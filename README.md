@@ -1,7 +1,7 @@
 # carpeta
 Carpeta Ciutadana
 
-# ![Logo](https://github.com/GovernIB/maven/raw/binaris/pluginsib/projectinfo_Attachments/icon.jpg) carpeta
+# ![Logo](https://github.com/GovernIB/maven/raw/binaris/pluginsib/projectinfo_Attachments/icon.jpg) Carpeta Ciutadana (carpeta)
 *Carpeta Ciutadana del GOIB*
 
 ***Descripció***
