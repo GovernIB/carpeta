@@ -3,7 +3,7 @@
 
 ***Versions***
 > - Versió Estable: -
-> - Versió en Desenvolupament: __carpeta-1.0__ (branca [carpeta-1.0](https://github.com/GovernIB/carpeta/tree/carpeta-1.0))
+> - Versió en Desenvolupament: __carpeta-1.0.0__ (branca [carpeta-1.0](https://github.com/GovernIB/carpeta/tree/carpeta-1.0))
 
 ***Descripció***
 
