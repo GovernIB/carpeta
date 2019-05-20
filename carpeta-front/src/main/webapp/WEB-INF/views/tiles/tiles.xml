@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">  
+
+<tiles-definitions>  
+ 
+    <!-- Base Definition -->
+    <definition name="base-definition"
+                template="/WEB-INF/views/tiles/layouts/defaultCarpeta.jsp">
+        <put-attribute name="title" value="CARPETA CIUTADANA" />
+        <put-attribute name="carrega" value="/WEB-INF/views/tiles/template/carpetaCarrega.jsp" />
+        <put-attribute name="header" value="/WEB-INF/views/tiles/template/carpetaHeader.jsp" />
+        <put-attribute name="mobil" value="/WEB-INF/views/tiles/template/carpetaMenumobil.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/views/tiles/template/carpetaMenu.jsp" />
+        <put-attribute name="miga" value="/WEB-INF/views/tiles/template/carpetaMiga.jsp" />
+        <put-attribute name="avis" value="/WEB-INF/views/tiles/template/carpetaAvis.jsp" />
+        <put-attribute name="missatge" value="/WEB-INF/views/tiles/template/carpetaMissatge.jsp" />
+        <put-attribute name="explicacio" value="/WEB-INF/views/tiles/template/carpetaExplicacio.jsp" />
+        <put-attribute name="lopd" value="/WEB-INF/views/tiles/template/carpetaLopd.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="contacte" value="/WEB-INF/views/tiles/template/carpetaContacte.jsp" />
+        <put-attribute name="footer" value="/WEB-INF/views/tiles/template/carpetaFooter.jsp" />
+    </definition>
+
+    <!-- Home Page -->
+    <definition name="inici" extends="base-definition">
+        <put-attribute name="title" value="Benvingut" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/inici.jsp" />
+    </definition>
+
+    <!-- Login Ticket -->
+    <definition name="loginTicket" template="/WEB-INF/views/pages/loginTicket.jsp">
+    </definition>
+
+    <!-- Logout -->
+    <definition name="salir" extends="base-definition">
+        <put-attribute name="title" value="Benvingut" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/logout.jsp" />
+    </definition>
+
+    <!-- Principal -->
+    <definition name="principal" extends="base-definition">
+        <put-attribute name="title" value="Benvingut" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/principal.jsp" />
+    </definition>
+
+    <!-- Llistat de tràmits Page -->
+    <definition name="tramitList" extends="base-definition">
+        <put-attribute name="title" value="Llista de tràmits" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/tramitList.jsp" />
+    </definition>
+
+    <!-- Llista de registres Page -->
+    <definition name="registreList" extends="base-definition">
+        <put-attribute name="title" value="Llistat de registres" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/registreList.jsp" />
+    </definition>
+
+    <!-- Detall de registre Page -->
+    <definition name="registreDetall" extends="base-definition">
+        <put-attribute name="title" value="Detall de registre" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/registreDetall.jsp" />
+    </definition>
+
+    <!-- Accessibilitat Page -->
+    <definition name="accessibilitat" extends="base-definition">
+        <put-attribute name="title" value="Accessibilitat" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/accessibilitat.jsp" />
+    </definition>
+
+</tiles-definitions>

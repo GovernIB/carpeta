@@ -1,0 +1,248 @@
+/* Document CSS */
+
+/* formateig */
+
+body, form, table, caption, tr, th, td, ul, ol, li, dl, dt, dd, img, p, header, h1, h2, h3, h4, h5, h6, object, iframe, legend, fieldset { font-size: 1em; list-style: none; margin: 0; padding: 0; outline: none; border: none; }
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section { display: block; }
+
+*, *::before, *::after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* generic */
+
+@font-face {
+	font-family: 'Bariol Regular';
+	src: url('../fonts/Bariol_Regular.ttf');
+}
+
+html,
+body { overflow: auto; overflow-x: hidden; }
+
+body { font: normal 100% 'Bariol Regular', Arial, Helvetica, sans-serif; color: #333; background-color: #eaeaea; }
+
+p { line-height: 1.2em; }
+
+a { color: #cc073c; text-decoration: none; padding: 0 .2em; will-change: color, background-color; }
+a:hover,
+a:focus { color: #fff; background-color: #cc073c; }
+
+a {
+	-webkit-transition: color .2s ease-out, background-color .2s ease-out;
+	-moz-transition: color .2s ease-out, background-color .2s ease-out;
+	-ms-transition: color .2s ease-out, background-color .2s ease-out;
+	-o-transition: color .2s ease-out, background-color .2s ease-out;
+	transition: color .2s ease-out, background-color .2s ease-out;
+}
+
+pre { font: normal 1.2em 'Bariol Regular', Arial, Helvetica, sans-serif; white-space: pre-wrap; }
+
+
+/* cap */
+
+.imc-contenidor { overflow: auto; position: fixed; top: 50%; left: 50%; width: 100%; height: 100%; background-color: #fff; transform: translate(-50%, -50%); }
+
+
+/* botonera */
+
+.imc--edicio-botonera { position: fixed; top: calc(50% + 270px); left: 50%; transform: translateX(-50%); }
+.imc--edicio-botonera ul { list-style: none; text-align: center; }
+.imc--edicio-botonera li { display: inline-block; }
+.imc--edicio-botonera a { display: inline-block; padding: .3em .7em; }
+
+.imc--edicio-botonera li.imc--anterior a::before { content: "<"; display: inline-block; color: #999; margin-right: .5em; }
+.imc--edicio-botonera li.imc--seguent a::after { content: ">"; display: inline-block; color: #999; margin-left: .5em; }
+
+/* forms */
+
+.imc-forms-formulari { font-size: 85%; margin: 0 1em; }
+
+.imc-form .imc-element.imc--el-remarca {
+	background-color: #fffde0 !important;
+	outline: 1px dashed #7f1300;
+}
+
+.imc-form .imc-element.imc--el-remarca legend {
+    background-color: #fffde0;
+}
+
+.imc-form .imc-element.imc--el-seleccionat {
+	background-color: #fff5a3 !important;
+	outline: 1px dashed #c00;
+}
+
+.imc-form .imc-element.imc--el-seleccionat legend {
+    background-color: #fff5a3;
+}
+
+.imc-form div.imc-element.imc-el-hidden {
+    display: block;
+    width: 100%;
+    height: 1.5em;
+    background: #f2f2f2 url(../imgs/icones/ico_invisible.svg) no-repeat 1em 50% / auto 1em;
+}
+
+.imc-form div.imc-element input,
+.imc-form div.imc-element textarea { display: none; }
+
+.imc-form div.imc-element[data-type=text] .imc-el-control::before {
+	content: "";
+	display: inline-block;
+	font: normal 110% 'Bariol Regular',Arial,Helvetica,sans-serif;
+	width: 100%;
+	height: 2em;
+	vertical-align: middle;
+	padding: .2em .3em;
+	background-color: #fff;
+	border: 3px solid #cecdcd;
+}
+
+.imc-form div.imc-element[data-type=date] .imc-el-control::before {
+	content: "";
+	display: inline-block;
+	font: normal 110% 'Bariol Regular',Arial,Helvetica,sans-serif;
+	width: 8.6em;
+	height: 2em;
+	vertical-align: middle;
+	padding: .2em .3em;
+	background: #fff url(../imgs/icones/ico_calendari.svg) no-repeat .5em 50% / auto 1em;
+	border: 3px solid #cecdcd;
+}
+
+.imc-form div.imc-element[data-type=time] .imc-el-control::before {
+	content: "";
+	display: inline-block;
+	font: normal 110% 'Bariol Regular',Arial,Helvetica,sans-serif;
+	width: 4.5em;
+	height: 2em;
+	vertical-align: middle;
+	padding: .2em .3em;
+	background: #fff url(../imgs/icones/ico_hora.svg) no-repeat .5em 50% / auto 1em;
+	border: 3px solid #cecdcd;
+}
+
+.imc-form div.imc-element[data-type=date-time] .imc-el-control::before {
+	content: "";
+	display: inline-block;
+	font: normal 110% 'Bariol Regular',Arial,Helvetica,sans-serif;
+	width: 8.6em;
+	height: 2em;
+	vertical-align: middle;
+	padding: .2em .3em;
+	background: #fff url(../imgs/icones/ico_calendari.svg) no-repeat .5em 50% / auto 1em;
+	border: 3px solid #cecdcd;
+}
+
+.imc-form div.imc-element[data-type=date-time] .imc-el-control::after {
+	content: "";
+	display: inline-block;
+	font: normal 110% 'Bariol Regular',Arial,Helvetica,sans-serif;
+	width: 4.5em;
+	height: 2em;
+	vertical-align: middle;
+	padding: .2em .3em;
+	background: #fff url(../imgs/icones/ico_hora.svg) no-repeat .5em 50% / auto 1em;
+	border: 3px solid #cecdcd;
+}
+
+.imc-form div.imc-element[data-type=date-time] .imc-el-control span { display: none; }
+
+.imc-form div.imc-element[data-type=select] .imc-select { display: none; }
+
+.imc-form div.imc-element[data-type=select] .imc-el-control { position: relative; }
+.imc-form div.imc-element[data-type=select] .imc-el-control::before {
+	content: "";
+	display: inline-block;
+	font: normal 110% 'Bariol Regular',Arial,Helvetica,sans-serif;
+	width: 100%;
+	height: 2em;
+	vertical-align: middle;
+	padding: .2em .3em;
+	background-color: #fff;
+	border: 3px solid #cecdcd;
+}
+
+.imc-form div.imc-element[data-type=select] .imc-el-control::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: .8em;
+    right: 1.5em;
+    width: 1em;
+    height: 1em;
+    background: transparent url(../imgs/icones/ico_item.svg) no-repeat top left / auto .7em;
+    transform: rotate(90deg);
+    opacity: .4;
+}
+
+
+
+/* select */
+
+.imc-form div.imc-element[data-type=textarea] .imc-el-control::before {
+	content: "";
+	display: inline-block;
+	font: normal 110% 'Bariol Regular',Arial,Helvetica,sans-serif;
+	width: 100%;
+	height: 5.8em;
+	vertical-align: middle;
+	padding: .2em .3em;
+	background-color: #fff;
+	border: 3px solid #cecdcd;
+}
+
+.imc-form div.imc-element.imc-el-files-3[data-type=textarea] .imc-el-control::before {
+	height: 9.7em;
+}
+
+.imc-form div.imc-element.imc-el-files-4[data-type=textarea] .imc-el-control::before {
+	height: 13.6em;
+}
+
+
+/* separador */
+
+.imc-form .imc-element.imc-sep-punt {
+    border-bottom-style: none;
+}
+
+.imc-form .imc-element.imc-sep-salt-carro {
+	display: block;
+	position: relative;
+	width: 100%;
+	height: .1em;
+}
+
+.imc-form .imc-element.imc-sep-salt-carro::after {
+	content: "";
+	display: block;
+	position: absolute;
+	top: -1em;
+	left: -0.5em;
+	width: 1em;
+	height: 2em;
+	background: #f2f2f2 url(../imgs/icones/ico_salt_carro.svg) no-repeat center center / auto .7em;
+}
+
+.imc-form .imc-element.imc-sep-salt-carro.imc--el-seleccionat {
+	outline: none;
+	background-color: #c00 !important;
+}
+
+.imc-form .imc-element.imc-sep-salt-carro.imc--el-remarca::after {
+	background-color: #fffde0 !important;
+}
+
+.imc-form .imc-element.imc-sep-salt-carro.imc--el-seleccionat::after {
+	background-color: #fff5a3 !important;
+	outline: 1px dashed #c00;
+}
+
+
+/* import */
+
+.imc-form div.imc-element.imc-el-import .imc-el-control::before {
+    width: calc(100% - 1em) !important;
+}

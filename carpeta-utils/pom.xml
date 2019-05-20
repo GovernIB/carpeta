@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>carpeta</artifactId>
+        <groupId>es.caib.carpeta</groupId>
+        <version>0.1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>carpeta-utils</artifactId>
+    <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <version_template_file>../scripts/templates/Versio.java.template</version_template_file>
+        <version_file>src/main/java/es/caib/regweb3/utils/Versio.java</version_file>
+
+        <timestamp_template_file>../scripts/templates/TimeStamp.java.template</timestamp_template_file>
+        <timestamp_file>src/main/java/es/caib/regweb3/utils/TimeStamp.java</timestamp_file>
+    </properties>
+
+    <build>
+        <plugins>
+
+        </plugins>
+    </build>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.14</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+</project>

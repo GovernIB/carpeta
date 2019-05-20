@@ -1,0 +1,13 @@
+#SISTRA
+
+sistra.urlBase=http://caibter.indra.es/sistramit/api/rest/externa/v1
+sistra.user=
+sistra.pass=
+
+REGWEB3
+
+regweb3.host=http://localhost:8080
+regweb3.api=/regweb3/ws/v3/RegWebAsientoRegistral
+regweb3.entidad=
+regweb3.user=
+regweb3.pass=

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>es.caib.carpeta</groupId>
+    <artifactId>carpeta</artifactId>
+    <packaging>pom</packaging>
+    <version>0.1</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.version>4.3.9.RELEASE</spring.version>
+        <spring-security.version>4.2.3.RELEASE</spring-security.version>
+        <apachetiles.version>3.0.5</apachetiles.version>
+        <hibernate.version>4.3.11.Final</hibernate.version>
+        <spring-data-jpa>1.6.6.RELEASE</spring-data-jpa>
+        <javax.servlet-api.version>3.1.0</javax.servlet-api.version>
+        <swagger.version>2.7.0</swagger.version>
+        <jackson.version>2.9.5</jackson.version>
+        <junit.version>4.12</junit.version>
+    </properties>
+
+    <modules>
+        <module>carpeta-ear</module>
+        <module>carpeta-core</module>
+        <module>carpeta-front</module>
+        <module>carpeta-back</module>
+        <module>carpeta-utils</module>
+    </modules>
+
+    <repositories>
+        <repository>
+            <id>governIB</id>
+            <name>GitHub GovernIB Maven Repository</name>
+            <url>https://governIB.github.io/maven/maven/</url>
+        </repository>
+    </repositories>
+
+</project>
