@@ -33,18 +33,6 @@ public class SecurityServiceImpl implements SecurityService{
     @Value("${es.caib.carpeta.loginib.pass}") private String PASS;
     @Value("${es.caib.carpeta.loginib.url}") private String URL;
 
-    /*private static final String METODES_AUTENTICACIO = "ANONIMO;CLAVE_CERTIFICADO;CLAVE_PIN;CLAVE_PERMANENTE";
-    private static final String CODI_ENTITAT = "A04003003";
-    private static final String APLICACIO_CODI = "CLIENT_TEST";
-    private static final String URL_CALLBACK_LOGIN = "http://localhost:8080/carpeta/principal";
-    private static final String URL_CALLBACK_ERROR = "http://www.google.es";
-    private static final String URL_CALLBACK_LOGOUT = "http://localhost:8080/carpeta/salir";
-    private static final String IDIOMA = "ca";
-    private static final String NIVELL_QAA = "3";
-    private static final String USUARI = "carpeta_loginib";
-    private static final String CONTRASENYA = "F4nd@c1oB1t";
-    private static final String URL = "http://caibter.indra.es/loginib/api/rest/v1";*/
-
     public String iniciarSesionAutentificacion() throws Exception {
 
 
