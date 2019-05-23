@@ -29,7 +29,7 @@ public class CarpetaSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/","/inici","/salir","/js/**","/css/**","/fonts/**","/imgs/**","/static/**").permitAll()
+        http.authorizeRequests().antMatchers("/","/inicio","/salir","/js/**","/css/**","/fonts/**","/imgs/**","/static/**").permitAll()
                 .and()
                 .authorizeRequests().anyRequest().access("isAuthenticated()")
                 .and()
@@ -41,7 +41,7 @@ public class CarpetaSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .failureForwardUrl("/login?error=true")
                 .permitAll()
-                .and().logout().logoutSuccessUrl("/inici");
+                .and().logout().logoutSuccessUrl("/salir");
     }
 
     @Bean

@@ -1,5 +1,6 @@
 package es.caib.carpeta.front.controllers;
 
+import es.caib.carpeta.front.config.UsuarioAutenticado;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.Authentication;
@@ -16,14 +17,17 @@ public class InicioController {
 
     protected final Log log = LogFactory.getLog(getClass());
 
-    @RequestMapping(value="/inici")
+    @RequestMapping(value="/inicio")
     public ModelAndView inicio(HttpServletRequest request, Authentication authentication) {
 
-        ModelAndView mav = new ModelAndView("inici");
+        ModelAndView mav = new ModelAndView("inicio");
 
         log.info("Dentro de inicioController");
 
         if(authentication != null){
+            UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();
+
+            log.info("Usuario autenticado: " + usuarioAutenticado.getUsuarioClave().getNombreCompleto());
             return new ModelAndView("redirect:/principal");
         }
 
@@ -31,23 +35,23 @@ public class InicioController {
 
     }
 
-    @RequestMapping(value = { "/tramitList"}, method = RequestMethod.GET)
+    @RequestMapping(value = { "/tramites"}, method = RequestMethod.GET)
     public String tramitlistPage(ModelMap model) {
-        return "tramitList";
+        return "tramites";
     }
 
-    @RequestMapping(value = { "/registreList"}, method = RequestMethod.GET)
+    @RequestMapping(value = { "/registros"}, method = RequestMethod.GET)
     public String registreListPage(ModelMap model) {
-        return "registreList";
+        return "registros";
     }
 
     @RequestMapping(value = { "/registreDetall"}, method = RequestMethod.GET)
     public String registreDetallPage(ModelMap model) {
-        return "registreDetall";
+        return "registro";
     }
 
-    @RequestMapping(value = { "/accessibilitat"}, method = RequestMethod.GET)
+    @RequestMapping(value = { "/accesibilidad"}, method = RequestMethod.GET)
     public String accessibilitatPage(ModelMap model) {
-        return "accessibilitat";
+        return "accesibilidad";
     }
 }

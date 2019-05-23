@@ -5,10 +5,10 @@
 
     <div class="imc--dades">
 
-        <h2><fmt:message key="carrega.carpeta"/></h2>
+        <h2><fmt:message key="carga.carpeta"/></h2>
 
         <div class="imc--usuari">
-            <strong><fmt:message key="menu.usuari"/></strong>
+            <strong><fmt:message key="menu.usuario"/></strong>
             <span>${nombre} ${apellidos}</span>
         </div>
 
@@ -22,7 +22,7 @@
     <ul class="imc--opcions" id="opcionsLlarg">
         <li>
             <button type="button" id="imc-bt-accessibilitat" class="imc-bt" onclick="location.href='accessibilitat.html';">
-                <p class="text1"><img src="${pageContext.request.contextPath}/static/img/icones/ico_accessibilitat.svg" class="icona-capsalera" alt=""/><fmt:message key="menu.accessibilitat"/></p>
+                <p class="text1"><img src="${pageContext.request.contextPath}/static/img/icones/ico_accessibilitat.svg" class="icona-capsalera" alt=""/><fmt:message key="menu.accesibilidad"/></p>
             </button>
         </li>
         <li class="imc-idioma imc-bt" id="imc-bt-idioma">
@@ -32,8 +32,8 @@
                 </li>
                 <li class="opcioOculta" id="idioma">
                     <ul>
-                        <li><a href="inici.html?idioma=ca" id="id_ca">Catala</a></li>
-                        <li><a href="inici.html?idioma=es" id="id_es">Castella</a></li>
+                        <li><a href="inicio.html?idioma=ca" id="id_ca">Catala</a></li>
+                        <li><a href="inicio.html?idioma=es" id="id_es">Castella</a></li>
                     </ul>
                 </li>
 
@@ -44,7 +44,7 @@
             <form action="${logoutUrl}" id="logout" method="post">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
             </form>
-            <button type="button" id="imc-bt-desconecta" class="imc-bt" onclick="sortirCarpeta()"><p class="text1"><img src="${pageContext.request.contextPath}/static/img/icones/ico_desconecta.svg" class="icona-capsalera" alt=""/><fmt:message key="menu.sortir"/></p></button>
+            <button type="button" id="imc-bt-desconecta" class="imc-bt" onclick="sortirCarpeta()"><p class="text1"><img src="${pageContext.request.contextPath}/static/img/icones/ico_desconecta.svg" class="icona-capsalera" alt=""/><fmt:message key="menu.salir"/></p></button>
         </li>
     </ul>
 

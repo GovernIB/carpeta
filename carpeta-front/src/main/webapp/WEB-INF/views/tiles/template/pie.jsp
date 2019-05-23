@@ -2,16 +2,16 @@
 <div class="imc--contingut">
 
     <div class="imc-peu-govern">
-        <strong><fmt:message key="peu.govern"/></strong>
+        <strong><fmt:message key="pie.govern"/></strong>
     </div>
 
     <div class="imc-peu-opcions">
         <ul>
 
-            <li><a href="mapaWeb.html"><fmt:message key="peu.mapa"/></a></li>
+            <li><a href="mapaWeb.html"><fmt:message key="pie.mapa"/></a></li>
 
 
-            <li><a href="avisLegal.html" target="_blank"><fmt:message key="peu.legal"/></a></li>
+            <li><a href="avisLegal.html" target="_blank"><fmt:message key="pie.legal"/></a></li>
 
 
             <li>
@@ -37,7 +37,7 @@
 
     <div class="imc-peu-xarxes">
 
-        <p><fmt:message key="peu.segueix"/></p>
+        <p><fmt:message key="pie.seguir"/></p>
         <ul>
 
             <li>

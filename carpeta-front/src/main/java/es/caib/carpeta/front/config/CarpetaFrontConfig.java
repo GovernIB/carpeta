@@ -34,7 +34,7 @@ public class CarpetaFrontConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("forward:/inici");
+        registry.addViewController("/").setViewName("forward:/inicio");
     }
 
     @Bean
@@ -54,18 +54,6 @@ public class CarpetaFrontConfig extends WebMvcConfigurerAdapter {
 
         registry.addResourceHandler("/static/**").addResourceLocations("/static/");
 
-
-       /*registry.addResourceHandler("/css/**")
-                .addResourceLocations("/css/");
-
-        registry.addResourceHandler("/fonts/**")
-                .addResourceLocations("/fonts/");
-
-        registry.addResourceHandler("/imgs/**")
-                .addResourceLocations("/imgs/");
-
-        registry.addResourceHandler("/js/**")
-                .addResourceLocations("/js/");*/
     }
 
     /*@Bean

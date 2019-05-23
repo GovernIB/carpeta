@@ -47,4 +47,9 @@ public class UsuarioClave {
     public void setMetodoAutentificacion(String metodoAutentificacion) {
         this.metodoAutentificacion = metodoAutentificacion;
     }
+
+    public String getNombreCompleto(){
+
+        return nombre +" "+ apellido1 +" "+ apellido2;
+    }
 }

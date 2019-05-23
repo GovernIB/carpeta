@@ -32,7 +32,7 @@
 <body>
 
     <section id="carrega">
-        <tiles:insertAttribute name="carrega" />
+        <tiles:insertAttribute name="carga" />
     </section>
 
     <!-- contenidor -->
@@ -43,12 +43,12 @@
 
             <!-- Header -->
             <header class="imc-cap" id="header" data-autenticacio="a">
-                <tiles:insertAttribute name="header" />
+                <tiles:insertAttribute name="cabecera" />
             </header>
 
             <!-- Menú mòbil -->
             <section id="mobil">
-                <tiles:insertAttribute name="mobil" />
+                <tiles:insertAttribute name="movil" />
             </section>
 
             <!-- Menu -->
@@ -71,12 +71,12 @@
 
                     <!-- Explicació -->
                     <section id="explicacio">
-                        <tiles:insertAttribute name="explicacio" />
+                        <tiles:insertAttribute name="informacion" />
                     </section>
 
                     <!-- Avisos -->
                     <section id="avis">
-                        <tiles:insertAttribute name="avis" />
+                        <tiles:insertAttribute name="aviso" />
                     </section>
 
                     <!-- Contingut -->
@@ -95,12 +95,12 @@
 
         <!-- Contacte -->
         <aside id="contacte" class="imc-contacte">
-            <tiles:insertAttribute name="contacte" />
+            <tiles:insertAttribute name="contacto" />
         </aside>
 
         <!-- Peu i LOPD -->
         <footer id="footer" class="imc-peu">
-            <tiles:insertAttribute name="footer" />
+            <tiles:insertAttribute name="pie" />
         </footer>
 
     </div>
@@ -108,7 +108,7 @@
 
     <!-- Missatge -->
     <footer id="missatge">
-        <tiles:insertAttribute name="missatge" />
+        <tiles:insertAttribute name="mensaje" />
     </footer>
 
 </body>

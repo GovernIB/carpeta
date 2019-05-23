@@ -65,6 +65,8 @@ public class SecurityServiceImpl implements SecurityService{
     @Override
     public UsuarioClave validarTicketAutentificacion(final String ticket) throws Exception {
 
+        log.info("Dentro de validarTicketAutentificacion: " + ticket);
+
         final RestTemplate restTemplate = new RestTemplate();
 
         restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(
@@ -87,6 +89,7 @@ public class SecurityServiceImpl implements SecurityService{
     @Override
     public String iniciarSesionLogout() throws Exception {
 
+        log.info("Dentro de iniciarSesionLogout");
         final RestTemplate restTemplate = new RestTemplate();
 
         restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(USER, PASS));

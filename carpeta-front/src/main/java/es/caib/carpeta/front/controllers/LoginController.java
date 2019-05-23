@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
@@ -33,7 +34,7 @@ public class LoginController {
     @RequestMapping(value="/login")
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        log.info("Dentro de LoginController : " + entidad);
+        log.info("Dentro de LoginController");
 
         // Error login
         if ("true".equals(request.getParameter("error"))) {
@@ -43,8 +44,6 @@ public class LoginController {
 
         if(savedRequest == null){
             String url = securityService.iniciarSesionAutentificacion();
-
-            log.info("URL: " + url);
 
             return new ModelAndView("redirect:"+url);
         }else {
@@ -75,13 +74,16 @@ public class LoginController {
     }
 
     @RequestMapping(value="/salir")
-    public ModelAndView salir(HttpServletRequest request) throws Exception{
+    public String salir(HttpServletRequest request) throws Exception{
 
         log.info("Dentro de salir");
 
         securityService.iniciarSesionLogout();
-
-        return new ModelAndView("logout");
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        return "redirect:/inicio";
 
     }
 

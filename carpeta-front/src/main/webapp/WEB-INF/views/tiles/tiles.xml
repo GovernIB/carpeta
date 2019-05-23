@@ -5,26 +5,26 @@
  
     <!-- Base Definition -->
     <definition name="base-definition"
-                template="/WEB-INF/views/tiles/layouts/defaultCarpeta.jsp">
+                template="/WEB-INF/views/tiles/layouts/carpeta.jsp">
         <put-attribute name="title" value="CARPETA CIUTADANA" />
-        <put-attribute name="carrega" value="/WEB-INF/views/tiles/template/carpetaCarrega.jsp" />
-        <put-attribute name="header" value="/WEB-INF/views/tiles/template/carpetaHeader.jsp" />
-        <put-attribute name="mobil" value="/WEB-INF/views/tiles/template/carpetaMenumobil.jsp" />
-        <put-attribute name="menu" value="/WEB-INF/views/tiles/template/carpetaMenu.jsp" />
-        <put-attribute name="miga" value="/WEB-INF/views/tiles/template/carpetaMiga.jsp" />
-        <put-attribute name="avis" value="/WEB-INF/views/tiles/template/carpetaAvis.jsp" />
-        <put-attribute name="missatge" value="/WEB-INF/views/tiles/template/carpetaMissatge.jsp" />
-        <put-attribute name="explicacio" value="/WEB-INF/views/tiles/template/carpetaExplicacio.jsp" />
-        <put-attribute name="lopd" value="/WEB-INF/views/tiles/template/carpetaLopd.jsp" />
+        <put-attribute name="carga" value="/WEB-INF/views/tiles/template/carga.jsp" />
+        <put-attribute name="cabecera" value="/WEB-INF/views/tiles/template/cabecera.jsp" />
+        <put-attribute name="movil" value="/WEB-INF/views/tiles/template/menuMovil.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/views/tiles/template/menu.jsp" />
+        <put-attribute name="miga" value="/WEB-INF/views/tiles/template/miga.jsp" />
+        <put-attribute name="aviso" value="/WEB-INF/views/tiles/template/aviso.jsp" />
+        <put-attribute name="mensaje" value="/WEB-INF/views/tiles/template/mensaje.jsp" />
+        <put-attribute name="informacion" value="/WEB-INF/views/tiles/template/informacion.jsp" />
+        <put-attribute name="lopd" value="/WEB-INF/views/tiles/template/lopd.jsp" />
         <put-attribute name="body" value="" />
-        <put-attribute name="contacte" value="/WEB-INF/views/tiles/template/carpetaContacte.jsp" />
-        <put-attribute name="footer" value="/WEB-INF/views/tiles/template/carpetaFooter.jsp" />
+        <put-attribute name="contacto" value="/WEB-INF/views/tiles/template/contacto.jsp" />
+        <put-attribute name="pie" value="/WEB-INF/views/tiles/template/pie.jsp" />
     </definition>
 
     <!-- Home Page -->
-    <definition name="inici" extends="base-definition">
+    <definition name="inicio" extends="base-definition">
         <put-attribute name="title" value="Benvingut" />
-        <put-attribute name="body" value="/WEB-INF/views/pages/inici.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/inicio.jsp" />
     </definition>
 
     <!-- Login Ticket -->
@@ -44,27 +44,27 @@
     </definition>
 
     <!-- Llistat de tràmits Page -->
-    <definition name="tramitList" extends="base-definition">
+    <definition name="tramites" extends="base-definition">
         <put-attribute name="title" value="Llista de tràmits" />
-        <put-attribute name="body" value="/WEB-INF/views/pages/tramitList.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/tramites.jsp" />
     </definition>
 
     <!-- Llista de registres Page -->
-    <definition name="registreList" extends="base-definition">
+    <definition name="registros" extends="base-definition">
         <put-attribute name="title" value="Llistat de registres" />
-        <put-attribute name="body" value="/WEB-INF/views/pages/registreList.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/registros.jsp" />
     </definition>
 
     <!-- Detall de registre Page -->
     <definition name="registreDetall" extends="base-definition">
         <put-attribute name="title" value="Detall de registre" />
-        <put-attribute name="body" value="/WEB-INF/views/pages/registreDetall.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/registro.jsp" />
     </definition>
 
     <!-- Accessibilitat Page -->
     <definition name="accessibilitat" extends="base-definition">
         <put-attribute name="title" value="Accessibilitat" />
-        <put-attribute name="body" value="/WEB-INF/views/pages/accessibilitat.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/accesibilidad.jsp" />
     </definition>
 
 </tiles-definitions>
