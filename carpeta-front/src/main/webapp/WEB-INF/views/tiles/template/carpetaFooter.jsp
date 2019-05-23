@@ -1,16 +1,17 @@
+<%@include file="/WEB-INF/views/includes.jsp"%>
 <div class="imc--contingut">
 
     <div class="imc-peu-govern">
-        <strong>GOIB</strong>
+        <strong><fmt:message key="peu.govern"/></strong>
     </div>
 
     <div class="imc-peu-opcions">
         <ul>
 
-            <li><a href="mapaWeb.html">Mapa web</a></li>
+            <li><a href="mapaWeb.html"><fmt:message key="peu.mapa"/></a></li>
 
 
-            <li><a href="avisLegal.html" target="_blank">Avis legal</a></li>
+            <li><a href="avisLegal.html" target="_blank"><fmt:message key="peu.legal"/></a></li>
 
 
             <li>
@@ -36,7 +37,7 @@
 
     <div class="imc-peu-xarxes">
 
-        <p>Segueix-nos:</p>
+        <p><fmt:message key="peu.segueix"/></p>
         <ul>
 
             <li>

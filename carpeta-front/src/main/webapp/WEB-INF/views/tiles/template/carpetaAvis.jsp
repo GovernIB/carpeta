@@ -1,3 +1,4 @@
+<%@include file="/WEB-INF/views/includes.jsp"%>
 <div class="imc--important no-visible">
-    Avisos de la pagina a tenir en compte
+    <p><fmt:message key="avis.info"/></p>
 </div>

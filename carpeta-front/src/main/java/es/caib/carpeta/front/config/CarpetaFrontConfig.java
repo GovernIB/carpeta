@@ -32,14 +32,6 @@ public class CarpetaFrontConfig extends WebMvcConfigurerAdapter {
         registry.viewResolver(viewResolver);
     }
 
-    /*@Bean
-    public ViewResolver getViewResolver() {
-        InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
-        internalResourceViewResolver.setPrefix("/WEB-INF/views/");
-        internalResourceViewResolver.setSuffix(".jsp");
-        return internalResourceViewResolver;
-    }*/
-
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("forward:/inici");

@@ -1,4 +1,5 @@
+<%@include file="/WEB-INF/views/includes.jsp"%>
 <div class="imc--lopd">
-    <h3><span>Informacio relativa a la Proteccio de dades personals</span></h3>
-    Texte <strong>LOPD</strong>
+    <h3><span><fmt:message key="lopd.informacio"/></span></h3>
+    <p><fmt:message key="lopd.texte"/> <strong><fmt:message key="lopd.lopd"/></strong></p>
 </div>

@@ -1,46 +1,53 @@
+<%@include file="/WEB-INF/views/includes.jsp"%>
 <div class="imc--explicacio-detallada imc--e-d llista" id="imc--explicacio-detallada">
-    <p>S'ha trobat un total de 6 tramits no finalitzats</p>
+    <p><fmt:message key="tramit.trobat"/></p>
     <ul>
         <li class="llista-fila">
             <div>
                 <span class="imc--num">1</span>
                 <a href="tramit.html" target="_blank">
-                    <div class="imc--doc"><span>Descripcio del Tramit</span></div>
+                    <div class="imc--doc"><p class="pad-left0"><fmt:message key="tramit.nom"/></p></div>
                 </a>
             </div>
             <div class="llista-fila-info">
-                <span class="imc--extensions">ID Tramit: <strong>34535345</strong>.</span>
-                <span class="imc--extensions">Data d'inici: <strong>12/02/2019</strong>.</span>
-                <span class="imc--extensions">Data darrer acces: <strong>14/02/2019</strong>.</span>
-                <span class="imc--extensions">Idioma: <strong>catala</strong>.</span>
+                <p class="pad-left0">
+                    <span class="imc--extensions"><fmt:message key="tramit.id"/> <strong><fmt:message key="tramit.id.valor"/></strong></span>
+                    <span class="imc--extensions"><fmt:message key="tramit.data"/> <strong><fmt:message key="tramit.data.valor"/></strong></span>
+                    <span class="imc--extensions"><fmt:message key="tramit.acces"/> <strong><fmt:message key="tramit.acces.valor"/></strong></span>
+                    <span class="imc--extensions"><fmt:message key="tramit.idioma"/> <strong><fmt:message key="tramit.idioma.catala"/></strong></span>
+                </p>
             </div>
         </li>
         <li class="llista-fila">
             <div>
                 <span class="imc--num">2</span>
                 <a href="tramit.html" target="_blank">
-                    <div class="imc--doc"><span>Descripcio del Tràmit</span></div>
+                    <div class="imc--doc"><p class="pad-left0"><fmt:message key="tramit.nom"/></p></div>
                 </a>
             </div>
             <div class="llista-fila-info">
-                <span class="imc--extensions">ID Tramit: <strong>34535345</strong>.</span>
-                <span class="imc--extensions">Data d'inici: <strong>12/02/2019</strong>.</span>
-                <span class="imc--extensions">Data darrer acces: <strong>14/02/2019</strong>.</span>
-                <span class="imc--extensions">Idioma: <strong>catala</strong>.</span>
+                <p class="pad-left0">
+                    <span class="imc--extensions"><fmt:message key="tramit.id"/> <strong><fmt:message key="tramit.id.valor"/></strong></span>
+                    <span class="imc--extensions"><fmt:message key="tramit.data"/> <strong><fmt:message key="tramit.data.valor"/></strong></span>
+                    <span class="imc--extensions"><fmt:message key="tramit.acces"/> <strong><fmt:message key="tramit.acces.valor"/></strong></span>
+                    <span class="imc--extensions"><fmt:message key="tramit.idioma"/> <strong><fmt:message key="tramit.idioma.catala"/></strong></span>
+                </p>
             </div>
         </li>
         <li class="llista-fila">
             <div>
                 <span class="imc--num">3</span>
                 <a href="tramit.html" target="_blank">
-                    <div class="imc--doc"><span>Descripcio del Tramit</span></div>
+                    <div class="imc--doc"><p class="pad-left0"><fmt:message key="tramit.nom"/></p></div>
                 </a>
             </div>
             <div class="llista-fila-info">
-                <span class="imc--extensions">ID Tramit: <strong>34535345</strong>.</span>
-                <span class="imc--extensions">Data d'inici: <strong>12/02/2019</strong>.</span>
-                <span class="imc--extensions">Data darrer acces: <strong>14/02/2019</strong>.</span>
-                <span class="imc--extensions">Idioma: <strong>catala</strong>.</span>
+                <p class="pad-left0">
+                    <span class="imc--extensions"><fmt:message key="tramit.id"/> <strong><fmt:message key="tramit.id.valor"/></strong></span>
+                    <span class="imc--extensions"><fmt:message key="tramit.data"/> <strong><fmt:message key="tramit.data.valor"/></strong></span>
+                    <span class="imc--extensions"><fmt:message key="tramit.acces"/> <strong><fmt:message key="tramit.acces.valor"/></strong></span>
+                    <span class="imc--extensions"><fmt:message key="tramit.idioma"/> <strong><fmt:message key="tramit.idioma.catala"/></strong></span>
+                </p>
             </div>
         </li>
     </ul>

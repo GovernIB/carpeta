@@ -1699,3 +1699,9 @@ ul.nav-items li a span {
 	display: table-column;
 }
 
+.pad-left0{
+	padding-left: 0 !important;
+}
+.text1{
+	line-height: 1em;
+}

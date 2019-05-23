@@ -1,22 +1,20 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
-<!-- Header i Idiomes -->
+<%@include file="/WEB-INF/views/includes.jsp"%>
 <div class="imc--c">
 
     <div class="imc--logo" title="Govern Illes Balears"></div>
 
     <div class="imc--dades">
 
-        <h2>Carpeta Ciutadana</h2>
+        <h2><fmt:message key="carrega.carpeta"/></h2>
 
         <div class="imc--usuari">
-            <strong>Usuari:</strong>
-            <span>Convidat</span>
+            <strong><fmt:message key="menu.usuari"/></strong>
+            <span>${nombre} ${apellidos}</span>
         </div>
 
         <div class="imc--clau">
             <strong>DNI:</strong>
-            <span>XXXXXXXX-X</span>
+            <span>${nif}</span>
         </div>
 
     </div>
@@ -24,13 +22,13 @@
     <ul class="imc--opcions" id="opcionsLlarg">
         <li>
             <button type="button" id="imc-bt-accessibilitat" class="imc-bt" onclick="location.href='accessibilitat.html';">
-                <img src="${pageContext.request.contextPath}/static/img/icones/ico_accessibilitat.svg" class="icona-capsalera" alt=""/><span>Accessibilitat</span>
+                <p class="text1"><img src="${pageContext.request.contextPath}/static/img/icones/ico_accessibilitat.svg" class="icona-capsalera" alt=""/><fmt:message key="menu.accessibilitat"/></p>
             </button>
         </li>
         <li class="imc-idioma imc-bt" id="imc-bt-idioma">
             <ul>
                 <li>
-                    <img src="${pageContext.request.contextPath}/static/img/icones/ico_idioma.svg" class="icona-capsalera" alt=""/><span>Idioma</span>
+                    <p class="text1"><img src="${pageContext.request.contextPath}/static/img/icones/ico_idioma.svg" class="icona-capsalera" alt=""/><fmt:message key="menu.idioma"/></p>
                 </li>
                 <li class="opcioOculta" id="idioma">
                     <ul>
@@ -46,7 +44,7 @@
             <form action="${logoutUrl}" id="logout" method="post">
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
             </form>
-            <button type="button" id="imc-bt-desconecta" class="imc-bt" onclick="sortirCarpeta()"><img src="${pageContext.request.contextPath}/static/img/icones/ico_desconecta.svg" class="icona-capsalera" alt=""/><span>Sortir</span></button>
+            <button type="button" id="imc-bt-desconecta" class="imc-bt" onclick="sortirCarpeta()"><p class="text1"><img src="${pageContext.request.contextPath}/static/img/icones/ico_desconecta.svg" class="icona-capsalera" alt=""/><fmt:message key="menu.sortir"/></p></button>
         </li>
     </ul>
 

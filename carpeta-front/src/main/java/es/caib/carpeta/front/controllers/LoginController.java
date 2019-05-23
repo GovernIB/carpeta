@@ -67,7 +67,7 @@ public class LoginController {
                 .getContext().getAuthentication().getPrincipal();
 
         mav.addObject("nombre", usuario.getUsuarioClave().getNombre());
-        mav.addObject("apellidos", usuario.getUsuarioClave().getApellido1());
+        mav.addObject("apellidos", usuario.getUsuarioClave().getApellido1() + ' ' + usuario.getUsuarioClave().getApellido2());
         mav.addObject("nif", usuario.getUsuarioClave().getNif());
 
         return mav;

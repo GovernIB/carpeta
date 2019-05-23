@@ -1,46 +1,47 @@
+<%@include file="/WEB-INF/views/includes.jsp"%>
 <div class="imc--explicacio-detallada imc--e-d llista" id="imc--explicacio-detallada">
-    <p>S'ha trobat un total de 3 registres</p>
+    <p><fmt:message key="registre.trobat"/></p>
     <ul>
         <li class="llista-fila">
             <div>
                 <span class="imc--num">1</span>
                 <a href="registreDetall.html">
-                    <div class="imc--doc"><span>Extracte del Registre</span></div>
+                    <div class="imc--doc"><span><fmt:message key="registre.nom"/></span></div>
                 </a>
             </div>
             <div class="llista-fila-info">
-                <span class="imc--extensions">Data: <strong>12/02/2019</strong>.</span>
-                <span class="imc--extensions">Numero: <strong>SAL1-E-105/2019</strong>.</span>
-                <span class="imc--extensions">Oficina Inici: <strong>Oficina de Salut - Principal</strong>.</span>
-                <span class="imc--extensions">Organisme Destinatari: <strong>Ayuntamiento de Catarroja</strong>.</span>
+                <span class="imc--extensions"><fmt:message key="registre.data"/> <strong><fmt:message key="registre.data.valor"/></strong>.</span>
+                <span class="imc--extensions"><fmt:message key="registre.numero"/> <strong><fmt:message key="registre.numero.valor"/></strong>.</span>
+                <span class="imc--extensions"><fmt:message key="registre.oficina"/> <strong><fmt:message key="registre.oficina.valor"/></strong>.</span>
+                <span class="imc--extensions"><fmt:message key="registre.organisme"/> <strong><fmt:message key="registre.organisme.valor"/></strong>.</span>
             </div>
         </li>
         <li class="llista-fila">
             <div>
                 <span class="imc--num">2</span>
                 <a href="registreDetall.html">
-                    <div class="imc--doc"><span>Extracte del Registre</span></div>
+                    <div class="imc--doc"><span><fmt:message key="registre.nom"/></span></div>
                 </a>
             </div>
             <div class="llista-fila-info">
-                <span class="imc--extensions">Data: <strong>12/02/2019</strong>.</span>
-                <span class="imc--extensions">Numero: <strong>SAL1-E-105/2019</strong>.</span>
-                <span class="imc--extensions">Oficina Inici: <strong>Oficina de Salut - Principal</strong>.</span>
-                <span class="imc--extensions">Organisme Destinatari: <strong>Ayuntamiento de Catarroja</strong>.</span>
+                <span class="imc--extensions"><fmt:message key="registre.data"/> <strong><fmt:message key="registre.data.valor"/></strong>.</span>
+                <span class="imc--extensions"><fmt:message key="registre.numero"/> <strong><fmt:message key="registre.numero.valor"/></strong>.</span>
+                <span class="imc--extensions"><fmt:message key="registre.oficina"/> <strong><fmt:message key="registre.oficina.valor"/></strong>.</span>
+                <span class="imc--extensions"><fmt:message key="registre.organisme"/> <strong><fmt:message key="registre.organisme.valor"/></strong>.</span>
             </div>
         </li>
         <li class="llista-fila">
             <div>
                 <span class="imc--num">3</span>
                 <a href="registreDetall.html">
-                    <div class="imc--doc"><span>Extracte del Registre</span></div>
+                    <div class="imc--doc"><span><fmt:message key="registre.nom"/></span></div>
                 </a>
             </div>
             <div class="llista-fila-info">
-                <span class="imc--extensions">Data: <strong>12/02/2019</strong>.</span>
-                <span class="imc--extensions">Numero: <strong>SAL1-E-105/2019</strong>.</span>
-                <span class="imc--extensions">Oficina Inici: <strong>Oficina de Salut - Principal</strong>.</span>
-                <span class="imc--extensions">Organisme Destinatari: <strong>Ayuntamiento de Catarroja</strong>.</span>
+                <span class="imc--extensions"><fmt:message key="registre.data"/> <strong><fmt:message key="registre.data.valor"/></strong>.</span>
+                <span class="imc--extensions"><fmt:message key="registre.numero"/> <strong><fmt:message key="registre.numero.valor"/></strong>.</span>
+                <span class="imc--extensions"><fmt:message key="registre.oficina"/> <strong><fmt:message key="registre.oficina.valor"/></strong>.</span>
+                <span class="imc--extensions"><fmt:message key="registre.organisme"/> <strong><fmt:message key="registre.organisme.valor"/></strong>.</span>
             </div>
         </li>
     </ul>

@@ -1,3 +1,4 @@
+<%@include file="/WEB-INF/views/includes.jsp"%>
 <div class="imc--info no-visible">
-    <p>Explicacio de la pagina.</p>
+    <p><fmt:message key="explicacio.info"/></p>
 </div>
