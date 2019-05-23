@@ -1,4 +1,4 @@
-# ![Logo](https://github.com/GovernIB/maven/raw/binaris/pluginsib/projectinfo_Attachments/icon.jpg) Carpeta Ciutadana (carpeta)
+# ![Logo](https://github.com/GovernIB/maven/raw/binaris/carpeta/logo_carpeta.png) Carpeta Ciutadana (carpeta)
 *Carpeta Ciutadana del GOIB*
 
 ***Versions***
