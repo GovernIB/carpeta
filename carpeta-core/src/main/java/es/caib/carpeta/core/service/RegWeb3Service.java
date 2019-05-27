@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface RegWeb3Service {
 
-    List<AsientoRegistralWs> obtenerRegistrosCiudadano(String entidad, String documento) throws Exception;
+    List<AsientoRegistralWs> obtenerAsientosCiudadano(String documento) throws Exception;
 }

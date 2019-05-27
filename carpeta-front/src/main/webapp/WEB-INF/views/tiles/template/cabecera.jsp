@@ -10,12 +10,12 @@
         <sec:authorize access="isAuthenticated()">
             <div class="imc--usuari">
                 <strong><fmt:message key="menu.usuario"/></strong>
-                <span>${nombre} ${apellidos}</span>
+                <span><sec:authentication property="principal.usuarioClave.nombreCompleto" /></span>
             </div>
 
             <div class="imc--clau">
                 <strong>DNI:</strong>
-                <span>${nif}</span>
+                <span><sec:authentication property="principal.usuarioClave.nif" /></span>
             </div>
         </sec:authorize>
 

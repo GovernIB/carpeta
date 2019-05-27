@@ -24,7 +24,7 @@ public class RegWeb3ServiceImpl implements RegWeb3Service{
     @Value("${es.caib.carpeta.regweb3.pass}")    private String REGWEB3_PASS;
 
     @Override
-    public List<AsientoRegistralWs> obtenerRegistrosCiudadano(String entidad, String documento) throws Exception {
+    public List<AsientoRegistralWs> obtenerAsientosCiudadano(String documento) throws Exception {
 
         try {
             String endpoint = REGWEB3_HOST + REGWEB3_API;
@@ -36,11 +36,13 @@ public class RegWeb3ServiceImpl implements RegWeb3Service{
 
             configAddressUserPassword(REGWEB3_USER, REGWEB3_PASS, endpoint, api);
 
-            List<AsientoRegistralWs> registros = api.obtenerAsientosCiudadano(entidad, "43146650F");
+            log.info("Buscando registros de: " + documento + "en " + REGWEB3_ENTIDAD);
 
-            log.info("Total registros: " + registros.size());
+            List<AsientoRegistralWs> asientos = api.obtenerAsientosCiudadano(REGWEB3_ENTIDAD, documento);
 
-            return registros;
+            log.info("Total asientos: " + asientos.size());
+
+            return asientos;
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
