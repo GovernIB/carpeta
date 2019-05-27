@@ -36,22 +36,22 @@ public class InicioController {
     }
 
     @RequestMapping(value = { "/tramites"}, method = RequestMethod.GET)
-    public String tramitlistPage(ModelMap model) {
+    public String tramites(ModelMap model) {
         return "tramites";
     }
 
     @RequestMapping(value = { "/registros"}, method = RequestMethod.GET)
-    public String registreListPage(ModelMap model) {
+    public String registros(ModelMap model) {
         return "registros";
     }
 
     @RequestMapping(value = { "/registreDetall"}, method = RequestMethod.GET)
-    public String registreDetallPage(ModelMap model) {
+    public String registreDetall(ModelMap model) {
         return "registro";
     }
 
     @RequestMapping(value = { "/accesibilidad"}, method = RequestMethod.GET)
-    public String accessibilitatPage(ModelMap model) {
+    public String accesibilidad(ModelMap model) {
         return "accesibilidad";
     }
 }

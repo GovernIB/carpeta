@@ -5,15 +5,18 @@
         <div>
             <ul>
                 <li class="menuInici">
-                    <a href="inicio.html"><p class="hide"><fmt:message key="menu.inicio"/></p></a>
+                    <a href="<c:url value="/"/>"><p class="hide"><fmt:message key="menu.inicio"/></p></a>
                 </li>
-                <li>
-                    <a href="#"><p><fmt:message key="menu.gestiones"/></p></a>
-                    <ul>
-                        <li><p><a href="tramites.html"><fmt:message key="menu.tramites.no.acabados"/></a></p></li>
-                        <li><p><a href="registros.html"><fmt:message key="menu.registros"/></a></p></li>
-                    </ul>
-                </li>
+                <sec:authorize access="isAuthenticated()">
+                    <li>
+                        <a href="#"><p><fmt:message key="menu.gestiones"/></p></a>
+                        <ul>
+                            <li><p><a href="<c:url value="/tramites"/>"><fmt:message key="menu.tramites.no.acabados"/></a></p></li>
+                            <li><p><a href="<c:url value="/registros"/>"><fmt:message key="menu.registros"/></a></p></li>
+                        </ul>
+                    </li>
+                </sec:authorize>
+
             </ul>
         </div>
     </div>

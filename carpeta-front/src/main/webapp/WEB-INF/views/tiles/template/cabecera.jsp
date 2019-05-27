@@ -7,15 +7,17 @@
 
         <h2><fmt:message key="carga.carpeta"/></h2>
 
-        <div class="imc--usuari">
-            <strong><fmt:message key="menu.usuario"/></strong>
-            <span>${nombre} ${apellidos}</span>
-        </div>
+        <sec:authorize access="isAuthenticated()">
+            <div class="imc--usuari">
+                <strong><fmt:message key="menu.usuario"/></strong>
+                <span>${nombre} ${apellidos}</span>
+            </div>
 
-        <div class="imc--clau">
-            <strong>DNI:</strong>
-            <span>${nif}</span>
-        </div>
+            <div class="imc--clau">
+                <strong>DNI:</strong>
+                <span>${nif}</span>
+            </div>
+        </sec:authorize>
 
     </div>
 
@@ -32,20 +34,23 @@
                 </li>
                 <li class="opcioOculta" id="idioma">
                     <ul>
-                        <li><a href="inicio.html?idioma=ca" id="id_ca">Catala</a></li>
-                        <li><a href="inicio.html?idioma=es" id="id_es">Castella</a></li>
+                        <li><a href="<c:url value="/?idioma=ca"/>" id="id_ca">Catala</a></li>
+                        <li><a href=" <c:url value="/?idioma=es"/>" id="id_es">Castella</a></li>
                     </ul>
                 </li>
 
             </ul>
         </li>
-        <li>
-            <c:url var="logoutUrl" value="/logout" />
-            <form action="${logoutUrl}" id="logout" method="post">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-            </form>
-            <button type="button" id="imc-bt-desconecta" class="imc-bt" onclick="sortirCarpeta()"><p class="text1"><img src="${pageContext.request.contextPath}/static/img/icones/ico_desconecta.svg" class="icona-capsalera" alt=""/><fmt:message key="menu.salir"/></p></button>
-        </li>
+        <sec:authorize access="isAuthenticated()">
+            <li>
+                <c:url var="logoutUrl" value="/logout" />
+                <form action="${logoutUrl}" id="logout" method="post">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                </form>
+                <button type="button" id="imc-bt-desconecta" class="imc-bt" onclick="sortirCarpeta()"><p class="text1"><img src="${pageContext.request.contextPath}/static/img/icones/ico_desconecta.svg" class="icona-capsalera" alt=""/><fmt:message key="menu.salir"/></p></button>
+            </li>
+        </sec:authorize>
+
     </ul>
 
     <button type="button" class="imc-bt-menu" id="menuMobil" title="Menú" onclick="desplegarMenu()"><span>Menú</span></button>

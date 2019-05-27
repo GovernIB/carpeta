@@ -1,6 +1,6 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
 <div data-conf="suport">
-        <p><strong><fmt:message key="soporte.ajuda"/>&nbsp;</strong><fmt:message key="soporte.contacto"/><button type="button" id="imc-bt-equip-suport" class="imc-bt--com-text" onclick="obrirAjuda()"><span>&nbsp;<fmt:message key="soporte.equipo"/></span></button></p>
+        <p><strong><fmt:message key="soporte.ayuda"/>&nbsp;</strong><fmt:message key="soporte.contacto"/><button type="button" id="imc-bt-equip-suport" class="imc-bt--com-text" onclick="obrirAjuda()"><span>&nbsp;<fmt:message key="soporte.equipo"/></span></button></p>
     </div>
 
     <div id="imc-suport" class="imc-suport" aria-hidden="true" role="dialog">
