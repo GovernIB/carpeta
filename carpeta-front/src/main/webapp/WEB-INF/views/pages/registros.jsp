@@ -20,17 +20,17 @@
                     <div>
                         <span class="imc--num">${index.count}</span>
                         <a href="<c:url value="/registreDetall"/>">
-                            <div class="imc--doc"><span>${asiento.resumen}</span></div>
+                            <div class="imc--doc"><span><fmt:message key="registro.tipo.${asiento.tipoRegistro}"/>: ${asiento.numeroRegistroFormateado}</span></div>
                         </a>
                     </div>
                     <div class="llista-fila-info">
-                        <span class="imc--extensions"><fmt:message key="registro.fecha"/> <strong><fmt:formatDate value="${asiento.fechaRegistro}" pattern="dd/MM/yyyy HH:mm"/></strong></span>
-                        <span class="imc--extensions"><fmt:message key="registro.numero"/> <strong>${asiento.numeroRegistroFormateado}</strong></span>
-                        <span class="imc--extensions"><fmt:message key="registro.oficina"/> <strong>${asiento.entidadRegistralInicioDenominacion}</strong></span>
+                        <span class="imc--extensions"><fmt:message key="registro.fecha"/>: <strong><fmt:formatDate value="${asiento.fechaRegistro}" pattern="dd/MM/yyyy HH:mm"/></strong></span>
+                        <span class="imc--extensions"><fmt:message key="registro.extracto"/>: <strong>${asiento.resumen}</strong></span>
+                        <span class="imc--extensions"><fmt:message key="registro.oficina"/>: <strong>${asiento.entidadRegistralInicioDenominacion}</strong></span>
 
                         <%--Registro Entrada--%>
                         <c:if test="${asiento.tipoRegistro == 1}">
-                            <span class="imc--extensions"><fmt:message key="registro.organisme"/> <strong>${asiento.unidadTramitacionDestinoDenominacion}</strong></span>
+                            <span class="imc--extensions"><fmt:message key="registro.organisme"/>: <strong>${asiento.unidadTramitacionDestinoDenominacion}</strong></span>
                         </c:if>
 
                         <%--Registro Salida--%>
