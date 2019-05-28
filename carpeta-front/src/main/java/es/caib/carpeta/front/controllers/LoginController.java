@@ -42,14 +42,16 @@ public class LoginController {
         }
         final SavedRequest savedRequest = loginRequestCache.getRequest(request, response);
 
-        if(savedRequest == null){
-            String url = securityService.iniciarSesionAutentificacion();
+        if(savedRequest != null && existeTicket(savedRequest)){
 
-            return new ModelAndView("redirect:"+url);
-        }else {
             log.info("savedRequest.getRedirectUrl(): " + savedRequest.getRedirectUrl());
 
             return autenticarTicket(savedRequest);
+
+        }else {
+            String url = securityService.iniciarSesionAutentificacion();
+
+            return new ModelAndView("redirect:"+url);
 
         }
 
