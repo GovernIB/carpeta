@@ -1,8 +1,10 @@
 package es.caib.carpeta.front.controllers;
 
 import es.caib.carpeta.core.service.RegWeb3Service;
+import es.caib.carpeta.core.service.Sistra2Service;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.regweb3.ws.api.v3.AsientoRegistralWs;
+import es.caib.sistramit.rest.api.externa.v1.RTramitePersistencia;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class InicioController {
     @Autowired
     RegWeb3Service regWeb3Service;
 
+    @Autowired
+    Sistra2Service sistra2Service;
+
     @RequestMapping(value="/inicio")
     public ModelAndView inicio(HttpServletRequest request, Authentication authentication) {
 
@@ -44,12 +49,27 @@ public class InicioController {
     }
 
     @RequestMapping(value = { "/tramites"}, method = RequestMethod.GET)
-    public String tramites(ModelMap model) {
-        return "tramites";
+    public ModelAndView tramites(ModelMap model, Authentication authentication) {
+
+        ModelAndView mav = new ModelAndView("tramites");
+
+        UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();
+
+        try {
+            List<RTramitePersistencia> tramites = sistra2Service.obtenerTramites(usuarioAutenticado.getUsuarioClave().getNif());
+
+            mav.addObject("tramites", tramites);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return mav;
     }
 
     @RequestMapping(value = { "/registros"}, method = RequestMethod.GET)
     public ModelAndView registros(ModelMap model, Authentication authentication) {
+
         ModelAndView mav = new ModelAndView("registros");
 
         UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();
