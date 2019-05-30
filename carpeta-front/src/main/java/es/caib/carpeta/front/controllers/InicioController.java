@@ -48,24 +48,6 @@ public class InicioController {
 
     }
 
-    @RequestMapping(value = { "/tramites"}, method = RequestMethod.GET)
-    public ModelAndView tramites(ModelMap model, Authentication authentication) {
-
-        ModelAndView mav = new ModelAndView("tramites");
-
-        UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();
-
-        try {
-            List<RTramitePersistencia> tramites = sistra2Service.obtenerTramites(usuarioAutenticado.getUsuarioClave().getNif());
-
-            mav.addObject("tramites", tramites);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return mav;
-    }
 
     @RequestMapping(value = { "/registros"}, method = RequestMethod.GET)
     public ModelAndView registros(ModelMap model, Authentication authentication) {

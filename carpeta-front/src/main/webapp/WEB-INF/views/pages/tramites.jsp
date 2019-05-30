@@ -17,7 +17,7 @@
                 <li class="llista-fila">
                     <div>
                         <span class="imc--num">${index.count}</span>
-                        <a href="<c:url value="/tramite?id=${tramite.idSesionTramitacion}"/>" target="_blank">
+                        <a href="<c:url value="/tramite/${tramite.idSesionTramitacion}"/>" target="_blank">
                             <div class="imc--doc"><p class="pad-left0">${tramite.descripcionTramite}</p></div>
                         </a>
                     </div>

@@ -95,7 +95,8 @@ public class Sistra2ServiceImpl implements Sistra2Service{
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         final RInfoTicketAcceso infoTicket = new RInfoTicketAcceso();
-        infoTicket.setIdSesionTramitacion("Q2KQIERJ-HED0WNT8-T804QSNW");
+        //infoTicket.setIdSesionTramitacion("Q2KQIERJ-HED0WNT8-T804QSNW");
+        infoTicket.setIdSesionTramitacion(idSesionTramitacion);
 
         final RUsuarioAutenticadoInfo usuariInfo = new RUsuarioAutenticadoInfo();
         usuariInfo.setUsername("jgarcia");
@@ -114,7 +115,7 @@ public class Sistra2ServiceImpl implements Sistra2Service{
         final ResponseEntity<String> response = restTemplate.postForEntity(
                 SISTRA2_URL + "/ticketAcceso", request, String.class);
 
-        System.out.println("Url: " + response.getBody());
+        log.info("Url: " + response.getBody());
 
         return response.getBody();
     }
