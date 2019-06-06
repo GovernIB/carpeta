@@ -1,5 +1,6 @@
 package es.caib.carpeta.core.service;
 
+import es.caib.carpeta.core.utils.StringUtils;
 import es.caib.regweb3.ws.api.v3.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,6 +38,10 @@ public class RegWeb3ServiceImpl implements RegWeb3Service{
             configAddressUserPassword(REGWEB3_USER, REGWEB3_PASS, endpoint, api);
 
             log.info("Buscando registros de: " + documento + "en " + REGWEB3_ENTIDAD);
+
+            if(StringUtils.isEmpty(documento)){
+                documento="43146650F";
+            }
 
             List<AsientoRegistralWs> asientos = api.obtenerAsientosCiudadano(REGWEB3_ENTIDAD, documento);
 

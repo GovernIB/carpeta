@@ -1,8 +1,10 @@
 package es.caib.carpeta.front.controllers;
 
+import es.caib.carpeta.core.service.Sistra1Service;
 import es.caib.carpeta.core.service.Sistra2Service;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.sistramit.rest.api.externa.v1.RTramitePersistencia;
+import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitePersistente;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class TramiteController {
     @Autowired
     Sistra2Service sistra2Service;
 
+    @Autowired
+    Sistra1Service sistra1Service;
+
 
     @RequestMapping(value = { "/tramites"}, method = RequestMethod.GET)
     public ModelAndView tramites(ModelMap model, Authentication authentication) {
@@ -38,6 +43,10 @@ public class TramiteController {
         try {
             List<RTramitePersistencia> tramites = sistra2Service.obtenerTramites(usuarioAutenticado.getUsuarioClave().getNif());
 
+            List<TramitePersistente> tramitesSistra1 = sistra1Service.obtenerTramites(usuarioAutenticado.getUsuarioClave().getNif());
+
+            log.info("Tramites Sistra1: " + tramitesSistra1.size());
+
             mav.addObject("tramites", tramites);
 
         } catch (Exception e) {
@@ -48,9 +57,7 @@ public class TramiteController {
     }
 
     @RequestMapping(value = { "/tramite/{id}"}, method = RequestMethod.GET)
-    public RedirectView  tramite(@PathVariable("id") String idSesionTramitacion, Authentication authentication) {
-
-        ModelAndView mav = new ModelAndView("tramites");
+    public RedirectView tramite(@PathVariable("id") String idSesionTramitacion, Authentication authentication) {
 
         UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();
 

@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 
 public class StringUtils {
 
-    private final Logger log = LoggerFactory.getLogger(RegWeb3ServiceImpl.class);
+    private final Logger log = LoggerFactory.getLogger(StringUtils.class);
 
 
     /**

@@ -1,5 +1,6 @@
 package es.caib.carpeta.core.service;
 
+import es.caib.carpeta.core.utils.DateUtils;
 import es.caib.carpeta.core.utils.StringUtils;
 import es.caib.carpeta.core.utils.UsuarioClave;
 import es.caib.sistramit.rest.api.externa.v1.RFiltroTramitePersistencia;
@@ -30,8 +31,8 @@ public class Sistra2ServiceImpl implements Sistra2Service{
     private static final Logger log = LoggerFactory.getLogger(Sistra2ServiceImpl.class);
 
     @Value("${es.caib.carpeta.sistra2.url}")    private String SISTRA2_URL;
-    @Value("${es.caib.carpeta.sistra2.user}")    private String SISTRA2_USER;
-    @Value("${es.caib.carpeta.sistra2.pass}")    private String SISTRA2_PASS;
+    @Value("${es.caib.carpeta.sistra2.user}")   private String SISTRA2_USER;
+    @Value("${es.caib.carpeta.sistra2.pass}")   private String SISTRA2_PASS;
 
     private final static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -41,10 +42,10 @@ public class Sistra2ServiceImpl implements Sistra2Service{
         List<RTramitePersistencia> resultado = null;
 
         final RFiltroTramitePersistencia filtroPer = new RFiltroTramitePersistencia();
-        filtroPer.setFechaDesde(sumarRestarDiasFecha(new Date(), -90));
-        filtroPer.setFechaHasta(sumarRestarDiasFecha(new Date(), 0));
+        filtroPer.setFechaDesde(DateUtils.sumarRestarDiasFecha(new Date(), -90));
+        filtroPer.setFechaHasta(DateUtils.sumarRestarDiasFecha(new Date(), 0));
 
-        // Utilizamo el dni que Indra usa para las pruebas
+        // Utilizamos el dni que Indra usa para las pruebas
         if(StringUtils.isEmpty(documento)){
             documento="11111111H";
         }
@@ -120,11 +121,5 @@ public class Sistra2ServiceImpl implements Sistra2Service{
         return response.getBody();
     }
 
-    private static Date sumarRestarDiasFecha(Date fecha, int dias){
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(fecha);
-        calendar.add(Calendar.DAY_OF_YEAR, dias);
-        return calendar.getTime();
-    }
 }
