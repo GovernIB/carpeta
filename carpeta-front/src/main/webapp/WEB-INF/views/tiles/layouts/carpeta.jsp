@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file="/WEB-INF/views/includes.jsp"%>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<c:out value="${pageContext.response.locale.language}"/>"  lang="<c:out value="${pageContext.response.locale.language}"/>" data-estil="pd" class=" js rgba multiplebgs backgroundsize borderradius boxshadow textshadow opacity cssanimations cssgradients csstransforms csstransitions generatedcontent">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<c:out value="${pageContext.response.locale.language}"/>"  lang="<c:out value="${pageContext.response.locale.language}"/>" data-estil="pd">
 <head>
     <link rel="shortcut icon" href="<c:url value="/static/img/logo_carpeta.png"/>" />
-    <%--<meta charset="UTF-8">--%>
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="Content-Language" content="ca"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,102 +14,61 @@
 
     <title>GOIB - Carpeta Ciudadana</title>
 
-    <link rel="stylesheet" media="screen" href="${pageContext.request.contextPath}/static/css/imc-sf.css">
-
-    <script src="${pageContext.request.contextPath}/static/js/jquery-3.3.1.min.js"></script>
-
-    <!-- inicia! -->
-    <script src="${pageContext.request.contextPath}/static/js/configuracion.js"></script>
-    <script src="${pageContext.request.contextPath}/static/js/imc-sf.js"></script>
-
-    <!-- AFEGIT PER JO-->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/carpeta.css">
+    <!-- jQuery library -->
+    <script src="${pageContext.request.contextPath}/static/js/jquery-3.1.1.slim.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/js/tether.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="${pageContext.request.contextPath}/static/js/ie10-viewport-bug-workaround.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/carpeta.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/imc-menu-desplegable.js"></script>
+
+    <!-- Estilos -->
+    <link href="${pageContext.request.contextPath}/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/static/css/carpeta.css" rel="stylesheet">
 
 </head>
 
 <body>
 
-    <section id="carrega">
-        <tiles:insertAttribute name="carga" />
-    </section>
-
     <!-- contenidor -->
-    <div id="imc-contenidor" class="imc-contenidor imc-mostra" aria-hidden="false"><!-- cap -->
+    <nav class="navbar navbar-toggleable-md navbar-inverse bg-carpeta fixed-top">
 
-        <!-- Header i Menu -->
-        <div class="imc-cap--fixe" id="imc-cap--fixe">
+        <!-- botón menú móvil -->
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <!-- Header -->
-            <header class="imc-cap" id="header" data-autenticacio="a">
-                <tiles:insertAttribute name="cabecera" />
-            </header>
+        <!-- Header -->
+        <tiles:insertAttribute name="cabecera" />
 
-            <!-- Menú mòbil -->
-            <section id="mobil">
-                <tiles:insertAttribute name="movil" />
-            </section>
+        <!-- Menú móvil -->
+        <tiles:insertAttribute name="movil" />
 
-            <!-- Menu -->
-            <header class="imc-menu" id="imc-menu">
-                <tiles:insertAttribute name="menu" />
-            </header>
+    </nav>
 
-            <!-- Molla de pa -->
-            <section id="miga">
-                <tiles:insertAttribute name="miga" />
-            </section>
+    <!-- Continido página -->
+    <div class="container">
 
-        </div>
+        <div class="starter-template">
 
-        <!-- Contingut pàgina -->
-        <div class="imc-contingut" id="imc-contingut">
-            <div class="imc--c"><!-- cal saber -->
+            <!-- Miga de pan -->
+            <tiles:insertAttribute name="miga" />
 
-                <div class="imc-pas">
+            <!-- Contenido -->
+            <tiles:insertAttribute name="body" />
 
-                    <!-- Explicació -->
-                    <section id="explicacio">
-                        <tiles:insertAttribute name="informacion" />
-                    </section>
+            <!-- LOPD -->
+            <tiles:insertAttribute name="lopd" />
 
-                    <!-- Avisos -->
-                    <section id="avis">
-                        <tiles:insertAttribute name="aviso" />
-                    </section>
-
-                    <!-- Contingut -->
-                    <section id="site-content">
-                        <tiles:insertAttribute name="body" />
-                    </section>
-
-                    <!-- LOPD -->
-                    <section id="lopd">
-                        <tiles:insertAttribute name="lopd" />
-                    </section>
-
-                </div>
-            </div>
-        </div>
-
-        <!-- Contacte -->
-        <aside id="contacte" class="imc-contacte">
+            <!-- contacto -->
             <tiles:insertAttribute name="contacto" />
-        </aside>
 
-        <!-- Peu i LOPD -->
-        <footer id="footer" class="imc-peu">
-            <tiles:insertAttribute name="pie" />
-        </footer>
+        </div>
 
-    </div>
-    <!-- /contenidor -->
+    </div><!-- /.container -->
 
-    <!-- Missatge -->
-    <footer id="missatge">
-        <tiles:insertAttribute name="mensaje" />
-    </footer>
+    <!-- Pie -->
+    <tiles:insertAttribute name="pie" />
 
 </body>
 

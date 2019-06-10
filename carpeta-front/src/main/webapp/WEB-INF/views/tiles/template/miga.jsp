@@ -1,8 +1,6 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
-<div>
-    <nav class="nav_migadepan">
-        <ul>
-            <li><fmt:message key="menu.inicio"/></li>
-        </ul>
-    </nav>
+<div class="col-12 migaPan">
+    <ul>
+        <li><fmt:message key="menu.inicio"/></li>
+    </ul>
 </div>

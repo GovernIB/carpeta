@@ -1,5 +1,7 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
-<div class="imc--explicacio-detallada imc--e-d llista" id="imc--explicacio-detallada">
+<div class="container contenido">
+
+    <div class="row">
 
     <c:if test="${empty tramites}">
         <p>No existen tramites pendientes</p>
@@ -64,5 +66,7 @@
                 </li>
             </ol>
         </nav>
+    </div>
+
     </div>
 </div>

@@ -1,58 +1,28 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
-<div class="imc--c">
+<div class="navbar-brand menuGovern">
 
-    <div class="imc--logo" title="Govern Illes Balears"></div>
-
-    <div class="imc--dades">
-
-        <h2><fmt:message key="carga.carpeta"/></h2>
-
-        <sec:authorize access="isAuthenticated()">
-            <div class="imc--usuari">
-                <strong><fmt:message key="menu.usuario"/></strong>
-                <span><sec:authentication property="principal.usuarioClave.nombreCompleto" /></span>
-            </div>
-
-            <div class="imc--clau">
-                <strong>DNI:</strong>
-                <span><sec:authentication property="principal.usuarioClave.nif" /></span>
-            </div>
-        </sec:authorize>
-
+    <div class="logoGovern">
+        <a class="mr-auto" href="<c:url value="/"/>"><img src="${pageContext.request.contextPath}/static/img/logo-govern.svg" width="50" alt="Govern Balear"/></a>
     </div>
+    <div>
+        <div>
+            <span class="titulo"><h1><fmt:message key="carga.carpeta"/></h1></span>
+        </div>
+        <div>
 
-    <ul class="imc--opcions" id="opcionsLlarg">
-        <li>
-            <button type="button" id="imc-bt-accessibilitat" class="imc-bt" onclick="location.href='accessibilitat.html';">
-                <p class="text1"><img src="${pageContext.request.contextPath}/static/img/icones/ico_accessibilitat.svg" class="icona-capsalera" alt=""/><fmt:message key="menu.accesibilidad"/></p>
-            </button>
-        </li>
-        <li class="imc-idioma imc-bt" id="imc-bt-idioma">
-            <ul>
-                <li>
-                    <p class="text1"><img src="${pageContext.request.contextPath}/static/img/icones/ico_idioma.svg" class="icona-capsalera" alt=""/><fmt:message key="menu.idioma"/></p>
-                </li>
-                <li class="opcioOculta" id="idioma">
-                    <ul>
-                        <li><a href="<c:url value="/?idioma=ca"/>" id="id_ca">Catala</a></li>
-                        <li><a href=" <c:url value="/?idioma=es"/>" id="id_es">Castella</a></li>
-                    </ul>
-                </li>
+            <sec:authorize access="isAuthenticated()">
+                <div>
+                    <strong class="subtitulo"><fmt:message key="menu.usuario"/></strong>
+                    <span class="subtituloMay"><sec:authentication property="principal.usuarioClave.nombreCompleto" /></span>
+                </div>
 
-            </ul>
-        </li>
-        <sec:authorize access="isAuthenticated()">
-            <li>
-                <c:url var="logoutUrl" value="/logout" />
-                <form action="${logoutUrl}" id="logout" method="post">
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                </form>
-                <button type="button" id="imc-bt-desconecta" class="imc-bt" onclick="sortirCarpeta()"><p class="text1"><img src="${pageContext.request.contextPath}/static/img/icones/ico_desconecta.svg" class="icona-capsalera" alt=""/><fmt:message key="menu.salir"/></p></button>
-            </li>
-        </sec:authorize>
+                <div>
+                    <strong class="subtitulo">DNI:</strong>
+                    <span class="subtitulo"><sec:authentication property="principal.usuarioClave.nif" /></span>
+                </div>
+            </sec:authorize>
 
-    </ul>
-
-    <button type="button" class="imc-bt-menu" id="menuMobil" title="Menú" onclick="desplegarMenu()"><span>Menú</span></button>
+        </div>
+    </div>
 
 </div>

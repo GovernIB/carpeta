@@ -1,5 +1,8 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
-<div class="imc--explicacio-detallada imc--e-d registreDetall">
+<div class="container contenido">
+
+    <div class="row">
+
     <p><strong><fmt:message key="registro.detalle.nom"/></strong></p>
     <ul class="dadesRegistre">
         <li>
@@ -44,4 +47,6 @@
 
         </li>
     </ul>
+
+    </div>
 </div>

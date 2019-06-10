@@ -1,4 +1,9 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
-<div class="imc--explicacio-detallada imc--e-d" id="imc--explicacio-detallada">
-    <p><fmt:message key="inicio.logout"/></p>
+<div class="container contenido">
+
+    <div class="row">
+
+        <p><fmt:message key="inicio.logout"/></p>
+
+    </div>
 </div>
