@@ -50,3 +50,8 @@ function cerrarAyuda(){
 	$("#soporte").removeClass("on");
     $("#cajaSoporte").removeClass("on");
 }
+
+/** Per sortir de la Carpeta **/
+function sortirCarpeta(){
+	document.getElementById('logout').submit();
+}

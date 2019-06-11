@@ -3,7 +3,7 @@
 
     <div class="row">
 
-        <p><fmt:message key="inicio.logout"/></p>
+        <p><fmt:message key="inicio.logout"/> pages</p>
 
     </div>
 </div>

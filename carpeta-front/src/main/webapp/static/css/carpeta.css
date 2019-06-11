@@ -50,6 +50,9 @@ body {
 .datosSoporte li{
 	list-style: circle;
 }
+.navbar-nav.movil {
+	padding-left: 20px !important;
+}
 }
 
 /* Inicio dropdown hover */
@@ -192,7 +195,8 @@ a.dropdown-item.movil:hover{
 	position: relative; 
 	color: #4dba79; 
 	padding: 0; 
-	background-color: transparent; 
+	background-color: transparent;
+	font-size: 90%;
 }
 .botonAyuda:hover,
 .botonAyuda:focus { 
@@ -402,6 +406,6 @@ a.botonRed {
 	padding-top: 1em;
 }
 .tituloLopd{
-	font-size: 1.75rem;
+	font-size: 1.3rem;
 }
 /* Fin LOPD */

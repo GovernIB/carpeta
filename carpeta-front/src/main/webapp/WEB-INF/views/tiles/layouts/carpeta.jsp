@@ -2,7 +2,7 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<c:out value="${pageContext.response.locale.language}"/>"  lang="<c:out value="${pageContext.response.locale.language}"/>" data-estil="pd">
-<head>
+
     <link rel="shortcut icon" href="<c:url value="/static/img/logo_carpeta.png"/>" />
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -15,16 +15,17 @@
     <title>GOIB - Carpeta Ciudadana</title>
 
     <!-- jQuery library -->
-    <script src="${pageContext.request.contextPath}/static/js/jquery-3.1.1.slim.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/js/tether.min.js"></script>
-    <script src="${pageContext.request.contextPath}/static/js/bootstrap.min.js"></script>
+
+    <script src="<c:url value="/static/js/jquery-3.1.1.slim.min.js"/>"></script>
+    <script src="<c:url value="/static/js/tether.min.js"/>"></script>
+    <script src="<c:url value="/static/js/bootstrap.min.js"/>"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="${pageContext.request.contextPath}/static/js/ie10-viewport-bug-workaround.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/static/js/carpeta.js"></script>
+    <script src="<c:url value="/static/js/ie10-viewport-bug-workaround.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/static/js/carpeta.js"/>"></script>
 
     <!-- Estilos -->
-    <link href="${pageContext.request.contextPath}/static/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/static/css/carpeta.css" rel="stylesheet">
+    <link href="<c:url value="/static/css/bootstrap.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/static/css/carpeta.css"/>" rel="stylesheet">
 
 </head>
 
@@ -38,11 +39,11 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Header -->
+        <!-- Cabecera -->
         <tiles:insertAttribute name="cabecera" />
 
-        <!-- Menú móvil -->
-        <tiles:insertAttribute name="movil" />
+        <!-- Menú principal -->
+        <tiles:insertAttribute name="menu" />
 
     </nav>
 

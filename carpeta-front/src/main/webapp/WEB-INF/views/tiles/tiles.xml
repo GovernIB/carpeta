@@ -9,7 +9,6 @@
         <put-attribute name="title" value="CARPETA CIUTADANA" />
         <put-attribute name="carga" value="/WEB-INF/views/tiles/template/carga.jsp" />
         <put-attribute name="cabecera" value="/WEB-INF/views/tiles/template/cabecera.jsp" />
-        <put-attribute name="movil" value="/WEB-INF/views/tiles/template/menuMovil.jsp" />
         <put-attribute name="menu" value="/WEB-INF/views/tiles/template/menu.jsp" />
         <put-attribute name="miga" value="/WEB-INF/views/tiles/template/miga.jsp" />
         <put-attribute name="aviso" value="/WEB-INF/views/tiles/template/aviso.jsp" />
