@@ -48,31 +48,6 @@ public class InicioController {
 
     }
 
-
-    @RequestMapping(value = { "/registros"}, method = RequestMethod.GET)
-    public ModelAndView registros(ModelMap model, Authentication authentication) {
-
-        ModelAndView mav = new ModelAndView("registros");
-
-        UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();
-
-        try {
-            List<AsientoRegistralWs> asientos = regWeb3Service.obtenerAsientosCiudadano(usuarioAutenticado.getUsuarioClave().getNif());
-
-            mav.addObject("asientos", asientos);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return mav;
-    }
-
-    @RequestMapping(value = { "/registreDetall"}, method = RequestMethod.GET)
-    public String registreDetall(ModelMap model) {
-        return "registro";
-    }
-
     @RequestMapping(value = { "/accesibilidad"}, method = RequestMethod.GET)
     public String accesibilidad(ModelMap model) {
         return "accesibilidad";
