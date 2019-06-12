@@ -1,0 +1,20 @@
+CONFIGURACIÓN APLICACIÓN
+-----------------------------
+
+Las propiedades de la aplicación se establecen en el archivo "carpeta.properties", en el hay que dar valor a todas las propiedades.
+
+Este archivo se ubicará, por ejemplo, en el directorio ${jboss.home}/standalone/deployments/carpeta.properties y esta ruta hay que
+establecerla como una "system-properties" en el archivo de configuración de jboss-eap-7.2 standalone.xml, de la siguiente manera:
+
+<system-properties>
+    <property name="es.caib.carpeta.properties.path" value="${jboss.home}/standalone/deployments/carpeta.properties"/>
+</system-properties>
+
+COMPILACIÓN APLICACIÓN
+----------------------------
+
+Para compilar la aplicación la primera vez es necesario ejecutar el comando "mvn initialize", con la finalidad de instalar
+librerias en el repositorio local de maven.
+
+Después se puede compilar la aplicación de la siguiente manera: mvn -DskipTests clean install y copiar el ear generado en
+la carpeta ${jboss.home}/standalone/deployments/
