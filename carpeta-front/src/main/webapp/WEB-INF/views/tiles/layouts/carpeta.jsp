@@ -47,7 +47,7 @@
 
     </nav>
 
-    <!-- Continido página -->
+    <!-- Contenido -->
     <div class="container">
 
         <div class="starter-template">

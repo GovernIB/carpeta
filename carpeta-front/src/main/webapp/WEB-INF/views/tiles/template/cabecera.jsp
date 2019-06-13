@@ -11,9 +11,14 @@
         <div>
 
             <sec:authorize access="isAuthenticated()">
+                <sec:authentication var="user" property="principal.usuarioClave.nombreCompleto" />
                 <div>
                     <strong class="subtitulo"><fmt:message key="menu.usuario"/></strong>
-                    <span class="subtituloMay"><sec:authentication property="principal.usuarioClave.nombreCompleto" /></span>
+                    <span class="subtituloMay">
+                        <c:if test="${user != null}">
+                            <sec:authentication property="principal.usuarioClave.nombreCompleto" />
+                        </c:if>
+                    </span>
                 </div>
 
                 <div>
