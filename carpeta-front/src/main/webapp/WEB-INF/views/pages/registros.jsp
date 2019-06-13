@@ -16,6 +16,7 @@
             </p>
         </div>
 
+        <!-- Lista registros -->
         <div class="row">
 
             <div class="list-group col-12">
@@ -25,7 +26,7 @@
                     <%--Registro Entrada--%>
                     <c:if test="${asiento.tipoRegistro == 1}">
 
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start cajaEntrada">
+                        <a href="<c:url value="/registreDetall"/>" class="list-group-item list-group-item-action flex-column align-items-start cajaRegistro">
                             <div class="d-flex w-100">
                                 <span class="numLista">${index.count}</span>
                                 <h5 class="mb-1 verde col-10 listVerde"><fmt:message key="registro.tipo.${asiento.tipoRegistro}"/>: ${asiento.numeroRegistroFormateado}</h5>
@@ -50,11 +51,11 @@
 
         </div>
 
+        <!-- Paginación -->
         <div class="row mt-20">
-
             <div class="col-sm-12 col-md-5">
                 <div class="dataTables_info izq" id="dataTable_info" role="status" aria-live="polite">
-                    <fmt:message key="registro.mostrar"/> 1 de 10 de ${fn:length(asientos)} <fmt:message key="registro.registros"/>
+                    <fmt:message key="carpeta.mostrar"/> 1 de 10 de ${fn:length(asientos)} <fmt:message key="registro.registros"/>
                 </div>
             </div>
             <div class="col-sm-12 col-md-7">

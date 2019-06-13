@@ -402,8 +402,11 @@ a.dropdown-item.movil:hover{
 .verde{
 	color: #3b8e5d;
 }
-.cajaEntrada{
+.cajaRegistro{
 	border-left: .25rem solid #5BC0DE!important;
+}
+.cajaTramite{
+	border-left: .25rem solid #5CB85C!important;
 }
 /*.cajaSalida{*/
 /*	border-left: .25rem solid #D9534F!important;*/
