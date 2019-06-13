@@ -31,9 +31,9 @@ public class Regweb3Tests extends CarpetaTestUtils {
 
             configAddressUserPassword(user, pass, endpoint, api);
 
-           List<AsientoRegistralWs> registros = api.obtenerAsientosCiudadano(entidad, "43146650F");
+           ResultadoBusquedaWs registros = api.obtenerAsientosCiudadano(entidad, "43146650F", 0);
 
-            System.out.println("Total registros: " + registros.size());
+            System.out.println("Total registros: " + registros.getTotalResults());
 
         } catch (MalformedURLException e) {
             e.printStackTrace();

@@ -24,8 +24,8 @@ public class RegWeb3ServiceImpl implements RegWeb3Service{
     @Value("${es.caib.carpeta.regweb3.user}")    private String REGWEB3_USER;
     @Value("${es.caib.carpeta.regweb3.pass}")    private String REGWEB3_PASS;
 
-    @Override
-    public List<AsientoRegistralWs> obtenerAsientosCiudadano(String documento) throws Exception {
+
+    public ResultadoBusquedaWs obtenerAsientosCiudadano(String documento, Integer pageNumber) throws Exception {
 
         try {
             String endpoint = REGWEB3_HOST + REGWEB3_API;
@@ -43,9 +43,9 @@ public class RegWeb3ServiceImpl implements RegWeb3Service{
                 documento="43146650F";
             }
 
-            List<AsientoRegistralWs> asientos = api.obtenerAsientosCiudadano(REGWEB3_ENTIDAD, documento);
+            ResultadoBusquedaWs asientos = api.obtenerAsientosCiudadano(REGWEB3_ENTIDAD, documento, pageNumber);
 
-            log.info("Total asientos: " + asientos.size());
+            log.info("Total asientos: " + asientos.getTotalResults());
 
             return asientos;
 

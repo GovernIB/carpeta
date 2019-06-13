@@ -45,10 +45,6 @@
                             <artifactId>carpeta-back</artifactId>
                             <contextRoot>carpeta-back</contextRoot>
                         </webModule>
-                        <!--<jarModule>
-                            <groupId>es.caib.carpeta</groupId>
-                            <artifactId>carpeta-utils</artifactId>
-                        </jarModule>-->
                     </modules>
                 </configuration>
             </plugin>

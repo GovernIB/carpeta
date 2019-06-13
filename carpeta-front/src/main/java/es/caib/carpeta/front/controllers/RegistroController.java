@@ -3,6 +3,7 @@ package es.caib.carpeta.front.controllers;
 import es.caib.carpeta.core.service.RegWeb3Service;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.regweb3.ws.api.v3.AsientoRegistralWs;
+import es.caib.regweb3.ws.api.v3.ResultadoBusquedaWs;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +32,9 @@ public class RegistroController {
         UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();
 
         try {
-            List<AsientoRegistralWs> asientos = regWeb3Service.obtenerAsientosCiudadano(usuarioAutenticado.getUsuarioClave().getNif());
+            ResultadoBusquedaWs asientos = regWeb3Service.obtenerAsientosCiudadano(usuarioAutenticado.getUsuarioClave().getNif(), 0);
 
-            mav.addObject("asientos", asientos);
+            mav.addObject("asientos", asientos.getResults());
 
         } catch (Exception e) {
             e.printStackTrace();
