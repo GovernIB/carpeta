@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file="/WEB-INF/views/includes.jsp"%>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<c:out value="${pageContext.response.locale.language}"/>"  lang="<c:out value="${pageContext.response.locale.language}"/>" data-estil="pd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${pageContext.response.locale.language}"  lang="${pageContext.response.locale.language}" data-estil="pd">
 <head>
     <link rel="shortcut icon" href="<c:url value="/static/img/logo_carpeta.png"/>" />
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="Content-Language" content="ca"/>
+    <meta http-equiv="Content-Language" content="${pageContext.response.locale.language}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="_csrf" content="">

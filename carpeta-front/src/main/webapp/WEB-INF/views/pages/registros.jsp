@@ -39,7 +39,7 @@
                                 <span><fmt:message key="registro.oficina"/>: <strong>${asiento.entidadRegistralInicioDenominacion}</strong></span>
                             </p>
                             <p class="mb-1 col-12 infoList">
-                                <span><fmt:message key="registro.organisme"/>: <strong>${asiento.unidadTramitacionDestinoDenominacion}</strong></span>
+                                <span><fmt:message key="registro.organismo"/>: <strong>${asiento.unidadTramitacionDestinoDenominacion}</strong></span>
                             </p>
                         </a>
 
