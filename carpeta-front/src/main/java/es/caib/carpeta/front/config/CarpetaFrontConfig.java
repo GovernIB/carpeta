@@ -7,8 +7,12 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
+
+import java.util.Locale;
 
 @Configuration
 @EnableWebMvc
@@ -43,6 +47,27 @@ public class CarpetaFrontConfig extends WebMvcConfigurerAdapter {
         messageSource.setBasename("mensajes");
         messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
+    }
+
+    @Bean(name = "localeResolver")
+    public SessionLocaleResolver getSessionLocaleResolver(){
+        // Create a SessionLocaleResolver object.
+        SessionLocaleResolver localeResolver = new SessionLocaleResolver();
+        // Set default locale in session.
+        localeResolver.setDefaultLocale(new Locale("ca"));
+        return localeResolver;
+    }
+
+    @Bean(name="localeInterceptor")
+    public LocaleChangeInterceptor getLocaleInterceptor(){
+        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+        interceptor.setParamName("idioma");
+        return interceptor;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(getLocaleInterceptor());
     }
 
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
