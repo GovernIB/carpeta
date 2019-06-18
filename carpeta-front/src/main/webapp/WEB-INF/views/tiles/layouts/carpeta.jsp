@@ -2,7 +2,7 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<c:out value="${pageContext.response.locale.language}"/>"  lang="<c:out value="${pageContext.response.locale.language}"/>" data-estil="pd">
-
+<head>
     <link rel="shortcut icon" href="<c:url value="/static/img/logo_carpeta.png"/>" />
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
