@@ -55,13 +55,13 @@
     </definition>
 
     <!-- Detall de registre Page -->
-    <definition name="registreDetall" extends="base-definition">
+    <definition name="registroDetalle" extends="base-definition">
         <put-attribute name="title" value="Detall de registre" />
-        <put-attribute name="body" value="/WEB-INF/views/pages/registro.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/registroDetalle.jsp" />
     </definition>
 
     <!-- Accessibilitat Page -->
-    <definition name="accessibilitat" extends="base-definition">
+    <definition name="accessibilidad" extends="base-definition">
         <put-attribute name="title" value="Accessibilitat" />
         <put-attribute name="body" value="/WEB-INF/views/pages/accesibilidad.jsp" />
     </definition>

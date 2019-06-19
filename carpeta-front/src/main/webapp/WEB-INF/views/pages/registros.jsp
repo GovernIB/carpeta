@@ -26,9 +26,10 @@
                     <%--Registro Entrada--%>
                     <c:if test="${asiento.tipoRegistro == 1}">
 
-                        <a href="<c:url value="/registreDetall"/>" class="list-group-item list-group-item-action flex-column align-items-start cajaRegistro">
+                        <a href="<c:url value="/registroDetalle/${asiento.tipoRegistro}"/>" class="list-group-item list-group-item-action flex-column align-items-start cajaRegistro">
                             <div class="d-flex w-100">
-                                <span class="numLista">${index.count}</span>
+                                <c:set var="numRegistro" value="${(paginacion.currentIndex - 1)*10 + index.count}"/>
+                                <span class="numLista">${numRegistro}</span>
                                 <h5 class="mb-1 verde col-10 listVerde"><fmt:message key="registro.tipo.${asiento.tipoRegistro}"/>: ${asiento.numeroRegistroFormateado}</h5>
                                 <small><fmt:formatDate value="${asiento.fechaRegistro}" pattern="dd/MM/yyyy HH:mm"/></small>
                             </div>

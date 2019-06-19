@@ -59,4 +59,23 @@ public class RegistroController {
         return mav;
     }
 
+    @RequestMapping(value="/registroDetalle/{idRegistro}", method = RequestMethod.GET)
+    public ModelAndView registroDetalle(ModelMap model, Authentication authentication) {
+
+        ModelAndView mav = new ModelAndView("registroDetalle");
+
+        UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();
+
+//        try {
+//            ResultadoBusquedaWs asientos = regWeb3Service.obtenerAsientosCiudadano(usuarioAutenticado.getUsuarioClave().getNif(), 0);
+//
+//            mav.addObject("asientos", asientos.getResults());
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+
+        return mav;
+    }
+
 }

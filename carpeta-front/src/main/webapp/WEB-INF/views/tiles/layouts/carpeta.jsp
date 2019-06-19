@@ -26,6 +26,7 @@
     <!-- Estilos -->
     <link href="<c:url value="/static/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/static/css/carpeta.css"/>" rel="stylesheet">
+    <link href="<c:url value="/static/css/open-iconic-bootstrap.css"/>" rel="stylesheet">
 
 </head>
 
