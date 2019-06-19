@@ -23,6 +23,20 @@ public class RegistroController {
     @Autowired
     RegWeb3Service regWeb3Service;
 
+    /**
+     *
+     */
+    @RequestMapping(value = "/registros", method = RequestMethod.GET)
+    public String listadoRegistros() {
+        return "redirect:/registros/1";
+    }
+
+    /**
+     *
+     * @param pageNumber
+     * @param authentication
+     * @return
+     */
     @RequestMapping(value = { "/registros/{pageNumber}"}, method = RequestMethod.GET)
     public ModelAndView registros(@PathVariable("pageNumber") Integer pageNumber, Authentication authentication) {
 
