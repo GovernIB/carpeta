@@ -1,5 +1,5 @@
-<!-- Menú principal-->
 <%@include file="/WEB-INF/views/includes.jsp"%>
+
 <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
     <ul class="navbar-nav movil">

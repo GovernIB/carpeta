@@ -4,7 +4,13 @@ body {
   color: #333; 
   background-color: #eaeaea;
 }
-.starter-template {
+
+a{
+	color: #4dba79;
+}
+
+
+.carpeta-contenido {
   padding: 3rem 1.5rem;
   text-align: center;
 }
@@ -25,9 +31,9 @@ body {
 .navbar-brand {
     font-size: 1rem !important; 
 }
-.starter-template {
+/*.starter-template {
     padding: 1rem !important;
-}
+}*/
 .tituloLopd{
 	font-size: 1rem !important;
 }

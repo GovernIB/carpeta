@@ -1,4 +1,13 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
+
+<%--Miga de pan--%>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<c:url value="/"/>"><fmt:message key="menu.inicio"/></a></li>
+        <li class="breadcrumb-item active" aria-current="page"><fmt:message key="menu.registros"/></li>
+    </ol>
+</nav>
+
 <div class="container contenido">
 
     <c:if test="${empty paginacion.listado}">
@@ -26,7 +35,7 @@
                     <%--Registro Entrada--%>
                     <c:if test="${asiento.tipoRegistro == 1}">
 
-                        <a href="<c:url value="/registroDetalle/${asiento.tipoRegistro}"/>" class="list-group-item list-group-item-action flex-column align-items-start cajaRegistro">
+                        <a href="<c:url value="/registro/${asiento.numeroRegistroFormateado}"/>" class="list-group-item list-group-item-action flex-column align-items-start cajaRegistro">
                             <div class="d-flex w-100">
                                 <c:set var="numRegistro" value="${(paginacion.currentIndex - 1)*10 + index.count}"/>
                                 <span class="numLista">${numRegistro}</span>

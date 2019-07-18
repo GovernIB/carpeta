@@ -8,4 +8,6 @@ import java.util.List;
 public interface RegWeb3Service {
 
     ResultadoBusquedaWs obtenerAsientosCiudadano(String documento, Integer pageNumber) throws Exception;
+
+    AsientoRegistralWs obtenerAsientoCiudadano(String documento, String numeroRegistroFormateado) throws Exception;
 }

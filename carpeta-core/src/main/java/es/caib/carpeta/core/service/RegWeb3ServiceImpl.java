@@ -37,7 +37,7 @@ public class RegWeb3ServiceImpl implements RegWeb3Service{
 
             configAddressUserPassword(REGWEB3_USER, REGWEB3_PASS, endpoint, api);
 
-            log.info("Buscando registros de: " + documento + "en " + REGWEB3_ENTIDAD);
+            log.info("Buscando registros de: " + documento + " en " + REGWEB3_ENTIDAD);
 
             if(StringUtils.isEmpty(documento)){
                 documento="43146650F";
@@ -59,6 +59,39 @@ public class RegWeb3ServiceImpl implements RegWeb3Service{
 
         return null;
 
+    }
+
+
+    public AsientoRegistralWs obtenerAsientoCiudadano(String documento, String numeroRegistroFormateado) throws Exception{
+
+        try {
+            String endpoint = REGWEB3_HOST + REGWEB3_API;
+            final URL wsdl = new URL(endpoint + "?wsdl");
+
+            RegWebAsientoRegistralWsService service =  new RegWebAsientoRegistralWsService(wsdl);
+
+            RegWebAsientoRegistralWs api = service.getRegWebAsientoRegistralWs();
+
+            configAddressUserPassword(REGWEB3_USER, REGWEB3_PASS, endpoint, api);
+
+            log.info("Obteniendo registro: " + numeroRegistroFormateado + " en " + REGWEB3_ENTIDAD);
+
+
+            AsientoRegistralWs asiento = api.obtenerAsientoCiudadano(REGWEB3_ENTIDAD, documento, numeroRegistroFormateado);
+
+            log.info("Resumen asiento: " + asiento.getResumen());
+
+            return asiento;
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (WsI18NException e) {
+            e.printStackTrace();
+        } catch (WsValidationException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     private static void configAddressUserPassword(String usr, String pwd,

@@ -1,4 +1,14 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
+
+<%--Miga de pan--%>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="<c:url value="/"/>"><fmt:message key="menu.inicio"/></a></li>
+        <li class="breadcrumb-item"><a href="<c:url value="/registros"/>"><fmt:message key="menu.registros"/></a></li>
+        <li class="breadcrumb-item active" aria-current="page"><fmt:message key="registro.registro"/> ${asiento.numeroRegistroFormateado}</li>
+    </ol>
+</nav>
+
 <div class="container contenido">
 
     <div class="row">

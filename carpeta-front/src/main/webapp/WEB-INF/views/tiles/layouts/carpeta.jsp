@@ -51,10 +51,10 @@
     <!-- Contenido -->
     <div class="container">
 
-        <div class="starter-template">
+        <div class="carpeta-contenido">
 
             <!-- Miga de pan -->
-            <tiles:insertAttribute name="miga" />
+            <%--<tiles:insertAttribute name="miga" />--%>
 
             <!-- Contenido -->
             <tiles:insertAttribute name="body" />
