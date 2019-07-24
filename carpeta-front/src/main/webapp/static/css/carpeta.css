@@ -320,3 +320,6 @@ a.dropdown-item.movil:hover{
 	height: 20%;
 	width: 20%;
 }
+.sinEstiloList{
+	list-style: none;
+}

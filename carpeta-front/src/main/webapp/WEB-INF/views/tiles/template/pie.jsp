@@ -13,7 +13,7 @@
 
                 <li><a href="avisLegal" target="_blank"><fmt:message key="pie.legal"/></a></li>
 
-                <li><a href="accesibilidad"><span class="oi oi-people" title="" alt="" aria-hidden="true"></span> <fmt:message key="menu.accesibilidad"/></a></li>
+                <li><a href="<c:url value="/accesibilidad"/>"><span class="oi oi-people" title="" alt="" aria-hidden="true"></span> <fmt:message key="menu.accesibilidad"/></a></li>
             </ul>
         </div>
 

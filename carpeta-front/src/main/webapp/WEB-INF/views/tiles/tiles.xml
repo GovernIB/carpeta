@@ -61,7 +61,7 @@
     </definition>
 
     <!-- Accessibilitat Page -->
-    <definition name="accessibilidad" extends="base-definition">
+    <definition name="accesibilidad" extends="base-definition">
         <put-attribute name="title" value="Accessibilitat" />
         <put-attribute name="body" value="/WEB-INF/views/pages/accesibilidad.jsp" />
     </definition>

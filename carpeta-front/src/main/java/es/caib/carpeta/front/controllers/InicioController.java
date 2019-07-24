@@ -48,12 +48,11 @@ public class InicioController {
 
     }
 
-    @RequestMapping(value = { "/accesibilidad"}, method = RequestMethod.GET)
-    public ModelAndView accesibilidad(HttpServletRequest request, Authentication authentication) {
+    @RequestMapping(value = { "/accesibilidad"})
+    public ModelAndView accesibilidad(HttpServletRequest request) {
 
         ModelAndView mav = new ModelAndView("accesibilidad");
 
-        log.info("ENTRAMMMMMMMMMM");
         return mav;
     }
 }
