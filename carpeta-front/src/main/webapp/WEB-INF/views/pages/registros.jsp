@@ -8,8 +8,6 @@
     </ol>
 </nav>
 
-<div class="container contenido">
-
     <c:if test="${empty paginacion.listado}">
         <div class="row">
             <p><fmt:message key="registro.vacio"/></p>
@@ -26,39 +24,37 @@
         </div>
 
         <!-- Lista registros -->
-        <div class="row">
 
-            <div class="list-group col-12">
 
-                <c:forEach items="${paginacion.listado}" var="asiento" varStatus="index">
+        <div class="card bg-light mb-12">
+            <div class="card-header"><fmt:message key="registro.registro"/></div>
 
-                    <%--Registro Entrada--%>
-                    <c:if test="${asiento.tipoRegistro == 1}">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col"><fmt:message key="registro.fecha"/></th>
+                                <th scope="col"><fmt:message key="registro.oficina"/></th>
+                                <th scope="col"><fmt:message key="registro.organismo"/></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${paginacion.listado}" var="asiento" varStatus="index">
 
-                        <a href="<c:url value="/registro/${asiento.numeroRegistroFormateado}"/>" class="list-group-item list-group-item-action flex-column align-items-start cajaRegistro">
-                            <div class="d-flex w-100">
-                                <c:set var="numRegistro" value="${(paginacion.currentIndex - 1)*10 + index.count}"/>
-                                <span class="numLista">${numRegistro}</span>
-                                <h5 class="mb-1 verde col-10 listVerde"><fmt:message key="registro.tipo.${asiento.tipoRegistro}"/>: ${asiento.numeroRegistroFormateado}</h5>
-                                <small><fmt:formatDate value="${asiento.fechaRegistro}" pattern="dd/MM/yyyy HH:mm"/></small>
-                            </div>
-                            <p class="mb-1 col-12 infoList">
-                                <span><fmt:message key="registro.extracto"/>: <strong>${asiento.resumen}</strong></span>
-                            </p>
-                            <p class="mb-1 col-12 infoList">
-                                <span><fmt:message key="registro.oficina"/>: <strong>${asiento.entidadRegistralInicioDenominacion}</strong></span>
-                            </p>
-                            <p class="mb-1 col-12 infoList">
-                                <span><fmt:message key="registro.organismo"/>: <strong>${asiento.unidadTramitacionDestinoDenominacion}</strong></span>
-                            </p>
-                        </a>
+                                <tr class="clickable-row" data-href="<c:url value="/registro/${asiento.numeroRegistroFormateado}"/>">
+                                        <td><fmt:formatDate value="${asiento.fechaRegistro}" pattern="dd/MM/yyyy HH:mm"/></td>
+                                        <td>${asiento.entidadRegistralInicioDenominacion}</td>
+                                        <td>${asiento.unidadTramitacionDestinoDenominacion}</td>
+                                </tr>
 
-                    </c:if>
+                            </c:forEach>
 
-                </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
-
         </div>
 
         <c:if test="${paginacion.totalPages > 1}">
@@ -112,5 +108,3 @@
         </c:if>
 
     </c:if>
-
-</div>

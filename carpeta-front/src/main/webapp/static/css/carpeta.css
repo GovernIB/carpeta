@@ -1,6 +1,6 @@
 body {
   padding-top: 5rem;
-  font: normal 110% 'Bariol Regular', Arial, Helvetica, sans-serif;
+  font: normal 100% 'Bariol Regular', Arial, Helvetica, sans-serif;
   color: #333; 
   background-color: #eaeaea;
 }
@@ -9,10 +9,8 @@ a{
 	color: #4dba79;
 }
 
-
 .carpeta-contenido {
   padding: 3rem 1.5rem;
-  text-align: center;
 }
 
 
@@ -31,24 +29,14 @@ a{
 .navbar-brand {
     font-size: 1rem !important; 
 }
-/*.starter-template {
-    padding: 1rem !important;
-}*/
+
 .tituloLopd{
 	font-size: 1rem !important;
 }
 .lopd{
 	font-size: 0.8rem !important;
 }
-/*.contenidoSoporte{*/
-/*    width: 90% !important;*/
-/*}*/
-/*.contenidoSoporte.on {*/
-/*	font-size: 0.9em !important;*/
-/*}*/
-/*.ayudaSoporte{*/
-/*	padding-left: 20px !important;*/
-/*}*/
+
 .datosSoporte{
 	padding-left: 30px !important;
 	line-height: 1.5 !important;
@@ -110,9 +98,7 @@ a{
 	padding-top: 10px;
 	padding-left: 40px;
 }
-/*.navbar-nav.movil li{*/
-/*	!*border-top: 1px solid #ddd; *!*/
-/*}*/
+
 
 .movil li a:hover{
 	color: #000 !important;
@@ -322,4 +308,14 @@ a.dropdown-item.movil:hover{
 }
 .sinEstiloList{
 	list-style: none;
+}
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+.bg-white {
+	background-color: #fff !important;
+}
+
+.clickable-row{
+	cursor: pointer;
 }

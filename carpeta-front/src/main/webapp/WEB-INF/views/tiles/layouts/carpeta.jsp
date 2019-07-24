@@ -49,9 +49,9 @@
     </nav>
 
     <!-- Contenido -->
-    <div class="container">
+    <div class="container p-3">
 
-        <div class="carpeta-contenido">
+        <div class="my-3 p-3 bg-white rounded box-shadow">
 
             <!-- Miga de pan -->
             <%--<tiles:insertAttribute name="miga" />--%>
@@ -60,10 +60,10 @@
             <tiles:insertAttribute name="body" />
 
             <!-- LOPD -->
-            <tiles:insertAttribute name="lopd" />
+            <%--tiles:insertAttribute name="lopd" />--%>
 
             <!-- contacto -->
-            <tiles:insertAttribute name="contacto" />
+            <%--<tiles:insertAttribute name="contacto" />--%>
 
         </div>
 

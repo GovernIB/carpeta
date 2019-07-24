@@ -1,3 +1,10 @@
+//Enlaces entoda la fila de la tabla
+jQuery(document).ready(function($) {
+	$(".clickable-row").click(function() {
+		window.location = $(this).data("href");
+	});
+});
+
 /** Recalcula los menús según ancho de ventana **/
 $( window ).resize(function() {
   var ventana_ancho = $(window).width();

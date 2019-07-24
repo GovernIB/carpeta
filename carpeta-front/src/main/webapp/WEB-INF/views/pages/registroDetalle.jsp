@@ -9,7 +9,6 @@
     </ol>
 </nav>
 
-<div class="container contenido">
 
     <div class="row">
 
@@ -124,4 +123,3 @@
 
     </div>
 
-</div>

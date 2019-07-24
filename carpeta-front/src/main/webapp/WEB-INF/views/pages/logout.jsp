@@ -1,9 +1,7 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
-<div class="container contenido">
 
-    <div class="row">
+<div class="row">
 
-        <p><fmt:message key="inicio.logout"/> pages</p>
+    <p><fmt:message key="inicio.logout"/> pages</p>
 
-    </div>
 </div>

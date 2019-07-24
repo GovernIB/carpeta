@@ -8,7 +8,6 @@
     </ol>
 </nav>
 
-<div class="container contenido">
 
     <c:if test="${empty tramites}">
         <div class="row">
@@ -96,4 +95,3 @@
 
     </c:if>
 
-</div>

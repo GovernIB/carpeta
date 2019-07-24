@@ -7,12 +7,8 @@
     </ol>
 </nav>
 
-<div class="container contenido">
+<div class="row">
 
-    <div class="row">
-
-        <p><fmt:message key="inicio.contenido"/></p>
-
-    </div>
+    <p><fmt:message key="inicio.contenido"/></p>
 
 </div>

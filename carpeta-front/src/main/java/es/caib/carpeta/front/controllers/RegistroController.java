@@ -79,8 +79,7 @@ public class RegistroController {
 
         try {
             AsientoRegistralWs asiento = regWeb3Service.obtenerAsientoCiudadano(usuarioAutenticado.getUsuarioClave().getNif(), numeroRegistro.replace("/registro/",""));
-log.info("anexos: " + asiento.getAnexos().size());
-log.info("interesados: " + asiento.getInteresados().size());
+
 
             mav.addObject("asiento", asiento);
 
