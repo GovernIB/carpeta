@@ -30,16 +30,16 @@ public class Sistra1ServiceImpl implements Sistra1Service{
     @Override
     public List<TramitePersistente> obtenerTramites(String documento) throws Exception{
 
-
-        BackofficeFacadeService service = new BackofficeFacadeService();
+        final URL wsdl = new URL(SISTRA1_URL + "?wsdl");
+        BackofficeFacadeService service = new BackofficeFacadeService(wsdl);
         BackofficeFacade backofficeFacade =  service.getBackofficeFacade();
 
         BindingProvider bindingProvider = (BindingProvider) backofficeFacade;
-        bindingProvider.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, "http://caibter.indra.es/zonaperws/services/v2/BackofficeFacade");
-        bindingProvider.getRequestContext().put(BindingProvider.USERNAME_PROPERTY, "carpeta_sistra1");
-        bindingProvider.getRequestContext().put(BindingProvider.PASSWORD_PROPERTY, "F4nd@c1oB1t");
+        bindingProvider.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, SISTRA1_URL);
+        bindingProvider.getRequestContext().put(BindingProvider.USERNAME_PROPERTY, SISTRA1_USER);
+        bindingProvider.getRequestContext().put(BindingProvider.PASSWORD_PROPERTY, SISTRA1_PASS);
         GregorianCalendar inicio = new GregorianCalendar();
-        inicio.setTime((DateUtils.sumarRestarDiasFecha(new Date(), -90)));
+        inicio.setTime((DateUtils.sumarRestarDiasFecha(new Date(), -120)));
 
         GregorianCalendar hoy = new GregorianCalendar();
         hoy.setTime(new Date());
@@ -54,29 +54,6 @@ public class Sistra1ServiceImpl implements Sistra1Service{
 
 
         System.out.println("Tramites: " + tramites.getTramitePersistente().size());
-
-
-
-       /* final URL wsdl = new URL(SISTRA1_URL + "?wsdl");
-
-        BackofficeFacadeService service = new BackofficeFacadeService(wsdl);
-
-        BackofficeFacade api = service.getBackofficeFacade();
-
-        GregorianCalendar inicio = new GregorianCalendar();
-        inicio.setTime((DateUtils.sumarRestarDiasFecha(new Date(), -90)));
-
-        GregorianCalendar hoy = new GregorianCalendar();
-        hoy.setTime(new Date());
-
-        // Utilizamos el dni que Indra usa para las pruebas
-        if(StringUtils.isEmpty(documento)){
-            documento="43146650F";
-        }
-
-        log.info("Buscando tramites de Sistra1: " + documento);
-
-        TramitesPersistentes tramites = api.obtenerPersistentes(documento,DatatypeFactory.newInstance().newXMLGregorianCalendar(inicio), DatatypeFactory.newInstance().newXMLGregorianCalendar(hoy));*/
 
         return tramites.getTramitePersistente();
     }
