@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <jboss-web>
-    <security-domain>seycon</security-domain>
+    <!--<security-domain>seycon</security-domain>-->
 </jboss-web>

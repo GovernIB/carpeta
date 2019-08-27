@@ -43,9 +43,9 @@
                             <c:forEach items="${paginacion.listado}" var="asiento" varStatus="index">
 
                                 <tr class="clickable-row" data-href="<c:url value="/registro/${asiento.numeroRegistroFormateado}"/>">
-                                        <td><fmt:formatDate value="${asiento.fechaRegistro}" pattern="dd/MM/yyyy HH:mm"/></td>
-                                        <td>${asiento.entidadRegistralInicioDenominacion}</td>
-                                        <td>${asiento.unidadTramitacionDestinoDenominacion}</td>
+                                    <td><fmt:formatDate value="${asiento.fechaRegistro}" pattern="dd/MM/yyyy HH:mm"/></td>
+                                    <td>${asiento.entidadRegistralInicioDenominacion}</td>
+                                    <td>${asiento.unidadTramitacionDestinoDenominacion}</td>
                                 </tr>
 
                             </c:forEach>
