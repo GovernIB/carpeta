@@ -1,5 +1,5 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
-<div class="contacto">
+<div class="infoContacto">
 
     <!-- Button trigger modal -->
     <strong><fmt:message key="soporte.ayuda"/> </strong><fmt:message key="soporte.contacto"/>
@@ -12,7 +12,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle"><span class="oi oi-info" title="" alt="" aria-hidden="true"></span> <fmt:message key="soporte.mensaje.ayuda"/></h5>
+                    <h2 class="modal-title" id="exampleModalLongTitle"><span class="oi oi-info" title="" alt="" aria-hidden="true"></span> <fmt:message key="soporte.mensaje.ayuda"/></h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

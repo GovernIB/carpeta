@@ -9,19 +9,19 @@
 </nav>
 
     <c:if test="${empty paginacion.listado}">
-        <div class="row">
+        <nav>
             <p><fmt:message key="registro.vacio"/></p>
-        </div>
+        </nav>
     </c:if>
 
     <c:if test="${not empty paginacion.listado}">
-        <div class="row">
+        <nav>
             <p>
                 <fmt:message key="registro.resultados">
                     <fmt:param value="${paginacion.totalResults}"/>
                 </fmt:message>
             </p>
-        </div>
+        </nav>
 
         <!-- Lista registros -->
 

@@ -50,6 +50,6 @@ public class UsuarioClave {
 
     public String getNombreCompleto(){
 
-        return nombre +" "+ apellido1 +" "+ apellido2;
+        return apellido1 +" "+ apellido2 +", "+ nombre;
     }
 }

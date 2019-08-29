@@ -7,8 +7,6 @@
     </ol>
 </nav>
 
-<div class="row">
-
+<nav>
     <p><fmt:message key="inicio.contenido"/></p>
-
-</div>
+</nav>

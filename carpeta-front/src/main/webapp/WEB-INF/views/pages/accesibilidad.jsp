@@ -1,9 +1,9 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
 
 
-<div class="row">
+<nav>
 
     <p><fmt:message key="accesibilidad.contenido"/></p>
 
-</div>
+</nav>
 

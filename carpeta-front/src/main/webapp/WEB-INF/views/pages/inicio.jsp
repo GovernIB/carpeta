@@ -7,15 +7,13 @@
     </ol>
 </nav>
 
-
-<div class="row">
-
+<nav>
     <p><fmt:message key="inicio.contenido"/></p>
-</div>
-<div class="row">
+</nav>
+<nav>
     <p>
         <sec:authorize access="!isAuthenticated()">
             <p><a href="<c:url value="/login"/>"><fmt:message key="inicio.login"/></a></p>
         </sec:authorize>
     </p>
-</div>
+</nav>

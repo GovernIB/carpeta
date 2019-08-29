@@ -62,12 +62,12 @@
             <!-- LOPD -->
             <%--tiles:insertAttribute name="lopd" />--%>
 
-            <!-- contacto -->
-            <%--<tiles:insertAttribute name="contacto" />--%>
-
         </div>
 
     </div><!-- /.container -->
+
+    <!-- contacto -->
+    <tiles:insertAttribute name="contacto" />
 
     <!-- Pie -->
     <tiles:insertAttribute name="pie" />

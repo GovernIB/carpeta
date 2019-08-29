@@ -10,19 +10,19 @@
 
 
     <c:if test="${empty tramites}">
-        <div class="row">
+        <nav>
             <p><fmt:message key="tramite.vacio"/></p>
-        </div>
+        </nav>
     </c:if>
 
     <c:if test="${not empty tramites}">
-        <div class="row">
+        <nav>
             <p>
                 <fmt:message key="tramites.resultados">
                     <fmt:param value="${fn:length(tramites)}"/>
                 </fmt:message>
             </p>
-        </div>
+        </nav>
 
         <!-- Lista trámites -->
         <div class="row">
