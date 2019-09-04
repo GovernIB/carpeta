@@ -1,3 +1,8 @@
+@font-face {
+	font-family: 'Bariol Regular';
+	src: url('../fonts/Bariol_Regular.ttf');
+}
+
 body {
   padding-top: 4.5rem;
   font: normal 100% 'Bariol Regular', Arial, Helvetica, sans-serif;
