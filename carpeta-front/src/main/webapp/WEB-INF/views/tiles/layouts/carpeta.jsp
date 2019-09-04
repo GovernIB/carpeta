@@ -48,13 +48,13 @@
 
     </nav>
 
+    <!-- Miga de pan -->
+    <tiles:insertAttribute name="miga" />
+
     <!-- Contenido -->
-    <div class="container p-3">
+    <div class="container p-3carpeta">
 
         <div class="my-3 p-3 bg-white rounded box-shadow">
-
-            <!-- Miga de pan -->
-            <%--<tiles:insertAttribute name="miga" />--%>
 
             <!-- Contenido -->
             <tiles:insertAttribute name="body" />

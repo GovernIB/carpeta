@@ -1,5 +1,5 @@
 body {
-  padding-top: 5rem;
+  padding-top: 4.5rem;
   font: normal 100% 'Bariol Regular', Arial, Helvetica, sans-serif;
   color: #333; 
   background-color: #eaeaea;
@@ -15,6 +15,17 @@ a:hover{
 
 .carpeta-contenido {
   padding: 3rem 1.5rem;
+}
+
+.p-3carpeta {
+	padding: 0rem 1rem!important;
+}
+.breadcrumb{
+    padding-left: 8%;
+	background-color: #ffffff;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+	content: ">" !important;
 }
 
 @media only screen and (max-width: 992px) {
@@ -36,6 +47,16 @@ a:hover{
     margin-right: 10px !important;
     margin-left: 10px !important;
 }
+.imatgeGovern{
+    width: 45px !important;
+}
+.navbar-toggler {
+    padding: 0.25rem !important;
+    font-size: 1rem !important;
+}
+.desactivarMovil{
+	display: none !important;
+}
 }
 
 @media only screen and (min-width : 200px) and (max-width : 400px) {
@@ -43,26 +64,34 @@ a:hover{
     margin-right: 5px !important;
     margin-left: 5px !important;
 }
+.imatgeGovern{
+    width: 40px !important;
+}
 .navbar-brand {
     font-size: 1rem !important; 
 }
-
 .tituloLopd{
 	font-size: 1rem !important;
 }
 .lopd{
 	font-size: 0.8rem !important;
 }
-
 .datosSoporte{
 	padding-left: 30px !important;
 	line-height: 1.5 !important;
 }
 .datosSoporte li{
-	list-style: circle;
+	list-style: circle !important;
 }
 .navbar-nav.movil {
 	padding-left: 20px !important;
+}
+.navbar-toggler {
+    padding: 0.25rem !important;
+    font-size: 1rem !important;
+}
+.desactivarMovil{
+	display: none !important;
 }
 }
 
@@ -103,6 +132,9 @@ a:hover{
 	float: left;
 	margin-right: 40px;
 	margin-left: 40px;
+}
+.imatgeGovern{
+    width: 50px;
 }
 /* Fin Menu */
 
@@ -412,4 +444,44 @@ a.iconoRedes {
 	border: none;
 	height: 17px;
 	margin-right: 3px;
+}
+
+
+/* CONTINGUT */
+.box{
+	padding:60px 0px;
+}
+
+.box-part{
+	background:#EAEAEA;
+	border-radius:0;
+	padding:30px 10px;
+	margin:20px 0px;
+	border: thin outset;
+	font: normal 100% 'Bariol Regular', Arial, Helvetica, sans-serif;
+	color: #333;
+}
+.box-part:hover{
+	cursor: pointer;
+}
+.text{
+	margin:20px 0px;
+}
+.fa{
+	color:#4183D7;
+}
+.imagenMenu{
+	font-size: 200%;
+	padding-bottom: 10px;
+	color: #265d3c;
+}
+.iconoMenu{
+	height: 45px;
+	padding-bottom: 10px;
+	filter: invert(78%) sepia(53%) saturate(428%) hue-rotate(91deg) brightness(96%) contrast(94%);
+}
+.tituloMenu{
+	font: normal 100% 'Bariol Regular', Arial, Helvetica, sans-serif;
+	color: #4dba79;
+	font-size: 1.5em;
 }

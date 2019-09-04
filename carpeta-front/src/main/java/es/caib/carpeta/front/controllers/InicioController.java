@@ -55,4 +55,12 @@ public class InicioController {
 
         return mav;
     }
+
+    @RequestMapping(value = { "/datosPersonales"})
+    public ModelAndView datosPersonales(HttpServletRequest request) {
+
+        ModelAndView mav = new ModelAndView("datosPersonales");
+
+        return mav;
+    }
 }

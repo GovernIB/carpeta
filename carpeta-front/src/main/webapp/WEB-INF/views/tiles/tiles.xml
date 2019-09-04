@@ -10,7 +10,7 @@
         <put-attribute name="carga" value="/WEB-INF/views/tiles/template/carga.jsp" />
         <put-attribute name="cabecera" value="/WEB-INF/views/tiles/template/cabecera.jsp" />
         <put-attribute name="menu" value="/WEB-INF/views/tiles/template/menu.jsp" />
-        <!--<put-attribute name="miga" value="/WEB-INF/views/tiles/template/miga.jsp" />-->
+        <put-attribute name="miga" value="/WEB-INF/views/tiles/template/miga.jsp" />
         <put-attribute name="aviso" value="/WEB-INF/views/tiles/template/aviso.jsp" />
         <put-attribute name="mensaje" value="/WEB-INF/views/tiles/template/mensaje.jsp" />
         <put-attribute name="informacion" value="/WEB-INF/views/tiles/template/informacion.jsp" />
@@ -64,6 +64,12 @@
     <definition name="accesibilidad" extends="base-definition">
         <put-attribute name="title" value="Accessibilitat" />
         <put-attribute name="body" value="/WEB-INF/views/pages/accesibilidad.jsp" />
+    </definition>
+
+    <!-- Datos Personales Page -->
+    <definition name="datosPersonales" extends="base-definition">
+        <put-attribute name="title" value="Dades personals" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/datosPersonales.jsp" />
     </definition>
 
 </tiles-definitions>

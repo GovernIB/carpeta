@@ -18,7 +18,7 @@
 
         <div class="col-3 redesPie">
 
-        <p><fmt:message key="pie.seguir"/></p>
+        <p class="desactivarMovil"><fmt:message key="pie.seguir"/></p>
         <ul>
 
                 <li>

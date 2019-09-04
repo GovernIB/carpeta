@@ -3,7 +3,7 @@
 <div class="navbar-brand menuGovern">
 
     <div class="logoGovern">
-        <a class="mr-auto" href="<c:url value="/"/>"><img src="${pageContext.request.contextPath}/static/img/STT_logo2.png" width="50" alt="Govern Balear"/></a>
+        <a class="mr-auto" href="<c:url value="/"/>"><img src="${pageContext.request.contextPath}/static/img/STT_logo2.png" class="imatgeGovern" alt="Govern Balear"/></a>
     </div>
 
     <div>

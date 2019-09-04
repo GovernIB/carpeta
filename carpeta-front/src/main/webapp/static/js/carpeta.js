@@ -58,7 +58,12 @@ function cerrarAyuda(){
     $("#cajaSoporte").removeClass("on");
 }
 
-/** Per sortir de la Carpeta **/
+/** Salir de la Carpeta **/
 function sortirCarpeta(){
 	document.getElementById('logout').submit();
+}
+
+/** Acceder a una url **/
+function goTo(url) {
+	document.location.href=url;
 }
