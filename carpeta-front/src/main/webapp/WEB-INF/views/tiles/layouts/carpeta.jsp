@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${pageContext.response.locale.language}"  lang="${pageContext.response.locale.language}" data-estil="pd">
 <head>
-    <link rel="shortcut icon" href="<c:url value="/static/img/logo_carpeta.png"/>" />
+    <link rel="shortcut icon" href="<c:url value="/static/img/GOIB_fav.png"/>" />
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="Content-Language" content="${pageContext.response.locale.language}"/>
