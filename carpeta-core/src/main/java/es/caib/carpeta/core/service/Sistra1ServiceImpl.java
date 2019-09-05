@@ -53,7 +53,7 @@ public class Sistra1ServiceImpl implements Sistra1Service{
                 DatatypeFactory.newInstance().newXMLGregorianCalendar(inicio),DatatypeFactory.newInstance().newXMLGregorianCalendar(hoy));
 
 
-        System.out.println("Tramites: " + tramites.getTramitePersistente().size());
+        System.out.println("Sistra1 Tramites: " + tramites.getTramitePersistente().size());
 
         return tramites.getTramitePersistente();
     }

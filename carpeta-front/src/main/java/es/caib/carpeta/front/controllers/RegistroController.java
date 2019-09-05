@@ -4,6 +4,7 @@ import es.caib.carpeta.core.service.RegWeb3Service;
 import es.caib.carpeta.core.utils.Paginacion;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.regweb3.ws.api.v3.AsientoRegistralWs;
+import es.caib.regweb3.ws.api.v3.JustificanteReferenciaWs;
 import es.caib.regweb3.ws.api.v3.ResultadoBusquedaWs;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -79,9 +80,10 @@ public class RegistroController {
 
         try {
             AsientoRegistralWs asiento = regWeb3Service.obtenerAsientoCiudadano(usuarioAutenticado.getUsuarioClave().getNif(), numeroRegistro.replace("/registro/",""));
-
+            JustificanteReferenciaWs justificante = regWeb3Service.obtenerReferenciaJustificante(numeroRegistro.replace("/registro/",""));
 
             mav.addObject("asiento", asiento);
+            mav.addObject("justificante", justificante);
 
         } catch (Exception e) {
             e.printStackTrace();

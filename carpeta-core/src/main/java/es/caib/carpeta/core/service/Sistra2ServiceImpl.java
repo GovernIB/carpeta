@@ -42,7 +42,7 @@ public class Sistra2ServiceImpl implements Sistra2Service{
         List<RTramitePersistencia> resultado = null;
 
         final RFiltroTramitePersistencia filtroPer = new RFiltroTramitePersistencia();
-        filtroPer.setFechaDesde(DateUtils.sumarRestarDiasFecha(new Date(), -90));
+        filtroPer.setFechaDesde(DateUtils.sumarRestarDiasFecha(new Date(), -200));
         filtroPer.setFechaHasta(DateUtils.sumarRestarDiasFecha(new Date(), 0));
 
         // Utilizamos el dni que Indra usa para las pruebas
@@ -77,7 +77,7 @@ public class Sistra2ServiceImpl implements Sistra2Service{
             }*/
 
         }else{
-            log.info("No hay tramites...");
+            log.info("Sistra2: No hay tramites...");
         }
 
 
