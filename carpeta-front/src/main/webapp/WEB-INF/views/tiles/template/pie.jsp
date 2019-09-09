@@ -1,6 +1,6 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
 <footer id="footer" class="containerPie">
-    <div class="row mr-auto">
+    <div class="row mr-auto pieResponsive">
 
         <div class="col-3 governPie">
             <strong><fmt:message key="pie.govern"/></strong>

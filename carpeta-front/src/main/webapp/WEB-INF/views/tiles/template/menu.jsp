@@ -15,7 +15,7 @@
 
         <li class="nav-item colorVerde">
 <%--            <a class="nav-link movil" href="#" id="accessibilidad" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="oi oi-globe" title="" alt="" aria-hidden="true"></span> <fmt:message key="menu.idioma"/></a>--%>
-            <a class="nav-link movil" href="<c:url value="/accesibilidad"/>"><img src="${pageContext.request.contextPath}/static/img/ico_accessibilitat.svg" class="iconoCabecera" alt=""/> <fmt:message key="menu.accesibilidad"/></a>
+            <a class="nav-link movil accBoton" href="<c:url value="/accesibilidad"/>"><img src="${pageContext.request.contextPath}/static/img/ico_accessibilitat.svg" class="iconoCabecera accIcon" alt=""/><fmt:message key="menu.accesibilidad"/></a>
         </li>
 
         <li class="nav-item dropdown colorVerde">
