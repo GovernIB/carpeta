@@ -2,6 +2,7 @@ package es.caib.carpeta.front.controllers;
 
 import es.caib.carpeta.core.service.Sistra1Service;
 import es.caib.carpeta.core.service.Sistra2Service;
+import es.caib.carpeta.core.utils.StringUtils;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.sistramit.rest.api.externa.v1.RTramitePersistencia;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitePersistente;
@@ -41,10 +42,28 @@ public class TramiteController {
 
         try {
             List<RTramitePersistencia> tramites = sistra2Service.obtenerTramites(usuarioAutenticado.getUsuarioClave().getNif());
-
             List<TramitePersistente> tramitesSistra1 = sistra1Service.obtenerTramites(usuarioAutenticado.getUsuarioClave().getNif());
 
-            log.info("Tramites Sistra1: " + tramitesSistra1.size());
+            if(tramites != null){
+                log.info("Tramites Sistra2: " + tramites.size());
+            }
+
+            if(tramitesSistra1 != null){
+                log.info("Tramites Sistra1: " + tramitesSistra1.size());
+
+                for (TramitePersistente tramitePersistente : tramitesSistra1) {
+                    log.info("");
+                    log.info("---------------");
+                    log.info("getIdTramite: " + tramitePersistente.getIdTramite());
+                    log.info("getDescripcionTramite: " + tramitePersistente.getDescripcionTramite());
+                    log.info("getIdSesionTramitacion: " + tramitePersistente.getIdSesionTramitacion());
+                    log.info("getFechaInicio: " + tramitePersistente.getFechaInicio());
+                    log.info("getFechaUltimoAcceso: " + tramitePersistente.getFechaUltimoAcceso());
+                    log.info("---------------");
+                    log.info("");
+                }
+            }
+
 
             mav.addObject("tramites", tramites);
 
@@ -55,15 +74,42 @@ public class TramiteController {
         return mav;
     }
 
-    @RequestMapping(value = { "/tramite/{id}"}, method = RequestMethod.GET)
-    public RedirectView tramite(@PathVariable("id") String idSesionTramitacion, Authentication authentication) {
+    @RequestMapping(value = { "/sistra2/tramite/{id}"}, method = RequestMethod.GET)
+    public RedirectView tramiteSistra2(@PathVariable("id") String idSesionTramitacion, Authentication authentication) {
 
         UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();
 
         try {
             String url = sistra2Service.obtenerUrlTicketAcceso(usuarioAutenticado.getUsuarioClave(), idSesionTramitacion);
 
-            return new RedirectView(url);
+            if(StringUtils.isNotEmpty(url)){
+                log.info("Url" + url);
+                return new RedirectView(url);
+            }else{
+                return new RedirectView("/inici");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @RequestMapping(value = { "/sistra1/tramite/{id}"}, method = RequestMethod.GET)
+    public RedirectView tramiteSistra1(@PathVariable("id") String idSesionTramitacion, Authentication authentication) {
+
+        UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();
+
+        try {
+            String url = sistra1Service.obtenerTiquetAcceso(idSesionTramitacion, usuarioAutenticado.getUsuarioClave());
+
+            if(StringUtils.isNotEmpty(url)){
+                log.info("Url" + url);
+                return new RedirectView(url);
+            }else{
+                return new RedirectView("/inici");
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

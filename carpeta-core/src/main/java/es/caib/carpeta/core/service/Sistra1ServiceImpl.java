@@ -2,10 +2,13 @@ package es.caib.carpeta.core.service;
 
 import es.caib.carpeta.core.utils.DateUtils;
 import es.caib.carpeta.core.utils.StringUtils;
+import es.caib.carpeta.core.utils.UsuarioClave;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitePersistente;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitesPersistentes;
+import es.caib.zonaper.ws.v2.model.usuarioautenticadoinfo.UsuarioAutenticadoInfo;
 import es.caib.zonaper.ws.v2.services.BackofficeFacade;
 import es.caib.zonaper.ws.v2.services.BackofficeFacadeService;
+import org.fundaciobit.plugins.utils.XTrustProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,14 +33,8 @@ public class Sistra1ServiceImpl implements Sistra1Service{
     @Override
     public List<TramitePersistente> obtenerTramites(String documento) throws Exception{
 
-        final URL wsdl = new URL(SISTRA1_URL + "?wsdl");
-        BackofficeFacadeService service = new BackofficeFacadeService(wsdl);
-        BackofficeFacade backofficeFacade =  service.getBackofficeFacade();
+        BackofficeFacade backofficeFacade =  getBackofficeFacade();
 
-        BindingProvider bindingProvider = (BindingProvider) backofficeFacade;
-        bindingProvider.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, SISTRA1_URL);
-        bindingProvider.getRequestContext().put(BindingProvider.USERNAME_PROPERTY, SISTRA1_USER);
-        bindingProvider.getRequestContext().put(BindingProvider.PASSWORD_PROPERTY, SISTRA1_PASS);
         GregorianCalendar inicio = new GregorianCalendar();
         inicio.setTime((DateUtils.sumarRestarDiasFecha(new Date(), -120)));
 
@@ -56,5 +53,47 @@ public class Sistra1ServiceImpl implements Sistra1Service{
         System.out.println("Sistra1 Tramites: " + tramites.getTramitePersistente().size());
 
         return tramites.getTramitePersistente();
+    }
+
+    @Override
+    public String obtenerTiquetAcceso(String idSesionTramitacion, UsuarioClave usuario) throws Exception {
+
+        BackofficeFacade backofficeFacade = getBackofficeFacade();
+
+        UsuarioAutenticadoInfo usuarioAutenticadoInfo = new UsuarioAutenticadoInfo();
+        usuarioAutenticadoInfo.setNombre(usuario.getNombre());
+        usuarioAutenticadoInfo.setApellido1(usuario.getApellido1());
+        usuarioAutenticadoInfo.setApellido2(usuario.getApellido2());
+        usuarioAutenticadoInfo.setMetodoAutenticacion(usuario.getMetodoAutentificacion());
+        usuarioAutenticadoInfo.setNif(usuario.getNif());
+
+        String url = backofficeFacade.obtenerTiquetAcceso(idSesionTramitacion,usuarioAutenticadoInfo);
+
+        return url;
+    }
+
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
+    private BackofficeFacade getBackofficeFacade() throws Exception{
+
+        final URL wsdl = new URL(SISTRA1_URL + "?wsdl");
+
+        if(SISTRA1_URL.startsWith("https")){
+            log.info("Install XTrustProvider");
+            XTrustProvider.install();
+        }
+
+        BackofficeFacadeService service = new BackofficeFacadeService(wsdl);
+        BackofficeFacade backofficeFacade =  service.getBackofficeFacade();
+
+        BindingProvider bindingProvider = (BindingProvider) backofficeFacade;
+        bindingProvider.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, SISTRA1_URL);
+        bindingProvider.getRequestContext().put(BindingProvider.USERNAME_PROPERTY, SISTRA1_USER);
+        bindingProvider.getRequestContext().put(BindingProvider.PASSWORD_PROPERTY, SISTRA1_PASS);
+
+        return backofficeFacade;
     }
 }

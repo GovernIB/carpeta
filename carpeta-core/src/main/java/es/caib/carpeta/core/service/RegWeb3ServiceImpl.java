@@ -36,7 +36,7 @@ public class RegWeb3ServiceImpl implements RegWeb3Service{
 
         try {
 
-            RegWebAsientoRegistralWs api = getRegWebAsientoRegistralWsApi(REGWEB3_HOST, REGWEB3_API, REGWEB3_USER, REGWEB3_PASS);
+            RegWebAsientoRegistralWs api = getRegWebAsientoRegistralWsApi();
 
             log.info("Buscando registros de: " + documento + " en " + REGWEB3_ENTIDAD);
 
@@ -73,7 +73,7 @@ public class RegWeb3ServiceImpl implements RegWeb3Service{
 
         try {
 
-            RegWebAsientoRegistralWs api = getRegWebAsientoRegistralWsApi(REGWEB3_HOST, REGWEB3_API, REGWEB3_USER, REGWEB3_PASS);
+            RegWebAsientoRegistralWs api = getRegWebAsientoRegistralWsApi();
 
             log.info("Obteniendo registro: " + numeroRegistroFormateado + " en " + REGWEB3_ENTIDAD);
 
@@ -104,7 +104,7 @@ public class RegWeb3ServiceImpl implements RegWeb3Service{
 
         try {
 
-            RegWebAsientoRegistralWs api = getRegWebAsientoRegistralWsApi(REGWEB3_HOST, REGWEB3_API, REGWEB3_USER, REGWEB3_PASS);
+            RegWebAsientoRegistralWs api = getRegWebAsientoRegistralWsApi();
 
             log.info("Obteniendo justificante: " + numeroRegistroFormateado + " en " + REGWEB3_ENTIDAD);
 
@@ -129,16 +129,12 @@ public class RegWeb3ServiceImpl implements RegWeb3Service{
 
     /**
      *
-     * @param host
-     * @param api
-     * @param user
-     * @param pass
      * @return
      * @throws MalformedURLException
      */
-    private static RegWebAsientoRegistralWs getRegWebAsientoRegistralWsApi(String host, String api, String user, String pass) throws MalformedURLException {
+    private RegWebAsientoRegistralWs getRegWebAsientoRegistralWsApi() throws MalformedURLException {
 
-        String endpoint = host + api;
+        String endpoint = REGWEB3_HOST + REGWEB3_API;
         final URL wsdl = new URL(endpoint + "?wsdl");
 
         RegWebAsientoRegistralWsService service =  new RegWebAsientoRegistralWsService(wsdl);
@@ -147,26 +143,11 @@ public class RegWeb3ServiceImpl implements RegWeb3Service{
 
         Map<String, Object> reqContext = ((BindingProvider) regWebAsientoRegistralWs).getRequestContext();
         reqContext.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, endpoint);
-        reqContext.put(BindingProvider.USERNAME_PROPERTY, user);
-        reqContext.put(BindingProvider.PASSWORD_PROPERTY, pass);
+        reqContext.put(BindingProvider.USERNAME_PROPERTY, REGWEB3_USER);
+        reqContext.put(BindingProvider.PASSWORD_PROPERTY, REGWEB3_PASS);
 
-        //configAddressUserPassword(user, pass, endpoint, regWebAsientoRegistralWs);
 
         return regWebAsientoRegistralWs;
     }
-    /**
-     *
-     * @param usr
-     * @param pwd
-     * @param endpoint
-     * @param api
-     */
-    private static void configAddressUserPassword(String usr, String pwd,
-                                                  String endpoint, Object api) {
 
-        Map<String, Object> reqContext = ((BindingProvider) api).getRequestContext();
-        reqContext.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, endpoint);
-        reqContext.put(BindingProvider.USERNAME_PROPERTY, usr);
-        reqContext.put(BindingProvider.PASSWORD_PROPERTY, pwd);
-    }
 }

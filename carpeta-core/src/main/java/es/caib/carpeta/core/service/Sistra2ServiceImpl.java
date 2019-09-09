@@ -80,8 +80,6 @@ public class Sistra2ServiceImpl implements Sistra2Service{
             log.info("Sistra2: No hay tramites...");
         }
 
-
-
         return  resultado;
 
     }
@@ -120,6 +118,5 @@ public class Sistra2ServiceImpl implements Sistra2Service{
 
         return response.getBody();
     }
-
 
 }
