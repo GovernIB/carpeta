@@ -4,6 +4,8 @@ import es.caib.carpeta.core.service.Sistra1Service;
 import es.caib.carpeta.core.service.Sistra2Service;
 import es.caib.carpeta.core.utils.StringUtils;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
+import es.caib.carpeta.front.utils.Tramite;
+import es.caib.carpeta.front.utils.TramitesCiudadano;
 import es.caib.sistramit.rest.api.externa.v1.RTramitePersistencia;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitePersistente;
 import org.apache.commons.logging.Log;
@@ -41,11 +43,11 @@ public class TramiteController {
         UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();
 
         try {
-            List<RTramitePersistencia> tramites = sistra2Service.obtenerTramites(usuarioAutenticado.getUsuarioClave().getNif());
+            List<RTramitePersistencia> tramitesSistra2 = sistra2Service.obtenerTramites(usuarioAutenticado.getUsuarioClave().getNif());
             List<TramitePersistente> tramitesSistra1 = sistra1Service.obtenerTramites(usuarioAutenticado.getUsuarioClave().getNif());
 
-            if(tramites != null){
-                log.info("Tramites Sistra2: " + tramites.size());
+            if(tramitesSistra2 != null){
+                log.info("Tramites Sistra2: " + tramitesSistra2.size());
             }
 
             if(tramitesSistra1 != null){
@@ -64,8 +66,9 @@ public class TramiteController {
                 }
             }
 
-
-            mav.addObject("tramites", tramites);
+            TramitesCiudadano tramites = new TramitesCiudadano(tramitesSistra2, tramitesSistra1);
+            log.info("Tramites totales: " + tramites.getTramites().size());
+            mav.addObject("tramites", tramites.getTramites());
 
         } catch (Exception e) {
             e.printStackTrace();

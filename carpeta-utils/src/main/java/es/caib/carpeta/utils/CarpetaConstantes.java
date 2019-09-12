@@ -4,17 +4,17 @@ public interface CarpetaConstantes {
 
     String CARPETA_PROPERTY_BASE = "es.caib.carpeta.";
 
-    //  REGWEB3
+    /* -------------- REGWEB3 --------------*/
     Long REGISTRO_ENTRADA = 1L;
     Long REGISTRO_SALIDA = 2L;
 
-    /* -------------- TIPO INTERESADO --------------*/
+    // TIPO INTERESADO
     Long TIPO_INTERESADO_ADMINISTRACION = 1L;
     Long TIPO_INTERESADO_PERSONA_FISICA = 2L;
     Long TIPO_INTERESADO_PERSONA_JURIDICA = 3L;
 
 
-    /* -------------- TIPO DOCUMENTO IDENTIFICACION --------------*/
+    // TIPO DOCUMENTO IDENTIFICACION
     char TIPODOCUMENTOID_NIF = 'N';
     long TIPODOCUMENTOID_NIF_ID = 1;
 
@@ -32,4 +32,9 @@ public interface CarpetaConstantes {
 
     char TIPODOCUMENTOID_CODIGO_ORIGEN = 'O';
     long TIPODOCUMENTOID_CODIGO_ORIGEN_ID = 6;
+
+    /* -------------- SISTRA --------------*/
+
+    Integer SISTRA1 = 1;
+    Integer SISTRA2 = 2;
 }

@@ -50,8 +50,6 @@ public class Sistra1ServiceImpl implements Sistra1Service{
                 DatatypeFactory.newInstance().newXMLGregorianCalendar(inicio),DatatypeFactory.newInstance().newXMLGregorianCalendar(hoy));
 
 
-        System.out.println("Sistra1 Tramites: " + tramites.getTramitePersistente().size());
-
         return tramites.getTramitePersistente();
     }
 
@@ -82,7 +80,6 @@ public class Sistra1ServiceImpl implements Sistra1Service{
         final URL wsdl = new URL(SISTRA1_URL + "?wsdl");
 
         if(SISTRA1_URL.startsWith("https")){
-            log.info("Install XTrustProvider");
             XTrustProvider.install();
         }
 

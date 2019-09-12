@@ -24,12 +24,12 @@
             <scope>provided</scope>
         </dependency>
 
-        <!--<dependency>
+        <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-utils</artifactId>
             <version>${project.version}</version>
             <scope>provided</scope>
-        </dependency>-->
+        </dependency>
 
         <!-- Sptring MVC -->
         <dependency>
