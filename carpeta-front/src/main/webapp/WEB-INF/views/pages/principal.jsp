@@ -14,7 +14,7 @@
         <div class="row">
             <!-- Trámites no acabados -->
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                <button class="box-part text-center" onclick="goTo('<c:url value="/tramites"/>')">
+                <button class="box-part text-center" onclick="goTo('<c:url value="/tramite/list"/>')">
                     <span class="oi oi-document imagenMenu" title="" alt="" aria-hidden="true"></span>
                     <div class="tituloMenu"><fmt:message key="menu.tramites"/></div>
                     <div class="text">
@@ -25,7 +25,7 @@
 
             <!-- Registros -->
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                <button class="box-part text-center" onclick="goTo('<c:url value="/registros"/>')">
+                <button class="box-part text-center" onclick="goTo('<c:url value="/registro/list"/>')">
                     <span class="oi oi-book imagenMenu" title="" alt="" aria-hidden="true"></span>
                     <div class="tituloMenu"><fmt:message key="menu.registros"/></div>
                     <div class="text">

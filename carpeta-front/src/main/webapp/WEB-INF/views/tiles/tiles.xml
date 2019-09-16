@@ -42,10 +42,16 @@
         <put-attribute name="body" value="/WEB-INF/views/pages/principal.jsp" />
     </definition>
 
-    <!-- Llistat de tràmits Page -->
+    <!-- Elección de trámites a buscar -->
     <definition name="tramites" extends="base-definition">
         <put-attribute name="title" value="Llista de tràmits" />
         <put-attribute name="body" value="/WEB-INF/views/pages/tramites.jsp" />
+    </definition>
+
+    <!-- Llistat de tràmits pendents -->
+    <definition name="tramitesPendientes" extends="base-definition">
+        <put-attribute name="title" value="Llista de tràmits pendents" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/tramitesPendientes.jsp" />
     </definition>
 
     <!-- Llista de registres Page -->

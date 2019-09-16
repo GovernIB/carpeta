@@ -31,7 +31,7 @@
 
                 <c:forEach items="${tramites}" var="tramite" varStatus="index">
 
-                    <a href="<c:url value="/sistra${tramite.sistra}/tramite/${tramite.idSesionTramitacion}"/>" class="list-group-item list-group-item-action flex-column align-items-start cajaTramite">
+                    <a href="<c:url value="/sistra${tramite.sistra}/${tramite.idSesionTramitacion}"/>" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start cajaTramite">
                         <div class="d-flex w-100">
                             <span class="numLista">${index.count}</span>
                             <h5 class="mb-1 verde col-10 listVerde">${tramite.descripcionTramite}</h5>

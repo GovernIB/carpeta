@@ -8,6 +8,7 @@ import es.caib.sistramit.rest.api.externa.v1.RInfoTicketAcceso;
 import es.caib.sistramit.rest.api.externa.v1.RTramitePersistencia;
 import es.caib.sistramit.rest.api.externa.v1.RUsuarioAutenticadoInfo;
 import es.caib.sistramit.rest.api.util.JsonException;
+import org.fundaciobit.plugins.utils.XTrustProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,21 +40,14 @@ public class Sistra2ServiceImpl implements Sistra2Service{
     @Override
     public List<RTramitePersistencia> obtenerTramites(String documento) throws Exception {
 
+        final RestTemplate restTemplate = getRestTemplate();
+
         List<RTramitePersistencia> resultado = null;
 
         final RFiltroTramitePersistencia filtroPer = new RFiltroTramitePersistencia();
         filtroPer.setFechaDesde(DateUtils.sumarRestarDiasFecha(new Date(), -90));
         filtroPer.setFechaHasta(DateUtils.sumarRestarDiasFecha(new Date(), 0));
-
-        // Utilizamos el dni que Indra usa para las pruebas
-       /* if(StringUtils.isEmpty(documento)){
-            documento="11111111H";
-        }*/
-
         filtroPer.setNif(documento);
-
-        final RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(SISTRA2_USER, SISTRA2_PASS));
 
         final HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -85,14 +79,12 @@ public class Sistra2ServiceImpl implements Sistra2Service{
     @Override
     public String obtenerUrlTicketAcceso(UsuarioClave usuario, String idSesionTramitacion) throws JsonException {
 
-        final RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(SISTRA2_USER, SISTRA2_PASS));
+        final RestTemplate restTemplate = getRestTemplate();
 
         final HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         final RInfoTicketAcceso infoTicket = new RInfoTicketAcceso();
-        //infoTicket.setIdSesionTramitacion("Q2KQIERJ-HED0WNT8-T804QSNW");
         infoTicket.setIdSesionTramitacion(idSesionTramitacion);
 
         final RUsuarioAutenticadoInfo usuariInfo = new RUsuarioAutenticadoInfo();
@@ -115,6 +107,22 @@ public class Sistra2ServiceImpl implements Sistra2Service{
         log.info("Url: " + response.getBody());
 
         return response.getBody();
+    }
+
+    /**
+     *
+     * @return
+     */
+    private RestTemplate getRestTemplate(){
+
+        if(SISTRA2_URL.startsWith("https")){
+            XTrustProvider.install();
+        }
+
+        final RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(SISTRA2_USER, SISTRA2_PASS));
+
+        return restTemplate;
     }
 
 }

@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
+@RequestMapping(value = "/registro")
 public class RegistroController {
 
     protected final Log log = LogFactory.getLog(getClass());
@@ -31,9 +32,9 @@ public class RegistroController {
     /**
      *
      */
-    @RequestMapping(value = "/registros", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String listadoRegistros() {
-        return "redirect:/registros/1";
+        return "redirect:/registro/list/1";
     }
 
     /**
@@ -42,7 +43,7 @@ public class RegistroController {
      * @param authentication
      * @return
      */
-    @RequestMapping(value = { "/registros/{pageNumber}"}, method = RequestMethod.GET)
+    @RequestMapping(value = { "/list/{pageNumber}"}, method = RequestMethod.GET)
     public ModelAndView registros(@PathVariable("pageNumber") Integer pageNumber, Authentication authentication) {
 
         ModelAndView mav = new ModelAndView("registros");
@@ -67,8 +68,8 @@ public class RegistroController {
         return mav;
     }
 
-    @RequestMapping(value="/registro/**", method = RequestMethod.GET)
-    public ModelAndView registro(HttpServletRequest request, Authentication authentication) {
+    @RequestMapping(value="/detalle/**", method = RequestMethod.GET)
+    public ModelAndView registroDetalle(HttpServletRequest request, Authentication authentication) {
 
         ModelAndView mav = new ModelAndView("registroDetalle");
 

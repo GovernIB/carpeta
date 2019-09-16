@@ -23,6 +23,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "/tramite")
 public class TramiteController {
 
     protected final Log log = LogFactory.getLog(getClass());
@@ -34,7 +35,7 @@ public class TramiteController {
     @Autowired
     Sistra1Service sistra1Service;
 
-    @RequestMapping(value = { "/tramites"}, method = RequestMethod.GET)
+    @RequestMapping(value = { "/list"}, method = RequestMethod.GET)
     public ModelAndView tramites(ModelMap model, Authentication authentication) {
 
         ModelAndView mav = new ModelAndView("tramites");
@@ -43,8 +44,8 @@ public class TramiteController {
     }
 
 
-    @RequestMapping(value = { "/tramitesPendientes"}, method = RequestMethod.GET)
-    public ModelAndView tramitesPendientes(ModelMap model, Authentication authentication) {
+    @RequestMapping(value = { "/pendientes"}, method = RequestMethod.GET)
+    public ModelAndView pendientes(Authentication authentication) {
 
         ModelAndView mav = new ModelAndView("tramitesPendientes");
 
@@ -85,7 +86,7 @@ public class TramiteController {
         return mav;
     }
 
-    @RequestMapping(value = { "/sistra2/tramite/{id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = { "/sistra2/{id}"}, method = RequestMethod.GET)
     public RedirectView tramiteSistra2(@PathVariable("id") String idSesionTramitacion, Authentication authentication) {
 
         UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();
@@ -107,7 +108,7 @@ public class TramiteController {
         return null;
     }
 
-    @RequestMapping(value = { "/sistra1/tramite/{id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = { "/sistra1/{id}"}, method = RequestMethod.GET)
     public RedirectView tramiteSistra1(@PathVariable("id") String idSesionTramitacion, Authentication authentication) {
 
         UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();

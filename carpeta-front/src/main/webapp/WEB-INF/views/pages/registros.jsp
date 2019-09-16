@@ -32,7 +32,7 @@
                     <tbody>
                         <c:forEach items="${paginacion.listado}" var="asiento" varStatus="index">
 
-                            <tr class="clickable-row" data-href="<c:url value="/registro/${asiento.numeroRegistroFormateado}"/>">
+                            <tr class="clickable-row" data-href="<c:url value="/registro/detalle/${asiento.numeroRegistroFormateado}"/>">
                                 <td><fmt:formatDate value="${asiento.fechaRegistro}" pattern="dd/MM/yyyy HH:mm"/></td>
                                 <td>${asiento.numeroRegistroFormateado}</td>
                                 <td>${asiento.entidadRegistralInicioDenominacion}</td>
@@ -49,10 +49,10 @@
     </div>
 
     <c:if test="${paginacion.totalPages > 1}">
-        <c:url value="/registros/1" var="firstUrl" />
-        <c:url value="/registros/${paginacion.totalPages}" var="lastUrl"/>
-        <c:url value="/registros/${paginacion.currentIndex - 1}" var="prevUrl"/>
-        <c:url value="/registros/${paginacion.currentIndex + 1}" var="nextUrl" />
+        <c:url value="/registro/list/1" var="firstUrl" />
+        <c:url value="/registro/list/${paginacion.totalPages}" var="lastUrl"/>
+        <c:url value="/registro/list/${paginacion.currentIndex - 1}" var="prevUrl"/>
+        <c:url value="/registro/list/${paginacion.currentIndex + 1}" var="nextUrl" />
 
         <div class="row mt-20">
             <div class="col-sm-12 col-md-5">
@@ -76,7 +76,7 @@
                         </c:choose>
 
                         <c:forEach var="i" begin="${paginacion.beginIndex}" end="${paginacion.endIndex}">
-                            <c:url var="pageUrl" value="/registros/${i}" />
+                            <c:url var="pageUrl" value="/registro/list/${i}" />
                             <li class="paginate_button page-item <c:if test="${i == paginacion.currentIndex}">active</c:if>">
                                 <a href="${pageUrl}" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">${i}</a>
                             </li>
