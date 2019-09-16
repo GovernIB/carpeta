@@ -35,10 +35,10 @@ public class TramiteController {
     Sistra1Service sistra1Service;
 
 
-    @RequestMapping(value = { "/tramites"}, method = RequestMethod.GET)
+    @RequestMapping(value = { "/tramitesPendientes"}, method = RequestMethod.GET)
     public ModelAndView tramites(ModelMap model, Authentication authentication) {
 
-        ModelAndView mav = new ModelAndView("tramites");
+        ModelAndView mav = new ModelAndView("tramitesPendientes");
 
         UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();
 

@@ -7,7 +7,7 @@
             <li class="nav-item dropdown colorVerde">
                 <a class="nav-link dropdown-toggle movil" href="#" id="menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="oi oi-briefcase" title="" alt="" aria-hidden="true"></span> <fmt:message key="menu.gestiones"/></a>
                 <div class="dropdown-menu marg0" aria-labelledby="menu">
-                    <a class="dropdown-item movil" href="<c:url value="/tramites"/>"><span class="oi oi-document" title="" alt="" aria-hidden="true"></span> <fmt:message key="menu.tramites.no.acabados"/></a>
+                    <a class="dropdown-item movil" href="<c:url value="/tramites"/>"><span class="oi oi-document" title="" alt="" aria-hidden="true"></span> <fmt:message key="menu.tramites"/></a>
                     <a class="dropdown-item movil" href="<c:url value="/registros"/>"><span class="oi oi-book" title="" alt="" aria-hidden="true"></span> <fmt:message key="menu.registros"/></a>
                 </div>
             </li>

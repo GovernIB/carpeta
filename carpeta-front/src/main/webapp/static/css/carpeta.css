@@ -23,10 +23,10 @@ a:hover{
 }
 
 .p-3carpeta {
-	padding: 0rem 1rem!important;
+	padding: 2.5rem 1rem!important;
 }
 .breadcrumb{
-    padding-left: 8%;
+    padding-left: 45px;
 	background-color: #ffffff;
 }
 .breadcrumb-item+.breadcrumb-item::before {
@@ -70,6 +70,7 @@ body {
 }
 .breadcrumb{
 	padding: .35rem 1rem !important;
+	border-radius: 0 !important;
 }
 .containerPie{
 	margin-left: 0px !important;
@@ -136,7 +137,8 @@ body {
 	display: list-item !important;
 }
 .breadcrumb{
-	padding: .35rem 1rem !important;
+	padding: .35rem 0.6rem !important;
+	border-radius: 0 !important;
 }
 .containerPie{
 	margin-left: 0px !important;
@@ -557,4 +559,12 @@ a.iconoRedes {
 }
 .accIcon{
 	margin-top: -4px !important;
+}
+.miga{
+	position: fixed;
+	z-index: 20;
+	width: 100%;
+}
+.migaDiv{
+	width: 100%;
 }

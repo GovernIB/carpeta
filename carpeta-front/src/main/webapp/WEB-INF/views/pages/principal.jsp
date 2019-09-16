@@ -8,11 +8,9 @@
 <%--</nav>--%>
 
 <nav>
-    <p><fmt:message key="inicio.contenido"/></p>
-
-
 
     <div class="container">
+        <p><fmt:message key="inicio.contenido"/></p>
         <div class="row">
             <!-- Trámites no acabados -->
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
