@@ -34,9 +34,17 @@ public class TramiteController {
     @Autowired
     Sistra1Service sistra1Service;
 
+    @RequestMapping(value = { "/tramites"}, method = RequestMethod.GET)
+    public ModelAndView tramites(ModelMap model, Authentication authentication) {
+
+        ModelAndView mav = new ModelAndView("tramites");
+
+        return mav;
+    }
+
 
     @RequestMapping(value = { "/tramitesPendientes"}, method = RequestMethod.GET)
-    public ModelAndView tramites(ModelMap model, Authentication authentication) {
+    public ModelAndView tramitesPendientes(ModelMap model, Authentication authentication) {
 
         ModelAndView mav = new ModelAndView("tramitesPendientes");
 
