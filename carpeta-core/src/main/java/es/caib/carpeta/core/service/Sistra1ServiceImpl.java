@@ -1,7 +1,6 @@
 package es.caib.carpeta.core.service;
 
 import es.caib.carpeta.core.utils.DateUtils;
-import es.caib.carpeta.core.utils.StringUtils;
 import es.caib.carpeta.core.utils.UsuarioClave;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitePersistente;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitesPersistentes;
@@ -42,9 +41,9 @@ public class Sistra1ServiceImpl implements Sistra1Service{
         hoy.setTime(new Date());
 
         // Utilizamos el dni que Indra usa para las pruebas
-        if(StringUtils.isEmpty(documento)){
+        /*if(StringUtils.isEmpty(documento)){
             documento="43146650F";
-        }
+        }*/
 
         TramitesPersistentes tramites = backofficeFacade.obtenerPersistentes(documento,
                 DatatypeFactory.newInstance().newXMLGregorianCalendar(inicio),DatatypeFactory.newInstance().newXMLGregorianCalendar(hoy));
