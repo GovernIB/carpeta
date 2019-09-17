@@ -1,6 +1,5 @@
 package es.caib.carpeta.core.service;
 
-import es.caib.carpeta.core.utils.StringUtils;
 import es.caib.regweb3.ws.api.v3.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 import javax.xml.ws.BindingProvider;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
 import java.util.Map;
 
 @Service
@@ -40,9 +38,9 @@ public class RegWeb3ServiceImpl implements RegWeb3Service{
 
             log.info("Buscando registros de: " + documento + " en " + REGWEB3_ENTIDAD);
 
-            if(StringUtils.isEmpty(documento)){
+           /* if(StringUtils.isEmpty(documento)){
                 documento="43146650F";
-            }
+            }*/
 
             ResultadoBusquedaWs asientos = api.obtenerAsientosCiudadano(REGWEB3_ENTIDAD, documento, pageNumber);
 
