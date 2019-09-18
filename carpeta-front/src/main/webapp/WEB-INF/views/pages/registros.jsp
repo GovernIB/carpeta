@@ -14,8 +14,8 @@
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table">
-                    <thead class="thead-light">
+                <table class="table table-hover tablaCarpeta">
+                    <thead class="table-success">
                         <tr>
                             <th scope="col"><fmt:message key="registro.fecha"/></th>
                             <th scope="col"><fmt:message key="registro.numero"/></th>
@@ -49,13 +49,13 @@
         <c:url value="/registro/list/${paginacion.currentIndex + 1}" var="nextUrl" />
 
         <div class="row mt-20">
-            <div class="col-sm-12 col-md-5">
-                <div class="dataTables_info izq" id="dataTable_info" role="status" aria-live="polite">
-                    <fmt:message key="carpeta.pagina"/> ${paginacion.currentIndex} de ${paginacion.totalPages}
-                </div>
-            </div>
+<%--            <div class="col-sm-12 col-md-5">--%>
+<%--                <div class="dataTables_info izq" id="dataTable_info" role="status" aria-live="polite">--%>
+<%--                    <fmt:message key="carpeta.pagina"/> ${paginacion.currentIndex} de ${paginacion.totalPages}--%>
+<%--                </div>--%>
+<%--            </div>--%>
 
-            <div class="col-sm-12 col-md-7">
+            <div class="col-sm-12 col-md-12">
                 <div class="dataTables_paginate paging_simple_numbers der" id="dataTable_paginate">
                     <ul class="pagination">
 

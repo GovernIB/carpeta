@@ -23,7 +23,7 @@ a:hover{
 }
 
 .p-3carpeta {
-	padding: 2.5rem 1rem!important;
+	padding: 3.5rem 1rem!important;
 }
 .breadcrumb{
     padding-left: 45px;
@@ -33,6 +33,7 @@ a:hover{
 	content: ">" !important;
 }
 
+/*Se aplican cuando el width es menor que 992px*/
 @media only screen and (max-width: 992px) {
 .colorVerde{
 	background-color: #4DBA79 !important;
@@ -46,7 +47,7 @@ a:hover{
 }
 }
 
-
+/*Se aplican cuando el width es menor que 480*/
 @media only screen and (min-width : 401px) and (max-width : 480px) {
 body {
 	padding-top: 4rem !important;
@@ -94,8 +95,12 @@ body {
 	text-align: center !important;
 	padding-right: 0px;
 }
+.p-3carpeta {
+	padding: 2.5rem 1rem!important;
+}
 }
 
+/*Se aplican cuando el width es menor que 400*/
 @media only screen and (min-width : 200px) and (max-width : 400px) {
 body {
 	padding-top: 4rem !important;
@@ -532,6 +537,16 @@ a.iconoRedes {
 }
 .box-part:hover{
 	cursor: pointer;
+	background: #b9b9b9;
+}
+.box-part:focus{
+	text-decoration:none;
+}
+.box-part:active{
+	text-decoration:none;
+}
+.box-part:visited{
+	text-decoration:none !important;
 }
 .text{
 	margin:20px 0px;
@@ -567,4 +582,13 @@ a.iconoRedes {
 }
 .migaDiv{
 	width: 100%;
+}
+.tablaCarpeta{
+	margin-bottom: 0rem !important;
+}
+
+.desactivado{
+	pointer-events: none;
+	cursor: none;
+	background-color: azure;
 }

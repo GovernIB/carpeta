@@ -17,7 +17,7 @@
 
             <!-- Trámites enviados -->
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <button class="box-part text-center" onclick="goTo('<c:url value="/tramite/finalizados"/>')">
+                <button class="box-part text-center desactivado">
                     <span class="oi oi-share-boxed imagenMenu" title="" alt="" aria-hidden="true"></span>
                     <div class="tituloMenu"><fmt:message key="menu.tramites.enviados"/></div>
                     <div class="text">

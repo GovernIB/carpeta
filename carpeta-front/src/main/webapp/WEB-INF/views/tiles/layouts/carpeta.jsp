@@ -35,10 +35,10 @@
 <body>
 
     <!-- contenidor -->
-    <nav class="navbar navbar-toggleable-md navbar-inverse bg-carpeta fixed-top">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark bg-carpeta fixed-top">
 
         <!-- botón menú móvil -->
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
