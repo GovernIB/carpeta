@@ -9,11 +9,11 @@
 <c:if test="${not empty tramites}">
 
      <!-- Lista trámites -->
-    <div class="card bg-light mb-12">
-        <div class="card-header"><fmt:message key="tramite.listado"/></div>
+    <div class="card mb-12 sinBorde">
+        <div class="card-header cabeceraTabla"><fmt:message key="tramite.listado"/></div>
         <div class="card-body">
 
-            <table id="dataTable_paginate" class="table table-striped table-bordered" style="width:100%">
+            <table id="dataTable_paginate" class="table table-striped table-bordered table-hover" style="width:100%">
                 <thead>
                     <tr>
                         <th><fmt:message key="tramite.tramite"/></th>

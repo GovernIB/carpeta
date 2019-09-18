@@ -7,7 +7,7 @@
     </div>
 
     <div>
-        <span class="titulo"><h1><fmt:message key="carga.carpeta"/></h1></span>
+        <span class="titulo"><fmt:message key="carga.carpeta"/></span>
     </div>
     <div>
 

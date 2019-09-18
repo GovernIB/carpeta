@@ -187,7 +187,7 @@ body {
 .menuGovern{
 	min-width: 400px;
 }
-.titulo h1{
+.titulo{
 	text-transform: uppercase;
 	font-size: 1.2em !important;
 	margin-bottom: 0px;
@@ -583,12 +583,22 @@ a.iconoRedes {
 .migaDiv{
 	width: 100%;
 }
+
+.desactivado{
+	cursor: not-allowed !important;
+}
+
+/* Tabla */
 .tablaCarpeta{
 	margin-bottom: 0rem !important;
 }
-
-.desactivado{
-	pointer-events: none;
-	cursor: none;
-	background-color: azure;
+.cabeceraTabla{
+	background-color: #FFF;
 }
+.sinBorde{
+	border: none;
+}
+.bodyTabla{
+
+}
+/* FIN Tabla */
