@@ -16,9 +16,10 @@
 
     <!-- jQuery library -->
 
-    <script src="<c:url value="/static/js/jquery-3.1.1.slim.min.js"/>"></script>
+    <script src="<c:url value="/static/js/jquery-3.2.1.min.js"/>"></script>
     <script src="<c:url value="/static/js/tether.min.js"/>"></script>
     <script src="<c:url value="/static/js/bootstrap.min.js"/>"></script>
+    <script src="<c:url value="/static/js/datatables.min.js"/>"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="<c:url value="/static/js/ie10-viewport-bug-workaround.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/static/js/carpeta.js"/>"></script>
@@ -27,6 +28,7 @@
     <link href="<c:url value="/static/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/static/css/carpeta.css"/>" rel="stylesheet">
     <link href="<c:url value="/static/css/open-iconic-bootstrap.css"/>" rel="stylesheet">
+    <link href="<c:url value="/static/css/datatables.min.css"/>" rel="stylesheet">
 
 </head>
 
@@ -71,6 +73,21 @@
 
     <!-- Pie -->
     <tiles:insertAttribute name="pie" />
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#dataTable_paginate').DataTable({
+                "language": {
+                    <c:if test="${pageContext.response.locale.language == 'ca'}">
+                        "url": "<c:url value="/static/i18n/Catalan.json"/>"
+                    </c:if>
+                    <c:if test="${pageContext.response.locale.language == 'es'}">
+                        "url": "<c:url value="/static/i18n/Spanish.json"/>"
+                    </c:if>
+                }
+            });
+        } );
+    </script>
 
 </body>
 

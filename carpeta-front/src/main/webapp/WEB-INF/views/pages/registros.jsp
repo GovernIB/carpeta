@@ -8,13 +8,7 @@
 
 <c:if test="${not empty paginacion.listado}">
 
-    <div class="alert alert-light" role="alert">
-        <fmt:message key="registro.resultados"><strong><fmt:param value="${paginacion.totalResults}"/></strong></fmt:message>
-        <p class="der"><fmt:message key="carpeta.pagina"/> ${paginacion.currentIndex} de ${paginacion.totalPages}</p>
-    </div>
-
     <!-- Lista registros -->
-
     <div class="card bg-light mb-12">
         <div class="card-header"><fmt:message key="registro.listado"/></div>
 

@@ -1,97 +1,39 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
 
-<%--Miga de pan--%>
-<%--<nav aria-label="breadcrumb">--%>
-<%--    <ol class="breadcrumb">--%>
-<%--        <li class="breadcrumb-item"><a href="<c:url value="/"/>"><fmt:message key="menu.inicio"/></a></li>--%>
-<%--        <li class="breadcrumb-item active" aria-current="page"><fmt:message key="menu.tramites.no.acabados"/></li>--%>
-<%--    </ol>--%>
-<%--</nav>--%>
+<c:if test="${empty tramites}">
+    <nav>
+        <p><fmt:message key="tramite.vacio"/></p>
+    </nav>
+</c:if>
 
+<c:if test="${not empty tramites}">
 
-    <c:if test="${empty tramites}">
-        <nav>
-            <p><fmt:message key="tramite.vacio"/></p>
-        </nav>
-    </c:if>
+     <!-- Lista trámites -->
+    <div class="card bg-light mb-12">
+        <div class="card-header"><fmt:message key="tramite.listado"/></div>
+        <div class="card-body">
 
-    <c:if test="${not empty tramites}">
-        <nav>
-            <p>
-                <fmt:message key="tramites.resultados">
-                    <fmt:param value="${fn:length(tramites)}"/>
-                </fmt:message>
-            </p>
-        </nav>
-
-        <!-- Lista trámites -->
-        <div class="row">
-
-            <div class="list-group col-12">
-
-                <c:forEach items="${tramites}" var="tramite" varStatus="index">
-
-                    <a href="<c:url value="/sistra${tramite.sistra}/${tramite.idSesionTramitacion}"/>" target="_blank" class="list-group-item list-group-item-action flex-column align-items-start cajaTramite">
-                        <div class="d-flex w-100">
-                            <span class="numLista">${index.count}</span>
-                            <h5 class="mb-1 verde col-10 listVerde">${tramite.descripcionTramite}</h5>
-                            <small></small>
-                        </div>
-                        <p class="mb-1 col-12 infoList">
-                            <span><fmt:message key="tramite.id"/>: <strong>${tramite.idTramite}</strong></span>
-                        </p>
-                        <p class="mb-1 col-12 infoList">
-                            <span><fmt:message key="tramite.fecha"/>: <strong><fmt:formatDate value="${tramite.fechaInicio}" pattern="dd/MM/yyyy HH:mm"/></strong></span>
-                        </p>
-                        <p class="mb-1 col-12 infoList">
-                            <span><fmt:message key="tramite.acceso"/>: <strong><fmt:formatDate value="${tramite.fechaUltimoAcceso}" pattern="dd/MM/yyyy HH:mm"/></strong></span>
-                        </p>
-                    </a>
-
-                </c:forEach>
-
-            </div>
+            <table id="dataTable_paginate" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th><fmt:message key="tramite.tramite"/></th>
+                        <th><fmt:message key="tramite.id"/></th>
+                        <th><fmt:message key="tramite.fecha"/></th>
+                        <th><fmt:message key="tramite.acceso"/></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${tramites}" var="tramite" varStatus="index">
+                        <tr class="clickable-row" data-href="<c:url value="/tramite/sistra${tramite.sistra}/${tramite.idSesionTramitacion}"/>">
+                            <td>${tramite.descripcionTramite}</td>
+                            <td>${tramite.idTramite}</td>
+                            <td><fmt:formatDate value="${tramite.fechaInicio}" pattern="dd/MM/yyyy HH:mm"/></td>
+                            <td><fmt:formatDate value="${tramite.fechaUltimoAcceso}" pattern="dd/MM/yyyy HH:mm"/></td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
 
         </div>
-
-        <!-- Paginación -->
-        <div class="row mt-20">
-            <div class="col-sm-12 col-md-5">
-                <div class="dataTables_info izq" id="dataTable_info" role="status" aria-live="polite">
-                    <fmt:message key="carpeta.mostrar"/> 1 de 10 de ${fn:length(tramites)} <fmt:message key="tramite.tramites"/>
-                </div>
-            </div>
-            <div class="col-sm-12 col-md-7">
-                <div class="dataTables_paginate paging_simple_numbers der" id="dataTable_paginate">
-                    <ul class="pagination">
-                        <li class="paginate_button page-item previous disabled" id="dataTable_previous">
-                            <a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link"><fmt:message key="carpeta.previo"/></a>
-                        </li>
-                        <li class="paginate_button page-item active">
-                            <a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-                        </li>
-                        <li class="paginate_button page-item ">
-                            <a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-                        </li>
-                        <li class="paginate_button page-item ">
-                            <a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a>
-                        </li>
-                        <li class="paginate_button page-item ">
-                            <a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a>
-                        </li>
-                        <li class="paginate_button page-item ">
-                            <a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a>
-                        </li>
-                        <li class="paginate_button page-item ">
-                            <a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a>
-                        </li>
-                        <li class="paginate_button page-item next" id="dataTable_next">
-                            <a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link"><fmt:message key="carpeta.proximo"/></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-    </c:if>
-
+    </div>
+</c:if>
