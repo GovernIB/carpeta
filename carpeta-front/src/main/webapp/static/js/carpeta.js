@@ -1,7 +1,8 @@
 //Enlaces entoda la fila de la tabla
 jQuery(document).ready(function($) {
 	$(".clickable-row").click(function() {
-		window.location = $(this).data("href");
+		var $th = $(this);
+		window.open($th.attr('data-href'), $th.attr('data-target'));
 	});
 });
 

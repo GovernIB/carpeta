@@ -77,6 +77,7 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#dataTable_paginate').DataTable({
+                "order": [[ 1, "desc" ]],
                 "language": {
                     <c:if test="${pageContext.response.locale.language == 'ca'}">
                         "url": "<c:url value="/static/i18n/Catalan.json"/>"
