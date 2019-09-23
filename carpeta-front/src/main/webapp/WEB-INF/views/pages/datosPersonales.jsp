@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-3 tituloPanel"><fmt:message key="menu.datos.personales"/></div>
+                            <div class="font-weight-bold text-primary text-uppercase mb-3 text-center"><fmt:message key="menu.datos.personales"/></div>
                             <div class="h5 mb-0 text-gray-800">
                                 <ul class="dadesRegistre">
                                     <li><strong><fmt:message key="usuario.nombre"/>: </strong><sec:authentication property="principal.usuarioClave.nombre" /></li>

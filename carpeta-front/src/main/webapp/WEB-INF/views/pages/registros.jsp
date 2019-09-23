@@ -10,7 +10,7 @@
 
     <!-- Lista registros -->
     <div class="card mb-12 border-0">
-        <h5 class="card-title"><fmt:message key="registro.listado"/></h5>
+        <h5 class="card-title border-bottom verde"><fmt:message key="registro.listado"/></h5>
 
         <div class="card-body">
             <div class="table-responsive">

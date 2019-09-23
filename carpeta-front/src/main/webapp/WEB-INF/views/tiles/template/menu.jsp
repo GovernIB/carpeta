@@ -22,11 +22,11 @@
             <a class="nav-link dropdown-toggle movil" href="#" id="idiomas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="oi oi-globe" title="" alt="" aria-hidden="true"></span> <fmt:message key="menu.idioma"/></a>
             <div class="dropdown-menu marg0" aria-labelledby="idiomas">
                 <c:if test="${pageContext.response.locale.language == 'ca'}">
-                    <a class="dropdown-item movil" href="<c:url value="/?idioma=es"/>"><fmt:message key="idioma.castellano"/></a>
+                    <a class="dropdown-item movil" href="<c:url value="${requestScope.requestURI}?idioma=es"/>"><fmt:message key="idioma.castellano"/></a>
                     <a class="dropdown-item movil desactivado"><fmt:message key="idioma.catala"/></a>
                 </c:if>
                 <c:if test="${pageContext.response.locale.language == 'es'}">
-                    <a class="dropdown-item movil" href="<c:url value="/?idioma=ca"/>"><fmt:message key="idioma.catala"/></a>
+                    <a class="dropdown-item movil" href="<c:url value="${requestScope.requestURI}?idioma=ca"/>"><fmt:message key="idioma.catala"/></a>
                     <a class="dropdown-item movil desactivado"><fmt:message key="idioma.castellano"/></a>
                 </c:if>
 

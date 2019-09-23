@@ -10,7 +10,7 @@
 
      <!-- Lista trámites -->
     <div class="card mb-12 border-0">
-        <h5 class="card-title"><fmt:message key="tramite.listado"/></h5>
+        <h5 class="card-title border-bottom verde"><fmt:message key="tramite.listado"/></h5>
         <div class="card-body">
 
             <table id="dataTable_paginate" class="table table-striped table-bordered table-hover" style="width:100%">

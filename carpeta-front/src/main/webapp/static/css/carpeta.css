@@ -390,7 +390,7 @@ a.dropdown-item.movil:hover{
 	width: 5%;
 }
 .verde{
-	color: #3b8e5d;
+	color: #4dba79;
 }
 .cajaRegistro{
 	border-left: .25rem solid #5BC0DE!important;
@@ -425,9 +425,8 @@ a.dropdown-item.movil:hover{
 	border-left: .25rem solid #e74a3b!important;
 }
 .dadesRegistre {
-	list-style: circle;
+	list-style: none;
 	text-align: left;
-	font-size: 0.9em;
 	line-height: 1.5em;
 }
 .imatge {
@@ -448,16 +447,12 @@ a.dropdown-item.movil:hover{
 .clickable-row{
 	cursor: pointer;
 }
-.tituloPanel{
-	text-align: center;
-}
+
 .textoDestacado{
 	font-weight: bolder;
 	font-style: italic;
 }
-.centrado{
-	text-align: center;
-}
+
 .colorVerde{
     background-color: #265d3c;
 	margin-left: 5px;
