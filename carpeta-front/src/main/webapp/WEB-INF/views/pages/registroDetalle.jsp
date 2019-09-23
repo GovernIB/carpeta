@@ -34,7 +34,75 @@
                                 <div class="col mr-2">
                                     <div class="font-weight-bold text-primary text-uppercase mb-3 text-center"><fmt:message key="registro.tipo.${asiento.tipoRegistro}"/></div>
 
-                                        <ul class="dadesRegistre">
+
+                                    <dl class="row">
+                                        <dt class="col-sm-3"><fmt:message key="registro.detalle.fecha"/></dt>
+                                        <dd class="col-sm-9"><fmt:formatDate value="${asiento.fechaRegistro}" pattern="dd/MM/yyyy HH:mm"/></dd>
+
+                                        <dt class="col-sm-3"><fmt:message key="registro.numero"/></dt>
+                                        <dd class="col-sm-9">${asiento.numeroRegistroFormateado}</dd>
+
+                                        <dt class="col-sm-3"><fmt:message key="registro.detalle.oficina"/></dt>
+                                        <dd class="col-sm-9">${asiento.entidadRegistralInicioDenominacion}</dd>
+
+                                        <dt class="col-sm-3"><fmt:message key="registro.detalle.organismo"/></dt>
+                                        <dd class="col-sm-9">${asiento.unidadTramitacionDestinoDenominacion}</dd>
+
+                                        <dt class="col-sm-3"><fmt:message key="registro.detalle.tipoDocumentacion"/></dt>
+                                        <dd class="col-sm-9"><fmt:message key="registro.detalle.tipoDocumentacion.${asiento.tipoDocumentacionFisicaCodigo}"/></dd>
+
+                                        <dt class="col-sm-3"><fmt:message key="registro.detalle.extracto"/></dt>
+                                        <dd class="col-sm-9">${asiento.resumen}</dd>
+
+                                        <dt class="col-sm-3"><fmt:message key="registro.detalle.idioma"/></dt>
+                                        <dd class="col-sm-9"><fmt:message key="idioma.${asiento.idioma}"/></dd>
+
+                                        <dt class="col-sm-3"><fmt:message key="registro.detalle.presencial"/></dt>
+                                        <dd class="col-sm-9">
+                                            <c:if test="${asiento.isPresencial()}">Si</c:if>
+                                            <c:if test="${not asiento.isPresencial()}">No</c:if>
+                                        </dd>
+
+                                        <c:if test="${not empty asiento.codigoSia}">
+                                            <dt class="col-sm-3"><fmt:message key="registro.detalle.codigoSia"/></dt>
+                                            <dd class="col-sm-9">${asiento.codigoSia}</dd>
+                                        </c:if>
+
+                                        <c:if test="${not empty asiento.codigoAsuntoDenominacion}">
+                                            <dt class="col-sm-3"><fmt:message key="registro.detalle.codigoAsunto"/></dt>
+                                            <dd class="col-sm-9">${asiento.codigoAsuntoDenominacion}</dd>
+                                        </c:if>
+
+                                        <c:if test="${not empty asiento.referenciaExterna}">
+                                            <dt class="col-sm-3"><fmt:message key="registro.detalle.refExterna"/></dt>
+                                            <dd class="col-sm-9">${asiento.referenciaExterna}</dd>
+                                        </c:if>
+
+                                        <c:if test="${not empty asiento.numeroExpediente}">
+                                            <dt class="col-sm-3"><fmt:message key="registro.detalle.expediente"/></dt>
+                                            <dd class="col-sm-9">${asiento.numeroExpediente}</dd>
+                                        </c:if>
+
+                                        <c:if test="${not empty asiento.tipoTransporte}">
+                                            <dt class="col-sm-3"><fmt:message key="registro.detalle.tipoTransporte"/></dt>
+                                            <dd class="col-sm-9"><fmt:message key="registro.detalle.transporte.${asiento.tipoTransporte}"/></dd>
+                                        </c:if>
+
+                                        <c:if test="${not empty asiento.numeroTransporte}">
+                                            <dt class="col-sm-3"><fmt:message key="registro.detalle.numeroTransporte"/></dt>
+                                            <dd class="col-sm-9">${asiento.numeroTransporte}</dd>
+                                        </c:if>
+
+                                        <c:if test="${not empty asiento.observaciones}">
+                                            <dt class="col-sm-3"><fmt:message key="registro.detalle.observaciones"/></dt>
+                                            <dd class="col-sm-9">${asiento.observaciones}</dd>
+                                        </c:if>
+
+
+                                    </dl>
+
+
+                                        <%--<ul class="dadesRegistre">
                                             <li><strong><fmt:message key="registro.detalle.fecha"/>: </strong><fmt:formatDate value="${asiento.fechaRegistro}" pattern="dd/MM/yyyy HH:mm"/></li>
                                             <li><strong><fmt:message key="registro.numero"/>: </strong>${asiento.numeroRegistroFormateado}</li>
                                             <li><strong><fmt:message key="registro.detalle.oficina"/>: </strong>${asiento.entidadRegistralInicioDenominacion}</li>
@@ -53,7 +121,7 @@
                                             <c:if test="${not empty asiento.tipoTransporte}"> <li><strong><fmt:message key="registro.detalle.tipoTransporte"/>: </strong><fmt:message key="registro.detalle.transporte.${asiento.tipoTransporte}"/></li></c:if>
                                             <c:if test="${not empty asiento.numeroTransporte}"> <li><strong><fmt:message key="registro.detalle.numeroTransporte"/>: </strong>${asiento.numeroTransporte}</li></c:if>
                                             <c:if test="${not empty asiento.observaciones}"> <li><strong><fmt:message key="registro.detalle.observaciones"/>: </strong>${asiento.observaciones}</li></c:if>
-                                        </ul>
+                                        </ul>--%>
 
                                 </div>
                             </div>
@@ -185,12 +253,12 @@
 
                                         <c:if test="${not empty asiento.expone}">
                                             <div class="font-weight-bold text-info text-uppercase mb-3 text-center"><fmt:message key="registro.detalle.expone"/></div>
-                                            <div class="row no-gutters align-items-center mb-4">${asiento.expone}</div>
+                                            <div class="row no-gutters text-justify mb-4">${asiento.expone}</div>
                                         </c:if>
 
                                         <c:if test="${not empty asiento.solicita}">
                                             <div class="font-weight-bold text-info text-uppercase mb-3 text-center"><fmt:message key="registro.detalle.solicita"/></div>
-                                            <div class="row no-gutters align-items-center">${asiento.solicita}</div>
+                                            <div class="row no-gutters text-justify">${asiento.solicita}</div>
                                         </c:if>
                                     </div>
                                 </div>
