@@ -28,7 +28,7 @@
                 <div class="col-5">
                     <!-- Información Registro -->
                     <div class="card border-left-primary shadow py-2 mb-3">
-                        <%--<h5 class="card-title"><fmt:message key="registro.registro"/> ${asiento.numeroRegistroFormateado}</h5>--%>
+
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
@@ -62,6 +62,7 @@
                                             <c:if test="${not asiento.isPresencial()}">No</c:if>
                                         </dd>
 
+                                        <%--Opcionales--%>
                                         <c:if test="${not empty asiento.codigoSia}">
                                             <dt class="col-sm-3"><fmt:message key="registro.detalle.codigoSia"/></dt>
                                             <dd class="col-sm-9">${asiento.codigoSia}</dd>
@@ -152,9 +153,7 @@
 
                                     <!-- No hay anexos -->
                                     <c:if test="${empty asiento.anexos}">
-                                        <div class="row text-center">
-                                            <p><fmt:message key="anexo.vacio"/></p>
-                                        </div>
+                                        <p class="text-center"><fmt:message key="anexo.vacio"/></p>
                                     </c:if>
 
                                     <c:if test="${not empty asiento.anexos}">
@@ -190,7 +189,6 @@
                                         <c:if test="${justificante != null && fn:length(asiento.anexos) == 1}">
                                             <p class="text-center"><fmt:message key="anexo.vacio"/></p>
                                         </c:if>
-
                                     </c:if>
 
                                 </div>
