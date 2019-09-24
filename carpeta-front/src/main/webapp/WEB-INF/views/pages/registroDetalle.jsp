@@ -159,7 +159,7 @@
                                     <c:if test="${not empty asiento.anexos}">
 
                                         <!-- Si hay anexos -->
-                                        <c:if test="${justificante == null && fn:length(asiento.anexos) >= 1}">
+                                        <c:if test="${justificante == null || fn:length(asiento.anexos) >= 1}">
 
                                             <table class="table table-hover">
                                                 <thead>
@@ -205,14 +205,15 @@
 
                                         <!-- Tiene justificante creado -->
                                         <c:if test="${justificante != null}">
-                                            <%--                                <a href="#" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm"><span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span> <fmt:message key="registro.detalle.descargar"/></a>--%>
-                                            <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="goTo('${justificante.url}')"><span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span> <fmt:message key="registro.detalle.descargar"/></button>
+                                            <div class="text-center">
+                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="goTo('${justificante.url}')"><span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span> <fmt:message key="registro.detalle.descargar"/></button>
+                                            </div>
+
                                         </c:if>
                                         <!-- No tiene justificante creado -->
                                         <c:if test="${justificante == null}">
                                             <p class="text-center"><fmt:message key="registro.justificante.vacio"/></p>
                                         </c:if>
-
                                 </div>
                             </div>
                         </div>
