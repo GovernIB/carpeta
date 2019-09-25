@@ -2,11 +2,11 @@
 <footer id="footer" class="containerPie">
     <div class="row mr-auto pieResponsive">
 
-        <div class="col-3 governPie">
+        <div class="col-4 governPie">
             <strong><fmt:message key="pie.govern"/></strong>
         </div>
 
-        <div class="col-6 opcionesPie">
+        <div class="col-4 opcionesPie">
             <ul>
 <%--                <li><a href="" data-toggle="modal" data-target="#modalContacto"><fmt:message key="soporte.ayuda"/></a></li>--%>
                 <li><a href=""><fmt:message key="pie.mapa"/></a></li>
@@ -16,13 +16,13 @@
             </ul>
         </div>
 
-        <div class="col-3 redesPie">
+        <div class="col-4 redesPie">
 
         <p class="desactivarMovil"><fmt:message key="pie.seguir"/></p>
         <ul>
 
                 <li>
-                    <a class="iconoRedes" href="http://www.google.es/?youtube" class="botonRed logo-youtube" title="YouTube">
+                    <a href="https://www.youtube.com/user/CanalIllesBalears" class="iconoRedes botonRed logo-youtube" title="YouTube" target="_blank">
                         <svg viewBox="0 0 90 90" xml:space="preserve">
                             <title>YouTube</title>
                                         <g>
@@ -55,7 +55,7 @@
 <%--                        <span>YouTube</span>--%>
                     </a>
 
-                    <a class="iconoRedes" href="http://www.google.es/?instagram" class="botonRed logo-instagram" title="Instagram">
+                    <a href="https://www.instagram.com/goib" class="iconoRedes botonRed logo-instagram" title="Instagram" target="_blank">
                         <svg viewBox="0 0 169.063 169.063" xml:space="preserve">
                             <title>Instagram</title>
                                         <g>
@@ -77,7 +77,7 @@
 
 
                 <li>
-                    <a class="iconoRedes" href="http://www.google.es/?twitter" class="botonRed logo-twitter">
+                    <a href="http://www.twitter.com/goib" class="iconoRedes botonRed logo-twitter" target="_blank">
                         <svg viewBox="0 0 430.117 430.117" xml:space="preserve" >
                             <title>Twitter</title>
                                         <g>
@@ -96,16 +96,16 @@
 <%--                        <span>Twitter</span>--%>
                     </a>
 
-<%--                    <a href="http://www.google.es/?facebook" class="botonRed logo-facebook" title="Facebook">--%>
-<%--                        <svg viewBox="0 0 430.113 430.114" xml:space="preserve">--%>
-<%--                                        <g>--%>
-<%--                                            <path d="M158.081,83.3c0,10.839,0,59.218,0,59.218h-43.385v72.412h43.385v215.183h89.122V214.936h59.805--%>
-<%--                                                c0,0,5.601-34.721,8.316-72.685c-7.784,0-67.784,0-67.784,0s0-42.127,0-49.511c0-7.4,9.717-17.354,19.321-17.354--%>
-<%--                                                c9.586,0,29.818,0,48.557,0c0-9.859,0-43.924,0-75.385c-25.016,0-53.476,0-66.021,0C155.878-0.004,158.081,72.48,158.081,83.3z"></path>--%>
-<%--                                        </g>--%>
-<%--                                    </svg>--%>
-<%--                        <span>Facebook</span>--%>
-<%--                    </a>--%>
+                    <a href="https://www.facebook.com/GovernIllesBalears/" class="iconoRedes botonRed logo-facebook" title="Facebook" target="_blank">
+                        <svg viewBox="0 0 430.113 430.114" xml:space="preserve">
+                                        <g>
+                                            <path d="M158.081,83.3c0,10.839,0,59.218,0,59.218h-43.385v72.412h43.385v215.183h89.122V214.936h59.805
+                                                c0,0,5.601-34.721,8.316-72.685c-7.784,0-67.784,0-67.784,0s0-42.127,0-49.511c0-7.4,9.717-17.354,19.321-17.354
+                                                c9.586,0,29.818,0,48.557,0c0-9.859,0-43.924,0-75.385c-25.016,0-53.476,0-66.021,0C155.878-0.004,158.081,72.48,158.081,83.3z"></path>
+                                        </g>
+                                    </svg>
+                        <%--<span>Facebook</span>--%>
+                    </a>
                 </li>
 
             </ul>
