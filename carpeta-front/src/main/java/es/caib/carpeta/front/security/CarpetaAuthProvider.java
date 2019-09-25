@@ -1,7 +1,8 @@
-package es.caib.carpeta.front.config;
+package es.caib.carpeta.front.security;
 
 import es.caib.carpeta.core.service.SecurityService;
 import es.caib.carpeta.core.utils.UsuarioClave;
+import es.caib.carpeta.front.config.UsuarioAutenticado;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;

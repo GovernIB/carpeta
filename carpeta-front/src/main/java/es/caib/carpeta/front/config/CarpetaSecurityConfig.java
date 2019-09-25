@@ -1,5 +1,6 @@
 package es.caib.carpeta.front.config;
 
+import es.caib.carpeta.front.security.CarpetaAuthProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

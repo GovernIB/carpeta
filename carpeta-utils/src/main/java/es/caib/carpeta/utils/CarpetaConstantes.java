@@ -4,6 +4,10 @@ public interface CarpetaConstantes {
 
     String CARPETA_PROPERTY_BASE = "es.caib.carpeta.";
 
+    /* -------------- LOGINIB --------------*/
+    String TICKET_USER_CLAVE = "ticket-user-clave";
+    String TICKET_PARAM = "ticket";
+
     /* -------------- REGWEB3 --------------*/
     Long REGISTRO_ENTRADA = 1L;
     Long REGISTRO_SALIDA = 2L;
@@ -34,7 +38,6 @@ public interface CarpetaConstantes {
     long TIPODOCUMENTOID_CODIGO_ORIGEN_ID = 6;
 
     /* -------------- SISTRA --------------*/
-
     Integer SISTRA1 = 1;
     Integer SISTRA2 = 2;
 }

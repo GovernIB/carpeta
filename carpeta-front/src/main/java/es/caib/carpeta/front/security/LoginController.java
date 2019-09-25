@@ -1,8 +1,11 @@
-package es.caib.carpeta.front.controllers;
+package es.caib.carpeta.front.security;
 
 import es.caib.carpeta.core.service.SecurityService;
+import es.caib.carpeta.core.utils.StringUtils;
 import es.caib.carpeta.front.config.LoginRequestCache;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
+import es.caib.carpeta.front.utils.SesionHttp;
+import es.caib.carpeta.utils.CarpetaConstantes;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +15,14 @@ import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 @Controller
 public class LoginController {
@@ -27,6 +34,12 @@ public class LoginController {
 
     @Autowired
     private LoginRequestCache loginRequestCache; //Cache peticiones
+
+    @Autowired
+    private SesionHttp sesionHttp;
+
+    @Autowired
+    private RequestMappingHandlerMapping requestMappingHandlerMapping;
 
     @Value("${es.caib.carpeta.loginib.entidad}")
     private String entidad;
@@ -44,12 +57,21 @@ public class LoginController {
 
         if(savedRequest != null && existeTicket(savedRequest)){
 
-            log.info("savedRequest.getRedirectUrl(): " + savedRequest.getRedirectUrl());
-
-            return autenticarTicket(savedRequest);
+            return autenticarTicket(savedRequest, CarpetaConstantes.TICKET_USER_CLAVE);
 
         }else {
+
+            if(savedRequest != null){
+                log.info("Punto de entrada: " + savedRequest.getRedirectUrl());
+
+                sesionHttp.setUrlEntrada(getUrlEntrada(savedRequest.getRedirectUrl()));
+
+                log.info("iniciarSesionAutentificacion: " + savedRequest.getRedirectUrl());
+            }
+
             String url = securityService.iniciarSesionAutentificacion();
+
+            log.info("Url autentificacion: " + url);
 
             return new ModelAndView("redirect:"+url);
 
@@ -58,11 +80,19 @@ public class LoginController {
     }
 
     @RequestMapping(value="/principal")
-    public ModelAndView principal(HttpServletRequest request) {
+    public ModelAndView principal(HttpServletRequest request, HttpServletResponse response) {
 
-        log.info("Dentro de principal");
+        log.info("Dentro de principal: " + sesionHttp.getUrlEntrada());
 
         ModelAndView mav = new ModelAndView("principal");
+
+        try {
+            if(StringUtils.isNotEmpty(sesionHttp.getUrlEntrada())){
+                response.sendRedirect(sesionHttp.getUrlEntrada());
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
 
         final UsuarioAutenticado usuario = (UsuarioAutenticado) SecurityContextHolder
                 .getContext().getAuthentication().getPrincipal();
@@ -92,27 +122,25 @@ public class LoginController {
     /**
      * Autentica via ticket.
      *
-     * @param pTicketName
-     *            Nombre ticket
-     * @param pTicketUser
-     *            Usuario asociado al tipo de ticket
+     * @param request Request
+     * @param ticketUserName Usuario asociado al tipo de ticket
      * @return Vista que realiza el login automáticamente
      */
-    private ModelAndView autenticarTicket(SavedRequest request) throws Exception {
+    private ModelAndView autenticarTicket(SavedRequest request, String ticketUserName) throws Exception {
 
         ModelAndView mav = new ModelAndView("loginTicket");
 
         // Obtenemos ticket de la peticion
-        final String[] tickets = request.getParameterMap().get("ticket");
+        final String[] tickets = request.getParameterMap().get(CarpetaConstantes.TICKET_PARAM);
         if (tickets == null || tickets.length != 1) {
             throw new Exception("No existe ticket");
         }
         final String ticket = tickets[0];
 
-        log.info("Dentro de autenticar ticket: " + tickets[0]);
+        log.info("Autenticando el ticket: " + tickets[0]);
 
         // Autenticamos automaticamente
-        mav.addObject("ticketName","ticket-clave");
+        mav.addObject("ticketName", ticketUserName);
         mav.addObject("ticketValue",ticket);
 
         return mav;
@@ -126,12 +154,35 @@ public class LoginController {
      */
     private boolean existeTicket(SavedRequest request) {
 
-        final String[] tickets = request.getParameterMap().get("ticket");
+        final String[] tickets = request.getParameterMap().get(CarpetaConstantes.TICKET_PARAM);
         if (tickets == null || tickets.length != 1) {
             return false;
         }
-        log.info("Dentro de existeTicket: "+ tickets.length);
+        log.info("Existe un ticket de autentificacion: "+ tickets.length);
 
         return true;
+    }
+
+    /**
+     *
+     * @param urlEntrada
+     * @return
+     */
+    private String getUrlEntrada(String urlEntrada){
+        try {
+
+            // Opcional: Comprobar si coincide con alguno de los mappings definidos
+            /*for (Map.Entry<RequestMappingInfo, HandlerMethod> entry : requestMappingHandlerMapping.getHandlerMethods().entrySet()) {
+                System.out.println("Item : " + entry.getKey().getPatternsCondition() + " Count : " + entry.getValue().getReturnType());
+            }*/
+
+           URL url = new URL(urlEntrada);
+
+           return url.getPath();
+
+        }catch (MalformedURLException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 }

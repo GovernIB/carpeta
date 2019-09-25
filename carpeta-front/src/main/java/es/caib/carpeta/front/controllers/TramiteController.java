@@ -4,7 +4,6 @@ import es.caib.carpeta.core.service.Sistra1Service;
 import es.caib.carpeta.core.service.Sistra2Service;
 import es.caib.carpeta.core.utils.StringUtils;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
-import es.caib.carpeta.front.utils.Tramite;
 import es.caib.carpeta.front.utils.TramitesCiudadano;
 import es.caib.sistramit.rest.api.externa.v1.RTramitePersistencia;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitePersistente;
@@ -95,7 +94,7 @@ public class TramiteController {
             String url = sistra2Service.obtenerUrlTicketAcceso(usuarioAutenticado.getUsuarioClave(), idSesionTramitacion);
 
             if(StringUtils.isNotEmpty(url)){
-                log.info("Url" + url);
+                log.info("Url: " + url);
                 return new RedirectView(url);
             }else{
                 return new RedirectView("/inici");
@@ -117,7 +116,7 @@ public class TramiteController {
             String url = sistra1Service.obtenerTiquetAcceso(idSesionTramitacion, usuarioAutenticado.getUsuarioClave());
 
             if(StringUtils.isNotEmpty(url)){
-                log.info("Url" + url);
+                log.info("Url: " + url);
                 return new RedirectView(url);
             }else{
                 return new RedirectView("/inici");

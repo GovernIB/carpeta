@@ -1,7 +1,6 @@
 package es.caib.carpeta.core.service;
 
 import es.caib.carpeta.core.utils.DateUtils;
-import es.caib.carpeta.core.utils.StringUtils;
 import es.caib.carpeta.core.utils.UsuarioClave;
 import es.caib.sistramit.rest.api.externa.v1.RFiltroTramitePersistencia;
 import es.caib.sistramit.rest.api.externa.v1.RInfoTicketAcceso;
@@ -22,7 +21,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -88,13 +86,13 @@ public class Sistra2ServiceImpl implements Sistra2Service{
         infoTicket.setIdSesionTramitacion(idSesionTramitacion);
 
         final RUsuarioAutenticadoInfo usuariInfo = new RUsuarioAutenticadoInfo();
-        usuariInfo.setUsername("jgarcia");
-        usuariInfo.setNombre("Jose");
-        usuariInfo.setApellido1("Garcia");
-        usuariInfo.setApellido2("Gutierrez");
-        usuariInfo.setEmail("jgarcia@caib.es");
-        usuariInfo.setNif("11111111H");
-        usuariInfo.setAutenticacion("CLAVE_CERTIFICADO");
+        usuariInfo.setUsername(usuario.getNif());
+        usuariInfo.setNombre(usuario.getNombre());
+        usuariInfo.setApellido1(usuario.getApellido1());
+        usuariInfo.setApellido2(usuario.getApellido2());
+        usuariInfo.setEmail("");
+        usuariInfo.setNif(usuario.getNif());
+        usuariInfo.setAutenticacion("c");
         usuariInfo.setMetodoAutenticacion("CLAVE_CERTIFICADO");
 
         infoTicket.setUsuarioAutenticadoInfo(usuariInfo);
@@ -103,8 +101,6 @@ public class Sistra2ServiceImpl implements Sistra2Service{
 
         final ResponseEntity<String> response = restTemplate.postForEntity(
                 SISTRA2_URL + "/ticketAcceso", request, String.class);
-
-        log.info("Url: " + response.getBody());
 
         return response.getBody();
     }
