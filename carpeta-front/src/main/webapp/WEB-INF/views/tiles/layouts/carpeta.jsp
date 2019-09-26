@@ -34,21 +34,21 @@
 
 <body>
 
-    <!-- contenidor -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark bg-carpeta fixed-top">
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark bg-carpeta">
 
-        <!-- botón menú móvil -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <button class="navbar-toggler botonMovil" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <!-- Cabecera -->
-        <tiles:insertAttribute name="cabecera" />
+            <!-- Cabecera -->
+            <tiles:insertAttribute name="cabecera" />
 
-        <!-- Menú principal -->
-        <tiles:insertAttribute name="menu" />
+            <!-- Menú principal -->
+            <tiles:insertAttribute name="menu" />
 
-    </nav>
+        </nav>
+    </header>
 
     <!-- Miga de pan -->
     <tiles:insertAttribute name="miga" />
@@ -68,7 +68,7 @@
 
     </div><!-- /.container -->
 
-    <!-- contacto -->
+    <!-- Contacto -->
     <tiles:insertAttribute name="contacto" />
 
     <!-- Pie -->
@@ -89,6 +89,10 @@
             });
         } );
     </script>
+
+<%--    <script type="text/javascript">--%>
+<%--        breadcrumbs(valoresMiga);--%>
+<%--    </script>--%>
 
 </body>
 

@@ -35,15 +35,34 @@ a:hover{
 
 /*Se aplican cuando el width es menor que 992px*/
 @media only screen and (max-width: 992px) {
-.colorVerde{
-	background-color: #4DBA79 !important;
-	margin-left: 0px !important;
+.botonCorto{
+    display: none;
 }
-.movil li a:hover{
-	background-color: #4DBA79 !important;
 }
-.colorVerde:hover{
-	background-color: #4DBA79 !important;
+
+/*Se aplican cuando el width es menor que 768*/
+@media only screen and (max-width : 767px) {
+	.colorVerde{
+		background-color: #4DBA79 !important;
+		margin-left: 0px !important;
+	}
+	.movil li a:hover{
+		background-color: #4DBA79 !important;
+	}
+	.colorVerde:hover{
+		background-color: #4DBA79 !important;
+	}
+.pieResponsive{
+    display: list-item !important;
+    list-style: none !important;
+}
+.elementPieResponsive{
+    max-width: 100% !important;
+    text-align: center !important;
+	justify-content: center !important;
+}
+.quitarMovil{
+	display: none;
 }
 }
 
@@ -76,24 +95,6 @@ body {
 .containerPie{
 	margin-left: 0px !important;
 	margin-right: 0px !important;
-}
-.governPie{
-	max-width: 100% !important;
-	text-align: center !important;
-	padding-right: 0px !important;
-}
-.opcionesPie{
-	max-width: 100% !important;
-	padding-left: 0px !important;
-	padding-right: 0px !important;
-}
-.containerPie ul{
-	padding-left: 0px !important;
-}
-.redesPie {
-	max-width: 100% !important;
-	text-align: center !important;
-	padding-right: 0px;
 }
 .p-3carpeta {
 	padding: 2.5rem 1rem!important;
@@ -138,34 +139,9 @@ body {
 .desactivarMovil{
 	display: none !important;
 }
-.pieResponsive{
-	display: list-item !important;
-}
 .breadcrumb{
 	padding: .35rem 0.6rem !important;
 	border-radius: 0 !important;
-}
-.containerPie{
-	margin-left: 0px !important;
-	margin-right: 0px !important;
-}
-.governPie{
-	max-width: 100% !important;
-	text-align: center !important;
-	padding-right: 0px !important;
-}
-.opcionesPie{
-	max-width: 100% !important;
-	padding-left: 0px !important;
-	padding-right: 0px !important;
-}
-.containerPie ul{
-	padding-left: 0px !important;
-}
-.redesPie {
-	max-width: 100% !important;
-	text-align: center !important;
-	padding-right: 0px;
 }
 }
 
@@ -295,63 +271,17 @@ a.dropdown-item.movil:hover{
 	text-decoration: none;
 }
 
-.migaPan{
-	text-align: start;
-}
-.migaPan ul{
-	padding-left: 0px;
-}
-.migaPan ul li{
-	list-style: none;
-}
-/* Fin Contenido */
-
 /* Pie */
-.containerPie{
-	/*padding-top: 2rem;*/
-	margin-left: 20px;
-	margin-right: 20px;
+.opcionesPie li::before {
+	content: "\0000a0\0000a0|\0000a0\0000a0";
 }
-.containerPie p,
-.containerPie ul,
-.containerPie li { 
-	display: inline-block; 
-	vertical-align: middle; 
-}
-.governPie { 
-	padding-top: 8px;
-}
-.governPie strong { 
-	text-transform: uppercase; 
-	padding-right: .5em; 
-	/*white-space: nowrap;  */
-	font-size: 1.1em;
-    line-height: 1.2em;
-}
-.opcionesPie{
-	text-align: center;
-	padding-top: 8px;
-}
-.opcionesPie li::before { 
-	content: "|"; 
-	}
 .opcionesPie li:first-child::before { 
 	content: ""; 
 	}
-.opcionesPie li a { 
-	color: #000; 
-	text-transform: uppercase; 
-	padding: 0 .5em; 
-}
-.opcionesPie li a:hover,
-.opcionesPie li a:focus,
-.opcionesPie li a:active { 
-	color: #4dba79; 
-	background-color: transparent; 
-	text-decoration: none;
-}
-.redesPie { 
-	text-align: right; 
+a.linkPie:hover,
+a.linkPie:focus,
+a.linkPie:active {
+	color: #4dba79 !important;
 }
 /* Fin Pie */
 
@@ -597,3 +527,33 @@ a.iconoRedes {
 
 }
 /* FIN Tabla */
+
+.botonMovil{
+	position: absolute;
+	right: 10px;
+	top: 20px;
+}
+
+
+/* Flecha de los botones con Submenú */
+.flechaSubmenu{
+	font-size: 8px;
+	padding-top: 5px !important;
+}
+.oi-caret-bottom:before {
+	content: '\0000a0\e02d' !important;
+}
+.oi-briefcase:before {
+	content: '\e024\0000a0' !important;
+}
+.oi-globe:before {
+	content: '\e06f\0000a0' !important;
+}
+.oi-power-standby:before {
+	content: '\e0ab\0000a0' !important;
+}
+/* FIN Flecha de los botones con Submenú */
+
+.minW0{
+	min-width: 0;
+}

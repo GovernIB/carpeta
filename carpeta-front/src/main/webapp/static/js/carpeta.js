@@ -6,47 +6,6 @@ jQuery(document).ready(function($) {
 	});
 });
 
-/** Recalcula los menús según ancho de ventana **/
-$( window ).resize(function() {
-  var ventana_ancho = $(window).width();
-  if(ventana_ancho>=810){
-	$("#navigation").addClass("noVisible");
-	$("#opcionesLargo").removeClass("noVisible");
-	$("#opcionesMenu").removeClass("noVisible");
-  }
-  if(ventana_ancho<810 & ventana_ancho>=640){
-	$("#navigation").addClass("noVisible");
-	$("#opcionesLargo").removeClass("noVisible");
-	$("#opcionesMenu").removeClass("noVisible");
-	$("#menuUsuario").removeClass("col-9");
-	$("#menuUsuario").addClass("col-8");
-  }
-  if(ventana_ancho<641){
-	$("#navigation").removeClass("noVisible");
-	$("#opcionesLargo").addClass("noVisible");
-	$("#opcionesMenu").addClass("noVisible");
-
-  }
-});
-
-/** Muestra los menús según ancho de ventana **/
-$(document).ready(function($){
-  var ventana_ancho = $(window).width();
-  if(ventana_ancho<810 & ventana_ancho>=640){
-	$("#opcionesLargo").removeClass("col-5");
-	$("#opcionesLargo").addClass("col-3");
-	$("#idCa").text("ca");
-	$("#idEs").text("es");
-  }
-  if(ventana_ancho<641){
-	$("#navigation").removeClass("noVisible");
-	$("#opcionesLargo").addClass("noVisible");
-	$("#opcionesMenu").addClass("noVisible");
-	$("#menuUsuario").removeClass("col-8");
-	$("#menuUsuario").addClass("col-10");
-  }
-});
-
 /** Abre el cuadro de ayuda **/
 function abrirAyuda(){
 	$("#soporte").addClass("on");
@@ -68,3 +27,18 @@ function sortirCarpeta(){
 function goTo(url) {
 	document.location.href=url;
 }
+
+// /** Breadcrumb **/
+// function breadcrumbs(valoresMiga) {
+// 	alert(Object.values(valoresMiga));
+// 	var numValores = Object.values(valoresMiga[0]);
+// 	alert(numValores * 2 + 1);
+// 	var contenidoMiga = "";
+// 	for (var i = 1; i < (numValores * 2 + 1); i+=2){
+// 		alert(i);
+// 		contenidoMiga = contenidoMiga + "<li class=\"breadcrumb-item active\"><a href=\""+valoresMiga[i]+"\">" + valoresMiga[i+1] + "</a></li>";
+// 		alert(contenidoMiga);
+// 	}
+//
+// 	$("#migaPan").html(contenidoMiga);
+// }
