@@ -52,7 +52,7 @@
                                                     l6.894,16.284L25.682,35.235z"></path>
                                             </g>
                                         </svg>
-    <%--                        <span>YouTube</span>--%>
+                            <span class="d-none">YouTube</span>
                         </a>
 
                         <a class="iconoRedes" href="http://www.google.es/?instagram" class="botonRed logo-instagram" title="Instagram">
@@ -71,12 +71,12 @@
                                                     C135.661,29.421,132.821,28.251,129.921,28.251z"></path>
                                             </g>
                                         </svg>
-    <%--                        <span>Instagram</span>--%>
+                            <span class="d-none">Instagram</span>
                         </a>
                     </li>
 
 
-                    <li>
+                    <li class="pl-1">
                         <a class="iconoRedes" href="http://www.google.es/?twitter" class="botonRed logo-twitter">
                             <svg viewBox="0 0 430.117 430.117" xml:space="preserve" >
                                 <title>Twitter</title>
@@ -93,7 +93,7 @@
                                                     C414.973,206.142,393.023,203.486,381.384,198.639z"></path>
                                             </g>
                                         </svg>
-    <%--                        <span>Twitter</span>--%>
+                            <span class="d-none">Twitter</span>
                         </a>
 
                     <a href="https://www.facebook.com/GovernIllesBalears/" class="iconoRedes botonRed logo-facebook" title="Facebook" target="_blank">
@@ -104,7 +104,7 @@
                                                 c9.586,0,29.818,0,48.557,0c0-9.859,0-43.924,0-75.385c-25.016,0-53.476,0-66.021,0C155.878-0.004,158.081,72.48,158.081,83.3z"></path>
                                         </g>
                                     </svg>
-                        <%--<span>Facebook</span>--%>
+                        <span class="d-none">Facebook</span>
                     </a>
                 </li>
 
@@ -114,34 +114,4 @@
 
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="modalContacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title" id="exampleModalLongTitle"><span class="oi oi-info" title="" alt="" aria-hidden="true"></span> <fmt:message key="soporte.mensaje.ayuda"/></h2>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row col-12 datosSoporte">
-                        <div class="row col-12"><fmt:message key="soporte.mensaje.necesita"/></div>
-
-                        <ul class="dades">
-                            <li>
-                                <fmt:message key="soporte.mensaje.envia"/> <a href="mailto:otae@fundaciobit.org" target="_blank"><fmt:message key="soporte.mensaje.correo"/></a>
-                            </li>
-                            <li>
-                                <fmt:message key="soporte.mensaje.llamar"/> <a href="tel:971784940"><fmt:message key="soporte.mensaje.telefono"/></a>.
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"><fmt:message key="soporte.mensaje.cerrar"/></button>
-                </div>
-            </div>
-        </div>
-    </div>
 </footer>

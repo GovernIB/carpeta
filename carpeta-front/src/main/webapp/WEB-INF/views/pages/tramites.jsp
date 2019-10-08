@@ -30,3 +30,8 @@
     </div>
 
 </nav>
+
+<%--<script type="text/javascript">--%>
+<%--    var valoresMiga = { 0: '2', 1: '<c:url value="/"/>', 2: '<fmt:message key="menu.inicio"/>',--%>
+<%--        3: '<c:url value="/tramite/list"/>', 4: '<fmt:message key="menu.tramites"/>'};--%>
+<%--</script>--%>

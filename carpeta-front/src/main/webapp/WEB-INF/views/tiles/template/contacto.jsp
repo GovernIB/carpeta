@@ -12,7 +12,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title" id="exampleModalLongTitle"><span class="oi oi-info" title="" alt="" aria-hidden="true"></span> <fmt:message key="soporte.mensaje.ayuda"/></h2>
+                    <span class="modal-title h2" id="exampleModalLongTitle"><span class="oi oi-info" title="" aria-hidden="true"></span> <fmt:message key="soporte.mensaje.ayuda"/></span>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

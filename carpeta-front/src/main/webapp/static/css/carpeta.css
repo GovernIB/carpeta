@@ -38,20 +38,23 @@ a:hover{
 .botonCorto{
     display: none;
 }
+.movil{
+	float: left !important;
+}
 }
 
 /*Se aplican cuando el width es menor que 768*/
 @media only screen and (max-width : 767px) {
-	.colorVerde{
-		background-color: #4DBA79 !important;
-		margin-left: 0px !important;
-	}
-	.movil li a:hover{
-		background-color: #4DBA79 !important;
-	}
-	.colorVerde:hover{
-		background-color: #4DBA79 !important;
-	}
+.colorVerde{
+	background-color: #4DBA79 !important;
+	margin-left: 0px !important;
+}
+.movil li a:hover{
+	background-color: #4DBA79 !important;
+}
+.colorVerde:hover{
+	background-color: #4DBA79 !important;
+}
 .pieResponsive{
     display: list-item !important;
     list-style: none !important;
@@ -63,6 +66,29 @@ a:hover{
 }
 .quitarMovil{
 	display: none;
+}
+.botonCorto{
+	display: inline;
+}
+.navbar-nav.movil {
+	width: 100%;
+}
+.dropdown-menu {
+	float: none;
+	padding: 0;
+}
+a.nav-link.movil:hover {
+	 color: #000 !important;
+}
+a.dropdown-item.movil:hover {
+	color: #4dba79 !important;
+	background-color: #FFF !important;
+}
+.mr-auto {
+	margin-left: 0 !important;
+}
+.p-3carpeta {
+	padding-bottom: 1rem !important;
 }
 }
 
@@ -93,11 +119,8 @@ body {
 	border-radius: 0 !important;
 }
 .containerPie{
-	margin-left: 0px !important;
-	margin-right: 0px !important;
-}
-.p-3carpeta {
-	padding: 2.5rem 1rem!important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
 }
 }
 
@@ -199,7 +222,6 @@ body {
 }
 
 .movil li a:hover{
-	/*color: #000 !important;*/
 	color: #fff !important;
 	background-color: #000;
 }
@@ -208,6 +230,7 @@ body {
 }
 .marg0{
 	margin: 0px;
+	border: 0px solid !important;
 }
 .icono{
 	opacity: 0.5;

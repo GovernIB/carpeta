@@ -2,7 +2,7 @@
 
 
 <div class="card mb-12 border-0">
-    <h5 class="card-title border-bottom verde"><fmt:message key="inicio.contenido"/></h5>
+    <span class="h5 card-title border-bottom verde"><fmt:message key="inicio.contenido"/></span>
 
     <div class="card-body">
 
