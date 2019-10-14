@@ -3,14 +3,12 @@ package es.caib.carpeta.front.security;
 import es.caib.carpeta.core.service.SecurityService;
 import es.caib.carpeta.core.utils.StringUtils;
 import es.caib.carpeta.front.config.LoginRequestCache;
-import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.carpeta.front.utils.SesionHttp;
 import es.caib.carpeta.utils.CarpetaConstantes;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -79,29 +77,23 @@ public class LoginController {
 
     }
 
-    @RequestMapping(value="/principal")
-    public ModelAndView principal(HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value="/redirigirLogin")
+    public ModelAndView redirigirLogin(HttpServletRequest request, HttpServletResponse response) {
 
-        log.info("Dentro de principal: " + sesionHttp.getUrlEntrada());
+        log.info("Dentro de redirigirLogin: " + sesionHttp.getUrlEntrada());
 
-        ModelAndView mav = new ModelAndView("principal");
-
+        // Gestionamos la url de entrada a la aplicación previa a autenticarse
         try {
             if(StringUtils.isNotEmpty(sesionHttp.getUrlEntrada())){
                 response.sendRedirect(sesionHttp.getUrlEntrada());
+            }else{
+                response.sendRedirect("/carpeta");
             }
         }catch (IOException e) {
             e.printStackTrace();
         }
 
-        final UsuarioAutenticado usuario = (UsuarioAutenticado) SecurityContextHolder
-                .getContext().getAuthentication().getPrincipal();
-
-        mav.addObject("nombre", usuario.getUsuarioClave().getNombre());
-        mav.addObject("apellidos", usuario.getUsuarioClave().getApellido1() + ' ' + usuario.getUsuarioClave().getApellido2());
-        mav.addObject("nif", usuario.getUsuarioClave().getNif());
-
-        return mav;
+        return new ModelAndView("inicio");
 
     }
 

@@ -3,7 +3,7 @@
 loginib.metodos_auth=
 loginib.entidad=
 loginib.aplicacion=
-loginib.url_callback_login=http://localhost:8080/carpeta/principal
+loginib.url_callback_login=http://localhost:8080/carpeta/redirigirLogin
 loginib.url_callback_error=http://www.google.es
 loginib.url_callback_logout=http://localhost:8080/carpeta/salir
 loginib.idioma=

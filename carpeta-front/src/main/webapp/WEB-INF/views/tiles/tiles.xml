@@ -36,12 +36,6 @@
         <put-attribute name="body" value="/WEB-INF/views/pages/logout.jsp" />
     </definition>
 
-    <!-- Principal -->
-    <definition name="principal" extends="base-definition">
-        <put-attribute name="title" value="Benvingut" />
-        <put-attribute name="body" value="/WEB-INF/views/pages/principal.jsp" />
-    </definition>
-
     <!-- Elección de trámites a buscar -->
     <definition name="tramites" extends="base-definition">
         <put-attribute name="title" value="Llista de tràmits" />
