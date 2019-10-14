@@ -2,12 +2,13 @@ package es.caib.carpeta.front.controllers;
 
 import es.caib.carpeta.core.service.RegWeb3Service;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
+import es.caib.regweb3.ws.api.v3.AnexoWs;
 import es.caib.regweb3.ws.api.v3.AsientoRegistralWs;
-import es.caib.regweb3.ws.api.v3.JustificanteReferenciaWs;
 import es.caib.regweb3.ws.api.v3.ResultadoBusquedaWs;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 public class RegistroController {
 
     protected final Log log = LogFactory.getLog(getClass());
+
+    @Value("${es.caib.carpeta.concsv.url}")    private String CONCSV_URL;
 
     @Autowired
     RegWeb3Service regWeb3Service;
@@ -67,10 +70,20 @@ public class RegistroController {
 
         try {
             AsientoRegistralWs asiento = regWeb3Service.obtenerAsientoCiudadano(usuarioAutenticado.getUsuarioClave().getNif(), numeroRegistro.replace("/registro/detalle/",""));
-            JustificanteReferenciaWs justificante = regWeb3Service.obtenerReferenciaJustificante(numeroRegistro.replace("/registro/detalle/",""));
+
+            for (AnexoWs anexo : asiento.getAnexos()) {
+
+                if(anexo.getCsv() != null){ //todo Añadir campo isJustificante en AnexoWS
+
+                    mav.addObject("justificante", CONCSV_URL.concat(anexo.getCsv()));
+                }
+
+            }
+
+            //JustificanteReferenciaWs justificante = regWeb3Service.obtenerReferenciaJustificante(numeroRegistro.replace("/registro/detalle/",""));
 
             mav.addObject("asiento", asiento);
-            mav.addObject("justificante", justificante);
+
 
         } catch (Exception e) {
             e.printStackTrace();

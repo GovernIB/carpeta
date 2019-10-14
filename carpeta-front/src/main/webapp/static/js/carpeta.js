@@ -28,6 +28,11 @@ function goTo(url) {
 	document.location.href=url;
 }
 
+/** Acceder a una url **/
+function goToWindow(url) {
+	window.open(url);
+}
+
 // /** Breadcrumb **/
 // function breadcrumbs(valoresMiga) {
 // 	alert(Object.values(valoresMiga));

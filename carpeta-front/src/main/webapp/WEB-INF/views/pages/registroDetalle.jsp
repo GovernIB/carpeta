@@ -104,6 +104,29 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Justificante -->
+                    <div class="card border-left-danger shadow py-2 mb-3">
+                        <div class="card-body">
+                            <div class="row no-gutters">
+                                <div class="col mr-2">
+                                    <div class="font-weight-bold text-danger text-uppercase mb-3 text-center"><fmt:message key="registro.detalle.justificante"/></div>
+
+                                    <!-- Tiene justificante creado -->
+                                    <c:if test="${justificante != null}">
+                                        <div class="text-center">
+                                            <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="goToWindow('${justificante}')"><span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span> <fmt:message key="registro.detalle.descargar"/></button>
+                                        </div>
+
+                                    </c:if>
+                                    <!-- No tiene justificante creado -->
+                                    <c:if test="${justificante == null}">
+                                        <p class="text-center"><fmt:message key="registro.justificante.vacio"/></p>
+                                    </c:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-7">
@@ -191,29 +214,6 @@
                                         </c:if>
                                     </c:if>
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Justificante -->
-                    <div class="card border-left-danger shadow py-2 mb-3">
-                        <div class="card-body">
-                            <div class="row no-gutters">
-                                <div class="col mr-2">
-                                    <div class="font-weight-bold text-danger text-uppercase mb-3 text-center"><fmt:message key="registro.detalle.justificante"/></div>
-
-                                        <!-- Tiene justificante creado -->
-                                        <c:if test="${justificante != null}">
-                                            <div class="text-center">
-                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="goTo('${justificante.url}')"><span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span> <fmt:message key="registro.detalle.descargar"/></button>
-                                            </div>
-
-                                        </c:if>
-                                        <!-- No tiene justificante creado -->
-                                        <c:if test="${justificante == null}">
-                                            <p class="text-center"><fmt:message key="registro.justificante.vacio"/></p>
-                                        </c:if>
                                 </div>
                             </div>
                         </div>
