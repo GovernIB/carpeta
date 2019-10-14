@@ -74,22 +74,6 @@
     <!-- Pie -->
     <tiles:insertAttribute name="pie" />
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#dataTable_paginate').DataTable({
-                "order": [[ 1, "desc" ]],
-                "language": {
-                    <c:if test="${pageContext.response.locale.language == 'ca'}">
-                        "url": "<c:url value="/static/i18n/Catalan.json"/>"
-                    </c:if>
-                    <c:if test="${pageContext.response.locale.language == 'es'}">
-                        "url": "<c:url value="/static/i18n/Spanish.json"/>"
-                    </c:if>
-                }
-            });
-        } );
-    </script>
-
 <%--    <script type="text/javascript">--%>
 <%--        breadcrumbs(valoresMiga);--%>
 <%--    </script>--%>

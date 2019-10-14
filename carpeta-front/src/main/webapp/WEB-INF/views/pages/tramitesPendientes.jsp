@@ -17,8 +17,7 @@
                 <thead class="table-success">
                     <tr>
                         <th><fmt:message key="tramite.tramite"/></th>
-                        <%--<th><fmt:message key="tramite.id"/></th>--%>
-                        <th><fmt:message key="tramite.fecha"/></th>
+                        <th><fmt:message key="tramite.fecha.inicio"/></th>
                         <th><fmt:message key="tramite.acceso"/></th>
                     </tr>
                 </thead>
@@ -26,7 +25,6 @@
                     <c:forEach items="${tramites}" var="tramite" varStatus="index">
                         <tr class="clickable-row" data-target="_blank" data-href="<c:url value="/tramite/sistra${tramite.sistra}/${tramite.idSesionTramitacion}"/>">
                             <td>${tramite.descripcionTramite}</td>
-                            <%--<td>${tramite.idTramite}</td>--%>
                             <td><fmt:formatDate value="${tramite.fechaInicio}" pattern="dd/MM/yyyy HH:mm"/></td>
                             <td><fmt:formatDate value="${tramite.fechaUltimoAcceso}" pattern="dd/MM/yyyy HH:mm"/></td>
                         </tr>
@@ -36,4 +34,20 @@
 
         </div>
     </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#dataTable_paginate').DataTable({
+                "language": {
+                    <c:if test="${pageContext.response.locale.language == 'ca'}">
+                    "url": "<c:url value="/static/i18n/Catalan.json"/>"
+                    </c:if>
+                    <c:if test="${pageContext.response.locale.language == 'es'}">
+                    "url": "<c:url value="/static/i18n/Spanish.json"/>"
+                    </c:if>
+                }
+            });
+        } );
+    </script>
+
 </c:if>

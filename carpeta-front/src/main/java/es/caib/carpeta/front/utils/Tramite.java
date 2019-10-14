@@ -2,7 +2,7 @@ package es.caib.carpeta.front.utils;
 
 import java.util.Date;
 
-public class Tramite {
+public class Tramite implements Comparable<Tramite>{
 
     private String idTramite;
     private String idSesionTramitacion;
@@ -68,5 +68,13 @@ public class Tramite {
 
     public void setFechaUltimoAcceso(Date fechaUltimoAcceso) {
         this.fechaUltimoAcceso = fechaUltimoAcceso;
+    }
+
+    @Override
+    public int compareTo(Tramite t) {
+        if (getFechaInicio() == null || t.getFechaInicio() == null) {
+            return 0;
+        }
+        return getFechaInicio().compareTo(t.getFechaInicio());
     }
 }
