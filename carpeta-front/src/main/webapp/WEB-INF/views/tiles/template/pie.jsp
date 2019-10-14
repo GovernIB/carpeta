@@ -22,7 +22,7 @@
             <ul class="list-unstyled d-inline-flex">
 
                     <li>
-                        <a class="iconoRedes" href="http://www.google.es/?youtube" class="botonRed logo-youtube" title="YouTube">
+                        <a class="iconoRedes" href="https://www.youtube.com/user/CanalIllesBalears" class="botonRed logo-youtube" title="YouTube">
                             <svg viewBox="0 0 90 90" xml:space="preserve">
                                 <title>YouTube</title>
                                             <g>
@@ -55,7 +55,7 @@
                             <span class="d-none">YouTube</span>
                         </a>
 
-                        <a class="iconoRedes" href="http://www.google.es/?instagram" class="botonRed logo-instagram" title="Instagram">
+                        <a class="iconoRedes" href="https://www.instagram.com/goib" class="botonRed logo-instagram" title="Instagram">
                             <svg viewBox="0 0 169.063 169.063" xml:space="preserve">
                                 <title>Instagram</title>
                                             <g>
@@ -77,7 +77,7 @@
 
 
                     <li class="pl-1">
-                        <a class="iconoRedes" href="http://www.google.es/?twitter" class="botonRed logo-twitter">
+                        <a class="iconoRedes" href="http://www.twitter.com/goib" class="botonRed logo-twitter">
                             <svg viewBox="0 0 430.117 430.117" xml:space="preserve" >
                                 <title>Twitter</title>
                                             <g>
