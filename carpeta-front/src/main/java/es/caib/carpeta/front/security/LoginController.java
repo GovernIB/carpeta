@@ -42,6 +42,7 @@ public class LoginController {
     @Value("${es.caib.carpeta.loginib.entidad}")
     private String entidad;
 
+
     @RequestMapping(value="/login")
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 

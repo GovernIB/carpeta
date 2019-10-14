@@ -25,7 +25,7 @@ public class InicioControllerTests {
 
     @Test
     public void testHandleRequestView() {
-        ModelAndView modelAndView = inicioController.inicio(null,null);
+        ModelAndView modelAndView = inicioController.inicio(null);
 
         assertEquals("inicio", modelAndView.getViewName());
         assertNotNull(modelAndView.getModel());
