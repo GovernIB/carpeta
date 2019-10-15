@@ -14,7 +14,7 @@
 
         <div class="card-body">
 
-            <p class="card-text mb-5"><spring:message code="menu.lorem"/></p>
+            <p class="card-text mb-5"><spring:message code="registro.descripcion"/></p>
 
             <div class="table-responsive">
                 <table id="dataTable_paginate" class="table table-striped table-bordered table-hover" style="width:100%">

@@ -23,7 +23,7 @@
                         <span class="oi oi-document imagenMenu" title="<fmt:message key="menu.tramites"/>" alt="<fmt:message key="menu.tramites"/>" aria-hidden="true"></span>
                         <div class="tituloMenu"><fmt:message key="menu.tramites"/></div>
                         <div class="text">
-                            <span><fmt:message key="menu.lorem"/></span>
+                            <span><spring:message code="tramite.descripcion.corta"/></span>
                         </div>
                     </button>
                 </div>
@@ -34,7 +34,7 @@
                         <span class="oi oi-book imagenMenu" title="<fmt:message key="menu.registros"/>" alt="<fmt:message key="menu.registros"/>" aria-hidden="true"></span>
                         <div class="tituloMenu"><fmt:message key="menu.registros"/></div>
                         <div class="text">
-                            <span><fmt:message key="menu.lorem"/></span>
+                            <span><spring:message code="registro.descripcion.corta"/></span>
                         </div>
                     </button>
                 </div>

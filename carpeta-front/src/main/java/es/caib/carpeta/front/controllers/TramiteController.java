@@ -12,7 +12,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,16 +33,16 @@ public class TramiteController {
     @Autowired
     Sistra1Service sistra1Service;
 
-    @RequestMapping(value = { "/list"}, method = RequestMethod.GET)
+   /* @RequestMapping(value = { "/list"}, method = RequestMethod.GET)
     public ModelAndView tramites(ModelMap model, Authentication authentication) {
 
         ModelAndView mav = new ModelAndView("tramites");
 
         return mav;
-    }
+    }*/
 
 
-    @RequestMapping(value = { "/pendientes"}, method = RequestMethod.GET)
+    @RequestMapping(value = { "/list"}, method = RequestMethod.GET)
     public ModelAndView pendientes(Authentication authentication) {
 
         ModelAndView mav = new ModelAndView("tramitesPendientes");
