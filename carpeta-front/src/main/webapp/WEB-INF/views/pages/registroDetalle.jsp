@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="/WEB-INF/views/includes.jsp"%>
 
 <%--Miga de pan--%>
@@ -27,12 +28,12 @@
 
                 <div class="col-5">
                     <!-- Información Registro -->
-                    <div class="card border-left-primary shadow py-2 mb-3">
+                    <div class="card border-left-carpeta shadow py-2 mb-3">
 
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-                                    <div class="font-weight-bold text-primary text-uppercase mb-3 text-center"><fmt:message key="registro.tipo.${asiento.tipoRegistro}"/></div>
+                                    <div class="font-weight-bold verde text-uppercase mb-3 text-center"><fmt:message key="registro.tipo.${asiento.tipoRegistro}"/></div>
 
                                     <dl class="row">
                                         <dt class="col-sm-3"><fmt:message key="registro.detalle.fecha"/></dt>
@@ -106,11 +107,11 @@
                     </div>
 
                     <!-- Justificante -->
-                    <div class="card border-left-danger shadow py-2 mb-3">
+                    <div class="card border-left-carpeta shadow py-2 mb-3">
                         <div class="card-body">
                             <div class="row no-gutters">
                                 <div class="col mr-2">
-                                    <div class="font-weight-bold text-danger text-uppercase mb-3 text-center"><fmt:message key="registro.detalle.justificante"/></div>
+                                    <div class="font-weight-bold verde text-uppercase mb-3 text-center"><fmt:message key="registro.detalle.justificante"/></div>
 
                                     <!-- Tiene justificante creado -->
                                     <c:if test="${justificante != null}">
@@ -132,11 +133,11 @@
                 <div class="col-7">
 
                     <!-- Interesados -->
-                    <div class="card border-left-warning shadow py-2 mb-3">
+                    <div class="card border-left-carpeta shadow py-2 mb-3">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-                                    <div class="font-weight-bold text-warning text-uppercase mb-3 text-center"><fmt:message key="registro.detalle.interesados"/></div>
+                                    <div class="font-weight-bold verde text-uppercase mb-3 text-center"><fmt:message key="registro.detalle.interesados"/></div>
                                     <div class="row no-gutters align-items-center">
 
                                         <table class="table table-hover">
@@ -157,6 +158,14 @@
                                                         <td>${interesado.interesado.documento}</td>
                                                         <td><fmt:message key="interesado.tipo.${interesado.interesado.tipoInteresado}"/></td>
                                                     </tr>
+                                                    <c:if test="${interesado.representante != null}">
+                                                        <tr>
+                                                            <td><span class="oi oi-chevron-right" title="<spring:message key="registro.detalle.representante"/>" aria-hidden="true"></span></td>
+                                                            <td>${interesado.representante.nombre} ${interesado.representante.apellido1} ${interesado.representante.apellido2}</td>
+                                                            <td>${interesado.representante.documento}</td>
+                                                            <td><fmt:message key="interesado.tipo.${interesado.representante.tipoInteresado}"/></td>
+                                                        </tr>
+                                                    </c:if>
                                                 </c:forEach>
                                             </tbody>
                                         </table>
@@ -168,11 +177,11 @@
                     </div>
 
                     <!-- Anexos -->
-                    <div class="card border-left-success shadow py-2 mb-3">
+                    <div class="card border-left-carpeta shadow py-2 mb-3">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-                                    <div class="font-weight-bold text-success text-uppercase mb-3 text-center"><fmt:message key="registro.detalle.anexos"/></div>
+                                    <div class="font-weight-bold verde text-uppercase mb-3 text-center"><fmt:message key="registro.detalle.anexos"/></div>
 
                                     <!-- No hay anexos -->
                                     <c:if test="${empty asiento.anexos}">
@@ -221,18 +230,18 @@
 
                     <!-- Expone - Solicita -->
                     <c:if test="${not empty asiento.expone || not empty asiento.solicita}">
-                        <div class="card border-left-info shadow py-2 mb-3">
+                        <div class="card border-left-carpeta shadow py-2 mb-3">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
 
                                         <c:if test="${not empty asiento.expone}">
-                                            <div class="font-weight-bold text-info text-uppercase mb-3 text-center"><fmt:message key="registro.detalle.expone"/></div>
+                                            <div class="font-weight-bold verde text-uppercase mb-3 text-center"><fmt:message key="registro.detalle.expone"/></div>
                                             <div class="row no-gutters text-justify mb-4">${asiento.expone}</div>
                                         </c:if>
 
                                         <c:if test="${not empty asiento.solicita}">
-                                            <div class="font-weight-bold text-info text-uppercase mb-3 text-center"><fmt:message key="registro.detalle.solicita"/></div>
+                                            <div class="font-weight-bold verde text-uppercase mb-3 text-center"><fmt:message key="registro.detalle.solicita"/></div>
                                             <div class="row no-gutters text-justify">${asiento.solicita}</div>
                                         </c:if>
                                     </div>

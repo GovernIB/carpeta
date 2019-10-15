@@ -77,8 +77,6 @@ public class RegWeb3ServiceImpl implements RegWeb3Service{
 
             AsientoRegistralWs asiento = api.obtenerAsientoCiudadano(REGWEB3_ENTIDAD, documento, numeroRegistroFormateado);
 
-            log.info("Resumen asiento: " + asiento.getResumen());
-
             return asiento;
 
         } catch (MalformedURLException e) {

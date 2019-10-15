@@ -345,20 +345,7 @@ a.linkPie:active {
 .verde{
 	color: #4dba79;
 }
-.cajaRegistro{
-	border-left: .25rem solid #5BC0DE!important;
-}
-.cajaTramite{
-	border-left: .25rem solid #5CB85C!important;
-}
-.infoList{
-	text-align: left;
-	padding-left: 5%;
-}
-.listVerde{
-	text-align: left;
-	padding-left: 0;
-}
+
 .mt-20{
 	margin-top: 20px !important;
 }
@@ -376,6 +363,9 @@ a.linkPie:active {
 }
 .border-left-danger {
 	border-left: .25rem solid #e74a3b!important;
+}
+.border-left-carpeta {
+	border-left: .25rem solid #4dba79!important;
 }
 .dadesRegistre {
 	list-style: none;
@@ -535,21 +525,6 @@ a.iconoRedes {
 .desactivado{
 	cursor: not-allowed !important;
 }
-
-/* Tabla */
-.tablaCarpeta{
-	margin-bottom: 0rem !important;
-}
-.cabeceraTabla{
-	background-color: #FFF;
-}
-.sinBorde{
-	border: none;
-}
-.bodyTabla{
-
-}
-/* FIN Tabla */
 
 .botonMovil{
 	position: absolute;
