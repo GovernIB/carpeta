@@ -46,7 +46,7 @@
         $(document).ready(function() {
             $.fn.dataTable.moment('D/MM/YYY HH:mm');
             $('#dataTable_paginate').DataTable({
-                "order": [[ 1, "asc" ]],
+                "order": [[ 1, "desc" ]],
                 "language": {
                     <c:if test="${pageContext.response.locale.language == 'ca'}">
                     "url": "<c:url value="/static/i18n/Catalan.json"/>"
