@@ -1,4 +1,3 @@
-<%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="/WEB-INF/views/includes.jsp"%>
 
 <%--Miga de pan--%>
@@ -160,7 +159,7 @@
                                                     </tr>
                                                     <c:if test="${interesado.representante != null}">
                                                         <tr>
-                                                            <td><span class="oi oi-chevron-right" title="<spring:message key="registro.detalle.representante"/>" aria-hidden="true"></span></td>
+                                                            <td><span class="oi oi-chevron-right" title="<spring:message code="registro.detalle.representante"/>" aria-hidden="true"></span></td>
                                                             <td>${interesado.representante.nombre} ${interesado.representante.apellido1} ${interesado.representante.apellido2}</td>
                                                             <td>${interesado.representante.documento}</td>
                                                             <td><fmt:message key="interesado.tipo.${interesado.representante.tipoInteresado}"/></td>

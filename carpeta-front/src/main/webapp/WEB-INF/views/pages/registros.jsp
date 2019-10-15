@@ -13,6 +13,9 @@
         <h5 class="card-title border-bottom verde"><fmt:message key="registro.listado"/></h5>
 
         <div class="card-body">
+
+            <p class="card-text mb-5"><spring:message code="menu.lorem"/></p>
+
             <div class="table-responsive">
                 <table id="dataTable_paginate" class="table table-striped table-bordered table-hover" style="width:100%">
                     <thead class="table-success">

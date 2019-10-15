@@ -1,4 +1,3 @@
-<%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file="/WEB-INF/views/includes.jsp"%>
 <!DOCTYPE html>
@@ -13,7 +12,7 @@
     <meta name="_csrf" content="">
     <meta name="_csrf_header" content="">
 
-    <title><spring:message key="carpeta.titulo"/></title>
+    <title><spring:message code="carpeta.titulo"/></title>
 
     <script src="<c:url value="/static/js/jquery-3.2.1.min.js"/>"></script>
     <%--<script src="<c:url value="/static/js/tether.min.js"/>"></script>--%>
