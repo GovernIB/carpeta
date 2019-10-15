@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@include file="/WEB-INF/views/includes.jsp"%>
 <!DOCTYPE html>
@@ -12,14 +13,14 @@
     <meta name="_csrf" content="">
     <meta name="_csrf_header" content="">
 
-    <title>GOIB - Carpeta Ciudadana</title>
-
-    <!-- jQuery library -->
+    <title><spring:message key="carpeta.titulo"/></title>
 
     <script src="<c:url value="/static/js/jquery-3.2.1.min.js"/>"></script>
-    <script src="<c:url value="/static/js/tether.min.js"/>"></script>
+    <%--<script src="<c:url value="/static/js/tether.min.js"/>"></script>--%>
     <script src="<c:url value="/static/js/bootstrap.min.js"/>"></script>
     <script src="<c:url value="/static/js/datatables.min.js"/>"></script>
+    <script src="<c:url value="/static/js/moment.min.js"/>"></script>
+    <script src="<c:url value="/static/js/datetime-moment.js"/>"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="<c:url value="/static/js/ie10-viewport-bug-workaround.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/static/js/carpeta.js"/>"></script>
