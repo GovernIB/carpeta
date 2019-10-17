@@ -1,5 +1,7 @@
 package es.caib.carpeta.front.form;
 
+import es.caib.carpeta.core.utils.DateUtils;
+
 import java.util.Date;
 
 public class FechaBusqueda {
@@ -8,7 +10,7 @@ public class FechaBusqueda {
     private Date fechaFin;
 
     public FechaBusqueda() {
-        fechaInicio = new Date();
+        fechaInicio = DateUtils.sumarRestarDiasFecha(new Date(), -30);
         fechaFin = new Date();
     }
 
