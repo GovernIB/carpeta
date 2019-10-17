@@ -20,20 +20,10 @@ public class TramitesCiudadano {
         if(sistra2 != null && !sistra2.isEmpty()){
            convertirTramitesSistra2(sistra2);
         }
-        System.out.println("Antes ordenar");
-        for (Tramite tramite : tramites) {
-            System.out.println(tramite.getIdTramite() + " - " + tramite.getFechaInicio());
-        }
 
         //tramites.sort(Comparator.comparing(Tramite::getFechaInicio));
         Collections.reverse(tramites);
-        //Collections.reverse(tramites);
 
-        System.out.println("    ");
-        System.out.println("Despues ordenar");
-        for (Tramite tramite : tramites) {
-            System.out.println(tramite.getIdTramite() + " - " + tramite.getFechaInicio());
-        }
     }
 
     public List<Tramite> getTramites() {

@@ -4,6 +4,7 @@ import es.caib.carpeta.core.service.Sistra1Service;
 import es.caib.carpeta.core.service.Sistra2Service;
 import es.caib.carpeta.core.utils.StringUtils;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
+import es.caib.carpeta.front.form.FechaBusqueda;
 import es.caib.carpeta.front.utils.TramitesCiudadano;
 import es.caib.sistramit.rest.api.externa.v1.RTramitePersistencia;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitePersistente;
@@ -12,6 +13,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -43,15 +46,23 @@ public class TramiteController {
 
 
     @RequestMapping(value = { "/list"}, method = RequestMethod.GET)
-    public ModelAndView pendientes(Authentication authentication) {
+    public ModelAndView tramitesPendientes(Authentication authentication) {
 
-        ModelAndView mav = new ModelAndView("tramitesPendientes");
+        return new ModelAndView("tramitesPendientes", "fechaBusqueda", new FechaBusqueda());
+
+    }
+
+    @RequestMapping(value = { "/list"}, method = RequestMethod.POST)
+    public String tramitesPendientes(@ModelAttribute("fechaBusqueda") FechaBusqueda fechaBusqueda, Authentication authentication, ModelMap model) {
 
         UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();
 
         try {
-            List<RTramitePersistencia> tramitesSistra2 = sistra2Service.obtenerTramites(usuarioAutenticado.getUsuarioClave().getNif());
-            List<TramitePersistente> tramitesSistra1 = sistra1Service.obtenerTramites(usuarioAutenticado.getUsuarioClave().getNif());
+
+            List<RTramitePersistencia> tramitesSistra2 = sistra2Service.obtenerTramites(usuarioAutenticado.getUsuarioClave().getNif(),
+                    fechaBusqueda.getFechaInicio(), fechaBusqueda.getFechaFin());
+            List<TramitePersistente> tramitesSistra1 = sistra1Service.obtenerTramites(usuarioAutenticado.getUsuarioClave().getNif(),
+                    fechaBusqueda.getFechaInicio(), fechaBusqueda.getFechaFin());
 
             if(tramitesSistra2 != null){
                 log.info("Tramites Sistra2: " + tramitesSistra2.size());
@@ -59,29 +70,17 @@ public class TramiteController {
 
             if(tramitesSistra1 != null){
                 log.info("Tramites Sistra1: " + tramitesSistra1.size());
-
-                for (TramitePersistente tramitePersistente : tramitesSistra1) {
-                    log.info("");
-                    log.info("---------------");
-                    log.info("getIdTramite: " + tramitePersistente.getIdTramite());
-                    log.info("getDescripcionTramite: " + tramitePersistente.getDescripcionTramite());
-                    log.info("getIdSesionTramitacion: " + tramitePersistente.getIdSesionTramitacion());
-                    log.info("getFechaInicio: " + tramitePersistente.getFechaInicio());
-                    log.info("getFechaUltimoAcceso: " + tramitePersistente.getFechaUltimoAcceso());
-                    log.info("---------------");
-                    log.info("");
-                }
             }
 
             TramitesCiudadano tramites = new TramitesCiudadano(tramitesSistra2, tramitesSistra1);
             log.info("Tramites totales: " + tramites.getTramites().size());
-            mav.addObject("tramites", tramites.getTramites());
+            model.addAttribute("tramites", tramites.getTramites());
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return mav;
+        return "tramitesPendientes";
     }
 
     @RequestMapping(value = { "/sistra2/{id}"}, method = RequestMethod.GET)

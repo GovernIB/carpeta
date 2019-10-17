@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.format.FormatterRegistry;
+import org.springframework.format.datetime.DateFormatter;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
@@ -63,6 +65,14 @@ public class CarpetaFrontConfig extends WebMvcConfigurerAdapter {
         LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
         interceptor.setParamName("idioma");
         return interceptor;
+    }
+
+    @Override
+    public void addFormatters (FormatterRegistry registry) {
+        DateFormatter dateFormatter = new DateFormatter();
+        dateFormatter.setPattern("dd/MM/yyyy");
+
+        registry.addFormatter(dateFormatter);
     }
 
     @Override

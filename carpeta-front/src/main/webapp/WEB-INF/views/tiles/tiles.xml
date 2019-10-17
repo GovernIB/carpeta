@@ -48,6 +48,12 @@
         <put-attribute name="body" value="/WEB-INF/views/pages/tramitesPendientes.jsp" />
     </definition>
 
+    <!-- Elección de notificaciones -->
+    <definition name="notificaciones" extends="base-definition">
+        <put-attribute name="title" value="Llista de notificacions" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/notificaciones.jsp" />
+    </definition>
+
     <!-- Llista de registres Page -->
     <definition name="registros" extends="base-definition">
         <put-attribute name="title" value="Llistat de registres" />

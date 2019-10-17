@@ -1,6 +1,5 @@
 package es.caib.carpeta.core.service;
 
-import es.caib.carpeta.core.utils.DateUtils;
 import es.caib.carpeta.core.utils.UsuarioClave;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitePersistente;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitesPersistentes;
@@ -30,15 +29,15 @@ public class Sistra1ServiceImpl implements Sistra1Service{
     @Value("${es.caib.carpeta.sistra1.pass}")   private String SISTRA1_PASS;
 
     @Override
-    public List<TramitePersistente> obtenerTramites(String documento) throws Exception{
+    public List<TramitePersistente> obtenerTramites(String documento, Date fechaInicio, Date fechaFin) throws Exception{
 
         BackofficeFacade backofficeFacade =  getBackofficeFacade();
 
         GregorianCalendar inicio = new GregorianCalendar();
-        inicio.setTime((DateUtils.sumarRestarDiasFecha(new Date(), -120)));
+        inicio.setTime(fechaInicio);
 
         GregorianCalendar hoy = new GregorianCalendar();
-        hoy.setTime(new Date());
+        hoy.setTime(fechaFin);
 
         // Utilizamos el dni que Indra usa para las pruebas
         /*if(StringUtils.isEmpty(documento)){

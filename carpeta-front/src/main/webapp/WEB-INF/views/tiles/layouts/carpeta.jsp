@@ -15,11 +15,12 @@
     <title><spring:message code="carpeta.titulo"/></title>
 
     <script src="<c:url value="/static/js/jquery-3.2.1.min.js"/>"></script>
-    <%--<script src="<c:url value="/static/js/tether.min.js"/>"></script>--%>
     <script src="<c:url value="/static/js/bootstrap.min.js"/>"></script>
     <script src="<c:url value="/static/js/datatables.min.js"/>"></script>
-    <script src="<c:url value="/static/js/moment.min.js"/>"></script>
+    <script src="<c:url value="/static/js/moment-with-locales.min.js"/>"></script>
     <script src="<c:url value="/static/js/datetime-moment.js"/>"></script>
+    <script src="<c:url value="/static/js/bootstrap-datetimepicker.js"/>"></script>
+    <%--<script src="<c:url value="/static/js/bootstrap-datetimepicker.ca.js"/>"></script>--%>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="<c:url value="/static/js/ie10-viewport-bug-workaround.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/static/js/carpeta.js"/>"></script>
@@ -29,6 +30,7 @@
     <link href="<c:url value="/static/css/carpeta.css"/>" rel="stylesheet">
     <link href="<c:url value="/static/css/open-iconic-bootstrap.css"/>" rel="stylesheet">
     <link href="<c:url value="/static/css/datatables.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/static/css/bootstrap-datetimepicker.min.css"/>" rel="stylesheet">
 
 </head>
 

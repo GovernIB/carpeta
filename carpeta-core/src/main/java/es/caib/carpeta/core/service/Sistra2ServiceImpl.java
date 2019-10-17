@@ -1,6 +1,5 @@
 package es.caib.carpeta.core.service;
 
-import es.caib.carpeta.core.utils.DateUtils;
 import es.caib.carpeta.core.utils.UsuarioClave;
 import es.caib.sistramit.rest.api.externa.v1.RFiltroTramitePersistencia;
 import es.caib.sistramit.rest.api.externa.v1.RInfoTicketAcceso;
@@ -36,15 +35,17 @@ public class Sistra2ServiceImpl implements Sistra2Service{
     private final static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @Override
-    public List<RTramitePersistencia> obtenerTramites(String documento) throws Exception {
+    public List<RTramitePersistencia> obtenerTramites(String documento, Date fechaInicio, Date fechaFin) throws Exception {
 
         final RestTemplate restTemplate = getRestTemplate();
 
         List<RTramitePersistencia> resultado = null;
 
         final RFiltroTramitePersistencia filtroPer = new RFiltroTramitePersistencia();
-        filtroPer.setFechaDesde(DateUtils.sumarRestarDiasFecha(new Date(), -90));
-        filtroPer.setFechaHasta(DateUtils.sumarRestarDiasFecha(new Date(), 0));
+        //filtroPer.setFechaDesde(DateUtils.sumarRestarDiasFecha(new Date(), -90));
+        //filtroPer.setFechaHasta(DateUtils.sumarRestarDiasFecha(new Date(), 0));
+        filtroPer.setFechaDesde(fechaInicio);
+        filtroPer.setFechaHasta(fechaFin);
         filtroPer.setNif(documento);
 
         final HttpHeaders headers = new HttpHeaders();

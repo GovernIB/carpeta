@@ -9,6 +9,7 @@
                 <div class="dropdown-menu dropdown-menu-right marg0" aria-labelledby="menu">
                     <a class="dropdown-item movil" href="<c:url value="/tramite/list"/>"><span class="oi oi-document" title="" aria-hidden="true"></span> <fmt:message key="menu.tramites"/></a>
                     <a class="dropdown-item movil" href="<c:url value="/registro/list"/>"><span class="oi oi-book" title="" aria-hidden="true"></span> <fmt:message key="menu.registros"/></a>
+                    <a class="dropdown-item movil" href="<c:url value="/notificacion/list"/>"><span class="oi oi-envelope-closed" title="" aria-hidden="true"></span> <fmt:message key="menu.notificaciones"/></a>
                 </div>
             </li>
         </sec:authorize>

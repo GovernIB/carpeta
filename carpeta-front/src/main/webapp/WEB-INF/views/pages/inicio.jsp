@@ -23,7 +23,7 @@
                         <span class="oi oi-document imagenMenu" title="<fmt:message key="menu.tramites"/>" alt="<fmt:message key="menu.tramites"/>" aria-hidden="true"></span>
                         <div class="tituloMenu"><fmt:message key="menu.tramites"/></div>
                         <div class="text">
-                            <span><spring:message code="tramite.descripcion.corta"/></span>
+                            <span><spring:message code="tramite.descripcion"/></span>
                         </div>
                     </button>
                 </div>
@@ -39,6 +39,20 @@
                     </button>
                 </div>
 
+                <!-- Notificaciones -->
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <button class="box-part text-center" onclick="goTo('<c:url value="/notificacion/list"/>')">
+                        <span class="oi oi-envelope-closed imagenMenu" title="<fmt:message key="menu.notificaciones"/>" alt="<fmt:message key="menu.notificaciones"/>" aria-hidden="true"></span>
+                        <div class="tituloMenu"><fmt:message key="menu.notificaciones"/></div>
+                        <div class="text">
+                            <span><spring:message code="menu.lorem"/></span>
+                        </div>
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="row">
                 <!-- Mis Datos -->
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <button class="box-part text-center" onclick="goTo('<c:url value="/datosPersonales"/>')">
@@ -49,8 +63,8 @@
                         </div>
                     </button>
                 </div>
-
             </div>
+
 
         </div>
 

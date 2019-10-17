@@ -153,14 +153,28 @@
 
                                                     <tr>
                                                         <td>${status.count}</td>
-                                                        <td>${interesado.interesado.nombre} ${interesado.interesado.apellido1} ${interesado.interesado.apellido2}</td>
+                                                        <td>
+                                                            <c:if test="${interesado.interesado.tipoInteresado == 2}">
+                                                                ${interesado.interesado.nombre} ${interesado.interesado.apellido1} ${interesado.interesado.apellido2}
+                                                            </c:if>
+                                                            <c:if test="${interesado.interesado.tipoInteresado != 2}">
+                                                                ${interesado.interesado.razonSocial}
+                                                            </c:if>
+                                                        </td>
                                                         <td>${interesado.interesado.documento}</td>
                                                         <td><fmt:message key="interesado.tipo.${interesado.interesado.tipoInteresado}"/></td>
                                                     </tr>
                                                     <c:if test="${interesado.representante != null}">
                                                         <tr>
-                                                            <td><span class="oi oi-chevron-right" title="<spring:message code="registro.detalle.representante"/>" aria-hidden="true"></span></td>
-                                                            <td>${interesado.representante.nombre} ${interesado.representante.apellido1} ${interesado.representante.apellido2}</td>
+                                                            <td class="font-weight-bold">R</td>
+                                                            <td>
+                                                                <c:if test="${interesado.interesado.tipoInteresado == 2}">
+                                                                    ${interesado.interesado.nombre} ${interesado.interesado.apellido1} ${interesado.interesado.apellido2}
+                                                                </c:if>
+                                                                <c:if test="${interesado.interesado.tipoInteresado != 2}">
+                                                                    ${interesado.interesado.razonSocial}
+                                                                </c:if>
+                                                            </td>
                                                             <td>${interesado.representante.documento}</td>
                                                             <td><fmt:message key="interesado.tipo.${interesado.representante.tipoInteresado}"/></td>
                                                         </tr>

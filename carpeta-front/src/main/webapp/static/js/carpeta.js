@@ -33,6 +33,33 @@ function goToWindow(url) {
 	window.open(url);
 }
 
+/**  DATEPICKER **/
+$(function() {
+	$('#fechaInicio').datetimepicker({
+		locale: 'ca',
+		format: 'D/MM/YYYY',
+		icons: {
+			time: 'oi oi-clock',
+			date: 'oi oi-calendar',
+			up: 'oi oi-chevron-top',
+			down: 'oi oi-chevron-bottom'
+		}
+	});
+});
+
+$(function() {
+	$('#fechaFin').datetimepicker({
+		locale: 'ca',
+		format: 'D/MM/YYYY',
+		icons: {
+			time: 'oi oi-clock',
+			date: 'oi oi-calendar',
+			up: 'oi oi-chevron-top',
+			down: 'oi oi-chevron-bottom'
+		}
+	});
+});
+
 // /** Breadcrumb **/
 // function breadcrumbs(valoresMiga) {
 // 	alert(Object.values(valoresMiga));
