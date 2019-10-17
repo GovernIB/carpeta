@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -48,7 +49,11 @@ public class TramiteController {
     @RequestMapping(value = { "/list"}, method = RequestMethod.GET)
     public ModelAndView tramitesPendientes(Authentication authentication) {
 
-        return new ModelAndView("tramitesPendientes", "fechaBusqueda", new FechaBusqueda());
+        ModelAndView mav = new ModelAndView("tramitesPendientes", "fechaBusqueda", new FechaBusqueda());
+
+        mav.addObject("breadcrumb", Arrays.asList("inicio", "tramite/list"));
+
+        return mav;
 
     }
 
@@ -79,6 +84,8 @@ public class TramiteController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        model.addAttribute("breadcrumb", Arrays.asList("inicio", "tramite/list"));
 
         return "tramitesPendientes";
     }

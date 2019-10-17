@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Arrays;
+
 
 @Controller
 @RequestMapping(value = "/notificacion")
@@ -20,7 +22,11 @@ public class NotificacionController {
     @RequestMapping(value = { "/list"}, method = RequestMethod.GET)
     public ModelAndView tramites(ModelMap model, Authentication authentication) {
 
-        return new ModelAndView("notificaciones");
+        ModelAndView mav = new ModelAndView("notificaciones");
+
+        mav.addObject("breadcrumb", Arrays.asList("inicio", "notificacion"));
+
+        return mav;
     }
 
 

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 public class InicioController {
@@ -19,7 +21,11 @@ public class InicioController {
 
         log.info("Dentro de inicioController");
 
-        return new ModelAndView("inicio");
+        ModelAndView mav = new ModelAndView("inicio");
+
+        mav.addObject("breadcrumb", Arrays.asList("inicio"));
+
+        return mav;
 
     }
 
@@ -28,6 +34,8 @@ public class InicioController {
 
         ModelAndView mav = new ModelAndView("accesibilidad");
 
+        mav.addObject("breadcrumb", Arrays.asList("inicio", "accesibilidad"));
+
         return mav;
     }
 
@@ -35,6 +43,8 @@ public class InicioController {
     public ModelAndView datosPersonales(HttpServletRequest request) {
 
         ModelAndView mav = new ModelAndView("datosPersonales");
+
+        mav.addObject("breadcrumb", Arrays.asList("inicio", "datosPersonales"));
 
         return mav;
     }

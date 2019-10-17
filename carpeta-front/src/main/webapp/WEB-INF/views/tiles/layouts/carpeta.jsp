@@ -76,10 +76,6 @@
     <!-- Pie -->
     <tiles:insertAttribute name="pie" />
 
-<%--    <script type="text/javascript">--%>
-<%--        breadcrumbs(valoresMiga);--%>
-<%--    </script>--%>
-
 </body>
 
 </html>

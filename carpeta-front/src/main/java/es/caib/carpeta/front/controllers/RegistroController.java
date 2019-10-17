@@ -17,6 +17,7 @@ import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 
 @Controller
 @RequestMapping(value = "/registro")
@@ -54,6 +55,8 @@ public class RegistroController {
             e.printStackTrace();
         }
 
+        mav.addObject("breadcrumb", Arrays.asList("inicio", "registro/list"));
+
         return mav;
     }
 
@@ -88,6 +91,8 @@ public class RegistroController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        mav.addObject("breadcrumb", Arrays.asList("inicio", "registro/list", "registro/detalle"));
 
         return mav;
     }

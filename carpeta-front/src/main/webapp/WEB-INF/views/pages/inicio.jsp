@@ -20,8 +20,8 @@
                 <!-- Trámites no acabados -->
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <button class="box-part text-center" onclick="goTo('<c:url value="/tramite/list"/>')">
-                        <span class="oi oi-document imagenMenu" title="<fmt:message key="menu.tramites"/>" alt="<fmt:message key="menu.tramites"/>" aria-hidden="true"></span>
-                        <div class="tituloMenu"><fmt:message key="menu.tramites"/></div>
+                        <span class="oi oi-document imagenMenu" title="<fmt:message key="menu.tramite/list"/>" alt="<fmt:message key="menu.tramite/list"/>" aria-hidden="true"></span>
+                        <div class="tituloMenu"><fmt:message key="menu.tramite/list"/></div>
                         <div class="text">
                             <span><spring:message code="tramite.descripcion"/></span>
                         </div>
@@ -31,8 +31,8 @@
                 <!-- Registros -->
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <button class="box-part text-center" onclick="goTo('<c:url value="/registro/list"/>')">
-                        <span class="oi oi-book imagenMenu" title="<fmt:message key="menu.registros"/>" alt="<fmt:message key="menu.registros"/>" aria-hidden="true"></span>
-                        <div class="tituloMenu"><fmt:message key="menu.registros"/></div>
+                        <span class="oi oi-book imagenMenu" title="<fmt:message key="menu.registro/list"/>" alt="<fmt:message key="menu.registro/list"/>" aria-hidden="true"></span>
+                        <div class="tituloMenu"><fmt:message key="menu.registro/list"/></div>
                         <div class="text">
                             <span><spring:message code="registro.descripcion.corta"/></span>
                         </div>
@@ -56,8 +56,8 @@
                 <!-- Mis Datos -->
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <button class="box-part text-center" onclick="goTo('<c:url value="/datosPersonales"/>')">
-                        <span class="oi oi-folder imagenMenu" title="<fmt:message key="menu.datos.personales"/>" alt="<fmt:message key="menu.datos.personales"/>" aria-hidden="true"></span>
-                        <div class="tituloMenu"><fmt:message key="menu.datos.personales"/></div>
+                        <span class="oi oi-folder imagenMenu" title="<fmt:message key="menu.datosPersonales"/>" alt="<fmt:message key="menu.datosPersonales"/>" aria-hidden="true"></span>
+                        <div class="tituloMenu"><fmt:message key="menu.datosPersonales"/></div>
                         <div class="text">
                             <span><fmt:message key="menu.lorem"/></span>
                         </div>

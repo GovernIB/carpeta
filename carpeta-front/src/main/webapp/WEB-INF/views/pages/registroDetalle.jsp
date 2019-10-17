@@ -1,14 +1,5 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
 
-<%--Miga de pan--%>
-<%--<nav aria-label="breadcrumb">--%>
-<%--    <ol class="breadcrumb">--%>
-<%--        <li class="breadcrumb-item"><a href="<c:url value="/"/>"><fmt:message key="menu.inicio"/></a></li>--%>
-<%--        <li class="breadcrumb-item"><a href="<c:url value="/registros"/>"><fmt:message key="menu.registros"/></a></li>--%>
-<%--        <li class="breadcrumb-item active" aria-current="page"><fmt:message key="registro.registro"/> ${asiento.numeroRegistroFormateado}</li>--%>
-<%--    </ol>--%>
-<%--</nav>--%>
-
 <c:if test="${empty asiento}">
     <div class="card mb-12 border-0">
         <h5 class="card-title">No ha sido posible obtener el Registro</h5>
@@ -25,7 +16,7 @@
 
             <div class="row">
 
-                <div class="col-5">
+                <div class="pri-col-deta-reg">
                     <!-- Información Registro -->
                     <div class="card border-left-carpeta shadow py-2 mb-3">
 
@@ -129,7 +120,7 @@
                     </div>
                 </div>
 
-                <div class="col-7">
+                <div class="seg-col-deta-reg">
 
                     <!-- Interesados -->
                     <div class="card border-left-carpeta shadow py-2 mb-3">
@@ -270,5 +261,3 @@
     </div>
 
 </c:if>
-
-

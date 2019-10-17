@@ -59,18 +59,3 @@ $(function() {
 		}
 	});
 });
-
-// /** Breadcrumb **/
-// function breadcrumbs(valoresMiga) {
-// 	alert(Object.values(valoresMiga));
-// 	var numValores = Object.values(valoresMiga[0]);
-// 	alert(numValores * 2 + 1);
-// 	var contenidoMiga = "";
-// 	for (var i = 1; i < (numValores * 2 + 1); i+=2){
-// 		alert(i);
-// 		contenidoMiga = contenidoMiga + "<li class=\"breadcrumb-item active\"><a href=\""+valoresMiga[i]+"\">" + valoresMiga[i+1] + "</a></li>";
-// 		alert(contenidoMiga);
-// 	}
-//
-// 	$("#migaPan").html(contenidoMiga);
-// }

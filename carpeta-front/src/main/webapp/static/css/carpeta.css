@@ -33,6 +33,17 @@ a:hover{
 	content: ">" !important;
 }
 
+.pri-col-deta-reg{
+	flex: 0 0 41.666667%;
+	max-width: 41.666667%;
+	padding: 0.5rem;
+}
+.seg-col-deta-reg{
+	flex: 0 0 58.333333%;
+	max-width: 58.333333%;
+	padding: 0.5rem;
+}
+
 /*Se aplican cuando el width es menor que 992px*/
 @media only screen and (max-width: 992px) {
 .botonCorto{
@@ -40,6 +51,19 @@ a:hover{
 }
 .movil{
 	float: left !important;
+}
+.container {
+	max-width: initial !important;
+}
+.pri-col-deta-reg{
+	flex: 100% !important;
+	max-width: 100% !important;
+	padding: 0 !important;
+}
+.seg-col-deta-reg{
+	flex: 100% !important;
+	max-width: 100% !important;
+	padding: 0 !important;
 }
 }
 
@@ -90,6 +114,9 @@ a.dropdown-item.movil:hover {
 .p-3carpeta {
 	padding-bottom: 1rem !important;
 }
+.marg0 {
+	border: 0px !important;
+}
 }
 
 /*Se aplican cuando el width es menor que 480*/
@@ -115,7 +142,7 @@ body {
 	display: list-item !important;
 }
 .breadcrumb{
-	padding: .35rem 1rem !important;
+	padding: 1rem 1rem 0.5rem 1rem !important;
 	border-radius: 0 !important;
 }
 .containerPie{
@@ -230,7 +257,7 @@ body {
 }
 .marg0{
 	margin: 0px;
-	border: 0px solid !important;
+	border: 1px solid #B9B9B9;
 }
 .icono{
 	opacity: 0.5;
@@ -475,7 +502,7 @@ a.iconoRedes {
 	border-radius:0;
 	padding:30px 10px;
 	margin:20px 0px;
-	border: thin outset;
+	/*border: thin outset;*/
 	font: normal 100% 'Bariol Regular', Arial, Helvetica, sans-serif;
 	color: #333;
 }

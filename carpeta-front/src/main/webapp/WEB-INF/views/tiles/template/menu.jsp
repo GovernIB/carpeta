@@ -7,8 +7,8 @@
             <li class="nav-item dropdown colorVerde">
                 <a class="nav-link dropdown movil" href="#" id="menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="oi oi-caret-bottom float-right flechaSubmenu" title="" aria-hidden="true"></span><p class="mb-0 float-right botonCorto"><fmt:message key="menu.gestiones"/></p><span class="oi oi-briefcase" title="<fmt:message key="menu.gestiones.img"/>" aria-hidden="true"></span></a>
                 <div class="dropdown-menu dropdown-menu-right marg0" aria-labelledby="menu">
-                    <a class="dropdown-item movil" href="<c:url value="/tramite/list"/>"><span class="oi oi-document" title="" aria-hidden="true"></span> <fmt:message key="menu.tramites"/></a>
-                    <a class="dropdown-item movil" href="<c:url value="/registro/list"/>"><span class="oi oi-book" title="" aria-hidden="true"></span> <fmt:message key="menu.registros"/></a>
+                    <a class="dropdown-item movil" href="<c:url value="/tramite/list"/>"><span class="oi oi-document" title="" aria-hidden="true"></span> <fmt:message key="menu.tramite/list"/></a>
+                    <a class="dropdown-item movil" href="<c:url value="/registro/list"/>"><span class="oi oi-book" title="" aria-hidden="true"></span> <fmt:message key="menu.registro/list"/></a>
                     <a class="dropdown-item movil" href="<c:url value="/notificacion/list"/>"><span class="oi oi-envelope-closed" title="" aria-hidden="true"></span> <fmt:message key="menu.notificaciones"/></a>
                 </div>
             </li>
