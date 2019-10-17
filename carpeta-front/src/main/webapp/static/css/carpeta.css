@@ -502,7 +502,7 @@ a.iconoRedes {
 	border-radius:0;
 	padding:30px 10px;
 	margin:20px 0px;
-	/*border: thin outset;*/
+	border: thin outset;
 	font: normal 100% 'Bariol Regular', Arial, Helvetica, sans-serif;
 	color: #333;
 }
