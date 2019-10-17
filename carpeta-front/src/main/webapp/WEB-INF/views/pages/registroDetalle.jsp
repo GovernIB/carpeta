@@ -168,11 +168,11 @@
                                                         <tr>
                                                             <td class="font-weight-bold">R</td>
                                                             <td>
-                                                                <c:if test="${interesado.interesado.tipoInteresado == 2}">
-                                                                    ${interesado.interesado.nombre} ${interesado.interesado.apellido1} ${interesado.interesado.apellido2}
+                                                                <c:if test="${interesado.representante.tipoInteresado == 2}">
+                                                                    ${interesado.representante.nombre} ${interesado.representante.apellido1} ${interesado.representante.apellido2}
                                                                 </c:if>
-                                                                <c:if test="${interesado.interesado.tipoInteresado != 2}">
-                                                                    ${interesado.interesado.razonSocial}
+                                                                <c:if test="${interesado.representante.tipoInteresado != 2}">
+                                                                    ${interesado.representante.razonSocial}
                                                                 </c:if>
                                                             </td>
                                                             <td>${interesado.representante.documento}</td>
