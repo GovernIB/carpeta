@@ -127,7 +127,7 @@
         <dependency>
             <groupId>es.caib.loginib</groupId>
             <artifactId>loginib-rest-api</artifactId>
-            <version>1.0.0</version>
+            <version>${loginib.version}</version>
         </dependency>
 
         <!--Sistramit-->

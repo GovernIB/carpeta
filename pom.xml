@@ -11,6 +11,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <loginib.version>1.0.1</loginib.version>
         <spring.version>4.3.9.RELEASE</spring.version>
         <spring-security.version>4.2.3.RELEASE</spring-security.version>
         <apache.tiles.version>3.0.8</apache.tiles.version>
