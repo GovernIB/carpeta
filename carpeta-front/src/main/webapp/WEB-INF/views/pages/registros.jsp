@@ -1,9 +1,9 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
 
 <c:if test="${empty registros}">
-    <nav>
-        <p><fmt:message key="registro.vacio"/></p>
-    </nav>
+    <div class="alert alert-secondary mt-5" role="alert">
+        <fmt:message key="registro.vacio"/>
+    </div>
 </c:if>
 
 <c:if test="${not empty registros}">
