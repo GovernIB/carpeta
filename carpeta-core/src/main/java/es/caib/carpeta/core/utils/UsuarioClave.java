@@ -50,6 +50,16 @@ public class UsuarioClave {
 
     public String getNombreCompleto(){
 
-        return apellido1 +" "+ apellido2 +", "+ nombre;
+        String nombreCompleto = "";
+
+        if(StringUtils.isNotEmpty(getApellido1()) && StringUtils.isNotEmpty(getApellido2())){
+            nombreCompleto += getApellido1() + " " + getApellido2()+", ";
+        }else if(StringUtils.isNotEmpty(getApellido1())){
+            nombreCompleto += getApellido1() + ", ";
+        }
+
+        nombreCompleto += getNombre();
+
+        return nombreCompleto;
     }
 }

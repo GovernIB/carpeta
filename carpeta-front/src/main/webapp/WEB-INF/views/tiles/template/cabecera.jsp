@@ -21,11 +21,6 @@
                     </c:if>
                 </span>
             </div>
-<%--No ha de sortir a la capsalera, ha de sortir a dades personals--%>
-<%--            <div>--%>
-<%--                <strong class="subtitulo">DNI:</strong>--%>
-<%--                <span class="subtitulo"><sec:authentication property="principal.usuarioClave.nif" /></span>--%>
-<%--            </div>--%>
         </sec:authorize>
 
     </div>
