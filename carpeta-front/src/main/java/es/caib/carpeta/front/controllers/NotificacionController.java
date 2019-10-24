@@ -18,6 +18,7 @@ import java.util.Arrays;
 public class NotificacionController {
 
     @Value("${es.caib.carpeta.zonaper.url}")    private String ZONAPER_URL;
+    @Value("${es.caib.carpeta.notificaciones.url}")    private String NOTIFICACIONES_URL;
 
     protected final Log log = LogFactory.getLog(getClass());
 
@@ -28,6 +29,7 @@ public class NotificacionController {
         ModelAndView mav = new ModelAndView("notificaciones");
 
         mav.addObject("zonaperUrl", ZONAPER_URL);
+        mav.addObject("notificacionesUrl", NOTIFICACIONES_URL);
         mav.addObject("breadcrumb", Arrays.asList("inicio", "notificacion"));
 
         return mav;
