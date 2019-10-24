@@ -510,14 +510,9 @@ a.iconoRedes {
 	cursor: pointer;
 	background: #b9b9b9;
 }
-.box-part:focus{
-	text-decoration:none;
-}
-.box-part:active{
-	text-decoration:none;
-}
-.box-part:visited{
-	text-decoration:none !important;
+.box-part:focus, .box-part:active, .box-part:visited{
+	outline: none !important;
+	box-shadow: none;
 }
 .text{
 	margin:20px 0px;
@@ -539,6 +534,7 @@ a.iconoRedes {
 	font: normal 100% 'Bariol Regular', Arial, Helvetica, sans-serif;
 	color: #4dba79;
 	font-size: 1.5em;
+	display: flow-root;
 }
 .accBoton{
 	padding-top: 10px !important;
