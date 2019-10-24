@@ -3,14 +3,14 @@
 
 <div class="card mb-12 border-0">
     <h5 class="card-title border-bottom verde"><fmt:message key="tramite.listado"/></h5>
-    <div class="card-body">
+    <div class="card-body tablaRegistros">
         <p class="card-text mb-5"><spring:message code="tramite.descripcion"/></p>
 
         <form:form method="post" modelAttribute="fechaBusqueda">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <form:label path="fechaInicio" placeholder="dd/mm/yyyy">Fecha inicio</form:label>
+                        <form:label path="fechaInicio" placeholder="dd/mm/yyyy"><spring:message code="carpeta.fecha.inicio"/></form:label>
                         <div class="input-group">
                             <form:input path="fechaInicio" maxlength="10" cssClass="form-control form-control-sm"/><span class="input-group-text"><span class="oi oi-calendar"></span></span>
                         </div>
@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <form:label path="fechaFin" placeholder="dd/mm/yyyy">Fecha fin</form:label>
+                        <form:label path="fechaFin" placeholder="dd/mm/yyyy"><spring:message code="carpeta.fecha.fin"/></form:label>
                         <div class="input-group">
                             <form:input path="fechaFin" maxlength="10" cssClass="form-control form-control-sm"/><span class="input-group-text"><span class="oi oi-calendar"></span></span >
                         </div>

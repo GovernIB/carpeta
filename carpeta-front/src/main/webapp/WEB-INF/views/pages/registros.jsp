@@ -12,7 +12,7 @@
     <div class="card mb-12 border-0">
         <h5 class="card-title border-bottom verde"><fmt:message key="registro.listado"/></h5>
 
-        <div class="card-body">
+        <div class="card-body tablaRegistros">
 
             <p class="card-text mb-5"><spring:message code="registro.descripcion"/></p>
 
@@ -22,17 +22,17 @@
                         <tr>
                             <th scope="col"><fmt:message key="registro.numero"/></th>
                             <th scope="col"><fmt:message key="registro.fecha"/></th>
-                            <th scope="col"><fmt:message key="registro.oficina"/></th>
+                            <th scope="col" class="quitarMovil"><fmt:message key="registro.oficina"/></th>
                             <th scope="col"><fmt:message key="registro.organismo"/></th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach items="${registros}" var="asiento" varStatus="index">
 
-                            <tr class="clickable-row" data-target="_blank" data-href="<c:url value="/registro/detalle/${asiento.numeroRegistroFormateado}"/>">
+                            <tr class="clickable-row" data-target="" data-href="<c:url value="/registro/detalle/${asiento.numeroRegistroFormateado}"/>">
                                 <td>${asiento.numeroRegistroFormateado}</td>
                                 <td><fmt:formatDate value="${asiento.fechaRegistro}" pattern="dd/MM/yyyy HH:mm"/></td>
-                                <td>${asiento.entidadRegistralInicioDenominacion}</td>
+                                <td class="quitarMovil">${asiento.entidadRegistralInicioDenominacion}</td>
                                 <td>${asiento.unidadTramitacionDestinoDenominacion}</td>
                             </tr>
 

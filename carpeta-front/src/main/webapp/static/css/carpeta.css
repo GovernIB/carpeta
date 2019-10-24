@@ -65,6 +65,9 @@ a:hover{
 	max-width: 100% !important;
 	padding: 0 !important;
 }
+.quitarTablet{
+	display: none;
+}
 }
 
 /*Se aplican cuando el width es menor que 768*/
@@ -116,6 +119,20 @@ a.dropdown-item.movil:hover {
 }
 .marg0 {
 	border: 0px !important;
+}
+.tablaRegistros {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+div.dataTables_wrapper div.dataTables_info {
+	white-space: pre-line !important;
+	padding-bottom: 1rem !important;
+}
+thead>tr>th.sorting {
+	padding-right: 0 !important;
+}
+.subtituloMay {
+	font-size: 0.8rem !important;
 }
 }
 

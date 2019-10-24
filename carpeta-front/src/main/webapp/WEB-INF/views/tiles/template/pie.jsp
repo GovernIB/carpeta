@@ -18,7 +18,7 @@
 
         <div class="col-4 text-right d-inline-flex justify-content-end elementPieResponsive">
 
-            <p class="mr-3 pt-2 quitarMovil"><fmt:message key="pie.seguir"/></p>
+            <p class="mr-3 pt-2 quitarTablet"><fmt:message key="pie.seguir"/></p>
             <ul class="list-unstyled d-inline-flex">
 
                     <li>

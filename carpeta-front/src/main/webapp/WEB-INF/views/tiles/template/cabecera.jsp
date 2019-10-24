@@ -14,7 +14,7 @@
         <sec:authorize access="isAuthenticated()">
             <sec:authentication var="user" property="principal.usuarioClave.nombreCompleto" />
             <div>
-                <strong class="subtitulo"><fmt:message key="menu.usuario"/></strong>
+                <strong class="subtitulo quitarMovil"><fmt:message key="menu.usuario"/></strong>
                 <span class="subtituloMay">
                     <c:if test="${user != null}">
                         <sec:authentication property="principal.usuarioClave.nombreCompleto" />

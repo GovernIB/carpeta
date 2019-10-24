@@ -2,7 +2,8 @@
 jQuery(document).ready(function($) {
 	$(".clickable-row").click(function() {
 		var $th = $(this);
-		window.open($th.attr('data-href'), $th.attr('data-target'));
+		// window.open($th.attr('data-href'), $th.attr('data-target'));
+		goTo($th.attr('data-href'));
 	});
 });
 
@@ -37,12 +38,19 @@ function goToWindow(url) {
 $(function() {
 	$('#fechaInicio').datetimepicker({
 		locale: 'ca',
+		showClose: false,
 		format: 'D/MM/YYYY',
 		icons: {
 			time: 'oi oi-clock',
 			date: 'oi oi-calendar',
-			up: 'oi oi-chevron-top',
-			down: 'oi oi-chevron-bottom'
+			previous: 'oi oi-chevron-left',
+			next: 'oi oi-chevron-right',
+			close: 'oi oi-circle-x'
+		},
+		tooltips: {
+			selectMonth: 'Selecciona mes',
+			prevMonth: 'Mes anterior',
+			nextMonth: 'Mes següent'
 		}
 	});
 });
@@ -50,12 +58,19 @@ $(function() {
 $(function() {
 	$('#fechaFin').datetimepicker({
 		locale: 'ca',
+		showClose: false,
 		format: 'D/MM/YYYY',
 		icons: {
 			time: 'oi oi-clock',
 			date: 'oi oi-calendar',
-			up: 'oi oi-chevron-top',
-			down: 'oi oi-chevron-bottom'
+			previous: 'oi oi-chevron-left',
+			next: 'oi oi-chevron-right',
+			close: 'oi oi-circle-x'
+		},
+		tooltips: {
+			selectMonth: 'Selecciona mes',
+			prevMonth: 'Mes anterior',
+			nextMonth: 'Mes següent'
 		}
 	});
 });

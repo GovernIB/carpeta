@@ -5,7 +5,7 @@
 	"sEmptyTable":     "Cap dada disponible en aquesta taula",
 	"sInfo":           "Mostrant registres del _START_ al _END_ d'un total de _TOTAL_ registres",
 	"sInfoEmpty":      "Mostrant registres del 0 al 0 d'un total de 0 registres",
-	"sInfoFiltered":   "(filtrat d'un total de _MAX_ registros)",
+	"sInfoFiltered":   "(filtrat d'un total de _MAX_ registres)",
 	"sInfoPostFix":    "",
 	"sSearch":         "Cercar:",
 	"sUrl":            "",
@@ -18,7 +18,7 @@
 		"sPrevious": "Anterior"
 	},
 	"oAria": {
-		"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-		"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+		"sSortAscending":  ": Activar per a ordenar la columna de manera ascendent",
+		"sSortDescending": ": Activar per a ordenar la columna de manera descendent"
 	}
 }
