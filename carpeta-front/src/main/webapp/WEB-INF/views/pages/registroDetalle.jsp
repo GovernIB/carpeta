@@ -2,8 +2,7 @@
 
 <c:if test="${empty asiento}">
     <div class="card mb-12 border-0">
-        <div class="card-title h5">No ha sido posible obtener el Registro</div>
-
+        <div class="card-title h5"><fmt:message key="registro.detalle.error"/> ${numeroRegistro}</div>
     </div>
 </c:if>
 
@@ -195,7 +194,7 @@
                                     <c:if test="${not empty asiento.anexos}">
 
                                         <!-- Si hay anexos -->
-                                        <c:if test="${justificante == null || fn:length(asiento.anexos) >= 1}">
+                                        <c:if test="${(justificante != null && fn:length(asiento.anexos) > 1) || (justificante == null && fn:length(asiento.anexos) > 0)}">
 
                                             <table class="table table-hover">
                                                 <thead>

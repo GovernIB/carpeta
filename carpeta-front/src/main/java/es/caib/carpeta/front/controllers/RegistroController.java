@@ -67,24 +67,24 @@ public class RegistroController {
 
         String numeroRegistro = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 
-        log.info("Numero registro:" + numeroRegistro.replace("/registro/detalle/",""));
+        String numReg = numeroRegistro.replace("/registro/detalle/","");
+        log.info("Numero registro:" + numReg);
 
         UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();
 
         try {
-            AsientoRegistralWs asiento = regWeb3Service.obtenerAsientoCiudadano(usuarioAutenticado.getUsuarioClave().getNif(), numeroRegistro.replace("/registro/detalle/",""));
+            AsientoRegistralWs asiento = regWeb3Service.obtenerAsientoCiudadano(usuarioAutenticado.getUsuarioClave().getNif(), numReg);
 
             for (AnexoWs anexo : asiento.getAnexos()) {
 
-                if(anexo.getCsv() != null){ //todo Añadir campo isJustificante en AnexoWS
+                    if (anexo.getCsv() != null) { //todo Añadir campo isJustificante en AnexoWS
 
-                    mav.addObject("justificante", CONCSV_URL.concat(anexo.getCsv()));
-                }
+                        mav.addObject("justificante", CONCSV_URL.concat(anexo.getCsv()));
+                    }
 
             }
 
             //JustificanteReferenciaWs justificante = regWeb3Service.obtenerReferenciaJustificante(numeroRegistro.replace("/registro/detalle/",""));
-
             mav.addObject("asiento", asiento);
 
 
@@ -92,6 +92,7 @@ public class RegistroController {
             e.printStackTrace();
         }
 
+        mav.addObject("numeroRegistro", numReg);
         mav.addObject("breadcrumb", Arrays.asList("inicio", "registro/list", "registro/detalle"));
 
         return mav;
