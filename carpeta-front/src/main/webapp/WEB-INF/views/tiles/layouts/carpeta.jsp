@@ -1,7 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <%@include file="/WEB-INF/views/includes.jsp"%>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${pageContext.response.locale.language}"  lang="${pageContext.response.locale.language}" data-estil="pd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${pageContext.response.locale.language}" lang="${pageContext.response.locale.language}" data-estil="pd">
 <head>
     <link rel="shortcut icon" href="<c:url value="/static/img/GOIB_fav.png"/>" />
 

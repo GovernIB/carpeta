@@ -2,7 +2,7 @@
 
 <c:if test="${empty asiento}">
     <div class="card mb-12 border-0">
-        <h5 class="card-title">No ha sido posible obtener el Registro</h5>
+        <div class="card-title h5">No ha sido posible obtener el Registro</div>
 
     </div>
 </c:if>
@@ -10,7 +10,7 @@
 <c:if test="${not empty asiento}">
 
     <div class="card mb-12 border-0">
-        <h5 class="card-title border-bottom verde"><fmt:message key="registro.detalle"/> ${asiento.numeroRegistroFormateado}</h5>
+        <div class="card-title border-bottom verde h5"><fmt:message key="registro.detalle"/> ${asiento.numeroRegistroFormateado}</div>
 
         <div class="card-body">
 

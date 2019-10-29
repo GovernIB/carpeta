@@ -2,7 +2,7 @@
 
 
 <div class="card mb-12 border-0">
-    <h5 class="card-title border-bottom verde"><fmt:message key="datos.datos"/> <sec:authentication property="principal.usuarioClave.nombreCompleto" /></h5>
+    <div class="card-title border-bottom verde h5"><fmt:message key="datos.datos"/> <sec:authentication property="principal.usuarioClave.nombreCompleto" /></div>
 
     <div class="card-body">
 

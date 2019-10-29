@@ -2,7 +2,7 @@
 
 
 <div class="card mb-12 border-0">
-    <h5 class="card-title border-bottom verde"><fmt:message key="tramite.listado"/></h5>
+    <div class="card-title border-bottom verde h5"><fmt:message key="tramite.listado"/></div>
     <div class="card-body tablaRegistros">
         <p class="card-text mb-5"><spring:message code="tramite.descripcion"/></p>
 

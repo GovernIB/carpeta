@@ -10,11 +10,12 @@
 
     <!-- Lista registros -->
     <div class="card mb-12 border-0">
-        <h5 class="card-title border-bottom verde"><fmt:message key="registro.listado"/></h5>
+        <div class="card-title border-bottom verde h5"><fmt:message key="registro.listado"/></div>
 
         <div class="card-body tablaRegistros">
 
-            <p class="card-text mb-5"><spring:message code="registro.descripcion"/></p>
+            <p class="card-text"><spring:message code="registro.descripcion.1"/></p>
+            <p class="card-text mb-5"><spring:message code="registro.descripcion.2"/></p>
 
             <div class="table-responsive">
                 <table id="dataTable_paginate" class="table table-striped table-bordered table-hover" style="width:100%">
