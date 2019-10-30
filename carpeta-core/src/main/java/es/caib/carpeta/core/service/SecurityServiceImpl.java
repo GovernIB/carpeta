@@ -7,7 +7,6 @@ import es.caib.loginib.rest.api.v1.RLogoutParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -82,6 +81,7 @@ public class SecurityServiceImpl implements SecurityService{
         usuarioClave.setApellido2(datosAutenticacion.getApellido2());
         usuarioClave.setNif(datosAutenticacion.getNif());
         usuarioClave.setMetodoAutentificacion(datosAutenticacion.getMetodoAutenticacion());
+        usuarioClave.setQaa(datosAutenticacion.getQaa());
 
         return usuarioClave;
     }
