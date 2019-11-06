@@ -1,9 +1,11 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
 
 <sec:authorize access="!isAuthenticated()">
-    <div class="card mb-12 border-0">
+    <div class="card col-12 border-0">
         <span class="h5 card-title border-bottom verde"><fmt:message key="inicio.bienvenida"/></span>
+    </div>
 
+    <div class="card col-md-6 border-0 float-left">
         <p class="lh15">
             <fmt:message key="inicio.contenido.1"/>
             <ul class="lh15">
@@ -13,10 +15,36 @@
                 <li><fmt:message key="inicio.contenido.5"/></li>
             </ul>
         </p>
+
+        <p><img src="${pageContext.request.contextPath}/static/img/solicitar_clave_acceso_dgt.jpg" class="w-25" alt="Cl@ve"/></p>
+
+        <p class="lh15">
+            <fmt:message key="inicio.clave.1"/>
+            <ul class="lh15">
+                <li><fmt:message key="inicio.clave.2"/></li>
+                <li><fmt:message key="inicio.clave.3"/></li>
+                <li><fmt:message key="inicio.clave.4"/></li>
+            </ul>
+        </p>
     </div>
-    <nav>
-        <p><a href="<c:url value="/login"/>"><fmt:message key="inicio.login"/></a></p>
-    </nav>
+
+    <div class="card col-md-6 border-0 margen-left-clave">
+
+        <p class="margen-top-clave">
+            <a class="btn btn-primary carpeta-btn" href="<c:url value="/login"/>" role="button"><span class="oi oi-share" title="" aria-hidden="true"></span> <fmt:message key="inicio.login"/></a>
+        </p>
+
+        <p class="font-weight-bold"><strong><fmt:message key="inicio.problema.1"/></strong></p>
+        <p class="lh15">
+            <fmt:message key="inicio.problema.2"/>
+            <ul class="lh15">
+                <li><fmt:message key="inicio.problema.3"/> <a href="http://clave.gob.es/clave_Home/clave.html" class="btn btn-soporte pb-1" title="Cl@ve" target="_blank">Cl@ve</a></li>
+                <li><fmt:message key="inicio.problema.4"/></li>
+                <li><fmt:message key="inicio.problema.5"/> <a href="https://ssweb.seap.minhap.es/ayuda/consulta/Claveciudadanos" class="btn btn-soporte pb-1" title="<fmt:message key="inicio.problema.6"/>" target="_blank"><fmt:message key="inicio.problema.6"/></a></li>
+            </ul>
+        </p>
+
+    </div>
 </sec:authorize>
 
 <sec:authorize access="isAuthenticated()">
