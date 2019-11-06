@@ -43,6 +43,9 @@ a:hover{
 	max-width: 58.333333%;
 	padding: 0.5rem;
 }
+.lh15{
+	line-height:1.5
+}
 
 /*Se aplican cuando el width es menor que 992px*/
 @media only screen and (max-width: 992px) {

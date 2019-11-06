@@ -1,9 +1,19 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
 
 <sec:authorize access="!isAuthenticated()">
-    <nav>
-        <p><fmt:message key="inicio.contenido"/></p>
-    </nav>
+    <div class="card mb-12 border-0">
+        <span class="h5 card-title border-bottom verde"><fmt:message key="inicio.bienvenida"/></span>
+
+        <p class="lh15">
+            <fmt:message key="inicio.contenido.1"/>
+            <ul class="lh15">
+                <li><fmt:message key="inicio.contenido.2"/></li>
+                <li><fmt:message key="inicio.contenido.3"/></li>
+                <li><fmt:message key="inicio.contenido.4"/></li>
+                <li><fmt:message key="inicio.contenido.5"/></li>
+            </ul>
+        </p>
+    </div>
     <nav>
         <p><a href="<c:url value="/login"/>"><fmt:message key="inicio.login"/></a></p>
     </nav>
@@ -11,7 +21,9 @@
 
 <sec:authorize access="isAuthenticated()">
     <div class="card mb-12 border-0">
-        <span class="h5 card-title border-bottom verde"><fmt:message key="inicio.contenido"/></span>
+        <span class="h5 card-title border-bottom verde"><fmt:message key="inicio.bienvenida"/></span>
+
+        <p class="lh15"><fmt:message key="inicio.contenido.logeado"/></p>
 
         <div class="card-body">
 
@@ -43,7 +55,7 @@
                         <span class="oi oi-envelope-closed imagenMenu row" title="<fmt:message key="menu.notificaciones"/>" alt="<fmt:message key="menu.notificaciones"/>" aria-hidden="true"></span>
                         <span class="tituloMenu"><fmt:message key="menu.notificaciones"/></span>
                         <span class="text row">
-                            <span><spring:message code="menu.lorem"/></span>
+                            <span><spring:message code="notificaciones.descripcion"/></span>
                         </span>
                     </button>
                 </div>
@@ -57,7 +69,7 @@
                         <span class="oi oi-folder imagenMenu row" title="<fmt:message key="menu.datosPersonales"/>" alt="<fmt:message key="menu.datosPersonales"/>" aria-hidden="true"></span>
                         <span class="tituloMenu"><fmt:message key="menu.datosPersonales"/></span>
                         <span class="text row">
-                            <span><fmt:message key="menu.lorem"/></span>
+                            <span><fmt:message key="datos.descripcion"/></span>
                         </span>
                     </button>
                 </div>
