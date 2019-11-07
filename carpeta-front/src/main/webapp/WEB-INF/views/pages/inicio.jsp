@@ -45,6 +45,11 @@
         </p>
 
     </div>
+
+    <script type="text/javascript">
+        $("div.bg-white").css("overflow","hidden");
+    </script>
+
 </sec:authorize>
 
 <sec:authorize access="isAuthenticated()">

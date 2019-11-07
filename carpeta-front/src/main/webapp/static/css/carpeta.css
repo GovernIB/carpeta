@@ -444,7 +444,7 @@ a.linkPie:active {
 
 .bg-white {
 	background-color: #fff !important;
-	overflow: hidden;
+	/*overflow: hidden;*/
 }
 
 .clickable-row{
