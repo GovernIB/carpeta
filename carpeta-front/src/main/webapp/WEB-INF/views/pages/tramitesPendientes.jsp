@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-carpeta"><spring:message code="carpeta.buscar"/></button>
+            <button type="submit" class="btn btn-primary carpeta-btn"><spring:message code="carpeta.buscar"/></button>
         </form:form>
 
         <c:if test="${tramites != null && empty tramites}">
