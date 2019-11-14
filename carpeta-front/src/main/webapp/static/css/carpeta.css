@@ -43,6 +43,9 @@ a:hover{
 	max-width: 58.333333%;
 	padding: 0.5rem;
 }
+.lh15{
+	line-height:1.5
+}
 
 /*Se aplican cuando el width es menor que 992px*/
 @media only screen and (max-width: 992px) {
@@ -133,6 +136,12 @@ thead>tr>th.sorting {
 }
 .subtituloMay {
 	font-size: 0.8rem !important;
+}
+.margen-left-clave{
+	padding-left: 15px !important;
+}
+.margen-top-clave{
+	padding-top: 1rem !important;
 }
 }
 
@@ -435,6 +444,7 @@ a.linkPie:active {
 
 .bg-white {
 	background-color: #fff !important;
+	/*overflow: hidden;*/
 }
 
 .clickable-row{
@@ -600,4 +610,27 @@ a.iconoRedes {
 
 .minW0{
 	min-width: 0;
+}
+
+/* Botón color Carpeta */
+.btn-primary.carpeta-btn {
+	background-color: #4dba79;
+	border-color: #4dba79;
+	border: none !important;
+}
+.btn-primary.carpeta-btn:hover,
+.btn-primary.carpeta-btn:focus,
+.btn-primary.carpeta-btn:active,
+.btn-primary.carpeta-btn:visited{
+	background-color: #000 !important;
+	border: none #000 !important;
+	outline: none !important;
+	box-shadow: none !important;
+}
+
+.margen-left-clave{
+	padding-left: 3rem;
+}
+.margen-top-clave{
+	padding-top: 3rem;
 }

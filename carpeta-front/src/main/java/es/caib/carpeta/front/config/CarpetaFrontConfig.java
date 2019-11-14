@@ -63,7 +63,7 @@ public class CarpetaFrontConfig extends WebMvcConfigurerAdapter {
     @Bean(name="localeInterceptor")
     public LocaleChangeInterceptor getLocaleInterceptor(){
         LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
-        interceptor.setParamName("idioma");
+        interceptor.setParamName("lang");
         return interceptor;
     }
 

@@ -2,9 +2,11 @@
 
 
 <div class="card mb-12 border-0">
-    <h5 class="card-title border-bottom verde"><fmt:message key="tramite.listado"/></h5>
+    <div class="card-title border-bottom verde h5"><fmt:message key="tramite.listado"/></div>
+
+    <p class="card-text mb-5 lh15"><spring:message code="tramite.descripcion"/></p>
+
     <div class="card-body tablaRegistros">
-        <p class="card-text mb-5"><spring:message code="tramite.descripcion"/></p>
 
         <form:form method="post" modelAttribute="fechaBusqueda">
             <div class="row">
@@ -25,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-carpeta"><spring:message code="carpeta.buscar"/></button>
+            <button type="submit" class="btn btn-primary carpeta-btn"><spring:message code="carpeta.buscar"/></button>
         </form:form>
 
         <c:if test="${tramites != null && empty tramites}">

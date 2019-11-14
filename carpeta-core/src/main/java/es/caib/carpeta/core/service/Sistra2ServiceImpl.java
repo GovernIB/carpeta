@@ -42,8 +42,6 @@ public class Sistra2ServiceImpl implements Sistra2Service{
         List<RTramitePersistencia> resultado = null;
 
         final RFiltroTramitePersistencia filtroPer = new RFiltroTramitePersistencia();
-        //filtroPer.setFechaDesde(DateUtils.sumarRestarDiasFecha(new Date(), -90));
-        //filtroPer.setFechaHasta(DateUtils.sumarRestarDiasFecha(new Date(), 0));
         filtroPer.setFechaDesde(fechaInicio);
         filtroPer.setFechaHasta(fechaFin);
         filtroPer.setNif(documento);
@@ -59,16 +57,6 @@ public class Sistra2ServiceImpl implements Sistra2Service{
         if (response.getBody() != null) {
 
             resultado = Arrays.asList(response.getBody());
-
-           /* for (RTramitePersistencia tramitePersistencia : resultado) {
-                System.out.println("IdTramite: " + tramitePersistencia.getIdTramite());
-                System.out.println("Descripcion: " + tramitePersistencia.getDescripcionTramite());
-                System.out.println("IdSesion: " + tramitePersistencia.getIdSesionTramitacion());
-                System.out.println("Fecha inicio: " +sdf.format(tramitePersistencia.getFechaInicio()));
-                System.out.println("Fecha ultimo acceso: " + sdf.format(tramitePersistencia.getFechaUltimoAcceso()));
-                System.out.println("-------------------------------------");
-            }*/
-
         }
 
         return  resultado;
@@ -95,6 +83,7 @@ public class Sistra2ServiceImpl implements Sistra2Service{
         usuariInfo.setNif(usuario.getNif());
         usuariInfo.setAutenticacion("c");
         usuariInfo.setMetodoAutenticacion("CLAVE_CERTIFICADO");
+        usuariInfo.setQaa(usuario.getQaa());
 
         infoTicket.setUsuarioAutenticadoInfo(usuariInfo);
 

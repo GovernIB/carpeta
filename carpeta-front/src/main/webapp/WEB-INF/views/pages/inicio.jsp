@@ -1,17 +1,62 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
 
 <sec:authorize access="!isAuthenticated()">
-    <nav>
-        <p><fmt:message key="inicio.contenido"/></p>
-    </nav>
-    <nav>
-        <p><a href="<c:url value="/login"/>"><fmt:message key="inicio.login"/></a></p>
-    </nav>
+    <div class="card col-12 border-0">
+        <span class="h5 card-title border-bottom verde"><fmt:message key="inicio.bienvenida"/></span>
+    </div>
+
+    <div class="card col-md-6 border-0 float-left">
+        <p class="lh15">
+            <fmt:message key="inicio.contenido.1"/>
+            <ul class="lh15">
+                <li><fmt:message key="inicio.contenido.2"/></li>
+                <li><fmt:message key="inicio.contenido.3"/></li>
+                <li><fmt:message key="inicio.contenido.4"/></li>
+                <li><fmt:message key="inicio.contenido.5"/></li>
+            </ul>
+        </p>
+
+        <p><img src="${pageContext.request.contextPath}/static/img/solicitar_clave_acceso_dgt.jpg" class="w-25" alt="Cl@ve"/></p>
+
+        <p class="lh15">
+            <fmt:message key="inicio.clave.1"/>
+            <ul class="lh15">
+                <li><fmt:message key="inicio.clave.2"/></li>
+                <li><fmt:message key="inicio.clave.3"/></li>
+                <li><fmt:message key="inicio.clave.4"/></li>
+            </ul>
+        </p>
+    </div>
+
+    <div class="card col-md-6 border-0 margen-left-clave">
+
+        <p class="margen-top-clave">
+            <a class="btn btn-primary carpeta-btn" href="<c:url value="/login"/>" role="button"><span class="oi oi-share" title="" aria-hidden="true"></span> <fmt:message key="inicio.login"/></a>
+        </p>
+
+        <p class="font-weight-bold"><strong><fmt:message key="inicio.problema.1"/></strong></p>
+        <p class="lh15">
+            <fmt:message key="inicio.problema.2"/>
+            <ul class="lh15">
+                <li><fmt:message key="inicio.problema.3"/> <a href="http://clave.gob.es/clave_Home/clave.html" class="btn btn-soporte pb-1" title="Cl@ve" target="_blank">Cl@ve</a></li>
+                <li><fmt:message key="inicio.problema.4"/></li>
+                <li><fmt:message key="inicio.problema.5"/> <a href="https://ssweb.seap.minhap.es/ayuda/consulta/Claveciudadanos" class="btn btn-soporte pb-1" title="<fmt:message key="inicio.problema.6"/>" target="_blank"><fmt:message key="inicio.problema.6"/></a></li>
+            </ul>
+        </p>
+
+    </div>
+
+    <script type="text/javascript">
+        $("div.bg-white").css("overflow","hidden");
+    </script>
+
 </sec:authorize>
 
 <sec:authorize access="isAuthenticated()">
     <div class="card mb-12 border-0">
-        <span class="h5 card-title border-bottom verde"><fmt:message key="inicio.contenido"/></span>
+        <span class="h5 card-title border-bottom verde"><fmt:message key="inicio.bienvenida"/></span>
+
+        <p class="lh15"><fmt:message key="inicio.contenido.logeado"/></p>
 
         <div class="card-body">
 
@@ -43,7 +88,7 @@
                         <span class="oi oi-envelope-closed imagenMenu row" title="<fmt:message key="menu.notificaciones"/>" alt="<fmt:message key="menu.notificaciones"/>" aria-hidden="true"></span>
                         <span class="tituloMenu"><fmt:message key="menu.notificaciones"/></span>
                         <span class="text row">
-                            <span><spring:message code="menu.lorem"/></span>
+                            <span><spring:message code="notificaciones.descripcion"/></span>
                         </span>
                     </button>
                 </div>
@@ -57,7 +102,7 @@
                         <span class="oi oi-folder imagenMenu row" title="<fmt:message key="menu.datosPersonales"/>" alt="<fmt:message key="menu.datosPersonales"/>" aria-hidden="true"></span>
                         <span class="tituloMenu"><fmt:message key="menu.datosPersonales"/></span>
                         <span class="text row">
-                            <span><fmt:message key="menu.lorem"/></span>
+                            <span><fmt:message key="datos.descripcion"/></span>
                         </span>
                     </button>
                 </div>

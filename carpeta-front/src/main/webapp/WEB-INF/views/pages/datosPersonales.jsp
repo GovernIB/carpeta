@@ -2,7 +2,10 @@
 
 
 <div class="card mb-12 border-0">
-    <h5 class="card-title border-bottom verde"><fmt:message key="datos.datos"/> <sec:authentication property="principal.usuarioClave.nombreCompleto" /></h5>
+
+    <span class="h5 card-title border-bottom verde"><fmt:message key="datos.datos"/> <sec:authentication property="principal.usuarioClave.nombreCompleto" /></span>
+
+    <p class="lh15"><fmt:message key="datos.descripcion"/></p>
 
     <div class="card-body">
 
@@ -12,7 +15,6 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-<%--                            <div class="font-weight-bold text-success text-uppercase mb-3 text-center"><fmt:message key="menu.datos.personales"/></div>--%>
                             <dl class="row">
                                 <dt class="col-sm-4"><fmt:message key="usuario.nombre"/></dt>
                                 <dd class="col-sm-8"><sec:authentication property="principal.usuarioClave.nombre" /></dd>

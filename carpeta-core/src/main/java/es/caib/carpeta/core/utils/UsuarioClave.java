@@ -7,6 +7,7 @@ public class UsuarioClave {
     private String apellido2;
     private String nif;
     private String metodoAutentificacion;
+    private String qaa;
 
     public String getNombre() {
         return nombre;
@@ -46,6 +47,14 @@ public class UsuarioClave {
 
     public void setMetodoAutentificacion(String metodoAutentificacion) {
         this.metodoAutentificacion = metodoAutentificacion;
+    }
+
+    public String getQaa() {
+        return qaa;
+    }
+
+    public void setQaa(String qaa) {
+        this.qaa = qaa;
     }
 
     public String getNombreCompleto(){
