@@ -14,7 +14,7 @@
                     <div class="form-group">
                         <form:label path="fechaInicio" placeholder="dd/mm/yyyy"><spring:message code="carpeta.fecha.inicio"/></form:label>
                         <div class="input-group">
-                            <form:input path="fechaInicio" maxlength="10" cssClass="form-control form-control-sm"/><span class="input-group-text"><span class="oi oi-calendar"></span></span>
+                            <form:input path="fechaInicio" maxlength="10" cssClass="form-control form-control-sm" required="required"/><span class="input-group-text"><span class="oi oi-calendar"></span></span>
                         </div>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <form:label path="fechaFin" placeholder="dd/mm/yyyy"><spring:message code="carpeta.fecha.fin"/></form:label>
                         <div class="input-group">
-                            <form:input path="fechaFin" maxlength="10" cssClass="form-control form-control-sm"/><span class="input-group-text"><span class="oi oi-calendar"></span></span >
+                            <form:input path="fechaFin" maxlength="10" cssClass="form-control form-control-sm" required="required"/><span class="input-group-text"><span class="oi oi-calendar"></span></span >
                         </div>
                     </div>
                 </div>
