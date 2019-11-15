@@ -8,7 +8,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
-import java.util.List;
 
 @Controller
 public class InicioController {
@@ -18,8 +17,6 @@ public class InicioController {
 
     @RequestMapping(value="/inicio")
     public ModelAndView inicio(HttpServletRequest request) {
-
-        log.info("Dentro de inicioController");
 
         ModelAndView mav = new ModelAndView("inicio");
 

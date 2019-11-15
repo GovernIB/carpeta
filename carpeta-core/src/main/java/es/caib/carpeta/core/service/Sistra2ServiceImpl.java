@@ -1,5 +1,6 @@
 package es.caib.carpeta.core.service;
 
+import es.caib.carpeta.core.utils.DateUtils;
 import es.caib.carpeta.core.utils.UsuarioClave;
 import es.caib.sistramit.rest.api.externa.v1.RFiltroTramitePersistencia;
 import es.caib.sistramit.rest.api.externa.v1.RInfoTicketAcceso;
@@ -43,7 +44,7 @@ public class Sistra2ServiceImpl implements Sistra2Service{
 
         final RFiltroTramitePersistencia filtroPer = new RFiltroTramitePersistencia();
         filtroPer.setFechaDesde(fechaInicio);
-        filtroPer.setFechaHasta(fechaFin);
+        filtroPer.setFechaHasta(DateUtils.sumarRestarDiasFecha(fechaFin, 1));
         filtroPer.setNif(documento);
 
         final HttpHeaders headers = new HttpHeaders();
