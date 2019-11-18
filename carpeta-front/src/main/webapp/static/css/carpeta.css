@@ -28,6 +28,7 @@ a:hover{
 .breadcrumb{
     padding-left: 45px;
 	background-color: #ffffff;
+    margin-bottom: 0px;
 }
 .breadcrumb-item+.breadcrumb-item::before {
 	content: ">" !important;
@@ -576,6 +577,7 @@ a.iconoRedes {
 }
 .migaDiv{
 	width: 100%;
+    border-bottom: 2px solid #EAEAEA;
 }
 
 .desactivado{
