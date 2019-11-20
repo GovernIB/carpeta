@@ -1,6 +1,7 @@
 package es.caib.carpeta.front.controllers;
 
 import es.caib.carpeta.core.service.RegWeb3Service;
+import es.caib.carpeta.core.utils.StringUtils;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.regweb3.ws.api.v3.AnexoWs;
 import es.caib.regweb3.ws.api.v3.AsientoRegistralWs;
@@ -75,18 +76,17 @@ public class RegistroController {
         try {
             AsientoRegistralWs asiento = regWeb3Service.obtenerAsientoCiudadano(usuarioAutenticado.getUsuarioClave().getNif(), numReg);
 
-            for (AnexoWs anexo : asiento.getAnexos()) {
-
-                    if (anexo.getCsv() != null) { //todo Añadir campo isJustificante en AnexoWS
-
+            if(asiento != null){
+                log.info("Anexos size:" + asiento.getAnexos().size());
+                log.info("" );
+                for (AnexoWs anexo : asiento.getAnexos()) {
+                    log.info("Anexo titulo:" + anexo.getTitulo());
+                    if (anexo.isJustificante() && StringUtils.isNotEmpty(anexo.getCsv())) {
                         mav.addObject("justificante", CONCSV_URL.concat(anexo.getCsv()));
                     }
-
+                }
+                mav.addObject("asiento", asiento);
             }
-
-            //JustificanteReferenciaWs justificante = regWeb3Service.obtenerReferenciaJustificante(numeroRegistro.replace("/registro/detalle/",""));
-            mav.addObject("asiento", asiento);
-
 
         } catch (Exception e) {
             e.printStackTrace();

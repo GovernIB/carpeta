@@ -2,7 +2,14 @@
 
 <c:if test="${empty asiento}">
     <div class="card mb-12 border-0">
-        <div class="card-title h5"><fmt:message key="registro.detalle.error"/> ${numeroRegistro}</div>
+        <div class="card-title border-bottom verde h5"><fmt:message key="registro.detalle"/> ${numeroRegistro}</div>
+
+        <div class="card-body">
+            <div class="alert alert-danger" role="alert">
+                <fmt:message key="registro.detalle.error"/>
+            </div>
+        </div>
+
     </div>
 </c:if>
 
@@ -202,7 +209,6 @@
                                                         <th scope="col">#</th>
                                                         <th scope="col"><fmt:message key="anexo.titulo"/></th>
                                                         <th scope="col"><fmt:message key="anexo.mime"/></th>
-                                                        <th scope="col"><fmt:message key="anexo.csv"/></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -212,7 +218,6 @@
                                                                 <td>${status.count}</td>
                                                                 <td>${anexo.titulo}</td>
                                                                 <td>${anexo.tipoMIMEFicheroAnexado}</td>
-                                                                <td>${anexo.csv}</td>
                                                             </tr>
                                                         </c:if>
                                                     </c:forEach>

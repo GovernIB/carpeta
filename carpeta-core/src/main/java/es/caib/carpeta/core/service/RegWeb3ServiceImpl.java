@@ -38,10 +38,6 @@ public class RegWeb3ServiceImpl implements RegWeb3Service{
 
             log.info("Buscando registros de: " + documento + " en " + REGWEB3_ENTIDAD);
 
-           /* if(StringUtils.isEmpty(documento)){
-                documento="43146650F";
-            }*/
-
             ResultadoBusquedaWs asientos = api.obtenerAsientosCiudadano(REGWEB3_ENTIDAD, documento, pageNumber);
 
             log.info("Total asientos: " + asientos.getTotalResults());
@@ -78,38 +74,6 @@ public class RegWeb3ServiceImpl implements RegWeb3Service{
             AsientoRegistralWs asiento = api.obtenerAsientoCiudadano(REGWEB3_ENTIDAD, documento, numeroRegistroFormateado);
 
             return asiento;
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (WsI18NException e) {
-            e.printStackTrace();
-        } catch (WsValidationException e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    /**
-     *
-     * @param numeroRegistroFormateado
-     * @return
-     * @throws Exception
-     */
-    public JustificanteReferenciaWs obtenerReferenciaJustificante(String numeroRegistroFormateado) throws Exception{
-
-        try {
-
-            RegWebAsientoRegistralWs api = getRegWebAsientoRegistralWsApi();
-
-            log.info("Obteniendo justificante: " + numeroRegistroFormateado + " en " + REGWEB3_ENTIDAD);
-
-            JustificanteReferenciaWs justificante = api.obtenerReferenciaJustificante(REGWEB3_ENTIDAD, numeroRegistroFormateado);
-
-            log.info("Justificnte url: " + justificante.getUrl());
-            log.info("Justificnte csv: " + justificante.getCsv());
-
-            return justificante;
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
