@@ -622,8 +622,7 @@ a.iconoRedes {
 }
 .btn-primary.carpeta-btn:hover,
 .btn-primary.carpeta-btn:focus,
-.btn-primary.carpeta-btn:active,
-.btn-primary.carpeta-btn:visited{
+.btn-primary.carpeta-btn:active{
 	background-color: #000 !important;
 	border: none #000 !important;
 	outline: none !important;
