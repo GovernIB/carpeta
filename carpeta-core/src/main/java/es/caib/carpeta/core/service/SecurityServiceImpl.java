@@ -4,6 +4,7 @@ import es.caib.carpeta.core.utils.UsuarioClave;
 import es.caib.loginib.rest.api.v1.RDatosAutenticacion;
 import es.caib.loginib.rest.api.v1.RLoginParams;
 import es.caib.loginib.rest.api.v1.RLogoutParams;
+import org.fundaciobit.plugins.utils.XTrustProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,12 +29,11 @@ public class SecurityServiceImpl implements SecurityService{
     @Value("${es.caib.carpeta.loginib.url_callback_logout}") private String URL_CALLBACK_LOGOUT;
     @Value("${es.caib.carpeta.loginib.idioma}") private String IDIOMA;
     @Value("${es.caib.carpeta.loginib.nivel_qaa}") private String NIVELL_QAA;
-    @Value("${es.caib.carpeta.loginib.user}") private String USER;
-    @Value("${es.caib.carpeta.loginib.pass}") private String PASS;
-    @Value("${es.caib.carpeta.loginib.url}") private String URL;
+    @Value("${es.caib.carpeta.loginib.user}") private String LOGINIB_USER;
+    @Value("${es.caib.carpeta.loginib.pass}") private String LOGINIB_PASS;
+    @Value("${es.caib.carpeta.loginib.url}") private String LOGINIB_URL;
 
     public String iniciarSesionAutentificacion() throws Exception {
-
 
         final RLoginParams param = new RLoginParams();
         param.setAplicacion(APLICACIO_CODI);
@@ -45,15 +45,14 @@ public class SecurityServiceImpl implements SecurityService{
         param.setQaa(Integer.parseInt(NIVELL_QAA));
         param.setMetodosAutenticacion(METODES_AUTENTICACIO);
         param.setAplicacion("CARPETA");
-        final RestTemplate restTemplate = new RestTemplate();
 
-        restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(USER, PASS));
+        final RestTemplate restTemplate = getLoginIbRestTemplate();
 
         final HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         final HttpEntity<RLoginParams> peticion = new HttpEntity<>(param, headers);
-        final ResponseEntity<String> responseTramite = restTemplate.postForEntity(URL + "/login",
+        final ResponseEntity<String> responseTramite = restTemplate.postForEntity(LOGINIB_URL + "/login",
                 peticion, String.class);
 
         log.info("URL: " + responseTramite.getBody());
@@ -64,15 +63,10 @@ public class SecurityServiceImpl implements SecurityService{
     @Override
     public UsuarioClave validarTicketAutentificacion(final String ticket) throws Exception {
 
-        log.info("Dentro de validarTicketAutentificacion: " + ticket);
-
-        final RestTemplate restTemplate = new RestTemplate();
-
-        restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(
-                USER, PASS));
+        final RestTemplate restTemplate = getLoginIbRestTemplate();
 
         final RDatosAutenticacion datosAutenticacion = restTemplate.getForObject(
-                URL + "/ticket/" + ticket, RDatosAutenticacion.class);
+                LOGINIB_URL + "/ticket/" + ticket, RDatosAutenticacion.class);
 
         final UsuarioClave usuarioClave = new UsuarioClave();
 
@@ -89,10 +83,11 @@ public class SecurityServiceImpl implements SecurityService{
     @Override
     public String iniciarSesionLogout() throws Exception {
 
-        log.info("Dentro de iniciarSesionLogout");
-        final RestTemplate restTemplate = new RestTemplate();
+        if(LOGINIB_URL.startsWith("https")){
+            XTrustProvider.install();
+        }
 
-        restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(USER, PASS));
+        final RestTemplate restTemplate = getLoginIbRestTemplate();
 
         final RLogoutParams param = new RLogoutParams();
         param.setAplicacion(APLICACIO_CODI);
@@ -104,13 +99,27 @@ public class SecurityServiceImpl implements SecurityService{
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         final HttpEntity<RLogoutParams> request = new HttpEntity<>(param, headers);
-        final ResponseEntity<String> responseTramite = restTemplate.postForEntity(URL + "/logout",
+        final ResponseEntity<String> responseTramite = restTemplate.postForEntity(LOGINIB_URL + "/logout",
                 request, String.class);
 
         String url = responseTramite.getBody();
 
-        log.info("Url logout: " + url);
-
         return url;
+    }
+
+    /**
+     *
+     * @return
+     */
+    private RestTemplate getLoginIbRestTemplate(){
+
+        if(LOGINIB_URL.startsWith("https")){
+            XTrustProvider.install();
+        }
+
+        final RestTemplate restTemplate = new RestTemplate();
+        restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(LOGINIB_USER, LOGINIB_PASS));
+
+        return restTemplate;
     }
 }
