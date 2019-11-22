@@ -77,10 +77,8 @@ public class RegistroController {
             AsientoRegistralWs asiento = regWeb3Service.obtenerAsientoCiudadano(usuarioAutenticado.getUsuarioClave().getNif(), numReg);
 
             if(asiento != null){
-                log.info("Anexos size:" + asiento.getAnexos().size());
-                log.info("" );
+
                 for (AnexoWs anexo : asiento.getAnexos()) {
-                    log.info("Anexo titulo:" + anexo.getTitulo());
                     if (anexo.isJustificante() && StringUtils.isNotEmpty(anexo.getCsv())) {
                         mav.addObject("justificante", CONCSV_URL.concat(anexo.getCsv()));
                     }
@@ -97,5 +95,4 @@ public class RegistroController {
 
         return mav;
     }
-
 }

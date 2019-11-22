@@ -32,6 +32,7 @@ public class SecurityServiceImpl implements SecurityService{
     @Value("${es.caib.carpeta.loginib.user}") private String LOGINIB_USER;
     @Value("${es.caib.carpeta.loginib.pass}") private String LOGINIB_PASS;
     @Value("${es.caib.carpeta.loginib.url}") private String LOGINIB_URL;
+    @Value("${es.caib.carpeta.development}") private Boolean development;
 
     public String iniciarSesionAutentificacion() throws Exception {
 
@@ -83,10 +84,6 @@ public class SecurityServiceImpl implements SecurityService{
     @Override
     public String iniciarSesionLogout() throws Exception {
 
-        if(LOGINIB_URL.startsWith("https")){
-            XTrustProvider.install();
-        }
-
         final RestTemplate restTemplate = getLoginIbRestTemplate();
 
         final RLogoutParams param = new RLogoutParams();
@@ -113,7 +110,7 @@ public class SecurityServiceImpl implements SecurityService{
      */
     private RestTemplate getLoginIbRestTemplate(){
 
-        if(LOGINIB_URL.startsWith("https")){
+        if(LOGINIB_URL.startsWith("https") && development){
             XTrustProvider.install();
         }
 

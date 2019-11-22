@@ -27,6 +27,7 @@ public class Sistra1ServiceImpl implements Sistra1Service{
     @Value("${es.caib.carpeta.sistra1.url}")    private String SISTRA1_URL;
     @Value("${es.caib.carpeta.sistra1.user}")   private String SISTRA1_USER;
     @Value("${es.caib.carpeta.sistra1.pass}")   private String SISTRA1_PASS;
+    @Value("${es.caib.carpeta.development}")    private Boolean development;
 
     @Override
     public List<TramitePersistente> obtenerTramites(String documento, Date fechaInicio, Date fechaFin) throws Exception{
@@ -38,11 +39,6 @@ public class Sistra1ServiceImpl implements Sistra1Service{
 
         GregorianCalendar hoy = new GregorianCalendar();
         hoy.setTime(fechaFin);
-
-        // Utilizamos el dni que Indra usa para las pruebas
-        /*if(StringUtils.isEmpty(documento)){
-            documento="43146650F";
-        }*/
 
         TramitesPersistentes tramites = backofficeFacade.obtenerPersistentes(documento,
                 DatatypeFactory.newInstance().newXMLGregorianCalendar(inicio),DatatypeFactory.newInstance().newXMLGregorianCalendar(hoy));
@@ -77,7 +73,7 @@ public class Sistra1ServiceImpl implements Sistra1Service{
 
         final URL wsdl = new URL(SISTRA1_URL + "?wsdl");
 
-        if(SISTRA1_URL.startsWith("https")){
+        if(SISTRA1_URL.startsWith("https") && development){
             XTrustProvider.install();
         }
 

@@ -32,6 +32,7 @@ public class Sistra2ServiceImpl implements Sistra2Service{
     @Value("${es.caib.carpeta.sistra2.url}")    private String SISTRA2_URL;
     @Value("${es.caib.carpeta.sistra2.user}")   private String SISTRA2_USER;
     @Value("${es.caib.carpeta.sistra2.pass}")   private String SISTRA2_PASS;
+    @Value("${es.caib.carpeta.development}")    private Boolean development;
 
     private final static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -102,7 +103,7 @@ public class Sistra2ServiceImpl implements Sistra2Service{
      */
     private RestTemplate getRestTemplate(){
 
-        if(SISTRA2_URL.startsWith("https")){
+        if(SISTRA2_URL.startsWith("https") && development){
             XTrustProvider.install();
         }
 
