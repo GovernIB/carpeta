@@ -213,7 +213,7 @@
                                                 </thead>
                                                 <tbody>
                                                     <c:forEach items="${asiento.anexos}" var="anexo" varStatus="status">
-                                                        <c:if test="${!anexo.justificante}">
+                                                        <c:if test="${!anexo.isJustificante()}">
                                                             <tr>
                                                                 <td>${status.count}</td>
                                                                 <td>${anexo.titulo}</td>
