@@ -65,8 +65,8 @@
                 <!-- Trámites no acabados -->
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <button class="box-part text-center" onclick="goTo('<c:url value="/tramite/list"/>')">
-                        <span class="oi oi-document imagenMenu row" title="<fmt:message key="menu.tramite/list"/>" alt="<fmt:message key="menu.tramite/list"/>" aria-hidden="true"></span>
-                        <span class="tituloMenu "><fmt:message key="menu.tramite/list"/></span>
+                        <span class="oi oi-document imagenMenu row" title="<fmt:message key="menu.tramites.no.acabados"/>" alt="<fmt:message key="menu.tramites.no.acabados"/>" aria-hidden="true"></span>
+                        <span class="tituloMenu "><fmt:message key="menu.tramites.no.acabados"/></span>
                         <span class="text row"><spring:message code="tramite.descripcion"/></span>
                     </button>
                 </div>
