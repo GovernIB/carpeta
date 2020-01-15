@@ -22,18 +22,32 @@
                     <tr>
                         <th scope="col"><fmt:message key="registro.numero"/></th>
                         <th scope="col"><fmt:message key="registro.fecha"/></th>
-                        <th scope="col" class="quitarMovil"><fmt:message key="registro.oficina"/></th>
-                        <th scope="col"><fmt:message key="registro.organismo"/></th>
+                        <th scope="col"><fmt:message key="registro.detalle.extracto"/></th>
+                        <th scope="col" class="quitarMovil"><fmt:message key="registro.organismo"/></th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach items="${registros}" var="asiento" varStatus="index">
 
                         <tr class="clickable-row" data-target="" data-href="<c:url value="/registro/detalle/${asiento.numeroRegistroFormateado}"/>">
-                            <td>${asiento.numeroRegistroFormateado}</td>
+                            <td>
+                                <label class="ponerMovil" data-toggle="tooltip" data-placement="top" title="${asiento.numeroRegistroFormateado} - ${asiento.unidadTramitacionDestinoDenominacion}">
+                                        ${asiento.numeroRegistroFormateado}
+                                </label>
+                                <p class="quitarMovil">${asiento.numeroRegistroFormateado}</p>
+                            </td>
                             <td><fmt:formatDate value="${asiento.fechaRegistro}" pattern="dd/MM/yyyy HH:mm"/></td>
-                            <td class="quitarMovil">${asiento.entidadRegistralInicioDenominacion}</td>
-                            <td>${asiento.unidadTramitacionDestinoDenominacion}</td>
+                            <td>
+                                <c:if test="${fn:length(asiento.resumen) > 30}">
+                                    <label data-toggle="tooltip" data-placement="top" title="${asiento.resumen}">
+                                        ${fn:substring(asiento.resumen, 0, 30)}...
+                                    </label>
+                                </c:if>
+                                <c:if test="${fn:length(asiento.resumen) <= 30}">
+                                    ${asiento.resumen}
+                                </c:if>
+                            </td>
+                            <td class="quitarMovil">${asiento.unidadTramitacionDestinoDenominacion}</td>
                         </tr>
 
                     </c:forEach>
@@ -59,6 +73,10 @@
                     }
                 });
             } );
+
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
         </script>
 
     </c:if>

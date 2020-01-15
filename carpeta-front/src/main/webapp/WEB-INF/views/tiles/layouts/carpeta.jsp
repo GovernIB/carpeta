@@ -15,6 +15,7 @@
     <title><spring:message code="carpeta.titulo"/></title>
 
     <script src="<c:url value="/static/js/jquery-3.2.1.min.js"/>"></script>
+    <script src="<c:url value="/static/js/popper.min.js"/>"></script>
     <script src="<c:url value="/static/js/bootstrap.min.js"/>"></script>
     <script src="<c:url value="/static/js/datatables.min.js"/>"></script>
     <script src="<c:url value="/static/js/moment-with-locales.min.js"/>"></script>

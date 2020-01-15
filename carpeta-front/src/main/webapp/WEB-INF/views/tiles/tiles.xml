@@ -78,4 +78,16 @@
         <put-attribute name="body" value="/WEB-INF/views/pages/datosPersonales.jsp" />
     </definition>
 
+    <!-- Mapa Web Page -->
+    <definition name="mapaWeb" extends="base-definition">
+        <put-attribute name="title" value="Mapa Web" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/mapaWeb.jsp" />
+    </definition>
+
+    <!-- Aviso Legal Page -->
+    <definition name="avisoLegal" extends="base-definition">
+        <put-attribute name="title" value="Avís Legal" />
+        <put-attribute name="body" value="/WEB-INF/views/pages/avisoLegal.jsp" />
+    </definition>
+
 </tiles-definitions>

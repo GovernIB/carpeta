@@ -23,7 +23,7 @@ a:hover{
 }
 
 .p-3carpeta {
-	padding: 3.5rem 1rem!important;
+	padding: 3.5rem 1rem 1.5rem 1rem !important;
 }
 .breadcrumb{
     padding-left: 45px;
@@ -46,6 +46,9 @@ a:hover{
 }
 .lh15{
 	line-height:1.5
+}
+.ponerMovil{
+	display: none;
 }
 
 /*Se aplican cuando el width es menor que 992px*/
@@ -97,6 +100,9 @@ a:hover{
 }
 .quitarMovil{
 	display: none;
+}
+.ponerMovil{
+	display: inline;
 }
 .botonCorto{
 	display: inline;

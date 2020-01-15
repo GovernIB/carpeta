@@ -30,7 +30,7 @@ public class CarpetaSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/","/inicio","/salir","/js/**","/css/**","/fonts/**","/imgs/**","/static/**","/accesibilidad").permitAll()
+        http.authorizeRequests().antMatchers("/","/inicio","/salir","/js/**","/css/**","/fonts/**","/imgs/**","/static/**","/accesibilidad", "/mapaWeb", "/avisoLegal").permitAll()
                 .and()
                 .authorizeRequests().anyRequest().access("isAuthenticated()")
                 .and()
