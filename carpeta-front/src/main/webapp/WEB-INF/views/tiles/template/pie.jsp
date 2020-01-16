@@ -11,8 +11,7 @@
 <%--                <li><a href="" data-toggle="modal" data-target="#modalContacto"><fmt:message key="soporte.ayuda"/></a></li>--%>
                 <li><a href="<c:url value="/mapaWeb"/>" class="text-dark linkPie"><fmt:message key="pie.mapa"/></a></li>
 <%--                <li><a href="" class="text-dark linkPie" target="_blank"><fmt:message key="lopd.lopd"/></a></li>--%>
-                <li><a href="<c:url value="/avisoLegal"/>" class="text-dark linkPie" target="_blank"><fmt:message key="pie.legal"/></a></li>
-<%--                <li><a href="<c:url value="/accesibilidad"/>"><span class="oi oi-people" title="" alt="" aria-hidden="true"></span> <fmt:message key="menu.accesibilidad"/></a></li>--%>
+                <li><a href="https://www.caib.es/govern/external/informacio.do?path=/webcaib/govern_illes/avis_legal/legalgovern&lang=${pageContext.response.locale.language}&fitxa=3437402" class="text-dark linkPie" target="_blank"><fmt:message key="pie.legal"/></a></li>
             </ul>
         </div>
 

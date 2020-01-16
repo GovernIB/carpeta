@@ -50,15 +50,15 @@ public class InicioController {
         return mav;
     }
 
-    @RequestMapping(value = { "/avisoLegal"})
-    public ModelAndView avisoLegal(HttpServletRequest request) {
-
-        ModelAndView mav = new ModelAndView("avisoLegal");
-
-        mav.addObject("breadcrumb", Arrays.asList("inicio", "avisoLegal"));
-
-        return mav;
-    }
+//    @RequestMapping(value = { "/avisoLegal"})
+//    public ModelAndView avisoLegal(HttpServletRequest request) {
+//
+//        ModelAndView mav = new ModelAndView("avisoLegal");
+//
+//        mav.addObject("breadcrumb", Arrays.asList("inicio", "avisoLegal"));
+//
+//        return mav;
+//    }
 
     @RequestMapping(value = { "/mapaWeb"})
     public ModelAndView mapaWeb(HttpServletRequest request) {

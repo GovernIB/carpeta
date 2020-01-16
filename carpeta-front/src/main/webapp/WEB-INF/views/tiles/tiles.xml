@@ -85,9 +85,9 @@
     </definition>
 
     <!-- Aviso Legal Page -->
-    <definition name="avisoLegal" extends="base-definition">
-        <put-attribute name="title" value="Avís Legal" />
-        <put-attribute name="body" value="/WEB-INF/views/pages/avisoLegal.jsp" />
-    </definition>
+<!--    <definition name="avisoLegal" extends="base-definition">-->
+<!--        <put-attribute name="title" value="Avís Legal" />-->
+<!--        <put-attribute name="body" value="/WEB-INF/views/pages/avisoLegal.jsp" />-->
+<!--    </definition>-->
 
 </tiles-definitions>
