@@ -16,7 +16,7 @@
             </ul>
         </p>
 
-        <p><img src="${pageContext.request.contextPath}/static/img/solicitar_clave_acceso_dgt.jpg" class="w-25" alt="Cl@ve"/></p>
+        <p><img src="${pageContext.request.contextPath}/static/img/solicitar_clave_acceso_dgt.jpg" class="w-25" alt="" title="<fmt:message key="inicio.clave.logo"/>"/></p>
 
         <p class="lh15">
             <fmt:message key="inicio.clave.1"/>
@@ -38,9 +38,9 @@
         <p class="lh15">
             <fmt:message key="inicio.problema.2"/>
             <ul class="lh15">
-                <li><fmt:message key="inicio.problema.3"/> <a href="http://clave.gob.es/clave_Home/clave.html" class="btn btn-soporte pb-1" title="Cl@ve" target="_blank">Cl@ve</a></li>
+                <li><fmt:message key="inicio.problema.3"/> <a href="http://clave.gob.es/clave_Home/clave.html" class="btn btn-soporte pb-1" title="<fmt:message key="inicio.clave"/>" alt="<fmt:message key="inicio.clave.alternativo"/>" target="_blank">Cl@ve</a></li>
                 <li><fmt:message key="inicio.problema.4"/></li>
-                <li><fmt:message key="inicio.problema.5"/> <a href="https://ssweb.seap.minhap.es/ayuda/consulta/Claveciudadanos" class="btn btn-soporte pb-1" title="<fmt:message key="inicio.problema.6"/>" target="_blank"><fmt:message key="inicio.problema.6"/></a></li>
+                <li><fmt:message key="inicio.problema.5"/> <a href="https://ssweb.seap.minhap.es/ayuda/consulta/Claveciudadanos" class="btn btn-soporte pb-1" title="<fmt:message key="inicio.buzon"/>" title="<fmt:message key="inicio.buzon.alternativo"/>" target="_blank"><fmt:message key="inicio.problema.6"/></a></li>
             </ul>
         </p>
 

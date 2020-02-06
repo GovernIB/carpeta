@@ -1,6 +1,6 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
 
-<nav aria-label="breadcrumb" class="miga">
+<nav aria-label="<fmt:message key="carpeta.miga"/>" class="miga">
     <div class="migaDiv">
         <ol class="breadcrumb" id="migaPan">
 

@@ -2,13 +2,17 @@ package es.caib.carpeta.front.controllers;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 @Controller
 public class InicioController {
@@ -25,6 +29,8 @@ public class InicioController {
         ModelAndView mav = new ModelAndView("inicio");
 
         mav.addObject("breadcrumb", Arrays.asList("inicio"));
+        Locale loc = LocaleContextHolder.getLocale();
+        mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.inicio"));
 
         return mav;
 
@@ -36,6 +42,8 @@ public class InicioController {
         ModelAndView mav = new ModelAndView("accesibilidad");
 
         mav.addObject("breadcrumb", Arrays.asList("inicio", "accesibilidad"));
+        Locale loc = LocaleContextHolder.getLocale();
+        mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.accesibilidad"));
 
         return mav;
     }
@@ -46,6 +54,8 @@ public class InicioController {
         ModelAndView mav = new ModelAndView("datosPersonales");
 
         mav.addObject("breadcrumb", Arrays.asList("inicio", "datosPersonales"));
+        Locale loc = LocaleContextHolder.getLocale();
+        mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.datosPersonales"));
 
         return mav;
     }
@@ -68,6 +78,9 @@ public class InicioController {
         mav.addObject("breadcrumb", Arrays.asList("inicio", "mapaWeb"));
         mav.addObject("zonaperUrl", ZONAPER_URL);
         mav.addObject("notificacionesUrl", NOTIFICACIONES_URL);
+        Locale loc = LocaleContextHolder.getLocale();
+        mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.mapaWeb"));
+
 
         return mav;
     }

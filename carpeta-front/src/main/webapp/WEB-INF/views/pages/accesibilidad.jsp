@@ -2,7 +2,7 @@
 
 <div class="card mb-12 border-0">
     <span class="h5 card-title border-bottom verde"><fmt:message key="accesibilidad.compromiso"/></span>
-    <nav>
+    <nav title="<fmt:message key="accesibilidad.compromiso"/>">
         <p><fmt:message key="accesibilidad.compromiso.contenido.1"/></p>
         <p><fmt:message key="accesibilidad.compromiso.contenido.2"/></p>
         <p><a class="mr-auto" href="https://www.w3.org/WAI/WCAG1AA-Conformance"><img src="${pageContext.request.contextPath}/static/img/wcag1AA.png" class="" alt="<fmt:message key="accesibilidad.img.wai"/>"/></a></p>
@@ -10,7 +10,7 @@
     </nav>
 
     <span class="h5 card-title border-bottom verde"><fmt:message key="accesibilidad.tecnologia"/></span>
-    <nav>
+    <nav title="<fmt:message key="accesibilidad.tecnologia"/>">
         <p><fmt:message key="accesibilidad.tecnologia.contenido.1"/></p>
         <p><fmt:message key="accesibilidad.tecnologia.contenido.2"/></p>
         <p>
@@ -20,7 +20,7 @@
     </nav>
 
     <span class="h5 card-title border-bottom verde"><fmt:message key="accesibilidad.herramientas"/></span>
-    <nav>
+    <nav title="<fmt:message key="accesibilidad.herramientas"/>">
         <p><fmt:message key="accesibilidad.herramientas.contenido.1"/></p>
         <p><fmt:message key="accesibilidad.herramientas.contenido.2"/></p>
     </nav>

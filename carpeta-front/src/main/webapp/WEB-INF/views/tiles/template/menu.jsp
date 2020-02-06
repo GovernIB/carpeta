@@ -15,18 +15,18 @@
         </sec:authorize>
 
         <li class="nav-item colorVerde">
-            <a class="nav-link movil accBoton" title="<fmt:message key="menu.accesibilidad.img"/>" href="<c:url value="/accesibilidad"/>"><img src="${pageContext.request.contextPath}/static/img/ico_accessibilitat.svg" class="iconoCabecera accIcon" title="<fmt:message key="menu.accesibilidad.img"/>" alt="<fmt:message key="menu.accesibilidad.img"/>"/><p class="mb-0 float-right botonCorto"><fmt:message key="menu.accesibilidad"/></p></a>
+            <a class="nav-link movil accBoton" title="<fmt:message key="menu.accesibilidad.img"/>" href="<c:url value="/accesibilidad"/>"><img src="${pageContext.request.contextPath}/static/img/ico_accessibilitat.svg" class="iconoCabecera accIcon" title="<fmt:message key="menu.accesibilidad.img"/>"/><p class="mb-0 float-right botonCorto"><fmt:message key="menu.accesibilidad"/></p></a>
         </li>
 
         <li class="nav-item dropdown colorVerde">
             <a class="nav-link dropdown movil" title="<fmt:message key="menu.idioma.img"/>" href="#" id="idiomas" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="oi oi-caret-bottom float-right flechaSubmenu" title="" aria-hidden="true"></span><p class="mb-0 float-right botonCorto"><fmt:message key="menu.idioma"/></p><span class="oi oi-globe" title="<fmt:message key="menu.idioma.img"/>" aria-hidden="true"></span></a>
             <div class="dropdown-menu dropdown-menu-right marg0 minW0" aria-labelledby="idiomas">
                 <c:if test="${pageContext.response.locale.language == 'ca'}">
-                    <a class="dropdown-item movil" href="<c:url value="${requestScope.requestURI}?lang=es"/>" hreflang="es" xml:lang="es" lang="es"><fmt:message key="idioma.castellano"/></a>
+                    <a class="dropdown-item movil" href="<c:url value="${requestScope.requestURI}?lang=es"/>" title="<fmt:message key="idioma.castellano.alternativo"/>"><fmt:message key="idioma.castellano"/></a>
                     <a class="dropdown-item movil desactivado"><fmt:message key="idioma.catala"/></a>
                 </c:if>
                 <c:if test="${pageContext.response.locale.language == 'es'}">
-                    <a class="dropdown-item movil" href="<c:url value="${requestScope.requestURI}?lang=ca"/>" hreflang="ca" xml:lang="ca" lang="ca"><fmt:message key="idioma.catala"/></a>
+                    <a class="dropdown-item movil" href="<c:url value="${requestScope.requestURI}?lang=ca"/>" title="<fmt:message key="idioma.catalan.alternativo"/>"><fmt:message key="idioma.catala"/></a>
                     <a class="dropdown-item movil desactivado"><fmt:message key="idioma.castellano"/></a>
                 </c:if>
 

@@ -3,7 +3,7 @@
 
     <!-- Button trigger modal -->
     <strong><fmt:message key="soporte.ayuda"/> </strong><fmt:message key="soporte.contacto"/>
-    <button type="button" class="btn btn-soporte" data-toggle="modal" data-target="#modalContacto">
+    <button type="button" class="btn btn-soporte" data-toggle="modal" data-target="#modalContacto" id="exampleModalCenterTitle">
         <fmt:message key="soporte.equipo"/>
     </button>
 
@@ -13,7 +13,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <span class="modal-title h2" id="exampleModalLongTitle"><span class="oi oi-info" title="" aria-hidden="true"></span> <fmt:message key="soporte.mensaje.ayuda"/></span>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="<fmt:message key="soporte.mensaje.cerrar"/>">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>

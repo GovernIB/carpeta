@@ -11,6 +11,7 @@ import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitePersistente;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,6 +24,8 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 @Controller
 @RequestMapping(value = "/tramite")
@@ -44,6 +47,8 @@ public class TramiteController {
         ModelAndView mav = new ModelAndView("tramitesPendientes", "fechaBusqueda", new FechaBusqueda());
 
         mav.addObject("breadcrumb", Arrays.asList("inicio", "tramite/list"));
+        Locale loc = LocaleContextHolder.getLocale();
+        mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.tramites"));
 
         return mav;
 
@@ -78,6 +83,8 @@ public class TramiteController {
         }
 
         model.addAttribute("breadcrumb", Arrays.asList("inicio", "tramite/list"));
+        Locale loc = LocaleContextHolder.getLocale();
+        model.addAttribute("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.tramites"));
 
         return "tramitesPendientes";
     }

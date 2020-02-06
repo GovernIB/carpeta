@@ -12,7 +12,7 @@
     <meta name="_csrf" content="">
     <meta name="_csrf_header" content="">
 
-    <title><spring:message code="carpeta.titulo"/></title>
+    <title>${title_page}</title>
 
     <script src="<c:url value="/static/js/jquery-3.2.1.min.js"/>"></script>
     <script src="<c:url value="/static/js/popper.min.js"/>"></script>
@@ -40,7 +40,7 @@
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark bg-carpeta">
 
-            <button class="navbar-toggler botonMovil" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler botonMovil" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="<fmt:message key="carpeta.menu.movil"/>">
                 <span class="navbar-toggler-icon"></span>
             </button>
 

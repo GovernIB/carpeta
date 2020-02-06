@@ -22,7 +22,6 @@
 
     <!-- Home Page -->
     <definition name="inicio" extends="base-definition">
-        <put-attribute name="title" value="Benvingut" />
         <put-attribute name="body" value="/WEB-INF/views/pages/inicio.jsp" />
     </definition>
 
@@ -32,62 +31,48 @@
 
     <!-- Logout -->
     <definition name="salir" extends="base-definition">
-        <put-attribute name="title" value="Benvingut" />
         <put-attribute name="body" value="/WEB-INF/views/pages/logout.jsp" />
     </definition>
 
     <!-- Elección de trámites a buscar -->
     <definition name="tramites" extends="base-definition">
-        <put-attribute name="title" value="Llista de tràmits" />
         <put-attribute name="body" value="/WEB-INF/views/pages/tramites.jsp" />
     </definition>
 
     <!-- Llistat de tràmits pendents -->
     <definition name="tramitesPendientes" extends="base-definition">
-        <put-attribute name="title" value="Llista de tràmits pendents" />
         <put-attribute name="body" value="/WEB-INF/views/pages/tramitesPendientes.jsp" />
     </definition>
 
     <!-- Elección de notificaciones -->
     <definition name="notificaciones" extends="base-definition">
-        <put-attribute name="title" value="Llista de notificacions" />
         <put-attribute name="body" value="/WEB-INF/views/pages/notificaciones.jsp" />
     </definition>
 
     <!-- Llista de registres Page -->
     <definition name="registros" extends="base-definition">
-        <put-attribute name="title" value="Llistat de registres" />
         <put-attribute name="body" value="/WEB-INF/views/pages/registros.jsp" />
     </definition>
 
     <!-- Detall de registre Page -->
     <definition name="registroDetalle" extends="base-definition">
-        <put-attribute name="title" value="Detall de registre" />
         <put-attribute name="body" value="/WEB-INF/views/pages/registroDetalle.jsp" />
     </definition>
 
     <!-- Accessibilitat Page -->
     <definition name="accesibilidad" extends="base-definition">
-        <put-attribute name="title" value="Accessibilitat" />
         <put-attribute name="body" value="/WEB-INF/views/pages/accesibilidad.jsp" />
     </definition>
 
     <!-- Datos Personales Page -->
     <definition name="datosPersonales" extends="base-definition">
-        <put-attribute name="title" value="Dades personals" />
         <put-attribute name="body" value="/WEB-INF/views/pages/datosPersonales.jsp" />
     </definition>
 
     <!-- Mapa Web Page -->
     <definition name="mapaWeb" extends="base-definition">
-        <put-attribute name="title" value="Mapa Web" />
         <put-attribute name="body" value="/WEB-INF/views/pages/mapaWeb.jsp" />
     </definition>
 
-    <!-- Aviso Legal Page -->
-<!--    <definition name="avisoLegal" extends="base-definition">-->
-<!--        <put-attribute name="title" value="Avís Legal" />-->
-<!--        <put-attribute name="body" value="/WEB-INF/views/pages/avisoLegal.jsp" />-->
-<!--    </definition>-->
 
 </tiles-definitions>
