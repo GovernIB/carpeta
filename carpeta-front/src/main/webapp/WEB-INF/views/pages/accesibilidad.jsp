@@ -1,27 +1,46 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
 
 <div class="card mb-12 border-0">
-    <span class="h5 card-title border-bottom verde"><fmt:message key="accesibilidad.compromiso"/></span>
-    <nav title="<fmt:message key="accesibilidad.compromiso"/>">
-        <p><fmt:message key="accesibilidad.compromiso.contenido.1"/></p>
-        <p><fmt:message key="accesibilidad.compromiso.contenido.2"/></p>
-        <p><a class="mr-auto" href="https://www.w3.org/WAI/WCAG1AA-Conformance"><img src="${pageContext.request.contextPath}/static/img/wcag1AA.png" class="" alt="<fmt:message key="accesibilidad.img.wai"/>"/></a></p>
-        <p><fmt:message key="accesibilidad.compromiso.contenido.3"/></p>
+    <span class="h5 card-title border-bottom verde"><fmt:message key="accesibilidad.declaracion"/></span>
+    <nav title="<fmt:message key="accesibilidad.declaracion"/>">
+        <p><fmt:message key="accesibilidad.declaracion.contenido.1"/></p>
+        <p><fmt:message key="accesibilidad.declaracion.contenido.2"/></p>
     </nav>
 
-    <span class="h5 card-title border-bottom verde"><fmt:message key="accesibilidad.tecnologia"/></span>
-    <nav title="<fmt:message key="accesibilidad.tecnologia"/>">
-        <p><fmt:message key="accesibilidad.tecnologia.contenido.1"/></p>
-        <p><fmt:message key="accesibilidad.tecnologia.contenido.2"/></p>
-        <p>
-            <a class="mr-auto" href="http://validator.w3.org/check?uri=referer"><img src="${pageContext.request.contextPath}/static/img/valid-xhtml10.png" class="" alt="<fmt:message key="accesibilidad.img.xhtml"/>"/></a>
-            <a class="mr-auto" href="http://jigsaw.w3.org/css-validator/"><img src="${pageContext.request.contextPath}/static/img/vcss.gif" class="" alt="<fmt:message key="accesibilidad.img.css"/>"/></a>
-        </p>
+    <span class="h5 card-title border-bottom verde"><fmt:message key="accesibilidad.compliment"/></span>
+    <nav title="<fmt:message key="accesibilidad.compliment"/>">
+        <p><fmt:message key="accesibilidad.compliment.contenido.1"/></p>
     </nav>
 
-    <span class="h5 card-title border-bottom verde"><fmt:message key="accesibilidad.herramientas"/></span>
-    <nav title="<fmt:message key="accesibilidad.herramientas"/>">
-        <p><fmt:message key="accesibilidad.herramientas.contenido.1"/></p>
-        <p><fmt:message key="accesibilidad.herramientas.contenido.2"/></p>
+    <span class="h5 card-title border-bottom verde"><fmt:message key="accesibilidad.noAccesible"/></span>
+    <nav title="<fmt:message key="accesibilidad.noAccesible"/>">
+        <p><fmt:message key="accesibilidad.noAccesible.contenido.1"/></p>
+        <p><fmt:message key="accesibilidad.noAccesible.contenido.2"/></p>
+    </nav>
+
+    <span class="h5 card-title border-bottom verde"><fmt:message key="accesibilidad.preparacion"/></span>
+    <nav title="<fmt:message key="accesibilidad.preparacion"/>">
+        <p><fmt:message key="accesibilidad.preparacion.contenido.1"/></p>
+        <p><fmt:message key="accesibilidad.preparacion.contenido.2"/></p>
+    </nav>
+
+    <span class="h5 card-title border-bottom verde"><fmt:message key="accesibilidad.observaciones"/></span>
+    <nav title="<fmt:message key="accesibilidad.observaciones"/>">
+        <p><fmt:message key="accesibilidad.observaciones.contenido.1"/></p>
+        <p><fmt:message key="accesibilidad.observaciones.contenido.2"/></p>
+    </nav>
+
+    <span class="h5 card-title border-bottom verde"><fmt:message key="accesibilidad.procedimiento"/></span>
+    <nav title="<fmt:message key="accesibilidad.procedimiento"/>">
+        <p><fmt:message key="accesibilidad.procedimiento.contenido.1"/></p>
+    </nav>
+
+    <span class="h5 card-title border-bottom verde"><fmt:message key="accesibilidad.opcional"/></span>
+    <nav title="<fmt:message key="accesibilidad.opcional"/>">
+        <p><fmt:message key="accesibilidad.opcional.contenido.1"/></p>
+        <p><fmt:message key="accesibilidad.opcional.contenido.2"/></p>
+        <p><fmt:message key="accesibilidad.opcional.contenido.3"/></p>
+        <p><a class="mr-auto" href="https://www.w3.org/WAI/WCAG1AA-Conformance"><img src="${pageContext.request.contextPath}/static/img/wcag2AA.png" class="" alt="<fmt:message key="accesibilidad.img.wai"/>"/></a></p>
+        <p><fmt:message key="accesibilidad.opcional.contenido.4"/></p>
     </nav>
 </div>
