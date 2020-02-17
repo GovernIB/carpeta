@@ -53,6 +53,10 @@ a:hover{
 .backWhite{
 	background-color: #FFF !important;
 }
+.textClave{
+	text-transform: none;
+	font-size: 0.8em;
+}
 
 /*Se aplican cuando el width es menor que 992px*/
 @media only screen and (max-width: 992px) {
