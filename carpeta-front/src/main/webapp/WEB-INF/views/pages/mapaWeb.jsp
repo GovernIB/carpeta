@@ -12,37 +12,33 @@
         <div class="table-responsive">
             <table class="table table-hover" style="width:100%">
                 <tbody>
-                    <tr class="clickable-row" data-target="" data-href="<c:url value="/inicio"/>">
-                        <td class="border-0"><fmt:message key="mapaWeb.informacion"/></td>
+                    <tr class="text-uppercase backWhite">
+                        <td class="border-0"><a href="<c:url value="/inicio"/>"><fmt:message key="mapaWeb.informacion"/></td>
                     </tr>
-
-                    <sec:authorize access="isAuthenticated()">
-                        <tr class="text-uppercase">
-                            <td class="border-0"><fmt:message key="menu.tramites.no.acabados"/></td>
-                        </tr>
-                        <tr class="clickable-row text-uppercase" data-target="" data-href="<c:url value="/tramite/list"/>">
-                            <td class="border-0 pl-5"><fmt:message key="mapaWeb.tramites"/></td>
-                        </tr>
-                        <tr class="text-uppercase">
-                            <td class="border-0"><fmt:message key="menu.registro/list"/></td>
-                        </tr>
-                        <tr class="clickable-row text-uppercase" data-target="" data-href="<c:url value="/registro/list"/>">
-                            <td class="border-0 pl-5"><fmt:message key="mapaWeb.registros"/></td>
-                        </tr>
-                        <tr class="text-uppercase">
-                            <td class="border-0"><fmt:message key="menu.notificaciones"/></td>
-                        </tr>
-                        <tr class="clickable-row text-uppercase" data-target="" onclick="goToWindow('${notificacionesUrl}')" data-href="<c:url value="/mapaWeb"/>">
-                            <td class="border-0 pl-5"><fmt:message key="menu.notificacion"/></td>
-                        </tr>
-                        <tr class="clickable-row text-uppercase" data-target="" onclick="goToWindow('${zonaperUrl}')" data-href="<c:url value="/mapaWeb"/>">
-                            <td class="border-0 pl-5"><fmt:message key="menu.notificaciones.otras"/></td>
-                        </tr>
-                        <tr class="clickable-row text-uppercase" data-target="" data-href="<c:url value="/datosPersonales"/>">
-                            <td class="border-0"><fmt:message key="menu.datosPersonales"/></td>
-                        </tr>
-                    </sec:authorize>
-
+                    <tr class="text-uppercase backWhite">
+                        <td class="border-0"><fmt:message key="menu.tramites.no.acabados"/></td>
+                    </tr>
+                    <tr class="text-uppercase backWhite">
+                        <td class="border-0 pl-5"><a href="<c:url value="/tramite/list"/>"><fmt:message key="mapaWeb.tramites"/></a>  <sec:authorize access="!isAuthenticated()"><img src="${pageContext.request.contextPath}/static/img/clave2.png" class="imatgeGovern" alt="<fmt:message key="accesibilidad.acceso.clave"/>" title="<fmt:message key="accesibilidad.acceso.clave"/>"/></sec:authorize></td>
+                    </tr>
+                    <tr class="text-uppercase backWhite">
+                        <td class="border-0"><fmt:message key="menu.registro/list"/></td>
+                    </tr>
+                    <tr class="text-uppercase backWhite">
+                        <td class="border-0 pl-5"><a href="<c:url value="/registro/list"/>"><fmt:message key="mapaWeb.registros"/></a>  <sec:authorize access="!isAuthenticated()"><img src="${pageContext.request.contextPath}/static/img/clave2.png" class="imatgeGovern" alt="<fmt:message key="accesibilidad.acceso.clave"/>" title="<fmt:message key="accesibilidad.acceso.clave"/>"/></sec:authorize></td>
+                    </tr>
+                    <tr class="text-uppercase backWhite">
+                        <td class="border-0"><fmt:message key="menu.notificaciones"/></td>
+                    </tr>
+                    <tr class="text-uppercase backWhite">
+                        <td class="border-0 pl-5"><a href="" onclick="goToWindow('${notificacionesUrl}')"><fmt:message key="menu.notificacion"/></a></td>
+                    </tr>
+                    <tr class="text-uppercase backWhite">
+                        <td class="border-0 pl-5"><a href="" onclick="goToWindow('${zonaperUrl}')"><fmt:message key="menu.notificaciones.otras"/></a>  <sec:authorize access="!isAuthenticated()"><img src="${pageContext.request.contextPath}/static/img/clave2.png" class="imatgeGovern" alt="<fmt:message key="accesibilidad.acceso.clave"/>" title="<fmt:message key="accesibilidad.acceso.clave"/>"/></sec:authorize></td>
+                    </tr>
+                    <tr class="text-uppercase backWhite">
+                        <td class="border-0"><a href="<c:url value="/datosPersonales"/>"><fmt:message key="menu.datosPersonales"/></a>  <sec:authorize access="!isAuthenticated()"><img src="${pageContext.request.contextPath}/static/img/clave2.png" class="imatgeGovern" alt="<fmt:message key="accesibilidad.acceso.clave"/>" title="<fmt:message key="accesibilidad.acceso.clave"/>"/></sec:authorize></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
