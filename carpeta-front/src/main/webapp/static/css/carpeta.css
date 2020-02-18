@@ -57,6 +57,9 @@ a:hover{
 	text-transform: none;
 	font-size: 0.8em;
 }
+.colorClave{
+	color: #FF4C00;
+}
 
 /*Se aplican cuando el width es menor que 992px*/
 @media only screen and (max-width: 992px) {
