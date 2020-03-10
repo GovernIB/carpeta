@@ -33,7 +33,7 @@ public class NotificacionController {
 
         mav.addObject("zonaperUrl", ZONAPER_URL);
         mav.addObject("notificacionesUrl", NOTIFICACIONES_URL);
-        mav.addObject("breadcrumb", Arrays.asList("inicio", "notificacion"));
+        mav.addObject("breadcrumb", Arrays.asList("inicio", "notificaciones"));
         Locale loc = LocaleContextHolder.getLocale();
         mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.notificaciones"));
 

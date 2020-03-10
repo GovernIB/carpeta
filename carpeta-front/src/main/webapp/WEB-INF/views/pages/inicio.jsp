@@ -16,7 +16,7 @@
             </ul>
         </p>
 
-        <p><img src="${pageContext.request.contextPath}/static/img/solicitar_clave_acceso_dgt.jpg" class="w-25" alt="" title="<fmt:message key="inicio.clave.logo"/>"/></p>
+        <p><img src="${pageContext.request.contextPath}/static/img/solicitar_clave_acceso_dgt.jpg" class="w-25" alt="<fmt:message key="inicio.clave.logo.alternativo"/>" title="<fmt:message key="inicio.clave.logo"/>"/></p>
 
         <p class="lh15">
             <fmt:message key="inicio.clave.1"/>
@@ -65,8 +65,8 @@
                 <!-- Trámites no acabados -->
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <button class="box-part text-center" onclick="goTo('<c:url value="/tramite/list"/>')">
-                        <span class="oi oi-document imagenMenu row" title="<fmt:message key="menu.tramites.no.acabados"/>" alt="<fmt:message key="menu.tramites.no.acabados"/>" aria-hidden="true"></span>
-                        <span class="tituloMenu "><fmt:message key="menu.tramites.no.acabados"/></span>
+                        <span class="oi oi-document imagenMenu row" title="<fmt:message key="menu.tramite/list"/>" alt="<fmt:message key="menu.tramite/list"/>" aria-hidden="true"></span>
+                        <span class="tituloMenu "><fmt:message key="menu.tramite/list"/></span>
                         <span class="text row"><spring:message code="tramite.descripcion"/></span>
                     </button>
                 </div>

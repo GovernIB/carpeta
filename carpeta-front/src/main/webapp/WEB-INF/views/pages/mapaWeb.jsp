@@ -16,7 +16,7 @@
                         <td class="border-0"><a href="<c:url value="/inicio"/>"><fmt:message key="mapaWeb.informacion"/></td>
                     </tr>
                     <tr class="text-uppercase backWhite">
-                        <td class="border-0"><fmt:message key="menu.tramites.no.acabados"/></td>
+                        <td class="border-0"><fmt:message key="menu.tramite/list"/></td>
                     </tr>
                     <tr class="text-uppercase backWhite">
                         <td class="border-0 pl-5"><a href="<c:url value="/tramite/list"/>"><fmt:message key="mapaWeb.tramites"/></a><sec:authorize access="!isAuthenticated()">    <span class="oi oi-lock-locked colorClave" title="<fmt:message key="accesibilidad.acceso.clave"/>"></span></sec:authorize></td>

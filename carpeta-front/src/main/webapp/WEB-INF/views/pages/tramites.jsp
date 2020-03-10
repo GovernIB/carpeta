@@ -8,7 +8,7 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <button class="box-part text-center" onclick="goTo('<c:url value="/tramite/list"/>')">
                     <span class="oi oi-pencil imagenMenu" title="" alt="" aria-hidden="true"></span>
-                    <div class="tituloMenu"><fmt:message key="menu.tramites.no.acabados"/></div>
+                    <div class="tituloMenu"><fmt:message key="menu.tramite/list"/></div>
                     <div class="text">
                         <span><fmt:message key="menu.lorem"/></span>
                     </div>
