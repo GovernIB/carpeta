@@ -9,8 +9,8 @@
 
         <div class="row">
             <!-- Notificaciones -->
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <button class="box-part text-center" onclick="goToWindow('${notificacionesUrl}')">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 boxGestio">
+                <button class="box-part text-center capsaMenu" onclick="goToWindow('${notificacionesUrl}')">
                     <span class="oi oi-envelope-closed imagenMenu" title="<fmt:message key="menu.notificaciones"/>" alt="<fmt:message key="menu.notificaciones"/>" aria-hidden="true"></span>
                     <div class="tituloMenu"><fmt:message key="menu.notificacion"/></div>
                     <div class="text">
@@ -20,8 +20,8 @@
             </div>
 
             <!-- Otras notificaciones -->
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                <button class="box-part text-center" onclick="goToWindow('${zonaperUrl}')">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 boxGestio">
+                <button class="box-part text-center capsaMenu" onclick="goToWindow('${zonaperUrl}')">
                     <span class="oi oi-box imagenMenu" title="<fmt:message key="menu.notificaciones.otras"/>" alt="<fmt:message key="menu.notificaciones.otras"/>" aria-hidden="true"></span>
                     <div class="tituloMenu"><fmt:message key="menu.notificaciones.otras"/></div>
                     <div class="text">

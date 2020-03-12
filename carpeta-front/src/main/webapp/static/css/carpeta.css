@@ -85,6 +85,9 @@ a:hover{
 .quitarTablet{
 	display: none;
 }
+.capsaMenu{
+    min-height: 18rem !important;
+}
 }
 
 /*Se aplican cuando el width es menor que 768*/
@@ -159,6 +162,20 @@ thead>tr>th.sorting {
 }
 .margen-top-clave{
 	padding-top: 1rem !important;
+}
+.capsaMenu{
+	min-height: 20rem !important;
+}
+}
+
+/*Se aplican cuando el width es menor que 692*/
+@media only screen and (max-width : 692px) {
+.boxGestio{
+	max-width: 100% !important;
+	flex: auto;
+}
+.capsaMenu{
+	min-height: 5rem !important;
 }
 }
 
@@ -650,4 +667,8 @@ a.iconoRedes {
 }
 .margen-top-clave{
 	padding-top: 3rem;
+}
+
+.capsaMenu{
+	min-height: 16rem;
 }

@@ -63,8 +63,8 @@
             <div class="row">
 
                 <!-- Trámites no acabados -->
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <button class="box-part text-center" onclick="goTo('<c:url value="/tramite/list"/>')">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 boxGestio">
+                    <button class="box-part text-center capsaMenu" onclick="goTo('<c:url value="/tramite/list"/>')">
                         <span class="oi oi-document imagenMenu row" title="<fmt:message key="menu.tramite/list"/>" alt="<fmt:message key="menu.tramite/list"/>" aria-hidden="true"></span>
                         <span class="tituloMenu "><fmt:message key="menu.tramite/list"/></span>
                         <span class="text row"><spring:message code="tramite.descripcion"/></span>
@@ -72,8 +72,8 @@
                 </div>
 
                 <!-- Registros -->
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <button class="box-part text-center" onclick="goTo('<c:url value="/registro/list"/>')">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 boxGestio">
+                    <button class="box-part text-center capsaMenu" onclick="goTo('<c:url value="/registro/list"/>')">
                         <span class="oi oi-book imagenMenu row" title="<fmt:message key="menu.registro/list"/>" alt="<fmt:message key="menu.registro/list"/>" aria-hidden="true"></span>
                         <span class="tituloMenu"><fmt:message key="menu.registro/list"/></span>
                         <span class="text row">
@@ -83,8 +83,8 @@
                 </div>
 
                 <!-- Notificaciones -->
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <button class="box-part text-center" onclick="goTo('<c:url value="/notificacion/list"/>')">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 boxGestio">
+                    <button class="box-part text-center capsaMenu" onclick="goTo('<c:url value="/notificacion/list"/>')">
                         <span class="oi oi-envelope-closed imagenMenu row" title="<fmt:message key="menu.notificaciones"/>" alt="<fmt:message key="menu.notificaciones"/>" aria-hidden="true"></span>
                         <span class="tituloMenu"><fmt:message key="menu.notificaciones"/></span>
                         <span class="text row">
@@ -97,8 +97,8 @@
 
             <div class="row">
                 <!-- Mis Datos -->
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <button class="box-part text-center" onclick="goTo('<c:url value="/datosPersonales"/>')">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 boxGestio">
+                    <button class="box-part text-center capsaMenu" onclick="goTo('<c:url value="/datosPersonales"/>')">
                         <span class="oi oi-folder imagenMenu row" title="<fmt:message key="menu.datosPersonales"/>" alt="<fmt:message key="menu.datosPersonales"/>" aria-hidden="true"></span>
                         <span class="tituloMenu"><fmt:message key="menu.datosPersonales"/></span>
                         <span class="text row">
