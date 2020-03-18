@@ -15,7 +15,7 @@
         </sec:authorize>
 
         <li class="nav-item colorVerde">
-            <a class="nav-link movil accBoton" title="<fmt:message key="menu.accesibilidad.img"/>" href="<c:url value="/accesibilidad"/>"><img src="${pageContext.request.contextPath}/static/img/ico_accessibilitat.svg" class="iconoCabecera accIcon" title="<fmt:message key="menu.accesibilidad.img"/>"/><p class="mb-0 float-right botonCorto"><fmt:message key="menu.accesibilidad"/></p></a>
+            <a class="nav-link movil accBoton" title="<fmt:message key="menu.accesibilidad.img"/>" href="<c:url value="/accesibilidad"/>"><img src="${pageContext.request.contextPath}/static/img/ico_accessibilitat.svg" class="iconoCabecera accIcon" title="<fmt:message key="menu.accesibilidad.img"/>" alt="<fmt:message key="menu.accesibilidad.img"/>"/><p class="mb-0 float-right botonCorto"><fmt:message key="menu.accesibilidad"/></p></a>
         </li>
 
         <li class="nav-item dropdown colorVerde">
