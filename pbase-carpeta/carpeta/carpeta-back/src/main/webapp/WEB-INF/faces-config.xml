@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+        xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
+        version="2.3">
+
+    <application>
+        <!--
+        Configuració de l'idioma per defecte, i llista d'idiomes soportats.
+        -->
+        <locale-config>
+            <default-locale>ca</default-locale>
+            <supported-locale>es</supported-locale>
+            <supported-locale>ca</supported-locale>
+        </locale-config>
+        <resource-bundle>
+            <base-name>ValidationMessages</base-name>
+            <var>ValidationMessages</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>persistence.LabelsPersistence</base-name>
+            <var>labelsPersistence</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>ejb.LabelsEJB</base-name>
+            <var>labelsEJB</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>back.LabelsBack</base-name>
+            <var>labels</var>
+        </resource-bundle>
+    </application>
+
+    <!--
+    Necessari per la gestió d'errors a Primefaces. Veure:
+     https://primefaces.github.io/primefaces/7_0/#/core/errorhandling?id=error-handling
+    -->
+    <application>
+        <el-resolver>
+            org.primefaces.application.exceptionhandler.PrimeExceptionHandlerELResolver
+        </el-resolver>
+    </application>
+
+    <factory>
+        <exception-handler-factory>
+            org.primefaces.application.exceptionhandler.PrimeExceptionHandlerFactory
+        </exception-handler-factory>
+    </factory>
+
+
+    <lifecycle>
+        <!--
+        Classe que genera un missatge de debug cada vegada que s'inicia i acaba una fase JSF.
+        Descomentar només si cal per debuggar errors a l'entorn de desenvolupament.
+        -->
+        <!--
+        <phase-listener>
+            es.caib.carpeta.back.listener.LoggingPhaseListener
+        </phase-listener>
+        -->
+    </lifecycle>
+
+</faces-config>

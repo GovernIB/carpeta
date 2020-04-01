@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<!--
+Pàgina amb el llistat de procediments d'una unitat administrativa.
+-->
+<ui:composition template="/template/template.xhtml">
+    <ui:define name="metadata">
+        <f:metadata>
+            <!-- Al principi de la vista, es fixarà el paràmetre rebut dins
+            i amb l'acció load carregarem les dades. El posam required perquè és obligatori -->
+            <f:viewParam name="unitatOrganicaId" value="#{listProcediment.unitatOrganica.id}" required="true"/>
+            <f:viewAction action="#{listProcediment.load}"/>
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="pageTitle">
+        <h:outputFormat value="#{labels.listProcediment_title}">
+            <f:param value="#{listProcediment.unitatOrganica.nom}"/>
+            <f:param value="#{listProcediment.unitatOrganica.codiDir3}"/>
+        </h:outputFormat>
+    </ui:define>
+
+    <ui:define name="breadcrumb">
+        <p:menuitem value="#{labels.listUnitatOrganica_link}" outcome="/listUnitatOrganica"/>
+        <p:menuitem value="#{labels.listProcediment_link}" outcome="/listProcediment" includeViewParams="true"/>
+    </ui:define>
+
+    <ui:define name="content">
+        <p>
+            <p:button value="#{labels.newProcediment_link}" outcome="/editProcediment">
+                <f:param name="unitatOrganicaId" value="#{listProcediment.unitatOrganica.id}"/>
+            </p:button>
+            <p:button value="#{labels.button_tornar}" outcome="/listUnitatOrganica"/>
+        </p>
+        <h:form>
+            <p:dataTable id="dataTable" value="#{listProcediment.procediments}" var="procediment"
+                         emptyMessage="#{labels.dataTable_emptyMessage}">
+                <p:column>
+                    <f:facet name="header">#{labels.procediment_id}</f:facet>
+                    <h:outputText value="#{procediment.id}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">#{labels.procediment_codiSia}</f:facet>
+                    <h:outputText value="#{procediment.codiSia}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header">#{labels.procediment_nom}</f:facet>
+                    <h:outputText value="#{procediment.nom}"/>
+                </p:column>
+                <p:column>
+                    <f:facet name="header"></f:facet>
+                    <p:menuButton value="#{labels.button_opcions}">
+                        <p:menuitem value="#{labels.button_editar}" outcome="/editProcediment">
+                            <f:param name="id" value="#{procediment.id}"/>
+                            <f:param name="unitatOrganicaId" value="#{listProcediment.unitatOrganica.id}"/>
+                        </p:menuitem>
+                        <p:menuitem value="#{labels.button_eliminar}" action="#{listProcediment.delete(procediment.id)}"
+                                    update="messages @form">
+                            <p:confirm message="#{labels.confirm_eliminar}"/>
+                        </p:menuitem>
+                    </p:menuButton>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

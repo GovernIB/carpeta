@@ -1,0 +1,9 @@
+<datasource jndi-name="java:jboss/datasources/carpetaDS" pool-name="carpetaDS" enabled="true"
+            use-java-context="true">
+    <connection-url>jdbc:postgresql://localhost:5432/carpeta</connection-url>
+    <driver>postgresql</driver>
+    <security>
+        <user-name>carpeta</user-name>
+        <password>carpeta</password>
+    </security>
+</datasource>

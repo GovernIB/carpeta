@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<!--
+Pàgina amb el Mapa Web
+-->
+<ui:composition template="/template/template.xhtml">
+
+    <ui:define name="pageTitle">#{labels.mapaweb_title}</ui:define>
+
+    <ui:define name="content">
+        <p>Aquí ha d'anar el mapa de la web</p>
+    </ui:define>
+
+    <ui:define name="breadcrumb">
+        <p:menuitem value="#{labels.mapaweb_link}" outcome="/mapaweb"/>
+    </ui:define>
+
+</ui:composition>
+</html>
