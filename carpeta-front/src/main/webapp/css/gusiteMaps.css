@@ -1,0 +1,19 @@
+/*div del mapa*/
+#gusiteMaps, .gusiteMaps {
+	width:100%;
+	height: 400px;
+	
+}
+
+div.gMMInfoWindow{
+	max-width: 300px;
+	max-height: 225px;
+}
+
+div.gMMInfoWindow img{
+	max-width: 270px;		
+}
+
+a.gMMBVolver{
+	margin-top: 10px;	
+}

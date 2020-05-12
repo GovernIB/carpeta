@@ -1,0 +1,49 @@
+/* botonet especial */
+
+a.imc-bt { display: inline-block; color: #cc073c; vertical-align: middle; padding: 1em; background-color: #fff; border: 2px solid #ddd; will-change: color, background-color; }
+a.imc-bt:hover,
+a.imc-bt:focus,
+a.imc-bt:active { color: #fff; background-color: #cc073c; }
+a.imc-bt {
+    -webkit-transition: color .2s ease-out, background-color .2s ease-out;
+    -moz-transition: color .2s ease-out, background-color .2s ease-out;
+    -ms-transition: color .2s ease-out, background-color .2s ease-out;
+    -o-transition: color .2s ease-out, background-color .2s ease-out;
+    transition: color .2s ease-out, background-color .2s ease-out;
+}
+
+a.imc-bt-especial { box-sizing: border-box; display: inline-flex; flex-direction: column; justify-content: center; align-content: center; overflow: hidden; width: 25em; height: 6em; font-size: .8em; vertical-align: middle; padding: 0 1em 0 5em; background: #fff url() no-repeat 1em 50% / 3em auto; will-change: background-position; }
+
+a.imc-bt-especial svg { display: none; width: 3em; height: 3em; vertical-align: middle; margin-right: 1em; }
+a.imc-bt-especial path { fill: #edb2c7; }
+
+a.imc-bt-especial strong { display: block; font-size: 1.3em; font-weight: normal; will-change: padding-top; }
+a.imc-bt-especial span { display: block; overflow: hidden; max-height: 0; font-size: 1em; line-height: 1.2em; padding-top: .3em; opacity: 0; will-change: opacity; }
+
+a.imc-bt-especial:hover span,
+a.imc-bt-especial:focus span,
+a.imc-bt-especial:active span { max-height: 2.6em; opacity: 1; }
+
+a.imc-bt-especial {
+    -webkit-transition: background-position .2s ease-out;
+    -moz-transition: background-position .2s ease-out;
+    -ms-transition: background-position .2s ease-out;
+    -o-transition: background-position .2s ease-out;
+    transition: background-position .2s ease-out;
+}
+
+a.imc-bt-especial span {
+    -webkit-transition: opacity .2s ease-out, max-height .2s ease-out;
+    -moz-transition: opacity .2s ease-out, max-height .2s ease-out;
+    -ms-transition: opacity .2s ease-out, max-height .2s ease-out;
+    -o-transition: opacity .2s ease-out, max-height .2s ease-out;
+    transition: opacity .2s ease-out, max-height .2s ease-out;
+}
+
+
+@media only screen and (max-width : 450px) {
+
+    a.imc-bt-especial { display: flex; width: 100%; margin-bottom: .7em; }
+
+
+}

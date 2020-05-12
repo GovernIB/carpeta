@@ -1,0 +1,23 @@
+<subsystem xmlns="urn:jboss:domain:keycloak:1.1">
+    <realm name="GOIB">
+        <auth-server-url>http://localhost:8180/auth</auth-server-url>
+        <ssl-required>EXTERNAL</ssl-required>
+    </realm>
+    <secure-deployment name="carpeta-back-1.0.0.war">
+        <realm>GOIB</realm>
+        <resource>goib-default</resource>
+        <use-resource-role-mappings>true</use-resource-role-mappings>
+        <public-client>true</public-client>
+        <principal-attribute>preferred_username</principal-attribute>
+        <verify-token-audience>true</verify-token-audience>
+    </secure-deployment>
+    <secure-deployment name="carpeta-api-1.0.0.war">
+        <realm>GOIB</realm>
+        <resource>goib-ws</resource>
+        <use-resource-role-mappings>true</use-resource-role-mappings>
+        <bearer-only>true</bearer-only>
+        <enable-basic-auth>true</enable-basic-auth>
+        <principal-attribute>preferred_username</principal-attribute>
+        <credential name="secret">e73e8e95-d88c-42bf-a76b-273be6708018</credential>
+    </secure-deployment>
+</subsystem>

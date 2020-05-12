@@ -1,0 +1,12 @@
+# Excloure del repositori
+# Directoris de resultat del Maven
+target/
+# Fitxers de projecte de Eclipse
+.classpath
+.project
+.settings/
+# Fitxers de projecte de IntelliJ IDEA
+*.iml
+.idea/
+# Fitxers de projecte de Netbeans
+nb-configuration.xml

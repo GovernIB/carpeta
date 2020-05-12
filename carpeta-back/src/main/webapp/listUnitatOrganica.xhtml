@@ -1,0 +1,89 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <!--
+    Pàgina amb el llistat d'unitats orgàniques.
+    -->
+    <ui:composition template="/template/template.xhtml">
+
+        <ui:define name="metadata">
+            <f:metadata>
+                <f:importConstants type="es.caib.carpeta.persistence.EstatPublicacio" var="estats"/>
+            </f:metadata>
+        </ui:define>
+
+        <ui:define name="pageTitle">#{labels.listUnitatOrganica_title}</ui:define>
+
+        <ui:define name="breadcrumb">
+            <p:menuitem value="#{labels.listUnitatOrganica_link}" outcome="/listUnitatOrganica"/>
+        </ui:define>
+
+        <ui:define name="content">
+            <p>
+            <h:form>
+                <p:dataTable id="dataTable" value="#{listUnitatOrganica.lazyModel}" var="unitatOrganica" sortMode="multiple"
+                             paginator="true" lazy="true" filterDelay="300" widgetVar="unitatsTable"
+                             rows="10" rowsPerPageTemplate="10,20,50,100"
+                             paginatorPosition="bottom" paginatorAlwaysVisible="false"
+                             paginatorTemplate="{RowsPerPageLabel} {RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport}
+                             {NextPageLink} {LastPageLink}"
+                             currentPageReportTemplate="#{labels.dataTable_currentPageReport}"
+                             emptyMessage="#{labels.dataTable_emptyMessage}">
+                    <f:facet name="{RowsPerPageLabel}">
+                        #{labels.dataTable_rowsPerPage}
+                    </f:facet>
+                    <p:column sortBy="#{unitatOrganica.id}">
+                        <f:facet name="header">#{labels.unitatOrganica_id}</f:facet>
+                        <h:outputText value="#{unitatOrganica.id}"/>
+                    </p:column>
+                    <p:column filterBy="#{unitatOrganica.codiDir3}" sortBy="#{unitatOrganica.codiDir3}">
+                        <f:facet name="header">#{labels.unitatOrganica_codiDir3}</f:facet>
+                        <h:outputText value="#{unitatOrganica.codiDir3}"/>
+                    </p:column>
+                    <p:column filterBy="#{unitatOrganica.nom}" sortBy="#{unitatOrganica.nom}">
+                        <f:facet name="header">#{labels.unitatOrganica_nom}</f:facet>
+                        <h:outputText value="#{unitatOrganica.nom}"/>
+                    </p:column>
+                    <p:column sortBy="#{unitatOrganica.dataCreacio}">
+                        <f:facet name="header">#{labels.unitatOrganica_dataCreacio}</f:facet>
+                        <h:outputText value="#{unitatOrganica.dataCreacio}">
+                            <f:convertDateTime type="localDate" pattern="dd-MM-yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column filterBy="#{unitatOrganica.estat}">
+                        <f:facet name="header">#{labels.unitatOrganica_estat}</f:facet>
+                        <f:facet name="filter">
+                            <p:selectOneMenu onchange="PF('unitatsTable').filter()" required="false">
+                                <f:selectItem itemLabel="----" itemValue=""/>
+                                <f:selectItems value="#{estats.values()}"/>
+                            </p:selectOneMenu>
+                        </f:facet>
+                        <h:outputText value="#{unitatOrganica.estat}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header"></f:facet>
+                        <p:menuButton value="#{labels.button_opcions}">
+                            <p:menuitem value="#{labels.button_editar}" outcome="/editUnitatOrganica">
+                                <f:param name="id" value="#{unitatOrganica.id}"/>
+                            </p:menuitem>
+                            <p:menuitem value="#{labels.listProcediment_link}" outcome="/listProcediment">
+                                <f:param name="unitatOrganicaId" value="#{unitatOrganica.id}"/>
+                            </p:menuitem>
+                            <p:menuitem value="#{labels.button_eliminar}"
+                                        action="#{listUnitatOrganica.delete(unitatOrganica.id)}"
+                                        update="messages @form">
+                                <p:confirm message="#{labels.confirm_eliminar}"/>
+                            </p:menuitem>
+                        </p:menuButton>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+            </p>
+            <p>
+                <p:button value="#{labels.newUnitatOrganica_link}" outcome="/editUnitatOrganica" />
+            </p>
+        </ui:define>
+    </ui:composition>
+</html>
