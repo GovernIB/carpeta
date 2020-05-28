@@ -18,4 +18,11 @@ public interface Constants {
      * Constant pel rol d'Usuari
      */
     String CAR_USER = "CAR_USER";
+
+
+    /**
+     * Default language
+     */
+    String DEFAULT_LANGUAGE = "CA";
+
 }
