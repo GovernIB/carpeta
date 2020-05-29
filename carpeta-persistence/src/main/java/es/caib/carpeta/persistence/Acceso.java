@@ -22,12 +22,8 @@ import java.util.Objects;
 @Entity
 @SequenceGenerator(name="acceso-sequence",sequenceName = "CAR_ACCESO_SEQ", allocationSize = 1)
 @Table(name = "CAR_ACCESO",
-   uniqueConstraints = {
-      @UniqueConstraint(name = "CAR_ACCESO_NIF_UK", columnNames = "NIF")
-   },
    indexes = {
       @Index(name = "CAR_ACCESO_PK_I", columnList = "ID"),
-      @Index(name = "CAR_ACCESO_NIF_UK_I", columnList = "NIF"),
       @Index(name = "CAR_ACCESO_ENTIDAD_FK_I", columnList = "ENTIDAD")
    }
 )
@@ -56,12 +52,11 @@ public class Acceso implements Serializable {
    private String apellidos;
 
    /**
-    * Nif del usuario autenticado. Es único, i por tanto una clave natural.
+    * Nif del usuario autenticado.
     *
     */
    @NotNull
-   @Pattern(regexp = "(([X-Z]{1})([-]?)(\\d{7})([-]?)([A-Z]{1}))|((\\d{8})([-]?)([A-Z]{1}))", message = "{persistence.Acceso.nif.Pattern.message}")
-   @Column(name="NIF", nullable = false, unique = true, length = 9)
+   @Column(name="NIF", nullable = false, length = 9)
    private String nif;
 
    /**
@@ -224,12 +219,12 @@ public class Acceso implements Serializable {
       if (this == o) return true;
       if (o == null || getClass() != o.getClass()) return false;
       Acceso acceso = (Acceso) o;
-      return nif.equals(acceso.nif);
+      return id.equals(acceso.id);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(nif);
+      return Objects.hash(id);
    }
 
    @Override
