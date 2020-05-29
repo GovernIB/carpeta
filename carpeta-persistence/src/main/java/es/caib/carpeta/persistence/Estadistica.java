@@ -26,7 +26,7 @@ import java.util.Objects;
    indexes = {
       @Index(name = "CAR_ESTADISTICA_PK_I", columnList = "ID"),
       @Index(name = "CAR_ESTAD_ACCESO_FK_I", columnList = "ACCESO"),
-      @Index(name = "CAR_ESTAD_ENTIDAD_FK_I", columnList = "ENTIDAD"),
+      @Index(name = "CAR_ESTAD_ENTIDAD_FK_I", columnList = "ENTIDAD")
    }
 )
 
