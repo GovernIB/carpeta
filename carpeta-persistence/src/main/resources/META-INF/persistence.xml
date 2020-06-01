@@ -22,6 +22,12 @@
         <class>es.caib.carpeta.persistence.PropiedadPlugin</class>
         <class>es.caib.carpeta.persistence.Usuario</class>
         <class>es.caib.carpeta.persistence.UsuarioEntidad</class>
+        <class>es.caib.carpeta.persistence.Traducible</class>
+        <class>es.caib.carpeta.persistence.TraduccionBase</class>
+        <class>es.caib.carpeta.persistence.TraduccionAviso</class>
+        <class>es.caib.carpeta.persistence.TraduccionEnlace</class>
+        <class>es.caib.carpeta.persistence.UsuarioEntidad</class>
+        <class>es.caib.carpeta.persistence.UsuarioEntidadId</class>
 
 
         <!-- Activar cache només per aquelles entitats on volguem expressament -->
@@ -49,9 +55,9 @@
                 https://github.com/hibernate/hibernate-orm/pull/3018
             Cal fixar la següent propietat
             -->
-            <!--
+
             <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect"/>
-            -->
+
 
             <!-- Afecta molt al rendiment. A entorn de producció, sempre a false -->
             <property name="hibernate.show_sql" value="false"/>

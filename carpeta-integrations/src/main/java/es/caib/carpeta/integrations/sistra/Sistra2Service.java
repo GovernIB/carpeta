@@ -2,6 +2,7 @@ package es.caib.carpeta.integrations.sistra;
 
 import es.caib.carpeta.commons.utils.BasicAuthenticator;
 import es.caib.carpeta.commons.utils.DateUtils;
+import es.caib.carpeta.commons.utils.UsuarioClave;
 import es.caib.sistramit.rest.api.externa.v1.RFiltroTramitePersistencia;
 import es.caib.sistramit.rest.api.externa.v1.RInfoTicketAcceso;
 import es.caib.sistramit.rest.api.externa.v1.RTramitePersistencia;
@@ -62,7 +63,7 @@ public class Sistra2Service {
      * @return
      * @throws Exception
      */
-    /*public String obtenerUrlTicketAcceso(UsuarioClave usuario, String idSesionTramitacion) throws Exception {
+    public String obtenerUrlTicketAcceso(UsuarioClave usuario, String idSesionTramitacion) throws Exception {
 
         Client client = getClientBasicAuthenticator();
 
@@ -87,7 +88,7 @@ public class Sistra2Service {
 
         return ticket;
 
-    }*/
+    }
 
     /**
      *

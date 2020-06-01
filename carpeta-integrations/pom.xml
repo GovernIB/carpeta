@@ -63,6 +63,13 @@
             <version>2.3.2</version>
         </dependency>-->
 
+        <!--SISTRA1 Zonaper-->
+        <dependency>
+            <groupId>es.caib.zonaper</groupId>
+            <artifactId>zonaper-ws-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+
          <!--Sistra2-->
         <dependency>
             <groupId>es.caib.sistra2</groupId>
@@ -103,6 +110,29 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <groupId>es.caib.zonaper</groupId>
+                            <artifactId>zonaper-ws-api</artifactId>
+                            <version>1.0</version>
+                            <packaging>jar</packaging>
+                            <file>${basedir}/lib/zonaper-ws-api.jar</file>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+       </plugins>
     </build>
 
     <profiles>
