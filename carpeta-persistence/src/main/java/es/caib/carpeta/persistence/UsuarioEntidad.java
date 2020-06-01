@@ -18,7 +18,7 @@ import java.util.Objects;
 //https://vladmihalcea.com/the-best-way-to-map-a-many-to-many-association-with-extra-columns-when-using-jpa-and-hibernate/
 
 @Entity
-//@SequenceGenerator(name="usuent-sequence",sequenceName = "CAR_USUARIOENTIDAD_SEQ", allocationSize = 1)
+@SequenceGenerator(name="usuent-sequence",sequenceName = "CAR_USUARIOENTIDAD_SEQ", allocationSize = 1)
 @Table(name = "CAR_USUARIOENTIDAD",
    indexes = {
       @Index(name = "CAR_USUARIOENTIDAD_PK_I", columnList = "ID"),
@@ -32,8 +32,13 @@ import java.util.Objects;
 public class UsuarioEntidad implements Serializable {
 
 
-   @EmbeddedId
-   private UsuarioEntidadId id;
+  // @EmbeddedId
+  // private UsuarioEntidadId id;
+
+   @Id
+   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "acceso-sequence")
+   @Column(name = "ID", nullable = false, length = 19)
+   private Long id;
 
    @NotNull
    @ManyToOne(fetch = FetchType.LAZY)
@@ -68,16 +73,15 @@ public class UsuarioEntidad implements Serializable {
    public UsuarioEntidad(Usuario usuario, Entidad entidad) {
       this.usuario = usuario;
       this.entidad = entidad;
-      this.id = new UsuarioEntidadId(usuario.getId(), entidad.getId());
+
    }
 
 
-
-   public UsuarioEntidadId getId() {
+   public Long getId() {
       return id;
    }
 
-   public void setId(UsuarioEntidadId id) {
+   public void setId(Long id) {
       this.id = id;
    }
 
