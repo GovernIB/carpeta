@@ -32,8 +32,7 @@ import java.util.Objects;
 public class UsuarioEntidad implements Serializable {
 
 
-  // @EmbeddedId
-  // private UsuarioEntidadId id;
+
 
    @Id
    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "acceso-sequence")

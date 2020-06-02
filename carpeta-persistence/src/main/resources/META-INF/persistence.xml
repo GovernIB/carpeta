@@ -7,8 +7,6 @@
         <jta-data-source>java:jboss/datasources/carpetaDS</jta-data-source>
 
         <!-- Llista de classes persistents -->
-        <!--<class>es.caib.carpeta.persistence.UnitatOrganica</class>
-        <class>es.caib.carpeta.persistence.Procediment</class>-->
         <class>es.caib.carpeta.persistence.Acceso</class>
         <class>es.caib.carpeta.persistence.Archivo</class>
         <class>es.caib.carpeta.persistence.Auditoria</class>
@@ -22,12 +20,6 @@
         <class>es.caib.carpeta.persistence.PropiedadPlugin</class>
         <class>es.caib.carpeta.persistence.Usuario</class>
         <class>es.caib.carpeta.persistence.UsuarioEntidad</class>
-        <class>es.caib.carpeta.persistence.Traducible</class>
-        <class>es.caib.carpeta.persistence.TraduccionBase</class>
-        <class>es.caib.carpeta.persistence.TraduccionAviso</class>
-        <class>es.caib.carpeta.persistence.TraduccionEnlace</class>
-        <class>es.caib.carpeta.persistence.UsuarioEntidad</class>
-        <class>es.caib.carpeta.persistence.UsuarioEntidadId</class>
 
 
         <!-- Activar cache només per aquelles entitats on volguem expressament -->

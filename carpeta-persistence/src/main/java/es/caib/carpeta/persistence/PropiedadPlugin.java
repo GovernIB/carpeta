@@ -35,7 +35,7 @@ public class PropiedadPlugin implements Serializable {
 
 
    @Id
-   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "propiedad-sequence")
+   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "propplugin-sequence")
    @Column(name = "ID", nullable = false, length = 19)
    private Long id;
 
