@@ -19,21 +19,36 @@ public class IntegrationsTestsUtlis {
         }
     }
 
-
-    public static String getSistraUrl() {
-        return testProperties.getProperty("sistra.urlBase");
+    public static String getSistra1Url() {
+        return testProperties.getProperty("sistra1.urlBase");
     }
 
-    public static String getSistraUser() {
-        return testProperties.getProperty("sistra.user");
+    public static String getSistra1User() {
+        return testProperties.getProperty("sistra1.user");
     }
 
-    public static String getSistraPass() {
-        return testProperties.getProperty("sistra.pass");
+    public static String getSistra1Pass() {
+        return testProperties.getProperty("sistra1.pass");
     }
 
-    public static String getSistraDocumento() {
-        return testProperties.getProperty("sistra.documento");
+    public static String getSistra1Documento() {
+        return testProperties.getProperty("sistra1.documento");
+    }
+
+    public static String getSistra2Url() {
+        return testProperties.getProperty("sistra2.urlBase");
+    }
+
+    public static String getSistra2User() {
+        return testProperties.getProperty("sistra2.user");
+    }
+
+    public static String getSistra2Pass() {
+        return testProperties.getProperty("sistra2.pass");
+    }
+
+    public static String getSistra2Documento() {
+        return testProperties.getProperty("sistra2.documento");
     }
 
     public static String getRegWeb3Host() {

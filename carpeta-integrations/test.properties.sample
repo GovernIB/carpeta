@@ -1,4 +1,11 @@
-#SISTRA
+#SISTRA1
+
+sistra1.urlBase=
+sistra1.user=
+sistra1.pass=
+sistra1.documento=
+
+#SISTRA2
 
 sistra.urlBase=http://caibter.indra.es/sistramit/api/rest/externa/v1
 sistra.user=

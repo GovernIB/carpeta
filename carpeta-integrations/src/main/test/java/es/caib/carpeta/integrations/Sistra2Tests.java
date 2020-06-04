@@ -17,12 +17,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class SistramitTests extends IntegrationsTestsUtlis{
+public class Sistra2Tests extends IntegrationsTestsUtlis{
 
-    private final static String urlBase = getSistraUrl();
-    private final static String user = getSistraUser();
-    private final static String pass = getSistraPass();
-    private final static String documento = getSistraDocumento();
+    private final static String urlBase = getSistra2Url();
+    private final static String user = getSistra2User();
+    private final static String pass = getSistra2Pass();
+    private final static String documento = getSistra2Documento();
 
     private final static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
