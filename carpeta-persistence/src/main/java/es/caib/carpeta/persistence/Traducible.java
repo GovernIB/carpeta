@@ -38,7 +38,7 @@ public abstract class Traducible<T extends TraduccionBase> {
     * Obtiene la traduccion por defecto.
     * @return La traduccion en el idioma per defecto.
     */
-   public Traduccion getTraduccion() {
+   public  T getTraduccion() {
       return getTraducciones().get(Constants.DEFAULT_LANGUAGE);
    }
 
@@ -47,7 +47,7 @@ public abstract class Traducible<T extends TraduccionBase> {
     * @param idioma Idioma de la traduccion.
     * @return Traduccion en el idioma indicado o <code>null</code> si no existe.
     */
-   public Traduccion getTraduccion(String idioma) {
+   public T getTraduccion(String idioma) {
       return getTraducciones().get(idioma);
    }
 

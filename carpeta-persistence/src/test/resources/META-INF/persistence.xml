@@ -21,12 +21,7 @@
         <class>es.caib.carpeta.persistence.PropiedadGlobal</class>
         <class>es.caib.carpeta.persistence.PropiedadPlugin</class>
         <class>es.caib.carpeta.persistence.Usuario</class>
-        <class>es.caib.carpeta.persistence.Traducible</class>
-        <class>es.caib.carpeta.persistence.TraduccionBase</class>
-        <class>es.caib.carpeta.persistence.TraduccionAviso</class>
-        <class>es.caib.carpeta.persistence.TraduccionEnlace</class>
         <class>es.caib.carpeta.persistence.UsuarioEntidad</class>
-        <class>es.caib.carpeta.persistence.UsuarioEntidadId</class>
 
         <!-- Desactivar cache -->
         <shared-cache-mode>NONE</shared-cache-mode>

@@ -120,8 +120,8 @@ public class Entidad extends Traducible<TraduccionBase> implements Serializable 
     /**
      * url del commit actual en marcha
      */
-    @Column(name="COMMIT")
-    private String commit;
+    @Column(name="COMIT")
+    private String comit;
 
     /**
      * Contexto de la entidad
@@ -142,9 +142,11 @@ public class Entidad extends Traducible<TraduccionBase> implements Serializable 
      */
     @ElementCollection(fetch =FetchType.LAZY, targetClass = TraduccionBase.class )
     @CollectionTable(name = "CAR_TRA_ENTIDAD",
-       joinColumns = {@JoinColumn(name = "IDENTIDAD", referencedColumnName = "id")})
-    @MapKey(name="LANG")
+       joinColumns = {@JoinColumn(name = "IDENTIDAD", referencedColumnName = "id")},foreignKey = @ForeignKey(name = "CAR_ENTIDAD_TRAENTID_FK"))
+    @MapKeyColumn(name="LANG", insertable = false, updatable = false)
     private Map<String, TraduccionBase> traducciones;
+
+
 
 
     public Entidad() {
@@ -220,12 +222,12 @@ public class Entidad extends Traducible<TraduccionBase> implements Serializable 
         this.ficheroCss = ficheroCss;
     }
 
-    public String getCommit() {
-        return commit;
+    public String getComit() {
+        return comit;
     }
 
-    public void setCommit(String commit) {
-        this.commit = commit;
+    public void setComit(String comit) {
+        this.comit = comit;
     }
 
     public String getContexto() {

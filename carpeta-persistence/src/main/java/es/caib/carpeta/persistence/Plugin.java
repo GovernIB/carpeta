@@ -91,9 +91,9 @@ public class Plugin extends Traducible<TraduccionBase> implements Serializable {
     * Traducciones
     */
    @ElementCollection(fetch =FetchType.LAZY, targetClass = TraduccionBase.class )
-   @CollectionTable(name = "CAR_TRA_ENTIDAD",
-      joinColumns = {@JoinColumn(name = "IDENTIDAD", referencedColumnName = "id")})
-   @MapKey(name="LANG")
+   @CollectionTable(name = "CAR_TRA_PLUGIN",
+      joinColumns = {@JoinColumn(name = "IDPLUGIN", referencedColumnName = "id")},foreignKey = @ForeignKey(name = "CAR_PLUGIN_TRAPLUG_FK"))
+   @MapKeyColumn(name="LANG", insertable = false, updatable = false)
    private Map<String, TraduccionBase> traducciones;
 
 

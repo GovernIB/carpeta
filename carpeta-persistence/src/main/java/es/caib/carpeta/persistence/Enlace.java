@@ -57,8 +57,8 @@ public class Enlace extends Traducible<TraduccionEnlace> implements Serializable
     */
    @ElementCollection(fetch =FetchType.LAZY, targetClass = TraduccionEnlace.class )
    @CollectionTable(name = "CAR_TRA_ENLACE",
-      joinColumns = {@JoinColumn(name = "IDENLACE", referencedColumnName = "id")})
-   @MapKey(name="LANG")
+      joinColumns = {@JoinColumn(name = "IDENLACE", referencedColumnName = "id")},foreignKey = @ForeignKey(name = "CAR_ENLACE_TRAENLAC_FK"))
+   @MapKeyColumn(name="LANG", insertable = false, updatable = false)
    private Map<String, TraduccionEnlace> traducciones;
 
    @Override

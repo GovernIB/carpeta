@@ -1,0 +1,82 @@
+
+a{
+	color: #4dba79;
+}
+a:hover{
+	color: #000;
+	text-decoration: none;
+}
+
+/* Botó color Carpeta */
+.btn-primary.carpeta-btn {
+	background-color: #4dba79;
+	border-color: #4dba79;
+	border: none !important;
+	color: #ffffff !important;
+}
+.btn-primary.carpeta-btn:hover,
+.btn-primary.carpeta-btn:focus,
+.btn-primary.carpeta-btn:active{
+	background-color: #000 !important;
+	border: none #000 !important;
+	outline: none !important;
+	box-shadow: none !important;
+}
+/* Fi Botó color Carpeta */
+
+.lh15{
+	line-height:1.5
+}
+.margen-top-clave{
+	padding-top: 3rem !important;
+}
+
+.container-contenido {
+    margin-left: 0 !important;
+}
+img:hover {
+    border: 0px;
+}
+
+
+/* Canvis per React */
+/*.imc-continguts {
+    max-width: 100% !important;
+}*/
+.boton-menu{
+	background-color: transparent;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #545454;
+  text-transform: uppercase;
+  padding: 1em 0.6em;
+  border: none;
+}
+.boton-menu:hover{
+  color: #cc073c;
+}
+.imc-separador{
+	/*font-size: 0.750em;*/
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+
+/* RESPONSIVE
+
+@media only screen and (min-width: 1410px){
+.imc-titol {
+    padding-left: 4.5em;
+	width: 100%;
+}
+.imc-titol .imc--contingut {
+    margin: 0;
+	max-width: 100% !important;
+	width: calc(100% - 5em);
+}
+.imc-peu .imc--contingut {
+    margin: 0;
+    width: calc(100% - 5em);
+}
+}*/
+
+/* FI RESPONSIVE */
