@@ -1,0 +1,25 @@
+grant select,insert,delete,update on CAR_ACCESO to www_carpeta;
+grant select,insert,delete,update on CAR_ARCHIVO to www_carpeta;
+grant select,insert,delete,update on CAR_AUDITORIA to www_carpeta;
+grant select,insert,delete,update on CAR_AVISO to www_carpeta;
+grant select,insert,delete,update on CAR_ENLACE to www_carpeta;
+grant select,insert,delete,update on CAR_ENTIDAD to www_carpeta;
+grant select,insert,delete,update on CAR_ESTADISTICA to www_carpeta;
+grant select,insert,delete,update on CAR_LOG to www_carpeta;
+grant select,insert,delete,update on CAR_PLUGIN to www_carpeta;
+grant select,insert,delete,update on CAR_PROPIEDAD_GLOBAL to www_carpeta;
+grant select,insert,delete,update on CAR_PROPIEDAD_PLUGIN to www_carpeta;
+grant select,insert,delete,update on CAR_USUARIO to www_carpeta;
+
+grant select, alter on CAR_ACCESO_SEQ to www_carpeta;
+grant select, alter on CAR_ARCHIVO_SEQ to www_carpeta;
+grant select, alter on CAR_AUDITORIA_SEQ to www_carpeta;
+grant select, alter on CAR_AVISO_SEQ to www_carpeta;
+grant select, alter on CAR_ENLACE_SEQ to www_carpeta;
+grant select, alter on CAR_ENTIDAD_SEQ to www_carpeta;
+grant select, alter on CAR_ESTADISTICA_SEQ to www_carpeta;
+grant select, alter on CAR_LOG_SEQ to www_carpeta;
+grant select, alter on CAR_PLUGIN_SEQ to www_carpeta;
+grant select, alter on CAR_PROPGLOBAL_SEQ to www_carpeta;
+grant select, alter on CAR_PROPPLUGIN_SEQ to www_carpeta;
+grant select, alter on CAR_USUARIO_SEQ to www_carpeta;
