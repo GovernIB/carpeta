@@ -1,8 +1,7 @@
 COMPILACIÓN APLICACIÓN
 ----------------------------
 
-Para compilar la aplicación la primera vez es necesario ejecutar el comando "mvn initialize", con la finalidad de instalar
-librerias en el repositorio local de maven.
 
-Después se puede compilar la aplicación de la siguiente manera: mvn -DskipTests clean install y copiar el ear generado en
-la carpeta ${jboss.home}/standalone/deployments/
+Se puede compilar la aplicación de la siguiente manera: mvn -DskipTests clean install
+
+Copiar el ear generado en la carpeta ${jboss.home}/standalone/deployments/

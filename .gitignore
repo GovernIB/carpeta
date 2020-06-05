@@ -10,3 +10,9 @@ target/
 .idea/
 # Fitxers de projecte de Netbeans
 nb-configuration.xml
+/react/build.bat
+/react/node_modules
+/react/build
+/react/package-lock.json
+/react/public/package-lock.json
+/react/src/package-lock.json
