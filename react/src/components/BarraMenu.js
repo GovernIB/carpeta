@@ -5,6 +5,10 @@ import { withTranslation } from 'react-i18next';
 
 class LegacyComponentClass extends Component{
 
+  onClick() {
+      this.setState(menuLateral);
+  }
+
   render(){
 
     const { t } = this.props;
@@ -26,7 +30,7 @@ class LegacyComponentClass extends Component{
 								</a>
 							</li>
 							<li>
-								<button type="button" className="imc-bt-menu" id="imc-bt-menu" title={ t('menu.menu') } onClick={menuLateral}>
+								<button type="button" className="imc-bt-menu" id="imc-bt-menu" title={ t('menu.menu') } onClick={this.onClick()}>
 									<span>{ t('menu.menu') }</span>
 								</button>
 							</li>

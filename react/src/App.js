@@ -10,13 +10,15 @@ class App extends Component {
 
 	render() {
 
-  //  /* global Modernizr */
-    //console.log(Modernizr);
+  ///* global Modernizr */
+  //console.log(Modernizr);
 
 //const { userId } = false
 
+//console.log(userId);
 //if (!userId) {
-//cookie.save('userId', userId, { path: '/' })
+ //cookie.save('userId', userId, { path: '/' })
+
 		return (
       <div>
 
@@ -25,9 +27,9 @@ class App extends Component {
       </div>
 		);
 
-}
+//}
 
-	//}
+	}
 }
 
 export default App;

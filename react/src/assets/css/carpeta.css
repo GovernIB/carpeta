@@ -60,6 +60,12 @@ img:hover {
 	padding-left: 0.5em;
 	padding-right: 0.5em;
 }
+.imc-bt-rotate{
+	transform: rotate(-90deg);
+	width: 2em !important;
+	background-color: transparent !important;
+	float: right;
+}
 
 /* RESPONSIVE
 

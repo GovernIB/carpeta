@@ -1,6 +1,6 @@
 import $ from 'jquery';
 //import Modernizr from 'modernizr';
-//const Modernizr = require('modernizr');
+//var Modernizr = require('modernizr');
 //import {modernizr} from '../assets/js/modernizr.js';
 
 
@@ -147,7 +147,9 @@ export function menuLateral(){
 
 
 // css scroll slim
-/**Modernizr.load({
+///* global Modernizr*/
+/*console.log(Modernizr);
+Modernizr.load({
 		test: Modernizr.cssscrollbar,
 		complete: function() {
 
@@ -162,16 +164,44 @@ export function menuLateral(){
 					});
 			}
 		}
-	});**/
+	});*/
 
 }
 
 
-
+//* Canvia l'idioma actiu del front *//
 export default function canviarIdioma(varLng) {
 alert(varLng);
 	return () => window.$lang = varLng;
   //i18n.changeLanguage(varLng, (err, t) => {
 	//	alert(i18n.language);
   //});
+};
+
+
+//* Elimna warning non-passive event listener to a scroll-blocking 'touchstart' *//
+$.event.special.touchstart = {
+  setup: function( _, ns, handle ){
+    if ( ns.includes("noPreventDefault") ) {
+      this.addEventListener("touchstart", handle, { passive: false });
+    } else {
+      this.addEventListener("touchstart", handle, { passive: true });
+    }
+  }
+};
+$.event.special.touchmove = {
+  setup: function( _, ns, handle ){
+    if ( ns.includes("noPreventDefault") ) {
+      this.addEventListener("touchmove", handle, { passive: false });
+    } else {
+      this.addEventListener("touchmove", handle, { passive: true });
+    }
+  }
+};
+
+/* Tanca el menú hamburguesa obert */
+export function tancamenu() {
+	//window.location.reload();
+	window.location.replace('');
+	//$("#imc-marc-menu").hide();
 };
