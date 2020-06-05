@@ -1,6 +1,7 @@
 import React, { Component, Suspense } from 'react';
 import { withTranslation } from 'react-i18next';
 import i18n from 'i18next';
+import {tancamenu} from '../assets/js/helper';
 
 
 class LegacyComponentClass extends Component{
@@ -30,8 +31,10 @@ class LegacyComponentClass extends Component{
 
         <div className="imc-marc-menu" id="imc-marc-menu" aria-hidden="true">
           <div className="imc-cercador" id="imc-cercador">
-
-          </div>
+            <button type="button" className="imc-bt-menu imc-bt-rotate" title="prova" onClick={tancamenu}>
+              <span>X</span>
+            </button>
+            </div>
           <ul>
             <li>
               <a href="http://www.caib.es/govern/cercadorAv.do?lang=ca" className="imc-marc-ico imc--avanzada" title={ t('menu.recerca') }>
