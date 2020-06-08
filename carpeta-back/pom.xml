@@ -4,7 +4,7 @@
     <parent>
         <groupId>es.caib.carpeta</groupId>
         <artifactId>carpeta</artifactId>
-        <version>1.1.0</version>
+        <version>carpeta-1.1.1</version>
     </parent>
 
     <artifactId>carpeta-back</artifactId>
@@ -29,19 +29,19 @@
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-commons</artifactId>
-            <version>1.1.0</version>
+            <version>carpeta-1.1.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-persistence</artifactId>
-            <version>1.1.0</version>
+            <version>carpeta-1.1.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-ejb</artifactId>
-            <version>1.1.0</version>
+            <version>carpeta-1.1.1</version>
             <scope>provided</scope>
         </dependency>
         <!-- Llibreries de keycloak -->
