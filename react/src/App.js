@@ -10,8 +10,8 @@ class App extends Component {
 
 	render() {
 
-  ///* global Modernizr */
-  //console.log(Modernizr);
+  /* global Modernizr */
+  console.log(Modernizr);
 
 //const { userId } = false
 

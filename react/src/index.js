@@ -14,8 +14,8 @@ import * as serviceWorker from './serviceWorker';
 import './i18n';
 
 /* Cookies */
-//import acceptarCookies from './assets/js/aceptar_cookies';
-//acceptarCookies();
+import acceptarCookies from './assets/js/aceptar_cookies';
+acceptarCookies();
 /* Fin Cookies */
 
 ReactDOM.render(
