@@ -4,7 +4,7 @@
     <parent>
         <groupId>es.caib.carpeta</groupId>
         <artifactId>carpeta</artifactId>
-        <version>carpeta-1.1.1</version>
+        <version>1.1.1</version>
     </parent>
 
     <artifactId>carpeta-ear</artifactId>
@@ -34,14 +34,14 @@
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-ejb</artifactId>
-            <version>carpeta-1.1.1</version>
+            <version>1.1.1</version>
             <type>ejb</type>
         </dependency>
         <!-- BACK START -->
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-back</artifactId>
-            <version>carpeta-1.1.1</version>
+            <version>1.1.1</version>
             <type>war</type>
         </dependency>
         <!-- BACK END -->
@@ -49,7 +49,7 @@
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-front</artifactId>
-            <version>carpeta-1.1.1</version>
+            <version>1.1.1</version>
             <type>war</type>
         </dependency>
         <!-- FRONT END -->
@@ -57,7 +57,7 @@
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-api</artifactId>
-            <version>carpeta-1.1.1</version>
+            <version>1.1.1</version>
             <type>war</type>
         </dependency>
         <!--
@@ -69,17 +69,17 @@
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-persistence</artifactId>
-            <version>carpeta-1.1.1</version>
+            <version>1.1.1</version>
         </dependency>
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-commons</artifactId>
-            <version>carpeta-1.1.1</version>
+            <version>1.1.1</version>
         </dependency>
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-integrations</artifactId>
-            <version>carpeta-1.1.1</version>
+            <version>1.1.1</version>
         </dependency>
         
     </dependencies>
