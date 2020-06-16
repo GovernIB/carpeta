@@ -26,7 +26,7 @@ public class Version {
      * Inicialitza el bean amb els valors de Version.properties
      */
     @PostConstruct
-    protected void init() {
+    public void init() {
         /* Agafa fitxer Version.properties amb el mateix package */
         ResourceBundle bundle = ResourceBundle.getBundle("carpeta.version.Version");
         version = bundle.getString("project.version");

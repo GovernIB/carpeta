@@ -17,6 +17,7 @@
         Si volem emprar el maven.build.timestamp al filtres s'ha de "redefinir" la propietat.
         Veure: https://issues.apache.org/jira/browse/MASSEMBLY-603
          -->
+         
         <project.buildtime>${maven.build.timestamp}</project.buildtime>
         <maven.build.timestamp.format>dd/MM/yyyy HH:mm</maven.build.timestamp.format>
     </properties>

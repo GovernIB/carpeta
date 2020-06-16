@@ -241,7 +241,7 @@ a:hover{
 }
 /* FI Boto Dropdown */
 
-/* CapÃ§alera */
+/* Capçalera */
 .flechaSubmenu{
 	font-size: 8px;
 	padding-top: 5px !important;
@@ -283,8 +283,8 @@ a:hover{
 }
 .logoGovern{
 	float: left;
-	margin-right: 40px;
-	margin-left: 40px;
+	margin-right: 20px;
+	margin-left: 5px;
 }
 .imatgeGovern{
 	width: 50px;
@@ -302,9 +302,9 @@ a:hover{
 .minW0{
 	min-width: 0;
 }
-/* FI CapÃ§alera */
+/* FI Capçalera */
 
-/* MenÃº mÃ²bil */
+/* Menú mòbil */
 .botoMobil{
 	position: absolute;
 	right: 10px;
@@ -341,7 +341,7 @@ a.dropdown-item.mobil:hover{
 	color: #4dba79 !important;
 	background-color: #fff;
 }
-/* FI MenÃº mÃ²bil */
+/* FI Menú mòbil */
 
 /* Suport */
 .infoContacte{
@@ -492,21 +492,4 @@ a.iconoXarxes{
 	color: #000;
 }
 
-/* EspecÃ­fics per primefaces */
-.ui-growl {
-	top: 100px;
-	left: 20px;
-}
-.ui-outputlabel {
-	padding-top: 6px;
-}
-.ui-widget {
-	font: normal 100% 'Bariol Regular', Arial, Helvetica, sans-serif;
-}
-.ui-breadcrumb a {
-	color: #4dba79;
-}
-.ui-breadcrumb a:hover {
-	color: #000;
-	text-decoration: none;
-}
+

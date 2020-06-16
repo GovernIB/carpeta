@@ -14,19 +14,63 @@
         <url>https://github.com/GovernIB/carpeta</url>
     </scm>
     <properties>
-        <!-- Propietats que afecten els plugins -->
-        <maven.compiler.release>11</maven.compiler.release>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- No fer els tests per defecte. -->
-        <maven.test.skip>true</maven.test.skip>
+
+
+
         <!-- Versions de JBoss -->
         <jboss-eap.version>7.2.6.GA</jboss-eap.version>
         <jboss-javaee.version>1.0.1.Final-redhat-00003</jboss-javaee.version>
-        <!-- Versions de diferents llibreries emprades dins els mòduls -->
-        <mp-openapi.version>1.0.1</mp-openapi.version>
-        <keycloak.version>6.0.1</keycloak.version>
+
+        <!-- 
         <primefaces.version>7.0</primefaces.version>
         <primefaces.theme.version>1.0.10</primefaces.theme.version>
+        
+        -->
+        
+        
+        		<!-- Propietats que afecten els plugins -->
+		<maven.compiler.release>11</maven.compiler.release>
+		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- No fer els tests per defecte. -->
+		<maven.test.skip>true</maven.test.skip>
+		<!-- Versions de les llibreries emprades dins els mòduls -->
+		<javaee-api.version>8.0.1</javaee-api.version>
+		<activation.version>1.1.1</activation.version>
+		<mp-openapi.version>1.0.1</mp-openapi.version>
+		<jaxb-api.version>2.2.12</jaxb-api.version>
+		<slf4j.version>1.7.30</slf4j.version>
+		<keycloak.version>6.0.1</keycloak.version>
+
+		<cxf.version>3.3.3</cxf.version>
+		<junit.version>4.8.2</junit.version>
+		<hibernate.version>5.3.15.Final</hibernate.version>
+		<hibernate.annotations.version>5.3.15.Final</hibernate.annotations.version>
+
+		<resteasy.version>3.6.3.Final</resteasy.version>
+		<jboss-logging.version>3.3.2.Final</jboss-logging.version>
+
+		<!-- 5.0.2.RELEASE - 5.0.0.RELEASE 4.3.26.RELEASE - 4.2.14.RELEASE 3.2.18.RELEASE 
+			- 3.2.10.RELEASE -->
+		<spring.version>4.3.26.RELEASE</spring.version>
+		<springsecurity.version>4.2.14.RELEASE</springsecurity.version>
+		
+		<tiles.version>3.0.8</tiles.version>
+		
+		<!-- XYZ ZZZ -->
+		<cxf.version>2.2.12</cxf.version>
+		<global.version>${project.version}</global.version>
+
+		<cglib.version>2.2.2</cglib.version>
+
+		<!-- XYZ ZZZ S'ha de fer la substitució -->
+		<genapp.version>2.0.0</genapp.version>
+		
+        
+        
+        
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -62,16 +106,7 @@
                 <artifactId>keycloak-core</artifactId>
                 <version>${keycloak.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.primefaces</groupId>
-                <artifactId>primefaces</artifactId>
-                <version>${primefaces.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.primefaces.themes</groupId>
-                <artifactId>bootstrap</artifactId>
-                <version>${primefaces.theme.version}</version>
-            </dependency>
+
         </dependencies>
     </dependencyManagement>
     <build>
@@ -269,13 +304,7 @@
                 <updatePolicy>never</updatePolicy>
             </snapshots>
         </repository>
-        <!-- Les llibreries de Primefaces no estan definides als repositoris centrals -->
-        <repository>
-            <id>prime-repo</id>
-            <name>PrimeFaces Maven Repository</name>
-            <url>http://repository.primefaces.org</url>
-            <layout>default</layout>
-        </repository>
+
         <!-- Repositori del GovernIB amb llibreries compartides, plugins, clients d'altres eines... -->
         <repository>
             <id>github-governib-maven</id>

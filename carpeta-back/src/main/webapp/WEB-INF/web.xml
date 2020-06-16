@@ -1,101 +1,219 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
-         version="4.0">
+<?xml version="1.0" encoding="UTF-8" ?>
+<web-app version="4.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_4_0.xsd">
 
-    <display-name>carpeta Back</display-name>
+	<display-name>Carpeta</display-name>
+	<description>Back&amp;Front Office Carpeta</description>
+	
+	<!--  LISTENER -->
+	<!-- 
+	<listener>
+      <listener-class>
+            es.caib.carpeta.back.utils.CarpetaSessionListener
+      </listener-class>
+    </listener>
+     -->
 
-    <welcome-file-list>
-        <welcome-file>index.xhtml</welcome-file>
-    </welcome-file-list>
+	<!--  LOAD-ON-STARTUP SERVLET -->
 
-    <!-- Servlet de JSF -->
-    <servlet>
-        <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
+	<servlet>
+      <servlet-name>InitServlet</servlet-name>
+      <servlet-class>es.caib.carpeta.back.utils.InitServlet</servlet-class>
+      <load-on-startup>1</load-on-startup>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>Faces Servlet</servlet-name>
-        <url-pattern>*.xhtml</url-pattern>
-    </servlet-mapping>
 
-    <!-- Per la llista completa de paràmetres de JSF veure 11.1.3 de l'especificació JSF -->
-    <!-- State saving method: 'client' o 'server' (=default). Veure 2.5.2  de l'especifiació JSF -->
-    <context-param>
-        <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
-        <param-value>server</param-value>
-    </context-param>
-    <!-- Canvia el mode en que es generen certs errors per ajudar al desenvolupament -->
-    <!-- TODO Aquest s'hauria de filtrar amb el maven per generar l'aplicació de producció -->
-    <context-param>
-        <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value>
-    </context-param>
-    <!-- Per defecte és GMT. Com que solem estar a GMT+1 convé indicar que agafi del sistema -->
-    <context-param>
-        <param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
-        <param-value>true</param-value>
-    </context-param>
-    <!-- Interpretar els input text buids com a null -->
-    <context-param>
-        <param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
-        <param-value>true</param-value>
-    </context-param>
 
-    <!--
-        Opcions de configuració de Primefaces
-        Veure: https://primefaces.github.io/primefaces/7_0/#/gettingstarted/configuration
-    -->
-    <context-param>
-        <param-name>primefaces.TRANSFORM_METADATA</param-name>
-        <param-value>true</param-value>
-    </context-param>
-    <!-- El tema ha de coincidir amb la dependència inclosa dins el WAR. Per no emprar-ne cap posar el valor none -->
-    <context-param>
-        <param-name>primefaces.THEME</param-name>
-        <param-value>bootstrap</param-value>
-    </context-param>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
 
-    <!--
-        Primefaces s'integra amb les error-page.
-        Veure: https://primefaces.github.io/primefaces/7_0/#/core/errorhandling?id=error-pages
-    -->
-    <error-page>
-        <location>/error/defaultError.xhtml</location>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/static/*</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.gif</url-pattern>
+		<url-pattern>*.png</url-pattern>
+		<url-pattern>*.jpg</url-pattern>
+		<url-pattern>*.js</url-pattern>
+		<url-pattern>*.css</url-pattern>
+		<url-pattern>*.map</url-pattern>		
+		<url-pattern>*.htm</url-pattern>
+		<url-pattern>*.txt</url-pattern>
+		<url-pattern>*.jar</url-pattern>
+		<url-pattern>*.pdf</url-pattern>
+        <url-pattern>*.ico</url-pattern>
+		<url-pattern>*.properties</url-pattern>
+	</servlet-mapping>
+
+	<!-- Spring 3 Configuration -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/applicationContext-security.xml</param-value>
+	</context-param>
+
+	<servlet>
+		<servlet-name>carpetaback</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+		<init-param>
+	        <param-name>contextClass</param-name>
+	        <param-value>
+	            org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+	        </param-value>
+	    </init-param>
+	    <init-param>
+	        <param-name>contextConfigLocation</param-name>
+	        <param-value>
+	            es.caib.carpeta.back.config.MvcConfiguration
+	        </param-value>
+	    </init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>carpetaback</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<!-- Spring 3 UTF-8 Encoding -->
+	<filter>
+		<filter-name>encoding-filter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>encoding-filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Spring 3 tld's requerits en els jsp -->
+	<jsp-config>
+		<taglib>
+			<taglib-uri>http://www.springframework.org/tags</taglib-uri>
+			<taglib-location>/WEB-INF/tld/spring.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://www.springframework.org/tags/form</taglib-uri>
+			<taglib-location>/WEB-INF/tld/spring-form.tld</taglib-location>
+		</taglib>
+		<taglib>
+		   <taglib-uri>http://www.springframework.org/security/tags</taglib-uri>
+		   <taglib-location>/WEB-INF/tld/security.tld</taglib-location>
+		</taglib>
+		<taglib>
+		   <taglib-uri>http://jakarta.apache.org/taglibs/unstandard-1.0</taglib-uri>
+		   <taglib-location>/WEB-INF/tld/taglibs-unstandard.tld</taglib-location>
+		</taglib>
+	</jsp-config>
+
+   <error-page>
+		<error-code>404</error-code>
+		<location>/error.jsp?errortype=404</location>
+	</error-page>
+
+   <error-page>
+		<error-code>403</error-code>
+		<location>/error.jsp?errortype=403</location>
+	</error-page>
+
+	<error-page>
+        <exception-type>es.caib.carpeta.back.security.LoginException</exception-type>
+        <location>/error.jsp?errortype=-1</location>
     </error-page>
 
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/error.jsp</location>
+    </error-page>
+
+
+ 
     <security-constraint>
-        <display-name>Accés restringit a adminsitradors</display-name>
         <web-resource-collection>
-            <web-resource-name>tot</web-resource-name>
-            <description>Tots els recursos</description>
-            <url-pattern>/*</url-pattern>
+            <web-resource-name>carpeta_back-public</web-resource-name>            
+            <url-pattern>/applet/*</url-pattern>
+            <url-pattern>/css/*</url-pattern>
+            <url-pattern>/img/*</url-pattern>
+            <url-pattern>/js/*</url-pattern>
+            <url-pattern>/doc/*</url-pattern>
+            <url-pattern>/error.jsp</url-pattern>
+            <url-pattern>/index.jsp</url-pattern>
+        </web-resource-collection>
+        <!-- No auth-constraint means everybody has access! -->
+    </security-constraint>
+	
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>carpeta_back-common</web-resource-name>
+            <url-pattern>/common/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>CAR_USER</role-name>
+            <role-name>CAR_ADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>carpeta_back-user</web-resource-name>
+            <url-pattern>/user/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>CAR_USER</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
+    
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>carpeta_back-admin</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+            <url-pattern>/webdb/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>CAR_ADMIN</role-name>
         </auth-constraint>
-        <!-- Si requerim SSL -->
-        <!--
-        <user-data-constraint>
-            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-        </user-data-constraint>
-        -->
     </security-constraint>
+    
+    <!-- XXX   CLIENT-CERT,BASIC -->
+	<login-config>
+		<auth-method>BASIC</auth-method>
+		<realm-name>Govern de les Illes Balears</realm-name>
+	</login-config>
 
-    <!-- <login-config>
-         <auth-method>BASIC</auth-method>
-         <realm-name>Govern de les Illes Balears</realm-name>
-     </login-config>-->
+	<security-role>
+		<description>Administrador de Carpeta</description>
+		<role-name>CAR_ADMIN</role-name>
+	</security-role>
 
-     <login-config>
-         <auth-method>KEYCLOAK</auth-method>
-         <realm-name>Autenticacio</realm-name>
-     </login-config>
+	<security-role>
+		<description>Usuari de Carpeta</description>
+		<role-name>CAR_USER</role-name>
+	</security-role>
 
-     <security-role>
-         <role-name>CAR_ADMIN</role-name>
-     </security-role>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 
- </web-app>
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+</web-app>

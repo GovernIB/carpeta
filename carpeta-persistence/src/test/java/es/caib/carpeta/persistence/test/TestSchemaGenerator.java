@@ -9,6 +9,14 @@ import java.util.Collections;
  * Test per realitzar la generació de l'schema de base de dades.
  */
 public class TestSchemaGenerator {
+	
+	
+	
+	public static void main(String[] args) {
+		new TestSchemaGenerator().testCreateSchema();
+	}
+	
+	
 
     /**
      * A partir del persistence.xml definit a test genera l'schema de base de dades.

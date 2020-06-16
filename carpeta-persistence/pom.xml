@@ -51,6 +51,14 @@
             <artifactId>hibernate-core</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+			<groupId>org.fundaciobit.genapp</groupId>
+			<artifactId>genapp-core</artifactId>
+			<version>${genapp.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
         <!-- Per tests EJB amb Arquillian -->
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
