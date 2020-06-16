@@ -30,7 +30,7 @@
 			</div>
 
 			<div>
-				<h1 class="titol"><%=es.caib.carpeta.commons.utils.StaticVersion.PROJECT_NAME%></h1>
+				<h1 class="titol">${version.projectName}</h1>
 			</div>
 			<div>
 				<div>
