@@ -17,27 +17,14 @@
 
   <!--  PIPELLES -->
   <div class="row-fluid container main" style="max-width: none;">
-    
+    <%--
     <ul class="nav nav-tabs custom-submenu">
     
 	    <li class="nav-item">
 	       <a class="nav-link ${(empty pipella)?'active' : '' }" href="<c:url value="/canviarPipella/"/>"><fmt:message key="inici" /></a>
 	    </li> 
 	
-	<%--  DRAW MENU OPTIONS  XYZ ZZZ
-	    <c:forEach var="rolG" items="${loginInfo.roles}">
-	    <c:set var="rol" value="${rolG.authority}"/>
-	    <c:if test="${not(rol eq 'ROLE_USER')}">
-	    <li ${(pipella eq rol)?'class="active"' : '' }>
-	       <a href="<c:url value="/canviarPipella/${rol}"/>"><fmt:message key="${rol}" />
-	       <c:if test="${not(empty avisos[rol])}">
-	         &nbsp; <span class="badge badge-warning">${avisos[rol]}</span>
-	       </c:if>
-	       </a>
-	    </li>
-	    </c:if>  
-	    </c:forEach>
-	    --%>
+
 	    
 	    <sec:authorize access="hasRole('ROLE_USER')">
 	    <li class="nav-item">
@@ -51,11 +38,6 @@
 	    </li>
 	    </sec:authorize>
 	
-	    <sec:authorize access="hasRole('ROLE_ADMIN')">
-	    <li class="nav-item">
-	       <a class="nav-link ${(pipella eq 'webdb')?'active' : '' }" href="<c:url value="/canviarPipella/webdb"/>"> WebDatabase</a>
-	    </li>
-	    </sec:authorize>
 	
 	    <c:if test="${prefixLowercase}:isDesenvolupament()}">
 	    <li class="nav-item">
@@ -63,6 +45,8 @@
 	    </li>
 	    </c:if>
     </ul>
+    
+    --%>
 
     <%-- INICI MENU + CONTINGUT --%>
     <div class="well well-white" style="padding:10px">

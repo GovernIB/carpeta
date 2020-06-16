@@ -2,11 +2,6 @@
 <%@page import="es.caib.carpeta.commons.utils.Configuracio"
 %><%@ page contentType="text/html;charset=UTF-8" language="java"
 %><%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
-<%
-  Version v = new Version();
-  v.init();
-  session.setAttribute("versio", v);
-%>
 
 <footer id="footer">
 	<div class="row mr-auto ml-3 mr-3 peuResponsive">
@@ -18,14 +13,14 @@
 		    
 			</strong> <br/>
 			<small>
-			Build: ${versio.buildTime} <br /> JDK:
+			Build: ${version.buildTime} <br /> JDK:
 			${version.jdkVersion} <br />
 
 			<fmt:message key="revisio" />: 
-			<c:if test="${empty versio.scmRevision}">
+			<c:if test="${empty version.scmRevision}">
 				<fmt:message key="scmversion.msg" />
 			</c:if>
-			<c:if test="${not empty versio.scmRevision}">${versio.scmRevision}</c:if>
+			<c:if test="${not empty version.scmRevision}">${version.scmRevision}</c:if>
 			<br />
 			<span style="padding-top: 2px">
 			 <i><fmt:message key="desenvolupatper" /></i></span>

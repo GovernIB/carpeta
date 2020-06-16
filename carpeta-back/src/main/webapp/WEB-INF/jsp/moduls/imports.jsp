@@ -13,8 +13,9 @@
     <%-- XYZ ZZZ   --%>
     <link href="<c:url value="/css/default.css"/>" rel="stylesheet">
    
-   
-    <link href="<c:url value="/css/genapp.css"/>" rel="stylesheet"> --%>
+    <%--
+    <link href="<c:url value="/css/genapp.css"/>" rel="stylesheet"> 
+    --%>
     
     <!-- Bootstrap CSS-->
     <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet">

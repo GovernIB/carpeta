@@ -34,6 +34,10 @@ public class Version {
         scmRevision = bundle.getString("scm.revision");
         jdkVersion = bundle.getString("jdk.version");
         projectName = bundle.getString("project.name");
+        if (projectName != null && projectName.length() != 0) {
+        	projectName = ("" + projectName.charAt(0)).toUpperCase() + projectName.substring(1);
+        }
+        
     }
 
     /**

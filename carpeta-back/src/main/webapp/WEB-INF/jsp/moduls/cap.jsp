@@ -95,7 +95,7 @@
 						--%>
 	    
 	                      <a class="dropdown-item ${(empty pipella)?'active' : '' }"	                      
-								href="<c:url value="/canviarPipella/user"></c:url>">
+								href="<c:url value="/canviarPipella"></c:url>">
 								<i class="fas fa-home"></i>
 								<fmt:message key="inici" /></a>
 							</a>
@@ -118,34 +118,30 @@
 	    --%>
 	    
 	    <sec:authorize access="hasRole('ROLE_USER')">
-			<a class="dropdown-item ${(pipella eq 'user')?'active' : '' }"	                      
-			href="<c:url value="/canviarPipella/user"/>">
+			<a class="dropdown-item ${(pipella eq 'user')?'active' : '' }" href="<c:url value="/canviarPipella/user"/>">
 			<i class="fas fa-user"></i>
 				ROLE_USER</a>
 			</a>
 	    </sec:authorize>
 	    
-	    <%--
-	    <i class="fas fa-user-shield"></i>
+
 	    <sec:authorize access="hasRole('ROLE_ADMIN')">
-	    <li class="nav-item">
-	       <a class="nav-link ${(pipella eq 'admin')?'active' : '' }" href="<c:url value="/canviarPipella/admin"/>">ROLE_ADMIN</a>
-	    </li>
+	       	<a class="dropdown-item ${(pipella eq 'admin')?'active' : '' }" href="<c:url value="/canviarPipella/admin"/>">
+			<i class="fas fa-user-shield"></i>
+				ROLE_ADMIN
+			</a>
 	    </sec:authorize>
 	
-	    <sec:authorize access="hasRole('ROLE_ADMIN')">
-	    <li class="nav-item">
-	       <a class="nav-link ${(pipella eq 'webdb')?'active' : '' }" href="<c:url value="/canviarPipella/webdb"/>"> WebDatabase</a>
-	    </li>
-	    </sec:authorize>
+
 	
 	    <c:if test="${prefixLowercase}:isDesenvolupament()}">
-	    <li class="nav-item">
-	       <a class="nav-link ${(pipella eq 'desenvolupament')?'active' : '' }" href="<c:url value="/canviarPipella/desenvolupament"/>"> <fmt:message key="desenvolupament" /></a>
-	    </li>
+	       <a class="dropdown-item ${(pipella eq 'desenvolupament')?'active' : '' }" href="<c:url value="/canviarPipella/desenvolupament"/>">
+			<i class="fas fa-user-shield"></i>
+				 <fmt:message key="desenvolupament" />
+           </a>
 	    </c:if>
 						
-				 --%>		
+					
 						
 					</div>
 				
@@ -164,16 +160,18 @@
 					<div class="dropdown-menu  dropdown-menu-right"
 						aria-labelledby="dropdownMenu3">
 						
-						
+						<table><tr>
 						<c:forEach var="idioma" items="${idiomes}"
 							varStatus="status">
-							<a class="dropdown-item"
+							<td><a class="dropdown-item"
 								href="<c:url value="/canviarIdioma/${idioma}"></c:url>">
 								<img
 								src="<c:url value="/img/${idioma}_petit_${lang eq idioma? 'on' : 'off'}.gif"/>"
 								alt="${idioma}" width="17" height="14" border="0" />
 							</a>
+					       </td>
 						</c:forEach>
+						</tr></table>
 						
 						<hr/>
 						
@@ -181,7 +179,9 @@
 						<a class="dropdown-item"
 							href="<c:url value="/configuracio"></c:url>"> <i
 							class="fas fa-cog"></i> <fmt:message key="configuracio" />
-						</a> <a class="dropdown-item" href="<c:url value="/logout"></c:url>">
+						</a>
+						
+						<a class="dropdown-item" href="<c:url value="/logout"></c:url>">
 							<i class="fas fa-sign-out-alt"></i> <fmt:message key="sortir" />
 						</a>
 
