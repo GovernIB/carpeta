@@ -78,9 +78,8 @@ public class Plugin extends Traducible<TraduccionBase> implements Serializable {
    /**
     * Entidad
     */
-   @NotNull
    @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "ENTIDAD", nullable = false,
+   @JoinColumn(name = "ENTIDAD",
       foreignKey = @ForeignKey(name = "CAR_PLUGIN_ENTIDAD_FK"))
    @JsonbTransient
    private Entidad entidad;
