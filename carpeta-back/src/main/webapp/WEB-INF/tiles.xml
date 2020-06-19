@@ -47,6 +47,24 @@
     <definition name="option2Common" extends="common">
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/option.jsp" />
     </definition>
+    
+     <definition name="avislegal" extends="common">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/avislegal.jsp" />
+    </definition>
+    
+    <definition name="accessibilitat" extends="common">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/accessibilitat.jsp" />
+    </definition>
+    
+     <definition name="mapaweb" extends="common">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/mapaweb.jsp" />
+    </definition>
+
+    <definition name="protecciodades" extends="common">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/protecciodades.jsp" />
+    </definition>
+    
+    
 
     <!--  ===========  USER  ================== -->
         

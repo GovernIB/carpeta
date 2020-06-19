@@ -1,9 +1,9 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
     <!--
     Avís legal en castellà
     -->
-    <ui:component>
+    <h1> Aviso Legal</h1>
+
         <h5>Información. Responsabilidad. Propiedad intelectual</h5>
         <ul>
             <li>Los dominios <a href="https://www.caib.es">caib.es</a>, <a href="http://www.caib.cat">caib.cat</a> e <a href="http://www.illesbalears.cat">illesbalears.cat</a> son los dominios del portal en Internet de titularidad de la Administración de la Comunidad Autónoma de las Illes Balears (NIF S-0711001-H), con sede en Palma (calle de la Llotja, 3, 07012). </li>
@@ -44,5 +44,3 @@
                 </ul>
             </li>
         </ul>				
-    </ui:component>
-</html>

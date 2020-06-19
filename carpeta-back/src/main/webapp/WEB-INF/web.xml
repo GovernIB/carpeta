@@ -115,6 +115,14 @@
 		   <taglib-uri>http://jakarta.apache.org/taglibs/unstandard-1.0</taglib-uri>
 		   <taglib-location>/WEB-INF/tld/taglibs-unstandard.tld</taglib-location>
 		</taglib>
+		
+
+		  <jsp-property-group>
+		    <url-pattern>*.jsp</url-pattern>
+		    <page-encoding>UTF-8</page-encoding>
+		  </jsp-property-group>
+
+		
 	</jsp-config>
 
    <error-page>

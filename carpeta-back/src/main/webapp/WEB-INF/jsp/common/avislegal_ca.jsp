@@ -3,7 +3,7 @@
     <!--
     Avís legal en català
     -->
-    <ui:component>
+   <h1> Avís Legal</h1>
 
         <h5>Informació. Responsabilitat. Propietat intel·lectual</h5>
         <ul>
@@ -45,5 +45,3 @@
                 </ul>
             </li>
         </ul>				
-    </ui:component>
-</html>

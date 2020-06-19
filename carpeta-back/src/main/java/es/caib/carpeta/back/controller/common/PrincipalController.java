@@ -49,14 +49,12 @@ public class PrincipalController {
 
 	}
 
-
 	@RequestMapping(value = "/canviarIdioma/{idioma}", method = RequestMethod.GET)
 	public ModelAndView canviarIdioma(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable(name = "idioma") String idioma) throws Exception {
-		es.caib.carpeta.back.utils.CarpetaSessionLocaleResolver.setLocaleManually(request, idioma);		
+		es.caib.carpeta.back.utils.CarpetaSessionLocaleResolver.setLocaleManually(request, idioma);
 		return new ModelAndView("principal");
 	}
-
 
 	@RequestMapping(value = "/canviarPipella", method = RequestMethod.GET)
 	public ModelAndView canviarPipella(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -98,4 +96,23 @@ public class PrincipalController {
 		return new ModelAndView("principal");
 	}
 
+	@RequestMapping(value = "/avislegal", method = RequestMethod.GET)
+	public ModelAndView avislegal(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		return new ModelAndView("avislegal");
+	}
+
+	@RequestMapping(value = "/accessibilitat", method = RequestMethod.GET)
+	public ModelAndView accessibilitat(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		return new ModelAndView("accessibilitat");
+	}
+
+	@RequestMapping(value = "/mapaweb", method = RequestMethod.GET)
+	public ModelAndView mapaweb(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		return new ModelAndView("mapaweb");
+	}
+
+	@RequestMapping(value = "/protecciodades", method = RequestMethod.GET)
+	public ModelAndView protecciodades(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		return new ModelAndView("protecciodades");
+	}
 }
