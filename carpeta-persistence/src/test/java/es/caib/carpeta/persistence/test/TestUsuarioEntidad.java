@@ -105,6 +105,7 @@ public class TestUsuarioEntidad {
       usuarioEntidad.setUsuario(usuario);
       usuarioEntidad.setActivo(true);
       usuarioEntidad.setUltimaEntidad(null);
+      usuarioEntidad.setAdministrador(true);
 
       em.persist(usuarioEntidad);
 
