@@ -10,5 +10,5 @@ package es.caib.carpeta.persistence;
    */
 public enum Idioma {
    CA,
-   ES
+   ES,
 }

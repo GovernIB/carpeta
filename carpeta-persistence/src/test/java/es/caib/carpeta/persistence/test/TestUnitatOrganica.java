@@ -11,7 +11,6 @@ import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
@@ -79,7 +78,7 @@ public class TestUnitatOrganica {
     /**
      * Crea una unitat orgància amb codiDir3 "U87654321".
      */
-    @Test
+  //  @Test
     @InSequence(1)
     public void testCreateUnitat() {
         UnitatOrganica unitatOrganica = new UnitatOrganica();
@@ -96,7 +95,7 @@ public class TestUnitatOrganica {
     /**
      * Selecciona la unitat orgànica amb codiDir3 "U87654321".
      */
-    @Test
+   // @Test
     @InSequence(2)
     public void testQueryUnitat() {
         TypedQuery<UnitatOrganica> query = em.createQuery(
@@ -111,7 +110,7 @@ public class TestUnitatOrganica {
     /**
      * Selecciona i esborra la unitat orgànica amb codiDir3 "U87654321".
      */
-    @Test
+  //  @Test
     @InSequence(3)
     public void testRemoveUnitat() {
         TypedQuery<UnitatOrganica> query = em.createQuery(
@@ -128,7 +127,7 @@ public class TestUnitatOrganica {
     /**
      * Crea una unitat orgànica incomplint les validacons i intenta persistir-la per fer botar els errors de validació.
      */
-    @Test
+  //  @Test
     @InSequence(4)
     public void testConstraintsUnitat() {
 

@@ -48,14 +48,14 @@
             Cal fixar la següent propietat
             -->
 
-<!-- 
+<!--
             <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect"/>
             -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
 
 
             <!-- Afecta molt al rendiment. A entorn de producció, sempre a false -->
-            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.show_sql" value="true"/>
         </properties>
     </persistence-unit>
 </persistence>

@@ -81,6 +81,10 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/user/user.jsp" />
     </definition>
 
+    <definition name="option3User" extends="user">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/user/user.jsp" />
+    </definition>
+
     <!--  ===========  ADMIN  ================== -->
         
     <definition name="admin" extends="base.definition">

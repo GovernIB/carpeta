@@ -6,6 +6,7 @@ import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -58,8 +59,8 @@ public class Enlace extends Traducible<TraduccionEnlace> implements Serializable
    @ElementCollection(fetch =FetchType.LAZY, targetClass = TraduccionEnlace.class )
    @CollectionTable(name = "CAR_TRA_ENLACE",
       joinColumns = {@JoinColumn(name = "IDENLACE", referencedColumnName = "id")},foreignKey = @ForeignKey(name = "CAR_ENLACE_TRAENLAC_FK"))
-   @MapKeyColumn(name="LANG", insertable = false, updatable = false)
-   private Map<String, TraduccionEnlace> traducciones;
+   @MapKeyColumn(name="LANG")
+   private Map<String, TraduccionEnlace> traducciones = new HashMap<>();
 
    @Override
    public Map<String, TraduccionEnlace> getTraducciones() {

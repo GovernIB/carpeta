@@ -3,7 +3,6 @@ package es.caib.carpeta.persistence;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -25,7 +24,6 @@ import java.util.Objects;
    indexes = {
       @Index(name = "CAR_USUARIO_PK_I", columnList = "ID"),
       @Index(name = "CAR_USERNAME_UK_I", columnList = "USERNAME"),
-      @Index(name = "CAR_USUARIO_ENTIDAD_FK_I", columnList = "ULTIMA_ENTIDAD")
    }
 )
 
@@ -75,14 +73,12 @@ public class Usuario implements Serializable {
 
 
     /**
-     * Ultima Entidad
+     * Tipus d'usuari (persona, aplicacio)
      */
+    @NotNull
+    @Column(name = "TIPO", nullable = false)
+    private TipoUsuario tipo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ULTIMA_ENTIDAD", nullable = false,
-       foreignKey = @ForeignKey(name = "CAR_USUARIO_ENTIDAD_FK"))
-    @JsonbTransient
-    private Entidad ultimaEntidad;
 
 
     public Usuario() {
@@ -141,12 +137,12 @@ public class Usuario implements Serializable {
         this.username = username;
     }
 
-    public Entidad getUltimaEntidad() {
-        return ultimaEntidad;
+    public TipoUsuario getTipo() {
+        return tipo;
     }
 
-    public void setUltimaEntidad(Entidad ultimaEntidad) {
-        this.ultimaEntidad = ultimaEntidad;
+    public void setTipo(TipoUsuario tipo) {
+        this.tipo = tipo;
     }
 
     @Transient

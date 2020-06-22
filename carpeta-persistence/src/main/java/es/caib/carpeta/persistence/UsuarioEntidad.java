@@ -23,7 +23,8 @@ import java.util.Objects;
    indexes = {
       @Index(name = "CAR_USUARIOENTIDAD_PK_I", columnList = "ID"),
       @Index(name = "CAR_USUENT_USUARIO_FK_I", columnList = "USUARIO"),
-      @Index(name = "CAR_USUENT_ENTIDAD_FK_I", columnList = "ENTIDAD")
+      @Index(name = "CAR_USUENT_ENTIDAD_FK_I", columnList = "ENTIDAD"),
+      @Index(name = "CAR_USUENT_ULTENT_FK_I",  columnList = "ULTIMA_ENTIDAD")
    }
 )
 
@@ -35,13 +36,12 @@ public class UsuarioEntidad implements Serializable {
 
 
    @Id
-   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "acceso-sequence")
+   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "usuent-sequence")
    @Column(name = "ID", nullable = false, length = 19)
    private Long id;
 
    @NotNull
    @ManyToOne(fetch = FetchType.LAZY)
-   @MapsId("usuarioId")
    @JoinColumn(name = "USUARIO", nullable = false,
       foreignKey = @ForeignKey(name = "CAR_USUENT_USUARIO_FK"))
    @JsonbTransient
@@ -49,11 +49,22 @@ public class UsuarioEntidad implements Serializable {
 
    @NotNull
    @ManyToOne(fetch = FetchType.LAZY)
-   @MapsId("entidadId")
    @JoinColumn(name = "ENTIDAD", nullable = false,
       foreignKey = @ForeignKey(name = "CAR_USUENT_ENTIDAD_FK"))
    @JsonbTransient
    private Entidad entidad;
+
+
+
+   /**
+    * Ultima Entidad
+    */
+
+   @ManyToOne(fetch = FetchType.LAZY)
+   @JoinColumn(name = "ULTIMA_ENTIDAD",
+      foreignKey = @ForeignKey(name = "CAR_USUENT_ULTENT_FK"))
+   @JsonbTransient
+   private Entidad ultimaEntidad;
 
 
 
@@ -98,6 +109,14 @@ public class UsuarioEntidad implements Serializable {
 
    public void setEntidad(Entidad entidad) {
       this.entidad = entidad;
+   }
+
+   public Entidad getUltimaEntidad() {
+      return ultimaEntidad;
+   }
+
+   public void setUltimaEntidad(Entidad ultimaEntidad) {
+      this.ultimaEntidad = ultimaEntidad;
    }
 
    public Boolean getActivo() {

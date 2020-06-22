@@ -1,6 +1,7 @@
 package es.caib.carpeta.persistence;
 
 import es.caib.carpeta.commons.utils.Constants;
+import org.apache.log4j.Logger;
 
 import java.util.Map;
 import java.util.Set;
@@ -14,13 +15,14 @@ import java.util.Set;
 
 public abstract class Traducible<T extends TraduccionBase> {
 
+   protected final Logger log = Logger.getLogger(getClass());
+
    public abstract Map<String, T> getTraducciones();
 
 
 
 
    // Metodos públicos.
-
    public  void setTraducciones(Map<String,T> traducciones){
       getTraducciones().putAll(traducciones);
    };

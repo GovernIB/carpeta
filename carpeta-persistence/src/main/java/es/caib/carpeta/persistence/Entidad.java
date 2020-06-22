@@ -143,8 +143,8 @@ public class Entidad extends Traducible<TraduccionBase> implements Serializable 
     @ElementCollection(fetch =FetchType.LAZY, targetClass = TraduccionBase.class )
     @CollectionTable(name = "CAR_TRA_ENTIDAD",
        joinColumns = {@JoinColumn(name = "IDENTIDAD", referencedColumnName = "id")},foreignKey = @ForeignKey(name = "CAR_ENTIDAD_TRAENTID_FK"))
-    @MapKeyColumn(name="LANG", insertable = false, updatable = false)
-    private Map<String, TraduccionBase> traducciones;
+    @MapKeyColumn(name="LANG")
+    private Map<String, TraduccionBase> traducciones = new HashMap<>();
 
 
 
@@ -281,7 +281,7 @@ public class Entidad extends Traducible<TraduccionBase> implements Serializable 
 
     @Override
     public Map<String, TraduccionBase> getTraducciones() {
-        return traducciones;
+        return this.traducciones;
     }
 
 

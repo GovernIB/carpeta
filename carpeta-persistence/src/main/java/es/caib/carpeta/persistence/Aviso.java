@@ -83,7 +83,7 @@ public class Aviso extends Traducible<TraduccionAviso> implements Serializable {
    @ElementCollection(fetch =FetchType.LAZY, targetClass = TraduccionAviso.class )
    @CollectionTable(name = "CAR_TRA_AVISO",
       joinColumns = {@JoinColumn(name = "IDAVISO", referencedColumnName = "id")},foreignKey = @ForeignKey(name = "CAR_AVISO_TRAAVISO_FK"))
-   @MapKeyColumn(name="LANG", insertable = false, updatable = false)
+   @MapKeyColumn(name="LANG")
    private Map<String, TraduccionAviso> traducciones;
 
    @Override

@@ -28,7 +28,7 @@
     <container qualifier="jboss-remote">
         <configuration>
             <property name="managementAddress">localhost</property>
-            <property name="managementPort">9990</property>
+            <property name="managementPort">8080</property>
             <!--
             <property name="username">admin</property>
             <property name="password">admin</property>
