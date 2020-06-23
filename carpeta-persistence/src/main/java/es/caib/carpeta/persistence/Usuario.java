@@ -73,13 +73,16 @@ public class Usuario implements Serializable {
 
 
     /**
-     * Tipus d'usuari (persona, aplicacio)
+     * Tipo de persona (persona, aplicación)
      */
     @NotNull
     @Column(name = "TIPO", nullable = false)
     private TipoUsuario tipo;
 
 
+    /**
+     * Idioma del usuario
+     */
     @NotNull
     @Column(name = "IDIOMA", nullable = false)
     private Idioma idioma;
