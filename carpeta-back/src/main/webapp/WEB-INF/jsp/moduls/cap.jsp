@@ -1,3 +1,4 @@
+<%@page import="es.caib.carpeta.back.security.LoginInfo"%>
 <%@page import="org.springframework.context.i18n.LocaleContextHolder"%>
 <%@page import="java.util.Locale"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%><%@ include
@@ -102,12 +103,13 @@
 
 	
 						<sec:authorize access="hasRole('ROLE_USER')">
+						<% if (LoginInfo.getInstance().getEntitatID() != null) { %>
 							<a class="dropdown-item ${(pipella eq 'user')?'active' : '' }"
 								href="<c:url value="/canviarPipella/user"/>"> <i
 								class="fas fa-user"></i> ROLE_USER
 							</a>
+					    <% } %>
 						</sec:authorize>
-
 
 						<sec:authorize access="hasRole('ROLE_ADMIN')">
 							<a class="dropdown-item ${(pipella eq 'admin')?'active' : '' }"
@@ -115,8 +117,6 @@
 								class="fas fa-user-shield"></i> ROLE_ADMIN
 							</a>
 						</sec:authorize>
-
-
 
 						<c:if test="${prefixLowercase}:isDesenvolupament()}">
 							<a

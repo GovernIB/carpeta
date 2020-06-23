@@ -16,9 +16,9 @@ public interface Constants {
     String CAR_USER = "CAR_USER";  
     
     /* -------------- ROLS VIRTUALS --------------*/
-    String ROLE_ADMIN = "CAR_ADMIN";
-    String ROLE_USER = "CAR_USER";    
-    String ROLE_ADEN = "CAR_ADEN";
+    String ROLE_ADMIN = "ROLE_ADMIN";
+    String ROLE_USER = "ROLE_USER";
+    String ROLE_ADEN = "ROLE_ADEN";
 
 
     /* -------------- IDIOMAS --------------*/

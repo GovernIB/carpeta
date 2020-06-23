@@ -89,13 +89,13 @@ public class AuthenticationSuccessListener implements
     for (GrantedAuthority grantedAuthority : seyconAuthorities) {
       String rol = grantedAuthority.getAuthority();
 
-      if (isDebug) { 
-        log.debug("Rol SEYCON : " + rol);
-      }
-      if (Constants.CAR_USER.equals(rol)) {
+      
+      log.info("XYZ ZZZ ZZZ Rol SEYCON : " + rol);
+      
+      if (Constants.ROLE_USER.equals(rol)) {
         containsRoleUser = true;
       }
-      if (Constants.CAR_ADMIN.equals(rol)) {
+      if (Constants.ROLE_ADMIN.equals(rol)) {
         containsRoleAdmin = true;
       }
     }
@@ -145,14 +145,10 @@ public class AuthenticationSuccessListener implements
             persona.setUsername(username);
             // XYZ ZZZ ZZZ
             //persona.setNif(info.getAdministrationID().toUpperCase());
-            
-            
-           
-            
+            persona.setIdioma("ca");
+
             UsuarioEntidad usuariEntitat = null;
 
-            
-           
             if (containsRoleUser) {
               // XYZ ZZZ ZZZ
               Long defaultEntity = null;
@@ -314,7 +310,12 @@ public class AuthenticationSuccessListener implements
     }
 
     
-    if (entitats.size() == 0 && !containsRoleAdmin) {
+    log.info(" XYZ ZZZ  entitats.size()  => " + entitats.size()  );
+    log.info(" XYZ ZZZ  containsRoleAdmin  => " + containsRoleAdmin  );
+    log.info(" XYZ ZZZ  !containsRoleAdmin  => " + !containsRoleAdmin  );
+    
+    
+    if (entitats.size() == 0 && containsRoleUser) {
       
       if (usuariEntitats.size() == 0) {
         // L'usuari " + name + " no té cap entitat associada. Consulti amb l'Administrador
