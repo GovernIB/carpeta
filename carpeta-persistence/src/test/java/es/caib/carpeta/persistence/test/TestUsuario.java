@@ -1,6 +1,5 @@
 package es.caib.carpeta.persistence.test;
 
-import es.caib.carpeta.persistence.Idioma;
 import es.caib.carpeta.persistence.TipoUsuario;
 import es.caib.carpeta.persistence.Usuario;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -102,7 +101,7 @@ public class TestUsuario {
       usuario.setEmail("mgonzalez@fundaciobit.org");
       usuario.setUsername("mgonzalez");
       usuario.setTipo(TipoUsuario.PERSONA);
-      usuario.setIdioma(Idioma.CA);
+      usuario.setIdioma("ca");
       em.persist(usuario);
 
       em.flush();

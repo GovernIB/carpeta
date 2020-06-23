@@ -105,8 +105,8 @@ public class TestEntidad {
 
 
       Map<String,TraduccionBase> traducciones = new HashMap<String,TraduccionBase>();
-      traducciones.put(Idioma.CA.toString(), traduccionBase);
-      traducciones.put(Idioma.ES.toString(), traduccionBase);
+      traducciones.put("ca", traduccionBase);
+      traducciones.put("es", traduccionBase);
 
       entidad.setTraducciones(traducciones);
 

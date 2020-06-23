@@ -100,9 +100,8 @@ public class Acceso implements Serializable {
     *Idioma con el que se ha autenticado
     */
    @NotNull
-   @Enumerated(EnumType.STRING)
    @Column(name = "IDIOMA", nullable = false)
-   private Idioma idioma;
+   private String idioma;
 
 
    /**
@@ -198,11 +197,11 @@ public class Acceso implements Serializable {
       this.fechaUltimoAcceso = fechaUltimoAcceso;
    }
 
-   public Idioma getIdioma() {
+   public String getIdioma() {
       return idioma;
    }
 
-   public void setIdioma(Idioma idioma) {
+   public void setIdioma(String idioma) {
       this.idioma = idioma;
    }
 

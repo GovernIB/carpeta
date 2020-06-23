@@ -85,7 +85,7 @@ public class Usuario implements Serializable {
      */
     @NotNull
     @Column(name = "IDIOMA", nullable = false)
-    private Idioma idioma;
+    private String idioma;
 
 
 
@@ -168,11 +168,11 @@ public class Usuario implements Serializable {
         return nombreCompleto;
     }
 
-    public Idioma getIdioma() {
+    public String getIdioma() {
         return idioma;
     }
 
-    public void setIdioma(Idioma idioma) {
+    public void setIdioma(String idioma) {
         this.idioma = idioma;
     }
 
