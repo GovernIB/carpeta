@@ -19,8 +19,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 
 
 /**
@@ -60,7 +58,7 @@ public class FileDownloadController {
         // TODO TRADUIR Identificador no trobar
         String msg = "Identificador no s'ha pogut desencriptar";
         response.setHeader("MsgCarpeta", msg);
-        response.sendError(response.SC_NOT_FOUND);
+        response.sendError(HttpServletResponse.SC_NOT_FOUND);
       } else {
         fullDownload(arxiuId, filename, contentType, response);
       }
@@ -87,7 +85,7 @@ public class FileDownloadController {
           // TODO TRADUIR Fitxer no trobat
           String msg = "Fitxer amb ID=" + arxiuId + " no existeix.";
           response.setHeader("MsgCarpeta", msg);
-          response.sendError(response.SC_NOT_FOUND);
+          response.sendError(HttpServletResponse.SC_NOT_FOUND);
           return;
         }
         
@@ -115,9 +113,9 @@ public class FileDownloadController {
         log.error(msg, e);
         response.setHeader("MsgCarpeta", msg);
         try {
-          response.sendError(response.SC_NOT_FOUND);
+          response.sendError(HttpServletResponse.SC_NOT_FOUND);
         } catch (IOException e1) {
-          response.setStatus(response.SC_NOT_FOUND);
+          response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
       }
     }

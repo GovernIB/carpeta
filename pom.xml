@@ -318,7 +318,9 @@
         <module>carpeta-ejb</module>
         <module>carpeta-back</module>
         <module>carpeta-front</module>
+        <!--
         <module>carpeta-api</module>
+        -->
         <module>carpeta-ear</module>
         <module>carpeta-integrations</module>
     </modules>

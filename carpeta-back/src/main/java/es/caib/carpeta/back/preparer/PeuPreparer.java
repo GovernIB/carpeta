@@ -11,17 +11,18 @@ import org.apache.tiles.AttributeContext;
 import org.apache.tiles.preparer.PreparerException;
 import org.apache.tiles.preparer.ViewPreparer;
 import org.apache.tiles.request.Request;
+
+import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.commons.utils.Version;
 import org.springframework.stereotype.Component;
 
-import es.caib.carpeta.commons.utils.Version;
 
 /**
- * @author GenApp
+ *
  * @author anadal
  *
  */
-@RunAs("CAR_USER")
+@RunAs(Constants.CAR_USER)
 @Component
 public class PeuPreparer implements ViewPreparer {
 

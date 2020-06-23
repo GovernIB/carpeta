@@ -24,7 +24,7 @@ This page is generated automatically. Please edit.
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 <td valign="top">
 <a href="http://blog.fundaciobit.org/category/admindigital/" target="_blank">
-<img src="<c:url value="/img/fundaciobit.png"/>"  alt="Fundaci� Bit" title="Fundaci� Bit"/>
+<img src="<c:url value="/img/fundaciobit.png"/>"  alt="Fundació Bit" title="Fundació Bit"/>
 </a>
 </td>
 </tr>
@@ -35,10 +35,17 @@ This page is generated automatically. Please edit.
 </div>
 
 <br/>
+
+
+
 Username: ${loginInfo.username}<br/>
+
+
+
 &#36;{car:hasRole(ROLE_ADMIN)}= ${car:hasRole('ROLE_ADMIN')}<br/>
 &#36;{car:hasRole(ROLE_USER) }= ${car:hasRole('ROLE_USER') }<br/>
 Locale = <%=LocaleContextHolder.getLocale() %> <br/>
+
 lang = ${lang} <br/>
 <br/>
 

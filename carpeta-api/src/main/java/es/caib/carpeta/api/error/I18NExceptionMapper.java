@@ -2,7 +2,8 @@ package es.caib.carpeta.api.error;
 
 import es.caib.carpeta.api.config.ApiConstants;
 import es.caib.carpeta.api.utils.I18NTranslatorRest;
-import es.caib.carpeta.commons.i18n.I18NException;
+
+import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +34,7 @@ public class I18NExceptionMapper implements ExceptionMapper<I18NException> {
 
         Locale locale = (Locale) request.getAttribute(ApiConstants.REQUEST_LOCALE);
 
-        String msg = I18NTranslatorRest.translate(e, locale);
+        String msg = I18NTranslatorRest.getMessage(e, locale);
         LOG.error("Rebuda una I18NException: " + msg);
 
         ErrorBean errorBean = new ErrorBean();

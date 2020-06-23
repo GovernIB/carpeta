@@ -1,6 +1,6 @@
 package es.caib.carpeta.ejb;
 
-import es.caib.carpeta.commons.i18n.I18NException;
+
 import es.caib.carpeta.commons.query.OrderBy;
 import es.caib.carpeta.commons.query.OrderType;
 import es.caib.carpeta.commons.utils.Constants;
@@ -10,6 +10,9 @@ import es.caib.carpeta.persistence.dao.AbstractDAO;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
+
+import org.fundaciobit.genapp.common.i18n.I18NException;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

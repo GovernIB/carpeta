@@ -100,21 +100,7 @@
 							class="fas fa-home"></i> <fmt:message key="inici" /></a>
 
 
-						<%--  DRAW MENU OPTIONS  XYZ ZZZ
-					    <c:forEach var="rolG" items="${loginInfo.roles}">
-					    <c:set var="rol" value="${rolG.authority}"/>
-					    <c:if test="${not(rol eq 'ROLE_USER')}">
-					    <li ${(pipella eq rol)?'class="active"' : '' }>
-					       <a href="<c:url value="/canviarPipella/${rol}"/>"><fmt:message key="${rol}" />
-					       <c:if test="${not(empty avisos[rol])}">
-					         &nbsp; <span class="badge badge-warning">${avisos[rol]}</span>
-					       </c:if>
-					       </a>
-					    </li>
-					    </c:if>  
-					    </c:forEach>
-					    --%>
-
+	
 						<sec:authorize access="hasRole('ROLE_USER')">
 							<a class="dropdown-item ${(pipella eq 'user')?'active' : '' }"
 								href="<c:url value="/canviarPipella/user"/>"> <i

@@ -9,7 +9,7 @@
   <c:forEach items="${missatges}" var="tipusList" varStatus="status">
     
       <c:forEach items="${tipusList.value}" var="msg" >
-      <div class="alert alert-${tipusList.key}">
+      <div class="alert alert-${(tipusList.key eq 'error')?'danger':tipusList.key}">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
       ${msg}
       </div>

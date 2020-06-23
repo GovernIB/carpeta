@@ -10,13 +10,10 @@ import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.crypt.AlgorithmEncrypter;
 import org.fundaciobit.genapp.common.crypt.FileIDEncrypter;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
-import org.fundaciobit.genapp.common.web.exportdata.DataExporterManager;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
-//import es.caib.carpeta.hibernate.HibernateFileUtil;
-//import es.caib.carpeta.logic.utils.I18NLogicUtils;
-//import es.caib.carpeta.logic.utils.LogicUtils;
+
 import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.Version;
 import es.caib.carpeta.ejb.utils.I18NTranslatorEjb;
@@ -38,13 +35,15 @@ public class InitServlet extends HttpServlet {
   public void init(ServletConfig config) throws ServletException {
 
     // Sistema de Fitxers
-    // TODO Moure a logic
+    // XYZ ZZZZ ZZZ Moure a Logic
+	  /*
     try {      
       FileSystemManager.setFilesPath(Configuracio.getFilesDirectory());
       log.info("FileSystemManager path = " + FileSystemManager.getFilesPath().getAbsolutePath());
     } catch (Throwable th) {
       log.error("Error inicialitzant el sistema de sistema de fitxers: " + th.getMessage(), th);
     }
+    */
 
     // Sistema de Traduccions WEB
     try {

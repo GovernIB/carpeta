@@ -1,11 +1,13 @@
 package es.caib.carpeta.persistence.dao;
 
-import es.caib.carpeta.commons.i18n.I18NException;
 import es.caib.carpeta.commons.query.OrderBy;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
+
+import org.fundaciobit.genapp.common.i18n.I18NException;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;

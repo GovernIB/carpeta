@@ -1,10 +1,13 @@
 package es.caib.carpeta.ejb;
 
-import es.caib.carpeta.commons.i18n.I18NException;
+
 import es.caib.carpeta.persistence.Entidad;
 import es.caib.carpeta.persistence.dao.DAO;
 
 import javax.ejb.Local;
+
+import org.fundaciobit.genapp.common.i18n.I18NException;
+
 import java.util.List;
 
 /**
@@ -16,7 +19,7 @@ import java.util.List;
 @Local
 public interface EntidadService extends DAO<Entidad, Long> {
 
-   public static final String JNDI_NAME = "java:app/carpeta-ejb-1.1.1/EntidadEJB!es.caib.carpeta.ejb.EntidadService";
+   public static final String JNDI_NAME = "java:app/carpeta-ejb/EntidadEJB!es.caib.carpeta.ejb.EntidadService";
 
 
    /**

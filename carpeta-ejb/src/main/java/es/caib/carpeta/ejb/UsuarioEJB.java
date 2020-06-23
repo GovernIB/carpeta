@@ -1,6 +1,6 @@
 package es.caib.carpeta.ejb;
 
-import es.caib.carpeta.commons.i18n.I18NException;
+
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.ejb.interceptor.Logged;
 import es.caib.carpeta.persistence.TipoUsuario;
@@ -14,6 +14,10 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.validation.constraints.NotNull;
+
+import org.fundaciobit.genapp.common.i18n.I18NException;
+
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +46,30 @@ public class UsuarioEJB extends AbstractDAO<Usuario, Long> implements UsuarioSer
       return usuario;
 
    }
+   
+   
+   @Override
+   @PermitAll
+   public Usuario findByUsername(@NotNull String username) {
+	   
+	   
+	   CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+	      CriteriaQuery<Usuario> cq = cb.createQuery(Usuario.class);
+	      final Root<Usuario> root = cq.from(Usuario.class);
+	      cq.select(root);
+	      cq.where(cb.equal(root.get("username"), username));
+
+	      TypedQuery<Usuario> query = entityManager.createQuery(cq);
+	      
+	      List<Usuario> list = query.getResultList();
+	      
+	      if (list == null || list.isEmpty()) {
+	    	  return null;
+	      } else {
+	          return list.get(0);
+	      } 
+   }
+   
 
 
    /**

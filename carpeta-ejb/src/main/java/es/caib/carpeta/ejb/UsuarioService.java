@@ -1,11 +1,15 @@
 package es.caib.carpeta.ejb;
 
-import es.caib.carpeta.commons.i18n.I18NException;
+
 import es.caib.carpeta.persistence.TipoUsuario;
 import es.caib.carpeta.persistence.Usuario;
 import es.caib.carpeta.persistence.dao.DAO;
 
 import javax.ejb.Local;
+import javax.validation.constraints.NotNull;
+
+import org.fundaciobit.genapp.common.i18n.I18NException;
+
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +22,7 @@ import java.util.Map;
 @Local
 public interface UsuarioService extends DAO<Usuario, Long > {
 
-   public static final String JNDI_NAME = "java:app/carpeta-ejb-1.1.1/UsuarioEJB!es.caib.carpeta.ejb.UsuarioService";
+   public static final String JNDI_NAME = "java:app/carpeta-ejb/UsuarioEJB!es.caib.carpeta.ejb.UsuarioService";
 
 
    /**
@@ -28,6 +32,9 @@ public interface UsuarioService extends DAO<Usuario, Long > {
     * @return El usuario creado.
     */
    Usuario crearUsuario(Usuario usuario) throws I18NException;
+   
+   
+   public Usuario findByUsername(@NotNull String username);
 
 
 

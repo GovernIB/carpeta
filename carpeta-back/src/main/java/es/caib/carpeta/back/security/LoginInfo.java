@@ -1,10 +1,16 @@
 package es.caib.carpeta.back.security;
 
-import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
+
+import es.caib.carpeta.persistence.Entidad;
+import es.caib.carpeta.persistence.Usuario;
+import es.caib.carpeta.persistence.UsuarioEntidad;
+import es.caib.carpeta.back.security.LoginException;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -18,67 +24,195 @@ import org.springframework.security.core.userdetails.User;
  */
 public class LoginInfo {
 
+	protected final Logger log = Logger.getLogger(getClass());
+
 	final User springSecurityUser;
-
-	Set<String> roles;
-
-	Set<GrantedAuthority> grantedAuthorities;
 
 	final String username;
 
-	final String language;
+	// final UsuariAplicacioJPA usuariAplicacio;
 
-	// TODO Add your fields HERE
+	final Usuario usuariPersona;
+
+	final Map<Long, Entidad> entitats;
+
+	final Map<Long, Set<GrantedAuthority>> rolesPerEntitat;
+
+	final Map<Long, UsuarioEntidad> usuariEntitatPerEntitatID;
+
+	Long entitatIDActual;
+
+	boolean needConfigUser;
 
 	/**
 	 * @param usuari
 	 * @param entitatActual
 	 * @param roles
 	 */
-	public LoginInfo(User springSecurityUser, String username, Set<GrantedAuthority> grantedAuthorities,
-			String language) {
-		this.springSecurityUser = springSecurityUser;
+	public LoginInfo(String username, User springSecurityUser, Usuario usuariPersona, Long entitatIDActual,
+			Map<Long, Entidad> entitats, Map<Long, Set<GrantedAuthority>> rolesPerEntitat,
+			Map<Long, UsuarioEntidad> usuariEntitatPerEntitatID, boolean needConfigUser) {
 		this.username = username;
-		this.language = language;
+		log.info(" ---------- PRE LoginInfo -------------- ");
+		this.springSecurityUser = springSecurityUser;
+		this.usuariPersona = usuariPersona;
+		this.entitats = entitats;
+		this.rolesPerEntitat = rolesPerEntitat;
+		this.usuariEntitatPerEntitatID = usuariEntitatPerEntitatID;
+		this.needConfigUser = needConfigUser;
+		log.info(" ---------- PRE 1 -------------- ");
+		setEntitatID(entitatIDActual);
+		log.info(" ---------- POST -------------- ");
 
-		this.grantedAuthorities = grantedAuthorities;
-		this.roles = new HashSet<String>();
+	}
 
-		for (GrantedAuthority grantedAuthority : this.grantedAuthorities) {
-			this.roles.add(grantedAuthority.getAuthority());
+	/**
+	 * Login per usuari aplicacio
+	 * 
+	 * @param springSecurityUser
+	 * @param usuariAplicacio
+	 * @param entitat
+	 * @param roles
+	 */
+	/*
+	 * public LoginInfo(User springSecurityUser, Entidad entitat,
+	 * Collection<GrantedAuthority> roles) { this.springSecurityUser =
+	 * springSecurityUser;
+	 * 
+	 * Map<Long, Entidad> entitats = new HashMap<Long, Entidad>(); if (entitat !=
+	 * null) { entitats.put(entitat.getId(), entitat); }
+	 * 
+	 * Map<Long, Set<GrantedAuthority>> rolesPerEntitat = new HashMap<Long,
+	 * Set<GrantedAuthority>>(); rolesPerEntitat.put((Long) null, new
+	 * HashSet<GrantedAuthority>(roles)); if (entitat != null) {
+	 * rolesPerEntitat.put(entitat.getId(), new HashSet<GrantedAuthority>(roles)); }
+	 * 
+	 * Map<Long, UsuarioEntidad> usuariEntitatPerEntitatID = new HashMap<Long,
+	 * UsuarioEntidad>(); if (entitat != null) {
+	 * usuariEntitatPerEntitatID.put(entitat.getId(), null); }
+	 * 
+	 * this.entitats = entitats; this.rolesPerEntitat = rolesPerEntitat;
+	 * 
+	 * if (entitat != null) { setEntitatID(entitat.getId()); } else {
+	 * setEntitatID(null); } // Només per usuari-entitat this.usuariPersona = null;
+	 * this.usuariEntitatPerEntitatID = usuariEntitatPerEntitatID;
+	 * this.needConfigUser = false;
+	 * 
+	 * }
+	 */
+
+	public Usuario getUsuariPersona() {
+		return usuariPersona;
+	}
+
+	public Long getEntitatID() {
+		return entitatIDActual;
+	}
+
+	/**
+	 * Aquest és l'únic mètode necessari per canviar d'entitat a part d'actualitzar
+	 * el token
+	 * 
+	 * @param novaEntitatID
+	 */
+	public void setEntitatID(Long novaEntitatID) {
+		if (entitats != null) {
+			Entidad novaEntitat = this.entitats.get(novaEntitatID);
+			if (novaEntitat != null) {
+				this.entitatIDActual = novaEntitatID;
+			}
 		}
-
 	}
 
-	public Set<String> getRoles() {
-		return this.roles;
+	public Entidad getEntitat() {
+		return this.entitats.get(this.entitatIDActual);
 	}
 
-	public Set<GrantedAuthority> getGrantedAuthorities() {
-		return grantedAuthorities;
+	public Set<GrantedAuthority> getRoles() {
+		return this.rolesPerEntitat.get(this.entitatIDActual);
 	}
 
+	
+	
 	public static boolean hasRole(String role) {
-
-		if (LoginInfo.getInstance() != null) {
-			return LoginInfo.getInstance().getRoles().contains(role);
-		} else {
-			return false;
+		return LoginInfo.getInstance().hasRoleInstance(role);
+	}
+	
+	
+	public boolean hasRoleInstance(String role) {
+		
+		log.info(" XYZ ZZZ ZZZ   HASROLE ENTRA" + role);
+		
+		Set<GrantedAuthority> rols = getRoles();
+		
+		log.info(" XYZ ZZZ ZZZ   HASROLE POST GET ROLES " + rols);
+		if (rols != null) {
+			log.info(" XYZ ZZZ ZZZ   HASROLE ENTRA IF " + rols.size());
+			for (GrantedAuthority grantedAuthority : rols) {
+				log.info(" XYZ ZZZ ZZZ   HASROLE ENTRA IF " + rols.size());
+				if (grantedAuthority.getAuthority().equals(role)) {
+					return true;
+				}
+			}
 		}
-
+		return false;
 	}
 
-	public String getUsername() {
-		return this.username;
+	public Long getUsuariEntitatID() {
+		UsuarioEntidad ue = getUsuariEntitat();
+		if (ue == null) {
+			return null;
+		} else {
+			return ue.getId();
+		}
+	}
+
+	public UsuarioEntidad getUsuariEntitat() {
+		return this.usuariEntitatPerEntitatID.get(this.entitatIDActual);
+	}
+
+	public Map<Long, Entidad> getEntitats() {
+		return entitats;
+	}
+
+	public Map<Long, Set<GrantedAuthority>> getRolesPerEntitat() {
+		return rolesPerEntitat;
+	}
+
+	public Map<Long, UsuarioEntidad> getUsuariEntitatPerEntitatID() {
+		return usuariEntitatPerEntitatID;
+	}
+
+	public boolean isNeedConfigUser() {
+		return needConfigUser;
+	}
+
+	public boolean getNeedConfigUser() {
+		return needConfigUser;
+	}
+
+	public void setNeedConfigUser(boolean needConfigUser) {
+		this.needConfigUser = needConfigUser;
 	}
 
 	public String getLanguage() {
-		return this.language;
+		return "ca"; // XYZ ZZZ
+		// return
+		// this.usuariEntitatPerEntitatID.get(this.entitatIDActual).getUsuario().getIdioma();
+	}
+
+	public String getUsername() {
+		return username;
 	}
 
 	public UsernamePasswordAuthenticationToken generateToken() {
 		UsernamePasswordAuthenticationToken authToken;
-		Set<GrantedAuthority> roles = getGrantedAuthorities();
+		Set<GrantedAuthority> roles = getRoles();
+		/*
+		 * Set<GrantedAuthority> roles; if (this.entitatIDActual == null) { roles = new
+		 * HashSet<GrantedAuthority>(); roles.add(new
+		 * SimpleGrantedAuthority(Constants.ROLE_ADMIN)); } else { roles = getRoles(); }
+		 */
 		authToken = new UsernamePasswordAuthenticationToken(this.springSecurityUser, "", roles);
 		authToken.setDetails(this);
 		return authToken;

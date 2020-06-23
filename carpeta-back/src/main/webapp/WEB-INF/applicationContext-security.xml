@@ -27,7 +27,7 @@
         
         <sec:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
         
-        <sec:intercept-url pattern="/webdb/**" access="hasRole('ROLE_ADMIN')"/>
+       
 
 <!--  OTHER EXAMPLES 
 		<sec:intercept-url pattern="/soli/**" access="hasRole('ROLE_SOLI')"/>
@@ -40,9 +40,6 @@
 		
 		<sec:intercept-url pattern="/aden/**" access="hasRole('ROLE_ADEN')"/>
 
-		<sec:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
-		
-		<sec:intercept-url pattern="/webdb/**" access="hasRole('ROLE_ADMIN')"/>
 		
 -->
 		

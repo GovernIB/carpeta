@@ -3,6 +3,7 @@ package es.caib.carpeta.back.controller.user;
 import es.caib.carpeta.persistence.Entidad;
 import es.caib.carpeta.persistence.Usuario;
 import org.apache.log4j.Logger;
+import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,7 +35,7 @@ public class UserController {
   @RequestMapping(value = "/option1")
   public ModelAndView option1(HttpSession session,
       HttpServletRequest request, HttpServletResponse response)
-      throws Exception {
+      throws I18NException {
 
 
     List<Usuario> usuarioList = usuarioService.busquedaUsuario(null, "mgonzalez", "","","", null);
@@ -52,7 +53,7 @@ public class UserController {
   @RequestMapping(value = "/option2")
   public ModelAndView option2(HttpSession session,
       HttpServletRequest request, HttpServletResponse response)
-      throws Exception {
+      throws I18NException {
 
     List<Entidad> entidadList = entidadService.findByCodigoDir3("A04003007");
 
@@ -66,14 +67,17 @@ public class UserController {
   @RequestMapping(value = "/option3")
   public ModelAndView option3(HttpSession session,
                               HttpServletRequest request, HttpServletResponse response)
-     throws Exception {
+     throws I18NException {
 
     List<Entidad> entidadList = entidadService.findByCodigoDir3("A04003007");
 
-    ModelAndView mav = new ModelAndView("option3User");
+
+	ModelAndView mav = new ModelAndView("option3User");
     mav.addObject("optionNumber", "OPCIÓ USER -3-");
     mav.addObject("entidades", entidadList);
     return mav;
+	
+    
   }
   
 }

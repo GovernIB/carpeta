@@ -12,8 +12,14 @@ import org.apache.tiles.AttributeContext;
 import org.apache.tiles.preparer.PreparerException;
 import org.apache.tiles.preparer.ViewPreparer;
 import org.apache.tiles.request.Request;
-
+import org.fundaciobit.genapp.common.i18n.I18NTranslation;
+import org.fundaciobit.genapp.common.web.HtmlUtils;
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.context.i18n.LocaleContextHolder;
+
+import org.springframework.mobile.device.Device;
+import org.springframework.mobile.device.DeviceUtils;
+
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -30,6 +36,9 @@ import es.caib.carpeta.commons.utils.Constants;
 @RunAs("CAR_USER")
 @Component
 public class BasePreparer implements ViewPreparer, Constants {
+    
+    public static Map<String,I18NTranslation> loginErrorMessage = new HashMap<String,I18NTranslation>();
+
 
 	protected final Logger log = Logger.getLogger(getClass());
 
@@ -47,7 +56,39 @@ public class BasePreparer implements ViewPreparer, Constants {
 		// TODO ficarho dins cache (veure Capperpare.java)
 		HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
 				.getRequest();
+		httpRequest.getSession().setAttribute("loginInfo", loginInfo);
 		{
+
+
+
+        Device currentDevice = DeviceUtils.getRequiredCurrentDevice(httpRequest);
+	    if(currentDevice.isMobile()) {
+	      
+	      log.info("\n\nXYZ ZZZ IS MOBILE = true \n\n");
+	      
+	      httpRequest.getSession().setAttribute("isMobile", true);      
+          request.put("isMobile", true);
+	    } else {
+	      log.info("\n\nXYZ ZZZ IS MOBILE = false \n\n");
+	    }
+
+	    // Error de Login
+	    final String username = loginInfo.getUsuariPersona().getUsername();
+	    
+	    I18NTranslation trans = loginErrorMessage.get(username);
+	    if (trans == null) {
+	      String msg = (String)httpRequest.getSession().getAttribute("loginerror");
+	      if (msg != null) {
+	        HtmlUtils.saveMessageError(httpRequest, msg);
+	      }
+	    } else {
+	      loginErrorMessage.remove(username);
+	      String msg = I18NUtils.tradueix(trans);
+	      HtmlUtils.saveMessageError(httpRequest, msg);
+	      httpRequest.getSession().setAttribute("loginerror", msg);
+	    }
+
+
 
 			request.put("urlActual", httpRequest.getServletPath());
 

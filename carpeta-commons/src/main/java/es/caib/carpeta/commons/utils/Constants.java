@@ -11,13 +11,18 @@ public interface Constants {
 
     String CARPETA_PROPERTY_BASE = "es.caib.carpeta.";
 
-    /* -------------- ROLES --------------*/
+    /* -------------- ROLS REALS--------------*/
     String CAR_ADMIN = "CAR_ADMIN";
-    String CAR_USER = "CAR_USER";
+    String CAR_USER = "CAR_USER";  
+    
+    /* -------------- ROLS VIRTUALS --------------*/
+    String ROLE_ADMIN = "CAR_ADMIN";
+    String ROLE_USER = "CAR_USER";    
+    String ROLE_ADEN = "CAR_ADEN";
 
 
     /* -------------- IDIOMAS --------------*/
-    String DEFAULT_LANGUAGE = "CA";
+    String DEFAULT_LANGUAGE = "ca";
 
 
     /* -------------- LOGINIB --------------*/

@@ -33,9 +33,9 @@
             <!--
             Recrea automàticament la BDD. Aquesta opció MAI s'ha d'emprar en entorn que no sigui de proves
             -->
-            <!--
+            <!--   
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-            -->
+          -->
 
             <!--
             Propietats específiques de Hibernate

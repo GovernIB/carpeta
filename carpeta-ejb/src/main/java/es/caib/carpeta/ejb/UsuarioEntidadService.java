@@ -1,9 +1,14 @@
 package es.caib.carpeta.ejb;
 
+
 import es.caib.carpeta.persistence.UsuarioEntidad;
 import es.caib.carpeta.persistence.dao.DAO;
 
+
 import javax.ejb.Local;
+
+import javax.validation.constraints.NotNull;
+
 import java.util.List;
 
 /**
@@ -15,7 +20,7 @@ import java.util.List;
 @Local
 public interface UsuarioEntidadService extends DAO<UsuarioEntidad, Long > {
 
-   public static final String JNDI_NAME = "java:app/carpeta-ejb-1.1.1/UsuarioEntidadEJB!es.caib.carpeta.ejb.UsuarioEntidadService";
+   public static final String JNDI_NAME = "java:app/carpeta-ejb/UsuarioEntidadEJB!es.caib.carpeta.ejb.UsuarioEntidadService";
 
 
    /**
@@ -33,5 +38,13 @@ public interface UsuarioEntidadService extends DAO<UsuarioEntidad, Long > {
     * @return número de usuarioEntidads de la entidad.
     */
    Long countAllByEntidad(Long entidadId);
+   
+   
+   
+   
+   public List<UsuarioEntidad> findAllByPersonaId(@NotNull long usuarioID);
+
+   
+   
 
 }

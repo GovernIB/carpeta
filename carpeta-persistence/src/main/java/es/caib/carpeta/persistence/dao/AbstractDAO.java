@@ -1,10 +1,12 @@
 package es.caib.carpeta.persistence.dao;
 
-import es.caib.carpeta.commons.i18n.I18NArgumentString;
-import es.caib.carpeta.commons.i18n.I18NException;
+
 import es.caib.carpeta.commons.query.OrderBy;
 import es.caib.carpeta.commons.query.OrderType;
 import es.caib.carpeta.commons.utils.Constants;
+
+import org.fundaciobit.genapp.common.i18n.I18NArgumentString;
+import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -52,14 +52,14 @@
             <version>1.1.1</version>
             <type>war</type>
         </dependency>
-        <!-- FRONT END -->
+        <!-- FRONT END
 
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-api</artifactId>
             <version>1.1.1</version>
             <type>war</type>
-        </dependency>
+        </dependency> -->
         <!--
         Mòduls que van dins el lib/
         Tenir en compte a l'hora de incloure dependències només si és imprescindible i no està ja dins
@@ -81,6 +81,24 @@
             <artifactId>carpeta-integrations</artifactId>
             <version>1.1.1</version>
         </dependency>
+        
+      <!-- ====================================== -->
+      <!-- ===== PLUGINS DE USERINFORMATION ===== -->
+      <!-- ====================================== -->
+
+      <dependency>
+        <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
+        <artifactId>pluginsib-userinformation-database</artifactId>				  
+        <version>2.0.0</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
+        <artifactId>pluginsib-userinformation-ldap</artifactId>				  
+        <version>2.0.0</version>
+      </dependency>
+        
         
     </dependencies>
 
@@ -109,6 +127,7 @@
                         <ejbModule>
                             <groupId>es.caib.carpeta</groupId>
                             <artifactId>carpeta-ejb</artifactId>
+                            <bundleFileName>carpeta-ejb</bundleFileName>
                         </ejbModule>
                         <!-- BACK START -->
                         <webModule>
@@ -123,13 +142,13 @@
                             <artifactId>carpeta-front</artifactId>
                             <contextRoot>/carpetafront</contextRoot>
                         </webModule>
-                        <!-- FRONT END -->
+                        <!-- FRONT END
                         <webModule>
                             <groupId>es.caib.carpeta</groupId>
                             <artifactId>carpeta-api</artifactId>
                             <contextRoot>/carpeta/api</contextRoot>
                         </webModule>
-                        
+                         -->
                     </modules>
                 </configuration>
             </plugin>
