@@ -55,7 +55,7 @@ public class UserController {
       HttpServletRequest request, HttpServletResponse response)
       throws I18NException {
 
-    List<Entidad> entidadList = entidadService.findByCodigoDir3("A04003007");
+    Entidad entidadList = entidadService.findByCodigoDir3("A04003007");
 
     ModelAndView mav = new ModelAndView("option2User");
     mav.addObject("optionNumber", "OPCIÓ USER -2-");
@@ -69,7 +69,7 @@ public class UserController {
                               HttpServletRequest request, HttpServletResponse response)
      throws I18NException {
 
-    List<Entidad> entidadList = entidadService.findByCodigoDir3("A04003007");
+    Entidad entidadList = entidadService.findByCodigoDir3("A04003007");
 
 
 	ModelAndView mav = new ModelAndView("option3User");
