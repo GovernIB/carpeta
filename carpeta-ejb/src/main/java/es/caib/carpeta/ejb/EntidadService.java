@@ -37,7 +37,7 @@ public interface EntidadService extends DAO<Entidad, Long> {
     * @return
     * @throws I18NException
     */
-   List<Entidad> findByCodigoDir3(String codigo) throws I18NException;
+   Entidad findByCodigoDir3(String codigo) throws I18NException;
 
 
    /**

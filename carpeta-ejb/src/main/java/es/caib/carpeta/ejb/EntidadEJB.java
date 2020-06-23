@@ -47,11 +47,16 @@ public class EntidadEJB extends AbstractDAO<Entidad, Long> implements EntidadSer
    }
 
    @Override
-   public List<Entidad> findByCodigoDir3(String codigo) throws I18NException {
+   public Entidad findByCodigoDir3(String codigo) throws I18NException {
       Map<String, Object> filters = new HashMap<>();
       filters.put("codigoDir3", codigo);
 
-      return findFiltered(filters, new OrderBy("id"));
+      List<Entidad> entidadList = findFiltered(filters, new OrderBy("id"));
+      if(entidadList!= null) {
+         return entidadList.get(0);
+      }else{
+         return null;
+      }
    }
 
 

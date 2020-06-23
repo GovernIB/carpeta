@@ -80,6 +80,12 @@ public class Usuario implements Serializable {
     private TipoUsuario tipo;
 
 
+    @NotNull
+    @Column(name = "IDIOMA", nullable = false)
+    private Idioma idioma;
+
+
+
 
     public Usuario() {
     }
@@ -157,6 +163,14 @@ public class Usuario implements Serializable {
         }
 
         return nombreCompleto;
+    }
+
+    public Idioma getIdioma() {
+        return idioma;
+    }
+
+    public void setIdioma(Idioma idioma) {
+        this.idioma = idioma;
     }
 
     @Transient

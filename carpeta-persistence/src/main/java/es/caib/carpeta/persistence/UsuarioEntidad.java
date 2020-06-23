@@ -76,6 +76,15 @@ public class UsuarioEntidad implements Serializable {
    private Boolean activo = true;
 
 
+   /**
+    *  Indica si el usuarioEntidad es administrador
+    */
+   @NotNull
+   @Column(name = "ADMINISTRADOR", nullable = false)
+   private Boolean administrador;
+
+
+
 
    public UsuarioEntidad() {
    }
@@ -125,6 +134,14 @@ public class UsuarioEntidad implements Serializable {
 
    public void setActivo(Boolean activo) {
       this.activo = activo;
+   }
+
+   public Boolean getAdministrador() {
+      return administrador;
+   }
+
+   public void setAdministrador(Boolean administrador) {
+      this.administrador = administrador;
    }
 
    @Transient
