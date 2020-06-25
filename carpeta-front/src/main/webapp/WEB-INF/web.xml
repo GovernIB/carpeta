@@ -4,10 +4,12 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <display-name>carpeta Front</display-name>
+    <display-name>Carpeta</display-name>
+    <description>Front Office Carpeta</description>
 
+    <!--  LOAD-ON-STARTUP SERVLET -->
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
+        <welcome-file>/WEB-INF/views/pages/inicio.jsp</welcome-file>
     </welcome-file-list>
 
 </web-app>

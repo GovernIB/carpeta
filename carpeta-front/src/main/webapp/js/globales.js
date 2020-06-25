@@ -1,5 +1,26 @@
 // Document JavaScript
 
+
+/* Cookies */
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 
+	'UA-85538009-6'
+	]);
+_gaq.push(['_trackPageview']);
+
+(function() {
+	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+
+var APP_SERVIDOR = '/sites/ft/tema2017/';	
+var	txtCookie =  'Atenci\xF3. Utilitzem cookies per a millorar l\'experi\xE8ncia d\'usuari';
+var	txtCookieMes = 'Vull m\xE9s informaci\xF3';
+var	txtCookieOk = 'D\'acord';
+/* Cookies */
+
+
 //Funciones generales estáticas. Antes estaban en scriptmenu
 //$('xxx')[0] --> retorna lo mismo que document.getElementById('xxx') pero haciendo uso de JQUERY.
 var nodo='0'; //Nodo actual del menú
@@ -154,7 +175,7 @@ var tamanyLletra = {
 	}
 };
 
-/* */
+
 
 function addEvent(obj,tipo,fn,captura) {
 	if(obj.addEventListener) { obj.addEventListener(tipo,fn,captura); return true;
@@ -162,11 +183,7 @@ function addEvent(obj,tipo,fn,captura) {
 } else { obj['on'+tipo] = fn; }
 }
 
-/*
-function $(id) {
-	elemento = document.getElementById(id); return elemento;
-}
-*/
+
 function setCookie(nombre, valor, expiraDias) {
 	var ExpiraFecha = new Date(); ExpiraFecha.setTime(ExpiraFecha.getTime() + (expiraDias * 24 * 3600 * 1000));
 	document.cookie = nombre + "=" + escape(valor) + ((expiraDias == null) ? "" : "; expires=" + ExpiraFecha.toGMTString()) + "; path=/";

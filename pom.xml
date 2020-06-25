@@ -55,7 +55,8 @@
 		<!-- 5.0.2.RELEASE - 5.0.0.RELEASE 4.3.26.RELEASE - 4.2.14.RELEASE 3.2.18.RELEASE 
 			- 3.2.10.RELEASE -->
 		<spring.version>4.3.26.RELEASE</spring.version>
-		<springsecurity.version>4.2.14.RELEASE</springsecurity.version>
+		<spring-security.version>4.2.14.RELEASE</spring-security.version>
+        <spring-data-jpa>1.6.6.RELEASE</spring-data-jpa>
 		
 		<tiles.version>3.0.8</tiles.version>
 		
@@ -67,9 +68,10 @@
 
 		<!-- XYZ ZZZ S'ha de fer la substitució -->
 		<genapp.version>2.0.0</genapp.version>
-		
-        
-        
+
+        <!-- LOGINIB -->
+        <loginib.version>1.0.1</loginib.version>
+
         
     </properties>
     <dependencyManagement>
