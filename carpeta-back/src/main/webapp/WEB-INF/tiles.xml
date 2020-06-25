@@ -67,6 +67,10 @@
     <definition name="usuarioform" extends="common">
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/UsuarioForm.jsp" />
     </definition>
+    
+    <definition name="systemproperties" extends="common">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/systemproperties.jsp" />
+    </definition>
 
     <!--  ===========  USER  ================== -->
         

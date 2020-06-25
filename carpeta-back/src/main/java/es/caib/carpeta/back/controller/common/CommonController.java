@@ -17,6 +17,16 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/common/")
 public class CommonController {
 
+	
+	 @RequestMapping(value = "/systemproperties")
+	  public ModelAndView systemProperties(HttpSession session,
+	      HttpServletRequest request, HttpServletResponse response)
+	      throws Exception {
+	    
+	    ModelAndView mav = new ModelAndView("systemproperties");
+	    return mav;
+	    
+	  }
   
   
   @RequestMapping(value = "/option1")

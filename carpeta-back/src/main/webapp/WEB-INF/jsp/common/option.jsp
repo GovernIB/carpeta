@@ -1,3 +1,4 @@
+<%@page import="java.util.Properties"%>
 <%@page import="org.springframework.security.core.Authentication"
 %><%@page import="org.springframework.security.core.context.SecurityContext"
 %><%@page import="org.springframework.security.core.context.SecurityContextHolder"
@@ -7,6 +8,6 @@
 <div class="clear"></div>
 <div class="spacer"></div>
 
-<center><h1>Option Page ${optionNumber}</h1></center>
+<center><h1>System Properties ${optionNumber}</h1></center>
 
 <center><i class="fa fa-check fa-lg" aria-hidden="true"></i></center>

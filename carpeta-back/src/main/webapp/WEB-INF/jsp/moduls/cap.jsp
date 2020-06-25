@@ -90,7 +90,7 @@
 						id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false">
 						<i class="fas fa-user-tag fa-lg"></i>
-						<fmt:message key="rol.${pipella}" />
+						<fmt:message key="rols" />
 					</button>
 
 					<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -106,7 +106,7 @@
 						<% if (LoginInfo.getInstance().getEntitatID() != null) { %>
 							<a class="dropdown-item ${(pipella eq 'user')?'active' : '' }"
 								href="<c:url value="/canviarPipella/user"/>"> <i
-								class="fas fa-user"></i> ROLE_USER
+								class="fas fa-user"></i> <fmt:message key="rol.user" />
 							</a>
 					    <% } %>
 						</sec:authorize>
@@ -114,7 +114,7 @@
 						<sec:authorize access="hasRole('ROLE_ADMIN')">
 							<a class="dropdown-item ${(pipella eq 'admin')?'active' : '' }"
 								href="<c:url value="/canviarPipella/admin"/>"> <i
-								class="fas fa-user-shield"></i> ROLE_ADMIN
+								class="fas fa-user-shield"></i> <fmt:message key="rol.admin" />
 							</a>
 						</sec:authorize>
 
