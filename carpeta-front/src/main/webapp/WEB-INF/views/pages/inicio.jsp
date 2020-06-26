@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ca" style="" class=" js flexbox flexboxlegacy hashchange backgroundsize boxshadow textshadow opacity cssanimations cssgradients csstransforms csstransitions fontface generatedcontent localstorage svg" lang="ca">
 <head>
 	<title>${title_page}</title>
@@ -75,6 +77,14 @@
 				<a href="javascript:history.back()" class="imc-torna" title="Torna"><span>Torna</span></a>
 				<h1>
 					<span>CARPETA CIUTADANA</span>
+					<sec:authorize access="isAuthenticated()">
+						<sec:authentication var="user" property="principal.usuarioClave.nombreCompleto" />
+						<span class="subtituloMay">
+							<c:if test="${user != null}">
+								<sec:authentication property="principal.usuarioClave.nombreCompleto" />
+							</c:if>
+						</span>
+					</sec:authorize>
 				</h1>
 
 				<!-- Menú -->
@@ -126,7 +136,20 @@
 						<a href="../../../accessibilitat.html" class="imc-marc-ico imc--accessibilitat" id="imc-marc-accessibilitat" title="Accessibilitat">
 							<span>Accessibilitat</span>
 						</a>
-					</li>					
+					</li>
+
+					<sec:authorize access="isAuthenticated()">
+						<li>
+							<c:url var="logoutUrl" value="/logout" />
+							<form action="${logoutUrl}" id="logout" method="post">
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+							</form>
+							<a href="javascript:sortirCarpeta()" class="imc-marc-ico imc--sortir" title="Sortir">
+								<span>Sortir</span>
+							</a>
+						</li>
+					</sec:authorize>
+
 				</ul>
 			</div>
 		</div>				

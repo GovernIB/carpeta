@@ -87,7 +87,7 @@ public class LoginController {
             if(StringUtils.isNotEmpty(sesionHttp.getUrlEntrada())){
                 response.sendRedirect(sesionHttp.getUrlEntrada());
             }else{
-                response.sendRedirect("/carpeta");
+                response.sendRedirect("/carpetafront");
             }
         }catch (IOException e) {
             e.printStackTrace();

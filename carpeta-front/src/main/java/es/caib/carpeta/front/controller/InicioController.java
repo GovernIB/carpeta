@@ -20,7 +20,7 @@ public class InicioController {
     @Value("${es.caib.carpeta.notificaciones.url}")    private String NOTIFICACIONES_URL;
 
 
-    @RequestMapping(value="/inicio")
+    @RequestMapping(value={"/", "/inicio"})
     public ModelAndView inicio(HttpServletRequest request) {
 
         ModelAndView mav = new ModelAndView("inicio");

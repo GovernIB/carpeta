@@ -30,3 +30,8 @@ a:hover{
 .margen-top-clave{
 	padding-top: 3rem !important;
 }
+
+.imc--sortir::before {
+	background-image: url(../files/sortir.png);
+	opacity: 1 !important;
+}

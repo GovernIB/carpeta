@@ -9,7 +9,7 @@
 
     <!--  LOAD-ON-STARTUP SERVLET -->
     <welcome-file-list>
-        <welcome-file>/WEB-INF/views/pages/inicio.jsp</welcome-file>
+        <welcome-file>/inicio</welcome-file>
     </welcome-file-list>
 
 </web-app>

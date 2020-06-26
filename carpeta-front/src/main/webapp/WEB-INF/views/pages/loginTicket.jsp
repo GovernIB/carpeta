@@ -1,4 +1,10 @@
-<%@ include file="/WEB-INF/views/includes.jsp" %>
+<%@ page session="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -8,7 +14,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title><fmt:message key="carpeta.titulo"/></title>
+    <title>LOGIN TICKET</title>
     <script type="text/javascript">
         function loginTicket() {
             document.getElementById("formLogin").submit();
