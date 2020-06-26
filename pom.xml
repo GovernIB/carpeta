@@ -21,14 +21,7 @@
         <jboss-eap.version>7.2.6.GA</jboss-eap.version>
         <jboss-javaee.version>1.0.1.Final-redhat-00003</jboss-javaee.version>
 
-        <!-- 
-        <primefaces.version>7.0</primefaces.version>
-        <primefaces.theme.version>1.0.10</primefaces.theme.version>
-        
-        -->
-        
-        
-        		<!-- Propietats que afecten els plugins -->
+   		<!-- Propietats que afecten els plugins -->
 		<maven.compiler.release>11</maven.compiler.release>
 		<maven.compiler.target>11</maven.compiler.target>
 		<maven.compiler.source>11</maven.compiler.source>
@@ -60,17 +53,13 @@
 		<tiles.version>3.0.8</tiles.version>
 		
 		<!-- XYZ ZZZ -->
-		<cxf.version>2.2.12</cxf.version>
 		<global.version>${project.version}</global.version>
 
 		<cglib.version>2.2.2</cglib.version>
 
 		<!-- XYZ ZZZ S'ha de fer la substitució -->
 		<genapp.version>2.0.0</genapp.version>
-		
-        
-        
-        
+
     </properties>
     <dependencyManagement>
         <dependencies>

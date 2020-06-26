@@ -10,7 +10,7 @@
     <artifactId>carpeta-back</artifactId>
     <packaging>war</packaging>
     <name>carpeta - BACK</name>
-    <description>Backoffice de carpeta, amb JSF+Primefaces</description>
+    <description>Backoffice de carpeta</description>
 
     <dependencies>
         <!-- Especificacions i llibreries proporcionades per JBoss -->
@@ -48,7 +48,7 @@
         <dependency>
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-core</artifactId>
-            <scope>provided</scope>
+            <!--  <scope>provided</scope>  -->
         </dependency>
 
         
@@ -68,14 +68,6 @@
 			<scope>provided</scope>
 		</dependency>
         
-
-		<!--dependency>
-			<groupId>apache-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.0</version>
-			<scope>provided</scope>
-		</dependency-->
-
 
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -322,11 +314,6 @@
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
 				<version>${slf4j.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.keycloak</groupId>
-				<artifactId>keycloak-core</artifactId>
-				<version>${keycloak.version}</version>
 			</dependency>
 
 			<!-- Dependència per persistència - implementació de JPA -->
