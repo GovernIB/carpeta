@@ -38,7 +38,7 @@ public class InitServlet extends HttpServlet {
     // XYZ ZZZZ ZZZ Moure a Logic
 	 
     try {      
-      FileSystemManager.setFilesPath(Configuracio.getFilesDirectory());
+      //FileSystemManager.setFilesPath(Configuracio.getFilesDirectory());
       log.info("FileSystemManager path = " + FileSystemManager.getFilesPath().getAbsolutePath());
     } catch (Throwable th) {
       log.error("Error inicialitzant el sistema de sistema de fitxers: " + th.getMessage(), th);

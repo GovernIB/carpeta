@@ -1,6 +1,6 @@
 
 a{
-	color: #4dba79;
+	color: #32814B;
 }
 a:hover{
 	color: #000;
@@ -9,8 +9,8 @@ a:hover{
 
 /* Botó color Carpeta */
 .btn-primary.carpeta-btn {
-	background-color: #4dba79;
-	border-color: #4dba79;
+	background-color: #32814B;
+	border-color: #32814B;
 	border: none !important;
 	color: #ffffff !important;
 }
