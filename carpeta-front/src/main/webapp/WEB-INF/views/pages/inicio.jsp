@@ -162,59 +162,129 @@
 			<!-- Molla de pa -->
 			<ul class="mollaPa" id="imc-molla-pa">
 				<li>
-					<a href="../../../index.html">Inici</a>
+					<a href="/carpetafront/inicio">Inici</a>
 				</li>
 			</ul>
 			<!-- Fi Molla de pa -->
 			
 			<!-- Contingut pàgina -->
-			<div class="container-contenido">
-				<div class="infoNoMenu">
-					<p class="titol h2">Benvingut a la Carpeta Ciutadana del Govern de les Illes Balears</p>
 
-					<div class="col-md-5 border-0 float-left p-0">
-						<p class="lh15">
-							Què podeu fer a la Carpeta Ciutadana?
-							<ul class="lh15 pl-5 pt-3">
-								<li>Consultar l'estat dels vostres tràmits telemàtics.</li>
-								<li>Consultar els vostres registres d'entrada i descarregar-vos els justificants.</li>
-								<li>Rebre notificacions i comunicacions.</li>
-								<li>Consultar les vostres dades personals.</li>
-							</ul>
-						</p>
+			<sec:authorize access="!isAuthenticated()">
+				<div class="container-contenido">
+					<div class="infoNoMenu">
+						<p class="titol h2">Benvingut a la Carpeta Ciutadana del Govern de les Illes Balears</p>
 
-						<p class="lh15 pt-3"><img src="../../../files/solicitar_clave_acceso_dgt.jpg" class="w-25" alt="Logo Clave" title="Logo Clave"/></p>
+						<div class="col-md-5 border-0 float-left p-0">
+							<p class="lh15">
+								Què podeu fer a la Carpeta Ciutadana?
+								<ul class="lh15 pl-5 pt-3">
+									<li>Consultar l'estat dels vostres tràmits telemàtics.</li>
+									<li>Consultar els vostres registres d'entrada i descarregar-vos els justificants.</li>
+									<li>Rebre notificacions i comunicacions.</li>
+									<li>Consultar les vostres dades personals.</li>
+								</ul>
+							</p>
 
-						<p class="lh15">
-							L'accés a la teva Carpeta Ciutadana requereix que t'identifiquis mitjançant el sistema d'autenticació de Cl@ve a través de:
-							<ul class="lh15 pl-5 pt-3">
-								<li>Certificat digital o DNI electrònic</li>
-								<li>Clau PIN</li>
-								<li>Clau permanent</li>
-							</ul>
-						</p>
+							<p class="lh15 pt-3"><img src="../../../files/solicitar_clave_acceso_dgt.jpg" class="w-25" alt="Logo Clave" title="Logo Clave"/></p>
+
+							<p class="lh15">
+								L'accés a la teva Carpeta Ciutadana requereix que t'identifiquis mitjançant el sistema d'autenticació de Cl@ve a través de:
+								<ul class="lh15 pl-5 pt-3">
+									<li>Certificat digital o DNI electrònic</li>
+									<li>Clau PIN</li>
+									<li>Clau permanent</li>
+								</ul>
+							</p>
+						</div>
+
+						<div class="col-md-5 border-0 float-right">
+
+							<p class="margen-top-clave pb-3">
+								<a class="btn btn-primary carpeta-btn" href="login" role="button"><span class="oi oi-share" title="" aria-hidden="true"></span> Accedir a la Carpeta</a>
+							</p>
+
+							<p class="titol h5">No pots accedir a la teva Carpeta Ciutadana?</p>
+							<p class="lh15">
+								Si necessites ajuda addicional per a utilitzar el sistema Cl@ve, pots obtenir-la a través dels mitjans següents:
+								<ul class="lh15 pl-5 pt-3">
+									<li>A través del portal d'informació de <a href="http://clave.gob.es/clave_Home/clave.html" title="Accedir Clave" alt="Accedir Clave" target="_blank">Cl@ve</a></li>
+									<li>Per telèfon, cridant al telèfon 060.</li>
+									<li>Deixant un missatge a la nostra <a href="https://ssweb.seap.minhap.es/ayuda/consulta/Claveciudadanos"  title="Accedir Bústia Clave" title="Accedir Bústia Clave" target="_blank">Bústia d'atenció</a></li>
+								</ul>
+							</p>
+
+						</div>
+
 					</div>
-
-					<div class="col-md-5 border-0 float-right">
-
-						<p class="margen-top-clave pb-3">
-							<a class="btn btn-primary carpeta-btn" href="login" role="button"><span class="oi oi-share" title="" aria-hidden="true"></span> Accedir a la Carpeta</a>
-						</p>
-
-						<p class="titol h5">No pots accedir a la teva Carpeta Ciutadana?</p>
-						<p class="lh15">
-							Si necessites ajuda addicional per a utilitzar el sistema Cl@ve, pots obtenir-la a través dels mitjans següents:
-							<ul class="lh15 pl-5 pt-3">
-								<li>A través del portal d'informació de <a href="http://clave.gob.es/clave_Home/clave.html" title="Accedir Clave" alt="Accedir Clave" target="_blank">Cl@ve</a></li>
-								<li>Per telèfon, cridant al telèfon 060.</li>
-								<li>Deixant un missatge a la nostra <a href="https://ssweb.seap.minhap.es/ayuda/consulta/Claveciudadanos"  title="Accedir Bústia Clave" title="Accedir Bústia Clave" target="_blank">Bústia d'atenció</a></li>
-							</ul>
-						</p>
-
-					</div>
-					
 				</div>
-			</div>
+			</sec:authorize>
+
+			<sec:authorize access="isAuthenticated()">
+				<div class="container-contenido">
+					<div class="infoNoMenu">
+						<p class="titol h2">Benvingut a la teva Carpeta Ciutadana personal</p>
+
+						<div class="col-md-12 border-0 pl-0 pr-0">
+
+                            <p class="lh15">A Carpeta Ciutadana podràs trobar ...</p>
+
+                            <div class="card-body imc--llista--capses">
+
+                                <div class="row mb-5">
+
+                                    <!-- Trámites no acabados -->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <button class="card col-md-10 align-items-lg-center imc--capsa" onclick="goTo('<c:url value="/tramite/list"/>')">
+                                            <span class="oi oi-document h3 mt-2 mb-2" title="Llista tràmits" alt="Llista tràmits" aria-hidden="true">
+                                                <span class="card-title titol">Llista de tràmits</span>
+                                            </span>
+                                            <span class="card-text mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor  ...</span>
+                                        </button>
+                                    </div>
+
+                                    <!-- Registros -->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <button class="card col-md-10 align-items-lg-center imc--capsa" onclick="goTo('<c:url value="/registro/list"/>')">
+                                            <span class="oi oi-book h3 mt-2 mb-2" title="Llista registres" alt="Llista registres" aria-hidden="true">
+                                                <span class="card-title titol">Llista de registres</span>
+                                            </span>
+                                            <span class="card-text mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor  ...</span>
+                                        </button>
+                                    </div>
+
+                                    <!-- Notificaciones -->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <button class="card col-md-10 align-items-lg-center imc--capsa" onclick="goTo('<c:url value="/notificacion/list"/>')">
+                                            <span class="oi oi-envelope-closed h3 mt-2 mb-2" title="Notificacions" alt="Notificacions" aria-hidden="true">
+                                                <span class="card-title titol">Notificacions</span>
+                                            </span>
+                                            <span class="card-text mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor  ...</span>
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <!-- Mis Datos -->
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                        <button class="card col-md-10 align-items-lg-center imc--capsa" onclick="goTo('<c:url value="/datosPersonales"/>')">
+                                            <span class="oi oi-folder h3 mt-2 mb-2" title="Dades personals" alt="Dades personals" aria-hidden="true">
+                                                <span class="card-title titol">Dades personals</span>
+                                            </span>
+                                            <span class="card-text mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor  ...</span>
+                                        </button>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+						</div>
+
+					</div>
+				</div>
+			</sec:authorize>
+
 			<!-- Fi Contingut pàgina -->
 
 		</div>

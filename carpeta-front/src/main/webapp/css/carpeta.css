@@ -35,3 +35,13 @@ a:hover{
 	background-image: url(../files/sortir.png);
 	opacity: 1 !important;
 }
+.imc--llista--capses{
+	box-sizing: border-box;
+}
+.imc--capsa{
+	background-color: #e9e9e9;
+}
+.card-title{
+	font: normal 100% 'Noto Sans', 'TrebuchetMS', 'Trebuchet MS', Arial, Helvetica, sans-serif;
+	vertical-align: baseline;
+}
