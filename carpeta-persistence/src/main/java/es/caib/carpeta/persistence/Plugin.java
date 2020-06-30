@@ -6,6 +6,7 @@ import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -43,15 +44,13 @@ public class Plugin extends Traducible<TraduccionBase> implements Serializable {
    /**
     * Prefijo de las propiedades Ex: es.caib.carpeta
     */
-   @NotNull
-   @Column(name = "PREFIJO_PROPS", nullable = false)
+   @Column(name = "PREFIJO_PROPS")
    private String prefijoPropiedades;
 
    /**
     * Prefijo de la entidad Ex: caib, cconsultiu
     */
-   @NotNull
-   @Column(name = "PREFIJO_ENTIDAD", nullable = false)
+   @Column(name = "PREFIJO_ENTIDAD")
    private String prefijoEntidad;
 
 
@@ -92,8 +91,8 @@ public class Plugin extends Traducible<TraduccionBase> implements Serializable {
    @ElementCollection(fetch =FetchType.LAZY, targetClass = TraduccionBase.class )
    @CollectionTable(name = "CAR_TRA_PLUGIN",
       joinColumns = {@JoinColumn(name = "IDPLUGIN", referencedColumnName = "id")},foreignKey = @ForeignKey(name = "CAR_PLUGIN_TRAPLUG_FK"))
-   @MapKeyColumn(name="LANG", insertable = false, updatable = false)
-   private Map<String, TraduccionBase> traducciones;
+   @MapKeyColumn(name="LANG")
+   private Map<String, TraduccionBase> traducciones = new HashMap<>();
 
 
 
