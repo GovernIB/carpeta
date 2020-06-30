@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -84,7 +85,7 @@ public class Aviso extends Traducible<TraduccionAviso> implements Serializable {
    @CollectionTable(name = "CAR_TRA_AVISO",
       joinColumns = {@JoinColumn(name = "IDAVISO", referencedColumnName = "id")},foreignKey = @ForeignKey(name = "CAR_AVISO_TRAAVISO_FK"))
    @MapKeyColumn(name="LANG")
-   private Map<String, TraduccionAviso> traducciones;
+   private Map<String, TraduccionAviso> traducciones  = new HashMap<>();
 
    @Override
    public Map<String, TraduccionAviso> getTraducciones() {

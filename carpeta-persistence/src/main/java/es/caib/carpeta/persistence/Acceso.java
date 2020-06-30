@@ -17,6 +17,8 @@ import java.util.Objects;
  *
  * @author mgonzalez
  * Date: 19/05/2020
+ *
+ * Clase que registra los accesos de los ciudadanos al front. Son todos aquellos accesos que pasan por LoginIB.
  */
 
 @Entity

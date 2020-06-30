@@ -16,6 +16,8 @@ import java.util.Objects;
  *
  * @author mgonzalez
  * Date: 19/05/2020
+ *
+ * Clase que representa las acciones realizadas en el backoffice Ex: Plugin desactivat, entitat creada, etc
  */
 
 @Entity

@@ -8,7 +8,8 @@ package es.caib.carpeta.persistence.test;
  */
 
 
-import es.caib.carpeta.persistence.*;
+import es.caib.carpeta.persistence.Entidad;
+import es.caib.carpeta.persistence.TraduccionBase;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.junit.InSequence;
@@ -131,35 +132,4 @@ public class TestEntidad {
       Assert.assertEquals("A04003007", entidad.getCodigoDir3());
 
    }
-
-
-
-   @Test
-   @InSequence(1)
-   public void testCreateUsuarioEntidad() {
-
-      TypedQuery<Entidad> query = em.createQuery(
-         "select u from Entidad u where u.codigoDir3 = :codigoDir3", Entidad.class);
-      query.setParameter("codigoDir3", "A04003007");
-      Entidad entidad = query.getSingleResult();
-
-      TypedQuery<Usuario> query2 = em.createQuery(
-         "select u from Usuario u where u.username = :username", Usuario.class);
-      query2.setParameter("username", "mgonzalez");
-      Usuario usuario = query2.getSingleResult();
-
-
-      UsuarioEntidad usuarioEntidad = new UsuarioEntidad();
-      usuarioEntidad.setEntidad(entidad);
-      usuarioEntidad.setUsuario(usuario);
-      usuarioEntidad.setActivo(true);
-      usuarioEntidad.setUltimaEntidad(null);
-
-      em.persist(usuarioEntidad);
-
-      em.flush();
-
-      Assert.assertNotNull(usuarioEntidad.getId());
-   }
-
 }

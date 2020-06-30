@@ -71,6 +71,12 @@ public class Usuario implements Serializable {
     private String username;
 
 
+    /**
+     * Documento identificativo del usuario
+     */
+    @Column(name = "DOCUMENTO")
+    private String documento;
+
 
     /**
      * Tipo de persona (persona, aplicación)
@@ -144,6 +150,15 @@ public class Usuario implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
     }
 
     public TipoUsuario getTipo() {
