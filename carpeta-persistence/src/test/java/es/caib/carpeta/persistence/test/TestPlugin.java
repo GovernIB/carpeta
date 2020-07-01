@@ -170,7 +170,7 @@ public class TestPlugin {
       query.setParameter("prefijoEntidad", "caib");
       Plugin plugin = query.getSingleResult();
 
-      // Comprovam el nom de la unitat seleccionada
+      // comprobamos el prefijo de la entidad del plugin
       Assert.assertEquals("caib", plugin.getPrefijoEntidad());
 
    }

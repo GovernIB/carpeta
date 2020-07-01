@@ -125,7 +125,7 @@ public class TestPropiedadGlobal {
       query.setParameter("codigo", "PG1");
       PropiedadGlobal propiedadGlobal = query.getSingleResult();
 
-      // Comprovam el nom de la unitat seleccionada
+      // Comprobamos el codigo de la propiedad seleccionada
       Assert.assertEquals("PG1", propiedadGlobal.getCodigo());
 
    }

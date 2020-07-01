@@ -128,7 +128,7 @@ public class TestPropiedadPlugin {
       query.setParameter("idPlugin", idPlugin);
       PropiedadPlugin propiedadPlugin = query.getSingleResult();
 
-      // Comprovam el nom de la unitat seleccionada
+      // Comprobamos el codigo de la propiedad seleccionada
       Assert.assertEquals("PROP1", propiedadPlugin.getCodigo());
 
    }
