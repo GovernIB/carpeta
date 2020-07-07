@@ -21,9 +21,8 @@ class App extends Component {
 
 		return (
       <div>
-
-  			<MenuLateral />
-        <LateralDret />
+	  			<MenuLateral />
+	        <LateralDret />
       </div>
 		);
 

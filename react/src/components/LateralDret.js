@@ -8,6 +8,12 @@ import Breadcrumb from './Breadcrumb';
 import ContingutInici from './ContingutInici';
 import Peu from './Peu';
 import Accessibilitat from './Accessibilitat';
+import DadesPersonals from './DadesPersonals';
+import TramitsPendents from './TramitsPendents';
+import Registres from './Registres';
+import DetallRegistre from './DetallRegistre';
+import Notificacions from './Notificacions';
+import PageNotFound from './PageNotFound';
 import * as breadcrumbPaths from '../utils/breadcrumbPaths';
 
 
@@ -28,6 +34,11 @@ class ContingutDret extends Component{
                   <Switch>
                     <Route path="/inici"><Breadcrumb items={breadcrumbPaths.Inici}/></Route>
                     <Route path="/accessibilitat"><Breadcrumb items={breadcrumbPaths.Accessibilitat}/></Route>
+                    <Route path="/dadesPersonals"><Breadcrumb items={breadcrumbPaths.DadesPersonals}/></Route>
+                    <Route path="/tramitsPendents"><Breadcrumb items={breadcrumbPaths.TramitsPendents}/></Route>
+                    <Route path="/registres"><Breadcrumb items={breadcrumbPaths.Registres}/></Route>
+                    <Route path="/detallRegistre"><Breadcrumb items={breadcrumbPaths.DetallRegistre}/></Route>
+                    <Route path="/notificacions"><Breadcrumb items={breadcrumbPaths.Notificacions}/></Route>
                     <Route path="/"><Breadcrumb items={breadcrumbPaths.Inici}/></Route>
                   </Switch>
               </BrowserRouter>
@@ -36,7 +47,13 @@ class ContingutDret extends Component{
                   <Switch>
                     <Route path="/inici" component={ContingutInici} />
                     <Route path="/accessibilitat" component={Accessibilitat} />
+                    <Route path="/dadesPersonals" component={DadesPersonals} />
+                    <Route path="/tramitsPendents" component={TramitsPendents} />
+                    <Route path="/registres" component={Registres} />
+                    <Route path="/detallRegistre" component={DetallRegistre} />
+                    <Route path="/notificacions" component={Notificacions} />
                     <Route path="/" component={ContingutInici} />
+                    <Route component={PageNotFound}/>
                   </Switch>
               </BrowserRouter>
 

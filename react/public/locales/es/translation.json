@@ -8,7 +8,11 @@
         "titol": "CARPETA CIUTADANA",
         "directori": "Directorio",
         "torna": "Vuelve",
-        "menu": "Menú"
+        "menu": "Menú",
+        "sortir": "Salir",
+        "tramits": "Trámites sin enviar",
+        "registres": "Mis registros",
+        "notificacions": "Mis notificaciones"
     },
     "menuLateral": {
         "govern": "Govern Illes Balears",
@@ -54,7 +58,17 @@
         "ajudaBustia": "Buzón de atención.",
         "logoClave": "Logo Clave",
         "ajudaClaveText": "Acceder Cl@ve",
-        "ajudaBustiaText": "Acceder Buzón Cl@ve"
+        "ajudaBustiaText": "Acceder Buzón Cl@ve",
+        "titolPrivat": "Bienvenido a la Carpeta Ciudadana del Govern de les Illes Balears",
+        "introduccioPrivat": "La Carpeta Ciudadana es una area privada que les facilita la relación con la Administración, desde la cual puede acceder de forma ágil y sencilla a sus trámites y gestiones, y también consultar sus datos personales en poder de la Administración. Actualmente, la Carpeta Ciudadana permite consultar las funcionalidades siguientes:",
+        "llistaTramits": "Trámites sin enviar",
+        "descripcioTramits": "En este apartado puede consultar todos los trámites telemáticos que ha iniciado y están pendientes de finalizar.",
+        "llistaRegistres": "Registros y trámites enviados",
+        "descripcioRegistres": "En este apartado puede consultar todos los registros de entrada que ha presentado en algunas de las oficinas de registro del Govern de les Illes Balers.",
+        "notificacions": "Mis notificaciones",
+        "descripcioNotificacions": "Desde aquí puede consultar sus notificaciones y otras comunicaciones que le dirija la Administración.",
+        "dadesPersonals": "Mis datos",
+        "descripcioDades": "Desde aquí puede consultar sus datos personales en poder de la Administración de la Comunidad Autónoma de las Illes Balears."
       },
       "accessibilitat": {
         "titol": "DECLARACIÓN DE ACCESSIBILIDAD",
@@ -91,8 +105,79 @@
         "opcional4": "La web está diseñada para la visualización responsive, con la que se visualiza de manera óptima en las tabletas táctiles y en los dispositivos móviles.",
         "wai": "Logo Web Accessibility Initiative"
       },
+      "dadespersonals": {
+        "titol": "DATOS PERSONALES DE ",
+        "descripcio": "Desde aquí puede consultar sus datos personales en poder de la Administración de la Comunidad Autónoma de las Illes Balears.",
+        "nom": "Nombre",
+        "llinatge1": "Primer apellido",
+        "llinatge2": "Segundo apellido",
+        "dni": "DNI",
+        "metode": "Autenticación"
+      },
+      "tramitspendents": {
+        "titol": "LISTA DE TRÁMITS TELEMÁTICOS SIN TERMINAR DEL USUARIO",
+        "descripcio": "En este apartado puede consultar todos los trámites telemáticos que ha iniciado y están pendientes de finalizar.",
+        "dataInici": "Fecha inicio",
+        "dataFi": "Fecha fin",
+        "cercar": "Buscar",
+        "tramit": "Trámite",
+        "darrer": "Fecha último acceso",
+        "continuar": "Para continuar con la tramitación iniciada, pulse sobre el trámite seleccionado, se le redirigirá al asistente de tramitación para poder retomar el trámite en el estado en el que lo dejó."
+      },
+      "registres": {
+        "titol": "LISTA DE REGISTROS DEL USUARIO",
+        "descripcio": "Desde aquí puede consultar los registros de entrada correspondientes a las solicitudes, escritos y documentos que ha presentado, como interesado o como a representante, dirigidos a la Administración de la Comunidad Autónoma de las Illes Balears.",
+        "numero": "Número",
+        "data": "Fecha",
+        "extracte": "Extracto",
+        "organisme": "Organismo destinatario"
+      },
+      "detallregistre": {
+        "titol": "DETALLE DEL REGISTRO DE ENTRADA ",
+        "entrada": "REGISTRO DE ENTRADA",
+        "data": "Fecha",
+        "numero": "Número",
+        "oficina": "Oficina",
+        "destinatari": "Destinatario",
+        "tipusdoc": "Tipo doc.",
+        "extracte": "Extracto",
+        "idioma": "Idioma",
+        "presencial": "Presencial",
+        "sia": "Código SIA",
+        "refexterna": "Referencia ext.",
+        "justificant": "JUSTIFICANTE",
+        "interessats": "INTERESADOS",
+        "nom": "Nombre",
+        "document": "Documento",
+        "tipus": "Tipo",
+        "annexos": "ANEXOS",
+        "titolannexe": "Título",
+        "mime": "Tipo mime",
+        "codi": "Código asunto",
+        "expedient": "Número expediente",
+        "transpot": "Tipo transporte",
+        "numtransport": "Número transporte",
+        "observacions": "Observaciones",
+        "descarregar": "Descargar",
+        "exposa": "Expone",
+        "solicita": "Solicita",
+        "organisme": "Organismo"
+      },
+      "notificacions": {
+        "titol": "MIS NOTIFICACIONES",
+        "descripcio": "Desde aquí puede consultar sus notificaciones y otras comunicaciones que le dirija la Administración.",
+        "notificacions": "Notificacioens",
+        "notdescripcio": "Desde aquí puede acceder a las notificaciones pendientes y realizar la comparecencia electrónica, a las notificaciones realizadas y a las comunicaciones.",
+        "altres": "Otras comunicaciones",
+        "altdescripcio": "Desde aquí puede acceder a las comunicaciones correspondientes a los trámites eviados mediante el asistente de tramitación del Govern de les Illes Balears."
+      },
       "breadcrumb": {
         "inici": "Inicio",
-        "accessibilitat": "Accesibilidad"
+        "accessibilitat": "Accesibilidad",
+        "dadesPersonals": "Mis datos",
+        "tramitsPendents": "Trámites sin enviar",
+        "registres": "Mis registros",
+        "detallRegistre": "Detalle de registro",
+        "notificacions": "Mis notificaciones"
       }
 }

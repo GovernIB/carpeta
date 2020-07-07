@@ -49,6 +49,26 @@ class LegacyComponentClass extends Component{
                 <span>{ t('menu.accessibilitat') }</span>
               </a>
             </li>
+            <li>
+              <a href="tramitsPendents" className="imc-marc-ico imc--tramits" id="imc-marc-tramits" title={ t('menu.tramits') }>
+                <span>{ t('menu.tramits') }</span>
+              </a>
+            </li>
+            <li>
+              <a href="registres" className="imc-marc-ico imc--registres" id="imc-marc-registres" title={ t('menu.registres') }>
+                <span>{ t('menu.registres') }</span>
+              </a>
+            </li>
+            <li>
+              <a href="notificacions" className="imc-marc-ico imc--notificacions" id="imc-marc-notificacions" title={ t('menu.notificacions') }>
+                <span>{ t('menu.notificacions') }</span>
+              </a>
+            </li>
+            <li>
+              <a href="sortir" className="imc-marc-ico imc--sortir" id="imc-marc-sortir" title={ t('menu.sortir') }>
+                <span>{ t('menu.sortir') }</span>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
