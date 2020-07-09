@@ -2,16 +2,32 @@ import React, { Component, Suspense } from 'react';
 import { withTranslation } from 'react-i18next';
 
 
+function obtenerValorParametro(sParametroNombre) {
+var sPaginaURL = window.location.search.substring(1);
+ var sURLVariables = sPaginaURL.split('&');
+  for (var i = 0; i < sURLVariables.length; i++) {
+    var sParametro = sURLVariables[i].split('=');
+    if (sParametro[0] === sParametroNombre) {
+      return sParametro[1];
+    }
+  }
+ return null;
+}
+
+
+
 class LegacyComponentClass extends Component{
 
   render(){
+
+    let registre = obtenerValorParametro('id');
 
     const { t } = this.props;
 
     return (
       <div className="container-contenido">
         <div className="infoNoMenu">
-          <p className="titol h2">{ t('detallregistre.titol') }</p>
+          <p className="titol h2">{ t('detallregistre.titol') } {registre}</p>
 
           <div className="col-md-12 border-0 float-left p-0">
 
@@ -88,7 +104,7 @@ class LegacyComponentClass extends Component{
                                           <div className="font-weight-bold verde text-uppercase mb-3 text-center h3">{ t('detallregistre.justificant') }</div>
 
                                               <div className="text-center">
-                                                  <button type="button" className="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="goToWindow()"><span className="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span> { t('detallregistre.descarregar') }</button>
+                                                  <button type="button" className="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onClick={event =>  window.location.href='/descarregar'}><span className="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span> { t('detallregistre.descarregar') }</button>
                                               </div>
 
                                       </div>

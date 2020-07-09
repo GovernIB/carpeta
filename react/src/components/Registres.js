@@ -8,6 +8,8 @@ class LegacyComponentClass extends Component{
 
     const { t } = this.props;
 
+    const registre = '8892020';
+
     return (
       <div className="container-contenido">
         <div className="infoNoMenu">
@@ -33,9 +35,9 @@ class LegacyComponentClass extends Component{
                                 <tr className="clickable-row" data-target="_blank" data-href="goTo('detallRegistre')">
                                     <td>
                                         <label class="ponerMovil" data-toggle="tooltip" data-placement="top" title="L17/889-2020">
-                                                <a href="detallRegistre" target="_blank">L17/889-2020</a>
+                                                <a href={"detallRegistre/"+registre}>L17/889-2020</a>
                                         </label>
-                                        <p class="quitarMovil mb-0 mt-0"><a href="detallRegistre" target="_blank">L17/889-2020</a></p>
+                                        <p class="quitarMovil mb-0 mt-0"><a href={"detallRegistre?id="+registre} target="_blank" rel="noopener noreferrer">L17/889-2020</a></p>
                                     </td>
                                     <td>12/02/20</td>
                                     <td>Registre fet per...</td>
