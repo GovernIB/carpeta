@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -14,6 +16,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+@Profile("!https")
 @ComponentScan("es.caib.carpeta.front")
 public class CarpetaSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -28,10 +31,27 @@ public class CarpetaSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(carpetaFrontAuthProvider);
     }
 
+//    @Override
+//    protected void configure(final HttpSecurity http)
+//            throws Exception {
+//        http.authorizeRequests()
+//                .antMatchers(
+//                        HttpMethod.GET,
+//                        "/index*", "/static/**", "/locales**", "/*.js", "/*.json", "/*.ico")
+//                .permitAll()
+//                .anyRequest().authenticated()
+//                .and()
+//                .formLogin().loginPage("/login")
+//                .defaultSuccessUrl("/homepage.html",true)
+//                .failureUrl("/PageNotFound");
+//
+//    }
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.authorizeRequests().antMatchers("/","/inicio","/salir","/js/**","/css/**","/fonts/**","/files/**","/static/**","/accesibilidad", "/mapaWeb").permitAll()
+        http.csrf().disable().authorizeRequests().antMatchers("/","/inici", "/index*", "/sortir", "/locales/**","/static/**", "/accessibilitat", "/static/**", "/locales**", "/*.js", "/*.json", "/*.ico").permitAll()
                 .and()
                 .authorizeRequests().anyRequest().access("isAuthenticated()")
                 .and()
@@ -43,7 +63,7 @@ public class CarpetaSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .failureForwardUrl("/login?error=true")
                 .permitAll()
-                .and().logout().logoutSuccessUrl("/salir");
+                .and().logout().logoutSuccessUrl("/sortir");
     }
 
     @Bean

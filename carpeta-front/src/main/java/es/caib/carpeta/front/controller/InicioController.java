@@ -20,17 +20,27 @@ public class InicioController {
     @Value("${es.caib.carpeta.notificaciones.url}")    private String NOTIFICACIONES_URL;
 
 
-    @RequestMapping(value={"/", "/inicio"})
-    public ModelAndView inicio(HttpServletRequest request) {
 
-        ModelAndView mav = new ModelAndView("inicio");
+//    @RequestMapping(value={"/", "/inicio"})
+//    public ModelAndView inicio(HttpServletRequest request) {
+//
+//        ModelAndView mav = new ModelAndView("inicio");
+//
+//        Locale loc = LocaleContextHolder.getLocale();
+//        mav.addObject("title_page", "CARPETA CIUTADANA - Inici JSP");
+//
+//        return mav;
+//
+//    }
 
-        Locale loc = LocaleContextHolder.getLocale();
-        mav.addObject("title_page", "CARPETA CIUTADANA - Inici JSP");
-
-        return mav;
-
-    }
+//    @RequestMapping(value={"/", "/inici"})
+//    public ModelAndView inici(HttpServletRequest request) {
+//
+//        ModelAndView mav = new ModelAndView("inici");
+//
+//        return mav;
+//
+//    }
 
 //    @RequestMapping(value = { "/accesibilidad"})
 //    public ModelAndView accesibilidad(HttpServletRequest request) {
