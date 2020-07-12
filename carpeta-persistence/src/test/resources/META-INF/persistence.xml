@@ -50,8 +50,8 @@
             Postgresql:    org.hibernate.dialect.PostgreSQL95Dialect
             Oracle:        org.hibernate.dialect.Oracle12cDialect
             -->
-            <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect"/>
-            <!--<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/> -->
+            <!--<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect"/>-->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
 
         </properties>
     </persistence-unit>

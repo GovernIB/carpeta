@@ -105,7 +105,17 @@
     <definition name="option2Admin" extends="admin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/admin/admin.jsp" />
     </definition>
-    
+
+
+    <definition name="entidadlist" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/entidad/entidadList.jsp" />
+    </definition>
+
+
+
+    <definition name="entidadform" extends="admin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/entidad/entidadForm.jsp" />
+    </definition>
     <!--  ===========  DESENVOLUPAMENT ================== -->
     
     <definition name="desenvolupament" extends="base.definition">

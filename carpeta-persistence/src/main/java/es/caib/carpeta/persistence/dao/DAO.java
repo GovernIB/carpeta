@@ -1,13 +1,12 @@
 package es.caib.carpeta.persistence.dao;
 
 import es.caib.carpeta.commons.query.OrderBy;
+import org.fundaciobit.genapp.common.i18n.I18NException;
 
+import javax.persistence.EntityGraph;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
-
-import org.fundaciobit.genapp.common.i18n.I18NException;
-
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -71,11 +70,12 @@ public interface DAO<E extends Serializable, PK> {
     /**
      * Obté totes les entitats.
      *
+     * @param entityGraph permet indicar quins atributs se carreguen de la clase indicada.
      * @param orderBy ordenacions que s'aplicaran amb l'ordre indicat.
      * @return llista d'entitats ordenada amb els criteris indicats.
      * @throws I18NException si es produeix qualsevol error d'accés a les dades.
      */
-    List<E> findAll(OrderBy... orderBy) throws I18NException;
+    public List<E> findAll(EntityGraph<E> entityGraph, OrderBy... orderBy) throws I18NException;
 
     /**
      * Obté les entitats que compleixen el filtre indicat.

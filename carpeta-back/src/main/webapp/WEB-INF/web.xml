@@ -187,6 +187,7 @@
         <web-resource-collection>
             <web-resource-name>carpeta_back-admin</web-resource-name>
             <url-pattern>/admin/*</url-pattern>
+            <url-pattern>/entidad/*</url-pattern>
             <url-pattern>/webdb/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>

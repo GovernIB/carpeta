@@ -3,11 +3,9 @@ package es.caib.carpeta.ejb;
 
 import es.caib.carpeta.persistence.Entidad;
 import es.caib.carpeta.persistence.dao.DAO;
-
-import javax.ejb.Local;
-
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
+import javax.ejb.Local;
 import java.util.List;
 
 /**
@@ -46,6 +44,16 @@ public interface EntidadService extends DAO<Entidad, Long> {
     * @throws I18NException
     */
    List<Entidad> findAll() throws I18NException;
+
+
+   /**
+    * Retorna las entidades con los atributos mínimos para mostrar en el listado
+    *
+    * En el caso de las entidades
+    * @return
+    * @throws I18NException
+    */
+   List<Entidad> findAllList() throws I18NException;
 
 
 

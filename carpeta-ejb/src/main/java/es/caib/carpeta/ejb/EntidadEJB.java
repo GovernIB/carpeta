@@ -7,12 +7,11 @@ import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.ejb.interceptor.Logged;
 import es.caib.carpeta.persistence.Entidad;
 import es.caib.carpeta.persistence.dao.AbstractDAO;
+import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
-
-import org.fundaciobit.genapp.common.i18n.I18NException;
-
+import javax.persistence.EntityGraph;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,8 +62,21 @@ public class EntidadEJB extends AbstractDAO<Entidad, Long> implements EntidadSer
    @Override
    public List<Entidad> findAll() throws I18NException {
 
-      OrderBy orderBy = new OrderBy("nombre", OrderType.ASC);
-      return findAll(orderBy);
+      OrderBy orderBy = new OrderBy("codigoDir3", OrderType.ASC);
+      List<Entidad> entidades =  findAll(null,orderBy);
+      return entidades;
+   }
+
+
+   @Override
+   public List<Entidad> findAllList() throws I18NException{
+
+      OrderBy orderBy = new OrderBy("codigoDir3", OrderType.ASC);
+      EntityGraph entityGraph = entityManager.createEntityGraph(Entidad.class);
+      entityGraph.addAttributeNodes("codigoDir3", "activa", "traducciones");
+      List<Entidad> entidades =  findAll(entityGraph,orderBy);
+
+      return entidades;
    }
 
 

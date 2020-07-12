@@ -4,7 +4,6 @@ package es.caib.carpeta.persistence.dao;
 import es.caib.carpeta.commons.query.OrderBy;
 import es.caib.carpeta.commons.query.OrderType;
 import es.caib.carpeta.commons.utils.Constants;
-
 import org.fundaciobit.genapp.common.i18n.I18NArgumentString;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.slf4j.Logger;
@@ -12,16 +11,8 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Order;
-import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.*;
+import javax.persistence.criteria.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
@@ -38,6 +29,7 @@ import java.util.Map;
  * @param <PK> Tipus de la clau primària de l'entitat.
  * @author areus
  * @author anadal
+ * @author mgonzalez
  */
 @RolesAllowed(Constants.CAR_ADMIN)
 public abstract class AbstractDAO<E extends Serializable, PK> implements DAO<E, PK> {
@@ -133,28 +125,29 @@ public abstract class AbstractDAO<E extends Serializable, PK> implements DAO<E, 
 
     @Override
     @PermitAll
-    public List<E> findAll(OrderBy... orderBy) throws I18NException {
-        return select(null, null, null, orderBy);
+    public List<E> findAll(EntityGraph<E> entityGraph, OrderBy... orderBy) throws I18NException {
+        return select(null, null, null, entityGraph,orderBy );
     }
+
 
     @Override
     @PermitAll
     public List<E> findFiltered(Map<String, Object> filters, OrderBy... orderBy) throws I18NException {
-        return select(filters, null, null, orderBy);
+        return select(filters, null, null,null,orderBy);
     }
 
     @Override
     @PermitAll
     public List<E> findAll(@PositiveOrZero int first, @Positive int pageSize, OrderBy... orderBy)
             throws I18NException {
-        return select(null, first, pageSize, orderBy);
+        return select(null, first, pageSize, null,orderBy);
     }
 
     @Override
     @PermitAll
     public List<E> findFiltered(Map<String, Object> filters, @PositiveOrZero int first, @Positive int pageSize,
                                 OrderBy... orderBy) throws I18NException {
-        return select(filters, first, pageSize, orderBy);
+        return select(filters, first, pageSize, null, orderBy);
     }
 
     @Override
@@ -172,11 +165,12 @@ public abstract class AbstractDAO<E extends Serializable, PK> implements DAO<E, 
      * @param filters     map on les claus són el nom d'atribut i el valor pel qual s'ha de filtrar.
      * @param firstResult el número d'ordre de la primera entitat a tornar. La primera és 0.
      * @param maxResults  el nombre màxim d'entitats a tornar.
+     * @param entityGraph  graf que indica quins atributs carregar
      * @param orderByList Camps per ordenar el llistat
      * @return llista d'entitats que compleixen el filtre.
      * @throws I18NException si es produeix un error executant la consulta
      */
-    protected List<E> select(Map<String, Object> filters, Integer firstResult, Integer maxResults,
+    protected List<E> select(Map<String, Object> filters, Integer firstResult, Integer maxResults,EntityGraph<E> entityGraph,
                              OrderBy... orderByList) throws I18NException {
 
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -202,6 +196,10 @@ public abstract class AbstractDAO<E extends Serializable, PK> implements DAO<E, 
         }
 
         TypedQuery<E> query = entityManager.createQuery(cq);
+
+        if(entityGraph!= null) {
+            query.setHint("javax.persistence.loadgraph", entityGraph);
+        }
         if (firstResult != null) {
             query.setFirstResult(firstResult);
         }
