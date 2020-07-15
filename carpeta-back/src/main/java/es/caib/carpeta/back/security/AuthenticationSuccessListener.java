@@ -21,7 +21,10 @@ import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.pluginsib.userinformation.IUserInformationPlugin;
 import org.fundaciobit.pluginsib.userinformation.UserInfo;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.config.ExecutorBeanDefinitionParser;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
+import org.springframework.security.concurrent.DelegatingSecurityContextExecutor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -34,10 +37,9 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.concurrent.Executor;
 
 /**
  *
@@ -49,6 +51,7 @@ public class AuthenticationSuccessListener implements
     ApplicationListener<InteractiveAuthenticationSuccessEvent> {
   
   protected final Logger log = Logger.getLogger(getClass());
+  
   
   
   /* public static final Set<String> allowedApplicationContexts = new HashSet<String>(); */
@@ -73,7 +76,7 @@ public class AuthenticationSuccessListener implements
     try {
       LoginInfo loginInfo = LoginInfo.getInstance();
 
-      if (!username.equals(loginInfo.getUsuariPersona().getId())) {
+      if (!username.equals(loginInfo.getUsuariPersona().getUsername())) {
         throw new LoginException("Amb aquest navegador ja s'ha autenticat amb un altre usuari."
             + " Tanqui el navegador completament.");
       }
@@ -88,18 +91,24 @@ public class AuthenticationSuccessListener implements
     Collection<GrantedAuthority> seyconAuthorities = user.getAuthorities();
     boolean containsRoleUser = false;
     boolean containsRoleAdmin = false;
-    for (GrantedAuthority grantedAuthority : seyconAuthorities) {
-      String rol = grantedAuthority.getAuthority();
-
-      
-      log.info("XYZ ZZZ ZZZ Rol SEYCON : " + rol);
-      
-      if (Constants.ROLE_USER.equals(rol)) {
-        containsRoleUser = true;
-      }
-      if (Constants.ROLE_ADMIN.equals(rol)) {
-        containsRoleAdmin = true;
-      }
+    
+    if (seyconAuthorities.size() == 0) {
+    	log.info(" =======  XYZ ZZZ NO TE CAP ROL =========== ");
+    } else {
+    
+	    for (GrantedAuthority grantedAuthority : seyconAuthorities) {
+	      String rol = grantedAuthority.getAuthority();
+	
+	      
+	      log.info("XYZ ZZZ ZZZ Rol SEYCON : " + rol);
+	      
+	      if (Constants.ROLE_USER.equals(rol)) {
+	        containsRoleUser = true;
+	      }
+	      if (Constants.ROLE_ADMIN.equals(rol)) {
+	        containsRoleAdmin = true;
+	      }
+	    }
     }
 
     UsuarioEntidadService usuariEntitatLogicaEjb;
@@ -124,30 +133,13 @@ public class AuthenticationSuccessListener implements
 
       {
         try {
-          IUserInformationPlugin plugin = CarpetaPluginsManager.getUserInformationPluginInstance();
-          UserInfo info = plugin.getUserInfoByUserName(username);
-          if (info != null) {
-            es.caib.carpeta.persistence.Usuario persona = new Usuario();
-            persona.setEmail(info.getEmail()== null? "" : info.getEmail());
+        	Usuario persona;       
+        	// XYZ ZZZ ZZZ ZZZ TODO
+        	persona = usuariPersonaLogicaEjb.getUserInfoFromUserInformation(username);
+          
+          
+          if (persona != null) {
             
-            // XYZ ZZZ
-            //persona.setIdiomaID(Configuracio.getDefaultLanguage());
-            final String nom, llinatge1, llinatge2;
-            {         
-              nom = info.getName();
-              
-              llinatge1 = info.getSurname1();
-              llinatge2 = info.getSurname2();
-            }
-            persona.setNombre(nom);
-            persona.setApellido1(llinatge1);
-            persona.setApellido2(llinatge2);
-
-            persona.setTipo(TipoUsuario.PERSONA);
-            persona.setUsername(username);
-            // XYZ ZZZ ZZZ
-            //persona.setNif(info.getAdministrationID().toUpperCase());
-            persona.setIdioma("ca");
 
             UsuarioEntidad usuariEntitat = null;
 
@@ -178,7 +170,7 @@ public class AuthenticationSuccessListener implements
             necesitaConfigurar = true;
 
             if (usuariEntitat == null) {
-              usuariPersona = usuariPersonaLogicaEjb.create(persona);
+              usuariPersona = usuariPersonaLogicaEjb.crearUsuario(persona);
             } else {
               usuariEntitat = usuariEntitatLogicaEjb.create(usuariEntitat);
               usuariPersona = usuariEntitat.getUsuario();
@@ -201,7 +193,7 @@ public class AuthenticationSuccessListener implements
              msg = e.getMessage();
            }
            
-           log.error("Error llegint informació del plugin de Login: " + msg, e);
+           log.error("Error llegint informació del plugin de User Information: " + msg, e);
         }
       }
       
@@ -363,6 +355,9 @@ public class AuthenticationSuccessListener implements
     log.debug(" =================================================================");
 
   }
+  
+
+  
   
   
   

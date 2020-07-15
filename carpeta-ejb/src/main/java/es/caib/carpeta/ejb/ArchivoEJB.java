@@ -18,5 +18,5 @@ import javax.ejb.Stateless;
 @Logged
 @Stateless
 @RolesAllowed(Constants.CAR_ADMIN)
-public class ArchivoEJB extends AbstractDAO<Archivo, Long> implements ArchivoService{
+public class ArchivoEJB extends AbstractDAO<Archivo, Long> implements ArchivoService {
 }

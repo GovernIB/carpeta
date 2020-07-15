@@ -38,8 +38,8 @@
 				<div>
 					<strong class="subtitol llevarMobil"><fmt:message
 							key="usuari" />: </strong> 
-							<span class="subtitolMay"> <%=request.getUserPrincipal().getName()%>
-						 | <%=request.getRemoteUser()%>
+							<span class="subtitolMay"> ${loginInfo.username}
+						 | ${loginInfo.usuariPersona.nombre}&nbsp;${loginInfo.usuariPersona.apellido1}&nbsp;${loginInfo.usuariPersona.apellido2} 
 					</span> <br/>
 					
 				</div>

@@ -3,21 +3,11 @@ package es.caib.carpeta.front.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.format.FormatterRegistry;
-import org.springframework.format.datetime.DateFormatter;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
-import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.ResourceBundleViewResolver;
-import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
-import java.util.Locale;
 
 @EnableWebMvc
 @Configuration

@@ -13,7 +13,7 @@ import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+//import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,8 +36,8 @@ public class LoginController {
     @Autowired
     private SesionHttp sesionHttp;
 
-    @Autowired
-    private RequestMappingHandlerMapping requestMappingHandlerMapping;
+    //@Autowired
+    //private RequestMappingHandlerMapping requestMappingHandlerMapping;
 
     @Value("${es.caib.carpeta.loginib.entidad}")
     private String entidad;

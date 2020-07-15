@@ -72,7 +72,7 @@ public class EntidadEJB extends AbstractDAO<Entidad, Long> implements EntidadSer
    public List<Entidad> findAllList() throws I18NException{
 
       OrderBy orderBy = new OrderBy("codigoDir3", OrderType.ASC);
-      EntityGraph entityGraph = entityManager.createEntityGraph(Entidad.class);
+      EntityGraph<Entidad> entityGraph = entityManager.createEntityGraph(Entidad.class);
       entityGraph.addAttributeNodes("codigoDir3", "activa", "traducciones");
       List<Entidad> entidades =  findAll(entityGraph,orderBy);
 

@@ -5,6 +5,7 @@ import es.caib.carpeta.persistence.TipoUsuario;
 import es.caib.carpeta.persistence.Usuario;
 import es.caib.carpeta.persistence.dao.DAO;
 
+import javax.annotation.security.PermitAll;
 import javax.ejb.Local;
 import javax.validation.constraints.NotNull;
 
@@ -20,9 +21,12 @@ import java.util.Map;
  * Date: 09/06/2020
  */
 @Local
+@PermitAll
 public interface UsuarioService extends DAO<Usuario, Long > {
 
-   public static final String JNDI_NAME = "java:app/carpeta-ejb/UsuarioEJB!es.caib.carpeta.ejb.UsuarioService";
+   public static final String EJB = "carpeta-ejb";
+	
+   public static final String JNDI_NAME = "java:app/" + EJB + "/UsuarioEJB!es.caib.carpeta.ejb.UsuarioService";
 
 
    /**
@@ -33,7 +37,7 @@ public interface UsuarioService extends DAO<Usuario, Long > {
     */
    Usuario crearUsuario(Usuario usuario) throws I18NException;
    
-   
+   @PermitAll
    public Usuario findByUsername(@NotNull String username);
 
 
@@ -47,6 +51,9 @@ public interface UsuarioService extends DAO<Usuario, Long > {
     * @throws I18NException
     */
    void eliminarUsuario(Long id) throws I18NException;
+   
+   
+   public Usuario getUserInfoFromUserInformation(String username) throws I18NException, Exception;
 
 
 }

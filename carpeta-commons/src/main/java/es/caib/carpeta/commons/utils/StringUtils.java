@@ -1,11 +1,16 @@
 package es.caib.carpeta.commons.utils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
+/**
+ * 
+ * @author anadal
+ *
+ */
 public class StringUtils {
 
-    private final Logger log = LoggerFactory.getLogger(StringUtils.class);
+    //private final Logger log = LoggerFactory.getLogger(StringUtils.class);
 
 
     /**

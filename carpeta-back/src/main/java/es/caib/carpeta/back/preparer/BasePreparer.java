@@ -24,7 +24,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-
 import es.caib.carpeta.back.security.LoginInfo;
 
 import es.caib.carpeta.commons.utils.Constants;
@@ -36,9 +35,8 @@ import es.caib.carpeta.commons.utils.Constants;
 @RunAs("CAR_USER")
 @Component
 public class BasePreparer implements ViewPreparer, Constants {
-    
-    public static Map<String,I18NTranslation> loginErrorMessage = new HashMap<String,I18NTranslation>();
 
+	public static Map<String, I18NTranslation> loginErrorMessage = new HashMap<String, I18NTranslation>();
 
 	protected final Logger log = Logger.getLogger(getClass());
 
@@ -59,36 +57,39 @@ public class BasePreparer implements ViewPreparer, Constants {
 		httpRequest.getSession().setAttribute("loginInfo", loginInfo);
 		{
 
+			if (httpRequest.getSession().getAttribute("isMobile") == null) {
 
+				Device currentDevice = DeviceUtils.getRequiredCurrentDevice(httpRequest);
+				if (currentDevice.isMobile()) {
 
-        Device currentDevice = DeviceUtils.getRequiredCurrentDevice(httpRequest);
-	    if(currentDevice.isMobile()) {
-	      
-	      log.info("\n\nXYZ ZZZ IS MOBILE = true \n\n");
-	      
-	      httpRequest.getSession().setAttribute("isMobile", true);      
-          request.put("isMobile", true);
-	    } else {
-	      log.info("\n\nXYZ ZZZ IS MOBILE = false \n\n");
-	    }
+					log.info("\n\nXYZ ZZZ IS MOBILE = true \n\n");
 
-	    // Error de Login
-	    final String username = loginInfo.getUsuariPersona().getUsername();
-	    
-	    I18NTranslation trans = loginErrorMessage.get(username);
-	    if (trans == null) {
-	      String msg = (String)httpRequest.getSession().getAttribute("loginerror");
-	      if (msg != null) {
-	        HtmlUtils.saveMessageError(httpRequest, msg);
-	      }
-	    } else {
-	      loginErrorMessage.remove(username);
-	      String msg = I18NUtils.tradueix(trans);
-	      HtmlUtils.saveMessageError(httpRequest, msg);
-	      httpRequest.getSession().setAttribute("loginerror", msg);
-	    }
+					httpRequest.getSession().setAttribute("isMobile", true);
+					request.put("isMobile", true);
+				} else {
+					log.info("\n\nXYZ ZZZ IS MOBILE = false \n\n");
+				}
+			}
 
-
+			// Error de Login
+			
+			if (loginInfo != null && loginInfo.getUsuariPersona() != null) {
+			
+				final String username = loginInfo.getUsuariPersona().getUsername();
+	
+				I18NTranslation trans = loginErrorMessage.get(username);
+				if (trans == null) {
+					String msg = (String) httpRequest.getSession().getAttribute("loginerror");
+					if (msg != null) {
+						HtmlUtils.saveMessageError(httpRequest, msg);
+					}
+				} else {
+					loginErrorMessage.remove(username);
+					String msg = I18NUtils.tradueix(trans);
+					HtmlUtils.saveMessageError(httpRequest, msg);
+					httpRequest.getSession().setAttribute("loginerror", msg);
+				}
+			}
 
 			request.put("urlActual", httpRequest.getServletPath());
 

@@ -44,17 +44,9 @@
             <version>1.1.1</version>
             <scope>provided</scope>
         </dependency>
-        <!-- Llibreries de keycloak XYZ ZZZ ZZZ LLEVAR PER -->
-        <dependency>
-            <groupId>org.keycloak</groupId>
-            <artifactId>keycloak-core</artifactId>
-            <!--  <scope>provided</scope>  -->
-        </dependency>
-
-        
+       
         
         <!-- Externas -->
-
 		<dependency>
 			<groupId>org.fundaciobit.genapp</groupId>
 			<artifactId>genapp-web</artifactId>
