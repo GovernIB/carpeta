@@ -4,7 +4,7 @@
     <parent>
         <groupId>es.caib.carpeta</groupId>
         <artifactId>carpeta</artifactId>
-        <version>1.1.1</version>
+        <version>1.1.2</version>
     </parent>
 
     <artifactId>carpeta-ear</artifactId>
@@ -34,14 +34,14 @@
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-ejb</artifactId>
-            <version>1.1.1</version>
+            <version>1.1.2</version>
             <type>ejb</type>
         </dependency>
         <!-- BACK START -->
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-back</artifactId>
-            <version>1.1.1</version>
+            <version>1.1.2</version>
             <type>war</type>
         </dependency>
         <!-- BACK END -->
@@ -49,7 +49,7 @@
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-front</artifactId>
-            <version>1.1.1</version>
+            <version>1.1.2</version>
             <type>war</type>
         </dependency>
         <!-- FRONT END
@@ -69,17 +69,17 @@
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-persistence</artifactId>
-            <version>1.1.1</version>
+            <version>1.1.2</version>
         </dependency>
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-commons</artifactId>
-            <version>1.1.1</version>
+            <version>1.1.2</version>
         </dependency>
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-integrations</artifactId>
-            <version>1.1.1</version>
+            <version>1.1.2</version>
         </dependency>
         
       <!-- ====================================== -->
