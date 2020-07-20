@@ -5,6 +5,8 @@ import es.caib.carpeta.persistence.dao.DAO;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import javax.ejb.Local;
+
+import java.text.MessageFormat;
 import java.util.List;
 
 /**
@@ -17,9 +19,8 @@ import java.util.List;
 @Local
 public interface AccesoService extends DAO<Acceso, Long> {
 
-   public static final String EJB = "carpeta-ejb";
 	
-   public static final String JNDI_NAME = "java:app/" + EJB + "/AccesoEJB!es.caib.carpeta.ejb.AccesoService";
+   public static final String JNDI_NAME = "java:app/carpeta-ejb/AccesoEJB!es.caib.carpeta.ejb.AccesoService";
 
    /**
     * Crea un acceso asociado a la entidad indicada

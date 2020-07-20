@@ -155,6 +155,7 @@
                             <groupId>es.caib.carpeta</groupId>
                             <artifactId>carpeta-back</artifactId>
                             <contextRoot>/carpetaback</contextRoot>
+                            <bundleFileName>carpeta-back.war</bundleFileName>
                         </webModule>
                         <!-- BACK END -->
                         <!-- FRONT START -->

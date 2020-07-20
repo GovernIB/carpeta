@@ -24,10 +24,9 @@ import java.util.Map;
 @PermitAll
 public interface UsuarioService extends DAO<Usuario, Long > {
 
-   public static final String EJB = "carpeta-ejb";
 	
-   public static final String JNDI_NAME = "java:app/" + EJB + "/UsuarioEJB!es.caib.carpeta.ejb.UsuarioService";
-
+   public static final String JNDI_NAME = "java:app/carpeta-ejb/UsuarioEJB!es.caib.carpeta.ejb.UsuarioService";
+   
 
    /**
     * Crea un usuario obteniendo los datos de keycloak
