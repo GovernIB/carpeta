@@ -29,7 +29,7 @@ import java.util.Map;
 
 @Logged
 @Stateless
-@RolesAllowed(Constants.CAR_ADMIN)
+@RolesAllowed(Constants.CAR_SUPER)
 public class UsuarioEntidadEJB extends AbstractDAO<UsuarioEntidad, Long> implements UsuarioEntidadService {
 
 	/**

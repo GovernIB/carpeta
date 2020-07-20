@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
  * @author anadal
  *
  */
-@RunAs(Constants.CAR_USER)
+@RunAs(Constants.CAR_ADMIN)
 @Component
 public class PeuPreparer implements ViewPreparer {
 

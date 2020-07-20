@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  * @author anadal
  *
  */
-@RunAs("CAR_USER")
+@RunAs("CAR_ADMIN")
 @Component
 public class MenuPreparer implements ViewPreparer {
 

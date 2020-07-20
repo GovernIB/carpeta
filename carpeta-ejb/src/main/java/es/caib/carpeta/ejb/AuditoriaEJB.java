@@ -32,7 +32,7 @@ import java.util.Map;
 
 @Logged
 @Stateless
-@RolesAllowed(Constants.CAR_ADMIN)
+@RolesAllowed(Constants.CAR_SUPER)
 public class AuditoriaEJB extends AbstractDAO<Auditoria, Long> implements AuditoriaService{
 
    @Override

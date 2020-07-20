@@ -167,8 +167,8 @@
             <url-pattern>/common/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>CAR_USER</role-name>
             <role-name>CAR_ADMIN</role-name>
+            <role-name>CAR_SUPER</role-name>
         </auth-constraint>
     </security-constraint>
 
@@ -178,7 +178,7 @@
             <url-pattern>/user/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>CAR_USER</role-name>
+            <role-name>CAR_ADMIN</role-name>
         </auth-constraint>
     </security-constraint>
     
@@ -188,27 +188,25 @@
             <web-resource-name>carpeta_back-admin</web-resource-name>
             <url-pattern>/admin/*</url-pattern>
             <url-pattern>/entidad/*</url-pattern>
-            <url-pattern>/webdb/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>CAR_ADMIN</role-name>
+            <role-name>CAR_SUPER</role-name>
         </auth-constraint>
     </security-constraint>
-    
-    <!-- XXX XYZ  CLIENT-CERT,BASIC -->
+
 	<login-config>
 		<auth-method>KEYCLOAK</auth-method>
 		<realm-name>Govern de les Illes Balears</realm-name>
 	</login-config>
 
 	<security-role>
-		<description>Administrador de Carpeta</description>
-		<role-name>CAR_ADMIN</role-name>
+		<description>Super Administrador de Carpeta</description>
+		<role-name>CAR_SUPER</role-name>
 	</security-role>
 
 	<security-role>
-		<description>Usuari de Carpeta</description>
-		<role-name>CAR_USER</role-name>
+		<description>Administrador d'Entitat de Carpeta</description>
+		<role-name>CAR_ADMIN</role-name>
 	</security-role>
 
 	<listener>

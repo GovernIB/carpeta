@@ -32,7 +32,7 @@ import es.caib.carpeta.commons.utils.Constants;
  * @author anadal
  *
  */
-@RunAs("CAR_USER")
+@RunAs("CAR_ADMIN")
 @Component
 public class BasePreparer implements ViewPreparer, Constants {
 

@@ -9,11 +9,13 @@ import org.apache.tiles.preparer.ViewPreparer;
 import org.apache.tiles.request.Request;
 import org.springframework.stereotype.Component;
 
+import es.caib.carpeta.commons.utils.Constants;
+
 /**
  * @author GenApp
  *
  */
-@RunAs("CAR_USER")
+@RunAs(Constants.CAR_ADMIN)
 @Component
 public class CapPreparer implements ViewPreparer {
 

@@ -31,7 +31,7 @@ import java.util.Map;
  * @author anadal
  * @author mgonzalez
  */
-@RolesAllowed(Constants.CAR_ADMIN)
+@RolesAllowed(Constants.CAR_SUPER)
 public abstract class AbstractDAO<E extends Serializable, PK> implements DAO<E, PK> {
 
     public final Logger log = LoggerFactory.getLogger(this.getClass());

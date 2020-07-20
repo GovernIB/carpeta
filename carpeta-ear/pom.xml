@@ -148,7 +148,7 @@
                         <ejbModule>
                             <groupId>es.caib.carpeta</groupId>
                             <artifactId>carpeta-ejb</artifactId>
-                            <bundleFileName>carpeta-ejb</bundleFileName>
+                            <bundleFileName>carpeta-ejb.jar</bundleFileName>
                         </ejbModule>
                         <!-- BACK START -->
                         <webModule>

@@ -42,8 +42,8 @@ Username: ${loginInfo.username}<br/>
 
 
 
-&#36;{car:hasRole(ROLE_ADMIN)}= ${car:hasRole('ROLE_ADMIN')}<br/>
-&#36;{car:hasRole(ROLE_USER) }= ${car:hasRole('ROLE_USER') }<br/>
+&#36;{car:hasRole(ROLE_SUPER)}= ${car:hasRole('ROLE_SUPER')}<br/>
+&#36;{car:hasRole(ROLE_ADMIN) }= ${car:hasRole('ROLE_ADMIN') }<br/>
 Locale = <%=LocaleContextHolder.getLocale() %> <br/>
 
 lang = ${lang} <br/>

@@ -208,11 +208,6 @@ public class LoginInfo {
 	public UsernamePasswordAuthenticationToken generateToken() {
 		UsernamePasswordAuthenticationToken authToken;
 		Set<GrantedAuthority> roles = getRoles();
-		/*
-		 * Set<GrantedAuthority> roles; if (this.entitatIDActual == null) { roles = new
-		 * HashSet<GrantedAuthority>(); roles.add(new
-		 * SimpleGrantedAuthority(Constants.ROLE_ADMIN)); } else { roles = getRoles(); }
-		 */
 		authToken = new UsernamePasswordAuthenticationToken(this.springSecurityUser, "", roles);
 		authToken.setDetails(this);
 		return authToken;

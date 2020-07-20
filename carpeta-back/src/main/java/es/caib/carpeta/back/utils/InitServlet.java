@@ -15,6 +15,7 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 
 
 import es.caib.carpeta.commons.utils.Configuracio;
+import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.commons.utils.Version;
 import es.caib.carpeta.ejb.utils.I18NTranslatorEjb;
 import es.caib.carpeta.persistence.hibernate.HibernateFileUtil;
@@ -26,7 +27,7 @@ import es.caib.carpeta.persistence.hibernate.HibernateFileUtil;
  * @author anadal
  * 
  */
-@RunAs("CAR_USER")
+@RunAs(Constants.CAR_ADMIN)
 public class InitServlet extends HttpServlet {
 
   protected final Logger log = Logger.getLogger(getClass());

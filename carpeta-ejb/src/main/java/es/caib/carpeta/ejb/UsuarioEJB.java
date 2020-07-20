@@ -1,6 +1,5 @@
 package es.caib.carpeta.ejb;
 
-import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.ejb.interceptor.Logged;
 import es.caib.carpeta.ejb.utils.CarpetaPluginsManager;
 import es.caib.carpeta.persistence.TipoUsuario;
@@ -8,7 +7,6 @@ import es.caib.carpeta.persistence.Usuario;
 import es.caib.carpeta.persistence.dao.AbstractDAO;
 
 import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -36,7 +34,6 @@ import java.util.Map;
 
 @Logged
 @Stateless
-// XYZ ZZZ ZZZ @RolesAllowed(Constants.CAR_ADMIN)
 @PermitAll
 public class UsuarioEJB extends AbstractDAO<Usuario, Long> implements UsuarioService {
 

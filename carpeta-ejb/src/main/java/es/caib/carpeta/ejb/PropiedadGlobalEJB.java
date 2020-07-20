@@ -26,7 +26,7 @@ import java.util.Map;
  */
 @Logged
 @Stateless
-@RolesAllowed(Constants.CAR_ADMIN)
+@RolesAllowed(Constants.CAR_SUPER)
 public class PropiedadGlobalEJB extends AbstractDAO<PropiedadGlobal, Long> implements PropiedadGlobalService {
 
    @Override

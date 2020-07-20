@@ -12,13 +12,12 @@ public interface Constants {
     String CARPETA_PROPERTY_BASE = "es.caib.carpeta.";
 
     /* -------------- ROLS REALS--------------*/
+    String CAR_SUPER = "CAR_SUPER";
     String CAR_ADMIN = "CAR_ADMIN";
-    String CAR_USER = "CAR_USER";  
     
     /* -------------- ROLS VIRTUALS --------------*/
+    String ROLE_SUPER = "ROLE_SUPER";
     String ROLE_ADMIN = "ROLE_ADMIN";
-    String ROLE_USER = "ROLE_USER";
-    String ROLE_ADEN = "ROLE_ADEN";
 
 
     /* -------------- IDIOMAS --------------*/

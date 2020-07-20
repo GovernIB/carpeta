@@ -31,7 +31,7 @@ import java.util.Map;
 
 @Logged
 @Stateless
-@RolesAllowed(Constants.CAR_ADMIN)
+@RolesAllowed(Constants.CAR_SUPER)
 public class EstadisticaEJB extends AbstractDAO<Estadistica, Long> implements EstadisticaService{
 
    @Override

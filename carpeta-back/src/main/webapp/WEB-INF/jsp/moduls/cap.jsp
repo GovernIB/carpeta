@@ -102,7 +102,7 @@
 
 
 	
-						<sec:authorize access="hasRole('ROLE_USER')">
+						<sec:authorize access="hasRole('ROLE_ADMIN')">
 						<% if (LoginInfo.getInstance().getEntitatID() != null) { %>
 							<a class="dropdown-item ${(pipella eq 'user')?'active' : '' }"
 								href="<c:url value="/canviarPipella/user"/>"> <i
@@ -111,7 +111,7 @@
 					    <% } %>
 						</sec:authorize>
 
-						<sec:authorize access="hasRole('ROLE_ADMIN')">
+						<sec:authorize access="hasRole('ROLE_SUPER')">
 							<a class="dropdown-item ${(pipella eq 'admin')?'active' : '' }"
 								href="<c:url value="/canviarPipella/admin"/>"> <i
 								class="fas fa-user-shield"></i> <fmt:message key="rol.admin" />

@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Logged
 @Stateless
-@RolesAllowed(Constants.CAR_ADMIN)
+@RolesAllowed(Constants.CAR_SUPER)
 public class PropiedadPluginEJB extends AbstractDAO<PropiedadPlugin, Long> implements PropiedadPluginService{
 
    /**
