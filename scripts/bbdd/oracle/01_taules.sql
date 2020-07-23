@@ -102,7 +102,7 @@
         PREFIJO_ENTIDAD varchar2(255 char) not null,
         PREFIJO_PROPS varchar2(255 char) not null,
         TIPO varchar2(255 char) not null,
-        ENTIDAD number(19,0) not null,
+        ENTIDAD number(19,0),
 
        CONSTRAINT CAR_PLUGIN_PK primary key (ID)
     );
@@ -168,7 +168,9 @@
         EMAIL varchar2(255 char) not null,
         NOMBRE varchar2(255 char) not null,
         USERNAME varchar2(255 char) not null,
-        ULTIMA_ENTIDAD number(19,0) not null,
+		IDIOMA varchar2 (10 char) DEFAULT 'ca' not null,
+		TIPO number(19,0) not null,
+		DOCUMENTO VARCHAR2(255 char),
 
        CONSTRAINT CAR_USUARIO_PK primary key (ID)
     );
@@ -178,6 +180,8 @@
         ACTIVO number(1,0) not null,
         ENTIDAD number(19,0) not null,
         USUARIO number(19,0) not null,
+		ULTIMA_ENTIDAD number(19,0) not null,
+		ADMINENTIDAD number(1,0) DEFAULT 0 NOT NULL,
 
        CONSTRAINT CAR_USUARIOENTIDAD_PK primary key (ID)
     );

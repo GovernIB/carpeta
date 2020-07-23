@@ -93,8 +93,8 @@ alter table CAR_ACCESO
        foreign key (IDPLUGIN) 
        references CAR_PLUGIN;
 
-    alter table CAR_USUARIO 
-       add constraint CAR_USUARIO_ENTIDAD_FK 
+    alter table CAR_USUARIOENTIDAD 
+       add constraint CAR_USUENT_ULTENT_FK 
        foreign key (ULTIMA_ENTIDAD) 
        references CAR_ENTIDAD;
 
