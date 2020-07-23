@@ -18,8 +18,8 @@ import java.util.Arrays;
  *
  * @author areus
  */
-@Logged
-@Interceptor
+//@Logged
+//@Interceptor
 public class LoggerInterceptor implements Serializable {
 
     private static final long serialVersionUID = 7109011370027722074L;

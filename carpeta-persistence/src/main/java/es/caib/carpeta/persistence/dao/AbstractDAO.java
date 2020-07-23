@@ -31,7 +31,7 @@ import java.util.Map;
  * @author anadal
  * @author mgonzalez
  */
-@RolesAllowed(Constants.CAR_SUPER)
+@RolesAllowed({Constants.CAR_SUPER, Constants.CAR_ADMIN})
 public abstract class AbstractDAO<E extends Serializable, PK> implements DAO<E, PK> {
 
     public final Logger log = LoggerFactory.getLogger(this.getClass());
@@ -64,10 +64,10 @@ public abstract class AbstractDAO<E extends Serializable, PK> implements DAO<E, 
         try {
             entityManager.persist(entity);
         } catch (javax.persistence.EntityExistsException eee) {
-            throw new I18NException("entity.error.alreadyexists", entityClass.getName());
+            throw new I18NException(eee, "entity.error.alreadyexists", new I18NArgumentString(entityClass.getName()));
         } catch (Throwable e) {
             // entity.error.creant=Error desconocido creando un objeto de tipo {0}: {1}
-            throw new I18NException("entity.error.creating", entityClass.getName(), e.getMessage());
+            throw new I18NException(e, "entity.error.creating", new I18NArgumentString(entityClass.getName()), new I18NArgumentString(e.getMessage()));
         }
         return entity;
     }
@@ -78,7 +78,7 @@ public abstract class AbstractDAO<E extends Serializable, PK> implements DAO<E, 
             return entityManager.merge(entity);
         } catch (Throwable e) {
             // entity.error.updating=Error desconocido actualizando un objeto de tipo {0}: {1}
-            throw new I18NException("entity.error.updating", entityClass.getName(), e.getMessage());
+            throw new I18NException(e, "entity.error.updating", new I18NArgumentString(entityClass.getName()), new I18NArgumentString(e.getMessage()));
         }
     }
 
@@ -89,7 +89,7 @@ public abstract class AbstractDAO<E extends Serializable, PK> implements DAO<E, 
             entityManager.remove(entity);
         } catch (EntityNotFoundException e) {
             //entity.error.notexists=L´objecte de tipus {0} amb identificador {1} no existeix a la base de dades
-            throw new I18NException("entity.error.notexists", entityClass.getName(), String.valueOf(id));
+            throw new I18NException(e, "entity.error.notexists", new I18NArgumentString(entityClass.getName()), new I18NArgumentString(String.valueOf(id)));
         }
     }
 

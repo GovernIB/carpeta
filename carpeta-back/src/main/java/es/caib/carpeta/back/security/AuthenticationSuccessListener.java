@@ -179,7 +179,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 						msg = e.getMessage();
 					}
 
-					log.error("Error llegint informació del plugin de User Information: " + msg, e);
+					log.error("Error llegint informacio del plugin de User Information o creant l'usuari a la BBDD: " + msg, e);
 				}
 			}
 

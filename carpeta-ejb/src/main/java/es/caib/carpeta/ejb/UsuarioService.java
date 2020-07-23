@@ -34,7 +34,7 @@ public interface UsuarioService extends DAO<Usuario, Long > {
     * @param usuario   usuario.
     * @return El usuario creado.
     */
-   Usuario crearUsuario(Usuario usuario) throws I18NException;
+   Usuario crearUsuario(Usuario usuario) throws I18NException, javax.ejb.EJBException;
    
    @PermitAll
    public Usuario findByUsername(@NotNull String username);

@@ -4,6 +4,8 @@ import org.junit.Test;
 
 import javax.persistence.Persistence;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Test per realitzar la generació de l'schema de base de dades.
@@ -25,6 +27,9 @@ public class TestSchemaGenerator {
     public void testCreateSchema() {
         // Les propietats per la generació es poden indicar dins el persistence.xml o es poden
         // passar dins el Map.
-        Persistence.generateSchema("testPU", Collections.emptyMap());
+        
+        Map<String, String> map = new HashMap<String,String>();
+        
+        Persistence.generateSchema("testPU", map);
     }
 }

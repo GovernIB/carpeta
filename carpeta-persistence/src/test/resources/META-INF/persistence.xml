@@ -4,6 +4,7 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
     <!--
+    
     Unitat de persistència de test que es pot utilitzar per realitzar proves o per generar els scripts de base de dades
     -->
     <persistence-unit name="testPU" transaction-type="RESOURCE_LOCAL">
@@ -50,8 +51,8 @@
             Postgresql:    org.hibernate.dialect.PostgreSQL95Dialect
             Oracle:        org.hibernate.dialect.Oracle12cDialect
             -->
-            <!--<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect"/>-->
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect"/>
+            <!--<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>-->
 
         </properties>
     </persistence-unit>

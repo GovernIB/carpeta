@@ -39,11 +39,26 @@ public class UsuarioEJB extends AbstractDAO<Usuario, Long> implements UsuarioSer
 
 	@Override
 	@PermitAll
-	public Usuario crearUsuario(Usuario usuario) throws I18NException {
+	public Usuario crearUsuario(Usuario usuario) throws I18NException, javax.ejb.EJBException {
 
 		// TODO comprobar que existe en keycloack y obtener la info para crear el
 		// usuario.
-		create(usuario);
+		try {
+			create(usuario);	
+		} catch(Throwable th) {
+			
+			log.error(" ==============================================" );
+			log.error(" TIPUS EXCEPCIO: " + th.getClass());
+			log.error(th.getMessage(), th);
+			
+			if (th instanceof I18NException) {
+				throw (I18NException)th;
+			} else {
+				throw new I18NException("comodi", th.getMessage());
+			}
+			
+		}
+		
 		return usuario;
 
 	}
