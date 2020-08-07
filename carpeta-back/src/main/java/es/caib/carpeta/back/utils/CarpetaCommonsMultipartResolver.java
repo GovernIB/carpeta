@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import es.caib.carpeta.commons.utils.Configuracio;
+import es.caib.carpeta.utils.Configuracio;
 
 /**
  * 
@@ -103,7 +103,7 @@ public class CarpetaCommonsMultipartResolver extends
     return maxUploadSize;
   }
 
-  private Long getMaxFitxerAdaptatSize() {
+  protected Long getMaxFitxerAdaptatSize() {
     Long maxFitxerAdaptatSizeGlobal = Configuracio.getMaxFitxerAdaptatSizeInBytes();
     if (log.isDebugEnabled()) {
       if (maxFitxerAdaptatSizeGlobal == null) {

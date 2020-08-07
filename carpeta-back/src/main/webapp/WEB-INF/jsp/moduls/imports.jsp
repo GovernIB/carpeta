@@ -13,13 +13,10 @@
     <%-- XYZ ZZZ   --%>
     <link href="<c:url value="/css/default.css"/>" rel="stylesheet">
    
-    <%--
     <link href="<c:url value="/css/genapp.css"/>" rel="stylesheet"> 
-    --%>
     
     <!-- Bootstrap CSS-->
-    <link href="<c:url value="/css/bootstrap.min.css"/>" rel="stylesheet">
-    <%-- XYZ ZZZ  --%>     
+    <link href="<c:url value="/css/bootstrap.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/datatables.min.css"/>" rel="stylesheet">
 
 
@@ -27,15 +24,15 @@
     <!-- Bootstrap TREE CSS
     <link href="<c:url value="/css/bootstrap-tree.css"/>" rel="stylesheet"> -->
 
-    <!-- Bootstrap DateTimepicker CSS 
-    <link href="<c:url value="/css/datetimepicker/tempusdominus-bootstrap-4.css"/>" rel="stylesheet"> -->
+    <!-- Bootstrap DateTimepicker CSS   -->
+    <link href="<c:url value="/css/datetimepicker/tempusdominus-bootstrap-4.css"/>" rel="stylesheet">
 
     <!-- JS -->
     <script src="<c:url value="/js/jquery.js"/>"></script>
     <script src="<c:url value="/js/popper.min.js"/>"></script>
 
     <!-- JS bootstrap -->
-    <script src="<c:url value="/js/bootstrap.min.js"/>"></script>
+    <script src="<c:url value="/js/bootstrap.js"/>"></script>
 
     <%-- https://fontawesome.com/icons?d=gallery&m=free --%>
     <script src="<c:url value="/js/fontawesome-all.js"/>"></script>
@@ -46,9 +43,9 @@
     --%>
 
      
-    <!-- Bootstrap DateTimePicker JS 
+    <!-- Bootstrap DateTimePicker JS -->
     <script src="<c:url value="/js/datetimepicker/moment-with-locales.js"/>"></script>
-    <script src="<c:url value="/js/datetimepicker/tempusdominus-bootstrap-4.js"/>"></script> -->
+    <script src="<c:url value="/js/datetimepicker/tempusdominus-bootstrap-4.js"/>"></script>
     <%-- XYZ ZZZ ZZZ
     <c:if test="${not empty onlylang}">
     <script src="<c:url value="/js/datepicker/bootstrap-datetimepicker.${onlylang}.js"/>"></script>
@@ -65,10 +62,10 @@
     <script type="text/javascript">
         var lang = '<c:out value="${pageContext.response.locale.language}"/>';
     </script>
-    <!--  
+    
     <script src="<c:url value="/js/tiny_mce/tiny_mce.js"/>" type="text/javascript"></script>
     <script src="<c:url value="/js/tinymce.js"/>" type="text/javascript"></script>
-    -->
+    
 
 <script type="text/javascript">
 

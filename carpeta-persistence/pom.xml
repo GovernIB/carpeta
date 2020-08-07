@@ -32,6 +32,14 @@
             <version>1.1.2</version>
             <scope>provided</scope>
         </dependency>
+        
+        <dependency>
+            <artifactId>carpeta-model</artifactId>
+            <groupId>es.caib.carpeta</groupId>
+            <version>1.1.2</version>
+            <scope>provided</scope>
+        </dependency>
+        
         <!-- Anotacions de documentació de openapi -->
         <dependency>
             <groupId>org.eclipse.microprofile.openapi</groupId>
@@ -44,13 +52,12 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- Dependència per tests JPA. Quan no estam dins el servidor d'aplicacions necessitam incorporar
-        la implementació de JPA, en aquest cas Hibernate -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <scope>test</scope>
-        </dependency>
+        
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
         <dependency>
 			<groupId>org.fundaciobit.genapp</groupId>

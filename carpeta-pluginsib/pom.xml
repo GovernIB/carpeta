@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>es.caib.carpeta</groupId>
+    <version>1.1.2</version>
+    <artifactId>carpeta-pluginsib</artifactId>
+    <packaging>pom</packaging>
+    <name>CARPETA - PLUGINSIB</name>
+    <modules>
+        <module>pluginsib-carpetafront</module>
+    </modules>
+    <parent>
+        <groupId>es.caib.carpeta</groupId>
+        <artifactId>carpeta</artifactId>
+        <version>1.1.2</version>
+    </parent>
+</project>

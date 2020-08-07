@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)https://dev.caib.es/carpeta/tramite/list -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ca" lang="ca"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="Content-Language" content="ca">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="_csrf" content="">
+    <meta name="_csrf_header" content="">
+
+    <title>Tràmits - Carpeta Ciutadana</title>
+
+    <script src="./carpeta/jquery-3.2.1.min.js.baixa"></script>
+    <script src="./carpeta/popper.min.js.baixa"></script>
+    <script src="./carpeta/bootstrap.min.js.baixa"></script>
+    <script src="./carpeta/datatables.min.js.baixa"></script>
+    
+    <script src="./carpeta/datetime-moment.js.baixa"></script>
+    <script src="./carpeta/bootstrap-datetimepicker.js.baixa"></script>
+    
+    <script src="./carpeta/moment-with-locales.min.js.baixa"></script>
+    
+    
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="./carpeta/ie10-viewport-bug-workaround.js.baixa"></script>
+
+    <!-- Estilos -->
+    <link href="./carpeta/bootstrap.min.css" rel="stylesheet">
+    <link href="./carpeta/datatables.min.css" rel="stylesheet">
+    <link href="./carpeta/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="./carpeta/open-iconic-bootstrap.css" rel="stylesheet">
+
+    <!--  EXTERN  -->
+    <script type="text/javascript" src="./carpeta/carpeta.js.baixa"></script>
+    <link href="./carpeta/carpeta.css" rel="stylesheet">
+    
+    
+
+</head>
+
+<body>
+
+
+    <!-- Contenido -->
+    <div class="container p-3carpeta">
+
+        <div class="my-3 p-3 bg-white rounded box-shadow">
+
+            <!-- Contenido -->
+           
+
+<div class="card mb-12 border-0">
+
+
+
+    <div class="card-title border-bottom verde h5">${tramite_listado}</div>
+
+
+    <p class="card-text mb-5 lh15">${tramite_descripcion}</p>
+
+    <div class="card-body tablaRegistros">
+<!--  XYZ ZZZ Falta muntar URL Correcte -->
+        <form id="fechaBusqueda" action="${form_action}" method="post">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="fechaInicio" placeholder="dd/mm/yyyy">${carpeta_fecha_inicio}</label>
+                        <div class="input-group">
+                            <input id="fechaInicio" name="fechaInicio" class="form-control form-control-sm" required="required" type="text" value="${form_dataInici?string('dd/MM/yyyy')}" maxlength="10">
+                            <span class="input-group-text"><span class="oi oi-calendar"></span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="fechaFin" placeholder="dd/mm/yyyy">${carpeta_fecha_fin}</label>
+                        <div class="input-group">
+                            <input id="fechaFin" name="fechaFin" class="form-control form-control-sm" required="required" type="text" value="${form_dataFi?string('dd/MM/yyyy')}" maxlength="10">
+                            <span class="input-group-text"><span class="oi oi-calendar"></span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary carpeta-btn">${carpeta_buscar}</button>
+        <div>
+    </div>
+    </form>
+    <#if isget>
+        <div class="mt-5">
+        </div>
+    <#else>
+        <#if tramits?has_content>
+            <div class="mt-5">
+
+            
+
+                <p class="card-text mb-5">${tramite_continuar}</p>
+
+                <table id="dataTable_paginate" class="table table-striped table-bordered table-hover" style="width:100%">
+                    <thead class="table-success">
+                    <tr>
+                        <th>${tramite_tramite}</th>
+                        <th>${tramite_fecha_inicio}</th>
+                        <th>${tramite_acceso}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <#setting date_format="MM/dd/yyyy hh">
+                    <#list tramits as tramite >
+                        <tr class="clickable-row" data-target="_blank" data-href="${web?replace('{0}', tramite.idSesionTramitacion)}">
+                            <td>${tramite.descripcionTramite}</td>
+                            <td>
+                            ${tramite.fechaInicio?datetime.iso?string("dd-MM-yyyy HH:mm")}</td>
+                            <td>${tramite.fechaUltimoAcceso?datetime.iso?string("dd-MM-yyyy HH:mm")}</td>
+                        </tr>
+                    </#list>
+                    </tbody>
+                </table>
+
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        $.fn.dataTable.moment('D/MM/YYY HH:mm');
+                        $('#dataTable_paginate').DataTable({
+                            "order": [[ 1, "desc" ]],
+                            "language": {
+                                "url": "${baseurl}/static/i18n/${lang}.json"
+                            }
+                        });
+                    } );
+                </script>
+                
+             <#else>   
+                 <div class="alert alert-secondary mt-5" role="alert">
+                   ${tramite_vacio}
+                 </div>
+            
+            </#if>
+    </#if>
+        
+    </div>
+
+</div>
+
+
+        </div>
+
+    </div>
+
+</body></html>

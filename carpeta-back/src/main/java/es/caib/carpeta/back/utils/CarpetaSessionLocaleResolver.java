@@ -32,7 +32,7 @@ public class CarpetaSessionLocaleResolver extends SessionLocaleResolver{
 		try {
 
 			if (idioma == null) {
-            idioma = es.caib.carpeta.commons.utils.Configuracio.getDefaultLanguage();
+            idioma = es.caib.carpeta.utils.Configuracio.getDefaultLanguage();
 			}
 
 			Locale loc = new Locale(idioma);

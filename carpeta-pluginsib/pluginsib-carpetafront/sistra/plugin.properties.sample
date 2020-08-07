@@ -1,0 +1,15 @@
+# Class => org.fundaciobit.pluginsib.carpetafront.sistra.SistraCarpetaFrontPlugin
+
+# Common
+es.caib.carpeta.pluginsib.carpetafront.sistra.development=true
+
+
+# Sistra 1
+es.caib.carpeta.pluginsib.carpetafront.sistra1.url=https://dev.caib.es/sistraback/zonaperws/services/v2/BackofficeFacade
+es.caib.carpeta.pluginsib.carpetafront.sistra1.user=usr
+es.caib.carpeta.pluginsib.carpetafront.sistra1.pass=pwd
+es.caib.carpeta.pluginsib.carpetafront.sistra1.level=2
+# {0} will be replaced with IdSesionTramitacion
+es.caib.carpeta.pluginsib.carpetafront.sistra1.web=https://www.caib.es/sistrafront/zonaperfront/protected/init.do
+
+# Sistra 2

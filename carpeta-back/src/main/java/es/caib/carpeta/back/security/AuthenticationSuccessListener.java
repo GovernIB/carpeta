@@ -1,15 +1,16 @@
 package es.caib.carpeta.back.security;
 
 import es.caib.carpeta.back.preparer.BasePreparer;
-import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.ejb.EntidadService;
-import es.caib.carpeta.ejb.UsuarioEntidadService;
-import es.caib.carpeta.ejb.UsuarioService;
-import es.caib.carpeta.ejb.utils.EjbManager;
-import es.caib.carpeta.persistence.Entidad;
-import es.caib.carpeta.persistence.Usuario;
-import es.caib.carpeta.persistence.UsuarioEntidad;
+import es.caib.carpeta.ejb.EntitatLocal;
+
+import es.caib.carpeta.logic.utils.EjbManager;
+import es.caib.carpeta.utils.Configuracio;
+import es.caib.carpeta.jpa.EntitatJPA;
+import es.caib.carpeta.jpa.UsuariJPA;
+import es.caib.carpeta.logic.UsuariEntitatLogicaLocal;
+import es.caib.carpeta.logic.UsuariLogicaLocal;
+import es.caib.carpeta.jpa.UsuariEntitatJPA;
 
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -101,9 +102,9 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 			}
 		}
 
-		UsuarioEntidadService usuariEntitatLogicaEjb;
-		UsuarioService usuariPersonaLogicaEjb;
-		EntidadService entitatLogicaEjb;
+		UsuariEntitatLogicaLocal usuariEntitatLogicaEjb;
+		UsuariLogicaLocal usuariPersonaLogicaEjb;
+		EntitatLocal entitatLogicaEjb;
 
 		try {
 			usuariEntitatLogicaEjb = EjbManager.getUsuariEntitatLogicaEJB();
@@ -115,7 +116,14 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 					+ username + ": " + e.getMessage(), e);
 		}
 
-		Usuario usuariPersona = usuariPersonaLogicaEjb.findByUsername(username);
+		UsuariJPA usuariPersona;
+		try {
+			usuariPersona = usuariPersonaLogicaEjb.findByUsername(username);
+		} catch (I18NException e1) {
+			String msg = I18NUtils.getMessage(e1);
+			log.error("Error llegint si l'usuari es troba a la BBDD: " + msg, e1);
+			usuariPersona = null;
+		}
 		boolean necesitaConfigurar = false;
 
 		if (usuariPersona == null) {
@@ -123,13 +131,13 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
 			{
 				try {
-					Usuario persona;
+					UsuariJPA persona;
 					// XYZ ZZZ ZZZ ZZZ TODO
 					persona = usuariPersonaLogicaEjb.getUserInfoFromUserInformation(username);
 
 					if (persona != null) {
 
-						UsuarioEntidad usuariEntitat = null;
+						UsuariEntitatJPA usuariEntitat = null;
 
 						if (containsRoleAdEn) {
 							// XYZ ZZZ ZZZ
@@ -142,13 +150,13 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 							}
 
 							if (defaultEntity != null) {
-								usuariEntitat = new UsuarioEntidad();
+								usuariEntitat = new UsuariEntitatJPA();
 								// usuariEntitat.setActiu(true);
-								usuariEntitat.setEntidad(entitatLogicaEjb.getReference(defaultEntity));
+								usuariEntitat.setEntitat(entitatLogicaEjb.findByPrimaryKey(defaultEntity));
 
 								// XYZ ZZZ
 								// usuariEntitat.setPredeterminat(true);
-								usuariEntitat.setUsuario(persona);
+								usuariEntitat.setUsuari(persona);
 							}
 
 						}
@@ -156,10 +164,10 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 						necesitaConfigurar = true;
 
 						if (usuariEntitat == null) {
-							usuariPersona = usuariPersonaLogicaEjb.crearUsuario(persona);
+							usuariPersona = usuariPersonaLogicaEjb.crearUsuari(persona);
 						} else {
-							usuariEntitat = usuariEntitatLogicaEjb.create(usuariEntitat);
-							usuariPersona = usuariEntitat.getUsuario();
+							usuariEntitat = (UsuariEntitatJPA)usuariEntitatLogicaEjb.create(usuariEntitat);
+							usuariPersona = usuariEntitat.getUsuari();
 						}
 
 						if (isDebug) {
@@ -185,17 +193,21 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
 		}
 
-		Set<UsuarioEntidad> usuariEntitats = null;
+		Set<UsuariEntitatJPA> usuariEntitats = null;
 		if (usuariPersona != null) {
-			// usuariEntitats = usuariPersona.getUsuariEntitats();
+			// usuariEntitats = usuariPersona.getUsuariEntitatJPAs();
 
-			usuariEntitats = new HashSet<UsuarioEntidad>(
-					usuariEntitatLogicaEjb.findAllByPersonaId(usuariPersona.getId()));
+			try {
+				usuariEntitats = new HashSet<UsuariEntitatJPA>(
+						usuariEntitatLogicaEjb.findAllByUsuariId(usuariPersona.getUsuariID()));
+			} catch (I18NException e) {
+				log.error(I18NUtils.getMessage(e) , e);
+			}
 
 		}
 
 		if (usuariEntitats == null) {
-			usuariEntitats = new HashSet<UsuarioEntidad>();
+			usuariEntitats = new HashSet<UsuariEntitatJPA>();
 		}
 
 		if (!containsRoleAdEn && usuariEntitats.size() != 0) {
@@ -210,19 +222,19 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 			// Com enviar-ho a la PAGINA WEB
 			BasePreparer.loginErrorMessage.put(username, translation);
 
-			usuariEntitats = new HashSet<UsuarioEntidad>();
+			usuariEntitats = new HashSet<UsuariEntitatJPA>();
 		}
 
 		// Seleccionam l'entitat per defecte i verificam que les entitats disponibles
 		// siguin correctes
-		Map<Long, Entidad> entitats = new HashMap<Long, Entidad>();
+		Map<Long, EntitatJPA> entitats = new HashMap<Long, EntitatJPA>();
 		Map<Long, Set<GrantedAuthority>> rolesPerEntitat = new HashMap<Long, Set<GrantedAuthority>>();
 		rolesPerEntitat.put((Long) null, new HashSet<GrantedAuthority>(seyconAuthorities));
-		Map<Long, UsuarioEntidad> usuariEntitatPerEntitatID = new HashMap<Long, UsuarioEntidad>();
-		Entidad entitatPredeterminada = null;
-		for (UsuarioEntidad usuariEntitat : usuariEntitats) {
+		Map<Long, UsuariEntitatJPA> usuariEntitatPerEntitatID = new HashMap<Long, UsuariEntitatJPA>();
+		EntitatJPA entitatPredeterminada = null;
+		for (UsuariEntitatJPA usuariEntitat : usuariEntitats) {
 
-			Entidad entitat = usuariEntitat.getEntidad();
+			EntitatJPA entitat = usuariEntitat.getEntitat();
 
 			if (entitat == null) {
 				// XYZ ZZZ ZZZ
@@ -232,7 +244,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 				continue;
 			}
 
-			Long entitatID = entitat.getId();
+			Long entitatID = entitat.getEntitatID();
 			if (isDebug) {
 				log.debug("--------------- Entitat " + entitatID);
 			}
@@ -273,9 +285,9 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 //      }
 
 			// Entitats
-			entitats.put(entitatID, usuariEntitat.getEntidad());
+			entitats.put(entitatID, usuariEntitat.getEntitat());
 			// Usuari Entitat
-			usuariEntitat.setUsuario(usuariPersona);
+			usuariEntitat.setUsuari(usuariPersona);
 			usuariEntitatPerEntitatID.put(entitatID, usuariEntitat);
 		}
 
@@ -300,7 +312,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
 		Long entitatIDActual = null;
 		if (entitatPredeterminada != null) {
-			entitatIDActual = entitatPredeterminada.getId();
+			entitatIDActual = entitatPredeterminada.getEntitatID();
 			if (isDebug) {
 				log.debug(">>>>>> Entitat predeterminada " + entitatIDActual);
 			}
@@ -311,8 +323,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
 		log.info("user => " + user);
 		log.info("usuariPersona => " + usuariPersona);
-		log.info("entitatIDActual => " + entitatIDActual);
-		log.info(" entitats => " + entitats);
+		log.info("entitatIDActual => " + entitatIDActual);		
 		log.info("rolesPerEntitat  => " + rolesPerEntitat);
 		log.info(" usuariEntitatPerEntitatID => " + usuariEntitatPerEntitatID);
 		log.info("necesitaConfigurar => " + necesitaConfigurar);

@@ -7,9 +7,9 @@ import org.apache.log4j.Logger;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
-import es.caib.carpeta.persistence.Entidad;
-import es.caib.carpeta.persistence.Usuario;
-import es.caib.carpeta.persistence.UsuarioEntidad;
+import es.caib.carpeta.jpa.EntitatJPA;
+import es.caib.carpeta.jpa.UsuariJPA;
+import es.caib.carpeta.jpa.UsuariEntitatJPA;
 import es.caib.carpeta.back.security.LoginException;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,13 +32,13 @@ public class LoginInfo {
 
 	// final UsuariAplicacioJPA usuariAplicacio;
 
-	final Usuario usuariPersona;
+	final UsuariJPA usuariPersona;
 
-	final Map<Long, Entidad> entitats;
+	final Map<Long, EntitatJPA> entitats;
 
 	final Map<Long, Set<GrantedAuthority>> rolesPerEntitat;
 
-	final Map<Long, UsuarioEntidad> usuariEntitatPerEntitatID;
+	final Map<Long, UsuariEntitatJPA> usuariEntitatPerEntitatID;
 
 	Long entitatIDActual;
 
@@ -49,9 +49,9 @@ public class LoginInfo {
 	 * @param entitatActual
 	 * @param roles
 	 */
-	public LoginInfo(String username, User springSecurityUser, Usuario usuariPersona, Long entitatIDActual,
-			Map<Long, Entidad> entitats, Map<Long, Set<GrantedAuthority>> rolesPerEntitat,
-			Map<Long, UsuarioEntidad> usuariEntitatPerEntitatID, boolean needConfigUser) {
+	public LoginInfo(String username, User springSecurityUser, UsuariJPA usuariPersona, Long entitatIDActual,
+			Map<Long, EntitatJPA> entitats, Map<Long, Set<GrantedAuthority>> rolesPerEntitat,
+			Map<Long, UsuariEntitatJPA> usuariEntitatPerEntitatID, boolean needConfigUser) {
 		this.username = username;
 		log.info(" ---------- PRE LoginInfo -------------- ");
 		this.springSecurityUser = springSecurityUser;
@@ -75,11 +75,11 @@ public class LoginInfo {
 	 * @param roles
 	 */
 	/*
-	 * public LoginInfo(User springSecurityUser, Entidad entitat,
+	 * public LoginInfo(User springSecurityUser, Entitat entitat,
 	 * Collection<GrantedAuthority> roles) { this.springSecurityUser =
 	 * springSecurityUser;
 	 * 
-	 * Map<Long, Entidad> entitats = new HashMap<Long, Entidad>(); if (entitat !=
+	 * Map<Long, Entitat> entitats = new HashMap<Long, Entitat>(); if (entitat !=
 	 * null) { entitats.put(entitat.getId(), entitat); }
 	 * 
 	 * Map<Long, Set<GrantedAuthority>> rolesPerEntitat = new HashMap<Long,
@@ -87,8 +87,8 @@ public class LoginInfo {
 	 * HashSet<GrantedAuthority>(roles)); if (entitat != null) {
 	 * rolesPerEntitat.put(entitat.getId(), new HashSet<GrantedAuthority>(roles)); }
 	 * 
-	 * Map<Long, UsuarioEntidad> usuariEntitatPerEntitatID = new HashMap<Long,
-	 * UsuarioEntidad>(); if (entitat != null) {
+	 * Map<Long, UsuarioEntitat> usuariEntitatPerEntitatID = new HashMap<Long,
+	 * UsuarioEntitat>(); if (entitat != null) {
 	 * usuariEntitatPerEntitatID.put(entitat.getId(), null); }
 	 * 
 	 * this.entitats = entitats; this.rolesPerEntitat = rolesPerEntitat;
@@ -101,7 +101,7 @@ public class LoginInfo {
 	 * }
 	 */
 
-	public Usuario getUsuariPersona() {
+	public UsuariJPA getUsuariPersona() {
 		return usuariPersona;
 	}
 
@@ -117,14 +117,14 @@ public class LoginInfo {
 	 */
 	public void setEntitatID(Long novaEntitatID) {
 		if (entitats != null) {
-			Entidad novaEntitat = this.entitats.get(novaEntitatID);
+			EntitatJPA novaEntitat = this.entitats.get(novaEntitatID);
 			if (novaEntitat != null) {
 				this.entitatIDActual = novaEntitatID;
 			}
 		}
 	}
 
-	public Entidad getEntitat() {
+	public EntitatJPA getEntitat() {
 		return this.entitats.get(this.entitatIDActual);
 	}
 
@@ -159,19 +159,19 @@ public class LoginInfo {
 	}
 
 	public Long getUsuariEntitatID() {
-		UsuarioEntidad ue = getUsuariEntitat();
+		UsuariEntitatJPA ue = getUsuariEntitat();
 		if (ue == null) {
 			return null;
 		} else {
-			return ue.getId();
+			return ue.getUsuariEntitatID();
 		}
 	}
 
-	public UsuarioEntidad getUsuariEntitat() {
+	public UsuariEntitatJPA getUsuariEntitat() {
 		return this.usuariEntitatPerEntitatID.get(this.entitatIDActual);
 	}
 
-	public Map<Long, Entidad> getEntitats() {
+	public Map<Long, EntitatJPA> getEntitats() {
 		return entitats;
 	}
 
@@ -179,7 +179,7 @@ public class LoginInfo {
 		return rolesPerEntitat;
 	}
 
-	public Map<Long, UsuarioEntidad> getUsuariEntitatPerEntitatID() {
+	public Map<Long, UsuariEntitatJPA> getUsuariEntitatPerEntitatID() {
 		return usuariEntitatPerEntitatID;
 	}
 

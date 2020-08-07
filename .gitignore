@@ -16,3 +16,9 @@ nb-configuration.xml
 /react/package-lock.json
 /react/public/package-lock.json
 /react/src/package-lock.json
+/carpeta-logic/src/main/resources/carpeta_genapp_ca.properties
+/carpeta-logic/src/main/resources/carpeta_genapp_en.properties
+/carpeta-logic/src/main/resources/carpeta_genapp_es.properties
+/carpeta-logic/src/main/resources/genapp_ca.properties
+/carpeta-logic/src/main/resources/genapp_en.properties
+/carpeta-logic/src/main/resources/genapp_es.properties

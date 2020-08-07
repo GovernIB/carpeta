@@ -1,7 +1,5 @@
 package es.caib.carpeta.back.controller.common;
 
-import es.caib.carpeta.commons.utils.Configuracio;
-
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.springframework.stereotype.Controller;
@@ -11,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import es.caib.carpeta.utils.Configuracio;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -67,12 +66,12 @@ public class PrincipalController {
 			 * true)); }
 			 */
 
-			if ("admin".equals(pipella)) {
-				return new ModelAndView(new RedirectView("/admin/option1", true));
+			if ("superadmin".equals(pipella)) {
+				return new ModelAndView(new RedirectView("/superadmin/buit", true));
 			}
 
-			if ("user".equals(pipella)) {
-				return new ModelAndView(new RedirectView("/user/option1", true));
+			if ("adminentitat".equals(pipella)) {
+				return new ModelAndView(new RedirectView("/adminentitat/buit", true));
 			}
 
 			if ("webdb".equals(pipella)) {

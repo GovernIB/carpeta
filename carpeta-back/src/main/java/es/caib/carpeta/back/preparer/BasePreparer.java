@@ -25,7 +25,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import es.caib.carpeta.back.security.LoginInfo;
-
 import es.caib.carpeta.commons.utils.Constants;
 
 /**

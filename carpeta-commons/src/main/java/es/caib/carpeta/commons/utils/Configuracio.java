@@ -2,6 +2,8 @@ package es.caib.carpeta.commons.utils;
 
 import java.io.File;
 
+import es.caib.carpeta.commons.utils.Constants;
+
 /**
  * 
  * @author anadal

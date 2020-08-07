@@ -31,5 +31,10 @@ public interface Constants {
     /* -------------- SISTRA --------------*/
     Integer SISTRA1 = 1;
     Integer SISTRA2 = 2;
+    
+    
+    /*   TIPUS DE PLUGINS     */
+    public static final int PLUGIN_TIPUS_FRONT = 1;
+    
 
 }

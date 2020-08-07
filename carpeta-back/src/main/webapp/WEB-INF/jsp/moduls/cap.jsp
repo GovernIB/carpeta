@@ -39,7 +39,7 @@
 					<strong class="subtitol llevarMobil"><fmt:message
 							key="usuari" />: </strong> 
 							<span class="subtitolMay"> ${loginInfo.username}
-						 | ${loginInfo.usuariPersona.nombre}&nbsp;${loginInfo.usuariPersona.apellido1}&nbsp;${loginInfo.usuariPersona.apellido2} 
+						 | ${loginInfo.usuariPersona.nom}&nbsp;${loginInfo.usuariPersona.llinatge1}&nbsp;${loginInfo.usuariPersona.llinatge2} 
 					</span> <br/>
 					
 				</div>
@@ -104,17 +104,17 @@
 	
 						<sec:authorize access="hasRole('ROLE_ADMIN')">
 						<% if (LoginInfo.getInstance().getEntitatID() != null) { %>
-							<a class="dropdown-item ${(pipella eq 'user')?'active' : '' }"
-								href="<c:url value="/canviarPipella/user"/>"> <i
-								class="fas fa-user"></i> <fmt:message key="rol.user" />
+							<a class="dropdown-item ${(pipella eq 'adminentitat')?'active' : '' }"
+								href="<c:url value="/canviarPipella/adminentitat"/>"> <i
+								class="fas fa-user"></i> <fmt:message key="rol.adminentitat" />
 							</a>
 					    <% } %>
 						</sec:authorize>
 
 						<sec:authorize access="hasRole('ROLE_SUPER')">
-							<a class="dropdown-item ${(pipella eq 'admin')?'active' : '' }"
-								href="<c:url value="/canviarPipella/admin"/>"> <i
-								class="fas fa-user-shield"></i> <fmt:message key="rol.admin" />
+							<a class="dropdown-item ${(pipella eq 'superadmin')?'active' : '' }"
+								href="<c:url value="/canviarPipella/superadmin"/>"> <i
+								class="fas fa-user-shield"></i> <fmt:message key="rol.superadmin" />
 							</a>
 						</sec:authorize>
 
@@ -169,7 +169,7 @@
 						<hr />
 
 						<a class="dropdown-item"
-							href="<c:url value="/configuracio"></c:url>"> <i
+							href="<c:url value="/common/usuari"></c:url><%=LoginInfo.getInstance().getUsuariPersona().getUsuariID()%>/edit"> <i
 							class="fas fa-cog"></i> <fmt:message key="configuracio" />
 						</a> <a class="dropdown-item" href="<c:url value="/logout"></c:url>">
 							<i class="fas fa-sign-out-alt"></i> <fmt:message key="sortir" />

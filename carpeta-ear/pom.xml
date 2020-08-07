@@ -37,6 +37,12 @@
             <version>1.1.2</version>
             <type>ejb</type>
         </dependency>
+        <dependency>
+            <groupId>es.caib.carpeta</groupId>
+            <artifactId>carpeta-logic</artifactId>
+            <version>1.1.2</version>
+            <type>ejb</type>
+        </dependency>
         <!-- BACK START -->
         <dependency>
             <groupId>es.caib.carpeta</groupId>
@@ -66,6 +72,13 @@
         un mòdul sobre el que es pugui establir una dependència als descriptors.
         https://docs.jboss.org/author/display/AS72/Implicit+module+dependencies+for+deployments
         -->
+        
+        <dependency>
+            <groupId>es.caib.carpeta</groupId>
+            <artifactId>carpeta-model</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-persistence</artifactId>
@@ -149,6 +162,11 @@
                             <groupId>es.caib.carpeta</groupId>
                             <artifactId>carpeta-ejb</artifactId>
                             <bundleFileName>carpeta-ejb.jar</bundleFileName>
+                        </ejbModule>
+                        <ejbModule>
+                            <groupId>es.caib.carpeta</groupId>
+                            <artifactId>carpeta-logic</artifactId>
+                            <bundleFileName>carpeta-logic.jar</bundleFileName>
                         </ejbModule>
                         <!-- BACK START -->
                         <webModule>

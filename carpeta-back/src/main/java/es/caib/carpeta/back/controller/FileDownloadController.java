@@ -1,8 +1,8 @@
 package es.caib.carpeta.back.controller;
 
 
-import es.caib.carpeta.persistence.hibernate.HibernateFileUtil;
-
+import es.caib.carpeta.hibernate.HibernateFileUtil;
+import es.caib.carpeta.model.entity.Fitxer;
 
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.crypt.FileIDEncrypter;
@@ -19,6 +19,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 
 /**
@@ -120,7 +122,7 @@ public class FileDownloadController {
       }
     }
     
-    /* XYZ ZZZ ZZZ 
+
     public static String fileUrl(Fitxer arxiu) {
       if (arxiu == null) {
         // TODO Llançar error
@@ -153,5 +155,5 @@ public class FileDownloadController {
         return base;
       }
     }
-*/
+
 }
