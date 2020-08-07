@@ -27,7 +27,7 @@
         <validation-mode>CALLBACK</validation-mode>
 
         <properties>
-            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.show_sql" value="false"/>
         </properties>
     </persistence-unit>
 </persistence>

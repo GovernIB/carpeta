@@ -46,7 +46,11 @@
 			<scope>compile</scope>
 		</dependency>
 
-
+        <dependency>
+            <artifactId>pluginsib-carpetafront-api</artifactId>
+            <groupId>es.caib.carpeta.pluginsib-carpetafront</groupId>
+            <version>${project.version}</version>
+        </dependency>
 
 		<dependency>
 			<groupId>javax</groupId>

@@ -29,8 +29,14 @@
 <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
 <a class="dropdown-item"
+    href="<c:url value="/superadmin/usuari/list"/>"> <span
+    style="${(fn:contains(url, '/superadmin/usuari/'))? " font-weight:bold;" : ""}"><spring:message
+            code="usuari.usuari.plural" /></span>
+</a>
+
+<a class="dropdown-item"
     href="<c:url value="/superadmin/usuarientitat/list"/>"> <span
-    style="${(fn:contains(url, 'option1'))? " font-weight:bold;" : ""}"><spring:message
+    style="${(fn:contains(url, '/superadmin/usuarientitat'))? " font-weight:bold;" : ""}"><spring:message
             code="usuariEntitat.usuariEntitat.plural" /></span>
 </a>
 

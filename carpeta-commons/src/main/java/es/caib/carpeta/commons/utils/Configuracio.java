@@ -52,8 +52,5 @@ public class Configuracio implements Constants {
         return Long.getLong(CARPETA_PROPERTY_BASE + "maxfitxeradaptatsizeinbytes");
     }
 
-    public static Long getDefaultEntity() {
-        return Long.getLong(CARPETA_PROPERTY_BASE + "defaultentity");
-    }
 
 }

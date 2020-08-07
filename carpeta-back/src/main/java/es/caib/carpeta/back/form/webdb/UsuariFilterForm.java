@@ -165,7 +165,7 @@ public class UsuariFilterForm extends CarpetaBaseFilterForm implements UsuariFie
 
   @Override
   public List<Field<?>> getDefaultFilterByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] {  }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { USERNAME ,NOM ,LLINATGE1 ,LLINATGE2 ,EMAIL ,NIF }));
   }
 
   @Override

@@ -5,11 +5,14 @@ import javax.naming.InitialContext;
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NArgumentString;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.Where;
 
+import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.ejb.EntitatLocal;
-import es.caib.carpeta.ejb.UsuariEntitatLocal;
+import es.caib.carpeta.ejb.PropietatGlobalLocal;
 import es.caib.carpeta.logic.UsuariEntitatLogicaLocal;
 import es.caib.carpeta.logic.UsuariLogicaLocal;
+import es.caib.carpeta.model.fields.PropietatGlobalFields;
 
 
 /**
@@ -28,9 +31,9 @@ public final class EjbManager {
 	protected static EntitatLocal entitatLogicaEjb;
 /* XYZ ZZZ ZZZ
 	protected static IdiomaLocal idiomaEjb;
-
+    */
 	protected static PropietatGlobalLocal propietatLogicaEjb;
-	*/
+
 
 	private static void throwNewI18NException(Throwable e, String name) throws I18NException {
 		throw new I18NException(e, "error.unknown",
@@ -89,18 +92,57 @@ public final class EjbManager {
 		}
 		return idiomaEjb;
 	}
+	*/
 
-	public static PropietatGlobalLogicaLocal getPropietatLogicaEJB() throws I18NException {
+	public static PropietatGlobalLocal getPropietatLogicaEJB() throws I18NException {
 
 		if (propietatLogicaEjb == null) {
 			try {
-				propietatLogicaEjb = (PropietatGlobalLogicaLocal) new InitialContext()
-						.lookup(PropietatGlobalLogicaLocal.JNDI_NAME);
+				propietatLogicaEjb = (PropietatGlobalLocal) new InitialContext()
+						.lookup(PropietatGlobalLocal.JNDI_NAME);
 			} catch (Throwable e) {
-				throwNewI18NException(e, PropietatGlobalLogicaLocal.JNDI_NAME);
+				throwNewI18NException(e, PropietatGlobalLocal.JNDI_NAME);
 			}
 		}
 		return propietatLogicaEjb;
 	}
-*/
+	
+	
+	public static String getDefaultEntityCode(PropietatGlobalLocal propietatGlobalEjb) throws I18NException {
+	    final String partialProp = "defaultentitycode";
+	    
+	    return getPropertyValue(propietatGlobalEjb, partialProp);
+	    
+	}
+
+    public static Long getPropertyValueLong(PropietatGlobalLocal propietatGlobalEjb, String partialProp)
+            throws I18NException {
+        String val = getPropertyValue(propietatGlobalEjb, partialProp);
+	    if (val== null || val.trim().length() == 0) {
+	        return null;
+	    }
+	    try {
+            return Long.parseLong(val);
+        } catch (Exception e) {
+            log.error("Error cercant propietat: defaultEntity", e);
+            return null;
+        }
+    }
+	
+	
+	public  static String getPropertyValue(PropietatGlobalLocal propietatGlobalEjb, String partialProp) throws I18NException {
+	    Where w = Where.AND(
+	            PropietatGlobalFields.CODI.equal(Constants.CARPETA_PROPERTY_BASE + partialProp),
+	            PropietatGlobalFields.ENTITATID.isNull()
+	            );
+	    return propietatGlobalEjb.executeQueryOne(PropietatGlobalFields.VALUE, w);
+	}
+	
+	
+//    public static String getPropertyValue(PropietatGlobalLocal propietatGlobalEjb, String partialProp, long entitatID) {
+//        
+//    }
+	
+	
+
 }

@@ -1,5 +1,10 @@
 package es.caib.carpeta.commons.utils;
 
+/**
+ * XYZ ZZZ ZZZ ESBORRAR
+ * @author anadal
+ *
+ */
 public class UsuarioClave {
 
     private String nombre;

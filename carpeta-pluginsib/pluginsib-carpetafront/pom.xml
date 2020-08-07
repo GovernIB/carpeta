@@ -16,8 +16,7 @@
     <modules>
         <module>api</module>
         <module>sistra</module>
-    <!--
-    
+    <!--    
     <module>registre</module>
     -->
     </modules>

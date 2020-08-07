@@ -3,9 +3,9 @@ package es.caib.carpeta.back.security;
 import es.caib.carpeta.back.preparer.BasePreparer;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.ejb.EntitatLocal;
-
+import es.caib.carpeta.ejb.PropietatGlobalLocal;
 import es.caib.carpeta.logic.utils.EjbManager;
-import es.caib.carpeta.utils.Configuracio;
+import es.caib.carpeta.model.fields.EntitatFields;
 import es.caib.carpeta.jpa.EntitatJPA;
 import es.caib.carpeta.jpa.UsuariJPA;
 import es.caib.carpeta.logic.UsuariEntitatLogicaLocal;
@@ -105,11 +105,13 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 		UsuariEntitatLogicaLocal usuariEntitatLogicaEjb;
 		UsuariLogicaLocal usuariPersonaLogicaEjb;
 		EntitatLocal entitatLogicaEjb;
+		PropietatGlobalLocal propietatGlobalEjb;
 
 		try {
 			usuariEntitatLogicaEjb = EjbManager.getUsuariEntitatLogicaEJB();
 			usuariPersonaLogicaEjb = EjbManager.getUsuariPersonaLogicaEJB();
 			entitatLogicaEjb = EjbManager.getEntitatLogicaEJB();
+			propietatGlobalEjb =  EjbManager.getPropietatLogicaEJB();
 		} catch (I18NException e) {
 			// TODO traduccio
 			throw new LoginException("No puc accedir al gestor d´obtenció de" + " informació d´usuari-entitat per "
@@ -127,6 +129,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 		boolean necesitaConfigurar = false;
 
 		if (usuariPersona == null) {
+		    log.info(" La persona amb username  '" +username + "' no esta registrada !!!!");
 			// Revisar si és un Administrador que entra per primera vegada
 
 			{
@@ -135,45 +138,50 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 					// XYZ ZZZ ZZZ ZZZ TODO
 					persona = usuariPersonaLogicaEjb.getUserInfoFromUserInformation(username);
 
-					if (persona != null) {
+					if (persona == null) {
+					    log.error("No hem trobat informació de la Persona amb username  '"
+					           + username + "' dins del sistema de UserInformation");
+					    
+					} else {
 
 						UsuariEntitatJPA usuariEntitat = null;
 
+						log.info("Contains role AdminEntitat: " + containsRoleAdEn );
 						if (containsRoleAdEn) {
-							// XYZ ZZZ ZZZ
-							Long defaultEntity = null;
+							
+							String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
+							log.info("Default Entity Code => " +  defaultEntityCode);
+							
+							if (defaultEntityCode != null && defaultEntityCode.trim().length() != 0) {
+							    
+							    Long defaultEntity = entitatLogicaEjb.executeQueryOne(EntitatFields.ENTITATID, EntitatFields.CODI.equal(defaultEntityCode));
+							
+							    log.info("Default Entity ID => " +  defaultEntity);
 
-							if (Configuracio.isCAIB()) {
-								defaultEntity = Configuracio.getDefaultEntity();
-							} else {
-								defaultEntity = null;
-							}
-
-							if (defaultEntity != null) {
-								usuariEntitat = new UsuariEntitatJPA();
-								// usuariEntitat.setActiu(true);
-								usuariEntitat.setEntitat(entitatLogicaEjb.findByPrimaryKey(defaultEntity));
-
-								// XYZ ZZZ
-								// usuariEntitat.setPredeterminat(true);
-								usuariEntitat.setUsuari(persona);
+    							if (defaultEntity != null) {
+    								usuariEntitat = new UsuariEntitatJPA();
+    								// usuariEntitat.setActiu(true);
+    								usuariEntitat.setEntitatID(defaultEntity);    								
+    								usuariEntitat.setActiu(true);
+    								//usuariEntitat.setUsuari(persona);
+    							}
 							}
 
 						}
 
 						necesitaConfigurar = true;
+						
+						persona = usuariPersonaLogicaEjb.crearUsuari(persona);
 
 						if (usuariEntitat == null) {
-							usuariPersona = usuariPersonaLogicaEjb.crearUsuari(persona);
+						    usuariPersona = persona;
 						} else {
+						    usuariEntitat.setUsuariID(persona.getUsuariID());
 							usuariEntitat = (UsuariEntitatJPA)usuariEntitatLogicaEjb.create(usuariEntitat);
-							usuariPersona = usuariEntitat.getUsuari();
+							usuariPersona = persona;
+							
 						}
-
-						if (isDebug) {
-							log.debug("necesitaConfigurarUsuari = " + necesitaConfigurar);
-						}
-
+						log.info("necesitaConfigurarUsuari = " + necesitaConfigurar);
 					}
 
 				} catch (Throwable e) {
