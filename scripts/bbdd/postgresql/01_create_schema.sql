@@ -1,1147 +1,936 @@
-﻿--
+--
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.16
--- Dumped by pg_dump version 9.6.16
-
--- Started on 2020-06-15 12:45:50
+-- Dumped from database version 9.3.5
+-- Dumped by pg_dump version 9.3.5
+-- Started on 2020-08-12 12:05:51
 
 
 --
--- TOC entry 197 (class 1259 OID 38361)
--- Name: car_acceso; Type: TABLE; Schema: public; Owner: postgres
+-- TOC entry 170 (class 1259 OID 112419)
+-- Name: car_carpeta_seq; Type: SEQUENCE; Schema: public; Owner: carpeta
 --
 
-CREATE TABLE public.car_acceso (
-    id bigint NOT NULL,
-    apellidos character varying(255) NOT NULL,
-    direccion_ip character varying(255) NOT NULL,
-    fecha_ultimo_acceso timestamp without time zone NOT NULL,
-    idioma character varying(255) NOT NULL,
-    nif character varying(9) NOT NULL,
-    nivel_seguridad character varying(255),
-    nombre character varying(255) NOT NULL,
-    proveedor_entidad character varying(255),
-    result_autenticacion character varying(255),
-    entidad bigint NOT NULL
-);
-
-
--- ALTER TABLE public.car_acceso OWNER TO postgres;
-
---
--- TOC entry 185 (class 1259 OID 38337)
--- Name: car_acceso_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.car_acceso_seq
-    START WITH 1
+CREATE SEQUENCE car_carpeta_seq
+    START WITH 1000
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
 
 
--- ALTER TABLE public.car_acceso_seq OWNER TO postgres;
+
 
 --
--- TOC entry 198 (class 1259 OID 38369)
--- Name: car_archivo; Type: TABLE; Schema: public; Owner: postgres
+-- TOC entry 181 (class 1259 OID 112626)
+-- Name: car_acces; Type: TABLE; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE TABLE public.car_archivo (
-    id bigint NOT NULL,
+CREATE TABLE car_acces (
+    accesid bigint DEFAULT nextval('car_carpeta_seq'::regclass) NOT NULL,
+    nom character varying(255),
+    llinatges character varying(255),
+    nif character varying(50),
+    ip character varying(100),
+    proveidoridentitat character varying(255),
+    nivellseguretat character varying(255),
+    resultatautenticacio integer,
+    datadarreracces timestamp without time zone,
+    idioma character varying(50),
+    entitatid bigint NOT NULL
+);
+
+
+
+
+--
+-- TOC entry 2111 (class 0 OID 0)
+-- Dependencies: 181
+-- Name: COLUMN car_acces.idioma; Type: COMMENT; Schema: public; Owner: carpeta
+--
+
+COMMENT ON COLUMN car_acces.idioma IS 'Hauria d''estar enllaçat amb la taula idioma';
+
+
+--
+-- TOC entry 185 (class 1259 OID 112683)
+-- Name: car_auditoria; Type: TABLE; Schema: public; Owner: carpeta; Tablespace: 
+--
+
+CREATE TABLE car_auditoria (
+    auditoriaid bigint DEFAULT nextval('car_carpeta_seq'::regclass) NOT NULL,
+    accio integer NOT NULL,
+    element character varying(255),
+    dataaudit timestamp without time zone NOT NULL,
+    entitatid bigint,
+    usuariid bigint
+);
+
+
+
+
+--
+-- TOC entry 179 (class 1259 OID 112591)
+-- Name: car_avis; Type: TABLE; Schema: public; Owner: carpeta; Tablespace: 
+--
+
+CREATE TABLE car_avis (
+    avisid bigint DEFAULT nextval('car_carpeta_seq'::regclass) NOT NULL,
+    descripcioid bigint NOT NULL,
+    entitatid bigint NOT NULL,
+    datainici timestamp without time zone,
+    datafi timestamp without time zone,
+    tipus integer NOT NULL
+);
+
+
+
+
+--
+-- TOC entry 175 (class 1259 OID 112505)
+-- Name: car_enllaz; Type: TABLE; Schema: public; Owner: carpeta; Tablespace: 
+--
+
+CREATE TABLE car_enllaz (
+    enllazid bigint DEFAULT nextval('car_carpeta_seq'::regclass) NOT NULL,
+    tipus integer NOT NULL,
+    urlid bigint NOT NULL,
+    nomid bigint NOT NULL,
+    entitatid bigint NOT NULL
+);
+
+
+
+
+--
+-- TOC entry 176 (class 1259 OID 112508)
+-- Name: car_entitat; Type: TABLE; Schema: public; Owner: carpeta; Tablespace: 
+--
+
+CREATE TABLE car_entitat (
+    entitatid bigint DEFAULT nextval('car_carpeta_seq'::regclass) NOT NULL,
+    nomid bigint NOT NULL,
+    codidir3 character varying(255) NOT NULL,
+    activa boolean NOT NULL,
+    logomenuid bigint,
+    colormenu character varying(100) NOT NULL,
+    textepeu character varying(4000),
+    logopeuid bigint NOT NULL,
+    versio character varying(50) NOT NULL,
+    commit character varying(255),
+    fitxercss bigint,
+    context character varying(255),
+    codi character varying(30) NOT NULL
+);
+
+
+
+
+--
+-- TOC entry 182 (class 1259 OID 112640)
+-- Name: car_estadistica; Type: TABLE; Schema: public; Owner: carpeta; Tablespace: 
+--
+
+CREATE TABLE car_estadistica (
+    estadisticaid bigint DEFAULT nextval('car_carpeta_seq'::regclass) NOT NULL,
+    entitatid bigint NOT NULL,
+    accesid bigint,
+    accio integer NOT NULL,
+    element character varying(255),
+    dataestadistica timestamp without time zone NOT NULL
+);
+
+
+
+
+--
+-- TOC entry 171 (class 1259 OID 112421)
+-- Name: car_fitxer; Type: TABLE; Schema: public; Owner: carpeta; Tablespace: 
+--
+
+CREATE TABLE car_fitxer (
+    fitxerid bigint DEFAULT nextval('car_carpeta_seq'::regclass) NOT NULL,
+    descripcio character varying(1000) DEFAULT NULL::character varying,
     mime character varying(255) NOT NULL,
-    nombre character varying(255) NOT NULL,
-    tamano bigint NOT NULL
+    nom character varying(255) NOT NULL,
+    tamany bigint NOT NULL
 );
 
 
--- ALTER TABLE public.car_archivo OWNER TO postgres;
+
 
 --
--- TOC entry 186 (class 1259 OID 38339)
--- Name: car_archivo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 172 (class 1259 OID 112429)
+-- Name: car_idioma; Type: TABLE; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE SEQUENCE public.car_archivo_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
--- ALTER TABLE public.car_archivo_seq OWNER TO postgres;
-
---
--- TOC entry 199 (class 1259 OID 38377)
--- Name: car_auditoria; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.car_auditoria (
-    id bigint NOT NULL,
-    accion character varying(255) NOT NULL,
-    elemento character varying(255) NOT NULL,
-    fecha timestamp without time zone NOT NULL,
-    entidad bigint NOT NULL,
-    usuario bigint NOT NULL
+CREATE TABLE car_idioma (
+    idiomaid character varying(5) NOT NULL,
+    nom character varying(50) NOT NULL,
+    suportat boolean DEFAULT true NOT NULL,
+    ordre integer DEFAULT 0 NOT NULL
 );
 
 
--- ALTER TABLE public.car_auditoria OWNER TO postgres;
+
 
 --
--- TOC entry 187 (class 1259 OID 38341)
--- Name: car_auditoria_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 180 (class 1259 OID 112607)
+-- Name: car_log; Type: TABLE; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE SEQUENCE public.car_auditoria_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
--- ALTER TABLE public.car_auditoria_seq OWNER TO postgres;
-
---
--- TOC entry 200 (class 1259 OID 38385)
--- Name: car_aviso; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.car_aviso (
-    id bigint NOT NULL,
-    fecha_fin timestamp without time zone NOT NULL,
-    fecha_inicio timestamp without time zone NOT NULL,
-    tipo character varying(255) NOT NULL,
-    entidad bigint NOT NULL
+CREATE TABLE car_log (
+    logid bigint DEFAULT nextval('car_carpeta_seq'::regclass) NOT NULL,
+    descripcio character varying(2000) NOT NULL,
+    entitatid bigint,
+    pluginid bigint,
+    tipus integer NOT NULL,
+    estat integer NOT NULL,
+    temps bigint,
+    datainici timestamp without time zone NOT NULL,
+    peticio character varying(255),
+    error character varying(2000),
+    excepcio text
 );
 
 
--- ALTER TABLE public.car_aviso OWNER TO postgres;
+
 
 --
--- TOC entry 188 (class 1259 OID 38343)
--- Name: car_aviso_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 178 (class 1259 OID 112580)
+-- Name: car_plugin; Type: TABLE; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE SEQUENCE public.car_aviso_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
--- ALTER TABLE public.car_aviso_seq OWNER TO postgres;
-
---
--- TOC entry 201 (class 1259 OID 38390)
--- Name: car_enlace; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.car_enlace (
-    id bigint NOT NULL,
-    tipo character varying(255) NOT NULL,
-    entidad bigint NOT NULL
+CREATE TABLE car_plugin (
+    pluginid bigint DEFAULT nextval('car_carpeta_seq'::regclass) NOT NULL,
+    nomid bigint NOT NULL,
+    classe character varying(255) NOT NULL,
+    tipus integer NOT NULL,
+    propietats text,
+    actiu boolean DEFAULT true NOT NULL
 );
 
 
--- ALTER TABLE public.car_enlace OWNER TO postgres;
+
 
 --
--- TOC entry 189 (class 1259 OID 38345)
--- Name: car_enlace_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 177 (class 1259 OID 112559)
+-- Name: car_propietatglobal; Type: TABLE; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE SEQUENCE public.car_enlace_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
--- ALTER TABLE public.car_enlace_seq OWNER TO postgres;
-
---
--- TOC entry 202 (class 1259 OID 38395)
--- Name: car_entidad; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.car_entidad (
-    id bigint NOT NULL,
-    activo boolean NOT NULL,
-    codigodir3 character varying(9) NOT NULL,
-    colormenu character varying(255),
-    comit character varying(255),
-    contexto character varying(255) NOT NULL,
-    textopie character varying(4000),
-    version character varying(255),
-    ficherocss bigint,
-    logomenu bigint,
-    logopie bigint
+CREATE TABLE car_propietatglobal (
+    propietatglobalid bigint DEFAULT nextval('car_carpeta_seq'::regclass) NOT NULL,
+    codi character varying(250) NOT NULL,
+    value character varying(4000),
+    descripcio character varying(1000),
+    entitatid bigint
 );
 
 
--- ALTER TABLE public.car_entidad OWNER TO postgres;
+
 
 --
--- TOC entry 190 (class 1259 OID 38347)
--- Name: car_entidad_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 173 (class 1259 OID 112434)
+-- Name: car_traduccio; Type: TABLE; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE SEQUENCE public.car_entidad_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
--- ALTER TABLE public.car_entidad_seq OWNER TO postgres;
-
---
--- TOC entry 203 (class 1259 OID 38403)
--- Name: car_estadistica; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.car_estadistica (
-    id bigint NOT NULL,
-    accion character varying(255) NOT NULL,
-    elemento character varying(255) NOT NULL,
-    fecha timestamp without time zone NOT NULL,
-    acceso bigint NOT NULL,
-    entidad bigint NOT NULL
+CREATE TABLE car_traduccio (
+    traduccioid bigint DEFAULT nextval('car_carpeta_seq'::regclass) NOT NULL
 );
 
 
--- ALTER TABLE public.car_estadistica OWNER TO postgres;
+
 
 --
--- TOC entry 191 (class 1259 OID 38349)
--- Name: car_estadistica_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 174 (class 1259 OID 112438)
+-- Name: car_traducciomap; Type: TABLE; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE SEQUENCE public.car_estadistica_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
--- ALTER TABLE public.car_estadistica_seq OWNER TO postgres;
-
---
--- TOC entry 204 (class 1259 OID 38411)
--- Name: car_log; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.car_log (
-    id bigint NOT NULL,
-    descripcion character varying(255),
-    error character varying(255),
-    estado character varying(255) NOT NULL,
-    excepcion character varying(255),
-    fecha timestamp without time zone NOT NULL,
-    peticion character varying(255),
-    tiempo bigint NOT NULL,
-    tipo character varying(255) NOT NULL,
-    entidad bigint NOT NULL,
-    plugin bigint NOT NULL
+CREATE TABLE car_traducciomap (
+    traducciomapid bigint NOT NULL,
+    idiomaid character varying(10) NOT NULL,
+    valor character varying(4000)
 );
 
 
--- ALTER TABLE public.car_log OWNER TO postgres;
+
 
 --
--- TOC entry 192 (class 1259 OID 38351)
--- Name: car_log_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 183 (class 1259 OID 112656)
+-- Name: car_usuari; Type: TABLE; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE SEQUENCE public.car_log_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
--- ALTER TABLE public.car_log_seq OWNER TO postgres;
-
---
--- TOC entry 205 (class 1259 OID 38419)
--- Name: car_plugin; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.car_plugin (
-    id bigint NOT NULL,
-    clase character varying(255) NOT NULL,
-    estado character varying(255) NOT NULL,
-    prefijo_entidad character varying(255) NOT NULL,
-    prefijo_props character varying(255) NOT NULL,
-    tipo character varying(255) NOT NULL,
-    entidad bigint
-);
-
-
--- ALTER TABLE public.car_plugin OWNER TO postgres;
-
---
--- TOC entry 193 (class 1259 OID 38353)
--- Name: car_plugin_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.car_plugin_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
--- ALTER TABLE public.car_plugin_seq OWNER TO postgres;
-
---
--- TOC entry 194 (class 1259 OID 38355)
--- Name: car_propglobal_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.car_propglobal_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
--- ALTER TABLE public.car_propglobal_seq OWNER TO postgres;
-
---
--- TOC entry 206 (class 1259 OID 38427)
--- Name: car_propiedad_global; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.car_propiedad_global (
-    id bigint NOT NULL,
-    codigo character varying(255) NOT NULL,
-    descripcion character varying(255),
-    valor character varying(255),
-    entidad bigint NOT NULL
-);
-
-
--- ALTER TABLE public.car_propiedad_global OWNER TO postgres;
-
---
--- TOC entry 207 (class 1259 OID 38435)
--- Name: car_propiedad_plugin; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.car_propiedad_plugin (
-    id bigint NOT NULL,
-    codigo character varying(255) NOT NULL,
-    descripcion character varying(255),
-    valor character varying(255),
-    plugin bigint NOT NULL
-);
-
-
--- ALTER TABLE public.car_propiedad_plugin OWNER TO postgres;
-
---
--- TOC entry 195 (class 1259 OID 38357)
--- Name: car_propplugin_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.car_propplugin_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
--- ALTER TABLE public.car_propplugin_seq OWNER TO postgres;
-
---
--- TOC entry 208 (class 1259 OID 38443)
--- Name: car_tra_aviso; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.car_tra_aviso (
-    idaviso bigint NOT NULL,
-    texto_aviso character varying(255) NOT NULL,
-    lang character varying(255) NOT NULL
-);
-
-
--- ALTER TABLE public.car_tra_aviso OWNER TO postgres;
-
---
--- TOC entry 209 (class 1259 OID 38451)
--- Name: car_tra_enlace; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.car_tra_enlace (
-    idenlace bigint NOT NULL,
-    url character varying(255) NOT NULL,
-    lang character varying(255) NOT NULL
-);
-
-
--- ALTER TABLE public.car_tra_enlace OWNER TO postgres;
-
---
--- TOC entry 210 (class 1259 OID 38459)
--- Name: car_tra_entidad; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.car_tra_entidad (
-    identidad bigint NOT NULL,
-    descripcion character varying(255),
-    nombre character varying(255),
-    lang character varying(255) NOT NULL
-);
-
-
--- ALTER TABLE public.car_tra_entidad OWNER TO postgres;
-
---
--- TOC entry 211 (class 1259 OID 38467)
--- Name: car_tra_plugin; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.car_tra_plugin (
-    idplugin bigint NOT NULL,
-    descripcion character varying(255),
-    nombre character varying(255),
-    lang character varying(255) NOT NULL
-);
-
-
--- ALTER TABLE public.car_tra_plugin OWNER TO postgres;
-
---
--- TOC entry 212 (class 1259 OID 38475)
--- Name: car_usuario; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.car_usuario (
-    id bigint NOT NULL,
-    apellido1 character varying(255),
-    apellido2 character varying(255),
-    email character varying(255) NOT NULL,
-    nombre character varying(255) NOT NULL,
+CREATE TABLE car_usuari (
+    usuariid bigint DEFAULT nextval('car_carpeta_seq'::regclass) NOT NULL,
     username character varying(255) NOT NULL,
-    ultima_entidad bigint NOT NULL
+    nom character varying(255) NOT NULL,
+    llinatge1 character varying(255) NOT NULL,
+    llinatge2 character varying(255),
+    email character varying(255),
+    nif character varying(255),
+    idioma character varying(50) DEFAULT 'ca'::character varying NOT NULL,
+    darreraentitat bigint
 );
 
 
--- ALTER TABLE public.car_usuario OWNER TO postgres;
+
 
 --
--- TOC entry 196 (class 1259 OID 38359)
--- Name: car_usuario_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+-- TOC entry 184 (class 1259 OID 112665)
+-- Name: car_usuarientitat; Type: TABLE; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE SEQUENCE public.car_usuario_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
--- ALTER TABLE public.car_usuario_seq OWNER TO postgres;
-
---
--- TOC entry 213 (class 1259 OID 38483)
--- Name: car_usuarioentidad; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.car_usuarioentidad (
-    id bigint NOT NULL,
-    activo boolean NOT NULL,
-    entidad bigint NOT NULL,
-    usuario bigint NOT NULL
+CREATE TABLE car_usuarientitat (
+    usuarientitatid bigint DEFAULT nextval('car_carpeta_seq'::regclass) NOT NULL,
+    usuariid bigint NOT NULL,
+    entitatid bigint NOT NULL,
+    actiu boolean NOT NULL
 );
 
 
--- ALTER TABLE public.car_usuarioentidad OWNER TO postgres;
 
---
--- TOC entry 2104 (class 2606 OID 38368)
--- Name: car_acceso car_acceso_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.car_acceso
-    ADD CONSTRAINT car_acceso_pkey PRIMARY KEY (id);
-
-
---
--- TOC entry 2107 (class 2606 OID 38376)
--- Name: car_archivo car_archivo_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.car_archivo
-    ADD CONSTRAINT car_archivo_pkey PRIMARY KEY (id);
-
 
 --
--- TOC entry 2112 (class 2606 OID 38384)
--- Name: car_auditoria car_auditoria_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1951 (class 2606 OID 112634)
+-- Name: car_acces_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-ALTER TABLE ONLY public.car_auditoria
-    ADD CONSTRAINT car_auditoria_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY car_acces
+    ADD CONSTRAINT car_acces_pk PRIMARY KEY (accesid);
 
 
 --
--- TOC entry 2116 (class 2606 OID 38389)
--- Name: car_aviso car_aviso_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1971 (class 2606 OID 112688)
+-- Name: car_auditoria_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-ALTER TABLE ONLY public.car_aviso
-    ADD CONSTRAINT car_aviso_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY car_auditoria
+    ADD CONSTRAINT car_auditoria_pk PRIMARY KEY (auditoriaid);
 
 
 --
--- TOC entry 2120 (class 2606 OID 38394)
--- Name: car_enlace car_enlace_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1942 (class 2606 OID 112596)
+-- Name: car_avis_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-ALTER TABLE ONLY public.car_enlace
-    ADD CONSTRAINT car_enlace_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY car_avis
+    ADD CONSTRAINT car_avis_pk PRIMARY KEY (avisid);
 
 
 --
--- TOC entry 2127 (class 2606 OID 38402)
--- Name: car_entidad car_entidad_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1921 (class 2606 OID 112515)
+-- Name: car_enllaz_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-ALTER TABLE ONLY public.car_entidad
-    ADD CONSTRAINT car_entidad_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY car_enllaz
+    ADD CONSTRAINT car_enllaz_pk PRIMARY KEY (enllazid);
 
 
 --
--- TOC entry 2134 (class 2606 OID 38410)
--- Name: car_estadistica car_estadistica_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1929 (class 2606 OID 112517)
+-- Name: car_entitat_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-ALTER TABLE ONLY public.car_estadistica
-    ADD CONSTRAINT car_estadistica_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY car_entitat
+    ADD CONSTRAINT car_entitat_pk PRIMARY KEY (entitatid);
 
 
 --
--- TOC entry 2138 (class 2606 OID 38418)
--- Name: car_log car_log_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1956 (class 2606 OID 112645)
+-- Name: car_estadistica_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-ALTER TABLE ONLY public.car_log
-    ADD CONSTRAINT car_log_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY car_estadistica
+    ADD CONSTRAINT car_estadistica_pk PRIMARY KEY (estadisticaid);
 
 
 --
--- TOC entry 2143 (class 2606 OID 38426)
--- Name: car_plugin car_plugin_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1906 (class 2606 OID 112445)
+-- Name: car_fitxer_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-ALTER TABLE ONLY public.car_plugin
-    ADD CONSTRAINT car_plugin_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY car_fitxer
+    ADD CONSTRAINT car_fitxer_pk PRIMARY KEY (fitxerid);
 
 
 --
--- TOC entry 2148 (class 2606 OID 38434)
--- Name: car_propiedad_global car_propiedad_global_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1909 (class 2606 OID 112447)
+-- Name: car_idioma_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-ALTER TABLE ONLY public.car_propiedad_global
-    ADD CONSTRAINT car_propiedad_global_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY car_idioma
+    ADD CONSTRAINT car_idioma_pk PRIMARY KEY (idiomaid);
 
 
 --
--- TOC entry 2152 (class 2606 OID 38442)
--- Name: car_propiedad_plugin car_propiedad_plugin_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1946 (class 2606 OID 112614)
+-- Name: car_log_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-ALTER TABLE ONLY public.car_propiedad_plugin
-    ADD CONSTRAINT car_propiedad_plugin_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY car_log
+    ADD CONSTRAINT car_log_pk PRIMARY KEY (logid);
 
 
 --
--- TOC entry 2159 (class 2606 OID 38450)
--- Name: car_tra_aviso car_tra_aviso_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1937 (class 2606 OID 112585)
+-- Name: car_plugin_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-ALTER TABLE ONLY public.car_tra_aviso
-    ADD CONSTRAINT car_tra_aviso_pkey PRIMARY KEY (idaviso, lang);
+ALTER TABLE ONLY car_plugin
+    ADD CONSTRAINT car_plugin_pk PRIMARY KEY (pluginid);
 
 
 --
--- TOC entry 2161 (class 2606 OID 38458)
--- Name: car_tra_enlace car_tra_enlace_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1933 (class 2606 OID 112567)
+-- Name: car_propietatglobal_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-ALTER TABLE ONLY public.car_tra_enlace
-    ADD CONSTRAINT car_tra_enlace_pkey PRIMARY KEY (idenlace, lang);
+ALTER TABLE ONLY car_propietatglobal
+    ADD CONSTRAINT car_propietatglobal_pk PRIMARY KEY (propietatglobalid);
 
 
 --
--- TOC entry 2163 (class 2606 OID 38466)
--- Name: car_tra_entidad car_tra_entidad_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1912 (class 2606 OID 112449)
+-- Name: car_traduccio_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-ALTER TABLE ONLY public.car_tra_entidad
-    ADD CONSTRAINT car_tra_entidad_pkey PRIMARY KEY (identidad, lang);
+ALTER TABLE ONLY car_traduccio
+    ADD CONSTRAINT car_traduccio_pk PRIMARY KEY (traduccioid);
 
 
 --
--- TOC entry 2165 (class 2606 OID 38474)
--- Name: car_tra_plugin car_tra_plugin_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1917 (class 2606 OID 112451)
+-- Name: car_traducmap_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-ALTER TABLE ONLY public.car_tra_plugin
-    ADD CONSTRAINT car_tra_plugin_pkey PRIMARY KEY (idplugin, lang);
+ALTER TABLE ONLY car_traducciomap
+    ADD CONSTRAINT car_traducmap_pk PRIMARY KEY (traducciomapid, idiomaid);
 
 
 --
--- TOC entry 2170 (class 2606 OID 38482)
--- Name: car_usuario car_usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1960 (class 2606 OID 112664)
+-- Name: car_usuari_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-ALTER TABLE ONLY public.car_usuario
-    ADD CONSTRAINT car_usuario_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY car_usuari
+    ADD CONSTRAINT car_usuari_pk PRIMARY KEY (usuariid);
 
 
 --
--- TOC entry 2175 (class 2606 OID 38487)
--- Name: car_usuarioentidad car_usuarioentidad_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1963 (class 2606 OID 112670)
+-- Name: car_usuarientitat_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-ALTER TABLE ONLY public.car_usuarioentidad
-    ADD CONSTRAINT car_usuarioentidad_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY car_usuarientitat
+    ADD CONSTRAINT car_usuarientitat_pk PRIMARY KEY (usuarientitatid);
 
 
 --
--- TOC entry 2129 (class 2606 OID 38504)
--- Name: car_entidad uk_4ebo6icnww42h20lf6y38vkte; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1967 (class 2606 OID 112682)
+-- Name: car_usuent_usu_ent_uk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-ALTER TABLE ONLY public.car_entidad
-    ADD CONSTRAINT uk_4ebo6icnww42h20lf6y38vkte UNIQUE (codigodir3);
+ALTER TABLE ONLY car_usuarientitat
+    ADD CONSTRAINT car_usuent_usu_ent_uk UNIQUE (usuariid, entitatid);
 
 
 --
--- TOC entry 2157 (class 2606 OID 38522)
--- Name: car_propiedad_plugin uk_7k170hvydh8vk73rnbcb7mn27; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1949 (class 1259 OID 112706)
+-- Name: car_acces_entitatid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-ALTER TABLE ONLY public.car_propiedad_plugin
-    ADD CONSTRAINT uk_7k170hvydh8vk73rnbcb7mn27 UNIQUE (codigo);
+CREATE INDEX car_acces_entitatid_fk_i ON car_acces USING btree (entitatid);
 
 
 --
--- TOC entry 2172 (class 2606 OID 38527)
--- Name: car_usuario uk_90rvgbpbebcc9o6r123onct5q; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1952 (class 1259 OID 112705)
+-- Name: car_acces_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-ALTER TABLE ONLY public.car_usuario
-    ADD CONSTRAINT uk_90rvgbpbebcc9o6r123onct5q UNIQUE (username);
+CREATE INDEX car_acces_pk_i ON car_acces USING btree (accesid);
 
 
 --
--- TOC entry 2150 (class 2606 OID 38517)
--- Name: car_propiedad_global uk_d42vgayqtp4l97ltacw9f2bur; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1969 (class 1259 OID 112708)
+-- Name: car_auditoria_entitatid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-ALTER TABLE ONLY public.car_propiedad_global
-    ADD CONSTRAINT uk_d42vgayqtp4l97ltacw9f2bur UNIQUE (codigo);
+CREATE INDEX car_auditoria_entitatid_fk_i ON car_auditoria USING btree (entitatid);
 
 
 --
--- TOC entry 2101 (class 1259 OID 38489)
--- Name: car_acceso_entidad_fk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1972 (class 1259 OID 112707)
+-- Name: car_auditoria_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_acceso_entidad_fk_i ON public.car_acceso USING btree (entidad);
+CREATE INDEX car_auditoria_pk_i ON car_auditoria USING btree (auditoriaid);
 
 
 --
--- TOC entry 2102 (class 1259 OID 38488)
--- Name: car_acceso_pk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1973 (class 1259 OID 112709)
+-- Name: car_auditoria_usuariid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_acceso_pk_i ON public.car_acceso USING btree (id);
+CREATE INDEX car_auditoria_usuariid_fk_i ON car_auditoria USING btree (usuariid);
 
 
 --
--- TOC entry 2105 (class 1259 OID 38490)
--- Name: car_archivo_pk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1939 (class 1259 OID 112711)
+-- Name: car_avis_descripcioid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_archivo_pk_i ON public.car_archivo USING btree (id);
+CREATE INDEX car_avis_descripcioid_fk_i ON car_avis USING btree (descripcioid);
 
 
 --
--- TOC entry 2108 (class 1259 OID 38493)
--- Name: car_audit_entidad_fk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1940 (class 1259 OID 112712)
+-- Name: car_avis_entitatid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_audit_entidad_fk_i ON public.car_auditoria USING btree (entidad);
+CREATE INDEX car_avis_entitatid_fk_i ON car_avis USING btree (entitatid);
 
 
 --
--- TOC entry 2109 (class 1259 OID 38492)
--- Name: car_audit_usuario_fk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1943 (class 1259 OID 112710)
+-- Name: car_avis_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_audit_usuario_fk_i ON public.car_auditoria USING btree (usuario);
+CREATE INDEX car_avis_pk_i ON car_avis USING btree (avisid);
 
 
 --
--- TOC entry 2110 (class 1259 OID 38491)
--- Name: car_auditoria_pk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1918 (class 1259 OID 112704)
+-- Name: car_enllaz_entitatid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_auditoria_pk_i ON public.car_auditoria USING btree (id);
+CREATE INDEX car_enllaz_entitatid_fk_i ON car_enllaz USING btree (entitatid);
 
 
 --
--- TOC entry 2113 (class 1259 OID 38495)
--- Name: car_aviso_entidad_fk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1919 (class 1259 OID 112549)
+-- Name: car_enllaz_nomid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_aviso_entidad_fk_i ON public.car_aviso USING btree (entidad);
+CREATE INDEX car_enllaz_nomid_fk_i ON car_enllaz USING btree (nomid);
 
 
 --
--- TOC entry 2114 (class 1259 OID 38494)
--- Name: car_aviso_pk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1922 (class 1259 OID 112548)
+-- Name: car_enllaz_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_aviso_pk_i ON public.car_aviso USING btree (id);
+CREATE INDEX car_enllaz_pk_i ON car_enllaz USING btree (enllazid);
 
 
 --
--- TOC entry 2117 (class 1259 OID 38497)
--- Name: car_enlace_entidad_fk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1923 (class 1259 OID 112550)
+-- Name: car_enllaz_urlid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_enlace_entidad_fk_i ON public.car_enlace USING btree (entidad);
+CREATE INDEX car_enllaz_urlid_fk_i ON car_enllaz USING btree (urlid);
 
 
 --
--- TOC entry 2118 (class 1259 OID 38496)
--- Name: car_enlace_pk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1924 (class 1259 OID 112555)
+-- Name: car_entitat_fitxercss_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_enlace_pk_i ON public.car_enlace USING btree (id);
+CREATE INDEX car_entitat_fitxercss_fk_i ON car_entitat USING btree (fitxercss);
 
 
 --
--- TOC entry 2121 (class 1259 OID 38499)
--- Name: car_entidad_codigodir3_uk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1925 (class 1259 OID 112553)
+-- Name: car_entitat_logomenuid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_entidad_codigodir3_uk_i ON public.car_entidad USING btree (codigodir3);
+CREATE INDEX car_entitat_logomenuid_fk_i ON car_entitat USING btree (logomenuid);
 
 
 --
--- TOC entry 2122 (class 1259 OID 38502)
--- Name: car_entidad_ficherocss_fk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1926 (class 1259 OID 112554)
+-- Name: car_entitat_logopeuid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_entidad_ficherocss_fk_i ON public.car_entidad USING btree (ficherocss);
+CREATE INDEX car_entitat_logopeuid_fk_i ON car_entitat USING btree (logopeuid);
 
 
 --
--- TOC entry 2123 (class 1259 OID 38500)
--- Name: car_entidad_logomenu_fk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1927 (class 1259 OID 112552)
+-- Name: car_entitat_nom_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_entidad_logomenu_fk_i ON public.car_entidad USING btree (logomenu);
+CREATE INDEX car_entitat_nom_fk_i ON car_entitat USING btree (nomid);
 
 
 --
--- TOC entry 2124 (class 1259 OID 38501)
--- Name: car_entidad_logopie_fk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1930 (class 1259 OID 112551)
+-- Name: car_entitat_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_entidad_logopie_fk_i ON public.car_entidad USING btree (logopie);
+CREATE INDEX car_entitat_pk_i ON car_entitat USING btree (entitatid);
 
 
 --
--- TOC entry 2125 (class 1259 OID 38498)
--- Name: car_entidad_pk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1953 (class 1259 OID 112715)
+-- Name: car_estadistica_accesid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_entidad_pk_i ON public.car_entidad USING btree (id);
+CREATE INDEX car_estadistica_accesid_fk_i ON car_estadistica USING btree (accesid);
 
 
 --
--- TOC entry 2130 (class 1259 OID 38506)
--- Name: car_estad_acceso_fk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1954 (class 1259 OID 112714)
+-- Name: car_estadistica_entitatid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_estad_acceso_fk_i ON public.car_estadistica USING btree (acceso);
+CREATE INDEX car_estadistica_entitatid_fk_i ON car_estadistica USING btree (entitatid);
 
 
 --
--- TOC entry 2131 (class 1259 OID 38507)
--- Name: car_estad_entidad_fk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1957 (class 1259 OID 112713)
+-- Name: car_estadistica_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_estad_entidad_fk_i ON public.car_estadistica USING btree (entidad);
+CREATE INDEX car_estadistica_pk_i ON car_estadistica USING btree (estadisticaid);
 
 
 --
--- TOC entry 2132 (class 1259 OID 38505)
--- Name: car_estadistica_pk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1907 (class 1259 OID 112452)
+-- Name: car_fitxer_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_estadistica_pk_i ON public.car_estadistica USING btree (id);
+CREATE INDEX car_fitxer_pk_i ON car_fitxer USING btree (fitxerid);
 
 
 --
--- TOC entry 2135 (class 1259 OID 38510)
--- Name: car_log_entidad_fk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1910 (class 1259 OID 112453)
+-- Name: car_idioma_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_log_entidad_fk_i ON public.car_log USING btree (entidad);
+CREATE INDEX car_idioma_pk_i ON car_idioma USING btree (idiomaid);
 
 
 --
--- TOC entry 2136 (class 1259 OID 38508)
--- Name: car_log_pk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1944 (class 1259 OID 112717)
+-- Name: car_log_entitatid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_log_pk_i ON public.car_log USING btree (id);
+CREATE INDEX car_log_entitatid_fk_i ON car_log USING btree (entitatid);
 
 
 --
--- TOC entry 2139 (class 1259 OID 38509)
--- Name: car_log_plugin_fk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1947 (class 1259 OID 112716)
+-- Name: car_log_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_log_plugin_fk_i ON public.car_log USING btree (plugin);
+CREATE INDEX car_log_pk_i ON car_log USING btree (logid);
 
 
 --
--- TOC entry 2140 (class 1259 OID 38512)
--- Name: car_plugin_entidad_fk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1948 (class 1259 OID 112718)
+-- Name: car_log_pluginid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_plugin_entidad_fk_i ON public.car_plugin USING btree (entidad);
+CREATE INDEX car_log_pluginid_fk_i ON car_log USING btree (pluginid);
 
 
 --
--- TOC entry 2141 (class 1259 OID 38511)
--- Name: car_plugin_pk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1935 (class 1259 OID 112720)
+-- Name: car_plugin_nomid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_plugin_pk_i ON public.car_plugin USING btree (id);
+CREATE INDEX car_plugin_nomid_fk_i ON car_plugin USING btree (nomid);
 
 
 --
--- TOC entry 2144 (class 1259 OID 38515)
--- Name: car_propglob_entidad_fk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1938 (class 1259 OID 112719)
+-- Name: car_plugin_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_propglob_entidad_fk_i ON public.car_propiedad_global USING btree (entidad);
+CREATE INDEX car_plugin_pk_i ON car_plugin USING btree (pluginid);
 
 
 --
--- TOC entry 2145 (class 1259 OID 38514)
--- Name: car_propglobal_codigo_uk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1931 (class 1259 OID 112722)
+-- Name: car_propglob_entitatid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_propglobal_codigo_uk_i ON public.car_propiedad_global USING btree (codigo);
+CREATE INDEX car_propglob_entitatid_fk_i ON car_propietatglobal USING btree (entitatid);
 
 
 --
--- TOC entry 2146 (class 1259 OID 38513)
--- Name: car_propglobal_pk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1934 (class 1259 OID 112721)
+-- Name: car_propietatglobal_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_propglobal_pk_i ON public.car_propiedad_global USING btree (id);
+CREATE INDEX car_propietatglobal_pk_i ON car_propietatglobal USING btree (propietatglobalid);
 
 
 --
--- TOC entry 2153 (class 1259 OID 38520)
--- Name: car_propplug_plugin_fk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1913 (class 1259 OID 112454)
+-- Name: car_traduccio_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_propplug_plugin_fk_i ON public.car_propiedad_plugin USING btree (plugin);
+CREATE INDEX car_traduccio_pk_i ON car_traduccio USING btree (traduccioid);
 
 
 --
--- TOC entry 2154 (class 1259 OID 38519)
--- Name: car_propplugin_codigo_uk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1914 (class 1259 OID 112455)
+-- Name: car_traducciomap_idiomaid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_propplugin_codigo_uk_i ON public.car_propiedad_plugin USING btree (codigo);
+CREATE INDEX car_traducciomap_idiomaid_fk_i ON car_traducciomap USING btree (idiomaid);
 
 
 --
--- TOC entry 2155 (class 1259 OID 38518)
--- Name: car_propplugin_pk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1915 (class 1259 OID 112456)
+-- Name: car_traducciomap_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_propplugin_pk_i ON public.car_propiedad_plugin USING btree (id);
+CREATE INDEX car_traducciomap_pk_i ON car_traducciomap USING btree (traducciomapid);
 
 
 --
--- TOC entry 2166 (class 1259 OID 38524)
--- Name: car_username_uk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1958 (class 1259 OID 114909)
+-- Name: car_usuari_darreraentitat_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_username_uk_i ON public.car_usuario USING btree (username);
+CREATE INDEX car_usuari_darreraentitat_fk_i ON car_usuari USING btree (darreraentitat);
 
 
 --
--- TOC entry 2167 (class 1259 OID 38525)
--- Name: car_usuario_entidad_fk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1961 (class 1259 OID 112723)
+-- Name: car_usuari_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_usuario_entidad_fk_i ON public.car_usuario USING btree (ultima_entidad);
+CREATE INDEX car_usuari_pk_i ON car_usuari USING btree (usuariid);
 
 
 --
--- TOC entry 2168 (class 1259 OID 38523)
--- Name: car_usuario_pk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1964 (class 1259 OID 112724)
+-- Name: car_usuarientitat_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_usuario_pk_i ON public.car_usuario USING btree (id);
+CREATE INDEX car_usuarientitat_pk_i ON car_usuarientitat USING btree (usuarientitatid);
 
 
 --
--- TOC entry 2173 (class 1259 OID 38528)
--- Name: car_usuarioentidad_pk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1965 (class 1259 OID 112726)
+-- Name: car_usuent_entitatid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_usuarioentidad_pk_i ON public.car_usuarioentidad USING btree (id);
+CREATE INDEX car_usuent_entitatid_fk_i ON car_usuarientitat USING btree (entitatid);
 
 
 --
--- TOC entry 2176 (class 1259 OID 38530)
--- Name: car_usuent_entidad_fk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1968 (class 1259 OID 112725)
+-- Name: car_usuent_usuariid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
-CREATE INDEX car_usuent_entidad_fk_i ON public.car_usuarioentidad USING btree (entidad);
+CREATE INDEX car_usuent_usuariid_fk_i ON car_usuarientitat USING btree (usuariid);
 
 
 --
--- TOC entry 2177 (class 1259 OID 38529)
--- Name: car_usuent_usuario_fk_i; Type: INDEX; Schema: public; Owner: postgres
+-- TOC entry 1988 (class 2606 OID 112699)
+-- Name: car_acces_entitat_entitatid_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
-CREATE INDEX car_usuent_usuario_fk_i ON public.car_usuarioentidad USING btree (usuario);
+ALTER TABLE ONLY car_acces
+    ADD CONSTRAINT car_acces_entitat_entitatid_fk FOREIGN KEY (entitatid) REFERENCES car_entitat(entitatid);
 
 
 --
--- TOC entry 2178 (class 2606 OID 38531)
--- Name: car_acceso car_acceso_entidad_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1995 (class 2606 OID 112694)
+-- Name: car_audit_entitat_ent_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
-ALTER TABLE ONLY public.car_acceso
-    ADD CONSTRAINT car_acceso_entidad_fk FOREIGN KEY (entidad) REFERENCES public.car_entidad(id);
+ALTER TABLE ONLY car_auditoria
+    ADD CONSTRAINT car_audit_entitat_ent_fk FOREIGN KEY (entitatid) REFERENCES car_entitat(entitatid);
 
 
 --
--- TOC entry 2179 (class 2606 OID 38536)
--- Name: car_auditoria car_audit_entidad_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1994 (class 2606 OID 112689)
+-- Name: car_audit_usuari_usu_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
-ALTER TABLE ONLY public.car_auditoria
-    ADD CONSTRAINT car_audit_entidad_fk FOREIGN KEY (entidad) REFERENCES public.car_entidad(id);
+ALTER TABLE ONLY car_auditoria
+    ADD CONSTRAINT car_audit_usuari_usu_fk FOREIGN KEY (usuariid) REFERENCES car_usuari(usuariid);
 
 
 --
--- TOC entry 2180 (class 2606 OID 38541)
--- Name: car_auditoria car_audit_usuario_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1985 (class 2606 OID 112602)
+-- Name: car_avis_entitat_ent_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
-ALTER TABLE ONLY public.car_auditoria
-    ADD CONSTRAINT car_audit_usuario_fk FOREIGN KEY (usuario) REFERENCES public.car_usuario(id);
+ALTER TABLE ONLY car_avis
+    ADD CONSTRAINT car_avis_entitat_ent_fk FOREIGN KEY (entitatid) REFERENCES car_entitat(entitatid);
 
 
 --
--- TOC entry 2181 (class 2606 OID 38546)
--- Name: car_aviso car_aviso_entidad_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1984 (class 2606 OID 112597)
+-- Name: car_avis_traduccio_desc_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
-ALTER TABLE ONLY public.car_aviso
-    ADD CONSTRAINT car_aviso_entidad_fk FOREIGN KEY (entidad) REFERENCES public.car_entidad(id);
+ALTER TABLE ONLY car_avis
+    ADD CONSTRAINT car_avis_traduccio_desc_fk FOREIGN KEY (descripcioid) REFERENCES car_traduccio(traduccioid);
 
 
 --
--- TOC entry 2193 (class 2606 OID 38606)
--- Name: car_tra_aviso car_aviso_traaviso_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1977 (class 2606 OID 112574)
+-- Name: car_enllaz_entitat_ent_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
-ALTER TABLE ONLY public.car_tra_aviso
-    ADD CONSTRAINT car_aviso_traaviso_fk FOREIGN KEY (idaviso) REFERENCES public.car_aviso(id);
+ALTER TABLE ONLY car_enllaz
+    ADD CONSTRAINT car_enllaz_entitat_ent_fk FOREIGN KEY (entitatid) REFERENCES car_entitat(entitatid);
 
 
 --
--- TOC entry 2182 (class 2606 OID 38551)
--- Name: car_enlace car_enlace_entidad_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1975 (class 2606 OID 112518)
+-- Name: car_enllaz_traduccio_nomid_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
-ALTER TABLE ONLY public.car_enlace
-    ADD CONSTRAINT car_enlace_entidad_fk FOREIGN KEY (entidad) REFERENCES public.car_entidad(id);
+ALTER TABLE ONLY car_enllaz
+    ADD CONSTRAINT car_enllaz_traduccio_nomid_fk FOREIGN KEY (nomid) REFERENCES car_traduccio(traduccioid);
 
 
 --
--- TOC entry 2194 (class 2606 OID 38611)
--- Name: car_tra_enlace car_enlace_traenlac_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1976 (class 2606 OID 112523)
+-- Name: car_enllaz_traduccio_urlid_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
-ALTER TABLE ONLY public.car_tra_enlace
-    ADD CONSTRAINT car_enlace_traenlac_fk FOREIGN KEY (idenlace) REFERENCES public.car_enlace(id);
+ALTER TABLE ONLY car_enllaz
+    ADD CONSTRAINT car_enllaz_traduccio_urlid_fk FOREIGN KEY (urlid) REFERENCES car_traduccio(traduccioid);
 
 
 --
--- TOC entry 2183 (class 2606 OID 38556)
--- Name: car_entidad car_entidad_ficherocss_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1978 (class 2606 OID 112528)
+-- Name: car_entitat_fitxer_css_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
-ALTER TABLE ONLY public.car_entidad
-    ADD CONSTRAINT car_entidad_ficherocss_fk FOREIGN KEY (ficherocss) REFERENCES public.car_archivo(id);
+ALTER TABLE ONLY car_entitat
+    ADD CONSTRAINT car_entitat_fitxer_css_fk FOREIGN KEY (fitxercss) REFERENCES car_fitxer(fitxerid);
 
 
 --
--- TOC entry 2184 (class 2606 OID 38561)
--- Name: car_entidad car_entidad_logomenu_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1979 (class 2606 OID 112533)
+-- Name: car_entitat_fitxer_logom_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
-ALTER TABLE ONLY public.car_entidad
-    ADD CONSTRAINT car_entidad_logomenu_fk FOREIGN KEY (logomenu) REFERENCES public.car_archivo(id);
+ALTER TABLE ONLY car_entitat
+    ADD CONSTRAINT car_entitat_fitxer_logom_fk FOREIGN KEY (logomenuid) REFERENCES car_fitxer(fitxerid);
 
 
 --
--- TOC entry 2185 (class 2606 OID 38566)
--- Name: car_entidad car_entidad_logopie_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1980 (class 2606 OID 112538)
+-- Name: car_entitat_fitxer_logop_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
-ALTER TABLE ONLY public.car_entidad
-    ADD CONSTRAINT car_entidad_logopie_fk FOREIGN KEY (logopie) REFERENCES public.car_archivo(id);
+ALTER TABLE ONLY car_entitat
+    ADD CONSTRAINT car_entitat_fitxer_logop_fk FOREIGN KEY (logopeuid) REFERENCES car_fitxer(fitxerid);
 
 
 --
--- TOC entry 2195 (class 2606 OID 38616)
--- Name: car_tra_entidad car_entidad_traentid_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1981 (class 2606 OID 112543)
+-- Name: car_entitat_traduccio_nom_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
-ALTER TABLE ONLY public.car_tra_entidad
-    ADD CONSTRAINT car_entidad_traentid_fk FOREIGN KEY (identidad) REFERENCES public.car_entidad(id);
+ALTER TABLE ONLY car_entitat
+    ADD CONSTRAINT car_entitat_traduccio_nom_fk FOREIGN KEY (nomid) REFERENCES car_traduccio(traduccioid);
 
 
 --
--- TOC entry 2186 (class 2606 OID 38571)
--- Name: car_estadistica car_estad_acceso_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1990 (class 2606 OID 112651)
+-- Name: car_estadis_acces_ac_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
-ALTER TABLE ONLY public.car_estadistica
-    ADD CONSTRAINT car_estad_acceso_fk FOREIGN KEY (acceso) REFERENCES public.car_acceso(id);
+ALTER TABLE ONLY car_estadistica
+    ADD CONSTRAINT car_estadis_acces_ac_fk FOREIGN KEY (accesid) REFERENCES car_acces(accesid);
 
 
 --
--- TOC entry 2187 (class 2606 OID 38576)
--- Name: car_estadistica car_estad_entidad_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1989 (class 2606 OID 112646)
+-- Name: car_estadis_entitat_ent_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
-ALTER TABLE ONLY public.car_estadistica
-    ADD CONSTRAINT car_estad_entidad_fk FOREIGN KEY (entidad) REFERENCES public.car_entidad(id);
+ALTER TABLE ONLY car_estadistica
+    ADD CONSTRAINT car_estadis_entitat_ent_fk FOREIGN KEY (entitatid) REFERENCES car_entitat(entitatid);
 
 
 --
--- TOC entry 2188 (class 2606 OID 38581)
--- Name: car_log car_log_entidad_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1986 (class 2606 OID 112615)
+-- Name: car_log_entitat_ent_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
-ALTER TABLE ONLY public.car_log
-    ADD CONSTRAINT car_log_entidad_fk FOREIGN KEY (entidad) REFERENCES public.car_entidad(id);
+ALTER TABLE ONLY car_log
+    ADD CONSTRAINT car_log_entitat_ent_fk FOREIGN KEY (entitatid) REFERENCES car_entitat(entitatid);
 
 
 --
--- TOC entry 2189 (class 2606 OID 38586)
--- Name: car_log car_log_plugin_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1987 (class 2606 OID 112620)
+-- Name: car_log_plugin_plu_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
-ALTER TABLE ONLY public.car_log
-    ADD CONSTRAINT car_log_plugin_fk FOREIGN KEY (plugin) REFERENCES public.car_plugin(id);
+ALTER TABLE ONLY car_log
+    ADD CONSTRAINT car_log_plugin_plu_fk FOREIGN KEY (pluginid) REFERENCES car_plugin(pluginid);
 
 
 --
--- TOC entry 2190 (class 2606 OID 38591)
--- Name: car_plugin car_plugin_entidad_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1983 (class 2606 OID 112586)
+-- Name: car_plugin_traduccio_nom_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
-ALTER TABLE ONLY public.car_plugin
-    ADD CONSTRAINT car_plugin_entidad_fk FOREIGN KEY (entidad) REFERENCES public.car_entidad(id);
+ALTER TABLE ONLY car_plugin
+    ADD CONSTRAINT car_plugin_traduccio_nom_fk FOREIGN KEY (nomid) REFERENCES car_traduccio(traduccioid);
 
 
 --
--- TOC entry 2196 (class 2606 OID 38621)
--- Name: car_tra_plugin car_plugin_traplug_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1982 (class 2606 OID 112568)
+-- Name: car_propglob_entitat_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
-ALTER TABLE ONLY public.car_tra_plugin
-    ADD CONSTRAINT car_plugin_traplug_fk FOREIGN KEY (idplugin) REFERENCES public.car_plugin(id);
+ALTER TABLE ONLY car_propietatglobal
+    ADD CONSTRAINT car_propglob_entitat_fk FOREIGN KEY (entitatid) REFERENCES car_entitat(entitatid);
 
 
 --
--- TOC entry 2191 (class 2606 OID 38596)
--- Name: car_propiedad_global car_propglob_entidad_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1974 (class 2606 OID 112457)
+-- Name: car_traducmap_traduccio_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
-ALTER TABLE ONLY public.car_propiedad_global
-    ADD CONSTRAINT car_propglob_entidad_fk FOREIGN KEY (entidad) REFERENCES public.car_entidad(id);
+ALTER TABLE ONLY car_traducciomap
+    ADD CONSTRAINT car_traducmap_traduccio_fk FOREIGN KEY (traducciomapid) REFERENCES car_traduccio(traduccioid);
 
 
 --
--- TOC entry 2192 (class 2606 OID 38601)
--- Name: car_propiedad_plugin car_propplug_plugin_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1991 (class 2606 OID 114904)
+-- Name: car_usuari_entitat_last_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
-ALTER TABLE ONLY public.car_propiedad_plugin
-    ADD CONSTRAINT car_propplug_plugin_fk FOREIGN KEY (plugin) REFERENCES public.car_plugin(id);
+ALTER TABLE ONLY car_usuari
+    ADD CONSTRAINT car_usuari_entitat_last_fk FOREIGN KEY (darreraentitat) REFERENCES car_entitat(entitatid);
 
 
 --
--- TOC entry 2197 (class 2606 OID 38626)
--- Name: car_usuario car_usuario_entidad_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1993 (class 2606 OID 112676)
+-- Name: car_usuent_entitat_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
-ALTER TABLE ONLY public.car_usuario
-    ADD CONSTRAINT car_usuario_entidad_fk FOREIGN KEY (ultima_entidad) REFERENCES public.car_entidad(id);
+ALTER TABLE ONLY car_usuarientitat
+    ADD CONSTRAINT car_usuent_entitat_fk FOREIGN KEY (entitatid) REFERENCES car_entitat(entitatid);
 
 
 --
--- TOC entry 2198 (class 2606 OID 38631)
--- Name: car_usuarioentidad car_usuent_entidad_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- TOC entry 1992 (class 2606 OID 112671)
+-- Name: car_usuent_usuari_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
-ALTER TABLE ONLY public.car_usuarioentidad
-    ADD CONSTRAINT car_usuent_entidad_fk FOREIGN KEY (entidad) REFERENCES public.car_entidad(id);
-
-
---
--- TOC entry 2199 (class 2606 OID 38636)
--- Name: car_usuarioentidad car_usuent_usuario_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
+ALTER TABLE ONLY car_usuarientitat
+    ADD CONSTRAINT car_usuent_usuari_fk FOREIGN KEY (usuariid) REFERENCES car_usuari(usuariid);
 
-ALTER TABLE ONLY public.car_usuarioentidad
-    ADD CONSTRAINT car_usuent_usuario_fk FOREIGN KEY (usuario) REFERENCES public.car_usuario(id);
 
 
--- Completed on 2020-06-15 12:45:51
+-- Completed on 2020-08-12 12:05:54
 
 --
 -- PostgreSQL database dump complete

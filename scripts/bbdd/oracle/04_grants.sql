@@ -15,4 +15,21 @@ grant select,insert,delete,update on car_usuari to www_carpeta;
 grant select,insert,delete,update on car_usuarientitat to www_carpeta;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 grant select, alter on CAR_CARPETA_SEQ to www_carpeta;
