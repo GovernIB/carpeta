@@ -22,6 +22,19 @@
       <servlet-class>es.caib.carpeta.back.utils.InitServlet</servlet-class>
       <load-on-startup>1</load-on-startup>
     </servlet>
+    
+     <!--  ===  SERVELET RECEPTOR DE PETICIONS DE PLUGIN DE CARPETA FRONT === -->
+  
+      <servlet>
+        <servlet-name>PluginPrivateWebRequests</servlet-name>
+        <servlet-class>es.caib.carpeta.back.controller.superadmin.CarpetaFrontModuleSuperAdminController</servlet-class>
+      </servlet>
+    
+      <servlet-mapping>
+        <servlet-name>PluginPrivateWebRequests</servlet-name>
+        <url-pattern>/common/carpetafrontservlet/requestPlugin/*</url-pattern>
+      </servlet-mapping>
+  
 
 
 	<welcome-file-list>

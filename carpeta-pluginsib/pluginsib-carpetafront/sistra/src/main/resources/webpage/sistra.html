@@ -10,29 +10,28 @@
 
     <title>Tràmits - Carpeta Ciutadana</title>
 
-    <script src="./carpeta/jquery-3.2.1.min.js.baixa"></script>
-    <script src="./carpeta/popper.min.js.baixa"></script>
-    <script src="./carpeta/bootstrap.min.js.baixa"></script>
-    <script src="./carpeta/datatables.min.js.baixa"></script>
+    <script src="${resources}/carpeta/jquery-3.2.1.min.js"></script>
+    <script src="${resources}/carpeta/popper.min.js"></script>
+    <script src="${resources}/carpeta/bootstrap.min.js"></script>
+    <script src="${resources}/carpeta/datatables.min.js"></script>
+
+    <script src="${resources}/carpeta/moment-with-locales.min.js"></script>
     
-    <script src="./carpeta/datetime-moment.js.baixa"></script>
-    <script src="./carpeta/bootstrap-datetimepicker.js.baixa"></script>
-    
-    <script src="./carpeta/moment-with-locales.min.js.baixa"></script>
-    
-    
+    <script src="${resources}/carpeta/datetime-moment.js"></script>
+    <script src="${resources}/carpeta/bootstrap-datetimepicker.js"></script>
+ 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="./carpeta/ie10-viewport-bug-workaround.js.baixa"></script>
+    <script src="${resources}/carpeta/ie10-viewport-bug-workaround.js"></script>
 
     <!-- Estilos -->
-    <link href="./carpeta/bootstrap.min.css" rel="stylesheet">
-    <link href="./carpeta/datatables.min.css" rel="stylesheet">
-    <link href="./carpeta/bootstrap-datetimepicker.min.css" rel="stylesheet">
-    <link href="./carpeta/open-iconic-bootstrap.css" rel="stylesheet">
+    <link href="${resources}/carpeta/bootstrap.min.css" rel="stylesheet">
+    <link href="${resources}/carpeta/datatables.min.css" rel="stylesheet">
+    <link href="${resources}/carpeta/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="${resources}/carpeta/open-iconic-bootstrap.css" rel="stylesheet">
 
     <!--  EXTERN  -->
-    <script type="text/javascript" src="./carpeta/carpeta.js.baixa"></script>
-    <link href="./carpeta/carpeta.css" rel="stylesheet">
+    <script type="text/javascript" src="${resources}/carpeta/carpeta.js"></script>
+    <link href="${resources}/carpeta/carpeta.css" rel="stylesheet">
     
     
 
@@ -123,7 +122,7 @@
                         $('#dataTable_paginate').DataTable({
                             "order": [[ 1, "desc" ]],
                             "language": {
-                                "url": "${baseurl}/static/i18n/${lang}.json"
+                                "url": "${resources}/i18n/${lang}.json"
                             }
                         });
                     } );

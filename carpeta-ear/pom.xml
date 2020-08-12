@@ -89,11 +89,34 @@
             <artifactId>carpeta-commons</artifactId>
             <version>1.1.2</version>
         </dependency>
+        
+        
+        <!-- XYZ ZZZ -->
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-integrations</artifactId>
             <version>1.1.2</version>
         </dependency>
+        
+        
+      <!-- ====================================== -->
+      <!-- =====  PLUGINS DE CARPETA FRONT  ===== -->
+      <!-- ====================================== -->
+        
+     <dependency>
+        <artifactId>pluginsib-carpetafront-api</artifactId>
+        <groupId>es.caib.carpeta.pluginsib-carpetafront</groupId>
+        <version>1.1.2</version>
+     </dependency>
+
+     <dependency>
+        <artifactId>pluginsib-carpetafront-sistra</artifactId>
+        <groupId>es.caib.carpeta.pluginsib-carpetafront</groupId>
+        <version>1.1.2</version>
+     </dependency>
+          
+
+
         
       <!-- ====================================== -->
       <!-- ===== PLUGINS DE USERINFORMATION ===== -->

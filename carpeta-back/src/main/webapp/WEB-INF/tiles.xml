@@ -197,6 +197,14 @@
     <definition name="usuariListSuperAdmin" extends="superadmin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariList.jsp" />
     </definition>
+    
+    
+    
+    <definition name="testPlugin" extends="superadmin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugin_contenidor.jsp" />
+    </definition>
+    
+    
 
     <!--  ===========  DESENVOLUPAMENT ================== -->
     

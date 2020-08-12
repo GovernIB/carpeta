@@ -118,9 +118,12 @@ public abstract class AbstractPluginFullUtilities extends AbstractPluginProperti
 
     
 
-    protected abstract void getJavascriptCSS(HttpServletRequest request,
-        String absolutePluginRequestPath, String relativePluginRequestPath, PrintWriter out,
-        Locale languageUI);
+
+    protected void getJavascriptCSS(HttpServletRequest request, String absolutePluginRequestPath,
+            String relativePluginRequestPath, PrintWriter out, Locale languageUI) {
+        
+    }
+
 
 
     
@@ -227,7 +230,7 @@ public abstract class AbstractPluginFullUtilities extends AbstractPluginProperti
     
     // TODO XYZ mogut a base
     
-    protected static final String ABSTRACT_SCAN_WEB_RES_BUNDLE = "scanwebapi";
+    protected static final String ABSTRACT_SCAN_WEB_RES_BUNDLE = "carpetafrontsistra";
     
 
     public void requestTimeOutError(String absolutePluginRequestPath,
@@ -268,13 +271,15 @@ public abstract class AbstractPluginFullUtilities extends AbstractPluginProperti
       String str = allRequestInfoToStr(request, titol, absolutePluginRequestPath,
           relativePluginRequestPath, query, ID);
       
+      log.error(str);
+      
       String msg = getTraduccio(ABSTRACT_SCAN_WEB_RES_BUNDLE, "notfound.error", locale, getTitle(locale),
           str);
       
       
       
 
-      log.error(msg);
+      
       
       try {
         response.sendError(httpStatusCode, msg); // bad request
@@ -402,7 +407,7 @@ public abstract class AbstractPluginFullUtilities extends AbstractPluginProperti
       return str.toString();
     }
 
-    protected String servletRequestInfoToStr(HttpServletRequest request) {
+    public static String servletRequestInfoToStr(HttpServletRequest request) {
       StringBuffer str = new StringBuffer(
           " +++++++++++++++++ SERVLET REQUEST INFO ++++++++++++++++++++++\n");
       str.append(" ++++ Scheme: " + request.getScheme() + "\n");

@@ -43,5 +43,27 @@ public class HibernateFileUtil {
         return 0;
       }
     }
+    
+    
+    public static String encryptString(String fileID) {
+        try {
+          return encrypter.encrypt(fileID);
+        } catch(Exception e) {
+          System.err.print("Error executant File Encrypter: " + e.getMessage());
+          e.printStackTrace(System.err);
+          return String.valueOf(fileID);
+        }
+      }
+    
+    
+    public static String decryptString(String encryptedData)  {
+        try {
+          return encrypter.decrypt(encryptedData);
+        } catch(Exception e) {
+          System.err.print("Error executant File Decrypter: " + e.getMessage());
+          e.printStackTrace(System.err);
+          return null;
+        }
+      }
 
 }

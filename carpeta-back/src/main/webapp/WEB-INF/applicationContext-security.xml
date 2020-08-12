@@ -11,6 +11,14 @@
 	<sec:http create-session="never" use-expressions="true"
 		auto-config="false"
 		entry-point-ref="preAuthenticatedProcessingFilterEntryPoint">
+        
+        
+        
+        <sec:headers>
+            <sec:frame-options  policy="SAMEORIGIN" />
+            <!--  <sec:hsts  disabled="true"/>  -->
+        </sec:headers>
+
 
 		<sec:csrf disabled="true" />
 
@@ -51,6 +59,11 @@
 		<sec:authentication-provider
 			ref="preAuthenticatedAuthenticationProvider" />
 	</sec:authentication-manager>
+
+
+    <bean id="defaultHttpFirewall" class="org.springframework.security.web.firewall.DefaultHttpFirewall"/>
+    <sec:http-firewall ref="defaultHttpFirewall"/>
+
 
 
 	<bean id="preAuthenticatedProcessingFilterEntryPoint"

@@ -23,3 +23,12 @@ nb-configuration.xml
 /carpeta-logic/src/main/resources/genapp_en.properties
 /carpeta-logic/src/main/resources/genapp_es.properties
 /carpeta-pluginsib/pluginsib-carpetafront/sistra/plugin.properties
+/carpeta-back/src/main/resources/carpeta_genapp_ca.properties
+/carpeta-back/src/main/resources/carpeta_genapp_en.properties
+/carpeta-back/src/main/resources/carpeta_genapp_es.properties
+/carpeta-back/src/main/resources/genapp_ca.properties
+/carpeta-back/src/main/resources/genapp_en.properties
+/carpeta-back/src/main/resources/genapp_es.properties
+/carpeta-back/src/main/resources/logicmissatges_ca.properties
+/carpeta-back/src/main/resources/logicmissatges_en.properties
+/carpeta-back/src/main/resources/logicmissatges_es.properties

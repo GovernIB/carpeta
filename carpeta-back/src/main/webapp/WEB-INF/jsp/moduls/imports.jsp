@@ -1,7 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<META HTTP-EQUIV="Access-Control-Allow-Origin" CONTENT="http://10.215.216.175:8080">
 
 <title>Benvingut a Carpeta</title>
 
@@ -21,8 +23,8 @@
 
 
 
-    <!-- Bootstrap TREE CSS
-    <link href="<c:url value="/css/bootstrap-tree.css"/>" rel="stylesheet"> -->
+    <!-- Bootstrap TREE CSS -->
+    <link href="<c:url value="/css/bootstrap-tree.css"/>" rel="stylesheet"> 
 
     <!-- Bootstrap DateTimepicker CSS   -->
     <link href="<c:url value="/css/datetimepicker/tempusdominus-bootstrap-4.css"/>" rel="stylesheet">
@@ -53,8 +55,8 @@
     --%>
 
 
-    <!-- Bootstrap TREE JS
-    <script src="<c:url value="/js/bootstrap-tree.js"/>"></script> -->
+    <!-- Bootstrap TREE JS -->
+    <script src="<c:url value="/js/bootstrap-tree.js"/>"></script>
 
 
        
