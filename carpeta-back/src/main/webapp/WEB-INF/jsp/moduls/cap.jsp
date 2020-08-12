@@ -116,9 +116,16 @@
 								href="<c:url value="/canviarPipella/superadmin"/>"> <i
 								class="fas fa-user-shield"></i> <fmt:message key="rol.superadmin" />
 							</a>
+                            <!--  XYZ ZZZ  Si desenvolupament activat !!!! -->
+                            <c:if test="${car:isDesenvolupament()}">
+                            <a class="dropdown-item ${(pipella eq 'webdb')?'active' : '' }"
+                                href="<c:url value="/canviarPipella/webdb"/>"> <i
+                                class="fas fa-user-shield"></i> <fmt:message key="rol.webdb" />
+                            </a>
+                            </c:if>
 						</sec:authorize>
-
-						<c:if test="${prefixLowercase}:isDesenvolupament()}">
+<%--
+						<c:if test="${car:isDesenvolupament()}">
 							<a
 								class="dropdown-item ${(pipella eq 'desenvolupament')?'active' : '' }"
 								href="<c:url value="/canviarPipella/desenvolupament"/>"> <i
@@ -126,6 +133,7 @@
 									key="desenvolupament" />
 							</a>
 						</c:if>
+                         --%>
 					</div>
 				</li>
 
