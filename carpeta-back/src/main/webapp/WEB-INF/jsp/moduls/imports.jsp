@@ -133,20 +133,29 @@
     function createDivModal(tituloDialog, msgDialog,url, formName) {
     $('body')
          .append(
-                 '<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">'
+                   '<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">'
+                 + '<div class="modal-dialog" role="document">'
+                 + '<div class="modal-content">'
+                 
                  + '<div class="modal-header">'
                  + '<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-remove"></i></button>'
                  + '<h3 id="myModalLabel">'+tituloDialog+'</h3>'
                  + '</div>'
+                 
                  + '<div class="modal-body">'
                  + '<p>'+msgDialog+'</p>'
                  + '</div>'
+                 
                  + '<div class="modal-footer">'
                  + '<button class="btn" data-dismiss="modal" aria-hidden="true">'+traduccions.type['boto.cancelar']+'</button>'
                  + '<button class="btn btn-danger" type="button" onclick="' 
                  + (formName? ('submitTo(\'' + formName + '\',') : 'goTo(') 
                  + '\''+url+'\')">'+traduccions.type['boto.continuar']+'</button>'
-                 + '</div></div>');
+                 + '</div>'
+                 
+                 + '</div>'
+                 + '</div>'
+                 + '</div>');
     }
     
     var traduccions = {
