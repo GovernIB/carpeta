@@ -69,8 +69,7 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
        log.info("startTestPlugin:: BASE = " + base);
        
        String view = "testPlugin";
-       
-       
+
        return CarpetaFrontModuleSuperAdminController.startPrivateSignatureProcess(request, response, view, pluginID, administrationID, base);
 
     }

@@ -44,7 +44,7 @@ es.caib.carpeta.pluginsib.carpetafront.sistra.development=true
 # Sistra 1
 es.caib.carpeta.pluginsib.carpetafront.sistra1.url=https://dev.caib.es/sistraback/zonaperws/services/v2/BackofficeFacade
 es.caib.carpeta.pluginsib.carpetafront.sistra1.user=$carpeta_sistra
-es.caib.carpeta.pluginsib.carpetafront.sistra1.pass=carpeta_sistra
+es.caib.carpeta.pluginsib.carpetafront.sistra1.pass=setpassword
 es.caib.carpeta.pluginsib.carpetafront.sistra1.level=2
 es.caib.carpeta.pluginsib.carpetafront.sistra1.web=https://www.caib.es/sistrafront/zonaperfront/protected/init.do', true);
 
