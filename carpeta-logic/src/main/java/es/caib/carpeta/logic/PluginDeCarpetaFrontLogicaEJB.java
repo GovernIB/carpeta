@@ -5,7 +5,6 @@ import es.caib.carpeta.pluginsib.carpetafront.api.ICarpetaFrontPlugin;
 
 import javax.ejb.Stateless;
 
-import org.fundaciobit.genapp.common.i18n.I18NException;
 
 /**
  *
@@ -25,6 +24,5 @@ public class PluginDeCarpetaFrontLogicaEJB extends AbstractPluginLogicaEJB<ICarp
     protected String getName() {
         return "Plugin de Carpeta Front";
     }
-
 
 }

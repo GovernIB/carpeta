@@ -34,6 +34,17 @@
         <servlet-name>PluginPrivateWebRequests</servlet-name>
         <url-pattern>/common/carpetafrontservlet/requestPlugin/*</url-pattern>
       </servlet-mapping>
+      
+      
+       <servlet>
+        <servlet-name>PluginPublicWebRequests</servlet-name>
+        <servlet-class>es.caib.carpeta.back.controller.common.CarpetaFrontModulePublicController</servlet-class>
+      </servlet>
+    
+      <servlet-mapping>
+        <servlet-name>PluginPublicWebRequests</servlet-name>
+        <url-pattern>/public/carpetafrontservlet/requestPlugin/*</url-pattern>
+      </servlet-mapping>
   
 
 
@@ -163,7 +174,7 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>carpeta_back-public</web-resource-name>            
-            <url-pattern>/applet/*</url-pattern>
+            <url-pattern>/public/*</url-pattern>
             <url-pattern>/css/*</url-pattern>
             <url-pattern>/img/*</url-pattern>
             <url-pattern>/js/*</url-pattern>

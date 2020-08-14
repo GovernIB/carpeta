@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.Base64;
 import java.util.Locale;
 
 /**
@@ -38,9 +39,9 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
     protected static Logger log = Logger.getLogger(AbstractCarpetaFrontModuleController.class);
 
-    public static final String PRIVATE_CONTEXTWEB = "/common/carpetafrontmodule";
+    public static final String PLUGINFRONT_PRIVATE_CONTEXTWEB = "/common/carpetafrontmodule";
 
-    // XYZ ZZZ
+    // XYZ ZZZ moure a Constants
     public static final String PUBLIC_CONTEXTWEB = "/public/carpetafrontmodule";
 
     public static final String SESSION_URL_BASE = "SESSION_URL_BASE";
@@ -50,6 +51,25 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
     @EJB(mappedName = PluginDeCarpetaFrontLogicaLocal.JNDI_NAME)
     protected PluginDeCarpetaFrontLogicaLocal pluginCarpetaFrontEjb;
+    
+    
+    
+    
+    
+    @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}/{urlBase}")
+    public ModelAndView showCarpetaFrontModule(HttpServletRequest request, HttpServletResponse response,
+            @PathVariable("pluginID") Long pluginID,
+            @PathVariable("administrationIDEncriptat") String administrationIDEncriptat,
+            @PathVariable("urlBase") String urlBase) throws Exception {
+        
+        String urlBaseDec = new String(Base64.getUrlDecoder().decode(urlBase), "utf-8");
+                
+                
+        request.getSession().setAttribute(SESSION_URL_BASE, urlBaseDec);
+        
+        return showCarpetaFrontModule(request, response, pluginID,administrationIDEncriptat);
+    }
+
 
     @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}")
     public ModelAndView showCarpetaFrontModule(HttpServletRequest request, HttpServletResponse response,
@@ -396,7 +416,7 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
         request.getSession().setAttribute(SESSION_URL_BASE, urlBase);
 
-        String context = isPublic ? PUBLIC_CONTEXTWEB : PRIVATE_CONTEXTWEB;
+        String context = isPublic ? PUBLIC_CONTEXTWEB : PLUGINFRONT_PRIVATE_CONTEXTWEB;
 
         String administrationIDEncriptat = HibernateFileUtil.encryptString(administrationID);
 

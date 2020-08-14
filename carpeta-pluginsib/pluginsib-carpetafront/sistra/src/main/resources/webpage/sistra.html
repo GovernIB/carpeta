@@ -41,7 +41,7 @@
 
 
     <!-- Contenido -->
-    <div class="container p-3carpeta">
+    <div class="container "> <!-- p-3carpeta -->
 
         <div class="my-3 p-3 bg-white rounded box-shadow">
 
@@ -55,7 +55,7 @@
     <div class="card-title border-bottom verde h5">${tramite_listado}</div>
 
 
-    <p class="card-text mb-5 lh15">${tramite_descripcion}</p>
+    <p class="card-text lh15">${tramite_descripcion}</p>
 
     <div class="card-body tablaRegistros">
 <!--  XYZ ZZZ Falta muntar URL Correcte -->
@@ -85,8 +85,8 @@
     </div>
     </form>
     <#if isget>
-        <div class="mt-5">
-        </div>
+        <!--  <div class="mt-5"> </div>  -->
+        <br/>
     <#else>
         <#if tramits?has_content>
             <div class="mt-5">

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping(value = AbstractCarpetaFrontModuleController.PUBLIC_CONTEXTWEB)
-public class CarpetaFrontModuleControllerPublic extends AbstractCarpetaFrontModuleController {
+public class CarpetaFrontModulePublicController extends AbstractCarpetaFrontModuleController {
 
     @Override
     public boolean isPublic() {

@@ -3,8 +3,7 @@
 	src: url('../fonts/Bariol_Regular.ttf');
 }
 
-body {
-  padding-top: 4.5rem;
+body {  
   font: normal 100% 'Bariol Regular', Arial, Helvetica, sans-serif;
   color: #333; 
   background-color: #eaeaea;

@@ -13,7 +13,7 @@ import es.caib.carpeta.back.controller.common.AbstractCarpetaFrontModuleControll
  *
  */
 @Controller
-@RequestMapping(value = AbstractCarpetaFrontModuleController.PRIVATE_CONTEXTWEB)
+@RequestMapping(value = AbstractCarpetaFrontModuleController.PLUGINFRONT_PRIVATE_CONTEXTWEB)
 public class CarpetaFrontModuleSuperAdminController extends AbstractCarpetaFrontModuleController {
 
     @Override
