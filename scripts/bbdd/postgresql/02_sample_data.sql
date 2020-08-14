@@ -16,7 +16,7 @@ INSERT INTO car_idioma VALUES ('en', 'English', true, 2);
 --
 
 
-INSERT INTO car_traduccio VALUES (1026);
+INSERT INTO car_traduccio VALUES (26);
 
 
 
@@ -27,9 +27,9 @@ INSERT INTO car_traduccio VALUES (1026);
 --
 
 
-INSERT INTO car_traducciomap VALUES (1026, 'en', 'Sistra v1 & v2');
-INSERT INTO car_traducciomap VALUES (1026, 'es', 'Sistra v1 & v2');
-INSERT INTO car_traducciomap VALUES (1026, 'ca', 'Sistra v1 & v2');
+INSERT INTO car_traducciomap VALUES (26, 'en', 'Sistra v1 & v2');
+INSERT INTO car_traducciomap VALUES (26, 'es', 'Sistra v1 & v2');
+INSERT INTO car_traducciomap VALUES (26, 'ca', 'Sistra v1 & v2');
 
 
 --
@@ -38,7 +38,7 @@ INSERT INTO car_traducciomap VALUES (1026, 'ca', 'Sistra v1 & v2');
 -- Data for Name: car_plugin; Type: TABLE DATA; Schema: public; Owner: carpeta
 --
 
-INSERT INTO car_plugin VALUES (1027, 1026, 'org.fundaciobit.pluginsib.carpetafront.sistra.SistraCarpetaFrontPlugin', 1, '# Common
+INSERT INTO car_plugin VALUES (27, 26, 'org.fundaciobit.pluginsib.carpetafront.sistra.SistraCarpetaFrontPlugin', 1, '# Common
 es.caib.carpeta.pluginsib.carpetafront.sistra.development=true
 
 # Sistra 1
@@ -55,7 +55,7 @@ es.caib.carpeta.pluginsib.carpetafront.sistra1.web=https://www.caib.es/sistrafro
 -- Data for Name: car_propietatglobal; Type: TABLE DATA; Schema: public; Owner: carpeta
 --
 
-INSERT INTO car_propietatglobal VALUES (1011, 'es.caib.carpeta.defaultentitycode', 'caib', '<p>Codi de l''entitat per defecte a la que es donar&agrave; d''alta autom&agrave;ticament a un usuari just despr&eacute;s d''haver-se creat a Carpeta</p>', NULL);
+INSERT INTO car_propietatglobal VALUES (24, 'es.caib.carpeta.defaultentitycode', 'caib', '<p>Codi de l''entitat per defecte a la que es donar&agrave; d''alta autom&agrave;ticament a un usuari just despr&eacute;s d''haver-se creat a Carpeta</p>', NULL);
 
 
 -- Completed on 2020-08-12 12:07:20

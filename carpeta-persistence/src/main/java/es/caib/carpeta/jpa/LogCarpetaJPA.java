@@ -13,6 +13,7 @@ import javax.persistence.SequenceGenerator;
 import org.hibernate.annotations.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.FetchType;
+import org.hibernate.annotations.Type;
 import javax.persistence.Id;
 
 
@@ -63,7 +64,8 @@ private static final long serialVersionUID = 1140880713L;
 	java.lang.String error;
 
 	@Column(name="excepcio",length = 2147483647)
-  @Lob
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
 	java.lang.String excepcio;
 
 

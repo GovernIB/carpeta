@@ -10,6 +10,7 @@ import org.hibernate.annotations.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import java.util.Set;
+import org.hibernate.annotations.Type;
 import java.util.HashSet;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
@@ -44,7 +45,8 @@ private static final long serialVersionUID = 190357384L;
 	java.lang.String classe;
 
 	@Column(name="propietats",length = 2147483647)
-  @Lob
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
 	java.lang.String propietats;
 
 	@Column(name="actiu",nullable = false,length = 1)
