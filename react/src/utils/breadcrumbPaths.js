@@ -1,35 +1,40 @@
 
 export const Inici  = [
-  {id: 'inici',label: 'breadcrumb.inici'}
+  {id: 'inici',label: 'breadcrumbInici'}
 ];
 
 export const Accessibilitat  = [
-  {id: 'inici',label: 'breadcrumb.inici'},
-  {id: 'accessibilitat',label: 'breadcrumb.accessibilitat'}
+  {id: 'javascript:newInici("contingut", "");',label: 'breadcrumbInici'},
+  {id: 'accessibilitat',label: 'breadcrumbAccessibilitat'}
 ];
 
 export const DadesPersonals  = [
-  {id: 'inici',label: 'breadcrumb.inici'},
-  {id: 'dadesPersonals',label: 'breadcrumb.dadesPersonals'}
+  {id: 'javascript:newInici("contingut", "");',label: 'breadcrumbInici'},
+  {id: 'dadesPersonals',label: 'breadcrumbDadesPersonals'}
 ];
 
 export const TramitsPendents  = [
-  {id: 'inici',label: 'breadcrumb.inici'},
-  {id: 'tramitsPendents',label: 'breadcrumb.tramitsPendents'}
+  {id: 'javascript:newInici("contingut", "");',label: 'breadcrumbInici'},
+  {id: 'tramitsPendents',label: 'breadcrumbTramitsPendents'}
 ];
 
 export const Registres  = [
-  {id: 'inici',label: 'breadcrumb.inici'},
-  {id: 'registres',label: 'breadcrumb.registres'}
+  {id: 'javascript:newInici("contingut", "");',label: 'breadcrumbInici'},
+  {id: 'registres',label: 'breadcrumbRegistres'}
 ];
 
 export const DetallRegistre  = [
-  {id: 'inici',label: 'breadcrumb.inici'},
-  {id: 'registres',label: 'breadcrumb.registres'},
-  {id: 'detallRegistre',label: 'breadcrumb.detallRegistre'}
+  {id: 'javascript:newInici("contingut", "");',label: 'breadcrumbInici'},
+  {id: 'javascript:newRegistres("contingut", "");',label: 'breadcrumbRegistres'},
+  {id: 'detallRegistre',label: 'breadcrumbDetallRegistre'}
 ];
 
 export const Notificacions  = [
-  {id: 'inici',label: 'breadcrumb.inici'},
-  {id: 'notificacions',label: 'breadcrumb.notificacions'}
+  {id: 'javascript:newInici("contingut", "");',label: 'breadcrumbInici'},
+  {id: 'notificacions',label: 'breadcrumbNotificacions'}
+];
+
+export const MapaWeb  = [
+  {id: 'javascript:newInici("contingut", "");',label: 'breadcrumbInici'},
+  {id: 'mapaWeb',label: 'breadcrumbMapaWeb'}
 ];

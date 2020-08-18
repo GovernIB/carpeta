@@ -68,6 +68,24 @@ img:hover {
 	font: normal 100% 'Noto Sans', 'TrebuchetMS', 'Trebuchet MS', Arial, Helvetica, sans-serif;
 	vertical-align: baseline;
 }
+.imc--logoclave{ 
+	background-image: url(../images/solicitar_clave_acceso_dgt.png); 
+	background-repeat: no-repeat;
+	width: 180px;
+    height: 87px;
+}
+.imc--logowai{ 
+	background-image: url(../images/wcag2AA.png); 
+	background-repeat: no-repeat;
+	width: 88px;
+    height: 31px;
+}
+.upper{
+	text-transform: uppercase;
+}
+.clickable-row{
+	cursor: pointer;
+}
 
 
 /* Canvis per React */
