@@ -93,7 +93,7 @@ public class LoginController {
             e.printStackTrace();
         }
 
-        return new ModelAndView("inicio");
+        return new ModelAndView("inici");
 
     }
 
@@ -107,7 +107,7 @@ public class LoginController {
         if (session != null) {
             session.invalidate();
         }
-        return "redirect:/inicio";
+        return "redirect:/inici";
 
     }
 

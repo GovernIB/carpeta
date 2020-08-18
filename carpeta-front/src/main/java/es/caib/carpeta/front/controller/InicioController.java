@@ -3,7 +3,15 @@ package es.caib.carpeta.front.controller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 
 @Controller
@@ -16,37 +24,37 @@ public class InicioController {
 
 
 
-//    @RequestMapping(value={"/", "/inicio"})
-//    public ModelAndView inicio(HttpServletRequest request) {
+    @RequestMapping(value={"/", "/inici"})
+    public ModelAndView inicio(HttpServletRequest request) {
+
+        ModelAndView mav = new ModelAndView("inici");
+
+        return mav;
+
+    }
+
+//    @RequestMapping(value={"/index"})
+//    public ModelAndView index(HttpServletRequest request) {
 //
-//        ModelAndView mav = new ModelAndView("inicio");
-//
-//        Locale loc = LocaleContextHolder.getLocale();
-//        mav.addObject("title_page", "CARPETA CIUTADANA - Inici JSP");
+//        ModelAndView mav = new ModelAndView("index.html");
 //
 //        return mav;
 //
 //    }
 
-//    @RequestMapping(value={"/", "/inici"})
-//    public ModelAndView inici(HttpServletRequest request) {
-//
-//        ModelAndView mav = new ModelAndView("inici");
-//
-//        return mav;
-//
-//    }
 
-//    @RequestMapping(value = { "/accesibilidad"})
-//    public ModelAndView accesibilidad(HttpServletRequest request) {
+//    @RequestMapping(value = { "/accessibilitat"})
+//    public String accessibilitat(HttpServletRequest request) {
 //
-//        ModelAndView mav = new ModelAndView("accesibilidad");
+//        ModelAndView mav = new ModelAndView("accessibilitat");
 //
-//        mav.addObject("breadcrumb", Arrays.asList("inicio", "accesibilidad"));
-//        Locale loc = LocaleContextHolder.getLocale();
-//        mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.accesibilidad"));
+//        log.info("ENTRAMMM ACCESSIBILITAT");
 //
-//        return mav;
+////        mav.addObject("breadcrumb", Arrays.asList("inici", "accessibilitat"));
+////        Locale loc = LocaleContextHolder.getLocale();
+////        mav.addObject("title_page", "HEM ENTRAT ::::");
+//
+//        return "redirect:/accessibilitat";
 //    }
 //
 //    @RequestMapping(value = { "/datosPersonales"})

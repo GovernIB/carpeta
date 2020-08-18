@@ -50,9 +50,9 @@ public class CarpetaSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.csrf().disable().authorizeRequests().antMatchers("/","/inici", "/index*", "/sortir", "/locales/**","/static/**", "/accessibilitat",
-                  "/pluginfront","/pluginfront/**", // XYZ ZZZ
-                  "/static/**", "/locales**", "/fonts/**", "/files/**", "/css/**" ,"/js/jquery-3.5.0.js" ,  "/js/**", "/*.js", "/*.json", "/*.ico").permitAll()
+        http.authorizeRequests()
+                .antMatchers("/", "/inici", "/sortir", "/dist/**", "/src/**", "/utils/**", "/assets/**", "/js/**", "/pluginfront","/pluginfront/**")
+                .permitAll()
                 .and()
                 .authorizeRequests().anyRequest().access("isAuthenticated()")
                 .and()

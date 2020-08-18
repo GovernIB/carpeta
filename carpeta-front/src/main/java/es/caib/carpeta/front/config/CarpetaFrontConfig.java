@@ -3,6 +3,7 @@ package es.caib.carpeta.front.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -14,15 +15,17 @@ import org.springframework.web.servlet.view.ResourceBundleViewResolver;
 @ComponentScan(basePackages = {"es.caib.carpeta.front"})
 public class CarpetaFrontConfig extends WebMvcConfigurerAdapter {
 
-
+// REACT
     @Override
     public void addResourceHandlers(
             ResourceHandlerRegistry registry) {
 
-        registry.addResourceHandler("/static/**")
-                .addResourceLocations("/static/");
+        registry.addResourceHandler("/dist/**")
+                .addResourceLocations("/dist/");
+        registry.addResourceHandler("/src/**")
+                .addResourceLocations("/src/");
         registry.addResourceHandler("/*.js")
-                .addResourceLocations("/static/js/");
+                .addResourceLocations("/src/assets/js/");
         registry.addResourceHandler("/*.json")
                 .addResourceLocations("/");
         registry.addResourceHandler("/*.ico")
@@ -30,6 +33,18 @@ public class CarpetaFrontConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/index.html")
                 .addResourceLocations("/index.html");
     }
+
+    // JSP
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("swagger-ui.html")
+//                .addResourceLocations("classpath:/META-INF/resources/");
+//
+//        registry.addResourceHandler("/webjars/**")
+//                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+//
+//        registry.addResourceHandler("/static/**").addResourceLocations("/static/");
+//
+//    }
 
     // JSP
     @Bean
@@ -40,20 +55,22 @@ public class CarpetaFrontConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
-    @Bean
-    public ViewResolver resourceBundleViewResolver() {
-        ResourceBundleViewResolver bean = new ResourceBundleViewResolver();
-        bean.setBasename("views/pages");
-        return bean;
-    }
+    // REACT
+//    @Bean
+//    public ViewResolver resourceBundleViewResolver() {
+//        ResourceBundleViewResolver bean = new ResourceBundleViewResolver();
+//        bean.setBasename("views/pages");
+//        return bean;
+//    }
 
-    @Bean
-    public ViewResolver getViewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/views/pages/");
-        resolver.setSuffix(".jsp");
-        return resolver;
-    }
+    // REACT
+//    @Bean
+//    public ViewResolver getViewResolver() {
+//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+//        resolver.setPrefix("/WEB-INF/views/pages/");
+//        resolver.setSuffix(".jsp");
+//        return resolver;
+//    }
 //
 //    @Override
 //    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer){
@@ -65,13 +82,13 @@ public class CarpetaFrontConfig extends WebMvcConfigurerAdapter {
 //        registry.addViewController("/").setViewName("forward:/inicio");
 //    }
 //
-//    @Bean
-//    public ResourceBundleMessageSource messageSource() {
-//        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-//        messageSource.setBasename("mensajes");
-//        messageSource.setDefaultEncoding("UTF-8");
-//        return messageSource;
-//    }
+    @Bean
+    public ResourceBundleMessageSource messageSource() {
+        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        messageSource.setBasename("missatges");
+        messageSource.setDefaultEncoding("UTF-8");
+        return messageSource;
+    }
 //
 //    @Bean(name = "localeResolver")
 //    public SessionLocaleResolver getSessionLocaleResolver(){
