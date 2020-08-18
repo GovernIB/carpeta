@@ -32,7 +32,7 @@
      
       <%-- BOTO DE NOU ELEMENT EN LLISTAT  --%>
     <c:if test="${__theFilterForm.addButtonVisible}">
-      <a class="btn btn-small btn-success float-right" role="button" 
+      <a class="btn btn-sm btn-success float-right"  style="color: white;" role="button" 
         href="<c:url value="${contexte}/new"/>"> <i class="fas fa-plus-circle"></i>
        <fmt:message key="genapp.createtitle" >
          <fmt:param value="${entityname}"/>
@@ -41,7 +41,7 @@
     </c:if>
       <%-- BOTO DE ESBORRAT MULTIPLE  --%>
     <c:if test="${__theFilterForm.deleteSelectedButtonVisible && __theFilterForm.visibleMultipleSelection && not empty accesItems}">
-      <a class="btn btn-danger btn-small float-right" style="color: white;" href="#myModal"
+      <a class="btn btn-danger btn-sm float-right" style="color: white;" href="#myModal"
         onclick="openModalSubmit('<c:url value="${contexte}/deleteSelected"/>','show', 'acces');"
         title="<fmt:message key="genapp.delete"/>">
         <i class="fas fa-trash icon-white"></i>
@@ -55,7 +55,7 @@
         <c:url var="thehref" value="${thelink}"/>
         <c:url var="thelink" value=""/>
       </c:if>
-<a class="btn btn-small ${button.type} float-right" style="${(empty button.type)? '' : 'color: white;'}"  href="${thehref}" onclick="${thelink}" title="<fmt:message key="${button.codeText}"/>">
+<a class="btn btn-sm ${button.type} float-right" style="${(empty button.type)? '' : 'color: white;'}"  href="${thehref}" onclick="${thelink}" title="<fmt:message key="${button.codeText}"/>">
          <i class="${button.icon}"></i>
          <fmt:message key="${button.codeText}"/>
       </a>

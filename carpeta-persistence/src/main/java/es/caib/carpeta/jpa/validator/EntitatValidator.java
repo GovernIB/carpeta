@@ -65,6 +65,17 @@ public class EntitatValidator<I extends Entitat>
       }
     }
 
+    if (__vr.getFieldErrorCount(CODI) == 0) {
+      String val = __target__.getCodi();
+      if (val != null && val.trim().length() != 0) {
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile("[a-z]{3,30}");
+        if (!p.matcher(val).matches()) {
+          __vr.rejectValue(CODI, "genapp.validation.malformed",
+             new org.fundaciobit.genapp.common.i18n.I18NArgumentString(val), new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CODI)));
+        }
+      }
+    }
+
     if (__vr.getFieldErrorCount(CODIDIR3) == 0) {
       java.lang.String __codidir3 = __target__.getCodiDir3();
       if (__codidir3!= null && __codidir3.length() > 255) {
