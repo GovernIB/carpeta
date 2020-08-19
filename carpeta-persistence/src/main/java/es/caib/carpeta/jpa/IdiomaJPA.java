@@ -12,7 +12,7 @@ import javax.persistence.Id;
 @SuppressWarnings("deprecation")
 @Entity
 @Table(name = "car_idioma" )
-@SequenceGenerator(name="CARPETA_SEQ", sequenceName="car_carpeta_seq", allocationSize=1)
+@SequenceGenerator(name="IDIOMA_SEQ", sequenceName="car_idioma_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class IdiomaJPA implements Idioma {
 

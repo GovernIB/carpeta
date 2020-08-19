@@ -9,7 +9,7 @@
 
     <artifactId>carpeta-integrations</artifactId>
     <packaging>jar</packaging>
-    <name>carpeta - INTEGRATIONS</name>
+    <name>Carpeta - Integrations</name>
     <description>Mòdul de integracions amb sistemes externs</description>
 
     <properties>

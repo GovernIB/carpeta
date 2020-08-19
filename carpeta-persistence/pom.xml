@@ -1,111 +1,79 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <artifactId>carpeta</artifactId>
-        <groupId>es.caib.carpeta</groupId>
-        <version>1.1.2</version>
-    </parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <artifactId>carpeta-persistence</artifactId>
-    <packaging>jar</packaging>
-    <name>carpeta - PERSISTENCE</name>
-    <description>Capa de persistència de carpeta</description>
+	<groupId>es.caib.carpeta</groupId>
+	<artifactId>carpeta-persistence</artifactId>
+	<packaging>jar</packaging>
 
-    <dependencies>
-        <!-- Especificacions i llibreries proporcionades per JBoss -->
-        <dependency>
-            <groupId>org.jboss.spec</groupId>
-            <artifactId>jboss-javaee-8.0</artifactId>
-            <type>pom</type>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <!-- Altres mòduls del projecte -->
-        <dependency>
-            <artifactId>carpeta-commons</artifactId>
-            <groupId>es.caib.carpeta</groupId>
-            <version>1.1.2</version>
-            <scope>provided</scope>
-        </dependency>
-        
-        <dependency>
-            <artifactId>carpeta-model</artifactId>
-            <groupId>es.caib.carpeta</groupId>
-            <version>1.1.2</version>
-            <scope>provided</scope>
-        </dependency>
-        
-        <!-- Anotacions de documentació de openapi -->
-        <dependency>
-            <groupId>org.eclipse.microprofile.openapi</groupId>
-            <artifactId>microprofile-openapi-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <!-- Dependències de test -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        
+	<parent>
+		<groupId>es.caib.carpeta</groupId>
+		<artifactId>carpeta</artifactId>
+		<version>1.1.2</version>
+	</parent>
+
+	<name>Carpeta - persistence</name>
+
+	<dependencies>
+
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<scope>provided</scope>
+			<groupId>es.caib.carpeta</groupId>
+			<artifactId>carpeta-model</artifactId>
+			<version>${project.version}</version>
+			<type>jar</type>
 		</dependency>
 
-        <dependency>
+		<dependency>
+			<groupId>es.caib.carpeta</groupId>
+			<artifactId>carpeta-commons</artifactId>
+			<version>${project.version}</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
 			<groupId>org.fundaciobit.genapp</groupId>
 			<artifactId>genapp-core</artifactId>
 			<version>${genapp.version}</version>
 			<scope>compile</scope>
 		</dependency>
 
-        <!-- Per tests EJB amb Arquillian -->
-        <dependency>
-            <groupId>org.jboss.arquillian.junit</groupId>
-            <artifactId>arquillian-junit-container</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
-    <build>
-        <finalName>${project.artifactId}-${project.version}</finalName>
-    </build>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<!-- Anotacions de documentació de openapi -->
+		<dependency>
+			<groupId>org.eclipse.microprofile.openapi</groupId>
+			<artifactId>microprofile-openapi-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
 
-    <profiles>
-        <!-- Realitza els tests arrancant automàticament un JBoss ubicat a la variable d'entorn JBOSS_HOME -->
-        <profile>
-            <id>arq-jboss-managed</id>
-            <properties>
-                <maven.test.skip>false</maven.test.skip>
-            </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>org.wildfly.arquillian</groupId>
-                    <artifactId>wildfly-arquillian-container-managed</artifactId>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-        <!-- Realitza els tests connectant a una instància de JBoss en marxa a localhost -->
-        <profile>
-            <id>arq-jboss-remote</id>
-            <properties>
-                <maven.test.skip>false</maven.test.skip>
-            </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>org.wildfly.arquillian</groupId>
-                    <artifactId>wildfly-arquillian-container-remote</artifactId>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<!-- Dependències de test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<finalName>${project.artifactId}-${project.version}</finalName>
+	</build>
+
+
 </project>

@@ -1,7 +1,7 @@
 package  es.caib.carpeta.jpa;
 
 //import java.util.List;
-//
+
 //import javax.persistence.EntityManager;
 //import javax.validation.constraints.NotNull;
 

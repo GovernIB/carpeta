@@ -13,7 +13,7 @@
 	</parent>
 
 
-	<name>Carpeta Logic</name>
+	<name>Carpeta - Logic</name>
 
 
 	<dependencies>
@@ -47,8 +47,8 @@
 		</dependency>
 
         <dependency>
-            <artifactId>pluginsib-carpetafront-api</artifactId>
-            <groupId>es.caib.carpeta.pluginsib-carpetafront</groupId>
+            <artifactId>carpeta-pluginsib-carpetafront-api</artifactId>
+            <groupId>es.caib.carpeta</groupId>
             <version>${project.version}</version>
         </dependency>
 

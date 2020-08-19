@@ -23,7 +23,7 @@ import javax.persistence.Id;
 @SuppressWarnings("deprecation")
 @Entity
 @Table(name = "car_plugin" )
-@SequenceGenerator(name="CARPETA_SEQ", sequenceName="car_carpeta_seq", allocationSize=1)
+@SequenceGenerator(name="PLUGIN_SEQ", sequenceName="car_plugin_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class PluginJPA implements Plugin {
 
@@ -32,7 +32,7 @@ public class PluginJPA implements Plugin {
 private static final long serialVersionUID = 190357384L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="CARPETA_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="PLUGIN_SEQ")
 	@Index(name="car_plugin_pk_i")
 	@Column(name="pluginid",nullable = false,length = 19)
 	long pluginID;

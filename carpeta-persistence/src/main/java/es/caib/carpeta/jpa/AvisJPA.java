@@ -18,7 +18,7 @@ import javax.persistence.Id;
 @SuppressWarnings("deprecation")
 @Entity
 @Table(name = "car_avis" )
-@SequenceGenerator(name="CARPETA_SEQ", sequenceName="car_carpeta_seq", allocationSize=1)
+@SequenceGenerator(name="AVIS_SEQ", sequenceName="car_avis_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class AvisJPA implements Avis {
 
@@ -27,7 +27,7 @@ public class AvisJPA implements Avis {
 private static final long serialVersionUID = 1036906268L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="CARPETA_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="AVIS_SEQ")
 	@Index(name="car_avis_pk_i")
 	@Column(name="avisid",nullable = false,length = 19)
 	long avisID;

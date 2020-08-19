@@ -11,7 +11,8 @@
 
     <artifactId>carpeta-back</artifactId>
     <packaging>war</packaging>
-    <name>carpeta - BACK</name>
+
+    <name>Carpeta - Back</name>
     <description>Backoffice de carpeta</description>
 
     <dependencies>

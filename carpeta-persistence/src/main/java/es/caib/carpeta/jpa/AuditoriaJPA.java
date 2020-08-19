@@ -18,7 +18,7 @@ import javax.persistence.Id;
 @SuppressWarnings("deprecation")
 @Entity
 @Table(name = "car_auditoria" )
-@SequenceGenerator(name="CARPETA_SEQ", sequenceName="car_carpeta_seq", allocationSize=1)
+@SequenceGenerator(name="AUDITORIA_SEQ", sequenceName="car_auditoria_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class AuditoriaJPA implements Auditoria {
 
@@ -27,7 +27,7 @@ public class AuditoriaJPA implements Auditoria {
 private static final long serialVersionUID = 129744773L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="CARPETA_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="AUDITORIA_SEQ")
 	@Index(name="car_auditoria_pk_i")
 	@Column(name="auditoriaid",nullable = false,length = 19)
 	long auditoriaID;

@@ -9,7 +9,7 @@
 
     <artifactId>carpeta-ejb</artifactId>
     <packaging>jar</packaging>
-    <name>carpeta - EJB</name>
+    <name>Carpeta - EJB</name>
     <description>Mòdul EJB de carpeta</description>
 
     <dependencies>

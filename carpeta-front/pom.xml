@@ -9,7 +9,7 @@
 
     <artifactId>carpeta-front</artifactId>
     <packaging>war</packaging>
-    <name>carpeta - FRONT</name>
+    <name>Carpeta - Front</name>
     <description>Front de carpeta</description>
 
     <dependencies>

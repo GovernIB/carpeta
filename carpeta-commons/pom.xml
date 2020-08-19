@@ -9,7 +9,7 @@
 
     <artifactId>carpeta-commons</artifactId>
     <packaging>jar</packaging>
-    <name>carpeta - COMMONS</name>
+    <name>Carpeta - Commons</name>
     <description>Mòdul de classes i recursos comuns carpeta</description>
 
     <properties>

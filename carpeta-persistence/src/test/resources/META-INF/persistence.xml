@@ -1,28 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
-    <!--
-    
-    Unitat de persistència de test que es pot utilitzar per realitzar proves o per generar els scripts de base de dades
-    -->
-    <persistence-unit name="testPU" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="carpetaPULocal" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <!-- Llista de classes persistents -->
-        <class>es.caib.carpeta.persistence.Acceso</class>
-        <class>es.caib.carpeta.persistence.Archivo</class>
-        <class>es.caib.carpeta.persistence.Auditoria</class>
-        <class>es.caib.carpeta.persistence.Aviso</class>
-        <class>es.caib.carpeta.persistence.Enlace</class>
-        <class>es.caib.carpeta.persistence.Entidad</class>
-        <class>es.caib.carpeta.persistence.Estadistica</class>
-        <class>es.caib.carpeta.persistence.Log</class>
-        <class>es.caib.carpeta.persistence.Plugin</class>
-        <class>es.caib.carpeta.persistence.PropiedadGlobal</class>
-        <class>es.caib.carpeta.persistence.PropiedadPlugin</class>
-        <class>es.caib.carpeta.persistence.Usuario</class>
-        <class>es.caib.carpeta.persistence.UsuarioEntidad</class>
+		<class>es.caib.carpeta.jpa.AccesJPA</class>
+		<class>es.caib.carpeta.jpa.AuditoriaJPA</class>
+		<class>es.caib.carpeta.jpa.AvisJPA</class>
+		<class>es.caib.carpeta.jpa.EnllazJPA</class>
+		<class>es.caib.carpeta.jpa.EntitatJPA</class>
+		<class>es.caib.carpeta.jpa.EstadisticaJPA</class>
+		<class>es.caib.carpeta.jpa.FitxerJPA</class>
+		<class>es.caib.carpeta.jpa.IdiomaJPA</class>
+		<class>es.caib.carpeta.jpa.LogCarpetaJPA</class>
+		<class>es.caib.carpeta.jpa.PluginJPA</class>
+		<class>es.caib.carpeta.jpa.PropietatGlobalJPA</class>
+		<class>es.caib.carpeta.jpa.TraduccioJPA</class>
+		<class>es.caib.carpeta.jpa.TraduccioMapJPA</class>
+		<class>es.caib.carpeta.jpa.UsuariJPA</class>
+		<class>es.caib.carpeta.jpa.UsuariEntitatJPA</class>
 
         <!-- Desactivar cache -->
         <shared-cache-mode>NONE</shared-cache-mode>
@@ -30,30 +29,7 @@
         <validation-mode>NONE</validation-mode>
 
         <properties>
-            <!-- Per les propietats estandard veure punt 8.2.1.9 de l'especificació JPA -->
-
-            <!-- Configuració per generar els scripts de creació de la base de dades -->
-            <property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>
-            <property name="javax.persistence.schema-generation.scripts.create-target" value="target/create.sql"/>
-            <property name="javax.persistence.schema-generation.scripts.drop-target" value="target/drop.sql"/>
-
-            <!--
-            Propietats específiques de Hibernate
-            https://docs.jboss.org/hibernate/orm/5.3/userguide/html_single/Hibernate_User_Guide.html#configurations
-            -->
-            <property name="hibernate.show_sql" value="false"/>
-            <property name="hibernate.format_sql" value="false"/>
-            <property name="hibernate.hbm2ddl.delimiter" value=";"/>
-
-            <!--
-            Si no indicam una connexió de bdd (per la generació no cal), Hibernate necessita que indiquem
-            el dialecte que emprarà per la generació.
-            Postgresql:    org.hibernate.dialect.PostgreSQL95Dialect
-            Oracle:        org.hibernate.dialect.Oracle12cDialect
-            -->
-            <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect"/>
-            <!--<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>-->
-
+         
         </properties>
     </persistence-unit>
 </persistence>

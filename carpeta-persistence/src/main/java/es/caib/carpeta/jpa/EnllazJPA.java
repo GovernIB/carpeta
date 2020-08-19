@@ -18,7 +18,7 @@ import javax.persistence.Id;
 @SuppressWarnings("deprecation")
 @Entity
 @Table(name = "car_enllaz" )
-@SequenceGenerator(name="CARPETA_SEQ", sequenceName="car_carpeta_seq", allocationSize=1)
+@SequenceGenerator(name="ENLLAZ_SEQ", sequenceName="car_enllaz_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class EnllazJPA implements Enllaz {
 
@@ -27,7 +27,7 @@ public class EnllazJPA implements Enllaz {
 private static final long serialVersionUID = -1473310087L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="CARPETA_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ENLLAZ_SEQ")
 	@Index(name="car_enllaz_pk_i")
 	@Column(name="enllazid",nullable = false,length = 19)
 	long enllazID;

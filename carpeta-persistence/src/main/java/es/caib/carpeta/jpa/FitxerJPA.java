@@ -18,7 +18,7 @@ import javax.persistence.Id;
 @SuppressWarnings("deprecation")
 @Entity
 @Table(name = "car_fitxer" )
-@SequenceGenerator(name="CARPETA_SEQ", sequenceName="car_carpeta_seq", allocationSize=1)
+@SequenceGenerator(name="FITXER_SEQ", sequenceName="car_fitxer_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class FitxerJPA implements Fitxer {
 
@@ -27,7 +27,7 @@ public class FitxerJPA implements Fitxer {
 private static final long serialVersionUID = -252813913L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="CARPETA_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="FITXER_SEQ")
 	@Index(name="car_fitxer_pk_i")
 	@Column(name="fitxerid",nullable = false,length = 19)
 	long fitxerID;

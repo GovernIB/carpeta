@@ -19,8 +19,8 @@ import javax.persistence.Id;
 @SuppressWarnings("deprecation")
 @Entity
 @Table(name = "car_usuarientitat"  , uniqueConstraints = {
-            @UniqueConstraint( columnNames={"usuariid","entitatid"}) } )
-@SequenceGenerator(name="CARPETA_SEQ", sequenceName="car_carpeta_seq", allocationSize=1)
+            @UniqueConstraint(name="car_usuent_usu_ent_uk", columnNames={"usuariid","entitatid"}) } )
+@SequenceGenerator(name="USUARIENTITAT_SEQ", sequenceName="car_usuarientitat_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class UsuariEntitatJPA implements UsuariEntitat {
 
@@ -29,7 +29,7 @@ public class UsuariEntitatJPA implements UsuariEntitat {
 private static final long serialVersionUID = 2031334771L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="CARPETA_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="USUARIENTITAT_SEQ")
 	@Index(name="car_usuarientitat_pk_i")
 	@Column(name="usuarientitatid",nullable = false,length = 19)
 	long usuariEntitatID;

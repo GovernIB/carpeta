@@ -1,26 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
     <persistence-unit name="carpetaPU" transaction-type="JTA">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <jta-data-source>java:jboss/datasources/carpetaDS</jta-data-source>
 
-        <!-- Llista de classes persistents -->
-        <class>es.caib.carpeta.persistence.Acceso</class>
-        <class>es.caib.carpeta.persistence.Archivo</class>
-        <class>es.caib.carpeta.persistence.Auditoria</class>
-        <class>es.caib.carpeta.persistence.Aviso</class>
-        <class>es.caib.carpeta.persistence.Enlace</class>
-        <class>es.caib.carpeta.persistence.Entidad</class>
-        <class>es.caib.carpeta.persistence.Estadistica</class>
-        <class>es.caib.carpeta.persistence.Log</class>
-        <class>es.caib.carpeta.persistence.Plugin</class>
-        <class>es.caib.carpeta.persistence.PropiedadGlobal</class>
-        <class>es.caib.carpeta.persistence.PropiedadPlugin</class>
-        <class>es.caib.carpeta.persistence.Usuario</class>
-        <class>es.caib.carpeta.persistence.UsuarioEntidad</class>
-
+		<class>es.caib.carpeta.jpa.AccesJPA</class>
+		<class>es.caib.carpeta.jpa.AuditoriaJPA</class>
+		<class>es.caib.carpeta.jpa.AvisJPA</class>
+		<class>es.caib.carpeta.jpa.EnllazJPA</class>
+		<class>es.caib.carpeta.jpa.EntitatJPA</class>
+		<class>es.caib.carpeta.jpa.EstadisticaJPA</class>
+		<class>es.caib.carpeta.jpa.FitxerJPA</class>
+		<class>es.caib.carpeta.jpa.IdiomaJPA</class>
+		<class>es.caib.carpeta.jpa.LogCarpetaJPA</class>
+		<class>es.caib.carpeta.jpa.PluginJPA</class>
+		<class>es.caib.carpeta.jpa.PropietatGlobalJPA</class>
+		<class>es.caib.carpeta.jpa.TraduccioJPA</class>
+		<class>es.caib.carpeta.jpa.TraduccioMapJPA</class>
+		<class>es.caib.carpeta.jpa.UsuariJPA</class>
+		<class>es.caib.carpeta.jpa.UsuariEntitatJPA</class>
 
         <!-- Activar cache només per aquelles entitats on volguem expressament -->
         <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
@@ -28,36 +30,8 @@
         <validation-mode>CALLBACK</validation-mode>
 
         <properties>
-            <!-- Per les propietats estandard veure punt 8.2.1.9 de l'especificació JPA -->
-
-            <!--
-            Recrea automàticament la BDD. Aquesta opció MAI s'ha d'emprar en entorn que no sigui de proves
-            -->
-            <!--   
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-          -->
-
-            <!--
-            Propietats específiques de Hibernate
-            https://docs.jboss.org/hibernate/orm/5.3/userguide/html_single/Hibernate_User_Guide.html#configurations
-            -->
-            <!--
-            Normalment Hibernate obté el dialecte correcte a partir de les metadades de la connexió.
-            Per mor d'un bug a Hibernate 5.3.x, amb versions d'Oracle superiors a la 12 (18 o 19), no ho resòl bé.
-                https://github.com/hibernate/hibernate-orm/pull/3018
-            Cal fixar la següent propietat
-            -->
-
-           <!--
-            <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect"/>
-            
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
-            
-            -->
-
-
-            <!-- Afecta molt al rendiment. A entorn de producció, sempre a false -->
-            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.dialect" value="${es.caib.carpeta.hibernate.dialect}" />
+            <property name="hibernate.query.substitutions" value="${es.caib.carpeta.hibernate.query.substitutions}"/>
         </properties>
     </persistence-unit>
 </persistence>

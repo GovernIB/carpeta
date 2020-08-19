@@ -18,7 +18,7 @@ import javax.persistence.Id;
 @SuppressWarnings("deprecation")
 @Entity
 @Table(name = "car_estadistica" )
-@SequenceGenerator(name="CARPETA_SEQ", sequenceName="car_carpeta_seq", allocationSize=1)
+@SequenceGenerator(name="ESTADISTICA_SEQ", sequenceName="car_estadistica_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class EstadisticaJPA implements Estadistica {
 
@@ -27,7 +27,7 @@ public class EstadisticaJPA implements Estadistica {
 private static final long serialVersionUID = -2066559243L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="CARPETA_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ESTADISTICA_SEQ")
 	@Index(name="car_estadistica_pk_i")
 	@Column(name="estadisticaid",nullable = false,length = 19)
 	long estadisticaID;

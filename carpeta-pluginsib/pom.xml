@@ -5,7 +5,7 @@
     <version>1.1.2</version>
     <artifactId>carpeta-pluginsib</artifactId>
     <packaging>pom</packaging>
-    <name>CARPETA - PLUGINSIB</name>
+    <name>Carpeta - PluginsIB</name>
     <modules>
         <module>pluginsib-carpetafront</module>
     </modules>

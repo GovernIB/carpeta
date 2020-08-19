@@ -9,7 +9,7 @@
 
     <artifactId>carpeta-ear</artifactId>
     <packaging>ear</packaging>
-    <name>carpeta - EAR</name>
+    <name>Carpeta - EAR</name>
     <description>Arxiu d'aplicació EAR de carpeta</description>
 
     <properties>
@@ -104,14 +104,14 @@
       <!-- ====================================== -->
         
      <dependency>
-        <artifactId>pluginsib-carpetafront-api</artifactId>
-        <groupId>es.caib.carpeta.pluginsib-carpetafront</groupId>
+        <artifactId>carpeta-pluginsib-carpetafront-api</artifactId>
+        <groupId>es.caib.carpeta</groupId>
         <version>1.1.2</version>
      </dependency>
 
      <dependency>
-        <artifactId>pluginsib-carpetafront-sistra</artifactId>
-        <groupId>es.caib.carpeta.pluginsib-carpetafront</groupId>
+        <artifactId>carpeta-pluginsib-carpetafront-sistra</artifactId>
+        <groupId>es.caib.carpeta</groupId>
         <version>1.1.2</version>
      </dependency>
           

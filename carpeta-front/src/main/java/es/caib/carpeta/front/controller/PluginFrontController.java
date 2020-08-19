@@ -1,7 +1,6 @@
 package es.caib.carpeta.front.controller;
 
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.Base64;
 import java.util.List;
 

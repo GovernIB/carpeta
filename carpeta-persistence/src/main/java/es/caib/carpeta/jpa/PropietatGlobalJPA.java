@@ -18,7 +18,7 @@ import javax.persistence.Id;
 @SuppressWarnings("deprecation")
 @Entity
 @Table(name = "car_propietatglobal" )
-@SequenceGenerator(name="CARPETA_SEQ", sequenceName="car_carpeta_seq", allocationSize=1)
+@SequenceGenerator(name="PROPIETATGLOBAL_SEQ", sequenceName="car_propietatglobal_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class PropietatGlobalJPA implements PropietatGlobal {
 
@@ -27,7 +27,7 @@ public class PropietatGlobalJPA implements PropietatGlobal {
 private static final long serialVersionUID = 1545722544L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="CARPETA_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="PROPIETATGLOBAL_SEQ")
 	@Index(name="car_propietatglobal_pk_i")
 	@Column(name="propietatglobalid",nullable = false,length = 19)
 	long propietaGlobalID;
