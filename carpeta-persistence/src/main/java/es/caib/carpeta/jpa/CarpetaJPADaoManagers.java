@@ -16,6 +16,7 @@ public final class CarpetaJPADaoManagers implements ICarpetaDaoManagers{
    private final IdiomaJPAManager car_idioma;
    private final LogCarpetaJPAManager car_log;
    private final PluginJPAManager car_plugin;
+   private final PluginEntitatJPAManager car_pluginentitat;
    private final PropietatGlobalJPAManager car_propietatglobal;
    private final TraduccioJPAManager car_traduccio;
    private final UsuariJPAManager car_usuari;
@@ -32,6 +33,7 @@ public final class CarpetaJPADaoManagers implements ICarpetaDaoManagers{
     this.car_idioma = new IdiomaJPAManager(__em);
     this.car_log = new LogCarpetaJPAManager(__em);
     this.car_plugin = new PluginJPAManager(__em);
+    this.car_pluginentitat = new PluginEntitatJPAManager(__em);
     this.car_propietatglobal = new PropietatGlobalJPAManager(__em);
     this.car_traduccio = new TraduccioJPAManager(__em);
     this.car_usuari = new UsuariJPAManager(__em);
@@ -76,6 +78,10 @@ public final class CarpetaJPADaoManagers implements ICarpetaDaoManagers{
 
 	public IPluginManager getPluginManager() {
 	  return this.car_plugin;
+	};
+
+	public IPluginEntitatManager getPluginEntitatManager() {
+	  return this.car_pluginentitat;
 	};
 
 	public IPropietatGlobalManager getPropietatGlobalManager() {

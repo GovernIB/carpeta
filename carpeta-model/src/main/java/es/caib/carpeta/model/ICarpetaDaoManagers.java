@@ -13,6 +13,7 @@ public interface ICarpetaDaoManagers {
 	public IIdiomaManager getIdiomaManager();
 	public ILogCarpetaManager getLogCarpetaManager();
 	public IPluginManager getPluginManager();
+	public IPluginEntitatManager getPluginEntitatManager();
 	public IPropietatGlobalManager getPropietatGlobalManager();
 	public ITraduccioManager getTraduccioManager();
 	public IUsuariManager getUsuariManager();

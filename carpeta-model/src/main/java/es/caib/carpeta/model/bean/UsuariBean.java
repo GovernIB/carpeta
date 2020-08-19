@@ -17,8 +17,8 @@ private static final long serialVersionUID = 79037649L;
 	java.lang.String llinatge2;
 	java.lang.String email;
 	java.lang.String nif;
-	java.lang.String idioma;
 	java.lang.Long darreraEntitat;
+	java.lang.String idiomaID;
 
 
   /** Constructor Buit */
@@ -26,7 +26,7 @@ private static final long serialVersionUID = 79037649L;
   }
 
   /** Constructor amb tots els camps  */
-  public UsuariBean(long usuariID , java.lang.String username , java.lang.String nom , java.lang.String llinatge1 , java.lang.String llinatge2 , java.lang.String email , java.lang.String nif , java.lang.String idioma , java.lang.Long darreraEntitat) {
+  public UsuariBean(long usuariID , java.lang.String username , java.lang.String nom , java.lang.String llinatge1 , java.lang.String llinatge2 , java.lang.String email , java.lang.String nif , java.lang.Long darreraEntitat , java.lang.String idiomaID) {
     this.usuariID=usuariID;
     this.username=username;
     this.nom=nom;
@@ -34,27 +34,27 @@ private static final long serialVersionUID = 79037649L;
     this.llinatge2=llinatge2;
     this.email=email;
     this.nif=nif;
-    this.idioma=idioma;
     this.darreraEntitat=darreraEntitat;
+    this.idiomaID=idiomaID;
 }
   /** Constructor sense valors autoincrementals */
-  public UsuariBean(java.lang.String username , java.lang.String nom , java.lang.String llinatge1 , java.lang.String llinatge2 , java.lang.String email , java.lang.String nif , java.lang.String idioma , java.lang.Long darreraEntitat) {
+  public UsuariBean(java.lang.String username , java.lang.String nom , java.lang.String llinatge1 , java.lang.String llinatge2 , java.lang.String email , java.lang.String nif , java.lang.Long darreraEntitat , java.lang.String idiomaID) {
     this.username=username;
     this.nom=nom;
     this.llinatge1=llinatge1;
     this.llinatge2=llinatge2;
     this.email=email;
     this.nif=nif;
-    this.idioma=idioma;
     this.darreraEntitat=darreraEntitat;
+    this.idiomaID=idiomaID;
 }
   /** Constructor dels valors Not Null */
-  public UsuariBean(long usuariID , java.lang.String username , java.lang.String nom , java.lang.String llinatge1 , java.lang.String idioma) {
+  public UsuariBean(long usuariID , java.lang.String username , java.lang.String nom , java.lang.String llinatge1 , java.lang.String idiomaID) {
     this.usuariID=usuariID;
     this.username=username;
     this.nom=nom;
     this.llinatge1=llinatge1;
-    this.idioma=idioma;
+    this.idiomaID=idiomaID;
 }
   public UsuariBean(Usuari __bean) {
     this.setUsuariID(__bean.getUsuariID());
@@ -64,8 +64,8 @@ private static final long serialVersionUID = 79037649L;
     this.setLlinatge2(__bean.getLlinatge2());
     this.setEmail(__bean.getEmail());
     this.setNif(__bean.getNif());
-    this.setIdioma(__bean.getIdioma());
     this.setDarreraEntitat(__bean.getDarreraEntitat());
+    this.setIdiomaID(__bean.getIdiomaID());
 	}
 
 	public long getUsuariID() {
@@ -117,18 +117,18 @@ private static final long serialVersionUID = 79037649L;
 		this.nif = _nif_;
 	};
 
-	public java.lang.String getIdioma() {
-		return(idioma);
-	};
-	public void setIdioma(java.lang.String _idioma_) {
-		this.idioma = _idioma_;
-	};
-
 	public java.lang.Long getDarreraEntitat() {
 		return(darreraEntitat);
 	};
 	public void setDarreraEntitat(java.lang.Long _darreraEntitat_) {
 		this.darreraEntitat = _darreraEntitat_;
+	};
+
+	public java.lang.String getIdiomaID() {
+		return(idiomaID);
+	};
+	public void setIdiomaID(java.lang.String _idiomaID_) {
+		this.idiomaID = _idiomaID_;
 	};
 
 
@@ -145,8 +145,8 @@ private static final long serialVersionUID = 79037649L;
     __tmp.setLlinatge2(__bean.getLlinatge2());
     __tmp.setEmail(__bean.getEmail());
     __tmp.setNif(__bean.getNif());
-    __tmp.setIdioma(__bean.getIdioma());
     __tmp.setDarreraEntitat(__bean.getDarreraEntitat());
+    __tmp.setIdiomaID(__bean.getIdiomaID());
 		return __tmp;
 	}
 

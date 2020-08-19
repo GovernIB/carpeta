@@ -59,16 +59,19 @@
           ${usuari.nif}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariFields.IDIOMA)}">
-          <td>
-          ${usuari.idioma}
-          </td>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariFields.DARRERAENTITAT)}">
           <td>
           <c:set var="tmp">${usuari.darreraEntitat}</c:set>
           <c:if test="${not empty tmp}">
           ${__theFilterForm.mapOfEntitatForDarreraEntitat[tmp]}
+          </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariFields.IDIOMAID)}">
+          <td>
+          <c:set var="tmp">${usuari.idiomaID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfIdiomaForIdiomaID[tmp]}
           </c:if>
           </td>
         </c:if>

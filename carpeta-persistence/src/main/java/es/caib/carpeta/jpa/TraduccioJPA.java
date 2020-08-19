@@ -130,16 +130,29 @@ private static final long serialVersionUID = -326205279L;
 	}
 
 
+// EXP  Field:descripcioid | Table: car_plugin | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "descripcioID")
+	private Set<PluginJPA> plugin_descripcioids = new HashSet<PluginJPA>(0);
+	public  Set<PluginJPA> getPlugin_descripcioids() {
+    return this.plugin_descripcioids;
+  }
+
+	public void setPlugin_descripcioids(Set<PluginJPA> plugin_descripcioids) {
+	  this.plugin_descripcioids = plugin_descripcioids;
+	}
+
+
 // EXP  Field:nomid | Table: car_plugin | Type: 0  
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "nomID")
-	private Set<PluginJPA> plugins = new HashSet<PluginJPA>(0);
-	public  Set<PluginJPA> getPlugins() {
-    return this.plugins;
+	private Set<PluginJPA> plugin_nomids = new HashSet<PluginJPA>(0);
+	public  Set<PluginJPA> getPlugin_nomids() {
+    return this.plugin_nomids;
   }
 
-	public void setPlugins(Set<PluginJPA> plugins) {
-	  this.plugins = plugins;
+	public void setPlugin_nomids(Set<PluginJPA> plugin_nomids) {
+	  this.plugin_nomids = plugin_nomids;
 	}
 
 
@@ -214,6 +227,10 @@ private static final long serialVersionUID = -326205279L;
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitats) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitats())) ) {
       __tmp.setEntitats(EntitatJPA.copyJPA(__jpa.getEntitats(), __alreadyCopied,"TraduccioJPA"));
     }
+    if(!"PluginJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.plugin_nomids) || org.hibernate.Hibernate.isInitialized(__jpa.getPlugin_nomids())) ) {
+      __tmp.setPlugin_nomids(PluginJPA.copyJPA(__jpa.getPlugin_nomids(), __alreadyCopied,"TraduccioJPA"));
+    }
     if(!"EnllazJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.enllaz_nomids) || org.hibernate.Hibernate.isInitialized(__jpa.getEnllaz_nomids())) ) {
       __tmp.setEnllaz_nomids(EnllazJPA.copyJPA(__jpa.getEnllaz_nomids(), __alreadyCopied,"TraduccioJPA"));
@@ -227,8 +244,8 @@ private static final long serialVersionUID = -326205279L;
       __tmp.setAviss(AvisJPA.copyJPA(__jpa.getAviss(), __alreadyCopied,"TraduccioJPA"));
     }
     if(!"PluginJPA".equals(origenJPA) 
-       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.plugins) || org.hibernate.Hibernate.isInitialized(__jpa.getPlugins())) ) {
-      __tmp.setPlugins(PluginJPA.copyJPA(__jpa.getPlugins(), __alreadyCopied,"TraduccioJPA"));
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.plugin_descripcioids) || org.hibernate.Hibernate.isInitialized(__jpa.getPlugin_descripcioids())) ) {
+      __tmp.setPlugin_descripcioids(PluginJPA.copyJPA(__jpa.getPlugin_descripcioids(), __alreadyCopied,"TraduccioJPA"));
     }
     // Copia de beans complexes (IMP)
     // Aquesta linia s'afeix de forma manual

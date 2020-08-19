@@ -65,6 +65,28 @@ public class PluginFilterForm extends CarpetaBaseFilterForm implements PluginFie
   }
 
 
+  private java.lang.Long descripcioIDDesde;
+
+  public java.lang.Long getDescripcioIDDesde() {
+    return this.descripcioIDDesde;
+  }
+
+  public void setDescripcioIDDesde(java.lang.Long descripcioIDDesde) {
+    this.descripcioIDDesde = descripcioIDDesde;
+  }
+
+
+  private java.lang.Long descripcioIDFins;
+
+  public java.lang.Long getDescripcioIDFins() {
+    return this.descripcioIDFins;
+  }
+
+  public void setDescripcioIDFins(java.lang.Long descripcioIDFins) {
+    this.descripcioIDFins = descripcioIDFins;
+  }
+
+
   private java.lang.String classe;
 
   public java.lang.String getClasse() {
@@ -118,11 +140,14 @@ public class PluginFilterForm extends CarpetaBaseFilterForm implements PluginFie
     this.pluginIDFins = __toClone.pluginIDFins;
     this.nomIDDesde = __toClone.nomIDDesde;
     this.nomIDFins = __toClone.nomIDFins;
+    this.descripcioIDDesde = __toClone.descripcioIDDesde;
+    this.descripcioIDFins = __toClone.descripcioIDFins;
     this.classe = __toClone.classe;
     this.propietats = __toClone.propietats;
     this.tipusDesde = __toClone.tipusDesde;
     this.tipusFins = __toClone.tipusFins;
     this.mapOfTraduccioForNomID = __toClone.mapOfTraduccioForNomID;
+    this.mapOfTraduccioForDescripcioID = __toClone.mapOfTraduccioForDescripcioID;
     this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
   }
   
@@ -166,6 +191,18 @@ public class PluginFilterForm extends CarpetaBaseFilterForm implements PluginFie
 
   public void setMapOfTraduccioForNomID(Map<String, String> mapOfTraduccioForNomID) {
     this.mapOfTraduccioForNomID = mapOfTraduccioForNomID;
+  }
+
+
+
+  private Map<String, String> mapOfTraduccioForDescripcioID;
+
+  public Map<String, String> getMapOfTraduccioForDescripcioID() {
+    return this.mapOfTraduccioForDescripcioID;
+  }
+
+  public void setMapOfTraduccioForDescripcioID(Map<String, String> mapOfTraduccioForDescripcioID) {
+    this.mapOfTraduccioForDescripcioID = mapOfTraduccioForDescripcioID;
   }
 
 

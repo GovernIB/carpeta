@@ -59,6 +59,7 @@ public abstract class AbstractPluginSuperAdminController extends PluginControlle
 
         if (pluginForm.isNou()) {
             pluginForm.getPlugin().setTipus(getTipus());
+            pluginForm.getPlugin().setActiu(true);
         }
 
         return pluginForm;
@@ -73,6 +74,8 @@ public abstract class AbstractPluginSuperAdminController extends PluginControlle
             Set<Field<?>> hiddenFields = new HashSet<Field<?>>(Arrays.asList(PluginFields.ALL_PLUGIN_FIELDS));
 
             hiddenFields.remove(PluginFields.NOMID);
+            hiddenFields.remove(PluginFields.DESCRIPCIOID);
+            hiddenFields.remove(PluginFields.CLASSE);
             hiddenFields.remove(PluginFields.ACTIU);
 
             pluginFilterForm.setHiddenFields(hiddenFields);

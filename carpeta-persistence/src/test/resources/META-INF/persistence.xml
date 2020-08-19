@@ -17,6 +17,7 @@
 		<class>es.caib.carpeta.jpa.IdiomaJPA</class>
 		<class>es.caib.carpeta.jpa.LogCarpetaJPA</class>
 		<class>es.caib.carpeta.jpa.PluginJPA</class>
+		<class>es.caib.carpeta.jpa.PluginEntitatJPA</class>
 		<class>es.caib.carpeta.jpa.PropietatGlobalJPA</class>
 		<class>es.caib.carpeta.jpa.TraduccioJPA</class>
 		<class>es.caib.carpeta.jpa.TraduccioMapJPA</class>

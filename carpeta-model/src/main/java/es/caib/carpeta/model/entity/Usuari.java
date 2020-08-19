@@ -23,11 +23,11 @@ public interface Usuari extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getNif();
 	public void setNif(java.lang.String _nif_);
 
-	public java.lang.String getIdioma();
-	public void setIdioma(java.lang.String _idioma_);
-
 	public java.lang.Long getDarreraEntitat();
 	public void setDarreraEntitat(java.lang.Long _darreraEntitat_);
+
+	public java.lang.String getIdiomaID();
+	public void setIdiomaID(java.lang.String _idiomaID_);
 
 
 

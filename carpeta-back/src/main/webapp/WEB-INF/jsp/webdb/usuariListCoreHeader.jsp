@@ -33,11 +33,11 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariFields.NIF)}">
         <th>${car:getSortIcons(__theFilterForm,UsuariFields.NIF)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariFields.IDIOMA)}">
-        <th>${car:getSortIcons(__theFilterForm,UsuariFields.IDIOMA)}</th>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariFields.DARRERAENTITAT)}">
         <th>${car:getSortIcons(__theFilterForm,UsuariFields.DARRERAENTITAT)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,UsuariFields.IDIOMAID)}">
+        <th>${car:getSortIcons(__theFilterForm,UsuariFields.IDIOMAID)}</th>
         </c:if>
 
 

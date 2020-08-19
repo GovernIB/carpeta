@@ -110,24 +110,6 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,UsuariFields.IDIOMA)}">
-        <tr id="usuari_idioma_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[UsuariFields.IDIOMA])?'usuari.idioma':__theForm.labels[UsuariFields.IDIOMA]}" /> &nbsp;(*)
-              <c:if test="${not empty __theForm.help[UsuariFields.IDIOMA]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[UsuariFields.IDIOMA]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-            <form:errors path="usuari.idioma" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuariFields.IDIOMA)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,UsuariFields.IDIOMA)? ' uneditable-input' : ''}"  maxlength="50" path="usuari.idioma"   />
-
-           </td>
-        </tr>
-        </c:if>
-        
         <c:if test="${!gen:contains(__theForm.hiddenFields,UsuariFields.DARRERAENTITAT)}">
         <tr id="usuari_darreraEntitat_rowid">
           <td>
@@ -149,6 +131,33 @@
           <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
           <form:option value="" ></form:option>
             <c:forEach items="${__theForm.listOfEntitatForDarreraEntitat}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,UsuariFields.IDIOMAID)}">
+        <tr id="usuari_idiomaID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[UsuariFields.IDIOMAID])?'usuari.idiomaID':__theForm.labels[UsuariFields.IDIOMAID]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[UsuariFields.IDIOMAID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[UsuariFields.IDIOMAID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="usuari.idiomaID" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,UsuariFields.IDIOMAID)}" >
+          <form:hidden path="usuari.idiomaID"/>
+          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.usuari.idiomaID,__theForm.listOfIdiomaForIdiomaID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,UsuariFields.IDIOMAID)}" >
+          <form:select id="usuari_idiomaID"  onchange="if(typeof onChangeIdiomaID == 'function') {  onChangeIdiomaID(this); };"  cssClass="form-control col-md-4" path="usuari.idiomaID">
+            <c:forEach items="${__theForm.listOfIdiomaForIdiomaID}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
           </form:select>

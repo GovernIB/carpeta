@@ -19,8 +19,8 @@ public interface UsuariFields extends java.io.Serializable {
 	 public static final StringField LLINATGE2 = new StringField(_TABLE_MODEL, "llinatge2", "llinatge2");
 	 public static final StringField EMAIL = new StringField(_TABLE_MODEL, "email", "email");
 	 public static final StringField NIF = new StringField(_TABLE_MODEL, "nif", "nif");
-	 public static final StringField IDIOMA = new StringField(_TABLE_MODEL, "idioma", "idioma");
 	 public static final LongField DARRERAENTITAT = new LongField(_TABLE_MODEL, "darreraEntitat", "darreraentitat");
+	 public static final StringField IDIOMAID = new StringField(_TABLE_MODEL, "idiomaID", "idiomaid");
 
 
   public static final Field<?>[] ALL_USUARI_FIELDS = {
@@ -31,8 +31,8 @@ public interface UsuariFields extends java.io.Serializable {
     LLINATGE2,
     EMAIL,
     NIF,
-    IDIOMA,
-    DARRERAENTITAT
+    DARRERAENTITAT,
+    IDIOMAID
   };
 
 

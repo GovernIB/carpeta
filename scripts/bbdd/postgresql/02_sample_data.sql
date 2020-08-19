@@ -17,6 +17,7 @@ INSERT INTO car_idioma VALUES ('en', 'English', true, 2);
 
 
 INSERT INTO car_traduccio VALUES (26);
+INSERT INTO car_traduccio VALUES (36);
 
 
 
@@ -31,14 +32,19 @@ INSERT INTO car_traducciomap VALUES (26, 'en', 'Sistra v1 & v2');
 INSERT INTO car_traducciomap VALUES (26, 'es', 'Sistra v1 & v2');
 INSERT INTO car_traducciomap VALUES (26, 'ca', 'Sistra v1 & v2');
 
+INSERT INTO car_traducciomap VALUES (36, 'en', 'Description Sistra v1 & v2');
+INSERT INTO car_traducciomap VALUES (36, 'es', 'Descripción Sistra v1 & v2');
+INSERT INTO car_traducciomap VALUES (36, 'ca', 'Descripció Sistra v1 & v2');
+
 
 --
 -- TOC entry 2010 (class 0 OID 112580)
 -- Dependencies: 178
 -- Data for Name: car_plugin; Type: TABLE DATA; Schema: public; Owner: carpeta
 --
-
-INSERT INTO car_plugin VALUES (27, 26, 'org.fundaciobit.pluginsib.carpetafront.sistra.SistraCarpetaFrontPlugin', 1, '# Common
+INSERT INTO car_plugin(
+            nomid, descripcioid, classe, tipus, propietats, actiu)
+    VALUES (26, 36, 'org.fundaciobit.pluginsib.carpetafront.sistra.SistraCarpetaFrontPlugin', 1, '# Common
 es.caib.carpeta.pluginsib.carpetafront.sistra.development=true
 
 # Sistra 1

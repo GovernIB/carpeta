@@ -37,6 +37,14 @@
           </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.DESCRIPCIOID)}">
+          <td>
+          <c:set var="tmp">${plugin.descripcioID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${plugin.descripcio.traduccions[lang].valor}
+          </c:if>
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.CLASSE)}">
           <td>
           ${plugin.classe}

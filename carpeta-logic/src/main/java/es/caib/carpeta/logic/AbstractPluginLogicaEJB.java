@@ -27,9 +27,21 @@ public abstract class AbstractPluginLogicaEJB<I extends IPlugin> extends PluginL
 
     @Override
     public List<Plugin> getAllPlugins() throws I18NException {
-        Where where = Where.AND(TIPUS.equal(getTipusDePlugin()), ACTIU.equal(true));
+        return getAllPlugins(null); 
+    }
+    
+    
+    @Override
+    public List<Plugin> getAllPlugins(Where w) throws I18NException {
+        Where where;
+        if (w == null) {
+            where = Where.AND(TIPUS.equal(getTipusDePlugin()), ACTIU.equal(true));
+        } else {
+            where = Where.AND(w, TIPUS.equal(getTipusDePlugin()), ACTIU.equal(true));
+        }
         return select(where);
     }
+    
 
     @Override
     public Where getWhere() {

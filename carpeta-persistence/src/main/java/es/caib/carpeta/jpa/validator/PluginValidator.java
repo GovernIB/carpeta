@@ -36,6 +36,10 @@ public class PluginValidator<I extends Plugin>
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NOMID)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,DESCRIPCIOID, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DESCRIPCIOID)));
+
     __vr.rejectIfEmptyOrWhitespace(__target__,CLASSE, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CLASSE)));
@@ -90,6 +94,18 @@ public class PluginValidator<I extends Plugin>
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccio"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccioID"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__nomid)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(DESCRIPCIOID) == 0) {
+      java.lang.Long __descripcioid = __target__.getDescripcioID();
+      Long __count_ = null;
+      try { __count_ = __traduccioManager.count(TraduccioFields.TRADUCCIOID.equal(__descripcioid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+      if (__count_ == null || __count_ == 0) {        
+        __vr.rejectValue(DESCRIPCIOID, "error.notfound",
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccio"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccioID"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__descripcioid)));
       }
     }
 

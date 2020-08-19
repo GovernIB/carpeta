@@ -109,17 +109,6 @@ public class UsuariFilterForm extends CarpetaBaseFilterForm implements UsuariFie
   }
 
 
-  private java.lang.String idioma;
-
-  public java.lang.String getIdioma() {
-    return this.idioma;
-  }
-
-  public void setIdioma(java.lang.String idioma) {
-    this.idioma = idioma;
-  }
-
-
   private java.lang.Long darreraEntitatDesde;
 
   public java.lang.Long getDarreraEntitatDesde() {
@@ -142,6 +131,17 @@ public class UsuariFilterForm extends CarpetaBaseFilterForm implements UsuariFie
   }
 
 
+  private java.lang.String idiomaID;
+
+  public java.lang.String getIdiomaID() {
+    return this.idiomaID;
+  }
+
+  public void setIdiomaID(java.lang.String idiomaID) {
+    this.idiomaID = idiomaID;
+  }
+
+
   public UsuariFilterForm() {
   }
   
@@ -155,10 +155,11 @@ public class UsuariFilterForm extends CarpetaBaseFilterForm implements UsuariFie
     this.llinatge2 = __toClone.llinatge2;
     this.email = __toClone.email;
     this.nif = __toClone.nif;
-    this.idioma = __toClone.idioma;
     this.darreraEntitatDesde = __toClone.darreraEntitatDesde;
     this.darreraEntitatFins = __toClone.darreraEntitatFins;
+    this.idiomaID = __toClone.idiomaID;
     this.mapOfEntitatForDarreraEntitat = __toClone.mapOfEntitatForDarreraEntitat;
+    this.mapOfIdiomaForIdiomaID = __toClone.mapOfIdiomaForIdiomaID;
   }
   
   /* ========= UTILS ========== */
@@ -201,6 +202,18 @@ public class UsuariFilterForm extends CarpetaBaseFilterForm implements UsuariFie
 
   public void setMapOfEntitatForDarreraEntitat(Map<String, String> mapOfEntitatForDarreraEntitat) {
     this.mapOfEntitatForDarreraEntitat = mapOfEntitatForDarreraEntitat;
+  }
+
+
+
+  private Map<String, String> mapOfIdiomaForIdiomaID;
+
+  public Map<String, String> getMapOfIdiomaForIdiomaID() {
+    return this.mapOfIdiomaForIdiomaID;
+  }
+
+  public void setMapOfIdiomaForIdiomaID(Map<String, String> mapOfIdiomaForIdiomaID) {
+    this.mapOfIdiomaForIdiomaID = mapOfIdiomaForIdiomaID;
   }
 
 

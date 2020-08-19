@@ -124,7 +124,7 @@ public class UsuariLogicaEJB extends UsuariEJB implements UsuariLogicaLocal {
 			persona.setUsername(username);
 			// XYZ ZZZ ZZZ
 			// persona.setNif(info.getAdministrationID().toUpperCase());
-			persona.setIdioma("ca");
+			persona.setIdiomaID("ca");
 		}
 
 		return persona;

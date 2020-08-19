@@ -19,6 +19,10 @@ public class PluginQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new LongField(getQueryPath(), PluginFields.NOMID);
   }
 
+  public LongField DESCRIPCIOID() {
+    return new LongField(getQueryPath(), PluginFields.DESCRIPCIOID);
+  }
+
   public StringField CLASSE() {
     return new StringField(getQueryPath(), PluginFields.CLASSE);
   }
@@ -58,10 +62,32 @@ public class PluginQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
   }
 */
 
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
+  public PluginEntitatQueryPath PLUGINENTITATS() {
+    return new PluginEntitatQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return PluginQueryPath.this.getQueryPath() + "pluginEntitats" + ".";
+      }
+    });
+  }
+*/
+
   public TraduccioQueryPath NOM() {
     return new TraduccioQueryPath(new QueryPath() {
       public String getQueryPath() {
           return PluginQueryPath.this.getQueryPath() + "nom" + ".";
+      }
+    });
+  }
+
+  public TraduccioQueryPath DESCRIPCIO() {
+    return new TraduccioQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return PluginQueryPath.this.getQueryPath() + "descripcio" + ".";
       }
     });
   }

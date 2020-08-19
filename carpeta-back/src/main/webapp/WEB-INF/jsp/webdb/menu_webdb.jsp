@@ -77,6 +77,13 @@ ${entityname}
         </span></a>
         </li>
 
+    <%-- PluginEntitat --%>
+       <fmt:message var="entityname" key="pluginEntitat.pluginEntitat.plural"/>
+        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/pluginEntitat/list/1"/>" ><span style="${(fn:contains(url, 'pluginEntitat/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
+${entityname}
+        </span></a>
+        </li>
+
     <%-- PropietatGlobal --%>
        <fmt:message var="entityname" key="propietatGlobal.propietatGlobal.plural"/>
         <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/propietatGlobal/list/1"/>" ><span style="${(fn:contains(url, 'propietatGlobal/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >

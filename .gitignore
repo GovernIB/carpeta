@@ -32,3 +32,7 @@ nb-configuration.xml
 /carpeta-back/src/main/resources/logicmissatges_ca.properties
 /carpeta-back/src/main/resources/logicmissatges_en.properties
 /carpeta-back/src/main/resources/logicmissatges_es.properties
+/carpeta-back/src/main/webapp/WEB-INF/jsp/moduls/menu_admin.jsp
+/carpeta-back/src/main/webapp/WEB-INF/jsp/moduls/menu_user.jsp
+/scripts/bbdd/oracle/create_db.sql
+/scripts/bbdd/oracle/drop_db.sql

@@ -58,7 +58,7 @@ public class TestSchemaGenerator {
         
        
         map.put("hibernate.dialect", dialect);
-        //map.put(""hibernate.query.substitutions","true 1, false 0");
+        map.put("hibernate.query.substitutions","true 1, false 0");
 
         
         Persistence.generateSchema("carpetaPULocal", map);

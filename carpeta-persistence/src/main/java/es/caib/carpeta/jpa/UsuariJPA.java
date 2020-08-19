@@ -53,12 +53,13 @@ private static final long serialVersionUID = -1105822054L;
 	@Column(name="nif",length = 255)
 	java.lang.String nif;
 
-	@Column(name="idioma",nullable = false,length = 50)
-	java.lang.String idioma;
-
 	@Index(name="car_usuari_darreraentitat_fk_i")
 	@Column(name="darreraentitat",length = 19)
 	java.lang.Long darreraEntitat;
+
+	@Index(name="car_usuari_idiomaid_fk_i")
+	@Column(name="idiomaid",nullable = false,length = 5)
+	java.lang.String idiomaID;
 
 
 
@@ -67,7 +68,7 @@ private static final long serialVersionUID = -1105822054L;
   }
 
   /** Constructor amb tots els camps  */
-  public UsuariJPA(long usuariID , java.lang.String username , java.lang.String nom , java.lang.String llinatge1 , java.lang.String llinatge2 , java.lang.String email , java.lang.String nif , java.lang.String idioma , java.lang.Long darreraEntitat) {
+  public UsuariJPA(long usuariID , java.lang.String username , java.lang.String nom , java.lang.String llinatge1 , java.lang.String llinatge2 , java.lang.String email , java.lang.String nif , java.lang.Long darreraEntitat , java.lang.String idiomaID) {
     this.usuariID=usuariID;
     this.username=username;
     this.nom=nom;
@@ -75,27 +76,27 @@ private static final long serialVersionUID = -1105822054L;
     this.llinatge2=llinatge2;
     this.email=email;
     this.nif=nif;
-    this.idioma=idioma;
     this.darreraEntitat=darreraEntitat;
+    this.idiomaID=idiomaID;
 }
   /** Constructor sense valors autoincrementals */
-  public UsuariJPA(java.lang.String username , java.lang.String nom , java.lang.String llinatge1 , java.lang.String llinatge2 , java.lang.String email , java.lang.String nif , java.lang.String idioma , java.lang.Long darreraEntitat) {
+  public UsuariJPA(java.lang.String username , java.lang.String nom , java.lang.String llinatge1 , java.lang.String llinatge2 , java.lang.String email , java.lang.String nif , java.lang.Long darreraEntitat , java.lang.String idiomaID) {
     this.username=username;
     this.nom=nom;
     this.llinatge1=llinatge1;
     this.llinatge2=llinatge2;
     this.email=email;
     this.nif=nif;
-    this.idioma=idioma;
     this.darreraEntitat=darreraEntitat;
+    this.idiomaID=idiomaID;
 }
   /** Constructor dels valors Not Null */
-  public UsuariJPA(long usuariID , java.lang.String username , java.lang.String nom , java.lang.String llinatge1 , java.lang.String idioma) {
+  public UsuariJPA(long usuariID , java.lang.String username , java.lang.String nom , java.lang.String llinatge1 , java.lang.String idiomaID) {
     this.usuariID=usuariID;
     this.username=username;
     this.nom=nom;
     this.llinatge1=llinatge1;
-    this.idioma=idioma;
+    this.idiomaID=idiomaID;
 }
   public UsuariJPA(Usuari __bean) {
     this.setUsuariID(__bean.getUsuariID());
@@ -105,8 +106,8 @@ private static final long serialVersionUID = -1105822054L;
     this.setLlinatge2(__bean.getLlinatge2());
     this.setEmail(__bean.getEmail());
     this.setNif(__bean.getNif());
-    this.setIdioma(__bean.getIdioma());
     this.setDarreraEntitat(__bean.getDarreraEntitat());
+    this.setIdiomaID(__bean.getIdiomaID());
 	}
 
 	public long getUsuariID() {
@@ -158,18 +159,18 @@ private static final long serialVersionUID = -1105822054L;
 		this.nif = _nif_;
 	};
 
-	public java.lang.String getIdioma() {
-		return(idioma);
-	};
-	public void setIdioma(java.lang.String _idioma_) {
-		this.idioma = _idioma_;
-	};
-
 	public java.lang.Long getDarreraEntitat() {
 		return(darreraEntitat);
 	};
 	public void setDarreraEntitat(java.lang.Long _darreraEntitat_) {
 		this.darreraEntitat = _darreraEntitat_;
+	};
+
+	public java.lang.String getIdiomaID() {
+		return(idiomaID);
+	};
+	public void setIdiomaID(java.lang.String _idiomaID_) {
+		this.idiomaID = _idiomaID_;
 	};
 
 
@@ -228,6 +229,21 @@ private static final long serialVersionUID = -1105822054L;
     this.entitat = entitat;
   }
 
+// IMP Field:idiomaid | Table: car_idioma | Type: 1  
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@ForeignKey(name="car_usuari_idioma_idi_fk")
+	@JoinColumn(name = "idiomaid", referencedColumnName ="idiomaID", nullable = false, insertable=false, updatable=false)
+	private IdiomaJPA idioma;
+
+	public IdiomaJPA getIdioma() {
+    return this.idioma;
+  }
+
+	public  void setIdioma(IdiomaJPA idioma) {
+    this.idioma = idioma;
+  }
+
 
  // ---------------  STATIC METHODS ------------------
   public static UsuariJPA toJPA(Usuari __bean) {
@@ -240,8 +256,8 @@ private static final long serialVersionUID = -1105822054L;
     __tmp.setLlinatge2(__bean.getLlinatge2());
     __tmp.setEmail(__bean.getEmail());
     __tmp.setNif(__bean.getNif());
-    __tmp.setIdioma(__bean.getIdioma());
     __tmp.setDarreraEntitat(__bean.getDarreraEntitat());
+    __tmp.setIdiomaID(__bean.getIdiomaID());
 		return __tmp;
 	}
 
@@ -281,6 +297,10 @@ private static final long serialVersionUID = -1105822054L;
       __tmp.setAuditorias(AuditoriaJPA.copyJPA(__jpa.getAuditorias(), __alreadyCopied,"UsuariJPA"));
     }
     // Copia de beans complexes (IMP)
+    if(!"IdiomaJPA".equals(origenJPA) && 
+       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.idioma) || org.hibernate.Hibernate.isInitialized(__jpa.getIdioma()) ) ) {
+      __tmp.setIdioma(IdiomaJPA.copyJPA(__jpa.getIdioma(), __alreadyCopied,"UsuariJPA"));
+    }
     if(!"EntitatJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat()) ) ) {
       __tmp.setEntitat(EntitatJPA.copyJPA(__jpa.getEntitat(), __alreadyCopied,"UsuariJPA"));

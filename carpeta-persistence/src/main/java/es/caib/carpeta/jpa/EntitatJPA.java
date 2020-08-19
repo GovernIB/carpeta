@@ -329,6 +329,19 @@ private static final long serialVersionUID = 489209138L;
 	}
 
 
+// EXP  Field:entitatid | Table: car_pluginentitat | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
+	private Set<PluginEntitatJPA> pluginEntitats = new HashSet<PluginEntitatJPA>(0);
+	public  Set<PluginEntitatJPA> getPluginEntitats() {
+    return this.pluginEntitats;
+  }
+
+	public void setPluginEntitats(Set<PluginEntitatJPA> pluginEntitats) {
+	  this.pluginEntitats = pluginEntitats;
+	}
+
+
 // EXP  Field:entitatid | Table: car_propietatglobal | Type: 0  
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
@@ -495,6 +508,10 @@ private static final long serialVersionUID = 489209138L;
     if(!"LogCarpetaJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.logCarpetas) || org.hibernate.Hibernate.isInitialized(__jpa.getLogCarpetas())) ) {
       __tmp.setLogCarpetas(LogCarpetaJPA.copyJPA(__jpa.getLogCarpetas(), __alreadyCopied,"EntitatJPA"));
+    }
+    if(!"PluginEntitatJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.pluginEntitats) || org.hibernate.Hibernate.isInitialized(__jpa.getPluginEntitats())) ) {
+      __tmp.setPluginEntitats(PluginEntitatJPA.copyJPA(__jpa.getPluginEntitats(), __alreadyCopied,"EntitatJPA"));
     }
     if(!"PropietatGlobalJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.propietatGlobals) || org.hibernate.Hibernate.isInitialized(__jpa.getPropietatGlobals())) ) {

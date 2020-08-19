@@ -128,6 +128,15 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/moduls/blanc.jsp" />
     </definition>
     
+    <definition name="pluginEntitatFormAdminEntitat" extends="adminentitat">
+        <put-attribute name="titol" value="pluginEntitat.pluginEntitat" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/pluginEntitatForm.jsp" />
+    </definition>
+    
+    <definition name="pluginEntitatListAdminEntitat" extends="adminentitat">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/pluginEntitatList.jsp" />
+    </definition>
+    
     
 
     <!--  ===========  SUPER ADMIN  ================== -->
@@ -338,6 +347,16 @@
     
     <definition name="pluginListWebDB" extends="webdb">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/pluginList.jsp" />
+    </definition>
+
+
+    <definition name="pluginEntitatFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="pluginEntitat.pluginEntitat" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/pluginEntitatForm.jsp" />
+    </definition>
+    
+    <definition name="pluginEntitatListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/pluginEntitatList.jsp" />
     </definition>
 
 

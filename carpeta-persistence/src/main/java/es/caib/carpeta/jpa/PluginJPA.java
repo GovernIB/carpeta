@@ -41,6 +41,10 @@ private static final long serialVersionUID = 190357384L;
 	@Column(name="nomid",nullable = false,length = 19)
 	long nomID;
 
+	@Index(name="car_plugin_descripcioid_fk_i")
+	@Column(name="descripcioid",nullable = false,length = 19)
+	java.lang.Long descripcioID;
+
 	@Column(name="classe",nullable = false,length = 255)
 	java.lang.String classe;
 
@@ -62,17 +66,19 @@ private static final long serialVersionUID = 190357384L;
   }
 
   /** Constructor amb tots els camps  */
-  public PluginJPA(long pluginID , long nomID , java.lang.String classe , java.lang.String propietats , boolean actiu , int tipus) {
+  public PluginJPA(long pluginID , long nomID , java.lang.Long descripcioID , java.lang.String classe , java.lang.String propietats , boolean actiu , int tipus) {
     this.pluginID=pluginID;
     this.nomID=nomID;
+    this.descripcioID=descripcioID;
     this.classe=classe;
     this.propietats=propietats;
     this.actiu=actiu;
     this.tipus=tipus;
 }
   /** Constructor sense valors autoincrementals */
-  public PluginJPA(long nomID , java.lang.String classe , java.lang.String propietats , boolean actiu , int tipus) {
+  public PluginJPA(long nomID , java.lang.Long descripcioID , java.lang.String classe , java.lang.String propietats , boolean actiu , int tipus) {
     this.nomID=nomID;
+    this.descripcioID=descripcioID;
     this.classe=classe;
     this.propietats=propietats;
     this.actiu=actiu;
@@ -81,6 +87,7 @@ private static final long serialVersionUID = 190357384L;
   public PluginJPA(Plugin __bean) {
     this.setPluginID(__bean.getPluginID());
     this.setNomID(__bean.getNomID());
+    this.setDescripcioID(__bean.getDescripcioID());
     this.setClasse(__bean.getClasse());
     this.setPropietats(__bean.getPropietats());
     this.setActiu(__bean.isActiu());
@@ -99,6 +106,13 @@ private static final long serialVersionUID = 190357384L;
 	};
 	public void setNomID(long _nomID_) {
 		this.nomID = _nomID_;
+	};
+
+	public java.lang.Long getDescripcioID() {
+		return(descripcioID);
+	};
+	public void setDescripcioID(java.lang.Long _descripcioID_) {
+		this.descripcioID = _descripcioID_;
 	};
 
 	public java.lang.String getClasse() {
@@ -157,6 +171,19 @@ private static final long serialVersionUID = 190357384L;
 	}
 
 
+// EXP  Field:pluginid | Table: car_pluginentitat | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "plugin")
+	private Set<PluginEntitatJPA> pluginEntitats = new HashSet<PluginEntitatJPA>(0);
+	public  Set<PluginEntitatJPA> getPluginEntitats() {
+    return this.pluginEntitats;
+  }
+
+	public void setPluginEntitats(Set<PluginEntitatJPA> pluginEntitats) {
+	  this.pluginEntitats = pluginEntitats;
+	}
+
+
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
@@ -182,6 +209,31 @@ private static final long serialVersionUID = 190357384L;
   }
 
 
+// IMP Field:traduccioid | Table: car_traduccio | Type: 1  
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
+	@ForeignKey(name="car_plugin_traduccio_desc_fk")
+	@JoinColumn(name = "descripcioid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false)
+	private TraduccioJPA descripcio;
+
+	public TraduccioJPA getDescripcio() {
+    return this.descripcio;
+  }
+
+	public  void setDescripcio(TraduccioJPA descripcio) {
+    this.descripcio = descripcio;
+  }
+
+  @javax.xml.bind.annotation.XmlTransient
+  public java.util.Map<String, es.caib.carpeta.jpa.TraduccioMapJPA> getDescripcioTraduccions() {
+    return this.descripcio.getTraduccions();
+  }
+
+  public void setDescripcioTraduccions(java.util.Map<String, es.caib.carpeta.jpa.TraduccioMapJPA> __traduccions__) {
+    this.descripcio.setTraduccions(__traduccions__);
+  }
+
+
 
  // ---------------  STATIC METHODS ------------------
   public static PluginJPA toJPA(Plugin __bean) {
@@ -189,6 +241,7 @@ private static final long serialVersionUID = 190357384L;
     PluginJPA __tmp = new PluginJPA();
     __tmp.setPluginID(__bean.getPluginID());
     __tmp.setNomID(__bean.getNomID());
+    __tmp.setDescripcioID(__bean.getDescripcioID());
     __tmp.setClasse(__bean.getClasse());
     __tmp.setPropietats(__bean.getPropietats());
     __tmp.setActiu(__bean.isActiu());
@@ -227,7 +280,15 @@ private static final long serialVersionUID = 190357384L;
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.logCarpetas) || org.hibernate.Hibernate.isInitialized(__jpa.getLogCarpetas())) ) {
       __tmp.setLogCarpetas(LogCarpetaJPA.copyJPA(__jpa.getLogCarpetas(), __alreadyCopied,"PluginJPA"));
     }
+    if(!"PluginEntitatJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.pluginEntitats) || org.hibernate.Hibernate.isInitialized(__jpa.getPluginEntitats())) ) {
+      __tmp.setPluginEntitats(PluginEntitatJPA.copyJPA(__jpa.getPluginEntitats(), __alreadyCopied,"PluginJPA"));
+    }
     // Copia de beans complexes (IMP)
+    if(!"TraduccioJPA".equals(origenJPA) && 
+       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.descripcio) || org.hibernate.Hibernate.isInitialized(__jpa.getDescripcio()) ) ) {
+      __tmp.setDescripcio(TraduccioJPA.copyJPA(__jpa.getDescripcio(), __alreadyCopied,"PluginJPA"));
+    }
     if(!"TraduccioJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.nom) || org.hibernate.Hibernate.isInitialized(__jpa.getNom()) ) ) {
       __tmp.setNom(TraduccioJPA.copyJPA(__jpa.getNom(), __alreadyCopied,"PluginJPA"));

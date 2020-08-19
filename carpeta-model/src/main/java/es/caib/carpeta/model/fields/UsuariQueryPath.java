@@ -39,12 +39,12 @@ public class UsuariQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new StringField(getQueryPath(), UsuariFields.NIF);
   }
 
-  public StringField IDIOMA() {
-    return new StringField(getQueryPath(), UsuariFields.IDIOMA);
-  }
-
   public LongField DARRERAENTITAT() {
     return new LongField(getQueryPath(), UsuariFields.DARRERAENTITAT);
+  }
+
+  public StringField IDIOMAID() {
+    return new StringField(getQueryPath(), UsuariFields.IDIOMAID);
   }
 
 
@@ -88,6 +88,14 @@ public class UsuariQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new EntitatQueryPath(new QueryPath() {
       public String getQueryPath() {
           return UsuariQueryPath.this.getQueryPath() + "entitat" + ".";
+      }
+    });
+  }
+
+  public IdiomaQueryPath IDIOMA() {
+    return new IdiomaQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return UsuariQueryPath.this.getQueryPath() + "idioma" + ".";
       }
     });
   }

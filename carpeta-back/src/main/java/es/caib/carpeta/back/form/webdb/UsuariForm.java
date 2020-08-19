@@ -20,6 +20,7 @@ public class UsuariForm extends CarpetaBaseForm {
     super(__toClone);
       this.usuari = __toClone.usuari;
     this.listOfEntitatForDarreraEntitat = __toClone.listOfEntitatForDarreraEntitat;
+    this.listOfIdiomaForIdiomaID = __toClone.listOfIdiomaForIdiomaID;
   }
   
   public UsuariForm(UsuariJPA usuari, boolean nou) {
@@ -43,6 +44,18 @@ public class UsuariForm extends CarpetaBaseForm {
 
   public void setListOfEntitatForDarreraEntitat(List<StringKeyValue> listOfEntitatForDarreraEntitat) {
     this.listOfEntitatForDarreraEntitat = listOfEntitatForDarreraEntitat;
+  }
+
+
+
+  private List<StringKeyValue> listOfIdiomaForIdiomaID;
+
+  public List<StringKeyValue> getListOfIdiomaForIdiomaID() {
+    return this.listOfIdiomaForIdiomaID;
+  }
+
+  public void setListOfIdiomaForIdiomaID(List<StringKeyValue> listOfIdiomaForIdiomaID) {
+    this.listOfIdiomaForIdiomaID = listOfIdiomaForIdiomaID;
   }
 
 

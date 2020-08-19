@@ -21,6 +21,8 @@ public interface AbstractPluginLogicaLocal<I> extends PluginLogicaLocal {
      * @throws I18NException si es produeix qualsevol error
      */
     public List<Plugin> getAllPlugins() throws I18NException;
+    
+    public List<Plugin> getAllPlugins(Where w) throws I18NException;
 
     public I getInstanceByPluginID(long pluginID) throws I18NException;
 

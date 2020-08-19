@@ -17,6 +17,9 @@ import es.caib.carpeta.model.entity.Entitat;
 import es.caib.carpeta.model.entity.Idioma;
 import es.caib.carpeta.model.entity.Plugin;
 import es.caib.carpeta.model.fields.EntitatFields;
+import es.caib.carpeta.model.fields.PluginEntitatFields;
+import es.caib.carpeta.model.fields.PluginEntitatQueryPath;
+import es.caib.carpeta.model.fields.PluginFields;
 
 /**
  * 
@@ -35,6 +38,9 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
 
     @EJB(mappedName = PluginDeCarpetaFrontLogicaLocal.JNDI_NAME)
     protected PluginDeCarpetaFrontLogicaLocal pluginCarpetaFrontEjb;
+
+    @EJB(mappedName = es.caib.carpeta.ejb.PluginEntitatLocal.JNDI_NAME)
+    protected es.caib.carpeta.ejb.PluginEntitatLocal pluginEntitatEjb;
 
     /**
      * Retorna codi i nom en l'idioma seleccionat
@@ -73,16 +79,18 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
     @Override
     public List<PluginInfo> getFrontPlugins(String codiEntitat, String language) throws I18NException {
 
-        List<Plugin> plugins = pluginCarpetaFrontEjb.getAllPlugins();
+        // XYZ ZZZ TODO Millorar amb una subquery
+        List<Long> pluginsEntitat = pluginEntitatEjb.executeQuery(PluginEntitatFields.PLUGINID,
+                new PluginEntitatQueryPath().ENTITAT().CODI().equal(codiEntitat));
+
+        List<Plugin> plugins = pluginCarpetaFrontEjb.getAllPlugins(PluginFields.PLUGINID.in(pluginsEntitat));
 
         List<PluginInfo> pluginsInfo = new ArrayList<PluginInfo>(plugins.size());
 
         for (Plugin plugin : plugins) {
-            pluginsInfo.add(new PluginInfo(plugin.getPluginID(),
-                    ((PluginJPA) plugin).getNom().getTraduccio(language).getValor(), ""));
-            // XYZ ZZZ
-
-            // ((PluginJPA)plugin).getDescripcio().getTraduccio(language).getValor()));
+            PluginJPA p = (PluginJPA) plugin;
+            pluginsInfo.add(new PluginInfo(plugin.getPluginID(), p.getNom().getTraduccio(language).getValor(),
+                    p.getDescripcio().getTraduccio(language).getValor()));
         }
 
         return pluginsInfo;

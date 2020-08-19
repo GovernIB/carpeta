@@ -3,9 +3,13 @@ package es.caib.carpeta.jpa;
 import es.caib.carpeta.model.entity.*;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import java.util.HashSet;
 import javax.persistence.Entity;
 import org.hibernate.annotations.Index;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import java.util.Set;
 import javax.persistence.Id;
 
 
@@ -102,6 +106,19 @@ private static final long serialVersionUID = 1367253670L;
     return __result;
   }
 
+// EXP  Field:idiomaid | Table: car_usuari | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "idioma")
+	private Set<UsuariJPA> usuaris = new HashSet<UsuariJPA>(0);
+	public  Set<UsuariJPA> getUsuaris() {
+    return this.usuaris;
+  }
+
+	public void setUsuaris(Set<UsuariJPA> usuaris) {
+	  this.usuaris = usuaris;
+	}
+
+
 
  // ---------------  STATIC METHODS ------------------
   public static IdiomaJPA toJPA(Idioma __bean) {
@@ -141,6 +158,10 @@ private static final long serialVersionUID = 1367253670L;
     __tmp = toJPA(__jpa);
     __alreadyCopied.put(__jpa, __tmp);
     // Copia de beans complexes (EXP)
+    if(!"UsuariJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.usuaris) || org.hibernate.Hibernate.isInitialized(__jpa.getUsuaris())) ) {
+      __tmp.setUsuaris(UsuariJPA.copyJPA(__jpa.getUsuaris(), __alreadyCopied,"IdiomaJPA"));
+    }
     // Copia de beans complexes (IMP)
 
     return __tmp;

@@ -4,7 +4,7 @@
 
 <a class="dropdown-item"
     href="<c:url value="/adminentitat/propietatglobal/list"/>"> <span
-    style="${(fn:contains(url, 'option1'))? " font-weight:bold;" : ""}"><spring:message
+    style="${(fn:contains(url, '/adminentitat/propietatglobal'))? " font-weight:bold;" : ""}"><spring:message
             code="propietatGlobal.propietatGlobal.plural" /></span>
 </a>
 
@@ -12,12 +12,23 @@
 
 <a class="dropdown-item"
     href="<c:url value="/adminentitat/usuarientitat/list"/>"> <span
-    style="${(fn:contains(url, 'option1'))? " font-weight:bold;" : ""}"><spring:message
+    style="${(fn:contains(url, 'adminentitat/usuarientitat'))? " font-weight:bold;" : ""}"><spring:message
             code="usuariEntitat.usuariEntitat.plural" /></span>
 </a>
 
 <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
+
+
+
+<a class="dropdown-item"
+    href="<c:url value="//adminentitat/pluginEntitat/list"/>"> <span
+    style="${(fn:contains(url, '/adminentitat/pluginEntitat'))? " font-weight:bold;" : ""}"><spring:message
+            code="pluginEntitat.pluginEntitat.plural" /></span>
+</a>
+
+
+<hr style="margin-top: 6px; margin-bottom: 6px;" />
 
 <a class="dropdown-item" href="<c:url value="/user/option1"/>"> <span
     style="${(fn:contains(url, 'option1'))? " font-weight:bold;" : ""}">Menú

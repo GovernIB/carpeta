@@ -37,6 +37,41 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,PluginFields.DESCRIPCIOID)}">
+        <tr id="plugin_descripcioID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[PluginFields.DESCRIPCIOID])?'plugin.descripcioID':__theForm.labels[PluginFields.DESCRIPCIOID]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[PluginFields.DESCRIPCIOID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.DESCRIPCIOID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+       <form:errors path="plugin.descripcio" cssClass="errorField alert alert-error" />
+       <div class="row-fluid  col-md-6">
+         <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
+             <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
+            <li class="nav-item ">
+                 <a class="nav-link ${(counter.index == 0)? 'active':''}" href="#${counter.index}_tab_descripcio_${idioma.idiomaID}" data-toggle="tab">${idioma.nom}</a>
+            </li>
+          </c:forEach>
+           
+         </ul>
+         <div class="tab-content well well-white" style="padding:8px;margin:0px;">
+           <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
+           <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_descripcio_${idioma.idiomaID}">
+               <form:errors path="plugin.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-error"/>
+               <form:input path="plugin.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,PluginFields.DESCRIPCIOID)? ' uneditable-input' : ''}" maxlength="4000" />
+           </div>
+           </c:forEach>
+         </div>
+       </div>
+
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginFields.CLASSE)}">
         <tr id="plugin_classe_rowid">
           <td>
