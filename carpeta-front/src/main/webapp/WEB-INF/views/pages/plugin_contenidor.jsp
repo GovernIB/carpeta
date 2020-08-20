@@ -12,7 +12,7 @@
 
 	<!-- Scripts -->
 
-	<script src="<c:url value="/js/jquery-3.5.0.js"/>"></script>
+	<script src="<c:url value="/src/assets/js/jquery-3.5.0.js"/>"></script>
 
 </head>
 

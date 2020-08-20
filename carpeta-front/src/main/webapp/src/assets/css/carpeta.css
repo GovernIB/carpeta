@@ -86,7 +86,17 @@ img:hover {
 .clickable-row{
 	cursor: pointer;
 }
-
+.imc-titol h5 span {
+	font-weight: normal;
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 0.8em;
+	padding-right: 1em;
+}
+.usuari{
+	top: 2.5em;
+	height: 2em;
+}
 
 /* Canvis per React */
 /*.imc-continguts {
