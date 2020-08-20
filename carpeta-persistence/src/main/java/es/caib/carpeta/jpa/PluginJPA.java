@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import java.util.Set;
 import org.hibernate.annotations.Type;
+import org.hibernate.type.descriptor.sql.LobTypeMappings;
+
 import java.util.HashSet;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;

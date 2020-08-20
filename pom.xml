@@ -349,5 +349,6 @@
         <module>carpeta-ear</module>
         <module>carpeta-integrations</module>
         <module>carpeta-pluginsib</module>
+        <module>scripts</module>
     </modules>
 </project>

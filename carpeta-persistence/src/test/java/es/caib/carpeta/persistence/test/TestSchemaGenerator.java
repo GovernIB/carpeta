@@ -62,5 +62,7 @@ public class TestSchemaGenerator {
 
         
         Persistence.generateSchema("carpetaPULocal", map);
+
+        
     }
 }
