@@ -97,7 +97,7 @@ public class LoginController {
 
     }
 
-    @RequestMapping(value="/salir")
+    @RequestMapping(value="/sortir")
     public String salir(HttpServletRequest request) throws Exception{
 
         log.info("Dentro de salir");

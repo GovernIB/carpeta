@@ -4,7 +4,7 @@ export const Inici  = [
 ];
 
 export const Accessibilitat  = [
-  {id: 'javascript:newInici("contingut", "");',label: 'breadcrumbInici'},
+  {id: 'javascript:newInici("contingut", autenticat);',label: 'breadcrumbInici'},
   {id: 'accessibilitat',label: 'breadcrumbAccessibilitat'}
 ];
 

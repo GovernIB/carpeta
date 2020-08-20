@@ -1,12 +1,13 @@
 var newIniciReact;
 var newAccessibilitatReact;
 var newTramitsPendentsReact;
-var newIniciPrivatReact;
 var newRegistresReact;
 var newDetallRegistreReact;
 var newNotificacionsReact;
 var newMapaWebReact;
 var newDadesPersonalsReact;
+var newMenuDesllisantReact;
+var newBreadcrumbReact;
 
 
 function newInici(compoWeb, nom) {
@@ -19,10 +20,6 @@ function newAccessibilitat(compoWeb, nom) {
 
 function newTramitsPendents(compoWeb, nom) {
 	setTimeout(newTramitsPendentsReact.bind(null,compoWeb,nom) , 1);
-}
-
-function newIniciPrivat(compoWeb, nom) {
-	setTimeout(newIniciPrivatReact.bind(null,compoWeb,nom) , 1);
 }
 
 function newRegistres(compoWeb, nom) {
@@ -43,4 +40,12 @@ function newMapaWeb(compoWeb, nom) {
 
 function newDadesPersonals(compoWeb, nom) {
 	setTimeout(newDadesPersonalsReact.bind(null,compoWeb,nom) , 1);
+}
+
+function newMenuDesllisant(compoWeb, nom) {
+	setTimeout(newMenuDesllisantReact.bind(null,compoWeb,nom) , 1);
+}
+
+function newBreadcrumb(compoWeb, nom) {
+	setTimeout(newBreadcrumbReact.bind(null,compoWeb,nom) , 1);
 }
