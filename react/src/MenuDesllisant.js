@@ -3,7 +3,7 @@ import { withTranslation } from 'react-i18next';
 import i18n from 'i18next';
 
 
-function MenuDesllisant ({ t }) {
+function MenuDesllisant ({ t , autenticat}) {
 
     var boto_ca;
     if (i18n.language === 'ca') {
@@ -18,6 +18,23 @@ function MenuDesllisant ({ t }) {
     } else {
       boto_es = <button onClick={() => i18n.changeLanguage('es')} className="boton-menu">{ t('menuIdioma_es') }</button>;
     }
+
+	var tramits;
+	var registres;
+	var notificacions;
+	var sortir;
+	if (autenticat === '1'){
+		tramits = <li><a href="javascript:newTramitsPendents('contingut', '');" className="imc-marc-ico imc--tramits" id="imc-marc-tramits" title={ t('menuTramits') }><span>{ t('menuTramits') }</span></a></li>;
+		registres = <li><a href="javascript:newRegistres('contingut', '');" className="imc-marc-ico imc--registres" id="imc-marc-registres" title={ t('menuRegistres') }><span>{ t('menuRegistres') }</span></a></li>;
+		notificacions = <li><a href="javascript:newNotificacions('contingut', '');" className="imc-marc-ico imc--notificacions" id="imc-marc-notificacions" title={ t('menuNotificacions') }><span>{ t('menuNotificacions') }</span></a></li>;
+		sortir = <li><a href="sortir" className="imc-marc-ico imc--sortir" id="imc-marc-sortir" title={ t('menuSortir') }><span>{ t('menuSortir') }</span></a></li>;
+	} 
+	if(autenticat === '0'){
+		tramits = '';
+		registres = '';
+		notificacions = '';
+		sortir = '';
+	}
 
 
     return (
@@ -41,31 +58,10 @@ function MenuDesllisant ({ t }) {
                 <span>{ t('menuAccessibilitat') }</span>
               </a>
             </li>
-            <li>
-              <a href="javascript:newTramitsPendents('contingut', '');" className="imc-marc-ico imc--tramits" id="imc-marc-tramits" title={ t('menuTramits') }>
-                <span>{ t('menuTramits') }</span>
-              </a>
-            </li>
-            <li>
-              <a href="javascript:newRegistres('contingut', '');" className="imc-marc-ico imc--registres" id="imc-marc-registres" title={ t('menuRegistres') }>
-                <span>{ t('menuRegistres') }</span>
-              </a>
-            </li>
-            <li>
-              <a href="javascript:newNotificacions('contingut', '');" className="imc-marc-ico imc--notificacions" id="imc-marc-notificacions" title={ t('menuNotificacions') }>
-                <span>{ t('menuNotificacions') }</span>
-              </a>
-            </li>
-			<li>
-              <a href="javascript:newIniciPrivat('contingut', '');" className="imc-marc-ico" id="" title={ t('iniciPrivatTitol') }>
-                <span>{ t('iniciPrivatTitol') }</span>
-              </a>
-            </li>
-            <li>
-              <a href="sortir" className="imc-marc-ico imc--sortir" id="imc-marc-sortir" title={ t('menuSortir') }>
-                <span>{ t('menuSortir') }</span>
-              </a>
-            </li>
+			{tramits}
+			{registres}
+			{notificacions}
+			{sortir}
           </ul>
         </div>
       </div>

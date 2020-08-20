@@ -12,7 +12,6 @@ import TramitsPendents from './TramitsPendents';
 import Registres from './Registres';
 import DetallRegistre from './DetallRegistre';
 import Notificacions from './Notificacions';
-import IniciPrivat from './IniciPrivat';
 import MapaWeb from './MapaWeb';
 import DadesPersonals from './DadesPersonals';
 import Breadcrumb from './Breadcrumb';
@@ -31,7 +30,7 @@ ReactDOM.render(
 );
 
 ReactDOM.render(
-  <MenuDesllisant />,
+  <MenuDesllisant autenticat='0'/>,
   document.getElementById("menuDesllisant")
 );
 
@@ -46,58 +45,56 @@ ReactDOM.render(
 );
 
 ReactDOM.render(
-  <Breadcrumb items={breadcrumbPaths.Inici}/>,
+  <Breadcrumb items={breadcrumbPaths.Inici} autenticat='0'/>,
   document.getElementById("mollaPa")
 );
 
 ReactDOM.render(
-  <Inici />,
+  <Inici autenticat='0'/>,
   document.getElementById("contingut")
 );
 
 
 newIniciReact  = function createReactCompInici(nomComponent, param) {
-    ReactDOM.render(<Inici />, document.getElementById(nomComponent));
-	ReactDOM.render(<Breadcrumb items={breadcrumbPaths.Inici}/>, document.getElementById("mollaPa"));
+    ReactDOM.render(<Inici autenticat={param}/>, document.getElementById(nomComponent));
+	ReactDOM.render(<Breadcrumb items={breadcrumbPaths.Inici} autenticat={param}/>, document.getElementById("mollaPa"));
 };
 
 newAccessibilitatReact  = function createReactCompAccessibilitat(nomComponent, param) {
     ReactDOM.render(<Accessibilitat />, document.getElementById(nomComponent));
-	ReactDOM.render(<Breadcrumb items={breadcrumbPaths.Accessibilitat}/>, document.getElementById("mollaPa"));
+	ReactDOM.render(<Breadcrumb items={breadcrumbPaths.Accessibilitat} autenticat={param}/>, document.getElementById("mollaPa"));
 };
 
 newTramitsPendentsReact  = function createReactCompTramitsPendents(nomComponent, param) {
     ReactDOM.render(<TramitsPendents />, document.getElementById(nomComponent));
-	ReactDOM.render(<Breadcrumb items={breadcrumbPaths.TramitsPendents}/>, document.getElementById("mollaPa"));
-};
-
-newIniciPrivatReact  = function createReactCompIniciPrivat(nomComponent, param) {
-    ReactDOM.render(<IniciPrivat />, document.getElementById(nomComponent));
-	ReactDOM.render(<Breadcrumb items={breadcrumbPaths.Inici}/>, document.getElementById("mollaPa"));
+	ReactDOM.render(<Breadcrumb items={breadcrumbPaths.TramitsPendents} autenticat={param}/>, document.getElementById("mollaPa"));
 };
 
 newRegistresReact  = function createReactCompRegistres(nomComponent, param) {
     ReactDOM.render(<Registres />, document.getElementById(nomComponent));
-	ReactDOM.render(<Breadcrumb items={breadcrumbPaths.Registres}/>, document.getElementById("mollaPa"));
+	ReactDOM.render(<Breadcrumb items={breadcrumbPaths.Registres} autenticat={param}/>, document.getElementById("mollaPa"));
 };
 
 newDetallRegistreReact  = function createReactCompDetallRegistre(nomComponent, param) {
     ReactDOM.render(<DetallRegistre id={param} />, document.getElementById(nomComponent));
-	ReactDOM.render(<Breadcrumb items={breadcrumbPaths.DetallRegistre}/>, document.getElementById("mollaPa"));
+	ReactDOM.render(<Breadcrumb items={breadcrumbPaths.DetallRegistre} autenticat={param}/>, document.getElementById("mollaPa"));
 };
 
 newNotificacionsReact  = function createReactCompNotificacions(nomComponent, param) {
     ReactDOM.render(<Notificacions />, document.getElementById(nomComponent));
-	ReactDOM.render(<Breadcrumb items={breadcrumbPaths.Notificacions}/>, document.getElementById("mollaPa"));
+	ReactDOM.render(<Breadcrumb items={breadcrumbPaths.Notificacions} autenticat={param}/>, document.getElementById("mollaPa"));
 };
 
 newMapaWebReact  = function createReactCompMapaWeb(nomComponent, param) {
     ReactDOM.render(<MapaWeb />, document.getElementById(nomComponent));
-	ReactDOM.render(<Breadcrumb items={breadcrumbPaths.MapaWeb}/>, document.getElementById("mollaPa"));
+	ReactDOM.render(<Breadcrumb items={breadcrumbPaths.MapaWeb} autenticat={param}/>, document.getElementById("mollaPa"));
 };
 
 newDadesPersonalsReact  = function createReactCompDadesPersonals(nomComponent, param) {
     ReactDOM.render(<DadesPersonals />, document.getElementById(nomComponent));
-	ReactDOM.render(<Breadcrumb items={breadcrumbPaths.DadesPersonals}/>, document.getElementById("mollaPa"));
+	ReactDOM.render(<Breadcrumb items={breadcrumbPaths.DadesPersonals} autenticat={param}/>, document.getElementById("mollaPa"));
 };
 
+newMenuDesllisantReact  = function createReactCompMenuDesllisant(nomComponent, param) {
+    ReactDOM.render(<MenuDesllisant autenticat={param}/>, document.getElementById(nomComponent));
+};
