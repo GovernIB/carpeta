@@ -1,133 +1,108 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>es.caib.carpeta</groupId>
-	<artifactId>carpeta-persistence</artifactId>
-	<packaging>jar</packaging>
+    <artifactId>carpeta-persistence</artifactId>
+    <packaging>jar</packaging>
 
-	<parent>
-		<groupId>es.caib.carpeta</groupId>
-		<artifactId>carpeta</artifactId>
-		<version>1.1.2</version>
-	</parent>
+    <parent>
+        <groupId>es.caib.carpeta</groupId>
+        <artifactId>carpeta</artifactId>
+        <version>1.1.2</version>
+    </parent>
 
-	<name>Carpeta - persistence</name>
-    
+    <name>Carpeta - Persistence</name>
+
     <properties>
-		<maven.test.skip>false</maven.test.skip>
+        <maven.test.skip>false</maven.test.skip>
     </properties>
 
-	<dependencies>
+    <dependencies>
 
-		<dependency>
-			<groupId>es.caib.carpeta</groupId>
-			<artifactId>carpeta-model</artifactId>
-			<version>${project.version}</version>
-			<type>jar</type>
-		</dependency>
+        <dependency>
+            <groupId>es.caib.carpeta</groupId>
+            <artifactId>carpeta-model</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+        </dependency>
 
-		<dependency>
-			<groupId>es.caib.carpeta</groupId>
-			<artifactId>carpeta-commons</artifactId>
-			<version>${project.version}</version>
-			<type>jar</type>
-		</dependency>
+        <dependency>
+            <groupId>es.caib.carpeta</groupId>
+            <artifactId>carpeta-commons</artifactId>
+            <version>${project.version}</version>
+            <type>jar</type>
+        </dependency>
 
-		<dependency>
-			<groupId>org.fundaciobit.genapp</groupId>
-			<artifactId>genapp-core</artifactId>
-			<version>${genapp.version}</version>
-			<scope>compile</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.fundaciobit.genapp</groupId>
+            <artifactId>genapp-core</artifactId>
+            <version>${genapp.version}</version>
+            <scope>compile</scope>
+        </dependency>
 
-		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-		<!-- Anotacions de documentació de openapi -->
-		<dependency>
-			<groupId>org.eclipse.microprofile.openapi</groupId>
-			<artifactId>microprofile-openapi-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <!-- Anotacions de documentació de openapi -->
+        <dependency>
+            <groupId>org.eclipse.microprofile.openapi</groupId>
+            <artifactId>microprofile-openapi-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<scope>provided</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
 
-		<!-- Dependències de test -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
+        <!-- Dependències de test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
 
-	</dependencies>
+    </dependencies>
 
-	<build>
-    
-    <plugins>
-    <plugin>
-        <artifactId>maven-jar-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>jdbc</id>
-            <goals><goal>test-jar</goal></goals>
-            <phase>package</phase>
-            <configuration>
-              <classifier>jdbc</classifier>
-              <forceCreation>true</forceCreation>
-              
-              <excludes>
-                <exclude>**/*.java</exclude>
-                <exclude>**/*.class</exclude>
-                <exclude>**/arquillian.xml</exclude>
-                <exclude>**/arquillian-persistence.xml</exclude>
-              </excludes>
-              <!--
-              <includes>
-                 <include>**/*.*</include>  
-                 <include>**/*.xml</include>                    
-              </includes>
-              -->
-              <skip>false</skip>
-            </configuration>
-          </execution>
-          
-        </executions>
-      </plugin>
-    </plugins>
-    
-    
-    <!--
-		<finalName>${project.artifactId}-${project.version}</finalName>
-            <plugins>
-     <plugin>
-       <groupId>org.apache.maven.plugins</groupId>
-       <artifactId>maven-jar-plugin</artifactId>
-       <version>3.0.2</version>
-       <executions>
-         <execution>
-           <goals>
-             <goal>test-jar</goal>
-           </goals>
-         </execution>
-       </executions>
-     </plugin>
-    </plugins>
-    -->
-	</build>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>jdbc</id>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <classifier>jdbc</classifier>
+                            <forceCreation>true</forceCreation>
+
+                            <excludes>
+                                <exclude>**/*.java</exclude>
+                                <exclude>**/*.class</exclude>
+                                <exclude>**/arquillian.xml</exclude>
+                                <exclude>**/arquillian-persistence.xml</exclude>
+                            </excludes>
+                            <skip>false</skip>
+                        </configuration>
+                    </execution>
+
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>
