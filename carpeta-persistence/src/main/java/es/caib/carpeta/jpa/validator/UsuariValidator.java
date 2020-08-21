@@ -113,6 +113,28 @@ public class UsuariValidator<I extends Usuari>
       // ====== Check Unique MULTIPLES - NOU =======
 
       // Check Unique - no PK
+      if (__vr.getFieldErrorCount(USERNAME) == 0) {
+        java.lang.String __username = __target__.getUsername();
+        Long __count_ = null;
+        try { __count_ = __usuariManager.count(org.fundaciobit.genapp.common.query.Where.AND(USERNAME.equal(__username))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ != 0) {        
+            __vr.rejectValue(USERNAME, "genapp.validation.unique",
+                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__username)),
+                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USERNAME)));
+        }
+      }
+
+      if (__vr.getFieldErrorCount(NIF) == 0) {
+        java.lang.String __nif = __target__.getNif();
+        Long __count_ = null;
+        try { __count_ = __usuariManager.count(org.fundaciobit.genapp.common.query.Where.AND(NIF.equal(__nif))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ != 0) {        
+            __vr.rejectValue(NIF, "genapp.validation.unique",
+                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__nif)),
+                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NIF)));
+        }
+      }
+
       // Check Unique - PK no AutoIncrement amb UNA SOLA PK 
     } else {
       // ================ UPDATE
@@ -120,6 +142,30 @@ public class UsuariValidator<I extends Usuari>
       // ====== Check Unique MULTIPLES - EDIT  =======
 
       // Check Unique - no PK
+      if (__vr.getFieldErrorCount(USERNAME) == 0 && __vr.getFieldErrorCount(USUARIID) == 0) {
+        java.lang.String __username = __target__.getUsername();
+        java.lang.Long __usuariid = __target__.getUsuariID();
+        Long __count_ = null;
+        try { __count_ = __usuariManager.count(org.fundaciobit.genapp.common.query.Where.AND(USERNAME.equal(__username), USUARIID.notEqual(__usuariid))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ != 0) {        
+            __vr.rejectValue(USERNAME, "genapp.validation.unique",
+                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__username)),
+                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USERNAME)));
+        }
+      }
+
+      if (__vr.getFieldErrorCount(NIF) == 0 && __vr.getFieldErrorCount(USUARIID) == 0) {
+        java.lang.String __nif = __target__.getNif();
+        java.lang.Long __usuariid = __target__.getUsuariID();
+        Long __count_ = null;
+        try { __count_ = __usuariManager.count(org.fundaciobit.genapp.common.query.Where.AND(NIF.equal(__nif), USUARIID.notEqual(__usuariid))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ != 0) {        
+            __vr.rejectValue(NIF, "genapp.validation.unique",
+                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__nif)),
+                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(NIF)));
+        }
+      }
+
     }
 
     // Fields with References to Other tables 

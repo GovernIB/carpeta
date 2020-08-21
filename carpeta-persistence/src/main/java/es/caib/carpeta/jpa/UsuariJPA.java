@@ -35,7 +35,7 @@ private static final long serialVersionUID = -1105822054L;
 	@Column(name="usuariid",nullable = false,length = 19)
 	long usuariID;
 
-	@Column(name="username",nullable = false,length = 255)
+	@Column(name="username",nullable = false,unique = true,length = 255)
 	java.lang.String username;
 
 	@Column(name="nom",nullable = false,length = 255)
@@ -50,7 +50,7 @@ private static final long serialVersionUID = -1105822054L;
 	@Column(name="email",length = 255)
 	java.lang.String email;
 
-	@Column(name="nif",length = 255)
+	@Column(name="nif",unique = true,length = 255)
 	java.lang.String nif;
 
 	@Index(name="car_usuari_darreraentitat_fk_i")

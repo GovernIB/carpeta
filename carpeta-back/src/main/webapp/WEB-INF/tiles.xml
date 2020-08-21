@@ -207,7 +207,9 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariList.jsp" />
     </definition>
     
-    
+    <definition name="crearusuariSuperAdmin" extends="superadmin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/superadmin/crear_usuari.jsp" />
+    </definition>
     
     <definition name="testPlugin" extends="superadmin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugin_contenidor.jsp" />

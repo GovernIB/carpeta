@@ -176,5 +176,12 @@
 
     alter table car_usuarientitat 
        add constraint car_usuent_usu_ent_uk unique (usuariid, entitatid);
+       
+    ALTER TABLE car_usuari
+       ADD CONSTRAINT car_usuari_username_uk UNIQUE (username);
+
+    ALTER TABLE car_usuari
+       ADD CONSTRAINT car_usuari_nif_uk UNIQUE (nif);
+       
  -- FINAL UNIQUEs
 

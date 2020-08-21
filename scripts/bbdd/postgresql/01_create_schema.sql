@@ -621,6 +621,12 @@ ALTER TABLE ONLY car_pluginentitat
     ADD CONSTRAINT car_plugent_plug_ent_uk UNIQUE (pluginid, entitatid);
 
 
+    ALTER TABLE car_usuari
+       ADD CONSTRAINT car_usuari_username_uk UNIQUE (username);
+
+    ALTER TABLE car_usuari
+       ADD CONSTRAINT car_usuari_nif_uk UNIQUE (nif);
+
 --
 -- TOC entry 1968 (class 2606 OID 112585)
 -- Name: car_plugin_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
