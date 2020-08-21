@@ -36,3 +36,10 @@ nb-configuration.xml
 /carpeta-back/src/main/webapp/WEB-INF/jsp/moduls/menu_user.jsp
 /scripts/bbdd/oracle/create_db.sql
 /scripts/bbdd/oracle/drop_db.sql
+/scripts/sqlgenerator/01_sequences.sql
+/scripts/sqlgenerator/02_tables.sql
+/scripts/sqlgenerator/03_constraints.sql
+/scripts/sqlgenerator/04_indexes.sql
+/scripts/sqlgenerator/06_grants.sql
+/scripts/sqlgenerator/create_schema.sql
+/scripts/sqlgenerator/drop_schema.sql
