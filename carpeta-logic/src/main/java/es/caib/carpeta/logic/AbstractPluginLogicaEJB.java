@@ -69,11 +69,10 @@ public abstract class AbstractPluginLogicaEJB<I extends IPlugin> extends PluginL
 
             if (plugin.getPropietats() != null && plugin.getPropietats().trim().length() != 0) {
                 try {
-
                     prop.load(new StringReader(plugin.getPropietats()));
-
                 } catch (Exception e) {
                     // TODO Crec que no es cridarà mai
+                    e.printStackTrace();
                 }
             }
 
