@@ -6,7 +6,8 @@ import { withTranslation } from 'react-i18next';
 class LegacyComponentClass extends Component{
 
   render(){
-
+	  
+	var autenticat = sessionStorage.getItem('autenticat');
     let items = this.props.items;
 
     const TOTAL_ITEMS = items.length;
@@ -32,7 +33,7 @@ class LegacyComponentClass extends Component{
 
 const Molla = withTranslation()(LegacyComponentClass)
 
-export default function Breadcrumb({items}) {
+export default function Breadcrumb({items , autenticat}) {
   return (
     <Suspense fallback="loading">
       <Molla items={items}/>

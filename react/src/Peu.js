@@ -2,7 +2,15 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 
 
-function Peu ({ t }) {
+function Peu ({ t , autenticat}) {
+	
+	var mapa;
+	if (autenticat === '1'){
+		mapa = <a href="javascript:newMapaWeb('contingut', '1');">{ t('peuMapa') }</a>;
+	} 
+	if(autenticat === '0'){
+		mapa = <a href="javascript:newMapaWeb('contingut', '0');">{ t('peuMapa') }</a>;
+	}
 
     return (
       <footer className="imc-peu">
@@ -19,7 +27,7 @@ function Peu ({ t }) {
 
           <div className="imc-peu-opcions">
             <ul>
-              <li><a href="javascript:newMapaWeb('contingut', '');">{ t('peuMapa') }</a></li>
+              <li>{mapa}</li>
               <li><a href="http://www.caib.es/govern/external/infoLegal.do?lang=ca">{ t('peuAvis') }</a></li>
               <li>
                 <a href="http://www.caib.es/govern/rss.do?lang=ca" className="imc-en-rss">
