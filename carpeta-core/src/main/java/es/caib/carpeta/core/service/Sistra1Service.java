@@ -2,6 +2,8 @@ package es.caib.carpeta.core.service;
 
 import es.caib.carpeta.core.utils.UsuarioClave;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitePersistente;
+import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementosExpediente;
+
 
 import java.util.Date;
 import java.util.List;
@@ -25,4 +27,13 @@ public interface Sistra1Service {
      */
     String obtenerTiquetAcceso(String idSesionTramitacion, UsuarioClave usuario) throws Exception;
 
+    /**
+     *
+     * @param
+     * @param
+     * @return
+     * @throws Exception
+     */
+
+    ElementosExpediente obtenerElementosExpediente() throws Exception;
 }

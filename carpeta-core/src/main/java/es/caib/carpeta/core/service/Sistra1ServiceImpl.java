@@ -1,9 +1,14 @@
 package es.caib.carpeta.core.service;
 
+import es.caib.carpeta.core.utils.DateUtils;
 import es.caib.carpeta.core.utils.UsuarioClave;
+import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementosExpediente;
+import es.caib.zonaper.ws.v2.model.elementoexpediente.FiltroElementosExpediente;
+import es.caib.zonaper.ws.v2.model.elementoexpediente.TipoElementoExpediente;
+import es.caib.zonaper.ws.v2.model.elementoexpediente.TiposElementoExpediente;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitePersistente;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitesPersistentes;
-import es.caib.zonaper.ws.v2.model.usuarioautenticadoinfo.UsuarioAutenticadoInfo;
+//import es.caib.zonaper.ws.v2.model.usuarioautenticadoinfo.UsuarioAutenticadoInfo;
 import es.caib.zonaper.ws.v2.services.BackofficeFacade;
 import es.caib.zonaper.ws.v2.services.BackofficeFacadeService;
 import org.fundaciobit.plugins.utils.XTrustProvider;
@@ -15,6 +20,7 @@ import org.springframework.stereotype.Service;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.ws.BindingProvider;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -31,6 +37,8 @@ public class Sistra1ServiceImpl implements Sistra1Service{
 
     @Override
     public List<TramitePersistente> obtenerTramites(String documento, Date fechaInicio, Date fechaFin) throws Exception{
+        //SISTRA1 i SISTRA2 fan la consulta de tramits amb intervals no inclusius
+        fechaFin = DateUtils.sumarRestarDiasFecha(fechaFin, 1);
 
         BackofficeFacade backofficeFacade =  getBackofficeFacade();
 
@@ -52,16 +60,53 @@ public class Sistra1ServiceImpl implements Sistra1Service{
 
         BackofficeFacade backofficeFacade = getBackofficeFacade();
 
-        UsuarioAutenticadoInfo usuarioAutenticadoInfo = new UsuarioAutenticadoInfo();
-        usuarioAutenticadoInfo.setNombre(usuario.getNombre());
-        usuarioAutenticadoInfo.setApellido1(usuario.getApellido1());
-        usuarioAutenticadoInfo.setApellido2(usuario.getApellido2());
-        usuarioAutenticadoInfo.setMetodoAutenticacion(usuario.getMetodoAutentificacion());
-        usuarioAutenticadoInfo.setNif(usuario.getNif());
+//        UsuarioAutenticadoInfo usuarioAutenticadoInfo = new UsuarioAutenticadoInfo();
+//        usuarioAutenticadoInfo.setNombre(usuario.getNombre());
+//        usuarioAutenticadoInfo.setApellido1(usuario.getApellido1());
+//        usuarioAutenticadoInfo.setApellido2(usuario.getApellido2());
+//        usuarioAutenticadoInfo.setMetodoAutenticacion(usuario.getMetodoAutentificacion());
+//        usuarioAutenticadoInfo.setNif(usuario.getNif());
+//
+        
+//        String url = backofficeFacade.oobtenerTiquetAcceso(idSesionTramitacion, usuario);
+        return "url";
+    }
 
-        String url = backofficeFacade.obtenerTiquetAcceso(idSesionTramitacion,usuarioAutenticadoInfo);
 
-        return url;
+//    public String obtenerElementosExpediente(UsuarioClave usuario) throws Exception {
+    public ElementosExpediente obtenerElementosExpediente() throws Exception {
+        log.debug("ANTES de declarar elementos");
+        BackofficeFacade backofficeFacade = getBackofficeFacade();
+
+//        UsuarioAutenticadoInfo usuarioAutenticadoInfo = new UsuarioAutenticadoInfo();
+//        usuarioAutenticadoInfo.setNombre(usuario.getNombre());
+//        usuarioAutenticadoInfo.setApellido1(usuario.getApellido1());
+//        usuarioAutenticadoInfo.setApellido2(usuario.getApellido2());
+//        usuarioAutenticadoInfo.setMetodoAutenticacion(usuario.getMetodoAutentificacion());
+//        usuarioAutenticadoInfo.setNif(usuario.getNif());
+
+        log.debug("ANTES de declarar elementos");
+
+        TiposElementoExpediente teess = new TiposElementoExpediente();
+        teess.getTipo().add(TipoElementoExpediente.COMUNICACION);
+        teess.getTipo().add(TipoElementoExpediente.NOTIFICACION);
+        teess.getTipo().add(TipoElementoExpediente.ENVIO);
+        teess.getTipo().add(TipoElementoExpediente.PREENVIO);
+        teess.getTipo().add(TipoElementoExpediente.PREREGISTRO);
+        teess.getTipo().add(TipoElementoExpediente.REGISTRO);
+
+        FiltroElementosExpediente fee = new FiltroElementosExpediente();
+        fee.setNif("11111111H");
+        fee.setIdioma("es");
+        fee.setTipos(teess);
+
+        log.debug("ANTES de LLAMADA");
+
+        ElementosExpediente el = backofficeFacade.obtenerElementosExpediente(fee);
+
+        log.debug("DESPUEEEEEEEEEEEEEES");
+
+        return el;
     }
 
     /**
@@ -70,7 +115,6 @@ public class Sistra1ServiceImpl implements Sistra1Service{
      * @throws Exception
      */
     private BackofficeFacade getBackofficeFacade() throws Exception{
-
         final URL wsdl = new URL(SISTRA1_URL + "?wsdl");
 
         if(SISTRA1_URL.startsWith("https") && development){

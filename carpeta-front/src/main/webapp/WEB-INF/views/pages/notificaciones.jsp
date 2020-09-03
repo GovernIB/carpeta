@@ -1,7 +1,7 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
 
-<div class="card mb-12 border-0">
-    <span class="h5 card-title border-bottom verde"><fmt:message key="menu.notificaciones"/></span>
+<div class="card mb-12 border-0 p-2">
+    <span class="h5 card-title border-bottom verde paddingBottomEstandard"><fmt:message key="menu.notificaciones"/></span>
 
     <p class="lh15"><fmt:message key="notificaciones.descripcion"/></p>
 
@@ -21,7 +21,7 @@
 
             <!-- Otras notificaciones -->
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 boxGestio">
-                <button class="box-part text-center capsaMenu" onclick="goToWindow('${zonaperUrl}')">
+                <button class="box-part text-center capsaMenu" onclick="goTo('<c:url value="/notificacion/comunicaciones"/>')" >
                     <span class="oi oi-box imagenMenu" title="<fmt:message key="menu.notificaciones.otras"/>" alt="<fmt:message key="menu.notificaciones.otras"/>" aria-hidden="true"></span>
                     <div class="tituloMenu"><fmt:message key="menu.notificaciones.otras"/></div>
                     <div class="text">
