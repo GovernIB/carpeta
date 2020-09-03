@@ -49,10 +49,10 @@
         <put-attribute name="body" value="/WEB-INF/views/pages/notificaciones.jsp" />
     </definition>
 
-<!--    &lt;!&ndash; Notificaciones / comunicaciones &ndash;&gt;-->
-<!--    <definition name="comunicaciones" extends="base-definition">-->
-<!--        <put-attribute name="body" value="/WEB-INF/views/pages/comunicaciones.jsp" />-->
-<!--    </definition>-->
+    <!-- Notificaciones / comunicaciones -->
+    <definition name="comunicaciones" extends="base-definition">
+        <put-attribute name="body" value="/WEB-INF/views/pages/comunicaciones.jsp" />
+    </definition>
 
     <!-- Llista de registres Page -->
     <definition name="registros" extends="base-definition">

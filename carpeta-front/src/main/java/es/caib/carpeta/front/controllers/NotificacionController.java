@@ -62,7 +62,7 @@ public class NotificacionController {
         mav.addObject("sistraZonaperUrl", SISTRA1_ZONAPER_URL);
         mav.addObject("notificacionesUrl", NOTIFICACIONES_URL);
         mav.addObject("comunicacions", comunicaciones);
-        mav.addObject("breadcrumb", Arrays.asList("inicio", "notificaciones", "notificaciones.otros"));
+        mav.addObject("breadcrumb", Arrays.asList("inicio", "notificaciones", "notificaciones.otras"));
         Locale loc = LocaleContextHolder.getLocale();
         mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.comunicaciones"));
 
