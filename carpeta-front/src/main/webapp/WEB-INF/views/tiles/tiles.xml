@@ -49,6 +49,11 @@
         <put-attribute name="body" value="/WEB-INF/views/pages/notificaciones.jsp" />
     </definition>
 
+<!--    &lt;!&ndash; Notificaciones / comunicaciones &ndash;&gt;-->
+<!--    <definition name="comunicaciones" extends="base-definition">-->
+<!--        <put-attribute name="body" value="/WEB-INF/views/pages/comunicaciones.jsp" />-->
+<!--    </definition>-->
+
     <!-- Llista de registres Page -->
     <definition name="registros" extends="base-definition">
         <put-attribute name="body" value="/WEB-INF/views/pages/registros.jsp" />
@@ -74,5 +79,9 @@
         <put-attribute name="body" value="/WEB-INF/views/pages/mapaWeb.jsp" />
     </definition>
 
+    <!-- Accés anònim -->
+    <definition name="anonim" extends="base-definition">
+        <put-attribute name="body" value="/WEB-INF/views/pages/anonim.jsp" />
+    </definition>
 
 </tiles-definitions>

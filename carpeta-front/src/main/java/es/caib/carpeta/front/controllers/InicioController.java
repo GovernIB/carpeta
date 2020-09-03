@@ -21,6 +21,7 @@ public class InicioController {
 
     @Value("${es.caib.carpeta.zonaper.url}")    private String ZONAPER_URL;
     @Value("${es.caib.carpeta.notificaciones.url}")    private String NOTIFICACIONES_URL;
+    @Value("${es.caib.carpeta.regweb3.host}")    private String ENTORNO_URL;
 
 
     @RequestMapping(value="/inicio")
@@ -83,5 +84,19 @@ public class InicioController {
 
 
         return mav;
+    }
+
+    @RequestMapping(value="/anonim")
+    public ModelAndView anonim(HttpServletRequest request) {
+
+        ModelAndView mav = new ModelAndView("anonim");
+
+        mav.addObject("breadcrumb", Arrays.asList("inicio", "anonim"));
+        mav.addObject("entornoURL", ENTORNO_URL);
+        Locale loc = LocaleContextHolder.getLocale();
+        mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.inicio"));
+
+        return mav;
+
     }
 }
