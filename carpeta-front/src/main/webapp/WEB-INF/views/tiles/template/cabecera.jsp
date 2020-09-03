@@ -17,8 +17,17 @@
                 <strong class="subtitulo quitarMovil"><fmt:message key="menu.usuario"/></strong>
                 <span class="subtituloMay">
                     <c:if test="${user != null}">
-                        <sec:authentication property="principal.usuarioClave.nombreCompleto" />
+                        <sec:authentication property="principal.usuarioClave.nombreCompleto" />, &nbsp;
                     </c:if>
+                </span>
+                <strong class="subtitulo quitarMovil"><fmt:message key="menu.qaa"/></strong>
+                <span class="subtituloMay">
+                    <c:if test="${user != null}">
+                        <sec:authentication property="principal.usuarioClave.qaa" />
+                    </c:if>
+                </span>
+                <span class="">
+
                 </span>
             </div>
         </sec:authorize>

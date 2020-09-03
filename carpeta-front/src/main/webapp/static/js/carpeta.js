@@ -53,6 +53,9 @@ $(function() {
 			nextMonth: 'Mes següent'
 		}
 	});
+	$('.oi-calendar').click(function() {
+		$(this).closest('.input-group').find('#fechaInicio').datetimepicker('show');
+	});
 });
 
 $(function() {
@@ -72,5 +75,8 @@ $(function() {
 			prevMonth: 'Mes anterior',
 			nextMonth: 'Mes següent'
 		}
+	});
+	$('.oi-calendar').click(function() {
+		$(this).closest('.input-group').find('#fechaFin').datetimepicker('show');
 	});
 });

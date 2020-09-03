@@ -1,8 +1,8 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
 
-<div class="card mb-12 border-0">
+<div class="card mb-12 border-0 p-2">
 
-    <div class="card-title border-bottom verde h5"><fmt:message key="registro.listado"/></div>
+    <div class="card-title border-bottom verde h5 paddingBottomEstandard"><fmt:message key="registro.listado"/></div>
 
     <c:if test="${empty registros}">
         <div class="alert alert-secondary mt-5" role="alert">

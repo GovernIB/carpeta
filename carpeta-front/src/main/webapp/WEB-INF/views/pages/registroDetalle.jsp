@@ -1,8 +1,8 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
 
 <c:if test="${empty asiento}">
-    <div class="card mb-12 border-0">
-        <div class="card-title border-bottom verde h5"><fmt:message key="registro.detalle"/> ${numeroRegistro}</div>
+    <div class="card mb-12 border-0 p-2">
+        <div class="card-title border-bottom verde h5 paddingBottomEstandard"><fmt:message key="registro.detalle"/> ${numeroRegistro}</div>
 
         <div class="card-body">
             <div class="alert alert-danger" role="alert">
@@ -15,8 +15,8 @@
 
 <c:if test="${not empty asiento}">
 
-    <div class="card mb-12 border-0">
-        <div class="card-title border-bottom verde h5"><fmt:message key="registro.detalle"/> ${asiento.numeroRegistroFormateado}</div>
+    <div class="card mb-12 border-0 p-2">
+        <div class="card-title border-bottom verde h5 paddingBottomEstandard"><fmt:message key="registro.detalle"/> ${asiento.numeroRegistroFormateado}</div>
 
         <div class="card-body">
 

@@ -1,8 +1,8 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
 
 
-<div class="card mb-12 border-0">
-    <div class="card-title border-bottom verde h5"><fmt:message key="tramite.listado"/></div>
+<div class="card mb-12 border-0 p-2">
+    <div class="card-title border-bottom verde h5 paddingBottomEstandard"><fmt:message key="tramite.listado"/></div>
 
     <p class="card-text mb-5 lh15"><spring:message code="tramite.descripcion"/></p>
 

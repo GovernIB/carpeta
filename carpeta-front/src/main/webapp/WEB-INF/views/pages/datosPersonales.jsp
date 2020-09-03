@@ -1,9 +1,9 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
 
 
-<div class="card mb-12 border-0">
+<div class="card mb-12 border-0 p-2">
 
-    <span class="h5 card-title border-bottom verde"><fmt:message key="datos.datos"/> <sec:authentication property="principal.usuarioClave.nombreCompleto" /></span>
+    <span class="h5 card-title border-bottom verde paddingBottomEstandard"><fmt:message key="datos.datos"/> <sec:authentication property="principal.usuarioClave.nombreCompleto" /></span>
 
     <p class="lh15"><fmt:message key="datos.descripcion"/></p>
 

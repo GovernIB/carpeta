@@ -1,12 +1,12 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
 
-<div class="card mb-12 border-0">
-    <span class="h5 card-title border-bottom verde"><fmt:message key="menu.mapaWeb"/></span>
+<div class="card mb-12 border-0 p-2">
+    <span class="h5 card-title border-bottom verde paddingBottomEstandard"><fmt:message key="menu.mapaWeb"/></span>
     <nav>
         <p><fmt:message key="mapaWeb.descripcion"/></p>
     </nav>
 
-    <span class="h5 card-title border-bottom verde"><fmt:message key="mapaWeb.secciones"/></span>
+    <span class="h5 card-title border-bottom verde paddingBottomEstandard"><fmt:message key="mapaWeb.secciones"/></span>
     <nav>
 
         <div class="table-responsive">
