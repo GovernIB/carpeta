@@ -29,8 +29,10 @@ public class InicioController {
 
         ModelAndView mav = new ModelAndView("inicio");
 
-        mav.addObject("breadcrumb", Arrays.asList("inicio"));
+//        mav.addObject("breadcrumb", Arrays.asList("inicio"));
+        mav.addObject("entornoURL", ENTORNO_URL);
         Locale loc = LocaleContextHolder.getLocale();
+        mav.addObject("idioma", loc);
         mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.inicio"));
 
         return mav;
@@ -86,17 +88,18 @@ public class InicioController {
         return mav;
     }
 
-    @RequestMapping(value="/anonim")
-    public ModelAndView anonim(HttpServletRequest request) {
-
-        ModelAndView mav = new ModelAndView("anonim");
-
-        mav.addObject("breadcrumb", Arrays.asList("inicio", "anonim"));
-        mav.addObject("entornoURL", ENTORNO_URL);
-        Locale loc = LocaleContextHolder.getLocale();
-        mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.inicio"));
-
-        return mav;
-
-    }
+//    @RequestMapping(value="/anonim")
+//    public ModelAndView anonim(HttpServletRequest request) {
+//
+//        ModelAndView mav = new ModelAndView("anonim");
+//
+//        mav.addObject("breadcrumb", Arrays.asList("inicio", "anonim"));
+//        mav.addObject("entornoURL", ENTORNO_URL);
+//        Locale loc = LocaleContextHolder.getLocale();
+//        mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.inicio"));
+//        mav.addObject("idioma", loc);
+//
+//        return mav;
+//
+//    }
 }

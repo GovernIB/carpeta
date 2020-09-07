@@ -10,6 +10,7 @@
         <put-attribute name="carga" value="/WEB-INF/views/tiles/template/carga.jsp" />
         <put-attribute name="cabecera" value="/WEB-INF/views/tiles/template/cabecera.jsp" />
         <put-attribute name="menu" value="/WEB-INF/views/tiles/template/menu.jsp" />
+        <put-attribute name="submenu" value="/WEB-INF/views/tiles/template/submenu.jsp" />
         <put-attribute name="miga" value="/WEB-INF/views/tiles/template/miga.jsp" />
         <put-attribute name="aviso" value="/WEB-INF/views/tiles/template/aviso.jsp" />
         <put-attribute name="mensaje" value="/WEB-INF/views/tiles/template/mensaje.jsp" />
@@ -79,9 +80,9 @@
         <put-attribute name="body" value="/WEB-INF/views/pages/mapaWeb.jsp" />
     </definition>
 
-    <!-- Accés anònim -->
-    <definition name="anonim" extends="base-definition">
-        <put-attribute name="body" value="/WEB-INF/views/pages/anonim.jsp" />
-    </definition>
+<!--    &lt;!&ndash; Accés anònim &ndash;&gt;-->
+<!--    <definition name="anonim" extends="base-definition">-->
+<!--        <put-attribute name="body" value="/WEB-INF/views/pages/anonim.jsp" />-->
+<!--    </definition>-->
 
 </tiles-definitions>
