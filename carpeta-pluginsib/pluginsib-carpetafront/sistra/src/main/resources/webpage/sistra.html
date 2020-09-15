@@ -88,6 +88,13 @@
         <!--  <div class="mt-5"> </div>  -->
         <br/>
     <#else>
+    
+    	<#if missatgeError??>
+    		 <div class="alert alert-danger mt-5" role="warning">
+                   ${tramite_genericerror} ${missatgeError}
+                 </div>
+    	</#if>
+    
         <#if tramits?has_content>
             <div class="mt-5">
 

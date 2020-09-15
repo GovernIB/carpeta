@@ -17,6 +17,7 @@ import es.caib.zonaper.ws.v2.services.BackofficeFacadeService;
 
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.ws.BindingProvider;
+import javax.xml.ws.soap.SOAPFaultException;
 
 import org.apache.commons.io.IOUtils;
 import org.fundaciobit.pluginsib.core.utils.XTrustProvider;
@@ -72,18 +73,6 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         // TODO Auto-generated method stub
         return null;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
     @Override
     public String getTitle(Locale locale) {
@@ -99,8 +88,6 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     public String getResourceBundleName() {
         return "carpetafrontsistra";
     }
-    
-    
 
     @Override
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
@@ -132,8 +119,6 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         
           super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, administrationID, administrationEncriptedID, locale, isGet);
         }
-        
-        
         
         
     }
@@ -199,6 +184,7 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 log.error("Error obtening writer: " + e.getMessage(), e);
               }
         
+              
         } catch (Exception e) {
             log.error("Error llistant tràmits: " + e.getMessage(), e);
         }  
@@ -224,11 +210,16 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         if (isGet) {
             tramits = null;
         } else {
-            if (isDevelopment()) {
-              tramits = getTramitsDebug(formDataInici, formDataFi, administrationID);
-            }  else {
-              tramits = getTramits(formDataInici, formDataFi, administrationID);
-            }
+        	try {
+	            if (isDevelopment()) {
+	              tramits = getTramitsDebug(formDataInici, formDataFi, administrationID);
+	            }  else {
+	              tramits = getTramits(formDataInici, formDataFi, administrationID);
+	            }
+        	}catch(SOAPFaultException e) {
+      		  tramits = null;
+      		  map.put("missatgeError", e.getMessage());
+      	  }
         }
         
         InputStream input = this.getClass().getResourceAsStream("/webpage/sistra.html");
@@ -248,7 +239,7 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         
         String[] traduccions = { "tramite.listado", "tramite.descripcion", "tramite.tramite",
                 "tramite.fecha.inicio", "tramite.acceso", "tramite.vacio", "carpeta.buscar",
-                "carpeta.fecha.inicio", "carpeta.fecha.fin", "tramite.continuar" };
+                "carpeta.fecha.inicio", "carpeta.fecha.fin", "tramite.continuar", "tramite.genericerror" };
         
         for (String t : traduccions) {
             map.put(t.replace('.', '_'), getTraduccio(t, locale));
