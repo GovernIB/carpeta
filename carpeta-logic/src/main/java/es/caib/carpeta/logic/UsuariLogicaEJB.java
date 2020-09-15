@@ -105,11 +105,21 @@ public class UsuariLogicaEJB extends UsuariEJB implements UsuariLogicaLocal {
 				    } else {
 				    
     				    if (nom == null) {
-    				        nom = full.substring(0, full.indexOf(' '));
+    				        int pos =full.indexOf(' ');
+    				        if (pos == -1) {
+    				            nom = full;
+    				        } else { 
+    				            nom = full.substring(0, pos);
+    				        }
     				    }
 
     				    if (llinatge1 == null) {
-    				        llinatge1 = full.substring(full.indexOf(' ') + 1);
+    				        int pos = full.indexOf(' ') + 1;
+    				        if (pos == -1) {
+    				            llinatge1 = full;
+    				        } else {
+    				            llinatge1 = full.substring(pos + 1);
+    				        }
     				    }
 				    }
 				    

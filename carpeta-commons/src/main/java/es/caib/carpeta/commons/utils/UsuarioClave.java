@@ -1,7 +1,7 @@
 package es.caib.carpeta.commons.utils;
 
 /**
- * XYZ ZZZ ZZZ ESBORRAR
+ * XYZ ZZZ ZZZ MOURE A FRONT???
  * @author anadal
  *
  */

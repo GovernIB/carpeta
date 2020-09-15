@@ -8,6 +8,7 @@ var newMapaWebReact;
 var newDadesPersonalsReact;
 var newMenuDesllisantReact;
 var newBreadcrumbReact;
+var newPeuReact;
 
 
 function newInici(compoWeb, nom) {
@@ -48,4 +49,8 @@ function newMenuDesllisant(compoWeb, nom) {
 
 function newBreadcrumb(compoWeb, nom) {
 	setTimeout(newBreadcrumbReact.bind(null,compoWeb,nom) , 1);
+}
+
+function newPeu(compoWeb, nom) {
+	setTimeout(newPeuReact.bind(null,compoWeb,nom) , 1);
 }

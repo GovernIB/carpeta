@@ -3,6 +3,35 @@ import { withTranslation } from 'react-i18next';
 
 
 function MapaWeb ({ t }) {
+	
+	var autenticat = sessionStorage.getItem('autenticat');
+
+	var informacio;
+	var tramits;
+	var registres;
+	var notificacions;
+	var altres;
+	var dades;
+	var logoClau;
+	
+	if (autenticat === '1'){
+		informacio = <a href="javascript:newInici('contingut', '1');">{ t('mapaWebInformacio') }</a>;
+		tramits = <a href="javascript:newTramitsPendents('contingut', '1');">{ t('mapaWebTramits') }</a>;
+		registres = <a href="javascript:newRegistres('contingut', '1');">{ t('mapaWebRegistres') }</a>;
+		notificacions = <a href="javascript:newNotificacions('contingut', '1');">{ t('notificacionsNotificacions') }</a>;
+		altres = <a href="javascript:newNotificacions('contingut', '1');">{ t('notificacionsAltres') }</a>;
+		dades = <a href="javascript:newDadesPersonals('contingut', '1');">{ t('mapaWebDades') }</a>;
+		logoClau = '';
+	} 
+	if(autenticat === '0'){
+		informacio = <a href="javascript:newInici('contingut', '0');">{ t('mapaWebInformacio') }</a>;
+		tramits = <a href="/carpetafront/login">{ t('mapaWebTramits') }</a>;
+		registres = <a href="/carpetafront/login">{ t('mapaWebRegistres') }</a>;
+		notificacions = <a href="/carpetafront/login">{ t('notificacionsNotificacions') }</a>;
+		altres = <a href="/carpetafront/login">{ t('notificacionsAltres') }</a>;
+		dades = <a href="/carpetafront/login">{ t('mapaWebDades') }</a>;
+		logoClau = <span class="oi oi-lock-locked colorClave" title={ t('mapaWebClave') }></span>;
+	}
 
     return (
         <div className="container-contenido">
@@ -17,23 +46,23 @@ function MapaWeb ({ t }) {
 					<div className="card">
 						<ul className="list-group list-group-flush">
 						  <li className="list-group-item">
-							<p className="lh15 upper"><a href="javascript:newInici('contingut', '');">{ t('mapaWebInformacio') }</a></p>
+							<p className="lh15 upper">{informacio}</p>
 						  </li>
 						  <li className="list-group-item">
 							<p className="titol h5 upper">{ t('mapaWebTramits') }</p>
-							<p className="lh15 upper"><a href="javascript:newTramitsPendents('contingut', '');">{ t('mapaWebTramits') }</a>    <span className="oi oi-lock-locked colorClave" title={ t('mapaWebClave') }></span></p>
+							<p className="lh15 upper">{tramits}    {logoClau}</p>
 						  </li>
 						  <li className="list-group-item">
 							<p className="titol h5 upper">{ t('mapaWebRegistres') }</p>
-							<p className="lh15"><a href="javascript:newRegistres('contingut', '');">{ t('mapaWebRegistres') }</a>    <span className="oi oi-lock-locked colorClave" title={ t('mapaWebClave') }></span></p>
+							<p className="lh15">{registres}    {logoClau}</p>
 						  </li>
 						  <li className="list-group-item">
 							<p className="titol h5 upper">{ t('notificacionsTitol') }</p>
-							<p className="lh15 upper"><a href="javascript:newNotificacions('contingut', '');">{ t('notificacionsNotificacions') }</a>    <span className="oi oi-lock-locked colorClave" title={ t('mapaWebClave') }></span></p>
-							<p className="lh15 upper"><a href="javascript:newNotificacions('contingut', '');">{ t('notificacionsAltres') }</a>    <span className="oi oi-lock-locked colorClave" title={ t('mapaWebClave') }></span></p>
+							<p className="lh15 upper">{notificacions}    {logoClau}</p>
+							<p className="lh15 upper">{altres}    {logoClau}</p>
 						  </li>
 						  <li className="list-group-item">
-							<p className="lh15 upper"><a href="javascript:newDadesPersonals('contingut', '');">{ t('mapaWebDades') }</a>    <span class="oi oi-lock-locked colorClave" title={ t('mapaWebClave') }></span></p>
+							<p className="lh15 upper">{dades}    {logoClau}</p>
 						  </li>
 						</ul>
 					  </div>

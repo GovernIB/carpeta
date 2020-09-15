@@ -83,13 +83,13 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         try {
             carpetaFront = pluginCarpetaFrontEjb.getInstanceByPluginID(pluginID);
         } catch (I18NException e) {
-            // XYZ ZZZ ZZZ
+            
             String msg = I18NUtils.tradueix("plugin.signatureweb.noexist", String.valueOf(pluginID));
             return generateErrorMAV(request, pluginID, msg, e);
         }
 
         if (carpetaFront == null) {
-            // XYZ ZZZ ZZZ
+            
             String msg = I18NUtils.tradueix("plugin.signatureweb.noexist", String.valueOf(pluginID));
             return generateErrorMAV(request, pluginID, msg, null);
         }

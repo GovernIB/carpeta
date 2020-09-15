@@ -19,17 +19,20 @@ function MenuDesllisant ({ t , autenticat}) {
       boto_es = <button onClick={() => i18n.changeLanguage('es')} className="boton-menu">{ t('menuIdioma_es') }</button>;
     }
 
+	var accessibilitat;
 	var tramits;
 	var registres;
 	var notificacions;
 	var sortir;
 	if (autenticat === '1'){
-		tramits = <li><a href="javascript:newTramitsPendents('contingut', '');" className="imc-marc-ico imc--tramits" id="imc-marc-tramits" title={ t('menuTramits') }><span>{ t('menuTramits') }</span></a></li>;
-		registres = <li><a href="javascript:newRegistres('contingut', '');" className="imc-marc-ico imc--registres" id="imc-marc-registres" title={ t('menuRegistres') }><span>{ t('menuRegistres') }</span></a></li>;
-		notificacions = <li><a href="javascript:newNotificacions('contingut', '');" className="imc-marc-ico imc--notificacions" id="imc-marc-notificacions" title={ t('menuNotificacions') }><span>{ t('menuNotificacions') }</span></a></li>;
+		accessibilitat = <li><a href="javascript:newAccessibilitat('contingut', '1');" className="imc-marc-ico imc--accessibilitat" id="imc-marc-accessibilitat" title={ t('menuAccessibilitat') }><span>{ t('menuAccessibilitat') }</span></a></li>;
+		tramits = <li><a href="javascript:newTramitsPendents('contingut', '1');" className="imc-marc-ico imc--tramits" id="imc-marc-tramits" title={ t('menuTramits') }><span>{ t('menuTramits') }</span></a></li>;
+		registres = <li><a href="javascript:newRegistres('contingut', '1');" className="imc-marc-ico imc--registres" id="imc-marc-registres" title={ t('menuRegistres') }><span>{ t('menuRegistres') }</span></a></li>;
+		notificacions = <li><a href="javascript:newNotificacions('contingut', '1');" className="imc-marc-ico imc--notificacions" id="imc-marc-notificacions" title={ t('menuNotificacions') }><span>{ t('menuNotificacions') }</span></a></li>;
 		sortir = <li><a href="sortir" className="imc-marc-ico imc--sortir" id="imc-marc-sortir" title={ t('menuSortir') }><span>{ t('menuSortir') }</span></a></li>;
 	} 
 	if(autenticat === '0'){
+		accessibilitat = <li><a href="javascript:newAccessibilitat('contingut', '0');" className="imc-marc-ico imc--accessibilitat" id="imc-marc-accessibilitat" title={ t('menuAccessibilitat') }><span>{ t('menuAccessibilitat') }</span></a></li>;
 		tramits = '';
 		registres = '';
 		notificacions = '';
@@ -53,11 +56,7 @@ function MenuDesllisant ({ t , autenticat}) {
             <li className="imc-marc-ico imc--idioma">
               {boto_ca} \ {boto_es}
             </li>
-            <li>
-              <a href="javascript:newAccessibilitat('contingut', '');" className="imc-marc-ico imc--accessibilitat" id="imc-marc-accessibilitat" title={ t('menuAccessibilitat') }>
-                <span>{ t('menuAccessibilitat') }</span>
-              </a>
-            </li>
+            {accessibilitat}
 			{tramits}
 			{registres}
 			{notificacions}

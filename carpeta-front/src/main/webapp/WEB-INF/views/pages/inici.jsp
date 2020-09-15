@@ -50,7 +50,12 @@
 
   <sec:authorize access="!isAuthenticated()">
 	  <script type="text/javascript">
-		  var autenticat = '0';
+		  window.onload = function($) {
+			  sessionStorage.setItem('autenticat', '0');
+			  var aut = sessionStorage.getItem('autenticat');
+			  newMenuDesllisant('menuDesllisant', aut);
+			  newPeu('peu', aut);
+		  }
 	  </script>
   </sec:authorize>
   
@@ -80,12 +85,11 @@
 				window.onload = function($) {
 					var element = document.getElementById('contenedor');
 					var autenticat = '1';
+					sessionStorage.setItem('autenticat', '1');
 					element.setAttribute('style','margin-top: 4.5em !important');
-					// alert("estam antes de menuDesllisant: " + autenticat);
-					// alert("aut: " + autenticat);
                     newMenuDesllisant('menuDesllisant', autenticat);
-                    // alert("estam antes de newIniciPrivat: " + autenticat);
 					newInici('contingut', autenticat);
+					newPeu('peu', autenticat);
 				}
 			</script>
 		</sec:authorize>
