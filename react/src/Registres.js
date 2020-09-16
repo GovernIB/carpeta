@@ -66,6 +66,7 @@ function Registres ({ t }) {
         </div>
 
       </div>
+	  
     );
 }
 

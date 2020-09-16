@@ -15,9 +15,9 @@ import Notificacions from './Notificacions';
 import MapaWeb from './MapaWeb';
 import DadesPersonals from './DadesPersonals';
 import Breadcrumb from './Breadcrumb';
+import Plugin from './Plugin';
 import * as breadcrumbPaths from './utils/breadcrumbPaths';
 import * as breadcrumbPathsAut from './utils/breadcrumbPathsAut';
-
 
 
 ReactDOM.render(
@@ -36,7 +36,7 @@ ReactDOM.render(
 );
 
 ReactDOM.render(
-  <Peu autenticat='0'/>,
+  <Peu />,
   document.getElementById("peu")
 );
 
@@ -93,7 +93,12 @@ newNotificacionsReact  = function createReactCompNotificacions(nomComponent, par
 
 newMapaWebReact  = function createReactCompMapaWeb(nomComponent, param) {
     ReactDOM.render(<MapaWeb />, document.getElementById(nomComponent));
-	ReactDOM.render(<Breadcrumb items={breadcrumbPaths.MapaWeb} autenticat={param}/>, document.getElementById("mollaPa"));
+	if (param === '0'){
+	  ReactDOM.render(<Breadcrumb items={breadcrumbPaths.MapaWeb} autenticat={param}/>, document.getElementById("mollaPa"));
+	}
+	if (param === '1'){
+	  ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.MapaWeb} autenticat={param}/>, document.getElementById("mollaPa"));
+	}
 };
 
 newDadesPersonalsReact  = function createReactCompDadesPersonals(nomComponent, param) {
@@ -107,4 +112,9 @@ newMenuDesllisantReact  = function createReactCompMenuDesllisant(nomComponent, p
 
 newPeuReact  = function createReactCompPeu(nomComponent, param) {
     ReactDOM.render(<Peu autenticat={param}/>, document.getElementById(nomComponent));
+};
+
+newPluginReact  = function createReactCompPlugins(nomComponent, param, pluginID) {
+    ReactDOM.render(<Plugin autenticat={param} pluginID={pluginID}/>, document.getElementById(nomComponent));
+	ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.Plugin} autenticat={param}/>, document.getElementById("mollaPa"));
 };

@@ -9,6 +9,7 @@ var newDadesPersonalsReact;
 var newMenuDesllisantReact;
 var newBreadcrumbReact;
 var newPeuReact;
+var newPluginReact;
 
 
 function newInici(compoWeb, nom) {
@@ -53,4 +54,8 @@ function newBreadcrumb(compoWeb, nom) {
 
 function newPeu(compoWeb, nom) {
 	setTimeout(newPeuReact.bind(null,compoWeb,nom) , 1);
+}
+
+function newPlugin(compoWeb, nom, pluginID) {
+	setTimeout(newPluginReact.bind(null,compoWeb,nom,pluginID) , 1);
 }

@@ -1,10 +1,13 @@
 import React, { Component, Suspense } from 'react';
 import { withTranslation } from 'react-i18next';
+import i18n from 'i18next';
 
 
 function MapaWeb ({ t }) {
 	
 	var autenticat = sessionStorage.getItem('autenticat');
+	const plugins = JSON.parse(sessionStorage.getItem('plugins'));
+	var plug;
 
 	var informacio;
 	var tramits;
@@ -15,22 +18,28 @@ function MapaWeb ({ t }) {
 	var logoClau;
 	
 	if (autenticat === '1'){
-		informacio = <a href="javascript:newInici('contingut', '1');">{ t('mapaWebInformacio') }</a>;
-		tramits = <a href="javascript:newTramitsPendents('contingut', '1');">{ t('mapaWebTramits') }</a>;
-		registres = <a href="javascript:newRegistres('contingut', '1');">{ t('mapaWebRegistres') }</a>;
-		notificacions = <a href="javascript:newNotificacions('contingut', '1');">{ t('notificacionsNotificacions') }</a>;
-		altres = <a href="javascript:newNotificacions('contingut', '1');">{ t('notificacionsAltres') }</a>;
-		dades = <a href="javascript:newDadesPersonals('contingut', '1');">{ t('mapaWebDades') }</a>;
 		logoClau = '';
+		informacio = <a href="javascript:newInici('contingut', '1');">{ t('mapaWebInformacio') }</a>;
+		
+		if (i18n.language === 'ca') {
+			plug = plugins.map(s => (<p className="lh15 upper"><a href={"javascript:newPlugin('contingut', '1', '" + s.pluginID + "');"}>{s.nomCa}</a></p>));
+		}
+		if (i18n.language === 'es') {
+		  plug = plugins.map(s => (<p className="lh15 upper"><a href={"javascript:newPlugin('contingut', '1', '" + s.pluginID + "');"}>{s.nomEs}</a></p>));
+		}
+		dades = <a href="javascript:newDadesPersonals('contingut', '1');">{ t('mapaWebDades') }</a>;
 	} 
 	if(autenticat === '0'){
-		informacio = <a href="javascript:newInici('contingut', '0');">{ t('mapaWebInformacio') }</a>;
-		tramits = <a href="/carpetafront/login">{ t('mapaWebTramits') }</a>;
-		registres = <a href="/carpetafront/login">{ t('mapaWebRegistres') }</a>;
-		notificacions = <a href="/carpetafront/login">{ t('notificacionsNotificacions') }</a>;
-		altres = <a href="/carpetafront/login">{ t('notificacionsAltres') }</a>;
-		dades = <a href="/carpetafront/login">{ t('mapaWebDades') }</a>;
 		logoClau = <span class="oi oi-lock-locked colorClave" title={ t('mapaWebClave') }></span>;
+		informacio = <a href="javascript:newInici('contingut', '0');">{ t('mapaWebInformacio') }</a>;
+		
+		if (i18n.language === 'ca') {
+			plug = plugins.map(s => (<p className="lh15 upper"><a href="/carpetafront/login">{s.nomCa}</a>    {logoClau}</p>));
+		}
+		if (i18n.language === 'es') {
+		  plug = plugins.map(s => (<p className="lh15 upper"><a href="/carpetafront/login">{s.nomEs}</a>    {logoClau}</p>));
+		}
+		dades = <a href="/carpetafront/login">{ t('mapaWebDades') }</a>;
 	}
 
     return (
@@ -49,17 +58,8 @@ function MapaWeb ({ t }) {
 							<p className="lh15 upper">{informacio}</p>
 						  </li>
 						  <li className="list-group-item">
-							<p className="titol h5 upper">{ t('mapaWebTramits') }</p>
-							<p className="lh15 upper">{tramits}    {logoClau}</p>
-						  </li>
-						  <li className="list-group-item">
-							<p className="titol h5 upper">{ t('mapaWebRegistres') }</p>
-							<p className="lh15">{registres}    {logoClau}</p>
-						  </li>
-						  <li className="list-group-item">
-							<p className="titol h5 upper">{ t('notificacionsTitol') }</p>
-							<p className="lh15 upper">{notificacions}    {logoClau}</p>
-							<p className="lh15 upper">{altres}    {logoClau}</p>
+							<p className="titol h5 upper">{ t('mapaWebPlugins') }</p>
+							{plug}
 						  </li>
 						  <li className="list-group-item">
 							<p className="lh15 upper">{dades}    {logoClau}</p>
