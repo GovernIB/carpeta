@@ -29,7 +29,8 @@
 	<script src="${pageContext.request.contextPath}/src/assets/js/respond.js" type="text/javascript"></script>
 	
 	<script src="${pageContext.request.contextPath}/src/assets/js/jquery.dataTables.min.js" type="text/javascript"></script>
-	
+	<script src="${pageContext.request.contextPath}/src/assets/js/datetime-moment.js" type="text/javascript"></script>
+
 	<!-- Scripts per Carpeta-->
 	<!--script type="text/javascript" src="src/assets/js/carpeta.js"></script-->
 	<!-- Scripts per Components React -->
@@ -42,7 +43,7 @@
 	<link href="${pageContext.request.contextPath}/src/assets/css/carpeta.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/src/assets/css/open-iconic-bootstrap.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/src/assets/css/jquery.dataTables.min.css" rel="stylesheet">
-	
+	<link href="${pageContext.request.contextPath}/src/assets/css/datatables.min.css" rel="stylesheet">
 
   </head>
 
@@ -70,6 +71,11 @@
 
 		<sec:authorize access="isAuthenticated()">
 			<sec:authentication var="user" property="principal.usuarioClave.nombreCompleto" />
+			<sec:authentication var="userName" property="principal.usuarioClave.nombre" />
+			<sec:authentication var="userSurname1" property="principal.usuarioClave.apellido1" />
+			<sec:authentication var="userSurname2" property="principal.usuarioClave.apellido2" />
+			<sec:authentication var="userDNI" property="principal.usuarioClave.nif" />
+			<sec:authentication var="userMethod" property="principal.usuarioClave.metodoAutentificacion" />
 			<div class="imc-titol usuari">
 				<nav class="imc--contingut">
 					<h5>
@@ -90,6 +96,13 @@
                     newMenuDesllisant('menuDesllisant', autenticat);
 					newInici('contingut', autenticat);
 					newPeu('peu', autenticat);
+					// Passa dades personals a React
+					sessionStorage.setItem('usuariNomComplet', '${user}');
+					sessionStorage.setItem('usuariNom', '${userName}');
+					sessionStorage.setItem('usuariLlinatge1', '${userSurname1}');
+					sessionStorage.setItem('usuariLlinatge2', '${userSurname2}');
+					sessionStorage.setItem('usuariDNI', '${userDNI}');
+					sessionStorage.setItem('usuariMetode', '${userMethod}');
 				}
 			</script>
 		</sec:authorize>
@@ -111,6 +124,14 @@
 
 		<!-- Peu -->
 		<div id = "peu"></div>
+
+
+		<script type="text/javascript">
+			// document.getElementById("urlBase").value=window.location.href;
+			sessionStorage.clear();
+			sessionStorage.setItem('plugins', JSON.stringify(${plugins}));
+		</script>
+
 	
 	</div>
 

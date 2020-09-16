@@ -1,25 +1,4 @@
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" 
-%><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" 
-%><!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ca" style="" class=" js flexbox flexboxlegacy hashchange backgroundsize boxshadow textshadow opacity cssanimations cssgradients csstransforms csstransitions fontface generatedcontent localstorage svg" lang="ca">
-<head>	
-	<link rel="shortcut icon" type="image/x-ico" href="http://www.caib.es/sites/favicon.png">
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-	<!-- Adapta la escala del responsive en los dispositivos moviles -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-
-	<!-- Scripts -->
-
-	<script src="<c:url value="/src/assets/js/jquery-3.5.0.js"/>"></script>
-
-</head>
-
-<body style="background-color:powderblue;">
-<%-- DINS D'UN IFRAME --%>
-
-<iframe src="${urlToShowPluginPage}" style="min-height:300px;padding:50px" frameborder='0' width="90%" height="400px"  id="myiframe" scrolling="auto">
+<iframe src="${urlToShowPluginPage}" classs="" style="min-height:300px;" frameborder='0' width="100%" height="400px"  id="myiframe" scrolling="auto">
 <p>NO IFRAME</p>
 </iframe>
 
@@ -70,6 +49,3 @@
       });
 
 </script>
-
-</body>
-</html>

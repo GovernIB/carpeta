@@ -15,6 +15,7 @@ import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitesPersistentes;
 import es.caib.zonaper.ws.v2.services.BackofficeFacade;
 import es.caib.zonaper.ws.v2.services.BackofficeFacadeService;
 
+import javax.servlet.http.HttpSession;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.soap.SOAPFaultException;
@@ -102,9 +103,11 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     
     @Override
     public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
-            HttpServletRequest request, HttpServletResponse response, String administrationID,
-            String administrationEncriptedID, Locale locale, boolean isGet) {
-        
+                                    HttpServletRequest request, HttpServletResponse response, String administrationID,
+                                    String administrationEncriptedID, Locale locale, boolean isGet) {
+
+
+
         
         log.info("SistraCarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
         log.info("SistraCarpetaFrontPlugin::requestCarpetaFront => administrationID: " + administrationID);

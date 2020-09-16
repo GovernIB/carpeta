@@ -1,6 +1,13 @@
+$(document).ready(function () {
+  $('#dataTable_paginate').DataTable();
+  $('.dataTables_length').addClass('bs-select');
+});
+
+
 //Enlaces entoda la fila de la tabla
 jQuery(document).ready(function($) {
 	$(".clickable-row").click(function() {
+		alert("clicable");
 		var $th = $(this);
 		// window.open($th.attr('data-href'), $th.attr('data-target'));
 		goTo($th.attr('data-href'));
@@ -53,9 +60,6 @@ $(function() {
 			nextMonth: 'Mes següent'
 		}
 	});
-	$('.oi-calendar').click(function() {
-		$(this).closest('.input-group').find('#fechaInicio').datetimepicker('show');
-	});
 });
 
 $(function() {
@@ -75,8 +79,5 @@ $(function() {
 			prevMonth: 'Mes anterior',
 			nextMonth: 'Mes següent'
 		}
-	});
-	$('.oi-calendar').click(function() {
-		$(this).closest('.input-group').find('#fechaFin').datetimepicker('show');
 	});
 });
