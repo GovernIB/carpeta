@@ -43,19 +43,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!--Plugins Fundacio Bit-->
-        <dependency>
-            <groupId>org.fundaciobit.plugins</groupId>
-            <artifactId>plugins-api</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
-        <!--Regweb3-->
-        <dependency>
-            <groupId>es.caib.regweb3</groupId>
-            <artifactId>regweb3-ws-api</artifactId>
-            <version>3.1.2</version>
-        </dependency>
 
         <!--<dependency>
             <groupId>com.sun.xml.ws</groupId>

@@ -18,6 +18,8 @@ INSERT INTO car_idioma VALUES ('en', 'English', true, 2);
 
 INSERT INTO car_traduccio VALUES (26);
 INSERT INTO car_traduccio VALUES (36);
+INSERT INTO car_traduccio VALUES (46);
+INSERT INTO car_traduccio VALUES (56);
 
 
 
@@ -53,6 +55,33 @@ es.caib.carpeta.pluginsib.carpetafront.sistra1.user=$carpeta_sistra
 es.caib.carpeta.pluginsib.carpetafront.sistra1.pass=setpassword
 es.caib.carpeta.pluginsib.carpetafront.sistra1.level=2
 es.caib.carpeta.pluginsib.carpetafront.sistra1.web=https://www.caib.es/sistrafront/zonaperfront/protected/init.do', true);
+
+
+INSERT INTO car_traducciomap VALUES (46, 'en', 'Registre');
+INSERT INTO car_traducciomap VALUES (46, 'es', 'Registro');
+INSERT INTO car_traducciomap VALUES (46, 'ca', 'Registre');
+
+INSERT INTO car_traducciomap VALUES (56, 'en', 'REGWEB3 Registre electrònic');
+INSERT INTO car_traducciomap VALUES (56, 'es', 'REGWEB3 Registro electrónico');
+INSERT INTO car_traducciomap VALUES (56, 'ca', 'REGWEB3 Registre electrònic');
+
+
+--
+-- TOC entry 2010 (class 0 OID 112580)
+-- Dependencies: 178
+-- Data for Name: car_plugin; Type: TABLE DATA; Schema: public; Owner: carpeta
+--
+INSERT INTO car_plugin(
+            nomid, descripcioid, classe, tipus, propietats, actiu)
+    VALUES (46, 56, 'org.fundaciobit.pluginsib.carpetafront.regweb3.Regweb3CarpetaFrontPlugin', 2, '# Common
+es.caib.carpeta.pluginsib.carpetafront.regweb3.development=true
+
+# Regweb3
+es.caib.carpeta.pluginsib.carpetafront.regweb3.url=http://registre3.fundaciobit.org/regweb3/ws/v3/RegWebAsientoRegistral
+es.caib.carpeta.pluginsib.carpetafront.regweb3.user=caibapp
+es.caib.carpeta.pluginsib.carpetafront.regweb3.pass=setpassword
+es.caib.carpeta.pluginsib.carpetafront.regweb3.entidad=A04003003
+es.caib.carpeta.pluginsib.carpetafront.regweb3.web=http://localhost:9080/carpeta/registro/detalle/{0}', true);
 
 
 --

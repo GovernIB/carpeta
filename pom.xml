@@ -347,7 +347,7 @@
         <module>carpeta-api</module>
         -->
         <module>carpeta-ear</module>
-        <module>carpeta-integrations</module>
+        <!--<module>carpeta-integrations</module>-->
         <module>carpeta-pluginsib</module>
         <module>scripts</module>
     </modules>
