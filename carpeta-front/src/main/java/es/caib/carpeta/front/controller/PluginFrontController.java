@@ -3,16 +3,21 @@ package es.caib.carpeta.front.controller;
 import java.net.URL;
 import java.util.Base64;
 import java.util.List;
+import java.util.Locale;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import es.caib.carpeta.front.config.UsuarioAutenticado;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -64,18 +69,26 @@ public class PluginFrontController {
     
     
     
-    @RequestMapping(value = "/showplugin", method = RequestMethod.POST)
-    public ModelAndView showPlugin(
-           HttpServletRequest request, HttpServletResponse response) throws Exception, I18NException {
-        log.info("ENTRA showPlugin front");
-        
-        long pluginID = Long.parseLong(request.getParameter("pluginID"));
-        String administrationID= request.getParameter("administrationID");
-        String urlBase = request.getParameter("urlBase");
+    @RequestMapping(value = "/showplugin/{pluginID}/{idioma}", method = RequestMethod.POST)
+    public ModelAndView showPlugin(@PathVariable("pluginID") String pluginID, @PathVariable("idioma") String idioma, HttpServletRequest request,
+                                   HttpServletResponse response, Authentication authentication) throws Exception, I18NException {
+
+    //TODO passar idioma
+        LocaleContextHolder.setLocale(new Locale(idioma));
+
+        Locale.setDefault(new Locale(idioma));
+
+        //String pluginID = request.getParameter("pluginID");
+        //String administrationID= request.getParameter("administrationID");
+        UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();
+        String administrationID= usuarioAutenticado.getUsuarioClave().getNif();
+
+        //TODO canviar, mirar javascript window.location.href
+        String urlBase = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
         
         log.info("showPlugin:: pluginID = " + pluginID);
         log.info("showPlugin:: administrationID = " + administrationID);
-        
+
         String contextPath = "/carpetaback";
         
         //log.info("startTestPlugin:: contextPath => " + contextPath);
@@ -101,7 +114,7 @@ public class PluginFrontController {
 
 
     private ModelAndView startPublicSignatureProcess(HttpServletRequest request, HttpServletResponse response,
-            String view, long pluginID, String administrationID, String baseBack)
+            String view, String pluginID, String administrationID, String baseBack)
             throws Exception, I18NException {
         
         //response.addHeader("X-Frame-Options", "SAMEORIGIN");

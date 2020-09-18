@@ -16,9 +16,7 @@
     <modules>
         <module>api</module>
         <module>sistra</module>
-    <!--    
-    <module>registre</module>
-    -->
+        <module>regweb3</module>
     </modules>
 
     <dependencies>

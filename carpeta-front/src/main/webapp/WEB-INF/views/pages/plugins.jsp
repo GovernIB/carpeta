@@ -56,7 +56,7 @@
        <td>
        <select name="pluginID" id="pluginID">
         <c:forEach items="${plugins}" var="plugin">
-          <option value="${plugin.pluginID}">${plugin.nom} (${plugin.pluginID})</option>
+          <option value="${plugin.pluginID}">${plugin.nomCa} (${plugin.pluginID})</option>
         </c:forEach>
         </select>
        </td>
@@ -66,7 +66,6 @@
 <input type="submit" value="Veure Plugin"/>
 
 <script type="text/javascript">
-
 document.getElementById("urlBase").value=window.location.href;
 </script>
 

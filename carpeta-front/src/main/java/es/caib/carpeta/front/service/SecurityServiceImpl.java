@@ -4,7 +4,7 @@ import es.caib.carpeta.commons.utils.UsuarioClave;
 import es.caib.loginib.rest.api.v1.RDatosAutenticacion;
 import es.caib.loginib.rest.api.v1.RLoginParams;
 import es.caib.loginib.rest.api.v1.RLogoutParams;
-import org.fundaciobit.plugins.utils.XTrustProvider;
+import org.fundaciobit.pluginsib.core.utils.XTrustProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

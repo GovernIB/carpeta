@@ -3,9 +3,6 @@ import { withTranslation } from 'react-i18next';
 
 
 function TramitsPendents ({ t }) {
-	
-
-	
 
 
     return (

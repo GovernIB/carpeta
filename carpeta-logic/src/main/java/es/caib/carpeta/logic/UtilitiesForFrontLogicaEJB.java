@@ -7,6 +7,7 @@ import javax.annotation.security.PermitAll;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import es.caib.carpeta.utils.Constants;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
@@ -89,8 +90,10 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
 
         for (Plugin plugin : plugins) {
             PluginJPA p = (PluginJPA) plugin;
-            pluginsInfo.add(new PluginInfo(plugin.getPluginID(), p.getNom().getTraduccio(language).getValor(),
-                    p.getDescripcio().getTraduccio(language).getValor()));
+            pluginsInfo.add(new PluginInfo(String.valueOf(plugin.getPluginID()), p.getNom().getTraduccio(Constants.IDIOMA_CATALA).getValor(),
+                    p.getNom().getTraduccio(Constants.IDIOMA_CASTELLA).getValor(), p.getNom().getTraduccio(Constants.IDIOMA_ANGLES).getValor(),
+                    p.getDescripcio().getTraduccio(Constants.IDIOMA_CATALA).getValor(), p.getDescripcio().getTraduccio(Constants.IDIOMA_CASTELLA).getValor(),
+                    p.getDescripcio().getTraduccio(Constants.IDIOMA_ANGLES).getValor()));
         }
 
         return pluginsInfo;
