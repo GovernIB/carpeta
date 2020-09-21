@@ -94,11 +94,17 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => administrationID: " + administrationID);
         log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: " + administrationEncriptedID);
 
+
         if (query.startsWith(LLISTAT_REGISTRES_PAGE)) {
+
 
             llistatDeRegistres(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, administrationID, administrationEncriptedID, locale, isGet);
 
+        } else if (query.startsWith(DETALL_REGISTRE_PAGE)) {
+
+            detallDeRegistre(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, administrationID, administrationEncriptedID, locale, isGet);
         } else {
+
 
             super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, administrationID, administrationEncriptedID, locale, isGet);
         }
@@ -130,6 +136,15 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
 
     protected static final String LLISTAT_REGISTRES_PAGE = "llistatRegistres";
+    protected static final String DETALL_REGISTRE_PAGE = "detallRegistre";
+
+
+    List<AsientoRegistralWs> listRegistros = new ArrayList<>();
+
+
+    public static AsientoRegistralWs findByNumeroRegistroFormateado(Collection<AsientoRegistralWs> listRegistros, String numeroRegistroFormateado) {
+        return listRegistros.stream().filter(registro -> numeroRegistroFormateado.equals(registro.getNumeroRegistroFormateado())).findFirst().orElse(null);
+    }
 
     public void llistatDeRegistres(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
                                    HttpServletRequest request, HttpServletResponse response, String administrationID,
@@ -243,7 +258,118 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         @SuppressWarnings("unchecked")
         List<AsientoRegistralWs> registros = (List<AsientoRegistralWs>) (List<?>) result.getResults();
+        this.listRegistros = registros;
         return registros;
+    }
+
+
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // -------------------     DETALL   DE   REGISTRE                        ----------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+
+    public void detallDeRegistre(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+                                 HttpServletRequest request, HttpServletResponse response, String administrationID,
+                                 String administrationEncriptedID, Locale locale, boolean isGet) {
+
+        try {
+
+
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("text/html");
+
+            String numeroRegistroFormateado = "";
+
+
+            String webpage = getDetallDeRegistrePage(absolutePluginRequestPath, numeroRegistroFormateado, locale);
+
+            try {
+                response.getWriter().println(webpage);
+                response.flushBuffer();
+            } catch (IOException e) {
+                log.error("Error obtening writer: " + e.getMessage(), e);
+            }
+
+        } catch (Exception e) {
+            log.error("Error llistant registres: " + e.getMessage(), e);
+        }
+
+
+    }
+
+
+    public String getDetallDeRegistrePage(String absolutePluginRequestPath, String numeroRegistroFormateado, Locale locale) throws Exception {
+
+        Map<String, Object> map = new HashMap<String, Object>();
+
+        AsientoRegistralWs registre;
+
+
+        if (isDevelopment()) {
+            registre = getDetallRegistreDebug(numeroRegistroFormateado);
+        } else {
+            registre = getDetallRegistre(numeroRegistroFormateado);
+        }
+
+
+        InputStream input = this.getClass().getResourceAsStream("/webpage/detall.html");
+
+        String plantilla = IOUtils.toString(input, "UTF-8");
+
+
+        // XYZ ZZZ
+        map.put("resources", absolutePluginRequestPath + "/" + WEBRESOURCE);
+
+        // XYZ ZZZ
+        map.put("form_action", absolutePluginRequestPath + "/" + DETALL_REGISTRE_PAGE);
+        map.put("lang", locale.getLanguage());
+
+        //TODO PONER LAS QUE TOCAN PORA DETALLE
+        String[] traduccions = {"registro.listado", "registro.descripcion", "registro.numero",
+           "registro.fecha", "registro.extracto", "registro.destinatario", "registro.vacio"};
+
+        for (String t : traduccions) {
+            map.put(t.replace('.', '_'), getTraduccio(t, locale));
+        }
+
+
+        map.put("registro", registre);
+        map.put("web", getWeb());
+
+        String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
+
+        return generat;
+
+    }
+
+    private AsientoRegistralWs getDetallRegistreDebug(String numeroRegistroFormateado) throws Exception {
+
+
+        AsientoRegistralWs registro = findByNumeroRegistroFormateado(listRegistros, numeroRegistroFormateado);
+
+
+        if (registro == null) {
+            System.out.println(" REGISTRE NULL o EMPTY: " + registro);
+        } else {
+            System.out.println(" -------------  REGISTRE  -------------------");
+            System.out.println("ar.getNumeroRegistroFormateado() => " + (registro.getNumeroRegistroFormateado()));
+            System.out.println("ar.getResumen() => " + registro.getResumen());
+            System.out.println("ar.getFechaRegistro(); => " + registro.getFechaRegistro());
+            System.out.println("ar.getUnidadTramitacionDestinoDenominacion() => " + registro.getUnidadTramitacionDestinoDenominacion());
+
+        }
+
+        return registro;
+    }
+
+
+    public AsientoRegistralWs getDetallRegistre(String numeroRegistroFormateado)
+       throws Exception {
+
+        AsientoRegistralWs registro = findByNumeroRegistroFormateado(listRegistros, numeroRegistroFormateado);
+        return registro;
     }
 
 
