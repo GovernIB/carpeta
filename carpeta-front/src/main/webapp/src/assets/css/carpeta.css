@@ -131,6 +131,13 @@ img:hover {
 .ponerMovil{
 	display: none;
 }
+.fonsPlugin{
+	background-color: #F8F8F8;
+}
+.titol{
+    text-transform: uppercase;
+}
+
 
 /* RESPONSIVE
 

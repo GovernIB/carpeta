@@ -99,8 +99,16 @@ img:hover {
 	height: 2em;
 }
 .fonsPlugin{
-	background-color: #F8F8F8
+	background-color: #F8F8F8;
 }
+.titol{
+	text-transform: uppercase;
+}
+.text-estrofa{
+	line-height: 130%;
+	margin: .8em 0;
+}
+
 
 /* Canvis per React */
 .boton-menu{

@@ -4,7 +4,7 @@
 }
 
 body {
-    font: normal 100% 'Bariol Regular', Arial, Helvetica, sans-serif;
+    font: normal 100% 'Noto Sans', 'TrebuchetMS', 'Trebuchet MS', Arial, Helvetica, sans-serif;
     color: #333;
     background-color: #eaeaea;
 }
@@ -67,6 +67,16 @@ a:hover {
 
 .colorClave {
     color: #FF4C00;
+}
+.fonsPlugin{
+    background-color: #F8F8F8;
+}
+.titol{
+    text-transform: uppercase;
+}
+.text-estrofa{
+    line-height: 130%;
+    margin: .8em 0;
 }
 
 /*Se aplican cuando el width es menor que 992px*/

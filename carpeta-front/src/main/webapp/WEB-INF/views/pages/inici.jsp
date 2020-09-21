@@ -88,7 +88,13 @@
 				</nav>
 			</div>
 			<script type="text/javascript">
+
+
+
 				window.onload = function($) {
+
+
+
 					var element = document.getElementById('contenedor');
 					var autenticat = '1';
 					sessionStorage.setItem('autenticat', '1');
