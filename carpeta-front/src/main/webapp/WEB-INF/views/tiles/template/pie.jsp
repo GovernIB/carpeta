@@ -3,7 +3,8 @@
     <div class="row mr-auto ml-3 mr-3 pieResponsive">
 
         <div class="col-4 pt-2 elementPieResponsive">
-            <strong class="text-uppercase font-weight-bold h6"><fmt:message key="pie.govern"/></strong>
+            <strong class="text-uppercase font-weight-bold h6"><fmt:message key="pie.govern"/></strong><br>
+            <strong class="h6"><fmt:message key="pie.versio"/> 0.1 - fase BETA</strong>
         </div>
 
         <div class="col-4 text-center pt-2 text-decoration-none bg-transparent text-uppercase p-2 opcionesPie elementPieResponsive">

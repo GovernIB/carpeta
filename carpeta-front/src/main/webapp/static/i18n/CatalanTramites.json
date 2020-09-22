@@ -1,0 +1,24 @@
+{
+  "sProcessing":     "Processant...",
+  "sLengthMenu":     "Mostra _MENU_ tràmits",
+  "sZeroRecords":    "No s'han trobat resultats",
+  "sEmptyTable":     "Cap dada disponible en aquesta taula",
+  "sInfo":           "Es mostren tràmits del _START_ al _END_ d'un total de _TOTAL_ tràmits",
+  "sInfoEmpty":      "Es mostren tràmits del 0 al 0 d'un total de 0 tràmits",
+  "sInfoFiltered":   "(filtrat d'un total de _MAX_ tràmits)",
+  "sInfoPostFix":    "",
+  "sSearch":         "Cerca:",
+  "sUrl":            "",
+  "sInfoThousands":  ",",
+  "sLoadingRecords": "Carregant...",
+  "oPaginate": {
+    "sFirst":    "Primer",
+    "sLast":     "Darrer",
+    "sNext":     "Següent",
+    "sPrevious": "Anterior"
+  },
+  "oAria": {
+    "sSortAscending":  ": Activa per a ordenar la columna de manera ascendent",
+    "sSortDescending": ": Activa per a ordenar la columna de manera descendent"
+  }
+}

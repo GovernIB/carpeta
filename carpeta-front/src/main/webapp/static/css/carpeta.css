@@ -4,7 +4,7 @@
 }
 
 body {
-  padding-top: 4.5rem;
+  /*padding-top: 4.5rem;*/
   font: normal 100% 'Bariol Regular', Arial, Helvetica, sans-serif;
   color: #333; 
   background-color: #eaeaea;
@@ -56,6 +56,9 @@ a:hover{
 .textClave{
 	text-transform: none;
 	font-size: 0.8em;
+}
+.content {
+	margin-top: 2%;
 }
 .colorClave{
 	color: #FF4C00;
@@ -146,7 +149,7 @@ a.dropdown-item.movil:hover {
 .marg0 {
 	border: 0px !important;
 }
-.tablaRegistros {
+.tablaRegistros, .tablaTramites {
 	padding-left: 0 !important;
 	padding-right: 0 !important;
 }
@@ -188,7 +191,10 @@ thead>tr>th.sorting {
 /*Se aplican cuando el width es menor que 480*/
 @media only screen and (min-width : 401px) and (max-width : 480px) {
 body {
-	padding-top: 4rem !important;
+	/*padding-top: 4rem !important;*/
+}
+.content {
+	margin-top: 7%;
 }
 .logoGovern {
     margin-right: 10px !important;
@@ -224,7 +230,10 @@ body {
 /*Se aplican cuando el width es menor que 400*/
 @media only screen and (min-width : 200px) and (max-width : 400px) {
 body {
-	padding-top: 4rem !important;
+	/*padding-top: 4rem !important;*/
+}
+.content {
+	margin-top: 7%;
 }
 .logoGovern {
     margin-right: 5px !important;
@@ -618,7 +627,7 @@ a.iconoRedes {
 	margin-top: -4px !important;
 }
 .miga{
-	position: fixed;
+	/*position: fixed;*/
 	z-index: 20;
 	width: 100%;
 }
@@ -691,4 +700,7 @@ a.iconoRedes {
 }
 .paddingBottomEstandard {
 	padding-bottom: 10px;
+}
+.card-body {
+	padding: 0;
 }

@@ -37,27 +37,40 @@
 
 <body>
 
-    <header>
-        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark bg-carpeta">
+<header class="_fixed-top" style="background: #32814b !important">
+    <nav class="container navbar navbar-expand-md navbar-dark _bg-dark bg-carpeta">
 
-            <button class="navbar-toggler botonMovil" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="<fmt:message key="carpeta.menu.movil"/>">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <button class="navbar-toggler botonMovil" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="<fmt:message key="carpeta.menu.movil"/>">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <!-- Cabecera -->
-            <tiles:insertAttribute name="cabecera" />
+        <!-- Cabecera -->
+        <tiles:insertAttribute name="cabecera" />
 
-            <!-- Menú principal -->
-            <tiles:insertAttribute name="menu" />
+        <!-- Menú principal -->
+        <tiles:insertAttribute name="menu" />
 
-        </nav>
-    </header>
+    </nav>
+    <sec:authorize access="isAuthenticated()">
+        <%--        <c:if test="${user != null}">--%>
+        <!-- Submenu -->
+        <tiles:insertAttribute name="submenu" />
+        <%--        </c:if>--%>
+    </sec:authorize>
+</header>
 
-    <!-- Miga de pan -->
-    <tiles:insertAttribute name="miga" />
+<div class="content">
+    <sec:authorize access="isAuthenticated()">
+        <sec:authentication var="user" property="principal.usuarioClave.nombreCompleto" />
+
+        <c:if test="${user != null}">
+            <!-- Miga de pan -->
+            <tiles:insertAttribute name="miga" />
+        </c:if>
+    </sec:authorize>
 
     <!-- Contenido -->
-    <div class="container p-3carpeta">
+    <div class="container pt-3 _p-3carpeta">
 
         <div class="my-3 p-3 bg-white rounded box-shadow">
 
@@ -70,12 +83,13 @@
         </div>
 
     </div><!-- /.container -->
+</div>
 
-    <!-- Contacto -->
-    <tiles:insertAttribute name="contacto" />
+<!-- Contacto -->
+<tiles:insertAttribute name="contacto" />
 
-    <!-- Pie -->
-    <tiles:insertAttribute name="pie" />
+<!-- Pie -->
+<tiles:insertAttribute name="pie" />
 
 </body>
 
