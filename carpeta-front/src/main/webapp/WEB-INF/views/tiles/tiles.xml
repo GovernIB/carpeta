@@ -80,9 +80,9 @@
         <put-attribute name="body" value="/WEB-INF/views/pages/mapaWeb.jsp" />
     </definition>
 
-<!--    &lt;!&ndash; Accés anònim &ndash;&gt;-->
-<!--    <definition name="anonim" extends="base-definition">-->
-<!--        <put-attribute name="body" value="/WEB-INF/views/pages/anonim.jsp" />-->
-<!--    </definition>-->
+    <!-- Accés anònim -->
+    <definition name="anonim" extends="base-definition">
+        <put-attribute name="body" value="/WEB-INF/views/pages/anonim.jsp" />
+    </definition>
 
 </tiles-definitions>

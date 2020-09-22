@@ -56,7 +56,7 @@
             <p class="font-weight-bold"><strong><fmt:message key="inicio.clau.tramitacio"/></strong></p>
             <p class="lh15">
                 <span class="oi oi-external-link verde pt-1 pr-1 pb-1" title="" aria-hidden="true"></span>
-                <a class="_btn _btn-primary" href="${entornoUrl}/sistrafront/zonaperfront/protected/init.do?lang=${idioma}&autenticacion=A" role="button"><fmt:message key="inicio.clau.tramitacio.acces"/></a>
+                <a class="_btn _btn-primary" href="<c:url value="/anonim"/>" role="button"><fmt:message key="inicio.clau.tramitacio.acces"/></a>
             </p>
         </div>
 

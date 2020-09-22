@@ -38,6 +38,12 @@ public interface CarpetaConstantes {
     long TIPODOCUMENTOID_CODIGO_ORIGEN_ID = 6;
 
     /* -------------- SISTRA --------------*/
+    Integer SISTRA1_ELEMENTOS = 0;
     Integer SISTRA1 = 1;
     Integer SISTRA2 = 2;
+
+    /* -------------- SISTRA 1/ ELEMENTOS PENDIENTES --------------*/
+    static final int ELEMENTO_PENDIENTE = 1;
+    static final int ELEMENTO_NO_PENDIENTE = 0;
+    static final int ELEMENTO_TODOS = -1;
 }
