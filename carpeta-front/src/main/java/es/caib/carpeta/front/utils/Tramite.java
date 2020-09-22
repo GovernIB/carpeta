@@ -10,7 +10,7 @@ public class Tramite implements Comparable<Tramite>{
     private String descripcionTramite;
     private String idioma;
     private Date fechaInicio;
-    private Date fechaUltimoAcceso;
+    private String url;
 
 
 
@@ -62,12 +62,12 @@ public class Tramite implements Comparable<Tramite>{
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaUltimoAcceso() {
-        return fechaUltimoAcceso;
+    public String getUrl() {
+        return url;
     }
 
-    public void setFechaUltimoAcceso(Date fechaUltimoAcceso) {
-        this.fechaUltimoAcceso = fechaUltimoAcceso;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override

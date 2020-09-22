@@ -155,7 +155,7 @@
         <dependency>
             <groupId>es.caib.sistra2</groupId>
             <artifactId>sistramit-rest-api</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </dependency>
 
         <!--Regweb3-->
@@ -188,6 +188,12 @@
             <groupId>javax.jws</groupId>
             <artifactId>javax.jws-api</artifactId>
             <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>es.caib.carpeta</groupId>
+            <artifactId>carpeta-utils</artifactId>
+            <version>0.1</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

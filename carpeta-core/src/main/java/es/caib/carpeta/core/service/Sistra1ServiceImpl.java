@@ -2,10 +2,8 @@ package es.caib.carpeta.core.service;
 
 import es.caib.carpeta.core.utils.DateUtils;
 import es.caib.carpeta.core.utils.UsuarioClave;
-import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementosExpediente;
-import es.caib.zonaper.ws.v2.model.elementoexpediente.FiltroElementosExpediente;
-import es.caib.zonaper.ws.v2.model.elementoexpediente.TipoElementoExpediente;
-import es.caib.zonaper.ws.v2.model.elementoexpediente.TiposElementoExpediente;
+import es.caib.carpeta.utils.CarpetaConstantes;
+import es.caib.zonaper.ws.v2.model.elementoexpediente.*;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitePersistente;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitesPersistentes;
 //import es.caib.zonaper.ws.v2.model.usuarioautenticadoinfo.UsuarioAutenticadoInfo;
@@ -17,13 +15,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.xml.bind.JAXBElement;
 import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.ws.BindingProvider;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class Sistra1ServiceImpl implements Sistra1Service{
@@ -51,62 +48,70 @@ public class Sistra1ServiceImpl implements Sistra1Service{
         TramitesPersistentes tramites = backofficeFacade.obtenerPersistentes(documento,
                 DatatypeFactory.newInstance().newXMLGregorianCalendar(inicio),DatatypeFactory.newInstance().newXMLGregorianCalendar(hoy));
 
-
         return tramites.getTramitePersistente();
     }
 
-    @Override
-    public String obtenerTiquetAcceso(String idSesionTramitacion, UsuarioClave usuario) throws Exception {
+    public String obtenerTramiteAnonimo(String claveAcceso) throws Exception {
+        BackofficeFacade backofficeFacade =  getBackofficeFacade();
 
-        BackofficeFacade backofficeFacade = getBackofficeFacade();
-
-//        UsuarioAutenticadoInfo usuarioAutenticadoInfo = new UsuarioAutenticadoInfo();
-//        usuarioAutenticadoInfo.setNombre(usuario.getNombre());
-//        usuarioAutenticadoInfo.setApellido1(usuario.getApellido1());
-//        usuarioAutenticadoInfo.setApellido2(usuario.getApellido2());
-//        usuarioAutenticadoInfo.setMetodoAutenticacion(usuario.getMetodoAutentificacion());
-//        usuarioAutenticadoInfo.setNif(usuario.getNif());
-//
-        
-//        String url = backofficeFacade.oobtenerTiquetAcceso(idSesionTramitacion, usuario);
-        return "url";
+        return backofficeFacade.obtenerUrlAccesoAnonimo(claveAcceso);
     }
 
+    public List<ElementoExpediente> obtenerElementosExpediente(List<TipoElementoExpediente> tipos, int pendiente, UsuarioClave usuarioClave, Locale loc) throws Exception {
+        return obtenerElementosExpediente(tipos, pendiente, usuarioClave, loc, null, null);
+    }
 
-//    public String obtenerElementosExpediente(UsuarioClave usuario) throws Exception {
-    public ElementosExpediente obtenerElementosExpediente() throws Exception {
-        log.debug("ANTES de declarar elementos");
+    public List<ElementoExpediente> obtenerElementosExpediente(List<TipoElementoExpediente> tipos, UsuarioClave usuarioClave, Locale loc) throws Exception {
+        return obtenerElementosExpediente(tipos, CarpetaConstantes.ELEMENTO_TODOS, usuarioClave, loc, null, null);
+    }
+
+    public List<ElementoExpediente> obtenerElementosExpediente(List<TipoElementoExpediente> tipos, int pendiente, UsuarioClave usuarioClave, Locale loc, GregorianCalendar dataIni, GregorianCalendar dataFi) throws Exception {
+
+        ObjectFactory factory = new ObjectFactory();
+        JAXBElement<XMLGregorianCalendar> fechaIni = null;
+        JAXBElement<XMLGregorianCalendar> fechaFi = null;
+
+        if (dataIni != null && dataFi != null) {
+            fechaIni = factory.createFiltroElementosExpedienteFechaInicio(DatatypeFactory.newInstance().newXMLGregorianCalendar(dataIni));
+            fechaFi = factory.createFiltroElementosExpedienteFechaFin(DatatypeFactory.newInstance().newXMLGregorianCalendar(dataFi));
+        }
+
         BackofficeFacade backofficeFacade = getBackofficeFacade();
 
-//        UsuarioAutenticadoInfo usuarioAutenticadoInfo = new UsuarioAutenticadoInfo();
-//        usuarioAutenticadoInfo.setNombre(usuario.getNombre());
-//        usuarioAutenticadoInfo.setApellido1(usuario.getApellido1());
-//        usuarioAutenticadoInfo.setApellido2(usuario.getApellido2());
-//        usuarioAutenticadoInfo.setMetodoAutenticacion(usuario.getMetodoAutentificacion());
-//        usuarioAutenticadoInfo.setNif(usuario.getNif());
-
-        log.debug("ANTES de declarar elementos");
-
         TiposElementoExpediente teess = new TiposElementoExpediente();
-        teess.getTipo().add(TipoElementoExpediente.COMUNICACION);
-        teess.getTipo().add(TipoElementoExpediente.NOTIFICACION);
-        teess.getTipo().add(TipoElementoExpediente.ENVIO);
-        teess.getTipo().add(TipoElementoExpediente.PREENVIO);
-        teess.getTipo().add(TipoElementoExpediente.PREREGISTRO);
-        teess.getTipo().add(TipoElementoExpediente.REGISTRO);
+        for (TipoElementoExpediente tee : tipos) {
+            teess.getTipo().add(tee);
+        }
 
         FiltroElementosExpediente fee = new FiltroElementosExpediente();
-        fee.setNif("11111111H");
-        fee.setIdioma("es");
+        fee.setNif(usuarioClave.getNif());
+        fee.setIdioma(loc.getLanguage());
         fee.setTipos(teess);
+        fee.setFechaInicio(fechaIni);
+        fee.setFechaFin(fechaFi);
 
-        log.debug("ANTES de LLAMADA");
+        long num = backofficeFacade.obtenerTotalElementosExpediente(fee);
 
-        ElementosExpediente el = backofficeFacade.obtenerElementosExpediente(fee);
+        int pagina = 1;
+        int tamPagina = (int) num;
 
-        log.debug("DESPUEEEEEEEEEEEEEES");
+        ElementosExpediente el = backofficeFacade.obtenerElementosExpediente(fee, null, null);
 
-        return el;
+        List<ElementoExpediente> els = new ArrayList<>();
+        for (ElementoExpediente elem : el.getElemento()) {
+            switch (pendiente) {
+                case CarpetaConstantes.ELEMENTO_PENDIENTE:
+                    if (elem.isPendiente()) els.add(elem);
+                    break;
+                case CarpetaConstantes.ELEMENTO_NO_PENDIENTE:
+                    if (!elem.isPendiente()) els.add(elem);
+                    break;
+                case CarpetaConstantes.ELEMENTO_TODOS:
+                    els.add(elem);
+            }
+        }
+
+        return els;
     }
 
     /**

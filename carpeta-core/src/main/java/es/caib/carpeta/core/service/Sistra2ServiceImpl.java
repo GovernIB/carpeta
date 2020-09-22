@@ -75,6 +75,7 @@ public class Sistra2ServiceImpl implements Sistra2Service{
 
         final RInfoTicketAcceso infoTicket = new RInfoTicketAcceso();
         infoTicket.setIdSesionTramitacion(idSesionTramitacion);
+        infoTicket.setUrlCallbackError("/carpeta/tramite/list");
 
         final RUsuarioAutenticadoInfo usuariInfo = new RUsuarioAutenticadoInfo();
         usuariInfo.setUsername(usuario.getNif());
@@ -84,10 +85,10 @@ public class Sistra2ServiceImpl implements Sistra2Service{
         usuariInfo.setEmail("");
         usuariInfo.setNif(usuario.getNif());
         usuariInfo.setAutenticacion("c");
-        usuariInfo.setMetodoAutenticacion("CLAVE_CERTIFICADO");
+        usuariInfo.setMetodoAutenticacion(usuario.getMetodoAutentificacion());
         usuariInfo.setQaa(usuario.getQaa());
 
-        infoTicket.setUsuarioAutenticadoInfo(usuariInfo);
+        infoTicket.setUsuarioAutenticadoInfo(usuariInfo);;
 
         final HttpEntity<RInfoTicketAcceso> request = new HttpEntity<>(infoTicket, headers);
 

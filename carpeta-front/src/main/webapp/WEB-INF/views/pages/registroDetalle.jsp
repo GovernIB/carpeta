@@ -4,7 +4,7 @@
     <div class="card mb-12 border-0 p-2">
         <div class="card-title border-bottom verde h5 paddingBottomEstandard"><fmt:message key="registro.detalle"/> ${numeroRegistro}</div>
 
-        <div class="card-body">
+        <div class="card-body" style="padding: 1.25rem">
             <div class="alert alert-danger" role="alert">
                 <fmt:message key="registro.detalle.error"/>
             </div>
@@ -26,7 +26,7 @@
                     <!-- Información Registro -->
                     <div class="card border-left-carpeta shadow py-2 mb-3">
 
-                        <div class="card-body">
+                        <div class="card-body" style="padding: 1.25rem">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="font-weight-bold verde text-uppercase mb-3 text-center"><fmt:message key="registro.tipo.${asiento.tipoRegistro}"/></div>
@@ -104,7 +104,7 @@
 
                     <!-- Justificante -->
                     <div class="card border-left-carpeta shadow py-2 mb-3">
-                        <div class="card-body">
+                        <div class="card-body" style="padding: 1.25rem">
                             <div class="row no-gutters">
                                 <div class="col mr-2">
                                     <div class="font-weight-bold verde text-uppercase mb-3 text-center"><fmt:message key="registro.detalle.justificante"/></div>
@@ -130,7 +130,7 @@
 
                     <!-- Interesados -->
                     <div class="card border-left-carpeta shadow py-2 mb-3">
-                        <div class="card-body">
+                        <div class="card-body" style="padding: 1.25rem">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="font-weight-bold verde text-uppercase mb-3 text-center"><fmt:message key="registro.detalle.interesados"/></div>
@@ -188,7 +188,7 @@
 
                     <!-- Anexos -->
                     <div class="card border-left-carpeta shadow py-2 mb-3">
-                        <div class="card-body">
+                        <div class="card-body" style="padding: 1.25rem">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="font-weight-bold verde text-uppercase mb-3 text-center"><fmt:message key="registro.detalle.anexos"/></div>
@@ -239,7 +239,7 @@
                     <!-- Expone - Solicita -->
                     <c:if test="${not empty asiento.expone || not empty asiento.solicita}">
                         <div class="card border-left-carpeta shadow py-2 mb-3">
-                            <div class="card-body">
+                            <div class="card-body" style="padding: 1.25rem">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
 
