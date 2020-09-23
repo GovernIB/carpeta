@@ -3,9 +3,9 @@
 
     <!-- Button trigger modal -->
     <strong><fmt:message key="soporte.ayuda"/> </strong><fmt:message key="soporte.contacto"/>
-    <button type="button" class="btn btn-soporte" data-toggle="modal" data-target="#modalContacto" id="exampleModalCenterTitle">
+    <a style="font-weight: bolder; color: #32814b" class="btn btn-soporte" data-toggle="modal" data-target="#modalContacto" id="exampleModalCenterTitle">
         <fmt:message key="soporte.equipo"/>
-    </button>
+    </a>
 
     <!-- Modal -->
     <div class="modal fade" id="modalContacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -26,7 +26,10 @@
                                 <fmt:message key="soporte.mensaje.envia"/> <a href="mailto:otae@fundaciobit.org" target="_blank"><fmt:message key="soporte.mensaje.correo"/></a>
                             </li>
                             <li>
-                                <fmt:message key="soporte.mensaje.llamar"/> <a href="tel:971784940"><fmt:message key="soporte.mensaje.telefono"/></a>.
+                                <fmt:message key="soporte.mensaje.llamar"/> <a href="tel:971177070"><fmt:message key="soporte.mensaje.telefono"/></a>.
+                            </li>
+                            <li>
+                                <fmt:message key="soporte.mensaje.autenticacion"/> <a href="tel:012">012</a>.
                             </li>
                         </ul>
                     </div>

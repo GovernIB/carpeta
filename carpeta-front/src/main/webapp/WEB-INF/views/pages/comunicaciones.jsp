@@ -27,7 +27,7 @@
                     </thead>
                     <tbody>
                     <c:forEach items="${comunicacions}" var="com" varStatus="index">
-                        <tr class="clickable-row" data-target="_blank" data-href="<c:url value="${com.url}"/>">
+                        <tr style="cursor: pointer" class="" data-target="_blank" data-href="<c:url value="${com.url}"/>">
                             <td>${com.descripcion}</td>
                             <td><fmt:formatDate value="${com.fecha.toGregorianCalendar().time}" pattern="dd/MM/yyyy HH:mm"/></td>
                         </tr>
@@ -40,3 +40,11 @@
     </div>
 
 </div>
+<script>
+    $('tr').click(function() {
+        var url = $(this).attr('data-href');
+        // var url = $(this).find('.url_sistra').html();
+        url = url.replace(/&amp;/g, "&");
+        window.open(url, '_blank');
+    });
+</script>

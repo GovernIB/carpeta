@@ -47,6 +47,7 @@
                     <tr>
                         <th><fmt:message key="tramite.tramite"/></th>
                         <th><fmt:message key="tramite.fecha.inicio"/></th>
+                        <th style="display: none"><fmt:message key="tramite.fecha.inicio"/></th>
 
                     </tr>
                     </thead>
@@ -54,19 +55,27 @@
                     <c:forEach items="${tramites}" var="tramite" varStatus="index">
                         <c:choose>
                             <c:when test="${tramite.sistra == 2}">
-                                <tr class="clickable-row" data-target="_blank" data-href="<c:url value="/tramite/sistra${tramite.sistra}/${tramite.idSesionTramitacion}"/>">
+<%--                                <tr class="clickable-row" data-target="_blank" data-href="<c:url value="/tramite/sistra${tramite.sistra}/${tramite.idSesionTramitacion}"/>">--%>
+<%--                                    <td>${tramite.descripcionTramite}</td>--%>
+<%--                                    <td><fmt:formatDate value="${tramite.fechaInicio}" pattern="dd/MM/yyyy HH:mm"/></td>--%>
+<%--                                </tr>--%>
+                                <tr class="" style="cursor: pointer">
                                     <td>${tramite.descripcionTramite}</td>
                                     <td><fmt:formatDate value="${tramite.fechaInicio}" pattern="dd/MM/yyyy HH:mm"/></td>
+                                    <td class="url_sistra" style="display: none">
+                                        <c:url value="/tramite/sistra2/${tramite.idSesionTramitacion}"/>
+                                    </td>
                                 </tr>
                             </c:when>
                             <c:otherwise>
-                                <tr <c:if test="${tramite.sistra == 0}">class="" data-toggle="modal" data-target="#aviso" style="cursor: pointer" </c:if>
-                                    <c:if test="${tramite.sistra == 1}">class="clickable-row" data-target="_blank" data-href="<c:url value="${tramite.url}"/>"</c:if>
+                                <tr <c:if test="${tramite.sistra == 0}">class="" data-toggle="modal" data-target="#aviso" </c:if> style="cursor: pointer"
+<%--                                    <c:if test="${tramite.sistra == 1}">class="clickable-row" data-target="_blank" data-href="<c:url value="${tramite.url}"/>"</c:if>--%>
 <%--                                    class="clickable-row" data-target="_blank" data-href="<c:url value="${tramite.url}"/>"--%>
                                 >
                                     <td>${tramite.descripcionTramite}</td>
                                     <td><fmt:formatDate value="${tramite.fechaInicio}" pattern="dd/MM/yyyy HH:mm"/></td>
-                                    <td class="url_elemento" style="display: none">${tramite.url}</td>
+                                    <c:if test="${tramite.sistra != 0}"><td class="url_sistra" style="display: none"><c:url value="${tramite.url}"/></td></c:if>
+                                    <c:if test="${tramite.sistra == 0}"><td class="url_elemento" style="display: none">${tramite.url}</td></c:if>
                                 </tr>
                             </c:otherwise>
 
@@ -122,20 +131,17 @@
     </div>
     <script>
         $('tr').click(function() {
-           var url = $(this).find('.url_elemento').html();
-           url = url.replace(/&amp;/g, "&");
-           $('.detalle_elemento').attr('href', url);
+            if ($(this).attr('data-target') == '#aviso') {
+                var url = $(this).find('.url_elemento').html();
+                url = url.replace(/&amp;/g, "&");
+                $('.detalle_elemento').attr('href', url);
+            } else {
+                var url = $(this).find('.url_sistra').html();
+                url = url.replace(/&amp;/g, "&");
+                window.open(url, '_blank');
+            }
         });
     </script>
-<%--    <script>--%>
-<%--        $('#dataTable_paginate .clickable-row').each(function(event) {--%>
-<%--            event.preventDefault();--%>
-<%--            var $th = $(this);--%>
-<%--            $th.on('click', function() {--%>
-<%--                window.open($th.attr('data-href'), $th.attr('data-target'));--%>
-<%--            });--%>
-<%--        });--%>
-<%--    </script>--%>
 </div>
 
 

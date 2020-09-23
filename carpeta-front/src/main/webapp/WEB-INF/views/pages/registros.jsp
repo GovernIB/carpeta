@@ -29,7 +29,7 @@
                     <tbody>
                     <c:forEach items="${registros}" var="asiento" varStatus="index">
 
-                        <tr class="clickable-row" data-target="" data-href="<c:url value="/registro/detalle/${asiento.numeroRegistroFormateado}"/>">
+                        <tr class="" style="cursor: pointer" data-target="" data-href="<c:url value="/registro/detalle/${asiento.numeroRegistroFormateado}"/>">
                             <td>
                                 <label class="ponerMovil" data-toggle="tooltip" data-placement="top" title="${asiento.numeroRegistroFormateado} - ${asiento.unidadTramitacionDestinoDenominacion}">
                                         ${asiento.numeroRegistroFormateado}
@@ -96,14 +96,12 @@
                         <tr>
                             <th scope="col"><fmt:message key="tramite.tramite"/></th>
                             <th scope="col"><fmt:message key="tramite.fecha.inicio"/></th>
-    <%--                        <th scope="col"><fmt:message key="registro.detalle.extracto"/></th>--%>
-    <%--                        <th scope="col" class="quitarMovil"><fmt:message key="registro.organismo"/></th>--%>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach items="${tramites}" var="tramite" varStatus="index">
 
-                            <tr class="clickable-row" data-target="" data-href="<c:url value="${tramite.url}"/>">
+                            <tr class="" style="cursor: pointer" data-target="" data-href="<c:url value="${tramite.url}"/>">
                                 <td>${tramite.descripcionTramite}</td>
                                 <td><fmt:formatDate value="${tramite.fechaInicio}" pattern="dd/MM/yyyy HH:mm"/></td>
                             </tr>
@@ -139,16 +137,13 @@
                 $('[data-toggle="tooltip"]').tooltip()
             })
         </script>
-<%--        <script>--%>
-<%--            $('#dataTable_paginate_tramite .clickable-row').each(function(event) {--%>
-<%--                event.preventDefault();--%>
-<%--                var $th = $(this);--%>
-<%--                $th.on('click', function() {--%>
-<%--                    window.open($th.attr('data-href'), $th.attr('data-target'));--%>
-<%--                });--%>
-<%--            });--%>
-<%--        </script>--%>
-
     </c:if>
-
+    <script>
+        $('tr').click(function() {
+            var url = $(this).attr('data-href');
+            // var url = $(this).find('.url_sistra').html();
+            url = url.replace(/&amp;/g, "&");
+            window.open(url, '_blank');
+        });
+    </script>
 </div>

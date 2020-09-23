@@ -421,6 +421,7 @@ a.linkPie:hover,
 a.linkPie:focus,
 a.linkPie:active {
 	color: #32814b !important;
+	font-weight: bolder;
 }
 /* Fin Pie */
 
