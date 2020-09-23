@@ -14,8 +14,14 @@ function Plugin ({ t , pluginID}) {
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', url, true);
 	xhr.onload = function () {
-		codiPlugin = this.responseText;
-		document.getElementById("substituir").innerHTML = codiPlugin;
+		if (xhr.readyState === 4) {
+			if (xhr.status === 200) {
+				codiPlugin = this.responseText;
+				document.getElementById("substituir").innerHTML = codiPlugin;
+			} else {
+				window.location.href = window.location.href;
+			}
+		}
 	};
 	xhr.send(data);
 	
