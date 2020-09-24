@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<!-- saved from url=(0040)https://dev.caib.es/carpeta/registro/list -->
+<!-- saved from url=(0040)https://dev.caib.es/carpeta/registro/detalle -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ca" lang="ca">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>${detalle_title}</title>
+    <title>${detalletitle}</title>
     <link rel="shortcut icon" type="image/x-ico" href="http://www.caib.es/sites/favicon.png">
     <meta http-equiv="Content-Language" content="ca">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,11 +31,11 @@
     <link href="${resources}/carpeta/datatables.min.css" rel="stylesheet">
 </head>
 
-<body>
+<body class="fonsPlugin">
 
 
 <!-- Contenido -->
-<div class="container"> <!-- p-3carpeta -->
+<div class="container p-3carpeta"> <!-- p-3carpeta -->
 
     <div class="my-3 p-3 bg-white rounded box-shadow">
 
@@ -63,40 +63,28 @@
 
                                         <dl class="row">
                                             <dt class="col-sm-3">${registro_fecha}</dt>
-                                            <dd class="col-sm-9">${registro.fecha}</dd>
+                                            <dd class="col-sm-9">${registro.fechaRegistro?string("dd-MM-yyyy HH:mm")}
+                                            </dd>
 
                                             <dt class="col-sm-3">${registro_numero}</dt>
                                             <dd class="col-sm-9">${registro.numeroRegistroFormateado}</dd>
 
                                             <dt class="col-sm-3">${registro_oficina}</dt>
-                                            <dd class="col-sm-9">${registro.entidadRegistralDestinoDenominacion}</dd>
+                                            <dd class="col-sm-9">${registro.entidadRegistralOrigenDenominacion}</dd>
 
-                                            <dt class="col-sm-3">${registro_destinario}</dt>
+                                            <dt class="col-sm-3">${registro_destinatario}</dt>
                                             <dd class="col-sm-9">${registro.unidadTramitacionDestinoDenominacion}</dd>
 
                                             <dt class="col-sm-3">${registro_tipo_doc}</dt>
                                             <dd class="col-sm-9">
-                                                ${registro_tipoDocumentacionFisica_${registro.tipoDocumentacionFisicaCodigo}}
+                                                ${registro.tipoDocumentacionFisicaCodigo}
                                             </dd>
 
                                             <dt class="col-sm-3">${registro_extracto}</dt>
-                                            <dd class="col-sm-9">Sol·licitud d'admissió a borses de treball o
-                                                oposicions
-                                            </dd>
+                                            <dd class="col-sm-9">${registro.resumen}</dd>
 
                                             <dt class="col-sm-3">${carpeta_idioma}</dt>
-                                            <dd class="col-sm-9">Català</dd>
-
-                                            <dt class="col-sm-3">${registro_presencial}</dt>
-                                            <dd class="col-sm-9">
-                                                <#if registro.presencial>
-                                                ${carpeta_si}
-                                                <#else>
-                                                ${carpeta_no}
-                                            </
-                                            #if>
-                                            </dd>
-
+                                            <dd class="col-sm-9">${registro.idioma}</dd>
                                         </dl>
 
                                     </div>
@@ -144,15 +132,18 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody>
+                                                <#list registro.interesados as interesado >
                                                 <tr>
-                                                    <td>1</td>
+                                                    <td>${interesado?index}</td>
                                                     <td>
-                                                        ${registro.interesado.nombre}
+                                                        ${interesado.interesado.nombre}
                                                     </td>
-                                                    <td>${registro.interesado.documento}</td>
-                                                    <td>${registro_interesado_${registro.interesado.tipoInteresado}}
+                                                    <td>${interesado.interesado.documento}</td>
+                                                    <td>${interesado.interesado.tipoInteresado}
                                                     </td>
                                                 </tr>
+                                                </
+                                                #list>
                                                 </tbody>
                                             </table>
 
@@ -171,12 +162,35 @@
                                             ${registro_anexos}
                                         </div>
 
+                                        <#if registro.anexos?has_content>
+
+                                        <table class="table table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">${registro_anexo_titulo}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            <#list registro.anexos as anexo >
+                                            <tr>
+                                                <td>${anexo?index}</td>
+                                                <td>${anexo.titulo}</td>
+                                            </tr>
+                                            </
+                                            #list>
+                                            </tbody>
+                                        </table>
+                                        <#else>
+
                                         <!-- No hay anexos -->
 
                                         <p class="text-center">${registro_anexos_vacio}</p>
 
-
-                                    </div>
+                                    </
+                                    #if>
+                                </div>
                                 </div>
                             </div>
                         </div>

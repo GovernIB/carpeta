@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0040)https://dev.caib.es/carpeta/registro/list -->
+<!-- saved from url=(0040)https://dev.caib.es/carpeta/tramite/list -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ca" lang="ca">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -30,29 +30,16 @@
     <link href="${resources}/carpeta/jquery.dataTables.min.css" rel="stylesheet">
     <link href="${resources}/carpeta/datatables.min.css" rel="stylesheet">
 </head>
-<body>
-
-
-<!-- Contenido -->
-<div class="container"> <!-- p-3carpeta -->
-
-    <div class="my-3 p-3 bg-white rounded box-shadow">
-
-        <!-- Contenido -->
-
-        <div class="card mb-12 border-0">
-
-            <div class="card-title border-bottom verde h5">${registro_listado}</div>
-
-
-            <p class="card-text lh15">${registro_descripcion}</p>
-
-
-            <#if registros?has_content>
-
+<body class="fonsPlugin">
+<div class="container-contenido">
+    <div class="infoNoMenu">
+        <p class="titol h2">${registro_listado}</p>
+        <div class="col-md-12 border-0 float-left p-0">
+            <p class="lh15 text-estrofa">${registro_descripcion}</p>
             <div class="card-body tablaRegistros">
 
-                <div class="table-responsive">
+                <#if registros?has_content>
+                <div class="mt-5">
                     <table id="dataTable_paginate" class="table table-striped table-bordered table-hover"
                            style="width:100%">
                         <thead class="table-success">
@@ -64,11 +51,11 @@
                         </tr>
                         </thead>
                         <tbody>
-
                         <#setting date_format="MM/dd/yyyy hh">
                         <#list registros as registro >
+
                         <tr class="clickable-row" data-target="_blank"
-                            data-href="detallRegistre?numeroRegistroFormateado=${registro.numeroRegistroFormateado}">
+                            onclick="window.location.href='detallRegistre?numeroRegistroFormateado=${registro.numeroRegistroFormateado}';">
                             <td>
                                 <label class="ponerMovil" data-toggle="tooltip" data-placement="top"
                                        title="${registro.numeroRegistroFormateado} - ${registro.unidadTramitacionDestinoDenominacion}">
@@ -78,43 +65,37 @@
                             </td>
                             <td>${registro.fechaRegistro?string("dd-MM-yyyy HH:mm")}</td>
                             <td>
-
                                 <label data-toggle="tooltip" data-placement="top" title="${registro.resumen}">
                                     ${registro.resumen}
                                 </label>
-
-
                             </td>
                             <td class="quitarMovil">${registro.unidadTramitacionDestinoDenominacion}</td>
                         </tr>
-                        </#list>
-
+                        </
+                        #list>
                         </tbody>
                     </table>
-                </div>
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $.fn.dataTable.moment('D/MM/YYY HH:mm');
+                            $('#dataTable_paginate').DataTable({
+                                "order": [[1, "desc"]],
+                                "language": {
+                                    "url": "${resources}/i18n/${lang}.json"
+                                }
+                            });
+                        });
+                    </script>
+                    <#else>
+                    <div class="alert alert-secondary mt-5" role="alert">
+                        ${registro_vacio}
+                    </div>
+                </
+                #if>
+
             </div>
-
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $.fn.dataTable.moment('D/MM/YYY HH:mm');
-                    $('#dataTable_paginate').DataTable({
-                        "order": [[1, "desc"]],
-                        "language": {
-                            "url": "${resources}/i18n/${lang}.json"
-                        }
-                    });
-                });
-            </script>
-
-
-            <#else>
-            <div class="alert alert-secondary mt-5" role="alert">
-                ${registro_vacio}
-            </div>
-        </#if>
     </div>
 </div>
 </div>
-
 </body>
 </html>

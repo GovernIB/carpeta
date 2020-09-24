@@ -1,8 +1,13 @@
 @echo off
+set JAVA_HOME=C:\Program Files\Java\jdk-11
 
 echo optional parameters -Dcaib -Psqlgen
 
 cmd /C mvn -DskipTests %* clean install
+
+echo ELIMINANDO TEMPORALES JBOSS
+rd /q /s C:\Users\mgonzalez\Documents\servidores\EAP-7.2.0\standalone\deployments\tmp
+rd /q /s C:\Users\mgonzalez\Documents\servidores\EAP-7.2.0\standalone\log
 
 if %errorlevel% EQU 0 (
 

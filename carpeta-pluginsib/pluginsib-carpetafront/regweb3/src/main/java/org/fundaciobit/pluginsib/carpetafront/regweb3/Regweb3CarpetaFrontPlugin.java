@@ -128,6 +128,11 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     }
 
 
+    public String getDetalleTitle(Locale locale) {
+        return getTraduccio("detalletitle", locale);
+    }
+
+
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
     // -------------------     L L I S T A T   DE   REGISTRES                ----------------
@@ -199,6 +204,8 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         // XYZ ZZZ
         map.put("form_action", absolutePluginRequestPath + "/" + LLISTAT_REGISTRES_PAGE);
         map.put("lang", locale.getLanguage());
+
+        map.put("title", getTitle(new Locale("ca")));
 
         String[] traduccions = {"registro.listado", "registro.descripcion", "registro.numero",
            "registro.fecha", "registro.extracto", "registro.destinatario", "registro.vacio"};
@@ -280,7 +287,8 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             response.setCharacterEncoding("utf-8");
             response.setContentType("text/html");
 
-            String numeroRegistroFormateado = "";
+
+            String numeroRegistroFormateado = request.getParameter("numeroRegistroFormateado");
 
 
             String webpage = getDetallDeRegistrePage(absolutePluginRequestPath, numeroRegistroFormateado, locale);
@@ -325,10 +333,15 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         // XYZ ZZZ
         map.put("form_action", absolutePluginRequestPath + "/" + DETALL_REGISTRE_PAGE);
         map.put("lang", locale.getLanguage());
+        map.put("detalletitle", getDetalleTitle(new Locale("ca")));
 
-        //TODO PONER LAS QUE TOCAN PORA DETALLE
-        String[] traduccions = {"registro.listado", "registro.descripcion", "registro.numero",
-           "registro.fecha", "registro.extracto", "registro.destinatario", "registro.vacio"};
+
+        String[] traduccions = {"registro.titulo.detalle", "registro.entrada", "registro.fecha", "registro.numero",
+           "registro.oficina", "registro.destinatario", "registro.tipo.doc", "registro.extracto", "carpeta_idioma",
+           "registro.justificante", "registre.justifcante.pendiente",
+           "registro.interesados", "registro.interesado.nombre", "registro.interesado.documento", "registro.interesado.tipo",
+           "registro.anexos", "registro.anexos.vacio", "registro.anexo.titulo"};
+
 
         for (String t : traduccions) {
             map.put(t.replace('.', '_'), getTraduccio(t, locale));
@@ -358,6 +371,10 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             System.out.println("ar.getResumen() => " + registro.getResumen());
             System.out.println("ar.getFechaRegistro(); => " + registro.getFechaRegistro());
             System.out.println("ar.getUnidadTramitacionDestinoDenominacion() => " + registro.getUnidadTramitacionDestinoDenominacion());
+            System.out.println("ar.getEntidadRegistralOrigenDenominacion() => " + registro.getEntidadRegistralOrigenDenominacion());
+            System.out.println("ar.getTipoDocumentacionFisicaCodigo() => " + registro.getTipoDocumentacionFisicaCodigo());
+            System.out.println("ar.getIdioma() => " + registro.getIdioma());
+
 
         }
 

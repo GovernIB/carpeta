@@ -1,11 +1,9 @@
 package es.caib.carpeta.pluginsib.carpetafront.api;
 
-import java.util.Locale;
-import java.util.Properties;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import java.util.Locale;
+import java.util.Properties;
 
 /**
  * 
