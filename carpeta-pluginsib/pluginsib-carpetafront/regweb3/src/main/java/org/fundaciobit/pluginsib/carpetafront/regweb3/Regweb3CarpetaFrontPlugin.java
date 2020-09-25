@@ -162,7 +162,7 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             response.setContentType("text/html");
 
 
-            String webpage = getLlistatDeRegistresPage(absolutePluginRequestPath, administrationID, getEntidad(), locale, isGet);
+            String webpage = getLlistatDeRegistresPage(absolutePluginRequestPath, relativePluginRequestPath,administrationID, getEntidad(), locale, isGet);
 
             try {
                 response.getWriter().println(webpage);
@@ -179,7 +179,7 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     }
 
 
-    public String getLlistatDeRegistresPage(String absolutePluginRequestPath, String administrationID, String entidad, Locale locale, boolean isGet) throws Exception {
+    public String getLlistatDeRegistresPage(String absolutePluginRequestPath, String relativePluginRequestPath,String administrationID, String entidad, Locale locale, boolean isGet) throws Exception {
 
         Map<String, Object> map = new HashMap<String, Object>();
 
@@ -207,13 +207,20 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         map.put("title", getTitle(new Locale("ca")));
 
+
+
+
         String[] traduccions = {"registro.listado", "registro.descripcion", "registro.numero",
-           "registro.fecha", "registro.extracto", "registro.destinatario", "registro.vacio"};
+           "registro.fecha", "registro.extracto", "registro.destinatario", "registro.vacio", "carpeta.acciones", "registro.detalle"};
 
         for (String t : traduccions) {
             map.put(t.replace('.', '_'), getTraduccio(t, locale));
         }
 
+        //String urlDetalle = absolutePluginRequestPath  + "/" + DETALL_REGISTRE_PAGE +"?numeroRegistroFormateado=";
+        String urlDetalle = relativePluginRequestPath  + "/" + DETALL_REGISTRE_PAGE +"?numeroRegistroFormateado=";
+
+        map.put("urlDetalle" , urlDetalle);
 
         map.put("registros", registres);
         map.put("web", getWeb());
@@ -291,7 +298,7 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             String numeroRegistroFormateado = request.getParameter("numeroRegistroFormateado");
 
 
-            String webpage = getDetallDeRegistrePage(absolutePluginRequestPath, numeroRegistroFormateado, locale);
+            String webpage = getDetallDeRegistrePage(absolutePluginRequestPath,numeroRegistroFormateado, locale);
 
             try {
                 response.getWriter().println(webpage);
@@ -336,11 +343,32 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         map.put("detalletitle", getDetalleTitle(new Locale("ca")));
 
 
+        //Traduccions tipoDocumentacionFísica
+        String [] tipoDocumentacioFisica = {"",getTraduccio("registro.tipoDocumentacionFisica.1",locale),
+                getTraduccio("registro.tipoDocumentacionFisica.2",locale),
+                getTraduccio("registro.tipoDocumentacionFisica.3",locale)};
+
+        map.put("docFisica", tipoDocumentacioFisica);
+
+        //Traduccions tipoInteresado
+        String [] tipoInteresado = {"",getTraduccio("registro.tipoInteresado.1",locale),
+                getTraduccio("registro.tipoInteresado.2",locale),
+                getTraduccio("registro.tipoInteresado.3",locale)};
+
+        map.put("tipoInteresado", tipoInteresado);
+
+
+        //Traduccions idioma Registro
+        String [] registroIdioma = {"",getTraduccio("registro.idioma.1",locale),
+                getTraduccio("registro.idioma.2",locale)};
+
+        map.put("registroIdioma", registroIdioma);
+
         String[] traduccions = {"registro.titulo.detalle", "registro.entrada", "registro.fecha", "registro.numero",
-           "registro.oficina", "registro.destinatario", "registro.tipo.doc", "registro.extracto", "carpeta_idioma",
-           "registro.justificante", "registre.justifcante.pendiente",
-           "registro.interesados", "registro.interesado.nombre", "registro.interesado.documento", "registro.interesado.tipo",
-           "registro.anexos", "registro.anexos.vacio", "registro.anexo.titulo"};
+           "registro.oficina", "registro.destinatario", "registro.tipo.doc", "registro.extracto", "carpeta.idioma",
+           "registro.justificante", "registre.justifcante.pendiente", "registro.interesados", "registro.interesado.nombre",
+           "registro.interesado.documento", "registro.interesado.tipo", "registro.anexos", "registro.anexos.vacio",
+           "registro.anexo.titulo"};
 
 
         for (String t : traduccions) {

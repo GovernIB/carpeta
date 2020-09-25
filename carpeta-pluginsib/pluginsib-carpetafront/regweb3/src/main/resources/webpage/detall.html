@@ -12,6 +12,7 @@
     <meta name="_csrf_header" content="">
     <!-- SCRIPTS -->
     <script src="${resources}/carpeta/jquery-3.5.0.js"></script>
+    <script src="${resources}/carpeta/popper.min.js"></script>
     <script src="${resources}/carpeta/bootstrap.min.js"></script>
     <!-- Datetimpicker -->
     <script src="${resources}/carpeta/moment-with-locales.min.js"></script>
@@ -32,28 +33,20 @@
 </head>
 
 <body class="fonsPlugin">
-
-
 <!-- Contenido -->
 <div class="container p-3carpeta"> <!-- p-3carpeta -->
-
     <div class="my-3 p-3 bg-white rounded box-shadow">
-
         <!-- Contenido -->
-
         <div class="card mb-12 border-0">
             <div class="card-title border-bottom verde h5">${registro_titulo_detalle}
                 ${registro.numeroRegistroFormateado}
             </div>
 
             <div class="card-body">
-
                 <div class="row">
-
                     <div class="pri-col-deta-reg">
                         <!-- InformaciÃ³n Registro -->
                         <div class="card border-left-carpeta shadow py-2 mb-3">
-
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
@@ -77,22 +70,22 @@
 
                                             <dt class="col-sm-3">${registro_tipo_doc}</dt>
                                             <dd class="col-sm-9">
-                                                ${registro.tipoDocumentacionFisicaCodigo}
+                                                ${docFisica[registro.tipoDocumentacionFisicaCodigo]}
                                             </dd>
 
                                             <dt class="col-sm-3">${registro_extracto}</dt>
                                             <dd class="col-sm-9">${registro.resumen}</dd>
 
                                             <dt class="col-sm-3">${carpeta_idioma}</dt>
-                                            <dd class="col-sm-9">${registro.idioma}</dd>
-                                        </dl>
+                                            <dd class="col-sm-9">${registroIdioma[registro.idioma]}</dd>
+                                           </dl>
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
 
-                        <!-- Justificante -->
+                           <!-- Justificante -->
                         <div class="card border-left-carpeta shadow py-2 mb-3">
                             <div class="card-body">
                                 <div class="row no-gutters">
@@ -139,11 +132,10 @@
                                                         ${interesado.interesado.nombre}
                                                     </td>
                                                     <td>${interesado.interesado.documento}</td>
-                                                    <td>${interesado.interesado.tipoInteresado}
+                                                    <td>${tipoInteresado[interesado.interesado.tipoInteresado]}
                                                     </td>
                                                 </tr>
-                                                </
-                                                #list>
+                                                </#list>
                                                 </tbody>
                                             </table>
 
@@ -178,18 +170,14 @@
                                                 <td>${anexo?index}</td>
                                                 <td>${anexo.titulo}</td>
                                             </tr>
-                                            </
-                                            #list>
+                                            </#list>
                                             </tbody>
                                         </table>
                                         <#else>
 
                                         <!-- No hay anexos -->
-
                                         <p class="text-center">${registro_anexos_vacio}</p>
-
-                                    </
-                                    #if>
+                                    </#if>
                                 </div>
                                 </div>
                             </div>
