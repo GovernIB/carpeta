@@ -21,6 +21,8 @@ public interface UsuariEntitatLogicaLocal extends UsuariEntitatLocal  {
 	public static final String JNDI_NAME = "java:app/carpeta-logic/UsuariEntitatLogicaEJB!es.caib.carpeta.logic.UsuariEntitatLogicaLocal";
 
 	public List<UsuariEntitatJPA> findAllByUsuariId(@NotNull long usuarioID) throws I18NException;
+	
+	public List<UsuariEntitatJPA> findAllByUsuariIdWithEntitat(@NotNull long usuarioID) throws I18NException;
 
 }
 

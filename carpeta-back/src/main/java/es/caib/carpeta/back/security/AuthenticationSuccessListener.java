@@ -10,14 +10,18 @@ import es.caib.carpeta.jpa.EntitatJPA;
 import es.caib.carpeta.jpa.UsuariJPA;
 import es.caib.carpeta.logic.UsuariEntitatLogicaLocal;
 import es.caib.carpeta.logic.UsuariLogicaLocal;
+import es.caib.carpeta.logic.UtilitiesForFrontLogicaEJB;
+import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
 import es.caib.carpeta.jpa.UsuariEntitatJPA;
 
 import org.apache.log4j.Logger;
+import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NTranslation;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,6 +34,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -207,11 +212,13 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
 			try {
 				usuariEntitats = new HashSet<UsuariEntitatJPA>(
-						usuariEntitatLogicaEjb.findAllByUsuariId(usuariPersona.getUsuariID()));
+						usuariEntitatLogicaEjb.findAllByUsuariIdWithEntitat(usuariPersona.getUsuariID()));
 			} catch (I18NException e) {
 				log.error(I18NUtils.getMessage(e) , e);
 			}
-
+			
+			log.info("Total UsuariEntitats:" + usuariEntitats.size());
+			log.info("isCAR_ADMIN: " + containsRoleAdEn);
 		}
 
 		if (usuariEntitats == null) {
@@ -224,7 +231,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 			I18NTranslation translation = new I18NTranslation("error.sensepfiuser", username);
 			log.error("");
 			log.error(I18NUtils.tradueix(translation));
-			log.error("Authenntication Info:\n" + au);
+			log.error("Authentication Info:\n" + au);
 			log.error("");
 
 			// Com enviar-ho a la PAGINA WEB
@@ -256,6 +263,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 			if (isDebug) {
 				log.debug("--------------- Entitat " + entitatID);
 			}
+			
 			// Check deshabilitada
 			// XYZ ZZZ ZZZ
 			/*
@@ -291,7 +299,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 //      if (usuariEntitat.isPredeterminat()) {
 //        entitatPredeterminada = entitat;
 //      }
-
+			
 			// Entitats
 			entitats.put(entitatID, usuariEntitat.getEntitat());
 			// Usuari Entitat
@@ -325,6 +333,13 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 				log.debug(">>>>>> Entitat predeterminada " + entitatIDActual);
 			}
 		}
+		
+		// EntitatsIdioma
+		
+		String lang = LocaleContextHolder.getLocale().getLanguage();
+		System.out.println("========================= IDIOMA =====================");
+		System.out.println(lang);
+		System.out.println(entitatIDActual);
 
 		LoginInfo loginInfo;
 		// create a new authentication token

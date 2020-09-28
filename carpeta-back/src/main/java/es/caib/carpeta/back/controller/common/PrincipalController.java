@@ -6,9 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.utils.Configuracio;
 
 import javax.servlet.http.HttpServletRequest;
@@ -86,6 +89,21 @@ public class PrincipalController {
 		}
 
 		return new ModelAndView("principal");
+	}
+	
+	@RequestMapping(value = "/canviarEntitat/{idEntitat}", method = RequestMethod.GET)
+	public ModelAndView canviarEntitat(HttpSession session, HttpServletRequest request, HttpServletResponse response,
+			@PathVariable String idEntitat) throws Exception {
+
+		LoginInfo loginInfo = LoginInfo.getInstance();
+		loginInfo.setEntitatID(Long.parseLong(idEntitat,10));
+		
+		HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
+				.getRequest();	
+		httpRequest.getSession().setAttribute("loginInfo", loginInfo);
+		
+		return new ModelAndView("principal");
+	
 	}
 
 	@RequestMapping(value = "/avislegal", method = RequestMethod.GET)

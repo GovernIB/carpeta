@@ -74,6 +74,10 @@ a:hover{
 	margin-left: auto;
 	margin-right: auto;
 }
+
+.titol { display:inline-block; }
+footer .logoPeu img.logoAplicacio { width:150px; height:auto; margin-bottom:10px; }
+
 /* FI Estils generals */
 
 /* Motlla de pa */
@@ -165,11 +169,11 @@ a:hover{
 	body {
 		padding-top: 4rem !important;
 	}
-	.logoGovern {
+	.logoGovern, .logoAplicacio {
 		margin-right: 10px !important;
 		margin-left: 10px !important;
 	}
-	.imatgeGovern{
+	.imatgeGovern, .logoAplicacio img{
 		width: 45px !important;
 	}
 	.navbar-toggler {
@@ -198,11 +202,11 @@ a:hover{
 	body {
 		padding-top: 4rem !important;
 	}
-	.logoGovern {
+	.logoGovern, .logoAplicacio {
 		margin-right: 5px !important;
 		margin-left: 5px !important;
 	}
-	.imatgeGovern{
+	.imatgeGovern, .logoAplicacio img{
 		width: 40px !important;
 	}
 	.navbar-brand {
@@ -281,12 +285,12 @@ a:hover{
 .menuGovern span, strong{
 	font-size: 1em;
 }
-.logoGovern{
+.logoGovern, .logoAplicacio{
 	float: left;
 	margin-right: 20px;
 	margin-left: 5px;
 }
-.imatgeGovern{
+.imatgeGovern, .logoAplicacio img{
 	width: 50px;
 }
 .iconoCapsalera{

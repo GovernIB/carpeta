@@ -25,14 +25,18 @@
 					alt="FundacioBit-Govern Digital" />
 				</a>
 			</div>
-
-			<div class="logoGovern">
-				<img src="<c:url value="/img/app-logo.png"/>" alt="Carpeta"
-					title="Carpeta" />
+			
+			<div class="logoAplicacio">
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
+					<c:if test="${not empty loginInfo.entitat.logoMenu}">
+					  <img src="<c:url value="${car:fileUrl(loginInfo.entitat.logoMenu)}" />" alt="${loginInfo.entitat.logoMenu.nom}" title="${loginInfo.entitat.codi}" />
+		            </c:if>
+				</sec:authorize>
 			</div>
 
 			<div>
 				<h1 class="titol">${version.projectName}</h1>
+				<span class="entidadName">${loginInfo.entitat.nom.traduccions[lang].valor} (${loginInfo.entitat.codi })</span>
 			</div>
 			<div>
 				<div>
@@ -41,11 +45,9 @@
 							<span class="subtitolMay"> ${loginInfo.username}
 						 | ${loginInfo.usuariPersona.nom}&nbsp;${loginInfo.usuariPersona.llinatge1}&nbsp;${loginInfo.usuariPersona.llinatge2} 
 					</span> <br/>
-					
 				</div>
 			</div>
 		</div>
-
 		<!-- FI Logo i nom aplicació -->
 
 		<!-- Botons -->
@@ -174,7 +176,15 @@
 							</tr>
 						</table>
 
-						<hr />
+						<div class="dropdown-divider"></div>
+						
+						<h6 class="dropdown-header"><fmt:message key="menu.entitats" /></h6>
+						<c:forEach items="${loginInfo.entitats}" var="item">
+                        <a class="dropdown-item <c:if test='${item.key == loginInfo.entitat.entitatID}'>active</c:if>" href="<c:url value="/canviarEntitat/${item.key}"/>"><c:out value="${item.value.nom.traduccions[lang].valor}" /></a>
+                        </c:forEach>
+						
+						
+						<div class="dropdown-divider"></div>
 
 						<a class="dropdown-item"
 							href="<c:url value="/common/usuari"></c:url><%=LoginInfo.getInstance().getUsuariPersona().getUsuariID()%>/edit"> <i

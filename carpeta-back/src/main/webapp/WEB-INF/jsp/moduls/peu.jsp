@@ -44,13 +44,16 @@
 		</div>
 
 		<!-- Dreta -->
-		<div class="col-4 text-center" >
+		<div class="col-4 text-center logoPeu" >
 		  <br/>
 		  <center>
-			<a href="http://otaeweb.ibit.org/" style="padding-top: 10px" target="_blank"> <img
-				src="<c:url value="/img/fundaciobit-logo-peu.png"/>"
-				alt="Fundacio Bit" />
-			</a> <br />
+		    <sec:authorize access="hasRole('ROLE_ADMIN')">
+		    <c:if test="${not empty loginInfo.entitat.logoPeu}">
+		      <%-- <a href="http://otaeweb.ibit.org/" style="padding-top: 10px" target="_blank"> --%> 
+                  <img class="logoAplicacio" src="<c:url value="${car:fileUrl(loginInfo.entitat.logoPeu)}"/>" alt="${loginInfo.entitat.logoPeu.nom}"  title="${loginInfo.entitat.codi}" />
+              <%-- </a> --%><br />
+                </c:if>
+			</sec:authorize>
 
 			<!-- Button to trigger modal -->
 			<small><a href="#modalAjuda" role="button"

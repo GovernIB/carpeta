@@ -39,13 +39,22 @@
             <groupId>javax.xml.ws</groupId>
             <artifactId>jaxws-api</artifactId>
             <version>2.3.1</version>
+            <scope>provided</scope>
         </dependency>
         
         <dependency>
 		    <groupId>javax.ws.rs</groupId>
 		    <artifactId>javax.ws.rs-api</artifactId>
 		    <version>2.0</version>
+		    <scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+            <scope>provided</scope>
+        </dependency>
+		
 
         <dependency>
              <groupId>org.fundaciobit.pluginsib.utils</groupId>
@@ -93,6 +102,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        
+        <dependency>
+		    <groupId>javax.json.bind</groupId>
+		    <artifactId>javax.json.bind-api</artifactId>
+		    <version>1.0</version>
+		</dependency>
 
     </dependencies>
 </project>

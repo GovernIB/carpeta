@@ -54,7 +54,12 @@ es.caib.carpeta.pluginsib.carpetafront.sistra1.url=https://dev.caib.es/sistrabac
 es.caib.carpeta.pluginsib.carpetafront.sistra1.user=$carpeta_sistra
 es.caib.carpeta.pluginsib.carpetafront.sistra1.pass=setpassword
 es.caib.carpeta.pluginsib.carpetafront.sistra1.level=2
-es.caib.carpeta.pluginsib.carpetafront.sistra1.web=https://www.caib.es/sistrafront/zonaperfront/protected/init.do', true);
+es.caib.carpeta.pluginsib.carpetafront.sistra1.web=https://www.caib.es/sistrafront/zonaperfront/protected/init.do
+
+# Sistra 2
+es.caib.carpeta.pluginsib.carpetafront.sistra2.url=https://dev.caib.es/sistramitws/rest/externa/v1
+es.caib.carpeta.pluginsib.carpetafront.sistra2.user=$carpeta_sistra
+es.caib.carpeta.pluginsib.carpetafront.sistra2.pass=setpassword', true);
 
 
 INSERT INTO car_traducciomap VALUES (46, 'en', 'Registre');
