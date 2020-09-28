@@ -34,66 +34,60 @@
 
 <body class="fonsPlugin">
 <!-- Contenido -->
-<div class="container p-3carpeta"> <!-- p-3carpeta -->
-    <div class="my-3 p-3 bg-white rounded box-shadow">
-        <!-- Contenido -->
-        <div class="card mb-12 border-0">
-            <div class="card-title border-bottom verde h5">${registro_titulo_detalle}
-                ${registro.numeroRegistroFormateado}
-            </div>
+<div class="container-contenido">
+    <div class="infoNoMenu">
+        <p class="titol h2">${registro_titulo_detalle} NUM REG ${registro.numeroRegistroFormateado}</p>
+
+        <div class="col-md-12 border-0 float-left p-0">
 
             <div class="card-body">
+
                 <div class="row">
-                    <div class="pri-col-deta-reg">
-                        <!-- InformaciÃ³n Registro -->
+
+                    <div class="pri-col-deta-reg col-md-5">
+
                         <div class="card border-left-carpeta shadow py-2 mb-3">
+
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="font-weight-bold verde text-uppercase mb-3 text-center">
-                                            ${registro_entrada}
-                                        </div>
+                                        <div class="font-weight-bold verde text-uppercase mb-3 text-center h3">${registro_entrada}</div>
 
                                         <dl class="row">
-                                            <dt class="col-sm-3">${registro_fecha}</dt>
-                                            <dd class="col-sm-9">${registro.fechaRegistro?string("dd-MM-yyyy HH:mm")}
-                                            </dd>
+                                            <dt class="col-sm-3 pb-2">${registro_fecha}</dt>
+                                            <dd class="col-sm-7">${registro.fechaRegistro?string("dd-MM-yyyy HH:mm")}</dd>
 
-                                            <dt class="col-sm-3">${registro_numero}</dt>
-                                            <dd class="col-sm-9">${registro.numeroRegistroFormateado}</dd>
+                                            <dt class="col-sm-3 pb-2">${registro_numero}</dt>
+                                            <dd class="col-sm-7">${registro.numeroRegistroFormateado}</dd>
 
-                                            <dt class="col-sm-3">${registro_oficina}</dt>
-                                            <dd class="col-sm-9">${registro.entidadRegistralOrigenDenominacion}</dd>
+                                            <dt class="col-sm-3 pb-2">${registro_oficina}</dt>
+                                            <dd class="col-sm-7">${registro.entidadRegistralOrigenDenominacion}</dd>
 
-                                            <dt class="col-sm-3">${registro_destinatario}</dt>
-                                            <dd class="col-sm-9">${registro.unidadTramitacionDestinoDenominacion}</dd>
+                                            <dt class="col-sm-3 pb-2">${registro_destinatario}</dt>
+                                            <dd class="col-sm-7">${registro.unidadTramitacionDestinoDenominacion}</dd>
 
-                                            <dt class="col-sm-3">${registro_tipo_doc}</dt>
-                                            <dd class="col-sm-9">
-                                                ${docFisica[registro.tipoDocumentacionFisicaCodigo]}
-                                            </dd>
+                                            <dt class="col-sm-3 pb-2">${registro_tipo_doc}</dt>
+                                            <dd class="col-sm-7">${docFisica[registro.tipoDocumentacionFisicaCodigo]}</dd>
 
-                                            <dt class="col-sm-3">${registro_extracto}</dt>
-                                            <dd class="col-sm-9">${registro.resumen}</dd>
+                                            <dt class="col-sm-3 pb-2">${registro_extracto}</dt>
+                                            <dd class="col-sm-7">${registro.resumen}</dd>
 
-                                            <dt class="col-sm-3">${carpeta_idioma}</dt>
-                                            <dd class="col-sm-9">${registroIdioma[registro.idioma]}</dd>
-                                           </dl>
+                                            <dt class="col-sm-3 pb-2">${carpeta_idioma}</dt>
+                                            <dd class="col-sm-7">${registroIdioma[registro.idioma]}</dd>
 
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
 
-                           <!-- Justificante -->
+                                        </dl>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="card border-left-carpeta shadow py-2 mb-3">
                             <div class="card-body">
                                 <div class="row no-gutters">
                                     <div class="col mr-2">
-                                        <div class="font-weight-bold verde text-uppercase mb-3 text-center">
-                                            ${registro_justificante}
-                                        </div>
-
+                                        <div class="font-weight-bold verde text-uppercase mb-3 text-center h3">${registro_justificante}</div>
 
                                         <p class="text-center">${registre_justifcante_pendiente}</p>
 
@@ -103,16 +97,13 @@
                         </div>
                     </div>
 
-                    <div class="seg-col-deta-reg">
+                    <div class="seg-col-deta-reg col-md-6">
 
-                        <!-- Interesados -->
                         <div class="card border-left-carpeta shadow py-2 mb-3">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="font-weight-bold verde text-uppercase mb-3 text-center">
-                                            ${registro_interesados}
-                                        </div>
+                                        <div class="font-weight-bold verde text-uppercase mb-3 text-center h3"> ${registro_interesados}</div>
                                         <div class="row no-gutters align-items-center">
 
                                             <table class="table table-hover">
@@ -132,9 +123,10 @@
                                                         ${interesado.interesado.nombre}
                                                     </td>
                                                     <td>${interesado.interesado.documento}</td>
-                                                    <td>${tipoInteresado[interesado.interesado.tipoInteresado]}
-                                                    </td>
+                                                    <td>${tipoInteresado[interesado.interesado.tipoInteresado]}</td>
                                                 </tr>
+
+
                                                 </#list>
                                                 </tbody>
                                             </table>
@@ -145,17 +137,12 @@
                             </div>
                         </div>
 
-                        <!-- Anexos -->
                         <div class="card border-left-carpeta shadow py-2 mb-3">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="font-weight-bold verde text-uppercase mb-3 text-center">
-                                            ${registro_anexos}
-                                        </div>
-
+                                        <div class="font-weight-bold verde text-uppercase mb-3 text-center h3">${registro_anexos}</div>
                                         <#if registro.anexos?has_content>
-
                                         <table class="table table-hover">
                                             <thead>
                                             <tr>
@@ -164,11 +151,11 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-
                                             <#list registro.anexos as anexo >
                                             <tr>
                                                 <td>${anexo?index}</td>
                                                 <td>${anexo.titulo}</td>
+
                                             </tr>
                                             </#list>
                                             </tbody>
@@ -178,20 +165,22 @@
                                         <!-- No hay anexos -->
                                         <p class="text-center">${registro_anexos_vacio}</p>
                                     </#if>
-                                </div>
+
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Expone - Solicita -->
-
-
                     </div>
 
+
                 </div>
+
             </div>
         </div>
+
+
     </div>
+
+</div>
 </div>
 
 </body>

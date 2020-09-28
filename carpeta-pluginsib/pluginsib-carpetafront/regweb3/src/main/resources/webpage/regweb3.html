@@ -32,88 +32,65 @@
     <link href="${resources}/carpeta/datatables.min.css" rel="stylesheet">
 </head>
 <body class="fonsPlugin">
-<div class="container p-3carpeta">
-
-    <div class="my-3 p-3 bg-white rounded box-shadow">
-
-        <!-- Contenido -->
-
-        <div class="card mb-12 border-0">
-
-            <div class="card-title border-bottom verde h5">${registro_listado}</div>
-
-            <p class="card-text lh15">${registro_descripcion}</p>
-
+<div class="container-contenido">
+    <div class="infoNoMenu">
+        <p class="titol h2">${registro_listado}</p>
+        <div class="col-md-12 border-0 float-left p-0">
+            <p class="lh15 text-estrofa">${registro_descripcion}</p>
             <div class="card-body tablaRegistros">
+
+
                 <#if registros?has_content>
-                <div class="table-responsive">
-                    <table id="dataTable_paginate" class="table table-striped table-bordered table-hover" style="width:100%">
+                <div class="mt-5">
+                    <table id="dataTable_paginate" class="table table-striped table-bordered table-hover"
+                           style="width:100%">
                         <thead class="table-success">
                         <tr>
-                            <th scope="col">${registro_numero}</th>
-                            <th scope="col">${registro_fecha}</th>
-                            <th scope="col">${registro_extracto}</th>
-                            <th scope="col" class="quitarMovil">${registro_destinatario}</th>
-                            <th scope="col" >${carpeta_acciones}</th>
+                            <th>${registro_numero}</th>
+                            <th>${registro_fecha}</th>
+                            <th>${registro_extracto}</th>
+                            <th>${registro_destinatario}</th>
                         </tr>
                         </thead>
                         <tbody>
                         <#setting date_format="MM/dd/yyyy hh">
                         <#list registros as registro >
 
-                        <tr class="clickable-row" data-target="" >
+                        <script type="text/javascript">
+                            var url = "${urlDetalle}${registro.numeroRegistroFormateado}";
+                        </script>
+
+                        <tr class="clickable-row"  onclick="window.location.replace(url)">
+                            <td>${registro.numeroRegistroFormateado}</td>
                             <td>
-                                <label class="ponerMovil" data-toggle="tooltip" data-placement="top" title="${registro.numeroRegistroFormateado} - ${registro.unidadTramitacionDestinoDenominacion}">
-                                    ${registro.numeroRegistroFormateado}
-                                </label>
-                                <p class="quitarMovil">${registro.numeroRegistroFormateado}</p>
+                                ${registro.fechaRegistro?string("dd-MM-yyyy HH:mm")}
                             </td>
-                            <td>${registro.fechaRegistro?string("dd-MM-yyyy HH:mm")}</td>
-                            <td>
-
-                                <label data-toggle="tooltip" data-placement="top" title="${registro.resumen}">
-                                    ${registro.resumen}
-                                </label>
-
-
-                            </td>
-                            <td class="quitarMovil">${registro.unidadTramitacionDestinoDenominacion}</td>
-                            <div class="btn-group" role="group">
-                                <td class="center"><a class="btn btn-warning" href="${urlDetalle}${registro.numeroRegistroFormateado}" role="button" title="${registro_detalle}"><span class="fa fa-pencil"></span></a></td>
-                            </div>
+                            <td>${registro.resumen}</td>
+                            <td>${registro.unidadTramitacionDestinoDenominacion}</td>
                         </tr>
                         </#list>
                         </tbody>
                     </table>
-                </div>
+                    <script type="text/javascript">
+                        $(document).ready(function () {
 
-            </div>
-
-            <script type="text/javascript">
-                $(document).ready(function () {
-                    $.fn.dataTable.moment('D/MM/YYY HH:mm');
-                    $('#dataTable_paginate').DataTable({
-                        "order": [[1, "desc"]],
-                        "language": {
-                            "url": "${resources}/i18n/${lang}.json"
-                        }
-                    });
-                });
-            </script>
-            <#else>
-            <div class="alert alert-secondary mt-5" role="alert">
-                ${registro_vacio}
-            </div>
-        </#if>
+                            $.fn.dataTable.moment('D/MM/YYY HH:mm');
+                            $('#dataTable_paginate').DataTable({
+                                "order": [[1, "desc"]],
+                                "language": {
+                                    "url": "${resources}/i18n/${lang}.json"
+                                }
+                            });
+                        });
+                    </script>
+                <#else>
+                    <div class="alert alert-secondary mt-5" role="alert">
+                        ${registro_vacio}
+                    </div>
+                </#if>
+        </div>
     </div>
-
-
-    <!-- LOPD -->
-
-
 </div>
-
-</div><!-- /.container -->
-
+</div>
 </body>
 </html>
