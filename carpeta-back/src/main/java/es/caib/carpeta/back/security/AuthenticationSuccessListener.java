@@ -333,13 +333,6 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 				log.debug(">>>>>> Entitat predeterminada " + entitatIDActual);
 			}
 		}
-		
-		// EntitatsIdioma
-		
-		String lang = LocaleContextHolder.getLocale().getLanguage();
-		System.out.println("========================= IDIOMA =====================");
-		System.out.println(lang);
-		System.out.println(entitatIDActual);
 
 		LoginInfo loginInfo;
 		// create a new authentication token
