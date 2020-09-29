@@ -217,7 +217,7 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             map.put(t.replace('.', '_'), getTraduccio(t, locale));
         }
 
-        //String urlDetalle = absolutePluginRequestPath  + "/" + DETALL_REGISTRE_PAGE +"?numeroRegistroFormateado=";
+
         String urlDetalle = relativePluginRequestPath  + "/" + DETALL_REGISTRE_PAGE +"?numeroRegistroFormateado=";
 
         map.put("urlDetalle" , urlDetalle);

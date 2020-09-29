@@ -1,25 +1,16 @@
 package es.caib.carpeta.pluginsib.carpetafront.api;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Properties;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.fundaciobit.pluginsib.core.utils.AbstractPluginPropertiesTranslations;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.util.*;
 
 /**
  * 
@@ -367,7 +358,36 @@ public abstract class AbstractPluginFullUtilities extends AbstractPluginProperti
       return mime;
     }
 
-   
+
+
+    //-------------------------
+    //------------------METODE NOU per obtenir una icona
+
+    //
+
+    /*public FileInfo getIcon(String locale){
+
+        InputStream input;
+
+        FileInfo fileInfo = new FileInfo();
+        try {
+
+             input = this.getClass().getResourceAsStream("webresource/carpeta/icon.jpg");
+             if(input != null) {
+                  fileInfo =  new  FileInfo("icon.jpg",getMimeType("icon.jpg"),IOUtils.toByteArray(input));
+             }
+        } catch (NumberFormatException e) {
+            log.info(e);
+        }  catch (Exception e) {
+            e.printStackTrace();
+        }
+        return fileInfo;
+
+    }*/
+
+
+
+
     
 
     // ---------------------------------------------------------
