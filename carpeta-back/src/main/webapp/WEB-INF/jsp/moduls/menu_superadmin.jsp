@@ -39,7 +39,7 @@
     style="${(fn:contains(url, '/superadmin/usuarientitat'))? " font-weight:bold;" : ""}"><spring:message
             code="usuariEntitat.usuariEntitat.plural" /></span>
 </a>
-
+<%--
 <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
 <a class="dropdown-item" href="<c:url value="/superadmin/option2"/>">
@@ -47,6 +47,8 @@
     style="${(fn:contains(url, 'option2'))? "font-weight:bold;" : ""}">Menú
         ADMIN Option 2</span>
 </a>
+
+--%>
 
 
 

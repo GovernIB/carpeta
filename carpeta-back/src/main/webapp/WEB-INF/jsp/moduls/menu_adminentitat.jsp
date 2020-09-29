@@ -27,7 +27,7 @@
             code="pluginEntitat.pluginEntitat.plural" /></span>
 </a>
 
-
+<%--
 <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
 <a class="dropdown-item" href="<c:url value="/user/option1"/>"> <span
@@ -43,4 +43,4 @@
         USER Option 2</span>
 </a>
 
-
+--%>
