@@ -359,35 +359,6 @@ public abstract class AbstractPluginFullUtilities extends AbstractPluginProperti
     }
 
 
-
-    //-------------------------
-    //------------------METODE NOU per obtenir una icona
-
-    //
-
-    /*public FileInfo getIcon(String locale){
-
-        InputStream input;
-
-        FileInfo fileInfo = new FileInfo();
-        try {
-
-             input = this.getClass().getResourceAsStream("webresource/carpeta/icon.jpg");
-             if(input != null) {
-                  fileInfo =  new  FileInfo("icon.jpg",getMimeType("icon.jpg"),IOUtils.toByteArray(input));
-             }
-        } catch (NumberFormatException e) {
-            log.info(e);
-        }  catch (Exception e) {
-            e.printStackTrace();
-        }
-        return fileInfo;
-
-    }*/
-
-
-
-
     
 
     // ---------------------------------------------------------

@@ -2,6 +2,7 @@ package org.fundaciobit.pluginsib.carpetafront.regweb3;
 
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
+import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.regweb3.ws.api.v3.AsientoRegistralWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWs;
@@ -218,7 +219,8 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         }
 
 
-        String urlDetalle = relativePluginRequestPath  + "/" + DETALL_REGISTRE_PAGE +"?numeroRegistroFormateado=";
+        String urlDetalle = absolutePluginRequestPath  + "/" + DETALL_REGISTRE_PAGE +"?numeroRegistroFormateado=";
+
 
         map.put("urlDetalle" , urlDetalle);
 
@@ -448,6 +450,33 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         reqContext.put(BindingProvider.PASSWORD_PROPERTY, password);
 
         return api;
+    }
+
+
+
+    // ---------------------------------------------------------
+    // ------------------- OBTENIR ICONA  ---------------
+    // ---------------------------------------------------------
+
+    @Override
+    public  FileInfo getIcon(Locale locale){
+
+        InputStream input;
+
+        FileInfo fileInfo = null;
+        try {
+
+            input = input = this.getClass().getResourceAsStream("/webresource/carpeta/wcag2AA.png");
+            if(input != null) {
+                fileInfo =  new  FileInfo("icon.jpg","image/png", IOUtils.toByteArray(input));
+            }
+
+        }  catch (Exception e) {
+            log.error("Error llegint recurs : webresource/carpeta/wcag2AA.png" + e.getMessage(), e);
+
+        }
+        return fileInfo;
+
     }
 
 

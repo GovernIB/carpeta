@@ -39,6 +39,9 @@ public class Regweb3CarpetaFrontTest {
          System.out.println("Total registros: " + registros.getTotalResults());
          System.out.println("Total registros: " + ((AsientoRegistralWs) registros.getResults().get(0)));
 
+        /* FileInfo fileInfo = Regweb3CarpetaFrontPlugin.getIcon(new Locale("ca"));
+         System.out.println("XXXXXXX    Tamany"+fileInfo.getName());*/
+
 
       } catch (Exception e) {
          // TODO Auto-generated catch block

@@ -1,16 +1,10 @@
 package es.caib.carpeta.front.controller;
 
-import java.net.URL;
-import java.util.Base64;
-import java.util.List;
-import java.util.Locale;
-
-import javax.ejb.EJB;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import es.caib.carpeta.front.config.UsuarioAutenticado;
+import es.caib.carpeta.hibernate.HibernateFileUtil;
+import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
+import es.caib.carpeta.logic.utils.PluginInfo;
+import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -22,14 +16,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import es.caib.carpeta.hibernate.HibernateFileUtil;
-import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
-import es.caib.carpeta.logic.utils.PluginInfo;
+import javax.ejb.EJB;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.net.URL;
+import java.util.Base64;
+import java.util.List;
+import java.util.Locale;
 
 
 /**
  * 
  * @author anadal
+ * @author mgonzalez
  *
  */
 @Controller
@@ -38,7 +37,7 @@ public class PluginFrontController {
     
     @EJB(mappedName = UtilitiesForFrontLogicaLocal.JNDI_NAME)
     UtilitiesForFrontLogicaLocal utilsEjb;
-    
+
     
     protected final Log log = LogFactory.getLog(getClass());
 
@@ -136,6 +135,25 @@ public class PluginFrontController {
         mav.addObject("urlToShowPluginPage", urlToShowPluginPage);
 
         return mav;
+    }
+
+
+    @RequestMapping(value = "/pluginicon/{pluginid}/{idioma}", method = RequestMethod.GET)
+    public void  getPluginIcon(@PathVariable("pluginid") Long pluginid,@PathVariable("idioma") String idioma, HttpServletRequest request, HttpServletResponse response) throws Exception, I18NException  {
+
+
+        LocaleContextHolder.setLocale(new Locale(idioma));
+
+        Locale.setDefault(new Locale(idioma));
+
+        FileInfo fi = utilsEjb.getIcona(pluginid,idioma);
+
+
+        response.setContentType(fi.getMime());
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + fi.getName()+ "\"");
+        response.setContentLength((int) fi.getData().length);
+
+        response.getOutputStream().write(fi.getData());
     }
     
 }

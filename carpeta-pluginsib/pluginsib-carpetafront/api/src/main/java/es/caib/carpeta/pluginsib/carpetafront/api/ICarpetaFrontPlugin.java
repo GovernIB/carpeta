@@ -1,11 +1,10 @@
 package es.caib.carpeta.pluginsib.carpetafront.api;
 
-import java.util.Locale;
+import org.fundaciobit.pluginsib.core.IPlugin;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.fundaciobit.pluginsib.core.IPlugin;
+import java.util.Locale;
 
 /**
  * 
@@ -29,5 +28,5 @@ public interface ICarpetaFrontPlugin extends IPlugin {
             HttpServletRequest request, HttpServletResponse response, String administrationID, String administrationEncriptedID, Locale locale, boolean isGet)
             throws Exception;
 
-
+    public FileInfo getIcon(Locale locale);
 }

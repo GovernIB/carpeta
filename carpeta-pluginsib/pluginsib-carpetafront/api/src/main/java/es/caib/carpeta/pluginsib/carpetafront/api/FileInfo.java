@@ -2,25 +2,25 @@ package es.caib.carpeta.pluginsib.carpetafront.api;
 
 public class FileInfo {
 
-    private String nom;
+    private String name;
     private String mime;
-    private byte[] contingut;
+    private byte[] data;
 
     public FileInfo() {
     }
 
-    public FileInfo(String nom, String mime, byte[] contingut) {
-        this.nom = nom;
+    public FileInfo(String name, String mime, byte[] data) {
+        this.name = name;
         this.mime = mime;
-        this.contingut = contingut;
+        this.data = data;
     }
 
-    public String getNom() {
-        return nom;
+    public String getName() {
+        return name;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getMime() {
@@ -31,11 +31,11 @@ public class FileInfo {
         this.mime = mime;
     }
 
-    public byte[] getContingut() {
-        return contingut;
+    public byte[] getData() {
+        return data;
     }
 
-    public void setContingut(byte[] contingut) {
-        this.contingut = contingut;
+    public void setData(byte[] data) {
+        this.data = data;
     }
 }

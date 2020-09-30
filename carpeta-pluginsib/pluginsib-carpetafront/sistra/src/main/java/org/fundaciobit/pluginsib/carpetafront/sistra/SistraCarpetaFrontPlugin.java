@@ -1,23 +1,17 @@
 package org.fundaciobit.pluginsib.carpetafront.sistra;
 
-import java.util.Locale;
-import java.util.Map;
-import java.util.Properties;
-
 import es.caib.carpeta.commons.utils.BasicAuthenticator;
 import es.caib.carpeta.commons.utils.DateUtils;
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
+import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
+import es.caib.sistramit.rest.api.externa.v1.RFiltroTramitePersistencia;
+import es.caib.sistramit.rest.api.externa.v1.RTramitePersistencia;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitePersistente;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitesPersistentes;
 import es.caib.zonaper.ws.v2.services.BackofficeFacade;
 import es.caib.zonaper.ws.v2.services.BackofficeFacadeService;
-
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.ws.BindingProvider;
-import javax.xml.ws.soap.SOAPFaultException;
-
 import org.apache.commons.io.IOUtils;
 import org.fundaciobit.pluginsib.core.utils.XTrustProvider;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
@@ -29,20 +23,14 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
-
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.ws.BindingProvider;
+import javax.xml.ws.soap.SOAPFaultException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
-
-import es.caib.sistramit.rest.api.externa.v1.RFiltroTramitePersistencia;
-import es.caib.sistramit.rest.api.externa.v1.RTramitePersistencia;
+import java.util.*;
 
 
 /**
@@ -457,6 +445,32 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
        return url;
    }
    */
+
+
+   // ---------------------------------------------------------
+   // ------------------- OBTENIR ICONA  ---------------
+   // ---------------------------------------------------------
+   @Override
+   public  FileInfo getIcon(Locale locale){
+
+      InputStream input;
+
+      FileInfo fileInfo = null;
+      try {
+
+         //input = SistraCarpetaFrontPlugin.class.getResourceAsStream("/webresource/carpeta/wcag2AA.png");
+         input = this.getClass().getResourceAsStream("/webresource/carpeta/wcag2AA.png");
+         if(input != null) {
+            fileInfo =  new  FileInfo("icon.jpg","image/png", IOUtils.toByteArray(input));
+         }
+
+      }  catch (Exception e) {
+         log.error("Error llegint recurs : webresource/carpeta/wcag2AA.png" + e.getMessage(), e);
+
+      }
+      return fileInfo;
+
+   }
    
 }
 

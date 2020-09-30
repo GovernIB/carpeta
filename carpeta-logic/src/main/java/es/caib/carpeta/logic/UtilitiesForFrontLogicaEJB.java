@@ -1,16 +1,5 @@
 package es.caib.carpeta.logic;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.security.PermitAll;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-
-import es.caib.carpeta.utils.Constants;
-import org.fundaciobit.genapp.common.StringKeyValue;
-import org.fundaciobit.genapp.common.i18n.I18NException;
-
 import es.caib.carpeta.jpa.EntitatJPA;
 import es.caib.carpeta.jpa.PluginJPA;
 import es.caib.carpeta.logic.utils.PluginInfo;
@@ -21,10 +10,23 @@ import es.caib.carpeta.model.fields.EntitatFields;
 import es.caib.carpeta.model.fields.PluginEntitatFields;
 import es.caib.carpeta.model.fields.PluginEntitatQueryPath;
 import es.caib.carpeta.model.fields.PluginFields;
+import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
+import es.caib.carpeta.pluginsib.carpetafront.api.ICarpetaFrontPlugin;
+import es.caib.carpeta.utils.Constants;
+import org.fundaciobit.genapp.common.StringKeyValue;
+import org.fundaciobit.genapp.common.i18n.I18NException;
+
+import javax.annotation.security.PermitAll;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * 
  * @author anadal
+ * @author mgonzalez
  *
  */
 @PermitAll
@@ -97,6 +99,16 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
         }
 
         return pluginsInfo;
+    }
+
+
+    @Override
+    public FileInfo getIcona(Long pluginID, String language) throws I18NException{
+
+        ICarpetaFrontPlugin plugin =  pluginCarpetaFrontEjb.getInstanceByPluginID(pluginID);
+        FileInfo fi = plugin.getIcon(new Locale(language));
+        return fi;
+
     }
 
 }
