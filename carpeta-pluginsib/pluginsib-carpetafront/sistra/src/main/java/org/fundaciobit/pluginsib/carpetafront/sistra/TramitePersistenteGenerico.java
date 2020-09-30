@@ -14,6 +14,7 @@ public class TramitePersistenteGenerico {
 	private String descripcionTramite;
 	private Date fechaInicio;
 	private Date fechaUltimoAcceso;
+	private int versionSistra;
 	
 	public String getIdSesionTramitacion() {
 		return idSesionTramitacion;
@@ -71,7 +72,15 @@ public class TramitePersistenteGenerico {
 		this.idioma = idioma;
 	}
 	
-	public TramitePersistenteGenerico(RTramitePersistencia tramite) {
+	public int getVersionSistra() {
+		return versionSistra;
+	}
+	
+	public void setVersionSistra(final int versionSistra) {
+		this.versionSistra = versionSistra;
+	}
+	
+	public TramitePersistenteGenerico(RTramitePersistencia tramite, int versionSistra) {
 		this.idSesionTramitacion = tramite.getIdSesionTramitacion();
 		this.idioma = tramite.getIdioma();
 		this.idTramite = tramite.getIdTramite();
@@ -79,9 +88,10 @@ public class TramitePersistenteGenerico {
 		this.descripcionTramite = tramite.getDescripcionTramite();
 		this.fechaInicio = tramite.getFechaInicio();
 		this.fechaUltimoAcceso = tramite.getFechaUltimoAcceso();
+		this.versionSistra = versionSistra;
 	}
 	
-	public TramitePersistenteGenerico(TramitePersistente tramite) {
+	public TramitePersistenteGenerico(TramitePersistente tramite, int versionSistra) {
 		this.idSesionTramitacion = tramite.getIdSesionTramitacion();
 		this.idioma = tramite.getIdioma();
 		this.idTramite = tramite.getIdTramite();
@@ -89,6 +99,7 @@ public class TramitePersistenteGenerico {
 		this.descripcionTramite = tramite.getDescripcionTramite();
 		this.fechaInicio = tramite.getFechaInicio().toGregorianCalendar().getTime();
 		this.fechaUltimoAcceso = tramite.getFechaUltimoAcceso().toGregorianCalendar().getTime();
+		this.versionSistra = versionSistra;
 	}
 	
 }

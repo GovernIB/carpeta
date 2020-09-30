@@ -11,7 +11,8 @@ public class JsonbConfigurator implements ContextResolver<Jsonb> {
 
     public JsonbConfigurator() {
         JsonbConfig config = new JsonbConfig()
-                .withDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", null);
+                .withDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", null)
+                .withDeserializers(new RTramitePersistenciaDeserializer());
         
         jsonb = JsonbBuilder.newBuilder()
                 .withConfig(config).build();

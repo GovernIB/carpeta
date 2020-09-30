@@ -22,9 +22,6 @@ import org.apache.commons.io.IOUtils;
 import org.fundaciobit.pluginsib.core.utils.XTrustProvider;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.client.Client;
@@ -122,7 +119,6 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
 
 
-        
         log.info("SistraCarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
         log.info("SistraCarpetaFrontPlugin::requestCarpetaFront => administrationID: " + administrationID);
         log.info("SistraCarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: " + administrationEncriptedID);
@@ -130,11 +126,10 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         if (query.startsWith(LLISTAT_TRAMITS_PAGE)) {
             
             llistatDeTramits(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, administrationID, administrationEncriptedID, locale, isGet);
-            
-            
+                        
         } else {
         
-          super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, administrationID, administrationEncriptedID, locale, isGet);
+        	super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, administrationID, administrationEncriptedID, locale, isGet);
         }
         
         
@@ -170,9 +165,11 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 	              
 	              String formDataIniciStr = request.getParameter("fechaInicio");
 	              String formDataFiStr = request.getParameter("fechaFin");
-	              
-	              log.info("formDataIniciStr: " + formDataIniciStr);
-	              log.info("formDataFiStr: " + formDataFiStr);
+	        
+	              if (isDevelopment()) {
+	            	  log.info("formDataIniciStr: " + formDataIniciStr);
+	            	  log.info("formDataFiStr: " + formDataFiStr);
+	              }
 	              
 	              SimpleDateFormat SDF = new SimpleDateFormat("dd/MM/yyyy");
 	              
@@ -242,7 +239,6 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         }
         map.put("missatgeError", missatgeError);
         
-        
         InputStream input = this.getClass().getResourceAsStream("/webpage/sistra.html");
         String plantilla = IOUtils.toString(input, "UTF-8");
 
@@ -256,12 +252,13 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         
         String[] traduccions = { "tramite.listado", "tramite.descripcion", "tramite.tramite",
                 "tramite.fecha.inicio", "tramite.acceso", "tramite.vacio", "carpeta.buscar",
-                "carpeta.fecha.inicio", "carpeta.fecha.fin", "tramite.continuar", "tramite.genericerror" };
+                "carpeta.fecha.inicio", "carpeta.fecha.fin", "tramite.continuar", "tramite.genericerror", "tramite.versionsistra" };
         
         for (String t : traduccions) {
             map.put(t.replace('.', '_'), getTraduccio(t, locale));
         }
 
+        map.put("development", isDevelopment());
         map.put("tramits", tramitesGenericos);
         map.put("web", getWeb() );
         
@@ -278,11 +275,11 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         List<TramitePersistenteGenerico> tramits = this.getTramits(formDataInici, formDataFi, administrationID);
 
         if (tramits == null || tramits.isEmpty()) {
-            System.out.println(" TRAMITS NULL o EMPTY: " + tramits);
+            log.info(" TRAMITS SISTRA1 NULL o EMPTY: " + tramits);
         } else {
             int x = 1;
             for (TramitePersistenteGenerico tp : tramits) {
-                System.out.println(" -------------  TRAMIT [" + x + " ] -------------------");
+                System.out.println(" -------------  TRAMIT SISTRA1 [" + x + " ] -------------------");
                 System.out.println("tp.getIdTramite() => " + tp.getIdTramite());
                 System.out.println("tp.getDescripcionTramite() => " + tp.getDescripcionTramite());
                 System.out.println("tp.getVersionTramite(); => " + tp.getVersionTramite());
@@ -325,7 +322,7 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         List<TramitePersistenteGenerico> tramits = new ArrayList<TramitePersistenteGenerico>();
         
         for (TramitePersistente tp : tramites.getTramitePersistente()) {
-        	tramits.add(new TramitePersistenteGenerico(tp));
+        	tramits.add(new TramitePersistenteGenerico(tp,1));
         }
         
         return tramits;
@@ -349,51 +346,37 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 	       filtroPer.setFechaHasta(DateUtils.sumarRestarDiasFecha(fechaFin, 1));
 	       filtroPer.setNif(documento);
 	       
-	       log.info("============= PARAMETROS SISTRA 2 =========================");
-	       log.info("URL: " + getPropertyRequired(SISTRA2_PROPERTY_BASE + "url") + "/tramite");
-	       log.info("FiltroPer.getFechaDesde: " + filtroPer.getFechaDesde());
-	       log.info("FiltroPer.getFechaHasta: " + filtroPer.getFechaHasta());
-	       log.info("FiltroPer.getNif: " + filtroPer.getNif());
-	       log.info(Entity.entity(filtroPer, MediaType.APPLICATION_JSON).toString());
-	       
-	       
-	       /*List<RTramitePersistencia> tramites = client.target( getPropertyRequired(SISTRA2_PROPERTY_BASE + "url") + "/tramite")
-	               .request(MediaType.APPLICATION_JSON)
-	               .post(Entity.entity(filtroPer, MediaType.APPLICATION_JSON), new GenericType<List<RTramitePersistencia>>() {});*/
-	       
-	       List<Map<String, Object>> tramites = client.target( getPropertyRequired(SISTRA2_PROPERTY_BASE + "url") + "/tramite")
-	    	        .request(MediaType.APPLICATION_JSON)
-	    	        .post(Entity.entity(filtroPer, MediaType.APPLICATION_JSON), new GenericType<>() {});
-	       
-	       for(Map<String, Object> trm : tramites)
-	       {
-	    	   System.out.println(trm.toString());
-	    	   System.out.println(trm.getClass());
-	    	   System.out.println("----------------------------");
+	       if (isDevelopment()) {
+	    	   log.info("============= PARAMETROS SISTRA 2 =========================");
+	    	   log.info("URL: " + getPropertyRequired(SISTRA2_PROPERTY_BASE + "url") + "/tramite");
+	    	   log.info(Entity.entity(filtroPer, MediaType.APPLICATION_JSON).toString());
 	       }
+	       
+	       List<RTramitePersistencia> tramites = client.target( getPropertyRequired(SISTRA2_PROPERTY_BASE + "url") + "/tramite")
+	               .request(MediaType.APPLICATION_JSON)
+	               .post(Entity.entity(filtroPer, MediaType.APPLICATION_JSON), new GenericType<List<RTramitePersistencia>>() {});
 	
 	       List<TramitePersistenteGenerico> tramits = new ArrayList<TramitePersistenteGenerico>();
 	       
 	       if (tramites == null || tramites.isEmpty()) {
 	    	   tramits = null;
-	           log.debug("SISTRA2 TRAMITES NULL o EMPTY: " + tramites);
+	           log.info("SISTRA2 TRAMITES NULL o EMPTY: " + tramites);
 	       } else {
 	           int x = 1;
-	           System.out.println(tramites);
-	           //for (RTramitePersistencia tp : tramites) {
-	        	   /*
-	               System.out.println(" -------------  TRAMITE [" + x + " ] -------------------");
-	               System.out.println("tp.getIdTramite() => " + tp.getIdTramite());
-	               System.out.println("tp.getDescripcionTramite() => " + tp.getDescripcionTramite());
-	               System.out.println("tp.getVersionTramite(); => " + tp.getVersionTramite());
-	               System.out.println("tp.getIdioma() => " + tp.getIdioma());
-	               System.out.println("tp.getFechaInicio() => " + tp.getFechaInicio());
-	               System.out.println("tp.getFechaUltimoAcceso() => " + tp.getFechaUltimoAcceso());
-	               System.out.println(" tp.getIdSesionTramitacion() => " + tp.getIdSesionTramitacion());
-	               */
-	               x++;
-	            //   tramits.add(new TramitePersistenteGenerico(tp));
-	          // }
+	           if (isDevelopment()) {
+	        	   for (RTramitePersistencia tp : tramites) {
+		        	   System.out.println(" -------------  TRAMITE SISTRA 2 [" + x + " ] -------------------");
+		               System.out.println("tp.getIdTramite() => " + tp.getIdTramite());
+		               System.out.println("tp.getDescripcionTramite() => " + tp.getDescripcionTramite());
+		               System.out.println("tp.getVersionTramite(); => " + tp.getVersionTramite());
+		               System.out.println("tp.getIdioma() => " + tp.getIdioma());
+		               System.out.println("tp.getFechaInicio() => " + tp.getFechaInicio());
+		               System.out.println("tp.getFechaUltimoAcceso() => " + tp.getFechaUltimoAcceso());
+		               System.out.println(" tp.getIdSesionTramitacion() => " + tp.getIdSesionTramitacion());
+		               x++;
+		               tramits.add(new TramitePersistenteGenerico(tp,2));
+		           }
+	           }
 	       }
 	       return tramits;
       
@@ -456,7 +439,6 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     		   .register(EntityLoggingFilter.class)
     		   .register(JsonbConfigurator.class);
    }
-
 
    /*
    public String obtenerTiquetAcceso(String idSesionTramitacion, UserData usuario) throws Exception {
