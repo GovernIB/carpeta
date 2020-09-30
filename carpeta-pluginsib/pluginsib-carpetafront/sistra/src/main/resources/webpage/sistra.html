@@ -65,7 +65,7 @@
                 <#if isget>
                 <br/>
                 <#else>
-                <#if missatgeError??>
+                <#if missatgeError?has_content >
                 <div class="alert alert-danger mt-5" role="warning">
                     ${tramite_genericerror} ${missatgeError}
                 </div>
@@ -80,6 +80,9 @@
                         <th>${tramite_tramite}</th>
                         <th>${tramite_fecha_inicio}</th>
                         <th>${tramite_acceso}</th>
+                        <#if development>
+                            <th>${tramite_versionsistra}</th>
+                        </#if>
                     </tr>
                     </thead>
                     <tbody>
@@ -91,9 +94,12 @@
                     <tr class="clickable-row" data-target="_blank" onClick="window.open(url)">
                         <td>${tramite.descripcionTramite}</td>
                         <td>
-                            ${tramite.fechaInicio?datetime.iso?string("dd-MM-yyyy HH:mm")}
+                            ${tramite.fechaInicio?string("dd-MM-yyyy HH:mm")}
                         </td>
-                        <td>${tramite.fechaUltimoAcceso?datetime.iso?string("dd-MM-yyyy HH:mm")}</td>
+                        <td>${tramite.fechaUltimoAcceso?string("dd-MM-yyyy HH:mm")}</td>
+                        <#if development>
+                        <td>${tramite.versionSistra}</td>
+                        </#if>
                     </tr>
                     </#list>
                     </tbody>
