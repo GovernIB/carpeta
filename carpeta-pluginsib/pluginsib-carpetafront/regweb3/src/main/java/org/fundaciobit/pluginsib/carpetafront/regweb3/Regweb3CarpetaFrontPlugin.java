@@ -454,25 +454,29 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
 
 
-    // ---------------------------------------------------------
-    // ------------------- OBTENIR ICONA  ---------------
-    // ---------------------------------------------------------
 
+    /**
+     * Mètode que retorna la icona del plugin
+     * @param locale
+     * @return
+     */
     @Override
     public  FileInfo getIcon(Locale locale){
 
         InputStream input;
 
         FileInfo fileInfo = null;
+        String resource = "/" + WEBRESOURCE + "/images"; //resource a on es troba l'icona
         try {
 
-            input = input = this.getClass().getResourceAsStream("/webresource/carpeta/wcag2AA.png");
+            //Agafa la icona del resource
+            input = this.getClass().getResourceAsStream(resource+"/icon.jpg");
             if(input != null) {
-                fileInfo =  new  FileInfo("icon.jpg","image/png", IOUtils.toByteArray(input));
+                fileInfo =  new  FileInfo("icon.jpg","image/jpeg", IOUtils.toByteArray(input));
             }
 
         }  catch (Exception e) {
-            log.error("Error llegint recurs : webresource/carpeta/wcag2AA.png" + e.getMessage(), e);
+            log.error("Error llegint recurs : "+resource+"/icon.jpg" + e.getMessage(), e);
 
         }
         return fileInfo;

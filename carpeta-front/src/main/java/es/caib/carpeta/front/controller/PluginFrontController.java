@@ -148,12 +148,15 @@ public class PluginFrontController {
 
         FileInfo fi = utilsEjb.getIcona(pluginid,idioma);
 
+        if(fi != null) {
+            response.setContentType(fi.getMime());
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + fi.getName() + "\"");
+            response.setContentLength((int) fi.getData().length);
 
-        response.setContentType(fi.getMime());
-        response.setHeader("Content-Disposition", "attachment; filename=\"" + fi.getName()+ "\"");
-        response.setContentLength((int) fi.getData().length);
+            response.getOutputStream().write(fi.getData());
+        }else{
 
-        response.getOutputStream().write(fi.getData());
+        }
     }
     
 }
