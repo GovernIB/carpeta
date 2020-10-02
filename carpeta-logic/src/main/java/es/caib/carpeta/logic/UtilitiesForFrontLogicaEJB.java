@@ -92,10 +92,13 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
 
         for (Plugin plugin : plugins) {
             PluginJPA p = (PluginJPA) plugin;
+            
+            ICarpetaFrontPlugin cfp = pluginCarpetaFrontEjb.getInstanceByPluginID(p.getPluginID());
+            
             pluginsInfo.add(new PluginInfo(String.valueOf(plugin.getPluginID()), p.getNom().getTraduccio(Constants.IDIOMA_CATALA).getValor(),
                     p.getNom().getTraduccio(Constants.IDIOMA_CASTELLA).getValor(), p.getNom().getTraduccio(Constants.IDIOMA_ANGLES).getValor(),
                     p.getDescripcio().getTraduccio(Constants.IDIOMA_CATALA).getValor(), p.getDescripcio().getTraduccio(Constants.IDIOMA_CASTELLA).getValor(),
-                    p.getDescripcio().getTraduccio(Constants.IDIOMA_ANGLES).getValor()));
+                    p.getDescripcio().getTraduccio(Constants.IDIOMA_ANGLES).getValor(), cfp.isReactComponent()));
         }
 
         return pluginsInfo;

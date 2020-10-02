@@ -17,12 +17,14 @@ public class PluginInfo {
     String descripcioEs;
     String descripcioEn;
 
+    boolean reactComponent;
+
     public PluginInfo() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-    public PluginInfo(String pluginID, String nomCa, String nomEs, String nomEn, String descripcioCa, String descripcioEs, String descripcioEn) {
+    public PluginInfo(String pluginID, String nomCa, String nomEs, String nomEn, String descripcioCa,
+            String descripcioEs, String descripcioEn, boolean reactComponent) {
         super();
         this.nomCa = nomCa;
         this.nomEs = nomEs;
@@ -31,6 +33,7 @@ public class PluginInfo {
         this.descripcioEs = descripcioEs;
         this.descripcioEn = descripcioEn;
         this.pluginID = pluginID;
+        this.reactComponent = reactComponent;
     }
 
     public String getPluginID() {
@@ -87,6 +90,14 @@ public class PluginInfo {
 
     public void setDescripcioEn(String descripcioEn) {
         this.descripcioEn = descripcioEn;
+    }
+
+    public boolean isReactComponent() {
+        return reactComponent;
+    }
+
+    public void setReactComponent(boolean reactComponent) {
+        this.reactComponent = reactComponent;
     }
 
 }

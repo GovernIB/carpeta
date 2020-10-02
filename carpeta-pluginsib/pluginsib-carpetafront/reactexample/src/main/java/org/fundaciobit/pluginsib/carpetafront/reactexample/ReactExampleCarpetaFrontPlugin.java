@@ -1,0 +1,239 @@
+package org.fundaciobit.pluginsib.carpetafront.reactexample;
+
+import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
+import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
+import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
+import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
+import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Properties;
+
+
+/**
+ * @author anadal
+ * @author mgonzalez
+ */
+public class ReactExampleCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
+
+    public static final String REACTEXAMPLE_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "reactexample.";
+
+    /**
+     *
+     */
+    public ReactExampleCarpetaFrontPlugin() {
+        super();
+    }
+
+    /**
+     * @param propertyKeyBase
+     * @param properties
+     */
+    public ReactExampleCarpetaFrontPlugin(String propertyKeyBase, Properties properties) {
+        super(propertyKeyBase, properties);
+    }
+
+    /**
+     * @param propertyKeyBase
+     */
+    public ReactExampleCarpetaFrontPlugin(String propertyKeyBase) {
+        super(propertyKeyBase);
+    }
+
+    @Override
+    public BasicServiceInformation existsInformation(UserData administrationID) throws Exception {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getTitle(Locale locale) {
+        return getTraduccio("title", locale);
+    }
+
+    @Override
+    public String getSubTitle(Locale locale) {
+        return getTraduccio("subtitle", locale);
+    }
+
+    @Override
+    public String getResourceBundleName() {
+        return "carpetafrontregweb3";
+    }
+
+    @Override
+    public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
+            HttpServletRequest request, String administrationID, String administrationIDEncriptat) throws Exception {
+
+        String startURL = absolutePluginRequestPath + "/" + INDEX_HTML_PAGE;
+
+        log.info(" getStartUrl( ); => " + startURL);
+        return startURL;
+    }
+
+    @Override
+    public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, String administrationID,
+            String administrationEncriptedID, Locale locale, boolean isGet) {
+
+        log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
+        log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => administrationID: " + administrationID);
+        log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
+                + administrationEncriptedID);
+
+        if (query.startsWith(INDEX_HTML_PAGE)) {
+
+            index(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, administrationID,
+                    administrationEncriptedID, locale, isGet);
+
+        } else if (query.startsWith(REACT_JS_PAGE)) {
+
+            reactjs(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, administrationID,
+                    administrationEncriptedID, locale, isGet);
+        } else {
+
+            super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
+                    administrationID, administrationEncriptedID, locale, isGet);
+        }
+
+    }
+
+    public boolean isDevelopment() {
+        return "true".equals(getProperty(REACTEXAMPLE_PROPERTY_BASE + "development"));
+    }
+
+    public String getWeb() throws Exception {
+        return getPropertyRequired(REACTEXAMPLE_PROPERTY_BASE + "web");
+
+    }
+
+    public String getEntidad() throws Exception {
+        return getPropertyRequired(REACTEXAMPLE_PROPERTY_BASE + "entidad");
+
+    }
+
+    public String getDetalleTitle(Locale locale) {
+        return getTraduccio("detalletitle", locale);
+    }
+
+    /**
+     * Mètode que retorna la icona del plugin
+     * 
+     * @param locale
+     * @return
+     */
+    @Override
+    public FileInfo getIcon(Locale locale) {
+
+        InputStream input;
+
+        FileInfo fileInfo = null;
+        try {
+
+            // Agafa la icona del resource
+            input = this.getClass().getResourceAsStream("/" + WEBRESOURCE + "/logo-reactexample.png");
+            if (input != null) {
+                fileInfo = new FileInfo("logo-regweb3.png", "image/png", IOUtils.toByteArray(input));
+            }
+
+        } catch (Exception e) {
+            log.error("Error llegint recurs : " + WEBRESOURCE + "/" +  "/logo-reactexample.png: " + e.getMessage(), e);
+
+        }
+        return fileInfo;
+
+    }
+
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // ------------------- INDEX ----------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+    protected static final String INDEX_HTML_PAGE = "index.html";
+
+    public void index(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, String administrationID,
+            String administrationEncriptedID, Locale locale, boolean isGet) {
+
+        try {
+
+            response.setContentType("text/html");
+
+            String resource = "/webpage/index.html";
+
+            response.setCharacterEncoding("utf-8");
+
+            InputStream input = this.getClass().getResourceAsStream(resource);
+
+            String plantilla = IOUtils.toString(input, "UTF-8");
+
+            Map<String, Object> map = new HashMap<String, Object>();
+
+            map.put("title", getTitle(locale));
+
+            map.put("subtitle", getSubTitle(locale));
+
+            String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
+
+            try {
+                response.getWriter().println(generat);
+                response.flushBuffer();
+            } catch (IOException e) {
+                log.error("Error obtening writer: " + e.getMessage(), e);
+            }
+
+        } catch (Exception e) {
+            // XYZ ZZZ
+            log.error("Error llistant registres: " + e.getMessage(), e);
+        }
+
+    }
+
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // ------------------- JAVASCRIPT REACT ----------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+    protected static final String REACT_JS_PAGE = "reactjs_main.js";
+
+    public void reactjs(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, String administrationID,
+            String administrationEncriptedID, Locale locale, boolean isGet) {
+
+        try {
+
+            response.setContentType("text/plain");
+
+            String resource = "/webpage/reactjs_main.js";
+
+            response.setCharacterEncoding("utf-8");
+
+            InputStream input = this.getClass().getResourceAsStream(resource);
+
+            String plantilla = IOUtils.toString(input, "UTF-8");
+
+            try {
+                response.getWriter().println(plantilla);
+                response.flushBuffer();
+            } catch (IOException e) {
+                log.error("Error obtening writer: " + e.getMessage(), e);
+            }
+
+        } catch (Exception e) {
+            log.error("Error llistant registres XYZ ZZZ: " + e.getMessage(), e);
+        }
+
+    }
+
+}
