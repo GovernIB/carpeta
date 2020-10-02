@@ -154,8 +154,6 @@ public class PluginFrontController {
             response.setContentLength((int) fi.getData().length);
 
             response.getOutputStream().write(fi.getData());
-        }else{
-
         }
     }
     
