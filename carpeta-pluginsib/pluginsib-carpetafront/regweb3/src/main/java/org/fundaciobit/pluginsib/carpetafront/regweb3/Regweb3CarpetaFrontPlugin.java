@@ -142,8 +142,7 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
 
     protected static final String LLISTAT_REGISTRES_PAGE = "llistatRegistres";
-    protected static final String DETALL_REGISTRE_PAGE = "detallRegistre";
-
+    
 
     List<AsientoRegistralWs> listRegistros = new ArrayList<>();
 
@@ -284,6 +283,8 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     // -------------------     DETALL   DE   REGISTRE                        ----------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
+
+    protected static final String DETALL_REGISTRE_PAGE = "detallRegistre";
 
 
     public void detallDeRegistre(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
