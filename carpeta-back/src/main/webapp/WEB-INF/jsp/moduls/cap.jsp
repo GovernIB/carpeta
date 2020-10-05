@@ -21,7 +21,7 @@
 		<div class="navbar-brand menuGovern">
 			<div class="logoGovern">
 				<a href="http://www.fundaciobit.org"> <img
-					src="<c:url value="/img/fundaciobit-logo-cap.png"/>"
+					src="<c:url value="/img/carpeta.png"/>"
 					alt="FundacioBit-Govern Digital" />
 				</a>
 			</div>

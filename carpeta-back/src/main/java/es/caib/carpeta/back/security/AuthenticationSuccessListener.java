@@ -10,8 +10,6 @@ import es.caib.carpeta.jpa.EntitatJPA;
 import es.caib.carpeta.jpa.UsuariJPA;
 import es.caib.carpeta.logic.UsuariEntitatLogicaLocal;
 import es.caib.carpeta.logic.UsuariLogicaLocal;
-import es.caib.carpeta.logic.UtilitiesForFrontLogicaEJB;
-import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
 import es.caib.carpeta.jpa.UsuariEntitatJPA;
 
 import org.apache.log4j.Logger;

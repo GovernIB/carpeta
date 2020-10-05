@@ -78,7 +78,7 @@ INSERT INTO car_traducciomap VALUES (56, 'ca', 'REGWEB3 Registre electrònic');
 --
 INSERT INTO car_plugin(
             nomid, descripcioid, classe, tipus, propietats, actiu)
-    VALUES (46, 56, 'org.fundaciobit.pluginsib.carpetafront.regweb3.Regweb3CarpetaFrontPlugin', 2, '# Common
+    VALUES (46, 56, 'org.fundaciobit.pluginsib.carpetafront.regweb3.Regweb3CarpetaFrontPlugin', 1, '# Common
 es.caib.carpeta.pluginsib.carpetafront.regweb3.development=true
 
 # Regweb3
