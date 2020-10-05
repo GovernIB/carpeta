@@ -20,7 +20,7 @@ public class PropietatGlobalAdminEntitatController extends PropietatGlobalSuperA
 
     @Override
     protected boolean isSuperAdmin() {
-        return true;
+        return false;
     }
 
 }
