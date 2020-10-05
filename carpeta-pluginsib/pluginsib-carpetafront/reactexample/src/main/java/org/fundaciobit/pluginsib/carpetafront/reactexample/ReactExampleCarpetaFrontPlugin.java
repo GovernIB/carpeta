@@ -21,11 +21,10 @@ import java.util.Properties;
 
 /**
  * @author anadal
- * @author mgonzalez
  */
 public class ReactExampleCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
-    public static final String REACTEXAMPLE_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "reactexample.";
+    //public static final String REACTEXAMPLE_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "reactexample.";
 
     /**
      *
@@ -107,23 +106,12 @@ public class ReactExampleCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     }
 
-    public boolean isDevelopment() {
-        return "true".equals(getProperty(REACTEXAMPLE_PROPERTY_BASE + "development"));
+
+    @Override
+    public boolean isReactComponent() {
+        return true;
     }
-
-    public String getWeb() throws Exception {
-        return getPropertyRequired(REACTEXAMPLE_PROPERTY_BASE + "web");
-
-    }
-
-    public String getEntidad() throws Exception {
-        return getPropertyRequired(REACTEXAMPLE_PROPERTY_BASE + "entidad");
-
-    }
-
-    public String getDetalleTitle(Locale locale) {
-        return getTraduccio("detalletitle", locale);
-    }
+    
 
     /**
      * Mètode que retorna la icona del plugin
