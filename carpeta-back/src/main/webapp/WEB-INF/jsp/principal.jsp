@@ -11,11 +11,11 @@
 <div>
 <br/>
 <center>
-<img src="<c:url value="/img/app-logo.png"/>"  alt="Carpeta" title="Carpeta"/>
+<img style="padding:10px; margin:15px;background-color:#32814B" src="<c:url value="/img/carpeta.png"/>"  alt="Carpeta" title="Carpeta"/>
 
 <br/>
 <br/>
-This page is generated automatically. Please edit.
+<h3>Back de Carpeta Ciutadana</h3>
 
 <br/>
 <br/>
@@ -36,11 +36,11 @@ This page is generated automatically. Please edit.
 
 <br/>
 
+<c:if test="${car:isDesenvolupament()}">
 
+<b> Only in Development Mode</b>
 
 Username: ${loginInfo.username}<br/>
-
-
 
 &#36;{car:hasRole(ROLE_SUPER)}= ${car:hasRole('ROLE_SUPER')}<br/>
 &#36;{car:hasRole(ROLE_ADMIN) }= ${car:hasRole('ROLE_ADMIN') }<br/>
@@ -49,6 +49,4 @@ Locale = <%=LocaleContextHolder.getLocale() %> <br/>
 lang = ${lang} <br/>
 <br/>
 
-<c:if test="${car:isDesenvolupament()}">
-Only in Development Mode
 </c:if>
