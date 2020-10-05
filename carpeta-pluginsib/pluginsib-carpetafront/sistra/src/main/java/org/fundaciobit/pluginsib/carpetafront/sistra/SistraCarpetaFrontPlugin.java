@@ -460,17 +460,17 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
       InputStream input;
 
       FileInfo fileInfo = null;
-      String resource = "/" + WEBRESOURCE + "/images"; //resource a on es troba l'icona
+      String resource = "/" + WEBRESOURCE + "/carpeta"; //resource a on es troba l'icona
       try {
 
          //Agafa la icona del resource
-         input = this.getClass().getResourceAsStream(resource+"/icon.jpg");
+         input = this.getClass().getResourceAsStream(resource+"/logo-sistra.png");
          if(input != null) {
-            fileInfo =  new  FileInfo("icon.jpg","image/jpeg", IOUtils.toByteArray(input));
+            fileInfo =  new  FileInfo("logo-sistra.png","image/png", IOUtils.toByteArray(input));
          }
 
       }  catch (Exception e) {
-         log.error("Error llegint recurs : "+resource+"/icon.jpg" + e.getMessage(), e);
+         log.error("Error llegint recurs : "+resource+"/logo-sistra.png" + e.getMessage(), e);
 
       }
       return fileInfo;

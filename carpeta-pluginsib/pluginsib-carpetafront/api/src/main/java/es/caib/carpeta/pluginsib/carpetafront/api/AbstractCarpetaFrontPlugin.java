@@ -72,19 +72,10 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
     // XYZ TODO Passat a pare web
     public static final String WEBRESOURCE = "webresource";
 
-    /*
-     * protected void getJavascriptCSS(HttpServletRequest request, String
-     * absolutePluginRequestPath, String relativePluginRequestPath, PrintWriter out,
-     * Locale languageUI) {
-     * 
-     * out.println("<script type=\"text/javascript\" src=\"" +
-     * relativePluginRequestPath + WEBRESOURCE + "/js/jquery.js\"></script>");
-     * out.println("<script type=\"text/javascript\" src=\"" +
-     * relativePluginRequestPath + WEBRESOURCE + "/js/bootstrap.js\"></script>");
-     * out.println("<link href=\"" + relativePluginRequestPath + WEBRESOURCE +
-     * "/css/bootstrap.css\" rel=\"stylesheet\" media=\"screen\">");
-     * 
-     * }
-     */
+
+    @Override
+    public boolean isReactComponent() {
+        return false;
+    }
 
 }
