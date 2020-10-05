@@ -467,7 +467,7 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         InputStream input;
 
         FileInfo fileInfo = null;
-        String resource = "/" + WEBRESOURCE + "/carpeta"; //resource a on es troba l'icona
+        String resource = "/" + LOGORESOURCE ; //resource a on es troba l'icona
         try {
 
             //Agafa la icona del resource

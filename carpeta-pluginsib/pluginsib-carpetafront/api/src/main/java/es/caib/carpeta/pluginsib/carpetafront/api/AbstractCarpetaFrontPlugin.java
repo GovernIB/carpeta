@@ -72,6 +72,8 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
     // XYZ TODO Passat a pare web
     public static final String WEBRESOURCE = "webresource";
 
+    public static final String LOGORESOURCE = "logo";
+
 
     @Override
     public boolean isReactComponent() {
