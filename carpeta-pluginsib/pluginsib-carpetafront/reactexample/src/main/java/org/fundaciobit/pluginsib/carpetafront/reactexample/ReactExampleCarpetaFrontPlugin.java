@@ -170,6 +170,9 @@ public class ReactExampleCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             response.setContentType("text/html");
 
             String resource = "/webpage/index.html";
+            
+            response.setHeader( "Content-Disposition",
+                    "inline;filename=\""+ java.net.URLEncoder.encode(INDEX_HTML_PAGE,"UTF-8") + "\"");
 
             response.setCharacterEncoding("utf-8");
 
@@ -182,6 +185,16 @@ public class ReactExampleCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             map.put("title", getTitle(locale));
 
             map.put("subtitle", getSubTitle(locale));
+            
+            
+            log.info("absolutePluginRequestPath ==> " + absolutePluginRequestPath);
+            
+            
+            //int pos =  absolutePluginRequestPath.indexOf(INDEX_HTML_PAGE); 
+             
+            String pathtojs = absolutePluginRequestPath + "/" + REACT_JS_PAGE;
+            
+            map.put("pathtojs", pathtojs);
 
             String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
 
@@ -213,7 +226,11 @@ public class ReactExampleCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         try {
 
-            response.setContentType("text/plain");
+            response.setContentType("application/javascript");
+            
+            response.setHeader( "Content-Disposition",
+                    "inline;filename=\""+ java.net.URLEncoder.encode(REACT_JS_PAGE,"UTF-8") + "\"");
+
 
             String resource = "/webpage/reactjs_main.js";
 
