@@ -18,13 +18,18 @@
 
 <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
-
-
-
 <a class="dropdown-item"
-    href="<c:url value="//adminentitat/pluginEntitat/list"/>"> <span
+    href="<c:url value="/adminentitat/pluginEntitat/list"/>"> <span
     style="${(fn:contains(url, '/adminentitat/pluginEntitat'))? " font-weight:bold;" : ""}"><spring:message
             code="pluginEntitat.pluginEntitat.plural" /></span>
+</a>
+
+<hr style="margin-top: 6px; margin-bottom: 6px;" />
+
+<a class="dropdown-item"
+    href="<c:url value="/adminentitat/enllaz/list"/>"> <span
+    style="${(fn:contains(url, '/adminentitat/enllaz'))? " font-weight:bold;" : ""}"><spring:message
+            code="enllaz.enllaz.plural" /></span>
 </a>
 
 <%--
