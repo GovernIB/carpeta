@@ -9,7 +9,6 @@ import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWsService;
 import es.caib.regweb3.ws.api.v3.ResultadoBusquedaWs;
 import org.apache.commons.io.IOUtils;
-import org.fundaciobit.pluginsib.core.utils.XTrustProvider;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import javax.servlet.http.HttpServletRequest;
@@ -432,10 +431,6 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         final String username = getPropertyRequired(REGWEB3_PROPERTY_BASE + "user");
 
         final String password = getPropertyRequired(REGWEB3_PROPERTY_BASE + "pass");
-
-        if (regweb3Url.startsWith("https") && isDevelopment()) {
-            XTrustProvider.install();
-        }
 
         final URL wsdl = new URL(regweb3Url + "?wsdl");
 

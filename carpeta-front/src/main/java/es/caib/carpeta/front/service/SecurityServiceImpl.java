@@ -4,7 +4,6 @@ import es.caib.carpeta.commons.utils.UsuarioClave;
 import es.caib.loginib.rest.api.v1.RDatosAutenticacion;
 import es.caib.loginib.rest.api.v1.RLoginParams;
 import es.caib.loginib.rest.api.v1.RLogoutParams;
-import org.fundaciobit.pluginsib.core.utils.XTrustProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -109,10 +108,6 @@ public class SecurityServiceImpl implements SecurityService {
      * @return
      */
     private RestTemplate getLoginIbRestTemplate(){
-
-        if(LOGINIB_URL.startsWith("https") && development){
-            XTrustProvider.install();
-        }
 
         final RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(LOGINIB_USER, LOGINIB_PASS));

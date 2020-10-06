@@ -13,7 +13,6 @@ import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitesPersistentes;
 import es.caib.zonaper.ws.v2.services.BackofficeFacade;
 import es.caib.zonaper.ws.v2.services.BackofficeFacadeService;
 import org.apache.commons.io.IOUtils;
-import org.fundaciobit.pluginsib.core.utils.XTrustProvider;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import javax.servlet.http.HttpServletRequest;
@@ -343,10 +342,6 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         final String username = getPropertyRequired(SISTRA1_PROPERTY_BASE + "user");
         final String password = getPropertyRequired(SISTRA1_PROPERTY_BASE + "pass");
 
-        if (sistraUrl.startsWith("https") && isDevelopment()) {
-            XTrustProvider.install();
-        }
-
         final URL wsdl = new URL(sistraUrl + "?wsdl");
         BackofficeFacadeService service = new BackofficeFacadeService(wsdl);
         BackofficeFacade backofficeFacade = service.getBackofficeFacade();
@@ -443,10 +438,6 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 	   final String sistraUrl = getPropertyRequired(SISTRA2_PROPERTY_BASE + "url");
 	   final String username = getPropertyRequired(SISTRA2_PROPERTY_BASE + "user");
        final String password = getPropertyRequired(SISTRA2_PROPERTY_BASE + "pass");
-
-       if(sistraUrl.startsWith("https") && development){
-          XTrustProvider.install();
-       }
 
        return ClientBuilder.newClient()
     		   .register(new BasicAuthenticator(username, password))
