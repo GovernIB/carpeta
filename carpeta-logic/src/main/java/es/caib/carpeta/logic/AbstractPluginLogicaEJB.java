@@ -2,7 +2,10 @@ package es.caib.carpeta.logic;
 
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 
 import es.caib.carpeta.jpa.PluginJPA;
@@ -12,6 +15,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.pluginsib.core.IPlugin;
 import org.fundaciobit.pluginsib.core.utils.PluginsManager;
+import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 /**
  *
@@ -69,7 +73,15 @@ public abstract class AbstractPluginLogicaEJB<I extends IPlugin> extends PluginL
 
             if (plugin.getPropietats() != null && plugin.getPropietats().trim().length() != 0) {
                 try {
-                    prop.load(new StringReader(plugin.getPropietats()));
+                    
+                    Map<String, Object> map = new HashMap<String, Object>();
+                    map.put("SP", System.getProperties());
+                    
+                    String plantilla = plugin.getPropietats();
+                    String generat = TemplateEngine.processExpressionLanguageSquareBrackets(plantilla, map, new Locale("ca"));
+                    
+                    prop.load(new StringReader(generat));
+                                        
                 } catch (Exception e) {
                     // TODO Crec que no es cridarà mai
                     e.printStackTrace();
