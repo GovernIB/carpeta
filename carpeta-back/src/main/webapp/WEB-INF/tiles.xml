@@ -137,6 +137,15 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/pluginEntitatList.jsp" />
     </definition>
     
+    <definition name="enllazFormAdminEntitat" extends="adminentitat">
+        <put-attribute name="titol" value="enllaz.enllaz" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/enllazForm.jsp" />
+    </definition>
+    
+    <definition name="enllazListAdminEntitat" extends="adminentitat">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/enllazList.jsp" />
+    </definition>
+    
     
 
     <!--  ===========  SUPER ADMIN  ================== -->
