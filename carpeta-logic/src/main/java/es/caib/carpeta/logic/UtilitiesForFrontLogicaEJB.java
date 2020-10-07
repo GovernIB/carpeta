@@ -98,7 +98,7 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
             pluginsInfo.add(new PluginInfo(String.valueOf(plugin.getPluginID()), p.getNom().getTraduccio(Constants.IDIOMA_CATALA).getValor(),
                     p.getNom().getTraduccio(Constants.IDIOMA_CASTELLA).getValor(), p.getNom().getTraduccio(Constants.IDIOMA_ANGLES).getValor(),
                     p.getDescripcio().getTraduccio(Constants.IDIOMA_CATALA).getValor(), p.getDescripcio().getTraduccio(Constants.IDIOMA_CASTELLA).getValor(),
-                    p.getDescripcio().getTraduccio(Constants.IDIOMA_ANGLES).getValor(), cfp.isReactComponent()));
+                    p.getDescripcio().getTraduccio(Constants.IDIOMA_ANGLES).getValor(), String.valueOf(cfp.isReactComponent())));
         }
 
         return pluginsInfo;

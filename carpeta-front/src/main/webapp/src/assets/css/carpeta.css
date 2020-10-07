@@ -97,6 +97,11 @@ img:hover {
 	top: 2.5em;
 	height: 2em;
 }
+.imc-icona{
+    height: 2em;
+    padding-right: 0.5em;
+	vertical-align: middle;
+}
 
 /* Canvis per React */
 /*.imc-continguts {
