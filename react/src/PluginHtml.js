@@ -3,7 +3,7 @@ import { withTranslation } from 'react-i18next';
 import i18n from 'i18next';
 
 
-function Plugin ({ t , pluginID}) {
+function PluginHtml ({ t , pluginID}) {
 	
 	var data = new FormData();
 	var codiPlugin;
@@ -59,4 +59,4 @@ function Plugin ({ t , pluginID}) {
 	
 }
 
-export default withTranslation()(Plugin);
+export default withTranslation()(PluginHtml);

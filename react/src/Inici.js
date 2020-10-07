@@ -61,15 +61,22 @@ function Inici ({ t , autenticat}) {
 		const plugins = JSON.parse(sessionStorage.getItem('plugins'));
 		
 
-		var plug;
+		var plugHtml;
+		var plugReact;
 		
 		if (i18n.language === 'ca') {
-			plug = plugins.map(s => (
+			plugHtml = plugins.filter(s => s.reactComponent === 'false').map(s => (
 			  <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
-				<button className="card col-md-10 align-items-lg-center" onClick={event =>  window.location.href="javascript:newPlugin('contingut', '1', '" + s.pluginID + "');"}>
-					<span className="oi oi-document h3 mt-2 mb-2" title={s.nomCa} alt={s.nomCa} aria-hidden="true">
-						<span className="card-title titol pl-1">{s.nomCa}</span>
-					</span>
+				<button className="card col-md-10 align-items-lg-center" alt={s.nomCa} onClick={event =>  window.location.href="javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}>
+					<span className="card-title titol pl-1 h3"><img src={"http://localhost:8080/carpetafront/pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img>{s.nomCa}</span>
+					<span className="card-text mb-3">{s.descripcioCa}</span>
+				</button>
+			  </div>
+			));
+			plugReact = plugins.filter(s => s.reactComponent === 'true').map(s => (
+			  <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
+				<button className="card col-md-10 align-items-lg-center" alt={s.nomCa} onClick={event =>  window.location.href="javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}>
+					<span className="card-title titol pl-1 h3"><img src={"http://localhost:8080/carpetafront/pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img>{s.nomCa}</span>
 					<span className="card-text mb-3">{s.descripcioCa}</span>
 				</button>
 			  </div>
@@ -77,12 +84,18 @@ function Inici ({ t , autenticat}) {
 		}
 
 		if (i18n.language === 'es') {
-		  plug = plugins.map(s => (
+			plugHtml = plugins.filter(s => s.reactComponent === 'false').map(s => (
 			  <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
-				<button className="card col-md-10 align-items-lg-center" onClick={event =>  window.location.href="javascript:newPlugin('contingut', '1', '" + s.pluginID + "');"}>
-					<span className="oi oi-document h3 mt-2 mb-2" title={s.nomEs} alt={s.nomEs} aria-hidden="true">
-						<span className="card-title titol pl-1">{s.nomEs}</span>
-					</span>
+				<button className="card col-md-10 align-items-lg-center" alt={s.nomEs} onClick={event =>  window.location.href="javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}>
+					<span className="card-title titol pl-1 h3"><img src={"http://localhost:8080/carpetafront/pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img>{s.nomEs}</span>
+					<span className="card-text mb-3">{s.descripcioEs}</span>
+				</button>
+			  </div>
+			));
+			plugReact = plugins.filter(s => s.reactComponent === 'true').map(s => (
+			  <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
+				<button className="card col-md-10 align-items-lg-center" alt={s.nomEs} onClick={event =>  window.location.href="javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}>
+					<span className="card-title titol pl-1 h3"><img src={"http://localhost:8080/carpetafront/pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img>{s.nomEs}</span>
 					<span className="card-text mb-3">{s.descripcioEs}</span>
 				</button>
 			  </div>
@@ -103,11 +116,12 @@ function Inici ({ t , autenticat}) {
 
 							  <div className="card-body imc--llista--capses">
 
-								  <div className="row mb-0">
+									<div className="row mb-0">
 
-									{plug}
-								  
-								  </div>
+										{plugHtml}
+										{plugReact}
+
+									</div>
 
 							  </div>
 
