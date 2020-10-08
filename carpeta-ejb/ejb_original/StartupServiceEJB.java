@@ -13,8 +13,8 @@ import javax.ejb.Startup;
  *
  * @author areus
  */
-@Singleton
-@Startup
+//@Singleton
+//@Startup
 public class StartupServiceEJB {
 
     private static final Logger LOG = LoggerFactory.getLogger(StartupServiceEJB.class);
@@ -22,7 +22,7 @@ public class StartupServiceEJB {
     /**
      * Executat a l'inici de l'aplicació.
      */
-    @PostConstruct
+    //@PostConstruct
     private void init() {
         // Aquí es podrien llegir les opcions de configuració, i comprovar que tots els paràmetres necessaris hi són,
         // o fixar els valors per defecte pels que no hi siguin, programar timers no persistents, ...
@@ -32,7 +32,7 @@ public class StartupServiceEJB {
     /**
      * Executat quan s'atura l'aplicació.
      */
-    @PreDestroy
+    //@PreDestroy
     private void destroy() {
         LOG.info("Aturada del mòdul EJB");
     }
