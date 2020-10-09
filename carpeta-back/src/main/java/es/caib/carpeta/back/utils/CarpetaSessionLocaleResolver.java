@@ -1,14 +1,13 @@
 package es.caib.carpeta.back.utils;
 
-import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.log4j.Logger;
 import es.caib.carpeta.back.security.LoginInfo;
+import org.apache.log4j.Logger;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.util.WebUtils;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Locale;
 
 /**
  * 

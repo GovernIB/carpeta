@@ -1,7 +1,5 @@
 package es.caib.carpeta.utils;
 
-import java.io.File;
-
 import es.caib.carpeta.commons.utils.Constants;
 
 /**
@@ -9,9 +7,11 @@ import es.caib.carpeta.commons.utils.Constants;
  * @author anadal
  * 
  */
-public class Configuracio implements Constants {
+public class Configuracio extends es.caib.carpeta.commons.utils.Configuracio implements Constants{
 
-    public static boolean isCAIB() {
+    /* XYZ ZZZ Veure si es pot eliminar aquesta classe */
+
+    /*public static boolean isCAIB() {
         return Boolean.getBoolean(CARPETA_PROPERTY_BASE + "iscaib");
     }
 
@@ -50,6 +50,6 @@ public class Configuracio implements Constants {
 
     public static Long getMaxFitxerAdaptatSizeInBytes() {
         return Long.getLong(CARPETA_PROPERTY_BASE + "maxfitxeradaptatsizeinbytes");
-    }
+    }*/
 
 }
