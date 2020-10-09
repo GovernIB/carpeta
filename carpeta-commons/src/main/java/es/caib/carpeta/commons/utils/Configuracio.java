@@ -87,5 +87,10 @@ public class Configuracio implements Constants {
     public  static Long getMaxFitxerAdaptatSizeInBytes() {
         return Long.getLong(CARPETA_PROPERTY_BASE + "maxfitxeradaptatsizeinbytes");
     }
+    
+    public static File getFilesDirectory() {
+        String path = getProperty(CARPETA_PROPERTY_BASE + "filesdirectory");
+        return new File(path);
+    }
 
 }
