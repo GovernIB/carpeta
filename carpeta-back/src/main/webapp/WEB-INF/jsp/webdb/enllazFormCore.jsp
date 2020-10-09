@@ -126,3 +126,39 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EnllazFields.LOGOID)}">
+        <tr id="enllaz_logoID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EnllazFields.LOGOID])?'enllaz.logoID':__theForm.labels[EnllazFields.LOGOID]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[EnllazFields.LOGOID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EnllazFields.LOGOID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+              <form:errors path="enllaz.logoID" cssClass="errorField alert alert-error" />
+            <c:if test="${gen:contains(__theForm.readOnlyFields ,EnllazFields.LOGOID)}" >
+              <a target="_blank" href="<c:url value="${car:fileUrl(logoID.logoID)}"/>">${logoID.logoID.nom}</a>
+            </c:if>
+            <c:if test="${!gen:contains(__theForm.readOnlyFields ,EnllazFields.LOGOID)}" >
+              <div class="input-group">
+                <div class="custom-file col-md-4">
+                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EnllazFields.LOGOID)? 'true' : 'false'}" cssClass="custom-file-input col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EnllazFields.LOGOID)? ' uneditable-input' : ''}"   path="logoID" type="file" />
+                  <label class="custom-file-label" for="logoID">
+                  </label>
+                </div>
+                <c:if test="${not empty __theForm.enllaz.logo}">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="">
+                  <small>              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.enllaz.logo)}"/>">${__theForm.enllaz.logo.nom}</a>
+</small>
+                  </span>
+                </div>
+                </c:if>
+              </div>
+            </c:if>
+           </td>
+        </tr>
+        </c:if>
+        

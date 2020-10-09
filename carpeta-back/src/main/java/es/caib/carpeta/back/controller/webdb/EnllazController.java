@@ -33,6 +33,9 @@ import es.caib.carpeta.back.form.webdb.EnllazForm;
 
 import es.caib.carpeta.back.validator.webdb.EnllazWebValidator;
 
+import es.caib.carpeta.model.entity.Fitxer;
+import es.caib.carpeta.jpa.FitxerJPA;
+import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
 import es.caib.carpeta.jpa.EnllazJPA;
 import es.caib.carpeta.model.entity.Enllaz;
 import es.caib.carpeta.model.fields.*;
@@ -47,7 +50,7 @@ import es.caib.carpeta.model.fields.*;
 @RequestMapping(value = "/webdb/enllaz")
 @SessionAttributes(types = { EnllazForm.class, EnllazFilterForm.class })
 public class EnllazController
-    extends es.caib.carpeta.back.controller.CarpetaBaseController<Enllaz, java.lang.Long> implements EnllazFields {
+    extends es.caib.carpeta.back.controller.CarpetaFilesBaseController<Enllaz, java.lang.Long, EnllazForm> implements EnllazFields {
 
   @EJB(mappedName = es.caib.carpeta.ejb.IdiomaLocal.JNDI_NAME)
   protected es.caib.carpeta.ejb.IdiomaLocal idiomaEjb;
@@ -356,21 +359,27 @@ public class EnllazController
 
     EnllazJPA enllaz = enllazForm.getEnllaz();
 
+    FilesFormManager<Fitxer> afm = getFilesFormManager(); // FILE
+
     try {
+      this.setFilesFormToEntity(afm, enllaz, enllazForm); // FILE
       preValidate(request, enllazForm, result);
       getWebValidator().validate(enllazForm, result);
       postValidate(request,enllazForm, result);
 
       if (result.hasErrors()) {
+        afm.processErrorFilesWithoutThrowException(); // FILE
         result.reject("error.form");
         return getTileForm();
       } else {
         enllaz = create(request, enllaz);
+        afm.postPersistFiles(); // FILE
         createMessageSuccess(request, "success.creation", enllaz.getEnllazID());
         enllazForm.setEnllaz(enllaz);
         return getRedirectWhenCreated(request, enllazForm);
       }
     } catch (Throwable __e) {
+      afm.processErrorFilesWithoutThrowException(); // FILE
       if (__e instanceof I18NValidationException) {
         ValidationWebUtils.addFieldErrorsToBindingResult(result, (I18NValidationException)__e);
         return getTileForm();
@@ -451,21 +460,26 @@ public class EnllazController
     }
     EnllazJPA enllaz = enllazForm.getEnllaz();
 
+    FilesFormManager<Fitxer> afm = getFilesFormManager(); // FILE
     try {
+      this.setFilesFormToEntity(afm, enllaz, enllazForm); // FILE
       preValidate(request, enllazForm, result);
       getWebValidator().validate(enllazForm, result);
       postValidate(request, enllazForm, result);
 
       if (result.hasErrors()) {
+        afm.processErrorFilesWithoutThrowException(); // FILE
         result.reject("error.form");
         return getTileForm();
       } else {
         enllaz = update(request, enllaz);
+        afm.postPersistFiles(); // FILE
         createMessageSuccess(request, "success.modification", enllaz.getEnllazID());
         status.setComplete();
         return getRedirectWhenModified(request, enllazForm, null);
       }
     } catch (Throwable __e) {
+      afm.processErrorFilesWithoutThrowException(); // FILE
       if (__e instanceof I18NValidationException) {
         ValidationWebUtils.addFieldErrorsToBindingResult(result, (I18NValidationException)__e);
         return getTileForm();
@@ -615,6 +629,28 @@ public java.lang.Long stringToPK(String value) {
     return _TABLE_MODEL;
   }
 
+  // FILE
+  @Override
+  public void setFilesFormToEntity(FilesFormManager<Fitxer> afm, Enllaz enllaz,
+      EnllazForm form) throws I18NException {
+
+    FitxerJPA f;
+    f = (FitxerJPA)afm.preProcessFile(form.getLogoID(), form.isLogoIDDelete(),
+        form.isNou()? null : enllaz.getLogo());
+    ((EnllazJPA)enllaz).setLogo(f);
+    if (f != null) { 
+      enllaz.setLogoID(f.getFitxerID());
+    } else {
+      enllaz.setLogoID(0);
+    }
+
+  }
+
+  // FILE
+  @Override
+  public void deleteFiles(Enllaz enllaz) {
+    deleteFile(enllaz.getLogoID());
+  }
   // Mètodes a sobreescriure 
 
   public boolean isActiveList() {

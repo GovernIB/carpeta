@@ -17,6 +17,7 @@ import es.caib.carpeta.jpa.validator.EnllazValidator;
 import es.caib.carpeta.back.form.webdb.EnllazForm;
 import org.fundaciobit.genapp.common.web.validation.AbstractWebValidator;
 import es.caib.carpeta.model.entity.Enllaz;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 
 /**
@@ -151,6 +152,17 @@ _ignoreFields.add(URLID);
     }
 
   }
+    if (isNou) { // Creacio
+      // ================ CREATION
+      // Fitxers 
+      CommonsMultipartFile logoID = ((EnllazForm)__form).getLogoID();
+      if (logoID == null || logoID.isEmpty()) {
+        errors.rejectValue(get(LOGOID), "genapp.validation.required",
+          new String[]{ org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(get(LOGOID)) },
+          null);
+      }
+
+    }
     BeanValidatorResult<Enllaz> __vr = new BeanValidatorResult<Enllaz>();
     validator.validate(__vr, __bean,
       isNou, enllazEjb, entitatEjb, traduccioEjb);

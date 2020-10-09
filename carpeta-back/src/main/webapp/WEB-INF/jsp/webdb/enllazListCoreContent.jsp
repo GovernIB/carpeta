@@ -61,6 +61,13 @@
           </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EnllazFields.LOGOID)}">
+          <td>
+            <c:if test="${not empty enllaz.logo}">
+              <a target="_blank" href="<c:url value="${car:fileUrl(enllaz.logo)}"/>">${enllaz.logo.nom}</a>
+            </c:if>
+           </td>
+        </c:if>
 
 
         <!--  /** Additional Fields */  -->

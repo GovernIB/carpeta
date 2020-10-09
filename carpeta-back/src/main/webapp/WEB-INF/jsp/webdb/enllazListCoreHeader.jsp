@@ -27,6 +27,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EnllazFields.ENTITATID)}">
         <th>${car:getSortIcons(__theFilterForm,EnllazFields.ENTITATID)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EnllazFields.LOGOID)}">
+        <th>${car:getSortIcons(__theFilterForm,EnllazFields.LOGOID)}</th>
+        </c:if>
 
 
         <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">

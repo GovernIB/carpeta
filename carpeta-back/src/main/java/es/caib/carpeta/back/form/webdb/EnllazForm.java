@@ -2,6 +2,7 @@ package es.caib.carpeta.back.form.webdb;
 
 import java.util.List;
 import org.fundaciobit.genapp.common.StringKeyValue;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import es.caib.carpeta.back.form.CarpetaBaseForm;
 import es.caib.carpeta.jpa.EnllazJPA;
 
@@ -12,6 +13,10 @@ import es.caib.carpeta.jpa.EnllazJPA;
 public class EnllazForm extends CarpetaBaseForm {
   
   private EnllazJPA enllaz;
+  
+  
+  private CommonsMultipartFile logoID;
+  private boolean logoIDDelete;
   
   public EnllazForm() {
   }
@@ -47,6 +52,20 @@ public class EnllazForm extends CarpetaBaseForm {
     this.idiomesTraduccio = idiomesTraduccio;
   }
   
+  public CommonsMultipartFile getLogoID() {
+    return logoID;
+  }
+  
+   public void setLogoID(CommonsMultipartFile logoID) {
+    this.logoID = logoID;
+  }
+  public boolean isLogoIDDelete() {
+    return logoIDDelete;
+  }
+  
+  public void setLogoIDDelete(boolean logoIDDelete) {
+    this.logoIDDelete = logoIDDelete;
+   }
   private List<StringKeyValue> listOfValuesForTipus;
 
   public List<StringKeyValue> getListOfValuesForTipus() {
