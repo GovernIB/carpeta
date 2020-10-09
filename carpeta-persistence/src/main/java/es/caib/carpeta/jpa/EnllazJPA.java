@@ -47,6 +47,10 @@ private static final long serialVersionUID = -1473310087L;
 	@Column(name="entitatid",nullable = false,length = 19)
 	long entitatID;
 
+	@Index(name="car_enllaz_logoid_fk_i")
+	@Column(name="logoid",nullable = false,length = 19)
+	long logoID;
+
 
 
   /** Constructor Buit */
@@ -54,19 +58,21 @@ private static final long serialVersionUID = -1473310087L;
   }
 
   /** Constructor amb tots els camps  */
-  public EnllazJPA(long enllazID , int tipus , long nomID , long urlID , long entitatID) {
+  public EnllazJPA(long enllazID , int tipus , long nomID , long urlID , long entitatID , long logoID) {
     this.enllazID=enllazID;
     this.tipus=tipus;
     this.nomID=nomID;
     this.urlID=urlID;
     this.entitatID=entitatID;
+    this.logoID=logoID;
 }
   /** Constructor sense valors autoincrementals */
-  public EnllazJPA(int tipus , long nomID , long urlID , long entitatID) {
+  public EnllazJPA(int tipus , long nomID , long urlID , long entitatID , long logoID) {
     this.tipus=tipus;
     this.nomID=nomID;
     this.urlID=urlID;
     this.entitatID=entitatID;
+    this.logoID=logoID;
 }
   public EnllazJPA(Enllaz __bean) {
     this.setEnllazID(__bean.getEnllazID());
@@ -74,6 +80,9 @@ private static final long serialVersionUID = -1473310087L;
     this.setNomID(__bean.getNomID());
     this.setUrlID(__bean.getUrlID());
     this.setEntitatID(__bean.getEntitatID());
+    this.setLogoID(__bean.getLogoID());
+    // Fitxer
+    this.setLogo(FitxerJPA.toJPA(__bean.getLogo()));
 	}
 
 	public long getEnllazID() {
@@ -109,6 +118,13 @@ private static final long serialVersionUID = -1473310087L;
 	};
 	public void setEntitatID(long _entitatID_) {
 		this.entitatID = _entitatID_;
+	};
+
+	public long getLogoID() {
+		return(logoID);
+	};
+	public void setLogoID(long _logoID_) {
+		this.logoID = _logoID_;
 	};
 
 
@@ -191,6 +207,21 @@ private static final long serialVersionUID = -1473310087L;
     this.entitat = entitat;
   }
 
+// IMP Field:fitxerid | Table: car_fitxer | Type: 1  
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@ForeignKey(name="car_enllaz_fitxer_logo_fk")
+	@JoinColumn(name = "logoid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false)
+	private FitxerJPA logo;
+
+	public FitxerJPA getLogo() {
+    return this.logo;
+  }
+
+	public  void setLogo(FitxerJPA logo) {
+    this.logo = logo;
+  }
+
 
  // ---------------  STATIC METHODS ------------------
   public static EnllazJPA toJPA(Enllaz __bean) {
@@ -201,6 +232,9 @@ private static final long serialVersionUID = -1473310087L;
     __tmp.setNomID(__bean.getNomID());
     __tmp.setUrlID(__bean.getUrlID());
     __tmp.setEntitatID(__bean.getEntitatID());
+    __tmp.setLogoID(__bean.getLogoID());
+    // Fitxer
+    __tmp.setLogo(FitxerJPA.toJPA(__bean.getLogo()));
 		return __tmp;
 	}
 

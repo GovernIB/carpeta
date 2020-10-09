@@ -15,6 +15,7 @@ private static final long serialVersionUID = 1571810514L;
 	long nomID;
 	long urlID;
 	long entitatID;
+	long logoID;
 
 
   /** Constructor Buit */
@@ -22,19 +23,21 @@ private static final long serialVersionUID = 1571810514L;
   }
 
   /** Constructor amb tots els camps  */
-  public EnllazBean(long enllazID , int tipus , long nomID , long urlID , long entitatID) {
+  public EnllazBean(long enllazID , int tipus , long nomID , long urlID , long entitatID , long logoID) {
     this.enllazID=enllazID;
     this.tipus=tipus;
     this.nomID=nomID;
     this.urlID=urlID;
     this.entitatID=entitatID;
+    this.logoID=logoID;
 }
   /** Constructor sense valors autoincrementals */
-  public EnllazBean(int tipus , long nomID , long urlID , long entitatID) {
+  public EnllazBean(int tipus , long nomID , long urlID , long entitatID , long logoID) {
     this.tipus=tipus;
     this.nomID=nomID;
     this.urlID=urlID;
     this.entitatID=entitatID;
+    this.logoID=logoID;
 }
   public EnllazBean(Enllaz __bean) {
     this.setEnllazID(__bean.getEnllazID());
@@ -42,6 +45,9 @@ private static final long serialVersionUID = 1571810514L;
     this.setNomID(__bean.getNomID());
     this.setUrlID(__bean.getUrlID());
     this.setEntitatID(__bean.getEntitatID());
+    this.setLogoID(__bean.getLogoID());
+    // Fitxer
+    this.setLogo(FitxerBean.toBean(__bean.getLogo()));
 	}
 
 	public long getEnllazID() {
@@ -79,6 +85,13 @@ private static final long serialVersionUID = 1571810514L;
 		this.entitatID = _entitatID_;
 	};
 
+	public long getLogoID() {
+		return(logoID);
+	};
+	public void setLogoID(long _logoID_) {
+		this.logoID = _logoID_;
+	};
+
 
 
   // ======================================
@@ -91,9 +104,19 @@ private static final long serialVersionUID = 1571810514L;
     __tmp.setNomID(__bean.getNomID());
     __tmp.setUrlID(__bean.getUrlID());
     __tmp.setEntitatID(__bean.getEntitatID());
+    __tmp.setLogoID(__bean.getLogoID());
+    // Fitxer
+    __tmp.setLogo(FitxerBean.toBean(__bean.getLogo()));
 		return __tmp;
 	}
 
+  protected FitxerBean logo;
+  public FitxerBean getLogo() {
+    return logo;
+  }
+  public void setLogo(FitxerBean __field) {
+    this. logo = __field;
+  }
 
 
 }

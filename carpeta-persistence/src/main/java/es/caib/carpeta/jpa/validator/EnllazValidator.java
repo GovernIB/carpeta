@@ -54,6 +54,14 @@ public class EnllazValidator<I extends Enllaz>
     if (__isNou__) { // Creació
       // ================ CREATION
       // Fitxers 
+    if (__vr.getFieldErrorCount(LOGOID) == 0) { // FITXER
+      Object __value = __vr.getFieldValue(__target__,LOGOID);
+      if (__value == null || String.valueOf(__value).trim().length() == 0 || String.valueOf(__value).trim().equals("0") ) {
+          __vr.rejectValue(LOGOID, "genapp.validation.required",
+             new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(LOGOID)));
+      }
+    }
+
       // ====== Check Unique MULTIPLES - NOU =======
 
       // Check Unique - no PK

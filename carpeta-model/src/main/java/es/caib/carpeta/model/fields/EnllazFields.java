@@ -17,6 +17,7 @@ public interface EnllazFields extends java.io.Serializable {
 	 public static final LongField NOMID = new LongField(_TABLE_MODEL, "nomID", "nomid");
 	 public static final LongField URLID = new LongField(_TABLE_MODEL, "urlID", "urlid");
 	 public static final LongField ENTITATID = new LongField(_TABLE_MODEL, "entitatID", "entitatid");
+	 public static final LongField LOGOID = new LongField(_TABLE_MODEL, "logoID", "logoid");
 
 
   public static final Field<?>[] ALL_ENLLAZ_FIELDS = {
@@ -24,7 +25,8 @@ public interface EnllazFields extends java.io.Serializable {
     TIPUS,
     NOMID,
     URLID,
-    ENTITATID
+    ENTITATID,
+    LOGOID
   };
 
 

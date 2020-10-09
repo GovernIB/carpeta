@@ -31,6 +31,10 @@ public class EnllazQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new LongField(getQueryPath(), EnllazFields.ENTITATID);
   }
 
+  public LongField LOGOID() {
+    return new LongField(getQueryPath(), EnllazFields.LOGOID);
+  }
+
 
 
   @Override
@@ -60,6 +64,14 @@ public class EnllazQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new EntitatQueryPath(new QueryPath() {
       public String getQueryPath() {
           return EnllazQueryPath.this.getQueryPath() + "entitat" + ".";
+      }
+    });
+  }
+
+  public FitxerQueryPath LOGO() {
+    return new FitxerQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return EnllazQueryPath.this.getQueryPath() + "logo" + ".";
       }
     });
   }
