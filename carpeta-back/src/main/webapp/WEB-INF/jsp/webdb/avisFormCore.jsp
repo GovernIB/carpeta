@@ -155,9 +155,47 @@
              </label>
             </td>
             <td>
-            <form:errors path="avis.tipus" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AvisFields.TIPUS)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,AvisFields.TIPUS)? ' uneditable-input' : ''}"   path="avis.tipus"   />
-
+          <form:errors path="avis.tipus" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,AvisFields.TIPUS)}" >
+          <form:hidden path="avis.tipus"/>
+          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.avis.tipus,__theForm.listOfValuesForTipus)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AvisFields.TIPUS)}" >
+          <form:select id="avis_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-4" path="avis.tipus">
+            <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,AvisFields.PLUGINFRONTID)}">
+        <tr id="avis_pluginFrontID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[AvisFields.PLUGINFRONTID])?'avis.pluginFrontID':__theForm.labels[AvisFields.PLUGINFRONTID]}" />
+              <c:if test="${not empty __theForm.help[AvisFields.PLUGINFRONTID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[AvisFields.PLUGINFRONTID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="avis.pluginFrontID" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,AvisFields.PLUGINFRONTID)}" >
+          <form:hidden path="avis.pluginFrontID"/>
+          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.avis.pluginFrontID,__theForm.listOfPluginForPluginFrontID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AvisFields.PLUGINFRONTID)}" >
+          <form:select id="avis_pluginFrontID"  onchange="if(typeof onChangePluginFrontID == 'function') {  onChangePluginFrontID(this); };"  cssClass="form-control col-md-4" path="avis.pluginFrontID">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfPluginForPluginFrontID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
            </td>
         </tr>
         </c:if>

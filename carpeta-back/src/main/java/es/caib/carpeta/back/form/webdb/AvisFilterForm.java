@@ -153,6 +153,28 @@ public class AvisFilterForm extends CarpetaBaseFilterForm implements AvisFields 
   }
 
 
+  private java.lang.Long pluginFrontIDDesde;
+
+  public java.lang.Long getPluginFrontIDDesde() {
+    return this.pluginFrontIDDesde;
+  }
+
+  public void setPluginFrontIDDesde(java.lang.Long pluginFrontIDDesde) {
+    this.pluginFrontIDDesde = pluginFrontIDDesde;
+  }
+
+
+  private java.lang.Long pluginFrontIDFins;
+
+  public java.lang.Long getPluginFrontIDFins() {
+    return this.pluginFrontIDFins;
+  }
+
+  public void setPluginFrontIDFins(java.lang.Long pluginFrontIDFins) {
+    this.pluginFrontIDFins = pluginFrontIDFins;
+  }
+
+
   public AvisFilterForm() {
   }
   
@@ -170,8 +192,12 @@ public class AvisFilterForm extends CarpetaBaseFilterForm implements AvisFields 
     this.dataFiFins = __toClone.dataFiFins;
     this.tipusDesde = __toClone.tipusDesde;
     this.tipusFins = __toClone.tipusFins;
+    this.pluginFrontIDDesde = __toClone.pluginFrontIDDesde;
+    this.pluginFrontIDFins = __toClone.pluginFrontIDFins;
     this.mapOfTraduccioForDescripcioID = __toClone.mapOfTraduccioForDescripcioID;
     this.mapOfEntitatForEntitatID = __toClone.mapOfEntitatForEntitatID;
+    this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
+    this.mapOfPluginForPluginFrontID = __toClone.mapOfPluginForPluginFrontID;
   }
   
   /* ========= UTILS ========== */
@@ -226,6 +252,30 @@ public class AvisFilterForm extends CarpetaBaseFilterForm implements AvisFields 
 
   public void setMapOfEntitatForEntitatID(Map<String, String> mapOfEntitatForEntitatID) {
     this.mapOfEntitatForEntitatID = mapOfEntitatForEntitatID;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForTipus;
+
+  public Map<String, String> getMapOfValuesForTipus() {
+    return this.mapOfValuesForTipus;
+  }
+
+  public void setMapOfValuesForTipus(Map<String, String> mapOfValuesForTipus) {
+    this.mapOfValuesForTipus = mapOfValuesForTipus;
+  }
+
+
+
+  private Map<String, String> mapOfPluginForPluginFrontID;
+
+  public Map<String, String> getMapOfPluginForPluginFrontID() {
+    return this.mapOfPluginForPluginFrontID;
+  }
+
+  public void setMapOfPluginForPluginFrontID(Map<String, String> mapOfPluginForPluginFrontID) {
+    this.mapOfPluginForPluginFrontID = mapOfPluginForPluginFrontID;
   }
 
 

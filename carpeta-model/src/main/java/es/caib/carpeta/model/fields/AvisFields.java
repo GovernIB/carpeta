@@ -18,6 +18,7 @@ public interface AvisFields extends java.io.Serializable {
 	 public static final TimestampField DATAINICI = new TimestampField(_TABLE_MODEL, "dataInici", "datainici");
 	 public static final TimestampField DATAFI = new TimestampField(_TABLE_MODEL, "dataFi", "datafi");
 	 public static final IntegerField TIPUS = new IntegerField(_TABLE_MODEL, "tipus", "tipus");
+	 public static final LongField PLUGINFRONTID = new LongField(_TABLE_MODEL, "pluginFrontID", "pluginfrontid");
 
 
   public static final Field<?>[] ALL_AVIS_FIELDS = {
@@ -26,7 +27,8 @@ public interface AvisFields extends java.io.Serializable {
     ENTITATID,
     DATAINICI,
     DATAFI,
-    TIPUS
+    TIPUS,
+    PLUGINFRONTID
   };
 
 

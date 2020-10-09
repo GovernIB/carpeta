@@ -21,6 +21,8 @@ public class AvisForm extends CarpetaBaseForm {
       this.avis = __toClone.avis;
     this.listOfTraduccioForDescripcioID = __toClone.listOfTraduccioForDescripcioID;
     this.listOfEntitatForEntitatID = __toClone.listOfEntitatForEntitatID;
+    this.listOfValuesForTipus = __toClone.listOfValuesForTipus;
+    this.listOfPluginForPluginFrontID = __toClone.listOfPluginForPluginFrontID;
   }
   
   public AvisForm(AvisJPA avis, boolean nou) {
@@ -65,6 +67,30 @@ public class AvisForm extends CarpetaBaseForm {
 
   public void setListOfEntitatForEntitatID(List<StringKeyValue> listOfEntitatForEntitatID) {
     this.listOfEntitatForEntitatID = listOfEntitatForEntitatID;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForTipus;
+
+  public List<StringKeyValue> getListOfValuesForTipus() {
+    return this.listOfValuesForTipus;
+  }
+
+  public void setListOfValuesForTipus(List<StringKeyValue> listOfValuesForTipus) {
+    this.listOfValuesForTipus = listOfValuesForTipus;
+  }
+
+
+
+  private List<StringKeyValue> listOfPluginForPluginFrontID;
+
+  public List<StringKeyValue> getListOfPluginForPluginFrontID() {
+    return this.listOfPluginForPluginFrontID;
+  }
+
+  public void setListOfPluginForPluginFrontID(List<StringKeyValue> listOfPluginForPluginFrontID) {
+    this.listOfPluginForPluginFrontID = listOfPluginForPluginFrontID;
   }
 
 

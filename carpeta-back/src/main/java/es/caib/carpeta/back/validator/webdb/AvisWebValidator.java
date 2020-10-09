@@ -38,6 +38,9 @@ public class AvisWebValidator extends AbstractWebValidator<AvisForm, Avis>
   @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EntitatLocal.JNDI_NAME)
   protected es.caib.carpeta.ejb.EntitatLocal entitatEjb;
 
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.PluginLocal.JNDI_NAME)
+  protected es.caib.carpeta.ejb.PluginLocal pluginEjb;
+
   @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.TraduccioLocal.JNDI_NAME)
   protected es.caib.carpeta.ejb.TraduccioLocal traduccioEjb;
 
@@ -121,7 +124,7 @@ _ignoreFields.add(DESCRIPCIOID);
   }
     BeanValidatorResult<Avis> __vr = new BeanValidatorResult<Avis>();
     validator.validate(__vr, __bean,
-      isNou, avisEjb, entitatEjb, traduccioEjb);
+      isNou, avisEjb, entitatEjb, pluginEjb, traduccioEjb);
 
     if (__vr.hasErrors()) {
         List<I18NFieldError> vrErrors = __vr.getErrors();

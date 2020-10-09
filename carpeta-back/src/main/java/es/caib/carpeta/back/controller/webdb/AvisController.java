@@ -69,6 +69,10 @@ public class AvisController
   @Autowired
   protected EntitatRefList entitatRefList;
 
+  // References 
+  @Autowired
+  protected PluginRefList pluginRefList;
+
   /**
    * Llistat de totes Avis
    */
@@ -209,6 +213,26 @@ public class AvisController
       };
     }
 
+    // Field tipus
+    {
+      _listSKV = getReferenceListForTipus(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForTipus(_tmp);
+      if (filterForm.getGroupByFields().contains(TIPUS)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, TIPUS, false);
+      };
+    }
+
+    // Field pluginFrontID
+    {
+      _listSKV = getReferenceListForPluginFrontID(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfPluginForPluginFrontID(_tmp);
+      if (filterForm.getGroupByFields().contains(PLUGINFRONTID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, PLUGINFRONTID, false);
+      };
+    }
+
 
     return groupByItemsMap;
   }
@@ -226,6 +250,8 @@ public class AvisController
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
     __mapping.put(DESCRIPCIOID, filterForm.getMapOfTraduccioForDescripcioID());
     __mapping.put(ENTITATID, filterForm.getMapOfEntitatForEntitatID());
+    __mapping.put(TIPUS, filterForm.getMapOfValuesForTipus());
+    __mapping.put(PLUGINFRONTID, filterForm.getMapOfPluginForPluginFrontID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -291,6 +317,24 @@ public class AvisController
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
       avisForm.setListOfEntitatForEntitatID(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (avisForm.getListOfValuesForTipus() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForTipus(request, mav, avisForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      avisForm.setListOfValuesForTipus(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (avisForm.getListOfPluginForPluginFrontID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForPluginFrontID(request, mav, avisForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      avisForm.setListOfPluginForPluginFrontID(_listSKV);
     }
     
   }
@@ -663,6 +707,79 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return entitatRefList.getReferenceList(EntitatFields.ENTITATID, where );
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
+       ModelAndView mav, AvisForm avisForm, Where where)  throws I18NException {
+    if (avisForm.isHiddenField(TIPUS)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForTipus(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
+       ModelAndView mav, AvisFilterForm avisFilterForm,
+       List<Avis> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (avisFilterForm.isHiddenField(TIPUS)
+      && !avisFilterForm.isGroupByField(TIPUS)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForTipus(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("1" , "1"));
+    __tmp.add(new StringKeyValue("2" , "2"));
+    __tmp.add(new StringKeyValue("3" , "3"));
+    __tmp.add(new StringKeyValue("4" , "4"));
+    __tmp.add(new StringKeyValue("5" , "5"));
+    return __tmp;
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPluginFrontID(HttpServletRequest request,
+       ModelAndView mav, AvisForm avisForm, Where where)  throws I18NException {
+    if (avisForm.isHiddenField(PLUGINFRONTID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _where = null;
+    if (avisForm.isReadOnlyField(PLUGINFRONTID)) {
+      _where = PluginFields.PLUGINID.equal(avisForm.getAvis().getPluginFrontID());
+    }
+    return getReferenceListForPluginFrontID(request, mav, Where.AND(where, _where));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPluginFrontID(HttpServletRequest request,
+       ModelAndView mav, AvisFilterForm avisFilterForm,
+       List<Avis> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (avisFilterForm.isHiddenField(PLUGINFRONTID)
+      && !avisFilterForm.isGroupByField(PLUGINFRONTID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    if (!_groupByItemsMap.containsKey(PLUGINFRONTID)) {
+      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
+      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
+      for (Avis _item : list) {
+        if(_item.getPluginFrontID() == null) { continue; };
+        _pkList.add(_item.getPluginFrontID());
+        }
+        _w = PluginFields.PLUGINID.in(_pkList);
+      }
+    return getReferenceListForPluginFrontID(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPluginFrontID(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    return pluginRefList.getReferenceList(PluginFields.PLUGINID, where );
   }
 
 
