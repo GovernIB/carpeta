@@ -39,7 +39,7 @@
                 <!--  XYZ ZZZ Falta muntar URL Correcte -->
                 <form id="fechaBusqueda" action="${form_action}" method="post">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="fechaInicio" placeholder="dd/mm/yyyy">${carpeta_fecha_inicio}</label>
                                 <div class="input-group">
@@ -50,13 +50,23 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label for="fechaFin" placeholder="dd/mm/yyyy">${carpeta_fecha_fin}</label>
                                 <div class="input-group">
                                     <input id="fechaFin" name="fechaFin" class="form-control form-control-sm" required="required" type="text" value="${form_dataFi?string('dd/MM/yyyy')}" maxlength="10">
                                     <span class="input-group-text"><span class="oi oi-calendar"></span></span>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="estado">${tramite_estado}</label>
+                                <select name="tramiteFinalizado" id="tramiteFinalizado" class="form-control form-control-sm">
+                                    <option value="A" <#if form_estat == "A">selected="selected"</#if>>${tramite_todos}</option>
+                                    <option value="S" <#if form_estat == "S">selected="selected"</#if>>${tramite_finalizado}</option>
+                                    <option value="N" <#if form_estat == "N">selected="selected"</#if>>${tramite_nofinalizado}</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -80,6 +90,8 @@
                         <th>${tramite_tramite}</th>
                         <th>${tramite_fecha_inicio}</th>
                         <th>${tramite_acceso}</th>
+                        <th>${tramite_estado}</th>
+                        <th>${tramite_detalle}</th>
                         <#if development>
                             <th>${tramite_versionsistra}</th>
                         </#if>
@@ -88,15 +100,19 @@
                     <tbody>
                     <#setting date_format="MM/dd/yyyy hh">
                     <#list tramits as tramite >
-                    <script type="text/javascript">
-                        var url = "${web?replace('{0}', tramite.idSesionTramitacion)}";
-                    </script>
-                    <tr class="clickable-row" data-target="_blank" onClick="window.open(url)">
+                    <tr class="clickable-row" data-target="_blank" onClick="window.open('${tramite.url}')">
                         <td>${tramite.descripcionTramite}</td>
                         <td>
                             ${tramite.fechaInicio?string("dd-MM-yyyy HH:mm")}
                         </td>
                         <td>${tramite.fechaUltimoAcceso?string("dd-MM-yyyy HH:mm")}</td>
+                        <#if tramite.tipo?has_content >
+                            <td>${tramite_finalizado}: <span style="text-transform:lowercase">${tramite.tipo}</span></td>
+                            <td align="center"><span class="oi oi-eye" title="${tramite_ver}"></span></td>
+                        <#else>
+                            <td>${tramite_nofinalizado}</td>
+                            <td align="center"><span class="oi oi-external-link" title="${tramite_continuar}"></span></td>
+                        </#if>
                         <#if development>
                         <td>${tramite.versionSistra}</td>
                         </#if>

@@ -3,18 +3,28 @@ package org.fundaciobit.pluginsib.carpetafront.sistra;
 import java.util.Date;
 
 import es.caib.sistramit.rest.api.externa.v1.RTramitePersistencia;
+import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementoExpediente;
+import es.caib.zonaper.ws.v2.model.elementoexpediente.TipoElementoExpediente;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitePersistente;
 
 public class TramitePersistenteGenerico {
 	
+	/* Atributs compartits */
+	private String descripcionTramite;
+	private Date fechaInicio;
+	private int versionSistra;
+	
+	/* Atributs inacabats */
 	private String idSesionTramitacion;
 	private String idioma;
 	private String idTramite;
 	private int versionTramite;
-	private String descripcionTramite;
-	private Date fechaInicio;
 	private Date fechaUltimoAcceso;
-	private int versionSistra;
+	
+	/* Atributs acabats */
+	private TipoElementoExpediente tipo;
+	private boolean pendiente;
+	private String url;
 	
 	public String getIdSesionTramitacion() {
 		return idSesionTramitacion;
@@ -80,6 +90,31 @@ public class TramitePersistenteGenerico {
 		this.versionSistra = versionSistra;
 	}
 	
+	
+	public TipoElementoExpediente getTipo() {
+		return this.tipo;
+	}
+	
+	public void setTipo(TipoElementoExpediente tipo) {
+		this.tipo = tipo;
+	}
+	
+	public String getUrl () {
+		return this.url;
+	}
+	
+	public void setUrl ( String url) {
+		this.url = url;
+	}
+	
+	public Boolean isPendiente() {
+		return this.pendiente;
+	}
+	
+	public void setPendiente(Boolean pendiente) {
+		this.pendiente = pendiente;
+	}
+	
 	public TramitePersistenteGenerico(RTramitePersistencia tramite, int versionSistra) {
 		this.idSesionTramitacion = tramite.getIdSesionTramitacion();
 		this.idioma = tramite.getIdioma();
@@ -89,6 +124,9 @@ public class TramitePersistenteGenerico {
 		this.fechaInicio = tramite.getFechaInicio();
 		this.fechaUltimoAcceso = tramite.getFechaUltimoAcceso();
 		this.versionSistra = versionSistra;
+		this.pendiente = true;
+		this.url = "";
+		this.tipo = null;
 	}
 	
 	public TramitePersistenteGenerico(TramitePersistente tramite, int versionSistra) {
@@ -100,6 +138,23 @@ public class TramitePersistenteGenerico {
 		this.fechaInicio = tramite.getFechaInicio().toGregorianCalendar().getTime();
 		this.fechaUltimoAcceso = tramite.getFechaUltimoAcceso().toGregorianCalendar().getTime();
 		this.versionSistra = versionSistra;
+		this.pendiente = true;
+		this.url = "";
+		this.tipo = null;
+	}
+	
+	public TramitePersistenteGenerico( ElementoExpediente tramite,  int versionSistra ) {
+		this.idSesionTramitacion = "";
+		this.idioma = "";
+		this.idTramite = tramite.getUrl().substring(tramite.getUrl().indexOf("tramite=")+8);
+		this.versionTramite = 0;
+		this.descripcionTramite = tramite.getDescripcion();
+		this.fechaInicio = tramite.getFecha().toGregorianCalendar().getTime();
+		this.fechaUltimoAcceso = tramite.getFecha().toGregorianCalendar().getTime();
+		this.versionSistra = 1;
+		this.pendiente = tramite.isPendiente();
+		this.url = tramite.getUrl();
+		this.tipo = tramite.getTipo();
 	}
 	
 }
