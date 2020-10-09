@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -16,6 +17,7 @@ import es.caib.carpeta.back.controller.webdb.EnllazController;
 import es.caib.carpeta.back.form.webdb.EnllazFilterForm;
 import es.caib.carpeta.back.form.webdb.EnllazForm;
 import es.caib.carpeta.back.security.LoginInfo;
+import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.jpa.EnllazJPA;
 import es.caib.carpeta.model.fields.EnllazFields;
 
@@ -55,9 +57,6 @@ public class EnllazAdminEntitatController extends EnllazController {
         EnllazFilterForm enllazFilterForm = super.getEnllazFilterForm(pagina, mav, request);
 
         if (enllazFilterForm.isNou()) {
-
-            enllazFilterForm.setAddButtonVisible(false);
-
             enllazFilterForm.addHiddenField(ENTITATID);
         }
 
@@ -82,10 +81,14 @@ public class EnllazAdminEntitatController extends EnllazController {
     public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request, ModelAndView mav, Where where)
             throws I18NException {
         List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-        __tmp.add(new StringKeyValue("1", "NACIONAL"));
-        /// I18NUtils.tradueix("nacional");
-        __tmp.add(new StringKeyValue("2", "LOCAL"));
-        __tmp.add(new StringKeyValue("3", "MUNDIAL"));
+        
+
+        
+        for (int i = 0; i < Constants.TIPUS_ENLLAZ_ALL.length; i++) {
+            int v = Constants.TIPUS_ENLLAZ_ALL[i];
+            __tmp.add(new StringKeyValue("" + v, I18NUtils.tradueix("enllaz.tipus." + v)));
+        }
+
         return __tmp;
     }
 

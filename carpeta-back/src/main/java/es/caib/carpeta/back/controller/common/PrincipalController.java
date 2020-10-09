@@ -1,5 +1,7 @@
 package es.caib.carpeta.back.controller.common;
 
+import es.caib.carpeta.back.security.LoginInfo;
+import es.caib.carpeta.utils.Configuracio;
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.springframework.stereotype.Controller;
@@ -10,9 +12,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-
-import es.caib.carpeta.back.security.LoginInfo;
-import es.caib.carpeta.utils.Configuracio;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

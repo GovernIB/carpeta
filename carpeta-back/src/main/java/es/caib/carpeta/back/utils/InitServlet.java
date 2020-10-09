@@ -1,23 +1,21 @@
 package es.caib.carpeta.back.utils;
 
-import javax.annotation.security.RunAs;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-
+import es.caib.carpeta.hibernate.HibernateFileUtil;
+import es.caib.carpeta.logic.utils.I18NTranslatorEjb;
+import es.caib.carpeta.utils.Configuracio;
+import es.caib.carpeta.utils.Constants;
+import es.caib.carpeta.utils.Version;
 import org.apache.log4j.Logger;
-
 import org.fundaciobit.genapp.common.crypt.AlgorithmEncrypter;
 import org.fundaciobit.genapp.common.crypt.FileIDEncrypter;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
-import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.logic.utils.I18NTranslatorEjb;
-import es.caib.carpeta.utils.Configuracio;
-import es.caib.carpeta.utils.Version;
-import es.caib.carpeta.hibernate.HibernateFileUtil;
+import javax.annotation.security.RunAs;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 
 
 /**
@@ -38,7 +36,7 @@ public class InitServlet extends HttpServlet {
     // XYZ ZZZZ ZZZ Moure a Logic
 	 
     try {      
-      //FileSystemManager.setFilesPath(Configuracio.getFilesDirectory());
+      FileSystemManager.setFilesPath(Configuracio.getFilesDirectory());
       log.info("FileSystemManager path = " + FileSystemManager.getFilesPath().getAbsolutePath());
     } catch (Throwable th) {
       log.error("Error inicialitzant el sistema de sistema de fitxers: " + th.getMessage(), th);

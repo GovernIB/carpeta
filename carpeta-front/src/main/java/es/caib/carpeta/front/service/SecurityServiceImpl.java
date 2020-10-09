@@ -1,12 +1,12 @@
 package es.caib.carpeta.front.service;
 
+import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.UsuarioClave;
 import es.caib.loginib.rest.api.v1.RDatosAutenticacion;
 import es.caib.loginib.rest.api.v1.RLoginParams;
 import es.caib.loginib.rest.api.v1.RLogoutParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -20,18 +20,18 @@ public class SecurityServiceImpl implements SecurityService {
 
     private static final Logger log = LoggerFactory.getLogger(SecurityServiceImpl.class);
 
-    @Value("${es.caib.carpeta.loginib.metodos_auth}") private String METODES_AUTENTICACIO;
-    @Value("${es.caib.carpeta.loginib.entidad}") private String CODI_ENTITAT;
-    @Value("${es.caib.carpeta.loginib.aplicacion}") private String APLICACIO_CODI;
-    @Value("${es.caib.carpeta.loginib.url_callback_login}") private String URL_CALLBACK_LOGIN;
-    @Value("${es.caib.carpeta.loginib.url_callback_error}") private String URL_CALLBACK_ERROR;
-    @Value("${es.caib.carpeta.loginib.url_callback_logout}") private String URL_CALLBACK_LOGOUT;
-    @Value("${es.caib.carpeta.loginib.idioma}") private String IDIOMA;
-    @Value("${es.caib.carpeta.loginib.nivel_qaa}") private String NIVELL_QAA;
-    @Value("${es.caib.carpeta.loginib.user}") private String LOGINIB_USER;
-    @Value("${es.caib.carpeta.loginib.pass}") private String LOGINIB_PASS;
-    @Value("${es.caib.carpeta.loginib.url}") private String LOGINIB_URL;
-    @Value("${es.caib.carpeta.development}") private String development;
+
+    private String METODES_AUTENTICACIO = Configuracio.getLoginIBMethodAuth();
+    private String CODI_ENTITAT = Configuracio.getLoginIBEntidad();
+    private String APLICACIO_CODI = Configuracio.getLoginIBAplicacion();
+    private String URL_CALLBACK_LOGIN = Configuracio.getLoginIBUrlCallbackLogin();
+    private String URL_CALLBACK_ERROR = Configuracio.getLoginIBUrlCallbackError();
+    private String URL_CALLBACK_LOGOUT = Configuracio.getLoginIBUrlCallbackLogout();
+    private String IDIOMA = Configuracio.getLoginIBIdioma();
+    private String NIVELL_QAA = Configuracio.getLoginIBNivelQAA();
+    private String LOGINIB_USER = Configuracio.getLoginIBUser();
+    private String LOGINIB_PASS = Configuracio.getLoginIBPassword();
+    private String LOGINIB_URL = Configuracio.getLoginIBUrl();
 
 
     public String iniciarSesionAutentificacion() throws Exception {

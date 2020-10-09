@@ -1,21 +1,17 @@
 package es.caib.carpeta.logic;
 
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Properties;
-
+import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.jpa.PluginJPA;
 import es.caib.carpeta.model.entity.Plugin;
-
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.pluginsib.core.IPlugin;
 import org.fundaciobit.pluginsib.core.utils.PluginsManager;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
+
+import java.io.StringReader;
+import java.util.*;
+
 
 /**
  *
@@ -75,7 +71,7 @@ public abstract class AbstractPluginLogicaEJB<I extends IPlugin> extends PluginL
                 try {
                     
                     Map<String, Object> map = new HashMap<String, Object>();
-                    map.put("SP", System.getProperties());
+                    map.put("SP", Configuracio.getSystemAndFileProperties());
                     
                     String plantilla = plugin.getPropietats();
                     String generat = TemplateEngine.processExpressionLanguageSquareBrackets(plantilla, map, new Locale("ca"));
