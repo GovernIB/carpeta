@@ -184,6 +184,8 @@
 	"breadcrumbDetallRegistre": "Detalle de registro",
 	"breadcrumbNotificacions": "Mis notificaciones",
 	"breadcrumbMapaWeb": "Mapa Web",
+	"breadcrumbPlugin": "Plugin de Entidad",
+	
 	
 	"mapaWebTitol": "MAPA WEB",
 	"mapaWebDescripcio": "El mapa web te permite obtener una visión general de las secciones de Carpeta Ciutadana",
@@ -193,6 +195,7 @@
 	"mapaWebRegistres": "REGISTROS DEL USUARIO",
 	"mapaWebDades": "DATOS PERSONALES",
 	"mapaWebPlugins": "PLUGINS DE LA ENTIDAD",
+	
 	
 	"iniciPrivatTitol": "INICIO PRIVADO"
 

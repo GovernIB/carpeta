@@ -15,7 +15,8 @@ import Notificacions from './Notificacions';
 import MapaWeb from './MapaWeb';
 import DadesPersonals from './DadesPersonals';
 import Breadcrumb from './Breadcrumb';
-import Plugin from './Plugin';
+import PluginHtml from './PluginHtml';
+import PluginReact from './PluginReact';
 import * as breadcrumbPaths from './utils/breadcrumbPaths';
 import * as breadcrumbPathsAut from './utils/breadcrumbPathsAut';
 
@@ -114,7 +115,12 @@ newPeuReact  = function createReactCompPeu(nomComponent, param) {
     ReactDOM.render(<Peu autenticat={param}/>, document.getElementById(nomComponent));
 };
 
-newPluginReact  = function createReactCompPlugins(nomComponent, param, pluginID) {
-    ReactDOM.render(<Plugin autenticat={param} pluginID={pluginID}/>, document.getElementById(nomComponent));
+newPluginHtml  = function createReactCompPluginHtml(nomComponent, param, pluginID) {
+    ReactDOM.render(<PluginHtml autenticat={param} pluginID={pluginID}/>, document.getElementById(nomComponent));
+	ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.Plugin} autenticat={param}/>, document.getElementById("mollaPa"));
+};
+
+newPluginReact  = function createReactCompPluginReact(nomComponent, param, pluginID) {
+	ReactDOM.render(<PluginReact autenticat={param} pluginID={pluginID}/>, document.getElementById(nomComponent));
 	ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.Plugin} autenticat={param}/>, document.getElementById("mollaPa"));
 };

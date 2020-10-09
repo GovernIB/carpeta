@@ -9,6 +9,7 @@ var newDadesPersonalsReact;
 var newMenuDesllisantReact;
 var newBreadcrumbReact;
 var newPeuReact;
+var newPluginHtml;
 var newPluginReact;
 
 
@@ -56,6 +57,10 @@ function newPeu(compoWeb, nom) {
 	setTimeout(newPeuReact.bind(null,compoWeb,nom) , 1);
 }
 
-function newPlugin(compoWeb, nom, pluginID) {
+function newPluginHtml(compoWeb, nom, pluginID) {
+	setTimeout(newPluginHtml.bind(null,compoWeb,nom,pluginID) , 1);
+}
+
+function newPluginReact(compoWeb, nom, pluginID) {
 	setTimeout(newPluginReact.bind(null,compoWeb,nom,pluginID) , 1);
 }

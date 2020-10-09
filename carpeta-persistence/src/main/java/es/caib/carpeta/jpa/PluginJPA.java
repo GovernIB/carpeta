@@ -158,6 +158,19 @@ private static final long serialVersionUID = 190357384L;
     return __result;
   }
 
+// EXP  Field:pluginfrontid | Table: car_avis | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "plugin")
+	private Set<AvisJPA> aviss = new HashSet<AvisJPA>(0);
+	public  Set<AvisJPA> getAviss() {
+    return this.aviss;
+  }
+
+	public void setAviss(Set<AvisJPA> aviss) {
+	  this.aviss = aviss;
+	}
+
+
 // EXP  Field:pluginid | Table: car_log | Type: 0  
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "plugin")
@@ -283,6 +296,10 @@ private static final long serialVersionUID = 190357384L;
     if(!"PluginEntitatJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.pluginEntitats) || org.hibernate.Hibernate.isInitialized(__jpa.getPluginEntitats())) ) {
       __tmp.setPluginEntitats(PluginEntitatJPA.copyJPA(__jpa.getPluginEntitats(), __alreadyCopied,"PluginJPA"));
+    }
+    if(!"AvisJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.aviss) || org.hibernate.Hibernate.isInitialized(__jpa.getAviss())) ) {
+      __tmp.setAviss(AvisJPA.copyJPA(__jpa.getAviss(), __alreadyCopied,"PluginJPA"));
     }
     // Copia de beans complexes (IMP)
     if(!"TraduccioJPA".equals(origenJPA) && 

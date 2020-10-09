@@ -163,12 +163,14 @@
 	"detallregistreSolicita": "Sol·licita",
 	"detallregistreOrganisme": "Organisme",
 
+
 	"notificacionsTitol": "LES MEVES NOTIFICACIONS",
 	"notificacionsDescripcio": "Des d'aquí podeu consultar les vostres notificacions i altres comunicacions que us adreci l'Administració.",
 	"notificacionsNotificacions": "Notificacions",
 	"notificacionsNotdescripcio": "Des d'aquí podeu accedir a les notificacions pendents i realitzar la compareixença electrònica, a les notificacions realitzades i a les comunicacions.",
 	"notificacionsAltres": "Altres comunicacions",
 	"notificacionsAltdescripcio": "Des d'aquí podeu accedir a les comunicacions corresponents als tràmits enviats mitjançant l'assistent de tramitació del Govern de les Illes Balears.",
+
 
 	"paginaerrorTitol": "ERROR",
 	"paginaerrorDescripcio": "Ha intentat accedir a una plana que no existeix.",
@@ -182,6 +184,8 @@
 	"breadcrumbDetallRegistre": "Detall de registre",
 	"breadcrumbNotificacions": "Les meves notificacions",
 	"breadcrumbMapaWeb": "Mapa Web",
+	"breadcrumbPlugin": "Plugin d'Entitat",
+	
 	
 	"mapaWebTitol": "MAPA WEB",
 	"mapaWebDescripcio": "El mapa web et permet obtenir una visió general de les seccions de Carpeta Ciutadana",
@@ -191,6 +195,7 @@
 	"mapaWebRegistres": "REGISTRES DE L'USUARI",
 	"mapaWebDades": "DADES PERSONALS",
 	"mapaWebPlugins": "PLUGINS DE L'ENTITAT",
+	
 	
 	"iniciPrivatTitol": "INICI PRIVAT"
 	

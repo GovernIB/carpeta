@@ -31,7 +31,7 @@ public class SecurityServiceImpl implements SecurityService {
     @Value("${es.caib.carpeta.loginib.user}") private String LOGINIB_USER;
     @Value("${es.caib.carpeta.loginib.pass}") private String LOGINIB_PASS;
     @Value("${es.caib.carpeta.loginib.url}") private String LOGINIB_URL;
-    @Value("${es.caib.carpeta.development}") private Boolean development;
+    @Value("${es.caib.carpeta.development}") private String development;
 
 
     public String iniciarSesionAutentificacion() throws Exception {

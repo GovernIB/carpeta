@@ -22,27 +22,40 @@ function MenuDesllisant ({ t , autenticat}) {
 	const plugins = JSON.parse(sessionStorage.getItem('plugins'));
 
 	var accessibilitat;
-	var plug;
+	var plugHtml;
+	var plugReact;
 	var sortir;
 	if (autenticat === '1'){
 		accessibilitat = <li><a href="javascript:newAccessibilitat('contingut', '1');" className="imc-marc-ico imc--accessibilitat" id="imc-marc-accessibilitat" title={ t('menuAccessibilitat') }><span>{ t('menuAccessibilitat') }</span></a></li>;
 		sortir = <li><a href="sortir" className="imc-marc-ico imc--sortir" id="imc-marc-sortir" title={ t('menuSortir') }><span>{ t('menuSortir') }</span></a></li>;
 		
 		if (i18n.language === 'ca') {
-			plug = plugins.map(s => (<li><a href={"javascript:newPlugin('contingut', '1', '" + s.pluginID + "');"} className="imc-marc-ico imc--tramits" id="imc-marc-tramits" title={s.nomCa}><span>{s.nomCa}</span></a></li>));
+			plugHtml = plugins.filter(s => s.reactComponent === 'false').map(s => (
+				<li><a href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"} title={s.nomCa}><img src={"http://localhost:8080/carpetafront/pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img><span>{s.nomCa}</span></a></li>
+			));
+			plugReact = plugins.filter(s => s.reactComponent === 'true').map(s => (
+				<li><a href={"javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"} title={s.nomCa}><img src={"http://localhost:8080/carpetafront/pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img><span>{s.nomCa}</span></a></li>
+			));
 		}
 
 		if (i18n.language === 'es') {
-		  plug = plugins.map(s => (<li><a href={"javascript:newPlugin('contingut', '1', '" + s.pluginID + "');"} className="imc-marc-ico imc--tramits" id="imc-marc-tramits" title={s.nomEs}><span>{s.nomEs}</span></a></li>));
+			plugHtml = plugins.filter(s => s.reactComponent === 'false').map(s => (
+				<li><a href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"} title={s.nomEs}><img src={"http://localhost:8080/carpetafront/pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img><span>{s.nomEs}</span></a></li>
+			));
+			plugReact = plugins.filter(s => s.reactComponent === 'true').map(s => (
+				<li><a href={"javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"} title={s.nomEs}><img src={"http://localhost:8080/carpetafront/pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img><span>{s.nomEs}</span></a></li>
+			));
 		}
 		
 	} 
 	if(autenticat === '0'){
 		accessibilitat = <li><a href="javascript:newAccessibilitat('contingut', '0');" className="imc-marc-ico imc--accessibilitat" id="imc-marc-accessibilitat" title={ t('menuAccessibilitat') }><span>{ t('menuAccessibilitat') }</span></a></li>;
-		plug = '';
+		plugHtml = '';
+		plugReact = '';
 		sortir = '';
 	}
 
+	var nomPlug = "PluginProva";
 
     return (
       <div className="imc-marc" id="imc-marc" tabIndex="-1" aria-hidden="true">
@@ -61,7 +74,8 @@ function MenuDesllisant ({ t , autenticat}) {
               {boto_ca} \ {boto_es}
             </li>
             {accessibilitat}
-			{plug}
+			{plugHtml}
+			{plugReact}
 			{sortir}
           </ul>
         </div>

@@ -49,6 +49,10 @@ private static final long serialVersionUID = 1036906268L;
 	@Column(name="tipus",nullable = false,length = 10)
 	int tipus;
 
+	@Index(name="car_avis_pluginfrontid_fk_i")
+	@Column(name="pluginfrontid",length = 19)
+	java.lang.Long pluginFrontID;
+
 
 
   /** Constructor Buit */
@@ -56,21 +60,23 @@ private static final long serialVersionUID = 1036906268L;
   }
 
   /** Constructor amb tots els camps  */
-  public AvisJPA(long avisID , long descripcioID , long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus) {
+  public AvisJPA(long avisID , long descripcioID , long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus , java.lang.Long pluginFrontID) {
     this.avisID=avisID;
     this.descripcioID=descripcioID;
     this.entitatID=entitatID;
     this.dataInici=dataInici;
     this.dataFi=dataFi;
     this.tipus=tipus;
+    this.pluginFrontID=pluginFrontID;
 }
   /** Constructor sense valors autoincrementals */
-  public AvisJPA(long descripcioID , long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus) {
+  public AvisJPA(long descripcioID , long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus , java.lang.Long pluginFrontID) {
     this.descripcioID=descripcioID;
     this.entitatID=entitatID;
     this.dataInici=dataInici;
     this.dataFi=dataFi;
     this.tipus=tipus;
+    this.pluginFrontID=pluginFrontID;
 }
   /** Constructor dels valors Not Null */
   public AvisJPA(long avisID , long descripcioID , long entitatID , int tipus) {
@@ -86,6 +92,7 @@ private static final long serialVersionUID = 1036906268L;
     this.setDataInici(__bean.getDataInici());
     this.setDataFi(__bean.getDataFi());
     this.setTipus(__bean.getTipus());
+    this.setPluginFrontID(__bean.getPluginFrontID());
 	}
 
 	public long getAvisID() {
@@ -128,6 +135,13 @@ private static final long serialVersionUID = 1036906268L;
 	};
 	public void setTipus(int _tipus_) {
 		this.tipus = _tipus_;
+	};
+
+	public java.lang.Long getPluginFrontID() {
+		return(pluginFrontID);
+	};
+	public void setPluginFrontID(java.lang.Long _pluginFrontID_) {
+		this.pluginFrontID = _pluginFrontID_;
 	};
 
 
@@ -185,6 +199,21 @@ private static final long serialVersionUID = 1036906268L;
     this.entitat = entitat;
   }
 
+// IMP Field:pluginid | Table: car_plugin | Type: 1  
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@ForeignKey(name="car_avis_plugin_pfront_fk")
+	@JoinColumn(name = "pluginfrontid", referencedColumnName ="pluginID", nullable = true, insertable=false, updatable=false)
+	private PluginJPA plugin;
+
+	public PluginJPA getPlugin() {
+    return this.plugin;
+  }
+
+	public  void setPlugin(PluginJPA plugin) {
+    this.plugin = plugin;
+  }
+
 
  // ---------------  STATIC METHODS ------------------
   public static AvisJPA toJPA(Avis __bean) {
@@ -196,6 +225,7 @@ private static final long serialVersionUID = 1036906268L;
     __tmp.setDataInici(__bean.getDataInici());
     __tmp.setDataFi(__bean.getDataFi());
     __tmp.setTipus(__bean.getTipus());
+    __tmp.setPluginFrontID(__bean.getPluginFrontID());
 		return __tmp;
 	}
 
@@ -234,6 +264,10 @@ private static final long serialVersionUID = 1036906268L;
     if(!"EntitatJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat()) ) ) {
       __tmp.setEntitat(EntitatJPA.copyJPA(__jpa.getEntitat(), __alreadyCopied,"AvisJPA"));
+    }
+    if(!"PluginJPA".equals(origenJPA) && 
+       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.plugin) || org.hibernate.Hibernate.isInitialized(__jpa.getPlugin()) ) ) {
+      __tmp.setPlugin(PluginJPA.copyJPA(__jpa.getPlugin(), __alreadyCopied,"AvisJPA"));
     }
 
     return __tmp;

@@ -17,14 +17,14 @@ public class PluginInfo {
     String descripcioEs;
     String descripcioEn;
 
-    boolean reactComponent;
+    String reactComponent;
 
     public PluginInfo() {
         super();
     }
 
     public PluginInfo(String pluginID, String nomCa, String nomEs, String nomEn, String descripcioCa,
-            String descripcioEs, String descripcioEn, boolean reactComponent) {
+            String descripcioEs, String descripcioEn, String reactComponent) {
         super();
         this.nomCa = nomCa;
         this.nomEs = nomEs;
@@ -92,11 +92,11 @@ public class PluginInfo {
         this.descripcioEn = descripcioEn;
     }
 
-    public boolean isReactComponent() {
+    public String isReactComponent() {
         return reactComponent;
     }
 
-    public void setReactComponent(boolean reactComponent) {
+    public void setReactComponent(String reactComponent) {
         this.reactComponent = reactComponent;
     }
 

@@ -16,6 +16,7 @@ private static final long serialVersionUID = 2079106191L;
 	java.sql.Timestamp dataInici;
 	java.sql.Timestamp dataFi;
 	int tipus;
+	java.lang.Long pluginFrontID;
 
 
   /** Constructor Buit */
@@ -23,21 +24,23 @@ private static final long serialVersionUID = 2079106191L;
   }
 
   /** Constructor amb tots els camps  */
-  public AvisBean(long avisID , long descripcioID , long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus) {
+  public AvisBean(long avisID , long descripcioID , long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus , java.lang.Long pluginFrontID) {
     this.avisID=avisID;
     this.descripcioID=descripcioID;
     this.entitatID=entitatID;
     this.dataInici=dataInici;
     this.dataFi=dataFi;
     this.tipus=tipus;
+    this.pluginFrontID=pluginFrontID;
 }
   /** Constructor sense valors autoincrementals */
-  public AvisBean(long descripcioID , long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus) {
+  public AvisBean(long descripcioID , long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus , java.lang.Long pluginFrontID) {
     this.descripcioID=descripcioID;
     this.entitatID=entitatID;
     this.dataInici=dataInici;
     this.dataFi=dataFi;
     this.tipus=tipus;
+    this.pluginFrontID=pluginFrontID;
 }
   /** Constructor dels valors Not Null */
   public AvisBean(long avisID , long descripcioID , long entitatID , int tipus) {
@@ -53,6 +56,7 @@ private static final long serialVersionUID = 2079106191L;
     this.setDataInici(__bean.getDataInici());
     this.setDataFi(__bean.getDataFi());
     this.setTipus(__bean.getTipus());
+    this.setPluginFrontID(__bean.getPluginFrontID());
 	}
 
 	public long getAvisID() {
@@ -97,6 +101,13 @@ private static final long serialVersionUID = 2079106191L;
 		this.tipus = _tipus_;
 	};
 
+	public java.lang.Long getPluginFrontID() {
+		return(pluginFrontID);
+	};
+	public void setPluginFrontID(java.lang.Long _pluginFrontID_) {
+		this.pluginFrontID = _pluginFrontID_;
+	};
+
 
 
   // ======================================
@@ -110,6 +121,7 @@ private static final long serialVersionUID = 2079106191L;
     __tmp.setDataInici(__bean.getDataInici());
     __tmp.setDataFi(__bean.getDataFi());
     __tmp.setTipus(__bean.getTipus());
+    __tmp.setPluginFrontID(__bean.getPluginFrontID());
 		return __tmp;
 	}
 

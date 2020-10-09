@@ -53,7 +53,18 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AvisFields.TIPUS)}">
           <td>
-          ${avis.tipus}
+          <c:set var="tmp">${avis.tipus}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForTipus[tmp]}
+          </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AvisFields.PLUGINFRONTID)}">
+          <td>
+          <c:set var="tmp">${avis.pluginFrontID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfPluginForPluginFrontID[tmp]}
+          </c:if>
           </td>
         </c:if>
 

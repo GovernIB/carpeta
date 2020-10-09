@@ -35,7 +35,8 @@
 	<!--script type="text/javascript" src="src/assets/js/carpeta.js"></script-->
 	<!-- Scripts per Components React -->
 	<script src="${pageContext.request.contextPath}/src/utils/carpeta_react.js" type="text/javascript"></script>
-	
+	<script src="${pageContext.request.contextPath}/src/utils/pluginConnect.js" type="text/javascript"></script>
+
 	<!-- ESTILS -->
 	<link href="${pageContext.request.contextPath}/src/assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/src/assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
@@ -141,6 +142,14 @@
 	<script src="${pageContext.request.contextPath}/src/assets/js/menu-lateral.js" type="text/javascript"></script>
 	<!-- acceptar cookies -->
 	<script src="${pageContext.request.contextPath}/src/assets/js/aceptar_cookies.js" type="text/javascript"></script>
+    <!-- Plugins -->
+<%--  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>--%>
+<%--  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>--%>
+<%--  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>--%>
+<%--  <script src="${pageContext.request.contextPath}/src/PluginProva.js" type="text/javascript"></script>--%>
+<%--  <script type="text/babel">--%>
+<%--	  ReactDOM.render(<PluginProva />, document.getElementById('contingut'));--%>
+<%--  </script>--%>
 
   </body>
 </html>

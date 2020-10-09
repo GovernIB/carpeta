@@ -35,6 +35,10 @@ public class AvisQueryPath extends org.fundaciobit.genapp.common.query.QueryPath
     return new IntegerField(getQueryPath(), AvisFields.TIPUS);
   }
 
+  public LongField PLUGINFRONTID() {
+    return new LongField(getQueryPath(), AvisFields.PLUGINFRONTID);
+  }
+
 
 
   @Override
@@ -56,6 +60,14 @@ public class AvisQueryPath extends org.fundaciobit.genapp.common.query.QueryPath
     return new EntitatQueryPath(new QueryPath() {
       public String getQueryPath() {
           return AvisQueryPath.this.getQueryPath() + "entitat" + ".";
+      }
+    });
+  }
+
+  public PluginQueryPath PLUGIN() {
+    return new PluginQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return AvisQueryPath.this.getQueryPath() + "plugin" + ".";
       }
     });
   }
