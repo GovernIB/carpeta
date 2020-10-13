@@ -1,5 +1,7 @@
 
 
+-- 06-10-2020 Afegir gestio d'Enllaços a Back #138
+
 ALTER TABLE car_avis
   ADD COLUMN pluginfrontid bigint;
 
@@ -8,11 +10,6 @@ ALTER TABLE car_avis
 
  -- Es recomanable tenir un index de la clau forania.
  create index car_avis_pluginfrontid_fk_i on car_avis (pluginfrontid);
-
-
-
-
-
 
 ALTER TABLE car_enllaz
   ADD COLUMN logoid bigint NOT NULL;
