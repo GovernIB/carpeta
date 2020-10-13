@@ -59,6 +59,14 @@
           </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AvisFields.GRAVETAT)}">
+          <td>
+          <c:set var="tmp">${avis.gravetat}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForGravetat[tmp]}
+          </c:if>
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AvisFields.PLUGINFRONTID)}">
           <td>
           <c:set var="tmp">${avis.pluginFrontID}</c:set>

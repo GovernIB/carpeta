@@ -35,6 +35,10 @@ public class AvisQueryPath extends org.fundaciobit.genapp.common.query.QueryPath
     return new IntegerField(getQueryPath(), AvisFields.TIPUS);
   }
 
+  public IntegerField GRAVETAT() {
+    return new IntegerField(getQueryPath(), AvisFields.GRAVETAT);
+  }
+
   public LongField PLUGINFRONTID() {
     return new LongField(getQueryPath(), AvisFields.PLUGINFRONTID);
   }

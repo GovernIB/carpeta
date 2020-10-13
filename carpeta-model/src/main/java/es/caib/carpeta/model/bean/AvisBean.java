@@ -16,6 +16,7 @@ private static final long serialVersionUID = 2079106191L;
 	java.sql.Timestamp dataInici;
 	java.sql.Timestamp dataFi;
 	int tipus;
+	int gravetat;
 	java.lang.Long pluginFrontID;
 
 
@@ -24,30 +25,33 @@ private static final long serialVersionUID = 2079106191L;
   }
 
   /** Constructor amb tots els camps  */
-  public AvisBean(long avisID , long descripcioID , long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus , java.lang.Long pluginFrontID) {
+  public AvisBean(long avisID , long descripcioID , long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus , int gravetat , java.lang.Long pluginFrontID) {
     this.avisID=avisID;
     this.descripcioID=descripcioID;
     this.entitatID=entitatID;
     this.dataInici=dataInici;
     this.dataFi=dataFi;
     this.tipus=tipus;
+    this.gravetat=gravetat;
     this.pluginFrontID=pluginFrontID;
 }
   /** Constructor sense valors autoincrementals */
-  public AvisBean(long descripcioID , long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus , java.lang.Long pluginFrontID) {
+  public AvisBean(long descripcioID , long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus , int gravetat , java.lang.Long pluginFrontID) {
     this.descripcioID=descripcioID;
     this.entitatID=entitatID;
     this.dataInici=dataInici;
     this.dataFi=dataFi;
     this.tipus=tipus;
+    this.gravetat=gravetat;
     this.pluginFrontID=pluginFrontID;
 }
   /** Constructor dels valors Not Null */
-  public AvisBean(long avisID , long descripcioID , long entitatID , int tipus) {
+  public AvisBean(long avisID , long descripcioID , long entitatID , int tipus , int gravetat) {
     this.avisID=avisID;
     this.descripcioID=descripcioID;
     this.entitatID=entitatID;
     this.tipus=tipus;
+    this.gravetat=gravetat;
 }
   public AvisBean(Avis __bean) {
     this.setAvisID(__bean.getAvisID());
@@ -56,6 +60,7 @@ private static final long serialVersionUID = 2079106191L;
     this.setDataInici(__bean.getDataInici());
     this.setDataFi(__bean.getDataFi());
     this.setTipus(__bean.getTipus());
+    this.setGravetat(__bean.getGravetat());
     this.setPluginFrontID(__bean.getPluginFrontID());
 	}
 
@@ -101,6 +106,13 @@ private static final long serialVersionUID = 2079106191L;
 		this.tipus = _tipus_;
 	};
 
+	public int getGravetat() {
+		return(gravetat);
+	};
+	public void setGravetat(int _gravetat_) {
+		this.gravetat = _gravetat_;
+	};
+
 	public java.lang.Long getPluginFrontID() {
 		return(pluginFrontID);
 	};
@@ -121,6 +133,7 @@ private static final long serialVersionUID = 2079106191L;
     __tmp.setDataInici(__bean.getDataInici());
     __tmp.setDataFi(__bean.getDataFi());
     __tmp.setTipus(__bean.getTipus());
+    __tmp.setGravetat(__bean.getGravetat());
     __tmp.setPluginFrontID(__bean.getPluginFrontID());
 		return __tmp;
 	}

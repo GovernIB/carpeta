@@ -20,6 +20,9 @@ public interface Avis extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public int getTipus();
 	public void setTipus(int _tipus_);
 
+	public int getGravetat();
+	public void setGravetat(int _gravetat_);
+
 	public java.lang.Long getPluginFrontID();
 	public void setPluginFrontID(java.lang.Long _pluginFrontID_);
 

@@ -48,6 +48,10 @@ public class AvisValidator<I extends Avis>
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TIPUS)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,GRAVETAT, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(GRAVETAT)));
+
     // Check size
     if (__isNou__) { // Creació
       // ================ CREATION

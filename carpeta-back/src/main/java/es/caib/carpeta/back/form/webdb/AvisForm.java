@@ -22,6 +22,7 @@ public class AvisForm extends CarpetaBaseForm {
     this.listOfTraduccioForDescripcioID = __toClone.listOfTraduccioForDescripcioID;
     this.listOfEntitatForEntitatID = __toClone.listOfEntitatForEntitatID;
     this.listOfValuesForTipus = __toClone.listOfValuesForTipus;
+    this.listOfValuesForGravetat = __toClone.listOfValuesForGravetat;
     this.listOfPluginForPluginFrontID = __toClone.listOfPluginForPluginFrontID;
   }
   
@@ -79,6 +80,18 @@ public class AvisForm extends CarpetaBaseForm {
 
   public void setListOfValuesForTipus(List<StringKeyValue> listOfValuesForTipus) {
     this.listOfValuesForTipus = listOfValuesForTipus;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForGravetat;
+
+  public List<StringKeyValue> getListOfValuesForGravetat() {
+    return this.listOfValuesForGravetat;
+  }
+
+  public void setListOfValuesForGravetat(List<StringKeyValue> listOfValuesForGravetat) {
+    this.listOfValuesForGravetat = listOfValuesForGravetat;
   }
 
 

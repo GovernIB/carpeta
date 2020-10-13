@@ -37,6 +37,31 @@ public interface Constants {
     /*   TIPUS DE PLUGINS     */
     public static final int PLUGIN_TIPUS_FRONT = 1;
     
+    /* Tipus Avis */
+    public static final int TIPUS_AVIS_FRONT_ABANS_LOGIN = 1;
+    public static final int TIPUS_AVIS_FRONT_DESPRES_LOGIN = 2;
+    public static final int TIPUS_AVIS_FRONT_PLUGIN = 3;
+    public static final int TIPUS_AVIS_BACK_ENTITAT = 4;
+    public static final int TIPUS_AVIS_BACK = 5;
+    
+    public static final int[] TIPUS_AVIS_ALL = {
+            TIPUS_AVIS_FRONT_ABANS_LOGIN,
+            TIPUS_AVIS_FRONT_DESPRES_LOGIN,
+            TIPUS_AVIS_FRONT_PLUGIN,
+            TIPUS_AVIS_BACK_ENTITAT,
+            TIPUS_AVIS_BACK
+    };
+    
+    /* Gravetat Avis */
+    public static final int GRAVETAT_AVIS_INFO = 1;
+    public static final int GRAVETAT_AVIS_WARNING = 2;
+    public static final int GRAVETAT_AVIS_ERROR = 3;
+    
+    public static final int[] GRAVETAT_AVIS_ALL = {
+            GRAVETAT_AVIS_INFO,
+            GRAVETAT_AVIS_WARNING,
+            GRAVETAT_AVIS_ERROR
+    };
     
     /* Tipus Enllaç */
     public static final int TIPUS_ENLLAZ_FRONT_XARXA_SOCIAL = 1;

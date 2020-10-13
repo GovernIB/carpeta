@@ -49,6 +49,9 @@ private static final long serialVersionUID = 1036906268L;
 	@Column(name="tipus",nullable = false,length = 10)
 	int tipus;
 
+	@Column(name="gravetat",nullable = false,length = 10)
+	int gravetat;
+
 	@Index(name="car_avis_pluginfrontid_fk_i")
 	@Column(name="pluginfrontid",length = 19)
 	java.lang.Long pluginFrontID;
@@ -60,30 +63,33 @@ private static final long serialVersionUID = 1036906268L;
   }
 
   /** Constructor amb tots els camps  */
-  public AvisJPA(long avisID , long descripcioID , long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus , java.lang.Long pluginFrontID) {
+  public AvisJPA(long avisID , long descripcioID , long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus , int gravetat , java.lang.Long pluginFrontID) {
     this.avisID=avisID;
     this.descripcioID=descripcioID;
     this.entitatID=entitatID;
     this.dataInici=dataInici;
     this.dataFi=dataFi;
     this.tipus=tipus;
+    this.gravetat=gravetat;
     this.pluginFrontID=pluginFrontID;
 }
   /** Constructor sense valors autoincrementals */
-  public AvisJPA(long descripcioID , long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus , java.lang.Long pluginFrontID) {
+  public AvisJPA(long descripcioID , long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus , int gravetat , java.lang.Long pluginFrontID) {
     this.descripcioID=descripcioID;
     this.entitatID=entitatID;
     this.dataInici=dataInici;
     this.dataFi=dataFi;
     this.tipus=tipus;
+    this.gravetat=gravetat;
     this.pluginFrontID=pluginFrontID;
 }
   /** Constructor dels valors Not Null */
-  public AvisJPA(long avisID , long descripcioID , long entitatID , int tipus) {
+  public AvisJPA(long avisID , long descripcioID , long entitatID , int tipus , int gravetat) {
     this.avisID=avisID;
     this.descripcioID=descripcioID;
     this.entitatID=entitatID;
     this.tipus=tipus;
+    this.gravetat=gravetat;
 }
   public AvisJPA(Avis __bean) {
     this.setAvisID(__bean.getAvisID());
@@ -92,6 +98,7 @@ private static final long serialVersionUID = 1036906268L;
     this.setDataInici(__bean.getDataInici());
     this.setDataFi(__bean.getDataFi());
     this.setTipus(__bean.getTipus());
+    this.setGravetat(__bean.getGravetat());
     this.setPluginFrontID(__bean.getPluginFrontID());
 	}
 
@@ -135,6 +142,13 @@ private static final long serialVersionUID = 1036906268L;
 	};
 	public void setTipus(int _tipus_) {
 		this.tipus = _tipus_;
+	};
+
+	public int getGravetat() {
+		return(gravetat);
+	};
+	public void setGravetat(int _gravetat_) {
+		this.gravetat = _gravetat_;
 	};
 
 	public java.lang.Long getPluginFrontID() {
@@ -225,6 +239,7 @@ private static final long serialVersionUID = 1036906268L;
     __tmp.setDataInici(__bean.getDataInici());
     __tmp.setDataFi(__bean.getDataFi());
     __tmp.setTipus(__bean.getTipus());
+    __tmp.setGravetat(__bean.getGravetat());
     __tmp.setPluginFrontID(__bean.getPluginFrontID());
 		return __tmp;
 	}

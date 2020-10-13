@@ -32,6 +32,14 @@
             code="enllaz.enllaz.plural" /></span>
 </a>
 
+<hr style="margin-top: 6px; margin-bottom: 6px;" />
+
+<a class="dropdown-item"
+    href="<c:url value="/adminentitat/avis/list"/>"> <span
+    style="${(fn:contains(url, '/adminentitat/avis'))? " font-weight:bold;" : ""}"><spring:message
+            code="avis.avis.plural" /></span>
+</a>
+
 <%--
 <hr style="margin-top: 6px; margin-bottom: 6px;" />
 

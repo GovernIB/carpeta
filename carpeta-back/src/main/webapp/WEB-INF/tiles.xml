@@ -105,7 +105,7 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariList.jsp" />
     </definition>
     
-        <definition name="propietatGlobalFormAdminEntitat" extends="adminentitat">
+    <definition name="propietatGlobalFormAdminEntitat" extends="adminentitat">
         <put-attribute name="titol" value="propietatGlobal.propietatGlobal" />
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/propietatGlobalForm.jsp" />
     </definition>
@@ -146,6 +146,15 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/enllazList.jsp" />
     </definition>
     
+    <definition name="avisFormAdminEntitat" extends="adminentitat">
+        <put-attribute name="titol" value="avis.avis" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/avisForm.jsp" />
+    </definition>
+    
+    <definition name="avisListAdminEntitat" extends="adminentitat">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/avisList.jsp" />
+    </definition>
+    
     
 
     <!--  ===========  SUPER ADMIN  ================== -->
@@ -181,6 +190,15 @@
     
     <definition name="propietatGlobalListSuperAdmin" extends="superadmin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/propietatGlobalList.jsp" />
+    </definition>
+    
+    <definition name="avisFormSuperAdmin" extends="superadmin">
+        <put-attribute name="titol" value="avis.avis" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/avisForm.jsp" />
+    </definition>
+    
+    <definition name="avisListSuperAdmin" extends="superadmin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/avisList.jsp" />
     </definition>
     
     

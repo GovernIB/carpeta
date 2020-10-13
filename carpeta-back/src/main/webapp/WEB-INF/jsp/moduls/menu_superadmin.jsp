@@ -39,6 +39,15 @@
     style="${(fn:contains(url, '/superadmin/usuarientitat'))? " font-weight:bold;" : ""}"><spring:message
             code="usuariEntitat.usuariEntitat.plural" /></span>
 </a>
+
+<hr style="margin-top: 6px; margin-bottom: 6px;" />
+
+<a class="dropdown-item"
+    href="<c:url value="/superadmin/avis/list"/>"> <span
+    style="${(fn:contains(url, '/superadmin/avis'))? " font-weight:bold;" : ""}"><spring:message
+            code="avis.avis.plural" /></span>
+</a>
+
 <%--
 <hr style="margin-top: 6px; margin-bottom: 6px;" />
 

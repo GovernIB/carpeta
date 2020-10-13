@@ -171,6 +171,33 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,AvisFields.GRAVETAT)}">
+        <tr id="avis_gravetat_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[AvisFields.GRAVETAT])?'avis.gravetat':__theForm.labels[AvisFields.GRAVETAT]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[AvisFields.GRAVETAT]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[AvisFields.GRAVETAT]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="avis.gravetat" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,AvisFields.GRAVETAT)}" >
+          <form:hidden path="avis.gravetat"/>
+          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.avis.gravetat,__theForm.listOfValuesForGravetat)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AvisFields.GRAVETAT)}" >
+          <form:select id="avis_gravetat"  onchange="if(typeof onChangeGravetat == 'function') {  onChangeGravetat(this); };"  cssClass="form-control col-md-4" path="avis.gravetat">
+            <c:forEach items="${__theForm.listOfValuesForGravetat}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,AvisFields.PLUGINFRONTID)}">
         <tr id="avis_pluginFrontID_rowid">
           <td>

@@ -223,6 +223,16 @@ public class AvisController
       };
     }
 
+    // Field gravetat
+    {
+      _listSKV = getReferenceListForGravetat(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForGravetat(_tmp);
+      if (filterForm.getGroupByFields().contains(GRAVETAT)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, GRAVETAT, false);
+      };
+    }
+
     // Field pluginFrontID
     {
       _listSKV = getReferenceListForPluginFrontID(request, mav, filterForm, list, groupByItemsMap, null);
@@ -251,6 +261,7 @@ public class AvisController
     __mapping.put(DESCRIPCIOID, filterForm.getMapOfTraduccioForDescripcioID());
     __mapping.put(ENTITATID, filterForm.getMapOfEntitatForEntitatID());
     __mapping.put(TIPUS, filterForm.getMapOfValuesForTipus());
+    __mapping.put(GRAVETAT, filterForm.getMapOfValuesForGravetat());
     __mapping.put(PLUGINFRONTID, filterForm.getMapOfPluginForPluginFrontID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
@@ -326,6 +337,15 @@ public class AvisController
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
       avisForm.setListOfValuesForTipus(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (avisForm.getListOfValuesForGravetat() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForGravetat(request, mav, avisForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      avisForm.setListOfValuesForGravetat(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (avisForm.getListOfPluginForPluginFrontID() == null) {
@@ -739,6 +759,37 @@ public java.lang.Long stringToPK(String value) {
     __tmp.add(new StringKeyValue("3" , "3"));
     __tmp.add(new StringKeyValue("4" , "4"));
     __tmp.add(new StringKeyValue("5" , "5"));
+    return __tmp;
+  }
+
+
+  public List<StringKeyValue> getReferenceListForGravetat(HttpServletRequest request,
+       ModelAndView mav, AvisForm avisForm, Where where)  throws I18NException {
+    if (avisForm.isHiddenField(GRAVETAT)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForGravetat(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForGravetat(HttpServletRequest request,
+       ModelAndView mav, AvisFilterForm avisFilterForm,
+       List<Avis> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (avisFilterForm.isHiddenField(GRAVETAT)
+      && !avisFilterForm.isGroupByField(GRAVETAT)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForGravetat(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForGravetat(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("1" , "1"));
+    __tmp.add(new StringKeyValue("2" , "2"));
+    __tmp.add(new StringKeyValue("3" , "3"));
     return __tmp;
   }
 

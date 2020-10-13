@@ -153,6 +153,28 @@ public class AvisFilterForm extends CarpetaBaseFilterForm implements AvisFields 
   }
 
 
+  private java.lang.Integer gravetatDesde;
+
+  public java.lang.Integer getGravetatDesde() {
+    return this.gravetatDesde;
+  }
+
+  public void setGravetatDesde(java.lang.Integer gravetatDesde) {
+    this.gravetatDesde = gravetatDesde;
+  }
+
+
+  private java.lang.Integer gravetatFins;
+
+  public java.lang.Integer getGravetatFins() {
+    return this.gravetatFins;
+  }
+
+  public void setGravetatFins(java.lang.Integer gravetatFins) {
+    this.gravetatFins = gravetatFins;
+  }
+
+
   private java.lang.Long pluginFrontIDDesde;
 
   public java.lang.Long getPluginFrontIDDesde() {
@@ -192,11 +214,14 @@ public class AvisFilterForm extends CarpetaBaseFilterForm implements AvisFields 
     this.dataFiFins = __toClone.dataFiFins;
     this.tipusDesde = __toClone.tipusDesde;
     this.tipusFins = __toClone.tipusFins;
+    this.gravetatDesde = __toClone.gravetatDesde;
+    this.gravetatFins = __toClone.gravetatFins;
     this.pluginFrontIDDesde = __toClone.pluginFrontIDDesde;
     this.pluginFrontIDFins = __toClone.pluginFrontIDFins;
     this.mapOfTraduccioForDescripcioID = __toClone.mapOfTraduccioForDescripcioID;
     this.mapOfEntitatForEntitatID = __toClone.mapOfEntitatForEntitatID;
     this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
+    this.mapOfValuesForGravetat = __toClone.mapOfValuesForGravetat;
     this.mapOfPluginForPluginFrontID = __toClone.mapOfPluginForPluginFrontID;
   }
   
@@ -264,6 +289,18 @@ public class AvisFilterForm extends CarpetaBaseFilterForm implements AvisFields 
 
   public void setMapOfValuesForTipus(Map<String, String> mapOfValuesForTipus) {
     this.mapOfValuesForTipus = mapOfValuesForTipus;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForGravetat;
+
+  public Map<String, String> getMapOfValuesForGravetat() {
+    return this.mapOfValuesForGravetat;
+  }
+
+  public void setMapOfValuesForGravetat(Map<String, String> mapOfValuesForGravetat) {
+    this.mapOfValuesForGravetat = mapOfValuesForGravetat;
   }
 
 
