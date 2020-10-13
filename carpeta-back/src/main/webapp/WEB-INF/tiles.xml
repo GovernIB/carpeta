@@ -145,6 +145,16 @@
     <definition name="enllazListAdminEntitat" extends="adminentitat">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/enllazList.jsp" />
     </definition>
+
+
+    <definition name="logCarpetaFormAdminEntitat" extends="adminentitat">
+        <put-attribute name="titol" value="logCarpeta.logCarpeta" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/logCarpetaForm.jsp" />
+    </definition>
+
+    <definition name="logCarpetaListAdminEntitat" extends="adminentitat">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/logCarpetaList.jsp" />
+    </definition>
     
     
 
