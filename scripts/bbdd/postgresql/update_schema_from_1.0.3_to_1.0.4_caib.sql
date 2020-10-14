@@ -1,5 +1,5 @@
 ﻿
-
+-- 06-10-2020 Afegir gestio d'Enllaços a Back #138
 
 -- YouTube
 

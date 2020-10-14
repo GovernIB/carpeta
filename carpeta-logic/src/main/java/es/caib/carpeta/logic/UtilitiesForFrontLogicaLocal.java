@@ -1,6 +1,8 @@
 package es.caib.carpeta.logic;
 
 import es.caib.carpeta.logic.utils.PluginInfo;
+import es.caib.carpeta.model.entity.Enllaz;
+import es.caib.carpeta.model.entity.Fitxer;
 import es.caib.carpeta.model.entity.Idioma;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import org.fundaciobit.genapp.common.StringKeyValue;
@@ -27,5 +29,9 @@ public interface UtilitiesForFrontLogicaLocal {
     public List<PluginInfo> getFrontPlugins(String codiEntitat, String language) throws I18NException;
 
     public FileInfo getIcona(Long pluginID, String language) throws I18NException;
+    
+    public List<Enllaz> getSocialNetworks(String codiEntitat, String language) throws I18NException;
+    
+    public Fitxer getFileInfo(Long fitxerID) throws I18NException;
 
 }
