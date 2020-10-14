@@ -62,10 +62,20 @@
        foreign key (entitatid) 
        references car_entitat;
 
+    alter table car_avis 
+       add constraint car_avis_plugin_pfront_fk 
+       foreign key (pluginfrontid) 
+       references car_plugin;
+
     alter table car_enllaz 
        add constraint car_enllaz_entitat_ent_fk 
        foreign key (entitatid) 
        references car_entitat;
+
+    alter table car_enllaz 
+       add constraint car_enllaz_fitxer_logo_fk 
+       foreign key (logoid) 
+       references car_fitxer;
 
     alter table car_enllaz 
        add constraint car_enllaz_traduccio_nomid_fk 
@@ -83,19 +93,34 @@
        references car_fitxer;
 
     alter table car_entitat 
-       add constraint car_entitat_fitxer_logom_fk 
-       foreign key (logomenuid) 
+       add constraint car_entitat_fitxer_icon_fk 
+       foreign key (iconid) 
        references car_fitxer;
 
     alter table car_entitat 
-       add constraint car_entitat_fitxer_logop_fk 
-       foreign key (logopeuid) 
+       add constraint car_entitat_fitxer_lcb_fk 
+       foreign key (logocapbackid) 
+       references car_fitxer;
+
+    alter table car_entitat 
+       add constraint car_entitat_fitxer_llf_fk 
+       foreign key (logolateralfrontid) 
+       references car_fitxer;
+
+    alter table car_entitat 
+       add constraint car_entitat_fitxer_lpb_fk 
+       foreign key (logopeubackid) 
        references car_fitxer;
 
     alter table car_entitat 
        add constraint car_entitat_traduccio_nom_fk 
        foreign key (nomid) 
        references car_traduccio;
+
+    alter table car_entitat 
+       add constraint car_entitat_plugin_login_fk 
+       foreign key (pluginloginid) 
+       references car_plugin;
 
     alter table car_estadistica 
        add constraint car_estadis_acces_ac_fk 
@@ -174,14 +199,13 @@
     alter table car_pluginentitat 
        add constraint car_plugent_plug_ent_uk unique (pluginid, entitatid);
 
+    alter table car_usuari 
+       add constraint UK_tdrt8u1p7bryex2oy8ogbpufq unique (nif);
+
+    alter table car_usuari 
+       add constraint UK_cirfvhc2yliu7g83kp3uo6mw0 unique (username);
+
     alter table car_usuarientitat 
        add constraint car_usuent_usu_ent_uk unique (usuariid, entitatid);
-       
-    ALTER TABLE car_usuari
-       ADD CONSTRAINT car_usuari_username_uk UNIQUE (username);
-
-    ALTER TABLE car_usuari
-       ADD CONSTRAINT car_usuari_nif_uk UNIQUE (nif);
-       
  -- FINAL UNIQUEs
 

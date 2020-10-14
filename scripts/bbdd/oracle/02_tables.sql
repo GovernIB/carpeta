@@ -28,12 +28,15 @@
         datainici timestamp,
         descripcioid number(19,0) not null,
         entitatid number(19,0) not null,
+        gravetat number(10,0) not null,
+        pluginfrontid number(19,0),
         tipus number(10,0) not null
     );
 
     create table car_enllaz (
        enllazid number(19,0) not null,
         entitatid number(19,0) not null,
+        logoid number(19,0) not null,
         nomid number(19,0) not null,
         tipus number(10,0) not null,
         urlid number(19,0) not null
@@ -47,12 +50,19 @@
         colormenu varchar2(100 char) not null,
         commit varchar2(255 char),
         context varchar2(255 char),
+        entitatdescfront varchar2(4000 char) not null,
         fitxercss number(19,0),
-        logomenuid number(19,0),
-        logopeuid number(19,0) not null,
+        iconid number(19,0) not null,
+        logocapbackid number(19,0) not null,
+        logolateralfrontid number(19,0) not null,
+        logopeubackid number(19,0) not null,
         nomid number(19,0) not null,
-        textepeu varchar2(4000 char),
-        versio varchar2(50 char) not null
+        pluginloginid number(19,0),
+        suportemail varchar2(255 char),
+        suporttelefon varchar2(255 char),
+        suportweb varchar2(255 char),
+        versio varchar2(50 char) not null,
+        webentitat varchar2(255 char) not null
     );
 
     create table car_estadistica (
@@ -146,6 +156,7 @@
         entitatid number(19,0) not null,
         usuariid number(19,0) not null
     );
+
 
 
 

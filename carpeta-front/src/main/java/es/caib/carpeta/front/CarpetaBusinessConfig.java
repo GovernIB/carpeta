@@ -3,6 +3,11 @@ package es.caib.carpeta.front;
 
 import org.springframework.context.annotation.*;
 
+/**
+ * 
+ * XYZ ZZZ  Esborrar ?????
+ *
+ */
 
 @Configuration
 @ComponentScan
