@@ -48,9 +48,9 @@
 		  <br/>
 		  <center>
 		    <sec:authorize access="hasRole('ROLE_ADMIN')">
-		    <c:if test="${not empty loginInfo.entitat.logoPeu}">
+		    <c:if test="${not empty loginInfo.entitat.logoPeuBack}">
 		      <%-- <a href="http://otaeweb.ibit.org/" style="padding-top: 10px" target="_blank"> --%> 
-                  <img class="logoAplicacio" src="<c:url value="${car:fileUrl(loginInfo.entitat.logoPeu)}"/>" alt="${loginInfo.entitat.logoPeu.nom}"  title="${loginInfo.entitat.codi}" />
+                  <img class="logoAplicacio" src="<c:url value="${car:fileUrl(loginInfo.entitat.logoPeuBack)}"/>" alt="${loginInfo.entitat.logoPeuBack.nom}"  title="${loginInfo.entitat.codi}" />
               <%-- </a> --%><br />
                 </c:if>
 			</sec:authorize>
