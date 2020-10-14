@@ -15,14 +15,21 @@ private static final long serialVersionUID = -2014602951L;
 	java.lang.String codi;
 	java.lang.String codiDir3;
 	boolean activa;
-	java.lang.Long logoMenuID;
 	java.lang.String colorMenu;
-	java.lang.String textePeu;
-	long logoPeuID;
+	long logoCapBackID;
+	long logoPeuBackID;
+	long logoLateralFrontID;
 	java.lang.String versio;
-	java.lang.String commit;
+	long iconID;
+	java.lang.String webEntitat;
+	java.lang.String entitatDescFront;
+	java.lang.String suportWeb;
+	java.lang.String suportTelefon;
+	java.lang.String suportEmail;
+	java.lang.Long pluginLoginID;
 	java.lang.Long fitxerCssID;
 	java.lang.String context;
+	java.lang.String commit;
 
 
   /** Constructor Buit */
@@ -30,46 +37,65 @@ private static final long serialVersionUID = -2014602951L;
   }
 
   /** Constructor amb tots els camps  */
-  public EntitatBean(long entitatID , long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.Long logoMenuID , java.lang.String colorMenu , java.lang.String textePeu , long logoPeuID , java.lang.String versio , java.lang.String commit , java.lang.Long fitxerCssID , java.lang.String context) {
+  public EntitatBean(long entitatID , long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.Long pluginLoginID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit) {
     this.entitatID=entitatID;
     this.nomID=nomID;
     this.codi=codi;
     this.codiDir3=codiDir3;
     this.activa=activa;
-    this.logoMenuID=logoMenuID;
     this.colorMenu=colorMenu;
-    this.textePeu=textePeu;
-    this.logoPeuID=logoPeuID;
+    this.logoCapBackID=logoCapBackID;
+    this.logoPeuBackID=logoPeuBackID;
+    this.logoLateralFrontID=logoLateralFrontID;
     this.versio=versio;
-    this.commit=commit;
+    this.iconID=iconID;
+    this.webEntitat=webEntitat;
+    this.entitatDescFront=entitatDescFront;
+    this.suportWeb=suportWeb;
+    this.suportTelefon=suportTelefon;
+    this.suportEmail=suportEmail;
+    this.pluginLoginID=pluginLoginID;
     this.fitxerCssID=fitxerCssID;
     this.context=context;
+    this.commit=commit;
 }
   /** Constructor sense valors autoincrementals */
-  public EntitatBean(long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.Long logoMenuID , java.lang.String colorMenu , java.lang.String textePeu , long logoPeuID , java.lang.String versio , java.lang.String commit , java.lang.Long fitxerCssID , java.lang.String context) {
+  public EntitatBean(long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.Long pluginLoginID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit) {
     this.nomID=nomID;
     this.codi=codi;
     this.codiDir3=codiDir3;
     this.activa=activa;
-    this.logoMenuID=logoMenuID;
     this.colorMenu=colorMenu;
-    this.textePeu=textePeu;
-    this.logoPeuID=logoPeuID;
+    this.logoCapBackID=logoCapBackID;
+    this.logoPeuBackID=logoPeuBackID;
+    this.logoLateralFrontID=logoLateralFrontID;
     this.versio=versio;
-    this.commit=commit;
+    this.iconID=iconID;
+    this.webEntitat=webEntitat;
+    this.entitatDescFront=entitatDescFront;
+    this.suportWeb=suportWeb;
+    this.suportTelefon=suportTelefon;
+    this.suportEmail=suportEmail;
+    this.pluginLoginID=pluginLoginID;
     this.fitxerCssID=fitxerCssID;
     this.context=context;
+    this.commit=commit;
 }
   /** Constructor dels valors Not Null */
-  public EntitatBean(long entitatID , long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoPeuID , java.lang.String versio) {
+  public EntitatBean(long entitatID , long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront) {
     this.entitatID=entitatID;
     this.nomID=nomID;
     this.codi=codi;
     this.codiDir3=codiDir3;
     this.activa=activa;
     this.colorMenu=colorMenu;
-    this.logoPeuID=logoPeuID;
+    this.logoCapBackID=logoCapBackID;
+    this.logoPeuBackID=logoPeuBackID;
+    this.logoLateralFrontID=logoLateralFrontID;
     this.versio=versio;
+    this.iconID=iconID;
+    this.webEntitat=webEntitat;
+    this.entitatDescFront=entitatDescFront;
 }
   public EntitatBean(Entitat __bean) {
     this.setEntitatID(__bean.getEntitatID());
@@ -77,18 +103,29 @@ private static final long serialVersionUID = -2014602951L;
     this.setCodi(__bean.getCodi());
     this.setCodiDir3(__bean.getCodiDir3());
     this.setActiva(__bean.isActiva());
-    this.setLogoMenuID(__bean.getLogoMenuID());
     this.setColorMenu(__bean.getColorMenu());
-    this.setTextePeu(__bean.getTextePeu());
-    this.setLogoPeuID(__bean.getLogoPeuID());
+    this.setLogoCapBackID(__bean.getLogoCapBackID());
+    this.setLogoPeuBackID(__bean.getLogoPeuBackID());
+    this.setLogoLateralFrontID(__bean.getLogoLateralFrontID());
     this.setVersio(__bean.getVersio());
-    this.setCommit(__bean.getCommit());
+    this.setIconID(__bean.getIconID());
+    this.setWebEntitat(__bean.getWebEntitat());
+    this.setEntitatDescFront(__bean.getEntitatDescFront());
+    this.setSuportWeb(__bean.getSuportWeb());
+    this.setSuportTelefon(__bean.getSuportTelefon());
+    this.setSuportEmail(__bean.getSuportEmail());
+    this.setPluginLoginID(__bean.getPluginLoginID());
     this.setFitxerCssID(__bean.getFitxerCssID());
     this.setContext(__bean.getContext());
+    this.setCommit(__bean.getCommit());
     // Fitxer
-    this.setLogoMenu(FitxerBean.toBean(__bean.getLogoMenu()));
+    this.setLogoCapBack(FitxerBean.toBean(__bean.getLogoCapBack()));
     // Fitxer
-    this.setLogoPeu(FitxerBean.toBean(__bean.getLogoPeu()));
+    this.setLogoPeuBack(FitxerBean.toBean(__bean.getLogoPeuBack()));
+    // Fitxer
+    this.setLogoLateralFront(FitxerBean.toBean(__bean.getLogoLateralFront()));
+    // Fitxer
+    this.setIcon(FitxerBean.toBean(__bean.getIcon()));
     // Fitxer
     this.setFitxerCss(FitxerBean.toBean(__bean.getFitxerCss()));
 	}
@@ -128,13 +165,6 @@ private static final long serialVersionUID = -2014602951L;
 		this.activa = _activa_;
 	};
 
-	public java.lang.Long getLogoMenuID() {
-		return(logoMenuID);
-	};
-	public void setLogoMenuID(java.lang.Long _logoMenuID_) {
-		this.logoMenuID = _logoMenuID_;
-	};
-
 	public java.lang.String getColorMenu() {
 		return(colorMenu);
 	};
@@ -142,18 +172,25 @@ private static final long serialVersionUID = -2014602951L;
 		this.colorMenu = _colorMenu_;
 	};
 
-	public java.lang.String getTextePeu() {
-		return(textePeu);
+	public long getLogoCapBackID() {
+		return(logoCapBackID);
 	};
-	public void setTextePeu(java.lang.String _textePeu_) {
-		this.textePeu = _textePeu_;
+	public void setLogoCapBackID(long _logoCapBackID_) {
+		this.logoCapBackID = _logoCapBackID_;
 	};
 
-	public long getLogoPeuID() {
-		return(logoPeuID);
+	public long getLogoPeuBackID() {
+		return(logoPeuBackID);
 	};
-	public void setLogoPeuID(long _logoPeuID_) {
-		this.logoPeuID = _logoPeuID_;
+	public void setLogoPeuBackID(long _logoPeuBackID_) {
+		this.logoPeuBackID = _logoPeuBackID_;
+	};
+
+	public long getLogoLateralFrontID() {
+		return(logoLateralFrontID);
+	};
+	public void setLogoLateralFrontID(long _logoLateralFrontID_) {
+		this.logoLateralFrontID = _logoLateralFrontID_;
 	};
 
 	public java.lang.String getVersio() {
@@ -163,11 +200,53 @@ private static final long serialVersionUID = -2014602951L;
 		this.versio = _versio_;
 	};
 
-	public java.lang.String getCommit() {
-		return(commit);
+	public long getIconID() {
+		return(iconID);
 	};
-	public void setCommit(java.lang.String _commit_) {
-		this.commit = _commit_;
+	public void setIconID(long _iconID_) {
+		this.iconID = _iconID_;
+	};
+
+	public java.lang.String getWebEntitat() {
+		return(webEntitat);
+	};
+	public void setWebEntitat(java.lang.String _webEntitat_) {
+		this.webEntitat = _webEntitat_;
+	};
+
+	public java.lang.String getEntitatDescFront() {
+		return(entitatDescFront);
+	};
+	public void setEntitatDescFront(java.lang.String _entitatDescFront_) {
+		this.entitatDescFront = _entitatDescFront_;
+	};
+
+	public java.lang.String getSuportWeb() {
+		return(suportWeb);
+	};
+	public void setSuportWeb(java.lang.String _suportWeb_) {
+		this.suportWeb = _suportWeb_;
+	};
+
+	public java.lang.String getSuportTelefon() {
+		return(suportTelefon);
+	};
+	public void setSuportTelefon(java.lang.String _suportTelefon_) {
+		this.suportTelefon = _suportTelefon_;
+	};
+
+	public java.lang.String getSuportEmail() {
+		return(suportEmail);
+	};
+	public void setSuportEmail(java.lang.String _suportEmail_) {
+		this.suportEmail = _suportEmail_;
+	};
+
+	public java.lang.Long getPluginLoginID() {
+		return(pluginLoginID);
+	};
+	public void setPluginLoginID(java.lang.Long _pluginLoginID_) {
+		this.pluginLoginID = _pluginLoginID_;
 	};
 
 	public java.lang.Long getFitxerCssID() {
@@ -184,6 +263,13 @@ private static final long serialVersionUID = -2014602951L;
 		this.context = _context_;
 	};
 
+	public java.lang.String getCommit() {
+		return(commit);
+	};
+	public void setCommit(java.lang.String _commit_) {
+		this.commit = _commit_;
+	};
+
 
 
   // ======================================
@@ -196,36 +282,61 @@ private static final long serialVersionUID = -2014602951L;
     __tmp.setCodi(__bean.getCodi());
     __tmp.setCodiDir3(__bean.getCodiDir3());
     __tmp.setActiva(__bean.isActiva());
-    __tmp.setLogoMenuID(__bean.getLogoMenuID());
     __tmp.setColorMenu(__bean.getColorMenu());
-    __tmp.setTextePeu(__bean.getTextePeu());
-    __tmp.setLogoPeuID(__bean.getLogoPeuID());
+    __tmp.setLogoCapBackID(__bean.getLogoCapBackID());
+    __tmp.setLogoPeuBackID(__bean.getLogoPeuBackID());
+    __tmp.setLogoLateralFrontID(__bean.getLogoLateralFrontID());
     __tmp.setVersio(__bean.getVersio());
-    __tmp.setCommit(__bean.getCommit());
+    __tmp.setIconID(__bean.getIconID());
+    __tmp.setWebEntitat(__bean.getWebEntitat());
+    __tmp.setEntitatDescFront(__bean.getEntitatDescFront());
+    __tmp.setSuportWeb(__bean.getSuportWeb());
+    __tmp.setSuportTelefon(__bean.getSuportTelefon());
+    __tmp.setSuportEmail(__bean.getSuportEmail());
+    __tmp.setPluginLoginID(__bean.getPluginLoginID());
     __tmp.setFitxerCssID(__bean.getFitxerCssID());
     __tmp.setContext(__bean.getContext());
+    __tmp.setCommit(__bean.getCommit());
     // Fitxer
-    __tmp.setLogoMenu(FitxerBean.toBean(__bean.getLogoMenu()));
+    __tmp.setLogoCapBack(FitxerBean.toBean(__bean.getLogoCapBack()));
     // Fitxer
-    __tmp.setLogoPeu(FitxerBean.toBean(__bean.getLogoPeu()));
+    __tmp.setLogoPeuBack(FitxerBean.toBean(__bean.getLogoPeuBack()));
+    // Fitxer
+    __tmp.setLogoLateralFront(FitxerBean.toBean(__bean.getLogoLateralFront()));
+    // Fitxer
+    __tmp.setIcon(FitxerBean.toBean(__bean.getIcon()));
     // Fitxer
     __tmp.setFitxerCss(FitxerBean.toBean(__bean.getFitxerCss()));
 		return __tmp;
 	}
 
-  protected FitxerBean logoMenu;
-  public FitxerBean getLogoMenu() {
-    return logoMenu;
+  protected FitxerBean logoCapBack;
+  public FitxerBean getLogoCapBack() {
+    return logoCapBack;
   }
-  public void setLogoMenu(FitxerBean __field) {
-    this. logoMenu = __field;
+  public void setLogoCapBack(FitxerBean __field) {
+    this. logoCapBack = __field;
   }
-  protected FitxerBean logoPeu;
-  public FitxerBean getLogoPeu() {
-    return logoPeu;
+  protected FitxerBean logoPeuBack;
+  public FitxerBean getLogoPeuBack() {
+    return logoPeuBack;
   }
-  public void setLogoPeu(FitxerBean __field) {
-    this. logoPeu = __field;
+  public void setLogoPeuBack(FitxerBean __field) {
+    this. logoPeuBack = __field;
+  }
+  protected FitxerBean logoLateralFront;
+  public FitxerBean getLogoLateralFront() {
+    return logoLateralFront;
+  }
+  public void setLogoLateralFront(FitxerBean __field) {
+    this. logoLateralFront = __field;
+  }
+  protected FitxerBean icon;
+  public FitxerBean getIcon() {
+    return icon;
+  }
+  public void setIcon(FitxerBean __field) {
+    this. icon = __field;
   }
   protected FitxerBean fitxerCss;
   public FitxerBean getFitxerCss() {

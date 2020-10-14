@@ -58,8 +58,8 @@ public class EntitatJPAManager
 		return list.toArray(new Entitat[list.size()]);
 	};
 
-	public synchronized Entitat create( long _nomID_, java.lang.String _codi_, java.lang.String _codiDir3_, boolean _activa_, java.lang.Long _logoMenuID_, java.lang.String _colorMenu_, java.lang.String _textePeu_, long _logoPeuID_, java.lang.String _versio_, java.lang.String _commit_, java.lang.Long _fitxerCssID_, java.lang.String _context_) throws I18NException {
-		EntitatJPA __bean =  new EntitatJPA(_nomID_,_codi_,_codiDir3_,_activa_,_logoMenuID_,_colorMenu_,_textePeu_,_logoPeuID_,_versio_,_commit_,_fitxerCssID_,_context_);
+	public synchronized Entitat create( long _nomID_, java.lang.String _codi_, java.lang.String _codiDir3_, boolean _activa_, java.lang.String _colorMenu_, long _logoCapBackID_, long _logoPeuBackID_, long _logoLateralFrontID_, java.lang.String _versio_, long _iconID_, java.lang.String _webEntitat_, java.lang.String _entitatDescFront_, java.lang.String _suportWeb_, java.lang.String _suportTelefon_, java.lang.String _suportEmail_, java.lang.Long _pluginLoginID_, java.lang.Long _fitxerCssID_, java.lang.String _context_, java.lang.String _commit_) throws I18NException {
+		EntitatJPA __bean =  new EntitatJPA(_nomID_,_codi_,_codiDir3_,_activa_,_colorMenu_,_logoCapBackID_,_logoPeuBackID_,_logoLateralFrontID_,_versio_,_iconID_,_webEntitat_,_entitatDescFront_,_suportWeb_,_suportTelefon_,_suportEmail_,_pluginLoginID_,_fitxerCssID_,_context_,_commit_);
 		return create(__bean);
 	}
 

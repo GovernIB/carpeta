@@ -73,10 +73,10 @@ public class FitxerQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
 
  // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
 
-  public EntitatQueryPath ENTITAT_LOGOMENUIDS() {
+  public EntitatQueryPath ENTITAT_ICONIDS() {
     return new EntitatQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return FitxerQueryPath.this.getQueryPath() + "entitat_logomenuids" + ".";
+          return FitxerQueryPath.this.getQueryPath() + "entitat_iconids" + ".";
       }
     });
   }
@@ -87,10 +87,38 @@ public class FitxerQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
 
  // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
 
-  public EntitatQueryPath ENTITAT_LOGOPEUIDS() {
+  public EntitatQueryPath ENTITAT_LOGOCAPBACKIDS() {
     return new EntitatQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return FitxerQueryPath.this.getQueryPath() + "entitat_logopeuids" + ".";
+          return FitxerQueryPath.this.getQueryPath() + "entitat_logocapbackids" + ".";
+      }
+    });
+  }
+*/
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
+  public EntitatQueryPath ENTITAT_LOGOLATERALFRONTIDS() {
+    return new EntitatQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return FitxerQueryPath.this.getQueryPath() + "entitat_logolateralfrontids" + ".";
+      }
+    });
+  }
+*/
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
+  public EntitatQueryPath ENTITAT_LOGOPEUBACKIDS() {
+    return new EntitatQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return FitxerQueryPath.this.getQueryPath() + "entitat_logopeubackids" + ".";
       }
     });
   }

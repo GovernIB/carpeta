@@ -27,29 +27,50 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.ACTIVA)}">
         <th>${car:getSortIcons(__theFilterForm,EntitatFields.ACTIVA)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.LOGOMENUID)}">
-        <th>${car:getSortIcons(__theFilterForm,EntitatFields.LOGOMENUID)}</th>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.COLORMENU)}">
         <th>${car:getSortIcons(__theFilterForm,EntitatFields.COLORMENU)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.TEXTEPEU)}">
-        <th>${car:getSortIcons(__theFilterForm,EntitatFields.TEXTEPEU)}</th>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.LOGOCAPBACKID)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.LOGOCAPBACKID)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.LOGOPEUID)}">
-        <th>${car:getSortIcons(__theFilterForm,EntitatFields.LOGOPEUID)}</th>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.LOGOPEUBACKID)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.LOGOPEUBACKID)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.LOGOLATERALFRONTID)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.LOGOLATERALFRONTID)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.VERSIO)}">
         <th>${car:getSortIcons(__theFilterForm,EntitatFields.VERSIO)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.COMMIT)}">
-        <th>${car:getSortIcons(__theFilterForm,EntitatFields.COMMIT)}</th>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.ICONID)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.ICONID)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.WEBENTITAT)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.WEBENTITAT)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.ENTITATDESCFRONT)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.ENTITATDESCFRONT)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.SUPORTWEB)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.SUPORTWEB)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.SUPORTTELEFON)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.SUPORTTELEFON)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.SUPORTEMAIL)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.SUPORTEMAIL)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.PLUGINLOGINID)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.PLUGINLOGINID)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.FITXERCSSID)}">
         <th>${car:getSortIcons(__theFilterForm,EntitatFields.FITXERCSSID)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.CONTEXT)}">
         <th>${car:getSortIcons(__theFilterForm,EntitatFields.CONTEXT)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.COMMIT)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.COMMIT)}</th>
         </c:if>
 
 

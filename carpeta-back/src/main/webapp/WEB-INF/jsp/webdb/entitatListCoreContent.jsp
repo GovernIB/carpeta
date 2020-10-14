@@ -52,27 +52,29 @@
             <img height="18" width="18" src="<c:url value="/img/icn_alert_${entitat.activa?'success':'error'}.png"/>">
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.LOGOMENUID)}">
-          <td>
-            <c:if test="${not empty entitat.logoMenu}">
-              <a target="_blank" href="<c:url value="${car:fileUrl(entitat.logoMenu)}"/>">${entitat.logoMenu.nom}</a>
-            </c:if>
-           </td>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.COLORMENU)}">
           <td>
           ${entitat.colorMenu}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.TEXTEPEU)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.LOGOCAPBACKID)}">
           <td>
-          ${entitat.textePeu}
-          </td>
+            <c:if test="${not empty entitat.logoCapBack}">
+              <a target="_blank" href="<c:url value="${car:fileUrl(entitat.logoCapBack)}"/>">${entitat.logoCapBack.nom}</a>
+            </c:if>
+           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.LOGOPEUID)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.LOGOPEUBACKID)}">
           <td>
-            <c:if test="${not empty entitat.logoPeu}">
-              <a target="_blank" href="<c:url value="${car:fileUrl(entitat.logoPeu)}"/>">${entitat.logoPeu.nom}</a>
+            <c:if test="${not empty entitat.logoPeuBack}">
+              <a target="_blank" href="<c:url value="${car:fileUrl(entitat.logoPeuBack)}"/>">${entitat.logoPeuBack.nom}</a>
+            </c:if>
+           </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.LOGOLATERALFRONTID)}">
+          <td>
+            <c:if test="${not empty entitat.logoLateralFront}">
+              <a target="_blank" href="<c:url value="${car:fileUrl(entitat.logoLateralFront)}"/>">${entitat.logoLateralFront.nom}</a>
             </c:if>
            </td>
         </c:if>
@@ -81,9 +83,50 @@
           ${entitat.versio}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.COMMIT)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.ICONID)}">
           <td>
-          ${entitat.commit}
+            <c:if test="${not empty entitat.icon}">
+              <a target="_blank" href="<c:url value="${car:fileUrl(entitat.icon)}"/>">${entitat.icon.nom}</a>
+            </c:if>
+           </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.WEBENTITAT)}">
+          <td>
+                       <c:if test="${ not empty entitat.webEntitat}">
+               <a href="${entitat.webEntitat}" target="_blank">${entitat.webEntitat}</a>
+             </c:if>
+
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.ENTITATDESCFRONT)}">
+          <td>
+          ${entitat.entitatDescFront}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.SUPORTWEB)}">
+          <td>
+                       <c:if test="${ not empty entitat.suportWeb}">
+               <a href="${entitat.suportWeb}" target="_blank">${entitat.suportWeb}</a>
+             </c:if>
+
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.SUPORTTELEFON)}">
+          <td>
+          ${entitat.suportTelefon}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.SUPORTEMAIL)}">
+          <td>
+          ${entitat.suportEmail}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.PLUGINLOGINID)}">
+          <td>
+          <c:set var="tmp">${entitat.pluginLoginID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfPluginForPluginLoginID[tmp]}
+          </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.FITXERCSSID)}">
@@ -96,6 +139,11 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.CONTEXT)}">
           <td>
           ${entitat.context}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.COMMIT)}">
+          <td>
+          ${entitat.commit}
           </td>
         </c:if>
 

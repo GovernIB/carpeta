@@ -15,12 +15,20 @@ public class EntitatForm extends CarpetaBaseForm {
   private EntitatJPA entitat;
   
   
-  private CommonsMultipartFile logoMenuID;
-  private boolean logoMenuIDDelete;
+  private CommonsMultipartFile logoCapBackID;
+  private boolean logoCapBackIDDelete;
   
   
-  private CommonsMultipartFile logoPeuID;
-  private boolean logoPeuIDDelete;
+  private CommonsMultipartFile logoPeuBackID;
+  private boolean logoPeuBackIDDelete;
+  
+  
+  private CommonsMultipartFile logoLateralFrontID;
+  private boolean logoLateralFrontIDDelete;
+  
+  
+  private CommonsMultipartFile iconID;
+  private boolean iconIDDelete;
   
   
   private CommonsMultipartFile fitxerCssID;
@@ -33,6 +41,7 @@ public class EntitatForm extends CarpetaBaseForm {
     super(__toClone);
       this.entitat = __toClone.entitat;
     this.listOfTraduccioForNomID = __toClone.listOfTraduccioForNomID;
+    this.listOfPluginForPluginLoginID = __toClone.listOfPluginForPluginLoginID;
   }
   
   public EntitatForm(EntitatJPA entitat, boolean nou) {
@@ -57,33 +66,61 @@ public class EntitatForm extends CarpetaBaseForm {
     this.idiomesTraduccio = idiomesTraduccio;
   }
   
-  public CommonsMultipartFile getLogoMenuID() {
-    return logoMenuID;
+  public CommonsMultipartFile getLogoCapBackID() {
+    return logoCapBackID;
   }
   
-   public void setLogoMenuID(CommonsMultipartFile logoMenuID) {
-    this.logoMenuID = logoMenuID;
+   public void setLogoCapBackID(CommonsMultipartFile logoCapBackID) {
+    this.logoCapBackID = logoCapBackID;
   }
-  public boolean isLogoMenuIDDelete() {
-    return logoMenuIDDelete;
+  public boolean isLogoCapBackIDDelete() {
+    return logoCapBackIDDelete;
   }
   
-  public void setLogoMenuIDDelete(boolean logoMenuIDDelete) {
-    this.logoMenuIDDelete = logoMenuIDDelete;
+  public void setLogoCapBackIDDelete(boolean logoCapBackIDDelete) {
+    this.logoCapBackIDDelete = logoCapBackIDDelete;
    }
-  public CommonsMultipartFile getLogoPeuID() {
-    return logoPeuID;
+  public CommonsMultipartFile getLogoPeuBackID() {
+    return logoPeuBackID;
   }
   
-   public void setLogoPeuID(CommonsMultipartFile logoPeuID) {
-    this.logoPeuID = logoPeuID;
+   public void setLogoPeuBackID(CommonsMultipartFile logoPeuBackID) {
+    this.logoPeuBackID = logoPeuBackID;
   }
-  public boolean isLogoPeuIDDelete() {
-    return logoPeuIDDelete;
+  public boolean isLogoPeuBackIDDelete() {
+    return logoPeuBackIDDelete;
   }
   
-  public void setLogoPeuIDDelete(boolean logoPeuIDDelete) {
-    this.logoPeuIDDelete = logoPeuIDDelete;
+  public void setLogoPeuBackIDDelete(boolean logoPeuBackIDDelete) {
+    this.logoPeuBackIDDelete = logoPeuBackIDDelete;
+   }
+  public CommonsMultipartFile getLogoLateralFrontID() {
+    return logoLateralFrontID;
+  }
+  
+   public void setLogoLateralFrontID(CommonsMultipartFile logoLateralFrontID) {
+    this.logoLateralFrontID = logoLateralFrontID;
+  }
+  public boolean isLogoLateralFrontIDDelete() {
+    return logoLateralFrontIDDelete;
+  }
+  
+  public void setLogoLateralFrontIDDelete(boolean logoLateralFrontIDDelete) {
+    this.logoLateralFrontIDDelete = logoLateralFrontIDDelete;
+   }
+  public CommonsMultipartFile getIconID() {
+    return iconID;
+  }
+  
+   public void setIconID(CommonsMultipartFile iconID) {
+    this.iconID = iconID;
+  }
+  public boolean isIconIDDelete() {
+    return iconIDDelete;
+  }
+  
+  public void setIconIDDelete(boolean iconIDDelete) {
+    this.iconIDDelete = iconIDDelete;
    }
   public CommonsMultipartFile getFitxerCssID() {
     return fitxerCssID;
@@ -107,6 +144,18 @@ public class EntitatForm extends CarpetaBaseForm {
 
   public void setListOfTraduccioForNomID(List<StringKeyValue> listOfTraduccioForNomID) {
     this.listOfTraduccioForNomID = listOfTraduccioForNomID;
+  }
+
+
+
+  private List<StringKeyValue> listOfPluginForPluginLoginID;
+
+  public List<StringKeyValue> getListOfPluginForPluginLoginID() {
+    return this.listOfPluginForPluginLoginID;
+  }
+
+  public void setListOfPluginForPluginLoginID(List<StringKeyValue> listOfPluginForPluginLoginID) {
+    this.listOfPluginForPluginLoginID = listOfPluginForPluginLoginID;
   }
 
 

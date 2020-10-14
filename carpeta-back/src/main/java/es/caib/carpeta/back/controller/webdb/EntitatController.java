@@ -68,6 +68,10 @@ public class EntitatController
   @Autowired
   protected TraduccioRefList traduccioRefList;
 
+  // References 
+  @Autowired
+  protected PluginRefList pluginRefList;
+
   /**
    * Llistat de totes Entitat
    */
@@ -201,6 +205,16 @@ public class EntitatController
 
       fillValuesToGroupByItemsBoolean("genapp.checkbox", groupByItemsMap, ACTIVA);
 
+    // Field pluginLoginID
+    {
+      _listSKV = getReferenceListForPluginLoginID(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfPluginForPluginLoginID(_tmp);
+      if (filterForm.getGroupByFields().contains(PLUGINLOGINID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, PLUGINLOGINID, false);
+      };
+    }
+
 
     return groupByItemsMap;
   }
@@ -217,6 +231,7 @@ public class EntitatController
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
     __mapping.put(NOMID, filterForm.getMapOfTraduccioForNomID());
+    __mapping.put(PLUGINLOGINID, filterForm.getMapOfPluginForPluginLoginID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -274,6 +289,15 @@ public class EntitatController
 
   public void fillReferencesForForm(EntitatForm entitatForm,
     HttpServletRequest request, ModelAndView mav) throws I18NException {
+    // Comprovam si ja esta definida la llista
+    if (entitatForm.getListOfPluginForPluginLoginID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForPluginLoginID(request, mav, entitatForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      entitatForm.setListOfPluginForPluginLoginID(_listSKV);
+    }
     
   }
 
@@ -574,23 +598,40 @@ public java.lang.Long stringToPK(String value) {
       EntitatForm form) throws I18NException {
 
     FitxerJPA f;
-    f = (FitxerJPA)afm.preProcessFile(form.getLogoMenuID(), form.isLogoMenuIDDelete(),
-        form.isNou()? null : entitat.getLogoMenu());
-    ((EntitatJPA)entitat).setLogoMenu(f);
+    f = (FitxerJPA)afm.preProcessFile(form.getLogoCapBackID(), form.isLogoCapBackIDDelete(),
+        form.isNou()? null : entitat.getLogoCapBack());
+    ((EntitatJPA)entitat).setLogoCapBack(f);
     if (f != null) { 
-      entitat.setLogoMenuID(f.getFitxerID());
+      entitat.setLogoCapBackID(f.getFitxerID());
     } else {
-      entitat.setLogoMenuID(null);
+      entitat.setLogoCapBackID(0);
     }
 
-
-    f = (FitxerJPA)afm.preProcessFile(form.getLogoPeuID(), form.isLogoPeuIDDelete(),
-        form.isNou()? null : entitat.getLogoPeu());
-    ((EntitatJPA)entitat).setLogoPeu(f);
+    f = (FitxerJPA)afm.preProcessFile(form.getLogoPeuBackID(), form.isLogoPeuBackIDDelete(),
+        form.isNou()? null : entitat.getLogoPeuBack());
+    ((EntitatJPA)entitat).setLogoPeuBack(f);
     if (f != null) { 
-      entitat.setLogoPeuID(f.getFitxerID());
+      entitat.setLogoPeuBackID(f.getFitxerID());
     } else {
-      entitat.setLogoPeuID(0);
+      entitat.setLogoPeuBackID(0);
+    }
+
+    f = (FitxerJPA)afm.preProcessFile(form.getLogoLateralFrontID(), form.isLogoLateralFrontIDDelete(),
+        form.isNou()? null : entitat.getLogoLateralFront());
+    ((EntitatJPA)entitat).setLogoLateralFront(f);
+    if (f != null) { 
+      entitat.setLogoLateralFrontID(f.getFitxerID());
+    } else {
+      entitat.setLogoLateralFrontID(0);
+    }
+
+    f = (FitxerJPA)afm.preProcessFile(form.getIconID(), form.isIconIDDelete(),
+        form.isNou()? null : entitat.getIcon());
+    ((EntitatJPA)entitat).setIcon(f);
+    if (f != null) { 
+      entitat.setIconID(f.getFitxerID());
+    } else {
+      entitat.setIconID(0);
     }
 
     f = (FitxerJPA)afm.preProcessFile(form.getFitxerCssID(), form.isFitxerCssIDDelete(),
@@ -608,8 +649,10 @@ public java.lang.Long stringToPK(String value) {
   // FILE
   @Override
   public void deleteFiles(Entitat entitat) {
-    deleteFile(entitat.getLogoMenuID());
-    deleteFile(entitat.getLogoPeuID());
+    deleteFile(entitat.getLogoCapBackID());
+    deleteFile(entitat.getLogoPeuBackID());
+    deleteFile(entitat.getLogoLateralFrontID());
+    deleteFile(entitat.getIconID());
     deleteFile(entitat.getFitxerCssID());
   }
   // Mètodes a sobreescriure 
@@ -661,6 +704,46 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForNomID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return traduccioRefList.getReferenceList(TraduccioFields.TRADUCCIOID, where );
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPluginLoginID(HttpServletRequest request,
+       ModelAndView mav, EntitatForm entitatForm, Where where)  throws I18NException {
+    if (entitatForm.isHiddenField(PLUGINLOGINID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _where = null;
+    if (entitatForm.isReadOnlyField(PLUGINLOGINID)) {
+      _where = PluginFields.PLUGINID.equal(entitatForm.getEntitat().getPluginLoginID());
+    }
+    return getReferenceListForPluginLoginID(request, mav, Where.AND(where, _where));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPluginLoginID(HttpServletRequest request,
+       ModelAndView mav, EntitatFilterForm entitatFilterForm,
+       List<Entitat> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (entitatFilterForm.isHiddenField(PLUGINLOGINID)
+      && !entitatFilterForm.isGroupByField(PLUGINLOGINID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    if (!_groupByItemsMap.containsKey(PLUGINLOGINID)) {
+      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
+      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
+      for (Entitat _item : list) {
+        if(_item.getPluginLoginID() == null) { continue; };
+        _pkList.add(_item.getPluginLoginID());
+        }
+        _w = PluginFields.PLUGINID.in(_pkList);
+      }
+    return getReferenceListForPluginLoginID(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPluginLoginID(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    return pluginRefList.getReferenceList(PluginFields.PLUGINID, where );
   }
 
 

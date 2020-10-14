@@ -1,4 +1,36 @@
 ﻿
+-- Afegir més dades a la taula d'Entitat #147
+
+
+INSERT INTO car_traduccio VALUES (111);
+
+
+INSERT INTO car_traducciomap VALUES (111, 'en', 'Government of the Balearic Islands');
+INSERT INTO car_traducciomap VALUES (111, 'ca', 'Govern de les Illes Balears');
+INSERT INTO car_traducciomap VALUES (111, 'es', 'Gobierno de las Islas Baleares');
+
+
+
+INSERT INTO car_fitxer(fitxerid, descripcio, mime, nom, tamany) VALUES (104, NULL, 'image/png', 'goib_back_cap.png', 2973);
+INSERT INTO car_fitxer(fitxerid, descripcio, mime, nom, tamany) VALUES (105, NULL, 'image/png', 'goib_back_peu.png', 2521);
+INSERT INTO car_fitxer(fitxerid, descripcio, mime, nom, tamany) VALUES (106, NULL, 'image/png', 'goib_front_lateral.png', 19397);
+INSERT INTO car_fitxer(fitxerid, descripcio, mime, nom, tamany) VALUES (107, NULL, 'image/png', 'favicon.png', 638);
+
+
+
+INSERT INTO car_entitat(entitatid, nomid, codidir3, activa, colormenu, versio, commit, 
+            fitxercss, context, codi, logocapbackid, logopeubackid, logolateralfrontid, 
+            iconid, suportweb, suportemail, suporttelefon, entitatdescfront, 
+            webentitat, pluginloginid) VALUES (100, 111, 'A04019898', true, '32814B', '1.1.1', NULL, NULL, NULL, 'caib', 104, 105, 106, 107, 'http://www.caib.es/sites/suportinformatic/es/inicio-5586/?campa=yes', 'suport@caib.es', '971177070', '<div class="imc-peu-govern"><p><strong>© Govern Illes Balears</strong></p><p><a href="http://www.caib.es/govern/organigrama/area.do?coduo=2390499&amp;lang=ca">Direcció General de Comunicació</a><a href="http://www.caib.es/govern/organigrama/planol.do?coduo=2390499&amp;lang=ca">: Passeig de Sagrera, 2 - 07012 Palma</a></p><p></p>Telèfon 971177166 - Fax 971176348<p></p></div>', 'https://www.caib.es', NULL);
+
+
+
+
+
+
+
+
+
 -- 06-10-2020 Afegir gestio d'Enllaços a Back #138
 
 -- YouTube

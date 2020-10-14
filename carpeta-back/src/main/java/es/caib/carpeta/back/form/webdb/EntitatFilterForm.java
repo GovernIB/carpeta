@@ -98,17 +98,6 @@ public class EntitatFilterForm extends CarpetaBaseFilterForm implements EntitatF
   }
 
 
-  private java.lang.String textePeu;
-
-  public java.lang.String getTextePeu() {
-    return this.textePeu;
-  }
-
-  public void setTextePeu(java.lang.String textePeu) {
-    this.textePeu = textePeu;
-  }
-
-
   private java.lang.String versio;
 
   public java.lang.String getVersio() {
@@ -120,14 +109,80 @@ public class EntitatFilterForm extends CarpetaBaseFilterForm implements EntitatF
   }
 
 
-  private java.lang.String commit;
+  private java.lang.String webEntitat;
 
-  public java.lang.String getCommit() {
-    return this.commit;
+  public java.lang.String getWebEntitat() {
+    return this.webEntitat;
   }
 
-  public void setCommit(java.lang.String commit) {
-    this.commit = commit;
+  public void setWebEntitat(java.lang.String webEntitat) {
+    this.webEntitat = webEntitat;
+  }
+
+
+  private java.lang.String entitatDescFront;
+
+  public java.lang.String getEntitatDescFront() {
+    return this.entitatDescFront;
+  }
+
+  public void setEntitatDescFront(java.lang.String entitatDescFront) {
+    this.entitatDescFront = entitatDescFront;
+  }
+
+
+  private java.lang.String suportWeb;
+
+  public java.lang.String getSuportWeb() {
+    return this.suportWeb;
+  }
+
+  public void setSuportWeb(java.lang.String suportWeb) {
+    this.suportWeb = suportWeb;
+  }
+
+
+  private java.lang.String suportTelefon;
+
+  public java.lang.String getSuportTelefon() {
+    return this.suportTelefon;
+  }
+
+  public void setSuportTelefon(java.lang.String suportTelefon) {
+    this.suportTelefon = suportTelefon;
+  }
+
+
+  private java.lang.String suportEmail;
+
+  public java.lang.String getSuportEmail() {
+    return this.suportEmail;
+  }
+
+  public void setSuportEmail(java.lang.String suportEmail) {
+    this.suportEmail = suportEmail;
+  }
+
+
+  private java.lang.Long pluginLoginIDDesde;
+
+  public java.lang.Long getPluginLoginIDDesde() {
+    return this.pluginLoginIDDesde;
+  }
+
+  public void setPluginLoginIDDesde(java.lang.Long pluginLoginIDDesde) {
+    this.pluginLoginIDDesde = pluginLoginIDDesde;
+  }
+
+
+  private java.lang.Long pluginLoginIDFins;
+
+  public java.lang.Long getPluginLoginIDFins() {
+    return this.pluginLoginIDFins;
+  }
+
+  public void setPluginLoginIDFins(java.lang.Long pluginLoginIDFins) {
+    this.pluginLoginIDFins = pluginLoginIDFins;
   }
 
 
@@ -139,6 +194,17 @@ public class EntitatFilterForm extends CarpetaBaseFilterForm implements EntitatF
 
   public void setContext(java.lang.String context) {
     this.context = context;
+  }
+
+
+  private java.lang.String commit;
+
+  public java.lang.String getCommit() {
+    return this.commit;
+  }
+
+  public void setCommit(java.lang.String commit) {
+    this.commit = commit;
   }
 
 
@@ -154,11 +220,18 @@ public class EntitatFilterForm extends CarpetaBaseFilterForm implements EntitatF
     this.codi = __toClone.codi;
     this.codiDir3 = __toClone.codiDir3;
     this.colorMenu = __toClone.colorMenu;
-    this.textePeu = __toClone.textePeu;
     this.versio = __toClone.versio;
-    this.commit = __toClone.commit;
+    this.webEntitat = __toClone.webEntitat;
+    this.entitatDescFront = __toClone.entitatDescFront;
+    this.suportWeb = __toClone.suportWeb;
+    this.suportTelefon = __toClone.suportTelefon;
+    this.suportEmail = __toClone.suportEmail;
+    this.pluginLoginIDDesde = __toClone.pluginLoginIDDesde;
+    this.pluginLoginIDFins = __toClone.pluginLoginIDFins;
     this.context = __toClone.context;
+    this.commit = __toClone.commit;
     this.mapOfTraduccioForNomID = __toClone.mapOfTraduccioForNomID;
+    this.mapOfPluginForPluginLoginID = __toClone.mapOfPluginForPluginLoginID;
   }
   
   /* ========= UTILS ========== */
@@ -201,6 +274,18 @@ public class EntitatFilterForm extends CarpetaBaseFilterForm implements EntitatF
 
   public void setMapOfTraduccioForNomID(Map<String, String> mapOfTraduccioForNomID) {
     this.mapOfTraduccioForNomID = mapOfTraduccioForNomID;
+  }
+
+
+
+  private Map<String, String> mapOfPluginForPluginLoginID;
+
+  public Map<String, String> getMapOfPluginForPluginLoginID() {
+    return this.mapOfPluginForPluginLoginID;
+  }
+
+  public void setMapOfPluginForPluginLoginID(Map<String, String> mapOfPluginForPluginLoginID) {
+    this.mapOfPluginForPluginLoginID = mapOfPluginForPluginLoginID;
   }
 
 

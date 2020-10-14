@@ -153,29 +153,55 @@ private static final long serialVersionUID = -252813913L;
 	}
 
 
-// EXP  Field:logomenuid | Table: car_entitat | Type: 0  
+// EXP  Field:iconid | Table: car_entitat | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "logoMenuID")
-	private Set<EntitatJPA> entitat_logomenuids = new HashSet<EntitatJPA>(0);
-	public  Set<EntitatJPA> getEntitat_logomenuids() {
-    return this.entitat_logomenuids;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "iconID")
+	private Set<EntitatJPA> entitat_iconids = new HashSet<EntitatJPA>(0);
+	public  Set<EntitatJPA> getEntitat_iconids() {
+    return this.entitat_iconids;
   }
 
-	public void setEntitat_logomenuids(Set<EntitatJPA> entitat_logomenuids) {
-	  this.entitat_logomenuids = entitat_logomenuids;
+	public void setEntitat_iconids(Set<EntitatJPA> entitat_iconids) {
+	  this.entitat_iconids = entitat_iconids;
 	}
 
 
-// EXP  Field:logopeuid | Table: car_entitat | Type: 0  
+// EXP  Field:logocapbackid | Table: car_entitat | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "logoPeuID")
-	private Set<EntitatJPA> entitat_logopeuids = new HashSet<EntitatJPA>(0);
-	public  Set<EntitatJPA> getEntitat_logopeuids() {
-    return this.entitat_logopeuids;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "logoCapBackID")
+	private Set<EntitatJPA> entitat_logocapbackids = new HashSet<EntitatJPA>(0);
+	public  Set<EntitatJPA> getEntitat_logocapbackids() {
+    return this.entitat_logocapbackids;
   }
 
-	public void setEntitat_logopeuids(Set<EntitatJPA> entitat_logopeuids) {
-	  this.entitat_logopeuids = entitat_logopeuids;
+	public void setEntitat_logocapbackids(Set<EntitatJPA> entitat_logocapbackids) {
+	  this.entitat_logocapbackids = entitat_logocapbackids;
+	}
+
+
+// EXP  Field:logolateralfrontid | Table: car_entitat | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "logoLateralFrontID")
+	private Set<EntitatJPA> entitat_logolateralfrontids = new HashSet<EntitatJPA>(0);
+	public  Set<EntitatJPA> getEntitat_logolateralfrontids() {
+    return this.entitat_logolateralfrontids;
+  }
+
+	public void setEntitat_logolateralfrontids(Set<EntitatJPA> entitat_logolateralfrontids) {
+	  this.entitat_logolateralfrontids = entitat_logolateralfrontids;
+	}
+
+
+// EXP  Field:logopeubackid | Table: car_entitat | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "logoPeuBackID")
+	private Set<EntitatJPA> entitat_logopeubackids = new HashSet<EntitatJPA>(0);
+	public  Set<EntitatJPA> getEntitat_logopeubackids() {
+    return this.entitat_logopeubackids;
+  }
+
+	public void setEntitat_logopeubackids(Set<EntitatJPA> entitat_logopeubackids) {
+	  this.entitat_logopeubackids = entitat_logopeubackids;
 	}
 
 
@@ -266,20 +292,28 @@ private static final long serialVersionUID = -252813913L;
     __alreadyCopied.put(__jpa, __tmp);
     // Copia de beans complexes (EXP)
     if(!"EntitatJPA".equals(origenJPA) 
-       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat_fitxercsss) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat_fitxercsss())) ) {
-      __tmp.setEntitat_fitxercsss(EntitatJPA.copyJPA(__jpa.getEntitat_fitxercsss(), __alreadyCopied,"FitxerJPA"));
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat_logolateralfrontids) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat_logolateralfrontids())) ) {
+      __tmp.setEntitat_logolateralfrontids(EntitatJPA.copyJPA(__jpa.getEntitat_logolateralfrontids(), __alreadyCopied,"FitxerJPA"));
     }
     if(!"EntitatJPA".equals(origenJPA) 
-       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat_logomenuids) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat_logomenuids())) ) {
-      __tmp.setEntitat_logomenuids(EntitatJPA.copyJPA(__jpa.getEntitat_logomenuids(), __alreadyCopied,"FitxerJPA"));
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat_logocapbackids) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat_logocapbackids())) ) {
+      __tmp.setEntitat_logocapbackids(EntitatJPA.copyJPA(__jpa.getEntitat_logocapbackids(), __alreadyCopied,"FitxerJPA"));
+    }
+    if(!"EntitatJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat_fitxercsss) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat_fitxercsss())) ) {
+      __tmp.setEntitat_fitxercsss(EntitatJPA.copyJPA(__jpa.getEntitat_fitxercsss(), __alreadyCopied,"FitxerJPA"));
     }
     if(!"EnllazJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.enllazs) || org.hibernate.Hibernate.isInitialized(__jpa.getEnllazs())) ) {
       __tmp.setEnllazs(EnllazJPA.copyJPA(__jpa.getEnllazs(), __alreadyCopied,"FitxerJPA"));
     }
     if(!"EntitatJPA".equals(origenJPA) 
-       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat_logopeuids) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat_logopeuids())) ) {
-      __tmp.setEntitat_logopeuids(EntitatJPA.copyJPA(__jpa.getEntitat_logopeuids(), __alreadyCopied,"FitxerJPA"));
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat_logopeubackids) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat_logopeubackids())) ) {
+      __tmp.setEntitat_logopeubackids(EntitatJPA.copyJPA(__jpa.getEntitat_logopeubackids(), __alreadyCopied,"FitxerJPA"));
+    }
+    if(!"EntitatJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat_iconids) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat_iconids())) ) {
+      __tmp.setEntitat_iconids(EntitatJPA.copyJPA(__jpa.getEntitat_iconids(), __alreadyCopied,"FitxerJPA"));
     }
     // Copia de beans complexes (IMP)
 

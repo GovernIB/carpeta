@@ -48,25 +48,46 @@ private static final long serialVersionUID = 489209138L;
 	@Column(name="activa",nullable = false,length = 1)
 	boolean activa;
 
-	@Index(name="car_entitat_logomenuid_fk_i")
-	@Column(name="logomenuid",length = 19)
-	java.lang.Long logoMenuID;
-
 	@Column(name="colormenu",nullable = false,length = 100)
 	java.lang.String colorMenu;
 
-	@Column(name="textepeu",length = 4000)
-	java.lang.String textePeu;
+	@Index(name="car_entitat_logocapback_fk_i")
+	@Column(name="logocapbackid",nullable = false,length = 19)
+	long logoCapBackID;
 
-	@Index(name="car_entitat_logopeuid_fk_i")
-	@Column(name="logopeuid",nullable = false,length = 19)
-	long logoPeuID;
+	@Index(name="car_entitat_logopeuback_fk_i")
+	@Column(name="logopeubackid",nullable = false,length = 19)
+	long logoPeuBackID;
+
+	@Index(name="car_entitat_logolatfront_fk_i")
+	@Column(name="logolateralfrontid",nullable = false,length = 19)
+	long logoLateralFrontID;
 
 	@Column(name="versio",nullable = false,length = 50)
 	java.lang.String versio;
 
-	@Column(name="commit",length = 255)
-	java.lang.String commit;
+	@Index(name="car_entitat_iconid_fk_i")
+	@Column(name="iconid",nullable = false,length = 19)
+	long iconID;
+
+	@Column(name="webentitat",nullable = false,length = 255)
+	java.lang.String webEntitat;
+
+	@Column(name="entitatdescfront",nullable = false,length = 4000)
+	java.lang.String entitatDescFront;
+
+	@Column(name="suportweb",length = 255)
+	java.lang.String suportWeb;
+
+	@Column(name="suporttelefon",length = 255)
+	java.lang.String suportTelefon;
+
+	@Column(name="suportemail",length = 255)
+	java.lang.String suportEmail;
+
+	@Index(name="car_entitat_pluginloginid_fk_i")
+	@Column(name="pluginloginid",length = 19)
+	java.lang.Long pluginLoginID;
 
 	@Index(name="car_entitat_fitxercss_fk_i")
 	@Column(name="fitxercss",length = 19)
@@ -75,6 +96,9 @@ private static final long serialVersionUID = 489209138L;
 	@Column(name="context",length = 255)
 	java.lang.String context;
 
+	@Column(name="commit",length = 255)
+	java.lang.String commit;
+
 
 
   /** Constructor Buit */
@@ -82,46 +106,65 @@ private static final long serialVersionUID = 489209138L;
   }
 
   /** Constructor amb tots els camps  */
-  public EntitatJPA(long entitatID , long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.Long logoMenuID , java.lang.String colorMenu , java.lang.String textePeu , long logoPeuID , java.lang.String versio , java.lang.String commit , java.lang.Long fitxerCssID , java.lang.String context) {
+  public EntitatJPA(long entitatID , long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.Long pluginLoginID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit) {
     this.entitatID=entitatID;
     this.nomID=nomID;
     this.codi=codi;
     this.codiDir3=codiDir3;
     this.activa=activa;
-    this.logoMenuID=logoMenuID;
     this.colorMenu=colorMenu;
-    this.textePeu=textePeu;
-    this.logoPeuID=logoPeuID;
+    this.logoCapBackID=logoCapBackID;
+    this.logoPeuBackID=logoPeuBackID;
+    this.logoLateralFrontID=logoLateralFrontID;
     this.versio=versio;
-    this.commit=commit;
+    this.iconID=iconID;
+    this.webEntitat=webEntitat;
+    this.entitatDescFront=entitatDescFront;
+    this.suportWeb=suportWeb;
+    this.suportTelefon=suportTelefon;
+    this.suportEmail=suportEmail;
+    this.pluginLoginID=pluginLoginID;
     this.fitxerCssID=fitxerCssID;
     this.context=context;
+    this.commit=commit;
 }
   /** Constructor sense valors autoincrementals */
-  public EntitatJPA(long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.Long logoMenuID , java.lang.String colorMenu , java.lang.String textePeu , long logoPeuID , java.lang.String versio , java.lang.String commit , java.lang.Long fitxerCssID , java.lang.String context) {
+  public EntitatJPA(long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.Long pluginLoginID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit) {
     this.nomID=nomID;
     this.codi=codi;
     this.codiDir3=codiDir3;
     this.activa=activa;
-    this.logoMenuID=logoMenuID;
     this.colorMenu=colorMenu;
-    this.textePeu=textePeu;
-    this.logoPeuID=logoPeuID;
+    this.logoCapBackID=logoCapBackID;
+    this.logoPeuBackID=logoPeuBackID;
+    this.logoLateralFrontID=logoLateralFrontID;
     this.versio=versio;
-    this.commit=commit;
+    this.iconID=iconID;
+    this.webEntitat=webEntitat;
+    this.entitatDescFront=entitatDescFront;
+    this.suportWeb=suportWeb;
+    this.suportTelefon=suportTelefon;
+    this.suportEmail=suportEmail;
+    this.pluginLoginID=pluginLoginID;
     this.fitxerCssID=fitxerCssID;
     this.context=context;
+    this.commit=commit;
 }
   /** Constructor dels valors Not Null */
-  public EntitatJPA(long entitatID , long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoPeuID , java.lang.String versio) {
+  public EntitatJPA(long entitatID , long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront) {
     this.entitatID=entitatID;
     this.nomID=nomID;
     this.codi=codi;
     this.codiDir3=codiDir3;
     this.activa=activa;
     this.colorMenu=colorMenu;
-    this.logoPeuID=logoPeuID;
+    this.logoCapBackID=logoCapBackID;
+    this.logoPeuBackID=logoPeuBackID;
+    this.logoLateralFrontID=logoLateralFrontID;
     this.versio=versio;
+    this.iconID=iconID;
+    this.webEntitat=webEntitat;
+    this.entitatDescFront=entitatDescFront;
 }
   public EntitatJPA(Entitat __bean) {
     this.setEntitatID(__bean.getEntitatID());
@@ -129,18 +172,29 @@ private static final long serialVersionUID = 489209138L;
     this.setCodi(__bean.getCodi());
     this.setCodiDir3(__bean.getCodiDir3());
     this.setActiva(__bean.isActiva());
-    this.setLogoMenuID(__bean.getLogoMenuID());
     this.setColorMenu(__bean.getColorMenu());
-    this.setTextePeu(__bean.getTextePeu());
-    this.setLogoPeuID(__bean.getLogoPeuID());
+    this.setLogoCapBackID(__bean.getLogoCapBackID());
+    this.setLogoPeuBackID(__bean.getLogoPeuBackID());
+    this.setLogoLateralFrontID(__bean.getLogoLateralFrontID());
     this.setVersio(__bean.getVersio());
-    this.setCommit(__bean.getCommit());
+    this.setIconID(__bean.getIconID());
+    this.setWebEntitat(__bean.getWebEntitat());
+    this.setEntitatDescFront(__bean.getEntitatDescFront());
+    this.setSuportWeb(__bean.getSuportWeb());
+    this.setSuportTelefon(__bean.getSuportTelefon());
+    this.setSuportEmail(__bean.getSuportEmail());
+    this.setPluginLoginID(__bean.getPluginLoginID());
     this.setFitxerCssID(__bean.getFitxerCssID());
     this.setContext(__bean.getContext());
+    this.setCommit(__bean.getCommit());
     // Fitxer
-    this.setLogoMenu(FitxerJPA.toJPA(__bean.getLogoMenu()));
+    this.setLogoCapBack(FitxerJPA.toJPA(__bean.getLogoCapBack()));
     // Fitxer
-    this.setLogoPeu(FitxerJPA.toJPA(__bean.getLogoPeu()));
+    this.setLogoPeuBack(FitxerJPA.toJPA(__bean.getLogoPeuBack()));
+    // Fitxer
+    this.setLogoLateralFront(FitxerJPA.toJPA(__bean.getLogoLateralFront()));
+    // Fitxer
+    this.setIcon(FitxerJPA.toJPA(__bean.getIcon()));
     // Fitxer
     this.setFitxerCss(FitxerJPA.toJPA(__bean.getFitxerCss()));
 	}
@@ -180,13 +234,6 @@ private static final long serialVersionUID = 489209138L;
 		this.activa = _activa_;
 	};
 
-	public java.lang.Long getLogoMenuID() {
-		return(logoMenuID);
-	};
-	public void setLogoMenuID(java.lang.Long _logoMenuID_) {
-		this.logoMenuID = _logoMenuID_;
-	};
-
 	public java.lang.String getColorMenu() {
 		return(colorMenu);
 	};
@@ -194,18 +241,25 @@ private static final long serialVersionUID = 489209138L;
 		this.colorMenu = _colorMenu_;
 	};
 
-	public java.lang.String getTextePeu() {
-		return(textePeu);
+	public long getLogoCapBackID() {
+		return(logoCapBackID);
 	};
-	public void setTextePeu(java.lang.String _textePeu_) {
-		this.textePeu = _textePeu_;
+	public void setLogoCapBackID(long _logoCapBackID_) {
+		this.logoCapBackID = _logoCapBackID_;
 	};
 
-	public long getLogoPeuID() {
-		return(logoPeuID);
+	public long getLogoPeuBackID() {
+		return(logoPeuBackID);
 	};
-	public void setLogoPeuID(long _logoPeuID_) {
-		this.logoPeuID = _logoPeuID_;
+	public void setLogoPeuBackID(long _logoPeuBackID_) {
+		this.logoPeuBackID = _logoPeuBackID_;
+	};
+
+	public long getLogoLateralFrontID() {
+		return(logoLateralFrontID);
+	};
+	public void setLogoLateralFrontID(long _logoLateralFrontID_) {
+		this.logoLateralFrontID = _logoLateralFrontID_;
 	};
 
 	public java.lang.String getVersio() {
@@ -215,11 +269,53 @@ private static final long serialVersionUID = 489209138L;
 		this.versio = _versio_;
 	};
 
-	public java.lang.String getCommit() {
-		return(commit);
+	public long getIconID() {
+		return(iconID);
 	};
-	public void setCommit(java.lang.String _commit_) {
-		this.commit = _commit_;
+	public void setIconID(long _iconID_) {
+		this.iconID = _iconID_;
+	};
+
+	public java.lang.String getWebEntitat() {
+		return(webEntitat);
+	};
+	public void setWebEntitat(java.lang.String _webEntitat_) {
+		this.webEntitat = _webEntitat_;
+	};
+
+	public java.lang.String getEntitatDescFront() {
+		return(entitatDescFront);
+	};
+	public void setEntitatDescFront(java.lang.String _entitatDescFront_) {
+		this.entitatDescFront = _entitatDescFront_;
+	};
+
+	public java.lang.String getSuportWeb() {
+		return(suportWeb);
+	};
+	public void setSuportWeb(java.lang.String _suportWeb_) {
+		this.suportWeb = _suportWeb_;
+	};
+
+	public java.lang.String getSuportTelefon() {
+		return(suportTelefon);
+	};
+	public void setSuportTelefon(java.lang.String _suportTelefon_) {
+		this.suportTelefon = _suportTelefon_;
+	};
+
+	public java.lang.String getSuportEmail() {
+		return(suportEmail);
+	};
+	public void setSuportEmail(java.lang.String _suportEmail_) {
+		this.suportEmail = _suportEmail_;
+	};
+
+	public java.lang.Long getPluginLoginID() {
+		return(pluginLoginID);
+	};
+	public void setPluginLoginID(java.lang.Long _pluginLoginID_) {
+		this.pluginLoginID = _pluginLoginID_;
 	};
 
 	public java.lang.Long getFitxerCssID() {
@@ -234,6 +330,13 @@ private static final long serialVersionUID = 489209138L;
 	};
 	public void setContext(java.lang.String _context_) {
 		this.context = _context_;
+	};
+
+	public java.lang.String getCommit() {
+		return(commit);
+	};
+	public void setCommit(java.lang.String _commit_) {
+		this.commit = _commit_;
 	};
 
 
@@ -409,31 +512,76 @@ private static final long serialVersionUID = 489209138L;
 // IMP Field:fitxerid | Table: car_fitxer | Type: 1  
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@ForeignKey(name="car_entitat_fitxer_logom_fk")
-	@JoinColumn(name = "logomenuid", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false)
-	private FitxerJPA logoMenu;
+	@ForeignKey(name="car_entitat_fitxer_lcb_fk")
+	@JoinColumn(name = "logocapbackid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false)
+	private FitxerJPA logoCapBack;
 
-	public FitxerJPA getLogoMenu() {
-    return this.logoMenu;
+	public FitxerJPA getLogoCapBack() {
+    return this.logoCapBack;
   }
 
-	public  void setLogoMenu(FitxerJPA logoMenu) {
-    this.logoMenu = logoMenu;
+	public  void setLogoCapBack(FitxerJPA logoCapBack) {
+    this.logoCapBack = logoCapBack;
   }
 
 // IMP Field:fitxerid | Table: car_fitxer | Type: 1  
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@ForeignKey(name="car_entitat_fitxer_logop_fk")
-	@JoinColumn(name = "logopeuid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false)
-	private FitxerJPA logoPeu;
+	@ForeignKey(name="car_entitat_fitxer_lpb_fk")
+	@JoinColumn(name = "logopeubackid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false)
+	private FitxerJPA logoPeuBack;
 
-	public FitxerJPA getLogoPeu() {
-    return this.logoPeu;
+	public FitxerJPA getLogoPeuBack() {
+    return this.logoPeuBack;
   }
 
-	public  void setLogoPeu(FitxerJPA logoPeu) {
-    this.logoPeu = logoPeu;
+	public  void setLogoPeuBack(FitxerJPA logoPeuBack) {
+    this.logoPeuBack = logoPeuBack;
+  }
+
+// IMP Field:fitxerid | Table: car_fitxer | Type: 1  
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@ForeignKey(name="car_entitat_fitxer_llf_fk")
+	@JoinColumn(name = "logolateralfrontid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false)
+	private FitxerJPA logoLateralFront;
+
+	public FitxerJPA getLogoLateralFront() {
+    return this.logoLateralFront;
+  }
+
+	public  void setLogoLateralFront(FitxerJPA logoLateralFront) {
+    this.logoLateralFront = logoLateralFront;
+  }
+
+// IMP Field:fitxerid | Table: car_fitxer | Type: 1  
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@ForeignKey(name="car_entitat_fitxer_icon_fk")
+	@JoinColumn(name = "iconid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false)
+	private FitxerJPA icon;
+
+	public FitxerJPA getIcon() {
+    return this.icon;
+  }
+
+	public  void setIcon(FitxerJPA icon) {
+    this.icon = icon;
+  }
+
+// IMP Field:pluginid | Table: car_plugin | Type: 1  
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@ForeignKey(name="car_entitat_plugin_login_fk")
+	@JoinColumn(name = "pluginloginid", referencedColumnName ="pluginID", nullable = true, insertable=false, updatable=false)
+	private PluginJPA plugin;
+
+	public PluginJPA getPlugin() {
+    return this.plugin;
+  }
+
+	public  void setPlugin(PluginJPA plugin) {
+    this.plugin = plugin;
   }
 
 // IMP Field:fitxerid | Table: car_fitxer | Type: 1  
@@ -461,18 +609,29 @@ private static final long serialVersionUID = 489209138L;
     __tmp.setCodi(__bean.getCodi());
     __tmp.setCodiDir3(__bean.getCodiDir3());
     __tmp.setActiva(__bean.isActiva());
-    __tmp.setLogoMenuID(__bean.getLogoMenuID());
     __tmp.setColorMenu(__bean.getColorMenu());
-    __tmp.setTextePeu(__bean.getTextePeu());
-    __tmp.setLogoPeuID(__bean.getLogoPeuID());
+    __tmp.setLogoCapBackID(__bean.getLogoCapBackID());
+    __tmp.setLogoPeuBackID(__bean.getLogoPeuBackID());
+    __tmp.setLogoLateralFrontID(__bean.getLogoLateralFrontID());
     __tmp.setVersio(__bean.getVersio());
-    __tmp.setCommit(__bean.getCommit());
+    __tmp.setIconID(__bean.getIconID());
+    __tmp.setWebEntitat(__bean.getWebEntitat());
+    __tmp.setEntitatDescFront(__bean.getEntitatDescFront());
+    __tmp.setSuportWeb(__bean.getSuportWeb());
+    __tmp.setSuportTelefon(__bean.getSuportTelefon());
+    __tmp.setSuportEmail(__bean.getSuportEmail());
+    __tmp.setPluginLoginID(__bean.getPluginLoginID());
     __tmp.setFitxerCssID(__bean.getFitxerCssID());
     __tmp.setContext(__bean.getContext());
+    __tmp.setCommit(__bean.getCommit());
     // Fitxer
-    __tmp.setLogoMenu(FitxerJPA.toJPA(__bean.getLogoMenu()));
+    __tmp.setLogoCapBack(FitxerJPA.toJPA(__bean.getLogoCapBack()));
     // Fitxer
-    __tmp.setLogoPeu(FitxerJPA.toJPA(__bean.getLogoPeu()));
+    __tmp.setLogoPeuBack(FitxerJPA.toJPA(__bean.getLogoPeuBack()));
+    // Fitxer
+    __tmp.setLogoLateralFront(FitxerJPA.toJPA(__bean.getLogoLateralFront()));
+    // Fitxer
+    __tmp.setIcon(FitxerJPA.toJPA(__bean.getIcon()));
     // Fitxer
     __tmp.setFitxerCss(FitxerJPA.toJPA(__bean.getFitxerCss()));
 		return __tmp;
@@ -549,6 +708,10 @@ private static final long serialVersionUID = 489209138L;
     if(!"TraduccioJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.nom) || org.hibernate.Hibernate.isInitialized(__jpa.getNom()) ) ) {
       __tmp.setNom(TraduccioJPA.copyJPA(__jpa.getNom(), __alreadyCopied,"EntitatJPA"));
+    }
+    if(!"PluginJPA".equals(origenJPA) && 
+       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.plugin) || org.hibernate.Hibernate.isInitialized(__jpa.getPlugin()) ) ) {
+      __tmp.setPlugin(PluginJPA.copyJPA(__jpa.getPlugin(), __alreadyCopied,"EntitatJPA"));
     }
 
     return __tmp;

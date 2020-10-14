@@ -17,23 +17,41 @@ public interface Entitat extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public boolean isActiva();
 	public void setActiva(boolean _activa_);
 
-	public java.lang.Long getLogoMenuID();
-	public void setLogoMenuID(java.lang.Long _logoMenuID_);
-
 	public java.lang.String getColorMenu();
 	public void setColorMenu(java.lang.String _colorMenu_);
 
-	public java.lang.String getTextePeu();
-	public void setTextePeu(java.lang.String _textePeu_);
+	public long getLogoCapBackID();
+	public void setLogoCapBackID(long _logoCapBackID_);
 
-	public long getLogoPeuID();
-	public void setLogoPeuID(long _logoPeuID_);
+	public long getLogoPeuBackID();
+	public void setLogoPeuBackID(long _logoPeuBackID_);
+
+	public long getLogoLateralFrontID();
+	public void setLogoLateralFrontID(long _logoLateralFrontID_);
 
 	public java.lang.String getVersio();
 	public void setVersio(java.lang.String _versio_);
 
-	public java.lang.String getCommit();
-	public void setCommit(java.lang.String _commit_);
+	public long getIconID();
+	public void setIconID(long _iconID_);
+
+	public java.lang.String getWebEntitat();
+	public void setWebEntitat(java.lang.String _webEntitat_);
+
+	public java.lang.String getEntitatDescFront();
+	public void setEntitatDescFront(java.lang.String _entitatDescFront_);
+
+	public java.lang.String getSuportWeb();
+	public void setSuportWeb(java.lang.String _suportWeb_);
+
+	public java.lang.String getSuportTelefon();
+	public void setSuportTelefon(java.lang.String _suportTelefon_);
+
+	public java.lang.String getSuportEmail();
+	public void setSuportEmail(java.lang.String _suportEmail_);
+
+	public java.lang.Long getPluginLoginID();
+	public void setPluginLoginID(java.lang.Long _pluginLoginID_);
 
 	public java.lang.Long getFitxerCssID();
 	public void setFitxerCssID(java.lang.Long _fitxerCssID_);
@@ -41,10 +59,17 @@ public interface Entitat extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getContext();
 	public void setContext(java.lang.String _context_);
 
+	public java.lang.String getCommit();
+	public void setCommit(java.lang.String _commit_);
+
   // Fitxer
-  public <F extends Fitxer> F getLogoMenu();
+  public <F extends Fitxer> F getLogoCapBack();
   // Fitxer
-  public <F extends Fitxer> F getLogoPeu();
+  public <F extends Fitxer> F getLogoPeuBack();
+  // Fitxer
+  public <F extends Fitxer> F getLogoLateralFront();
+  // Fitxer
+  public <F extends Fitxer> F getIcon();
   // Fitxer
   public <F extends Fitxer> F getFitxerCss();
 

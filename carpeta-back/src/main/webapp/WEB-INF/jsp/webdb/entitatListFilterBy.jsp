@@ -143,19 +143,6 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.TEXTEPEU)}">
-            <%-- FILTRE STRING --%>
-            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="entitat.textePeu" var="textePeu" />
-              <fmt:message key="genapp.form.searchby" var="cercapertextePeu" >                
-                 <fmt:param value="${textePeu}"/>
-              </fmt:message>
-              <span class="add-on"><c:out value="${textePeu}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercapertextePeu}" path="textePeu" />
-            </div>
-
-
-        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.VERSIO)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
@@ -169,15 +156,85 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.COMMIT)}">
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.WEBENTITAT)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="entitat.commit" var="commit" />
-              <fmt:message key="genapp.form.searchby" var="cercapercommit" >                
-                 <fmt:param value="${commit}"/>
+              <fmt:message key="entitat.webEntitat" var="webEntitat" />
+              <fmt:message key="genapp.form.searchby" var="cercaperwebEntitat" >                
+                 <fmt:param value="${webEntitat}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${commit}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercapercommit}" path="commit" />
+              <span class="add-on"><c:out value="${webEntitat}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperwebEntitat}" path="webEntitat" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.ENTITATDESCFRONT)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="entitat.entitatDescFront" var="entitatDescFront" />
+              <fmt:message key="genapp.form.searchby" var="cercaperentitatDescFront" >                
+                 <fmt:param value="${entitatDescFront}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${entitatDescFront}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperentitatDescFront}" path="entitatDescFront" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.SUPORTWEB)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="entitat.suportWeb" var="suportWeb" />
+              <fmt:message key="genapp.form.searchby" var="cercapersuportWeb" >                
+                 <fmt:param value="${suportWeb}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${suportWeb}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapersuportWeb}" path="suportWeb" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.SUPORTTELEFON)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="entitat.suportTelefon" var="suportTelefon" />
+              <fmt:message key="genapp.form.searchby" var="cercapersuportTelefon" >                
+                 <fmt:param value="${suportTelefon}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${suportTelefon}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapersuportTelefon}" path="suportTelefon" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.SUPORTEMAIL)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="entitat.suportEmail" var="suportEmail" />
+              <fmt:message key="genapp.form.searchby" var="cercapersuportEmail" >                
+                 <fmt:param value="${suportEmail}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${suportEmail}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapersuportEmail}" path="suportEmail" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.PLUGINLOGINID)}">
+            <%-- FILTRE NUMERO --%>      
+            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+              <span class="add-on"><fmt:message key="entitat.pluginLoginID" />:</span>
+
+              <span class="add-on"><fmt:message key="genapp.from" /></span>
+              
+              <form:input cssClass="input-append input-small" path="pluginLoginIDDesde" />
+
+
+              <span class="add-on"><fmt:message key="genapp.to" /></span>
+
+              <form:input cssClass="input-append input-small search-query" path="pluginLoginIDFins" />
+
             </div>
 
 
@@ -191,6 +248,19 @@
               </fmt:message>
               <span class="add-on"><c:out value="${context}" />:</span>
               <form:input cssClass="search-query input-medium" placeholder="${cercapercontext}" path="context" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.COMMIT)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="entitat.commit" var="commit" />
+              <fmt:message key="genapp.form.searchby" var="cercapercommit" >                
+                 <fmt:param value="${commit}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${commit}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapercommit}" path="commit" />
             </div>
 
 

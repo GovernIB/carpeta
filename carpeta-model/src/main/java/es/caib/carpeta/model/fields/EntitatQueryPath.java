@@ -31,28 +31,52 @@ public class EntitatQueryPath extends org.fundaciobit.genapp.common.query.QueryP
     return new BooleanField(getQueryPath(), EntitatFields.ACTIVA);
   }
 
-  public LongField LOGOMENUID() {
-    return new LongField(getQueryPath(), EntitatFields.LOGOMENUID);
-  }
-
   public StringField COLORMENU() {
     return new StringField(getQueryPath(), EntitatFields.COLORMENU);
   }
 
-  public StringField TEXTEPEU() {
-    return new StringField(getQueryPath(), EntitatFields.TEXTEPEU);
+  public LongField LOGOCAPBACKID() {
+    return new LongField(getQueryPath(), EntitatFields.LOGOCAPBACKID);
   }
 
-  public LongField LOGOPEUID() {
-    return new LongField(getQueryPath(), EntitatFields.LOGOPEUID);
+  public LongField LOGOPEUBACKID() {
+    return new LongField(getQueryPath(), EntitatFields.LOGOPEUBACKID);
+  }
+
+  public LongField LOGOLATERALFRONTID() {
+    return new LongField(getQueryPath(), EntitatFields.LOGOLATERALFRONTID);
   }
 
   public StringField VERSIO() {
     return new StringField(getQueryPath(), EntitatFields.VERSIO);
   }
 
-  public StringField COMMIT() {
-    return new StringField(getQueryPath(), EntitatFields.COMMIT);
+  public LongField ICONID() {
+    return new LongField(getQueryPath(), EntitatFields.ICONID);
+  }
+
+  public StringField WEBENTITAT() {
+    return new StringField(getQueryPath(), EntitatFields.WEBENTITAT);
+  }
+
+  public StringField ENTITATDESCFRONT() {
+    return new StringField(getQueryPath(), EntitatFields.ENTITATDESCFRONT);
+  }
+
+  public StringField SUPORTWEB() {
+    return new StringField(getQueryPath(), EntitatFields.SUPORTWEB);
+  }
+
+  public StringField SUPORTTELEFON() {
+    return new StringField(getQueryPath(), EntitatFields.SUPORTTELEFON);
+  }
+
+  public StringField SUPORTEMAIL() {
+    return new StringField(getQueryPath(), EntitatFields.SUPORTEMAIL);
+  }
+
+  public LongField PLUGINLOGINID() {
+    return new LongField(getQueryPath(), EntitatFields.PLUGINLOGINID);
   }
 
   public LongField FITXERCSSID() {
@@ -61,6 +85,10 @@ public class EntitatQueryPath extends org.fundaciobit.genapp.common.query.QueryP
 
   public StringField CONTEXT() {
     return new StringField(getQueryPath(), EntitatFields.CONTEXT);
+  }
+
+  public StringField COMMIT() {
+    return new StringField(getQueryPath(), EntitatFields.COMMIT);
   }
 
 
@@ -220,18 +248,42 @@ public class EntitatQueryPath extends org.fundaciobit.genapp.common.query.QueryP
     });
   }
 
-  public FitxerQueryPath LOGOMENU() {
+  public FitxerQueryPath LOGOCAPBACK() {
     return new FitxerQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return EntitatQueryPath.this.getQueryPath() + "logoMenu" + ".";
+          return EntitatQueryPath.this.getQueryPath() + "logoCapBack" + ".";
       }
     });
   }
 
-  public FitxerQueryPath LOGOPEU() {
+  public FitxerQueryPath LOGOPEUBACK() {
     return new FitxerQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return EntitatQueryPath.this.getQueryPath() + "logoPeu" + ".";
+          return EntitatQueryPath.this.getQueryPath() + "logoPeuBack" + ".";
+      }
+    });
+  }
+
+  public FitxerQueryPath LOGOLATERALFRONT() {
+    return new FitxerQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return EntitatQueryPath.this.getQueryPath() + "logoLateralFront" + ".";
+      }
+    });
+  }
+
+  public FitxerQueryPath ICON() {
+    return new FitxerQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return EntitatQueryPath.this.getQueryPath() + "icon" + ".";
+      }
+    });
+  }
+
+  public PluginQueryPath PLUGIN() {
+    return new PluginQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return EntitatQueryPath.this.getQueryPath() + "plugin" + ".";
       }
     });
   }

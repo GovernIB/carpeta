@@ -171,6 +171,19 @@ private static final long serialVersionUID = 190357384L;
 	}
 
 
+// EXP  Field:pluginloginid | Table: car_entitat | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "plugin")
+	private Set<EntitatJPA> entitats = new HashSet<EntitatJPA>(0);
+	public  Set<EntitatJPA> getEntitats() {
+    return this.entitats;
+  }
+
+	public void setEntitats(Set<EntitatJPA> entitats) {
+	  this.entitats = entitats;
+	}
+
+
 // EXP  Field:pluginid | Table: car_log | Type: 0  
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "plugin")
@@ -296,6 +309,10 @@ private static final long serialVersionUID = 190357384L;
     if(!"PluginEntitatJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.pluginEntitats) || org.hibernate.Hibernate.isInitialized(__jpa.getPluginEntitats())) ) {
       __tmp.setPluginEntitats(PluginEntitatJPA.copyJPA(__jpa.getPluginEntitats(), __alreadyCopied,"PluginJPA"));
+    }
+    if(!"EntitatJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitats) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitats())) ) {
+      __tmp.setEntitats(EntitatJPA.copyJPA(__jpa.getEntitats(), __alreadyCopied,"PluginJPA"));
     }
     if(!"AvisJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.aviss) || org.hibernate.Hibernate.isInitialized(__jpa.getAviss())) ) {

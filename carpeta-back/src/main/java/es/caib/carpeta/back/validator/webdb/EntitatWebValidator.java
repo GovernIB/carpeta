@@ -36,6 +36,9 @@ public class EntitatWebValidator extends AbstractWebValidator<EntitatForm, Entit
   @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EntitatLocal.JNDI_NAME)
   protected es.caib.carpeta.ejb.EntitatLocal entitatEjb;
 
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.PluginLocal.JNDI_NAME)
+  protected es.caib.carpeta.ejb.PluginLocal pluginEjb;
+
   @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.TraduccioLocal.JNDI_NAME)
   protected es.caib.carpeta.ejb.TraduccioLocal traduccioEjb;
 
@@ -120,17 +123,38 @@ _ignoreFields.add(NOMID);
     if (isNou) { // Creacio
       // ================ CREATION
       // Fitxers 
-      CommonsMultipartFile logoPeuID = ((EntitatForm)__form).getLogoPeuID();
-      if (logoPeuID == null || logoPeuID.isEmpty()) {
-        errors.rejectValue(get(LOGOPEUID), "genapp.validation.required",
-          new String[]{ org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(get(LOGOPEUID)) },
+      CommonsMultipartFile logoCapBackID = ((EntitatForm)__form).getLogoCapBackID();
+      if (logoCapBackID == null || logoCapBackID.isEmpty()) {
+        errors.rejectValue(get(LOGOCAPBACKID), "genapp.validation.required",
+          new String[]{ org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(get(LOGOCAPBACKID)) },
+          null);
+      }
+
+      CommonsMultipartFile logoPeuBackID = ((EntitatForm)__form).getLogoPeuBackID();
+      if (logoPeuBackID == null || logoPeuBackID.isEmpty()) {
+        errors.rejectValue(get(LOGOPEUBACKID), "genapp.validation.required",
+          new String[]{ org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(get(LOGOPEUBACKID)) },
+          null);
+      }
+
+      CommonsMultipartFile logoLateralFrontID = ((EntitatForm)__form).getLogoLateralFrontID();
+      if (logoLateralFrontID == null || logoLateralFrontID.isEmpty()) {
+        errors.rejectValue(get(LOGOLATERALFRONTID), "genapp.validation.required",
+          new String[]{ org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(get(LOGOLATERALFRONTID)) },
+          null);
+      }
+
+      CommonsMultipartFile iconID = ((EntitatForm)__form).getIconID();
+      if (iconID == null || iconID.isEmpty()) {
+        errors.rejectValue(get(ICONID), "genapp.validation.required",
+          new String[]{ org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(get(ICONID)) },
           null);
       }
 
     }
     BeanValidatorResult<Entitat> __vr = new BeanValidatorResult<Entitat>();
     validator.validate(__vr, __bean,
-      isNou, entitatEjb, traduccioEjb);
+      isNou, entitatEjb, pluginEjb, traduccioEjb);
 
     if (__vr.hasErrors()) {
         List<I18NFieldError> vrErrors = __vr.getErrors();

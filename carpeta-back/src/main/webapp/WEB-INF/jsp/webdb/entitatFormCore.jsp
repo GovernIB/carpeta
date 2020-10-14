@@ -95,46 +95,6 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.LOGOMENUID)}">
-        <tr id="entitat_logoMenuID_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[EntitatFields.LOGOMENUID])?'entitat.logoMenuID':__theForm.labels[EntitatFields.LOGOMENUID]}" />
-              <c:if test="${not empty __theForm.help[EntitatFields.LOGOMENUID]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.LOGOMENUID]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-              <form:errors path="entitat.logoMenuID" cssClass="errorField alert alert-error" />
-            <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOMENUID)}" >
-              <a target="_blank" href="<c:url value="${car:fileUrl(logoMenuID.logoMenuID)}"/>">${logoMenuID.logoMenuID.nom}</a>
-            </c:if>
-            <c:if test="${!gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOMENUID)}" >
-              <div class="input-group">
-                <div class="custom-file col-md-4">
-                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOMENUID)? 'true' : 'false'}" cssClass="custom-file-input col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOMENUID)? ' uneditable-input' : ''}"   path="logoMenuID" type="file" />
-                  <label class="custom-file-label" for="logoMenuID">
-                  </label>
-                </div>
-                <c:if test="${not empty __theForm.entitat.logoMenu}">
-                <div class="input-group-append">
-                  <span class="input-group-text" id="">
-                  <small>              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.entitat.logoMenu)}"/>">${__theForm.entitat.logoMenu.nom}</a>
-</small>
-                  </span>
-                  <span class="input-group-text" id="">
-                        <form:checkbox path="logoMenuIDDelete"/>
-                        <small><fmt:message key="genapp.form.file.delete"/></small>
-                  </span>
-                </div>
-                </c:if>
-              </div>
-            </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
         <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.COLORMENU)}">
         <tr id="entitat_colorMenu_rowid">
           <td>
@@ -153,57 +113,104 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.TEXTEPEU)}">
-        <tr id="entitat_textePeu_rowid">
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.LOGOCAPBACKID)}">
+        <tr id="entitat_logoCapBackID_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[EntitatFields.TEXTEPEU])?'entitat.textePeu':__theForm.labels[EntitatFields.TEXTEPEU]}" />
-              <c:if test="${not empty __theForm.help[EntitatFields.TEXTEPEU]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.TEXTEPEU]}" ></i>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.LOGOCAPBACKID])?'entitat.logoCapBackID':__theForm.labels[EntitatFields.LOGOCAPBACKID]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[EntitatFields.LOGOCAPBACKID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.LOGOCAPBACKID]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-              <form:errors path="entitat.textePeu" cssClass="errorField alert alert-error" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;" cssClass="form-control col-md-8" readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.TEXTEPEU)? 'true' : 'false'}" path="entitat.textePeu"  />
-              <div class="btn-group" style="vertical-align: top;">
-              <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span></button>
-              <ul class="dropdown-menu">
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('entitat.textePeu'); ta.wrap='off';" >No Wrap</a></li>
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('entitat.textePeu'); ta.wrap='soft';">Soft Wrap</a></li>
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('entitat.textePeu'); ta.wrap='hard';">Hard Wrap</a></li>
-              </ul>
+              <form:errors path="entitat.logoCapBackID" cssClass="errorField alert alert-error" />
+            <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOCAPBACKID)}" >
+              <a target="_blank" href="<c:url value="${car:fileUrl(logoCapBackID.logoCapBackID)}"/>">${logoCapBackID.logoCapBackID.nom}</a>
+            </c:if>
+            <c:if test="${!gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOCAPBACKID)}" >
+              <div class="input-group">
+                <div class="custom-file col-md-4">
+                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOCAPBACKID)? 'true' : 'false'}" cssClass="custom-file-input col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOCAPBACKID)? ' uneditable-input' : ''}"   path="logoCapBackID" type="file" />
+                  <label class="custom-file-label" for="logoCapBackID">
+                  </label>
+                </div>
+                <c:if test="${not empty __theForm.entitat.logoCapBack}">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="">
+                  <small>              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.entitat.logoCapBack)}"/>">${__theForm.entitat.logoCapBack.nom}</a>
+</small>
+                  </span>
+                </div>
+                </c:if>
               </div>
+            </c:if>
            </td>
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.LOGOPEUID)}">
-        <tr id="entitat_logoPeuID_rowid">
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.LOGOPEUBACKID)}">
+        <tr id="entitat_logoPeuBackID_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[EntitatFields.LOGOPEUID])?'entitat.logoPeuID':__theForm.labels[EntitatFields.LOGOPEUID]}" /> &nbsp;(*)
-              <c:if test="${not empty __theForm.help[EntitatFields.LOGOPEUID]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.LOGOPEUID]}" ></i>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.LOGOPEUBACKID])?'entitat.logoPeuBackID':__theForm.labels[EntitatFields.LOGOPEUBACKID]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[EntitatFields.LOGOPEUBACKID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.LOGOPEUBACKID]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-              <form:errors path="entitat.logoPeuID" cssClass="errorField alert alert-error" />
-            <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOPEUID)}" >
-              <a target="_blank" href="<c:url value="${car:fileUrl(logoPeuID.logoPeuID)}"/>">${logoPeuID.logoPeuID.nom}</a>
+              <form:errors path="entitat.logoPeuBackID" cssClass="errorField alert alert-error" />
+            <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOPEUBACKID)}" >
+              <a target="_blank" href="<c:url value="${car:fileUrl(logoPeuBackID.logoPeuBackID)}"/>">${logoPeuBackID.logoPeuBackID.nom}</a>
             </c:if>
-            <c:if test="${!gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOPEUID)}" >
+            <c:if test="${!gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOPEUBACKID)}" >
               <div class="input-group">
                 <div class="custom-file col-md-4">
-                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOPEUID)? 'true' : 'false'}" cssClass="custom-file-input col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOPEUID)? ' uneditable-input' : ''}"   path="logoPeuID" type="file" />
-                  <label class="custom-file-label" for="logoPeuID">
+                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOPEUBACKID)? 'true' : 'false'}" cssClass="custom-file-input col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOPEUBACKID)? ' uneditable-input' : ''}"   path="logoPeuBackID" type="file" />
+                  <label class="custom-file-label" for="logoPeuBackID">
                   </label>
                 </div>
-                <c:if test="${not empty __theForm.entitat.logoPeu}">
+                <c:if test="${not empty __theForm.entitat.logoPeuBack}">
                 <div class="input-group-append">
                   <span class="input-group-text" id="">
-                  <small>              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.entitat.logoPeu)}"/>">${__theForm.entitat.logoPeu.nom}</a>
+                  <small>              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.entitat.logoPeuBack)}"/>">${__theForm.entitat.logoPeuBack.nom}</a>
+</small>
+                  </span>
+                </div>
+                </c:if>
+              </div>
+            </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.LOGOLATERALFRONTID)}">
+        <tr id="entitat_logoLateralFrontID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.LOGOLATERALFRONTID])?'entitat.logoLateralFrontID':__theForm.labels[EntitatFields.LOGOLATERALFRONTID]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[EntitatFields.LOGOLATERALFRONTID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.LOGOLATERALFRONTID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+              <form:errors path="entitat.logoLateralFrontID" cssClass="errorField alert alert-error" />
+            <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOLATERALFRONTID)}" >
+              <a target="_blank" href="<c:url value="${car:fileUrl(logoLateralFrontID.logoLateralFrontID)}"/>">${logoLateralFrontID.logoLateralFrontID.nom}</a>
+            </c:if>
+            <c:if test="${!gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOLATERALFRONTID)}" >
+              <div class="input-group">
+                <div class="custom-file col-md-4">
+                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOLATERALFRONTID)? 'true' : 'false'}" cssClass="custom-file-input col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOLATERALFRONTID)? ' uneditable-input' : ''}"   path="logoLateralFrontID" type="file" />
+                  <label class="custom-file-label" for="logoLateralFrontID">
+                  </label>
+                </div>
+                <c:if test="${not empty __theForm.entitat.logoLateralFront}">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="">
+                  <small>              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.entitat.logoLateralFront)}"/>">${__theForm.entitat.logoLateralFront.nom}</a>
 </small>
                   </span>
                 </div>
@@ -232,20 +239,188 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.COMMIT)}">
-        <tr id="entitat_commit_rowid">
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.ICONID)}">
+        <tr id="entitat_iconID_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[EntitatFields.COMMIT])?'entitat.commit':__theForm.labels[EntitatFields.COMMIT]}" />
-              <c:if test="${not empty __theForm.help[EntitatFields.COMMIT]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.COMMIT]}" ></i>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.ICONID])?'entitat.iconID':__theForm.labels[EntitatFields.ICONID]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[EntitatFields.ICONID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.ICONID]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="entitat.commit" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.COMMIT)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.COMMIT)? ' uneditable-input' : ''}"  maxlength="255" path="entitat.commit"   />
+              <form:errors path="entitat.iconID" cssClass="errorField alert alert-error" />
+            <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.ICONID)}" >
+              <a target="_blank" href="<c:url value="${car:fileUrl(iconID.iconID)}"/>">${iconID.iconID.nom}</a>
+            </c:if>
+            <c:if test="${!gen:contains(__theForm.readOnlyFields ,EntitatFields.ICONID)}" >
+              <div class="input-group">
+                <div class="custom-file col-md-4">
+                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.ICONID)? 'true' : 'false'}" cssClass="custom-file-input col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.ICONID)? ' uneditable-input' : ''}"   path="iconID" type="file" />
+                  <label class="custom-file-label" for="iconID">
+                  </label>
+                </div>
+                <c:if test="${not empty __theForm.entitat.icon}">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="">
+                  <small>              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.entitat.icon)}"/>">${__theForm.entitat.icon.nom}</a>
+</small>
+                  </span>
+                </div>
+                </c:if>
+              </div>
+            </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.WEBENTITAT)}">
+        <tr id="entitat_webEntitat_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.WEBENTITAT])?'entitat.webEntitat':__theForm.labels[EntitatFields.WEBENTITAT]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[EntitatFields.WEBENTITAT]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.WEBENTITAT]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+           <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.WEBENTITAT)}">
 
+             <c:if test="${ not empty __theForm.entitat.webEntitat}">
+               <a href="${__theForm.entitat.webEntitat}" target="_blank">${__theForm.entitat.webEntitat}</a>
+
+             </c:if>
+           </c:if>
+
+           <c:if test="${not (gen:contains(__theForm.readOnlyFields ,EntitatFields.WEBENTITAT))}">
+
+            <form:errors path="entitat.webEntitat" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.WEBENTITAT)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.WEBENTITAT)? ' uneditable-input' : ''}"  maxlength="255" path="entitat.webEntitat"   />
+
+           </c:if>
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.ENTITATDESCFRONT)}">
+        <tr id="entitat_entitatDescFront_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.ENTITATDESCFRONT])?'entitat.entitatDescFront':__theForm.labels[EntitatFields.ENTITATDESCFRONT]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[EntitatFields.ENTITATDESCFRONT]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.ENTITATDESCFRONT]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+              <form:errors path="entitat.entitatDescFront" cssClass="errorField alert alert-error" />
+              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;" cssClass="form-control col-md-8" readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.ENTITATDESCFRONT)? 'true' : 'false'}" path="entitat.entitatDescFront"  />
+              <div class="btn-group" style="vertical-align: top;">
+              <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span></button>
+              <ul class="dropdown-menu">
+                <li><a href="#" onclick="javascript:var ta=document.getElementById('entitat.entitatDescFront'); ta.wrap='off';" >No Wrap</a></li>
+                <li><a href="#" onclick="javascript:var ta=document.getElementById('entitat.entitatDescFront'); ta.wrap='soft';">Soft Wrap</a></li>
+                <li><a href="#" onclick="javascript:var ta=document.getElementById('entitat.entitatDescFront'); ta.wrap='hard';">Hard Wrap</a></li>
+              </ul>
+              </div>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.SUPORTWEB)}">
+        <tr id="entitat_suportWeb_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.SUPORTWEB])?'entitat.suportWeb':__theForm.labels[EntitatFields.SUPORTWEB]}" />
+              <c:if test="${not empty __theForm.help[EntitatFields.SUPORTWEB]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.SUPORTWEB]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+           <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTWEB)}">
+
+             <c:if test="${ not empty __theForm.entitat.suportWeb}">
+               <a href="${__theForm.entitat.suportWeb}" target="_blank">${__theForm.entitat.suportWeb}</a>
+
+             </c:if>
+           </c:if>
+
+           <c:if test="${not (gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTWEB))}">
+
+            <form:errors path="entitat.suportWeb" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTWEB)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTWEB)? ' uneditable-input' : ''}"  maxlength="255" path="entitat.suportWeb"   />
+
+           </c:if>
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.SUPORTTELEFON)}">
+        <tr id="entitat_suportTelefon_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.SUPORTTELEFON])?'entitat.suportTelefon':__theForm.labels[EntitatFields.SUPORTTELEFON]}" />
+              <c:if test="${not empty __theForm.help[EntitatFields.SUPORTTELEFON]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.SUPORTTELEFON]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="entitat.suportTelefon" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTTELEFON)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTTELEFON)? ' uneditable-input' : ''}"  maxlength="255" path="entitat.suportTelefon"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.SUPORTEMAIL)}">
+        <tr id="entitat_suportEmail_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.SUPORTEMAIL])?'entitat.suportEmail':__theForm.labels[EntitatFields.SUPORTEMAIL]}" />
+              <c:if test="${not empty __theForm.help[EntitatFields.SUPORTEMAIL]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.SUPORTEMAIL]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="entitat.suportEmail" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTEMAIL)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTEMAIL)? ' uneditable-input' : ''}"  maxlength="255" path="entitat.suportEmail"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.PLUGINLOGINID)}">
+        <tr id="entitat_pluginLoginID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.PLUGINLOGINID])?'entitat.pluginLoginID':__theForm.labels[EntitatFields.PLUGINLOGINID]}" />
+              <c:if test="${not empty __theForm.help[EntitatFields.PLUGINLOGINID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.PLUGINLOGINID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="entitat.pluginLoginID" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.PLUGINLOGINID)}" >
+          <form:hidden path="entitat.pluginLoginID"/>
+          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.entitat.pluginLoginID,__theForm.listOfPluginForPluginLoginID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,EntitatFields.PLUGINLOGINID)}" >
+          <form:select id="entitat_pluginLoginID"  onchange="if(typeof onChangePluginLoginID == 'function') {  onChangePluginLoginID(this); };"  cssClass="form-control col-md-4" path="entitat.pluginLoginID">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfPluginForPluginLoginID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
            </td>
         </tr>
         </c:if>
@@ -303,6 +478,24 @@
             <td>
             <form:errors path="entitat.context" cssClass="errorField alert alert-error" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.CONTEXT)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.CONTEXT)? ' uneditable-input' : ''}"  maxlength="255" path="entitat.context"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.COMMIT)}">
+        <tr id="entitat_commit_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.COMMIT])?'entitat.commit':__theForm.labels[EntitatFields.COMMIT]}" />
+              <c:if test="${not empty __theForm.help[EntitatFields.COMMIT]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.COMMIT]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="entitat.commit" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.COMMIT)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.COMMIT)? ' uneditable-input' : ''}"  maxlength="255" path="entitat.commit"   />
 
            </td>
         </tr>
