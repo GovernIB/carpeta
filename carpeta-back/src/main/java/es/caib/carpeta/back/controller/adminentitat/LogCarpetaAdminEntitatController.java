@@ -7,10 +7,8 @@ import es.caib.carpeta.back.form.webdb.LogCarpetaForm;
 import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.jpa.LogCarpetaJPA;
 import es.caib.carpeta.model.fields.LogCarpetaFields;
-import es.caib.carpeta.model.fields.PropietatGlobalFields;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
-import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -63,9 +61,9 @@ public class LogCarpetaAdminEntitatController extends LogCarpetaController {
             logCarpetaFilterForm.addHiddenField(ENTITATID);
             logCarpetaFilterForm.addHiddenField(LOGID);
             logCarpetaFilterForm.setAddButtonVisible(false);
-            logCarpetaFilterForm.setDeleteSelectedButtonVisible(false);
+            /*logCarpetaFilterForm.setDeleteSelectedButtonVisible(false);
             logCarpetaFilterForm.setEditButtonVisible(false);
-            logCarpetaFilterForm.setDeleteButtonVisible(false);
+            logCarpetaFilterForm.setDeleteButtonVisible(false);*/
         }
         return logCarpetaFilterForm;
     }

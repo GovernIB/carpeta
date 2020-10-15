@@ -1,15 +1,21 @@
 package es.caib.carpeta.back.controller.webdb;
 
+import es.caib.carpeta.back.form.webdb.*;
+import es.caib.carpeta.back.validator.webdb.LogCarpetaWebValidator;
+import es.caib.carpeta.jpa.LogCarpetaJPA;
+import es.caib.carpeta.model.entity.LogCarpeta;
+import es.caib.carpeta.model.fields.EntitatFields;
+import es.caib.carpeta.model.fields.LogCarpetaFields;
+import es.caib.carpeta.model.fields.PluginFields;
 import org.fundaciobit.genapp.common.StringKeyValue;
+import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.i18n.I18NValidationException;
+import org.fundaciobit.genapp.common.query.Field;
+import org.fundaciobit.genapp.common.query.GroupByItem;
+import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.utils.Utils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
-import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.genapp.common.query.GroupByItem;
-import org.fundaciobit.genapp.common.query.Field;
-import org.fundaciobit.genapp.common.query.Where;
-import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.web.validation.ValidationWebUtils;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Controller;
@@ -23,19 +29,9 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
-
-import es.caib.carpeta.back.form.webdb.*;
-import es.caib.carpeta.back.form.webdb.LogCarpetaForm;
-
-import es.caib.carpeta.back.validator.webdb.LogCarpetaWebValidator;
-
-import es.caib.carpeta.jpa.LogCarpetaJPA;
-import es.caib.carpeta.model.entity.LogCarpeta;
-import es.caib.carpeta.model.fields.*;
 
 /**
  * Controller per gestionar un LogCarpeta
@@ -206,6 +202,26 @@ public class LogCarpetaController
       };
     }
 
+    // Field tipus
+    {
+      _listSKV = getReferenceListForTipus(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForTipus(_tmp);
+      if (filterForm.getGroupByFields().contains(TIPUS)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, TIPUS, false);
+      };
+    }
+
+    // Field estat
+    {
+      _listSKV = getReferenceListForEstat(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForEstat(_tmp);
+      if (filterForm.getGroupByFields().contains(ESTAT)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, ESTAT, false);
+      };
+    }
+
 
     return groupByItemsMap;
   }
@@ -223,6 +239,8 @@ public class LogCarpetaController
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
     __mapping.put(ENTITATID, filterForm.getMapOfEntitatForEntitatID());
     __mapping.put(PLUGINID, filterForm.getMapOfPluginForPluginID());
+    __mapping.put(TIPUS, filterForm.getMapOfValuesForTipus());
+    __mapping.put(ESTAT, filterForm.getMapOfValuesForEstat());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -287,6 +305,24 @@ public class LogCarpetaController
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
       logCarpetaForm.setListOfPluginForPluginID(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (logCarpetaForm.getListOfValuesForTipus() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForTipus(request, mav, logCarpetaForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      logCarpetaForm.setListOfValuesForTipus(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (logCarpetaForm.getListOfValuesForEstat() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForEstat(request, mav, logCarpetaForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      logCarpetaForm.setListOfValuesForEstat(_listSKV);
     }
     
   }
@@ -668,6 +704,70 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForPluginID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return pluginRefList.getReferenceList(PluginFields.PLUGINID, where );
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
+       ModelAndView mav, LogCarpetaForm logCarpetaForm, Where where)  throws I18NException {
+    if (logCarpetaForm.isHiddenField(TIPUS)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForTipus(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
+       ModelAndView mav, LogCarpetaFilterForm logCarpetaFilterForm,
+       List<LogCarpeta> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (logCarpetaFilterForm.isHiddenField(TIPUS)
+      && !logCarpetaFilterForm.isGroupByField(TIPUS)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForTipus(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("1" , "1"));
+    __tmp.add(new StringKeyValue("2" , "2"));
+    __tmp.add(new StringKeyValue("3" , "3"));
+    __tmp.add(new StringKeyValue("4" , "4"));
+    __tmp.add(new StringKeyValue("5" , "5"));
+    return __tmp;
+  }
+
+
+  public List<StringKeyValue> getReferenceListForEstat(HttpServletRequest request,
+       ModelAndView mav, LogCarpetaForm logCarpetaForm, Where where)  throws I18NException {
+    if (logCarpetaForm.isHiddenField(ESTAT)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForEstat(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForEstat(HttpServletRequest request,
+       ModelAndView mav, LogCarpetaFilterForm logCarpetaFilterForm,
+       List<LogCarpeta> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (logCarpetaFilterForm.isHiddenField(ESTAT)
+      && !logCarpetaFilterForm.isGroupByField(ESTAT)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForEstat(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForEstat(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("0" , "0"));
+    __tmp.add(new StringKeyValue("1" , "1"));
+    __tmp.add(new StringKeyValue("2" , "2"));
+    return __tmp;
   }
 
 

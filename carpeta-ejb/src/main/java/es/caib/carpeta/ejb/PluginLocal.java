@@ -1,11 +1,11 @@
 
 package es.caib.carpeta.ejb;
 
-import javax.ejb.Local;
-
-import es.caib.carpeta.jpa.PluginJPA;
 import es.caib.carpeta.jpa.PluginIJPAManager;
+import es.caib.carpeta.jpa.PluginJPA;
 import es.caib.carpeta.model.dao.IPluginManager;
+
+import javax.ejb.Local;
 
 @Local
 public interface PluginLocal extends PluginIJPAManager,IPluginManager {

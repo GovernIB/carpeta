@@ -52,12 +52,18 @@
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,LogCarpetaFields.TIPUS)}">
           <td>
-          ${logCarpeta.tipus}
+          <c:set var="tmp">${logCarpeta.tipus}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForTipus[tmp]}
+          </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,LogCarpetaFields.ESTAT)}">
           <td>
-          ${logCarpeta.estat}
+          <c:set var="tmp">${logCarpeta.estat}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForEstat[tmp]}
+          </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,LogCarpetaFields.TEMPS)}">

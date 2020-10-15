@@ -1,11 +1,11 @@
 
 package es.caib.carpeta.ejb;
 
-import javax.ejb.Local;
-
-import es.caib.carpeta.jpa.EnllazJPA;
 import es.caib.carpeta.jpa.EnllazIJPAManager;
+import es.caib.carpeta.jpa.EnllazJPA;
 import es.caib.carpeta.model.dao.IEnllazManager;
+
+import javax.ejb.Local;
 
 @Local
 public interface EnllazLocal extends EnllazIJPAManager,IEnllazManager {

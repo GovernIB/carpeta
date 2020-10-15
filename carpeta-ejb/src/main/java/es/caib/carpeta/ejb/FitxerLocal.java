@@ -1,11 +1,11 @@
 
 package es.caib.carpeta.ejb;
 
-import javax.ejb.Local;
-
-import es.caib.carpeta.jpa.FitxerJPA;
 import es.caib.carpeta.jpa.FitxerIJPAManager;
+import es.caib.carpeta.jpa.FitxerJPA;
 import es.caib.carpeta.model.dao.IFitxerManager;
+
+import javax.ejb.Local;
 
 @Local
 public interface FitxerLocal extends FitxerIJPAManager,IFitxerManager {

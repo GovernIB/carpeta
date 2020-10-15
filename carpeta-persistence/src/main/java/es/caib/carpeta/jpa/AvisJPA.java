@@ -1,18 +1,11 @@
 
 package es.caib.carpeta.jpa;
-import es.caib.carpeta.model.entity.*;
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
-import javax.persistence.GeneratedValue;
-import org.hibernate.annotations.Index;
-import javax.persistence.SequenceGenerator;
+
+import es.caib.carpeta.model.entity.Avis;
 import org.hibernate.annotations.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
+import org.hibernate.annotations.Index;
+
+import javax.persistence.*;
 
 
 @SuppressWarnings("deprecation")
@@ -52,7 +45,6 @@ private static final long serialVersionUID = 1036906268L;
 	@Column(name="gravetat",nullable = false,length = 10)
 	int gravetat;
 
-	@Index(name="car_avis_pluginfrontid_fk_i")
 	@Column(name="pluginfrontid",length = 19)
 	java.lang.Long pluginFrontID;
 

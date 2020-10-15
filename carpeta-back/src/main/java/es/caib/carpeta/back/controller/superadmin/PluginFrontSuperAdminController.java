@@ -1,12 +1,13 @@
 package es.caib.carpeta.back.controller.superadmin;
 
 
-import java.net.URL;
-
-import javax.ejb.EJB;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import es.caib.carpeta.back.form.webdb.PluginFilterForm;
+import es.caib.carpeta.back.form.webdb.PluginForm;
+import es.caib.carpeta.back.security.LoginInfo;
+import es.caib.carpeta.commons.utils.Constants;
+import es.caib.carpeta.jpa.LogCarpetaJPA;
+import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
+import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaLocal;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
@@ -17,10 +18,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import es.caib.carpeta.back.form.webdb.PluginFilterForm;
-import es.caib.carpeta.back.form.webdb.PluginForm;
-import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaLocal;
+import javax.ejb.EJB;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.net.URL;
+import java.sql.Timestamp;
+
+import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_PLUGIN_FRONT;
 
 /**
  * 
@@ -37,6 +42,10 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
 
     @EJB(mappedName = PluginDeCarpetaFrontLogicaLocal.JNDI_NAME)
     protected PluginDeCarpetaFrontLogicaLocal pluginCarpetaFrontEjb;
+
+
+    @EJB(mappedName = LogCarpetaLogicaLocal.JNDI_NAME)
+    protected LogCarpetaLogicaLocal logCarpetaLogicaEjb;
 
     @Override
     public int getTipus() {
@@ -69,6 +78,22 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
        log.info("startTestPlugin:: BASE = " + base);
        
        String view = "testPlugin";
+
+       // XYZ XXXX Creamos log de prueba
+      LogCarpetaJPA logCarpetaJPA = new LogCarpetaJPA();
+      logCarpetaJPA.setEntitatID(LoginInfo.getInstance().getEntitatID());
+      logCarpetaJPA.setDataInici(new Timestamp(System.currentTimeMillis()));
+      logCarpetaJPA.setDescripcio("Esto es una prueba de test plugin de marilen");
+      logCarpetaJPA.setTipus(TIPUS_LOG_PLUGIN_FRONT);
+      logCarpetaJPA.setEstat(ESTAT_LOG_OK);
+      logCarpetaJPA.setPluginID(pluginID);
+
+
+
+      logCarpetaLogicaEjb.crearLog(logCarpetaJPA);
+
+
+
 
        return CarpetaFrontModuleSuperAdminController.startPrivateSignatureProcess(request, response, view, pluginID, administrationID, base);
 

@@ -3,15 +3,16 @@ package es.caib.carpeta.back.security;
 import es.caib.carpeta.back.preparer.BasePreparer;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.ejb.EntitatLocal;
+import es.caib.carpeta.ejb.LogCarpetaLocal;
 import es.caib.carpeta.ejb.PropietatGlobalLocal;
-import es.caib.carpeta.logic.utils.EjbManager;
-import es.caib.carpeta.model.fields.EntitatFields;
 import es.caib.carpeta.jpa.EntitatJPA;
+import es.caib.carpeta.jpa.LogCarpetaJPA;
+import es.caib.carpeta.jpa.UsuariEntitatJPA;
 import es.caib.carpeta.jpa.UsuariJPA;
 import es.caib.carpeta.logic.UsuariEntitatLogicaLocal;
 import es.caib.carpeta.logic.UsuariLogicaLocal;
-import es.caib.carpeta.jpa.UsuariEntitatJPA;
-
+import es.caib.carpeta.logic.utils.EjbManager;
+import es.caib.carpeta.model.fields.EntitatFields;
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NTranslation;
@@ -26,14 +27,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.sql.Timestamp;
+import java.util.*;
+
+import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_BACK;
 
 /**
  *
@@ -107,12 +105,14 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 		UsuariLogicaLocal usuariPersonaLogicaEjb;
 		EntitatLocal entitatLogicaEjb;
 		PropietatGlobalLocal propietatGlobalEjb;
+		LogCarpetaLocal logCarpetaEjb;
 
 		try {
 			usuariEntitatLogicaEjb = EjbManager.getUsuariEntitatLogicaEJB();
 			usuariPersonaLogicaEjb = EjbManager.getUsuariPersonaLogicaEJB();
 			entitatLogicaEjb = EjbManager.getEntitatLogicaEJB();
 			propietatGlobalEjb =  EjbManager.getPropietatLogicaEJB();
+			logCarpetaEjb = EjbManager.getLogCarpetaLogicaEJB();
 		} catch (I18NException e) {
 			// TODO traduccio
 			throw new LoginException("No puc accedir al gestor d´obtenció de" + " informació d´usuari-entitat per "
@@ -345,6 +345,20 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
 		// and set the authentication of the current Session context
 		SecurityContextHolder.getContext().setAuthentication(loginInfo.generateToken());
+
+		//TODO Refactorizar este codigo marilen
+		LogCarpetaJPA logCarpeta = new LogCarpetaJPA();
+		logCarpeta.setEntitatID(entitatIDActual);
+		logCarpeta.setDataInici(new Timestamp(System.currentTimeMillis()));
+		logCarpeta.setDescripcio("L'usuari" + username + "s'ha autenticat correctament");
+		logCarpeta.setTipus(TIPUS_LOG_AUTENTICACIO_BACK);
+		logCarpeta.setEstat(ESTAT_LOG_OK);
+
+		try {
+			logCarpetaEjb.create(logCarpeta);
+		}catch (I18NException e){
+			log.error(I18NUtils.getMessage(e) , e);
+		}
 
 		if (isDebug) {
 			log.debug(">>>>>> Final del Process d'autenticació.");

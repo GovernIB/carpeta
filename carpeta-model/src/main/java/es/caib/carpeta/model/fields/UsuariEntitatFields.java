@@ -1,6 +1,9 @@
 
 package es.caib.carpeta.model.fields;
-import org.fundaciobit.genapp.common.query.*;
+
+import org.fundaciobit.genapp.common.query.BooleanField;
+import org.fundaciobit.genapp.common.query.Field;
+import org.fundaciobit.genapp.common.query.LongField;
 public interface UsuariEntitatFields extends java.io.Serializable {
 
   public static final String _TABLE_SQL = "car_usuarientitat";

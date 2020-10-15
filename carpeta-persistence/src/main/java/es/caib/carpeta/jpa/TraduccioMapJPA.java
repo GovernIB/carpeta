@@ -1,8 +1,10 @@
 
 package es.caib.carpeta.jpa;
-import es.caib.carpeta.model.entity.*;
-import javax.persistence.Table;
+
+import es.caib.carpeta.model.entity.TraduccioMap;
+
 import javax.persistence.Column;
+import javax.persistence.Table;
 
 
 @SuppressWarnings("deprecation")

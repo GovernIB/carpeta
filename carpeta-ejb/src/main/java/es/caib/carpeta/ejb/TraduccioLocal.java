@@ -1,11 +1,11 @@
 
 package es.caib.carpeta.ejb;
 
-import javax.ejb.Local;
-
-import es.caib.carpeta.jpa.TraduccioJPA;
 import es.caib.carpeta.jpa.TraduccioIJPAManager;
+import es.caib.carpeta.jpa.TraduccioJPA;
 import es.caib.carpeta.model.dao.ITraduccioManager;
+
+import javax.ejb.Local;
 
 @Local
 public interface TraduccioLocal extends TraduccioIJPAManager,ITraduccioManager {

@@ -1,13 +1,15 @@
 
 package es.caib.carpeta.jpa;
-import java.util.*;
+
+import es.caib.carpeta.model.dao.IAvisManager;
+import es.caib.carpeta.model.entity.Avis;
+import es.caib.carpeta.model.fields.AvisFields;
+import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.TableName;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import es.caib.carpeta.model.entity.*;
-import es.caib.carpeta.model.fields.*;
-import es.caib.carpeta.model.dao.*;
-import org.fundaciobit.genapp.common.query.TableName;
-import org.fundaciobit.genapp.common.i18n.I18NException;
+import java.util.List;
 
 
 public class AvisJPAManager

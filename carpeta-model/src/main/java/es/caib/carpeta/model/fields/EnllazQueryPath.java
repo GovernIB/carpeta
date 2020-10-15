@@ -1,6 +1,9 @@
 
 package es.caib.carpeta.model.fields;
-import org.fundaciobit.genapp.common.query.*;
+
+import org.fundaciobit.genapp.common.query.IntegerField;
+import org.fundaciobit.genapp.common.query.LongField;
+import org.fundaciobit.genapp.common.query.QueryPath;
 
 public class EnllazQueryPath extends org.fundaciobit.genapp.common.query.QueryPath {
 

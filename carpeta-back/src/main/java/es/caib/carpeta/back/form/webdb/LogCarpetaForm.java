@@ -1,9 +1,10 @@
 package es.caib.carpeta.back.form.webdb;
 
-import java.util.List;
-import org.fundaciobit.genapp.common.StringKeyValue;
 import es.caib.carpeta.back.form.CarpetaBaseForm;
 import es.caib.carpeta.jpa.LogCarpetaJPA;
+import org.fundaciobit.genapp.common.StringKeyValue;
+
+import java.util.List;
 
 /**
  *  ========= FITXER AUTOGENERAT - NO MODIFICAR !!!!! 
@@ -21,6 +22,8 @@ public class LogCarpetaForm extends CarpetaBaseForm {
       this.logCarpeta = __toClone.logCarpeta;
     this.listOfEntitatForEntitatID = __toClone.listOfEntitatForEntitatID;
     this.listOfPluginForPluginID = __toClone.listOfPluginForPluginID;
+    this.listOfValuesForTipus = __toClone.listOfValuesForTipus;
+    this.listOfValuesForEstat = __toClone.listOfValuesForEstat;
   }
   
   public LogCarpetaForm(LogCarpetaJPA logCarpeta, boolean nou) {
@@ -56,6 +59,30 @@ public class LogCarpetaForm extends CarpetaBaseForm {
 
   public void setListOfPluginForPluginID(List<StringKeyValue> listOfPluginForPluginID) {
     this.listOfPluginForPluginID = listOfPluginForPluginID;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForTipus;
+
+  public List<StringKeyValue> getListOfValuesForTipus() {
+    return this.listOfValuesForTipus;
+  }
+
+  public void setListOfValuesForTipus(List<StringKeyValue> listOfValuesForTipus) {
+    this.listOfValuesForTipus = listOfValuesForTipus;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForEstat;
+
+  public List<StringKeyValue> getListOfValuesForEstat() {
+    return this.listOfValuesForEstat;
+  }
+
+  public void setListOfValuesForEstat(List<StringKeyValue> listOfValuesForEstat) {
+    this.listOfValuesForEstat = listOfValuesForEstat;
   }
 
 
