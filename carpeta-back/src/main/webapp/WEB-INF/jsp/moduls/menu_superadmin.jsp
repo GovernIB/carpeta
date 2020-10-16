@@ -37,7 +37,7 @@
 <a class="dropdown-item"
     href="<c:url value="/superadmin/usuarientitat/list"/>"> <span
     style="${(fn:contains(url, '/superadmin/usuarientitat'))? " font-weight:bold;" : ""}"><spring:message
-            code="usuariEntitat.usuariEntitat.plural" /></span>
+            code="usuariEntitat.usuariEntitat.plural" /> </span>
 </a>
 
 <hr style="margin-top: 6px; margin-bottom: 6px;" />
@@ -45,7 +45,7 @@
 <a class="dropdown-item"
     href="<c:url value="/superadmin/avis/list"/>"> <span
     style="${(fn:contains(url, '/superadmin/avis'))? " font-weight:bold;" : ""}"><spring:message
-            code="avis.avis.plural" /></span>
+            code="avis.avis.plural" />&nbsp;<c:if test="numAvisos gt 0"><span class="badge badge-danger">${numAvisos}</span></c:if></span>
 </a>
 
 <%--

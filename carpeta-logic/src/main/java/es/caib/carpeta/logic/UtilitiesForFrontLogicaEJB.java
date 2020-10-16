@@ -143,5 +143,10 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
     public Fitxer getFileInfo(Long fitxerID) throws I18NException {
         return fitxerLogicaEjb.findByPrimaryKey(fitxerID);
     }
+    
+    @Override
+	public long getIconaEntitat(String codiEntitat) throws I18NException {
+    	return entitatEjb.executeQueryOne(EntitatFields.ICONID, EntitatFields.CODI.equal(codiEntitat));
+	}
 
 }

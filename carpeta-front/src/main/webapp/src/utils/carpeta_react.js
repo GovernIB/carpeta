@@ -6,6 +6,7 @@ var newDetallRegistreReact;
 var newNotificacionsReact;
 var newMapaWebReact;
 var newDadesPersonalsReact;
+var newMenuLateralReact;
 var newMenuDesllisantReact;
 var newBreadcrumbReact;
 var newPeuReact;
@@ -43,6 +44,10 @@ function newMapaWeb(compoWeb, nom) {
 
 function newDadesPersonals(compoWeb, nom) {
 	setTimeout(newDadesPersonalsReact.bind(null,compoWeb,nom) , 1);
+}
+
+function newMenuLateral(compoWeb, nom) {
+	setTimeout(newMenuLateralReact.bind(null,compoWeb,nom) , 1);
 }
 
 function newMenuDesllisant(compoWeb, nom) {

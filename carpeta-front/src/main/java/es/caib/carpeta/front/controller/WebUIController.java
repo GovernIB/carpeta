@@ -29,6 +29,8 @@ import es.caib.carpeta.model.entity.Enllaz;
 public class WebUIController extends CommonFrontController {
 
     public static final String WEBUI_PATH = "/webui";
+    
+    public static final String WEBUI_ICON_PATH = "/icona";
 
     /**
      * 
@@ -74,6 +76,24 @@ public class WebUIController extends CommonFrontController {
 
         public void setUrllogo(String urllogo) {
             this.urllogo = urllogo;
+        }
+
+    }
+   
+
+    @RequestMapping(value = WEBUI_ICON_PATH, method = RequestMethod.GET)
+    public void getEntitatLogo(HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+            //XYZ ZZZ Pendent codiEntitat
+        	String codiEntitat = "caib";
+        	
+        	Long iconaEntitatId = utilsEjb.getIconaEntitat(codiEntitat);
+        	
+            descarregaFitxer(response,iconaEntitatId);
+
+        } catch (Throwable e) {
+            processException(e, response);
         }
 
     }

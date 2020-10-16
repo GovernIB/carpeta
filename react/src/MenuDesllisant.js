@@ -4,6 +4,8 @@ import i18n from 'i18next';
 
 
 function MenuDesllisant ({ t , autenticat}) {
+	
+	var urlBase = window.location.href;
 
     var boto_ca;
     if (i18n.language === 'ca') {
@@ -18,7 +20,8 @@ function MenuDesllisant ({ t , autenticat}) {
     } else {
       boto_es = <button onClick={() => i18n.changeLanguage('es')} className="boton-menu">{ t('menuIdioma_es') }</button>;
     }
-	
+
+
 	const plugins = JSON.parse(sessionStorage.getItem('plugins'));
 
 	var accessibilitat;
@@ -31,19 +34,19 @@ function MenuDesllisant ({ t , autenticat}) {
 		
 		if (i18n.language === 'ca') {
 			plugHtml = plugins.filter(s => s.reactComponent === 'false').map(s => (
-				<li><a href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"} title={s.nomCa}><img src={"http://localhost:8080/carpetafront/pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img><span>{s.nomCa}</span></a></li>
+				<li><a href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"} title={s.nomCa}><img src={urlBase+"pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img><span>{s.nomCa}</span></a></li>
 			));
 			plugReact = plugins.filter(s => s.reactComponent === 'true').map(s => (
-				<li><a href={"javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"} title={s.nomCa}><img src={"http://localhost:8080/carpetafront/pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img><span>{s.nomCa}</span></a></li>
+				<li><a href={"javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"} title={s.nomCa}><img src={urlBase+"pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img><span>{s.nomCa}</span></a></li>
 			));
 		}
 
 		if (i18n.language === 'es') {
 			plugHtml = plugins.filter(s => s.reactComponent === 'false').map(s => (
-				<li><a href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"} title={s.nomEs}><img src={"http://localhost:8080/carpetafront/pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img><span>{s.nomEs}</span></a></li>
+				<li><a href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"} title={s.nomEs}><img src={urlBase+"pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img><span>{s.nomEs}</span></a></li>
 			));
 			plugReact = plugins.filter(s => s.reactComponent === 'true').map(s => (
-				<li><a href={"javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"} title={s.nomEs}><img src={"http://localhost:8080/carpetafront/pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img><span>{s.nomEs}</span></a></li>
+				<li><a href={"javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"} title={s.nomEs}><img src={urlBase+"pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img><span>{s.nomEs}</span></a></li>
 			));
 		}
 		
@@ -55,7 +58,6 @@ function MenuDesllisant ({ t , autenticat}) {
 		sortir = '';
 	}
 
-	var nomPlug = "PluginProva";
 
     return (
       <div className="imc-marc" id="imc-marc" tabIndex="-1" aria-hidden="true">

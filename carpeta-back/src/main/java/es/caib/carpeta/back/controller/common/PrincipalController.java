@@ -1,6 +1,8 @@
 package es.caib.carpeta.back.controller.common;
 
 import es.caib.carpeta.back.security.LoginInfo;
+import es.caib.carpeta.jpa.AvisJPA;
+import es.caib.carpeta.logic.AvisLogicaLocal;
 import es.caib.carpeta.utils.Configuracio;
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
@@ -13,6 +15,10 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,6 +33,9 @@ import javax.servlet.http.HttpSession;
 public class PrincipalController {
 
 	protected final Logger log = Logger.getLogger(getClass());
+	
+	@EJB(mappedName = AvisLogicaLocal.JNDI_NAME)
+	protected AvisLogicaLocal avisLogicaLocalEjb; 
 
 	@RequestMapping(value = "/common/principal.html")
 	public ModelAndView principal(HttpSession session, HttpServletRequest request, HttpServletResponse response)
@@ -59,6 +68,8 @@ public class PrincipalController {
 	public ModelAndView canviarPipella(HttpServletRequest request, HttpServletResponse response,
 			@PathVariable String pipella) throws Exception {
 
+		ModelAndView mav = new ModelAndView();
+		
 		if (pipella != null && pipella.trim().length() != 0) {
 
 			// TODO GENAPP Afegir altres pipelles !!!!!
@@ -67,27 +78,34 @@ public class PrincipalController {
 			 * return new ModelAndView(new RedirectView("/aden/peticionscaducades/list/1",
 			 * true)); }
 			 */
-
+			
 			if ("superadmin".equals(pipella)) {
-				return new ModelAndView(new RedirectView("/superadmin/buit", true));
+				mav.setView(new RedirectView("/superadmin/buit", true));
+				mav.addObject("numAvisos",this.checkNumAvisos("superadmin"));
+				return mav; 
 			}
 
 			if ("adminentitat".equals(pipella)) {
-				return new ModelAndView(new RedirectView("/adminentitat/buit", true));
+				mav.setView(new RedirectView("/adminentitat/buit", true));
+				mav.addObject("numAvisos",this.checkNumAvisos("adminentitat"));
+				return mav;
 			}
 
 			if ("webdb".equals(pipella)) {
-				return new ModelAndView("webdb");
+				mav.setViewName("webdb");
+				return mav;
 			}
 
 			if (Configuracio.isDesenvolupament() && "desenvolupament".equals(pipella)) {
-				return new ModelAndView("desenvolupament");
+				mav.setViewName("desenvolupament");
+				return mav;
 			}
 
 			log.error("S'ha accedit a canviarPipella amb un paràmetre desconegut: " + pipella);
 		}
 
-		return new ModelAndView("principal");
+		mav.setViewName("principal");
+		return mav;
 	}
 	
 	@RequestMapping(value = "/canviarEntitat/{idEntitat}", method = RequestMethod.GET)
@@ -123,5 +141,32 @@ public class PrincipalController {
 	@RequestMapping(value = "/protecciodades", method = RequestMethod.GET)
 	public ModelAndView protecciodades(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		return new ModelAndView("protecciodades");
+	}
+	
+	protected int checkNumAvisos(String pipella) {
+		
+		List<AvisJPA> avisosList = new ArrayList<AvisJPA>();
+		try {
+			if("superadmin".equals(pipella))
+				avisosList = avisLogicaLocalEjb.findAllActive();
+			else
+				avisosList = avisLogicaLocalEjb.findActiveByEntidadID(LoginInfo.getInstance().getEntitatID());
+			
+			HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
+					.getRequest();	
+			httpRequest.getSession().setAttribute("numAvisos", avisosList.size());
+			
+			return avisosList.size();
+			//request.put("numAvisos", avisosList.size());
+		}catch(Exception e) {
+			log.error("-------------1---------------");
+			log.error(e.getMessage());
+			log.error("----------------------------");
+		}catch (Throwable e) {
+			log.error("-------------2---------------");
+			log.error(e.getMessage());
+			log.error("----------------------------");
+		}
+		return 0;
 	}
 }

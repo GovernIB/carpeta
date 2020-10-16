@@ -107,6 +107,10 @@ newDadesPersonalsReact  = function createReactCompDadesPersonals(nomComponent, p
 	ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.DadesPersonals} autenticat={param}/>, document.getElementById("mollaPa"));
 };
 
+newMenuLateralReact  = function createReactCompMenuLateral(nomComponent, param) {
+    ReactDOM.render(<MenuLateral autenticat={param}/>, document.getElementById(nomComponent));
+};
+
 newMenuDesllisantReact  = function createReactCompMenuDesllisant(nomComponent, param) {
     ReactDOM.render(<MenuDesllisant autenticat={param}/>, document.getElementById(nomComponent));
 };

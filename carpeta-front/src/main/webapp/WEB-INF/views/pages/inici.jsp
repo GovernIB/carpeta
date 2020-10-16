@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ca" style="" class=" js flexbox flexboxlegacy hashchange backgroundsize boxshadow textshadow opacity cssanimations cssgradients csstransforms csstransitions fontface generatedcontent localstorage svg" lang="ca">
   <head>
     <title>Carpeta Ciutadana - Front React</title>
-	<link rel="shortcut icon" type="image/x-ico" href="http://www.caib.es/sites/favicon.png">
+	<link rel="shortcut icon" type="image/x-ico" href="${pageContext.request.contextPath}/webui/icona/">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -54,6 +54,8 @@
 	  <script type="text/javascript">
 		  window.onload = function($) {
 			  sessionStorage.setItem('autenticat', '0');
+			  <%--sessionStorage.setItem('urlAvis', '${urlAvis}');--%>
+			  <%--sessionStorage.setItem('urlRss', '${urlRss}');--%>
 			  var aut = sessionStorage.getItem('autenticat');
 			  newMenuDesllisant('menuDesllisant', aut);
 			  newPeu('peu', aut);
@@ -69,6 +71,8 @@
 
 		<!-- Capçalera -->
 		<div id = "barraMenu"></div>
+		
+		${iconaEntitatId}
 
 		<sec:authorize access="isAuthenticated()">
 			<sec:authentication var="user" property="principal.usuarioClave.nombreCompleto" />
@@ -128,9 +132,10 @@
 
 
 		<script type="text/javascript">
-			// document.getElementById("urlBase").value=window.location.href;
 			sessionStorage.clear();
 			sessionStorage.setItem('plugins', JSON.stringify(${plugins}));
+			<%--sessionStorage.setItem('urlAvis', '${urlAvis}');--%>
+			<%--sessionStorage.setItem('urlRss', '${urlRss}');--%>
 		</script>
 
 	
@@ -142,14 +147,6 @@
 	<script src="${pageContext.request.contextPath}/src/assets/js/menu-lateral.js" type="text/javascript"></script>
 	<!-- acceptar cookies -->
 	<script src="${pageContext.request.contextPath}/src/assets/js/aceptar_cookies.js" type="text/javascript"></script>
-    <!-- Plugins -->
-<%--  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>--%>
-<%--  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>--%>
-<%--  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>--%>
-<%--  <script src="${pageContext.request.contextPath}/src/PluginProva.js" type="text/javascript"></script>--%>
-<%--  <script type="text/babel">--%>
-<%--	  ReactDOM.render(<PluginProva />, document.getElementById('contingut'));--%>
-<%--  </script>--%>
 
   </body>
 </html>

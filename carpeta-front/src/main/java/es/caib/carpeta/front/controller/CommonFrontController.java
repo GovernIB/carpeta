@@ -2,6 +2,7 @@ package es.caib.carpeta.front.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.ejb.EJB;
@@ -12,6 +13,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
+import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,32 +46,37 @@ public abstract class CommonFrontController {
 
             Long fileID = Long.parseLong(fileIDStr);
 
-            Fitxer fi = utilsEjb.getFileInfo(fileID);
-
-            File file = FileSystemManager.getFile(fileID);
-
-            FileInputStream fis = new FileInputStream(file);
-
-            try {
-                response.setContentType(fi.getMime());
-                response.setHeader("Content-Disposition", "inline; filename=\"" + fi.getNom() + "\"");
-                response.setContentLength((int) file.length());
-
-                IOUtils.copy(fis, response.getOutputStream());
-            } finally {
-
-                try {
-                    fis.close();
-                } catch (Exception e) {
-
-                }
-
-            }
+            descarregaFitxer(response, fileID);
 
         } catch (Throwable e) {
             processException(e, response);
         }
 
+    }
+
+    protected void descarregaFitxer(HttpServletResponse response, Long fileID)
+            throws I18NException, FileNotFoundException, IOException {
+        Fitxer fi = utilsEjb.getFileInfo(fileID);
+
+        File file = FileSystemManager.getFile(fileID);
+
+        FileInputStream fis = new FileInputStream(file);
+
+        try {
+            response.setContentType(fi.getMime());
+            response.setHeader("Content-Disposition", "inline; filename=\"" + fi.getNom() + "\"");
+            response.setContentLength((int) file.length());
+
+            IOUtils.copy(fis, response.getOutputStream());
+        } finally {
+
+            try {
+                fis.close();
+            } catch (Exception e) {
+
+            }
+
+        }
     }
 
     public void processException(Throwable e, HttpServletResponse response) {

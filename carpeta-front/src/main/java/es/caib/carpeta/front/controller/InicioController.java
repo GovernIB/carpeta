@@ -25,6 +25,7 @@ public class InicioController {
 
     protected final Log log = LogFactory.getLog(getClass());
 
+    // XYZ ZZZ Esborrar ???? 
     @Value("${es.caib.carpeta.zonaper.url}")    private String ZONAPER_URL;
     @Value("${es.caib.carpeta.notificaciones.url}")    private String NOTIFICACIONES_URL;
 
