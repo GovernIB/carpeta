@@ -37,7 +37,7 @@
 <a class="dropdown-item"
     href="<c:url value="/adminentitat/avis/list"/>"> <span
     style="${(fn:contains(url, '/adminentitat/avis'))? " font-weight:bold;" : ""}"><spring:message
-            code="avis.avis.plural" />&nbsp;<span class="badge badge-danger">${numAvisos}</span></span>
+            code="avis.avis.plural" />&nbsp;<c:if test="numAvisos gt 0"><span class="badge badge-danger">${numAvisos}</span></c:if></span>
 </a>
 
 <hr style="margin-top: 6px; margin-bottom: 6px;" />
