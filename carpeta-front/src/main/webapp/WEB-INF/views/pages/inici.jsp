@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ca" style="" class=" js flexbox flexboxlegacy hashchange backgroundsize boxshadow textshadow opacity cssanimations cssgradients csstransforms csstransitions fontface generatedcontent localstorage svg" lang="ca">
   <head>
     <title>Carpeta Ciutadana - Front React</title>
-	<link rel="shortcut icon" type="image/x-ico" href="http://www.caib.es/sites/favicon.png">
+	<link rel="shortcut icon" type="image/x-ico" href="${pageContext.request.contextPath}/webui/icona/">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -69,6 +69,8 @@
 
 		<!-- Capçalera -->
 		<div id = "barraMenu"></div>
+		
+		${iconaEntitatId}
 
 		<sec:authorize access="isAuthenticated()">
 			<sec:authentication var="user" property="principal.usuarioClave.nombreCompleto" />

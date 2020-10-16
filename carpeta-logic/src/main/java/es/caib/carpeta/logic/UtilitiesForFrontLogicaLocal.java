@@ -33,5 +33,7 @@ public interface UtilitiesForFrontLogicaLocal {
     public List<Enllaz> getSocialNetworks(String codiEntitat, String language) throws I18NException;
     
     public Fitxer getFileInfo(Long fitxerID) throws I18NException;
+    
+    public long getIconaEntitat(String codiEntitat) throws I18NException;
 
 }
