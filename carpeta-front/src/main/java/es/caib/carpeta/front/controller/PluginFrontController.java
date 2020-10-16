@@ -2,6 +2,7 @@ package es.caib.carpeta.front.controller;
 
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.carpeta.hibernate.HibernateFileUtil;
+import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
 import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
 import es.caib.carpeta.logic.utils.PluginInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
@@ -24,6 +25,9 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Locale;
 
+import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_PLUGIN_FRONT;
+
 
 /**
  * 
@@ -37,6 +41,9 @@ public class PluginFrontController {
     
     @EJB(mappedName = UtilitiesForFrontLogicaLocal.JNDI_NAME)
     UtilitiesForFrontLogicaLocal utilsEjb;
+
+    @EJB(mappedName = LogCarpetaLogicaLocal.JNDI_NAME)
+    protected LogCarpetaLogicaLocal logCarpetaLogicaEjb;
 
     
     protected final Log log = LogFactory.getLog(getClass());
@@ -118,7 +125,7 @@ public class PluginFrontController {
         
         //response.addHeader("X-Frame-Options", "SAMEORIGIN");
 
-        
+        long temps = System.currentTimeMillis();
 
         String context = PUBLIC_CONTEXTWEB;
 
@@ -129,6 +136,8 @@ public class PluginFrontController {
                 + "/" + Base64.getUrlEncoder().encodeToString(baseBack.getBytes());
 
         log.info(" urlToShowPluginPage => " + urlToShowPluginPage);
+
+        logCarpetaLogicaEjb.crearLog("Plugin del Front", ESTAT_LOG_OK,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,null,"","",null, Long.parseLong(pluginID));
 
         ModelAndView mav = new ModelAndView(view);
         // mav.addObject("signaturesSetID", signaturesSetID);

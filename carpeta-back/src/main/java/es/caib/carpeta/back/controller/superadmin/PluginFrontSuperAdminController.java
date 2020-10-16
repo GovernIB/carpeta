@@ -5,7 +5,6 @@ import es.caib.carpeta.back.form.webdb.PluginFilterForm;
 import es.caib.carpeta.back.form.webdb.PluginForm;
 import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.jpa.LogCarpetaJPA;
 import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
 import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaLocal;
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -22,7 +21,6 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URL;
-import java.sql.Timestamp;
 
 import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_PLUGIN_FRONT;
@@ -59,6 +57,8 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
    public ModelAndView startTestPlugin(@PathVariable("pluginID") Long pluginID,
           HttpServletRequest request, HttpServletResponse response,
           PluginFilterForm filterForm) throws Exception, I18NException {
+
+       long temps = System.currentTimeMillis();
         
        String administrationID= request.getParameter("administrationID");
        String urlBase = request.getParameter("urlBase");
@@ -79,18 +79,9 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
        
        String view = "testPlugin";
 
-       // XYZ XXXX Creamos log de prueba
-      LogCarpetaJPA logCarpetaJPA = new LogCarpetaJPA();
-      logCarpetaJPA.setEntitatID(LoginInfo.getInstance().getEntitatID());
-      logCarpetaJPA.setDataInici(new Timestamp(System.currentTimeMillis()));
-      logCarpetaJPA.setDescripcio("Esto es una prueba de test plugin de marilen");
-      logCarpetaJPA.setTipus(TIPUS_LOG_PLUGIN_FRONT);
-      logCarpetaJPA.setEstat(ESTAT_LOG_OK);
-      logCarpetaJPA.setPluginID(pluginID);
 
+       logCarpetaLogicaEjb.crearLog("Plugin del Front via test", ESTAT_LOG_OK,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,null,"","",LoginInfo.getInstance().getEntitatID(),pluginID);
 
-
-      logCarpetaLogicaEjb.crearLog(logCarpetaJPA);
 
 
 

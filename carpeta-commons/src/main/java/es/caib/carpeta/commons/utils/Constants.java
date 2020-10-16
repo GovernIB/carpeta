@@ -88,13 +88,16 @@ public interface Constants {
     };
 
     /* Estat LogCarpeta */
+    public static final int ESTAT_LOG_UNKNOWN = 0;
     public static final int ESTAT_LOG_OK = 1;
     public static final int ESTAT_LOG_ERROR = 2;
 
 
+
     public static final int[] ESTAT_LOG_ALL = {
        ESTAT_LOG_OK,
-       ESTAT_LOG_ERROR
+       ESTAT_LOG_ERROR,
+       ESTAT_LOG_UNKNOWN
     };
 
 }
