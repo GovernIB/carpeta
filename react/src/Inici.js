@@ -58,9 +58,10 @@ function Inici ({ t , autenticat}) {
 	
 	if(autenticat === '1'){
 		
+		var urlBase = window.location.href;
+		
 		const plugins = JSON.parse(sessionStorage.getItem('plugins'));
 		
-
 		var plugHtml;
 		var plugReact;
 		
@@ -68,7 +69,7 @@ function Inici ({ t , autenticat}) {
 			plugHtml = plugins.filter(s => s.reactComponent === 'false').map(s => (
 			  <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
 				<button className="card col-md-10 align-items-lg-center" alt={s.nomCa} onClick={event =>  window.location.href="javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}>
-					<span className="card-title titol pl-1 h3"><img src={"http://localhost:8080/carpetafront/pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img>{s.nomCa}</span>
+					<span className="card-title titol pl-1 h3"><img src={urlBase+"pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img>{s.nomCa}</span>
 					<span className="card-text mb-3">{s.descripcioCa}</span>
 				</button>
 			  </div>
@@ -76,7 +77,7 @@ function Inici ({ t , autenticat}) {
 			plugReact = plugins.filter(s => s.reactComponent === 'true').map(s => (
 			  <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
 				<button className="card col-md-10 align-items-lg-center" alt={s.nomCa} onClick={event =>  window.location.href="javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}>
-					<span className="card-title titol pl-1 h3"><img src={"http://localhost:8080/carpetafront/pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img>{s.nomCa}</span>
+					<span className="card-title titol pl-1 h3"><img src={urlBase+"pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img>{s.nomCa}</span>
 					<span className="card-text mb-3">{s.descripcioCa}</span>
 				</button>
 			  </div>
@@ -87,7 +88,7 @@ function Inici ({ t , autenticat}) {
 			plugHtml = plugins.filter(s => s.reactComponent === 'false').map(s => (
 			  <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
 				<button className="card col-md-10 align-items-lg-center" alt={s.nomEs} onClick={event =>  window.location.href="javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}>
-					<span className="card-title titol pl-1 h3"><img src={"http://localhost:8080/carpetafront/pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img>{s.nomEs}</span>
+					<span className="card-title titol pl-1 h3"><img src={urlBase+"pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img>{s.nomEs}</span>
 					<span className="card-text mb-3">{s.descripcioEs}</span>
 				</button>
 			  </div>
@@ -95,7 +96,7 @@ function Inici ({ t , autenticat}) {
 			plugReact = plugins.filter(s => s.reactComponent === 'true').map(s => (
 			  <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
 				<button className="card col-md-10 align-items-lg-center" alt={s.nomEs} onClick={event =>  window.location.href="javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}>
-					<span className="card-title titol pl-1 h3"><img src={"http://localhost:8080/carpetafront/pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img>{s.nomEs}</span>
+					<span className="card-title titol pl-1 h3"><img src={urlBase+"pluginfront/pluginicon/"+s.pluginID+"/"+i18n.language+""} className="imc-icona"></img>{s.nomEs}</span>
 					<span className="card-text mb-3">{s.descripcioEs}</span>
 				</button>
 			  </div>

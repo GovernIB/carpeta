@@ -54,6 +54,8 @@
 	  <script type="text/javascript">
 		  window.onload = function($) {
 			  sessionStorage.setItem('autenticat', '0');
+			  <%--sessionStorage.setItem('urlAvis', '${urlAvis}');--%>
+			  <%--sessionStorage.setItem('urlRss', '${urlRss}');--%>
 			  var aut = sessionStorage.getItem('autenticat');
 			  newMenuDesllisant('menuDesllisant', aut);
 			  newPeu('peu', aut);
@@ -130,9 +132,10 @@
 
 
 		<script type="text/javascript">
-			// document.getElementById("urlBase").value=window.location.href;
 			sessionStorage.clear();
 			sessionStorage.setItem('plugins', JSON.stringify(${plugins}));
+			<%--sessionStorage.setItem('urlAvis', '${urlAvis}');--%>
+			<%--sessionStorage.setItem('urlRss', '${urlRss}');--%>
 		</script>
 
 	
@@ -144,14 +147,6 @@
 	<script src="${pageContext.request.contextPath}/src/assets/js/menu-lateral.js" type="text/javascript"></script>
 	<!-- acceptar cookies -->
 	<script src="${pageContext.request.contextPath}/src/assets/js/aceptar_cookies.js" type="text/javascript"></script>
-    <!-- Plugins -->
-<%--  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>--%>
-<%--  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>--%>
-<%--  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>--%>
-<%--  <script src="${pageContext.request.contextPath}/src/PluginProva.js" type="text/javascript"></script>--%>
-<%--  <script type="text/babel">--%>
-<%--	  ReactDOM.render(<PluginProva />, document.getElementById('contingut'));--%>
-<%--  </script>--%>
 
   </body>
 </html>
