@@ -1,26 +1,30 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
 import i18n from 'i18next';
 
+class PluginReact extends Component {
 
-function PluginReact ({ t , pluginID}) {
+	render() {
 
-	var data = new FormData();
-	var codiPlugin;
-	
-	var urlBase = window.location.href;
-	var url = urlBase + "pluginfront/showplugin/" + pluginID + "/" + i18n.language;
+		const {t} = this.props;
 
-	
-	$(document).ready(function ()  {
-		sessionStorage.setItem('idioma', i18n.language);
-		$('#content').load(url);
-    });
+		var data = new FormData();
+		var codiPlugin;
 
-    return (
-        <div id="content"></div>
-    );
-	
+		var urlBase = window.location.href;
+		var url = urlBase + "pluginfront/showplugin/" + pluginID + "/" + i18n.language;
+
+
+		$(document).ready(function () {
+			sessionStorage.setItem('idioma', i18n.language);
+			$('#content').load(url);
+		});
+
+		return (
+			<div id="content"></div>
+		);
+
+	}
 }
 
 export default withTranslation()(PluginReact);
