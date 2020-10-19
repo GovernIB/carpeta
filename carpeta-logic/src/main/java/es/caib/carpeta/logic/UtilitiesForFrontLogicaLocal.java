@@ -1,5 +1,6 @@
 package es.caib.carpeta.logic;
 
+import es.caib.carpeta.jpa.EntitatJPA;
 import es.caib.carpeta.logic.utils.PluginInfo;
 import es.caib.carpeta.model.entity.Enllaz;
 import es.caib.carpeta.model.entity.Fitxer;
@@ -21,6 +22,8 @@ import java.util.List;
 public interface UtilitiesForFrontLogicaLocal {
 
     public static final String JNDI_NAME = "java:app/carpeta-logic/UtilitiesForFrontLogicaEJB!es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal";
+    
+    public EntitatJPA getEntitat(String codiEntitat) throws I18NException;
 
     public List<StringKeyValue> getEntitats(String language) throws I18NException;
 

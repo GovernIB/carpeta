@@ -78,6 +78,21 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
 
     }
 
+    @Override
+    public EntitatJPA getEntitat(String codiEntitat) throws I18NException {
+
+        List<Entitat> entitats = entitatEjb.select(EntitatFields.CODI.equal(codiEntitat));
+
+        if (entitats == null || entitats.size() == 0) {
+            return null;
+        }
+
+        EntitatJPA e = (EntitatJPA) entitats.get(0);
+
+        return e;
+
+    }
+
     /**
      * Retorna codi i nom en l'idioma seleccionat
      */

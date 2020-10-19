@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 
 import es.caib.carpeta.hibernate.HibernateFileUtil;
 import es.caib.carpeta.jpa.EnllazJPA;
+import es.caib.carpeta.jpa.EntitatJPA;
 import es.caib.carpeta.model.entity.Enllaz;
 
 /**
@@ -34,6 +35,8 @@ public class WebUIController extends CommonFrontController {
     public static final String WEBUI_FAVICON_PATH = "/icona";
 
     public static final String WEBUI_LOGOLATERAL_PATH = "/logolateral";
+    
+    public static final String WEBUI_INFOLOGOLATERAL_PATH = "/infologolateral";
 
     /**
      * 
@@ -82,6 +85,40 @@ public class WebUIController extends CommonFrontController {
         }
 
     }
+    
+    
+    
+    @RequestMapping(value = WEBUI_INFOLOGOLATERAL_PATH, method = RequestMethod.GET)
+    public void getEntitatInfoLogoLateral(HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+            // XYZ ZZZ Pendent codiEntitat
+            String codiEntitat = "caib";
+            String idioma = "ca";
+            
+            
+            EntitatJPA entitat = utilsEjb.getEntitat(codiEntitat);
+            
+            
+            EnllazInfo enllazInfo = new EnllazInfo(entitat.getNom().getTraduccio(idioma).getValor(),
+                    entitat.getWebEntitat(), request.getContextPath() + WEBUI_PATH + WEBUI_LOGOLATERAL_PATH);
+            
+            
+            // Passar JSON 
+            Gson gson = new Gson();
+            String json = gson.toJson(enllazInfo);
+
+            response.setContentType("application/json");
+
+            response.getWriter().write(json);
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
+
+    }
+    
+    
 
     @RequestMapping(value = WEBUI_LOGOLATERAL_PATH, method = RequestMethod.GET)
     public void getEntitatLogoLateral(HttpServletRequest request, HttpServletResponse response) {
