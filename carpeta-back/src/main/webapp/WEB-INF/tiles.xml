@@ -251,6 +251,16 @@
     <definition name="testPlugin" extends="superadmin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugin_contenidor.jsp" />
     </definition>
+
+
+    <definition name="logCarpetaFormSuperAdmin" extends="superadmin">
+        <put-attribute name="titol" value="logCarpeta.logCarpeta" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/logCarpetaForm.jsp" />
+    </definition>
+
+    <definition name="logCarpetaListSuperAdmin" extends="superadmin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/logCarpetaList.jsp" />
+    </definition>
     
     
 
