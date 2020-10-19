@@ -2,10 +2,8 @@ package es.caib.carpeta.logic;
 
 import java.util.List;
 
-import javax.annotation.security.PermitAll;
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
-import javax.validation.constraints.NotNull;
 
 import es.caib.carpeta.ejb.AvisEJB;
 import es.caib.carpeta.jpa.AvisJPA;

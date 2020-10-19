@@ -155,7 +155,7 @@ public class PluginFrontController {
 
         Locale.setDefault(new Locale(idioma));
 
-        FileInfo fi = utilsEjb.getIcona(pluginid,idioma);
+        FileInfo fi = utilsEjb.getIconaPlugin(pluginid,idioma);
 
         if(fi != null) {
             response.setContentType(fi.getMime());

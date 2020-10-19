@@ -20,7 +20,6 @@ import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.jpa.AvisJPA;
 import es.caib.carpeta.model.fields.AvisFields;
-import es.caib.carpeta.model.fields.PropietatGlobalFields;
 
 /* 
  *  @author jagarcia

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -29,8 +30,10 @@ import es.caib.carpeta.model.entity.Enllaz;
 public class WebUIController extends CommonFrontController {
 
     public static final String WEBUI_PATH = "/webui";
-    
-    public static final String WEBUI_ICON_PATH = "/icona";
+
+    public static final String WEBUI_FAVICON_PATH = "/icona";
+
+    public static final String WEBUI_LOGOLATERAL_PATH = "/logolateral";
 
     /**
      * 
@@ -79,18 +82,53 @@ public class WebUIController extends CommonFrontController {
         }
 
     }
-   
 
-    @RequestMapping(value = WEBUI_ICON_PATH, method = RequestMethod.GET)
-    public void getEntitatLogo(HttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value = WEBUI_LOGOLATERAL_PATH, method = RequestMethod.GET)
+    public void getEntitatLogoLateral(HttpServletRequest request, HttpServletResponse response) {
 
         try {
-            //XYZ ZZZ Pendent codiEntitat
-        	String codiEntitat = "caib";
-        	
-        	Long iconaEntitatId = utilsEjb.getIconaEntitat(codiEntitat);
-        	
-            descarregaFitxer(response,iconaEntitatId);
+            // XYZ ZZZ Pendent codiEntitat
+            String codiEntitat = "caib";
+
+            Long iconaEntitatId = utilsEjb.getLogolateralEntitat(codiEntitat);
+
+            descarregaFitxer(response, iconaEntitatId);
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
+
+    }
+
+    @RequestMapping(value = WEBUI_FAVICON_PATH, method = RequestMethod.GET)
+    public void getEntitatFavicon(HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+            // XYZ ZZZ Pendent codiEntitat
+            String codiEntitat = "caib";
+
+            Long iconaEntitatId = utilsEjb.getIconaEntitat(codiEntitat);
+
+            descarregaFitxer(response, iconaEntitatId);
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
+
+    }
+
+    public static final String ENLLAZ_LOGO_PATH = "/enllazlogo";
+
+    @RequestMapping(value = ENLLAZ_LOGO_PATH + "/{encodedenllazlogoid}", method = RequestMethod.GET)
+    public void getEnllazLogo(@PathVariable("encodedenllazlogoid") String encodedenllazlogoid,
+            HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+            String fileIDStr = HibernateFileUtil.decryptString(encodedenllazlogoid);
+
+            Long fileID = Long.parseLong(fileIDStr);
+
+            descarregaFitxer(response, fileID);
 
         } catch (Throwable e) {
             processException(e, response);

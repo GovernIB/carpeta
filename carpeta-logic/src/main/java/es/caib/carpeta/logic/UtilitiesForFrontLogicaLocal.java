@@ -28,12 +28,14 @@ public interface UtilitiesForFrontLogicaLocal {
 
     public List<PluginInfo> getFrontPlugins(String codiEntitat, String language) throws I18NException;
 
-    public FileInfo getIcona(Long pluginID, String language) throws I18NException;
+    public FileInfo getIconaPlugin(Long pluginID, String language) throws I18NException;
     
     public List<Enllaz> getSocialNetworks(String codiEntitat, String language) throws I18NException;
     
     public Fitxer getFileInfo(Long fitxerID) throws I18NException;
     
     public long getIconaEntitat(String codiEntitat) throws I18NException;
+    
+    public long getLogolateralEntitat(String codiEntitat) throws I18NException;
 
 }

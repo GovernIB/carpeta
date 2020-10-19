@@ -14,11 +14,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
-import es.caib.carpeta.hibernate.HibernateFileUtil;
 import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
 import es.caib.carpeta.model.entity.Fitxer;
 
@@ -35,24 +31,7 @@ public abstract class CommonFrontController {
     UtilitiesForFrontLogicaLocal utilsEjb;
     
     
-    public static final String ENLLAZ_LOGO_PATH =  "/enllazlogo";
-
-    @RequestMapping(value = ENLLAZ_LOGO_PATH + "/{encodedenllazlogoid}", method = RequestMethod.GET)
-    public void getEnllazLogo(@PathVariable("encodedenllazlogoid") String encodedenllazlogoid,
-            HttpServletRequest request, HttpServletResponse response) {
-
-        try {
-            String fileIDStr = HibernateFileUtil.decryptString(encodedenllazlogoid);
-
-            Long fileID = Long.parseLong(fileIDStr);
-
-            descarregaFitxer(response, fileID);
-
-        } catch (Throwable e) {
-            processException(e, response);
-        }
-
-    }
+   
 
     protected void descarregaFitxer(HttpServletResponse response, Long fileID)
             throws I18NException, FileNotFoundException, IOException {
