@@ -59,8 +59,10 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
           PluginFilterForm filterForm) throws Exception, I18NException {
 
        long temps = System.currentTimeMillis();
-        
+       String peticio = "El plugin l'ha executat l'usuari " + LoginInfo.getInstance().getUsername();
+
        String administrationID= request.getParameter("administrationID");
+
        String urlBase = request.getParameter("urlBase");
        
        log.info("startTestPlugin:: administrationID = " + administrationID);
@@ -80,7 +82,7 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
        String view = "testPlugin";
 
 
-       logCarpetaLogicaEjb.crearLog("Plugin del Front via test", ESTAT_LOG_OK,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,null,"","",LoginInfo.getInstance().getEntitatID(),pluginID);
+       logCarpetaLogicaEjb.crearLog("Plugin del Front via test", ESTAT_LOG_OK,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,null,"",peticio,LoginInfo.getInstance().getEntitatID(),pluginID);
 
 
 

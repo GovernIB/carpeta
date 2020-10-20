@@ -42,4 +42,6 @@ public interface UtilitiesForFrontLogicaLocal {
     
     public long getLogolateralEntitat(String codiEntitat) throws I18NException;
 
+    public String getTexteInformatiuEntitat(String codiEntitat) throws I18NException;
+
 }

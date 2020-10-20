@@ -3,17 +3,8 @@ package es.caib.carpeta.logic;
 import es.caib.carpeta.jpa.EntitatJPA;
 import es.caib.carpeta.jpa.PluginJPA;
 import es.caib.carpeta.logic.utils.PluginInfo;
-import es.caib.carpeta.model.entity.Enllaz;
-import es.caib.carpeta.model.entity.Entitat;
-import es.caib.carpeta.model.entity.Fitxer;
-import es.caib.carpeta.model.entity.Idioma;
-import es.caib.carpeta.model.entity.Plugin;
-import es.caib.carpeta.model.fields.EnllazFields;
-import es.caib.carpeta.model.fields.EnllazQueryPath;
-import es.caib.carpeta.model.fields.EntitatFields;
-import es.caib.carpeta.model.fields.PluginEntitatFields;
-import es.caib.carpeta.model.fields.PluginEntitatQueryPath;
-import es.caib.carpeta.model.fields.PluginFields;
+import es.caib.carpeta.model.entity.*;
+import es.caib.carpeta.model.fields.*;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.ICarpetaFrontPlugin;
 import es.caib.carpeta.utils.Constants;
@@ -24,7 +15,6 @@ import org.fundaciobit.genapp.common.query.Where;
 import javax.annotation.security.PermitAll;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -169,6 +159,11 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
     @Override
     public long getLogolateralEntitat(String codiEntitat) throws I18NException {
         return entitatEjb.executeQueryOne(EntitatFields.LOGOLATERALFRONTID, EntitatFields.CODI.equal(codiEntitat));
+    }
+
+    @Override
+    public String getTexteInformatiuEntitat(String codiEntitat) throws I18NException {
+        return entitatEjb.executeQueryOne(EntitatFields.ENTITATDESCFRONT, EntitatFields.CODI.equal(codiEntitat));
     }
 
 }
