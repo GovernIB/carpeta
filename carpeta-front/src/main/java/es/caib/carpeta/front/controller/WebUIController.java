@@ -202,6 +202,15 @@ public class WebUIController extends CommonFrontController {
         
         getEnllazosJSON(request, response, enllazType);
     }
+    
+    
+    @RequestMapping(value = "/centralfooterlinks", method = RequestMethod.GET)
+    public void getCentalFooterLinks(HttpServletRequest request, HttpServletResponse response) {
+
+        final int enllazType = es.caib.carpeta.commons.utils.Constants.TIPUS_ENLLAZ_FRONT_PEU_CENTRAL;
+        
+        getEnllazosJSON(request, response, enllazType);
+    }
 
 
 

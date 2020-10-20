@@ -148,3 +148,42 @@ INSERT INTO car_enllaz(enllazid, tipus, urlid, nomid, entitatid, logoid) VALUES 
 
 
 
+
+-- Enllaços de PEU CENTRAL
+
+
+-- Legal
+
+INSERT INTO car_traduccio VALUES (253);
+INSERT INTO car_traduccio VALUES (254);
+
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (253, 'en', 'Legal Warning');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (253, 'ca', 'Avís Legal');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (253, 'es', 'Aviso Legal');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (254, 'en', 'http://www.caib.es/govern/external/infoLegal.do?lang=es');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (254, 'ca', 'http://www.caib.es/govern/external/infoLegal.do?lang=ca');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (254, 'es', 'http://www.caib.es/govern/external/infoLegal.do?lang=es');
+
+INSERT INTO car_fitxer(fitxerid, descripcio, mime, nom, tamany) VALUES (250, NULL, 'image/png', 'legal.png', 442);
+
+INSERT INTO car_enllaz(enllazid, tipus, urlid, nomid, entitatid, logoid) VALUES (252, 3, 254, 253, (SELECT entitatid FROM car_entitat where codi = 'caib'), 250);
+
+
+-- RSS
+
+INSERT INTO car_traduccio VALUES (263);
+INSERT INTO car_traduccio VALUES (264);
+
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (263, 'en', 'RSS');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (263, 'ca', 'RSS');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (263, 'es', 'RSS');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (264, 'en', 'http://www.caib.es/govern/rss.do?lang=es');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (264, 'ca', 'http://www.caib.es/govern/rss.do?lang=ca');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (264, 'es', 'http://www.caib.es/govern/rss.do?lang=es');
+
+INSERT INTO car_fitxer(fitxerid, descripcio, mime, nom, tamany) VALUES (260, NULL, 'image/png', 'rss.png', 292);
+
+INSERT INTO car_enllaz(enllazid, tipus, urlid, nomid, entitatid, logoid) VALUES (262, 3, 264, 263, (SELECT entitatid FROM car_entitat where codi = 'caib'), 260);
+
+
+
