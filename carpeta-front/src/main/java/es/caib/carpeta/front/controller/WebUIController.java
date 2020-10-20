@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -101,15 +105,17 @@ public class WebUIController extends CommonFrontController {
             
             
             EntitatJPA entitat = utilsEjb.getEntitat(codiEntitat);
-            
+
+            List<EnllazInfo> enllazosInfo = new ArrayList<WebUIController.EnllazInfo>();
             
             EnllazInfo enllazInfo = new EnllazInfo(entitat.getNom().getTraduccio(idioma).getValor(),
                     entitat.getWebEntitat(), request.getContextPath() + WEBUI_PATH + WEBUI_LOGOLATERAL_PATH);
-            
+
+            enllazosInfo.add(enllazInfo);
             
             // Passar JSON 
             Gson gson = new Gson();
-            String json = gson.toJson(enllazInfo);
+            String json = gson.toJson(enllazosInfo);
 
             response.setContentType("application/json");
 
@@ -252,5 +258,25 @@ public class WebUIController extends CommonFrontController {
             processException(e, response);
         }
     }
+//
+//    @RequestMapping(value = "/autenticat", method = RequestMethod.GET)
+//    public void isAutenticat(HttpServletRequest request, HttpServletResponse response) {
+//
+//        try {
+//            // TODO XYZ ZZZ Pendent codiEntitat
+//            String codiEntitat = "caib";
+//            Gson gson = new Gson();
+//            response.setContentType("application/json");
+//            if(SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")){
+//                response.getWriter().write(gson.toJson("false"));
+//            }else{
+//                response.getWriter().write(gson.toJson("true"));
+//            }
+//
+//        } catch (Throwable e) {
+//            processException(e, response);
+//        }
+//
+//    }
 
 }
