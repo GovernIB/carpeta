@@ -235,9 +235,14 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 	            }  else {
 	              tramits = obtenerTramites(administrationID,formDataInici,formDataFi, formEstat);
 	            }
-           }catch(Exception e) {
+	       }catch(javax.ws.rs.client.ResponseProcessingException e) {
+	    	   tramits = null;
+	    	   e.printStackTrace();
+	    	   log.error("Sistra2 - No hi ha tràmits:" + e.getMessage());
+	       }catch(Exception e) {
+	    	    tramits = null;
               	missatgeError += "Sistra2: " + e.getMessage();
-              	log.error("Error Sistra2:" + e.getMessage() );
+              	log.error("Error Sistra2:" + e.getMessage());
            }
 	       
 	       if (tramits != null) {
@@ -270,7 +275,6 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         map.put("development", isDevelopment());
         map.put("missatgeError", missatgeError);
         map.put("tramits", tramitesGenericos);
-        map.put("web", getWeb() );
         
         String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);       
         return generat;
@@ -283,10 +287,6 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
    public String getWeb() throws Exception {
         return getPropertyRequired(SISTRA1_PROPERTY_BASE + "web");
    }
-   
-   public String getWeb2() throws Exception {
-       return getPropertyRequired(SISTRA1_PROPERTY_BASE + "web2");
-  }
    
    
    
@@ -345,7 +345,7 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 	        	tpg = new TramitePersistenteGenerico(tp,1);
 	        	
 	        	// XYZ ZZZ  &perfilAF=CIUDADANO
-	        	tpg.setUrl(getWeb2() + "?lang=" + locale.getLanguage() + "&modelo=" + tp.getIdTramite() +"&loginClaveAuto=true&version=1&idPersistencia=" + tp.getIdSesionTramitacion());
+	        	tpg.setUrl(getWeb() + "?lang=" + locale.getLanguage() + "&modelo=" + tp.getIdTramite() +"&loginClaveAuto=true&version=1&idPersistencia=" + tp.getIdSesionTramitacion());
 	        	tramits.add(tpg);
 	        }
         }
@@ -428,11 +428,12 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 	       filtroPer.setFechaDesde(fechaInicio);
 	       filtroPer.setFechaHasta(DateUtils.sumarRestarDiasFecha(fechaFin, 1));
 	       filtroPer.setNif(documento);
+	      
 	       
 	       List<RTramitePersistencia> tramites = client.target( getPropertyRequired(SISTRA2_PROPERTY_BASE + "url") + "/tramite")
 	               .request(MediaType.APPLICATION_JSON)
 	               .post(Entity.entity(filtroPer, MediaType.APPLICATION_JSON), new GenericType<List<RTramitePersistencia>>() {});
-	
+	       
 	       List<TramitePersistenteGenerico> tramits = new ArrayList<TramitePersistenteGenerico>();
 	       
 	       if (tramites == null || tramites.isEmpty()) {
