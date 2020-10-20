@@ -100,7 +100,6 @@ img:hover {
 .imc-icona{
     height: 2em;
     padding-right: 0.5em;
-	vertical-align: middle;
 }
 
 /* Canvis per React */
@@ -141,6 +140,10 @@ img:hover {
 }
 .titol{
     text-transform: uppercase;
+}
+.imc-logo a.imc--goib {
+	height: auto;
+	background: none;
 }
 
 

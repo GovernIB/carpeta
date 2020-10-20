@@ -24,6 +24,7 @@ import org.fundaciobit.genapp.common.query.Where;
 import javax.annotation.security.PermitAll;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -143,13 +144,15 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
 
     }
 
+    // es.caib.carpeta.commons.utils.Constants.TIPUS_ENLLAZ_FRONT_XARXA_SOCIAL
     @Override
-    public List<Enllaz> getSocialNetworks(String codiEntitat, String language) throws I18NException {
+    public List<Enllaz> getEnllazosByType(String codiEntitat, String language, int enllazType) throws I18NException {
 
         EnllazQueryPath eqp = new EnllazQueryPath();
 
         List<Enllaz> enllazos = enllazEjb.select(Where.AND(eqp.ENTITAT().CODI().equal(codiEntitat),
-                EnllazFields.TIPUS.equal(es.caib.carpeta.commons.utils.Constants.TIPUS_ENLLAZ_FRONT_XARXA_SOCIAL)));
+                EnllazFields.TIPUS.equal(enllazType)), 
+                new org.fundaciobit.genapp.common.query.OrderBy(EnllazFields.ENLLAZID));
         return enllazos;
     }
 

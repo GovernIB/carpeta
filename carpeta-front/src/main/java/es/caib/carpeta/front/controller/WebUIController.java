@@ -6,7 +6,12 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +42,8 @@ public class WebUIController extends CommonFrontController {
     public static final String WEBUI_LOGOLATERAL_PATH = "/logolateral";
     
     public static final String WEBUI_INFOLOGOLATERAL_PATH = "/infologolateral";
+    
+    public static final String ENLLAZ_LOGO_PATH = "/enllazlogo";
 
     /**
      * 
@@ -98,15 +105,17 @@ public class WebUIController extends CommonFrontController {
             
             
             EntitatJPA entitat = utilsEjb.getEntitat(codiEntitat);
-            
+
+            List<EnllazInfo> enllazosInfo = new ArrayList<WebUIController.EnllazInfo>();
             
             EnllazInfo enllazInfo = new EnllazInfo(entitat.getNom().getTraduccio(idioma).getValor(),
                     entitat.getWebEntitat(), request.getContextPath() + WEBUI_PATH + WEBUI_LOGOLATERAL_PATH);
-            
+
+            enllazosInfo.add(enllazInfo);
             
             // Passar JSON 
             Gson gson = new Gson();
-            String json = gson.toJson(enllazInfo);
+            String json = gson.toJson(enllazosInfo);
 
             response.setContentType("application/json");
 
@@ -154,7 +163,7 @@ public class WebUIController extends CommonFrontController {
 
     }
 
-    public static final String ENLLAZ_LOGO_PATH = "/enllazlogo";
+
 
     @RequestMapping(value = ENLLAZ_LOGO_PATH + "/{encodedenllazlogoid}", method = RequestMethod.GET)
     public void getEnllazLogo(@PathVariable("encodedenllazlogoid") String encodedenllazlogoid,
@@ -172,16 +181,52 @@ public class WebUIController extends CommonFrontController {
         }
 
     }
-
+    
+    @Deprecated
     @RequestMapping(value = "/socialnetworks", method = RequestMethod.GET)
+    public void getSocialNetworksDeprecated(HttpServletRequest request, HttpServletResponse response) {
+
+        final int enllazType = es.caib.carpeta.commons.utils.Constants.TIPUS_ENLLAZ_FRONT_XARXA_SOCIAL;
+        
+        getEnllazosJSON(request, response, enllazType);
+    }
+    
+    
+    @RequestMapping(value = "/socialnetworkslinks", method = RequestMethod.GET)
     public void getSocialNetworks(HttpServletRequest request, HttpServletResponse response) {
 
+        final int enllazType = es.caib.carpeta.commons.utils.Constants.TIPUS_ENLLAZ_FRONT_XARXA_SOCIAL;
+        
+        getEnllazosJSON(request, response, enllazType);
+    }
+    
+    
+    @RequestMapping(value = "/laterallinks", method = RequestMethod.GET)
+    public void getLateralLinks(HttpServletRequest request, HttpServletResponse response) {
+
+        final int enllazType = es.caib.carpeta.commons.utils.Constants.TIPUS_ENLLAZ_FRONT_LATERAL;
+        
+        getEnllazosJSON(request, response, enllazType);
+    }
+    
+    
+    @RequestMapping(value = "/centralfooterlinks", method = RequestMethod.GET)
+    public void getCentalFooterLinks(HttpServletRequest request, HttpServletResponse response) {
+
+        final int enllazType = es.caib.carpeta.commons.utils.Constants.TIPUS_ENLLAZ_FRONT_PEU_CENTRAL;
+        
+        getEnllazosJSON(request, response, enllazType);
+    }
+
+
+
+    protected void getEnllazosJSON(HttpServletRequest request, HttpServletResponse response, final int enllazType) {
         try {
             String lang = LocaleContextHolder.getLocale().getLanguage();
             // TODO XYZ ZZZ falta entitat
             String codiEntitat = "caib";
 
-            List<Enllaz> enllazos = utilsEjb.getSocialNetworks(codiEntitat, lang);
+            List<Enllaz> enllazos = utilsEjb.getEnllazosByType(codiEntitat,lang, enllazType);
 
             List<EnllazInfo> enllazosInfo = new ArrayList<WebUIController.EnllazInfo>();
 
@@ -196,7 +241,6 @@ public class WebUIController extends CommonFrontController {
                         + HibernateFileUtil.encryptFileID(enllazJPA.getLogoID());
 
                 enllazosInfo.add(new EnllazInfo(label, url, urllogo));
-
             }
 
             // Passar JSON de pluginsEntitat
@@ -204,12 +248,35 @@ public class WebUIController extends CommonFrontController {
             String json = gson.toJson(enllazosInfo);
 
             response.setContentType("application/json");
+            response.setCharacterEncoding("UTF8"); 
+            
+            byte[] utf8JsonString = json.getBytes("UTF8");
 
-            response.getWriter().write(json);
+            response.getOutputStream().write(utf8JsonString);
 
         } catch (Throwable e) {
             processException(e, response);
         }
     }
+//
+//    @RequestMapping(value = "/autenticat", method = RequestMethod.GET)
+//    public void isAutenticat(HttpServletRequest request, HttpServletResponse response) {
+//
+//        try {
+//            // TODO XYZ ZZZ Pendent codiEntitat
+//            String codiEntitat = "caib";
+//            Gson gson = new Gson();
+//            response.setContentType("application/json");
+//            if(SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")){
+//                response.getWriter().write(gson.toJson("false"));
+//            }else{
+//                response.getWriter().write(gson.toJson("true"));
+//            }
+//
+//        } catch (Throwable e) {
+//            processException(e, response);
+//        }
+//
+//    }
 
 }
