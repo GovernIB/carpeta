@@ -70,8 +70,6 @@
 
 		<!-- Capçalera -->
 		<div id = "barraMenu"></div>
-		
-		${iconaEntitatId}
 
 		<sec:authorize access="isAuthenticated()">
 			<sec:authentication var="user" property="principal.usuarioClave.nombreCompleto" />
