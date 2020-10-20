@@ -1,11 +1,11 @@
 
 package es.caib.carpeta.ejb;
 
-import javax.ejb.Local;
-
-import es.caib.carpeta.jpa.LogCarpetaJPA;
 import es.caib.carpeta.jpa.LogCarpetaIJPAManager;
+import es.caib.carpeta.jpa.LogCarpetaJPA;
 import es.caib.carpeta.model.dao.ILogCarpetaManager;
+
+import javax.ejb.Local;
 
 @Local
 public interface LogCarpetaLocal extends LogCarpetaIJPAManager,ILogCarpetaManager {

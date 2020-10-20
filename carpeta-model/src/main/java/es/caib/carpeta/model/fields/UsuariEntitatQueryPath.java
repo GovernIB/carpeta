@@ -1,6 +1,9 @@
 
 package es.caib.carpeta.model.fields;
-import org.fundaciobit.genapp.common.query.*;
+
+import org.fundaciobit.genapp.common.query.BooleanField;
+import org.fundaciobit.genapp.common.query.LongField;
+import org.fundaciobit.genapp.common.query.QueryPath;
 
 public class UsuariEntitatQueryPath extends org.fundaciobit.genapp.common.query.QueryPath {
 

@@ -1,15 +1,24 @@
 package es.caib.carpeta.back.controller.webdb;
 
+import es.caib.carpeta.back.form.webdb.*;
+import es.caib.carpeta.back.validator.webdb.EnllazWebValidator;
+import es.caib.carpeta.jpa.EnllazJPA;
+import es.caib.carpeta.jpa.FitxerJPA;
+import es.caib.carpeta.model.entity.Enllaz;
+import es.caib.carpeta.model.entity.Fitxer;
+import es.caib.carpeta.model.fields.EnllazFields;
+import es.caib.carpeta.model.fields.EntitatFields;
+import es.caib.carpeta.model.fields.TraduccioFields;
 import org.fundaciobit.genapp.common.StringKeyValue;
-import org.fundaciobit.genapp.common.utils.Utils;
-import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.genapp.common.query.GroupByItem;
-import org.fundaciobit.genapp.common.query.Field;
-import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
+import org.fundaciobit.genapp.common.query.Field;
+import org.fundaciobit.genapp.common.query.GroupByItem;
+import org.fundaciobit.genapp.common.query.Where;
+import org.fundaciobit.genapp.common.utils.Utils;
+import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.genapp.common.web.validation.ValidationWebUtils;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Controller;
@@ -23,22 +32,9 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
-
-import es.caib.carpeta.back.form.webdb.*;
-import es.caib.carpeta.back.form.webdb.EnllazForm;
-
-import es.caib.carpeta.back.validator.webdb.EnllazWebValidator;
-
-import es.caib.carpeta.model.entity.Fitxer;
-import es.caib.carpeta.jpa.FitxerJPA;
-import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
-import es.caib.carpeta.jpa.EnllazJPA;
-import es.caib.carpeta.model.entity.Enllaz;
-import es.caib.carpeta.model.fields.*;
 
 /**
  * Controller per gestionar un Enllaz

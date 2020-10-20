@@ -1,35 +1,41 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
 
+class BarraMenu extends Component {
 
-function BarraMenu ({ t }) {
+	render() {
 
-    return (
-		<header className="imc-titol">
+        const { t } = this.props;
 
-			<nav className="imc--contingut">
+		return (
+			<header className="imc-titol">
 
-				<a href="{this.context.router.goBack()}" className="imc-torna" title={ t('menuTorna') }><span>{ t('menuTorna') }</span></a>
-				<h1>
-					<span>{ t('menuTitol') }</span>
-				</h1>
+				<nav className="imc--contingut">
 
-				<ul>
-					<li>
-						<a href="http://www.caib.es/govern/organigrama/directori.do?lang=ca" className="imc-bt-directori" title={ t('menuDirectori') }>
-							<span>{ t('menuDirectori') }</span>
-						</a>
-					</li>
-					<li>
-						<button type="button" className="imc-bt-menu" id="imc-bt-menu" title={ t('menuMenu') }>
-							<span>{ t('menuMenu') }</span>
-						</button>
-					</li>
-				</ul>
-			</nav>
+					<a href="{this.context.router.goBack()}" className="imc-torna"
+					   title={t('menuTorna')}><span>{t('menuTorna')}</span></a>
+					<h1>
+						<span>{t('menuTitol')}</span>
+					</h1>
 
-		</header>
-    )
+					<ul>
+						<li>
+							<a href="http://www.caib.es/govern/organigrama/directori.do?lang=ca"
+							   className="imc-bt-directori" title={t('menuDirectori')}>
+								<span>{t('menuDirectori')}</span>
+							</a>
+						</li>
+						<li>
+							<button type="button" className="imc-bt-menu" id="imc-bt-menu" title={t('menuMenu')}>
+								<span>{t('menuMenu')}</span>
+							</button>
+						</li>
+					</ul>
+				</nav>
+
+			</header>
+		)
+	}
 }
 
 export default withTranslation()(BarraMenu);

@@ -1,14 +1,14 @@
 
 package es.caib.carpeta.ejb;
 
-import javax.ejb.Stateless;
-import javax.annotation.security.RolesAllowed;
-import org.fundaciobit.genapp.common.i18n.I18NException;
-import es.caib.carpeta.model.entity.Avis;
 import es.caib.carpeta.jpa.AvisJPA;
 import es.caib.carpeta.jpa.AvisJPAManager;
-
+import es.caib.carpeta.model.entity.Avis;
 import es.caib.carpeta.utils.Constants;
+import org.fundaciobit.genapp.common.i18n.I18NException;
+
+import javax.annotation.security.RolesAllowed;
+import javax.ejb.Stateless;
 
 @Stateless
 public class AvisEJB extends AvisJPAManager implements AvisLocal {

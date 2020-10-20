@@ -1,7 +1,6 @@
 package es.caib.carpeta.logic;
 
-import es.caib.carpeta.jpa.LogCarpetaJPA;
-import es.caib.carpeta.model.entity.LogCarpeta;
+import es.caib.carpeta.ejb.LogCarpetaLocal;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
 /**
@@ -10,7 +9,9 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
  * @author mgonzalez
  * Date: 13/10/2020
  */
-public interface LogCarpetaLogicaLocal {
+public interface LogCarpetaLogicaLocal extends LogCarpetaLocal {
 
-    LogCarpeta createFull(LogCarpeta logCarpeta) throws I18NException;
+    public static final String JNDI_NAME = "java:app/carpeta-logic/LogCarpetaLogicaEJB!es.caib.carpeta.logic.LogCarpetaLogicaLocal";
+
+    void crearLog(String descripcio, int estat, int tipus, long temps, Throwable th, String error, String peticio, Long entidadID, Long pluginID ) throws I18NException;
 }

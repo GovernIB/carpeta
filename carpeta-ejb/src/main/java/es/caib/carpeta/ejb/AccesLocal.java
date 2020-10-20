@@ -1,11 +1,11 @@
 
 package es.caib.carpeta.ejb;
 
-import javax.ejb.Local;
-
-import es.caib.carpeta.jpa.AccesJPA;
 import es.caib.carpeta.jpa.AccesIJPAManager;
+import es.caib.carpeta.jpa.AccesJPA;
 import es.caib.carpeta.model.dao.IAccesManager;
+
+import javax.ejb.Local;
 
 @Local
 public interface AccesLocal extends AccesIJPAManager,IAccesManager {

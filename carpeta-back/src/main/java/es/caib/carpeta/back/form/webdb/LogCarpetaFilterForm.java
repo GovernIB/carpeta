@@ -1,17 +1,15 @@
 
 package es.caib.carpeta.back.form.webdb;
 
+import es.caib.carpeta.back.form.CarpetaBaseFilterForm;
+import es.caib.carpeta.model.fields.LogCarpetaFields;
+import org.fundaciobit.genapp.common.query.Field;
+import org.fundaciobit.genapp.common.query.OrderBy;
+import org.springframework.stereotype.Component;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.stereotype.Component;
-
-import org.fundaciobit.genapp.common.query.Field;
-import org.fundaciobit.genapp.common.query.OrderBy;
-import es.caib.carpeta.back.form.CarpetaBaseFilterForm;
-
-import es.caib.carpeta.model.fields.LogCarpetaFields;
 
 /**
  *  ========= FITXER AUTOGENERAT - NO MODIFICAR !!!!! 
@@ -244,6 +242,8 @@ public class LogCarpetaFilterForm extends CarpetaBaseFilterForm implements LogCa
     this.excepcio = __toClone.excepcio;
     this.mapOfEntitatForEntitatID = __toClone.mapOfEntitatForEntitatID;
     this.mapOfPluginForPluginID = __toClone.mapOfPluginForPluginID;
+    this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
+    this.mapOfValuesForEstat = __toClone.mapOfValuesForEstat;
   }
   
   /* ========= UTILS ========== */
@@ -298,6 +298,30 @@ public class LogCarpetaFilterForm extends CarpetaBaseFilterForm implements LogCa
 
   public void setMapOfPluginForPluginID(Map<String, String> mapOfPluginForPluginID) {
     this.mapOfPluginForPluginID = mapOfPluginForPluginID;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForTipus;
+
+  public Map<String, String> getMapOfValuesForTipus() {
+    return this.mapOfValuesForTipus;
+  }
+
+  public void setMapOfValuesForTipus(Map<String, String> mapOfValuesForTipus) {
+    this.mapOfValuesForTipus = mapOfValuesForTipus;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForEstat;
+
+  public Map<String, String> getMapOfValuesForEstat() {
+    return this.mapOfValuesForEstat;
+  }
+
+  public void setMapOfValuesForEstat(Map<String, String> mapOfValuesForEstat) {
+    this.mapOfValuesForEstat = mapOfValuesForEstat;
   }
 
 

@@ -1,13 +1,11 @@
 package es.caib.carpeta.jpa.validator;
 
-import org.apache.log4j.Logger;
-
 import es.caib.carpeta.model.entity.Usuari;
-import org.fundaciobit.genapp.common.query.Field;
-import es.caib.carpeta.model.fields.UsuariFields;
 import es.caib.carpeta.model.fields.EntitatFields;
 import es.caib.carpeta.model.fields.IdiomaFields;
-
+import es.caib.carpeta.model.fields.UsuariFields;
+import org.apache.log4j.Logger;
+import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.validation.IValidatorResult;
 
 

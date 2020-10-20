@@ -96,9 +96,18 @@
              </label>
             </td>
             <td>
-            <form:errors path="logCarpeta.tipus" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.TIPUS)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.TIPUS)? ' uneditable-input' : ''}"   path="logCarpeta.tipus"   />
-
+          <form:errors path="logCarpeta.tipus" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.TIPUS)}" >
+          <form:hidden path="logCarpeta.tipus"/>
+          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.logCarpeta.tipus,__theForm.listOfValuesForTipus)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.TIPUS)}" >
+          <form:select id="logCarpeta_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-4" path="logCarpeta.tipus">
+            <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
            </td>
         </tr>
         </c:if>
@@ -114,9 +123,18 @@
              </label>
             </td>
             <td>
-            <form:errors path="logCarpeta.estat" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ESTAT)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ESTAT)? ' uneditable-input' : ''}"   path="logCarpeta.estat"   />
-
+          <form:errors path="logCarpeta.estat" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ESTAT)}" >
+          <form:hidden path="logCarpeta.estat"/>
+          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.logCarpeta.estat,__theForm.listOfValuesForEstat)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ESTAT)}" >
+          <form:select id="logCarpeta_estat"  onchange="if(typeof onChangeEstat == 'function') {  onChangeEstat(this); };"  cssClass="form-control col-md-4" path="logCarpeta.estat">
+            <c:forEach items="${__theForm.listOfValuesForEstat}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
            </td>
         </tr>
         </c:if>

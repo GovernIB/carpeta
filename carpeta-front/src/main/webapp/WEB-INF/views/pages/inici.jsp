@@ -35,7 +35,6 @@
 	<!--script type="text/javascript" src="src/assets/js/carpeta.js"></script-->
 	<!-- Scripts per Components React -->
 	<script src="${pageContext.request.contextPath}/src/utils/carpeta_react.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/src/utils/pluginConnect.js" type="text/javascript"></script>
 
 	<!-- ESTILS -->
 	<link href="${pageContext.request.contextPath}/src/assets/css/bootstrap.min.css" rel="stylesheet">

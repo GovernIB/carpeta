@@ -1,18 +1,18 @@
 package es.caib.carpeta.logic.utils;
 
-import javax.naming.InitialContext;
-
+import es.caib.carpeta.commons.utils.Constants;
+import es.caib.carpeta.ejb.EntitatLocal;
+import es.caib.carpeta.ejb.PropietatGlobalLocal;
+import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
+import es.caib.carpeta.logic.UsuariEntitatLogicaLocal;
+import es.caib.carpeta.logic.UsuariLogicaLocal;
+import es.caib.carpeta.model.fields.PropietatGlobalFields;
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NArgumentString;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
 
-import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.ejb.EntitatLocal;
-import es.caib.carpeta.ejb.PropietatGlobalLocal;
-import es.caib.carpeta.logic.UsuariEntitatLogicaLocal;
-import es.caib.carpeta.logic.UsuariLogicaLocal;
-import es.caib.carpeta.model.fields.PropietatGlobalFields;
+import javax.naming.InitialContext;
 
 
 /**
@@ -29,6 +29,8 @@ public final class EjbManager {
 	protected static UsuariLogicaLocal usuariPersonaLogicaEjb;
 	
 	protected static EntitatLocal entitatLogicaEjb;
+
+	protected static LogCarpetaLogicaLocal logCarpetaLogicaEjb;
 /* XYZ ZZZ ZZZ
 	protected static IdiomaLocal idiomaEjb;
     */
@@ -78,6 +80,20 @@ public final class EjbManager {
 			}
 		}
 		return entitatLogicaEjb;
+	}
+
+
+	public static LogCarpetaLogicaLocal getLogCarpetaLogicaEJB() throws I18NException {
+
+		if (logCarpetaLogicaEjb == null) {
+			try {
+				logCarpetaLogicaEjb = (LogCarpetaLogicaLocal) new InitialContext()
+					.lookup(LogCarpetaLogicaLocal.JNDI_NAME);
+			} catch (Throwable e) {
+				throwNewI18NException(e, "LogCarpetaLogicaLocal");
+			}
+		}
+		return logCarpetaLogicaEjb;
 	}
 	
 /* XYZ ZZZ ZZZ

@@ -1,7 +1,8 @@
 package es.caib.carpeta.jpa;
 
-import es.caib.carpeta.model.*;
+import es.caib.carpeta.model.ICarpetaDaoManagers;
 import es.caib.carpeta.model.dao.*;
+
 import javax.persistence.EntityManager;
 
 public final class CarpetaJPADaoManagers implements ICarpetaDaoManagers{

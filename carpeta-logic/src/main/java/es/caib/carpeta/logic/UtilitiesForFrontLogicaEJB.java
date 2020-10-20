@@ -1,6 +1,5 @@
 package es.caib.carpeta.logic;
 
-import es.caib.carpeta.ejb.FitxerLocal;
 import es.caib.carpeta.jpa.EntitatJPA;
 import es.caib.carpeta.jpa.PluginJPA;
 import es.caib.carpeta.logic.utils.PluginInfo;
@@ -79,6 +78,21 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
 
     }
 
+    @Override
+    public EntitatJPA getEntitat(String codiEntitat) throws I18NException {
+
+        List<Entitat> entitats = entitatEjb.select(EntitatFields.CODI.equal(codiEntitat));
+
+        if (entitats == null || entitats.size() == 0) {
+            return null;
+        }
+
+        EntitatJPA e = (EntitatJPA) entitats.get(0);
+
+        return e;
+
+    }
+
     /**
      * Retorna codi i nom en l'idioma seleccionat
      */
@@ -121,7 +135,7 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
     }
 
     @Override
-    public FileInfo getIcona(Long pluginID, String language) throws I18NException {
+    public FileInfo getIconaPlugin(Long pluginID, String language) throws I18NException {
 
         ICarpetaFrontPlugin plugin = pluginCarpetaFrontEjb.getInstanceByPluginID(pluginID);
         FileInfo fi = plugin.getIcon(new Locale(language));
@@ -143,10 +157,15 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
     public Fitxer getFileInfo(Long fitxerID) throws I18NException {
         return fitxerLogicaEjb.findByPrimaryKey(fitxerID);
     }
-    
+
     @Override
-	public long getIconaEntitat(String codiEntitat) throws I18NException {
-    	return entitatEjb.executeQueryOne(EntitatFields.ICONID, EntitatFields.CODI.equal(codiEntitat));
-	}
+    public long getIconaEntitat(String codiEntitat) throws I18NException {
+        return entitatEjb.executeQueryOne(EntitatFields.ICONID, EntitatFields.CODI.equal(codiEntitat));
+    }
+
+    @Override
+    public long getLogolateralEntitat(String codiEntitat) throws I18NException {
+        return entitatEjb.executeQueryOne(EntitatFields.LOGOLATERALFRONTID, EntitatFields.CODI.equal(codiEntitat));
+    }
 
 }

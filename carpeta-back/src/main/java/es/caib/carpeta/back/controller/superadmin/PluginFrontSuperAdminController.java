@@ -1,12 +1,12 @@
 package es.caib.carpeta.back.controller.superadmin;
 
 
-import java.net.URL;
-
-import javax.ejb.EJB;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import es.caib.carpeta.back.form.webdb.PluginFilterForm;
+import es.caib.carpeta.back.form.webdb.PluginForm;
+import es.caib.carpeta.back.security.LoginInfo;
+import es.caib.carpeta.commons.utils.Constants;
+import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
+import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaLocal;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
@@ -17,10 +17,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import es.caib.carpeta.back.form.webdb.PluginFilterForm;
-import es.caib.carpeta.back.form.webdb.PluginForm;
-import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaLocal;
+import javax.ejb.EJB;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.net.URL;
+
+import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_PLUGIN_FRONT;
 
 /**
  * 
@@ -38,6 +41,10 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
     @EJB(mappedName = PluginDeCarpetaFrontLogicaLocal.JNDI_NAME)
     protected PluginDeCarpetaFrontLogicaLocal pluginCarpetaFrontEjb;
 
+
+    @EJB(mappedName = LogCarpetaLogicaLocal.JNDI_NAME)
+    protected LogCarpetaLogicaLocal logCarpetaLogicaEjb;
+
     @Override
     public int getTipus() {
         return Constants.PLUGIN_TIPUS_FRONT;
@@ -50,6 +57,8 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
    public ModelAndView startTestPlugin(@PathVariable("pluginID") Long pluginID,
           HttpServletRequest request, HttpServletResponse response,
           PluginFilterForm filterForm) throws Exception, I18NException {
+
+       long temps = System.currentTimeMillis();
         
        String administrationID= request.getParameter("administrationID");
        String urlBase = request.getParameter("urlBase");
@@ -69,6 +78,13 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
        log.info("startTestPlugin:: BASE = " + base);
        
        String view = "testPlugin";
+
+
+       logCarpetaLogicaEjb.crearLog("Plugin del Front via test", ESTAT_LOG_OK,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,null,"","",LoginInfo.getInstance().getEntitatID(),pluginID);
+
+
+
+
 
        return CarpetaFrontModuleSuperAdminController.startPrivateSignatureProcess(request, response, view, pluginID, administrationID, base);
 

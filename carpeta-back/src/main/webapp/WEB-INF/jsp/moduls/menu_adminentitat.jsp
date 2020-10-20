@@ -40,13 +40,13 @@
             code="avis.avis.plural" />&nbsp;<c:if test="numAvisos gt 0"><span class="badge badge-danger">${numAvisos}</span></c:if></span>
 </a>
 
-<hr style="margin-top: 6px; margin-bottom: 6px;" />
+<%--<hr style="margin-top: 6px; margin-bottom: 6px;" />
 
 <a class="dropdown-item"
    href="<c:url value="/adminentitat/logCarpeta/list"/>"> <span
         style="${(fn:contains(url, '/adminentitat/logCarpeta'))? " font-weight:bold;" : ""}"><spring:message
         code="logCarpeta.logCarpeta.plural" /></span>
-</a>
+</a>--%>
 
 <%--
 <hr style="margin-top: 6px; margin-bottom: 6px;" />

@@ -1,17 +1,15 @@
 
 package es.caib.carpeta.back.form.webdb;
 
+import es.caib.carpeta.back.form.CarpetaBaseFilterForm;
+import es.caib.carpeta.model.fields.PluginFields;
+import org.fundaciobit.genapp.common.query.Field;
+import org.fundaciobit.genapp.common.query.OrderBy;
+import org.springframework.stereotype.Component;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.stereotype.Component;
-
-import org.fundaciobit.genapp.common.query.Field;
-import org.fundaciobit.genapp.common.query.OrderBy;
-import es.caib.carpeta.back.form.CarpetaBaseFilterForm;
-
-import es.caib.carpeta.model.fields.PluginFields;
 
 /**
  *  ========= FITXER AUTOGENERAT - NO MODIFICAR !!!!! 
