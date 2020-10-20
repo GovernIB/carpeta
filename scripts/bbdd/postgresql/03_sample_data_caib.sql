@@ -25,7 +25,7 @@ INSERT INTO car_entitat(entitatid, nomid, codidir3, activa, colormenu, versio, c
 
 
 
--- 06-10-2020 Afegir gestio d'Enllaços a Back #138
+-- Enllaços de TIPUS XARXA SOCIAL
 
 -- YouTube
 
@@ -91,4 +91,60 @@ INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (210, 'es'
 INSERT INTO car_fitxer(fitxerid, descripcio, mime, nom, tamany) VALUES (203, NULL, 'image/png', 'facebook.png', 824);
 
 INSERT INTO car_enllaz(enllazid, tipus, urlid, nomid, entitatid, logoid) VALUES (205, 1, 210, 209, (SELECT entitatid FROM car_entitat where codi = 'caib'), 203);
+
+
+-- Enllaços de TIPUS LATERAL
+
+-- Noticies
+
+INSERT INTO car_traduccio VALUES (223);
+INSERT INTO car_traduccio VALUES (224);
+
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (223, 'en', 'News');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (223, 'ca', 'Notícies');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (223, 'es', 'Noticias');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (224, 'en', 'https://www.caib.es/pidip2front/jsp/es/noticias');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (224, 'ca', 'https://www.caib.es/pidip2front/jsp/ca/noticies');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (224, 'es', 'https://www.caib.es/pidip2front/jsp/es/noticias');
+
+INSERT INTO car_fitxer(fitxerid, descripcio, mime, nom, tamany) VALUES (220, NULL, 'image/png', 'noticies.png', 1322);
+
+INSERT INTO car_enllaz(enllazid, tipus, urlid, nomid, entitatid, logoid) VALUES (222, 2, 224, 223, (SELECT entitatid FROM car_entitat where codi = 'caib'), 220);
+
+
+-- Administracio
+
+INSERT INTO car_traduccio VALUES (233);
+INSERT INTO car_traduccio VALUES (234);
+
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (233, 'en', 'Government');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (233, 'ca', 'Administració');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (233, 'es', 'Administración');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (234, 'en', 'https://www.caib.es/govern/administracio.do?lang=es');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (234, 'ca', 'https://www.caib.es/govern/administracio.do?lang=ca');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (234, 'es', 'https://www.caib.es/govern/administracio.do?lang=es');
+
+INSERT INTO car_fitxer(fitxerid, descripcio, mime, nom, tamany) VALUES (230, NULL, 'image/png', 'administracio.png', 967);
+
+INSERT INTO car_enllaz(enllazid, tipus, urlid, nomid, entitatid, logoid) VALUES (232, 2, 234, 233, (SELECT entitatid FROM car_entitat where codi = 'caib'), 230);
+
+
+-- Illes
+
+INSERT INTO car_traduccio VALUES (243);
+INSERT INTO car_traduccio VALUES (244);
+
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (243, 'en', 'Islands');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (243, 'ca', 'Illes');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (243, 'es', 'Islas');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (244, 'en', 'https://www.illesbalears.travel/en/baleares/');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (244, 'ca', 'https://www.illesbalears.travel/ca/baleares/');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (244, 'es', 'https://www.illesbalears.travel/es/baleares/');
+
+INSERT INTO car_fitxer(fitxerid, descripcio, mime, nom, tamany) VALUES (240, NULL, 'image/png', 'illes.png', 1630);
+
+INSERT INTO car_enllaz(enllazid, tipus, urlid, nomid, entitatid, logoid) VALUES (242, 2, 244, 243, (SELECT entitatid FROM car_entitat where codi = 'caib'), 240);
+
+
+
 
