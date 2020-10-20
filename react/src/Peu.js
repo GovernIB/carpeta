@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
-import i18n from 'i18next';
-
 
 class Peu extends Component {
 	
@@ -26,8 +24,8 @@ class Peu extends Component {
 	render(){
 	
 		var urlBase = window.location.href;
-		
-		var autenticat = sessionStorage.getItem('autenticat');
+
+		var autenticat = this.props.autenticat;
 		const { t } = this.props;
 		
 		var mapa;

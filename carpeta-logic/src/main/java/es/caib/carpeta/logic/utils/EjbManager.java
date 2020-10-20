@@ -2,8 +2,8 @@ package es.caib.carpeta.logic.utils;
 
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.ejb.EntitatLocal;
-import es.caib.carpeta.ejb.LogCarpetaLocal;
 import es.caib.carpeta.ejb.PropietatGlobalLocal;
+import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
 import es.caib.carpeta.logic.UsuariEntitatLogicaLocal;
 import es.caib.carpeta.logic.UsuariLogicaLocal;
 import es.caib.carpeta.model.fields.PropietatGlobalFields;
@@ -30,7 +30,7 @@ public final class EjbManager {
 	
 	protected static EntitatLocal entitatLogicaEjb;
 
-	protected static LogCarpetaLocal logCarpetaLogicaEjb;
+	protected static LogCarpetaLogicaLocal logCarpetaLogicaEjb;
 /* XYZ ZZZ ZZZ
 	protected static IdiomaLocal idiomaEjb;
     */
@@ -83,12 +83,12 @@ public final class EjbManager {
 	}
 
 
-	public static LogCarpetaLocal getLogCarpetaLogicaEJB() throws I18NException {
+	public static LogCarpetaLogicaLocal getLogCarpetaLogicaEJB() throws I18NException {
 
 		if (logCarpetaLogicaEjb == null) {
 			try {
-				logCarpetaLogicaEjb = (LogCarpetaLocal) new InitialContext()
-					.lookup(LogCarpetaLocal.JNDI_NAME);
+				logCarpetaLogicaEjb = (LogCarpetaLogicaLocal) new InitialContext()
+					.lookup(LogCarpetaLogicaLocal.JNDI_NAME);
 			} catch (Throwable e) {
 				throwNewI18NException(e, "LogCarpetaLogicaLocal");
 			}
