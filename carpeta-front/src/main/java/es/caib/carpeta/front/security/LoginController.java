@@ -9,8 +9,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 //import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
@@ -24,6 +26,9 @@ import java.net.URL;
 
 @Controller
 public class LoginController {
+    
+    
+    public static final String SESSION_RETURN_URL_POST_LOGIN = "SESSION_RETURN_URL_POST_LOGIN";
 
     private final Log log = LogFactory.getLog(getClass());
 
@@ -39,13 +44,30 @@ public class LoginController {
     //@Autowired
     //private RequestMappingHandlerMapping requestMappingHandlerMapping;
 
-    @Value("${es.caib.carpeta.loginib.entidad}")
-    private String entidad;
+    //@Value("${es.caib.carpeta.loginib.entidad}")
+    //private String entidad;
 
+
+    @RequestMapping(value="/prelogin")
+    public String prelogin(HttpServletRequest request, HttpServletResponse response
+            //, @PathVariable("mprotocol") String protocol, @PathVariable("mhost") String host
+            ) throws Exception {
+        
+        
+        //String urluser = protocol + "//" + host + request.getContextPath();
+        
+        String urluser = request.getParameter("urlbase") + request.getContextPath();
+        
+        log.info(" XXX XYZ  urluser => " + urluser);
+        request.getSession().setAttribute(SESSION_RETURN_URL_POST_LOGIN, urluser );
+        
+        return "redirect:/login";
+    }
 
     @RequestMapping(value="/login")
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+            
+        
         // Error login
         if ("true".equals(request.getParameter("error"))) {
             log.info("Error de login");
@@ -66,8 +88,17 @@ public class LoginController {
 
                 log.info("iniciarSesionAutentificacion: " + savedRequest.getRedirectUrl());
             }
+            
+            String baseURL = (String)request.getSession().getAttribute(SESSION_RETURN_URL_POST_LOGIN);
+            
+            log.info(" XXX XYZ  BASE URL LOGIN => " + baseURL);
+            
+            String url_callback_login=baseURL + "/redirigirLogin";
+            String url_callback_error= baseURL;
+            //    es.caib.carpeta.loginib.url_callback_logout=http://localhost:8080/carpetafront/salir
+            String IDIOMA = LocaleContextHolder.getLocale().getLanguage();
 
-            String url = securityService.iniciarSesionAutentificacion();
+            String url = securityService.iniciarSesionAutentificacion(url_callback_login, url_callback_error, IDIOMA);
 
             log.info("Url autentificacion: " + url);
 
@@ -101,8 +132,16 @@ public class LoginController {
     public String salir(HttpServletRequest request) throws Exception{
 
         log.info("Dentro de salir");
+        
+        String baseURL = (String)request.getSession().getAttribute(SESSION_RETURN_URL_POST_LOGIN);
+        
+        log.info(" XXX XYZ  BASE URL LOGOUT => " + baseURL);
+        
+       
+        String url_callback_logout= baseURL + "/salir";
+        String IDIOMA = LocaleContextHolder.getLocale().getLanguage();
 
-        securityService.iniciarSesionLogout();
+        securityService.iniciarSesionLogout(url_callback_logout, IDIOMA);
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();

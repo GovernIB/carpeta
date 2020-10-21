@@ -40,7 +40,7 @@ class Inici extends Component {
 							<div className="col-md-5 border-0 float-right">
 
 								<p className="margen-top-clave pb-3">
-									<a className="btn btn-primary carpeta-btn" href="login" role="button"><span
+									<a className="btn btn-primary carpeta-btn" href="javascript: var loc = new URL(window.location.href);  window.location.href=('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host) )" role="button"><span
 										className="oi oi-share" title=""
 										aria-hidden="true"></span> {t('paginaIniciBotoAccedir')}</a>
 								</p>

@@ -109,7 +109,7 @@ public class Configuracio implements Constants {
 
     public static String getLoginIBAplicacion() { return getProperty(CARPETA_PROPERTY_LOGINIB + "aplicacion");
     }
-
+/*  XXX XYZ
     public static String getLoginIBUrlCallbackLogin() { return getProperty(CARPETA_PROPERTY_LOGINIB + "url_callback_login");
     }
 
@@ -121,7 +121,7 @@ public class Configuracio implements Constants {
 
     public static String getLoginIBIdioma() { return getProperty(CARPETA_PROPERTY_LOGINIB + "idioma");
     }
-
+*/
     public static String getLoginIBNivelQAA() { return getProperty(CARPETA_PROPERTY_LOGINIB + "nivel_qaa");
     }
 

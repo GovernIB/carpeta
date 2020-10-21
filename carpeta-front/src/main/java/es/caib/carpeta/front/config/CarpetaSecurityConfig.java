@@ -52,7 +52,7 @@ public class CarpetaSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/", "/inici", "/sortir", "/dist/**", "/src/**", "/utils/**", "/assets/**", "/js/**", "/pluginfront","/pluginfront/**", WebUIController.WEBUI_PATH + "/**")
+                .antMatchers("/", "/inici", "/prelogin/**", "/sortir", "/dist/**", "/src/**", "/utils/**", "/assets/**", "/js/**", "/pluginfront","/pluginfront/**", WebUIController.WEBUI_PATH + "/**")
                 .permitAll()
                 .and()
                 .authorizeRequests().anyRequest().access("isAuthenticated()")
