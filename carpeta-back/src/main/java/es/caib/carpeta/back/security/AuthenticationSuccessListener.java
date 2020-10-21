@@ -99,13 +99,8 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 				throw new LoginException("Error creant el log");
 			}
 		} catch (Throwable e) {
-			log.info(" XYZ ZZZ ZZZ S'ha produit un error consultant la informació de login actual: " + e.getMessage());
-			try {
-				logCarpetaEjb.crearLog("Autenticació al back", ESTAT_LOG_ERROR, TIPUS_LOG_AUTENTICACIO_BACK,System.currentTimeMillis() - temps ,e, "S'ha produit un error consultant la informació de login actual: " + e.getMessage()
-					, peticio,null,null);
-			}catch (I18NException ie){
-				throw new LoginException("Error creant el log");
-			}
+			log.debug(" XYZ ZZZ ZZZ S'ha produit un error consultant la informació de login actual: " + e.getMessage());
+
 		}
 
 		final boolean isDebug = log.isDebugEnabled();
