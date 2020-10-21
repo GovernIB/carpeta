@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  $('#dataTable_paginate').DataTable();
+ // $('#dataTable_paginate').DataTable({retrieve:true});
   $('.dataTables_length').addClass('bs-select');
 });
 
@@ -7,10 +7,9 @@ $(document).ready(function () {
 //Enlaces entoda la fila de la tabla
 jQuery(document).ready(function($) {
 	$(".clickable-row").click(function() {
-		alert("clicable");
 		var $th = $(this);
-		// window.open($th.attr('data-href'), $th.attr('data-target'));
-		goTo($th.attr('data-href'));
+		window.open($th.attr('data-href'), $th.attr('data-target'));
+		// goTo($th.attr('data-href'));
 	});
 });
 

@@ -372,6 +372,7 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     log.info("tp.getDescripcion() => " + tp.getDescripcionTramite());
                     log.info("tp.getTipo() => " + tp.getTipo());
                     log.info("tp.isPendiente() => " + tp.isPendiente());
+                    log.info("tp.getUrl() => " + tp.getUrl());
             	} else {
 	                log.info(" -------------  TRAMIT SISTRA1 [" + x + " ] -------------------");
 	                log.info("tp.getIdTramite() => " + tp.getIdTramite());
@@ -440,8 +441,10 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 	    	   tramits = null;
 	       } else {
 	    	   for (RTramitePersistencia tp : tramites) {
-	    		   if(finalizado.equals("A") || finalizado.equals("N"))
-	    			   tramits.add(new TramitePersistenteGenerico(tp,2));
+	    		   if(finalizado.equals("A") || finalizado.equals("N")) {
+	    			   TramitePersistenteGenerico tpg = new TramitePersistenteGenerico(tp,2);
+	    			   tramits.add(tpg);
+	    		   }
 	    	   }
 	       }
 	       return tramits;
@@ -466,6 +469,9 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     		   log.info("tp.getFechaInicio() => " + tp.getFechaInicio());
     		   log.info("tp.getFechaUltimoAcceso() => " + tp.getFechaUltimoAcceso());
     		   log.info(" tp.getIdSesionTramitacion() => " + tp.getIdSesionTramitacion());
+    		   log.info(" tp.getTipo() => " +tp.getTipo());
+    		   log.info(" tp.getVersionSistra() => " +tp.getVersionSistra());
+    		   log.info(" tp.getUrl() => " +tp.getUrl());
                x++;
            }
        }
