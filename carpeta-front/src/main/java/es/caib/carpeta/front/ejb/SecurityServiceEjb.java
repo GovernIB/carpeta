@@ -17,8 +17,10 @@ public class SecurityServiceEjb implements SecurityService {
 
 
     @Override
-    public String iniciarSesionAutentificacion() throws Exception {
-        return securityService.iniciarSesionAutentificacion();
+    public String iniciarSesionAutentificacion(String URL_CALLBACK_LOGIN, 
+            String URL_CALLBACK_ERROR, String IDIOMA) throws Exception {
+        return securityService.iniciarSesionAutentificacion(URL_CALLBACK_LOGIN, 
+                URL_CALLBACK_ERROR, IDIOMA);
     }
 
     @Override
@@ -27,7 +29,7 @@ public class SecurityServiceEjb implements SecurityService {
     }
 
     @Override
-    public String iniciarSesionLogout() throws Exception {
-        return securityService.iniciarSesionLogout();
+    public String iniciarSesionLogout(String URL_CALLBACK_LOGOUT, String IDIOMA) throws Exception {
+        return securityService.iniciarSesionLogout(URL_CALLBACK_LOGOUT, IDIOMA);
     }
 }

@@ -9,7 +9,8 @@ public interface SecurityService {
      * @return
      * @throws Exception
      */
-    String iniciarSesionAutentificacion() throws Exception;
+    public String iniciarSesionAutentificacion(String URL_CALLBACK_LOGIN, 
+            String URL_CALLBACK_ERROR, String IDIOMA) throws Exception;
 
     /**
      *
@@ -24,5 +25,5 @@ public interface SecurityService {
      * @return
      * @throws Exception
      */
-    String iniciarSesionLogout() throws Exception;
+    public String iniciarSesionLogout(String URL_CALLBACK_LOGOUT, String IDIOMA) throws Exception;
 }

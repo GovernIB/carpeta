@@ -1,6 +1,7 @@
 package es.caib.carpeta.front.controller;
 
 
+
 import com.google.gson.Gson;
 import es.caib.carpeta.hibernate.HibernateFileUtil;
 import es.caib.carpeta.jpa.EnllazJPA;
@@ -34,7 +35,7 @@ public class WebUIController extends CommonFrontController {
     public static final String WEBUI_FAVICON_PATH = "/icona";
 
     public static final String WEBUI_LOGOLATERAL_PATH = "/logolateral";
-    
+
     public static final String WEBUI_INFOLOGOLATERAL_PATH = "/infologolateral";
 
     public static final String ENLLAZ_LOGO_PATH = "/enllazlogo";
@@ -86,9 +87,7 @@ public class WebUIController extends CommonFrontController {
         }
 
     }
-    
-    
-    
+
     @RequestMapping(value = WEBUI_INFOLOGOLATERAL_PATH, method = RequestMethod.GET)
     public void getEntitatInfoLogoLateral(HttpServletRequest request, HttpServletResponse response) {
 
@@ -96,9 +95,9 @@ public class WebUIController extends CommonFrontController {
             // XYZ ZZZ Pendent codiEntitat
             String codiEntitat = "caib";
             String idioma = "ca";
-            
-            
+
             EntitatJPA entitat = utilsEjb.getEntitat(codiEntitat);
+
 
             List<EnllazInfo> enllazosInfo = new ArrayList<WebUIController.EnllazInfo>();
             
@@ -108,6 +107,7 @@ public class WebUIController extends CommonFrontController {
             enllazosInfo.add(enllazInfo);
             
             // Passar JSON 
+
             Gson gson = new Gson();
             String json = gson.toJson(enllazosInfo);
 
@@ -120,8 +120,6 @@ public class WebUIController extends CommonFrontController {
         }
 
     }
-    
-    
 
     @RequestMapping(value = WEBUI_LOGOLATERAL_PATH, method = RequestMethod.GET)
     public void getEntitatLogoLateral(HttpServletRequest request, HttpServletResponse response) {
@@ -156,8 +154,6 @@ public class WebUIController extends CommonFrontController {
         }
 
     }
-
-
 
     @RequestMapping(value = ENLLAZ_LOGO_PATH + "/{encodedenllazlogoid}", method = RequestMethod.GET)
     public void getEnllazLogo(@PathVariable("encodedenllazlogoid") String encodedenllazlogoid,
@@ -212,15 +208,13 @@ public class WebUIController extends CommonFrontController {
         getEnllazosJSON(request, response, enllazType);
     }
 
-
-
     protected void getEnllazosJSON(HttpServletRequest request, HttpServletResponse response, final int enllazType) {
         try {
             String lang = LocaleContextHolder.getLocale().getLanguage();
             // TODO XYZ ZZZ falta entitat
             String codiEntitat = "caib";
 
-            List<Enllaz> enllazos = utilsEjb.getEnllazosByType(codiEntitat,lang, enllazType);
+            List<Enllaz> enllazos = utilsEjb.getEnllazosByType(codiEntitat, lang, enllazType);
 
             List<EnllazInfo> enllazosInfo = new ArrayList<WebUIController.EnllazInfo>();
 

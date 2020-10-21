@@ -20,22 +20,23 @@ public class SecurityServiceImpl implements SecurityService {
 
     private static final Logger log = LoggerFactory.getLogger(SecurityServiceImpl.class);
 
-
     private String METODES_AUTENTICACIO = Configuracio.getLoginIBMethodAuth();
     private String CODI_ENTITAT = Configuracio.getLoginIBEntidad();
     private String APLICACIO_CODI = Configuracio.getLoginIBAplicacion();
-    private String URL_CALLBACK_LOGIN = Configuracio.getLoginIBUrlCallbackLogin();
-    private String URL_CALLBACK_ERROR = Configuracio.getLoginIBUrlCallbackError();
-    private String URL_CALLBACK_LOGOUT = Configuracio.getLoginIBUrlCallbackLogout();
-    private String IDIOMA = Configuracio.getLoginIBIdioma();
+    /*
+     * XYZ ZZZ private String URL_CALLBACK_LOGIN =
+     * Configuracio.getLoginIBUrlCallbackLogin(); private String URL_CALLBACK_ERROR
+     * = Configuracio.getLoginIBUrlCallbackError(); private String
+     * URL_CALLBACK_LOGOUT = Configuracio.getLoginIBUrlCallbackLogout(); private
+     * String IDIOMA = Configuracio.getLoginIBIdioma();
+     */
     private String NIVELL_QAA = Configuracio.getLoginIBNivelQAA();
     private String LOGINIB_USER = Configuracio.getLoginIBUser();
     private String LOGINIB_PASS = Configuracio.getLoginIBPassword();
     private String LOGINIB_URL = Configuracio.getLoginIBUrl();
 
-
-    public String iniciarSesionAutentificacion() throws Exception {
-
+    @Override
+    public String iniciarSesionAutentificacion(String URL_CALLBACK_LOGIN, String URL_CALLBACK_ERROR, String IDIOMA) {
         final RLoginParams param = new RLoginParams();
         param.setAplicacion(APLICACIO_CODI);
         param.setEntidad(CODI_ENTITAT);
@@ -52,7 +53,8 @@ public class SecurityServiceImpl implements SecurityService {
         final HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         final HttpEntity<RLoginParams> peticion = new HttpEntity<>(param, headers);
-        final ResponseEntity<String> responseTramite = restTemplate.postForEntity(LOGINIB_URL + "/login", peticion, String.class);
+        final ResponseEntity<String> responseTramite = restTemplate.postForEntity(LOGINIB_URL + "/login", peticion,
+                String.class);
 
         log.info("response: " + responseTramite.toString());
         log.info("URL: " + responseTramite.getBody());
@@ -65,8 +67,8 @@ public class SecurityServiceImpl implements SecurityService {
 
         final RestTemplate restTemplate = getLoginIbRestTemplate();
 
-        final RDatosAutenticacion datosAutenticacion = restTemplate.getForObject(
-                LOGINIB_URL + "/ticket/" + ticket, RDatosAutenticacion.class);
+        final RDatosAutenticacion datosAutenticacion = restTemplate.getForObject(LOGINIB_URL + "/ticket/" + ticket,
+                RDatosAutenticacion.class);
 
         final UsuarioClave usuarioClave = new UsuarioClave();
 
@@ -81,7 +83,7 @@ public class SecurityServiceImpl implements SecurityService {
     }
 
     @Override
-    public String iniciarSesionLogout() throws Exception {
+    public String iniciarSesionLogout(String URL_CALLBACK_LOGOUT, String IDIOMA) throws Exception {
 
         final RestTemplate restTemplate = getLoginIbRestTemplate();
 
@@ -95,8 +97,8 @@ public class SecurityServiceImpl implements SecurityService {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         final HttpEntity<RLogoutParams> request = new HttpEntity<>(param, headers);
-        final ResponseEntity<String> responseTramite = restTemplate.postForEntity(LOGINIB_URL + "/logout",
-                request, String.class);
+        final ResponseEntity<String> responseTramite = restTemplate.postForEntity(LOGINIB_URL + "/logout", request,
+                String.class);
 
         String url = responseTramite.getBody();
 
@@ -107,7 +109,7 @@ public class SecurityServiceImpl implements SecurityService {
      *
      * @return
      */
-    private RestTemplate getLoginIbRestTemplate(){
+    private RestTemplate getLoginIbRestTemplate() {
 
         final RestTemplate restTemplate = new RestTemplate();
         restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(LOGINIB_USER, LOGINIB_PASS));
