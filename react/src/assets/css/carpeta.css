@@ -141,6 +141,13 @@ img:hover {
 .titol{
     text-transform: uppercase;
 }
+.imc-logo a.imc--goib {
+	height: auto;
+	background: none;
+}
+.imc-logo li a::before {
+	content: none;
+}
 
 
 /* RESPONSIVE

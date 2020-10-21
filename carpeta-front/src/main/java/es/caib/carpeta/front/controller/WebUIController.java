@@ -1,23 +1,23 @@
 package es.caib.carpeta.front.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import es.caib.carpeta.hibernate.HibernateFileUtil;
+import es.caib.carpeta.jpa.EnllazJPA;
+import es.caib.carpeta.jpa.EntitatJPA;
+import es.caib.carpeta.model.entity.Enllaz;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.google.gson.Gson;
-
-import es.caib.carpeta.hibernate.HibernateFileUtil;
-import es.caib.carpeta.jpa.EnllazJPA;
-import es.caib.carpeta.jpa.EntitatJPA;
-import es.caib.carpeta.model.entity.Enllaz;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Conjunt de cridades REST per obtenir informació per a la presentació de la
@@ -98,12 +98,18 @@ public class WebUIController extends CommonFrontController {
 
             EntitatJPA entitat = utilsEjb.getEntitat(codiEntitat);
 
+
+            List<EnllazInfo> enllazosInfo = new ArrayList<WebUIController.EnllazInfo>();
+            
             EnllazInfo enllazInfo = new EnllazInfo(entitat.getNom().getTraduccio(idioma).getValor(),
                     entitat.getWebEntitat(), request.getContextPath() + WEBUI_PATH + WEBUI_LOGOLATERAL_PATH);
 
-            // Passar JSON
+            enllazosInfo.add(enllazInfo);
+            
+            // Passar JSON 
+
             Gson gson = new Gson();
-            String json = gson.toJson(enllazInfo);
+            String json = gson.toJson(enllazosInfo);
 
             response.setContentType("application/json");
 
@@ -175,6 +181,7 @@ public class WebUIController extends CommonFrontController {
         getEnllazosJSON(request, response, enllazType);
     }
 
+
     @RequestMapping(value = "/socialnetworkslinks", method = RequestMethod.GET)
     public void getSocialNetworks(HttpServletRequest request, HttpServletResponse response) {
 
@@ -183,6 +190,7 @@ public class WebUIController extends CommonFrontController {
         getEnllazosJSON(request, response, enllazType);
     }
 
+
     @RequestMapping(value = "/laterallinks", method = RequestMethod.GET)
     public void getLateralLinks(HttpServletRequest request, HttpServletResponse response) {
 
@@ -190,6 +198,7 @@ public class WebUIController extends CommonFrontController {
 
         getEnllazosJSON(request, response, enllazType);
     }
+
 
     @RequestMapping(value = "/centralfooterlinks", method = RequestMethod.GET)
     public void getCentalFooterLinks(HttpServletRequest request, HttpServletResponse response) {
@@ -237,5 +246,51 @@ public class WebUIController extends CommonFrontController {
             processException(e, response);
         }
     }
+
+    @RequestMapping(value = "/textinformatiuentitat", method = RequestMethod.GET)
+    public void getTextInformatiuEntitat(HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+            String lang = LocaleContextHolder.getLocale().getLanguage();
+            // TODO XYZ ZZZ falta entitat
+            String codiEntitat = "caib";
+
+            String texteInformatiu = utilsEjb.getTexteInformatiuEntitat(codiEntitat);
+
+            try {
+                response.setCharacterEncoding("utf-8");
+                response.setContentType("text/html");
+                response.getWriter().println(texteInformatiu);
+                response.flushBuffer();
+
+            } catch (IOException io){
+                log.error("Error obtening writer: " + io.getMessage(), io);
+            }
+
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
+    }
+//
+//    @RequestMapping(value = "/autenticat", method = RequestMethod.GET)
+//    public void isAutenticat(HttpServletRequest request, HttpServletResponse response) {
+//
+//        try {
+//            // TODO XYZ ZZZ Pendent codiEntitat
+//            String codiEntitat = "caib";
+//            Gson gson = new Gson();
+//            response.setContentType("application/json");
+//            if(SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")){
+//                response.getWriter().write(gson.toJson("false"));
+//            }else{
+//                response.getWriter().write(gson.toJson("true"));
+//            }
+//
+//        } catch (Throwable e) {
+//            processException(e, response);
+//        }
+//
+//    }
 
 }

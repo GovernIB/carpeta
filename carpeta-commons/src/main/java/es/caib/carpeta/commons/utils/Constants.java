@@ -80,11 +80,13 @@ public interface Constants {
     /* Tipus LogCarpeta */
     public static final int TIPUS_LOG_PLUGIN_FRONT = 1;
     public static final int TIPUS_LOG_AUTENTICACIO_BACK = 2;
+    public static final int TIPUS_LOG_AUTENTICACIO_FRONT = 3;
 
 
     public static final int[] TIPUS_LOG_ALL = {
        TIPUS_LOG_PLUGIN_FRONT,
-       TIPUS_LOG_AUTENTICACIO_BACK
+       TIPUS_LOG_AUTENTICACIO_BACK,
+       TIPUS_LOG_AUTENTICACIO_FRONT
     };
 
     /* Estat LogCarpeta */
