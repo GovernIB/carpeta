@@ -22,7 +22,7 @@ public class Configuracio implements Constants {
 
     public static void getFileProperties(){
         //matches the property name as defined in the system-properties element in WildFly
-        String propertyFile = System.getProperty(Constants.CARPETA_PROPERTY_BASE + "properties.path");
+        String propertyFile = System.getProperty(Constants.CARPETA_PROPERTY_BASE + "properties");
         File file = new File(propertyFile);
 
         try {
