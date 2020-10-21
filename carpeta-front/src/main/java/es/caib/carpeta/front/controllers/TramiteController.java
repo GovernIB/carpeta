@@ -15,6 +15,7 @@ import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitePersistente;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,6 +33,10 @@ import java.util.*;
 @Controller
 @RequestMapping(value = "/tramite")
 public class TramiteController {
+
+    @Value("${es.caib.carpeta.suport.correu}") private String SUPORT_CORREU;
+    @Value("${es.caib.carpeta.suport.telefon}") private String SUPORT_TELEFON;
+    @Value("${es.caib.carpeta.suport.autenticacio}") private String SUPORT_AUTENTICACIO;
 
     protected final Log log = LogFactory.getLog(getClass());
 
@@ -52,6 +57,10 @@ public class TramiteController {
         mav.addObject("breadcrumb", Arrays.asList("inicio", "tramite/list"));
         Locale loc = LocaleContextHolder.getLocale();
         mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.tramites"));
+
+        mav.addObject("suport_correu", SUPORT_CORREU);
+        mav.addObject("suport_telefon", SUPORT_TELEFON);
+        mav.addObject("suport_autenticacio", SUPORT_AUTENTICACIO);
 
         return mav;
 
@@ -105,6 +114,10 @@ public class TramiteController {
         model.addAttribute("autenticacio", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("breadcrumb", Arrays.asList("inicio", "tramite/list"));
         model.addAttribute("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.tramites"));
+
+        model.addAttribute("suport_correu", SUPORT_CORREU);
+        model.addAttribute("suport_telefon", SUPORT_TELEFON);
+        model.addAttribute("suport_autenticacio", SUPORT_AUTENTICACIO);
 
         return "tramitesPendientes";
     }

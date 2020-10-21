@@ -4,20 +4,16 @@ import es.caib.carpeta.core.service.Sistra1Service;
 import es.caib.carpeta.core.utils.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -30,6 +26,10 @@ public class InicioController {
     @Value("${es.caib.carpeta.zonaper.url}")    private String ZONAPER_URL;
     @Value("${es.caib.carpeta.notificaciones.url}")    private String NOTIFICACIONES_URL;
     @Value("${es.caib.carpeta.regweb3.host}")    private String ENTORNO_URL;
+
+    @Value("${es.caib.carpeta.suport.correu}") private String SUPORT_CORREU;
+    @Value("${es.caib.carpeta.suport.telefon}") private String SUPORT_TELEFON;
+    @Value("${es.caib.carpeta.suport.autenticacio}") private String SUPORT_AUTENTICACIO;
 
     @Autowired
     Sistra1Service sistra1Service;
@@ -46,6 +46,10 @@ public class InicioController {
         mav.addObject("idioma", loc);
         mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.inicio"));
 
+        mav.addObject("suport_correu", SUPORT_CORREU);
+        mav.addObject("suport_telefon", SUPORT_TELEFON);
+        mav.addObject("suport_autenticacio", SUPORT_AUTENTICACIO);
+
         return mav;
 
     }
@@ -60,6 +64,10 @@ public class InicioController {
         Locale loc = LocaleContextHolder.getLocale();
         mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.accesibilidad"));
 
+        mav.addObject("suport_correu", SUPORT_CORREU);
+        mav.addObject("suport_telefon", SUPORT_TELEFON);
+        mav.addObject("suport_autenticacio", SUPORT_AUTENTICACIO);
+
         return mav;
     }
 
@@ -73,18 +81,13 @@ public class InicioController {
         Locale loc = LocaleContextHolder.getLocale();
         mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.datosPersonales"));
 
+        mav.addObject("suport_correu", SUPORT_CORREU);
+        mav.addObject("suport_telefon", SUPORT_TELEFON);
+        mav.addObject("suport_autenticacio", SUPORT_AUTENTICACIO);
+
         return mav;
     }
 
-//    @RequestMapping(value = { "/avisoLegal"})
-//    public ModelAndView avisoLegal(HttpServletRequest request) {
-//
-//        ModelAndView mav = new ModelAndView("avisoLegal");
-//
-//        mav.addObject("breadcrumb", Arrays.asList("inicio", "avisoLegal"));
-//
-//        return mav;
-//    }
 
     @RequestMapping(value = { "/mapaWeb"})
     public ModelAndView mapaWeb(HttpServletRequest request) {
@@ -98,6 +101,9 @@ public class InicioController {
         Locale loc = LocaleContextHolder.getLocale();
         mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.mapaWeb"));
 
+        mav.addObject("suport_correu", SUPORT_CORREU);
+        mav.addObject("suport_telefon", SUPORT_TELEFON);
+        mav.addObject("suport_autenticacio", SUPORT_AUTENTICACIO);
 
         return mav;
     }
@@ -112,6 +118,10 @@ public class InicioController {
         Locale loc = LocaleContextHolder.getLocale();
         mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.inicio"));
         mav.addObject("idioma", loc);
+
+        mav.addObject("suport_correu", SUPORT_CORREU);
+        mav.addObject("suport_telefon", SUPORT_TELEFON);
+        mav.addObject("suport_autenticacio", SUPORT_AUTENTICACIO);
 
         return mav;
 
@@ -131,6 +141,10 @@ public class InicioController {
             mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.inicio"));
             mav.addObject("idioma", loc);
             mav.addObject("error", "ERROR");
+
+            mav.addObject("suport_correu", SUPORT_CORREU);
+            mav.addObject("suport_telefon", SUPORT_TELEFON);
+            mav.addObject("suport_autenticacio", SUPORT_AUTENTICACIO);
 
             return mav;
         }

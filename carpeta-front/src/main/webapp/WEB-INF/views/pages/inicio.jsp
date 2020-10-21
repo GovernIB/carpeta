@@ -138,4 +138,9 @@
         </div>
 
     </div>
+    <script>
+        $('.boxGestio').click(function (){
+            $(this).find('.text.row').html("<span class='oi oi-loop-circular rotating' style='width: 100%; font-size: 35px; color: #32814b;'></span><span style='display: flow-root'><fmt:message key='mensaje.cargando.datos'/></span>");
+        });
+    </script>
 </sec:authorize>

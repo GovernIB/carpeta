@@ -3,7 +3,6 @@ package es.caib.carpeta.front.controllers;
 import es.caib.carpeta.core.service.RegWeb3Service;
 import es.caib.carpeta.core.service.Sistra1Service;
 import es.caib.carpeta.core.utils.StringUtils;
-import es.caib.carpeta.core.utils.UsuarioClave;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.carpeta.front.utils.TramitesCiudadano;
 import es.caib.carpeta.utils.CarpetaConstantes;
@@ -35,6 +34,10 @@ public class RegistroController {
     protected final Log log = LogFactory.getLog(getClass());
 
     @Value("${es.caib.carpeta.concsv.url}")    private String CONCSV_URL;
+
+    @Value("${es.caib.carpeta.suport.correu}") private String SUPORT_CORREU;
+    @Value("${es.caib.carpeta.suport.telefon}") private String SUPORT_TELEFON;
+    @Value("${es.caib.carpeta.suport.autenticacio}") private String SUPORT_AUTENTICACIO;
 
     @Autowired
     RegWeb3Service regWeb3Service;
@@ -84,6 +87,9 @@ public class RegistroController {
         mav.addObject("breadcrumb", Arrays.asList("inicio", "registro/list"));
         mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.registros"));
 
+        mav.addObject("suport_correu", SUPORT_CORREU);
+        mav.addObject("suport_telefon", SUPORT_TELEFON);
+        mav.addObject("suport_autenticacio", SUPORT_AUTENTICACIO);
         return mav;
     }
 
@@ -103,7 +109,6 @@ public class RegistroController {
             AsientoRegistralWs asiento = regWeb3Service.obtenerAsientoCiudadano(usuarioAutenticado.getUsuarioClave().getNif(), numReg);
 
             if(asiento != null){
-
                 for (AnexoWs anexo : asiento.getAnexos()) {
                     if (anexo.isJustificante() && StringUtils.isNotEmpty(anexo.getCsv())) {
                         mav.addObject("justificante", CONCSV_URL.concat(anexo.getCsv()));
@@ -121,6 +126,10 @@ public class RegistroController {
         mav.addObject("breadcrumb", Arrays.asList("inicio", "registro/list", "registro/detalle"));
         Locale loc = LocaleContextHolder.getLocale();
         mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.registro.detalle"));
+
+        mav.addObject("suport_correu", SUPORT_CORREU);
+        mav.addObject("suport_telefon", SUPORT_TELEFON);
+        mav.addObject("suport_autenticacio", SUPORT_AUTENTICACIO);
 
         return mav;
     }

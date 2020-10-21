@@ -27,7 +27,10 @@ public class NotificacionController {
 
     @Value("${es.caib.carpeta.zonaper.url}")    private String ZONAPER_URL;
     @Value("${es.caib.carpeta.notificaciones.url}")    private String NOTIFICACIONES_URL;
-    @Value("${es.caib.carpeta.sistra1.zonaper.url}")    private String SISTRA1_ZONAPER_URL;
+
+    @Value("${es.caib.carpeta.suport.correu}") private String SUPORT_CORREU;
+    @Value("${es.caib.carpeta.suport.telefon}") private String SUPORT_TELEFON;
+    @Value("${es.caib.carpeta.suport.autenticacio}") private String SUPORT_AUTENTICACIO;
 
     @Autowired
     Sistra1Service sistra1Service;
@@ -46,6 +49,10 @@ public class NotificacionController {
         Locale loc = LocaleContextHolder.getLocale();
         mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.notificaciones"));
 
+        mav.addObject("suport_correu", SUPORT_CORREU);
+        mav.addObject("suport_telefon", SUPORT_TELEFON);
+        mav.addObject("suport_autenticacio", SUPORT_AUTENTICACIO);
+
         return mav;
 
     }
@@ -59,23 +66,21 @@ public class NotificacionController {
         List<TipoElementoExpediente> coms = new ArrayList<TipoElementoExpediente>();
         coms.add(TipoElementoExpediente.COMUNICACION);
         coms.add(TipoElementoExpediente.NOTIFICACION);
-//        coms.add(TipoElementoExpediente.ENVIO);
-//        coms.add(TipoElementoExpediente.REGISTRO);
-//        coms.add(TipoElementoExpediente.PREREGISTRO);
-//        coms.add(TipoElementoExpediente.PREENVIO);
 
         List<ElementoExpediente> comunicaciones = sistra1Service.obtenerElementosExpediente(coms, CarpetaConstantes.ELEMENTO_TODOS, usuarioAutenticado.getUsuarioClave(), loc);
 
         ModelAndView mav = new ModelAndView("comunicaciones");
 
         mav.addObject("autenticacio", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        mav.addObject("sistraZonaperUrl", SISTRA1_ZONAPER_URL);
         mav.addObject("notificacionesUrl", NOTIFICACIONES_URL);
         mav.addObject("comunicacions", comunicaciones);
         mav.addObject("breadcrumb", Arrays.asList("inicio", "notificacion/list", "notificaciones.otras"));
 
         mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.comunicaciones"));
 
+        mav.addObject("suport_correu", SUPORT_CORREU);
+        mav.addObject("suport_telefon", SUPORT_TELEFON);
+        mav.addObject("suport_autenticacio", SUPORT_AUTENTICACIO);
         return mav;
 
     }

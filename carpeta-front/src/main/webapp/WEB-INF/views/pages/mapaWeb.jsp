@@ -34,7 +34,7 @@
                         <td class="border-0 pl-5"><a href="" onclick="goToWindow('${notificacionesUrl}')"><fmt:message key="menu.notificacion"/></a></td>
                     </tr>
                     <tr class="text-uppercase backWhite">
-                        <td class="border-0 pl-5"><a href="" onclick="goToWindow('${zonaperUrl}')"><fmt:message key="menu.notificaciones.otras"/></a><sec:authorize access="!isAuthenticated()">    <span class="oi oi-lock-locked colorClave" title="<fmt:message key="accesibilidad.acceso.clave"/>"></span></sec:authorize></td>
+                        <td class="border-0 pl-5"><a href="<c:url value="/notificacion/comunicaciones"/>"><fmt:message key="menu.notificaciones.otras"/></a><sec:authorize access="!isAuthenticated()">    <span class="oi oi-lock-locked colorClave" title="<fmt:message key="accesibilidad.acceso.clave"/>"></span></sec:authorize></td>
                     </tr>
                     <tr class="text-uppercase backWhite">
                         <td class="border-0"><a href="<c:url value="/datosPersonales"/>"><fmt:message key="menu.datosPersonales"/></a><sec:authorize access="!isAuthenticated()">    <span class="oi oi-lock-locked colorClave" title="<fmt:message key="accesibilidad.acceso.clave"/>"></span></sec:authorize></td>

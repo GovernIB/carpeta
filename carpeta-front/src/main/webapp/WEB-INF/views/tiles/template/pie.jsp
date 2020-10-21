@@ -1,5 +1,5 @@
 <%@include file="/WEB-INF/views/includes.jsp"%>
-<footer id="footer">
+<footer id="footer" class="container">
     <div class="row mr-auto ml-3 mr-3 pieResponsive">
 
         <div class="col-4 pt-2 elementPieResponsive">

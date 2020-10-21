@@ -23,13 +23,13 @@
 
                         <ul class="dades">
                             <li>
-                                <fmt:message key="soporte.mensaje.envia"/> <a href="mailto:otae@fundaciobit.org" target="_blank"><fmt:message key="soporte.mensaje.correo"/></a>
+                                <fmt:message key="soporte.mensaje.envia"/> <a href="mailto:${suport_correu}" target="_blank">${suport_correu}</a>
                             </li>
                             <li>
-                                <fmt:message key="soporte.mensaje.llamar"/> <a href="tel:971177070"><fmt:message key="soporte.mensaje.telefono"/></a>.
+                                <fmt:message key="soporte.mensaje.llamar"/> <a href="tel:${suport_telefon}">${suport_telefon}</a>.
                             </li>
                             <li>
-                                <fmt:message key="soporte.mensaje.autenticacion"/> <a href="tel:012">012</a>.
+                                <fmt:message key="soporte.mensaje.autenticacion"/> <a href="tel:${suport_autenticacio}">${suport_autenticacio}</a>.
                             </li>
                         </ul>
                     </div>
