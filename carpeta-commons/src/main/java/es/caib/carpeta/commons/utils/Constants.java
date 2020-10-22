@@ -78,25 +78,25 @@ public interface Constants {
 
 
     /* Tipus LogCarpeta */
-    public static final int TIPUS_LOG_PLUGIN_FRONT = 1;
-    public static final int TIPUS_LOG_AUTENTICACIO_BACK = 2;
-    public static final int TIPUS_LOG_AUTENTICACIO_FRONT = 3;
+    int TIPUS_LOG_PLUGIN_FRONT = 1;
+    int TIPUS_LOG_AUTENTICACIO_BACK = 2;
+    int TIPUS_LOG_AUTENTICACIO_FRONT = 3;
 
 
-    public static final int[] TIPUS_LOG_ALL = {
+    int[] TIPUS_LOG_ALL = {
        TIPUS_LOG_PLUGIN_FRONT,
        TIPUS_LOG_AUTENTICACIO_BACK,
        TIPUS_LOG_AUTENTICACIO_FRONT
     };
 
     /* Estat LogCarpeta */
-    public static final int ESTAT_LOG_UNKNOWN = 0;
-    public static final int ESTAT_LOG_OK = 1;
-    public static final int ESTAT_LOG_ERROR = 2;
+    int ESTAT_LOG_UNKNOWN = 0;
+    int ESTAT_LOG_OK = 1;
+    int ESTAT_LOG_ERROR = 2;
 
 
 
-    public static final int[] ESTAT_LOG_ALL = {
+     int[] ESTAT_LOG_ALL = {
        ESTAT_LOG_OK,
        ESTAT_LOG_ERROR,
        ESTAT_LOG_UNKNOWN
