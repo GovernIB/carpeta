@@ -119,7 +119,7 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
                     p.getDescripcio().getTraduccio(Constants.IDIOMA_CATALA).getValor(),
                     p.getDescripcio().getTraduccio(Constants.IDIOMA_CASTELLA).getValor(),
                     p.getDescripcio().getTraduccio(Constants.IDIOMA_ANGLES).getValor(),
-                    String.valueOf(cfp.isReactComponent())));
+                    String.valueOf(cfp.isReactComponent()),1,"Error"));
         }
 
         return pluginsInfo;
