@@ -58,3 +58,8 @@ create index car_entitat_logolatfront_fk_i on car_entitat (logolateralfrontid);
 create index car_entitat_iconid_fk_i on car_entitat (iconid);
 
 create index car_entitat_pluginloginid_fk_i on car_entitat (pluginloginid);
+
+
+-- 22/10/2020 Retornar Informació des de la capa de Lògica els avisos dels PLugins #187
+
+ALTER TABLE car_avis ALTER COLUMN entitatid DROP NOT NULL;

@@ -1,10 +1,6 @@
 
 package es.caib.carpeta.model.fields;
-
-import org.fundaciobit.genapp.common.query.BooleanField;
-import org.fundaciobit.genapp.common.query.IntegerField;
-import org.fundaciobit.genapp.common.query.QueryPath;
-import org.fundaciobit.genapp.common.query.StringField;
+import org.fundaciobit.genapp.common.query.*;
 
 public class IdiomaQueryPath extends org.fundaciobit.genapp.common.query.QueryPath {
 

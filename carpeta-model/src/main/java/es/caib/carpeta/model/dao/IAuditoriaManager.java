@@ -1,6 +1,6 @@
 package es.caib.carpeta.model.dao;
 
-import es.caib.carpeta.model.entity.Auditoria;
+import es.caib.carpeta.model.entity.*;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
 

@@ -1,15 +1,13 @@
 
 package es.caib.carpeta.jpa;
-
-import es.caib.carpeta.model.dao.IAccesManager;
-import es.caib.carpeta.model.entity.Acces;
-import es.caib.carpeta.model.fields.AccesFields;
-import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.genapp.common.query.TableName;
-
+import java.util.*;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
+import es.caib.carpeta.model.entity.*;
+import es.caib.carpeta.model.fields.*;
+import es.caib.carpeta.model.dao.*;
+import org.fundaciobit.genapp.common.query.TableName;
+import org.fundaciobit.genapp.common.i18n.I18NException;
 
 
 public class AccesJPAManager

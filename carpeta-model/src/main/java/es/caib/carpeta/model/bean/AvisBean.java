@@ -12,7 +12,7 @@ private static final long serialVersionUID = 2079106191L;
 
 	long avisID;// PK
 	long descripcioID;
-	long entitatID;
+	java.lang.Long entitatID;
 	java.sql.Timestamp dataInici;
 	java.sql.Timestamp dataFi;
 	int tipus;
@@ -25,7 +25,7 @@ private static final long serialVersionUID = 2079106191L;
   }
 
   /** Constructor amb tots els camps  */
-  public AvisBean(long avisID , long descripcioID , long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus , int gravetat , java.lang.Long pluginFrontID) {
+  public AvisBean(long avisID , long descripcioID , java.lang.Long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus , int gravetat , java.lang.Long pluginFrontID) {
     this.avisID=avisID;
     this.descripcioID=descripcioID;
     this.entitatID=entitatID;
@@ -36,7 +36,7 @@ private static final long serialVersionUID = 2079106191L;
     this.pluginFrontID=pluginFrontID;
 }
   /** Constructor sense valors autoincrementals */
-  public AvisBean(long descripcioID , long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus , int gravetat , java.lang.Long pluginFrontID) {
+  public AvisBean(long descripcioID , java.lang.Long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus , int gravetat , java.lang.Long pluginFrontID) {
     this.descripcioID=descripcioID;
     this.entitatID=entitatID;
     this.dataInici=dataInici;
@@ -46,10 +46,9 @@ private static final long serialVersionUID = 2079106191L;
     this.pluginFrontID=pluginFrontID;
 }
   /** Constructor dels valors Not Null */
-  public AvisBean(long avisID , long descripcioID , long entitatID , int tipus , int gravetat) {
+  public AvisBean(long avisID , long descripcioID , int tipus , int gravetat) {
     this.avisID=avisID;
     this.descripcioID=descripcioID;
-    this.entitatID=entitatID;
     this.tipus=tipus;
     this.gravetat=gravetat;
 }
@@ -78,10 +77,10 @@ private static final long serialVersionUID = 2079106191L;
 		this.descripcioID = _descripcioID_;
 	};
 
-	public long getEntitatID() {
+	public java.lang.Long getEntitatID() {
 		return(entitatID);
 	};
-	public void setEntitatID(long _entitatID_) {
+	public void setEntitatID(java.lang.Long _entitatID_) {
 		this.entitatID = _entitatID_;
 	};
 

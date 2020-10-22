@@ -1,21 +1,23 @@
 package es.caib.carpeta.back.validator.webdb;
 
-import es.caib.carpeta.back.form.webdb.EnllazForm;
-import es.caib.carpeta.jpa.validator.EnllazValidator;
-import es.caib.carpeta.model.entity.Enllaz;
-import es.caib.carpeta.model.fields.EnllazFields;
 import org.apache.log4j.Logger;
-import org.fundaciobit.genapp.common.i18n.I18NFieldError;
-import org.fundaciobit.genapp.common.query.Field;
+
 import org.fundaciobit.genapp.common.validation.BeanValidatorResult;
-import org.fundaciobit.genapp.common.web.validation.AbstractWebValidator;
+import org.fundaciobit.genapp.common.i18n.I18NFieldError;
+import java.util.List;
+import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.web.validation.WebValidationResult;
+import es.caib.carpeta.model.fields.*;
+
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import es.caib.carpeta.jpa.validator.EnllazValidator;
 
-import java.util.List;
+import es.caib.carpeta.back.form.webdb.EnllazForm;
+import org.fundaciobit.genapp.common.web.validation.AbstractWebValidator;
+import es.caib.carpeta.model.entity.Enllaz;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 
 /**

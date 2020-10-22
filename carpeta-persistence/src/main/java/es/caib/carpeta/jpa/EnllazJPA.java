@@ -1,11 +1,18 @@
 
 package es.caib.carpeta.jpa;
-
-import es.caib.carpeta.model.entity.Enllaz;
-import org.hibernate.annotations.ForeignKey;
+import es.caib.carpeta.model.entity.*;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
+import javax.persistence.GeneratedValue;
 import org.hibernate.annotations.Index;
-
-import javax.persistence.*;
+import javax.persistence.SequenceGenerator;
+import org.hibernate.annotations.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
 
 
 @SuppressWarnings("deprecation")
@@ -40,6 +47,7 @@ private static final long serialVersionUID = -1473310087L;
 	@Column(name="entitatid",nullable = false,length = 19)
 	long entitatID;
 
+	@Index(name="car_enllaz_logoid_fk_i")
 	@Column(name="logoid",nullable = false,length = 19)
 	long logoID;
 

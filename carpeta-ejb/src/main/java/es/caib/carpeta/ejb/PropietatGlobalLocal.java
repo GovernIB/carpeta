@@ -1,11 +1,11 @@
 
 package es.caib.carpeta.ejb;
 
-import es.caib.carpeta.jpa.PropietatGlobalIJPAManager;
-import es.caib.carpeta.jpa.PropietatGlobalJPA;
-import es.caib.carpeta.model.dao.IPropietatGlobalManager;
-
 import javax.ejb.Local;
+
+import es.caib.carpeta.jpa.PropietatGlobalJPA;
+import es.caib.carpeta.jpa.PropietatGlobalIJPAManager;
+import es.caib.carpeta.model.dao.IPropietatGlobalManager;
 
 @Local
 public interface PropietatGlobalLocal extends PropietatGlobalIJPAManager,IPropietatGlobalManager {

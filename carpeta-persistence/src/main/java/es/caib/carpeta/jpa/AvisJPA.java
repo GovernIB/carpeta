@@ -1,11 +1,18 @@
 
 package es.caib.carpeta.jpa;
-
-import es.caib.carpeta.model.entity.Avis;
-import org.hibernate.annotations.ForeignKey;
+import es.caib.carpeta.model.entity.*;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GenerationType;
+import javax.persistence.ManyToOne;
+import javax.persistence.GeneratedValue;
 import org.hibernate.annotations.Index;
-
-import javax.persistence.*;
+import javax.persistence.SequenceGenerator;
+import org.hibernate.annotations.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
 
 
 @SuppressWarnings("deprecation")
@@ -30,8 +37,8 @@ private static final long serialVersionUID = 1036906268L;
 	long descripcioID;
 
 	@Index(name="car_avis_entitatid_fk_i")
-	@Column(name="entitatid",nullable = false,length = 19)
-	long entitatID;
+	@Column(name="entitatid",length = 19)
+	java.lang.Long entitatID;
 
 	@Column(name="datainici",length = 29,precision = 6)
 	java.sql.Timestamp dataInici;
@@ -45,6 +52,7 @@ private static final long serialVersionUID = 1036906268L;
 	@Column(name="gravetat",nullable = false,length = 10)
 	int gravetat;
 
+	@Index(name="car_avis_pluginfrontid_fk_i")
 	@Column(name="pluginfrontid",length = 19)
 	java.lang.Long pluginFrontID;
 
@@ -55,7 +63,7 @@ private static final long serialVersionUID = 1036906268L;
   }
 
   /** Constructor amb tots els camps  */
-  public AvisJPA(long avisID , long descripcioID , long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus , int gravetat , java.lang.Long pluginFrontID) {
+  public AvisJPA(long avisID , long descripcioID , java.lang.Long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus , int gravetat , java.lang.Long pluginFrontID) {
     this.avisID=avisID;
     this.descripcioID=descripcioID;
     this.entitatID=entitatID;
@@ -66,7 +74,7 @@ private static final long serialVersionUID = 1036906268L;
     this.pluginFrontID=pluginFrontID;
 }
   /** Constructor sense valors autoincrementals */
-  public AvisJPA(long descripcioID , long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus , int gravetat , java.lang.Long pluginFrontID) {
+  public AvisJPA(long descripcioID , java.lang.Long entitatID , java.sql.Timestamp dataInici , java.sql.Timestamp dataFi , int tipus , int gravetat , java.lang.Long pluginFrontID) {
     this.descripcioID=descripcioID;
     this.entitatID=entitatID;
     this.dataInici=dataInici;
@@ -76,10 +84,9 @@ private static final long serialVersionUID = 1036906268L;
     this.pluginFrontID=pluginFrontID;
 }
   /** Constructor dels valors Not Null */
-  public AvisJPA(long avisID , long descripcioID , long entitatID , int tipus , int gravetat) {
+  public AvisJPA(long avisID , long descripcioID , int tipus , int gravetat) {
     this.avisID=avisID;
     this.descripcioID=descripcioID;
-    this.entitatID=entitatID;
     this.tipus=tipus;
     this.gravetat=gravetat;
 }
@@ -108,10 +115,10 @@ private static final long serialVersionUID = 1036906268L;
 		this.descripcioID = _descripcioID_;
 	};
 
-	public long getEntitatID() {
+	public java.lang.Long getEntitatID() {
 		return(entitatID);
 	};
-	public void setEntitatID(long _entitatID_) {
+	public void setEntitatID(java.lang.Long _entitatID_) {
 		this.entitatID = _entitatID_;
 	};
 
@@ -194,7 +201,7 @@ private static final long serialVersionUID = 1036906268L;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@ForeignKey(name="car_avis_entitat_ent_fk")
-	@JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false)
+	@JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = true, insertable=false, updatable=false)
 	private EntitatJPA entitat;
 
 	public EntitatJPA getEntitat() {

@@ -1,11 +1,11 @@
 
 package es.caib.carpeta.ejb;
 
-import es.caib.carpeta.jpa.EstadisticaIJPAManager;
-import es.caib.carpeta.jpa.EstadisticaJPA;
-import es.caib.carpeta.model.dao.IEstadisticaManager;
-
 import javax.ejb.Local;
+
+import es.caib.carpeta.jpa.EstadisticaJPA;
+import es.caib.carpeta.jpa.EstadisticaIJPAManager;
+import es.caib.carpeta.model.dao.IEstadisticaManager;
 
 @Local
 public interface EstadisticaLocal extends EstadisticaIJPAManager,IEstadisticaManager {

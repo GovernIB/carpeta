@@ -1,7 +1,6 @@
 
 package es.caib.carpeta.jpa;
-
-import es.caib.carpeta.model.entity.Acces;
+import es.caib.carpeta.model.entity.*;
 
 
 public interface AccesIJPAManager

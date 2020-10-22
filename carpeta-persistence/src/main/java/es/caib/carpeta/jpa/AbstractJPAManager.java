@@ -9,12 +9,10 @@ package  es.caib.carpeta.jpa;
 //import javax.persistence.Query;
 //
 //import org.apache.log4j.Logger;
-
 import org.fundaciobit.genapp.common.IGenAppEntity;
-import org.fundaciobit.genapp.common.query.AbstractTableManager;
-
 //import org.fundaciobit.genapp.common.i18n.I18NArgumentString;
 //import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.AbstractTableManager;
 //import org.fundaciobit.genapp.common.query.GroupBy;
 //import org.fundaciobit.genapp.common.query.OrderBy;
 //import org.fundaciobit.genapp.common.query.Select;

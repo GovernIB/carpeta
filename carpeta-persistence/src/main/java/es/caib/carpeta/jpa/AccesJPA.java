@@ -1,13 +1,21 @@
 
 package es.caib.carpeta.jpa;
-
-import es.caib.carpeta.model.entity.Acces;
+import es.caib.carpeta.model.entity.*;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import org.hibernate.annotations.ForeignKey;
-import org.hibernate.annotations.Index;
-
-import javax.persistence.*;
-import java.util.HashSet;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import java.util.Set;
+import java.util.HashSet;
+import javax.persistence.GenerationType;
+import javax.persistence.GeneratedValue;
+import org.hibernate.annotations.Index;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
 
 
 @SuppressWarnings("deprecation")

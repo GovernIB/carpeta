@@ -1,15 +1,13 @@
 
 package es.caib.carpeta.jpa;
-
-import es.caib.carpeta.model.dao.IAvisManager;
-import es.caib.carpeta.model.entity.Avis;
-import es.caib.carpeta.model.fields.AvisFields;
-import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.genapp.common.query.TableName;
-
+import java.util.*;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
+import es.caib.carpeta.model.entity.*;
+import es.caib.carpeta.model.fields.*;
+import es.caib.carpeta.model.dao.*;
+import org.fundaciobit.genapp.common.query.TableName;
+import org.fundaciobit.genapp.common.i18n.I18NException;
 
 
 public class AvisJPAManager
@@ -60,7 +58,7 @@ public class AvisJPAManager
 		return list.toArray(new Avis[list.size()]);
 	};
 
-	public synchronized Avis create( long _descripcioID_, long _entitatID_, java.sql.Timestamp _dataInici_, java.sql.Timestamp _dataFi_, int _tipus_, int _gravetat_, java.lang.Long _pluginFrontID_) throws I18NException {
+	public synchronized Avis create( long _descripcioID_, java.lang.Long _entitatID_, java.sql.Timestamp _dataInici_, java.sql.Timestamp _dataFi_, int _tipus_, int _gravetat_, java.lang.Long _pluginFrontID_) throws I18NException {
 		AvisJPA __bean =  new AvisJPA(_descripcioID_,_entitatID_,_dataInici_,_dataFi_,_tipus_,_gravetat_,_pluginFrontID_);
 		return create(__bean);
 	}

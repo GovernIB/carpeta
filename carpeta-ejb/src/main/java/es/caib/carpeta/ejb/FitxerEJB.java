@@ -1,14 +1,14 @@
 
 package es.caib.carpeta.ejb;
 
+import javax.ejb.Stateless;
+import javax.annotation.security.RolesAllowed;
+import org.fundaciobit.genapp.common.i18n.I18NException;
+import es.caib.carpeta.model.entity.Fitxer;
 import es.caib.carpeta.jpa.FitxerJPA;
 import es.caib.carpeta.jpa.FitxerJPAManager;
-import es.caib.carpeta.model.entity.Fitxer;
-import es.caib.carpeta.utils.Constants;
-import org.fundaciobit.genapp.common.i18n.I18NException;
 
-import javax.annotation.security.RolesAllowed;
-import javax.ejb.Stateless;
+import es.caib.carpeta.utils.Constants;
 
 @Stateless
 public class FitxerEJB extends FitxerJPAManager implements FitxerLocal {

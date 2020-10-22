@@ -1,9 +1,11 @@
 package es.caib.carpeta.jpa.validator;
 
-import es.caib.carpeta.model.entity.Idioma;
-import es.caib.carpeta.model.fields.IdiomaFields;
 import org.apache.log4j.Logger;
+
+import es.caib.carpeta.model.entity.Idioma;
 import org.fundaciobit.genapp.common.query.Field;
+import es.caib.carpeta.model.fields.IdiomaFields;
+
 import org.fundaciobit.genapp.common.validation.IValidatorResult;
 
 

@@ -1,11 +1,10 @@
 package es.caib.carpeta.back.form.webdb;
 
-import es.caib.carpeta.back.form.CarpetaBaseForm;
-import es.caib.carpeta.jpa.EnllazJPA;
+import java.util.List;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
-import java.util.List;
+import es.caib.carpeta.back.form.CarpetaBaseForm;
+import es.caib.carpeta.jpa.EnllazJPA;
 
 /**
  *  ========= FITXER AUTOGENERAT - NO MODIFICAR !!!!! 

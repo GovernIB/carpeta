@@ -1,11 +1,11 @@
 
 package es.caib.carpeta.ejb;
 
-import es.caib.carpeta.jpa.IdiomaIJPAManager;
-import es.caib.carpeta.jpa.IdiomaJPA;
-import es.caib.carpeta.model.dao.IIdiomaManager;
-
 import javax.ejb.Local;
+
+import es.caib.carpeta.jpa.IdiomaJPA;
+import es.caib.carpeta.jpa.IdiomaIJPAManager;
+import es.caib.carpeta.model.dao.IIdiomaManager;
 
 @Local
 public interface IdiomaLocal extends IdiomaIJPAManager,IIdiomaManager {

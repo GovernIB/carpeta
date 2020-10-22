@@ -8,8 +8,8 @@ public interface Avis extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public long getDescripcioID();
 	public void setDescripcioID(long _descripcioID_);
 
-	public long getEntitatID();
-	public void setEntitatID(long _entitatID_);
+	public java.lang.Long getEntitatID();
+	public void setEntitatID(java.lang.Long _entitatID_);
 
 	public java.sql.Timestamp getDataInici();
 	public void setDataInici(java.sql.Timestamp _dataInici_);

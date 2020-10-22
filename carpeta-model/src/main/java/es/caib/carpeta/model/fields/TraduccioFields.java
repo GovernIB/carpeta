@@ -1,8 +1,6 @@
 
 package es.caib.carpeta.model.fields;
-
-import org.fundaciobit.genapp.common.query.Field;
-import org.fundaciobit.genapp.common.query.LongField;
+import org.fundaciobit.genapp.common.query.*;
 public interface TraduccioFields extends java.io.Serializable {
 
   public static final String _TABLE_SQL = "car_traduccio";

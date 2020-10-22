@@ -1,12 +1,14 @@
 package es.caib.carpeta.jpa.validator;
 
+import org.apache.log4j.Logger;
+
 import es.caib.carpeta.model.entity.Avis;
+import org.fundaciobit.genapp.common.query.Field;
 import es.caib.carpeta.model.fields.AvisFields;
 import es.caib.carpeta.model.fields.EntitatFields;
 import es.caib.carpeta.model.fields.PluginFields;
 import es.caib.carpeta.model.fields.TraduccioFields;
-import org.apache.log4j.Logger;
-import org.fundaciobit.genapp.common.query.Field;
+
 import org.fundaciobit.genapp.common.validation.IValidatorResult;
 
 
@@ -37,10 +39,6 @@ public class AvisValidator<I extends Avis>
     __vr.rejectIfEmptyOrWhitespace(__target__,DESCRIPCIOID, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DESCRIPCIOID)));
-
-    __vr.rejectIfEmptyOrWhitespace(__target__,ENTITATID, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ENTITATID)));
 
     __vr.rejectIfEmptyOrWhitespace(__target__,TIPUS, 
         "genapp.validation.required",
@@ -81,13 +79,15 @@ public class AvisValidator<I extends Avis>
 
     if (__vr.getFieldErrorCount(ENTITATID) == 0) {
       java.lang.Long __entitatid = __target__.getEntitatID();
-      Long __count_ = null;
-      try { __count_ = __entitatManager.count(EntitatFields.ENTITATID.equal(__entitatid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
-      if (__count_ == null || __count_ == 0) {        
-        __vr.rejectValue(ENTITATID, "error.notfound",
+      if (__entitatid != null ) {
+        Long __count_ = null;
+        try { __count_ = __entitatManager.count(EntitatFields.ENTITATID.equal(__entitatid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ == 0) {        
+          __vr.rejectValue(ENTITATID, "error.notfound",
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("entitat.entitat"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("entitat.entitatID"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__entitatid)));
+        }
       }
     }
 

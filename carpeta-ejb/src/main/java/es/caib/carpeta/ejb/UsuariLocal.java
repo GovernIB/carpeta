@@ -1,11 +1,11 @@
 
 package es.caib.carpeta.ejb;
 
-import es.caib.carpeta.jpa.UsuariIJPAManager;
-import es.caib.carpeta.jpa.UsuariJPA;
-import es.caib.carpeta.model.dao.IUsuariManager;
-
 import javax.ejb.Local;
+
+import es.caib.carpeta.jpa.UsuariJPA;
+import es.caib.carpeta.jpa.UsuariIJPAManager;
+import es.caib.carpeta.model.dao.IUsuariManager;
 
 @Local
 public interface UsuariLocal extends UsuariIJPAManager,IUsuariManager {

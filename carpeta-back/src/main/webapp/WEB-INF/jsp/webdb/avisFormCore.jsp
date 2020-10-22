@@ -41,7 +41,7 @@
         <tr id="avis_entitatID_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[AvisFields.ENTITATID])?'avis.entitatID':__theForm.labels[AvisFields.ENTITATID]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[AvisFields.ENTITATID])?'avis.entitatID':__theForm.labels[AvisFields.ENTITATID]}" />
               <c:if test="${not empty __theForm.help[AvisFields.ENTITATID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AvisFields.ENTITATID]}" ></i>
               </c:if>
@@ -55,6 +55,8 @@
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,AvisFields.ENTITATID)}" >
           <form:select id="avis_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-4" path="avis.entitatID">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
             <c:forEach items="${__theForm.listOfEntitatForEntitatID}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>

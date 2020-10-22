@@ -27,7 +27,7 @@
         datafi timestamp,
         datainici timestamp,
         descripcioid number(19,0) not null,
-        entitatid number(19,0) not null,
+        entitatid number(19,0),
         gravetat number(10,0) not null,
         pluginfrontid number(19,0),
         tipus number(10,0) not null

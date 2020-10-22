@@ -1,20 +1,21 @@
 
 package es.caib.carpeta.back.form.webdb;
 
-import es.caib.carpeta.ejb.EntitatLocal;
-import es.caib.carpeta.ejb.TraduccioLocal;
-import es.caib.carpeta.model.fields.EntitatFields;
+import java.util.List;
+import javax.ejb.EJB;
+import org.springframework.stereotype.Component;
+
 import org.fundaciobit.genapp.common.StringKeyValue;
-import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.Select;
 import org.fundaciobit.genapp.common.query.Where;
-import org.fundaciobit.genapp.common.web.controller.RefListBase;
-import org.springframework.stereotype.Component;
 
-import javax.ejb.EJB;
-import java.util.List;
+import es.caib.carpeta.ejb.EntitatLocal;
+import es.caib.carpeta.ejb.TraduccioLocal;
+import org.fundaciobit.genapp.common.i18n.I18NException;
+import es.caib.carpeta.model.fields.EntitatFields;
+import org.fundaciobit.genapp.common.web.controller.RefListBase;
 
 /**
  *  ========= FITXER AUTOGENERAT - NO MODIFICAR !!!!! 
