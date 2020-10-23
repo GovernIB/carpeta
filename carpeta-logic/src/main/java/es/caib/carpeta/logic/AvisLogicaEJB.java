@@ -18,6 +18,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 @Stateless
 public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaLocal {
 	
+	@Override
 	public List<AvisJPA> findAllActive () throws I18NException {
 		 
 		 TypedQuery<AvisJPA> query = getEntityManager().createQuery(
@@ -26,7 +27,7 @@ public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaLocal {
 			return query.getResultList(); 
 	 }
 	
-	
+	@Override
 	 public List<AvisJPA> findActiveByEntidadID (long entidadID) throws I18NException {
 		 
 		 TypedQuery<AvisJPA> query = getEntityManager().createQuery(
