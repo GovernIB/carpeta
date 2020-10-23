@@ -71,7 +71,7 @@ public class AvisSuperAdminController extends AvisController {
 		AvisForm avisForm = super.getAvisForm(_jpa, __isView, request, mav);
 		
 		if (avisForm.isNou()) {
-				avisForm.getAvis().setEntitatID(LoginInfo.getInstance().getEntitatID());
+		    avisForm.getAvis().setEntitatID(LoginInfo.getInstance().getEntitatID());
 		}
 		
 		if (!isSuperAdmin()) {

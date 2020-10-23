@@ -8,6 +8,7 @@ import javax.annotation.security.RunAs;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
+import org.apache.tiles.Attribute;
 import org.apache.tiles.AttributeContext;
 import org.apache.tiles.preparer.PreparerException;
 import org.apache.tiles.preparer.ViewPreparer;
@@ -116,6 +117,12 @@ public class BasePreparer implements ViewPreparer, Constants {
 
 		// Pipella
 		request.put("pipella", attributeContext.getAttribute("pipella"));
+        Attribute a = attributeContext.getAttribute("pipella");
+        log.info("\n\n PIPELLLA A: " + a);
+        if (a != null) {
+            String pipella = (String)a.getValue();
+            log.info("\n\n PIPELLLA P: " + pipella);
+        }
 
 		// TODO GENAPP
 		// Warning for each ROLE
@@ -131,6 +138,8 @@ public class BasePreparer implements ViewPreparer, Constants {
 
 		// attributeContext.putAttribute("menu", new
 		// Attribute("/WEB-INF/jsp/moduls/menu_inici.jsp"));
+		
+		
 
 		request.put("contingut_tile", attributeContext.getAttribute("contingut").toString());
 

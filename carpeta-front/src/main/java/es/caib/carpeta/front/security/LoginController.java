@@ -103,7 +103,7 @@ public class LoginController {
             log.info(" XXX XYZ  BASE URL LOGIN => " + baseURL);
 
             String url_callback_login = baseURL + "/redirigirLogin";
-            String url_callback_error = baseURL;
+            String url_callback_error = baseURL + "/errorLogin";
             // es.caib.carpeta.loginib.url_callback_logout=http://localhost:8080/carpetafront/salir
             String IDIOMA = LocaleContextHolder.getLocale().getLanguage();
 

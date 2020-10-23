@@ -12,9 +12,9 @@
     <definition name="base.definition" template="/WEB-INF/jsp/layout/layout.jsp" preparer="es.caib.carpeta.back.preparer.BasePreparer">
         <put-attribute name="cap" value="base.cap" />
         <put-attribute name="menu_i_contingut" value="base.menu_i_contingut" />
-        <put-attribute name="menu" value="base.menu" />
+        <put-attribute name="menu" value="base.menu"  />
         <put-attribute name="contingut" value="base.contingut" />
-        <put-attribute name="peu" value="base.peu" />
+        <put-attribute name="peu" value="base.peu"  />
     </definition>
 
 

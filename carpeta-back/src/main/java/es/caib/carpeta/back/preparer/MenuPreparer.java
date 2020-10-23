@@ -24,6 +24,6 @@ public class MenuPreparer implements ViewPreparer {
 
 	@Override
 	public void execute(Request tilesRequest, AttributeContext attributeContext) throws PreparerException {
-	  
+     
 	}
 }
