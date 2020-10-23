@@ -24,12 +24,12 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_FRONT;
+import static es.caib.carpeta.commons.utils.Constants.*;
+
 
 /**
- * 
- * @author jpernia, anadal
+ *
+ * @author jpernia, anadal, mgonzalez
  *
  */
 @Controller
@@ -73,12 +73,19 @@ public class LoginController {
         return "redirect:/login";
     }
 
-    @RequestMapping(value = "/login")
-    public ModelAndView login(HttpServletRequest request, HttpServletResponse response)
-            throws Exception, I18NException {
+
+    @RequestMapping(value="/login")
+    public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception, I18NException {
+
+
+        long temps = System.currentTimeMillis();
+        StringBuilder peticio = new StringBuilder();
+        peticio.append("Usuari: no definit").append(System.getProperty("line.separator"));
+        peticio.append("classe: ").append(getClass().getName()).append(System.getProperty("line.separator"));
 
         // Error login
         if ("true".equals(request.getParameter("error"))) {
+            logCarpetaLogicaEjb.crearLog("Autenticació del Front", ESTAT_LOG_ERROR,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"Error de login",peticio.toString(),null,null);
             log.info("Error de login");
         }
         final SavedRequest savedRequest = loginRequestCache.getRequest(request, response);
@@ -109,6 +116,8 @@ public class LoginController {
 
             String url = securityService.iniciarSesionAutentificacion(url_callback_login, url_callback_error, IDIOMA);
 
+            logCarpetaLogicaEjb.crearLog("Iniciam Sessió Autenticació Front", ESTAT_LOG_OK,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),null,null);
+
             log.info("Url autentificacion: " + url);
 
             return new ModelAndView("redirect:" + url);
@@ -118,7 +127,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/redirigirLogin")
-    public ModelAndView redirigirLogin(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView redirigirLogin(HttpServletRequest request, HttpServletResponse response) throws I18NException {
 
         log.info("Dentro de redirigirLogin: " + sesionHttp.getUrlEntrada());
 
@@ -168,7 +177,7 @@ public class LoginController {
     private ModelAndView autenticarTicket(SavedRequest request, String ticketUserName) throws Exception, I18NException {
 
         long temps = System.currentTimeMillis();
-        String peticio = "Autenticació del usuari " + ticketUserName;
+        StringBuilder peticio = new StringBuilder();
 
         ModelAndView mav = new ModelAndView("loginTicket");
 
@@ -181,8 +190,10 @@ public class LoginController {
 
         log.info("Autenticando el ticket: " + tickets[0]);
 
-        logCarpetaLogicaEjb.crearLog("Autenticación del Front", ESTAT_LOG_OK, TIPUS_LOG_AUTENTICACIO_FRONT,
-                System.currentTimeMillis() - temps, null, "", peticio, null, null);
+        peticio.append("Ticket: ").append(tickets[0]).append(System.getProperty("line.separator"));
+        peticio.append("classe: ").append(getClass().getName()).append(System.getProperty("line.separator"));
+
+        logCarpetaLogicaEjb.crearLog("Autenticació del Front del ticket " + tickets[0], ESTAT_LOG_OK,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),null,null);
 
         // Autenticamos automaticamente
         mav.addObject("ticketName", ticketUserName);

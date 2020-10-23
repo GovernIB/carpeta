@@ -126,7 +126,9 @@ public class PluginFrontController {
         //response.addHeader("X-Frame-Options", "SAMEORIGIN");
 
         long temps = System.currentTimeMillis();
-        String peticio = "Executat per: " + administrationID;
+
+        StringBuilder peticio = new StringBuilder();
+
 
         String context = PUBLIC_CONTEXTWEB;
 
@@ -140,8 +142,10 @@ public class PluginFrontController {
 
 
        //Obtenemos plugin para obtener entidadID
+        peticio.append("Usuari").append(administrationID).append(System.getProperty("line.separator"));
+        peticio.append("classe: ").append(getClass().getName()).append(System.getProperty("line.separator"));
 
-        logCarpetaLogicaEjb.crearLog("Executat plugin des del Front", ESTAT_LOG_OK,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,null,"",peticio,null, Long.parseLong(pluginID));
+        logCarpetaLogicaEjb.crearLog("Executat plugin des del Front per "+ administrationID, ESTAT_LOG_OK,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),null, Long.parseLong(pluginID));
 
         ModelAndView mav = new ModelAndView(view);
         // mav.addObject("signaturesSetID", signaturesSetID);

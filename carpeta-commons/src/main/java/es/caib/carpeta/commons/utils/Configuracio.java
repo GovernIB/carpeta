@@ -20,13 +20,20 @@ public class Configuracio implements Constants {
     private static final Properties properties = new Properties();
 
 
-    public static void getFileProperties(){
+    /*Agafa els fitxers de propietats definits a l'standalone
+    *
+    * Seguim els estandars de la CAIB veure document "propietats.pdf" Issue #120*/
+    public static void getFilesProperties(){
         //matches the property name as defined in the system-properties element in WildFly
         String propertyFile = System.getProperty(Constants.CARPETA_PROPERTY_BASE + "properties");
         File file = new File(propertyFile);
 
+        String propertySystemFile = System.getProperty(Constants.CARPETA_PROPERTY_BASE + "system.properties");
+        File systemFile = new File(propertySystemFile);
+
         try {
             properties.load(new FileInputStream(file));
+            properties.load(new FileInputStream(systemFile));
         } catch (
            IOException e) {
             LOG.error("No es pot carregar el fitxer de propietats", e);
@@ -35,9 +42,10 @@ public class Configuracio implements Constants {
     }
 
 
+
     public static Properties getSystemAndFileProperties(){
 
-        getFileProperties();
+        getFilesProperties();
         properties.putAll(System.getProperties());
 
         return properties;

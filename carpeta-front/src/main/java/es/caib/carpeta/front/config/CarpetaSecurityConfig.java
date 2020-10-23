@@ -31,22 +31,6 @@ public class CarpetaSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(carpetaFrontAuthProvider);
     }
 
-//    @Override
-//    protected void configure(final HttpSecurity http)
-//            throws Exception {
-//        http.authorizeRequests()
-//                .antMatchers(
-//                        HttpMethod.GET,
-//                        "/index*", "/static/**", "/locales**", "/*.js", "/*.json", "/*.ico")
-//                .permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .formLogin().loginPage("/login")
-//                .defaultSuccessUrl("/homepage.html",true)
-//                .failureUrl("/PageNotFound");
-//
-//    }
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

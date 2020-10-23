@@ -31,11 +31,11 @@ public class StartupServiceEJB {
         // o fixar els valors per defecte pels que no hi siguin, programar timers no persistents, ...
         LOG.info("Inici del mòdul EJB");
 
-        //Carregam el fitxer de properties
+        //Carregam els fitxers de properties
         try {
-            Configuracio.getFileProperties();
+            Configuracio.getFilesProperties();
         } catch (Throwable e) {
-            LOG.error("Error carregant fitxer properties: " + e.getMessage(), e);
+            LOG.error("Error carregant fitxers de properties: " + e.getMessage(), e);
         }
 
     }
