@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
-import { withTranslation } from 'react-i18next';
+import {Component} from 'react';
+import {withTranslation} from 'react-i18next';
+import DadesEntitat from './DadesEntitat';
 
 class Peu extends Component {
 	
@@ -71,12 +72,8 @@ class Peu extends Component {
       <footer className="imc-peu">
         <div className="imc--contingut">
 
-          <div className="imc-peu-govern">
-            <p><strong>{ t('peuCopyright') }</strong></p>
-            <p>
-              <a href="http://www.caib.es/govern/organigrama/area.do?coduo=2390499&amp;lang=ca">{ t('peuDireccio') }</a><a href="http://www.caib.es/govern/organigrama/planol.do?coduo=2390499&amp;lang=ca">: { t('peuAdresa') }</a></p><p></p>{ t('peuTelefon') }
-            <p></p>
-          </div>
+			<DadesEntitat />
+
 
           <div className="imc-peu-opcions">
             <ul>
