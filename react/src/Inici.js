@@ -4,6 +4,22 @@ import i18n from 'i18next';
 
 class Inici extends Component {
 
+	infoHtml(missatge, pluginID) {
+		alert(missatge);
+		var contingut = newPluginHtml('contingut', '1', pluginID);
+		window.location.href(contingut);
+	}
+
+	infoReact(missatge, pluginID) {
+		alert(missatge);
+		var contingut = newPluginReact('contingut', '1', pluginID);
+		window.location.href(contingut);
+	}
+
+	error(missatge) {
+		alert(missatge);
+	}
+
 	render() {
 
 		var autenticat = this.props.autenticat;
@@ -76,12 +92,18 @@ class Inici extends Component {
 			const plugins = JSON.parse(sessionStorage.getItem('plugins'));
 
 			var plugHtml;
+			var plugHtmlInfo;
+			var plugHtmlWarning;
+			var plugHtmlError;
 			var plugReact;
+			var plugReactInfo;
+			var plugReactWarning;
+			var plugReactError;
 
 			if (i18n.language === 'ca') {
-				plugHtml = plugins.filter(s => s.reactComponent === 'false').map(s => (
+				plugHtml = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 0).map(s => (
 					<div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
-						<button className="card col-md-10 align-items-lg-center" alt={s.nomCa}
+						<button alt={s.nomCa} className={`card col-md-10 align-items-lg-center`}
 								onClick={event => window.location.href = "javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}>
 							<span className="card-title titol pl-1 h3"><img
 								src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
@@ -90,10 +112,19 @@ class Inici extends Component {
 						</button>
 					</div>
 				));
-				plugReact = plugins.filter(s => s.reactComponent === 'true').map(s => (
+				plugHtmlInfo = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 1).map(s => (
 					<div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
-						<button className="card col-md-10 align-items-lg-center" alt={s.nomCa}
-								onClick={event => window.location.href = "javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}>
+						<button alt={s.nomCa} className={`card col-md-10 align-items-lg-center alert${s.gravetat}`}
+								onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}>
+							<span className="card-title titol pl-1 h3"><img src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} className="imc-icona"></img>{s.nomCa}</span>
+							<span className="card-text mb-3">{s.descripcioCa}</span>
+						</button>
+					</div>
+				));
+				plugHtmlWarning = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 2).map(s => (
+					<div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
+						<button alt={s.nomCa} className={`card col-md-10 align-items-lg-center alert${s.gravetat}`}
+								onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}>
 							<span className="card-title titol pl-1 h3"><img
 								src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 								className="imc-icona"></img>{s.nomCa}</span>
@@ -101,12 +132,69 @@ class Inici extends Component {
 						</button>
 					</div>
 				));
+				plugHtmlError = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 3).map(s => (
+					<div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
+						<button alt={s.nomCa} className={`card col-md-10 align-items-lg-center alert${s.gravetat}`}
+								onClick={(event) => this.error(s.missatge)}>
+							<span className="card-title titol pl-1 h3"><img
+								src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+								className="imc-icona"></img>{s.nomCa}</span>
+							<span className="card-text mb-3">{s.descripcioCa}</span>
+						</button>
+					</div>
+				));
+
+				plugReact = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 0).map(s => (
+					<div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
+						<button alt={s.nomCa} className={`card col-md-10 align-items-lg-center alert${s.gravetat}`}
+								onClick={event => window.location.href = "javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"}>
+							<span className="card-title titol pl-1 h3"><img
+								src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+								className="imc-icona"></img>{s.nomCa}</span>
+							<span className="card-text mb-3">{s.descripcioCa}</span>
+						</button>
+					</div>
+				));
+				plugReactInfo = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 1).map(s => (
+					<div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
+						<button alt={s.nomCa} className={`card col-md-10 align-items-lg-center alert${s.gravetat}`}
+								onClick={(event) => this.infoReact(s.missatge,s.pluginID)}>
+							<span className="card-title titol pl-1 h3"><img
+								src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+								className="imc-icona"></img>{s.nomCa}</span>
+							<span className="card-text mb-3">{s.descripcioCa}</span>
+						</button>
+					</div>
+				));
+				plugReactWarning = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 2).map(s => (
+					<div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
+						<button alt={s.nomCa} className={`card col-md-10 align-items-lg-center alert${s.gravetat}`}
+								onClick={(event) => this.infoReact(s.missatge,s.pluginID)}>
+							<span className="card-title titol pl-1 h3"><img
+								src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+								className="imc-icona"></img>{s.nomCa}</span>
+							<span className="card-text mb-3">{s.descripcioCa}</span>
+						</button>
+					</div>
+				));
+				plugReactError = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 3).map(s => (
+					<div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
+						<button alt={s.nomCa} className={`card col-md-10 align-items-lg-center alert${s.gravetat}`}
+								onClick={(event) => this.error(s.missatge)}>
+							<span className="card-title titol pl-1 h3"><img
+								src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+								className="imc-icona"></img>{s.nomCa}</span>
+							<span className="card-text mb-3">{s.descripcioCa}</span>
+						</button>
+					</div>
+				));
+
 			}
 
 			if (i18n.language === 'es') {
-				plugHtml = plugins.filter(s => s.reactComponent === 'false').map(s => (
+				plugHtml = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 0).map(s => (
 					<div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
-						<button className="card col-md-10 align-items-lg-center" alt={s.nomEs}
+						<button alt={s.nomEs} className={`card col-md-10 align-items-lg-center`}
 								onClick={event => window.location.href = "javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}>
 							<span className="card-title titol pl-1 h3"><img
 								src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
@@ -115,10 +203,75 @@ class Inici extends Component {
 						</button>
 					</div>
 				));
-				plugReact = plugins.filter(s => s.reactComponent === 'true').map(s => (
+				plugHtmlInfo = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 1).map(s => (
 					<div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
-						<button className="card col-md-10 align-items-lg-center" alt={s.nomEs}
-								onClick={event => window.location.href = "javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}>
+						<button alt={s.nomEs} className={`card col-md-10 align-items-lg-center alert${s.gravetat}`}
+								onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}>
+							<span className="card-title titol pl-1 h3"><img src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} className="imc-icona"></img>{s.nomEs}</span>
+							<span className="card-text mb-3">{s.descripcioEs}</span>
+						</button>
+					</div>
+				));
+				plugHtmlWarning = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 2).map(s => (
+					<div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
+						<button alt={s.nomEs} className={`card col-md-10 align-items-lg-center alert${s.gravetat}`}
+								onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}>
+							<span className="card-title titol pl-1 h3"><img
+								src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+								className="imc-icona"></img>{s.nomEs}</span>
+							<span className="card-text mb-3">{s.descripcioEs}</span>
+						</button>
+					</div>
+				));
+				plugHtmlError = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 3).map(s => (
+					<div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
+						<button alt={s.nomEs} className={`card col-md-10 align-items-lg-center alert${s.gravetat}`}
+								onClick={(event) => this.error(s.missatge)}>
+							<span className="card-title titol pl-1 h3"><img
+								src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+								className="imc-icona"></img>{s.nomEs}</span>
+							<span className="card-text mb-3">{s.descripcioEs}</span>
+						</button>
+					</div>
+				));
+
+				plugReact = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 0).map(s => (
+					<div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
+						<button alt={s.nomEs} className={`card col-md-10 align-items-lg-center alert${s.gravetat}`}
+								onClick={event => window.location.href = "javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"}>
+							<span className="card-title titol pl-1 h3"><img
+								src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+								className="imc-icona"></img>{s.nomEs}</span>
+							<span className="card-text mb-3">{s.descripcioEs}</span>
+						</button>
+					</div>
+				));
+				plugReactInfo = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 1).map(s => (
+					<div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
+						<button alt={s.nomEs} className={`card col-md-10 align-items-lg-center alert${s.gravetat}`}
+								onClick={(event) => this.infoReact(s.missatge,s.pluginID)}>
+							<span className="card-title titol pl-1 h3"><img
+								src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+								className="imc-icona"></img>{s.nomEs}</span>
+							<span className="card-text mb-3">{s.descripcioEs}</span>
+						</button>
+					</div>
+				));
+				plugReactWarning = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 2).map(s => (
+					<div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
+						<button alt={s.nomEs} className={`card col-md-10 align-items-lg-center alert${s.gravetat}`}
+								onClick={(event) => this.infoReact(s.missatge,s.pluginID)}>
+							<span className="card-title titol pl-1 h3"><img
+								src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+								className="imc-icona"></img>{s.nomEs}</span>
+							<span className="card-text mb-3">{s.descripcioEs}</span>
+						</button>
+					</div>
+				));
+				plugReactError = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 3).map(s => (
+					<div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5">
+						<button alt={s.nomEs} className={`card col-md-10 align-items-lg-center alert${s.gravetat}`}
+								onClick={(event) => this.error(s.missatge)}>
 							<span className="card-title titol pl-1 h3"><img
 								src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 								className="imc-icona"></img>{s.nomEs}</span>
@@ -145,7 +298,13 @@ class Inici extends Component {
 									<div className="row mb-0">
 
 										{plugHtml}
+										{plugHtmlInfo}
+										{plugHtmlWarning}
+										{plugHtmlError}
 										{plugReact}
+										{plugReactInfo}
+										{plugReactWarning}
+										{plugReactError}
 
 									</div>
 

@@ -38,4 +38,16 @@ public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaLocal {
 			return query.getResultList(); 
 	 }
 
+	@Override
+	public List<AvisJPA> findActiveByPluginID (long pluginID) throws I18NException {
+
+		TypedQuery<AvisJPA> query = getEntityManager().createQuery(
+				"select a from AvisJPA a "
+						+ "where a.pluginFrontID = :plugin "
+						+ "and CURRENT_DATE between a.dataInici and a.dataFi "
+						+ "order by a.gravetat desc", AvisJPA.class);
+		query.setParameter("plugin", pluginID);
+		return query.getResultList();
+	}
+
 }
