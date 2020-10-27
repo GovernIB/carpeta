@@ -38,6 +38,7 @@ public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaLocal {
 			return query.getResultList(); 
 	 }
 
+	/** Cerca els avisos actius d'un plugin en concret i els ordena de més greu a menys **/
 	@Override
 	public List<AvisJPA> findActiveByPluginID (long pluginID) throws I18NException {
 
