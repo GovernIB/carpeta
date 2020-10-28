@@ -1,20 +1,13 @@
-import {Component} from 'react';
+import React, {Component} from 'react';
 import {withTranslation} from 'react-i18next';
-import React from "./main";
 
 class DadesEntitat extends Component {
 
-    constructor(){
-        super();
-
-    }
-
-
-
     render() {
 
+        var data = new FormData();
         var urlBase = window.location.href;
-        var url = urlBase + "/textinformatiuentitat";
+        var url = urlBase + "webui/textinformatiuentitat";
 
         var xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);
@@ -30,7 +23,7 @@ class DadesEntitat extends Component {
         xhr.send(data);
 
         return (
-            <div id="substituir"></div>
+            <div id="substituir" class="imc-peu-govern"></div>
         );
     }
 }
