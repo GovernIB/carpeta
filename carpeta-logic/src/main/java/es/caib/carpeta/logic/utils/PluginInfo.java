@@ -19,7 +19,7 @@ public class PluginInfo {
 
     String reactComponent;
 
-    int gravetat;
+    Long gravetat;
     String missatge;
 
     public PluginInfo() {
@@ -27,7 +27,7 @@ public class PluginInfo {
     }
 
     public PluginInfo(String pluginID, String nomCa, String nomEs, String nomEn, String descripcioCa,
-            String descripcioEs, String descripcioEn, String reactComponent, int gravetat, String missatge) {
+            String descripcioEs, String descripcioEn, String reactComponent, Long gravetat, String missatge) {
         super();
         this.nomCa = nomCa;
         this.nomEs = nomEs;
@@ -105,11 +105,11 @@ public class PluginInfo {
         this.reactComponent = reactComponent;
     }
 
-    public int getGravetat() {
+    public Long getGravetat() {
         return gravetat;
     }
 
-    public void setGravetat(int gravetat) {
+    public void setGravetat(Long gravetat) {
         this.gravetat = gravetat;
     }
 

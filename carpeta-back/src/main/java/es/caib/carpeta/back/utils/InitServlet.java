@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.crypt.AlgorithmEncrypter;
 import org.fundaciobit.genapp.common.crypt.FileIDEncrypter;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
+import org.fundaciobit.genapp.common.filesystem.IFileSystemManager;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 
@@ -41,7 +42,21 @@ public class InitServlet extends HttpServlet {
     } catch (Throwable th) {
       log.error("Error inicialitzant el sistema de sistema de fitxers: " + th.getMessage(), th);
     }
-    
+
+
+    try {
+      String className = Configuracio.getFileSystemManager();
+      if(className != null) {
+        Class c = Class.forName(className.trim());
+        FileSystemManager.setFileSystemManager((IFileSystemManager) c.getConstructor().newInstance());
+      }else{
+        log.error("Error: no s'ha especificat cap classe: " + className);
+      }
+    } catch (Throwable th) {
+       log.error("Error carregant la classe FileSystemManager: " + th.getMessage(), th);
+       throw new ServletException(th.getMessage());
+    }
+
 
     // Sistema de Traduccions WEB
     try {

@@ -45,7 +45,7 @@
 <a class="dropdown-item"
     href="<c:url value="/superadmin/avis/list"/>"> <span
     style="${(fn:contains(url, '/superadmin/avis'))? " font-weight:bold;" : ""}"><spring:message
-            code="avis.avis.plural" />&nbsp;<c:if test="numAvisos gt 0"><span class="badge badge-danger">${numAvisos}</span></c:if></span>
+            code="avis.avis.plural" />&nbsp;<c:if test="${sessionScope.numAvisos ne '0'}"><span class="badge badge-danger">${sessionScope.numAvisos}</span></c:if></span>
 </a>
 
 <hr style="margin-top: 6px; margin-bottom: 6px;" />

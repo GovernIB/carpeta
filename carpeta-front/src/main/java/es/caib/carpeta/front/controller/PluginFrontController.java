@@ -1,7 +1,9 @@
 package es.caib.carpeta.front.controller;
 
+import com.google.gson.Gson;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.carpeta.hibernate.HibernateFileUtil;
+import es.caib.carpeta.jpa.PluginJPA;
 import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
 import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
 import es.caib.carpeta.logic.utils.PluginInfo;
@@ -21,6 +23,7 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Locale;
@@ -37,7 +40,7 @@ import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_PLUGIN_FRONT;
  */
 @Controller
 @RequestMapping(value = "/pluginfront", method = RequestMethod.GET)
-public class PluginFrontController {
+public class PluginFrontController extends CommonFrontController {
     
     @EJB(mappedName = UtilitiesForFrontLogicaLocal.JNDI_NAME)
     UtilitiesForFrontLogicaLocal utilsEjb;
@@ -173,5 +176,35 @@ public class PluginFrontController {
             response.getOutputStream().write(fi.getData());
         }
     }
-    
+
+    @RequestMapping(value = "/veureplugins" , method = RequestMethod.GET)
+    public void getAllPlugins(HttpServletRequest request, HttpServletResponse response) throws I18NException {
+
+        try{
+
+            // TODO XYZ ZZZ falta idioma
+            String lang = LocaleContextHolder.getLocale().getLanguage();
+            // TODO XYZ ZZZ falta entitat
+            String codiEntitat = "caib";
+
+            List<PluginInfo> pluginsEntitat = utilsEjb.getFrontPlugins(codiEntitat, lang);
+
+            // Passar JSON de pluginsEntitat
+            Gson gson = new Gson();
+            String json = gson.toJson(pluginsEntitat);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF8");
+
+            byte[] utf8JsonString = json.getBytes("UTF8");
+
+            response.getOutputStream().write(utf8JsonString);
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
+
+    }
+
+
 }

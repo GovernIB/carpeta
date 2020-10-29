@@ -18,6 +18,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 @Stateless
 public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaLocal {
 	
+	@Override
 	public List<AvisJPA> findAllActive () throws I18NException {
 		 
 		 TypedQuery<AvisJPA> query = getEntityManager().createQuery(
@@ -26,7 +27,7 @@ public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaLocal {
 			return query.getResultList(); 
 	 }
 	
-	
+	@Override
 	 public List<AvisJPA> findActiveByEntidadID (long entidadID) throws I18NException {
 		 
 		 TypedQuery<AvisJPA> query = getEntityManager().createQuery(
@@ -36,5 +37,18 @@ public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaLocal {
 		 	query.setParameter("entidad", entidadID);
 			return query.getResultList(); 
 	 }
+
+	/** Cerca els avisos actius d'un plugin en concret i els ordena de més greu a menys **/
+	@Override
+	public List<AvisJPA> findActiveByPluginID (long pluginID) throws I18NException {
+
+		TypedQuery<AvisJPA> query = getEntityManager().createQuery(
+				"select a from AvisJPA a "
+						+ "where a.pluginFrontID = :plugin "
+						+ "and CURRENT_DATE between a.dataInici and a.dataFi "
+						+ "order by a.gravetat desc", AvisJPA.class);
+		query.setParameter("plugin", pluginID);
+		return query.getResultList();
+	}
 
 }

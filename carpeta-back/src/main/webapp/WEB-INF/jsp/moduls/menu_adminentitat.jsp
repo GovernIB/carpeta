@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%><%@ include
     file="/WEB-INF/jsp/moduls/includes.jsp"%>
 
-
 <a class="dropdown-item"
     href="<c:url value="/adminentitat/propietatglobal/list"/>"> <span
     style="${(fn:contains(url, '/adminentitat/propietatglobal'))? " font-weight:bold;" : ""}"><spring:message
@@ -37,7 +36,7 @@
 <a class="dropdown-item"
     href="<c:url value="/adminentitat/avis/list"/>"> <span
     style="${(fn:contains(url, '/adminentitat/avis'))? " font-weight:bold;" : ""}"><spring:message
-            code="avis.avis.plural" />&nbsp;<c:if test="numAvisos gt 0"><span class="badge badge-danger">${numAvisos}</span></c:if></span>
+            code="avis.avis.plural" />&nbsp;<c:if test="${sessionScope.numAvisos ne '0'}"><span class="badge badge-danger">${sessionScope.numAvisos}</span></c:if></span>
 </a>
 
 <%--<hr style="margin-top: 6px; margin-bottom: 6px;" />

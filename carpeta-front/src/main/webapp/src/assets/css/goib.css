@@ -362,6 +362,7 @@ html.imc-menu-visible .imc-marc .imc-marc-menu {
 .imc-peu-opcions li a:hover,
 .imc-peu-opcions li a:focus,
 .imc-peu-opcions li a:active { color: #ee013b; background-color: transparent; }
+.imc-peu-opcions li a img { margin-left:5px; margin-top:-5px; }
 
 .imc-en-rss span { display: inline-block; vertical-align: middle; }
 .imc-en-rss svg { display: inline-block; width: .7em; height: .7em; vertical-align: middle; }

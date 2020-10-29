@@ -1,5 +1,6 @@
 package es.caib.carpeta.logic;
 
+import es.caib.carpeta.jpa.AvisJPA;
 import es.caib.carpeta.jpa.EntitatJPA;
 import es.caib.carpeta.jpa.PluginJPA;
 import es.caib.carpeta.logic.utils.PluginInfo;
@@ -43,6 +44,9 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
 
     @EJB(mappedName = es.caib.carpeta.ejb.EnllazLocal.JNDI_NAME)
     protected es.caib.carpeta.ejb.EnllazLocal enllazEjb;
+
+    @EJB(mappedName = AvisLogicaLocal.JNDI_NAME)
+    protected AvisLogicaLocal avisEjb;
 
     @EJB(mappedName = FitxerLogicaLocal.JNDI_NAME)
     protected FitxerLogicaLocal fitxerLogicaEjb;
@@ -112,6 +116,17 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
 
             ICarpetaFrontPlugin cfp = pluginCarpetaFrontEjb.getInstanceByPluginID(p.getPluginID());
 
+            List<AvisJPA> avisos = avisEjb.findActiveByPluginID(p.getPluginID());
+
+            // XYZ ZZZ TODO Ara hi pot haver més d'un avís actiu al mateix temps, només es mostra el de major gravetat
+            Long gravetatAvis = (long) 0;
+            String missatgeAvis = "";
+            if (avisos.size() > 0){
+                gravetatAvis = (long) avisos.get(0).getGravetat();
+                // XYZ ZZZ TODO Canviar per idioma actiu
+                missatgeAvis = avisos.get(0).getDescripcio().getTraduccio(Constants.IDIOMA_CATALA).getValor();
+            }
+
             pluginsInfo.add(new PluginInfo(String.valueOf(plugin.getPluginID()),
                     p.getNom().getTraduccio(Constants.IDIOMA_CATALA).getValor(),
                     p.getNom().getTraduccio(Constants.IDIOMA_CASTELLA).getValor(),
@@ -119,7 +134,7 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
                     p.getDescripcio().getTraduccio(Constants.IDIOMA_CATALA).getValor(),
                     p.getDescripcio().getTraduccio(Constants.IDIOMA_CASTELLA).getValor(),
                     p.getDescripcio().getTraduccio(Constants.IDIOMA_ANGLES).getValor(),
-                    String.valueOf(cfp.isReactComponent()),1,"Error"));
+                    String.valueOf(cfp.isReactComponent()),gravetatAvis,missatgeAvis));
         }
 
         return pluginsInfo;

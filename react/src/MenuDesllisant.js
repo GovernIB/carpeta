@@ -4,6 +4,22 @@ import i18n from 'i18next';
 
 class MenuDesllisant extends Component {
 
+	infoHtml(missatge, pluginID) {
+		alert(missatge);
+		var contingut = newPluginHtml('contingut', '1', pluginID);
+		window.location.href(contingut);
+	}
+
+	infoReact(missatge, pluginID) {
+		alert(missatge);
+		var contingut = newPluginReact('contingut', '1', pluginID);
+		window.location.href(contingut);
+	}
+
+	error(missatge) {
+		alert(missatge);
+	}
+
 	render() {
 
 		const {t} = this.props;
@@ -31,7 +47,13 @@ class MenuDesllisant extends Component {
 
 		var accessibilitat;
 		var plugHtml;
+		var plugHtmlInfo;
+		var plugHtmlWarning;
+		var plugHtmlError;
 		var plugReact;
+		var plugReactInfo;
+		var plugReactWarning;
+		var plugReactError;
 		var sortir;
 		if (autenticat === '1') {
 			accessibilitat = <li><a href="javascript:newAccessibilitat('contingut', '1');"
@@ -41,32 +63,94 @@ class MenuDesllisant extends Component {
 							title={t('menuSortir')}><span>{t('menuSortir')}</span></a></li>;
 
 			if (i18n.language === 'ca') {
-				plugHtml = plugins.filter(s => s.reactComponent === 'false').map(s => (
+				plugHtml = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 0).map(s => (
 					<li><a href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}
 						   title={s.nomCa}><img
 						src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 						className="imc-icona"></img><span>{s.nomCa}</span></a></li>
 				));
-				plugReact = plugins.filter(s => s.reactComponent === 'true').map(s => (
+				plugHtmlInfo = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 1).map(s => (
+					<li><button title={s.nomCa} className="botoMenu alert1menu" onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}><img
+						src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+						className="imc-icona"></img><span>{s.nomCa}</span></button></li>
+				));
+				plugHtmlWarning = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 2).map(s => (
+					<li><button title={s.nomCa} className="botoMenu alert2menu" onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}><img
+						src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+						className="imc-icona"></img><span>{s.nomCa}</span></button></li>
+				));
+				plugHtmlError = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 3).map(s => (
+					<li><button title={s.nomCa} className="botoMenu alert3menu" onClick={(event) => this.error(s.missatge)}><img
+						src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+						className="imc-icona"></img><span>{s.nomCa}</span></button></li>
+				));
+
+				plugReact = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 0).map(s => (
 					<li><a href={"javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"}
 						   title={s.nomCa}><img
 						src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 						className="imc-icona"></img><span>{s.nomCa}</span></a></li>
+				));
+				plugReactInfo = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 1).map(s => (
+					<li><button title={s.nomCa} className="botoMenu alert1menu" onClick={(event) => this.infoReact(s.missatge,s.pluginID)}><img
+						src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+						className="imc-icona"></img><span>{s.nomCa}</span></button></li>
+				));
+				plugReactWarning = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 2).map(s => (
+					<li><button title={s.nomCa} className="botoMenu alert2menu" onClick={(event) => this.infoReact(s.missatge,s.pluginID)}><img
+						src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+						className="imc-icona"></img><span>{s.nomCa}</span></button></li>
+				));
+				plugReactError = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 3).map(s => (
+					<li><button title={s.nomCa} className="botoMenu alert3menu" onClick={(event) => this.error(s.missatge)}><img
+						src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+						className="imc-icona"></img><span>{s.nomCa}</span></button></li>
 				));
 			}
 
 			if (i18n.language === 'es') {
-				plugHtml = plugins.filter(s => s.reactComponent === 'false').map(s => (
+				plugHtml = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 0).map(s => (
 					<li><a href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}
 						   title={s.nomEs}><img
 						src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 						className="imc-icona"></img><span>{s.nomEs}</span></a></li>
 				));
-				plugReact = plugins.filter(s => s.reactComponent === 'true').map(s => (
+				plugHtmlInfo = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 1).map(s => (
+					<li><button title={s.nomEs} className="botoMenu alert1menu" onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}><img
+						src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+						className="imc-icona"></img><span>{s.nomEs}</span></button></li>
+				));
+				plugHtmlWarning = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 2).map(s => (
+					<li><button title={s.nomEs} className="botoMenu alert2menu" onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}><img
+						src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+						className="imc-icona"></img><span>{s.nomEs}</span></button></li>
+				));
+				plugHtmlError = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 3).map(s => (
+					<li><button title={s.nomEs} className="botoMenu alert3menu" onClick={(event) => this.error(s.missatge)}><img
+						src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+						className="imc-icona"></img><span>{s.nomEs}</span></button></li>
+				));
+
+				plugReact = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 0).map(s => (
 					<li><a href={"javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"}
 						   title={s.nomEs}><img
 						src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 						className="imc-icona"></img><span>{s.nomEs}</span></a></li>
+				));
+				plugReactInfo = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 1).map(s => (
+					<li><button title={s.nomEs} className="botoMenu alert1menu" onClick={(event) => this.infoReact(s.missatge,s.pluginID)}><img
+						src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+						className="imc-icona"></img><span>{s.nomEs}</span></button></li>
+				));
+				plugReactWarning = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 2).map(s => (
+					<li><button title={s.nomEs} className="botoMenu alert2menu" onClick={(event) => this.infoReact(s.missatge,s.pluginID)}><img
+						src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+						className="imc-icona"></img><span>{s.nomEs}</span></button></li>
+				));
+				plugReactError = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 3).map(s => (
+					<li><button title={s.nomEs} className="botoMenu alert3menu" onClick={(event) => this.error(s.missatge)}><img
+						src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+						className="imc-icona"></img><span>{s.nomEs}</span></button></li>
 				));
 			}
 
@@ -77,6 +161,12 @@ class MenuDesllisant extends Component {
 									title={t('menuAccessibilitat')}><span>{t('menuAccessibilitat')}</span></a></li>;
 			plugHtml = '';
 			plugReact = '';
+			plugHtmlInfo = '';
+			plugHtmlWarning = '';
+			plugHtmlError = '';
+			plugReactInfo = '';
+			plugReactWarning = '';
+			plugReactError = '';
 			sortir = '';
 		}
 
@@ -100,7 +190,13 @@ class MenuDesllisant extends Component {
 						</li>
 						{accessibilitat}
 						{plugHtml}
+						{plugHtmlInfo}
+						{plugHtmlWarning}
+						{plugHtmlError}
 						{plugReact}
+						{plugReactInfo}
+						{plugReactWarning}
+						{plugReactError}
 						{sortir}
 					</ul>
 				</div>

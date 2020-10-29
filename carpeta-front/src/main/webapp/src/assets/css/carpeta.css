@@ -148,6 +148,47 @@ img:hover {
 .imc-logo li a::before {
 	content: none;
 }
+.alert1{
+	border-color: blue;
+	border-width: medium;
+}
+.alert2{
+    border-color: orange;
+    border-width: medium;
+}
+.alert3{
+    border-color: red;
+    border-width: medium;
+}
+.botoMenu{
+	display: block;
+	font-size: 1.1em;
+	font-weight: bold;
+	color: #545454;
+	text-transform: uppercase;
+	padding: 1em 0;
+	width: 100%;
+	text-align: justify;
+	background-color: #ffffff;
+}
+.alert1menu{
+	border: groove;
+	border-color: blue;
+	border-width: medium;
+}
+.alert2menu{
+	border: groove;
+	border-color: orange;
+	border-width: medium;
+}
+.alert3menu{
+	border: groove;
+	border-color: red;
+	border-width: medium;
+}
+
+/* Peu */
+.imc-peu-opcions li a img { margin-left:5px; margin-top:-5px; }
 
 
 /* RESPONSIVE

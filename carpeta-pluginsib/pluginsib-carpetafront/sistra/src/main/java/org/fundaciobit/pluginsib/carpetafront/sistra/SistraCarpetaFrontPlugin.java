@@ -118,6 +118,10 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             
             llistatDeTramits(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, administrationID, administrationEncriptedID, locale, isGet);
  
+        } else if (query.startsWith(OBTENER_TIQUET)) {
+        	
+        	obtenerTramiteSistra2(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, administrationID, administrationEncriptedID, locale, isGet);
+            
         } else {
         
         	super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, administrationID, administrationEncriptedID, locale, isGet);
@@ -231,9 +235,9 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 	       /* SISTRA2 */
 	       try {
 	    	   if (isDevelopment()) {
-	              tramits = obtenerTramitesDebug(administrationID, formDataInici, formDataFi, formEstat);
+	              tramits = obtenerTramitesDebug(administrationID, formDataInici, formDataFi, formEstat, absolutePluginRequestPath);
 	            }  else {
-	              tramits = obtenerTramites(administrationID,formDataInici,formDataFi, formEstat);
+	              tramits = obtenerTramites(administrationID,formDataInici,formDataFi, formEstat, absolutePluginRequestPath);
 	            }
 	       }catch(javax.ws.rs.client.ResponseProcessingException e) {
 	    	   tramits = null;
@@ -383,8 +387,6 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 	                log.info("tp.getFechaUltimoAcceso() => " + tp.getFechaUltimoAcceso());
 	                log.info("tp.getIdSesionTramitacion() => " + tp.getIdSesionTramitacion());
 	                log.info("tp.getUrl() => " + tp.getUrl());
-	                
-	                //log.info(" Tiquet-Acceso => " + plugin.obtenerTiquetAcceso(tp.getIdSesionTramitacion(), usuari));
             	}
                 x++;
             }
@@ -421,7 +423,7 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     * @return List<TramitePersistenteGenerico>
     * @throws Exception
     */
-   public List<TramitePersistenteGenerico> obtenerTramites(String documento, Date fechaInicio, Date fechaFin, String finalizado) throws Exception {
+   public List<TramitePersistenteGenerico> obtenerTramites(String documento, Date fechaInicio, Date fechaFin, String finalizado, String absolutePluginRequestPath) throws Exception {
 
 	       Client client = getClientBasicAuthenticator();
 	       
@@ -443,6 +445,7 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 	    	   for (RTramitePersistencia tp : tramites) {
 	    		   if(finalizado.equals("A") || finalizado.equals("N")) {
 	    			   TramitePersistenteGenerico tpg = new TramitePersistenteGenerico(tp,2);
+	    			   tpg.setUrl(absolutePluginRequestPath + "/" + OBTENER_TIQUET + "?tramite=" + tpg.getIdSesionTramitacion());
 	    			   tramits.add(tpg);
 	    		   }
 	    	   }
@@ -451,9 +454,9 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
    }
    
    
-   private List<TramitePersistenteGenerico> obtenerTramitesDebug(String documento, Date fechaInicio, Date fechaFin, String finalizado) throws Exception {
+   private List<TramitePersistenteGenerico> obtenerTramitesDebug(String documento, Date fechaInicio, Date fechaFin, String finalizado, String absolutePluginRequestPath) throws Exception {
             
-       List<TramitePersistenteGenerico> tramits = this.obtenerTramites(documento,fechaInicio,fechaFin,finalizado);
+       List<TramitePersistenteGenerico> tramits = this.obtenerTramites(documento,fechaInicio,fechaFin,finalizado,absolutePluginRequestPath);
        
        if (tramits == null || tramits.isEmpty()) {
     	   tramits = null;
@@ -492,7 +495,84 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     		   .register(JsonbConfigurator.class);
    }
 
+
+   
+   // --------------------------------------------------------------------------------------
+   // --------------------------------------------------------------------------------------
+   // -------------------     A C C E S O  T I Q U E T   S I S T R A 2      ----------------
+   // --------------------------------------------------------------------------------------
+   // --------------------------------------------------------------------------------------
+   
+   
+   protected static final String OBTENER_TIQUET = "tiquetAcceso";    
+   
+   public void obtenerTramiteSistra2(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+           HttpServletRequest request, HttpServletResponse response, String administrationID,
+           String administrationEncriptedID, Locale locale, boolean isGet)  {
+       
+       try {
+       
+	        // XYZ ZZZ Issue #197 Pendent obtenir dades autenticació usuari per cridar obtenerTiquetAccesoSistra2
+    	   
+	        /*
+	        UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();
+	        UsuarioClave usuClave = usuarioAutenticado.getUsuarioClave();
+	        
+	        if (isDevelopment()) {
+    		   log.info("REQUEST TRAMITE: " + request.getParameter("tramite"));
+    		   log.info("Nombre: " + usuClave.getNombre());
+	   	        log.info("Apellido1: " + usuClave.getApellido1());
+	   	        log.info("Apellido2: " + usuClave.getApellido2());
+	   	        log.info("Nif: " + usuClave.getNif());
+	   	        log.info("MetodoAutentication: " + usuClave.getMetodoAutentificacion());
+	   	        log.info("Qaa: " + usuClave.getQaa());
+    	   }
+	        
+	       String url = obtenerTiquetAccesoSistra2(request.getParameter("tramite"), usuClave);
+           response.sendRedirect(url);
+           */
+           
+           
+       } catch (Exception e) {
+           log.error("Error obtenint tiquet accès Sistra 2: " + e.getMessage(), e);
+       }  
+   }
+   
    /*
+   public String obtenerTiquetAccesoSistra2(String idSesionTramitacion, UsuarioClave usuario) throws Exception {
+
+       Client client = getClientBasicAuthenticator();
+       
+       RInfoTicketAcceso infoTicket = new RInfoTicketAcceso();
+       infoTicket.setIdSesionTramitacion(idSesionTramitacion);
+       
+       RUsuarioAutenticadoInfo usuarioInfo = new RUsuarioAutenticadoInfo();
+       usuarioInfo.setNombre(usuario.getNombre());
+       usuarioInfo.setApellido1(usuario.getApellido1());
+       usuarioInfo.setApellido2(usuario.getApellido2());
+       usuarioInfo.setEmail("");
+       usuarioInfo.setUsername(usuario.getNif());
+       usuarioInfo.setNif(usuario.getNif());
+       usuarioInfo.setAutenticacion("c");
+       usuarioInfo.setMetodoAutenticacion(usuario.getMetodoAutentificacion());
+       usuarioInfo.setQaa(usuario.getQaa());
+       
+       infoTicket.setUsuarioAutenticadoInfo(usuarioInfo);
+       
+       String url = client.target( getPropertyRequired(SISTRA2_PROPERTY_BASE + "url") + "/ticketAcceso" )
+    		   .request(MediaType.APPLICATION_JSON)
+    		   .post(Entity.entity(infoTicket, MediaType.APPLICATION_JSON), String.class);
+    		   
+	    if (isDevelopment()) {
+      		log.info("URL TIQUET: " + url);
+       }
+       
+       return url;
+   }
+   */
+   
+   /*
+   // SISTRA 1
    public String obtenerTiquetAcceso(String idSesionTramitacion, UserData usuario) throws Exception {
 
        BackofficeFacade backofficeFacade = getBackofficeFacade();
@@ -505,8 +585,7 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
        usuarioAutenticadoInfo.setNif(usuario.getAdministrationID());
 
        String url = backofficeFacade.obtenerTiquetAcceso(idSesionTramitacion, usuarioAutenticadoInfo);
-
-       return url;
+	   return url;
    }
    */
    

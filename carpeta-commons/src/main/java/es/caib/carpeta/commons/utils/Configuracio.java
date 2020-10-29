@@ -108,6 +108,10 @@ public class Configuracio implements Constants {
         return new File(path);
     }
 
+    public static String getFileSystemManager() {
+       return getProperty(CARPETA_PROPERTY_BASE + "filesystemmanagerclass");
+    }
+
 
     public static String getLoginIBMethodAuth() { return getProperty(CARPETA_PROPERTY_LOGINIB + "metodos_auth");
     }
