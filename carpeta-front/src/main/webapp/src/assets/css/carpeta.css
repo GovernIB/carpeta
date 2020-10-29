@@ -187,6 +187,9 @@ img:hover {
 	border-width: medium;
 }
 
+/* Peu */
+.imc-peu-opcions li a img { margin-left:5px; margin-top:-5px; }
+
 
 /* RESPONSIVE
 
