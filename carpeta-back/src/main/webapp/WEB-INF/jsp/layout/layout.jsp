@@ -14,11 +14,9 @@
 <%@ include file="/WEB-INF/jsp/moduls/imports.jsp"%>
 
         <sec:authorize access="!hasRole('ROLE_ADMIN')">
-              <% System.out.println("ENTRAMOS COMO NO ROLE_ADMIN"); %>
               <link rel="icon" type="image/vnd.microsoft.icon" href="<c:url value="/img/favicon.ico"/>">
         </sec:authorize> 
         <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <% System.out.println("ENTRAMOS COMO ROLE_ADMIN"); %>
             <c:choose>
                 <c:when test="${not empty loginInfo.entitat.icon}">
                     <link href="<c:url value="${car:fileUrl(loginInfo.entitat.icon)}"/>" rel="shortcut icon" type="image/x-icon" />
