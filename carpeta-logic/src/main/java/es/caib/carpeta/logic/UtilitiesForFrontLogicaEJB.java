@@ -181,4 +181,11 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
         return entitatEjb.executeQueryOne(EntitatFields.ENTITATDESCFRONT, EntitatFields.CODI.equal(codiEntitat));
     }
 
+    @Override
+    public List<AvisJPA> getAvisosByType(String codiEntitat, int avisType) throws I18NException {
+
+       List<AvisJPA> avisos = avisEjb.findActiveAvisos(codiEntitat, avisType);
+       return avisos;
+    }
+
 }

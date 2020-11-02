@@ -51,4 +51,19 @@ public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaLocal {
 		return query.getResultList();
 	}
 
+	/** Cerca els avisos actius d'un front public en concret i els ordena de més greu a menys **/
+	@Override
+	public List<AvisJPA> findActiveAvisos (String codiEntitat, int avisType) throws I18NException {
+
+		TypedQuery<AvisJPA> query = getEntityManager().createQuery(
+				"select a from AvisJPA a "
+						+ "where a.entitat.codi = :codiEntitat "
+						+ "and CURRENT_DATE between a.dataInici and a.dataFi "
+						+ "and a.tipus = :avisType "
+						+ "order by a.gravetat desc", AvisJPA.class);
+		query.setParameter("codiEntitat", codiEntitat);
+		query.setParameter("avisType", avisType);
+		return query.getResultList();
+	}
+
 }

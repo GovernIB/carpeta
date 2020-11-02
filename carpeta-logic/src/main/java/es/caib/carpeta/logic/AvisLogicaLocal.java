@@ -25,5 +25,7 @@ public interface AvisLogicaLocal extends AvisLocal{
     /** Cerca els avisos actius d'un plugin en concret i els ordena de més greu a menys **/
     public List<AvisJPA> findActiveByPluginID (long pluginID) throws I18NException;
 
+    /** Cerca els avisos actius d'un front public en concret i els ordena de més greu a menys **/
+    public List<AvisJPA> findActiveAvisos (String codiEntitat, int avisType) throws I18NException;
 }
 
