@@ -9,6 +9,7 @@ var newDadesPersonalsReact;
 var newMenuLateralReact;
 var newMenuDesllisantReact;
 var newBreadcrumbReact;
+var newAvisosFrontReact;
 var newPeuReact;
 var newPluginHtml;
 var newPluginReact;
@@ -56,6 +57,10 @@ function newMenuDesllisant(compoWeb, nom) {
 
 function newBreadcrumb(compoWeb, nom) {
 	setTimeout(newBreadcrumbReact.bind(null,compoWeb,nom) , 1);
+}
+
+function newAvisosFront(compoWeb, nom) {
+	setTimeout(newAvisosFrontReact.bind(null,compoWeb,nom) , 1);
 }
 
 function newPeu(compoWeb, nom) {

@@ -186,6 +186,24 @@ img:hover {
 	border-color: red;
 	border-width: medium;
 }
+.avis1{
+	color:#0c5460;
+	background-color:#d1ecf1;
+	border-color:#bee5eb;
+	border-radius: 4px;
+}
+.avis2{
+	color:#856404;
+	background-color:#fff3cd;
+	border-color:#ffeeba;
+	border-radius: 4px;
+}
+.avis3{
+	color:#721c24;
+	background-color:#f8d7da;
+	border-color:#f5c6cb;
+	border-radius: 4px;
+}
 
 /* Peu */
 .imc-peu-opcions li a img { margin-left:5px; margin-top:-5px; }

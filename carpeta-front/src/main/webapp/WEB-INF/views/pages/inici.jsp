@@ -53,8 +53,6 @@
 	  <script type="text/javascript">
 		  window.onload = function($) {
 			  sessionStorage.setItem('autenticat', '0');
-			  <%--sessionStorage.setItem('urlAvis', '${urlAvis}');--%>
-			  <%--sessionStorage.setItem('urlRss', '${urlRss}');--%>
 			  var aut = sessionStorage.getItem('autenticat');
 			  newMenuDesllisant('menuDesllisant', aut);
 			  newPeu('peu', aut);
@@ -98,6 +96,7 @@
                     newMenuDesllisant('menuDesllisant', autenticat);
 					newInici('contingut', autenticat);
 					newPeu('peu', autenticat);
+					newAvisosFront('avisosFront', autenticat);
 					// Passa dades personals a React
 					sessionStorage.setItem('usuariNomComplet', '${user}');
 					sessionStorage.setItem('usuariNom', '${userName}');
@@ -118,6 +117,9 @@
 			<!-- Molla de pa -->
 			<div id = "mollaPa"></div>
 
+			<!-- Avisos Front -->
+			<div id = "avisosFront"></div>
+
 			<!-- Contingut pàgina -->
 			<div id = "contingut"></div>
 
@@ -131,8 +133,6 @@
 		<script type="text/javascript">
 			sessionStorage.clear();
 			sessionStorage.setItem('plugins', JSON.stringify(${plugins}));
-			<%--sessionStorage.setItem('urlAvis', '${urlAvis}');--%>
-			<%--sessionStorage.setItem('urlRss', '${urlRss}');--%>
 		</script>
 
 	

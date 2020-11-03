@@ -3,9 +3,12 @@ package es.caib.carpeta.front.controller;
 
 
 import com.google.gson.Gson;
+import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.hibernate.HibernateFileUtil;
+import es.caib.carpeta.jpa.AvisJPA;
 import es.caib.carpeta.jpa.EnllazJPA;
 import es.caib.carpeta.jpa.EntitatJPA;
+import es.caib.carpeta.model.entity.Avis;
 import es.caib.carpeta.model.entity.Enllaz;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
@@ -18,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Conjunt de cridades REST per obtenir informació per a la presentació de la
@@ -84,6 +88,39 @@ public class WebUIController extends CommonFrontController {
 
         public void setUrllogo(String urllogo) {
             this.urllogo = urllogo;
+        }
+
+    }
+
+    public static class AvisInfo {
+        protected String label;
+        protected String gravetat;
+
+        public AvisInfo() {
+            super();
+            // TODO Auto-generated constructor stub
+        }
+
+        public AvisInfo(String label, String gravetat) {
+            super();
+            this.label = label;
+            this.gravetat = gravetat;
+        }
+
+        public String getLabel() {
+            return label;
+        }
+
+        public void setLabel(String label) {
+            this.label = label;
+        }
+
+        public String getGravetat() {
+            return gravetat;
+        }
+
+        public void setGravetat(String gravetat) {
+            this.gravetat = gravetat;
         }
 
     }
@@ -267,6 +304,71 @@ public class WebUIController extends CommonFrontController {
                 log.error("Error obtening writer: " + io.getMessage(), io);
             }
 
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
+    }
+
+    @RequestMapping(value = "/canviarIdioma/{idioma}", method = RequestMethod.GET)
+    public void canviarIdiomaServidor(@PathVariable("idioma") String idioma, HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+            String lang = LocaleContextHolder.getLocale().getLanguage();
+            log.info("teníem el llenguatge: " + lang);
+
+            LocaleContextHolder.setLocale(new Locale(idioma));
+            log.info("ARA TENIM el llenguatge: " + LocaleContextHolder.getLocale().getLanguage());
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
+    }
+
+    @RequestMapping(value = "/avisosfrontpublic", method = RequestMethod.GET)
+    public void getAvisosFrontPublic(HttpServletRequest request, HttpServletResponse response) {
+
+        final int avisType = Constants.TIPUS_AVIS_FRONT_ABANS_LOGIN;
+        getAvisosJSON(request, response, avisType);
+    }
+
+    @RequestMapping(value = "/avisosfrontprivat", method = RequestMethod.GET)
+    public void getAvisosFrontPrivat(HttpServletRequest request, HttpServletResponse response) {
+
+        final int avisType = Constants.TIPUS_AVIS_FRONT_DESPRES_LOGIN;
+        getAvisosJSON(request, response, avisType);
+    }
+
+    protected void getAvisosJSON(HttpServletRequest request, HttpServletResponse response, final int avisType) {
+        try {
+            String lang = LocaleContextHolder.getLocale().getLanguage();
+            // TODO XYZ ZZZ falta entitat
+            String codiEntitat = "caib";
+
+            List<AvisJPA> avisos = utilsEjb.getAvisosByType(codiEntitat, avisType);
+
+            List<AvisInfo> avisosInfo = new ArrayList<>();
+
+            for (Avis avis : avisos) {
+
+                AvisJPA avisJPA = (AvisJPA) avis;
+
+                String label = avisJPA.getDescripcio().getTraduccio(lang).getValor();
+                String gravetat = String.valueOf(avisJPA.getGravetat());
+
+                avisosInfo.add(new AvisInfo(label, gravetat));
+            }
+
+            // Passar JSON
+            Gson gson = new Gson();
+            String json = gson.toJson(avisosInfo);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF8");
+
+            byte[] utf8JsonString = json.getBytes("UTF8");
+
+            response.getOutputStream().write(utf8JsonString);
 
         } catch (Throwable e) {
             processException(e, response);

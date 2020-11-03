@@ -15,6 +15,7 @@ import Notificacions from './Notificacions';
 import MapaWeb from './MapaWeb';
 import DadesPersonals from './DadesPersonals';
 import Breadcrumb from './Breadcrumb';
+import AvisosFront from './AvisosFront';
 import PluginHtml from './PluginHtml';
 import PluginReact from './PluginReact';
 import * as breadcrumbPaths from './utils/breadcrumbPaths';
@@ -49,6 +50,11 @@ ReactDOM.render(
 ReactDOM.render(
   <Breadcrumb items={breadcrumbPaths.Inici} autenticat='0'/>,
   document.getElementById("mollaPa")
+);
+
+ReactDOM.render(
+	<AvisosFront autenticat='0'/>,
+	document.getElementById("avisosFront")
 );
 
 ReactDOM.render(
@@ -127,4 +133,7 @@ newPluginHtml  = function createReactCompPluginHtml(nomComponent, param, pluginI
 newPluginReact  = function createReactCompPluginReact(nomComponent, param, pluginID) {
 	ReactDOM.render(<PluginReact autenticat={param} pluginID={pluginID}/>, document.getElementById(nomComponent));
 	ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.Plugin} autenticat={param}/>, document.getElementById("mollaPa"));
+};
+newAvisosFrontReact  = function createReactCompAvisosFront(nomComponent, param) {
+	ReactDOM.render(<AvisosFront autenticat={param}/>, document.getElementById(nomComponent));
 };
