@@ -86,5 +86,15 @@ public class PropietatGlobalSuperAdminController extends PropietatGlobalControll
 
         return propietatGlobalFilterForm;
     }
+    
+    @Override
+    public String getEntityNameCode() {
+        return "propietatGlobal.superadmin.titol";
+      }
+
+    @Override
+    public String getEntityNameCodePlural() {
+        return "propietatGlobal.superadmin.titol.plural";
+    }
 
 }

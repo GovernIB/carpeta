@@ -4,7 +4,7 @@
 <a class="dropdown-item"
     href="<c:url value="/adminentitat/propietatglobal/list"/>"> <span
     style="${(fn:contains(url, '/adminentitat/propietatglobal'))? " font-weight:bold;" : ""}"><spring:message
-            code="propietatGlobal.propietatGlobal.plural" /></span>
+            code="propietatGlobal.adminentitat.titol.plural" /></span>
 </a>
 
 <hr style="margin-top: 6px; margin-bottom: 6px;" />

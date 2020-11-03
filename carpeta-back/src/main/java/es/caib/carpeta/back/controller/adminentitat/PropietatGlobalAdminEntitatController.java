@@ -22,5 +22,15 @@ public class PropietatGlobalAdminEntitatController extends PropietatGlobalSuperA
     protected boolean isSuperAdmin() {
         return false;
     }
+    
+    @Override
+    public String getEntityNameCode() {
+        return "propietatGlobal.adminentitat.titol";
+      }
+
+    @Override
+    public String getEntityNameCodePlural() {
+        return "propietatGlobal.adminentitat.titol.plural";
+    }
 
 }
