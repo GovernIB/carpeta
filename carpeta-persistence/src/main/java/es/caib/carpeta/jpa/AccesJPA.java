@@ -1,21 +1,10 @@
 
 package es.caib.carpeta.jpa;
-import es.caib.carpeta.model.entity.*;
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import es.caib.carpeta.model.entity.Acces;
 import org.hibernate.annotations.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import java.util.Set;
-import java.util.HashSet;
-import javax.persistence.GenerationType;
-import javax.persistence.GeneratedValue;
 import org.hibernate.annotations.Index;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 
 
 @SuppressWarnings("deprecation")
@@ -211,19 +200,6 @@ private static final long serialVersionUID = -2081832820L;
     return __result;
   }
 
-// EXP  Field:accesid | Table: car_estadistica | Type: 0  
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "acces")
-	private Set<EstadisticaJPA> estadisticas = new HashSet<EstadisticaJPA>(0);
-	public  Set<EstadisticaJPA> getEstadisticas() {
-    return this.estadisticas;
-  }
-
-	public void setEstadisticas(Set<EstadisticaJPA> estadisticas) {
-	  this.estadisticas = estadisticas;
-	}
-
-
 // IMP Field:entitatid | Table: car_entitat | Type: 1  
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -285,10 +261,6 @@ private static final long serialVersionUID = -2081832820L;
     __tmp = toJPA(__jpa);
     __alreadyCopied.put(__jpa, __tmp);
     // Copia de beans complexes (EXP)
-    if(!"EstadisticaJPA".equals(origenJPA) 
-       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.estadisticas) || org.hibernate.Hibernate.isInitialized(__jpa.getEstadisticas())) ) {
-      __tmp.setEstadisticas(EstadisticaJPA.copyJPA(__jpa.getEstadisticas(), __alreadyCopied,"AccesJPA"));
-    }
     // Copia de beans complexes (IMP)
     if(!"EntitatJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat()) ) ) {
