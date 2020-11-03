@@ -18,17 +18,17 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.ENTITATID)}">
         <th>${car:getSortIcons(__theFilterForm,EstadisticaFields.ENTITATID)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.ACCESID)}">
-        <th>${car:getSortIcons(__theFilterForm,EstadisticaFields.ACCESID)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.ACCIO)}">
-        <th>${car:getSortIcons(__theFilterForm,EstadisticaFields.ACCIO)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.ELEMENT)}">
-        <th>${car:getSortIcons(__theFilterForm,EstadisticaFields.ELEMENT)}</th>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.DATAESTADISTICA)}">
         <th>${car:getSortIcons(__theFilterForm,EstadisticaFields.DATAESTADISTICA)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.TIPUS)}">
+        <th>${car:getSortIcons(__theFilterForm,EstadisticaFields.TIPUS)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.COMPTADOR)}">
+        <th>${car:getSortIcons(__theFilterForm,EstadisticaFields.COMPTADOR)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.PLUGINID)}">
+        <th>${car:getSortIcons(__theFilterForm,EstadisticaFields.PLUGINID)}</th>
         </c:if>
 
 

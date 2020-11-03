@@ -65,61 +65,6 @@ public class EstadisticaFilterForm extends CarpetaBaseFilterForm implements Esta
   }
 
 
-  private java.lang.Long accesIDDesde;
-
-  public java.lang.Long getAccesIDDesde() {
-    return this.accesIDDesde;
-  }
-
-  public void setAccesIDDesde(java.lang.Long accesIDDesde) {
-    this.accesIDDesde = accesIDDesde;
-  }
-
-
-  private java.lang.Long accesIDFins;
-
-  public java.lang.Long getAccesIDFins() {
-    return this.accesIDFins;
-  }
-
-  public void setAccesIDFins(java.lang.Long accesIDFins) {
-    this.accesIDFins = accesIDFins;
-  }
-
-
-  private java.lang.Integer accioDesde;
-
-  public java.lang.Integer getAccioDesde() {
-    return this.accioDesde;
-  }
-
-  public void setAccioDesde(java.lang.Integer accioDesde) {
-    this.accioDesde = accioDesde;
-  }
-
-
-  private java.lang.Integer accioFins;
-
-  public java.lang.Integer getAccioFins() {
-    return this.accioFins;
-  }
-
-  public void setAccioFins(java.lang.Integer accioFins) {
-    this.accioFins = accioFins;
-  }
-
-
-  private java.lang.String element;
-
-  public java.lang.String getElement() {
-    return this.element;
-  }
-
-  public void setElement(java.lang.String element) {
-    this.element = element;
-  }
-
-
   private java.sql.Timestamp dataEstadisticaDesde;
 
   public java.sql.Timestamp getDataEstadisticaDesde() {
@@ -142,6 +87,72 @@ public class EstadisticaFilterForm extends CarpetaBaseFilterForm implements Esta
   }
 
 
+  private java.lang.Integer tipusDesde;
+
+  public java.lang.Integer getTipusDesde() {
+    return this.tipusDesde;
+  }
+
+  public void setTipusDesde(java.lang.Integer tipusDesde) {
+    this.tipusDesde = tipusDesde;
+  }
+
+
+  private java.lang.Integer tipusFins;
+
+  public java.lang.Integer getTipusFins() {
+    return this.tipusFins;
+  }
+
+  public void setTipusFins(java.lang.Integer tipusFins) {
+    this.tipusFins = tipusFins;
+  }
+
+
+  private java.lang.Integer comptadorDesde;
+
+  public java.lang.Integer getComptadorDesde() {
+    return this.comptadorDesde;
+  }
+
+  public void setComptadorDesde(java.lang.Integer comptadorDesde) {
+    this.comptadorDesde = comptadorDesde;
+  }
+
+
+  private java.lang.Integer comptadorFins;
+
+  public java.lang.Integer getComptadorFins() {
+    return this.comptadorFins;
+  }
+
+  public void setComptadorFins(java.lang.Integer comptadorFins) {
+    this.comptadorFins = comptadorFins;
+  }
+
+
+  private java.lang.Integer pluginIDDesde;
+
+  public java.lang.Integer getPluginIDDesde() {
+    return this.pluginIDDesde;
+  }
+
+  public void setPluginIDDesde(java.lang.Integer pluginIDDesde) {
+    this.pluginIDDesde = pluginIDDesde;
+  }
+
+
+  private java.lang.Integer pluginIDFins;
+
+  public java.lang.Integer getPluginIDFins() {
+    return this.pluginIDFins;
+  }
+
+  public void setPluginIDFins(java.lang.Integer pluginIDFins) {
+    this.pluginIDFins = pluginIDFins;
+  }
+
+
   public EstadisticaFilterForm() {
   }
   
@@ -151,15 +162,16 @@ public class EstadisticaFilterForm extends CarpetaBaseFilterForm implements Esta
     this.estadisticaIDFins = __toClone.estadisticaIDFins;
     this.entitatIDDesde = __toClone.entitatIDDesde;
     this.entitatIDFins = __toClone.entitatIDFins;
-    this.accesIDDesde = __toClone.accesIDDesde;
-    this.accesIDFins = __toClone.accesIDFins;
-    this.accioDesde = __toClone.accioDesde;
-    this.accioFins = __toClone.accioFins;
-    this.element = __toClone.element;
     this.dataEstadisticaDesde = __toClone.dataEstadisticaDesde;
     this.dataEstadisticaFins = __toClone.dataEstadisticaFins;
+    this.tipusDesde = __toClone.tipusDesde;
+    this.tipusFins = __toClone.tipusFins;
+    this.comptadorDesde = __toClone.comptadorDesde;
+    this.comptadorFins = __toClone.comptadorFins;
+    this.pluginIDDesde = __toClone.pluginIDDesde;
+    this.pluginIDFins = __toClone.pluginIDFins;
     this.mapOfEntitatForEntitatID = __toClone.mapOfEntitatForEntitatID;
-    this.mapOfAccesForAccesID = __toClone.mapOfAccesForAccesID;
+    this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
   }
   
   /* ========= UTILS ========== */
@@ -206,14 +218,14 @@ public class EstadisticaFilterForm extends CarpetaBaseFilterForm implements Esta
 
 
 
-  private Map<String, String> mapOfAccesForAccesID;
+  private Map<String, String> mapOfValuesForTipus;
 
-  public Map<String, String> getMapOfAccesForAccesID() {
-    return this.mapOfAccesForAccesID;
+  public Map<String, String> getMapOfValuesForTipus() {
+    return this.mapOfValuesForTipus;
   }
 
-  public void setMapOfAccesForAccesID(Map<String, String> mapOfAccesForAccesID) {
-    this.mapOfAccesForAccesID = mapOfAccesForAccesID;
+  public void setMapOfValuesForTipus(Map<String, String> mapOfValuesForTipus) {
+    this.mapOfValuesForTipus = mapOfValuesForTipus;
   }
 
 

@@ -11,11 +11,11 @@ public class EstadisticaBean implements Estadistica {
 private static final long serialVersionUID = 360955862L;
 
 	long estadisticaID;// PK
-	long entitatID;
-	java.lang.Long accesID;
-	int accio;
-	java.lang.String element;
+	java.lang.Long entitatID;
 	java.sql.Timestamp dataEstadistica;
+	int tipus;
+	int comptador;
+	java.lang.Integer pluginID;
 
 
   /** Constructor Buit */
@@ -23,36 +23,36 @@ private static final long serialVersionUID = 360955862L;
   }
 
   /** Constructor amb tots els camps  */
-  public EstadisticaBean(long estadisticaID , long entitatID , java.lang.Long accesID , int accio , java.lang.String element , java.sql.Timestamp dataEstadistica) {
+  public EstadisticaBean(long estadisticaID , java.lang.Long entitatID , java.sql.Timestamp dataEstadistica , int tipus , int comptador , java.lang.Integer pluginID) {
     this.estadisticaID=estadisticaID;
     this.entitatID=entitatID;
-    this.accesID=accesID;
-    this.accio=accio;
-    this.element=element;
     this.dataEstadistica=dataEstadistica;
+    this.tipus=tipus;
+    this.comptador=comptador;
+    this.pluginID=pluginID;
 }
   /** Constructor sense valors autoincrementals */
-  public EstadisticaBean(long entitatID , java.lang.Long accesID , int accio , java.lang.String element , java.sql.Timestamp dataEstadistica) {
+  public EstadisticaBean(java.lang.Long entitatID , java.sql.Timestamp dataEstadistica , int tipus , int comptador , java.lang.Integer pluginID) {
     this.entitatID=entitatID;
-    this.accesID=accesID;
-    this.accio=accio;
-    this.element=element;
     this.dataEstadistica=dataEstadistica;
+    this.tipus=tipus;
+    this.comptador=comptador;
+    this.pluginID=pluginID;
 }
   /** Constructor dels valors Not Null */
-  public EstadisticaBean(long estadisticaID , long entitatID , int accio , java.sql.Timestamp dataEstadistica) {
+  public EstadisticaBean(long estadisticaID , java.sql.Timestamp dataEstadistica , int tipus , int comptador) {
     this.estadisticaID=estadisticaID;
-    this.entitatID=entitatID;
-    this.accio=accio;
     this.dataEstadistica=dataEstadistica;
+    this.tipus=tipus;
+    this.comptador=comptador;
 }
   public EstadisticaBean(Estadistica __bean) {
     this.setEstadisticaID(__bean.getEstadisticaID());
     this.setEntitatID(__bean.getEntitatID());
-    this.setAccesID(__bean.getAccesID());
-    this.setAccio(__bean.getAccio());
-    this.setElement(__bean.getElement());
     this.setDataEstadistica(__bean.getDataEstadistica());
+    this.setTipus(__bean.getTipus());
+    this.setComptador(__bean.getComptador());
+    this.setPluginID(__bean.getPluginID());
 	}
 
 	public long getEstadisticaID() {
@@ -62,32 +62,11 @@ private static final long serialVersionUID = 360955862L;
 		this.estadisticaID = _estadisticaID_;
 	};
 
-	public long getEntitatID() {
+	public java.lang.Long getEntitatID() {
 		return(entitatID);
 	};
-	public void setEntitatID(long _entitatID_) {
+	public void setEntitatID(java.lang.Long _entitatID_) {
 		this.entitatID = _entitatID_;
-	};
-
-	public java.lang.Long getAccesID() {
-		return(accesID);
-	};
-	public void setAccesID(java.lang.Long _accesID_) {
-		this.accesID = _accesID_;
-	};
-
-	public int getAccio() {
-		return(accio);
-	};
-	public void setAccio(int _accio_) {
-		this.accio = _accio_;
-	};
-
-	public java.lang.String getElement() {
-		return(element);
-	};
-	public void setElement(java.lang.String _element_) {
-		this.element = _element_;
 	};
 
 	public java.sql.Timestamp getDataEstadistica() {
@@ -95,6 +74,27 @@ private static final long serialVersionUID = 360955862L;
 	};
 	public void setDataEstadistica(java.sql.Timestamp _dataEstadistica_) {
 		this.dataEstadistica = _dataEstadistica_;
+	};
+
+	public int getTipus() {
+		return(tipus);
+	};
+	public void setTipus(int _tipus_) {
+		this.tipus = _tipus_;
+	};
+
+	public int getComptador() {
+		return(comptador);
+	};
+	public void setComptador(int _comptador_) {
+		this.comptador = _comptador_;
+	};
+
+	public java.lang.Integer getPluginID() {
+		return(pluginID);
+	};
+	public void setPluginID(java.lang.Integer _pluginID_) {
+		this.pluginID = _pluginID_;
 	};
 
 
@@ -106,10 +106,10 @@ private static final long serialVersionUID = 360955862L;
     EstadisticaBean __tmp = new EstadisticaBean();
     __tmp.setEstadisticaID(__bean.getEstadisticaID());
     __tmp.setEntitatID(__bean.getEntitatID());
-    __tmp.setAccesID(__bean.getAccesID());
-    __tmp.setAccio(__bean.getAccio());
-    __tmp.setElement(__bean.getElement());
     __tmp.setDataEstadistica(__bean.getDataEstadistica());
+    __tmp.setTipus(__bean.getTipus());
+    __tmp.setComptador(__bean.getComptador());
+    __tmp.setPluginID(__bean.getPluginID());
 		return __tmp;
 	}
 

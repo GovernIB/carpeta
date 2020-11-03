@@ -1,18 +1,10 @@
 
 package es.caib.carpeta.jpa;
-import es.caib.carpeta.model.entity.*;
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
-import javax.persistence.GeneratedValue;
-import org.hibernate.annotations.Index;
-import javax.persistence.SequenceGenerator;
+import es.caib.carpeta.model.entity.Estadistica;
 import org.hibernate.annotations.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
+import org.hibernate.annotations.Index;
+
+import javax.persistence.*;
 
 
 @SuppressWarnings("deprecation")
@@ -33,21 +25,20 @@ private static final long serialVersionUID = -2066559243L;
 	long estadisticaID;
 
 	@Index(name="car_estadistica_entitatid_fk_i")
-	@Column(name="entitatid",nullable = false,length = 19)
-	long entitatID;
-
-	@Index(name="car_estadistica_accesid_fk_i")
-	@Column(name="accesid",length = 19)
-	java.lang.Long accesID;
-
-	@Column(name="accio",nullable = false,length = 10)
-	int accio;
-
-	@Column(name="element",length = 255)
-	java.lang.String element;
+	@Column(name="entitatid",length = 19)
+	java.lang.Long entitatID;
 
 	@Column(name="dataestadistica",nullable = false,length = 29,precision = 6)
 	java.sql.Timestamp dataEstadistica;
+
+	@Column(name="tipus",nullable = false,length = 10)
+	int tipus;
+
+	@Column(name="comptador",nullable = false,length = 10)
+	int comptador;
+
+	@Column(name="pluginid",length = 19)
+	java.lang.Integer pluginID;
 
 
 
@@ -56,36 +47,36 @@ private static final long serialVersionUID = -2066559243L;
   }
 
   /** Constructor amb tots els camps  */
-  public EstadisticaJPA(long estadisticaID , long entitatID , java.lang.Long accesID , int accio , java.lang.String element , java.sql.Timestamp dataEstadistica) {
+  public EstadisticaJPA(long estadisticaID , java.lang.Long entitatID , java.sql.Timestamp dataEstadistica , int tipus , int comptador , java.lang.Integer pluginID) {
     this.estadisticaID=estadisticaID;
     this.entitatID=entitatID;
-    this.accesID=accesID;
-    this.accio=accio;
-    this.element=element;
     this.dataEstadistica=dataEstadistica;
+    this.tipus=tipus;
+    this.comptador=comptador;
+    this.pluginID=pluginID;
 }
   /** Constructor sense valors autoincrementals */
-  public EstadisticaJPA(long entitatID , java.lang.Long accesID , int accio , java.lang.String element , java.sql.Timestamp dataEstadistica) {
+  public EstadisticaJPA(java.lang.Long entitatID , java.sql.Timestamp dataEstadistica , int tipus , int comptador , java.lang.Integer pluginID) {
     this.entitatID=entitatID;
-    this.accesID=accesID;
-    this.accio=accio;
-    this.element=element;
     this.dataEstadistica=dataEstadistica;
+    this.tipus=tipus;
+    this.comptador=comptador;
+    this.pluginID=pluginID;
 }
   /** Constructor dels valors Not Null */
-  public EstadisticaJPA(long estadisticaID , long entitatID , int accio , java.sql.Timestamp dataEstadistica) {
+  public EstadisticaJPA(long estadisticaID , java.sql.Timestamp dataEstadistica , int tipus , int comptador) {
     this.estadisticaID=estadisticaID;
-    this.entitatID=entitatID;
-    this.accio=accio;
     this.dataEstadistica=dataEstadistica;
+    this.tipus=tipus;
+    this.comptador=comptador;
 }
   public EstadisticaJPA(Estadistica __bean) {
     this.setEstadisticaID(__bean.getEstadisticaID());
     this.setEntitatID(__bean.getEntitatID());
-    this.setAccesID(__bean.getAccesID());
-    this.setAccio(__bean.getAccio());
-    this.setElement(__bean.getElement());
     this.setDataEstadistica(__bean.getDataEstadistica());
+    this.setTipus(__bean.getTipus());
+    this.setComptador(__bean.getComptador());
+    this.setPluginID(__bean.getPluginID());
 	}
 
 	public long getEstadisticaID() {
@@ -95,32 +86,11 @@ private static final long serialVersionUID = -2066559243L;
 		this.estadisticaID = _estadisticaID_;
 	};
 
-	public long getEntitatID() {
+	public java.lang.Long getEntitatID() {
 		return(entitatID);
 	};
-	public void setEntitatID(long _entitatID_) {
+	public void setEntitatID(java.lang.Long _entitatID_) {
 		this.entitatID = _entitatID_;
-	};
-
-	public java.lang.Long getAccesID() {
-		return(accesID);
-	};
-	public void setAccesID(java.lang.Long _accesID_) {
-		this.accesID = _accesID_;
-	};
-
-	public int getAccio() {
-		return(accio);
-	};
-	public void setAccio(int _accio_) {
-		this.accio = _accio_;
-	};
-
-	public java.lang.String getElement() {
-		return(element);
-	};
-	public void setElement(java.lang.String _element_) {
-		this.element = _element_;
 	};
 
 	public java.sql.Timestamp getDataEstadistica() {
@@ -128,6 +98,27 @@ private static final long serialVersionUID = -2066559243L;
 	};
 	public void setDataEstadistica(java.sql.Timestamp _dataEstadistica_) {
 		this.dataEstadistica = _dataEstadistica_;
+	};
+
+	public int getTipus() {
+		return(tipus);
+	};
+	public void setTipus(int _tipus_) {
+		this.tipus = _tipus_;
+	};
+
+	public int getComptador() {
+		return(comptador);
+	};
+	public void setComptador(int _comptador_) {
+		this.comptador = _comptador_;
+	};
+
+	public java.lang.Integer getPluginID() {
+		return(pluginID);
+	};
+	public void setPluginID(java.lang.Integer _pluginID_) {
+		this.pluginID = _pluginID_;
 	};
 
 
@@ -149,7 +140,7 @@ private static final long serialVersionUID = -2066559243L;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@ForeignKey(name="car_estadis_entitat_ent_fk")
-	@JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false)
+	@JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = true, insertable=false, updatable=false)
 	private EntitatJPA entitat;
 
 	public EntitatJPA getEntitat() {
@@ -160,21 +151,6 @@ private static final long serialVersionUID = -2066559243L;
     this.entitat = entitat;
   }
 
-// IMP Field:accesid | Table: car_acces | Type: 1  
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="car_estadis_acces_ac_fk")
-	@JoinColumn(name = "accesid", referencedColumnName ="accesID", nullable = true, insertable=false, updatable=false)
-	private AccesJPA acces;
-
-	public AccesJPA getAcces() {
-    return this.acces;
-  }
-
-	public  void setAcces(AccesJPA acces) {
-    this.acces = acces;
-  }
-
 
  // ---------------  STATIC METHODS ------------------
   public static EstadisticaJPA toJPA(Estadistica __bean) {
@@ -182,10 +158,10 @@ private static final long serialVersionUID = -2066559243L;
     EstadisticaJPA __tmp = new EstadisticaJPA();
     __tmp.setEstadisticaID(__bean.getEstadisticaID());
     __tmp.setEntitatID(__bean.getEntitatID());
-    __tmp.setAccesID(__bean.getAccesID());
-    __tmp.setAccio(__bean.getAccio());
-    __tmp.setElement(__bean.getElement());
     __tmp.setDataEstadistica(__bean.getDataEstadistica());
+    __tmp.setTipus(__bean.getTipus());
+    __tmp.setComptador(__bean.getComptador());
+    __tmp.setPluginID(__bean.getPluginID());
 		return __tmp;
 	}
 
@@ -217,10 +193,6 @@ private static final long serialVersionUID = -2066559243L;
     __alreadyCopied.put(__jpa, __tmp);
     // Copia de beans complexes (EXP)
     // Copia de beans complexes (IMP)
-    if(!"AccesJPA".equals(origenJPA) && 
-       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.acces) || org.hibernate.Hibernate.isInitialized(__jpa.getAcces()) ) ) {
-      __tmp.setAcces(AccesJPA.copyJPA(__jpa.getAcces(), __alreadyCopied,"EstadisticaJPA"));
-    }
     if(!"EntitatJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat()) ) ) {
       __tmp.setEntitat(EntitatJPA.copyJPA(__jpa.getEntitat(), __alreadyCopied,"EstadisticaJPA"));

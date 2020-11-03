@@ -19,20 +19,20 @@ public class EstadisticaQueryPath extends org.fundaciobit.genapp.common.query.Qu
     return new LongField(getQueryPath(), EstadisticaFields.ENTITATID);
   }
 
-  public LongField ACCESID() {
-    return new LongField(getQueryPath(), EstadisticaFields.ACCESID);
-  }
-
-  public IntegerField ACCIO() {
-    return new IntegerField(getQueryPath(), EstadisticaFields.ACCIO);
-  }
-
-  public StringField ELEMENT() {
-    return new StringField(getQueryPath(), EstadisticaFields.ELEMENT);
-  }
-
   public TimestampField DATAESTADISTICA() {
     return new TimestampField(getQueryPath(), EstadisticaFields.DATAESTADISTICA);
+  }
+
+  public IntegerField TIPUS() {
+    return new IntegerField(getQueryPath(), EstadisticaFields.TIPUS);
+  }
+
+  public IntegerField COMPTADOR() {
+    return new IntegerField(getQueryPath(), EstadisticaFields.COMPTADOR);
+  }
+
+  public IntegerField PLUGINID() {
+    return new IntegerField(getQueryPath(), EstadisticaFields.PLUGINID);
   }
 
 
@@ -48,14 +48,6 @@ public class EstadisticaQueryPath extends org.fundaciobit.genapp.common.query.Qu
     return new EntitatQueryPath(new QueryPath() {
       public String getQueryPath() {
           return EstadisticaQueryPath.this.getQueryPath() + "entitat" + ".";
-      }
-    });
-  }
-
-  public AccesQueryPath ACCES() {
-    return new AccesQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return EstadisticaQueryPath.this.getQueryPath() + "acces" + ".";
       }
     });
   }

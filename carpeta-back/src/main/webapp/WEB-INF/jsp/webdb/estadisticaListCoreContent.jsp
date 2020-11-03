@@ -37,26 +37,26 @@
           </c:if>
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.ACCESID)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.DATAESTADISTICA)}">
+          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${estadistica.dataEstadistica}" /></td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.TIPUS)}">
           <td>
-          <c:set var="tmp">${estadistica.accesID}</c:set>
+          <c:set var="tmp">${estadistica.tipus}</c:set>
           <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfAccesForAccesID[tmp]}
+          ${__theFilterForm.mapOfValuesForTipus[tmp]}
           </c:if>
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.ACCIO)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.COMPTADOR)}">
           <td>
-          ${estadistica.accio}
+          ${estadistica.comptador}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.ELEMENT)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.PLUGINID)}">
           <td>
-          ${estadistica.element}
+          ${estadistica.pluginID}
           </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.DATAESTADISTICA)}">
-          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${estadistica.dataEstadistica}" /></td>
         </c:if>
 
 

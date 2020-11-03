@@ -6,7 +6,7 @@
         <tr id="estadistica_entitatID_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[EstadisticaFields.ENTITATID])?'estadistica.entitatID':__theForm.labels[EstadisticaFields.ENTITATID]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[EstadisticaFields.ENTITATID])?'estadistica.entitatID':__theForm.labels[EstadisticaFields.ENTITATID]}" />
               <c:if test="${not empty __theForm.help[EstadisticaFields.ENTITATID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EstadisticaFields.ENTITATID]}" ></i>
               </c:if>
@@ -20,83 +20,13 @@
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,EstadisticaFields.ENTITATID)}" >
           <form:select id="estadistica_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-4" path="estadistica.entitatID">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
             <c:forEach items="${__theForm.listOfEntitatForEntitatID}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
           </form:select>
           </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,EstadisticaFields.ACCESID)}">
-        <tr id="estadistica_accesID_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[EstadisticaFields.ACCESID])?'estadistica.accesID':__theForm.labels[EstadisticaFields.ACCESID]}" />
-              <c:if test="${not empty __theForm.help[EstadisticaFields.ACCESID]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[EstadisticaFields.ACCESID]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <form:errors path="estadistica.accesID" cssClass="errorField alert alert-error" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.ACCESID)}" >
-          <form:hidden path="estadistica.accesID"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.estadistica.accesID,__theForm.listOfAccesForAccesID)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,EstadisticaFields.ACCESID)}" >
-          <form:select id="estadistica_accesID"  onchange="if(typeof onChangeAccesID == 'function') {  onChangeAccesID(this); };"  cssClass="form-control col-md-4" path="estadistica.accesID">
-          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
-          <form:option value="" ></form:option>
-            <c:forEach items="${__theForm.listOfAccesForAccesID}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,EstadisticaFields.ACCIO)}">
-        <tr id="estadistica_accio_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[EstadisticaFields.ACCIO])?'estadistica.accio':__theForm.labels[EstadisticaFields.ACCIO]}" /> &nbsp;(*)
-              <c:if test="${not empty __theForm.help[EstadisticaFields.ACCIO]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[EstadisticaFields.ACCIO]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-            <form:errors path="estadistica.accio" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EstadisticaFields.ACCIO)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.ACCIO)? ' uneditable-input' : ''}"   path="estadistica.accio"   />
-
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,EstadisticaFields.ELEMENT)}">
-        <tr id="estadistica_element_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[EstadisticaFields.ELEMENT])?'estadistica.element':__theForm.labels[EstadisticaFields.ELEMENT]}" />
-              <c:if test="${not empty __theForm.help[EstadisticaFields.ELEMENT]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[EstadisticaFields.ELEMENT]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-              <form:errors path="estadistica.element" cssClass="errorField alert alert-error" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;" cssClass="form-control col-md-8" readonly="${ gen:contains(__theForm.readOnlyFields ,EstadisticaFields.ELEMENT)? 'true' : 'false'}" path="estadistica.element"  />
-              <div class="btn-group" style="vertical-align: top;">
-              <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span></button>
-              <ul class="dropdown-menu">
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('estadistica.element'); ta.wrap='off';" >No Wrap</a></li>
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('estadistica.element'); ta.wrap='soft';">Soft Wrap</a></li>
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('estadistica.element'); ta.wrap='hard';">Hard Wrap</a></li>
-              </ul>
-              </div>
            </td>
         </tr>
         </c:if>
@@ -137,6 +67,69 @@
             });
           </script>        </div>
       </div>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EstadisticaFields.TIPUS)}">
+        <tr id="estadistica_tipus_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EstadisticaFields.TIPUS])?'estadistica.tipus':__theForm.labels[EstadisticaFields.TIPUS]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[EstadisticaFields.TIPUS]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EstadisticaFields.TIPUS]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="estadistica.tipus" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.TIPUS)}" >
+          <form:hidden path="estadistica.tipus"/>
+          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.estadistica.tipus,__theForm.listOfValuesForTipus)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,EstadisticaFields.TIPUS)}" >
+          <form:select id="estadistica_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-4" path="estadistica.tipus">
+            <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EstadisticaFields.COMPTADOR)}">
+        <tr id="estadistica_comptador_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EstadisticaFields.COMPTADOR])?'estadistica.comptador':__theForm.labels[EstadisticaFields.COMPTADOR]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[EstadisticaFields.COMPTADOR]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EstadisticaFields.COMPTADOR]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="estadistica.comptador" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EstadisticaFields.COMPTADOR)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.COMPTADOR)? ' uneditable-input' : ''}"   path="estadistica.comptador"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EstadisticaFields.PLUGINID)}">
+        <tr id="estadistica_pluginID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EstadisticaFields.PLUGINID])?'estadistica.pluginID':__theForm.labels[EstadisticaFields.PLUGINID]}" />
+              <c:if test="${not empty __theForm.help[EstadisticaFields.PLUGINID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EstadisticaFields.PLUGINID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="estadistica.pluginID" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EstadisticaFields.PLUGINID)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.PLUGINID)? ' uneditable-input' : ''}"   path="estadistica.pluginID"   />
+
            </td>
         </tr>
         </c:if>

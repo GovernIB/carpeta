@@ -1,15 +1,23 @@
 package es.caib.carpeta.back.controller.webdb;
 
+import es.caib.carpeta.back.form.webdb.EntitatRefList;
+import es.caib.carpeta.back.form.webdb.EstadisticaFilterForm;
+import es.caib.carpeta.back.form.webdb.EstadisticaForm;
+import es.caib.carpeta.back.form.webdb.EstadisticaRefList;
+import es.caib.carpeta.back.validator.webdb.EstadisticaWebValidator;
+import es.caib.carpeta.jpa.EstadisticaJPA;
+import es.caib.carpeta.model.entity.Estadistica;
+import es.caib.carpeta.model.fields.EntitatFields;
+import es.caib.carpeta.model.fields.EstadisticaFields;
 import org.fundaciobit.genapp.common.StringKeyValue;
+import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.i18n.I18NValidationException;
+import org.fundaciobit.genapp.common.query.Field;
+import org.fundaciobit.genapp.common.query.GroupByItem;
+import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.utils.Utils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
-import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.genapp.common.query.GroupByItem;
-import org.fundaciobit.genapp.common.query.Field;
-import org.fundaciobit.genapp.common.query.Where;
-import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.web.validation.ValidationWebUtils;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Controller;
@@ -23,19 +31,9 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
-
-import es.caib.carpeta.back.form.webdb.*;
-import es.caib.carpeta.back.form.webdb.EstadisticaForm;
-
-import es.caib.carpeta.back.validator.webdb.EstadisticaWebValidator;
-
-import es.caib.carpeta.jpa.EstadisticaJPA;
-import es.caib.carpeta.model.entity.Estadistica;
-import es.caib.carpeta.model.fields.*;
 
 /**
  * Controller per gestionar un Estadistica
@@ -61,10 +59,6 @@ public class EstadisticaController
   // References 
   @Autowired
   protected EntitatRefList entitatRefList;
-
-  // References 
-  @Autowired
-  protected AccesRefList accesRefList;
 
   /**
    * Llistat de totes Estadistica
@@ -196,13 +190,13 @@ public class EstadisticaController
       };
     }
 
-    // Field accesID
+    // Field tipus
     {
-      _listSKV = getReferenceListForAccesID(request, mav, filterForm, list, groupByItemsMap, null);
+      _listSKV = getReferenceListForTipus(request, mav, filterForm, list, groupByItemsMap, null);
       _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfAccesForAccesID(_tmp);
-      if (filterForm.getGroupByFields().contains(ACCESID)) {
-        fillValuesToGroupByItems(_tmp, groupByItemsMap, ACCESID, false);
+      filterForm.setMapOfValuesForTipus(_tmp);
+      if (filterForm.getGroupByFields().contains(TIPUS)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, TIPUS, false);
       };
     }
 
@@ -222,7 +216,7 @@ public class EstadisticaController
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
     __mapping.put(ENTITATID, filterForm.getMapOfEntitatForEntitatID());
-    __mapping.put(ACCESID, filterForm.getMapOfAccesForAccesID());
+    __mapping.put(TIPUS, filterForm.getMapOfValuesForTipus());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -280,13 +274,13 @@ public class EstadisticaController
       estadisticaForm.setListOfEntitatForEntitatID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
-    if (estadisticaForm.getListOfAccesForAccesID() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForAccesID(request, mav, estadisticaForm, null);
+    if (estadisticaForm.getListOfValuesForTipus() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForTipus(request, mav, estadisticaForm, null);
 
       if(_listSKV != null && !_listSKV.isEmpty()) { 
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
-      estadisticaForm.setListOfAccesForAccesID(_listSKV);
+      estadisticaForm.setListOfValuesForTipus(_listSKV);
     }
     
   }
@@ -616,6 +610,7 @@ public java.lang.Long stringToPK(String value) {
       // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
       java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
       for (Estadistica _item : list) {
+        if(_item.getEntitatID() == null) { continue; };
         _pkList.add(_item.getEntitatID());
         }
         _w = EntitatFields.ENTITATID.in(_pkList);
@@ -630,43 +625,36 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public List<StringKeyValue> getReferenceListForAccesID(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
        ModelAndView mav, EstadisticaForm estadisticaForm, Where where)  throws I18NException {
-    if (estadisticaForm.isHiddenField(ACCESID)) {
+    if (estadisticaForm.isHiddenField(TIPUS)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
-    Where _where = null;
-    if (estadisticaForm.isReadOnlyField(ACCESID)) {
-      _where = AccesFields.ACCESID.equal(estadisticaForm.getEstadistica().getAccesID());
-    }
-    return getReferenceListForAccesID(request, mav, Where.AND(where, _where));
+    return getReferenceListForTipus(request, mav, where);
   }
 
 
-  public List<StringKeyValue> getReferenceListForAccesID(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
        ModelAndView mav, EstadisticaFilterForm estadisticaFilterForm,
        List<Estadistica> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
-    if (estadisticaFilterForm.isHiddenField(ACCESID)
-      && !estadisticaFilterForm.isGroupByField(ACCESID)) {
+    if (estadisticaFilterForm.isHiddenField(TIPUS)
+      && !estadisticaFilterForm.isGroupByField(TIPUS)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
-    if (!_groupByItemsMap.containsKey(ACCESID)) {
-      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
-      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
-      for (Estadistica _item : list) {
-        if(_item.getAccesID() == null) { continue; };
-        _pkList.add(_item.getAccesID());
-        }
-        _w = AccesFields.ACCESID.in(_pkList);
-      }
-    return getReferenceListForAccesID(request, mav, Where.AND(where,_w));
+    return getReferenceListForTipus(request, mav, Where.AND(where,_w));
   }
 
 
-  public List<StringKeyValue> getReferenceListForAccesID(HttpServletRequest request,
+  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
-    return accesRefList.getReferenceList(AccesFields.ACCESID, where );
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("1" , "1"));
+    __tmp.add(new StringKeyValue("2" , "2"));
+    __tmp.add(new StringKeyValue("3" , "3"));
+    __tmp.add(new StringKeyValue("4" , "4"));
+    __tmp.add(new StringKeyValue("5" , "5"));
+    return __tmp;
   }
 
 

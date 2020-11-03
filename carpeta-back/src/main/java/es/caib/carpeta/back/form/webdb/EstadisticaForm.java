@@ -20,7 +20,7 @@ public class EstadisticaForm extends CarpetaBaseForm {
     super(__toClone);
       this.estadistica = __toClone.estadistica;
     this.listOfEntitatForEntitatID = __toClone.listOfEntitatForEntitatID;
-    this.listOfAccesForAccesID = __toClone.listOfAccesForAccesID;
+    this.listOfValuesForTipus = __toClone.listOfValuesForTipus;
   }
   
   public EstadisticaForm(EstadisticaJPA estadistica, boolean nou) {
@@ -48,14 +48,14 @@ public class EstadisticaForm extends CarpetaBaseForm {
 
 
 
-  private List<StringKeyValue> listOfAccesForAccesID;
+  private List<StringKeyValue> listOfValuesForTipus;
 
-  public List<StringKeyValue> getListOfAccesForAccesID() {
-    return this.listOfAccesForAccesID;
+  public List<StringKeyValue> getListOfValuesForTipus() {
+    return this.listOfValuesForTipus;
   }
 
-  public void setListOfAccesForAccesID(List<StringKeyValue> listOfAccesForAccesID) {
-    this.listOfAccesForAccesID = listOfAccesForAccesID;
+  public void setListOfValuesForTipus(List<StringKeyValue> listOfValuesForTipus) {
+    this.listOfValuesForTipus = listOfValuesForTipus;
   }
 
 
