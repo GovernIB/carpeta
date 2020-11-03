@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+
 /**
  * 
  * @author anadal
@@ -27,6 +28,17 @@ public class SuperAdminController {
     return mav;
     
   }
+  
+  @RequestMapping(value = "/systemproperties")
+  public ModelAndView systemProperties(HttpSession session,
+	      HttpServletRequest request, HttpServletResponse response)
+	      throws Exception {
+	    
+	    ModelAndView mav = new ModelAndView("systemproperties");
+	    return mav;
+	    
+	  }
+  
   
   // TODO XYZ ZZZ Esborrar
   @RequestMapping(value = "/option2")

@@ -67,10 +67,6 @@
     <definition name="usuarioform" extends="common">
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/UsuarioForm.jsp" />
     </definition>
-    
-    <definition name="systemproperties" extends="common">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/common/systemproperties.jsp" />
-    </definition>
 
     <definition name="usuariFormCommon" extends="common">
         <put-attribute name="titol" value="usuari.usuari" />
@@ -268,6 +264,10 @@
 
     <definition name="estadisticaListSuperAdmin" extends="superadmin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/estadisticaList.jsp" />
+    </definition>
+    
+    <definition name="systemproperties" extends="superadmin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/superadmin/systemproperties.jsp" />
     </definition>
     
     
