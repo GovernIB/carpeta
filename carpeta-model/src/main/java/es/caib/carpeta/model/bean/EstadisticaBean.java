@@ -11,11 +11,11 @@ public class EstadisticaBean implements Estadistica {
 private static final long serialVersionUID = 360955862L;
 
 	long estadisticaID;// PK
-	java.lang.Long entitatID;
+	long entitatID;
 	java.sql.Timestamp dataEstadistica;
 	int tipus;
 	int comptador;
-	java.lang.Integer pluginID;
+	java.lang.Long pluginID;
 
 
   /** Constructor Buit */
@@ -23,7 +23,7 @@ private static final long serialVersionUID = 360955862L;
   }
 
   /** Constructor amb tots els camps  */
-  public EstadisticaBean(long estadisticaID , java.lang.Long entitatID , java.sql.Timestamp dataEstadistica , int tipus , int comptador , java.lang.Integer pluginID) {
+  public EstadisticaBean(long estadisticaID , long entitatID , java.sql.Timestamp dataEstadistica , int tipus , int comptador , java.lang.Long pluginID) {
     this.estadisticaID=estadisticaID;
     this.entitatID=entitatID;
     this.dataEstadistica=dataEstadistica;
@@ -32,19 +32,12 @@ private static final long serialVersionUID = 360955862L;
     this.pluginID=pluginID;
 }
   /** Constructor sense valors autoincrementals */
-  public EstadisticaBean(java.lang.Long entitatID , java.sql.Timestamp dataEstadistica , int tipus , int comptador , java.lang.Integer pluginID) {
+  public EstadisticaBean(long entitatID , java.sql.Timestamp dataEstadistica , int tipus , int comptador , java.lang.Long pluginID) {
     this.entitatID=entitatID;
     this.dataEstadistica=dataEstadistica;
     this.tipus=tipus;
     this.comptador=comptador;
     this.pluginID=pluginID;
-}
-  /** Constructor dels valors Not Null */
-  public EstadisticaBean(long estadisticaID , java.sql.Timestamp dataEstadistica , int tipus , int comptador) {
-    this.estadisticaID=estadisticaID;
-    this.dataEstadistica=dataEstadistica;
-    this.tipus=tipus;
-    this.comptador=comptador;
 }
   public EstadisticaBean(Estadistica __bean) {
     this.setEstadisticaID(__bean.getEstadisticaID());
@@ -62,10 +55,10 @@ private static final long serialVersionUID = 360955862L;
 		this.estadisticaID = _estadisticaID_;
 	};
 
-	public java.lang.Long getEntitatID() {
+	public long getEntitatID() {
 		return(entitatID);
 	};
-	public void setEntitatID(java.lang.Long _entitatID_) {
+	public void setEntitatID(long _entitatID_) {
 		this.entitatID = _entitatID_;
 	};
 
@@ -90,10 +83,10 @@ private static final long serialVersionUID = 360955862L;
 		this.comptador = _comptador_;
 	};
 
-	public java.lang.Integer getPluginID() {
+	public java.lang.Long getPluginID() {
 		return(pluginID);
 	};
-	public void setPluginID(java.lang.Integer _pluginID_) {
+	public void setPluginID(java.lang.Long _pluginID_) {
 		this.pluginID = _pluginID_;
 	};
 

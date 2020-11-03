@@ -5,8 +5,8 @@ public interface Estadistica extends org.fundaciobit.genapp.common.IGenAppEntity
 	public long getEstadisticaID();
 	public void setEstadisticaID(long _estadisticaID_);
 
-	public java.lang.Long getEntitatID();
-	public void setEntitatID(java.lang.Long _entitatID_);
+	public long getEntitatID();
+	public void setEntitatID(long _entitatID_);
 
 	public java.sql.Timestamp getDataEstadistica();
 	public void setDataEstadistica(java.sql.Timestamp _dataEstadistica_);
@@ -17,8 +17,8 @@ public interface Estadistica extends org.fundaciobit.genapp.common.IGenAppEntity
 	public int getComptador();
 	public void setComptador(int _comptador_);
 
-	public java.lang.Integer getPluginID();
-	public void setPluginID(java.lang.Integer _pluginID_);
+	public java.lang.Long getPluginID();
+	public void setPluginID(java.lang.Long _pluginID_);
 
 
 

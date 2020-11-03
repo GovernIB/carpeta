@@ -131,24 +131,24 @@ public class EstadisticaFilterForm extends CarpetaBaseFilterForm implements Esta
   }
 
 
-  private java.lang.Integer pluginIDDesde;
+  private java.lang.Long pluginIDDesde;
 
-  public java.lang.Integer getPluginIDDesde() {
+  public java.lang.Long getPluginIDDesde() {
     return this.pluginIDDesde;
   }
 
-  public void setPluginIDDesde(java.lang.Integer pluginIDDesde) {
+  public void setPluginIDDesde(java.lang.Long pluginIDDesde) {
     this.pluginIDDesde = pluginIDDesde;
   }
 
 
-  private java.lang.Integer pluginIDFins;
+  private java.lang.Long pluginIDFins;
 
-  public java.lang.Integer getPluginIDFins() {
+  public java.lang.Long getPluginIDFins() {
     return this.pluginIDFins;
   }
 
-  public void setPluginIDFins(java.lang.Integer pluginIDFins) {
+  public void setPluginIDFins(java.lang.Long pluginIDFins) {
     this.pluginIDFins = pluginIDFins;
   }
 

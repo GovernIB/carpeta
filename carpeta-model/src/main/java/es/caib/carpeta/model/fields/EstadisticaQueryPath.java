@@ -31,8 +31,8 @@ public class EstadisticaQueryPath extends org.fundaciobit.genapp.common.query.Qu
     return new IntegerField(getQueryPath(), EstadisticaFields.COMPTADOR);
   }
 
-  public IntegerField PLUGINID() {
-    return new IntegerField(getQueryPath(), EstadisticaFields.PLUGINID);
+  public LongField PLUGINID() {
+    return new LongField(getQueryPath(), EstadisticaFields.PLUGINID);
   }
 
 

@@ -1,13 +1,14 @@
 
 package es.caib.carpeta.jpa;
-import java.util.*;
+import es.caib.carpeta.model.dao.IEstadisticaManager;
+import es.caib.carpeta.model.entity.Estadistica;
+import es.caib.carpeta.model.fields.EstadisticaFields;
+import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.TableName;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import es.caib.carpeta.model.entity.*;
-import es.caib.carpeta.model.fields.*;
-import es.caib.carpeta.model.dao.*;
-import org.fundaciobit.genapp.common.query.TableName;
-import org.fundaciobit.genapp.common.i18n.I18NException;
+import java.util.List;
 
 
 public class EstadisticaJPAManager
@@ -58,7 +59,7 @@ public class EstadisticaJPAManager
 		return list.toArray(new Estadistica[list.size()]);
 	};
 
-	public synchronized Estadistica create( java.lang.Long _entitatID_, java.sql.Timestamp _dataEstadistica_, int _tipus_, int _comptador_, java.lang.Integer _pluginID_) throws I18NException {
+	public synchronized Estadistica create( long _entitatID_, java.sql.Timestamp _dataEstadistica_, int _tipus_, int _comptador_, java.lang.Long _pluginID_) throws I18NException {
 		EstadisticaJPA __bean =  new EstadisticaJPA(_entitatID_,_dataEstadistica_,_tipus_,_comptador_,_pluginID_);
 		return create(__bean);
 	}

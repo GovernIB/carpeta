@@ -610,7 +610,6 @@ public java.lang.Long stringToPK(String value) {
       // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
       java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
       for (Estadistica _item : list) {
-        if(_item.getEntitatID() == null) { continue; };
         _pkList.add(_item.getEntitatID());
         }
         _w = EntitatFields.ENTITATID.in(_pkList);
