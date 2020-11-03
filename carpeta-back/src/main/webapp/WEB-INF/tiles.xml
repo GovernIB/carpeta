@@ -252,7 +252,6 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/common/plugin_contenidor.jsp" />
     </definition>
 
-
     <definition name="logCarpetaFormSuperAdmin" extends="superadmin">
         <put-attribute name="titol" value="logCarpeta.logCarpeta" />
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/logCarpetaForm.jsp" />
@@ -260,6 +259,15 @@
 
     <definition name="logCarpetaListSuperAdmin" extends="superadmin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/logCarpetaList.jsp" />
+    </definition>
+
+    <definition name="estadisticaFormSuperAdmin" extends="superadmin">
+        <put-attribute name="titol" value="estadistica.estadistica" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/estadisticaForm.jsp" />
+    </definition>
+
+    <definition name="estadisticaListSuperAdmin" extends="superadmin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/estadisticaList.jsp" />
     </definition>
     
     
