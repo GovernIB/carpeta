@@ -25,8 +25,8 @@ private static final long serialVersionUID = -2066559243L;
 	long estadisticaID;
 
 	@Index(name="car_estadistica_entitatid_fk_i")
-	@Column(name="entitatid",nullable = false,length = 19)
-	long entitatID;
+	@Column(name="entitatid",length = 19)
+	java.lang.Long entitatID;
 
 	@Column(name="dataestadistica",nullable = false,length = 29,precision = 6)
 	java.sql.Timestamp dataEstadistica;
@@ -47,7 +47,7 @@ private static final long serialVersionUID = -2066559243L;
   }
 
   /** Constructor amb tots els camps  */
-  public EstadisticaJPA(long estadisticaID , long entitatID , java.sql.Timestamp dataEstadistica , int tipus , int comptador , java.lang.Long pluginID) {
+  public EstadisticaJPA(long estadisticaID , java.lang.Long entitatID , java.sql.Timestamp dataEstadistica , int tipus , int comptador , java.lang.Long pluginID) {
     this.estadisticaID=estadisticaID;
     this.entitatID=entitatID;
     this.dataEstadistica=dataEstadistica;
@@ -56,12 +56,19 @@ private static final long serialVersionUID = -2066559243L;
     this.pluginID=pluginID;
 }
   /** Constructor sense valors autoincrementals */
-  public EstadisticaJPA(long entitatID , java.sql.Timestamp dataEstadistica , int tipus , int comptador , java.lang.Long pluginID) {
+  public EstadisticaJPA(java.lang.Long entitatID , java.sql.Timestamp dataEstadistica , int tipus , int comptador , java.lang.Long pluginID) {
     this.entitatID=entitatID;
     this.dataEstadistica=dataEstadistica;
     this.tipus=tipus;
     this.comptador=comptador;
     this.pluginID=pluginID;
+}
+  /** Constructor dels valors Not Null */
+  public EstadisticaJPA(long estadisticaID , java.sql.Timestamp dataEstadistica , int tipus , int comptador) {
+    this.estadisticaID=estadisticaID;
+    this.dataEstadistica=dataEstadistica;
+    this.tipus=tipus;
+    this.comptador=comptador;
 }
   public EstadisticaJPA(Estadistica __bean) {
     this.setEstadisticaID(__bean.getEstadisticaID());
@@ -79,10 +86,10 @@ private static final long serialVersionUID = -2066559243L;
 		this.estadisticaID = _estadisticaID_;
 	};
 
-	public long getEntitatID() {
+	public java.lang.Long getEntitatID() {
 		return(entitatID);
 	};
-	public void setEntitatID(long _entitatID_) {
+	public void setEntitatID(java.lang.Long _entitatID_) {
 		this.entitatID = _entitatID_;
 	};
 
@@ -133,7 +140,7 @@ private static final long serialVersionUID = -2066559243L;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@ForeignKey(name="car_estadis_entitat_ent_fk")
-	@JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false)
+	@JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = true, insertable=false, updatable=false)
 	private EntitatJPA entitat;
 
 	public EntitatJPA getEntitat() {
