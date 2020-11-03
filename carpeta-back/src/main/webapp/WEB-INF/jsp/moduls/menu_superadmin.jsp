@@ -50,11 +50,17 @@
 
 <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
+<a class="dropdown-item" href="<c:url value="/superadmin/systemproperties"/>"> <span
+    style="${(fn:contains(url, '/superadmin/systemproperties'))? " font-weight:bold;" : ""}"><spring:message
+        code="superadmin.systemproperties" /> </span>
+</a>
+
 <a class="dropdown-item"
    href="<c:url value="/superadmin/logCarpeta/list"/>"> <span
         style="${(fn:contains(url, '/superadmin/logCarpeta'))? " font-weight:bold;" : ""}"><spring:message
         code="logCarpeta.logCarpeta.plural" /> </span>
 </a>
+
 <%--
 <hr style="margin-top: 6px; margin-bottom: 6px;" />
 

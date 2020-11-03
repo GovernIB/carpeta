@@ -4,10 +4,3 @@
 <a class="dropdown-item" href="<c:url value="/common/principal.html"/>">
   <span style="${(fn:contains(url, 'principal'))? "font-weight: bold;" : ""}">Pàgina Inicial</span>
 </a>
-
-
-<hr/>
-
-<a class="dropdown-item" href="<c:url value="/common/systemproperties"/>"> <span
-	style="${(fn:contains(url, 'option1'))? " font-weight:bold;" : ""}">SystemProperties</span>
-</a>
