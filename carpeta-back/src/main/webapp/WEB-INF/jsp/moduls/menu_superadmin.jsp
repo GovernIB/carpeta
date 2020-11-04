@@ -61,6 +61,12 @@
         code="logCarpeta.logCarpeta.plural" /> </span>
 </a>
 
+<a class="dropdown-item"
+   href="<c:url value="/superadmin/estadistica/list"/>"> <span
+        style="${(fn:contains(url, '/superadmin/estadistica'))? " font-weight:bold;" : ""}"><spring:message
+        code="estadistica.estadistica.plural" /> </span>
+</a>
+
 <%--
 <hr style="margin-top: 6px; margin-bottom: 6px;" />
 

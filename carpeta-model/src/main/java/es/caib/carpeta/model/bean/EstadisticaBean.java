@@ -11,7 +11,7 @@ public class EstadisticaBean implements Estadistica {
 private static final long serialVersionUID = 360955862L;
 
 	long estadisticaID;// PK
-	long entitatID;
+	java.lang.Long entitatID;
 	java.sql.Timestamp dataEstadistica;
 	int tipus;
 	int comptador;
@@ -23,7 +23,7 @@ private static final long serialVersionUID = 360955862L;
   }
 
   /** Constructor amb tots els camps  */
-  public EstadisticaBean(long estadisticaID , long entitatID , java.sql.Timestamp dataEstadistica , int tipus , int comptador , java.lang.Long pluginID) {
+  public EstadisticaBean(long estadisticaID , java.lang.Long entitatID , java.sql.Timestamp dataEstadistica , int tipus , int comptador , java.lang.Long pluginID) {
     this.estadisticaID=estadisticaID;
     this.entitatID=entitatID;
     this.dataEstadistica=dataEstadistica;
@@ -32,12 +32,19 @@ private static final long serialVersionUID = 360955862L;
     this.pluginID=pluginID;
 }
   /** Constructor sense valors autoincrementals */
-  public EstadisticaBean(long entitatID , java.sql.Timestamp dataEstadistica , int tipus , int comptador , java.lang.Long pluginID) {
+  public EstadisticaBean(java.lang.Long entitatID , java.sql.Timestamp dataEstadistica , int tipus , int comptador , java.lang.Long pluginID) {
     this.entitatID=entitatID;
     this.dataEstadistica=dataEstadistica;
     this.tipus=tipus;
     this.comptador=comptador;
     this.pluginID=pluginID;
+}
+  /** Constructor dels valors Not Null */
+  public EstadisticaBean(long estadisticaID , java.sql.Timestamp dataEstadistica , int tipus , int comptador) {
+    this.estadisticaID=estadisticaID;
+    this.dataEstadistica=dataEstadistica;
+    this.tipus=tipus;
+    this.comptador=comptador;
 }
   public EstadisticaBean(Estadistica __bean) {
     this.setEstadisticaID(__bean.getEstadisticaID());
@@ -55,10 +62,10 @@ private static final long serialVersionUID = 360955862L;
 		this.estadisticaID = _estadisticaID_;
 	};
 
-	public long getEntitatID() {
+	public java.lang.Long getEntitatID() {
 		return(entitatID);
 	};
-	public void setEntitatID(long _entitatID_) {
+	public void setEntitatID(java.lang.Long _entitatID_) {
 		this.entitatID = _entitatID_;
 	};
 

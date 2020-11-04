@@ -102,4 +102,19 @@ public interface Constants {
        ESTAT_LOG_UNKNOWN
     };
 
+
+    /* Tipus Estadística */
+    public static final int TIPUS_ESTAD_ENTRADA_BACK = 1;
+    public static final int TIPUS_ESTAD_ENTRADA_FRONT_NO_AUTENTICAT = 2;
+    public static final int TIPUS_ESTAD_ENTRADA_FRONT_AUTENTICAT = 3;
+    public static final int TIPUS_ESTAD_ACCES_PLUGIN = 4;
+
+
+    public static final int[] TIPUS_ESTADISTICA_ALL = {
+       TIPUS_ESTAD_ENTRADA_BACK,
+       TIPUS_ESTAD_ENTRADA_FRONT_NO_AUTENTICAT,
+       TIPUS_ESTAD_ENTRADA_FRONT_AUTENTICAT,
+       TIPUS_ESTAD_ACCES_PLUGIN
+    };
+
 }

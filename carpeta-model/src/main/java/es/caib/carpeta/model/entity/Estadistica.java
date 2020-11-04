@@ -5,8 +5,8 @@ public interface Estadistica extends org.fundaciobit.genapp.common.IGenAppEntity
 	public long getEstadisticaID();
 	public void setEstadisticaID(long _estadisticaID_);
 
-	public long getEntitatID();
-	public void setEntitatID(long _entitatID_);
+	public java.lang.Long getEntitatID();
+	public void setEntitatID(java.lang.Long _entitatID_);
 
 	public java.sql.Timestamp getDataEstadistica();
 	public void setDataEstadistica(java.sql.Timestamp _dataEstadistica_);
