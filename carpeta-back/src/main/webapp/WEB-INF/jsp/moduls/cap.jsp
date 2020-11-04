@@ -187,7 +187,7 @@
 						<div class="dropdown-divider"></div>
 
 						<a class="dropdown-item"
-							href="<c:url value="/common/usuari"></c:url><%=LoginInfo.getInstance().getUsuariPersona().getUsuariID()%>/edit"> <i
+							href="<c:url value="/common/usuari/"></c:url><%=LoginInfo.getInstance().getUsuariPersona().getUsuariID()%>/edit"> <i
 							class="fas fa-cog"></i> <fmt:message key="configuracio" />
 						</a> <a class="dropdown-item" href="<c:url value="/logout"></c:url>">
 							<i class="fas fa-sign-out-alt"></i> <fmt:message key="sortir" />
