@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import i18n from './i18n';
 import { withTranslation } from 'react-i18next';
+import ReactGA from 'react-ga';
+ReactGA.initialize(''); // Aqui pones tu identificador de cuenta de Google Analytics
 
 class App extends Component {
 

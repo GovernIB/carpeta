@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
 import i18n from 'i18next';
+import ReactGA from 'react-ga';
 
 class Inici extends Component {
 
@@ -23,6 +24,10 @@ class Inici extends Component {
 
 	error(missatge) {
 		alert(missatge);
+	}
+
+	componentDidMount() {
+		ReactGA.pageview(window.location.href);
 	}
 
 	render() {
