@@ -5,16 +5,15 @@ import es.caib.carpeta.ejb.LogCarpetaEJB;
 import es.caib.carpeta.jpa.LogCarpetaJPA;
 import es.caib.carpeta.model.entity.LogCarpeta;
 import es.caib.carpeta.model.fields.LogCarpetaFields;
+
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
-
-import javax.ejb.Stateless;
-import javax.validation.constraints.NotNull;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import javax.ejb.Stateless;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by Fundació BIT.
@@ -26,7 +25,7 @@ import java.util.List;
 public class LogCarpetaLogicaEJB extends LogCarpetaEJB implements LogCarpetaLogicaLocal {
 
 
-
+    @Override
     public List<LogCarpetaJPA> findByEntidadByTipus(@NotNull Long entitatId, @NotNull Integer tipus)throws I18NException {
 
         List<LogCarpeta> logs = select(Where.AND(LogCarpetaFields.ENTITATID.equal(entitatId),
