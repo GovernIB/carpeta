@@ -7,11 +7,18 @@ import es.caib.carpeta.ejb.PropietatGlobalLocal;
 import es.caib.carpeta.jpa.EntitatJPA;
 import es.caib.carpeta.jpa.UsuariEntitatJPA;
 import es.caib.carpeta.jpa.UsuariJPA;
+import es.caib.carpeta.logic.EstadisticaLogicaLocal;
 import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
 import es.caib.carpeta.logic.UsuariEntitatLogicaLocal;
 import es.caib.carpeta.logic.UsuariLogicaLocal;
 import es.caib.carpeta.logic.utils.EjbManager;
 import es.caib.carpeta.model.fields.EntitatFields;
+import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_ERROR;
+import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_ESTAD_ENTRADA_BACK;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_BACK;
+
+
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NTranslation;
@@ -27,8 +34,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-
-import static es.caib.carpeta.commons.utils.Constants.*;
 
 /**
  *
@@ -59,9 +64,11 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 		Authentication au = sc.getAuthentication();
 
 		LogCarpetaLogicaLocal logCarpetaEjb;
+		EstadisticaLogicaLocal estadisticaEjb;
 
 		try {
 			logCarpetaEjb = EjbManager.getLogCarpetaLogicaEJB();
+			estadisticaEjb = EjbManager.getEstadisticaLogicaEJB();
 		} catch (I18NException e) {
 			// TODO traduccio
 			throw new LoginException("Error carregant LogCarpetaLogicaEJB " + e.getMessage(), e);
@@ -418,11 +425,11 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
 
 		try {
+			estadisticaEjb.crearActualizarEstadistica(null,TIPUS_ESTAD_ENTRADA_BACK, null);
 			logCarpetaEjb.crearLog("Autenticació al back - Usuari: " + username , ESTAT_LOG_OK,TIPUS_LOG_AUTENTICACIO_BACK, System.currentTimeMillis() - temps ,null,"",peticio.toString(),entitatIDActual,null);
 		}catch (I18NException ie){
-			throw new LoginException("Error creant el log");
+			throw new LoginException("Error creant el log o l'estadistica");
 		}
-
 
 
 		if (isDebug) {
