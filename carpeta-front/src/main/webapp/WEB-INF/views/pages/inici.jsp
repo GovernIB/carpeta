@@ -22,6 +22,7 @@
 	<script src="${pageContext.request.contextPath}/src/assets/js/moment-with-locales.min.js"></script>
 	<script src="${pageContext.request.contextPath}/src/assets/js/bootstrap-datetimepicker.js"></script>
 	<!-- Necessari per les cookies -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/src/assets/js/jquery.slimscroll.min.js"></script>
 	<script src="${pageContext.request.contextPath}/src/assets/js/modernizr.js"></script>
 	<!-- Del Goib -->
 	<script src="${pageContext.request.contextPath}/src/assets/js/globales.js" type="text/javascript"></script>
@@ -31,8 +32,6 @@
 	<script src="${pageContext.request.contextPath}/src/assets/js/jquery.dataTables.min.js" type="text/javascript"></script>
 	<script src="${pageContext.request.contextPath}/src/assets/js/datetime-moment.js" type="text/javascript"></script>
 
-	<!-- Scripts per Carpeta-->
-	<!--script type="text/javascript" src="src/assets/js/carpeta.js"></script-->
 	<!-- Scripts per Components React -->
 	<script src="${pageContext.request.contextPath}/src/utils/carpeta_react.js" type="text/javascript"></script>
 
