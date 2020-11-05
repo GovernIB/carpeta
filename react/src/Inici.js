@@ -4,6 +4,11 @@ import i18n from 'i18next';
 
 class Inici extends Component {
 
+	componentWillMount() {
+		var canviarLang = sessionStorage.getItem("langActual");
+		i18n.changeLanguage(canviarLang);
+	}
+
 	infoHtml(missatge, pluginID) {
 		alert(missatge);
 		var contingut = newPluginHtml('contingut', '1', pluginID);

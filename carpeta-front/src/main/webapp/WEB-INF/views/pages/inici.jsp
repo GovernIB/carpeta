@@ -131,7 +131,7 @@
 
 
 		<script type="text/javascript">
-			sessionStorage.clear();
+			// sessionStorage.clear();
 			sessionStorage.setItem('plugins', JSON.stringify(${plugins}));
 		</script>
 

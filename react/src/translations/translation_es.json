@@ -9,10 +9,10 @@
 	"menuDirectori": "Directorio",
 	"menuTorna": "Vuelve",
 	"menuMenu": "Menú",
-	"menuRecercaSortir": "Salir",
-	"menuRecercaTramits": "Trámites sin enviar",
-	"menuRecercaRegistres": "Mis registros",
-	"menuRecercaNotificacions": "Mis notificaciones",
+	"menuSortir": "Salir",
+	"menuTramits": "Trámites sin enviar",
+	"menuRegistres": "Mis registros",
+	"menuNotificacions": "Mis notificaciones",
 
 
 	"menuLateralGovern": "Govern Illes Balears",

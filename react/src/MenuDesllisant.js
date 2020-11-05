@@ -1,6 +1,7 @@
 import React, { Component, Suspense } from 'react';
 import { withTranslation } from 'react-i18next';
 import i18n from 'i18next';
+import axios from 'axios'
 
 class MenuDesllisant extends Component {
 
@@ -18,6 +19,16 @@ class MenuDesllisant extends Component {
 
 	error(missatge) {
 		alert(missatge);
+	}
+
+	componentDidMount() {
+		i18n.on('languageChanged', function(lng) {
+			sessionStorage.setItem("langActual", lng);
+			var url = window.location.href + `webui/canviarIdioma/${lng}`;
+			axios.get(url).then(res => {
+				const lang = res.data;
+			})
+		});
 	}
 
 	render() {

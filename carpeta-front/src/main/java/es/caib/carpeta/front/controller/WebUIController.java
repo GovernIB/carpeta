@@ -15,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -314,12 +316,9 @@ public class WebUIController extends CommonFrontController {
     public void canviarIdiomaServidor(@PathVariable("idioma") String idioma, HttpServletRequest request, HttpServletResponse response) {
 
         try {
-            String lang = LocaleContextHolder.getLocale().getLanguage();
-            log.info("teníem el llenguatge: " + lang);
-
-            LocaleContextHolder.setLocale(new Locale(idioma));
-            log.info("ARA TENIM el llenguatge: " + LocaleContextHolder.getLocale().getLanguage());
-
+            Locale idiomaFinal = new Locale(idioma);
+            LocaleContextHolder.setLocale(idiomaFinal);
+            WebUtils.setSessionAttribute(request, SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, idiomaFinal);
         } catch (Throwable e) {
             processException(e, response);
         }
