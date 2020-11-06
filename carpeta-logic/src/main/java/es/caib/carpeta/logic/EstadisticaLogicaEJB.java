@@ -2,13 +2,14 @@ package es.caib.carpeta.logic;
 
 import es.caib.carpeta.ejb.EstadisticaEJB;
 import es.caib.carpeta.jpa.EstadisticaJPA;
+import es.caib.carpeta.logic.utils.LogicUtils;
 import es.caib.carpeta.model.entity.Estadistica;
 import es.caib.carpeta.model.fields.EstadisticaFields;
 
+import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.Where;
 import java.sql.Timestamp;
 import java.util.*;
-
-import org.fundaciobit.genapp.common.i18n.I18NException;
 import javax.ejb.Stateless;
 import javax.validation.constraints.NotNull;
 
@@ -23,9 +24,24 @@ public class EstadisticaLogicaEJB extends EstadisticaEJB implements EstadisticaL
 
 
     @Override
-    public List<EstadisticaJPA> findByTipus(@NotNull Integer tipus)throws I18NException {
+    public List<EstadisticaJPA> findEstadistica(Integer tipus, Long entitatID, Date data, Long pluginID)throws I18NException {
 
-        List<Estadistica> estadisticas = select(EstadisticaFields.TIPUS.equal(tipus)); ;
+        Where w = null;
+        if(tipus != null){
+            w = Where.AND(w,EstadisticaFields.TIPUS.equal(tipus));
+        }
+        if(entitatID!= null){
+            w = Where.AND(w,EstadisticaFields.ENTITATID.equal(entitatID));
+        }
+        if(data != null){
+            w = Where.AND(w,EstadisticaFields.DATAESTADISTICA.equal(new Timestamp(LogicUtils.llevarHoraData(data).getTime())));
+        }
+        if(pluginID != null){
+            w = Where.AND(w,EstadisticaFields.PLUGINID.equal(pluginID));
+        }
+
+
+        List<Estadistica> estadisticas = select(w); ;
 
         if (estadisticas == null || estadisticas.size() == 0) {
             return null;
@@ -42,47 +58,33 @@ public class EstadisticaLogicaEJB extends EstadisticaEJB implements EstadisticaL
     }
 
     @Override
-    public void crearActualizarEstadistica(Long entitatID, @NotNull int tipus, Long pluginID) throws I18NException {
+    public void crearEstadistica(Long entitatID, @NotNull int tipus, Long pluginID) throws I18NException {
 
         EstadisticaJPA estadisticaJPA = new EstadisticaJPA();
 
-        List<EstadisticaJPA> estadisticas = findByTipus(tipus);
 
-        if(estadisticas != null && !estadisticas.isEmpty()){ // Si ja està creada
-            estadisticaJPA = estadisticas.get(0);
+        estadisticaJPA.setDataEstadistica(new Timestamp(LogicUtils.novaDataSenseHora().getTime()));
+        estadisticaJPA.setComptador(1);
+        estadisticaJPA.setTipus(tipus);
+        estadisticaJPA.setEntitatID(entitatID);
+        estadisticaJPA.setPluginID(pluginID);
 
-            incrementarComptador(estadisticaJPA);
-        }else{
-            estadisticaJPA.setDataEstadistica(new Timestamp(dataSenseHora().getTime()));
-            estadisticaJPA.setComptador(1);
-            estadisticaJPA.setTipus(tipus);
-            estadisticaJPA.setEntitatID(entitatID);
-            estadisticaJPA.setPluginID(pluginID);
+        create(estadisticaJPA);
 
-            create(estadisticaJPA);
-        }
 
     }
 
 
-    private void incrementarComptador(@NotNull EstadisticaJPA estadisticaJPA) throws I18NException{
+
+
+    @Override
+    public void incrementarComptador(@NotNull EstadisticaJPA estadisticaJPA) throws I18NException{
 
         estadisticaJPA.setComptador(estadisticaJPA.getComptador() + 1);
 
-    }
-
-
-
-    private Date dataSenseHora(){
-
-        Date date = new Date();                      // timestamp now
-        Calendar cal = Calendar.getInstance();       // get calendar instance
-        cal.setTime(date);                           // set cal to date
-        cal.set(Calendar.HOUR_OF_DAY, 0);            // set hour to midnight
-        cal.set(Calendar.MINUTE, 0);                 // set minute in hour
-        cal.set(Calendar.SECOND, 0);                 // set second in minute
-        cal.set(Calendar.MILLISECOND, 0);            // set millis in second
-        return  cal.getTime();
+        update(estadisticaJPA);
 
     }
+
+
 }

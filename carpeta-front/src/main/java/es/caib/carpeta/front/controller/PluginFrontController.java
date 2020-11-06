@@ -1,13 +1,19 @@
 package es.caib.carpeta.front.controller;
 
-import com.google.gson.Gson;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.carpeta.hibernate.HibernateFileUtil;
-import es.caib.carpeta.jpa.PluginJPA;
+import es.caib.carpeta.jpa.EstadisticaJPA;
+import es.caib.carpeta.logic.EstadisticaLogicaLocal;
 import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
 import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
 import es.caib.carpeta.logic.utils.PluginInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
+import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_ESTAD_ACCES_PLUGIN;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_PLUGIN_FRONT;
+
+import com.google.gson.Gson;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -18,18 +24,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
+import java.net.URL;
+import java.util.*;
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Locale;
-
-import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_PLUGIN_FRONT;
 
 
 /**
@@ -47,6 +46,9 @@ public class PluginFrontController extends CommonFrontController {
 
     @EJB(mappedName = LogCarpetaLogicaLocal.JNDI_NAME)
     protected LogCarpetaLogicaLocal logCarpetaLogicaEjb;
+
+    @EJB(mappedName = EstadisticaLogicaLocal.JNDI_NAME)
+    protected EstadisticaLogicaLocal estadisticaLogicaEjb;
 
     
     protected final Log log = LogFactory.getLog(getClass());
@@ -149,6 +151,17 @@ public class PluginFrontController extends CommonFrontController {
         peticio.append("classe: ").append(getClass().getName()).append(System.getProperty("line.separator"));
 
         logCarpetaLogicaEjb.crearLog("Executat plugin des del Front per "+ administrationID, ESTAT_LOG_OK,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),null, Long.parseLong(pluginID));
+
+        //CREAM/ACTUALITZAM ESTADISTICA
+        List<EstadisticaJPA> estadisticas = estadisticaLogicaEjb.findEstadistica(TIPUS_ESTAD_ACCES_PLUGIN,null,new Date(),Long.parseLong(pluginID));
+
+        if(estadisticas != null && !estadisticas.isEmpty()) {
+
+            estadisticaLogicaEjb.incrementarComptador(estadisticas.get(0));
+        }else{
+            estadisticaLogicaEjb.crearEstadistica(null, TIPUS_ESTAD_ACCES_PLUGIN,Long.parseLong(pluginID));
+        }
+
 
         ModelAndView mav = new ModelAndView(view);
         // mav.addObject("signaturesSetID", signaturesSetID);
