@@ -1,4 +1,4 @@
--- 02/11/2020 issue #211
+﻿-- 02/11/2020 Revisió i adaptació de l'estructura de dades per soportar la funcionalitat d'Estadistiques #211
 
 ALTER TABLE public.car_estadistica
   DROP COLUMN accesid;
