@@ -5,6 +5,7 @@ import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.ejb.EntitatLocal;
 import es.caib.carpeta.ejb.PropietatGlobalLocal;
 import es.caib.carpeta.jpa.EntitatJPA;
+import es.caib.carpeta.jpa.EstadisticaJPA;
 import es.caib.carpeta.jpa.UsuariEntitatJPA;
 import es.caib.carpeta.jpa.UsuariJPA;
 import es.caib.carpeta.logic.EstadisticaLogicaLocal;
@@ -17,7 +18,6 @@ import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_ERROR;
 import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_ESTAD_ENTRADA_BACK;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_BACK;
-
 
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -32,7 +32,6 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
-
 import java.util.*;
 
 /**
@@ -425,7 +424,17 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
 
 		try {
-			estadisticaEjb.crearActualizarEstadistica(null,TIPUS_ESTAD_ENTRADA_BACK, null);
+
+			//CREAM/ACTUALITZAM ESTADISTICA
+			List<EstadisticaJPA> estadisticas = estadisticaEjb.findEstadistica(TIPUS_ESTAD_ENTRADA_BACK,null,new Date(),null);
+
+			if(estadisticas != null && !estadisticas.isEmpty()) {
+
+				estadisticaEjb.incrementarComptador(estadisticas.get(0));
+			}else{
+				estadisticaEjb.crearEstadistica(null, TIPUS_ESTAD_ENTRADA_BACK,null);
+			}
+			//CREAM LOG
 			logCarpetaEjb.crearLog("Autenticació al back - Usuari: " + username , ESTAT_LOG_OK,TIPUS_LOG_AUTENTICACIO_BACK, System.currentTimeMillis() - temps ,null,"",peticio.toString(),entitatIDActual,null);
 		}catch (I18NException ie){
 			throw new LoginException("Error creant el log o l'estadistica");
