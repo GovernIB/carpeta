@@ -29,17 +29,6 @@
           ${estadistica.estadisticaID}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.ENTITATID)}">
-          <td>
-          <c:set var="tmp">${estadistica.entitatID}</c:set>
-          <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfEntitatForEntitatID[tmp]}
-          </c:if>
-          </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.DATAESTADISTICA)}">
-          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${estadistica.dataEstadistica}" /></td>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.TIPUS)}">
           <td>
           <c:set var="tmp">${estadistica.tipus}</c:set>
@@ -48,14 +37,28 @@
           </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.DATAESTADISTICA)}">
+          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${estadistica.dataEstadistica}" /></td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.PLUGINID)}">
+          <td>
+          <c:set var="tmp">${estadistica.pluginID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForPluginID[tmp]}
+          </c:if>
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.COMPTADOR)}">
           <td>
           ${estadistica.comptador}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.PLUGINID)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.ENTITATID)}">
           <td>
-          ${estadistica.pluginID}
+          <c:set var="tmp">${estadistica.entitatID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfEntitatForEntitatID[tmp]}
+          </c:if>
           </td>
         </c:if>
 

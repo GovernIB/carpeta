@@ -15,24 +15,24 @@ public class EstadisticaQueryPath extends org.fundaciobit.genapp.common.query.Qu
     return new LongField(getQueryPath(), EstadisticaFields.ESTADISTICAID);
   }
 
-  public LongField ENTITATID() {
-    return new LongField(getQueryPath(), EstadisticaFields.ENTITATID);
+  public IntegerField TIPUS() {
+    return new IntegerField(getQueryPath(), EstadisticaFields.TIPUS);
   }
 
   public TimestampField DATAESTADISTICA() {
     return new TimestampField(getQueryPath(), EstadisticaFields.DATAESTADISTICA);
   }
 
-  public IntegerField TIPUS() {
-    return new IntegerField(getQueryPath(), EstadisticaFields.TIPUS);
+  public LongField PLUGINID() {
+    return new LongField(getQueryPath(), EstadisticaFields.PLUGINID);
   }
 
   public IntegerField COMPTADOR() {
     return new IntegerField(getQueryPath(), EstadisticaFields.COMPTADOR);
   }
 
-  public LongField PLUGINID() {
-    return new LongField(getQueryPath(), EstadisticaFields.PLUGINID);
+  public LongField ENTITATID() {
+    return new LongField(getQueryPath(), EstadisticaFields.ENTITATID);
   }
 
 

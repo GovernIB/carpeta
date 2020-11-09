@@ -68,19 +68,19 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EstadisticaFields.ENTITATID)}">
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EstadisticaFields.TIPUS)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="estadistica.entitatID" />:</span>
+              <span class="add-on"><fmt:message key="estadistica.tipus" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="entitatIDDesde" />
+              <form:input cssClass="input-append input-small" path="tipusDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="entitatIDFins" />
+              <form:input cssClass="input-append input-small search-query" path="tipusFins" />
 
             </div>
 
@@ -132,19 +132,19 @@
 
     
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EstadisticaFields.TIPUS)}">
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EstadisticaFields.PLUGINID)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="estadistica.tipus" />:</span>
+              <span class="add-on"><fmt:message key="estadistica.pluginID" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="tipusDesde" />
+              <form:input cssClass="input-append input-small" path="pluginIDDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="tipusFins" />
+              <form:input cssClass="input-append input-small search-query" path="pluginIDFins" />
 
             </div>
 
@@ -168,19 +168,19 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EstadisticaFields.PLUGINID)}">
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EstadisticaFields.ENTITATID)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="estadistica.pluginID" />:</span>
+              <span class="add-on"><fmt:message key="estadistica.entitatID" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="pluginIDDesde" />
+              <form:input cssClass="input-append input-small" path="entitatIDDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="pluginIDFins" />
+              <form:input cssClass="input-append input-small search-query" path="entitatIDFins" />
 
             </div>
 

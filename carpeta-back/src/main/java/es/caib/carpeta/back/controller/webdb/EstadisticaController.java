@@ -182,16 +182,6 @@ public class EstadisticaController
     Map<String, String> _tmp;
     List<StringKeyValue> _listSKV;
 
-    // Field entitatID
-    {
-      _listSKV = getReferenceListForEntitatID(request, mav, filterForm, list, groupByItemsMap, null);
-      _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfEntitatForEntitatID(_tmp);
-      if (filterForm.getGroupByFields().contains(ENTITATID)) {
-        fillValuesToGroupByItems(_tmp, groupByItemsMap, ENTITATID, false);
-      };
-    }
-
     // Field tipus
     {
       _listSKV = getReferenceListForTipus(request, mav, filterForm, list, groupByItemsMap, null);
@@ -199,6 +189,26 @@ public class EstadisticaController
       filterForm.setMapOfValuesForTipus(_tmp);
       if (filterForm.getGroupByFields().contains(TIPUS)) {
         fillValuesToGroupByItems(_tmp, groupByItemsMap, TIPUS, false);
+      };
+    }
+
+    // Field pluginID
+    {
+      _listSKV = getReferenceListForPluginID(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForPluginID(_tmp);
+      if (filterForm.getGroupByFields().contains(PLUGINID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, PLUGINID, false);
+      };
+    }
+
+    // Field entitatID
+    {
+      _listSKV = getReferenceListForEntitatID(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfEntitatForEntitatID(_tmp);
+      if (filterForm.getGroupByFields().contains(ENTITATID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, ENTITATID, false);
       };
     }
 
@@ -217,8 +227,9 @@ public class EstadisticaController
 
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
-    __mapping.put(ENTITATID, filterForm.getMapOfEntitatForEntitatID());
     __mapping.put(TIPUS, filterForm.getMapOfValuesForTipus());
+    __mapping.put(PLUGINID, filterForm.getMapOfValuesForPluginID());
+    __mapping.put(ENTITATID, filterForm.getMapOfEntitatForEntitatID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -267,15 +278,6 @@ public class EstadisticaController
   public void fillReferencesForForm(EstadisticaForm estadisticaForm,
     HttpServletRequest request, ModelAndView mav) throws I18NException {
     // Comprovam si ja esta definida la llista
-    if (estadisticaForm.getListOfEntitatForEntitatID() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForEntitatID(request, mav, estadisticaForm, null);
-
-      if(_listSKV != null && !_listSKV.isEmpty()) { 
-          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
-      }
-      estadisticaForm.setListOfEntitatForEntitatID(_listSKV);
-    }
-    // Comprovam si ja esta definida la llista
     if (estadisticaForm.getListOfValuesForTipus() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForTipus(request, mav, estadisticaForm, null);
 
@@ -283,6 +285,24 @@ public class EstadisticaController
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
       estadisticaForm.setListOfValuesForTipus(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (estadisticaForm.getListOfValuesForPluginID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForPluginID(request, mav, estadisticaForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      estadisticaForm.setListOfValuesForPluginID(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (estadisticaForm.getListOfEntitatForEntitatID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForEntitatID(request, mav, estadisticaForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      estadisticaForm.setListOfEntitatForEntitatID(_listSKV);
     }
     
   }
@@ -587,6 +607,72 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
+  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
+       ModelAndView mav, EstadisticaForm estadisticaForm, Where where)  throws I18NException {
+    if (estadisticaForm.isHiddenField(TIPUS)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForTipus(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
+       ModelAndView mav, EstadisticaFilterForm estadisticaFilterForm,
+       List<Estadistica> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (estadisticaFilterForm.isHiddenField(TIPUS)
+      && !estadisticaFilterForm.isGroupByField(TIPUS)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForTipus(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("1" , "1"));
+    __tmp.add(new StringKeyValue("2" , "2"));
+    __tmp.add(new StringKeyValue("3" , "3"));
+    __tmp.add(new StringKeyValue("4" , "4"));
+    __tmp.add(new StringKeyValue("5" , "5"));
+    return __tmp;
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPluginID(HttpServletRequest request,
+       ModelAndView mav, EstadisticaForm estadisticaForm, Where where)  throws I18NException {
+    if (estadisticaForm.isHiddenField(PLUGINID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForPluginID(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPluginID(HttpServletRequest request,
+       ModelAndView mav, EstadisticaFilterForm estadisticaFilterForm,
+       List<Estadistica> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (estadisticaFilterForm.isHiddenField(PLUGINID)
+      && !estadisticaFilterForm.isGroupByField(PLUGINID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForPluginID(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPluginID(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("1" , "1"));
+    __tmp.add(new StringKeyValue("2" , "2"));
+    __tmp.add(new StringKeyValue("3" , "3"));
+    __tmp.add(new StringKeyValue("4" , "4"));
+    __tmp.add(new StringKeyValue("5" , "5"));
+    return __tmp;
+  }
+
+
   public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
        ModelAndView mav, EstadisticaForm estadisticaForm, Where where)  throws I18NException {
     if (estadisticaForm.isHiddenField(ENTITATID)) {
@@ -624,39 +710,6 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return entitatRefList.getReferenceList(EntitatFields.ENTITATID, where );
-  }
-
-
-  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
-       ModelAndView mav, EstadisticaForm estadisticaForm, Where where)  throws I18NException {
-    if (estadisticaForm.isHiddenField(TIPUS)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
-    }
-    return getReferenceListForTipus(request, mav, where);
-  }
-
-
-  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
-       ModelAndView mav, EstadisticaFilterForm estadisticaFilterForm,
-       List<Estadistica> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
-    if (estadisticaFilterForm.isHiddenField(TIPUS)
-      && !estadisticaFilterForm.isGroupByField(TIPUS)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
-    }
-    Where _w = null;
-    return getReferenceListForTipus(request, mav, Where.AND(where,_w));
-  }
-
-
-  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
-       ModelAndView mav, Where where)  throws I18NException {
-    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-    __tmp.add(new StringKeyValue("1" , "1"));
-    __tmp.add(new StringKeyValue("2" , "2"));
-    __tmp.add(new StringKeyValue("3" , "3"));
-    __tmp.add(new StringKeyValue("4" , "4"));
-    __tmp.add(new StringKeyValue("5" , "5"));
-    return __tmp;
   }
 
 

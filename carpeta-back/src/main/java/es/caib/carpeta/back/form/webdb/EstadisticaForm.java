@@ -19,8 +19,9 @@ public class EstadisticaForm extends CarpetaBaseForm {
   public EstadisticaForm(EstadisticaForm __toClone) {
     super(__toClone);
       this.estadistica = __toClone.estadistica;
-    this.listOfEntitatForEntitatID = __toClone.listOfEntitatForEntitatID;
     this.listOfValuesForTipus = __toClone.listOfValuesForTipus;
+    this.listOfValuesForPluginID = __toClone.listOfValuesForPluginID;
+    this.listOfEntitatForEntitatID = __toClone.listOfEntitatForEntitatID;
   }
   
   public EstadisticaForm(EstadisticaJPA estadistica, boolean nou) {
@@ -36,18 +37,6 @@ public class EstadisticaForm extends CarpetaBaseForm {
   }
   
   
-  private List<StringKeyValue> listOfEntitatForEntitatID;
-
-  public List<StringKeyValue> getListOfEntitatForEntitatID() {
-    return this.listOfEntitatForEntitatID;
-  }
-
-  public void setListOfEntitatForEntitatID(List<StringKeyValue> listOfEntitatForEntitatID) {
-    this.listOfEntitatForEntitatID = listOfEntitatForEntitatID;
-  }
-
-
-
   private List<StringKeyValue> listOfValuesForTipus;
 
   public List<StringKeyValue> getListOfValuesForTipus() {
@@ -56,6 +45,30 @@ public class EstadisticaForm extends CarpetaBaseForm {
 
   public void setListOfValuesForTipus(List<StringKeyValue> listOfValuesForTipus) {
     this.listOfValuesForTipus = listOfValuesForTipus;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForPluginID;
+
+  public List<StringKeyValue> getListOfValuesForPluginID() {
+    return this.listOfValuesForPluginID;
+  }
+
+  public void setListOfValuesForPluginID(List<StringKeyValue> listOfValuesForPluginID) {
+    this.listOfValuesForPluginID = listOfValuesForPluginID;
+  }
+
+
+
+  private List<StringKeyValue> listOfEntitatForEntitatID;
+
+  public List<StringKeyValue> getListOfEntitatForEntitatID() {
+    return this.listOfEntitatForEntitatID;
+  }
+
+  public void setListOfEntitatForEntitatID(List<StringKeyValue> listOfEntitatForEntitatID) {
+    this.listOfEntitatForEntitatID = listOfEntitatForEntitatID;
   }
 
 

@@ -1,12 +1,11 @@
 package es.caib.carpeta.jpa.validator;
 
-import org.apache.log4j.Logger;
-
 import es.caib.carpeta.model.entity.Estadistica;
-import org.fundaciobit.genapp.common.query.Field;
-import es.caib.carpeta.model.fields.EstadisticaFields;
 import es.caib.carpeta.model.fields.EntitatFields;
+import es.caib.carpeta.model.fields.EstadisticaFields;
 
+import org.apache.log4j.Logger;
+import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.validation.IValidatorResult;
 
 
@@ -32,13 +31,13 @@ public class EstadisticaValidator<I extends Estadistica>
     ,es.caib.carpeta.model.dao.IEstadisticaManager __estadisticaManager) {
 
     // Valors Not Null
-    __vr.rejectIfEmptyOrWhitespace(__target__,DATAESTADISTICA, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DATAESTADISTICA)));
-
     __vr.rejectIfEmptyOrWhitespace(__target__,TIPUS, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TIPUS)));
+
+    __vr.rejectIfEmptyOrWhitespace(__target__,DATAESTADISTICA, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DATAESTADISTICA)));
 
     __vr.rejectIfEmptyOrWhitespace(__target__,COMPTADOR, 
         "genapp.validation.required",
