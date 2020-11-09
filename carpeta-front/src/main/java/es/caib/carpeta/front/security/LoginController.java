@@ -1,14 +1,15 @@
 package es.caib.carpeta.front.security;
 
-import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.front.config.LoginRequestCache;
-import es.caib.carpeta.front.service.SecurityService;
-import es.caib.carpeta.front.utils.SesionHttp;
-import es.caib.carpeta.front.utils.StringUtils;
-import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
+import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_ERROR;
+import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_ESTAD_ENTRADA_FRONT_AUTENTICAT;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_ESTAD_ENTRADA_FRONT_NO_AUTENTICAT;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_FRONT;
+
+import org.fundaciobit.genapp.common.i18n.I18NException;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.web.savedrequest.SavedRequest;
@@ -20,11 +21,21 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Date;
+import java.util.List;
 
-import static es.caib.carpeta.commons.utils.Constants.*;
+import es.caib.carpeta.commons.utils.Constants;
+import es.caib.carpeta.front.config.LoginRequestCache;
+import es.caib.carpeta.front.service.SecurityService;
+import es.caib.carpeta.front.utils.SesionHttp;
+import es.caib.carpeta.front.utils.StringUtils;
+import es.caib.carpeta.jpa.EstadisticaJPA;
+import es.caib.carpeta.logic.EstadisticaLogicaLocal;
+import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
 
 
 /**
@@ -50,6 +61,9 @@ public class LoginController {
 
     @EJB(mappedName = LogCarpetaLogicaLocal.JNDI_NAME)
     protected LogCarpetaLogicaLocal logCarpetaLogicaEjb;
+
+    @EJB(mappedName = EstadisticaLogicaLocal.JNDI_NAME)
+    protected EstadisticaLogicaLocal estadisticaLogicaEjb;
 
     // @Autowired
     // private RequestMappingHandlerMapping requestMappingHandlerMapping;
@@ -87,6 +101,20 @@ public class LoginController {
         if ("true".equals(request.getParameter("error"))) {
             logCarpetaLogicaEjb.crearLog("Autenticació del Front", ESTAT_LOG_ERROR,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"Error de login",peticio.toString(),null,null);
             log.info("Error de login");
+
+            //Estadistiques no autenticades
+
+            //Estadistica entrada al front autenticada
+            List<EstadisticaJPA> estadisticas = estadisticaLogicaEjb.findEstadistica(TIPUS_ESTAD_ENTRADA_FRONT_NO_AUTENTICAT,null,new Date(),null);
+
+            if(estadisticas != null && !estadisticas.isEmpty()) {
+
+                estadisticaLogicaEjb.incrementarComptador(estadisticas.get(0));
+            }else{
+                estadisticaLogicaEjb.crearEstadistica(null, TIPUS_ESTAD_ENTRADA_FRONT_NO_AUTENTICAT,null);
+            }
+
+
         }
         final SavedRequest savedRequest = loginRequestCache.getRequest(request, response);
 
@@ -194,6 +222,16 @@ public class LoginController {
         peticio.append("classe: ").append(getClass().getName()).append(System.getProperty("line.separator"));
 
         logCarpetaLogicaEjb.crearLog("Autenticació del Front del ticket " + tickets[0], ESTAT_LOG_OK,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),null,null);
+
+        //Estadistica entrada al front autenticada
+        List<EstadisticaJPA> estadisticas = estadisticaLogicaEjb.findEstadistica(TIPUS_ESTAD_ENTRADA_FRONT_AUTENTICAT,null,new Date(),null);
+
+        if(estadisticas != null && !estadisticas.isEmpty()) {
+
+            estadisticaLogicaEjb.incrementarComptador(estadisticas.get(0));
+        }else{
+            estadisticaLogicaEjb.crearEstadistica(null, TIPUS_ESTAD_ENTRADA_FRONT_AUTENTICAT,null);
+        }
 
         // Autenticamos automaticamente
         mav.addObject("ticketName", ticketUserName);
