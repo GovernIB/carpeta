@@ -18,14 +18,14 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.DATAAUDIT)}">
         <th>${car:getSortIcons(__theFilterForm,AuditoriaFields.DATAAUDIT)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.TIPUS)}">
+        <th>${car:getSortIcons(__theFilterForm,AuditoriaFields.TIPUS)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.ENTITATID)}">
         <th>${car:getSortIcons(__theFilterForm,AuditoriaFields.ENTITATID)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.USUARIID)}">
         <th>${car:getSortIcons(__theFilterForm,AuditoriaFields.USUARIID)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.TIPUS)}">
-        <th>${car:getSortIcons(__theFilterForm,AuditoriaFields.TIPUS)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.TICKETLOGINIB)}">
         <th>${car:getSortIcons(__theFilterForm,AuditoriaFields.TICKETLOGINIB)}</th>

@@ -42,6 +42,33 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.TIPUS)}">
+        <tr id="auditoria_tipus_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[AuditoriaFields.TIPUS])?'auditoria.tipus':__theForm.labels[AuditoriaFields.TIPUS]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[AuditoriaFields.TIPUS]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.TIPUS]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="auditoria.tipus" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TIPUS)}" >
+          <form:hidden path="auditoria.tipus"/>
+          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.auditoria.tipus,__theForm.listOfValuesForTipus)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TIPUS)}" >
+          <form:select id="auditoria_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-4" path="auditoria.tipus">
+            <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.ENTITATID)}">
         <tr id="auditoria_entitatID_rowid">
           <td>
@@ -92,33 +119,6 @@
           <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
           <form:option value="" ></form:option>
             <c:forEach items="${__theForm.listOfUsuariForUsuariID}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.TIPUS)}">
-        <tr id="auditoria_tipus_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[AuditoriaFields.TIPUS])?'auditoria.tipus':__theForm.labels[AuditoriaFields.TIPUS]}" /> &nbsp;(*)
-              <c:if test="${not empty __theForm.help[AuditoriaFields.TIPUS]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.TIPUS]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <form:errors path="auditoria.tipus" cssClass="errorField alert alert-error" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TIPUS)}" >
-          <form:hidden path="auditoria.tipus"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.auditoria.tipus,__theForm.listOfValuesForTipus)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TIPUS)}" >
-          <form:select id="auditoria_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-4" path="auditoria.tipus">
-            <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
           </form:select>

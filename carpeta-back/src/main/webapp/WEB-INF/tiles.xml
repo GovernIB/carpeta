@@ -265,11 +265,21 @@
     <definition name="estadisticaListSuperAdmin" extends="superadmin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/estadisticaList.jsp" />
     </definition>
+
+    <definition name="auditoriaFormSuperAdmin" extends="superadmin">
+        <put-attribute name="titol" value="auditoria.auditoria" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/auditoriaForm.jsp" />
+    </definition>
+
+    <definition name="auditoriaListSuperAdmin" extends="superadmin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/auditoriaList.jsp" />
+    </definition>
     
     <definition name="systemproperties" extends="superadmin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/superadmin/systemproperties.jsp" />
     </definition>
-    
+
+
     
 
     <!--  ===========  DESENVOLUPAMENT ================== -->

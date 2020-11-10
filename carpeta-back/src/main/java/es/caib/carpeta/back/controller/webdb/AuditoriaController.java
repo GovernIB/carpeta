@@ -186,6 +186,16 @@ public class AuditoriaController
     Map<String, String> _tmp;
     List<StringKeyValue> _listSKV;
 
+    // Field tipus
+    {
+      _listSKV = getReferenceListForTipus(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForTipus(_tmp);
+      if (filterForm.getGroupByFields().contains(TIPUS)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, TIPUS, false);
+      };
+    }
+
     // Field entitatID
     {
       _listSKV = getReferenceListForEntitatID(request, mav, filterForm, list, groupByItemsMap, null);
@@ -203,16 +213,6 @@ public class AuditoriaController
       filterForm.setMapOfUsuariForUsuariID(_tmp);
       if (filterForm.getGroupByFields().contains(USUARIID)) {
         fillValuesToGroupByItems(_tmp, groupByItemsMap, USUARIID, false);
-      };
-    }
-
-    // Field tipus
-    {
-      _listSKV = getReferenceListForTipus(request, mav, filterForm, list, groupByItemsMap, null);
-      _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfValuesForTipus(_tmp);
-      if (filterForm.getGroupByFields().contains(TIPUS)) {
-        fillValuesToGroupByItems(_tmp, groupByItemsMap, TIPUS, false);
       };
     }
 
@@ -241,9 +241,9 @@ public class AuditoriaController
 
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
+    __mapping.put(TIPUS, filterForm.getMapOfValuesForTipus());
     __mapping.put(ENTITATID, filterForm.getMapOfEntitatForEntitatID());
     __mapping.put(USUARIID, filterForm.getMapOfUsuariForUsuariID());
-    __mapping.put(TIPUS, filterForm.getMapOfValuesForTipus());
     __mapping.put(PLUGINID, filterForm.getMapOfValuesForPluginID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
@@ -293,6 +293,15 @@ public class AuditoriaController
   public void fillReferencesForForm(AuditoriaForm auditoriaForm,
     HttpServletRequest request, ModelAndView mav) throws I18NException {
     // Comprovam si ja esta definida la llista
+    if (auditoriaForm.getListOfValuesForTipus() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForTipus(request, mav, auditoriaForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      auditoriaForm.setListOfValuesForTipus(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
     if (auditoriaForm.getListOfEntitatForEntitatID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForEntitatID(request, mav, auditoriaForm, null);
 
@@ -309,15 +318,6 @@ public class AuditoriaController
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
       auditoriaForm.setListOfUsuariForUsuariID(_listSKV);
-    }
-    // Comprovam si ja esta definida la llista
-    if (auditoriaForm.getListOfValuesForTipus() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForTipus(request, mav, auditoriaForm, null);
-
-      if(_listSKV != null && !_listSKV.isEmpty()) { 
-          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
-      }
-      auditoriaForm.setListOfValuesForTipus(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (auditoriaForm.getListOfValuesForPluginID() == null) {
@@ -631,6 +631,41 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
+  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
+       ModelAndView mav, AuditoriaForm auditoriaForm, Where where)  throws I18NException {
+    if (auditoriaForm.isHiddenField(TIPUS)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForTipus(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
+       ModelAndView mav, AuditoriaFilterForm auditoriaFilterForm,
+       List<Auditoria> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (auditoriaFilterForm.isHiddenField(TIPUS)
+      && !auditoriaFilterForm.isGroupByField(TIPUS)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForTipus(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("1" , "1"));
+    __tmp.add(new StringKeyValue("2" , "2"));
+    __tmp.add(new StringKeyValue("3" , "3"));
+    __tmp.add(new StringKeyValue("4" , "4"));
+    __tmp.add(new StringKeyValue("5" , "5"));
+    __tmp.add(new StringKeyValue("6" , "6"));
+    __tmp.add(new StringKeyValue("7" , "7"));
+    return __tmp;
+  }
+
+
   public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
        ModelAndView mav, AuditoriaForm auditoriaForm, Where where)  throws I18NException {
     if (auditoriaForm.isHiddenField(ENTITATID)) {
@@ -708,41 +743,6 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForUsuariID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return usuariRefList.getReferenceList(UsuariFields.USUARIID, where );
-  }
-
-
-  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
-       ModelAndView mav, AuditoriaForm auditoriaForm, Where where)  throws I18NException {
-    if (auditoriaForm.isHiddenField(TIPUS)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
-    }
-    return getReferenceListForTipus(request, mav, where);
-  }
-
-
-  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
-       ModelAndView mav, AuditoriaFilterForm auditoriaFilterForm,
-       List<Auditoria> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
-    if (auditoriaFilterForm.isHiddenField(TIPUS)
-      && !auditoriaFilterForm.isGroupByField(TIPUS)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
-    }
-    Where _w = null;
-    return getReferenceListForTipus(request, mav, Where.AND(where,_w));
-  }
-
-
-  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
-       ModelAndView mav, Where where)  throws I18NException {
-    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-    __tmp.add(new StringKeyValue("1" , "1"));
-    __tmp.add(new StringKeyValue("2" , "2"));
-    __tmp.add(new StringKeyValue("3" , "3"));
-    __tmp.add(new StringKeyValue("4" , "4"));
-    __tmp.add(new StringKeyValue("5" , "5"));
-    __tmp.add(new StringKeyValue("6" , "6"));
-    __tmp.add(new StringKeyValue("7" , "7"));
-    return __tmp;
   }
 
 
