@@ -2,7 +2,14 @@ import React, {Component} from 'react';
 import i18n from './i18n';
 import { withTranslation } from 'react-i18next';
 import ReactGA from 'react-ga';
-ReactGA.initialize(''); // Aqui pones tu identificador de cuenta de Google Analytics
+import createHistory from 'history/createBrowserHistory';
+
+const history = createHistory()
+ReactGA.initialize('UA-00000000-1'); // Aqui poses l'identificador de compte de Google Analytics
+history.listen((location, action) => {
+    ReactGA.pageview(location.pathname + location.search);
+    console.log(location.pathname)
+});
 
 class App extends Component {
 
