@@ -34,20 +34,20 @@ public class AuditoriaValidator<I extends Auditoria>
     ,es.caib.carpeta.model.dao.IUsuariManager __usuariManager) {
 
     // Valors Not Null
-    __vr.rejectIfEmptyOrWhitespace(__target__,ACCIO, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ACCIO)));
-
     __vr.rejectIfEmptyOrWhitespace(__target__,DATAAUDIT, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DATAAUDIT)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,TIPUS, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TIPUS)));
+
     // Check size
-    if (__vr.getFieldErrorCount(ELEMENT) == 0) {
-      java.lang.String __element = __target__.getElement();
-      if (__element!= null && __element.length() > 255) {
-        __vr.rejectValue(ELEMENT, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ELEMENT)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+    if (__vr.getFieldErrorCount(TICKETLOGINIB) == 0) {
+      java.lang.String __ticketloginib = __target__.getTicketLoginIB();
+      if (__ticketloginib!= null && __ticketloginib.length() > 256) {
+        __vr.rejectValue(TICKETLOGINIB, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TICKETLOGINIB)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(256)));
       }
     }
 

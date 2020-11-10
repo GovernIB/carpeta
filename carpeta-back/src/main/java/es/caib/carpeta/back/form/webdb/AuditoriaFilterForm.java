@@ -43,39 +43,6 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
   }
 
 
-  private java.lang.Integer accioDesde;
-
-  public java.lang.Integer getAccioDesde() {
-    return this.accioDesde;
-  }
-
-  public void setAccioDesde(java.lang.Integer accioDesde) {
-    this.accioDesde = accioDesde;
-  }
-
-
-  private java.lang.Integer accioFins;
-
-  public java.lang.Integer getAccioFins() {
-    return this.accioFins;
-  }
-
-  public void setAccioFins(java.lang.Integer accioFins) {
-    this.accioFins = accioFins;
-  }
-
-
-  private java.lang.String element;
-
-  public java.lang.String getElement() {
-    return this.element;
-  }
-
-  public void setElement(java.lang.String element) {
-    this.element = element;
-  }
-
-
   private java.sql.Timestamp dataAuditDesde;
 
   public java.sql.Timestamp getDataAuditDesde() {
@@ -142,6 +109,61 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
   }
 
 
+  private java.lang.Integer tipusDesde;
+
+  public java.lang.Integer getTipusDesde() {
+    return this.tipusDesde;
+  }
+
+  public void setTipusDesde(java.lang.Integer tipusDesde) {
+    this.tipusDesde = tipusDesde;
+  }
+
+
+  private java.lang.Integer tipusFins;
+
+  public java.lang.Integer getTipusFins() {
+    return this.tipusFins;
+  }
+
+  public void setTipusFins(java.lang.Integer tipusFins) {
+    this.tipusFins = tipusFins;
+  }
+
+
+  private java.lang.String ticketLoginIB;
+
+  public java.lang.String getTicketLoginIB() {
+    return this.ticketLoginIB;
+  }
+
+  public void setTicketLoginIB(java.lang.String ticketLoginIB) {
+    this.ticketLoginIB = ticketLoginIB;
+  }
+
+
+  private java.lang.Integer pluginIDDesde;
+
+  public java.lang.Integer getPluginIDDesde() {
+    return this.pluginIDDesde;
+  }
+
+  public void setPluginIDDesde(java.lang.Integer pluginIDDesde) {
+    this.pluginIDDesde = pluginIDDesde;
+  }
+
+
+  private java.lang.Integer pluginIDFins;
+
+  public java.lang.Integer getPluginIDFins() {
+    return this.pluginIDFins;
+  }
+
+  public void setPluginIDFins(java.lang.Integer pluginIDFins) {
+    this.pluginIDFins = pluginIDFins;
+  }
+
+
   public AuditoriaFilterForm() {
   }
   
@@ -149,17 +171,21 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
     super(__toClone);
     this.auditoriaIDDesde = __toClone.auditoriaIDDesde;
     this.auditoriaIDFins = __toClone.auditoriaIDFins;
-    this.accioDesde = __toClone.accioDesde;
-    this.accioFins = __toClone.accioFins;
-    this.element = __toClone.element;
     this.dataAuditDesde = __toClone.dataAuditDesde;
     this.dataAuditFins = __toClone.dataAuditFins;
     this.entitatIDDesde = __toClone.entitatIDDesde;
     this.entitatIDFins = __toClone.entitatIDFins;
     this.usuariIDDesde = __toClone.usuariIDDesde;
     this.usuariIDFins = __toClone.usuariIDFins;
+    this.tipusDesde = __toClone.tipusDesde;
+    this.tipusFins = __toClone.tipusFins;
+    this.ticketLoginIB = __toClone.ticketLoginIB;
+    this.pluginIDDesde = __toClone.pluginIDDesde;
+    this.pluginIDFins = __toClone.pluginIDFins;
     this.mapOfEntitatForEntitatID = __toClone.mapOfEntitatForEntitatID;
     this.mapOfUsuariForUsuariID = __toClone.mapOfUsuariForUsuariID;
+    this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
+    this.mapOfValuesForPluginID = __toClone.mapOfValuesForPluginID;
   }
   
   /* ========= UTILS ========== */
@@ -214,6 +240,30 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
 
   public void setMapOfUsuariForUsuariID(Map<String, String> mapOfUsuariForUsuariID) {
     this.mapOfUsuariForUsuariID = mapOfUsuariForUsuariID;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForTipus;
+
+  public Map<String, String> getMapOfValuesForTipus() {
+    return this.mapOfValuesForTipus;
+  }
+
+  public void setMapOfValuesForTipus(Map<String, String> mapOfValuesForTipus) {
+    this.mapOfValuesForTipus = mapOfValuesForTipus;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForPluginID;
+
+  public Map<String, String> getMapOfValuesForPluginID() {
+    return this.mapOfValuesForPluginID;
+  }
+
+  public void setMapOfValuesForPluginID(Map<String, String> mapOfValuesForPluginID) {
+    this.mapOfValuesForPluginID = mapOfValuesForPluginID;
   }
 
 

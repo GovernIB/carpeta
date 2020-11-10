@@ -5,12 +5,6 @@ public interface Auditoria extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public long getAuditoriaID();
 	public void setAuditoriaID(long _auditoriaID_);
 
-	public int getAccio();
-	public void setAccio(int _accio_);
-
-	public java.lang.String getElement();
-	public void setElement(java.lang.String _element_);
-
 	public java.sql.Timestamp getDataAudit();
 	public void setDataAudit(java.sql.Timestamp _dataAudit_);
 
@@ -19,6 +13,15 @@ public interface Auditoria extends org.fundaciobit.genapp.common.IGenAppEntity {
 
 	public java.lang.Long getUsuariID();
 	public void setUsuariID(java.lang.Long _usuariID_);
+
+	public int getTipus();
+	public void setTipus(int _tipus_);
+
+	public java.lang.String getTicketLoginIB();
+	public void setTicketLoginIB(java.lang.String _ticketLoginIB_);
+
+	public java.lang.Integer getPluginID();
+	public void setPluginID(java.lang.Integer _pluginID_);
 
 
 

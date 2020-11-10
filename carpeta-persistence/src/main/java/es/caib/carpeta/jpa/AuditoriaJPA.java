@@ -32,12 +32,6 @@ private static final long serialVersionUID = 129744773L;
 	@Column(name="auditoriaid",nullable = false,length = 19)
 	long auditoriaID;
 
-	@Column(name="accio",nullable = false,length = 10)
-	int accio;
-
-	@Column(name="element",length = 255)
-	java.lang.String element;
-
 	@Column(name="dataaudit",nullable = false,length = 29,precision = 6)
 	java.sql.Timestamp dataAudit;
 
@@ -49,6 +43,15 @@ private static final long serialVersionUID = 129744773L;
 	@Column(name="usuariid",length = 19)
 	java.lang.Long usuariID;
 
+	@Column(name="tipus",nullable = false,length = 10)
+	int tipus;
+
+	@Column(name="ticketloginib",length = 256)
+	java.lang.String ticketLoginIB;
+
+	@Column(name="pluginid",length = 10)
+	java.lang.Integer pluginID;
+
 
 
   /** Constructor Buit */
@@ -56,35 +59,38 @@ private static final long serialVersionUID = 129744773L;
   }
 
   /** Constructor amb tots els camps  */
-  public AuditoriaJPA(long auditoriaID , int accio , java.lang.String element , java.sql.Timestamp dataAudit , java.lang.Long entitatID , java.lang.Long usuariID) {
+  public AuditoriaJPA(long auditoriaID , java.sql.Timestamp dataAudit , java.lang.Long entitatID , java.lang.Long usuariID , int tipus , java.lang.String ticketLoginIB , java.lang.Integer pluginID) {
     this.auditoriaID=auditoriaID;
-    this.accio=accio;
-    this.element=element;
     this.dataAudit=dataAudit;
     this.entitatID=entitatID;
     this.usuariID=usuariID;
+    this.tipus=tipus;
+    this.ticketLoginIB=ticketLoginIB;
+    this.pluginID=pluginID;
 }
   /** Constructor sense valors autoincrementals */
-  public AuditoriaJPA(int accio , java.lang.String element , java.sql.Timestamp dataAudit , java.lang.Long entitatID , java.lang.Long usuariID) {
-    this.accio=accio;
-    this.element=element;
+  public AuditoriaJPA(java.sql.Timestamp dataAudit , java.lang.Long entitatID , java.lang.Long usuariID , int tipus , java.lang.String ticketLoginIB , java.lang.Integer pluginID) {
     this.dataAudit=dataAudit;
     this.entitatID=entitatID;
     this.usuariID=usuariID;
+    this.tipus=tipus;
+    this.ticketLoginIB=ticketLoginIB;
+    this.pluginID=pluginID;
 }
   /** Constructor dels valors Not Null */
-  public AuditoriaJPA(long auditoriaID , int accio , java.sql.Timestamp dataAudit) {
+  public AuditoriaJPA(long auditoriaID , java.sql.Timestamp dataAudit , int tipus) {
     this.auditoriaID=auditoriaID;
-    this.accio=accio;
     this.dataAudit=dataAudit;
+    this.tipus=tipus;
 }
   public AuditoriaJPA(Auditoria __bean) {
     this.setAuditoriaID(__bean.getAuditoriaID());
-    this.setAccio(__bean.getAccio());
-    this.setElement(__bean.getElement());
     this.setDataAudit(__bean.getDataAudit());
     this.setEntitatID(__bean.getEntitatID());
     this.setUsuariID(__bean.getUsuariID());
+    this.setTipus(__bean.getTipus());
+    this.setTicketLoginIB(__bean.getTicketLoginIB());
+    this.setPluginID(__bean.getPluginID());
 	}
 
 	public long getAuditoriaID() {
@@ -92,20 +98,6 @@ private static final long serialVersionUID = 129744773L;
 	};
 	public void setAuditoriaID(long _auditoriaID_) {
 		this.auditoriaID = _auditoriaID_;
-	};
-
-	public int getAccio() {
-		return(accio);
-	};
-	public void setAccio(int _accio_) {
-		this.accio = _accio_;
-	};
-
-	public java.lang.String getElement() {
-		return(element);
-	};
-	public void setElement(java.lang.String _element_) {
-		this.element = _element_;
 	};
 
 	public java.sql.Timestamp getDataAudit() {
@@ -127,6 +119,27 @@ private static final long serialVersionUID = 129744773L;
 	};
 	public void setUsuariID(java.lang.Long _usuariID_) {
 		this.usuariID = _usuariID_;
+	};
+
+	public int getTipus() {
+		return(tipus);
+	};
+	public void setTipus(int _tipus_) {
+		this.tipus = _tipus_;
+	};
+
+	public java.lang.String getTicketLoginIB() {
+		return(ticketLoginIB);
+	};
+	public void setTicketLoginIB(java.lang.String _ticketLoginIB_) {
+		this.ticketLoginIB = _ticketLoginIB_;
+	};
+
+	public java.lang.Integer getPluginID() {
+		return(pluginID);
+	};
+	public void setPluginID(java.lang.Integer _pluginID_) {
+		this.pluginID = _pluginID_;
 	};
 
 
@@ -180,11 +193,12 @@ private static final long serialVersionUID = 129744773L;
     if (__bean == null) { return null;}
     AuditoriaJPA __tmp = new AuditoriaJPA();
     __tmp.setAuditoriaID(__bean.getAuditoriaID());
-    __tmp.setAccio(__bean.getAccio());
-    __tmp.setElement(__bean.getElement());
     __tmp.setDataAudit(__bean.getDataAudit());
     __tmp.setEntitatID(__bean.getEntitatID());
     __tmp.setUsuariID(__bean.getUsuariID());
+    __tmp.setTipus(__bean.getTipus());
+    __tmp.setTicketLoginIB(__bean.getTicketLoginIB());
+    __tmp.setPluginID(__bean.getPluginID());
 		return __tmp;
 	}
 

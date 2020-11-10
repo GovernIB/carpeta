@@ -2,49 +2,6 @@
 <%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
 <un:useConstants var="AuditoriaFields" className="es.caib.carpeta.model.fields.AuditoriaFields"/>
   
-        <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.ACCIO)}">
-        <tr id="auditoria_accio_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[AuditoriaFields.ACCIO])?'auditoria.accio':__theForm.labels[AuditoriaFields.ACCIO]}" /> &nbsp;(*)
-              <c:if test="${not empty __theForm.help[AuditoriaFields.ACCIO]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.ACCIO]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-            <form:errors path="auditoria.accio" cssClass="errorField alert alert-error" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.ACCIO)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.ACCIO)? ' uneditable-input' : ''}"   path="auditoria.accio"   />
-
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.ELEMENT)}">
-        <tr id="auditoria_element_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[AuditoriaFields.ELEMENT])?'auditoria.element':__theForm.labels[AuditoriaFields.ELEMENT]}" />
-              <c:if test="${not empty __theForm.help[AuditoriaFields.ELEMENT]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.ELEMENT]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-              <form:errors path="auditoria.element" cssClass="errorField alert alert-error" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;" cssClass="form-control col-md-8" readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.ELEMENT)? 'true' : 'false'}" path="auditoria.element"  />
-              <div class="btn-group" style="vertical-align: top;">
-              <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span></button>
-              <ul class="dropdown-menu">
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('auditoria.element'); ta.wrap='off';" >No Wrap</a></li>
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('auditoria.element'); ta.wrap='soft';">Soft Wrap</a></li>
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('auditoria.element'); ta.wrap='hard';">Hard Wrap</a></li>
-              </ul>
-              </div>
-           </td>
-        </tr>
-        </c:if>
-        
         <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.DATAAUDIT)}">
         <tr id="auditoria_dataAudit_rowid">
           <td>
@@ -135,6 +92,80 @@
           <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
           <form:option value="" ></form:option>
             <c:forEach items="${__theForm.listOfUsuariForUsuariID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.TIPUS)}">
+        <tr id="auditoria_tipus_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[AuditoriaFields.TIPUS])?'auditoria.tipus':__theForm.labels[AuditoriaFields.TIPUS]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[AuditoriaFields.TIPUS]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.TIPUS]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="auditoria.tipus" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TIPUS)}" >
+          <form:hidden path="auditoria.tipus"/>
+          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.auditoria.tipus,__theForm.listOfValuesForTipus)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TIPUS)}" >
+          <form:select id="auditoria_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-4" path="auditoria.tipus">
+            <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.TICKETLOGINIB)}">
+        <tr id="auditoria_ticketLoginIB_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[AuditoriaFields.TICKETLOGINIB])?'auditoria.ticketLoginIB':__theForm.labels[AuditoriaFields.TICKETLOGINIB]}" />
+              <c:if test="${not empty __theForm.help[AuditoriaFields.TICKETLOGINIB]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.TICKETLOGINIB]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="auditoria.ticketLoginIB" cssClass="errorField alert alert-error" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TICKETLOGINIB)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TICKETLOGINIB)? ' uneditable-input' : ''}"  maxlength="256" path="auditoria.ticketLoginIB"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.PLUGINID)}">
+        <tr id="auditoria_pluginID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[AuditoriaFields.PLUGINID])?'auditoria.pluginID':__theForm.labels[AuditoriaFields.PLUGINID]}" />
+              <c:if test="${not empty __theForm.help[AuditoriaFields.PLUGINID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.PLUGINID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="auditoria.pluginID" cssClass="errorField alert alert-error" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.PLUGINID)}" >
+          <form:hidden path="auditoria.pluginID"/>
+          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.auditoria.pluginID,__theForm.listOfValuesForPluginID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AuditoriaFields.PLUGINID)}" >
+          <form:select id="auditoria_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="form-control col-md-4" path="auditoria.pluginID">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfValuesForPluginID}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
           </form:select>

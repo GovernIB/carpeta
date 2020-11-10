@@ -21,6 +21,8 @@ public class AuditoriaForm extends CarpetaBaseForm {
       this.auditoria = __toClone.auditoria;
     this.listOfEntitatForEntitatID = __toClone.listOfEntitatForEntitatID;
     this.listOfUsuariForUsuariID = __toClone.listOfUsuariForUsuariID;
+    this.listOfValuesForTipus = __toClone.listOfValuesForTipus;
+    this.listOfValuesForPluginID = __toClone.listOfValuesForPluginID;
   }
   
   public AuditoriaForm(AuditoriaJPA auditoria, boolean nou) {
@@ -56,6 +58,30 @@ public class AuditoriaForm extends CarpetaBaseForm {
 
   public void setListOfUsuariForUsuariID(List<StringKeyValue> listOfUsuariForUsuariID) {
     this.listOfUsuariForUsuariID = listOfUsuariForUsuariID;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForTipus;
+
+  public List<StringKeyValue> getListOfValuesForTipus() {
+    return this.listOfValuesForTipus;
+  }
+
+  public void setListOfValuesForTipus(List<StringKeyValue> listOfValuesForTipus) {
+    this.listOfValuesForTipus = listOfValuesForTipus;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForPluginID;
+
+  public List<StringKeyValue> getListOfValuesForPluginID() {
+    return this.listOfValuesForPluginID;
+  }
+
+  public void setListOfValuesForPluginID(List<StringKeyValue> listOfValuesForPluginID) {
+    this.listOfValuesForPluginID = listOfValuesForPluginID;
   }
 
 

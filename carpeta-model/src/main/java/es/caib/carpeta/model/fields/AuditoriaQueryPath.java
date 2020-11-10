@@ -15,14 +15,6 @@ public class AuditoriaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new LongField(getQueryPath(), AuditoriaFields.AUDITORIAID);
   }
 
-  public IntegerField ACCIO() {
-    return new IntegerField(getQueryPath(), AuditoriaFields.ACCIO);
-  }
-
-  public StringField ELEMENT() {
-    return new StringField(getQueryPath(), AuditoriaFields.ELEMENT);
-  }
-
   public TimestampField DATAAUDIT() {
     return new TimestampField(getQueryPath(), AuditoriaFields.DATAAUDIT);
   }
@@ -33,6 +25,18 @@ public class AuditoriaQueryPath extends org.fundaciobit.genapp.common.query.Quer
 
   public LongField USUARIID() {
     return new LongField(getQueryPath(), AuditoriaFields.USUARIID);
+  }
+
+  public IntegerField TIPUS() {
+    return new IntegerField(getQueryPath(), AuditoriaFields.TIPUS);
+  }
+
+  public StringField TICKETLOGINIB() {
+    return new StringField(getQueryPath(), AuditoriaFields.TICKETLOGINIB);
+  }
+
+  public IntegerField PLUGINID() {
+    return new IntegerField(getQueryPath(), AuditoriaFields.PLUGINID);
   }
 
 
