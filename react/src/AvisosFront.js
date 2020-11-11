@@ -23,6 +23,17 @@ class AvisosFront extends Component {
         })
     }
 
+    componentWillReceiveProps(lng) {
+        var url = window.location.href + "webui/avisosfrontpublic";
+        axios.get(url).then(res => {
+            this.setState({ avisosPublic: res.data })
+        });
+        var url2 = window.location.href + "webui/avisosfrontprivat";
+        axios.get(url2).then(res => {
+            this.setState({ avisosPrivat: res.data })
+        })
+    }
+
     render() {
 
         const {t} = this.props;
