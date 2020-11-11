@@ -2,6 +2,7 @@ package es.caib.carpeta.front.security;
 
 import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_ERROR;
 import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ENTRADA_FRONT_AUTENTICAT;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_ESTAD_ENTRADA_FRONT_AUTENTICAT;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_ESTAD_ENTRADA_FRONT_NO_AUTENTICAT;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_FRONT;
@@ -34,6 +35,7 @@ import es.caib.carpeta.front.service.SecurityService;
 import es.caib.carpeta.front.utils.SesionHttp;
 import es.caib.carpeta.front.utils.StringUtils;
 import es.caib.carpeta.jpa.EstadisticaJPA;
+import es.caib.carpeta.logic.AuditoriaLogicaLocal;
 import es.caib.carpeta.logic.EstadisticaLogicaLocal;
 import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
 
@@ -64,6 +66,9 @@ public class LoginController {
 
     @EJB(mappedName = EstadisticaLogicaLocal.JNDI_NAME)
     protected EstadisticaLogicaLocal estadisticaLogicaEjb;
+
+    @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
+    protected AuditoriaLogicaLocal auditoriaLogicaEjb;
 
     // @Autowired
     // private RequestMappingHandlerMapping requestMappingHandlerMapping;
@@ -232,6 +237,9 @@ public class LoginController {
         }else{
             estadisticaLogicaEjb.crearEstadistica(null, TIPUS_ESTAD_ENTRADA_FRONT_AUTENTICAT,null);
         }
+
+        //AUDITORIA
+        auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ENTRADA_FRONT_AUTENTICAT,null,null, ticket,null);
 
         // Autenticamos automaticamente
         mav.addObject("ticketName", ticketUserName);
