@@ -195,8 +195,8 @@ public class PluginFrontController extends CommonFrontController {
 
         try{
 
-            // TODO XYZ ZZZ falta idioma
             String lang = LocaleContextHolder.getLocale().getLanguage();
+
             // TODO XYZ ZZZ falta entitat
             String codiEntitat = "caib";
 

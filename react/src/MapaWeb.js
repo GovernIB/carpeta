@@ -1,15 +1,39 @@
 import React, { Component, Suspense } from 'react';
 import { withTranslation } from 'react-i18next';
-import i18n from 'i18next';
+import axios from "axios";
 
 class MapaWeb extends Component {
+
+	constructor(){
+		super();
+		this.state = {
+			plugins: []
+		}
+	}
+
+	componentWillMount() {
+		var url = window.location.href + `pluginfront/veureplugins`;
+		axios.get(url).then(res => {
+			const plugins = res.data;
+			this.setState({ plugins });
+		})
+	}
+
+	componentWillReceiveProps(lng) {
+		var url = window.location.href + `pluginfront/veureplugins`;
+		axios.get(url).then(res => {
+			const plugins = res.data;
+			this.setState({ plugins });
+		})
+	}
 
 	render() {
 
 		const {t} = this.props;
 
 		var autenticat = sessionStorage.getItem('autenticat');
-		const plugins = JSON.parse(sessionStorage.getItem('plugins'));
+		const plugins = this.state.plugins;
+
 		var plug;
 
 		var informacio;
@@ -24,28 +48,18 @@ class MapaWeb extends Component {
 			logoClau = '';
 			informacio = <a href="javascript:newInici('contingut', '1');">{t('mapaWebInformacio')}</a>;
 
-			if (i18n.language === 'ca') {
-				plug = plugins.map(s => (<p className="lh15 upper"><a
-					href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}>{s.nomCa}</a></p>));
-			}
-			if (i18n.language === 'es') {
-				plug = plugins.map(s => (<p className="lh15 upper"><a
-					href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}>{s.nomEs}</a></p>));
-			}
+			plug = plugins.map(s => (<p className="lh15 upper"><a
+				href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}>{s.nom}</a></p>));
+
 			dades = <a href="javascript:newDadesPersonals('contingut', '1');">{t('mapaWebDades')}</a>;
 		}
 		if (autenticat === '0') {
 			logoClau = <span class="oi oi-lock-locked colorClave" title={t('mapaWebClave')}></span>;
 			informacio = <a href="javascript:newInici('contingut', '0');">{t('mapaWebInformacio')}</a>;
 
-			if (i18n.language === 'ca') {
-				plug = plugins.map(s => (
-					<p className="lh15 upper"><a href="/carpetafront/login">{s.nomCa}</a> {logoClau}</p>));
-			}
-			if (i18n.language === 'es') {
-				plug = plugins.map(s => (
-					<p className="lh15 upper"><a href="/carpetafront/login">{s.nomEs}</a> {logoClau}</p>));
-			}
+			plug = plugins.map(s => (
+				<p className="lh15 upper"><a href="/carpetafront/login">{s.nom}</a> {logoClau}</p>));
+
 			dades = <a href="/carpetafront/login">{t('mapaWebDades')}</a>;
 		}
 

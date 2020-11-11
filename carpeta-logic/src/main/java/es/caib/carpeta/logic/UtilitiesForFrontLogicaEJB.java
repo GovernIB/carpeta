@@ -111,8 +111,6 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
 
         List<PluginInfo> pluginsInfo = new ArrayList<PluginInfo>(plugins.size());
 
-        String lang = LocaleContextHolder.getLocale().getLanguage();
-
         for (Plugin plugin : plugins) {
             PluginJPA p = (PluginJPA) plugin;
 
@@ -125,13 +123,12 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
             String missatgeAvis = "";
             if (avisos.size() > 0){
                 gravetatAvis = (long) avisos.get(0).getGravetat();
-                // XYZ ZZZ TODO Canviar per idioma actiu
-                missatgeAvis = avisos.get(0).getDescripcio().getTraduccio(lang).getValor();
+                missatgeAvis = avisos.get(0).getDescripcio().getTraduccio(language).getValor();
             }
 
             pluginsInfo.add(new PluginInfo(String.valueOf(plugin.getPluginID()),
-                    p.getNom().getTraduccio(lang).getValor(),
-                    p.getDescripcio().getTraduccio(lang).getValor(),
+                    p.getNom().getTraduccio(language).getValor(),
+                    p.getDescripcio().getTraduccio(language).getValor(),
                     String.valueOf(cfp.isReactComponent()),gravetatAvis,missatgeAvis));
         }
 
