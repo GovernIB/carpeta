@@ -13,7 +13,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="usuari.username" cssClass="errorField alert alert-error" />
+            <form:errors path="usuari.username" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuariFields.USERNAME)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,UsuariFields.USERNAME)? ' uneditable-input' : ''}"  maxlength="255" path="usuari.username"   />
 
            </td>
@@ -31,7 +31,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="usuari.nom" cssClass="errorField alert alert-error" />
+            <form:errors path="usuari.nom" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuariFields.NOM)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,UsuariFields.NOM)? ' uneditable-input' : ''}"  maxlength="255" path="usuari.nom"   />
 
            </td>
@@ -49,7 +49,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="usuari.llinatge1" cssClass="errorField alert alert-error" />
+            <form:errors path="usuari.llinatge1" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuariFields.LLINATGE1)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,UsuariFields.LLINATGE1)? ' uneditable-input' : ''}"  maxlength="255" path="usuari.llinatge1"   />
 
            </td>
@@ -67,7 +67,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="usuari.llinatge2" cssClass="errorField alert alert-error" />
+            <form:errors path="usuari.llinatge2" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuariFields.LLINATGE2)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,UsuariFields.LLINATGE2)? ' uneditable-input' : ''}"  maxlength="255" path="usuari.llinatge2"   />
 
            </td>
@@ -85,7 +85,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="usuari.email" cssClass="errorField alert alert-error" />
+            <form:errors path="usuari.email" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuariFields.EMAIL)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,UsuariFields.EMAIL)? ' uneditable-input' : ''}"  maxlength="255" path="usuari.email"   />
 
            </td>
@@ -103,7 +103,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="usuari.nif" cssClass="errorField alert alert-error" />
+            <form:errors path="usuari.nif" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuariFields.NIF)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,UsuariFields.NIF)? ' uneditable-input' : ''}"  maxlength="255" path="usuari.nif"   />
 
            </td>
@@ -121,7 +121,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="usuari.darreraEntitat" cssClass="errorField alert alert-error" />
+          <form:errors path="usuari.darreraEntitat" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,UsuariFields.DARRERAENTITAT)}" >
           <form:hidden path="usuari.darreraEntitat"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.usuari.darreraEntitat,__theForm.listOfEntitatForDarreraEntitat)}"  />
@@ -150,7 +150,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="usuari.idiomaID" cssClass="errorField alert alert-error" />
+          <form:errors path="usuari.idiomaID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,UsuariFields.IDIOMAID)}" >
           <form:hidden path="usuari.idiomaID"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.usuari.idiomaID,__theForm.listOfIdiomaForIdiomaID)}"  />

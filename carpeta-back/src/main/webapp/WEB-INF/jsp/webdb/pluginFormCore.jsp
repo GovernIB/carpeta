@@ -13,7 +13,7 @@
              </label>
             </td>
             <td>
-       <form:errors path="plugin.nom" cssClass="errorField alert alert-error" />
+       <form:errors path="plugin.nom" cssClass="errorField alert alert-danger" />
        <div class="row-fluid  col-md-6">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
              <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
@@ -26,7 +26,7 @@
          <div class="tab-content well well-white" style="padding:8px;margin:0px;">
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_nom_${idioma.idiomaID}">
-               <form:errors path="plugin.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-error"/>
+               <form:errors path="plugin.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
                <form:input path="plugin.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,PluginFields.NOMID)? ' uneditable-input' : ''}" maxlength="4000" />
            </div>
            </c:forEach>
@@ -48,7 +48,7 @@
              </label>
             </td>
             <td>
-       <form:errors path="plugin.descripcio" cssClass="errorField alert alert-error" />
+       <form:errors path="plugin.descripcio" cssClass="errorField alert alert-danger" />
        <div class="row-fluid  col-md-6">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
              <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
@@ -61,7 +61,7 @@
          <div class="tab-content well well-white" style="padding:8px;margin:0px;">
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_descripcio_${idioma.idiomaID}">
-               <form:errors path="plugin.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-error"/>
+               <form:errors path="plugin.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
                <form:input path="plugin.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,PluginFields.DESCRIPCIOID)? ' uneditable-input' : ''}" maxlength="4000" />
            </div>
            </c:forEach>
@@ -83,7 +83,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="plugin.classe" cssClass="errorField alert alert-error" />
+            <form:errors path="plugin.classe" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.CLASSE)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,PluginFields.CLASSE)? ' uneditable-input' : ''}"  maxlength="255" path="plugin.classe"   />
 
            </td>
@@ -101,7 +101,7 @@
              </label>
             </td>
             <td>
-              <form:errors path="plugin.propietats" cssClass="errorField alert alert-error" />
+              <form:errors path="plugin.propietats" cssClass="errorField alert alert-danger" />
               <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;" cssClass="form-control col-md-8" readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.PROPIETATS)? 'true' : 'false'}" path="plugin.propietats"  />
               <div class="btn-group" style="vertical-align: top;">
               <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span></button>
@@ -127,7 +127,7 @@
             </td>
             <td>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginFields.ACTIU)}" >
-              <form:errors path="plugin.actiu" cssClass="errorField alert alert-error" />
+              <form:errors path="plugin.actiu" cssClass="errorField alert alert-danger" />
               <form:checkbox cssClass="form-control" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,PluginFields.ACTIU)? 'false' : 'true'}" path="plugin.actiu" />
           </c:if>
           <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginFields.ACTIU)}" >
@@ -148,7 +148,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="plugin.tipus" cssClass="errorField alert alert-error" />
+          <form:errors path="plugin.tipus" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginFields.TIPUS)}" >
           <form:hidden path="plugin.tipus"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.plugin.tipus,__theForm.listOfValuesForTipus)}"  />

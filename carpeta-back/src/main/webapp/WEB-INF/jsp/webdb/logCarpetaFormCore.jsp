@@ -13,7 +13,7 @@
              </label>
             </td>
             <td>
-              <form:errors path="logCarpeta.descripcio" cssClass="errorField alert alert-error" />
+              <form:errors path="logCarpeta.descripcio" cssClass="errorField alert alert-danger" />
               <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;" cssClass="form-control col-md-8" readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.DESCRIPCIO)? 'true' : 'false'}" path="logCarpeta.descripcio"  />
               <div class="btn-group" style="vertical-align: top;">
               <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span></button>
@@ -38,7 +38,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="logCarpeta.entitatID" cssClass="errorField alert alert-error" />
+          <form:errors path="logCarpeta.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ENTITATID)}" >
           <form:hidden path="logCarpeta.entitatID"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.logCarpeta.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
@@ -67,7 +67,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="logCarpeta.pluginID" cssClass="errorField alert alert-error" />
+          <form:errors path="logCarpeta.pluginID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.PLUGINID)}" >
           <form:hidden path="logCarpeta.pluginID"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.logCarpeta.pluginID,__theForm.listOfPluginForPluginID)}"  />
@@ -96,7 +96,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="logCarpeta.tipus" cssClass="errorField alert alert-error" />
+          <form:errors path="logCarpeta.tipus" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.TIPUS)}" >
           <form:hidden path="logCarpeta.tipus"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.logCarpeta.tipus,__theForm.listOfValuesForTipus)}"  />
@@ -123,7 +123,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="logCarpeta.estat" cssClass="errorField alert alert-error" />
+          <form:errors path="logCarpeta.estat" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ESTAT)}" >
           <form:hidden path="logCarpeta.estat"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.logCarpeta.estat,__theForm.listOfValuesForEstat)}"  />
@@ -150,7 +150,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="logCarpeta.temps" cssClass="errorField alert alert-error" />
+            <form:errors path="logCarpeta.temps" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.TEMPS)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.TEMPS)? ' uneditable-input' : ''}"   path="logCarpeta.temps"   />
 
            </td>
@@ -168,7 +168,7 @@
              </label>
             </td>
             <td>
-              <form:errors path="logCarpeta.dataInici" cssClass="errorField alert alert-error" />
+              <form:errors path="logCarpeta.dataInici" cssClass="errorField alert alert-danger" />
     <div class="container">
       <div class="row">
             <div class="form-group">
@@ -208,7 +208,7 @@
              </label>
             </td>
             <td>
-              <form:errors path="logCarpeta.peticio" cssClass="errorField alert alert-error" />
+              <form:errors path="logCarpeta.peticio" cssClass="errorField alert alert-danger" />
               <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;" cssClass="form-control col-md-8" readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.PETICIO)? 'true' : 'false'}" path="logCarpeta.peticio"  />
               <div class="btn-group" style="vertical-align: top;">
               <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span></button>
@@ -233,7 +233,7 @@
              </label>
             </td>
             <td>
-              <form:errors path="logCarpeta.error" cssClass="errorField alert alert-error" />
+              <form:errors path="logCarpeta.error" cssClass="errorField alert alert-danger" />
               <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;" cssClass="form-control col-md-8" readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ERROR)? 'true' : 'false'}" path="logCarpeta.error"  />
               <div class="btn-group" style="vertical-align: top;">
               <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span></button>
@@ -258,7 +258,7 @@
              </label>
             </td>
             <td>
-              <form:errors path="logCarpeta.excepcio" cssClass="errorField alert alert-error" />
+              <form:errors path="logCarpeta.excepcio" cssClass="errorField alert alert-danger" />
               <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;" cssClass="form-control col-md-8" readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.EXCEPCIO)? 'true' : 'false'}" path="logCarpeta.excepcio"  />
               <div class="btn-group" style="vertical-align: top;">
               <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span></button>

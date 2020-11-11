@@ -13,7 +13,7 @@
              </label>
             </td>
             <td>
-              <form:errors path="auditoria.dataAudit" cssClass="errorField alert alert-error" />
+              <form:errors path="auditoria.dataAudit" cssClass="errorField alert alert-danger" />
     <div class="container">
       <div class="row">
             <div class="form-group">
@@ -53,7 +53,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="auditoria.entitatID" cssClass="errorField alert alert-error" />
+          <form:errors path="auditoria.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.ENTITATID)}" >
           <form:hidden path="auditoria.entitatID"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.auditoria.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
@@ -82,7 +82,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="auditoria.usuariID" cssClass="errorField alert alert-error" />
+          <form:errors path="auditoria.usuariID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USUARIID)}" >
           <form:hidden path="auditoria.usuariID"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.auditoria.usuariID,__theForm.listOfUsuariForUsuariID)}"  />
@@ -111,7 +111,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="auditoria.tipus" cssClass="errorField alert alert-error" />
+          <form:errors path="auditoria.tipus" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TIPUS)}" >
           <form:hidden path="auditoria.tipus"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.auditoria.tipus,__theForm.listOfValuesForTipus)}"  />
@@ -138,7 +138,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="auditoria.ticketLoginIB" cssClass="errorField alert alert-error" />
+            <form:errors path="auditoria.ticketLoginIB" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TICKETLOGINIB)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TICKETLOGINIB)? ' uneditable-input' : ''}"  maxlength="256" path="auditoria.ticketLoginIB"   />
 
            </td>
@@ -156,7 +156,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="auditoria.pluginID" cssClass="errorField alert alert-error" />
+          <form:errors path="auditoria.pluginID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.PLUGINID)}" >
           <form:hidden path="auditoria.pluginID"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.auditoria.pluginID,__theForm.listOfValuesForPluginID)}"  />

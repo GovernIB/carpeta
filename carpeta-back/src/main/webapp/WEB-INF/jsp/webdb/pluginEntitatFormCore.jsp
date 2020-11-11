@@ -13,7 +13,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="pluginEntitat.pluginID" cssClass="errorField alert alert-error" />
+          <form:errors path="pluginEntitat.pluginID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.PLUGINID)}" >
           <form:hidden path="pluginEntitat.pluginID"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.pluginEntitat.pluginID,__theForm.listOfPluginForPluginID)}"  />
@@ -40,7 +40,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="pluginEntitat.entitatID" cssClass="errorField alert alert-error" />
+          <form:errors path="pluginEntitat.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ENTITATID)}" >
           <form:hidden path="pluginEntitat.entitatID"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.pluginEntitat.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
@@ -68,7 +68,7 @@
             </td>
             <td>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ACTIU)}" >
-              <form:errors path="pluginEntitat.actiu" cssClass="errorField alert alert-error" />
+              <form:errors path="pluginEntitat.actiu" cssClass="errorField alert alert-danger" />
               <form:checkbox cssClass="form-control" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ACTIU)? 'false' : 'true'}" path="pluginEntitat.actiu" />
           </c:if>
           <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ACTIU)}" >

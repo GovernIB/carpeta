@@ -13,7 +13,7 @@
              </label>
             </td>
             <td>
-       <form:errors path="entitat.nom" cssClass="errorField alert alert-error" />
+       <form:errors path="entitat.nom" cssClass="errorField alert alert-danger" />
        <div class="row-fluid  col-md-6">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
              <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
@@ -26,7 +26,7 @@
          <div class="tab-content well well-white" style="padding:8px;margin:0px;">
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_nom_${idioma.idiomaID}">
-               <form:errors path="entitat.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-error"/>
+               <form:errors path="entitat.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
                <form:input path="entitat.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.NOMID)? ' uneditable-input' : ''}" maxlength="4000" />
            </div>
            </c:forEach>
@@ -48,7 +48,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="entitat.codi" cssClass="errorField alert alert-error" />
+            <form:errors path="entitat.codi" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.CODI)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.CODI)? ' uneditable-input' : ''}"  maxlength="30" path="entitat.codi"   />
 
            </td>
@@ -66,7 +66,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="entitat.codiDir3" cssClass="errorField alert alert-error" />
+            <form:errors path="entitat.codiDir3" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.CODIDIR3)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.CODIDIR3)? ' uneditable-input' : ''}"  maxlength="255" path="entitat.codiDir3"   />
 
            </td>
@@ -85,7 +85,7 @@
             </td>
             <td>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,EntitatFields.ACTIVA)}" >
-              <form:errors path="entitat.activa" cssClass="errorField alert alert-error" />
+              <form:errors path="entitat.activa" cssClass="errorField alert alert-danger" />
               <form:checkbox cssClass="form-control" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,EntitatFields.ACTIVA)? 'false' : 'true'}" path="entitat.activa" />
           </c:if>
           <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.ACTIVA)}" >
@@ -106,7 +106,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="entitat.colorMenu" cssClass="errorField alert alert-error" />
+            <form:errors path="entitat.colorMenu" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.COLORMENU)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.COLORMENU)? ' uneditable-input' : ''}"  maxlength="100" path="entitat.colorMenu"   />
 
            </td>
@@ -124,7 +124,7 @@
              </label>
             </td>
             <td>
-              <form:errors path="entitat.logoCapBackID" cssClass="errorField alert alert-error" />
+              <form:errors path="entitat.logoCapBackID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOCAPBACKID)}" >
               <a target="_blank" href="<c:url value="${car:fileUrl(logoCapBackID.logoCapBackID)}"/>">${logoCapBackID.logoCapBackID.nom}</a>
             </c:if>
@@ -160,7 +160,7 @@
              </label>
             </td>
             <td>
-              <form:errors path="entitat.logoPeuBackID" cssClass="errorField alert alert-error" />
+              <form:errors path="entitat.logoPeuBackID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOPEUBACKID)}" >
               <a target="_blank" href="<c:url value="${car:fileUrl(logoPeuBackID.logoPeuBackID)}"/>">${logoPeuBackID.logoPeuBackID.nom}</a>
             </c:if>
@@ -196,7 +196,7 @@
              </label>
             </td>
             <td>
-              <form:errors path="entitat.logoLateralFrontID" cssClass="errorField alert alert-error" />
+              <form:errors path="entitat.logoLateralFrontID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOLATERALFRONTID)}" >
               <a target="_blank" href="<c:url value="${car:fileUrl(logoLateralFrontID.logoLateralFrontID)}"/>">${logoLateralFrontID.logoLateralFrontID.nom}</a>
             </c:if>
@@ -232,7 +232,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="entitat.versio" cssClass="errorField alert alert-error" />
+            <form:errors path="entitat.versio" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.VERSIO)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.VERSIO)? ' uneditable-input' : ''}"  maxlength="50" path="entitat.versio"   />
 
            </td>
@@ -250,7 +250,7 @@
              </label>
             </td>
             <td>
-              <form:errors path="entitat.iconID" cssClass="errorField alert alert-error" />
+              <form:errors path="entitat.iconID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.ICONID)}" >
               <a target="_blank" href="<c:url value="${car:fileUrl(iconID.iconID)}"/>">${iconID.iconID.nom}</a>
             </c:if>
@@ -296,7 +296,7 @@
 
            <c:if test="${not (gen:contains(__theForm.readOnlyFields ,EntitatFields.WEBENTITAT))}">
 
-            <form:errors path="entitat.webEntitat" cssClass="errorField alert alert-error" />
+            <form:errors path="entitat.webEntitat" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.WEBENTITAT)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.WEBENTITAT)? ' uneditable-input' : ''}"  maxlength="255" path="entitat.webEntitat"   />
 
            </c:if>
@@ -316,7 +316,7 @@
              </label>
             </td>
             <td>
-              <form:errors path="entitat.entitatDescFront" cssClass="errorField alert alert-error" />
+              <form:errors path="entitat.entitatDescFront" cssClass="errorField alert alert-danger" />
               <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;" cssClass="form-control col-md-8" readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.ENTITATDESCFRONT)? 'true' : 'false'}" path="entitat.entitatDescFront"  />
               <div class="btn-group" style="vertical-align: top;">
               <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span></button>
@@ -351,7 +351,7 @@
 
            <c:if test="${not (gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTWEB))}">
 
-            <form:errors path="entitat.suportWeb" cssClass="errorField alert alert-error" />
+            <form:errors path="entitat.suportWeb" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTWEB)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTWEB)? ' uneditable-input' : ''}"  maxlength="255" path="entitat.suportWeb"   />
 
            </c:if>
@@ -371,7 +371,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="entitat.suportTelefon" cssClass="errorField alert alert-error" />
+            <form:errors path="entitat.suportTelefon" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTTELEFON)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTTELEFON)? ' uneditable-input' : ''}"  maxlength="255" path="entitat.suportTelefon"   />
 
            </td>
@@ -389,7 +389,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="entitat.suportEmail" cssClass="errorField alert alert-error" />
+            <form:errors path="entitat.suportEmail" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTEMAIL)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTEMAIL)? ' uneditable-input' : ''}"  maxlength="255" path="entitat.suportEmail"   />
 
            </td>
@@ -407,7 +407,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="entitat.pluginLoginID" cssClass="errorField alert alert-error" />
+          <form:errors path="entitat.pluginLoginID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.PLUGINLOGINID)}" >
           <form:hidden path="entitat.pluginLoginID"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.entitat.pluginLoginID,__theForm.listOfPluginForPluginLoginID)}"  />
@@ -436,7 +436,7 @@
              </label>
             </td>
             <td>
-              <form:errors path="entitat.fitxerCssID" cssClass="errorField alert alert-error" />
+              <form:errors path="entitat.fitxerCssID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.FITXERCSSID)}" >
               <a target="_blank" href="<c:url value="${car:fileUrl(fitxerCssID.fitxerCssID)}"/>">${fitxerCssID.fitxerCssID.nom}</a>
             </c:if>
@@ -476,7 +476,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="entitat.context" cssClass="errorField alert alert-error" />
+            <form:errors path="entitat.context" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.CONTEXT)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.CONTEXT)? ' uneditable-input' : ''}"  maxlength="255" path="entitat.context"   />
 
            </td>
@@ -494,7 +494,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="entitat.commit" cssClass="errorField alert alert-error" />
+            <form:errors path="entitat.commit" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.COMMIT)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.COMMIT)? ' uneditable-input' : ''}"  maxlength="255" path="entitat.commit"   />
 
            </td>

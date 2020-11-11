@@ -1,11 +1,12 @@
 package es.caib.carpeta.jpa.validator;
 
-import es.caib.carpeta.model.entity.Estadistica;
-import es.caib.carpeta.model.fields.EntitatFields;
-import es.caib.carpeta.model.fields.EstadisticaFields;
-
 import org.apache.log4j.Logger;
+
+import es.caib.carpeta.model.entity.Estadistica;
 import org.fundaciobit.genapp.common.query.Field;
+import es.caib.carpeta.model.fields.EstadisticaFields;
+import es.caib.carpeta.model.fields.EntitatFields;
+
 import org.fundaciobit.genapp.common.validation.IValidatorResult;
 
 

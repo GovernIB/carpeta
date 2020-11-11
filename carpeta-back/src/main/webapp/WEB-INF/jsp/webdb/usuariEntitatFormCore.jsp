@@ -13,7 +13,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="usuariEntitat.usuariID" cssClass="errorField alert alert-error" />
+          <form:errors path="usuariEntitat.usuariID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,UsuariEntitatFields.USUARIID)}" >
           <form:hidden path="usuariEntitat.usuariID"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.usuariEntitat.usuariID,__theForm.listOfUsuariForUsuariID)}"  />
@@ -40,7 +40,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="usuariEntitat.entitatID" cssClass="errorField alert alert-error" />
+          <form:errors path="usuariEntitat.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,UsuariEntitatFields.ENTITATID)}" >
           <form:hidden path="usuariEntitat.entitatID"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.usuariEntitat.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
@@ -68,7 +68,7 @@
             </td>
             <td>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,UsuariEntitatFields.ACTIU)}" >
-              <form:errors path="usuariEntitat.actiu" cssClass="errorField alert alert-error" />
+              <form:errors path="usuariEntitat.actiu" cssClass="errorField alert alert-danger" />
               <form:checkbox cssClass="form-control" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,UsuariEntitatFields.ACTIU)? 'false' : 'true'}" path="usuariEntitat.actiu" />
           </c:if>
           <c:if test="${gen:contains(__theForm.readOnlyFields ,UsuariEntitatFields.ACTIU)}" >

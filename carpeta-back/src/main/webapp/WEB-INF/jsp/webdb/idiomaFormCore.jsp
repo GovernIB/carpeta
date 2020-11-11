@@ -13,7 +13,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="idioma.idiomaID" cssClass="errorField alert alert-error" />
+            <form:errors path="idioma.idiomaID" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,IdiomaFields.IDIOMAID)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,IdiomaFields.IDIOMAID)? ' uneditable-input' : ''}"  maxlength="5" path="idioma.idiomaID"   />
 
            </td>
@@ -31,7 +31,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="idioma.nom" cssClass="errorField alert alert-error" />
+            <form:errors path="idioma.nom" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,IdiomaFields.NOM)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,IdiomaFields.NOM)? ' uneditable-input' : ''}"  maxlength="50" path="idioma.nom"   />
 
            </td>
@@ -50,7 +50,7 @@
             </td>
             <td>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,IdiomaFields.SUPORTAT)}" >
-              <form:errors path="idioma.suportat" cssClass="errorField alert alert-error" />
+              <form:errors path="idioma.suportat" cssClass="errorField alert alert-danger" />
               <form:checkbox cssClass="form-control" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,IdiomaFields.SUPORTAT)? 'false' : 'true'}" path="idioma.suportat" />
           </c:if>
           <c:if test="${gen:contains(__theForm.readOnlyFields ,IdiomaFields.SUPORTAT)}" >
@@ -71,7 +71,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="idioma.ordre" cssClass="errorField alert alert-error" />
+            <form:errors path="idioma.ordre" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,IdiomaFields.ORDRE)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,IdiomaFields.ORDRE)? ' uneditable-input' : ''}"   path="idioma.ordre"   />
 
            </td>

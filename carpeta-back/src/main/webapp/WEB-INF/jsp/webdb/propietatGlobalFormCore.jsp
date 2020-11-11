@@ -13,7 +13,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="propietatGlobal.codi" cssClass="errorField alert alert-error" />
+            <form:errors path="propietatGlobal.codi" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.CODI)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.CODI)? ' uneditable-input' : ''}"  maxlength="250" path="propietatGlobal.codi"   />
 
            </td>
@@ -31,7 +31,7 @@
              </label>
             </td>
             <td>
-              <form:errors path="propietatGlobal.value" cssClass="errorField alert alert-error" />
+              <form:errors path="propietatGlobal.value" cssClass="errorField alert alert-danger" />
               <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;" cssClass="form-control col-md-8" readonly="${ gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.VALUE)? 'true' : 'false'}" path="propietatGlobal.value"  />
               <div class="btn-group" style="vertical-align: top;">
               <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span></button>
@@ -56,7 +56,7 @@
              </label>
             </td>
             <td>
-              <form:errors path="propietatGlobal.descripcio" cssClass="errorField alert alert-error" />
+              <form:errors path="propietatGlobal.descripcio" cssClass="errorField alert alert-danger" />
               <form:textarea cssClass="col-md-8 ${gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.DESCRIPCIO)? 'mceEditorReadOnly':'mceEditor'}"  path="propietatGlobal.descripcio"  />
            </td>
         </tr>
@@ -73,7 +73,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="propietatGlobal.entitatID" cssClass="errorField alert alert-error" />
+          <form:errors path="propietatGlobal.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.ENTITATID)}" >
           <form:hidden path="propietatGlobal.entitatID"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.propietatGlobal.entitatID,__theForm.listOfEntitatForEntitatID)}"  />

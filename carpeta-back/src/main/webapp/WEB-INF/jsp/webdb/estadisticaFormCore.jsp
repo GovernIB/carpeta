@@ -13,7 +13,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="estadistica.tipus" cssClass="errorField alert alert-error" />
+          <form:errors path="estadistica.tipus" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.TIPUS)}" >
           <form:hidden path="estadistica.tipus"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.estadistica.tipus,__theForm.listOfValuesForTipus)}"  />
@@ -40,7 +40,7 @@
              </label>
             </td>
             <td>
-              <form:errors path="estadistica.dataEstadistica" cssClass="errorField alert alert-error" />
+              <form:errors path="estadistica.dataEstadistica" cssClass="errorField alert alert-danger" />
     <div class="container">
       <div class="row">
             <div class="form-group">
@@ -80,7 +80,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="estadistica.pluginID" cssClass="errorField alert alert-error" />
+          <form:errors path="estadistica.pluginID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.PLUGINID)}" >
           <form:hidden path="estadistica.pluginID"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.estadistica.pluginID,__theForm.listOfValuesForPluginID)}"  />
@@ -109,7 +109,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="estadistica.comptador" cssClass="errorField alert alert-error" />
+            <form:errors path="estadistica.comptador" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EstadisticaFields.COMPTADOR)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.COMPTADOR)? ' uneditable-input' : ''}"   path="estadistica.comptador"   />
 
            </td>
@@ -127,7 +127,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="estadistica.entitatID" cssClass="errorField alert alert-error" />
+          <form:errors path="estadistica.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.ENTITATID)}" >
           <form:hidden path="estadistica.entitatID"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.estadistica.entitatID,__theForm.listOfEntitatForEntitatID)}"  />

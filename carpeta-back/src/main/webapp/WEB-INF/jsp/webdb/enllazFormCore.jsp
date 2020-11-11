@@ -13,7 +13,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="enllaz.tipus" cssClass="errorField alert alert-error" />
+          <form:errors path="enllaz.tipus" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,EnllazFields.TIPUS)}" >
           <form:hidden path="enllaz.tipus"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.enllaz.tipus,__theForm.listOfValuesForTipus)}"  />
@@ -40,7 +40,7 @@
              </label>
             </td>
             <td>
-       <form:errors path="enllaz.nom" cssClass="errorField alert alert-error" />
+       <form:errors path="enllaz.nom" cssClass="errorField alert alert-danger" />
        <div class="row-fluid  col-md-6">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
              <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
@@ -53,7 +53,7 @@
          <div class="tab-content well well-white" style="padding:8px;margin:0px;">
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_nom_${idioma.idiomaID}">
-               <form:errors path="enllaz.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-error"/>
+               <form:errors path="enllaz.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
                <form:input path="enllaz.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EnllazFields.NOMID)? ' uneditable-input' : ''}" maxlength="4000" />
            </div>
            </c:forEach>
@@ -75,7 +75,7 @@
              </label>
             </td>
             <td>
-       <form:errors path="enllaz.url" cssClass="errorField alert alert-error" />
+       <form:errors path="enllaz.url" cssClass="errorField alert alert-danger" />
        <div class="row-fluid  col-md-6">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
              <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
@@ -88,7 +88,7 @@
          <div class="tab-content well well-white" style="padding:8px;margin:0px;">
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_url_${idioma.idiomaID}">
-               <form:errors path="enllaz.url.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-error"/>
+               <form:errors path="enllaz.url.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
                <form:input path="enllaz.url.traduccions['${idioma.idiomaID}'].valor" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EnllazFields.URLID)? ' uneditable-input' : ''}" maxlength="4000" />
            </div>
            </c:forEach>
@@ -110,7 +110,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="enllaz.entitatID" cssClass="errorField alert alert-error" />
+          <form:errors path="enllaz.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,EnllazFields.ENTITATID)}" >
           <form:hidden path="enllaz.entitatID"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.enllaz.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
@@ -137,7 +137,7 @@
              </label>
             </td>
             <td>
-              <form:errors path="enllaz.logoID" cssClass="errorField alert alert-error" />
+              <form:errors path="enllaz.logoID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,EnllazFields.LOGOID)}" >
               <a target="_blank" href="<c:url value="${car:fileUrl(logoID.logoID)}"/>">${logoID.logoID.nom}</a>
             </c:if>

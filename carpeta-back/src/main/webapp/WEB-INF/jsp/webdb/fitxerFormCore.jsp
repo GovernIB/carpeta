@@ -13,7 +13,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="fitxer.nom" cssClass="errorField alert alert-error" />
+            <form:errors path="fitxer.nom" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,FitxerFields.NOM)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,FitxerFields.NOM)? ' uneditable-input' : ''}"  maxlength="255" path="fitxer.nom"   />
 
            </td>
@@ -31,7 +31,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="fitxer.mime" cssClass="errorField alert alert-error" />
+            <form:errors path="fitxer.mime" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,FitxerFields.MIME)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,FitxerFields.MIME)? ' uneditable-input' : ''}"  maxlength="255" path="fitxer.mime"   />
 
            </td>
@@ -49,7 +49,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="fitxer.tamany" cssClass="errorField alert alert-error" />
+            <form:errors path="fitxer.tamany" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,FitxerFields.TAMANY)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,FitxerFields.TAMANY)? ' uneditable-input' : ''}"   path="fitxer.tamany"   />
 
            </td>
@@ -67,7 +67,7 @@
              </label>
             </td>
             <td>
-              <form:errors path="fitxer.descripcio" cssClass="errorField alert alert-error" />
+              <form:errors path="fitxer.descripcio" cssClass="errorField alert alert-danger" />
               <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;" cssClass="form-control col-md-8" readonly="${ gen:contains(__theForm.readOnlyFields ,FitxerFields.DESCRIPCIO)? 'true' : 'false'}" path="fitxer.descripcio"  />
               <div class="btn-group" style="vertical-align: top;">
               <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span></button>

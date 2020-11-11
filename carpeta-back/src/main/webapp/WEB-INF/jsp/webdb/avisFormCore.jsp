@@ -13,7 +13,7 @@
              </label>
             </td>
             <td>
-       <form:errors path="avis.descripcio" cssClass="errorField alert alert-error" />
+       <form:errors path="avis.descripcio" cssClass="errorField alert alert-danger" />
        <div class="row-fluid  col-md-6">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
              <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
@@ -26,7 +26,7 @@
          <div class="tab-content well well-white" style="padding:8px;margin:0px;">
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_descripcio_${idioma.idiomaID}">
-               <form:errors path="avis.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-error"/>
+               <form:errors path="avis.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
                <form:input path="avis.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,AvisFields.DESCRIPCIOID)? ' uneditable-input' : ''}" maxlength="4000" />
            </div>
            </c:forEach>
@@ -48,7 +48,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="avis.entitatID" cssClass="errorField alert alert-error" />
+          <form:errors path="avis.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,AvisFields.ENTITATID)}" >
           <form:hidden path="avis.entitatID"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.avis.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
@@ -77,7 +77,7 @@
              </label>
             </td>
             <td>
-              <form:errors path="avis.dataInici" cssClass="errorField alert alert-error" />
+              <form:errors path="avis.dataInici" cssClass="errorField alert alert-danger" />
     <div class="container">
       <div class="row">
             <div class="form-group">
@@ -117,7 +117,7 @@
              </label>
             </td>
             <td>
-              <form:errors path="avis.dataFi" cssClass="errorField alert alert-error" />
+              <form:errors path="avis.dataFi" cssClass="errorField alert alert-danger" />
     <div class="container">
       <div class="row">
             <div class="form-group">
@@ -157,7 +157,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="avis.tipus" cssClass="errorField alert alert-error" />
+          <form:errors path="avis.tipus" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,AvisFields.TIPUS)}" >
           <form:hidden path="avis.tipus"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.avis.tipus,__theForm.listOfValuesForTipus)}"  />
@@ -184,7 +184,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="avis.gravetat" cssClass="errorField alert alert-error" />
+          <form:errors path="avis.gravetat" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,AvisFields.GRAVETAT)}" >
           <form:hidden path="avis.gravetat"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.avis.gravetat,__theForm.listOfValuesForGravetat)}"  />
@@ -211,7 +211,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="avis.pluginFrontID" cssClass="errorField alert alert-error" />
+          <form:errors path="avis.pluginFrontID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,AvisFields.PLUGINFRONTID)}" >
           <form:hidden path="avis.pluginFrontID"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.avis.pluginFrontID,__theForm.listOfPluginForPluginFrontID)}"  />

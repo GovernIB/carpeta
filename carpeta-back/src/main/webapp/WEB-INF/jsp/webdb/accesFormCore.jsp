@@ -13,7 +13,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="acces.nom" cssClass="errorField alert alert-error" />
+            <form:errors path="acces.nom" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.NOM)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,AccesFields.NOM)? ' uneditable-input' : ''}"  maxlength="255" path="acces.nom"   />
 
            </td>
@@ -31,7 +31,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="acces.llinatges" cssClass="errorField alert alert-error" />
+            <form:errors path="acces.llinatges" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.LLINATGES)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,AccesFields.LLINATGES)? ' uneditable-input' : ''}"  maxlength="255" path="acces.llinatges"   />
 
            </td>
@@ -49,7 +49,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="acces.nif" cssClass="errorField alert alert-error" />
+            <form:errors path="acces.nif" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.NIF)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,AccesFields.NIF)? ' uneditable-input' : ''}"  maxlength="50" path="acces.nif"   />
 
            </td>
@@ -67,7 +67,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="acces.ip" cssClass="errorField alert alert-error" />
+            <form:errors path="acces.ip" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.IP)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,AccesFields.IP)? ' uneditable-input' : ''}"  maxlength="100" path="acces.ip"   />
 
            </td>
@@ -85,7 +85,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="acces.proveidorIdentitat" cssClass="errorField alert alert-error" />
+            <form:errors path="acces.proveidorIdentitat" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.PROVEIDORIDENTITAT)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,AccesFields.PROVEIDORIDENTITAT)? ' uneditable-input' : ''}"  maxlength="255" path="acces.proveidorIdentitat"   />
 
            </td>
@@ -103,7 +103,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="acces.nivellSeguretat" cssClass="errorField alert alert-error" />
+            <form:errors path="acces.nivellSeguretat" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.NIVELLSEGURETAT)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,AccesFields.NIVELLSEGURETAT)? ' uneditable-input' : ''}"  maxlength="255" path="acces.nivellSeguretat"   />
 
            </td>
@@ -121,7 +121,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="acces.resultatAutenticacio" cssClass="errorField alert alert-error" />
+            <form:errors path="acces.resultatAutenticacio" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.RESULTATAUTENTICACIO)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,AccesFields.RESULTATAUTENTICACIO)? ' uneditable-input' : ''}"   path="acces.resultatAutenticacio"   />
 
            </td>
@@ -139,7 +139,7 @@
              </label>
             </td>
             <td>
-              <form:errors path="acces.dataDarrerAcces" cssClass="errorField alert alert-error" />
+              <form:errors path="acces.dataDarrerAcces" cssClass="errorField alert alert-danger" />
     <div class="container">
       <div class="row">
             <div class="form-group">
@@ -179,7 +179,7 @@
              </label>
             </td>
             <td>
-            <form:errors path="acces.idioma" cssClass="errorField alert alert-error" />
+            <form:errors path="acces.idioma" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.IDIOMA)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,AccesFields.IDIOMA)? ' uneditable-input' : ''}"  maxlength="50" path="acces.idioma"   />
 
            </td>
@@ -197,7 +197,7 @@
              </label>
             </td>
             <td>
-          <form:errors path="acces.entitatID" cssClass="errorField alert alert-error" />
+          <form:errors path="acces.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,AccesFields.ENTITATID)}" >
           <form:hidden path="acces.entitatID"/>
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.acces.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
