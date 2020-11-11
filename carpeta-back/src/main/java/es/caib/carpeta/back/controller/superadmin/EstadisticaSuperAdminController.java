@@ -18,7 +18,6 @@ import es.caib.carpeta.back.form.webdb.*;
 
 import es.caib.carpeta.back.controller.webdb.EstadisticaController;
 import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.jpa.EstadisticaJPA;
 import es.caib.carpeta.model.fields.*;
 
 /**
@@ -59,6 +58,7 @@ public class EstadisticaSuperAdminController  extends EstadisticaController {
    }
 
 
+   @Override
    public EstadisticaFilterForm getEstadisticaFilterForm(Integer pagina, ModelAndView mav,
                                                          HttpServletRequest request) throws I18NException {
       EstadisticaFilterForm estadisticaFilterForm = super.getEstadisticaFilterForm(pagina, mav, request);
@@ -79,25 +79,6 @@ public class EstadisticaSuperAdminController  extends EstadisticaController {
       return estadisticaFilterForm;
    }
 
-
-   /**
-    *
-    * @return
-    * @throws Exception
-    */
-   @Override
-   public EstadisticaForm getEstadisticaForm(EstadisticaJPA _jpa,
-                                             boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
-      EstadisticaForm estadisticaForm = super.getEstadisticaForm(_jpa,__isView,request,mav);
-
-
-
-      estadisticaForm.setAllFieldsReadOnly(LogCarpetaFields.ALL_LOGCARPETA_FIELDS);
-      estadisticaForm.setSaveButtonVisible(false);
-      estadisticaForm.setDeleteButtonVisible(false);
-
-      return estadisticaForm;
-   }
 
    @Override
    public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,

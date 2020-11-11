@@ -117,4 +117,25 @@ public interface Constants {
        TIPUS_ESTAD_ACCES_PLUGIN
     };
 
+
+    /* Tipus Auditoria */
+    public static final int TIPUS_AUDIT_ENTRADA_BACK = 1;
+    public static final int TIPUS_AUDIT_ENTRADA_FRONT_NO_AUTENTICAT = 2;
+    public static final int TIPUS_AUDIT_ENTRADA_FRONT_AUTENTICAT = 3;
+    public static final int TIPUS_AUDIT_ACCES_PLUGIN = 4;
+    public static final int TIPUS_AUDIT_AFEGIR_PROPGLOB = 5;
+    public static final int TIPUS_AUDIT_AFEGIR_PLUGIN = 6;
+
+
+
+    public static final int[] TIPUS_AUDITORIA_ALL = {
+            TIPUS_AUDIT_ENTRADA_BACK,
+            TIPUS_AUDIT_ENTRADA_FRONT_NO_AUTENTICAT,
+            TIPUS_AUDIT_ENTRADA_FRONT_AUTENTICAT,
+            TIPUS_AUDIT_ACCES_PLUGIN,
+            TIPUS_AUDIT_AFEGIR_PROPGLOB,
+            TIPUS_AUDIT_AFEGIR_PLUGIN
+    };
+
+
 }

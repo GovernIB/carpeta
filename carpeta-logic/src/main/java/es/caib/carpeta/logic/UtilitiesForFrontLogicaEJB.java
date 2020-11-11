@@ -8,10 +8,10 @@ import es.caib.carpeta.model.entity.*;
 import es.caib.carpeta.model.fields.*;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.ICarpetaFrontPlugin;
-import es.caib.carpeta.utils.Constants;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
+import org.springframework.context.i18n.LocaleContextHolder;
 
 import javax.annotation.security.PermitAll;
 import javax.ejb.EJB;
@@ -111,6 +111,8 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
 
         List<PluginInfo> pluginsInfo = new ArrayList<PluginInfo>(plugins.size());
 
+        String lang = LocaleContextHolder.getLocale().getLanguage();
+
         for (Plugin plugin : plugins) {
             PluginJPA p = (PluginJPA) plugin;
 
@@ -124,16 +126,12 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
             if (avisos.size() > 0){
                 gravetatAvis = (long) avisos.get(0).getGravetat();
                 // XYZ ZZZ TODO Canviar per idioma actiu
-                missatgeAvis = avisos.get(0).getDescripcio().getTraduccio(Constants.IDIOMA_CATALA).getValor();
+                missatgeAvis = avisos.get(0).getDescripcio().getTraduccio(lang).getValor();
             }
 
             pluginsInfo.add(new PluginInfo(String.valueOf(plugin.getPluginID()),
-                    p.getNom().getTraduccio(Constants.IDIOMA_CATALA).getValor(),
-                    p.getNom().getTraduccio(Constants.IDIOMA_CASTELLA).getValor(),
-                    p.getNom().getTraduccio(Constants.IDIOMA_ANGLES).getValor(),
-                    p.getDescripcio().getTraduccio(Constants.IDIOMA_CATALA).getValor(),
-                    p.getDescripcio().getTraduccio(Constants.IDIOMA_CASTELLA).getValor(),
-                    p.getDescripcio().getTraduccio(Constants.IDIOMA_ANGLES).getValor(),
+                    p.getNom().getTraduccio(lang).getValor(),
+                    p.getDescripcio().getTraduccio(lang).getValor(),
                     String.valueOf(cfp.isReactComponent()),gravetatAvis,missatgeAvis));
         }
 

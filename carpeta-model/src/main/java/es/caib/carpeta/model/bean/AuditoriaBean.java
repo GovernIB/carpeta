@@ -12,9 +12,9 @@ private static final long serialVersionUID = -273096378L;
 
 	long auditoriaID;// PK
 	java.sql.Timestamp dataAudit;
+	int tipus;
 	java.lang.Long entitatID;
 	java.lang.Long usuariID;
-	int tipus;
 	java.lang.String ticketLoginIB;
 	java.lang.Integer pluginID;
 
@@ -24,21 +24,21 @@ private static final long serialVersionUID = -273096378L;
   }
 
   /** Constructor amb tots els camps  */
-  public AuditoriaBean(long auditoriaID , java.sql.Timestamp dataAudit , java.lang.Long entitatID , java.lang.Long usuariID , int tipus , java.lang.String ticketLoginIB , java.lang.Integer pluginID) {
+  public AuditoriaBean(long auditoriaID , java.sql.Timestamp dataAudit , int tipus , java.lang.Long entitatID , java.lang.Long usuariID , java.lang.String ticketLoginIB , java.lang.Integer pluginID) {
     this.auditoriaID=auditoriaID;
     this.dataAudit=dataAudit;
+    this.tipus=tipus;
     this.entitatID=entitatID;
     this.usuariID=usuariID;
-    this.tipus=tipus;
     this.ticketLoginIB=ticketLoginIB;
     this.pluginID=pluginID;
 }
   /** Constructor sense valors autoincrementals */
-  public AuditoriaBean(java.sql.Timestamp dataAudit , java.lang.Long entitatID , java.lang.Long usuariID , int tipus , java.lang.String ticketLoginIB , java.lang.Integer pluginID) {
+  public AuditoriaBean(java.sql.Timestamp dataAudit , int tipus , java.lang.Long entitatID , java.lang.Long usuariID , java.lang.String ticketLoginIB , java.lang.Integer pluginID) {
     this.dataAudit=dataAudit;
+    this.tipus=tipus;
     this.entitatID=entitatID;
     this.usuariID=usuariID;
-    this.tipus=tipus;
     this.ticketLoginIB=ticketLoginIB;
     this.pluginID=pluginID;
 }
@@ -51,9 +51,9 @@ private static final long serialVersionUID = -273096378L;
   public AuditoriaBean(Auditoria __bean) {
     this.setAuditoriaID(__bean.getAuditoriaID());
     this.setDataAudit(__bean.getDataAudit());
+    this.setTipus(__bean.getTipus());
     this.setEntitatID(__bean.getEntitatID());
     this.setUsuariID(__bean.getUsuariID());
-    this.setTipus(__bean.getTipus());
     this.setTicketLoginIB(__bean.getTicketLoginIB());
     this.setPluginID(__bean.getPluginID());
 	}
@@ -72,6 +72,13 @@ private static final long serialVersionUID = -273096378L;
 		this.dataAudit = _dataAudit_;
 	};
 
+	public int getTipus() {
+		return(tipus);
+	};
+	public void setTipus(int _tipus_) {
+		this.tipus = _tipus_;
+	};
+
 	public java.lang.Long getEntitatID() {
 		return(entitatID);
 	};
@@ -84,13 +91,6 @@ private static final long serialVersionUID = -273096378L;
 	};
 	public void setUsuariID(java.lang.Long _usuariID_) {
 		this.usuariID = _usuariID_;
-	};
-
-	public int getTipus() {
-		return(tipus);
-	};
-	public void setTipus(int _tipus_) {
-		this.tipus = _tipus_;
 	};
 
 	public java.lang.String getTicketLoginIB() {
@@ -116,9 +116,9 @@ private static final long serialVersionUID = -273096378L;
     AuditoriaBean __tmp = new AuditoriaBean();
     __tmp.setAuditoriaID(__bean.getAuditoriaID());
     __tmp.setDataAudit(__bean.getDataAudit());
+    __tmp.setTipus(__bean.getTipus());
     __tmp.setEntitatID(__bean.getEntitatID());
     __tmp.setUsuariID(__bean.getUsuariID());
-    __tmp.setTipus(__bean.getTipus());
     __tmp.setTicketLoginIB(__bean.getTicketLoginIB());
     __tmp.setPluginID(__bean.getPluginID());
 		return __tmp;

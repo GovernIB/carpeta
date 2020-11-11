@@ -7,13 +7,10 @@ class PluginReact extends Component {
 	render() {
 
 		const {t} = this.props;
-
-		var data = new FormData();
-		var codiPlugin;
+		const pluginID = this.props.pluginID;
 
 		var urlBase = window.location.href;
 		var url = urlBase + "pluginfront/showplugin/" + pluginID + "/" + i18n.language;
-
 
 		$(document).ready(function () {
 			sessionStorage.setItem('idioma', i18n.language);

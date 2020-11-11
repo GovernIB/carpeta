@@ -129,12 +129,6 @@
 		<div id = "peu"></div>
 
 
-		<script type="text/javascript">
-			// sessionStorage.clear();
-			sessionStorage.setItem('plugins', JSON.stringify(${plugins}));
-		</script>
-
-	
 	</div>
 
 	<!-- js react -->

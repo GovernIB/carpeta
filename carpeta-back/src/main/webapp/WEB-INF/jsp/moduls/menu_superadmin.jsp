@@ -55,6 +55,8 @@
         code="superadmin.systemproperties" /> </span>
 </a>
 
+<hr style="margin-top: 6px; margin-bottom: 6px;" />
+
 <a class="dropdown-item"
    href="<c:url value="/superadmin/logCarpeta/list"/>"> <span
         style="${(fn:contains(url, '/superadmin/logCarpeta'))? " font-weight:bold;" : ""}"><spring:message
@@ -65,6 +67,12 @@
    href="<c:url value="/superadmin/estadistica/list"/>"> <span
         style="${(fn:contains(url, '/superadmin/estadistica'))? " font-weight:bold;" : ""}"><spring:message
         code="estadistica.estadistica.plural" /> </span>
+</a>
+
+<a class="dropdown-item"
+   href="<c:url value="/superadmin/auditoria/list"/>"> <span
+        style="${(fn:contains(url, '/superadmin/auditoria'))? " font-weight:bold;" : ""}"><spring:message
+        code="auditoria.auditoria.plural" /> </span>
 </a>
 
 <%--

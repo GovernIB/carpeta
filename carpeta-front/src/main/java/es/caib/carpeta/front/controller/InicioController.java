@@ -36,11 +36,6 @@ public class InicioController {
 
         ModelAndView mav = new ModelAndView("inici");
 
-        // Passar JSON de pluginsEntitat
-        Gson gson = new Gson();
-        String plugins = gson.toJson(pluginsEntitat);
-        mav.addObject("plugins", plugins);
-
         return mav;
 
     }

@@ -8,17 +8,9 @@ package es.caib.carpeta.logic.utils;
 public class PluginInfo {
 
     String pluginID;
-
-    String nomCa;
-    String nomEs;
-    String nomEn;
-
-    String descripcioCa;
-    String descripcioEs;
-    String descripcioEn;
-
+    String nom;
+    String descripcio;
     String reactComponent;
-
     Long gravetat;
     String missatge;
 
@@ -26,15 +18,10 @@ public class PluginInfo {
         super();
     }
 
-    public PluginInfo(String pluginID, String nomCa, String nomEs, String nomEn, String descripcioCa,
-            String descripcioEs, String descripcioEn, String reactComponent, Long gravetat, String missatge) {
+    public PluginInfo(String pluginID, String nom, String descripcio, String reactComponent, Long gravetat, String missatge) {
         super();
-        this.nomCa = nomCa;
-        this.nomEs = nomEs;
-        this.nomEn = nomEn;
-        this.descripcioCa = descripcioCa;
-        this.descripcioEs = descripcioEs;
-        this.descripcioEn = descripcioEn;
+        this.nom = nom;
+        this.descripcio = descripcio;
         this.pluginID = pluginID;
         this.reactComponent = reactComponent;
         this.gravetat = gravetat;
@@ -49,52 +36,20 @@ public class PluginInfo {
         this.pluginID = pluginID;
     }
 
-    public String getNomCa() {
-        return nomCa;
+    public String getNom() {
+        return nom;
     }
 
-    public void setNomCa(String nomCa) {
-        this.nomCa = nomCa;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
-    public String getNomEs() {
-        return nomEs;
+    public String getDescripcio() {
+        return descripcio;
     }
 
-    public void setNomEs(String nomEs) {
-        this.nomEs = nomEs;
-    }
-
-    public String getNomEn() {
-        return nomEn;
-    }
-
-    public void setNomEn(String nomEn) {
-        this.nomEn = nomEn;
-    }
-
-    public String getDescripcioCa() {
-        return descripcioCa;
-    }
-
-    public void setDescripcioCa(String descripcioCa) {
-        this.descripcioCa = descripcioCa;
-    }
-
-    public String getDescripcioEs() {
-        return descripcioEs;
-    }
-
-    public void setDescripcioEs(String descripcioEs) {
-        this.descripcioEs = descripcioEs;
-    }
-
-    public String getDescripcioEn() {
-        return descripcioEn;
-    }
-
-    public void setDescripcioEn(String descripcioEn) {
-        this.descripcioEn = descripcioEn;
+    public void setDescripcio(String descripcio) {
+        this.descripcio = descripcio;
     }
 
     public String isReactComponent() {

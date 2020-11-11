@@ -65,6 +65,28 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
   }
 
 
+  private java.lang.Integer tipusDesde;
+
+  public java.lang.Integer getTipusDesde() {
+    return this.tipusDesde;
+  }
+
+  public void setTipusDesde(java.lang.Integer tipusDesde) {
+    this.tipusDesde = tipusDesde;
+  }
+
+
+  private java.lang.Integer tipusFins;
+
+  public java.lang.Integer getTipusFins() {
+    return this.tipusFins;
+  }
+
+  public void setTipusFins(java.lang.Integer tipusFins) {
+    this.tipusFins = tipusFins;
+  }
+
+
   private java.lang.Long entitatIDDesde;
 
   public java.lang.Long getEntitatIDDesde() {
@@ -106,28 +128,6 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
 
   public void setUsuariIDFins(java.lang.Long usuariIDFins) {
     this.usuariIDFins = usuariIDFins;
-  }
-
-
-  private java.lang.Integer tipusDesde;
-
-  public java.lang.Integer getTipusDesde() {
-    return this.tipusDesde;
-  }
-
-  public void setTipusDesde(java.lang.Integer tipusDesde) {
-    this.tipusDesde = tipusDesde;
-  }
-
-
-  private java.lang.Integer tipusFins;
-
-  public java.lang.Integer getTipusFins() {
-    return this.tipusFins;
-  }
-
-  public void setTipusFins(java.lang.Integer tipusFins) {
-    this.tipusFins = tipusFins;
   }
 
 
@@ -173,18 +173,18 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
     this.auditoriaIDFins = __toClone.auditoriaIDFins;
     this.dataAuditDesde = __toClone.dataAuditDesde;
     this.dataAuditFins = __toClone.dataAuditFins;
+    this.tipusDesde = __toClone.tipusDesde;
+    this.tipusFins = __toClone.tipusFins;
     this.entitatIDDesde = __toClone.entitatIDDesde;
     this.entitatIDFins = __toClone.entitatIDFins;
     this.usuariIDDesde = __toClone.usuariIDDesde;
     this.usuariIDFins = __toClone.usuariIDFins;
-    this.tipusDesde = __toClone.tipusDesde;
-    this.tipusFins = __toClone.tipusFins;
     this.ticketLoginIB = __toClone.ticketLoginIB;
     this.pluginIDDesde = __toClone.pluginIDDesde;
     this.pluginIDFins = __toClone.pluginIDFins;
+    this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
     this.mapOfEntitatForEntitatID = __toClone.mapOfEntitatForEntitatID;
     this.mapOfUsuariForUsuariID = __toClone.mapOfUsuariForUsuariID;
-    this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
     this.mapOfValuesForPluginID = __toClone.mapOfValuesForPluginID;
   }
   
@@ -220,6 +220,18 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
    // -----------------------
    // Maps de referencies.
    // -----------------------
+  private Map<String, String> mapOfValuesForTipus;
+
+  public Map<String, String> getMapOfValuesForTipus() {
+    return this.mapOfValuesForTipus;
+  }
+
+  public void setMapOfValuesForTipus(Map<String, String> mapOfValuesForTipus) {
+    this.mapOfValuesForTipus = mapOfValuesForTipus;
+  }
+
+
+
   private Map<String, String> mapOfEntitatForEntitatID;
 
   public Map<String, String> getMapOfEntitatForEntitatID() {
@@ -240,18 +252,6 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
 
   public void setMapOfUsuariForUsuariID(Map<String, String> mapOfUsuariForUsuariID) {
     this.mapOfUsuariForUsuariID = mapOfUsuariForUsuariID;
-  }
-
-
-
-  private Map<String, String> mapOfValuesForTipus;
-
-  public Map<String, String> getMapOfValuesForTipus() {
-    return this.mapOfValuesForTipus;
-  }
-
-  public void setMapOfValuesForTipus(Map<String, String> mapOfValuesForTipus) {
-    this.mapOfValuesForTipus = mapOfValuesForTipus;
   }
 
 
