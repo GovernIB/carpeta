@@ -11,6 +11,7 @@ public class Tramite implements Comparable<Tramite>{
     private String idioma;
     private Date fechaInicio;
     private String url;
+    private String autenticacion;
 
 
 
@@ -68,6 +69,14 @@ public class Tramite implements Comparable<Tramite>{
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getAutenticacion() {
+        return autenticacion;
+    }
+
+    public void setAutenticacion(String autenticacion) {
+        this.autenticacion = autenticacion;
     }
 
     @Override

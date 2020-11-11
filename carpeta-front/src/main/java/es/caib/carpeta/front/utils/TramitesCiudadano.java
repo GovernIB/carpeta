@@ -65,6 +65,7 @@ public class TramitesCiudadano {
             tramite.setIdioma(tramitesistra2.getIdioma());
             tramite.setFechaInicio(tramitesistra2.getFechaInicio());
             tramite.setUrl("");
+            tramite.setAutenticacion("");
 
             tramites.add(tramite);
         }
@@ -81,6 +82,7 @@ public class TramitesCiudadano {
             tramite.setIdioma(tramitesistra1.getIdioma());
             tramite.setFechaInicio(tramitesistra1.getFechaInicio().toGregorianCalendar().getTime());
             tramite.setUrl(tramitesistra1.getUrlAcceso());
+            tramite.setAutenticacion(tramitesistra1.getAutenticacion());
 
             tramites.add(tramite);
         }
@@ -97,6 +99,7 @@ public class TramitesCiudadano {
             tramite.setIdioma(loc.getLanguage());
             tramite.setFechaInicio(tramitesistra1.getFecha().toGregorianCalendar().getTime());
             tramite.setUrl(tramitesistra1.getUrl());
+            tramite.setAutenticacion("");
 
             tramites.add(tramite);
         }

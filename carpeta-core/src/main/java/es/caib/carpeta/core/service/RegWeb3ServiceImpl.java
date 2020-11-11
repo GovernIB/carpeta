@@ -36,11 +36,11 @@ public class RegWeb3ServiceImpl implements RegWeb3Service{
 
             RegWebAsientoRegistralWs api = getRegWebAsientoRegistralWsApi();
 
-            log.info("Buscando registros de: " + documento + " en " + REGWEB3_ENTIDAD);
+            if (log.isDebugEnabled()) log.debug("Buscando registros de: " + documento + " en " + REGWEB3_ENTIDAD);
 
             ResultadoBusquedaWs asientos = api.obtenerAsientosCiudadano(REGWEB3_ENTIDAD, documento, pageNumber);
 
-            log.info("Total asientos: " + asientos.getTotalResults());
+            if (log.isDebugEnabled()) log.debug("Total asientos: " + asientos.getTotalResults());
 
             return asientos;
 
@@ -69,7 +69,7 @@ public class RegWeb3ServiceImpl implements RegWeb3Service{
 
             RegWebAsientoRegistralWs api = getRegWebAsientoRegistralWsApi();
 
-            log.info("Obteniendo registro: " + numeroRegistroFormateado + " en " + REGWEB3_ENTIDAD);
+            if (log.isDebugEnabled()) log.debug("Obteniendo registro: " + numeroRegistroFormateado + " en " + REGWEB3_ENTIDAD);
 
             AsientoRegistralWs asiento = api.obtenerAsientoCiudadano(REGWEB3_ENTIDAD, documento, numeroRegistroFormateado);
 

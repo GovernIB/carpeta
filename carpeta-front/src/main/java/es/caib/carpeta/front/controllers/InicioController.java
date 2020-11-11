@@ -27,6 +27,8 @@ public class InicioController {
     @Value("${es.caib.carpeta.notificaciones.url}")    private String NOTIFICACIONES_URL;
     @Value("${es.caib.carpeta.regweb3.host}")    private String ENTORNO_URL;
 
+    @Value("${es.caib.carpeta.suport.faqs}") private String SUPORT_FAQS;
+    @Value("${es.caib.carpeta.suport.qssi}") private String SUPORT_QSSI;
     @Value("${es.caib.carpeta.suport.correu}") private String SUPORT_CORREU;
     @Value("${es.caib.carpeta.suport.telefon}") private String SUPORT_TELEFON;
     @Value("${es.caib.carpeta.suport.autenticacio}") private String SUPORT_AUTENTICACIO;
@@ -46,6 +48,8 @@ public class InicioController {
         mav.addObject("idioma", loc);
         mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.inicio"));
 
+        mav.addObject("suport_faqs", SUPORT_FAQS);
+        mav.addObject("suport_qssi", SUPORT_QSSI);
         mav.addObject("suport_correu", SUPORT_CORREU);
         mav.addObject("suport_telefon", SUPORT_TELEFON);
         mav.addObject("suport_autenticacio", SUPORT_AUTENTICACIO);
@@ -64,6 +68,8 @@ public class InicioController {
         Locale loc = LocaleContextHolder.getLocale();
         mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.accesibilidad"));
 
+        mav.addObject("suport_faqs", SUPORT_FAQS);
+        mav.addObject("suport_qssi", SUPORT_QSSI);
         mav.addObject("suport_correu", SUPORT_CORREU);
         mav.addObject("suport_telefon", SUPORT_TELEFON);
         mav.addObject("suport_autenticacio", SUPORT_AUTENTICACIO);
@@ -81,6 +87,8 @@ public class InicioController {
         Locale loc = LocaleContextHolder.getLocale();
         mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.datosPersonales"));
 
+        mav.addObject("suport_faqs", SUPORT_FAQS);
+        mav.addObject("suport_qssi", SUPORT_QSSI);
         mav.addObject("suport_correu", SUPORT_CORREU);
         mav.addObject("suport_telefon", SUPORT_TELEFON);
         mav.addObject("suport_autenticacio", SUPORT_AUTENTICACIO);
@@ -101,6 +109,8 @@ public class InicioController {
         Locale loc = LocaleContextHolder.getLocale();
         mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.mapaWeb"));
 
+        mav.addObject("suport_faqs", SUPORT_FAQS);
+        mav.addObject("suport_qssi", SUPORT_QSSI);
         mav.addObject("suport_correu", SUPORT_CORREU);
         mav.addObject("suport_telefon", SUPORT_TELEFON);
         mav.addObject("suport_autenticacio", SUPORT_AUTENTICACIO);
@@ -119,6 +129,8 @@ public class InicioController {
         mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.inicio"));
         mav.addObject("idioma", loc);
 
+        mav.addObject("suport_faqs", SUPORT_FAQS);
+        mav.addObject("suport_qssi", SUPORT_QSSI);
         mav.addObject("suport_correu", SUPORT_CORREU);
         mav.addObject("suport_telefon", SUPORT_TELEFON);
         mav.addObject("suport_autenticacio", SUPORT_AUTENTICACIO);
@@ -142,6 +154,8 @@ public class InicioController {
             mav.addObject("idioma", loc);
             mav.addObject("error", "ERROR");
 
+            mav.addObject("suport_faqs", SUPORT_FAQS);
+            mav.addObject("suport_qssi", SUPORT_QSSI);
             mav.addObject("suport_correu", SUPORT_CORREU);
             mav.addObject("suport_telefon", SUPORT_TELEFON);
             mav.addObject("suport_autenticacio", SUPORT_AUTENTICACIO);

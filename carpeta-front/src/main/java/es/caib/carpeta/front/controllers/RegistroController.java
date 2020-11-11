@@ -35,6 +35,8 @@ public class RegistroController {
 
     @Value("${es.caib.carpeta.concsv.url}")    private String CONCSV_URL;
 
+    @Value("${es.caib.carpeta.suport.faqs}") private String SUPORT_FAQS;
+    @Value("${es.caib.carpeta.suport.qssi}") private String SUPORT_QSSI;
     @Value("${es.caib.carpeta.suport.correu}") private String SUPORT_CORREU;
     @Value("${es.caib.carpeta.suport.telefon}") private String SUPORT_TELEFON;
     @Value("${es.caib.carpeta.suport.autenticacio}") private String SUPORT_AUTENTICACIO;
@@ -62,7 +64,7 @@ public class RegistroController {
             ResultadoBusquedaWs registros = regWeb3Service.obtenerAsientosCiudadano(usuarioAutenticado.getUsuarioClave().getNif(), 0);
 
             if(registros != null){
-                log.info("Total registros: " +registros.getResults().size());
+                if (log.isInfoEnabled()) log.info("Total registros: " +registros.getResults().size());
                 mav.addObject("registros", registros.getResults());
             }
 
@@ -73,9 +75,9 @@ public class RegistroController {
             List<ElementoExpediente> tramitesSistra1Otros = sistra1Service.obtenerElementosExpediente(coms, CarpetaConstantes.ELEMENTO_NO_PENDIENTE, usuarioAutenticado.getUsuarioClave(), loc);
 
             if (tramitesSistra1Otros != null) {
-                log.info("Total tramites acabados: " +tramitesSistra1Otros.size());
+                if (log.isInfoEnabled()) log.info("Total tramites acabados: " +tramitesSistra1Otros.size());
                 TramitesCiudadano tramites = new TramitesCiudadano(tramitesSistra1Otros, loc);
-                log.info("Tramites totales: " + tramites.getTramites().size());
+                if (log.isInfoEnabled()) log.info("Tramites totales: " + tramites.getTramites().size());
                 mav.addObject("tramites", tramites.getTramites());
             }
 
@@ -90,6 +92,9 @@ public class RegistroController {
         mav.addObject("suport_correu", SUPORT_CORREU);
         mav.addObject("suport_telefon", SUPORT_TELEFON);
         mav.addObject("suport_autenticacio", SUPORT_AUTENTICACIO);
+        mav.addObject("suport_faqs", SUPORT_FAQS);
+        mav.addObject("suport_qssi", SUPORT_QSSI);
+
         return mav;
     }
 
@@ -101,7 +106,7 @@ public class RegistroController {
         String numeroRegistro = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 
         String numReg = numeroRegistro.replace("/registro/detalle/","");
-        log.info("Numero registro:" + numReg);
+        if (log.isInfoEnabled()) log.info("Numero registro:" + numReg);
 
         UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();
 
@@ -109,7 +114,10 @@ public class RegistroController {
             AsientoRegistralWs asiento = regWeb3Service.obtenerAsientoCiudadano(usuarioAutenticado.getUsuarioClave().getNif(), numReg);
 
             if(asiento != null){
+//                log.info("El asiento tiene "+asiento.getAnexos().size()+" anexos");
                 for (AnexoWs anexo : asiento.getAnexos()) {
+//                    log.info("El anexo ocupa "+anexo.getFicheroAnexado().length);
+
                     if (anexo.isJustificante() && StringUtils.isNotEmpty(anexo.getCsv())) {
                         mav.addObject("justificante", CONCSV_URL.concat(anexo.getCsv()));
                     }
@@ -127,6 +135,8 @@ public class RegistroController {
         Locale loc = LocaleContextHolder.getLocale();
         mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.registro.detalle"));
 
+        mav.addObject("suport_faqs", SUPORT_FAQS);
+        mav.addObject("suport_qssi", SUPORT_QSSI);
         mav.addObject("suport_correu", SUPORT_CORREU);
         mav.addObject("suport_telefon", SUPORT_TELEFON);
         mav.addObject("suport_autenticacio", SUPORT_AUTENTICACIO);

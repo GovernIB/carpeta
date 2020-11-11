@@ -34,6 +34,8 @@ import java.util.*;
 @RequestMapping(value = "/tramite")
 public class TramiteController {
 
+    @Value("${es.caib.carpeta.suport.faqs}") private String SUPORT_FAQS;
+    @Value("${es.caib.carpeta.suport.qssi}") private String SUPORT_QSSI;
     @Value("${es.caib.carpeta.suport.correu}") private String SUPORT_CORREU;
     @Value("${es.caib.carpeta.suport.telefon}") private String SUPORT_TELEFON;
     @Value("${es.caib.carpeta.suport.autenticacio}") private String SUPORT_AUTENTICACIO;
@@ -58,6 +60,8 @@ public class TramiteController {
         Locale loc = LocaleContextHolder.getLocale();
         mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.tramites"));
 
+        mav.addObject("suport_faqs", SUPORT_FAQS);
+        mav.addObject("suport_qssi", SUPORT_QSSI);
         mav.addObject("suport_correu", SUPORT_CORREU);
         mav.addObject("suport_telefon", SUPORT_TELEFON);
         mav.addObject("suport_autenticacio", SUPORT_AUTENTICACIO);
@@ -92,19 +96,19 @@ public class TramiteController {
             List<ElementoExpediente> tramitesSistra1Otros = sistra1Service.obtenerElementosExpediente(coms, CarpetaConstantes.ELEMENTO_TODOS, usuarioAutenticado.getUsuarioClave(), loc, fechaIni, fechaFin);
 
             if(tramitesSistra2 != null){
-                log.info("Tramites Sistra2: " + tramitesSistra2.size());
+                if (log.isInfoEnabled()) log.info("Tramites Sistra2: " + tramitesSistra2.size());
             }
 
             if(tramitesSistra1 != null){
-                log.info("Tramites Sistra1: " + tramitesSistra1.size());
+                if (log.isInfoEnabled()) log.info("Tramites Sistra1: " + tramitesSistra1.size());
             }
 
             if(tramitesSistra1Otros != null){
-                log.info("Tramites envio, preenvio, registro y preregistro Sistra1: " + tramitesSistra1Otros.size());
+                if (log.isInfoEnabled()) log.info("Tramites envio, preenvio, registro y preregistro Sistra1: " + tramitesSistra1Otros.size());
             }
 
             TramitesCiudadano tramites = new TramitesCiudadano(tramitesSistra2, tramitesSistra1, tramitesSistra1Otros, loc);
-            log.info("Tramites totales: " + tramites.getTramites().size());
+            if (log.isInfoEnabled()) log.info("Tramites totales: " + tramites.getTramites().size());
             model.addAttribute("tramites", tramites.getTramites());
 
         } catch (Exception e) {
@@ -115,6 +119,8 @@ public class TramiteController {
         model.addAttribute("breadcrumb", Arrays.asList("inicio", "tramite/list"));
         model.addAttribute("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.tramites"));
 
+        model.addAttribute("suport_faqs", SUPORT_FAQS);
+        model.addAttribute("suport_qssi", SUPORT_QSSI);
         model.addAttribute("suport_correu", SUPORT_CORREU);
         model.addAttribute("suport_telefon", SUPORT_TELEFON);
         model.addAttribute("suport_autenticacio", SUPORT_AUTENTICACIO);
@@ -131,7 +137,7 @@ public class TramiteController {
             String url = sistra2Service.obtenerUrlTicketAcceso(usuarioAutenticado.getUsuarioClave(), idSesionTramitacion);
 
             if(StringUtils.isNotEmpty(url)){
-                log.info("Url: " + url);
+                if (log.isDebugEnabled()) log.debug("Url: " + url);
                 return new RedirectView(url);
             }else{
                 return new RedirectView("/inici");

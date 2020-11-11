@@ -28,6 +28,8 @@ public class NotificacionController {
     @Value("${es.caib.carpeta.zonaper.url}")    private String ZONAPER_URL;
     @Value("${es.caib.carpeta.notificaciones.url}")    private String NOTIFICACIONES_URL;
 
+    @Value("${es.caib.carpeta.suport.faqs}") private String SUPORT_FAQS;
+    @Value("${es.caib.carpeta.suport.qssi}") private String SUPORT_QSSI;
     @Value("${es.caib.carpeta.suport.correu}") private String SUPORT_CORREU;
     @Value("${es.caib.carpeta.suport.telefon}") private String SUPORT_TELEFON;
     @Value("${es.caib.carpeta.suport.autenticacio}") private String SUPORT_AUTENTICACIO;
@@ -49,6 +51,8 @@ public class NotificacionController {
         Locale loc = LocaleContextHolder.getLocale();
         mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.notificaciones"));
 
+        mav.addObject("suport_faqs", SUPORT_FAQS);
+        mav.addObject("suport_qssi", SUPORT_QSSI);
         mav.addObject("suport_correu", SUPORT_CORREU);
         mav.addObject("suport_telefon", SUPORT_TELEFON);
         mav.addObject("suport_autenticacio", SUPORT_AUTENTICACIO);
@@ -78,6 +82,8 @@ public class NotificacionController {
 
         mav.addObject("title_page", ResourceBundle.getBundle("mensajes", loc).getString("titulo.comunicaciones"));
 
+        mav.addObject("suport_faqs", SUPORT_FAQS);
+        mav.addObject("suport_qssi", SUPORT_QSSI);
         mav.addObject("suport_correu", SUPORT_CORREU);
         mav.addObject("suport_telefon", SUPORT_TELEFON);
         mav.addObject("suport_autenticacio", SUPORT_AUTENTICACIO);

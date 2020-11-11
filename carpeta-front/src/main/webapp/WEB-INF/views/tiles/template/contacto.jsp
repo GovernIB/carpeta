@@ -22,15 +22,31 @@
                         <div class="row col-12"><fmt:message key="soporte.mensaje.necesita"/></div>
 
                         <ul class="dades">
+                            <c:if test="${not empty suport_faqs}">
+                            <li>
+                                <fmt:message key="soporte.mensaje.faqs"/> <a href="${suport_faqs}" target="_blank"><fmt:message key="soporte.mensaje.faqs.txt"/></a>
+                            </li>
+                            </c:if>
+                            <c:if test="${not empty suport_qssi}">
+                            <li>
+                                <fmt:message key="soporte.mensaje.qssi"/> <a href="${suport_qssi}" target="_blank"><fmt:message key="soporte.mensaje.qssi.txt"/></a>
+                            </li>
+                            </c:if>
+                            <c:if test="${not empty suport_correu}">
                             <li>
                                 <fmt:message key="soporte.mensaje.envia"/> <a href="mailto:${suport_correu}" target="_blank">${suport_correu}</a>
                             </li>
+                            </c:if>
+                            <c:if test="${not empty suport_telefon}">
                             <li>
                                 <fmt:message key="soporte.mensaje.llamar"/> <a href="tel:${suport_telefon}">${suport_telefon}</a>.
                             </li>
+                            </c:if>
+                            <c:if test="${not empty suport_autenticacio}">
                             <li>
                                 <fmt:message key="soporte.mensaje.autenticacion"/> <a href="tel:${suport_autenticacio}">${suport_autenticacio}</a>.
                             </li>
+                            </c:if>
                         </ul>
                     </div>
                 </div>

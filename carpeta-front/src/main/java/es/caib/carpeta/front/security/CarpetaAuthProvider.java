@@ -29,13 +29,17 @@ public class CarpetaAuthProvider implements AuthenticationProvider {
         final String usuario = authentication.getName();
         final String passwd = authentication.getCredentials().toString();
 
-        log.info("Usuario: " + usuario);
-        log.info("Password: " + passwd);
+        if (log.isDebugEnabled()) {
+            log.debug("Usuario: " + usuario);
+            log.debug("Password: " + passwd);
+        }
 
         UsuarioClave usuarioClave = null;
 
         try {
             usuarioClave = securityService.validarTicketAutentificacion(passwd);
+            if (log.isDebugEnabled())
+                log.debug("Metodo autenticacion = " + usuarioClave.getMetodoAutentificacion());
         } catch (Exception e) {
             e.printStackTrace();
             throw new BadCredentialsException("Imposible autenticar usuario: " + usuario);

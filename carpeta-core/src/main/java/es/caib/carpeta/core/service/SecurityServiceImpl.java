@@ -56,7 +56,7 @@ public class SecurityServiceImpl implements SecurityService{
         final ResponseEntity<String> responseTramite = restTemplate.postForEntity(LOGINIB_URL + "/login",
                 peticion, String.class);
 
-        log.info("URL: " + responseTramite.getBody());
+        if (log.isDebugEnabled()) log.debug("URL: " + responseTramite.getBody());
 
         return responseTramite.getBody();
     }

@@ -46,31 +46,29 @@ public class LoginController {
     @RequestMapping(value="/login")
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        log.info("Dentro de LoginController");
+        if (log.isInfoEnabled()) log.info("Dentro de LoginController");
 
         // Error login
         if ("true".equals(request.getParameter("error"))) {
-            log.info("Error de login");
+            if (log.isErrorEnabled()) log.error("Error de login");
         }
         final SavedRequest savedRequest = loginRequestCache.getRequest(request, response);
 
         if(savedRequest != null && existeTicket(savedRequest)){
-
             return autenticarTicket(savedRequest, CarpetaConstantes.TICKET_USER_CLAVE);
-
-        }else {
+        } else {
 
             if(savedRequest != null){
-                log.info("Punto de entrada: " + savedRequest.getRedirectUrl());
+                if (log.isDebugEnabled()) log.debug("Punto de entrada: " + savedRequest.getRedirectUrl());
 
                 sesionHttp.setUrlEntrada(getUrlEntrada(savedRequest.getRedirectUrl()));
 
-                log.info("iniciarSesionAutentificacion: " + savedRequest.getRedirectUrl());
+                if (log.isDebugEnabled()) log.debug("iniciarSesionAutenticacion: " + savedRequest.getRedirectUrl());
             }
 
             String url = securityService.iniciarSesionAutentificacion();
 
-            log.info("Url autentificacion: " + url);
+            if (log.isDebugEnabled()) log.debug("Url autenticacion: " + url);
 
             return new ModelAndView("redirect:"+url);
 
@@ -81,7 +79,7 @@ public class LoginController {
     @RequestMapping(value="/redirigirLogin")
     public ModelAndView redirigirLogin(HttpServletRequest request, HttpServletResponse response) {
 
-        log.info("Dentro de redirigirLogin: " + sesionHttp.getUrlEntrada());
+        if (log.isDebugEnabled()) log.debug("Dentro de redirigirLogin: " + sesionHttp.getUrlEntrada());
 
         // Gestionamos la url de entrada a la aplicación previa a autenticarse
         try {
@@ -101,7 +99,7 @@ public class LoginController {
     @RequestMapping(value="/salir")
     public String salir(HttpServletRequest request) throws Exception{
 
-        log.info("Dentro de salir");
+        if (log.isInfoEnabled()) log.info("Dentro de salir");
 
         securityService.iniciarSesionLogout();
         HttpSession session = request.getSession(false);
@@ -130,7 +128,7 @@ public class LoginController {
         }
         final String ticket = tickets[0];
 
-        log.info("Autenticando el ticket: " + tickets[0]);
+        if (log.isDebugEnabled()) log.debug("Autenticando el ticket: " + tickets[0]);
 
         // Autenticamos automaticamente
         mav.addObject("ticketName", ticketUserName);
@@ -151,7 +149,7 @@ public class LoginController {
         if (tickets == null || tickets.length != 1) {
             return false;
         }
-        log.info("Existe un ticket de autentificacion: "+ tickets.length);
+        if (log.isInfoEnabled()) log.info("Existe un ticket de autenticacion: "+ tickets.length);
 
         return true;
     }
