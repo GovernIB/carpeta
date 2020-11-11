@@ -278,8 +278,15 @@
     <definition name="systemproperties" extends="superadmin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/superadmin/systemproperties.jsp" />
     </definition>
-
-
+    
+    <definition name="fitxerOrfesFormSuperAdmin" extends="superadmin">
+        <put-attribute name="titol" value="fitxer.fitxer" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/fitxerForm.jsp" />
+    </definition>
+    
+    <definition name="fitxerOrfesListSuperAdmin" extends="superadmin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/fitxerList.jsp" />
+    </definition>
     
 
     <!--  ===========  DESENVOLUPAMENT ================== -->

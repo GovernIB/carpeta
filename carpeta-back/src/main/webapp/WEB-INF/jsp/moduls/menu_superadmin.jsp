@@ -75,6 +75,12 @@
         code="auditoria.auditoria.plural" /> </span>
 </a>
 
+<a class="dropdown-item"
+   href="<c:url value="/superadmin/fitxerorfes/list"/>"> <span
+        style="${(fn:contains(url, '/superadmin/fitxerorfes'))? " font-weight:bold;" : ""}"><spring:message
+        code="fitxers.orfes" /> </span>
+</a>
+
 <%--
 <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
