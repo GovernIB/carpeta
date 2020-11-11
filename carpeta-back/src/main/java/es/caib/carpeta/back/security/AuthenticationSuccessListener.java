@@ -1,29 +1,17 @@
 package es.caib.carpeta.back.security;
 
-import es.caib.carpeta.back.preparer.BasePreparer;
-import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.ejb.EntitatLocal;
-import es.caib.carpeta.ejb.PropietatGlobalLocal;
-import es.caib.carpeta.jpa.EntitatJPA;
-import es.caib.carpeta.jpa.EstadisticaJPA;
-import es.caib.carpeta.jpa.UsuariEntitatJPA;
-import es.caib.carpeta.jpa.UsuariJPA;
-import es.caib.carpeta.logic.EstadisticaLogicaLocal;
-import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
-import es.caib.carpeta.logic.UsuariEntitatLogicaLocal;
-import es.caib.carpeta.logic.UsuariLogicaLocal;
-import es.caib.carpeta.logic.utils.EjbManager;
-import es.caib.carpeta.model.fields.EntitatFields;
 import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_ERROR;
 import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ENTRADA_BACK;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_ESTAD_ENTRADA_BACK;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_BACK;
 
-import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NTranslation;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
+
+import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.security.core.Authentication;
@@ -32,7 +20,32 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
-import java.util.*;
+
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+
+import es.caib.carpeta.back.preparer.BasePreparer;
+import es.caib.carpeta.commons.utils.Constants;
+import es.caib.carpeta.ejb.EntitatLocal;
+import es.caib.carpeta.ejb.PropietatGlobalLocal;
+import es.caib.carpeta.jpa.EntitatJPA;
+import es.caib.carpeta.jpa.EstadisticaJPA;
+import es.caib.carpeta.jpa.UsuariEntitatJPA;
+import es.caib.carpeta.jpa.UsuariJPA;
+import es.caib.carpeta.logic.AuditoriaLogicaLocal;
+import es.caib.carpeta.logic.EstadisticaLogicaLocal;
+import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
+import es.caib.carpeta.logic.UsuariEntitatLogicaLocal;
+import es.caib.carpeta.logic.UsuariLogicaLocal;
+import es.caib.carpeta.logic.utils.EjbManager;
+import es.caib.carpeta.model.fields.*;
 
 /**
  *
@@ -64,10 +77,12 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
 		LogCarpetaLogicaLocal logCarpetaEjb;
 		EstadisticaLogicaLocal estadisticaEjb;
+		AuditoriaLogicaLocal auditoriaEjb;
 
 		try {
 			logCarpetaEjb = EjbManager.getLogCarpetaLogicaEJB();
 			estadisticaEjb = EjbManager.getEstadisticaLogicaEJB();
+			auditoriaEjb = EjbManager.getAuditoriaLogicaEJB();
 		} catch (I18NException e) {
 			// TODO traduccio
 			throw new LoginException("Error carregant LogCarpetaLogicaEJB " + e.getMessage(), e);
@@ -425,7 +440,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
 		try {
 
-			//CREAM/ACTUALITZAM ESTADISTICA
+			//ESTADISTICA
 			List<EstadisticaJPA> estadisticas = estadisticaEjb.findEstadistica(TIPUS_ESTAD_ENTRADA_BACK,null,new Date(),null);
 
 			if(estadisticas != null && !estadisticas.isEmpty()) {
@@ -434,8 +449,12 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 			}else{
 				estadisticaEjb.crearEstadistica(null, TIPUS_ESTAD_ENTRADA_BACK,null);
 			}
-			//CREAM LOG
+
+			//LOG
 			logCarpetaEjb.crearLog("Autenticació al back - Usuari: " + username , ESTAT_LOG_OK,TIPUS_LOG_AUTENTICACIO_BACK, System.currentTimeMillis() - temps ,null,"",peticio.toString(),entitatIDActual,null);
+
+			//AUDITORIA
+			auditoriaEjb.crearAuditoria(TIPUS_AUDIT_ENTRADA_BACK,null, loginInfo.getUsuariPersona().getUsuariID(),"",null);
 		}catch (I18NException ie){
 			throw new LoginException("Error creant el log o l'estadistica");
 		}

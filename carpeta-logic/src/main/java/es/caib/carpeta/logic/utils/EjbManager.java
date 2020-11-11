@@ -1,20 +1,23 @@
 package es.caib.carpeta.logic.utils;
 
+import org.fundaciobit.genapp.common.i18n.I18NArgumentString;
+import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.Where;
+
+import org.apache.log4j.Logger;
+
+import javax.naming.InitialContext;
+
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.ejb.EntitatLocal;
 import es.caib.carpeta.ejb.PropietatGlobalLocal;
+import es.caib.carpeta.logic.AuditoriaLogicaLocal;
 import es.caib.carpeta.logic.AvisLogicaLocal;
 import es.caib.carpeta.logic.EstadisticaLogicaLocal;
 import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
 import es.caib.carpeta.logic.UsuariEntitatLogicaLocal;
 import es.caib.carpeta.logic.UsuariLogicaLocal;
-import es.caib.carpeta.model.fields.PropietatGlobalFields;
-
-import org.apache.log4j.Logger;
-import org.fundaciobit.genapp.common.i18n.I18NArgumentString;
-import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.genapp.common.query.Where;
-import javax.naming.InitialContext;
+import es.caib.carpeta.model.fields.*;
 
 
 /**
@@ -39,7 +42,10 @@ public final class EjbManager {
 	protected static PropietatGlobalLocal propietatLogicaEjb;
 	
 	protected static AvisLogicaLocal avisLogicaEjb;
+
 	protected static EstadisticaLogicaLocal estadisticaLogicaEjb;
+
+	protected static AuditoriaLogicaLocal auditoriaLogicaEjb;
 
 
 	private static void throwNewI18NException(Throwable e, String name) throws I18NException {
@@ -152,6 +158,20 @@ public final class EjbManager {
 			}
 		}
 		return estadisticaLogicaEjb;
+	}
+
+
+	public static AuditoriaLogicaLocal getAuditoriaLogicaEJB() throws I18NException {
+
+		if (auditoriaLogicaEjb == null) {
+			try {
+				auditoriaLogicaEjb = (AuditoriaLogicaLocal) new InitialContext()
+						.lookup(AuditoriaLogicaLocal.JNDI_NAME);
+			} catch (Throwable e) {
+				throwNewI18NException(e, "AuditoriaLogicaLocal");
+			}
+		}
+		return auditoriaLogicaEjb;
 	}
 	
 	
