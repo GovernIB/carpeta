@@ -23,3 +23,7 @@ ALTER TABLE public.car_auditoria
   ADD COLUMN ticketloginib character varying(256);
 ALTER TABLE public.car_auditoria
   ADD COLUMN pluginid integer;
+
+
+--10/11/2020 Gestió de les Auditories al backoffice #204 Canviat nom de la columna
+ALTER TABLE public.car_auditoria RENAME ticketloginib  TO "usuariclave";
