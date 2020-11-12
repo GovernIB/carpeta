@@ -1,20 +1,26 @@
 package es.caib.carpeta.back.controller.superadmin;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.query.Where;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.ejb.EJB;
+import javax.servlet.http.HttpServletRequest;
+
+import es.caib.carpeta.back.form.webdb.*;
+
 import es.caib.carpeta.back.controller.webdb.PropietatGlobalController;
-import es.caib.carpeta.back.form.webdb.PropietatGlobalFilterForm;
-import es.caib.carpeta.back.form.webdb.PropietatGlobalForm;
 import es.caib.carpeta.back.security.LoginInfo;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_AFEGIR_PROPGLOB;
 import es.caib.carpeta.jpa.PropietatGlobalJPA;
-import es.caib.carpeta.model.fields.PropietatGlobalFields;
+import es.caib.carpeta.logic.AuditoriaLogicaLocal;
+import es.caib.carpeta.model.fields.*;
 
 /**
  * 
@@ -25,6 +31,9 @@ import es.caib.carpeta.model.fields.PropietatGlobalFields;
 @RequestMapping(value = "/superadmin/propietatglobal")
 @SessionAttributes(types = { PropietatGlobalForm.class, PropietatGlobalFilterForm.class })
 public class PropietatGlobalSuperAdminController extends PropietatGlobalController {
+
+    @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
+    protected AuditoriaLogicaLocal auditoriaLogicaEjb;
 
     @Override
     public String getTileForm() {
@@ -72,7 +81,6 @@ public class PropietatGlobalSuperAdminController extends PropietatGlobalControll
         }
 
         return propietatGlobalForm;
-
     }
 
     @Override
@@ -97,4 +105,20 @@ public class PropietatGlobalSuperAdminController extends PropietatGlobalControll
         return "propietatGlobal.superadmin.titol.plural";
     }
 
+
+    @Override
+    public PropietatGlobalJPA create(HttpServletRequest request, PropietatGlobalJPA propietatGlobal) throws Exception, I18NException, I18NValidationException {
+        PropietatGlobalJPA propietatGlobalJPA = super.create(request, propietatGlobal);
+
+        try{
+            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PROPGLOB,null,LoginInfo.getInstance().getUsuariPersona().getUsuariID(),"",null);
+        }catch(I18NException e){
+
+            String msg = "Error creant auditoria "+ "("+  e.getMessage() + ")";
+            log.error(msg, e);
+        }
+
+        return propietatGlobalJPA;
+
+    }
 }
