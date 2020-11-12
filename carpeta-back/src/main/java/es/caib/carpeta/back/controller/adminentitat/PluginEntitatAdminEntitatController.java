@@ -1,25 +1,28 @@
 package es.caib.carpeta.back.controller.adminentitat;
 
-import java.util.List;
-
-import javax.ejb.EJB;
-import javax.servlet.http.HttpServletRequest;
-
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.query.Where;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.ejb.EJB;
+import javax.servlet.http.HttpServletRequest;
+
+import java.util.List;
+import es.caib.carpeta.back.form.webdb.*;
+
 import es.caib.carpeta.back.controller.webdb.PluginEntitatController;
-import es.caib.carpeta.back.form.webdb.PluginEntitatFilterForm;
-import es.caib.carpeta.back.form.webdb.PluginEntitatForm;
 import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.jpa.PluginEntitatJPA;
-import es.caib.carpeta.model.fields.PluginEntitatFields;
-import es.caib.carpeta.model.fields.PluginFields;
+import es.caib.carpeta.logic.AuditoriaLogicaLocal;
+import es.caib.carpeta.model.fields.*;
+
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_AFEGIR_PLUGIN;
 
 /**
  * 
@@ -33,6 +36,9 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
 
     @EJB(mappedName = es.caib.carpeta.ejb.PluginLocal.JNDI_NAME)
     protected es.caib.carpeta.ejb.PluginLocal pluginEjb;
+
+    @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
+    protected AuditoriaLogicaLocal auditoriaLogicaEjb;
 
     @Override
     public String getTileForm() {
@@ -90,6 +96,22 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
         }
 
         return pluginEntitatForm;
+    }
+
+    @Override
+    public PluginEntitatJPA create(HttpServletRequest request, PluginEntitatJPA pluginEntitat)
+            throws Exception,I18NException, I18NValidationException {
+        PluginEntitatJPA pluginEntitatJPA =super.create(request,pluginEntitat);
+
+        try{
+            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PLUGIN,LoginInfo.getInstance().getEntitatID(), LoginInfo.getInstance().getUsuariPersona().getUsuariID(),"",pluginEntitatJPA.getPluginID());
+        }catch(I18NException e){
+
+            String msg = "Error creant auditoria "+ "("+  e.getMessage() + ")";
+            log.error(msg, e);
+        }
+
+        return pluginEntitatJPA;
     }
 
 }

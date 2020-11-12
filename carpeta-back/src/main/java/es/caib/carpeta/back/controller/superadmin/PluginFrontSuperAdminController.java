@@ -1,15 +1,11 @@
 package es.caib.carpeta.back.controller.superadmin;
 
 
-import es.caib.carpeta.back.form.webdb.PluginFilterForm;
-import es.caib.carpeta.back.form.webdb.PluginForm;
-import es.caib.carpeta.back.security.LoginInfo;
-import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
-import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaLocal;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,9 +16,19 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import java.net.URL;
+import es.caib.carpeta.back.form.webdb.*;
+
+import es.caib.carpeta.back.security.LoginInfo;
+import es.caib.carpeta.commons.utils.Constants;
+import es.caib.carpeta.jpa.PluginJPA;
+import es.caib.carpeta.logic.AuditoriaLogicaLocal;
+import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
+import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaLocal;
 
 import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_AFEGIR_PLUGIN;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_PLUGIN_FRONT;
 
 /**
@@ -44,6 +50,9 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
 
     @EJB(mappedName = LogCarpetaLogicaLocal.JNDI_NAME)
     protected LogCarpetaLogicaLocal logCarpetaLogicaEjb;
+
+    @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
+    protected AuditoriaLogicaLocal auditoriaLogicaEjb;
 
     @Override
     public int getTipus() {
@@ -129,4 +138,22 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
        return pluginFilterForm;
     
    }
+
+
+    @Override
+    public PluginJPA create(HttpServletRequest request, PluginJPA plugin)
+            throws Exception,I18NException, I18NValidationException {
+        PluginJPA pluginJPA = super.create(request, plugin);
+
+        try{
+            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PLUGIN,null,LoginInfo.getInstance().getUsuariPersona().getUsuariID(),"",pluginJPA.getPluginID());
+        }catch(I18NException e){
+
+            String msg = "Error creant auditoria "+ "("+  e.getMessage() + ")";
+            log.error(msg, e);
+        }
+
+        return pluginJPA;
+    }
+
 }
