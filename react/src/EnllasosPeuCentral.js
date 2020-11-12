@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
+import axios from "axios";
 
 class EnllasosPeuCentral extends Component {
 
@@ -18,6 +19,13 @@ class EnllasosPeuCentral extends Component {
             .then((enllasosPeuCentral) => {
                 this.setState({ enllasosPeuCentral: enllasosPeuCentral })
             })
+    }
+
+    componentWillReceiveProps(lng) {
+        var url = window.location.href + "webui/centralfooterlinks";
+        axios.get(url).then(res => {
+            this.setState({ enllasosPeuCentral: res.data })
+        });
     }
 
     render() {
@@ -39,7 +47,7 @@ class EnllasosPeuCentral extends Component {
         } else{
             enllasosPeuCentral = this.state.enllasosPeuCentral.map((s, i) => (
                 <li>
-                    <a href={s.url} title="enlacePie">
+                    <a href={s.url}>
                         <span>{s.label}</span>
                         <img src={s.urllogo} title={s.label} alt={s.label} />
                         

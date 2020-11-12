@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
+import axios from "axios";
 
 class EnllasosLateral extends Component {
 
@@ -12,13 +13,17 @@ class EnllasosLateral extends Component {
     }
 
     componentWillMount() {
-        fetch(window.location.href + "webui/laterallinks")
-            .then((response) => {
-                return response.json()
-            })
-            .then((laterallinks) => {
-                this.setState({ laterallinks: laterallinks })
-            });
+        var url = window.location.href + "webui/laterallinks";
+        axios.get(url).then(res => {
+            this.setState({ laterallinks: res.data })
+        });
+    }
+
+    componentWillReceiveProps(lng) {
+        var url = window.location.href + "webui/laterallinks";
+        axios.get(url).then(res => {
+            this.setState({ laterallinks: res.data })
+        });
     }
 
     render() {
