@@ -104,12 +104,12 @@ public class LoginController {
 
         // Error login
         if ("true".equals(request.getParameter("error"))) {
+
+            //Log no autenticat/error
             logCarpetaLogicaEjb.crearLog("Autenticació del Front", ESTAT_LOG_ERROR,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"Error de login",peticio.toString(),null,null);
             log.info("Error de login");
 
-            //Estadistiques no autenticades
-
-            //Estadistica entrada al front autenticada
+            //Estadístiques no autenticades
             List<EstadisticaJPA> estadisticas = estadisticaLogicaEjb.findEstadistica(TIPUS_ESTAD_ENTRADA_FRONT_NO_AUTENTICAT,null,new Date(),null);
 
             if(estadisticas != null && !estadisticas.isEmpty()) {
@@ -118,6 +118,9 @@ public class LoginController {
             }else{
                 estadisticaLogicaEjb.crearEstadistica(null, TIPUS_ESTAD_ENTRADA_FRONT_NO_AUTENTICAT,null);
             }
+
+            //Auditoria
+            auditoriaLogicaEjb.crearAuditoria(TIPUS_ESTAD_ENTRADA_FRONT_NO_AUTENTICAT, null,null,"",null);
 
 
         }
