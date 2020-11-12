@@ -69,35 +69,6 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.ENTITATID)}">
-        <tr id="auditoria_entitatID_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[AuditoriaFields.ENTITATID])?'auditoria.entitatID':__theForm.labels[AuditoriaFields.ENTITATID]}" />
-              <c:if test="${not empty __theForm.help[AuditoriaFields.ENTITATID]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.ENTITATID]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <form:errors path="auditoria.entitatID" cssClass="errorField alert alert-danger" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.ENTITATID)}" >
-          <form:hidden path="auditoria.entitatID"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.auditoria.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AuditoriaFields.ENTITATID)}" >
-          <form:select id="auditoria_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-4" path="auditoria.entitatID">
-          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
-          <form:option value="" ></form:option>
-            <c:forEach items="${__theForm.listOfEntitatForEntitatID}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
         <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.USUARIID)}">
         <tr id="auditoria_usuariID_rowid">
           <td>
@@ -141,6 +112,35 @@
             <form:errors path="auditoria.ticketLoginIB" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TICKETLOGINIB)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TICKETLOGINIB)? ' uneditable-input' : ''}"  maxlength="256" path="auditoria.ticketLoginIB"   />
 
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.ENTITATID)}">
+        <tr id="auditoria_entitatID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[AuditoriaFields.ENTITATID])?'auditoria.entitatID':__theForm.labels[AuditoriaFields.ENTITATID]}" />
+              <c:if test="${not empty __theForm.help[AuditoriaFields.ENTITATID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.ENTITATID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="auditoria.entitatID" cssClass="errorField alert alert-danger" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.ENTITATID)}" >
+          <form:hidden path="auditoria.entitatID"/>
+          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.auditoria.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AuditoriaFields.ENTITATID)}" >
+          <form:select id="auditoria_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-4" path="auditoria.entitatID">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfEntitatForEntitatID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
            </td>
         </tr>
         </c:if>

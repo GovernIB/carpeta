@@ -60,11 +60,11 @@ public class AuditoriaController
 
   // References 
   @Autowired
-  protected EntitatRefList entitatRefList;
+  protected UsuariRefList usuariRefList;
 
   // References 
   @Autowired
-  protected UsuariRefList usuariRefList;
+  protected EntitatRefList entitatRefList;
 
   /**
    * Llistat de totes Auditoria
@@ -196,16 +196,6 @@ public class AuditoriaController
       };
     }
 
-    // Field entitatID
-    {
-      _listSKV = getReferenceListForEntitatID(request, mav, filterForm, list, groupByItemsMap, null);
-      _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfEntitatForEntitatID(_tmp);
-      if (filterForm.getGroupByFields().contains(ENTITATID)) {
-        fillValuesToGroupByItems(_tmp, groupByItemsMap, ENTITATID, false);
-      };
-    }
-
     // Field usuariID
     {
       _listSKV = getReferenceListForUsuariID(request, mav, filterForm, list, groupByItemsMap, null);
@@ -213,6 +203,16 @@ public class AuditoriaController
       filterForm.setMapOfUsuariForUsuariID(_tmp);
       if (filterForm.getGroupByFields().contains(USUARIID)) {
         fillValuesToGroupByItems(_tmp, groupByItemsMap, USUARIID, false);
+      };
+    }
+
+    // Field entitatID
+    {
+      _listSKV = getReferenceListForEntitatID(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfEntitatForEntitatID(_tmp);
+      if (filterForm.getGroupByFields().contains(ENTITATID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, ENTITATID, false);
       };
     }
 
@@ -242,8 +242,8 @@ public class AuditoriaController
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
     __mapping.put(TIPUS, filterForm.getMapOfValuesForTipus());
-    __mapping.put(ENTITATID, filterForm.getMapOfEntitatForEntitatID());
     __mapping.put(USUARIID, filterForm.getMapOfUsuariForUsuariID());
+    __mapping.put(ENTITATID, filterForm.getMapOfEntitatForEntitatID());
     __mapping.put(PLUGINID, filterForm.getMapOfValuesForPluginID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
@@ -302,15 +302,6 @@ public class AuditoriaController
       auditoriaForm.setListOfValuesForTipus(_listSKV);
     }
     // Comprovam si ja esta definida la llista
-    if (auditoriaForm.getListOfEntitatForEntitatID() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForEntitatID(request, mav, auditoriaForm, null);
-
-      if(_listSKV != null && !_listSKV.isEmpty()) { 
-          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
-      }
-      auditoriaForm.setListOfEntitatForEntitatID(_listSKV);
-    }
-    // Comprovam si ja esta definida la llista
     if (auditoriaForm.getListOfUsuariForUsuariID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForUsuariID(request, mav, auditoriaForm, null);
 
@@ -318,6 +309,15 @@ public class AuditoriaController
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
       auditoriaForm.setListOfUsuariForUsuariID(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (auditoriaForm.getListOfEntitatForEntitatID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForEntitatID(request, mav, auditoriaForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      auditoriaForm.setListOfEntitatForEntitatID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
     if (auditoriaForm.getListOfValuesForPluginID() == null) {
@@ -666,46 +666,6 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
-       ModelAndView mav, AuditoriaForm auditoriaForm, Where where)  throws I18NException {
-    if (auditoriaForm.isHiddenField(ENTITATID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
-    }
-    Where _where = null;
-    if (auditoriaForm.isReadOnlyField(ENTITATID)) {
-      _where = EntitatFields.ENTITATID.equal(auditoriaForm.getAuditoria().getEntitatID());
-    }
-    return getReferenceListForEntitatID(request, mav, Where.AND(where, _where));
-  }
-
-
-  public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
-       ModelAndView mav, AuditoriaFilterForm auditoriaFilterForm,
-       List<Auditoria> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
-    if (auditoriaFilterForm.isHiddenField(ENTITATID)
-      && !auditoriaFilterForm.isGroupByField(ENTITATID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
-    }
-    Where _w = null;
-    if (!_groupByItemsMap.containsKey(ENTITATID)) {
-      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
-      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
-      for (Auditoria _item : list) {
-        if(_item.getEntitatID() == null) { continue; };
-        _pkList.add(_item.getEntitatID());
-        }
-        _w = EntitatFields.ENTITATID.in(_pkList);
-      }
-    return getReferenceListForEntitatID(request, mav, Where.AND(where,_w));
-  }
-
-
-  public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
-       ModelAndView mav, Where where)  throws I18NException {
-    return entitatRefList.getReferenceList(EntitatFields.ENTITATID, where );
-  }
-
-
   public List<StringKeyValue> getReferenceListForUsuariID(HttpServletRequest request,
        ModelAndView mav, AuditoriaForm auditoriaForm, Where where)  throws I18NException {
     if (auditoriaForm.isHiddenField(USUARIID)) {
@@ -743,6 +703,46 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForUsuariID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return usuariRefList.getReferenceList(UsuariFields.USUARIID, where );
+  }
+
+
+  public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
+       ModelAndView mav, AuditoriaForm auditoriaForm, Where where)  throws I18NException {
+    if (auditoriaForm.isHiddenField(ENTITATID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _where = null;
+    if (auditoriaForm.isReadOnlyField(ENTITATID)) {
+      _where = EntitatFields.ENTITATID.equal(auditoriaForm.getAuditoria().getEntitatID());
+    }
+    return getReferenceListForEntitatID(request, mav, Where.AND(where, _where));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
+       ModelAndView mav, AuditoriaFilterForm auditoriaFilterForm,
+       List<Auditoria> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (auditoriaFilterForm.isHiddenField(ENTITATID)
+      && !auditoriaFilterForm.isGroupByField(ENTITATID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    if (!_groupByItemsMap.containsKey(ENTITATID)) {
+      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
+      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
+      for (Auditoria _item : list) {
+        if(_item.getEntitatID() == null) { continue; };
+        _pkList.add(_item.getEntitatID());
+        }
+        _w = EntitatFields.ENTITATID.in(_pkList);
+      }
+    return getReferenceListForEntitatID(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    return entitatRefList.getReferenceList(EntitatFields.ENTITATID, where );
   }
 
 

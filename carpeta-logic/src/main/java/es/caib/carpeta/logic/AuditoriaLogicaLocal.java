@@ -17,5 +17,5 @@ import es.caib.carpeta.ejb.AuditoriaLocal;
 public interface AuditoriaLogicaLocal extends AuditoriaLocal {
     public static final String JNDI_NAME = "java:app/carpeta-logic/AuditoriaLogicaEJB!es.caib.carpeta.logic.AuditoriaLogicaLocal";
 
-    public void crearAuditoria(@NotNull int tipus, Long entitatID, Long usuariID, String ticketLoginIB, Integer pluginID) throws I18NException;
+    public void crearAuditoria(@NotNull int tipus, Long entitatID, Long usuariID, String ticketLoginIB, Long pluginID) throws I18NException;
 }

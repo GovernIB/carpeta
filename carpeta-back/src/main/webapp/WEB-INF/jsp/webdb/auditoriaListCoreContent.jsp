@@ -40,14 +40,6 @@
           </c:if>
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.ENTITATID)}">
-          <td>
-          <c:set var="tmp">${auditoria.entitatID}</c:set>
-          <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfEntitatForEntitatID[tmp]}
-          </c:if>
-          </td>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.USUARIID)}">
           <td>
           <c:set var="tmp">${auditoria.usuariID}</c:set>
@@ -59,6 +51,14 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.TICKETLOGINIB)}">
           <td>
           ${auditoria.ticketLoginIB}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.ENTITATID)}">
+          <td>
+          <c:set var="tmp">${auditoria.entitatID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfEntitatForEntitatID[tmp]}
+          </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.PLUGINID)}">

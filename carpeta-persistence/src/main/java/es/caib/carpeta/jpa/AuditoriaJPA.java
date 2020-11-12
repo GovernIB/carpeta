@@ -38,10 +38,6 @@ private static final long serialVersionUID = 129744773L;
 	@Column(name="tipus",nullable = false,length = 10)
 	int tipus;
 
-	@Index(name="car_auditoria_entitatid_fk_i")
-	@Column(name="entitatid",length = 19)
-	java.lang.Long entitatID;
-
 	@Index(name="car_auditoria_usuariid_fk_i")
 	@Column(name="usuariid",length = 19)
 	java.lang.Long usuariID;
@@ -49,8 +45,12 @@ private static final long serialVersionUID = 129744773L;
 	@Column(name="ticketloginib",length = 256)
 	java.lang.String ticketLoginIB;
 
+	@Index(name="car_auditoria_entitatid_fk_i")
+	@Column(name="entitatid",length = 19)
+	java.lang.Long entitatID;
+
 	@Column(name="pluginid",length = 10)
-	java.lang.Integer pluginID;
+	java.lang.Long pluginID;
 
 
 
@@ -59,22 +59,22 @@ private static final long serialVersionUID = 129744773L;
   }
 
   /** Constructor amb tots els camps  */
-  public AuditoriaJPA(long auditoriaID , java.sql.Timestamp dataAudit , int tipus , java.lang.Long entitatID , java.lang.Long usuariID , java.lang.String ticketLoginIB , java.lang.Integer pluginID) {
+  public AuditoriaJPA(long auditoriaID , java.sql.Timestamp dataAudit , int tipus , java.lang.Long usuariID , java.lang.String ticketLoginIB , java.lang.Long entitatID , java.lang.Long pluginID) {
     this.auditoriaID=auditoriaID;
     this.dataAudit=dataAudit;
     this.tipus=tipus;
-    this.entitatID=entitatID;
     this.usuariID=usuariID;
     this.ticketLoginIB=ticketLoginIB;
+    this.entitatID=entitatID;
     this.pluginID=pluginID;
 }
   /** Constructor sense valors autoincrementals */
-  public AuditoriaJPA(java.sql.Timestamp dataAudit , int tipus , java.lang.Long entitatID , java.lang.Long usuariID , java.lang.String ticketLoginIB , java.lang.Integer pluginID) {
+  public AuditoriaJPA(java.sql.Timestamp dataAudit , int tipus , java.lang.Long usuariID , java.lang.String ticketLoginIB , java.lang.Long entitatID , java.lang.Long pluginID) {
     this.dataAudit=dataAudit;
     this.tipus=tipus;
-    this.entitatID=entitatID;
     this.usuariID=usuariID;
     this.ticketLoginIB=ticketLoginIB;
+    this.entitatID=entitatID;
     this.pluginID=pluginID;
 }
   /** Constructor dels valors Not Null */
@@ -87,9 +87,9 @@ private static final long serialVersionUID = 129744773L;
     this.setAuditoriaID(__bean.getAuditoriaID());
     this.setDataAudit(__bean.getDataAudit());
     this.setTipus(__bean.getTipus());
-    this.setEntitatID(__bean.getEntitatID());
     this.setUsuariID(__bean.getUsuariID());
     this.setTicketLoginIB(__bean.getTicketLoginIB());
+    this.setEntitatID(__bean.getEntitatID());
     this.setPluginID(__bean.getPluginID());
 	}
 
@@ -114,13 +114,6 @@ private static final long serialVersionUID = 129744773L;
 		this.tipus = _tipus_;
 	};
 
-	public java.lang.Long getEntitatID() {
-		return(entitatID);
-	};
-	public void setEntitatID(java.lang.Long _entitatID_) {
-		this.entitatID = _entitatID_;
-	};
-
 	public java.lang.Long getUsuariID() {
 		return(usuariID);
 	};
@@ -135,10 +128,17 @@ private static final long serialVersionUID = 129744773L;
 		this.ticketLoginIB = _ticketLoginIB_;
 	};
 
-	public java.lang.Integer getPluginID() {
+	public java.lang.Long getEntitatID() {
+		return(entitatID);
+	};
+	public void setEntitatID(java.lang.Long _entitatID_) {
+		this.entitatID = _entitatID_;
+	};
+
+	public java.lang.Long getPluginID() {
 		return(pluginID);
 	};
-	public void setPluginID(java.lang.Integer _pluginID_) {
+	public void setPluginID(java.lang.Long _pluginID_) {
 		this.pluginID = _pluginID_;
 	};
 
@@ -157,21 +157,6 @@ private static final long serialVersionUID = 129744773L;
     return __result;
   }
 
-// IMP Field:entitatid | Table: car_entitat | Type: 1  
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="car_audit_entitat_ent_fk")
-	@JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = true, insertable=false, updatable=false)
-	private EntitatJPA entitat;
-
-	public EntitatJPA getEntitat() {
-    return this.entitat;
-  }
-
-	public  void setEntitat(EntitatJPA entitat) {
-    this.entitat = entitat;
-  }
-
 // IMP Field:usuariid | Table: car_usuari | Type: 1  
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -187,6 +172,21 @@ private static final long serialVersionUID = 129744773L;
     this.usuari = usuari;
   }
 
+// IMP Field:entitatid | Table: car_entitat | Type: 1  
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@ForeignKey(name="car_audit_entitat_ent_fk")
+	@JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = true, insertable=false, updatable=false)
+	private EntitatJPA entitat;
+
+	public EntitatJPA getEntitat() {
+    return this.entitat;
+  }
+
+	public  void setEntitat(EntitatJPA entitat) {
+    this.entitat = entitat;
+  }
+
 
  // ---------------  STATIC METHODS ------------------
   public static AuditoriaJPA toJPA(Auditoria __bean) {
@@ -195,9 +195,9 @@ private static final long serialVersionUID = 129744773L;
     __tmp.setAuditoriaID(__bean.getAuditoriaID());
     __tmp.setDataAudit(__bean.getDataAudit());
     __tmp.setTipus(__bean.getTipus());
-    __tmp.setEntitatID(__bean.getEntitatID());
     __tmp.setUsuariID(__bean.getUsuariID());
     __tmp.setTicketLoginIB(__bean.getTicketLoginIB());
+    __tmp.setEntitatID(__bean.getEntitatID());
     __tmp.setPluginID(__bean.getPluginID());
 		return __tmp;
 	}

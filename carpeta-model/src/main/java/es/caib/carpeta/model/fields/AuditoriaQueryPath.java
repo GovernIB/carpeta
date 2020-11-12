@@ -23,10 +23,6 @@ public class AuditoriaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new IntegerField(getQueryPath(), AuditoriaFields.TIPUS);
   }
 
-  public LongField ENTITATID() {
-    return new LongField(getQueryPath(), AuditoriaFields.ENTITATID);
-  }
-
   public LongField USUARIID() {
     return new LongField(getQueryPath(), AuditoriaFields.USUARIID);
   }
@@ -35,8 +31,12 @@ public class AuditoriaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new StringField(getQueryPath(), AuditoriaFields.TICKETLOGINIB);
   }
 
-  public IntegerField PLUGINID() {
-    return new IntegerField(getQueryPath(), AuditoriaFields.PLUGINID);
+  public LongField ENTITATID() {
+    return new LongField(getQueryPath(), AuditoriaFields.ENTITATID);
+  }
+
+  public LongField PLUGINID() {
+    return new LongField(getQueryPath(), AuditoriaFields.PLUGINID);
   }
 
 
@@ -48,18 +48,18 @@ public class AuditoriaQueryPath extends org.fundaciobit.genapp.common.query.Quer
   }
 
 
-  public EntitatQueryPath ENTITAT() {
-    return new EntitatQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return AuditoriaQueryPath.this.getQueryPath() + "entitat" + ".";
-      }
-    });
-  }
-
   public UsuariQueryPath USUARI() {
     return new UsuariQueryPath(new QueryPath() {
       public String getQueryPath() {
           return AuditoriaQueryPath.this.getQueryPath() + "usuari" + ".";
+      }
+    });
+  }
+
+  public EntitatQueryPath ENTITAT() {
+    return new EntitatQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return AuditoriaQueryPath.this.getQueryPath() + "entitat" + ".";
       }
     });
   }
