@@ -27,8 +27,8 @@ public class AuditoriaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new LongField(getQueryPath(), AuditoriaFields.USUARIID);
   }
 
-  public StringField TICKETLOGINIB() {
-    return new StringField(getQueryPath(), AuditoriaFields.TICKETLOGINIB);
+  public StringField USUARICLAVE() {
+    return new StringField(getQueryPath(), AuditoriaFields.USUARICLAVE);
   }
 
   public LongField ENTITATID() {

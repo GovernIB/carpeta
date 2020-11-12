@@ -16,7 +16,7 @@ public interface AuditoriaFields extends java.io.Serializable {
 	 public static final TimestampField DATAAUDIT = new TimestampField(_TABLE_MODEL, "dataAudit", "dataaudit");
 	 public static final IntegerField TIPUS = new IntegerField(_TABLE_MODEL, "tipus", "tipus");
 	 public static final LongField USUARIID = new LongField(_TABLE_MODEL, "usuariID", "usuariid");
-	 public static final StringField TICKETLOGINIB = new StringField(_TABLE_MODEL, "ticketLoginIB", "ticketloginib");
+	 public static final StringField USUARICLAVE = new StringField(_TABLE_MODEL, "usuariClave", "usuariclave");
 	 public static final LongField ENTITATID = new LongField(_TABLE_MODEL, "entitatID", "entitatid");
 	 public static final LongField PLUGINID = new LongField(_TABLE_MODEL, "pluginID", "pluginid");
 
@@ -26,7 +26,7 @@ public interface AuditoriaFields extends java.io.Serializable {
     DATAAUDIT,
     TIPUS,
     USUARIID,
-    TICKETLOGINIB,
+    USUARICLAVE,
     ENTITATID,
     PLUGINID
   };

@@ -109,14 +109,14 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
   }
 
 
-  private java.lang.String ticketLoginIB;
+  private java.lang.String usuariClave;
 
-  public java.lang.String getTicketLoginIB() {
-    return this.ticketLoginIB;
+  public java.lang.String getUsuariClave() {
+    return this.usuariClave;
   }
 
-  public void setTicketLoginIB(java.lang.String ticketLoginIB) {
-    this.ticketLoginIB = ticketLoginIB;
+  public void setUsuariClave(java.lang.String usuariClave) {
+    this.usuariClave = usuariClave;
   }
 
 
@@ -177,7 +177,7 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
     this.tipusFins = __toClone.tipusFins;
     this.usuariIDDesde = __toClone.usuariIDDesde;
     this.usuariIDFins = __toClone.usuariIDFins;
-    this.ticketLoginIB = __toClone.ticketLoginIB;
+    this.usuariClave = __toClone.usuariClave;
     this.entitatIDDesde = __toClone.entitatIDDesde;
     this.entitatIDFins = __toClone.entitatIDFins;
     this.pluginIDDesde = __toClone.pluginIDDesde;

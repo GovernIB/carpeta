@@ -98,19 +98,19 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.TICKETLOGINIB)}">
-        <tr id="auditoria_ticketLoginIB_rowid">
+        <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.USUARICLAVE)}">
+        <tr id="auditoria_usuariClave_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[AuditoriaFields.TICKETLOGINIB])?'auditoria.ticketLoginIB':__theForm.labels[AuditoriaFields.TICKETLOGINIB]}" />
-              <c:if test="${not empty __theForm.help[AuditoriaFields.TICKETLOGINIB]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.TICKETLOGINIB]}" ></i>
+              <fmt:message key="${(empty __theForm.labels[AuditoriaFields.USUARICLAVE])?'auditoria.usuariClave':__theForm.labels[AuditoriaFields.USUARICLAVE]}" />
+              <c:if test="${not empty __theForm.help[AuditoriaFields.USUARICLAVE]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.USUARICLAVE]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="auditoria.ticketLoginIB" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TICKETLOGINIB)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TICKETLOGINIB)? ' uneditable-input' : ''}"  maxlength="256" path="auditoria.ticketLoginIB"   />
+            <form:errors path="auditoria.usuariClave" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USUARICLAVE)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USUARICLAVE)? ' uneditable-input' : ''}"  maxlength="256" path="auditoria.usuariClave"   />
 
            </td>
         </tr>

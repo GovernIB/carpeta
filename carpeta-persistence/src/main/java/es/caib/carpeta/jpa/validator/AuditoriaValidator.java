@@ -43,11 +43,11 @@ public class AuditoriaValidator<I extends Auditoria>
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TIPUS)));
 
     // Check size
-    if (__vr.getFieldErrorCount(TICKETLOGINIB) == 0) {
-      java.lang.String __ticketloginib = __target__.getTicketLoginIB();
-      if (__ticketloginib!= null && __ticketloginib.length() > 256) {
-        __vr.rejectValue(TICKETLOGINIB, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TICKETLOGINIB)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(256)));
+    if (__vr.getFieldErrorCount(USUARICLAVE) == 0) {
+      java.lang.String __usuariclave = __target__.getUsuariClave();
+      if (__usuariclave!= null && __usuariclave.length() > 256) {
+        __vr.rejectValue(USUARICLAVE, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USUARICLAVE)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(256)));
       }
     }
 

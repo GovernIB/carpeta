@@ -48,9 +48,9 @@
           </c:if>
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.TICKETLOGINIB)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.USUARICLAVE)}">
           <td>
-          ${auditoria.ticketLoginIB}
+          ${auditoria.usuariClave}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.ENTITATID)}">

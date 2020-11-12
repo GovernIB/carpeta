@@ -150,15 +150,15 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,AuditoriaFields.TICKETLOGINIB)}">
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,AuditoriaFields.USUARICLAVE)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="auditoria.ticketLoginIB" var="ticketLoginIB" />
-              <fmt:message key="genapp.form.searchby" var="cercaperticketLoginIB" >                
-                 <fmt:param value="${ticketLoginIB}"/>
+              <fmt:message key="auditoria.usuariClave" var="usuariClave" />
+              <fmt:message key="genapp.form.searchby" var="cercaperusuariClave" >                
+                 <fmt:param value="${usuariClave}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${ticketLoginIB}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperticketLoginIB}" path="ticketLoginIB" />
+              <span class="add-on"><c:out value="${usuariClave}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperusuariClave}" path="usuariClave" />
             </div>
 
 

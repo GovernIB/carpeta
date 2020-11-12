@@ -14,8 +14,8 @@ public interface Auditoria extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.Long getUsuariID();
 	public void setUsuariID(java.lang.Long _usuariID_);
 
-	public java.lang.String getTicketLoginIB();
-	public void setTicketLoginIB(java.lang.String _ticketLoginIB_);
+	public java.lang.String getUsuariClave();
+	public void setUsuariClave(java.lang.String _usuariClave_);
 
 	public java.lang.Long getEntitatID();
 	public void setEntitatID(java.lang.Long _entitatID_);

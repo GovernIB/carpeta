@@ -24,8 +24,8 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.USUARIID)}">
         <th>${car:getSortIcons(__theFilterForm,AuditoriaFields.USUARIID)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.TICKETLOGINIB)}">
-        <th>${car:getSortIcons(__theFilterForm,AuditoriaFields.TICKETLOGINIB)}</th>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.USUARICLAVE)}">
+        <th>${car:getSortIcons(__theFilterForm,AuditoriaFields.USUARICLAVE)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.ENTITATID)}">
         <th>${car:getSortIcons(__theFilterForm,AuditoriaFields.ENTITATID)}</th>
