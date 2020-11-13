@@ -31,7 +31,7 @@ class LogoLateral extends Component {
         } else{
             infologolateral = this.state.infologolateral.map((s, i) => (
                 <a href={s.url} className="imc--goib" title={s.label}>
-                    <img src={s.urllogo} title={s.label} alt={s.label} />
+                    <img src={s.urllogo} style={{maxWidth: "70%"}} title={s.label} alt={s.label} />
                     <span>{s.label}</span>
                 </a>
             ))
