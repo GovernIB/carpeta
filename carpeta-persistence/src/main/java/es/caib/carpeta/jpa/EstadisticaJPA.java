@@ -38,11 +38,11 @@ private static final long serialVersionUID = -2066559243L;
 	@Column(name="dataestadistica",nullable = false,length = 29,precision = 6)
 	java.sql.Timestamp dataEstadistica;
 
-	@Column(name="pluginid",length = 19)
-	java.lang.Long pluginID;
-
 	@Column(name="comptador",nullable = false,length = 10)
 	int comptador;
+
+	@Column(name="pluginid",length = 19)
+	java.lang.Long pluginID;
 
 	@Index(name="car_estadistica_entitatid_fk_i")
 	@Column(name="entitatid",length = 19)
@@ -55,20 +55,20 @@ private static final long serialVersionUID = -2066559243L;
   }
 
   /** Constructor amb tots els camps  */
-  public EstadisticaJPA(long estadisticaID , int tipus , java.sql.Timestamp dataEstadistica , java.lang.Long pluginID , int comptador , java.lang.Long entitatID) {
+  public EstadisticaJPA(long estadisticaID , int tipus , java.sql.Timestamp dataEstadistica , int comptador , java.lang.Long pluginID , java.lang.Long entitatID) {
     this.estadisticaID=estadisticaID;
     this.tipus=tipus;
     this.dataEstadistica=dataEstadistica;
-    this.pluginID=pluginID;
     this.comptador=comptador;
+    this.pluginID=pluginID;
     this.entitatID=entitatID;
 }
   /** Constructor sense valors autoincrementals */
-  public EstadisticaJPA(int tipus , java.sql.Timestamp dataEstadistica , java.lang.Long pluginID , int comptador , java.lang.Long entitatID) {
+  public EstadisticaJPA(int tipus , java.sql.Timestamp dataEstadistica , int comptador , java.lang.Long pluginID , java.lang.Long entitatID) {
     this.tipus=tipus;
     this.dataEstadistica=dataEstadistica;
-    this.pluginID=pluginID;
     this.comptador=comptador;
+    this.pluginID=pluginID;
     this.entitatID=entitatID;
 }
   /** Constructor dels valors Not Null */
@@ -82,8 +82,8 @@ private static final long serialVersionUID = -2066559243L;
     this.setEstadisticaID(__bean.getEstadisticaID());
     this.setTipus(__bean.getTipus());
     this.setDataEstadistica(__bean.getDataEstadistica());
-    this.setPluginID(__bean.getPluginID());
     this.setComptador(__bean.getComptador());
+    this.setPluginID(__bean.getPluginID());
     this.setEntitatID(__bean.getEntitatID());
 	}
 
@@ -108,18 +108,18 @@ private static final long serialVersionUID = -2066559243L;
 		this.dataEstadistica = _dataEstadistica_;
 	};
 
-	public java.lang.Long getPluginID() {
-		return(pluginID);
-	};
-	public void setPluginID(java.lang.Long _pluginID_) {
-		this.pluginID = _pluginID_;
-	};
-
 	public int getComptador() {
 		return(comptador);
 	};
 	public void setComptador(int _comptador_) {
 		this.comptador = _comptador_;
+	};
+
+	public java.lang.Long getPluginID() {
+		return(pluginID);
+	};
+	public void setPluginID(java.lang.Long _pluginID_) {
+		this.pluginID = _pluginID_;
 	};
 
 	public java.lang.Long getEntitatID() {
@@ -167,8 +167,8 @@ private static final long serialVersionUID = -2066559243L;
     __tmp.setEstadisticaID(__bean.getEstadisticaID());
     __tmp.setTipus(__bean.getTipus());
     __tmp.setDataEstadistica(__bean.getDataEstadistica());
-    __tmp.setPluginID(__bean.getPluginID());
     __tmp.setComptador(__bean.getComptador());
+    __tmp.setPluginID(__bean.getPluginID());
     __tmp.setEntitatID(__bean.getEntitatID());
 		return __tmp;
 	}

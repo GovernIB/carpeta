@@ -23,12 +23,12 @@ public class EstadisticaQueryPath extends org.fundaciobit.genapp.common.query.Qu
     return new TimestampField(getQueryPath(), EstadisticaFields.DATAESTADISTICA);
   }
 
-  public LongField PLUGINID() {
-    return new LongField(getQueryPath(), EstadisticaFields.PLUGINID);
-  }
-
   public IntegerField COMPTADOR() {
     return new IntegerField(getQueryPath(), EstadisticaFields.COMPTADOR);
+  }
+
+  public LongField PLUGINID() {
+    return new LongField(getQueryPath(), EstadisticaFields.PLUGINID);
   }
 
   public LongField ENTITATID() {

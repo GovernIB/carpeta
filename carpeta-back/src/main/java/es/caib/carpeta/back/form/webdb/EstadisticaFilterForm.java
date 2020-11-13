@@ -87,28 +87,6 @@ public class EstadisticaFilterForm extends CarpetaBaseFilterForm implements Esta
   }
 
 
-  private java.lang.Long pluginIDDesde;
-
-  public java.lang.Long getPluginIDDesde() {
-    return this.pluginIDDesde;
-  }
-
-  public void setPluginIDDesde(java.lang.Long pluginIDDesde) {
-    this.pluginIDDesde = pluginIDDesde;
-  }
-
-
-  private java.lang.Long pluginIDFins;
-
-  public java.lang.Long getPluginIDFins() {
-    return this.pluginIDFins;
-  }
-
-  public void setPluginIDFins(java.lang.Long pluginIDFins) {
-    this.pluginIDFins = pluginIDFins;
-  }
-
-
   private java.lang.Integer comptadorDesde;
 
   public java.lang.Integer getComptadorDesde() {
@@ -128,6 +106,28 @@ public class EstadisticaFilterForm extends CarpetaBaseFilterForm implements Esta
 
   public void setComptadorFins(java.lang.Integer comptadorFins) {
     this.comptadorFins = comptadorFins;
+  }
+
+
+  private java.lang.Long pluginIDDesde;
+
+  public java.lang.Long getPluginIDDesde() {
+    return this.pluginIDDesde;
+  }
+
+  public void setPluginIDDesde(java.lang.Long pluginIDDesde) {
+    this.pluginIDDesde = pluginIDDesde;
+  }
+
+
+  private java.lang.Long pluginIDFins;
+
+  public java.lang.Long getPluginIDFins() {
+    return this.pluginIDFins;
+  }
+
+  public void setPluginIDFins(java.lang.Long pluginIDFins) {
+    this.pluginIDFins = pluginIDFins;
   }
 
 
@@ -164,10 +164,10 @@ public class EstadisticaFilterForm extends CarpetaBaseFilterForm implements Esta
     this.tipusFins = __toClone.tipusFins;
     this.dataEstadisticaDesde = __toClone.dataEstadisticaDesde;
     this.dataEstadisticaFins = __toClone.dataEstadisticaFins;
-    this.pluginIDDesde = __toClone.pluginIDDesde;
-    this.pluginIDFins = __toClone.pluginIDFins;
     this.comptadorDesde = __toClone.comptadorDesde;
     this.comptadorFins = __toClone.comptadorFins;
+    this.pluginIDDesde = __toClone.pluginIDDesde;
+    this.pluginIDFins = __toClone.pluginIDFins;
     this.entitatIDDesde = __toClone.entitatIDDesde;
     this.entitatIDFins = __toClone.entitatIDFins;
     this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
