@@ -211,9 +211,6 @@ public class LoginController {
      */
     private ModelAndView autenticarTicket(SavedRequest request, String ticketUserName) throws Exception, I18NException {
 
-        long temps = System.currentTimeMillis();
-        StringBuilder peticio = new StringBuilder();
-
         ModelAndView mav = new ModelAndView("loginTicket");
 
         // Obtenemos ticket de la peticion
@@ -224,11 +221,6 @@ public class LoginController {
         final String ticket = tickets[0];
 
         log.info("Autenticando el ticket: " + tickets[0]);
-
-        peticio.append("Ticket: ").append(tickets[0]).append(System.getProperty("line.separator"));
-        peticio.append("classe: ").append(getClass().getName()).append(System.getProperty("line.separator"));
-
-        logCarpetaLogicaEjb.crearLog("Autenticació del Front del ticket " + tickets[0], ESTAT_LOG_OK,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),null,null);
 
         //Estadistica entrada al front autenticada
         List<EstadisticaJPA> estadisticas = estadisticaLogicaEjb.findEstadistica(TIPUS_ESTAD_ENTRADA_FRONT_AUTENTICAT,null,new Date(),null);
