@@ -13,12 +13,16 @@ import org.springframework.stereotype.Component;
 
 import javax.ejb.EJB;
 
+import java.util.*;
+
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ENTRADA_FRONT_AUTENTICAT;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_ESTAD_ENTRADA_FRONT_AUTENTICAT;
 import es.caib.carpeta.commons.utils.UsuarioClave;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.carpeta.front.service.SecurityService;
+import es.caib.carpeta.jpa.EstadisticaJPA;
 import es.caib.carpeta.logic.AuditoriaLogicaLocal;
-
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ENTRADA_FRONT_AUTENTICAT;
+import es.caib.carpeta.logic.EstadisticaLogicaLocal;
 
 
 @Component
@@ -28,6 +32,9 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
 
     @Autowired
     SecurityService securityService;
+
+    @EJB(mappedName = EstadisticaLogicaLocal.JNDI_NAME)
+    protected EstadisticaLogicaLocal estadisticaLogicaEjb;
 
     @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
     protected AuditoriaLogicaLocal auditoriaLogicaEjb;
@@ -47,6 +54,18 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
 
         try {
             usuarioClave = securityService.validarTicketAutentificacion(passwd);
+
+
+
+            //Estadistica entrada al front autenticada
+            List<EstadisticaJPA> estadisticas = estadisticaLogicaEjb.findEstadistica(TIPUS_ESTAD_ENTRADA_FRONT_AUTENTICAT,null,new Date(),null);
+
+            if(estadisticas != null && !estadisticas.isEmpty()) {
+
+                estadisticaLogicaEjb.incrementarComptador(estadisticas.get(0));
+            }else{
+                estadisticaLogicaEjb.crearEstadistica(null, TIPUS_ESTAD_ENTRADA_FRONT_AUTENTICAT,null);
+            }
 
             //AUDITORIA
             auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ENTRADA_FRONT_AUTENTICAT,null,null,usuarioClave.getNif(),null);
