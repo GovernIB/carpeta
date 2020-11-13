@@ -2,6 +2,8 @@ package es.caib.carpeta.back.controller.superadmin;
 
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.OrderBy;
+import org.fundaciobit.genapp.common.query.OrderType;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 
@@ -13,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
-import java.util.List;
+import java.util.*;
 import es.caib.carpeta.back.form.webdb.*;
 
 import es.caib.carpeta.back.controller.webdb.EstadisticaController;
@@ -72,8 +74,9 @@ public class EstadisticaSuperAdminController  extends EstadisticaController {
          estadisticaFilterForm.addGroupByField(TIPUS);
          estadisticaFilterForm.addGroupByField(ENTITATID);
 
-         estadisticaFilterForm.setOrderBy(EstadisticaFields.DATAESTADISTICA.javaName);
-         estadisticaFilterForm.setOrderAsc(false);
+         OrderBy[] orderByDef = {new OrderBy(EstadisticaFields.TIPUS.javaName),new OrderBy(EstadisticaFields.DATAESTADISTICA.javaName, OrderType.DESC)};
+         estadisticaFilterForm.setDefaultOrderBy(orderByDef);
+
       }
 
       return estadisticaFilterForm;
