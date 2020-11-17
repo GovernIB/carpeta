@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -16,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import es.caib.carpeta.back.controller.webdb.EntitatController;
 import es.caib.carpeta.back.form.webdb.EntitatFilterForm;
 import es.caib.carpeta.back.form.webdb.EntitatForm;
+import es.caib.carpeta.logic.EntitatLogicaLocal;
+import es.caib.carpeta.model.entity.Entitat;
 import es.caib.carpeta.model.fields.EntitatFields;
 
 /**
@@ -28,6 +31,9 @@ import es.caib.carpeta.model.fields.EntitatFields;
 @SessionAttributes(types = { EntitatForm.class, EntitatFilterForm.class })
 public class EntitatSuperAdminController extends EntitatController {
 
+	@EJB(mappedName = EntitatLogicaLocal.JNDI_NAME)
+	protected EntitatLogicaLocal entitatLogicaEjb;
+	
     @Override
     public String getTileForm() {
         return "entitatFormSuperAdmin";
@@ -62,5 +68,10 @@ public class EntitatSuperAdminController extends EntitatController {
         return entitatFilterForm;
 
     }
+    
+    @Override
+    public void delete(HttpServletRequest request, Entitat entitat) throws Exception,I18NException {
+    	entitatLogicaEjb.deleteFull(entitat, true);
+      } 
 
 }

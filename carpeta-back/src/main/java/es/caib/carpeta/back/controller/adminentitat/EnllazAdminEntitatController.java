@@ -2,6 +2,7 @@ package es.caib.carpeta.back.controller.adminentitat;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.StringKeyValue;
@@ -19,6 +20,8 @@ import es.caib.carpeta.back.form.webdb.EnllazForm;
 import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.jpa.EnllazJPA;
+import es.caib.carpeta.logic.EnllazLogicaLocal;
+import es.caib.carpeta.model.entity.Enllaz;
 import es.caib.carpeta.model.fields.EnllazFields;
 
 /**
@@ -30,6 +33,9 @@ import es.caib.carpeta.model.fields.EnllazFields;
 @RequestMapping(value = "/adminentitat/enllaz")
 @SessionAttributes(types = { EnllazForm.class, EnllazFilterForm.class })
 public class EnllazAdminEntitatController extends EnllazController {
+	
+	@EJB(mappedName = EnllazLogicaLocal.JNDI_NAME)
+	protected EnllazLogicaLocal enllazLogicaEjb;
 
     @Override
     public String getTileForm() {
@@ -91,5 +97,9 @@ public class EnllazAdminEntitatController extends EnllazController {
 
         return __tmp;
     }
-
+    
+    @Override
+    public void delete(HttpServletRequest request, Enllaz enllaz) throws Exception,I18NException {
+        enllazLogicaEjb.deleteFull(enllaz, true);
+    }
 }
