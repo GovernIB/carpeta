@@ -69,6 +69,24 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EstadisticaFields.COMPTADOR)}">
+        <tr id="estadistica_comptador_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EstadisticaFields.COMPTADOR])?'estadistica.comptador':__theForm.labels[EstadisticaFields.COMPTADOR]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[EstadisticaFields.COMPTADOR]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EstadisticaFields.COMPTADOR]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="estadistica.comptador" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EstadisticaFields.COMPTADOR)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.COMPTADOR)? ' uneditable-input' : ''}"   path="estadistica.comptador"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,EstadisticaFields.PLUGINID)}">
         <tr id="estadistica_pluginID_rowid">
           <td>
@@ -94,24 +112,6 @@
             </c:forEach>
           </form:select>
           </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,EstadisticaFields.COMPTADOR)}">
-        <tr id="estadistica_comptador_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[EstadisticaFields.COMPTADOR])?'estadistica.comptador':__theForm.labels[EstadisticaFields.COMPTADOR]}" /> &nbsp;(*)
-              <c:if test="${not empty __theForm.help[EstadisticaFields.COMPTADOR]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[EstadisticaFields.COMPTADOR]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-            <form:errors path="estadistica.comptador" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EstadisticaFields.COMPTADOR)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.COMPTADOR)? ' uneditable-input' : ''}"   path="estadistica.comptador"   />
-
            </td>
         </tr>
         </c:if>

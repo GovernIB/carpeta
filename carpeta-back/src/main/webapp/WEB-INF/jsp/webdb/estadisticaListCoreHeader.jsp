@@ -21,11 +21,11 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.DATAESTADISTICA)}">
         <th>${car:getSortIcons(__theFilterForm,EstadisticaFields.DATAESTADISTICA)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.PLUGINID)}">
-        <th>${car:getSortIcons(__theFilterForm,EstadisticaFields.PLUGINID)}</th>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.COMPTADOR)}">
         <th>${car:getSortIcons(__theFilterForm,EstadisticaFields.COMPTADOR)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.PLUGINID)}">
+        <th>${car:getSortIcons(__theFilterForm,EstadisticaFields.PLUGINID)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EstadisticaFields.ENTITATID)}">
         <th>${car:getSortIcons(__theFilterForm,EstadisticaFields.ENTITATID)}</th>
