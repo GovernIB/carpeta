@@ -1,16 +1,12 @@
 package es.caib.carpeta.logic;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
+import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
-import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
-import org.fundaciobit.genapp.common.i18n.I18NException;
+import java.util.*;
 
 import es.caib.carpeta.ejb.AccesLocal;
 import es.caib.carpeta.ejb.AuditoriaLocal;
@@ -24,17 +20,7 @@ import es.caib.carpeta.ejb.PropietatGlobalLocal;
 import es.caib.carpeta.ejb.UsuariEntitatLocal;
 import es.caib.carpeta.model.entity.Enllaz;
 import es.caib.carpeta.model.entity.Entitat;
-import es.caib.carpeta.model.fields.AccesFields;
-import es.caib.carpeta.model.fields.AuditoriaFields;
-import es.caib.carpeta.model.fields.AvisFields;
-import es.caib.carpeta.model.fields.EnllazFields;
-import es.caib.carpeta.model.fields.EntitatFields;
-import es.caib.carpeta.model.fields.EstadisticaFields;
-import es.caib.carpeta.model.fields.FitxerFields;
-import es.caib.carpeta.model.fields.LogCarpetaFields;
-import es.caib.carpeta.model.fields.PluginEntitatFields;
-import es.caib.carpeta.model.fields.PropietatGlobalFields;
-import es.caib.carpeta.model.fields.UsuariEntitatFields;
+import es.caib.carpeta.model.fields.*;
 
 /**
  * 
@@ -103,7 +89,7 @@ public class EntitatLogicaEJB extends EntitatEJB implements EntitatLogicaLocal, 
 		auditoriaEjb.delete(AuditoriaFields.ENTITATID.equal(entitat.getEntitatID()));
 		
 		// logs
-		logCarpetaEjb.delete(LogCarpetaFields.ENTITATID.equal(entitat.getEntitatID()));
+		logCarpetaEjb.delete(LogCarpetaFields.ENTITATCODI.equal(entitat.getCodi()));
 		
 		// enllazos BBDD + fitxers
 		List<Enllaz> enllazos = enllazLogicaEjb.select(EnllazFields.ENTITATID.equal(entitat.getEntitatID()));
