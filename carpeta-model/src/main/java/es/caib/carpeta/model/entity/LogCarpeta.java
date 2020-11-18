@@ -8,17 +8,17 @@ public interface LogCarpeta extends org.fundaciobit.genapp.common.IGenAppEntity 
 	public java.lang.String getDescripcio();
 	public void setDescripcio(java.lang.String _descripcio_);
 
-	public java.lang.Long getEntitatID();
-	public void setEntitatID(java.lang.Long _entitatID_);
-
-	public java.lang.Long getPluginID();
-	public void setPluginID(java.lang.Long _pluginID_);
-
 	public int getTipus();
 	public void setTipus(int _tipus_);
 
 	public int getEstat();
 	public void setEstat(int _estat_);
+
+	public java.lang.Long getPluginID();
+	public void setPluginID(java.lang.Long _pluginID_);
+
+	public java.lang.String getEntitatCodi();
+	public void setEntitatCodi(java.lang.String _entitatCodi_);
 
 	public java.lang.Long getTemps();
 	public void setTemps(java.lang.Long _temps_);

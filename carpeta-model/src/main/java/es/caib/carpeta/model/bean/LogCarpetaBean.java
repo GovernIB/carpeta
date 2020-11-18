@@ -12,10 +12,10 @@ private static final long serialVersionUID = 1007346690L;
 
 	long logID;// PK
 	java.lang.String descripcio;
-	java.lang.Long entitatID;
-	java.lang.Long pluginID;
 	int tipus;
 	int estat;
+	java.lang.Long pluginID;
+	java.lang.String entitatCodi;
 	java.lang.Long temps;
 	java.sql.Timestamp dataInici;
 	java.lang.String peticio;
@@ -28,13 +28,13 @@ private static final long serialVersionUID = 1007346690L;
   }
 
   /** Constructor amb tots els camps  */
-  public LogCarpetaBean(long logID , java.lang.String descripcio , java.lang.Long entitatID , java.lang.Long pluginID , int tipus , int estat , java.lang.Long temps , java.sql.Timestamp dataInici , java.lang.String peticio , java.lang.String error , java.lang.String excepcio) {
+  public LogCarpetaBean(long logID , java.lang.String descripcio , int tipus , int estat , java.lang.Long pluginID , java.lang.String entitatCodi , java.lang.Long temps , java.sql.Timestamp dataInici , java.lang.String peticio , java.lang.String error , java.lang.String excepcio) {
     this.logID=logID;
     this.descripcio=descripcio;
-    this.entitatID=entitatID;
-    this.pluginID=pluginID;
     this.tipus=tipus;
     this.estat=estat;
+    this.pluginID=pluginID;
+    this.entitatCodi=entitatCodi;
     this.temps=temps;
     this.dataInici=dataInici;
     this.peticio=peticio;
@@ -42,12 +42,12 @@ private static final long serialVersionUID = 1007346690L;
     this.excepcio=excepcio;
 }
   /** Constructor sense valors autoincrementals */
-  public LogCarpetaBean(java.lang.String descripcio , java.lang.Long entitatID , java.lang.Long pluginID , int tipus , int estat , java.lang.Long temps , java.sql.Timestamp dataInici , java.lang.String peticio , java.lang.String error , java.lang.String excepcio) {
+  public LogCarpetaBean(java.lang.String descripcio , int tipus , int estat , java.lang.Long pluginID , java.lang.String entitatCodi , java.lang.Long temps , java.sql.Timestamp dataInici , java.lang.String peticio , java.lang.String error , java.lang.String excepcio) {
     this.descripcio=descripcio;
-    this.entitatID=entitatID;
-    this.pluginID=pluginID;
     this.tipus=tipus;
     this.estat=estat;
+    this.pluginID=pluginID;
+    this.entitatCodi=entitatCodi;
     this.temps=temps;
     this.dataInici=dataInici;
     this.peticio=peticio;
@@ -65,10 +65,10 @@ private static final long serialVersionUID = 1007346690L;
   public LogCarpetaBean(LogCarpeta __bean) {
     this.setLogID(__bean.getLogID());
     this.setDescripcio(__bean.getDescripcio());
-    this.setEntitatID(__bean.getEntitatID());
-    this.setPluginID(__bean.getPluginID());
     this.setTipus(__bean.getTipus());
     this.setEstat(__bean.getEstat());
+    this.setPluginID(__bean.getPluginID());
+    this.setEntitatCodi(__bean.getEntitatCodi());
     this.setTemps(__bean.getTemps());
     this.setDataInici(__bean.getDataInici());
     this.setPeticio(__bean.getPeticio());
@@ -90,20 +90,6 @@ private static final long serialVersionUID = 1007346690L;
 		this.descripcio = _descripcio_;
 	};
 
-	public java.lang.Long getEntitatID() {
-		return(entitatID);
-	};
-	public void setEntitatID(java.lang.Long _entitatID_) {
-		this.entitatID = _entitatID_;
-	};
-
-	public java.lang.Long getPluginID() {
-		return(pluginID);
-	};
-	public void setPluginID(java.lang.Long _pluginID_) {
-		this.pluginID = _pluginID_;
-	};
-
 	public int getTipus() {
 		return(tipus);
 	};
@@ -116,6 +102,20 @@ private static final long serialVersionUID = 1007346690L;
 	};
 	public void setEstat(int _estat_) {
 		this.estat = _estat_;
+	};
+
+	public java.lang.Long getPluginID() {
+		return(pluginID);
+	};
+	public void setPluginID(java.lang.Long _pluginID_) {
+		this.pluginID = _pluginID_;
+	};
+
+	public java.lang.String getEntitatCodi() {
+		return(entitatCodi);
+	};
+	public void setEntitatCodi(java.lang.String _entitatCodi_) {
+		this.entitatCodi = _entitatCodi_;
 	};
 
 	public java.lang.Long getTemps() {
@@ -162,10 +162,10 @@ private static final long serialVersionUID = 1007346690L;
     LogCarpetaBean __tmp = new LogCarpetaBean();
     __tmp.setLogID(__bean.getLogID());
     __tmp.setDescripcio(__bean.getDescripcio());
-    __tmp.setEntitatID(__bean.getEntitatID());
-    __tmp.setPluginID(__bean.getPluginID());
     __tmp.setTipus(__bean.getTipus());
     __tmp.setEstat(__bean.getEstat());
+    __tmp.setPluginID(__bean.getPluginID());
+    __tmp.setEntitatCodi(__bean.getEntitatCodi());
     __tmp.setTemps(__bean.getTemps());
     __tmp.setDataInici(__bean.getDataInici());
     __tmp.setPeticio(__bean.getPeticio());

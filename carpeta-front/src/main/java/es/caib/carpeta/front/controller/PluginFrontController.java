@@ -58,6 +58,9 @@ public class PluginFrontController extends CommonFrontController {
     @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
     protected AuditoriaLogicaLocal auditoriaLogicaEjb;
 
+   /* @EJB(mappedName = PluginLogicaLocal.JNDI_NAME)
+    protected PluginLogicaLocal pluginLogicaEjb;*/
+
     
     protected final Log log = LogFactory.getLog(getClass());
 
@@ -159,7 +162,8 @@ public class PluginFrontController extends CommonFrontController {
         peticio.append("classe: ").append(getClass().getName()).append(System.getProperty("line.separator"));
 
         //LOG
-        logCarpetaLogicaEjb.crearLog("Executat plugin des del Front per "+ administrationID, ESTAT_LOG_OK,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),null, Long.parseLong(pluginID));
+      //  XYZ TODO Passar valor a la var PluginText
+        logCarpetaLogicaEjb.crearLog("Executat plugin des del Front per "+ administrationID, ESTAT_LOG_OK,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),"", Long.parseLong(pluginID));
 
         //ESTADISTICA
         List<EstadisticaJPA> estadisticas = estadisticaLogicaEjb.findEstadistica(TIPUS_ESTAD_ACCES_PLUGIN,null,new Date(),Long.parseLong(pluginID));

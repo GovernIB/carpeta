@@ -1,19 +1,21 @@
 package es.caib.carpeta.logic;
 
-import es.caib.carpeta.commons.utils.StringUtils;
-import es.caib.carpeta.ejb.LogCarpetaEJB;
-import es.caib.carpeta.jpa.LogCarpetaJPA;
-import es.caib.carpeta.model.entity.LogCarpeta;
-import es.caib.carpeta.model.fields.LogCarpetaFields;
-
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
+
+import javax.ejb.Stateless;
+import javax.validation.constraints.NotNull;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.Timestamp;
 import java.util.*;
-import javax.ejb.Stateless;
-import javax.validation.constraints.NotNull;
+
+import es.caib.carpeta.commons.utils.StringUtils;
+import es.caib.carpeta.ejb.LogCarpetaEJB;
+import es.caib.carpeta.jpa.LogCarpetaJPA;
+import es.caib.carpeta.model.entity.LogCarpeta;
+import es.caib.carpeta.model.fields.*;
 
 /**
  * Created by Fundació BIT.
@@ -26,9 +28,9 @@ public class LogCarpetaLogicaEJB extends LogCarpetaEJB implements LogCarpetaLogi
 
 
     @Override
-    public List<LogCarpetaJPA> findByEntidadByTipus(@NotNull Long entitatId, @NotNull Integer tipus)throws I18NException {
+    public List<LogCarpetaJPA> findByEntidadByTipus(@NotNull String entitatCodi, @NotNull Integer tipus)throws I18NException {
 
-        List<LogCarpeta> logs = select(Where.AND(LogCarpetaFields.ENTITATID.equal(entitatId),
+        List<LogCarpeta> logs = select(Where.AND(LogCarpetaFields.ENTITATCODI.equal(entitatCodi),
            LogCarpetaFields.TIPUS.equal(tipus))); ;
 
         if (logs == null || logs.size() == 0) {
@@ -47,7 +49,7 @@ public class LogCarpetaLogicaEJB extends LogCarpetaEJB implements LogCarpetaLogi
 
 
     @Override
-    public void crearLog(String descripcio, int estat, int tipus, long temps, Throwable th, String error, String peticio, Long entidadID, Long pluginID ) throws I18NException{
+    public void crearLog(String descripcio, int estat, int tipus, long temps, Throwable th, String error, String peticio, String entitatCodi, Long pluginID) throws I18NException{
 
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw, true);
@@ -72,7 +74,7 @@ public class LogCarpetaLogicaEJB extends LogCarpetaEJB implements LogCarpetaLogi
         logCarpeta.setExcepcio(exception);
         logCarpeta.setError(error);
         logCarpeta.setPeticio(peticio);
-        logCarpeta.setEntitatID(entidadID);
+        logCarpeta.setEntitatCodi(entitatCodi);
         logCarpeta.setPluginID(pluginID);
 
 

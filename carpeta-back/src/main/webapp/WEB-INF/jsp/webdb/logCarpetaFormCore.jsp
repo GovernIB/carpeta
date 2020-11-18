@@ -27,64 +27,6 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,LogCarpetaFields.ENTITATID)}">
-        <tr id="logCarpeta_entitatID_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[LogCarpetaFields.ENTITATID])?'logCarpeta.entitatID':__theForm.labels[LogCarpetaFields.ENTITATID]}" />
-              <c:if test="${not empty __theForm.help[LogCarpetaFields.ENTITATID]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[LogCarpetaFields.ENTITATID]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <form:errors path="logCarpeta.entitatID" cssClass="errorField alert alert-danger" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ENTITATID)}" >
-          <form:hidden path="logCarpeta.entitatID"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.logCarpeta.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ENTITATID)}" >
-          <form:select id="logCarpeta_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-4" path="logCarpeta.entitatID">
-          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
-          <form:option value="" ></form:option>
-            <c:forEach items="${__theForm.listOfEntitatForEntitatID}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,LogCarpetaFields.PLUGINID)}">
-        <tr id="logCarpeta_pluginID_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[LogCarpetaFields.PLUGINID])?'logCarpeta.pluginID':__theForm.labels[LogCarpetaFields.PLUGINID]}" />
-              <c:if test="${not empty __theForm.help[LogCarpetaFields.PLUGINID]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[LogCarpetaFields.PLUGINID]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <form:errors path="logCarpeta.pluginID" cssClass="errorField alert alert-danger" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.PLUGINID)}" >
-          <form:hidden path="logCarpeta.pluginID"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.logCarpeta.pluginID,__theForm.listOfPluginForPluginID)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.PLUGINID)}" >
-          <form:select id="logCarpeta_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="form-control col-md-4" path="logCarpeta.pluginID">
-          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
-          <form:option value="" ></form:option>
-            <c:forEach items="${__theForm.listOfPluginForPluginID}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
         <c:if test="${!gen:contains(__theForm.hiddenFields,LogCarpetaFields.TIPUS)}">
         <tr id="logCarpeta_tipus_rowid">
           <td>
@@ -135,6 +77,53 @@
             </c:forEach>
           </form:select>
           </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,LogCarpetaFields.PLUGINID)}">
+        <tr id="logCarpeta_pluginID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[LogCarpetaFields.PLUGINID])?'logCarpeta.pluginID':__theForm.labels[LogCarpetaFields.PLUGINID]}" />
+              <c:if test="${not empty __theForm.help[LogCarpetaFields.PLUGINID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[LogCarpetaFields.PLUGINID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="logCarpeta.pluginID" cssClass="errorField alert alert-danger" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.PLUGINID)}" >
+          <form:hidden path="logCarpeta.pluginID"/>
+          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.logCarpeta.pluginID,__theForm.listOfValuesForPluginID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.PLUGINID)}" >
+          <form:select id="logCarpeta_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="form-control col-md-4" path="logCarpeta.pluginID">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfValuesForPluginID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,LogCarpetaFields.ENTITATCODI)}">
+        <tr id="logCarpeta_entitatCodi_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[LogCarpetaFields.ENTITATCODI])?'logCarpeta.entitatCodi':__theForm.labels[LogCarpetaFields.ENTITATCODI]}" />
+              <c:if test="${not empty __theForm.help[LogCarpetaFields.ENTITATCODI]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[LogCarpetaFields.ENTITATCODI]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="logCarpeta.entitatCodi" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ENTITATCODI)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ENTITATCODI)? ' uneditable-input' : ''}"  maxlength="9" path="logCarpeta.entitatCodi"   />
+
            </td>
         </tr>
         </c:if>

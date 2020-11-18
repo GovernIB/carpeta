@@ -1,14 +1,14 @@
 package es.caib.carpeta.logic;
 
-import es.caib.carpeta.ejb.LogCarpetaLocal;
-import es.caib.carpeta.jpa.LogCarpetaJPA;
-
-import java.util.*;
-
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import javax.ejb.Local;
 import javax.validation.constraints.NotNull;
+
+import java.util.*;
+
+import es.caib.carpeta.ejb.LogCarpetaLocal;
+import es.caib.carpeta.jpa.LogCarpetaJPA;
 
 /**
  * Created by Fundació BIT.
@@ -21,7 +21,7 @@ public interface LogCarpetaLogicaLocal extends LogCarpetaLocal {
 
     public static final String JNDI_NAME = "java:app/carpeta-logic/LogCarpetaLogicaEJB!es.caib.carpeta.logic.LogCarpetaLogicaLocal";
 
-    public List<LogCarpetaJPA> findByEntidadByTipus(@NotNull Long entitatId, @NotNull Integer tipus)throws I18NException;
+    public List<LogCarpetaJPA> findByEntidadByTipus(@NotNull String entitatCodi, @NotNull Integer tipus)throws I18NException;
 
-    void crearLog(String descripcio, int estat, int tipus, long temps, Throwable th, String error, String peticio, Long entidadID, Long pluginID ) throws I18NException;
+    void crearLog(String descripcio, int estat, int tipus, long temps, Throwable th, String error, String peticio, String entitatCodi, Long pluginID) throws I18NException;
 }

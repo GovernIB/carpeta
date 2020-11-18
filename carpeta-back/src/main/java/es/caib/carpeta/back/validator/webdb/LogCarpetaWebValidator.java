@@ -32,14 +32,8 @@ public class LogCarpetaWebValidator extends AbstractWebValidator<LogCarpetaForm,
   protected LogCarpetaValidator<LogCarpeta> validator = new LogCarpetaValidator<LogCarpeta>();
 
   // EJB's
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EntitatLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.EntitatLocal entitatEjb;
-
   @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.LogCarpetaLocal.JNDI_NAME)
   protected es.caib.carpeta.ejb.LogCarpetaLocal logCarpetaEjb;
-
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.PluginLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.PluginLocal pluginEjb;
 
 
 
@@ -83,7 +77,7 @@ public class LogCarpetaWebValidator extends AbstractWebValidator<LogCarpetaForm,
 
     BeanValidatorResult<LogCarpeta> __vr = new BeanValidatorResult<LogCarpeta>();
     validator.validate(__vr, __bean,
-      isNou, entitatEjb, logCarpetaEjb, pluginEjb);
+      isNou, logCarpetaEjb);
 
     if (__vr.hasErrors()) {
         List<I18NFieldError> vrErrors = __vr.getErrors();

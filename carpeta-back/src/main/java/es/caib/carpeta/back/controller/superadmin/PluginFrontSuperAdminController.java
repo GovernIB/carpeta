@@ -22,14 +22,14 @@ import es.caib.carpeta.back.form.webdb.*;
 
 import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.commons.utils.Constants;
+import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_AFEGIR_PLUGIN;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_PLUGIN_FRONT;
 import es.caib.carpeta.jpa.PluginJPA;
 import es.caib.carpeta.logic.AuditoriaLogicaLocal;
 import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
 import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaLocal;
 
-import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_AFEGIR_PLUGIN;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_PLUGIN_FRONT;
 
 /**
  * 
@@ -93,7 +93,9 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
 
        peticio.append("Usuari: ").append(LoginInfo.getInstance().getUsername()).append(System.getProperty("line.separator"));
        peticio.append("classe: ").append(getClass().getName()).append(System.getProperty("line.separator"));
-       logCarpetaLogicaEjb.crearLog("Plugin del Front via test executat per " + LoginInfo.getInstance().getUsername(), ESTAT_LOG_OK,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),LoginInfo.getInstance().getEntitatID(),pluginID);
+
+       //XYZ TODO passar algo al camp PluginText
+       logCarpetaLogicaEjb.crearLog("Plugin del Front via test executat per " + LoginInfo.getInstance().getUsername(), ESTAT_LOG_OK,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),LoginInfo.getInstance().getEntitat().getCodi(), pluginID);
 
 
        return CarpetaFrontModuleSuperAdminController.startPrivateSignatureProcess(request, response, view, pluginID, administrationID, base);

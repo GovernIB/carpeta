@@ -1,17 +1,15 @@
 
 package es.caib.carpeta.back.form.webdb;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import org.fundaciobit.genapp.common.query.Field;
+import org.fundaciobit.genapp.common.query.OrderBy;
 
 import org.springframework.stereotype.Component;
 
-import org.fundaciobit.genapp.common.query.Field;
-import org.fundaciobit.genapp.common.query.OrderBy;
+import java.util.*;
 import es.caib.carpeta.back.form.CarpetaBaseFilterForm;
 
-import es.caib.carpeta.model.fields.LogCarpetaFields;
+import es.caib.carpeta.model.fields.*;
 
 /**
  *  ========= FITXER AUTOGENERAT - NO MODIFICAR !!!!! 
@@ -51,50 +49,6 @@ public class LogCarpetaFilterForm extends CarpetaBaseFilterForm implements LogCa
 
   public void setDescripcio(java.lang.String descripcio) {
     this.descripcio = descripcio;
-  }
-
-
-  private java.lang.Long entitatIDDesde;
-
-  public java.lang.Long getEntitatIDDesde() {
-    return this.entitatIDDesde;
-  }
-
-  public void setEntitatIDDesde(java.lang.Long entitatIDDesde) {
-    this.entitatIDDesde = entitatIDDesde;
-  }
-
-
-  private java.lang.Long entitatIDFins;
-
-  public java.lang.Long getEntitatIDFins() {
-    return this.entitatIDFins;
-  }
-
-  public void setEntitatIDFins(java.lang.Long entitatIDFins) {
-    this.entitatIDFins = entitatIDFins;
-  }
-
-
-  private java.lang.Long pluginIDDesde;
-
-  public java.lang.Long getPluginIDDesde() {
-    return this.pluginIDDesde;
-  }
-
-  public void setPluginIDDesde(java.lang.Long pluginIDDesde) {
-    this.pluginIDDesde = pluginIDDesde;
-  }
-
-
-  private java.lang.Long pluginIDFins;
-
-  public java.lang.Long getPluginIDFins() {
-    return this.pluginIDFins;
-  }
-
-  public void setPluginIDFins(java.lang.Long pluginIDFins) {
-    this.pluginIDFins = pluginIDFins;
   }
 
 
@@ -139,6 +93,39 @@ public class LogCarpetaFilterForm extends CarpetaBaseFilterForm implements LogCa
 
   public void setEstatFins(java.lang.Integer estatFins) {
     this.estatFins = estatFins;
+  }
+
+
+  private java.lang.Long pluginIDDesde;
+
+  public java.lang.Long getPluginIDDesde() {
+    return this.pluginIDDesde;
+  }
+
+  public void setPluginIDDesde(java.lang.Long pluginIDDesde) {
+    this.pluginIDDesde = pluginIDDesde;
+  }
+
+
+  private java.lang.Long pluginIDFins;
+
+  public java.lang.Long getPluginIDFins() {
+    return this.pluginIDFins;
+  }
+
+  public void setPluginIDFins(java.lang.Long pluginIDFins) {
+    this.pluginIDFins = pluginIDFins;
+  }
+
+
+  private java.lang.String entitatCodi;
+
+  public java.lang.String getEntitatCodi() {
+    return this.entitatCodi;
+  }
+
+  public void setEntitatCodi(java.lang.String entitatCodi) {
+    this.entitatCodi = entitatCodi;
   }
 
 
@@ -227,14 +214,13 @@ public class LogCarpetaFilterForm extends CarpetaBaseFilterForm implements LogCa
     this.logIDDesde = __toClone.logIDDesde;
     this.logIDFins = __toClone.logIDFins;
     this.descripcio = __toClone.descripcio;
-    this.entitatIDDesde = __toClone.entitatIDDesde;
-    this.entitatIDFins = __toClone.entitatIDFins;
-    this.pluginIDDesde = __toClone.pluginIDDesde;
-    this.pluginIDFins = __toClone.pluginIDFins;
     this.tipusDesde = __toClone.tipusDesde;
     this.tipusFins = __toClone.tipusFins;
     this.estatDesde = __toClone.estatDesde;
     this.estatFins = __toClone.estatFins;
+    this.pluginIDDesde = __toClone.pluginIDDesde;
+    this.pluginIDFins = __toClone.pluginIDFins;
+    this.entitatCodi = __toClone.entitatCodi;
     this.tempsDesde = __toClone.tempsDesde;
     this.tempsFins = __toClone.tempsFins;
     this.dataIniciDesde = __toClone.dataIniciDesde;
@@ -242,10 +228,9 @@ public class LogCarpetaFilterForm extends CarpetaBaseFilterForm implements LogCa
     this.peticio = __toClone.peticio;
     this.error = __toClone.error;
     this.excepcio = __toClone.excepcio;
-    this.mapOfEntitatForEntitatID = __toClone.mapOfEntitatForEntitatID;
-    this.mapOfPluginForPluginID = __toClone.mapOfPluginForPluginID;
     this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
     this.mapOfValuesForEstat = __toClone.mapOfValuesForEstat;
+    this.mapOfValuesForPluginID = __toClone.mapOfValuesForPluginID;
   }
   
   /* ========= UTILS ========== */
@@ -280,30 +265,6 @@ public class LogCarpetaFilterForm extends CarpetaBaseFilterForm implements LogCa
    // -----------------------
    // Maps de referencies.
    // -----------------------
-  private Map<String, String> mapOfEntitatForEntitatID;
-
-  public Map<String, String> getMapOfEntitatForEntitatID() {
-    return this.mapOfEntitatForEntitatID;
-  }
-
-  public void setMapOfEntitatForEntitatID(Map<String, String> mapOfEntitatForEntitatID) {
-    this.mapOfEntitatForEntitatID = mapOfEntitatForEntitatID;
-  }
-
-
-
-  private Map<String, String> mapOfPluginForPluginID;
-
-  public Map<String, String> getMapOfPluginForPluginID() {
-    return this.mapOfPluginForPluginID;
-  }
-
-  public void setMapOfPluginForPluginID(Map<String, String> mapOfPluginForPluginID) {
-    this.mapOfPluginForPluginID = mapOfPluginForPluginID;
-  }
-
-
-
   private Map<String, String> mapOfValuesForTipus;
 
   public Map<String, String> getMapOfValuesForTipus() {
@@ -324,6 +285,18 @@ public class LogCarpetaFilterForm extends CarpetaBaseFilterForm implements LogCa
 
   public void setMapOfValuesForEstat(Map<String, String> mapOfValuesForEstat) {
     this.mapOfValuesForEstat = mapOfValuesForEstat;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForPluginID;
+
+  public Map<String, String> getMapOfValuesForPluginID() {
+    return this.mapOfValuesForPluginID;
+  }
+
+  public void setMapOfValuesForPluginID(Map<String, String> mapOfValuesForPluginID) {
+    this.mapOfValuesForPluginID = mapOfValuesForPluginID;
   }
 
 

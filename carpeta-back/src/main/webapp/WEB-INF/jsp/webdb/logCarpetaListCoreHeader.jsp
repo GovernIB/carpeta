@@ -18,17 +18,17 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,LogCarpetaFields.DESCRIPCIO)}">
         <th>${car:getSortIcons(__theFilterForm,LogCarpetaFields.DESCRIPCIO)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,LogCarpetaFields.ENTITATID)}">
-        <th>${car:getSortIcons(__theFilterForm,LogCarpetaFields.ENTITATID)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,LogCarpetaFields.PLUGINID)}">
-        <th>${car:getSortIcons(__theFilterForm,LogCarpetaFields.PLUGINID)}</th>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,LogCarpetaFields.TIPUS)}">
         <th>${car:getSortIcons(__theFilterForm,LogCarpetaFields.TIPUS)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,LogCarpetaFields.ESTAT)}">
         <th>${car:getSortIcons(__theFilterForm,LogCarpetaFields.ESTAT)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,LogCarpetaFields.PLUGINID)}">
+        <th>${car:getSortIcons(__theFilterForm,LogCarpetaFields.PLUGINID)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,LogCarpetaFields.ENTITATCODI)}">
+        <th>${car:getSortIcons(__theFilterForm,LogCarpetaFields.ENTITATCODI)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,LogCarpetaFields.TEMPS)}">
         <th>${car:getSortIcons(__theFilterForm,LogCarpetaFields.TEMPS)}</th>

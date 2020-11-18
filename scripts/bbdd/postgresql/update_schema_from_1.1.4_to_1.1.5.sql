@@ -27,3 +27,17 @@ ALTER TABLE public.car_auditoria
 
 --10/11/2020 Gestió de les Auditories al backoffice #204 Canviat nom de la columna
 ALTER TABLE public.car_auditoria RENAME ticketloginib  TO "usuariclave";
+
+
+--13/11/2020 Desvincular el pluginid i entitatid de la taula car_log #156
+ALTER TABLE public.car_log
+  DROP COLUMN entitatcodi;
+ALTER TABLE public.car_log
+  ADD COLUMN entitatcodi character varying(9);
+ALTER TABLE public.car_log RENAME entitatid  TO "entitatcodi";
+ALTER TABLE public.car_log
+  DROP CONSTRAINT car_log_entitat_ent_fk;
+ALTER TABLE public.car_log
+  DROP CONSTRAINT car_log_plugin_plu_fk;
+
+

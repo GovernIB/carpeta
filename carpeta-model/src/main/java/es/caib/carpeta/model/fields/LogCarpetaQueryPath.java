@@ -19,20 +19,20 @@ public class LogCarpetaQueryPath extends org.fundaciobit.genapp.common.query.Que
     return new StringField(getQueryPath(), LogCarpetaFields.DESCRIPCIO);
   }
 
-  public LongField ENTITATID() {
-    return new LongField(getQueryPath(), LogCarpetaFields.ENTITATID);
-  }
-
-  public LongField PLUGINID() {
-    return new LongField(getQueryPath(), LogCarpetaFields.PLUGINID);
-  }
-
   public IntegerField TIPUS() {
     return new IntegerField(getQueryPath(), LogCarpetaFields.TIPUS);
   }
 
   public IntegerField ESTAT() {
     return new IntegerField(getQueryPath(), LogCarpetaFields.ESTAT);
+  }
+
+  public LongField PLUGINID() {
+    return new LongField(getQueryPath(), LogCarpetaFields.PLUGINID);
+  }
+
+  public StringField ENTITATCODI() {
+    return new StringField(getQueryPath(), LogCarpetaFields.ENTITATCODI);
   }
 
   public LongField TEMPS() {
@@ -63,21 +63,5 @@ public class LogCarpetaQueryPath extends org.fundaciobit.genapp.common.query.Que
         : this.parentQueryPath.getQueryPath());
   }
 
-
-  public EntitatQueryPath ENTITAT() {
-    return new EntitatQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return LogCarpetaQueryPath.this.getQueryPath() + "entitat" + ".";
-      }
-    });
-  }
-
-  public PluginQueryPath PLUGIN() {
-    return new PluginQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return LogCarpetaQueryPath.this.getQueryPath() + "plugin" + ".";
-      }
-    });
-  }
 
 }

@@ -14,10 +14,10 @@ public interface LogCarpetaFields extends java.io.Serializable {
 
 	 public static final LongField LOGID = new LongField(_TABLE_MODEL, "logID", "logid");  // PK
 	 public static final StringField DESCRIPCIO = new StringField(_TABLE_MODEL, "descripcio", "descripcio");
-	 public static final LongField ENTITATID = new LongField(_TABLE_MODEL, "entitatID", "entitatid");
-	 public static final LongField PLUGINID = new LongField(_TABLE_MODEL, "pluginID", "pluginid");
 	 public static final IntegerField TIPUS = new IntegerField(_TABLE_MODEL, "tipus", "tipus");
 	 public static final IntegerField ESTAT = new IntegerField(_TABLE_MODEL, "estat", "estat");
+	 public static final LongField PLUGINID = new LongField(_TABLE_MODEL, "pluginID", "pluginid");
+	 public static final StringField ENTITATCODI = new StringField(_TABLE_MODEL, "entitatCodi", "entitatcodi");
 	 public static final LongField TEMPS = new LongField(_TABLE_MODEL, "temps", "temps");
 	 public static final TimestampField DATAINICI = new TimestampField(_TABLE_MODEL, "dataInici", "datainici");
 	 public static final StringField PETICIO = new StringField(_TABLE_MODEL, "peticio", "peticio");
@@ -28,10 +28,10 @@ public interface LogCarpetaFields extends java.io.Serializable {
   public static final Field<?>[] ALL_LOGCARPETA_FIELDS = {
     LOGID,
     DESCRIPCIO,
-    ENTITATID,
-    PLUGINID,
     TIPUS,
     ESTAT,
+    PLUGINID,
+    ENTITATCODI,
     TEMPS,
     DATAINICI,
     PETICIO,

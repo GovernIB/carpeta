@@ -19,10 +19,9 @@ public class LogCarpetaForm extends CarpetaBaseForm {
   public LogCarpetaForm(LogCarpetaForm __toClone) {
     super(__toClone);
       this.logCarpeta = __toClone.logCarpeta;
-    this.listOfEntitatForEntitatID = __toClone.listOfEntitatForEntitatID;
-    this.listOfPluginForPluginID = __toClone.listOfPluginForPluginID;
     this.listOfValuesForTipus = __toClone.listOfValuesForTipus;
     this.listOfValuesForEstat = __toClone.listOfValuesForEstat;
+    this.listOfValuesForPluginID = __toClone.listOfValuesForPluginID;
   }
   
   public LogCarpetaForm(LogCarpetaJPA logCarpeta, boolean nou) {
@@ -38,30 +37,6 @@ public class LogCarpetaForm extends CarpetaBaseForm {
   }
   
   
-  private List<StringKeyValue> listOfEntitatForEntitatID;
-
-  public List<StringKeyValue> getListOfEntitatForEntitatID() {
-    return this.listOfEntitatForEntitatID;
-  }
-
-  public void setListOfEntitatForEntitatID(List<StringKeyValue> listOfEntitatForEntitatID) {
-    this.listOfEntitatForEntitatID = listOfEntitatForEntitatID;
-  }
-
-
-
-  private List<StringKeyValue> listOfPluginForPluginID;
-
-  public List<StringKeyValue> getListOfPluginForPluginID() {
-    return this.listOfPluginForPluginID;
-  }
-
-  public void setListOfPluginForPluginID(List<StringKeyValue> listOfPluginForPluginID) {
-    this.listOfPluginForPluginID = listOfPluginForPluginID;
-  }
-
-
-
   private List<StringKeyValue> listOfValuesForTipus;
 
   public List<StringKeyValue> getListOfValuesForTipus() {
@@ -82,6 +57,18 @@ public class LogCarpetaForm extends CarpetaBaseForm {
 
   public void setListOfValuesForEstat(List<StringKeyValue> listOfValuesForEstat) {
     this.listOfValuesForEstat = listOfValuesForEstat;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForPluginID;
+
+  public List<StringKeyValue> getListOfValuesForPluginID() {
+    return this.listOfValuesForPluginID;
+  }
+
+  public void setListOfValuesForPluginID(List<StringKeyValue> listOfValuesForPluginID) {
+    this.listOfValuesForPluginID = listOfValuesForPluginID;
   }
 
 

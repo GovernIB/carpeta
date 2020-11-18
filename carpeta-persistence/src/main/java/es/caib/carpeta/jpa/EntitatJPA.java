@@ -419,19 +419,6 @@ private static final long serialVersionUID = 489209138L;
 	}
 
 
-// EXP  Field:entitatid | Table: car_log | Type: 0  
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
-	private Set<LogCarpetaJPA> logCarpetas = new HashSet<LogCarpetaJPA>(0);
-	public  Set<LogCarpetaJPA> getLogCarpetas() {
-    return this.logCarpetas;
-  }
-
-	public void setLogCarpetas(Set<LogCarpetaJPA> logCarpetas) {
-	  this.logCarpetas = logCarpetas;
-	}
-
-
 // EXP  Field:entitatid | Table: car_pluginentitat | Type: 0  
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
@@ -664,10 +651,6 @@ private static final long serialVersionUID = 489209138L;
     __tmp = toJPA(__jpa);
     __alreadyCopied.put(__jpa, __tmp);
     // Copia de beans complexes (EXP)
-    if(!"LogCarpetaJPA".equals(origenJPA) 
-       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.logCarpetas) || org.hibernate.Hibernate.isInitialized(__jpa.getLogCarpetas())) ) {
-      __tmp.setLogCarpetas(LogCarpetaJPA.copyJPA(__jpa.getLogCarpetas(), __alreadyCopied,"EntitatJPA"));
-    }
     if(!"PluginEntitatJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.pluginEntitats) || org.hibernate.Hibernate.isInitialized(__jpa.getPluginEntitats())) ) {
       __tmp.setPluginEntitats(PluginEntitatJPA.copyJPA(__jpa.getPluginEntitats(), __alreadyCopied,"EntitatJPA"));

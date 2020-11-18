@@ -1,24 +1,30 @@
 package es.caib.carpeta.back.controller.superadmin;
 
-import es.caib.carpeta.back.controller.webdb.LogCarpetaController;
-import es.caib.carpeta.back.form.webdb.LogCarpetaFilterForm;
-import es.caib.carpeta.back.form.webdb.LogCarpetaForm;
-import es.caib.carpeta.back.security.LoginInfo;
-import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.jpa.LogCarpetaJPA;
-import es.caib.carpeta.model.fields.LogCarpetaFields;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.Field;
+import org.fundaciobit.genapp.common.query.GroupByItem;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+
+import java.util.*;
+import es.caib.carpeta.back.form.webdb.*;
+
+import es.caib.carpeta.back.controller.webdb.LogCarpetaController;
+import es.caib.carpeta.back.security.LoginInfo;
+import es.caib.carpeta.commons.utils.Constants;
+import es.caib.carpeta.jpa.LogCarpetaJPA;
+import es.caib.carpeta.model.entity.LogCarpeta;
+import es.caib.carpeta.model.fields.*;
 
 /**
  * Created by Fundació BIT.
@@ -31,6 +37,10 @@ import java.util.List;
 @RequestMapping(value = "/superadmin/logCarpeta")
 @SessionAttributes(types = { LogCarpetaForm.class, LogCarpetaFilterForm.class })
 public class LogCarpetaSuperAdminController extends LogCarpetaController {
+
+   @Autowired
+   protected PluginRefList pluginRefList;
+
    @Override
    public String getTileForm() {
       return "logCarpetaFormSuperAdmin";
@@ -87,7 +97,7 @@ public class LogCarpetaSuperAdminController extends LogCarpetaController {
       LogCarpetaForm logCarpetaForm = super.getLogCarpetaForm(_jpa, __isView, request, mav);
 
       if(logCarpetaForm.isNou()){
-         logCarpetaForm.getLogCarpeta().setEntitatID(LoginInfo.getInstance().getEntitatID());
+         logCarpetaForm.getLogCarpeta().setEntitatCodi(LoginInfo.getInstance().getEntitat().getCodi());
       }
 
       logCarpetaForm.setAllFieldsReadOnly(LogCarpetaFields.ALL_LOGCARPETA_FIELDS);
@@ -125,5 +135,51 @@ public class LogCarpetaSuperAdminController extends LogCarpetaController {
          __tmp.add(new StringKeyValue("" + v, I18NUtils.tradueix("logcarpeta.estat." + v)));
       }
       return __tmp;
+   }
+
+
+   @Override
+   public List<StringKeyValue> getReferenceListForPluginID(HttpServletRequest request,
+                                                           ModelAndView mav, LogCarpetaFilterForm logCarpetaFilterForm,
+                                                           List<LogCarpeta> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+
+      List<StringKeyValue> pluginsIds = pluginRefList.getReferenceList(PluginFields.PLUGINID, where );
+
+      List<String> pluginsIdKeys = new ArrayList<>();
+      for(StringKeyValue skv:pluginsIds){
+         pluginsIdKeys.add(skv.getKey());
+      }
+
+      for(LogCarpeta logCarpeta:list){
+         if(logCarpeta.getPluginID() != null ) {
+            if (!pluginsIdKeys.contains(logCarpeta.getPluginID().toString())) {
+               pluginsIds.add(new StringKeyValue(logCarpeta.getPluginID().toString(), I18NUtils.tradueix("plugin.esborrat")));
+            }
+         }
+      }
+
+      return pluginsIds;
+
+   }
+
+
+   @Override
+   public List<StringKeyValue> getReferenceListForPluginID(HttpServletRequest request,
+                                                           ModelAndView mav, LogCarpetaForm logCarpetaForm, Where where)  throws I18NException {
+
+      List<StringKeyValue> pluginsIds = pluginRefList.getReferenceList(PluginFields.PLUGINID, where );
+
+
+      //TODO Si no lo contiene lo añade
+
+      List<String> pluginsIdKeys = new ArrayList<>();
+      for(StringKeyValue skv:pluginsIds){
+         pluginsIdKeys.add(skv.getKey());
+      }
+      if(!pluginsIdKeys.contains(logCarpetaForm.getLogCarpeta().getPluginID().toString())){
+       pluginsIds.add(new StringKeyValue(logCarpetaForm.getLogCarpeta().getPluginID().toString() , I18NUtils.tradueix("plugin.esborrat")));
+      }
+
+      return pluginsIds;
    }
 }

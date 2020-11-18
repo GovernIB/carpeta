@@ -67,7 +67,7 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
             peticio.append("Usuari Clave: ").append(usuarioClave.getNif()).append(System.getProperty("line.separator"));
             peticio.append("classe: ").append(getClass().getName()).append(System.getProperty("line.separator"));
 
-            logCarpetaLogicaEjb.crearLog("Autenticació del Front de l'Usuari " + usuarioClave.getNif(), ESTAT_LOG_OK,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),null,null);
+            logCarpetaLogicaEjb.crearLog("Autenticació del Front de l'Usuari " + usuarioClave.getNif(), ESTAT_LOG_OK,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),"",null);
 
 
             //Estadistica entrada al front autenticada

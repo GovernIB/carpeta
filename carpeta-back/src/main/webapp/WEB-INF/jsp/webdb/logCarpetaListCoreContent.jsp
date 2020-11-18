@@ -34,22 +34,6 @@
           ${logCarpeta.descripcio}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,LogCarpetaFields.ENTITATID)}">
-          <td>
-          <c:set var="tmp">${logCarpeta.entitatID}</c:set>
-          <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfEntitatForEntitatID[tmp]}
-          </c:if>
-          </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,LogCarpetaFields.PLUGINID)}">
-          <td>
-          <c:set var="tmp">${logCarpeta.pluginID}</c:set>
-          <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfPluginForPluginID[tmp]}
-          </c:if>
-          </td>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,LogCarpetaFields.TIPUS)}">
           <td>
           <c:set var="tmp">${logCarpeta.tipus}</c:set>
@@ -64,6 +48,19 @@
           <c:if test="${not empty tmp}">
           ${__theFilterForm.mapOfValuesForEstat[tmp]}
           </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,LogCarpetaFields.PLUGINID)}">
+          <td>
+          <c:set var="tmp">${logCarpeta.pluginID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForPluginID[tmp]}
+          </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,LogCarpetaFields.ENTITATCODI)}">
+          <td>
+          ${logCarpeta.entitatCodi}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,LogCarpetaFields.TEMPS)}">

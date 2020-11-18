@@ -6,13 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.GeneratedValue;
 import org.hibernate.annotations.Index;
 import javax.persistence.SequenceGenerator;
-import org.hibernate.annotations.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.FetchType;
 import org.hibernate.annotations.Type;
 import javax.persistence.Id;
 
@@ -37,19 +33,18 @@ private static final long serialVersionUID = 1140880713L;
 	@Column(name="descripcio",nullable = false,length = 2000)
 	java.lang.String descripcio;
 
-	@Index(name="car_log_entitatid_fk_i")
-	@Column(name="entitatid",length = 19)
-	java.lang.Long entitatID;
-
-	@Index(name="car_log_pluginid_fk_i")
-	@Column(name="pluginid",length = 19)
-	java.lang.Long pluginID;
-
 	@Column(name="tipus",nullable = false,length = 10)
 	int tipus;
 
 	@Column(name="estat",nullable = false,length = 10)
 	int estat;
+
+	@Index(name="car_log_pluginid_fk_i")
+	@Column(name="pluginid",length = 19)
+	java.lang.Long pluginID;
+
+	@Column(name="entitatcodi",length = 9)
+	java.lang.String entitatCodi;
 
 	@Column(name="temps",length = 19)
 	java.lang.Long temps;
@@ -75,13 +70,13 @@ private static final long serialVersionUID = 1140880713L;
   }
 
   /** Constructor amb tots els camps  */
-  public LogCarpetaJPA(long logID , java.lang.String descripcio , java.lang.Long entitatID , java.lang.Long pluginID , int tipus , int estat , java.lang.Long temps , java.sql.Timestamp dataInici , java.lang.String peticio , java.lang.String error , java.lang.String excepcio) {
+  public LogCarpetaJPA(long logID , java.lang.String descripcio , int tipus , int estat , java.lang.Long pluginID , java.lang.String entitatCodi , java.lang.Long temps , java.sql.Timestamp dataInici , java.lang.String peticio , java.lang.String error , java.lang.String excepcio) {
     this.logID=logID;
     this.descripcio=descripcio;
-    this.entitatID=entitatID;
-    this.pluginID=pluginID;
     this.tipus=tipus;
     this.estat=estat;
+    this.pluginID=pluginID;
+    this.entitatCodi=entitatCodi;
     this.temps=temps;
     this.dataInici=dataInici;
     this.peticio=peticio;
@@ -89,12 +84,12 @@ private static final long serialVersionUID = 1140880713L;
     this.excepcio=excepcio;
 }
   /** Constructor sense valors autoincrementals */
-  public LogCarpetaJPA(java.lang.String descripcio , java.lang.Long entitatID , java.lang.Long pluginID , int tipus , int estat , java.lang.Long temps , java.sql.Timestamp dataInici , java.lang.String peticio , java.lang.String error , java.lang.String excepcio) {
+  public LogCarpetaJPA(java.lang.String descripcio , int tipus , int estat , java.lang.Long pluginID , java.lang.String entitatCodi , java.lang.Long temps , java.sql.Timestamp dataInici , java.lang.String peticio , java.lang.String error , java.lang.String excepcio) {
     this.descripcio=descripcio;
-    this.entitatID=entitatID;
-    this.pluginID=pluginID;
     this.tipus=tipus;
     this.estat=estat;
+    this.pluginID=pluginID;
+    this.entitatCodi=entitatCodi;
     this.temps=temps;
     this.dataInici=dataInici;
     this.peticio=peticio;
@@ -112,10 +107,10 @@ private static final long serialVersionUID = 1140880713L;
   public LogCarpetaJPA(LogCarpeta __bean) {
     this.setLogID(__bean.getLogID());
     this.setDescripcio(__bean.getDescripcio());
-    this.setEntitatID(__bean.getEntitatID());
-    this.setPluginID(__bean.getPluginID());
     this.setTipus(__bean.getTipus());
     this.setEstat(__bean.getEstat());
+    this.setPluginID(__bean.getPluginID());
+    this.setEntitatCodi(__bean.getEntitatCodi());
     this.setTemps(__bean.getTemps());
     this.setDataInici(__bean.getDataInici());
     this.setPeticio(__bean.getPeticio());
@@ -137,20 +132,6 @@ private static final long serialVersionUID = 1140880713L;
 		this.descripcio = _descripcio_;
 	};
 
-	public java.lang.Long getEntitatID() {
-		return(entitatID);
-	};
-	public void setEntitatID(java.lang.Long _entitatID_) {
-		this.entitatID = _entitatID_;
-	};
-
-	public java.lang.Long getPluginID() {
-		return(pluginID);
-	};
-	public void setPluginID(java.lang.Long _pluginID_) {
-		this.pluginID = _pluginID_;
-	};
-
 	public int getTipus() {
 		return(tipus);
 	};
@@ -163,6 +144,20 @@ private static final long serialVersionUID = 1140880713L;
 	};
 	public void setEstat(int _estat_) {
 		this.estat = _estat_;
+	};
+
+	public java.lang.Long getPluginID() {
+		return(pluginID);
+	};
+	public void setPluginID(java.lang.Long _pluginID_) {
+		this.pluginID = _pluginID_;
+	};
+
+	public java.lang.String getEntitatCodi() {
+		return(entitatCodi);
+	};
+	public void setEntitatCodi(java.lang.String _entitatCodi_) {
+		this.entitatCodi = _entitatCodi_;
 	};
 
 	public java.lang.Long getTemps() {
@@ -215,36 +210,6 @@ private static final long serialVersionUID = 1140880713L;
     return __result;
   }
 
-// IMP Field:entitatid | Table: car_entitat | Type: 1  
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="car_log_entitat_ent_fk")
-	@JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = true, insertable=false, updatable=false)
-	private EntitatJPA entitat;
-
-	public EntitatJPA getEntitat() {
-    return this.entitat;
-  }
-
-	public  void setEntitat(EntitatJPA entitat) {
-    this.entitat = entitat;
-  }
-
-// IMP Field:pluginid | Table: car_plugin | Type: 1  
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="car_log_plugin_plu_fk")
-	@JoinColumn(name = "pluginid", referencedColumnName ="pluginID", nullable = true, insertable=false, updatable=false)
-	private PluginJPA plugin;
-
-	public PluginJPA getPlugin() {
-    return this.plugin;
-  }
-
-	public  void setPlugin(PluginJPA plugin) {
-    this.plugin = plugin;
-  }
-
 
  // ---------------  STATIC METHODS ------------------
   public static LogCarpetaJPA toJPA(LogCarpeta __bean) {
@@ -252,10 +217,10 @@ private static final long serialVersionUID = 1140880713L;
     LogCarpetaJPA __tmp = new LogCarpetaJPA();
     __tmp.setLogID(__bean.getLogID());
     __tmp.setDescripcio(__bean.getDescripcio());
-    __tmp.setEntitatID(__bean.getEntitatID());
-    __tmp.setPluginID(__bean.getPluginID());
     __tmp.setTipus(__bean.getTipus());
     __tmp.setEstat(__bean.getEstat());
+    __tmp.setPluginID(__bean.getPluginID());
+    __tmp.setEntitatCodi(__bean.getEntitatCodi());
     __tmp.setTemps(__bean.getTemps());
     __tmp.setDataInici(__bean.getDataInici());
     __tmp.setPeticio(__bean.getPeticio());
@@ -292,14 +257,6 @@ private static final long serialVersionUID = 1140880713L;
     __alreadyCopied.put(__jpa, __tmp);
     // Copia de beans complexes (EXP)
     // Copia de beans complexes (IMP)
-    if(!"EntitatJPA".equals(origenJPA) && 
-       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat()) ) ) {
-      __tmp.setEntitat(EntitatJPA.copyJPA(__jpa.getEntitat(), __alreadyCopied,"LogCarpetaJPA"));
-    }
-    if(!"PluginJPA".equals(origenJPA) && 
-       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.plugin) || org.hibernate.Hibernate.isInitialized(__jpa.getPlugin()) ) ) {
-      __tmp.setPlugin(PluginJPA.copyJPA(__jpa.getPlugin(), __alreadyCopied,"LogCarpetaJPA"));
-    }
 
     return __tmp;
   }

@@ -1,25 +1,27 @@
 package es.caib.carpeta.back.controller.adminentitat;
 
 
-import es.caib.carpeta.back.controller.webdb.LogCarpetaController;
-import es.caib.carpeta.back.form.webdb.LogCarpetaFilterForm;
-import es.caib.carpeta.back.form.webdb.LogCarpetaForm;
-import es.caib.carpeta.back.security.LoginInfo;
-import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.jpa.LogCarpetaJPA;
-import es.caib.carpeta.model.fields.LogCarpetaFields;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+
+import java.util.*;
+import es.caib.carpeta.back.form.webdb.*;
+
+import es.caib.carpeta.back.controller.webdb.LogCarpetaController;
+import es.caib.carpeta.back.security.LoginInfo;
+import es.caib.carpeta.commons.utils.Constants;
+import es.caib.carpeta.jpa.LogCarpetaJPA;
+import es.caib.carpeta.model.fields.*;
 
 /**
  * Created by Fundació BIT.
@@ -54,7 +56,7 @@ public class LogCarpetaAdminEntitatController extends LogCarpetaController {
 
     @Override
     public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
-        return LogCarpetaFields.ENTITATID.equal(LoginInfo.getInstance().getEntitatID());
+        return LogCarpetaFields.ENTITATCODI.equal(LoginInfo.getInstance().getEntitat().getCodi());
     }
 
     @Override
@@ -63,7 +65,7 @@ public class LogCarpetaAdminEntitatController extends LogCarpetaController {
         LogCarpetaFilterForm logCarpetaFilterForm = super.getLogCarpetaFilterForm(pagina, mav, request);
 
         if(logCarpetaFilterForm.isNou()) {
-            logCarpetaFilterForm.addHiddenField(ENTITATID);
+            logCarpetaFilterForm.addHiddenField(ENTITATCODI);
             logCarpetaFilterForm.addHiddenField(LOGID);
             logCarpetaFilterForm.addHiddenField(EXCEPCIO);
             logCarpetaFilterForm.addHiddenField(PETICIO);
@@ -89,10 +91,10 @@ public class LogCarpetaAdminEntitatController extends LogCarpetaController {
         LogCarpetaForm logCarpetaForm = super.getLogCarpetaForm(_jpa, __isView, request, mav);
 
         if(logCarpetaForm.isNou()){
-            logCarpetaForm.getLogCarpeta().setEntitatID(LoginInfo.getInstance().getEntitatID());
+            logCarpetaForm.getLogCarpeta().setEntitatCodi(LoginInfo.getInstance().getEntitat().getCodi());
         }
 
-        logCarpetaForm.addHiddenField(ENTITATID);
+        logCarpetaForm.addHiddenField(ENTITATCODI);
         logCarpetaForm.setAllFieldsReadOnly(LogCarpetaFields.ALL_LOGCARPETA_FIELDS);
         logCarpetaForm.setSaveButtonVisible(false);
         logCarpetaForm.setDeleteButtonVisible(false);

@@ -17,39 +17,27 @@ public class LogCarpetaBeanValidator
 
 
   // EJB's
-  protected final es.caib.carpeta.model.dao.IEntitatManager __entitatManager;
-
   protected final es.caib.carpeta.model.dao.ILogCarpetaManager __logCarpetaManager;
-
-  protected final es.caib.carpeta.model.dao.IPluginManager __pluginManager;
 
 
   public final LogCarpetaValidator<LogCarpetaJPA> _validator;
 
 
-  public LogCarpetaBeanValidator(es.caib.carpeta.model.dao.IEntitatManager __entitatManager,
-     es.caib.carpeta.model.dao.ILogCarpetaManager __logCarpetaManager,
-     es.caib.carpeta.model.dao.IPluginManager __pluginManager) { 
-    this.__entitatManager = __entitatManager;
+  public LogCarpetaBeanValidator(es.caib.carpeta.model.dao.ILogCarpetaManager __logCarpetaManager) { 
     this.__logCarpetaManager = __logCarpetaManager;
-    this.__pluginManager = __pluginManager;
     _validator = new LogCarpetaValidator<LogCarpetaJPA>();
   }
 
   public LogCarpetaBeanValidator(LogCarpetaValidator<LogCarpetaJPA> _validator,
-     es.caib.carpeta.model.dao.IEntitatManager __entitatManager,
-     es.caib.carpeta.model.dao.ILogCarpetaManager __logCarpetaManager,
-     es.caib.carpeta.model.dao.IPluginManager __pluginManager) {
-    this.__entitatManager = __entitatManager;
+     es.caib.carpeta.model.dao.ILogCarpetaManager __logCarpetaManager) {
     this.__logCarpetaManager = __logCarpetaManager;
-    this.__pluginManager = __pluginManager;
     this._validator = _validator;
   }
 
   @Override
   public List<I18NFieldError> validate(LogCarpetaJPA target, boolean isNou) throws I18NException {
     BeanValidatorResult<LogCarpetaJPA> _bvr_ = new BeanValidatorResult<LogCarpetaJPA>();
-    _validator.validate(_bvr_, target, isNou, __entitatManager, __logCarpetaManager, __pluginManager);
+    _validator.validate(_bvr_, target, isNou, __logCarpetaManager);
     return _bvr_.getErrors();
   }
 }

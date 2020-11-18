@@ -105,7 +105,7 @@ public class LoginController {
         if ("true".equals(request.getParameter("error"))) {
 
             //Log no autenticat/error
-            logCarpetaLogicaEjb.crearLog("Autenticació del Front", ESTAT_LOG_ERROR,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"Error de login",peticio.toString(),null,null);
+            logCarpetaLogicaEjb.crearLog("Autenticació del Front", ESTAT_LOG_ERROR,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"Error de login",peticio.toString(),"",null);
             log.info("Error de login");
 
             //Estadístiques no autenticades
@@ -151,7 +151,7 @@ public class LoginController {
 
             String url = securityService.iniciarSesionAutentificacion(url_callback_login, url_callback_error, IDIOMA);
 
-            logCarpetaLogicaEjb.crearLog("Iniciam Sessió Autenticació Front", ESTAT_LOG_OK,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),null,null);
+            logCarpetaLogicaEjb.crearLog("Iniciam Sessió Autenticació Front", ESTAT_LOG_OK,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),"",null);
 
             log.info("Url autentificacion: " + url);
 
