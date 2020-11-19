@@ -290,7 +290,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 		if (!containsRoleAdEn && usuariEntitats.size() != 0) {
 			// L'usuari " + name + " està assignat a una o varies
 			// entitats però no té el rol ROLE_ADEN";
-			I18NTranslation translation = new I18NTranslation("error.sensepfiuser", username);
+			I18NTranslation translation = new I18NTranslation("error.sensecaradmin", username);
 			log.error("");
 			log.error(I18NUtils.tradueix(translation));
 			log.error("Authentication Info:\n" + au);

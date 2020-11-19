@@ -12,8 +12,10 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.pluginsib.userinformation.IUserInformationPlugin;
 import org.fundaciobit.pluginsib.userinformation.UserInfo;
 
+import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.ejb.UsuariEJB;
 import es.caib.carpeta.jpa.UsuariJPA;
+import es.caib.carpeta.logic.utils.CarpetaPluginsManager;
 import es.caib.carpeta.model.entity.Usuari;
 import es.caib.carpeta.model.fields.UsuariFields;
 
@@ -74,19 +76,26 @@ public class UsuariLogicaEJB extends UsuariEJB implements UsuariLogicaLocal {
 
 	@Override
 	@PermitAll
-	public UsuariJPA getUserInfoFromUserInformation(String username) throws I18NException, Exception {
+	public UsuariJPA getUserInfoFromUserInformation(String username) throws  javax.ejb.EJBException {
 
 		UsuariJPA persona = null;
-		IUserInformationPlugin plugin = es.caib.carpeta.logic.utils.CarpetaPluginsManager.getUserInformationPluginInstance();
+		
+		log.info(" XYZ ZZZ  PRE CarpetaPluginsManager.getUserInformationPluginInstance()");
+		
+		IUserInformationPlugin plugin = CarpetaPluginsManager.getUserInformationPluginInstance();
 		
 		log.info("XYZ ZZZ ZZZ UserInformationPlugin => " + plugin);
 		
 		
-		UserInfo info = plugin.getUserInfoByUserName(username);
+		UserInfo info;
+        try {
+            info = plugin.getUserInfoByUserName(username);
+        } catch (Exception e) {
+            log.error("Error intentant obtenir informació ");
+            info = null;
+        }
 		if (info != null) {
-			persona = new UsuariJPA();
-			persona.setEmail(info.getEmail() == null ? "" : info.getEmail());
-
+			
 			// XYZ ZZZ
 			// persona.setIdiomaID(Configuracio.getDefaultLanguage());
 			String nom, llinatge1, llinatge2;
@@ -126,15 +135,23 @@ public class UsuariLogicaEJB extends UsuariEJB implements UsuariLogicaLocal {
 				}
 				
 			}
+			
+			persona = new UsuariJPA();
+            persona.setEmail(info.getEmail() == null ? "" : info.getEmail());
+
 			persona.setNom(nom);
 			persona.setLlinatge1(llinatge1);
 			persona.setLlinatge2(llinatge2);
 
-			//persona.setTipo(TipoUsuario.PERSONA);
 			persona.setUsername(username);
-			// XYZ ZZZ ZZZ
-			// persona.setNif(info.getAdministrationID().toUpperCase());
-			persona.setIdiomaID("ca");
+	
+			String nif = info.getAdministrationID();
+			if (nif != null && nif.trim().length() != 0) {
+			  persona.setNif(nif.trim().replaceAll("\\s+", "").toUpperCase());
+			}
+
+			persona.setIdiomaID(Configuracio.getDefaultLanguage());
+			
 		}
 
 		return persona;
