@@ -59,6 +59,7 @@ class MenuDesllisant extends Component {
 		const {t} = this.props;
 		var autenticat = this.props.autenticat;
 		var urlBase = window.location.href;
+		var defaultEntityCode = sessionStorage.getItem("defaultEntityCode");
 
 		var boto_ca;
 		if (i18n.language === 'ca') {
@@ -89,6 +90,7 @@ class MenuDesllisant extends Component {
 		var plugReactWarning;
 		var plugReactError;
 		var sortir;
+		var canviarEntitat;
 		if (autenticat === '1') {
 			accessibilitat = <li><a href="javascript:newAccessibilitat('contingut', '1');"
 									className="imc-marc-ico imc--accessibilitat" id="imc-marc-accessibilitat"
@@ -156,6 +158,11 @@ class MenuDesllisant extends Component {
 			sortir = '';
 		}
 
+		if(defaultEntityCode === ""){
+			canviarEntitat = <li><a href="/carpetafront/entitat" className="imc-marc-ico imc--registres" title={t('menuEntitat')}><span>{t('menuEntitat')}</span></a></li>;
+		} else{
+			canviarEntitat = "";
+		}
 
 		return (
 			<div className="imc-marc" id="imc-marc" tabIndex="-1" aria-hidden="true">
@@ -184,6 +191,7 @@ class MenuDesllisant extends Component {
 						{plugReactWarning}
 						{plugReactError}
 						{sortir}
+						{canviarEntitat}
 					</ul>
 				</div>
 			</div>

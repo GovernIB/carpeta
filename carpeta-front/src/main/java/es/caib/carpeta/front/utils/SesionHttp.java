@@ -13,6 +13,7 @@ public class SesionHttp {
     private String userAgent;
     private String idioma;
     private String urlEntrada;
+    private String entitat;
 
     public SesionHttp() { }
 
@@ -37,12 +38,18 @@ public class SesionHttp {
     }
 
 
-    public String getUrlEntrada() {
-        return urlEntrada;
+    public String getUrlEntrada() { return urlEntrada; }
+
+
+    public void setUrlEntrada(String urlEntrada) { this.urlEntrada = urlEntrada; }
+
+
+    public String getEntitat() {
+        return entitat;
     }
 
 
-    public void setUrlEntrada(String urlEntrada) {
-        this.urlEntrada = urlEntrada;
+    public void setEntitat(String entitat) {
+        this.entitat = entitat;
     }
 }

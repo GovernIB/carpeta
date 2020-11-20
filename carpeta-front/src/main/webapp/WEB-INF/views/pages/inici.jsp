@@ -52,6 +52,8 @@
 	  <script type="text/javascript">
 		  window.onload = function($) {
 			  sessionStorage.setItem('autenticat', '0');
+			  sessionStorage.setItem('entitat', '${entitat}');
+			  sessionStorage.setItem('defaultEntityCode', '${defaultEntityCode}');
 			  var aut = sessionStorage.getItem('autenticat');
 			  newMenuDesllisant('menuDesllisant', aut);
 			  newPeu('peu', aut);
