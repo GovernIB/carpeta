@@ -9,12 +9,9 @@ import javax.ejb.Stateless;
 import java.util.*;
 
 import es.caib.carpeta.ejb.AccesLocal;
-import es.caib.carpeta.ejb.AuditoriaLocal;
 import es.caib.carpeta.ejb.AvisLocal;
 import es.caib.carpeta.ejb.EntitatEJB;
-import es.caib.carpeta.ejb.EstadisticaLocal;
 import es.caib.carpeta.ejb.FitxerLocal;
-import es.caib.carpeta.ejb.LogCarpetaLocal;
 import es.caib.carpeta.ejb.PluginEntitatLocal;
 import es.caib.carpeta.ejb.PropietatGlobalLocal;
 import es.caib.carpeta.ejb.UsuariEntitatLocal;
@@ -49,15 +46,6 @@ public class EntitatLogicaEJB extends EntitatEJB implements EntitatLogicaLocal, 
 	@EJB(mappedName = AccesLocal.JNDI_NAME)
 	protected AccesLocal accesEjb;
 	
-	@EJB(mappedName = EstadisticaLocal.JNDI_NAME)
-	protected EstadisticaLocal estadisticaEjb;
-	
-	@EJB(mappedName = AuditoriaLocal.JNDI_NAME)
-	protected AuditoriaLocal auditoriaEjb;
-	
-	@EJB(mappedName = LogCarpetaLocal.JNDI_NAME)
-	protected LogCarpetaLocal logCarpetaEjb;
-	
 	@EJB(mappedName = FitxerLocal.JNDI_NAME)
 	protected FitxerLocal fitxersEjb;
 	
@@ -81,15 +69,6 @@ public class EntitatLogicaEJB extends EntitatEJB implements EntitatLogicaLocal, 
 		
 		// access
 		accesEjb.delete(AccesFields.ENTITATID.equal(entitat.getEntitatID()));
-		
-		// estadistica
-		estadisticaEjb.delete(EstadisticaFields.ENTITATID.equal(entitat.getEntitatID()));
-		
-		// auditoria
-		auditoriaEjb.delete(AuditoriaFields.ENTITATID.equal(entitat.getEntitatID()));
-		
-		// logs
-		logCarpetaEjb.delete(LogCarpetaFields.ENTITATCODI.equal(entitat.getCodi()));
 		
 		// enllazos BBDD + fitxers
 		List<Enllaz> enllazos = enllazLogicaEjb.select(EnllazFields.ENTITATID.equal(entitat.getEntitatID()));

@@ -24,3 +24,7 @@ ALTER TABLE car_log DROP COLUMN entitatid;
 ALTER TABLE car_log ADD entitatcodi varchar2(9 char);
 ALTER TABLE car_log DROP CONSTRAINT car_log_entitat_ent_fk;
 ALTER TABLE car_log DROP CONSTRAINT car_log_plugin_plu_fk;
+
+--20/11/2020 Quan esborrem una entitat, es mantenen els  registres de auditoria i estadistica #160
+ALTER TABLE car_auditoria DROP CONSTRAINT car_audit_entitat_ent_fk;
+ALTER TABLE car_estadistica DROP CONSTRAINT car_estadis_entitat_ent_fk;
