@@ -172,21 +172,6 @@ private static final long serialVersionUID = 129744773L;
     this.usuari = usuari;
   }
 
-// IMP Field:entitatid | Table: car_entitat | Type: 1  
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="car_audit_entitat_ent_fk")
-	@JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = true, insertable=false, updatable=false)
-	private EntitatJPA entitat;
-
-	public EntitatJPA getEntitat() {
-    return this.entitat;
-  }
-
-	public  void setEntitat(EntitatJPA entitat) {
-    this.entitat = entitat;
-  }
-
 
  // ---------------  STATIC METHODS ------------------
   public static AuditoriaJPA toJPA(Auditoria __bean) {
@@ -233,10 +218,6 @@ private static final long serialVersionUID = 129744773L;
     if(!"UsuariJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.usuari) || org.hibernate.Hibernate.isInitialized(__jpa.getUsuari()) ) ) {
       __tmp.setUsuari(UsuariJPA.copyJPA(__jpa.getUsuari(), __alreadyCopied,"AuditoriaJPA"));
-    }
-    if(!"EntitatJPA".equals(origenJPA) && 
-       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat()) ) ) {
-      __tmp.setEntitat(EntitatJPA.copyJPA(__jpa.getEntitat(), __alreadyCopied,"AuditoriaJPA"));
     }
 
     return __tmp;

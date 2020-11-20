@@ -44,12 +44,4 @@ public class EstadisticaQueryPath extends org.fundaciobit.genapp.common.query.Qu
   }
 
 
-  public EntitatQueryPath ENTITAT() {
-    return new EntitatQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return EstadisticaQueryPath.this.getQueryPath() + "entitat" + ".";
-      }
-    });
-  }
-
 }

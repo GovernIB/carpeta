@@ -58,10 +58,6 @@ public class EstadisticaController
   @Autowired
   protected EstadisticaRefList estadisticaRefList;
 
-  // References 
-  @Autowired
-  protected EntitatRefList entitatRefList;
-
   /**
    * Llistat de totes Estadistica
    */
@@ -206,7 +202,7 @@ public class EstadisticaController
     {
       _listSKV = getReferenceListForEntitatID(request, mav, filterForm, list, groupByItemsMap, null);
       _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfEntitatForEntitatID(_tmp);
+      filterForm.setMapOfValuesForEntitatID(_tmp);
       if (filterForm.getGroupByFields().contains(ENTITATID)) {
         fillValuesToGroupByItems(_tmp, groupByItemsMap, ENTITATID, false);
       };
@@ -229,7 +225,7 @@ public class EstadisticaController
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
     __mapping.put(TIPUS, filterForm.getMapOfValuesForTipus());
     __mapping.put(PLUGINID, filterForm.getMapOfValuesForPluginID());
-    __mapping.put(ENTITATID, filterForm.getMapOfEntitatForEntitatID());
+    __mapping.put(ENTITATID, filterForm.getMapOfValuesForEntitatID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -296,13 +292,13 @@ public class EstadisticaController
       estadisticaForm.setListOfValuesForPluginID(_listSKV);
     }
     // Comprovam si ja esta definida la llista
-    if (estadisticaForm.getListOfEntitatForEntitatID() == null) {
+    if (estadisticaForm.getListOfValuesForEntitatID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForEntitatID(request, mav, estadisticaForm, null);
 
       if(_listSKV != null && !_listSKV.isEmpty()) { 
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
-      estadisticaForm.setListOfEntitatForEntitatID(_listSKV);
+      estadisticaForm.setListOfValuesForEntitatID(_listSKV);
     }
     
   }
@@ -678,11 +674,7 @@ public java.lang.Long stringToPK(String value) {
     if (estadisticaForm.isHiddenField(ENTITATID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
-    Where _where = null;
-    if (estadisticaForm.isReadOnlyField(ENTITATID)) {
-      _where = EntitatFields.ENTITATID.equal(estadisticaForm.getEstadistica().getEntitatID());
-    }
-    return getReferenceListForEntitatID(request, mav, Where.AND(where, _where));
+    return getReferenceListForEntitatID(request, mav, where);
   }
 
 
@@ -694,22 +686,17 @@ public java.lang.Long stringToPK(String value) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
-    if (!_groupByItemsMap.containsKey(ENTITATID)) {
-      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
-      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
-      for (Estadistica _item : list) {
-        if(_item.getEntitatID() == null) { continue; };
-        _pkList.add(_item.getEntitatID());
-        }
-        _w = EntitatFields.ENTITATID.in(_pkList);
-      }
     return getReferenceListForEntitatID(request, mav, Where.AND(where,_w));
   }
 
 
   public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
-    return entitatRefList.getReferenceList(EntitatFields.ENTITATID, where );
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("1" , "1"));
+    __tmp.add(new StringKeyValue("2" , "2"));
+    __tmp.add(new StringKeyValue("3" , "3"));
+    return __tmp;
   }
 
 

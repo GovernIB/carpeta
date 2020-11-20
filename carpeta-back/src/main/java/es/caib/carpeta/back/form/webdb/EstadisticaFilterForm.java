@@ -172,7 +172,7 @@ public class EstadisticaFilterForm extends CarpetaBaseFilterForm implements Esta
     this.entitatIDFins = __toClone.entitatIDFins;
     this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
     this.mapOfValuesForPluginID = __toClone.mapOfValuesForPluginID;
-    this.mapOfEntitatForEntitatID = __toClone.mapOfEntitatForEntitatID;
+    this.mapOfValuesForEntitatID = __toClone.mapOfValuesForEntitatID;
   }
   
   /* ========= UTILS ========== */
@@ -231,14 +231,14 @@ public class EstadisticaFilterForm extends CarpetaBaseFilterForm implements Esta
 
 
 
-  private Map<String, String> mapOfEntitatForEntitatID;
+  private Map<String, String> mapOfValuesForEntitatID;
 
-  public Map<String, String> getMapOfEntitatForEntitatID() {
-    return this.mapOfEntitatForEntitatID;
+  public Map<String, String> getMapOfValuesForEntitatID() {
+    return this.mapOfValuesForEntitatID;
   }
 
-  public void setMapOfEntitatForEntitatID(Map<String, String> mapOfEntitatForEntitatID) {
-    this.mapOfEntitatForEntitatID = mapOfEntitatForEntitatID;
+  public void setMapOfValuesForEntitatID(Map<String, String> mapOfValuesForEntitatID) {
+    this.mapOfValuesForEntitatID = mapOfValuesForEntitatID;
   }
 
 

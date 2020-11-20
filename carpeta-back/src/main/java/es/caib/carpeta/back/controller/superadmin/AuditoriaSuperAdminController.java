@@ -2,6 +2,8 @@ package es.caib.carpeta.back.controller.superadmin;
 
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.Field;
+import org.fundaciobit.genapp.common.query.GroupByItem;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 
@@ -13,11 +15,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import es.caib.carpeta.back.form.webdb.*;
 
 import es.caib.carpeta.back.controller.webdb.AuditoriaController;
 import es.caib.carpeta.commons.utils.Constants;
+import es.caib.carpeta.model.entity.Auditoria;
 import es.caib.carpeta.model.fields.*;
 
 /**
@@ -34,6 +40,9 @@ public class AuditoriaSuperAdminController extends AuditoriaController {
     // References
     @Autowired
     protected PluginRefList pluginRefList;
+    
+    @Autowired
+    protected EntitatRefList entitatRefList;
 
     @Override
     public String getTileForm() {
@@ -91,9 +100,52 @@ public class AuditoriaSuperAdminController extends AuditoriaController {
         return __tmp;
     }
 
-
+    @Override
     public List<StringKeyValue> getReferenceListForPluginID(HttpServletRequest request,
                                                             ModelAndView mav, Where where)  throws I18NException {
         return pluginRefList.getReferenceList(PluginFields.PLUGINID, where );
+    }
+    
+    @Override
+    public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
+    		ModelAndView mav, AuditoriaForm auditoriaForm, Where where)  throws I18NException {
+
+    	List<StringKeyValue> entitats = entitatRefList.getReferenceList(EntitatFields.ENTITATID, where);
+
+    	List<String> entitatIdKeys = new ArrayList<>();
+    	for(StringKeyValue skv : entitats) {
+    		entitatIdKeys.add(skv.getKey());
+    	}
+    	if(!entitatIdKeys.contains(auditoriaForm.getAuditoria().getEntitatID().toString())) {
+    		entitats.add(new StringKeyValue(auditoriaForm.getAuditoria().getEntitatID().toString(),  I18NUtils.tradueix("entitat.esborrada")));
+    	}
+    	return entitats;
+    }
+
+    @Override
+    public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
+    		ModelAndView mav, AuditoriaFilterForm auditoriaFilterForm,
+    		List<Auditoria> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+
+    	List<StringKeyValue> entitats = entitatRefList.getReferenceList(EntitatFields.ENTITATID, where);
+
+    	List<String> entitatIdKeys = new ArrayList<>();
+    	for(StringKeyValue skv : entitats) {
+    		entitatIdKeys.add(skv.getKey());
+    	}
+    	for(Auditoria auditoria : list) {
+    		if(auditoria.getEntitatID() != null) {
+    			if(!entitatIdKeys.contains(auditoria.getEntitatID().toString())) {
+    				entitats.add(new StringKeyValue(auditoria.getEntitatID().toString(), I18NUtils.tradueix("entitat.esborrada")));
+    			}
+    		}
+    	}
+    	return entitats;
+    }
+
+    @Override
+    public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
+    		ModelAndView mav, Where where)  throws I18NException {
+    	return entitatRefList.getReferenceList(EntitatFields.ENTITATID, where );
     }
 }

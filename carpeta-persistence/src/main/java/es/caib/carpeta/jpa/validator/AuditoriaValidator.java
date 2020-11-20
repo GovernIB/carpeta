@@ -5,7 +5,6 @@ import org.apache.log4j.Logger;
 import es.caib.carpeta.model.entity.Auditoria;
 import org.fundaciobit.genapp.common.query.Field;
 import es.caib.carpeta.model.fields.AuditoriaFields;
-import es.caib.carpeta.model.fields.EntitatFields;
 import es.caib.carpeta.model.fields.UsuariFields;
 
 import org.fundaciobit.genapp.common.validation.IValidatorResult;
@@ -30,7 +29,6 @@ public class AuditoriaValidator<I extends Auditoria>
   /** Constructor */
   public void validate(IValidatorResult<I> __vr,I __target__, boolean __isNou__
     ,es.caib.carpeta.model.dao.IAuditoriaManager __auditoriaManager
-    ,es.caib.carpeta.model.dao.IEntitatManager __entitatManager
     ,es.caib.carpeta.model.dao.IUsuariManager __usuariManager) {
 
     // Valors Not Null
@@ -77,20 +75,6 @@ public class AuditoriaValidator<I extends Auditoria>
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("usuari.usuari"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("usuari.usuariID"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__usuariid)));
-        }
-      }
-    }
-
-    if (__vr.getFieldErrorCount(ENTITATID) == 0) {
-      java.lang.Long __entitatid = __target__.getEntitatID();
-      if (__entitatid != null ) {
-        Long __count_ = null;
-        try { __count_ = __entitatManager.count(EntitatFields.ENTITATID.equal(__entitatid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
-        if (__count_ == null || __count_ == 0) {        
-          __vr.rejectValue(ENTITATID, "error.notfound",
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("entitat.entitat"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("entitat.entitatID"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__entitatid)));
         }
       }
     }

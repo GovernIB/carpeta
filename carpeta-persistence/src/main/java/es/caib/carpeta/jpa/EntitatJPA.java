@@ -367,19 +367,6 @@ private static final long serialVersionUID = 489209138L;
 	}
 
 
-// EXP  Field:entitatid | Table: car_auditoria | Type: 0  
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
-	private Set<AuditoriaJPA> auditorias = new HashSet<AuditoriaJPA>(0);
-	public  Set<AuditoriaJPA> getAuditorias() {
-    return this.auditorias;
-  }
-
-	public void setAuditorias(Set<AuditoriaJPA> auditorias) {
-	  this.auditorias = auditorias;
-	}
-
-
 // EXP  Field:entitatid | Table: car_avis | Type: 0  
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
@@ -403,19 +390,6 @@ private static final long serialVersionUID = 489209138L;
 
 	public void setEnllazs(Set<EnllazJPA> enllazs) {
 	  this.enllazs = enllazs;
-	}
-
-
-// EXP  Field:entitatid | Table: car_estadistica | Type: 0  
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
-	private Set<EstadisticaJPA> estadisticas = new HashSet<EstadisticaJPA>(0);
-	public  Set<EstadisticaJPA> getEstadisticas() {
-    return this.estadisticas;
-  }
-
-	public void setEstadisticas(Set<EstadisticaJPA> estadisticas) {
-	  this.estadisticas = estadisticas;
 	}
 
 
@@ -659,10 +633,6 @@ private static final long serialVersionUID = 489209138L;
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.propietatGlobals) || org.hibernate.Hibernate.isInitialized(__jpa.getPropietatGlobals())) ) {
       __tmp.setPropietatGlobals(PropietatGlobalJPA.copyJPA(__jpa.getPropietatGlobals(), __alreadyCopied,"EntitatJPA"));
     }
-    if(!"EstadisticaJPA".equals(origenJPA) 
-       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.estadisticas) || org.hibernate.Hibernate.isInitialized(__jpa.getEstadisticas())) ) {
-      __tmp.setEstadisticas(EstadisticaJPA.copyJPA(__jpa.getEstadisticas(), __alreadyCopied,"EntitatJPA"));
-    }
     if(!"EnllazJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.enllazs) || org.hibernate.Hibernate.isInitialized(__jpa.getEnllazs())) ) {
       __tmp.setEnllazs(EnllazJPA.copyJPA(__jpa.getEnllazs(), __alreadyCopied,"EntitatJPA"));
@@ -674,10 +644,6 @@ private static final long serialVersionUID = 489209138L;
     if(!"AccesJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.access) || org.hibernate.Hibernate.isInitialized(__jpa.getAccess())) ) {
       __tmp.setAccess(AccesJPA.copyJPA(__jpa.getAccess(), __alreadyCopied,"EntitatJPA"));
-    }
-    if(!"AuditoriaJPA".equals(origenJPA) 
-       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.auditorias) || org.hibernate.Hibernate.isInitialized(__jpa.getAuditorias())) ) {
-      __tmp.setAuditorias(AuditoriaJPA.copyJPA(__jpa.getAuditorias(), __alreadyCopied,"EntitatJPA"));
     }
     if(!"AvisJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.aviss) || org.hibernate.Hibernate.isInitialized(__jpa.getAviss())) ) {

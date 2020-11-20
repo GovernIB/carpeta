@@ -19,8 +19,6 @@ public class AuditoriaBeanValidator
   // EJB's
   protected final es.caib.carpeta.model.dao.IAuditoriaManager __auditoriaManager;
 
-  protected final es.caib.carpeta.model.dao.IEntitatManager __entitatManager;
-
   protected final es.caib.carpeta.model.dao.IUsuariManager __usuariManager;
 
 
@@ -28,20 +26,16 @@ public class AuditoriaBeanValidator
 
 
   public AuditoriaBeanValidator(es.caib.carpeta.model.dao.IAuditoriaManager __auditoriaManager,
-     es.caib.carpeta.model.dao.IEntitatManager __entitatManager,
      es.caib.carpeta.model.dao.IUsuariManager __usuariManager) { 
     this.__auditoriaManager = __auditoriaManager;
-    this.__entitatManager = __entitatManager;
     this.__usuariManager = __usuariManager;
     _validator = new AuditoriaValidator<AuditoriaJPA>();
   }
 
   public AuditoriaBeanValidator(AuditoriaValidator<AuditoriaJPA> _validator,
      es.caib.carpeta.model.dao.IAuditoriaManager __auditoriaManager,
-     es.caib.carpeta.model.dao.IEntitatManager __entitatManager,
      es.caib.carpeta.model.dao.IUsuariManager __usuariManager) {
     this.__auditoriaManager = __auditoriaManager;
-    this.__entitatManager = __entitatManager;
     this.__usuariManager = __usuariManager;
     this._validator = _validator;
   }
@@ -49,7 +43,7 @@ public class AuditoriaBeanValidator
   @Override
   public List<I18NFieldError> validate(AuditoriaJPA target, boolean isNou) throws I18NException {
     BeanValidatorResult<AuditoriaJPA> _bvr_ = new BeanValidatorResult<AuditoriaJPA>();
-    _validator.validate(_bvr_, target, isNou, __auditoriaManager, __entitatManager, __usuariManager);
+    _validator.validate(_bvr_, target, isNou, __auditoriaManager, __usuariManager);
     return _bvr_.getErrors();
   }
 }

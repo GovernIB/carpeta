@@ -35,9 +35,6 @@ public class AuditoriaWebValidator extends AbstractWebValidator<AuditoriaForm, A
   @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.AuditoriaLocal.JNDI_NAME)
   protected es.caib.carpeta.ejb.AuditoriaLocal auditoriaEjb;
 
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EntitatLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.EntitatLocal entitatEjb;
-
   @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.UsuariLocal.JNDI_NAME)
   protected es.caib.carpeta.ejb.UsuariLocal usuariEjb;
 
@@ -83,7 +80,7 @@ public class AuditoriaWebValidator extends AbstractWebValidator<AuditoriaForm, A
 
     BeanValidatorResult<Auditoria> __vr = new BeanValidatorResult<Auditoria>();
     validator.validate(__vr, __bean,
-      isNou, auditoriaEjb, entitatEjb, usuariEjb);
+      isNou, auditoriaEjb, usuariEjb);
 
     if (__vr.hasErrors()) {
         List<I18NFieldError> vrErrors = __vr.getErrors();

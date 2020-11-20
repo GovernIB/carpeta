@@ -56,12 +56,4 @@ public class AuditoriaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     });
   }
 
-  public EntitatQueryPath ENTITAT() {
-    return new EntitatQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return AuditoriaQueryPath.this.getQueryPath() + "entitat" + ".";
-      }
-    });
-  }
-
 }

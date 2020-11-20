@@ -32,9 +32,6 @@ public class EstadisticaWebValidator extends AbstractWebValidator<EstadisticaFor
   protected EstadisticaValidator<Estadistica> validator = new EstadisticaValidator<Estadistica>();
 
   // EJB's
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EntitatLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.EntitatLocal entitatEjb;
-
   @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EstadisticaLocal.JNDI_NAME)
   protected es.caib.carpeta.ejb.EstadisticaLocal estadisticaEjb;
 
@@ -80,7 +77,7 @@ public class EstadisticaWebValidator extends AbstractWebValidator<EstadisticaFor
 
     BeanValidatorResult<Estadistica> __vr = new BeanValidatorResult<Estadistica>();
     validator.validate(__vr, __bean,
-      isNou, entitatEjb, estadisticaEjb);
+      isNou, estadisticaEjb);
 
     if (__vr.hasErrors()) {
         List<I18NFieldError> vrErrors = __vr.getErrors();

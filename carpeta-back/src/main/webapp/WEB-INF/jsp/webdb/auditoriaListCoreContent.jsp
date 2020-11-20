@@ -57,7 +57,7 @@
           <td>
           <c:set var="tmp">${auditoria.entitatID}</c:set>
           <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfEntitatForEntitatID[tmp]}
+          ${__theFilterForm.mapOfValuesForEntitatID[tmp]}
           </c:if>
           </td>
         </c:if>

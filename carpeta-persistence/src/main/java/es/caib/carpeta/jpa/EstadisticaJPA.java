@@ -5,13 +5,9 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
 import javax.persistence.GeneratedValue;
 import org.hibernate.annotations.Index;
 import javax.persistence.SequenceGenerator;
-import org.hibernate.annotations.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 
 
@@ -144,21 +140,6 @@ private static final long serialVersionUID = -2066559243L;
     return __result;
   }
 
-// IMP Field:entitatid | Table: car_entitat | Type: 1  
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="car_estadis_entitat_ent_fk")
-	@JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = true, insertable=false, updatable=false)
-	private EntitatJPA entitat;
-
-	public EntitatJPA getEntitat() {
-    return this.entitat;
-  }
-
-	public  void setEntitat(EntitatJPA entitat) {
-    this.entitat = entitat;
-  }
-
 
  // ---------------  STATIC METHODS ------------------
   public static EstadisticaJPA toJPA(Estadistica __bean) {
@@ -201,10 +182,6 @@ private static final long serialVersionUID = -2066559243L;
     __alreadyCopied.put(__jpa, __tmp);
     // Copia de beans complexes (EXP)
     // Copia de beans complexes (IMP)
-    if(!"EntitatJPA".equals(origenJPA) && 
-       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat()) ) ) {
-      __tmp.setEntitat(EntitatJPA.copyJPA(__jpa.getEntitat(), __alreadyCopied,"EstadisticaJPA"));
-    }
 
     return __tmp;
   }

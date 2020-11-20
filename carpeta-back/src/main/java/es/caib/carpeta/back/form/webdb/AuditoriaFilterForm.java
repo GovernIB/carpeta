@@ -184,7 +184,7 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
     this.pluginIDFins = __toClone.pluginIDFins;
     this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
     this.mapOfUsuariForUsuariID = __toClone.mapOfUsuariForUsuariID;
-    this.mapOfEntitatForEntitatID = __toClone.mapOfEntitatForEntitatID;
+    this.mapOfValuesForEntitatID = __toClone.mapOfValuesForEntitatID;
     this.mapOfValuesForPluginID = __toClone.mapOfValuesForPluginID;
   }
   
@@ -244,14 +244,14 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
 
 
 
-  private Map<String, String> mapOfEntitatForEntitatID;
+  private Map<String, String> mapOfValuesForEntitatID;
 
-  public Map<String, String> getMapOfEntitatForEntitatID() {
-    return this.mapOfEntitatForEntitatID;
+  public Map<String, String> getMapOfValuesForEntitatID() {
+    return this.mapOfValuesForEntitatID;
   }
 
-  public void setMapOfEntitatForEntitatID(Map<String, String> mapOfEntitatForEntitatID) {
-    this.mapOfEntitatForEntitatID = mapOfEntitatForEntitatID;
+  public void setMapOfValuesForEntitatID(Map<String, String> mapOfValuesForEntitatID) {
+    this.mapOfValuesForEntitatID = mapOfValuesForEntitatID;
   }
 
 
