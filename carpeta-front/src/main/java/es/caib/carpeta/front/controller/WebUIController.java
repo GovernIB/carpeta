@@ -1,15 +1,18 @@
 package es.caib.carpeta.front.controller;
 
-
-
 import com.google.gson.Gson;
 import es.caib.carpeta.commons.utils.Constants;
+import es.caib.carpeta.ejb.PropietatGlobalLocal;
+import es.caib.carpeta.front.utils.SesionHttp;
 import es.caib.carpeta.hibernate.HibernateFileUtil;
 import es.caib.carpeta.jpa.AvisJPA;
 import es.caib.carpeta.jpa.EnllazJPA;
 import es.caib.carpeta.jpa.EntitatJPA;
+import es.caib.carpeta.logic.utils.EjbManager;
 import es.caib.carpeta.model.entity.Avis;
 import es.caib.carpeta.model.entity.Enllaz;
+import org.fundaciobit.genapp.common.StringKeyValue;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,6 +38,9 @@ import java.util.Locale;
 @Controller
 @RequestMapping(value = WebUIController.WEBUI_PATH)
 public class WebUIController extends CommonFrontController {
+
+    @Autowired
+    private SesionHttp sesionHttp;
 
     public static final String WEBUI_PATH = "/webui";
 
@@ -131,9 +137,8 @@ public class WebUIController extends CommonFrontController {
     public void getEntitatInfoLogoLateral(HttpServletRequest request, HttpServletResponse response) {
 
         try {
-            // XYZ ZZZ Pendent codiEntitat
-            String codiEntitat = "caib";
-            String idioma = "ca";
+            String codiEntitat = sesionHttp.getEntitat();
+            String idioma = LocaleContextHolder.getLocale().getLanguage();
 
             EntitatJPA entitat = utilsEjb.getEntitat(codiEntitat);
 
@@ -164,8 +169,7 @@ public class WebUIController extends CommonFrontController {
     public void getEntitatLogoLateral(HttpServletRequest request, HttpServletResponse response) {
 
         try {
-            // XYZ ZZZ Pendent codiEntitat
-            String codiEntitat = "caib";
+            String codiEntitat = sesionHttp.getEntitat();
 
             Long iconaEntitatId = utilsEjb.getLogolateralEntitat(codiEntitat);
 
@@ -181,8 +185,7 @@ public class WebUIController extends CommonFrontController {
     public void getEntitatFavicon(HttpServletRequest request, HttpServletResponse response) {
 
         try {
-            // XYZ ZZZ Pendent codiEntitat
-            String codiEntitat = "caib";
+            String codiEntitat = sesionHttp.getEntitat();
 
             Long iconaEntitatId = utilsEjb.getIconaEntitat(codiEntitat);
 
@@ -250,8 +253,7 @@ public class WebUIController extends CommonFrontController {
     protected void getEnllazosJSON(HttpServletRequest request, HttpServletResponse response, final int enllazType) {
         try {
             String lang = LocaleContextHolder.getLocale().getLanguage();
-            // TODO XYZ ZZZ falta entitat
-            String codiEntitat = "caib";
+            String codiEntitat = sesionHttp.getEntitat();
 
             List<Enllaz> enllazos = utilsEjb.getEnllazosByType(codiEntitat, lang, enllazType);
 
@@ -291,8 +293,7 @@ public class WebUIController extends CommonFrontController {
 
         try {
             String lang = LocaleContextHolder.getLocale().getLanguage();
-            // TODO XYZ ZZZ falta entitat
-            String codiEntitat = "caib";
+            String codiEntitat = sesionHttp.getEntitat();
 
             String texteInformatiu = utilsEjb.getTexteInformatiuEntitat(codiEntitat);
 
@@ -341,8 +342,7 @@ public class WebUIController extends CommonFrontController {
     protected void getAvisosJSON(HttpServletRequest request, HttpServletResponse response, final int avisType) {
         try {
             String lang = LocaleContextHolder.getLocale().getLanguage();
-            // TODO XYZ ZZZ falta entitat
-            String codiEntitat = "caib";
+            String codiEntitat = sesionHttp.getEntitat();
 
             List<AvisJPA> avisos = utilsEjb.getAvisosByType(codiEntitat, avisType);
 
@@ -373,25 +373,61 @@ public class WebUIController extends CommonFrontController {
             processException(e, response);
         }
     }
-//
-//    @RequestMapping(value = "/autenticat", method = RequestMethod.GET)
-//    public void isAutenticat(HttpServletRequest request, HttpServletResponse response) {
-//
-//        try {
-//            // TODO XYZ ZZZ Pendent codiEntitat
-//            String codiEntitat = "caib";
-//            Gson gson = new Gson();
-//            response.setContentType("application/json");
-//            if(SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser")){
-//                response.getWriter().write(gson.toJson("false"));
-//            }else{
-//                response.getWriter().write(gson.toJson("true"));
-//            }
-//
-//        } catch (Throwable e) {
-//            processException(e, response);
-//        }
-//
-//    }
+
+    @RequestMapping(value = "/entityDefault", method = RequestMethod.GET)
+    public void getEntityDefault(HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+            String lang = LocaleContextHolder.getLocale().getLanguage();
+
+            PropietatGlobalLocal propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
+            String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
+            log.info("Default Entity Code => " +  defaultEntityCode);
+            sesionHttp.setEntitat(defaultEntityCode);
+
+            List<StringKeyValue> skv = new ArrayList<StringKeyValue>(1);
+            if(defaultEntityCode != null){
+                skv.add(new StringKeyValue(defaultEntityCode, defaultEntityCode));
+            }
+
+            // Passar JSON
+            Gson gson = new Gson();
+            String json = gson.toJson(skv);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF8");
+
+            byte[] utf8JsonString = json.getBytes("UTF8");
+
+            response.getOutputStream().write(utf8JsonString);
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
+    }
+
+    @RequestMapping(value = "/entitats", method = RequestMethod.GET)
+    public void getEntitats(HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+            String lang = LocaleContextHolder.getLocale().getLanguage();
+
+            List<StringKeyValue> entitats = utilsEjb.getEntitats(lang);
+
+            // Passar JSON
+            Gson gson = new Gson();
+            String json = gson.toJson(entitats);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF8");
+
+            byte[] utf8JsonString = json.getBytes("UTF8");
+
+            response.getOutputStream().write(utf8JsonString);
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
+    }
 
 }

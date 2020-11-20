@@ -37,10 +37,6 @@ class MapaWeb extends Component {
 		var plug;
 
 		var informacio;
-		var tramits;
-		var registres;
-		var notificacions;
-		var altres;
 		var dades;
 		var logoClau;
 
@@ -58,9 +54,9 @@ class MapaWeb extends Component {
 			informacio = <a href="javascript:newInici('contingut', '0');">{t('mapaWebInformacio')}</a>;
 
 			plug = plugins.map(s => (
-				<p className="lh15 upper"><a href="/carpetafront/login">{s.nom}</a> {logoClau}</p>));
+				<p className="lh15 upper"><a href="javascript: var loc = new URL(window.location.href);  window.location.href=('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host) )">{s.nom}</a> {logoClau}</p>));
 
-			dades = <a href="/carpetafront/login">{t('mapaWebDades')}</a>;
+			dades = <a href="javascript: var loc = new URL(window.location.href);  window.location.href=('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host) )">{t('mapaWebDades')}</a>;
 		}
 
 		return (

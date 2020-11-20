@@ -193,12 +193,14 @@ public class LoginController {
         String url_callback_logout = baseURL + "/salir";
         String IDIOMA = LocaleContextHolder.getLocale().getLanguage();
 
+        String codiEntitat = sesionHttp.getEntitat();
+
         securityService.iniciarSesionLogout(url_callback_logout, IDIOMA);
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
         }
-        return "redirect:/";
+        return "redirect:/entitat/"+codiEntitat;
 
     }
 
