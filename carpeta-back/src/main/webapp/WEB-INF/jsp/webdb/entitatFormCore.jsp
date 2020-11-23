@@ -135,14 +135,30 @@
                   <label class="custom-file-label" for="logoCapBackID">
                   </label>
                 </div>
-                <c:if test="${not empty __theForm.entitat.logoCapBack}">
+                <c:choose>
+                <c:when test="${not empty __theForm.entitat.logoCapBack}">
                 <div class="input-group-append">
                   <span class="input-group-text" id="">
                   <small>              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.entitat.logoCapBack)}"/>">${__theForm.entitat.logoCapBack.nom}</a>
 </small>
                   </span>
                 </div>
-                </c:if>
+                </c:when>
+                <c:otherwise>
+                <div class="input-group-append input-group-append-file">
+                  <span class="input-group-text" id="logoCapBackID-custom-file-label" style="display:none">
+                  <small></small>
+                  </span>
+                </div>
+                <script type="text/javascript">
+					$('#logoCapBackID').on('change', function(){
+						var ruta = $('#logoCapBackID').val(); 
+						var rutaArray = ruta.split('\\');
+						$('#logoCapBackID-custom-file-label').css('display','block');
+						$('#logoCapBackID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+					});
+				</script>                </c:otherwise>
+                </c:choose>
               </div>
             </c:if>
            </td>
@@ -171,14 +187,30 @@
                   <label class="custom-file-label" for="logoPeuBackID">
                   </label>
                 </div>
-                <c:if test="${not empty __theForm.entitat.logoPeuBack}">
+                <c:choose>
+                <c:when test="${not empty __theForm.entitat.logoPeuBack}">
                 <div class="input-group-append">
                   <span class="input-group-text" id="">
                   <small>              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.entitat.logoPeuBack)}"/>">${__theForm.entitat.logoPeuBack.nom}</a>
 </small>
                   </span>
                 </div>
-                </c:if>
+                </c:when>
+                <c:otherwise>
+                <div class="input-group-append input-group-append-file">
+                  <span class="input-group-text" id="logoPeuBackID-custom-file-label" style="display:none">
+                  <small></small>
+                  </span>
+                </div>
+                <script type="text/javascript">
+					$('#logoPeuBackID').on('change', function(){
+						var ruta = $('#logoPeuBackID').val(); 
+						var rutaArray = ruta.split('\\');
+						$('#logoPeuBackID-custom-file-label').css('display','block');
+						$('#logoPeuBackID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+					});
+				</script>                </c:otherwise>
+                </c:choose>
               </div>
             </c:if>
            </td>
@@ -207,14 +239,30 @@
                   <label class="custom-file-label" for="logoLateralFrontID">
                   </label>
                 </div>
-                <c:if test="${not empty __theForm.entitat.logoLateralFront}">
+                <c:choose>
+                <c:when test="${not empty __theForm.entitat.logoLateralFront}">
                 <div class="input-group-append">
                   <span class="input-group-text" id="">
                   <small>              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.entitat.logoLateralFront)}"/>">${__theForm.entitat.logoLateralFront.nom}</a>
 </small>
                   </span>
                 </div>
-                </c:if>
+                </c:when>
+                <c:otherwise>
+                <div class="input-group-append input-group-append-file">
+                  <span class="input-group-text" id="logoLateralFrontID-custom-file-label" style="display:none">
+                  <small></small>
+                  </span>
+                </div>
+                <script type="text/javascript">
+					$('#logoLateralFrontID').on('change', function(){
+						var ruta = $('#logoLateralFrontID').val(); 
+						var rutaArray = ruta.split('\\');
+						$('#logoLateralFrontID-custom-file-label').css('display','block');
+						$('#logoLateralFrontID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+					});
+				</script>                </c:otherwise>
+                </c:choose>
               </div>
             </c:if>
            </td>
@@ -261,14 +309,30 @@
                   <label class="custom-file-label" for="iconID">
                   </label>
                 </div>
-                <c:if test="${not empty __theForm.entitat.icon}">
+                <c:choose>
+                <c:when test="${not empty __theForm.entitat.icon}">
                 <div class="input-group-append">
                   <span class="input-group-text" id="">
                   <small>              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.entitat.icon)}"/>">${__theForm.entitat.icon.nom}</a>
 </small>
                   </span>
                 </div>
-                </c:if>
+                </c:when>
+                <c:otherwise>
+                <div class="input-group-append input-group-append-file">
+                  <span class="input-group-text" id="iconID-custom-file-label" style="display:none">
+                  <small></small>
+                  </span>
+                </div>
+                <script type="text/javascript">
+					$('#iconID').on('change', function(){
+						var ruta = $('#iconID').val(); 
+						var rutaArray = ruta.split('\\');
+						$('#iconID-custom-file-label').css('display','block');
+						$('#iconID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+					});
+				</script>                </c:otherwise>
+                </c:choose>
               </div>
             </c:if>
            </td>
@@ -447,7 +511,8 @@
                   <label class="custom-file-label" for="fitxerCssID">
                   </label>
                 </div>
-                <c:if test="${not empty __theForm.entitat.fitxerCss}">
+                <c:choose>
+                <c:when test="${not empty __theForm.entitat.fitxerCss}">
                 <div class="input-group-append">
                   <span class="input-group-text" id="">
                   <small>              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.entitat.fitxerCss)}"/>">${__theForm.entitat.fitxerCss.nom}</a>
@@ -458,7 +523,22 @@
                         <small><fmt:message key="genapp.form.file.delete"/></small>
                   </span>
                 </div>
-                </c:if>
+                </c:when>
+                <c:otherwise>
+                <div class="input-group-append input-group-append-file">
+                  <span class="input-group-text" id="fitxerCssID-custom-file-label" style="display:none">
+                  <small></small>
+                  </span>
+                </div>
+                <script type="text/javascript">
+					$('#fitxerCssID').on('change', function(){
+						var ruta = $('#fitxerCssID').val(); 
+						var rutaArray = ruta.split('\\');
+						$('#fitxerCssID-custom-file-label').css('display','block');
+						$('#fitxerCssID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+					});
+				</script>                </c:otherwise>
+                </c:choose>
               </div>
             </c:if>
            </td>

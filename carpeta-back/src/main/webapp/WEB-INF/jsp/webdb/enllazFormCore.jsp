@@ -148,14 +148,30 @@
                   <label class="custom-file-label" for="logoID">
                   </label>
                 </div>
-                <c:if test="${not empty __theForm.enllaz.logo}">
+                <c:choose>
+                <c:when test="${not empty __theForm.enllaz.logo}">
                 <div class="input-group-append">
                   <span class="input-group-text" id="">
                   <small>              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.enllaz.logo)}"/>">${__theForm.enllaz.logo.nom}</a>
 </small>
                   </span>
                 </div>
-                </c:if>
+                </c:when>
+                <c:otherwise>
+                <div class="input-group-append input-group-append-file">
+                  <span class="input-group-text" id="logoID-custom-file-label" style="display:none">
+                  <small></small>
+                  </span>
+                </div>
+                <script type="text/javascript">
+					$('#logoID').on('change', function(){
+						var ruta = $('#logoID').val(); 
+						var rutaArray = ruta.split('\\');
+						$('#logoID-custom-file-label').css('display','block');
+						$('#logoID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+					});
+				</script>                </c:otherwise>
+                </c:choose>
               </div>
             </c:if>
            </td>
