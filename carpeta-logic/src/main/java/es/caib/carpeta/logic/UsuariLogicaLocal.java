@@ -17,11 +17,17 @@ public interface UsuariLogicaLocal extends UsuariLocal  {
 	
 	public static final String JNDI_NAME = "java:app/carpeta-logic/UsuariLogicaEJB!es.caib.carpeta.logic.UsuariLogicaLocal";
 
-	public UsuariJPA getUserInfoFromUserInformation(String username) throws javax.ejb.EJBException;
+	
 	
 	public UsuariJPA crearUsuari(UsuariJPA usuario) throws I18NException, javax.ejb.EJBException;
 	
+	
 	public UsuariJPA findByUsername(String username) throws I18NException;
-
+	
+	/*
+	public UsuariJPA getUserInfoFromUserInformation(String username) throws javax.ejb.EJBException;
+	
+	public UsuariJPA userInfo2UsuariJPA(UserInfo info);
+*/
 }
 

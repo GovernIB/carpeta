@@ -23,11 +23,13 @@ public class RolesBasedAttributes2GrantedAuthoritiesMapper implements Attributes
 	public void setBaseRoleMapping(Map baseRoleMapping) {
 		this.baseRoleMapping = baseRoleMapping;
 	}
+	
 
+	@Override
 	public Collection<GrantedAuthority> getGrantedAuthorities(Collection<String> attributes) {
 		List<GrantedAuthority> gaList = new ArrayList<GrantedAuthority>();
-		boolean isDebug = log.isDebugEnabled();
-		if (isDebug) {  log.info("------------  MAPPING -----------------"); };
+		boolean isDebug = true; // log.isDebugEnabled();
+		if (isDebug) {  log.info("------------  MAPPING ()-----------------"); };
 		for (String attribute: attributes) {
 		  log.info("  + Attribute: " + attribute);
 			Object mapping = baseRoleMapping.get(attribute);

@@ -64,9 +64,6 @@
             <version>1.1.5</version>
             <scope>provided</scope>
         </dependency>
-        
-
-
 
         <!-- Externas -->
         <dependency>
@@ -81,7 +78,6 @@
             <version>${genapp.version}</version>
             <scope>provided</scope>
         </dependency>
-
 
         <dependency>
             <groupId>commons-fileupload</groupId>
@@ -289,6 +285,22 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        
+        <!-- Llibreries de keycloak. Parxe CAIB -->
+        
+        
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-spring-security-adapter</artifactId>
+            <version>${keycloak.version}</version>
+        </dependency>
+
 
     </dependencies>
 

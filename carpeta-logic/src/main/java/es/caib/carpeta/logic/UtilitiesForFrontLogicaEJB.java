@@ -11,7 +11,6 @@ import es.caib.carpeta.pluginsib.carpetafront.api.ICarpetaFrontPlugin;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
-import org.springframework.context.i18n.LocaleContextHolder;
 
 import javax.annotation.security.PermitAll;
 import javax.ejb.EJB;

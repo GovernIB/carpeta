@@ -22,6 +22,8 @@ import org.springframework.web.servlet.view.RedirectView;
 import es.caib.carpeta.back.controller.webdb.UsuariController;
 import es.caib.carpeta.back.form.webdb.UsuariFilterForm;
 import es.caib.carpeta.back.form.webdb.UsuariForm;
+import es.caib.carpeta.back.utils.PluginUserInformationUtils;
+import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.jpa.UsuariJPA;
 import es.caib.carpeta.logic.UsuariLogicaLocal;
 
@@ -92,7 +94,8 @@ public class UsuariSuperAdminController extends UsuariController {
                 } else {
 
                     // XYZ ZZZ ZZZ ZZZ TODO
-                    persona = usuariPersonaLogicaEjb.getUserInfoFromUserInformation(username);
+                    //persona = usuariPersonaLogicaEjb.getUserInfoFromUserInformation(username);
+                    persona = PluginUserInformationUtils.getUserInfoFromUserInformation(username);
 
                     if (persona == null) {
                         throw new Exception("Username not found");
@@ -134,8 +137,10 @@ public class UsuariSuperAdminController extends UsuariController {
 
             usuariFilterForm.setAddButtonVisible(false);
 
-            usuariFilterForm.addAdditionalButton(new AdditionalButton("fas fa-plus-circle", "usuari.afegir",
+            if (!Configuracio.isCAIB()) {
+              usuariFilterForm.addAdditionalButton(new AdditionalButton("fas fa-plus-circle", "usuari.afegir",
                     getContextWeb() + "/checkusername", "btn-success"));
+            }
 
         }
         return usuariFilterForm;
