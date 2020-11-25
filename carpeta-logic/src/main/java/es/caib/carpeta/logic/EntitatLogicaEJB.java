@@ -108,7 +108,7 @@ public class EntitatLogicaEJB extends EntitatEJB implements EntitatLogicaLocal, 
 
 		TypedQuery<EntitatJPA> query = getEntityManager().createQuery(
 				"select a from EntitatJPA a "
-						+ "where a.codi = :codiEntitat ", EntitatJPA.class);
+						+ "where a.codi = :codiEntitat and a.activa = true", EntitatJPA.class);
 		query.setParameter("codiEntitat", codiEntitat);
 		return query.getResultList().size() > 0;
 	}
