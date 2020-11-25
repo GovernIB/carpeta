@@ -1,10 +1,12 @@
 package es.caib.carpeta.logic;
 
+import es.caib.carpeta.jpa.EntitatJPA;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.persistence.TypedQuery;
 
 import java.util.*;
 
@@ -98,5 +100,16 @@ public class EntitatLogicaEJB extends EntitatEJB implements EntitatLogicaLocal, 
 			}
 		}
 			
+	}
+
+	/** Cerca si existeix una entiat **/
+	@Override
+	public boolean existeix(String codiEntitat) throws I18NException {
+
+		TypedQuery<EntitatJPA> query = getEntityManager().createQuery(
+				"select a from EntitatJPA a "
+						+ "where a.codi = :codiEntitat ", EntitatJPA.class);
+		query.setParameter("codiEntitat", codiEntitat);
+		return query.getResultList().size() > 0;
 	}
 }

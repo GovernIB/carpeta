@@ -1,9 +1,12 @@
 package es.caib.carpeta.front.controller;
 
+import es.caib.carpeta.ejb.EntitatLocal;
 import es.caib.carpeta.ejb.PropietatGlobalLocal;
 import es.caib.carpeta.front.utils.SesionHttp;
+import es.caib.carpeta.logic.EntitatLogicaLocal;
 import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
 import es.caib.carpeta.logic.utils.EjbManager;
+import es.caib.carpeta.model.entity.Entitat;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fundaciobit.genapp.common.StringKeyValue;
@@ -31,6 +34,9 @@ public class InicioController extends CommonFrontController {
     @EJB(mappedName = UtilitiesForFrontLogicaLocal.JNDI_NAME)
     UtilitiesForFrontLogicaLocal utilsEjb;
 
+    @EJB(mappedName = EntitatLogicaLocal.JNDI_NAME)
+    EntitatLogicaLocal entitatEjb;
+
     protected final Log log = LogFactory.getLog(getClass());
 
     @RequestMapping(value={"/entitat"}, method = RequestMethod.GET)
@@ -54,7 +60,7 @@ public class InicioController extends CommonFrontController {
 
             } else {
 
-                mav = new ModelAndView("redirect:/entitat/" + defaultEntityCode);
+                mav = new ModelAndView("redirect:/e/" + defaultEntityCode);
 
             }
 
@@ -66,7 +72,7 @@ public class InicioController extends CommonFrontController {
 
     }
 
-    @RequestMapping(value={"/entitat/{codiEntitat}"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/e/{codiEntitat}"}, method = RequestMethod.GET)
     public String triarEntitat(@PathVariable("codiEntitat") String codiEntitat, HttpServletRequest request, HttpServletResponse response) throws I18NException {
 
         try{
@@ -103,30 +109,37 @@ public class InicioController extends CommonFrontController {
 
                     mav = new ModelAndView("entitat");
                     mav.addObject("entitats", entitats);
-                    mav.addObject("numEntitats", entitats.size());
+//                    mav.addObject("numEntitats", entitats.size());
 
                 } else{
 
                     sesionHttp.setEntitat(entitats.get(0).key);
                     mav.addObject("entitat", entitats.get(0).key);
-                    mav.addObject("numEntitats", entitats.size());
+//                    mav.addObject("numEntitats", entitats.size());
 
                 }
 
-            } else{
+            } else if(defaultEntityCode != null){
 
-                if(defaultEntityCode != null){
-                    sesionHttp.setEntitat(defaultEntityCode);
+                    if(entitatEjb.existeix(defaultEntityCode)) {
+
+                        sesionHttp.setEntitat(defaultEntityCode);
+                        mav.addObject("entitat", sesionHttp.getEntitat());
+                        mav.addObject("defaultEntityCode", defaultEntityCode);
+
+                    } else{
+
+                        if(sesionHttp.getEntitat() != null){
+                            mav.addObject("entitat", sesionHttp.getEntitat());
+                        } else{
+                            mav = new ModelAndView("entitat");
+                            mav.addObject("entitats", entitats);
+                        }
+
+                    }
                 }
 
-                mav.addObject("entitat", sesionHttp.getEntitat());
-                mav.addObject("defaultEntityCode", defaultEntityCode);
-                mav.addObject("numEntitats", entitats.size());
-
-            }
-
-
-        } catch (Throwable e) {
+            } catch (Throwable e) {
             processException(e, response);
         }
 
