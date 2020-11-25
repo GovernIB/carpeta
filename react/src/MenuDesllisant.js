@@ -60,6 +60,7 @@ class MenuDesllisant extends Component {
 		var autenticat = this.props.autenticat;
 		var urlBase = window.location.href;
 		var defaultEntityCode = sessionStorage.getItem("defaultEntityCode");
+		var numEntitats = sessionStorage.getItem("numEntitats");
 
 		var boto_ca;
 		if (i18n.language === 'ca') {
@@ -158,7 +159,7 @@ class MenuDesllisant extends Component {
 			sortir = '';
 		}
 
-		if(defaultEntityCode === ""){
+		if(defaultEntityCode === "" && numEntitats > 1){
 			canviarEntitat = <li><a href="/carpetafront/entitat" className="imc-marc-ico imc--registres" title={t('menuEntitat')}><span>{t('menuEntitat')}</span></a></li>;
 		} else{
 			canviarEntitat = "";
