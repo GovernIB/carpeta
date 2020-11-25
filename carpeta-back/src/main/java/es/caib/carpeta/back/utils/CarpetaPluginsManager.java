@@ -1,4 +1,4 @@
-package es.caib.carpeta.logic.utils;
+package es.caib.carpeta.back.utils;
 
 import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.Constants;
@@ -8,8 +8,6 @@ import java.util.Properties;
 import javax.ejb.EJBException;
 
 import org.apache.log4j.Logger;
-import org.fundaciobit.genapp.common.i18n.I18NArgumentCode;
-import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.pluginsib.core.utils.PluginsManager;
 import org.fundaciobit.pluginsib.userinformation.IUserInformationPlugin;
 

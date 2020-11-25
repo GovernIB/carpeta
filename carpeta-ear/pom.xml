@@ -129,7 +129,7 @@
         <!-- ====================================== -->
         <!-- ===== PLUGINS DE USERINFORMATION ===== -->
         <!-- ====================================== -->
-
+        
         <dependency>
             <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
             <artifactId>pluginsib-userinformation-keycloak</artifactId>

@@ -4,8 +4,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ca" style="" class=" js flexbox flexboxlegacy hashchange backgroundsize boxshadow textshadow opacity cssanimations cssgradients csstransforms csstransitions fontface generatedcontent localstorage svg" lang="ca">
 <head>
-    <title>Carpeta Ciutadana - Front React</title>
-    <link rel="shortcut icon" type="image/x-ico" href="${pageContext.request.contextPath}/webui/icona/">
+    <title>Carpeta Ciutadana</title>
+    <link rel="shortcut icon" type="image/x-ico" href="${pageContext.request.contextPath}/src/assets/images/icon.png">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
@@ -72,7 +72,7 @@
                                 <label class="ponerMovil" data-toggle="tooltip" data-placement="top" title="${entitat.value}">
                                         ${entitat.key}
                                 </label>
-                                <a href="<c:url value="/entitat/${entitat.key}"/>"><p class="quitarMovil">${entitat.value}</p></a>
+                                <a href="<c:url value="/e/${entitat.key}"/>"><p class="quitarMovil">${entitat.value}</p></a>
                             </td>
                         </tr>
                     </c:forEach>

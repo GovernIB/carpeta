@@ -47,6 +47,6 @@ Username: ${loginInfo.username}<br/>
 Locale = <%=LocaleContextHolder.getLocale() %> <br/>
 
 lang = ${lang} <br/>
-<br/>
+
 
 </c:if>

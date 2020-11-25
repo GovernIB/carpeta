@@ -1,9 +1,12 @@
 package es.caib.carpeta.front.controller;
 
+import es.caib.carpeta.ejb.EntitatLocal;
 import es.caib.carpeta.ejb.PropietatGlobalLocal;
 import es.caib.carpeta.front.utils.SesionHttp;
+import es.caib.carpeta.logic.EntitatLogicaLocal;
 import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
 import es.caib.carpeta.logic.utils.EjbManager;
+import es.caib.carpeta.model.entity.Entitat;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fundaciobit.genapp.common.StringKeyValue;
@@ -18,11 +21,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
 @Controller
-public class InicioController {
+public class InicioController extends CommonFrontController {
 
     @Autowired
     private SesionHttp sesionHttp;
@@ -30,39 +34,55 @@ public class InicioController {
     @EJB(mappedName = UtilitiesForFrontLogicaLocal.JNDI_NAME)
     UtilitiesForFrontLogicaLocal utilsEjb;
 
+    @EJB(mappedName = EntitatLogicaLocal.JNDI_NAME)
+    EntitatLogicaLocal entitatEjb;
+
     protected final Log log = LogFactory.getLog(getClass());
 
     @RequestMapping(value={"/entitat"}, method = RequestMethod.GET)
-    public ModelAndView llistarEntitats(HttpServletRequest request) throws I18NException {
+    public ModelAndView llistarEntitats(HttpServletRequest request, HttpServletResponse response) throws I18NException {
 
-        String lang = LocaleContextHolder.getLocale().getLanguage();
+        ModelAndView mav = new ModelAndView("entitat");
 
-        PropietatGlobalLocal propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
-        String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
-        log.info("Default Entity Code => " +  defaultEntityCode);
+        try {
 
-        if(defaultEntityCode == null) {
+            String lang = LocaleContextHolder.getLocale().getLanguage();
 
-            List<StringKeyValue> entitats = utilsEjb.getEntitats(lang);
+            PropietatGlobalLocal propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
+            String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
+            log.info("Default Entity Code => " + defaultEntityCode);
 
-            ModelAndView mav = new ModelAndView("entitat");
-            mav.addObject("entitats", entitats);
+            if (defaultEntityCode == null) {
 
-            return mav;
+                List<StringKeyValue> entitats = utilsEjb.getEntitats(lang);
 
-        } else{
+                mav.addObject("entitats", entitats);
 
-            return new ModelAndView("redirect:/entitat/"+defaultEntityCode);
+            } else {
 
+                mav = new ModelAndView("redirect:/e/" + defaultEntityCode);
+
+            }
+
+        } catch (Throwable e) {
+            processException(e, response);
         }
+
+        return mav;
 
     }
 
-    @RequestMapping(value={"/entitat/{codiEntitat}"}, method = RequestMethod.GET)
-    public String triarEntitat(@PathVariable("codiEntitat") String codiEntitat, HttpServletRequest request) throws I18NException {
+    @RequestMapping(value={"/e/{codiEntitat}"}, method = RequestMethod.GET)
+    public String triarEntitat(@PathVariable("codiEntitat") String codiEntitat, HttpServletRequest request, HttpServletResponse response) throws I18NException {
 
-        String lang = LocaleContextHolder.getLocale().getLanguage();
-        sesionHttp.setEntitat(codiEntitat);
+        try{
+
+            String lang = LocaleContextHolder.getLocale().getLanguage();
+            sesionHttp.setEntitat(codiEntitat);
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
 
         return "redirect:/";
 
@@ -70,35 +90,60 @@ public class InicioController {
 
 
     @RequestMapping(value={"/"})
-    public ModelAndView inicio(HttpServletRequest request) throws I18NException {
+    public ModelAndView inicio(HttpServletRequest request, HttpServletResponse response) throws I18NException {
 
-        String lang = LocaleContextHolder.getLocale().getLanguage();
+        ModelAndView mav = new ModelAndView("inici");
 
-        PropietatGlobalLocal propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
-        String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
+        try{
 
-        if(defaultEntityCode == null && sesionHttp.getEntitat() == null) {
+            String lang = LocaleContextHolder.getLocale().getLanguage();
+
+            PropietatGlobalLocal propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
+            String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
 
             List<StringKeyValue> entitats = utilsEjb.getEntitats(lang);
 
-            ModelAndView mav = new ModelAndView("entitat");
-            mav.addObject("entitats", entitats);
+            if(defaultEntityCode == null && sesionHttp.getEntitat() == null) {
 
-            return mav;
+                if(entitats.size() > 1){
 
-        } else{
+                    mav = new ModelAndView("entitat");
+                    mav.addObject("entitats", entitats);
+//                    mav.addObject("numEntitats", entitats.size());
 
-            if(defaultEntityCode != null){
-                sesionHttp.setEntitat(defaultEntityCode);
-            }
+                } else{
 
-            ModelAndView mav = new ModelAndView("inici");
-            mav.addObject("entitat", sesionHttp.getEntitat());
-            mav.addObject("defaultEntityCode", defaultEntityCode);
+                    sesionHttp.setEntitat(entitats.get(0).key);
+                    mav.addObject("entitat", entitats.get(0).key);
+//                    mav.addObject("numEntitats", entitats.size());
 
-            return mav;
+                }
 
+            } else if(defaultEntityCode != null){
+
+                    if(entitatEjb.existeix(defaultEntityCode)) {
+
+                        sesionHttp.setEntitat(defaultEntityCode);
+                        mav.addObject("entitat", sesionHttp.getEntitat());
+                        mav.addObject("defaultEntityCode", defaultEntityCode);
+
+                    } else{
+
+                        if(sesionHttp.getEntitat() != null){
+                            mav.addObject("entitat", sesionHttp.getEntitat());
+                        } else{
+                            mav = new ModelAndView("entitat");
+                            mav.addObject("entitats", entitats);
+                        }
+
+                    }
+                }
+
+            } catch (Throwable e) {
+            processException(e, response);
         }
+
+        return mav;
 
     }
 

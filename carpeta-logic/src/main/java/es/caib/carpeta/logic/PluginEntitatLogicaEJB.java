@@ -6,7 +6,6 @@ import java.util.List;
 import javax.annotation.security.PermitAll;
 
 import javax.ejb.Stateless;
-import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;

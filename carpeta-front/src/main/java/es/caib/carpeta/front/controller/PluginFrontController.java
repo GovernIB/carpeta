@@ -2,10 +2,12 @@ package es.caib.carpeta.front.controller;
 
 import com.google.gson.Gson;
 
+import es.caib.carpeta.front.utils.SesionHttp;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -45,6 +47,9 @@ import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 @Controller
 @RequestMapping(value = "/pluginfront", method = RequestMethod.GET)
 public class PluginFrontController extends CommonFrontController {
+
+    @Autowired
+    private SesionHttp sesionHttp;
     
     @EJB(mappedName = UtilitiesForFrontLogicaLocal.JNDI_NAME)
     UtilitiesForFrontLogicaLocal utilsEjb;
@@ -71,18 +76,21 @@ public class PluginFrontController extends CommonFrontController {
     
     @RequestMapping(value = {"", "/" }, method = RequestMethod.GET) 
     public ModelAndView showAllPlugins(HttpServletRequest request, HttpServletResponse response) throws I18NException {
-        
-        // TODO XYZ ZZZ falta idioma
-        String lang = LocaleContextHolder.getLocale().getLanguage();
-        // TODO XYZ ZZZ falta entitat
-        String codiEntitat = "caib";
-        
-        List<PluginInfo> plugins = utilsEjb.getFrontPlugins(codiEntitat, lang);
-        
-        
+
         ModelAndView mav = new ModelAndView("plugins"); // => /src/main/webapp/WEB-INF/views/pages/plugins.jsp
-        
-        mav.addObject("plugins", plugins);
+
+        try {
+
+            String lang = LocaleContextHolder.getLocale().getLanguage();
+            String codiEntitat = sesionHttp.getEntitat();
+
+            List<PluginInfo> plugins = utilsEjb.getFrontPlugins(codiEntitat, lang);
+
+            mav.addObject("plugins", plugins);
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
         
         return mav;
         
@@ -95,39 +103,45 @@ public class PluginFrontController extends CommonFrontController {
     public ModelAndView showPlugin(@PathVariable("pluginID") String pluginID, @PathVariable("idioma") String idioma, HttpServletRequest request,
                                    HttpServletResponse response, Authentication authentication) throws Exception, I18NException {
 
-    //TODO passar idioma
-        LocaleContextHolder.setLocale(new Locale(idioma));
-
-        Locale.setDefault(new Locale(idioma));
-
-        //String pluginID = request.getParameter("pluginID");
-        //String administrationID= request.getParameter("administrationID");
-        UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();
-        String administrationID= usuarioAutenticado.getUsuarioClave().getNif();
-
-        //TODO canviar, mirar javascript window.location.href
-        String urlBase = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
-        
-        log.info("showPlugin:: pluginID = " + pluginID);
-        log.info("showPlugin:: administrationID = " + administrationID);
-
-        String contextPath = "/carpetaback";
-        
-        //log.info("startTestPlugin:: contextPath => " + contextPath);
-        
-        
-        log.info("showPlugin:: URL BASE = " + urlBase);
-
-        
-        URL url = new URL(urlBase);
-        
-        int port = url.getPort();
-        
-        String baseBack = url.getProtocol() + "://" + url.getHost() + (port == -1? "" : (":" +port)) + contextPath; 
-        
-        log.info("showPlugin:: BASE BACK = " + baseBack);
-        
+        String administrationID = "";
+        String baseBack = "";
         final String view = "plugin_contenidor"; // => \WEB-INF\views\pages\plugin_contenidor.jsp
+
+        try {
+
+            LocaleContextHolder.setLocale(new Locale(idioma));
+            Locale.setDefault(new Locale(idioma));
+
+            //String pluginID = request.getParameter("pluginID");
+            //String administrationID= request.getParameter("administrationID");
+            UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado) authentication.getPrincipal();
+            administrationID = usuarioAutenticado.getUsuarioClave().getNif();
+
+            //TODO canviar, mirar javascript window.location.href
+            String urlBase = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+
+            log.info("showPlugin:: pluginID = " + pluginID);
+            log.info("showPlugin:: administrationID = " + administrationID);
+
+            String contextPath = "/carpetaback";
+
+            //log.info("startTestPlugin:: contextPath => " + contextPath);
+
+
+            log.info("showPlugin:: URL BASE = " + urlBase);
+
+
+            URL url = new URL(urlBase);
+
+            int port = url.getPort();
+
+            baseBack = url.getProtocol() + "://" + url.getHost() + (port == -1 ? "" : (":" + port)) + contextPath;
+
+            log.info("showPlugin:: BASE BACK = " + baseBack);
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
 
         return startPublicSignatureProcess(request, response, view, pluginID, administrationID, baseBack);
 
@@ -138,50 +152,56 @@ public class PluginFrontController extends CommonFrontController {
     private ModelAndView startPublicSignatureProcess(HttpServletRequest request, HttpServletResponse response,
             String view, String pluginID, String administrationID, String baseBack)
             throws Exception, I18NException {
-        
-        //response.addHeader("X-Frame-Options", "SAMEORIGIN");
-
-        long temps = System.currentTimeMillis();
-
-        StringBuilder peticio = new StringBuilder();
-
-
-        String context = PUBLIC_CONTEXTWEB;
-
-        String administrationIDEncriptat = HibernateFileUtil.encryptString(administrationID);
-
-        final String urlToShowPluginPage = baseBack + context + "/showplugin/" + pluginID 
-                + "/" + response.encodeURL(administrationIDEncriptat)
-                + "/" + Base64.getUrlEncoder().encodeToString(baseBack.getBytes());
-
-        log.info(" urlToShowPluginPage => " + urlToShowPluginPage);
-
-
-       //Obtenemos plugin para obtener entidadID
-        peticio.append("Usuari").append(administrationID).append(System.getProperty("line.separator"));
-        peticio.append("classe: ").append(getClass().getName()).append(System.getProperty("line.separator"));
-
-        //LOG
-      //  XYZ TODO Passar valor a la var PluginText
-        logCarpetaLogicaEjb.crearLog("Executat plugin des del Front per "+ administrationID, ESTAT_LOG_OK,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),"", Long.parseLong(pluginID));
-
-        //ESTADISTICA
-        List<EstadisticaJPA> estadisticas = estadisticaLogicaEjb.findEstadistica(TIPUS_ESTAD_ACCES_PLUGIN,null,new Date(),Long.parseLong(pluginID));
-
-        if(estadisticas != null && !estadisticas.isEmpty()) {
-
-            estadisticaLogicaEjb.incrementarComptador(estadisticas.get(0));
-        }else{
-            estadisticaLogicaEjb.crearEstadistica(null, TIPUS_ESTAD_ACCES_PLUGIN,Long.parseLong(pluginID));
-        }
-
-        //AUDITORIA
-        auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ACCES_PLUGIN,null,null,administrationID,Long.parseLong(pluginID));
-
 
         ModelAndView mav = new ModelAndView(view);
-        // mav.addObject("signaturesSetID", signaturesSetID);
-        mav.addObject("urlToShowPluginPage", urlToShowPluginPage);
+
+        try{
+
+            //response.addHeader("X-Frame-Options", "SAMEORIGIN");
+
+            long temps = System.currentTimeMillis();
+
+            StringBuilder peticio = new StringBuilder();
+
+
+            String context = PUBLIC_CONTEXTWEB;
+
+            String administrationIDEncriptat = HibernateFileUtil.encryptString(administrationID);
+
+            final String urlToShowPluginPage = baseBack + context + "/showplugin/" + pluginID
+                    + "/" + response.encodeURL(administrationIDEncriptat)
+                    + "/" + Base64.getUrlEncoder().encodeToString(baseBack.getBytes());
+
+            log.info(" urlToShowPluginPage => " + urlToShowPluginPage);
+
+
+           //Obtenemos plugin para obtener entidadID
+            peticio.append("Usuari").append(administrationID).append(System.getProperty("line.separator"));
+            peticio.append("classe: ").append(getClass().getName()).append(System.getProperty("line.separator"));
+
+            //LOG
+          //  XYZ TODO Passar valor a la var PluginText
+            logCarpetaLogicaEjb.crearLog("Executat plugin des del Front per "+ administrationID, ESTAT_LOG_OK,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),"", Long.parseLong(pluginID));
+
+            //ESTADISTICA
+            List<EstadisticaJPA> estadisticas = estadisticaLogicaEjb.findEstadistica(TIPUS_ESTAD_ACCES_PLUGIN,null,new Date(),Long.parseLong(pluginID));
+
+            if(estadisticas != null && !estadisticas.isEmpty()) {
+
+                estadisticaLogicaEjb.incrementarComptador(estadisticas.get(0));
+            }else{
+                estadisticaLogicaEjb.crearEstadistica(null, TIPUS_ESTAD_ACCES_PLUGIN,Long.parseLong(pluginID));
+            }
+
+            //AUDITORIA
+            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ACCES_PLUGIN,null,null,administrationID,Long.parseLong(pluginID));
+
+            // mav.addObject("signaturesSetID", signaturesSetID);
+            mav.addObject("urlToShowPluginPage", urlToShowPluginPage);
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
 
         return mav;
     }
@@ -190,20 +210,25 @@ public class PluginFrontController extends CommonFrontController {
     @RequestMapping(value = "/pluginicon/{pluginid}/{idioma}", method = RequestMethod.GET)
     public void  getPluginIcon(@PathVariable("pluginid") Long pluginid,@PathVariable("idioma") String idioma, HttpServletRequest request, HttpServletResponse response) throws Exception, I18NException  {
 
+        try {
+            LocaleContextHolder.setLocale(new Locale(idioma));
 
-        LocaleContextHolder.setLocale(new Locale(idioma));
+            Locale.setDefault(new Locale(idioma));
 
-        Locale.setDefault(new Locale(idioma));
+            FileInfo fi = utilsEjb.getIconaPlugin(pluginid, idioma);
 
-        FileInfo fi = utilsEjb.getIconaPlugin(pluginid,idioma);
+            if (fi != null) {
+                response.setContentType(fi.getMime());
+                response.setHeader("Content-Disposition", "attachment; filename=\"" + fi.getName() + "\"");
+                response.setContentLength((int) fi.getData().length);
 
-        if(fi != null) {
-            response.setContentType(fi.getMime());
-            response.setHeader("Content-Disposition", "attachment; filename=\"" + fi.getName() + "\"");
-            response.setContentLength((int) fi.getData().length);
+                response.getOutputStream().write(fi.getData());
+            }
 
-            response.getOutputStream().write(fi.getData());
+        } catch (Throwable e) {
+            processException(e, response);
         }
+
     }
 
     @RequestMapping(value = "/veureplugins" , method = RequestMethod.GET)
@@ -212,9 +237,7 @@ public class PluginFrontController extends CommonFrontController {
         try{
 
             String lang = LocaleContextHolder.getLocale().getLanguage();
-
-            // TODO XYZ ZZZ falta entitat
-            String codiEntitat = "caib";
+            String codiEntitat = sesionHttp.getEntitat();
 
             List<PluginInfo> pluginsEntitat = utilsEjb.getFrontPlugins(codiEntitat, lang);
 

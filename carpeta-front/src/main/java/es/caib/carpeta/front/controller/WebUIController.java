@@ -187,9 +187,11 @@ public class WebUIController extends CommonFrontController {
         try {
             String codiEntitat = sesionHttp.getEntitat();
 
-            Long iconaEntitatId = utilsEjb.getIconaEntitat(codiEntitat);
+            if(codiEntitat != null) {
+                Long iconaEntitatId = utilsEjb.getIconaEntitat(codiEntitat);
+                descarregaFitxer(response, iconaEntitatId);
+            }
 
-            descarregaFitxer(response, iconaEntitatId);
 
         } catch (Throwable e) {
             processException(e, response);

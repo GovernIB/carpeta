@@ -76,7 +76,7 @@ public class Configuracio implements Constants {
     }
 
     public static boolean isCAIB() {
-        return Boolean.getBoolean(getProperty(CARPETA_PROPERTY_BASE + "iscaib"));
+        return Boolean.parseBoolean(getProperty(CARPETA_PROPERTY_BASE + "iscaib"));
     }
 
     public static String getAppUrl() {
