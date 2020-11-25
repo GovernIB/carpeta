@@ -72,7 +72,7 @@
                                 <label class="ponerMovil" data-toggle="tooltip" data-placement="top" title="${entitat.value}">
                                         ${entitat.key}
                                 </label>
-                                <a href="<c:url value="/entitat/${entitat.key}"/>"><p class="quitarMovil">${entitat.value}</p></a>
+                                <a href="<c:url value="/e/${entitat.key}"/>"><p class="quitarMovil">${entitat.value}</p></a>
                             </td>
                         </tr>
                     </c:forEach>

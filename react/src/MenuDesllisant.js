@@ -60,7 +60,7 @@ class MenuDesllisant extends Component {
 		var autenticat = this.props.autenticat;
 		var urlBase = window.location.href;
 		var defaultEntityCode = sessionStorage.getItem("defaultEntityCode");
-		var numEntitats = sessionStorage.getItem("numEntitats");
+		// var numEntitats = sessionStorage.getItem("numEntitats");
 
 		var boto_ca;
 		if (i18n.language === 'ca') {
@@ -159,11 +159,11 @@ class MenuDesllisant extends Component {
 			sortir = '';
 		}
 
-		if(defaultEntityCode === "" && numEntitats > 1){
-			canviarEntitat = <li><a href="/carpetafront/entitat" className="imc-marc-ico imc--registres" title={t('menuEntitat')}><span>{t('menuEntitat')}</span></a></li>;
-		} else{
-			canviarEntitat = "";
-		}
+		// if(defaultEntityCode === "" && numEntitats > 1){
+		// 	canviarEntitat = <li><a href="/carpetafront/entitat" className="imc-marc-ico imc--registres" title={t('menuEntitat')}><span>{t('menuEntitat')}</span></a></li>;
+		// } else{
+		// 	canviarEntitat = "";
+		// }
 
 		return (
 			<div className="imc-marc" id="imc-marc" tabIndex="-1" aria-hidden="true">
@@ -192,7 +192,7 @@ class MenuDesllisant extends Component {
 						{plugReactWarning}
 						{plugReactError}
 						{sortir}
-						{canviarEntitat}
+						{/*{canviarEntitat}*/}
 					</ul>
 				</div>
 			</div>

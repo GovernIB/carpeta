@@ -54,7 +54,7 @@
 			  sessionStorage.setItem('autenticat', '0');
 			  sessionStorage.setItem('entitat', '${entitat}');
 			  sessionStorage.setItem('defaultEntityCode', '${defaultEntityCode}');
-			  sessionStorage.setItem('numEntitats', '${numEntitats}');
+			  <%--sessionStorage.setItem('numEntitats', '${numEntitats}');--%>
 			  var aut = sessionStorage.getItem('autenticat');
 			  newMenuDesllisant('menuDesllisant', aut);
 			  newPeu('peu', aut);
