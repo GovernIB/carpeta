@@ -4,4 +4,9 @@
     Permet introduïr configuracions relacionades amb el desplegament.
     Com ara ignorar mòduls del servidor si el nostre EAR conté versions més recents.
     -->
+	<deployment>
+        <dependencies>
+            <module name="org.hibernate" />
+        </dependencies>
+    </deployment>
 </jboss-deployment-structure>

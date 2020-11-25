@@ -11,6 +11,7 @@ public interface Constants {
 
     String CARPETA_PROPERTY_BASE = "es.caib.carpeta.";
     String CARPETA_PROPERTY_LOGINIB = CARPETA_PROPERTY_BASE + "loginib.";
+    String CARPETA_PROPERTY_HIBERNATE = CARPETA_PROPERTY_BASE + "hibernate.";
 
     /* -------------- ROLS REALS--------------*/
     String CAR_SUPER = "CAR_SUPER";
