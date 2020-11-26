@@ -12,13 +12,13 @@ INSERT INTO car_traduccio VALUES (26);
 INSERT INTO car_traduccio VALUES (36);
 
 
-INSERT INTO car_traducciomap(idiomaid, nom, suportat, ordre) VALUES (26, 'en', 'Sistra v1 & v2');
-INSERT INTO car_traducciomap VALUES (26, 'es', 'Sistra v1 & v2');
-INSERT INTO car_traducciomap VALUES (26, 'ca', 'Sistra v1 & v2');
+INSERT INTO car_traducciomap(traducciomapid, valor, idiomaid) VALUES (26, 'en', 'Sistra v1 and v2');
+INSERT INTO car_traducciomap(traducciomapid, valor, idiomaid) VALUES (26, 'es', 'Sistra v1 y v2');
+INSERT INTO car_traducciomap(traducciomapid, valor, idiomaid) VALUES (26, 'ca', 'Sistra v1 i v2');
 
-INSERT INTO car_traducciomap VALUES (36, 'en', 'Description Sistra v1 & v2');
-INSERT INTO car_traducciomap VALUES (36, 'es', 'Descripción Sistra v1 & v2');
-INSERT INTO car_traducciomap VALUES (36, 'ca', 'Descripció Sistra v1 & v2');
+INSERT INTO car_traducciomap(traducciomapid, valor, idiomaid) VALUES (36, 'en', 'Description Sistra v1 and v2');
+INSERT INTO car_traducciomap(traducciomapid, valor, idiomaid) VALUES (36, 'es', 'Descripción Sistra v1 y v2');
+INSERT INTO car_traducciomap(traducciomapid, valor, idiomaid) VALUES (36, 'ca', 'Descripció Sistra v1 i v2');
 
 
 INSERT INTO car_plugin(

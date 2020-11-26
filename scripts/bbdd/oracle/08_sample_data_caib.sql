@@ -21,7 +21,7 @@ INSERT INTO car_fitxer(fitxerid, descripcio, mime, nom, tamany) VALUES (107, NUL
 INSERT INTO car_entitat(entitatid, nomid, codidir3, activa, colormenu, versio, commit, 
             fitxercss, context, codi, logocapbackid, logopeubackid, logolateralfrontid, 
             iconid, suportweb, suportemail, suporttelefon, entitatdescfront, 
-            webentitat, pluginloginid) VALUES (100, 111, 'A04003003', 1, '32814B', '1.1.1', NULL, NULL, NULL, 'caib', 104, 105, 106, 107, 'http://www.caib.es/sites/suportinformatic/es/inicio-5586/?campa=yes', 'suport@caib.es', '971177070', '<p><strong>© Govern Illes Balears</strong></p><p><a href="http://www.caib.es/govern/organigrama/area.do?coduo=2390499&amp;lang=ca">Direcció General de Comunicació</a><a href="http://www.caib.es/govern/organigrama/planol.do?coduo=2390499&amp;lang=ca">: Passeig de Sagrera, 2 - 07012 Palma</a></p><p></p>Telèfon 971177166 - Fax 971176348<p></p>', 'https://www.caib.es', NULL);
+            webentitat, pluginloginid) VALUES (100, 111, 'A04003003', 1, '32814B', '1.1.1', NULL, NULL, NULL, 'caib', 104, 105, 106, 107, 'http://www.caib.es/sites/suportinformatic/es/inicio-5586/?campa=yes', 'suport@caib.es', '971177070', '<p><strong>© Govern Illes Balears</strong></p><p><a href="http://www.caib.es/govern/organigrama/area.do?coduo=2390499' || chr(38) || 'amp;lang=ca">Direcció General de Comunicació</a><a href="http://www.caib.es/govern/organigrama/planol.do?coduo=2390499' || chr(38) || 'amp;lang=ca">: Passeig de Sagrera, 2 - 07012 Palma</a></p><p></p>Telèfon 971177166 - Fax 971176348<p></p>', 'https://www.caib.es', NULL);
 
 
 
