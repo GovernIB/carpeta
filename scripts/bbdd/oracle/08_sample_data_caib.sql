@@ -1,5 +1,5 @@
 
--- Afegir mÃ©s dades a la taula d'Entitat #147
+-- Afegir més dades a la taula d'Entitat #147
 
 
 INSERT INTO car_traduccio VALUES (111);
@@ -159,7 +159,7 @@ INSERT INTO car_traduccio VALUES (253);
 INSERT INTO car_traduccio VALUES (254);
 
 INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (253, 'en', 'Legal Warning');
-INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (253, 'ca', 'AvÃ­s Legal');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (253, 'ca', 'Avís Legal');
 INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (253, 'es', 'Aviso Legal');
 INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (254, 'en', 'http://www.caib.es/govern/external/infoLegal.do?lang=es');
 INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (254, 'ca', 'http://www.caib.es/govern/external/infoLegal.do?lang=ca');

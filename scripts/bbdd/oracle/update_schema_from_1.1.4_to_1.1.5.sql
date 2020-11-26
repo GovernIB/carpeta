@@ -1,4 +1,4 @@
--- 02/11/2020 RevisiÃ³ i adaptaciÃ³ de l'estructura de dades per soportar la funcionalitat d'Estadistiques #211
+-- 02/11/2020 Revisió i adaptació de l'estructura de dades per soportar la funcionalitat d'Estadistiques #211
 ALTER TABLE car_estadistica DROP COLUMN accesid;
 ALTER TABLE car_estadistica DROP COLUMN element;
 ALTER TABLE car_estadistica MODIFY entitatid NULL;
@@ -8,14 +8,14 @@ ALTER TABLE car_estadistica ADD pluginid number(19,0);
 
 
 
---10/11/2020 RevisiÃ³ i adaptaciÃ³ de l'estructura de dades per soportar la funcionalitat d'Auditories #216
+--10/11/2020 Revisió i adaptació de l'estructura de dades per soportar la funcionalitat d'Auditories #216
 ALTER TABLE car_auditoria DROP COLUMN element;
 ALTER TABLE car_estadistica RENAME COLUMN accio TO tipus;
 ALTER TABLE car_auditoria ADD ticketloginib varchar2(256 char);
 ALTER TABLE car_auditoria ADD pluginid number(19,0);
 
 
---10/11/2020 GestiÃ³ de les Auditories al backoffice #204 Canviat nom de la columna
+--10/11/2020 Gestió de les Auditories al backoffice #204 Canviat nom de la columna
 ALTER TABLE car_auditoria RENAME COLUMN ticketloginib  TO usuariclave;
 
 
