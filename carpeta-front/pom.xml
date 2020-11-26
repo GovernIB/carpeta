@@ -4,7 +4,7 @@
     <parent>
         <artifactId>carpeta</artifactId>
         <groupId>es.caib.carpeta</groupId>
-        <version>1.1.5</version>
+        <version>1.1.6</version>
     </parent>
 
     <artifactId>carpeta-front</artifactId>
@@ -29,26 +29,26 @@
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-commons</artifactId>
-            <version>1.1.5</version>
+            <version>1.1.6</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-persistence</artifactId>
-            <version>1.1.5</version>
+            <version>1.1.6</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-ejb</artifactId>
-            <version>1.1.5</version>
+            <version>1.1.6</version>
             <scope>provided</scope>
         </dependency>
        
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-logic</artifactId>
-            <version>1.1.5</version>
+            <version>1.1.6</version>
             <scope>provided</scope>
         </dependency>
 
