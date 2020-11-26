@@ -1,4 +1,4 @@
-﻿
+
 -- Afegir més dades a la taula d'Entitat #147
 
 

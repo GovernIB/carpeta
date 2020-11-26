@@ -22,8 +22,8 @@ INSERT INTO car_traducciomap(traducciomapid, valor, idiomaid) VALUES (36, 'ca', 
 
 
 INSERT INTO car_plugin(
-            nomid, descripcioid, classe, tipus, propietats, actiu)
-    VALUES (26, 36, 'org.fundaciobit.pluginsib.carpetafront.sistra.SistraCarpetaFrontPlugin', 1, '# Common
+           pluginid, nomid, descripcioid, classe, tipus, propietats, actiu)
+    VALUES (1, 26, 36, 'org.fundaciobit.pluginsib.carpetafront.sistra.SistraCarpetaFrontPlugin', 1, '# Common
 es.caib.carpeta.pluginsib.carpetafront.sistra.development=true
 
 # Sistra 1
@@ -53,8 +53,8 @@ INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (56, 'ca', 
 
 
 INSERT INTO car_plugin(
-            nomid, descripcioid, classe, tipus, propietats, actiu)
-    VALUES (46, 56, 'org.fundaciobit.pluginsib.carpetafront.regweb3.Regweb3CarpetaFrontPlugin', 1, '# Common
+            pluginid, nomid, descripcioid, classe, tipus, propietats, actiu)
+    VALUES (2, 46, 56, 'org.fundaciobit.pluginsib.carpetafront.regweb3.Regweb3CarpetaFrontPlugin', 1, '# Common
 es.caib.carpeta.pluginsib.carpetafront.regweb3.development=true
 
 # Regweb3   
