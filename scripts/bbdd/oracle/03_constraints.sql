@@ -43,11 +43,6 @@
        references car_entitat;
 
     alter table car_auditoria 
-       add constraint car_audit_entitat_ent_fk 
-       foreign key (entitatid) 
-       references car_entitat;
-
-    alter table car_auditoria 
        add constraint car_audit_usuari_usu_fk 
        foreign key (usuariid) 
        references car_usuari;
@@ -120,26 +115,6 @@
     alter table car_entitat 
        add constraint car_entitat_plugin_login_fk 
        foreign key (pluginloginid) 
-       references car_plugin;
-
-    alter table car_estadistica 
-       add constraint car_estadis_acces_ac_fk 
-       foreign key (accesid) 
-       references car_acces;
-
-    alter table car_estadistica 
-       add constraint car_estadis_entitat_ent_fk 
-       foreign key (entitatid) 
-       references car_entitat;
-
-    alter table car_log 
-       add constraint car_log_entitat_ent_fk 
-       foreign key (entitatid) 
-       references car_entitat;
-
-    alter table car_log 
-       add constraint car_log_plugin_plu_fk 
-       foreign key (pluginid) 
        references car_plugin;
 
     alter table car_plugin 

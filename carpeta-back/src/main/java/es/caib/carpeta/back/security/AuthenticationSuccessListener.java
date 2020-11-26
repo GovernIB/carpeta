@@ -551,7 +551,6 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
         SecurityContextHolder.getContext().setAuthentication(loginInfo.generateToken());
 
         try {
-
             // ESTADISTICA
             List<EstadisticaJPA> estadisticas = estadisticaEjb.findEstadistica(TIPUS_ESTAD_ENTRADA_BACK, null,
                     new Date(), null);

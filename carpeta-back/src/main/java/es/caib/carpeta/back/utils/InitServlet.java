@@ -47,7 +47,7 @@ public class InitServlet extends HttpServlet {
     try {
       String className = Configuracio.getFileSystemManager();
       if(className != null) {
-        Class c = Class.forName(className.trim());
+        Class<?> c = Class.forName(className.trim());
         FileSystemManager.setFileSystemManager((IFileSystemManager) c.getConstructor().newInstance());
       }else{
         log.error("Error: no s'ha especificat cap classe: " + className);

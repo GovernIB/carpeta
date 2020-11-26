@@ -15,10 +15,11 @@
 
     create table car_auditoria (
        auditoriaid number(19,0) not null,
-        accio number(10,0) not null,
         dataaudit timestamp not null,
-        element varchar2(255 char),
         entitatid number(19,0),
+        pluginid number(19,0),
+        tipus number(10,0) not null,
+        usuariclave varchar2(256 char),
         usuariid number(19,0)
     );
 
@@ -67,11 +68,11 @@
 
     create table car_estadistica (
        estadisticaid number(19,0) not null,
-        accesid number(19,0),
-        accio number(10,0) not null,
+        comptador number(10,0) not null,
         dataestadistica timestamp not null,
-        element varchar2(255 char),
-        entitatid number(19,0) not null
+        entitatid number(19,0),
+        pluginid number(19,0),
+        tipus number(10,0) not null
     );
 
     create table car_fitxer (
@@ -93,7 +94,7 @@
        logid number(19,0) not null,
         datainici timestamp not null,
         descripcio varchar2(2000 char) not null,
-        entitatid number(19,0),
+        entitatcodi varchar2(9 char),
         error varchar2(2000 char),
         estat number(10,0) not null,
         excepcio clob,
