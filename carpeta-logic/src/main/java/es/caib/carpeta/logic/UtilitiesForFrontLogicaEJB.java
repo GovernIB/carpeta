@@ -2,6 +2,7 @@ package es.caib.carpeta.logic;
 
 import es.caib.carpeta.jpa.AvisJPA;
 import es.caib.carpeta.jpa.EntitatJPA;
+import es.caib.carpeta.jpa.PluginEntitatJPA;
 import es.caib.carpeta.jpa.PluginJPA;
 import es.caib.carpeta.logic.utils.PluginInfo;
 import es.caib.carpeta.model.entity.*;
@@ -38,8 +39,8 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
     @EJB(mappedName = PluginDeCarpetaFrontLogicaLocal.JNDI_NAME)
     protected PluginDeCarpetaFrontLogicaLocal pluginCarpetaFrontEjb;
 
-    @EJB(mappedName = es.caib.carpeta.ejb.PluginEntitatLocal.JNDI_NAME)
-    protected es.caib.carpeta.ejb.PluginEntitatLocal pluginEntitatEjb;
+    @EJB(mappedName = PluginEntitatLogicaLocal.JNDI_NAME)
+    protected PluginEntitatLogicaLocal pluginEntitatLogicaEjb;
 
     @EJB(mappedName = es.caib.carpeta.ejb.EnllazLocal.JNDI_NAME)
     protected es.caib.carpeta.ejb.EnllazLocal enllazEjb;
@@ -102,33 +103,33 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
     @Override
     public List<PluginInfo> getFrontPlugins(String codiEntitat, String language) throws I18NException {
 
-        // XYZ ZZZ TODO Millorar amb una subquery
-        List<Long> pluginsEntitat = pluginEntitatEjb.executeQuery(PluginEntitatFields.PLUGINID,
-                new PluginEntitatQueryPath().ENTITAT().CODI().equal(codiEntitat));
+        List<Long> pluginsEntitat = pluginEntitatLogicaEjb.getPluginsEntitat(codiEntitat, true);
 
         List<Plugin> plugins = pluginCarpetaFrontEjb.getAllPlugins(PluginFields.PLUGINID.in(pluginsEntitat));
 
         List<PluginInfo> pluginsInfo = new ArrayList<PluginInfo>(plugins.size());
 
         for (Plugin plugin : plugins) {
-            PluginJPA p = (PluginJPA) plugin;
+            if(plugin.isActiu()) {
+                PluginJPA p = (PluginJPA) plugin;
 
-            ICarpetaFrontPlugin cfp = pluginCarpetaFrontEjb.getInstanceByPluginID(p.getPluginID());
+                ICarpetaFrontPlugin cfp = pluginCarpetaFrontEjb.getInstanceByPluginID(p.getPluginID());
 
-            List<AvisJPA> avisos = avisEjb.findActiveByPluginID(p.getPluginID());
+                List<AvisJPA> avisos = avisEjb.findActiveByPluginID(p.getPluginID());
 
-            // XYZ ZZZ TODO Ara hi pot haver més d'un avís actiu al mateix temps, només es mostra el de major gravetat
-            Long gravetatAvis = (long) 0;
-            String missatgeAvis = "";
-            if (avisos.size() > 0){
-                gravetatAvis = (long) avisos.get(0).getGravetat();
-                missatgeAvis = avisos.get(0).getDescripcio().getTraduccio(language).getValor();
+                // XYZ ZZZ TODO Ara hi pot haver més d'un avís actiu al mateix temps, només es mostra el de major gravetat
+                Long gravetatAvis = (long) 0;
+                String missatgeAvis = "";
+                if (avisos.size() > 0) {
+                    gravetatAvis = (long) avisos.get(0).getGravetat();
+                    missatgeAvis = avisos.get(0).getDescripcio().getTraduccio(language).getValor();
+                }
+
+                pluginsInfo.add(new PluginInfo(String.valueOf(plugin.getPluginID()),
+                        p.getNom().getTraduccio(language).getValor(),
+                        p.getDescripcio().getTraduccio(language).getValor(),
+                        String.valueOf(cfp.isReactComponent()), gravetatAvis, missatgeAvis));
             }
-
-            pluginsInfo.add(new PluginInfo(String.valueOf(plugin.getPluginID()),
-                    p.getNom().getTraduccio(language).getValor(),
-                    p.getDescripcio().getTraduccio(language).getValor(),
-                    String.valueOf(cfp.isReactComponent()),gravetatAvis,missatgeAvis));
         }
 
         return pluginsInfo;

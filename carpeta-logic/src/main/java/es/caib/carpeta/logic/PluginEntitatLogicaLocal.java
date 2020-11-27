@@ -22,5 +22,7 @@ public interface PluginEntitatLogicaLocal extends PluginEntitatLocal  {
 
 	public List<PluginEntitatJPA> findAllByEntitatId(@NotNull long codiEntitat) throws I18NException;
 
+	public List<Long> getPluginsEntitat(String codiEntitat, boolean actiu) throws I18NException;
+
 }
 

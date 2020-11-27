@@ -200,7 +200,7 @@ public class LoginController {
         if (session != null) {
             session.invalidate();
         }
-        return "redirect:/entitat/"+codiEntitat;
+        return "redirect:/e/"+codiEntitat;
 
     }
 

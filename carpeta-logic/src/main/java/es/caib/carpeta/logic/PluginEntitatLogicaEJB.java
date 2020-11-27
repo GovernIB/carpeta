@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.security.PermitAll;
 
 import javax.ejb.Stateless;
+import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -36,6 +37,19 @@ public class PluginEntitatLogicaEJB extends PluginEntitatEJB implements PluginEn
 
 		return list2;
 
+	}
+
+	/** Cerca plugins actius d'una entitat **/
+	@Override
+	public List<Long> getPluginsEntitat(String codiEntitat, boolean actiu) throws I18NException {
+
+		TypedQuery<Long> query = getEntityManager().createQuery(
+				"select a.pluginID from PluginEntitatJPA a "
+						+ "where a.entitat.codi = :codiEntitat and a.actiu = :actiu",Long.class);
+		query.setParameter("codiEntitat", codiEntitat);
+		query.setParameter("actiu", actiu);
+
+		return query.getResultList();
 	}
 
 }
