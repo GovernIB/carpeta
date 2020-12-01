@@ -56,7 +56,9 @@ public class UsuariPersonaCommonController extends UsuariController {
             usuariForm.addReadOnlyField(NIF);
         }
 
-        usuariForm.addReadOnlyField(EMAIL);
+        if (usuariForm.getUsuari().getEmail() != null) {
+            usuariForm.addReadOnlyField(EMAIL);
+        }
         usuariForm.addReadOnlyField(USERNAME);
         usuariForm.addReadOnlyField(DARRERAENTITAT);
 
