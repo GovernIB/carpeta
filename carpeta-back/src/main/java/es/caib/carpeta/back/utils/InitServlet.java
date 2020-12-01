@@ -2,7 +2,7 @@ package es.caib.carpeta.back.utils;
 
 import es.caib.carpeta.hibernate.HibernateFileUtil;
 import es.caib.carpeta.logic.utils.I18NLogicUtils;
-import es.caib.carpeta.utils.Configuracio;
+import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.utils.Constants;
 import es.caib.carpeta.utils.Version;
 import org.apache.log4j.Logger;

@@ -15,7 +15,7 @@ public class LogicUtils {
 	protected static Logger log = Logger.getLogger(LogicUtils.class);
 
 	public static String getVersio() {
-		return StaticVersion.VERSION + (es.caib.carpeta.utils.Configuracio.isCAIB() ? "-caib" : "");
+		return StaticVersion.VERSION + (es.caib.carpeta.commons.utils.Configuracio.isCAIB() ? "-caib" : "");
 	}
 
 

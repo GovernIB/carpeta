@@ -22,7 +22,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
-import es.caib.carpeta.utils.Configuracio;
+import es.caib.carpeta.commons.utils.Configuracio;
 
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 

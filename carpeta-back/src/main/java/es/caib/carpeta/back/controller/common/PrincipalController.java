@@ -1,7 +1,7 @@
 package es.caib.carpeta.back.controller.common;
 
 import es.caib.carpeta.back.security.LoginInfo;
-import es.caib.carpeta.utils.Configuracio;
+import es.caib.carpeta.commons.utils.Configuracio;
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.springframework.stereotype.Controller;

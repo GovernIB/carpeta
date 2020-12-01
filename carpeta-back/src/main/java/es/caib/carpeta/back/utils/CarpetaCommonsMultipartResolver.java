@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import es.caib.carpeta.utils.Configuracio;
+import es.caib.carpeta.commons.utils.Configuracio;
 
 /**
  * 
