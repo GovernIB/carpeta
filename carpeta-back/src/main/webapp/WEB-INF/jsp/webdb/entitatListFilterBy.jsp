@@ -221,6 +221,45 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.SUPORTFAQ)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="entitat.suportFAQ" var="suportFAQ" />
+              <fmt:message key="genapp.form.searchby" var="cercapersuportFAQ" >                
+                 <fmt:param value="${suportFAQ}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${suportFAQ}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapersuportFAQ}" path="suportFAQ" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.SUPORTQSSI)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="entitat.suportqssi" var="suportqssi" />
+              <fmt:message key="genapp.form.searchby" var="cercapersuportqssi" >                
+                 <fmt:param value="${suportqssi}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${suportqssi}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapersuportqssi}" path="suportqssi" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.SUPORTAUTENTICACIO)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="entitat.suportautenticacio" var="suportautenticacio" />
+              <fmt:message key="genapp.form.searchby" var="cercapersuportautenticacio" >                
+                 <fmt:param value="${suportautenticacio}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${suportautenticacio}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapersuportautenticacio}" path="suportautenticacio" />
+            </div>
+
+
+        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.PLUGINLOGINID)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
@@ -234,6 +273,24 @@
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
               <form:input cssClass="input-append input-small search-query" path="pluginLoginIDFins" />
+
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.LOGINTEXTID)}">
+            <%-- FILTRE NUMERO --%>      
+            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+              <span class="add-on"><fmt:message key="entitat.loginTextID" />:</span>
+
+              <span class="add-on"><fmt:message key="genapp.from" /></span>
+              
+              <form:input cssClass="input-append input-small" path="loginTextIDDesde" />
+
+
+              <span class="add-on"><fmt:message key="genapp.to" /></span>
+
+              <form:input cssClass="input-append input-small search-query" path="loginTextIDFins" />
 
             </div>
 

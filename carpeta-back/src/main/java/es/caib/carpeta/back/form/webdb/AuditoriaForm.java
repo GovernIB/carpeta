@@ -20,7 +20,7 @@ public class AuditoriaForm extends CarpetaBaseForm {
     super(__toClone);
       this.auditoria = __toClone.auditoria;
     this.listOfValuesForTipus = __toClone.listOfValuesForTipus;
-    this.listOfUsuariForUsuariID = __toClone.listOfUsuariForUsuariID;
+    this.listOfValuesForUsername = __toClone.listOfValuesForUsername;
     this.listOfValuesForEntitatID = __toClone.listOfValuesForEntitatID;
     this.listOfValuesForPluginID = __toClone.listOfValuesForPluginID;
   }
@@ -50,14 +50,14 @@ public class AuditoriaForm extends CarpetaBaseForm {
 
 
 
-  private List<StringKeyValue> listOfUsuariForUsuariID;
+  private List<StringKeyValue> listOfValuesForUsername;
 
-  public List<StringKeyValue> getListOfUsuariForUsuariID() {
-    return this.listOfUsuariForUsuariID;
+  public List<StringKeyValue> getListOfValuesForUsername() {
+    return this.listOfValuesForUsername;
   }
 
-  public void setListOfUsuariForUsuariID(List<StringKeyValue> listOfUsuariForUsuariID) {
-    this.listOfUsuariForUsuariID = listOfUsuariForUsuariID;
+  public void setListOfValuesForUsername(List<StringKeyValue> listOfValuesForUsername) {
+    this.listOfValuesForUsername = listOfValuesForUsername;
   }
 
 

@@ -75,8 +75,24 @@ public class EntitatQueryPath extends org.fundaciobit.genapp.common.query.QueryP
     return new StringField(getQueryPath(), EntitatFields.SUPORTEMAIL);
   }
 
+  public StringField SUPORTFAQ() {
+    return new StringField(getQueryPath(), EntitatFields.SUPORTFAQ);
+  }
+
+  public StringField SUPORTQSSI() {
+    return new StringField(getQueryPath(), EntitatFields.SUPORTQSSI);
+  }
+
+  public StringField SUPORTAUTENTICACIO() {
+    return new StringField(getQueryPath(), EntitatFields.SUPORTAUTENTICACIO);
+  }
+
   public LongField PLUGINLOGINID() {
     return new LongField(getQueryPath(), EntitatFields.PLUGINLOGINID);
+  }
+
+  public LongField LOGINTEXTID() {
+    return new LongField(getQueryPath(), EntitatFields.LOGINTEXTID);
   }
 
   public LongField FITXERCSSID() {
@@ -242,6 +258,14 @@ public class EntitatQueryPath extends org.fundaciobit.genapp.common.query.QueryP
     return new PluginQueryPath(new QueryPath() {
       public String getQueryPath() {
           return EntitatQueryPath.this.getQueryPath() + "plugin" + ".";
+      }
+    });
+  }
+
+  public TraduccioQueryPath LOGINTEXT() {
+    return new TraduccioQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return EntitatQueryPath.this.getQueryPath() + "loginText" + ".";
       }
     });
   }

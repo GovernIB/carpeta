@@ -111,7 +111,8 @@ public class PropietatGlobalSuperAdminController extends PropietatGlobalControll
         PropietatGlobalJPA propietatGlobalJPA = super.create(request, propietatGlobal);
 
         try{
-            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PROPGLOB,null,LoginInfo.getInstance().getUsuariPersona().getUsuariID(),"",null);
+            LoginInfo loginInfo = LoginInfo.getInstance();
+            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PROPGLOB,null,loginInfo.getUsuariPersona().getUsername(),null,null);
         }catch(I18NException e){
 
             String msg = "Error creant auditoria "+ "("+  e.getMessage() + ")";

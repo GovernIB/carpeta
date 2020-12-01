@@ -104,9 +104,9 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
         PluginEntitatJPA pluginEntitatJPA =super.create(request,pluginEntitat);
 
         try{
-            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PLUGIN,LoginInfo.getInstance().getEntitatID(), LoginInfo.getInstance().getUsuariPersona().getUsuariID(),"",pluginEntitatJPA.getPluginID());
+            LoginInfo loginInfo = LoginInfo.getInstance();
+            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PLUGIN,loginInfo.getEntitatID(),loginInfo.getUsuariPersona().getUsername(), null,pluginEntitatJPA.getPluginID());
         }catch(I18NException e){
-
             String msg = "Error creant auditoria "+ "("+  e.getMessage() + ")";
             log.error(msg, e);
         }

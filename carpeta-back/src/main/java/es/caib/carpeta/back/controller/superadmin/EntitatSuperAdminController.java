@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import es.caib.carpeta.back.controller.webdb.EntitatController;
 import es.caib.carpeta.back.form.webdb.EntitatFilterForm;
 import es.caib.carpeta.back.form.webdb.EntitatForm;
+import es.caib.carpeta.jpa.EntitatJPA;
 import es.caib.carpeta.logic.EntitatLogicaLocal;
 import es.caib.carpeta.model.entity.Entitat;
 import es.caib.carpeta.model.fields.EntitatFields;
@@ -68,6 +69,23 @@ public class EntitatSuperAdminController extends EntitatController {
         return entitatFilterForm;
 
     }
+    
+    @Override
+    public EntitatForm getEntitatForm(EntitatJPA _jpa,
+            boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
+         EntitatForm entitatForm = super.getEntitatForm(_jpa, __isView, request, mav);
+         
+         
+         entitatForm.addHiddenField(PLUGINLOGINID);
+         entitatForm.addHiddenField(LOGINTEXTID);
+         entitatForm.addHiddenField(CONTEXT);
+         entitatForm.addHiddenField(COMMIT);
+         
+         
+         return entitatForm;
+       }
+    
+    
     
     @Override
     public void delete(HttpServletRequest request, Entitat entitat) throws Exception,I18NException {

@@ -63,6 +63,7 @@ public class EntitatWebValidator extends AbstractWebValidator<EntitatForm, Entit
 
 java.util.List<Field<?>> _ignoreFields = new java.util.ArrayList<Field<?>>();
 _ignoreFields.add(NOMID);
+_ignoreFields.add(LOGINTEXTID);
     WebValidationResult<EntitatForm> wvr;
     wvr = new WebValidationResult<EntitatForm>(errors, _ignoreFields);
 
@@ -116,6 +117,46 @@ _ignoreFields.add(NOMID);
           }
       } else {
         errors.rejectValue("entitat.nom", "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(NOMID.fullName)}, null);
+      }
+    }
+    {
+      // IF CAMP ES NOT NULL verificar que totes les traduccions son not null
+      es.caib.carpeta.jpa.TraduccioJPA tradJPA = __jpa.getLoginText();
+      if (tradJPA != null) {
+        // TODO ERROR
+        java.util.Map<String,es.caib.carpeta.jpa.TraduccioMapJPA> _trad = tradJPA.getTraduccions();
+        int countNull= 0;
+        int countNotNull = 0;
+        for (String _idioma : _trad.keySet()) {
+          es.caib.carpeta.jpa.TraduccioMapJPA _map = _trad.get(_idioma);
+          if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
+            countNull++;
+          } else {
+            countNotNull++;
+          }
+        }
+
+        if (countNull == _trad.size()) {
+          // OK Tot esta buit ==> passam el camp a NULL
+          __jpa.setLoginTextID(null);
+          __jpa.setLoginText(null);
+        } else {
+          if (countNotNull  == _trad.size()) {
+            // OK Tot esta ple
+          } else {
+            for (String _idioma : _trad.keySet()) {
+              es.caib.carpeta.jpa.TraduccioMapJPA _map = _trad.get(_idioma);
+              if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
+                errors.rejectValue("entitat.loginText", "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(LOGINTEXTID.fullName)}, null);
+                errors.rejectValue("entitat.loginText.traduccions["+ _idioma +"].valor",
+                  "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(LOGINTEXTID.fullName)}, null);
+              }
+            }
+          }
+        }
+      } else {
+          __jpa.setLoginTextID(null);
+          __jpa.setLoginText(null);
       }
     }
 

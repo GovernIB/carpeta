@@ -4,6 +4,7 @@ import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.GroupByItem;
+import org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 
 import java.util.ArrayList;
@@ -23,24 +25,30 @@ import es.caib.carpeta.back.form.webdb.*;
 
 import es.caib.carpeta.back.controller.webdb.AuditoriaController;
 import es.caib.carpeta.commons.utils.Constants;
+import es.caib.carpeta.logic.UsuariLogicaLocal;
 import es.caib.carpeta.model.entity.Auditoria;
-import es.caib.carpeta.model.fields.*;
+import es.caib.carpeta.model.fields.AuditoriaFields;
+import es.caib.carpeta.model.fields.EntitatFields;
+import es.caib.carpeta.model.fields.PluginFields;
+import es.caib.carpeta.model.fields.UsuariFields;
 
 /**
  * Created by Fundació BIT.
  *
- * @author mgonzalez
- * Date: 10/11/2020
+ * @author mgonzalez Date: 10/11/2020
  */
 @Controller
 @RequestMapping(value = "/superadmin/auditoria")
 @SessionAttributes(types = { AuditoriaForm.class, AuditoriaFilterForm.class })
 public class AuditoriaSuperAdminController extends AuditoriaController {
 
+    @EJB(mappedName = UsuariLogicaLocal.JNDI_NAME)
+    protected UsuariLogicaLocal usuariPersonaLogicaEjb;
+
     // References
     @Autowired
     protected PluginRefList pluginRefList;
-    
+
     @Autowired
     protected EntitatRefList entitatRefList;
 
@@ -59,26 +67,27 @@ public class AuditoriaSuperAdminController extends AuditoriaController {
         return "AuditoriaSuperAdmin_FilterForm";
     }
 
-
     @Override
     public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
         return null;
     }
 
-
     @Override
-    public AuditoriaFilterForm getAuditoriaFilterForm(Integer pagina, ModelAndView mav,
-                                                      HttpServletRequest request) throws I18NException {
-        AuditoriaFilterForm auditoriaFilterForm= super.getAuditoriaFilterForm(pagina, mav, request);
+    public AuditoriaFilterForm getAuditoriaFilterForm(Integer pagina, ModelAndView mav, HttpServletRequest request)
+            throws I18NException {
+        AuditoriaFilterForm auditoriaFilterForm = super.getAuditoriaFilterForm(pagina, mav, request);
 
-        if(auditoriaFilterForm.isNou()) {
+        if (auditoriaFilterForm.isNou()) {
             auditoriaFilterForm.addHiddenField(AUDITORIAID);
             auditoriaFilterForm.setAddButtonVisible(false);
             auditoriaFilterForm.setDeleteSelectedButtonVisible(false);
             auditoriaFilterForm.setDeleteButtonVisible(false);
             auditoriaFilterForm.setEditButtonVisible(false);
-            auditoriaFilterForm.addGroupByField(TIPUS);
-            auditoriaFilterForm.addGroupByField(ENTITATID);
+
+            /*
+             * auditoriaFilterForm.addGroupByField(TIPUS);
+             * auditoriaFilterForm.addGroupByField(ENTITATID);
+             */
 
             auditoriaFilterForm.setOrderBy(AuditoriaFields.DATAAUDIT.javaName);
             auditoriaFilterForm.setOrderAsc(false);
@@ -86,11 +95,9 @@ public class AuditoriaSuperAdminController extends AuditoriaController {
         return auditoriaFilterForm;
     }
 
-
-
     @Override
-    public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
-                                                         ModelAndView mav, Where where)  throws I18NException {
+    public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request, ModelAndView mav, Where where)
+            throws I18NException {
         List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
 
         for (int i = 0; i < Constants.TIPUS_AUDITORIA_ALL.length; i++) {
@@ -101,51 +108,124 @@ public class AuditoriaSuperAdminController extends AuditoriaController {
     }
 
     @Override
-    public List<StringKeyValue> getReferenceListForPluginID(HttpServletRequest request,
-                                                            ModelAndView mav, Where where)  throws I18NException {
-        return pluginRefList.getReferenceList(PluginFields.PLUGINID, where );
-    }
-    
-    @Override
-    public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
-    		ModelAndView mav, AuditoriaForm auditoriaForm, Where where)  throws I18NException {
-
-    	List<StringKeyValue> entitats = entitatRefList.getReferenceList(EntitatFields.ENTITATID, where);
-
-    	List<String> entitatIdKeys = new ArrayList<>();
-    	for(StringKeyValue skv : entitats) {
-    		entitatIdKeys.add(skv.getKey());
-    	}
-    	if(!entitatIdKeys.contains(auditoriaForm.getAuditoria().getEntitatID().toString())) {
-    		entitats.add(new StringKeyValue(auditoriaForm.getAuditoria().getEntitatID().toString(),  I18NUtils.tradueix("entitat.esborrada")));
-    	}
-    	return entitats;
+    public List<StringKeyValue> getReferenceListForPluginID(HttpServletRequest request, ModelAndView mav, Where where)
+            throws I18NException {
+        return pluginRefList.getReferenceList(PluginFields.PLUGINID, where);
     }
 
     @Override
-    public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
-    		ModelAndView mav, AuditoriaFilterForm auditoriaFilterForm,
-    		List<Auditoria> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request, ModelAndView mav,
+            AuditoriaForm auditoriaForm, Where where) throws I18NException {
 
-    	List<StringKeyValue> entitats = entitatRefList.getReferenceList(EntitatFields.ENTITATID, where);
+        List<StringKeyValue> entitats = entitatRefList.getReferenceList(EntitatFields.ENTITATID, where);
 
-    	List<String> entitatIdKeys = new ArrayList<>();
-    	for(StringKeyValue skv : entitats) {
-    		entitatIdKeys.add(skv.getKey());
-    	}
-    	for(Auditoria auditoria : list) {
-    		if(auditoria.getEntitatID() != null) {
-    			if(!entitatIdKeys.contains(auditoria.getEntitatID().toString())) {
-    				entitats.add(new StringKeyValue(auditoria.getEntitatID().toString(), I18NUtils.tradueix("entitat.esborrada")));
-    			}
-    		}
-    	}
-    	return entitats;
+        List<String> entitatIdKeys = new ArrayList<>();
+        for (StringKeyValue skv : entitats) {
+            entitatIdKeys.add(skv.getKey());
+        }
+        if (!entitatIdKeys.contains(auditoriaForm.getAuditoria().getEntitatID().toString())) {
+            entitats.add(new StringKeyValue(auditoriaForm.getAuditoria().getEntitatID().toString(),
+                    I18NUtils.tradueix("entitat.esborrada")));
+        }
+        return entitats;
     }
 
     @Override
-    public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
-    		ModelAndView mav, Where where)  throws I18NException {
-    	return entitatRefList.getReferenceList(EntitatFields.ENTITATID, where );
+    public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request, ModelAndView mav,
+            AuditoriaFilterForm auditoriaFilterForm, List<Auditoria> list, Map<Field<?>, GroupByItem> _groupByItemsMap,
+            Where where) throws I18NException {
+
+        List<StringKeyValue> entitats = entitatRefList.getReferenceList(EntitatFields.ENTITATID, where);
+
+        List<String> entitatIdKeys = new ArrayList<>();
+        for (StringKeyValue skv : entitats) {
+            entitatIdKeys.add(skv.getKey());
+        }
+        for (Auditoria auditoria : list) {
+            if (auditoria.getEntitatID() != null) {
+                if (!entitatIdKeys.contains(auditoria.getEntitatID().toString())) {
+                    entitats.add(new StringKeyValue(auditoria.getEntitatID().toString(),
+                            I18NUtils.tradueix("entitat.esborrada")));
+                }
+            }
+        }
+        return entitats;
     }
+
+    @Override
+    public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request, ModelAndView mav, Where where)
+            throws I18NException {
+        return entitatRefList.getReferenceList(EntitatFields.ENTITATID, where);
+    }
+
+    /**
+     * Convertim l'username en Nom i Llinatges
+     */
+    public List<StringKeyValue> getReferenceListForUsername(HttpServletRequest request, ModelAndView mav,
+            AuditoriaForm auditoriaForm, Where where) throws I18NException {
+        if (auditoriaForm.isHiddenField(USERNAME)) {
+            return EMPTY_STRINGKEYVALUE_LIST;
+        }
+
+        String username = auditoriaForm.getAuditoria().getUsername();
+
+        SelectMultipleStringKeyValue select = new SelectMultipleStringKeyValue(UsuariFields.USERNAME.select,
+                UsuariFields.NOM.select, UsuariFields.LLINATGE1.select);
+
+        StringKeyValue skv = usuariPersonaLogicaEjb.executeQueryOne(select, UsuariFields.USERNAME.equal(username));
+
+        if (skv == null) {
+            skv = new StringKeyValue(username, username);
+        }
+
+        List<StringKeyValue> list = new ArrayList<StringKeyValue>();
+        list.add(skv);
+
+        return list;
+
+    }
+
+    @Override
+    public List<StringKeyValue> getReferenceListForUsername(HttpServletRequest request, ModelAndView mav,
+            AuditoriaFilterForm auditoriaFilterForm, List<Auditoria> list, Map<Field<?>, GroupByItem> _groupByItemsMap,
+            Where where) throws I18NException {
+        if (auditoriaFilterForm.isHiddenField(USERNAME) && !auditoriaFilterForm.isGroupByField(USERNAME)) {
+            return EMPTY_STRINGKEYVALUE_LIST;
+        }
+
+        List<String> usernames = new ArrayList<String>();
+
+        for (Auditoria au : list) {
+            usernames.add(au.getUsername());
+        }
+
+        SelectMultipleStringKeyValue select = new SelectMultipleStringKeyValue(UsuariFields.USERNAME.select,
+                UsuariFields.NOM.select, UsuariFields.LLINATGE1.select);
+
+        List<StringKeyValue> skvs = usuariPersonaLogicaEjb.executeQuery(select, UsuariFields.USERNAME.in(usernames));
+
+        return skvs;
+
+    }
+
+    @Override
+    public boolean isActiveFormNew() {
+        return false;
+    }
+
+    @Override
+    public boolean isActiveFormEdit() {
+        return false;
+    }
+
+    @Override
+    public boolean isActiveDelete() {
+        return false;
+    }
+
+    @Override
+    public boolean isActiveFormView() {
+        return false;
+    }
+
 }

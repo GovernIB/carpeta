@@ -570,7 +570,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
             // AUDITORIA
             if (loginInfo.getUsuariPersona() != null) {
-              auditoriaEjb.crearAuditoria(TIPUS_AUDIT_ENTRADA_BACK, null, loginInfo.getUsuariPersona().getUsuariID(), "",
+              auditoriaEjb.crearAuditoria(TIPUS_AUDIT_ENTRADA_BACK, loginInfo.getEntitatID(), loginInfo.getUsuariPersona().getUsername(), null,
                     null);
             }
         } catch (I18NException ie) {

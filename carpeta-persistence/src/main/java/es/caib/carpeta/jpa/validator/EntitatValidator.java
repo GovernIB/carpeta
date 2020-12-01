@@ -150,6 +150,30 @@ public class EntitatValidator<I extends Entitat>
       }
     }
 
+    if (__vr.getFieldErrorCount(SUPORTFAQ) == 0) {
+      java.lang.String __suportfaq = __target__.getSuportFAQ();
+      if (__suportfaq!= null && __suportfaq.length() > 255) {
+        __vr.rejectValue(SUPORTFAQ, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SUPORTFAQ)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(SUPORTQSSI) == 0) {
+      java.lang.String __suportqssi = __target__.getSuportqssi();
+      if (__suportqssi!= null && __suportqssi.length() > 255) {
+        __vr.rejectValue(SUPORTQSSI, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SUPORTQSSI)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(SUPORTAUTENTICACIO) == 0) {
+      java.lang.String __suportautenticacio = __target__.getSuportautenticacio();
+      if (__suportautenticacio!= null && __suportautenticacio.length() > 255) {
+        __vr.rejectValue(SUPORTAUTENTICACIO, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(SUPORTAUTENTICACIO)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+
     if (__vr.getFieldErrorCount(CONTEXT) == 0) {
       java.lang.String __context = __target__.getContext();
       if (__context!= null && __context.length() > 255) {
@@ -236,6 +260,20 @@ public class EntitatValidator<I extends Entitat>
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("plugin.plugin"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("plugin.pluginID"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__pluginloginid)));
+        }
+      }
+    }
+
+    if (__vr.getFieldErrorCount(LOGINTEXTID) == 0) {
+      java.lang.Long __logintextid = __target__.getLoginTextID();
+      if (__logintextid != null ) {
+        Long __count_ = null;
+        try { __count_ = __traduccioManager.count(TraduccioFields.TRADUCCIOID.equal(__logintextid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ == 0) {        
+          __vr.rejectValue(LOGINTEXTID, "error.notfound",
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccio"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccioID"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__logintextid)));
         }
       }
     }

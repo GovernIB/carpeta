@@ -50,8 +50,20 @@ public interface Entitat extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getSuportEmail();
 	public void setSuportEmail(java.lang.String _suportEmail_);
 
+	public java.lang.String getSuportFAQ();
+	public void setSuportFAQ(java.lang.String _suportFAQ_);
+
+	public java.lang.String getSuportqssi();
+	public void setSuportqssi(java.lang.String _suportqssi_);
+
+	public java.lang.String getSuportautenticacio();
+	public void setSuportautenticacio(java.lang.String _suportautenticacio_);
+
 	public java.lang.Long getPluginLoginID();
 	public void setPluginLoginID(java.lang.Long _pluginLoginID_);
+
+	public java.lang.Long getLoginTextID();
+	public void setLoginTextID(java.lang.Long _loginTextID_);
 
 	public java.lang.Long getFitxerCssID();
 	public void setFitxerCssID(java.lang.Long _fitxerCssID_);

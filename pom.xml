@@ -6,7 +6,7 @@
     <version>1.1.6</version>
     <packaging>pom</packaging>
     <name>Carpeta</name>
-    <description>carpeta Java EE 8 i JBOSS 7.2</description>
+    <description>Carpeta Java EE 8 i JBOSS 7.2</description>
     <!-- Referència al sistema de control de versions, ja sigui GIT, SVN, CVS... -->
     <!-- permetrà al plugin buildnumber-maven-plugin agafar la revisió/versió    -->
     <scm>

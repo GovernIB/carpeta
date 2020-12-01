@@ -12,6 +12,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import javax.ejb.Local;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 
@@ -45,5 +46,7 @@ public interface UtilitiesForFrontLogicaLocal {
     public String getTexteInformatiuEntitat(String codiEntitat) throws I18NException;
 
     public List<AvisJPA> getAvisosByType(String codiEntitat, int avisType) throws I18NException;
+    
+    public Map<String, String> getSuportEntitat(String codiEntitat, String lang) throws I18NException;
 
 }

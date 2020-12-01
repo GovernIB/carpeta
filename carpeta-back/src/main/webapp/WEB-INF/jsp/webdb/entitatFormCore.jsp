@@ -460,6 +460,60 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.SUPORTFAQ)}">
+        <tr id="entitat_suportFAQ_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.SUPORTFAQ])?'entitat.suportFAQ':__theForm.labels[EntitatFields.SUPORTFAQ]}" />
+              <c:if test="${not empty __theForm.help[EntitatFields.SUPORTFAQ]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.SUPORTFAQ]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="entitat.suportFAQ" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTFAQ)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTFAQ)? ' uneditable-input' : ''}"  maxlength="255" path="entitat.suportFAQ"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.SUPORTQSSI)}">
+        <tr id="entitat_suportqssi_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.SUPORTQSSI])?'entitat.suportqssi':__theForm.labels[EntitatFields.SUPORTQSSI]}" />
+              <c:if test="${not empty __theForm.help[EntitatFields.SUPORTQSSI]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.SUPORTQSSI]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="entitat.suportqssi" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTQSSI)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTQSSI)? ' uneditable-input' : ''}"  maxlength="255" path="entitat.suportqssi"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.SUPORTAUTENTICACIO)}">
+        <tr id="entitat_suportautenticacio_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.SUPORTAUTENTICACIO])?'entitat.suportautenticacio':__theForm.labels[EntitatFields.SUPORTAUTENTICACIO]}" />
+              <c:if test="${not empty __theForm.help[EntitatFields.SUPORTAUTENTICACIO]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.SUPORTAUTENTICACIO]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="entitat.suportautenticacio" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTAUTENTICACIO)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTAUTENTICACIO)? ' uneditable-input' : ''}"  maxlength="255" path="entitat.suportautenticacio"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.PLUGINLOGINID)}">
         <tr id="entitat_pluginLoginID_rowid">
           <td>
@@ -485,6 +539,41 @@
             </c:forEach>
           </form:select>
           </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.LOGINTEXTID)}">
+        <tr id="entitat_loginTextID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.LOGINTEXTID])?'entitat.loginTextID':__theForm.labels[EntitatFields.LOGINTEXTID]}" />
+              <c:if test="${not empty __theForm.help[EntitatFields.LOGINTEXTID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.LOGINTEXTID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+       <form:errors path="entitat.loginText" cssClass="errorField alert alert-danger" />
+       <div class="row-fluid  col-md-6">
+         <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
+             <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
+            <li class="nav-item ">
+                 <a class="nav-link ${(counter.index == 0)? 'active':''}" href="#${counter.index}_tab_loginText_${idioma.idiomaID}" data-toggle="tab">${idioma.nom}</a>
+            </li>
+          </c:forEach>
+           
+         </ul>
+         <div class="tab-content well well-white" style="padding:8px;margin:0px;">
+           <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
+           <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_loginText_${idioma.idiomaID}">
+               <form:errors path="entitat.loginText.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
+               <form:input path="entitat.loginText.traduccions['${idioma.idiomaID}'].valor" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGINTEXTID)? ' uneditable-input' : ''}" maxlength="4000" />
+           </div>
+           </c:forEach>
+         </div>
+       </div>
+
            </td>
         </tr>
         </c:if>

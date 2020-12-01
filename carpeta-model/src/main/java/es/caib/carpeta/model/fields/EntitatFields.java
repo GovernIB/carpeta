@@ -28,7 +28,11 @@ public interface EntitatFields extends java.io.Serializable {
 	 public static final StringField SUPORTWEB = new StringField(_TABLE_MODEL, "suportWeb", "suportweb");
 	 public static final StringField SUPORTTELEFON = new StringField(_TABLE_MODEL, "suportTelefon", "suporttelefon");
 	 public static final StringField SUPORTEMAIL = new StringField(_TABLE_MODEL, "suportEmail", "suportemail");
+	 public static final StringField SUPORTFAQ = new StringField(_TABLE_MODEL, "suportFAQ", "suportfaq");
+	 public static final StringField SUPORTQSSI = new StringField(_TABLE_MODEL, "suportqssi", "suportqssi");
+	 public static final StringField SUPORTAUTENTICACIO = new StringField(_TABLE_MODEL, "suportautenticacio", "suportautenticacio");
 	 public static final LongField PLUGINLOGINID = new LongField(_TABLE_MODEL, "pluginLoginID", "pluginloginid");
+	 public static final LongField LOGINTEXTID = new LongField(_TABLE_MODEL, "loginTextID", "logintextid");
 	 public static final LongField FITXERCSSID = new LongField(_TABLE_MODEL, "fitxerCssID", "fitxercss");
 	 public static final StringField CONTEXT = new StringField(_TABLE_MODEL, "context", "context");
 	 public static final StringField COMMIT = new StringField(_TABLE_MODEL, "commit", "commit");
@@ -51,7 +55,11 @@ public interface EntitatFields extends java.io.Serializable {
     SUPORTWEB,
     SUPORTTELEFON,
     SUPORTEMAIL,
+    SUPORTFAQ,
+    SUPORTQSSI,
+    SUPORTAUTENTICACIO,
     PLUGINLOGINID,
+    LOGINTEXTID,
     FITXERCSSID,
     CONTEXT,
     COMMIT

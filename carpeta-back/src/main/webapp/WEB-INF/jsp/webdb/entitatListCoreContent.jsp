@@ -121,11 +121,34 @@
           ${entitat.suportEmail}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.SUPORTFAQ)}">
+          <td>
+          ${entitat.suportFAQ}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.SUPORTQSSI)}">
+          <td>
+          ${entitat.suportqssi}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.SUPORTAUTENTICACIO)}">
+          <td>
+          ${entitat.suportautenticacio}
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.PLUGINLOGINID)}">
           <td>
           <c:set var="tmp">${entitat.pluginLoginID}</c:set>
           <c:if test="${not empty tmp}">
           ${__theFilterForm.mapOfPluginForPluginLoginID[tmp]}
+          </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.LOGINTEXTID)}">
+          <td>
+          <c:set var="tmp">${entitat.loginTextID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${entitat.loginText.traduccions[lang].valor}
           </c:if>
           </td>
         </c:if>

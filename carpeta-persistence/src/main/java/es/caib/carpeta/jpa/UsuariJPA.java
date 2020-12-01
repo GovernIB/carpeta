@@ -188,19 +188,6 @@ private static final long serialVersionUID = -1105822054L;
     return __result;
   }
 
-// EXP  Field:usuariid | Table: car_auditoria | Type: 0  
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuari")
-	private Set<AuditoriaJPA> auditorias = new HashSet<AuditoriaJPA>(0);
-	public  Set<AuditoriaJPA> getAuditorias() {
-    return this.auditorias;
-  }
-
-	public void setAuditorias(Set<AuditoriaJPA> auditorias) {
-	  this.auditorias = auditorias;
-	}
-
-
 // EXP  Field:usuariid | Table: car_usuarientitat | Type: 0  
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuari")
@@ -291,10 +278,6 @@ private static final long serialVersionUID = -1105822054L;
     if(!"UsuariEntitatJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.usuariEntitats) || org.hibernate.Hibernate.isInitialized(__jpa.getUsuariEntitats())) ) {
       __tmp.setUsuariEntitats(UsuariEntitatJPA.copyJPA(__jpa.getUsuariEntitats(), __alreadyCopied,"UsuariJPA"));
-    }
-    if(!"AuditoriaJPA".equals(origenJPA) 
-       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.auditorias) || org.hibernate.Hibernate.isInitialized(__jpa.getAuditorias())) ) {
-      __tmp.setAuditorias(AuditoriaJPA.copyJPA(__jpa.getAuditorias(), __alreadyCopied,"UsuariJPA"));
     }
     // Copia de beans complexes (IMP)
     if(!"IdiomaJPA".equals(origenJPA) && 

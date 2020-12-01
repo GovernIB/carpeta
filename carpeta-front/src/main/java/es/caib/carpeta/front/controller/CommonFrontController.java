@@ -25,7 +25,7 @@ public abstract class CommonFrontController {
     protected final Log log = LogFactory.getLog(getClass());
 
     @EJB(mappedName = UtilitiesForFrontLogicaLocal.JNDI_NAME)
-    UtilitiesForFrontLogicaLocal utilsEjb;
+    protected UtilitiesForFrontLogicaLocal utilsEjb;
     
     
    

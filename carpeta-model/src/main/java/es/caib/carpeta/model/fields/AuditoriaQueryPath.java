@@ -23,8 +23,8 @@ public class AuditoriaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new IntegerField(getQueryPath(), AuditoriaFields.TIPUS);
   }
 
-  public LongField USUARIID() {
-    return new LongField(getQueryPath(), AuditoriaFields.USUARIID);
+  public StringField USERNAME() {
+    return new StringField(getQueryPath(), AuditoriaFields.USERNAME);
   }
 
   public StringField USUARICLAVE() {
@@ -47,13 +47,5 @@ public class AuditoriaQueryPath extends org.fundaciobit.genapp.common.query.Quer
         : this.parentQueryPath.getQueryPath());
   }
 
-
-  public UsuariQueryPath USUARI() {
-    return new UsuariQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return AuditoriaQueryPath.this.getQueryPath() + "usuari" + ".";
-      }
-    });
-  }
 
 }

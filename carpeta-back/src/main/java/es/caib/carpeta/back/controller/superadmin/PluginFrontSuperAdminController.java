@@ -148,7 +148,8 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
         PluginJPA pluginJPA = super.create(request, plugin);
 
         try{
-            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PLUGIN,null,LoginInfo.getInstance().getUsuariPersona().getUsuariID(),"",pluginJPA.getPluginID());
+            LoginInfo loginInfo = LoginInfo.getInstance();
+            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PLUGIN,null,loginInfo.getUsuariPersona().getUsername(),null,pluginJPA.getPluginID());
         }catch(I18NException e){
 
             String msg = "Error creant auditoria "+ "("+  e.getMessage() + ")";

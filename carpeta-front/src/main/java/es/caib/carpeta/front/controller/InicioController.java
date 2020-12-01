@@ -1,12 +1,10 @@
 package es.caib.carpeta.front.controller;
 
-import es.caib.carpeta.ejb.EntitatLocal;
 import es.caib.carpeta.ejb.PropietatGlobalLocal;
 import es.caib.carpeta.front.utils.SesionHttp;
 import es.caib.carpeta.logic.EntitatLogicaLocal;
 import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
 import es.caib.carpeta.logic.utils.EjbManager;
-import es.caib.carpeta.model.entity.Entitat;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fundaciobit.genapp.common.StringKeyValue;
@@ -77,7 +75,7 @@ public class InicioController extends CommonFrontController {
 
         try{
 
-            String lang = LocaleContextHolder.getLocale().getLanguage();
+            //String lang = LocaleContextHolder.getLocale().getLanguage();
             sesionHttp.setEntitat(codiEntitat);
 
         } catch (Throwable e) {

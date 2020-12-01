@@ -164,6 +164,39 @@ public class EntitatFilterForm extends CarpetaBaseFilterForm implements EntitatF
   }
 
 
+  private java.lang.String suportFAQ;
+
+  public java.lang.String getSuportFAQ() {
+    return this.suportFAQ;
+  }
+
+  public void setSuportFAQ(java.lang.String suportFAQ) {
+    this.suportFAQ = suportFAQ;
+  }
+
+
+  private java.lang.String suportqssi;
+
+  public java.lang.String getSuportqssi() {
+    return this.suportqssi;
+  }
+
+  public void setSuportqssi(java.lang.String suportqssi) {
+    this.suportqssi = suportqssi;
+  }
+
+
+  private java.lang.String suportautenticacio;
+
+  public java.lang.String getSuportautenticacio() {
+    return this.suportautenticacio;
+  }
+
+  public void setSuportautenticacio(java.lang.String suportautenticacio) {
+    this.suportautenticacio = suportautenticacio;
+  }
+
+
   private java.lang.Long pluginLoginIDDesde;
 
   public java.lang.Long getPluginLoginIDDesde() {
@@ -183,6 +216,28 @@ public class EntitatFilterForm extends CarpetaBaseFilterForm implements EntitatF
 
   public void setPluginLoginIDFins(java.lang.Long pluginLoginIDFins) {
     this.pluginLoginIDFins = pluginLoginIDFins;
+  }
+
+
+  private java.lang.Long loginTextIDDesde;
+
+  public java.lang.Long getLoginTextIDDesde() {
+    return this.loginTextIDDesde;
+  }
+
+  public void setLoginTextIDDesde(java.lang.Long loginTextIDDesde) {
+    this.loginTextIDDesde = loginTextIDDesde;
+  }
+
+
+  private java.lang.Long loginTextIDFins;
+
+  public java.lang.Long getLoginTextIDFins() {
+    return this.loginTextIDFins;
+  }
+
+  public void setLoginTextIDFins(java.lang.Long loginTextIDFins) {
+    this.loginTextIDFins = loginTextIDFins;
   }
 
 
@@ -226,12 +281,18 @@ public class EntitatFilterForm extends CarpetaBaseFilterForm implements EntitatF
     this.suportWeb = __toClone.suportWeb;
     this.suportTelefon = __toClone.suportTelefon;
     this.suportEmail = __toClone.suportEmail;
+    this.suportFAQ = __toClone.suportFAQ;
+    this.suportqssi = __toClone.suportqssi;
+    this.suportautenticacio = __toClone.suportautenticacio;
     this.pluginLoginIDDesde = __toClone.pluginLoginIDDesde;
     this.pluginLoginIDFins = __toClone.pluginLoginIDFins;
+    this.loginTextIDDesde = __toClone.loginTextIDDesde;
+    this.loginTextIDFins = __toClone.loginTextIDFins;
     this.context = __toClone.context;
     this.commit = __toClone.commit;
     this.mapOfTraduccioForNomID = __toClone.mapOfTraduccioForNomID;
     this.mapOfPluginForPluginLoginID = __toClone.mapOfPluginForPluginLoginID;
+    this.mapOfTraduccioForLoginTextID = __toClone.mapOfTraduccioForLoginTextID;
   }
   
   /* ========= UTILS ========== */
@@ -286,6 +347,18 @@ public class EntitatFilterForm extends CarpetaBaseFilterForm implements EntitatF
 
   public void setMapOfPluginForPluginLoginID(Map<String, String> mapOfPluginForPluginLoginID) {
     this.mapOfPluginForPluginLoginID = mapOfPluginForPluginLoginID;
+  }
+
+
+
+  private Map<String, String> mapOfTraduccioForLoginTextID;
+
+  public Map<String, String> getMapOfTraduccioForLoginTextID() {
+    return this.mapOfTraduccioForLoginTextID;
+  }
+
+  public void setMapOfTraduccioForLoginTextID(Map<String, String> mapOfTraduccioForLoginTextID) {
+    this.mapOfTraduccioForLoginTextID = mapOfTraduccioForLoginTextID;
   }
 
 

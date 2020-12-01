@@ -42,6 +42,7 @@ public class EntitatForm extends CarpetaBaseForm {
       this.entitat = __toClone.entitat;
     this.listOfTraduccioForNomID = __toClone.listOfTraduccioForNomID;
     this.listOfPluginForPluginLoginID = __toClone.listOfPluginForPluginLoginID;
+    this.listOfTraduccioForLoginTextID = __toClone.listOfTraduccioForLoginTextID;
   }
   
   public EntitatForm(EntitatJPA entitat, boolean nou) {
@@ -156,6 +157,18 @@ public class EntitatForm extends CarpetaBaseForm {
 
   public void setListOfPluginForPluginLoginID(List<StringKeyValue> listOfPluginForPluginLoginID) {
     this.listOfPluginForPluginLoginID = listOfPluginForPluginLoginID;
+  }
+
+
+
+  private List<StringKeyValue> listOfTraduccioForLoginTextID;
+
+  public List<StringKeyValue> getListOfTraduccioForLoginTextID() {
+    return this.listOfTraduccioForLoginTextID;
+  }
+
+  public void setListOfTraduccioForLoginTextID(List<StringKeyValue> listOfTraduccioForLoginTextID) {
+    this.listOfTraduccioForLoginTextID = listOfTraduccioForLoginTextID;
   }
 
 

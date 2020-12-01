@@ -85,9 +85,25 @@ private static final long serialVersionUID = 489209138L;
 	@Column(name="suportemail",length = 255)
 	java.lang.String suportEmail;
 
+  /** Preguntes Freqüents */
+	@Column(name="suportfaq",length = 255)
+	java.lang.String suportFAQ;
+
+  /**  Queixes i suggeriments  */
+	@Column(name="suportqssi",length = 255)
+	java.lang.String suportqssi;
+
+  /** Suport autenticació Front */
+	@Column(name="suportautenticacio",length = 255)
+	java.lang.String suportautenticacio;
+
 	@Index(name="car_entitat_pluginloginid_fk_i")
 	@Column(name="pluginloginid",length = 19)
 	java.lang.Long pluginLoginID;
+
+	@Index(name="car_entitat_logintextid_fk_i")
+	@Column(name="logintextid",length = 19)
+	java.lang.Long loginTextID;
 
 	@Index(name="car_entitat_fitxercss_fk_i")
 	@Column(name="fitxercss",length = 19)
@@ -106,7 +122,7 @@ private static final long serialVersionUID = 489209138L;
   }
 
   /** Constructor amb tots els camps  */
-  public EntitatJPA(long entitatID , long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.Long pluginLoginID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit) {
+  public EntitatJPA(long entitatID , long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.String suportFAQ , java.lang.String suportqssi , java.lang.String suportautenticacio , java.lang.Long pluginLoginID , java.lang.Long loginTextID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit) {
     this.entitatID=entitatID;
     this.nomID=nomID;
     this.codi=codi;
@@ -123,13 +139,17 @@ private static final long serialVersionUID = 489209138L;
     this.suportWeb=suportWeb;
     this.suportTelefon=suportTelefon;
     this.suportEmail=suportEmail;
+    this.suportFAQ=suportFAQ;
+    this.suportqssi=suportqssi;
+    this.suportautenticacio=suportautenticacio;
     this.pluginLoginID=pluginLoginID;
+    this.loginTextID=loginTextID;
     this.fitxerCssID=fitxerCssID;
     this.context=context;
     this.commit=commit;
 }
   /** Constructor sense valors autoincrementals */
-  public EntitatJPA(long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.Long pluginLoginID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit) {
+  public EntitatJPA(long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.String suportFAQ , java.lang.String suportqssi , java.lang.String suportautenticacio , java.lang.Long pluginLoginID , java.lang.Long loginTextID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit) {
     this.nomID=nomID;
     this.codi=codi;
     this.codiDir3=codiDir3;
@@ -145,7 +165,11 @@ private static final long serialVersionUID = 489209138L;
     this.suportWeb=suportWeb;
     this.suportTelefon=suportTelefon;
     this.suportEmail=suportEmail;
+    this.suportFAQ=suportFAQ;
+    this.suportqssi=suportqssi;
+    this.suportautenticacio=suportautenticacio;
     this.pluginLoginID=pluginLoginID;
+    this.loginTextID=loginTextID;
     this.fitxerCssID=fitxerCssID;
     this.context=context;
     this.commit=commit;
@@ -183,7 +207,11 @@ private static final long serialVersionUID = 489209138L;
     this.setSuportWeb(__bean.getSuportWeb());
     this.setSuportTelefon(__bean.getSuportTelefon());
     this.setSuportEmail(__bean.getSuportEmail());
+    this.setSuportFAQ(__bean.getSuportFAQ());
+    this.setSuportqssi(__bean.getSuportqssi());
+    this.setSuportautenticacio(__bean.getSuportautenticacio());
     this.setPluginLoginID(__bean.getPluginLoginID());
+    this.setLoginTextID(__bean.getLoginTextID());
     this.setFitxerCssID(__bean.getFitxerCssID());
     this.setContext(__bean.getContext());
     this.setCommit(__bean.getCommit());
@@ -311,11 +339,39 @@ private static final long serialVersionUID = 489209138L;
 		this.suportEmail = _suportEmail_;
 	};
 
+	public java.lang.String getSuportFAQ() {
+		return(suportFAQ);
+	};
+	public void setSuportFAQ(java.lang.String _suportFAQ_) {
+		this.suportFAQ = _suportFAQ_;
+	};
+
+	public java.lang.String getSuportqssi() {
+		return(suportqssi);
+	};
+	public void setSuportqssi(java.lang.String _suportqssi_) {
+		this.suportqssi = _suportqssi_;
+	};
+
+	public java.lang.String getSuportautenticacio() {
+		return(suportautenticacio);
+	};
+	public void setSuportautenticacio(java.lang.String _suportautenticacio_) {
+		this.suportautenticacio = _suportautenticacio_;
+	};
+
 	public java.lang.Long getPluginLoginID() {
 		return(pluginLoginID);
 	};
 	public void setPluginLoginID(java.lang.Long _pluginLoginID_) {
 		this.pluginLoginID = _pluginLoginID_;
+	};
+
+	public java.lang.Long getLoginTextID() {
+		return(loginTextID);
+	};
+	public void setLoginTextID(java.lang.Long _loginTextID_) {
+		this.loginTextID = _loginTextID_;
 	};
 
 	public java.lang.Long getFitxerCssID() {
@@ -545,6 +601,31 @@ private static final long serialVersionUID = 489209138L;
     this.plugin = plugin;
   }
 
+// IMP Field:traduccioid | Table: car_traduccio | Type: 1  
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
+	@ForeignKey(name="car_entitat_traduccio_log_fk")
+	@JoinColumn(name = "logintextid", referencedColumnName ="traduccioID", nullable = true, insertable=false, updatable=false)
+	private TraduccioJPA loginText;
+
+	public TraduccioJPA getLoginText() {
+    return this.loginText;
+  }
+
+	public  void setLoginText(TraduccioJPA loginText) {
+    this.loginText = loginText;
+  }
+
+  @javax.xml.bind.annotation.XmlTransient
+  public java.util.Map<String, es.caib.carpeta.jpa.TraduccioMapJPA> getLoginTextTraduccions() {
+    return this.loginText.getTraduccions();
+  }
+
+  public void setLoginTextTraduccions(java.util.Map<String, es.caib.carpeta.jpa.TraduccioMapJPA> __traduccions__) {
+    this.loginText.setTraduccions(__traduccions__);
+  }
+
+
 // IMP Field:fitxerid | Table: car_fitxer | Type: 1  
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -581,7 +662,11 @@ private static final long serialVersionUID = 489209138L;
     __tmp.setSuportWeb(__bean.getSuportWeb());
     __tmp.setSuportTelefon(__bean.getSuportTelefon());
     __tmp.setSuportEmail(__bean.getSuportEmail());
+    __tmp.setSuportFAQ(__bean.getSuportFAQ());
+    __tmp.setSuportqssi(__bean.getSuportqssi());
+    __tmp.setSuportautenticacio(__bean.getSuportautenticacio());
     __tmp.setPluginLoginID(__bean.getPluginLoginID());
+    __tmp.setLoginTextID(__bean.getLoginTextID());
     __tmp.setFitxerCssID(__bean.getFitxerCssID());
     __tmp.setContext(__bean.getContext());
     __tmp.setCommit(__bean.getCommit());
@@ -654,6 +739,10 @@ private static final long serialVersionUID = 489209138L;
       __tmp.setUsuaris(UsuariJPA.copyJPA(__jpa.getUsuaris(), __alreadyCopied,"EntitatJPA"));
     }
     // Copia de beans complexes (IMP)
+    if(!"TraduccioJPA".equals(origenJPA) && 
+       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.loginText) || org.hibernate.Hibernate.isInitialized(__jpa.getLoginText()) ) ) {
+      __tmp.setLoginText(TraduccioJPA.copyJPA(__jpa.getLoginText(), __alreadyCopied,"EntitatJPA"));
+    }
     if(!"TraduccioJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.nom) || org.hibernate.Hibernate.isInitialized(__jpa.getNom()) ) ) {
       __tmp.setNom(TraduccioJPA.copyJPA(__jpa.getNom(), __alreadyCopied,"EntitatJPA"));

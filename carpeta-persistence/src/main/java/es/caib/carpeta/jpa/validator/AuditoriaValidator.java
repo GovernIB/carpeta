@@ -5,7 +5,6 @@ import org.apache.log4j.Logger;
 import es.caib.carpeta.model.entity.Auditoria;
 import org.fundaciobit.genapp.common.query.Field;
 import es.caib.carpeta.model.fields.AuditoriaFields;
-import es.caib.carpeta.model.fields.UsuariFields;
 
 import org.fundaciobit.genapp.common.validation.IValidatorResult;
 
@@ -28,8 +27,7 @@ public class AuditoriaValidator<I extends Auditoria>
 
   /** Constructor */
   public void validate(IValidatorResult<I> __vr,I __target__, boolean __isNou__
-    ,es.caib.carpeta.model.dao.IAuditoriaManager __auditoriaManager
-    ,es.caib.carpeta.model.dao.IUsuariManager __usuariManager) {
+    ,es.caib.carpeta.model.dao.IAuditoriaManager __auditoriaManager) {
 
     // Valors Not Null
     __vr.rejectIfEmptyOrWhitespace(__target__,DATAAUDIT, 
@@ -41,6 +39,25 @@ public class AuditoriaValidator<I extends Auditoria>
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TIPUS)));
 
     // Check size
+    if (__vr.getFieldErrorCount(USERNAME) == 0) {
+      java.lang.String __username = __target__.getUsername();
+      if (__username!= null && __username.length() > 255) {
+        __vr.rejectValue(USERNAME, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USERNAME)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(USERNAME) == 0) {
+      String val = __target__.getUsername();
+      if (val != null && val.trim().length() != 0) {
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile("(1|2|3|4)");
+        if (!p.matcher(val).matches()) {
+          __vr.rejectValue(USERNAME, "genapp.validation.malformed",
+             new org.fundaciobit.genapp.common.i18n.I18NArgumentString(val), new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USERNAME)));
+        }
+      }
+    }
+
     if (__vr.getFieldErrorCount(USUARICLAVE) == 0) {
       java.lang.String __usuariclave = __target__.getUsuariClave();
       if (__usuariclave!= null && __usuariclave.length() > 256) {
@@ -65,20 +82,6 @@ public class AuditoriaValidator<I extends Auditoria>
     }
 
     // Fields with References to Other tables 
-    if (__vr.getFieldErrorCount(USUARIID) == 0) {
-      java.lang.Long __usuariid = __target__.getUsuariID();
-      if (__usuariid != null ) {
-        Long __count_ = null;
-        try { __count_ = __usuariManager.count(UsuariFields.USUARIID.equal(__usuariid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
-        if (__count_ == null || __count_ == 0) {        
-          __vr.rejectValue(USUARIID, "error.notfound",
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("usuari.usuari"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("usuari.usuariID"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__usuariid)));
-        }
-      }
-    }
-
   } // Final de mètode
   public String get(Field<?> field) {
     return field.fullName;

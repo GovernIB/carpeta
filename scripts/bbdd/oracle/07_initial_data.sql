@@ -58,10 +58,10 @@ INSERT INTO car_plugin(
 es.caib.carpeta.pluginsib.carpetafront.regweb3.development=true
 
 # Regweb3   
-es.caib.carpeta.pluginsib.carpetafront.regweb3.url=[=SP[""]]
-es.caib.carpeta.pluginsib.carpetafront.regweb3.user=[=SP[""]]
-es.caib.carpeta.pluginsib.carpetafront.regweb3.pass=[=SP[""]]
-es.caib.carpeta.pluginsib.carpetafront.regweb3.entidad=[=SP[""]]', 1);
+es.caib.carpeta.pluginsib.carpetafront.regweb3.url=[=SP["es.caib.carpeta.pluginsib.carpetafront.regweb3.url"]]
+es.caib.carpeta.pluginsib.carpetafront.regweb3.user=[=SP["es.caib.carpeta.pluginsib.carpetafront.regweb3.user"]]
+es.caib.carpeta.pluginsib.carpetafront.regweb3.pass=[=SP["es.caib.carpeta.pluginsib.carpetafront.regweb3.pass"]]
+es.caib.carpeta.pluginsib.carpetafront.regweb3.entidad=A04003003', 1);
 
 
 

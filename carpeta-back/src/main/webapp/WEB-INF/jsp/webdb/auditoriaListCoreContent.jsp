@@ -40,11 +40,11 @@
           </c:if>
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.USUARIID)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.USERNAME)}">
           <td>
-          <c:set var="tmp">${auditoria.usuariID}</c:set>
+          <c:set var="tmp">${auditoria.username}</c:set>
           <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfUsuariForUsuariID[tmp]}
+          ${__theFilterForm.mapOfValuesForUsername[tmp]}
           </c:if>
           </td>
         </c:if>

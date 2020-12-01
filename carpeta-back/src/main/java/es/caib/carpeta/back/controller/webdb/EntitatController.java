@@ -215,6 +215,16 @@ public class EntitatController
       };
     }
 
+    // Field loginTextID
+    {
+      _listSKV = getReferenceListForLoginTextID(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfTraduccioForLoginTextID(_tmp);
+      if (filterForm.getGroupByFields().contains(LOGINTEXTID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, LOGINTEXTID, false);
+      };
+    }
+
 
     return groupByItemsMap;
   }
@@ -232,6 +242,7 @@ public class EntitatController
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
     __mapping.put(NOMID, filterForm.getMapOfTraduccioForNomID());
     __mapping.put(PLUGINLOGINID, filterForm.getMapOfPluginForPluginLoginID());
+    __mapping.put(LOGINTEXTID, filterForm.getMapOfTraduccioForLoginTextID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -258,6 +269,15 @@ public class EntitatController
         trad.addTraduccio(idioma.getIdiomaID(), new es.caib.carpeta.jpa.TraduccioMapJPA());
       }
       entitatForm.getEntitat().setNom(trad);
+    }
+
+    
+    if (entitatForm.getEntitat().getLoginText() == null){
+      es.caib.carpeta.jpa.TraduccioJPA trad = new es.caib.carpeta.jpa.TraduccioJPA();
+      for (es.caib.carpeta.model.entity.Idioma idioma : entitatForm.getIdiomesTraduccio()) {
+        trad.addTraduccio(idioma.getIdiomaID(), new es.caib.carpeta.jpa.TraduccioMapJPA());
+      }
+      entitatForm.getEntitat().setLoginText(trad);
     }
 
     mav.addObject("entitatForm" ,entitatForm);
@@ -744,6 +764,32 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForPluginLoginID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return pluginRefList.getReferenceList(PluginFields.PLUGINID, where );
+  }
+
+  public List<StringKeyValue> getReferenceListForLoginTextID(HttpServletRequest request,
+       ModelAndView mav, EntitatFilterForm entitatFilterForm,
+       List<Entitat> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (entitatFilterForm.isHiddenField(LOGINTEXTID)
+      && !entitatFilterForm.isGroupByField(LOGINTEXTID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    if (!_groupByItemsMap.containsKey(LOGINTEXTID)) {
+      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
+      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
+      for (Entitat _item : list) {
+        if(_item.getLoginTextID() == null) { continue; };
+        _pkList.add(_item.getLoginTextID());
+        }
+        _w = TraduccioFields.TRADUCCIOID.in(_pkList);
+      }
+    return getReferenceListForLoginTextID(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForLoginTextID(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    return traduccioRefList.getReferenceList(TraduccioFields.TRADUCCIOID, where );
   }
 
 

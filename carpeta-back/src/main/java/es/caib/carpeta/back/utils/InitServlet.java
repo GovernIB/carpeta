@@ -1,7 +1,7 @@
 package es.caib.carpeta.back.utils;
 
 import es.caib.carpeta.hibernate.HibernateFileUtil;
-import es.caib.carpeta.logic.utils.I18NTranslatorEjb;
+import es.caib.carpeta.logic.utils.I18NLogicUtils;
 import es.caib.carpeta.utils.Configuracio;
 import es.caib.carpeta.utils.Constants;
 import es.caib.carpeta.utils.Version;
@@ -76,7 +76,7 @@ public class InitServlet extends HttpServlet {
     // Sistema de Traduccions LOGIC
     // TODO Moure a logic
     try {
-      Class.forName(I18NTranslatorEjb.class.getName());
+      Class.forName(I18NLogicUtils.class.getName());
     } catch (Throwable th) {
       log.error("Error inicialitzant el sistema de traduccions logic: " + th.getMessage(), th);
     }

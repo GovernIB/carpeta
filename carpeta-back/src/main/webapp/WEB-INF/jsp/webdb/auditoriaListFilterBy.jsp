@@ -132,20 +132,15 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,AuditoriaFields.USUARIID)}">
-            <%-- FILTRE NUMERO --%>      
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="auditoria.usuariID" />:</span>
-
-              <span class="add-on"><fmt:message key="genapp.from" /></span>
-              
-              <form:input cssClass="input-append input-small" path="usuariIDDesde" />
-
-
-              <span class="add-on"><fmt:message key="genapp.to" /></span>
-
-              <form:input cssClass="input-append input-small search-query" path="usuariIDFins" />
-
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,AuditoriaFields.USERNAME)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="auditoria.username" var="username" />
+              <fmt:message key="genapp.form.searchby" var="cercaperusername" >                
+                 <fmt:param value="${username}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${username}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperusername}" path="username" />
             </div>
 
 

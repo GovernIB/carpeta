@@ -2,23 +2,29 @@ package es.caib.carpeta.logic;
 
 import es.caib.carpeta.jpa.AvisJPA;
 import es.caib.carpeta.jpa.EntitatJPA;
-import es.caib.carpeta.jpa.PluginEntitatJPA;
 import es.caib.carpeta.jpa.PluginJPA;
+import es.caib.carpeta.logic.utils.I18NLogicUtils;
 import es.caib.carpeta.logic.utils.PluginInfo;
 import es.caib.carpeta.model.entity.*;
 import es.caib.carpeta.model.fields.*;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.ICarpetaFrontPlugin;
+
+import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.Where;
 
 import javax.annotation.security.PermitAll;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 /**
  * 
@@ -29,6 +35,8 @@ import java.util.Locale;
 @PermitAll
 @Stateless
 public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal {
+    
+    protected Logger log = Logger.getLogger(this.getClass());
 
     @EJB(mappedName = es.caib.carpeta.ejb.EntitatLocal.JNDI_NAME)
     protected es.caib.carpeta.ejb.EntitatLocal entitatEjb;
@@ -152,7 +160,7 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
 
         List<Enllaz> enllazos = enllazEjb.select(Where.AND(eqp.ENTITAT().CODI().equal(codiEntitat),
                 EnllazFields.TIPUS.equal(enllazType)), 
-                new org.fundaciobit.genapp.common.query.OrderBy(EnllazFields.ENLLAZID));
+                new OrderBy(EnllazFields.ENLLAZID));
         return enllazos;
     }
 
@@ -182,5 +190,52 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
        List<AvisJPA> avisos = avisEjb.findActiveAvisos(codiEntitat, avisType);
        return avisos;
     }
+    
+    
+    @Override
+    public Map<String, String> getSuportEntitat(String codiEntitat, String lang) throws I18NException {
+
+        Map<String, String> suport = new HashMap<String, String>();
+
+        Entitat entitat;
+        {
+            List<Entitat> entitats = entitatEjb.select(EntitatFields.CODI.equal(codiEntitat));
+
+            if (entitats == null || entitats.size() == 0) {
+                return suport;
+            }
+            entitat = entitats.get(0);
+        }
+
+        Locale loc = new Locale(lang.toLowerCase());
+
+        String[][] valors = {
+                { I18NLogicUtils.tradueix(loc, "entitat.suportWeb"), entitat.getSuportWeb() },
+                { I18NLogicUtils.tradueix(loc, "entitat.suportTelefon"), entitat.getSuportTelefon() },
+                { I18NLogicUtils.tradueix(loc, "entitat.suportEmail"), entitat.getSuportEmail() },
+                { I18NLogicUtils.tradueix(loc, "entitat.suportFAQ"), entitat.getSuportFAQ() },
+                { I18NLogicUtils.tradueix(loc, "entitat.suportqssi"), entitat.getSuportqssi() },
+                { I18NLogicUtils.tradueix(loc, "entitat.suportautenticacio"), entitat.getSuportautenticacio() } 
+           };
+
+        for (int i = 0; i < valors.length; i++) {
+
+            if (valors[i][1] != null) {
+                suport.put(valors[i][0], valors[i][1]);
+            }
+
+        }
+
+        return suport;
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    
 
 }

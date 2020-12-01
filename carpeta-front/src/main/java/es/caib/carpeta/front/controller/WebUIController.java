@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * Conjunt de cridades REST per obtenir informació per a la presentació de la
@@ -294,7 +295,7 @@ public class WebUIController extends CommonFrontController {
     public void getTextInformatiuEntitat(HttpServletRequest request, HttpServletResponse response) {
 
         try {
-            String lang = LocaleContextHolder.getLocale().getLanguage();
+            //String lang = LocaleContextHolder.getLocale().getLanguage();
             String codiEntitat = sesionHttp.getEntitat();
 
             String texteInformatiu = utilsEjb.getTexteInformatiuEntitat(codiEntitat);
@@ -314,6 +315,32 @@ public class WebUIController extends CommonFrontController {
             processException(e, response);
         }
     }
+    
+    
+    
+    
+    
+    @RequestMapping(value = "/suport", method = RequestMethod.GET)
+    public void getEntitatSuport(HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+            String lang = LocaleContextHolder.getLocale().getLanguage();
+            String codiEntitat = sesionHttp.getEntitat();
+
+            Map<String, String> suport = utilsEjb.getSuportEntitat(codiEntitat, lang);
+
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("text/html");
+            response.getWriter().println(suport);
+            response.flushBuffer();
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
+    }
+    
+
+    
 
     @RequestMapping(value = "/canviarIdioma/{idioma}", method = RequestMethod.GET)
     public void canviarIdiomaServidor(@PathVariable("idioma") String idioma, HttpServletRequest request, HttpServletResponse response) {
@@ -380,7 +407,7 @@ public class WebUIController extends CommonFrontController {
     public void getEntityDefault(HttpServletRequest request, HttpServletResponse response) {
 
         try {
-            String lang = LocaleContextHolder.getLocale().getLanguage();
+            //String lang = LocaleContextHolder.getLocale().getLanguage();
 
             PropietatGlobalLocal propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
             String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);

@@ -60,8 +60,20 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.SUPORTEMAIL)}">
         <th>${car:getSortIcons(__theFilterForm,EntitatFields.SUPORTEMAIL)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.SUPORTFAQ)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.SUPORTFAQ)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.SUPORTQSSI)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.SUPORTQSSI)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.SUPORTAUTENTICACIO)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.SUPORTAUTENTICACIO)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.PLUGINLOGINID)}">
         <th>${car:getSortIcons(__theFilterForm,EntitatFields.PLUGINLOGINID)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.LOGINTEXTID)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.LOGINTEXTID)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.FITXERCSSID)}">
         <th>${car:getSortIcons(__theFilterForm,EntitatFields.FITXERCSSID)}</th>
