@@ -5,7 +5,7 @@
   <%
    LoginInfo.getInstance().setNeedConfigUser(false);
   %>
-  <c:redirect url="/common/usuari/${loginInfo.usuariPersona.usuariID}/edit"/>
+  <c:redirect url="/common/usuarifullview/${loginInfo.usuariPersona.usuariID}/edit"/>
 </c:if>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<c:out value="${pageContext.response.locale.language}"/>"  lang="<c:out value="${pageContext.response.locale.language}"/>">

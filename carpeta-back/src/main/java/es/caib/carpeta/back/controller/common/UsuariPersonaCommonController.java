@@ -33,11 +33,9 @@ import es.caib.carpeta.model.fields.UsuariEntitatFields;
 @RequestMapping(value = "/common/usuari")
 @SessionAttributes(types = { UsuariForm.class, UsuariFilterForm.class })
 public class UsuariPersonaCommonController extends UsuariController {
-    
 
     @EJB(mappedName = es.caib.carpeta.ejb.UsuariEntitatLocal.JNDI_NAME)
     protected es.caib.carpeta.ejb.UsuariEntitatLocal usuariEntitatEjb;
-    
 
     @Override
     public String getTileForm() {
@@ -53,7 +51,7 @@ public class UsuariPersonaCommonController extends UsuariController {
         if (usuariForm.getUsuari().getUsuariID() != LoginInfo.getInstance().getUsuariPersona().getUsuariID()) {
             mav.setStatus(HttpStatus.FORBIDDEN);
         }
-        
+
         if (usuariForm.getUsuari().getNif() != null) {
             usuariForm.addReadOnlyField(NIF);
         }
@@ -61,7 +59,6 @@ public class UsuariPersonaCommonController extends UsuariController {
         usuariForm.addReadOnlyField(EMAIL);
         usuariForm.addReadOnlyField(USERNAME);
         usuariForm.addReadOnlyField(DARRERAENTITAT);
-         
 
         return usuariForm;
 
@@ -87,7 +84,7 @@ public class UsuariPersonaCommonController extends UsuariController {
         return false;
     }
 
-
+    @Override
     public List<StringKeyValue> getReferenceListForDarreraEntitat(HttpServletRequest request, ModelAndView mav,
             UsuariForm usuariForm, Where where) throws I18NException {
 
@@ -98,14 +95,17 @@ public class UsuariPersonaCommonController extends UsuariController {
 
         return entitatRefList.getReferenceList(EntitatFields.ENTITATID, w);
     }
-    
-    
+
+    @Override
     public String getRedirectWhenModified(HttpServletRequest request, UsuariForm usuariForm, Throwable __e) {
         if (__e == null) {
-          return "redirect:/";
+
+            LoginInfo.getInstance().setUsuariPersona(usuariForm.getUsuari());
+
+            return "redirect:/";
         } else {
-          return  getTileForm();
+            return getTileForm();
         }
-      }
+    }
 
 }

@@ -72,6 +72,15 @@
         <put-attribute name="titol" value="usuari.usuari" />
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariForm.jsp" />
     </definition>
+    
+    
+    <definition name="usuariFullViewFormCommon" template="/WEB-INF/jsp/layout/onlycontentlayout.jsp">
+        <put-attribute name="titol" value="usuari.usuari" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariForm.jsp" />
+    </definition>
+    
+    
+    
 
     <!--  ===========  ADMINISTRADOR ENTITAT  ================== -->
         

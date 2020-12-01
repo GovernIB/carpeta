@@ -32,7 +32,7 @@ public class LoginInfo {
 
 	// final UsuariAplicacioJPA usuariAplicacio;
 
-	final UsuariJPA usuariPersona;
+	UsuariJPA usuariPersona;
 
 	final Map<Long, EntitatJPA> entitats;
 
@@ -104,6 +104,10 @@ public class LoginInfo {
 	public UsuariJPA getUsuariPersona() {
 		return usuariPersona;
 	}
+	
+	public void setUsuariPersona(UsuariJPA usr) {
+        this.usuariPersona = usr;
+    }
 
 	public Long getEntitatID() {
 		return entitatIDActual;
