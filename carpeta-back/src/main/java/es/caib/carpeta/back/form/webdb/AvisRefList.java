@@ -13,7 +13,6 @@ import org.fundaciobit.genapp.common.query.Where;
 
 import es.caib.carpeta.ejb.AvisLocal;
 import es.caib.carpeta.ejb.TraduccioLocal;
-
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import es.caib.carpeta.model.fields.AvisFields;
 import org.fundaciobit.genapp.common.web.controller.RefListBase;
