@@ -109,7 +109,11 @@ public class Configuracio implements Constants {
 
     public static File getFilesDirectory() {
         String path = getProperty(CARPETA_PROPERTY_BASE + "filesdirectory");
-        return new File(path);
+        if (path == null || path.trim().length() == 0) {
+            return null;
+        } else {
+          return new File(path);
+        }
     }
 
     public static String getFileSystemManager() {
