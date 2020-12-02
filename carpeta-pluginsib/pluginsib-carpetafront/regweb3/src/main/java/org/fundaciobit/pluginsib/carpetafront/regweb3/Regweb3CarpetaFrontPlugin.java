@@ -1,5 +1,13 @@
 package org.fundaciobit.pluginsib.carpetafront.regweb3;
 
+import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
+
+import org.apache.commons.io.IOUtils;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.BindingProvider;
+
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
@@ -8,16 +16,17 @@ import es.caib.regweb3.ws.api.v3.AsientoRegistralWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWsService;
 import es.caib.regweb3.ws.api.v3.ResultadoBusquedaWs;
-import org.apache.commons.io.IOUtils;
-import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.BindingProvider;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Properties;
+
 
 /**
  * @author anadal
@@ -115,11 +124,6 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     public boolean isDevelopment() {
         return "true".equals(getProperty(REGWEB3_PROPERTY_BASE + "development"));
-    }
-
-    public String getWeb() throws Exception {
-        return getPropertyRequired(REGWEB3_PROPERTY_BASE + "web");
-
     }
 
     public String getEntidad() throws Exception {
@@ -223,7 +227,6 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         map.put("urlDetalle" , urlDetalle);
 
         map.put("registros", registres);
-        map.put("web", getWeb());
 
         String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
 
@@ -379,7 +382,6 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
 
         map.put("registro", registre);
-        map.put("web", getWeb());
 
         String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
 
@@ -401,7 +403,7 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             System.out.println("ar.getResumen() => " + registro.getResumen());
             System.out.println("ar.getFechaRegistro(); => " + registro.getFechaRegistro());
             System.out.println("ar.getUnidadTramitacionDestinoDenominacion() => " + registro.getUnidadTramitacionDestinoDenominacion());
-            System.out.println("ar.getEntidadRegistralOrigenDenominacion() => " + registro.getEntidadRegistralOrigenDenominacion());
+            System.out.println("ar.getEntidadRegistralInicioDenominacion() => " + registro.getEntidadRegistralInicioDenominacion());
             System.out.println("ar.getTipoDocumentacionFisicaCodigo() => " + registro.getTipoDocumentacionFisicaCodigo());
             System.out.println("ar.getIdioma() => " + registro.getIdioma());
 
