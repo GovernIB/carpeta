@@ -123,9 +123,11 @@ public class AuditoriaSuperAdminController extends AuditoriaController {
         for (StringKeyValue skv : entitats) {
             entitatIdKeys.add(skv.getKey());
         }
-        if (!entitatIdKeys.contains(auditoriaForm.getAuditoria().getEntitatID().toString())) {
-            entitats.add(new StringKeyValue(auditoriaForm.getAuditoria().getEntitatID().toString(),
-                    I18NUtils.tradueix("entitat.esborrada")));
+        if (auditoriaForm.getAuditoria().getEntitatID() != null) {
+            if (!entitatIdKeys.contains(auditoriaForm.getAuditoria().getEntitatID().toString())) {
+                entitats.add(new StringKeyValue(auditoriaForm.getAuditoria().getEntitatID().toString(),
+                        I18NUtils.tradueix("entitat.esborrada")));
+            }
         }
         return entitats;
     }
