@@ -49,7 +49,7 @@ public class LogCarpetaLogicaEJB extends LogCarpetaEJB implements LogCarpetaLogi
 
 
     @Override
-    public void crearLog(String descripcio, int estat, int tipus, long temps, Throwable th, String error, String peticio, String entitatCodi, Long pluginID) throws I18NException{
+    public void crearLog(String descripcio, int estat, int tipus, long temps, Throwable th, String error, String peticio, String entitatCodi, Long pluginID) {
 
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw, true);
@@ -61,10 +61,6 @@ public class LogCarpetaLogicaEJB extends LogCarpetaEJB implements LogCarpetaLogi
             }
         }
         String exception = sw.getBuffer().toString();
-
-
-
-
         LogCarpetaJPA logCarpeta = new LogCarpetaJPA();
         logCarpeta.setTipus(tipus);
         logCarpeta.setTemps(temps);
@@ -85,12 +81,6 @@ public class LogCarpetaLogicaEJB extends LogCarpetaEJB implements LogCarpetaLogi
             log.error(" ==============================================" );
             log.error(" TIPUS EXCEPCIO: " + t.getClass());
             log.error(th.getMessage(), t);
-
-            if (th instanceof I18NException) {
-                throw (I18NException)t;
-            } else {
-                throw new I18NException("comodi", t.getMessage());
-            }
 
         }
 

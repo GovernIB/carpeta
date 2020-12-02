@@ -23,5 +23,5 @@ public interface LogCarpetaLogicaLocal extends LogCarpetaLocal {
 
     public List<LogCarpetaJPA> findByEntidadByTipus(@NotNull String entitatCodi, @NotNull Integer tipus)throws I18NException;
 
-    void crearLog(String descripcio, int estat, int tipus, long temps, Throwable th, String error, String peticio, String entitatCodi, Long pluginID) throws I18NException;
+    void crearLog(String descripcio, int estat, int tipus, long temps, Throwable th, String error, String peticio, String entitatCodi, Long pluginID) ;
 }

@@ -2,7 +2,6 @@ package es.caib.carpeta.front.controller;
 
 import com.google.gson.Gson;
 
-import es.caib.carpeta.front.utils.SesionHttp;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import org.apache.commons.logging.Log;
@@ -28,6 +27,7 @@ import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ACCES_PLUGIN;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_ESTAD_ACCES_PLUGIN;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_PLUGIN_FRONT;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
+import es.caib.carpeta.front.utils.SesionHttp;
 import es.caib.carpeta.hibernate.HibernateFileUtil;
 import es.caib.carpeta.jpa.EstadisticaJPA;
 import es.caib.carpeta.logic.AuditoriaLogicaLocal;
@@ -55,7 +55,7 @@ public class PluginFrontController extends CommonFrontController {
     UtilitiesForFrontLogicaLocal utilsEjb;
 
     @EJB(mappedName = LogCarpetaLogicaLocal.JNDI_NAME)
-    protected LogCarpetaLogicaLocal logCarpetaLogicaEjb;
+    protected LogCarpetaLogicaLocal logLogicaEjb;
 
     @EJB(mappedName = EstadisticaLogicaLocal.JNDI_NAME)
     protected EstadisticaLogicaLocal estadisticaLogicaEjb;
@@ -176,12 +176,13 @@ public class PluginFrontController extends CommonFrontController {
 
 
            //Obtenemos plugin para obtener entidadID
-            peticio.append("Usuari").append(administrationID).append(System.getProperty("line.separator"));
-            peticio.append("classe: ").append(getClass().getName()).append(System.getProperty("line.separator"));
+            peticio.append("Usuari").append(administrationID).append("\n");
+            peticio.append("classe: ").append(getClass().getName()).append("\n");
 
             //LOG
           //  XYZ TODO Passar valor a la var PluginText
-            logCarpetaLogicaEjb.crearLog("Executat plugin des del Front per "+ administrationID, ESTAT_LOG_OK,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),"", Long.parseLong(pluginID));
+            // TODO Revisar si aqui hem de guardar l'entitat del plugin(necessitariem obtenir el plugin primer) Comentar amb en Toni Nadal.
+            logLogicaEjb.crearLog("Executat plugin des del Front per "+ administrationID, ESTAT_LOG_OK,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),"", Long.parseLong(pluginID));
 
             //ESTADISTICA
             List<EstadisticaJPA> estadisticas = estadisticaLogicaEjb.findEstadistica(TIPUS_ESTAD_ACCES_PLUGIN,null,new Date(),Long.parseLong(pluginID));

@@ -34,6 +34,7 @@ import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaLocal;
 /**
  * 
  * @author anadal
+ * @author mgonzalez
  *
  */
 @Controller
@@ -68,7 +69,7 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
           PluginFilterForm filterForm) throws Exception, I18NException {
 
        long temps = System.currentTimeMillis();
-       StringBuilder peticio = new StringBuilder();
+
 
        String administrationID= request.getParameter("administrationID");
 
@@ -91,8 +92,9 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
        String view = "testPlugin";
 
 
-       peticio.append("Usuari: ").append(LoginInfo.getInstance().getUsername()).append(System.getProperty("line.separator"));
-       peticio.append("classe: ").append(getClass().getName()).append(System.getProperty("line.separator"));
+       StringBuilder peticio = new StringBuilder();
+       peticio.append("Usuari: ").append(LoginInfo.getInstance().getUsername()).append("\n");
+       peticio.append("classe: ").append(getClass().getName()).append("\n");
 
        //XYZ TODO passar algo al camp PluginText
        logCarpetaLogicaEjb.crearLog("Plugin del Front via test executat per " + LoginInfo.getInstance().getUsername(), ESTAT_LOG_OK,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),LoginInfo.getInstance().getEntitat().getCodi(), pluginID);

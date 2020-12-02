@@ -43,7 +43,7 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
     protected AuditoriaLogicaLocal auditoriaLogicaEjb;
 
     @EJB(mappedName = LogCarpetaLogicaLocal.JNDI_NAME)
-    protected LogCarpetaLogicaLocal logCarpetaLogicaEjb;
+    protected LogCarpetaLogicaLocal logLogicaEjb;
 
     @Override
     public Authentication authenticate(Authentication authentication) {
@@ -59,15 +59,14 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
         UsuarioClave usuarioClave = null;
 
         try {
+            long temps = System.currentTimeMillis();
             usuarioClave = securityService.validarTicketAutentificacion(passwd);
 
-            long temps = System.currentTimeMillis();
+            //LOG
             StringBuilder peticio = new StringBuilder();
-
             peticio.append("Usuari Clave: ").append(usuarioClave.getNif()).append(System.getProperty("line.separator"));
             peticio.append("classe: ").append(getClass().getName()).append(System.getProperty("line.separator"));
-
-            logCarpetaLogicaEjb.crearLog("Autenticació del Front de l'Usuari " + usuarioClave.getNif(), ESTAT_LOG_OK,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),"",null);
+            logLogicaEjb.crearLog("Autenticació del Front de l'Usuari " + usuarioClave.getNif(), ESTAT_LOG_OK,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),"",null);
 
 
             //Estadistica entrada al front autenticada
@@ -83,13 +82,12 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
             //AUDITORIA
             auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ENTRADA_FRONT_AUTENTICAT,null,null,usuarioClave.getNif(),null);
 
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new BadCredentialsException("Imposible autenticar usuario: " + usuario);
         }catch (I18NException ie){
             ie.printStackTrace();
             throw new BadCredentialsException("Imposible crear auditoria: " + usuario);
+        }catch (Exception e) {
+            e.printStackTrace();
+            throw new BadCredentialsException("Imposible autenticar usuario: " + usuario);
         }
 
         UsuarioAutenticado usuarioAutenticado =  new UsuarioAutenticado();

@@ -4,6 +4,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NTranslation;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
+
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
@@ -14,6 +15,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
+import java.util.*;
+
 import es.caib.carpeta.back.preparer.BasePreparer;
 import es.caib.carpeta.back.utils.PluginUserInformationUtils;
 import es.caib.carpeta.commons.utils.Constants;
@@ -22,17 +25,6 @@ import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ENTRADA_BACK;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_ESTAD_ENTRADA_BACK;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_BACK;
-
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
-
 import es.caib.carpeta.ejb.EntitatLocal;
 import es.caib.carpeta.ejb.PropietatGlobalLocal;
 import es.caib.carpeta.jpa.EntitatJPA;
@@ -45,12 +37,13 @@ import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
 import es.caib.carpeta.logic.UsuariEntitatLogicaLocal;
 import es.caib.carpeta.logic.UsuariLogicaLocal;
 import es.caib.carpeta.logic.utils.EjbManager;
-import es.caib.carpeta.model.fields.EntitatFields;
+import es.caib.carpeta.model.fields.*;
 
 
 /**
  *
  * @author anadal(u80067)
+ * @author mgonzalez
  *
  */
 @Component
@@ -82,16 +75,14 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
     @Override
     public synchronized void onApplicationEvent(InteractiveAuthenticationSuccessEvent event) {
 
-        long temps = System.currentTimeMillis();
+        long temps = System.currentTimeMillis(); // Para calcular el tiempo de logs, estadisticas y auditorias
+        StringBuilder peticio = new StringBuilder(); //Guardarem les dades de la petició per als logs
+        String entitatCodi ="";
 
-        StringBuilder peticio = new StringBuilder();
 
-        peticio.append("Usuari: no definit").append(System.getProperty("line.separator"));
-        peticio.append("classe: ").append(getClass().getName()).append(System.getProperty("line.separator"));
-
-        LogCarpetaLogicaLocal logCarpetaEjb;
+        LogCarpetaLogicaLocal logCarpetaLogicaEjb;
         try {
-            logCarpetaEjb = EjbManager.getLogCarpetaLogicaEJB();
+            logCarpetaLogicaEjb = EjbManager.getLogCarpetaLogicaEJB();
 
         } catch (I18NException e) {
             // TODO traduccio
@@ -103,40 +94,39 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
         if (au == null) {
             // TODO traduccio
-            try {
-                logCarpetaEjb.crearLog("Autenticació al back", ESTAT_LOG_ERROR, TIPUS_LOG_AUTENTICACIO_BACK,
+            peticio.append("Usuari: no definit").append("\n");
+            peticio.append("classe: ").append(getClass().getName()).append("\n");
+            logCarpetaLogicaEjb.crearLog("Autenticació al back", ESTAT_LOG_ERROR, TIPUS_LOG_AUTENTICACIO_BACK,
                         System.currentTimeMillis() - temps, null, "NO PUC ACCEDIR A LA INFORMACIO de AUTENTICACIO",
                         peticio.toString(), "", null);
-            } catch (I18NException ie) {
-                throw new LoginException("Error creant el log");
-            }
 
             throw new LoginException("NO PUC ACCEDIR A LA INFORMACIO de AUTENTICACIO");
+
         }
 
         EstadisticaLogicaLocal estadisticaEjb;
         AuditoriaLogicaLocal auditoriaEjb;
 
         try {
-
             estadisticaEjb = EjbManager.getEstadisticaLogicaEJB();
             auditoriaEjb = EjbManager.getAuditoriaLogicaEJB();
         } catch (I18NException e) {
             // TODO traduccio
             throw new LoginException("Error carregant LogCarpetaLogicaEJB " + e.getMessage(), e);
         }
-        try {
-            logCarpetaEjb.crearLog("Iniciam Autenticació al back", ESTAT_LOG_OK, TIPUS_LOG_AUTENTICACIO_BACK,
+
+        //Cream log d'inici d'autenticació al back
+        logCarpetaLogicaEjb.crearLog("Iniciam Autenticació al back", ESTAT_LOG_OK, TIPUS_LOG_AUTENTICACIO_BACK,
                     System.currentTimeMillis() - temps, null, "", peticio.toString(), "", null);
-        } catch (I18NException ie) {
-            throw new LoginException("Error creant el log");
-        }
+
 
         User user = (User) au.getPrincipal();
         String username = user.getUsername();
+
+        //Montam les dades bàsiques de la petició per a la creació dels logs
         peticio = new StringBuilder();
-        peticio.append("Usuari: ").append(username).append(System.getProperty("line.separator"));
-        peticio.append("classe:").append(getClass().getName()).append(System.getProperty("line.separator"));
+        peticio.append("Usuari: ").append(username).append("\n");
+        peticio.append("classe: ").append(getClass().getName()).append("\n");
 
         log.debug(" =================================================================");
         log.info(" ============ Login Usuari: " + username);
@@ -145,18 +135,18 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
             LoginInfo loginInfo = LoginInfo.getInstance();
 
             if (!username.equals(loginInfo.getUsuariPersona().getUsername())) {
-                throw new LoginException("Amb aquest navegador ja s'ha autenticat amb un altre usuari."
-                        + " Tanqui el navegador completament.");
-            }
-
-            try {
-                logCarpetaEjb.crearLog("Autenticació al back de l'usuari: " + username, ESTAT_LOG_ERROR,
+                peticio.append("Usuari: ").append(username).append("\n");
+                entitatCodi = loginInfo.getEntitat()!=null?loginInfo.getEntitat().getCodi():null;
+                logCarpetaLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, ESTAT_LOG_ERROR,
                         TIPUS_LOG_AUTENTICACIO_BACK, System.currentTimeMillis() - temps, null,
                         "Amb aquest navegador ja s'ha autenticat amb un altre usuari. Tanqui el navegador completament.",
-                        peticio.toString(), "", null);
-            } catch (I18NException ie) {
-                throw new LoginException("Error creant el log");
+                        peticio.toString(), entitatCodi, null);
+                throw new LoginException("Amb aquest navegador ja s'ha autenticat amb un altre usuari."
+                        + " Tanqui el navegador completament.");
+
             }
+
+
         } catch (Throwable e) {
             log.debug(" XYZ ZZZ ZZZ S'ha produit un error consultant la informació de login actual: " + e.getMessage());
         }
@@ -262,17 +252,14 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
         
         try {
             usuariPersona = usuariPersonaLogicaEjb.findByUsername(username);
+            entitatCodi = usuariPersona.getEntitat()!=null?usuariPersona.getEntitat().getCodi():null;
         } catch (I18NException e1) {
             String msg = I18NUtils.getMessage(e1);
             log.error("Error llegint si l'usuari es troba a la BBDD: " + msg, e1);
 
-            try {
-                logCarpetaEjb.crearLog("Autenticació al back de l'usuari: " + username, ESTAT_LOG_ERROR,
+            logCarpetaLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, ESTAT_LOG_ERROR,
                         TIPUS_LOG_AUTENTICACIO_BACK, System.currentTimeMillis() - temps, e1,
-                        "Error llegint si l'usuari es troba a la BBDD: " + msg, peticio.toString(), "", null);
-            } catch (I18NException ie) {
-                throw new LoginException("Error creant el log");
-            }
+                        "Error llegint si l'usuari es troba a la BBDD: " + msg, peticio.toString(), entitatCodi, null);
 
             usuariPersona = null;
         }
@@ -344,6 +331,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                             usuariPersona = persona;
 
                         }
+                        entitatCodi = usuariPersona.getEntitat()!=null?usuariPersona.getEntitat().getCodi():null;
                         log.info("necesitaConfigurarUsuari = " + necesitaConfigurar);
                     }
 
@@ -358,15 +346,12 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                         msg = e.getMessage();
                     }
 
-                    try {
-                        logCarpetaEjb.crearLog("Autenticació al back de l'usuari: " + username, ESTAT_LOG_ERROR,
+                    logCarpetaLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, ESTAT_LOG_ERROR,
                                 TIPUS_LOG_AUTENTICACIO_BACK, System.currentTimeMillis() - temps, e,
                                 "Error llegint informacio del plugin de User Information o creant l'usuari a la BBDD: "
                                         + msg,
-                                peticio.toString(), "", null);
-                    } catch (I18NException ie) {
-                        throw new LoginException("Error creant el log");
-                    }
+                                peticio.toString(), entitatCodi, null);
+
 
                     log.error("Error llegint informacio del plugin de User Information o creant l'usuari a la BBDD: "
                             + msg, e);
@@ -382,15 +367,17 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
             try {
                 usuariEntitats = new HashSet<UsuariEntitatJPA>(
                         usuariEntitatLogicaEjb.findAllByUsuariIdWithEntitat(usuariPersona.getUsuariID()));
+                //Obtenim el codi de l'entitat
+                if(usuariEntitats.size()>0){
+                    entitatCodi = usuariEntitats.iterator().next().getEntitat().getCodi();
+                }
             } catch (I18NException e) {
                 log.error(I18NUtils.getMessage(e), e);
-                try {
-                    logCarpetaEjb.crearLog("Autenticació al back de l'usuri " + username, ESTAT_LOG_ERROR,
+
+                logCarpetaLogicaEjb.crearLog("Autenticació al back de l'usuri " + username, ESTAT_LOG_ERROR,
                             TIPUS_LOG_AUTENTICACIO_BACK, System.currentTimeMillis() - temps, e, "", peticio.toString(),
-                            "", null);
-                } catch (I18NException ie) {
-                    throw new LoginException("Error creant el log");
-                }
+                            entitatCodi, null);
+
             }
 
             log.info("Total UsuariEntitats:" + usuariEntitats.size());
@@ -410,13 +397,11 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
             log.error("Authentication Info:\n" + au);
             log.error("");
 
-            try {
-                logCarpetaEjb.crearLog("Autenticació al back de l'usuari: " + username, ESTAT_LOG_ERROR,
+
+            logCarpetaLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, ESTAT_LOG_ERROR,
                         TIPUS_LOG_AUTENTICACIO_BACK, System.currentTimeMillis() - temps, null,
-                        I18NUtils.tradueix(translation), peticio.toString(), "", null);
-            } catch (I18NException ie) {
-                throw new LoginException("Error creant el log");
-            }
+                        "L´usuari "+username+" està assignat a una o varies entitats però no té el rol CAR_ADMIN", peticio.toString(), entitatCodi, null);
+
 
             // Com enviar-ho a la PAGINA WEB
             BasePreparer.loginErrorMessage.put(username, translation);
@@ -502,25 +487,21 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                 // l'Administrador
                 I18NTranslation translation = new I18NTranslation("error.senseentitat", username);
                 BasePreparer.loginErrorMessage.put(username, translation);
-                try {
-                    logCarpetaEjb.crearLog("Autenticació al back de l'usuari: " + username, ESTAT_LOG_ERROR,
+
+                logCarpetaLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, ESTAT_LOG_ERROR,
                             TIPUS_LOG_AUTENTICACIO_BACK, System.currentTimeMillis() - temps, null,
-                            I18NUtils.tradueix(translation), peticio.toString(), "", null);
-                } catch (I18NException ie) {
-                    throw new LoginException("Error creant el log");
-                }
+                            "L´usuari "+username+" no té cap entitat associada. Consulti amb l´Administrador d´Entitat", peticio.toString(), "", null);
+
             } else {
                 // Les entitats a les que pertany estan desactivades
                 // "L'usuari " + name + " no té cap entitat vàlida associada");
                 I18NTranslation translation = new I18NTranslation("error.senseentitatvalida", username);
                 BasePreparer.loginErrorMessage.put(username, translation);
-                try {
-                    logCarpetaEjb.crearLog("Autenticació al back de l'usuari:" + username, ESTAT_LOG_ERROR,
+                entitatCodi = usuariEntitats.iterator().next().getEntitat().getCodi();
+                logCarpetaLogicaEjb.crearLog("Autenticació al back de l'usuari:" + username, ESTAT_LOG_ERROR,
                             TIPUS_LOG_AUTENTICACIO_BACK, System.currentTimeMillis() - temps, null,
-                            I18NUtils.tradueix(translation), peticio.toString(), "", null);
-                } catch (I18NException ie) {
-                    throw new LoginException("Error creant el log");
-                }
+                            "Les entitats a les que pertany estan desactivades. L´usuari "+username+" no té cap entitat vàlida associada", peticio.toString(), entitatCodi, null);
+
             }
         }
 
@@ -564,7 +545,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
             }
 
             // LOG
-            logCarpetaEjb.crearLog("Autenticació al back - Usuari: " + username, ESTAT_LOG_OK,
+            logCarpetaLogicaEjb.crearLog("Autenticació al back - Usuari: " + username, ESTAT_LOG_OK,
                     TIPUS_LOG_AUTENTICACIO_BACK, System.currentTimeMillis() - temps, null, "", peticio.toString(),
                     entitatCodiActual, null);
 

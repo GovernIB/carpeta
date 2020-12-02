@@ -61,7 +61,7 @@ public class LoginController {
     private SesionHttp sesionHttp;
 
     @EJB(mappedName = LogCarpetaLogicaLocal.JNDI_NAME)
-    protected LogCarpetaLogicaLocal logCarpetaLogicaEjb;
+    protected LogCarpetaLogicaLocal logLogicaEjb;
 
     @EJB(mappedName = EstadisticaLogicaLocal.JNDI_NAME)
     protected EstadisticaLogicaLocal estadisticaLogicaEjb;
@@ -97,15 +97,17 @@ public class LoginController {
 
 
         long temps = System.currentTimeMillis();
+        //Cream les dades bàsiques de la petició per els logs
         StringBuilder peticio = new StringBuilder();
-        peticio.append("Usuari: no definit").append(System.getProperty("line.separator"));
-        peticio.append("classe: ").append(getClass().getName()).append(System.getProperty("line.separator"));
+        peticio.append("Usuari: no definit").append("\n");
+        peticio.append("classe: ").append(getClass().getName()).append("\n");
 
         // Error login
         if ("true".equals(request.getParameter("error"))) {
 
             //Log no autenticat/error
-            logCarpetaLogicaEjb.crearLog("Autenticació del Front", ESTAT_LOG_ERROR,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"Error de login",peticio.toString(),"",null);
+
+            logLogicaEjb.crearLog("Autenticació del Front", ESTAT_LOG_ERROR,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"Error de login",peticio.toString(),"",null);
             log.info("Error de login");
 
             //Estadístiques no autenticades
@@ -151,7 +153,7 @@ public class LoginController {
 
             String url = securityService.iniciarSesionAutentificacion(url_callback_login, url_callback_error, IDIOMA);
 
-            logCarpetaLogicaEjb.crearLog("Iniciam Sessió Autenticació Front", ESTAT_LOG_OK,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),"",null);
+            logLogicaEjb.crearLog("Iniciam Sessió Autenticació Front", ESTAT_LOG_OK,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),"",null);
 
             log.info("Url autentificacion: " + url);
 
