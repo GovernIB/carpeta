@@ -36,7 +36,18 @@ public class PrincipalController {
 
 		if (initialized == null) {
 			HtmlUtils.saveMessageInfo(request, "MessageInfo : Benvingut a Carpeta");
-			session.setAttribute("inicialitzat", true);
+
+			log.info(" request.isUserInRole(ROLE_ADMIN) =>    "  + request.isUserInRole("ROLE_ADMIN") );
+			log.info(" request.isUserInRole(ROLE_SUPER) =>    "  + request.isUserInRole("ROLE_SUPER") );
+
+            if (request.isUserInRole("ROLE_SUPER")) {
+                return new ModelAndView(new RedirectView("/superadmin/buit", true));
+            }
+
+            if (request.isUserInRole("ROLE_ADMIN") && LoginInfo.getInstance().getEntitatID() != null ) {
+                return new ModelAndView(new RedirectView("/adminentitat/buit", true));
+            }
+			
 		}
 
 		return new ModelAndView("principal");

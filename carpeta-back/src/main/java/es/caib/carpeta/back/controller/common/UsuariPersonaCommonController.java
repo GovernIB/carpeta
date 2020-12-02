@@ -61,6 +61,8 @@ public class UsuariPersonaCommonController extends UsuariController {
         }
         usuariForm.addReadOnlyField(USERNAME);
         usuariForm.addReadOnlyField(DARRERAENTITAT);
+        
+        usuariForm.setDeleteButtonVisible(false);
 
         return usuariForm;
 
@@ -108,6 +110,11 @@ public class UsuariPersonaCommonController extends UsuariController {
         } else {
             return getTileForm();
         }
+    }
+    
+    @Override
+    public String getRedirectWhenCancel(HttpServletRequest request, java.lang.Long usuariID) {
+        return "redirect:/";
     }
 
 }
