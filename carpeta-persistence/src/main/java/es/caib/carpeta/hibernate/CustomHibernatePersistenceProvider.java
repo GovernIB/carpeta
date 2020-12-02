@@ -12,37 +12,42 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import es.caib.carpeta.commons.utils.Configuracio;
-import es.caib.carpeta.commons.utils.Constants;
-
+/**
+ * ========= FITXER AUTOGENERAT - NO MODIFICAR !!!!!
+ * @author jagarcia
+ */
+@SuppressWarnings("unchecked")
 public class CustomHibernatePersistenceProvider extends HibernatePersistenceProvider {
 	
-	private static final Logger log = LoggerFactory.getLogger(Configuracio.class);
+	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
-	public EntityManagerFactory createContainerEntityManagerFactory(PersistenceUnitInfo info, Map properties) {
+	public EntityManagerFactory createContainerEntityManagerFactory(PersistenceUnitInfo info, @SuppressWarnings("rawtypes") Map properties) {
 		
-		Map carpetaProperties = new HashMap<String,String>();
+		Map<String,String> projecteProperties = new HashMap<String,String>();
 		
 		if(!properties.isEmpty()) {
-			carpetaProperties.putAll(properties);
+			projecteProperties.putAll(properties);
 		}
 		
 		Properties fitxerProperties = Configuracio.getSystemAndFileProperties();
 		if(fitxerProperties != null) {
 			fitxerProperties.forEach((k,v) -> {
-	        	if (k.toString().startsWith(Constants.CARPETA_PROPERTY_HIBERNATE)) {
-	        		carpetaProperties.put(k.toString().replace(Constants.CARPETA_PROPERTY_BASE,""), v.toString());
+               String kStr = k.toString();
+	        	if (kStr.startsWith("es.caib.carpeta.hibernate")) {
+	        		projecteProperties.put(kStr.replace("es.caib.carpeta",""), v.toString());
+	        	} else if(kStr.startsWith("hibernate.")) {
+	        		//if (!projecteProperties.containsKey(kStr)) {
+	        			projecteProperties.put(kStr, v.toString());
+	        		//}
 	        	}
 	        });
 		}
-		
 		if (Configuracio.isDesenvolupament()) {
-			carpetaProperties.forEach((k,v) -> {
+			projecteProperties.forEach((k,v) -> {
 	        	log.info("HibernateProperties: " + k + ", Value : " + v);
 	        });
 		}
-		
-		return super.createContainerEntityManagerFactory(info, carpetaProperties);
+		return super.createContainerEntityManagerFactory(info, projecteProperties);
 	}
-	
 }

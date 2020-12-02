@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- FITXER AUTOGENERAT -->
 <persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
              http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd"
              version="2.2">
     <persistence-unit name="carpetaPU" transaction-type="JTA">
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <provider>es.caib.carpeta.hibernate.CustomHibernatePersistenceProvider</provider>
         <jta-data-source>java:jboss/datasources/carpetaDS</jta-data-source>
-
+        
 		<class>es.caib.carpeta.jpa.AccesJPA</class>
 		<class>es.caib.carpeta.jpa.AuditoriaJPA</class>
 		<class>es.caib.carpeta.jpa.AvisJPA</class>
@@ -30,9 +32,5 @@
         <!-- Sempre activar la validació de les propietats -->
         <validation-mode>CALLBACK</validation-mode>
 
-        <properties>
-            <property name="hibernate.dialect" value="${es.caib.carpeta.hibernate.dialect}" />
-            <property name="hibernate.query.substitutions" value="${es.caib.carpeta.hibernate.query.substitutions}"/>
-        </properties>
     </persistence-unit>
 </persistence>

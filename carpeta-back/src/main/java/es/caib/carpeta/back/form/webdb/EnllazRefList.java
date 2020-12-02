@@ -57,7 +57,13 @@ public class EnllazRefList extends RefListBase
     for (es.caib.carpeta.model.entity.Traduccio traduccio : traduccions) {
       es.caib.carpeta.jpa.TraduccioJPA traduccioJPA = (es.caib.carpeta.jpa.TraduccioJPA) traduccio;
       String key = keysMap.get(String.valueOf(traduccioJPA.getTraduccioID()));
-      String value = traduccioJPA.getTraduccio(_lang).getValor();
+      es.caib.carpeta.jpa.TraduccioMapJPA _tm = traduccioJPA.getTraduccio(_lang);
+      String value;
+      if (_tm == null) {
+          value = "NO_TRADUCCIO_PER_CODI_" + traduccio.getTraduccioID() + "_[" + _lang + "]";
+      } else {
+          value= _tm.getValor();
+      }
       StringKeyValue skv = new StringKeyValue(key, value);
       _list.add(skv);
     }
