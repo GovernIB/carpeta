@@ -80,6 +80,8 @@ img:hover {
 	width: 88px;
     height: 31px;
 }
+.imc--gestions::before { background-image: url(../images/folder.png); }
+.imc--dades::before { background-image: url(../images/dades.PNG); }
 .upper{
 	text-transform: uppercase;
 }
@@ -204,8 +206,43 @@ img:hover {
 	border-color:#f5c6cb;
 	border-radius: 4px;
 }
+.dropdown:hover > .dropdown-menu {
+	display: block;
+}
+.dropdown > .dropdown-toggle:active {
+	/*Without this, clicking will make it sticky*/
+	pointer-events: none;
+}
+.menuRapid{
+	border: 0px;
+	color: #32814B;
+	background-color: #F8F8F8;
+}
+.menuRapid:hover{
+	color: #000;
+	text-decoration: none;
+}
+.menuRapid:active:focus:visited{
+	border: 0px;
+	color: #000;
+	text-decoration: none;
+}
+.navCarpeta{
+	vertical-align: top;
+}
+.submenuRapid{
+	top: auto;
+	left: auto;
+}
+.submenuRapid--item{
+	width: auto;
+	padding: 0.25rem 1rem;
+}
+.dropdown-toggle::after {
+vertical-align: 0em !important;
+}
 
-/* RESPONSIVE
+/* RESPONSIVE */
 
 /*Se aplican cuando el width es menor que 992px*/
 @media only screen and (max-width: 992px) {

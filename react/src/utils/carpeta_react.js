@@ -13,6 +13,7 @@ var newAvisosFrontReact;
 var newPeuReact;
 var newPluginHtml;
 var newPluginReact;
+var newMenuRapidReact;
 
 
 function newInici(compoWeb, nom) {
@@ -57,6 +58,10 @@ function newMenuDesllisant(compoWeb, nom) {
 
 function newBreadcrumb(compoWeb, nom) {
 	setTimeout(newBreadcrumbReact.bind(null,compoWeb,nom) , 1);
+}
+
+function newMenuRapid(compoWeb, nom) {
+	setTimeout(newMenuRapidReact.bind(null,compoWeb,nom) , 1);
 }
 
 function newAvisosFront(compoWeb, nom) {

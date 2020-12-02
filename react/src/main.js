@@ -18,6 +18,7 @@ import Breadcrumb from './Breadcrumb';
 import AvisosFront from './AvisosFront';
 import PluginHtml from './PluginHtml';
 import PluginReact from './PluginReact';
+import MenuRapid from './MenuRapid';
 import * as breadcrumbPaths from './utils/breadcrumbPaths';
 import * as breadcrumbPathsAut from './utils/breadcrumbPathsAut';
 
@@ -40,6 +41,11 @@ ReactDOM.render(
 ReactDOM.render(
   <Peu />,
   document.getElementById("peu")
+);
+
+ReactDOM.render(
+	<MenuRapid autenticat='0'/>,
+	document.getElementById("menuRapid")
 );
 
 ReactDOM.render(
@@ -66,6 +72,10 @@ ReactDOM.render(
 newIniciReact  = function createReactCompInici(nomComponent, param) {
     ReactDOM.render(<Inici autenticat={param}/>, document.getElementById(nomComponent));
 	ReactDOM.render(<Breadcrumb items={breadcrumbPaths.Inici} autenticat={param}/>, document.getElementById("mollaPa"));
+};
+
+newMenuRapidReact  = function createReactCompMenuRapid(nomComponent, param) {
+	ReactDOM.render(<MenuRapid autenticat={param}/>, document.getElementById(nomComponent));
 };
 
 newAccessibilitatReact  = function createReactCompAccessibilitat(nomComponent, param) {

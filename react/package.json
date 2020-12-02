@@ -14,6 +14,7 @@
   "dependencies": {
     "@babel/core": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
+    "@popperjs/core": "^2.5.4",
     "axios": "^0.21.0",
     "babel-loader": "^8.1.0",
     "babel-preset-env": "^1.7.0",
@@ -29,6 +30,9 @@
     "react-dom": "^16.13.1",
     "react-ga": "^3.2.0",
     "react-i18next": "^11.5.0",
+    "react-popper": "^2.2.4",
+    "run": "^1.4.0",
+    "styled-components": "^5.2.1",
     "url-loader": "^4.1.0",
     "webpack": "^4.43.0",
     "webpack-dev-server": "^3.11.0"

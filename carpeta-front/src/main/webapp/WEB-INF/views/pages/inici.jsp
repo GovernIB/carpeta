@@ -58,6 +58,7 @@
 			  var aut = sessionStorage.getItem('autenticat');
 			  newMenuDesllisant('menuDesllisant', aut);
 			  newPeu('peu', aut);
+			  newMenuRapid('menuRapid', aut);
 		  }
 	  </script>
   </sec:authorize>
@@ -99,6 +100,7 @@
 					newInici('contingut', autenticat);
 					newPeu('peu', autenticat);
 					newAvisosFront('avisosFront', autenticat);
+					newMenuRapid('menuRapid', autenticat);
 					// Passa dades personals a React
 					sessionStorage.setItem('usuariNomComplet', '${user}');
 					sessionStorage.setItem('usuariNom', '${userName}');
@@ -115,6 +117,9 @@
 			
 		<!-- Zona Contingut -->
 		<div class="imc-continguts" id="continguts">
+
+			<!-- Menú Ràpid-->
+			<div id = "menuRapid"></div>
 
 			<!-- Molla de pa -->
 			<div id = "mollaPa"></div>
