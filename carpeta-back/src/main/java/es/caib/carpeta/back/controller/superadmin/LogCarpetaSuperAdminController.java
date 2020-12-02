@@ -176,8 +176,10 @@ public class LogCarpetaSuperAdminController extends LogCarpetaController {
       for(StringKeyValue skv:pluginsIds){
          pluginsIdKeys.add(skv.getKey());
       }
-      if(!pluginsIdKeys.contains(logCarpetaForm.getLogCarpeta().getPluginID().toString())){
-       pluginsIds.add(new StringKeyValue(logCarpetaForm.getLogCarpeta().getPluginID().toString() , I18NUtils.tradueix("plugin.esborrat")));
+      if(logCarpetaForm.getLogCarpeta().getPluginID()!=null) {
+         if (!pluginsIdKeys.contains(logCarpetaForm.getLogCarpeta().getPluginID().toString())) {
+            pluginsIds.add(new StringKeyValue(logCarpetaForm.getLogCarpeta().getPluginID().toString(), I18NUtils.tradueix("plugin.esborrat")));
+         }
       }
 
       return pluginsIds;
