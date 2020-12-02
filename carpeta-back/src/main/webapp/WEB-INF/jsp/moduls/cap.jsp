@@ -36,7 +36,7 @@
 
 			<div>
 				<h1 class="titol">${version.projectName}</h1>
-				<span class="entidadName">${loginInfo.entitat.nom.traduccions[lang].valor} (${loginInfo.entitat.codi })</span>
+				<span class="entidadName">${loginInfo.entitat.nom.traduccions[lang].valor} <c:if test="${not empty fn:trim(loginInfo.entitat.codi)}"> (${loginInfo.entitat.codi })</c:if></span>
 			</div>
 			<div>
 				<div>
