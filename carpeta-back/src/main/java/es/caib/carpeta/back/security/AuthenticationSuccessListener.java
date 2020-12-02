@@ -506,10 +506,8 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
         }
 
         Long entitatIDActual = null;
-        String entitatCodiActual = "";
         if (entitatPredeterminada != null) {
             entitatIDActual = entitatPredeterminada.getEntitatID();
-            entitatCodiActual = entitatPredeterminada.getCodi();
             if (isDebug) {
                 log.debug(">>>>>> Entitat predeterminada " + entitatIDActual);
             }
@@ -545,9 +543,10 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
             }
 
             // LOG
+            String codiEntitat = loginInfo.getEntitat()!=null?loginInfo.getEntitat().getCodi():null;
             logCarpetaLogicaEjb.crearLog("Autenticació al back - Usuari: " + username, ESTAT_LOG_OK,
                     TIPUS_LOG_AUTENTICACIO_BACK, System.currentTimeMillis() - temps, null, "", peticio.toString(),
-                    entitatCodiActual, null);
+                    codiEntitat, null);
 
             // AUDITORIA
             if (loginInfo.getUsuariPersona() != null) {
