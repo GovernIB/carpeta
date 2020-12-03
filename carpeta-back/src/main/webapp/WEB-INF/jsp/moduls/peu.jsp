@@ -47,19 +47,18 @@
 		<div class="col-4 text-center logoPeu" >
 		  <br/>
 		  <center>
-		    <sec:authorize access="hasRole('ROLE_ADMIN')">
-		    <c:if test="${not empty loginInfo.entitat.logoPeuBack}">
-		      <%-- <a href="http://otaeweb.ibit.org/" style="padding-top: 10px" target="_blank"> --%> 
-                  <img class="logoAplicacio" src="<c:url value="${car:fileUrl(loginInfo.entitat.logoPeuBack)}"/>" alt="${loginInfo.entitat.logoPeuBack.nom}"  title="${loginInfo.entitat.codi}" />
-              <%-- </a> --%><br />
-                </c:if>
-			</sec:authorize>
+			  <ul class="ajudaPeu">
+					<sec:authorize access="hasRole('ROLE_ADMIN')">
+					<c:if test="${not empty loginInfo.entitat.logoPeuBack}">
+						  <li><img class="logoAplicacio" src="<c:url value="${car:fileUrl(loginInfo.entitat.logoPeuBack)}"/>" alt="${loginInfo.entitat.logoPeuBack.nom}"  title="${loginInfo.entitat.codi}" /></li>
+				    </c:if>
+					</sec:authorize>
 
-			<!-- Button to trigger modal -->
-			<small><a href="#modalAjuda" role="button"
-				data-toggle="modal" data-target="#modalAjuda"><fmt:message key="ajuda.necessitau" /></a>
-		    </small>
-
+					<!-- Button to trigger modal -->
+				  <li><small><a href="#modalAjuda" role="button"
+						data-toggle="modal" data-target="#modalAjuda"><fmt:message key="ajuda.necessitau" /></a>
+					</small></li>
+			  </ul>
 		  </center>
 		</div>
 
@@ -81,10 +80,10 @@
 				<fmt:message key="ajuda.missatge" />
 			</p>
 			<ul>
-				<li><fmt:message key="ajuda.viatelefon" /> 123456789</li>
-				<li><fmt:message key="ajuda.viaweb" /> http://www.help.hl/help</li>
-				<li><fmt:message key="ajuda.viaemail" /><a
-					href="mailto: help@help.hl"> help@help.hl</a></li>
+				<li><fmt:message key="ajuda.suporttecnic" />
+					<a href="mailto: governdigital.carpeta@fundaciobit.org"> governdigital.carpeta@fundaciobit.org</a></li>
+				<li><fmt:message key="ajuda.suportfrontback" />
+					<a href="mailto: scalafat@dgtic.caib.es">scalafat@dgtic.caib.es</a></li>
 			</ul>
       </div>
       <div class="modal-footer">

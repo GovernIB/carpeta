@@ -398,6 +398,9 @@ a.linkPeu:focus,
 a.linkPeu:active {
 	color: #32814B !important;
 }
+
+.ajudaPeu{ list-style: none;
+	display: inline-block;}
 /* FI Peu */
 
 /* Xarxes Socials */
