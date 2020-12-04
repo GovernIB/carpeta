@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -149,10 +148,6 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     List<AsientoRegistralWs> listRegistros = new ArrayList<>();
 
-
-    public static AsientoRegistralWs findByNumeroRegistroFormateado(Collection<AsientoRegistralWs> listRegistros, String numeroRegistroFormateado) {
-        return listRegistros.stream().filter(registro -> numeroRegistroFormateado.equals(registro.getNumeroRegistroFormateado())).findFirst().orElse(null);
-    }
 
     public void llistatDeRegistres(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
                                    HttpServletRequest request, HttpServletResponse response, String administrationID,
@@ -303,7 +298,7 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             String numeroRegistroFormateado = request.getParameter("numeroRegistroFormateado");
 
 
-            String webpage = getDetallDeRegistrePage(absolutePluginRequestPath,numeroRegistroFormateado, locale);
+            String webpage = getDetallDeRegistrePage(absolutePluginRequestPath,numeroRegistroFormateado,administrationID,getEntidad(),locale);
 
             try {
                 response.getWriter().println(webpage);
@@ -320,7 +315,7 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     }
 
 
-    public String getDetallDeRegistrePage(String absolutePluginRequestPath, String numeroRegistroFormateado, Locale locale) throws Exception {
+    public String getDetallDeRegistrePage(String absolutePluginRequestPath, String numeroRegistroFormateado,String administrationID, String entidad, Locale locale) throws Exception {
 
         Map<String, Object> map = new HashMap<String, Object>();
 
@@ -328,9 +323,9 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
 
         if (isDevelopment()) {
-            registre = getDetallRegistreDebug(numeroRegistroFormateado);
+            registre = getDetallRegistreDebug(numeroRegistroFormateado,administrationID,entidad);
         } else {
-            registre = getDetallRegistre(numeroRegistroFormateado);
+            registre = getDetallRegistre(numeroRegistroFormateado,administrationID,entidad);
         }
 
 
@@ -389,10 +384,10 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     }
 
-    private AsientoRegistralWs getDetallRegistreDebug(String numeroRegistroFormateado) throws Exception {
+    private AsientoRegistralWs getDetallRegistreDebug(String numeroRegistroFormateado,String administrationID, String entidad) throws Exception {
 
 
-        AsientoRegistralWs registro = findByNumeroRegistroFormateado(listRegistros, numeroRegistroFormateado);
+        AsientoRegistralWs registro = getDetallRegistre(numeroRegistroFormateado, administrationID, entidad);
 
 
         if (registro == null) {
@@ -414,10 +409,15 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     }
 
 
-    public AsientoRegistralWs getDetallRegistre(String numeroRegistroFormateado)
+    public AsientoRegistralWs getDetallRegistre(String numeroRegistroFormateado,String administrationID, String entidad)
        throws Exception {
 
-        AsientoRegistralWs registro = findByNumeroRegistroFormateado(listRegistros, numeroRegistroFormateado);
+
+        // Llamamos a obtenerAsientoCiudadano para obtener la información completa
+        RegWebAsientoRegistralWs service = getRegWebAsientoRegistralWsService();
+
+        AsientoRegistralWs registro= service.obtenerAsientoCiudadano(entidad, administrationID, numeroRegistroFormateado);
+
         return registro;
     }
 
