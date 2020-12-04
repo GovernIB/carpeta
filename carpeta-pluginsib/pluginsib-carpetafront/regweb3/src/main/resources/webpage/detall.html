@@ -61,19 +61,19 @@
                                             <dd class="col-sm-7">${registro.numeroRegistroFormateado}</dd>
 
                                             <dt class="col-sm-3 pb-2">${registro_oficina}</dt>
-                                            <dd class="col-sm-7">${registro.entidadRegistralOrigenDenominacion}</dd>
+                                            <dd class="col-sm-7"><#if registro.entidadRegistralInicioDenominacion?has_content >${registro.entidadRegistralInicioDenominacion}</#if></dd>
 
                                             <dt class="col-sm-3 pb-2">${registro_destinatario}</dt>
-                                            <dd class="col-sm-7">${registro.unidadTramitacionDestinoDenominacion}</dd>
+                                            <dd class="col-sm-7"><#if registro.unidadTramitacionDestinoDenominacion?has_content >${registro.unidadTramitacionDestinoDenominacion}</#if></dd>
 
                                             <dt class="col-sm-3 pb-2">${registro_tipo_doc}</dt>
-                                            <dd class="col-sm-7">${docFisica[registro.tipoDocumentacionFisicaCodigo]}</dd>
+                                            <dd class="col-sm-7"><#if registro.tipoDocumentacionFisicaCodigo?has_content >${docFisica[registro.tipoDocumentacionFisicaCodigo]}</#if></dd>
 
                                             <dt class="col-sm-3 pb-2">${registro_extracto}</dt>
-                                            <dd class="col-sm-7">${registro.resumen}</dd>
+                                            <dd class="col-sm-7"><#if registro.resumen?has_content >${registro.resumen}</#if></dd>
 
                                             <dt class="col-sm-3 pb-2">${carpeta_idioma}</dt>
-                                            <dd class="col-sm-7">${registroIdioma[registro.idioma]}</dd>
+                                            <dd class="col-sm-7"><#if registro.idioma?has_content >${registroIdioma[registro.idioma]}</#if></dd>
 
 
                                         </dl>
