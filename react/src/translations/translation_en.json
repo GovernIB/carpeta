@@ -188,6 +188,7 @@
 	"breadcrumbNotificacions": "Les meves notificacions",
 	"breadcrumbMapaWeb": "Mapa Web",
 	"breadcrumbPlugin": "Plugin d'Entitat",
+	"breadcrumbSuport": "Suport",
 	
 	
 	"mapaWebTitol": "MAPA WEB",
@@ -200,6 +201,11 @@
 	"mapaWebPlugins": "PLUGINS DE L'ENTITAT",
 	
 	
-	"iniciPrivatTitol": "INICI PRIVAT"
+	"iniciPrivatTitol": "INICI PRIVAT",
+
+	"suportTanca": "Tanca",
+	"suportAqui": "aquí",
+	"suportAjuda": "Si necessita ajuda pitgi",
+	"suportTitol": "Dades de contacte"
 	
 }

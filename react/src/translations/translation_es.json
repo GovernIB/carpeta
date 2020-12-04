@@ -188,6 +188,7 @@
 	"breadcrumbNotificacions": "Mis notificaciones",
 	"breadcrumbMapaWeb": "Mapa Web",
 	"breadcrumbPlugin": "Plugin de Entidad",
+	"breadcrumbSuport": "Soporte",
 	
 	
 	"mapaWebTitol": "MAPA WEB",
@@ -200,6 +201,11 @@
 	"mapaWebPlugins": "PLUGINS DE LA ENTIDAD",
 	
 	
-	"iniciPrivatTitol": "INICIO PRIVADO"
+	"iniciPrivatTitol": "INICIO PRIVADO",
+
+	"suportTanca": "Cierra",
+	"suportAqui": "aquí",
+	"suportAjuda": "Si necesita ayuda clique",
+	"suportTitol": "Datos de contacto"
 
 }

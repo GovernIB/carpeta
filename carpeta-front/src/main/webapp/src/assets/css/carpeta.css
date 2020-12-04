@@ -244,6 +244,11 @@ img:hover {
 .dropdown-toggle::after {
 	vertical-align: 0em !important;
 }
+.cardSuport{
+	width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+}
 
 
 /* RESPONSIVE
