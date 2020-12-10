@@ -130,7 +130,7 @@
     </definition>
     
     <definition name="buitAdminEntitat" extends="adminentitat">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/moduls/blanc.jsp" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/buit.jsp" />
     </definition>
     
     <definition name="pluginEntitatFormAdminEntitat" extends="adminentitat">
@@ -227,7 +227,7 @@
     </definition>
     
         <definition name="buitSuperAdmin" extends="superadmin">
-        <put-attribute name="contingut" value="/WEB-INF/jsp/moduls/blanc.jsp" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/buit.jsp" />
     </definition>
 
     <definition name="pluginFormSuperAdmin" extends="superadmin">

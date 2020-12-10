@@ -78,6 +78,10 @@ a:hover{
 .titol { display:inline-block; }
 footer .logoPeu img.logoAplicacio { width:150px; height:auto; margin-bottom:10px; }
 
+.buitContainer { width: 500px; margin: 150px auto; }
+.buitContainer img { padding:10px; margin:15px; background-color:#32814B; } 
+.buitContainer h3, .buitContainer p { text-align:center; }
+
 /* FI Estils generals */
 
 /* Motlla de pa */
