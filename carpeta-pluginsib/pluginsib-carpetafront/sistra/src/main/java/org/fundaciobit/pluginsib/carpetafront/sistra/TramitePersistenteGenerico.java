@@ -23,7 +23,7 @@ public class TramitePersistenteGenerico {
 	
 	/* Atributs acabats */
 	private TipoElementoExpediente tipo;
-	private boolean pendiente;
+	private boolean pendiente = false;
 	private String url;
 	
 	public String getIdSesionTramitacion() {
@@ -139,7 +139,7 @@ public class TramitePersistenteGenerico {
 		this.fechaUltimoAcceso = tramite.getFechaUltimoAcceso().toGregorianCalendar().getTime();
 		this.versionSistra = versionSistra;
 		this.pendiente = true;
-		this.url = "";
+		this.url = tramite.getUrlAcceso();
 		this.tipo = null;
 	}
 	
@@ -151,7 +151,7 @@ public class TramitePersistenteGenerico {
 		this.descripcionTramite = tramite.getDescripcion();
 		this.fechaInicio = tramite.getFecha().toGregorianCalendar().getTime();
 		this.fechaUltimoAcceso = tramite.getFecha().toGregorianCalendar().getTime();
-		this.versionSistra = 1;
+		this.versionSistra = versionSistra;
 		this.pendiente = tramite.isPendiente();
 		this.url = tramite.getUrl();
 		this.tipo = tramite.getTipo();

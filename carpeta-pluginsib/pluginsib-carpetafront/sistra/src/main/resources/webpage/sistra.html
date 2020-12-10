@@ -12,7 +12,7 @@
     <!-- SCRIPTS -->
     <script src="${resources}/carpeta/jquery-3.5.0.js"></script>
     <script src="${resources}/carpeta/bootstrap.min.js"></script>
-    <!-- Datetimpicker -->
+    <!-- Datetimepicker -->
     <script src="${resources}/carpeta/moment-with-locales.min.js"></script>
     <script src="${resources}/carpeta/bootstrap-datetimepicker.js"></script>
     <!-- Del Goib -->
@@ -101,18 +101,18 @@
                     <tbody>
                     <#setting date_format="MM/dd/yyyy hh">
                     <#list tramits as tramite >
-                    <tr class="clickable-row" data-target="_blank" onClick="window.open('${tramite.url}')">
+                    <tr class="clickableRow" data-url="${tramite.url}" data-pending="${tramite.isPendiente()?then('S','N')}" style="cursor:pointer">
                         <td>${tramite.descripcionTramite}</td>
                         <td>
                             ${tramite.fechaInicio?string("dd-MM-yyyy HH:mm")}
                         </td>
                         <td>${tramite.fechaUltimoAcceso?string("dd-MM-yyyy HH:mm")}</td>
-                        <#if tramite.tipo?has_content >
-                            <td>${tramite_finalizado}: <span style="text-transform:lowercase">${tramite.tipo}</span></td>
-                            <td align="center"><span class="oi oi-eye" title="${tramite_ver}"></span></td>
-                        <#else>
+                        <#if tramite.isPendiente()!>
                             <td>${tramite_nofinalizado}</td>
                             <td align="center"><span class="oi oi-external-link" title="${tramite_continuar}"></span></td>
+                        <#else>
+                            <td>${tramite_finalizado}<#if tramite.tipo?has_content>: <span style="text-transform:lowercase">${tramite.tipo}</span></#if></td>
+                            <td align="center"><span class="oi oi-eye" title="${tramite_ver}"></span></td>
                         </#if>
                         <#if development>
                         <td>${tramite.versionSistra}</td>
@@ -131,7 +131,49 @@
                                 "url": "${resources}/i18n/" + idioma + ".json"
                             }
                         });
+                        
+                        $('.clickableRow').click(function(event) {
+                        	event.preventDefault();
+                        	if ($(this).data('pending') == 'S'){
+                        		openModalConfirm($(this).data('url'));
+                        	}else{
+                        		window.open($(this).data('url'), '_blank');
+                       		}
+                        });
                     });
+                    
+                    function goParentTo(url) {
+                        window.open(url, '_blank');
+                        $('#myModal').modal('hide');
+                    }
+
+                    function openModalConfirm(url) {
+                        $('body')
+                        .append(
+                                  '<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">'
+                                + '<div class="modal-dialog" role="document">'
+                                + '<div class="modal-content">'
+                                
+                                + '<div class="modal-header">'
+                                + '<h3 id="myModalLabel">${tramite_modal_titulo}</h3>'
+                                + '</div>'
+                                
+                                + '<div class="modal-body">'
+                                + '<p>${tramite_modal_texte}</p>'
+                                + '</div>'
+                                
+                                + '<div class="modal-footer">'
+                                + '<button class="btn btn-success" type="button" onclick="goParentTo(\''+url+'\')">${tramite_modal_continuarBtn}</button>'
+                                + '<button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">${tramite_modal_cancelarBtn}</button>'
+                                
+                                + '</div>'
+                                
+                                + '</div>'
+                                + '</div>'
+                                + '</div>');
+                        
+                        $('#myModal').modal('show');
+                    }  
                 </script>
                 <#else>
                 <div class="alert alert-secondary mt-5" role="alert">

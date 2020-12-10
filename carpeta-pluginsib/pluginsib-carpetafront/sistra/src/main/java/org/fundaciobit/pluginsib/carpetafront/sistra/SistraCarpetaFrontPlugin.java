@@ -14,6 +14,7 @@ import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementoExpediente;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementosExpediente;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.FiltroElementosExpediente;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.ObjectFactory;
+import es.caib.zonaper.ws.v2.model.elementoexpediente.TipoElementoExpediente;
 import es.caib.zonaper.ws.v2.services.BackofficeFacade;
 import es.caib.zonaper.ws.v2.services.BackofficeFacadeService;
 import org.apache.commons.io.IOUtils;
@@ -242,7 +243,7 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 	       }catch(javax.ws.rs.client.ResponseProcessingException e) {
 	    	   tramits = null;
 	    	   e.printStackTrace();
-	    	   log.error("Sistra2 - No hi ha tràmits:" + e.getMessage());
+	    	   log.error("Sistra2 - No hi ha tramits:" + e.getMessage());
 	       }catch(Exception e) {
 	    	    tramits = null;
               	missatgeError += "Sistra2: " + e.getMessage();
@@ -270,7 +271,8 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 "tramite.fecha.inicio", "tramite.acceso", "tramite.vacio", "carpeta.buscar",
                 "carpeta.fecha.inicio", "carpeta.fecha.fin", "tramite.continuar", "tramite.genericerror", 
                 "tramite.versionsistra", "tramite.estado", "tramite.finalizado", "tramite.nofinalizado",
-                "tramite.todos", "tramite.detalle", "tramite.ver", "tramite.continuar"};
+                "tramite.todos", "tramite.detalle", "tramite.ver", "tramite.continuar", "tramite.modal.titulo", 
+                "tramite.modal.texte", "tramite.modal.continuarBtn", "tramite.modal.cancelarBtn"};
         
         for (String t : traduccions) {
             map.put(t.replace('.', '_'), getTraduccio(t, locale));
@@ -316,9 +318,8 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         
         List<TramitePersistenteGenerico> tramits = new ArrayList<TramitePersistenteGenerico>();
         
-        // Tramits acabats
-        if (!finalizado.equals("N")) {
-	       
+        // Tramits acabats o inacabats si son del tipus PREREGISTRO o PREENVIO
+        {   
 	        final ObjectFactory objectFactoryElement = new ObjectFactory();    	
 	        final FiltroElementosExpediente filtroElementosExpediente = objectFactoryElement.createFiltroElementosExpediente();
 	        
@@ -327,11 +328,26 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 	        filtroElementosExpediente.setFechaFin(objectFactoryElement.createFiltroElementosExpedienteFechaFin(DatatypeFactory.newInstance().newXMLGregorianCalendar(hoy)));
 	        filtroElementosExpediente.setIdioma(locale.getLanguage());
 	        
-	        // XYZ ZZZ  
+	        // XYZ ZZZ  Paginació
 	        ElementosExpediente tramitesAcabados = backofficeFacade.obtenerElementosExpediente(filtroElementosExpediente, 0, 99);
 	        
 	        for(ElementoExpediente item : tramitesAcabados.getElemento() ) {
-	        	tramits.add(new TramitePersistenteGenerico(item,1));
+	        	TipoElementoExpediente tipus = item.getTipo();
+	        	if (tipus != TipoElementoExpediente.REGISTRO && tipus != TipoElementoExpediente.COMUNICACION  && tipus != TipoElementoExpediente.NOTIFICACION ) {
+		        	// Els tràmits de tipos Registre es mostren a través del plugin de REGWEB #231
+		        	// Els tràmits de tipus Comunicacion o notificacion es mostren a través del plugin de NOTIB #231
+	        		
+	        		TramitePersistenteGenerico tpg = new TramitePersistenteGenerico(item,1);
+	        		 
+	        		// Es marquen com a pendents perquè els falta entregar documentació presencialment
+	        		Boolean estaPendent = (tipus == TipoElementoExpediente.PREREGISTRO || tipus == TipoElementoExpediente.PREENVIO) ? true : false;
+	        		tpg.setPendiente(estaPendent);
+	        		
+	        		if ((estaPendent && !finalizado.equals("S")) || (!estaPendent && !finalizado.equals("N"))) {
+	        			tramits.add(tpg);
+	        		}
+	        	}
+	        	
 	        }
         }
 
@@ -347,9 +363,6 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 	        
 	        for (TramitePersistente tp : tramites.getTramitePersistente()) {
 	        	tpg = new TramitePersistenteGenerico(tp,1);
-	        	
-	        	// XYZ ZZZ  &perfilAF=CIUDADANO
-	        	tpg.setUrl(getWeb() + "?lang=" + locale.getLanguage() + "&modelo=" + tp.getIdTramite() +"&loginClaveAuto=true&version=1&idPersistencia=" + tp.getIdSesionTramitacion());
 	        	tramits.add(tpg);
 	        }
         }
@@ -368,26 +381,18 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         } else {
             int x = 1;
             for (TramitePersistenteGenerico tp : tramits) {
-            	
-            	if ( tp.getTipo() != null ) {
-            		log.info(" -------------  TRAMIT ACABAT SISTRA1 [" + x + " ] -------------------");
-                    log.info("tp.getUrl() => " + tp.getUrl());
-                    log.info("tp.getFecha() => " +  tp.getFechaInicio());
-                    log.info("tp.getDescripcion() => " + tp.getDescripcionTramite());
-                    log.info("tp.getTipo() => " + tp.getTipo());
-                    log.info("tp.isPendiente() => " + tp.isPendiente());
-                    log.info("tp.getUrl() => " + tp.getUrl());
-            	} else {
-	                log.info(" -------------  TRAMIT SISTRA1 [" + x + " ] -------------------");
-	                log.info("tp.getIdTramite() => " + tp.getIdTramite());
-	                log.info("tp.getDescripcionTramite() => " + tp.getDescripcionTramite());
-	                log.info("tp.getVersionTramite(); => " + tp.getVersionTramite());
-	                log.info("tp.getIdioma() => " + tp.getIdioma());
-	                log.info("tp.getFechaInicio() => " + tp.getFechaInicio());
-	                log.info("tp.getFechaUltimoAcceso() => " + tp.getFechaUltimoAcceso());
-	                log.info("tp.getIdSesionTramitacion() => " + tp.getIdSesionTramitacion());
-	                log.info("tp.getUrl() => " + tp.getUrl());
-            	}
+            	log.info(" -------------  TRAMIT [" + x + " ] SISTRA1 -------------------");
+                log.info("tp.getIdSesionTramitacion() => " + tp.getIdSesionTramitacion());
+            	log.info("tp.getIdTramite() => " + tp.getIdTramite());
+            	log.info("tp.getUrl() => " + tp.getUrl());
+            	log.info("tp.getDescripcionTramite() => " + tp.getDescripcionTramite());
+            	log.info("tp.getFechaInicio() => " + tp.getFechaInicio());
+            	log.info("tp.isPendiente() => " + tp.isPendiente());
+            	log.info("tp.getVersionSistra() => " +tp.getVersionSistra());
+            	log.info("tp.getVersionTramite(); => " + tp.getVersionTramite());
+            	log.info("tp.getIdioma() => " + tp.getIdioma());
+            	log.info("tp.getTipo() => " + tp.getTipo());
+            	log.info("tp.getFechaUltimoAcceso() => " + tp.getFechaUltimoAcceso());
                 x++;
             }
         }
@@ -464,17 +469,18 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
        } else {
            int x = 1;
     	   for (TramitePersistenteGenerico tp : tramits) {
-    		   log.info(" -------------  TRAMITE SISTRA 2 [" + x + " ] -------------------");
+    		   log.info(" -------------  TRAMITE [" + x + " ] SISTRA 2-------------------");
     		   log.info("tp.getIdTramite() => " + tp.getIdTramite());
     		   log.info("tp.getDescripcionTramite() => " + tp.getDescripcionTramite());
     		   log.info("tp.getVersionTramite(); => " + tp.getVersionTramite());
     		   log.info("tp.getIdioma() => " + tp.getIdioma());
     		   log.info("tp.getFechaInicio() => " + tp.getFechaInicio());
     		   log.info("tp.getFechaUltimoAcceso() => " + tp.getFechaUltimoAcceso());
-    		   log.info(" tp.getIdSesionTramitacion() => " + tp.getIdSesionTramitacion());
-    		   log.info(" tp.getTipo() => " +tp.getTipo());
-    		   log.info(" tp.getVersionSistra() => " +tp.getVersionSistra());
-    		   log.info(" tp.getUrl() => " +tp.getUrl());
+    		   log.info("tp.getIdSesionTramitacion() => " + tp.getIdSesionTramitacion());
+    		   log.info("tp.getTipo() => " +tp.getTipo());
+    		   log.info("tp.getVersionSistra() => " +tp.getVersionSistra());
+    		   log.info("tp.getUrl() => " +tp.getUrl());
+    		   log.info("tp.isPendiente() => " + tp.isPendiente());
                x++;
            }
        }
