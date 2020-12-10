@@ -2,10 +2,13 @@ package es.caib.carpeta.logic;
 
 import javax.ejb.Local;
 
+import es.caib.carpeta.jpa.EntitatJPA;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import es.caib.carpeta.ejb.EntitatLocal;
 import es.caib.carpeta.model.entity.Entitat;
+
+import java.util.List;
 
 
 /**
@@ -20,6 +23,6 @@ public interface EntitatLogicaLocal extends EntitatLocal {
     
     public void deleteFull(Entitat entitat, boolean deleteFiles) throws I18NException;
 
-    public boolean existeix(String codiEntitat) throws I18NException;
+    public EntitatJPA findByCodi(String codiEntitat) throws I18NException;
 
 }

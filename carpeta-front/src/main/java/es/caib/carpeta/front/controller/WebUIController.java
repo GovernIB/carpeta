@@ -253,6 +253,22 @@ public class WebUIController extends CommonFrontController {
         getEnllazosJSON(request, response, enllazType);
     }
 
+    @RequestMapping(value = "/menubarlinks", method = RequestMethod.GET)
+    public void getMenuBarLinks(HttpServletRequest request, HttpServletResponse response) {
+
+        final int enllazType = Constants.TIPUS_ENLLAZ_FRONT_MENU_BARRA;
+
+        getEnllazosJSON(request, response, enllazType);
+    }
+
+    @RequestMapping(value = "/menuslidelinks", method = RequestMethod.GET)
+    public void getMenuSlideLinks(HttpServletRequest request, HttpServletResponse response) {
+
+        final int enllazType = Constants.TIPUS_ENLLAZ_FRONT_MENU_DESLLISANT;
+
+        getEnllazosJSON(request, response, enllazType);
+    }
+
     protected void getEnllazosJSON(HttpServletRequest request, HttpServletResponse response, final int enllazType) {
         try {
             String lang = LocaleContextHolder.getLocale().getLanguage();
@@ -315,10 +331,7 @@ public class WebUIController extends CommonFrontController {
             processException(e, response);
         }
     }
-    
-    
-    
-    
+
     
     @RequestMapping(value = "/suport", method = RequestMethod.GET)
     public void getEntitatSuport(HttpServletRequest request, HttpServletResponse response) {
@@ -338,9 +351,7 @@ public class WebUIController extends CommonFrontController {
             processException(e, response);
         }
     }
-    
 
-    
 
     @RequestMapping(value = "/canviarIdioma/{idioma}", method = RequestMethod.GET)
     public void canviarIdiomaServidor(@PathVariable("idioma") String idioma, HttpServletRequest request, HttpServletResponse response) {
@@ -453,6 +464,25 @@ public class WebUIController extends CommonFrontController {
             byte[] utf8JsonString = json.getBytes("UTF8");
 
             response.getOutputStream().write(utf8JsonString);
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
+    }
+
+    @RequestMapping(value = "/nomEntitat", method = RequestMethod.GET)
+    public void getNomEntitat(HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+            String lang = LocaleContextHolder.getLocale().getLanguage();
+            String codiEntitat = sesionHttp.getEntitat();
+
+            EntitatJPA entitat = entitatEjb.findByCodi(codiEntitat);
+
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("text/html");
+            response.getWriter().println(entitat.getNom().getTraduccio(lang).getValor());
+            response.flushBuffer();
 
         } catch (Throwable e) {
             processException(e, response);
