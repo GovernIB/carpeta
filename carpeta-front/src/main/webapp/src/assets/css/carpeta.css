@@ -249,7 +249,26 @@ img:hover {
 	margin-left: auto;
 	margin-right: auto;
 }
+.imc-bt-menubar { display: inline-block; height: 2em; padding-left: 2.7em; margin-right: 2em; vertical-align: middle;}
+.imc-bt-menubar span { display: block; color: #fff; text-transform: uppercase; float: left;}
 
+.imc-bt-menubar:hover,
+.imc-bt-menubar:focus {
+	color: #fff;
+	background-color: transparent;
+}
+.logoMenuBar{
+	margin-right: 0.5em;
+	width: 20px;
+	float: left;
+}
+.itemBar{
+	vertical-align: text-top;
+}
+.iconaEnllas{
+	max-width: 2em;
+	opacity: .6;
+}
 
 /* RESPONSIVE
 

@@ -1,5 +1,6 @@
 package es.caib.carpeta.front.controller;
 
+import es.caib.carpeta.logic.EntitatLogicaLocal;
 import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
 import es.caib.carpeta.model.entity.Fitxer;
 import org.apache.commons.io.IOUtils;
@@ -26,6 +27,9 @@ public abstract class CommonFrontController {
 
     @EJB(mappedName = UtilitiesForFrontLogicaLocal.JNDI_NAME)
     protected UtilitiesForFrontLogicaLocal utilsEjb;
+
+    @EJB(mappedName = EntitatLogicaLocal.JNDI_NAME)
+    EntitatLogicaLocal entitatEjb;
     
     
    

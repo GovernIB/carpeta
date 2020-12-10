@@ -1,19 +1,44 @@
 import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
 import i18n from 'i18next';
+import axios from "axios";
 
 class IniciPublic extends Component {
+
+    constructor(){
+        super();
+        this.state = {
+            nomEntitat: []
+        }
+    }
+
+    componentWillMount() {
+        var url = window.location.href + "webui/nomEntitat";
+        axios.get(url).then(res => {
+            this.setState({ nomEntitat: res.data })
+        });
+    }
+
+    componentWillReceiveProps(lng) {
+        var url = window.location.href + "webui/nomEntitat";
+        axios.get(url).then(res => {
+            this.setState({ nomEntitat: res.data })
+        });
+    }
+
 
     render() {
 
         const { t } = this.props;
+
+        let entitatNom = this.state.nomEntitat;
 
         return (
             <div className="container-contenido">
 
                 <div className="row mr-0 ml-0">
                     <div className="infoNoMenu">
-                        <p className="titol h2">{t('paginaIniciTitol')}</p>
+                        <p className="titol h2">{t('paginaIniciTitol')} {entitatNom}</p>
 
                         <div className="col-md-5 border-0 float-left p-0">
                             <p className="lh15">{t('paginaIniciQuefer')}</p>

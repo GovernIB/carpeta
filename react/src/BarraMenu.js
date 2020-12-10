@@ -1,11 +1,50 @@
 import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
+import axios from "axios";
 
 class BarraMenu extends Component {
+
+	constructor(){
+		super();
+		this.state = {
+			enllasosMenuBar: []
+		}
+	}
+
+	componentWillMount() {
+		var url = window.location.href + `webui/menubarlinks`;
+		axios.get(url).then(res => {
+			const enllasosMenuBar = res.data;
+			this.setState({ enllasosMenuBar });
+		})
+	}
+
+	componentWillReceiveProps(lng) {
+		var url = window.location.href + `webui/menubarlinks`;
+		axios.get(url).then(res => {
+			const enllasosMenuBar = res.data;
+			this.setState({ enllasosMenuBar });
+		})
+	}
 
 	render() {
 
         const { t } = this.props;
+
+		let enllasosBarraMenu;
+
+		if(!this.state.enllasosMenuBar.length){
+			enllasosBarraMenu = "";
+		} else{
+			enllasosBarraMenu = this.state.enllasosMenuBar.map((s, i) => (
+				<li className="itemBar">
+					<a href={s.url} className="imc-bt-menubar">
+						<img src={s.urllogo} title={s.label} alt={s.label} className="logoMenuBar"/>
+						<span>{s.label}</span>
+					</a>
+				</li>
+			))
+		}
 
 		return (
 			<header className="imc-titol">
@@ -19,12 +58,7 @@ class BarraMenu extends Component {
 					</h1>
 
 					<ul>
-						<li>
-							<a href="http://www.caib.es/govern/organigrama/directori.do?lang=ca"
-							   className="imc-bt-directori" title={t('menuDirectori')}>
-								<span>{t('menuDirectori')}</span>
-							</a>
-						</li>
+						{enllasosBarraMenu}
 						<li>
 							<button type="button" className="imc-bt-menu" id="imc-bt-menu" title={t('menuMenu')}>
 								<span>{t('menuMenu')}</span>

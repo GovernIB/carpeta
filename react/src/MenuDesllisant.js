@@ -8,15 +8,19 @@ class MenuDesllisant extends Component {
 	constructor(){
 		super();
 		this.state = {
-			plugins: []
+			plugins: [],
+			menuEnllasos: []
 		}
 	}
 
 	componentWillMount() {
 		var url = window.location.href + `pluginfront/veureplugins`;
 		axios.get(url).then(res => {
-			const plugins = res.data;
-			this.setState({ plugins });
+			this.setState({ plugins: res.data })
+		});
+		var url2 = window.location.href + `webui/menuslidelinks`;
+		axios.get(url2).then(res => {
+			this.setState({ menuEnllasos: res.data })
 		})
 	}
 
@@ -39,8 +43,11 @@ class MenuDesllisant extends Component {
 	componentWillReceiveProps(lng) {
 		var url = window.location.href + `pluginfront/veureplugins`;
 		axios.get(url).then(res => {
-			const plugins = res.data;
-			this.setState({ plugins });
+			this.setState({ plugins: res.data })
+		});
+		var url2 = window.location.href + `webui/menuslidelinks`;
+		axios.get(url2).then(res => {
+			this.setState({ menuEnllasos: res.data })
 		})
 	}
 
@@ -61,6 +68,22 @@ class MenuDesllisant extends Component {
 		var urlBase = window.location.href;
 		var defaultEntityCode = sessionStorage.getItem("defaultEntityCode");
 		// var numEntitats = sessionStorage.getItem("numEntitats");
+
+		let enllasosMenu;
+
+		if(!this.state.menuEnllasos.length){
+			enllasosMenu = "";
+		} else{
+			enllasosMenu = this.state.menuEnllasos.map((s, i) => (
+				<li>
+					<a href={s.url} title={s.nom}>
+						<img src={s.urllogo} title={s.label} alt={s.label} className="imc-icona iconaEnllas"></img>
+						<span>{s.label}</span>
+					</a>
+				</li>
+			))
+		}
+
 
 		var boto_ca;
 		if (i18n.language === 'ca') {
@@ -173,12 +196,7 @@ class MenuDesllisant extends Component {
 					<div className="imc-cercador" id="imc-cercador">
 					</div>
 					<ul>
-						<li>
-							<a href="http://www.caib.es/govern/cercadorAv.do?lang=ca"
-							   className="imc-marc-ico imc--avanzada" title={t('menuRecerca')}>
-								<span>{t('menuRecerca')}</span>
-							</a>
-						</li>
+						{enllasosMenu}
 						<li className="imc-marc-ico imc--idioma">
 							{boto_ca} \ {boto_es}
 						</li>

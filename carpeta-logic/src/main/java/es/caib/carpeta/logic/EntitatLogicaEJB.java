@@ -102,14 +102,14 @@ public class EntitatLogicaEJB extends EntitatEJB implements EntitatLogicaLocal, 
 			
 	}
 
-	/** Cerca si existeix una entiat **/
+	/** Cerca una entiat a través del seu coodi**/
 	@Override
-	public boolean existeix(String codiEntitat) throws I18NException {
+	public EntitatJPA findByCodi(String codiEntitat) throws I18NException {
 
 		TypedQuery<EntitatJPA> query = getEntityManager().createQuery(
 				"select a from EntitatJPA a "
 						+ "where a.codi = :codiEntitat and a.activa = true", EntitatJPA.class);
 		query.setParameter("codiEntitat", codiEntitat);
-		return query.getResultList().size() > 0;
+		return query.getResultList().get(0);
 	}
 }

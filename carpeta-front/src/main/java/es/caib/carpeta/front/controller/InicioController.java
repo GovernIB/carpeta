@@ -2,6 +2,7 @@ package es.caib.carpeta.front.controller;
 
 import es.caib.carpeta.ejb.PropietatGlobalLocal;
 import es.caib.carpeta.front.utils.SesionHttp;
+import es.caib.carpeta.jpa.EntitatJPA;
 import es.caib.carpeta.logic.EntitatLogicaLocal;
 import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
 import es.caib.carpeta.logic.utils.EjbManager;
@@ -119,7 +120,9 @@ public class InicioController extends CommonFrontController {
 
             } else if(defaultEntityCode != null){
 
-                    if(entitatEjb.existeix(defaultEntityCode)) {
+                    EntitatJPA entitat = entitatEjb.findByCodi(defaultEntityCode);
+
+                    if(entitat != null) {
 
                         sesionHttp.setEntitat(defaultEntityCode);
                         mav.addObject("entitat", sesionHttp.getEntitat());
