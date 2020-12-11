@@ -19,7 +19,6 @@ import AvisosFront from './AvisosFront';
 import PluginHtml from './PluginHtml';
 import PluginReact from './PluginReact';
 import MenuRapid from './MenuRapid';
-import Suport from './Suport';
 import * as breadcrumbPaths from './utils/breadcrumbPaths';
 import * as breadcrumbPathsAut from './utils/breadcrumbPathsAut';
 
@@ -134,16 +133,6 @@ newMenuDesllisantReact  = function createReactCompMenuDesllisant(nomComponent, p
 
 newPeuReact  = function createReactCompPeu(nomComponent, param) {
     ReactDOM.render(<Peu autenticat={param}/>, document.getElementById(nomComponent));
-};
-
-newSuportReact  = function createReactCompSuport(nomComponent, param) {
-	ReactDOM.render(<Suport autenticat={param}/>, document.getElementById(nomComponent));
-	if (param === '0'){
-		ReactDOM.render(<Breadcrumb items={breadcrumbPaths.Suport} autenticat={param}/>, document.getElementById("mollaPa"));
-	}
-	if (param === '1'){
-		ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.Suport} autenticat={param}/>, document.getElementById("mollaPa"));
-	}
 };
 
 newPluginHtml  = function createReactCompPluginHtml(nomComponent, param, pluginID) {

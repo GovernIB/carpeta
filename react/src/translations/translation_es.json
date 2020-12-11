@@ -206,6 +206,10 @@
 	"suportTanca": "Cierra",
 	"suportAqui": "aquí",
 	"suportAjuda": "Si necesita ayuda clique",
-	"suportTitol": "Datos de contacto"
+	"suportTitol": "¿Necesitas ayuda?",
+	"suportPer": "Para ",
+	"suportCrida": "llame al teléfono ",
+	"suportConsulta": "Consulta nuestro apartado ",
+	"suportMail": "Envía un mail a "
 
 }

@@ -41,11 +41,6 @@ export const MapaWeb  = [
   {id: 'mapaWeb',label: 'breadcrumbMapaWeb'}
 ];
 
-export const Suport  = [
-  {id: 'javascript:newInici("contingut", "1");',label: 'breadcrumbInici'},
-  {id: 'suport',label: 'breadcrumbSuport'}
-];
-
 export const Plugin  = [
   {id: 'javascript:newInici("contingut", "1");',label: 'breadcrumbInici'},
   {id: 'plugin',label: 'breadcrumbPlugin'}

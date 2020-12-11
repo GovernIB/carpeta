@@ -14,7 +14,6 @@ var newPeuReact;
 var newPluginHtml;
 var newPluginReact;
 var newMenuRapidReact;
-var newSuportReact;
 
 
 function newInici(compoWeb, nom) {
@@ -71,10 +70,6 @@ function newAvisosFront(compoWeb, nom) {
 
 function newPeu(compoWeb, nom) {
 	setTimeout(newPeuReact.bind(null,compoWeb,nom) , 1);
-}
-
-function newSuport(compoWeb, nom) {
-	setTimeout(newSuportReact.bind(null,compoWeb,nom) , 1);
 }
 
 function newPluginHtml(compoWeb, nom, pluginID) {

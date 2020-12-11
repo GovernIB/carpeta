@@ -40,8 +40,3 @@ export const MapaWeb  = [
   {id: 'javascript:newInici("contingut", "0");',label: 'breadcrumbInici'},
   {id: 'mapaWeb',label: 'breadcrumbMapaWeb'}
 ];
-
-export const Suport  = [
-  {id: 'javascript:newInici("contingut", "0");',label: 'breadcrumbInici'},
-  {id: 'suport',label: 'breadcrumbSuport'}
-];

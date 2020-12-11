@@ -206,6 +206,9 @@
 	"suportTanca": "Tanca",
 	"suportAqui": "aquí",
 	"suportAjuda": "Si necessita ajuda pitgi",
-	"suportTitol": "Dades de contacte"
-
+	"suportTitol": "Necessites ajuda?",
+	"suportPer": "Per a ",
+	"suportCrida": "crida al telèfon ",
+	"suportConsulta": "Consulta el nostre apartat ",
+	"suportMail": "Envia un mail a "
 }
