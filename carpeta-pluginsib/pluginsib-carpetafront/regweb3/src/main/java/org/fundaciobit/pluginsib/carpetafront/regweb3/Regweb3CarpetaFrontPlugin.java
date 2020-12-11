@@ -340,7 +340,7 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         // XYZ ZZZ
         map.put("form_action", absolutePluginRequestPath + "/" + DETALL_REGISTRE_PAGE);
         map.put("lang", locale.getLanguage());
-        map.put("detalletitle", getDetalleTitle(new Locale("ca")));
+        map.put("detalletitle", getDetalleTitle(locale));
 
 
         //Traduccions tipoDocumentacionFísica
@@ -366,9 +366,9 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         String[] traduccions = {"registro.titulo.detalle", "registro.entrada", "registro.fecha", "registro.numero",
            "registro.oficina", "registro.destinatario", "registro.tipo.doc", "registro.extracto", "carpeta.idioma",
-           "registro.justificante", "registre.justifcante.pendiente", "registro.interesados", "registro.interesado.nombre",
-           "registro.interesado.documento", "registro.interesado.tipo", "registro.anexos", "registro.anexos.vacio",
-           "registro.anexo.titulo"};
+           "registro.presencial", "registro.justificante", "registre.justifcante.pendiente", "registro.interesados",
+           "registro.interesado.nombre", "registro.interesado.documento", "registro.interesado.tipo", "registro.anexos",
+           "registro.anexos.vacio", "registro.anexo.titulo", "registro.anexo.tipomime"};
 
 
         for (String t : traduccions) {
@@ -401,6 +401,8 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             System.out.println("ar.getEntidadRegistralInicioDenominacion() => " + registro.getEntidadRegistralInicioDenominacion());
             System.out.println("ar.getTipoDocumentacionFisicaCodigo() => " + registro.getTipoDocumentacionFisicaCodigo());
             System.out.println("ar.getIdioma() => " + registro.getIdioma());
+            System.out.println("ar.isPresencial() => " + registro.isPresencial());
+            System.out.println("Anexos retornados => " + registro.getAnexos().size());
 
 
         }
@@ -417,6 +419,8 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         RegWebAsientoRegistralWs service = getRegWebAsientoRegistralWsService();
 
         AsientoRegistralWs registro= service.obtenerAsientoCiudadano(entidad, administrationID, numeroRegistroFormateado);
+
+
 
         return registro;
     }
