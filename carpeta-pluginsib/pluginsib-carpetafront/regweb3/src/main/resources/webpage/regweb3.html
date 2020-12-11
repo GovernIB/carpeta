@@ -56,11 +56,7 @@
                         <#setting date_format="MM/dd/yyyy hh">
                         <#list registros as registro >
 
-                        <script type="text/javascript">
-                            var url = "${urlDetalle}${registro.numeroRegistroFormateado}";
-                        </script>
-
-                        <tr class="clickable-row"  onclick="window.location.replace(url)">
+                        <tr class="clickable-row"  onclick="window.location.replace('${urlDetalle}${registro.numeroRegistroFormateado}')">
                             <td>${registro.numeroRegistroFormateado}</td>
                             <td>
                                 ${registro.fechaRegistro?string("dd-MM-yyyy HH:mm")}

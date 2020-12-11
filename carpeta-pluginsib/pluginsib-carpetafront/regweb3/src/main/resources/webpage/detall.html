@@ -75,6 +75,10 @@
                                             <dt class="col-sm-3 pb-2">${carpeta_idioma}</dt>
                                             <dd class="col-sm-7"><#if registro.idioma?has_content >${registroIdioma[registro.idioma]}</#if></dd>
 
+                                            <dt class="col-sm-3 pb-2">${registro_presencial}</dt>
+                                            <dd class="col-sm-7">${registro.isPresencial()?then('Sí', 'No')}</dd>
+
+
 
                                         </dl>
 
@@ -118,9 +122,9 @@
                                                 <tbody>
                                                 <#list registro.interesados as interesado >
                                                 <tr>
-                                                    <td>${interesado?index}</td>
+                                                    <td>${interesado?index+1}</td>
                                                     <td>
-                                                        ${interesado.interesado.nombre}
+                                                        ${interesado.interesado.nombre} ${interesado.interesado.apellido1} ${interesado.interesado.apellido2}
                                                     </td>
                                                     <td>${interesado.interesado.documento}</td>
                                                     <td>${tipoInteresado[interesado.interesado.tipoInteresado]}</td>
@@ -148,13 +152,15 @@
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">${registro_anexo_titulo}</th>
+                                                <th scope="col">${registro_anexo_tipomime}</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <#list registro.anexos as anexo >
                                             <tr>
-                                                <td>${anexo?index}</td>
+                                                <td>${anexo?index +1}</td>
                                                 <td>${anexo.titulo}</td>
+                                                <td>${anexo.tipoMIMEFicheroAnexado}</td>
 
                                             </tr>
                                             </#list>
