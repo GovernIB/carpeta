@@ -84,7 +84,7 @@
 					<h5>
 						<span>
 							<c:if test="${user != null}">
-								<span class="oi oi-person" aria-hidden="true"> </span><sec:authentication property="principal.usuarioClave.nombreCompleto" />
+								<span class="oi oi-person pl-3" aria-hidden="true"> </span><sec:authentication property="principal.usuarioClave.nombreCompleto" />
 							</c:if>
 						</span>
 					</h5>

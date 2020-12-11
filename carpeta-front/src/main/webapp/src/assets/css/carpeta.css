@@ -231,7 +231,7 @@ img:hover {
 	text-decoration: none;
 }
 .navCarpeta{
-	vertical-align: top;
+	vertical-align: sub;
 }
 .submenuRapid{
 	top: auto;
@@ -288,6 +288,9 @@ img:hover {
 .modal-header .close {
 	padding: 0;
 	margin: 0;
+}
+.imc-titol h1 span {
+	font-size: 1.75em;
 }
 
 /* RESPONSIVE
