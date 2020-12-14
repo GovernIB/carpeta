@@ -1,15 +1,10 @@
 package es.caib.carpeta.back.controller.common;
 
-import es.caib.carpeta.hibernate.HibernateFileUtil;
-import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaLocal;
-import es.caib.carpeta.logic.UsuariEntitatLogicaLocal;
-import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
-import es.caib.carpeta.pluginsib.carpetafront.api.ICarpetaFrontPlugin;
-import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
-import org.springframework.context.i18n.LocaleContextHolder;
+
+import org.apache.log4j.Logger;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +17,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import es.caib.carpeta.hibernate.HibernateFileUtil;
+import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaLocal;
+import es.caib.carpeta.logic.UsuariEntitatLogicaLocal;
+import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
+import es.caib.carpeta.pluginsib.carpetafront.api.ICarpetaFrontPlugin;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -214,7 +215,11 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         }
 
         // XYZ ZZZ ZZZ S'ha de collir de transacció
-        Locale locale = LocaleContextHolder.getLocale();
+        //Amb això no agafa be el locale
+       // Locale locale = LocaleContextHolder.getLocale();
+
+        //Així si que agafa be l'idioma del front
+        Locale locale = Locale.getDefault();
 
         try {
             requestPlugin(request, response, pluginIDStr, administrationIDEncripted, query, locale, isGet, debug);
