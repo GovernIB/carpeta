@@ -1,5 +1,6 @@
 package es.caib.carpeta.logic;
 
+import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.jpa.AvisJPA;
 import es.caib.carpeta.jpa.EntitatJPA;
 import es.caib.carpeta.jpa.PluginJPA;
@@ -208,22 +209,25 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
 
         Locale loc = new Locale(lang.toLowerCase());
 
-        String[][] valors = {
-                { I18NLogicUtils.tradueix(loc, "entitat.suportWeb"), entitat.getSuportWeb() },
-                { I18NLogicUtils.tradueix(loc, "entitat.suportTelefon"), entitat.getSuportTelefon() },
-                { I18NLogicUtils.tradueix(loc, "entitat.suportEmail"), entitat.getSuportEmail() },
-                { I18NLogicUtils.tradueix(loc, "entitat.suportFAQ"), entitat.getSuportFAQ() },
-                { I18NLogicUtils.tradueix(loc, "entitat.suportqssi"), entitat.getSuportqssi() },
-                { I18NLogicUtils.tradueix(loc, "entitat.suportautenticacio"), entitat.getSuportautenticacio() } 
-           };
-
-        for (int i = 0; i < valors.length; i++) {
-
-            if (valors[i][1] != null) {
-                suport.put(valors[i][0], valors[i][1]);
-            }
-
+        if(!entitat.getSuportWeb().isEmpty()){
+            suport.put(String.valueOf(Constants.TIPUS_SUPORT_WEB), entitat.getSuportWeb());
         }
+        if(!entitat.getSuportTelefon().isEmpty()){
+            suport.put(String.valueOf(Constants.TIPUS_SUPORT_TELEFON), entitat.getSuportTelefon());
+        }
+        if(!entitat.getSuportEmail().isEmpty()){
+            suport.put(String.valueOf(Constants.TIPUS_SUPORT_MAIL), entitat.getSuportEmail());
+        }
+        if(!entitat.getSuportFAQ().isEmpty()){
+            suport.put(String.valueOf(Constants.TIPUS_SUPORT_FAQ), entitat.getSuportFAQ());
+        }
+        if(!entitat.getSuportqssi().isEmpty()){
+            suport.put(String.valueOf(Constants.TIPUS_SUPORT_CONSULTA_TECNICA), entitat.getSuportqssi());
+        }
+        if(!entitat.getSuportautenticacio().isEmpty()){
+            suport.put(String.valueOf(Constants.TIPUS_SUPORT_AUTENTICACIO), entitat.getSuportautenticacio());
+        }
+
 
         return suport;
 

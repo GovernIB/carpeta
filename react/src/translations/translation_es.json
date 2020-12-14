@@ -208,8 +208,12 @@
 	"suportAjuda": "Si necesita ayuda clique",
 	"suportTitol": "¿Necesitas ayuda?",
 	"suportPer": "Para ",
-	"suportCrida": "llame al teléfono ",
-	"suportConsulta": "Consulta nuestro apartado ",
-	"suportMail": "Envía un mail a "
+	"suportCrida": "Llame al teléfono ",
+	"suportConsulta": "Consulte nuestro apartado ",
+	"suportMail": "Envíe un correo a ",
+	"suportWeb": "Soporte Web",
+	"suportFAQ": "Preguntas Frecuentes (FAQ)",
+	"suportConsultaTecnica": "Háganos llegar su consulta técnica ",
+	"suportAutenticacio": "Problemas relacionados con la autenticación: "
 
 }

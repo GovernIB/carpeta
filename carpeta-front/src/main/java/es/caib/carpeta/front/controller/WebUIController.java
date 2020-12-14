@@ -134,6 +134,39 @@ public class WebUIController extends CommonFrontController {
 
     }
 
+    public static class SuportInfo {
+        protected String tipus;
+        protected String valor;
+
+        public SuportInfo() {
+            super();
+            // TODO Auto-generated constructor stub
+        }
+
+        public SuportInfo(String tipus, String valor) {
+            super();
+            this.tipus = tipus;
+            this.valor = valor;
+        }
+
+        public String getTipus() {
+            return tipus;
+        }
+
+        public void setTipus(String tipus) {
+            this.tipus = tipus;
+        }
+
+        public String getValor() {
+            return valor;
+        }
+
+        public void setValor(String valor) {
+            this.valor = valor;
+        }
+
+    }
+
     @RequestMapping(value = WEBUI_INFOLOGOLATERAL_PATH, method = RequestMethod.GET)
     public void getEntitatInfoLogoLateral(HttpServletRequest request, HttpServletResponse response) {
 
@@ -342,10 +375,22 @@ public class WebUIController extends CommonFrontController {
 
             Map<String, String> suport = utilsEjb.getSuportEntitat(codiEntitat, lang);
 
-            response.setCharacterEncoding("utf-8");
-            response.setContentType("text/html");
-            response.getWriter().println(suport);
-            response.flushBuffer();
+            List<SuportInfo> suportInfo = new ArrayList<WebUIController.SuportInfo>();
+
+            for (Map.Entry<String, String> dada : suport.entrySet()){
+                suportInfo.add(new SuportInfo(dada.getKey(), dada.getValue()));
+            }
+
+            // Passar JSON de dadesSuport
+            Gson gson = new Gson();
+            String json = gson.toJson(suportInfo);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF8");
+
+            byte[] utf8JsonString = json.getBytes("UTF8");
+
+            response.getOutputStream().write(utf8JsonString);
 
         } catch (Throwable e) {
             processException(e, response);
