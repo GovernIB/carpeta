@@ -34,3 +34,32 @@ ALTER TABLE car_entitat
   ADD CONSTRAINT car_entitat_traduccio_log_fk FOREIGN KEY (logintextid) REFERENCES car_traduccio (traduccioid) ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 create index car_entitat_logintextid_fk_i on car_entitat (logintextid);
+
+
+-- 14/12/2020 Implementar Plugin de Notificacions #270 
+
+INSERT INTO car_traduccio VALUES (66);
+INSERT INTO car_traduccio VALUES (76);
+
+INSERT INTO car_traducciomap VALUES (66, 'en', 'Notifications');
+INSERT INTO car_traducciomap VALUES (66, 'ca', 'Notificacions');
+INSERT INTO car_traducciomap VALUES (66, 'es', 'Notificaciones');
+INSERT INTO car_traducciomap VALUES (76, 'en', 'Notifications');
+INSERT INTO car_traducciomap VALUES (76, 'ca', 'Notificacions');
+INSERT INTO car_traducciomap VALUES (76, 'es', 'Notificaciones');
+
+
+
+INSERT INTO car_plugin(nomid, classe, tipus, propietats, actiu, descripcioid)) VALUES (66, 'org.fundaciobit.pluginsib.carpetafront.notib.NotibCarpetaFrontPlugin', 1, '# Class => org.fundaciobit.pluginsib.carpetafront.notib.NotibCarpetaFrontPlugin
+
+# Common
+es.caib.carpeta.pluginsib.carpetafront.notib.development=true
+
+#
+# Sistra 1
+es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.url=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.url"]]
+es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.user=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.user"]]
+es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.pass=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.pass"]]
+
+# NOTIFICACIONES
+es.caib.carpeta.pluginsib.carpetafront.notib.notificaciones.url=https://sede.administracion.gob.es/carpeta/notificaciones/notifica/consultaNotificaciones.htm', true, 76);

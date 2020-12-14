@@ -1,0 +1,17 @@
+# Class => org.fundaciobit.pluginsib.carpetafront.notib.NotibCarpetaFrontPlugin
+
+# Common
+es.caib.carpeta.pluginsib.carpetafront.notib.development=true
+
+#
+# Notificacions CAIB: Sistra 1
+es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.url=https://dev.caib.es/sistraback/zonaperws/services/v2/BackofficeFacade
+es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.user=user
+es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.pass=pass
+es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.level=2
+es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.web=https://www.caib.es/sistrafront/zonaperfront/protected/init.do
+
+
+# Notificacions Estatals
+es.caib.carpeta.pluginsib.carpetafront.notib.notificaciones.url=https://sede.administracion.gob.es/carpeta/notificaciones/notifica/consultaNotificaciones.htm
+

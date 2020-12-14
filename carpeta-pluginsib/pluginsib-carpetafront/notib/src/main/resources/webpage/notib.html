@@ -1,0 +1,47 @@
+
+<div class="card mb-12 border-0 p-2">
+    <div class="card-title border-bottom verde h5 paddingBottomEstandard">${comunicacion_listado}</div>
+
+    <p class="card-text mb-5 lh15">${comunicacion_descripcion}</p>
+
+    <div class="card-body tablaRegistros">
+        <#if  comunicacions?has_content == false >
+            <div class="alert alert-secondary mt-5" role="alert">
+                ${comunicacion_vacio}
+            </div>
+        </#if>
+
+        <div class="mt-0">
+
+            <#if  comunicacions?has_content  >
+
+                <table id="dataTable_paginate" class="table table-striped table-bordered table-hover" style="width:100%">
+                    <thead class="table-success">
+                    <tr>
+                        <th>${comunicacion_descripcion_comunicacion}</th>
+                        <th>${comunicacion_fecha}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <#list comunicacions as com >
+                        <tr style="cursor: pointer" class="" data-target="_blank" data-href="${com.url}">
+                            <td>${com.descripcion}</td>
+                            <td>${com.fecha?string("dd-MM-yyyy HH:mm")}</td>
+                        </tr>
+                    </#list>
+                    </tbody>
+                </table>
+            </#if>
+        </div>
+
+    </div>
+
+</div>
+<script>
+    $('tr').click(function() {
+        var url = $(this).attr('data-href');
+        // var url = $(this).find('.url_sistra').html();
+        url = url.replace(/&amp;/g, "&");
+        window.open(url, '_blank');
+    });
+</script>

@@ -17,6 +17,7 @@
         <module>api</module>
         <module>sistra</module>
         <module>regweb3</module>
+        <module>notib</module>
         <module>reactexample</module>
     </modules>
 

@@ -47,8 +47,6 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     public static final String SISTRA_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "sistra.";
     public static final String SISTRA1_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "sistra1.";
     public static final String SISTRA2_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "sistra2.";
-    
-    private final static Boolean development = true;
 
     /**
      * 

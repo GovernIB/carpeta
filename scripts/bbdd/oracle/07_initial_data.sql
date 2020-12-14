@@ -63,6 +63,33 @@ es.caib.carpeta.pluginsib.carpetafront.regweb3.user=[=SP["es.caib.carpeta.plugin
 es.caib.carpeta.pluginsib.carpetafront.regweb3.pass=[=SP["es.caib.carpeta.pluginsib.carpetafront.regweb3.pass"]]
 es.caib.carpeta.pluginsib.carpetafront.regweb3.entidad=A04003003', 1);
 
+-- Plugin de NOTIB
+
+INSERT INTO car_traduccio VALUES (66);
+INSERT INTO car_traduccio VALUES (76);
+
+INSERT INTO car_traducciomap VALUES (66, 'en', 'Notifications');
+INSERT INTO car_traducciomap VALUES (66, 'ca', 'Notificacions');
+INSERT INTO car_traducciomap VALUES (66, 'es', 'Notificaciones');
+INSERT INTO car_traducciomap VALUES (76, 'en', 'Notifications');
+INSERT INTO car_traducciomap VALUES (76, 'ca', 'Notificacions');
+INSERT INTO car_traducciomap VALUES (76, 'es', 'Notificaciones');
+
+
+
+INSERT INTO car_plugin(pluginid, nomid, classe, tipus, propietats, actiu, descripcioid)) VALUES (3, 66, 'org.fundaciobit.pluginsib.carpetafront.notib.NotibCarpetaFrontPlugin', 1, '# Class => org.fundaciobit.pluginsib.carpetafront.notib.NotibCarpetaFrontPlugin
+
+# Common
+es.caib.carpeta.pluginsib.carpetafront.notib.development=true
+
+#
+# Sistra 1
+es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.url=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.url"]]
+es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.user=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.user"]]
+es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.pass=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.pass"]]
+
+# NOTIFICACIONES
+es.caib.carpeta.pluginsib.carpetafront.notib.notificaciones.url=https://sede.administracion.gob.es/carpeta/notificaciones/notifica/consultaNotificaciones.htm', true, 76);
 
 
 -- Propietat Global
