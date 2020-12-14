@@ -7,7 +7,9 @@ import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.sistramit.rest.api.externa.v1.RFiltroTramitePersistencia;
+import es.caib.sistramit.rest.api.externa.v1.RInfoTicketAcceso;
 import es.caib.sistramit.rest.api.externa.v1.RTramitePersistencia;
+import es.caib.sistramit.rest.api.externa.v1.RUsuarioAutenticadoInfo;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitePersistente;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitesPersistentes;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementoExpediente;
@@ -93,7 +95,7 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     @Override
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
-            HttpServletRequest request, String administrationID,String administrationIDEncriptat) throws Exception {
+            HttpServletRequest request, UserData userData,String administrationIDEncriptat) throws Exception {
         
         String startURL = absolutePluginRequestPath + "/" + LLISTAT_TRAMITS_PAGE; 
         
@@ -104,26 +106,26 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     
     @Override
     public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
-                                    HttpServletRequest request, HttpServletResponse response, String administrationID,
+                                    HttpServletRequest request, HttpServletResponse response, UserData userData,
                                     String administrationEncriptedID, Locale locale, boolean isGet) {
 
 
 
         log.info("SistraCarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
-        log.info("SistraCarpetaFrontPlugin::requestCarpetaFront => administrationID: " + administrationID);
+        log.info("SistraCarpetaFrontPlugin::requestCarpetaFront => administrationID: " + userData.getAdministrationID());
         log.info("SistraCarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: " + administrationEncriptedID);
         
         if (query.startsWith(LLISTAT_TRAMITS_PAGE)) {
             
-            llistatDeTramits(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, administrationID, administrationEncriptedID, locale, isGet);
+            llistatDeTramits(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData, administrationEncriptedID, locale, isGet);
  
         } else if (query.startsWith(OBTENER_TIQUET)) {
         	
-        	obtenerTramiteSistra2(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, administrationID, administrationEncriptedID, locale, isGet);
+        	obtenerTramiteSistra2(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData, administrationEncriptedID, locale, isGet);
             
         } else {
         
-        	super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, administrationID, administrationEncriptedID, locale, isGet);
+        	super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData, administrationEncriptedID, locale, isGet);
         }
         
         
@@ -140,7 +142,7 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     protected static final String LLISTAT_TRAMITS_PAGE = "llistatTramits";
     
     public void llistatDeTramits(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
-            HttpServletRequest request, HttpServletResponse response, String administrationID,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet)  {
         
         try {
@@ -181,7 +183,7 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 	        response.setContentType("text/html");
 	        
 	                  
-	        String webpage =  getLlistatDeTramitsPage(absolutePluginRequestPath, administrationID, formDataInici, formDataFi, formEstat, locale, isGet);
+	        String webpage =  getLlistatDeTramitsPage(absolutePluginRequestPath, userData, formDataInici, formDataFi, formEstat, locale, isGet);
 	              
 	        try {
 	        	response.getWriter().println(webpage);
@@ -197,7 +199,7 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     
     
     
-    public String getLlistatDeTramitsPage(String absolutePluginRequestPath, String administrationID,  Date formDataInici, 
+    public String getLlistatDeTramitsPage(String absolutePluginRequestPath,UserData userData,  Date formDataInici, 
     		Date formDataFi, String formEstat, Locale locale, boolean isGet) throws Exception {
         
         Map<String, Object> map = new HashMap<String, Object>();
@@ -218,9 +220,9 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         	/* SISTRA1 */
         	try {
 	            if (isDevelopment()) {
-	              tramits = getTramitsDebug(formDataInici, formDataFi, administrationID, formEstat, locale);
+	              tramits = getTramitsDebug(formDataInici, formDataFi, userData.getAdministrationID(), formEstat, locale);
 	            }  else {
-	              tramits = getTramits(formDataInici, formDataFi, administrationID, formEstat, locale);
+	              tramits = getTramits(formDataInici, formDataFi, userData.getAdministrationID(), formEstat, locale);
 	            }
         	}catch(SOAPFaultException e) {
       		  tramits = null;
@@ -234,9 +236,9 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 	       /* SISTRA2 */
 	       try {
 	    	   if (isDevelopment()) {
-	              tramits = obtenerTramitesDebug(administrationID, formDataInici, formDataFi, formEstat, absolutePluginRequestPath);
+	              tramits = obtenerTramitesDebug(userData.getAdministrationID(), formDataInici, formDataFi, formEstat, absolutePluginRequestPath);
 	            }  else {
-	              tramits = obtenerTramites(administrationID,formDataInici,formDataFi, formEstat, absolutePluginRequestPath);
+	              tramits = obtenerTramites(userData.getAdministrationID(),formDataInici,formDataFi, formEstat, absolutePluginRequestPath);
 	            }
 	       }catch(javax.ws.rs.client.ResponseProcessingException e) {
 	    	   tramits = null;
@@ -511,39 +513,40 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
    protected static final String OBTENER_TIQUET = "tiquetAcceso";    
    
    public void obtenerTramiteSistra2(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
-           HttpServletRequest request, HttpServletResponse response, String administrationID,
+           HttpServletRequest request, HttpServletResponse response, UserData userData,
            String administrationEncriptedID, Locale locale, boolean isGet)  {
        
        try {
        
 	        // XYZ ZZZ Issue #197 Pendent obtenir dades autenticació usuari per cridar obtenerTiquetAccesoSistra2
     	   
-	        /*
-	        UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();
-	        UsuarioClave usuClave = usuarioAutenticado.getUsuarioClave();
+	        
+	        //UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();
+	        
+           /*
 	        
 	        if (isDevelopment()) {
     		   log.info("REQUEST TRAMITE: " + request.getParameter("tramite"));
-    		   log.info("Nombre: " + usuClave.getNombre());
-	   	        log.info("Apellido1: " + usuClave.getApellido1());
-	   	        log.info("Apellido2: " + usuClave.getApellido2());
-	   	        log.info("Nif: " + usuClave.getNif());
-	   	        log.info("MetodoAutentication: " + usuClave.getMetodoAutentificacion());
-	   	        log.info("Qaa: " + usuClave.getQaa());
+    		   log.info("Nombre: " + userData.getName());
+	   	        log.info("Apellido1: " + userData.getSurname1());
+	   	        log.info("Apellido2: " + userData.getSurname2());
+	   	        log.info("Nif: " + userData.getAdministrationID());
+	   	        log.info("MetodoAutentication: " + userData.getAuthenticationMethod());
+	   	        log.info("Qaa: " + userData.getQaa());
     	   }
 	        
-	       String url = obtenerTiquetAccesoSistra2(request.getParameter("tramite"), usuClave);
+	       String url = obtenerTiquetAccesoSistra2(request.getParameter("tramite"), userData);
            response.sendRedirect(url);
-           */
            
+           */
            
        } catch (Exception e) {
            log.error("Error obtenint tiquet accès Sistra 2: " + e.getMessage(), e);
        }  
    }
    
-   /*
-   public String obtenerTiquetAccesoSistra2(String idSesionTramitacion, UsuarioClave usuario) throws Exception {
+  
+   public String obtenerTiquetAccesoSistra2(String idSesionTramitacion, UserData userData) throws Exception {
 
        Client client = getClientBasicAuthenticator();
        
@@ -551,15 +554,15 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
        infoTicket.setIdSesionTramitacion(idSesionTramitacion);
        
        RUsuarioAutenticadoInfo usuarioInfo = new RUsuarioAutenticadoInfo();
-       usuarioInfo.setNombre(usuario.getNombre());
-       usuarioInfo.setApellido1(usuario.getApellido1());
-       usuarioInfo.setApellido2(usuario.getApellido2());
+       usuarioInfo.setNombre(userData.getName());
+       usuarioInfo.setApellido1(userData.getSurname1());
+       usuarioInfo.setApellido2(userData.getSurname2());
        usuarioInfo.setEmail("");
-       usuarioInfo.setUsername(usuario.getNif());
-       usuarioInfo.setNif(usuario.getNif());
+       usuarioInfo.setUsername(userData.getAdministrationID());
+       usuarioInfo.setNif(userData.getAdministrationID());
        usuarioInfo.setAutenticacion("c");
-       usuarioInfo.setMetodoAutenticacion(usuario.getMetodoAutentificacion());
-       usuarioInfo.setQaa(usuario.getQaa());
+       usuarioInfo.setMetodoAutenticacion(userData.getAuthenticationMethod());
+       usuarioInfo.setQaa(userData.getQaa());
        
        infoTicket.setUsuarioAutenticadoInfo(usuarioInfo);
        
@@ -573,7 +576,7 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
        
        return url;
    }
-   */
+   
    
    /*
    // SISTRA 1

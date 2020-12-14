@@ -76,7 +76,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     @Override
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
-            HttpServletRequest request, String administrationID, String administrationIDEncriptat) throws Exception {
+            HttpServletRequest request, UserData userData, String administrationIDEncriptat) throws Exception {
+        
+        registerUserData(userData);
 
         String startURL = absolutePluginRequestPath + "/" + OPCIONS;
 
@@ -86,27 +88,27 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     @Override
     public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
-            HttpServletRequest request, HttpServletResponse response, String administrationID,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet) {
 
         log.info("NotibCarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
-        log.info("NotibCarpetaFrontPlugin::requestCarpetaFront => administrationID: " + administrationID);
+        log.info("NotibCarpetaFrontPlugin::requestCarpetaFront => administrationID: " + userData.getAdministrationID());
         log.info("NotibCarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
                 + administrationEncriptedID);
 
         if (query.startsWith(OPCIONS)) {
 
-            opcions(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, administrationID,
+            opcions(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
                     administrationEncriptedID, locale, isGet);
 
         } else if (query.startsWith(COMUNICACIONS)) {
 
             comunicacions(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                    administrationID, administrationEncriptedID, locale, isGet);
+                    userData, administrationEncriptedID, locale, isGet);
         } else {
 
             super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                    administrationID, administrationEncriptedID, locale, isGet);
+                    userData, administrationEncriptedID, locale, isGet);
         }
 
     }
@@ -128,7 +130,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     protected static final String OPCIONS = "opcions";
 
     public void opcions(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
-            HttpServletRequest request, HttpServletResponse response, String administrationID,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet) {
 
         try {
@@ -136,7 +138,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             response.setCharacterEncoding("utf-8");
             response.setContentType("text/html");
 
-            String webpage = getOpcionsPage(absolutePluginRequestPath, relativePluginRequestPath, administrationID,
+            String webpage = getOpcionsPage(absolutePluginRequestPath, relativePluginRequestPath, userData,
                     locale, isGet);
 
             try {
@@ -153,7 +155,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     }
 
     protected String getOpcionsPage(String absolutePluginRequestPath, String relativePluginRequestPath,
-            String administrationID, Locale locale, boolean isGet) throws Exception {
+            UserData userData, Locale locale, boolean isGet) throws Exception {
 
         Map<String, Object> map = new HashMap<String, Object>();
 
@@ -218,7 +220,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     protected static final String COMUNICACIONS = "comunicacions";
 
     public void comunicacions(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
-            HttpServletRequest request, HttpServletResponse response, String administrationID,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet) {
 
         try {
@@ -228,7 +230,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             String numeroRegistroFormateado = request.getParameter("numeroRegistroFormateado");
 
-            String webpage = getComunicacionsPage(absolutePluginRequestPath, numeroRegistroFormateado, administrationID,
+            String webpage = getComunicacionsPage(absolutePluginRequestPath, numeroRegistroFormateado, userData,
                     locale);
 
             try {
@@ -245,7 +247,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     }
 
     public String getComunicacionsPage(String absolutePluginRequestPath, String numeroRegistroFormateado,
-            String administrationID, Locale locale) throws Exception {
+            UserData userData, Locale locale) throws Exception {
 
         Map<String, Object> map = new HashMap<String, Object>();
 
@@ -266,7 +268,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         Sistra1ServiceImpl sistra1Service = getSistra1ServiceImpl();
 
         List<ElementoExpediente> comunicaciones = sistra1Service.obtenerElementosExpediente(coms,
-                Sistra1ServiceImpl.ELEMENTO_TODOS, administrationID, locale);
+                Sistra1ServiceImpl.ELEMENTO_TODOS, userData.getAdministrationID(), locale);
 
         map.put("comunicacions", comunicaciones);
 

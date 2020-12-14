@@ -1,9 +1,7 @@
-package es.caib.carpeta.back.controller.common;
+package es.caib.carpeta.front.controller;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
-
 import org.apache.log4j.Logger;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,25 +52,19 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
     @EJB(mappedName = PluginDeCarpetaFrontLogicaLocal.JNDI_NAME)
     protected PluginDeCarpetaFrontLogicaLocal pluginCarpetaFrontEjb;
-    
-    
-    
-    
-    
+
     @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}/{urlBase}")
     public ModelAndView showCarpetaFrontModule(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("pluginID") Long pluginID,
             @PathVariable("administrationIDEncriptat") String administrationIDEncriptat,
             @PathVariable("urlBase") String urlBase) throws Exception {
-        
-        String urlBaseDec = new String(Base64.getUrlDecoder().decode(urlBase), "utf-8");
-                
-                
-        request.getSession().setAttribute(SESSION_URL_BASE, urlBaseDec);
-        
-        return showCarpetaFrontModule(request, response, pluginID,administrationIDEncriptat);
-    }
 
+        String urlBaseDec = new String(Base64.getUrlDecoder().decode(urlBase), "utf-8");
+
+        request.getSession().setAttribute(SESSION_URL_BASE, urlBaseDec);
+
+        return showCarpetaFrontModule(request, response, pluginID, administrationIDEncriptat);
+    }
 
     @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}")
     public ModelAndView showCarpetaFrontModule(HttpServletRequest request, HttpServletResponse response,
@@ -86,13 +78,13 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         try {
             carpetaFront = pluginCarpetaFrontEjb.getInstanceByPluginID(pluginID);
         } catch (I18NException e) {
-            
+
             String msg = I18NUtils.tradueix("plugin.signatureweb.noexist", String.valueOf(pluginID));
             return generateErrorMAV(request, pluginID, msg, e);
         }
 
         if (carpetaFront == null) {
-            
+
             String msg = I18NUtils.tradueix("plugin.signatureweb.noexist", String.valueOf(pluginID));
             return generateErrorMAV(request, pluginID, msg, null);
         }
@@ -123,39 +115,13 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         return new ModelAndView(new RedirectView(urlToPluginWebPage, false));
 
     }
-    
-    
+
     public abstract UserData getUserData(String administrationID);
-    
-    
-    
 
     private String getRelativeBaseServlet() {
         return (isPublic() ? "/public" : "/common") + "/carpetafrontservlet";
     }
 
-    /*
-     * @RequestMapping(value = "/final/{usuariEntitatIdEncriptat}") public
-     * ModelAndView finalProcesDeFirma(HttpServletRequest request,
-     * HttpServletResponse response,
-     * 
-     * @PathVariable("usuariEntitatIdEncriptat") String usuariEntitatIdEncriptat)
-     * throws Exception {
-     * 
-     * 
-     * 
-     * String urlFinal = pss.getUrlFinalOriginal();
-     * 
-     * ModelAndView mav = new ModelAndView("PluginFirmaFinal");
-     * mav.addObject("URL_FINAL", urlFinal); mav.addObject("window",
-     * pss.isRedirectToParentWindow() ? "window.top": "window");
-     * 
-     * //log.info("\n\n finalProcesDeFirma: SURT\n\n");
-     * 
-     * return mav;
-     * 
-     * }
-     */
     @RequestMapping(value = "/error")
     public ModelAndView errorProcesDeFirma(HttpServletRequest request, HttpServletResponse response,
             @RequestParam("URL_FINAL") String urlFinal) throws Exception {
@@ -223,10 +189,10 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         }
 
         // XYZ ZZZ ZZZ S'ha de collir de transacció
-        //Amb això no agafa be el locale
-       // Locale locale = LocaleContextHolder.getLocale();
+        // Amb això no agafa be el locale
+        // Locale locale = LocaleContextHolder.getLocale();
 
-        //Així si que agafa be l'idioma del front
+        // Així si que agafa be l'idioma del front
         Locale locale = Locale.getDefault();
 
         try {
@@ -308,57 +274,6 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
     // -------------------------------------------------------------------------
     // -------------------------------------------------------------------------
 
-    /*
-     * private static long lastCheckFirmesCaducades = 0;
-     * 
-     * public static void closeSignaturesSet(HttpServletRequest request, String
-     * signaturesSetID, ModulDeFirmaWebLogicaLocal modulDeFirmaEjb) {
-     * 
-     * PortaFIBSignaturesSet pss = getPortaFIBSignaturesSet(request,
-     * signaturesSetID, modulDeFirmaEjb);
-     * 
-     * if (pss == null) { log.warn("NO Existeix signaturesSetID igual a " +
-     * signaturesSetID); return; }
-     * 
-     * closeSignaturesSet(request, pss, modulDeFirmaEjb); }
-     * 
-     * 
-     * private static void closeSignaturesSet(HttpServletRequest request,
-     * PortaFIBSignaturesSet pss, ModulDeFirmaWebLogicaLocal modulDeFirmaEjb) {
-     * 
-     * 
-     * Long pluginID = pss.getPluginID(); final String signaturesSetID =
-     * pss.getSignaturesSetID(); if (pluginID == null) { // Encara no s'ha asignat
-     * plugin al signatureset } else {
-     * 
-     * ISignatureWebPlugin signaturePlugin = null; try { signaturePlugin =
-     * modulDeFirmaEjb.getInstanceByPluginID(pluginID); } catch (I18NException e) {
-     * log.error(I18NUtils.getMessage(e), e); return; } if (signaturePlugin == null)
-     * { log.error(I18NUtils.tradueix("plugin.signatureweb.noexist",
-     * String.valueOf(pluginID))); }
-     * 
-     * try { signaturePlugin.closeSignaturesSet(request, signaturesSetID); } catch
-     * (Exception e) { log.error("Error esborrant dades d'un SignaturesSet " +
-     * signaturesSetID + ": " + e.getMessage(), e); } } synchronized
-     * (portaFIBSignaturesSets) {
-     * 
-     * if (log.isDebugEnabled()) {
-     * log.info("SignatureModuleController::closeSignaturesSet() " +
-     * "=> Esborrant signaturesSetID = " + signaturesSetID); }
-     * 
-     * portaFIBSignaturesSets.remove(signaturesSetID); } }
-     * 
-     * 
-     * 
-     * 
-     * protected ModelAndView generateErrorMAV(HttpServletRequest request, String
-     * pluginID, String msg, Throwable th) {
-     * 
-     * //PortaFIBSignaturesSet pss = getPortaFIBSignaturesSet(request,
-     * signaturesSetID, modulDeFirmaEjb); return generateErrorMAV(request, pluginID,
-     * msg, th); }
-     */
-
     protected ModelAndView generateErrorMAV(HttpServletRequest request, Long pluginID, String msg, Throwable th) {
 
         String urlFinal = processError(request, pluginID, msg, th);
@@ -397,7 +312,8 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
         String urlFinal;
 
-        HtmlUtils.saveMessageError(request, msg);
+        log.error(msg, th);
+        // XYZ ZZZ HtmlUtils.saveMessageError(request, msg);
         urlFinal = getRelativePortaFIBBase(request);
 
         return urlFinal;
@@ -424,8 +340,8 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
     private static ModelAndView startSignatureProcess(HttpServletRequest request, HttpServletResponse response,
             String view, long pluginID, String administrationID, String urlBase, boolean isPublic)
             throws I18NException {
-        
-        //response.addHeader("X-Frame-Options", "SAMEORIGIN");
+
+        // response.addHeader("X-Frame-Options", "SAMEORIGIN");
 
         request.getSession().setAttribute(SESSION_URL_BASE, urlBase);
 

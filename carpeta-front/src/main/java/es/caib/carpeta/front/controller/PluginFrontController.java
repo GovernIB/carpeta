@@ -19,13 +19,16 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.net.URL;
-import java.util.*;
-
 import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ACCES_PLUGIN;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_ESTAD_ACCES_PLUGIN;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_PLUGIN_FRONT;
+
+import java.util.Base64;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.carpeta.front.utils.SesionHttp;
 import es.caib.carpeta.hibernate.HibernateFileUtil;
@@ -70,7 +73,7 @@ public class PluginFrontController extends CommonFrontController {
     protected final Log log = LogFactory.getLog(getClass());
 
     // XYZ ZZZ Llegir de constantds
-    public static final String PUBLIC_CONTEXTWEB = "/public/carpetafrontmodule";
+    //public static final String PUBLIC_CONTEXTWEB = "/public/carpetafrontmodule";
     
     
     
@@ -104,7 +107,7 @@ public class PluginFrontController extends CommonFrontController {
                                    HttpServletResponse response, Authentication authentication) throws Exception, I18NException {
 
         String administrationID = "";
-        String baseBack = "";
+        String baseFront = "";
         final String view = "plugin_contenidor"; // => \WEB-INF\views\pages\plugin_contenidor.jsp
 
         try {
@@ -120,10 +123,12 @@ public class PluginFrontController extends CommonFrontController {
             //TODO canviar, mirar javascript window.location.href
             String urlBase = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
 
+            log.info("showPlugin:: urlBase = " + urlBase);
             log.info("showPlugin:: pluginID = " + pluginID);
             log.info("showPlugin:: administrationID = " + administrationID);
 
-            String contextPath = "/carpetaback";
+            /*
+            String contextPath = "/carpetafront";
 
             //log.info("startTestPlugin:: contextPath => " + contextPath);
 
@@ -138,19 +143,22 @@ public class PluginFrontController extends CommonFrontController {
             baseBack = url.getProtocol() + "://" + url.getHost() + (port == -1 ? "" : (":" + port)) + contextPath;
 
             log.info("showPlugin:: BASE BACK = " + baseBack);
+            */
+            baseFront = urlBase;
 
         } catch (Throwable e) {
             processException(e, response);
         }
 
-        return startPublicSignatureProcess(request, response, view, pluginID, administrationID, baseBack);
+        return startPublicSignatureProcess(request, response, view, pluginID, administrationID, baseFront);
 
      }
     
 
 
+    // TODO XYZ ZZZ   
     private ModelAndView startPublicSignatureProcess(HttpServletRequest request, HttpServletResponse response,
-            String view, String pluginID, String administrationID, String baseBack)
+            String view, String pluginID, String administrationID, String baseFront)
             throws Exception, I18NException {
 
         ModelAndView mav = new ModelAndView(view);
@@ -164,13 +172,13 @@ public class PluginFrontController extends CommonFrontController {
             StringBuilder peticio = new StringBuilder();
 
 
-            String context = PUBLIC_CONTEXTWEB;
+            String context = AbstractCarpetaFrontModuleController.PUBLIC_CONTEXTWEB;
 
             String administrationIDEncriptat = HibernateFileUtil.encryptString(administrationID);
 
-            final String urlToShowPluginPage = baseBack + context + "/showplugin/" + pluginID
+            final String urlToShowPluginPage = baseFront + context + "/showplugin/" + pluginID
                     + "/" + response.encodeURL(administrationIDEncriptat)
-                    + "/" + Base64.getUrlEncoder().encodeToString(baseBack.getBytes());
+                    + "/" + Base64.getUrlEncoder().encodeToString(baseFront.getBytes());
 
             log.info(" urlToShowPluginPage => " + urlToShowPluginPage);
 

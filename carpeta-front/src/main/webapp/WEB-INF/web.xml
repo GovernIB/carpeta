@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
-         version="4.0">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+    version="4.0">
 
     <display-name>Carpeta Front</display-name>
+
+
+    <!--  LOAD-ON-STARTUP SERVLET -->
+
+    <servlet>
+      <servlet-name>InitServlet</servlet-name>
+      <servlet-class>es.caib.carpeta.front.utils.InitServlet</servlet-class>
+      <load-on-startup>1</load-on-startup>
+    </servlet>
+
+
+    <!-- === SERVLET RECEPTOR DE PETICIONS DE PLUGIN DE CARPETA FRONT === -->
+
+    <servlet>
+        <servlet-name>PluginPublicWebRequests</servlet-name>
+        <servlet-class>es.caib.carpeta.front.controller.CarpetaFrontModulePublicController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>PluginPublicWebRequests</servlet-name>
+        <url-pattern>/public/carpetafrontservlet/requestPlugin/*</url-pattern>
+    </servlet-mapping>
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

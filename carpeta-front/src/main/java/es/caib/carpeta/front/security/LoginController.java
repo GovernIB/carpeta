@@ -151,7 +151,17 @@ public class LoginController {
             // es.caib.carpeta.loginib.url_callback_logout=http://localhost:8080/carpetafront/salir
             String IDIOMA = LocaleContextHolder.getLocale().getLanguage();
 
-            String url = securityService.iniciarSesionAutentificacion(url_callback_login, url_callback_error, IDIOMA);
+            String url;
+            try {
+                
+              url = securityService.iniciarSesionAutentificacion(url_callback_login, url_callback_error, IDIOMA);
+            
+            } catch (Exception e) {
+                log.error("Error Iniciant la sessió de seguretat amb Cl@ve: " + e.getMessage(), e);
+                // XYZ ZZZ FALTA MOSTRAR ERROR
+                url = baseURL;
+            }
+
 
             logLogicaEjb.crearLog("Iniciam Sessió Autenticació Front", ESTAT_LOG_OK,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),"",null);
 

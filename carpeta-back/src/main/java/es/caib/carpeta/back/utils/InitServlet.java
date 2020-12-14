@@ -49,7 +49,7 @@ public class InitServlet extends HttpServlet {
                 throw new Exception("La ruta " + fd.getAbsolutePath() + " apunta a un fitxer i hauria d'apuntar a un directori.");
             }
             FileSystemManager.setFilesPath(fd);
-            log.info("FileSystemManager path = " + FileSystemManager.getFilesPath().getAbsolutePath());
+            log.info("FileSystemManager path (BACK) = " + FileSystemManager.getFilesPath().getAbsolutePath());
         } catch (Throwable th) {
             final String msg = "Error inicialitzant el sistema de sistema de fitxers: " + th.getMessage(); 
             log.error(msg, th);

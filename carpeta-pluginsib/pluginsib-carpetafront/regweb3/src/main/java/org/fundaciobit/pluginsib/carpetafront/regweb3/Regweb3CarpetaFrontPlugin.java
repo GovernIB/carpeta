@@ -83,8 +83,10 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     @Override
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
-                              HttpServletRequest request, String administrationID, String administrationIDEncriptat) throws Exception {
+                              HttpServletRequest request, UserData userData, String administrationIDEncriptat) throws Exception {
 
+        registerUserData(userData);
+        
         String startURL = absolutePluginRequestPath + "/" + LLISTAT_REGISTRES_PAGE;
 
         log.info(" getStartUrl( ); => " + startURL);
@@ -94,27 +96,27 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     @Override
     public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
-                                    HttpServletRequest request, HttpServletResponse response, String administrationID,
+                                    HttpServletRequest request, HttpServletResponse response, UserData userData,
                                     String administrationEncriptedID, Locale locale, boolean isGet) {
 
 
         log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
-        log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => administrationID: " + administrationID);
+        log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => administrationID: " + userData.getAdministrationID());
         log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: " + administrationEncriptedID);
 
 
         if (query.startsWith(LLISTAT_REGISTRES_PAGE)) {
 
 
-            llistatDeRegistres(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, administrationID, administrationEncriptedID, locale, isGet);
+            llistatDeRegistres(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData, administrationEncriptedID, locale, isGet);
 
         } else if (query.startsWith(DETALL_REGISTRE_PAGE)) {
 
-            detallDeRegistre(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, administrationID, administrationEncriptedID, locale, isGet);
+            detallDeRegistre(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData, administrationEncriptedID, locale, isGet);
         } else {
 
 
-            super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, administrationID, administrationEncriptedID, locale, isGet);
+            super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData, administrationEncriptedID, locale, isGet);
         }
 
 
@@ -150,7 +152,7 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
 
     public void llistatDeRegistres(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
-                                   HttpServletRequest request, HttpServletResponse response, String administrationID,
+                                   HttpServletRequest request, HttpServletResponse response, UserData userData,
                                    String administrationEncriptedID, Locale locale, boolean isGet) {
 
         try {
@@ -160,7 +162,7 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             response.setContentType("text/html");
 
 
-            String webpage = getLlistatDeRegistresPage(absolutePluginRequestPath, relativePluginRequestPath,administrationID, getEntidad(), locale, isGet);
+            String webpage = getLlistatDeRegistresPage(absolutePluginRequestPath, relativePluginRequestPath, userData, getEntidad(), locale, isGet);
 
             try {
                 response.getWriter().println(webpage);
@@ -177,7 +179,7 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     }
 
 
-    public String getLlistatDeRegistresPage(String absolutePluginRequestPath, String relativePluginRequestPath,String administrationID, String entidad, Locale locale, boolean isGet) throws Exception {
+    public String getLlistatDeRegistresPage(String absolutePluginRequestPath, String relativePluginRequestPath,UserData userData, String entidad, Locale locale, boolean isGet) throws Exception {
 
         Map<String, Object> map = new HashMap<String, Object>();
 
@@ -185,9 +187,9 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
 
         if (isDevelopment()) {
-            registres = getRegistresDebug(administrationID, entidad);
+            registres = getRegistresDebug(userData.getAdministrationID(), entidad);
         } else {
-            registres = getRegistres(administrationID, entidad);
+            registres = getRegistres(userData.getAdministrationID(), entidad);
         }
 
 
@@ -285,7 +287,7 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
 
     public void detallDeRegistre(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
-                                 HttpServletRequest request, HttpServletResponse response, String administrationID,
+                                 HttpServletRequest request, HttpServletResponse response, UserData userData,
                                  String administrationEncriptedID, Locale locale, boolean isGet) {
 
         try {
@@ -298,7 +300,7 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             String numeroRegistroFormateado = request.getParameter("numeroRegistroFormateado");
 
 
-            String webpage = getDetallDeRegistrePage(absolutePluginRequestPath,numeroRegistroFormateado,administrationID,getEntidad(),locale);
+            String webpage = getDetallDeRegistrePage(absolutePluginRequestPath,numeroRegistroFormateado, userData.getAdministrationID(),getEntidad(),locale);
 
             try {
                 response.getWriter().println(webpage);

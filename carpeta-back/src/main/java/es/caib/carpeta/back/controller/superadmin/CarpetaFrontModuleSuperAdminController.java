@@ -4,6 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import es.caib.carpeta.back.controller.common.AbstractCarpetaFrontModuleController;
+import es.caib.carpeta.back.security.LoginInfo;
+import es.caib.carpeta.jpa.UsuariJPA;
+import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 
 
 /**
@@ -19,6 +22,16 @@ public class CarpetaFrontModuleSuperAdminController extends AbstractCarpetaFront
     @Override
     public boolean isPublic() {
         return false;
+    }
+
+    @Override
+    public UserData getUserData(String administrationID) {
+        
+        UsuariJPA persona = LoginInfo.getInstance().getUsuariPersona();
+        
+        final String authenticationMethod = null;
+        final String qaa = null;
+        return new UserData(persona.getNom(), persona.getLlinatge1(), persona.getLlinatge2(), persona.getNif(), authenticationMethod, qaa);
     }
   
 }

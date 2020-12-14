@@ -71,8 +71,10 @@ public class ReactExampleCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     @Override
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
-            HttpServletRequest request, String administrationID, String administrationIDEncriptat) throws Exception {
+            HttpServletRequest request, UserData userData, String administrationIDEncriptat) throws Exception {
 
+        registerUserData(userData);
+        
         String startURL = absolutePluginRequestPath + "/" + INDEX_HTML_PAGE;
 
         log.info(" getStartUrl( ); => " + startURL);
@@ -81,27 +83,27 @@ public class ReactExampleCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     @Override
     public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
-            HttpServletRequest request, HttpServletResponse response, String administrationID,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet) {
 
         log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
-        log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => administrationID: " + administrationID);
+        log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => administrationID: " + userData.getAdministrationID());
         log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
                 + administrationEncriptedID);
 
         if (query.startsWith(INDEX_HTML_PAGE)) {
 
-            index(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, administrationID,
+            index(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
                     administrationEncriptedID, locale, isGet);
 
         } else if (query.startsWith(REACT_JS_PAGE)) {
 
-            reactjs(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, administrationID,
+            reactjs(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
                     administrationEncriptedID, locale, isGet);
         } else {
 
             super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                    administrationID, administrationEncriptedID, locale, isGet);
+                    userData, administrationEncriptedID, locale, isGet);
         }
 
     }
@@ -150,7 +152,7 @@ public class ReactExampleCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     protected static final String INDEX_HTML_PAGE = "index.html";
 
     public void index(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
-            HttpServletRequest request, HttpServletResponse response, String administrationID,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet) {
 
         try {
@@ -209,7 +211,7 @@ public class ReactExampleCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     protected static final String REACT_JS_PAGE = "reactjs_main.js";
 
     public void reactjs(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
-            HttpServletRequest request, HttpServletResponse response, String administrationID,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet) {
 
         try {

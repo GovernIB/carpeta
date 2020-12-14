@@ -28,7 +28,7 @@
       <load-on-startup>1</load-on-startup>
     </servlet>
     
-     <!--  ===  SERVELET RECEPTOR DE PETICIONS DE PLUGIN DE CARPETA FRONT === -->
+     <!--  ===  SERVLET RECEPTOR DE PETICIONS DE PLUGIN DE CARPETA FRONT DINS EL BACK === -->
   
       <servlet>
         <servlet-name>PluginPrivateWebRequests</servlet-name>
@@ -39,18 +39,6 @@
         <servlet-name>PluginPrivateWebRequests</servlet-name>
         <url-pattern>/common/carpetafrontservlet/requestPlugin/*</url-pattern>
       </servlet-mapping>
-      
-      
-       <servlet>
-        <servlet-name>PluginPublicWebRequests</servlet-name>
-        <servlet-class>es.caib.carpeta.back.controller.common.CarpetaFrontModulePublicController</servlet-class>
-      </servlet>
-    
-      <servlet-mapping>
-        <servlet-name>PluginPublicWebRequests</servlet-name>
-        <url-pattern>/public/carpetafrontservlet/requestPlugin/*</url-pattern>
-      </servlet-mapping>
-  
 
 
 	<welcome-file-list>

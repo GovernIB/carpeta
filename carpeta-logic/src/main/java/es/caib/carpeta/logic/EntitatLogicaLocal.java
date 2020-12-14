@@ -8,8 +8,6 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import es.caib.carpeta.ejb.EntitatLocal;
 import es.caib.carpeta.model.entity.Entitat;
 
-import java.util.List;
-
 
 /**
  * 

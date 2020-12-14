@@ -7,21 +7,33 @@ package es.caib.carpeta.pluginsib.carpetafront.api;
  */
 public class UserData {
 
-    String name;
-    String surname1;
-    String surname2;
-    String administrationID;
+    protected String name;
+    protected String surname1;
+    protected String surname2;
+    protected String administrationID;
+    protected String authenticationMethod;
+    protected String qaa;
 
     public UserData() {
         super();
     }
 
-    public UserData(String name, String surname1, String surname2, String administrationID) {
+    public UserData(String administrationID) {
+        super();
+        this.administrationID = administrationID;
+    }
+
+    
+    
+    public UserData(String name, String surname1, String surname2, String administrationID, 
+            String authenticationMethod, String qaa) {
         super();
         this.name = name;
         this.surname1 = surname1;
         this.surname2 = surname2;
         this.administrationID = administrationID;
+        this.authenticationMethod = authenticationMethod;
+        this.qaa = qaa;
     }
 
     public String getName() {
@@ -54,6 +66,22 @@ public class UserData {
 
     public void setAdministrationID(String administrationID) {
         this.administrationID = administrationID;
+    }
+
+    public String getAuthenticationMethod() {
+        return authenticationMethod;
+    }
+
+    public void setAuthenticationMethod(String authenticationMethod) {
+        this.authenticationMethod = authenticationMethod;
+    }
+
+    public String getQaa() {
+        return qaa;
+    }
+
+    public void setQaa(String qaa) {
+        this.qaa = qaa;
     }
 
 }
