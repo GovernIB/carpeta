@@ -24,7 +24,11 @@
                     </thead>
                     <tbody>
                     <#list comunicacions as com >
-                        <tr style="cursor: pointer" class="" data-target="_blank" data-href="${com.url}">
+                       <#if com.url??>
+                          <tr style="cursor: pointer" class="" data-target="_blank" data-href="${com.url}">
+                       <#else>
+                          <tr style="cursor: pointer" class="">
+                       </#if>
                             <td>${com.descripcion}</td>
                             <td>${com.fecha?string("dd-MM-yyyy HH:mm")}</td>
                         </tr>
