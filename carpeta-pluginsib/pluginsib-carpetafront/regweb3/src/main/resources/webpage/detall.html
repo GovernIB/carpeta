@@ -124,12 +124,13 @@
                                                 <tr>
                                                     <td>${interesado?index+1}</td>
                                                     <td>
-                                                        ${interesado.interesado.nombre} ${interesado.interesado.apellido1} ${interesado.interesado.apellido2}
+                                                        ${interesado.interesado.nombre}
+                                                        <#if interesado.interesado.apellido1?has_content >${interesado.interesado.apellido1}</#if>
+                                                        <#if interesado.interesado.apellido2?has_content >${interesado.interesado.apellido2}</#if>
                                                     </td>
-                                                    <td>${interesado.interesado.documento}</td>
+                                                    <td><#if interesado.interesado.documento?has_content >${interesado.interesado.documento}</#if></td>
                                                     <td>${tipoInteresado[interesado.interesado.tipoInteresado]}</td>
                                                 </tr>
-
 
                                                 </#list>
                                                 </tbody>
@@ -160,7 +161,7 @@
                                             <tr>
                                                 <td>${anexo?index +1}</td>
                                                 <td>${anexo.titulo}</td>
-                                                <td>${anexo.tipoMIMEFicheroAnexado}</td>
+                                                <td><#if anexo.tipoMIMEFicheroAnexado?has_content >${anexo.tipoMIMEFicheroAnexado}</#if></td>
 
                                             </tr>
                                             </#list>
