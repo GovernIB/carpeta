@@ -45,27 +45,31 @@ class Peu extends Component {
 		var autenticat = this.props.autenticat;
 		const {t} = this.props;
 
+		const dadesSuport = this.state.dadesSuport;
+
 		var suport = <button type="button" onClick={this.toggle} className="botoSuport">{t('suportAqui')}</button>
 
 		var tancar =  <button type="button" onClick={this.toggle} className="botoSuport">{t('suportTanca')}</button>;
 
-		var dades = this.state.dadesSuport.toString();
-
-
-		var dadesSuport = dades.substring(1, dades.length - 2);
-		var arrayDeCadenas = dadesSuport.split(', ');
-
-		const listWebs = arrayDeCadenas.filter(dada => dada.substr(dada.indexOf('=')+1).startsWith('http')).map((dada) =>
-			<li className="pb-2">{t('suportConsulta')} <a href={dada.substr(dada.indexOf('=')+1)}>{dada.substr(0,dada.indexOf('='))}</a></li>
+		var suportWeb = dadesSuport.filter(s => s.tipus === '1').map(s =>
+			<li className="pb-2">{t('suportConsulta')} <a href={s.valor}>{t('suportWeb')}</a></li>
+		);
+		var suportTelefon = dadesSuport.filter(s => s.tipus === '2').map(s =>
+			<li className="pb-2">{t('suportCrida')} <p className="text-verd"> {s.valor}</p></li>
+		);
+		var suportMail = dadesSuport.filter(s => s.tipus === '3').map(s =>
+			<li className="pb-2">{t('suportMail')} <a href={"mailto:'"+s.valor+"'"}>{s.valor}</a></li>
+		);
+		var suportFAQ = dadesSuport.filter(s => s.tipus === '4').map(s =>
+			<li className="pb-2">{t('suportConsulta')} <a href={s.valor}>{t('suportFAQ')}</a></li>
+		);
+		var suportConsulta = dadesSuport.filter(s => s.tipus === '5').map(s =>
+			<li className="pb-2">{t('suportConsultaTecnica')} <p className="text-verd"> {s.valor}</p></li>
+		);
+		var suportAutenticacio = dadesSuport.filter(s => s.tipus === '6').map(s =>
+			<li className="pb-2">{t('suportAutenticacio')} <p className="text-verd"> {s.valor}</p></li>
 		);
 
-		const listTelefons = arrayDeCadenas.filter(dada => !isNaN(parseInt(dada.substr(dada.indexOf('=')+1)))).map((dada) =>
-			<li className="pb-2">{t('suportPer')} {dada.substr(0,dada.indexOf('='))} {t('suportCrida')} <p className="text-verd"> {dada.substr(dada.indexOf('=')+1)}</p></li>
-		);
-
-		const listMails = arrayDeCadenas.filter(dada => dada.substr(dada.indexOf('=')+1).includes('@')).map((dada) =>
-			<li className="pb-2">{t('suportMail')} <a href={"mailto:'"+dada.substr(dada.indexOf('=')+1)+"'"}>{dada.substr(dada.indexOf('=')+1)}</a></li>
-		);
 
 		return (
 			<footer className="imc-peu">
@@ -92,9 +96,12 @@ class Peu extends Component {
 					</ModalHeader>
 					<ModalBody>
 						<ul className="pl-3">
-							{listWebs}
-							{listTelefons}
-							{listMails}
+							{suportWeb}
+							{suportTelefon}
+							{suportMail}
+							{suportFAQ}
+							{suportConsulta}
+							{suportAutenticacio}
 						</ul>
 					</ModalBody>
 					<ModalFooter>

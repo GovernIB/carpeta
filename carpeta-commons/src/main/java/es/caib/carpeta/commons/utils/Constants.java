@@ -142,4 +142,24 @@ public interface Constants {
     };
 
 
+    /* Tipus Dades d'Ajuda */
+    public static final int TIPUS_SUPORT_WEB = 1;
+    public static final int TIPUS_SUPORT_TELEFON = 2;
+    public static final int TIPUS_SUPORT_MAIL = 3;
+    public static final int TIPUS_SUPORT_FAQ = 4;
+    public static final int TIPUS_SUPORT_CONSULTA_TECNICA = 5;
+    public static final int TIPUS_SUPORT_AUTENTICACIO = 6;
+
+
+
+    public static final int[] TIPUS_SUPORT_ALL = {
+            TIPUS_SUPORT_WEB,
+            TIPUS_SUPORT_TELEFON,
+            TIPUS_SUPORT_MAIL,
+            TIPUS_SUPORT_FAQ,
+            TIPUS_SUPORT_CONSULTA_TECNICA,
+            TIPUS_SUPORT_AUTENTICACIO
+    };
+
+
 }

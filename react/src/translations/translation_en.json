@@ -208,8 +208,12 @@
 	"suportAjuda": "Si necessita ajuda pitgi",
 	"suportTitol": "Necessites ajuda?",
 	"suportPer": "Per a ",
-	"suportCrida": "crida al telèfon ",
+	"suportCrida": "Crida al telèfon ",
 	"suportConsulta": "Consulta el nostre apartat ",
-	"suportMail": "Envia un mail a "
+	"suportMail": "Envia un correu a ",
+	"suportWeb": "Suport Web",
+	"suportFAQ": "Preguntes Freqüents (FAQ)",
+	"suportConsultaTecnica": "Fes-nos arribar la teva consulta tècnica ",
+	"suportAutenticacio": "Problemes relacionats amb l'autenticació: "
 	
 }
