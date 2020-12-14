@@ -77,7 +77,7 @@ INSERT INTO car_traducciomap VALUES (76, 'es', 'Notificaciones');
 
 
 
-INSERT INTO car_plugin(pluginid, nomid, classe, tipus, propietats, actiu, descripcioid)) VALUES (3, 66, 'org.fundaciobit.pluginsib.carpetafront.notib.NotibCarpetaFrontPlugin', 1, '# Class => org.fundaciobit.pluginsib.carpetafront.notib.NotibCarpetaFrontPlugin
+INSERT INTO car_plugin(pluginid, nomid, classe, tipus, propietats, actiu, descripcioid) VALUES (3, 66, 'org.fundaciobit.pluginsib.carpetafront.notib.NotibCarpetaFrontPlugin', 1, '# Class => org.fundaciobit.pluginsib.carpetafront.notib.NotibCarpetaFrontPlugin
 
 # Common
 es.caib.carpeta.pluginsib.carpetafront.notib.development=true
