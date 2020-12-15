@@ -112,8 +112,9 @@ public class PluginFrontController extends CommonFrontController {
 
         try {
 
-            LocaleContextHolder.setLocale(new Locale(idioma));
-            Locale.setDefault(new Locale(idioma));
+            Locale loc = new Locale(idioma);
+            LocaleContextHolder.setLocale(loc);
+            Locale.setDefault(loc);
 
             //String pluginID = request.getParameter("pluginID");
             //String administrationID= request.getParameter("administrationID");
