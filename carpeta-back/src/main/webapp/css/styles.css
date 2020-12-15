@@ -29,6 +29,7 @@ a:hover{
 .colorVerd{
 	background-color: #265d3c;
 	margin-left: 5px;
+	position: relative;
 }
 .colorVerd:hover:enabled{
 	background-color: #0000;
@@ -78,6 +79,7 @@ a:hover{
 .titol { display:inline-block; }
 footer .logoPeu img.logoAplicacio { width:150px; height:auto; margin-bottom:10px; }
 
+/* Página inici */
 .buitContainer { width: 500px; margin: 150px auto; }
 .buitContainer img { padding:10px; margin:15px; background-color:#32814B; } 
 .buitContainer h3, .buitContainer p { text-align:center; }
@@ -241,9 +243,15 @@ footer .logoPeu img.logoAplicacio { width:150px; height:auto; margin-bottom:10px
 /* FI */
 
 /* Boto Dropdown */
-.dropdown:hover>.dropdown-menu {
+
+.dropdown-menu { margin: 0 !important; }
+#dropdownSubMenu1, #dropdownSubMenu2 { left: auto !important; }
+#dropdownSubMenu2 { right: 0px; }
+
+/*.dropdown:hover>.dropdown-menu {
 	display: block;
-}
+}*/
+
 .dropdown>.dropdown-toggle:active {
 	pointer-events: none;
 }

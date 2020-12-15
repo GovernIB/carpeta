@@ -61,7 +61,7 @@
                    ----------------------------------------------                   
                 --%>
 
-				<li class="dropdown colorVerd">
+				<li class="colorVerd">
 
 					<button class="btn colorVerd dropdown-toggle" type="button"
 						id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
@@ -71,7 +71,7 @@
 				   </button>
 				   <c:set var="url" value="${urlActual}" />
 
-					<div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+					<div class="dropdown-menu" aria-labelledby="dropdownMenu1" id="dropdownSubMenu1">
 
 						 <tiles:insertAttribute name="menu">
 			             </tiles:insertAttribute>
@@ -86,7 +86,7 @@
                 --%>
                 
 
-				<li class="dropdown colorVerd">
+				<li class="colorVerd">
 
 					<button class="btn colorVerd dropdown-toggle" type="button"
 						id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
@@ -95,7 +95,7 @@
 						<fmt:message key="rols" />
 					</button>
 
-					<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+					<div class="dropdown-menu" aria-labelledby="dropdownMenu2" id="dropdownSubMenu2">
 
 
 						<a class="dropdown-item ${(empty pipella)?'active' : '' }"
@@ -147,7 +147,7 @@
                    ----------------------------------------------                   
                 --%>
                 
-				<li class="dropdown colorVerd">
+				<li class="colorVerd">
 
 					<button class="btn colorVerd dropdown-toggle" type="button"
 						id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true"
@@ -155,7 +155,7 @@
 						<i class="fas fa-ellipsis-v"></i>
 					</button>
 					<div class="dropdown-menu  dropdown-menu-right"
-						aria-labelledby="dropdownMenu3">
+						aria-labelledby="dropdownMenu3" id="dropdownSubMenu3">
 				<%
 					// TODO XYZ ZZZ Això ho ha de collir dels idiomes de la BBDD
 					java.util.List<String> idiomes = new java.util.ArrayList<String>();
@@ -208,24 +208,46 @@
 		var xrknpass = false;
 		$(function() {
 			$(window)
-					.keydown(
-							function(e) {
-								var ev = e || window.event;
-								var key = ev.which || ev.keyCode;
-								if (xrknpass && key == 66) {
-									var url = unescape("\u0068\u0074\u0074\u0070\u003a\u002f\u002f\u0074\u0069\u006e\u0079\u002e\u0063\u0063\u002f\u0070\u006f\u0072\u0074\u0061\u0066\u0069\u0062");
-									var theDiv = document
-											.getElementById('xrkn');
-									theDiv.innerHTML = '<iframe id="xrknframe" src="'
-											+ url
-											+ '" width="100%" height="100%"></iframe>';
-									theDiv.style.visibility = 'visible';
-								} else if (ev.altKey && ev.ctrlKey && key == 78) {
-									xrknpass = true;
-								} else {
-									xrknpass = false;
-								}
-							});
+				.keydown(
+					function(e) {
+						var ev = e || window.event;
+						var key = ev.which || ev.keyCode;
+						if (xrknpass && key == 66) {
+							var url = unescape("\u0068\u0074\u0074\u0070\u003a\u002f\u002f\u0074\u0069\u006e\u0079\u002e\u0063\u0063\u002f\u0070\u006f\u0072\u0074\u0061\u0066\u0069\u0062");
+							var theDiv = document
+									.getElementById('xrkn');
+							theDiv.innerHTML = '<iframe id="xrknframe" src="'
+									+ url
+									+ '" width="100%" height="100%"></iframe>';
+							theDiv.style.visibility = 'visible';
+						} else if (ev.altKey && ev.ctrlKey && key == 78) {
+							xrknpass = true;
+						} else {
+							xrknpass = false;
+						}
+					});
+		});
+		
+		$('html').click(function() {
+			$('.dropdown-menu').css('display','none');
+		});
+		
+		$('#dropdownMenu1').on('click', function(event){
+			event.stopPropagation();
+			$('.dropdown-menu').css('display','none');
+            $('#dropdownSubMenu1').css('display','block');	
+        });
+		
+		$('#dropdownMenu2').on('click', function(event){
+			event.stopPropagation();
+			$('.dropdown-menu').css('display','none');
+			$('#dropdownSubMenu2').css('display','block');  
+        });
+		
+		$('#dropdownMenu3').on('click', function(event){
+			event.stopPropagation();
+			$('.dropdown-menu').css('display','none');
+			$('#dropdownSubMenu3').css('display','block');  
 		});
 	</script>
 	<div id="xrkn"
