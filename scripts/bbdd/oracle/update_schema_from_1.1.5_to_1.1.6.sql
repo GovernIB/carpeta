@@ -60,3 +60,6 @@ es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.pass=[=SP["es.caib.carpeta.
 
 # NOTIFICACIONES
 es.caib.carpeta.pluginsib.carpetafront.notib.notificaciones.url=https://sede.administracion.gob.es/carpeta/notificaciones/notifica/consultaNotificaciones.htm', true, 76);
+
+-- 15/12/2020  Revisió i adaptació de l'estructura de dades per soportar la funcionalitat d'accessos #268
+ALTER TABLE car_acces ADD tipus NUMBER(19,0) not null;
