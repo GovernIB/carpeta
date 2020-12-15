@@ -209,22 +209,22 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
 
         Locale loc = new Locale(lang.toLowerCase());
 
-        if(!entitat.getSuportWeb().isEmpty()){
+        if(entitat.getSuportWeb() != null){
             suport.put(String.valueOf(Constants.TIPUS_SUPORT_WEB), entitat.getSuportWeb());
         }
-        if(!entitat.getSuportTelefon().isEmpty()){
+        if(entitat.getSuportTelefon() != null){
             suport.put(String.valueOf(Constants.TIPUS_SUPORT_TELEFON), entitat.getSuportTelefon());
         }
-        if(!entitat.getSuportEmail().isEmpty()){
+        if(entitat.getSuportEmail() != null){
             suport.put(String.valueOf(Constants.TIPUS_SUPORT_MAIL), entitat.getSuportEmail());
         }
-        if(!entitat.getSuportFAQ().isEmpty()){
+        if(entitat.getSuportFAQ() != null){
             suport.put(String.valueOf(Constants.TIPUS_SUPORT_FAQ), entitat.getSuportFAQ());
         }
-        if(!entitat.getSuportqssi().isEmpty()){
+        if(entitat.getSuportqssi() != null){
             suport.put(String.valueOf(Constants.TIPUS_SUPORT_CONSULTA_TECNICA), entitat.getSuportqssi());
         }
-        if(!entitat.getSuportautenticacio().isEmpty()){
+        if(entitat.getSuportautenticacio() != null){
             suport.put(String.valueOf(Constants.TIPUS_SUPORT_AUTENTICACIO), entitat.getSuportautenticacio());
         }
 
