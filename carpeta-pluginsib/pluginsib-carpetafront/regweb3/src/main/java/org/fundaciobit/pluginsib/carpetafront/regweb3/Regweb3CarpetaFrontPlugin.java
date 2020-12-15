@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.BindingProvider;
 
+import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
@@ -365,6 +366,10 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 getTraduccio("registro.idioma.2",locale)};
 
         map.put("registroIdioma", registroIdioma);
+
+
+
+        map.put("tipusMime", Constants.TEXTO_REDUCIDO_BY_TIPO_MIME);
 
         String[] traduccions = {"registro.titulo.detalle", "registro.entrada", "registro.fecha", "registro.numero",
            "registro.oficina", "registro.destinatario", "registro.tipo.doc", "registro.extracto", "carpeta.idioma",
