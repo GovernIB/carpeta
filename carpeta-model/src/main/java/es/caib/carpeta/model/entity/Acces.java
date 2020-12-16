@@ -26,17 +26,17 @@ public interface Acces extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.Integer getResultatAutenticacio();
 	public void setResultatAutenticacio(java.lang.Integer _resultatAutenticacio_);
 
-	public java.sql.Timestamp getDataDarrerAcces();
-	public void setDataDarrerAcces(java.sql.Timestamp _dataDarrerAcces_);
-
-	public java.lang.String getIdioma();
-	public void setIdioma(java.lang.String _idioma_);
-
 	public long getEntitatID();
 	public void setEntitatID(long _entitatID_);
 
 	public int getTipus();
 	public void setTipus(int _tipus_);
+
+	public java.sql.Timestamp getDataDarrerAcces();
+	public void setDataDarrerAcces(java.sql.Timestamp _dataDarrerAcces_);
+
+	public java.lang.String getIdioma();
+	public void setIdioma(java.lang.String _idioma_);
 
 
 

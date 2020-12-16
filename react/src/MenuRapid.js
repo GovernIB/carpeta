@@ -52,7 +52,7 @@ class MenuRapid extends Component {
                     <a href="javascript:newAccessibilitat('contingut', '1');" className="imc-marc-ico imc--accessibilitat navCarpeta" id="imc-marc-accessibilitat" title={t('menuAccessibilitat')}><span>{t('menuAccessibilitat')}</span></a>
                 </li>;
 
-            dades = <li className="nav-item pl-4">
+            dades = <li className="nav-item">
                     <a href="javascript:newDadesPersonals('contingut', '1');" className="imc-marc-ico navCarpeta imc--dades"><span>{t('menuDades')}</span></a>
                 </li>;
 
@@ -77,13 +77,13 @@ class MenuRapid extends Component {
             </li>;
 
             gestionsHtml = plugins.filter(s => s.reactComponent === 'false').map(s => (
-                <li className="nav-item"><a className="imc-marc-ico navCarpeta" href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}
+                <li className="nav-item pr-4"><a className="navCarpeta" href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}
                    title={s.nom}><img src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
                                       className="imc-icona"></img><span>{s.nom}</span></a></li>
             ));
 
             gestionsReact = plugins.filter(s => s.reactComponent === 'true').map(s => (
-                    <li className="nav-item"><a className="imc-marc-ico navCarpeta" href={"javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"}
+                    <li className="nav-item pr-4"><a className="navCarpeta" href={"javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"}
                    title={s.nom}><img src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
                                       className="imc-icona"></img><span>{s.nom}</span></a></li>
             ));

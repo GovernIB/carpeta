@@ -128,6 +128,60 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,AccesFields.ENTITATID)}">
+        <tr id="acces_entitatID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[AccesFields.ENTITATID])?'acces.entitatID':__theForm.labels[AccesFields.ENTITATID]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[AccesFields.ENTITATID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.ENTITATID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="acces.entitatID" cssClass="errorField alert alert-danger" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,AccesFields.ENTITATID)}" >
+          <form:hidden path="acces.entitatID"/>
+          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.acces.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AccesFields.ENTITATID)}" >
+          <form:select id="acces_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-4" path="acces.entitatID">
+            <c:forEach items="${__theForm.listOfEntitatForEntitatID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,AccesFields.TIPUS)}">
+        <tr id="acces_tipus_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[AccesFields.TIPUS])?'acces.tipus':__theForm.labels[AccesFields.TIPUS]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[AccesFields.TIPUS]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.TIPUS]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="acces.tipus" cssClass="errorField alert alert-danger" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,AccesFields.TIPUS)}" >
+          <form:hidden path="acces.tipus"/>
+          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.acces.tipus,__theForm.listOfValuesForTipus)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AccesFields.TIPUS)}" >
+          <form:select id="acces_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-4" path="acces.tipus">
+            <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,AccesFields.DATADARRERACCES)}">
         <tr id="acces_dataDarrerAcces_rowid">
           <td>
@@ -182,60 +236,6 @@
             <form:errors path="acces.idioma" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.IDIOMA)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,AccesFields.IDIOMA)? ' uneditable-input' : ''}"  maxlength="50" path="acces.idioma"   />
 
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,AccesFields.ENTITATID)}">
-        <tr id="acces_entitatID_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[AccesFields.ENTITATID])?'acces.entitatID':__theForm.labels[AccesFields.ENTITATID]}" /> &nbsp;(*)
-              <c:if test="${not empty __theForm.help[AccesFields.ENTITATID]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.ENTITATID]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <form:errors path="acces.entitatID" cssClass="errorField alert alert-danger" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,AccesFields.ENTITATID)}" >
-          <form:hidden path="acces.entitatID"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.acces.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AccesFields.ENTITATID)}" >
-          <form:select id="acces_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-4" path="acces.entitatID">
-            <c:forEach items="${__theForm.listOfEntitatForEntitatID}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,AccesFields.TIPUS)}">
-        <tr id="acces_tipus_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[AccesFields.TIPUS])?'acces.tipus':__theForm.labels[AccesFields.TIPUS]}" /> &nbsp;(*)
-              <c:if test="${not empty __theForm.help[AccesFields.TIPUS]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.TIPUS]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <form:errors path="acces.tipus" cssClass="errorField alert alert-danger" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,AccesFields.TIPUS)}" >
-          <form:hidden path="acces.tipus"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.acces.tipus,__theForm.listOfValuesForTipus)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AccesFields.TIPUS)}" >
-          <form:select id="acces_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-4" path="acces.tipus">
-            <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
            </td>
         </tr>
         </c:if>
