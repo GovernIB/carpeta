@@ -18,10 +18,10 @@ private static final long serialVersionUID = -112525025L;
 	java.lang.String proveidorIdentitat;
 	java.lang.String nivellSeguretat;
 	java.lang.Integer resultatAutenticacio;
-	java.sql.Timestamp dataDarrerAcces;
-	java.lang.String idioma;
 	long entitatID;
 	int tipus;
+	java.sql.Timestamp dataDarrerAcces;
+	java.lang.String idioma;
 
 
   /** Constructor Buit */
@@ -29,7 +29,7 @@ private static final long serialVersionUID = -112525025L;
   }
 
   /** Constructor amb tots els camps  */
-  public AccesBean(long accesID , java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String nivellSeguretat , java.lang.Integer resultatAutenticacio , java.sql.Timestamp dataDarrerAcces , java.lang.String idioma , long entitatID , int tipus) {
+  public AccesBean(long accesID , java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String nivellSeguretat , java.lang.Integer resultatAutenticacio , long entitatID , int tipus , java.sql.Timestamp dataDarrerAcces , java.lang.String idioma) {
     this.accesID=accesID;
     this.nom=nom;
     this.llinatges=llinatges;
@@ -38,13 +38,13 @@ private static final long serialVersionUID = -112525025L;
     this.proveidorIdentitat=proveidorIdentitat;
     this.nivellSeguretat=nivellSeguretat;
     this.resultatAutenticacio=resultatAutenticacio;
-    this.dataDarrerAcces=dataDarrerAcces;
-    this.idioma=idioma;
     this.entitatID=entitatID;
     this.tipus=tipus;
+    this.dataDarrerAcces=dataDarrerAcces;
+    this.idioma=idioma;
 }
   /** Constructor sense valors autoincrementals */
-  public AccesBean(java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String nivellSeguretat , java.lang.Integer resultatAutenticacio , java.sql.Timestamp dataDarrerAcces , java.lang.String idioma , long entitatID , int tipus) {
+  public AccesBean(java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String nivellSeguretat , java.lang.Integer resultatAutenticacio , long entitatID , int tipus , java.sql.Timestamp dataDarrerAcces , java.lang.String idioma) {
     this.nom=nom;
     this.llinatges=llinatges;
     this.nif=nif;
@@ -52,10 +52,10 @@ private static final long serialVersionUID = -112525025L;
     this.proveidorIdentitat=proveidorIdentitat;
     this.nivellSeguretat=nivellSeguretat;
     this.resultatAutenticacio=resultatAutenticacio;
-    this.dataDarrerAcces=dataDarrerAcces;
-    this.idioma=idioma;
     this.entitatID=entitatID;
     this.tipus=tipus;
+    this.dataDarrerAcces=dataDarrerAcces;
+    this.idioma=idioma;
 }
   /** Constructor dels valors Not Null */
   public AccesBean(long accesID , long entitatID , int tipus) {
@@ -72,10 +72,10 @@ private static final long serialVersionUID = -112525025L;
     this.setProveidorIdentitat(__bean.getProveidorIdentitat());
     this.setNivellSeguretat(__bean.getNivellSeguretat());
     this.setResultatAutenticacio(__bean.getResultatAutenticacio());
-    this.setDataDarrerAcces(__bean.getDataDarrerAcces());
-    this.setIdioma(__bean.getIdioma());
     this.setEntitatID(__bean.getEntitatID());
     this.setTipus(__bean.getTipus());
+    this.setDataDarrerAcces(__bean.getDataDarrerAcces());
+    this.setIdioma(__bean.getIdioma());
 	}
 
 	public long getAccesID() {
@@ -134,20 +134,6 @@ private static final long serialVersionUID = -112525025L;
 		this.resultatAutenticacio = _resultatAutenticacio_;
 	};
 
-	public java.sql.Timestamp getDataDarrerAcces() {
-		return(dataDarrerAcces);
-	};
-	public void setDataDarrerAcces(java.sql.Timestamp _dataDarrerAcces_) {
-		this.dataDarrerAcces = _dataDarrerAcces_;
-	};
-
-	public java.lang.String getIdioma() {
-		return(idioma);
-	};
-	public void setIdioma(java.lang.String _idioma_) {
-		this.idioma = _idioma_;
-	};
-
 	public long getEntitatID() {
 		return(entitatID);
 	};
@@ -160,6 +146,20 @@ private static final long serialVersionUID = -112525025L;
 	};
 	public void setTipus(int _tipus_) {
 		this.tipus = _tipus_;
+	};
+
+	public java.sql.Timestamp getDataDarrerAcces() {
+		return(dataDarrerAcces);
+	};
+	public void setDataDarrerAcces(java.sql.Timestamp _dataDarrerAcces_) {
+		this.dataDarrerAcces = _dataDarrerAcces_;
+	};
+
+	public java.lang.String getIdioma() {
+		return(idioma);
+	};
+	public void setIdioma(java.lang.String _idioma_) {
+		this.idioma = _idioma_;
 	};
 
 
@@ -177,10 +177,10 @@ private static final long serialVersionUID = -112525025L;
     __tmp.setProveidorIdentitat(__bean.getProveidorIdentitat());
     __tmp.setNivellSeguretat(__bean.getNivellSeguretat());
     __tmp.setResultatAutenticacio(__bean.getResultatAutenticacio());
-    __tmp.setDataDarrerAcces(__bean.getDataDarrerAcces());
-    __tmp.setIdioma(__bean.getIdioma());
     __tmp.setEntitatID(__bean.getEntitatID());
     __tmp.setTipus(__bean.getTipus());
+    __tmp.setDataDarrerAcces(__bean.getDataDarrerAcces());
+    __tmp.setIdioma(__bean.getIdioma());
 		return __tmp;
 	}
 

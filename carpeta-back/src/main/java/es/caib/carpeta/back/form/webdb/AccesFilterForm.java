@@ -131,39 +131,6 @@ public class AccesFilterForm extends CarpetaBaseFilterForm implements AccesField
   }
 
 
-  private java.sql.Timestamp dataDarrerAccesDesde;
-
-  public java.sql.Timestamp getDataDarrerAccesDesde() {
-    return this.dataDarrerAccesDesde;
-  }
-
-  public void setDataDarrerAccesDesde(java.sql.Timestamp dataDarrerAccesDesde) {
-    this.dataDarrerAccesDesde = dataDarrerAccesDesde;
-  }
-
-
-  private java.sql.Timestamp dataDarrerAccesFins;
-
-  public java.sql.Timestamp getDataDarrerAccesFins() {
-    return this.dataDarrerAccesFins;
-  }
-
-  public void setDataDarrerAccesFins(java.sql.Timestamp dataDarrerAccesFins) {
-    this.dataDarrerAccesFins = dataDarrerAccesFins;
-  }
-
-
-  private java.lang.String idioma;
-
-  public java.lang.String getIdioma() {
-    return this.idioma;
-  }
-
-  public void setIdioma(java.lang.String idioma) {
-    this.idioma = idioma;
-  }
-
-
   private java.lang.Long entitatIDDesde;
 
   public java.lang.Long getEntitatIDDesde() {
@@ -208,6 +175,39 @@ public class AccesFilterForm extends CarpetaBaseFilterForm implements AccesField
   }
 
 
+  private java.sql.Timestamp dataDarrerAccesDesde;
+
+  public java.sql.Timestamp getDataDarrerAccesDesde() {
+    return this.dataDarrerAccesDesde;
+  }
+
+  public void setDataDarrerAccesDesde(java.sql.Timestamp dataDarrerAccesDesde) {
+    this.dataDarrerAccesDesde = dataDarrerAccesDesde;
+  }
+
+
+  private java.sql.Timestamp dataDarrerAccesFins;
+
+  public java.sql.Timestamp getDataDarrerAccesFins() {
+    return this.dataDarrerAccesFins;
+  }
+
+  public void setDataDarrerAccesFins(java.sql.Timestamp dataDarrerAccesFins) {
+    this.dataDarrerAccesFins = dataDarrerAccesFins;
+  }
+
+
+  private java.lang.String idioma;
+
+  public java.lang.String getIdioma() {
+    return this.idioma;
+  }
+
+  public void setIdioma(java.lang.String idioma) {
+    this.idioma = idioma;
+  }
+
+
   public AccesFilterForm() {
   }
   
@@ -223,13 +223,13 @@ public class AccesFilterForm extends CarpetaBaseFilterForm implements AccesField
     this.nivellSeguretat = __toClone.nivellSeguretat;
     this.resultatAutenticacioDesde = __toClone.resultatAutenticacioDesde;
     this.resultatAutenticacioFins = __toClone.resultatAutenticacioFins;
-    this.dataDarrerAccesDesde = __toClone.dataDarrerAccesDesde;
-    this.dataDarrerAccesFins = __toClone.dataDarrerAccesFins;
-    this.idioma = __toClone.idioma;
     this.entitatIDDesde = __toClone.entitatIDDesde;
     this.entitatIDFins = __toClone.entitatIDFins;
     this.tipusDesde = __toClone.tipusDesde;
     this.tipusFins = __toClone.tipusFins;
+    this.dataDarrerAccesDesde = __toClone.dataDarrerAccesDesde;
+    this.dataDarrerAccesFins = __toClone.dataDarrerAccesFins;
+    this.idioma = __toClone.idioma;
     this.mapOfEntitatForEntitatID = __toClone.mapOfEntitatForEntitatID;
     this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
   }
