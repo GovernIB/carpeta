@@ -287,6 +287,17 @@ img:hover {
 	margin: 0;
 }
 
+/* HomePage */
+.homePage .titol.h5 { text-transform: none !important; }
+.homePage ul { list-style:none;  }
+.homePage .oi { margin-right: 5px; color: #32814B; font-size: 20px; }
+.homePage ul .oi{margin-left:-25px;}
+.homePage ul li { margin-left:25px; }
+.homePage .imc--logoclave{ height: 100px; float:left; }
+.homePage .opcionesAcceso { width: 320px; margin-left: 190px; margin-right: 20px; }
+.homePage .carpeta-btn .oi {color:#fff; }
+.homePage .carpeta-btn { font-size: 20px; padding: 12px 30px;}
+
 /* RESPONSIVE */
 
 /*Se aplican cuando el width es menor que 992px*/

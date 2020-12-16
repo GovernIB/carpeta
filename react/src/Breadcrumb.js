@@ -24,9 +24,13 @@ class LegacyComponentClass extends Component{
     });
 
     return (
+      <div>
+        {itemDOMS.length > 1 &&
         <ul className="mollaPa" id="imc-molla-pa">
           {itemDOMS}
         </ul>
+        }
+      </div>
     )
   }
 }

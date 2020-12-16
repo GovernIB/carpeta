@@ -155,8 +155,8 @@ img:hover {
 	border-width: medium;
 }
 .alert2{
-    border-color: orange;
-    border-width: medium;
+	border-color: orange;
+	border-width: medium;
 }
 .alert3{
     border-color: red;
@@ -206,9 +206,6 @@ img:hover {
 	border-color:#f5c6cb;
 	border-radius: 4px;
 }
-
-/* Peu */
-.imc-peu-opcions li a img { margin-left:5px; margin-top:-5px; }
 .dropdown:hover > .dropdown-menu {
 	display: block;
 }
@@ -290,7 +287,18 @@ img:hover {
 	margin: 0;
 }
 
-/* RESPONSIVE
+/* HomePage */
+.homePage .titol.h5 { text-transform: none !important; }
+.homePage ul { list-style:none;  }
+.homePage .oi { margin-right: 5px; color: #32814B; font-size: 20px; }
+.homePage ul .oi{margin-left:-25px;}
+.homePage ul li { margin-left:25px; }
+.homePage .imc--logoclave{ height: 100px; float:left; }
+.homePage .opcionesAcceso { width: 320px; margin-left: 190px; margin-right: 20px; }
+.homePage .carpeta-btn .oi {color:#fff; }
+.homePage .carpeta-btn { font-size: 20px; padding: 12px 30px;}
+
+/* RESPONSIVE */
 
 /*Se aplican cuando el width es menor que 992px*/
 @media only screen and (max-width: 992px) {
