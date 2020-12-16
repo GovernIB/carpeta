@@ -199,7 +199,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             map.put("title", getTitle(locale));
 
-            map.put("resources", absolutePluginRequestPath + "/" + WEBRESOURCE);
+            map.put("resources", absolutePluginRequestPath + "/" + WEBRESOURCECOMMON);
 
             map.put("contingut", generat);
 

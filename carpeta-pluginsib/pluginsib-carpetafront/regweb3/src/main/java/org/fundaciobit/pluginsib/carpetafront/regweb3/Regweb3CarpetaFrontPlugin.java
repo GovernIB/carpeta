@@ -200,13 +200,13 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
 
         // XYZ ZZZ
-        map.put("resources", absolutePluginRequestPath + "/" + WEBRESOURCE);
+        map.put("resources", absolutePluginRequestPath + "/" + WEBRESOURCECOMMON);
 
         // XYZ ZZZ
         map.put("form_action", absolutePluginRequestPath + "/" + LLISTAT_REGISTRES_PAGE);
         map.put("lang", locale.getLanguage());
 
-        map.put("title", getTitle(new Locale("ca")));
+        map.put("title", getTitle(locale));
 
 
 
@@ -338,7 +338,7 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
 
         // XYZ ZZZ
-        map.put("resources", absolutePluginRequestPath + "/" + WEBRESOURCE);
+        map.put("resources", absolutePluginRequestPath + "/" + WEBRESOURCECOMMON);
 
         // XYZ ZZZ
         map.put("form_action", absolutePluginRequestPath + "/" + DETALL_REGISTRE_PAGE);

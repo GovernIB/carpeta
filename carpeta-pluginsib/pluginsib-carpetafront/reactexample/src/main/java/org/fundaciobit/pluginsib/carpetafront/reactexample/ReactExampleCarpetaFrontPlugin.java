@@ -130,13 +130,13 @@ public class ReactExampleCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         try {
 
             // Agafa la icona del resource
-            input = this.getClass().getResourceAsStream("/" + WEBRESOURCE + "/logo-reactexample.png");
+            input = this.getClass().getResourceAsStream("/logo/logo-reactexample.png");
             if (input != null) {
-                fileInfo = new FileInfo("logo-regweb3.png", "image/png", IOUtils.toByteArray(input));
+                fileInfo = new FileInfo("logo-reactexample.png", "image/png", IOUtils.toByteArray(input));
             }
 
         } catch (Exception e) {
-            log.error("Error llegint recurs : " + WEBRESOURCE + "/" +  "/logo-reactexample.png: " + e.getMessage(), e);
+            log.error("Error llegint recurs : /logo/logo-reactexample.png: " + e.getMessage(), e);
 
         }
         return fileInfo;

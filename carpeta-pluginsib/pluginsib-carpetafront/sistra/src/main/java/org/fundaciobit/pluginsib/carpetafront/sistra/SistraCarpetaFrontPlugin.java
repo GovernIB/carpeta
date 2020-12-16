@@ -97,6 +97,8 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
             HttpServletRequest request, UserData userData,String administrationIDEncriptat) throws Exception {
         
+        super.registerUserData(userData);
+        
         String startURL = absolutePluginRequestPath + "/" + LLISTAT_TRAMITS_PAGE; 
         
         log.info(" getStartUrl( ); => " + startURL);
@@ -108,7 +110,6 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
                                     HttpServletRequest request, HttpServletResponse response, UserData userData,
                                     String administrationEncriptedID, Locale locale, boolean isGet) {
-
 
 
         log.info("SistraCarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
@@ -260,7 +261,8 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         String plantilla = IOUtils.toString(input, "UTF-8");
 
         // XYZ ZZZ   
-        map.put("resources", absolutePluginRequestPath + "/" + WEBRESOURCE);
+        map.put("resources", absolutePluginRequestPath + "/" + WEBRESOURCECOMMON);
+        map.put("resourcessistra", absolutePluginRequestPath + "/webresourcesistra");
   
         // XYZ ZZZ            
         map.put("form_action", absolutePluginRequestPath + "/" + LLISTAT_TRAMITS_PAGE);
