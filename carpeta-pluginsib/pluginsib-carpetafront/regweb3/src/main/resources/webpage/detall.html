@@ -161,8 +161,12 @@
                                             <tr>
                                                 <td>${anexo?index +1}</td>
                                                 <td>${anexo.titulo}</td>
-                                                <td><#if anexo.tipoMIMEFicheroAnexado?has_content >${anexo.tipoMIMEFicheroAnexado}</#if></td>
-
+                                                <td><#if anexo.tipoMIMEFicheroAnexado?has_content >
+                                                        <#if tipusMime[anexo.tipoMIMEFicheroAnexado]?has_content >
+                                                            ${tipusMime[anexo.tipoMIMEFicheroAnexado]}
+                                                        </#if>
+                                                    </#if>
+                                                </td>
                                             </tr>
                                             </#list>
                                             </tbody>

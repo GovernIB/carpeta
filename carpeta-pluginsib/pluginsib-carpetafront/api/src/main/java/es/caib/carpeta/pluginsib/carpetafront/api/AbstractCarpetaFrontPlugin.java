@@ -158,6 +158,11 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
             retornarRecursLocal(absolutePluginRequestPath, relativePluginRequestPath, userData.getAdministrationID(),
                     query, request, response, locale);
 
+        } else if (query.startsWith(WEBRESOURCECOMMON)) {
+
+            retornarRecursLocal(absolutePluginRequestPath, relativePluginRequestPath, userData.getAdministrationID(),
+                    query, request, response, locale);
+
         } else {
             // XYZ Fer un missatges com toca
             String titol = (isGet ? "GET" : "POST") + " " + getTitle(new Locale("ca")) + " DESCONEGUT";
@@ -168,6 +173,8 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
 
     // XYZ TODO Passat a pare web
     public static final String WEBRESOURCE = "webresource";
+    
+    public static final String WEBRESOURCECOMMON = "webresourcecommon";
 
     public static final String LOGORESOURCE = "logo";
 

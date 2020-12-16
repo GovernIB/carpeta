@@ -1,12 +1,13 @@
 package es.caib.carpeta.back.utils;
 
-import es.caib.carpeta.back.security.LoginInfo;
 import org.apache.log4j.Logger;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.HttpServletRequest;
+
+import es.caib.carpeta.back.security.LoginInfo;
 import java.util.Locale;
 
 /**
@@ -52,6 +53,7 @@ public class CarpetaSessionLocaleResolver extends SessionLocaleResolver{
 	public static void setLocaleManually(HttpServletRequest request, String idioma) {
 		Locale loc = new Locale(idioma);
 		LocaleContextHolder.setLocale(loc);
+		Locale.setDefault(loc);
 		WebUtils.setSessionAttribute(request, LOCALE_SESSION_ATTRIBUTE_NAME, loc);
 	}
 

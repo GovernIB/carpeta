@@ -21,6 +21,7 @@ private static final long serialVersionUID = -112525025L;
 	java.sql.Timestamp dataDarrerAcces;
 	java.lang.String idioma;
 	long entitatID;
+	int tipus;
 
 
   /** Constructor Buit */
@@ -28,7 +29,7 @@ private static final long serialVersionUID = -112525025L;
   }
 
   /** Constructor amb tots els camps  */
-  public AccesBean(long accesID , java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String nivellSeguretat , java.lang.Integer resultatAutenticacio , java.sql.Timestamp dataDarrerAcces , java.lang.String idioma , long entitatID) {
+  public AccesBean(long accesID , java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String nivellSeguretat , java.lang.Integer resultatAutenticacio , java.sql.Timestamp dataDarrerAcces , java.lang.String idioma , long entitatID , int tipus) {
     this.accesID=accesID;
     this.nom=nom;
     this.llinatges=llinatges;
@@ -40,9 +41,10 @@ private static final long serialVersionUID = -112525025L;
     this.dataDarrerAcces=dataDarrerAcces;
     this.idioma=idioma;
     this.entitatID=entitatID;
+    this.tipus=tipus;
 }
   /** Constructor sense valors autoincrementals */
-  public AccesBean(java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String nivellSeguretat , java.lang.Integer resultatAutenticacio , java.sql.Timestamp dataDarrerAcces , java.lang.String idioma , long entitatID) {
+  public AccesBean(java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String nivellSeguretat , java.lang.Integer resultatAutenticacio , java.sql.Timestamp dataDarrerAcces , java.lang.String idioma , long entitatID , int tipus) {
     this.nom=nom;
     this.llinatges=llinatges;
     this.nif=nif;
@@ -53,11 +55,13 @@ private static final long serialVersionUID = -112525025L;
     this.dataDarrerAcces=dataDarrerAcces;
     this.idioma=idioma;
     this.entitatID=entitatID;
+    this.tipus=tipus;
 }
   /** Constructor dels valors Not Null */
-  public AccesBean(long accesID , long entitatID) {
+  public AccesBean(long accesID , long entitatID , int tipus) {
     this.accesID=accesID;
     this.entitatID=entitatID;
+    this.tipus=tipus;
 }
   public AccesBean(Acces __bean) {
     this.setAccesID(__bean.getAccesID());
@@ -71,6 +75,7 @@ private static final long serialVersionUID = -112525025L;
     this.setDataDarrerAcces(__bean.getDataDarrerAcces());
     this.setIdioma(__bean.getIdioma());
     this.setEntitatID(__bean.getEntitatID());
+    this.setTipus(__bean.getTipus());
 	}
 
 	public long getAccesID() {
@@ -150,6 +155,13 @@ private static final long serialVersionUID = -112525025L;
 		this.entitatID = _entitatID_;
 	};
 
+	public int getTipus() {
+		return(tipus);
+	};
+	public void setTipus(int _tipus_) {
+		this.tipus = _tipus_;
+	};
+
 
 
   // ======================================
@@ -168,6 +180,7 @@ private static final long serialVersionUID = -112525025L;
     __tmp.setDataDarrerAcces(__bean.getDataDarrerAcces());
     __tmp.setIdioma(__bean.getIdioma());
     __tmp.setEntitatID(__bean.getEntitatID());
+    __tmp.setTipus(__bean.getTipus());
 		return __tmp;
 	}
 

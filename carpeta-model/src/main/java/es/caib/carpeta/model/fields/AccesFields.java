@@ -23,6 +23,7 @@ public interface AccesFields extends java.io.Serializable {
 	 public static final TimestampField DATADARRERACCES = new TimestampField(_TABLE_MODEL, "dataDarrerAcces", "datadarreracces");
 	 public static final StringField IDIOMA = new StringField(_TABLE_MODEL, "idioma", "idioma");
 	 public static final LongField ENTITATID = new LongField(_TABLE_MODEL, "entitatID", "entitatid");
+	 public static final IntegerField TIPUS = new IntegerField(_TABLE_MODEL, "tipus", "tipus");
 
 
   public static final Field<?>[] ALL_ACCES_FIELDS = {
@@ -36,7 +37,8 @@ public interface AccesFields extends java.io.Serializable {
     RESULTATAUTENTICACIO,
     DATADARRERACCES,
     IDIOMA,
-    ENTITATID
+    ENTITATID,
+    TIPUS
   };
 
 
