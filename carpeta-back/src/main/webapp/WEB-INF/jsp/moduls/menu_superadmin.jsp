@@ -58,6 +58,12 @@
 <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
 <a class="dropdown-item"
+   href="<c:url value="/superadmin/acces/list"/>"> <span
+        style="${(fn:contains(url, '/superadmin/acces'))? " font-weight:bold;" : ""}"><spring:message
+        code="acces.acces.plural" /> </span>
+</a>
+
+<a class="dropdown-item"
    href="<c:url value="/superadmin/logCarpeta/list"/>"> <span
         style="${(fn:contains(url, '/superadmin/logCarpeta'))? " font-weight:bold;" : ""}"><spring:message
         code="logCarpeta.logCarpeta.plural" /> </span>

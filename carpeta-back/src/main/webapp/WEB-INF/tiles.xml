@@ -296,6 +296,15 @@
     <definition name="fitxerOrfesListSuperAdmin" extends="superadmin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/fitxerList.jsp" />
     </definition>
+
+    <definition name="accesFormSuperAdmin" extends="superadmin">
+        <put-attribute name="titol" value="acces.acces" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/accesForm.jsp" />
+    </definition>
+
+    <definition name="accesListSuperAdmin" extends="superadmin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/accesList.jsp" />
+    </definition>
     
 
     <!--  ===========  DESENVOLUPAMENT ================== -->
