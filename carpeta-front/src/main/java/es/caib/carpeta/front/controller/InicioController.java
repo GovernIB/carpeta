@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -89,9 +90,12 @@ public class InicioController extends CommonFrontController {
 
 
     @RequestMapping(value={"/"})
-    public ModelAndView inicio(HttpServletRequest request, HttpServletResponse response) throws I18NException {
+    public ModelAndView inicio(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws I18NException {
 
         ModelAndView mav = new ModelAndView("inici");
+
+        // Posam la sessió de 30 minuts
+        session.setMaxInactiveInterval(30 * 60);
 
         try{
 
@@ -138,6 +142,10 @@ public class InicioController extends CommonFrontController {
                         }
 
                     }
+                } else{
+
+                    mav.addObject("entitat", sesionHttp.getEntitat());
+
                 }
 
             } catch (Throwable e) {
