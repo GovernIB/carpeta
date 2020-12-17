@@ -77,7 +77,6 @@ public class InicioController extends CommonFrontController {
 
         try{
 
-            //String lang = LocaleContextHolder.getLocale().getLanguage();
             sesionHttp.setEntitat(codiEntitat);
 
         } catch (Throwable e) {
@@ -103,6 +102,7 @@ public class InicioController extends CommonFrontController {
 
             PropietatGlobalLocal propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
             String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
+            String canviardefront = EjbManager.getCanviarDeFront(propietatGlobalEjb);
 
             List<StringKeyValue> entitats = utilsEjb.getEntitats(lang);
 
@@ -112,13 +112,15 @@ public class InicioController extends CommonFrontController {
 
                     mav = new ModelAndView("entitat");
                     mav.addObject("entitats", entitats);
-//                    mav.addObject("numEntitats", entitats.size());
+                    mav.addObject("numEntitats", entitats.size());
+                    mav.addObject("canviarDeFront", canviardefront);
 
                 } else{
 
                     sesionHttp.setEntitat(entitats.get(0).key);
                     mav.addObject("entitat", entitats.get(0).key);
-//                    mav.addObject("numEntitats", entitats.size());
+                    mav.addObject("numEntitats", entitats.size());
+                    mav.addObject("canviarDeFront", canviardefront);
 
                 }
 
@@ -131,11 +133,15 @@ public class InicioController extends CommonFrontController {
                         sesionHttp.setEntitat(defaultEntityCode);
                         mav.addObject("entitat", sesionHttp.getEntitat());
                         mav.addObject("defaultEntityCode", defaultEntityCode);
+                        mav.addObject("numEntitats", entitats.size());
+                        mav.addObject("canviarDeFront", canviardefront);
 
                     } else{
 
                         if(sesionHttp.getEntitat() != null){
                             mav.addObject("entitat", sesionHttp.getEntitat());
+                            mav.addObject("numEntitats", entitats.size());
+                            mav.addObject("canviarDeFront", canviardefront);
                         } else{
                             mav = new ModelAndView("entitat");
                             mav.addObject("entitats", entitats);
@@ -145,6 +151,8 @@ public class InicioController extends CommonFrontController {
                 } else{
 
                     mav.addObject("entitat", sesionHttp.getEntitat());
+                    mav.addObject("numEntitats", entitats.size());
+                    mav.addObject("canviarDeFront", canviardefront);
 
                 }
 

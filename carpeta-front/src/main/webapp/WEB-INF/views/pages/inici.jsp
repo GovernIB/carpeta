@@ -57,7 +57,8 @@
 			  sessionStorage.setItem('entitat', '${entitat}');
 			  sessionStorage.setItem('defaultEntityCode', '${defaultEntityCode}');
 			  sessionStorage.setItem('maxInactiveInterval','${pageContext.session.maxInactiveInterval}');
-			  <%--sessionStorage.setItem('numEntitats', '${numEntitats}');--%>
+			  sessionStorage.setItem('numEntitats', '${numEntitats}');
+			  sessionStorage.setItem('canviarDeFront', '${canviarDeFront}');
 			  var aut = sessionStorage.getItem('autenticat');
 			  newMenuDesllisant('menuDesllisant', aut);
 			  newPeu('peu', aut);
