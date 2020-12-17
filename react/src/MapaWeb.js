@@ -1,6 +1,7 @@
 import React, { Component, Suspense } from 'react';
 import { withTranslation } from 'react-i18next';
 import axios from "axios";
+import ExpirarSessio from "./ExpirarSessio";
 
 class MapaWeb extends Component {
 
@@ -61,6 +62,7 @@ class MapaWeb extends Component {
 
 		return (
 			<div className="container-contenido">
+				<ExpirarSessio />
 
 				<div className="infoNoMenu">
 					<p className="titol h2">{t('mapaWebTitol')}</p>

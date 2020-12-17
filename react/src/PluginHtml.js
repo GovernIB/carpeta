@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
 import i18n from 'i18next';
+import ExpirarSessio from "./ExpirarSessio";
 
 class PluginHtml extends Component {
 
@@ -58,7 +59,10 @@ class PluginHtml extends Component {
 
 
         return (
-            <div id="substituir"></div>
+            <div>
+                <ExpirarSessio />
+                <div id="substituir"></div>
+            </div>
         );
 
     }
