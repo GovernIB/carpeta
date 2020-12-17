@@ -73,8 +73,6 @@ public class SecurityServiceImpl implements SecurityService {
 
         final UsuarioClave usuarioClave = new UsuarioClave();
 
-        datosAutenticacion
-
         usuarioClave.setNombre(datosAutenticacion.getNombre());
         usuarioClave.setApellido1(datosAutenticacion.getApellido1());
         usuarioClave.setApellido2(datosAutenticacion.getApellido2());
