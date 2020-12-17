@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
+import ExpirarSessio from "./ExpirarSessio";
 
 class Accessibilitat extends Component {
 
@@ -9,6 +10,7 @@ class Accessibilitat extends Component {
 
         return (
             <div className="container-contenido">
+                <ExpirarSessio />
                 <div className="infoNoMenu">
                     <p className="titol h2">{t('accessibilitatTitol')}</p>
 

@@ -4,6 +4,7 @@ import i18n from 'i18next';
 // import ReactGA from 'react-ga';
 import LlistatDePlugins from './LlistatDePlugins';
 import IniciPublic from './IniciPublic';
+import ExpirarSessio from "./ExpirarSessio";
 
 class Inici extends Component {
 
@@ -23,6 +24,7 @@ class Inici extends Component {
 		return (
 
 			<div className="container-contenido">
+				<ExpirarSessio />
 				{
 					{
 						'0': <IniciPublic />,

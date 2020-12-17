@@ -33,9 +33,9 @@
     </welcome-file-list>
 
     <!--Temps de sessió-->
-    <session-config>
-        <session-timeout>30</session-timeout>
-    </session-config>
+<!--    <session-config>-->
+<!--        <session-timeout>30</session-timeout>-->
+<!--    </session-config>-->
 
     <listener>
         <listener-class>es.caib.carpeta.front.config.HttpSessionChecker</listener-class>
