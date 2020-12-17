@@ -101,7 +101,7 @@
                     <tbody>
                     <#setting date_format="MM/dd/yyyy hh">
                     <#list tramits as tramite >
-                    <tr class="clickableRow" data-url="${tramite.url}" data-pending="${tramite.isPendiente()?then('S','N')}" style="cursor:pointer">
+                    <tr class="clickableRow" data-url="${tramite.url}" data-pending="${tramite.isPendiente()?then('S','N')}" data-version="${tramite.versionSistra}" style="cursor:pointer">
                         <td>${tramite.descripcionTramite}</td>
                         <td>
                             ${tramite.fechaInicio?string("dd-MM-yyyy HH:mm")}
@@ -133,8 +133,8 @@
                         });
                         
                         $('.clickableRow').click(function(event) {
-                        	event.preventDefault();
-                        	if ($(this).data('pending') == 'S'){
+                        	event.preventDefault();       
+                        	if ($(this).data('pending') == 'S' && $(this).data('version') == '1'){
                         		openModalConfirm($(this).data('url'));
                         	}else{
                         		window.open($(this).data('url'), '_blank');
