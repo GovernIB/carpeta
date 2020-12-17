@@ -1,10 +1,5 @@
 package es.caib.carpeta.front.service;
 
-import es.caib.carpeta.commons.utils.Configuracio;
-import es.caib.carpeta.commons.utils.UsuarioClave;
-import es.caib.loginib.rest.api.v1.RDatosAutenticacion;
-import es.caib.loginib.rest.api.v1.RLoginParams;
-import es.caib.loginib.rest.api.v1.RLogoutParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
@@ -14,6 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.support.BasicAuthorizationInterceptor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import es.caib.carpeta.commons.utils.Configuracio;
+import es.caib.carpeta.commons.utils.UsuarioClave;
+import es.caib.loginib.rest.api.v1.RDatosAutenticacion;
+import es.caib.loginib.rest.api.v1.RLoginParams;
+import es.caib.loginib.rest.api.v1.RLogoutParams;
 
 @Service
 public class SecurityServiceImpl implements SecurityService {
@@ -71,6 +72,8 @@ public class SecurityServiceImpl implements SecurityService {
                 RDatosAutenticacion.class);
 
         final UsuarioClave usuarioClave = new UsuarioClave();
+
+        datosAutenticacion
 
         usuarioClave.setNombre(datosAutenticacion.getNombre());
         usuarioClave.setApellido1(datosAutenticacion.getApellido1());
