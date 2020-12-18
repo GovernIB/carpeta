@@ -59,6 +59,7 @@
 			  sessionStorage.setItem('maxInactiveInterval','${pageContext.session.maxInactiveInterval}');
 			  sessionStorage.setItem('numEntitats', '${numEntitats}');
 			  sessionStorage.setItem('canviarDeFront', '${canviarDeFront}');
+			  sessionStorage.removeItem('pluginActiu');
 			  var aut = sessionStorage.getItem('autenticat');
 			  newMenuDesllisant('menuDesllisant', aut);
 			  newPeu('peu', aut);
