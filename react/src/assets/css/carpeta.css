@@ -331,6 +331,9 @@ img:hover {
 .noVisible{
 	display: none;
 }
+.ui-dialog .ui-dialog-title {
+	color: #fff;
+}
 
 
 /* HomePage */
