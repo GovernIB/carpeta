@@ -56,7 +56,7 @@
 			  sessionStorage.setItem('autenticat', '0');
 			  sessionStorage.setItem('entitat', '${entitat}');
 			  sessionStorage.setItem('defaultEntityCode', '${defaultEntityCode}');
-			  sessionStorage.setItem('maxInactiveInterval','${pageContext.session.maxInactiveInterval}');
+			  sessionStorage.setItem('maxInactiveInterval','${maxInactiveInterval}');
 			  sessionStorage.setItem('numEntitats', '${numEntitats}');
 			  sessionStorage.setItem('canviarDeFront', '${canviarDeFront}');
 			  sessionStorage.removeItem('pluginActiu');

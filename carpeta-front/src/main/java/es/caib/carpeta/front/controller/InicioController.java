@@ -94,7 +94,9 @@ public class InicioController extends CommonFrontController {
         ModelAndView mav = new ModelAndView("inici");
 
         // Posam la sessió de 30 minuts
-        session.setMaxInactiveInterval(30 * 60);
+//        session.setMaxInactiveInterval(1 * 60);
+        mav.addObject("maxInactiveInterval", 30*60);
+
 
         try{
 

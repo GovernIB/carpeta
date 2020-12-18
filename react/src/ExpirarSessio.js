@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
-import i18n from 'i18next';
 
 class ExpirarSessio extends Component {
 
     loadDialog(maxInactiveInterval) {
         var sessionAlive = maxInactiveInterval;
+        if(sessionAlive === null){
+            sessionAlive = 30 * 60;
+        }
         var notifyBefore = 30;
         setTimeout(function() {
             $(function() {
