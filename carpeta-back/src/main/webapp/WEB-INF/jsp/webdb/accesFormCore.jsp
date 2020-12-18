@@ -155,6 +155,35 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,AccesFields.PLUGINID)}">
+        <tr id="acces_pluginID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[AccesFields.PLUGINID])?'acces.pluginID':__theForm.labels[AccesFields.PLUGINID]}" />
+              <c:if test="${not empty __theForm.help[AccesFields.PLUGINID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.PLUGINID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="acces.pluginID" cssClass="errorField alert alert-danger" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,AccesFields.PLUGINID)}" >
+          <form:hidden path="acces.pluginID"/>
+          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.acces.pluginID,__theForm.listOfValuesForPluginID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AccesFields.PLUGINID)}" >
+          <form:select id="acces_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="form-control col-md-4" path="acces.pluginID">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfValuesForPluginID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,AccesFields.TIPUS)}">
         <tr id="acces_tipus_rowid">
           <td>

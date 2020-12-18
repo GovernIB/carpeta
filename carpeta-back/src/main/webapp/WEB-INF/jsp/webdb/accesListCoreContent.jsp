@@ -72,6 +72,14 @@
           </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.PLUGINID)}">
+          <td>
+          <c:set var="tmp">${acces.pluginID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForPluginID[tmp]}
+          </c:if>
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.TIPUS)}">
           <td>
           <c:set var="tmp">${acces.tipus}</c:set>

@@ -47,6 +47,10 @@ public class AccesQueryPath extends org.fundaciobit.genapp.common.query.QueryPat
     return new LongField(getQueryPath(), AccesFields.ENTITATID);
   }
 
+  public IntegerField PLUGINID() {
+    return new IntegerField(getQueryPath(), AccesFields.PLUGINID);
+  }
+
   public IntegerField TIPUS() {
     return new IntegerField(getQueryPath(), AccesFields.TIPUS);
   }

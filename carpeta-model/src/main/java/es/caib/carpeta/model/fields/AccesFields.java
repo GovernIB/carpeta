@@ -21,6 +21,7 @@ public interface AccesFields extends java.io.Serializable {
 	 public static final StringField NIVELLSEGURETAT = new StringField(_TABLE_MODEL, "nivellSeguretat", "nivellseguretat");
 	 public static final IntegerField RESULTATAUTENTICACIO = new IntegerField(_TABLE_MODEL, "resultatAutenticacio", "resultatautenticacio");
 	 public static final LongField ENTITATID = new LongField(_TABLE_MODEL, "entitatID", "entitatid");
+	 public static final IntegerField PLUGINID = new IntegerField(_TABLE_MODEL, "pluginID", "pluginid");
 	 public static final IntegerField TIPUS = new IntegerField(_TABLE_MODEL, "tipus", "tipus");
 	 public static final TimestampField DATADARRERACCES = new TimestampField(_TABLE_MODEL, "dataDarrerAcces", "datadarreracces");
 	 public static final StringField IDIOMA = new StringField(_TABLE_MODEL, "idioma", "idioma");
@@ -36,6 +37,7 @@ public interface AccesFields extends java.io.Serializable {
     NIVELLSEGURETAT,
     RESULTATAUTENTICACIO,
     ENTITATID,
+    PLUGINID,
     TIPUS,
     DATADARRERACCES,
     IDIOMA

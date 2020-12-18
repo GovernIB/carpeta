@@ -29,6 +29,9 @@ public interface Acces extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public long getEntitatID();
 	public void setEntitatID(long _entitatID_);
 
+	public java.lang.Integer getPluginID();
+	public void setPluginID(java.lang.Integer _pluginID_);
+
 	public int getTipus();
 	public void setTipus(int _tipus_);
 

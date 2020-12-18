@@ -153,6 +153,28 @@ public class AccesFilterForm extends CarpetaBaseFilterForm implements AccesField
   }
 
 
+  private java.lang.Integer pluginIDDesde;
+
+  public java.lang.Integer getPluginIDDesde() {
+    return this.pluginIDDesde;
+  }
+
+  public void setPluginIDDesde(java.lang.Integer pluginIDDesde) {
+    this.pluginIDDesde = pluginIDDesde;
+  }
+
+
+  private java.lang.Integer pluginIDFins;
+
+  public java.lang.Integer getPluginIDFins() {
+    return this.pluginIDFins;
+  }
+
+  public void setPluginIDFins(java.lang.Integer pluginIDFins) {
+    this.pluginIDFins = pluginIDFins;
+  }
+
+
   private java.lang.Integer tipusDesde;
 
   public java.lang.Integer getTipusDesde() {
@@ -225,12 +247,15 @@ public class AccesFilterForm extends CarpetaBaseFilterForm implements AccesField
     this.resultatAutenticacioFins = __toClone.resultatAutenticacioFins;
     this.entitatIDDesde = __toClone.entitatIDDesde;
     this.entitatIDFins = __toClone.entitatIDFins;
+    this.pluginIDDesde = __toClone.pluginIDDesde;
+    this.pluginIDFins = __toClone.pluginIDFins;
     this.tipusDesde = __toClone.tipusDesde;
     this.tipusFins = __toClone.tipusFins;
     this.dataDarrerAccesDesde = __toClone.dataDarrerAccesDesde;
     this.dataDarrerAccesFins = __toClone.dataDarrerAccesFins;
     this.idioma = __toClone.idioma;
     this.mapOfEntitatForEntitatID = __toClone.mapOfEntitatForEntitatID;
+    this.mapOfValuesForPluginID = __toClone.mapOfValuesForPluginID;
     this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
   }
   
@@ -274,6 +299,18 @@ public class AccesFilterForm extends CarpetaBaseFilterForm implements AccesField
 
   public void setMapOfEntitatForEntitatID(Map<String, String> mapOfEntitatForEntitatID) {
     this.mapOfEntitatForEntitatID = mapOfEntitatForEntitatID;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForPluginID;
+
+  public Map<String, String> getMapOfValuesForPluginID() {
+    return this.mapOfValuesForPluginID;
+  }
+
+  public void setMapOfValuesForPluginID(Map<String, String> mapOfValuesForPluginID) {
+    this.mapOfValuesForPluginID = mapOfValuesForPluginID;
   }
 
 
