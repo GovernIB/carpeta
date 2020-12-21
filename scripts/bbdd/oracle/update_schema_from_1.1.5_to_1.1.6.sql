@@ -64,3 +64,6 @@ es.caib.carpeta.pluginsib.carpetafront.notib.notificaciones.url=https://sede.adm
 -- 15/12/2020  Revisió i adaptació de l'estructura de dades per soportar la funcionalitat d'accessos #268
 ALTER TABLE car_acces ADD tipus NUMBER(19,0) not null;
 ALTER TABLE car_acces ADD pluginid NUMBER(19,0);
+
+-- 21/12/2020 Refactoritzar estadístiques #286
+TRUNCATE TABLE car_estadistica;

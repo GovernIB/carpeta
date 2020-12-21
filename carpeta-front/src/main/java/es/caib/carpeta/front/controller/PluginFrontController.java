@@ -23,17 +23,14 @@ import javax.servlet.http.HttpServletResponse;
 import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_ACCES_PLUGIN;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ACCES_PLUGIN;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_ESTAD_ACCES_PLUGIN;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_PLUGIN_FRONT;
 import es.caib.carpeta.commons.utils.UsuarioClave;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.carpeta.front.utils.SesionHttp;
 import es.caib.carpeta.hibernate.HibernateFileUtil;
 import es.caib.carpeta.jpa.EntitatJPA;
-import es.caib.carpeta.jpa.EstadisticaJPA;
 import es.caib.carpeta.logic.AccesLogicaLocal;
 import es.caib.carpeta.logic.AuditoriaLogicaLocal;
-import es.caib.carpeta.logic.EstadisticaLogicaLocal;
 import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
 import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
 import es.caib.carpeta.logic.utils.PluginInfo;
@@ -64,9 +61,6 @@ public class PluginFrontController extends CommonFrontController {
 
     @EJB(mappedName = LogCarpetaLogicaLocal.JNDI_NAME)
     protected LogCarpetaLogicaLocal logLogicaEjb;
-
-    @EJB(mappedName = EstadisticaLogicaLocal.JNDI_NAME)
-    protected EstadisticaLogicaLocal estadisticaLogicaEjb;
 
     @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
     protected AuditoriaLogicaLocal auditoriaLogicaEjb;
@@ -227,16 +221,6 @@ public class PluginFrontController extends CommonFrontController {
             //  XYZ TODO Passar valor a la var PluginText
             // TODO Revisar si aqui hem de guardar l'entitat del plugin(necessitariem obtenir el plugin primer) Comentar amb en Toni Nadal.
             logLogicaEjb.crearLog("Executat plugin des del Front per "+ administrationID, ESTAT_LOG_OK,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),"", Long.parseLong(pluginID));
-
-            //ESTADISTICA
-            List<EstadisticaJPA> estadisticas = estadisticaLogicaEjb.findEstadistica(TIPUS_ESTAD_ACCES_PLUGIN,null,new Date(),Long.parseLong(pluginID));
-
-            if(estadisticas != null && !estadisticas.isEmpty()) {
-
-                estadisticaLogicaEjb.incrementarComptador(estadisticas.get(0));
-            }else{
-                estadisticaLogicaEjb.crearEstadistica(null, TIPUS_ESTAD_ACCES_PLUGIN,Long.parseLong(pluginID));
-            }
 
             //AUDITORIA
             auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ACCES_PLUGIN,null,null,administrationID,Long.parseLong(pluginID));

@@ -15,29 +15,31 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
-
 import es.caib.carpeta.back.preparer.BasePreparer;
 import es.caib.carpeta.back.utils.PluginUserInformationUtils;
 import es.caib.carpeta.commons.utils.Constants;
 import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_ERROR;
 import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ENTRADA_BACK;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_ESTAD_ENTRADA_BACK;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_BACK;
 import es.caib.carpeta.ejb.EntitatLocal;
 import es.caib.carpeta.ejb.PropietatGlobalLocal;
 import es.caib.carpeta.jpa.EntitatJPA;
-import es.caib.carpeta.jpa.EstadisticaJPA;
 import es.caib.carpeta.jpa.UsuariEntitatJPA;
 import es.caib.carpeta.jpa.UsuariJPA;
 import es.caib.carpeta.logic.AuditoriaLogicaLocal;
-import es.caib.carpeta.logic.EstadisticaLogicaLocal;
 import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
 import es.caib.carpeta.logic.UsuariEntitatLogicaLocal;
 import es.caib.carpeta.logic.UsuariLogicaLocal;
 import es.caib.carpeta.logic.utils.EjbManager;
-import es.caib.carpeta.model.fields.*;
+import es.caib.carpeta.model.fields.EntitatFields;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 
 /**
@@ -104,11 +106,10 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
         }
 
-        EstadisticaLogicaLocal estadisticaEjb;
+
         AuditoriaLogicaLocal auditoriaEjb;
 
         try {
-            estadisticaEjb = EjbManager.getEstadisticaLogicaEJB();
             auditoriaEjb = EjbManager.getAuditoriaLogicaEJB();
         } catch (I18NException e) {
             // TODO traduccio
@@ -530,17 +531,6 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
         SecurityContextHolder.getContext().setAuthentication(loginInfo.generateToken());
 
         try {
-            // ESTADISTICA
-            List<EstadisticaJPA> estadisticas = estadisticaEjb.findEstadistica(TIPUS_ESTAD_ENTRADA_BACK, null,
-                    new Date(), null);
-            
-
-            if (estadisticas != null && !estadisticas.isEmpty()) {
-
-                estadisticaEjb.incrementarComptador(estadisticas.get(0));
-            } else {
-                estadisticaEjb.crearEstadistica(null, TIPUS_ESTAD_ENTRADA_BACK, null);
-            }
 
             // LOG
             String codiEntitat = loginInfo.getEntitat()!=null?loginInfo.getEntitat().getCodi():null;
@@ -554,7 +544,8 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                     null);
             }
         } catch (I18NException ie) {
-            throw new LoginException("Error creant el log o l'estadistica");
+            log.error("S'ha produit un error creant el log");
+
         }
 
         if (isDebug) {

@@ -70,12 +70,6 @@
 </a>
 
 <a class="dropdown-item"
-   href="<c:url value="/superadmin/estadistica/list"/>"> <span
-        style="${(fn:contains(url, '/superadmin/estadistica'))? " font-weight:bold;" : ""}"><spring:message
-        code="estadistica.estadistica.plural" /> </span>
-</a>
-
-<a class="dropdown-item"
    href="<c:url value="/superadmin/auditoria/list"/>"> <span
         style="${(fn:contains(url, '/superadmin/auditoria'))? " font-weight:bold;" : ""}"><spring:message
         code="auditoria.auditoria.plural" /> </span>

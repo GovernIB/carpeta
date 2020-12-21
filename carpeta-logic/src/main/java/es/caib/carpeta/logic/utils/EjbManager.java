@@ -13,11 +13,10 @@ import es.caib.carpeta.ejb.EntitatLocal;
 import es.caib.carpeta.ejb.PropietatGlobalLocal;
 import es.caib.carpeta.logic.AuditoriaLogicaLocal;
 import es.caib.carpeta.logic.AvisLogicaLocal;
-import es.caib.carpeta.logic.EstadisticaLogicaLocal;
 import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
 import es.caib.carpeta.logic.UsuariEntitatLogicaLocal;
 import es.caib.carpeta.logic.UsuariLogicaLocal;
-import es.caib.carpeta.model.fields.*;
+import es.caib.carpeta.model.fields.PropietatGlobalFields;
 
 
 /**
@@ -42,8 +41,6 @@ public final class EjbManager {
 	protected static PropietatGlobalLocal propietatLogicaEjb;
 	
 	protected static AvisLogicaLocal avisLogicaEjb;
-
-	protected static EstadisticaLogicaLocal estadisticaLogicaEjb;
 
 	protected static AuditoriaLogicaLocal auditoriaLogicaEjb;
 
@@ -145,19 +142,6 @@ public final class EjbManager {
 			}
 		}
 		return avisLogicaEjb;
-	}
-
-	public static EstadisticaLogicaLocal getEstadisticaLogicaEJB() throws I18NException {
-
-		if (estadisticaLogicaEjb == null) {
-			try {
-				estadisticaLogicaEjb = (EstadisticaLogicaLocal) new InitialContext()
-						.lookup(EstadisticaLogicaLocal.JNDI_NAME);
-			} catch (Throwable e) {
-				throwNewI18NException(e, "EstadisticaLogicaLocal");
-			}
-		}
-		return estadisticaLogicaEjb;
 	}
 
 
