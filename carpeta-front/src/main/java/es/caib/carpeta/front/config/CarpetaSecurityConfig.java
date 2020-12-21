@@ -1,6 +1,7 @@
 package es.caib.carpeta.front.config;
 
 import es.caib.carpeta.front.controller.WebUIController;
+import es.caib.carpeta.front.controller.DadesObertesController;
 import es.caib.carpeta.front.security.CarpetaFrontAuthProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -36,7 +37,7 @@ public class CarpetaSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/", "/inici", "/prelogin/**", "/sortir", "/dist/**", "/src/**", "/utils/**", "/assets/**", "/js/**", "/pluginfront","/pluginfront/**", WebUIController.WEBUI_PATH + "/**", "/entitat", "/e/**")
+                .antMatchers("/", "/inici", "/prelogin/**", "/sortir", "/dist/**", "/src/**", "/utils/**", "/assets/**", "/js/**", "/pluginfront","/pluginfront/**", WebUIController.WEBUI_PATH + "/**", DadesObertesController.DADES_OBERTES_PATH + "/**",  "/entitat", "/e/**")
                 .permitAll()
                 .and()
                 .authorizeRequests().anyRequest().access("isAuthenticated()")
