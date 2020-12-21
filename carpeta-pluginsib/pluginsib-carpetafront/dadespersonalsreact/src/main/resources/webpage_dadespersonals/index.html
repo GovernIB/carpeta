@@ -1,47 +1,29 @@
-<!DOCTYPE html>
+<div id="dadespersonalscontainer"></div>
+<script>
+	var newInstancePlugin;
+	var changeLanguagePlugin;
+</script>
 
-<html lang="es">
+<script src="${pathtojs}"></script>
 
-<head>
+<script>
 
-<title>My first ReactJS App</title>
+   var props = {  "usuariNom" : "${usuariNom}",
+           "usuariLlinatge1" : "${usuariLlinatge1}",
+         "usuariLlinatge2" : "${usuariLlinatge2}",
+         "usuariDNI" : "${usuariDNI}",
+         "usuariMetode" : "${usuariMetode}"
+   };
 
-</head>
+   newInstancePlugin('dadespersonalscontainer', props);
+/*
+	// Function name to invoke
+	var fnName = "newInstancePlugin";
 
-<body>
+	// Params to pass to the function
+	var params = "dadespersonalscontainer";
 
-    <table border="2">
-
-
-        <tr>
-            <td>DIV ROOT NOVA FORMA</td>
-        </tr>
-        <tr>
-            <td><div id="dadespersonalscontainer"></div></td>
-        </tr>
-
-    </table>
-
-    <script>
-		var newInstancePlugin;
-		var changeLanguageDadesCiutadaReact;
-	</script>
-
-    <script src="${pathtojs}"></script>
-
-    <script>
-		//newDadesPersonalsReact('root');
-
-		// Function name to invoke
-		var fnName = "newInstancePlugin";
-
-		// Params to pass to the function
-		var params = "dadespersonalscontainer";
-
-		// Call function using Window object
-		window[fnName](params);
-	</script>
-
-
-</body>
-</html>
+	// Call function using Window object
+	window[fnName](params);
+	*/
+</script>

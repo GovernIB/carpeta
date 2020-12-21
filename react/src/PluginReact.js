@@ -6,14 +6,23 @@ import ExpirarSessio from "./ExpirarSessio";
 class PluginReact extends Component {
 
 
+     constructor(props) {
+        super(props);
+
+       this.state = {
+            loaded: false            
+        };
+    }
+
    componentDidMount() {
      i18n.on('languageChanged', function(lng) { 
             console.log('PLUGIN REACT  Idioma canviat a ' + lng );
           
-            if (window['changeLanguageDadesCiutadaReact']) {
-                console.log('changeLanguageDadesCiutadaReact => EXISTEIX !!!!');
+            if (window['changeLanguagePlugin']) {
+                console.log('changeLanguagePlugin => EXISTEIX !!!!');
+                window['changeLanguagePlugin'](lng);
             } else {
-                console.log('changeLanguageDadesCiutadaReact => NOOOO EXISTEIX !!!!');
+                console.log('changeLanguagePlugin => NOOOO EXISTEIX !!!!');
             }
               
          }
@@ -26,19 +35,23 @@ class PluginReact extends Component {
 		const {t} = this.props;
 		const pluginID = this.props.pluginID;
 
-		var urlBase = window.location.href;
-		var url = urlBase + "pluginfront/showreactplugin/" + pluginID + "/" + i18n.language;
+        if (!this.state.loaded) {
 
-		$(document).ready(function () {
-			sessionStorage.setItem('idioma', i18n.language);
-			$('#contentplugin').load(url);
+            console.log("CARREGA INICIAL DEL PLUGIN !!!!!");
+
+            var urlBase = window.location.href;
+            var url = urlBase + "pluginfront/showreactplugin/" + pluginID + "/" + i18n.language;
+
+            $(document).ready(function () {
+                sessionStorage.setItem('idioma', i18n.language);
+                $('#contentplugin').load(url);
+            });
             
+            this.setState({loaded: true });
+        } else {
+            console.log("PLUGIN JA CARREGAT !!!!!");
+        }
             
-            
-            
-            
-            
-		});
 
 		return (
             <div>

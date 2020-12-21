@@ -49,3 +49,9 @@ nb-configuration.xml
 /react/dist/index.html
 /react/dist/reactjs_main.js
 /carpeta-pluginsib/pluginsib-carpetafront/sistra/src/main/resources/webresourcesistra/carpeta/backup
+/carpeta-pluginsib/pluginsib-carpetafront/dadespersonalsreact/react/dist
+/carpeta-pluginsib/pluginsib-carpetafront/dadespersonalsreact/react/node_modules
+/carpeta-pluginsib/pluginsib-carpetafront/dadespersonalsreact/react/index.html
+/carpeta-pluginsib/pluginsib-carpetafront/dadespersonalsreact/react/package-lock.json
+/carpeta-pluginsib/pluginsib-carpetafront/dadespersonalsreact/react/readme.txt
+/carpeta-pluginsib/pluginsib-carpetafront/dadespersonalsreact/react/src/App.js

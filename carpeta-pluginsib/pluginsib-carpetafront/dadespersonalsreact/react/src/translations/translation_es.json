@@ -1,0 +1,10 @@
+{
+    "Welcome to React": "Bienvenido a React y a react-i18next",
+    "dadespersonalsTitol": "DATOS PERSONALES DE ",
+    "dadespersonalsDescripcio": "Desde aquí puede consultar sus datos personales en poder de la Administración de la Comunidad Autónoma de las Illes Balears.",
+    "dadespersonalsNom": "Nombre",
+    "dadespersonalsLlinatge1": "Primer apellido",
+    "dadespersonalsLlinatge2": "Segundo apellido",
+    "dadespersonalsDni": "DNI",
+    "dadespersonalsMetode": "Autenticación"
+}
