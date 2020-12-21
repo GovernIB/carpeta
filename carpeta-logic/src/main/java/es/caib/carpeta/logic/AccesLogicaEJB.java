@@ -4,14 +4,18 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 
 import es.caib.carpeta.commons.utils.UsuarioClave;
 import es.caib.carpeta.ejb.AccesEJB;
 import es.caib.carpeta.jpa.AccesJPA;
+import es.caib.carpeta.jpa.AvisJPA;
 import es.caib.carpeta.jpa.EntitatJPA;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Fundació BIT.
@@ -53,5 +57,32 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaLocal{
         create(accesJPA);
 
 
+    }
+    
+    /* Llistat de accesos entre dues dates ordenat per data descendent */
+    @Override
+    public List<AccesJPA> findBetweenDates(Date inici, Date fi, long entitat) throws I18NException {
+    	
+    	String filtreEntitat = (entitat > 0) ? "and a.entitatID = :codiEntitat " : "";
+    	String sentencia = "select a from AccesJPA a "
+				+ "where a.dataDarrerAcces between :dataInici and :dataFi "
+				+ filtreEntitat
+				+ "order by a.dataDarrerAcces desc";
+    	
+    	TypedQuery<AccesJPA> query = getEntityManager().createQuery(
+				sentencia, AccesJPA.class);
+		query.setParameter("dataInici", inici);
+		query.setParameter("dataFi", fi);
+		
+		System.out.println("sentencia:" + sentencia);
+		System.out.println("Inici: " + inici);
+		System.out.println("Fi: " + fi);
+		System.out.println("Entitat: " + entitat);
+		
+		if(filtreEntitat != "")
+			query.setParameter("codiEntitat", entitat);
+		
+		return query.getResultList();
+    	
     }
 }
