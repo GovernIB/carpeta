@@ -99,16 +99,25 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
 
         }catch (I18NException ie){
             ie.printStackTrace();
-            throw new BadCredentialsException("Imposible crear auditoria: " + usuario);
+            //throw new BadCredentialsException("Imposible crear auditoria: " + usuario);
         }catch (Exception e) {
             e.printStackTrace();
-            throw new BadCredentialsException("Imposible autenticar usuario: " + usuario);
+            //throw new BadCredentialsException("Imposible autenticar usuario: " + usuario);
         }
+        
+        log.info("Dentro de CarpetaAuthProvider 111");
 
         UsuarioAutenticado usuarioAutenticado =  new UsuarioAutenticado();
         usuarioAutenticado.setUsuarioClave(usuarioClave);
+        
+        log.info("Dentro de CarpetaAuthProvider 2222");
 
-        return new UsernamePasswordAuthenticationToken(usuarioAutenticado, authentication.getCredentials(), usuarioAutenticado.getAuthorities());
+        UsernamePasswordAuthenticationToken upat;
+        upat = new UsernamePasswordAuthenticationToken(usuarioAutenticado, authentication.getCredentials(), usuarioAutenticado.getAuthorities());
+        
+        log.info("Dentro de CarpetaAuthProvider 3333");
+        
+        return upat;
     }
 
     @Override

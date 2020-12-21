@@ -5,6 +5,22 @@ import ExpirarSessio from "./ExpirarSessio";
 
 class PluginReact extends Component {
 
+
+   componentDidMount() {
+     i18n.on('languageChanged', function(lng) { 
+            console.log('PLUGIN REACT  Idioma canviat a ' + lng );
+          
+            if (window['changeLanguageDadesCiutadaReact']) {
+                console.log('changeLanguageDadesCiutadaReact => EXISTEIX !!!!');
+            } else {
+                console.log('changeLanguageDadesCiutadaReact => NOOOO EXISTEIX !!!!');
+            }
+              
+         }
+     );
+   }
+
+
 	render() {
 
 		const {t} = this.props;
@@ -16,17 +32,24 @@ class PluginReact extends Component {
 		$(document).ready(function () {
 			sessionStorage.setItem('idioma', i18n.language);
 			$('#contentplugin').load(url);
+            
+            
+            
+            
+            
+            
 		});
 
 		return (
-<<<<<<< HEAD
+            <div>
 			<div id="contentplugin"></div>
-=======
+
 			<div>
 				<ExpirarSessio />
 				<div id="substituir"></div>
 			</div>
->>>>>>> 9c05eb9a914458809035337ff86b72f7bb2315d5
+            </div>
+
 		);
 
 	}

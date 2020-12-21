@@ -66,21 +66,30 @@ public class SecurityServiceImpl implements SecurityService {
     @Override
     public UsuarioClave validarTicketAutentificacion(final String ticket) throws Exception {
 
-        final RestTemplate restTemplate = getLoginIbRestTemplate();
+        
+        try {
+            final RestTemplate restTemplate = getLoginIbRestTemplate();
+    
+            final RDatosAutenticacion datosAutenticacion = restTemplate.getForObject(LOGINIB_URL + "/ticket/" + ticket,
+                    RDatosAutenticacion.class);
+    
+            final UsuarioClave usuarioClave = new UsuarioClave();
+    
+            usuarioClave.setNombre(datosAutenticacion.getNombre());
+            usuarioClave.setApellido1(datosAutenticacion.getApellido1());
+            usuarioClave.setApellido2(datosAutenticacion.getApellido2());
+            usuarioClave.setNif(datosAutenticacion.getNif());
+            usuarioClave.setMetodoAutentificacion(datosAutenticacion.getMetodoAutenticacion());
+            usuarioClave.setQaa(datosAutenticacion.getQaa());
+            
+            return usuarioClave;
+        } catch(Exception e) {
+            // XYZ ZZZ ZZZ
+            log.error(" ERROR DESCONEGUT en validarTicketAutentificacion: " + e.getMessage(), e);
+            throw e;
+        }
 
-        final RDatosAutenticacion datosAutenticacion = restTemplate.getForObject(LOGINIB_URL + "/ticket/" + ticket,
-                RDatosAutenticacion.class);
-
-        final UsuarioClave usuarioClave = new UsuarioClave();
-
-        usuarioClave.setNombre(datosAutenticacion.getNombre());
-        usuarioClave.setApellido1(datosAutenticacion.getApellido1());
-        usuarioClave.setApellido2(datosAutenticacion.getApellido2());
-        usuarioClave.setNif(datosAutenticacion.getNif());
-        usuarioClave.setMetodoAutentificacion(datosAutenticacion.getMetodoAutenticacion());
-        usuarioClave.setQaa(datosAutenticacion.getQaa());
-
-        return usuarioClave;
+        
     }
 
     @Override
