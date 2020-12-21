@@ -7,6 +7,7 @@ import org.fundaciobit.genapp.common.query.OrderType;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -16,11 +17,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import es.caib.carpeta.back.form.webdb.AccesFilterForm;
 import es.caib.carpeta.back.form.webdb.AccesForm;
+import es.caib.carpeta.back.form.webdb.PluginRefList;
 
 import es.caib.carpeta.back.controller.webdb.AccesController;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.model.fields.AccesFields;
 import es.caib.carpeta.model.fields.EntitatFields;
+import es.caib.carpeta.model.fields.PluginFields;
 import java.util.List;
 
 /**
@@ -34,6 +37,10 @@ import java.util.List;
 @RequestMapping(value = "/superadmin/acces")
 @SessionAttributes(types = { AccesForm.class, AccesFilterForm.class })
 public class AccesSuperAdminController extends AccesController {
+
+
+    @Autowired
+    protected PluginRefList pluginRefList;
 
     @Override
     public String getTileForm() { return "accesFormSuperAdmin"; }
@@ -103,6 +110,13 @@ public class AccesSuperAdminController extends AccesController {
         }
         return __tmp;
     }
+
+    @Override
+    public List<StringKeyValue> getReferenceListForPluginID(HttpServletRequest request,
+                                                            ModelAndView mav, Where where)  throws I18NException {
+        return pluginRefList.getReferenceList(PluginFields.PLUGINID, where );
+    }
+
 
     @Override
     public boolean isActiveFormNew() {

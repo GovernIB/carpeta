@@ -22,7 +22,7 @@ import java.util.List;
 public interface AccesLogicaLocal extends AccesLocal {
     public static final String JNDI_NAME = "java:app/carpeta-logic/AccesLogicaEJB!es.caib.carpeta.logic.AccesLogicaLocal";
 
-    public void crearAcces(UsuarioClave usuarioClave,@NotNull int tipus, String codiEntitat, Timestamp dataDarrerAcces,String idioma, String ipAddress) throws I18NException;
+    public void crearAcces(UsuarioClave usuarioClave,@NotNull int tipus, String codiEntitat,Integer pluginID, Timestamp dataDarrerAcces,String idioma, String ipAddress) throws I18NException;
     
     /* Llistat de accesos entre dues dates ordenat per data descendent */
     public List<AccesJPA> findBetweenDates(Date inici, Date fi, long entitat) throws I18NException;

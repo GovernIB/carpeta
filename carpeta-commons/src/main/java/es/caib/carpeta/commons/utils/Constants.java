@@ -219,12 +219,15 @@ public interface Constants {
     /* Tipus Accessos */
     public static final int TIPUS_ACCES_LOGIN_AUTENTICAT = 1;
     public static final int TIPUS_ACCES_LOGIN_NO_AUTENTICAT = 2;
+    public static final int TIPUS_ACCES_PLUGIN = 3;
+
 
 
 
     public static final int[] TIPUS_ACCES_ALL = {
             TIPUS_ACCES_LOGIN_AUTENTICAT,
             TIPUS_ACCES_LOGIN_NO_AUTENTICAT,
+            TIPUS_ACCES_PLUGIN
 
     };
 

@@ -10,10 +10,8 @@ import javax.validation.constraints.NotNull;
 import es.caib.carpeta.commons.utils.UsuarioClave;
 import es.caib.carpeta.ejb.AccesEJB;
 import es.caib.carpeta.jpa.AccesJPA;
-import es.caib.carpeta.jpa.AvisJPA;
 import es.caib.carpeta.jpa.EntitatJPA;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +28,7 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaLocal{
     protected EntitatLogicaLocal entitatLogicaEjb;
 
     @Override
-    public void crearAcces(UsuarioClave usuarioClave,@NotNull int tipus, String codiEntitat, Timestamp dataDarrerAcces, String idioma, String ipAddress) throws I18NException {
+    public void crearAcces(UsuarioClave usuarioClave,@NotNull int tipus, String codiEntitat, Integer pluginID, Timestamp dataDarrerAcces, String idioma, String ipAddress) throws I18NException {
 
         AccesJPA accesJPA = new AccesJPA();
 
@@ -52,6 +50,8 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaLocal{
         if(entitatJPA!=null) {
             accesJPA.setEntitatID(entitatJPA.getEntitatID());
         }
+
+        accesJPA.setPluginID(pluginID);
 
 
         create(accesJPA);
