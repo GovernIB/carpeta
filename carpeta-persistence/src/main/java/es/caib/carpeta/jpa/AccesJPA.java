@@ -1,18 +1,20 @@
 
 package es.caib.carpeta.jpa;
-import es.caib.carpeta.model.entity.*;
-import javax.persistence.Table;
+import org.hibernate.annotations.ForeignKey;
+import org.hibernate.annotations.Index;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
-import javax.persistence.GeneratedValue;
-import org.hibernate.annotations.Index;
-import javax.persistence.SequenceGenerator;
-import org.hibernate.annotations.ForeignKey;
-import javax.persistence.JoinColumn;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import es.caib.carpeta.model.entity.Acces;
 
 
 @SuppressWarnings("deprecation")
@@ -58,7 +60,7 @@ private static final long serialVersionUID = -2081832820L;
 	long entitatID;
 
 	@Column(name="pluginid",length = 10)
-	java.lang.Integer pluginID;
+	java.lang.Long pluginID;
 
 	@Column(name="tipus",nullable = false,length = 10)
 	int tipus;
@@ -77,7 +79,7 @@ private static final long serialVersionUID = -2081832820L;
   }
 
   /** Constructor amb tots els camps  */
-  public AccesJPA(long accesID , java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String nivellSeguretat , java.lang.Integer resultatAutenticacio , long entitatID , java.lang.Integer pluginID , int tipus , java.sql.Timestamp dataDarrerAcces , java.lang.String idioma) {
+  public AccesJPA(long accesID , java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String nivellSeguretat , java.lang.Integer resultatAutenticacio , long entitatID , java.lang.Long pluginID , int tipus , java.sql.Timestamp dataDarrerAcces , java.lang.String idioma) {
     this.accesID=accesID;
     this.nom=nom;
     this.llinatges=llinatges;
@@ -93,7 +95,7 @@ private static final long serialVersionUID = -2081832820L;
     this.idioma=idioma;
 }
   /** Constructor sense valors autoincrementals */
-  public AccesJPA(java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String nivellSeguretat , java.lang.Integer resultatAutenticacio , long entitatID , java.lang.Integer pluginID , int tipus , java.sql.Timestamp dataDarrerAcces , java.lang.String idioma) {
+  public AccesJPA(java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String nivellSeguretat , java.lang.Integer resultatAutenticacio , long entitatID , java.lang.Long pluginID , int tipus , java.sql.Timestamp dataDarrerAcces , java.lang.String idioma) {
     this.nom=nom;
     this.llinatges=llinatges;
     this.nif=nif;
@@ -192,10 +194,10 @@ private static final long serialVersionUID = -2081832820L;
 		this.entitatID = _entitatID_;
 	};
 
-	public java.lang.Integer getPluginID() {
+	public java.lang.Long getPluginID() {
 		return(pluginID);
 	};
-	public void setPluginID(java.lang.Integer _pluginID_) {
+	public void setPluginID(java.lang.Long _pluginID_) {
 		this.pluginID = _pluginID_;
 	};
 

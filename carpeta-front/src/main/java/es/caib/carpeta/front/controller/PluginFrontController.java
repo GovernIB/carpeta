@@ -21,29 +21,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_ACCES_PLUGIN;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ACCES_PLUGIN;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_ESTAD_ACCES_PLUGIN;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_PLUGIN_FRONT;
-
+import es.caib.carpeta.commons.utils.UsuarioClave;
+import es.caib.carpeta.front.config.UsuarioAutenticado;
+import es.caib.carpeta.front.utils.SesionHttp;
+import es.caib.carpeta.hibernate.HibernateFileUtil;
+import es.caib.carpeta.jpa.EntitatJPA;
+import es.caib.carpeta.logic.AccesLogicaLocal;
+import es.caib.carpeta.logic.AuditoriaLogicaLocal;
+import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
+import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
+import es.caib.carpeta.logic.utils.PluginInfo;
+import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
+import java.net.InetAddress;
+import java.sql.Timestamp;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import es.caib.carpeta.front.config.UsuarioAutenticado;
-import es.caib.carpeta.front.utils.SesionHttp;
-import es.caib.carpeta.hibernate.HibernateFileUtil;
-import es.caib.carpeta.jpa.EstadisticaJPA;
-import es.caib.carpeta.logic.AuditoriaLogicaLocal;
-import es.caib.carpeta.logic.EstadisticaLogicaLocal;
-import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
-import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
-import es.caib.carpeta.logic.utils.PluginInfo;
-import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
-
 
 /**
- * 
+ *
  * @author anadal
  * @author mgonzalez
  *
@@ -54,31 +55,28 @@ public class PluginFrontController extends CommonFrontController {
 
     @Autowired
     private SesionHttp sesionHttp;
-    
+
     @EJB(mappedName = UtilitiesForFrontLogicaLocal.JNDI_NAME)
     UtilitiesForFrontLogicaLocal utilsEjb;
 
     @EJB(mappedName = LogCarpetaLogicaLocal.JNDI_NAME)
     protected LogCarpetaLogicaLocal logLogicaEjb;
 
-    @EJB(mappedName = EstadisticaLogicaLocal.JNDI_NAME)
-    protected EstadisticaLogicaLocal estadisticaLogicaEjb;
-
     @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
     protected AuditoriaLogicaLocal auditoriaLogicaEjb;
 
-   /* @EJB(mappedName = PluginLogicaLocal.JNDI_NAME)
-    protected PluginLogicaLocal pluginLogicaEjb;*/
+    @EJB(mappedName = AccesLogicaLocal.JNDI_NAME)
+    protected AccesLogicaLocal accesLogicaEjb;
 
-    
+
     protected final Log log = LogFactory.getLog(getClass());
 
     // XYZ ZZZ Llegir de constantds
     //public static final String PUBLIC_CONTEXTWEB = "/public/carpetafrontmodule";
-    
-    
-    
-    @RequestMapping(value = {"", "/" }, method = RequestMethod.GET) 
+
+
+
+    @RequestMapping(value = {"", "/" }, method = RequestMethod.GET)
     public ModelAndView showAllPlugins(HttpServletRequest request, HttpServletResponse response) throws I18NException {
 
         ModelAndView mav = new ModelAndView("plugins"); // => /src/main/webapp/WEB-INF/views/pages/plugins.jsp
@@ -95,42 +93,45 @@ public class PluginFrontController extends CommonFrontController {
         } catch (Throwable e) {
             processException(e, response);
         }
-        
+
         return mav;
-        
+
     }
-    
-    
+
+
     @RequestMapping(value = "/showplugin/{pluginID}/{idioma}", method = RequestMethod.POST)
     public ModelAndView showNormalPlugin(@PathVariable("pluginID") String pluginID, @PathVariable("idioma") String idioma,
-            HttpServletRequest request,
-            HttpServletResponse response, Authentication authentication) throws Exception, I18NException {
-        
+                                         HttpServletRequest request,
+                                         HttpServletResponse response, Authentication authentication) throws Exception, I18NException {
+
         final boolean isreact=false;
         return showPlugin(pluginID,  idioma,
                 request,
                 response, authentication, isreact);
     }
-    
+
     @RequestMapping(value = "/showreactplugin/{pluginID}/{idioma}", method = RequestMethod.POST)
     public ModelAndView showReactPlugin(@PathVariable("pluginID") String pluginID, @PathVariable("idioma") String idioma,
-            HttpServletRequest request,
-            HttpServletResponse response, Authentication authentication) throws Exception, I18NException {
+                                        HttpServletRequest request,
+                                        HttpServletResponse response, Authentication authentication) throws Exception, I18NException {
         final boolean isreact=true;
         return showPlugin(pluginID,  idioma,
                 request,
                 response, authentication, isreact);
     }
-    
-    
-    
+
+
+
     protected ModelAndView showPlugin(String pluginID,  String idioma,
-            HttpServletRequest request,
-            HttpServletResponse response, Authentication authentication, boolean isreact) throws Exception, I18NException {
+                                      HttpServletRequest request,
+                                      HttpServletResponse response, Authentication authentication, boolean isreact) throws Exception, I18NException {
 
         String administrationID = "";
         String baseFront = "";
-        
+
+        UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado) authentication.getPrincipal();
+        administrationID = usuarioAutenticado.getUsuarioClave().getNif();
+
 
         try {
 
@@ -140,8 +141,6 @@ public class PluginFrontController extends CommonFrontController {
 
             //String pluginID = request.getParameter("pluginID");
             //String administrationID= request.getParameter("administrationID");
-            UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado) authentication.getPrincipal();
-            administrationID = usuarioAutenticado.getUsuarioClave().getNif();
 
             //TODO canviar, mirar javascript window.location.href
             String urlBase = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
@@ -152,19 +151,11 @@ public class PluginFrontController extends CommonFrontController {
 
             /*
             String contextPath = "/carpetafront";
-
             //log.info("startTestPlugin:: contextPath => " + contextPath);
-
-
             log.info("showPlugin:: URL BASE = " + urlBase);
-
-
             URL url = new URL(urlBase);
-
             int port = url.getPort();
-
             baseBack = url.getProtocol() + "://" + url.getHost() + (port == -1 ? "" : (":" + port)) + contextPath;
-
             log.info("showPlugin:: BASE BACK = " + baseBack);
             */
             baseFront = urlBase;
@@ -172,32 +163,32 @@ public class PluginFrontController extends CommonFrontController {
         } catch (Throwable e) {
             processException(e, response);
         }
-        
-        
-        String urlToShowPluginPage = startPublicSignatureProcess(request, response, pluginID, administrationID, baseFront);
+
+
+        String urlToShowPluginPage = startPublicSignatureProcess(request, response, pluginID, administrationID, baseFront,usuarioAutenticado.getUsuarioClave());
 
         ModelAndView mav;
-        
+
         if (isreact) {
             mav = new ModelAndView(new RedirectView(urlToShowPluginPage));
         } else {
             final String view = "plugin_contenidor"; // => \WEB-INF\views\pages\plugin_contenidor.jsp
-        
+
             mav = new ModelAndView(view);
             // mav.addObject("signaturesSetID", signaturesSetID);
             mav.addObject("urlToShowPluginPage", urlToShowPluginPage);
         }
-            
-        
+
+
         return mav;
 
-     }
-    
+    }
 
 
-    // TODO XYZ ZZZ   
+
+    // TODO XYZ ZZZ
     private String startPublicSignatureProcess(HttpServletRequest request, HttpServletResponse response,
-            String pluginID, String administrationID, String baseFront)
+                                               String pluginID, String administrationID, String baseFront, UsuarioClave usuarioClave)
             throws Exception, I18NException {
 
         String urlToShowPluginPage = null;
@@ -222,29 +213,24 @@ public class PluginFrontController extends CommonFrontController {
             log.info(" urlToShowPluginPage => " + urlToShowPluginPage);
 
 
-           //Obtenemos plugin para obtener entidadID
+            //Obtenemos plugin para obtener entidadID
             peticio.append("Usuari").append(administrationID).append("\n");
             peticio.append("classe: ").append(getClass().getName()).append("\n");
 
             //LOG
-          //  XYZ TODO Passar valor a la var PluginText
+            //  XYZ TODO Passar valor a la var PluginText
             // TODO Revisar si aqui hem de guardar l'entitat del plugin(necessitariem obtenir el plugin primer) Comentar amb en Toni Nadal.
             logLogicaEjb.crearLog("Executat plugin des del Front per "+ administrationID, ESTAT_LOG_OK,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),"", Long.parseLong(pluginID));
-
-            //ESTADISTICA
-            List<EstadisticaJPA> estadisticas = estadisticaLogicaEjb.findEstadistica(TIPUS_ESTAD_ACCES_PLUGIN,null,new Date(),Long.parseLong(pluginID));
-
-            if(estadisticas != null && !estadisticas.isEmpty()) {
-
-                estadisticaLogicaEjb.incrementarComptador(estadisticas.get(0));
-            }else{
-                estadisticaLogicaEjb.crearEstadistica(null, TIPUS_ESTAD_ACCES_PLUGIN,Long.parseLong(pluginID));
-            }
 
             //AUDITORIA
             auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ACCES_PLUGIN,null,null,administrationID,Long.parseLong(pluginID));
 
-           
+            //ACCESS
+
+            EntitatJPA entitatJPA = entitatEjb.findByCodi(sesionHttp.getEntitat());
+            accesLogicaEjb.crearAcces(usuarioClave,TIPUS_ACCES_PLUGIN, entitatJPA.getCodiDir3(),Long.parseLong(pluginID),new Timestamp(new Date().getTime()),LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress());
+
+
 
         } catch (Throwable e) {
             processException(e, response);

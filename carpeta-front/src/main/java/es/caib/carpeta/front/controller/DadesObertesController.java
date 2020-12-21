@@ -1,22 +1,21 @@
 package es.caib.carpeta.front.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.ejb.EJB;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.google.gson.Gson;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.google.gson.Gson;
+import javax.ejb.EJB;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import es.caib.carpeta.jpa.AccesJPA;
 import es.caib.carpeta.logic.AccesLogicaLocal;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Conjunt de cridades REST per obtenir informació per a la plataforma de dades obertes
@@ -42,13 +41,13 @@ public class DadesObertesController extends CommonFrontController {
 		protected String idioma;
 		protected long entitatid;
 		protected int tipus;
-		protected Integer pluginid;
+		protected Long pluginid;
 		
 		public AccesInfo() {
 			super();
 		}
 		
-		public AccesInfo( String proveidor, String nivell, int autenticacio, Date data, String idioma, long entitat, int tipus, Integer plugin) {
+		public AccesInfo( String proveidor, String nivell, int autenticacio, Date data, String idioma, long entitat, int tipus, Long plugin) {
 			super();
 			this.proveidor = proveidor;
 			this.nivellSeguretat = nivell;
@@ -116,11 +115,11 @@ public class DadesObertesController extends CommonFrontController {
 			this.tipus = tipus;
 		}
 		
-		public Integer getPluginId() {
+		public Long getPluginId() {
 			return this.pluginid;
 		}
 		
-		public void setPluginId(Integer plugin) {
+		public void setPluginId(Long plugin) {
 			this.pluginid = plugin;
 		}
 	}

@@ -7,7 +7,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -18,20 +17,16 @@ import es.caib.carpeta.commons.utils.Configuracio;
 import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_ACCES_LOGIN_AUTENTICAT;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ENTRADA_FRONT_AUTENTICAT;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_ESTAD_ENTRADA_FRONT_AUTENTICAT;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_FRONT;
 import es.caib.carpeta.commons.utils.UsuarioClave;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.carpeta.front.service.SecurityService;
-import es.caib.carpeta.jpa.EstadisticaJPA;
 import es.caib.carpeta.logic.AccesLogicaLocal;
 import es.caib.carpeta.logic.AuditoriaLogicaLocal;
-import es.caib.carpeta.logic.EstadisticaLogicaLocal;
 import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
 import java.net.InetAddress;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.List;
 
 
 @Component
@@ -41,9 +36,6 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
 
     @Autowired
     SecurityService securityService;
-
-    @EJB(mappedName = EstadisticaLogicaLocal.JNDI_NAME)
-    protected EstadisticaLogicaLocal estadisticaLogicaEjb;
 
     @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
     protected AuditoriaLogicaLocal auditoriaLogicaEjb;
@@ -73,8 +65,7 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
 
 
             //Cream acces
-
-            accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_LOGIN_AUTENTICAT, Configuracio.getLoginIBEntidad(), new Timestamp(new Date().getTime()), LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress());
+            accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_LOGIN_AUTENTICAT, Configuracio.getLoginIBEntidad(),null, new Timestamp(new Date().getTime()), LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress());
 
 
             //AUDITORIA
@@ -86,23 +77,11 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
             peticio.append("classe: ").append(getClass().getName()).append(System.getProperty("line.separator"));
             logLogicaEjb.crearLog("Autenticació del Front de l'Usuari " + usuarioClave.getNif(), ESTAT_LOG_OK,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),"",null);
 
-
-            //Estadistica entrada al front autenticada
-            List<EstadisticaJPA> estadisticas = estadisticaLogicaEjb.findEstadistica(TIPUS_ESTAD_ENTRADA_FRONT_AUTENTICAT,null,new Date(),null);
-
-            if(estadisticas != null && !estadisticas.isEmpty()) {
-
-                estadisticaLogicaEjb.incrementarComptador(estadisticas.get(0));
-            }else{
-                estadisticaLogicaEjb.crearEstadistica(null, TIPUS_ESTAD_ENTRADA_FRONT_AUTENTICAT,null);
-            }
-
         }catch (I18NException ie){
-            ie.printStackTrace();
-            //throw new BadCredentialsException("Imposible crear auditoria: " + usuario);
+            log.error("S'ha produit un error : " + ie.getMessage());
         }catch (Exception e) {
-            e.printStackTrace();
-            //throw new BadCredentialsException("Imposible autenticar usuario: " + usuario);
+            log.error("S'ha produit un error : " + e.getMessage());
+
         }
         
         log.info("Dentro de CarpetaAuthProvider 111");
