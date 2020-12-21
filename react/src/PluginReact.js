@@ -10,15 +10,15 @@ class PluginReact extends Component {
 		const pluginID = this.props.pluginID;
 
 		var urlBase = window.location.href;
-		var url = urlBase + "pluginfront/showplugin/" + pluginID + "/" + i18n.language;
+		var url = urlBase + "pluginfront/showreactplugin/" + pluginID + "/" + i18n.language;
 
 		$(document).ready(function () {
 			sessionStorage.setItem('idioma', i18n.language);
-			$('#content').load(url);
+			$('#contentplugin').load(url);
 		});
 
 		return (
-			<div id="content"></div>
+			<div id="contentplugin"></div>
 		);
 
 	}

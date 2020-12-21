@@ -1,4 +1,4 @@
-package org.fundaciobit.pluginsib.carpetafront.reactexample;
+package org.fundaciobit.pluginsib.carpetafront.dadespersonalsreact;
 
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
@@ -22,14 +22,14 @@ import java.util.Properties;
 /**
  * @author anadal
  */
-public class ReactExampleCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
+public class DadesPersonalsReactCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
-    //public static final String REACTEXAMPLE_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "reactexample.";
+    //public static final String REACTEXAMPLE_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "dadespersonalsreact.";
 
     /**
      *
      */
-    public ReactExampleCarpetaFrontPlugin() {
+    public DadesPersonalsReactCarpetaFrontPlugin() {
         super();
     }
 
@@ -37,20 +37,19 @@ public class ReactExampleCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
      * @param propertyKeyBase
      * @param properties
      */
-    public ReactExampleCarpetaFrontPlugin(String propertyKeyBase, Properties properties) {
+    public DadesPersonalsReactCarpetaFrontPlugin(String propertyKeyBase, Properties properties) {
         super(propertyKeyBase, properties);
     }
 
     /**
      * @param propertyKeyBase
      */
-    public ReactExampleCarpetaFrontPlugin(String propertyKeyBase) {
+    public DadesPersonalsReactCarpetaFrontPlugin(String propertyKeyBase) {
         super(propertyKeyBase);
     }
 
     @Override
     public BasicServiceInformation existsInformation(UserData administrationID) throws Exception {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -66,7 +65,7 @@ public class ReactExampleCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     @Override
     public String getResourceBundleName() {
-        return "carpetafrontreactexample";
+        return "carpetafrontdadespersonalsreact";
     }
 
     @Override
@@ -76,6 +75,8 @@ public class ReactExampleCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         registerUserData(userData);
         
         String startURL = absolutePluginRequestPath + "/" + INDEX_HTML_PAGE;
+        
+        //String startURL = absolutePluginRequestPath + "/" + REACT_JS_PAGE;
 
         log.info(" getStartUrl( ); => " + startURL);
         return startURL;
@@ -130,13 +131,13 @@ public class ReactExampleCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         try {
 
             // Agafa la icona del resource
-            input = this.getClass().getResourceAsStream("/logo/logo-reactexample.png");
+            input = this.getClass().getResourceAsStream("/logo/logo-dadespersonalsreact.png");
             if (input != null) {
-                fileInfo = new FileInfo("logo-reactexample.png", "image/png", IOUtils.toByteArray(input));
+                fileInfo = new FileInfo("logo-dadespersonalsreact.png", "image/png", IOUtils.toByteArray(input));
             }
 
         } catch (Exception e) {
-            log.error("Error llegint recurs : /logo/logo-reactexample.png: " + e.getMessage(), e);
+            log.error("Error llegint recurs : /logo/logo-dadespersonalsreact.png: " + e.getMessage(), e);
 
         }
         return fileInfo;
@@ -159,7 +160,7 @@ public class ReactExampleCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             response.setContentType("text/html");
 
-            String resource = "/webpage/index.html";
+            String resource = "/webpage_dadespersonals/index.html";
             
             response.setHeader( "Content-Disposition",
                     "inline;filename=\""+ java.net.URLEncoder.encode(INDEX_HTML_PAGE,"UTF-8") + "\"");
@@ -222,7 +223,7 @@ public class ReactExampleCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     "inline;filename=\""+ java.net.URLEncoder.encode(REACT_JS_PAGE,"UTF-8") + "\"");
 
 
-            String resource = "/webpage/reactjs_main.js";
+            String resource = "/webpage_dadespersonals/reactjs_main.js";
 
             response.setCharacterEncoding("utf-8");
 

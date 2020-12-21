@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
@@ -100,15 +101,36 @@ public class PluginFrontController extends CommonFrontController {
     }
     
     
-    
-    
     @RequestMapping(value = "/showplugin/{pluginID}/{idioma}", method = RequestMethod.POST)
-    public ModelAndView showPlugin(@PathVariable("pluginID") String pluginID, @PathVariable("idioma") String idioma, HttpServletRequest request,
-                                   HttpServletResponse response, Authentication authentication) throws Exception, I18NException {
+    public ModelAndView showNormalPlugin(@PathVariable("pluginID") String pluginID, @PathVariable("idioma") String idioma,
+            HttpServletRequest request,
+            HttpServletResponse response, Authentication authentication) throws Exception, I18NException {
+        
+        final boolean isreact=false;
+        return showPlugin(pluginID,  idioma,
+                request,
+                response, authentication, isreact);
+    }
+    
+    @RequestMapping(value = "/showreactplugin/{pluginID}/{idioma}", method = RequestMethod.POST)
+    public ModelAndView showReactPlugin(@PathVariable("pluginID") String pluginID, @PathVariable("idioma") String idioma,
+            HttpServletRequest request,
+            HttpServletResponse response, Authentication authentication) throws Exception, I18NException {
+        final boolean isreact=true;
+        return showPlugin(pluginID,  idioma,
+                request,
+                response, authentication, isreact);
+    }
+    
+    
+    
+    protected ModelAndView showPlugin(String pluginID,  String idioma,
+            HttpServletRequest request,
+            HttpServletResponse response, Authentication authentication, boolean isreact) throws Exception, I18NException {
 
         String administrationID = "";
         String baseFront = "";
-        final String view = "plugin_contenidor"; // => \WEB-INF\views\pages\plugin_contenidor.jsp
+        
 
         try {
 
@@ -150,19 +172,35 @@ public class PluginFrontController extends CommonFrontController {
         } catch (Throwable e) {
             processException(e, response);
         }
+        
+        
+        String urlToShowPluginPage = startPublicSignatureProcess(request, response, pluginID, administrationID, baseFront);
 
-        return startPublicSignatureProcess(request, response, view, pluginID, administrationID, baseFront);
+        ModelAndView mav;
+        
+        if (isreact) {
+            mav = new ModelAndView(new RedirectView(urlToShowPluginPage));
+        } else {
+            final String view = "plugin_contenidor"; // => \WEB-INF\views\pages\plugin_contenidor.jsp
+        
+            mav = new ModelAndView(view);
+            // mav.addObject("signaturesSetID", signaturesSetID);
+            mav.addObject("urlToShowPluginPage", urlToShowPluginPage);
+        }
+            
+        
+        return mav;
 
      }
     
 
 
     // TODO XYZ ZZZ   
-    private ModelAndView startPublicSignatureProcess(HttpServletRequest request, HttpServletResponse response,
-            String view, String pluginID, String administrationID, String baseFront)
+    private String startPublicSignatureProcess(HttpServletRequest request, HttpServletResponse response,
+            String pluginID, String administrationID, String baseFront)
             throws Exception, I18NException {
 
-        ModelAndView mav = new ModelAndView(view);
+        String urlToShowPluginPage = null;
 
         try{
 
@@ -177,7 +215,7 @@ public class PluginFrontController extends CommonFrontController {
 
             String administrationIDEncriptat = HibernateFileUtil.encryptString(administrationID);
 
-            final String urlToShowPluginPage = baseFront + context + "/showplugin/" + pluginID
+            urlToShowPluginPage = baseFront + context + "/showplugin/" + pluginID
                     + "/" + response.encodeURL(administrationIDEncriptat)
                     + "/" + Base64.getUrlEncoder().encodeToString(baseFront.getBytes());
 
@@ -206,14 +244,13 @@ public class PluginFrontController extends CommonFrontController {
             //AUDITORIA
             auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ACCES_PLUGIN,null,null,administrationID,Long.parseLong(pluginID));
 
-            // mav.addObject("signaturesSetID", signaturesSetID);
-            mav.addObject("urlToShowPluginPage", urlToShowPluginPage);
+           
 
         } catch (Throwable e) {
             processException(e, response);
         }
 
-        return mav;
+        return urlToShowPluginPage;
     }
 
 
