@@ -19,7 +19,7 @@ private static final long serialVersionUID = -112525025L;
 	java.lang.String nivellSeguretat;
 	java.lang.Integer resultatAutenticacio;
 	long entitatID;
-	java.lang.Integer pluginID;
+	java.lang.Long pluginID;
 	int tipus;
 	java.sql.Timestamp dataDarrerAcces;
 	java.lang.String idioma;
@@ -30,7 +30,7 @@ private static final long serialVersionUID = -112525025L;
   }
 
   /** Constructor amb tots els camps  */
-  public AccesBean(long accesID , java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String nivellSeguretat , java.lang.Integer resultatAutenticacio , long entitatID , java.lang.Integer pluginID , int tipus , java.sql.Timestamp dataDarrerAcces , java.lang.String idioma) {
+  public AccesBean(long accesID , java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String nivellSeguretat , java.lang.Integer resultatAutenticacio , long entitatID , java.lang.Long pluginID , int tipus , java.sql.Timestamp dataDarrerAcces , java.lang.String idioma) {
     this.accesID=accesID;
     this.nom=nom;
     this.llinatges=llinatges;
@@ -46,7 +46,7 @@ private static final long serialVersionUID = -112525025L;
     this.idioma=idioma;
 }
   /** Constructor sense valors autoincrementals */
-  public AccesBean(java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String nivellSeguretat , java.lang.Integer resultatAutenticacio , long entitatID , java.lang.Integer pluginID , int tipus , java.sql.Timestamp dataDarrerAcces , java.lang.String idioma) {
+  public AccesBean(java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String nivellSeguretat , java.lang.Integer resultatAutenticacio , long entitatID , java.lang.Long pluginID , int tipus , java.sql.Timestamp dataDarrerAcces , java.lang.String idioma) {
     this.nom=nom;
     this.llinatges=llinatges;
     this.nif=nif;
@@ -145,10 +145,10 @@ private static final long serialVersionUID = -112525025L;
 		this.entitatID = _entitatID_;
 	};
 
-	public java.lang.Integer getPluginID() {
+	public java.lang.Long getPluginID() {
 		return(pluginID);
 	};
-	public void setPluginID(java.lang.Integer _pluginID_) {
+	public void setPluginID(java.lang.Long _pluginID_) {
 		this.pluginID = _pluginID_;
 	};
 

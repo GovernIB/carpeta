@@ -28,7 +28,7 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaLocal{
     protected EntitatLogicaLocal entitatLogicaEjb;
 
     @Override
-    public void crearAcces(UsuarioClave usuarioClave,@NotNull int tipus, String codiEntitat, Integer pluginID, Timestamp dataDarrerAcces, String idioma, String ipAddress) throws I18NException {
+    public void crearAcces(UsuarioClave usuarioClave,@NotNull int tipus, String codiEntitat, Long pluginID, Timestamp dataDarrerAcces, String idioma, String ipAddress) throws I18NException {
 
         AccesJPA accesJPA = new AccesJPA();
 
