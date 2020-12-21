@@ -1,5 +1,6 @@
 import React, { Component, Suspense } from 'react';
 import { withTranslation } from 'react-i18next';
+import ExpirarSessio from "./ExpirarSessio";
 
 class DadesPersonals extends Component {
 
@@ -16,6 +17,7 @@ class DadesPersonals extends Component {
 
         return (
             <div className="container-contenido">
+                <ExpirarSessio />
                 <div className="infoNoMenu">
                     <p className="titol h2">{t('dadespersonalsTitol')} {usuariNomComplet}</p>
 

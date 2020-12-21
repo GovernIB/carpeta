@@ -188,7 +188,7 @@
 	"breadcrumbDetallRegistre": "Detalle de registro",
 	"breadcrumbNotificacions": "Mis notificaciones",
 	"breadcrumbMapaWeb": "Mapa Web",
-	"breadcrumbPlugin": "Plugin de Entidad",
+	"breadcrumbPlugin": "plugin",
 	"breadcrumbSuport": "Soporte",
 	
 	
@@ -215,6 +215,11 @@
 	"suportWeb": "Soporte Web",
 	"suportFAQ": "Preguntas Frecuentes (FAQ)",
 	"suportConsultaTecnica": "Háganos llegar su consulta técnica ",
-	"suportAutenticacio": "Problemas relacionados con la autenticación: "
+	"suportAutenticacio": "Problemas relacionados con la autenticación: ",
+
+	"sessioAvisDescripcio": "Su sesión finalizará en 30 segundos. ¿Quiere continuar la sesión?",
+	"sessioAvisTitol": "Información Expiración Sesión",
+	"sessioExpiradaTitol": "Sesión expirada",
+	"sessioExpiradaDescripcio": "Ha expirado la sesión."
 
 }

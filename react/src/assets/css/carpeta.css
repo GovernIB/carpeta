@@ -286,6 +286,55 @@ img:hover {
 	padding: 0;
 	margin: 0;
 }
+.botoDialegVerd {
+	background-color: #32814B;
+	border-color: #32814B;
+	border: none !important;
+	color: #ffffff !important;
+	padding: 0.2em 0.5em;
+	border-radius: 4px;
+}
+.botoDialegVerd:hover {
+	background-color: #000000;
+}
+.botoDialegVermell {
+	background-color: #c30045;;
+	border-color: #c30045;;
+	border: none !important;
+	color: #ffffff !important;
+	padding: 0.2em 0.5em;
+	border-radius: 4px;
+}
+.botoDialegVermell:hover {
+	background-color: #000000;
+}
+.ui-widget{
+	font: normal 100% 'Noto Sans', 'TrebuchetMS', 'Trebuchet MS', Arial, Helvetica, sans-serif;
+}
+.ui-draggable .ui-dialog-titlebar {
+	font: normal 100% 'Noto Sans', 'TrebuchetMS', 'Trebuchet MS', Arial, Helvetica, sans-serif;
+	background-color: #dc3545!important;
+}
+.ui-widget-overlay {
+	opacity: .4;
+}
+.no-close .ui-dialog-titlebar-close {
+	display: none;
+}
+.ui-dialog .ui-dialog-titlebar-close {
+	display: none;
+}
+.ui-dialog .ui-dialog-titlebar {
+	font: normal 100% 'Noto Sans', 'TrebuchetMS', 'Trebuchet MS', Arial, Helvetica, sans-serif;
+	background-color: #32814B!important;
+}
+.noVisible{
+	display: none;
+}
+.ui-dialog .ui-dialog-title {
+	color: #fff;
+}
+
 
 /* HomePage */
 .homePage .titol.h5 { text-transform: none !important; }

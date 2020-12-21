@@ -182,6 +182,13 @@ public final class EjbManager {
 	    
 	}
 
+	public static String getCanviarDeFront(PropietatGlobalLocal propietatGlobalEjb) throws I18NException {
+		final String partialProp = "canviardefront";
+
+		return getPropertyValue(propietatGlobalEjb, partialProp);
+
+	}
+
     public static Long getPropertyValueLong(PropietatGlobalLocal propietatGlobalEjb, String partialProp)
             throws I18NException {
         String val = getPropertyValue(propietatGlobalEjb, partialProp);

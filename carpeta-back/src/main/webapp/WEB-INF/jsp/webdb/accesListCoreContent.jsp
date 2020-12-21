@@ -64,19 +64,19 @@
           ${acces.resultatAutenticacio}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.DATADARRERACCES)}">
-          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${acces.dataDarrerAcces}" /></td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.IDIOMA)}">
-          <td>
-          ${acces.idioma}
-          </td>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.ENTITATID)}">
           <td>
           <c:set var="tmp">${acces.entitatID}</c:set>
           <c:if test="${not empty tmp}">
           ${__theFilterForm.mapOfEntitatForEntitatID[tmp]}
+          </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.PLUGINID)}">
+          <td>
+          <c:set var="tmp">${acces.pluginID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForPluginID[tmp]}
           </c:if>
           </td>
         </c:if>
@@ -86,6 +86,14 @@
           <c:if test="${not empty tmp}">
           ${__theFilterForm.mapOfValuesForTipus[tmp]}
           </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.DATADARRERACCES)}">
+          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${acces.dataDarrerAcces}" /></td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.IDIOMA)}">
+          <td>
+          ${acces.idioma}
           </td>
         </c:if>
 

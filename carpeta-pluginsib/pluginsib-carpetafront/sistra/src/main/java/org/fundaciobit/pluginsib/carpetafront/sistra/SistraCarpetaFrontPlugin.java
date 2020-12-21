@@ -17,6 +17,7 @@ import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementosExpediente;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.FiltroElementosExpediente;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.ObjectFactory;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.TipoElementoExpediente;
+import es.caib.zonaper.ws.v2.model.elementoexpediente.TiposElementoExpediente;
 import es.caib.zonaper.ws.v2.services.BackofficeFacade;
 import es.caib.zonaper.ws.v2.services.BackofficeFacadeService;
 import org.apache.commons.io.IOUtils;
@@ -325,31 +326,45 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 	        final ObjectFactory objectFactoryElement = new ObjectFactory();    	
 	        final FiltroElementosExpediente filtroElementosExpediente = objectFactoryElement.createFiltroElementosExpediente();
 	        
+        	// Els tràmits de tipos Registre es mostren a través del plugin de REGWEB #231
+        	// Els tràmits de tipus Comunicacion o notificacion es mostren a través del plugin de NOTIB #231
+	        // Només mostram els de tipus ENVIO, PREENVIO i PREREGISTRO
+	        List<TipoElementoExpediente> coms = new ArrayList<TipoElementoExpediente>();
+	        coms.add(TipoElementoExpediente.ENVIO);
+	        coms.add(TipoElementoExpediente.PREENVIO);
+	        coms.add(TipoElementoExpediente.PREREGISTRO);
+	        
+	        TiposElementoExpediente teess = new TiposElementoExpediente();
+	        for (TipoElementoExpediente tee : coms) {
+	            teess.getTipo().add(tee);
+	        }
+	        
 	        filtroElementosExpediente.setNif(documento);
 	        filtroElementosExpediente.setFechaInicio(objectFactoryElement.createFiltroElementosExpedienteFechaInicio(DatatypeFactory.newInstance().newXMLGregorianCalendar(inicio)));
 	        filtroElementosExpediente.setFechaFin(objectFactoryElement.createFiltroElementosExpedienteFechaFin(DatatypeFactory.newInstance().newXMLGregorianCalendar(hoy)));
 	        filtroElementosExpediente.setIdioma(locale.getLanguage());
+	        filtroElementosExpediente.setTipos(teess);
+	        
+	        long num = backofficeFacade.obtenerTotalElementosExpediente(filtroElementosExpediente);
+	        
+	        int pagina = 0;
+	        int tamPagina = (int) num;
+	        
 	        
 	        // XYZ ZZZ  Paginació
-	        ElementosExpediente tramitesAcabados = backofficeFacade.obtenerElementosExpediente(filtroElementosExpediente, 0, 99);
+	        ElementosExpediente tramitesAcabados = backofficeFacade.obtenerElementosExpediente(filtroElementosExpediente, pagina, tamPagina);
 	        
 	        for(ElementoExpediente item : tramitesAcabados.getElemento() ) {
-	        	TipoElementoExpediente tipus = item.getTipo();
-	        	if (tipus != TipoElementoExpediente.REGISTRO && tipus != TipoElementoExpediente.COMUNICACION  && tipus != TipoElementoExpediente.NOTIFICACION ) {
-		        	// Els tràmits de tipos Registre es mostren a través del plugin de REGWEB #231
-		        	// Els tràmits de tipus Comunicacion o notificacion es mostren a través del plugin de NOTIB #231
-	        		
-	        		TramitePersistenteGenerico tpg = new TramitePersistenteGenerico(item,1);
-	        		 
-	        		// Es marquen com a pendents perquè els falta entregar documentació presencialment
-	        		Boolean estaPendent = (tipus == TipoElementoExpediente.PREREGISTRO || tipus == TipoElementoExpediente.PREENVIO) ? true : false;
-	        		tpg.setPendiente(estaPendent);
-	        		
-	        		if ((estaPendent && !finalizado.equals("S")) || (!estaPendent && !finalizado.equals("N"))) {
-	        			tramits.add(tpg);
-	        		}
-	        	}
 	        	
+        		TramitePersistenteGenerico tpg = new TramitePersistenteGenerico(item,1);
+        		 
+        		// Es marquen com a pendents els de PREENVIO i PREREGISTRO perquè els falta entregar documentació presencialment
+        		Boolean estaPendent = (item.getTipo() != TipoElementoExpediente.ENVIO) ? true : false;
+        		tpg.setPendiente(estaPendent);
+        		
+        		if ((estaPendent && !finalizado.equals("S")) || (!estaPendent && !finalizado.equals("N"))) {
+        			tramits.add(tpg);
+        		}
 	        }
         }
 
@@ -374,8 +389,6 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     
     private List<TramitePersistenteGenerico> getTramitsDebug(Date formDataInici, Date formDataFi, String administrationID, String finalizado, Locale locale) throws Exception {
         
-    	BackofficeFacade backofficeFacade = getBackofficeFacade();
-    	
         List<TramitePersistenteGenerico> tramits = this.getTramits(formDataInici, formDataFi, administrationID, finalizado, locale);
 
         if (tramits == null || tramits.isEmpty()) {
@@ -493,7 +506,6 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
    private Client getClientBasicAuthenticator() throws Exception{
 	   
-	   final String sistraUrl = getPropertyRequired(SISTRA2_PROPERTY_BASE + "url");
 	   final String username = getPropertyRequired(SISTRA2_PROPERTY_BASE + "user");
        final String password = getPropertyRequired(SISTRA2_PROPERTY_BASE + "pass");
 
@@ -519,28 +531,21 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
            String administrationEncriptedID, Locale locale, boolean isGet)  {
        
        try {
-       
-	        // XYZ ZZZ Issue #197 Pendent obtenir dades autenticació usuari per cridar obtenerTiquetAccesoSistra2
-    	   
-	        
-	        //UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado)authentication.getPrincipal();
-	        
-           /*
 	        
 	        if (isDevelopment()) {
+	           log.info("==================  OBTENER TIQUET ACCESO ==========================");
     		   log.info("REQUEST TRAMITE: " + request.getParameter("tramite"));
     		   log.info("Nombre: " + userData.getName());
-	   	        log.info("Apellido1: " + userData.getSurname1());
-	   	        log.info("Apellido2: " + userData.getSurname2());
-	   	        log.info("Nif: " + userData.getAdministrationID());
-	   	        log.info("MetodoAutentication: " + userData.getAuthenticationMethod());
-	   	        log.info("Qaa: " + userData.getQaa());
+	   	       log.info("Apellido1: " + userData.getSurname1());
+	   	       log.info("Apellido2: " + userData.getSurname2());
+	   	       log.info("Nif: " + userData.getAdministrationID());
+	   	       log.info("MetodoAutentication: " + userData.getAuthenticationMethod());
+	   	       log.info("Qaa: " + userData.getQaa());
+	   	       log.info("=====================================================================");
     	   }
 	        
 	       String url = obtenerTiquetAccesoSistra2(request.getParameter("tramite"), userData);
            response.sendRedirect(url);
-           
-           */
            
        } catch (Exception e) {
            log.error("Error obtenint tiquet accès Sistra 2: " + e.getMessage(), e);
@@ -572,7 +577,7 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     		   .request(MediaType.APPLICATION_JSON)
     		   .post(Entity.entity(infoTicket, MediaType.APPLICATION_JSON), String.class);
     		   
-	    if (isDevelopment()) {
+	   if (isDevelopment()) {
       		log.info("URL TIQUET: " + url);
        }
        

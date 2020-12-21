@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -76,7 +77,6 @@ public class InicioController extends CommonFrontController {
 
         try{
 
-            //String lang = LocaleContextHolder.getLocale().getLanguage();
             sesionHttp.setEntitat(codiEntitat);
 
         } catch (Throwable e) {
@@ -89,9 +89,14 @@ public class InicioController extends CommonFrontController {
 
 
     @RequestMapping(value={"/"})
-    public ModelAndView inicio(HttpServletRequest request, HttpServletResponse response) throws I18NException {
+    public ModelAndView inicio(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws I18NException {
 
         ModelAndView mav = new ModelAndView("inici");
+
+        // Posam la sessió de 30 minuts
+//        session.setMaxInactiveInterval(1 * 60);
+        mav.addObject("maxInactiveInterval", 30*60);
+
 
         try{
 
@@ -99,6 +104,7 @@ public class InicioController extends CommonFrontController {
 
             PropietatGlobalLocal propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
             String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
+            String canviardefront = EjbManager.getCanviarDeFront(propietatGlobalEjb);
 
             List<StringKeyValue> entitats = utilsEjb.getEntitats(lang);
 
@@ -108,13 +114,15 @@ public class InicioController extends CommonFrontController {
 
                     mav = new ModelAndView("entitat");
                     mav.addObject("entitats", entitats);
-//                    mav.addObject("numEntitats", entitats.size());
+                    mav.addObject("numEntitats", entitats.size());
+                    mav.addObject("canviarDeFront", canviardefront);
 
                 } else{
 
                     sesionHttp.setEntitat(entitats.get(0).key);
                     mav.addObject("entitat", entitats.get(0).key);
-//                    mav.addObject("numEntitats", entitats.size());
+                    mav.addObject("numEntitats", entitats.size());
+                    mav.addObject("canviarDeFront", canviardefront);
 
                 }
 
@@ -127,17 +135,27 @@ public class InicioController extends CommonFrontController {
                         sesionHttp.setEntitat(defaultEntityCode);
                         mav.addObject("entitat", sesionHttp.getEntitat());
                         mav.addObject("defaultEntityCode", defaultEntityCode);
+                        mav.addObject("numEntitats", entitats.size());
+                        mav.addObject("canviarDeFront", canviardefront);
 
                     } else{
 
                         if(sesionHttp.getEntitat() != null){
                             mav.addObject("entitat", sesionHttp.getEntitat());
+                            mav.addObject("numEntitats", entitats.size());
+                            mav.addObject("canviarDeFront", canviardefront);
                         } else{
                             mav = new ModelAndView("entitat");
                             mav.addObject("entitats", entitats);
                         }
 
                     }
+                } else{
+
+                    mav.addObject("entitat", sesionHttp.getEntitat());
+                    mav.addObject("numEntitats", entitats.size());
+                    mav.addObject("canviarDeFront", canviardefront);
+
                 }
 
             } catch (Throwable e) {

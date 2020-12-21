@@ -20,6 +20,7 @@ public class AccesForm extends CarpetaBaseForm {
     super(__toClone);
       this.acces = __toClone.acces;
     this.listOfEntitatForEntitatID = __toClone.listOfEntitatForEntitatID;
+    this.listOfValuesForPluginID = __toClone.listOfValuesForPluginID;
     this.listOfValuesForTipus = __toClone.listOfValuesForTipus;
   }
   
@@ -44,6 +45,18 @@ public class AccesForm extends CarpetaBaseForm {
 
   public void setListOfEntitatForEntitatID(List<StringKeyValue> listOfEntitatForEntitatID) {
     this.listOfEntitatForEntitatID = listOfEntitatForEntitatID;
+  }
+
+
+
+  private List<StringKeyValue> listOfValuesForPluginID;
+
+  public List<StringKeyValue> getListOfValuesForPluginID() {
+    return this.listOfValuesForPluginID;
+  }
+
+  public void setListOfValuesForPluginID(List<StringKeyValue> listOfValuesForPluginID) {
+    this.listOfValuesForPluginID = listOfValuesForPluginID;
   }
 
 

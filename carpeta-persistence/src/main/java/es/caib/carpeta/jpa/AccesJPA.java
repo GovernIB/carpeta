@@ -53,19 +53,22 @@ private static final long serialVersionUID = -2081832820L;
 	@Column(name="resultatautenticacio",length = 10)
 	java.lang.Integer resultatAutenticacio;
 
+	@Index(name="car_acces_entitatid_fk_i")
+	@Column(name="entitatid",nullable = false,length = 19)
+	long entitatID;
+
+	@Column(name="pluginid",length = 10)
+	java.lang.Integer pluginID;
+
+	@Column(name="tipus",nullable = false,length = 10)
+	int tipus;
+
 	@Column(name="datadarreracces",length = 29,precision = 6)
 	java.sql.Timestamp dataDarrerAcces;
 
   /** Hauria d'estar enllaçat amb la taula idioma */
 	@Column(name="idioma",length = 50)
 	java.lang.String idioma;
-
-	@Index(name="car_acces_entitatid_fk_i")
-	@Column(name="entitatid",nullable = false,length = 19)
-	long entitatID;
-
-	@Column(name="tipus",nullable = false,length = 10)
-	int tipus;
 
 
 
@@ -74,7 +77,7 @@ private static final long serialVersionUID = -2081832820L;
   }
 
   /** Constructor amb tots els camps  */
-  public AccesJPA(long accesID , java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String nivellSeguretat , java.lang.Integer resultatAutenticacio , java.sql.Timestamp dataDarrerAcces , java.lang.String idioma , long entitatID , int tipus) {
+  public AccesJPA(long accesID , java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String nivellSeguretat , java.lang.Integer resultatAutenticacio , long entitatID , java.lang.Integer pluginID , int tipus , java.sql.Timestamp dataDarrerAcces , java.lang.String idioma) {
     this.accesID=accesID;
     this.nom=nom;
     this.llinatges=llinatges;
@@ -83,13 +86,14 @@ private static final long serialVersionUID = -2081832820L;
     this.proveidorIdentitat=proveidorIdentitat;
     this.nivellSeguretat=nivellSeguretat;
     this.resultatAutenticacio=resultatAutenticacio;
+    this.entitatID=entitatID;
+    this.pluginID=pluginID;
+    this.tipus=tipus;
     this.dataDarrerAcces=dataDarrerAcces;
     this.idioma=idioma;
-    this.entitatID=entitatID;
-    this.tipus=tipus;
 }
   /** Constructor sense valors autoincrementals */
-  public AccesJPA(java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String nivellSeguretat , java.lang.Integer resultatAutenticacio , java.sql.Timestamp dataDarrerAcces , java.lang.String idioma , long entitatID , int tipus) {
+  public AccesJPA(java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String nivellSeguretat , java.lang.Integer resultatAutenticacio , long entitatID , java.lang.Integer pluginID , int tipus , java.sql.Timestamp dataDarrerAcces , java.lang.String idioma) {
     this.nom=nom;
     this.llinatges=llinatges;
     this.nif=nif;
@@ -97,10 +101,11 @@ private static final long serialVersionUID = -2081832820L;
     this.proveidorIdentitat=proveidorIdentitat;
     this.nivellSeguretat=nivellSeguretat;
     this.resultatAutenticacio=resultatAutenticacio;
+    this.entitatID=entitatID;
+    this.pluginID=pluginID;
+    this.tipus=tipus;
     this.dataDarrerAcces=dataDarrerAcces;
     this.idioma=idioma;
-    this.entitatID=entitatID;
-    this.tipus=tipus;
 }
   /** Constructor dels valors Not Null */
   public AccesJPA(long accesID , long entitatID , int tipus) {
@@ -117,10 +122,11 @@ private static final long serialVersionUID = -2081832820L;
     this.setProveidorIdentitat(__bean.getProveidorIdentitat());
     this.setNivellSeguretat(__bean.getNivellSeguretat());
     this.setResultatAutenticacio(__bean.getResultatAutenticacio());
+    this.setEntitatID(__bean.getEntitatID());
+    this.setPluginID(__bean.getPluginID());
+    this.setTipus(__bean.getTipus());
     this.setDataDarrerAcces(__bean.getDataDarrerAcces());
     this.setIdioma(__bean.getIdioma());
-    this.setEntitatID(__bean.getEntitatID());
-    this.setTipus(__bean.getTipus());
 	}
 
 	public long getAccesID() {
@@ -179,6 +185,27 @@ private static final long serialVersionUID = -2081832820L;
 		this.resultatAutenticacio = _resultatAutenticacio_;
 	};
 
+	public long getEntitatID() {
+		return(entitatID);
+	};
+	public void setEntitatID(long _entitatID_) {
+		this.entitatID = _entitatID_;
+	};
+
+	public java.lang.Integer getPluginID() {
+		return(pluginID);
+	};
+	public void setPluginID(java.lang.Integer _pluginID_) {
+		this.pluginID = _pluginID_;
+	};
+
+	public int getTipus() {
+		return(tipus);
+	};
+	public void setTipus(int _tipus_) {
+		this.tipus = _tipus_;
+	};
+
 	public java.sql.Timestamp getDataDarrerAcces() {
 		return(dataDarrerAcces);
 	};
@@ -191,20 +218,6 @@ private static final long serialVersionUID = -2081832820L;
 	};
 	public void setIdioma(java.lang.String _idioma_) {
 		this.idioma = _idioma_;
-	};
-
-	public long getEntitatID() {
-		return(entitatID);
-	};
-	public void setEntitatID(long _entitatID_) {
-		this.entitatID = _entitatID_;
-	};
-
-	public int getTipus() {
-		return(tipus);
-	};
-	public void setTipus(int _tipus_) {
-		this.tipus = _tipus_;
 	};
 
 
@@ -250,10 +263,11 @@ private static final long serialVersionUID = -2081832820L;
     __tmp.setProveidorIdentitat(__bean.getProveidorIdentitat());
     __tmp.setNivellSeguretat(__bean.getNivellSeguretat());
     __tmp.setResultatAutenticacio(__bean.getResultatAutenticacio());
+    __tmp.setEntitatID(__bean.getEntitatID());
+    __tmp.setPluginID(__bean.getPluginID());
+    __tmp.setTipus(__bean.getTipus());
     __tmp.setDataDarrerAcces(__bean.getDataDarrerAcces());
     __tmp.setIdioma(__bean.getIdioma());
-    __tmp.setEntitatID(__bean.getEntitatID());
-    __tmp.setTipus(__bean.getTipus());
 		return __tmp;
 	}
 

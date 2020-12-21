@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
 import i18n from 'i18next';
+import ExpirarSessio from "./ExpirarSessio";
 
 class PluginReact extends Component {
 
@@ -18,7 +19,14 @@ class PluginReact extends Component {
 		});
 
 		return (
+<<<<<<< HEAD
 			<div id="contentplugin"></div>
+=======
+			<div>
+				<ExpirarSessio />
+				<div id="substituir"></div>
+			</div>
+>>>>>>> 9c05eb9a914458809035337ff86b72f7bb2315d5
 		);
 
 	}

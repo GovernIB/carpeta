@@ -43,20 +43,24 @@ public class AccesQueryPath extends org.fundaciobit.genapp.common.query.QueryPat
     return new IntegerField(getQueryPath(), AccesFields.RESULTATAUTENTICACIO);
   }
 
+  public LongField ENTITATID() {
+    return new LongField(getQueryPath(), AccesFields.ENTITATID);
+  }
+
+  public IntegerField PLUGINID() {
+    return new IntegerField(getQueryPath(), AccesFields.PLUGINID);
+  }
+
+  public IntegerField TIPUS() {
+    return new IntegerField(getQueryPath(), AccesFields.TIPUS);
+  }
+
   public TimestampField DATADARRERACCES() {
     return new TimestampField(getQueryPath(), AccesFields.DATADARRERACCES);
   }
 
   public StringField IDIOMA() {
     return new StringField(getQueryPath(), AccesFields.IDIOMA);
-  }
-
-  public LongField ENTITATID() {
-    return new LongField(getQueryPath(), AccesFields.ENTITATID);
-  }
-
-  public IntegerField TIPUS() {
-    return new IntegerField(getQueryPath(), AccesFields.TIPUS);
   }
 
 

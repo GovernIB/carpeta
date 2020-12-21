@@ -17,6 +17,7 @@
 	<!-- google analytics -->
 	<script type="text/javascript" async="" src="${pageContext.request.contextPath}/src/assets/js/ga.js"></script>
 	<script src="${pageContext.request.contextPath}/src/assets/js/jquery-3.5.0.js"></script>
+	<script src="${pageContext.request.contextPath}/src/assets/js/jquery-ui.min.js"></script>
 	<script src="${pageContext.request.contextPath}/src/assets/js/bootstrap.min.js"></script>
 	<!-- Datetimpicker -->
 	<script src="${pageContext.request.contextPath}/src/assets/js/moment-with-locales.min.js"></script>
@@ -38,6 +39,7 @@
 	<!-- ESTILS -->
 	<link href="${pageContext.request.contextPath}/src/assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/src/assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/src/assets/css/jquery-ui.min.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/src/assets/css/goib.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/src/assets/css/carpeta.css" rel="stylesheet">
 	<link href="${pageContext.request.contextPath}/src/assets/css/open-iconic-bootstrap.css" rel="stylesheet">
@@ -54,7 +56,10 @@
 			  sessionStorage.setItem('autenticat', '0');
 			  sessionStorage.setItem('entitat', '${entitat}');
 			  sessionStorage.setItem('defaultEntityCode', '${defaultEntityCode}');
-			  <%--sessionStorage.setItem('numEntitats', '${numEntitats}');--%>
+			  sessionStorage.setItem('maxInactiveInterval','${maxInactiveInterval}');
+			  sessionStorage.setItem('numEntitats', '${numEntitats}');
+			  sessionStorage.setItem('canviarDeFront', '${canviarDeFront}');
+			  sessionStorage.removeItem('pluginActiu');
 			  var aut = sessionStorage.getItem('autenticat');
 			  newMenuDesllisant('menuDesllisant', aut);
 			  newPeu('peu', aut);
@@ -72,6 +77,17 @@
 		<!-- Capçalera -->
 		<div id = "barraMenu"></div>
 
+
+		<!-- Diàleg d'expiració de sessió -->
+<%--		<fmt:setLocale value="${idiomaFMT}"/>--%>
+<%--		<div id="dialog" title="<fmt:message key="sessio.avis.titol" bundle="missa"/>" style="display:none">--%>
+<%--			<p class="pt-4"><fmt:message key="sessio.avis.descripcio" /></p>--%>
+<%--		</div>--%>
+
+<%--		<div id="expirat" title="<fmt:message key="sessio.expirada.titol" />" style="display:none" class="dialogExpirat">--%>
+<%--			<p class="pt-4"><fmt:message key="sessio.expirada.descripcio" /></p>--%>
+<%--		</div>--%>
+
 		<sec:authorize access="isAuthenticated()">
 			<sec:authentication var="user" property="principal.usuarioClave.nombreCompleto" />
 			<sec:authentication var="userName" property="principal.usuarioClave.nombre" />
@@ -84,7 +100,7 @@
 					<h5>
 						<span>
 							<c:if test="${user != null}">
-								<span class="oi oi-person pl-3" aria-hidden="true"> </span><sec:authentication property="principal.usuarioClave.nombreCompleto" />
+								<span class="oi oi-person" aria-hidden="true"> </span><sec:authentication property="principal.usuarioClave.nombreCompleto" />
 							</c:if>
 						</span>
 					</h5>

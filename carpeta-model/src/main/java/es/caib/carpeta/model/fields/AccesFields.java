@@ -20,10 +20,11 @@ public interface AccesFields extends java.io.Serializable {
 	 public static final StringField PROVEIDORIDENTITAT = new StringField(_TABLE_MODEL, "proveidorIdentitat", "proveidoridentitat");
 	 public static final StringField NIVELLSEGURETAT = new StringField(_TABLE_MODEL, "nivellSeguretat", "nivellseguretat");
 	 public static final IntegerField RESULTATAUTENTICACIO = new IntegerField(_TABLE_MODEL, "resultatAutenticacio", "resultatautenticacio");
+	 public static final LongField ENTITATID = new LongField(_TABLE_MODEL, "entitatID", "entitatid");
+	 public static final IntegerField PLUGINID = new IntegerField(_TABLE_MODEL, "pluginID", "pluginid");
+	 public static final IntegerField TIPUS = new IntegerField(_TABLE_MODEL, "tipus", "tipus");
 	 public static final TimestampField DATADARRERACCES = new TimestampField(_TABLE_MODEL, "dataDarrerAcces", "datadarreracces");
 	 public static final StringField IDIOMA = new StringField(_TABLE_MODEL, "idioma", "idioma");
-	 public static final LongField ENTITATID = new LongField(_TABLE_MODEL, "entitatID", "entitatid");
-	 public static final IntegerField TIPUS = new IntegerField(_TABLE_MODEL, "tipus", "tipus");
 
 
   public static final Field<?>[] ALL_ACCES_FIELDS = {
@@ -35,10 +36,11 @@ public interface AccesFields extends java.io.Serializable {
     PROVEIDORIDENTITAT,
     NIVELLSEGURETAT,
     RESULTATAUTENTICACIO,
-    DATADARRERACCES,
-    IDIOMA,
     ENTITATID,
-    TIPUS
+    PLUGINID,
+    TIPUS,
+    DATADARRERACCES,
+    IDIOMA
   };
 
 

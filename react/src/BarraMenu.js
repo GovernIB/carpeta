@@ -54,7 +54,7 @@ class BarraMenu extends Component {
 					{/*<a href="{this.context.router.goBack()}" className="imc-torna"*/}
 					{/*   title={t('menuTorna')}><span>{t('menuTorna')}</span></a>*/}
 					<h1>
-						<span className="pl-3 fs">{t('menuTitol')}</span>
+						<span>{t('menuTitol')}</span>
 					</h1>
 
 					<ul>

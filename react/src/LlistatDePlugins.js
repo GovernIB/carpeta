@@ -154,6 +154,7 @@ class LlistatDePlugins extends Component {
         return (
 
             <div className="row mr-0 ml-0">
+
                 <div className="infoNoMenu">
                     <p className="titol h2">{t('paginaIniciTitolPrivat')}</p>
 

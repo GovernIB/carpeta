@@ -1,14 +1,11 @@
 package es.caib.carpeta.logic;
 
-import es.caib.carpeta.jpa.EntitatJPA;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
-
-import java.util.*;
 
 import es.caib.carpeta.ejb.AccesLocal;
 import es.caib.carpeta.ejb.AvisLocal;
@@ -17,9 +14,20 @@ import es.caib.carpeta.ejb.FitxerLocal;
 import es.caib.carpeta.ejb.PluginEntitatLocal;
 import es.caib.carpeta.ejb.PropietatGlobalLocal;
 import es.caib.carpeta.ejb.UsuariEntitatLocal;
+import es.caib.carpeta.jpa.EntitatJPA;
 import es.caib.carpeta.model.entity.Enllaz;
 import es.caib.carpeta.model.entity.Entitat;
-import es.caib.carpeta.model.fields.*;
+import es.caib.carpeta.model.fields.AccesFields;
+import es.caib.carpeta.model.fields.AvisFields;
+import es.caib.carpeta.model.fields.EnllazFields;
+import es.caib.carpeta.model.fields.EntitatFields;
+import es.caib.carpeta.model.fields.FitxerFields;
+import es.caib.carpeta.model.fields.PluginEntitatFields;
+import es.caib.carpeta.model.fields.PropietatGlobalFields;
+import es.caib.carpeta.model.fields.UsuariEntitatFields;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 
@@ -111,5 +119,22 @@ public class EntitatLogicaEJB extends EntitatEJB implements EntitatLogicaLocal, 
 						+ "where a.codi = :codiEntitat and a.activa = true", EntitatJPA.class);
 		query.setParameter("codiEntitat", codiEntitat);
 		return query.getResultList().get(0);
+	}
+
+
+	/** Cerca una entitat a través del seu codi DIR3**/
+	@Override
+	public EntitatJPA findByCodiDir3(String codiDir3Entitat) throws I18NException {
+
+		TypedQuery<EntitatJPA> query = getEntityManager().createQuery(
+				"select a from EntitatJPA a "
+						+ "where a.codiDir3 = :codiDir3Entitat and a.activa = true", EntitatJPA.class);
+		query.setParameter("codiDir3Entitat", codiDir3Entitat);
+		if(query.getResultList().size()>0){
+			return query.getResultList().get(0);
+		}else{
+			return null;
+		}
+
 	}
 }
