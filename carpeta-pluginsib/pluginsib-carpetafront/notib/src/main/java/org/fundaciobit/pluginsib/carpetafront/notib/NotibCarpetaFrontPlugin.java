@@ -9,6 +9,10 @@ import org.apache.commons.io.IOUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.Duration;
+import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.namespace.QName;
 
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
@@ -17,12 +21,17 @@ import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
+import java.util.TimeZone;
 
 /**
  * @author anadal
@@ -77,7 +86,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     @Override
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
             HttpServletRequest request, UserData userData, String administrationIDEncriptat) throws Exception {
-        
+
         registerUserData(userData);
 
         String startURL = absolutePluginRequestPath + "/" + OPCIONS;
@@ -103,8 +112,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         } else if (query.startsWith(COMUNICACIONS)) {
 
-            comunicacions(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                    userData, administrationEncriptedID, locale, isGet);
+            comunicacions(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
         } else {
 
             super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
@@ -123,7 +132,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
-    // -------------------     L L I S T A T     D E     O P C  I O N S     ----------------
+    // ------------------- L L I S T A T D E O P C I O N S ----------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
@@ -138,8 +147,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             response.setCharacterEncoding("utf-8");
             response.setContentType("text/html");
 
-            String webpage = getOpcionsPage(absolutePluginRequestPath, relativePluginRequestPath, userData,
-                    locale, isGet);
+            String webpage = getOpcionsPage(absolutePluginRequestPath, relativePluginRequestPath, userData, locale,
+                    isGet);
 
             try {
                 response.getWriter().println(webpage);
@@ -269,8 +278,33 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         List<ElementoExpediente> comunicaciones = sistra1Service.obtenerElementosExpediente(coms,
                 Sistra1ServiceImpl.ELEMENTO_TODOS, userData.getAdministrationID(), locale);
+        
+        /*
+        if (comunicaciones.isEmpty()) {
+            
+            ElementoExpediente ee = new ElementoExpediente();
+            ee.setDescripcion("HOLA CARA DESC");
+
+            GregorianCalendar calendar = new GregorianCalendar();
+
+            calendar.setTime(new Date());
+
+            ee.setFecha(  DatatypeFactory.newInstance().newXMLGregorianCalendar(calendar));
+            
+            ee.setPendiente(true);
+            ee.setTipo(TipoElementoExpediente.COMUNICACION);
+            ee.setUrl("http://google.es");
+            
+            comunicaciones.add(ee);
+            comunicaciones.add(ee);
+
+        }
+        */
+        
 
         map.put("comunicacions", comunicaciones);
+        
+        
 
         InputStream input = this.getClass().getResourceAsStream("/webpage/notib.html");
 

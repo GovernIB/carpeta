@@ -1,4 +1,4 @@
-
+<#setting date_format="dd-MM-yyyy HH:mm">
 <div class="card mb-12 border-0 p-2">
     <div class="card-title border-bottom verde h5 paddingBottomEstandard">${comunicacion_listado}</div>
 
@@ -30,7 +30,7 @@
                           <tr style="cursor: pointer" class="">
                        </#if>
                             <td>${com.descripcion}</td>
-                            <td>${com.fecha?string("dd-MM-yyyy HH:mm")}</td>
+                            <td>${com.fecha?string?datetime("yyyy-MM-dd'T'HH:mm:ss.SSSX")?string("dd-MM-yyyy HH:mm")}</td>
                         </tr>
                     </#list>
                     </tbody>
