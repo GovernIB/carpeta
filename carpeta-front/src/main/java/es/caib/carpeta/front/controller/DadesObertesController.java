@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.google.gson.Gson;
 
+import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.ejb.PropietatGlobalLocal;
 import es.caib.carpeta.jpa.AccesJPA;
 import es.caib.carpeta.logic.AccesLogicaLocal;
@@ -43,22 +44,22 @@ public class DadesObertesController extends CommonFrontController {
 		protected int autenticacio;
 		protected Date data;
 		protected String idioma;
-		protected long entitatid;
-		protected int tipus;
+		protected String entitat;
+		protected String tipus;
 		protected Long pluginid;
 		
 		public AccesInfo() {
 			super();
 		}
 		
-		public AccesInfo( String proveidor, String nivell, int autenticacio, Date data, String idioma, long entitat, int tipus, Long plugin) {
+		public AccesInfo( String proveidor, String nivell, int autenticacio, Date data, String idioma, String entitat, String tipus, Long plugin) {
 			super();
 			this.proveidor = proveidor;
 			this.nivellSeguretat = nivell;
 			this.autenticacio = autenticacio;
 			this.data = data;
 			this.idioma = idioma;
-			this.entitatid = entitat;
+			this.entitat = entitat;
 			this.tipus = tipus;
 			this.pluginid = plugin;
 		}
@@ -103,19 +104,19 @@ public class DadesObertesController extends CommonFrontController {
 			this.idioma = idioma;
 		}
 		
-		public long getEntitatId() {
-			return this.entitatid;
+		public String getEntitat() {
+			return this.entitat;
 		}
 		
-		public void setEntitatId(long entitat) {
-			this.entitatid = entitat;
+		public void setEntitat(String entitat) {
+			this.entitat = entitat;
 		}
 		
-		public int getTipus() {
+		public String getTipus() {
 			 return this.tipus;
 		}
 		
-		public void setTipus(int tipus) {
+		public void setTipus(String tipus) {
 			this.tipus = tipus;
 		}
 		
@@ -164,14 +165,27 @@ public class DadesObertesController extends CommonFrontController {
 				List <AccesInfo> accesosInfo = new ArrayList<AccesInfo>();
 				
 				for(AccesJPA item : accesos) {
+					
+					String tipusAcces = ""; 
+					switch(item.getTipus()) {
+					case Constants.TIPUS_ACCES_LOGIN_AUTENTICAT:
+						tipusAcces = "Login Autenticat";
+						break;
+					case Constants.TIPUS_ACCES_LOGIN_NO_AUTENTICAT:
+						tipusAcces = "Login No Autenticat";
+						break;
+					case Constants.TIPUS_ACCES_PLUGIN:
+						tipusAcces = "Accés a Plugin";
+					}
+					
 					accesosInfo.add(new AccesInfo(
 							item.getProveidorIdentitat(), 
 							item.getNivellSeguretat(),
 							item.getResultatAutenticacio(),
 							item.getDataDarrerAcces(),
 							item.getIdioma(),
-							item.getEntitatID(),
-							item.getTipus(),
+							entitatRequest,
+							tipusAcces,
 							item.getPluginID()
 							));
 				}
