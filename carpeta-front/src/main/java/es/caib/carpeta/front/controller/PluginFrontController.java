@@ -213,7 +213,7 @@ public class PluginFrontController extends CommonFrontController {
             //ACCESS
 
             EntitatJPA entitatJPA = entitatEjb.findByCodi(sesionHttp.getEntitat());
-            accesLogicaEjb.crearAcces(usuarioClave,TIPUS_ACCES_PLUGIN, entitatJPA.getCodiDir3(),Long.parseLong(pluginID),new Timestamp(new Date().getTime()),LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress());
+            accesLogicaEjb.crearAcces(usuarioClave,TIPUS_ACCES_PLUGIN, entitatJPA.getEntitatID(),Long.parseLong(pluginID),new Timestamp(new Date().getTime()),LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress());
 
 
 

@@ -8,6 +8,8 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.ejb.EJB;
 
@@ -17,9 +19,13 @@ import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ENTRADA_FRONT_
 import es.caib.carpeta.commons.utils.UsuarioClave;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.carpeta.front.service.SecurityService;
+import es.caib.carpeta.front.utils.SesionHttp;
+import es.caib.carpeta.jpa.EntitatJPA;
 import es.caib.carpeta.logic.AccesLogicaLocal;
 import es.caib.carpeta.logic.AuditoriaLogicaLocal;
 import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
+import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
+
 import java.net.InetAddress;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -41,6 +47,12 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
 
     @EJB(mappedName = AccesLogicaLocal.JNDI_NAME)
     protected AccesLogicaLocal accesLogicaEjb;
+    
+    @EJB(mappedName = UtilitiesForFrontLogicaLocal.JNDI_NAME)
+    protected UtilitiesForFrontLogicaLocal utilsEjb;
+    
+    @Autowired
+    private SesionHttp sesionHttp;
 
     @Override
     public Authentication authenticate(Authentication authentication) {
@@ -62,7 +74,16 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
 
 
             //Cream acces
-            accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_LOGIN_AUTENTICAT, Configuracio.getLoginIBEntidad(),null, new Timestamp(new Date().getTime()), LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress());
+            // XYZ ZZZ   Necessitam el codi de l'entitat !!!!!!
+            
+//            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+//            return attr.getRequest().getSession(true)
+            
+            
+            String codiEntitat = sesionHttp.getEntitat();
+            EntitatJPA entitat = utilsEjb.getEntitat(codiEntitat);
+            long entitatID = entitat.getEntitatID();
+            accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_LOGIN_AUTENTICAT, entitatID, null, new Timestamp(new Date().getTime()), LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress());
 
 
             //AUDITORIA

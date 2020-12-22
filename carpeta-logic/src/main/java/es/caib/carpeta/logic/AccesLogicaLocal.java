@@ -15,15 +15,15 @@ import java.util.List;
 /**
  * Created by Fundació BIT.
  *
- * @author mgonzalez
- * Date: 16/12/2020
+ * @author mgonzalez Date: 16/12/2020
  */
 
 public interface AccesLogicaLocal extends AccesLocal {
     public static final String JNDI_NAME = "java:app/carpeta-logic/AccesLogicaEJB!es.caib.carpeta.logic.AccesLogicaLocal";
 
-    public void crearAcces(UsuarioClave usuarioClave,@NotNull int tipus, String codiEntitat,Long pluginID, Timestamp dataDarrerAcces,String idioma, String ipAddress) throws I18NException;
-    
+    public void crearAcces(UsuarioClave usuarioClave, @NotNull int tipus, long entitatID, Long pluginID,
+            Timestamp dataDarrerAcces, String idioma, String ipAddress) throws I18NException;
+
     /* Llistat de accesos entre dues dates ordenat per data descendent */
     public List<AccesJPA> findBetweenDates(Date inici, Date fi, String codiEntitat) throws I18NException;
 }
