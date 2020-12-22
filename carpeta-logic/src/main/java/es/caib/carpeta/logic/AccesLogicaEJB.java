@@ -62,26 +62,18 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaLocal{
     
     /* Llistat de accesos entre dues dates ordenat per data descendent */
     @Override
-    public List<AccesJPA> findBetweenDates(Date inici, Date fi, long entitat) throws I18NException {
+    public List<AccesJPA> findBetweenDates(Date inici, Date fi, String codiEntitat) throws I18NException {
     	
-    	String filtreEntitat = (entitat > 0) ? "and a.entitatID = :codiEntitat " : "";
     	String sentencia = "select a from AccesJPA a "
 				+ "where a.dataDarrerAcces between :dataInici and :dataFi "
-				+ filtreEntitat
+				+ "and a.entitat.codi = :codiEntitat "
 				+ "order by a.dataDarrerAcces desc";
     	
     	TypedQuery<AccesJPA> query = getEntityManager().createQuery(
 				sentencia, AccesJPA.class);
 		query.setParameter("dataInici", inici);
 		query.setParameter("dataFi", fi);
-		
-		System.out.println("sentencia:" + sentencia);
-		System.out.println("Inici: " + inici);
-		System.out.println("Fi: " + fi);
-		System.out.println("Entitat: " + entitat);
-		
-		if(filtreEntitat != "")
-			query.setParameter("codiEntitat", entitat);
+		query.setParameter("codiEntitat", codiEntitat);
 		
 		return query.getResultList();
     	

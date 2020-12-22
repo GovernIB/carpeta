@@ -25,5 +25,5 @@ public interface AccesLogicaLocal extends AccesLocal {
     public void crearAcces(UsuarioClave usuarioClave,@NotNull int tipus, String codiEntitat,Long pluginID, Timestamp dataDarrerAcces,String idioma, String ipAddress) throws I18NException;
     
     /* Llistat de accesos entre dues dates ordenat per data descendent */
-    public List<AccesJPA> findBetweenDates(Date inici, Date fi, long entitat) throws I18NException;
+    public List<AccesJPA> findBetweenDates(Date inici, Date fi, String codiEntitat) throws I18NException;
 }

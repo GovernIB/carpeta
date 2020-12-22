@@ -1,21 +1,25 @@
 package es.caib.carpeta.front.controller;
 
-import com.google.gson.Gson;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.google.gson.Gson;
+
+import es.caib.carpeta.ejb.PropietatGlobalLocal;
 import es.caib.carpeta.jpa.AccesJPA;
 import es.caib.carpeta.logic.AccesLogicaLocal;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import es.caib.carpeta.logic.utils.EjbManager;
 
 /**
  * Conjunt de cridades REST per obtenir informació per a la plataforma de dades obertes
@@ -131,36 +135,59 @@ public class DadesObertesController extends CommonFrontController {
 			
 			String dataIniciRequest = request.getParameter("inici");
 			String dataFiRequest = request.getParameter("fi");
-			String entitatRequest = (request.getParameter("entitat") != "") ? request.getParameter("entitat") : "0";
+			String entitatRequest = request.getParameter("entitat"); 
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			
-			List <AccesJPA> accesos = accesEjb.findBetweenDates(
-					sdf.parse(dataIniciRequest), sdf.parse(dataFiRequest), Long.valueOf(entitatRequest));
-			
-			List <AccesInfo> accesosInfo = new ArrayList<AccesInfo>();
-			
-			for(AccesJPA item : accesos) {
-				accesosInfo.add(new AccesInfo(
-						item.getProveidorIdentitat(), 
-						item.getNivellSeguretat(),
-						item.getResultatAutenticacio(),
-						item.getDataDarrerAcces(),
-						item.getIdioma(),
-						item.getEntitatID(),
-						item.getTipus(),
-						item.getPluginID()
-						));
+			// Si no hi ha parametres de dates, es retorna per defecte el darrer mes
+			if(dataFiRequest == null) {
+				dataFiRequest = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			}
 			
-			Gson gson = new Gson();
-			String json = gson.toJson(accesosInfo);
+			if (dataIniciRequest == null) {
+				dataIniciRequest = LocalDate.parse(dataFiRequest, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+						.minusMonths(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			}
 			
-			response.setContentType("application/json");
-            response.setCharacterEncoding("UTF8");
-            
-            byte[] utf8JsonString = json.getBytes("UTF8");
-            response.getOutputStream().write(utf8JsonString);
+			// si no hi ha entitatId, es retorna la propietatGlobal defaultEntity 
+			if (entitatRequest == null) {
+				PropietatGlobalLocal propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
+	            entitatRequest = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
+			}
+			
+			// si falta entitat, retorna error 400
+			if(entitatRequest != null) {
+			
+				List <AccesJPA> accesos = accesEjb.findBetweenDates(
+						java.sql.Date.valueOf(LocalDate.parse(dataIniciRequest, DateTimeFormatter.ofPattern("yyyy-MM-dd"))),
+						java.sql.Date.valueOf(LocalDate.parse(dataFiRequest, DateTimeFormatter.ofPattern("yyyy-MM-dd"))),
+						entitatRequest );
+				
+				List <AccesInfo> accesosInfo = new ArrayList<AccesInfo>();
+				
+				for(AccesJPA item : accesos) {
+					accesosInfo.add(new AccesInfo(
+							item.getProveidorIdentitat(), 
+							item.getNivellSeguretat(),
+							item.getResultatAutenticacio(),
+							item.getDataDarrerAcces(),
+							item.getIdioma(),
+							item.getEntitatID(),
+							item.getTipus(),
+							item.getPluginID()
+							));
+				}
+				
+				Gson gson = new Gson();
+				String json = gson.toJson(accesosInfo);
+			
+				response.setContentType("application/json");
+	            response.setCharacterEncoding("UTF8");
+				
+	            byte[] utf8JsonString = json.getBytes("UTF8");
+	            response.getOutputStream().write(utf8JsonString);
+				
+			} else {
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Bad Request");
+			}
 			
         } catch (Exception e) {
 			log.error("DadesObertesController -> getAccesInfo : " + e.getMessage());
