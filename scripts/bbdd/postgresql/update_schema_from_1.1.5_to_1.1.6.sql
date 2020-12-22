@@ -71,3 +71,20 @@ ALTER TABLE car_acces ADD COLUMN pluginid integer;
 
 -- 21/12/2020 Refactoritzar estadístiques #286
 TRUNCATE TABLE car_estadistica;
+
+-- 22/12/2020  Implementar Plugin de Dades Personals #283 
+INSERT INTO car_traduccio VALUES (86);
+INSERT INTO car_traduccio VALUES (87);
+
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (86, 'en', 'Personal Information');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (86, 'ca', 'Dades Personals');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (86, 'es', 'Datos Personales');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (87, 'en', 'Personal Information');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (87, 'ca', 'Dades Personals');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (87, 'es', 'Datos Personales');
+
+
+INSERT INTO car_plugin(pluginid, nomid, classe, tipus, propietats, actiu, descripcioid) VALUES (85, 86, 'org.fundaciobit.pluginsib.carpetafront.dadespersonalsreact.DadesPersonalsReactCarpetaFrontPlugin', 1, NULL, true, 87);
+
+
+

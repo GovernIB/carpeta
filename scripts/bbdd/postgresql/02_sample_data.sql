@@ -68,12 +68,12 @@ es.caib.carpeta.pluginsib.carpetafront.regweb3.entidad=A04003003', true);
 INSERT INTO car_traduccio VALUES (66);
 INSERT INTO car_traduccio VALUES (76);
 
-INSERT INTO car_traducciomap VALUES (66, 'en', 'Notifications');
-INSERT INTO car_traducciomap VALUES (66, 'ca', 'Notificacions');
-INSERT INTO car_traducciomap VALUES (66, 'es', 'Notificaciones');
-INSERT INTO car_traducciomap VALUES (76, 'en', 'Notifications');
-INSERT INTO car_traducciomap VALUES (76, 'ca', 'Notificacions');
-INSERT INTO car_traducciomap VALUES (76, 'es', 'Notificaciones');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (66, 'en', 'Notifications');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (66, 'ca', 'Notificacions');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (66, 'es', 'Notificaciones');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (76, 'en', 'Notifications');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (76, 'ca', 'Notificacions');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (76, 'es', 'Notificaciones');
 
 
 
@@ -90,6 +90,24 @@ es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.pass=[=SP["es.caib.carpeta.
 
 # NOTIFICACIONES
 es.caib.carpeta.pluginsib.carpetafront.notib.notificaciones.url=https://sede.administracion.gob.es/carpeta/notificaciones/notifica/consultaNotificaciones.htm', true, 76);
+
+
+
+-- Plugin de Infomació Personal
+INSERT INTO car_traduccio VALUES (86);
+INSERT INTO car_traduccio VALUES (87);
+
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (86, 'en', 'Personal Information');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (86, 'ca', 'Dades Personals');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (86, 'es', 'Datos Personales');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (87, 'en', 'Personal Information');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (87, 'ca', 'Dades Personals');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (87, 'es', 'Datos Personales');
+
+
+INSERT INTO car_plugin(pluginid, nomid, classe, tipus, propietats, actiu, descripcioid) VALUES (85, 86, 'org.fundaciobit.pluginsib.carpetafront.dadespersonalsreact.DadesPersonalsReactCarpetaFrontPlugin', 1, NULL, true, 87);
+
+
 
 -- Propietat Global
 

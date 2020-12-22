@@ -4,7 +4,6 @@ import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.jpa.AvisJPA;
 import es.caib.carpeta.jpa.EntitatJPA;
 import es.caib.carpeta.jpa.PluginJPA;
-import es.caib.carpeta.logic.utils.I18NLogicUtils;
 import es.caib.carpeta.logic.utils.PluginInfo;
 import es.caib.carpeta.model.entity.*;
 import es.caib.carpeta.model.fields.*;

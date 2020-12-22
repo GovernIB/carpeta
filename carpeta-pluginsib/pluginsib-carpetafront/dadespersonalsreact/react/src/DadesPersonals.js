@@ -9,29 +9,21 @@ class DadesPersonals extends Component {
 
     constructor(props) {
        super(props);
-       this.setState({ refrescar: 0 });
-       this.changedLanguage = this.changedLanguage.bind(this);
+       //this.setState({ refrescar: 0 });
+       //this.changedLanguage = this.changedLanguage.bind(this);
     }
-
+/*
    componentDidMount() {
 	   
 	   i18n.on('languageChanged', this.changedLanguage.bind(this));
-	   /*
-     i18n.on('languageChanged', function(lng) { 
-            console.log('DadesPersonals  Idioma canviat a ' + lng );
-            this.render();
-         }
-     );
-     */
+
    }
    
    
    changedLanguage(lng) {
 	   console.log('DadesPersonals  Idioma canviat a ' + lng );
-       //this.render();
-	   //this.setState({refrescar : new Date().getTime()});
    }
-
+*/
 
 	render() {
 
@@ -48,11 +40,9 @@ class DadesPersonals extends Component {
         const usuariMetode = dades.usuariMetode;
         
         const usuariNomComplet = usuariNom + ' ' + usuariLlinatge1 + ' ' + usuariLlinatge2;
-        
-        
 
         return (
-            <div className="container-contenido">
+            
                 <div className="infoNoMenu">
                     <p className="titol h2">{t('dadespersonalsTitol')} {usuariNomComplet}</p>
 
@@ -61,7 +51,7 @@ class DadesPersonals extends Component {
 
                         <div className="card">
                             <ul className="list-group list-group-flush">
-                                <li className="list-group-item"><p className="titol h5">{t('dadespersonalsNom')}</p><p
+                                <li className="list-group-item"><p className="titol h5" >{t('dadespersonalsNom')}</p><p
                                     className="lh15">{usuariNom}</p></li>
                                 <li className="list-group-item"><p
                                     className="titol h5">{t('dadespersonalsLlinatge1')}</p><p
@@ -79,7 +69,7 @@ class DadesPersonals extends Component {
                     </div>
 
                 </div>
-            </div>
+         
         );   
 
 
