@@ -1,7 +1,5 @@
 package es.caib.carpeta.front.security;
 
-import org.fundaciobit.genapp.common.i18n.I18NException;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +12,8 @@ import org.springframework.stereotype.Component;
 import javax.ejb.EJB;
 
 import es.caib.carpeta.commons.utils.Configuracio;
-import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_ACCES_LOGIN_AUTENTICAT;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ENTRADA_FRONT_AUTENTICAT;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_FRONT;
 import es.caib.carpeta.commons.utils.UsuarioClave;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.carpeta.front.service.SecurityService;
@@ -58,9 +54,10 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
         log.info("Password: " + passwd);
 
         UsuarioClave usuarioClave = null;
+        long temps = System.currentTimeMillis();
 
         try {
-            long temps = System.currentTimeMillis();
+
             usuarioClave = securityService.validarTicketAutentificacion(passwd);
 
 
@@ -71,19 +68,10 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
             //AUDITORIA
             auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ENTRADA_FRONT_AUTENTICAT,null,null,usuarioClave.getNif(),null);
 
-            //LOG
-            StringBuilder peticio = new StringBuilder();
-            peticio.append("Usuari Clave: ").append(usuarioClave.getNif()).append(System.getProperty("line.separator"));
-            peticio.append("classe: ").append(getClass().getName()).append(System.getProperty("line.separator"));
-            logLogicaEjb.crearLog("Autenticació del Front de l'Usuari " + usuarioClave.getNif(), ESTAT_LOG_OK,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),"",null);
-
-        }catch (I18NException ie){
+        } catch (Exception ie){
             log.error("S'ha produit un error : " + ie.getMessage());
-        }catch (Exception e) {
-            log.error("S'ha produit un error : " + e.getMessage());
-
         }
-        
+
         log.info("Dentro de CarpetaAuthProvider 111");
 
         UsuarioAutenticado usuarioAutenticado =  new UsuarioAutenticado();

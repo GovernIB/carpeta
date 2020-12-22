@@ -20,10 +20,8 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_ACCES_PLUGIN;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ACCES_PLUGIN;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_PLUGIN_FRONT;
 import es.caib.carpeta.commons.utils.UsuarioClave;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.carpeta.front.utils.SesionHttp;
@@ -192,14 +190,11 @@ public class PluginFrontController extends CommonFrontController {
             throws Exception, I18NException {
 
         String urlToShowPluginPage = null;
+        long temps = System.currentTimeMillis();
 
         try{
 
             //response.addHeader("X-Frame-Options", "SAMEORIGIN");
-
-            long temps = System.currentTimeMillis();
-
-            StringBuilder peticio = new StringBuilder();
 
 
             String context = AbstractCarpetaFrontModuleController.PUBLIC_CONTEXTWEB;
@@ -212,16 +207,6 @@ public class PluginFrontController extends CommonFrontController {
 
             log.info(" urlToShowPluginPage => " + urlToShowPluginPage);
 
-
-            //Obtenemos plugin para obtener entidadID
-            peticio.append("Usuari").append(administrationID).append("\n");
-            peticio.append("classe: ").append(getClass().getName()).append("\n");
-
-            //LOG
-            //  XYZ TODO Passar valor a la var PluginText
-            // TODO Revisar si aqui hem de guardar l'entitat del plugin(necessitariem obtenir el plugin primer) Comentar amb en Toni Nadal.
-            logLogicaEjb.crearLog("Executat plugin des del Front per "+ administrationID, ESTAT_LOG_OK,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),"", Long.parseLong(pluginID));
-
             //AUDITORIA
             auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ACCES_PLUGIN,null,null,administrationID,Long.parseLong(pluginID));
 
@@ -233,6 +218,10 @@ public class PluginFrontController extends CommonFrontController {
 
 
         } catch (Throwable e) {
+          /*  StringBuilder peticio = new StringBuilder();
+            peticio.append("Usuari").append(administrationID).append("\n");
+            peticio.append("classe: ").append(getClass().getName()).append("\n");
+            logLogicaEjb.crearLog("Executat plugin des del Front per "+ administrationID, ESTAT_LOG_ERROR,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,e,"Error en l'execució del plugin",peticio.toString(),"", Long.parseLong(pluginID));*/
             processException(e, response);
         }
 

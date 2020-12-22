@@ -19,7 +19,6 @@ import es.caib.carpeta.back.preparer.BasePreparer;
 import es.caib.carpeta.back.utils.PluginUserInformationUtils;
 import es.caib.carpeta.commons.utils.Constants;
 import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_ERROR;
-import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ENTRADA_BACK;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_BACK;
 import es.caib.carpeta.ejb.EntitatLocal;
@@ -53,6 +52,9 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
     protected final Logger log = Logger.getLogger(getClass());
 
+    protected LogCarpetaLogicaLocal logCarpetaLogicaEjb;
+    protected AuditoriaLogicaLocal auditoriaEjb;
+
     public class LogInfo {
 
         protected final int tipus;
@@ -81,14 +83,11 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
         StringBuilder peticio = new StringBuilder(); //Guardarem les dades de la petició per als logs
         String entitatCodi ="";
 
-
-        LogCarpetaLogicaLocal logCarpetaLogicaEjb;
         try {
             logCarpetaLogicaEjb = EjbManager.getLogCarpetaLogicaEJB();
-
+            auditoriaEjb = EjbManager.getAuditoriaLogicaEJB();
         } catch (I18NException e) {
-            // TODO traduccio
-            throw new LoginException("Error carregant LogCarpetaLogicaEJB " + e.getMessage(), e);
+            log.error(e.getMessage());
         }
 
         SecurityContext sc = SecurityContextHolder.getContext();
@@ -105,21 +104,6 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
             throw new LoginException("NO PUC ACCEDIR A LA INFORMACIO de AUTENTICACIO");
 
         }
-
-
-        AuditoriaLogicaLocal auditoriaEjb;
-
-        try {
-            auditoriaEjb = EjbManager.getAuditoriaLogicaEJB();
-        } catch (I18NException e) {
-            // TODO traduccio
-            throw new LoginException("Error carregant LogCarpetaLogicaEJB " + e.getMessage(), e);
-        }
-
-        //Cream log d'inici d'autenticació al back
-        logCarpetaLogicaEjb.crearLog("Iniciam Autenticació al back", ESTAT_LOG_OK, TIPUS_LOG_AUTENTICACIO_BACK,
-                    System.currentTimeMillis() - temps, null, "", peticio.toString(), "", null);
-
 
         User user = (User) au.getPrincipal();
         String username = user.getUsername();
@@ -289,6 +273,9 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                     
 
                     if (persona == null) {
+                     /*  logCarpetaLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, ESTAT_LOG_ERROR,
+                                TIPUS_LOG_AUTENTICACIO_BACK, System.currentTimeMillis() - temps, null,
+                                "No hem trobat informació de la Persona amb username  "+username+" dins del sistema de UserInformation", peticio.toString(), entitatCodi, null);*/
                         log.error("No hem trobat informació de la Persona amb username  '" + username
                                 + "' dins del sistema de UserInformation");
 
@@ -531,13 +518,6 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
         SecurityContextHolder.getContext().setAuthentication(loginInfo.generateToken());
 
         try {
-
-            // LOG
-            String codiEntitat = loginInfo.getEntitat()!=null?loginInfo.getEntitat().getCodi():null;
-            logCarpetaLogicaEjb.crearLog("Autenticació al back - Usuari: " + username, ESTAT_LOG_OK,
-                    TIPUS_LOG_AUTENTICACIO_BACK, System.currentTimeMillis() - temps, null, "", peticio.toString(),
-                    codiEntitat, null);
-
             // AUDITORIA
             if (loginInfo.getUsuariPersona() != null) {
               auditoriaEjb.crearAuditoria(TIPUS_AUDIT_ENTRADA_BACK, loginInfo.getEntitatID(), loginInfo.getUsuariPersona().getUsername(), null,

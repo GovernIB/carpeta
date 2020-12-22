@@ -18,7 +18,6 @@ import javax.servlet.http.HttpSession;
 
 import es.caib.carpeta.commons.utils.Constants;
 import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_ERROR;
-import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_ESTAD_ENTRADA_FRONT_NO_AUTENTICAT;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_FRONT;
 import es.caib.carpeta.front.config.LoginRequestCache;
@@ -141,9 +140,6 @@ public class LoginController {
                 // XYZ ZZZ FALTA MOSTRAR ERROR
                 url = baseURL;
             }
-
-
-            logLogicaEjb.crearLog("Iniciam Sessió Autenticació Front", ESTAT_LOG_OK,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),"",null);
 
             log.info("Url autentificacion: " + url);
 

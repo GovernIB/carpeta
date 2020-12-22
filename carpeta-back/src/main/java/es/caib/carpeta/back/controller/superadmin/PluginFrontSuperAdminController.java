@@ -17,18 +17,17 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.net.URL;
-import es.caib.carpeta.back.form.webdb.*;
+import es.caib.carpeta.back.form.webdb.PluginFilterForm;
+import es.caib.carpeta.back.form.webdb.PluginForm;
 
 import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.commons.utils.Constants;
-import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_OK;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_AFEGIR_PLUGIN;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_PLUGIN_FRONT;
 import es.caib.carpeta.jpa.PluginJPA;
 import es.caib.carpeta.logic.AuditoriaLogicaLocal;
 import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
 import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaLocal;
+import java.net.URL;
 
 
 /**
@@ -68,7 +67,7 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
           HttpServletRequest request, HttpServletResponse response,
           PluginFilterForm filterForm) throws Exception, I18NException {
 
-       long temps = System.currentTimeMillis();
+      // long temps = System.currentTimeMillis();
 
 
        String administrationID= request.getParameter("administrationID");
@@ -90,14 +89,6 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
        log.info("startTestPlugin:: BASE = " + base);
        
        String view = "testPlugin";
-
-
-       StringBuilder peticio = new StringBuilder();
-       peticio.append("Usuari: ").append(LoginInfo.getInstance().getUsername()).append("\n");
-       peticio.append("classe: ").append(getClass().getName()).append("\n");
-
-       //XYZ TODO passar algo al camp PluginText
-       logCarpetaLogicaEjb.crearLog("Plugin del Front via test executat per " + LoginInfo.getInstance().getUsername(), ESTAT_LOG_OK,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,null,"",peticio.toString(),LoginInfo.getInstance().getEntitat().getCodi(), pluginID);
 
 
        return CarpetaFrontModuleSuperAdminController.startPrivateSignatureProcess(request, response, view, pluginID, administrationID, base);
