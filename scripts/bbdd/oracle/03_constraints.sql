@@ -42,11 +42,6 @@
        foreign key (entitatid) 
        references car_entitat;
 
-    alter table car_auditoria 
-       add constraint car_audit_usuari_usu_fk 
-       foreign key (usuariid) 
-       references car_usuari;
-
     alter table car_avis 
        add constraint car_avis_traduccio_desc_fk 
        foreign key (descripcioid) 
@@ -91,6 +86,11 @@
        add constraint car_entitat_fitxer_icon_fk 
        foreign key (iconid) 
        references car_fitxer;
+
+    alter table car_entitat 
+       add constraint car_entitat_traduccio_log_fk 
+       foreign key (logintextid) 
+       references car_traduccio;
 
     alter table car_entitat 
        add constraint car_entitat_fitxer_lcb_fk 

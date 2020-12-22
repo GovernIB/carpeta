@@ -2,9 +2,6 @@
     alter table car_acces 
        drop constraint car_acces_entitat_entitatid_fk;
 
-    alter table car_auditoria 
-       drop constraint car_audit_usuari_usu_fk;
-
     alter table car_avis 
        drop constraint car_avis_traduccio_desc_fk;
 
@@ -31,6 +28,9 @@
 
     alter table car_entitat 
        drop constraint car_entitat_fitxer_icon_fk;
+
+    alter table car_entitat 
+       drop constraint car_entitat_traduccio_log_fk;
 
     alter table car_entitat 
        drop constraint car_entitat_fitxer_lcb_fk;

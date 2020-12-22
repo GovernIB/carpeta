@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.3.5
 -- Dumped by pg_dump version 9.3.5
--- Started on 2020-11-26 11:18:56
+-- Started on 2020-12-22 14:12:29
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -22,7 +22,7 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 2162 (class 0 OID 0)
+-- TOC entry 2163 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
@@ -67,14 +67,16 @@ CREATE TABLE car_acces (
     resultatautenticacio integer,
     datadarreracces timestamp without time zone,
     idioma character varying(50),
-    entitatid bigint NOT NULL
+    entitatid bigint NOT NULL,
+    tipus integer NOT NULL,
+    pluginid integer
 );
 
 
 ALTER TABLE public.car_acces OWNER TO carpeta;
 
 --
--- TOC entry 2163 (class 0 OID 0)
+-- TOC entry 2164 (class 0 OID 0)
 -- Dependencies: 180
 -- Name: COLUMN car_acces.idioma; Type: COMMENT; Schema: public; Owner: carpeta
 --
@@ -107,9 +109,9 @@ CREATE TABLE car_auditoria (
     tipus integer NOT NULL,
     dataaudit timestamp without time zone NOT NULL,
     entitatid bigint,
-    usuariid bigint,
     usuariclave character varying(256),
-    pluginid integer
+    pluginid integer,
+    username character varying(255)
 );
 
 
@@ -221,11 +223,42 @@ CREATE TABLE car_entitat (
     suporttelefon character varying(255),
     entitatdescfront character varying(4000) NOT NULL,
     webentitat character varying(255) NOT NULL,
-    pluginloginid bigint
+    pluginloginid bigint,
+    suportfaq character varying(255),
+    suportqssi character varying(255),
+    suportautenticacio character varying(255),
+    logintextid bigint
 );
 
 
 ALTER TABLE public.car_entitat OWNER TO carpeta;
+
+--
+-- TOC entry 2165 (class 0 OID 0)
+-- Dependencies: 175
+-- Name: COLUMN car_entitat.suportfaq; Type: COMMENT; Schema: public; Owner: carpeta
+--
+
+COMMENT ON COLUMN car_entitat.suportfaq IS 'Preguntes Freqüents';
+
+
+--
+-- TOC entry 2166 (class 0 OID 0)
+-- Dependencies: 175
+-- Name: COLUMN car_entitat.suportqssi; Type: COMMENT; Schema: public; Owner: carpeta
+--
+
+COMMENT ON COLUMN car_entitat.suportqssi IS ' Queixes i suggeriments ';
+
+
+--
+-- TOC entry 2167 (class 0 OID 0)
+-- Dependencies: 175
+-- Name: COLUMN car_entitat.suportautenticacio; Type: COMMENT; Schema: public; Owner: carpeta
+--
+
+COMMENT ON COLUMN car_entitat.suportautenticacio IS 'Suport autenticació Front';
+
 
 --
 -- TOC entry 190 (class 1259 OID 114922)
@@ -543,7 +576,7 @@ CREATE TABLE car_usuarientitat (
 ALTER TABLE public.car_usuarientitat OWNER TO carpeta;
 
 --
--- TOC entry 1988 (class 2606 OID 112634)
+-- TOC entry 1990 (class 2606 OID 112634)
 -- Name: car_acces_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -552,7 +585,7 @@ ALTER TABLE ONLY car_acces
 
 
 --
--- TOC entry 2012 (class 2606 OID 112688)
+-- TOC entry 2014 (class 2606 OID 112688)
 -- Name: car_auditoria_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -561,7 +594,7 @@ ALTER TABLE ONLY car_auditoria
 
 
 --
--- TOC entry 1979 (class 2606 OID 112596)
+-- TOC entry 1981 (class 2606 OID 112596)
 -- Name: car_avis_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -570,7 +603,7 @@ ALTER TABLE ONLY car_avis
 
 
 --
--- TOC entry 1954 (class 2606 OID 112515)
+-- TOC entry 1955 (class 2606 OID 112515)
 -- Name: car_enllaz_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -579,7 +612,7 @@ ALTER TABLE ONLY car_enllaz
 
 
 --
--- TOC entry 1964 (class 2606 OID 112517)
+-- TOC entry 1966 (class 2606 OID 112517)
 -- Name: car_entitat_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -588,7 +621,7 @@ ALTER TABLE ONLY car_entitat
 
 
 --
--- TOC entry 1992 (class 2606 OID 112645)
+-- TOC entry 1994 (class 2606 OID 112645)
 -- Name: car_estadistica_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -597,7 +630,7 @@ ALTER TABLE ONLY car_estadistica
 
 
 --
--- TOC entry 1938 (class 2606 OID 112445)
+-- TOC entry 1939 (class 2606 OID 112445)
 -- Name: car_fitxer_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -606,7 +639,7 @@ ALTER TABLE ONLY car_fitxer
 
 
 --
--- TOC entry 1941 (class 2606 OID 112447)
+-- TOC entry 1942 (class 2606 OID 112447)
 -- Name: car_idioma_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -615,7 +648,7 @@ ALTER TABLE ONLY car_idioma
 
 
 --
--- TOC entry 1983 (class 2606 OID 112614)
+-- TOC entry 1985 (class 2606 OID 112614)
 -- Name: car_log_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -624,7 +657,7 @@ ALTER TABLE ONLY car_log
 
 
 --
--- TOC entry 2017 (class 2606 OID 115009)
+-- TOC entry 2018 (class 2606 OID 115009)
 -- Name: car_plugent_plug_ent_uk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -633,7 +666,7 @@ ALTER TABLE ONLY car_pluginentitat
 
 
 --
--- TOC entry 1974 (class 2606 OID 112585)
+-- TOC entry 1976 (class 2606 OID 112585)
 -- Name: car_plugin_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -642,7 +675,7 @@ ALTER TABLE ONLY car_plugin
 
 
 --
--- TOC entry 2020 (class 2606 OID 115007)
+-- TOC entry 2021 (class 2606 OID 115007)
 -- Name: car_pluginentitat_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -651,7 +684,7 @@ ALTER TABLE ONLY car_pluginentitat
 
 
 --
--- TOC entry 1969 (class 2606 OID 112567)
+-- TOC entry 1971 (class 2606 OID 112567)
 -- Name: car_propietatglobal_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -660,7 +693,7 @@ ALTER TABLE ONLY car_propietatglobal
 
 
 --
--- TOC entry 1944 (class 2606 OID 112449)
+-- TOC entry 1945 (class 2606 OID 112449)
 -- Name: car_traduccio_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -669,7 +702,7 @@ ALTER TABLE ONLY car_traduccio
 
 
 --
--- TOC entry 1949 (class 2606 OID 112451)
+-- TOC entry 1950 (class 2606 OID 112451)
 -- Name: car_traducmap_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -678,7 +711,7 @@ ALTER TABLE ONLY car_traducciomap
 
 
 --
--- TOC entry 1997 (class 2606 OID 115033)
+-- TOC entry 1999 (class 2606 OID 115033)
 -- Name: car_usuari_nif_uk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -687,7 +720,7 @@ ALTER TABLE ONLY car_usuari
 
 
 --
--- TOC entry 1999 (class 2606 OID 112664)
+-- TOC entry 2001 (class 2606 OID 112664)
 -- Name: car_usuari_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -696,7 +729,7 @@ ALTER TABLE ONLY car_usuari
 
 
 --
--- TOC entry 2002 (class 2606 OID 115031)
+-- TOC entry 2004 (class 2606 OID 115031)
 -- Name: car_usuari_username_uk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -705,7 +738,7 @@ ALTER TABLE ONLY car_usuari
 
 
 --
--- TOC entry 2004 (class 2606 OID 112670)
+-- TOC entry 2006 (class 2606 OID 112670)
 -- Name: car_usuarientitat_pk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -714,7 +747,7 @@ ALTER TABLE ONLY car_usuarientitat
 
 
 --
--- TOC entry 2008 (class 2606 OID 112682)
+-- TOC entry 2010 (class 2606 OID 112682)
 -- Name: car_usuent_usu_ent_uk; Type: CONSTRAINT; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -723,7 +756,7 @@ ALTER TABLE ONLY car_usuarientitat
 
 
 --
--- TOC entry 1986 (class 1259 OID 112706)
+-- TOC entry 1988 (class 1259 OID 112706)
 -- Name: car_acces_entitatid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -731,7 +764,7 @@ CREATE INDEX car_acces_entitatid_fk_i ON car_acces USING btree (entitatid);
 
 
 --
--- TOC entry 1989 (class 1259 OID 112705)
+-- TOC entry 1991 (class 1259 OID 112705)
 -- Name: car_acces_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -739,7 +772,7 @@ CREATE INDEX car_acces_pk_i ON car_acces USING btree (accesid);
 
 
 --
--- TOC entry 2010 (class 1259 OID 112708)
+-- TOC entry 2012 (class 1259 OID 112708)
 -- Name: car_auditoria_entitatid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -747,7 +780,7 @@ CREATE INDEX car_auditoria_entitatid_fk_i ON car_auditoria USING btree (entitati
 
 
 --
--- TOC entry 2013 (class 1259 OID 112707)
+-- TOC entry 2015 (class 1259 OID 112707)
 -- Name: car_auditoria_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -755,15 +788,7 @@ CREATE INDEX car_auditoria_pk_i ON car_auditoria USING btree (auditoriaid);
 
 
 --
--- TOC entry 2014 (class 1259 OID 112709)
--- Name: car_auditoria_usuariid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
---
-
-CREATE INDEX car_auditoria_usuariid_fk_i ON car_auditoria USING btree (usuariid);
-
-
---
--- TOC entry 1976 (class 1259 OID 112711)
+-- TOC entry 1978 (class 1259 OID 112711)
 -- Name: car_avis_descripcioid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -771,7 +796,7 @@ CREATE INDEX car_avis_descripcioid_fk_i ON car_avis USING btree (descripcioid);
 
 
 --
--- TOC entry 1977 (class 1259 OID 112712)
+-- TOC entry 1979 (class 1259 OID 112712)
 -- Name: car_avis_entitatid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -779,7 +804,7 @@ CREATE INDEX car_avis_entitatid_fk_i ON car_avis USING btree (entitatid);
 
 
 --
--- TOC entry 1980 (class 1259 OID 112710)
+-- TOC entry 1982 (class 1259 OID 112710)
 -- Name: car_avis_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -787,7 +812,7 @@ CREATE INDEX car_avis_pk_i ON car_avis USING btree (avisid);
 
 
 --
--- TOC entry 1981 (class 1259 OID 123215)
+-- TOC entry 1983 (class 1259 OID 123215)
 -- Name: car_avis_pluginfrontid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -795,7 +820,7 @@ CREATE INDEX car_avis_pluginfrontid_fk_i ON car_avis USING btree (pluginfrontid)
 
 
 --
--- TOC entry 1950 (class 1259 OID 112704)
+-- TOC entry 1951 (class 1259 OID 112704)
 -- Name: car_enllaz_entitatid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -803,7 +828,7 @@ CREATE INDEX car_enllaz_entitatid_fk_i ON car_enllaz USING btree (entitatid);
 
 
 --
--- TOC entry 1951 (class 1259 OID 123216)
+-- TOC entry 1952 (class 1259 OID 123216)
 -- Name: car_enllaz_logoid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -811,7 +836,7 @@ CREATE INDEX car_enllaz_logoid_fk_i ON car_enllaz USING btree (logoid);
 
 
 --
--- TOC entry 1952 (class 1259 OID 112549)
+-- TOC entry 1953 (class 1259 OID 112549)
 -- Name: car_enllaz_nomid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -819,7 +844,7 @@ CREATE INDEX car_enllaz_nomid_fk_i ON car_enllaz USING btree (nomid);
 
 
 --
--- TOC entry 1955 (class 1259 OID 112548)
+-- TOC entry 1956 (class 1259 OID 112548)
 -- Name: car_enllaz_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -827,7 +852,7 @@ CREATE INDEX car_enllaz_pk_i ON car_enllaz USING btree (enllazid);
 
 
 --
--- TOC entry 1956 (class 1259 OID 112550)
+-- TOC entry 1957 (class 1259 OID 112550)
 -- Name: car_enllaz_urlid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -835,7 +860,7 @@ CREATE INDEX car_enllaz_urlid_fk_i ON car_enllaz USING btree (urlid);
 
 
 --
--- TOC entry 1957 (class 1259 OID 112555)
+-- TOC entry 1958 (class 1259 OID 112555)
 -- Name: car_entitat_fitxercss_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -843,7 +868,7 @@ CREATE INDEX car_entitat_fitxercss_fk_i ON car_entitat USING btree (fitxercss);
 
 
 --
--- TOC entry 1958 (class 1259 OID 123254)
+-- TOC entry 1959 (class 1259 OID 123254)
 -- Name: car_entitat_iconid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -851,7 +876,15 @@ CREATE INDEX car_entitat_iconid_fk_i ON car_entitat USING btree (iconid);
 
 
 --
--- TOC entry 1959 (class 1259 OID 123251)
+-- TOC entry 1960 (class 1259 OID 131479)
+-- Name: car_entitat_logintextid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
+--
+
+CREATE INDEX car_entitat_logintextid_fk_i ON car_entitat USING btree (logintextid);
+
+
+--
+-- TOC entry 1961 (class 1259 OID 123251)
 -- Name: car_entitat_logocapback_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -859,7 +892,7 @@ CREATE INDEX car_entitat_logocapback_fk_i ON car_entitat USING btree (logocapbac
 
 
 --
--- TOC entry 1960 (class 1259 OID 123253)
+-- TOC entry 1962 (class 1259 OID 123253)
 -- Name: car_entitat_logolatfront_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -867,7 +900,7 @@ CREATE INDEX car_entitat_logolatfront_fk_i ON car_entitat USING btree (logolater
 
 
 --
--- TOC entry 1961 (class 1259 OID 123252)
+-- TOC entry 1963 (class 1259 OID 123252)
 -- Name: car_entitat_logopeuback_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -875,7 +908,7 @@ CREATE INDEX car_entitat_logopeuback_fk_i ON car_entitat USING btree (logopeubac
 
 
 --
--- TOC entry 1962 (class 1259 OID 112552)
+-- TOC entry 1964 (class 1259 OID 112552)
 -- Name: car_entitat_nom_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -883,7 +916,7 @@ CREATE INDEX car_entitat_nom_fk_i ON car_entitat USING btree (nomid);
 
 
 --
--- TOC entry 1965 (class 1259 OID 112551)
+-- TOC entry 1967 (class 1259 OID 112551)
 -- Name: car_entitat_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -891,7 +924,7 @@ CREATE INDEX car_entitat_pk_i ON car_entitat USING btree (entitatid);
 
 
 --
--- TOC entry 1966 (class 1259 OID 123255)
+-- TOC entry 1968 (class 1259 OID 123255)
 -- Name: car_entitat_pluginloginid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -899,7 +932,7 @@ CREATE INDEX car_entitat_pluginloginid_fk_i ON car_entitat USING btree (pluginlo
 
 
 --
--- TOC entry 1990 (class 1259 OID 112714)
+-- TOC entry 1992 (class 1259 OID 112714)
 -- Name: car_estadistica_entitatid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -907,7 +940,7 @@ CREATE INDEX car_estadistica_entitatid_fk_i ON car_estadistica USING btree (enti
 
 
 --
--- TOC entry 1993 (class 1259 OID 112713)
+-- TOC entry 1995 (class 1259 OID 112713)
 -- Name: car_estadistica_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -915,7 +948,7 @@ CREATE INDEX car_estadistica_pk_i ON car_estadistica USING btree (estadisticaid)
 
 
 --
--- TOC entry 1939 (class 1259 OID 112452)
+-- TOC entry 1940 (class 1259 OID 112452)
 -- Name: car_fitxer_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -923,7 +956,7 @@ CREATE INDEX car_fitxer_pk_i ON car_fitxer USING btree (fitxerid);
 
 
 --
--- TOC entry 1942 (class 1259 OID 112453)
+-- TOC entry 1943 (class 1259 OID 112453)
 -- Name: car_idioma_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -931,7 +964,7 @@ CREATE INDEX car_idioma_pk_i ON car_idioma USING btree (idiomaid);
 
 
 --
--- TOC entry 1984 (class 1259 OID 112716)
+-- TOC entry 1986 (class 1259 OID 112716)
 -- Name: car_log_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -939,7 +972,7 @@ CREATE INDEX car_log_pk_i ON car_log USING btree (logid);
 
 
 --
--- TOC entry 1985 (class 1259 OID 112718)
+-- TOC entry 1987 (class 1259 OID 112718)
 -- Name: car_log_pluginid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -947,7 +980,7 @@ CREATE INDEX car_log_pluginid_fk_i ON car_log USING btree (pluginid);
 
 
 --
--- TOC entry 2015 (class 1259 OID 115023)
+-- TOC entry 2016 (class 1259 OID 115023)
 -- Name: car_plugent_entitatid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -955,7 +988,7 @@ CREATE INDEX car_plugent_entitatid_fk_i ON car_pluginentitat USING btree (entita
 
 
 --
--- TOC entry 2018 (class 1259 OID 115022)
+-- TOC entry 2019 (class 1259 OID 115022)
 -- Name: car_plugent_pluginid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -963,7 +996,7 @@ CREATE INDEX car_plugent_pluginid_fk_i ON car_pluginentitat USING btree (plugini
 
 
 --
--- TOC entry 1971 (class 1259 OID 115029)
+-- TOC entry 1973 (class 1259 OID 115029)
 -- Name: car_plugin_descripcioid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -971,7 +1004,7 @@ CREATE INDEX car_plugin_descripcioid_fk_i ON car_plugin USING btree (descripcioi
 
 
 --
--- TOC entry 1972 (class 1259 OID 112720)
+-- TOC entry 1974 (class 1259 OID 112720)
 -- Name: car_plugin_nomid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -979,7 +1012,7 @@ CREATE INDEX car_plugin_nomid_fk_i ON car_plugin USING btree (nomid);
 
 
 --
--- TOC entry 1975 (class 1259 OID 112719)
+-- TOC entry 1977 (class 1259 OID 112719)
 -- Name: car_plugin_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -987,7 +1020,7 @@ CREATE INDEX car_plugin_pk_i ON car_plugin USING btree (pluginid);
 
 
 --
--- TOC entry 2021 (class 1259 OID 115021)
+-- TOC entry 2022 (class 1259 OID 115021)
 -- Name: car_pluginentitat_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -995,7 +1028,7 @@ CREATE INDEX car_pluginentitat_pk_i ON car_pluginentitat USING btree (pluginenti
 
 
 --
--- TOC entry 1967 (class 1259 OID 112722)
+-- TOC entry 1969 (class 1259 OID 112722)
 -- Name: car_propglob_entitatid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -1003,7 +1036,7 @@ CREATE INDEX car_propglob_entitatid_fk_i ON car_propietatglobal USING btree (ent
 
 
 --
--- TOC entry 1970 (class 1259 OID 112721)
+-- TOC entry 1972 (class 1259 OID 112721)
 -- Name: car_propietatglobal_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -1011,7 +1044,7 @@ CREATE INDEX car_propietatglobal_pk_i ON car_propietatglobal USING btree (propie
 
 
 --
--- TOC entry 1945 (class 1259 OID 112454)
+-- TOC entry 1946 (class 1259 OID 112454)
 -- Name: car_traduccio_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -1019,7 +1052,7 @@ CREATE INDEX car_traduccio_pk_i ON car_traduccio USING btree (traduccioid);
 
 
 --
--- TOC entry 1946 (class 1259 OID 112455)
+-- TOC entry 1947 (class 1259 OID 112455)
 -- Name: car_traducciomap_idiomaid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -1027,7 +1060,7 @@ CREATE INDEX car_traducciomap_idiomaid_fk_i ON car_traducciomap USING btree (idi
 
 
 --
--- TOC entry 1947 (class 1259 OID 112456)
+-- TOC entry 1948 (class 1259 OID 112456)
 -- Name: car_traducciomap_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -1035,7 +1068,7 @@ CREATE INDEX car_traducciomap_pk_i ON car_traducciomap USING btree (traducciomap
 
 
 --
--- TOC entry 1994 (class 1259 OID 114909)
+-- TOC entry 1996 (class 1259 OID 114909)
 -- Name: car_usuari_darreraentitat_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -1043,7 +1076,7 @@ CREATE INDEX car_usuari_darreraentitat_fk_i ON car_usuari USING btree (darreraen
 
 
 --
--- TOC entry 1995 (class 1259 OID 115020)
+-- TOC entry 1997 (class 1259 OID 115020)
 -- Name: car_usuari_idiomaid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -1051,7 +1084,7 @@ CREATE INDEX car_usuari_idiomaid_fk_i ON car_usuari USING btree (idiomaid);
 
 
 --
--- TOC entry 2000 (class 1259 OID 112723)
+-- TOC entry 2002 (class 1259 OID 112723)
 -- Name: car_usuari_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -1059,7 +1092,7 @@ CREATE INDEX car_usuari_pk_i ON car_usuari USING btree (usuariid);
 
 
 --
--- TOC entry 2005 (class 1259 OID 112724)
+-- TOC entry 2007 (class 1259 OID 112724)
 -- Name: car_usuarientitat_pk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -1067,7 +1100,7 @@ CREATE INDEX car_usuarientitat_pk_i ON car_usuarientitat USING btree (usuarienti
 
 
 --
--- TOC entry 2006 (class 1259 OID 112726)
+-- TOC entry 2008 (class 1259 OID 112726)
 -- Name: car_usuent_entitatid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -1075,7 +1108,7 @@ CREATE INDEX car_usuent_entitatid_fk_i ON car_usuarientitat USING btree (entitat
 
 
 --
--- TOC entry 2009 (class 1259 OID 112725)
+-- TOC entry 2011 (class 1259 OID 112725)
 -- Name: car_usuent_usuariid_fk_i; Type: INDEX; Schema: public; Owner: carpeta; Tablespace: 
 --
 
@@ -1083,7 +1116,7 @@ CREATE INDEX car_usuent_usuariid_fk_i ON car_usuarientitat USING btree (usuariid
 
 
 --
--- TOC entry 2040 (class 2606 OID 112699)
+-- TOC entry 2042 (class 2606 OID 112699)
 -- Name: car_acces_entitat_entitatid_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1092,16 +1125,7 @@ ALTER TABLE ONLY car_acces
 
 
 --
--- TOC entry 2045 (class 2606 OID 112689)
--- Name: car_audit_usuari_usu_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
---
-
-ALTER TABLE ONLY car_auditoria
-    ADD CONSTRAINT car_audit_usuari_usu_fk FOREIGN KEY (usuariid) REFERENCES car_usuari(usuariid);
-
-
---
--- TOC entry 2038 (class 2606 OID 112602)
+-- TOC entry 2040 (class 2606 OID 112602)
 -- Name: car_avis_entitat_ent_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1110,7 +1134,7 @@ ALTER TABLE ONLY car_avis
 
 
 --
--- TOC entry 2039 (class 2606 OID 123205)
+-- TOC entry 2041 (class 2606 OID 123205)
 -- Name: car_avis_plugin_pfront_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1119,7 +1143,7 @@ ALTER TABLE ONLY car_avis
 
 
 --
--- TOC entry 2037 (class 2606 OID 112597)
+-- TOC entry 2039 (class 2606 OID 112597)
 -- Name: car_avis_traduccio_desc_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1128,7 +1152,7 @@ ALTER TABLE ONLY car_avis
 
 
 --
--- TOC entry 2025 (class 2606 OID 112574)
+-- TOC entry 2026 (class 2606 OID 112574)
 -- Name: car_enllaz_entitat_ent_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1137,7 +1161,7 @@ ALTER TABLE ONLY car_enllaz
 
 
 --
--- TOC entry 2026 (class 2606 OID 123210)
+-- TOC entry 2027 (class 2606 OID 123210)
 -- Name: car_enllaz_fitxer_logo_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1146,7 +1170,7 @@ ALTER TABLE ONLY car_enllaz
 
 
 --
--- TOC entry 2023 (class 2606 OID 112518)
+-- TOC entry 2024 (class 2606 OID 112518)
 -- Name: car_enllaz_traduccio_nomid_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1155,7 +1179,7 @@ ALTER TABLE ONLY car_enllaz
 
 
 --
--- TOC entry 2024 (class 2606 OID 112523)
+-- TOC entry 2025 (class 2606 OID 112523)
 -- Name: car_enllaz_traduccio_urlid_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1164,7 +1188,7 @@ ALTER TABLE ONLY car_enllaz
 
 
 --
--- TOC entry 2027 (class 2606 OID 112528)
+-- TOC entry 2028 (class 2606 OID 112528)
 -- Name: car_entitat_fitxer_css_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1173,7 +1197,7 @@ ALTER TABLE ONLY car_entitat
 
 
 --
--- TOC entry 2032 (class 2606 OID 123232)
+-- TOC entry 2033 (class 2606 OID 123232)
 -- Name: car_entitat_fitxer_icon_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1182,7 +1206,7 @@ ALTER TABLE ONLY car_entitat
 
 
 --
--- TOC entry 2029 (class 2606 OID 123217)
+-- TOC entry 2030 (class 2606 OID 123217)
 -- Name: car_entitat_fitxer_lcb_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1191,7 +1215,7 @@ ALTER TABLE ONLY car_entitat
 
 
 --
--- TOC entry 2031 (class 2606 OID 123227)
+-- TOC entry 2032 (class 2606 OID 123227)
 -- Name: car_entitat_fitxer_llf_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1200,7 +1224,7 @@ ALTER TABLE ONLY car_entitat
 
 
 --
--- TOC entry 2030 (class 2606 OID 123222)
+-- TOC entry 2031 (class 2606 OID 123222)
 -- Name: car_entitat_fitxer_lpb_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1209,7 +1233,7 @@ ALTER TABLE ONLY car_entitat
 
 
 --
--- TOC entry 2033 (class 2606 OID 123237)
+-- TOC entry 2034 (class 2606 OID 123237)
 -- Name: car_entitat_plugin_login_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1218,7 +1242,16 @@ ALTER TABLE ONLY car_entitat
 
 
 --
--- TOC entry 2028 (class 2606 OID 112543)
+-- TOC entry 2035 (class 2606 OID 131474)
+-- Name: car_entitat_traduccio_log_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
+--
+
+ALTER TABLE ONLY car_entitat
+    ADD CONSTRAINT car_entitat_traduccio_log_fk FOREIGN KEY (logintextid) REFERENCES car_traduccio(traduccioid);
+
+
+--
+-- TOC entry 2029 (class 2606 OID 112543)
 -- Name: car_entitat_traduccio_nom_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1227,7 +1260,7 @@ ALTER TABLE ONLY car_entitat
 
 
 --
--- TOC entry 2046 (class 2606 OID 115010)
+-- TOC entry 2047 (class 2606 OID 115010)
 -- Name: car_plugent_entitat_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1236,7 +1269,7 @@ ALTER TABLE ONLY car_pluginentitat
 
 
 --
--- TOC entry 2047 (class 2606 OID 115015)
+-- TOC entry 2048 (class 2606 OID 115015)
 -- Name: car_plugent_plugin_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1245,7 +1278,7 @@ ALTER TABLE ONLY car_pluginentitat
 
 
 --
--- TOC entry 2036 (class 2606 OID 115024)
+-- TOC entry 2038 (class 2606 OID 115024)
 -- Name: car_plugin_traduccio_desc_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1254,7 +1287,7 @@ ALTER TABLE ONLY car_plugin
 
 
 --
--- TOC entry 2035 (class 2606 OID 112586)
+-- TOC entry 2037 (class 2606 OID 112586)
 -- Name: car_plugin_traduccio_nom_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1263,7 +1296,7 @@ ALTER TABLE ONLY car_plugin
 
 
 --
--- TOC entry 2034 (class 2606 OID 112568)
+-- TOC entry 2036 (class 2606 OID 112568)
 -- Name: car_propglob_entitat_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1272,7 +1305,7 @@ ALTER TABLE ONLY car_propietatglobal
 
 
 --
--- TOC entry 2022 (class 2606 OID 112457)
+-- TOC entry 2023 (class 2606 OID 112457)
 -- Name: car_traducmap_traduccio_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1281,7 +1314,7 @@ ALTER TABLE ONLY car_traducciomap
 
 
 --
--- TOC entry 2041 (class 2606 OID 114904)
+-- TOC entry 2043 (class 2606 OID 114904)
 -- Name: car_usuari_entitat_last_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1290,7 +1323,7 @@ ALTER TABLE ONLY car_usuari
 
 
 --
--- TOC entry 2042 (class 2606 OID 114973)
+-- TOC entry 2044 (class 2606 OID 114973)
 -- Name: car_usuari_idioma_idi_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1299,7 +1332,7 @@ ALTER TABLE ONLY car_usuari
 
 
 --
--- TOC entry 2044 (class 2606 OID 112676)
+-- TOC entry 2046 (class 2606 OID 112676)
 -- Name: car_usuent_entitat_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1308,7 +1341,7 @@ ALTER TABLE ONLY car_usuarientitat
 
 
 --
--- TOC entry 2043 (class 2606 OID 112671)
+-- TOC entry 2045 (class 2606 OID 112671)
 -- Name: car_usuent_usuari_fk; Type: FK CONSTRAINT; Schema: public; Owner: carpeta
 --
 
@@ -1317,7 +1350,7 @@ ALTER TABLE ONLY car_usuarientitat
 
 
 --
--- TOC entry 2161 (class 0 OID 0)
+-- TOC entry 2162 (class 0 OID 0)
 -- Dependencies: 5
 -- Name: public; Type: ACL; Schema: -; Owner: postgres
 --
@@ -1328,7 +1361,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2020-11-26 11:18:57
+-- Completed on 2020-12-22 14:12:35
 
 --
 -- PostgreSQL database dump complete

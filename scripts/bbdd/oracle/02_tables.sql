@@ -9,8 +9,10 @@
         nif varchar2(50 char),
         nivellseguretat varchar2(255 char),
         nom varchar2(255 char),
+        pluginid number(19,0),
         proveidoridentitat varchar2(255 char),
-        resultatautenticacio number(10,0)
+        resultatautenticacio number(10,0),
+        tipus number(10,0) not null
     );
 
     create table car_auditoria (
@@ -19,8 +21,8 @@
         entitatid number(19,0),
         pluginid number(19,0),
         tipus number(10,0) not null,
-        usuariclave varchar2(256 char),
-        usuariid number(19,0)
+        username varchar2(255 char),
+        usuariclave varchar2(256 char)
     );
 
     create table car_avis (
@@ -54,14 +56,18 @@
         entitatdescfront varchar2(4000 char) not null,
         fitxercss number(19,0),
         iconid number(19,0) not null,
+        logintextid number(19,0),
         logocapbackid number(19,0) not null,
         logolateralfrontid number(19,0) not null,
         logopeubackid number(19,0) not null,
         nomid number(19,0) not null,
         pluginloginid number(19,0),
         suportemail varchar2(255 char),
+        suportfaq varchar2(255 char),
         suporttelefon varchar2(255 char),
         suportweb varchar2(255 char),
+        suportautenticacio varchar2(255 char),
+        suportqssi varchar2(255 char),
         versio varchar2(50 char) not null,
         webentitat varchar2(255 char) not null
     );
