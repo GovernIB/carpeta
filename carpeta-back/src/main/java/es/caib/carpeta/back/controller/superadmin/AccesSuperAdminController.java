@@ -72,6 +72,10 @@ public class AccesSuperAdminController extends AccesController {
             accesFilterForm.setDeleteButtonVisible(false);
             accesFilterForm.setEditButtonVisible(false);
 
+            accesFilterForm.addGroupByField(AccesFields.TIPUS);
+            accesFilterForm.addGroupByField(AccesFields.ENTITATID);
+            accesFilterForm.addGroupByField(AccesFields.PLUGINID);
+
 
             OrderBy[] orderByDef = {new OrderBy(AccesFields.ENTITATID.javaName),new OrderBy(AccesFields.TIPUS.javaName),new OrderBy(AccesFields.DATADARRERACCES.javaName, OrderType.DESC)};
             accesFilterForm.setDefaultOrderBy(orderByDef);
