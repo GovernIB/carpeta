@@ -130,6 +130,16 @@ img:hover {
 }
 
 
+/* Notificacions */
+
+.notificacions .tituloMenu { color: #32814b; font-size: 1.5em; display: flow-root; }
+.notificacions .imagenMenu { font-size:200%; padding-bottom: 10px; color: #265d3c; }
+.notificacions .text { margin: 20px 0px; }
+.notificacions .boxGestio { max-width: 45%; }
+.notificacions .box-part { background: #EAEAEA; border-radius: 0; padding: 30px 10px;
+    margin: 20px 0px; border: thin outset; color: #333; }
+
+
 /* Canvis per React */
 .boton-menu {
     background-color: transparent;
