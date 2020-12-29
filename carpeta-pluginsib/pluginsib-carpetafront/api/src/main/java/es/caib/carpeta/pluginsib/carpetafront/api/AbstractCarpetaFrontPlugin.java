@@ -3,6 +3,14 @@ package es.caib.carpeta.pluginsib.carpetafront.api;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.IOUtils;
+
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
@@ -49,9 +57,9 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
 
         public final long startDate;
 
-        public InternalUserData(String name, String surname1, String surname2, String administrationID, 
+        public InternalUserData(String name, String surname1, String surname2, String administrationID,
                 String authenticationMethod, String qaa) {
-            super(name, surname1, surname2, administrationID,  authenticationMethod, qaa);
+            super(name, surname1, surname2, administrationID, authenticationMethod, qaa);
             this.startDate = System.currentTimeMillis();
         }
 
@@ -173,7 +181,7 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
 
     // XYZ TODO Passat a pare web
     public static final String WEBRESOURCE = "webresource";
-    
+
     public static final String WEBRESOURCECOMMON = "webresourcecommon";
 
     public static final String LOGORESOURCE = "logo";
@@ -181,6 +189,117 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
     @Override
     public boolean isReactComponent() {
         return false;
+    }
+
+    public abstract String getPropertyBase();
+
+    protected abstract FileInfo getResourceIcon(Locale locale);
+
+    /**
+     * Mètode que retorna la icona del plugin
+     * 
+     * @param locale
+     * @return
+     */
+    @Override
+    public final FileInfo getIcon(Locale locale) {
+
+        String logo = getProperty(getPropertyBase() + "logo");
+        FileInfo fileInfo;
+        try {
+
+            if (logo == null || logo.trim().length() == 0) {
+                
+                
+                fileInfo = getResourceIcon(locale);
+            } else {
+                logo = logo.trim();
+                if ("EMPTY".equals(logo)) {
+                    fileInfo = null;
+                } else if (logo.toLowerCase().startsWith("http")) {
+                    // URL
+                    fileInfo = downloadImagePNG(logo);
+                } else {
+                    // FILE
+                    fileInfo = imageFromFile(logo);
+                }
+
+            }
+
+        } catch (Exception e) {
+            log.error("Error llegint imatge " + logo + ": " + e.getMessage(), e);
+            fileInfo = null;
+        }
+        return fileInfo;
+    }
+
+    protected FileInfo getImageFromResource(Locale locale, String resourcePath, String mime) {
+        
+        FileInfo fileInfo;
+        
+        try {
+            
+        
+        
+        InputStream input;
+        
+        if (resourcePath == null) {
+            log.error("No s'ha definit getResourceLogoPNG() per aquest plugin " + this.getTitle(locale));
+            fileInfo = null;
+        } else {
+
+            // Agafa la icona del resource
+            input = this.getClass().getResourceAsStream(resourcePath);
+            if (input == null) {
+                fileInfo = null;
+            } else {
+                fileInfo = new FileInfo(resourcePath.replace('/', '_').replace('\\', '_'), mime,
+                        IOUtils.toByteArray(input));
+            }
+
+        }
+        
+        } catch (Exception e) {
+            log.error("Error llegint imatge " + resourcePath + " des de resources: " + e.getMessage(), e);
+            fileInfo = null;
+        }
+        return fileInfo;
+    }
+
+    protected FileInfo imageFromFile(String sourceUrl) throws Exception {
+        File f = new File(sourceUrl);
+
+        InputStream imageReader = new FileInputStream(f);
+        ByteArrayOutputStream imageWriter = new ByteArrayOutputStream();
+        try {
+            int readByte;
+
+            while ((readByte = imageReader.read()) != -1) {
+                imageWriter.write(readByte);
+            }
+        } finally {
+            imageReader.close();
+        }
+
+        return new FileInfo(f.getName(), "image/png", imageWriter.toByteArray());
+
+    }
+
+    protected FileInfo downloadImagePNG(String sourceUrl) throws Exception {
+        URL imageUrl = new URL(sourceUrl);
+
+        InputStream imageReader = new BufferedInputStream(imageUrl.openStream());
+        ByteArrayOutputStream imageWriter = new ByteArrayOutputStream();
+        {
+            int readByte;
+
+            while ((readByte = imageReader.read()) != -1) {
+                imageWriter.write(readByte);
+            }
+        }
+
+        return new FileInfo(sourceUrl.replace(':', '_').replace('/', '_'), "image/png", imageWriter.toByteArray());
+
     }
 
 }

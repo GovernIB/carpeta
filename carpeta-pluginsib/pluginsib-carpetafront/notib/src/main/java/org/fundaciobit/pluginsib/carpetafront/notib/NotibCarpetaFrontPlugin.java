@@ -9,10 +9,6 @@ import org.apache.commons.io.IOUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.Duration;
-import javax.xml.datatype.XMLGregorianCalendar;
-import javax.xml.namespace.QName;
 
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
@@ -21,17 +17,12 @@ import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
-import java.util.TimeZone;
 
 /**
  * @author anadal
@@ -325,27 +316,14 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
      * @return
      */
     @Override
-    public FileInfo getIcon(Locale locale) {
+    public FileInfo getResourceIcon(Locale locale) {
 
-        InputStream input;
+        return getImageFromResource(locale, "/logo/logo-notib.png", "image/png");
+    }
 
-        final String logoName = "logo-notib.png";
-        FileInfo fileInfo = null;
-        String resource = "/" + LOGORESOURCE; // resource a on es troba l'icona
-        try {
-
-            // Agafa la icona del resource
-            input = this.getClass().getResourceAsStream(resource + "/" + logoName);
-            if (input != null) {
-                fileInfo = new FileInfo(logoName, "image/png", IOUtils.toByteArray(input));
-            }
-
-        } catch (Exception e) {
-            log.error("Error llegint recurs : " + resource + "/" + logoName + ": " + e.getMessage(), e);
-
-        }
-        return fileInfo;
-
+    @Override
+    public String getPropertyBase() {
+        return NOTIB_PROPERTY_BASE;
     }
 
     private Sistra1ServiceImpl sistra1ServiceImpl = null;
