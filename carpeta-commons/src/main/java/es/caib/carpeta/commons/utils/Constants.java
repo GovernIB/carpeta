@@ -165,56 +165,6 @@ public interface Constants {
     };
 
 
-    /* -------- TIPO DOCUMENTO ---------- */
-
-
-
-    String MIME_JPG  = "image/jpeg";
-    String MIME_XML1  = "text/xml";
-    String MIME_XML2  = "application/xml";
-    String MIME_PDF  = "application/pdf";
-    String MIME_PNG  = "image/png";
-    String MIME_RTF  = "text/rtf";
-    String MIME_RTF2  = "application/rtf";
-    String MIME_SVG  = "image/svg+xml";
-    String MIME_TIFF = "image/tiff";
-    String MIME_TXT  = "text/plain";
-    String MIME_ODT  = "application/vnd.oasis.opendocument.text";
-    String MIME_XLSX  = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-    String MIME_PPTX  = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
-    String MIME_ODP  = "application/vnd.oasis.opendocument.presentation";
-    String MIME_ODS  = "application/vnd.oasis.opendocument.spreadsheet";
-    String MIME_ODG  = "application/vnd.oasis.opendocument.graphics";
-    String MIME_DOCX  = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
-    String MIME_HTML  = "text/html";
-    String MIME_DEFAULT  = "application/octet-stream";
-
-
-
-
-
-    Map<String, String> TEXTO_REDUCIDO_BY_TIPO_MIME = new HashMap<String, String>() {{
-        put(MIME_JPG, "JPG");
-        put(MIME_XML1, "XML");
-        put(MIME_XML2, "XML");
-        put(MIME_PDF, "PDF");
-        put(MIME_PNG, "PNG");
-        put(MIME_RTF, "RTF");
-        put(MIME_RTF2, "RTF2");
-        put(MIME_SVG, "SVG");
-        put(MIME_TIFF, "TIFF");
-        put(MIME_TXT, "TXT");
-        put(MIME_ODT, "ODT");
-        put(MIME_XLSX, "XLSX(EXCEL)");
-        put(MIME_PPTX, "PPTX");
-        put(MIME_ODP, "ODP");
-        put(MIME_ODS, "ODS");
-        put(MIME_ODG, "ODG");
-        put(MIME_DOCX, "DOCX");
-        put(MIME_HTML, "HTML");
-        put(MIME_DEFAULT, "OCTET-STREAM");
-    }};
-
 
     /* Tipus Accessos */
     public static final int TIPUS_ACCES_LOGIN_AUTENTICAT = 1;

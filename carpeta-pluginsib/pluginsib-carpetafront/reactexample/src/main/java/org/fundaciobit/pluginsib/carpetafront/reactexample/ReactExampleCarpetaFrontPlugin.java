@@ -24,7 +24,7 @@ import java.util.Properties;
  */
 public class ReactExampleCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
-    //public static final String REACTEXAMPLE_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "reactexample.";
+    public static final String REACTEXAMPLE_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "reactexample.";
 
     /**
      *
@@ -122,25 +122,15 @@ public class ReactExampleCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
      * @return
      */
     @Override
-    public FileInfo getIcon(Locale locale) {
-
-        InputStream input;
-
-        FileInfo fileInfo = null;
-        try {
-
-            // Agafa la icona del resource
-            input = this.getClass().getResourceAsStream("/logo/logo-reactexample.png");
-            if (input != null) {
-                fileInfo = new FileInfo("logo-reactexample.png", "image/png", IOUtils.toByteArray(input));
-            }
-
-        } catch (Exception e) {
-            log.error("Error llegint recurs : /logo/logo-reactexample.png: " + e.getMessage(), e);
-
-        }
-        return fileInfo;
-
+    public FileInfo getResourceIcon(Locale locale) {
+    
+        return getImageFromResource(locale,"/logo/logo-reactexample.png", "image/png");
+    
+    }
+    
+    @Override
+    public String getPropertyBase() {
+        return REACTEXAMPLE_PROPERTY_BASE;
     }
 
     // --------------------------------------------------------------------------------------

@@ -74,8 +74,7 @@ public abstract class AbstractPluginSuperAdminController extends PluginControlle
             Set<Field<?>> hiddenFields = new HashSet<Field<?>>(Arrays.asList(PluginFields.ALL_PLUGIN_FIELDS));
 
             hiddenFields.remove(PluginFields.NOMID);
-            hiddenFields.remove(PluginFields.DESCRIPCIOID);
-            hiddenFields.remove(PluginFields.CLASSE);
+            hiddenFields.remove(PluginFields.DESCRIPCIOID);            
             hiddenFields.remove(PluginFields.ACTIU);
 
             pluginFilterForm.setHiddenFields(hiddenFields);

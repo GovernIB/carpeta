@@ -24,7 +24,7 @@ import java.util.Properties;
  */
 public class DadesPersonalsReactCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
-    //public static final String REACTEXAMPLE_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "dadespersonalsreact.";
+    public static final String DADESPERSONALS_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "dadespersonalsreact.";
 
     /**
      *
@@ -123,26 +123,15 @@ public class DadesPersonalsReactCarpetaFrontPlugin extends AbstractCarpetaFrontP
      * @return
      */
     @Override
-    public FileInfo getIcon(Locale locale) {
-
-        InputStream input;
-
-        FileInfo fileInfo = null;
-        try {
-
-            // Agafa la icona del resource
-            input = this.getClass().getResourceAsStream("/logo/logo-dadespersonalsreact.png");
-            if (input != null) {
-                fileInfo = new FileInfo("logo-dadespersonalsreact.png", "image/png", IOUtils.toByteArray(input));
-            }
-
-        } catch (Exception e) {
-            log.error("Error llegint recurs : /logo/logo-dadespersonalsreact.png: " + e.getMessage(), e);
-
-        }
-        return fileInfo;
-
+    public FileInfo getResourceIcon(Locale locale) {
+        return getImageFromResource(locale, "/logo/logo-dadespersonalsreact.png", "image/png");
     }
+    
+    @Override
+    public String getPropertyBase() {
+        return DADESPERSONALS_PROPERTY_BASE;
+    }
+    
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------

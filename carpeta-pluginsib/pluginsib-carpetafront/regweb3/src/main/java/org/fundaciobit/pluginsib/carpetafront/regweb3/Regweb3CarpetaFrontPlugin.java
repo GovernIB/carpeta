@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.BindingProvider;
 
-import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
@@ -36,6 +35,49 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     public static final String REGWEB3_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "regweb3.";
 
+    
+    
+    public static final String MIME_JPG  = "image/jpeg";
+    public static final String MIME_XML1  = "text/xml";
+    public static final String MIME_XML2  = "application/xml";
+    public static final String MIME_PDF  = "application/pdf";
+    public static final String MIME_PNG  = "image/png";
+    public static final String MIME_RTF  = "text/rtf";
+    public static final String MIME_RTF2  = "application/rtf";
+    public static final String MIME_SVG  = "image/svg+xml";
+    public static final String MIME_TIFF = "image/tiff";
+    public static final String MIME_TXT  = "text/plain";
+    public static final String MIME_ODT  = "application/vnd.oasis.opendocument.text";
+    public static final String MIME_XLSX  = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+    public static final String MIME_PPTX  = "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+    public static final String MIME_ODP  = "application/vnd.oasis.opendocument.presentation";
+    public static final String MIME_ODS  = "application/vnd.oasis.opendocument.spreadsheet";
+    public static final String MIME_ODG  = "application/vnd.oasis.opendocument.graphics";
+    public static final String MIME_DOCX  = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+    public static final String MIME_HTML  = "text/html";
+    public static final String MIME_DEFAULT  = "application/octet-stream";
+    
+    public static final Map<String, String> TEXTO_REDUCIDO_BY_TIPO_MIME = new HashMap<String, String>() {{
+        put(MIME_JPG, "JPG");
+        put(MIME_XML1, "XML");
+        put(MIME_XML2, "XML");
+        put(MIME_PDF, "PDF");
+        put(MIME_PNG, "PNG");
+        put(MIME_RTF, "RTF");
+        put(MIME_RTF2, "RTF2");
+        put(MIME_SVG, "SVG");
+        put(MIME_TIFF, "TIFF");
+        put(MIME_TXT, "TXT");
+        put(MIME_ODT, "ODT");
+        put(MIME_XLSX, "XLSX(EXCEL)");
+        put(MIME_PPTX, "PPTX");
+        put(MIME_ODP, "ODP");
+        put(MIME_ODS, "ODS");
+        put(MIME_ODG, "ODG");
+        put(MIME_DOCX, "DOCX");
+        put(MIME_HTML, "HTML");
+        put(MIME_DEFAULT, "OCTET-STREAM");
+    }};
 
     /**
      *
@@ -369,7 +411,7 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
 
 
-        map.put("tipusMime", Constants.TEXTO_REDUCIDO_BY_TIPO_MIME);
+        map.put("tipusMime", TEXTO_REDUCIDO_BY_TIPO_MIME);
 
         String[] traduccions = {"registro.titulo.detalle", "registro.entrada", "registro.fecha", "registro.numero",
            "registro.oficina", "registro.destinatario", "registro.tipo.doc", "registro.extracto", "carpeta.idioma",
@@ -470,26 +512,15 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
      * @return
      */
     @Override
-    public  FileInfo getIcon(Locale locale){
+    public  FileInfo getResourceIcon(Locale locale)  {
 
-        InputStream input;
+        return getImageFromResource(locale, "/logo/logo-regweb3.png", "image/png");
 
-        FileInfo fileInfo = null;
-        String resource = "/" + LOGORESOURCE ; //resource a on es troba l'icona
-        try {
-
-            //Agafa la icona del resource
-            input = this.getClass().getResourceAsStream(resource+"/logo-regweb3.png");
-            if(input != null) {
-                fileInfo =  new  FileInfo("logo-regweb3.png","image/png", IOUtils.toByteArray(input));
-            }
-
-        }  catch (Exception e) {
-            log.error("Error llegint recurs : "+resource+"/logo-regweb3.png" + e.getMessage(), e);
-
-        }
-        return fileInfo;
-
+    }
+    
+    @Override
+    public String getPropertyBase() {
+        return REGWEB3_PROPERTY_BASE;
     }
 
 
