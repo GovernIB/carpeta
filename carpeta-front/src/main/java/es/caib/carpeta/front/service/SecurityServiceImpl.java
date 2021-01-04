@@ -2,128 +2,55 @@ package es.caib.carpeta.front.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.support.BasicAuthorizationInterceptor;
-import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import es.caib.carpeta.commons.utils.Configuracio;
+import org.springframework.stereotype.Service;
+
 import es.caib.carpeta.commons.utils.UsuarioClave;
-import es.caib.loginib.rest.api.v1.RDatosAutenticacion;
-import es.caib.loginib.rest.api.v1.RLoginParams;
-import es.caib.loginib.rest.api.v1.RLogoutParams;
+import es.caib.carpeta.front.pluginlogin.LoginInfo;
+import es.caib.carpeta.front.pluginlogin.PluginLoginLoginIB;
 
 @Service
 public class SecurityServiceImpl implements SecurityService {
 
     private static final Logger log = LoggerFactory.getLogger(SecurityServiceImpl.class);
 
-    private String METODES_AUTENTICACIO = Configuracio.getLoginIBMethodAuth();
-    private String CODI_ENTITAT = Configuracio.getLoginIBEntidad();
-    private String APLICACIO_CODI = Configuracio.getLoginIBAplicacion();
-    /*
-     * XYZ ZZZ private String URL_CALLBACK_LOGIN =
-     * Configuracio.getLoginIBUrlCallbackLogin(); private String URL_CALLBACK_ERROR
-     * = Configuracio.getLoginIBUrlCallbackError(); private String
-     * URL_CALLBACK_LOGOUT = Configuracio.getLoginIBUrlCallbackLogout(); private
-     * String IDIOMA = Configuracio.getLoginIBIdioma();
-     */
-    private String NIVELL_QAA = Configuracio.getLoginIBNivelQAA();
-    private String LOGINIB_USER = Configuracio.getLoginIBUser();
-    private String LOGINIB_PASS = Configuracio.getLoginIBPassword();
-    private String LOGINIB_URL = Configuracio.getLoginIBUrl();
+    protected PluginLoginLoginIB pluginLogin = new PluginLoginLoginIB();
 
     @Override
-    public String iniciarSesionAutentificacion(String URL_CALLBACK_LOGIN, String URL_CALLBACK_ERROR, String IDIOMA) {
-        final RLoginParams param = new RLoginParams();
-        param.setAplicacion(APLICACIO_CODI);
-        param.setEntidad(CODI_ENTITAT);
-        param.setUrlCallback(URL_CALLBACK_LOGIN);
-        param.setUrlCallbackError(URL_CALLBACK_ERROR);
-        param.setIdioma(IDIOMA);
-        param.setForzarAutenticacion(false);
-        param.setQaa(Integer.parseInt(NIVELL_QAA));
-        param.setMetodosAutenticacion(METODES_AUTENTICACIO);
-        param.setAplicacion("CARPETA");
+    public String iniciarSesionAutentificacion(String urlCallBackLoginOk, String urCallBackLoginError,
+            String language) throws Exception {
 
-        final RestTemplate restTemplate = getLoginIbRestTemplate();
+        return pluginLogin.startAuthentication(urlCallBackLoginOk, urCallBackLoginError, language);
 
-        final HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        final HttpEntity<RLoginParams> peticion = new HttpEntity<>(param, headers);
-        final ResponseEntity<String> responseTramite = restTemplate.postForEntity(LOGINIB_URL + "/login", peticion,
-                String.class);
-
-        log.info("response: " + responseTramite.toString());
-        log.info("URL: " + responseTramite.getBody());
-
-        return responseTramite.getBody();
     }
 
     @Override
     public UsuarioClave validarTicketAutentificacion(final String ticket) throws Exception {
 
-        
-        try {
-            final RestTemplate restTemplate = getLoginIbRestTemplate();
-    
-            final RDatosAutenticacion datosAutenticacion = restTemplate.getForObject(LOGINIB_URL + "/ticket/" + ticket,
-                    RDatosAutenticacion.class);
-    
-            final UsuarioClave usuarioClave = new UsuarioClave();
-    
-            usuarioClave.setNombre(datosAutenticacion.getNombre());
-            usuarioClave.setApellido1(datosAutenticacion.getApellido1());
-            usuarioClave.setApellido2(datosAutenticacion.getApellido2());
-            usuarioClave.setNif(datosAutenticacion.getNif());
-            usuarioClave.setMetodoAutentificacion(datosAutenticacion.getMetodoAutenticacion());
-            usuarioClave.setQaa(datosAutenticacion.getQaa());
-            
-            return usuarioClave;
-        } catch(Exception e) {
-            // XYZ ZZZ ZZZ
-            log.error(" ERROR DESCONEGUT en validarTicketAutentificacion: " + e.getMessage(), e);
-            throw e;
-        }
+        LoginInfo loginInfo = pluginLogin.validateAuthenticationTicket(ticket);
 
-        
+        UsuarioClave usuarioClave = new UsuarioClave();
+        usuarioClave.setNombre(loginInfo.getName());
+        usuarioClave.setApellido1(loginInfo.getSurname1());
+        usuarioClave.setApellido2(loginInfo.getSurname2());
+        usuarioClave.setNif(loginInfo.getAdministrationID());
+        usuarioClave.setMetodoAutentificacion(loginInfo.getAuthenticationMethod());
+        usuarioClave.setQaa(loginInfo.getQaa());
+        usuarioClave.setProveedorDeIdentidad(loginInfo.getIdentityProvider()); // clave
+
+        return usuarioClave;
+
     }
 
     @Override
-    public String iniciarSesionLogout(String URL_CALLBACK_LOGOUT, String IDIOMA) throws Exception {
+    public String iniciarSesionLogout(String urlCallBackLogout, String language) throws Exception {
 
-        final RestTemplate restTemplate = getLoginIbRestTemplate();
+        String urlLogout = pluginLogin.logout(urlCallBackLogout, language);
 
-        final RLogoutParams param = new RLogoutParams();
-        param.setAplicacion(APLICACIO_CODI);
-        param.setEntidad(CODI_ENTITAT);
-        param.setUrlCallback(URL_CALLBACK_LOGOUT);
-        param.setIdioma(IDIOMA);
-        param.setAplicacion("CARPETA");
-        final HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        log.info("Url LOGOUT: " + urlLogout);
 
-        final HttpEntity<RLogoutParams> request = new HttpEntity<>(param, headers);
-        final ResponseEntity<String> responseTramite = restTemplate.postForEntity(LOGINIB_URL + "/logout", request,
-                String.class);
+        return urlLogout;
 
-        String url = responseTramite.getBody();
-
-        return url;
     }
 
-    /**
-     *
-     * @return
-     */
-    private RestTemplate getLoginIbRestTemplate() {
-
-        final RestTemplate restTemplate = new RestTemplate();
-        restTemplate.getInterceptors().add(new BasicAuthorizationInterceptor(LOGINIB_USER, LOGINIB_PASS));
-
-        return restTemplate;
-    }
 }

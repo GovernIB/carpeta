@@ -2,6 +2,7 @@ package es.caib.carpeta.commons.utils;
 
 /**
  * XYZ ZZZ ZZZ MOURE A FRONT???
+ * 
  * @author anadal
  *
  */
@@ -13,6 +14,7 @@ public class UsuarioClave {
     private String nif;
     private String metodoAutentificacion;
     private String qaa;
+    private String proveedorDeIdentidad;
 
     public String getNombre() {
         return nombre;
@@ -62,13 +64,21 @@ public class UsuarioClave {
         this.qaa = qaa;
     }
 
-    public String getNombreCompleto(){
+    public String getProveedorDeIdentidad() {
+        return proveedorDeIdentidad;
+    }
+
+    public void setProveedorDeIdentidad(String proveedorDeIdentidad) {
+        this.proveedorDeIdentidad = proveedorDeIdentidad;
+    }
+
+    public String getNombreCompleto() {
 
         String nombreCompleto = "";
 
-        if(StringUtils.isNotEmpty(getApellido1()) && StringUtils.isNotEmpty(getApellido2())){
-            nombreCompleto += getApellido1() + " " + getApellido2()+", ";
-        }else if(StringUtils.isNotEmpty(getApellido1())){
+        if (StringUtils.isNotEmpty(getApellido1()) && StringUtils.isNotEmpty(getApellido2())) {
+            nombreCompleto += getApellido1() + " " + getApellido2() + ", ";
+        } else if (StringUtils.isNotEmpty(getApellido1())) {
             nombreCompleto += getApellido1() + ", ";
         }
 

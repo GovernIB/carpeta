@@ -1,9 +1,6 @@
 package es.caib.carpeta.commons.utils;
 
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Constants emprades dins tota l'aplicació.
  *

@@ -91,6 +91,15 @@
         </dependency>
 
         <!-- LoginIB -->
+        
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>2.33</version>
+        </dependency>
+        
+      
+        
         <dependency>
             <groupId>es.caib.loginib</groupId>
             <artifactId>loginib-rest-api</artifactId>
