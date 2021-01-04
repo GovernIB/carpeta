@@ -80,9 +80,16 @@ a:hover{
 footer .logoPeu img.logoAplicacio { width:150px; height:auto; margin-bottom:10px; }
 
 /* Página inici */
-.buitContainer { width: 500px; margin: 150px auto; }
+.buitContainer { width: 80%; margin: 80px auto; }
 .buitContainer img { padding:10px; margin:15px; background-color:#32814B; } 
-.buitContainer h3, .buitContainer p { text-align:center; }
+.buitContainer h3 { text-align:center; margin-bottom:40px; }
+.buitContainer > p { text-align:center; }
+.buitContainer .card p { font-size: 0.85rem; }
+.buitContainer .card { background-color:#efefef; height: 225px;}
+.buitContainer .row { margin-bottom:25px; }
+.buitContainer h5 { font-weight:600; }
+.buitContainer ul { list-style:none; }
+.buitContainer ul li:before { content: ">"; margin-right: 5px; margin-left: -15px; }
 
 /* FI Estils generals */
 
