@@ -59,7 +59,7 @@
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.auditoria.tipus,__theForm.listOfValuesForTipus)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TIPUS)}" >
-          <form:select id="auditoria_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-4" path="auditoria.tipus">
+          <form:select id="auditoria_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-8" path="auditoria.tipus">
             <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
@@ -86,7 +86,7 @@
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.auditoria.username,__theForm.listOfValuesForUsername)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USERNAME)}" >
-          <form:select id="auditoria_username"  onchange="if(typeof onChangeUsername == 'function') {  onChangeUsername(this); };"  cssClass="form-control col-md-4" path="auditoria.username">
+          <form:select id="auditoria_username"  onchange="if(typeof onChangeUsername == 'function') {  onChangeUsername(this); };"  cssClass="form-control col-md-8" path="auditoria.username">
           <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
           <form:option value="" ></form:option>
             <c:forEach items="${__theForm.listOfValuesForUsername}" var="tmp">
@@ -110,7 +110,7 @@
             </td>
             <td>
             <form:errors path="auditoria.usuariClave" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USUARICLAVE)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USUARICLAVE)? ' uneditable-input' : ''}"  maxlength="256" path="auditoria.usuariClave"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USUARICLAVE)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USUARICLAVE)? ' uneditable-input' : ''}"  style="" maxlength="256" path="auditoria.usuariClave"   />
 
            </td>
         </tr>
@@ -133,7 +133,7 @@
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.auditoria.entitatID,__theForm.listOfValuesForEntitatID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,AuditoriaFields.ENTITATID)}" >
-          <form:select id="auditoria_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-4" path="auditoria.entitatID">
+          <form:select id="auditoria_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-8" path="auditoria.entitatID">
           <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
           <form:option value="" ></form:option>
             <c:forEach items="${__theForm.listOfValuesForEntitatID}" var="tmp">
@@ -162,7 +162,7 @@
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.auditoria.pluginID,__theForm.listOfValuesForPluginID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,AuditoriaFields.PLUGINID)}" >
-          <form:select id="auditoria_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="form-control col-md-4" path="auditoria.pluginID">
+          <form:select id="auditoria_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="form-control col-md-8" path="auditoria.pluginID">
           <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
           <form:option value="" ></form:option>
             <c:forEach items="${__theForm.listOfValuesForPluginID}" var="tmp">

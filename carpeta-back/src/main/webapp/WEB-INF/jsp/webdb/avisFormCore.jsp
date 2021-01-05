@@ -14,7 +14,7 @@
             </td>
             <td>
        <form:errors path="avis.descripcio" cssClass="errorField alert alert-danger" />
-       <div class="row-fluid  col-md-6">
+       <div class="row-fluid  col-md-8">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
              <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
             <li class="nav-item ">
@@ -27,7 +27,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_descripcio_${idioma.idiomaID}">
                <form:errors path="avis.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="avis.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,AvisFields.DESCRIPCIOID)? ' uneditable-input' : ''}" maxlength="4000" />
+               <form:input path="avis.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,AvisFields.DESCRIPCIOID)? ' uneditable-input' : ''}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -54,7 +54,7 @@
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.avis.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,AvisFields.ENTITATID)}" >
-          <form:select id="avis_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-4" path="avis.entitatID">
+          <form:select id="avis_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-8" path="avis.entitatID">
           <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
           <form:option value="" ></form:option>
             <c:forEach items="${__theForm.listOfEntitatForEntitatID}" var="tmp">
@@ -163,7 +163,7 @@
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.avis.tipus,__theForm.listOfValuesForTipus)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,AvisFields.TIPUS)}" >
-          <form:select id="avis_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-4" path="avis.tipus">
+          <form:select id="avis_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-8" path="avis.tipus">
             <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
@@ -190,7 +190,7 @@
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.avis.gravetat,__theForm.listOfValuesForGravetat)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,AvisFields.GRAVETAT)}" >
-          <form:select id="avis_gravetat"  onchange="if(typeof onChangeGravetat == 'function') {  onChangeGravetat(this); };"  cssClass="form-control col-md-4" path="avis.gravetat">
+          <form:select id="avis_gravetat"  onchange="if(typeof onChangeGravetat == 'function') {  onChangeGravetat(this); };"  cssClass="form-control col-md-8" path="avis.gravetat">
             <c:forEach items="${__theForm.listOfValuesForGravetat}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
@@ -217,7 +217,7 @@
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.avis.pluginFrontID,__theForm.listOfPluginForPluginFrontID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,AvisFields.PLUGINFRONTID)}" >
-          <form:select id="avis_pluginFrontID"  onchange="if(typeof onChangePluginFrontID == 'function') {  onChangePluginFrontID(this); };"  cssClass="form-control col-md-4" path="avis.pluginFrontID">
+          <form:select id="avis_pluginFrontID"  onchange="if(typeof onChangePluginFrontID == 'function') {  onChangePluginFrontID(this); };"  cssClass="form-control col-md-8" path="avis.pluginFrontID">
           <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
           <form:option value="" ></form:option>
             <c:forEach items="${__theForm.listOfPluginForPluginFrontID}" var="tmp">

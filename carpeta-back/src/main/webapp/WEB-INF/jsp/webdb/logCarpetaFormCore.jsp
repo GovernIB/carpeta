@@ -14,15 +14,15 @@
             </td>
             <td>
               <form:errors path="logCarpeta.descripcio" cssClass="errorField alert alert-danger" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;" cssClass="form-control col-md-8" readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.DESCRIPCIO)? 'true' : 'false'}" path="logCarpeta.descripcio"  />
-              <div class="btn-group" style="vertical-align: top;">
-              <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span></button>
-              <ul class="dropdown-menu">
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.descripcio'); ta.wrap='off';" >No Wrap</a></li>
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.descripcio'); ta.wrap='soft';">Soft Wrap</a></li>
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.descripcio'); ta.wrap='hard';">Hard Wrap</a></li>
-              </ul>
-              </div>
+              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.DESCRIPCIO)? 'true' : 'false'}" path="logCarpeta.descripcio"  />
+      <div class="dropdown" style="vertical-align:top;display:inline;">
+        <button id="dropdownMenuButton_descripcio" class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left:0px;"><span class="caret"></span></button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_descripcio">
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.descripcio'); ta.wrap='off';" >No Wrap</a>
+          <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.descripcio'); ta.wrap='soft';">Soft Wrap</a>
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.descripcio'); ta.wrap='hard';">Hard Wrap</a>
+        </div>
+      </div>
            </td>
         </tr>
         </c:if>
@@ -44,7 +44,7 @@
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.logCarpeta.tipus,__theForm.listOfValuesForTipus)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.TIPUS)}" >
-          <form:select id="logCarpeta_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-4" path="logCarpeta.tipus">
+          <form:select id="logCarpeta_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-8" path="logCarpeta.tipus">
             <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
@@ -71,7 +71,7 @@
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.logCarpeta.estat,__theForm.listOfValuesForEstat)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ESTAT)}" >
-          <form:select id="logCarpeta_estat"  onchange="if(typeof onChangeEstat == 'function') {  onChangeEstat(this); };"  cssClass="form-control col-md-4" path="logCarpeta.estat">
+          <form:select id="logCarpeta_estat"  onchange="if(typeof onChangeEstat == 'function') {  onChangeEstat(this); };"  cssClass="form-control col-md-8" path="logCarpeta.estat">
             <c:forEach items="${__theForm.listOfValuesForEstat}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
@@ -98,7 +98,7 @@
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.logCarpeta.pluginID,__theForm.listOfValuesForPluginID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.PLUGINID)}" >
-          <form:select id="logCarpeta_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="form-control col-md-4" path="logCarpeta.pluginID">
+          <form:select id="logCarpeta_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="form-control col-md-8" path="logCarpeta.pluginID">
           <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
           <form:option value="" ></form:option>
             <c:forEach items="${__theForm.listOfValuesForPluginID}" var="tmp">
@@ -122,7 +122,7 @@
             </td>
             <td>
             <form:errors path="logCarpeta.entitatCodi" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ENTITATCODI)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ENTITATCODI)? ' uneditable-input' : ''}"  maxlength="9" path="logCarpeta.entitatCodi"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ENTITATCODI)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ENTITATCODI)? ' uneditable-input' : ''}"  style="" maxlength="9" path="logCarpeta.entitatCodi"   />
 
            </td>
         </tr>
@@ -140,7 +140,7 @@
             </td>
             <td>
             <form:errors path="logCarpeta.temps" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.TEMPS)? 'true' : 'false'}" cssClass="col-md-6 form-control ${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.TEMPS)? ' uneditable-input' : ''}"   path="logCarpeta.temps"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.TEMPS)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.TEMPS)? ' uneditable-input' : ''}"  style=""  path="logCarpeta.temps"   />
 
            </td>
         </tr>
@@ -198,15 +198,15 @@
             </td>
             <td>
               <form:errors path="logCarpeta.peticio" cssClass="errorField alert alert-danger" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;" cssClass="form-control col-md-8" readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.PETICIO)? 'true' : 'false'}" path="logCarpeta.peticio"  />
-              <div class="btn-group" style="vertical-align: top;">
-              <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span></button>
-              <ul class="dropdown-menu">
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.peticio'); ta.wrap='off';" >No Wrap</a></li>
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.peticio'); ta.wrap='soft';">Soft Wrap</a></li>
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.peticio'); ta.wrap='hard';">Hard Wrap</a></li>
-              </ul>
-              </div>
+              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.PETICIO)? 'true' : 'false'}" path="logCarpeta.peticio"  />
+      <div class="dropdown" style="vertical-align:top;display:inline;">
+        <button id="dropdownMenuButton_peticio" class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left:0px;"><span class="caret"></span></button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_peticio">
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.peticio'); ta.wrap='off';" >No Wrap</a>
+          <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.peticio'); ta.wrap='soft';">Soft Wrap</a>
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.peticio'); ta.wrap='hard';">Hard Wrap</a>
+        </div>
+      </div>
            </td>
         </tr>
         </c:if>
@@ -223,15 +223,15 @@
             </td>
             <td>
               <form:errors path="logCarpeta.error" cssClass="errorField alert alert-danger" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;" cssClass="form-control col-md-8" readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ERROR)? 'true' : 'false'}" path="logCarpeta.error"  />
-              <div class="btn-group" style="vertical-align: top;">
-              <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span></button>
-              <ul class="dropdown-menu">
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.error'); ta.wrap='off';" >No Wrap</a></li>
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.error'); ta.wrap='soft';">Soft Wrap</a></li>
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.error'); ta.wrap='hard';">Hard Wrap</a></li>
-              </ul>
-              </div>
+              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ERROR)? 'true' : 'false'}" path="logCarpeta.error"  />
+      <div class="dropdown" style="vertical-align:top;display:inline;">
+        <button id="dropdownMenuButton_error" class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left:0px;"><span class="caret"></span></button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_error">
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.error'); ta.wrap='off';" >No Wrap</a>
+          <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.error'); ta.wrap='soft';">Soft Wrap</a>
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.error'); ta.wrap='hard';">Hard Wrap</a>
+        </div>
+      </div>
            </td>
         </tr>
         </c:if>
@@ -248,15 +248,15 @@
             </td>
             <td>
               <form:errors path="logCarpeta.excepcio" cssClass="errorField alert alert-danger" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;" cssClass="form-control col-md-8" readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.EXCEPCIO)? 'true' : 'false'}" path="logCarpeta.excepcio"  />
-              <div class="btn-group" style="vertical-align: top;">
-              <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">&nbsp;<span class="caret"></span></button>
-              <ul class="dropdown-menu">
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.excepcio'); ta.wrap='off';" >No Wrap</a></li>
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.excepcio'); ta.wrap='soft';">Soft Wrap</a></li>
-                <li><a href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.excepcio'); ta.wrap='hard';">Hard Wrap</a></li>
-              </ul>
-              </div>
+              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.EXCEPCIO)? 'true' : 'false'}" path="logCarpeta.excepcio"  />
+      <div class="dropdown" style="vertical-align:top;display:inline;">
+        <button id="dropdownMenuButton_excepcio" class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left:0px;"><span class="caret"></span></button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_excepcio">
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.excepcio'); ta.wrap='off';" >No Wrap</a>
+          <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.excepcio'); ta.wrap='soft';">Soft Wrap</a>
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.excepcio'); ta.wrap='hard';">Hard Wrap</a>
+        </div>
+      </div>
            </td>
         </tr>
         </c:if>

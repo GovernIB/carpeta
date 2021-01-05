@@ -19,7 +19,7 @@
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.pluginEntitat.pluginID,__theForm.listOfPluginForPluginID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.PLUGINID)}" >
-          <form:select id="pluginEntitat_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="form-control col-md-4" path="pluginEntitat.pluginID">
+          <form:select id="pluginEntitat_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="form-control col-md-8" path="pluginEntitat.pluginID">
             <c:forEach items="${__theForm.listOfPluginForPluginID}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
@@ -46,7 +46,7 @@
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.pluginEntitat.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ENTITATID)}" >
-          <form:select id="pluginEntitat_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-4" path="pluginEntitat.entitatID">
+          <form:select id="pluginEntitat_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-8" path="pluginEntitat.entitatID">
             <c:forEach items="${__theForm.listOfEntitatForEntitatID}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
@@ -69,7 +69,7 @@
             <td>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ACTIU)}" >
               <form:errors path="pluginEntitat.actiu" cssClass="errorField alert alert-danger" />
-              <form:checkbox cssClass="form-control" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ACTIU)? 'false' : 'true'}" path="pluginEntitat.actiu" />
+              <form:checkbox cssClass="form-control" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ACTIU)? 'false' : 'true'}" path="pluginEntitat.actiu"  style="width:1%"/>
           </c:if>
           <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ACTIU)}" >
                 <fmt:message key="genapp.checkbox.${__theForm.pluginEntitat.actiu}" />
