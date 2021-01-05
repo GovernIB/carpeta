@@ -127,7 +127,6 @@ body {
 }
 .well-white {
 	background-color:#FFF;
-/*	-moz-box-shadow: 0 0 5px #888; XYZ ZZZ */
 	-webkit-box-shadow: 0 0 5px#888;
 	box-shadow: 0 0 5px #888;
 	margin: 0 10px;

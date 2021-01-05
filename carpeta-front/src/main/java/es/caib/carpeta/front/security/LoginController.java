@@ -123,17 +123,14 @@ public class LoginController {
 
             String baseURL = (String) request.getSession().getAttribute(SESSION_RETURN_URL_POST_LOGIN);
 
-            log.info(" XXX XYZ  BASE URL LOGIN => " + baseURL);
-
             String url_callback_login = baseURL + "/redirigirLogin";
             String url_callback_error = baseURL + "/errorLogin";
-            // es.caib.carpeta.loginib.url_callback_logout=http://localhost:8080/carpetafront/salir
-            String IDIOMA = LocaleContextHolder.getLocale().getLanguage();
+            String language = LocaleContextHolder.getLocale().getLanguage();
 
             String url;
             try {
                 
-              url = securityService.iniciarSesionAutentificacion(url_callback_login, url_callback_error, IDIOMA);
+              url = securityService.iniciarSesionAutentificacion(url_callback_login, url_callback_error, language);
             
             } catch (Exception e) {
                 log.error("Error Iniciant la sessió de seguretat amb Cl@ve: " + e.getMessage(), e);

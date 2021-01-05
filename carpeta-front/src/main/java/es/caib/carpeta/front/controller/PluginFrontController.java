@@ -69,10 +69,6 @@ public class PluginFrontController extends CommonFrontController {
 
     protected final Log log = LogFactory.getLog(getClass());
 
-    // XYZ ZZZ Llegir de constantds
-    //public static final String PUBLIC_CONTEXTWEB = "/public/carpetafrontmodule";
-
-
 
     @RequestMapping(value = {"", "/" }, method = RequestMethod.GET)
     public ModelAndView showAllPlugins(HttpServletRequest request, HttpServletResponse response) throws I18NException {
@@ -184,18 +180,13 @@ public class PluginFrontController extends CommonFrontController {
 
 
 
-    // TODO XYZ ZZZ
     private String startPublicSignatureProcess(HttpServletRequest request, HttpServletResponse response,
                                                String pluginID, String administrationID, String baseFront, UsuarioClave usuarioClave)
             throws Exception, I18NException {
 
         String urlToShowPluginPage = null;
-        long temps = System.currentTimeMillis();
 
-        try{
-
-            //response.addHeader("X-Frame-Options", "SAMEORIGIN");
-
+        try {
 
             String context = AbstractCarpetaFrontModuleController.PUBLIC_CONTEXTWEB;
 

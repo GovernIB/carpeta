@@ -19,10 +19,6 @@ import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 @RequestMapping(value = AbstractCarpetaFrontModuleController.PLUGINFRONT_PRIVATE_CONTEXTWEB)
 public class CarpetaFrontModuleSuperAdminController extends AbstractCarpetaFrontModuleController {
 
-    @Override
-    public boolean isPublic() {
-        return false;
-    }
 
     @Override
     public UserData getUserData(String administrationID) {

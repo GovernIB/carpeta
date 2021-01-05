@@ -1,6 +1,6 @@
 package es.caib.carpeta.front.config;
 
-import es.caib.carpeta.front.CarpetaBusinessConfig;
+
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 
@@ -8,7 +8,7 @@ public class CarpetaFrontAppInitilizer extends AbstractAnnotationConfigDispatche
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[] { CarpetaBusinessConfig.class, CarpetaSecurityConfig.class };
+        return new Class<?>[] { CarpetaSecurityConfig.class };
     }
 
     @Override

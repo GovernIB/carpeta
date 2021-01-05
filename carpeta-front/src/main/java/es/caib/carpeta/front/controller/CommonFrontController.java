@@ -60,7 +60,7 @@ public abstract class CommonFrontController {
     }
 
     public void processException(Throwable e, HttpServletResponse response) {
-        /// XYZ ZZZ
+
         // XYZ ZZZ Afegir log de BBDD d'error al front
 
         log.error(e);
@@ -68,7 +68,7 @@ public abstract class CommonFrontController {
         try {
             response.sendRedirect("/error");
         } catch (IOException e1) {
-            log.error("Erro desconegut realitzant un sendRedirect: " + e1.getMessage(), e1);
+            log.error("Error desconegut realitzant un sendRedirect: " + e1.getMessage(), e1);
         }
 
     }

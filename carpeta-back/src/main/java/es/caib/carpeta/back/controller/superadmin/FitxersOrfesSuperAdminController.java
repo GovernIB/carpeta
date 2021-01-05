@@ -12,6 +12,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -120,9 +121,8 @@ public class FitxersOrfesSuperAdminController extends FitxerController{
 		  // Fitxers que existeixen a BBDD pero no fisicament
 		  for (Long fID : fitxersBBDD) {
 		      if (!fitxersFisics.containsKey(fID)) {
-		        // TODO XYZ ZZZ TRADUIR
-		        HtmlUtils.saveMessageError(request, "Fitxer amb ID="
-		            + fID + " existeix en BBDD pero no existeix fisicament !!!" );
+		        // Fitxer amb ID={0} existeix en BBDD pero no existeix fisicament !!!
+		        HtmlUtils.saveMessageError(request, I18NUtils.tradueix("error.fitxer.noexisteix", String.valueOf(fID)));
 		      }
 		  }
 		  

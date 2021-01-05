@@ -3,6 +3,7 @@ package es.caib.carpeta.back.controller.adminentitat;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
+import org.fundaciobit.genapp.common.query.SubQuery;
 import org.fundaciobit.genapp.common.query.Where;
 
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import es.caib.carpeta.back.controller.webdb.PluginEntitatController;
 import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.jpa.PluginEntitatJPA;
 import es.caib.carpeta.logic.AuditoriaLogicaLocal;
+import es.caib.carpeta.model.entity.PluginEntitat;
 import es.caib.carpeta.model.fields.*;
 
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_AFEGIR_PLUGIN;
@@ -64,11 +66,12 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
     public List<StringKeyValue> getReferenceListForPluginID(HttpServletRequest request, ModelAndView mav,
             PluginEntitatForm pluginEntitatForm, Where where) throws I18NException {
 
-        // TODO XYZ ZZZ Optimirzar-ho amb una subquery
-        List<Long> pluginsActuals = pluginEntitatEjb.executeQuery(PluginEntitatFields.PLUGINID,
+        SubQuery<PluginEntitat, Long> subquery = pluginEntitatEjb.getSubQuery(PluginEntitatFields.PLUGINID,
                 PluginEntitatFields.ENTITATID.equal(LoginInfo.getInstance().getEntitatID()));
+        
+        
 
-        return super.getReferenceListForPluginID(request, mav, PluginFields.PLUGINID.notIn(pluginsActuals));
+        return super.getReferenceListForPluginID(request, mav, PluginFields.PLUGINID.notIn(subquery));
     }
 
     @Override
@@ -76,8 +79,7 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
             HttpServletRequest request) throws I18NException {
         PluginEntitatFilterForm pluginEntitatFilterForm = super.getPluginEntitatFilterForm(pagina, mav, request);
 
-        // XYZ ZZZ ZZZ
-        // Descomentar això pluginEntitatFilterForm.addHiddenField(ENTITATID);
+        pluginEntitatFilterForm.addHiddenField(ENTITATID);
 
         return pluginEntitatFilterForm;
     }
@@ -87,8 +89,7 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
             ModelAndView mav) throws I18NException {
         PluginEntitatForm pluginEntitatForm = super.getPluginEntitatForm(_jpa, __isView, request, mav);
 
-        // XYZ ZZZZ TODO fer hidden
-        pluginEntitatForm.addReadOnlyField(ENTITATID);
+        pluginEntitatForm.addHiddenField(ENTITATID);
 
         if (pluginEntitatForm.isNou()) {
             pluginEntitatForm.getPluginEntitat().setEntitatID(LoginInfo.getInstance().getEntitatID());

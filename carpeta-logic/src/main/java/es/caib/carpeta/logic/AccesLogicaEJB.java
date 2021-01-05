@@ -37,10 +37,11 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaLocal {
         accesJPA.setIp(ipAddress);
         accesJPA.setNif(usuarioClave.getNif());
         accesJPA.setDataDarrerAcces(dataDarrerAcces);
+        // XYZ ZZZ   Això està be ????
         accesJPA.setResultatAutenticacio(Integer.parseInt(usuarioClave.getQaa()));
+        // XYZ ZZZ   Això està be ????
         accesJPA.setNivellSeguretat(usuarioClave.getMetodoAutentificacion());
-        accesJPA.setProveidorIdentitat("Clave");// TODO este valor no viene informado por LoginIB, tendriamos que hablar
-                                                // con loginIb a ver si pueden enviarnoslo.
+        accesJPA.setProveidorIdentitat(usuarioClave.getProveedorDeIdentidad());
         accesJPA.setIdioma(idioma);
 
         accesJPA.setDataDarrerAcces(new Timestamp(new Date().getTime()));

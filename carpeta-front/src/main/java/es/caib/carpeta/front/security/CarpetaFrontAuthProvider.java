@@ -63,19 +63,10 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
         log.info("Password: " + passwd);
 
         UsuarioClave usuarioClave = null;
-        long temps = System.currentTimeMillis();
 
         try {
 
             usuarioClave = securityService.validarTicketAutentificacion(passwd);
-
-
-            //Cream acces
-            // XYZ ZZZ   Necessitam el codi de l'entitat !!!!!!
-            
-//            ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-//            return attr.getRequest().getSession(true)
-            
             
             String codiEntitat = sesionHttp.getEntitat();
             EntitatJPA entitat = utilsEjb.getEntitat(codiEntitat);
@@ -87,20 +78,17 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
             auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ENTRADA_FRONT_AUTENTICAT,null,null,usuarioClave.getNif(),null);
 
         } catch (Exception ie){
-            log.error("S'ha produit un error : " + ie.getMessage());
+            log.error("S'ha produit un error : " + ie.getMessage(), ie);
         }
 
-        log.info("Dentro de CarpetaAuthProvider 111");
 
         UsuarioAutenticado usuarioAutenticado =  new UsuarioAutenticado();
         usuarioAutenticado.setUsuarioClave(usuarioClave);
         
-        log.info("Dentro de CarpetaAuthProvider 2222");
 
         UsernamePasswordAuthenticationToken upat;
         upat = new UsernamePasswordAuthenticationToken(usuarioAutenticado, authentication.getCredentials(), usuarioAutenticado.getAuthorities());
         
-        log.info("Dentro de CarpetaAuthProvider 3333");
         
         return upat;
     }

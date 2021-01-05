@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-
 /**
  * 
  * @author anadal
@@ -18,38 +17,23 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/superadmin/")
 public class SuperAdminController {
 
-  
-  @RequestMapping(value = "/buit")
-  public ModelAndView option1(HttpSession session,
-      HttpServletRequest request, HttpServletResponse response)
-      throws Exception {
-    
-    ModelAndView mav = new ModelAndView("buitSuperAdmin");
-    return mav;
-    
-  }
-  
-  @RequestMapping(value = "/systemproperties")
-  public ModelAndView systemProperties(HttpSession session,
-	      HttpServletRequest request, HttpServletResponse response)
-	      throws Exception {
-	    
-	    ModelAndView mav = new ModelAndView("systemproperties");
-	    return mav;
-	    
-	  }
-  
-  
-  // TODO XYZ ZZZ Esborrar
-  @RequestMapping(value = "/option2")
-  public ModelAndView option2(HttpSession session,
-      HttpServletRequest request, HttpServletResponse response)
-      throws Exception {
-    
-    ModelAndView mav = new ModelAndView("option2Admin");
-    mav.addObject("optionNumber", "OPCIÓ ADMIN -2-");
-    return mav;
-  }
-  
-  
+    @RequestMapping(value = "/buit")
+    public ModelAndView option1(HttpSession session, HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+
+        ModelAndView mav = new ModelAndView("buitSuperAdmin");
+        return mav;
+
+    }
+
+    @RequestMapping(value = "/systemproperties")
+    public ModelAndView systemProperties(HttpSession session, HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+
+        ModelAndView mav = new ModelAndView("systemproperties");
+        return mav;
+
+    }
+
+
 }

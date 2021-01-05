@@ -24,7 +24,7 @@ public class CarpetaPluginsManager implements Constants {
 
 	public static IUserInformationPlugin userInformationPlugin = null;
 
-	public static IUserInformationPlugin getUserInformationPluginInstance() throws EJBException {  // XYZ ZZZ I18NException {
+	public static IUserInformationPlugin getUserInformationPluginInstance() throws EJBException { 
 		if (userInformationPlugin == null) {
 		    
 		    Properties props = Configuracio.getFilesProperties();
@@ -35,7 +35,7 @@ public class CarpetaPluginsManager implements Constants {
 			    pluginInstance = PluginsManager.instancePluginByClassName(className, CARPETA_PROPERTY_BASE, props);
 			    
 			    if (pluginInstance == null) {
-			      log.error("XYZ ZZZ ZZZ  pluginInstance RETORNAT és null ");
+			      log.error("pluginInstance RETORNAT és null ");
 			    }
 			    
             } catch (Exception th) {
@@ -46,7 +46,7 @@ public class CarpetaPluginsManager implements Constants {
             }
 			
 			if (pluginInstance == null) {
-				throw new EJBException("plugin.donotinstantiateplugin");// XYZ ZZZ  I18NException("plugin.donotinstantiateplugin", new I18NArgumentCode("plugin.userinfo"));
+				throw new EJBException("plugin.donotinstantiateplugin");
 			}
 			userInformationPlugin = (IUserInformationPlugin) pluginInstance;
 		}

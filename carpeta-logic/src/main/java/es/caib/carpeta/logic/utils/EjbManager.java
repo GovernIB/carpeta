@@ -35,9 +35,7 @@ public final class EjbManager {
 	protected static EntitatLocal entitatLogicaEjb;
 
 	protected static LogCarpetaLogicaLocal logCarpetaLogicaEjb;
-/* XYZ ZZZ ZZZ
-	protected static IdiomaLocal idiomaEjb;
-    */
+
 	protected static PropietatGlobalLocal propietatLogicaEjb;
 	
 	protected static AvisLogicaLocal avisLogicaEjb;
@@ -104,19 +102,6 @@ public final class EjbManager {
 		return logCarpetaLogicaEjb;
 	}
 	
-/* XYZ ZZZ ZZZ
-	public static IdiomaLocal getIdiomaEJB() throws I18NException {
-
-		if (idiomaEjb == null) {
-			try {
-				idiomaEjb = (IdiomaLocal) new InitialContext().lookup("portafib/IdiomaEJB/local");
-			} catch (Throwable e) {
-				throwNewI18NException(e, "IdiomaEJB");
-			}
-		}
-		return idiomaEjb;
-	}
-	*/
 
 	public static PropietatGlobalLocal getPropietatLogicaEJB() throws I18NException {
 

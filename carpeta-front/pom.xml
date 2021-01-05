@@ -91,6 +91,15 @@
         </dependency>
 
         <!-- LoginIB -->
+        
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>2.33</version>
+        </dependency>
+        
+      
+        
         <dependency>
             <groupId>es.caib.loginib</groupId>
             <artifactId>loginib-rest-api</artifactId>
@@ -127,6 +136,13 @@
             <artifactId>genapp-core</artifactId>
             <version>${genapp.version}</version>
             <scope>provided</scope>
+        </dependency>
+        
+        <!-- Soluciona error de java.lang.OutOfMemoryError: Metaspace / PermGen space  -->
+        <dependency>
+          <groupId>se.jiderhamn.classloader-leak-prevention</groupId>
+          <artifactId>classloader-leak-prevention-servlet</artifactId>
+          <version>2.7.0</version>
         </dependency>
         
 
