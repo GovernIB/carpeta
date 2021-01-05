@@ -100,7 +100,6 @@ public class PluginLoginLoginIB {
 
             return loginInfo;
         } catch (Exception e) {
-            // XYZ ZZZ ZZZ
             log.error(" ERROR DESCONEGUT en validateAuthenticationTicket: " + e.getMessage(), e);
             throw e;
         }

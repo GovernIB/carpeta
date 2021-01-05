@@ -40,9 +40,6 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
     protected static Logger log = Logger.getLogger(AbstractCarpetaFrontModuleController.class);
 
-    public static final String PLUGINFRONT_PRIVATE_CONTEXTWEB = "/common/carpetafrontmodule";
-
-    // XYZ ZZZ moure a Constants
     public static final String PUBLIC_CONTEXTWEB = "/public/carpetafrontmodule";
 
     public static final String SESSION_URL_BASE = "SESSION_URL_BASE";
@@ -119,7 +116,7 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
     public abstract UserData getUserData(String administrationID);
 
     private String getRelativeBaseServlet() {
-        return (isPublic() ? "/public" : "/common") + "/carpetafrontservlet";
+        return "/public/carpetafrontservlet";
     }
 
     @RequestMapping(value = "/error")
@@ -146,8 +143,8 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
     protected void processServlet(HttpServletRequest request, HttpServletResponse response, boolean isGet)
             throws ServletException, IOException {
 
-        // XYZ ZZZ
-        final boolean debug = true; // log.isDebugEnabled();
+
+        final boolean debug = log.isDebugEnabled();
 
         if (debug) {
             log.debug(AbstractCarpetaFrontPlugin.servletRequestInfoToStr(request));
@@ -188,10 +185,6 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
             log.info(" query = " + query);
         }
 
-        // XYZ ZZZ ZZZ S'ha de collir de transacció
-        // Amb això no agafa be el locale
-        // Locale locale = LocaleContextHolder.getLocale();
-
         // Així si que agafa be l'idioma del front
         Locale locale = Locale.getDefault();
 
@@ -202,8 +195,6 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         }
 
     }
-
-    public abstract boolean isPublic();
 
     /**
      * 
@@ -260,8 +251,10 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         String relativeRequestPluginBasePath = getRelativeRequestPluginBasePath(request, getRelativeBaseServlet(),
                 pluginID, administrationIDEncripted);
 
-        log.info("XYZ ZZZ absoluteRequestPluginBasePath => " + absoluteRequestPluginBasePath);
-        log.info("XYZ ZZZ relativeRequestPluginBasePath => " + relativeRequestPluginBasePath);
+        if (debug) {
+          log.debug("absoluteRequestPluginBasePath => " + absoluteRequestPluginBasePath);
+          log.debug("relativeRequestPluginBasePath => " + relativeRequestPluginBasePath);
+        }
 
         carpetaFrontPlugin.requestCarpetaFront(absoluteRequestPluginBasePath, relativeRequestPluginBasePath, query,
                 request, response, administrationID, administrationIDEncripted, locale, isGet);
@@ -278,7 +271,6 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
         String urlFinal = processError(request, pluginID, msg, th);
 
-        // XYZ ZZZ Segons sigui public o privat
 
         ModelAndView mav = new ModelAndView(new RedirectView("/superadmin/pluginfront/list", true));
         // request.getSession().setAttribute("URL_FINAL", urlError);
@@ -313,39 +305,27 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         String urlFinal;
 
         log.error(msg, th);
-        // XYZ ZZZ HtmlUtils.saveMessageError(request, msg);
         urlFinal = getRelativePortaFIBBase(request);
 
         return urlFinal;
     }
 
-    /**
-     * 
-     * @param request
-     * @param view
-     * @param signaturesSet
-     * @return
-     * @throws I18NException
-     */
-    public static ModelAndView startPrivateSignatureProcess(HttpServletRequest request, HttpServletResponse response,
-            String view, long pluginID, String administrationID, String urlBase) throws I18NException {
-        return startSignatureProcess(request, response, view, pluginID, administrationID, urlBase, false);
-    }
+
 
     public static ModelAndView startPublicSignatureProcess(HttpServletRequest request, HttpServletResponse response,
             String view, long pluginID, String administrationID, String urlBase) throws I18NException {
-        return startSignatureProcess(request, response, view, pluginID, administrationID, urlBase, true);
+        return startSignatureProcess(request, response, view, pluginID, administrationID, urlBase);
     }
 
     private static ModelAndView startSignatureProcess(HttpServletRequest request, HttpServletResponse response,
-            String view, long pluginID, String administrationID, String urlBase, boolean isPublic)
+            String view, long pluginID, String administrationID, String urlBase)
             throws I18NException {
 
         // response.addHeader("X-Frame-Options", "SAMEORIGIN");
 
         request.getSession().setAttribute(SESSION_URL_BASE, urlBase);
 
-        String context = isPublic ? PUBLIC_CONTEXTWEB : PLUGINFRONT_PRIVATE_CONTEXTWEB;
+        String context = PUBLIC_CONTEXTWEB;
 
         String administrationIDEncriptat = HibernateFileUtil.encryptString(administrationID);
 

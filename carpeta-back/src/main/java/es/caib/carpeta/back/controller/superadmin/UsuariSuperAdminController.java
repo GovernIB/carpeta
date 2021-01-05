@@ -74,8 +74,8 @@ public class UsuariSuperAdminController extends UsuariController {
         String username = request.getParameter("username");
 
         if (username == null || username.trim().length() == 0) {
-
-            HtmlUtils.saveMessageError(request, "XYZ ZZZ Ha de introduir un username");
+            // Ha d'introduir un username
+            HtmlUtils.saveMessageError(request, I18NUtils.tradueix("usuari.avis.falta"));
 
         } else {
 
@@ -93,8 +93,6 @@ public class UsuariSuperAdminController extends UsuariController {
 
                 } else {
 
-                    // XYZ ZZZ ZZZ ZZZ TODO
-                    //persona = usuariPersonaLogicaEjb.getUserInfoFromUserInformation(username);
                     persona = PluginUserInformationUtils.getUserInfoFromUserInformation(username);
 
                     if (persona == null) {

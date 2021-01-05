@@ -4,10 +4,6 @@
        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
 http://xmlns.jcp.org/xml/ns/javaee/beans_2_0.xsd" bean-discovery-mode="all" version="2.0">
 
-    <!-- Tots els interceptors i decorators s'han de llistar explicitament dins els beans XYZ ZZZ
-    <interceptors>
-        <class>es.caib.carpeta.ejb.interceptor.LoggerInterceptor</class>
-    </interceptors>
-     -->
+    <!-- Tots els interceptors i decorators s'han de llistar explicitament dins els beans  -->
 
 </beans>

@@ -10,7 +10,6 @@
     
     <!-- CSS -->
     <link href="<c:url value="/css/styles.css"/>" rel="stylesheet">
-    <%-- XYZ ZZZ   --%>
     <link href="<c:url value="/css/default.css"/>" rel="stylesheet">
    
     <link href="<c:url value="/css/genapp.css"/>" rel="stylesheet"> 
@@ -37,26 +36,13 @@
     <%-- https://fontawesome.com/icons?d=gallery&m=free --%>
     <script src="<c:url value="/js/fontawesome-all.js"/>"></script>
 
-<%-- XYZ ZZZ 
-    <!-- Bootstrap FileUpload JS -->
-    <script src="<c:url value="/js/bootstrap-fileupload.js"/>"></script>
-    --%>
-
      
     <!-- Bootstrap DateTimePicker JS -->
     <script src="<c:url value="/js/datetimepicker/moment-with-locales.js"/>"></script>
     <script src="<c:url value="/js/datetimepicker/tempusdominus-bootstrap-4.js"/>"></script>
-    <%-- XYZ ZZZ ZZZ
-    <c:if test="${not empty onlylang}">
-    <script src="<c:url value="/js/datepicker/bootstrap-datetimepicker.${onlylang}.js"/>"></script>
-    </c:if>
-    --%>
-
 
     <!-- Bootstrap TREE JS -->
     <script src="<c:url value="/js/bootstrap-tree.js"/>"></script>
-
-
        
     <!-- TinyMCE -->
     <script type="text/javascript">

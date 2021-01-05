@@ -1,7 +1,6 @@
 package es.caib.carpeta.commons.utils;
 
 /**
- * XYZ ZZZ ZZZ MOURE A FRONT???
  * 
  * @author anadal
  *

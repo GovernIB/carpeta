@@ -35,9 +35,6 @@ public class PluginUserInformationUtils {
 
     public static UsuariJPA getUserInfoFromUserInformation(String username) throws javax.ejb.EJBException {
 
-        log.info(" XYZ ZZZ  PRE CarpetaPluginsManager.getUserInformationPluginInstance()");
-
-        log.info("\nXXXXXXXXXXXXXXXXXXX  Configuracio.isCAIB() => " + Configuracio.isCAIB());
         UserInfo info;
         if (Configuracio.isCAIB()) {
 
@@ -76,31 +73,13 @@ public class PluginUserInformationUtils {
 
             }
 
-            /*
-             * KeyCloakCaibUserInformationPlugin plugin; plugin = new
-             * KeyCloakCaibUserInformationPlugin(Constants.CARPETA_PROPERTY_BASE,
-             * Configuracio.getFilesProperties());
-             * 
-             * 
-             * 
-             * log.
-             * info("\n\n XYZ ZZZ  ================ ENTRA PLUGIN CAIB KEYCLOAK ============ \n\n"
-             * ); info = null; try { log.info(" -- 1 ---"); ServletRequestAttributes sra =
-             * (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-             * info = plugin.getUserInfoByUserName(username, sra); } catch (Exception e) {
-             * log.error("Error intentant obtenir informaciód de l'usuari " + username +
-             * ": " + e.getMessage(), e); } finally {
-             * log.info("\n\n XYZ ZZZ  ----------------- SURT PLUGIN CAIB KEYCLOAK (" + info
-             * + ") ---------------- \n\n"); }
-             * 
-             */
 
         } else {
 
             IUserInformationPlugin plugin = es.caib.carpeta.back.utils.CarpetaPluginsManager
                     .getUserInformationPluginInstance();
 
-            log.info("XYZ ZZZ ZZZ UserInformationPlugin => " + plugin);
+            log.info("UserInformationPlugin => " + plugin);
 
             try {
                 info = plugin.getUserInfoByUserName(username);
@@ -124,8 +103,7 @@ public class PluginUserInformationUtils {
     // @Override
     protected static UsuariJPA userInfo2UsuariJPA(UserInfo info) {
         UsuariJPA persona;
-        // XYZ ZZZ
-        // persona.setIdiomaID(Configuracio.getDefaultLanguage());
+
         String nom, llinatge1, llinatge2;
         {
             nom = info.getName();
@@ -184,7 +162,7 @@ public class PluginUserInformationUtils {
 
     protected static UserInfo userRepresentationToUserInfo(AccessToken token) throws Exception {
 
-        // XYZ ZZZ
+
         final String KEYCLOAKCAIB = Constants.CARPETA_PROPERTY_BASE + "pluginsib.userinformation.keycloakcaib.";
         final String MAPPING_PROPERTY = KEYCLOAKCAIB + "mapping.";
         final String ISDEBUG_PROPERTY = KEYCLOAKCAIB + "debug";
@@ -204,7 +182,7 @@ public class PluginUserInformationUtils {
             log.error("--------------------------------");
             log.error("resourceAccessRoles:");
 
-            // XYZ ZZZ MAPPING
+            // MAPPING
 
             Map<String, AccessToken.Access> resourceAccess = token.getResourceAccess();
             for (String key : resourceAccess.keySet()) {

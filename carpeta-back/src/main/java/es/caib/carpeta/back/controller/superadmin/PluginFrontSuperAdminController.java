@@ -5,7 +5,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
-
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -103,7 +103,8 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
           PluginFilterForm filterForm) throws Exception, I18NException {
        
        if (!pluginCarpetaFrontEjb.deleteOfCache(pluginID)) {
-           HtmlUtils.saveMessageError(request, "XYZ ZZZ No s'ha pogut esborrar la instància de la cache o no n´hi havia cap.");
+           // plugin.avis.cache=No s´ha pogut esborrar la instància de la cache o no n´hi havia cap.
+           HtmlUtils.saveMessageError(request, I18NUtils.tradueix("plugin.avis.cache"));
        };
 
        return "redirect:" + getContextWeb() + "/list";

@@ -133,7 +133,8 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
 
         } catch (Throwable e) {
-            log.debug(" XYZ ZZZ ZZZ S'ha produit un error consultant la informació de login actual: " + e.getMessage());
+            // OK
+            // Si és llança un error significa que ja hi ha una sessió oberta 
         }
 
         final boolean isDebug = log.isDebugEnabled();
@@ -143,67 +144,21 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
         boolean containsRoleAdEn = false;
         boolean containsRoleSuper = false;
         Collection<GrantedAuthority> seyconAuthorities;
-        /* XYZ ZZZ
-        if (Configuracio.isCAIB()) 
-        
-        try {
-            
-            log.error("\n\n PARXE CAIB per OBTENIR ROLES \n\n");
-            
-            ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-            if (sra == null || sra.getRequest() == null) {
-                String msg = "ROLES ServletRequestAttributes o HttpServletRequest val null ";
-                log.error(msg);
-                throw new LoginException(msg);
-            } else {
-                HttpServletRequest request = sra.getRequest();
-
-                // https://logindes.caib.es/auth
-
-                RefreshableKeycloakSecurityContext context = (RefreshableKeycloakSecurityContext) request
-                        .getAttribute(KeycloakSecurityContext.class.getName());
-
-                if (context == null) {
-                    String msg = "ROLES RefreshableKeycloakSecurityContext val null ";
-                    log.error(msg);
-                    throw new LoginException(msg);
-                } else {
-                    AccessToken token = context.getToken();
-                    
-                    Map<String, AccessToken.Access> resourceAccess = token.getResourceAccess();
-                    for (String key : resourceAccess.keySet()) {
-                        log.error("RRRRRRRRRRRRRRRRRRR " + key + " = " + resourceAccess.get(key).getRoles());
-                    }
-                    
-                    seyconAuthorities = new HashSet<GrantedAuthority>();
-                    seyconAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-                    seyconAuthorities.add(new SimpleGrantedAuthority("ROLE_SUPER"));
-                }
-            }
-        
-            
-            
-            
-        } catch(Throwable th) {
-            log.error ("KEYCLOAK CAIB NO HA ANAT BE: " + th.getMessage(), th);
-        }
-        
-        
-      */ {
+        {
         
         
             seyconAuthorities = user.getAuthorities();
 
     
             if (seyconAuthorities.size() == 0) {
-                log.info(" =======  XYZ ZZZ NO TE CAP ROL =========== ");
+                log.info(" ======= NO TE CAP ROL =========== ");
     
             } else {
     
                 for (GrantedAuthority grantedAuthority : seyconAuthorities) {
                     String rol = grantedAuthority.getAuthority();
     
-                    log.info("XYZ ZZZ ZZZ Rol SEYCON : " + rol);
+                    log.info("Rol SEYCON : " + rol);
     
                     if (Constants.ROLE_ADMIN.equals(rol)) {
                         containsRoleAdEn = true;
@@ -409,26 +364,14 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
             EntitatJPA entitat = usuariEntitat.getEntitat();
 
             if (entitat == null) {
-                // XYZ ZZZ ZZZ
-//        log.info("Configuracio.getDefaultEntity() = ]" + PropietatGlobalUtil.getDefaultEntity() + "[");
-//        log.info("ROLES = ]" + Arrays.toString(seyconAuthorities.toArray())+ "[");
-//        log.warn("Entitat val null");
-                continue;
+               log.warn("Entitat val null");
+               continue;
             }
 
             Long entitatID = entitat.getEntitatID();
             if (isDebug) {
                 log.debug("--------------- Entitat " + entitatID);
             }
-
-            // Check deshabilitada
-            // XYZ ZZZ ZZZ
-            /*
-             * if (!entitat.isActiva()) { log.warn("L'entitat " + entitat.getNom() +
-             * " esta deshabilitada."); continue; } if (!usuariEntitat.isActiu()) {
-             * log.warn("L'entitat " + entitat.getNom() +
-             * " esta deshabilitatda per l'usuari " + usuariPersona.getId()); continue; }
-             */
 
             // Per si no n'hi ha cap per defecte
             if (entitatPredeterminada == null) {
@@ -440,22 +383,11 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                 Set<GrantedAuthority> rolescarpeta = new TreeSet<GrantedAuthority>(GRANTEDAUTHORITYCOMPARATOR);
                 rolescarpeta.addAll(seyconAuthorities);
 
-                // XYZ ZZZ ZZZ
-                /*
-                 * if (usuariEntitat.isAden()) { rolescarpeta.add(new
-                 * SimpleGrantedAuthority(Constants.CAR_ADEN)); }
-                 */
-
                 rolesPerEntitat.put(entitatID, rolescarpeta);
             } else {
                 log.debug("No te el role seycon CAR_ADMIN");
                 rolesPerEntitat.put(entitatID, new HashSet<GrantedAuthority>());
             }
-            // Entitat per defecte
-            // XYZ ZZZ ZZZ
-//      if (usuariEntitat.isPredeterminat()) {
-//        entitatPredeterminada = entitat;
-//      }
 
             // Entitats
             entitats.put(entitatID, usuariEntitat.getEntitat());
@@ -464,9 +396,9 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
             usuariEntitatPerEntitatID.put(entitatID, usuariEntitat);
         }
 
-        log.info(" XYZ ZZZ  entitats.size()  => " + entitats.size());
-        log.info(" XYZ ZZZ  containsRoleSuper  => " + containsRoleSuper);
-        log.info(" XYZ ZZZ  !containsRoleSuper => " + !containsRoleSuper);
+        log.info(" entitats.size()  => " + entitats.size());
+        log.info(" containsRoleSuper  => " + containsRoleSuper);
+        log.info(" !containsRoleSuper => " + !containsRoleSuper);
 
         if (entitats.size() == 0 && containsRoleAdEn) {
 
