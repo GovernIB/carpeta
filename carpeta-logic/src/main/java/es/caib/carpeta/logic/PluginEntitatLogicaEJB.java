@@ -51,5 +51,17 @@ public class PluginEntitatLogicaEJB extends PluginEntitatEJB implements PluginEn
 
 		return query.getResultList();
 	}
+	
+	/** Cerca tots els plugins associats a una entitat **/
+	@Override
+	public List<Long> getAllPluginsByEntitat(String codiEntitat) throws I18NException {
+		
+		TypedQuery<Long> query = getEntityManager().createQuery(
+				"select a.pluginID from PluginEntitatJPA a "
+						+ "where a.entitat.codi = :codiEntitat",Long.class);
+		query.setParameter("codiEntitat", codiEntitat);
 
+		return query.getResultList();
+	}
+	
 }

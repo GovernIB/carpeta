@@ -1,6 +1,7 @@
 package es.caib.carpeta.logic;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Local;
 import javax.validation.constraints.NotNull;
@@ -23,6 +24,8 @@ public interface PluginEntitatLogicaLocal extends PluginEntitatLocal  {
 	public List<PluginEntitatJPA> findAllByEntitatId(@NotNull long codiEntitat) throws I18NException;
 
 	public List<Long> getPluginsEntitat(String codiEntitat, boolean actiu) throws I18NException;
+	
+	public List<Long> getAllPluginsByEntitat(String codiEntitat) throws I18NException;
 
 }
 
