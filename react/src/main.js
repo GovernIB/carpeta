@@ -142,6 +142,7 @@ newPluginHtml  = function createReactCompPluginHtml(nomComponent, param, pluginI
 };
 
 newPluginReact  = function createReactCompPluginReact(nomComponent, param, pluginID) {
+	sessionStorage.setItem('pluginActiu', pluginID);
 	ReactDOM.render(<PluginReact autenticat={param} pluginID={pluginID}/>, document.getElementById(nomComponent));
 	ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.Plugin} autenticat={param}/>, document.getElementById("mollaPa"));
 };

@@ -98,7 +98,7 @@ class MenuRapid extends Component {
                         {/*{accessibilitat}*/}
                         {gestionsHtml}
                         {gestionsReact}
-                        {dades}
+                        {/*{dades}*/}
                     </ul>
                 </nav>
             </div>
