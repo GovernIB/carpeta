@@ -334,6 +334,12 @@ img:hover {
 .ui-dialog .ui-dialog-title {
 	color: #fff;
 }
+.columna2Inici{
+	float: right!important;
+}
+.col2peu{
+	padding-left: 3rem!important;
+}
 
 
 /* HomePage */
@@ -349,8 +355,36 @@ img:hover {
 
 /* RESPONSIVE */
 
+/*Se aplican cuando el width es menor que 1224px*/
+@media only screen and (max-width: 1224px) {
+body {
+	font-size: 100% !important;
+}
+.imc-titol {
+	min-height: 30px;
+}
+.imc-titol .imc--contingut {
+	margin-left: 0em;
+	font-size: 1.1em;
+	/*top: .2em;*/
+}
+.imc-titol h1 span {
+	font-size: 1.35em;
+	min-font-size: 20px;
+}
+img {
+	max-width: 100%;
+}
+}
+
 /*Se aplican cuando el width es menor que 992px*/
 @media only screen and (max-width: 992px) {
+body {
+	font-size: 100% !important;
+}
+.imc-titol h1 span {
+	font-size: 1.35em;
+}
 .botonCorto{
     display: none;
 }
@@ -380,6 +414,26 @@ img:hover {
 
 /*Se aplican cuando el width es menor que 768*/
 @media only screen and (max-width : 767px) {
+body {
+	font-size: 100% !important;
+}
+.imc-titol h1 span {
+	font-size: 1.35em;
+}
+.columna2Inici{
+	float: none!important;
+	padding-left: 0px;
+}
+.botoAccedirCarpeta{
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+.col2peu{
+	padding-left: 0rem!important;
+}
+.homePage .opcionesAcceso {
+	width: auto;
+}
 .colorVerde{
 	background-color: #4DBA79 !important;
 	margin-left: 0px !important;
@@ -456,6 +510,18 @@ thead>tr>th.sorting {
 
 /*Se aplican cuando el width es menor que 692*/
 @media only screen and (max-width : 692px) {
+body {
+	font-size: 100% !important;
+}
+.imc-titol h1 span {
+	font-size: 1.35em;
+}
+.imc-bt-menubar {
+	margin-right: 0.5em;
+}
+.imc-bt-menubar span {
+	display: none;
+}
 .boxGestio{
 	max-width: 100% !important;
 	flex: auto;
@@ -469,6 +535,10 @@ thead>tr>th.sorting {
 @media only screen and (min-width : 401px) and (max-width : 480px) {
 body {
 	padding-top: 4rem !important;
+	font-size: 100% !important;
+}
+.imc-titol h1 span {
+	font-size: 1.35em;
 }
 .logoGovern {
     margin-right: 10px !important;
@@ -501,6 +571,7 @@ body {
 @media only screen and (min-width : 200px) and (max-width : 400px) {
 body {
 	padding-top: 4rem !important;
+	font-size: 100% !important;
 }
 .logoGovern {
     margin-right: 5px !important;

@@ -61,10 +61,10 @@ class IniciPublic extends Component {
                             <br className="clearBoth" />
                         </div>
 
-                        <div className="col-md-5 border-0 float-right">
+                        <div className="col-md-5 border-0 columna2Inici">
 
                             <p className="margen-top-clave pb-3">
-                                <a className="btn btn-primary carpeta-btn" href="javascript: var loc = new URL(window.location.href);  window.location.href=('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host) )" role="button"><span
+                                <a className="btn btn-primary carpeta-btn botoAccedirCarpeta" href="javascript: var loc = new URL(window.location.href);  window.location.href=('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host) )" role="button"><span
                                     className="oi oi-account-login" title=""
                                     aria-hidden="true"></span> {t('paginaIniciBotoAccedir')}</a>
                             </p>
