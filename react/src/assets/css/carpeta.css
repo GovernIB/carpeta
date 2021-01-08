@@ -37,10 +37,6 @@ a:hover{
 img:hover {
     border: 0px;
 }
-.margen-top-clave{
-	padding-top: 3rem !important;
-}
-
 .imc--sortir::before {
 	background-image: url(../images/sortir.png);
 	opacity: 1 !important;
@@ -502,9 +498,11 @@ thead>tr>th.sorting {
 .margen-left-clave{
 	padding-left: 15px !important;
 }
-
 .capsaMenu{
 	min-height: 20rem !important;
+}
+.margen-top-clave{
+	text-align-last: center;
 }
 }
 
@@ -529,12 +527,22 @@ body {
 .capsaMenu{
 	min-height: 5rem !important;
 }
+.menuRapidView{
+	display: none;
+}
+.navbar-expand-sm .navbar-nav {
+	-ms-flex-direction: row;
+	flex-direction: row;
+}
+.homePage ul li {
+	margin-left: 0px;
+}
 }
 
 /*Se aplican cuando el width es menor que 480*/
 @media only screen and (min-width : 401px) and (max-width : 480px) {
 body {
-	padding-top: 4rem !important;
+	/*padding-top: 4rem !important;*/
 	font-size: 100% !important;
 }
 .imc-titol h1 span {
@@ -565,12 +573,16 @@ body {
 	margin-left: 0 !important;
 	margin-right: 0 !important;
 }
+.navbar-expand-sm .navbar-nav {
+	-ms-flex-direction: row;
+	flex-direction: row;
+}
 }
 
 /*Se aplican cuando el width es menor que 400*/
 @media only screen and (min-width : 200px) and (max-width : 400px) {
 body {
-	padding-top: 4rem !important;
+	/*padding-top: 4rem !important;*/
 	font-size: 100% !important;
 }
 .logoGovern {
@@ -609,6 +621,10 @@ body {
 .breadcrumb{
 	padding: .35rem 0.6rem !important;
 	border-radius: 0 !important;
+}
+.navbar-expand-sm .navbar-nav {
+	-ms-flex-direction: row;
+	flex-direction: row;
 }
 }
 

@@ -79,13 +79,13 @@ class MenuRapid extends Component {
             gestionsHtml = plugins.filter(s => s.reactComponent === 'false').map(s => (
                 <li className="nav-item pr-4"><a className="navCarpeta" href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}
                    title={s.nom}><img src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-                                      className="imc-icona"></img><span>{s.nom}</span></a></li>
+                                      className="imc-icona"></img><span class="menuRapidView">{s.nom}</span></a></li>
             ));
 
             gestionsReact = plugins.filter(s => s.reactComponent === 'true').map(s => (
                     <li className="nav-item pr-4"><a className="navCarpeta" href={"javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"}
                    title={s.nom}><img src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-                                      className="imc-icona"></img><span>{s.nom}</span></a></li>
+                                      className="imc-icona"></img><span class="menuRapidView">{s.nom}</span></a></li>
             ));
 
         }
