@@ -6,6 +6,9 @@ a:hover{
 	color: #000;
 	text-decoration: none;
 }
+.h2, h2{
+	font-size: 1.1em !important;
+}
 
 /* Botó color Carpeta */
 .btn-primary.carpeta-btn {

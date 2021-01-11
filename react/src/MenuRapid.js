@@ -29,6 +29,13 @@ class MenuRapid extends Component {
         })
     }
 
+    componentDidUpdate() {
+        var div = document.getElementById('llistaMenuRapid').innerHTML;
+        if (div === '') {
+            document.getElementById('llistaMenuRapid').remove();
+        }
+    }
+
     render() {
 
         const {t} = this.props;
@@ -93,7 +100,7 @@ class MenuRapid extends Component {
         return (
             <div>
                 <nav className="navbar navbar-expand-sm bg-light pl-0">
-                    <ul className="navbar-nav">
+                    <ul className="navbar-nav" id="llistaMenuRapid">
                         {/*{gestions}*/}
                         {/*{accessibilitat}*/}
                         {gestionsHtml}
