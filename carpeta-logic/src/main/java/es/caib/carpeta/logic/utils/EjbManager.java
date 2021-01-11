@@ -158,6 +158,13 @@ public final class EjbManager {
 
 	}
 
+	public static Long getEsborrarLogs(PropietatGlobalLocal propietatGlobalEjb) throws I18NException {
+		final String partialProp = "esborrarlogs.dies";
+
+		return getPropertyValueLong(propietatGlobalEjb, partialProp);
+
+	}
+
     public static Long getPropertyValueLong(PropietatGlobalLocal propietatGlobalEjb, String partialProp)
             throws I18NException {
         String val = getPropertyValue(propietatGlobalEjb, partialProp);
