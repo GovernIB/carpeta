@@ -174,7 +174,7 @@
 						
 						<a class="dropdown-item ${(pipella eq 'sobre')?'active' : '' }"
                             href="<c:url value="/canviarPipella/sobre"></c:url>"> <i
-                            class="fas fa-info"></i> Sobre Carpeta </a>
+                            class="fas fa-info"></i> <fmt:message key="menu.sobre" /> </a>
 
 						<a class="dropdown-item"
 							href="<c:url value="/common/usuari/"></c:url><%=LoginInfo.getInstance().getUsuariPersona().getUsuariID()%>/edit"> <i
