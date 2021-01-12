@@ -16,15 +16,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
-import java.util.*;
-import es.caib.carpeta.back.form.webdb.*;
+import es.caib.carpeta.back.form.webdb.LogCarpetaFilterForm;
+import es.caib.carpeta.back.form.webdb.LogCarpetaForm;
+import es.caib.carpeta.back.form.webdb.PluginRefList;
 
 import es.caib.carpeta.back.controller.webdb.LogCarpetaController;
 import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.jpa.LogCarpetaJPA;
 import es.caib.carpeta.model.entity.LogCarpeta;
-import es.caib.carpeta.model.fields.*;
+import es.caib.carpeta.model.fields.LogCarpetaFields;
+import es.caib.carpeta.model.fields.PluginFields;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Fundació BIT.
