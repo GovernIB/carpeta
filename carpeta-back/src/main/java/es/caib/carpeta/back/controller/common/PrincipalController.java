@@ -90,6 +90,11 @@ public class PrincipalController {
 				mav.setView(new RedirectView("/adminentitat/buit", true));
 				return mav;
 			}
+			
+			if ("sobre".equals(pipella)) {
+				mav.setViewName("principal");
+				return mav;
+			}
 
 			if ("webdb".equals(pipella)) {
 				mav.setViewName("webdb");

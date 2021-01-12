@@ -60,7 +60,8 @@
                      MENU D'OPCIONS
                    ----------------------------------------------                   
                 --%>
-
+                
+                <c:if test="${ !empty pipella }">
 				<li class="colorVerd">
 
 					<button class="btn colorVerd dropdown-toggle" type="button"
@@ -78,6 +79,7 @@
 
 	                </div>
 				</li>
+				</c:if>
 
 				<%--   
                    ----------------------------------------------
@@ -96,13 +98,6 @@
 					</button>
 
 					<div class="dropdown-menu" aria-labelledby="dropdownMenu2" id="dropdownSubMenu2">
-
-
-						<a class="dropdown-item ${(empty pipella)?'active' : '' }"
-							href="<c:url value="/canviarPipella"></c:url>"> <i
-							class="fas fa-home"></i> <fmt:message key="inici" /></a>
-
-
 	
 						<sec:authorize access="hasRole('ROLE_ADMIN')">
 						<% if (LoginInfo.getInstance().getEntitatID() != null) { %>
@@ -176,6 +171,10 @@
 						
 						
 						<div class="dropdown-divider"></div>
+						
+						<a class="dropdown-item ${(pipella eq 'sobre')?'active' : '' }"
+                            href="<c:url value="/canviarPipella/sobre"></c:url>"> <i
+                            class="fas fa-info"></i> Sobre Carpeta </a>
 
 						<a class="dropdown-item"
 							href="<c:url value="/common/usuari/"></c:url><%=LoginInfo.getInstance().getUsuariPersona().getUsuariID()%>/edit"> <i
