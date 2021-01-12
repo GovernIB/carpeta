@@ -9,13 +9,10 @@ import org.apache.log4j.Logger;
 import javax.naming.InitialContext;
 
 import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.ejb.EntitatLocal;
 import es.caib.carpeta.ejb.PropietatGlobalLocal;
 import es.caib.carpeta.logic.AuditoriaLogicaLocal;
+import es.caib.carpeta.logic.AuthenticationLogicaLocal;
 import es.caib.carpeta.logic.AvisLogicaLocal;
-import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
-import es.caib.carpeta.logic.UsuariEntitatLogicaLocal;
-import es.caib.carpeta.logic.UsuariLogicaLocal;
 import es.caib.carpeta.model.fields.PropietatGlobalFields;
 
 
@@ -28,13 +25,6 @@ public final class EjbManager {
 
 	protected static final Logger log = Logger.getLogger(EjbManager.class);
 
-	protected static UsuariEntitatLogicaLocal usuariEntitatLogicaEjb;
-
-	protected static UsuariLogicaLocal usuariPersonaLogicaEjb;
-	
-	protected static EntitatLocal entitatLogicaEjb;
-
-	protected static LogCarpetaLogicaLocal logCarpetaLogicaEjb;
 
 	protected static PropietatGlobalLocal propietatLogicaEjb;
 	
@@ -42,65 +32,14 @@ public final class EjbManager {
 
 	protected static AuditoriaLogicaLocal auditoriaLogicaEjb;
 
+	protected static AuthenticationLogicaLocal authenticationLogicaEjb;
+
 
 	private static void throwNewI18NException(Throwable e, String name) throws I18NException {
 		throw new I18NException(e, "error.unknown",
 				new I18NArgumentString("No puc instanciar " + name + ": " + e.getMessage()));
 	}
 
-	public static UsuariEntitatLogicaLocal getUsuariEntitatLogicaEJB() throws I18NException {
-
-		if (usuariEntitatLogicaEjb == null) {
-			try {
-				usuariEntitatLogicaEjb = (UsuariEntitatLogicaLocal) new InitialContext()
-						.lookup(UsuariEntitatLogicaLocal.JNDI_NAME);
-			} catch (Throwable e) {
-				throwNewI18NException(e, "UsuariEntitatLogicaLocal");
-			}
-		}
-		return usuariEntitatLogicaEjb;
-	}
-
-	public static UsuariLogicaLocal getUsuariPersonaLogicaEJB() throws I18NException {
-
-		if (usuariPersonaLogicaEjb == null) {
-			try {
-				usuariPersonaLogicaEjb = (UsuariLogicaLocal) new InitialContext()
-						.lookup(UsuariLogicaLocal.JNDI_NAME);
-			} catch (Throwable e) {
-				throwNewI18NException(e, "UsuariPersonaLogicaLocal");
-			}
-		}
-		return usuariPersonaLogicaEjb;
-	}
-	
-	
-	public static EntitatLocal getEntitatLogicaEJB() throws I18NException {
-
-		if (entitatLogicaEjb == null) {
-			try {
-				entitatLogicaEjb = (EntitatLocal) new InitialContext()
-						.lookup(EntitatLocal.JNDI_NAME);
-			} catch (Throwable e) {
-				throwNewI18NException(e, "EntitatLogicaLocal");
-			}
-		}
-		return entitatLogicaEjb;
-	}
-
-
-	public static LogCarpetaLogicaLocal getLogCarpetaLogicaEJB() throws I18NException {
-
-		if (logCarpetaLogicaEjb == null) {
-			try {
-				logCarpetaLogicaEjb = (LogCarpetaLogicaLocal) new InitialContext()
-					.lookup(LogCarpetaLogicaLocal.JNDI_NAME);
-			} catch (Throwable e) {
-				throwNewI18NException(e, "LogCarpetaLogicaLocal");
-			}
-		}
-		return logCarpetaLogicaEjb;
-	}
 	
 
 	public static PropietatGlobalLocal getPropietatLogicaEJB() throws I18NException {
@@ -130,17 +69,17 @@ public final class EjbManager {
 	}
 
 
-	public static AuditoriaLogicaLocal getAuditoriaLogicaEJB() throws I18NException {
+	public static AuthenticationLogicaLocal getAuthenticationLogicaEJB() throws I18NException {
 
-		if (auditoriaLogicaEjb == null) {
+		if (authenticationLogicaEjb == null) {
 			try {
-				auditoriaLogicaEjb = (AuditoriaLogicaLocal) new InitialContext()
-						.lookup(AuditoriaLogicaLocal.JNDI_NAME);
+				authenticationLogicaEjb = (AuthenticationLogicaLocal) new InitialContext()
+						.lookup(AuthenticationLogicaLocal.JNDI_NAME);
 			} catch (Throwable e) {
-				throwNewI18NException(e, "AuditoriaLogicaLocal");
+				throwNewI18NException(e, "AuthenticationLogicaLocal");
 			}
 		}
-		return auditoriaLogicaEjb;
+		return authenticationLogicaEjb;
 	}
 	
 	
