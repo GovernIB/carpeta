@@ -12,7 +12,7 @@ class Accessibilitat extends Component {
             <div className="container-contenido">
                 <ExpirarSessio />
                 <div className="infoNoMenu">
-                    <p className="titol h2">{t('accessibilitatTitol')}</p>
+                    <h2><p className="titol h2">{t('accessibilitatTitol')}</p></h2>
 
                     <div className="col-md-12 border-0 float-left p-0">
                         <p className="lh15">{t('accessibilitatDeclaracio1')} <a
@@ -68,7 +68,7 @@ class Accessibilitat extends Component {
                         <p className="lh15">{t('accessibilitatOpcional3')}</p>
                         <p className="lh15"><a className="mr-auto" href="https://www.w3.org/WAI/WCAG1AA-Conformance"
                                                target="_blank" rel="noopener noreferrer">
-                            <div className="imc--logowai"></div>
+                            <img src="/carpetafront/src/assets/images/wcag2AA.png" title={t('accessibilitatAccesWAI')} alt={t('accessibilitatAccesWAI')} />
                         </a></p>
                         <p className="lh15">{t('accessibilitatOpcional4')}</p>
 

@@ -94,6 +94,12 @@ img:hover {
 	font-size: 0.8em;
 	padding-right: 1em;
 }
+.estilUsuari{
+	font-weight: normal;
+	color: #fff;
+	text-transform: uppercase;
+	padding-right: 1em;
+}
 .usuari{
 	top: 2.5em;
 	height: 2em;

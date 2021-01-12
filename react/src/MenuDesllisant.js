@@ -78,7 +78,7 @@ class MenuDesllisant extends Component {
 			enllasosMenu = this.state.menuEnllasos.map((s, i) => (
 				<li>
 					<a href={s.url} title={s.nom}>
-						<img src={s.urllogo} title={s.label} alt={s.label} className="imc-icona iconaEnllas"></img>
+						<img src={s.urllogo} title="" alt="" className="imc-icona iconaEnllas" />
 						<span>{s.label}</span>
 					</a>
 				</li>
@@ -120,6 +120,7 @@ class MenuDesllisant extends Component {
 			accessibilitat = <li><a href="javascript:newAccessibilitat('contingut', '1');"
 									className="imc-marc-ico imc--accessibilitat" id="imc-marc-accessibilitat"
 									title={t('menuAccessibilitat')}><span>{t('menuAccessibilitat')}</span></a></li>;
+
 			sortir = <li><a href="sortir" className="imc-marc-ico imc--sortir" id="imc-marc-sortir"
 							title={t('menuSortir')}><span>{t('menuSortir')}</span></a></li>;
 
@@ -127,44 +128,44 @@ class MenuDesllisant extends Component {
 				<li><a href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}
 					   title={s.nom}><img
 					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-					className="imc-icona"></img><span>{s.nom}</span></a></li>
+					className="imc-icona" title="" alt="" /><span>{s.nom}</span></a></li>
 			));
 			plugHtmlInfo = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 1).map(s => (
 				<li><button title={s.nom} className="botoMenu alert1menu" onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}><img
 					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-					className="imc-icona"></img><span>{s.nom}</span></button></li>
+					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
 			plugHtmlWarning = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 2).map(s => (
 				<li><button title={s.nom} className="botoMenu alert2menu" onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}><img
 					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-					className="imc-icona"></img><span>{s.nom}</span></button></li>
+					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
 			plugHtmlError = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 3).map(s => (
 				<li><button title={s.nom} className="botoMenu alert3menu" onClick={(event) => this.error(s.missatge)}><img
 					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-					className="imc-icona"></img><span>{s.nom}</span></button></li>
+					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
 
 			plugReact = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 0).map(s => (
 				<li><a href={"javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"}
 					   title={s.nom}><img
 					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-					className="imc-icona"></img><span>{s.nom}</span></a></li>
+					className="imc-icona" title="" alt="" /><span>{s.nom}</span></a></li>
 			));
 			plugReactInfo = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 1).map(s => (
 				<li><button title={s.nom} className="botoMenu alert1menu" onClick={(event) => this.infoReact(s.missatge,s.pluginID)}><img
 					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-					className="imc-icona"></img><span>{s.nom}</span></button></li>
+					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
 			plugReactWarning = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 2).map(s => (
 				<li><button title={s.nom} className="botoMenu alert2menu" onClick={(event) => this.infoReact(s.missatge,s.pluginID)}><img
 					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-					className="imc-icona"></img><span>{s.nom}</span></button></li>
+					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
 			plugReactError = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 3).map(s => (
 				<li><button title={s.nom} className="botoMenu alert3menu" onClick={(event) => this.error(s.missatge)}><img
 					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-					className="imc-icona"></img><span>{s.nom}</span></button></li>
+					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
 
 		}

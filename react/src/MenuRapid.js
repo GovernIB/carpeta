@@ -45,54 +45,48 @@ class MenuRapid extends Component {
 
         var gestionsHtml;
         var gestionsReact;
-        var accessibilitat;
-        var dades;
-        var gestions;
+        // var accessibilitat;
+        // var dades;
+        // var gestions;
 
         if(autenticat === '0'){
 
-            accessibilitat = "";
-            dades = "";
+            // accessibilitat = "";
+            // dades = "";
 
         } else if(autenticat === '1'){
-            accessibilitat = <li className="nav-item pr-5">
-                    <a href="javascript:newAccessibilitat('contingut', '1');" className="imc-marc-ico imc--accessibilitat navCarpeta" id="imc-marc-accessibilitat" title={t('menuAccessibilitat')}><span>{t('menuAccessibilitat')}</span></a>
-                </li>;
-
-            dades = <li className="nav-item">
-                    <a href="javascript:newDadesPersonals('contingut', '1');" className="imc-marc-ico navCarpeta imc--dades"><span>{t('menuDades')}</span></a>
-                </li>;
-
-            // gestionsHtml = plugins.filter(s => s.reactComponent === 'false').map(s => (
-            //     <a className="dropdown-item menuRapid submenuRapid--item" href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}
-            //            title={s.nom}><img src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-            //         className="imc-icona"></img><span>{s.nom}</span></a>
-            // ));
+            // accessibilitat = <li className="nav-item pr-5">
+            //         <a href="javascript:newAccessibilitat('contingut', '1');" className="imc-marc-ico imc--accessibilitat navCarpeta" id="imc-marc-accessibilitat" title={t('menuAccessibilitat')}><span>{t('menuAccessibilitat')}</span></a>
+            //     </li>;
             //
-            // gestionsReact = plugins.filter(s => s.reactComponent === 'true').map(s => (
-            //     <a className="dropdown-item menuRapid submenuRapid--item" href={"javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"}
-            //        title={s.nom}><img src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-            //                           className="imc-icona"></img><span>{s.nom}</span></a>
-            // ));
+            // dades = <li className="nav-item">
+            //         <a href="javascript:newDadesPersonals('contingut', '1');" className="imc-marc-ico navCarpeta imc--dades"><span>{t('menuDades')}</span></a>
+            //     </li>;
 
-            gestions = <li className="nav-item pr-5">
-                <button className="imc-marc-ico dropdown-toggle menuRapid imc--gestions" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>{t('menuGestions')}</span></button>
-                <div className="dropdown-menu submenuRapid" aria-labelledby="dropdownMenuButton">
-                    {gestionsHtml}
-                    {gestionsReact}
-                </div>
-            </li>;
+            // gestions = <li className="nav-item pr-5">
+            //     <button className="imc-marc-ico dropdown-toggle menuRapid imc--gestions" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>{t('menuGestions')}</span></button>
+            //     <div className="dropdown-menu submenuRapid" aria-labelledby="dropdownMenuButton">
+            //         {gestionsHtml}
+            //         {gestionsReact}
+            //     </div>
+            // </li>;
 
             gestionsHtml = plugins.filter(s => s.reactComponent === 'false').map(s => (
-                <li className="nav-item pr-4"><a className="navCarpeta" href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}
-                   title={s.nom}><img src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-                                      className="imc-icona"></img><span class="menuRapidView">{s.nom}</span></a></li>
+                <li className="nav-item pr-4">
+                    <a className="navCarpeta" href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"} title={s.nom}>
+                        <img src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} alt="" title="" className="imc-icona" />
+                        <span className="menuRapidView">{s.nom}</span>
+                    </a>
+                </li>
             ));
 
             gestionsReact = plugins.filter(s => s.reactComponent === 'true').map(s => (
-                    <li className="nav-item pr-4"><a className="navCarpeta" href={"javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"}
-                   title={s.nom}><img src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-                                      className="imc-icona"></img><span class="menuRapidView">{s.nom}</span></a></li>
+                    <li className="nav-item pr-4">
+                        <a className="navCarpeta" href={"javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"} title={s.nom}>
+                            <img src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} alt="" title="" className="imc-icona" />
+                            <span className="menuRapidView">{s.nom}</span>
+                        </a>
+                    </li>
             ));
 
         }

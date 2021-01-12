@@ -44,7 +44,7 @@ class DadesPersonals extends Component {
         return (
             
                 <div className="infoNoMenu">
-                    <p className="titol h2">{t('dadespersonalsTitol')} {usuariNomComplet}</p>
+                    <h2><p className="titol h2">{t('dadespersonalsTitol')} {usuariNomComplet}</p></h2>
 
                     <div className="col-md-12 border-0 float-left p-0">
                         <p className="lh15">{t('dadespersonalsDescripcio')} </p>

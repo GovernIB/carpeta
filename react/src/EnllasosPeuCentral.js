@@ -49,7 +49,7 @@ class EnllasosPeuCentral extends Component {
                 <li>
                     <a href={s.url}>
                         <span>{s.label}</span>
-                        <img src={s.urllogo} title={s.label} alt={s.label} />
+                        <img src={s.urllogo} title="" alt="" />
                         
                     </a>
                 </li>

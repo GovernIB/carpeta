@@ -98,13 +98,12 @@
 			<sec:authentication var="userMethod" property="principal.usuarioClave.metodoAutentificacion" />
 			<div class="imc-titol usuari">
 				<nav class="imc--contingut">
-					<h5>
-						<span>
+						<span class="estilUsuari">
 							<c:if test="${user != null}">
-								<span class="oi oi-person" aria-hidden="true"> </span><sec:authentication property="principal.usuarioClave.nombreCompleto" />
+								<span class="oi oi-person pr-2" aria-hidden="true"> </span><sec:authentication property="principal.usuarioClave.nombreCompleto" />
 							</c:if>
 						</span>
-					</h5>
+					</h3>
 				</nav>
 			</div>
 			<script type="text/javascript">

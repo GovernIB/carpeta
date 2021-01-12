@@ -34,7 +34,7 @@ class EnllasosXarxes extends Component {
             enllasos = this.state.enllasosXarxes.map((s, i) => (
                 <li>
                     <a href={s.url} className="imc-bt-xarxa border-0" title={s.label}>
-                        <img src={s.urllogo} title={s.label} alt={s.label}/>
+                        <img src={s.urllogo} title="" alt=""/>
                         <span>{s.label}</span>
                     </a>
                 </li>

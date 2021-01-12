@@ -65,7 +65,7 @@ class MapaWeb extends Component {
 				<ExpirarSessio />
 
 				<div className="infoNoMenu">
-					<p className="titol h2">{t('mapaWebTitol')}</p>
+					<h2><p className="titol h2">{t('mapaWebTitol')}</p></h2>
 
 					<div className="col-md-12 border-0 pl-0 pr-0">
 
