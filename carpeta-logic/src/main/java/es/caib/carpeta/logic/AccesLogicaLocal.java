@@ -2,6 +2,7 @@ package es.caib.carpeta.logic;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
+import javax.ejb.Local;
 import javax.validation.constraints.NotNull;
 
 import es.caib.carpeta.commons.utils.UsuarioClave;
@@ -17,7 +18,7 @@ import java.util.List;
  *
  * @author mgonzalez Date: 16/12/2020
  */
-
+@Local
 public interface AccesLogicaLocal extends AccesLocal {
     public static final String JNDI_NAME = "java:app/carpeta-logic/AccesLogicaEJB!es.caib.carpeta.logic.AccesLogicaLocal";
 
