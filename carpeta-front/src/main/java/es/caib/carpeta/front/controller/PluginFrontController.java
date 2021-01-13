@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_ACCES_PLUGIN;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ACCES_PLUGIN;
 import es.caib.carpeta.commons.utils.UsuarioClave;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.carpeta.front.utils.SesionHttp;
@@ -197,9 +196,6 @@ public class PluginFrontController extends CommonFrontController {
                     + "/" + Base64.getUrlEncoder().encodeToString(baseFront.getBytes());
 
             log.info(" urlToShowPluginPage => " + urlToShowPluginPage);
-
-            //AUDITORIA
-            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ACCES_PLUGIN,null,null,administrationID,Long.parseLong(pluginID));
 
             //ACCESS
 

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import javax.ejb.EJB;
 
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_ACCES_LOGIN_AUTENTICAT;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ENTRADA_FRONT_AUTENTICAT;
 import es.caib.carpeta.commons.utils.UsuarioClave;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.carpeta.front.service.SecurityService;
@@ -22,7 +21,6 @@ import es.caib.carpeta.logic.AccesLogicaLocal;
 import es.caib.carpeta.logic.AuditoriaLogicaLocal;
 import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
 import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
-
 import java.net.InetAddress;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -73,9 +71,6 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
             long entitatID = entitat.getEntitatID();
             accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_LOGIN_AUTENTICAT, entitatID, null, new Timestamp(new Date().getTime()), LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress());
 
-
-            //AUDITORIA
-            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ENTRADA_FRONT_AUTENTICAT,null,null,usuarioClave.getNif(),null);
 
         } catch (Exception ie){
             log.error("S'ha produit un error : " + ie.getMessage(), ie);

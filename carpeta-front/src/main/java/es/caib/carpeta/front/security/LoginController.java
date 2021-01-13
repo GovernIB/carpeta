@@ -18,7 +18,6 @@ import javax.servlet.http.HttpSession;
 
 import es.caib.carpeta.commons.utils.Constants;
 import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_ERROR;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_ESTAD_ENTRADA_FRONT_NO_AUTENTICAT;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_FRONT;
 import es.caib.carpeta.front.config.LoginRequestCache;
 import es.caib.carpeta.front.service.SecurityService;
@@ -98,9 +97,6 @@ public class LoginController {
 
             logLogicaEjb.crearLog("Autenticació del Front", ESTAT_LOG_ERROR,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"Error de login",peticio.toString(),"",null);
             log.info("Error de login");
-
-            //Auditoria
-            auditoriaLogicaEjb.crearAuditoria(TIPUS_ESTAD_ENTRADA_FRONT_NO_AUTENTICAT, null,null,"",null);
 
 
         }
