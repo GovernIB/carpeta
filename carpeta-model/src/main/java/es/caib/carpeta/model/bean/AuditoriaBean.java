@@ -14,9 +14,7 @@ private static final long serialVersionUID = -273096378L;
 	java.sql.Timestamp dataAudit;
 	int tipus;
 	java.lang.String username;
-	java.lang.String usuariClave;
 	java.lang.Long entitatID;
-	java.lang.Long pluginID;
 
 
   /** Constructor Buit */
@@ -24,23 +22,19 @@ private static final long serialVersionUID = -273096378L;
   }
 
   /** Constructor amb tots els camps  */
-  public AuditoriaBean(long auditoriaID , java.sql.Timestamp dataAudit , int tipus , java.lang.String username , java.lang.String usuariClave , java.lang.Long entitatID , java.lang.Long pluginID) {
+  public AuditoriaBean(long auditoriaID , java.sql.Timestamp dataAudit , int tipus , java.lang.String username , java.lang.Long entitatID) {
     this.auditoriaID=auditoriaID;
     this.dataAudit=dataAudit;
     this.tipus=tipus;
     this.username=username;
-    this.usuariClave=usuariClave;
     this.entitatID=entitatID;
-    this.pluginID=pluginID;
 }
   /** Constructor sense valors autoincrementals */
-  public AuditoriaBean(java.sql.Timestamp dataAudit , int tipus , java.lang.String username , java.lang.String usuariClave , java.lang.Long entitatID , java.lang.Long pluginID) {
+  public AuditoriaBean(java.sql.Timestamp dataAudit , int tipus , java.lang.String username , java.lang.Long entitatID) {
     this.dataAudit=dataAudit;
     this.tipus=tipus;
     this.username=username;
-    this.usuariClave=usuariClave;
     this.entitatID=entitatID;
-    this.pluginID=pluginID;
 }
   /** Constructor dels valors Not Null */
   public AuditoriaBean(long auditoriaID , java.sql.Timestamp dataAudit , int tipus) {
@@ -53,9 +47,7 @@ private static final long serialVersionUID = -273096378L;
     this.setDataAudit(__bean.getDataAudit());
     this.setTipus(__bean.getTipus());
     this.setUsername(__bean.getUsername());
-    this.setUsuariClave(__bean.getUsuariClave());
     this.setEntitatID(__bean.getEntitatID());
-    this.setPluginID(__bean.getPluginID());
 	}
 
 	public long getAuditoriaID() {
@@ -86,25 +78,11 @@ private static final long serialVersionUID = -273096378L;
 		this.username = _username_;
 	};
 
-	public java.lang.String getUsuariClave() {
-		return(usuariClave);
-	};
-	public void setUsuariClave(java.lang.String _usuariClave_) {
-		this.usuariClave = _usuariClave_;
-	};
-
 	public java.lang.Long getEntitatID() {
 		return(entitatID);
 	};
 	public void setEntitatID(java.lang.Long _entitatID_) {
 		this.entitatID = _entitatID_;
-	};
-
-	public java.lang.Long getPluginID() {
-		return(pluginID);
-	};
-	public void setPluginID(java.lang.Long _pluginID_) {
-		this.pluginID = _pluginID_;
 	};
 
 
@@ -118,9 +96,7 @@ private static final long serialVersionUID = -273096378L;
     __tmp.setDataAudit(__bean.getDataAudit());
     __tmp.setTipus(__bean.getTipus());
     __tmp.setUsername(__bean.getUsername());
-    __tmp.setUsuariClave(__bean.getUsuariClave());
     __tmp.setEntitatID(__bean.getEntitatID());
-    __tmp.setPluginID(__bean.getPluginID());
 		return __tmp;
 	}
 

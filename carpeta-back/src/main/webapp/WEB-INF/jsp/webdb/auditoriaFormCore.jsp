@@ -80,37 +80,8 @@
              </label>
             </td>
             <td>
-          <form:errors path="auditoria.username" cssClass="errorField alert alert-danger" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USERNAME)}" >
-          <form:hidden path="auditoria.username"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.auditoria.username,__theForm.listOfValuesForUsername)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USERNAME)}" >
-          <form:select id="auditoria_username"  onchange="if(typeof onChangeUsername == 'function') {  onChangeUsername(this); };"  cssClass="form-control col-md-8" path="auditoria.username">
-          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
-          <form:option value="" ></form:option>
-            <c:forEach items="${__theForm.listOfValuesForUsername}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.USUARICLAVE)}">
-        <tr id="auditoria_usuariClave_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[AuditoriaFields.USUARICLAVE])?'auditoria.usuariClave':__theForm.labels[AuditoriaFields.USUARICLAVE]}" />
-              <c:if test="${not empty __theForm.help[AuditoriaFields.USUARICLAVE]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.USUARICLAVE]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-            <form:errors path="auditoria.usuariClave" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USUARICLAVE)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USUARICLAVE)? ' uneditable-input' : ''}"  style="" maxlength="256" path="auditoria.usuariClave"   />
+            <form:errors path="auditoria.username" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USERNAME)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USERNAME)? ' uneditable-input' : ''}"  style="" maxlength="255" path="auditoria.username"   />
 
            </td>
         </tr>
@@ -137,35 +108,6 @@
           <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
           <form:option value="" ></form:option>
             <c:forEach items="${__theForm.listOfValuesForEntitatID}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.PLUGINID)}">
-        <tr id="auditoria_pluginID_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[AuditoriaFields.PLUGINID])?'auditoria.pluginID':__theForm.labels[AuditoriaFields.PLUGINID]}" />
-              <c:if test="${not empty __theForm.help[AuditoriaFields.PLUGINID]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.PLUGINID]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <form:errors path="auditoria.pluginID" cssClass="errorField alert alert-danger" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.PLUGINID)}" >
-          <form:hidden path="auditoria.pluginID"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.auditoria.pluginID,__theForm.listOfValuesForPluginID)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AuditoriaFields.PLUGINID)}" >
-          <form:select id="auditoria_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="form-control col-md-8" path="auditoria.pluginID">
-          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
-          <form:option value="" ></form:option>
-            <c:forEach items="${__theForm.listOfValuesForPluginID}" var="tmp">
             <form:option value="${tmp.key}" >${tmp.value}</form:option>
             </c:forEach>
           </form:select>

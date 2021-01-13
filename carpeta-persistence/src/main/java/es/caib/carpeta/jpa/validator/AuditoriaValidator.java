@@ -50,19 +50,11 @@ public class AuditoriaValidator<I extends Auditoria>
     if (__vr.getFieldErrorCount(USERNAME) == 0) {
       String val = __target__.getUsername();
       if (val != null && val.trim().length() != 0) {
-        java.util.regex.Pattern p = java.util.regex.Pattern.compile("(1|2|3|4)");
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile("1,2,3,4");
         if (!p.matcher(val).matches()) {
           __vr.rejectValue(USERNAME, "genapp.validation.malformed",
              new org.fundaciobit.genapp.common.i18n.I18NArgumentString(val), new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USERNAME)));
         }
-      }
-    }
-
-    if (__vr.getFieldErrorCount(USUARICLAVE) == 0) {
-      java.lang.String __usuariclave = __target__.getUsuariClave();
-      if (__usuariclave!= null && __usuariclave.length() > 256) {
-        __vr.rejectValue(USUARICLAVE, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(USUARICLAVE)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(256)));
       }
     }
 

@@ -58,8 +58,8 @@ public class AuditoriaJPAManager
 		return list.toArray(new Auditoria[list.size()]);
 	};
 
-	public synchronized Auditoria create( java.sql.Timestamp _dataAudit_, int _tipus_, java.lang.String _username_, java.lang.String _usuariClave_, java.lang.Long _entitatID_, java.lang.Long _pluginID_) throws I18NException {
-		AuditoriaJPA __bean =  new AuditoriaJPA(_dataAudit_,_tipus_,_username_,_usuariClave_,_entitatID_,_pluginID_);
+	public synchronized Auditoria create( java.sql.Timestamp _dataAudit_, int _tipus_, java.lang.String _username_, java.lang.Long _entitatID_) throws I18NException {
+		AuditoriaJPA __bean =  new AuditoriaJPA(_dataAudit_,_tipus_,_username_,_entitatID_);
 		return create(__bean);
 	}
 

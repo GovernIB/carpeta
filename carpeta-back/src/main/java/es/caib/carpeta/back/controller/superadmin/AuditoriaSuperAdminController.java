@@ -4,7 +4,6 @@ import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.GroupByItem;
-import org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 
@@ -28,8 +27,6 @@ import es.caib.carpeta.logic.UsuariLogicaLocal;
 import es.caib.carpeta.model.entity.Auditoria;
 import es.caib.carpeta.model.fields.AuditoriaFields;
 import es.caib.carpeta.model.fields.EntitatFields;
-import es.caib.carpeta.model.fields.PluginFields;
-import es.caib.carpeta.model.fields.UsuariFields;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -110,12 +107,6 @@ public class AuditoriaSuperAdminController extends AuditoriaController {
     }
 
     @Override
-    public List<StringKeyValue> getReferenceListForPluginID(HttpServletRequest request, ModelAndView mav, Where where)
-            throws I18NException {
-        return pluginRefList.getReferenceList(PluginFields.PLUGINID, where);
-    }
-
-    @Override
     public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request, ModelAndView mav,
             AuditoriaForm auditoriaForm, Where where) throws I18NException {
 
@@ -160,56 +151,6 @@ public class AuditoriaSuperAdminController extends AuditoriaController {
     public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request, ModelAndView mav, Where where)
             throws I18NException {
         return entitatRefList.getReferenceList(EntitatFields.ENTITATID, where);
-    }
-
-    /**
-     * Convertim l'username en Nom i Llinatges
-     */
-    public List<StringKeyValue> getReferenceListForUsername(HttpServletRequest request, ModelAndView mav,
-            AuditoriaForm auditoriaForm, Where where) throws I18NException {
-        if (auditoriaForm.isHiddenField(USERNAME)) {
-            return EMPTY_STRINGKEYVALUE_LIST;
-        }
-
-        String username = auditoriaForm.getAuditoria().getUsername();
-
-        SelectMultipleStringKeyValue select = new SelectMultipleStringKeyValue(UsuariFields.USERNAME.select,
-                UsuariFields.NOM.select, UsuariFields.LLINATGE1.select);
-
-        StringKeyValue skv = usuariPersonaLogicaEjb.executeQueryOne(select, UsuariFields.USERNAME.equal(username));
-
-        if (skv == null) {
-            skv = new StringKeyValue(username, username);
-        }
-
-        List<StringKeyValue> list = new ArrayList<StringKeyValue>();
-        list.add(skv);
-
-        return list;
-
-    }
-
-    @Override
-    public List<StringKeyValue> getReferenceListForUsername(HttpServletRequest request, ModelAndView mav,
-            AuditoriaFilterForm auditoriaFilterForm, List<Auditoria> list, Map<Field<?>, GroupByItem> _groupByItemsMap,
-            Where where) throws I18NException {
-        if (auditoriaFilterForm.isHiddenField(USERNAME) && !auditoriaFilterForm.isGroupByField(USERNAME)) {
-            return EMPTY_STRINGKEYVALUE_LIST;
-        }
-
-        List<String> usernames = new ArrayList<String>();
-
-        for (Auditoria au : list) {
-            usernames.add(au.getUsername());
-        }
-
-        SelectMultipleStringKeyValue select = new SelectMultipleStringKeyValue(UsuariFields.USERNAME.select,
-                UsuariFields.NOM.select, UsuariFields.LLINATGE1.select);
-
-        List<StringKeyValue> skvs = usuariPersonaLogicaEjb.executeQuery(select, UsuariFields.USERNAME.in(usernames));
-
-        return skvs;
-
     }
 
     @Override

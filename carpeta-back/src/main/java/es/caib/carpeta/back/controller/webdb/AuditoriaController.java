@@ -188,16 +188,6 @@ public class AuditoriaController
       };
     }
 
-    // Field username
-    {
-      _listSKV = getReferenceListForUsername(request, mav, filterForm, list, groupByItemsMap, null);
-      _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfValuesForUsername(_tmp);
-      if (filterForm.getGroupByFields().contains(USERNAME)) {
-        fillValuesToGroupByItems(_tmp, groupByItemsMap, USERNAME, false);
-      };
-    }
-
     // Field entitatID
     {
       _listSKV = getReferenceListForEntitatID(request, mav, filterForm, list, groupByItemsMap, null);
@@ -205,16 +195,6 @@ public class AuditoriaController
       filterForm.setMapOfValuesForEntitatID(_tmp);
       if (filterForm.getGroupByFields().contains(ENTITATID)) {
         fillValuesToGroupByItems(_tmp, groupByItemsMap, ENTITATID, false);
-      };
-    }
-
-    // Field pluginID
-    {
-      _listSKV = getReferenceListForPluginID(request, mav, filterForm, list, groupByItemsMap, null);
-      _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfValuesForPluginID(_tmp);
-      if (filterForm.getGroupByFields().contains(PLUGINID)) {
-        fillValuesToGroupByItems(_tmp, groupByItemsMap, PLUGINID, false);
       };
     }
 
@@ -234,9 +214,7 @@ public class AuditoriaController
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
     __mapping.put(TIPUS, filterForm.getMapOfValuesForTipus());
-    __mapping.put(USERNAME, filterForm.getMapOfValuesForUsername());
     __mapping.put(ENTITATID, filterForm.getMapOfValuesForEntitatID());
-    __mapping.put(PLUGINID, filterForm.getMapOfValuesForPluginID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -294,15 +272,6 @@ public class AuditoriaController
       auditoriaForm.setListOfValuesForTipus(_listSKV);
     }
     // Comprovam si ja esta definida la llista
-    if (auditoriaForm.getListOfValuesForUsername() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForUsername(request, mav, auditoriaForm, null);
-
-      if(_listSKV != null && !_listSKV.isEmpty()) { 
-          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
-      }
-      auditoriaForm.setListOfValuesForUsername(_listSKV);
-    }
-    // Comprovam si ja esta definida la llista
     if (auditoriaForm.getListOfValuesForEntitatID() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForEntitatID(request, mav, auditoriaForm, null);
 
@@ -310,15 +279,6 @@ public class AuditoriaController
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
       auditoriaForm.setListOfValuesForEntitatID(_listSKV);
-    }
-    // Comprovam si ja esta definida la llista
-    if (auditoriaForm.getListOfValuesForPluginID() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForPluginID(request, mav, auditoriaForm, null);
-
-      if(_listSKV != null && !_listSKV.isEmpty()) { 
-          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
-      }
-      auditoriaForm.setListOfValuesForPluginID(_listSKV);
     }
     
   }
@@ -658,38 +618,6 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
-  public List<StringKeyValue> getReferenceListForUsername(HttpServletRequest request,
-       ModelAndView mav, AuditoriaForm auditoriaForm, Where where)  throws I18NException {
-    if (auditoriaForm.isHiddenField(USERNAME)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
-    }
-    return getReferenceListForUsername(request, mav, where);
-  }
-
-
-  public List<StringKeyValue> getReferenceListForUsername(HttpServletRequest request,
-       ModelAndView mav, AuditoriaFilterForm auditoriaFilterForm,
-       List<Auditoria> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
-    if (auditoriaFilterForm.isHiddenField(USERNAME)
-      && !auditoriaFilterForm.isGroupByField(USERNAME)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
-    }
-    Where _w = null;
-    return getReferenceListForUsername(request, mav, Where.AND(where,_w));
-  }
-
-
-  public List<StringKeyValue> getReferenceListForUsername(HttpServletRequest request,
-       ModelAndView mav, Where where)  throws I18NException {
-    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-    __tmp.add(new StringKeyValue("1" , "1"));
-    __tmp.add(new StringKeyValue("2" , "2"));
-    __tmp.add(new StringKeyValue("3" , "3"));
-    __tmp.add(new StringKeyValue("4" , "4"));
-    return __tmp;
-  }
-
-
   public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
        ModelAndView mav, AuditoriaForm auditoriaForm, Where where)  throws I18NException {
     if (auditoriaForm.isHiddenField(ENTITATID)) {
@@ -717,39 +645,6 @@ public java.lang.Long stringToPK(String value) {
     __tmp.add(new StringKeyValue("1" , "1"));
     __tmp.add(new StringKeyValue("2" , "2"));
     __tmp.add(new StringKeyValue("3" , "3"));
-    return __tmp;
-  }
-
-
-  public List<StringKeyValue> getReferenceListForPluginID(HttpServletRequest request,
-       ModelAndView mav, AuditoriaForm auditoriaForm, Where where)  throws I18NException {
-    if (auditoriaForm.isHiddenField(PLUGINID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
-    }
-    return getReferenceListForPluginID(request, mav, where);
-  }
-
-
-  public List<StringKeyValue> getReferenceListForPluginID(HttpServletRequest request,
-       ModelAndView mav, AuditoriaFilterForm auditoriaFilterForm,
-       List<Auditoria> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
-    if (auditoriaFilterForm.isHiddenField(PLUGINID)
-      && !auditoriaFilterForm.isGroupByField(PLUGINID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
-    }
-    Where _w = null;
-    return getReferenceListForPluginID(request, mav, Where.AND(where,_w));
-  }
-
-
-  public List<StringKeyValue> getReferenceListForPluginID(HttpServletRequest request,
-       ModelAndView mav, Where where)  throws I18NException {
-    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-    __tmp.add(new StringKeyValue("1" , "1"));
-    __tmp.add(new StringKeyValue("2" , "2"));
-    __tmp.add(new StringKeyValue("3" , "3"));
-    __tmp.add(new StringKeyValue("4" , "4"));
-    __tmp.add(new StringKeyValue("5" , "5"));
     return __tmp;
   }
 

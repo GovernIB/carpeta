@@ -27,16 +27,8 @@ public class AuditoriaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new StringField(getQueryPath(), AuditoriaFields.USERNAME);
   }
 
-  public StringField USUARICLAVE() {
-    return new StringField(getQueryPath(), AuditoriaFields.USUARICLAVE);
-  }
-
   public LongField ENTITATID() {
     return new LongField(getQueryPath(), AuditoriaFields.ENTITATID);
-  }
-
-  public LongField PLUGINID() {
-    return new LongField(getQueryPath(), AuditoriaFields.PLUGINID);
   }
 
 

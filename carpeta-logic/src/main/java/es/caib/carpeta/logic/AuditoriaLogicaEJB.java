@@ -31,8 +31,6 @@ public class AuditoriaLogicaEJB extends AuditoriaEJB implements AuditoriaLogicaL
         auditoriaJPA.setTipus(tipus);
         auditoriaJPA.setEntitatID(entitatID);
         auditoriaJPA.setUsername(username);
-        auditoriaJPA.setUsuariClave(usuariClave);
-        auditoriaJPA.setPluginID(pluginID);
 
         create(auditoriaJPA);
 

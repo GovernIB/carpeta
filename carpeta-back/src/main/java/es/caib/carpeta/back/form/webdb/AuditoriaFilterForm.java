@@ -98,17 +98,6 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
   }
 
 
-  private java.lang.String usuariClave;
-
-  public java.lang.String getUsuariClave() {
-    return this.usuariClave;
-  }
-
-  public void setUsuariClave(java.lang.String usuariClave) {
-    this.usuariClave = usuariClave;
-  }
-
-
   private java.lang.Long entitatIDDesde;
 
   public java.lang.Long getEntitatIDDesde() {
@@ -131,28 +120,6 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
   }
 
 
-  private java.lang.Long pluginIDDesde;
-
-  public java.lang.Long getPluginIDDesde() {
-    return this.pluginIDDesde;
-  }
-
-  public void setPluginIDDesde(java.lang.Long pluginIDDesde) {
-    this.pluginIDDesde = pluginIDDesde;
-  }
-
-
-  private java.lang.Long pluginIDFins;
-
-  public java.lang.Long getPluginIDFins() {
-    return this.pluginIDFins;
-  }
-
-  public void setPluginIDFins(java.lang.Long pluginIDFins) {
-    this.pluginIDFins = pluginIDFins;
-  }
-
-
   public AuditoriaFilterForm() {
   }
   
@@ -165,27 +132,22 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
     this.tipusDesde = __toClone.tipusDesde;
     this.tipusFins = __toClone.tipusFins;
     this.username = __toClone.username;
-    this.usuariClave = __toClone.usuariClave;
     this.entitatIDDesde = __toClone.entitatIDDesde;
     this.entitatIDFins = __toClone.entitatIDFins;
-    this.pluginIDDesde = __toClone.pluginIDDesde;
-    this.pluginIDFins = __toClone.pluginIDFins;
     this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
-    this.mapOfValuesForUsername = __toClone.mapOfValuesForUsername;
     this.mapOfValuesForEntitatID = __toClone.mapOfValuesForEntitatID;
-    this.mapOfValuesForPluginID = __toClone.mapOfValuesForPluginID;
   }
   
   /* ========= UTILS ========== */
 
   @Override
   public List<Field<?>> getDefaultFilterByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { DATAAUDIT ,USERNAME ,USUARICLAVE }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { DATAAUDIT ,USERNAME }));
   }
 
   @Override
   public List<Field<?>> getDefaultGroupByFields() {
-    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { TIPUS ,ENTITATID ,PLUGINID }));
+    return new java.util.ArrayList<Field<?>>(Arrays.asList(new Field<?>[] { TIPUS ,ENTITATID }));
   }
 
 
@@ -220,18 +182,6 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
 
 
 
-  private Map<String, String> mapOfValuesForUsername;
-
-  public Map<String, String> getMapOfValuesForUsername() {
-    return this.mapOfValuesForUsername;
-  }
-
-  public void setMapOfValuesForUsername(Map<String, String> mapOfValuesForUsername) {
-    this.mapOfValuesForUsername = mapOfValuesForUsername;
-  }
-
-
-
   private Map<String, String> mapOfValuesForEntitatID;
 
   public Map<String, String> getMapOfValuesForEntitatID() {
@@ -240,18 +190,6 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
 
   public void setMapOfValuesForEntitatID(Map<String, String> mapOfValuesForEntitatID) {
     this.mapOfValuesForEntitatID = mapOfValuesForEntitatID;
-  }
-
-
-
-  private Map<String, String> mapOfValuesForPluginID;
-
-  public Map<String, String> getMapOfValuesForPluginID() {
-    return this.mapOfValuesForPluginID;
-  }
-
-  public void setMapOfValuesForPluginID(Map<String, String> mapOfValuesForPluginID) {
-    this.mapOfValuesForPluginID = mapOfValuesForPluginID;
   }
 
 
