@@ -11,6 +11,9 @@ public interface Plugin extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.Long getDescripcioID();
 	public void setDescripcioID(java.lang.Long _descripcioID_);
 
+	public java.lang.Long getLogoID();
+	public void setLogoID(java.lang.Long _logoID_);
+
 	public java.lang.String getClasse();
 	public void setClasse(java.lang.String _classe_);
 
@@ -23,6 +26,8 @@ public interface Plugin extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public int getTipus();
 	public void setTipus(int _tipus_);
 
+  // Fitxer
+  public <F extends Fitxer> F getLogo();
 
 
   // ======================================

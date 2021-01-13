@@ -205,6 +205,19 @@ private static final long serialVersionUID = -252813913L;
 	}
 
 
+// EXP  Field:logoid | Table: car_plugin | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "logoID")
+	private Set<PluginJPA> plugins = new HashSet<PluginJPA>(0);
+	public  Set<PluginJPA> getPlugins() {
+    return this.plugins;
+  }
+
+	public void setPlugins(Set<PluginJPA> plugins) {
+	  this.plugins = plugins;
+	}
+
+
 
   @javax.persistence.Transient
   javax.activation.DataHandler data;
@@ -314,6 +327,10 @@ private static final long serialVersionUID = -252813913L;
     if(!"EntitatJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat_iconids) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat_iconids())) ) {
       __tmp.setEntitat_iconids(EntitatJPA.copyJPA(__jpa.getEntitat_iconids(), __alreadyCopied,"FitxerJPA"));
+    }
+    if(!"PluginJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.plugins) || org.hibernate.Hibernate.isInitialized(__jpa.getPlugins())) ) {
+      __tmp.setPlugins(PluginJPA.copyJPA(__jpa.getPlugins(), __alreadyCopied,"FitxerJPA"));
     }
     // Copia de beans complexes (IMP)
 

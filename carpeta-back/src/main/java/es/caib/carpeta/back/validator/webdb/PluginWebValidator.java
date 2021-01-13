@@ -148,6 +148,10 @@ _ignoreFields.add(DESCRIPCIOID);
     }
 
   }
+    if (isNou) { // Creacio
+      // ================ CREATION
+      // Fitxers 
+    }
     BeanValidatorResult<Plugin> __vr = new BeanValidatorResult<Plugin>();
     validator.validate(__vr, __bean,
       isNou, pluginEjb, traduccioEjb);

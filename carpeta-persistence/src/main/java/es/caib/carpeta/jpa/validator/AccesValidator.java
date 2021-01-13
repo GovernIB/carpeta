@@ -6,6 +6,7 @@ import es.caib.carpeta.model.entity.Acces;
 import org.fundaciobit.genapp.common.query.Field;
 import es.caib.carpeta.model.fields.AccesFields;
 import es.caib.carpeta.model.fields.EntitatFields;
+import es.caib.carpeta.model.fields.PluginFields;
 
 import org.fundaciobit.genapp.common.validation.IValidatorResult;
 
@@ -29,7 +30,8 @@ public class AccesValidator<I extends Acces>
   /** Constructor */
   public void validate(IValidatorResult<I> __vr,I __target__, boolean __isNou__
     ,es.caib.carpeta.model.dao.IAccesManager __accesManager
-    ,es.caib.carpeta.model.dao.IEntitatManager __entitatManager) {
+    ,es.caib.carpeta.model.dao.IEntitatManager __entitatManager
+    ,es.caib.carpeta.model.dao.IPluginManager __pluginManager) {
 
     // Valors Not Null
     __vr.rejectIfEmptyOrWhitespace(__target__,ENTITATID, 
@@ -122,6 +124,20 @@ public class AccesValidator<I extends Acces>
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("entitat.entitat"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("entitat.entitatID"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__entitatid)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(PLUGINID) == 0) {
+      java.lang.Long __pluginid = __target__.getPluginID();
+      if (__pluginid != null ) {
+        Long __count_ = null;
+        try { __count_ = __pluginManager.count(PluginFields.PLUGINID.equal(__pluginid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ == 0) {        
+          __vr.rejectValue(PLUGINID, "error.notfound",
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("plugin.plugin"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("plugin.pluginID"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__pluginid)));
+        }
       }
     }
 

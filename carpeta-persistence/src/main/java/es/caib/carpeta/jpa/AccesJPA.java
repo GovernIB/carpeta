@@ -250,6 +250,21 @@ private static final long serialVersionUID = -2081832820L;
     this.entitat = entitat;
   }
 
+// IMP Field:pluginid | Table: car_plugin | Type: 1  
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@ForeignKey(name="car_acces_plugin_pluginid_fk")
+	@JoinColumn(name = "pluginid", referencedColumnName ="pluginID", nullable = true, insertable=false, updatable=false)
+	private PluginJPA plugin;
+
+	public PluginJPA getPlugin() {
+    return this.plugin;
+  }
+
+	public  void setPlugin(PluginJPA plugin) {
+    this.plugin = plugin;
+  }
+
 
  // ---------------  STATIC METHODS ------------------
   public static AccesJPA toJPA(Acces __bean) {
@@ -302,6 +317,10 @@ private static final long serialVersionUID = -2081832820L;
     if(!"EntitatJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat()) ) ) {
       __tmp.setEntitat(EntitatJPA.copyJPA(__jpa.getEntitat(), __alreadyCopied,"AccesJPA"));
+    }
+    if(!"PluginJPA".equals(origenJPA) && 
+       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.plugin) || org.hibernate.Hibernate.isInitialized(__jpa.getPlugin()) ) ) {
+      __tmp.setPlugin(PluginJPA.copyJPA(__jpa.getPlugin(), __alreadyCopied,"AccesJPA"));
     }
 
     return __tmp;

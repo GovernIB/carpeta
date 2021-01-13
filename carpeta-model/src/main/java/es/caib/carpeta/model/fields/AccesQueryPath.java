@@ -80,4 +80,12 @@ public class AccesQueryPath extends org.fundaciobit.genapp.common.query.QueryPat
     });
   }
 
+  public PluginQueryPath PLUGIN() {
+    return new PluginQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return AccesQueryPath.this.getQueryPath() + "plugin" + ".";
+      }
+    });
+  }
+
 }

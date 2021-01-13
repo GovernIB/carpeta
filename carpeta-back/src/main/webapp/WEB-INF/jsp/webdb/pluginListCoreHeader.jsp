@@ -21,6 +21,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.DESCRIPCIOID)}">
         <th>${car:getSortIcons(__theFilterForm,PluginFields.DESCRIPCIOID)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.LOGOID)}">
+        <th>${car:getSortIcons(__theFilterForm,PluginFields.LOGOID)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.CLASSE)}">
         <th>${car:getSortIcons(__theFilterForm,PluginFields.CLASSE)}</th>
         </c:if>

@@ -21,29 +21,35 @@ public class AccesBeanValidator
 
   protected final es.caib.carpeta.model.dao.IEntitatManager __entitatManager;
 
+  protected final es.caib.carpeta.model.dao.IPluginManager __pluginManager;
+
 
   public final AccesValidator<AccesJPA> _validator;
 
 
   public AccesBeanValidator(es.caib.carpeta.model.dao.IAccesManager __accesManager,
-     es.caib.carpeta.model.dao.IEntitatManager __entitatManager) { 
+     es.caib.carpeta.model.dao.IEntitatManager __entitatManager,
+     es.caib.carpeta.model.dao.IPluginManager __pluginManager) { 
     this.__accesManager = __accesManager;
     this.__entitatManager = __entitatManager;
+    this.__pluginManager = __pluginManager;
     _validator = new AccesValidator<AccesJPA>();
   }
 
   public AccesBeanValidator(AccesValidator<AccesJPA> _validator,
      es.caib.carpeta.model.dao.IAccesManager __accesManager,
-     es.caib.carpeta.model.dao.IEntitatManager __entitatManager) {
+     es.caib.carpeta.model.dao.IEntitatManager __entitatManager,
+     es.caib.carpeta.model.dao.IPluginManager __pluginManager) {
     this.__accesManager = __accesManager;
     this.__entitatManager = __entitatManager;
+    this.__pluginManager = __pluginManager;
     this._validator = _validator;
   }
 
   @Override
   public List<I18NFieldError> validate(AccesJPA target, boolean isNou) throws I18NException {
     BeanValidatorResult<AccesJPA> _bvr_ = new BeanValidatorResult<AccesJPA>();
-    _validator.validate(_bvr_, target, isNou, __accesManager, __entitatManager);
+    _validator.validate(_bvr_, target, isNou, __accesManager, __entitatManager, __pluginManager);
     return _bvr_.getErrors();
   }
 }

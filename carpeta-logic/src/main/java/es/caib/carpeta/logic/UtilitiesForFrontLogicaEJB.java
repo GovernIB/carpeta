@@ -12,6 +12,7 @@ import es.caib.carpeta.pluginsib.carpetafront.api.ICarpetaFrontPlugin;
 
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.StringKeyValue;
+import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.Where;
@@ -19,6 +20,9 @@ import org.fundaciobit.genapp.common.query.Where;
 import javax.annotation.security.PermitAll;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,6 +61,9 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
 
     @EJB(mappedName = FitxerLogicaLocal.JNDI_NAME)
     protected FitxerLogicaLocal fitxerLogicaEjb;
+    
+    @EJB(mappedName = es.caib.carpeta.ejb.PluginLocal.JNDI_NAME)
+    protected es.caib.carpeta.ejb.PluginLocal pluginEjb;
 
     /**
      * Retorna codi i nom en l'idioma seleccionat
@@ -145,8 +152,36 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
     @Override
     public FileInfo getIconaPlugin(Long pluginID, String language) throws I18NException {
 
-        ICarpetaFrontPlugin plugin = pluginCarpetaFrontEjb.getInstanceByPluginID(pluginID);
-        FileInfo fi = plugin.getIcon(new Locale(language));
+    	FileInfo fi = null; 
+    	
+		// miram si el plugin té associat una icona. 
+    	List<Plugin> pluginItem = pluginEjb.select(PluginFields.PLUGINID.equal(pluginID));
+    	if (pluginItem.size() > 0) {
+    		
+    		try {
+    			Fitxer f = pluginItem.get(0).getLogo();
+        		if(f != null) {
+        			File file = FileSystemManager.getFile(f.getFitxerID());
+            		if (file != null) {
+            			FileInputStream fis = new FileInputStream(file);
+    		    		fi = new FileInfo(f.getNom(), f.getMime(), org.apache.commons.io.IOUtils.toByteArray(fis));
+    		    		fis.close();
+    		    	}
+        		}
+    			
+    		}  catch(Exception e) {
+				log.error("getIconaPlugin - Error carregant fitxer.");
+			}
+    		
+    	}
+    	
+    	// Si no té icona associat, miram el properties
+    	// Si no está definit a properties, posam el per defecte
+    	if (fi == null){
+            ICarpetaFrontPlugin plugin = pluginCarpetaFrontEjb.getInstanceByPluginID(pluginID);
+            fi = plugin.getIcon(new Locale(language));
+    	}
+
         return fi;
 
     }

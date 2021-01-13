@@ -72,6 +72,62 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,PluginFields.LOGOID)}">
+        <tr id="plugin_logoID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[PluginFields.LOGOID])?'plugin.logoID':__theForm.labels[PluginFields.LOGOID]}" />
+              <c:if test="${not empty __theForm.help[PluginFields.LOGOID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.LOGOID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+              <form:errors path="plugin.logoID" cssClass="errorField alert alert-danger" />
+            <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginFields.LOGOID)}" >
+              <a target="_blank" href="<c:url value="${car:fileUrl(logoID.logoID)}"/>">${logoID.logoID.nom}</a>
+            </c:if>
+            <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginFields.LOGOID)}" >
+              <div class="input-group">
+                <div class="custom-file col-md-8">
+                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.LOGOID)? 'true' : 'false'}" cssClass="custom-file-input form-control ${gen:contains(__theForm.readOnlyFields ,PluginFields.LOGOID)? ' uneditable-input' : ''}"   path="logoID" type="file" />
+                  <label class="custom-file-label" for="logoID">
+                  </label>
+                </div>
+                <c:choose>
+                <c:when test="${not empty __theForm.plugin.logo}">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="">
+                  <small>              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.plugin.logo)}"/>">${__theForm.plugin.logo.nom}</a>
+</small>
+                  </span>
+                  <span class="input-group-text" id="">
+                        <form:checkbox path="logoIDDelete"/>
+                        <small><fmt:message key="genapp.form.file.delete"/></small>
+                  </span>
+                </div>
+                </c:when>
+                <c:otherwise>
+                <div class="input-group-append input-group-append-file">
+                  <span class="input-group-text" id="logoID-custom-file-label" style="display:none">
+                  <small></small>
+                  </span>
+                </div>
+                <script type="text/javascript">
+					$('#logoID').on('change', function(){
+						var ruta = $('#logoID').val(); 
+						var rutaArray = ruta.split('\\');
+						$('#logoID-custom-file-label').css('display','block');
+						$('#logoID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+					});
+				</script>                </c:otherwise>
+                </c:choose>
+              </div>
+            </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginFields.CLASSE)}">
         <tr id="plugin_classe_rowid">
           <td>

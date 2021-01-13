@@ -255,7 +255,7 @@ public class AccesFilterForm extends CarpetaBaseFilterForm implements AccesField
     this.dataDarrerAccesFins = __toClone.dataDarrerAccesFins;
     this.idioma = __toClone.idioma;
     this.mapOfEntitatForEntitatID = __toClone.mapOfEntitatForEntitatID;
-    this.mapOfValuesForPluginID = __toClone.mapOfValuesForPluginID;
+    this.mapOfPluginForPluginID = __toClone.mapOfPluginForPluginID;
     this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
   }
   
@@ -303,14 +303,14 @@ public class AccesFilterForm extends CarpetaBaseFilterForm implements AccesField
 
 
 
-  private Map<String, String> mapOfValuesForPluginID;
+  private Map<String, String> mapOfPluginForPluginID;
 
-  public Map<String, String> getMapOfValuesForPluginID() {
-    return this.mapOfValuesForPluginID;
+  public Map<String, String> getMapOfPluginForPluginID() {
+    return this.mapOfPluginForPluginID;
   }
 
-  public void setMapOfValuesForPluginID(Map<String, String> mapOfValuesForPluginID) {
-    this.mapOfValuesForPluginID = mapOfValuesForPluginID;
+  public void setMapOfPluginForPluginID(Map<String, String> mapOfPluginForPluginID) {
+    this.mapOfPluginForPluginID = mapOfPluginForPluginID;
   }
 
 

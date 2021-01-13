@@ -45,6 +45,13 @@
           </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.LOGOID)}">
+          <td>
+            <c:if test="${not empty plugin.logo}">
+              <a target="_blank" href="<c:url value="${car:fileUrl(plugin.logo)}"/>">${plugin.logo.nom}</a>
+            </c:if>
+           </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.CLASSE)}">
           <td>
           ${plugin.classe}

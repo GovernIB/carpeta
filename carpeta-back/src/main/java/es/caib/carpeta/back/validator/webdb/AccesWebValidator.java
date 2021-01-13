@@ -38,6 +38,9 @@ public class AccesWebValidator extends AbstractWebValidator<AccesForm, Acces>
   @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EntitatLocal.JNDI_NAME)
   protected es.caib.carpeta.ejb.EntitatLocal entitatEjb;
 
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.PluginLocal.JNDI_NAME)
+  protected es.caib.carpeta.ejb.PluginLocal pluginEjb;
+
 
 
   public AccesWebValidator() {
@@ -80,7 +83,7 @@ public class AccesWebValidator extends AbstractWebValidator<AccesForm, Acces>
 
     BeanValidatorResult<Acces> __vr = new BeanValidatorResult<Acces>();
     validator.validate(__vr, __bean,
-      isNou, accesEjb, entitatEjb);
+      isNou, accesEjb, entitatEjb, pluginEjb);
 
     if (__vr.hasErrors()) {
         List<I18NFieldError> vrErrors = __vr.getErrors();

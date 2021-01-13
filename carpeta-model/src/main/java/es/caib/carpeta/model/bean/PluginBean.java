@@ -13,6 +13,7 @@ private static final long serialVersionUID = 1605894563L;
 	long pluginID;// PK
 	long nomID;
 	java.lang.Long descripcioID;
+	java.lang.Long logoID;
 	java.lang.String classe;
 	java.lang.String propietats;
 	boolean actiu;
@@ -24,21 +25,32 @@ private static final long serialVersionUID = 1605894563L;
   }
 
   /** Constructor amb tots els camps  */
-  public PluginBean(long pluginID , long nomID , java.lang.Long descripcioID , java.lang.String classe , java.lang.String propietats , boolean actiu , int tipus) {
+  public PluginBean(long pluginID , long nomID , java.lang.Long descripcioID , java.lang.Long logoID , java.lang.String classe , java.lang.String propietats , boolean actiu , int tipus) {
     this.pluginID=pluginID;
     this.nomID=nomID;
     this.descripcioID=descripcioID;
+    this.logoID=logoID;
     this.classe=classe;
     this.propietats=propietats;
     this.actiu=actiu;
     this.tipus=tipus;
 }
   /** Constructor sense valors autoincrementals */
-  public PluginBean(long nomID , java.lang.Long descripcioID , java.lang.String classe , java.lang.String propietats , boolean actiu , int tipus) {
+  public PluginBean(long nomID , java.lang.Long descripcioID , java.lang.Long logoID , java.lang.String classe , java.lang.String propietats , boolean actiu , int tipus) {
+    this.nomID=nomID;
+    this.descripcioID=descripcioID;
+    this.logoID=logoID;
+    this.classe=classe;
+    this.propietats=propietats;
+    this.actiu=actiu;
+    this.tipus=tipus;
+}
+  /** Constructor dels valors Not Null */
+  public PluginBean(long pluginID , long nomID , java.lang.Long descripcioID , java.lang.String classe , boolean actiu , int tipus) {
+    this.pluginID=pluginID;
     this.nomID=nomID;
     this.descripcioID=descripcioID;
     this.classe=classe;
-    this.propietats=propietats;
     this.actiu=actiu;
     this.tipus=tipus;
 }
@@ -46,10 +58,13 @@ private static final long serialVersionUID = 1605894563L;
     this.setPluginID(__bean.getPluginID());
     this.setNomID(__bean.getNomID());
     this.setDescripcioID(__bean.getDescripcioID());
+    this.setLogoID(__bean.getLogoID());
     this.setClasse(__bean.getClasse());
     this.setPropietats(__bean.getPropietats());
     this.setActiu(__bean.isActiu());
     this.setTipus(__bean.getTipus());
+    // Fitxer
+    this.setLogo(FitxerBean.toBean(__bean.getLogo()));
 	}
 
 	public long getPluginID() {
@@ -71,6 +86,13 @@ private static final long serialVersionUID = 1605894563L;
 	};
 	public void setDescripcioID(java.lang.Long _descripcioID_) {
 		this.descripcioID = _descripcioID_;
+	};
+
+	public java.lang.Long getLogoID() {
+		return(logoID);
+	};
+	public void setLogoID(java.lang.Long _logoID_) {
+		this.logoID = _logoID_;
 	};
 
 	public java.lang.String getClasse() {
@@ -111,13 +133,23 @@ private static final long serialVersionUID = 1605894563L;
     __tmp.setPluginID(__bean.getPluginID());
     __tmp.setNomID(__bean.getNomID());
     __tmp.setDescripcioID(__bean.getDescripcioID());
+    __tmp.setLogoID(__bean.getLogoID());
     __tmp.setClasse(__bean.getClasse());
     __tmp.setPropietats(__bean.getPropietats());
     __tmp.setActiu(__bean.isActiu());
     __tmp.setTipus(__bean.getTipus());
+    // Fitxer
+    __tmp.setLogo(FitxerBean.toBean(__bean.getLogo()));
 		return __tmp;
 	}
 
+  protected FitxerBean logo;
+  public FitxerBean getLogo() {
+    return logo;
+  }
+  public void setLogo(FitxerBean __field) {
+    this. logo = __field;
+  }
 
 
 }
