@@ -61,7 +61,7 @@ class BarraMenu extends Component {
 						{enllasosBarraMenu}
 						<li>
 							<button type="button" className="imc-bt-menu" id="imc-bt-menu" title={t('menuMenu')}>
-								<span>{t('menuMenu')}</span>
+								{/*<span>{t('menuMenu')}</span>*/}
 							</button>
 						</li>
 					</ul>
