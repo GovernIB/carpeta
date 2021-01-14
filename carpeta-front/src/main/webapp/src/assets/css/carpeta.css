@@ -67,6 +67,7 @@ img:hover {
 .card-title{
 	font: normal 100% 'Noto Sans', 'TrebuchetMS', 'Trebuchet MS', Arial, Helvetica, sans-serif;
 	vertical-align: baseline;
+	align-self: center;
 }
 .imc--logoclave{ 
 	background-image: url(../images/solicitar_clave_acceso_dgt.png); 
@@ -108,6 +109,13 @@ img:hover {
 .imc-icona{
     height: 2em;
     padding-right: 0.5em;
+}
+.capsaPlugin{
+	height: 14rem;
+}
+.titolPlugin{
+	display: flow-root;
+	align-self: center;
 }
 
 /* Canvis per React */
@@ -346,6 +354,12 @@ img:hover {
 .col2peu{
 	padding-left: 3rem!important;
 }
+/*.nivellAutenticacio{*/
+/*	color: #fff;*/
+/*}*/
+.nivellAut{
+	text-transform: none;
+}
 
 /* HomePage */
 .homePage .titol.h5 { text-transform: none !important; }
@@ -414,6 +428,9 @@ body {
 }
 .capsaMenu{
     min-height: 18rem !important;
+}
+.capsaPlugin{
+	height: 15rem;
 }
 }
 
@@ -513,6 +530,9 @@ thead>tr>th.sorting {
 .margen-top-clave{
 	text-align-last: center;
 }
+.capsaPlugin{
+	height: 16rem;
+}
 }
 
 /*Se aplican cuando el width es menor que 692*/
@@ -545,6 +565,19 @@ body {
 }
 .homePage ul li {
 	margin-left: 0px;
+}
+.capsaPlugin{
+	height: 17rem;
+}
+}
+
+/*Se aplican cuando el width es menor que 576*/
+@media only screen and (min-width : 481px) and (max-width : 575px) {
+.capsaPlugin{
+	height: 11rem;
+}
+.nivellAut{
+	font-size: 0.7em;
 }
 }
 

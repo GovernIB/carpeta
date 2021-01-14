@@ -96,11 +96,19 @@
 			<sec:authentication var="userSurname2" property="principal.usuarioClave.apellido2" />
 			<sec:authentication var="userDNI" property="principal.usuarioClave.nif" />
 			<sec:authentication var="userMethod" property="principal.usuarioClave.metodoAutentificacion" />
+			<sec:authentication var="userLevelAut" property="principal.usuarioClave.qaa" />
 			<div class="imc-titol usuari">
 				<nav class="imc--contingut">
 						<span class="estilUsuari">
 							<c:if test="${user != null}">
 								<span class="oi oi-person pr-2" aria-hidden="true"> </span><sec:authentication property="principal.usuarioClave.nombreCompleto" />
+<%--								<span class="pl-3" title="<fmt:message key="nivell.autenticacio"/>">--%>
+<%--									<c:forEach begin="0" end="${userLevelAut - 1}">--%>
+<%--										<span class="oi oi-lock-locked nivellAutenticacio"></span>--%>
+<%--									</c:forEach>--%>
+<%--								</span>--%>
+								<!-- Nivell d'autenticació -->
+								<span id="nivellAutenticacio"></span>
 							</c:if>
 						</span>
 					</h3>
@@ -124,6 +132,7 @@
 					sessionStorage.setItem('usuariLlinatge2', '${userSurname2}');
 					sessionStorage.setItem('usuariDNI', '${userDNI}');
 					sessionStorage.setItem('usuariMetode', '${userMethod}');
+					sessionStorage.setItem('usuariNivell', '${userLevelAut}');
 				}
 			</script>
 		</sec:authorize>
@@ -144,7 +153,7 @@
 			<div id = "avisosFront"></div>
 
 			<!-- Contingut pàgina -->
-			<div id = "contingut"></div>
+			<div id = "contingut" class="pt-5"></div>
 
 		</div>
 		<!-- Fi Zona Contingut -->
