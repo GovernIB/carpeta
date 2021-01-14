@@ -37,9 +37,11 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaLocal {
         accesJPA.setIp(ipAddress);
         accesJPA.setNif(usuarioClave.getNif());
         accesJPA.setDataDarrerAcces(dataDarrerAcces);
-        // XYZ ZZZ   Això està be ????
+        // S'ha d'arreglar a https://github.com/GovernIB/carpeta/issues/308
+        //    Això està be ????
         accesJPA.setResultatAutenticacio(Integer.parseInt(usuarioClave.getQaa()));
-        // XYZ ZZZ   Això està be ????
+        // S'ha d'arreglar a https://github.com/GovernIB/carpeta/issues/308
+        // Això està be ????
         accesJPA.setNivellSeguretat(usuarioClave.getMetodoAutentificacion());
         accesJPA.setProveidorIdentitat(usuarioClave.getProveedorDeIdentidad());
         accesJPA.setIdioma(idioma);

@@ -128,8 +128,16 @@ public class Configuracio implements Constants {
         return getProperty(CARPETA_PROPERTY_LOGINIB + "entidad");
     }
 
-    public static String getLoginIBAplicacion() {
+    /**
+     * 
+     * @return
+     */
+    public static String getLoginIBAplicacionCode() {
         return getProperty(CARPETA_PROPERTY_LOGINIB + "aplicacion");
+    }
+    
+    public static String getLoginIBAplicacionDescription() {
+        return getProperty(CARPETA_PROPERTY_LOGINIB + "aplicaciondescripcion");
     }
 
 

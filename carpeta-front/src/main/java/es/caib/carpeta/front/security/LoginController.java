@@ -130,7 +130,8 @@ public class LoginController {
             
             } catch (Exception e) {
                 log.error("Error Iniciant la sessió de seguretat amb Cl@ve: " + e.getMessage(), e);
-                // XYZ ZZZ FALTA MOSTRAR ERROR
+                //  FALTA MOSTRAR ERROR
+                // Solucionarà a "Mostrar error al fallar autenticació de front #309"
                 url = baseURL;
             }
 

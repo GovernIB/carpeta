@@ -143,7 +143,8 @@
 					<div class="dropdown-menu  dropdown-menu-right"
 						aria-labelledby="dropdownMenu3" id="dropdownSubMenu3">
 				<%
-					// TODO XYZ ZZZ Això ho ha de collir dels idiomes de la BBDD
+                    // ISSUE Configuració d'idiomes #306 
+					// Això ho ha de collir dels idiomes de la BBDD
 					java.util.List<String> idiomes = new java.util.ArrayList<String>();
 					idiomes.add("ca");
 					idiomes.add("es");

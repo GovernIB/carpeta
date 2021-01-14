@@ -131,7 +131,8 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
 
                 List<AvisJPA> avisos = avisEjb.findActiveByPluginID(p.getPluginID());
 
-                // XYZ ZZZ TODO Ara hi pot haver més d'un avís actiu al mateix temps, només es mostra el de major gravetat
+                // Ara hi pot haver més d'un avís actiu al mateix temps, només es mostra el de major gravetat,
+                // ja que cada tipus d'avis te una forma diferent de visualitzar el plugin al Front
                 Long gravetatAvis = (long) 0;
                 String missatgeAvis = "";
                 if (avisos.size() > 0) {

@@ -27,8 +27,8 @@ public class PluginLoginLoginIB {
 
     private String METODES_AUTENTICACIO = Configuracio.getLoginIBMethodAuth();
     private String CODI_ENTITAT = Configuracio.getLoginIBEntidad();
-    private String APLICACIO_CODI = Configuracio.getLoginIBAplicacion();
-
+    private String APLICACIO_CODI = Configuracio.getLoginIBAplicacionCode();
+    private String APLICACIO_DESCRIPCIO = Configuracio.getLoginIBAplicacionDescription();
     private String NIVELL_QAA = Configuracio.getLoginIBNivelQAA();
     private String LOGINIB_USER = Configuracio.getLoginIBUser();
     private String LOGINIB_PASS = Configuracio.getLoginIBPassword();
@@ -37,7 +37,7 @@ public class PluginLoginLoginIB {
     private boolean ignoreServerCertificates = false;
     
 
-    private String APLICACIO_DESCRIPCIO = "CARPETA"; // XYZ ZZZ
+    
 
     public String startAuthentication(String urlCallBackLoginOk, String urCallBackLoginError, String language) throws Exception {
         final RLoginParams param = new RLoginParams();
@@ -94,10 +94,10 @@ public class PluginLoginLoginIB {
             loginInfo.setAdministrationID(datosAutenticacion.getNif());
             loginInfo.setAuthenticationMethod(datosAutenticacion.getMetodoAutenticacion());
             loginInfo.setQaa(datosAutenticacion.getQaa());
-            loginInfo.setIdentityProvider("Clave"); // XYZ ZZZ ZZZ TODO este valor no viene informado por LoginIB,
-                                                       // tendriamos que hablar
+            // S'ha mogut la petició al issue "LoginIB no retorna informació del Provider de l'autenticacio #310 "
+            //  TODO este valor no viene informado por LoginIB, tendriamos que hablar
             // con loginIb a ver si pueden enviarnoslo.
-
+            loginInfo.setIdentityProvider("Clave"); 
             return loginInfo;
         } catch (Exception e) {
             log.error(" ERROR DESCONEGUT en validateAuthenticationTicket: " + e.getMessage(), e);

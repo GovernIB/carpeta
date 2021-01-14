@@ -76,7 +76,7 @@
           <td>
           <c:set var="tmp">${acces.pluginID}</c:set>
           <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfValuesForPluginID[tmp]}
+          ${__theFilterForm.mapOfPluginForPluginID[tmp]}
           </c:if>
           </td>
         </c:if>
