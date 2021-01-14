@@ -13,14 +13,13 @@ import javax.ejb.EJB;
 
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_ACCES_LOGIN_AUTENTICAT;
 import es.caib.carpeta.commons.utils.UsuarioClave;
+import es.caib.carpeta.ejb.PropietatGlobalLocal;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.carpeta.front.service.SecurityService;
-import es.caib.carpeta.front.utils.SesionHttp;
 import es.caib.carpeta.jpa.EntitatJPA;
 import es.caib.carpeta.logic.AccesLogicaLocal;
-import es.caib.carpeta.logic.AuditoriaLogicaLocal;
-import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
 import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
+import es.caib.carpeta.logic.utils.EjbManager;
 import java.net.InetAddress;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -34,20 +33,11 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
     @Autowired
     SecurityService securityService;
 
-    @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
-    protected AuditoriaLogicaLocal auditoriaLogicaEjb;
-
-    @EJB(mappedName = LogCarpetaLogicaLocal.JNDI_NAME)
-    protected LogCarpetaLogicaLocal logLogicaEjb;
-
     @EJB(mappedName = AccesLogicaLocal.JNDI_NAME)
     protected AccesLogicaLocal accesLogicaEjb;
     
     @EJB(mappedName = UtilitiesForFrontLogicaLocal.JNDI_NAME)
     protected UtilitiesForFrontLogicaLocal utilsEjb;
-    
-    @Autowired
-    private SesionHttp sesionHttp;
 
     @Override
     public Authentication authenticate(Authentication authentication) {
@@ -65,9 +55,11 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
         try {
 
             usuarioClave = securityService.validarTicketAutentificacion(passwd);
-            
-            String codiEntitat = sesionHttp.getEntitat();
-            EntitatJPA entitat = utilsEjb.getEntitat(codiEntitat);
+
+            //Agafam l'entitat per defecte
+            PropietatGlobalLocal propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
+            String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
+            EntitatJPA entitat = utilsEjb.getEntitat(defaultEntityCode);
             long entitatID = entitat.getEntitatID();
             accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_LOGIN_AUTENTICAT, entitatID, null, new Timestamp(new Date().getTime()), LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress());
 
