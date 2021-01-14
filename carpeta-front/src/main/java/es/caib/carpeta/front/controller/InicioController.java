@@ -24,7 +24,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-
 @Controller
 public class InicioController extends CommonFrontController {
 
@@ -39,7 +38,7 @@ public class InicioController extends CommonFrontController {
 
     protected final Log log = LogFactory.getLog(getClass());
 
-    @RequestMapping(value={"/entitat"}, method = RequestMethod.GET)
+    @RequestMapping(value = { "/entitat" }, method = RequestMethod.GET)
     public ModelAndView llistarEntitats(HttpServletRequest request, HttpServletResponse response) throws I18NException {
 
         ModelAndView mav = new ModelAndView("entitat");
@@ -72,10 +71,11 @@ public class InicioController extends CommonFrontController {
 
     }
 
-    @RequestMapping(value={"/e/{codiEntitat}"}, method = RequestMethod.GET)
-    public String triarEntitat(@PathVariable("codiEntitat") String codiEntitat, HttpServletRequest request, HttpServletResponse response) throws I18NException {
+    @RequestMapping(value = { "/e/{codiEntitat}" }, method = RequestMethod.GET)
+    public String triarEntitat(@PathVariable("codiEntitat") String codiEntitat, HttpServletRequest request,
+            HttpServletResponse response) throws I18NException {
 
-        try{
+        try {
 
             sesionHttp.setEntitat(codiEntitat);
 
@@ -87,18 +87,17 @@ public class InicioController extends CommonFrontController {
 
     }
 
-
-    @RequestMapping(value={"/"})
-    public ModelAndView inicio(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws I18NException {
+    @RequestMapping(value = { "/" })
+    public ModelAndView inicio(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+            throws I18NException {
 
         ModelAndView mav = new ModelAndView("inici");
 
         // Posam la sessió de 30 minuts
 //        session.setMaxInactiveInterval(1 * 60);
-        mav.addObject("maxInactiveInterval", 30*60);
+        mav.addObject("maxInactiveInterval", 30 * 60);
 
-
-        try{
+        try {
 
             String lang = LocaleContextHolder.getLocale().getLanguage();
 
@@ -108,16 +107,16 @@ public class InicioController extends CommonFrontController {
 
             List<StringKeyValue> entitats = utilsEjb.getEntitats(lang);
 
-            if(defaultEntityCode == null && sesionHttp.getEntitat() == null) {
+            if (defaultEntityCode == null && sesionHttp.getEntitat() == null) {
 
-                if(entitats.size() > 1){
+                if (entitats.size() > 1) {
 
                     mav = new ModelAndView("entitat");
                     mav.addObject("entitats", entitats);
                     mav.addObject("numEntitats", entitats.size());
                     mav.addObject("canviarDeFront", canviardefront);
 
-                } else{
+                } else {
 
                     sesionHttp.setEntitat(entitats.get(0).key);
                     mav.addObject("entitat", entitats.get(0).key);
@@ -126,39 +125,39 @@ public class InicioController extends CommonFrontController {
 
                 }
 
-            } else if(defaultEntityCode != null){
+            } else if (defaultEntityCode != null) {
 
-                    EntitatJPA entitat = entitatEjb.findByCodi(defaultEntityCode);
+                EntitatJPA entitat = entitatEjb.findByCodi(defaultEntityCode);
 
-                    if(entitat != null) {
+                if (entitat != null) {
 
-                        sesionHttp.setEntitat(defaultEntityCode);
-                        mav.addObject("entitat", sesionHttp.getEntitat());
-                        mav.addObject("defaultEntityCode", defaultEntityCode);
-                        mav.addObject("numEntitats", entitats.size());
-                        mav.addObject("canviarDeFront", canviardefront);
-
-                    } else{
-
-                        if(sesionHttp.getEntitat() != null){
-                            mav.addObject("entitat", sesionHttp.getEntitat());
-                            mav.addObject("numEntitats", entitats.size());
-                            mav.addObject("canviarDeFront", canviardefront);
-                        } else{
-                            mav = new ModelAndView("entitat");
-                            mav.addObject("entitats", entitats);
-                        }
-
-                    }
-                } else{
-
+                    sesionHttp.setEntitat(defaultEntityCode);
                     mav.addObject("entitat", sesionHttp.getEntitat());
+                    mav.addObject("defaultEntityCode", defaultEntityCode);
                     mav.addObject("numEntitats", entitats.size());
                     mav.addObject("canviarDeFront", canviardefront);
 
-                }
+                } else {
 
-            } catch (Throwable e) {
+                    if (sesionHttp.getEntitat() != null) {
+                        mav.addObject("entitat", sesionHttp.getEntitat());
+                        mav.addObject("numEntitats", entitats.size());
+                        mav.addObject("canviarDeFront", canviardefront);
+                    } else {
+                        mav = new ModelAndView("entitat");
+                        mav.addObject("entitats", entitats);
+                    }
+
+                }
+            } else {
+
+                mav.addObject("entitat", sesionHttp.getEntitat());
+                mav.addObject("numEntitats", entitats.size());
+                mav.addObject("canviarDeFront", canviardefront);
+
+            }
+
+        } catch (Throwable e) {
             processException(e, response);
         }
 

@@ -61,7 +61,8 @@ public abstract class CommonFrontController {
 
     public void processException(Throwable e, HttpServletResponse response) {
 
-        // XYZ ZZZ Afegir log de BBDD d'error al front
+        //  Afegir log de BBDD d'error al front
+        // ISSUE "Mostrar error al fallar autenticació de front #309"
 
         log.error(e);
 
