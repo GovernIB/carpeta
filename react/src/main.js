@@ -19,6 +19,7 @@ import AvisosFront from './AvisosFront';
 import PluginHtml from './PluginHtml';
 import PluginReact from './PluginReact';
 import MenuRapid from './MenuRapid';
+import NivellAutenticacio from './NivellAutenticacio';
 import * as breadcrumbPaths from './utils/breadcrumbPaths';
 import * as breadcrumbPathsAut from './utils/breadcrumbPathsAut';
 
@@ -68,6 +69,10 @@ ReactDOM.render(
   document.getElementById("contingut")
 );
 
+ReactDOM.render(
+	<NivellAutenticacio autenticat='1'/>,
+	document.getElementById("nivellAutenticacio")
+);
 
 newIniciReact  = function createReactCompInici(nomComponent, param) {
     ReactDOM.render(<Inici autenticat={param}/>, document.getElementById(nomComponent));
@@ -148,4 +153,11 @@ newPluginReact  = function createReactCompPluginReact(nomComponent, param, plugi
 };
 newAvisosFrontReact  = function createReactCompAvisosFront(nomComponent, param) {
 	ReactDOM.render(<AvisosFront autenticat={param}/>, document.getElementById(nomComponent));
+};
+
+newNivellAutenticacioReact = function createReactCompNivellAutenticacio(nomComponent, param) {
+	alert(param);
+	if(param === '1') {
+		ReactDOM.render(<NivellAutenticacio autenticat={param}/>, document.getElementById(nomComponent));
+	}
 };

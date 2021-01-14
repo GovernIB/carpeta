@@ -41,7 +41,7 @@
 	"mollaInici": "Inici",
 
 
-	"paginaIniciTitol": "Us donam la benvinguda a la Carpeta Ciutadana -",
+	"paginaIniciTitol": "Us donam la benvinguda a la Carpeta Ciutadana - ",
 	"paginaIniciQuefer": "Què podeu fer a la Carpeta Ciutadana?",
 	"paginaIniciQuefer1": "Consultar l'estat dels vostres tràmits telemàtics.",
 	"paginaIniciQuefer2": "Consultar els vostres registres d'entrada i descarregar-vos els justificants.",
@@ -63,7 +63,7 @@
 	"paginaIniciLogoClave": "Logo Clave",
 	"paginaIniciAjudaClaveText": "Accedir Cl@ve",
 	"paginaIniciAjudaBustiaText": "Accedir Bústia Cl@ve",
-	"paginaIniciTitolPrivat": "Benvingut a la Carpeta Ciutadana del Govern de les Illes Balears",
+	"paginaIniciTitolPrivat": "Us donam la benvinguda a la Carpeta Ciutadana - ",
 	"paginaIniciIntroduccioPrivat": "La Carpeta Ciutadana és una àrea privada que us facilita la relació amb l'Administració, des de la qual podeu accedir de forma àgil i senzilla als vostres tràmits i gestions, i també consultar les vostres dades personals en poder de l'Administració. Actualment, la Carpeta Ciutadana permet consultar les funcionalitats següents:",
 	"paginaIniciLlistaTramits": "Tràmits sense enviar",
 	"paginaIniciDescripcioTramits": "En aquest apartat podeu consultar tots els tràmits telemàtics que heu iniciat i estan pendents de finalitzar.",
@@ -221,5 +221,10 @@
 	"sessioAvisDescripcio": "La seva sessió finalizarà en 30 segons. Vol continuar la sessió?",
 	"sessioAvisTitol": "Informació Expiració Sessió",
 	"sessioExpiradaTitol": "Sessió expirada",
-	"sessioExpiradaDescripcio": "Ha expirat la sessió."
+	"sessioExpiradaDescripcio": "Ha expirat la sessió.",
+
+	"nivellAutenticacio": "Nivell d'autenticació",
+	"nivellAutenticacio1": "BAIX",
+	"nivellAutenticacio2": "MITJÀ",
+	"nivellAutenticacio3": "ALT"
 }

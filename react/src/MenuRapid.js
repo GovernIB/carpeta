@@ -93,8 +93,8 @@ class MenuRapid extends Component {
 
         return (
             <div>
-                <nav className="navbar navbar-expand-sm bg-light pl-0">
-                    <ul className="navbar-nav" id="llistaMenuRapid">
+                <nav className="navbar navbar-expand-sm bg-white p-0">
+                    <ul className="navbar-nav p-3" id="llistaMenuRapid">
                         {/*{gestions}*/}
                         {/*{accessibilitat}*/}
                         {gestionsHtml}

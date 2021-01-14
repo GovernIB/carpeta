@@ -14,6 +14,7 @@ var newPeuReact;
 var newPluginHtml;
 var newPluginReact;
 var newMenuRapidReact;
+var newNivellAutenticacioReact;
 
 
 function newInici(compoWeb, nom) {
@@ -78,4 +79,8 @@ function newPluginHtml(compoWeb, nom, pluginID) {
 
 function newPluginReact(compoWeb, nom, pluginID) {
 	setTimeout(newPluginReact.bind(null,compoWeb,nom,pluginID) , 1);
+}
+
+function newNivellAutenticacio(compoWeb, nom, pluginID) {
+	setTimeout(newNivellAutenticacioReact.bind(null,compoWeb,nom,pluginID) , 1);
 }
