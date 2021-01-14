@@ -15,7 +15,9 @@ import org.apache.tiles.AttributeContext;
 import org.apache.tiles.preparer.PreparerException;
 import org.apache.tiles.preparer.ViewPreparer;
 import org.apache.tiles.request.Request;
+import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NTranslation;
+import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -29,9 +31,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.commons.utils.Constants;
+import es.caib.carpeta.ejb.IdiomaLocal;
 import es.caib.carpeta.jpa.AvisJPA;
 import es.caib.carpeta.logic.AvisLogicaLocal;
 import es.caib.carpeta.logic.utils.EjbManager;
+import es.caib.carpeta.model.fields.IdiomaFields;
 
 /**
  * @author anadal
@@ -44,8 +48,7 @@ public class BasePreparer implements ViewPreparer, Constants {
 	public static Map<String, I18NTranslation> loginErrorMessage = new HashMap<String, I18NTranslation>();
 
 	protected final Logger log = Logger.getLogger(getClass());
-	
-	protected AvisLogicaLocal avisLogicaLocalEjb; 
+
 
 	@Override
 	public void execute(Request tilesRequest, AttributeContext attributeContext) throws PreparerException {
@@ -121,6 +124,12 @@ public class BasePreparer implements ViewPreparer, Constants {
 		Locale loc = LocaleContextHolder.getLocale();
 		request.put("lang", loc.toString()); // LANG i si es necessari el country
 		request.put("onlylang", loc.getLanguage()); // només el LANG
+		try {
+		    IdiomaLocal idiomaEjb =EjbManager.getIdiomaEJB();
+		   request.put("languages", idiomaEjb.select(IdiomaFields.SUPORTAT.equal(true), new OrderBy(IdiomaFields.ORDRE)));
+        } catch (I18NException e) {
+            throw new PreparerException("Error consultant idiomes disponibles: " + I18NUtils.getMessage(e), e);
+        }
 
 		// Pipella
 		request.put("pipella", attributeContext.getAttribute("pipella"));
@@ -137,11 +146,11 @@ public class BasePreparer implements ViewPreparer, Constants {
 		// Avisos Back
 		List<AvisJPA> avisosList = new ArrayList<AvisJPA>();
 		try {
-			avisLogicaLocalEjb = EjbManager.getAvisLogicaEJB();
+		    AvisLogicaLocal avisLogicaEjb = EjbManager.getAvisLogicaEJB();
 			if("superadmin".equals((String)attributeContext.getAttribute("pipella").getValue())) {
-				avisosList = avisLogicaLocalEjb.findAllActive();
+				avisosList = avisLogicaEjb.findAllActive();
 			} else if("adminentitat".equals((String)attributeContext.getAttribute("pipella").getValue())) { 
-				avisosList = avisLogicaLocalEjb.findActiveByEntidadID(LoginInfo.getInstance().getEntitatID());
+				avisosList = avisLogicaEjb.findActiveByEntidadID(LoginInfo.getInstance().getEntitatID());
 			} 
 			httpRequest.getSession().setAttribute("numAvisos", avisosList.size());
 			

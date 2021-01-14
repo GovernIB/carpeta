@@ -8,26 +8,6 @@
     </span>
 </a>
 
-<hr style="margin-top: 6px; margin-bottom: 6px;" />
-
-<a class="dropdown-item"
-    href="<c:url value="/superadmin/propietatglobal/list"/>"> <span
-    style="${(fn:contains(url, 'option1'))? " font-weight:bold;" : ""}"><spring:message
-            code="propietatGlobal.propietatGlobal.plural" /></span>
-</a>
-
-<hr style="margin-top: 6px; margin-bottom: 6px;" />
-
-<a class="dropdown-item" href="<c:url value="/superadmin/pluginfront/list"/>">
-   <span
-    style="${(fn:contains(url, 'superadmin/pluginfront/list'))? "font-weight:bold;" : ""}"><spring:message
-            code="plugin.tipus.1.plural" /></span>
-</a>
-
-
-
-<hr style="margin-top: 6px; margin-bottom: 6px;" />
-
 <a class="dropdown-item"
     href="<c:url value="/superadmin/usuari/list"/>"> <span
     style="${(fn:contains(url, '/superadmin/usuari/'))? " font-weight:bold;" : ""}"><spring:message
@@ -42,25 +22,10 @@
 
 <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
-<a class="dropdown-item"
-    href="<c:url value="/superadmin/avis/list"/>"> <span
-    style="${(fn:contains(url, '/superadmin/avis'))? " font-weight:bold;" : ""}"><spring:message
-            code="avis.avis.plural" />&nbsp;<c:if test="${sessionScope.numAvisos ne '0'}"><span class="badge badge-danger">${sessionScope.numAvisos}</span></c:if></span>
-</a>
-
-<hr style="margin-top: 6px; margin-bottom: 6px;" />
-
-<a class="dropdown-item" href="<c:url value="/superadmin/systemproperties"/>"> <span
-    style="${(fn:contains(url, '/superadmin/systemproperties'))? " font-weight:bold;" : ""}"><spring:message
-        code="superadmin.systemproperties" /> </span>
-</a>
-
-<hr style="margin-top: 6px; margin-bottom: 6px;" />
-
-<a class="dropdown-item"
-   href="<c:url value="/superadmin/acces/list"/>"> <span
-        style="${(fn:contains(url, '/superadmin/acces'))? " font-weight:bold;" : ""}"><spring:message
-        code="acces.acces.plural" /> </span>
+<a class="dropdown-item" href="<c:url value="/superadmin/pluginfront/list"/>">
+   <span
+    style="${(fn:contains(url, 'superadmin/pluginfront/list'))? "font-weight:bold;" : ""}"><spring:message
+            code="plugin.tipus.1.plural" /></span>
 </a>
 
 <a class="dropdown-item"
@@ -69,10 +34,26 @@
         code="logCarpeta.logCarpeta.plural" /> </span>
 </a>
 
+<hr style="margin-top: 6px; margin-bottom: 6px;" />
+
 <a class="dropdown-item"
-   href="<c:url value="/superadmin/auditoria/list"/>"> <span
-        style="${(fn:contains(url, '/superadmin/auditoria'))? " font-weight:bold;" : ""}"><spring:message
-        code="auditoria.auditoria.plural" /> </span>
+    href="<c:url value="/superadmin/avis/list"/>"> <span
+    style="${(fn:contains(url, '/superadmin/avis'))? " font-weight:bold;" : ""}"><spring:message
+            code="avis.avis.plural" />&nbsp;<c:if test="${sessionScope.numAvisos ne '0'}"><span class="badge badge-danger">${sessionScope.numAvisos}</span></c:if></span>
+</a>
+
+<hr style="margin-top: 6px; margin-bottom: 6px;" />
+
+
+<a class="dropdown-item"
+    href="<c:url value="/superadmin/propietatglobal/list"/>"> <span
+    style="${(fn:contains(url, 'propietatglobal/list'))? " font-weight:bold;" : ""}"><spring:message
+            code="propietatGlobal.propietatGlobal.plural" /></span>
+</a>
+
+<a class="dropdown-item" href="<c:url value="/superadmin/systemproperties"/>"> <span
+    style="${(fn:contains(url, '/superadmin/systemproperties'))? " font-weight:bold;" : ""}"><spring:message
+        code="superadmin.systemproperties" /> </span>
 </a>
 
 <a class="dropdown-item"
@@ -80,6 +61,32 @@
         style="${(fn:contains(url, '/superadmin/fitxerorfes'))? " font-weight:bold;" : ""}"><spring:message
         code="fitxers.orfes" /> </span>
 </a>
+
+<a class="dropdown-item"
+   href="<c:url value="/superadmin/idioma/list"/>"> <span
+        style="${(fn:contains(url, '/superadmin/idioma'))? " font-weight:bold;" : ""}"><spring:message
+        code="idioma.idioma.plural" /> </span>
+</a>
+
+<hr style="margin-top: 6px; margin-bottom: 6px;" />
+
+
+<a class="dropdown-item"
+   href="<c:url value="/superadmin/auditoria/list"/>"> <span
+        style="${(fn:contains(url, '/superadmin/auditoria'))? " font-weight:bold;" : ""}"><spring:message
+        code="auditoria.auditoria.plural" /> </span>
+</a>
+
+<a class="dropdown-item"
+   href="<c:url value="/superadmin/acces/list"/>"> <span
+        style="${(fn:contains(url, '/superadmin/acces'))? " font-weight:bold;" : ""}"><spring:message
+        code="acces.acces.plural" /> </span>
+</a>
+
+
+
+
+
 
 <%--
 <hr style="margin-top: 6px; margin-bottom: 6px;" />

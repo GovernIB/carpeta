@@ -132,6 +132,7 @@
 	                    <li><a href="<c:url value="/superadmin/propietatglobal/list"/>"><spring:message code="propietatGlobal.propietatGlobal.plural" /></a></li>
 	                    <li><a href="<c:url value="/superadmin/systemproperties"/>"><spring:message code="superadmin.systemproperties" /></a></li>
 	                    <li><a href="<c:url value="/superadmin/fitxerorfes/list"/>"><spring:message code="fitxers.orfes" /></a></li>
+                        <li><a href="<c:url value="/superadmin/idioma/list"/>"><spring:message code="idioma.idioma.plural" /></a></li>
 	                </ul>
 	            </div>
 	        </div>

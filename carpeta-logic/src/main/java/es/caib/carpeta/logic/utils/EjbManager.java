@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import javax.naming.InitialContext;
 
 import es.caib.carpeta.commons.utils.Constants;
+import es.caib.carpeta.ejb.IdiomaLocal;
 import es.caib.carpeta.ejb.PropietatGlobalLocal;
 import es.caib.carpeta.logic.AuditoriaLogicaLocal;
 import es.caib.carpeta.logic.AuthenticationLogicaLocal;
@@ -29,6 +30,8 @@ public final class EjbManager {
 	protected static PropietatGlobalLocal propietatLogicaEjb;
 	
 	protected static AvisLogicaLocal avisLogicaEjb;
+	
+	protected static IdiomaLocal idiomaEjb;
 
 	protected static AuditoriaLogicaLocal auditoriaLogicaEjb;
 
@@ -40,6 +43,20 @@ public final class EjbManager {
 				new I18NArgumentString("No puc instanciar " + name + ": " + e.getMessage()));
 	}
 
+	
+	
+	public static IdiomaLocal getIdiomaEJB() throws I18NException {
+
+        if (idiomaEjb == null) {
+            try {
+                idiomaEjb = (IdiomaLocal) new InitialContext()
+                        .lookup(IdiomaLocal.JNDI_NAME);
+            } catch (Throwable e) {
+                throwNewI18NException(e, IdiomaLocal.JNDI_NAME);
+            }
+        }
+        return idiomaEjb;
+    }
 	
 
 	public static PropietatGlobalLocal getPropietatLogicaEJB() throws I18NException {

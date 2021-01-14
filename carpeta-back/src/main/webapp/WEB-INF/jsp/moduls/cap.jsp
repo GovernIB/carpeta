@@ -145,19 +145,19 @@
 				<%
                     // ISSUE Configuració d'idiomes #306 
 					// Això ho ha de collir dels idiomes de la BBDD
-					java.util.List<String> idiomes = new java.util.ArrayList<String>();
-					idiomes.add("ca");
-					idiomes.add("es");
+					//java.util.List<String> idiomes = new java.util.ArrayList<String>();
+					//idiomes.add("ca");
+					//idiomes.add("es");
 					//idiomes.add("en");
-					session.setAttribute("idiomes", idiomes);
+					//session.setAttribute("idiomes", idiomes);
 				%>
 						<table>
 							<tr>
-								<c:forEach var="idioma" items="${idiomes}" varStatus="status">
+								<c:forEach var="idioma" items="${languages}" varStatus="status">
 									<td><a class="dropdown-item"
-										href="<c:url value="/canviarIdioma/${idioma}"></c:url>"> <img
-											src="<c:url value="/img/${idioma}_petit_${lang eq idioma? 'on' : 'off'}.gif"/>"
-											alt="${idioma}" width="17" height="14" border="0" />
+										href="<c:url value="/canviarIdioma/${idioma.idiomaID}"></c:url>"> <img
+											src="<c:url value="/img/${idioma.idiomaID}_petit_${onlylang eq idioma.idiomaID? 'on' : 'off'}.gif"/>"
+											alt="${idioma.nom}" width="17" height="14" border="0" />
 									</a></td>
 								</c:forEach>
 							</tr>

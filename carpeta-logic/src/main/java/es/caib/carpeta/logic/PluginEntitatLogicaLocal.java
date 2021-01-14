@@ -1,7 +1,6 @@
 package es.caib.carpeta.logic;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.ejb.Local;
 import javax.validation.constraints.NotNull;

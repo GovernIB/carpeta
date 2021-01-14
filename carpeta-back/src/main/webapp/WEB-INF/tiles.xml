@@ -306,6 +306,16 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/accesList.jsp" />
     </definition>
     
+    
+    <definition name="idiomaFormSuperAdmin" extends="superadmin">
+        <put-attribute name="titol" value="idioma.idioma" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/idiomaForm.jsp" />
+    </definition>
+    
+    <definition name="idiomaListSuperAdmin" extends="superadmin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/idiomaList.jsp" />
+    </definition>
+    
 
     <!--  ===========  DESENVOLUPAMENT ================== -->
     
