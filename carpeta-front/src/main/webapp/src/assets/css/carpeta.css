@@ -354,11 +354,11 @@ img:hover {
 .col2peu{
 	padding-left: 3rem!important;
 }
-/*.nivellAutenticacio{*/
-/*	color: #fff;*/
-/*}*/
 .nivellAut{
 	text-transform: none;
+}
+.padL-4-5{
+	padding-left: 4.5em !important;
 }
 
 /* HomePage */
@@ -532,6 +532,9 @@ thead>tr>th.sorting {
 }
 .capsaPlugin{
 	height: 16rem;
+}
+.padL-4-5 {
+	padding-left: 3em !important;
 }
 }
 

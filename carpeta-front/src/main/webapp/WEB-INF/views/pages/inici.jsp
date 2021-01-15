@@ -133,14 +133,14 @@
 			</script>
 		</sec:authorize>
 
+		<!-- Menú Ràpid-->
+		<div id = "menuRapid"></div>
+
 		<!-- Menú desplegable -->
 		<div id = "menuDesllisant"></div>
-			
+
 		<!-- Zona Contingut -->
 		<div class="imc-continguts" id="continguts">
-
-			<!-- Menú Ràpid-->
-			<div id = "menuRapid"></div>
 
 			<!-- Molla de pa -->
 			<div id = "mollaPa"></div>
