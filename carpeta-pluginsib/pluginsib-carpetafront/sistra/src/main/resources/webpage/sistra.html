@@ -89,10 +89,10 @@
                     <thead class="table-success">
                     <tr>
                         <th>${tramite_tramite}</th>
-                        <th>${tramite_fecha_inicio}</th>
-                        <th>${tramite_acceso}</th>
+                        <th style="width:120px !important">${tramite_fecha_inicio}</th>
+<!--                        <th>${tramite_acceso}</th>-->
                         <th>${tramite_estado}</th>
-                        <th>${tramite_detalle}</th>
+<!--                        <th>${tramite_detalle}</th>-->
                         <#if development>
                             <th>${tramite_versionsistra}</th>
                         </#if>
@@ -106,13 +106,14 @@
                         <td>
                             ${tramite.fechaInicio?string("dd-MM-yyyy HH:mm")}
                         </td>
-                        <td>${tramite.fechaUltimoAcceso?string("dd-MM-yyyy HH:mm")}</td>
+<!--                        <td>${tramite.fechaUltimoAcceso?string("dd-MM-yyyy HH:mm")}</td>-->
                         <#if tramite.isPendiente()!>
                             <td>${tramite_nofinalizado}</td>
-                            <td align="center"><span class="oi oi-external-link" title="${tramite_continuar}"></span></td>
+<!--                            <td align="center"><span class="oi oi-external-link" title="${tramite_continuar}"></span></td>-->
                         <#else>
-                            <td>${tramite_finalizado}<#if tramite.tipo?has_content>: <span style="text-transform:lowercase">${tramite.tipo}</span></#if></td>
-                            <td align="center"><span class="oi oi-eye" title="${tramite_ver}"></span></td>
+                            <td>${tramite_finalizado}</td>
+<!--                            <td>${tramite_finalizado}<#if tramite.tipo?has_content>: <span style="text-transform:lowercase">${tramite.tipo}</span></#if></td>-->
+<!--                            <td align="center"><span class="oi oi-eye" title="${tramite_ver}"></span></td>-->
                         </#if>
                         <#if development>
                         <td>${tramite.versionSistra}</td>

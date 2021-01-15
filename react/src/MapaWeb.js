@@ -77,7 +77,7 @@ class MapaWeb extends Component {
 									<p className="lh15 upper">{informacio}</p>
 								</li>
 								<li className="list-group-item">
-									<p className="titol h5 upper">{t('mapaWebPlugins')}</p>
+									{/*<p className="titol h5 upper">{t('mapaWebPlugins')}</p>*/}
 									{plug}
 								</li>
 								<li className="list-group-item">
