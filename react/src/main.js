@@ -69,10 +69,10 @@ ReactDOM.render(
   document.getElementById("contingut")
 );
 
-ReactDOM.render(
-	<NivellAutenticacio autenticat='1'/>,
-	document.getElementById("nivellAutenticacio")
-);
+// ReactDOM.render(
+// 	<NivellAutenticacio autenticat='1'/>,
+// 	document.getElementById("nivellAutenticacio")
+// );
 
 newIniciReact  = function createReactCompInici(nomComponent, param) {
     ReactDOM.render(<Inici autenticat={param}/>, document.getElementById(nomComponent));
@@ -156,8 +156,5 @@ newAvisosFrontReact  = function createReactCompAvisosFront(nomComponent, param) 
 };
 
 newNivellAutenticacioReact = function createReactCompNivellAutenticacio(nomComponent, param) {
-	alert(param);
-	if(param === '1') {
-		ReactDOM.render(<NivellAutenticacio autenticat={param}/>, document.getElementById(nomComponent));
-	}
+	ReactDOM.render(<NivellAutenticacio />, document.getElementById(nomComponent));
 };

@@ -102,11 +102,6 @@
 						<span class="estilUsuari">
 							<c:if test="${user != null}">
 								<span class="oi oi-person pr-2" aria-hidden="true"> </span><sec:authentication property="principal.usuarioClave.nombreCompleto" />
-<%--								<span class="pl-3" title="<fmt:message key="nivell.autenticacio"/>">--%>
-<%--									<c:forEach begin="0" end="${userLevelAut - 1}">--%>
-<%--										<span class="oi oi-lock-locked nivellAutenticacio"></span>--%>
-<%--									</c:forEach>--%>
-<%--								</span>--%>
 								<!-- Nivell d'autenticació -->
 								<span id="nivellAutenticacio"></span>
 							</c:if>
@@ -125,6 +120,7 @@
 					newPeu('peu', autenticat);
 					newAvisosFront('avisosFront', autenticat);
 					newMenuRapid('menuRapid', autenticat);
+					newNivellAutenticacio('nivellAutenticacio', autenticat);
 					// Passa dades personals a React
 					sessionStorage.setItem('usuariNomComplet', '${user}');
 					sessionStorage.setItem('usuariNom', '${userName}');

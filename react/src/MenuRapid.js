@@ -30,9 +30,11 @@ class MenuRapid extends Component {
     }
 
     componentDidUpdate() {
-        var div = document.getElementById('llistaMenuRapid').innerHTML;
-        if (div === '') {
-            document.getElementById('llistaMenuRapid').remove();
+        var aut = sessionStorage.getItem('autenticat');
+        if (aut === '1') {
+            document.getElementById('llistaMenuRapid').classList.remove('d-none');
+        }else{
+            document.getElementById('llistaMenuRapid').classList.add('d-none');
         }
     }
 
