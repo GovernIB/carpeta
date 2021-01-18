@@ -15,6 +15,5 @@ ALTER TABLE car_acces ALTER COLUMN idioma SET NOT NULL;
 ALTER TABLE car_acces RENAME datadarreracces  TO dataacces;
 ALTER TABLE car_acces ADD COLUMN qaa integer NOT NULL;
 ALTER TABLE car_acces RENAME nivellseguretat  TO metodeautenticacio;
-
 ALTER TABLE car_acces ALTER COLUMN resultat SET DEFAULT true;
 ALTER TABLE car_acces ALTER COLUMN qaa DROP NOT NULL;
