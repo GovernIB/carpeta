@@ -371,6 +371,14 @@ img:hover {
 .homePage .opcionesAcceso { width: 320px; margin-left: 190px; margin-right: 20px; }
 .homePage .carpeta-btn .oi {color:#fff; }
 .homePage .carpeta-btn { font-size: 20px; padding: 12px 30px;}
+#tramitacioModal .modal-title { color: #32814b; }
+#tramitacioModal .alert { display:none; }
+#iniciarTramitacioBtn { background-color:#32814b; border-color: #32814b; }
+#iniciarTramitacioBtn:hover { background-color:#000000; border-color:#000000;}
+#tramitacioModalBtn{ color: #32814b; }
+#clauAnonima{width:50%;color:#666;padding:10px;}
+
+
 
 /* RESPONSIVE */
 

@@ -69,6 +69,33 @@ class IniciPublic extends Component {
                                     aria-hidden="true"></span> {t('paginaIniciBotoAccedir')}</a>
                             </p>
 
+                            <p className="titol h5">{t('tramitacioAnonimaTitol')}</p>
+                            <p className="lh15 pb-3"><a href="#" id="tramitacioModalBtn" data-toggle="modal" data-target="#tramitacioModal"><span class="oi oi-external-link"></span>{t('tramitacioEnllaz')}</a></p>
+                            
+                            <div class="modal fade" id="tramitacioModal" tabindex="-1" aria-labelledby="tramitacioLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="tramitacioModalLabel">{t('iniciarTramitacioAnonimaTitol')}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="alert alert-danger" role="alert">{t('errorTramitacioAnonima')}</div> 
+                                        <p>{t('descTramitacioAnonima')}</p>
+                                        <input type="text" id="clauAnonima"></input>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{t('cancelarTramitacioAnonima')}</button>
+                                        <button type="button" id="iniciarTramitacioBtn" class="btn btn-primary">{t('iniciarTramitacioAnonimaBtn')}</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
                             <p className="titol h5">{t('paginaIniciProblemes')}</p>
                             <p className="lh15">{t('paginaIniciAjuda')}</p>
                             <ul className="lh15 pl-5 pt-3">
