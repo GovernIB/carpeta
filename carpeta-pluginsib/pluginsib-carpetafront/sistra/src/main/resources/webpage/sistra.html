@@ -103,7 +103,7 @@
                     <#list tramits as tramite >
                     <tr class="clickableRow" data-url="${tramite.url}" data-pending="${tramite.isPendiente()?then('S','N')}" data-version="${tramite.versionSistra}" style="cursor:pointer">
                         <td>${tramite.descripcionTramite}</td>
-                        <td>
+                        <td data-order="${tramite.fechaInicio?string("yyyyMMddHHmm")}">
                             ${tramite.fechaInicio?string("dd-MM-yyyy HH:mm")}
                         </td>
 <!--                        <td>${tramite.fechaUltimoAcceso?string("dd-MM-yyyy HH:mm")}</td>-->
