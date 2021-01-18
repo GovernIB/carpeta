@@ -19,6 +19,7 @@ import es.caib.regweb3.ws.api.v3.ResultadoBusquedaWs;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -282,16 +283,41 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
 
         if (registros == null || registros.isEmpty()) {
-            System.out.println(" REGISTRES NULL o EMPTY: " + registros);
+            log.info(" REGISTRES NULL o EMPTY: " + registros);
+            
+            /*            
+            AsientoRegistralWs as1 = new AsientoRegistralWs();
+            as1.setNumeroRegistroFormateado("XXX1");
+            as1.setFechaRegistro(new Timestamp(2018 - 1900, 1, 3, 0, 0, 0, 0));
+            as1.setResumen("Un resumen 1");
+            as1.setUnidadTramitacionDestinoDenominacion("LDER7863254");
+            registros.add(as1);
+            
+            
+            AsientoRegistralWs as2 = new AsientoRegistralWs();
+            as2.setNumeroRegistroFormateado("XXX2");
+            as2.setFechaRegistro(new Timestamp(2019 - 1900, 1, 2, 0, 0, 0, 0));
+            as2.setResumen("Un resumen 2");
+            as2.setUnidadTramitacionDestinoDenominacion("LDER7863254");
+            registros.add(as2);
+            
+            AsientoRegistralWs as3 = new AsientoRegistralWs();
+            as3.setNumeroRegistroFormateado("XXX3");
+            as3.setFechaRegistro(new Timestamp(2020 - 1900, 1, 1, 0, 0, 0, 0));
+            as3.setResumen("Un resumen 3");
+            as3.setUnidadTramitacionDestinoDenominacion("LDER7863254");
+            registros.add(as3);
+            */
+            
         } else {
             int x = 1;
             for (AsientoRegistralWs ar : registros) {
 
-                System.out.println(" -------------  REGISTRE [" + x + " ] -------------------");
-                System.out.println("ar.getNumeroRegistroFormateado() => " + (ar.getNumeroRegistroFormateado()));
-                System.out.println("ar.getResumen() => " + ar.getResumen());
-                System.out.println("ar.getFechaRegistro(); => " + ar.getFechaRegistro());
-                System.out.println("ar.getUnidadTramitacionDestinoDenominacion() => " + ar.getUnidadTramitacionDestinoDenominacion());
+                log.info(" -------------  REGISTRE [" + x + " ] -------------------");
+                log.info("ar.getNumeroRegistroFormateado() => " + (ar.getNumeroRegistroFormateado()));
+                log.info("ar.getResumen() => " + ar.getResumen());
+                log.info("ar.getFechaRegistro(); => " + ar.getFechaRegistro());
+                log.info("ar.getUnidadTramitacionDestinoDenominacion() => " + ar.getUnidadTramitacionDestinoDenominacion());
 
                 x++;
 
