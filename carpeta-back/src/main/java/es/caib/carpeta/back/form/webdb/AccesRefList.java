@@ -33,7 +33,7 @@ public class AccesRefList extends RefListBase
     this.accesEjb = __clone.accesEjb;
   }
   public AccesRefList() {
-    setSelects(new Select<?>[] { NOM.select, NIF.select, DATADARRERACCES.select });
+    setSelects(new Select<?>[] { NOM.select, NIF.select });
   }
   public List<StringKeyValue> getReferenceList(Field<?> keyField, Where where, OrderBy ... orderBy) throws I18NException {
     Select<StringKeyValue> select =  new org.fundaciobit.genapp.common.query.SelectMultipleStringKeyValue(keyField.select, getSeparator(), getSelects());

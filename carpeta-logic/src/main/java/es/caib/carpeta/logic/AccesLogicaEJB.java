@@ -28,7 +28,7 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaLocal {
 
     @Override
     public void crearAcces(UsuarioClave usuarioClave, @NotNull int tipus, long entitatID, Long pluginID,
-            Timestamp dataDarrerAcces, String idioma, String ipAddress) throws I18NException {
+            Timestamp dataDarrerAcces, String idioma, String ipAddress,boolean resultat ) throws I18NException {
 
         AccesJPA accesJPA = new AccesJPA();
 
@@ -36,17 +36,16 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaLocal {
         accesJPA.setLlinatges(usuarioClave.getApellido1() + " " + usuarioClave.getApellido2());
         accesJPA.setIp(ipAddress);
         accesJPA.setNif(usuarioClave.getNif());
-        accesJPA.setDataDarrerAcces(dataDarrerAcces);
-        // S'ha d'arreglar a https://github.com/GovernIB/carpeta/issues/308
-        //    Això està be ????
-        accesJPA.setResultatAutenticacio(Integer.parseInt(usuarioClave.getQaa()));
+        accesJPA.setDataAcces(dataDarrerAcces);
+        accesJPA.setQaa(Integer.parseInt(usuarioClave.getQaa()));
+
         // S'ha d'arreglar a https://github.com/GovernIB/carpeta/issues/308
         // Això està be ????
-        accesJPA.setNivellSeguretat(usuarioClave.getMetodoAutentificacion());
+        accesJPA.setMetodeAutenticacio(usuarioClave.getMetodoAutentificacion());
         accesJPA.setProveidorIdentitat(usuarioClave.getProveedorDeIdentidad());
         accesJPA.setIdioma(idioma);
+        accesJPA.setResultat(resultat);
 
-        accesJPA.setDataDarrerAcces(new Timestamp(new Date().getTime()));
         accesJPA.setTipus(tipus);
 
         // Cercam primer la entitat
@@ -65,8 +64,8 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaLocal {
     @Override
     public List<AccesJPA> findBetweenDates(Date inici, Date fi, String codiEntitat) throws I18NException {
 
-        String sentencia = "select a from AccesJPA a " + "where a.dataDarrerAcces between :dataInici and :dataFi "
-                + "and a.entitat.codi = :codiEntitat " + "order by a.dataDarrerAcces desc";
+        String sentencia = "select a from AccesJPA a " + "where a.dataAcces between :dataInici and :dataFi "
+                + "and a.entitat.codi = :codiEntitat " + "order by a.dataAcces desc";
 
         TypedQuery<AccesJPA> query = getEntityManager().createQuery(sentencia, AccesJPA.class);
         query.setParameter("dataInici", inici);

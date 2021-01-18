@@ -184,6 +184,7 @@ public class PluginFrontController extends CommonFrontController {
             throws Exception, I18NException {
 
         String urlToShowPluginPage = null;
+        EntitatJPA entitatJPA = entitatEjb.findByCodi(sesionHttp.getEntitat());
 
         try {
 
@@ -199,16 +200,15 @@ public class PluginFrontController extends CommonFrontController {
 
             //ACCESS
 
-            EntitatJPA entitatJPA = entitatEjb.findByCodi(sesionHttp.getEntitat());
-            accesLogicaEjb.crearAcces(usuarioClave,TIPUS_ACCES_PLUGIN, entitatJPA.getEntitatID(),Long.parseLong(pluginID),new Timestamp(new Date().getTime()),LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress());
+
+            accesLogicaEjb.crearAcces(usuarioClave,TIPUS_ACCES_PLUGIN, entitatJPA.getEntitatID(),Long.parseLong(pluginID),new Timestamp(new Date().getTime()),LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress(), true);
 
 
 
         } catch (Throwable e) {
-          /*  StringBuilder peticio = new StringBuilder();
-            peticio.append("Usuari").append(administrationID).append("\n");
-            peticio.append("classe: ").append(getClass().getName()).append("\n");
-            logLogicaEjb.crearLog("Executat plugin des del Front per "+ administrationID, ESTAT_LOG_ERROR,TIPUS_LOG_PLUGIN_FRONT,System.currentTimeMillis() - temps ,e,"Error en l'execució del plugin",peticio.toString(),"", Long.parseLong(pluginID));*/
+
+            accesLogicaEjb.crearAcces(usuarioClave,TIPUS_ACCES_PLUGIN, entitatJPA.getEntitatID(),Long.parseLong(pluginID),new Timestamp(new Date().getTime()),LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress(), false);
+
             processException(e, response);
         }
 

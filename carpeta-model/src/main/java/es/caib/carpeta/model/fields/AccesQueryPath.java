@@ -15,6 +15,10 @@ public class AccesQueryPath extends org.fundaciobit.genapp.common.query.QueryPat
     return new LongField(getQueryPath(), AccesFields.ACCESID);
   }
 
+  public IntegerField TIPUS() {
+    return new IntegerField(getQueryPath(), AccesFields.TIPUS);
+  }
+
   public StringField NOM() {
     return new StringField(getQueryPath(), AccesFields.NOM);
   }
@@ -35,32 +39,32 @@ public class AccesQueryPath extends org.fundaciobit.genapp.common.query.QueryPat
     return new StringField(getQueryPath(), AccesFields.PROVEIDORIDENTITAT);
   }
 
-  public StringField NIVELLSEGURETAT() {
-    return new StringField(getQueryPath(), AccesFields.NIVELLSEGURETAT);
+  public StringField METODEAUTENTICACIO() {
+    return new StringField(getQueryPath(), AccesFields.METODEAUTENTICACIO);
   }
 
-  public IntegerField RESULTATAUTENTICACIO() {
-    return new IntegerField(getQueryPath(), AccesFields.RESULTATAUTENTICACIO);
+  public IntegerField QAA() {
+    return new IntegerField(getQueryPath(), AccesFields.QAA);
   }
 
-  public LongField ENTITATID() {
-    return new LongField(getQueryPath(), AccesFields.ENTITATID);
+  public TimestampField DATAACCES() {
+    return new TimestampField(getQueryPath(), AccesFields.DATAACCES);
   }
 
   public LongField PLUGINID() {
     return new LongField(getQueryPath(), AccesFields.PLUGINID);
   }
 
-  public IntegerField TIPUS() {
-    return new IntegerField(getQueryPath(), AccesFields.TIPUS);
-  }
-
-  public TimestampField DATADARRERACCES() {
-    return new TimestampField(getQueryPath(), AccesFields.DATADARRERACCES);
+  public LongField ENTITATID() {
+    return new LongField(getQueryPath(), AccesFields.ENTITATID);
   }
 
   public StringField IDIOMA() {
     return new StringField(getQueryPath(), AccesFields.IDIOMA);
+  }
+
+  public BooleanField RESULTAT() {
+    return new BooleanField(getQueryPath(), AccesFields.RESULTAT);
   }
 
 
@@ -76,14 +80,6 @@ public class AccesQueryPath extends org.fundaciobit.genapp.common.query.QueryPat
     return new EntitatQueryPath(new QueryPath() {
       public String getQueryPath() {
           return AccesQueryPath.this.getQueryPath() + "entitat" + ".";
-      }
-    });
-  }
-
-  public PluginQueryPath PLUGIN() {
-    return new PluginQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return AccesQueryPath.this.getQueryPath() + "plugin" + ".";
       }
     });
   }

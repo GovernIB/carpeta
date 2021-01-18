@@ -68,6 +68,24 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.TIPUS)}">
+            <%-- FILTRE NUMERO --%>      
+            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+              <span class="add-on"><fmt:message key="acces.tipus" />:</span>
+
+              <span class="add-on"><fmt:message key="genapp.from" /></span>
+              
+              <form:input cssClass="input-append input-small" path="tipusDesde" />
+
+
+              <span class="add-on"><fmt:message key="genapp.to" /></span>
+
+              <form:input cssClass="input-append input-small search-query" path="tipusFins" />
+
+            </div>
+
+
+        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.NOM)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
@@ -133,32 +151,96 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.NIVELLSEGURETAT)}">
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.METODEAUTENTICACIO)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="acces.nivellSeguretat" var="nivellSeguretat" />
-              <fmt:message key="genapp.form.searchby" var="cercapernivellSeguretat" >                
-                 <fmt:param value="${nivellSeguretat}"/>
+              <fmt:message key="acces.metodeAutenticacio" var="metodeAutenticacio" />
+              <fmt:message key="genapp.form.searchby" var="cercapermetodeAutenticacio" >                
+                 <fmt:param value="${metodeAutenticacio}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${nivellSeguretat}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercapernivellSeguretat}" path="nivellSeguretat" />
+              <span class="add-on"><c:out value="${metodeAutenticacio}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapermetodeAutenticacio}" path="metodeAutenticacio" />
             </div>
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.RESULTATAUTENTICACIO)}">
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.QAA)}">
             <%-- FILTRE NUMERO --%>      
             <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="acces.resultatAutenticacio" />:</span>
+              <span class="add-on"><fmt:message key="acces.qaa" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               
-              <form:input cssClass="input-append input-small" path="resultatAutenticacioDesde" />
+              <form:input cssClass="input-append input-small" path="qaaDesde" />
 
 
               <span class="add-on"><fmt:message key="genapp.to" /></span>
 
-              <form:input cssClass="input-append input-small search-query" path="resultatAutenticacioFins" />
+              <form:input cssClass="input-append input-small search-query" path="qaaFins" />
+
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.DATAACCES)}">
+            <%-- FILTRE DATE --%>
+            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+              <span class="add-on"><fmt:message key="acces.dataAcces" />:</span>
+              <span class="add-on"><fmt:message key="genapp.from" /></span>
+              <div id="dataAccesDesde" class="input-append">
+                <form:input cssClass="input-large" path="dataAccesDesde" />
+                <span class="add-on">
+                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                  </i>
+                </span>
+              </div>
+              <script type="text/javascript">                
+                $(function() {
+                  $('#dataAccesDesde').datetimepicker({
+                    language: '${lang}',
+                    pick12HourFormat: <c:out value="${fn:contains(gen:getDateTimePattern(), 'a')?'true' : 'false'}"/>,
+                    format:  '${gen:getJSDateTimePattern()}',
+                    pickTime: true,
+                    weekStart: ${gen:getFirstDayOfTheWeek()}
+                  });
+                });
+              </script>
+              <span class="add-on"><fmt:message key="genapp.to" /></span>              
+              <div id="dataAccesFins" class="input-append">
+                <form:input cssClass="input-large" path="dataAccesFins" />
+                <span class="add-on">
+                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                  </i>
+                </span>
+              </div>
+              <script type="text/javascript">                
+                $(function() {
+                  $('#dataAccesFins').datetimepicker({
+                    language: '${lang}',
+                    pick12HourFormat: <c:out value="${fn:contains(gen:getDateTimePattern(), 'a')?'true' : 'false'}"/>,
+                    format:  '${gen:getJSDateTimePattern()}',
+                    pickTime: true,
+                    weekStart: ${gen:getFirstDayOfTheWeek()}
+                  });
+                });
+              </script>
+            </div>
+
+    
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.PLUGINID)}">
+            <%-- FILTRE NUMERO --%>      
+            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+              <span class="add-on"><fmt:message key="acces.pluginID" />:</span>
+
+              <span class="add-on"><fmt:message key="genapp.from" /></span>
+              
+              <form:input cssClass="input-append input-small" path="pluginIDDesde" />
+
+
+              <span class="add-on"><fmt:message key="genapp.to" /></span>
+
+              <form:input cssClass="input-append input-small search-query" path="pluginIDFins" />
 
             </div>
 
@@ -182,88 +264,6 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.PLUGINID)}">
-            <%-- FILTRE NUMERO --%>      
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="acces.pluginID" />:</span>
-
-              <span class="add-on"><fmt:message key="genapp.from" /></span>
-              
-              <form:input cssClass="input-append input-small" path="pluginIDDesde" />
-
-
-              <span class="add-on"><fmt:message key="genapp.to" /></span>
-
-              <form:input cssClass="input-append input-small search-query" path="pluginIDFins" />
-
-            </div>
-
-
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.TIPUS)}">
-            <%-- FILTRE NUMERO --%>      
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="acces.tipus" />:</span>
-
-              <span class="add-on"><fmt:message key="genapp.from" /></span>
-              
-              <form:input cssClass="input-append input-small" path="tipusDesde" />
-
-
-              <span class="add-on"><fmt:message key="genapp.to" /></span>
-
-              <form:input cssClass="input-append input-small search-query" path="tipusFins" />
-
-            </div>
-
-
-        </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.DATADARRERACCES)}">
-            <%-- FILTRE DATE --%>
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="acces.dataDarrerAcces" />:</span>
-              <span class="add-on"><fmt:message key="genapp.from" /></span>
-              <div id="dataDarrerAccesDesde" class="input-append">
-                <form:input cssClass="input-large" path="dataDarrerAccesDesde" />
-                <span class="add-on">
-                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-                  </i>
-                </span>
-              </div>
-              <script type="text/javascript">                
-                $(function() {
-                  $('#dataDarrerAccesDesde').datetimepicker({
-                    language: '${lang}',
-                    pick12HourFormat: <c:out value="${fn:contains(gen:getDateTimePattern(), 'a')?'true' : 'false'}"/>,
-                    format:  '${gen:getJSDateTimePattern()}',
-                    pickTime: true,
-                    weekStart: ${gen:getFirstDayOfTheWeek()}
-                  });
-                });
-              </script>
-              <span class="add-on"><fmt:message key="genapp.to" /></span>              
-              <div id="dataDarrerAccesFins" class="input-append">
-                <form:input cssClass="input-large" path="dataDarrerAccesFins" />
-                <span class="add-on">
-                  <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-                  </i>
-                </span>
-              </div>
-              <script type="text/javascript">                
-                $(function() {
-                  $('#dataDarrerAccesFins').datetimepicker({
-                    language: '${lang}',
-                    pick12HourFormat: <c:out value="${fn:contains(gen:getDateTimePattern(), 'a')?'true' : 'false'}"/>,
-                    format:  '${gen:getJSDateTimePattern()}',
-                    pickTime: true,
-                    weekStart: ${gen:getFirstDayOfTheWeek()}
-                  });
-                });
-              </script>
-            </div>
-
-    
-        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.IDIOMA)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
@@ -273,6 +273,24 @@
               </fmt:message>
               <span class="add-on"><c:out value="${idioma}" />:</span>
               <form:input cssClass="search-query input-medium" placeholder="${cercaperidioma}" path="idioma" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.RESULTAT)}">
+            <%-- FILTRE NUMERO --%>      
+            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+              <span class="add-on"><fmt:message key="acces.resultat" />:</span>
+
+              <span class="add-on"><fmt:message key="genapp.from" /></span>
+              
+              <form:input cssClass="input-append input-small" path="resultatDesde" />
+
+
+              <span class="add-on"><fmt:message key="genapp.to" /></span>
+
+              <form:input cssClass="input-append input-small search-query" path="resultatFins" />
+
             </div>
 
 

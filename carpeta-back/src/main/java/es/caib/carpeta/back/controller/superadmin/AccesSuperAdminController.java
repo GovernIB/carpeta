@@ -77,7 +77,7 @@ public class AccesSuperAdminController extends AccesController {
             accesFilterForm.addGroupByField(AccesFields.PLUGINID);
 
 
-            OrderBy[] orderByDef = {new OrderBy(AccesFields.ENTITATID.javaName),new OrderBy(AccesFields.TIPUS.javaName),new OrderBy(AccesFields.DATADARRERACCES.javaName, OrderType.DESC)};
+            OrderBy[] orderByDef = {new OrderBy(AccesFields.DATAACCES.javaName,OrderType.DESC), new OrderBy(AccesFields.TIPUS.javaName)};
             accesFilterForm.setDefaultOrderBy(orderByDef);
 
         }
@@ -85,17 +85,6 @@ public class AccesSuperAdminController extends AccesController {
         return accesFilterForm;
     }
 
-    /*@Override
-    public AccesForm getAccesForm(AccesJPA _jpa,
-                                  boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
-        AccesForm accesForm = super.getAccesForm(_jpa,__isView,request,mav);
-
-        //accesForm.setAllFieldsReadOnly(AccesFields.ALL_ACCES_FIELDS);
-       // accesForm.setSaveButtonVisible(false);
-       // accesForm.setDeleteButtonVisible(false);
-
-        return accesForm;
-    }*/
 
     @Override
     public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
