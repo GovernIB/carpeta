@@ -29,6 +29,14 @@
           ${acces.accesID}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.TIPUS)}">
+          <td>
+          <c:set var="tmp">${acces.tipus}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForTipus[tmp]}
+          </c:if>
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.NOM)}">
           <td>
           ${acces.nom}
@@ -54,14 +62,25 @@
           ${acces.proveidorIdentitat}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.NIVELLSEGURETAT)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.METODEAUTENTICACIO)}">
           <td>
-          ${acces.nivellSeguretat}
+          ${acces.metodeAutenticacio}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.RESULTATAUTENTICACIO)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.QAA)}">
           <td>
-          ${acces.resultatAutenticacio}
+          ${acces.qaa}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.DATAACCES)}">
+          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${acces.dataAcces}" /></td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.PLUGINID)}">
+          <td>
+          <c:set var="tmp">${acces.pluginID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfValuesForPluginID[tmp]}
+          </c:if>
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.ENTITATID)}">
@@ -72,28 +91,14 @@
           </c:if>
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.PLUGINID)}">
-          <td>
-          <c:set var="tmp">${acces.pluginID}</c:set>
-          <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfPluginForPluginID[tmp]}
-          </c:if>
-          </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.TIPUS)}">
-          <td>
-          <c:set var="tmp">${acces.tipus}</c:set>
-          <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfValuesForTipus[tmp]}
-          </c:if>
-          </td>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.DATADARRERACCES)}">
-          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${acces.dataDarrerAcces}" /></td>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.IDIOMA)}">
           <td>
           ${acces.idioma}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.RESULTAT)}">
+          <td>
+            <img height="18" width="18" src="<c:url value="/img/icn_alert_${acces.resultat?'success':'error'}.png"/>">
           </td>
         </c:if>
 

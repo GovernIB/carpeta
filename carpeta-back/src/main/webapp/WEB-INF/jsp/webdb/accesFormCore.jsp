@@ -2,6 +2,33 @@
 <%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
 <un:useConstants var="AccesFields" className="es.caib.carpeta.model.fields.AccesFields"/>
   
+        <c:if test="${!gen:contains(__theForm.hiddenFields,AccesFields.TIPUS)}">
+        <tr id="acces_tipus_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[AccesFields.TIPUS])?'acces.tipus':__theForm.labels[AccesFields.TIPUS]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[AccesFields.TIPUS]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.TIPUS]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="acces.tipus" cssClass="errorField alert alert-danger" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,AccesFields.TIPUS)}" >
+          <form:hidden path="acces.tipus"/>
+          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.acces.tipus,__theForm.listOfValuesForTipus)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AccesFields.TIPUS)}" >
+          <form:select id="acces_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-8" path="acces.tipus">
+            <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,AccesFields.NOM)}">
         <tr id="acces_nom_rowid">
           <td>
@@ -92,38 +119,114 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,AccesFields.NIVELLSEGURETAT)}">
-        <tr id="acces_nivellSeguretat_rowid">
+        <c:if test="${!gen:contains(__theForm.hiddenFields,AccesFields.METODEAUTENTICACIO)}">
+        <tr id="acces_metodeAutenticacio_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[AccesFields.NIVELLSEGURETAT])?'acces.nivellSeguretat':__theForm.labels[AccesFields.NIVELLSEGURETAT]}" />
-              <c:if test="${not empty __theForm.help[AccesFields.NIVELLSEGURETAT]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.NIVELLSEGURETAT]}" ></i>
+              <fmt:message key="${(empty __theForm.labels[AccesFields.METODEAUTENTICACIO])?'acces.metodeAutenticacio':__theForm.labels[AccesFields.METODEAUTENTICACIO]}" />
+              <c:if test="${not empty __theForm.help[AccesFields.METODEAUTENTICACIO]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.METODEAUTENTICACIO]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="acces.nivellSeguretat" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.NIVELLSEGURETAT)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,AccesFields.NIVELLSEGURETAT)? ' uneditable-input' : ''}"  style="" maxlength="255" path="acces.nivellSeguretat"   />
+              <form:errors path="acces.metodeAutenticacio" cssClass="errorField alert alert-danger" />
+              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.METODEAUTENTICACIO)? 'true' : 'false'}" path="acces.metodeAutenticacio"  />
+      <div class="dropdown" style="vertical-align:top;display:inline;">
+        <button id="dropdownMenuButton_metodeAutenticacio" class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left:0px;"><span class="caret"></span></button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_metodeAutenticacio">
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('acces.metodeAutenticacio'); ta.wrap='off';" >No Wrap</a>
+          <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('acces.metodeAutenticacio'); ta.wrap='soft';">Soft Wrap</a>
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('acces.metodeAutenticacio'); ta.wrap='hard';">Hard Wrap</a>
+        </div>
+      </div>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,AccesFields.QAA)}">
+        <tr id="acces_qaa_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[AccesFields.QAA])?'acces.qaa':__theForm.labels[AccesFields.QAA]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[AccesFields.QAA]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.QAA]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="acces.qaa" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.QAA)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,AccesFields.QAA)? ' uneditable-input' : ''}"  style=""  path="acces.qaa"   />
 
            </td>
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,AccesFields.RESULTATAUTENTICACIO)}">
-        <tr id="acces_resultatAutenticacio_rowid">
+        <c:if test="${!gen:contains(__theForm.hiddenFields,AccesFields.DATAACCES)}">
+        <tr id="acces_dataAcces_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[AccesFields.RESULTATAUTENTICACIO])?'acces.resultatAutenticacio':__theForm.labels[AccesFields.RESULTATAUTENTICACIO]}" />
-              <c:if test="${not empty __theForm.help[AccesFields.RESULTATAUTENTICACIO]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.RESULTATAUTENTICACIO]}" ></i>
+              <fmt:message key="${(empty __theForm.labels[AccesFields.DATAACCES])?'acces.dataAcces':__theForm.labels[AccesFields.DATAACCES]}" />
+              <c:if test="${not empty __theForm.help[AccesFields.DATAACCES]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.DATAACCES]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="acces.resultatAutenticacio" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.RESULTATAUTENTICACIO)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,AccesFields.RESULTATAUTENTICACIO)? ' uneditable-input' : ''}"  style=""  path="acces.resultatAutenticacio"   />
-
+              <form:errors path="acces.dataAcces" cssClass="errorField alert alert-danger" />
+    <div class="container">
+      <div class="row">
+            <div class="form-group">
+                <div class="input-group date" id="acces_dataAcces" data-target-input="nearest">
+                      <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.DATAACCES)? 'true' : 'false'}" cssClass="form-control datetimepicker-input"  data-target="#acces_dataAcces" path="acces.dataAcces" />
+                    <c:if test="${!gen:contains(__theForm.readOnlyFields ,AccesFields.DATAACCES)}" >
+                    <div class="input-group-append"  data-target="#acces_dataAcces"  data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                    </c:if>
+                </div>
+            </div>
+          <script type="text/javascript">
+            $(function () {
+                $('#acces_dataAcces').datetimepicker({
+                    format: '${gen:getJSDateTimePattern()}',
+                    locale: '${lang}',
+                    icons: {
+                       time: 'far fa-clock'
+                    }
+                });
+            });
+          </script>        </div>
+      </div>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,AccesFields.PLUGINID)}">
+        <tr id="acces_pluginID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[AccesFields.PLUGINID])?'acces.pluginID':__theForm.labels[AccesFields.PLUGINID]}" />
+              <c:if test="${not empty __theForm.help[AccesFields.PLUGINID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.PLUGINID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="acces.pluginID" cssClass="errorField alert alert-danger" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,AccesFields.PLUGINID)}" >
+          <form:hidden path="acces.pluginID"/>
+          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.acces.pluginID,__theForm.listOfValuesForPluginID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AccesFields.PLUGINID)}" >
+          <form:select id="acces_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="form-control col-md-8" path="acces.pluginID">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfValuesForPluginID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
            </td>
         </tr>
         </c:if>
@@ -155,102 +258,6 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,AccesFields.PLUGINID)}">
-        <tr id="acces_pluginID_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[AccesFields.PLUGINID])?'acces.pluginID':__theForm.labels[AccesFields.PLUGINID]}" />
-              <c:if test="${not empty __theForm.help[AccesFields.PLUGINID]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.PLUGINID]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <form:errors path="acces.pluginID" cssClass="errorField alert alert-danger" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,AccesFields.PLUGINID)}" >
-          <form:hidden path="acces.pluginID"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.acces.pluginID,__theForm.listOfPluginForPluginID)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AccesFields.PLUGINID)}" >
-          <form:select id="acces_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="form-control col-md-8" path="acces.pluginID">
-          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
-          <form:option value="" ></form:option>
-            <c:forEach items="${__theForm.listOfPluginForPluginID}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,AccesFields.TIPUS)}">
-        <tr id="acces_tipus_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[AccesFields.TIPUS])?'acces.tipus':__theForm.labels[AccesFields.TIPUS]}" /> &nbsp;(*)
-              <c:if test="${not empty __theForm.help[AccesFields.TIPUS]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.TIPUS]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <form:errors path="acces.tipus" cssClass="errorField alert alert-danger" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,AccesFields.TIPUS)}" >
-          <form:hidden path="acces.tipus"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.acces.tipus,__theForm.listOfValuesForTipus)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AccesFields.TIPUS)}" >
-          <form:select id="acces_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-8" path="acces.tipus">
-            <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,AccesFields.DATADARRERACCES)}">
-        <tr id="acces_dataDarrerAcces_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[AccesFields.DATADARRERACCES])?'acces.dataDarrerAcces':__theForm.labels[AccesFields.DATADARRERACCES]}" />
-              <c:if test="${not empty __theForm.help[AccesFields.DATADARRERACCES]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.DATADARRERACCES]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-              <form:errors path="acces.dataDarrerAcces" cssClass="errorField alert alert-danger" />
-    <div class="container">
-      <div class="row">
-            <div class="form-group">
-                <div class="input-group date" id="acces_dataDarrerAcces" data-target-input="nearest">
-                      <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.DATADARRERACCES)? 'true' : 'false'}" cssClass="form-control datetimepicker-input"  data-target="#acces_dataDarrerAcces" path="acces.dataDarrerAcces" />
-                    <c:if test="${!gen:contains(__theForm.readOnlyFields ,AccesFields.DATADARRERACCES)}" >
-                    <div class="input-group-append"  data-target="#acces_dataDarrerAcces"  data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                    </div>
-                    </c:if>
-                </div>
-            </div>
-          <script type="text/javascript">
-            $(function () {
-                $('#acces_dataDarrerAcces').datetimepicker({
-                    format: '${gen:getJSDateTimePattern()}',
-                    locale: '${lang}',
-                    icons: {
-                       time: 'far fa-clock'
-                    }
-                });
-            });
-          </script>        </div>
-      </div>
-           </td>
-        </tr>
-        </c:if>
-        
         <c:if test="${!gen:contains(__theForm.hiddenFields,AccesFields.IDIOMA)}">
         <tr id="acces_idioma_rowid">
           <td>
@@ -265,6 +272,28 @@
             <form:errors path="acces.idioma" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.IDIOMA)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,AccesFields.IDIOMA)? ' uneditable-input' : ''}"  style="" maxlength="50" path="acces.idioma"   />
 
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,AccesFields.RESULTAT)}">
+        <tr id="acces_resultat_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[AccesFields.RESULTAT])?'acces.resultat':__theForm.labels[AccesFields.RESULTAT]}" />
+              <c:if test="${not empty __theForm.help[AccesFields.RESULTAT]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.RESULTAT]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AccesFields.RESULTAT)}" >
+              <form:errors path="acces.resultat" cssClass="errorField alert alert-danger" />
+              <form:checkbox cssClass="form-control" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,AccesFields.RESULTAT)? 'false' : 'true'}" path="acces.resultat"  style="width:1%"/>
+          </c:if>
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,AccesFields.RESULTAT)}" >
+                <fmt:message key="genapp.checkbox.${__theForm.acces.resultat}" />
+          </c:if>
            </td>
         </tr>
         </c:if>

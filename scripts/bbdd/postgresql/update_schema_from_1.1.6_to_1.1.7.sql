@@ -7,3 +7,11 @@ ALTER TABLE car_auditoria DROP COLUMN pluginid;
 ALTER TABLE car_plugin ADD logoid int8 NULL;
 ALTER TABLE car_plugin ADD CONSTRAINT car_plugin_fitxer_logo_fk FOREIGN KEY (logoid) REFERENCES car_fitxer(fitxerid);
 CREATE INDEX car_plugin_logoid_fk_i ON car_plugin using btree (logoid);
+
+--14/01/2021 Refactorització d'Accesos #308
+ALTER TABLE car_acces DROP COLUMN resultatautenticacio;
+ALTER TABLE car_acces ADD COLUMN resultat boolean NOT NULL;
+ALTER TABLE car_acces ALTER COLUMN idioma SET NOT NULL;
+ALTER TABLE car_acces RENAME datadarreracces  TO dataacces;
+ALTER TABLE car_acces ADD COLUMN qaa integer NOT NULL;
+ALTER TABLE car_acces RENAME nivellseguretat  TO metodeautenticacio;

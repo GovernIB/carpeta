@@ -61,7 +61,7 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
             String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
             EntitatJPA entitat = utilsEjb.getEntitat(defaultEntityCode);
             long entitatID = entitat.getEntitatID();
-            accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_LOGIN_AUTENTICAT, entitatID, null, new Timestamp(new Date().getTime()), LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress());
+            accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_LOGIN_AUTENTICAT, entitatID, null, new Timestamp(new Date().getTime()), LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress(), true);
 
 
         } catch (Exception ie){

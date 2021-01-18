@@ -15,6 +15,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.ACCESID)}">
         <th>${car:getSortIcons(__theFilterForm,AccesFields.ACCESID)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.TIPUS)}">
+        <th>${car:getSortIcons(__theFilterForm,AccesFields.TIPUS)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.NOM)}">
         <th>${car:getSortIcons(__theFilterForm,AccesFields.NOM)}</th>
         </c:if>
@@ -30,26 +33,26 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.PROVEIDORIDENTITAT)}">
         <th>${car:getSortIcons(__theFilterForm,AccesFields.PROVEIDORIDENTITAT)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.NIVELLSEGURETAT)}">
-        <th>${car:getSortIcons(__theFilterForm,AccesFields.NIVELLSEGURETAT)}</th>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.METODEAUTENTICACIO)}">
+        <th>${car:getSortIcons(__theFilterForm,AccesFields.METODEAUTENTICACIO)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.RESULTATAUTENTICACIO)}">
-        <th>${car:getSortIcons(__theFilterForm,AccesFields.RESULTATAUTENTICACIO)}</th>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.QAA)}">
+        <th>${car:getSortIcons(__theFilterForm,AccesFields.QAA)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.ENTITATID)}">
-        <th>${car:getSortIcons(__theFilterForm,AccesFields.ENTITATID)}</th>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.DATAACCES)}">
+        <th>${car:getSortIcons(__theFilterForm,AccesFields.DATAACCES)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.PLUGINID)}">
         <th>${car:getSortIcons(__theFilterForm,AccesFields.PLUGINID)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.TIPUS)}">
-        <th>${car:getSortIcons(__theFilterForm,AccesFields.TIPUS)}</th>
-        </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.DATADARRERACCES)}">
-        <th>${car:getSortIcons(__theFilterForm,AccesFields.DATADARRERACCES)}</th>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.ENTITATID)}">
+        <th>${car:getSortIcons(__theFilterForm,AccesFields.ENTITATID)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.IDIOMA)}">
         <th>${car:getSortIcons(__theFilterForm,AccesFields.IDIOMA)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.RESULTAT)}">
+        <th>${car:getSortIcons(__theFilterForm,AccesFields.RESULTAT)}</th>
         </c:if>
 
 

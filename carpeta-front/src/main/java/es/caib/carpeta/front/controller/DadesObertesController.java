@@ -1,22 +1,14 @@
 package es.caib.carpeta.front.controller;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.ejb.EJB;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.google.gson.Gson;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.google.gson.Gson;
+import javax.ejb.EJB;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.Constants;
@@ -29,6 +21,13 @@ import es.caib.carpeta.logic.PluginEntitatLogicaLocal;
 import es.caib.carpeta.logic.utils.EjbManager;
 import es.caib.carpeta.model.entity.Plugin;
 import es.caib.carpeta.model.fields.PluginFields;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Conjunt de cridades REST per obtenir informació per a la plataforma de dades obertes
@@ -54,8 +53,8 @@ public class DadesObertesController extends CommonFrontController {
 	public static class AccesInfo {
 		
 		protected String proveidor;
-		protected String nivellSeguretat;
-		protected int autenticacio;
+		protected String metodeAutenticacio;
+		protected int qaa;
 		protected Date data;
 		protected String idioma;
 		protected String entitat;
@@ -65,12 +64,14 @@ public class DadesObertesController extends CommonFrontController {
 		public AccesInfo() {
 			super();
 		}
-		
-		public AccesInfo( String proveidor, String nivell, int autenticacio, Date data, String idioma, String entitat, String tipus, String plugin) {
+
+
+
+		public AccesInfo(String proveidor, String metodeAutenticacio, int qaa, Date data, String idioma, String entitat, String tipus, String plugin) {
 			super();
 			this.proveidor = proveidor;
-			this.nivellSeguretat = nivell;
-			this.autenticacio = autenticacio;
+			this.metodeAutenticacio = metodeAutenticacio;
+			this.qaa = qaa;
 			this.data = data;
 			this.idioma = idioma;
 			this.entitat = entitat;
@@ -85,21 +86,17 @@ public class DadesObertesController extends CommonFrontController {
 		public void setProveidor(String proveidor) {
 			this.proveidor = proveidor;
 		}
-		
-		public String getNivellSeguretat() {
-			return this.nivellSeguretat;
+
+		public String getMetodeAutenticacio() { return metodeAutenticacio; }
+
+		public void setMetodeAutenticacio(String metodeAutenticacio) { this.metodeAutenticacio = metodeAutenticacio; }
+
+		public int getQaa() {
+			return this.qaa;
 		}
 		
-		public void setNivellSegureta(String nivell) {
-			this.nivellSeguretat = nivell;
-		}
-		
-		public int getAutenticacio() {
-			return this.autenticacio;
-		}
-		
-		public void setAutenticacio(int autenticacio) {
-			this.autenticacio = autenticacio;
+		public void setQaa(int qaa) {
+			this.qaa = qaa;
 		}
 		
 		public Date getData() {
@@ -219,9 +216,9 @@ public class DadesObertesController extends CommonFrontController {
 					
 					accesosInfo.add(new AccesInfo(
 							item.getProveidorIdentitat(), 
-							item.getNivellSeguretat(),
-							item.getResultatAutenticacio(),
-							item.getDataDarrerAcces(),
+							item.getMetodeAutenticacio(),
+							item.getQaa(),
+							item.getDataAcces(),
 							item.getIdioma(),
 							entitatRequest,
 							tipusAcces,

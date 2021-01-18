@@ -43,6 +43,28 @@ public class AccesFilterForm extends CarpetaBaseFilterForm implements AccesField
   }
 
 
+  private java.lang.Integer tipusDesde;
+
+  public java.lang.Integer getTipusDesde() {
+    return this.tipusDesde;
+  }
+
+  public void setTipusDesde(java.lang.Integer tipusDesde) {
+    this.tipusDesde = tipusDesde;
+  }
+
+
+  private java.lang.Integer tipusFins;
+
+  public java.lang.Integer getTipusFins() {
+    return this.tipusFins;
+  }
+
+  public void setTipusFins(java.lang.Integer tipusFins) {
+    this.tipusFins = tipusFins;
+  }
+
+
   private java.lang.String nom;
 
   public java.lang.String getNom() {
@@ -98,58 +120,58 @@ public class AccesFilterForm extends CarpetaBaseFilterForm implements AccesField
   }
 
 
-  private java.lang.String nivellSeguretat;
+  private java.lang.String metodeAutenticacio;
 
-  public java.lang.String getNivellSeguretat() {
-    return this.nivellSeguretat;
+  public java.lang.String getMetodeAutenticacio() {
+    return this.metodeAutenticacio;
   }
 
-  public void setNivellSeguretat(java.lang.String nivellSeguretat) {
-    this.nivellSeguretat = nivellSeguretat;
-  }
-
-
-  private java.lang.Integer resultatAutenticacioDesde;
-
-  public java.lang.Integer getResultatAutenticacioDesde() {
-    return this.resultatAutenticacioDesde;
-  }
-
-  public void setResultatAutenticacioDesde(java.lang.Integer resultatAutenticacioDesde) {
-    this.resultatAutenticacioDesde = resultatAutenticacioDesde;
+  public void setMetodeAutenticacio(java.lang.String metodeAutenticacio) {
+    this.metodeAutenticacio = metodeAutenticacio;
   }
 
 
-  private java.lang.Integer resultatAutenticacioFins;
+  private java.lang.Integer qaaDesde;
 
-  public java.lang.Integer getResultatAutenticacioFins() {
-    return this.resultatAutenticacioFins;
+  public java.lang.Integer getQaaDesde() {
+    return this.qaaDesde;
   }
 
-  public void setResultatAutenticacioFins(java.lang.Integer resultatAutenticacioFins) {
-    this.resultatAutenticacioFins = resultatAutenticacioFins;
-  }
-
-
-  private java.lang.Long entitatIDDesde;
-
-  public java.lang.Long getEntitatIDDesde() {
-    return this.entitatIDDesde;
-  }
-
-  public void setEntitatIDDesde(java.lang.Long entitatIDDesde) {
-    this.entitatIDDesde = entitatIDDesde;
+  public void setQaaDesde(java.lang.Integer qaaDesde) {
+    this.qaaDesde = qaaDesde;
   }
 
 
-  private java.lang.Long entitatIDFins;
+  private java.lang.Integer qaaFins;
 
-  public java.lang.Long getEntitatIDFins() {
-    return this.entitatIDFins;
+  public java.lang.Integer getQaaFins() {
+    return this.qaaFins;
   }
 
-  public void setEntitatIDFins(java.lang.Long entitatIDFins) {
-    this.entitatIDFins = entitatIDFins;
+  public void setQaaFins(java.lang.Integer qaaFins) {
+    this.qaaFins = qaaFins;
+  }
+
+
+  private java.sql.Timestamp dataAccesDesde;
+
+  public java.sql.Timestamp getDataAccesDesde() {
+    return this.dataAccesDesde;
+  }
+
+  public void setDataAccesDesde(java.sql.Timestamp dataAccesDesde) {
+    this.dataAccesDesde = dataAccesDesde;
+  }
+
+
+  private java.sql.Timestamp dataAccesFins;
+
+  public java.sql.Timestamp getDataAccesFins() {
+    return this.dataAccesFins;
+  }
+
+  public void setDataAccesFins(java.sql.Timestamp dataAccesFins) {
+    this.dataAccesFins = dataAccesFins;
   }
 
 
@@ -175,47 +197,25 @@ public class AccesFilterForm extends CarpetaBaseFilterForm implements AccesField
   }
 
 
-  private java.lang.Integer tipusDesde;
+  private java.lang.Long entitatIDDesde;
 
-  public java.lang.Integer getTipusDesde() {
-    return this.tipusDesde;
+  public java.lang.Long getEntitatIDDesde() {
+    return this.entitatIDDesde;
   }
 
-  public void setTipusDesde(java.lang.Integer tipusDesde) {
-    this.tipusDesde = tipusDesde;
-  }
-
-
-  private java.lang.Integer tipusFins;
-
-  public java.lang.Integer getTipusFins() {
-    return this.tipusFins;
-  }
-
-  public void setTipusFins(java.lang.Integer tipusFins) {
-    this.tipusFins = tipusFins;
+  public void setEntitatIDDesde(java.lang.Long entitatIDDesde) {
+    this.entitatIDDesde = entitatIDDesde;
   }
 
 
-  private java.sql.Timestamp dataDarrerAccesDesde;
+  private java.lang.Long entitatIDFins;
 
-  public java.sql.Timestamp getDataDarrerAccesDesde() {
-    return this.dataDarrerAccesDesde;
+  public java.lang.Long getEntitatIDFins() {
+    return this.entitatIDFins;
   }
 
-  public void setDataDarrerAccesDesde(java.sql.Timestamp dataDarrerAccesDesde) {
-    this.dataDarrerAccesDesde = dataDarrerAccesDesde;
-  }
-
-
-  private java.sql.Timestamp dataDarrerAccesFins;
-
-  public java.sql.Timestamp getDataDarrerAccesFins() {
-    return this.dataDarrerAccesFins;
-  }
-
-  public void setDataDarrerAccesFins(java.sql.Timestamp dataDarrerAccesFins) {
-    this.dataDarrerAccesFins = dataDarrerAccesFins;
+  public void setEntitatIDFins(java.lang.Long entitatIDFins) {
+    this.entitatIDFins = entitatIDFins;
   }
 
 
@@ -237,26 +237,26 @@ public class AccesFilterForm extends CarpetaBaseFilterForm implements AccesField
     super(__toClone);
     this.accesIDDesde = __toClone.accesIDDesde;
     this.accesIDFins = __toClone.accesIDFins;
+    this.tipusDesde = __toClone.tipusDesde;
+    this.tipusFins = __toClone.tipusFins;
     this.nom = __toClone.nom;
     this.llinatges = __toClone.llinatges;
     this.nif = __toClone.nif;
     this.ip = __toClone.ip;
     this.proveidorIdentitat = __toClone.proveidorIdentitat;
-    this.nivellSeguretat = __toClone.nivellSeguretat;
-    this.resultatAutenticacioDesde = __toClone.resultatAutenticacioDesde;
-    this.resultatAutenticacioFins = __toClone.resultatAutenticacioFins;
-    this.entitatIDDesde = __toClone.entitatIDDesde;
-    this.entitatIDFins = __toClone.entitatIDFins;
+    this.metodeAutenticacio = __toClone.metodeAutenticacio;
+    this.qaaDesde = __toClone.qaaDesde;
+    this.qaaFins = __toClone.qaaFins;
+    this.dataAccesDesde = __toClone.dataAccesDesde;
+    this.dataAccesFins = __toClone.dataAccesFins;
     this.pluginIDDesde = __toClone.pluginIDDesde;
     this.pluginIDFins = __toClone.pluginIDFins;
-    this.tipusDesde = __toClone.tipusDesde;
-    this.tipusFins = __toClone.tipusFins;
-    this.dataDarrerAccesDesde = __toClone.dataDarrerAccesDesde;
-    this.dataDarrerAccesFins = __toClone.dataDarrerAccesFins;
+    this.entitatIDDesde = __toClone.entitatIDDesde;
+    this.entitatIDFins = __toClone.entitatIDFins;
     this.idioma = __toClone.idioma;
-    this.mapOfEntitatForEntitatID = __toClone.mapOfEntitatForEntitatID;
-    this.mapOfPluginForPluginID = __toClone.mapOfPluginForPluginID;
     this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
+    this.mapOfValuesForPluginID = __toClone.mapOfValuesForPluginID;
+    this.mapOfEntitatForEntitatID = __toClone.mapOfEntitatForEntitatID;
   }
   
   /* ========= UTILS ========== */
@@ -291,30 +291,6 @@ public class AccesFilterForm extends CarpetaBaseFilterForm implements AccesField
    // -----------------------
    // Maps de referencies.
    // -----------------------
-  private Map<String, String> mapOfEntitatForEntitatID;
-
-  public Map<String, String> getMapOfEntitatForEntitatID() {
-    return this.mapOfEntitatForEntitatID;
-  }
-
-  public void setMapOfEntitatForEntitatID(Map<String, String> mapOfEntitatForEntitatID) {
-    this.mapOfEntitatForEntitatID = mapOfEntitatForEntitatID;
-  }
-
-
-
-  private Map<String, String> mapOfPluginForPluginID;
-
-  public Map<String, String> getMapOfPluginForPluginID() {
-    return this.mapOfPluginForPluginID;
-  }
-
-  public void setMapOfPluginForPluginID(Map<String, String> mapOfPluginForPluginID) {
-    this.mapOfPluginForPluginID = mapOfPluginForPluginID;
-  }
-
-
-
   private Map<String, String> mapOfValuesForTipus;
 
   public Map<String, String> getMapOfValuesForTipus() {
@@ -323,6 +299,30 @@ public class AccesFilterForm extends CarpetaBaseFilterForm implements AccesField
 
   public void setMapOfValuesForTipus(Map<String, String> mapOfValuesForTipus) {
     this.mapOfValuesForTipus = mapOfValuesForTipus;
+  }
+
+
+
+  private Map<String, String> mapOfValuesForPluginID;
+
+  public Map<String, String> getMapOfValuesForPluginID() {
+    return this.mapOfValuesForPluginID;
+  }
+
+  public void setMapOfValuesForPluginID(Map<String, String> mapOfValuesForPluginID) {
+    this.mapOfValuesForPluginID = mapOfValuesForPluginID;
+  }
+
+
+
+  private Map<String, String> mapOfEntitatForEntitatID;
+
+  public Map<String, String> getMapOfEntitatForEntitatID() {
+    return this.mapOfEntitatForEntitatID;
+  }
+
+  public void setMapOfEntitatForEntitatID(Map<String, String> mapOfEntitatForEntitatID) {
+    this.mapOfEntitatForEntitatID = mapOfEntitatForEntitatID;
   }
 
 

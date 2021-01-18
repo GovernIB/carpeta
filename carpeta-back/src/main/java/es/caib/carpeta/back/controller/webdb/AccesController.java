@@ -62,10 +62,6 @@ public class AccesController
   @Autowired
   protected EntitatRefList entitatRefList;
 
-  // References 
-  @Autowired
-  protected PluginRefList pluginRefList;
-
   /**
    * Llistat de totes Acces
    */
@@ -186,6 +182,26 @@ public class AccesController
     Map<String, String> _tmp;
     List<StringKeyValue> _listSKV;
 
+    // Field tipus
+    {
+      _listSKV = getReferenceListForTipus(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForTipus(_tmp);
+      if (filterForm.getGroupByFields().contains(TIPUS)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, TIPUS, false);
+      };
+    }
+
+    // Field pluginID
+    {
+      _listSKV = getReferenceListForPluginID(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfValuesForPluginID(_tmp);
+      if (filterForm.getGroupByFields().contains(PLUGINID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, PLUGINID, false);
+      };
+    }
+
     // Field entitatID
     {
       _listSKV = getReferenceListForEntitatID(request, mav, filterForm, list, groupByItemsMap, null);
@@ -196,25 +212,8 @@ public class AccesController
       };
     }
 
-    // Field pluginID
-    {
-      _listSKV = getReferenceListForPluginID(request, mav, filterForm, list, groupByItemsMap, null);
-      _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfPluginForPluginID(_tmp);
-      if (filterForm.getGroupByFields().contains(PLUGINID)) {
-        fillValuesToGroupByItems(_tmp, groupByItemsMap, PLUGINID, false);
-      };
-    }
 
-    // Field tipus
-    {
-      _listSKV = getReferenceListForTipus(request, mav, filterForm, list, groupByItemsMap, null);
-      _tmp = Utils.listToMap(_listSKV);
-      filterForm.setMapOfValuesForTipus(_tmp);
-      if (filterForm.getGroupByFields().contains(TIPUS)) {
-        fillValuesToGroupByItems(_tmp, groupByItemsMap, TIPUS, false);
-      };
-    }
+      fillValuesToGroupByItemsBoolean("genapp.checkbox", groupByItemsMap, RESULTAT);
 
 
     return groupByItemsMap;
@@ -231,9 +230,9 @@ public class AccesController
 
     java.util.Map<Field<?>, java.util.Map<String, String>> __mapping;
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
-    __mapping.put(ENTITATID, filterForm.getMapOfEntitatForEntitatID());
-    __mapping.put(PLUGINID, filterForm.getMapOfPluginForPluginID());
     __mapping.put(TIPUS, filterForm.getMapOfValuesForTipus());
+    __mapping.put(PLUGINID, filterForm.getMapOfValuesForPluginID());
+    __mapping.put(ENTITATID, filterForm.getMapOfEntitatForEntitatID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -282,24 +281,6 @@ public class AccesController
   public void fillReferencesForForm(AccesForm accesForm,
     HttpServletRequest request, ModelAndView mav) throws I18NException {
     // Comprovam si ja esta definida la llista
-    if (accesForm.getListOfEntitatForEntitatID() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForEntitatID(request, mav, accesForm, null);
-
-      if(_listSKV != null && !_listSKV.isEmpty()) { 
-          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
-      }
-      accesForm.setListOfEntitatForEntitatID(_listSKV);
-    }
-    // Comprovam si ja esta definida la llista
-    if (accesForm.getListOfPluginForPluginID() == null) {
-      List<StringKeyValue> _listSKV = getReferenceListForPluginID(request, mav, accesForm, null);
-
-      if(_listSKV != null && !_listSKV.isEmpty()) { 
-          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
-      }
-      accesForm.setListOfPluginForPluginID(_listSKV);
-    }
-    // Comprovam si ja esta definida la llista
     if (accesForm.getListOfValuesForTipus() == null) {
       List<StringKeyValue> _listSKV = getReferenceListForTipus(request, mav, accesForm, null);
 
@@ -307,6 +288,24 @@ public class AccesController
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
       accesForm.setListOfValuesForTipus(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (accesForm.getListOfValuesForPluginID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForPluginID(request, mav, accesForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      accesForm.setListOfValuesForPluginID(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (accesForm.getListOfEntitatForEntitatID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForEntitatID(request, mav, accesForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      accesForm.setListOfEntitatForEntitatID(_listSKV);
     }
     
   }
@@ -611,6 +610,74 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
+  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
+       ModelAndView mav, AccesForm accesForm, Where where)  throws I18NException {
+    if (accesForm.isHiddenField(TIPUS)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForTipus(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
+       ModelAndView mav, AccesFilterForm accesFilterForm,
+       List<Acces> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (accesFilterForm.isHiddenField(TIPUS)
+      && !accesFilterForm.isGroupByField(TIPUS)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForTipus(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("1" , "1"));
+    __tmp.add(new StringKeyValue("2" , "2"));
+    __tmp.add(new StringKeyValue("3" , "3"));
+    __tmp.add(new StringKeyValue("4" , "4"));
+    __tmp.add(new StringKeyValue("5" , "5"));
+    __tmp.add(new StringKeyValue("6" , "6"));
+    __tmp.add(new StringKeyValue("7" , "7"));
+    return __tmp;
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPluginID(HttpServletRequest request,
+       ModelAndView mav, AccesForm accesForm, Where where)  throws I18NException {
+    if (accesForm.isHiddenField(PLUGINID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    return getReferenceListForPluginID(request, mav, where);
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPluginID(HttpServletRequest request,
+       ModelAndView mav, AccesFilterForm accesFilterForm,
+       List<Acces> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (accesFilterForm.isHiddenField(PLUGINID)
+      && !accesFilterForm.isGroupByField(PLUGINID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    return getReferenceListForPluginID(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForPluginID(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+    __tmp.add(new StringKeyValue("1" , "1"));
+    __tmp.add(new StringKeyValue("2" , "2"));
+    __tmp.add(new StringKeyValue("3" , "3"));
+    __tmp.add(new StringKeyValue("4" , "4"));
+    __tmp.add(new StringKeyValue("5" , "5"));
+    return __tmp;
+  }
+
+
   public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
        ModelAndView mav, AccesForm accesForm, Where where)  throws I18NException {
     if (accesForm.isHiddenField(ENTITATID)) {
@@ -647,81 +714,6 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return entitatRefList.getReferenceList(EntitatFields.ENTITATID, where );
-  }
-
-
-  public List<StringKeyValue> getReferenceListForPluginID(HttpServletRequest request,
-       ModelAndView mav, AccesForm accesForm, Where where)  throws I18NException {
-    if (accesForm.isHiddenField(PLUGINID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
-    }
-    Where _where = null;
-    if (accesForm.isReadOnlyField(PLUGINID)) {
-      _where = PluginFields.PLUGINID.equal(accesForm.getAcces().getPluginID());
-    }
-    return getReferenceListForPluginID(request, mav, Where.AND(where, _where));
-  }
-
-
-  public List<StringKeyValue> getReferenceListForPluginID(HttpServletRequest request,
-       ModelAndView mav, AccesFilterForm accesFilterForm,
-       List<Acces> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
-    if (accesFilterForm.isHiddenField(PLUGINID)
-      && !accesFilterForm.isGroupByField(PLUGINID)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
-    }
-    Where _w = null;
-    if (!_groupByItemsMap.containsKey(PLUGINID)) {
-      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
-      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
-      for (Acces _item : list) {
-        if(_item.getPluginID() == null) { continue; };
-        _pkList.add(_item.getPluginID());
-        }
-        _w = PluginFields.PLUGINID.in(_pkList);
-      }
-    return getReferenceListForPluginID(request, mav, Where.AND(where,_w));
-  }
-
-
-  public List<StringKeyValue> getReferenceListForPluginID(HttpServletRequest request,
-       ModelAndView mav, Where where)  throws I18NException {
-    return pluginRefList.getReferenceList(PluginFields.PLUGINID, where );
-  }
-
-
-  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
-       ModelAndView mav, AccesForm accesForm, Where where)  throws I18NException {
-    if (accesForm.isHiddenField(TIPUS)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
-    }
-    return getReferenceListForTipus(request, mav, where);
-  }
-
-
-  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
-       ModelAndView mav, AccesFilterForm accesFilterForm,
-       List<Acces> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
-    if (accesFilterForm.isHiddenField(TIPUS)
-      && !accesFilterForm.isGroupByField(TIPUS)) {
-      return EMPTY_STRINGKEYVALUE_LIST;
-    }
-    Where _w = null;
-    return getReferenceListForTipus(request, mav, Where.AND(where,_w));
-  }
-
-
-  public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request,
-       ModelAndView mav, Where where)  throws I18NException {
-    List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-    __tmp.add(new StringKeyValue("1" , "1"));
-    __tmp.add(new StringKeyValue("2" , "2"));
-    __tmp.add(new StringKeyValue("3" , "3"));
-    __tmp.add(new StringKeyValue("4" , "4"));
-    __tmp.add(new StringKeyValue("5" , "5"));
-    __tmp.add(new StringKeyValue("6" , "6"));
-    __tmp.add(new StringKeyValue("7" , "7"));
-    return __tmp;
   }
 
 
