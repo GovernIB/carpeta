@@ -116,7 +116,7 @@
       var tree = $('#tree').tree({
           dataSource: treedata,
           primaryKey: 'id',
-          uiLibrary: 'bootstrap',
+          uiLibrary: 'bootstrap4',
           select: function (e, node, id) {
               var nodedata = tree.getDataById(id);
               if (!nodedata.hasChildren) {

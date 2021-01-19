@@ -35,13 +35,14 @@
     <%-- https://fontawesome.com/icons?d=gallery&m=free --%>
     <script src="<c:url value="/js/fontawesome-all.js"/>"></script>
 
+    <!-- Bootstrap TREE JS -->
+    <script src="<c:url value="/js/gijgo.min.js"/>"></script>
      
     <!-- Bootstrap DateTimePicker JS -->
     <script src="<c:url value="/js/datetimepicker/moment-with-locales.js"/>"></script>
     <script src="<c:url value="/js/datetimepicker/tempusdominus-bootstrap-4.js"/>"></script>
 
-    <!-- Bootstrap TREE JS -->
-    <script src="<c:url value="/js/gijgo.min.js"/>"></script>
+    
     
        
     <!-- TinyMCE -->
