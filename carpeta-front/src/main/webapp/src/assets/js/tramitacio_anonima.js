@@ -3,11 +3,10 @@ jQuery("#iniciarTramitacioBtn").on("click", function(){
             url: window.location.href.split('/').slice(0, 3).join('/')+"/carpetafront/tramitacio?id=" + jQuery('#clauAnonima').val(),
             method: "GET"
         }).done(function(data){
-	    if (data.url != "")
-	            window.open(data.url, "_blank");
-	    else if (data.error)
-            jQuery('#tramitacioModal .alert-danger').css('display','block');
-	
-	    jQuery('#tramitacioModal').modal('hide');
+    	    if (data.url !== undefined){
+    	            window.open(data.url, "_blank");
+                    jQuery('#tramitacioModal').modal('hide');
+    	    }else if (data.error == 'true')
+                jQuery('#tramitacioModal .alert-danger').css('display','block');
         })
     });

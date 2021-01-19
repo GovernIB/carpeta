@@ -87,9 +87,9 @@ public class TramitacioAnonimaController extends CommonFrontController {
             }
         }
        
-        final String sistraUrl = fileProperties.getProperty(Constants.CARPETA_PROPERTY_SISTRA1 + "url");
-        final String username = fileProperties.getProperty(Constants.CARPETA_PROPERTY_SISTRA1 + "user");
-        final String password = fileProperties.getProperty(Constants.CARPETA_PROPERTY_SISTRA1 + "pass");
+        final String sistraUrl = fileProperties.getProperty(Constants.CARPETA_PROPERTY_BASE + "pluginsib.carpetafront.sistra1.url");
+        final String username = fileProperties.getProperty(Constants.CARPETA_PROPERTY_BASE + "pluginsib.carpetafront.sistra1.user");
+        final String password = fileProperties.getProperty(Constants.CARPETA_PROPERTY_BASE + "pluginsib.carpetafront.sistra1.pass");
         
         final URL wsdl = new URL(sistraUrl + "?wsdl");
         BackofficeFacadeService service = new BackofficeFacadeService(wsdl);
