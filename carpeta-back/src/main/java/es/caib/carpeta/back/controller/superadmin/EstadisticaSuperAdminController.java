@@ -15,20 +15,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
-import java.util.*;
-import es.caib.carpeta.back.form.webdb.*;
+
 
 import es.caib.carpeta.back.controller.webdb.EstadisticaController;
+import es.caib.carpeta.back.form.webdb.EntitatRefList;
+import es.caib.carpeta.back.form.webdb.EstadisticaFilterForm;
+import es.caib.carpeta.back.form.webdb.EstadisticaForm;
+import es.caib.carpeta.back.form.webdb.PluginRefList;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.model.entity.Estadistica;
-import es.caib.carpeta.model.fields.*;
+import es.caib.carpeta.model.fields.EntitatFields;
+import es.caib.carpeta.model.fields.EstadisticaFields;
+import es.caib.carpeta.model.fields.PluginFields;
 
 /**
  * Created by Fundació BIT.
  *
  * @author mgonzalez
+ * 
  * Date: 29/10/2020
  */
 @Controller
@@ -80,7 +90,7 @@ public class EstadisticaSuperAdminController  extends EstadisticaController {
          estadisticaFilterForm.addGroupByField(TIPUS);
          estadisticaFilterForm.addGroupByField(ENTITATID);
 
-         OrderBy[] orderByDef = {new OrderBy(EstadisticaFields.TIPUS.javaName),new OrderBy(EstadisticaFields.DATAESTADISTICA.javaName, OrderType.DESC)};
+         OrderBy[] orderByDef = {new OrderBy(EstadisticaFields.DATAESTADISTICA.javaName, OrderType.DESC)};
          estadisticaFilterForm.setDefaultOrderBy(orderByDef);
 
       }
@@ -116,7 +126,7 @@ public class EstadisticaSuperAdminController  extends EstadisticaController {
 	   
 	  List<StringKeyValue> entitats = entitatRefList.getReferenceList(EntitatFields.ENTITATID, where);
 	   
-	  List<String> entitatIdKeys = new ArrayList<>();
+	  List<String> entitatIdKeys = new ArrayList<String>();
 	  for(StringKeyValue skv : entitats) {
 		  entitatIdKeys.add(skv.getKey());
 	  }

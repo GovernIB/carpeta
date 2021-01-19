@@ -77,7 +77,7 @@ public class AccesSuperAdminController extends AccesController {
             accesFilterForm.addGroupByField(AccesFields.PLUGINID);
 
 
-            OrderBy[] orderByDef = {new OrderBy(AccesFields.DATAACCES.javaName,OrderType.DESC), new OrderBy(AccesFields.TIPUS.javaName)};
+            OrderBy[] orderByDef = {new OrderBy(AccesFields.DATAACCES.javaName,OrderType.DESC)};
             accesFilterForm.setDefaultOrderBy(orderByDef);
 
         }
