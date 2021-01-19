@@ -1,35 +1,38 @@
 
-<div class="card mb-12 border-0 p-2">
-    <span class="h5 card-title border-bottom verde paddingBottomEstandard">${menu_notificaciones}</span>
+<div class="infoNoMenu">
+    <h2><p class="titol h2">${menu_notificaciones}</p></h2>
 
-    <p class="lh15">${notificaciones_descripcion}</p>
+    <div class="col-md-12 border-0 pl-0 pr-0">
 
-    <div class="card-body">
+        <p class="lh15">${notificaciones_descripcion}</p>
 
-        <div class="row notificacions">
-            <!-- Notificaciones -->
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 boxGestio">
-                <button class="box-part text-center capsaMenu" onclick="javascript:window.open('${notificacionesUrl}', '_blank')">
-                    <span class="oi oi-envelope-closed imagenMenu" title="${menu_notificaciones}" alt="${menu_notificaciones}" aria-hidden="true"></span>
-                    <div class="tituloMenu">${menu_notificacion}</div>
-                    <div class="text">
-                        <span>${notificaciones_notificaciones}</span>
-                    </div>
-                </button>
+        <div class="card-body imc--llista--capses">
+
+            <div class="row mb-0">
+
+                <!-- Notificaciones -->
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mb-5 pl-0">
+                    <button class="card col-md-12 align-items-lg-center capsaPlugin pt-3" onClick="javascript:window.open('${notificacionesUrl}', '_blank')">
+                    <span class="card-title titol pl-1 h3" title="${menu_notificaciones}" alt="${menu_notificaciones}" style="align-self: center;">
+                        <span class="oi oi-envelope-closed imagenMenu" aria-hidden="true" style="color:#265D3C;"></span>
+                    </span>
+                    <span class="titolPlugin titol h3" style="align-self: center;">${menu_notificacion}</span>
+                    <span class="card-text mb-3 mt-3">${notificaciones_notificaciones}</span>
+                    </button>
+                </div>
+
+                <!-- Otras notificaciones -->
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mb-5 pl-0">
+                    <button class="card col-md-12 align-items-lg-center capsaPlugin pt-3" onClick="window.location.href ='${comunicacionesURL}'">
+                    <span class="card-title titol pl-1 h3" title="${menu_notificaciones_otras}" alt="${menu_notificaciones_otras}" style="align-self: center;">
+                        <span class="oi oi-box imagenMenu" aria-hidden="true" style="color:#265D3C;"></span>
+                    </span>
+                        <span class="titolPlugin titol h3" style="align-self: center;">${menu_notificaciones_otras}</span>
+                        <span class="card-text mb-3 mt-3">${notificaciones_otras}</span>
+                    </button>
+                </div>
+
             </div>
-
-            <!-- Otras notificaciones -->
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 boxGestio">
-                <button class="box-part text-center capsaMenu" onclick="window.location.href ='${comunicacionesURL}'" >
-                    <span class="oi oi-box imagenMenu" title="${menu_notificaciones_otras}" alt="${menu_notificaciones_otras}" aria-hidden="true"></span>
-                    <div class="tituloMenu">${menu_notificaciones_otras}</div>
-                    <div class="text">
-                        <span>${notificaciones_otras}</span>
-                    </div>
-                </button>
-            </div>
-
         </div>
     </div>
-
 </div>
