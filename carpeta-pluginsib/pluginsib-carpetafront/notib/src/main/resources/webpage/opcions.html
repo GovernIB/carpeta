@@ -6,9 +6,9 @@
 
         <p class="lh15">${notificaciones_descripcion}</p>
 
-        <div class="card-body imc--llista--capses">
+        <div class="card-body imc--llista--capses" style="display: flex;">
 
-            <div class="row mb-0">
+            <div class="row mb-0" style="display: contents;">
 
                 <!-- Notificaciones -->
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mb-5 pl-0">
@@ -36,3 +36,14 @@
         </div>
     </div>
 </div>
+<script >
+$( document ).ready(function() {
+    var heights = $(".well").map(function() {
+    return $(this).height();
+    }).get(),
+
+    maxHeight = Math.max.apply(null, heights);
+
+    $(".well").height(maxHeight);
+});
+</script>

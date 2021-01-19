@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
 
+
+
+
+
 class ExpirarSessio extends Component {
+
+
+
 
     loadDialog(maxInactiveInterval) {
         var sessionAlive = maxInactiveInterval;
@@ -12,6 +19,7 @@ class ExpirarSessio extends Component {
         setTimeout(function() {
             $(function() {
                 const entitatActual = sessionStorage.getItem('entitat');
+                console.log('Sessio: ' + sessionAlive);
                 $('#dialog').dialog({
                     autoOpen: true,
                     maxWidth:400,
@@ -81,7 +89,7 @@ class ExpirarSessio extends Component {
 
             <div className="row mr-0 ml-0">
 
-                <div id="dialog" title={t('sessioAvisTitol')}className="noVisible">
+                <div id="dialog" title={t('sessioAvisTitol')} className="noVisible">
                     <p className="pt-4">{t('sessioAvisDescripcio')}</p>
                 </div>
 
