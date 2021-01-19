@@ -18,10 +18,9 @@
     <link href="<c:url value="/css/bootstrap.css"/>" rel="stylesheet">
     <link href="<c:url value="/css/datatables.min.css"/>" rel="stylesheet">
 
-
-
     <!-- Bootstrap TREE CSS -->
-    <link href="<c:url value="/css/bootstrap-tree.css"/>" rel="stylesheet"> 
+    <link href="<c:url value="/css/gijgo.min.css"/>" rel="stylesheet">
+  
 
     <!-- Bootstrap DateTimepicker CSS   -->
     <link href="<c:url value="/css/datetimepicker/tempusdominus-bootstrap-4.css"/>" rel="stylesheet">
@@ -42,7 +41,8 @@
     <script src="<c:url value="/js/datetimepicker/tempusdominus-bootstrap-4.js"/>"></script>
 
     <!-- Bootstrap TREE JS -->
-    <script src="<c:url value="/js/bootstrap-tree.js"/>"></script>
+    <script src="<c:url value="/js/gijgo.min.js"/>"></script>
+    
        
     <!-- TinyMCE -->
     <script type="text/javascript">
