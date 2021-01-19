@@ -58,7 +58,7 @@ public class AccesJPAManager
 		return list.toArray(new Acces[list.size()]);
 	};
 
-	public synchronized Acces create( int _tipus_, java.lang.String _nom_, java.lang.String _llinatges_, java.lang.String _nif_, java.lang.String _ip_, java.lang.String _proveidorIdentitat_, java.lang.String _metodeAutenticacio_, int _qaa_, java.sql.Timestamp _dataAcces_, java.lang.Long _pluginID_, long _entitatID_, java.lang.String _idioma_, boolean _resultat_) throws I18NException {
+	public synchronized Acces create( int _tipus_, java.lang.String _nom_, java.lang.String _llinatges_, java.lang.String _nif_, java.lang.String _ip_, java.lang.String _proveidorIdentitat_, java.lang.String _metodeAutenticacio_, java.lang.Integer _qaa_, java.sql.Timestamp _dataAcces_, java.lang.Long _pluginID_, long _entitatID_, java.lang.String _idioma_, boolean _resultat_) throws I18NException {
 		AccesJPA __bean =  new AccesJPA(_tipus_,_nom_,_llinatges_,_nif_,_ip_,_proveidorIdentitat_,_metodeAutenticacio_,_qaa_,_dataAcces_,_pluginID_,_entitatID_,_idioma_,_resultat_);
 		return create(__bean);
 	}

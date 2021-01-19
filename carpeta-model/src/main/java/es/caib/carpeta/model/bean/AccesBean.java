@@ -18,7 +18,7 @@ private static final long serialVersionUID = -112525025L;
 	java.lang.String ip;
 	java.lang.String proveidorIdentitat;
 	java.lang.String metodeAutenticacio;
-	int qaa;
+	java.lang.Integer qaa;
 	java.sql.Timestamp dataAcces;
 	java.lang.Long pluginID;
 	long entitatID;
@@ -31,7 +31,7 @@ private static final long serialVersionUID = -112525025L;
   }
 
   /** Constructor amb tots els camps  */
-  public AccesBean(long accesID , int tipus , java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String metodeAutenticacio , int qaa , java.sql.Timestamp dataAcces , java.lang.Long pluginID , long entitatID , java.lang.String idioma , boolean resultat) {
+  public AccesBean(long accesID , int tipus , java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String metodeAutenticacio , java.lang.Integer qaa , java.sql.Timestamp dataAcces , java.lang.Long pluginID , long entitatID , java.lang.String idioma , boolean resultat) {
     this.accesID=accesID;
     this.tipus=tipus;
     this.nom=nom;
@@ -48,7 +48,7 @@ private static final long serialVersionUID = -112525025L;
     this.resultat=resultat;
 }
   /** Constructor sense valors autoincrementals */
-  public AccesBean(int tipus , java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String metodeAutenticacio , int qaa , java.sql.Timestamp dataAcces , java.lang.Long pluginID , long entitatID , java.lang.String idioma , boolean resultat) {
+  public AccesBean(int tipus , java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String metodeAutenticacio , java.lang.Integer qaa , java.sql.Timestamp dataAcces , java.lang.Long pluginID , long entitatID , java.lang.String idioma , boolean resultat) {
     this.tipus=tipus;
     this.nom=nom;
     this.llinatges=llinatges;
@@ -143,10 +143,10 @@ private static final long serialVersionUID = -112525025L;
 		this.metodeAutenticacio = _metodeAutenticacio_;
 	};
 
-	public int getQaa() {
+	public java.lang.Integer getQaa() {
 		return(qaa);
 	};
-	public void setQaa(int _qaa_) {
+	public void setQaa(java.lang.Integer _qaa_) {
 		this.qaa = _qaa_;
 	};
 

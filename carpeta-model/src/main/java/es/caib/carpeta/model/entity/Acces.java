@@ -26,8 +26,8 @@ public interface Acces extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getMetodeAutenticacio();
 	public void setMetodeAutenticacio(java.lang.String _metodeAutenticacio_);
 
-	public int getQaa();
-	public void setQaa(int _qaa_);
+	public java.lang.Integer getQaa();
+	public void setQaa(java.lang.Integer _qaa_);
 
 	public java.sql.Timestamp getDataAcces();
 	public void setDataAcces(java.sql.Timestamp _dataAcces_);

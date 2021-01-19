@@ -1,8 +1,8 @@
 package es.caib.carpeta.pluginsib.carpetafront.api;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
+//import org.apache.commons.fileupload.FileItem;
+//import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+//import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.fundaciobit.pluginsib.core.utils.AbstractPluginPropertiesTranslations;
@@ -133,6 +133,7 @@ public abstract class AbstractPluginFullUtilities extends AbstractPluginProperti
      * @param response
      * @return null when error then you must call to "return;"
      */
+    /*
     protected Map<String, FileItem> readFilesFromRequest(HttpServletRequest request,
         HttpServletResponse response) {
       boolean isMultipart = ServletFileUpload.isMultipartContent(request);
@@ -191,7 +192,7 @@ public abstract class AbstractPluginFullUtilities extends AbstractPluginProperti
       }
 
     }
-    
+    */
     
     public static File tempDir = null;
     

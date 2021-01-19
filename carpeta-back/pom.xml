@@ -71,6 +71,28 @@
             <artifactId>genapp-web</artifactId>
             <version>${genapp.version}</version>
         </dependency>
+        
+        
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>javax.activation-api</artifactId>
+            <version>1.2.0</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+            <scope>provided</scope>
+        </dependency>
+
 
         <dependency>
             <groupId>org.fundaciobit.genapp</groupId>
@@ -85,6 +107,13 @@
             <version>1.3</version>
             <scope>compile</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
 
         <dependency>
             <groupId>javax</groupId>
@@ -148,6 +177,13 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -294,6 +330,37 @@
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-core</artifactId>
             <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.bouncycastle</groupId>
+                    <artifactId>bcprov-jdk15on</artifactId>
+                </exclusion>            
+            </exclusions>
+        </dependency>
+        
+        <dependency>
+           <groupId>org.bouncycastle</groupId>
+           <artifactId>bcprov-jdk15on</artifactId>
+           <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+           <groupId>com.fasterxml.jackson.core</groupId>
+           <artifactId>jackson-core</artifactId>
+           <scope>provided</scope>
+        </dependency>
+        
+
+        <dependency>
+           <groupId>com.fasterxml.jackson.core</groupId>
+           <artifactId>jackson-databind</artifactId>
+           <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+           <groupId>com.fasterxml.jackson.core</groupId>
+           <artifactId>jackson-annotations</artifactId>
+           <scope>provided</scope>
         </dependency>
         
         <dependency>
