@@ -166,6 +166,8 @@
 	<script src="${pageContext.request.contextPath}/src/assets/js/menu-lateral.js" type="text/javascript"></script>
 	<!-- acceptar cookies -->
 	<script src="${pageContext.request.contextPath}/src/assets/js/aceptar_cookies.js" type="text/javascript"></script>
+	<!-- Tramitacio Anomima   -->
+	<script src="${pageContext.request.contextPath}/src/assets/js/tramitacio_anonima.js" type="text/javascript"></script>
 
   </body>
 </html>

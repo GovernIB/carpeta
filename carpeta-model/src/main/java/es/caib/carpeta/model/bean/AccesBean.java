@@ -64,10 +64,9 @@ private static final long serialVersionUID = -112525025L;
     this.resultat=resultat;
 }
   /** Constructor dels valors Not Null */
-  public AccesBean(long accesID , int tipus , int qaa , long entitatID , boolean resultat) {
+  public AccesBean(long accesID , int tipus , long entitatID , boolean resultat) {
     this.accesID=accesID;
     this.tipus=tipus;
-    this.qaa=qaa;
     this.entitatID=entitatID;
     this.resultat=resultat;
 }

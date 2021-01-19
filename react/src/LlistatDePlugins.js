@@ -83,7 +83,7 @@ class LlistatDePlugins extends Component {
                         alt="" title=""
                         className="imc-icona" /></span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>
-                    <span className="card-text mb-3 mt-3">{s.descripcio}</span>
+                    <span className="card-text mb-3 mt-3 alignCenter">{s.descripcio}</span>
                 </button>
             </div>
         ));
@@ -93,7 +93,7 @@ class LlistatDePlugins extends Component {
                         onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}>
                     <span className="card-title titol pl-1 h3"><img src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} alt="" title="" className="imc-icona" /></span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>
-                    <span className="card-text mb-3 mt-3">{s.descripcio}</span>
+                    <span className="card-text mb-3 mt-3 alignCenter">{s.descripcio}</span>
                 </button>
             </div>
         ));
@@ -106,7 +106,7 @@ class LlistatDePlugins extends Component {
                         alt="" title=""
                         className="imc-icona" /></span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>
-                    <span className="card-text mb-3 mt-3">{s.descripcio}</span>
+                    <span className="card-text mb-3 mt-3 alignCenter">{s.descripcio}</span>
                 </button>
             </div>
         ));
@@ -119,7 +119,7 @@ class LlistatDePlugins extends Component {
                         alt="" title=""
                         className="imc-icona" /></span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>
-                    <span className="card-text mb-3 mt-3">{s.descripcio}</span>
+                    <span className="card-text mb-3 mt-3 alignCenter">{s.descripcio}</span>
                 </button>
             </div>
         ));
@@ -133,7 +133,7 @@ class LlistatDePlugins extends Component {
                         alt="" title=""
                         className="imc-icona" /></span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>
-                    <span className="card-text mb-3 mt-3">{s.descripcio}</span>
+                    <span className="card-text mb-3 mt-3 alignCenter">{s.descripcio}</span>
                 </button>
             </div>
         ));
@@ -146,7 +146,7 @@ class LlistatDePlugins extends Component {
                         alt="" title=""
                         className="imc-icona" /></span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>
-                    <span className="card-text mb-3 mt-3">{s.descripcio}</span>
+                    <span className="card-text mb-3 mt-3 alignCenter">{s.descripcio}</span>
                 </button>
             </div>
         ));
@@ -159,7 +159,7 @@ class LlistatDePlugins extends Component {
                         alt="" title=""
                         className="imc-icona" /></span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>
-                    <span className="card-text mb-3 mt-3">{s.descripcio}</span>
+                    <span className="card-text mb-3 mt-3 alignCenter">{s.descripcio}</span>
                 </button>
             </div>
         ));
@@ -172,7 +172,7 @@ class LlistatDePlugins extends Component {
                         alt="" title=""
                         className="imc-icona" /></span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>
-                    <span className="card-text mb-3 mt-3">{s.descripcio}</span>
+                    <span className="card-text mb-3 mt-3 alignCenter">{s.descripcio}</span>
                 </button>
             </div>
         ));

@@ -36,10 +36,6 @@ public class AccesValidator<I extends Acces>
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TIPUS)));
 
-    __vr.rejectIfEmptyOrWhitespace(__target__,QAA, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(QAA)));
-
     __vr.rejectIfEmptyOrWhitespace(__target__,ENTITATID, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ENTITATID)));

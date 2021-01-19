@@ -148,7 +148,7 @@
         <tr id="acces_qaa_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[AccesFields.QAA])?'acces.qaa':__theForm.labels[AccesFields.QAA]}" /> &nbsp;(*)
+              <fmt:message key="${(empty __theForm.labels[AccesFields.QAA])?'acces.qaa':__theForm.labels[AccesFields.QAA]}" />
               <c:if test="${not empty __theForm.help[AccesFields.QAA]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.QAA]}" ></i>
               </c:if>

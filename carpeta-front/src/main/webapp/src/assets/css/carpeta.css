@@ -227,6 +227,10 @@ img:hover {
 	/*Without this, clicking will make it sticky*/
 	pointer-events: none;
 }
+.mRapidGlobal{
+	margin: 0 auto;
+	width: 1270px;
+}
 .menuRapid{
 	border: 0px;
 	color: #32814B;
@@ -360,6 +364,12 @@ img:hover {
 .padL-4-5{
 	padding-left: 4.5em !important;
 }
+.colorVerd{
+	color: #265D3C;
+}
+.alignCenter{
+	align-self: center;
+}
 
 /* HomePage */
 .homePage .titol.h5 { text-transform: none !important; }
@@ -371,8 +381,23 @@ img:hover {
 .homePage .opcionesAcceso { width: 320px; margin-left: 190px; margin-right: 20px; }
 .homePage .carpeta-btn .oi {color:#fff; }
 .homePage .carpeta-btn { font-size: 20px; padding: 12px 30px;}
+#tramitacioModal .modal-title { color: #32814b; }
+#tramitacioModal .alert { display:none; }
+#iniciarTramitacioBtn { background-color:#32814b; border-color: #32814b; }
+#iniciarTramitacioBtn:hover { background-color:#000000; border-color:#000000;}
+#tramitacioModalBtn{ color: #32814b; }
+#clauAnonima{width:50%;color:#666;padding:10px;}
+
+
 
 /* RESPONSIVE */
+
+/*Se aplican cuando el width es menor que 1410px*/
+@media only screen and (max-width: 1410px) {
+.mRapidGlobal {
+	padding-left: 3.5em !important;
+}
+}
 
 /*Se aplican cuando el width es menor que 1224px*/
 @media only screen and (max-width: 1224px) {
@@ -393,6 +418,13 @@ body {
 }
 img {
 	max-width: 100%;
+}
+}
+
+/*Se aplican cuando el width es menor que 1128px*/
+@media only screen and (max-width: 1128px) {
+.mRapidGlobal{
+	padding-left: 4em !important;
 }
 }
 
@@ -535,6 +567,12 @@ thead>tr>th.sorting {
 }
 .padL-4-5 {
 	padding-left: 3em !important;
+}
+#continguts {
+	margin-top: 1em;
+}
+.fonsPlugin{
+	padding-top: 0em !important;
 }
 }
 

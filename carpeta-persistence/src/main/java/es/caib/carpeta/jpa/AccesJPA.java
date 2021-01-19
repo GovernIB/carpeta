@@ -53,7 +53,7 @@ private static final long serialVersionUID = -2081832820L;
 	@Column(name="metodeautenticacio",length = 255)
 	java.lang.String metodeAutenticacio;
 
-	@Column(name="qaa",nullable = false,length = 10)
+	@Column(name="qaa",length = 10)
 	int qaa;
 
 	@Column(name="dataacces",length = 29,precision = 6)
@@ -113,10 +113,9 @@ private static final long serialVersionUID = -2081832820L;
     this.resultat=resultat;
 }
   /** Constructor dels valors Not Null */
-  public AccesJPA(long accesID , int tipus , int qaa , long entitatID , boolean resultat) {
+  public AccesJPA(long accesID , int tipus , long entitatID , boolean resultat) {
     this.accesID=accesID;
     this.tipus=tipus;
-    this.qaa=qaa;
     this.entitatID=entitatID;
     this.resultat=resultat;
 }

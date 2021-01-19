@@ -10,8 +10,8 @@ CREATE INDEX car_plugin_logoid_fk_i ON car_plugin using btree (logoid);
 
 --14/01/2021 Refactorització d'Accesos #308
 ALTER TABLE car_acces DROP COLUMN resultatautenticacio;
-ALTER TABLE car_acces ADD COLUMN resultat boolean NOT NULL;
+ALTER TABLE car_acces ADD COLUMN resultat boolean NOT NULL DEFAULT true;
 ALTER TABLE car_acces ALTER COLUMN idioma SET NOT NULL;
 ALTER TABLE car_acces RENAME datadarreracces  TO dataacces;
-ALTER TABLE car_acces ADD COLUMN qaa integer NOT NULL;
+ALTER TABLE car_acces ADD COLUMN qaa integer;
 ALTER TABLE car_acces RENAME nivellseguretat  TO metodeautenticacio;
