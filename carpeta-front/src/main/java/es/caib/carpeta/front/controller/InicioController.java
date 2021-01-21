@@ -94,7 +94,6 @@ public class InicioController extends CommonFrontController {
         ModelAndView mav = new ModelAndView("inici");
 
         // Posam la sessió de 30 minuts
-//        session.setMaxInactiveInterval(1 * 60);
         mav.addObject("maxInactiveInterval", 30 * 60);
 
         try {
@@ -119,6 +118,7 @@ public class InicioController extends CommonFrontController {
                 } else {
 
                     sesionHttp.setEntitat(entitats.get(0).key);
+                    log.info("ASSIGNAM ENTITAT 1: " + entitats.get(0).key);
                     mav.addObject("entitat", entitats.get(0).key);
                     mav.addObject("numEntitats", entitats.size());
                     mav.addObject("canviarDeFront", canviardefront);
@@ -149,8 +149,9 @@ public class InicioController extends CommonFrontController {
                     }
 
                 }
-            } else {
+            } else if (sesionHttp.getEntitat() != null) {
 
+                log.info("ASSIGNAM ENTITAT 2: " + sesionHttp.getEntitat());
                 mav.addObject("entitat", sesionHttp.getEntitat());
                 mav.addObject("numEntitats", entitats.size());
                 mav.addObject("canviarDeFront", canviardefront);

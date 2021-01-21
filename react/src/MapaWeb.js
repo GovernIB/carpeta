@@ -60,6 +60,8 @@ class MapaWeb extends Component {
 			dades = <a href="javascript: var loc = new URL(window.location.href);  window.location.href=('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host) )">{t('mapaWebDades')}</a>;
 		}
 
+		clearTimeout(sessionStorage.getItem('idTimeOut'));
+
 		return (
 			<div className="container-contenido">
 				<ExpirarSessio />

@@ -57,6 +57,8 @@ class PluginHtml extends Component {
             sessionStorage.setItem('idioma', i18n.language);
         });
 
+        clearTimeout(sessionStorage.getItem('idTimeOut'));
+
 
         return (
             <div>

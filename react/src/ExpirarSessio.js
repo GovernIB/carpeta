@@ -2,24 +2,18 @@ import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
 
 
-
-
-
 class ExpirarSessio extends Component {
-
-
 
 
     loadDialog(maxInactiveInterval) {
         var sessionAlive = maxInactiveInterval;
         if(sessionAlive === null){
-            sessionAlive = 30 * 60;
+            sessionAlive = 1 * 60;
         }
         var notifyBefore = 30;
-        setTimeout(function() {
+        var newTimer = setTimeout(function() {
             $(function() {
                 const entitatActual = sessionStorage.getItem('entitat');
-                console.log('Sessio: ' + sessionAlive);
                 $('#dialog').dialog({
                     autoOpen: true,
                     maxWidth:400,
@@ -64,7 +58,8 @@ class ExpirarSessio extends Component {
                                     class:'botoDialegVerd',
                                     click: function() {
                                         $( this ).dialog( "close" );
-                                        var url = window.location.href + 'sortir';
+                                        // var url = window.location.href + 'sortir';
+                                        var url = window.location.href + 'e/' + sessionStorage.getItem('entitat');
                                         window.location.replace(url);
                                     }
                                 }
@@ -75,6 +70,7 @@ class ExpirarSessio extends Component {
 
             });
         }, (sessionAlive - notifyBefore) * 1000);
+        sessionStorage.setItem('idTimeOut', newTimer);
     };
 
 

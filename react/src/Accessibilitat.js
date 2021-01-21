@@ -8,6 +8,8 @@ class Accessibilitat extends Component {
 
         const { t } = this.props;
 
+        clearTimeout(sessionStorage.getItem('idTimeOut'));
+
         return (
             <div className="container-contenido">
                 <ExpirarSessio />

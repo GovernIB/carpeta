@@ -41,22 +41,22 @@ class IniciPublic extends Component {
                         <h2><p className="titol h2">{t('paginaIniciTitol')} {entitatNom}</p></h2>
 
                         <div className="col-md-5 border-0 float-left p-0">
-                            <p className="lh15 font-weight-bolder"><span class="oi oi-person"></span>{t('paginaIniciQuefer')}</p>
+                            <p className="lh15 font-weight-bolder"><span className="oi oi-person" />{t('paginaIniciQuefer')}</p>
                             <ul className="lh15 pl-5 pt-3">
-                                <li><span class="oi oi-arrow-right"></span>{t('paginaIniciQuefer1')}</li>
-                                <li><span class="oi oi-arrow-right"></span>{t('paginaIniciQuefer2')}</li>
-                                <li><span class="oi oi-arrow-right"></span>{t('paginaIniciQuefer3')}</li>
-                                <li><span class="oi oi-arrow-right"></span>{t('paginaIniciQuefer4')}</li>
+                                <li><span className="oi oi-arrow-right" />{t('paginaIniciQuefer1')}</li>
+                                <li><span className="oi oi-arrow-right" />{t('paginaIniciQuefer2')}</li>
+                                <li><span className="oi oi-arrow-right" />{t('paginaIniciQuefer3')}</li>
+                                <li><span className="oi oi-arrow-right" />{t('paginaIniciQuefer4')}</li>
                             </ul>
 
-                            <p className="titol h5 margen-top-clave"><span class="oi oi-account-login"></span>{t('paginaIniciAcces')}</p>
+                            <p className="titol h5 margen-top-clave"><span className="oi oi-account-login" />{t('paginaIniciAcces')}</p>
 
                             <p className="lh15">{t('paginaIniciClave')}</p>
-                            <div className="pt-3 imc--logoclave"></div>
+                            <div className="pt-3 imc--logoclave" />
                             <ul className="lh15 pl-5 pt-3 opcionesAcceso">
-                                <li><span class="oi oi-arrow-right"></span>{t('paginaIniciClave1')}</li>
-                                <li><span class="oi oi-arrow-right"></span>{t('paginaIniciClave2')}</li>
-                                <li><span class="oi oi-arrow-right"></span>{t('paginaIniciClave3')}</li>
+                                <li><span className="oi oi-arrow-right" />{t('paginaIniciClave1')}</li>
+                                <li><span className="oi oi-arrow-right" />{t('paginaIniciClave2')}</li>
+                                <li><span className="oi oi-arrow-right" />{t('paginaIniciClave3')}</li>
                             </ul>
                             <br className="clearBoth" />
                         </div>
@@ -66,29 +66,29 @@ class IniciPublic extends Component {
                             <p className="margen-top-clave pb-3">
                                 <a className="btn btn-primary carpeta-btn botoAccedirCarpeta" href="javascript: var loc = new URL(window.location.href);  window.location.href=('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host) )" role="button"><span
                                     className="oi oi-account-login" title=""
-                                    aria-hidden="true"></span> {t('paginaIniciBotoAccedir')}</a>
+                                    aria-hidden="true" /> {t('paginaIniciBotoAccedir')}</a>
                             </p>
 
                             <p className="titol h5">{t('tramitacioAnonimaTitol')}</p>
-                            <p className="lh15 pb-3"><a href="#" id="tramitacioModalBtn" data-toggle="modal" data-target="#tramitacioModal"><span class="oi oi-external-link"></span>{t('tramitacioEnllaz')}</a></p>
+                            <p className="lh15 pb-3"><a href="#" id="tramitacioModalBtn" data-toggle="modal" data-target="#tramitacioModal"><span className="oi oi-external-link" />{t('tramitacioEnllaz')}</a></p>
                             
-                            <div class="modal fade" id="tramitacioModal" tabindex="-1" aria-labelledby="tramitacioLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="tramitacioModalLabel">{t('iniciarTramitacioAnonimaTitol')}</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <div className="modal fade" id="tramitacioModal" tabindex="-1" aria-labelledby="tramitacioLabel" aria-hidden="true">
+                                <div className="modal-dialog">
+                                    <div className="modal-content">
+                                    <div className="modal-header">
+                                        <h5 className="modal-title" id="tramitacioModalLabel">{t('iniciarTramitacioAnonimaTitol')}</h5>
+                                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
-                                        <div class="alert alert-danger" role="alert">{t('errorTramitacioAnonima')}</div> 
+                                    <div className="modal-body">
+                                        <div className="alert alert-danger" role="alert">{t('errorTramitacioAnonima')}</div>
                                         <p>{t('descTramitacioAnonima')}</p>
-                                        <input type="text" id="clauAnonima"></input>
+                                        <input type="text" id="clauAnonima" />
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{t('cancelarTramitacioAnonima')}</button>
-                                        <button type="button" id="iniciarTramitacioBtn" class="btn btn-primary">{t('iniciarTramitacioAnonimaBtn')}</button>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-dismiss="modal">{t('cancelarTramitacioAnonima')}</button>
+                                        <button type="button" id="iniciarTramitacioBtn" className="btn btn-primary">{t('iniciarTramitacioAnonimaBtn')}</button>
                                     </div>
                                     </div>
                                 </div>
@@ -99,15 +99,15 @@ class IniciPublic extends Component {
                             <p className="titol h5">{t('paginaIniciProblemes')}</p>
                             <p className="lh15">{t('paginaIniciAjuda')}</p>
                             <ul className="lh15 pl-5 pt-3">
-                                <li><span class="oi oi-arrow-right"></span> {t('paginaIniciAjuda1')} <a href="http://clave.gob.es/clave_Home/clave.html"
+                                <li><span className="oi oi-arrow-right" /> {t('paginaIniciAjuda1')} <a href="http://clave.gob.es/clave_Home/clave.html"
                                                                 title={t('paginaIniciAjudaClaveText')}
-                                                                alt={t('paginaIniciAjudaClaveText')} target="_blank"
+                                                                target="_blank"
                                                                 rel="noopener noreferrer">{t('paginaIniciAjudaClave')}</a>
                                 </li>
-                                <li><span class="oi oi-arrow-right"></span> {t('paginaIniciAjuda2')}</li>
-                                <li><span class="oi oi-arrow-right"></span> {t('paginaIniciAjuda3')} <a
+                                <li><span className="oi oi-arrow-right" /> {t('paginaIniciAjuda2')}</li>
+                                <li><span className="oi oi-arrow-right" /> {t('paginaIniciAjuda3')} <a
                                     href="https://ssweb.seap.minhap.es/ayuda/consulta/Claveciudadanos"
-                                    title={t('paginaIniciAjudaBustiaText')} alt={t('paginaIniciAjudaBustiaText')}
+                                    title={t('paginaIniciAjudaBustiaText')}
                                     target="_blank" rel="noopener noreferrer">{t('paginaIniciAjudaBustia')}</a></li>
                             </ul>
 

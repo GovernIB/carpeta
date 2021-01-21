@@ -182,7 +182,10 @@ public class LoginController {
         if (session != null) {
             session.invalidate();
         }
-        return "redirect:/e/"+codiEntitat;
+        sesionHttp.setEntitat(codiEntitat);
+
+//        return "redirect:/e/"+codiEntitat;
+        return "redirect:/";
 
     }
 

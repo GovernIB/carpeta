@@ -55,12 +55,14 @@
 	  <script type="text/javascript">
 		  window.onload = function($) {
 			  sessionStorage.setItem('autenticat', '0');
+			  <%--console.log('entitat: ' + '${entitat}');--%>
 			  sessionStorage.setItem('entitat', '${entitat}');
 			  sessionStorage.setItem('defaultEntityCode', '${defaultEntityCode}');
 			  sessionStorage.setItem('maxInactiveInterval','${maxInactiveInterval}');
 			  sessionStorage.setItem('numEntitats', '${numEntitats}');
 			  sessionStorage.setItem('canviarDeFront', '${canviarDeFront}');
 			  sessionStorage.removeItem('pluginActiu');
+			  // sessionStorage.setItem('idTimeOut', '1');
 			  var aut = sessionStorage.getItem('autenticat');
 			  newMenuDesllisant('menuDesllisant', aut);
 			  newPeu('peu', aut);

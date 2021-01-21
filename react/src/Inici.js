@@ -21,6 +21,10 @@ class Inici extends Component {
 
 		var autenticat = this.props.autenticat;
 
+		clearTimeout(sessionStorage.getItem('idTimeOut'));
+
+		console.log("entitat inici: " + sessionStorage.getItem('entitat'));
+
 		return (
 
 			<div className="container-contenido">

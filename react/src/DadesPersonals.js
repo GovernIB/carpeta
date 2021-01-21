@@ -15,6 +15,8 @@ class DadesPersonals extends Component {
         const usuariDNI = sessionStorage.getItem('usuariDNI');
         const usuariMetode = sessionStorage.getItem('usuariMetode');
 
+        clearTimeout(sessionStorage.getItem('idTimeOut'));
+
         return (
             <div className="container-contenido">
                 <ExpirarSessio />

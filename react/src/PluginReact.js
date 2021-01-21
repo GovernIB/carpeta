@@ -51,7 +51,8 @@ class PluginReact extends Component {
         } else {
             console.log("PLUGIN JA CARREGAT !!!!!");
         }
-            
+
+        clearTimeout(sessionStorage.getItem('idTimeOut'));
 
 		return (
             <div>
