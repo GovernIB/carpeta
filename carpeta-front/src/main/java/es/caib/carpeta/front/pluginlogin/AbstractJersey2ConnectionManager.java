@@ -64,14 +64,14 @@ public class AbstractJersey2ConnectionManager {
         this.ignoreServerCertificates = ignoreServerCertificates;
     }
 
-    protected String serializeJson(Object pojo) throws Exception {
+    public static String serializeJson(Object pojo) throws Exception {
 
         ObjectMapper om = new ObjectMapper();
         return om.writeValueAsString(pojo);
 
     }
 
-    protected <T> T deserializeJson(String pojo, Class<T> classe) throws Exception {
+    public static  <T> T deserializeJson(String pojo, Class<T> classe) throws Exception {
 
         ObjectMapper om = new ObjectMapper();
 

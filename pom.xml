@@ -56,13 +56,9 @@
 
 		<cglib.version>2.2.2</cglib.version>
 
-		<!-- XYZ ZZZ S'ha de fer la substitució -->
+		<!-- S'ha de fer la substitució -->
 		<genapp.version>2.0.0-SNAPSHOT</genapp.version>
-
-        <!-- LOGINIB -->
-        <loginib.version>1.0.1</loginib.version>
-
-        
+   
 
     </properties>
     <dependencyManagement>

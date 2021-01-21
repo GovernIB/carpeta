@@ -1,12 +1,23 @@
 package es.caib.carpeta.front.pluginlogin;
 
+import java.net.HttpURLConnection;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+
+import org.jboss.resteasy.client.jaxrs.BasicAuthentication;
+import org.jboss.resteasy.client.jaxrs.ResteasyClient;
+import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+//import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.support.BasicAuthorizationInterceptor;
 import org.springframework.web.client.RestTemplate;
@@ -51,18 +62,28 @@ public class PluginLoginLoginIB {
         param.setMetodosAutenticacion(METODES_AUTENTICACIO);
         param.setAplicacion(APLICACIO_DESCRIPCIO); 
 
-        /* XYZ ZZZ
-        LoginIBApi api = getLoginApi();
+        /* XYZ ZZZ  Jersey
+        LoginIBApiJersey api = getLoginApiJersey();
         String url = api.login(param);
         
-        log.info("\n\n  URL LOGIN = " + url + "\n\n\n");
+        
+        */
+        
+        /*
+         * XYZ ZZZ RestEasy
+         */
+        /*
+        LoginIBApiRestEasy easy = new LoginIBApiRestEasy();
+        
+        String url = easy.login(param);
         */
         
         
+        /* XYZ ZZZ  RestTemplate Spring */
         final RestTemplate restTemplate = getLoginIbRestTemplate();
 
         final HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setContentType(org.springframework.http.MediaType.APPLICATION_JSON);
         final HttpEntity<RLoginParams> peticion = new HttpEntity<>(param, headers);
         final ResponseEntity<String> responseTramite = restTemplate.postForEntity(LOGINIB_URL + "/login", peticion,
                 String.class);
@@ -72,6 +93,9 @@ public class PluginLoginLoginIB {
 
         String url = responseTramite.getBody();
         
+        
+        
+        log.info("\n\n  URL LOGIN = " + url + "\n\n\n");
         
         return url;
 
@@ -117,7 +141,7 @@ public class PluginLoginLoginIB {
         param.setIdioma(language);
         param.setAplicacion(APLICACIO_DESCRIPCIO);
         final HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setContentType(org.springframework.http.MediaType.APPLICATION_JSON);
 
         final HttpEntity<RLogoutParams> request = new HttpEntity<>(param, headers);
         final ResponseEntity<String> responseTramite = restTemplate.postForEntity(LOGINIB_URL + "/logout", request,
@@ -142,12 +166,12 @@ public class PluginLoginLoginIB {
     
     
     
-    private LoginIBApi loginAPI =  null;
+    private LoginIBApiJersey loginAPI =  null;
     
     
-    protected LoginIBApi getLoginApi() {
+    protected LoginIBApiJersey getLoginApiJersey() {
         if (loginAPI == null) {            
-            loginAPI = new LoginIBApi(LOGINIB_USER, LOGINIB_PASS, ignoreServerCertificates);
+            loginAPI = new LoginIBApiJersey(LOGINIB_USER, LOGINIB_PASS, ignoreServerCertificates);
         }
         
         return loginAPI;
@@ -155,14 +179,87 @@ public class PluginLoginLoginIB {
     
     
     
-    public class LoginIBApi extends AbstractJersey2ConnectionManager {
+    
+    public class LoginIBApiRestEasy {
+        
+        
+        
+        public String login(RLoginParams param) throws Exception {
+            //Client client = ClientBuilder.newClient();    
+            //
+          
+            HttpURLConnection.setFollowRedirects(true); 
+            
+            ResteasyClient client = (ResteasyClient)ResteasyClientBuilder.newBuilder()
+                    //.sslContext(buildSSLContext())
+                    //.hostnameVerifier(buildHostVerifier())
+                    //.withConfig(config)
+                    .build();
+            
+            ResteasyWebTarget target = client.target(LOGINIB_URL);
+            target.register(new BasicAuthentication(LOGINIB_USER, LOGINIB_PASS));
+            
+            
+            String data = AbstractJersey2ConnectionManager.serializeJson(param);
+            
+            
 
-        public LoginIBApi(String token, boolean ignoreServerCertificates) {
+            System.out.println(" OBJECT PARAMETER: " + data);
+
+            Entity<?> json = Entity.entity(data, javax.ws.rs.core.MediaType.APPLICATION_JSON_TYPE);
+                    
+                                
+             Response response = target.request().accept(MediaType.APPLICATION_JSON).post(json);
+             
+             
+            int status = response.getStatus();
+            
+            log.info("\n\n\n STATUS = " + status + "\n\n");
+            
+            if (status == 200 || status == 201) {
+                String raw_msg = response.readEntity(String.class);
+                
+                
+                log.info("RAW MESSAGE : " + raw_msg);
+                
+                return raw_msg;
+            } if (status == 302) {
+                String newEndPoint =  response.getHeaderString("Location");
+                
+                System.out.println(" \n\n LOCATION HEADER = ]" + newEndPoint + "[\n\n");
+                
+                
+                throw new Exception("HAN FET FER UNA REDIRECCIO: " + newEndPoint);
+            } else {
+                String raw_msg = response.readEntity(String.class);
+                
+                
+                
+                throw new Exception("Error desconegut (Codi de servidor " + response.getStatus() + "): \n " + raw_msg
+                        + response.toString());
+            }
+             
+             
+             
+             
+             
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    public class LoginIBApiJersey extends AbstractJersey2ConnectionManager {
+
+        public LoginIBApiJersey(String token, boolean ignoreServerCertificates) {
             super(token, ignoreServerCertificates);
             // TODO Auto-generated constructor stub
         }
 
-        public LoginIBApi(String username, String password, boolean ignoreServerCertificates) {
+        public LoginIBApiJersey(String username, String password, boolean ignoreServerCertificates) {
             super(username, password, ignoreServerCertificates);
             setConnectionTimeoutMs(60000);
             setReadTimeoutMs(60000);

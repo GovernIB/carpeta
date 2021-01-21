@@ -53,10 +53,24 @@
         </dependency>
 
         <!-- Spring MVC -->
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -92,10 +106,17 @@
 
         <!-- LoginIB -->
         
+      
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-client</artifactId>
             <version>2.33</version>
+        </dependency>
+        
+   
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-client</artifactId>
         </dependency>
         
       
@@ -103,7 +124,7 @@
         <dependency>
             <groupId>es.caib.loginib</groupId>
             <artifactId>loginib-rest-api</artifactId>
-            <version>${loginib.version}</version>
+            <version>1.0.1</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework</groupId>
@@ -119,10 +140,103 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
+        
+        <dependency>
+           <groupId>com.fasterxml.jackson.core</groupId>
+           <artifactId>jackson-core</artifactId>
+           <scope>provided</scope>
+        </dependency>
+        
+
+        <dependency>
+           <groupId>com.fasterxml.jackson.core</groupId>
+           <artifactId>jackson-databind</artifactId>
+           <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+           <groupId>com.fasterxml.jackson.core</groupId>
+           <artifactId>jackson-annotations</artifactId>
+           <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+           <groupId>net.bytebuddy</groupId>
+           <artifactId>byte-buddy</artifactId>
+           <scope>provided</scope>
+           <!--  1.9.11.redhat-00002 -->
+        </dependency>
+        
+        
+        <dependency>
+           <groupId>io.springfox</groupId>
+           <artifactId>springfox-core</artifactId>
+           <version>2.7.0</version>
+           <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+           <groupId>io.springfox</groupId>
+           <artifactId>springfox-spi</artifactId>
+           <version>2.7.0</version>
+           <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+           <groupId>io.springfox</groupId>
+           <artifactId>springfox-schema</artifactId>
+           <version>2.7.0</version>
+           <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+           <groupId>io.springfox</groupId>
+           <artifactId>springfox-swagger2</artifactId>
+           <version>2.7.0</version>
+           <scope>provided</scope>
+           <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-beans</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-context</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-aop</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
+        
+        <dependency>
+           <groupId>io.springfox</groupId>
+           <artifactId>springfox-swagger-common</artifactId>
+           <version>2.7.0</version>
+           <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+           <groupId>io.springfox</groupId>
+           <artifactId>springfox-spring-web</artifactId>
+           <version>2.7.0</version>
+           <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+           <groupId>com.google.guava</groupId>
+           <artifactId>guava</artifactId>
+           <scope>provided</scope>
+        </dependency>
+
+        
         
         <!--  Utilitats -->
         <dependency>
