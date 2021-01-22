@@ -370,6 +370,9 @@ img:hover {
 .alignCenter{
 	align-self: center;
 }
+.lletraIdioma{
+	font-size: 1em;
+}
 
 /* HomePage */
 .homePage .titol.h5 { text-transform: none !important; }

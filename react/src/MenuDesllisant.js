@@ -9,7 +9,8 @@ class MenuDesllisant extends Component {
 		super();
 		this.state = {
 			plugins: [],
-			menuEnllasos: []
+			menuEnllasos: [],
+			idiomes: []
 		}
 	}
 
@@ -21,6 +22,10 @@ class MenuDesllisant extends Component {
 		var url2 = window.location.href + `webui/menuslidelinks`;
 		axios.get(url2).then(res => {
 			this.setState({ menuEnllasos: res.data })
+		});
+		var url3 = window.location.href + `webui/idiomesFront`;
+		axios.get(url3).then(res => {
+			this.setState({ idiomes: res.data })
 		})
 	}
 
@@ -48,6 +53,10 @@ class MenuDesllisant extends Component {
 		var url2 = window.location.href + `webui/menuslidelinks`;
 		axios.get(url2).then(res => {
 			this.setState({ menuEnllasos: res.data })
+		});
+		var url3 = window.location.href + `webui/idiomesFront`;
+		axios.get(url3).then(res => {
+			this.setState({ idiomes: res.data })
 		})
 	}
 
@@ -85,21 +94,62 @@ class MenuDesllisant extends Component {
 			))
 		}
 
+		const idiomes = this.state.idiomes;
 
 		var boto_ca;
-		if (i18n.language === 'ca') {
-			boto_ca = <strong>{t('menuIdioma_ca')}</strong>;
-		} else {
-			boto_ca =
-				<button onClick={() => i18n.changeLanguage('ca')} className="boton-menu">{t('menuIdioma_ca')}</button>;
+		var boto_es;
+		var boto_en;
+		var separacio1 = "";
+		var separacio2 = "";
+
+		if(idiomes.length === 2){
+			separacio1 = "\\";
+		}
+		if(idiomes.length === 3){
+			separacio1 = "\\";
+			separacio2 = "\\";
 		}
 
-		var boto_es;
+		if (i18n.language === 'ca') {
+			boto_ca = idiomes.filter(s => s === 'ca').map(s => (
+				<strong className="lletraIdioma">{t('menuIdioma_ca')}</strong>
+			));
+			boto_es = idiomes.filter(s => s === 'es').map(s => (
+				<button onClick={() => i18n.changeLanguage('es')}
+						className="boton-menu lletraIdioma">{t('menuIdioma_es')}</button>
+			));
+			boto_en = idiomes.filter(s => s === 'en').map(s => (
+				<button onClick={() => i18n.changeLanguage('en')}
+						className="boton-menu lletraIdioma">{t('menuIdioma_en')}</button>
+			));
+		}
+
 		if (i18n.language === 'es') {
-			boto_es = <strong>{t('menuIdioma_es')}</strong>;
-		} else {
-			boto_es =
-				<button onClick={() => i18n.changeLanguage('es')} className="boton-menu">{t('menuIdioma_es')}</button>;
+			boto_ca = idiomes.filter(s => s === 'ca').map(s => (
+				<button onClick={() => i18n.changeLanguage('ca')}
+					className="boton-menu lletraIdioma">{t('menuIdioma_ca')}</button>
+			));
+			boto_es = idiomes.filter(s => s === 'es').map(s => (
+				<strong className="lletraIdioma">{t('menuIdioma_es')}</strong>
+			));
+			boto_en = idiomes.filter(s => s === 'en').map(s => (
+				<button onClick={() => i18n.changeLanguage('en')}
+						className="boton-menu lletraIdioma">{t('menuIdioma_en')}</button>
+			));
+		}
+
+		if (i18n.language === 'en') {
+			boto_ca = idiomes.filter(s => s === 'ca').map(s => (
+				<button onClick={() => i18n.changeLanguage('ca')}
+						className="boton-menu lletraIdioma">{t('menuIdioma_ca')}</button>
+			));
+			boto_es = idiomes.filter(s => s === 'es').map(s => (
+				<button onClick={() => i18n.changeLanguage('es')}
+						className="boton-menu lletraIdioma">{t('menuIdioma_es')}</button>
+			));
+			boto_en = idiomes.filter(s => s === 'en').map(s => (
+				<strong className="lletraIdioma">{t('menuIdioma_en')}</strong>
+			));
 		}
 
 
@@ -200,7 +250,7 @@ class MenuDesllisant extends Component {
 					<ul>
 						{enllasosMenu}
 						<li className="imc-marc-ico imc--idioma">
-							{boto_ca} \ {boto_es}
+							{boto_ca} {separacio1} {boto_es} {separacio2} {boto_en}
 						</li>
 						{accessibilitat}
 						{plugHtml}

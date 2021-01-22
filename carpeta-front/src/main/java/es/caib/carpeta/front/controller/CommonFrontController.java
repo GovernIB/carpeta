@@ -1,5 +1,6 @@
 package es.caib.carpeta.front.controller;
 
+import es.caib.carpeta.ejb.IdiomaLocal;
 import es.caib.carpeta.logic.EntitatLogicaLocal;
 import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
 import es.caib.carpeta.model.entity.Fitxer;
@@ -30,6 +31,9 @@ public abstract class CommonFrontController {
 
     @EJB(mappedName = EntitatLogicaLocal.JNDI_NAME)
     EntitatLogicaLocal entitatEjb;
+
+    @EJB(mappedName = IdiomaLocal.JNDI_NAME)
+    IdiomaLocal idiomaEjb;
     
     
    

@@ -11,7 +11,10 @@ import es.caib.carpeta.jpa.EntitatJPA;
 import es.caib.carpeta.logic.utils.EjbManager;
 import es.caib.carpeta.model.entity.Avis;
 import es.caib.carpeta.model.entity.Enllaz;
+import es.caib.carpeta.model.entity.Idioma;
+import es.caib.carpeta.model.fields.IdiomaFields;
 import org.fundaciobit.genapp.common.StringKeyValue;
+import org.fundaciobit.genapp.common.query.OrderBy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
@@ -528,6 +531,34 @@ public class WebUIController extends CommonFrontController {
             response.setContentType("text/html");
             response.getWriter().println(entitat.getNom().getTraduccio(lang).getValor());
             response.flushBuffer();
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
+    }
+
+    @RequestMapping(value = "/idiomesFront", method = RequestMethod.GET)
+    public void getIdiomes(HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+
+            List<Idioma> idiomesFront = idiomaEjb.select(IdiomaFields.SUPORTAT.equal(true), new OrderBy(IdiomaFields.ORDRE));
+
+            List<String> idiomaInfo = new ArrayList<>();
+            for (Idioma idioma : idiomesFront) {
+                idiomaInfo.add(idioma.getIdiomaID());
+            }
+
+            // Passar JSON
+            Gson gson = new Gson();
+            String json = gson.toJson(idiomaInfo);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF8");
+
+            byte[] utf8JsonString = json.getBytes("UTF8");
+
+            response.getOutputStream().write(utf8JsonString);
 
         } catch (Throwable e) {
             processException(e, response);
