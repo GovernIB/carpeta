@@ -362,8 +362,9 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
                 // Es marquen com a pendents els de PREENVIO i PREREGISTRO perquè els falta
                 // entregar documentació presencialment
-                Boolean estaPendent = (item.getTipo() != TipoElementoExpediente.ENVIO) ? true : false;
+                Boolean estaPendent = (item.getTipo() != TipoElementoExpediente.ENVIO && item.isPendiente()) ? true : false;
                 tpg.setPendiente(estaPendent);
+                tpg.setMostraModal((item.getTipo() != TipoElementoExpediente.ENVIO && !item.isPendiente()) ? true : false);
 
                 if ((estaPendent && !finalizado.equals("S")) || (!estaPendent && !finalizado.equals("N"))) {
                     tramits.add(tpg);

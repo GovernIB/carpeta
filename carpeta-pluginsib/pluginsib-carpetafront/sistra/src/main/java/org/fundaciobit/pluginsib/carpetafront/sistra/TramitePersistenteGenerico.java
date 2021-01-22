@@ -13,6 +13,7 @@ public class TramitePersistenteGenerico {
 	private String descripcionTramite;
 	private Date fechaInicio;
 	private int versionSistra;
+	private boolean mostraModal;
 	
 	/* Atributs inacabats */
 	private String idSesionTramitacion;
@@ -115,6 +116,14 @@ public class TramitePersistenteGenerico {
 		this.pendiente = pendiente;
 	}
 	
+	public Boolean esMostraModal() {
+		 return this.mostraModal;
+	}
+	
+	public void setMostraModal(Boolean mostraModal) {
+		this.mostraModal = mostraModal;
+	}
+	
 	public TramitePersistenteGenerico(RTramitePersistencia tramite, int versionSistra) {
 		this.idSesionTramitacion = tramite.getIdSesionTramitacion();
 		this.idioma = tramite.getIdioma();
@@ -127,6 +136,7 @@ public class TramitePersistenteGenerico {
 		this.pendiente = true;
 		this.url = "";
 		this.tipo = null;
+		this.mostraModal = false;
 	}
 	
 	public TramitePersistenteGenerico(TramitePersistente tramite, int versionSistra) {
@@ -141,6 +151,7 @@ public class TramitePersistenteGenerico {
 		this.pendiente = true;
 		this.url = tramite.getUrlAcceso();
 		this.tipo = null;
+		this.mostraModal = false;
 	}
 	
 	public TramitePersistenteGenerico( ElementoExpediente tramite,  int versionSistra ) {
@@ -155,6 +166,7 @@ public class TramitePersistenteGenerico {
 		this.pendiente = tramite.isPendiente();
 		this.url = tramite.getUrl();
 		this.tipo = tramite.getTipo();
+		this.mostraModal = false;
 	}
 	
 }
