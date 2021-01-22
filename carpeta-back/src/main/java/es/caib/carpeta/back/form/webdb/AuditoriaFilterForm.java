@@ -43,28 +43,6 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
   }
 
 
-  private java.sql.Timestamp dataAuditDesde;
-
-  public java.sql.Timestamp getDataAuditDesde() {
-    return this.dataAuditDesde;
-  }
-
-  public void setDataAuditDesde(java.sql.Timestamp dataAuditDesde) {
-    this.dataAuditDesde = dataAuditDesde;
-  }
-
-
-  private java.sql.Timestamp dataAuditFins;
-
-  public java.sql.Timestamp getDataAuditFins() {
-    return this.dataAuditFins;
-  }
-
-  public void setDataAuditFins(java.sql.Timestamp dataAuditFins) {
-    this.dataAuditFins = dataAuditFins;
-  }
-
-
   private java.lang.Integer tipusDesde;
 
   public java.lang.Integer getTipusDesde() {
@@ -84,6 +62,39 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
 
   public void setTipusFins(java.lang.Integer tipusFins) {
     this.tipusFins = tipusFins;
+  }
+
+
+  private java.lang.String objecte;
+
+  public java.lang.String getObjecte() {
+    return this.objecte;
+  }
+
+  public void setObjecte(java.lang.String objecte) {
+    this.objecte = objecte;
+  }
+
+
+  private java.sql.Timestamp dataAuditDesde;
+
+  public java.sql.Timestamp getDataAuditDesde() {
+    return this.dataAuditDesde;
+  }
+
+  public void setDataAuditDesde(java.sql.Timestamp dataAuditDesde) {
+    this.dataAuditDesde = dataAuditDesde;
+  }
+
+
+  private java.sql.Timestamp dataAuditFins;
+
+  public java.sql.Timestamp getDataAuditFins() {
+    return this.dataAuditFins;
+  }
+
+  public void setDataAuditFins(java.sql.Timestamp dataAuditFins) {
+    this.dataAuditFins = dataAuditFins;
   }
 
 
@@ -127,10 +138,11 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
     super(__toClone);
     this.auditoriaIDDesde = __toClone.auditoriaIDDesde;
     this.auditoriaIDFins = __toClone.auditoriaIDFins;
-    this.dataAuditDesde = __toClone.dataAuditDesde;
-    this.dataAuditFins = __toClone.dataAuditFins;
     this.tipusDesde = __toClone.tipusDesde;
     this.tipusFins = __toClone.tipusFins;
+    this.objecte = __toClone.objecte;
+    this.dataAuditDesde = __toClone.dataAuditDesde;
+    this.dataAuditFins = __toClone.dataAuditFins;
     this.username = __toClone.username;
     this.entitatIDDesde = __toClone.entitatIDDesde;
     this.entitatIDFins = __toClone.entitatIDFins;

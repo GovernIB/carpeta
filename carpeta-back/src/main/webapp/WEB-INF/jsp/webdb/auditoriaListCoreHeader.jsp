@@ -15,11 +15,14 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.AUDITORIAID)}">
         <th>${car:getSortIcons(__theFilterForm,AuditoriaFields.AUDITORIAID)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.DATAAUDIT)}">
-        <th>${car:getSortIcons(__theFilterForm,AuditoriaFields.DATAAUDIT)}</th>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.TIPUS)}">
         <th>${car:getSortIcons(__theFilterForm,AuditoriaFields.TIPUS)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.OBJECTE)}">
+        <th>${car:getSortIcons(__theFilterForm,AuditoriaFields.OBJECTE)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.DATAAUDIT)}">
+        <th>${car:getSortIcons(__theFilterForm,AuditoriaFields.DATAAUDIT)}</th>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.USERNAME)}">
         <th>${car:getSortIcons(__theFilterForm,AuditoriaFields.USERNAME)}</th>

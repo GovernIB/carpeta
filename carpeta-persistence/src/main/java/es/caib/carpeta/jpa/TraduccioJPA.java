@@ -1,27 +1,29 @@
 
 package es.caib.carpeta.jpa;
-import es.caib.carpeta.model.entity.*;
-import javax.persistence.Table;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinTable;
-import org.hibernate.annotations.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import java.util.Set;
-import java.util.HashMap;
 import org.hibernate.annotations.Cascade;
-import java.util.HashSet;
-import javax.persistence.GenerationType;
-import javax.persistence.GeneratedValue;
+import org.hibernate.annotations.ForeignKey;
 import org.hibernate.annotations.Index;
-import javax.persistence.SequenceGenerator;
-import java.util.Map;
-import javax.persistence.FetchType;
-import javax.persistence.ElementCollection;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import es.caib.carpeta.model.entity.Traduccio;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 
 @SuppressWarnings("deprecation")

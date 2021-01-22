@@ -1,14 +1,14 @@
 package es.caib.carpeta.jpa.validator;
 
+import org.fundaciobit.genapp.common.query.Field;
+import org.fundaciobit.genapp.common.validation.IValidatorResult;
+
 import org.apache.log4j.Logger;
 
 import es.caib.carpeta.model.entity.Enllaz;
-import org.fundaciobit.genapp.common.query.Field;
 import es.caib.carpeta.model.fields.EnllazFields;
 import es.caib.carpeta.model.fields.EntitatFields;
 import es.caib.carpeta.model.fields.TraduccioFields;
-
-import org.fundaciobit.genapp.common.validation.IValidatorResult;
 
 
 /**

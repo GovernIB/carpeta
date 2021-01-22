@@ -29,9 +29,6 @@
           ${auditoria.auditoriaID}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.DATAAUDIT)}">
-          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${auditoria.dataAudit}" /></td>
-        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.TIPUS)}">
           <td>
           <c:set var="tmp">${auditoria.tipus}</c:set>
@@ -39,6 +36,14 @@
           ${__theFilterForm.mapOfValuesForTipus[tmp]}
           </c:if>
           </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.OBJECTE)}">
+          <td>
+          ${auditoria.objecte}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.DATAAUDIT)}">
+          <td> <fmt:formatDate pattern="${gen:getDateTimePattern()}" value="${auditoria.dataAudit}" /></td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AuditoriaFields.USERNAME)}">
           <td>

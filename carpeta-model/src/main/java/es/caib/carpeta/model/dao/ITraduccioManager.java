@@ -1,7 +1,8 @@
 package es.caib.carpeta.model.dao;
 
-import es.caib.carpeta.model.entity.*;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+
+import es.caib.carpeta.model.entity.Traduccio;
 
 
 public interface ITraduccioManager extends org.fundaciobit.genapp.common.query.ITableManager<Traduccio, Long> {

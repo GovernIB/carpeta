@@ -1,16 +1,15 @@
 package es.caib.carpeta.logic;
 
 
-
-
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.pluginsib.core.IPlugin;
 
-import es.caib.carpeta.ejb.PluginEJB;
-import es.caib.carpeta.model.entity.Plugin;
-
+import javax.annotation.security.PermitAll;
 import javax.ejb.EJB;
 
+import es.caib.carpeta.ejb.PluginEJB;
+import es.caib.carpeta.jpa.PluginJPA;
+import es.caib.carpeta.model.entity.Plugin;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,5 +72,18 @@ public class PluginLogicaEJB extends PluginEJB implements PluginLogicaLocal {
       return  pluginsCache.get(pluginID);  
     }
   }
-  
+
+  @Override
+  @PermitAll
+  public PluginJPA findByPrimaryKey(Long _ID_) {
+    return (PluginJPA) super.findByPrimaryKey(_ID_);
+  }
+
+  @Override
+  @PermitAll
+  public PluginJPA findByPrimaryKey(long _ID_) {
+    return (PluginJPA) super.findByPrimaryKey(_ID_);
+  }
+
+
 }

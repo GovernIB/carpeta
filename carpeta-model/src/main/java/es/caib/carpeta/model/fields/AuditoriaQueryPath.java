@@ -15,12 +15,16 @@ public class AuditoriaQueryPath extends org.fundaciobit.genapp.common.query.Quer
     return new LongField(getQueryPath(), AuditoriaFields.AUDITORIAID);
   }
 
-  public TimestampField DATAAUDIT() {
-    return new TimestampField(getQueryPath(), AuditoriaFields.DATAAUDIT);
-  }
-
   public IntegerField TIPUS() {
     return new IntegerField(getQueryPath(), AuditoriaFields.TIPUS);
+  }
+
+  public StringField OBJECTE() {
+    return new StringField(getQueryPath(), AuditoriaFields.OBJECTE);
+  }
+
+  public TimestampField DATAAUDIT() {
+    return new TimestampField(getQueryPath(), AuditoriaFields.DATAAUDIT);
   }
 
   public StringField USERNAME() {

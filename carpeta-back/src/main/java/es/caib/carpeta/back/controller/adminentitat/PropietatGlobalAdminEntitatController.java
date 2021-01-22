@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
-import es.caib.carpeta.back.form.webdb.*;
+import es.caib.carpeta.back.form.webdb.PropietatGlobalFilterForm;
+import es.caib.carpeta.back.form.webdb.PropietatGlobalForm;
 
 import es.caib.carpeta.back.controller.superadmin.PropietatGlobalSuperAdminController;
 import es.caib.carpeta.back.security.LoginInfo;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_AFEGIR_PROPGLOB;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_AFEGIR_PROPENT;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ELIMINAT_PROPENT;
 import es.caib.carpeta.jpa.PropietatGlobalJPA;
+import es.caib.carpeta.model.entity.PropietatGlobal;
 
 /**
  * 
@@ -49,7 +52,7 @@ public class PropietatGlobalAdminEntitatController extends PropietatGlobalSuperA
 
         try{
             LoginInfo loginInfo = LoginInfo.getInstance();
-            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PROPGLOB,loginInfo.getEntitatID(),loginInfo.getUsuariPersona().getUsername(),null,null);
+            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PROPENT,loginInfo.getEntitatID(),loginInfo.getUsuariPersona().getUsername(), propietatGlobalJPA.getCodi());
         }catch(I18NException e){
 
             String msg = "Error creant auditoria "+ "("+  e.getMessage() + ")";
@@ -59,5 +62,22 @@ public class PropietatGlobalAdminEntitatController extends PropietatGlobalSuperA
         return propietatGlobalJPA;
 
     }
+
+    @Override
+    public void delete(HttpServletRequest request, PropietatGlobal propietatGlobal) throws Exception,I18NException {
+        String codi = propietatGlobal.getCodi();
+        super.delete(request,propietatGlobal);
+
+        try{
+            LoginInfo loginInfo = LoginInfo.getInstance();
+            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ELIMINAT_PROPENT,loginInfo.getEntitatID(),loginInfo.getUsuariPersona().getUsername(), codi);
+        }catch(I18NException e){
+
+            String msg = "Error creant auditoria "+ "("+  e.getMessage() + ")";
+            log.error(msg, e);
+        }
+    }
+
+
 
 }

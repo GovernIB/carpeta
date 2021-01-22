@@ -1,8 +1,23 @@
 package es.caib.carpeta.jpa;
 
-import es.caib.carpeta.model.*;
-import es.caib.carpeta.model.dao.*;
 import javax.persistence.EntityManager;
+
+import es.caib.carpeta.model.ICarpetaDaoManagers;
+import es.caib.carpeta.model.dao.IAccesManager;
+import es.caib.carpeta.model.dao.IAuditoriaManager;
+import es.caib.carpeta.model.dao.IAvisManager;
+import es.caib.carpeta.model.dao.IEnllazManager;
+import es.caib.carpeta.model.dao.IEntitatManager;
+import es.caib.carpeta.model.dao.IEstadisticaManager;
+import es.caib.carpeta.model.dao.IFitxerManager;
+import es.caib.carpeta.model.dao.IIdiomaManager;
+import es.caib.carpeta.model.dao.ILogCarpetaManager;
+import es.caib.carpeta.model.dao.IPluginEntitatManager;
+import es.caib.carpeta.model.dao.IPluginManager;
+import es.caib.carpeta.model.dao.IPropietatGlobalManager;
+import es.caib.carpeta.model.dao.ITraduccioManager;
+import es.caib.carpeta.model.dao.IUsuariEntitatManager;
+import es.caib.carpeta.model.dao.IUsuariManager;
 
 public final class CarpetaJPADaoManagers implements ICarpetaDaoManagers{
 

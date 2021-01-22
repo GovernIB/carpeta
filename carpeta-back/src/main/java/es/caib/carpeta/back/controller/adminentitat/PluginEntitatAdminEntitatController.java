@@ -14,17 +14,21 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 
-import java.util.List;
-import es.caib.carpeta.back.form.webdb.*;
+import es.caib.carpeta.back.form.webdb.PluginEntitatFilterForm;
+import es.caib.carpeta.back.form.webdb.PluginEntitatForm;
 
 import es.caib.carpeta.back.controller.webdb.PluginEntitatController;
 import es.caib.carpeta.back.security.LoginInfo;
+import es.caib.carpeta.commons.utils.Constants;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_AFEGIR_PLUGIN;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ELIMINAT_PLUGIN;
 import es.caib.carpeta.jpa.PluginEntitatJPA;
+import es.caib.carpeta.jpa.PluginJPA;
 import es.caib.carpeta.logic.AuditoriaLogicaLocal;
 import es.caib.carpeta.model.entity.PluginEntitat;
-import es.caib.carpeta.model.fields.*;
-
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_AFEGIR_PLUGIN;
+import es.caib.carpeta.model.fields.PluginEntitatFields;
+import es.caib.carpeta.model.fields.PluginFields;
+import java.util.List;
 
 /**
  * 
@@ -41,6 +45,7 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
 
     @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
     protected AuditoriaLogicaLocal auditoriaLogicaEjb;
+
 
     @Override
     public String getTileForm() {
@@ -105,8 +110,9 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
         PluginEntitatJPA pluginEntitatJPA =super.create(request,pluginEntitat);
 
         try{
+            PluginJPA plugin = (PluginJPA)pluginEjb.findByPrimaryKey(pluginEntitatJPA.getPluginID());
             LoginInfo loginInfo = LoginInfo.getInstance();
-            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PLUGIN,loginInfo.getEntitatID(),loginInfo.getUsuariPersona().getUsername(), null,pluginEntitatJPA.getPluginID());
+            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PLUGIN ,loginInfo.getEntitatID(),loginInfo.getUsuariPersona().getUsername(), plugin.getNomTraduccions().get(Constants.DEFAULT_LANGUAGE).getValor());
         }catch(I18NException e){
             String msg = "Error creant auditoria "+ "("+  e.getMessage() + ")";
             log.error(msg, e);
@@ -114,5 +120,21 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
 
         return pluginEntitatJPA;
     }
+
+    @Override
+    public void delete(HttpServletRequest request, PluginEntitat pluginEntitat) throws Exception,I18NException {
+        PluginJPA plugin = (PluginJPA)pluginEjb.findByPrimaryKey(pluginEntitat.getPluginID());
+        super.delete(request,pluginEntitat);
+
+        try{
+            LoginInfo loginInfo = LoginInfo.getInstance();
+            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ELIMINAT_PLUGIN,null,loginInfo.getUsuariPersona().getUsername(), plugin.getNomTraduccions().get(Constants.DEFAULT_LANGUAGE).getValor());
+        }catch(I18NException e){
+
+            String msg = "Error creant auditoria "+ "("+  e.getMessage() + ")";
+            log.error(msg, e);
+        }
+    }
+
 
 }

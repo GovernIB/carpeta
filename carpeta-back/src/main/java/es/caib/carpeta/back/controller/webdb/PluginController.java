@@ -1,13 +1,14 @@
 package es.caib.carpeta.back.controller.webdb;
 
 import org.fundaciobit.genapp.common.StringKeyValue;
-import org.fundaciobit.genapp.common.utils.Utils;
-import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.genapp.common.query.GroupByItem;
-import org.fundaciobit.genapp.common.query.Field;
-import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
+import org.fundaciobit.genapp.common.query.Field;
+import org.fundaciobit.genapp.common.query.GroupByItem;
+import org.fundaciobit.genapp.common.query.Where;
+import org.fundaciobit.genapp.common.utils.Utils;
+import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.fundaciobit.genapp.common.web.validation.ValidationWebUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,12 @@ import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -24,21 +30,22 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-
-import es.caib.carpeta.back.form.webdb.*;
+import es.caib.carpeta.back.form.webdb.PluginFilterForm;
 import es.caib.carpeta.back.form.webdb.PluginForm;
+import es.caib.carpeta.back.form.webdb.PluginRefList;
+import es.caib.carpeta.back.form.webdb.TraduccioRefList;
 
 import es.caib.carpeta.back.validator.webdb.PluginWebValidator;
 
-import es.caib.carpeta.model.entity.Fitxer;
 import es.caib.carpeta.jpa.FitxerJPA;
-import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
 import es.caib.carpeta.jpa.PluginJPA;
+import es.caib.carpeta.model.entity.Fitxer;
 import es.caib.carpeta.model.entity.Plugin;
-import es.caib.carpeta.model.fields.*;
+import es.caib.carpeta.model.fields.PluginFields;
+import es.caib.carpeta.model.fields.TraduccioFields;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Controller per gestionar un Plugin

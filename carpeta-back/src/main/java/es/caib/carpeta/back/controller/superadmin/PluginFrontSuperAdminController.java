@@ -6,6 +6,7 @@ import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,10 +24,12 @@ import es.caib.carpeta.back.form.webdb.PluginForm;
 import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.commons.utils.Constants;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_AFEGIR_PLUGIN;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ELIMINAT_PLUGIN;
 import es.caib.carpeta.jpa.PluginJPA;
 import es.caib.carpeta.logic.AuditoriaLogicaLocal;
 import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
 import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaLocal;
+import es.caib.carpeta.model.entity.Plugin;
 import java.net.URL;
 
 
@@ -143,7 +146,8 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
 
         try{
             LoginInfo loginInfo = LoginInfo.getInstance();
-            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PLUGIN,null,loginInfo.getUsuariPersona().getUsername(),null,pluginJPA.getPluginID());
+
+            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PLUGIN,null,loginInfo.getUsuariPersona().getUsername(), pluginJPA.getNomTraduccions().get(Constants.DEFAULT_LANGUAGE).getValor());
         }catch(I18NException e){
 
             String msg = "Error creant auditoria "+ "("+  e.getMessage() + ")";
@@ -151,6 +155,22 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
         }
 
         return pluginJPA;
+    }
+
+
+    @Override
+    public void delete(HttpServletRequest request, Plugin plugin) throws Exception,I18NException {
+        String nom = findByPrimaryKey(request, plugin.getPluginID()).getNomTraduccions().get(Constants.DEFAULT_LANGUAGE).getValor();
+        super.delete(request,plugin);
+
+        try{
+            LoginInfo loginInfo = LoginInfo.getInstance();
+            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ELIMINAT_PLUGIN,null,loginInfo.getUsuariPersona().getUsername(), nom);
+        }catch(I18NException e){
+
+            String msg = "Error creant auditoria "+ "("+  e.getMessage() + ")";
+            log.error(msg, e);
+        }
     }
 
 }

@@ -15,3 +15,7 @@ ALTER TABLE car_acces ALTER COLUMN idioma SET NOT NULL;
 ALTER TABLE car_acces RENAME datadarreracces  TO dataacces;
 ALTER TABLE car_acces ADD COLUMN qaa integer;
 ALTER TABLE car_acces RENAME nivellseguretat  TO metodeautenticacio;
+
+
+--19/01/2021 Millores en la taula d'Auditories #304
+ALTER TABLE public.car_auditoria ADD COLUMN objecte character varying(255);

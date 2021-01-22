@@ -52,8 +52,7 @@ public class AuthenticationLogicaEJB implements AuthenticationLogicaLocal{
 
     @Override
     public void crearAuditoria(Long entitatID,String username) throws I18NException {
-        auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ENTRADA_BACK, entitatID, username, null,
-                null);
+        auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ENTRADA_BACK, entitatID, username, "");
     }
 
     @Override

@@ -129,6 +129,11 @@ public interface Constants {
     public static final int TIPUS_AUDIT_ACCES_PLUGIN = 4;
     public static final int TIPUS_AUDIT_AFEGIR_PROPGLOB = 5;
     public static final int TIPUS_AUDIT_AFEGIR_PLUGIN = 6;
+    public static final int TIPUS_AUDIT_AFEGIR_PROPENT = 7;
+    public static final int TIPUS_AUDIT_ELIMINAT_PLUGIN = 8;
+    public static final int TIPUS_AUDIT_ELIMINAT_PROPGLOB = 9;
+    public static final int TIPUS_AUDIT_ELIMINAT_PROPENT = 10;
+
 
 
 
@@ -138,7 +143,12 @@ public interface Constants {
             TIPUS_AUDIT_ENTRADA_FRONT_AUTENTICAT,
             TIPUS_AUDIT_ACCES_PLUGIN,
             TIPUS_AUDIT_AFEGIR_PROPGLOB,
-            TIPUS_AUDIT_AFEGIR_PLUGIN
+            TIPUS_AUDIT_AFEGIR_PLUGIN,
+            TIPUS_AUDIT_AFEGIR_PROPENT,
+            TIPUS_AUDIT_ELIMINAT_PLUGIN,
+            TIPUS_AUDIT_ELIMINAT_PROPGLOB,
+            TIPUS_AUDIT_ELIMINAT_PROPENT
+
     };
 
 

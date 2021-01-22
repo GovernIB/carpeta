@@ -18,8 +18,10 @@ import es.caib.carpeta.back.form.webdb.*;
 import es.caib.carpeta.back.controller.webdb.PropietatGlobalController;
 import es.caib.carpeta.back.security.LoginInfo;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_AFEGIR_PROPGLOB;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ELIMINAT_PROPGLOB;
 import es.caib.carpeta.jpa.PropietatGlobalJPA;
 import es.caib.carpeta.logic.AuditoriaLogicaLocal;
+import es.caib.carpeta.model.entity.PropietatGlobal;
 import es.caib.carpeta.model.fields.*;
 
 /**
@@ -111,8 +113,10 @@ public class PropietatGlobalSuperAdminController extends PropietatGlobalControll
         PropietatGlobalJPA propietatGlobalJPA = super.create(request, propietatGlobal);
 
         try{
-            LoginInfo loginInfo = LoginInfo.getInstance();
-            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PROPGLOB,null,loginInfo.getUsuariPersona().getUsername(),null,null);
+            if(isSuperAdmin()){
+                LoginInfo loginInfo = LoginInfo.getInstance();
+                auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PROPGLOB,null,loginInfo.getUsuariPersona().getUsername(), propietatGlobalJPA.getCodi());
+            }
         }catch(I18NException e){
 
             String msg = "Error creant auditoria "+ "("+  e.getMessage() + ")";
@@ -122,4 +126,25 @@ public class PropietatGlobalSuperAdminController extends PropietatGlobalControll
         return propietatGlobalJPA;
 
     }
+
+
+    @Override
+    public void delete(HttpServletRequest request, PropietatGlobal propietatGlobal) throws Exception,I18NException {
+        String codi = propietatGlobal.getCodi();
+        super.delete(request,propietatGlobal);
+
+        try{
+            if(isSuperAdmin()){
+                LoginInfo loginInfo = LoginInfo.getInstance();
+                auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ELIMINAT_PROPGLOB,null,loginInfo.getUsuariPersona().getUsername(), codi);
+            }
+        }catch(I18NException e){
+
+            String msg = "Error creant auditoria "+ "("+  e.getMessage() + ")";
+            log.error(msg, e);
+        }
+
+    }
+
+
 }

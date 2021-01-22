@@ -22,7 +22,7 @@ public class AuditoriaLogicaEJB extends AuditoriaEJB implements AuditoriaLogicaL
 
 
     @Override
-    public void crearAuditoria(@NotNull int tipus, Long entitatID, String username, String usuariClave, Long pluginID) throws I18NException {
+    public void crearAuditoria(@NotNull int tipus, Long entitatID, String username, String objecte) throws I18NException {
 
         AuditoriaJPA auditoriaJPA = new AuditoriaJPA();
 
@@ -31,6 +31,7 @@ public class AuditoriaLogicaEJB extends AuditoriaEJB implements AuditoriaLogicaL
         auditoriaJPA.setTipus(tipus);
         auditoriaJPA.setEntitatID(entitatID);
         auditoriaJPA.setUsername(username);
+        auditoriaJPA.setObjecte(objecte);
 
         create(auditoriaJPA);
 

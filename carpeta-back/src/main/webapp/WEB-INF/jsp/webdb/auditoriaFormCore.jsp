@@ -2,6 +2,58 @@
 <%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
 <un:useConstants var="AuditoriaFields" className="es.caib.carpeta.model.fields.AuditoriaFields"/>
   
+        <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.TIPUS)}">
+        <tr id="auditoria_tipus_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[AuditoriaFields.TIPUS])?'auditoria.tipus':__theForm.labels[AuditoriaFields.TIPUS]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[AuditoriaFields.TIPUS]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.TIPUS]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="auditoria.tipus" cssClass="errorField alert alert-danger" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TIPUS)}" >
+          <form:hidden path="auditoria.tipus"/>
+          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.auditoria.tipus,__theForm.listOfValuesForTipus)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TIPUS)}" >
+          <form:select id="auditoria_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-8" path="auditoria.tipus">
+            <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.OBJECTE)}">
+        <tr id="auditoria_objecte_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[AuditoriaFields.OBJECTE])?'auditoria.objecte':__theForm.labels[AuditoriaFields.OBJECTE]}" />
+              <c:if test="${not empty __theForm.help[AuditoriaFields.OBJECTE]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.OBJECTE]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+              <form:errors path="auditoria.objecte" cssClass="errorField alert alert-danger" />
+              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.OBJECTE)? 'true' : 'false'}" path="auditoria.objecte"  />
+      <div class="dropdown" style="vertical-align:top;display:inline;">
+        <button id="dropdownMenuButton_objecte" class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left:0px;"><span class="caret"></span></button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_objecte">
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('auditoria.objecte'); ta.wrap='off';" >No Wrap</a>
+          <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('auditoria.objecte'); ta.wrap='soft';">Soft Wrap</a>
+          <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('auditoria.objecte'); ta.wrap='hard';">Hard Wrap</a>
+        </div>
+      </div>
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.DATAAUDIT)}">
         <tr id="auditoria_dataAudit_rowid">
           <td>
@@ -38,33 +90,6 @@
             });
           </script>        </div>
       </div>
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.TIPUS)}">
-        <tr id="auditoria_tipus_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[AuditoriaFields.TIPUS])?'auditoria.tipus':__theForm.labels[AuditoriaFields.TIPUS]}" /> &nbsp;(*)
-              <c:if test="${not empty __theForm.help[AuditoriaFields.TIPUS]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.TIPUS]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <form:errors path="auditoria.tipus" cssClass="errorField alert alert-danger" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TIPUS)}" >
-          <form:hidden path="auditoria.tipus"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.auditoria.tipus,__theForm.listOfValuesForTipus)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TIPUS)}" >
-          <form:select id="auditoria_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-8" path="auditoria.tipus">
-            <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
            </td>
         </tr>
         </c:if>

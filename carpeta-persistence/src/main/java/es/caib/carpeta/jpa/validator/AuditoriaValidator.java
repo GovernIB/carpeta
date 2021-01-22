@@ -30,15 +30,23 @@ public class AuditoriaValidator<I extends Auditoria>
     ,es.caib.carpeta.model.dao.IAuditoriaManager __auditoriaManager) {
 
     // Valors Not Null
-    __vr.rejectIfEmptyOrWhitespace(__target__,DATAAUDIT, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DATAAUDIT)));
-
     __vr.rejectIfEmptyOrWhitespace(__target__,TIPUS, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TIPUS)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,DATAAUDIT, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(DATAAUDIT)));
+
     // Check size
+    if (__vr.getFieldErrorCount(OBJECTE) == 0) {
+      java.lang.String __objecte = __target__.getObjecte();
+      if (__objecte!= null && __objecte.length() > 255) {
+        __vr.rejectValue(OBJECTE, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(OBJECTE)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+
     if (__vr.getFieldErrorCount(USERNAME) == 0) {
       java.lang.String __username = __target__.getUsername();
       if (__username!= null && __username.length() > 255) {

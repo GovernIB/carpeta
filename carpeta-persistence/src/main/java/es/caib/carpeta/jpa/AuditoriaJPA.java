@@ -28,11 +28,14 @@ private static final long serialVersionUID = 129744773L;
 	@Column(name="auditoriaid",nullable = false,length = 19)
 	long auditoriaID;
 
-	@Column(name="dataaudit",nullable = false,length = 29,precision = 6)
-	java.sql.Timestamp dataAudit;
-
 	@Column(name="tipus",nullable = false,length = 10)
 	int tipus;
+
+	@Column(name="objecte",length = 255)
+	java.lang.String objecte;
+
+	@Column(name="dataaudit",nullable = false,length = 29,precision = 6)
+	java.sql.Timestamp dataAudit;
 
 	@Column(name="username",length = 255)
 	java.lang.String username;
@@ -48,30 +51,33 @@ private static final long serialVersionUID = 129744773L;
   }
 
   /** Constructor amb tots els camps  */
-  public AuditoriaJPA(long auditoriaID , java.sql.Timestamp dataAudit , int tipus , java.lang.String username , java.lang.Long entitatID) {
+  public AuditoriaJPA(long auditoriaID , int tipus , java.lang.String objecte , java.sql.Timestamp dataAudit , java.lang.String username , java.lang.Long entitatID) {
     this.auditoriaID=auditoriaID;
-    this.dataAudit=dataAudit;
     this.tipus=tipus;
+    this.objecte=objecte;
+    this.dataAudit=dataAudit;
     this.username=username;
     this.entitatID=entitatID;
 }
   /** Constructor sense valors autoincrementals */
-  public AuditoriaJPA(java.sql.Timestamp dataAudit , int tipus , java.lang.String username , java.lang.Long entitatID) {
-    this.dataAudit=dataAudit;
+  public AuditoriaJPA(int tipus , java.lang.String objecte , java.sql.Timestamp dataAudit , java.lang.String username , java.lang.Long entitatID) {
     this.tipus=tipus;
+    this.objecte=objecte;
+    this.dataAudit=dataAudit;
     this.username=username;
     this.entitatID=entitatID;
 }
   /** Constructor dels valors Not Null */
-  public AuditoriaJPA(long auditoriaID , java.sql.Timestamp dataAudit , int tipus) {
+  public AuditoriaJPA(long auditoriaID , int tipus , java.sql.Timestamp dataAudit) {
     this.auditoriaID=auditoriaID;
-    this.dataAudit=dataAudit;
     this.tipus=tipus;
+    this.dataAudit=dataAudit;
 }
   public AuditoriaJPA(Auditoria __bean) {
     this.setAuditoriaID(__bean.getAuditoriaID());
-    this.setDataAudit(__bean.getDataAudit());
     this.setTipus(__bean.getTipus());
+    this.setObjecte(__bean.getObjecte());
+    this.setDataAudit(__bean.getDataAudit());
     this.setUsername(__bean.getUsername());
     this.setEntitatID(__bean.getEntitatID());
 	}
@@ -83,18 +89,25 @@ private static final long serialVersionUID = 129744773L;
 		this.auditoriaID = _auditoriaID_;
 	};
 
-	public java.sql.Timestamp getDataAudit() {
-		return(dataAudit);
-	};
-	public void setDataAudit(java.sql.Timestamp _dataAudit_) {
-		this.dataAudit = _dataAudit_;
-	};
-
 	public int getTipus() {
 		return(tipus);
 	};
 	public void setTipus(int _tipus_) {
 		this.tipus = _tipus_;
+	};
+
+	public java.lang.String getObjecte() {
+		return(objecte);
+	};
+	public void setObjecte(java.lang.String _objecte_) {
+		this.objecte = _objecte_;
+	};
+
+	public java.sql.Timestamp getDataAudit() {
+		return(dataAudit);
+	};
+	public void setDataAudit(java.sql.Timestamp _dataAudit_) {
+		this.dataAudit = _dataAudit_;
 	};
 
 	public java.lang.String getUsername() {
@@ -132,8 +145,9 @@ private static final long serialVersionUID = 129744773L;
     if (__bean == null) { return null;}
     AuditoriaJPA __tmp = new AuditoriaJPA();
     __tmp.setAuditoriaID(__bean.getAuditoriaID());
-    __tmp.setDataAudit(__bean.getDataAudit());
     __tmp.setTipus(__bean.getTipus());
+    __tmp.setObjecte(__bean.getObjecte());
+    __tmp.setDataAudit(__bean.getDataAudit());
     __tmp.setUsername(__bean.getUsername());
     __tmp.setEntitatID(__bean.getEntitatID());
 		return __tmp;
