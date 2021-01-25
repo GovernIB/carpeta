@@ -93,8 +93,14 @@
                                     <div class="col mr-2">
                                         <div class="font-weight-bold verde text-uppercase mb-3 text-center h3">${registro_justificante}</div>
 
+                                        <#if justificante?has_content>
+                                        <div class="text-center">
+                                            <!--<button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="goToWindow('${justificante}')"><span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span> ${carpeta_descargar}</button>-->
+                                            <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="window.open('${justificante}')"><span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span> ${carpeta_descargar}</button>
+                                        </div>
+                                        <#else>
                                         <p class="text-center">${registre_justifcante_pendiente}</p>
-
+                                        </#if>
                                     </div>
                                 </div>
                             </div>
@@ -158,6 +164,7 @@
                                             </thead>
                                             <tbody>
                                             <#list registro.anexos as anexo >
+                                            <#if !anexo.isJustificante()>
                                             <tr>
                                                 <td>${anexo?index +1}</td>
                                                 <td>${anexo.titulo}</td>
@@ -168,6 +175,7 @@
                                                     </#if>
                                                 </td>
                                             </tr>
+                                            </#if>
                                             </#list>
                                             </tbody>
                                         </table>
