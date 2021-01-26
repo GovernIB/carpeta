@@ -282,13 +282,12 @@ public class DadesPersonalsReactCarpetaFrontPlugin extends AbstractCarpetaFrontP
                 if ("00".equals(estat.getCodigoEstado())) {
                     DatosTitular dt = rde.getRetorno().getDatosTitular();
                     SimpleDateFormat sdf_in = new SimpleDateFormat("yyyyMMdd");
-                    SimpleDateFormat sdf_out = new SimpleDateFormat("MM/dd/yyyy");
+                    SimpleDateFormat sdf_out = new SimpleDateFormat("dd/MM/yyyy");
                     
                     
                     dt.setFechaCaducidad(sdf_out.format(sdf_in.parse(dt.getFechaCaducidad())));
                     
                     dt.getDatosNacimiento().setFecha(sdf_out.format(sdf_in.parse(dt.getDatosNacimiento().getFecha())));
-                    
                     
                     dadesPolicia.setDatosTitular(dt);
                 } else {
