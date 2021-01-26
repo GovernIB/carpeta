@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>carpeta-pluginsib-carpetafront-dadespersonalsreact</artifactId>
@@ -28,11 +28,55 @@
             <version>2.5</version>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.utils</groupId>
+            <artifactId>pluginsib-utils-templateengine</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+
+
+        <!-- PINBAL DADES -->
+        <dependency>
+            <groupId>es.caib.carpeta</groupId>
+            <artifactId>carpeta-pinbal-ws-client</artifactId>
+            <version>1.0.0</version>
+            <type>jar</type>
+        </dependency>
+
+
+        <dependency>
+            <groupId>es.caib.scsp</groupId>
+            <artifactId>scsp-schemas-xsd-SVDDGPCIWS02v3</artifactId>
+            <version>1.0.0</version>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>es.caib.scsp</groupId>
+            <artifactId>scsp-utils</artifactId>
+            <version>1.0.0</version>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>es.caib.scsp</groupId>
+            <artifactId>pinbal-ws-client</artifactId>
+            <version>1.0.0</version>
+            <type>jar</type>
+            <exclusions>
+               <exclusion>
+                  <groupId>junit</groupId>
+                  <artifactId>junit</artifactId>
+               </exclusion>
+            </exclusions>
+        </dependency>
         
         <dependency>
-             <groupId>org.fundaciobit.pluginsib.utils</groupId>
-             <artifactId>pluginsib-utils-templateengine</artifactId>
-             <version>2.0.1</version>
+            <groupId>es.caib.scsp</groupId>
+            <artifactId>scsp-schemas-xsd-SVDDGPVIWS02v3</artifactId>
+            <version>1.0.0</version>
+            <type>jar</type>
         </dependency>
 
     </dependencies>

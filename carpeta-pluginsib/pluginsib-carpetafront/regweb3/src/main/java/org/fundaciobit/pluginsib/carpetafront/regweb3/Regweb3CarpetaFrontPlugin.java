@@ -19,7 +19,6 @@ import es.caib.regweb3.ws.api.v3.ResultadoBusquedaWs;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
