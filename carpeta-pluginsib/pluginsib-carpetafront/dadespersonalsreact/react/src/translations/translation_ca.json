@@ -8,6 +8,14 @@
     "dadespersonalsLlinatge1": "Primer llinatge",
     "dadespersonalsLlinatge2": "Segon llinatge",
     "dadespersonalsDni": "DNI",
-    "dadespersonalsMetode": "Autenticació"
+    "dadespersonalsMetode": "Autenticació",
+    "nacionalidad": "Nacionalitat",
+    "sexo": "Sexe",
+	"datosNacimiento_fecha": "Data de Naixement",
+    "datosNacimiento_localidad": "Localitat de Naixement",
+    "datosNacimiento_provincia": "Provincia de Naixement",
+	"nombrePadre": "Nom del Pare",
+	"nombreMadre": "Nom de la Mare",
+    "fechaCaducidad": "Data de Caducitat"
 
 }

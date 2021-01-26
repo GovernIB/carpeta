@@ -110,15 +110,25 @@ class DadesPolicia extends Component {
                             <li className="list-group-item"><label
                                 className="lh15">{t('dadespersonalsLlinatge2')}:&nbsp;</label><label
                                     className="titol h5">{data.datosTitular.apellido2}</label></li>
-                            <li className="list-group-item"><label className="lh15">{t('dadespersonalsDni')}:&nbsp;</label><label
-                                className="titol h5">{data.datosTitular.fechaCaducidad}</label></li>
-                            <li className="list-group-item"><label className="lh15">{t('dadespersonalsMetode')}:&nbsp;</label>
-                                <label className="titol h5">{data.datosTitular.nacionalidad}</label></li>
+                            <li className="list-group-item"><label className="lh15">{t('nacionalidad')}:&nbsp;</label><label
+                                className="titol h5">{data.datosTitular.nacionalidad}</label></li>
+                            <li className="list-group-item"><label className="lh15">{t('sexo')}:&nbsp;</label>
+                                <label className="titol h5">{data.datosTitular.sexo}</label></li>
+                            <li className="list-group-item"><label className="lh15">{t('datosNacimiento_fecha')}:&nbsp;</label><label
+                                className="titol h5">{data.datosTitular.datosNacimiento.fecha}</label></li>
+                            <li className="list-group-item"><label className="lh15">{t('datosNacimiento_localidad')}:&nbsp;</label><label
+                                className="titol h5">{data.datosTitular.datosNacimiento.localidad}</label></li>
+                                <li className="list-group-item"><label className="lh15">{t('datosNacimiento_provincia')}:&nbsp;</label><label
+                                className="titol h5">{data.datosTitular.datosNacimiento.provincia}</label></li>
+                            <li className="list-group-item"><label className="lh15">{t('nombrePadre')}:&nbsp;</label>
+                                <label className="titol h5">{data.datosTitular.nombrePadre}</label></li>
+                            <li className="list-group-item"><label className="lh15">{t('nombreMadre')}:&nbsp;</label><label
+                                className="titol h5">{data.datosTitular.nombreMadre}</label></li>
+                            <li className="list-group-item"><label className="lh15">{t('fechaCaducidad')}:&nbsp;</label>
+                                <label className="titol h5">{data.datosTitular.fechaCaducidad}</label></li>
                         </ul>
                     </div>
-
                 </div>
-
             </div>
             
             

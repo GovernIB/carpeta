@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -222,26 +223,16 @@ public class DadesPersonalsReactCarpetaFrontPlugin extends AbstractCarpetaFrontP
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet) {
 
-      
-
             response.setContentType("application/json");
-
-            
             response.setCharacterEncoding("utf-8");
-
-            
-            
 
             DadesPolicia dadesPolicia = new DadesPolicia();
 
             try {
                 
-                
                 String baseurl = getProperty(DADESPERSONALS_PROPERTY_BASE + "pinbal.baseurl");
                 String username = getProperty(DADESPERSONALS_PROPERTY_BASE + "pinbal.username");
                 String password = getProperty(DADESPERSONALS_PROPERTY_BASE + "pinbal.password");
-                
-                
                 
                 String app = "es.caib.carpeta.";
                 System.setProperty(app + "pinbal.client.baseURL", baseurl);
@@ -290,6 +281,15 @@ public class DadesPersonalsReactCarpetaFrontPlugin extends AbstractCarpetaFrontP
                  */                
                 if ("00".equals(estat.getCodigoEstado())) {
                     DatosTitular dt = rde.getRetorno().getDatosTitular();
+                    SimpleDateFormat sdf_in = new SimpleDateFormat("yyyyMMdd");
+                    SimpleDateFormat sdf_out = new SimpleDateFormat("MM/dd/yyyy");
+                    
+                    
+                    dt.setFechaCaducidad(sdf_out.format(sdf_in.parse(dt.getFechaCaducidad())));
+                    
+                    dt.getDatosNacimiento().setFecha(sdf_out.format(sdf_in.parse(dt.getDatosNacimiento().getFecha())));
+                    
+                    
                     dadesPolicia.setDatosTitular(dt);
                 } else {
                     
