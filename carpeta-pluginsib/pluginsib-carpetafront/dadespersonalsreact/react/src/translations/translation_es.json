@@ -1,7 +1,9 @@
 {
     "Welcome to React": "Bienvenido a React y a react-i18next",
-    "dadespersonalsTitol": "DATOS PERSONALES DE ",
-    "dadespersonalsDescripcio": "Desde aquí puede consultar sus datos personales en poder de la Administración de la Comunidad Autónoma de las Illes Balears.",
+    "pipella_dadesbasiques": "Datos Básicos",
+    "pipella_dadespolicia":"Datos Documento de Identidad",
+    "dadespersonalsTitol": "DATOS PERSONALES",
+    "dadespersonalsDescripcio": "Desde aquí puede consultar sus datos personales en poder de la Administración",
     "dadespersonalsNom": "Nombre",
     "dadespersonalsLlinatge1": "Primer apellido",
     "dadespersonalsLlinatge2": "Segundo apellido",

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import i18n from './i18n';
-import DadesPersonals from './DadesPersonals';
+import Pipelles from './Pipelles';
 
 
 //i18n.on('languageChanged', function(lng) { alert('Idioma canviat a ' + lng );});
@@ -11,18 +11,18 @@ import DadesPersonals from './DadesPersonals';
 
 console.log(" +++++++++++++++   CARREGANT COMPONENT 1 ¿¿¿¿¿¿¿¿¿¿¿");
 
-   newInstancePlugin = function createReactCompAppIntern(nomComponent, props) {
-      
-    ReactDOM.render(<DadesPersonals dades={props} />, document.getElementById(nomComponent));
-  };
+newInstancePlugin = function createReactCompAppIntern(nomComponent, props) {
+
+  ReactDOM.render(<Pipelles dades={props} />, document.getElementById(nomComponent));
+};
 
 
 console.log(" +++++++++++++++   CARREGANT COMPONENT 2 ¿¿¿¿¿¿¿¿¿¿¿");
-    
-  changeLanguagePlugin = function changeLanguageReactCompAppIntern(lng) {
-     
-    i18n.changeLanguage(lng);
-  };
+
+changeLanguagePlugin = function changeLanguageReactCompAppIntern(lng) {
+
+  i18n.changeLanguage(lng);
+};
 
 
 

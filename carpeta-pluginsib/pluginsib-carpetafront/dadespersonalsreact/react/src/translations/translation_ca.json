@@ -1,10 +1,13 @@
 {
     "Welcome to React": "Benvingut a React i a react-i18next",
-    "dadespersonalsTitol": "DADES PERSONALS DE ",
-    "dadespersonalsDescripcio": "Des d'aquí podeu consultar les vostres dades personals en poder de l'Administració de la Comunitat Autònoma de les Illes Balears.",
+    "pipella_dadesbasiques": "Dades Bàsiques",
+    "pipella_dadespolicia":"Dades Document Identitat",
+    "dadespersonalsTitol": "DADES PERSONALS",
+    "dadespersonalsDescripcio": "Des d'aquí podeu consultar les vostres dades personals en poder de l'Administració.",
     "dadespersonalsNom": "Nom",
     "dadespersonalsLlinatge1": "Primer llinatge",
     "dadespersonalsLlinatge2": "Segon llinatge",
     "dadespersonalsDni": "DNI",
     "dadespersonalsMetode": "Autenticació"
+
 }
