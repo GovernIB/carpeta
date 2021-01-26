@@ -12,6 +12,7 @@ import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
+import es.caib.regweb3.ws.api.v3.AnexoWs;
 import es.caib.regweb3.ws.api.v3.AsientoRegistralWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWsService;
@@ -173,6 +174,11 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     public String getEntidad() throws Exception {
         return getPropertyRequired(REGWEB3_PROPERTY_BASE + "entidad");
 
+    }
+
+    //Propietat que indica la url de descarrega del justificant
+    public String getConcsvUrl() {
+        return getProperty(  REGWEB3_PROPERTY_BASE + "concsv.url");
     }
 
 
@@ -442,7 +448,7 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
            "registro.oficina", "registro.destinatario", "registro.tipo.doc", "registro.extracto", "carpeta.idioma",
            "registro.presencial", "registro.justificante", "registre.justifcante.pendiente", "registro.interesados",
            "registro.interesado.nombre", "registro.interesado.documento", "registro.interesado.tipo", "registro.anexos",
-           "registro.anexos.vacio", "registro.anexo.titulo", "registro.anexo.tipomime"};
+           "registro.anexos.vacio", "registro.anexo.titulo", "registro.anexo.tipomime", "carpeta.descargar"};
 
 
         for (String t : traduccions) {
@@ -452,6 +458,13 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         map.put("registro", registre);
 
+        //Montamos la url de descarga del justificante
+        String concsvUrl = getConcsvUrl();
+        for(AnexoWs anexoWs : registre.getAnexos()) {
+            if (anexoWs.isJustificante() && !anexoWs.getCsv().isEmpty()) {
+                map.put("justificante", concsvUrl.concat(anexoWs.getCsv()));
+            }
+        }
         String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
 
         return generat;

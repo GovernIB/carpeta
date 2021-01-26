@@ -352,7 +352,6 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             int pagina = 0;
             int tamPagina = (int) num;
 
-            // XYZ ZZZ Paginació
             ElementosExpediente tramitesAcabados = backofficeFacade
                     .obtenerElementosExpediente(filtroElementosExpediente, pagina, tamPagina);
 
@@ -360,11 +359,10 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
                 TramitePersistenteGenerico tpg = new TramitePersistenteGenerico(item, 1);
 
-                // Es marquen com a pendents els de PREENVIO i PREREGISTRO perquè els falta
-                // entregar documentació presencialment
-                Boolean estaPendent = (item.getTipo() != TipoElementoExpediente.ENVIO && item.isPendiente()) ? true : false;
-                tpg.setPendiente(estaPendent);
-                tpg.setMostraModal((item.getTipo() != TipoElementoExpediente.ENVIO && !item.isPendiente()) ? true : false);
+                Boolean estaPendent = item.isPendiente();
+
+                // Casuística tràmits SISTRA1 #317
+                tpg.setMostraModal(item.getTipo() != TipoElementoExpediente.ENVIO && estaPendent);
 
                 if ((estaPendent && !finalizado.equals("S")) || (!estaPendent && !finalizado.equals("N"))) {
                     tramits.add(tpg);
