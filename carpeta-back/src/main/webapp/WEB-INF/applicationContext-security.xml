@@ -22,7 +22,7 @@
 
 		<sec:csrf disabled="true" />
 
-		<sec:logout logout-success-url="/index.jsp" />
+        <sec:logout success-handler-ref="carpetaLogoutSuccessHandler" delete-cookies="JSESSIONID" />
 
         <sec:intercept-url pattern="/fonts/**" access="permitAll" />
 		<sec:intercept-url pattern="/js/**" access="permitAll" />
@@ -81,6 +81,8 @@
 			</map>
 		</property>
 	</bean>
+	
+	<bean id="carpetaLogoutSuccessHandler" class="es.caib.carpeta.back.security.CarpetaLogoutSuccessHandler" />
 
 
 	<bean id="mappableAttributesRetriever"
