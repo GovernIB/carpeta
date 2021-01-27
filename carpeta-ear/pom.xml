@@ -222,6 +222,7 @@
                             <groupId>es.caib.carpeta</groupId>
                             <artifactId>carpeta-front</artifactId>
                             <contextRoot>/carpetafront</contextRoot>
+                            <bundleFileName>carpeta-front.war</bundleFileName>
                         </webModule>
                         <!-- FRONT END
                         <webModule>
