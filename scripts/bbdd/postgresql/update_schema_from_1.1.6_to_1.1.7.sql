@@ -18,7 +18,7 @@ ALTER TABLE car_acces RENAME nivellseguretat  TO metodeautenticacio;
 
 
 -- 19/01/2021 Millores en la taula d'Auditories #304
-ALTER TABLE public.car_auditoria ADD COLUMN objecte character varying(255);
+ALTER TABLE car_auditoria ADD COLUMN objecte character varying(255);
 
 
 
