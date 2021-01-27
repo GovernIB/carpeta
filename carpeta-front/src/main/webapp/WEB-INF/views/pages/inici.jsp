@@ -80,17 +80,6 @@
 		<!-- Capçalera -->
 		<div id = "barraMenu"></div>
 
-
-		<!-- Diàleg d'expiració de sessió -->
-<%--		<fmt:setLocale value="${idiomaFMT}"/>--%>
-<%--		<div id="dialog" title="<fmt:message key="sessio.avis.titol" bundle="missa"/>" style="display:none">--%>
-<%--			<p class="pt-4"><fmt:message key="sessio.avis.descripcio" /></p>--%>
-<%--		</div>--%>
-
-<%--		<div id="expirat" title="<fmt:message key="sessio.expirada.titol" />" style="display:none" class="dialogExpirat">--%>
-<%--			<p class="pt-4"><fmt:message key="sessio.expirada.descripcio" /></p>--%>
-<%--		</div>--%>
-
 		<sec:authorize access="isAuthenticated()">
 			<sec:authentication var="user" property="principal.usuarioClave.nombreCompleto" />
 			<sec:authentication var="userName" property="principal.usuarioClave.nombre" />
@@ -105,7 +94,7 @@
 							<c:if test="${user != null}">
 								<span class="oi oi-person pr-2" aria-hidden="true"> </span><sec:authentication property="principal.usuarioClave.nombreCompleto" />
 								<!-- Nivell d'autenticació -->
-								<span id="nivellAutenticacio"></span>
+								<span id="nivellAutenticacio" class="imc--autenticacio"></span>
 							</c:if>
 						</span>
 					</h3>
@@ -157,7 +146,7 @@
 		<!-- Fi Zona Contingut -->
 
 		<!-- Peu -->
-		<div id = "peu"></div>
+		<div id = "peu" class="capsaPeu"></div>
 
 
 	</div>
