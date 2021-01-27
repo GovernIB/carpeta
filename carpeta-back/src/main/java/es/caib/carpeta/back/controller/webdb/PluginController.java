@@ -52,11 +52,11 @@ import es.caib.carpeta.model.fields.*;
 public class PluginController
     extends es.caib.carpeta.back.controller.CarpetaFilesBaseController<Plugin, java.lang.Long, PluginForm> implements PluginFields {
 
-  @EJB(mappedName = es.caib.carpeta.ejb.IdiomaLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.IdiomaLocal idiomaEjb;
+  @EJB(mappedName = es.caib.carpeta.ejb.IdiomaService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.IdiomaService idiomaEjb;
 
-  @EJB(mappedName = es.caib.carpeta.ejb.PluginLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.PluginLocal pluginEjb;
+  @EJB(mappedName = es.caib.carpeta.ejb.PluginService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.PluginService pluginEjb;
 
   @Autowired
   private PluginWebValidator pluginWebValidator;

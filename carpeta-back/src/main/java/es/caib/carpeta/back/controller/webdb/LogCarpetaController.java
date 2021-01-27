@@ -49,8 +49,8 @@ import es.caib.carpeta.model.fields.*;
 public class LogCarpetaController
     extends es.caib.carpeta.back.controller.CarpetaBaseController<LogCarpeta, java.lang.Long> implements LogCarpetaFields {
 
-  @EJB(mappedName = es.caib.carpeta.ejb.LogCarpetaLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.LogCarpetaLocal logCarpetaEjb;
+  @EJB(mappedName = es.caib.carpeta.ejb.LogCarpetaService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.LogCarpetaService logCarpetaEjb;
 
   @Autowired
   private LogCarpetaWebValidator logCarpetaWebValidator;

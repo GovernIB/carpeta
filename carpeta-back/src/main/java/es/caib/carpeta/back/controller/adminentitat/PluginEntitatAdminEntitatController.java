@@ -24,7 +24,7 @@ import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_AFEGIR_PLUGIN;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ELIMINAT_PLUGIN;
 import es.caib.carpeta.persistence.PluginEntitatJPA;
 import es.caib.carpeta.persistence.PluginJPA;
-import es.caib.carpeta.logic.AuditoriaLogicaLocal;
+import es.caib.carpeta.logic.AuditoriaLogicaService;
 import es.caib.carpeta.model.entity.PluginEntitat;
 import es.caib.carpeta.model.fields.PluginEntitatFields;
 import es.caib.carpeta.model.fields.PluginFields;
@@ -40,11 +40,11 @@ import java.util.List;
 @SessionAttributes(types = { PluginEntitatForm.class, PluginEntitatFilterForm.class })
 public class PluginEntitatAdminEntitatController extends PluginEntitatController {
 
-    @EJB(mappedName = es.caib.carpeta.ejb.PluginLocal.JNDI_NAME)
-    protected es.caib.carpeta.ejb.PluginLocal pluginEjb;
+    @EJB(mappedName = es.caib.carpeta.ejb.PluginService.JNDI_NAME)
+    protected es.caib.carpeta.ejb.PluginService pluginEjb;
 
-    @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
-    protected AuditoriaLogicaLocal auditoriaLogicaEjb;
+    @EJB(mappedName = AuditoriaLogicaService.JNDI_NAME)
+    protected AuditoriaLogicaService auditoriaLogicaEjb;
 
 
     @Override

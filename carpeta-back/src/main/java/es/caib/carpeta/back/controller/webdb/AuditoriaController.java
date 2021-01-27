@@ -49,8 +49,8 @@ import es.caib.carpeta.model.fields.*;
 public class AuditoriaController
     extends es.caib.carpeta.back.controller.CarpetaBaseController<Auditoria, java.lang.Long> implements AuditoriaFields {
 
-  @EJB(mappedName = es.caib.carpeta.ejb.AuditoriaLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.AuditoriaLocal auditoriaEjb;
+  @EJB(mappedName = es.caib.carpeta.ejb.AuditoriaService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.AuditoriaService auditoriaEjb;
 
   @Autowired
   private AuditoriaWebValidator auditoriaWebValidator;

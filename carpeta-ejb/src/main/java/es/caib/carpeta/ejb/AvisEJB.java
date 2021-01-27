@@ -11,7 +11,7 @@ import es.caib.carpeta.persistence.AvisJPAManager;
 import es.caib.carpeta.utils.Constants;
 
 @Stateless
-public class AvisEJB extends AvisJPAManager implements AvisLocal {
+public class AvisEJB extends AvisJPAManager implements AvisService {
 
   @Override
 	@RolesAllowed({Constants.CAR_ADMIN,

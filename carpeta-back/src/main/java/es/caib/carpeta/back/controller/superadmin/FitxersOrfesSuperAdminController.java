@@ -36,11 +36,11 @@ import es.caib.carpeta.model.fields.EntitatFields;
 public class FitxersOrfesSuperAdminController extends FitxerController{
 	
 	
-	  @EJB(mappedName = es.caib.carpeta.ejb.EnllazLocal.JNDI_NAME)
-	  protected es.caib.carpeta.ejb.EnllazLocal enllazEjb;
+	  @EJB(mappedName = es.caib.carpeta.ejb.EnllazService.JNDI_NAME)
+	  protected es.caib.carpeta.ejb.EnllazService enllazEjb;
 	  
-	  @EJB(mappedName = es.caib.carpeta.ejb.EntitatLocal.JNDI_NAME)
-	  protected es.caib.carpeta.ejb.EntitatLocal entitatEjb;
+	  @EJB(mappedName = es.caib.carpeta.ejb.EntitatService.JNDI_NAME)
+	  protected es.caib.carpeta.ejb.EntitatService entitatEjb;
 	  
 	  @Override
 	  public String getTileForm() {

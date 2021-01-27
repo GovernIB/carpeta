@@ -23,8 +23,8 @@ import es.caib.carpeta.front.config.LoginRequestCache;
 import es.caib.carpeta.front.service.SecurityService;
 import es.caib.carpeta.front.utils.SesionHttp;
 import es.caib.carpeta.front.utils.StringUtils;
-import es.caib.carpeta.logic.AuditoriaLogicaLocal;
-import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
+import es.caib.carpeta.logic.AuditoriaLogicaService;
+import es.caib.carpeta.logic.LogCarpetaLogicaService;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -51,11 +51,11 @@ public class LoginController {
     @Autowired
     private SesionHttp sesionHttp;
 
-    @EJB(mappedName = LogCarpetaLogicaLocal.JNDI_NAME)
-    protected LogCarpetaLogicaLocal logLogicaEjb;
+    @EJB(mappedName = LogCarpetaLogicaService.JNDI_NAME)
+    protected LogCarpetaLogicaService logLogicaEjb;
 
-    @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
-    protected AuditoriaLogicaLocal auditoriaLogicaEjb;
+    @EJB(mappedName = AuditoriaLogicaService.JNDI_NAME)
+    protected AuditoriaLogicaService auditoriaLogicaEjb;
 
     // @Autowired
     // private RequestMappingHandlerMapping requestMappingHandlerMapping;

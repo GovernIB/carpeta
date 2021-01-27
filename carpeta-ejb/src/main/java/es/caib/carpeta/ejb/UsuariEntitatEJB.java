@@ -11,7 +11,7 @@ import es.caib.carpeta.persistence.UsuariEntitatJPAManager;
 import es.caib.carpeta.utils.Constants;
 
 @Stateless
-public class UsuariEntitatEJB extends UsuariEntitatJPAManager implements UsuariEntitatLocal {
+public class UsuariEntitatEJB extends UsuariEntitatJPAManager implements UsuariEntitatService {
 
   @Override
 	@RolesAllowed({Constants.CAR_ADMIN,

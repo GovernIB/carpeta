@@ -19,8 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import es.caib.carpeta.hibernate.HibernateFileUtil;
-import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaLocal;
-import es.caib.carpeta.logic.UsuariEntitatLogicaLocal;
+import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaService;
+import es.caib.carpeta.logic.UsuariEntitatLogicaService;
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.ICarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
@@ -46,11 +46,11 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
     public static final String SESSION_URL_BASE = "SESSION_URL_BASE";
 
-    @EJB(mappedName = UsuariEntitatLogicaLocal.JNDI_NAME)
-    protected UsuariEntitatLogicaLocal usuariEntitatEjb;
+    @EJB(mappedName = UsuariEntitatLogicaService.JNDI_NAME)
+    protected UsuariEntitatLogicaService usuariEntitatEjb;
 
-    @EJB(mappedName = PluginDeCarpetaFrontLogicaLocal.JNDI_NAME)
-    protected PluginDeCarpetaFrontLogicaLocal pluginCarpetaFrontEjb;
+    @EJB(mappedName = PluginDeCarpetaFrontLogicaService.JNDI_NAME)
+    protected PluginDeCarpetaFrontLogicaService pluginCarpetaFrontEjb;
 
     
     @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}/{urlBase}")
@@ -303,7 +303,7 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
      * private static long lastCheckFirmesCaducades = 0;
      * 
      * public static void closeSignaturesSet(HttpServletRequest request, String
-     * signaturesSetID, ModulDeFirmaWebLogicaLocal modulDeFirmaEjb) {
+     * signaturesSetID, ModulDeFirmaWebLogicaService modulDeFirmaEjb) {
      * 
      * PortaFIBSignaturesSet pss = getPortaFIBSignaturesSet(request,
      * signaturesSetID, modulDeFirmaEjb);
@@ -315,7 +315,7 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
      * 
      * 
      * private static void closeSignaturesSet(HttpServletRequest request,
-     * PortaFIBSignaturesSet pss, ModulDeFirmaWebLogicaLocal modulDeFirmaEjb) {
+     * PortaFIBSignaturesSet pss, ModulDeFirmaWebLogicaService modulDeFirmaEjb) {
      * 
      * 
      * Long pluginID = pss.getPluginID(); final String signaturesSetID =

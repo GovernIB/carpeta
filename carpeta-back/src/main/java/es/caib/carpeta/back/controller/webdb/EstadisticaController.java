@@ -49,8 +49,8 @@ import es.caib.carpeta.model.fields.*;
 public class EstadisticaController
     extends es.caib.carpeta.back.controller.CarpetaBaseController<Estadistica, java.lang.Long> implements EstadisticaFields {
 
-  @EJB(mappedName = es.caib.carpeta.ejb.EstadisticaLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.EstadisticaLocal estadisticaEjb;
+  @EJB(mappedName = es.caib.carpeta.ejb.EstadisticaService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.EstadisticaService estadisticaEjb;
 
   @Autowired
   private EstadisticaWebValidator estadisticaWebValidator;

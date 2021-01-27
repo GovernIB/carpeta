@@ -5,7 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
-import es.caib.carpeta.ejb.AvisLocal;
+import es.caib.carpeta.ejb.AvisService;
 import es.caib.carpeta.persistence.AvisJPA;
 
 /**
@@ -14,9 +14,9 @@ import es.caib.carpeta.persistence.AvisJPA;
  * 
  */
 @Local
-public interface AvisLogicaLocal extends AvisLocal{
+public interface AvisLogicaService extends AvisService{
   
-    public static final String JNDI_NAME = "java:app/carpeta-logic/AvisLogicaEJB!es.caib.carpeta.logic.AvisLogicaLocal";
+    public static final String JNDI_NAME = "java:app/carpeta-logic/AvisLogicaEJB!es.caib.carpeta.logic.AvisLogicaService";
   
     public List<AvisJPA> findAllActive () throws I18NException;
     

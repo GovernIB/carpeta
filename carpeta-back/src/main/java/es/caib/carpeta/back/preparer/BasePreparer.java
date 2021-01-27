@@ -31,9 +31,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.ejb.IdiomaLocal;
+import es.caib.carpeta.ejb.IdiomaService;
 import es.caib.carpeta.persistence.AvisJPA;
-import es.caib.carpeta.logic.AvisLogicaLocal;
+import es.caib.carpeta.logic.AvisLogicaService;
 import es.caib.carpeta.logic.utils.EjbManager;
 import es.caib.carpeta.model.fields.IdiomaFields;
 
@@ -125,7 +125,7 @@ public class BasePreparer implements ViewPreparer, Constants {
 		request.put("lang", loc.toString()); // LANG i si es necessari el country
 		request.put("onlylang", loc.getLanguage()); // només el LANG
 		try {
-		    IdiomaLocal idiomaEjb =EjbManager.getIdiomaEJB();
+		    IdiomaService idiomaEjb =EjbManager.getIdiomaEJB();
 		   request.put("languages", idiomaEjb.select(IdiomaFields.SUPORTAT.equal(true), new OrderBy(IdiomaFields.ORDRE)));
         } catch (I18NException e) {
             throw new PreparerException("Error consultant idiomes disponibles: " + I18NUtils.getMessage(e), e);
@@ -146,7 +146,7 @@ public class BasePreparer implements ViewPreparer, Constants {
 		// Avisos Back
 		List<AvisJPA> avisosList = new ArrayList<AvisJPA>();
 		try {
-		    AvisLogicaLocal avisLogicaEjb = EjbManager.getAvisLogicaEJB();
+		    AvisLogicaService avisLogicaEjb = EjbManager.getAvisLogicaEJB();
 			if("superadmin".equals((String)attributeContext.getAttribute("pipella").getValue())) {
 				avisosList = avisLogicaEjb.findAllActive();
 			} else if("adminentitat".equals((String)attributeContext.getAttribute("pipella").getValue())) { 

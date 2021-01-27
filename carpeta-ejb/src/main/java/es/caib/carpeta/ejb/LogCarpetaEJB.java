@@ -11,7 +11,7 @@ import es.caib.carpeta.persistence.LogCarpetaJPAManager;
 import es.caib.carpeta.utils.Constants;
 
 @Stateless
-public class LogCarpetaEJB extends LogCarpetaJPAManager implements LogCarpetaLocal {
+public class LogCarpetaEJB extends LogCarpetaJPAManager implements LogCarpetaService {
 
   @Override
 	@RolesAllowed({Constants.CAR_ADMIN,

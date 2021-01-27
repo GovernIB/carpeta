@@ -26,10 +26,10 @@ import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.carpeta.front.utils.SesionHttp;
 import es.caib.carpeta.hibernate.HibernateFileUtil;
 import es.caib.carpeta.persistence.EntitatJPA;
-import es.caib.carpeta.logic.AccesLogicaLocal;
-import es.caib.carpeta.logic.AuditoriaLogicaLocal;
-import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
-import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
+import es.caib.carpeta.logic.AccesLogicaService;
+import es.caib.carpeta.logic.AuditoriaLogicaService;
+import es.caib.carpeta.logic.LogCarpetaLogicaService;
+import es.caib.carpeta.logic.UtilitiesForFrontLogicaService;
 import es.caib.carpeta.logic.utils.PluginInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import java.net.InetAddress;
@@ -53,17 +53,17 @@ public class PluginFrontController extends CommonFrontController {
     @Autowired
     private SesionHttp sesionHttp;
 
-    @EJB(mappedName = UtilitiesForFrontLogicaLocal.JNDI_NAME)
-    UtilitiesForFrontLogicaLocal utilsEjb;
+    @EJB(mappedName = UtilitiesForFrontLogicaService.JNDI_NAME)
+    UtilitiesForFrontLogicaService utilsEjb;
 
-    @EJB(mappedName = LogCarpetaLogicaLocal.JNDI_NAME)
-    protected LogCarpetaLogicaLocal logLogicaEjb;
+    @EJB(mappedName = LogCarpetaLogicaService.JNDI_NAME)
+    protected LogCarpetaLogicaService logLogicaEjb;
 
-    @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
-    protected AuditoriaLogicaLocal auditoriaLogicaEjb;
+    @EJB(mappedName = AuditoriaLogicaService.JNDI_NAME)
+    protected AuditoriaLogicaService auditoriaLogicaEjb;
 
-    @EJB(mappedName = AccesLogicaLocal.JNDI_NAME)
-    protected AccesLogicaLocal accesLogicaEjb;
+    @EJB(mappedName = AccesLogicaService.JNDI_NAME)
+    protected AccesLogicaService accesLogicaEjb;
 
 
     protected final Log log = LogFactory.getLog(getClass());

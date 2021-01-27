@@ -32,14 +32,14 @@ public class UsuariEntitatWebValidator extends AbstractWebValidator<UsuariEntita
   protected UsuariEntitatValidator<UsuariEntitat> validator = new UsuariEntitatValidator<UsuariEntitat>();
 
   // EJB's
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EntitatLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.EntitatLocal entitatEjb;
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EntitatService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.EntitatService entitatEjb;
 
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.UsuariLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.UsuariLocal usuariEjb;
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.UsuariService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.UsuariService usuariEjb;
 
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.UsuariEntitatLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.UsuariEntitatLocal usuariEntitatEjb;
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.UsuariEntitatService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.UsuariEntitatService usuariEntitatEjb;
 
 
 

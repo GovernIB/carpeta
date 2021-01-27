@@ -11,7 +11,7 @@ import es.caib.carpeta.persistence.PropietatGlobalJPAManager;
 import es.caib.carpeta.utils.Constants;
 
 @Stateless
-public class PropietatGlobalEJB extends PropietatGlobalJPAManager implements PropietatGlobalLocal {
+public class PropietatGlobalEJB extends PropietatGlobalJPAManager implements PropietatGlobalService {
 
   @Override
 	@RolesAllowed({Constants.CAR_ADMIN,

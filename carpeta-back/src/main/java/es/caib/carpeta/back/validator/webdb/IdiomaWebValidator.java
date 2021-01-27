@@ -32,8 +32,8 @@ public class IdiomaWebValidator extends AbstractWebValidator<IdiomaForm, Idioma>
   protected IdiomaValidator<Idioma> validator = new IdiomaValidator<Idioma>();
 
   // EJB's
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.IdiomaLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.IdiomaLocal idiomaEjb;
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.IdiomaService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.IdiomaService idiomaEjb;
 
 
 

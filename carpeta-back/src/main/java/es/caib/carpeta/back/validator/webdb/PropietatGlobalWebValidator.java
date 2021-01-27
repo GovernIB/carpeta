@@ -32,11 +32,11 @@ public class PropietatGlobalWebValidator extends AbstractWebValidator<PropietatG
   protected PropietatGlobalValidator<PropietatGlobal> validator = new PropietatGlobalValidator<PropietatGlobal>();
 
   // EJB's
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EntitatLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.EntitatLocal entitatEjb;
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EntitatService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.EntitatService entitatEjb;
 
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.PropietatGlobalLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.PropietatGlobalLocal propietatGlobalEjb;
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.PropietatGlobalService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.PropietatGlobalService propietatGlobalEjb;
 
 
 

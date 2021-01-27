@@ -18,10 +18,10 @@ import es.caib.carpeta.model.entity.Enllaz;
  *
  */
 @Stateless
-public class EnllazLogicaEJB extends EnllazEJB implements EnllazLogicaLocal{
+public class EnllazLogicaEJB extends EnllazEJB implements EnllazLogicaService{
 	
-	@EJB(mappedName = FitxerLogicaLocal.JNDI_NAME)
-	protected FitxerLogicaLocal fitxersEjb;
+	@EJB(mappedName = FitxerLogicaService.JNDI_NAME)
+	protected FitxerLogicaService fitxersEjb;
 	
 	@Override
 	public Set<Long> deleteFull(Enllaz enllaz, boolean deleteFiles) throws I18NException{

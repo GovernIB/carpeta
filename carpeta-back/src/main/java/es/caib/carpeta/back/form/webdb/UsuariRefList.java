@@ -11,7 +11,7 @@ import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.Select;
 import org.fundaciobit.genapp.common.query.Where;
 
-import es.caib.carpeta.ejb.UsuariLocal;
+import es.caib.carpeta.ejb.UsuariService;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import es.caib.carpeta.model.fields.UsuariFields;
 import org.fundaciobit.genapp.common.web.controller.RefListBase;
@@ -25,8 +25,8 @@ import org.fundaciobit.genapp.common.web.controller.RefListBase;
 public class UsuariRefList extends RefListBase
     implements UsuariFields {
 
-  @EJB(mappedName = UsuariLocal.JNDI_NAME)
-  private UsuariLocal usuariEjb;
+  @EJB(mappedName = UsuariService.JNDI_NAME)
+  private UsuariService usuariEjb;
 
   public UsuariRefList(UsuariRefList __clone) {
     super(__clone);

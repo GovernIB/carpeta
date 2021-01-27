@@ -49,8 +49,8 @@ import es.caib.carpeta.model.fields.*;
 public class PropietatGlobalController
     extends es.caib.carpeta.back.controller.CarpetaBaseController<PropietatGlobal, java.lang.Long> implements PropietatGlobalFields {
 
-  @EJB(mappedName = es.caib.carpeta.ejb.PropietatGlobalLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.PropietatGlobalLocal propietatGlobalEjb;
+  @EJB(mappedName = es.caib.carpeta.ejb.PropietatGlobalService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.PropietatGlobalService propietatGlobalEjb;
 
   @Autowired
   private PropietatGlobalWebValidator propietatGlobalWebValidator;

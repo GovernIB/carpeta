@@ -52,11 +52,11 @@ import es.caib.carpeta.model.fields.*;
 public class EntitatController
     extends es.caib.carpeta.back.controller.CarpetaFilesBaseController<Entitat, java.lang.Long, EntitatForm> implements EntitatFields {
 
-  @EJB(mappedName = es.caib.carpeta.ejb.IdiomaLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.IdiomaLocal idiomaEjb;
+  @EJB(mappedName = es.caib.carpeta.ejb.IdiomaService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.IdiomaService idiomaEjb;
 
-  @EJB(mappedName = es.caib.carpeta.ejb.EntitatLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.EntitatLocal entitatEjb;
+  @EJB(mappedName = es.caib.carpeta.ejb.EntitatService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.EntitatService entitatEjb;
 
   @Autowired
   private EntitatWebValidator entitatWebValidator;

@@ -11,7 +11,7 @@ import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.Select;
 import org.fundaciobit.genapp.common.query.Where;
 
-import es.caib.carpeta.ejb.PluginEntitatLocal;
+import es.caib.carpeta.ejb.PluginEntitatService;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import es.caib.carpeta.model.fields.PluginEntitatFields;
 import org.fundaciobit.genapp.common.web.controller.RefListBase;
@@ -25,8 +25,8 @@ import org.fundaciobit.genapp.common.web.controller.RefListBase;
 public class PluginEntitatRefList extends RefListBase
     implements PluginEntitatFields {
 
-  @EJB(mappedName = PluginEntitatLocal.JNDI_NAME)
-  private PluginEntitatLocal pluginEntitatEjb;
+  @EJB(mappedName = PluginEntitatService.JNDI_NAME)
+  private PluginEntitatService pluginEntitatEjb;
 
   public PluginEntitatRefList(PluginEntitatRefList __clone) {
     super(__clone);

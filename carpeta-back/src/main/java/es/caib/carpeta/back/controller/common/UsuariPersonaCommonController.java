@@ -34,8 +34,8 @@ import es.caib.carpeta.model.fields.UsuariEntitatFields;
 @SessionAttributes(types = { UsuariForm.class, UsuariFilterForm.class })
 public class UsuariPersonaCommonController extends UsuariController {
 
-    @EJB(mappedName = es.caib.carpeta.ejb.UsuariEntitatLocal.JNDI_NAME)
-    protected es.caib.carpeta.ejb.UsuariEntitatLocal usuariEntitatEjb;
+    @EJB(mappedName = es.caib.carpeta.ejb.UsuariEntitatService.JNDI_NAME)
+    protected es.caib.carpeta.ejb.UsuariEntitatService usuariEntitatEjb;
 
     @Override
     public String getTileForm() {

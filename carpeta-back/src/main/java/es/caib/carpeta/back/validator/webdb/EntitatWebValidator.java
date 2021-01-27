@@ -33,14 +33,14 @@ public class EntitatWebValidator extends AbstractWebValidator<EntitatForm, Entit
   protected EntitatValidator<Entitat> validator = new EntitatValidator<Entitat>();
 
   // EJB's
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EntitatLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.EntitatLocal entitatEjb;
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EntitatService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.EntitatService entitatEjb;
 
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.PluginLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.PluginLocal pluginEjb;
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.PluginService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.PluginService pluginEjb;
 
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.TraduccioLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.TraduccioLocal traduccioEjb;
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.TraduccioService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.TraduccioService traduccioEjb;
 
 
 

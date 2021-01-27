@@ -18,11 +18,11 @@ import org.springframework.stereotype.Component;
 import es.caib.carpeta.back.preparer.BasePreparer;
 import es.caib.carpeta.back.utils.PluginUserInformationUtils;
 import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.ejb.PropietatGlobalLocal;
+import es.caib.carpeta.ejb.PropietatGlobalService;
 import es.caib.carpeta.persistence.EntitatJPA;
 import es.caib.carpeta.persistence.UsuariEntitatJPA;
 import es.caib.carpeta.persistence.UsuariJPA;
-import es.caib.carpeta.logic.AuthenticationLogicaLocal;
+import es.caib.carpeta.logic.AuthenticationLogicaService;
 import es.caib.carpeta.logic.utils.EjbManager;
 import java.util.Collection;
 import java.util.Comparator;
@@ -44,7 +44,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
     protected final Logger log = Logger.getLogger(getClass());
 
-    protected AuthenticationLogicaLocal authenticationLogicaEjb;
+    protected AuthenticationLogicaService authenticationLogicaEjb;
 
     public class LogInfo {
 
@@ -200,7 +200,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                         if (containsRoleAdEn) {
 
 
-                            PropietatGlobalLocal propietatGlobalEjb;
+                            PropietatGlobalService propietatGlobalEjb;
                             try {
                                 propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
                             } catch (I18NException e) {

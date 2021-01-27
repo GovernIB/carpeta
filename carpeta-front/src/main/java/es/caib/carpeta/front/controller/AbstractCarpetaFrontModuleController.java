@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import es.caib.carpeta.hibernate.HibernateFileUtil;
-import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaLocal;
-import es.caib.carpeta.logic.UsuariEntitatLogicaLocal;
+import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaService;
+import es.caib.carpeta.logic.UsuariEntitatLogicaService;
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.ICarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
@@ -44,11 +44,11 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
     public static final String SESSION_URL_BASE = "SESSION_URL_BASE";
 
-    @EJB(mappedName = UsuariEntitatLogicaLocal.JNDI_NAME)
-    protected UsuariEntitatLogicaLocal usuariEntitatEjb;
+    @EJB(mappedName = UsuariEntitatLogicaService.JNDI_NAME)
+    protected UsuariEntitatLogicaService usuariEntitatEjb;
 
-    @EJB(mappedName = PluginDeCarpetaFrontLogicaLocal.JNDI_NAME)
-    protected PluginDeCarpetaFrontLogicaLocal pluginCarpetaFrontEjb;
+    @EJB(mappedName = PluginDeCarpetaFrontLogicaService.JNDI_NAME)
+    protected PluginDeCarpetaFrontLogicaService pluginCarpetaFrontEjb;
 
     @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}/{urlBase}")
     public ModelAndView showCarpetaFrontModule(HttpServletRequest request, HttpServletResponse response,

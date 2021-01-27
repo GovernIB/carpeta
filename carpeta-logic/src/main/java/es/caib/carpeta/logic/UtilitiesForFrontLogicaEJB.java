@@ -37,33 +37,33 @@ import java.util.Map;
  */
 @PermitAll
 @Stateless
-public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal {
+public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaService {
     
     protected Logger log = Logger.getLogger(this.getClass());
 
-    @EJB(mappedName = es.caib.carpeta.ejb.EntitatLocal.JNDI_NAME)
-    protected es.caib.carpeta.ejb.EntitatLocal entitatEjb;
+    @EJB(mappedName = es.caib.carpeta.ejb.EntitatService.JNDI_NAME)
+    protected es.caib.carpeta.ejb.EntitatService entitatEjb;
 
-    @EJB(mappedName = es.caib.carpeta.ejb.IdiomaLocal.JNDI_NAME)
-    protected es.caib.carpeta.ejb.IdiomaLocal idiomaEjb;
+    @EJB(mappedName = es.caib.carpeta.ejb.IdiomaService.JNDI_NAME)
+    protected es.caib.carpeta.ejb.IdiomaService idiomaEjb;
 
-    @EJB(mappedName = PluginDeCarpetaFrontLogicaLocal.JNDI_NAME)
-    protected PluginDeCarpetaFrontLogicaLocal pluginCarpetaFrontEjb;
+    @EJB(mappedName = PluginDeCarpetaFrontLogicaService.JNDI_NAME)
+    protected PluginDeCarpetaFrontLogicaService pluginCarpetaFrontEjb;
 
-    @EJB(mappedName = PluginEntitatLogicaLocal.JNDI_NAME)
-    protected PluginEntitatLogicaLocal pluginEntitatLogicaEjb;
+    @EJB(mappedName = PluginEntitatLogicaService.JNDI_NAME)
+    protected PluginEntitatLogicaService pluginEntitatLogicaEjb;
 
-    @EJB(mappedName = es.caib.carpeta.ejb.EnllazLocal.JNDI_NAME)
-    protected es.caib.carpeta.ejb.EnllazLocal enllazEjb;
+    @EJB(mappedName = es.caib.carpeta.ejb.EnllazService.JNDI_NAME)
+    protected es.caib.carpeta.ejb.EnllazService enllazEjb;
 
-    @EJB(mappedName = AvisLogicaLocal.JNDI_NAME)
-    protected AvisLogicaLocal avisEjb;
+    @EJB(mappedName = AvisLogicaService.JNDI_NAME)
+    protected AvisLogicaService avisEjb;
 
-    @EJB(mappedName = FitxerLogicaLocal.JNDI_NAME)
-    protected FitxerLogicaLocal fitxerLogicaEjb;
+    @EJB(mappedName = FitxerLogicaService.JNDI_NAME)
+    protected FitxerLogicaService fitxerLogicaEjb;
     
-    @EJB(mappedName = es.caib.carpeta.ejb.PluginLocal.JNDI_NAME)
-    protected es.caib.carpeta.ejb.PluginLocal pluginEjb;
+    @EJB(mappedName = es.caib.carpeta.ejb.PluginService.JNDI_NAME)
+    protected es.caib.carpeta.ejb.PluginService pluginEjb;
 
     /**
      * Retorna codi i nom en l'idioma seleccionat

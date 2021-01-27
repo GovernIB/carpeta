@@ -11,7 +11,7 @@ import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.Select;
 import org.fundaciobit.genapp.common.query.Where;
 
-import es.caib.carpeta.ejb.AuditoriaLocal;
+import es.caib.carpeta.ejb.AuditoriaService;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import es.caib.carpeta.model.fields.AuditoriaFields;
 import org.fundaciobit.genapp.common.web.controller.RefListBase;
@@ -25,8 +25,8 @@ import org.fundaciobit.genapp.common.web.controller.RefListBase;
 public class AuditoriaRefList extends RefListBase
     implements AuditoriaFields {
 
-  @EJB(mappedName = AuditoriaLocal.JNDI_NAME)
-  private AuditoriaLocal auditoriaEjb;
+  @EJB(mappedName = AuditoriaService.JNDI_NAME)
+  private AuditoriaService auditoriaEjb;
 
   public AuditoriaRefList(AuditoriaRefList __clone) {
     super(__clone);

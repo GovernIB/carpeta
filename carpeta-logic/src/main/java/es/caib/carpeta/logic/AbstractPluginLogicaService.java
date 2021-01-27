@@ -11,7 +11,7 @@ import es.caib.carpeta.model.entity.Plugin;
  * 
  * @author anadal
  */
-public interface AbstractPluginLogicaLocal<I> extends PluginLogicaLocal {
+public interface AbstractPluginLogicaService<I> extends PluginLogicaService {
 
     /**
      * Retorna tots els plugins actius del tipus I associats no associats a cap

@@ -11,9 +11,9 @@ import es.caib.carpeta.persistence.PluginJPA;
  *
  */
 @Local
-public interface PluginLogicaLocal extends es.caib.carpeta.ejb.PluginLocal {
+public interface PluginLogicaService extends es.caib.carpeta.ejb.PluginService {
   
-    public static final String JNDI_NAME = "java:app/carpeta-logic/PluginLogicaEJB!es.caib.carpeta.logic.PluginLogicaLocal";
+    public static final String JNDI_NAME = "java:app/carpeta-logic/PluginLogicaEJB!es.caib.carpeta.logic.PluginLogicaService";
   
     public boolean deleteOfCache(Long pluginID);
   

@@ -19,7 +19,7 @@ import java.util.*;
  *
  */
 public abstract class AbstractPluginLogicaEJB<I extends IPlugin> extends PluginLogicaEJB
-        implements AbstractPluginLogicaLocal<I> {
+        implements AbstractPluginLogicaService<I> {
 
     protected abstract int getTipusDePlugin();
 

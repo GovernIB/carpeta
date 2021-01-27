@@ -32,8 +32,8 @@ public class TraduccioWebValidator extends AbstractWebValidator<TraduccioForm, T
   protected TraduccioValidator<Traduccio> validator = new TraduccioValidator<Traduccio>();
 
   // EJB's
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.TraduccioLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.TraduccioLocal traduccioEjb;
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.TraduccioService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.TraduccioService traduccioEjb;
 
 
 

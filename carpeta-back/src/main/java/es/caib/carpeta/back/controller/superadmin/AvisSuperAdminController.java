@@ -24,7 +24,7 @@ import es.caib.carpeta.persistence.AvisJPA;
 import es.caib.carpeta.model.fields.AvisFields;
 import es.caib.carpeta.model.fields.PluginFields;
 
-import es.caib.carpeta.logic.PluginEntitatLogicaLocal;
+import es.caib.carpeta.logic.PluginEntitatLogicaService;
 import es.caib.carpeta.persistence.PluginEntitatJPA;
 
 /* 
@@ -36,8 +36,8 @@ import es.caib.carpeta.persistence.PluginEntitatJPA;
 @SessionAttributes(types = { AvisForm.class, AvisFilterForm.class })
 public class AvisSuperAdminController extends AvisController {
 	
-	@EJB(mappedName = PluginEntitatLogicaLocal.JNDI_NAME)
-	  protected PluginEntitatLogicaLocal pluginEntitatEjb;
+	@EJB(mappedName = PluginEntitatLogicaService.JNDI_NAME)
+	  protected PluginEntitatLogicaService pluginEntitatEjb;
 
 	@Override
 	public String getTileForm() {

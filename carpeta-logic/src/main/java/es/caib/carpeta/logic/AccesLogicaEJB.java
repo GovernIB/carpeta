@@ -21,10 +21,10 @@ import java.util.List;
  * @author mgonzalez Date: 16/12/2020
  */
 @Stateless
-public class AccesLogicaEJB extends AccesEJB implements AccesLogicaLocal {
+public class AccesLogicaEJB extends AccesEJB implements AccesLogicaService {
 
-    @EJB(mappedName = EntitatLogicaLocal.JNDI_NAME)
-    protected EntitatLogicaLocal entitatLogicaEjb;
+    @EJB(mappedName = EntitatLogicaService.JNDI_NAME)
+    protected EntitatLogicaService entitatLogicaEjb;
 
     @Override
     public void crearAcces(UsuarioClave usuarioClave, @NotNull int tipus, long entitatID, Long pluginID,

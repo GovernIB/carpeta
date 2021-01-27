@@ -32,11 +32,11 @@ public class AccesWebValidator extends AbstractWebValidator<AccesForm, Acces>
   protected AccesValidator<Acces> validator = new AccesValidator<Acces>();
 
   // EJB's
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.AccesLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.AccesLocal accesEjb;
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.AccesService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.AccesService accesEjb;
 
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EntitatLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.EntitatLocal entitatEjb;
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EntitatService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.EntitatService entitatEjb;
 
 
 

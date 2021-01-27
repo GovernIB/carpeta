@@ -22,7 +22,7 @@ import es.caib.carpeta.model.fields.PluginEntitatFields;
  *
  */
 @Stateless
-public class PluginEntitatLogicaEJB extends PluginEntitatEJB implements PluginEntitatLogicaLocal {
+public class PluginEntitatLogicaEJB extends PluginEntitatEJB implements PluginEntitatLogicaService {
 
 	@Override
 	@PermitAll

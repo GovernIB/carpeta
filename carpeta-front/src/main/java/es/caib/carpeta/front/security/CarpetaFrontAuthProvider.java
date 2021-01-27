@@ -13,12 +13,12 @@ import javax.ejb.EJB;
 
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_ACCES_LOGIN_AUTENTICAT;
 import es.caib.carpeta.commons.utils.UsuarioClave;
-import es.caib.carpeta.ejb.PropietatGlobalLocal;
+import es.caib.carpeta.ejb.PropietatGlobalService;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.carpeta.front.service.SecurityService;
 import es.caib.carpeta.persistence.EntitatJPA;
-import es.caib.carpeta.logic.AccesLogicaLocal;
-import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
+import es.caib.carpeta.logic.AccesLogicaService;
+import es.caib.carpeta.logic.UtilitiesForFrontLogicaService;
 import es.caib.carpeta.logic.utils.EjbManager;
 import java.net.InetAddress;
 import java.sql.Timestamp;
@@ -33,11 +33,11 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
     @Autowired
     SecurityService securityService;
 
-    @EJB(mappedName = AccesLogicaLocal.JNDI_NAME)
-    protected AccesLogicaLocal accesLogicaEjb;
+    @EJB(mappedName = AccesLogicaService.JNDI_NAME)
+    protected AccesLogicaService accesLogicaEjb;
     
-    @EJB(mappedName = UtilitiesForFrontLogicaLocal.JNDI_NAME)
-    protected UtilitiesForFrontLogicaLocal utilsEjb;
+    @EJB(mappedName = UtilitiesForFrontLogicaService.JNDI_NAME)
+    protected UtilitiesForFrontLogicaService utilsEjb;
 
     @Override
     public Authentication authenticate(Authentication authentication) {
@@ -57,7 +57,7 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
             usuarioClave = securityService.validarTicketAutentificacion(passwd);
 
             //Agafam l'entitat per defecte
-            PropietatGlobalLocal propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
+            PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
             String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
             EntitatJPA entitat = utilsEjb.getEntitat(defaultEntityCode);
             long entitatID = entitat.getEntitatID();

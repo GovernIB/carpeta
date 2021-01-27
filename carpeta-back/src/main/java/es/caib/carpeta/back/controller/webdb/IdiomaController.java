@@ -47,8 +47,8 @@ import es.caib.carpeta.model.fields.*;
 public class IdiomaController
     extends es.caib.carpeta.back.controller.CarpetaBaseController<Idioma, java.lang.String> implements IdiomaFields {
 
-  @EJB(mappedName = es.caib.carpeta.ejb.IdiomaLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.IdiomaLocal idiomaEjb;
+  @EJB(mappedName = es.caib.carpeta.ejb.IdiomaService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.IdiomaService idiomaEjb;
 
   @Autowired
   private IdiomaWebValidator idiomaWebValidator;

@@ -2,7 +2,7 @@ package es.caib.carpeta.front.controller;
 
 import com.google.gson.Gson;
 import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.ejb.PropietatGlobalLocal;
+import es.caib.carpeta.ejb.PropietatGlobalService;
 import es.caib.carpeta.front.utils.SesionHttp;
 import es.caib.carpeta.hibernate.HibernateFileUtil;
 import es.caib.carpeta.persistence.AvisJPA;
@@ -468,7 +468,7 @@ public class WebUIController extends CommonFrontController {
         try {
             //String lang = LocaleContextHolder.getLocale().getLanguage();
 
-            PropietatGlobalLocal propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
+            PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
             String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
             log.info("Default Entity Code => " +  defaultEntityCode);
             sesionHttp.setEntitat(defaultEntityCode);

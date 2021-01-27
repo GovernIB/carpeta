@@ -32,8 +32,8 @@ public class LogCarpetaWebValidator extends AbstractWebValidator<LogCarpetaForm,
   protected LogCarpetaValidator<LogCarpeta> validator = new LogCarpetaValidator<LogCarpeta>();
 
   // EJB's
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.LogCarpetaLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.LogCarpetaLocal logCarpetaEjb;
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.LogCarpetaService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.LogCarpetaService logCarpetaEjb;
 
 
 

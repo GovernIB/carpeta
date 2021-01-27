@@ -24,7 +24,7 @@ import es.caib.carpeta.model.fields.*;
  * Date: 13/10/2020
  */
 @Stateless
-public class LogCarpetaLogicaEJB extends LogCarpetaEJB implements LogCarpetaLogicaLocal {
+public class LogCarpetaLogicaEJB extends LogCarpetaEJB implements LogCarpetaLogicaService {
 
 
     @Override

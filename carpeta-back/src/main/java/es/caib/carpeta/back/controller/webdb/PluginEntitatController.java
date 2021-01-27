@@ -49,8 +49,8 @@ import es.caib.carpeta.model.fields.*;
 public class PluginEntitatController
     extends es.caib.carpeta.back.controller.CarpetaBaseController<PluginEntitat, java.lang.Long> implements PluginEntitatFields {
 
-  @EJB(mappedName = es.caib.carpeta.ejb.PluginEntitatLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.PluginEntitatLocal pluginEntitatEjb;
+  @EJB(mappedName = es.caib.carpeta.ejb.PluginEntitatService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.PluginEntitatService pluginEntitatEjb;
 
   @Autowired
   private PluginEntitatWebValidator pluginEntitatWebValidator;

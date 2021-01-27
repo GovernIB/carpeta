@@ -18,7 +18,7 @@ import es.caib.carpeta.back.controller.webdb.EntitatController;
 import es.caib.carpeta.back.form.webdb.EntitatFilterForm;
 import es.caib.carpeta.back.form.webdb.EntitatForm;
 import es.caib.carpeta.persistence.EntitatJPA;
-import es.caib.carpeta.logic.EntitatLogicaLocal;
+import es.caib.carpeta.logic.EntitatLogicaService;
 import es.caib.carpeta.model.entity.Entitat;
 import es.caib.carpeta.model.fields.EntitatFields;
 
@@ -32,8 +32,8 @@ import es.caib.carpeta.model.fields.EntitatFields;
 @SessionAttributes(types = { EntitatForm.class, EntitatFilterForm.class })
 public class EntitatSuperAdminController extends EntitatController {
 
-	@EJB(mappedName = EntitatLogicaLocal.JNDI_NAME)
-	protected EntitatLogicaLocal entitatLogicaEjb;
+	@EJB(mappedName = EntitatLogicaService.JNDI_NAME)
+	protected EntitatLogicaService entitatLogicaEjb;
 	
     @Override
     public String getTileForm() {

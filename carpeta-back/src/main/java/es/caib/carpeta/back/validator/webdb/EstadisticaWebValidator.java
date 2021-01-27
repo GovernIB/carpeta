@@ -32,8 +32,8 @@ public class EstadisticaWebValidator extends AbstractWebValidator<EstadisticaFor
   protected EstadisticaValidator<Estadistica> validator = new EstadisticaValidator<Estadistica>();
 
   // EJB's
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EstadisticaLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.EstadisticaLocal estadisticaEjb;
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EstadisticaService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.EstadisticaService estadisticaEjb;
 
 
 

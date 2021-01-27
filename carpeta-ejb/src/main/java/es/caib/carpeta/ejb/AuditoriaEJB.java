@@ -11,7 +11,7 @@ import es.caib.carpeta.persistence.AuditoriaJPAManager;
 import es.caib.carpeta.utils.Constants;
 
 @Stateless
-public class AuditoriaEJB extends AuditoriaJPAManager implements AuditoriaLocal {
+public class AuditoriaEJB extends AuditoriaJPAManager implements AuditoriaService {
 
   @Override
 	@RolesAllowed({Constants.CAR_ADMIN,

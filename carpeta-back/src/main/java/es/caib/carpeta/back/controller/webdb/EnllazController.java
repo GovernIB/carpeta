@@ -52,11 +52,11 @@ import es.caib.carpeta.model.fields.*;
 public class EnllazController
     extends es.caib.carpeta.back.controller.CarpetaFilesBaseController<Enllaz, java.lang.Long, EnllazForm> implements EnllazFields {
 
-  @EJB(mappedName = es.caib.carpeta.ejb.IdiomaLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.IdiomaLocal idiomaEjb;
+  @EJB(mappedName = es.caib.carpeta.ejb.IdiomaService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.IdiomaService idiomaEjb;
 
-  @EJB(mappedName = es.caib.carpeta.ejb.EnllazLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.EnllazLocal enllazEjb;
+  @EJB(mappedName = es.caib.carpeta.ejb.EnllazService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.EnllazService enllazEjb;
 
   @Autowired
   private EnllazWebValidator enllazWebValidator;

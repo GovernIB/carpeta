@@ -11,8 +11,8 @@ import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.Select;
 import org.fundaciobit.genapp.common.query.Where;
 
-import es.caib.carpeta.ejb.AvisLocal;
-import es.caib.carpeta.ejb.TraduccioLocal;
+import es.caib.carpeta.ejb.AvisService;
+import es.caib.carpeta.ejb.TraduccioService;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import es.caib.carpeta.model.fields.AvisFields;
 import org.fundaciobit.genapp.common.web.controller.RefListBase;
@@ -26,11 +26,11 @@ import org.fundaciobit.genapp.common.web.controller.RefListBase;
 public class AvisRefList extends RefListBase
     implements AvisFields {
 
-  @EJB(mappedName = AvisLocal.JNDI_NAME)
-  private AvisLocal avisEjb;
+  @EJB(mappedName = AvisService.JNDI_NAME)
+  private AvisService avisEjb;
 
-  @EJB(mappedName = TraduccioLocal.JNDI_NAME)
-  private TraduccioLocal traduccioEjb;
+  @EJB(mappedName = TraduccioService.JNDI_NAME)
+  private TraduccioService traduccioEjb;
   public AvisRefList(AvisRefList __clone) {
     super(__clone);
     this.avisEjb = __clone.avisEjb;

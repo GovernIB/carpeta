@@ -32,8 +32,8 @@ public class FitxerWebValidator extends AbstractWebValidator<FitxerForm, Fitxer>
   protected FitxerValidator<Fitxer> validator = new FitxerValidator<Fitxer>();
 
   // EJB's
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.FitxerLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.FitxerLocal fitxerEjb;
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.FitxerService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.FitxerService fitxerEjb;
 
 
 

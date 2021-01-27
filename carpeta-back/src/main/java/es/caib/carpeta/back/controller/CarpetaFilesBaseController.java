@@ -1,6 +1,6 @@
 package es.caib.carpeta.back.controller;
 
-import es.caib.carpeta.ejb.FitxerLocal;
+import es.caib.carpeta.ejb.FitxerService;
 import es.caib.carpeta.model.entity.Fitxer;
 
 import org.fundaciobit.genapp.common.IGenAppEntity;
@@ -24,8 +24,8 @@ import javax.ejb.EJB;
 public abstract class CarpetaFilesBaseController<I extends IGenAppEntity,PK extends Object,F extends BaseForm> extends CommonFilesBaseController<I,PK,F,Fitxer>{
 
 
-	@EJB(mappedName=FitxerLocal.JNDI_NAME)
-	protected FitxerLocal fitxerEjb;
+	@EJB(mappedName=FitxerService.JNDI_NAME)
+	protected FitxerService fitxerEjb;
 
 
 	/**

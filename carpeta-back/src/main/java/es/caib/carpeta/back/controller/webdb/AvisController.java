@@ -49,11 +49,11 @@ import es.caib.carpeta.model.fields.*;
 public class AvisController
     extends es.caib.carpeta.back.controller.CarpetaBaseController<Avis, java.lang.Long> implements AvisFields {
 
-  @EJB(mappedName = es.caib.carpeta.ejb.IdiomaLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.IdiomaLocal idiomaEjb;
+  @EJB(mappedName = es.caib.carpeta.ejb.IdiomaService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.IdiomaService idiomaEjb;
 
-  @EJB(mappedName = es.caib.carpeta.ejb.AvisLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.AvisLocal avisEjb;
+  @EJB(mappedName = es.caib.carpeta.ejb.AvisService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.AvisService avisEjb;
 
   @Autowired
   private AvisWebValidator avisWebValidator;

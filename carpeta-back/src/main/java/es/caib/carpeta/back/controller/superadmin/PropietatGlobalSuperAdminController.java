@@ -20,7 +20,7 @@ import es.caib.carpeta.back.security.LoginInfo;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_AFEGIR_PROPGLOB;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ELIMINAT_PROPGLOB;
 import es.caib.carpeta.persistence.PropietatGlobalJPA;
-import es.caib.carpeta.logic.AuditoriaLogicaLocal;
+import es.caib.carpeta.logic.AuditoriaLogicaService;
 import es.caib.carpeta.model.entity.PropietatGlobal;
 import es.caib.carpeta.model.fields.*;
 
@@ -34,8 +34,8 @@ import es.caib.carpeta.model.fields.*;
 @SessionAttributes(types = { PropietatGlobalForm.class, PropietatGlobalFilterForm.class })
 public class PropietatGlobalSuperAdminController extends PropietatGlobalController {
 
-    @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
-    protected AuditoriaLogicaLocal auditoriaLogicaEjb;
+    @EJB(mappedName = AuditoriaLogicaService.JNDI_NAME)
+    protected AuditoriaLogicaService auditoriaLogicaEjb;
 
     @Override
     public String getTileForm() {

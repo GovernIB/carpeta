@@ -4,7 +4,7 @@ import javax.ejb.Local;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
-import es.caib.carpeta.ejb.UsuariLocal;
+import es.caib.carpeta.ejb.UsuariService;
 import es.caib.carpeta.persistence.UsuariJPA;
 
 /**
@@ -13,9 +13,9 @@ import es.caib.carpeta.persistence.UsuariJPA;
  *
  */
 @Local
-public interface UsuariLogicaLocal extends UsuariLocal  {
+public interface UsuariLogicaService extends UsuariService  {
 	
-	public static final String JNDI_NAME = "java:app/carpeta-logic/UsuariLogicaEJB!es.caib.carpeta.logic.UsuariLogicaLocal";
+	public static final String JNDI_NAME = "java:app/carpeta-logic/UsuariLogicaEJB!es.caib.carpeta.logic.UsuariLogicaService";
 
 	
 	

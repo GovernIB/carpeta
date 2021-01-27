@@ -11,7 +11,7 @@ import es.caib.carpeta.persistence.AccesJPAManager;
 import es.caib.carpeta.utils.Constants;
 
 @Stateless
-public class AccesEJB extends AccesJPAManager implements AccesLocal {
+public class AccesEJB extends AccesJPAManager implements AccesService {
 
   @Override
 	@RolesAllowed({Constants.CAR_ADMIN,

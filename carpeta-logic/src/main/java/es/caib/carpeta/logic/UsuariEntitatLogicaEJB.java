@@ -22,7 +22,7 @@ import es.caib.carpeta.model.fields.UsuariEntitatFields;
  *
  */
 @Stateless
-public class UsuariEntitatLogicaEJB extends UsuariEntitatEJB implements UsuariEntitatLogicaLocal {
+public class UsuariEntitatLogicaEJB extends UsuariEntitatEJB implements UsuariEntitatLogicaService {
 
 	@Override
 	@PermitAll

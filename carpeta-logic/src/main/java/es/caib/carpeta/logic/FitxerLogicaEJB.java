@@ -14,7 +14,7 @@ import es.caib.carpeta.persistence.FitxerJPA;
  *
  */
 @Stateless(name = "FitxerLogicaEJB")
-public class FitxerLogicaEJB extends FitxerEJB implements FitxerLogicaLocal {
+public class FitxerLogicaEJB extends FitxerEJB implements FitxerLogicaService {
 
     @Override
     @PermitAll

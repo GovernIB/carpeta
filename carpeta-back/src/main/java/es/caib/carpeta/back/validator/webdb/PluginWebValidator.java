@@ -32,11 +32,11 @@ public class PluginWebValidator extends AbstractWebValidator<PluginForm, Plugin>
   protected PluginValidator<Plugin> validator = new PluginValidator<Plugin>();
 
   // EJB's
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.PluginLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.PluginLocal pluginEjb;
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.PluginService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.PluginService pluginEjb;
 
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.TraduccioLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.TraduccioLocal traduccioEjb;
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.TraduccioService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.TraduccioService traduccioEjb;
 
 
 

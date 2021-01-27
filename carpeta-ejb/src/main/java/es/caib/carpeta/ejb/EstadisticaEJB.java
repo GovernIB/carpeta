@@ -11,7 +11,7 @@ import es.caib.carpeta.persistence.EstadisticaJPAManager;
 import es.caib.carpeta.utils.Constants;
 
 @Stateless
-public class EstadisticaEJB extends EstadisticaJPAManager implements EstadisticaLocal {
+public class EstadisticaEJB extends EstadisticaJPAManager implements EstadisticaService {
 
   @Override
 	@RolesAllowed({Constants.CAR_ADMIN,

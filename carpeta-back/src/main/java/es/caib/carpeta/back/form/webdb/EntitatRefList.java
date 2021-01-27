@@ -11,8 +11,8 @@ import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.Select;
 import org.fundaciobit.genapp.common.query.Where;
 
-import es.caib.carpeta.ejb.EntitatLocal;
-import es.caib.carpeta.ejb.TraduccioLocal;
+import es.caib.carpeta.ejb.EntitatService;
+import es.caib.carpeta.ejb.TraduccioService;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import es.caib.carpeta.model.fields.EntitatFields;
 import org.fundaciobit.genapp.common.web.controller.RefListBase;
@@ -26,11 +26,11 @@ import org.fundaciobit.genapp.common.web.controller.RefListBase;
 public class EntitatRefList extends RefListBase
     implements EntitatFields {
 
-  @EJB(mappedName = EntitatLocal.JNDI_NAME)
-  private EntitatLocal entitatEjb;
+  @EJB(mappedName = EntitatService.JNDI_NAME)
+  private EntitatService entitatEjb;
 
-  @EJB(mappedName = TraduccioLocal.JNDI_NAME)
-  private TraduccioLocal traduccioEjb;
+  @EJB(mappedName = TraduccioService.JNDI_NAME)
+  private TraduccioService traduccioEjb;
   public EntitatRefList(EntitatRefList __clone) {
     super(__clone);
     this.entitatEjb = __clone.entitatEjb;

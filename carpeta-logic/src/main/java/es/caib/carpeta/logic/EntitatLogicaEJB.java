@@ -7,13 +7,13 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
 
-import es.caib.carpeta.ejb.AccesLocal;
-import es.caib.carpeta.ejb.AvisLocal;
+import es.caib.carpeta.ejb.AccesService;
+import es.caib.carpeta.ejb.AvisService;
 import es.caib.carpeta.ejb.EntitatEJB;
-import es.caib.carpeta.ejb.FitxerLocal;
-import es.caib.carpeta.ejb.PluginEntitatLocal;
-import es.caib.carpeta.ejb.PropietatGlobalLocal;
-import es.caib.carpeta.ejb.UsuariEntitatLocal;
+import es.caib.carpeta.ejb.FitxerService;
+import es.caib.carpeta.ejb.PluginEntitatService;
+import es.caib.carpeta.ejb.PropietatGlobalService;
+import es.caib.carpeta.ejb.UsuariEntitatService;
 import es.caib.carpeta.persistence.EntitatJPA;
 import es.caib.carpeta.model.entity.Enllaz;
 import es.caib.carpeta.model.entity.Entitat;
@@ -36,28 +36,28 @@ import java.util.Set;
  */
 
 @Stateless(name = "EntitatLogicaEJB")
-public class EntitatLogicaEJB extends EntitatEJB implements EntitatLogicaLocal, EntitatFields{
+public class EntitatLogicaEJB extends EntitatEJB implements EntitatLogicaService, EntitatFields{
 	
-	@EJB(mappedName = UsuariEntitatLocal.JNDI_NAME)
-	protected UsuariEntitatLocal usuariEntitatEjb;
+	@EJB(mappedName = UsuariEntitatService.JNDI_NAME)
+	protected UsuariEntitatService usuariEntitatEjb;
 
-	@EJB(mappedName = PluginEntitatLocal.JNDI_NAME)
-	protected PluginEntitatLocal pluginEntitatEjb;
+	@EJB(mappedName = PluginEntitatService.JNDI_NAME)
+	protected PluginEntitatService pluginEntitatEjb;
 	
-	@EJB(mappedName = EnllazLogicaLocal.JNDI_NAME)
-	protected EnllazLogicaLocal enllazLogicaEjb;
+	@EJB(mappedName = EnllazLogicaService.JNDI_NAME)
+	protected EnllazLogicaService enllazLogicaEjb;
 	
-	@EJB(mappedName = AvisLocal.JNDI_NAME)
-	protected AvisLocal avisEjb;
+	@EJB(mappedName = AvisService.JNDI_NAME)
+	protected AvisService avisEjb;
 	
-	@EJB(mappedName = PropietatGlobalLocal.JNDI_NAME)
-	protected PropietatGlobalLocal propietatGlobalEjb;
+	@EJB(mappedName = PropietatGlobalService.JNDI_NAME)
+	protected PropietatGlobalService propietatGlobalEjb;
 	
-	@EJB(mappedName = AccesLocal.JNDI_NAME)
-	protected AccesLocal accesEjb;
+	@EJB(mappedName = AccesService.JNDI_NAME)
+	protected AccesService accesEjb;
 	
-	@EJB(mappedName = FitxerLocal.JNDI_NAME)
-	protected FitxerLocal fitxersEjb;
+	@EJB(mappedName = FitxerService.JNDI_NAME)
+	protected FitxerService fitxersEjb;
 	
 	
 	@Override

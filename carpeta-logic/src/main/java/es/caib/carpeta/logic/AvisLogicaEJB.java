@@ -16,7 +16,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
  * 
  */
 @Stateless
-public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaLocal {
+public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaService {
 	
 	@Override
 	public List<AvisJPA> findAllActive () throws I18NException {

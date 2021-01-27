@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 import java.util.*;
 
-import es.caib.carpeta.ejb.LogCarpetaLocal;
+import es.caib.carpeta.ejb.LogCarpetaService;
 import es.caib.carpeta.persistence.LogCarpetaJPA;
 
 /**
@@ -17,9 +17,9 @@ import es.caib.carpeta.persistence.LogCarpetaJPA;
  * Date: 13/10/2020
  */
 @Local
-public interface LogCarpetaLogicaLocal extends LogCarpetaLocal {
+public interface LogCarpetaLogicaService extends LogCarpetaService {
 
-    public static final String JNDI_NAME = "java:app/carpeta-logic/LogCarpetaLogicaEJB!es.caib.carpeta.logic.LogCarpetaLogicaLocal";
+    public static final String JNDI_NAME = "java:app/carpeta-logic/LogCarpetaLogicaEJB!es.caib.carpeta.logic.LogCarpetaLogicaService";
 
     public List<LogCarpetaJPA> findByEntidadByTipus(@NotNull String entitatCodi, @NotNull Integer tipus)throws I18NException;
 

@@ -47,8 +47,8 @@ import es.caib.carpeta.model.fields.*;
 public class FitxerController
     extends es.caib.carpeta.back.controller.CarpetaBaseController<Fitxer, java.lang.Long> implements FitxerFields {
 
-  @EJB(mappedName = es.caib.carpeta.ejb.FitxerLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.FitxerLocal fitxerEjb;
+  @EJB(mappedName = es.caib.carpeta.ejb.FitxerService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.FitxerService fitxerEjb;
 
   @Autowired
   private FitxerWebValidator fitxerWebValidator;

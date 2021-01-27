@@ -1,10 +1,10 @@
 package es.caib.carpeta.front.controller;
 
-import es.caib.carpeta.ejb.PropietatGlobalLocal;
+import es.caib.carpeta.ejb.PropietatGlobalService;
 import es.caib.carpeta.front.utils.SesionHttp;
 import es.caib.carpeta.persistence.EntitatJPA;
-import es.caib.carpeta.logic.EntitatLogicaLocal;
-import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
+import es.caib.carpeta.logic.EntitatLogicaService;
+import es.caib.carpeta.logic.UtilitiesForFrontLogicaService;
 import es.caib.carpeta.logic.utils.EjbManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -30,11 +30,11 @@ public class InicioController extends CommonFrontController {
     @Autowired
     private SesionHttp sesionHttp;
 
-    @EJB(mappedName = UtilitiesForFrontLogicaLocal.JNDI_NAME)
-    UtilitiesForFrontLogicaLocal utilsEjb;
+    @EJB(mappedName = UtilitiesForFrontLogicaService.JNDI_NAME)
+    UtilitiesForFrontLogicaService utilsEjb;
 
-    @EJB(mappedName = EntitatLogicaLocal.JNDI_NAME)
-    EntitatLogicaLocal entitatEjb;
+    @EJB(mappedName = EntitatLogicaService.JNDI_NAME)
+    EntitatLogicaService entitatEjb;
 
     protected final Log log = LogFactory.getLog(getClass());
 
@@ -47,7 +47,7 @@ public class InicioController extends CommonFrontController {
 
             String lang = LocaleContextHolder.getLocale().getLanguage();
 
-            PropietatGlobalLocal propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
+            PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
             String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
             log.info("Default Entity Code => " + defaultEntityCode);
 
@@ -100,7 +100,7 @@ public class InicioController extends CommonFrontController {
 
             String lang = LocaleContextHolder.getLocale().getLanguage();
 
-            PropietatGlobalLocal propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
+            PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
             String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
             String canviardefront = EjbManager.getCanviarDeFront(propietatGlobalEjb);
 

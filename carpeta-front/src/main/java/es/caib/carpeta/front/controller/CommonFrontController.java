@@ -1,8 +1,8 @@
 package es.caib.carpeta.front.controller;
 
-import es.caib.carpeta.ejb.IdiomaLocal;
-import es.caib.carpeta.logic.EntitatLogicaLocal;
-import es.caib.carpeta.logic.UtilitiesForFrontLogicaLocal;
+import es.caib.carpeta.ejb.IdiomaService;
+import es.caib.carpeta.logic.EntitatLogicaService;
+import es.caib.carpeta.logic.UtilitiesForFrontLogicaService;
 import es.caib.carpeta.model.entity.Fitxer;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
@@ -26,14 +26,14 @@ public abstract class CommonFrontController {
 
     protected final Log log = LogFactory.getLog(getClass());
 
-    @EJB(mappedName = UtilitiesForFrontLogicaLocal.JNDI_NAME)
-    protected UtilitiesForFrontLogicaLocal utilsEjb;
+    @EJB(mappedName = UtilitiesForFrontLogicaService.JNDI_NAME)
+    protected UtilitiesForFrontLogicaService utilsEjb;
 
-    @EJB(mappedName = EntitatLogicaLocal.JNDI_NAME)
-    EntitatLogicaLocal entitatEjb;
+    @EJB(mappedName = EntitatLogicaService.JNDI_NAME)
+    EntitatLogicaService entitatEjb;
 
-    @EJB(mappedName = IdiomaLocal.JNDI_NAME)
-    IdiomaLocal idiomaEjb;
+    @EJB(mappedName = IdiomaService.JNDI_NAME)
+    IdiomaService idiomaEjb;
     
     
    

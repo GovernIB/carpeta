@@ -26,9 +26,9 @@ import es.caib.carpeta.commons.utils.Constants;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_AFEGIR_PLUGIN;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ELIMINAT_PLUGIN;
 import es.caib.carpeta.persistence.PluginJPA;
-import es.caib.carpeta.logic.AuditoriaLogicaLocal;
-import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
-import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaLocal;
+import es.caib.carpeta.logic.AuditoriaLogicaService;
+import es.caib.carpeta.logic.LogCarpetaLogicaService;
+import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaService;
 import es.caib.carpeta.model.entity.Plugin;
 import java.net.URL;
 
@@ -47,15 +47,15 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
     
     public static  final String CONTEXTWEB = "/superadmin/pluginfront";
 
-    @EJB(mappedName = PluginDeCarpetaFrontLogicaLocal.JNDI_NAME)
-    protected PluginDeCarpetaFrontLogicaLocal pluginCarpetaFrontEjb;
+    @EJB(mappedName = PluginDeCarpetaFrontLogicaService.JNDI_NAME)
+    protected PluginDeCarpetaFrontLogicaService pluginCarpetaFrontEjb;
 
 
-    @EJB(mappedName = LogCarpetaLogicaLocal.JNDI_NAME)
-    protected LogCarpetaLogicaLocal logCarpetaLogicaEjb;
+    @EJB(mappedName = LogCarpetaLogicaService.JNDI_NAME)
+    protected LogCarpetaLogicaService logCarpetaLogicaEjb;
 
-    @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
-    protected AuditoriaLogicaLocal auditoriaLogicaEjb;
+    @EJB(mappedName = AuditoriaLogicaService.JNDI_NAME)
+    protected AuditoriaLogicaService auditoriaLogicaEjb;
 
     @Override
     public int getTipus() {

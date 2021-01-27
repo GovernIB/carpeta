@@ -11,8 +11,8 @@ import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.Select;
 import org.fundaciobit.genapp.common.query.Where;
 
-import es.caib.carpeta.ejb.EnllazLocal;
-import es.caib.carpeta.ejb.TraduccioLocal;
+import es.caib.carpeta.ejb.EnllazService;
+import es.caib.carpeta.ejb.TraduccioService;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import es.caib.carpeta.model.fields.EnllazFields;
 import org.fundaciobit.genapp.common.web.controller.RefListBase;
@@ -26,11 +26,11 @@ import org.fundaciobit.genapp.common.web.controller.RefListBase;
 public class EnllazRefList extends RefListBase
     implements EnllazFields {
 
-  @EJB(mappedName = EnllazLocal.JNDI_NAME)
-  private EnllazLocal enllazEjb;
+  @EJB(mappedName = EnllazService.JNDI_NAME)
+  private EnllazService enllazEjb;
 
-  @EJB(mappedName = TraduccioLocal.JNDI_NAME)
-  private TraduccioLocal traduccioEjb;
+  @EJB(mappedName = TraduccioService.JNDI_NAME)
+  private TraduccioService traduccioEjb;
   public EnllazRefList(EnllazRefList __clone) {
     super(__clone);
     this.enllazEjb = __clone.enllazEjb;

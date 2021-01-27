@@ -11,7 +11,7 @@ import es.caib.carpeta.persistence.TraduccioJPAManager;
 import es.caib.carpeta.utils.Constants;
 
 @Stateless
-public class TraduccioEJB extends TraduccioJPAManager implements TraduccioLocal {
+public class TraduccioEJB extends TraduccioJPAManager implements TraduccioService {
 
   @Override
 	@RolesAllowed({Constants.CAR_ADMIN,

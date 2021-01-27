@@ -13,7 +13,7 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class PluginDeCarpetaFrontLogicaEJB extends AbstractPluginLogicaEJB<ICarpetaFrontPlugin>
-        implements PluginDeCarpetaFrontLogicaLocal {
+        implements PluginDeCarpetaFrontLogicaService {
 
     @Override
     public int getTipusDePlugin() {

@@ -32,8 +32,8 @@ public class AuditoriaWebValidator extends AbstractWebValidator<AuditoriaForm, A
   protected AuditoriaValidator<Auditoria> validator = new AuditoriaValidator<Auditoria>();
 
   // EJB's
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.AuditoriaLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.AuditoriaLocal auditoriaEjb;
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.AuditoriaService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.AuditoriaService auditoriaEjb;
 
 
 

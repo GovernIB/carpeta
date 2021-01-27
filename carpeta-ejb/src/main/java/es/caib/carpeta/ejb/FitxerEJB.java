@@ -11,7 +11,7 @@ import es.caib.carpeta.persistence.FitxerJPAManager;
 import es.caib.carpeta.utils.Constants;
 
 @Stateless
-public class FitxerEJB extends FitxerJPAManager implements FitxerLocal {
+public class FitxerEJB extends FitxerJPAManager implements FitxerService {
 
   @Override
 	@RolesAllowed({Constants.CAR_ADMIN,

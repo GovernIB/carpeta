@@ -24,7 +24,7 @@ import es.caib.carpeta.back.form.webdb.PluginRefList;
 import es.caib.carpeta.back.controller.webdb.AuditoriaController;
 import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.logic.UsuariLogicaLocal;
+import es.caib.carpeta.logic.UsuariLogicaService;
 import es.caib.carpeta.model.entity.Auditoria;
 import es.caib.carpeta.model.fields.AuditoriaFields;
 import es.caib.carpeta.model.fields.EntitatFields;
@@ -42,8 +42,8 @@ import java.util.Map;
 @SessionAttributes(types = { AuditoriaForm.class, AuditoriaFilterForm.class })
 public class AuditoriaSuperAdminController extends AuditoriaController {
 
-    @EJB(mappedName = UsuariLogicaLocal.JNDI_NAME)
-    protected UsuariLogicaLocal usuariPersonaLogicaEjb;
+    @EJB(mappedName = UsuariLogicaService.JNDI_NAME)
+    protected UsuariLogicaService usuariPersonaLogicaEjb;
 
     // References
     @Autowired

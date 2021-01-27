@@ -16,9 +16,9 @@ import java.util.List;
  * Date: 11/01/2021
  */
 @Local
-public interface AuthenticationLogicaLocal {
+public interface AuthenticationLogicaService {
 
-    public static final String JNDI_NAME = "java:app/carpeta-logic/AuthenticationLogicaEJB!es.caib.carpeta.logic.AuthenticationLogicaLocal";
+    public static final String JNDI_NAME = "java:app/carpeta-logic/AuthenticationLogicaEJB!es.caib.carpeta.logic.AuthenticationLogicaService";
 
     public void crearLog(String descripcio, Long temps, StringBuilder peticio, Throwable th, String error,String entitatCodi);
 

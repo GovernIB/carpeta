@@ -11,7 +11,7 @@ import es.caib.carpeta.persistence.IdiomaJPAManager;
 import es.caib.carpeta.utils.Constants;
 
 @Stateless
-public class IdiomaEJB extends IdiomaJPAManager implements IdiomaLocal {
+public class IdiomaEJB extends IdiomaJPAManager implements IdiomaService {
 
   @Override
 	@RolesAllowed({Constants.CAR_ADMIN,

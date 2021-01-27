@@ -11,7 +11,7 @@ import es.caib.carpeta.persistence.EnllazJPAManager;
 import es.caib.carpeta.utils.Constants;
 
 @Stateless
-public class EnllazEJB extends EnllazJPAManager implements EnllazLocal {
+public class EnllazEJB extends EnllazJPAManager implements EnllazService {
 
   @Override
 	@RolesAllowed({Constants.CAR_ADMIN,

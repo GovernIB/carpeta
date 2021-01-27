@@ -49,8 +49,8 @@ import es.caib.carpeta.model.fields.*;
 public class AccesController
     extends es.caib.carpeta.back.controller.CarpetaBaseController<Acces, java.lang.Long> implements AccesFields {
 
-  @EJB(mappedName = es.caib.carpeta.ejb.AccesLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.AccesLocal accesEjb;
+  @EJB(mappedName = es.caib.carpeta.ejb.AccesService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.AccesService accesEjb;
 
   @Autowired
   private AccesWebValidator accesWebValidator;

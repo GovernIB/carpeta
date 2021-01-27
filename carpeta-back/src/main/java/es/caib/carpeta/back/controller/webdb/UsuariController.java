@@ -49,8 +49,8 @@ import es.caib.carpeta.model.fields.*;
 public class UsuariController
     extends es.caib.carpeta.back.controller.CarpetaBaseController<Usuari, java.lang.Long> implements UsuariFields {
 
-  @EJB(mappedName = es.caib.carpeta.ejb.UsuariLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.UsuariLocal usuariEjb;
+  @EJB(mappedName = es.caib.carpeta.ejb.UsuariService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.UsuariService usuariEjb;
 
   @Autowired
   private UsuariWebValidator usuariWebValidator;

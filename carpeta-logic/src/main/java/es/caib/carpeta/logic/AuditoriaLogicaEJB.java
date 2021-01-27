@@ -18,7 +18,7 @@ import es.caib.carpeta.persistence.AuditoriaJPA;
  * Date: 10/11/2020
  */
 @Stateless
-public class AuditoriaLogicaEJB extends AuditoriaEJB implements AuditoriaLogicaLocal {
+public class AuditoriaLogicaEJB extends AuditoriaEJB implements AuditoriaLogicaService {
 
 
     @Override

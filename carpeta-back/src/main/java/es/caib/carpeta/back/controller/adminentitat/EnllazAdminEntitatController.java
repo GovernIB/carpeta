@@ -20,7 +20,7 @@ import es.caib.carpeta.back.form.webdb.EnllazForm;
 import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.persistence.EnllazJPA;
-import es.caib.carpeta.logic.EnllazLogicaLocal;
+import es.caib.carpeta.logic.EnllazLogicaService;
 import es.caib.carpeta.model.entity.Enllaz;
 import es.caib.carpeta.model.fields.EnllazFields;
 
@@ -34,8 +34,8 @@ import es.caib.carpeta.model.fields.EnllazFields;
 @SessionAttributes(types = { EnllazForm.class, EnllazFilterForm.class })
 public class EnllazAdminEntitatController extends EnllazController {
 	
-	@EJB(mappedName = EnllazLogicaLocal.JNDI_NAME)
-	protected EnllazLogicaLocal enllazLogicaEjb;
+	@EJB(mappedName = EnllazLogicaService.JNDI_NAME)
+	protected EnllazLogicaService enllazLogicaEjb;
 
     @Override
     public String getTileForm() {

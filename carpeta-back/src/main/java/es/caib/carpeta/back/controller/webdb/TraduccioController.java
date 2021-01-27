@@ -47,8 +47,8 @@ import es.caib.carpeta.model.fields.*;
 public class TraduccioController
     extends es.caib.carpeta.back.controller.CarpetaBaseController<Traduccio, java.lang.Long> implements TraduccioFields {
 
-  @EJB(mappedName = es.caib.carpeta.ejb.TraduccioLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.TraduccioLocal traduccioEjb;
+  @EJB(mappedName = es.caib.carpeta.ejb.TraduccioService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.TraduccioService traduccioEjb;
 
   @Autowired
   private TraduccioWebValidator traduccioWebValidator;

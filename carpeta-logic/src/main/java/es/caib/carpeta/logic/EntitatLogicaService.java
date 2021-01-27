@@ -4,7 +4,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import javax.ejb.Local;
 
-import es.caib.carpeta.ejb.EntitatLocal;
+import es.caib.carpeta.ejb.EntitatService;
 import es.caib.carpeta.persistence.EntitatJPA;
 import es.caib.carpeta.model.entity.Entitat;
 
@@ -15,9 +15,9 @@ import es.caib.carpeta.model.entity.Entitat;
  *
  */
 @Local
-public interface EntitatLogicaLocal extends EntitatLocal {
+public interface EntitatLogicaService extends EntitatService {
 	
-    public static final String JNDI_NAME = "java:app/carpeta-logic/EntitatLogicaEJB!es.caib.carpeta.logic.EntitatLogicaLocal";
+    public static final String JNDI_NAME = "java:app/carpeta-logic/EntitatLogicaEJB!es.caib.carpeta.logic.EntitatLogicaService";
     
     public void deleteFull(Entitat entitat, boolean deleteFiles) throws I18NException;
 

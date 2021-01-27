@@ -25,7 +25,7 @@ import es.caib.carpeta.back.form.webdb.UsuariForm;
 import es.caib.carpeta.back.utils.PluginUserInformationUtils;
 import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.persistence.UsuariJPA;
-import es.caib.carpeta.logic.UsuariLogicaLocal;
+import es.caib.carpeta.logic.UsuariLogicaService;
 
 /**
  * 
@@ -39,8 +39,8 @@ public class UsuariSuperAdminController extends UsuariController {
 
     public static final String SESSION_LOAD_USERINFO = "SESSION_LOAD_USERINFO";
 
-    @EJB(mappedName = UsuariLogicaLocal.JNDI_NAME)
-    protected UsuariLogicaLocal usuariPersonaLogicaEjb;
+    @EJB(mappedName = UsuariLogicaService.JNDI_NAME)
+    protected UsuariLogicaService usuariPersonaLogicaEjb;
 
     @Override
     public String getTileForm() {

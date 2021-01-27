@@ -37,8 +37,8 @@ public class AvisAdminEntitatController extends AvisSuperAdminController {
         return false;
     }
     
-    @EJB(mappedName = es.caib.carpeta.ejb.PluginEntitatLocal.JNDI_NAME)
-    protected es.caib.carpeta.ejb.PluginEntitatLocal pluginEntitatEjb;
+    @EJB(mappedName = es.caib.carpeta.ejb.PluginEntitatService.JNDI_NAME)
+    protected es.caib.carpeta.ejb.PluginEntitatService pluginEntitatEjb;
     
     
     @Override

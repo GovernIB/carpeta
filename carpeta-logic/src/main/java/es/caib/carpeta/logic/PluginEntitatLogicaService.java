@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
-import es.caib.carpeta.ejb.PluginEntitatLocal;
+import es.caib.carpeta.ejb.PluginEntitatService;
 import es.caib.carpeta.persistence.PluginEntitatJPA;
 
 /**
@@ -16,9 +16,9 @@ import es.caib.carpeta.persistence.PluginEntitatJPA;
  *
  */
 @Local
-public interface PluginEntitatLogicaLocal extends PluginEntitatLocal  {
+public interface PluginEntitatLogicaService extends PluginEntitatService  {
 	
-	public static final String JNDI_NAME = "java:app/carpeta-logic/PluginEntitatLogicaEJB!es.caib.carpeta.logic.PluginEntitatLogicaLocal";
+	public static final String JNDI_NAME = "java:app/carpeta-logic/PluginEntitatLogicaEJB!es.caib.carpeta.logic.PluginEntitatLogicaService";
 
 	public List<PluginEntitatJPA> findAllByEntitatId(@NotNull long codiEntitat) throws I18NException;
 

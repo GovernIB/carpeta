@@ -24,22 +24,22 @@ import java.util.List;
  * Date: 11/01/2021
  */
 @Stateless
-public class AuthenticationLogicaEJB implements AuthenticationLogicaLocal{
+public class AuthenticationLogicaEJB implements AuthenticationLogicaService{
 
-    @EJB(mappedName = UsuariEntitatLogicaLocal.JNDI_NAME)
-    protected UsuariEntitatLogicaLocal usuariEntitatLogicaEjb;
+    @EJB(mappedName = UsuariEntitatLogicaService.JNDI_NAME)
+    protected UsuariEntitatLogicaService usuariEntitatLogicaEjb;
 
-    @EJB(mappedName = UsuariLogicaLocal.JNDI_NAME)
-    protected UsuariLogicaLocal usuariLogicaEjb;
+    @EJB(mappedName = UsuariLogicaService.JNDI_NAME)
+    protected UsuariLogicaService usuariLogicaEjb;
 
-    @EJB(mappedName = EntitatLogicaLocal.JNDI_NAME)
-    protected EntitatLogicaLocal entitatLogicaEjb;
+    @EJB(mappedName = EntitatLogicaService.JNDI_NAME)
+    protected EntitatLogicaService entitatLogicaEjb;
 
-    @EJB(mappedName = AuditoriaLogicaLocal.JNDI_NAME)
-    protected AuditoriaLogicaLocal auditoriaLogicaEjb;
+    @EJB(mappedName = AuditoriaLogicaService.JNDI_NAME)
+    protected AuditoriaLogicaService auditoriaLogicaEjb;
 
-    @EJB(mappedName = LogCarpetaLogicaLocal.JNDI_NAME)
-    protected LogCarpetaLogicaLocal logCarpetaLogicaEjb;
+    @EJB(mappedName = LogCarpetaLogicaService.JNDI_NAME)
+    protected LogCarpetaLogicaService logCarpetaLogicaEjb;
 
 
 

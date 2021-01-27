@@ -18,12 +18,12 @@ import java.util.Map;
  * @author anadal
  *
  */
-public class PluginLogicaEJB extends PluginEJB implements PluginLogicaLocal {
+public class PluginLogicaEJB extends PluginEJB implements PluginLogicaService {
 
   private static final Map<Long, IPlugin> pluginsCache = new HashMap<Long, IPlugin>();
 
-  @EJB(mappedName = es.caib.carpeta.ejb.TraduccioLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.TraduccioLocal traduccioEjb;
+  @EJB(mappedName = es.caib.carpeta.ejb.TraduccioService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.TraduccioService traduccioEjb;
   
   @Override
   public Plugin update(Plugin instance) throws I18NException {

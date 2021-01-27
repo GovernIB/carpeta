@@ -2,7 +2,7 @@ package es.caib.carpeta.logic;
 
 import javax.ejb.Local;
 
-import es.caib.carpeta.ejb.FitxerLocal;
+import es.caib.carpeta.ejb.FitxerService;
 import es.caib.carpeta.persistence.FitxerJPA;
 
 /**
@@ -11,9 +11,9 @@ import es.caib.carpeta.persistence.FitxerJPA;
  *
  */
 @Local
-public interface FitxerLogicaLocal extends FitxerLocal {
+public interface FitxerLogicaService extends FitxerService {
 
-    public static final String JNDI_NAME = "java:app/carpeta-logic/FitxerLogicaEJB!es.caib.carpeta.logic.FitxerLogicaLocal";
+    public static final String JNDI_NAME = "java:app/carpeta-logic/FitxerLogicaEJB!es.caib.carpeta.logic.FitxerLogicaService";
 
     @Override
     public FitxerJPA findByPrimaryKey(Long _ID_);

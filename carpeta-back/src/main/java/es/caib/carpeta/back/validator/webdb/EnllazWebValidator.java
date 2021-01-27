@@ -33,14 +33,14 @@ public class EnllazWebValidator extends AbstractWebValidator<EnllazForm, Enllaz>
   protected EnllazValidator<Enllaz> validator = new EnllazValidator<Enllaz>();
 
   // EJB's
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EnllazLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.EnllazLocal enllazEjb;
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EnllazService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.EnllazService enllazEjb;
 
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EntitatLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.EntitatLocal entitatEjb;
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EntitatService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.EntitatService entitatEjb;
 
-  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.TraduccioLocal.JNDI_NAME)
-  protected es.caib.carpeta.ejb.TraduccioLocal traduccioEjb;
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.TraduccioService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.TraduccioService traduccioEjb;
 
 
 

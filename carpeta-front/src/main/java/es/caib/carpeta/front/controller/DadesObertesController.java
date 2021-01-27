@@ -12,12 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.ejb.PropietatGlobalLocal;
+import es.caib.carpeta.ejb.PropietatGlobalService;
 import es.caib.carpeta.persistence.AccesJPA;
 import es.caib.carpeta.persistence.PluginJPA;
-import es.caib.carpeta.logic.AccesLogicaLocal;
-import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaLocal;
-import es.caib.carpeta.logic.PluginEntitatLogicaLocal;
+import es.caib.carpeta.logic.AccesLogicaService;
+import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaService;
+import es.caib.carpeta.logic.PluginEntitatLogicaService;
 import es.caib.carpeta.logic.utils.EjbManager;
 import es.caib.carpeta.model.entity.Plugin;
 import es.caib.carpeta.model.fields.PluginFields;
@@ -41,14 +41,14 @@ public class DadesObertesController extends CommonFrontController {
 	
 	public static final String DADES_OBERTES_PATH = "/dadesobertes";
 	
-	@EJB(mappedName = AccesLogicaLocal.JNDI_NAME)
-	AccesLogicaLocal accesEjb;
+	@EJB(mappedName = AccesLogicaService.JNDI_NAME)
+	AccesLogicaService accesEjb;
 	
-	@EJB(mappedName = PluginDeCarpetaFrontLogicaLocal.JNDI_NAME)
-    protected PluginDeCarpetaFrontLogicaLocal pluginCarpetaFrontEjb;
+	@EJB(mappedName = PluginDeCarpetaFrontLogicaService.JNDI_NAME)
+    protected PluginDeCarpetaFrontLogicaService pluginCarpetaFrontEjb;
 	
-	@EJB(mappedName = PluginEntitatLogicaLocal.JNDI_NAME)
-    protected PluginEntitatLogicaLocal pluginEntitatLogicaEjb;
+	@EJB(mappedName = PluginEntitatLogicaService.JNDI_NAME)
+    protected PluginEntitatLogicaService pluginEntitatLogicaEjb;
 	
 	public static class AccesInfo {
 		
@@ -165,7 +165,7 @@ public class DadesObertesController extends CommonFrontController {
 			
 			// si no hi ha entitatId, es retorna la propietatGlobal defaultEntity 
 			if (entitatRequest == null) {
-				PropietatGlobalLocal propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
+				PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
 	            entitatRequest = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
 			}
 			
