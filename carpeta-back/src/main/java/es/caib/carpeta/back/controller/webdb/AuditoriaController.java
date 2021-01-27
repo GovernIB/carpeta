@@ -33,7 +33,7 @@ import es.caib.carpeta.back.form.webdb.AuditoriaForm;
 
 import es.caib.carpeta.back.validator.webdb.AuditoriaWebValidator;
 
-import es.caib.carpeta.jpa.AuditoriaJPA;
+import es.caib.carpeta.persistence.AuditoriaJPA;
 import es.caib.carpeta.model.entity.Auditoria;
 import es.caib.carpeta.model.fields.*;
 

@@ -31,7 +31,7 @@ import es.caib.carpeta.back.form.webdb.TraduccioForm;
 
 import es.caib.carpeta.back.validator.webdb.TraduccioWebValidator;
 
-import es.caib.carpeta.jpa.TraduccioJPA;
+import es.caib.carpeta.persistence.TraduccioJPA;
 import es.caib.carpeta.model.entity.Traduccio;
 import es.caib.carpeta.model.fields.*;
 

@@ -19,7 +19,7 @@ import es.caib.carpeta.back.controller.webdb.UsuariController;
 import es.caib.carpeta.back.form.webdb.UsuariFilterForm;
 import es.caib.carpeta.back.form.webdb.UsuariForm;
 import es.caib.carpeta.back.security.LoginInfo;
-import es.caib.carpeta.jpa.UsuariJPA;
+import es.caib.carpeta.persistence.UsuariJPA;
 import es.caib.carpeta.model.entity.UsuariEntitat;
 import es.caib.carpeta.model.fields.EntitatFields;
 import es.caib.carpeta.model.fields.UsuariEntitatFields;

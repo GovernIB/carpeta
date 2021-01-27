@@ -1,7 +1,7 @@
 package es.caib.carpeta.logic;
 
-import es.caib.carpeta.jpa.AvisJPA;
-import es.caib.carpeta.jpa.EntitatJPA;
+import es.caib.carpeta.persistence.AvisJPA;
+import es.caib.carpeta.persistence.EntitatJPA;
 import es.caib.carpeta.logic.utils.PluginInfo;
 import es.caib.carpeta.model.entity.Enllaz;
 import es.caib.carpeta.model.entity.Fitxer;

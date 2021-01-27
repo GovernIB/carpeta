@@ -8,7 +8,7 @@ import javax.annotation.security.PermitAll;
 import javax.ejb.EJB;
 
 import es.caib.carpeta.ejb.PluginEJB;
-import es.caib.carpeta.jpa.PluginJPA;
+import es.caib.carpeta.persistence.PluginJPA;
 import es.caib.carpeta.model.entity.Plugin;
 import java.util.HashMap;
 import java.util.Map;

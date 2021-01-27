@@ -10,7 +10,7 @@ import javax.ejb.Stateless;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import es.caib.carpeta.ejb.UsuariEJB;
-import es.caib.carpeta.jpa.UsuariJPA;
+import es.caib.carpeta.persistence.UsuariJPA;
 import es.caib.carpeta.model.entity.Usuari;
 import es.caib.carpeta.model.fields.UsuariFields;
 

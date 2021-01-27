@@ -3,8 +3,8 @@ package es.caib.carpeta.ejb;
 
 import javax.ejb.Local;
 
-import es.caib.carpeta.jpa.IdiomaJPA;
-import es.caib.carpeta.jpa.IdiomaIJPAManager;
+import es.caib.carpeta.persistence.IdiomaJPA;
+import es.caib.carpeta.persistence.IdiomaIJPAManager;
 import es.caib.carpeta.model.dao.IIdiomaManager;
 
 @Local

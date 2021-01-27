@@ -4,7 +4,7 @@ import java.util.List;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import es.caib.carpeta.back.form.CarpetaBaseForm;
-import es.caib.carpeta.jpa.EnllazJPA;
+import es.caib.carpeta.persistence.EnllazJPA;
 
 /**
  *  ========= FITXER AUTOGENERAT - NO MODIFICAR !!!!! 

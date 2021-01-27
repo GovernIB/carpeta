@@ -1,22 +1,21 @@
 
 package es.caib.carpeta.back.form.webdb;
 
+import java.util.List;
+import javax.ejb.EJB;
+import org.springframework.stereotype.Component;
+
 import org.fundaciobit.genapp.common.StringKeyValue;
-import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.Select;
 import org.fundaciobit.genapp.common.query.Where;
-import org.fundaciobit.genapp.common.web.controller.RefListBase;
-
-import org.springframework.stereotype.Component;
-
-import javax.ejb.EJB;
 
 import es.caib.carpeta.ejb.EntitatLocal;
 import es.caib.carpeta.ejb.TraduccioLocal;
+import org.fundaciobit.genapp.common.i18n.I18NException;
 import es.caib.carpeta.model.fields.EntitatFields;
-import java.util.List;
+import org.fundaciobit.genapp.common.web.controller.RefListBase;
 
 /**
  *  ========= FITXER AUTOGENERAT - NO MODIFICAR !!!!! 
@@ -56,9 +55,9 @@ public class EntitatRefList extends RefListBase
     List<StringKeyValue> _list = new java.util.ArrayList<StringKeyValue>(traduccions.size());
     final String _lang = org.fundaciobit.genapp.common.web.i18n.I18NUtils.getLocale().getLanguage();
     for (es.caib.carpeta.model.entity.Traduccio traduccio : traduccions) {
-      es.caib.carpeta.jpa.TraduccioJPA traduccioJPA = (es.caib.carpeta.jpa.TraduccioJPA) traduccio;
+      es.caib.carpeta.persistence.TraduccioJPA traduccioJPA = (es.caib.carpeta.persistence.TraduccioJPA) traduccio;
       String key = keysMap.get(String.valueOf(traduccioJPA.getTraduccioID()));
-      es.caib.carpeta.jpa.TraduccioMapJPA _tm = traduccioJPA.getTraduccio(_lang);
+      es.caib.carpeta.persistence.TraduccioMapJPA _tm = traduccioJPA.getTraduccio(_lang);
       String value;
       if (_tm == null) {
           value = "NO_TRADUCCIO_PER_CODI_" + traduccio.getTraduccioID() + "_[" + _lang + "]";

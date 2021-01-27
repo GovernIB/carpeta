@@ -1,22 +1,22 @@
 package es.caib.carpeta.back.validator.webdb;
 
-import org.fundaciobit.genapp.common.i18n.I18NFieldError;
-import org.fundaciobit.genapp.common.query.Field;
-import org.fundaciobit.genapp.common.validation.BeanValidatorResult;
-import org.fundaciobit.genapp.common.web.validation.AbstractWebValidator;
-import org.fundaciobit.genapp.common.web.validation.WebValidationResult;
-
 import org.apache.log4j.Logger;
+
+import org.fundaciobit.genapp.common.validation.BeanValidatorResult;
+import org.fundaciobit.genapp.common.i18n.I18NFieldError;
+import java.util.List;
+import org.fundaciobit.genapp.common.query.Field;
+import org.fundaciobit.genapp.common.web.validation.WebValidationResult;
+import es.caib.carpeta.model.fields.*;
+
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+import es.caib.carpeta.persistence.validator.FitxerValidator;
 
 import es.caib.carpeta.back.form.webdb.FitxerForm;
-
-import es.caib.carpeta.jpa.validator.FitxerValidator;
+import org.fundaciobit.genapp.common.web.validation.AbstractWebValidator;
 import es.caib.carpeta.model.entity.Fitxer;
-import es.caib.carpeta.model.fields.FitxerFields;
-import java.util.List;
 
 
 /**

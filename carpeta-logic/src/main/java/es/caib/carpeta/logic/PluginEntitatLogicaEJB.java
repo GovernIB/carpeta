@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import es.caib.carpeta.ejb.PluginEntitatEJB;
-import es.caib.carpeta.jpa.PluginEntitatJPA;
+import es.caib.carpeta.persistence.PluginEntitatJPA;
 import es.caib.carpeta.model.entity.PluginEntitat;
 import es.caib.carpeta.model.fields.PluginEntitatFields;
 

@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 
 import es.caib.carpeta.commons.utils.UsuarioClave;
 import es.caib.carpeta.ejb.AccesEJB;
-import es.caib.carpeta.jpa.AccesJPA;
+import es.caib.carpeta.persistence.AccesJPA;
 
 import java.sql.Timestamp;
 import java.util.Date;

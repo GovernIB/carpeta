@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import es.caib.carpeta.back.controller.webdb.PluginController;
 import es.caib.carpeta.back.form.webdb.PluginFilterForm;
 import es.caib.carpeta.back.form.webdb.PluginForm;
-import es.caib.carpeta.jpa.PluginJPA;
+import es.caib.carpeta.persistence.PluginJPA;
 import es.caib.carpeta.model.fields.PluginFields;
 
 /**

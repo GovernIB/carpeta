@@ -23,7 +23,7 @@ import es.caib.carpeta.back.form.webdb.PluginRefList;
 import es.caib.carpeta.back.controller.webdb.LogCarpetaController;
 import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.jpa.LogCarpetaJPA;
+import es.caib.carpeta.persistence.LogCarpetaJPA;
 import es.caib.carpeta.model.entity.LogCarpeta;
 import es.caib.carpeta.model.fields.LogCarpetaFields;
 import es.caib.carpeta.model.fields.PluginFields;

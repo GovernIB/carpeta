@@ -33,7 +33,7 @@ import es.caib.carpeta.back.form.webdb.EstadisticaForm;
 
 import es.caib.carpeta.back.validator.webdb.EstadisticaWebValidator;
 
-import es.caib.carpeta.jpa.EstadisticaJPA;
+import es.caib.carpeta.persistence.EstadisticaJPA;
 import es.caib.carpeta.model.entity.Estadistica;
 import es.caib.carpeta.model.fields.*;
 

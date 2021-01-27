@@ -16,7 +16,7 @@ import es.caib.carpeta.back.controller.superadmin.PropietatGlobalSuperAdminContr
 import es.caib.carpeta.back.security.LoginInfo;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_AFEGIR_PROPENT;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ELIMINAT_PROPENT;
-import es.caib.carpeta.jpa.PropietatGlobalJPA;
+import es.caib.carpeta.persistence.PropietatGlobalJPA;
 import es.caib.carpeta.model.entity.PropietatGlobal;
 
 /**

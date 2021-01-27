@@ -12,7 +12,7 @@ import es.caib.carpeta.model.fields.*;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import es.caib.carpeta.jpa.validator.EntitatValidator;
+import es.caib.carpeta.persistence.validator.EntitatValidator;
 
 import es.caib.carpeta.back.form.webdb.EntitatForm;
 import org.fundaciobit.genapp.common.web.validation.AbstractWebValidator;
@@ -86,17 +86,17 @@ _ignoreFields.add(LOGINTEXTID);
     WebValidationResult<EntitatForm> wvr, boolean isNou) {
 
   {
-      es.caib.carpeta.jpa.EntitatJPA __jpa;
-      __jpa = (es.caib.carpeta.jpa.EntitatJPA)__bean;
+      es.caib.carpeta.persistence.EntitatJPA __jpa;
+      __jpa = (es.caib.carpeta.persistence.EntitatJPA)__bean;
     {
       // IF CAMP ES NOT NULL verificar que totes les traduccions son not null
-      es.caib.carpeta.jpa.TraduccioJPA tradJPA = __jpa.getNom();
+      es.caib.carpeta.persistence.TraduccioJPA tradJPA = __jpa.getNom();
       if (tradJPA != null) {
         // TODO ERROR
-        java.util.Map<String,es.caib.carpeta.jpa.TraduccioMapJPA> _trad = tradJPA.getTraduccions();
+        java.util.Map<String,es.caib.carpeta.persistence.TraduccioMapJPA> _trad = tradJPA.getTraduccions();
         int countNotNull = 0;
         for (String _idioma : _trad.keySet()) {
-          es.caib.carpeta.jpa.TraduccioMapJPA _map = _trad.get(_idioma);
+          es.caib.carpeta.persistence.TraduccioMapJPA _map = _trad.get(_idioma);
           if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
           } else {
             countNotNull++;
@@ -107,7 +107,7 @@ _ignoreFields.add(LOGINTEXTID);
             // OK Tot esta ple
           } else {
             for (String _idioma : _trad.keySet()) {
-              es.caib.carpeta.jpa.TraduccioMapJPA _map = _trad.get(_idioma);
+              es.caib.carpeta.persistence.TraduccioMapJPA _map = _trad.get(_idioma);
               if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
                 errors.rejectValue("entitat.nom", "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(NOMID.fullName)}, null);
                 errors.rejectValue("entitat.nom.traduccions["+ _idioma +"].valor",
@@ -121,14 +121,14 @@ _ignoreFields.add(LOGINTEXTID);
     }
     {
       // IF CAMP ES NOT NULL verificar que totes les traduccions son not null
-      es.caib.carpeta.jpa.TraduccioJPA tradJPA = __jpa.getLoginText();
+      es.caib.carpeta.persistence.TraduccioJPA tradJPA = __jpa.getLoginText();
       if (tradJPA != null) {
         // TODO ERROR
-        java.util.Map<String,es.caib.carpeta.jpa.TraduccioMapJPA> _trad = tradJPA.getTraduccions();
+        java.util.Map<String,es.caib.carpeta.persistence.TraduccioMapJPA> _trad = tradJPA.getTraduccions();
         int countNull= 0;
         int countNotNull = 0;
         for (String _idioma : _trad.keySet()) {
-          es.caib.carpeta.jpa.TraduccioMapJPA _map = _trad.get(_idioma);
+          es.caib.carpeta.persistence.TraduccioMapJPA _map = _trad.get(_idioma);
           if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
             countNull++;
           } else {
@@ -145,7 +145,7 @@ _ignoreFields.add(LOGINTEXTID);
             // OK Tot esta ple
           } else {
             for (String _idioma : _trad.keySet()) {
-              es.caib.carpeta.jpa.TraduccioMapJPA _map = _trad.get(_idioma);
+              es.caib.carpeta.persistence.TraduccioMapJPA _map = _trad.get(_idioma);
               if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
                 errors.rejectValue("entitat.loginText", "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(LOGINTEXTID.fullName)}, null);
                 errors.rejectValue("entitat.loginText.traduccions["+ _idioma +"].valor",

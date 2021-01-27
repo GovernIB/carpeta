@@ -13,7 +13,7 @@ import java.util.*;
 
 import es.caib.carpeta.commons.utils.StringUtils;
 import es.caib.carpeta.ejb.LogCarpetaEJB;
-import es.caib.carpeta.jpa.LogCarpetaJPA;
+import es.caib.carpeta.persistence.LogCarpetaJPA;
 import es.caib.carpeta.model.entity.LogCarpeta;
 import es.caib.carpeta.model.fields.*;
 

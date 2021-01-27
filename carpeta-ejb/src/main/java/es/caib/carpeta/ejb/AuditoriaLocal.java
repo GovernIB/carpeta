@@ -3,8 +3,8 @@ package es.caib.carpeta.ejb;
 
 import javax.ejb.Local;
 
-import es.caib.carpeta.jpa.AuditoriaJPA;
-import es.caib.carpeta.jpa.AuditoriaIJPAManager;
+import es.caib.carpeta.persistence.AuditoriaJPA;
+import es.caib.carpeta.persistence.AuditoriaIJPAManager;
 import es.caib.carpeta.model.dao.IAuditoriaManager;
 
 @Local

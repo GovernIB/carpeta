@@ -1,7 +1,7 @@
 package es.caib.carpeta.back.form.webdb;
 
 import es.caib.carpeta.back.form.CarpetaBaseForm;
-import es.caib.carpeta.jpa.FitxerJPA;
+import es.caib.carpeta.persistence.FitxerJPA;
 
 /**
  *  ========= FITXER AUTOGENERAT - NO MODIFICAR !!!!! 

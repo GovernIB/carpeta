@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import es.caib.carpeta.back.controller.webdb.IdiomaController;
 import es.caib.carpeta.back.form.webdb.IdiomaFilterForm;
 import es.caib.carpeta.back.form.webdb.IdiomaForm;
-import es.caib.carpeta.jpa.IdiomaJPA;
+import es.caib.carpeta.persistence.IdiomaJPA;
 
 /**
  * 

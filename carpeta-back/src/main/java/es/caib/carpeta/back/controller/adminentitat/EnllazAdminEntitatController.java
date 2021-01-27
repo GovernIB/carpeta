@@ -19,7 +19,7 @@ import es.caib.carpeta.back.form.webdb.EnllazFilterForm;
 import es.caib.carpeta.back.form.webdb.EnllazForm;
 import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.jpa.EnllazJPA;
+import es.caib.carpeta.persistence.EnllazJPA;
 import es.caib.carpeta.logic.EnllazLogicaLocal;
 import es.caib.carpeta.model.entity.Enllaz;
 import es.caib.carpeta.model.fields.EnllazFields;

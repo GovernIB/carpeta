@@ -34,9 +34,9 @@ import es.caib.carpeta.back.form.webdb.EntitatForm;
 import es.caib.carpeta.back.validator.webdb.EntitatWebValidator;
 
 import es.caib.carpeta.model.entity.Fitxer;
-import es.caib.carpeta.jpa.FitxerJPA;
+import es.caib.carpeta.persistence.FitxerJPA;
 import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
-import es.caib.carpeta.jpa.EntitatJPA;
+import es.caib.carpeta.persistence.EntitatJPA;
 import es.caib.carpeta.model.entity.Entitat;
 import es.caib.carpeta.model.fields.*;
 
@@ -264,18 +264,18 @@ public class EntitatController
     EntitatForm entitatForm = getEntitatForm(null, false, request, mav);
     
     if (entitatForm.getEntitat().getNom() == null){
-      es.caib.carpeta.jpa.TraduccioJPA trad = new es.caib.carpeta.jpa.TraduccioJPA();
+      es.caib.carpeta.persistence.TraduccioJPA trad = new es.caib.carpeta.persistence.TraduccioJPA();
       for (es.caib.carpeta.model.entity.Idioma idioma : entitatForm.getIdiomesTraduccio()) {
-        trad.addTraduccio(idioma.getIdiomaID(), new es.caib.carpeta.jpa.TraduccioMapJPA());
+        trad.addTraduccio(idioma.getIdiomaID(), new es.caib.carpeta.persistence.TraduccioMapJPA());
       }
       entitatForm.getEntitat().setNom(trad);
     }
 
     
     if (entitatForm.getEntitat().getLoginText() == null){
-      es.caib.carpeta.jpa.TraduccioJPA trad = new es.caib.carpeta.jpa.TraduccioJPA();
+      es.caib.carpeta.persistence.TraduccioJPA trad = new es.caib.carpeta.persistence.TraduccioJPA();
       for (es.caib.carpeta.model.entity.Idioma idioma : entitatForm.getIdiomesTraduccio()) {
-        trad.addTraduccio(idioma.getIdiomaID(), new es.caib.carpeta.jpa.TraduccioMapJPA());
+        trad.addTraduccio(idioma.getIdiomaID(), new es.caib.carpeta.persistence.TraduccioMapJPA());
       }
       entitatForm.getEntitat().setLoginText(trad);
     }

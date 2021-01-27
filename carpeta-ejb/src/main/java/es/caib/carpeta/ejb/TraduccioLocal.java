@@ -3,8 +3,8 @@ package es.caib.carpeta.ejb;
 
 import javax.ejb.Local;
 
-import es.caib.carpeta.jpa.TraduccioJPA;
-import es.caib.carpeta.jpa.TraduccioIJPAManager;
+import es.caib.carpeta.persistence.TraduccioJPA;
+import es.caib.carpeta.persistence.TraduccioIJPAManager;
 import es.caib.carpeta.model.dao.ITraduccioManager;
 
 @Local

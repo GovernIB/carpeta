@@ -34,9 +34,9 @@ import es.caib.carpeta.back.form.webdb.EnllazForm;
 import es.caib.carpeta.back.validator.webdb.EnllazWebValidator;
 
 import es.caib.carpeta.model.entity.Fitxer;
-import es.caib.carpeta.jpa.FitxerJPA;
+import es.caib.carpeta.persistence.FitxerJPA;
 import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
-import es.caib.carpeta.jpa.EnllazJPA;
+import es.caib.carpeta.persistence.EnllazJPA;
 import es.caib.carpeta.model.entity.Enllaz;
 import es.caib.carpeta.model.fields.*;
 
@@ -272,18 +272,18 @@ public class EnllazController
     EnllazForm enllazForm = getEnllazForm(null, false, request, mav);
     
     if (enllazForm.getEnllaz().getNom() == null){
-      es.caib.carpeta.jpa.TraduccioJPA trad = new es.caib.carpeta.jpa.TraduccioJPA();
+      es.caib.carpeta.persistence.TraduccioJPA trad = new es.caib.carpeta.persistence.TraduccioJPA();
       for (es.caib.carpeta.model.entity.Idioma idioma : enllazForm.getIdiomesTraduccio()) {
-        trad.addTraduccio(idioma.getIdiomaID(), new es.caib.carpeta.jpa.TraduccioMapJPA());
+        trad.addTraduccio(idioma.getIdiomaID(), new es.caib.carpeta.persistence.TraduccioMapJPA());
       }
       enllazForm.getEnllaz().setNom(trad);
     }
 
     
     if (enllazForm.getEnllaz().getUrl() == null){
-      es.caib.carpeta.jpa.TraduccioJPA trad = new es.caib.carpeta.jpa.TraduccioJPA();
+      es.caib.carpeta.persistence.TraduccioJPA trad = new es.caib.carpeta.persistence.TraduccioJPA();
       for (es.caib.carpeta.model.entity.Idioma idioma : enllazForm.getIdiomesTraduccio()) {
-        trad.addTraduccio(idioma.getIdiomaID(), new es.caib.carpeta.jpa.TraduccioMapJPA());
+        trad.addTraduccio(idioma.getIdiomaID(), new es.caib.carpeta.persistence.TraduccioMapJPA());
       }
       enllazForm.getEnllaz().setUrl(trad);
     }

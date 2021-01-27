@@ -1,6 +1,6 @@
 package es.caib.carpeta.back.controller;
 
-import es.caib.carpeta.jpa.FitxerJPA;
+import es.caib.carpeta.persistence.FitxerJPA;
 import es.caib.carpeta.model.entity.Fitxer;
 
 import org.fundaciobit.genapp.common.filesystem.IFileManager;

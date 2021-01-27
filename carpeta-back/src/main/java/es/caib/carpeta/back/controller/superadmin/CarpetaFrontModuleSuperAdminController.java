@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import es.caib.carpeta.back.controller.common.AbstractCarpetaFrontModuleController;
 import es.caib.carpeta.back.security.LoginInfo;
-import es.caib.carpeta.jpa.UsuariJPA;
+import es.caib.carpeta.persistence.UsuariJPA;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 
 

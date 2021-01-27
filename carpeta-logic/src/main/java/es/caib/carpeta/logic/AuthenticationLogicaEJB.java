@@ -9,8 +9,8 @@ import javax.validation.constraints.NotNull;
 import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_ERROR;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ENTRADA_BACK;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_BACK;
-import es.caib.carpeta.jpa.UsuariEntitatJPA;
-import es.caib.carpeta.jpa.UsuariJPA;
+import es.caib.carpeta.persistence.UsuariEntitatJPA;
+import es.caib.carpeta.persistence.UsuariJPA;
 import es.caib.carpeta.model.fields.EntitatFields;
 import java.util.List;
 
