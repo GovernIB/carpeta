@@ -5,8 +5,8 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import javax.ejb.Local;
 import javax.validation.constraints.NotNull;
 
-import es.caib.carpeta.jpa.UsuariEntitatJPA;
-import es.caib.carpeta.jpa.UsuariJPA;
+import es.caib.carpeta.persistence.UsuariEntitatJPA;
+import es.caib.carpeta.persistence.UsuariJPA;
 import java.util.List;
 
 /**

@@ -20,7 +20,7 @@ ALTER TABLE car_acces ADD qaa NUMBER(1,0);
 ALTER TABLE car_acces RENAME COLUMN nivellseguretat  TO metodeautenticacio;
 
 --19/01/2021 Millores en la taula d'Auditories #304
-ALTER TABLE public.car_auditoria ADD objecte varchar2(255 char);
+ALTER TABLE car_auditoria ADD objecte varchar2(255 char);
 
 
 -- 26/01/2021 Dades Personals de l'usuari emprant PINBAL #290

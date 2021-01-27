@@ -3,8 +3,8 @@ package es.caib.carpeta.ejb;
 
 import javax.ejb.Local;
 
-import es.caib.carpeta.jpa.UsuariEntitatJPA;
-import es.caib.carpeta.jpa.UsuariEntitatIJPAManager;
+import es.caib.carpeta.persistence.UsuariEntitatJPA;
+import es.caib.carpeta.persistence.UsuariEntitatIJPAManager;
 import es.caib.carpeta.model.dao.IUsuariEntitatManager;
 
 @Local

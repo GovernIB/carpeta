@@ -1,23 +1,23 @@
 package es.caib.carpeta.back.validator.webdb;
 
-import org.fundaciobit.genapp.common.i18n.I18NFieldError;
-import org.fundaciobit.genapp.common.query.Field;
-import org.fundaciobit.genapp.common.validation.BeanValidatorResult;
-import org.fundaciobit.genapp.common.web.validation.AbstractWebValidator;
-import org.fundaciobit.genapp.common.web.validation.WebValidationResult;
-
 import org.apache.log4j.Logger;
+
+import org.fundaciobit.genapp.common.validation.BeanValidatorResult;
+import org.fundaciobit.genapp.common.i18n.I18NFieldError;
+import java.util.List;
+import org.fundaciobit.genapp.common.query.Field;
+import org.fundaciobit.genapp.common.web.validation.WebValidationResult;
+import es.caib.carpeta.model.fields.*;
+
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import es.caib.carpeta.persistence.validator.EnllazValidator;
 
 import es.caib.carpeta.back.form.webdb.EnllazForm;
-
-import es.caib.carpeta.jpa.validator.EnllazValidator;
+import org.fundaciobit.genapp.common.web.validation.AbstractWebValidator;
 import es.caib.carpeta.model.entity.Enllaz;
-import es.caib.carpeta.model.fields.EnllazFields;
-import java.util.List;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 
 /**
@@ -86,17 +86,17 @@ _ignoreFields.add(URLID);
     WebValidationResult<EnllazForm> wvr, boolean isNou) {
 
   {
-      es.caib.carpeta.jpa.EnllazJPA __jpa;
-      __jpa = (es.caib.carpeta.jpa.EnllazJPA)__bean;
+      es.caib.carpeta.persistence.EnllazJPA __jpa;
+      __jpa = (es.caib.carpeta.persistence.EnllazJPA)__bean;
     {
       // IF CAMP ES NOT NULL verificar que totes les traduccions son not null
-      es.caib.carpeta.jpa.TraduccioJPA tradJPA = __jpa.getNom();
+      es.caib.carpeta.persistence.TraduccioJPA tradJPA = __jpa.getNom();
       if (tradJPA != null) {
         // TODO ERROR
-        java.util.Map<String,es.caib.carpeta.jpa.TraduccioMapJPA> _trad = tradJPA.getTraduccions();
+        java.util.Map<String,es.caib.carpeta.persistence.TraduccioMapJPA> _trad = tradJPA.getTraduccions();
         int countNotNull = 0;
         for (String _idioma : _trad.keySet()) {
-          es.caib.carpeta.jpa.TraduccioMapJPA _map = _trad.get(_idioma);
+          es.caib.carpeta.persistence.TraduccioMapJPA _map = _trad.get(_idioma);
           if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
           } else {
             countNotNull++;
@@ -107,7 +107,7 @@ _ignoreFields.add(URLID);
             // OK Tot esta ple
           } else {
             for (String _idioma : _trad.keySet()) {
-              es.caib.carpeta.jpa.TraduccioMapJPA _map = _trad.get(_idioma);
+              es.caib.carpeta.persistence.TraduccioMapJPA _map = _trad.get(_idioma);
               if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
                 errors.rejectValue("enllaz.nom", "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(NOMID.fullName)}, null);
                 errors.rejectValue("enllaz.nom.traduccions["+ _idioma +"].valor",
@@ -121,13 +121,13 @@ _ignoreFields.add(URLID);
     }
     {
       // IF CAMP ES NOT NULL verificar que totes les traduccions son not null
-      es.caib.carpeta.jpa.TraduccioJPA tradJPA = __jpa.getUrl();
+      es.caib.carpeta.persistence.TraduccioJPA tradJPA = __jpa.getUrl();
       if (tradJPA != null) {
         // TODO ERROR
-        java.util.Map<String,es.caib.carpeta.jpa.TraduccioMapJPA> _trad = tradJPA.getTraduccions();
+        java.util.Map<String,es.caib.carpeta.persistence.TraduccioMapJPA> _trad = tradJPA.getTraduccions();
         int countNotNull = 0;
         for (String _idioma : _trad.keySet()) {
-          es.caib.carpeta.jpa.TraduccioMapJPA _map = _trad.get(_idioma);
+          es.caib.carpeta.persistence.TraduccioMapJPA _map = _trad.get(_idioma);
           if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
           } else {
             countNotNull++;
@@ -138,7 +138,7 @@ _ignoreFields.add(URLID);
             // OK Tot esta ple
           } else {
             for (String _idioma : _trad.keySet()) {
-              es.caib.carpeta.jpa.TraduccioMapJPA _map = _trad.get(_idioma);
+              es.caib.carpeta.persistence.TraduccioMapJPA _map = _trad.get(_idioma);
               if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
                 errors.rejectValue("enllaz.url", "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(URLID.fullName)}, null);
                 errors.rejectValue("enllaz.url.traduccions["+ _idioma +"].valor",

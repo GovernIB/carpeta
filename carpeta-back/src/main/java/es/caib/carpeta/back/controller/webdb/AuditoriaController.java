@@ -33,7 +33,7 @@ import es.caib.carpeta.back.form.webdb.AuditoriaForm;
 
 import es.caib.carpeta.back.validator.webdb.AuditoriaWebValidator;
 
-import es.caib.carpeta.jpa.AuditoriaJPA;
+import es.caib.carpeta.persistence.AuditoriaJPA;
 import es.caib.carpeta.model.entity.Auditoria;
 import es.caib.carpeta.model.fields.*;
 
@@ -617,6 +617,8 @@ public java.lang.Long stringToPK(String value) {
     __tmp.add(new StringKeyValue("8" , "8"));
     __tmp.add(new StringKeyValue("9" , "9"));
     __tmp.add(new StringKeyValue("10" , "10"));
+    __tmp.add(new StringKeyValue("11" , "11"));
+    __tmp.add(new StringKeyValue("12" , "12"));
     return __tmp;
   }
 

@@ -14,7 +14,7 @@ import es.caib.carpeta.ejb.FitxerLocal;
 import es.caib.carpeta.ejb.PluginEntitatLocal;
 import es.caib.carpeta.ejb.PropietatGlobalLocal;
 import es.caib.carpeta.ejb.UsuariEntitatLocal;
-import es.caib.carpeta.jpa.EntitatJPA;
+import es.caib.carpeta.persistence.EntitatJPA;
 import es.caib.carpeta.model.entity.Enllaz;
 import es.caib.carpeta.model.entity.Entitat;
 import es.caib.carpeta.model.fields.AccesFields;

@@ -54,9 +54,9 @@ public class AvisRefList extends RefListBase
     List<StringKeyValue> _list = new java.util.ArrayList<StringKeyValue>(traduccions.size());
     final String _lang = org.fundaciobit.genapp.common.web.i18n.I18NUtils.getLocale().getLanguage();
     for (es.caib.carpeta.model.entity.Traduccio traduccio : traduccions) {
-      es.caib.carpeta.jpa.TraduccioJPA traduccioJPA = (es.caib.carpeta.jpa.TraduccioJPA) traduccio;
+      es.caib.carpeta.persistence.TraduccioJPA traduccioJPA = (es.caib.carpeta.persistence.TraduccioJPA) traduccio;
       String key = keysMap.get(String.valueOf(traduccioJPA.getTraduccioID()));
-      es.caib.carpeta.jpa.TraduccioMapJPA _tm = traduccioJPA.getTraduccio(_lang);
+      es.caib.carpeta.persistence.TraduccioMapJPA _tm = traduccioJPA.getTraduccio(_lang);
       String value;
       if (_tm == null) {
           value = "NO_TRADUCCIO_PER_CODI_" + traduccio.getTraduccioID() + "_[" + _lang + "]";

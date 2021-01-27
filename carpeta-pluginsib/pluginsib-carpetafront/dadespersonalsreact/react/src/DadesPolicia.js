@@ -81,9 +81,7 @@ class DadesPolicia extends Component {
 
     render() {
         const { isLoaded, data } = this.state;
-
         console.log("RENDER POLICIA  URL on atacar " + this.props.pathtodocumentidentitat);
-
         let resultat;
         if (isLoaded) {
             
@@ -130,9 +128,6 @@ class DadesPolicia extends Component {
                     </div>
                 </div>
             </div>
-            
-            
-            
             );
             
     }

@@ -7,9 +7,9 @@ import org.apache.log4j.Logger;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
-import es.caib.carpeta.jpa.EntitatJPA;
-import es.caib.carpeta.jpa.UsuariJPA;
-import es.caib.carpeta.jpa.UsuariEntitatJPA;
+import es.caib.carpeta.persistence.EntitatJPA;
+import es.caib.carpeta.persistence.UsuariJPA;
+import es.caib.carpeta.persistence.UsuariEntitatJPA;
 import es.caib.carpeta.back.security.LoginException;
 
 import org.springframework.security.core.context.SecurityContextHolder;

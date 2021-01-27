@@ -32,7 +32,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.ejb.IdiomaLocal;
-import es.caib.carpeta.jpa.AvisJPA;
+import es.caib.carpeta.persistence.AvisJPA;
 import es.caib.carpeta.logic.AvisLogicaLocal;
 import es.caib.carpeta.logic.utils.EjbManager;
 import es.caib.carpeta.model.fields.IdiomaFields;

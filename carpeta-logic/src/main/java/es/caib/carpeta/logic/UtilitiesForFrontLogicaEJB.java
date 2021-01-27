@@ -1,9 +1,9 @@
 package es.caib.carpeta.logic;
 
 import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.jpa.AvisJPA;
-import es.caib.carpeta.jpa.EntitatJPA;
-import es.caib.carpeta.jpa.PluginJPA;
+import es.caib.carpeta.persistence.AvisJPA;
+import es.caib.carpeta.persistence.EntitatJPA;
+import es.caib.carpeta.persistence.PluginJPA;
 import es.caib.carpeta.logic.utils.PluginInfo;
 import es.caib.carpeta.model.entity.*;
 import es.caib.carpeta.model.fields.*;
@@ -97,9 +97,7 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaLocal 
         }
 
         EntitatJPA e = (EntitatJPA) entitats.get(0);
-
         return e;
-
     }
 
     /**

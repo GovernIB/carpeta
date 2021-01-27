@@ -25,7 +25,7 @@ import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.commons.utils.Constants;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_AFEGIR_PLUGIN;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ELIMINAT_PLUGIN;
-import es.caib.carpeta.jpa.PluginJPA;
+import es.caib.carpeta.persistence.PluginJPA;
 import es.caib.carpeta.logic.AuditoriaLogicaLocal;
 import es.caib.carpeta.logic.LogCarpetaLogicaLocal;
 import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaLocal;

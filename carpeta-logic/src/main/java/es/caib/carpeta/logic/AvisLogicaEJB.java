@@ -6,7 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
 
 import es.caib.carpeta.ejb.AvisEJB;
-import es.caib.carpeta.jpa.AvisJPA;
+import es.caib.carpeta.persistence.AvisJPA;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 

@@ -169,6 +169,24 @@
     <definition name="avisListAdminEntitat" extends="adminentitat">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/avisList.jsp" />
     </definition>
+
+    <definition name="auditoriaFormAdminEntitat" extends="adminentitat">
+        <put-attribute name="titol" value="auditoria.auditoria" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/auditoriaForm.jsp" />
+    </definition>
+
+    <definition name="auditoriaListAdminEntitat" extends="adminentitat">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/auditoriaList.jsp" />
+    </definition>
+
+    <definition name="accesFormAdminEntitat" extends="adminentitat">
+        <put-attribute name="titol" value="acces.acces" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/accesForm.jsp" />
+    </definition>
+
+    <definition name="accesListAdminEntitat" extends="adminentitat">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/accesList.jsp" />
+    </definition>
     
     
 

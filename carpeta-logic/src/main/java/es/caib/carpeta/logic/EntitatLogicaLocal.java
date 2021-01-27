@@ -5,7 +5,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import javax.ejb.Local;
 
 import es.caib.carpeta.ejb.EntitatLocal;
-import es.caib.carpeta.jpa.EntitatJPA;
+import es.caib.carpeta.persistence.EntitatJPA;
 import es.caib.carpeta.model.entity.Entitat;
 
 

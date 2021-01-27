@@ -5,8 +5,8 @@ import javax.ejb.Stateless;
 import javax.annotation.security.RolesAllowed;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import es.caib.carpeta.model.entity.Plugin;
-import es.caib.carpeta.jpa.PluginJPA;
-import es.caib.carpeta.jpa.PluginJPAManager;
+import es.caib.carpeta.persistence.PluginJPA;
+import es.caib.carpeta.persistence.PluginJPAManager;
 
 import es.caib.carpeta.utils.Constants;
 

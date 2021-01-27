@@ -3,8 +3,8 @@ package es.caib.carpeta.ejb;
 
 import javax.ejb.Local;
 
-import es.caib.carpeta.jpa.AvisJPA;
-import es.caib.carpeta.jpa.AvisIJPAManager;
+import es.caib.carpeta.persistence.AvisJPA;
+import es.caib.carpeta.persistence.AvisIJPAManager;
 import es.caib.carpeta.model.dao.IAvisManager;
 
 @Local

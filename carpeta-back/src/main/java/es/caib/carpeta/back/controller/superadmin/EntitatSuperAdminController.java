@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import es.caib.carpeta.back.controller.webdb.EntitatController;
 import es.caib.carpeta.back.form.webdb.EntitatFilterForm;
 import es.caib.carpeta.back.form.webdb.EntitatForm;
-import es.caib.carpeta.jpa.EntitatJPA;
+import es.caib.carpeta.persistence.EntitatJPA;
 import es.caib.carpeta.logic.EntitatLogicaLocal;
 import es.caib.carpeta.model.entity.Entitat;
 import es.caib.carpeta.model.fields.EntitatFields;

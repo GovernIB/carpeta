@@ -33,7 +33,7 @@ import es.caib.carpeta.back.form.webdb.UsuariEntitatForm;
 
 import es.caib.carpeta.back.validator.webdb.UsuariEntitatWebValidator;
 
-import es.caib.carpeta.jpa.UsuariEntitatJPA;
+import es.caib.carpeta.persistence.UsuariEntitatJPA;
 import es.caib.carpeta.model.entity.UsuariEntitat;
 import es.caib.carpeta.model.fields.*;
 

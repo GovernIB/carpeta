@@ -274,11 +274,11 @@ public class DadesPersonalsReactCarpetaFrontPlugin extends AbstractCarpetaFrontP
                 log.info("\nEstado Secundario  " + estat.getCodigoEstadoSecundario() + "\n");
                 
                 /*
-                      Result::getLiteralError: Tramitada
-                      Result::getLiteralErrorSec: null
-                      Estado  00
-                      Estado Secundario  null
-                 */                
+                  Result::getLiteralError: Tramitada
+                  Result::getLiteralErrorSec: null
+                  Estado  00
+                  Estado Secundario  null
+                 */
                 if ("00".equals(estat.getCodigoEstado())) {
                     DatosTitular dt = rde.getRetorno().getDatosTitular();
                     SimpleDateFormat sdf_in = new SimpleDateFormat("yyyyMMdd");

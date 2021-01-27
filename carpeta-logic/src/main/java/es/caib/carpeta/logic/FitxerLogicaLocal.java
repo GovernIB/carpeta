@@ -3,7 +3,7 @@ package es.caib.carpeta.logic;
 import javax.ejb.Local;
 
 import es.caib.carpeta.ejb.FitxerLocal;
-import es.caib.carpeta.jpa.FitxerJPA;
+import es.caib.carpeta.persistence.FitxerJPA;
 
 /**
  * 

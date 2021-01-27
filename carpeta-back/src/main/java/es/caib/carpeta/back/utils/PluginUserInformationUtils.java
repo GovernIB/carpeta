@@ -21,7 +21,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import es.caib.carpeta.back.security.LoginException;
 import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.jpa.UsuariJPA;
+import es.caib.carpeta.persistence.UsuariJPA;
 
 /**
  * 

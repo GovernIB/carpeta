@@ -24,7 +24,7 @@ import es.caib.carpeta.back.form.webdb.UsuariFilterForm;
 import es.caib.carpeta.back.form.webdb.UsuariForm;
 import es.caib.carpeta.back.utils.PluginUserInformationUtils;
 import es.caib.carpeta.commons.utils.Configuracio;
-import es.caib.carpeta.jpa.UsuariJPA;
+import es.caib.carpeta.persistence.UsuariJPA;
 import es.caib.carpeta.logic.UsuariLogicaLocal;
 
 /**

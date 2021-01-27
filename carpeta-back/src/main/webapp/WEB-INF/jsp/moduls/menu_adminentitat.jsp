@@ -39,13 +39,25 @@
             code="avis.avis.plural" />&nbsp;<c:if test="${sessionScope.numAvisos ne '0'}"><span class="badge badge-danger">${sessionScope.numAvisos}</span></c:if></span>
 </a>
 
-<%--<hr style="margin-top: 6px; margin-bottom: 6px;" />
+<hr style="margin-top: 6px; margin-bottom: 6px;" />
+
+<a class="dropdown-item"
+   href="<c:url value="/adminentitat/auditoria/list"/>"> <span
+        style="${(fn:contains(url, '/adminentitat/auditoria'))? " font-weight:bold;" : ""}"><spring:message
+        code="auditoria.auditoria.plural" /></span>
+</a>
+
+<a class="dropdown-item"
+   href="<c:url value="/adminentitat/acces/list"/>"> <span
+        style="${(fn:contains(url, '/adminentitat/acces'))? " font-weight:bold;" : ""}"><spring:message
+        code="acces.acces.plural" /></span>
+</a>
 
 <a class="dropdown-item"
    href="<c:url value="/adminentitat/logCarpeta/list"/>"> <span
         style="${(fn:contains(url, '/adminentitat/logCarpeta'))? " font-weight:bold;" : ""}"><spring:message
         code="logCarpeta.logCarpeta.plural" /></span>
-</a>--%>
+</a>
 
 <%--
 <hr style="margin-top: 6px; margin-bottom: 6px;" />

@@ -1,13 +1,13 @@
 package es.caib.carpeta.back.controller.webdb;
 
 import org.fundaciobit.genapp.common.StringKeyValue;
-import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.genapp.common.i18n.I18NValidationException;
-import org.fundaciobit.genapp.common.query.Field;
-import org.fundaciobit.genapp.common.query.GroupByItem;
-import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.utils.Utils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
+import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.GroupByItem;
+import org.fundaciobit.genapp.common.query.Field;
+import org.fundaciobit.genapp.common.query.Where;
+import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.web.validation.ValidationWebUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +15,7 @@ import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -29,22 +24,18 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import es.caib.carpeta.back.form.webdb.EntitatRefList;
-import es.caib.carpeta.back.form.webdb.PluginEntitatFilterForm;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+
+import es.caib.carpeta.back.form.webdb.*;
 import es.caib.carpeta.back.form.webdb.PluginEntitatForm;
-import es.caib.carpeta.back.form.webdb.PluginEntitatRefList;
-import es.caib.carpeta.back.form.webdb.PluginRefList;
 
 import es.caib.carpeta.back.validator.webdb.PluginEntitatWebValidator;
 
-import es.caib.carpeta.jpa.PluginEntitatJPA;
+import es.caib.carpeta.persistence.PluginEntitatJPA;
 import es.caib.carpeta.model.entity.PluginEntitat;
-import es.caib.carpeta.model.fields.EntitatFields;
-import es.caib.carpeta.model.fields.PluginEntitatFields;
-import es.caib.carpeta.model.fields.PluginFields;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import es.caib.carpeta.model.fields.*;
 
 /**
  * Controller per gestionar un PluginEntitat

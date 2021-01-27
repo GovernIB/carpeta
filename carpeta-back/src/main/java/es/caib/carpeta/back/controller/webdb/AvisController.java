@@ -33,7 +33,7 @@ import es.caib.carpeta.back.form.webdb.AvisForm;
 
 import es.caib.carpeta.back.validator.webdb.AvisWebValidator;
 
-import es.caib.carpeta.jpa.AvisJPA;
+import es.caib.carpeta.persistence.AvisJPA;
 import es.caib.carpeta.model.entity.Avis;
 import es.caib.carpeta.model.fields.*;
 
@@ -284,9 +284,9 @@ public class AvisController
     AvisForm avisForm = getAvisForm(null, false, request, mav);
     
     if (avisForm.getAvis().getDescripcio() == null){
-      es.caib.carpeta.jpa.TraduccioJPA trad = new es.caib.carpeta.jpa.TraduccioJPA();
+      es.caib.carpeta.persistence.TraduccioJPA trad = new es.caib.carpeta.persistence.TraduccioJPA();
       for (es.caib.carpeta.model.entity.Idioma idioma : avisForm.getIdiomesTraduccio()) {
-        trad.addTraduccio(idioma.getIdiomaID(), new es.caib.carpeta.jpa.TraduccioMapJPA());
+        trad.addTraduccio(idioma.getIdiomaID(), new es.caib.carpeta.persistence.TraduccioMapJPA());
       }
       avisForm.getAvis().setDescripcio(trad);
     }

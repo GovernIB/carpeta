@@ -33,7 +33,7 @@ import es.caib.carpeta.back.form.webdb.LogCarpetaForm;
 
 import es.caib.carpeta.back.validator.webdb.LogCarpetaWebValidator;
 
-import es.caib.carpeta.jpa.LogCarpetaJPA;
+import es.caib.carpeta.persistence.LogCarpetaJPA;
 import es.caib.carpeta.model.entity.LogCarpeta;
 import es.caib.carpeta.model.fields.*;
 

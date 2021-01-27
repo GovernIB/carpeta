@@ -5,8 +5,8 @@ import javax.ejb.Stateless;
 import javax.annotation.security.RolesAllowed;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import es.caib.carpeta.model.entity.Traduccio;
-import es.caib.carpeta.jpa.TraduccioJPA;
-import es.caib.carpeta.jpa.TraduccioJPAManager;
+import es.caib.carpeta.persistence.TraduccioJPA;
+import es.caib.carpeta.persistence.TraduccioJPAManager;
 
 import es.caib.carpeta.utils.Constants;
 

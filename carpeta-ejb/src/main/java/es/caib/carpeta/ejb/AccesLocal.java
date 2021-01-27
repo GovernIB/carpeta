@@ -3,8 +3,8 @@ package es.caib.carpeta.ejb;
 
 import javax.ejb.Local;
 
-import es.caib.carpeta.jpa.AccesJPA;
-import es.caib.carpeta.jpa.AccesIJPAManager;
+import es.caib.carpeta.persistence.AccesJPA;
+import es.caib.carpeta.persistence.AccesIJPAManager;
 import es.caib.carpeta.model.dao.IAccesManager;
 
 @Local

@@ -3,7 +3,7 @@ package es.caib.carpeta.back.form.webdb;
 import java.util.List;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import es.caib.carpeta.back.form.CarpetaBaseForm;
-import es.caib.carpeta.jpa.PropietatGlobalJPA;
+import es.caib.carpeta.persistence.PropietatGlobalJPA;
 
 /**
  *  ========= FITXER AUTOGENERAT - NO MODIFICAR !!!!! 

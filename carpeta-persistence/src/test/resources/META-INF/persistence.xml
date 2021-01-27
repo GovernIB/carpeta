@@ -7,22 +7,22 @@
     <persistence-unit name="carpetaPULocal" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-		<class>es.caib.carpeta.jpa.AccesJPA</class>
-		<class>es.caib.carpeta.jpa.AuditoriaJPA</class>
-		<class>es.caib.carpeta.jpa.AvisJPA</class>
-		<class>es.caib.carpeta.jpa.EnllazJPA</class>
-		<class>es.caib.carpeta.jpa.EntitatJPA</class>
-		<class>es.caib.carpeta.jpa.EstadisticaJPA</class>
-		<class>es.caib.carpeta.jpa.FitxerJPA</class>
-		<class>es.caib.carpeta.jpa.IdiomaJPA</class>
-		<class>es.caib.carpeta.jpa.LogCarpetaJPA</class>
-		<class>es.caib.carpeta.jpa.PluginJPA</class>
-		<class>es.caib.carpeta.jpa.PluginEntitatJPA</class>
-		<class>es.caib.carpeta.jpa.PropietatGlobalJPA</class>
-		<class>es.caib.carpeta.jpa.TraduccioJPA</class>
-		<class>es.caib.carpeta.jpa.TraduccioMapJPA</class>
-		<class>es.caib.carpeta.jpa.UsuariJPA</class>
-		<class>es.caib.carpeta.jpa.UsuariEntitatJPA</class>
+		<class>es.caib.carpeta.persistence.AccesJPA</class>
+		<class>es.caib.carpeta.persistence.AuditoriaJPA</class>
+		<class>es.caib.carpeta.persistence.AvisJPA</class>
+		<class>es.caib.carpeta.persistence.EnllazJPA</class>
+		<class>es.caib.carpeta.persistence.EntitatJPA</class>
+		<class>es.caib.carpeta.persistence.EstadisticaJPA</class>
+		<class>es.caib.carpeta.persistence.FitxerJPA</class>
+		<class>es.caib.carpeta.persistence.IdiomaJPA</class>
+		<class>es.caib.carpeta.persistence.LogCarpetaJPA</class>
+		<class>es.caib.carpeta.persistence.PluginJPA</class>
+		<class>es.caib.carpeta.persistence.PluginEntitatJPA</class>
+		<class>es.caib.carpeta.persistence.PropietatGlobalJPA</class>
+		<class>es.caib.carpeta.persistence.TraduccioJPA</class>
+		<class>es.caib.carpeta.persistence.TraduccioMapJPA</class>
+		<class>es.caib.carpeta.persistence.UsuariJPA</class>
+		<class>es.caib.carpeta.persistence.UsuariEntitatJPA</class>
 
         <!-- Desactivar cache -->
         <shared-cache-mode>NONE</shared-cache-mode>

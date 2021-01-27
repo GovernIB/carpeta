@@ -12,7 +12,7 @@ import es.caib.carpeta.model.fields.*;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import es.caib.carpeta.jpa.validator.UsuariValidator;
+import es.caib.carpeta.persistence.validator.UsuariValidator;
 
 import es.caib.carpeta.back.form.webdb.UsuariForm;
 import org.fundaciobit.genapp.common.web.validation.AbstractWebValidator;

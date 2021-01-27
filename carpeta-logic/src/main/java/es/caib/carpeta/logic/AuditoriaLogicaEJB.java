@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import es.caib.carpeta.ejb.AuditoriaEJB;
-import es.caib.carpeta.jpa.AuditoriaJPA;
+import es.caib.carpeta.persistence.AuditoriaJPA;
 
 /**
  * Created by Fundació BIT.

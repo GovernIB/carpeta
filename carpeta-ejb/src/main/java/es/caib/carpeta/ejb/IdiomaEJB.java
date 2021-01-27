@@ -1,14 +1,13 @@
 
 package es.caib.carpeta.ejb;
 
-import org.fundaciobit.genapp.common.i18n.I18NException;
-
-import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
-
-import es.caib.carpeta.jpa.IdiomaJPA;
-import es.caib.carpeta.jpa.IdiomaJPAManager;
+import javax.annotation.security.RolesAllowed;
+import org.fundaciobit.genapp.common.i18n.I18NException;
 import es.caib.carpeta.model.entity.Idioma;
+import es.caib.carpeta.persistence.IdiomaJPA;
+import es.caib.carpeta.persistence.IdiomaJPAManager;
+
 import es.caib.carpeta.utils.Constants;
 
 @Stateless

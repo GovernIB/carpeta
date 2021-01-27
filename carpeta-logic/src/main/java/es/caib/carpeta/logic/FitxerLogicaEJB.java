@@ -6,7 +6,7 @@ import javax.annotation.security.PermitAll;
 import javax.ejb.Stateless;
 
 import es.caib.carpeta.ejb.FitxerEJB;
-import es.caib.carpeta.jpa.FitxerJPA;
+import es.caib.carpeta.persistence.FitxerJPA;
 
 /**
  * 

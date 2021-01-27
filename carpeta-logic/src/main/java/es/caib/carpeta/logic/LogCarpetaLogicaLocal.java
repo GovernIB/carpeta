@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.util.*;
 
 import es.caib.carpeta.ejb.LogCarpetaLocal;
-import es.caib.carpeta.jpa.LogCarpetaJPA;
+import es.caib.carpeta.persistence.LogCarpetaJPA;
 
 /**
  * Created by Fundació BIT.

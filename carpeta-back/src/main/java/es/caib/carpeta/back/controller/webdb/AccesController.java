@@ -33,7 +33,7 @@ import es.caib.carpeta.back.form.webdb.AccesForm;
 
 import es.caib.carpeta.back.validator.webdb.AccesWebValidator;
 
-import es.caib.carpeta.jpa.AccesJPA;
+import es.caib.carpeta.persistence.AccesJPA;
 import es.caib.carpeta.model.entity.Acces;
 import es.caib.carpeta.model.fields.*;
 

@@ -22,6 +22,7 @@ import es.caib.carpeta.back.form.webdb.EntitatRefList;
 import es.caib.carpeta.back.form.webdb.PluginRefList;
 
 import es.caib.carpeta.back.controller.webdb.AuditoriaController;
+import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.logic.UsuariLogicaLocal;
 import es.caib.carpeta.model.entity.Auditoria;
@@ -51,24 +52,33 @@ public class AuditoriaSuperAdminController extends AuditoriaController {
     @Autowired
     protected EntitatRefList entitatRefList;
 
+
     @Override
     public String getTileForm() {
-        return "auditoriaFormSuperAdmin";
+        return "auditoriaForm" + getName();
     }
 
     @Override
     public String getTileList() {
-        return "auditoriaListSuperAdmin";
+        return "auditoriaList" + getName();
     }
 
     @Override
     public String getSessionAttributeFilterForm() {
-        return "AuditoriaSuperAdmin_FilterForm";
+        return "Auditoria" + getName() + "_FilterForm";
     }
 
     @Override
     public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
-        return null;
+        return isSuperAdmin() ? null : AuditoriaFields.ENTITATID.equal(LoginInfo.getInstance().getEntitatID());
+    }
+
+    protected boolean isSuperAdmin() {
+        return true;
+    }
+
+    protected String getName() {
+        return isSuperAdmin() ? "SuperAdmin" : "AdminEntitat";
     }
 
     @Override
@@ -77,6 +87,10 @@ public class AuditoriaSuperAdminController extends AuditoriaController {
         AuditoriaFilterForm auditoriaFilterForm = super.getAuditoriaFilterForm(pagina, mav, request);
 
         if (auditoriaFilterForm.isNou()) {
+
+            if (!isSuperAdmin()) {
+                auditoriaFilterForm.addHiddenField(ENTITATID);
+            }
             auditoriaFilterForm.addHiddenField(AUDITORIAID);
             auditoriaFilterForm.setAddButtonVisible(false);
             auditoriaFilterForm.setDeleteSelectedButtonVisible(false);

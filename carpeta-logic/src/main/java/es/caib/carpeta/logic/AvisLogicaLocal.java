@@ -6,7 +6,7 @@ import javax.ejb.Local;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import es.caib.carpeta.ejb.AvisLocal;
-import es.caib.carpeta.jpa.AvisJPA;
+import es.caib.carpeta.persistence.AvisJPA;
 
 /**
  * 

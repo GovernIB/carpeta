@@ -5,8 +5,8 @@ import javax.ejb.Stateless;
 import javax.annotation.security.RolesAllowed;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import es.caib.carpeta.model.entity.Fitxer;
-import es.caib.carpeta.jpa.FitxerJPA;
-import es.caib.carpeta.jpa.FitxerJPAManager;
+import es.caib.carpeta.persistence.FitxerJPA;
+import es.caib.carpeta.persistence.FitxerJPAManager;
 
 import es.caib.carpeta.utils.Constants;
 

@@ -3,8 +3,8 @@ package es.caib.carpeta.ejb;
 
 import javax.ejb.Local;
 
-import es.caib.carpeta.jpa.EstadisticaJPA;
-import es.caib.carpeta.jpa.EstadisticaIJPAManager;
+import es.caib.carpeta.persistence.EstadisticaJPA;
+import es.caib.carpeta.persistence.EstadisticaIJPAManager;
 import es.caib.carpeta.model.dao.IEstadisticaManager;
 
 @Local

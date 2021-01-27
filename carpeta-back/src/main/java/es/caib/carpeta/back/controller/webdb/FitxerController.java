@@ -31,7 +31,7 @@ import es.caib.carpeta.back.form.webdb.FitxerForm;
 
 import es.caib.carpeta.back.validator.webdb.FitxerWebValidator;
 
-import es.caib.carpeta.jpa.FitxerJPA;
+import es.caib.carpeta.persistence.FitxerJPA;
 import es.caib.carpeta.model.entity.Fitxer;
 import es.caib.carpeta.model.fields.*;
 

@@ -104,7 +104,7 @@ img:hover {
 }
 .usuari{
 	top: 2.5em;
-	height: 2em;
+	/*height: 2em;*/
 }
 .imc-icona{
     height: 2em;
@@ -429,6 +429,9 @@ img {
 .mRapidGlobal{
 	padding-left: 4em !important;
 }
+.opcionesAcceso {
+	width: 220px !important;
+}
 }
 
 /*Se aplican cuando el width es menor que 992px*/
@@ -466,6 +469,10 @@ body {
 }
 .capsaPlugin{
 	height: 15rem;
+}
+.opcionesAcceso {
+	float: left;
+	margin-left: 0px !important;
 }
 }
 
@@ -572,10 +579,13 @@ thead>tr>th.sorting {
 	padding-left: 3em !important;
 }
 #continguts {
-	margin-top: 1em;
+	margin-top: 2em;
 }
 .fonsPlugin{
 	padding-top: 0em !important;
+}
+.capsaPeu{
+	margin-top: 5em;
 }
 }
 
@@ -584,8 +594,8 @@ thead>tr>th.sorting {
 body {
 	font-size: 100% !important;
 }
-.imc-titol h1 span {
-	font-size: 1.35em;
+.imc-titol h1 {
+	width: calc(100% - 10em) !important;
 }
 .imc-bt-menubar {
 	margin-right: 0.5em;
@@ -613,6 +623,20 @@ body {
 .capsaPlugin{
 	height: 17rem;
 }
+.imc--autenticacio{
+	display: table !important;
+	padding-left: 0.7em !important;
+	font-size: 0.7em !important;
+}
+.estilUsuari{
+	font-size: 0.8em !important;
+}
+.imc-titol h1 span {
+	font-size: 1.6em !important;
+}
+.usuari {
+	top: 2em !important;
+}
 }
 
 /*Se aplican cuando el width es menor que 576*/
@@ -623,6 +647,19 @@ body {
 .nivellAut{
 	font-size: 0.7em;
 }
+.imc--contingut{
+	font-size: 0.8em !important;
+}
+.imc--autenticacio{
+	display: table !important;
+	padding-left: 0.5em !important;
+}
+.imc-titol h1 {
+	font-size: 1.3em !important;
+}
+.usuari {
+	top: 2em !important;
+}
 }
 
 /*Se aplican cuando el width es menor que 480*/
@@ -630,9 +667,6 @@ body {
 body {
 	/*padding-top: 4rem !important;*/
 	font-size: 100% !important;
-}
-.imc-titol h1 span {
-	font-size: 1.35em;
 }
 .logoGovern {
     margin-right: 10px !important;

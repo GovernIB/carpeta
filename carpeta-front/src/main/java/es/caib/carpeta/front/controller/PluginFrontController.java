@@ -25,7 +25,7 @@ import es.caib.carpeta.commons.utils.UsuarioClave;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.carpeta.front.utils.SesionHttp;
 import es.caib.carpeta.hibernate.HibernateFileUtil;
-import es.caib.carpeta.jpa.EntitatJPA;
+import es.caib.carpeta.persistence.EntitatJPA;
 import es.caib.carpeta.logic.AccesLogicaLocal;
 import es.caib.carpeta.logic.AuditoriaLogicaLocal;
 import es.caib.carpeta.logic.LogCarpetaLogicaLocal;

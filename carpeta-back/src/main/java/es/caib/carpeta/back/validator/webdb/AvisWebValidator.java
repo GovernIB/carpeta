@@ -12,7 +12,7 @@ import es.caib.carpeta.model.fields.*;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import es.caib.carpeta.jpa.validator.AvisValidator;
+import es.caib.carpeta.persistence.validator.AvisValidator;
 
 import es.caib.carpeta.back.form.webdb.AvisForm;
 import org.fundaciobit.genapp.common.web.validation.AbstractWebValidator;
@@ -87,17 +87,17 @@ _ignoreFields.add(DESCRIPCIOID);
     WebValidationResult<AvisForm> wvr, boolean isNou) {
 
   {
-      es.caib.carpeta.jpa.AvisJPA __jpa;
-      __jpa = (es.caib.carpeta.jpa.AvisJPA)__bean;
+      es.caib.carpeta.persistence.AvisJPA __jpa;
+      __jpa = (es.caib.carpeta.persistence.AvisJPA)__bean;
     {
       // IF CAMP ES NOT NULL verificar que totes les traduccions son not null
-      es.caib.carpeta.jpa.TraduccioJPA tradJPA = __jpa.getDescripcio();
+      es.caib.carpeta.persistence.TraduccioJPA tradJPA = __jpa.getDescripcio();
       if (tradJPA != null) {
         // TODO ERROR
-        java.util.Map<String,es.caib.carpeta.jpa.TraduccioMapJPA> _trad = tradJPA.getTraduccions();
+        java.util.Map<String,es.caib.carpeta.persistence.TraduccioMapJPA> _trad = tradJPA.getTraduccions();
         int countNotNull = 0;
         for (String _idioma : _trad.keySet()) {
-          es.caib.carpeta.jpa.TraduccioMapJPA _map = _trad.get(_idioma);
+          es.caib.carpeta.persistence.TraduccioMapJPA _map = _trad.get(_idioma);
           if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
           } else {
             countNotNull++;
@@ -108,7 +108,7 @@ _ignoreFields.add(DESCRIPCIOID);
             // OK Tot esta ple
           } else {
             for (String _idioma : _trad.keySet()) {
-              es.caib.carpeta.jpa.TraduccioMapJPA _map = _trad.get(_idioma);
+              es.caib.carpeta.persistence.TraduccioMapJPA _map = _trad.get(_idioma);
               if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
                 errors.rejectValue("avis.descripcio", "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(DESCRIPCIOID.fullName)}, null);
                 errors.rejectValue("avis.descripcio.traduccions["+ _idioma +"].valor",

@@ -20,6 +20,7 @@ import es.caib.carpeta.back.form.webdb.AccesForm;
 import es.caib.carpeta.back.form.webdb.PluginRefList;
 
 import es.caib.carpeta.back.controller.webdb.AccesController;
+import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.model.fields.AccesFields;
 import es.caib.carpeta.model.fields.EntitatFields;
@@ -42,22 +43,33 @@ public class AccesSuperAdminController extends AccesController {
     @Autowired
     protected PluginRefList pluginRefList;
 
+
     @Override
-    public String getTileForm() { return "accesFormSuperAdmin"; }
+    public String getTileForm() {
+        return "accesForm" + getName();
+    }
 
     @Override
     public String getTileList() {
-        return "accesListSuperAdmin";
+        return "accesList" + getName();
     }
 
     @Override
     public String getSessionAttributeFilterForm() {
-        return "AccesSuperAdmin_FilterForm";
+        return "Acces" + getName() + "_FilterForm";
     }
 
     @Override
     public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
-        return null;
+        return isSuperAdmin() ? null : AccesFields.ENTITATID.equal(LoginInfo.getInstance().getEntitatID());
+    }
+
+    protected boolean isSuperAdmin() {
+        return true;
+    }
+
+    protected String getName() {
+        return isSuperAdmin() ? "SuperAdmin" : "AdminEntitat";
     }
 
     @Override
@@ -66,6 +78,10 @@ public class AccesSuperAdminController extends AccesController {
         AccesFilterForm accesFilterForm = super.getAccesFilterForm(pagina,mav,request);
 
         if (accesFilterForm.isNou()) {
+
+            if (!isSuperAdmin()) {
+                accesFilterForm.addHiddenField(ENTITATID);
+            }
             accesFilterForm.addHiddenField(ACCESID);
             accesFilterForm.setAddButtonVisible(false);
             accesFilterForm.setDeleteSelectedButtonVisible(false);
