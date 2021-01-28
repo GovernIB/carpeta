@@ -417,4 +417,18 @@ img:hover {
     }
 }
 
+@media only screen and (max-device-width: 450px) {
+    .fonsPlugin {
+        font-size: 150%;
+    }
+    .col-md-6 {
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .imc--llista--capses {
+        display: block !important;
+    }
+}
+
 /* FI RESPONSIVE */

@@ -38,7 +38,7 @@ class EnllasosLateral extends Component {
             laterallink = this.state.laterallinks.map((s, i) => (
                 <li>
                     <a href={s.url} className="" title={s.label}>
-                        <img src={s.urllogo} title={s.label} alt={s.label} />
+                        <img src={s.urllogo} title={s.label} alt={s.label} className="imatgeMobil" />
                     </a>
                 </li>
             ))
