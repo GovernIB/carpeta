@@ -350,7 +350,6 @@
            <scope>provided</scope>
         </dependency>
         
-
         <dependency>
            <groupId>com.fasterxml.jackson.core</groupId>
            <artifactId>jackson-databind</artifactId>
@@ -399,6 +398,7 @@
                 <groupId>javax.activation</groupId>
                 <artifactId>activation</artifactId>
                 <version>${activation.version}</version>
+                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.microprofile.openapi</groupId>
