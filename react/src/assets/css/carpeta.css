@@ -384,18 +384,24 @@ img:hover {
 .homePage .opcionesAcceso { width: 320px; margin-left: 190px; margin-right: 20px; }
 .homePage .carpeta-btn .oi {color:#fff; }
 .homePage .carpeta-btn { font-size: 20px; padding: 12px 30px;}
+#tramitacioModal .modal-title { color: #32814b; }
+#tramitacioModal .alert { display:none; }
+#iniciarTramitacioBtn { background-color:#32814b; border-color: #32814b; }
+#iniciarTramitacioBtn:hover { background-color:#000000; border-color:#000000;}
+#tramitacioModalBtn{ color: #32814b; }
+#clauAnonima{width:50%;color:#666;padding:10px;}
 
 /* RESPONSIVE */
 
 /*Se aplican cuando el width es menor que 1410px*/
-@media only screen and (max-width: 1410px) {
+@media only screen and (max-width: 1410px), only screen and (max-device-width: 1410px) {
 .mRapidGlobal {
 	padding-left: 3.5em !important;
 }
 }
 
 /*Se aplican cuando el width es menor que 1224px*/
-@media only screen and (max-width: 1224px) {
+@media only screen and (max-width: 1224px), only screen and (max-device-width: 1224px) {
 body {
 	font-size: 100% !important;
 }
@@ -417,7 +423,7 @@ img {
 }
 
 /*Se aplican cuando el width es menor que 1128px*/
-@media only screen and (max-width: 1128px) {
+@media only screen and (max-width: 1128px), only screen and (max-device-width: 1128px) {
 .mRapidGlobal{
 	padding-left: 4em !important;
 }
@@ -427,7 +433,7 @@ img {
 }
 
 /*Se aplican cuando el width es menor que 992px*/
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 992px), only screen and (max-device-width: 992px) {
 body {
 	font-size: 100% !important;
 }
@@ -469,7 +475,7 @@ body {
 }
 
 /*Se aplican cuando el width es menor que 768*/
-@media only screen and (max-width : 767px) {
+@media only screen and (max-width : 767px), only screen and (max-device-width: 767px) {
 body {
 	font-size: 100% !important;
 }
@@ -579,10 +585,13 @@ thead>tr>th.sorting {
 .capsaPeu{
 	margin-top: 5em;
 }
+.col-md-5 {
+	max-width: 100%;
+}
 }
 
 /*Se aplican cuando el width es menor que 692*/
-@media only screen and (max-width : 692px) {
+@media only screen and (max-width : 692px), only screen and (max-device-width: 692px) {
 body {
 	font-size: 100% !important;
 }
@@ -632,7 +641,7 @@ body {
 }
 
 /*Se aplican cuando el width es menor que 576*/
-@media only screen and (min-width : 481px) and (max-width : 575px) {
+@media only screen and (min-width : 481px) and (max-width : 575px), only screen and (max-device-width: 575px) {
 .capsaPlugin{
 	height: 11rem;
 }
@@ -655,7 +664,7 @@ body {
 }
 
 /*Se aplican cuando el width es menor que 480*/
-@media only screen and (min-width : 401px) and (max-width : 480px) {
+@media only screen and (min-width : 401px) and (max-width : 480px), only screen and (max-device-width: 480px) {
 body {
 	/*padding-top: 4rem !important;*/
 	font-size: 100% !important;
@@ -692,7 +701,7 @@ body {
 }
 
 /*Se aplican cuando el width es menor que 400*/
-@media only screen and (min-width : 200px) and (max-width : 400px) {
+@media only screen and (min-width : 200px) and (max-width : 400px), only screen and (max-device-width: 400px) {
 body {
 	/*padding-top: 4rem !important;*/
 	font-size: 100% !important;
@@ -738,6 +747,75 @@ body {
 	-ms-flex-direction: row;
 	flex-direction: row;
 }
+}
+
+@media only screen and (max-device-width: 400px) {
+	body {
+		font-size: 200% !important;
+	}
+	.opcionesAcceso {
+		width: auto !important;
+	}
+	.imatgeMobil{
+		width: 50%;
+	}
+	.logo-govern{
+		width: 70% !important;
+	}
+	.logoMenuBar {
+		width: 40px !important;
+	}
+	.homePage .carpeta-btn {
+		font-size: 30px;
+		padding: 30px 30px;
+	}
+	.imc-peu .imc--contingut {
+		flex-direction: column;
+	}
+	.imc-peu-govern, .imc-peu-opcions, .imc-peu-xarxes {
+		width: 100%;
+		font-size: 100%;
+		text-align: center;
+		padding-bottom: 1.5em;
+	}
+	.capsaPeu {
+		margin-top: 0;
+	}
+	.imc-titol ul {
+		right: 1em;
+	}
+	.modal-dialog {
+		max-width: 700px;
+	}
+	.modal-body {
+		padding: 3rem;
+	}
+	.estilUsuari {
+		font-size: 1.1em !important;
+	}
+	.imc--autenticacio {
+		font-size: 1.1em !important;
+	}
+	.col-md-4 {
+		-ms-flex: 0 0 100%;
+		flex: 0 0 100%;
+		max-width: 100%;
+	}
+	.capsaPlugin {
+		height: 20rem;
+	}
+	.fonsPlugin {
+		font-size: 150%;
+	}
+	.imc-peu{
+		padding-top: 0;
+	}
+	#expirat, #dialog{
+		height: auto;
+	}
+	.ui-dialog{
+		height: auto !important;
+	}
 }
 
 /* FI RESPONSIVE */
