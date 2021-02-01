@@ -1,28 +1,28 @@
 
     create table car_acces (
        accesid number(19,0) not null,
-        datadarreracces timestamp,
+        dataacces timestamp,
         entitatid number(19,0) not null,
         idioma varchar2(50 char),
         ip varchar2(100 char),
         llinatges varchar2(255 char),
+        metodeautenticacio varchar2(255 char),
         nif varchar2(50 char),
-        nivellseguretat varchar2(255 char),
         nom varchar2(255 char),
         pluginid number(19,0),
         proveidoridentitat varchar2(255 char),
-        resultatautenticacio number(10,0),
+        qaa number(10,0),
+        resultat number(1,0) not null,
         tipus number(10,0) not null
-    );
+    )TABLESPACE CARPETA_DADES;
 
     create table car_auditoria (
        auditoriaid number(19,0) not null,
         dataaudit timestamp not null,
         entitatid number(19,0),
-        pluginid number(19,0),
+        objecte varchar2(255 char),
         tipus number(10,0) not null,
-        username varchar2(255 char),
-        usuariclave varchar2(256 char)
+        username varchar2(255 char)
     );
 
     create table car_avis (
@@ -101,24 +101,34 @@
         datainici timestamp not null,
         descripcio varchar2(2000 char) not null,
         entitatcodi varchar2(9 char),
-        error varchar2(2000 char),
+        error clob,
         estat number(10,0) not null,
         excepcio clob,
         peticio varchar2(255 char),
         pluginid number(19,0),
         temps number(19,0),
         tipus number(10,0) not null
-    );
+    ) TABLESPACE CARPETA_DADES
+     lob (error) store as car_log_error_lob
+          (tablespace CARPETA_LOB
+             index car_log_error_lob_i)
+     lob (excepcio) store as car_log_excepcio_lob
+          (tablespace CARPETA_LOB
+             index car_log_excepcio_lob_i);
+
 
     create table car_plugin (
        pluginid number(19,0) not null,
         actiu number(1,0) not null,
         classe varchar2(255 char) not null,
         descripcioid number(19,0) not null,
+        logoid number(19,0),
         nomid number(19,0) not null,
         propietats clob,
         tipus number(10,0) not null
-    );
+    )lob (propietats) store as car_log_propietats_lob
+          (tablespace CARPETA_LOB
+             index car_log_propietats_lob_i);
 
     create table car_pluginentitat (
        pluginentitatid number(19,0) not null,
@@ -163,7 +173,6 @@
         entitatid number(19,0) not null,
         usuariid number(19,0) not null
     );
-
 
 
 

@@ -123,6 +123,11 @@
        references car_traduccio;
 
     alter table car_plugin 
+       add constraint car_plugin_fitxer_logo_fk 
+       foreign key (logoid) 
+       references car_fitxer;
+
+    alter table car_plugin 
        add constraint car_plugin_traduccio_nom_fk 
        foreign key (nomid) 
        references car_traduccio;
