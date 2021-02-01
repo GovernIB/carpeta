@@ -14,6 +14,20 @@
 
     <name>Carpeta - Back</name>
     <description>Backoffice de carpeta</description>
+    
+    <properties>
+      <auth.method>BASIC</auth.method>
+    </properties>
+    
+    <profiles>
+        <profile>
+            <id>caib</id>
+            <properties>
+                <auth.method>KEYCLOAK</auth.method>
+            </properties>
+        </profile>
+    </profiles>
+    
 
     <dependencies>
         <!-- Especificacions i llibreries proporcionades per JBoss -->
@@ -477,6 +491,9 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                  <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
+                </configuration>
             </plugin>
 
             <plugin>
