@@ -218,10 +218,8 @@
     </security-constraint>
 
 	<login-config>
-    <!-- 
-		<auth-method>KEYCLOAK</auth-method>
-         -->
-        <auth-method>BASIC</auth-method>
+        <!-- Per defecte BASIC. Si profile -Pcaib llavors KEYCLOAK  -->
+        <auth-method>${auth.method}</auth-method>
 		<realm-name>Govern de les Illes Balears</realm-name>
 	</login-config>
 
