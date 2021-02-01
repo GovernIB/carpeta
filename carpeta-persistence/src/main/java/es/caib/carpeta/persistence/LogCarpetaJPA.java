@@ -55,7 +55,9 @@ private static final long serialVersionUID = 1140880713L;
 	@Column(name="peticio",length = 255)
 	java.lang.String peticio;
 
-	@Column(name="error",length = 2000)
+	@Column(name="error",length = 2147483647)
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
 	java.lang.String error;
 
 	@Column(name="excepcio",length = 2147483647)

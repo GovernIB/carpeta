@@ -140,6 +140,9 @@
 			<div id = "avisosFront"></div>
 
 			<!-- Contingut pàgina -->
+			<div id="carregant" class="loader-container centrat loaderOcult">
+				<div class="loader"></div>
+			</div>
 			<div id = "contingut" class="pt-5"></div>
 
 		</div>

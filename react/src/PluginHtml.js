@@ -1,11 +1,36 @@
-import React, {Component} from 'react';
+import React, {Component,Suspense} from 'react';
 import { withTranslation } from 'react-i18next';
 import i18n from 'i18next';
 import ExpirarSessio from "./ExpirarSessio";
 
 class PluginHtml extends Component {
 
+    constructor() {
+        super();
+        this.state = {loading: true}
+    }
+
+    componentDidMount() {
+        this.fakeRequest().then(() => {
+            const el = document.querySelector(".loader-container");
+            if (el) {
+                document.querySelector("#carregant").classList.add('loaderOcult');
+                this.setState({ loading: false });
+            }
+        });
+    }
+
+    fakeRequest() {
+        return new Promise(resolve => setTimeout(() => resolve(), 2500));
+    };
+
+
     render() {
+
+        if (this.state.loading) {
+            document.querySelector("#carregant").classList.remove('loaderOcult');
+            return null;
+        }
 
         const {t} = this.props;
         const pluginID = this.props.pluginID;
@@ -63,7 +88,7 @@ class PluginHtml extends Component {
         return (
             <div>
                 <ExpirarSessio />
-                <div id="substituir"></div>
+                <div id="substituir" />
             </div>
         );
 
