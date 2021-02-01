@@ -41,7 +41,7 @@ class IniciPublic extends Component {
                         <h2><p className="titol h2">{t('paginaIniciTitol')} {entitatNom}</p></h2>
 
                         <div className="col-md-5 border-0 float-left p-0">
-                            <p className="lh15 font-weight-bolder"><span className="oi oi-person" />{t('paginaIniciQuefer')}</p>
+                            <p className="titol h5 margen-top-clave"><span className="oi oi-person" />{t('paginaIniciQuefer')}</p>
                             <ul className="lh15 pl-5 pt-3">
                                 <li><span className="oi oi-arrow-right" />{t('paginaIniciQuefer1')}</li>
                                 <li><span className="oi oi-arrow-right" />{t('paginaIniciQuefer2')}</li>

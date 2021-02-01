@@ -79,7 +79,7 @@ class Peu extends Component {
 
 					<div className="imc-peu-opcions">
 
-						<div className="pb-3 col2peu"><strong>{t('suportAjuda')} </strong> {suport}</div>
+						<div className="pb-3 col2peu">{suport}</div>
 
 						<EnllasosPeuCentral autenticat={autenticat} />
 					</div>
