@@ -40,11 +40,22 @@ es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.testsurname=FUSTER'
 --29/01/2021 Taula de Logs i Accessos a un altre TableSpace #315
 ALTER TABLE car_log RENAME COLUMN error TO error2;
 ALTER TABLE car_log ADD (error CLOB);
+alter table car_log move lob (error) store as CAR_LOG_ERROR_lob (tablespace carpeta_lob index CAR_LOG_ERROR_lob_i);
 UPDATE car_log SET error=error2;
 ALTER TABLE car_log DROP COLUMN error2;
 
+
+
+alter table car_log move lob (excepcio) store as CAR_LOG_EXCEPCIO_lob (tablespace carpeta_lob index CAR_LOG_EXCEPCIO_lob_i);
+
 ALTER INDEX CAR_LOG_PK REBUILD;
 
+
+
+alter table car_plugin move lob (propietats) store as CAR_LOG_PROPIETATS_lob (tablespace carpeta_lob index CAR_LOG_PROPIETATS_lob_i);
+
+
+ALTER INDEX CAR_PLUGIN_PK REBUILD;
 
 
 

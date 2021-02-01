@@ -35,4 +35,7 @@ es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.password=[=SP["es.c
 es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.testnif=30000056Y
 es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.testsurname=FUSTER'  WHERE pluginid=85;
 
+--29/01/2021 Taula de Logs i Accessos a un altre TableSpace #315
+ALTER TABLE car_log ALTER COLUMN error TYPE text;
+
 
