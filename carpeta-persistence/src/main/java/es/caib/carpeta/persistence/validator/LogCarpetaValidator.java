@@ -73,9 +73,9 @@ public class LogCarpetaValidator<I extends LogCarpeta>
 
     if (__vr.getFieldErrorCount(ERROR) == 0) {
       java.lang.String __error = __target__.getError();
-      if (__error!= null && __error.length() > 2000) {
+      if (__error!= null && __error.length() > 2147483647) {
         __vr.rejectValue(ERROR, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ERROR)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(2000)));
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ERROR)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(2147483647)));
       }
     }
 
