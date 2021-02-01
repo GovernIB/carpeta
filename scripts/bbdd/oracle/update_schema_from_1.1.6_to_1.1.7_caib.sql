@@ -44,16 +44,13 @@ alter table car_log move lob (error) store as CAR_LOG_ERROR_lob (tablespace carp
 UPDATE car_log SET error=error2;
 ALTER TABLE car_log DROP COLUMN error2;
 
-
-
 alter table car_log move lob (excepcio) store as CAR_LOG_EXCEPCIO_lob (tablespace carpeta_lob index CAR_LOG_EXCEPCIO_lob_i);
 
+ALTER TABLE car_log MOVE TABLESPACE CARPETA_DADES;
 ALTER INDEX CAR_LOG_PK REBUILD;
 
 
-
 alter table car_plugin move lob (propietats) store as CAR_LOG_PROPIETATS_lob (tablespace carpeta_lob index CAR_LOG_PROPIETATS_lob_i);
-
 
 ALTER INDEX CAR_PLUGIN_PK REBUILD;
 
