@@ -10,6 +10,17 @@ class PluginHtml extends Component {
         this.state = {loading: true}
     }
 
+    componentWillReceiveProps() {
+        this.setState({ loading: true });
+        this.fakeRequest().then(() => {
+            const el = document.querySelector(".loader-container");
+            if (el) {
+                document.querySelector("#carregant").classList.add('loaderOcult');
+                this.setState({ loading: false });
+            }
+        });
+    }
+
     componentDidMount() {
         this.fakeRequest().then(() => {
             const el = document.querySelector(".loader-container");
@@ -21,7 +32,7 @@ class PluginHtml extends Component {
     }
 
     fakeRequest() {
-        return new Promise(resolve => setTimeout(() => resolve(), 2500));
+        return new Promise(resolve => setTimeout(() => resolve(), 1000));
     };
 
 
@@ -63,17 +74,31 @@ class PluginHtml extends Component {
 
             var iframe = document.getElementById('myiframe');
             var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+            // var iframeDocument;
+            // if(iframe.contentDocument != null) {
+            //     iframeDocument = iframe.contentDocument;
+            // } else {
+            //     iframeDocument = iframe.contentWindow.document;
+            // }
             var h1 = $(iframeDocument.body).height();
             var h2 = iframeDocument.body.scrollHeight;
-            var h = Math.max(h1, h2);
+            var h = h1;
+            if(h2 != null) {
+                h = Math.max(h1, h2);
+            }
+            // var h = Math.max(h1, h2);
             var log = false;
             var d = new Date();
 
-            if (h != lastSize) {
+            if (h !== lastSize) {
                 h = h + 100;
                 lastSize = h;
                 document.getElementById('myiframe').style.height = h + "px";
-                lastSize = Math.max($(iframeDocument.body).height(), iframeDocument.body.scrollHeight);
+                lastSize = $(iframeDocument.body).height();
+                if(iframeDocument.body != null) {
+                    h = Math.max($(iframeDocument.body).height(), iframeDocument.body.scrollHeight);
+                }
+                // lastSize = Math.max($(iframeDocument.body).height(), iframeDocument.body.scrollHeight);
             }
         }
 
