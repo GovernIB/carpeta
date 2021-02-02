@@ -80,6 +80,12 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         put(MIME_DEFAULT, "OCTET-STREAM");
     }};
 
+
+    public static final String VALIDEZ_DOCUMENTO_COPIA  = "1";
+    public static final String VALIDEZ_DOCUMENTO_COPIA_ORIGINAL  = "3";
+    public static final String VALIDEZ_DOCUMENTO_ORIGINAL  = "4";
+
+
     /**
      *
      */
@@ -440,15 +446,35 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         map.put("registroIdioma", registroIdioma);
 
+        //Traduccions validez documento anexo
+       /* String [] validezDocumento = {"",getTraduccio("registro.anexo.validezdocumento.1",locale),"",
+                getTraduccio("registro.anexo.validezdocumento.3",locale),
+                getTraduccio("registro.anexo.validezdocumento.4",locale)};*/
 
 
-        map.put("tipusMime", TEXTO_REDUCIDO_BY_TIPO_MIME);
+
+        Map<String, String> VALIDEZ_DOCUMENTAL_ANEXO = new HashMap<String, String>() {{
+            put(VALIDEZ_DOCUMENTO_COPIA, getTraduccio("registro.anexo.validezdocumento.1",locale));
+            put(VALIDEZ_DOCUMENTO_COPIA_ORIGINAL, getTraduccio("registro.anexo.validezdocumento.3",locale));
+            put(VALIDEZ_DOCUMENTO_ORIGINAL, getTraduccio("registro.anexo.validezdocumento.4",locale));
+        }};
+
+        map.put("validezDocumento", VALIDEZ_DOCUMENTAL_ANEXO);
+
+        //map.put("tipusMime", TEXTO_REDUCIDO_BY_TIPO_MIME);
+
+        /*<td><#if anexo.tipoMIMEFicheroAnexado?has_content >
+              <#if tipusMime[anexo.tipoMIMEFicheroAnexado]?has_content >
+                ${tipusMime[anexo.tipoMIMEFicheroAnexado]}
+                                                        </#if>
+                                                    </#if>
+                                                </td>*/
 
         String[] traduccions = {"registro.titulo.detalle", "registro.entrada", "registro.fecha", "registro.numero",
            "registro.oficina", "registro.destinatario", "registro.tipo.doc", "registro.extracto", "carpeta.idioma",
            "registro.presencial", "registro.justificante", "registre.justifcante.pendiente", "registro.interesados",
            "registro.interesado.nombre", "registro.interesado.documento", "registro.interesado.tipo", "registro.anexos",
-           "registro.anexos.vacio", "registro.anexo.titulo", "registro.anexo.tipomime", "carpeta.descargar"};
+           "registro.anexos.vacio", "registro.anexo.titulo", "registro.anexo.validezdocumento", "carpeta.descargar"};
 
 
         for (String t : traduccions) {

@@ -159,7 +159,8 @@
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">${registro_anexo_titulo}</th>
-                                                <th scope="col">${registro_anexo_tipomime}</th>
+                                                <th scope="col">${registro_anexo_validezdocumento}</th>
+
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -168,9 +169,9 @@
                                             <tr>
                                                 <td>${anexo?index +1}</td>
                                                 <td>${anexo.titulo}</td>
-                                                <td><#if anexo.tipoMIMEFicheroAnexado?has_content >
-                                                        <#if tipusMime[anexo.tipoMIMEFicheroAnexado]?has_content >
-                                                            ${tipusMime[anexo.tipoMIMEFicheroAnexado]}
+                                                <td><#if anexo.validezDocumento?has_content >
+                                                        <#if validezDocumento[anexo.validezDocumento]?has_content >
+                                                            ${validezDocumento[anexo.validezDocumento]}
                                                         </#if>
                                                     </#if>
                                                 </td>
