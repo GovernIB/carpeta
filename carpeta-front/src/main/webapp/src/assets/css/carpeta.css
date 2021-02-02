@@ -230,6 +230,7 @@ img:hover {
 .mRapidGlobal{
 	margin: 0 auto;
 	width: 1270px;
+	margin-bottom: -2em;
 }
 .menuRapid{
 	border: 0px;
@@ -393,6 +394,18 @@ img:hover {
 .centrat{
 	text-align: -webkit-center;
 }
+.ajuda{
+	display: grid !important;
+}
+.liAjuda{
+	list-style: circle;
+	display: list-item !important;
+}
+.mollaPa {
+	margin-top: 0.5em;
+	font-size: 1.2em;
+}
+
 
 /* HomePage */
 .homePage .titol.h5 { text-transform: none !important; }

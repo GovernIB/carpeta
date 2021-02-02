@@ -47,27 +47,23 @@ class Peu extends Component {
 
 		const dadesSuport = this.state.dadesSuport;
 
-		var suport = <button type="button" onClick={this.toggle} className="botoSuport">{t('suportAqui')}</button>
-
-		var tancar =  <button type="button" onClick={this.toggle} className="botoSuport">{t('suportTanca')}</button>;
-
 		var suportWeb = dadesSuport.filter(s => s.tipus === '1').map(s =>
-			<li className="pb-2">{t('suportConsulta')} <a href={s.valor}>{t('suportWeb')}</a></li>
+			<li className="pb-2 liAjuda">{t('suportConsulta')} <a href={s.valor}>{t('suportWeb')}</a></li>
 		);
 		var suportTelefon = dadesSuport.filter(s => s.tipus === '2').map(s =>
-			<li className="pb-2">{t('suportCrida')} <p className="text-verd"> {s.valor}</p></li>
+			<li className="pb-2 liAjuda">{t('suportCrida')} <p className="text-verd"> {s.valor}</p></li>
 		);
 		var suportMail = dadesSuport.filter(s => s.tipus === '3').map(s =>
-			<li className="pb-2">{t('suportMail')} <a href={"mailto:'"+s.valor+"'"}>{s.valor}</a></li>
+			<li className="pb-2 liAjuda">{t('suportMail')} <a href={"mailto:'"+s.valor+"'"}>{s.valor}</a></li>
 		);
 		var suportFAQ = dadesSuport.filter(s => s.tipus === '4').map(s =>
-			<li className="pb-2">{t('suportConsulta')} <a href={s.valor}>{t('suportFAQ')}</a></li>
+			<li className="pb-2 liAjuda">{t('suportConsulta')} <a href={s.valor}>{t('suportFAQ')}</a></li>
 		);
 		var suportConsulta = dadesSuport.filter(s => s.tipus === '5').map(s =>
-			<li className="pb-2">{t('suportConsultaTecnica')} <p className="text-verd"> {s.valor}</p></li>
+			<li className="pb-2 liAjuda">{t('suportConsultaTecnica')} <p className="text-verd"> {s.valor}</p></li>
 		);
 		var suportAutenticacio = dadesSuport.filter(s => s.tipus === '6').map(s =>
-			<li className="pb-2">{t('suportAutenticacio')} <p className="text-verd"> {s.valor}</p></li>
+			<li className="pb-2 liAjuda">{t('suportAutenticacio')} <p className="text-verd"> {s.valor}</p></li>
 		);
 
 
@@ -79,7 +75,9 @@ class Peu extends Component {
 
 					<div className="imc-peu-opcions">
 
-						<div className="pb-3 col2peu">{suport}</div>
+						<div className="pb-3 col2peu">
+							<button type="button" id="dialogAjuda" data-toggle="modal" data-target="#ajudaModal" className="botoSuport">{t('suportAqui')}</button>
+						</div>
 
 						<EnllasosPeuCentral autenticat={autenticat} />
 					</div>
@@ -89,25 +87,32 @@ class Peu extends Component {
 					</div>
 				</div>
 
+				<div className="modal fade" id="ajudaModal" tabIndex="-1" aria-labelledby="ajudaLabel" aria-hidden="true">
+					<div className="modal-dialog">
+						<div className="modal-content">
+							<div className="modal-header">
+								<p className="card-title titol h2">{t('suportTitol')}</p>
+								<button type="button" className="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div className="modal-body">
+								<ul className="pl-3 ajuda">
+									{suportWeb}
+									{suportTelefon}
+									{suportMail}
+									{suportFAQ}
+									{suportConsulta}
+									{suportAutenticacio}
+								</ul>
+							</div>
+							<div className="modal-footer">
+								<button type="button" className="botoSuport" data-dismiss="modal" aria-label="Close">{t('suportTanca')}</button>
+							</div>
+						</div>
+					</div>
+				</div>
 
-				<Modal isOpen={this.state.modal} fade={false} toggle={this.toggle}>
-					<ModalHeader toggle={this.toggle}>
-						<p className="card-title titol h2">{t('suportTitol')}</p>
-					</ModalHeader>
-					<ModalBody>
-						<ul className="pl-3">
-							{suportWeb}
-							{suportTelefon}
-							{suportMail}
-							{suportFAQ}
-							{suportConsulta}
-							{suportAutenticacio}
-						</ul>
-					</ModalBody>
-					<ModalFooter>
-						{tancar}
-					</ModalFooter>
-				</Modal>
 			</footer>
 		);
 	}
