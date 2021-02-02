@@ -1,12 +1,16 @@
 package es.caib.carpeta.back.controller.common;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.SubQuery;
 import org.fundaciobit.genapp.common.query.Where;
 import org.springframework.http.HttpStatus;
@@ -22,7 +26,9 @@ import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.persistence.UsuariJPA;
 import es.caib.carpeta.model.entity.UsuariEntitat;
 import es.caib.carpeta.model.fields.EntitatFields;
+import es.caib.carpeta.model.fields.IdiomaFields;
 import es.caib.carpeta.model.fields.UsuariEntitatFields;
+import es.caib.carpeta.model.fields.UsuariFields;
 
 /**
  * 
@@ -52,15 +58,13 @@ public class UsuariPersonaCommonController extends UsuariController {
             mav.setStatus(HttpStatus.FORBIDDEN);
         }
 
-        if (usuariForm.getUsuari().getNif() != null) {
-            usuariForm.addReadOnlyField(NIF);
-        }
-
-        if (usuariForm.getUsuari().getEmail() != null) {
-            usuariForm.addReadOnlyField(EMAIL);
-        }
-        usuariForm.addReadOnlyField(USERNAME);
-        usuariForm.addReadOnlyField(DARRERAENTITAT);
+        
+        Set<Field<?>> readOnlyFields = new HashSet<Field<?>>(Arrays.asList(UsuariFields.ALL_USUARI_FIELDS));
+        
+        readOnlyFields.remove(IDIOMAID);
+        
+        usuariForm.setReadOnlyFields(readOnlyFields);
+        
         
         usuariForm.setDeleteButtonVisible(false);
 
@@ -117,4 +121,10 @@ public class UsuariPersonaCommonController extends UsuariController {
         return "redirect:/";
     }
 
+    @Override
+    public List<StringKeyValue> getReferenceListForIdiomaID(HttpServletRequest request,
+            ModelAndView mav, Where where)  throws I18NException {
+         return super.getReferenceListForIdiomaID(request, mav, Where.AND(where, IdiomaFields.SUPORTAT.equal(true)));
+    }
+    
 }

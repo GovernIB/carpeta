@@ -1,3 +1,4 @@
+<%@page import="es.caib.carpeta.commons.utils.Configuracio"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%><%@ include
     file="/WEB-INF/jsp/moduls/includes.jsp"%>
 
@@ -8,11 +9,16 @@
     </span>
 </a>
 
+
+<%  if (Configuracio.isDesenvolupament()) { %>
+
 <a class="dropdown-item"
     href="<c:url value="/superadmin/usuari/list"/>"> <span
     style="${(fn:contains(url, '/superadmin/usuari/'))? " font-weight:bold;" : ""}"><spring:message
             code="usuari.usuari.plural" /></span>
 </a>
+
+<% } %>
 
 <a class="dropdown-item"
     href="<c:url value="/superadmin/usuarientitat/list"/>"> <span
@@ -51,6 +57,8 @@
             code="propietatGlobal.propietatGlobal.plural" /></span>
 </a>
 
+<%  if (Configuracio.isDesenvolupament()) { %>
+
 <a class="dropdown-item" href="<c:url value="/superadmin/systemproperties"/>"> <span
     style="${(fn:contains(url, '/superadmin/systemproperties'))? " font-weight:bold;" : ""}"><spring:message
         code="superadmin.systemproperties" /> </span>
@@ -61,6 +69,8 @@
         style="${(fn:contains(url, '/superadmin/fitxerorfes'))? " font-weight:bold;" : ""}"><spring:message
         code="fitxers.orfes" /> </span>
 </a>
+
+<% } %>
 
 <a class="dropdown-item"
    href="<c:url value="/superadmin/idioma/list"/>"> <span

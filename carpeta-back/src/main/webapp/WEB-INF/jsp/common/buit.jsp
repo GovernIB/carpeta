@@ -1,3 +1,4 @@
+<%@page import="es.caib.carpeta.commons.utils.Configuracio"%>
 <%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
 
 <div class="buitContainer">
@@ -99,7 +100,9 @@
 	                <p class="card-text"><spring:message code="menu.superadmin.entitats.descripcio" /></p>
 	                <ul>
 	                    <li><a href="<c:url value="/superadmin/entitat/list"/>"><spring:message code="entitat.entitat.plural" /></a></li>
+                        <%  if (Configuracio.isDesenvolupament()) { %>
 	                    <li><a href="<c:url value="/superadmin/usuari/list"/>"><spring:message code="usuari.usuari.plural" /></a></li>
+                        <% } %>
 	                    <li><a href="<c:url value="/superadmin/usuarientitat/list"/>"><spring:message code="usuariEntitat.usuariEntitat.plural" /></a></li>
 	                </ul>
 	            </div>
@@ -141,8 +144,10 @@
 	                <p class="card-text"><spring:message code="menu.superadmin.system.descripcio" /></p>
 	                <ul>
 	                    <li><a href="<c:url value="/superadmin/propietatglobal/list"/>"><spring:message code="propietatGlobal.propietatGlobal.plural" /></a></li>
+                        <%  if (Configuracio.isDesenvolupament()) { %>
 	                    <li><a href="<c:url value="/superadmin/systemproperties"/>"><spring:message code="superadmin.systemproperties" /></a></li>
 	                    <li><a href="<c:url value="/superadmin/fitxerorfes/list"/>"><spring:message code="fitxers.orfes" /></a></li>
+                        <%  } %>
                         <li><a href="<c:url value="/superadmin/idioma/list"/>"><spring:message code="idioma.idioma.plural" /></a></li>
 	                </ul>
 	            </div>

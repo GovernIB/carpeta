@@ -73,6 +73,8 @@ public class UsuariEntitatSuperAdminController extends UsuariEntitatController {
                 usuariEntitatForm.getUsuariEntitat().setEntitatID(LoginInfo.getInstance().getEntitatID());
             }
             usuariEntitatForm.getUsuariEntitat().setActiu(true);
+        } else {
+            usuariEntitatForm.addReadOnlyField(USUARIID);
         }
         
         if (!isSuperAdmin()) {
