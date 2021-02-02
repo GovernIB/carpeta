@@ -272,7 +272,7 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         String[] traduccions = { "tramite.listado", "tramite.descripcion", "tramite.tramite", "tramite.fecha.inicio",
                 "tramite.acceso", "tramite.vacio", "carpeta.buscar", "carpeta.fecha.inicio", "carpeta.fecha.fin",
                 "tramite.continuar", "tramite.genericerror", "tramite.versionsistra", "tramite.estado",
-                "tramite.finalizado", "tramite.nofinalizado", "tramite.todos", "tramite.detalle", "tramite.ver",
+                "tramite.finalizado", "tramite.nofinalizado", "tramite.nofinalizadopresencial", "tramite.todos", "tramite.detalle", "tramite.ver",
                 "tramite.continuar", "tramite.modal.titulo", "tramite.modal.texte", "tramite.modal.continuarBtn",
                 "tramite.modal.cancelarBtn" };
 

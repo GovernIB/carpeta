@@ -143,7 +143,7 @@
 			<div id="carregant" class="loader-container centrat loaderOcult">
 				<div class="loader"></div>
 			</div>
-			<div id = "contingut" class="pt-5"></div>
+			<div id="contingut" class="pt-2"></div>
 
 		</div>
 		<!-- Fi Zona Contingut -->
