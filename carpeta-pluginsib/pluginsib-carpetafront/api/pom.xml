@@ -24,7 +24,7 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <scope>provided</scope>
+            <!-- scope>provided</scope -->
         </dependency>
 
         <dependency>
