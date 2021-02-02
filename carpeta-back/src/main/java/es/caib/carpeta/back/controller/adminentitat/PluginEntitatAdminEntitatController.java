@@ -71,12 +71,16 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
     public List<StringKeyValue> getReferenceListForPluginID(HttpServletRequest request, ModelAndView mav,
             PluginEntitatForm pluginEntitatForm, Where where) throws I18NException {
 
-        SubQuery<PluginEntitat, Long> subquery = pluginEntitatEjb.getSubQuery(PluginEntitatFields.PLUGINID,
+        Where w;
+        if (pluginEntitatForm.isReadOnlyField(PLUGINID)) {
+          w = where;
+        } else {
+          SubQuery<PluginEntitat, Long> subquery = pluginEntitatEjb.getSubQuery(PluginEntitatFields.PLUGINID,
                 PluginEntitatFields.ENTITATID.equal(LoginInfo.getInstance().getEntitatID()));
-        
-        
+          w  = Where.AND(where, PluginFields.PLUGINID.notIn(subquery));
+        }
 
-        return super.getReferenceListForPluginID(request, mav, PluginFields.PLUGINID.notIn(subquery));
+        return super.getReferenceListForPluginID(request, mav, w);
     }
 
     @Override
@@ -85,6 +89,17 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
         PluginEntitatFilterForm pluginEntitatFilterForm = super.getPluginEntitatFilterForm(pagina, mav, request);
 
         pluginEntitatFilterForm.addHiddenField(ENTITATID);
+
+        
+        SubQuery<PluginEntitat, Long> subquery = pluginEntitatEjb.getSubQuery(PluginEntitatFields.PLUGINID,
+                PluginEntitatFields.ENTITATID.equal(LoginInfo.getInstance().getEntitatID()));
+        if ( 0L == pluginEjb.count(PluginFields.PLUGINID.notIn(subquery))) {
+            pluginEntitatFilterForm.setAddButtonVisible(false);
+        } else {
+            pluginEntitatFilterForm.setAddButtonVisible(true);
+        }
+        
+        
 
         return pluginEntitatFilterForm;
     }
@@ -99,6 +114,8 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
         if (pluginEntitatForm.isNou()) {
             pluginEntitatForm.getPluginEntitat().setEntitatID(LoginInfo.getInstance().getEntitatID());
             pluginEntitatForm.getPluginEntitat().setActiu(true);
+        } else {
+            pluginEntitatForm.addReadOnlyField(PLUGINID);
         }
 
         return pluginEntitatForm;

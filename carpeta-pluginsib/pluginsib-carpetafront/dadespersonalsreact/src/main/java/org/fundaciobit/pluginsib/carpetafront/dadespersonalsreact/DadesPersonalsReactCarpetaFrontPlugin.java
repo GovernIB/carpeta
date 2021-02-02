@@ -260,7 +260,7 @@ public class DadesPersonalsReactCarpetaFrontPlugin extends AbstractCarpetaFrontP
                 result = client.peticionSincrona(nif.toUpperCase(), surname.toUpperCase());
                 
 
-                log.info("\n  Result OBject: " + result + "\n");
+                //log.info("\n  Result OBject: " + result + "\n");
                 log.info("\n  Result::getLiteralError: " + result.getLiteralError() + "\n");
                 log.info("\n  Result::getLiteralErrorSec: " + result.getLiteralErrorSec() + "\n");
 

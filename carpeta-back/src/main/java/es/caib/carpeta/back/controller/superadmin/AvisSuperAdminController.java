@@ -88,6 +88,7 @@ public class AvisSuperAdminController extends AvisController {
 			avisForm.addHiddenField(ENTITATID);
 		}
 		
+		avisForm.setAttachedAdditionalJspCode(true);
 		avisForm.addHiddenField(AVISID);
 		return avisForm;
 	}

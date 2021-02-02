@@ -134,10 +134,10 @@ public class BasePreparer implements ViewPreparer, Constants {
 		// Pipella
 		request.put("pipella", attributeContext.getAttribute("pipella"));
         Attribute a = attributeContext.getAttribute("pipella");
-        log.info("\n\n PIPELLLA A: " + a);
+        //log.info("\n\n PIPELLLA A: " + a);
         if (a != null) {
             String pipella = (String)a.getValue();
-            log.info("\n\n PIPELLLA P: " + pipella);
+            //log.info("\n\n PIPELLLA P: " + pipella);
         }
 
 		// TODO GENAPP

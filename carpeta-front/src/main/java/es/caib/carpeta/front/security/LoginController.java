@@ -1,5 +1,6 @@
 package es.caib.carpeta.front.security;
 
+import com.sun.mail.imap.protocol.ID;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import org.apache.commons.logging.Log;
@@ -182,10 +183,8 @@ public class LoginController {
         if (session != null) {
             session.invalidate();
         }
-        sesionHttp.setEntitat(codiEntitat);
 
-//        return "redirect:/e/"+codiEntitat;
-        return "redirect:/";
+        return "redirect:/e/"+codiEntitat;
 
     }
 
