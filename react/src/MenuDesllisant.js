@@ -10,7 +10,8 @@ class MenuDesllisant extends Component {
 		this.state = {
 			plugins: [],
 			menuEnllasos: [],
-			idiomes: []
+			idiomes: [],
+			menupseudoplugin: []
 		}
 	}
 
@@ -23,10 +24,18 @@ class MenuDesllisant extends Component {
 		axios.get(url2).then(res => {
 			this.setState({ menuEnllasos: res.data })
 		});
+
 		var url3 = window.location.href + `webui/idiomesFront`;
 		axios.get(url3).then(res => {
 			this.setState({ idiomes: res.data })
 		})
+
+		var url4 = window.location.href + `webui/menupseudoplugin`;
+		axios.get(url4).then(res => {
+			this.setState({ menupseudoplugin: res.data })
+		});
+
+		
 	}
 
 	infoHtml(missatge, pluginID) {
@@ -58,6 +67,11 @@ class MenuDesllisant extends Component {
 		axios.get(url3).then(res => {
 			this.setState({ idiomes: res.data })
 		})
+
+		var url4 = window.location.href + `webui/menupseudoplugin`;
+		axios.get(url4).then(res => {
+			this.setState({ menupseudoplugin: res.data })
+		});
 	}
 
 	componentDidMount() {
@@ -93,6 +107,24 @@ class MenuDesllisant extends Component {
 				</li>
 			))
 		}
+
+
+		let enllasosPseusoPluginMenu;
+
+		if(!this.state.menupseudoplugin.length){
+			enllasosPseusoPluginMenu = "";
+		} else {
+			enllasosPseusoPluginMenu = this.state.menupseudoplugin.map((s, i) => (
+				<li>
+					<a href={s.url} target="_blank" title={s.nom}>
+						<img src={s.urllogo} title="" alt="" className="imc-icona iconaEnllas" />
+						<span>{s.label}</span>
+					</a>
+				</li>
+			))
+		}
+
+
 
 		const idiomes = this.state.idiomes;
 
@@ -176,7 +208,7 @@ class MenuDesllisant extends Component {
 
 			plugHtml = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 0).map(s => (
 				<li><a href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}
-					   title={s.nom}><img
+					title={s.nom}><img
 					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></a></li>
 			));
@@ -198,7 +230,7 @@ class MenuDesllisant extends Component {
 
 			plugReact = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 0).map(s => (
 				<li><a href={"javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"}
-					   title={s.nom}><img
+					title={s.nom}><img
 					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></a></li>
 			));
@@ -261,6 +293,7 @@ class MenuDesllisant extends Component {
 						{plugReactInfo}
 						{plugReactWarning}
 						{plugReactError}
+						{enllasosPseusoPluginMenu}
 						{sortir}
 						{canviarEntitat}
 					</ul>

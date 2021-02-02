@@ -304,6 +304,14 @@ public class WebUIController extends CommonFrontController {
 
         getEnllazosJSON(request, response, enllazType);
     }
+    
+    @RequestMapping(value = "/menupseudoplugin", method = RequestMethod.GET)
+    public void getMenuPseudoPlugin(HttpServletRequest request, HttpServletResponse response) {
+
+        final int enllazType = Constants.TIPUS_ENLLAZ_FRONT_PSEUDOPLUGIN;
+
+        getEnllazosJSON(request, response, enllazType);
+    }
 
     protected void getEnllazosJSON(HttpServletRequest request, HttpServletResponse response, final int enllazType) {
         try {
@@ -327,7 +335,7 @@ public class WebUIController extends CommonFrontController {
                 enllazosInfo.add(new EnllazInfo(label, url, urllogo));
             }
 
-            // Passar JSON de pluginsEntitat
+            // Passar enllazosInfo a 
             Gson gson = new Gson();
             String json = gson.toJson(enllazosInfo);
 
