@@ -108,7 +108,7 @@
                         </td>
 <!--                        <td>${tramite.fechaUltimoAcceso?string("dd-MM-yyyy HH:mm")}</td>-->
                         <#if tramite.isPendiente()!>
-                            <td>${tramite_nofinalizado}</td>
+                            <td><#if tramite.esMostraModal()!>${tramite_nofinalizadopresencial}<#else>${tramite_nofinalizado}</#if></td>
 <!--                            <td align="center"><span class="oi oi-external-link" title="${tramite_continuar}"></span></td>-->
                         <#else>
                             <td>${tramite_finalizado}</td>
