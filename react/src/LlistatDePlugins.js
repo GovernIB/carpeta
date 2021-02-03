@@ -8,7 +8,8 @@ class LlistatDePlugins extends Component {
     constructor(){
         super();
         this.state = {
-            plugins: []
+            plugins: [],
+            menupseudoplugin : []
         }
     }
 
@@ -23,9 +24,16 @@ class LlistatDePlugins extends Component {
         axios.get(url2).then(res => {
             this.setState({ nomEntitat: res.data })
         });
+
+        var url4 = window.location.href + `webui/menupseudoplugin`;
+		axios.get(url4).then(res => {
+			this.setState({ menupseudoplugin: res.data })
+		});
     }
 
     componentWillReceiveProps(lng) {
+
+        
         var url = window.location.href + `pluginfront/veureplugins`;
         axios.get(url).then(res => {
             const plugins = res.data;
@@ -36,6 +44,12 @@ class LlistatDePlugins extends Component {
         axios.get(url2).then(res => {
             this.setState({ nomEntitat: res.data })
         });
+        
+        var url4 = window.location.href + `webui/menupseudoplugin`;
+		axios.get(url4).then(res => {
+			this.setState({ menupseudoplugin: res.data })
+		});
+        
     }
 
     infoHtml(missatge, pluginID) {
@@ -64,7 +78,9 @@ class LlistatDePlugins extends Component {
         var urlBase = window.location.href;
 
         const plugins = this.state.plugins;
+        const menupseudoplugin = this.state.menupseudoplugin;
 
+        var menuPseudoPlugin;
         var plugHtml;
         var plugHtmlInfo;
         var plugHtmlWarning;
@@ -73,6 +89,22 @@ class LlistatDePlugins extends Component {
         var plugReactInfo;
         var plugReactWarning;
         var plugReactError;
+
+
+        menuPseudoPlugin = menupseudoplugin.map(s => (
+            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
+                <button alt={s.label} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}
+                        onClick={ () => window.open(s.url) } >
+                    <span className="card-title titol pl-1 h3"><img
+                        src={s.urllogo}
+                        alt={s.nom} title={s.label}
+                        className="imc-icona" /></span>
+                    <span className="titolPlugin  titol h3">{s.label}</span>
+                    <span className="card-text mb-3 mt-3 alignCenter">{s.label}</span>
+                </button>
+            </div>
+        ));
+
 
         plugHtml = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 0).map(s => (
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
@@ -201,6 +233,7 @@ class LlistatDePlugins extends Component {
                                 {plugReactInfo}
                                 {plugReactWarning}
                                 {plugReactError}
+                                {menuPseudoPlugin}
 
                             </div>
 
