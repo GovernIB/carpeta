@@ -58,8 +58,8 @@ class ExpirarSessio extends Component {
                                     class:'botoDialegVerd',
                                     click: function() {
                                         $( this ).dialog( "close" );
-                                        // var url = window.location.href + 'sortir';
-                                        var url = window.location.href + 'e/' + sessionStorage.getItem('entitat');
+                                        var url = window.location.href + 'sortir';
+                                        // var url = window.location.href + 'e/' + sessionStorage.getItem('entitat');
                                         window.location.replace(url);
                                     }
                                 }
