@@ -74,11 +74,11 @@
         <div class="col">
             <div class="card">
                 <div class="card-body">
-                    <h5><spring:message code="auditoria.auditoria.plural" /></h5>
-                    <p class="card-text"><spring:message code="menu.superadmin.auditoria.descripcio" /></p>
+                    <h5><spring:message code="menu.adminentitat.auditoria.titol" /></h5>
+                    <p class="card-text"><spring:message code="menu.adminentitat.auditoria.descripcio" /></p>
                     <ul>
-                        <li><a href="<c:url value="/adminentitat/auditoria/list"/>"><spring:message code="auditoria.auditoria.plural" /></a></li>
-                        <li><a href="<c:url value="/adminentitat/acces/list"/>"><spring:message code="acces.acces.plural" /></a></li>
+                        <li><a href="<c:url value="/adminentitat/auditoria/list"/>"><spring:message code="auditoria.auditoria.back" /></a></li>
+                        <li><a href="<c:url value="/adminentitat/acces/list"/>"><spring:message code="acces.acces.frontal" /></a></li>
                         <li><a href="<c:url value="/adminentitat/logCarpeta/list"/>"><spring:message code="logCarpeta.logCarpeta.plural" /></a></li>
                     </ul>
                 </div>
@@ -115,7 +115,7 @@
 	                <h5><spring:message code="plugin.tipus.1.plural" /></h5>
 	                <p class="card-text"><spring:message code="menu.superadmin.plugins.descripcio" /></p>
 	                <ul>
-	                    <li><a href="<c:url value="/superadmin/pluginfront/list"/>"><spring:message code="plugin.tipus.1.plural" /></a></li>
+	                    <li><a href="<c:url value="/superadmin/pluginfront/list"/>"><spring:message code="plugin.tipus.frontal" /></a></li>
 	                </ul>
 	            </div>
 	        </div>
@@ -156,11 +156,11 @@
         <div class="col">
             <div class="card">
 	            <div class="card-body">
-	                <h5><spring:message code="auditoria.auditoria.plural" /></h5>
+	                <h5><spring:message code="menu.superadmin.auditoria.titol" /></h5>
 	                <p class="card-text"><spring:message code="menu.superadmin.auditoria.descripcio" /></p>
 	                <ul>
-	                    <li><a href="<c:url value="/superadmin/auditoria/list"/>"><spring:message code="auditoria.auditoria.plural" /></a></li>
-	                    <li><a href="<c:url value="/superadmin/acces/list"/>"><spring:message code="acces.acces.plural" /></a></li>
+	                    <li><a href="<c:url value="/superadmin/auditoria/list"/>"><spring:message code="auditoria.auditoria.back" /></a></li>
+	                    <li><a href="<c:url value="/superadmin/acces/list"/>"><spring:message code="acces.acces.frontal" /></a></li>
                         <li><a href="<c:url value="/superadmin/logCarpeta/list"/>"><spring:message code="logCarpeta.logCarpeta.plural" /></a></li>
 	                </ul>
 	            </div>
