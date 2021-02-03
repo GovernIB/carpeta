@@ -361,7 +361,7 @@ html.imc-menu-visible .imc-marc .imc-marc-menu {
 .imc-peu-opcions li a { color: #000; text-transform: uppercase; padding: 0 .5em; }
 .imc-peu-opcions li a:hover,
 .imc-peu-opcions li a:focus,
-.imc-peu-opcions li a:active { color: #ee013b; background-color: transparent; }
+.imc-peu-opcions li a:active { color: #DF073D; background-color: transparent; }
 
 .imc-en-rss span { display: inline-block; vertical-align: middle; }
 .imc-en-rss svg { display: inline-block; width: .7em; height: .7em; vertical-align: middle; }
@@ -369,7 +369,7 @@ html.imc-menu-visible .imc-marc .imc-marc-menu {
 
 .imc-en-rss:hover path,
 .imc-en-rss:focus path,
-.imc-en-rss:active path { fill: #ee013b; }
+.imc-en-rss:active path { fill: #DF073D; }
 
 .imc-peu-xarxes { width: 23%; text-align: right; white-space: nowrap; }
 .imc-peu-xarxes p { font-size: .9em; padding-right: 1em; }
@@ -381,7 +381,7 @@ a.imc-bt-xarxa span { position: fixed; top: -999em; left: -999em; }
 
 a.imc-bt-xarxa:hover,
 a.imc-bt-xarxa:focus,
-a.imc-bt-xarxa:active { background-color: #ee013b; border-color: #ee013b; }
+a.imc-bt-xarxa:active { background-color: #DF073D; border-color: #DF073D; }
 a.imc-bt-xarxa:hover path,
 a.imc-bt-xarxa:focus path,
 a.imc-bt-xarxa:active path { fill: #fff; }
