@@ -37,7 +37,7 @@
 		<keycloak.version>6.0.1</keycloak.version>
 
 		<cxf.version>3.3.3</cxf.version>
-		<junit.version>4.8.2</junit.version>
+		<junit.version>4.13.1</junit.version>
 		<hibernate.version>5.3.15.Final</hibernate.version>
 		<hibernate.annotations.version>5.3.15.Final</hibernate.annotations.version>
 
