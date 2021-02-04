@@ -23,7 +23,10 @@ public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaService {
 		 
 		 TypedQuery<AvisJPA> query = getEntityManager().createQuery(
 					"select a from AvisJPA a "
-					+ "where CURRENT_DATE between a.dataInici and a.dataFi", AvisJPA.class);
+					+ "where (CURRENT_DATE between a.dataInici and a.dataFi) "
+					+ "   or (a.dataFi IS NULL and a.dataInici IS NULL)"
+					+ "   or (a.dataFi IS NULL and CURRENT_DATE >= a.dataInici)"
+					+ "   or (a.dataInici IS NULL and CURRENT_DATE < a.dataFi)", AvisJPA.class);
 			return query.getResultList(); 
 	 }
 	
@@ -33,7 +36,10 @@ public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaService {
 		 TypedQuery<AvisJPA> query = getEntityManager().createQuery(
 					"select a from AvisJPA a "
 					+ "where a.entitatID = :entidad " 
-					+ "and CURRENT_DATE between a.dataInici and a.dataFi", AvisJPA.class);
+					+ "and ((CURRENT_DATE between a.dataInici and a.dataFi)"
+					+ " or (a.dataFi IS NULL and a.dataInici IS NULL)"
+					+ " or (a.dataFi IS NULL and CURRENT_DATE >= a.dataInici)"
+					+ " or (a.dataInici IS NULL and CURRENT_DATE < a.dataFi))", AvisJPA.class);
 		 	query.setParameter("entidad", entidadID);
 			return query.getResultList(); 
 	 }
@@ -45,7 +51,10 @@ public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaService {
 		TypedQuery<AvisJPA> query = getEntityManager().createQuery(
 				"select a from AvisJPA a "
 						+ "where a.pluginFrontID = :plugin "
-						+ "and CURRENT_DATE between a.dataInici and a.dataFi "
+						+ "and ((CURRENT_DATE between a.dataInici and a.dataFi) "
+						+ " or (a.dataFi IS NULL and a.dataInici IS NULL)"
+						+ " or (a.dataFi IS NULL and CURRENT_DATE >= a.dataInici)"
+						+ " or (a.dataInici IS NULL and CURRENT_DATE < a.dataFi))"
 						+ "order by a.gravetat desc", AvisJPA.class);
 		query.setParameter("plugin", pluginID);
 		return query.getResultList();
@@ -58,7 +67,10 @@ public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaService {
 		TypedQuery<AvisJPA> query = getEntityManager().createQuery(
 				"select a from AvisJPA a "
 						+ "where a.entitat.codi = :codiEntitat "
-						+ "and CURRENT_DATE between a.dataInici and a.dataFi "
+						+ "and ((CURRENT_DATE between a.dataInici and a.dataFi) "
+						+ " or (a.dataFi IS NULL and a.dataInici IS NULL)"
+						+ " or (a.dataFi IS NULL and CURRENT_DATE >= a.dataInici)"
+						+ " or (a.dataInici IS NULL and CURRENT_DATE < a.dataFi))"
 						+ "and a.tipus = :avisType "
 						+ "order by a.gravetat desc", AvisJPA.class);
 		query.setParameter("codiEntitat", codiEntitat);
