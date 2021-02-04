@@ -54,3 +54,5 @@ nb-configuration.xml
 /carpeta-pluginsib/pluginsib-carpetafront/dadespersonalsreact/react/readme.txt
 /carpeta-pluginsib/pluginsib-carpetafront/dadespersonalsreact/react/src/App.js
 /genapp/lastconfig.properties
+/carpeta-front/react/dist
+/carpeta-front/react/node_modules
