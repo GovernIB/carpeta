@@ -124,7 +124,7 @@
             <dependency>
                 <groupId>org.jvnet.mimepull</groupId>
                 <artifactId>mimepull</artifactId>
-                <version>1.9.10</version>
+                <version>1.9.13</version>
             </dependency>
 			
 			<!-- Dependencies que s'exclouen perque estan carregades a JBOSS -->
