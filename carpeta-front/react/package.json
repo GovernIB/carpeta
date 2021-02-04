@@ -2,11 +2,11 @@
   "name": "Carpeta",
   "version": "1.2.3",
   "description": "Front Carpeta versio 1.0",
-  "main": "./src/main.js",
+  "main": "src/main.js",
   "scripts": {
-    "start": "webpack-dev-server --hot",
+    "start": "node_modules/.bin/webpack-dev-server --hot",
     "deploy": "npm run build&&gh-pages -d build",
-    "build": "webpack --config webpack.config.js --mode=production"
+    "build": "node_modules/.bin/webpack --config webpack.config.js --mode=production"
   },
   "keywords": [],
   "author": "xmassoft",
