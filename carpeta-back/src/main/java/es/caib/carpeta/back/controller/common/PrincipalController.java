@@ -3,7 +3,6 @@ package es.caib.carpeta.back.controller.common;
 import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.commons.utils.Configuracio;
 import org.apache.log4j.Logger;
-import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +34,7 @@ public class PrincipalController {
 		Boolean initialized = (Boolean) session.getAttribute("inicialitzat");
 
 		if (initialized == null) {
-			HtmlUtils.saveMessageInfo(request, "MessageInfo : Benvingut a Carpeta");
+			//HtmlUtils.saveMessageInfo(request, "MessageInfo : Benvingut a Carpeta");
 
 			log.info(" request.isUserInRole(ROLE_ADMIN) =>    "  + request.isUserInRole("ROLE_ADMIN") );
 			log.info(" request.isUserInRole(ROLE_SUPER) =>    "  + request.isUserInRole("ROLE_SUPER") );

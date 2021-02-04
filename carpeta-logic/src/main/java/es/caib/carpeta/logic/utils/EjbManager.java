@@ -14,6 +14,7 @@ import es.caib.carpeta.ejb.PropietatGlobalService;
 import es.caib.carpeta.logic.AuditoriaLogicaService;
 import es.caib.carpeta.logic.AuthenticationLogicaService;
 import es.caib.carpeta.logic.AvisLogicaService;
+import es.caib.carpeta.logic.LogCarpetaLogicaService;
 import es.caib.carpeta.model.fields.PropietatGlobalFields;
 
 
@@ -36,6 +37,8 @@ public final class EjbManager {
 	protected static AuditoriaLogicaService auditoriaLogicaEjb;
 
 	protected static AuthenticationLogicaService authenticationLogicaEjb;
+	
+	protected static LogCarpetaLogicaService logCarpetaLogicaEjb;
 
 
 	private static void throwNewI18NException(Throwable e, String name) throws I18NException {
@@ -43,6 +46,19 @@ public final class EjbManager {
 				new I18NArgumentString("No puc instanciar " + name + ": " + e.getMessage()));
 	}
 
+	
+	public static LogCarpetaLogicaService getLogCarpetaLogicaEJB() throws I18NException {
+
+        if (logCarpetaLogicaEjb == null) {
+            try {
+                logCarpetaLogicaEjb = (LogCarpetaLogicaService) new InitialContext()
+                        .lookup(LogCarpetaLogicaService.JNDI_NAME);
+            } catch (Throwable e) {
+                throwNewI18NException(e, LogCarpetaLogicaService.JNDI_NAME);
+            }
+        }
+        return logCarpetaLogicaEjb;
+    }
 	
 	
 	public static IdiomaService getIdiomaEJB() throws I18NException {

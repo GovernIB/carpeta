@@ -4,12 +4,6 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_4_0.xsd">
 
 	<display-name>Carpeta Back</display-name>
-   
-    
-    <!-- Soluciona error de java.lang.OutOfMemoryError: Metaspace / PermGen space  -->
-    <listener>
-      <listener-class>se.jiderhamn.classloader.leak.prevention.ClassLoaderLeakPreventorListener</listener-class>
-    </listener>
 
 	<!--  LISTENER -->
 	<!-- 

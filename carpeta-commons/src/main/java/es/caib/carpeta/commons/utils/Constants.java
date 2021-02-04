@@ -85,12 +85,14 @@ public interface Constants {
     int TIPUS_LOG_PLUGIN_FRONT = 1;
     int TIPUS_LOG_AUTENTICACIO_BACK = 2;
     int TIPUS_LOG_AUTENTICACIO_FRONT = 3;
+    int TIPUS_LOG_GESTIO_BACK = 4;
 
 
     int[] TIPUS_LOG_ALL = {
        TIPUS_LOG_PLUGIN_FRONT,
        TIPUS_LOG_AUTENTICACIO_BACK,
-       TIPUS_LOG_AUTENTICACIO_FRONT
+       TIPUS_LOG_AUTENTICACIO_FRONT,
+       TIPUS_LOG_GESTIO_BACK
     };
 
     /* Estat LogCarpeta */

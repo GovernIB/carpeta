@@ -24,7 +24,7 @@ import java.util.List;
  * Date: 11/01/2021
  */
 @Stateless
-public class AuthenticationLogicaEJB implements AuthenticationLogicaService{
+public class AuthenticationLogicaEJB implements AuthenticationLogicaService {
 
     @EJB(mappedName = UsuariEntitatLogicaService.JNDI_NAME)
     protected UsuariEntitatLogicaService usuariEntitatLogicaEjb;
@@ -79,4 +79,6 @@ public class AuthenticationLogicaEJB implements AuthenticationLogicaService{
     public List<UsuariEntitatJPA> findAllByUsuariIdWithEntitat(@NotNull long usuarioID) throws I18NException{
       return usuariEntitatLogicaEjb.findAllByUsuariIdWithEntitat(usuarioID);
     }
+    
+    
 }

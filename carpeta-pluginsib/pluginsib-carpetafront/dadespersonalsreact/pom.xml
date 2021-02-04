@@ -6,7 +6,7 @@
 
     <artifactId>carpeta-pluginsib-carpetafront-dadespersonalsreact</artifactId>
 
-    <name>Carpeta - PluginsIB - Carpeta Front - DadesPersonals React</name>
+    <name>Carpeta - PluginsIB - Carpeta Front - DadesPersonals</name>
 
     <parent>
         <groupId>es.caib.carpeta</groupId>

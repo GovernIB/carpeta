@@ -1,3 +1,8 @@
+<%@page import="org.fundaciobit.genapp.common.i18n.I18NException"%>
+<%@page import="es.caib.carpeta.logic.LogCarpetaLogicaService"%>
+<%@page import="es.caib.carpeta.back.utils.Utils"%>
+<%@page import="es.caib.carpeta.logic.utils.EjbManager"%>
+<%@page import="es.caib.carpeta.logic.AuthenticationLogicaService"%>
 <%@page import="es.caib.carpeta.back.security.LoginException"
 %><%@page import="org.fundaciobit.genapp.common.web.i18n.I18NUtils"
 %><%@page import="org.apache.log4j.Logger"
@@ -83,8 +88,23 @@ try {
           if (runAsException) {
             redirect = (String)request.getAttribute("javax.servlet.error.request_uri");
           }
+      } else if (e instanceof I18NException){
+          missatgeTipusError = I18NUtils.getMessage((I18NException)e);
+      } else if (e instanceof org.springframework.web.util.NestedServletException) {
+          org.springframework.web.util.NestedServletException nse;
+          nse = (org.springframework.web.util.NestedServletException)e;
+          Throwable thnse = e.getCause();
+          if (thnse instanceof I18NException){
+              missatgeTipusError = I18NUtils.getMessage((I18NException)thnse);
+          } else {
+              missatgeTipusError =  thnse.getMessage();
+          }
+      
       } else {
-         
+      
+           missatgeTipusError =  e.getMessage();
+          
+          
            log.error("[[" + idError + "]] Exceptio de tipus " + e.getClass() );
            log.error("[[" + idError + "]] Exceptio MSG " + e.getMessage() );
          
@@ -95,6 +115,19 @@ try {
     String titolPagina  = I18NUtils.tradueix("error.jsp.pagina");
     String detallError  = I18NUtils.tradueix("error.jsp.detall");
     String veureDetall  = I18NUtils.tradueix("error.jsp.veuredetall");
+    
+    try {
+        LogCarpetaLogicaService logCarpetaLogicaEjb;
+        logCarpetaLogicaEjb = EjbManager.getLogCarpetaLogicaEJB();
+        
+        String missatge = (missatgeSessioInvalida == null ? "":  missatgeSessioInvalida)
+                          + (missatgeTipusError == null ? "" : missatgeTipusError);
+        
+        Utils.createLog(logCarpetaLogicaEjb, missatge, request, null, null, e);
+        
+    } catch(Throwable th) {
+        log.error("Error desconegut guardant dins la taula LOG una excepció: " + th.getMessage(), th );
+    }
 
     request.getSession().setAttribute("locale", LocaleContextHolder.getLocale().toString());
 

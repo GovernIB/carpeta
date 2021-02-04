@@ -51,16 +51,18 @@ public class LogCarpetaLogicaEJB extends LogCarpetaEJB implements LogCarpetaLogi
     @Override
     public void crearLog(String descripcio, int estat, int tipus, long temps, Throwable th, String error, String peticio, String entitatCodi, Long pluginID) {
 
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw, true);
+        String exception = null;
         if(th != null) {
+            
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw, true);
             th.printStackTrace(pw);
-
-            if (StringUtils.isEmpty(error)){
+            exception = sw.getBuffer().toString();
+            if (StringUtils.isEmpty(error)) {
                 error = th.getMessage();
             }
         }
-        String exception = sw.getBuffer().toString();
+        
         LogCarpetaJPA logCarpeta = new LogCarpetaJPA();
         logCarpeta.setTipus(tipus);
         logCarpeta.setTemps(temps);

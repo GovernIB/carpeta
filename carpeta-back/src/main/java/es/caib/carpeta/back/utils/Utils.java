@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.StringKeyValue;
@@ -13,6 +14,11 @@ import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.OrderType;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
+
+import es.caib.carpeta.back.security.LoginInfo;
+import es.caib.carpeta.commons.utils.Constants;
+import es.caib.carpeta.logic.LogCarpetaLogicaService;
+
 import org.fundaciobit.genapp.common.web.form.AdditionalField;
 import org.fundaciobit.genapp.common.web.form.BaseFilterForm;
 
@@ -22,7 +28,7 @@ import org.fundaciobit.genapp.common.web.form.BaseFilterForm;
  * @author anadal
  * 
  */
-public class Utils {
+public class Utils implements Constants {
 
   protected static final Logger log = Logger.getLogger(Utils.class);
 
@@ -140,6 +146,40 @@ public class Utils {
   public static void sortStringKeyValueList(List<StringKeyValue> listNovaFirma) {
     Collections.sort(listNovaFirma, STRINGKEYVALUECOMPARATOR);
   }
+  
+  
+  public static void createLog(LogCarpetaLogicaService logCarpetaLogicaEjb, String msg, HttpServletRequest request, String code, Object pk, Throwable e) {
+
+      String entitatCodi = null;
+      try {
+          if (LoginInfo.getInstance() != null && LoginInfo.getInstance().getEntitatID() != null) {
+             
+              entitatCodi = LoginInfo.getInstance().getEntitat().getCodi();
+          }
+      } catch( es.caib.carpeta.back.security.LoginException le) {
+          
+      }
+      
+      String peticio = "";
+      if (pk != null) {
+          peticio = peticio + "Object PK=" + pk + "\n";
+      }
+      
+      String urlOrigin = (String)request.getAttribute("javax.servlet.error.request_uri");
+      if (urlOrigin == null) {
+        peticio = peticio + "Ruta: " + request.getRequestURI()+ "\n";;
+      } else {
+        peticio = peticio + "Ruta: " + urlOrigin+ "\n";
+      }
+      
+      if (code != null) {
+          peticio = peticio + I18NUtils.tradueix(code, String.valueOf(pk)) + "\n";;
+      }
+
+      logCarpetaLogicaEjb.crearLog(msg, ESTAT_LOG_ERROR, TIPUS_LOG_GESTIO_BACK, -1, e, msg,
+              peticio , entitatCodi, null);
+  }
+
 
  
 }

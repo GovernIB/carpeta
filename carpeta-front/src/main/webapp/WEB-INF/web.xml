@@ -6,11 +6,6 @@
 
     <display-name>Carpeta Front</display-name>
     
-    <!-- Soluciona error de java.lang.OutOfMemoryError: Metaspace / PermGen space  -->
-    <listener>
-      <listener-class>se.jiderhamn.classloader.leak.prevention.ClassLoaderLeakPreventorListener</listener-class>
-    </listener>
-
 
     <!--  LOAD-ON-STARTUP SERVLET -->
 

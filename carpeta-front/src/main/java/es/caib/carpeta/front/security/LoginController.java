@@ -1,6 +1,6 @@
 package es.caib.carpeta.front.security;
 
-import com.sun.mail.imap.protocol.ID;
+
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import org.apache.commons.logging.Log;

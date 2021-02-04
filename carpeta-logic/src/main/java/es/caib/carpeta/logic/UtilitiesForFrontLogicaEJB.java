@@ -240,7 +240,7 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
             entitat = entitats.get(0);
         }
 
-        Locale loc = new Locale(lang.toLowerCase());
+        //Locale loc = new Locale(lang.toLowerCase());
 
         if(entitat.getSuportWeb() != null){
             suport.put(String.valueOf(Constants.TIPUS_SUPORT_WEB), entitat.getSuportWeb());

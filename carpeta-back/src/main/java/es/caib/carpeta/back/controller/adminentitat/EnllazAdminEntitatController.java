@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.ITableManager;
+import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.stereotype.Controller;
@@ -50,7 +52,7 @@ public class EnllazAdminEntitatController extends EnllazController {
     @Override
     public String getSessionAttributeFilterForm() {
         return "EnllazAdminEntitat_FilterForm";
-    }
+    }  
 
     @Override
     public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
