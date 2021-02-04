@@ -34,7 +34,7 @@
 		<jaxb-api.version>2.3.1</jaxb-api.version>
 
 		<slf4j.version>1.7.30</slf4j.version>
-		<keycloak.version>6.0.1</keycloak.version>
+		<keycloak.version>12.0.2</keycloak.version>
 
 		<cxf.version>3.3.3</cxf.version>
 		<junit.version>4.8.2</junit.version>
