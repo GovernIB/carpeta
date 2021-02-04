@@ -8,7 +8,7 @@ class ExpirarSessio extends Component {
     loadDialog(maxInactiveInterval) {
         var sessionAlive = maxInactiveInterval;
         if(sessionAlive === null){
-            sessionAlive = 1 * 60;
+            sessionAlive = 30 * 60;
         }
         var notifyBefore = 30;
         var newTimer = setTimeout(function() {
