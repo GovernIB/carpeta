@@ -9,3 +9,5 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+      time: "19:43"
+    target-branch: "carpeta-1.1"
