@@ -10,12 +10,12 @@ target/
 .idea/
 # Fitxers de projecte de Netbeans
 nb-configuration.xml
-/react/build.bat
-/react/node_modules
-/react/build
-/react/package-lock.json
-/react/public/package-lock.json
-/react/src/package-lock.json
+/carpeta-front/react/react/build.bat
+/carpeta-front/react/react/node_modules
+/carpeta-front/react/react/build
+/carpeta-front/react/react/package-lock.json
+/carpeta-front/react/react/public/package-lock.json
+/carpeta-front/react/react/src/package-lock.json
 /carpeta-logic/src/main/resources/carpeta_genapp_ca.properties
 /carpeta-logic/src/main/resources/carpeta_genapp_en.properties
 /carpeta-logic/src/main/resources/carpeta_genapp_es.properties
@@ -43,11 +43,11 @@ nb-configuration.xml
 /scripts/sqlgenerator/06_grants.sql
 /scripts/sqlgenerator/create_schema.sql
 /scripts/sqlgenerator/drop_schema.sql
-/react/dist/51620ce6389d6f664748a17c4bd1d90f.png
-/react/dist/b8bc9afa159f448fcce1dd4ff3a2787f.png
-/react/dist/ed1c36a7c956b395e966575a93d19e45.jpg
-/react/dist/index.html
-/react/dist/reactjs_main.js
+/carpeta-front/react/dist/51620ce6389d6f664748a17c4bd1d90f.png
+/carpeta-front/react/dist/b8bc9afa159f448fcce1dd4ff3a2787f.png
+/carpeta-front/react/dist/ed1c36a7c956b395e966575a93d19e45.jpg
+/carpeta-front/react/react/dist/index.html
+/carpeta-front/react/react/dist/reactjs_main.js
 /carpeta-pluginsib/pluginsib-carpetafront/sistra/src/main/resources/webresourcesistra/carpeta/backup
 /carpeta-pluginsib/pluginsib-carpetafront/dadespersonalsreact/react/node_modules
 /carpeta-pluginsib/pluginsib-carpetafront/dadespersonalsreact/react/package-lock.json

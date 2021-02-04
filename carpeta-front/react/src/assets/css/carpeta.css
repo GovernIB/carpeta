@@ -41,19 +41,19 @@ img:hover {
     border: 0px;
 }
 .imc--sortir::before {
-	background-image: url(../images/sortir.png);
+	background-image: url(src/assets/images/sortir.png);
 	opacity: 1 !important;
 }
 .imc--tramits::before {
-	background-image: url(../images/tramits.png);
+	background-image: url(src/assets/images/tramits.png);
 	opacity: 1 !important;
 }
 .imc--registres::before {
-	background-image: url(../images/registres.png);
+	background-image: url(src/assets/images/registres.png);
 	opacity: 1 !important;
 }
 .imc--notificacions::before {
-	background-image: url(../images/notificacions.png);
+	background-image: url(src/assets/images/notificacions.png);
 	opacity: 1 !important;
 }
 
@@ -69,19 +69,19 @@ img:hover {
 	align-self: center;
 }
 .imc--logoclave{ 
-	background-image: url(../images/solicitar_clave_acceso_dgt.png); 
+	background-image: url(src/assets/images/solicitar_clave_acceso_dgt.png);
 	background-repeat: no-repeat;
 	width: 180px;
     height: 87px;
 }
 .imc--logowai{ 
-	background-image: url(../images/wcag2AA.png); 
+	background-image: url(src/assets/images/wcag2AA.png);
 	background-repeat: no-repeat;
 	width: 88px;
     height: 31px;
 }
-.imc--gestions::before { background-image: url(../images/folder.png); }
-.imc--dades::before { background-image: url(../images/dades.PNG); }
+.imc--gestions::before { background-image: url(src/assets/images/folder.png); }
+.imc--dades::before { background-image: url(src/assets/images/dades.PNG); }
 .upper{
 	text-transform: uppercase;
 }
