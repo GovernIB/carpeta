@@ -31,6 +31,14 @@
     <link href="${resources}/carpeta/datatables.min.css" rel="stylesheet">
 </head>
 <body class="fonsPlugin">
+<div id="carregantTramits" class="loader-container centrat loaderOcult">
+    <div class="loader"></div>
+</div>
+<script type="text/javascript">
+    function mostrarCarregant() {
+        $("#carregantTramits").removeClass("loaderOcult");
+    }
+</script>
 <div class="container-contenido">
     <div class="infoNoMenu">
         <h2><p class="titol h2">${tramite_listado}</p></h2>
@@ -71,7 +79,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary carpeta-btn">${carpeta_buscar}</button>
+                    <button type="submit" class="btn btn-primary carpeta-btn" onclick="mostrarCarregant()">${carpeta_buscar}</button>
                 </form>
                 <#if isget>
                 <br/>
@@ -82,6 +90,11 @@
                 </div>
             </#if>
             <#if tramits?has_content>
+            <script type="text/javascript">
+                $(window).on('load', function() {
+                    $("#carregantTramits").addClass("loaderOcult");
+                });
+            </script>
             <div class="mt-5">
 <!--                <p class="card-text mb-5">${tramite_continuar}</p>-->
                 <table id="dataTable_paginate" class="table table-striped table-bordered table-hover"

@@ -23,7 +23,7 @@ class Inici extends Component {
 
 		clearTimeout(sessionStorage.getItem('idTimeOut'));
 
-		console.log("entitat inici: " + sessionStorage.getItem('entitat'));
+		// console.log("entitat inici: " + sessionStorage.getItem('entitat'));
 
 		return (
 
