@@ -35,3 +35,7 @@ ALTER TABLE car_enllaz  ADD COLUMN seccioid bigint;
 ALTER TABLE car_enllaz  ADD CONSTRAINT car_enllaz_seccio_sec_fk FOREIGN KEY (seccioid) REFERENCES car_seccio (seccioid) ON UPDATE NO ACTION ON DELETE NO ACTION;
 create index car_enllaz_seccioid_fk_i on car_enllaz (seccioid);
 
+ALTER TABLE car_seccio ADD COLUMN entitatid bigint NOT NULL;
+ALTER TABLE car_seccio ADD CONSTRAINT car_seccio_entitat_ent_fk FOREIGN KEY (entitatid) REFERENCES car_entitat (entitatid) ON UPDATE NO ACTION ON DELETE NO ACTION;
+create index car_seccio_entitatid_fk_i on car_seccio (entitatid);
+
