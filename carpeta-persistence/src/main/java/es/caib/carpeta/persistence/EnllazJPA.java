@@ -51,6 +51,10 @@ private static final long serialVersionUID = -1473310087L;
 	@Column(name="logoid",nullable = false,length = 19)
 	long logoID;
 
+	@Index(name="car_enllaz_seccioid_fk_i")
+	@Column(name="seccioid",length = 19)
+	java.lang.Long seccioID;
+
 
 
   /** Constructor Buit */
@@ -58,21 +62,23 @@ private static final long serialVersionUID = -1473310087L;
   }
 
   /** Constructor amb tots els camps  */
-  public EnllazJPA(long enllazID , int tipus , long nomID , long urlID , long entitatID , long logoID) {
+  public EnllazJPA(long enllazID , int tipus , long nomID , long urlID , long entitatID , long logoID , java.lang.Long seccioID) {
     this.enllazID=enllazID;
     this.tipus=tipus;
     this.nomID=nomID;
     this.urlID=urlID;
     this.entitatID=entitatID;
     this.logoID=logoID;
+    this.seccioID=seccioID;
 }
   /** Constructor sense valors autoincrementals */
-  public EnllazJPA(int tipus , long nomID , long urlID , long entitatID , long logoID) {
+  public EnllazJPA(int tipus , long nomID , long urlID , long entitatID , long logoID , java.lang.Long seccioID) {
     this.tipus=tipus;
     this.nomID=nomID;
     this.urlID=urlID;
     this.entitatID=entitatID;
     this.logoID=logoID;
+    this.seccioID=seccioID;
 }
   public EnllazJPA(Enllaz __bean) {
     this.setEnllazID(__bean.getEnllazID());
@@ -81,6 +87,7 @@ private static final long serialVersionUID = -1473310087L;
     this.setUrlID(__bean.getUrlID());
     this.setEntitatID(__bean.getEntitatID());
     this.setLogoID(__bean.getLogoID());
+    this.setSeccioID(__bean.getSeccioID());
     // Fitxer
     this.setLogo(FitxerJPA.toJPA(__bean.getLogo()));
 	}
@@ -125,6 +132,13 @@ private static final long serialVersionUID = -1473310087L;
 	};
 	public void setLogoID(long _logoID_) {
 		this.logoID = _logoID_;
+	};
+
+	public java.lang.Long getSeccioID() {
+		return(seccioID);
+	};
+	public void setSeccioID(java.lang.Long _seccioID_) {
+		this.seccioID = _seccioID_;
 	};
 
 
@@ -222,6 +236,21 @@ private static final long serialVersionUID = -1473310087L;
     this.logo = logo;
   }
 
+// IMP Field:seccioid | Table: car_seccio | Type: 1  
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@ForeignKey(name="car_enllaz_seccio_sec_fk")
+	@JoinColumn(name = "seccioid", referencedColumnName ="seccioID", nullable = true, insertable=false, updatable=false)
+	private SeccioJPA seccio;
+
+	public SeccioJPA getSeccio() {
+    return this.seccio;
+  }
+
+	public  void setSeccio(SeccioJPA seccio) {
+    this.seccio = seccio;
+  }
+
 
  // ---------------  STATIC METHODS ------------------
   public static EnllazJPA toJPA(Enllaz __bean) {
@@ -233,6 +262,7 @@ private static final long serialVersionUID = -1473310087L;
     __tmp.setUrlID(__bean.getUrlID());
     __tmp.setEntitatID(__bean.getEntitatID());
     __tmp.setLogoID(__bean.getLogoID());
+    __tmp.setSeccioID(__bean.getSeccioID());
     // Fitxer
     __tmp.setLogo(FitxerJPA.toJPA(__bean.getLogo()));
 		return __tmp;
@@ -266,6 +296,10 @@ private static final long serialVersionUID = -1473310087L;
     __alreadyCopied.put(__jpa, __tmp);
     // Copia de beans complexes (EXP)
     // Copia de beans complexes (IMP)
+    if(!"SeccioJPA".equals(origenJPA) && 
+       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.seccio) || org.hibernate.Hibernate.isInitialized(__jpa.getSeccio()) ) ) {
+      __tmp.setSeccio(SeccioJPA.copyJPA(__jpa.getSeccio(), __alreadyCopied,"EnllazJPA"));
+    }
     if(!"TraduccioJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.nom) || org.hibernate.Hibernate.isInitialized(__jpa.getNom()) ) ) {
       __tmp.setNom(TraduccioJPA.copyJPA(__jpa.getNom(), __alreadyCopied,"EnllazJPA"));

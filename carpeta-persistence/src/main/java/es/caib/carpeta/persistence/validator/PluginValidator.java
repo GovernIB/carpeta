@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import es.caib.carpeta.model.entity.Plugin;
 import org.fundaciobit.genapp.common.query.Field;
 import es.caib.carpeta.model.fields.PluginFields;
+import es.caib.carpeta.model.fields.SeccioFields;
 import es.caib.carpeta.model.fields.TraduccioFields;
 
 import org.fundaciobit.genapp.common.validation.IValidatorResult;
@@ -29,6 +30,7 @@ public class PluginValidator<I extends Plugin>
   /** Constructor */
   public void validate(IValidatorResult<I> __vr,I __target__, boolean __isNou__
     ,es.caib.carpeta.model.dao.IPluginManager __pluginManager
+    ,es.caib.carpeta.model.dao.ISeccioManager __seccioManager
     ,es.caib.carpeta.model.dao.ITraduccioManager __traduccioManager) {
 
     // Valors Not Null
@@ -106,6 +108,20 @@ public class PluginValidator<I extends Plugin>
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccio"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccioID"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__descripcioid)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(SECCIOID) == 0) {
+      java.lang.Long __seccioid = __target__.getSeccioID();
+      if (__seccioid != null ) {
+        Long __count_ = null;
+        try { __count_ = __seccioManager.count(SeccioFields.SECCIOID.equal(__seccioid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ == 0) {        
+          __vr.rejectValue(SECCIOID, "error.notfound",
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("seccio.seccio"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("seccio.seccioID"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__seccioid)));
+        }
       }
     }
 

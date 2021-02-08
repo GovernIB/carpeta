@@ -39,6 +39,9 @@ public class EnllazWebValidator extends AbstractWebValidator<EnllazForm, Enllaz>
   @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EntitatService.JNDI_NAME)
   protected es.caib.carpeta.ejb.EntitatService entitatEjb;
 
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.SeccioService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.SeccioService seccioEjb;
+
   @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.TraduccioService.JNDI_NAME)
   protected es.caib.carpeta.ejb.TraduccioService traduccioEjb;
 
@@ -165,7 +168,7 @@ _ignoreFields.add(URLID);
     }
     BeanValidatorResult<Enllaz> __vr = new BeanValidatorResult<Enllaz>();
     validator.validate(__vr, __bean,
-      isNou, enllazEjb, entitatEjb, traduccioEjb);
+      isNou, enllazEjb, entitatEjb, seccioEjb, traduccioEjb);
 
     if (__vr.hasErrors()) {
         List<I18NFieldError> vrErrors = __vr.getErrors();

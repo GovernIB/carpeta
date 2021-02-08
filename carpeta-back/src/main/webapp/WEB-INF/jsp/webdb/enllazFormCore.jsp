@@ -178,3 +178,32 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EnllazFields.SECCIOID)}">
+        <tr id="enllaz_seccioID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EnllazFields.SECCIOID])?'enllaz.seccioID':__theForm.labels[EnllazFields.SECCIOID]}" />
+              <c:if test="${not empty __theForm.help[EnllazFields.SECCIOID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EnllazFields.SECCIOID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="enllaz.seccioID" cssClass="errorField alert alert-danger" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,EnllazFields.SECCIOID)}" >
+          <form:hidden path="enllaz.seccioID"/>
+          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.enllaz.seccioID,__theForm.listOfSeccioForSeccioID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,EnllazFields.SECCIOID)}" >
+          <form:select id="enllaz_seccioID"  onchange="if(typeof onChangeSeccioID == 'function') {  onChangeSeccioID(this); };"  cssClass="form-control col-md-8" path="enllaz.seccioID">
+          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
+          <form:option value="" ></form:option>
+            <c:forEach items="${__theForm.listOfSeccioForSeccioID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        

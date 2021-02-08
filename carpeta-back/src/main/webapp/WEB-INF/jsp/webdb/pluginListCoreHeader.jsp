@@ -36,6 +36,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.TIPUS)}">
         <th>${car:getSortIcons(__theFilterForm,PluginFields.TIPUS)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.SECCIOID)}">
+        <th>${car:getSortIcons(__theFilterForm,PluginFields.SECCIOID)}</th>
+        </c:if>
 
 
         <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">

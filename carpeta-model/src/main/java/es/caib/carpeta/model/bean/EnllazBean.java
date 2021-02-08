@@ -16,6 +16,7 @@ private static final long serialVersionUID = 1571810514L;
 	long urlID;
 	long entitatID;
 	long logoID;
+	java.lang.Long seccioID;
 
 
   /** Constructor Buit */
@@ -23,21 +24,23 @@ private static final long serialVersionUID = 1571810514L;
   }
 
   /** Constructor amb tots els camps  */
-  public EnllazBean(long enllazID , int tipus , long nomID , long urlID , long entitatID , long logoID) {
+  public EnllazBean(long enllazID , int tipus , long nomID , long urlID , long entitatID , long logoID , java.lang.Long seccioID) {
     this.enllazID=enllazID;
     this.tipus=tipus;
     this.nomID=nomID;
     this.urlID=urlID;
     this.entitatID=entitatID;
     this.logoID=logoID;
+    this.seccioID=seccioID;
 }
   /** Constructor sense valors autoincrementals */
-  public EnllazBean(int tipus , long nomID , long urlID , long entitatID , long logoID) {
+  public EnllazBean(int tipus , long nomID , long urlID , long entitatID , long logoID , java.lang.Long seccioID) {
     this.tipus=tipus;
     this.nomID=nomID;
     this.urlID=urlID;
     this.entitatID=entitatID;
     this.logoID=logoID;
+    this.seccioID=seccioID;
 }
   public EnllazBean(Enllaz __bean) {
     this.setEnllazID(__bean.getEnllazID());
@@ -46,6 +49,7 @@ private static final long serialVersionUID = 1571810514L;
     this.setUrlID(__bean.getUrlID());
     this.setEntitatID(__bean.getEntitatID());
     this.setLogoID(__bean.getLogoID());
+    this.setSeccioID(__bean.getSeccioID());
     // Fitxer
     this.setLogo(FitxerBean.toBean(__bean.getLogo()));
 	}
@@ -92,6 +96,13 @@ private static final long serialVersionUID = 1571810514L;
 		this.logoID = _logoID_;
 	};
 
+	public java.lang.Long getSeccioID() {
+		return(seccioID);
+	};
+	public void setSeccioID(java.lang.Long _seccioID_) {
+		this.seccioID = _seccioID_;
+	};
+
 
 
   // ======================================
@@ -105,6 +116,7 @@ private static final long serialVersionUID = 1571810514L;
     __tmp.setUrlID(__bean.getUrlID());
     __tmp.setEntitatID(__bean.getEntitatID());
     __tmp.setLogoID(__bean.getLogoID());
+    __tmp.setSeccioID(__bean.getSeccioID());
     // Fitxer
     __tmp.setLogo(FitxerBean.toBean(__bean.getLogo()));
 		return __tmp;

@@ -35,6 +35,9 @@ public class PluginWebValidator extends AbstractWebValidator<PluginForm, Plugin>
   @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.PluginService.JNDI_NAME)
   protected es.caib.carpeta.ejb.PluginService pluginEjb;
 
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.SeccioService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.SeccioService seccioEjb;
+
   @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.TraduccioService.JNDI_NAME)
   protected es.caib.carpeta.ejb.TraduccioService traduccioEjb;
 
@@ -154,7 +157,7 @@ _ignoreFields.add(DESCRIPCIOID);
     }
     BeanValidatorResult<Plugin> __vr = new BeanValidatorResult<Plugin>();
     validator.validate(__vr, __bean,
-      isNou, pluginEjb, traduccioEjb);
+      isNou, pluginEjb, seccioEjb, traduccioEjb);
 
     if (__vr.hasErrors()) {
         List<I18NFieldError> vrErrors = __vr.getErrors();

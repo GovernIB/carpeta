@@ -72,6 +72,10 @@ public class EnllazController
   @Autowired
   protected EntitatRefList entitatRefList;
 
+  // References 
+  @Autowired
+  protected SeccioRefList seccioRefList;
+
   /**
    * Llistat de totes Enllaz
    */
@@ -232,6 +236,16 @@ public class EnllazController
       };
     }
 
+    // Field seccioID
+    {
+      _listSKV = getReferenceListForSeccioID(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfSeccioForSeccioID(_tmp);
+      if (filterForm.getGroupByFields().contains(SECCIOID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, SECCIOID, false);
+      };
+    }
+
 
     return groupByItemsMap;
   }
@@ -251,6 +265,7 @@ public class EnllazController
     __mapping.put(NOMID, filterForm.getMapOfTraduccioForNomID());
     __mapping.put(URLID, filterForm.getMapOfTraduccioForUrlID());
     __mapping.put(ENTITATID, filterForm.getMapOfEntitatForEntitatID());
+    __mapping.put(SECCIOID, filterForm.getMapOfSeccioForSeccioID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -334,6 +349,15 @@ public class EnllazController
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
       enllazForm.setListOfEntitatForEntitatID(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (enllazForm.getListOfSeccioForSeccioID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForSeccioID(request, mav, enllazForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      enllazForm.setListOfSeccioForSeccioID(_listSKV);
     }
     
   }
@@ -797,6 +821,46 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return entitatRefList.getReferenceList(EntitatFields.ENTITATID, where );
+  }
+
+
+  public List<StringKeyValue> getReferenceListForSeccioID(HttpServletRequest request,
+       ModelAndView mav, EnllazForm enllazForm, Where where)  throws I18NException {
+    if (enllazForm.isHiddenField(SECCIOID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _where = null;
+    if (enllazForm.isReadOnlyField(SECCIOID)) {
+      _where = SeccioFields.SECCIOID.equal(enllazForm.getEnllaz().getSeccioID());
+    }
+    return getReferenceListForSeccioID(request, mav, Where.AND(where, _where));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForSeccioID(HttpServletRequest request,
+       ModelAndView mav, EnllazFilterForm enllazFilterForm,
+       List<Enllaz> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (enllazFilterForm.isHiddenField(SECCIOID)
+      && !enllazFilterForm.isGroupByField(SECCIOID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    if (!_groupByItemsMap.containsKey(SECCIOID)) {
+      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
+      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
+      for (Enllaz _item : list) {
+        if(_item.getSeccioID() == null) { continue; };
+        _pkList.add(_item.getSeccioID());
+        }
+        _w = SeccioFields.SECCIOID.in(_pkList);
+      }
+    return getReferenceListForSeccioID(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForSeccioID(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    return seccioRefList.getReferenceList(SeccioFields.SECCIOID, where );
   }
 
 

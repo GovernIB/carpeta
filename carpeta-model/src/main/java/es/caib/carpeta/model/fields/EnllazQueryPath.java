@@ -35,6 +35,10 @@ public class EnllazQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new LongField(getQueryPath(), EnllazFields.LOGOID);
   }
 
+  public LongField SECCIOID() {
+    return new LongField(getQueryPath(), EnllazFields.SECCIOID);
+  }
+
 
 
   @Override
@@ -72,6 +76,14 @@ public class EnllazQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new FitxerQueryPath(new QueryPath() {
       public String getQueryPath() {
           return EnllazQueryPath.this.getQueryPath() + "logo" + ".";
+      }
+    });
+  }
+
+  public SeccioQueryPath SECCIO() {
+    return new SeccioQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return EnllazQueryPath.this.getQueryPath() + "seccio" + ".";
       }
     });
   }

@@ -218,6 +218,19 @@ private static final long serialVersionUID = -252813913L;
 	}
 
 
+// EXP  Field:iconaid | Table: car_seccio | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "iconaID")
+	private Set<SeccioJPA> seccios = new HashSet<SeccioJPA>(0);
+	public  Set<SeccioJPA> getSeccios() {
+    return this.seccios;
+  }
+
+	public void setSeccios(Set<SeccioJPA> seccios) {
+	  this.seccios = seccios;
+	}
+
+
 
   @javax.persistence.Transient
   javax.activation.DataHandler data;
@@ -327,6 +340,10 @@ private static final long serialVersionUID = -252813913L;
     if(!"EntitatJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat_iconids) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat_iconids())) ) {
       __tmp.setEntitat_iconids(EntitatJPA.copyJPA(__jpa.getEntitat_iconids(), __alreadyCopied,"FitxerJPA"));
+    }
+    if(!"SeccioJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.seccios) || org.hibernate.Hibernate.isInitialized(__jpa.getSeccios())) ) {
+      __tmp.setSeccios(SeccioJPA.copyJPA(__jpa.getSeccios(), __alreadyCopied,"FitxerJPA"));
     }
     if(!"PluginJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.plugins) || org.hibernate.Hibernate.isInitialized(__jpa.getPlugins())) ) {

@@ -19,6 +19,8 @@ public class PluginBeanValidator
   // EJB's
   protected final es.caib.carpeta.model.dao.IPluginManager __pluginManager;
 
+  protected final es.caib.carpeta.model.dao.ISeccioManager __seccioManager;
+
   protected final es.caib.carpeta.model.dao.ITraduccioManager __traduccioManager;
 
 
@@ -26,16 +28,20 @@ public class PluginBeanValidator
 
 
   public PluginBeanValidator(es.caib.carpeta.model.dao.IPluginManager __pluginManager,
+     es.caib.carpeta.model.dao.ISeccioManager __seccioManager,
      es.caib.carpeta.model.dao.ITraduccioManager __traduccioManager) { 
     this.__pluginManager = __pluginManager;
+    this.__seccioManager = __seccioManager;
     this.__traduccioManager = __traduccioManager;
     _validator = new PluginValidator<PluginJPA>();
   }
 
   public PluginBeanValidator(PluginValidator<PluginJPA> _validator,
      es.caib.carpeta.model.dao.IPluginManager __pluginManager,
+     es.caib.carpeta.model.dao.ISeccioManager __seccioManager,
      es.caib.carpeta.model.dao.ITraduccioManager __traduccioManager) {
     this.__pluginManager = __pluginManager;
+    this.__seccioManager = __seccioManager;
     this.__traduccioManager = __traduccioManager;
     this._validator = _validator;
   }
@@ -43,7 +49,7 @@ public class PluginBeanValidator
   @Override
   public List<I18NFieldError> validate(PluginJPA target, boolean isNou) throws I18NException {
     BeanValidatorResult<PluginJPA> _bvr_ = new BeanValidatorResult<PluginJPA>();
-    _validator.validate(_bvr_, target, isNou, __pluginManager, __traduccioManager);
+    _validator.validate(_bvr_, target, isNou, __pluginManager, __seccioManager, __traduccioManager);
     return _bvr_.getErrors();
   }
 }

@@ -68,6 +68,10 @@ public class PluginController
   @Autowired
   protected TraduccioRefList traduccioRefList;
 
+  // References 
+  @Autowired
+  protected SeccioRefList seccioRefList;
+
   /**
    * Llistat de totes Plugin
    */
@@ -221,6 +225,16 @@ public class PluginController
       };
     }
 
+    // Field seccioID
+    {
+      _listSKV = getReferenceListForSeccioID(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfSeccioForSeccioID(_tmp);
+      if (filterForm.getGroupByFields().contains(SECCIOID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, SECCIOID, false);
+      };
+    }
+
 
     return groupByItemsMap;
   }
@@ -239,6 +253,7 @@ public class PluginController
     __mapping.put(NOMID, filterForm.getMapOfTraduccioForNomID());
     __mapping.put(DESCRIPCIOID, filterForm.getMapOfTraduccioForDescripcioID());
     __mapping.put(TIPUS, filterForm.getMapOfValuesForTipus());
+    __mapping.put(SECCIOID, filterForm.getMapOfSeccioForSeccioID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -313,6 +328,15 @@ public class PluginController
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
       pluginForm.setListOfValuesForTipus(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (pluginForm.getListOfSeccioForSeccioID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForSeccioID(request, mav, pluginForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      pluginForm.setListOfSeccioForSeccioID(_listSKV);
     }
     
   }
@@ -737,6 +761,46 @@ public java.lang.Long stringToPK(String value) {
     __tmp.add(new StringKeyValue("3" , "3"));
     __tmp.add(new StringKeyValue("4" , "4"));
     return __tmp;
+  }
+
+
+  public List<StringKeyValue> getReferenceListForSeccioID(HttpServletRequest request,
+       ModelAndView mav, PluginForm pluginForm, Where where)  throws I18NException {
+    if (pluginForm.isHiddenField(SECCIOID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _where = null;
+    if (pluginForm.isReadOnlyField(SECCIOID)) {
+      _where = SeccioFields.SECCIOID.equal(pluginForm.getPlugin().getSeccioID());
+    }
+    return getReferenceListForSeccioID(request, mav, Where.AND(where, _where));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForSeccioID(HttpServletRequest request,
+       ModelAndView mav, PluginFilterForm pluginFilterForm,
+       List<Plugin> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (pluginFilterForm.isHiddenField(SECCIOID)
+      && !pluginFilterForm.isGroupByField(SECCIOID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    if (!_groupByItemsMap.containsKey(SECCIOID)) {
+      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
+      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
+      for (Plugin _item : list) {
+        if(_item.getSeccioID() == null) { continue; };
+        _pkList.add(_item.getSeccioID());
+        }
+        _w = SeccioFields.SECCIOID.in(_pkList);
+      }
+    return getReferenceListForSeccioID(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForSeccioID(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    return seccioRefList.getReferenceList(SeccioFields.SECCIOID, where );
   }
 
 

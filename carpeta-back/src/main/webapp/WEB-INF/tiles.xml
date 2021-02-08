@@ -490,6 +490,16 @@
     </definition>
 
 
+    <definition name="seccioFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="seccio.seccio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/seccioForm.jsp" />
+    </definition>
+    
+    <definition name="seccioListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/seccioList.jsp" />
+    </definition>
+
+
     <definition name="traduccioFormWebDB" extends="webdb">
         <put-attribute name="titol" value="traduccio.traduccio" />
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/traduccioForm.jsp" />

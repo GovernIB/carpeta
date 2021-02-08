@@ -91,6 +91,13 @@ ${entityname}
         </span></a>
         </li>
 
+    <%-- Seccio --%>
+       <fmt:message var="entityname" key="seccio.seccio.plural"/>
+        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/seccio/list/1"/>" ><span style="${(fn:contains(url, 'seccio/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
+${entityname}
+        </span></a>
+        </li>
+
     <%-- Traduccio --%>
        <fmt:message var="entityname" key="traduccio.traduccio.plural"/>
         <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/traduccio/list/1"/>" ><span style="${(fn:contains(url, 'traduccio/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >

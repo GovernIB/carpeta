@@ -35,7 +35,7 @@ public class CustomHibernatePersistenceProvider extends HibernatePersistenceProv
 			fitxerProperties.forEach((k,v) -> {
                String kStr = k.toString();
 	        	if (kStr.startsWith("es.caib.carpeta.hibernate")) {
-	        		projecteProperties.put(kStr.replace("es.caib.carpeta",""), v.toString());
+	        		projecteProperties.put(kStr.replace("es.caib.carpeta.",""), v.toString());
 	        	} else if(kStr.startsWith("hibernate.")) {
 	        		//if (!projecteProperties.containsKey(kStr)) {
 	        			projecteProperties.put(kStr, v.toString());

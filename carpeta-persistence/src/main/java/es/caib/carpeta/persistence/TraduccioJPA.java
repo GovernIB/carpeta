@@ -169,6 +169,32 @@ private static final long serialVersionUID = -326205279L;
 	}
 
 
+// EXP  Field:descripcioid | Table: car_seccio | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "descripcioID")
+	private Set<SeccioJPA> seccio_descripcioids = new HashSet<SeccioJPA>(0);
+	public  Set<SeccioJPA> getSeccio_descripcioids() {
+    return this.seccio_descripcioids;
+  }
+
+	public void setSeccio_descripcioids(Set<SeccioJPA> seccio_descripcioids) {
+	  this.seccio_descripcioids = seccio_descripcioids;
+	}
+
+
+// EXP  Field:nomid | Table: car_seccio | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "nomID")
+	private Set<SeccioJPA> seccio_nomids = new HashSet<SeccioJPA>(0);
+	public  Set<SeccioJPA> getSeccio_nomids() {
+    return this.seccio_nomids;
+  }
+
+	public void setSeccio_nomids(Set<SeccioJPA> seccio_nomids) {
+	  this.seccio_nomids = seccio_nomids;
+	}
+
+
   @ElementCollection(fetch= FetchType.EAGER, targetClass = es.caib.carpeta.persistence.TraduccioMapJPA.class)
   @Cascade(value=org.hibernate.annotations.CascadeType.ALL)
   @LazyCollection(value= LazyCollectionOption.FALSE)
@@ -239,6 +265,14 @@ private static final long serialVersionUID = -326205279L;
     if(!"EntitatJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat_nomids) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat_nomids())) ) {
       __tmp.setEntitat_nomids(EntitatJPA.copyJPA(__jpa.getEntitat_nomids(), __alreadyCopied,"TraduccioJPA"));
+    }
+    if(!"SeccioJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.seccio_nomids) || org.hibernate.Hibernate.isInitialized(__jpa.getSeccio_nomids())) ) {
+      __tmp.setSeccio_nomids(SeccioJPA.copyJPA(__jpa.getSeccio_nomids(), __alreadyCopied,"TraduccioJPA"));
+    }
+    if(!"SeccioJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.seccio_descripcioids) || org.hibernate.Hibernate.isInitialized(__jpa.getSeccio_descripcioids())) ) {
+      __tmp.setSeccio_descripcioids(SeccioJPA.copyJPA(__jpa.getSeccio_descripcioids(), __alreadyCopied,"TraduccioJPA"));
     }
     if(!"PluginJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.plugin_nomids) || org.hibernate.Hibernate.isInitialized(__jpa.getPlugin_nomids())) ) {

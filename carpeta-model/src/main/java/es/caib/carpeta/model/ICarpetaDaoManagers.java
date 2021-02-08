@@ -15,6 +15,7 @@ public interface ICarpetaDaoManagers {
 	public IPluginManager getPluginManager();
 	public IPluginEntitatManager getPluginEntitatManager();
 	public IPropietatGlobalManager getPropietatGlobalManager();
+	public ISeccioManager getSeccioManager();
 	public ITraduccioManager getTraduccioManager();
 	public IUsuariManager getUsuariManager();
 	public IUsuariEntitatManager getUsuariEntitatManager();

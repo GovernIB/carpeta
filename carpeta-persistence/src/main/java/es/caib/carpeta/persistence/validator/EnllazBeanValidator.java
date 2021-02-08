@@ -21,6 +21,8 @@ public class EnllazBeanValidator
 
   protected final es.caib.carpeta.model.dao.IEntitatManager __entitatManager;
 
+  protected final es.caib.carpeta.model.dao.ISeccioManager __seccioManager;
+
   protected final es.caib.carpeta.model.dao.ITraduccioManager __traduccioManager;
 
 
@@ -29,9 +31,11 @@ public class EnllazBeanValidator
 
   public EnllazBeanValidator(es.caib.carpeta.model.dao.IEnllazManager __enllazManager,
      es.caib.carpeta.model.dao.IEntitatManager __entitatManager,
+     es.caib.carpeta.model.dao.ISeccioManager __seccioManager,
      es.caib.carpeta.model.dao.ITraduccioManager __traduccioManager) { 
     this.__enllazManager = __enllazManager;
     this.__entitatManager = __entitatManager;
+    this.__seccioManager = __seccioManager;
     this.__traduccioManager = __traduccioManager;
     _validator = new EnllazValidator<EnllazJPA>();
   }
@@ -39,9 +43,11 @@ public class EnllazBeanValidator
   public EnllazBeanValidator(EnllazValidator<EnllazJPA> _validator,
      es.caib.carpeta.model.dao.IEnllazManager __enllazManager,
      es.caib.carpeta.model.dao.IEntitatManager __entitatManager,
+     es.caib.carpeta.model.dao.ISeccioManager __seccioManager,
      es.caib.carpeta.model.dao.ITraduccioManager __traduccioManager) {
     this.__enllazManager = __enllazManager;
     this.__entitatManager = __entitatManager;
+    this.__seccioManager = __seccioManager;
     this.__traduccioManager = __traduccioManager;
     this._validator = _validator;
   }
@@ -49,7 +55,7 @@ public class EnllazBeanValidator
   @Override
   public List<I18NFieldError> validate(EnllazJPA target, boolean isNou) throws I18NException {
     BeanValidatorResult<EnllazJPA> _bvr_ = new BeanValidatorResult<EnllazJPA>();
-    _validator.validate(_bvr_, target, isNou, __enllazManager, __entitatManager, __traduccioManager);
+    _validator.validate(_bvr_, target, isNou, __enllazManager, __entitatManager, __seccioManager, __traduccioManager);
     return _bvr_.getErrors();
   }
 }
