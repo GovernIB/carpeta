@@ -65,6 +65,14 @@
           </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,SeccioFields.ENTITATID)}">
+          <td>
+          <c:set var="tmp">${seccio.entitatID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfEntitatForEntitatID[tmp]}
+          </c:if>
+          </td>
+        </c:if>
 
 
         <!--  /** Additional Fields */  -->

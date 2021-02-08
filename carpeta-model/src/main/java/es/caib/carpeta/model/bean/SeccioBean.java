@@ -16,6 +16,7 @@ private static final long serialVersionUID = 223694536L;
 	boolean activa;
 	long iconaID;
 	java.lang.Long seccioPareID;
+	long entitatID;
 
 
   /** Constructor Buit */
@@ -23,21 +24,23 @@ private static final long serialVersionUID = 223694536L;
   }
 
   /** Constructor amb tots els camps  */
-  public SeccioBean(long seccioID , long nomID , long descripcioID , boolean activa , long iconaID , java.lang.Long seccioPareID) {
+  public SeccioBean(long seccioID , long nomID , long descripcioID , boolean activa , long iconaID , java.lang.Long seccioPareID , long entitatID) {
     this.seccioID=seccioID;
     this.nomID=nomID;
     this.descripcioID=descripcioID;
     this.activa=activa;
     this.iconaID=iconaID;
     this.seccioPareID=seccioPareID;
+    this.entitatID=entitatID;
 }
   /** Constructor sense valors autoincrementals */
-  public SeccioBean(long nomID , long descripcioID , boolean activa , long iconaID , java.lang.Long seccioPareID) {
+  public SeccioBean(long nomID , long descripcioID , boolean activa , long iconaID , java.lang.Long seccioPareID , long entitatID) {
     this.nomID=nomID;
     this.descripcioID=descripcioID;
     this.activa=activa;
     this.iconaID=iconaID;
     this.seccioPareID=seccioPareID;
+    this.entitatID=entitatID;
 }
   public SeccioBean(Seccio __bean) {
     this.setSeccioID(__bean.getSeccioID());
@@ -46,6 +49,7 @@ private static final long serialVersionUID = 223694536L;
     this.setActiva(__bean.isActiva());
     this.setIconaID(__bean.getIconaID());
     this.setSeccioPareID(__bean.getSeccioPareID());
+    this.setEntitatID(__bean.getEntitatID());
     // Fitxer
     this.setIcona(FitxerBean.toBean(__bean.getIcona()));
 	}
@@ -92,6 +96,13 @@ private static final long serialVersionUID = 223694536L;
 		this.seccioPareID = _seccioPareID_;
 	};
 
+	public long getEntitatID() {
+		return(entitatID);
+	};
+	public void setEntitatID(long _entitatID_) {
+		this.entitatID = _entitatID_;
+	};
+
 
 
   // ======================================
@@ -105,6 +116,7 @@ private static final long serialVersionUID = 223694536L;
     __tmp.setActiva(__bean.isActiva());
     __tmp.setIconaID(__bean.getIconaID());
     __tmp.setSeccioPareID(__bean.getSeccioPareID());
+    __tmp.setEntitatID(__bean.getEntitatID());
     // Fitxer
     __tmp.setIcona(FitxerBean.toBean(__bean.getIcona()));
 		return __tmp;

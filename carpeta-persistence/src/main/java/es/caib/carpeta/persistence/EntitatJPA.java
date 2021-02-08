@@ -475,6 +475,19 @@ private static final long serialVersionUID = 489209138L;
 	}
 
 
+// EXP  Field:entitatid | Table: car_seccio | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
+	private Set<SeccioJPA> seccios = new HashSet<SeccioJPA>(0);
+	public  Set<SeccioJPA> getSeccios() {
+    return this.seccios;
+  }
+
+	public void setSeccios(Set<SeccioJPA> seccios) {
+	  this.seccios = seccios;
+	}
+
+
 // EXP  Field:darreraentitat | Table: car_usuari | Type: 0  
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
@@ -729,6 +742,10 @@ private static final long serialVersionUID = 489209138L;
     if(!"AccesJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.access) || org.hibernate.Hibernate.isInitialized(__jpa.getAccess())) ) {
       __tmp.setAccess(AccesJPA.copyJPA(__jpa.getAccess(), __alreadyCopied,"EntitatJPA"));
+    }
+    if(!"SeccioJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.seccios) || org.hibernate.Hibernate.isInitialized(__jpa.getSeccios())) ) {
+      __tmp.setSeccios(SeccioJPA.copyJPA(__jpa.getSeccios(), __alreadyCopied,"EntitatJPA"));
     }
     if(!"AvisJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.aviss) || org.hibernate.Hibernate.isInitialized(__jpa.getAviss())) ) {

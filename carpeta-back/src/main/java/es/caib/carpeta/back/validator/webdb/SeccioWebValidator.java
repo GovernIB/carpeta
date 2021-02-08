@@ -33,6 +33,9 @@ public class SeccioWebValidator extends AbstractWebValidator<SeccioForm, Seccio>
   protected SeccioValidator<Seccio> validator = new SeccioValidator<Seccio>();
 
   // EJB's
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EntitatService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.EntitatService entitatEjb;
+
   @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.SeccioService.JNDI_NAME)
   protected es.caib.carpeta.ejb.SeccioService seccioEjb;
 
@@ -162,7 +165,7 @@ _ignoreFields.add(DESCRIPCIOID);
     }
     BeanValidatorResult<Seccio> __vr = new BeanValidatorResult<Seccio>();
     validator.validate(__vr, __bean,
-      isNou, seccioEjb, traduccioEjb);
+      isNou, entitatEjb, seccioEjb, traduccioEjb);
 
     if (__vr.hasErrors()) {
         List<I18NFieldError> vrErrors = __vr.getErrors();

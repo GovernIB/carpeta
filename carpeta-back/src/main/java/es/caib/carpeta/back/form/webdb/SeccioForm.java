@@ -27,6 +27,7 @@ public class SeccioForm extends CarpetaBaseForm {
     this.listOfTraduccioForNomID = __toClone.listOfTraduccioForNomID;
     this.listOfTraduccioForDescripcioID = __toClone.listOfTraduccioForDescripcioID;
     this.listOfValuesForSeccioPareID = __toClone.listOfValuesForSeccioPareID;
+    this.listOfEntitatForEntitatID = __toClone.listOfEntitatForEntitatID;
   }
   
   public SeccioForm(SeccioJPA seccio, boolean nou) {
@@ -97,6 +98,18 @@ public class SeccioForm extends CarpetaBaseForm {
 
   public void setListOfValuesForSeccioPareID(List<StringKeyValue> listOfValuesForSeccioPareID) {
     this.listOfValuesForSeccioPareID = listOfValuesForSeccioPareID;
+  }
+
+
+
+  private List<StringKeyValue> listOfEntitatForEntitatID;
+
+  public List<StringKeyValue> getListOfEntitatForEntitatID() {
+    return this.listOfEntitatForEntitatID;
+  }
+
+  public void setListOfEntitatForEntitatID(List<StringKeyValue> listOfEntitatForEntitatID) {
+    this.listOfEntitatForEntitatID = listOfEntitatForEntitatID;
   }
 
 

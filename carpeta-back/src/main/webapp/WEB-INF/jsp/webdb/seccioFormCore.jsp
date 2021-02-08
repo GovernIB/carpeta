@@ -175,3 +175,30 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,SeccioFields.ENTITATID)}">
+        <tr id="seccio_entitatID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[SeccioFields.ENTITATID])?'seccio.entitatID':__theForm.labels[SeccioFields.ENTITATID]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[SeccioFields.ENTITATID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[SeccioFields.ENTITATID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <form:errors path="seccio.entitatID" cssClass="errorField alert alert-danger" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,SeccioFields.ENTITATID)}" >
+          <form:hidden path="seccio.entitatID"/>
+          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.seccio.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,SeccioFields.ENTITATID)}" >
+          <form:select id="seccio_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-8" path="seccio.entitatID">
+            <c:forEach items="${__theForm.listOfEntitatForEntitatID}" var="tmp">
+            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        

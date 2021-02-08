@@ -53,6 +53,10 @@ private static final long serialVersionUID = 838506947L;
 	@Column(name="secciopareid",length = 19)
 	java.lang.Long seccioPareID;
 
+	@Index(name="car_seccio_entitatid_fk_i")
+	@Column(name="entitatid",nullable = false,length = 19)
+	long entitatID;
+
 
 
   /** Constructor Buit */
@@ -60,21 +64,23 @@ private static final long serialVersionUID = 838506947L;
   }
 
   /** Constructor amb tots els camps  */
-  public SeccioJPA(long seccioID , long nomID , long descripcioID , boolean activa , long iconaID , java.lang.Long seccioPareID) {
+  public SeccioJPA(long seccioID , long nomID , long descripcioID , boolean activa , long iconaID , java.lang.Long seccioPareID , long entitatID) {
     this.seccioID=seccioID;
     this.nomID=nomID;
     this.descripcioID=descripcioID;
     this.activa=activa;
     this.iconaID=iconaID;
     this.seccioPareID=seccioPareID;
+    this.entitatID=entitatID;
 }
   /** Constructor sense valors autoincrementals */
-  public SeccioJPA(long nomID , long descripcioID , boolean activa , long iconaID , java.lang.Long seccioPareID) {
+  public SeccioJPA(long nomID , long descripcioID , boolean activa , long iconaID , java.lang.Long seccioPareID , long entitatID) {
     this.nomID=nomID;
     this.descripcioID=descripcioID;
     this.activa=activa;
     this.iconaID=iconaID;
     this.seccioPareID=seccioPareID;
+    this.entitatID=entitatID;
 }
   public SeccioJPA(Seccio __bean) {
     this.setSeccioID(__bean.getSeccioID());
@@ -83,6 +89,7 @@ private static final long serialVersionUID = 838506947L;
     this.setActiva(__bean.isActiva());
     this.setIconaID(__bean.getIconaID());
     this.setSeccioPareID(__bean.getSeccioPareID());
+    this.setEntitatID(__bean.getEntitatID());
     // Fitxer
     this.setIcona(FitxerJPA.toJPA(__bean.getIcona()));
 	}
@@ -127,6 +134,13 @@ private static final long serialVersionUID = 838506947L;
 	};
 	public void setSeccioPareID(java.lang.Long _seccioPareID_) {
 		this.seccioPareID = _seccioPareID_;
+	};
+
+	public long getEntitatID() {
+		return(entitatID);
+	};
+	public void setEntitatID(long _entitatID_) {
+		this.entitatID = _entitatID_;
 	};
 
 
@@ -235,6 +249,21 @@ private static final long serialVersionUID = 838506947L;
     this.icona = icona;
   }
 
+// IMP Field:entitatid | Table: car_entitat | Type: 1  
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@ForeignKey(name="car_seccio_entitat_ent_fk")
+	@JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false)
+	private EntitatJPA entitat;
+
+	public EntitatJPA getEntitat() {
+    return this.entitat;
+  }
+
+	public  void setEntitat(EntitatJPA entitat) {
+    this.entitat = entitat;
+  }
+
 
  // ---------------  STATIC METHODS ------------------
   public static SeccioJPA toJPA(Seccio __bean) {
@@ -246,6 +275,7 @@ private static final long serialVersionUID = 838506947L;
     __tmp.setActiva(__bean.isActiva());
     __tmp.setIconaID(__bean.getIconaID());
     __tmp.setSeccioPareID(__bean.getSeccioPareID());
+    __tmp.setEntitatID(__bean.getEntitatID());
     // Fitxer
     __tmp.setIcona(FitxerJPA.toJPA(__bean.getIcona()));
 		return __tmp;
@@ -294,6 +324,10 @@ private static final long serialVersionUID = 838506947L;
     if(!"TraduccioJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.nom) || org.hibernate.Hibernate.isInitialized(__jpa.getNom()) ) ) {
       __tmp.setNom(TraduccioJPA.copyJPA(__jpa.getNom(), __alreadyCopied,"SeccioJPA"));
+    }
+    if(!"EntitatJPA".equals(origenJPA) && 
+       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat()) ) ) {
+      __tmp.setEntitat(EntitatJPA.copyJPA(__jpa.getEntitat(), __alreadyCopied,"SeccioJPA"));
     }
 
     return __tmp;

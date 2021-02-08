@@ -109,6 +109,28 @@ public class SeccioFilterForm extends CarpetaBaseFilterForm implements SeccioFie
   }
 
 
+  private java.lang.Long entitatIDDesde;
+
+  public java.lang.Long getEntitatIDDesde() {
+    return this.entitatIDDesde;
+  }
+
+  public void setEntitatIDDesde(java.lang.Long entitatIDDesde) {
+    this.entitatIDDesde = entitatIDDesde;
+  }
+
+
+  private java.lang.Long entitatIDFins;
+
+  public java.lang.Long getEntitatIDFins() {
+    return this.entitatIDFins;
+  }
+
+  public void setEntitatIDFins(java.lang.Long entitatIDFins) {
+    this.entitatIDFins = entitatIDFins;
+  }
+
+
   public SeccioFilterForm() {
   }
   
@@ -122,9 +144,12 @@ public class SeccioFilterForm extends CarpetaBaseFilterForm implements SeccioFie
     this.descripcioIDFins = __toClone.descripcioIDFins;
     this.seccioPareIDDesde = __toClone.seccioPareIDDesde;
     this.seccioPareIDFins = __toClone.seccioPareIDFins;
+    this.entitatIDDesde = __toClone.entitatIDDesde;
+    this.entitatIDFins = __toClone.entitatIDFins;
     this.mapOfTraduccioForNomID = __toClone.mapOfTraduccioForNomID;
     this.mapOfTraduccioForDescripcioID = __toClone.mapOfTraduccioForDescripcioID;
     this.mapOfValuesForSeccioPareID = __toClone.mapOfValuesForSeccioPareID;
+    this.mapOfEntitatForEntitatID = __toClone.mapOfEntitatForEntitatID;
   }
   
   /* ========= UTILS ========== */
@@ -191,6 +216,18 @@ public class SeccioFilterForm extends CarpetaBaseFilterForm implements SeccioFie
 
   public void setMapOfValuesForSeccioPareID(Map<String, String> mapOfValuesForSeccioPareID) {
     this.mapOfValuesForSeccioPareID = mapOfValuesForSeccioPareID;
+  }
+
+
+
+  private Map<String, String> mapOfEntitatForEntitatID;
+
+  public Map<String, String> getMapOfEntitatForEntitatID() {
+    return this.mapOfEntitatForEntitatID;
+  }
+
+  public void setMapOfEntitatForEntitatID(Map<String, String> mapOfEntitatForEntitatID) {
+    this.mapOfEntitatForEntitatID = mapOfEntitatForEntitatID;
   }
 
 

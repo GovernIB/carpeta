@@ -30,6 +30,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,SeccioFields.SECCIOPAREID)}">
         <th>${car:getSortIcons(__theFilterForm,SeccioFields.SECCIOPAREID)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,SeccioFields.ENTITATID)}">
+        <th>${car:getSortIcons(__theFilterForm,SeccioFields.ENTITATID)}</th>
+        </c:if>
 
 
         <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">
