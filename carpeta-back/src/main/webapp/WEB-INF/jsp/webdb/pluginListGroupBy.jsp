@@ -37,7 +37,7 @@
       
       <div class="float-right" style="padding-left:2px">
             <div class="span10">
-               <i title="<fmt:message key="genapp.form.hidegroupby"/>" onclick="document.getElementById('GroupDiv').style.display='none'; document.getElementById('GroupButton').style.display='inline';" class="icon-remove"></i>
+               <i title="<fmt:message key="genapp.form.hidegroupby"/>" onclick="document.getElementById('GroupDiv').style.display='none'; document.getElementById('GroupButton').style.display='inline';" class="fas fa-trash"></i>
             </div>
       </div>
 
