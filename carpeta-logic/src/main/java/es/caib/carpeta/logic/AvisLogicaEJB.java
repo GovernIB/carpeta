@@ -26,7 +26,8 @@ public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaService {
 					+ "where (CURRENT_DATE between a.dataInici and a.dataFi) "
 					+ "   or (a.dataFi IS NULL and a.dataInici IS NULL)"
 					+ "   or (a.dataFi IS NULL and CURRENT_DATE >= a.dataInici)"
-					+ "   or (a.dataInici IS NULL and CURRENT_DATE < a.dataFi)", AvisJPA.class);
+					+ "   or (a.dataInici IS NULL and CURRENT_DATE < a.dataFi)"
+					+ " order by a.gravetat desc", AvisJPA.class);
 			return query.getResultList(); 
 	 }
 	
@@ -39,7 +40,8 @@ public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaService {
 					+ "and ((CURRENT_DATE between a.dataInici and a.dataFi)"
 					+ " or (a.dataFi IS NULL and a.dataInici IS NULL)"
 					+ " or (a.dataFi IS NULL and CURRENT_DATE >= a.dataInici)"
-					+ " or (a.dataInici IS NULL and CURRENT_DATE < a.dataFi))", AvisJPA.class);
+					+ " or (a.dataInici IS NULL and CURRENT_DATE < a.dataFi))"
+					+ " order by a.gravetat desc", AvisJPA.class);
 		 	query.setParameter("entidad", entidadID);
 			return query.getResultList(); 
 	 }
