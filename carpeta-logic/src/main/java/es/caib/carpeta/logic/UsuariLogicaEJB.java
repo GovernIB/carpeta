@@ -7,9 +7,11 @@ import javax.annotation.security.PermitAll;
 
 
 import javax.ejb.Stateless;
+import javax.persistence.TypedQuery;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import es.caib.carpeta.ejb.UsuariEJB;
+import es.caib.carpeta.persistence.UsuariEntitatJPA;
 import es.caib.carpeta.persistence.UsuariJPA;
 import es.caib.carpeta.model.entity.Usuari;
 import es.caib.carpeta.model.fields.UsuariFields;
@@ -27,17 +29,15 @@ public class UsuariLogicaEJB extends UsuariEJB implements UsuariLogicaService {
 	@PermitAll
 	public UsuariJPA findByUsername(String username) throws I18NException {
 		
+		TypedQuery<UsuariJPA> query = getEntityManager().createQuery(
+				"select u from UsuariJPA u "
+				+ "join fetch u.entitat "
+				+ "where u.username = :username", UsuariJPA.class);
+		query.setParameter("username", username);
 		
-		List<Usuari> usuaris = select(UsuariFields.USERNAME.equal(username));
-		
-		if (usuaris == null || usuaris.size() == 0) {
-			return null;
-		} else {
-			return (UsuariJPA)usuaris.get(0);
-		}
-		
-		
-		
+		List<UsuariJPA> resultats = query.getResultList();
+		return (resultats.size() > 0) ? resultats.get(0) : null;
+			
 	}
 	
 	

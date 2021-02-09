@@ -2,6 +2,8 @@ package es.caib.carpeta.back.controller.common;
 
 import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.commons.utils.Configuracio;
+import es.caib.carpeta.model.entity.Usuari;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +14,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,6 +29,9 @@ import javax.servlet.http.HttpSession;
 public class PrincipalController {
 
 	protected final Logger log = Logger.getLogger(getClass());
+	
+	@EJB(mappedName= es.caib.carpeta.ejb.UsuariService.JNDI_NAME)
+	protected es.caib.carpeta.ejb.UsuariService usuariEjb; 
 
 	@RequestMapping(value = "/common/principal.html")
 	public ModelAndView principal(HttpSession session, HttpServletRequest request, HttpServletResponse response)
@@ -46,11 +52,9 @@ public class PrincipalController {
             if (request.isUserInRole("ROLE_ADMIN") && LoginInfo.getInstance().getEntitatID() != null ) {
                 return new ModelAndView(new RedirectView("/adminentitat/buit", true));
             }
-			
 		}
-
 		return new ModelAndView("principal");
-
+		
 	}
 
 	@RequestMapping(value = "/canviarIdioma/{idioma}", method = RequestMethod.GET)
@@ -117,7 +121,14 @@ public class PrincipalController {
 			@PathVariable String idEntitat) throws Exception {
 
 		LoginInfo loginInfo = LoginInfo.getInstance();
-		loginInfo.setEntitatID(Long.parseLong(idEntitat,10));
+		
+		// Guardam la darrera entitat a base de dades
+    	Usuari usuariAutenticat = usuariEjb.findByPrimaryKey(loginInfo.getUsuariPersona().getUsuariID());
+    	usuariAutenticat.setDarreraEntitat(Long.parseLong(idEntitat,10));
+    	usuariEjb.update(usuariAutenticat);
+    	
+		// Guardam la darrera entitat a logininfo
+    	loginInfo.setEntitatID(Long.parseLong(idEntitat,10));
 		
 		HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
 				.getRequest();	
