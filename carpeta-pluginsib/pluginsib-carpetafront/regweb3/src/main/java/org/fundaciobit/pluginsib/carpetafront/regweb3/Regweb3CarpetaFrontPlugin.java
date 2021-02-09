@@ -14,6 +14,7 @@ import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.regweb3.ws.api.v3.AnexoWs;
 import es.caib.regweb3.ws.api.v3.AsientoRegistralWs;
+import es.caib.regweb3.ws.api.v3.JustificanteWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWsService;
 import es.caib.regweb3.ws.api.v3.ResultadoBusquedaWs;
@@ -157,14 +158,15 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         if (query.startsWith(LLISTAT_REGISTRES_PAGE)) {
 
-
             llistatDeRegistres(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData, administrationEncriptedID, locale, isGet);
 
         } else if (query.startsWith(DETALL_REGISTRE_PAGE)) {
 
             detallDeRegistre(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData, administrationEncriptedID, locale, isGet);
-        } else {
+        } else if (query.startsWith(JUSTIFICANT_REGISTRE_PAGE)) {
 
+            justificantDeRegistre(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData, administrationEncriptedID, locale, isGet);
+        } else {
 
             super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData, administrationEncriptedID, locale, isGet);
         }
@@ -190,6 +192,10 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     public String getDetalleTitle(Locale locale) {
         return getTraduccio("detalletitle", locale);
+    }
+
+    public String getJustificantTitle(Locale locale) {
+        return getTraduccio("justificantetitle", locale);
     }
 
 
@@ -380,7 +386,7 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             String numeroRegistroFormateado = request.getParameter("numeroRegistroFormateado");
 
 
-            String webpage = getDetallDeRegistrePage(absolutePluginRequestPath,numeroRegistroFormateado, userData.getAdministrationID(),getEntidad(),locale);
+            String webpage = getDetallDeRegistrePage(absolutePluginRequestPath,numeroRegistroFormateado, userData.getAdministrationID(),getEntidad(),locale,"");
 
             try {
                 response.getWriter().println(webpage);
@@ -397,7 +403,8 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     }
 
 
-    public String getDetallDeRegistrePage(String absolutePluginRequestPath, String numeroRegistroFormateado,String administrationID, String entidad, Locale locale) throws Exception {
+    public String getDetallDeRegistrePage(String absolutePluginRequestPath, String numeroRegistroFormateado,String administrationID, String entidad, Locale locale, String errorGeneracioJustificant) throws Exception {
+
 
         Map<String, Object> map = new HashMap<String, Object>();
 
@@ -446,12 +453,6 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         map.put("registroIdioma", registroIdioma);
 
-        //Traduccions validez documento anexo
-       /* String [] validezDocumento = {"",getTraduccio("registro.anexo.validezdocumento.1",locale),"",
-                getTraduccio("registro.anexo.validezdocumento.3",locale),
-                getTraduccio("registro.anexo.validezdocumento.4",locale)};*/
-
-
 
         Map<String, String> VALIDEZ_DOCUMENTAL_ANEXO = new HashMap<String, String>() {{
             put(VALIDEZ_DOCUMENTO_COPIA, getTraduccio("registro.anexo.validezdocumento.1",locale));
@@ -461,20 +462,12 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         map.put("validezDocumento", VALIDEZ_DOCUMENTAL_ANEXO);
 
-        //map.put("tipusMime", TEXTO_REDUCIDO_BY_TIPO_MIME);
-
-        /*<td><#if anexo.tipoMIMEFicheroAnexado?has_content >
-              <#if tipusMime[anexo.tipoMIMEFicheroAnexado]?has_content >
-                ${tipusMime[anexo.tipoMIMEFicheroAnexado]}
-                                                        </#if>
-                                                    </#if>
-                                                </td>*/
-
         String[] traduccions = {"registro.titulo.detalle", "registro.entrada", "registro.fecha", "registro.numero",
            "registro.oficina", "registro.destinatario", "registro.tipo.doc", "registro.extracto", "carpeta.idioma",
            "registro.presencial", "registro.justificante", "registre.justifcante.pendiente", "registro.interesados",
            "registro.interesado.nombre", "registro.interesado.documento", "registro.interesado.tipo", "registro.anexos",
-           "registro.anexos.vacio", "registro.anexo.titulo", "registro.anexo.validezdocumento", "carpeta.descargar"};
+           "registro.anexos.vacio", "registro.anexo.titulo", "registro.anexo.validezdocumento", "carpeta.descargar",
+           "justificante.generar","carpeta.catala","carpeta.castella", "justificante.generando"};
 
 
         for (String t : traduccions) {
@@ -484,6 +477,14 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         map.put("registro", registre);
 
+
+        String urlDetalle = absolutePluginRequestPath  + "/" + DETALL_REGISTRE_PAGE +"?numeroRegistroFormateado=";
+        map.put("urlDetalle" , urlDetalle);
+
+        //Montamos la url de generación del justificante
+        String urlJustificant = absolutePluginRequestPath  + "/" + JUSTIFICANT_REGISTRE_PAGE +"?numeroRegistroFormateado="+registre.getNumeroRegistroFormateado()+"&tipoRegistro="+registre.getTipoRegistro();
+        map.put("urlJustificant",urlJustificant);
+
         //Montamos la url de descarga del justificante
         String concsvUrl = getConcsvUrl();
         for(AnexoWs anexoWs : registre.getAnexos()) {
@@ -491,6 +492,11 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 map.put("justificante", concsvUrl.concat(anexoWs.getCsv()));
             }
         }
+
+        //Indicamos si se ha producido un error en la generación del justificante
+        map.put("errorGeneracioJustificant", errorGeneracioJustificant);
+
+
         String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
 
         return generat;
@@ -536,6 +542,88 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
 
         return registro;
+    }
+
+
+
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // -------------------     JUSTIFICANTE   DE   REGISTRE                        ----------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+
+
+
+    protected static final String JUSTIFICANT_REGISTRE_PAGE = "justificantRegistre";
+
+
+    public void justificantDeRegistre(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+                                 HttpServletRequest request, HttpServletResponse response, UserData userData,
+                                 String administrationEncriptedID, Locale locale, boolean isGet) {
+
+        try {
+
+
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("text/html");
+
+
+            String numeroRegistroFormateado = request.getParameter("numeroRegistroFormateado");
+            String tipoRegistro = request.getParameter("tipoRegistro");
+
+            String webpage = getJustificantDeRegistrePage(absolutePluginRequestPath,numeroRegistroFormateado,userData.getAdministrationID(),Long.parseLong(tipoRegistro) ,getEntidad(),locale,request,response);
+
+            try {
+                response.getWriter().println(webpage);
+                response.flushBuffer();
+            } catch (IOException e) {
+                log.error("Error obtening writer: " + e.getMessage(), e);
+            }
+
+        } catch (Exception e) {
+            log.error("Error llistant registres: " + e.getMessage(), e);
+        }
+
+
+    }
+
+
+    public String getJustificantDeRegistrePage(String absolutePluginRequestPath, String numeroRegistroFormateado, String administrationID, Long tipoRegistro, String entidad, Locale locale, HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        //Generam justificant
+        getJustificantRegistre(entidad,numeroRegistroFormateado,tipoRegistro);
+
+        //Indicam si s'ha produit un error en la generació del justificant
+        String errorJustificant= "";
+        if(getJustificantRegistre(entidad,numeroRegistroFormateado,tipoRegistro) == null) {
+            errorJustificant  = getTraduccio("justificante.error.generando", locale);
+        }
+
+        //Recarregam la pàgina de detall
+        return getDetallDeRegistrePage(absolutePluginRequestPath, numeroRegistroFormateado, administrationID, entidad,  locale, errorJustificant);
+
+    }
+
+
+
+    public JustificanteWs getJustificantRegistre(String entidad,String numeroRegistroFormateado, Long tipoRegistro)
+            throws Exception {
+
+
+
+        RegWebAsientoRegistralWs service = getRegWebAsientoRegistralWsService();
+        JustificanteWs justificante;
+
+        try{
+            justificante= service.obtenerJustificante(entidad,numeroRegistroFormateado,tipoRegistro);
+
+        }catch (Exception e){
+           justificante = null;
+        }
+
+        return justificante;
+
     }
 
 
