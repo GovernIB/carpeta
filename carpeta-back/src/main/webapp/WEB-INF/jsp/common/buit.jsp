@@ -1,18 +1,18 @@
 <%@page import="es.caib.carpeta.commons.utils.Configuracio"%>
 <%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
 
-<c:if test="${(pipella eq 'adminentitat')}">
+
 <div class="alertContainer">
     <c:if test="${sessionScope.numAvisos ne '0'}">
         <c:forEach items="${ sessionScope.avisosInfo }" var="avis">
             <div class="alert ${avis.value } alert-dismissible fade show" role="alert">
-                <c:out value="${avis.key.descripcio.traduccions[lang].valor}" />
+                <c:if test="${(pipella eq 'superadmin')}"><strong><c:out value="${avis.key.entitat.nom.traduccions[lang].valor}"/>: </strong></c:if><c:out value="${avis.key.descripcio.traduccions[lang].valor}" />
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
         </c:forEach>
     </c:if>
 </div>
-</c:if>
+
 <div class="buitContainer">
     <p><img src="<c:url value="/img/carpeta.png"/>"  alt="Carpeta" title="Carpeta"/></p>
     <h3><spring:message code="buit.benvinguda" /></h3>

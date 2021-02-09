@@ -146,7 +146,7 @@ public class BasePreparer implements ViewPreparer, Constants {
 				avisosList = avisLogicaEjb.findActiveByEntidadID(LoginInfo.getInstance().getEntitatID());
 			} 
 			
-			/* Enviam al back només els avisos de tipus BACK pels administradors d'entitat */
+			/* Enviam al back només els avisos de tipus BACK */
 			Map<AvisJPA,String> avisosInfo = new HashMap<AvisJPA,String>();
 			for(AvisJPA item : avisosList) {
 				int tipusAvis = item.getTipus();

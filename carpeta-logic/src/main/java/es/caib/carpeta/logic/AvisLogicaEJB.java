@@ -22,7 +22,7 @@ public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaService {
 	public List<AvisJPA> findAllActive () throws I18NException {
 		 
 		 TypedQuery<AvisJPA> query = getEntityManager().createQuery(
-					"select a from AvisJPA a "
+					"select a from AvisJPA a join fetch a.entitat "
 					+ "where (CURRENT_DATE between a.dataInici and a.dataFi) "
 					+ "   or (a.dataFi IS NULL and a.dataInici IS NULL)"
 					+ "   or (a.dataFi IS NULL and CURRENT_DATE >= a.dataInici)"
@@ -35,7 +35,7 @@ public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaService {
 	 public List<AvisJPA> findActiveByEntidadID (long entidadID) throws I18NException {
 		 
 		 TypedQuery<AvisJPA> query = getEntityManager().createQuery(
-					"select a from AvisJPA a "
+					"select a from AvisJPA a join fetch a.entitat "
 					+ "where a.entitatID = :entidad " 
 					+ "and ((CURRENT_DATE between a.dataInici and a.dataFi)"
 					+ " or (a.dataFi IS NULL and a.dataInici IS NULL)"
