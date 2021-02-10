@@ -56,6 +56,11 @@
                     <li><a href="<c:url value="/adminentitat/enllaz/list"/>"><spring:message
             code="enllaz.enllaz.plural" /></a></li>
                 </ul>
+                
+                <ul>
+                    <li><a href="<c:url value="/adminentitat/seccio/list"/>"><spring:message
+            code="seccio.seccio.plural" /></a></li>
+                </ul>
             </div>
             </div>
         </div>

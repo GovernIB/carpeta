@@ -131,28 +131,6 @@ public class PluginFilterForm extends CarpetaBaseFilterForm implements PluginFie
   }
 
 
-  private java.lang.Long seccioIDDesde;
-
-  public java.lang.Long getSeccioIDDesde() {
-    return this.seccioIDDesde;
-  }
-
-  public void setSeccioIDDesde(java.lang.Long seccioIDDesde) {
-    this.seccioIDDesde = seccioIDDesde;
-  }
-
-
-  private java.lang.Long seccioIDFins;
-
-  public java.lang.Long getSeccioIDFins() {
-    return this.seccioIDFins;
-  }
-
-  public void setSeccioIDFins(java.lang.Long seccioIDFins) {
-    this.seccioIDFins = seccioIDFins;
-  }
-
-
   public PluginFilterForm() {
   }
   
@@ -168,12 +146,9 @@ public class PluginFilterForm extends CarpetaBaseFilterForm implements PluginFie
     this.propietats = __toClone.propietats;
     this.tipusDesde = __toClone.tipusDesde;
     this.tipusFins = __toClone.tipusFins;
-    this.seccioIDDesde = __toClone.seccioIDDesde;
-    this.seccioIDFins = __toClone.seccioIDFins;
     this.mapOfTraduccioForNomID = __toClone.mapOfTraduccioForNomID;
     this.mapOfTraduccioForDescripcioID = __toClone.mapOfTraduccioForDescripcioID;
     this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
-    this.mapOfSeccioForSeccioID = __toClone.mapOfSeccioForSeccioID;
   }
   
   /* ========= UTILS ========== */
@@ -240,18 +215,6 @@ public class PluginFilterForm extends CarpetaBaseFilterForm implements PluginFie
 
   public void setMapOfValuesForTipus(Map<String, String> mapOfValuesForTipus) {
     this.mapOfValuesForTipus = mapOfValuesForTipus;
-  }
-
-
-
-  private Map<String, String> mapOfSeccioForSeccioID;
-
-  public Map<String, String> getMapOfSeccioForSeccioID() {
-    return this.mapOfSeccioForSeccioID;
-  }
-
-  public void setMapOfSeccioForSeccioID(Map<String, String> mapOfSeccioForSeccioID) {
-    this.mapOfSeccioForSeccioID = mapOfSeccioForSeccioID;
   }
 
 

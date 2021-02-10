@@ -6,6 +6,8 @@ import es.caib.carpeta.persistence.EntitatJPA;
 import es.caib.carpeta.logic.EntitatLogicaService;
 import es.caib.carpeta.logic.UtilitiesForFrontLogicaService;
 import es.caib.carpeta.logic.utils.EjbManager;
+import es.caib.carpeta.model.fields.EntitatFields;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fundaciobit.genapp.common.StringKeyValue;
@@ -77,7 +79,10 @@ public class InicioController extends CommonFrontController {
 
         try {
 
-            sesionHttp.setEntitat(codiEntitat);
+            sesionHttp.setEntitat2(codiEntitat);
+            
+            long entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID, EntitatFields.CODI.equal(codiEntitat));
+            sesionHttp.setEntitatID(entitatID);
 
         } catch (Throwable e) {
             processException(e, response);
@@ -116,8 +121,14 @@ public class InicioController extends CommonFrontController {
                     mav.addObject("canviarDeFront", canviardefront);
 
                 } else {
+                    
+                    String codiEntitat = entitats.get(0).key;
+                    
+                    
+                    long entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID, EntitatFields.CODI.equal(codiEntitat));
+                    sesionHttp.setEntitatID(entitatID);
 
-                    sesionHttp.setEntitat(entitats.get(0).key);
+                    sesionHttp.setEntitat2(codiEntitat);
                     log.info("ASSIGNAM ENTITAT 1: " + entitats.get(0).key);
                     mav.addObject("entitat", entitats.get(0).key);
                     mav.addObject("numEntitats", entitats.size());
@@ -131,7 +142,13 @@ public class InicioController extends CommonFrontController {
 
                 if (entitat != null) {
 
-                    sesionHttp.setEntitat(defaultEntityCode);
+                    
+                    
+                    long entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID, EntitatFields.CODI.equal(defaultEntityCode));
+                    sesionHttp.setEntitatID(entitatID);
+
+                    sesionHttp.setEntitat2(defaultEntityCode);
+                    
                     mav.addObject("entitat", sesionHttp.getEntitat());
                     mav.addObject("defaultEntityCode", defaultEntityCode);
                     mav.addObject("numEntitats", entitats.size());

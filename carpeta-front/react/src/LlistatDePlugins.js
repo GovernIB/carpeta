@@ -3,18 +3,26 @@ import { withTranslation } from 'react-i18next';
 import i18n from 'i18next';
 import axios from "axios";
 
+
 class LlistatDePlugins extends Component {
 
-    constructor(){
+    constructor() {
         super();
         this.state = {
             plugins: [],
-            menupseudoplugin : []
+            menupseudoplugin : [],
+            seccions : []
         }
     }
 
     componentWillMount() {
-        var url = window.location.href + `pluginfront/veureplugins`;
+
+        const seccioID = this.props.seccioID ? this.props.seccioID : 0;
+
+        console.log(" NOU LLISTAT AAAAAA - " + seccioID);
+
+        // 0 == Nivell Arell
+        var url = window.location.href + `pluginfront/veureplugins/` + seccioID;
         axios.get(url).then(res => {
             const plugins = res.data;
             this.setState({ plugins });
@@ -24,17 +32,28 @@ class LlistatDePlugins extends Component {
         axios.get(url2).then(res => {
             this.setState({ nomEntitat: res.data })
         });
-
-        var url4 = window.location.href + `webui/menupseudoplugin`;
+       // 0 == Nivell Arell    
+        var url4 = window.location.href + `webui/menupseudoplugin/` + seccioID;
 		axios.get(url4).then(res => {
 			this.setState({ menupseudoplugin: res.data })
-		});
+        });
+        // 0 == Nivell Arell        
+        var url5 = window.location.href + `webui/seccions/` + seccioID;
+		axios.get(url5).then(res => {
+			this.setState({ seccions: res.data })
+        });
+        
     }
 
     componentWillReceiveProps(lng) {
 
-        
-        var url = window.location.href + `pluginfront/veureplugins`;
+        // XYZ ZZZ componentWillMount();
+        const seccioID = this.props.seccioID ? this.props.seccioID : 0;
+
+        console.log(" NOU LLISTAT BBBBB [" + lng + "] - " + seccioID);
+
+        // 0 == Nivell Arell
+        var url = window.location.href + `pluginfront/veureplugins/` + seccioID;
         axios.get(url).then(res => {
             const plugins = res.data;
             this.setState({ plugins });
@@ -44,11 +63,18 @@ class LlistatDePlugins extends Component {
         axios.get(url2).then(res => {
             this.setState({ nomEntitat: res.data })
         });
-        
-        var url4 = window.location.href + `webui/menupseudoplugin`;
+       // 0 == Nivell Arell    
+        var url4 = window.location.href + `webui/menupseudoplugin/` + seccioID;
 		axios.get(url4).then(res => {
 			this.setState({ menupseudoplugin: res.data })
-		});
+        });
+        // 0 == Nivell Arell
+        
+        var url5 = window.location.href + `webui/seccions/` + seccioID;
+		axios.get(url5).then(res => {
+			this.setState({ seccions: res.data })
+        });
+        
         
     }
 
@@ -69,6 +95,16 @@ class LlistatDePlugins extends Component {
     }
 
 
+    mostrarNovaSeccio(seccioID) {
+
+        console.log("Entra a mostrarNovaSeccio");
+        const { t } = this.props;
+        ReactDOM.render(<LlistatDePlugins seccioID={seccioID}  t={t} />, document.getElementById('contingut'));
+        console.log("Surt mostrarNovaSeccio");
+
+    }
+
+
     render() {
 
         const { t } = this.props;
@@ -77,9 +113,13 @@ class LlistatDePlugins extends Component {
 
         var urlBase = window.location.href;
 
+        const seccions = this.state.seccions;
+
         const plugins = this.state.plugins;
+
         const menupseudoplugin = this.state.menupseudoplugin;
 
+        var seccionsS;
         var menuPseudoPlugin;
         var plugHtml;
         var plugHtmlInfo;
@@ -90,6 +130,18 @@ class LlistatDePlugins extends Component {
         var plugReactWarning;
         var plugReactError;
 
+        seccionsS = seccions.map(s => (
+            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
+                <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}
+                        onClick={() => this.mostrarNovaSeccio(s.seccioID) }>
+                    <span className="card-title titol pl-1 h3">
+                        <img src={s.iconaID} alt="" title="" className="imc-icona" />
+                    </span>
+                    <span className="titolPlugin  titol h3">{s.nom}</span>
+                    <span className="card-text mb-3 mt-3 alignCenter">{s.descripcio}</span>
+                </button>
+            </div>
+        ));
 
         menuPseudoPlugin = menupseudoplugin.map(s => (
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
@@ -209,22 +261,37 @@ class LlistatDePlugins extends Component {
             </div>
         ));
 
+        var titolHeader;
+        if (this.props.seccioID == 0) {
+            titolHeader = t('paginaIniciTitolPrivat') + entitatNom;
+        } else {
+            titolHeader = 'AIXÒ ES EL TITOL DE UNA SECCCIO ' + this.props.seccioID;
+        }
+
+        var subtitolHeader;
+        if (this.props.seccioID == 0) {
+            subtitolHeader = t('paginaIniciIntroduccioPrivat');
+        } else {
+            subtitolHeader = 'AIXÒ ES EL SUBTITOL DE LA SECCCIO' + this.props.seccioID;
+        }
 
         return (
 
             <div className="row mr-0 ml-0">
 
                 <div className="infoNoMenu">
-                    <h2><p className="titol h2">{t('paginaIniciTitolPrivat')} {entitatNom}</p></h2>
+                    
+                    <h2><p className="titol h2">{titolHeader}</p></h2>
 
                     <div className="col-md-12 border-0 pl-0 pr-0">
 
-                        <p className="lh15">{t('paginaIniciIntroduccioPrivat')}</p>
+                        
+                        <p className="lh15">{subtitolHeader}</p>
 
                         <div className="card-body imc--llista--capses">
 
                             <div className="row mb-0">
-
+                                {seccionsS} 
                                 {plugHtml}
                                 {plugHtmlInfo}
                                 {plugHtmlWarning}

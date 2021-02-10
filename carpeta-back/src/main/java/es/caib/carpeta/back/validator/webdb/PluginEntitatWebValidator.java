@@ -41,6 +41,9 @@ public class PluginEntitatWebValidator extends AbstractWebValidator<PluginEntita
   @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.PluginEntitatService.JNDI_NAME)
   protected es.caib.carpeta.ejb.PluginEntitatService pluginEntitatEjb;
 
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.SeccioService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.SeccioService seccioEjb;
+
 
 
   public PluginEntitatWebValidator() {
@@ -83,7 +86,7 @@ public class PluginEntitatWebValidator extends AbstractWebValidator<PluginEntita
 
     BeanValidatorResult<PluginEntitat> __vr = new BeanValidatorResult<PluginEntitat>();
     validator.validate(__vr, __bean,
-      isNou, entitatEjb, pluginEjb, pluginEntitatEjb);
+      isNou, entitatEjb, pluginEjb, pluginEntitatEjb, seccioEjb);
 
     if (__vr.hasErrors()) {
         List<I18NFieldError> vrErrors = __vr.getErrors();

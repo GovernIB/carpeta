@@ -27,6 +27,10 @@ public class PluginEntitatQueryPath extends org.fundaciobit.genapp.common.query.
     return new BooleanField(getQueryPath(), PluginEntitatFields.ACTIU);
   }
 
+  public LongField SECCIOID() {
+    return new LongField(getQueryPath(), PluginEntitatFields.SECCIOID);
+  }
+
 
 
   @Override
@@ -48,6 +52,14 @@ public class PluginEntitatQueryPath extends org.fundaciobit.genapp.common.query.
     return new EntitatQueryPath(new QueryPath() {
       public String getQueryPath() {
           return PluginEntitatQueryPath.this.getQueryPath() + "entitat" + ".";
+      }
+    });
+  }
+
+  public SeccioQueryPath SECCIO() {
+    return new SeccioQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return PluginEntitatQueryPath.this.getQueryPath() + "seccio" + ".";
       }
     });
   }

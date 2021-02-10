@@ -70,9 +70,16 @@ class PluginHtml extends Component {
 
         function checkIframeSize() {
 
+            var iframe = document.getElementById('myiframe');
+
+            if(!iframe) {
+                console.log("XYZ ZZZ Sortim de IFRAME");
+                return;
+            }
+
             setTimeout(checkIframeSize, 1000);
 
-            var iframe = document.getElementById('myiframe');
+            
             var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
             // var iframeDocument;
             // if(iframe.contentDocument != null) {

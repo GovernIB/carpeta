@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.genapp.common.query.ITableManager;
-import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.stereotype.Controller;
@@ -25,6 +23,7 @@ import es.caib.carpeta.persistence.EnllazJPA;
 import es.caib.carpeta.logic.EnllazLogicaService;
 import es.caib.carpeta.model.entity.Enllaz;
 import es.caib.carpeta.model.fields.EnllazFields;
+import es.caib.carpeta.model.fields.SeccioFields;
 
 /**
  * 
@@ -35,9 +34,9 @@ import es.caib.carpeta.model.fields.EnllazFields;
 @RequestMapping(value = "/adminentitat/enllaz")
 @SessionAttributes(types = { EnllazForm.class, EnllazFilterForm.class })
 public class EnllazAdminEntitatController extends EnllazController {
-	
-	@EJB(mappedName = EnllazLogicaService.JNDI_NAME)
-	protected EnllazLogicaService enllazLogicaEjb;
+
+    @EJB(mappedName = EnllazLogicaService.JNDI_NAME)
+    protected EnllazLogicaService enllazLogicaEjb;
 
     @Override
     public String getTileForm() {
@@ -52,7 +51,7 @@ public class EnllazAdminEntitatController extends EnllazController {
     @Override
     public String getSessionAttributeFilterForm() {
         return "EnllazAdminEntitat_FilterForm";
-    }  
+    }
 
     @Override
     public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
@@ -89,9 +88,7 @@ public class EnllazAdminEntitatController extends EnllazController {
     public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request, ModelAndView mav, Where where)
             throws I18NException {
         List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
-        
 
-        
         for (int i = 0; i < Constants.TIPUS_ENLLAZ_ALL.length; i++) {
             int v = Constants.TIPUS_ENLLAZ_ALL[i];
             __tmp.add(new StringKeyValue("" + v, I18NUtils.tradueix("enllaz.tipus." + v)));
@@ -99,9 +96,21 @@ public class EnllazAdminEntitatController extends EnllazController {
 
         return __tmp;
     }
-    
+
     @Override
-    public void delete(HttpServletRequest request, Enllaz enllaz) throws Exception,I18NException {
+    public void delete(HttpServletRequest request, Enllaz enllaz) throws Exception, I18NException {
         enllazLogicaEjb.deleteFull(enllaz, true);
     }
+
+    @Override
+    public List<StringKeyValue> getReferenceListForSeccioID(HttpServletRequest request, ModelAndView mav, Where where)
+            throws I18NException {
+        Where w = Where.AND(where, SeccioFields.ENTITATID.equal(LoginInfo.getInstance().getEntitatID()));
+        List<StringKeyValue> list = super.getReferenceListForSeccioID(request, mav, w);
+        
+        list.add(new StringKeyValue("", I18NUtils.tradueix("seccio.arrel")));
+        
+        return list;
+    }
+
 }

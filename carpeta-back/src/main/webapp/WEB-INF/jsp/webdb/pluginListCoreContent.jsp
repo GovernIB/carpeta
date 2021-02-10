@@ -75,14 +75,6 @@
           </c:if>
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.SECCIOID)}">
-          <td>
-          <c:set var="tmp">${plugin.seccioID}</c:set>
-          <c:if test="${not empty tmp}">
-          ${__theFilterForm.mapOfSeccioForSeccioID[tmp]}
-          </c:if>
-          </td>
-        </c:if>
 
 
         <!--  /** Additional Fields */  -->

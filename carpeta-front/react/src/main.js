@@ -22,6 +22,7 @@ import MenuRapid from './MenuRapid';
 import NivellAutenticacio from './NivellAutenticacio';
 import * as breadcrumbPaths from './utils/breadcrumbPaths';
 import * as breadcrumbPathsAut from './utils/breadcrumbPathsAut';
+import LlistatDePlugins from './LlistatDePlugins';
 
 
 ReactDOM.render(
@@ -86,10 +87,10 @@ newMenuRapidReact  = function createReactCompMenuRapid(nomComponent, param) {
 newAccessibilitatReact  = function createReactCompAccessibilitat(nomComponent, param) {
     ReactDOM.render(<Accessibilitat />, document.getElementById(nomComponent));
 	if (param === '0'){
-	  ReactDOM.render(<Breadcrumb items={breadcrumbPaths.Accessibilitat} autenticat={param}/>, document.getElementById("mollaPa"));
+	    ReactDOM.render(<Breadcrumb items={breadcrumbPaths.Accessibilitat} autenticat={param}/>, document.getElementById("mollaPa"));
 	}
 	if (param === '1'){
-	  ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.Accessibilitat} autenticat={param}/>, document.getElementById("mollaPa"));
+	    ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.Accessibilitat} autenticat={param}/>, document.getElementById("mollaPa"));
 	}
 };
 
@@ -116,10 +117,10 @@ newNotificacionsReact  = function createReactCompNotificacions(nomComponent, par
 newMapaWebReact  = function createReactCompMapaWeb(nomComponent, param) {
     ReactDOM.render(<MapaWeb />, document.getElementById(nomComponent));
 	if (param === '0'){
-	  ReactDOM.render(<Breadcrumb items={breadcrumbPaths.MapaWeb} autenticat={param}/>, document.getElementById("mollaPa"));
+	    ReactDOM.render(<Breadcrumb items={breadcrumbPaths.MapaWeb} autenticat={param}/>, document.getElementById("mollaPa"));
 	}
 	if (param === '1'){
-	  ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.MapaWeb} autenticat={param}/>, document.getElementById("mollaPa"));
+	    ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.MapaWeb} autenticat={param}/>, document.getElementById("mollaPa"));
 	}
 };
 
@@ -151,6 +152,8 @@ newPluginReact  = function createReactCompPluginReact(nomComponent, param, plugi
 	ReactDOM.render(<PluginReact autenticat={param} pluginID={pluginID}/>, document.getElementById(nomComponent));
 	ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.Plugin} autenticat={param}/>, document.getElementById("mollaPa"));
 };
+
+
 newAvisosFrontReact  = function createReactCompAvisosFront(nomComponent, param) {
 	ReactDOM.render(<AvisosFront autenticat={param}/>, document.getElementById(nomComponent));
 };

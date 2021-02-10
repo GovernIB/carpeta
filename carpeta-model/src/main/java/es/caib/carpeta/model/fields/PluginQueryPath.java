@@ -43,10 +43,6 @@ public class PluginQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new IntegerField(getQueryPath(), PluginFields.TIPUS);
   }
 
-  public LongField SECCIOID() {
-    return new LongField(getQueryPath(), PluginFields.SECCIOID);
-  }
-
 
 
   @Override
@@ -118,14 +114,6 @@ public class PluginQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new FitxerQueryPath(new QueryPath() {
       public String getQueryPath() {
           return PluginQueryPath.this.getQueryPath() + "logo" + ".";
-      }
-    });
-  }
-
-  public SeccioQueryPath SECCIO() {
-    return new SeccioQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return PluginQueryPath.this.getQueryPath() + "seccio" + ".";
       }
     });
   }

@@ -78,8 +78,10 @@ public class PluginFrontController extends CommonFrontController {
 
             String lang = LocaleContextHolder.getLocale().getLanguage();
             String codiEntitat = sesionHttp.getEntitat();
+            
+            final Long seccioID = null;
 
-            List<PluginInfo> plugins = utilsEjb.getFrontPlugins(codiEntitat, lang);
+            List<PluginInfo> plugins = utilsEjb.getFrontPlugins(codiEntitat, lang, seccioID);
 
             mav.addObject("plugins", plugins);
 
@@ -239,16 +241,23 @@ public class PluginFrontController extends CommonFrontController {
         }
 
     }
-
-    @RequestMapping(value = "/veureplugins" , method = RequestMethod.GET)
-    public void getAllPlugins(HttpServletRequest request, HttpServletResponse response) throws I18NException {
-
-        try{
+    
+    
+    @RequestMapping(value = "/veureplugins/{seccioID}" , method = RequestMethod.GET)
+    public void getAllPlugins(HttpServletRequest request, HttpServletResponse response,
+          @PathVariable("seccioID") Long seccioID) throws I18NException {
+            
+        try {
+            
+            if (seccioID != null && seccioID == 0) {
+                seccioID = null;
+            }
+            
 
             String lang = LocaleContextHolder.getLocale().getLanguage();
             String codiEntitat = sesionHttp.getEntitat();
 
-            List<PluginInfo> pluginsEntitat = utilsEjb.getFrontPlugins(codiEntitat, lang);
+            List<PluginInfo> pluginsEntitat = utilsEjb.getFrontPlugins(codiEntitat, lang, seccioID);
 
             // Passar JSON de pluginsEntitat
             Gson gson = new Gson();
@@ -264,6 +273,15 @@ public class PluginFrontController extends CommonFrontController {
         } catch (Throwable e) {
             processException(e, response);
         }
+        
+    }
+    
+
+    // XYZ ZZZ
+    @RequestMapping(value = "/veureplugins" , method = RequestMethod.GET)
+    public void getAllPlugins(HttpServletRequest request, HttpServletResponse response) throws I18NException {
+
+        getAllPlugins(request,  response, null);
 
     }
 

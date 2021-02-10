@@ -63,12 +63,13 @@ public abstract class CommonFrontController {
         }
     }
 
+    // XYZ ZZZ AIXÔ HA DE FUNCIONAR PER SERVEIS REST !!!!!!!1
     public void processException(Throwable e, HttpServletResponse response) {
 
         //  Afegir log de BBDD d'error al front
         // ISSUE "Mostrar error al fallar autenticació de front #309"
 
-        log.error(e);
+        log.error(e.getMessage(), e);
 
         try {
             response.sendRedirect("/error");

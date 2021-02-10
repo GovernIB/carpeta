@@ -45,6 +45,10 @@ private static final long serialVersionUID = -695907131L;
 	@Column(name="actiu",nullable = false,length = 1)
 	boolean actiu;
 
+	@Index(name="car_plugent_seccioid_fk_i")
+	@Column(name="seccioid",length = 19)
+	java.lang.Long seccioID;
+
 
 
   /** Constructor Buit */
@@ -52,23 +56,26 @@ private static final long serialVersionUID = -695907131L;
   }
 
   /** Constructor amb tots els camps  */
-  public PluginEntitatJPA(long pluginEntitatID , long pluginID , long entitatID , boolean actiu) {
+  public PluginEntitatJPA(long pluginEntitatID , long pluginID , long entitatID , boolean actiu , java.lang.Long seccioID) {
     this.pluginEntitatID=pluginEntitatID;
     this.pluginID=pluginID;
     this.entitatID=entitatID;
     this.actiu=actiu;
+    this.seccioID=seccioID;
 }
   /** Constructor sense valors autoincrementals */
-  public PluginEntitatJPA(long pluginID , long entitatID , boolean actiu) {
+  public PluginEntitatJPA(long pluginID , long entitatID , boolean actiu , java.lang.Long seccioID) {
     this.pluginID=pluginID;
     this.entitatID=entitatID;
     this.actiu=actiu;
+    this.seccioID=seccioID;
 }
   public PluginEntitatJPA(PluginEntitat __bean) {
     this.setPluginEntitatID(__bean.getPluginEntitatID());
     this.setPluginID(__bean.getPluginID());
     this.setEntitatID(__bean.getEntitatID());
     this.setActiu(__bean.isActiu());
+    this.setSeccioID(__bean.getSeccioID());
 	}
 
 	public long getPluginEntitatID() {
@@ -97,6 +104,13 @@ private static final long serialVersionUID = -695907131L;
 	};
 	public void setActiu(boolean _actiu_) {
 		this.actiu = _actiu_;
+	};
+
+	public java.lang.Long getSeccioID() {
+		return(seccioID);
+	};
+	public void setSeccioID(java.lang.Long _seccioID_) {
+		this.seccioID = _seccioID_;
 	};
 
 
@@ -144,6 +158,21 @@ private static final long serialVersionUID = -695907131L;
     this.entitat = entitat;
   }
 
+// IMP Field:seccioid | Table: car_seccio | Type: 1  
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@ForeignKey(name="car_plugent_seccio_sec_fk")
+	@JoinColumn(name = "seccioid", referencedColumnName ="seccioID", nullable = true, insertable=false, updatable=false)
+	private SeccioJPA seccio;
+
+	public SeccioJPA getSeccio() {
+    return this.seccio;
+  }
+
+	public  void setSeccio(SeccioJPA seccio) {
+    this.seccio = seccio;
+  }
+
 
  // ---------------  STATIC METHODS ------------------
   public static PluginEntitatJPA toJPA(PluginEntitat __bean) {
@@ -153,6 +182,7 @@ private static final long serialVersionUID = -695907131L;
     __tmp.setPluginID(__bean.getPluginID());
     __tmp.setEntitatID(__bean.getEntitatID());
     __tmp.setActiu(__bean.isActiu());
+    __tmp.setSeccioID(__bean.getSeccioID());
 		return __tmp;
 	}
 
@@ -184,6 +214,10 @@ private static final long serialVersionUID = -695907131L;
     __alreadyCopied.put(__jpa, __tmp);
     // Copia de beans complexes (EXP)
     // Copia de beans complexes (IMP)
+    if(!"SeccioJPA".equals(origenJPA) && 
+       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.seccio) || org.hibernate.Hibernate.isInitialized(__jpa.getSeccio()) ) ) {
+      __tmp.setSeccio(SeccioJPA.copyJPA(__jpa.getSeccio(), __alreadyCopied,"PluginEntitatJPA"));
+    }
     if(!"EntitatJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat()) ) ) {
       __tmp.setEntitat(EntitatJPA.copyJPA(__jpa.getEntitat(), __alreadyCopied,"PluginEntitatJPA"));

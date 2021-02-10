@@ -1,7 +1,7 @@
 import React, { Component, Suspense } from 'react';
 import { withTranslation } from 'react-i18next';
 import ExpirarSessio from "./ExpirarSessio";
-
+// XYZ ZZZ Es pot esborrar ???
 class DadesPersonals extends Component {
 
     render() {

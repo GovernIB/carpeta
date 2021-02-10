@@ -31,8 +31,8 @@ class Inici extends Component {
 				<ExpirarSessio />
 				{
 					{
-						'0': <IniciPublic />,
-						'1': <LlistatDePlugins />
+						'0': <IniciPublic />,						
+						'1': <LlistatDePlugins seccioID='0' />
 					}[autenticat]
 				}
 			</div>

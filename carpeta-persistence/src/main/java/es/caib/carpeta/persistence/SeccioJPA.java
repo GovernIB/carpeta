@@ -171,16 +171,16 @@ private static final long serialVersionUID = 838506947L;
 	}
 
 
-// EXP  Field:seccioid | Table: car_plugin | Type: 0  
+// EXP  Field:seccioid | Table: car_pluginentitat | Type: 0  
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "seccio")
-	private Set<PluginJPA> plugins = new HashSet<PluginJPA>(0);
-	public  Set<PluginJPA> getPlugins() {
-    return this.plugins;
+	private Set<PluginEntitatJPA> pluginEntitats = new HashSet<PluginEntitatJPA>(0);
+	public  Set<PluginEntitatJPA> getPluginEntitats() {
+    return this.pluginEntitats;
   }
 
-	public void setPlugins(Set<PluginJPA> plugins) {
-	  this.plugins = plugins;
+	public void setPluginEntitats(Set<PluginEntitatJPA> pluginEntitats) {
+	  this.pluginEntitats = pluginEntitats;
 	}
 
 
@@ -308,13 +308,13 @@ private static final long serialVersionUID = 838506947L;
     __tmp = toJPA(__jpa);
     __alreadyCopied.put(__jpa, __tmp);
     // Copia de beans complexes (EXP)
+    if(!"PluginEntitatJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.pluginEntitats) || org.hibernate.Hibernate.isInitialized(__jpa.getPluginEntitats())) ) {
+      __tmp.setPluginEntitats(PluginEntitatJPA.copyJPA(__jpa.getPluginEntitats(), __alreadyCopied,"SeccioJPA"));
+    }
     if(!"EnllazJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.enllazs) || org.hibernate.Hibernate.isInitialized(__jpa.getEnllazs())) ) {
       __tmp.setEnllazs(EnllazJPA.copyJPA(__jpa.getEnllazs(), __alreadyCopied,"SeccioJPA"));
-    }
-    if(!"PluginJPA".equals(origenJPA) 
-       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.plugins) || org.hibernate.Hibernate.isInitialized(__jpa.getPlugins())) ) {
-      __tmp.setPlugins(PluginJPA.copyJPA(__jpa.getPlugins(), __alreadyCopied,"SeccioJPA"));
     }
     // Copia de beans complexes (IMP)
     if(!"TraduccioJPA".equals(origenJPA) && 

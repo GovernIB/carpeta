@@ -63,10 +63,6 @@ private static final long serialVersionUID = 190357384L;
 	@Column(name="tipus",nullable = false,length = 10)
 	int tipus;
 
-	@Index(name="car_plugin_seccioid_fk_i")
-	@Column(name="seccioid",length = 19)
-	java.lang.Long seccioID;
-
 
 
   /** Constructor Buit */
@@ -74,7 +70,7 @@ private static final long serialVersionUID = 190357384L;
   }
 
   /** Constructor amb tots els camps  */
-  public PluginJPA(long pluginID , long nomID , java.lang.Long descripcioID , java.lang.Long logoID , java.lang.String classe , java.lang.String propietats , boolean actiu , int tipus , java.lang.Long seccioID) {
+  public PluginJPA(long pluginID , long nomID , java.lang.Long descripcioID , java.lang.Long logoID , java.lang.String classe , java.lang.String propietats , boolean actiu , int tipus) {
     this.pluginID=pluginID;
     this.nomID=nomID;
     this.descripcioID=descripcioID;
@@ -83,10 +79,9 @@ private static final long serialVersionUID = 190357384L;
     this.propietats=propietats;
     this.actiu=actiu;
     this.tipus=tipus;
-    this.seccioID=seccioID;
 }
   /** Constructor sense valors autoincrementals */
-  public PluginJPA(long nomID , java.lang.Long descripcioID , java.lang.Long logoID , java.lang.String classe , java.lang.String propietats , boolean actiu , int tipus , java.lang.Long seccioID) {
+  public PluginJPA(long nomID , java.lang.Long descripcioID , java.lang.Long logoID , java.lang.String classe , java.lang.String propietats , boolean actiu , int tipus) {
     this.nomID=nomID;
     this.descripcioID=descripcioID;
     this.logoID=logoID;
@@ -94,7 +89,6 @@ private static final long serialVersionUID = 190357384L;
     this.propietats=propietats;
     this.actiu=actiu;
     this.tipus=tipus;
-    this.seccioID=seccioID;
 }
   /** Constructor dels valors Not Null */
   public PluginJPA(long pluginID , long nomID , java.lang.Long descripcioID , java.lang.String classe , boolean actiu , int tipus) {
@@ -114,7 +108,6 @@ private static final long serialVersionUID = 190357384L;
     this.setPropietats(__bean.getPropietats());
     this.setActiu(__bean.isActiu());
     this.setTipus(__bean.getTipus());
-    this.setSeccioID(__bean.getSeccioID());
     // Fitxer
     this.setLogo(FitxerJPA.toJPA(__bean.getLogo()));
 	}
@@ -173,13 +166,6 @@ private static final long serialVersionUID = 190357384L;
 	};
 	public void setTipus(int _tipus_) {
 		this.tipus = _tipus_;
-	};
-
-	public java.lang.Long getSeccioID() {
-		return(seccioID);
-	};
-	public void setSeccioID(java.lang.Long _seccioID_) {
-		this.seccioID = _seccioID_;
 	};
 
 
@@ -301,21 +287,6 @@ private static final long serialVersionUID = 190357384L;
     this.logo = logo;
   }
 
-// IMP Field:seccioid | Table: car_seccio | Type: 1  
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="car_plugin_seccio_sec_fk")
-	@JoinColumn(name = "seccioid", referencedColumnName ="seccioID", nullable = true, insertable=false, updatable=false)
-	private SeccioJPA seccio;
-
-	public SeccioJPA getSeccio() {
-    return this.seccio;
-  }
-
-	public  void setSeccio(SeccioJPA seccio) {
-    this.seccio = seccio;
-  }
-
 
  // ---------------  STATIC METHODS ------------------
   public static PluginJPA toJPA(Plugin __bean) {
@@ -329,7 +300,6 @@ private static final long serialVersionUID = 190357384L;
     __tmp.setPropietats(__bean.getPropietats());
     __tmp.setActiu(__bean.isActiu());
     __tmp.setTipus(__bean.getTipus());
-    __tmp.setSeccioID(__bean.getSeccioID());
     // Fitxer
     __tmp.setLogo(FitxerJPA.toJPA(__bean.getLogo()));
 		return __tmp;
@@ -378,10 +348,6 @@ private static final long serialVersionUID = 190357384L;
     if(!"TraduccioJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.descripcio) || org.hibernate.Hibernate.isInitialized(__jpa.getDescripcio()) ) ) {
       __tmp.setDescripcio(TraduccioJPA.copyJPA(__jpa.getDescripcio(), __alreadyCopied,"PluginJPA"));
-    }
-    if(!"SeccioJPA".equals(origenJPA) && 
-       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.seccio) || org.hibernate.Hibernate.isInitialized(__jpa.getSeccio()) ) ) {
-      __tmp.setSeccio(SeccioJPA.copyJPA(__jpa.getSeccio(), __alreadyCopied,"PluginJPA"));
     }
     if(!"TraduccioJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.nom) || org.hibernate.Hibernate.isInitialized(__jpa.getNom()) ) ) {

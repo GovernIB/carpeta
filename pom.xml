@@ -158,12 +158,14 @@
 				<version>1.2</version>
 				<scope>provided</scope>
 			</dependency>
+            <!--
 			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
 				<version>25.0.0.redhat-1</version>
 				<scope>provided</scope>
 			</dependency>
+            -->
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>

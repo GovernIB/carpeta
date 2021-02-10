@@ -8,12 +8,18 @@ import es.caib.carpeta.hibernate.HibernateFileUtil;
 import es.caib.carpeta.persistence.AvisJPA;
 import es.caib.carpeta.persistence.EnllazJPA;
 import es.caib.carpeta.persistence.EntitatJPA;
+import es.caib.carpeta.persistence.SeccioJPA;
+import es.caib.carpeta.logic.EntitatLogicaService;
+import es.caib.carpeta.logic.SeccioLogicaService;
 import es.caib.carpeta.logic.utils.EjbManager;
 import es.caib.carpeta.model.entity.Avis;
 import es.caib.carpeta.model.entity.Enllaz;
 import es.caib.carpeta.model.entity.Idioma;
+import es.caib.carpeta.model.entity.Seccio;
+import es.caib.carpeta.model.fields.EntitatFields;
 import es.caib.carpeta.model.fields.IdiomaFields;
 import org.fundaciobit.genapp.common.StringKeyValue;
+import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.OrderBy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -24,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.util.WebUtils;
 
+import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -42,6 +49,9 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = WebUIController.WEBUI_PATH)
 public class WebUIController extends CommonFrontController {
+    
+    @EJB(mappedName = SeccioLogicaService.JNDI_NAME)
+    SeccioLogicaService seccioLogicaEjb;
 
     @Autowired
     private SesionHttp sesionHttp;
@@ -56,6 +66,62 @@ public class WebUIController extends CommonFrontController {
 
     public static final String ENLLAZ_LOGO_PATH = "/enllazlogo";
 
+    
+    /**
+     * 
+     * @author anadal
+     *
+     */
+    public static class SeccioInfo {
+
+        protected long seccioID;
+        protected String nom;
+        protected String descripcio;        
+        protected String iconaID;
+
+        public SeccioInfo() {
+            super();
+        }
+
+        public SeccioInfo(long seccioID, String nom, String descripcio, String iconaID) {
+            super();
+            this.seccioID = seccioID;
+            this.nom = nom;
+            this.descripcio = descripcio;
+            this.iconaID = iconaID;
+        }
+
+        public long getSeccioID() {
+            return seccioID;
+        }
+
+        public void setSeccioID(long seccioID) {
+            this.seccioID = seccioID;
+        }
+        public String getNom() {
+            return nom;
+        }
+        public void setNom(String nom) {
+            this.nom = nom;
+        }
+        public String getDescripcio() {
+            return descripcio;
+        }
+        public void setDescripcio(String descripcio) {
+            this.descripcio = descripcio;
+        }
+        public String getIconaID() {
+            return iconaID;
+        }
+        public void setIconaID(String iconaID) {
+            this.iconaID = iconaID;
+        }
+
+    }
+
+    
+    
+    
     /**
      * 
      * @author anadal
@@ -301,27 +367,53 @@ public class WebUIController extends CommonFrontController {
     public void getMenuSlideLinks(HttpServletRequest request, HttpServletResponse response) {
 
         final int enllazType = Constants.TIPUS_ENLLAZ_FRONT_MENU_DESLLISANT;
+               
 
         getEnllazosJSON(request, response, enllazType);
     }
     
+    
+    // XYZ ZZZ
     @RequestMapping(value = "/menupseudoplugin", method = RequestMethod.GET)
-    public void getMenuPseudoPlugin(HttpServletRequest request, HttpServletResponse response) {
+    public void getMenuPseudoPlugin(HttpServletRequest request, HttpServletResponse response ) {
+
+        final int enllazType = Constants.TIPUS_ENLLAZ_FRONT_PSEUDOPLUGIN;
+        
+        Long seccioPareID = null;
+
+        getEnllazosJSON(request, response, enllazType, seccioPareID);
+    }
+    
+    
+    @RequestMapping(value = "/menupseudoplugin/{seccioPareID}", method = RequestMethod.GET)
+    public void getMenuPseudoPlugin(HttpServletRequest request, HttpServletResponse response, @PathVariable("seccioPareID") Long seccioPareID) {
 
         final int enllazType = Constants.TIPUS_ENLLAZ_FRONT_PSEUDOPLUGIN;
 
-        getEnllazosJSON(request, response, enllazType);
+        getEnllazosJSON(request, response, enllazType, seccioPareID);
     }
 
+    
     protected void getEnllazosJSON(HttpServletRequest request, HttpServletResponse response, final int enllazType) {
+       final Long seccioID = null;
+       getEnllazosJSON(request, response, enllazType, seccioID);
+    }
+    
+    
+
+    protected void getEnllazosJSON(HttpServletRequest request, HttpServletResponse response, final int enllazType, Long seccioID) {
         try {
+            if (seccioID != null && seccioID == 0) {
+                seccioID = null;
+            }            
+            
             String lang = LocaleContextHolder.getLocale().getLanguage();
             String codiEntitat = sesionHttp.getEntitat();
 
-            List<Enllaz> enllazos = utilsEjb.getEnllazosByType(codiEntitat, lang, enllazType);
+            List<Enllaz> enllazos = utilsEjb.getEnllazosByType(codiEntitat, lang, enllazType, seccioID);
 
             List<EnllazInfo> enllazosInfo = new ArrayList<WebUIController.EnllazInfo>();
-
+            
             for (Enllaz enllaz : enllazos) {
 
                 EnllazJPA enllazJPA = (EnllazJPA) enllaz;
@@ -350,6 +442,70 @@ public class WebUIController extends CommonFrontController {
             processException(e, response);
         }
     }
+
+    
+    
+    @RequestMapping(value = "/seccions/{seccioPareID}", method = RequestMethod.GET)
+    public void getSeccions(HttpServletRequest request, HttpServletResponse response,@PathVariable("seccioPareID") Long seccioPareID) {
+
+        if (seccioPareID != null && seccioPareID == 0) {
+            seccioPareID = null;
+        }
+
+        getSeccionsJSON(request, response, seccioPareID);
+    }
+    
+    
+    
+    
+    protected void getSeccionsJSON(HttpServletRequest request, HttpServletResponse response, final Long seccioPareID) {
+        try {
+            
+            long entitatID = sesionHttp.getEntitatID();
+            
+            log.info(" XYZ ZZZ ENTITAT ID = " + entitatID );
+            
+            List<Seccio> seccions = seccioLogicaEjb.findByEntity(entitatID, seccioPareID);
+
+            List<SeccioInfo> seccioInfo = new ArrayList<SeccioInfo>();
+            
+            String lang = LocaleContextHolder.getLocale().getLanguage();
+
+            for (Seccio seccio : seccions) {
+
+                SeccioJPA seccioJPA = (SeccioJPA) seccio;
+
+                String nom = seccioJPA.getNomTraduccions().get(lang).getValor();
+                String descripcio = seccioJPA.getDescripcioTraduccions().get(lang).getValor();
+
+                String urllogo = request.getContextPath() + WEBUI_PATH + ENLLAZ_LOGO_PATH + "/"
+                        + HibernateFileUtil.encryptFileID(seccioJPA.getIconaID());
+
+                seccioInfo.add(new SeccioInfo(seccioJPA.getSeccioID(), nom, descripcio, urllogo));
+            }
+
+            // Passar enllazosInfo a 
+            Gson gson = new Gson();
+            String json = gson.toJson(seccioInfo);
+            
+            
+            log.info(" Seccions amb PAREID = " + seccioPareID + ":\n" + json + "\n");
+            
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF8");
+
+            byte[] utf8JsonString = json.getBytes("UTF8");
+
+            response.getOutputStream().write(utf8JsonString);
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
+    }
+    
+    
+    
 
     @RequestMapping(value = "/textinformatiuentitat", method = RequestMethod.GET)
     public void getTextInformatiuEntitat(HttpServletRequest request, HttpServletResponse response) {
@@ -479,7 +635,11 @@ public class WebUIController extends CommonFrontController {
             PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
             String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
             log.info("Default Entity Code => " +  defaultEntityCode);
-            sesionHttp.setEntitat(defaultEntityCode);
+            sesionHttp.setEntitat2(defaultEntityCode);
+            
+            long entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID, EntitatFields.CODI.equal(defaultEntityCode));
+            sesionHttp.setEntitatID(entitatID);
+            
 
             List<StringKeyValue> skv = new ArrayList<StringKeyValue>(1);
             if(defaultEntityCode != null){

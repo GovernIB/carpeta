@@ -67,10 +67,10 @@ public class SeccioQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
 
  // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
 
-  public PluginQueryPath PLUGINS() {
-    return new PluginQueryPath(new QueryPath() {
+  public PluginEntitatQueryPath PLUGINENTITATS() {
+    return new PluginEntitatQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return SeccioQueryPath.this.getQueryPath() + "plugins" + ".";
+          return SeccioQueryPath.this.getQueryPath() + "pluginEntitats" + ".";
       }
     });
   }

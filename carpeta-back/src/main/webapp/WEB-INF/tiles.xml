@@ -188,6 +188,15 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/accesList.jsp" />
     </definition>
     
+   <definition name="seccioFormAdminEntitat" extends="adminentitat">
+        <put-attribute name="titol" value="seccio.seccio" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/seccioForm.jsp" />
+    </definition>
+    
+    <definition name="seccioListAdminEntitat" extends="adminentitat">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/seccioList.jsp" />
+    </definition>
+    
     
 
     <!--  ===========  SUPER ADMIN  ================== -->

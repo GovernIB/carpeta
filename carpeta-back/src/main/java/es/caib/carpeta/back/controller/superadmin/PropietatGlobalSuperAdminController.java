@@ -17,8 +17,6 @@ import es.caib.carpeta.back.form.webdb.*;
 
 import es.caib.carpeta.back.controller.webdb.PropietatGlobalController;
 import es.caib.carpeta.back.security.LoginInfo;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_AFEGIR_PROPGLOB;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ELIMINAT_PROPGLOB;
 import es.caib.carpeta.persistence.PropietatGlobalJPA;
 import es.caib.carpeta.logic.AuditoriaLogicaService;
 import es.caib.carpeta.model.entity.PropietatGlobal;

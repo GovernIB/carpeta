@@ -1,6 +1,5 @@
 package es.caib.carpeta.back.controller;
 
-import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.back.utils.Utils;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.ejb.FitxerService;

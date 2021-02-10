@@ -71,7 +71,15 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaService {
         query.setParameter("dataInici", inici);
         query.setParameter("dataFi", fi);
         query.setParameter("codiEntitat", codiEntitat);
-
+        
+/*     XYZ ZZZ Canviar per aquest codi
+        Where w1 = DATAACCES.between(new TimeStamp(inici.getTime()), new TimeStamp(fi.getTime()))
+        AccesQueryPath aqp = new AccesQueryPath();
+        Where w2 = aqp.ENTITAT().CODI().equal(codiEntitat);
+        Where w = Where.AND(w1,w2);
+        OrderBy order = new OrderBy(DATAACCES, OrderType.DESC);
+        return select(w,order);
+*/ 
         return query.getResultList();
 
     }

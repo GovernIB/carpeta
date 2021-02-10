@@ -26,9 +26,6 @@ public interface Plugin extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public int getTipus();
 	public void setTipus(int _tipus_);
 
-	public java.lang.Long getSeccioID();
-	public void setSeccioID(java.lang.Long _seccioID_);
-
   // Fitxer
   public <F extends Fitxer> F getLogo();
 

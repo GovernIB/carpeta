@@ -5,7 +5,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.query.SubQuery;
 import org.fundaciobit.genapp.common.query.Where;
-
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -20,14 +20,14 @@ import es.caib.carpeta.back.form.webdb.PluginEntitatForm;
 import es.caib.carpeta.back.controller.webdb.PluginEntitatController;
 import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.commons.utils.Constants;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_AFEGIR_PLUGIN;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ELIMINAT_PLUGIN;
 import es.caib.carpeta.persistence.PluginEntitatJPA;
 import es.caib.carpeta.persistence.PluginJPA;
 import es.caib.carpeta.logic.AuditoriaLogicaService;
 import es.caib.carpeta.model.entity.PluginEntitat;
 import es.caib.carpeta.model.fields.PluginEntitatFields;
 import es.caib.carpeta.model.fields.PluginFields;
+import es.caib.carpeta.model.fields.SeccioFields;
+
 import java.util.List;
 
 /**
@@ -45,7 +45,6 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
 
     @EJB(mappedName = AuditoriaLogicaService.JNDI_NAME)
     protected AuditoriaLogicaService auditoriaLogicaEjb;
-
 
     @Override
     public String getTileForm() {
@@ -73,11 +72,11 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
 
         Where w;
         if (pluginEntitatForm.isReadOnlyField(PLUGINID)) {
-          w = where;
+            w = where;
         } else {
-          SubQuery<PluginEntitat, Long> subquery = pluginEntitatEjb.getSubQuery(PluginEntitatFields.PLUGINID,
-                PluginEntitatFields.ENTITATID.equal(LoginInfo.getInstance().getEntitatID()));
-          w  = Where.AND(where, PluginFields.PLUGINID.notIn(subquery));
+            SubQuery<PluginEntitat, Long> subquery = pluginEntitatEjb.getSubQuery(PluginEntitatFields.PLUGINID,
+                    PluginEntitatFields.ENTITATID.equal(LoginInfo.getInstance().getEntitatID()));
+            w = Where.AND(where, PluginFields.PLUGINID.notIn(subquery));
         }
 
         return super.getReferenceListForPluginID(request, mav, w);
@@ -90,16 +89,13 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
 
         pluginEntitatFilterForm.addHiddenField(ENTITATID);
 
-        
         SubQuery<PluginEntitat, Long> subquery = pluginEntitatEjb.getSubQuery(PluginEntitatFields.PLUGINID,
                 PluginEntitatFields.ENTITATID.equal(LoginInfo.getInstance().getEntitatID()));
-        if ( 0L == pluginEjb.count(PluginFields.PLUGINID.notIn(subquery))) {
+        if (0L == pluginEjb.count(PluginFields.PLUGINID.notIn(subquery))) {
             pluginEntitatFilterForm.setAddButtonVisible(false);
         } else {
             pluginEntitatFilterForm.setAddButtonVisible(true);
         }
-        
-        
 
         return pluginEntitatFilterForm;
     }
@@ -123,15 +119,17 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
 
     @Override
     public PluginEntitatJPA create(HttpServletRequest request, PluginEntitatJPA pluginEntitat)
-            throws Exception,I18NException, I18NValidationException {
-        PluginEntitatJPA pluginEntitatJPA =super.create(request,pluginEntitat);
+            throws Exception, I18NException, I18NValidationException {
+        PluginEntitatJPA pluginEntitatJPA = super.create(request, pluginEntitat);
 
-        try{
-            PluginJPA plugin = (PluginJPA)pluginEjb.findByPrimaryKey(pluginEntitatJPA.getPluginID());
+        try {
+            PluginJPA plugin = (PluginJPA) pluginEjb.findByPrimaryKey(pluginEntitatJPA.getPluginID());
             LoginInfo loginInfo = LoginInfo.getInstance();
-            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PLUGIN ,loginInfo.getEntitatID(),loginInfo.getUsuariPersona().getUsername(), plugin.getNomTraduccions().get(Constants.DEFAULT_LANGUAGE).getValor());
-        }catch(I18NException e){
-            String msg = "Error creant auditoria "+ "("+  e.getMessage() + ")";
+            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PLUGIN, loginInfo.getEntitatID(),
+                    loginInfo.getUsuariPersona().getUsername(),
+                    plugin.getNomTraduccions().get(Constants.DEFAULT_LANGUAGE).getValor());
+        } catch (I18NException e) {
+            String msg = "Error creant auditoria " + "(" + e.getMessage() + ")";
             log.error(msg, e);
         }
 
@@ -139,19 +137,31 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
     }
 
     @Override
-    public void delete(HttpServletRequest request, PluginEntitat pluginEntitat) throws Exception,I18NException {
-        PluginJPA plugin = (PluginJPA)pluginEjb.findByPrimaryKey(pluginEntitat.getPluginID());
-        super.delete(request,pluginEntitat);
+    public void delete(HttpServletRequest request, PluginEntitat pluginEntitat) throws Exception, I18NException {
+        PluginJPA plugin = (PluginJPA) pluginEjb.findByPrimaryKey(pluginEntitat.getPluginID());
+        super.delete(request, pluginEntitat);
 
-        try{
+        try {
             LoginInfo loginInfo = LoginInfo.getInstance();
-            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ELIMINAT_PLUGIN,null,loginInfo.getUsuariPersona().getUsername(), plugin.getNomTraduccions().get(Constants.DEFAULT_LANGUAGE).getValor());
-        }catch(I18NException e){
+            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ELIMINAT_PLUGIN, null,
+                    loginInfo.getUsuariPersona().getUsername(),
+                    plugin.getNomTraduccions().get(Constants.DEFAULT_LANGUAGE).getValor());
+        } catch (I18NException e) {
 
-            String msg = "Error creant auditoria "+ "("+  e.getMessage() + ")";
+            String msg = "Error creant auditoria " + "(" + e.getMessage() + ")";
             log.error(msg, e);
         }
     }
 
+    @Override
+    public List<StringKeyValue> getReferenceListForSeccioID(HttpServletRequest request, ModelAndView mav, Where where)
+            throws I18NException {
+        Where w = Where.AND(where, SeccioFields.ENTITATID.equal(LoginInfo.getInstance().getEntitatID()));
+        List<StringKeyValue> list = super.getReferenceListForSeccioID(request, mav, w);
+
+        list.add(new StringKeyValue("", I18NUtils.tradueix("seccio.arrel")));
+
+        return list;
+    }
 
 }

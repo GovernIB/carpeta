@@ -27,7 +27,6 @@ public class PluginForm extends CarpetaBaseForm {
     this.listOfTraduccioForNomID = __toClone.listOfTraduccioForNomID;
     this.listOfTraduccioForDescripcioID = __toClone.listOfTraduccioForDescripcioID;
     this.listOfValuesForTipus = __toClone.listOfValuesForTipus;
-    this.listOfSeccioForSeccioID = __toClone.listOfSeccioForSeccioID;
   }
   
   public PluginForm(PluginJPA plugin, boolean nou) {
@@ -98,18 +97,6 @@ public class PluginForm extends CarpetaBaseForm {
 
   public void setListOfValuesForTipus(List<StringKeyValue> listOfValuesForTipus) {
     this.listOfValuesForTipus = listOfValuesForTipus;
-  }
-
-
-
-  private List<StringKeyValue> listOfSeccioForSeccioID;
-
-  public List<StringKeyValue> getListOfSeccioForSeccioID() {
-    return this.listOfSeccioForSeccioID;
-  }
-
-  public void setListOfSeccioForSeccioID(List<StringKeyValue> listOfSeccioForSeccioID) {
-    this.listOfSeccioForSeccioID = listOfSeccioForSeccioID;
   }
 
 

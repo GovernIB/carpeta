@@ -1,16 +1,11 @@
 package es.caib.carpeta.back.controller;
 
-import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_ERROR;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_BACK;
-
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.IGenAppEntity;
 import org.fundaciobit.genapp.common.web.controller.CommonBaseController;
 
-
-import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.back.utils.Utils;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.logic.LogCarpetaLogicaService;

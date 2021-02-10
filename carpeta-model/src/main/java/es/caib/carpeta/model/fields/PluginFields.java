@@ -20,7 +20,6 @@ public interface PluginFields extends java.io.Serializable {
 	 public static final StringField PROPIETATS = new StringField(_TABLE_MODEL, "propietats", "propietats");
 	 public static final BooleanField ACTIU = new BooleanField(_TABLE_MODEL, "actiu", "actiu");
 	 public static final IntegerField TIPUS = new IntegerField(_TABLE_MODEL, "tipus", "tipus");
-	 public static final LongField SECCIOID = new LongField(_TABLE_MODEL, "seccioID", "seccioid");
 
 
   public static final Field<?>[] ALL_PLUGIN_FIELDS = {
@@ -31,8 +30,7 @@ public interface PluginFields extends java.io.Serializable {
     CLASSE,
     PROPIETATS,
     ACTIU,
-    TIPUS,
-    SECCIOID
+    TIPUS
   };
 
 

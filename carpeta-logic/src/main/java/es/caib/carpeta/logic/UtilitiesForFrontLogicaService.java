@@ -31,11 +31,11 @@ public interface UtilitiesForFrontLogicaService {
 
     public List<Idioma> getIdiomes() throws I18NException;
 
-    public List<PluginInfo> getFrontPlugins(String codiEntitat, String language) throws I18NException;
+    public List<PluginInfo> getFrontPlugins(String codiEntitat, String language, Long seccioID) throws I18NException;
 
     public FileInfo getIconaPlugin(Long pluginID, String language) throws I18NException;
 
-    public List<Enllaz> getEnllazosByType(String codiEntitat, String language, int enllazType) throws I18NException;
+    public List<Enllaz> getEnllazosByType(String codiEntitat, String language, int enllazType, Long seccioID) throws I18NException;
     
     public Fitxer getFileInfo(Long fitxerID) throws I18NException;
     

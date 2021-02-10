@@ -31,6 +31,12 @@
             code="enllaz.enllaz.plural" /></span>
 </a>
 
+<a class="dropdown-item"
+    href="<c:url value="/adminentitat/seccio/list"/>"> <span
+    style="${(fn:contains(url, '/adminentitat/seccio'))? " font-weight:bold;" : ""}"><spring:message
+            code="seccio.seccio.plural" /></span>
+</a>
+
 <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
 <a class="dropdown-item"

@@ -54,12 +54,18 @@
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.avis.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,AvisFields.ENTITATID)}" >
+          <c:set var="containEmptyValue"  value="false" />
           <form:select id="avis_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-8" path="avis.entitatID">
-          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
-          <form:option value="" ></form:option>
             <c:forEach items="${__theForm.listOfEntitatForEntitatID}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+                <form:option value="${tmp.key}">${tmp.value}</form:option>
+                <c:if test="${empty tmp.key}">
+                  <c:set var="containEmptyValue"  value="true" />
+                </c:if>
             </c:forEach>
+            <%-- El camp pot ser null, per la qual cosa afegim una entrada buida si no s'ha definit abans --%>
+            <c:if test="${not containEmptyValue}">
+            <form:option value="" ></form:option>
+            </c:if>
           </form:select>
           </c:if>
            </td>
@@ -163,9 +169,13 @@
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.avis.tipus,__theForm.listOfValuesForTipus)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,AvisFields.TIPUS)}" >
+          <c:set var="containEmptyValue"  value="false" />
           <form:select id="avis_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-8" path="avis.tipus">
             <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+                <form:option value="${tmp.key}">${tmp.value}</form:option>
+                <c:if test="${empty tmp.key}">
+                  <c:set var="containEmptyValue"  value="true" />
+                </c:if>
             </c:forEach>
           </form:select>
           </c:if>
@@ -190,9 +200,13 @@
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.avis.gravetat,__theForm.listOfValuesForGravetat)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,AvisFields.GRAVETAT)}" >
+          <c:set var="containEmptyValue"  value="false" />
           <form:select id="avis_gravetat"  onchange="if(typeof onChangeGravetat == 'function') {  onChangeGravetat(this); };"  cssClass="form-control col-md-8" path="avis.gravetat">
             <c:forEach items="${__theForm.listOfValuesForGravetat}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+                <form:option value="${tmp.key}">${tmp.value}</form:option>
+                <c:if test="${empty tmp.key}">
+                  <c:set var="containEmptyValue"  value="true" />
+                </c:if>
             </c:forEach>
           </form:select>
           </c:if>
@@ -217,12 +231,18 @@
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.avis.pluginFrontID,__theForm.listOfPluginForPluginFrontID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,AvisFields.PLUGINFRONTID)}" >
+          <c:set var="containEmptyValue"  value="false" />
           <form:select id="avis_pluginFrontID"  onchange="if(typeof onChangePluginFrontID == 'function') {  onChangePluginFrontID(this); };"  cssClass="form-control col-md-8" path="avis.pluginFrontID">
-          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
-          <form:option value="" ></form:option>
             <c:forEach items="${__theForm.listOfPluginForPluginFrontID}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+                <form:option value="${tmp.key}">${tmp.value}</form:option>
+                <c:if test="${empty tmp.key}">
+                  <c:set var="containEmptyValue"  value="true" />
+                </c:if>
             </c:forEach>
+            <%-- El camp pot ser null, per la qual cosa afegim una entrada buida si no s'ha definit abans --%>
+            <c:if test="${not containEmptyValue}">
+            <form:option value="" ></form:option>
+            </c:if>
           </form:select>
           </c:if>
            </td>

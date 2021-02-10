@@ -7,6 +7,7 @@ import org.fundaciobit.genapp.common.query.Field;
 import es.caib.carpeta.model.fields.PluginEntitatFields;
 import es.caib.carpeta.model.fields.EntitatFields;
 import es.caib.carpeta.model.fields.PluginFields;
+import es.caib.carpeta.model.fields.SeccioFields;
 
 import org.fundaciobit.genapp.common.validation.IValidatorResult;
 
@@ -31,7 +32,8 @@ public class PluginEntitatValidator<I extends PluginEntitat>
   public void validate(IValidatorResult<I> __vr,I __target__, boolean __isNou__
     ,es.caib.carpeta.model.dao.IEntitatManager __entitatManager
     ,es.caib.carpeta.model.dao.IPluginManager __pluginManager
-    ,es.caib.carpeta.model.dao.IPluginEntitatManager __pluginEntitatManager) {
+    ,es.caib.carpeta.model.dao.IPluginEntitatManager __pluginEntitatManager
+    ,es.caib.carpeta.model.dao.ISeccioManager __seccioManager) {
 
     // Valors Not Null
     __vr.rejectIfEmptyOrWhitespace(__target__,PLUGINID, 
@@ -117,6 +119,20 @@ public class PluginEntitatValidator<I extends PluginEntitat>
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("entitat.entitat"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("entitat.entitatID"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__entitatid)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(SECCIOID) == 0) {
+      java.lang.Long __seccioid = __target__.getSeccioID();
+      if (__seccioid != null ) {
+        Long __count_ = null;
+        try { __count_ = __seccioManager.count(SeccioFields.SECCIOID.equal(__seccioid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ == 0) {        
+          __vr.rejectValue(SECCIOID, "error.notfound",
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("seccio.seccio"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("seccio.seccioID"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__seccioid)));
+        }
       }
     }
 

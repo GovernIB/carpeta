@@ -10,16 +10,18 @@ import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.Where;
 
 import es.caib.carpeta.ejb.PluginEntitatEJB;
 import es.caib.carpeta.persistence.PluginEntitatJPA;
 import es.caib.carpeta.model.entity.PluginEntitat;
 import es.caib.carpeta.model.fields.PluginEntitatFields;
+import es.caib.carpeta.model.fields.PluginEntitatQueryPath;
 
 /**
  * 
  * @author jagarcia
- *
+ * @author anadal
  */
 @Stateless
 public class PluginEntitatLogicaEJB extends PluginEntitatEJB implements PluginEntitatLogicaService {
@@ -41,8 +43,9 @@ public class PluginEntitatLogicaEJB extends PluginEntitatEJB implements PluginEn
 
 	/** Cerca plugins actius d'una entitat **/
 	@Override
-	public List<Long> getPluginsEntitat(String codiEntitat, boolean actiu) throws I18NException {
+	public List<Long> getPluginsEntitat(String codiEntitat, boolean actiu, Long seccioID) throws I18NException {
 
+	    /*
 		TypedQuery<Long> query = getEntityManager().createQuery(
 				"select a.pluginID from PluginEntitatJPA a "
 						+ "where a.entitat.codi = :codiEntitat and a.actiu = :actiu",Long.class);
@@ -50,6 +53,27 @@ public class PluginEntitatLogicaEJB extends PluginEntitatEJB implements PluginEn
 		query.setParameter("actiu", actiu);
 
 		return query.getResultList();
+		*/
+	    
+	    PluginEntitatQueryPath peqp = new PluginEntitatQueryPath();
+	    
+	    Where w;
+        if (seccioID == null) {
+           w = PluginEntitatFields.SECCIOID.isNull(); 
+        } else {
+           w = PluginEntitatFields.SECCIOID.equal(seccioID);
+        }
+	    
+	    
+	    List<Long> pluginIDs = executeQuery(PluginEntitatFields.PLUGINID,
+	            Where.AND(
+	                    peqp.ENTITAT().CODI().equal(codiEntitat),
+	                    PluginEntitatFields.ACTIU.equal(true),
+	                    w
+	                    ));
+	    
+	    return pluginIDs;
+
 	}
 	
 	/** Cerca tots els plugins associats a una entitat **/

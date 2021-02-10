@@ -14,6 +14,9 @@ public interface PluginEntitat extends org.fundaciobit.genapp.common.IGenAppEnti
 	public boolean isActiu();
 	public void setActiu(boolean _actiu_);
 
+	public java.lang.Long getSeccioID();
+	public void setSeccioID(java.lang.Long _seccioID_);
+
 
 
   // ======================================

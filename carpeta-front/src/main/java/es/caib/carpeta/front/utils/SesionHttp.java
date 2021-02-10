@@ -5,7 +5,11 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
-
+/**
+ * 
+ * @author anadal entitatID
+ *
+ */
 @Component("sesionHttp")
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class SesionHttp {
@@ -14,6 +18,7 @@ public class SesionHttp {
     private String idioma;
     private String urlEntrada;
     private String entitat;
+    private long entitatID;
 
     public SesionHttp() { }
 
@@ -49,7 +54,20 @@ public class SesionHttp {
     }
 
 
-    public void setEntitat(String entitat) {
+    public void setEntitat2(String entitat) {
         this.entitat = entitat;
     }
+
+
+    public long getEntitatID() {
+        return entitatID;
+    }
+
+
+    public void setEntitatID(long entitatID) {
+        this.entitatID = entitatID;
+    }
+    
+    
+    
 }

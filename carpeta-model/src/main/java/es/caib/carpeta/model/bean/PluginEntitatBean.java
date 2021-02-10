@@ -14,6 +14,7 @@ private static final long serialVersionUID = -98501626L;
 	long pluginID;
 	long entitatID;
 	boolean actiu;
+	java.lang.Long seccioID;
 
 
   /** Constructor Buit */
@@ -21,23 +22,26 @@ private static final long serialVersionUID = -98501626L;
   }
 
   /** Constructor amb tots els camps  */
-  public PluginEntitatBean(long pluginEntitatID , long pluginID , long entitatID , boolean actiu) {
+  public PluginEntitatBean(long pluginEntitatID , long pluginID , long entitatID , boolean actiu , java.lang.Long seccioID) {
     this.pluginEntitatID=pluginEntitatID;
     this.pluginID=pluginID;
     this.entitatID=entitatID;
     this.actiu=actiu;
+    this.seccioID=seccioID;
 }
   /** Constructor sense valors autoincrementals */
-  public PluginEntitatBean(long pluginID , long entitatID , boolean actiu) {
+  public PluginEntitatBean(long pluginID , long entitatID , boolean actiu , java.lang.Long seccioID) {
     this.pluginID=pluginID;
     this.entitatID=entitatID;
     this.actiu=actiu;
+    this.seccioID=seccioID;
 }
   public PluginEntitatBean(PluginEntitat __bean) {
     this.setPluginEntitatID(__bean.getPluginEntitatID());
     this.setPluginID(__bean.getPluginID());
     this.setEntitatID(__bean.getEntitatID());
     this.setActiu(__bean.isActiu());
+    this.setSeccioID(__bean.getSeccioID());
 	}
 
 	public long getPluginEntitatID() {
@@ -68,6 +72,13 @@ private static final long serialVersionUID = -98501626L;
 		this.actiu = _actiu_;
 	};
 
+	public java.lang.Long getSeccioID() {
+		return(seccioID);
+	};
+	public void setSeccioID(java.lang.Long _seccioID_) {
+		this.seccioID = _seccioID_;
+	};
+
 
 
   // ======================================
@@ -79,6 +90,7 @@ private static final long serialVersionUID = -98501626L;
     __tmp.setPluginID(__bean.getPluginID());
     __tmp.setEntitatID(__bean.getEntitatID());
     __tmp.setActiu(__bean.isActiu());
+    __tmp.setSeccioID(__bean.getSeccioID());
 		return __tmp;
 	}
 

@@ -113,9 +113,9 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
     }
 
     @Override
-    public List<PluginInfo> getFrontPlugins(String codiEntitat, String language) throws I18NException {
+    public List<PluginInfo> getFrontPlugins(String codiEntitat, String language, Long seccioID) throws I18NException {
 
-        List<Long> pluginsEntitat = pluginEntitatLogicaEjb.getPluginsEntitat(codiEntitat, true);
+        List<Long> pluginsEntitat = pluginEntitatLogicaEjb.getPluginsEntitat(codiEntitat, true, seccioID);
 
         List<Plugin> plugins = pluginCarpetaFrontEjb.getAllPlugins(PluginFields.PLUGINID.in(pluginsEntitat));
 
@@ -187,12 +187,24 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
 
     // es.caib.carpeta.commons.utils.Constants.TIPUS_ENLLAZ_FRONT_XARXA_SOCIAL
     @Override
-    public List<Enllaz> getEnllazosByType(String codiEntitat, String language, int enllazType) throws I18NException {
+    public List<Enllaz> getEnllazosByType(String codiEntitat, String language, int enllazType, Long seccioID) throws I18NException {
 
         EnllazQueryPath eqp = new EnllazQueryPath();
 
-        List<Enllaz> enllazos = enllazEjb.select(Where.AND(eqp.ENTITAT().CODI().equal(codiEntitat),
-                EnllazFields.TIPUS.equal(enllazType)), 
+        Where w;
+        if (seccioID == null) {
+            w = EnllazFields.SECCIOID.isNull(); 
+         } else {
+            w = EnllazFields.SECCIOID.equal(seccioID);
+         }
+        
+        
+        List<Enllaz> enllazos = enllazEjb.select(
+                Where.AND(
+                        eqp.ENTITAT().CODI().equal(codiEntitat),
+                        EnllazFields.TIPUS.equal(enllazType),
+                        w
+                        ), 
                 new OrderBy(EnllazFields.ENLLAZID));
         return enllazos;
     }

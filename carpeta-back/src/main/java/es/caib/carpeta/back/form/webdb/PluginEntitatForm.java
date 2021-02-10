@@ -21,6 +21,7 @@ public class PluginEntitatForm extends CarpetaBaseForm {
       this.pluginEntitat = __toClone.pluginEntitat;
     this.listOfPluginForPluginID = __toClone.listOfPluginForPluginID;
     this.listOfEntitatForEntitatID = __toClone.listOfEntitatForEntitatID;
+    this.listOfSeccioForSeccioID = __toClone.listOfSeccioForSeccioID;
   }
   
   public PluginEntitatForm(PluginEntitatJPA pluginEntitat, boolean nou) {
@@ -56,6 +57,18 @@ public class PluginEntitatForm extends CarpetaBaseForm {
 
   public void setListOfEntitatForEntitatID(List<StringKeyValue> listOfEntitatForEntitatID) {
     this.listOfEntitatForEntitatID = listOfEntitatForEntitatID;
+  }
+
+
+
+  private List<StringKeyValue> listOfSeccioForSeccioID;
+
+  public List<StringKeyValue> getListOfSeccioForSeccioID() {
+    return this.listOfSeccioForSeccioID;
+  }
+
+  public void setListOfSeccioForSeccioID(List<StringKeyValue> listOfSeccioForSeccioID) {
+    this.listOfSeccioForSeccioID = listOfSeccioForSeccioID;
   }
 
 

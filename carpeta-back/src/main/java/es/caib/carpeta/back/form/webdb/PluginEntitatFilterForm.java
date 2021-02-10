@@ -87,6 +87,28 @@ public class PluginEntitatFilterForm extends CarpetaBaseFilterForm implements Pl
   }
 
 
+  private java.lang.Long seccioIDDesde;
+
+  public java.lang.Long getSeccioIDDesde() {
+    return this.seccioIDDesde;
+  }
+
+  public void setSeccioIDDesde(java.lang.Long seccioIDDesde) {
+    this.seccioIDDesde = seccioIDDesde;
+  }
+
+
+  private java.lang.Long seccioIDFins;
+
+  public java.lang.Long getSeccioIDFins() {
+    return this.seccioIDFins;
+  }
+
+  public void setSeccioIDFins(java.lang.Long seccioIDFins) {
+    this.seccioIDFins = seccioIDFins;
+  }
+
+
   public PluginEntitatFilterForm() {
   }
   
@@ -98,8 +120,11 @@ public class PluginEntitatFilterForm extends CarpetaBaseFilterForm implements Pl
     this.pluginIDFins = __toClone.pluginIDFins;
     this.entitatIDDesde = __toClone.entitatIDDesde;
     this.entitatIDFins = __toClone.entitatIDFins;
+    this.seccioIDDesde = __toClone.seccioIDDesde;
+    this.seccioIDFins = __toClone.seccioIDFins;
     this.mapOfPluginForPluginID = __toClone.mapOfPluginForPluginID;
     this.mapOfEntitatForEntitatID = __toClone.mapOfEntitatForEntitatID;
+    this.mapOfSeccioForSeccioID = __toClone.mapOfSeccioForSeccioID;
   }
   
   /* ========= UTILS ========== */
@@ -154,6 +179,18 @@ public class PluginEntitatFilterForm extends CarpetaBaseFilterForm implements Pl
 
   public void setMapOfEntitatForEntitatID(Map<String, String> mapOfEntitatForEntitatID) {
     this.mapOfEntitatForEntitatID = mapOfEntitatForEntitatID;
+  }
+
+
+
+  private Map<String, String> mapOfSeccioForSeccioID;
+
+  public Map<String, String> getMapOfSeccioForSeccioID() {
+    return this.mapOfSeccioForSeccioID;
+  }
+
+  public void setMapOfSeccioForSeccioID(Map<String, String> mapOfSeccioForSeccioID) {
+    this.mapOfSeccioForSeccioID = mapOfSeccioForSeccioID;
   }
 
 

@@ -210,38 +210,13 @@
           <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.plugin.tipus,__theForm.listOfValuesForTipus)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginFields.TIPUS)}" >
+          <c:set var="containEmptyValue"  value="false" />
           <form:select id="plugin_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-8" path="plugin.tipus">
             <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
-            </c:forEach>
-          </form:select>
-          </c:if>
-           </td>
-        </tr>
-        </c:if>
-        
-        <c:if test="${!gen:contains(__theForm.hiddenFields,PluginFields.SECCIOID)}">
-        <tr id="plugin_seccioID_rowid">
-          <td>
-            <label>
-              <fmt:message key="${(empty __theForm.labels[PluginFields.SECCIOID])?'plugin.seccioID':__theForm.labels[PluginFields.SECCIOID]}" />
-              <c:if test="${not empty __theForm.help[PluginFields.SECCIOID]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.SECCIOID]}" ></i>
-              </c:if>
-             </label>
-            </td>
-            <td>
-          <form:errors path="plugin.seccioID" cssClass="errorField alert alert-danger" />
-          <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginFields.SECCIOID)}" >
-          <form:hidden path="plugin.seccioID"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.plugin.seccioID,__theForm.listOfSeccioForSeccioID)}"  />
-          </c:if>
-          <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginFields.SECCIOID)}" >
-          <form:select id="plugin_seccioID"  onchange="if(typeof onChangeSeccioID == 'function') {  onChangeSeccioID(this); };"  cssClass="form-control col-md-8" path="plugin.seccioID">
-          <%-- El camp pot ser null, per la qual cosa afegim una entrada buida --%>
-          <form:option value="" ></form:option>
-            <c:forEach items="${__theForm.listOfSeccioForSeccioID}" var="tmp">
-            <form:option value="${tmp.key}" >${tmp.value}</form:option>
+                <form:option value="${tmp.key}">${tmp.value}</form:option>
+                <c:if test="${empty tmp.key}">
+                  <c:set var="containEmptyValue"  value="true" />
+                </c:if>
             </c:forEach>
           </form:select>
           </c:if>

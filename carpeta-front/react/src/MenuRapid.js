@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
 import axios from "axios";
 import i18n from "i18next";
+import LlistatDePlugins from './LlistatDePlugins';
 
 
 class MenuRapid extends Component {
@@ -9,8 +10,11 @@ class MenuRapid extends Component {
     constructor(){
         super();
         this.state = {
-            plugins: []
+            plugins: [],
+            menupseudoplugin: [],
+			seccions : []
         }
+        this.mostrarNovaSeccio = this.mostrarNovaSeccio.bind(this);
     }
 
     componentWillMount() {
@@ -18,7 +22,18 @@ class MenuRapid extends Component {
         axios.get(url).then(res => {
             const plugins = res.data;
             this.setState({ plugins });
-        })
+        });
+
+        var url4 = window.location.href + `webui/menupseudoplugin/0`;
+		axios.get(url4).then(res => {
+			this.setState({ menupseudoplugin: res.data })
+		});
+
+		// 0 == Nivell Arell        
+        var url5 = window.location.href + `webui/seccions/0`;
+		axios.get(url5).then(res => {
+			this.setState({ seccions: res.data })
+        });
     }
 
     componentWillReceiveProps(lng) {
@@ -26,7 +41,18 @@ class MenuRapid extends Component {
         axios.get(url).then(res => {
             const plugins = res.data;
             this.setState({ plugins });
-        })
+        });
+
+        var url4 = window.location.href + `webui/menupseudoplugin/0`;
+		axios.get(url4).then(res => {
+			this.setState({ menupseudoplugin: res.data })
+		});
+
+		// 0 == Nivell Arell        
+        var url5 = window.location.href + `webui/seccions/0`;
+		axios.get(url5).then(res => {
+			this.setState({ seccions: res.data })
+        });
     }
 
     componentDidUpdate() {
@@ -38,6 +64,15 @@ class MenuRapid extends Component {
         }
     }
 
+    mostrarNovaSeccio(seccioID) {
+
+        console.log("RAPID Entra a mostrarNovaSeccio");
+        //const { t } = this.props;  t={t}
+        ReactDOM.render(<LlistatDePlugins seccioID={seccioID}  />, document.getElementById('contingut'));
+        console.log("RAPID Surt mostrarNovaSeccio");
+
+    }
+
     render() {
 
         const {t} = this.props;
@@ -47,6 +82,8 @@ class MenuRapid extends Component {
 
         var gestionsHtml;
         var gestionsReact;
+        var enllasosPseusoPluginMenu;
+        var seccionsS;
         // var accessibilitat;
         // var dades;
         // var gestions;
@@ -91,6 +128,33 @@ class MenuRapid extends Component {
                     </li>
             ));
 
+            
+
+            if(!this.state.menupseudoplugin.length){
+                enllasosPseusoPluginMenu = "";
+            } else {
+                enllasosPseusoPluginMenu = this.state.menupseudoplugin.map((s, i) => (
+
+                    <li className="nav-item pr-4">
+                        <a className="navCarpeta" href={s.url} target="_blank" title={s.nom}>
+                            <img src={s.urllogo} alt="" title={s.nom} className="imc-icona" />
+                            <span className="menuRapidView">{s.nom}</span>
+                        </a>
+                    </li>
+                ))
+            }
+
+            const seccions = this.state.seccions;
+            
+            seccionsS = seccions.map(s => (
+                <li className="nav-item pr-4" onClick={() => this.mostrarNovaSeccio(s.seccioID) }>                    
+                    <a className="navCarpeta"    >
+                        <img src={s.iconaID} title={s.nom} alt={s.descripcio} className="imc-icona" />
+                        <span className="menuRapidView">{s.nom}</span>
+                    </a>
+                </li>
+            ));
+
         }
 
         return (
@@ -99,8 +163,10 @@ class MenuRapid extends Component {
                     <ul className="navbar-nav p-3 mRapidGlobal" id="llistaMenuRapid">
                         {/*{gestions}*/}
                         {/*{accessibilitat}*/}
+                        {seccionsS}
                         {gestionsHtml}
                         {gestionsReact}
+                        {enllasosPseusoPluginMenu}
                         {/*{dades}*/}
                     </ul>
                 </nav>

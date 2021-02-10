@@ -2,6 +2,7 @@ import React, { Component, Suspense } from 'react';
 import { withTranslation } from 'react-i18next';
 import i18n from 'i18next';
 import axios from 'axios'
+import LlistatDePlugins from './LlistatDePlugins';
 
 class MenuDesllisant extends Component {
 
@@ -11,7 +12,8 @@ class MenuDesllisant extends Component {
 			plugins: [],
 			menuEnllasos: [],
 			idiomes: [],
-			menupseudoplugin: []
+			menupseudoplugin: [],
+			seccions : []
 		}
 	}
 
@@ -34,6 +36,12 @@ class MenuDesllisant extends Component {
 		axios.get(url4).then(res => {
 			this.setState({ menupseudoplugin: res.data })
 		});
+
+		// 0 == Nivell Arell        
+        var url5 = window.location.href + `webui/seccions/0`;
+		axios.get(url5).then(res => {
+			this.setState({ seccions: res.data })
+        });
 
 		
 	}
@@ -72,6 +80,12 @@ class MenuDesllisant extends Component {
 		axios.get(url4).then(res => {
 			this.setState({ menupseudoplugin: res.data })
 		});
+
+		// 0 == Nivell Arell        
+		var url5 = window.location.href + `webui/seccions/0`;
+		axios.get(url5).then(res => {
+			this.setState({ seccions: res.data })
+		});
 	}
 
 	componentDidMount() {
@@ -84,6 +98,15 @@ class MenuDesllisant extends Component {
 		});
 	}
 
+	mostrarNovaSeccio(seccioID) {
+
+        console.log("DESLLISSANT Entra a mostrarNovaSeccio");
+        const { t } = this.props;
+        ReactDOM.render(<LlistatDePlugins seccioID={seccioID}  t={t} />, document.getElementById('contingut'));
+        console.log("DESLLISSTANT Surt mostrarNovaSeccio");
+
+    }
+
 	render() {
 
 		const {t} = this.props;
@@ -93,8 +116,19 @@ class MenuDesllisant extends Component {
 		var canviarDeFront = sessionStorage.getItem("canviarDeFront");
 		var numEntitats = sessionStorage.getItem("numEntitats");
 
-		let enllasosMenu;
+		var seccionsS;
+		seccionsS = this.state.seccions.map(s => (
+			<li>
+				<a href="javascript:" onClick={() => this.mostrarNovaSeccio(s.seccioID) } title={s.nom}>
+					<img src={s.iconaID} title="" alt={s.descripcio} className="imc-icona iconaEnllas" />
+					<span>{s.nom}</span>
+				</a>
+			</li>
 
+        ));
+
+
+		let enllasosMenu;
 		if(!this.state.menuEnllasos.length){
 			enllasosMenu = "";
 		} else{
@@ -251,10 +285,12 @@ class MenuDesllisant extends Component {
 			));
 
 		}
+
 		if (autenticat === '0') {
 			accessibilitat = <li><a href="javascript:newAccessibilitat('contingut', '0');"
 									className="imc-marc-ico imc--accessibilitat" id="imc-marc-accessibilitat"
 									title={t('menuAccessibilitat')}><span>{t('menuAccessibilitat')}</span></a></li>;
+			seccionsS = '';
 			plugHtml = '';
 			plugReact = '';
 			plugHtmlInfo = '';
@@ -285,6 +321,7 @@ class MenuDesllisant extends Component {
 							{boto_ca} {separacio1} {boto_es} {separacio2} {boto_en}
 						</li>
 						{accessibilitat}
+						{seccionsS}
 						{plugHtml}
 						{plugHtmlInfo}
 						{plugHtmlWarning}

@@ -10,7 +10,6 @@ import javax.annotation.security.RunAs;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
-import org.apache.tiles.Attribute;
 import org.apache.tiles.AttributeContext;
 import org.apache.tiles.preparer.PreparerException;
 import org.apache.tiles.preparer.ViewPreparer;
@@ -32,9 +31,9 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.ejb.IdiomaService;
-import es.caib.carpeta.persistence.AvisJPA;
 import es.caib.carpeta.logic.AvisLogicaService;
 import es.caib.carpeta.logic.utils.EjbManager;
+import es.caib.carpeta.model.entity.Avis;
 import es.caib.carpeta.model.fields.IdiomaFields;
 
 /**
@@ -138,7 +137,7 @@ public class BasePreparer implements ViewPreparer, Constants {
 		// Warning for each ROLE
 
 		// Avisos Back
-		List<AvisJPA> avisosList = new ArrayList<AvisJPA>();
+		List<Avis> avisosList = new ArrayList<Avis>();
 		try {
 		    AvisLogicaService avisLogicaEjb = EjbManager.getAvisLogicaEJB();
 			if("superadmin".equals((String)attributeContext.getAttribute("pipella").getValue())) {
