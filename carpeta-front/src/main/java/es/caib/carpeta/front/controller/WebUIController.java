@@ -17,7 +17,9 @@ import es.caib.carpeta.model.entity.Idioma;
 import es.caib.carpeta.model.entity.Seccio;
 import es.caib.carpeta.model.fields.EntitatFields;
 import es.caib.carpeta.model.fields.IdiomaFields;
+import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import org.fundaciobit.genapp.common.StringKeyValue;
+import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.OrderBy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -300,6 +302,23 @@ public class WebUIController extends CommonFrontController {
 
     }
 
+    @RequestMapping(value = WEBUI_FAVICON_PATH + "/{entitatid}", method = RequestMethod.GET)
+    public void getEntitatIcona(@PathVariable("entitatid") String entitatid, HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+
+            if(entitatid != null) {
+                Long iconaEntitatId = utilsEjb.getIconaEntitat(entitatid);
+                descarregaFitxer(response, iconaEntitatId);
+            }
+
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
+
+    }
+
     @RequestMapping(value = ENLLAZ_LOGO_PATH + "/{encodedenllazlogoid}", method = RequestMethod.GET)
     public void getEnllazLogo(@PathVariable("encodedenllazlogoid") String encodedenllazlogoid,
             HttpServletRequest request, HttpServletResponse response) {
@@ -441,6 +460,41 @@ public class WebUIController extends CommonFrontController {
         }
     }
 
+    @RequestMapping(value = "/seccio/{seccioID}", method = RequestMethod.GET)
+    public void getSeccio(HttpServletRequest request, HttpServletResponse response,
+            @PathVariable("seccioID") Long seccioID) {
+        try {
+            Seccio seccio = seccioLogicaEjb.findByPrimaryKey(seccioID);
+
+            String lang = LocaleContextHolder.getLocale().getLanguage();
+
+            SeccioJPA seccioJPA = (SeccioJPA) seccio;
+
+            String nom = seccioJPA.getNomTraduccions().get(lang).getValor();
+            String descripcio = seccioJPA.getDescripcioTraduccions().get(lang).getValor();
+
+            String urllogo = request.getContextPath() + WEBUI_PATH + ENLLAZ_LOGO_PATH + "/"
+                    + HibernateFileUtil.encryptFileID(seccioJPA.getIconaID());
+
+            SeccioInfo seccioInfo = new SeccioInfo(seccioJPA.getSeccioID(), nom, descripcio, urllogo);
+
+            // Passar enllazosInfo a
+            Gson gson = new Gson();
+            String json = gson.toJson(seccioInfo);
+
+            log.info(" Seccio amb ID = " + seccioID + ":\n" + json + "\n");
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF8");
+
+            byte[] utf8JsonString = json.getBytes("UTF8");
+
+            response.getOutputStream().write(utf8JsonString);
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
+    }
     
     
     @RequestMapping(value = "/seccions/{seccioPareID}", method = RequestMethod.GET)
@@ -633,11 +687,11 @@ public class WebUIController extends CommonFrontController {
             PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
             String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
             log.info("Default Entity Code => " +  defaultEntityCode);
-            sesionHttp.setEntitat2(defaultEntityCode);
-            
+            sesionHttp.setEntitat(defaultEntityCode);
+
             long entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID, EntitatFields.CODI.equal(defaultEntityCode));
             sesionHttp.setEntitatID(entitatID);
-            
+
 
             List<StringKeyValue> skv = new ArrayList<StringKeyValue>(1);
             if(defaultEntityCode != null){
@@ -729,6 +783,27 @@ public class WebUIController extends CommonFrontController {
         } catch (Throwable e) {
             processException(e, response);
         }
+    }
+
+    @RequestMapping(value = "/entityicon/{entityID}", method = RequestMethod.GET)
+    public void  getEntityIcon(@PathVariable("entityID") Long entityID, HttpServletRequest request, HttpServletResponse response) throws Exception, I18NException {
+
+        try {
+
+            FileInfo fi = utilsEjb.getIconEntity(entityID);
+
+            if (fi != null) {
+                response.setContentType(fi.getMime());
+                response.setHeader("Content-Disposition", "attachment; filename=\"" + fi.getName() + "\"");
+                response.setContentLength((int) fi.getData().length);
+
+                response.getOutputStream().write(fi.getData());
+            }
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
+
     }
 
 }

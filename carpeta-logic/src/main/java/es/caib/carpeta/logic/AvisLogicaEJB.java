@@ -34,7 +34,9 @@ public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaService {
 					+ "   or (a.dataInici IS NULL and CURRENT_DATE < a.dataFi)"
 					+ " order by a.gravetat desc", AvisJPA.class);
 			return query.getResultList(); 
-		*/		
+
+		*/
+
 
 	    Where w = getDatesWhere();
 		List<Avis> llistat = select(w);

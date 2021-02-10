@@ -6,6 +6,7 @@ import javax.ejb.Local;
 
 import es.caib.carpeta.ejb.SeccioService;
 import es.caib.carpeta.model.entity.Seccio;
+import es.caib.carpeta.persistence.SeccioJPA;
 
 import java.util.List;
 
@@ -19,6 +20,9 @@ public interface SeccioLogicaService extends SeccioService {
 
     public static final String JNDI_NAME = "java:app/carpeta-logic/SeccioLogicaEJB!es.caib.carpeta.logic.SeccioLogicaService";
 
+    
+    public SeccioJPA findByPrimaryKey(Long _ID_);
+    
     public List<Seccio> findByEntity(long entitatID, Long seccioPareID) throws I18NException;
 
 }

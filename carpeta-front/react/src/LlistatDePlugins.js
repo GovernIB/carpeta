@@ -11,7 +11,8 @@ class LlistatDePlugins extends Component {
         this.state = {
             plugins: [],
             menupseudoplugin : [],
-            seccions : []
+            seccions : [],
+            seccio : null
         }
     }
 
@@ -42,6 +43,13 @@ class LlistatDePlugins extends Component {
 		axios.get(url5).then(res => {
 			this.setState({ seccions: res.data })
         });
+
+        if (seccioID != 0) {
+            var url6 = window.location.href + `webui/seccio/` + seccioID;
+		    axios.get(url6).then(res => {
+			    this.setState({ seccio: res.data })
+            });
+        }
         
     }
 
@@ -63,17 +71,24 @@ class LlistatDePlugins extends Component {
         axios.get(url2).then(res => {
             this.setState({ nomEntitat: res.data })
         });
-       // 0 == Nivell Arell    
+
+
         var url4 = window.location.href + `webui/menupseudoplugin/` + seccioID;
 		axios.get(url4).then(res => {
 			this.setState({ menupseudoplugin: res.data })
         });
-        // 0 == Nivell Arell
         
         var url5 = window.location.href + `webui/seccions/` + seccioID;
 		axios.get(url5).then(res => {
 			this.setState({ seccions: res.data })
         });
+
+        if (seccioID != 0) {
+            var url6 = window.location.href + `webui/seccio/` + seccioID;
+		    axios.get(url6).then(res => {
+			    this.setState({ seccio: res.data })
+            });
+        }
         
         
     }
@@ -262,17 +277,19 @@ class LlistatDePlugins extends Component {
         ));
 
         var titolHeader;
-        if (this.props.seccioID == 0) {
-            titolHeader = t('paginaIniciTitolPrivat') + entitatNom;
-        } else {
-            titolHeader = 'AIXÒ ES EL TITOL DE UNA SECCCIO ' + this.props.seccioID;
-        }
-
         var subtitolHeader;
         if (this.props.seccioID == 0) {
+            titolHeader = t('paginaIniciTitolPrivat') + entitatNom;
             subtitolHeader = t('paginaIniciIntroduccioPrivat');
         } else {
-            subtitolHeader = 'AIXÒ ES EL SUBTITOL DE LA SECCCIO' + this.props.seccioID;
+            const seccio = this.state.seccio;
+            if (seccio == null) {
+                subtitolHeader = "...";
+                titolHeader = "...";
+            } else {
+                titolHeader = seccio.nom;
+                subtitolHeader = seccio.descripcio;
+            }
         }
 
         return (
