@@ -13,6 +13,7 @@ import es.caib.carpeta.persistence.AvisJPA;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
+import org.hibernate.Hibernate;
 
 /**
  * 
@@ -33,11 +34,14 @@ public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaService {
 					+ "   or (a.dataInici IS NULL and CURRENT_DATE < a.dataFi)"
 					+ " order by a.gravetat desc", AvisJPA.class);
 			return query.getResultList(); 
-		*/
+		*/		
 
-	   Where w = getDatesWhere();
-			
-	     return select(w);
+	    Where w = getDatesWhere();
+		List<Avis> llistat = select(w);
+		for (Avis avis : llistat) {
+			Hibernate.initialize(((AvisJPA)avis).getEntitat());
+		}
+	    return llistat;
 	 }
 
     protected Where getDatesWhere() {
@@ -78,7 +82,11 @@ public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaService {
         
 	    Where w = Where.AND(w1,w2);
 	    
-        return select(w);
+	    List<Avis> llistat = select(w);
+		for (Avis avis : llistat) {
+			Hibernate.initialize(((AvisJPA)avis).getEntitat());
+		}
+	    return llistat;
 
 	 }
 
