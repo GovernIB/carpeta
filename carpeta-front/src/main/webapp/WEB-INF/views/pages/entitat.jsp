@@ -2,12 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ca" style="" class=" js flexbox flexboxlegacy hashchange backgroundsize boxshadow textshadow opacity cssanimations cssgradients csstransforms csstransitions fontface generatedcontent localstorage svg" lang="ca">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${pageContext.response.locale.language}" style="" class=" js flexbox flexboxlegacy hashchange backgroundsize boxshadow textshadow opacity cssanimations cssgradients csstransforms csstransitions fontface generatedcontent localstorage svg" lang="${pageContext.response.locale.language}">
 <head>
     <title>Carpeta Ciutadana</title>
     <link rel="shortcut icon" type="image/x-ico" href="${pageContext.request.contextPath}/src/assets/images/icon.png">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="${pageContext.response.locale.language}"/>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js" charset="utf-8"></script>
@@ -48,42 +49,135 @@
 
 <body>
 
-    <!-- Zona Contingut -->
-    <div class="imc-continguts" id="continguts">
+    <!-- Menú vertical -->
+    <div>
+        <div class="imc-logo">
+            <div>
+                <a href="javascript:window.location.reload(true)" class="imc--goib" title="<fmt:message key="entitats.carpeta"/>">
+                    <img src="${pageContext.request.contextPath}/src/assets/images/icon.png" title="" alt="" class="logo-govern" style="max-width: 70%;"/>
+                    <span><fmt:message key="entitats.carpeta"/></span>
+                </a>
+            </div>
+        </div>
+    </div>
 
-        <c:if test="${not empty entitats}">
-            <table id="dataTable_paginate" class="table table-striped table-bordered table-hover" style="width:100%">
-                <thead class="table-success">
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">NOM</th>
-                </tr>
-                </thead>
-                <tbody>
-                    <c:forEach items="${entitats}" var="entitat" varStatus="index">
-                        <tr class="clickable-row" data-target="" data-href="<c:url value="/entitat/${entitat.key}"/>">
-                            <td>
-                                <label class="ponerMovil" data-toggle="tooltip" data-placement="top" title="${entitat.value}">
-                                        ${entitat.value}
-                                </label>
-                                <p class="quitarMovil">${entitat.key}</p>
-                            </td>
-                            <td>
-                                <label class="ponerMovil" data-toggle="tooltip" data-placement="top" title="${entitat.value}">
-                                        ${entitat.key}
-                                </label>
-                                <a href="<c:url value="/e/${entitat.key}"/>"><p class="quitarMovil">${entitat.value}</p></a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </c:if>
+    <!-- Contingut dret -->
+    <div class="contenedor">
+
+        <!-- Capçalera -->
+        <div>
+            <header class="imc-titol">
+                <nav class="imc--contingut">
+                    <h1><span class="text-uppercase"><fmt:message key="entitats.carpeta"/></span></h1>
+                    <ul>
+                        <li><button type="button" class="imc-bt-menu" id="imc-bt-menu" title="<fmt:message key="entitats.menu"/>"></button></li>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+
+        <!-- Menú desplegable -->
+        <div>
+            <div class="imc-marc" id="imc-marc" tabindex="-1" aria-hidden="true">
+                <div class="imc--fons"></div>
+                <div class="imc-marc-menu" id="imc-marc-menu" aria-hidden="true">
+                    <div class="imc-cercador" id="imc-cercador"></div>
+                    <ul>
+                        <c:if test="${lang=='ca'}">
+                            <li class="imc-marc-ico imc--idioma"><strong class="lletraIdioma"><fmt:message key="entitats.catala"/></strong> \ <button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=es"/>'"><fmt:message key="entitats.castellano"/></button> \ <button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=en"/>'"><fmt:message key="entitats.english"/></button></li>
+                        </c:if>
+                        <c:if test="${lang=='es'}">
+                            <li class="imc-marc-ico imc--idioma"><button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=ca"/>'"><fmt:message key="entitats.catala"/></button> \ <strong class="lletraIdioma"><fmt:message key="entitats.castellano"/></strong> \ <button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=en"/>'"><fmt:message key="entitats.english"/></button></li>
+                        </c:if>
+                        <c:if test="${lang=='en'}">
+                            <li class="imc-marc-ico imc--idioma"><button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=ca"/>'"><fmt:message key="entitats.catala"/></button> \ <button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=es"/>'"><fmt:message key="entitats.castellano"/></button> \ <strong class="lletraIdioma"><fmt:message key="entitats.english"/></strong></li>
+                        </c:if>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Zona Contingut -->
+        <div class="imc-continguts">
+            <div class="pt-2">
+                <div class="container-contenido homePage">
+                    <div class="row mr-0 ml-0">
+                        <div class="infoNoMenu">
+                            <p class="lh15"><fmt:message key="entitats.llista"/></p>
+                            <div class="col-md-12 border-0 float-left pt-3 pl-0">
+                                <div class="card-body imc--llista--capses">
+                                    <div class="row mb-0">
+
+                                        <c:forEach items="${entitats}" var="entitat" varStatus="index">
+                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
+                                                <button class="card col-md-12 align-items-lg-center capsaPlugin pt-3" onclick="location.href='<c:url value="/e/${entitat.codi}"/>'">
+                                                    <span class="card-title titol pl-1 h3">
+                                                        <c:set var="url" value="http://localhost:8080/carpetafront/webui/entityicon/${entitat.entitatID}"/>
+                                                        <img src="${url}" alt="" title="" class="imc-icona">
+                                                    </span>
+                                                    <span class="titolPlugin titol h3 titolCentrat">${entitat.nom.getTraduccio(lang).valor}</span>
+<%--                                                    <span class="card-text mb-3 mt-3 alignCenter">REGWEB3 Registre electrònic</span>--%>
+                                                </button>
+                                            </div>
+                                        </c:forEach>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fi Zona Contingut -->
+
+        <!-- Peu -->
+        <div class="capsaPeu">
+            <footer class="imc-peu">
+                <div class="imc--contingut">
+                    <div class="imc-peu-govern">
+
+                    </div>
+                    <div class="imc-peu-opcions">
+                        <div class="pb-3 col2peu">
+                            <button type="button" id="dialogAjuda" data-toggle="modal" data-target="#ajudaModal" class="botoSuport"><fmt:message key="entitats.ajuda"/></button>
+                        </div>
+                    </div>
+                    <div class="imc-peu-xarxes">
+
+                    </div>
+                </div>
+                <div class="modal fade" id="ajudaModal" tabindex="-1" aria-labelledby="ajudaLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <p class="card-title titol h2"><fmt:message key="entitats.ajuda.titol"/></p>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <ul class="pl-3 ajuda">
+                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.suportweb1"/>  <a href='http://www.caib.es/sites/suportinformatic/es/inicio-5586/?campa=yes'><fmt:message key="entitats.ajuda.suportweb2"/></a></li>
+                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.telefon1"/>  <p class="text-verd"> <fmt:message key="entitats.ajuda.telefon2"/></p></li>
+                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.correu1"/>  <a href="mailto:'suport@caib.es'"><fmt:message key="entitats.ajuda.correu2"/></a></li>
+                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.faq1"/>  <a href="http://www.faq.com"><fmt:message key="entitats.ajuda.faq2"/></a></li>
+                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.consulta1"/>  <p class="text-verd"> <fmt:message key="entitats.ajuda.consulta2"/></p></li>
+                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.problemes1"/>  <p class="text-verd"> <fmt:message key="entitats.ajuda.problemes2"/></p></li>
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="botoSuport" data-dismiss="modal" aria-label="Close"><fmt:message key="entitats.ajuda.tanca"/></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
 
     </div>
-    <!-- Fi Zona Contingut -->
-
-</div>
 
 <!-- js react -->
 <script src = "${pageContext.request.contextPath}/dist/reactjs_main.js" type="text/javascript"></script>

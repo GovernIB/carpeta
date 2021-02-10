@@ -29,6 +29,8 @@ public interface UtilitiesForFrontLogicaService {
 
     public List<StringKeyValue> getEntitats(String language) throws I18NException;
 
+    public List<EntitatJPA> getEntitatsFull(String language) throws I18NException;
+
     public List<Idioma> getIdiomes() throws I18NException;
 
     public List<PluginInfo> getFrontPlugins(String codiEntitat, String language, Long seccioID) throws I18NException;
@@ -48,5 +50,7 @@ public interface UtilitiesForFrontLogicaService {
     public List<AvisJPA> getAvisosByType(String codiEntitat, int avisType) throws I18NException;
     
     public Map<String, String> getSuportEntitat(String codiEntitat, String lang) throws I18NException;
+
+    public FileInfo getIconEntity(Long codiEntitat) throws I18NException;
 
 }
