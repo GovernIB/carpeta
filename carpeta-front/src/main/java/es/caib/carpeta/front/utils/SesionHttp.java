@@ -20,54 +20,47 @@ public class SesionHttp {
     private String entitat;
     private long entitatID;
 
-    public SesionHttp() { }
-
+    public SesionHttp() {
+    }
 
     public String getUserAgent() {
         return userAgent;
     }
 
-
     public void setUserAgent(String userAgent) {
         this.userAgent = userAgent;
     }
-
 
     public String getIdioma() {
         return idioma;
     }
 
-
     public void setIdioma(String idioma) {
         this.idioma = idioma;
     }
 
+    public String getUrlEntrada() {
+        return urlEntrada;
+    }
 
-    public String getUrlEntrada() { return urlEntrada; }
-
-
-    public void setUrlEntrada(String urlEntrada) { this.urlEntrada = urlEntrada; }
-
+    public void setUrlEntrada(String urlEntrada) {
+        this.urlEntrada = urlEntrada;
+    }
 
     public String getEntitat() {
         return entitat;
     }
 
-
-    public void setEntitat2(String entitat) {
+    public void setEntitat(String entitat) {
         this.entitat = entitat;
     }
-
 
     public long getEntitatID() {
         return entitatID;
     }
 
-
     public void setEntitatID(long entitatID) {
         this.entitatID = entitatID;
     }
-    
-    
-    
+
 }

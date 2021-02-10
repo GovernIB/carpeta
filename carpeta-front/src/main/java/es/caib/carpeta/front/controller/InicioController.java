@@ -79,7 +79,7 @@ public class InicioController extends CommonFrontController {
 
         try {
 
-            sesionHttp.setEntitat2(codiEntitat);
+            sesionHttp.setEntitat(codiEntitat);
             
             long entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID, EntitatFields.CODI.equal(codiEntitat));
             sesionHttp.setEntitatID(entitatID);
@@ -128,7 +128,7 @@ public class InicioController extends CommonFrontController {
                     long entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID, EntitatFields.CODI.equal(codiEntitat));
                     sesionHttp.setEntitatID(entitatID);
 
-                    sesionHttp.setEntitat2(codiEntitat);
+                    sesionHttp.setEntitat(codiEntitat);
                     log.info("ASSIGNAM ENTITAT 1: " + entitats.get(0).key);
                     mav.addObject("entitat", entitats.get(0).key);
                     mav.addObject("numEntitats", entitats.size());
@@ -147,7 +147,7 @@ public class InicioController extends CommonFrontController {
                     long entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID, EntitatFields.CODI.equal(defaultEntityCode));
                     sesionHttp.setEntitatID(entitatID);
 
-                    sesionHttp.setEntitat2(defaultEntityCode);
+                    sesionHttp.setEntitat(defaultEntityCode);
                     
                     mav.addObject("entitat", sesionHttp.getEntitat());
                     mav.addObject("defaultEntityCode", defaultEntityCode);

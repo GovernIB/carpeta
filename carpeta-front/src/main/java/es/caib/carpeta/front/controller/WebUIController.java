@@ -441,6 +441,41 @@ public class WebUIController extends CommonFrontController {
         }
     }
 
+    @RequestMapping(value = "/seccio/{seccioID}", method = RequestMethod.GET)
+    public void getSeccio(HttpServletRequest request, HttpServletResponse response,
+            @PathVariable("seccioID") Long seccioID) {
+        try {
+            Seccio seccio = seccioLogicaEjb.findByPrimaryKey(seccioID);
+
+            String lang = LocaleContextHolder.getLocale().getLanguage();
+
+            SeccioJPA seccioJPA = (SeccioJPA) seccio;
+
+            String nom = seccioJPA.getNomTraduccions().get(lang).getValor();
+            String descripcio = seccioJPA.getDescripcioTraduccions().get(lang).getValor();
+
+            String urllogo = request.getContextPath() + WEBUI_PATH + ENLLAZ_LOGO_PATH + "/"
+                    + HibernateFileUtil.encryptFileID(seccioJPA.getIconaID());
+
+            SeccioInfo seccioInfo = new SeccioInfo(seccioJPA.getSeccioID(), nom, descripcio, urllogo);
+
+            // Passar enllazosInfo a
+            Gson gson = new Gson();
+            String json = gson.toJson(seccioInfo);
+
+            log.info(" Seccio amb ID = " + seccioID + ":\n" + json + "\n");
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF8");
+
+            byte[] utf8JsonString = json.getBytes("UTF8");
+
+            response.getOutputStream().write(utf8JsonString);
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
+    }
     
     
     @RequestMapping(value = "/seccions/{seccioPareID}", method = RequestMethod.GET)
@@ -633,7 +668,7 @@ public class WebUIController extends CommonFrontController {
             PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
             String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
             log.info("Default Entity Code => " +  defaultEntityCode);
-            sesionHttp.setEntitat2(defaultEntityCode);
+            sesionHttp.setEntitat(defaultEntityCode);
             
             long entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID, EntitatFields.CODI.equal(defaultEntityCode));
             sesionHttp.setEntitatID(entitatID);

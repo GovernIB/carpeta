@@ -72,12 +72,15 @@ class PluginHtml extends Component {
 
             var iframe = document.getElementById('myiframe');
 
+
+            setTimeout(checkIframeSize, 1000);
+
             if(!iframe) {
-                console.log("XYZ ZZZ Sortim de IFRAME");
+                console.log("XYZ ZZZ Sortim de IFRAME (frame val null)");
                 return;
             }
 
-            setTimeout(checkIframeSize, 1000);
+            
 
             
             var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;

@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
 
 import es.caib.carpeta.ejb.AvisEJB;
+import es.caib.carpeta.hibernate.HibernateFileUtil;
 import es.caib.carpeta.model.entity.Avis;
 import es.caib.carpeta.model.fields.AvisFields;
 import es.caib.carpeta.persistence.AvisJPA;
@@ -34,6 +35,7 @@ public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaService {
 					+ " order by a.gravetat desc", AvisJPA.class);
 			return query.getResultList(); 
 		*/
+	   
 
 	   Where w = getDatesWhere();
 			
