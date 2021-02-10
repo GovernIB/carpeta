@@ -54,7 +54,7 @@ public class SesionHttp {
     }
 
 
-    public void setEntitat2(String entitat) {
+    public void setEntitat(String entitat) {
         this.entitat = entitat;
     }
 

@@ -58,9 +58,9 @@ class MenuRapid extends Component {
     componentDidUpdate() {
         var aut = sessionStorage.getItem('autenticat');
         if (aut === '1') {
-            document.getElementById('llistaMenuRapid').classList.remove('d-none');
+            document.getElementById('menuRapid').classList.remove('d-none');
         }else{
-            document.getElementById('llistaMenuRapid').classList.add('d-none');
+            document.getElementById('menuRapid').classList.add('d-none');
         }
     }
 
@@ -159,7 +159,7 @@ class MenuRapid extends Component {
 
         return (
             <div>
-                <nav className="navbar navbar-expand-sm bg-white p-0">
+                <nav className="navbar navbar-expand-sm bg-white p-0 fixo" id="menuRapid">
                     <ul className="navbar-nav p-3 mRapidGlobal" id="llistaMenuRapid">
                         {/*{gestions}*/}
                         {/*{accessibilitat}*/}

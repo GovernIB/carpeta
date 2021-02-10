@@ -231,6 +231,7 @@ img:hover {
 	margin: 0 auto;
 	width: 1270px;
 	margin-bottom: -2em;
+	height: -webkit-fill-available;
 }
 .menuRapid{
 	border: 0px;
@@ -404,6 +405,18 @@ img:hover {
 .mollaPa {
 	margin-top: 0.5em;
 	font-size: 1.2em;
+}
+.fixo{
+	position: fixed;
+	width: 100%;
+	height: 4em;
+	z-index: 5;
+}
+.espaiContingut {
+	padding-top: 5em;
+}
+.titolCentrat{
+	display: contents !important;
 }
 
 

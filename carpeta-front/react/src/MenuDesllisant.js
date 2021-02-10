@@ -303,7 +303,21 @@ class MenuDesllisant extends Component {
 		}
 
 		if(canviarDeFront === 'true' && numEntitats > 1){
-			canviarEntitat = <li><a href="/carpetafront/entitat" className="imc-marc-ico imc--registres" title={t('menuEntitat')}><span>{t('menuEntitat')}</span></a></li>;
+			if (i18n.language === 'ca') {
+				canviarEntitat =
+					<li><a href="/carpetafront/entitat?lang=ca" className="imc-marc-ico imc--registres"
+						   title={t('menuEntitat')}><span>{t('menuEntitat')}</span></a></li>;
+			}
+			if (i18n.language === 'es') {
+				canviarEntitat =
+					<li><a href="/carpetafront/entitat?lang=es" className="imc-marc-ico imc--registres"
+						   title={t('menuEntitat')}><span>{t('menuEntitat')}</span></a></li>;
+			}
+			if (i18n.language === 'en') {
+				canviarEntitat =
+					<li><a href="/carpetafront/entitat?lang=en" className="imc-marc-ico imc--registres"
+						   title={t('menuEntitat')}><span>{t('menuEntitat')}</span></a></li>;
+			}
 		} else{
 			canviarEntitat = "";
 		}

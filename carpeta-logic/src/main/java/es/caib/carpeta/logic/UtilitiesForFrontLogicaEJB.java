@@ -87,6 +87,24 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
 
     }
 
+    /**
+     * Retorna Entitats en l'idioma seleccionat
+     */
+    @Override
+    public List<EntitatJPA> getEntitatsFull(String language) throws I18NException {
+
+        List<Entitat> entitats = entitatEjb.select(EntitatFields.ACTIVA.equal(true));
+
+        List<EntitatJPA> entities = new ArrayList<>(entitats.size());
+
+        for (Entitat entitat : entitats) {
+            entities.add((EntitatJPA) entitat);
+        }
+
+        return entities;
+
+    }
+
     @Override
     public EntitatJPA getEntitat(String codiEntitat) throws I18NException {
 
@@ -277,13 +295,35 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
         return suport;
 
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
+    @Override
+    public FileInfo getIconEntity(Long entityID) throws I18NException {
+
+        FileInfo fi = null;
+
+        // miram si l'entitat té associada una icona.
+        List<Entitat> entitatItem = entitatEjb.select(EntitatFields.ENTITATID.equal(entityID));
+        if (entitatItem.size() > 0) {
+
+            try {
+                Fitxer f = entitatItem.get(0).getIcon();
+                if(f != null) {
+                    File file = FileSystemManager.getFile(f.getFitxerID());
+                    if (file != null) {
+                        FileInputStream fis = new FileInputStream(file);
+                        fi = new FileInfo(f.getNom(), f.getMime(), org.apache.commons.io.IOUtils.toByteArray(fis));
+                        fis.close();
+                    }
+                }
+
+            }  catch(Exception e) {
+                log.error("getIconaEntitat - Error carregant fitxer.");
+            }
+
+        }
+
+        return fi;
+
+    }
 
 }

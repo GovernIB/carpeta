@@ -5,6 +5,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
@@ -63,13 +64,18 @@ public class CarpetaFrontConfig extends WebMvcConfigurerAdapter {
         localeResolver.setDefaultLocale(new Locale("ca"));
         return localeResolver;
     }
-//
-//    @Bean(name="localeInterceptor")
-//    public LocaleChangeInterceptor getLocaleInterceptor(){
-//        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
-//        interceptor.setParamName("lng");
-//        System.out.println("interceptor: " + interceptor.getParamName());
-//        return interceptor;
-//    }
+
+    @Bean(name="localeInterceptor")
+    public LocaleChangeInterceptor getLocaleInterceptor(){
+        LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
+        interceptor.setParamName("lang");
+        System.out.println("interceptor: " + interceptor.getParamName());
+        return interceptor;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(getLocaleInterceptor());
+    }
 
 }
