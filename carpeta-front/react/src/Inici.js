@@ -14,7 +14,15 @@ class Inici extends Component {
 	}
 
 	// componentDidMount() {
-	// 	ReactGA.pageview(window.location.pathname + window.location.search);
+	// 	var aut = sessionStorage.getItem('autenticat');
+	// 	if (aut === '1') {
+	// 		console.log("1:" + aut);
+	// 		document.getElementById('contingutCentral').classList.add('espaiContingut');
+	// 	}else{
+	// 		console.log("2:" + aut);
+	// 		document.getElementById('contingutCentral').classList.remove('espaiContingut');
+	// 	}
+	// 	// ReactGA.pageview(window.location.pathname + window.location.search);
 	// }
 
 	render() {
@@ -27,7 +35,7 @@ class Inici extends Component {
 
 		return (
 
-			<div className="container-contenido">
+			<div className="container-contenido espaiContingut" id="contingutCentral">
 				<ExpirarSessio />
 				{
 					{

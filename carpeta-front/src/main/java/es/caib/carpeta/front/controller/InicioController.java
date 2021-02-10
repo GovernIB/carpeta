@@ -10,7 +10,6 @@ import es.caib.carpeta.model.fields.EntitatFields;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -40,13 +39,12 @@ public class InicioController extends CommonFrontController {
 
     protected final Log log = LogFactory.getLog(getClass());
 
-    @RequestMapping(value = { "/entitat" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "/entitat"}, method = RequestMethod.GET)
     public ModelAndView llistarEntitats(HttpServletRequest request, HttpServletResponse response) throws I18NException {
 
         ModelAndView mav = new ModelAndView("entitat");
 
         try {
-
             String lang = LocaleContextHolder.getLocale().getLanguage();
 
             PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
@@ -55,9 +53,10 @@ public class InicioController extends CommonFrontController {
 
             if (defaultEntityCode == null) {
 
-                List<StringKeyValue> entitats = utilsEjb.getEntitats(lang);
+                List<EntitatJPA> entitats = utilsEjb.getEntitatsFull(lang);
 
                 mav.addObject("entitats", entitats);
+                mav.addObject("lang", lang);
 
             } else {
 
@@ -109,7 +108,7 @@ public class InicioController extends CommonFrontController {
             String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
             String canviardefront = EjbManager.getCanviarDeFront(propietatGlobalEjb);
 
-            List<StringKeyValue> entitats = utilsEjb.getEntitats(lang);
+            List<EntitatJPA> entitats = utilsEjb.getEntitatsFull(lang);
 
             if (defaultEntityCode == null && sesionHttp.getEntitat() == null) {
 
@@ -119,36 +118,36 @@ public class InicioController extends CommonFrontController {
                     mav.addObject("entitats", entitats);
                     mav.addObject("numEntitats", entitats.size());
                     mav.addObject("canviarDeFront", canviardefront);
+                    mav.addObject("lang", lang);
 
                 } else {
+
                     
-                    String codiEntitat = entitats.get(0).key;
-                    
-                    
+                    String codiEntitat = entitats.get(0).getCodi();
+
                     long entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID, EntitatFields.CODI.equal(codiEntitat));
                     sesionHttp.setEntitatID(entitatID);
 
                     sesionHttp.setEntitat(codiEntitat);
-                    log.info("ASSIGNAM ENTITAT 1: " + entitats.get(0).key);
-                    mav.addObject("entitat", entitats.get(0).key);
+                   
+                    mav.addObject("entitat", codiEntitat);
                     mav.addObject("numEntitats", entitats.size());
                     mav.addObject("canviarDeFront", canviardefront);
 
                 }
 
             } else if (defaultEntityCode != null) {
-
+                System.out.println("5: ");
                 EntitatJPA entitat = entitatEjb.findByCodi(defaultEntityCode);
 
-                if (entitat != null) {
-
-                    
+                if (entitat != null) {                  
                     
                     long entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID, EntitatFields.CODI.equal(defaultEntityCode));
                     sesionHttp.setEntitatID(entitatID);
 
                     sesionHttp.setEntitat(defaultEntityCode);
                     
+
                     mav.addObject("entitat", sesionHttp.getEntitat());
                     mav.addObject("defaultEntityCode", defaultEntityCode);
                     mav.addObject("numEntitats", entitats.size());

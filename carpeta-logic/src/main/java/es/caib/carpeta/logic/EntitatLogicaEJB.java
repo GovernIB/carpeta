@@ -118,7 +118,12 @@ public class EntitatLogicaEJB extends EntitatEJB implements EntitatLogicaService
 				"select a from EntitatJPA a "
 						+ "where a.codi = :codiEntitat and a.activa = true", EntitatJPA.class);
 		query.setParameter("codiEntitat", codiEntitat);
-		return query.getResultList().get(0);
+
+		if(query.getResultList().size() > 0) {
+			return query.getResultList().get(0);
+		} else{
+			return null;
+		}
 	}
 
 

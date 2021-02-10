@@ -67,6 +67,7 @@
 			  newMenuDesllisant('menuDesllisant', aut);
 			  newPeu('peu', aut);
 			  newMenuRapid('menuRapid', aut);
+			  document.getElementById('contingutCentral').classList.remove('espaiContingut');
 		  }
 	  </script>
   </sec:authorize>
@@ -120,6 +121,8 @@
 					sessionStorage.setItem('usuariDNI', '${userDNI}');
 					sessionStorage.setItem('usuariMetode', '${userMethod}');
 					sessionStorage.setItem('usuariNivell', '${userLevelAut}');
+					var aut = sessionStorage.getItem('autenticat');
+					document.getElementById('contingutCentral').classList.add('espaiContingut');
 				}
 			</script>
 		</sec:authorize>
