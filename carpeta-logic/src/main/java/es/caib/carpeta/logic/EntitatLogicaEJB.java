@@ -2,10 +2,10 @@ package es.caib.carpeta.logic;
 
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.Where;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.TypedQuery;
 
 import es.caib.carpeta.ejb.AccesService;
 import es.caib.carpeta.ejb.AvisService;
@@ -14,7 +14,6 @@ import es.caib.carpeta.ejb.FitxerService;
 import es.caib.carpeta.ejb.PluginEntitatService;
 import es.caib.carpeta.ejb.PropietatGlobalService;
 import es.caib.carpeta.ejb.UsuariEntitatService;
-import es.caib.carpeta.persistence.EntitatJPA;
 import es.caib.carpeta.model.entity.Enllaz;
 import es.caib.carpeta.model.entity.Entitat;
 import es.caib.carpeta.model.fields.AccesFields;
@@ -25,6 +24,7 @@ import es.caib.carpeta.model.fields.FitxerFields;
 import es.caib.carpeta.model.fields.PluginEntitatFields;
 import es.caib.carpeta.model.fields.PropietatGlobalFields;
 import es.caib.carpeta.model.fields.UsuariEntitatFields;
+import es.caib.carpeta.persistence.EntitatJPA;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -114,16 +114,10 @@ public class EntitatLogicaEJB extends EntitatEJB implements EntitatLogicaService
 	@Override
 	public EntitatJPA findByCodi(String codiEntitat) throws I18NException {
 
-		TypedQuery<EntitatJPA> query = getEntityManager().createQuery(
-				"select a from EntitatJPA a "
-						+ "where a.codi = :codiEntitat and a.activa = true", EntitatJPA.class);
-		query.setParameter("codiEntitat", codiEntitat);
+		Where w1 = Where.AND(CODI.equal(codiEntitat),ACTIVA.equal(true));
+		List<Entitat> entitats = select(w1);
 
-		if(query.getResultList().size() > 0) {
-			return query.getResultList().get(0);
-		} else{
-			return null;
-		}
+		return entitats.size()>0?(EntitatJPA)entitats.get(0):null;
 	}
 
 
@@ -131,15 +125,10 @@ public class EntitatLogicaEJB extends EntitatEJB implements EntitatLogicaService
 	@Override
 	public EntitatJPA findByCodiDir3(String codiDir3Entitat) throws I18NException {
 
-		TypedQuery<EntitatJPA> query = getEntityManager().createQuery(
-				"select a from EntitatJPA a "
-						+ "where a.codiDir3 = :codiDir3Entitat and a.activa = true", EntitatJPA.class);
-		query.setParameter("codiDir3Entitat", codiDir3Entitat);
-		if(query.getResultList().size()>0){
-			return query.getResultList().get(0);
-		}else{
-			return null;
-		}
+		Where w1 = Where.AND(CODIDIR3.equal(codiDir3Entitat),ACTIVA.equal(true));
+		select(w1);
+		List<Entitat> entitats = select(w1);
+		return entitats.size()>0?(EntitatJPA)entitats.get(0):null;
 
 	}
 }
