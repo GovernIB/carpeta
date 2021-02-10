@@ -11,6 +11,8 @@ import javax.persistence.TypedQuery;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import es.caib.carpeta.ejb.UsuariEJB;
+import es.caib.carpeta.model.fields.EntitatFields;
+import es.caib.carpeta.model.fields.UsuariFields;
 import es.caib.carpeta.persistence.UsuariJPA;
 
 /**
@@ -28,8 +30,8 @@ public class UsuariLogicaEJB extends UsuariEJB implements UsuariLogicaService {
 		
 		TypedQuery<UsuariJPA> query = getEntityManager().createQuery(
 				"select u from UsuariJPA u "
-				+ "join fetch u.entitat "
-				+ "where u.username = :username", UsuariJPA.class);
+				+ "left join fetch u." + EntitatFields._TABLE_MODEL
+				+ " where u."+ UsuariFields.USERNAME.javaName  +" = :username", UsuariJPA.class);
 		query.setParameter("username", username);
 		
 		List<UsuariJPA> resultats = query.getResultList();
