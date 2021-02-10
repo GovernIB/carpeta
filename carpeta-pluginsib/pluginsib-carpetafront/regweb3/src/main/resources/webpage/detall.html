@@ -33,6 +33,22 @@
 </head>
 
 <body class="fonsPlugin">
+
+<div id="carregantDetallRegistre" class="loader-container centrat loaderOcult">
+    <div class="loader"></div>
+</div>
+<script type="text/javascript">
+    function mostrarCarregantDetall() {
+        $("#carregantDetallRegistre").removeClass("loaderOcult");
+    }
+
+
+    function generantJustificant(){
+        mostrarCarregantDetall();
+        window.location.replace('${urlJustificant}');
+    }
+
+</script>
 <!-- Contenido -->
 <div class="container-contenido">
     <div class="infoNoMenu">
@@ -95,12 +111,15 @@
 
                                         <#if justificante?has_content>
                                         <div class="text-center">
-                                            <!--<button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="goToWindow('${justificante}')"><span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span> ${carpeta_descargar}</button>-->
-                                            <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="window.open('${justificante}')"><span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span> ${carpeta_descargar}</button>
+                                            <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="window.open('${justificante}')"><span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span>${carpeta_descargar}</button>
                                         </div>
                                         <#else>
-                                        <p class="text-center">${registre_justifcante_pendiente}</p>
+
+                                        <div class="text-center">
+                                            <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm"  onclick="generantJustificant()" ><span class="oi" title="" alt="" aria-hidden="true"></span>${justificante_generar}</button>
+                                        </div>
                                         </#if>
+                                        <div class="text-center pt-3 text-danger"><#if errorGeneracioJustificant?has_content >${errorGeneracioJustificant}</#if></div>
                                     </div>
                                 </div>
                             </div>
@@ -153,19 +172,18 @@
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
                                         <div class="font-weight-bold verde text-uppercase mb-3 text-center h3">${registro_anexos}</div>
-                                        <#if registro.anexos?has_content>
+                                        <#if registro.anexos?has_content >
                                         <table class="table table-hover">
                                             <thead>
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">${registro_anexo_titulo}</th>
                                                 <th scope="col">${registro_anexo_validezdocumento}</th>
-
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <#list registro.anexos as anexo >
-                                            <#if !anexo.isJustificante()>
+                                            <#if !anexo.isJustificante() >
                                             <tr>
                                                 <td>${anexo?index +1}</td>
                                                 <td>${anexo.titulo}</td>
@@ -184,23 +202,23 @@
 
                                         <!-- No hay anexos -->
                                         <p class="text-center">${registro_anexos_vacio}</p>
-                                    </#if>
+                                        </#if>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+
                     </div>
 
-
                 </div>
-
-            </div>
         </div>
 
 
     </div>
 
-</div>
+    </div>
 </div>
 
 </body>

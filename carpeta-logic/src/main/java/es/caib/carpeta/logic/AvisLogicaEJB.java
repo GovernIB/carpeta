@@ -26,11 +26,12 @@ public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaService {
 	public List<Avis> findAllActive () throws I18NException {
 		 /*
 		 TypedQuery<AvisJPA> query = getEntityManager().createQuery(
-					"select a from AvisJPA a "
+					"select a from AvisJPA a join fetch a.entitat "
 					+ "where (CURRENT_DATE between a.dataInici and a.dataFi) "
 					+ "   or (a.dataFi IS NULL and a.dataInici IS NULL)"
 					+ "   or (a.dataFi IS NULL and CURRENT_DATE >= a.dataInici)"
-					+ "   or (a.dataInici IS NULL and CURRENT_DATE < a.dataFi)", AvisJPA.class);
+					+ "   or (a.dataInici IS NULL and CURRENT_DATE < a.dataFi)"
+					+ " order by a.gravetat desc", AvisJPA.class);
 			return query.getResultList(); 
 		*/
 
@@ -52,14 +53,20 @@ public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaService {
     }
 	
 	@Override
-	 public List<Avis> findActiveByEntidadID (long entitatID) throws I18NException {
+    public List<Avis> findActiveByEntidadID (long entitatID) throws I18NException {
 		/*
 		TypedQuery<AvisJPA> query = getEntityManager().createQuery(
 					"select a from AvisJPA a "
+
+	 public List<AvisJPA> findActiveByEntidadID (long entidadID) throws I18NException {
+		 
+		 TypedQuery<AvisJPA> query = getEntityManager().createQuery(
+					"select a from AvisJPA a join fetch a.entitat "
 					+ "where a.entitatID = :entidad " 
 					+ "and ((CURRENT_DATE between a.dataInici and a.dataFi)"
 					+ " or (a.dataFi IS NULL and a.dataInici IS NULL)"
 					+ " or (a.dataFi IS NULL and CURRENT_DATE >= a.dataInici)"
+
 					+ " or (a.dataInici IS NULL and CURRENT_DATE < a.dataFi))", AvisJPA.class);
 	 	query.setParameter("entidad", entidadID);
 	 	
@@ -72,6 +79,7 @@ public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaService {
 	    Where w = Where.AND(w1,w2);
 	    
         return select(w);
+
 	 }
 
 	/** Cerca els avisos actius d'un plugin en concret i els ordena de més greu a menys **/

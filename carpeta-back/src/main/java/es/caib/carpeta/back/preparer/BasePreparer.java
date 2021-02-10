@@ -145,6 +145,18 @@ public class BasePreparer implements ViewPreparer, Constants {
 			} else if("adminentitat".equals((String)attributeContext.getAttribute("pipella").getValue())) { 
 				avisosList = avisLogicaEjb.findActiveByEntidadID(LoginInfo.getInstance().getEntitatID());
 			} 
+			
+			/* Enviam al back només els avisos de tipus BACK */
+			Map<Avis,String> avisosInfo = new HashMap<Avis,String>();
+			for(Avis item : avisosList) {
+				int tipusAvis = item.getTipus();
+				int gravetatAvis = item.getGravetat();
+				String claseAlert = (gravetatAvis == Constants.GRAVETAT_AVIS_ERROR) ? "alert-danger" : (gravetatAvis == Constants.GRAVETAT_AVIS_WARNING) ? "alert-warning" : "alert-info";
+				if( tipusAvis == Constants.TIPUS_AVIS_BACK || tipusAvis == Constants.TIPUS_AVIS_BACK_ENTITAT) {
+					avisosInfo.put(item, claseAlert);
+				}
+			}
+			httpRequest.getSession().setAttribute("avisosInfo", avisosInfo);
 			httpRequest.getSession().setAttribute("numAvisos", avisosList.size());
 			
 		} catch(Exception e) {
@@ -154,9 +166,9 @@ public class BasePreparer implements ViewPreparer, Constants {
 		}
 		
 		// Avisos
-		Map<String, Long> avisos = new HashMap<String, Long>();
+		// Map<String, Long> avisos = new HashMap<String, Long>();
 		// avisos.put(rol, <<Number of warnings>>);
-		request.put("avisos", avisos);
+		// request.put("avisos", avisos);
 
 		if (attributeContext.getAttribute("menu") != null) {
 			request.put("menu_tile", attributeContext.getAttribute("menu").toString());
