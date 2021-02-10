@@ -1,16 +1,19 @@
 package es.caib.carpeta.logic;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.OrderBy;
+import org.fundaciobit.genapp.common.query.OrderType;
+import org.fundaciobit.genapp.common.query.Where;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 
 import es.caib.carpeta.commons.utils.UsuarioClave;
 import es.caib.carpeta.ejb.AccesEJB;
+import es.caib.carpeta.model.entity.Acces;
+import es.caib.carpeta.model.fields.AccesQueryPath;
 import es.caib.carpeta.persistence.AccesJPA;
-
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -28,7 +31,7 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaService {
 
     @Override
     public void crearAcces(UsuarioClave usuarioClave, @NotNull int tipus, long entitatID, Long pluginID,
-            Timestamp dataDarrerAcces, String idioma, String ipAddress,boolean resultat ) throws I18NException {
+                           Timestamp dataDarrerAcces, String idioma, String ipAddress, boolean resultat ) throws I18NException {
 
         AccesJPA accesJPA = new AccesJPA();
 
@@ -62,25 +65,26 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaService {
 
     /* Llistat de accesos entre dues dates ordenat per data descendent */
     @Override
-    public List<AccesJPA> findBetweenDates(Date inici, Date fi, String codiEntitat) throws I18NException {
+    public List<Acces> findBetweenDates(Date inici, Date fi, String codiEntitat) throws I18NException {
 
-        String sentencia = "select a from AccesJPA a " + "where a.dataAcces between :dataInici and :dataFi "
+       /* String sentencia = "select a from AccesJPA a " + "where a.dataAcces between :dataInici and :dataFi "
                 + "and a.entitat.codi = :codiEntitat " + "order by a.dataAcces desc";
 
         TypedQuery<AccesJPA> query = getEntityManager().createQuery(sentencia, AccesJPA.class);
         query.setParameter("dataInici", inici);
         query.setParameter("dataFi", fi);
-        query.setParameter("codiEntitat", codiEntitat);
+        query.setParameter("codiEntitat", codiEntitat);*/
         
-/*     XYZ ZZZ Canviar per aquest codi
-        Where w1 = DATAACCES.between(new TimeStamp(inici.getTime()), new TimeStamp(fi.getTime()))
+
+        Where w1 = DATAACCES.between(new Timestamp(inici.getTime()), new Timestamp(fi.getTime()));
         AccesQueryPath aqp = new AccesQueryPath();
         Where w2 = aqp.ENTITAT().CODI().equal(codiEntitat);
         Where w = Where.AND(w1,w2);
         OrderBy order = new OrderBy(DATAACCES, OrderType.DESC);
         return select(w,order);
-*/ 
-        return query.getResultList();
+
+        //return query.getResultList();
 
     }
+
 }

@@ -7,8 +7,7 @@ import javax.validation.constraints.NotNull;
 
 import es.caib.carpeta.commons.utils.UsuarioClave;
 import es.caib.carpeta.ejb.AccesService;
-import es.caib.carpeta.persistence.AccesJPA;
-
+import es.caib.carpeta.model.entity.Acces;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -26,5 +25,5 @@ public interface AccesLogicaService extends AccesService {
             Timestamp dataDarrerAcces, String idioma, String ipAddress, boolean resultat) throws I18NException;
 
     /* Llistat de accesos entre dues dates ordenat per data descendent */
-    public List<AccesJPA> findBetweenDates(Date inici, Date fi, String codiEntitat) throws I18NException;
+    public List<Acces> findBetweenDates(Date inici, Date fi, String codiEntitat) throws I18NException;
 }

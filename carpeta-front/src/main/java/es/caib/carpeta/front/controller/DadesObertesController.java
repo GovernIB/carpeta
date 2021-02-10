@@ -13,14 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.ejb.PropietatGlobalService;
-import es.caib.carpeta.persistence.AccesJPA;
-import es.caib.carpeta.persistence.PluginJPA;
 import es.caib.carpeta.logic.AccesLogicaService;
 import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaService;
 import es.caib.carpeta.logic.PluginEntitatLogicaService;
 import es.caib.carpeta.logic.utils.EjbManager;
+import es.caib.carpeta.model.entity.Acces;
 import es.caib.carpeta.model.entity.Plugin;
 import es.caib.carpeta.model.fields.PluginFields;
+import es.caib.carpeta.persistence.PluginJPA;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -186,14 +186,14 @@ public class DadesObertesController extends CommonFrontController {
 					llistaPlugins.put(p.getPluginID(), p.getNom().getTraduccio(idiomaRequest).getValor());
 				}
 			
-				List <AccesJPA> accesos = accesEjb.findBetweenDates(
+				List <Acces> accesos = accesEjb.findBetweenDates(
 						java.sql.Date.valueOf(LocalDate.parse(dataIniciRequest, DateTimeFormatter.ofPattern("yyyy-MM-dd"))),
 						java.sql.Date.valueOf(LocalDate.parse(dataFiRequest, DateTimeFormatter.ofPattern("yyyy-MM-dd"))),
 						entitatRequest );
 				
 				List <AccesInfo> accesosInfo = new ArrayList<AccesInfo>();
 				
-				for(AccesJPA item : accesos) {
+				for(Acces item : accesos) {
 					
 					String tipusAcces = "";
 					String nomPlugin = "";
