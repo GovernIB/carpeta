@@ -300,13 +300,14 @@ class MenuDesllisant extends Component {
 			plugReactWarning = '';
 			plugReactError = '';
 			sortir = '';
+			enllasosPseusoPluginMenu = '';
 		}
 
 		if(canviarDeFront === 'true' && numEntitats > 1){
 			if (i18n.language === 'ca') {
 				canviarEntitat =
 					<li><a href="/carpetafront/entitat?lang=ca" className="imc-marc-ico imc--registres"
-						   title={t('menuEntitat')}><span>{t('menuEntitat')}</span></a></li>;
+						title={t('menuEntitat')}><span>{t('menuEntitat')}</span></a></li>;
 			}
 			if (i18n.language === 'es') {
 				canviarEntitat =
