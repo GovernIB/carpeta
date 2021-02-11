@@ -511,7 +511,7 @@
                             <outputDirectory>${basedir}/src/main/resources</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${basedir}/../carpeta-logic/src/main/resources</directory>
+                                    <directory>${basedir}/../carpeta-ejb/src/main/resources</directory>
                                     <includes>
                                         <include>logicmissatges_*.properties</include>
                                         <include>genapp_*.properties</include>
