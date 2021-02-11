@@ -6,7 +6,13 @@
     <c:if test="${sessionScope.numAvisos ne '0'}">
         <c:forEach items="${ sessionScope.avisosInfo }" var="avis">
             <div class="alert ${avis.value } alert-dismissible fade show" role="alert">
-                <c:if test="${(pipella eq 'superadmin')}"><strong><c:out value="${avis.key.entitat.nom.traduccions[lang].valor}"/>: </strong></c:if><c:out value="${avis.key.descripcio.traduccions[lang].valor}" />
+                <c:if test="${(pipella eq 'superadmin')}">
+	                <c:forEach items="${loginInfo.entitats}" var="item">
+	                    <c:if test="${avis.key.entitatID eq item.key}">
+					        <strong><c:out value="${item.value.nom.traduccions[lang].valor}" />:</strong>
+					    </c:if>
+					</c:forEach>
+                </c:if><c:out value="${avis.key.descripcio.traduccions[lang].valor}" />
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
         </c:forEach>

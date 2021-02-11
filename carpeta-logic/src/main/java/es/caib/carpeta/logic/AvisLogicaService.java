@@ -7,7 +7,6 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import es.caib.carpeta.ejb.AvisService;
 import es.caib.carpeta.model.entity.Avis;
-import es.caib.carpeta.persistence.AvisJPA;
 
 /**
  * 
@@ -24,9 +23,9 @@ public interface AvisLogicaService extends AvisService {
     public List<Avis> findActiveByEntidadID (long entidadID) throws I18NException;
 
     /** Cerca els avisos actius d'un plugin en concret i els ordena de més greu a menys **/
-    public List<AvisJPA> findActiveByPluginID (long pluginID) throws I18NException;
+    public List<Avis> findActiveByPluginID (long pluginID) throws I18NException;
 
     /** Cerca els avisos actius d'un front public en concret i els ordena de més greu a menys **/
-    public List<AvisJPA> findActiveAvisos (String codiEntitat, int avisType) throws I18NException;
+    public List<Avis> findActiveAvisos (String codiEntitat, int avisType) throws I18NException;
 }
 

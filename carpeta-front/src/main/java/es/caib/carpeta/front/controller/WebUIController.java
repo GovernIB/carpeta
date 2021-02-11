@@ -648,7 +648,7 @@ public class WebUIController extends CommonFrontController {
             String lang = LocaleContextHolder.getLocale().getLanguage();
             String codiEntitat = sesionHttp.getEntitat();
 
-            List<AvisJPA> avisos = utilsEjb.getAvisosByType(codiEntitat, avisType);
+            List<Avis> avisos = utilsEjb.getAvisosByType(codiEntitat, avisType);
 
             List<AvisInfo> avisosInfo = new ArrayList<>();
 
