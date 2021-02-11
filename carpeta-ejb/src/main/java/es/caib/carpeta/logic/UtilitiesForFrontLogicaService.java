@@ -1,8 +1,8 @@
 package es.caib.carpeta.logic;
 
-import es.caib.carpeta.persistence.AvisJPA;
 import es.caib.carpeta.persistence.EntitatJPA;
 import es.caib.carpeta.logic.utils.PluginInfo;
+import es.caib.carpeta.model.entity.Avis;
 import es.caib.carpeta.model.entity.Enllaz;
 import es.caib.carpeta.model.entity.Fitxer;
 import es.caib.carpeta.model.entity.Idioma;
@@ -47,7 +47,7 @@ public interface UtilitiesForFrontLogicaService {
 
     public String getTexteInformatiuEntitat(String codiEntitat) throws I18NException;
 
-    public List<AvisJPA> getAvisosByType(String codiEntitat, int avisType) throws I18NException;
+    public List<Avis> getAvisosByType(String codiEntitat, int avisType) throws I18NException;
     
     public Map<String, String> getSuportEntitat(String codiEntitat, String lang) throws I18NException;
 

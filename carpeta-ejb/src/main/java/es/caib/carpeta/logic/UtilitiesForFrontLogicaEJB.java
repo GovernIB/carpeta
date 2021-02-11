@@ -145,7 +145,7 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
 
                 ICarpetaFrontPlugin cfp = pluginCarpetaFrontEjb.getInstanceByPluginID(p.getPluginID());
 
-                List<AvisJPA> avisos = avisEjb.findActiveByPluginID(p.getPluginID());
+                List<Avis> avisos = avisEjb.findActiveByPluginID(p.getPluginID());
 
                 // Ara hi pot haver més d'un avís actiu al mateix temps, només es mostra el de major gravetat,
                 // ja que cada tipus d'avis te una forma diferent de visualitzar el plugin al Front
@@ -153,7 +153,7 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
                 String missatgeAvis = "";
                 if (avisos.size() > 0) {
                     gravetatAvis = (long) avisos.get(0).getGravetat();
-                    missatgeAvis = avisos.get(0).getDescripcio().getTraduccio(language).getValor();
+                    missatgeAvis = ((AvisJPA)avisos.get(0)).getDescripcio().getTraduccio(language).getValor();
                 }
 
                 pluginsInfo.add(new PluginInfo(String.valueOf(plugin.getPluginID()),
@@ -248,9 +248,9 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
     }
 
     @Override
-    public List<AvisJPA> getAvisosByType(String codiEntitat, int avisType) throws I18NException {
+    public List<Avis> getAvisosByType(String codiEntitat, int avisType) throws I18NException {
 
-       List<AvisJPA> avisos = avisEjb.findActiveAvisos(codiEntitat, avisType);
+       List<Avis> avisos = avisEjb.findActiveAvisos(codiEntitat, avisType);
        return avisos;
     }
     
