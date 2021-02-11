@@ -13,7 +13,7 @@ import es.caib.carpeta.pluginsib.carpetafront.api.ICarpetaFrontPlugin;
 @Local
 public interface PluginDeCarpetaFrontLogicaService extends AbstractPluginLogicaService<ICarpetaFrontPlugin> {
 
-    public static final String JNDI_NAME = "java:app/carpeta-logic/PluginDeCarpetaFrontLogicaEJB!es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaService";
+    public static final String JNDI_NAME = "java:app/carpeta-ejb/PluginDeCarpetaFrontLogicaEJB!es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaService";
 
    
 }

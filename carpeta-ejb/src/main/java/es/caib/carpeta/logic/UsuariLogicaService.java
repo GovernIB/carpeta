@@ -15,7 +15,7 @@ import es.caib.carpeta.persistence.UsuariJPA;
 @Local
 public interface UsuariLogicaService extends UsuariService  {
 	
-	public static final String JNDI_NAME = "java:app/carpeta-logic/UsuariLogicaEJB!es.caib.carpeta.logic.UsuariLogicaService";
+	public static final String JNDI_NAME = "java:app/carpeta-ejb/UsuariLogicaEJB!es.caib.carpeta.logic.UsuariLogicaService";
 
 	
 	

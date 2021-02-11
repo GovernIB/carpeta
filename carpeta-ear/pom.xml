@@ -37,12 +37,7 @@
             <version>1.1.8</version>
             <type>ejb</type>
         </dependency>
-        <dependency>
-            <groupId>es.caib.carpeta</groupId>
-            <artifactId>carpeta-logic</artifactId>
-            <version>1.1.8</version>
-            <type>ejb</type>
-        </dependency>
+
         <!-- BACK START -->
         <dependency>
             <groupId>es.caib.carpeta</groupId>
@@ -204,11 +199,7 @@
                             <artifactId>carpeta-ejb</artifactId>
                             <bundleFileName>carpeta-ejb.jar</bundleFileName>
                         </ejbModule>
-                        <ejbModule>
-                            <groupId>es.caib.carpeta</groupId>
-                            <artifactId>carpeta-logic</artifactId>
-                            <bundleFileName>carpeta-logic.jar</bundleFileName>
-                        </ejbModule>
+
                         <!-- BACK START -->
                         <webModule>
                             <groupId>es.caib.carpeta</groupId>

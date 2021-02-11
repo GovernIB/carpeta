@@ -17,7 +17,7 @@ import es.caib.carpeta.persistence.AvisJPA;
 @Local
 public interface AvisLogicaService extends AvisService {
   
-    public static final String JNDI_NAME = "java:app/carpeta-logic/AvisLogicaEJB!es.caib.carpeta.logic.AvisLogicaService";
+    public static final String JNDI_NAME = "java:app/carpeta-ejb/AvisLogicaEJB!es.caib.carpeta.logic.AvisLogicaService";
   
     public List<Avis> findAllActive () throws I18NException;
     

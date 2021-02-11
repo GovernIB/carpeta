@@ -18,7 +18,7 @@ import es.caib.carpeta.persistence.PluginEntitatJPA;
 @Local
 public interface PluginEntitatLogicaService extends PluginEntitatService  {
 	
-	public static final String JNDI_NAME = "java:app/carpeta-logic/PluginEntitatLogicaEJB!es.caib.carpeta.logic.PluginEntitatLogicaService";
+	public static final String JNDI_NAME = "java:app/carpeta-ejb/PluginEntitatLogicaEJB!es.caib.carpeta.logic.PluginEntitatLogicaService";
 
 	public List<PluginEntitatJPA> findAllByEntitatId(@NotNull long codiEntitat) throws I18NException;
 

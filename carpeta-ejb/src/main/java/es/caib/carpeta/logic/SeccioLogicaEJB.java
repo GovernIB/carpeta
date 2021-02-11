@@ -7,6 +7,7 @@ import javax.annotation.security.PermitAll;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import es.caib.carpeta.ejb.SeccioEJB;
+import es.caib.carpeta.logic.EntitatLogicaService;
 import es.caib.carpeta.model.entity.Seccio;
 import es.caib.carpeta.persistence.SeccioJPA;
 

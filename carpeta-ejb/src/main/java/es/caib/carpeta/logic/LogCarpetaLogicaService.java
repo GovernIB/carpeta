@@ -19,7 +19,7 @@ import es.caib.carpeta.persistence.LogCarpetaJPA;
 @Local
 public interface LogCarpetaLogicaService extends LogCarpetaService {
 
-    public static final String JNDI_NAME = "java:app/carpeta-logic/LogCarpetaLogicaEJB!es.caib.carpeta.logic.LogCarpetaLogicaService";
+    public static final String JNDI_NAME = "java:app/carpeta-ejb/LogCarpetaLogicaEJB!es.caib.carpeta.logic.LogCarpetaLogicaService";
 
     public List<LogCarpetaJPA> findByEntidadByTipus(@NotNull String entitatCodi, @NotNull Integer tipus)throws I18NException;
 

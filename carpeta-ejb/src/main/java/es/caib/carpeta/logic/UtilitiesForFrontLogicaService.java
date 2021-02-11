@@ -23,7 +23,7 @@ import java.util.Map;
 @Local
 public interface UtilitiesForFrontLogicaService {
 
-    public static final String JNDI_NAME = "java:app/carpeta-logic/UtilitiesForFrontLogicaEJB!es.caib.carpeta.logic.UtilitiesForFrontLogicaService";
+    public static final String JNDI_NAME = "java:app/carpeta-ejb/UtilitiesForFrontLogicaEJB!es.caib.carpeta.logic.UtilitiesForFrontLogicaService";
     
     public EntitatJPA getEntitat(String codiEntitat) throws I18NException;
 

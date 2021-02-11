@@ -18,7 +18,7 @@ import java.util.List;
 @Local
 public interface SeccioLogicaService extends SeccioService {
 
-    public static final String JNDI_NAME = "java:app/carpeta-logic/SeccioLogicaEJB!es.caib.carpeta.logic.SeccioLogicaService";
+    public static final String JNDI_NAME = "java:app/carpeta-ejb/SeccioLogicaEJB!es.caib.carpeta.logic.SeccioLogicaService";
 
     
     public SeccioJPA findByPrimaryKey(Long _ID_);

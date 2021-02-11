@@ -502,7 +502,9 @@
         <module>carpeta-model</module>
         <module>carpeta-persistence</module>
         <module>carpeta-ejb</module>
+        <!--
         <module>carpeta-logic</module>
+        -->
         <module>carpeta-back</module>
         <module>carpeta-front</module>
         <!--

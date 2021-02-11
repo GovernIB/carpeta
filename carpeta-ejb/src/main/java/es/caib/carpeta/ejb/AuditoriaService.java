@@ -1,6 +1,7 @@
 
 package es.caib.carpeta.ejb;
 
+// NO MODIFICAR - DO NOT MODIFY;
 import javax.ejb.Local;
 
 import es.caib.carpeta.persistence.AuditoriaJPA;

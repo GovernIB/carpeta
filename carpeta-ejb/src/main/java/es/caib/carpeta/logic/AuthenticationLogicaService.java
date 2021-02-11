@@ -18,7 +18,7 @@ import java.util.List;
 @Local
 public interface AuthenticationLogicaService {
 
-    public static final String JNDI_NAME = "java:app/carpeta-logic/AuthenticationLogicaEJB!es.caib.carpeta.logic.AuthenticationLogicaService";
+    public static final String JNDI_NAME = "java:app/carpeta-ejb/AuthenticationLogicaEJB!es.caib.carpeta.logic.AuthenticationLogicaService";
 
     public void crearLog(String descripcio, Long temps, StringBuilder peticio, Throwable th, String error,String entitatCodi);
 

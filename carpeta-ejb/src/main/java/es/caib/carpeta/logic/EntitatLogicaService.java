@@ -17,7 +17,7 @@ import es.caib.carpeta.model.entity.Entitat;
 @Local
 public interface EntitatLogicaService extends EntitatService {
 	
-    public static final String JNDI_NAME = "java:app/carpeta-logic/EntitatLogicaEJB!es.caib.carpeta.logic.EntitatLogicaService";
+    public static final String JNDI_NAME = "java:app/carpeta-ejb/EntitatLogicaEJB!es.caib.carpeta.logic.EntitatLogicaService";
     
     public void deleteFull(Entitat entitat, boolean deleteFiles) throws I18NException;
 

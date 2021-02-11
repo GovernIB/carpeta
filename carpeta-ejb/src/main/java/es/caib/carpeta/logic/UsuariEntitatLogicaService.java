@@ -18,7 +18,7 @@ import es.caib.carpeta.persistence.UsuariEntitatJPA;
 @Local
 public interface UsuariEntitatLogicaService extends UsuariEntitatService  {
 	
-	public static final String JNDI_NAME = "java:app/carpeta-logic/UsuariEntitatLogicaEJB!es.caib.carpeta.logic.UsuariEntitatLogicaService";
+	public static final String JNDI_NAME = "java:app/carpeta-ejb/UsuariEntitatLogicaEJB!es.caib.carpeta.logic.UsuariEntitatLogicaService";
 
 	public List<UsuariEntitatJPA> findAllByUsuariId(@NotNull long usuarioID) throws I18NException;
 	

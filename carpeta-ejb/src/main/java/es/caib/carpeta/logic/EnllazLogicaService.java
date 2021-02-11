@@ -17,7 +17,7 @@ import es.caib.carpeta.model.entity.Enllaz;
 @Local
 public interface EnllazLogicaService extends EnllazService{
 	
-	public static final String JNDI_NAME = "java:app/carpeta-logic/EnllazLogicaEJB!es.caib.carpeta.logic.EnllazLogicaService";
+	public static final String JNDI_NAME = "java:app/carpeta-ejb/EnllazLogicaEJB!es.caib.carpeta.logic.EnllazLogicaService";
 	
 	public Set<Long> deleteFull(Enllaz enllaz, boolean deleteFiles) throws I18NException;
 

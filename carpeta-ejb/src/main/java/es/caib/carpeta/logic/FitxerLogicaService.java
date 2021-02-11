@@ -13,7 +13,7 @@ import es.caib.carpeta.persistence.FitxerJPA;
 @Local
 public interface FitxerLogicaService extends FitxerService {
 
-    public static final String JNDI_NAME = "java:app/carpeta-logic/FitxerLogicaEJB!es.caib.carpeta.logic.FitxerLogicaService";
+    public static final String JNDI_NAME = "java:app/carpeta-ejb/FitxerLogicaEJB!es.caib.carpeta.logic.FitxerLogicaService";
 
     @Override
     public FitxerJPA findByPrimaryKey(Long _ID_);

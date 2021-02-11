@@ -1,6 +1,7 @@
 
 package es.caib.carpeta.ejb;
 
+// NO MODIFICAR - DO NOT MODIFY;
 import javax.ejb.Stateless;
 import javax.annotation.security.RolesAllowed;
 import org.fundaciobit.genapp.common.i18n.I18NException;
