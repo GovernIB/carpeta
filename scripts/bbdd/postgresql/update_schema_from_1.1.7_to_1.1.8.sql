@@ -37,3 +37,10 @@ create index car_seccio_entitatid_fk_i on car_seccio (entitatid);
 ALTER TABLE car_pluginentitat  ADD COLUMN seccioid bigint;
 ALTER TABLE car_pluginentitat  ADD CONSTRAINT car_plugent_seccio_sec_fk FOREIGN KEY (seccioid) REFERENCES car_seccio (seccioid) ON UPDATE NO ACTION ON DELETE NO ACTION;
 create index car_plugent_seccioid_fk_i on car_pluginentitat (seccioid);
+
+
+-- 15/02/2021 Afegir un camp descripció traduïble a la taula d'enllaz #351 
+
+ALTER TABLE car_enllaz ADD COLUMN descripcioid bigint;
+ALTER TABLE car_enllaz ADD CONSTRAINT car_enllaz_traduccio_desid_fk FOREIGN KEY (descripcioid) REFERENCES car_traduccio (traduccioid) ON UPDATE NO ACTION ON DELETE NO ACTION;
+create index car_enllaz_descripcioid_fk_i on car_enllaz (descripcioid);

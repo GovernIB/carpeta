@@ -167,7 +167,7 @@ class LlistatDePlugins extends Component {
                         alt={s.nom} title={s.label}
                         className="imc-icona" /></span>
                     <span className="titolPlugin  titol h3">{s.label}</span>
-                    <span className="card-text mb-3 mt-3 alignCenter">{s.label}</span>
+                    <span className="card-text mb-3 mt-3 alignCenter">{s.labelDescription}</span>
                 </button>
             </div>
         ));

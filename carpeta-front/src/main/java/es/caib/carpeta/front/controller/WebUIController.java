@@ -129,12 +129,12 @@ public class WebUIController extends CommonFrontController {
      */
     public static class EnllazInfo {
         protected String label;
+        protected String labelDescription;
         protected String url;
         protected String urllogo;
 
         public EnllazInfo() {
             super();
-            // TODO Auto-generated constructor stub
         }
 
         public EnllazInfo(String label, String url, String urllogo) {
@@ -167,6 +167,16 @@ public class WebUIController extends CommonFrontController {
         public void setUrllogo(String urllogo) {
             this.urllogo = urllogo;
         }
+
+        public String getLabelDescription() {
+            return labelDescription;
+        }
+
+        public void setLabelDescription(String labelDescription) {
+            this.labelDescription = labelDescription;
+        }
+        
+        
 
     }
 
@@ -441,7 +451,18 @@ public class WebUIController extends CommonFrontController {
                 String urllogo = request.getContextPath() + WEBUI_PATH + ENLLAZ_LOGO_PATH + "/"
                         + HibernateFileUtil.encryptFileID(enllazJPA.getLogoID());
 
-                enllazosInfo.add(new EnllazInfo(label, url, urllogo));
+                
+                EnllazInfo ei = new EnllazInfo(label, url, urllogo);
+                
+                if (enllazType == Constants.TIPUS_ENLLAZ_FRONT_PSEUDOPLUGIN) {
+                    if (enllazJPA.getDescripcio() == null) {
+                        ei.setLabelDescription(label);
+                    } else {
+                        ei.setLabelDescription(enllazJPA.getDescripcioTraduccions().get(lang).getValor());
+                    }
+                }
+                
+                enllazosInfo.add(ei);
             }
 
             // Passar enllazosInfo a 

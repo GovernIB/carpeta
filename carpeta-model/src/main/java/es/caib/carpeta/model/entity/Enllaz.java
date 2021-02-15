@@ -11,6 +11,9 @@ public interface Enllaz extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public long getNomID();
 	public void setNomID(long _nomID_);
 
+	public java.lang.Long getDescripcioID();
+	public void setDescripcioID(java.lang.Long _descripcioID_);
+
 	public long getUrlID();
 	public void setUrlID(long _urlID_);
 

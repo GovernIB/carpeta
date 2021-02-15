@@ -39,6 +39,10 @@ private static final long serialVersionUID = -1473310087L;
 	@Column(name="nomid",nullable = false,length = 19)
 	long nomID;
 
+	@Index(name="car_enllaz_descripcioid_fk_i")
+	@Column(name="descripcioid",length = 19)
+	java.lang.Long descripcioID;
+
 	@Index(name="car_enllaz_urlid_fk_i")
 	@Column(name="urlid",nullable = false,length = 19)
 	long urlID;
@@ -62,28 +66,40 @@ private static final long serialVersionUID = -1473310087L;
   }
 
   /** Constructor amb tots els camps  */
-  public EnllazJPA(long enllazID , int tipus , long nomID , long urlID , long entitatID , long logoID , java.lang.Long seccioID) {
+  public EnllazJPA(long enllazID , int tipus , long nomID , java.lang.Long descripcioID , long urlID , long entitatID , long logoID , java.lang.Long seccioID) {
     this.enllazID=enllazID;
     this.tipus=tipus;
     this.nomID=nomID;
+    this.descripcioID=descripcioID;
     this.urlID=urlID;
     this.entitatID=entitatID;
     this.logoID=logoID;
     this.seccioID=seccioID;
 }
   /** Constructor sense valors autoincrementals */
-  public EnllazJPA(int tipus , long nomID , long urlID , long entitatID , long logoID , java.lang.Long seccioID) {
+  public EnllazJPA(int tipus , long nomID , java.lang.Long descripcioID , long urlID , long entitatID , long logoID , java.lang.Long seccioID) {
     this.tipus=tipus;
     this.nomID=nomID;
+    this.descripcioID=descripcioID;
     this.urlID=urlID;
     this.entitatID=entitatID;
     this.logoID=logoID;
     this.seccioID=seccioID;
 }
+  /** Constructor dels valors Not Null */
+  public EnllazJPA(long enllazID , int tipus , long nomID , long urlID , long entitatID , long logoID) {
+    this.enllazID=enllazID;
+    this.tipus=tipus;
+    this.nomID=nomID;
+    this.urlID=urlID;
+    this.entitatID=entitatID;
+    this.logoID=logoID;
+}
   public EnllazJPA(Enllaz __bean) {
     this.setEnllazID(__bean.getEnllazID());
     this.setTipus(__bean.getTipus());
     this.setNomID(__bean.getNomID());
+    this.setDescripcioID(__bean.getDescripcioID());
     this.setUrlID(__bean.getUrlID());
     this.setEntitatID(__bean.getEntitatID());
     this.setLogoID(__bean.getLogoID());
@@ -111,6 +127,13 @@ private static final long serialVersionUID = -1473310087L;
 	};
 	public void setNomID(long _nomID_) {
 		this.nomID = _nomID_;
+	};
+
+	public java.lang.Long getDescripcioID() {
+		return(descripcioID);
+	};
+	public void setDescripcioID(java.lang.Long _descripcioID_) {
+		this.descripcioID = _descripcioID_;
 	};
 
 	public long getUrlID() {
@@ -178,6 +201,31 @@ private static final long serialVersionUID = -1473310087L;
 
   public void setNomTraduccions(java.util.Map<String, es.caib.carpeta.persistence.TraduccioMapJPA> __traduccions__) {
     this.nom.setTraduccions(__traduccions__);
+  }
+
+
+// IMP Field:traduccioid | Table: car_traduccio | Type: 1  
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
+	@ForeignKey(name="car_enllaz_traduccio_desid_fk")
+	@JoinColumn(name = "descripcioid", referencedColumnName ="traduccioID", nullable = true, insertable=false, updatable=false)
+	private TraduccioJPA descripcio;
+
+	public TraduccioJPA getDescripcio() {
+    return this.descripcio;
+  }
+
+	public  void setDescripcio(TraduccioJPA descripcio) {
+    this.descripcio = descripcio;
+  }
+
+  @javax.xml.bind.annotation.XmlTransient
+  public java.util.Map<String, es.caib.carpeta.persistence.TraduccioMapJPA> getDescripcioTraduccions() {
+    return this.descripcio.getTraduccions();
+  }
+
+  public void setDescripcioTraduccions(java.util.Map<String, es.caib.carpeta.persistence.TraduccioMapJPA> __traduccions__) {
+    this.descripcio.setTraduccions(__traduccions__);
   }
 
 
@@ -259,6 +307,7 @@ private static final long serialVersionUID = -1473310087L;
     __tmp.setEnllazID(__bean.getEnllazID());
     __tmp.setTipus(__bean.getTipus());
     __tmp.setNomID(__bean.getNomID());
+    __tmp.setDescripcioID(__bean.getDescripcioID());
     __tmp.setUrlID(__bean.getUrlID());
     __tmp.setEntitatID(__bean.getEntitatID());
     __tmp.setLogoID(__bean.getLogoID());
@@ -296,6 +345,10 @@ private static final long serialVersionUID = -1473310087L;
     __alreadyCopied.put(__jpa, __tmp);
     // Copia de beans complexes (EXP)
     // Copia de beans complexes (IMP)
+    if(!"TraduccioJPA".equals(origenJPA) && 
+       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.descripcio) || org.hibernate.Hibernate.isInitialized(__jpa.getDescripcio()) ) ) {
+      __tmp.setDescripcio(TraduccioJPA.copyJPA(__jpa.getDescripcio(), __alreadyCopied,"EnllazJPA"));
+    }
     if(!"SeccioJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.seccio) || org.hibernate.Hibernate.isInitialized(__jpa.getSeccio()) ) ) {
       __tmp.setSeccio(SeccioJPA.copyJPA(__jpa.getSeccio(), __alreadyCopied,"EnllazJPA"));

@@ -58,8 +58,8 @@ public class EnllazJPAManager
 		return list.toArray(new Enllaz[list.size()]);
 	};
 
-	public synchronized Enllaz create( int _tipus_, long _nomID_, long _urlID_, long _entitatID_, long _logoID_, java.lang.Long _seccioID_) throws I18NException {
-		EnllazJPA __bean =  new EnllazJPA(_tipus_,_nomID_,_urlID_,_entitatID_,_logoID_,_seccioID_);
+	public synchronized Enllaz create( int _tipus_, long _nomID_, java.lang.Long _descripcioID_, long _urlID_, long _entitatID_, long _logoID_, java.lang.Long _seccioID_) throws I18NException {
+		EnllazJPA __bean =  new EnllazJPA(_tipus_,_nomID_,_descripcioID_,_urlID_,_entitatID_,_logoID_,_seccioID_);
 		return create(__bean);
 	}
 
@@ -117,6 +117,18 @@ public class EnllazJPAManager
               getEntityManager().persist(_trad);
             } 
             transientInstance.setNomID(_trad.getTraduccioID());
+          }
+        }
+      }
+      if (transientInstance.getDescripcioID() == null) {
+        if (transientInstance instanceof EnllazJPA) {
+          EnllazJPA _jpa = (EnllazJPA)transientInstance;
+          TraduccioJPA _trad = _jpa.getDescripcio();
+           if (_trad != null) {
+            if (_trad.getTraduccioID() == 0) {
+              getEntityManager().persist(_trad);
+            } 
+            transientInstance.setDescripcioID(_trad.getTraduccioID());
           }
         }
       }

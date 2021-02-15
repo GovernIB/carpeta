@@ -39,6 +39,7 @@ public class EnllazRefList extends RefListBase
   public EnllazRefList() {
     setSelects(new Select<?>[] { NOMID.select });
     addCampTraduible(NOMID.select);
+    addCampTraduible(DESCRIPCIOID.select);
     addCampTraduible(URLID.select);
   }
   public List<StringKeyValue> getReferenceList(Field<?> keyField, Where where, OrderBy ... orderBy) throws I18NException {

@@ -68,6 +68,41 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EnllazFields.DESCRIPCIOID)}">
+        <tr id="enllaz_descripcioID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EnllazFields.DESCRIPCIOID])?'enllaz.descripcioID':__theForm.labels[EnllazFields.DESCRIPCIOID]}" />
+              <c:if test="${not empty __theForm.help[EnllazFields.DESCRIPCIOID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EnllazFields.DESCRIPCIOID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+       <form:errors path="enllaz.descripcio" cssClass="errorField alert alert-danger" />
+       <div class="row-fluid  col-md-8">
+         <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
+             <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
+            <li class="nav-item ">
+                 <a class="nav-link ${(counter.index == 0)? 'active':''}" href="#${counter.index}_tab_descripcio_${idioma.idiomaID}" data-toggle="tab">${idioma.nom}</a>
+            </li>
+          </c:forEach>
+           
+         </ul>
+         <div class="tab-content well well-white" style="padding:8px;margin:0px;">
+           <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
+           <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_descripcio_${idioma.idiomaID}">
+               <form:errors path="enllaz.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
+               <form:input path="enllaz.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,EnllazFields.DESCRIPCIOID)? ' uneditable-input' : ''}" maxlength="4000" />
+           </div>
+           </c:forEach>
+         </div>
+       </div>
+
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,EnllazFields.URLID)}">
         <tr id="enllaz_urlID_rowid">
           <td>

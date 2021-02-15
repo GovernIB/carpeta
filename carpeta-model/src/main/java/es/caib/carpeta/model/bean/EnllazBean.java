@@ -13,6 +13,7 @@ private static final long serialVersionUID = 1571810514L;
 	long enllazID;// PK
 	int tipus;
 	long nomID;
+	java.lang.Long descripcioID;
 	long urlID;
 	long entitatID;
 	long logoID;
@@ -24,28 +25,40 @@ private static final long serialVersionUID = 1571810514L;
   }
 
   /** Constructor amb tots els camps  */
-  public EnllazBean(long enllazID , int tipus , long nomID , long urlID , long entitatID , long logoID , java.lang.Long seccioID) {
+  public EnllazBean(long enllazID , int tipus , long nomID , java.lang.Long descripcioID , long urlID , long entitatID , long logoID , java.lang.Long seccioID) {
     this.enllazID=enllazID;
     this.tipus=tipus;
     this.nomID=nomID;
+    this.descripcioID=descripcioID;
     this.urlID=urlID;
     this.entitatID=entitatID;
     this.logoID=logoID;
     this.seccioID=seccioID;
 }
   /** Constructor sense valors autoincrementals */
-  public EnllazBean(int tipus , long nomID , long urlID , long entitatID , long logoID , java.lang.Long seccioID) {
+  public EnllazBean(int tipus , long nomID , java.lang.Long descripcioID , long urlID , long entitatID , long logoID , java.lang.Long seccioID) {
     this.tipus=tipus;
     this.nomID=nomID;
+    this.descripcioID=descripcioID;
     this.urlID=urlID;
     this.entitatID=entitatID;
     this.logoID=logoID;
     this.seccioID=seccioID;
 }
+  /** Constructor dels valors Not Null */
+  public EnllazBean(long enllazID , int tipus , long nomID , long urlID , long entitatID , long logoID) {
+    this.enllazID=enllazID;
+    this.tipus=tipus;
+    this.nomID=nomID;
+    this.urlID=urlID;
+    this.entitatID=entitatID;
+    this.logoID=logoID;
+}
   public EnllazBean(Enllaz __bean) {
     this.setEnllazID(__bean.getEnllazID());
     this.setTipus(__bean.getTipus());
     this.setNomID(__bean.getNomID());
+    this.setDescripcioID(__bean.getDescripcioID());
     this.setUrlID(__bean.getUrlID());
     this.setEntitatID(__bean.getEntitatID());
     this.setLogoID(__bean.getLogoID());
@@ -73,6 +86,13 @@ private static final long serialVersionUID = 1571810514L;
 	};
 	public void setNomID(long _nomID_) {
 		this.nomID = _nomID_;
+	};
+
+	public java.lang.Long getDescripcioID() {
+		return(descripcioID);
+	};
+	public void setDescripcioID(java.lang.Long _descripcioID_) {
+		this.descripcioID = _descripcioID_;
 	};
 
 	public long getUrlID() {
@@ -113,6 +133,7 @@ private static final long serialVersionUID = 1571810514L;
     __tmp.setEnllazID(__bean.getEnllazID());
     __tmp.setTipus(__bean.getTipus());
     __tmp.setNomID(__bean.getNomID());
+    __tmp.setDescripcioID(__bean.getDescripcioID());
     __tmp.setUrlID(__bean.getUrlID());
     __tmp.setEntitatID(__bean.getEntitatID());
     __tmp.setLogoID(__bean.getLogoID());

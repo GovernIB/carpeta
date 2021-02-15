@@ -26,6 +26,7 @@ public class EnllazForm extends CarpetaBaseForm {
       this.enllaz = __toClone.enllaz;
     this.listOfValuesForTipus = __toClone.listOfValuesForTipus;
     this.listOfTraduccioForNomID = __toClone.listOfTraduccioForNomID;
+    this.listOfTraduccioForDescripcioID = __toClone.listOfTraduccioForDescripcioID;
     this.listOfTraduccioForUrlID = __toClone.listOfTraduccioForUrlID;
     this.listOfEntitatForEntitatID = __toClone.listOfEntitatForEntitatID;
     this.listOfSeccioForSeccioID = __toClone.listOfSeccioForSeccioID;
@@ -87,6 +88,18 @@ public class EnllazForm extends CarpetaBaseForm {
 
   public void setListOfTraduccioForNomID(List<StringKeyValue> listOfTraduccioForNomID) {
     this.listOfTraduccioForNomID = listOfTraduccioForNomID;
+  }
+
+
+
+  private List<StringKeyValue> listOfTraduccioForDescripcioID;
+
+  public List<StringKeyValue> getListOfTraduccioForDescripcioID() {
+    return this.listOfTraduccioForDescripcioID;
+  }
+
+  public void setListOfTraduccioForDescripcioID(List<StringKeyValue> listOfTraduccioForDescripcioID) {
+    this.listOfTraduccioForDescripcioID = listOfTraduccioForDescripcioID;
   }
 
 

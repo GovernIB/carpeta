@@ -21,6 +21,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EnllazFields.NOMID)}">
         <th>${car:getSortIcons(__theFilterForm,EnllazFields.NOMID)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EnllazFields.DESCRIPCIOID)}">
+        <th>${car:getSortIcons(__theFilterForm,EnllazFields.DESCRIPCIOID)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EnllazFields.URLID)}">
         <th>${car:getSortIcons(__theFilterForm,EnllazFields.URLID)}</th>
         </c:if>

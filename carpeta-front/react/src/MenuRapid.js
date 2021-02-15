@@ -128,17 +128,14 @@ class MenuRapid extends Component {
                     </li>
             ));
 
-            
-
             if(!this.state.menupseudoplugin.length){
                 enllasosPseusoPluginMenu = "";
             } else {
                 enllasosPseusoPluginMenu = this.state.menupseudoplugin.map((s, i) => (
-
                     <li className="nav-item pr-4">
-                        <a className="navCarpeta" href={s.url} target="_blank" title={s.nom}>
-                            <img src={s.urllogo} alt="" title={s.nom} className="imc-icona" />
-                            <span className="menuRapidView">{s.nom}</span>
+                        <a className="navCarpeta" href={s.url} target="_blank" title={s.label}>
+                            <img src={s.urllogo} alt="" title={s.label} className="imc-icona" />
+                            <span className="menuRapidView">{s.label}</span>
                         </a>
                     </li>
                 ))
@@ -154,7 +151,6 @@ class MenuRapid extends Component {
                     </a>
                 </li>
             ));
-
         }
 
         return (

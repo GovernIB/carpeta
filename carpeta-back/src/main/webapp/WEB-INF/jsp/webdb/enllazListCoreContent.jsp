@@ -45,6 +45,14 @@
           </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EnllazFields.DESCRIPCIOID)}">
+          <td>
+          <c:set var="tmp">${enllaz.descripcioID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${enllaz.descripcio.traduccions[lang].valor}
+          </c:if>
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EnllazFields.URLID)}">
           <td>
           <c:set var="tmp">${enllaz.urlID}</c:set>

@@ -23,6 +23,10 @@ public class EnllazQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new LongField(getQueryPath(), EnllazFields.NOMID);
   }
 
+  public LongField DESCRIPCIOID() {
+    return new LongField(getQueryPath(), EnllazFields.DESCRIPCIOID);
+  }
+
   public LongField URLID() {
     return new LongField(getQueryPath(), EnllazFields.URLID);
   }
@@ -52,6 +56,14 @@ public class EnllazQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new TraduccioQueryPath(new QueryPath() {
       public String getQueryPath() {
           return EnllazQueryPath.this.getQueryPath() + "nom" + ".";
+      }
+    });
+  }
+
+  public TraduccioQueryPath DESCRIPCIO() {
+    return new TraduccioQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return EnllazQueryPath.this.getQueryPath() + "descripcio" + ".";
       }
     });
   }

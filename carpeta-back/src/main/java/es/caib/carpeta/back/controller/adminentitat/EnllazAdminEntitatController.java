@@ -10,6 +10,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -65,6 +66,7 @@ public class EnllazAdminEntitatController extends EnllazController {
 
         if (enllazFilterForm.isNou()) {
             enllazFilterForm.addHiddenField(ENTITATID);
+            enllazFilterForm.addHiddenField(DESCRIPCIOID);
         }
 
         return enllazFilterForm;
@@ -107,10 +109,67 @@ public class EnllazAdminEntitatController extends EnllazController {
             throws I18NException {
         Where w = Where.AND(where, SeccioFields.ENTITATID.equal(LoginInfo.getInstance().getEntitatID()));
         List<StringKeyValue> list = super.getReferenceListForSeccioID(request, mav, w);
-        
+
         list.add(new StringKeyValue("", I18NUtils.tradueix("seccio.arrel")));
-        
+
         return list;
+    }
+
+    @Override
+    public void preValidate(HttpServletRequest request, EnllazForm enllazForm, BindingResult result)
+            throws I18NException {
+
+        EnllazJPA enllaz = enllazForm.getEnllaz();
+        if (enllaz.getTipus() == Constants.TIPUS_ENLLAZ_FRONT_PSEUDOPLUGIN) {
+            // En aquest cas Descripció és obligatori: ho validam ...
+
+            {
+                // IF CAMP ES NOT NULL verificar que totes les traduccions son not null
+                es.caib.carpeta.persistence.TraduccioJPA tradJPA = enllaz.getDescripcio();
+                if (tradJPA != null) {
+                    
+                    // TODO ERROR
+                    java.util.Map<String, es.caib.carpeta.persistence.TraduccioMapJPA> _trad = tradJPA.getTraduccions();
+                    int countNotNull = 0;
+                    for (String _idioma : _trad.keySet()) {
+                        es.caib.carpeta.persistence.TraduccioMapJPA _map = _trad.get(_idioma);
+                        if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0)) {
+                        } else {
+                            countNotNull++;
+                        }
+                    }
+
+                    if (countNotNull == _trad.size()) {
+                        // OK Tot esta ple
+                    } else {
+                        for (String _idioma : _trad.keySet()) {
+                            es.caib.carpeta.persistence.TraduccioMapJPA _map = _trad.get(_idioma);
+                            if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0)) {
+                                result.rejectValue("enllaz.descripcio", "genapp.validation.required",
+                                        new String[] { org.fundaciobit.genapp.common.web.i18n.I18NUtils
+                                                .tradueix(DESCRIPCIOID.fullName) },
+                                        null);
+                                result.rejectValue("enllaz.descripcio.traduccions[" + _idioma + "].valor",
+                                        "genapp.validation.required",
+                                        new String[] { org.fundaciobit.genapp.common.web.i18n.I18NUtils
+                                                .tradueix(DESCRIPCIOID.fullName) },
+                                        null);
+                            }
+                        }
+                    }
+                    
+                } else { 
+                    result.rejectValue("enllaz.descripcio", "genapp.validation.required",
+                            new String[] {
+                                    org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(DESCRIPCIOID.fullName) },
+                            null);
+                }
+            }
+        } else {
+            // En aquest cas Descripció ha de valer NULL
+            enllaz.setDescripcio(null);
+            enllaz.setDescripcioID(null);
+        }
     }
 
 }

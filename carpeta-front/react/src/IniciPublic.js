@@ -100,9 +100,9 @@ class IniciPublic extends Component {
                             <p className="lh15">{t('paginaIniciAjuda')}</p>
                             <ul className="lh15 pl-5 pt-3">
                                 <li><span className="oi oi-arrow-right" /> {t('paginaIniciAjuda1')} <a href="http://clave.gob.es/clave_Home/clave.html"
-                                                                title={t('paginaIniciAjudaClaveText')}
-                                                                target="_blank"
-                                                                rel="noopener noreferrer">{t('paginaIniciAjudaClave')}</a>
+                                    title={t('paginaIniciAjudaClaveText')}
+                                    target="_blank"
+                                    rel="noopener noreferrer">{t('paginaIniciAjudaClave')}</a>
                                 </li>
                                 <li><span className="oi oi-arrow-right" /> {t('paginaIniciAjuda2')}</li>
                                 <li><span className="oi oi-arrow-right" /> {t('paginaIniciAjuda3')} <a

@@ -91,6 +91,19 @@ private static final long serialVersionUID = -326205279L;
 	}
 
 
+// EXP  Field:descripcioid | Table: car_enllaz | Type: 0  
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "descripcioID")
+	private Set<EnllazJPA> enllaz_descripcioids = new HashSet<EnllazJPA>(0);
+	public  Set<EnllazJPA> getEnllaz_descripcioids() {
+    return this.enllaz_descripcioids;
+  }
+
+	public void setEnllaz_descripcioids(Set<EnllazJPA> enllaz_descripcioids) {
+	  this.enllaz_descripcioids = enllaz_descripcioids;
+	}
+
+
 // EXP  Field:nomid | Table: car_enllaz | Type: 0  
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "nomID")
@@ -273,6 +286,10 @@ private static final long serialVersionUID = -326205279L;
     if(!"SeccioJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.seccio_descripcioids) || org.hibernate.Hibernate.isInitialized(__jpa.getSeccio_descripcioids())) ) {
       __tmp.setSeccio_descripcioids(SeccioJPA.copyJPA(__jpa.getSeccio_descripcioids(), __alreadyCopied,"TraduccioJPA"));
+    }
+    if(!"EnllazJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.enllaz_descripcioids) || org.hibernate.Hibernate.isInitialized(__jpa.getEnllaz_descripcioids())) ) {
+      __tmp.setEnllaz_descripcioids(EnllazJPA.copyJPA(__jpa.getEnllaz_descripcioids(), __alreadyCopied,"TraduccioJPA"));
     }
     if(!"PluginJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.plugin_nomids) || org.hibernate.Hibernate.isInitialized(__jpa.getPlugin_nomids())) ) {
