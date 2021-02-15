@@ -43,6 +43,8 @@ class PluginHtml extends Component {
             return null;
         }
 
+        document.querySelector("#continguts").classList.add('espaiContingut');
+
         const {t} = this.props;
         const pluginID = this.props.pluginID;
 

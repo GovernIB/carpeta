@@ -122,6 +122,8 @@ class LlistatDePlugins extends Component {
 
     render() {
 
+        document.querySelector("#continguts").classList.remove('espaiContingut');
+
         const { t } = this.props;
 
         let entitatNom = this.state.nomEntitat;
