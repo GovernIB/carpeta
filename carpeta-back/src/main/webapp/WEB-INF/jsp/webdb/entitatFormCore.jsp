@@ -151,13 +151,13 @@
                   </span>
                 </div>
                 <script type="text/javascript">
-					$('#logoCapBackID').on('change', function(){
-						var ruta = $('#logoCapBackID').val(); 
-						var rutaArray = ruta.split('\\');
-						$('#logoCapBackID-custom-file-label').css('display','block');
-						$('#logoCapBackID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
-					});
-				</script>                </c:otherwise>
+                    $('#logoCapBackID').on('change', function(){
+                        var ruta = $('#logoCapBackID').val(); 
+                        var rutaArray = ruta.split('\\');
+                        $('#logoCapBackID-custom-file-label').css('display','block');
+                        $('#logoCapBackID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+                    });
+                </script>                </c:otherwise>
                 </c:choose>
               </div>
             </c:if>
@@ -203,13 +203,13 @@
                   </span>
                 </div>
                 <script type="text/javascript">
-					$('#logoPeuBackID').on('change', function(){
-						var ruta = $('#logoPeuBackID').val(); 
-						var rutaArray = ruta.split('\\');
-						$('#logoPeuBackID-custom-file-label').css('display','block');
-						$('#logoPeuBackID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
-					});
-				</script>                </c:otherwise>
+                    $('#logoPeuBackID').on('change', function(){
+                        var ruta = $('#logoPeuBackID').val(); 
+                        var rutaArray = ruta.split('\\');
+                        $('#logoPeuBackID-custom-file-label').css('display','block');
+                        $('#logoPeuBackID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+                    });
+                </script>                </c:otherwise>
                 </c:choose>
               </div>
             </c:if>
@@ -255,13 +255,13 @@
                   </span>
                 </div>
                 <script type="text/javascript">
-					$('#logoLateralFrontID').on('change', function(){
-						var ruta = $('#logoLateralFrontID').val(); 
-						var rutaArray = ruta.split('\\');
-						$('#logoLateralFrontID-custom-file-label').css('display','block');
-						$('#logoLateralFrontID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
-					});
-				</script>                </c:otherwise>
+                    $('#logoLateralFrontID').on('change', function(){
+                        var ruta = $('#logoLateralFrontID').val(); 
+                        var rutaArray = ruta.split('\\');
+                        $('#logoLateralFrontID-custom-file-label').css('display','block');
+                        $('#logoLateralFrontID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+                    });
+                </script>                </c:otherwise>
                 </c:choose>
               </div>
             </c:if>
@@ -325,13 +325,13 @@
                   </span>
                 </div>
                 <script type="text/javascript">
-					$('#iconID').on('change', function(){
-						var ruta = $('#iconID').val(); 
-						var rutaArray = ruta.split('\\');
-						$('#iconID-custom-file-label').css('display','block');
-						$('#iconID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
-					});
-				</script>                </c:otherwise>
+                    $('#iconID').on('change', function(){
+                        var ruta = $('#iconID').val(); 
+                        var rutaArray = ruta.split('\\');
+                        $('#iconID-custom-file-label').css('display','block');
+                        $('#iconID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+                    });
+                </script>                </c:otherwise>
                 </c:choose>
               </div>
             </c:if>
@@ -382,15 +382,21 @@
             <td>
               <form:errors path="entitat.entitatDescFront" cssClass="errorField alert alert-danger" />
               <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.ENTITATDESCFRONT)? 'true' : 'false'}" path="entitat.entitatDescFront"  />
-      <div class="dropdown" style="vertical-align:top;display:inline;">
-        <button id="dropdownMenuButton_entitatDescFront" class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left:0px;"><span class="caret"></span></button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_entitatDescFront">
+      <div id="dropdownMenuButton_entitatDescFront" style="vertical-align:top;display:inline;position:relative;">
+        <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
+        <div id="dropdownMenuContainer_entitatDescFront" class="dropdown-menu">
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('entitat.entitatDescFront'); ta.wrap='off';" >No Wrap</a>
           <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('entitat.entitatDescFront'); ta.wrap='soft';">Soft Wrap</a>
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('entitat.entitatDescFront'); ta.wrap='hard';">Hard Wrap</a>
         </div>
       </div>
-           </td>
+      <script type="text/javascript">			
+	                $('#dropdownMenuButton_entitatDescFront').on('click', function(){
+					var valor = ($('#dropdownMenuContainer_entitatDescFront').css('display') != 'none') ? 'none' : 'block';
+                    $('#dropdownMenuContainer_entitatDescFront').css('display', valor);
+                    return false;
+				});
+      </script>           </td>
         </tr>
         </c:if>
         
@@ -626,13 +632,13 @@
                   </span>
                 </div>
                 <script type="text/javascript">
-					$('#fitxerCssID').on('change', function(){
-						var ruta = $('#fitxerCssID').val(); 
-						var rutaArray = ruta.split('\\');
-						$('#fitxerCssID-custom-file-label').css('display','block');
-						$('#fitxerCssID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
-					});
-				</script>                </c:otherwise>
+                    $('#fitxerCssID').on('change', function(){
+                        var ruta = $('#fitxerCssID').val(); 
+                        var rutaArray = ruta.split('\\');
+                        $('#fitxerCssID-custom-file-label').css('display','block');
+                        $('#fitxerCssID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+                    });
+                </script>                </c:otherwise>
                 </c:choose>
               </div>
             </c:if>
