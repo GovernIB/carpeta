@@ -72,7 +72,7 @@ class IniciPublic extends Component {
                             <p className="titol h5">{t('tramitacioAnonimaTitol')}</p>
                             <p className="lh15 pb-3"><a href="#" id="tramitacioModalBtn" data-toggle="modal" data-target="#tramitacioModal"><span className="oi oi-external-link" />{t('tramitacioEnllaz')}</a></p>
                             
-                            <div className="modal fade" id="tramitacioModal" tabindex="-1" aria-labelledby="tramitacioLabel" aria-hidden="true">
+                            <div className="modal fade" id="tramitacioModal" tabIndex="-1" aria-labelledby="tramitacioLabel" aria-hidden="true">
                                 <div className="modal-dialog">
                                     <div className="modal-content">
                                     <div className="modal-header">

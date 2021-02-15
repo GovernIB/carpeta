@@ -8,12 +8,12 @@ import Peu from './Peu';
 import MollaPa from './MollaPa';
 import Inici from './Inici';
 import Accessibilitat from './Accessibilitat';
-import TramitsPendents from './TramitsPendents';
-import Registres from './Registres';
-import DetallRegistre from './DetallRegistre';
-import Notificacions from './Notificacions';
+// import TramitsPendents from './TramitsPendents';
+// import Registres from './Registres';
+// import DetallRegistre from './DetallRegistre';
+// import Notificacions from './Notificacions';
 import MapaWeb from './MapaWeb';
-import DadesPersonals from './DadesPersonals';
+// import DadesPersonals from './DadesPersonals';
 import Breadcrumb from './Breadcrumb';
 import AvisosFront from './AvisosFront';
 import PluginHtml from './PluginHtml';
@@ -94,25 +94,25 @@ newAccessibilitatReact  = function createReactCompAccessibilitat(nomComponent, p
 	}
 };
 
-newTramitsPendentsReact  = function createReactCompTramitsPendents(nomComponent, param) {
-    ReactDOM.render(<TramitsPendents />, document.getElementById(nomComponent));
-	ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.TramitsPendents} autenticat={param}/>, document.getElementById("mollaPa"));
-};
-
-newRegistresReact  = function createReactCompRegistres(nomComponent, param) {
-    ReactDOM.render(<Registres />, document.getElementById(nomComponent));
-	ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.Registres} autenticat={param}/>, document.getElementById("mollaPa"));
-};
-
-newDetallRegistreReact  = function createReactCompDetallRegistre(nomComponent, param) {
-    ReactDOM.render(<DetallRegistre id={param} />, document.getElementById(nomComponent));
-	ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.DetallRegistre} autenticat={param}/>, document.getElementById("mollaPa"));
-};
-
-newNotificacionsReact  = function createReactCompNotificacions(nomComponent, param) {
-    ReactDOM.render(<Notificacions />, document.getElementById(nomComponent));
-	ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.Notificacions} autenticat={param}/>, document.getElementById("mollaPa"));
-};
+// newTramitsPendentsReact  = function createReactCompTramitsPendents(nomComponent, param) {
+//     ReactDOM.render(<TramitsPendents />, document.getElementById(nomComponent));
+// 	ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.TramitsPendents} autenticat={param}/>, document.getElementById("mollaPa"));
+// };
+//
+// newRegistresReact  = function createReactCompRegistres(nomComponent, param) {
+//     ReactDOM.render(<Registres />, document.getElementById(nomComponent));
+// 	ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.Registres} autenticat={param}/>, document.getElementById("mollaPa"));
+// };
+//
+// newDetallRegistreReact  = function createReactCompDetallRegistre(nomComponent, param) {
+//     ReactDOM.render(<DetallRegistre id={param} />, document.getElementById(nomComponent));
+// 	ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.DetallRegistre} autenticat={param}/>, document.getElementById("mollaPa"));
+// };
+//
+// newNotificacionsReact  = function createReactCompNotificacions(nomComponent, param) {
+//     ReactDOM.render(<Notificacions />, document.getElementById(nomComponent));
+// 	ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.Notificacions} autenticat={param}/>, document.getElementById("mollaPa"));
+// };
 
 newMapaWebReact  = function createReactCompMapaWeb(nomComponent, param) {
     ReactDOM.render(<MapaWeb />, document.getElementById(nomComponent));
@@ -124,10 +124,10 @@ newMapaWebReact  = function createReactCompMapaWeb(nomComponent, param) {
 	}
 };
 
-newDadesPersonalsReact  = function createReactCompDadesPersonals(nomComponent, param) {
-    ReactDOM.render(<DadesPersonals />, document.getElementById(nomComponent));
-	ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.DadesPersonals} autenticat={param}/>, document.getElementById("mollaPa"));
-};
+// newDadesPersonalsReact  = function createReactCompDadesPersonals(nomComponent, param) {
+//     ReactDOM.render(<DadesPersonals />, document.getElementById(nomComponent));
+// 	ReactDOM.render(<Breadcrumb items={breadcrumbPathsAut.DadesPersonals} autenticat={param}/>, document.getElementById("mollaPa"));
+// };
 
 newMenuLateralReact  = function createReactCompMenuLateral(nomComponent, param) {
     ReactDOM.render(<MenuLateral autenticat={param}/>, document.getElementById(nomComponent));
