@@ -24,6 +24,7 @@ import es.caib.carpeta.back.form.webdb.FitxerForm;
 import es.caib.carpeta.model.entity.Fitxer;
 import es.caib.carpeta.model.fields.EnllazFields;
 import es.caib.carpeta.model.fields.EntitatFields;
+import es.caib.carpeta.model.fields.PluginFields;
 
 /**
  * 
@@ -41,6 +42,9 @@ public class FitxersOrfesSuperAdminController extends FitxerController{
 	  
 	  @EJB(mappedName = es.caib.carpeta.ejb.EntitatService.JNDI_NAME)
 	  protected es.caib.carpeta.ejb.EntitatService entitatEjb;
+	  
+	  @EJB(mappedName = es.caib.carpeta.ejb.PluginService.JNDI_NAME)
+	  protected es.caib.carpeta.ejb.PluginService pluginEjb;
 	  
 	  @Override
 	  public String getTileForm() {
@@ -66,8 +70,9 @@ public class FitxersOrfesSuperAdminController extends FitxerController{
 	    Where w3 = FITXERID.notIn(entitatEjb.getSubQuery(EntitatFields.LOGOCAPBACKID, null));
 	    Where w4 = FITXERID.notIn(entitatEjb.getSubQuery(EntitatFields.LOGOPEUBACKID, null));
 	    Where w5 = FITXERID.notIn(entitatEjb.getSubQuery(EntitatFields.LOGOLATERALFRONTID, null));
+	    Where w6 = FITXERID.notIn(pluginEjb.getSubQuery(PluginFields.LOGOID, null));
 	    
-	    return Where.AND(parent, w1, w2, w3, w4, w5);
+	    return Where.AND(parent, w1, w2, w3, w4, w5, w6);
 	  }
 	  
 	  
@@ -102,6 +107,7 @@ public class FitxersOrfesSuperAdminController extends FitxerController{
 	      if (fitxerFilterForm.isNou()) {
 	        fitxerFilterForm.setTitleCode("fitxers.orfes");
 	        fitxerFilterForm.setAddButtonVisible(false);
+	        fitxerFilterForm.setEditButtonVisible(false);
 	      }
 	      
 	      return fitxerFilterForm;
