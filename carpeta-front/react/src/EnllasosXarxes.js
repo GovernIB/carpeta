@@ -10,7 +10,7 @@ class EnllasosXarxes extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         fetch(window.location.href + 'webui/socialnetworks')
             .then((response) => {
                 return response.json()
@@ -32,7 +32,7 @@ class EnllasosXarxes extends Component {
         } else {
             seguir = t('peuSeguir');
             enllasos = this.state.enllasosXarxes.map((s, i) => (
-                <li>
+                <li key={i}>
                     <a href={s.url} className="imc-bt-xarxa border-0" title={s.label}>
                         <img src={s.urllogo} title="" alt=""/>
                         <span>{s.label}</span>

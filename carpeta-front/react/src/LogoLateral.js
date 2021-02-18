@@ -10,7 +10,7 @@ class LogoLateral extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         fetch(window.location.href + "webui/infologolateral")
             .then((response) => {
                 return response.json()
@@ -30,7 +30,7 @@ class LogoLateral extends Component {
             infologolateral = "";
         } else{
             infologolateral = this.state.infologolateral.map((s, i) => (
-                <a href={s.url} className="imc--goib" title={s.label}>
+                <a href={s.url} className="imc--goib" title={s.label} key={i}>
                     <img src={s.urllogo} style={{maxWidth: "70%"}} title="" alt="" className="logo-govern" />
                     <span>{s.label}</span>
                 </a>

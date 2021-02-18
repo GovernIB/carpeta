@@ -11,7 +11,7 @@ class EnllasosPeuCentral extends Component {
         }
     }
 
-    componentWillMount() {          
+    componentDidMount() {
         fetch(window.location.href + 'webui/centralfooterlinks')
             .then((response) => {
                 return response.json()
@@ -46,7 +46,7 @@ class EnllasosPeuCentral extends Component {
             enllasosPeuCentral = "";
         } else{
             enllasosPeuCentral = this.state.enllasosPeuCentral.map((s, i) => (
-                <li>
+                <li key={i}>
                     <a href={s.url}>
                         <span>{s.label}</span>
                         <img src={s.urllogo} title="" alt="" />

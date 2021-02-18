@@ -8,7 +8,7 @@ import ExpirarSessio from "./ExpirarSessio";
 
 class Inici extends Component {
 
-	componentWillMount() {
+	componentDidMount() {
 		var canviarLang = sessionStorage.getItem("langActual");
 		i18n.changeLanguage(canviarLang);
 	}

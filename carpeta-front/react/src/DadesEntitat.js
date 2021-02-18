@@ -23,7 +23,7 @@ class DadesEntitat extends Component {
         xhr.send(data);
 
         return (
-            <div id="substituir" class="imc-peu-govern"></div>
+            <div id="substituir" className="imc-peu-govern"/>
         );
     }
 }

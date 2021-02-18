@@ -12,7 +12,7 @@ class EnllasosLateral extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         var url = window.location.href + "webui/laterallinks";
         axios.get(url).then(res => {
             this.setState({ laterallinks: res.data })
@@ -36,7 +36,7 @@ class EnllasosLateral extends Component {
             laterallink = "";
         } else{
             laterallink = this.state.laterallinks.map((s, i) => (
-                <li>
+                <li key={i}>
                     <a href={s.url} className="" title={s.label}>
                         <img src={s.urllogo} title={s.label} alt={s.label} className="imatgeMobil" />
                     </a>

@@ -17,7 +17,7 @@ class MenuRapid extends Component {
         this.mostrarNovaSeccio = this.mostrarNovaSeccio.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         var url = window.location.href + `pluginfront/veureplugins`;
         axios.get(url).then(res => {
             const plugins = res.data;
@@ -84,34 +84,14 @@ class MenuRapid extends Component {
         var gestionsReact;
         var enllasosPseusoPluginMenu;
         var seccionsS;
-        // var accessibilitat;
-        // var dades;
-        // var gestions;
 
         if(autenticat === '0'){
 
-            // accessibilitat = "";
-            // dades = "";
 
         } else if(autenticat === '1'){
-            // accessibilitat = <li className="nav-item pr-5">
-            //         <a href="javascript:newAccessibilitat('contingut', '1');" className="imc-marc-ico imc--accessibilitat navCarpeta" id="imc-marc-accessibilitat" title={t('menuAccessibilitat')}><span>{t('menuAccessibilitat')}</span></a>
-            //     </li>;
-            //
-            // dades = <li className="nav-item">
-            //         <a href="javascript:newDadesPersonals('contingut', '1');" className="imc-marc-ico navCarpeta imc--dades"><span>{t('menuDades')}</span></a>
-            //     </li>;
 
-            // gestions = <li className="nav-item pr-5">
-            //     <button className="imc-marc-ico dropdown-toggle menuRapid imc--gestions" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>{t('menuGestions')}</span></button>
-            //     <div className="dropdown-menu submenuRapid" aria-labelledby="dropdownMenuButton">
-            //         {gestionsHtml}
-            //         {gestionsReact}
-            //     </div>
-            // </li>;
-
-            gestionsHtml = plugins.filter(s => s.reactComponent === 'false').map(s => (
-                <li className="nav-item pr-4">
+            gestionsHtml = plugins.filter(s => s.reactComponent === 'false').map((s, i) => (
+                <li className="nav-item pr-4" key={i}>
                     <a className="navCarpeta" href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"} title={s.nom}>
                         <img src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} alt="" title="" className="imc-icona" />
                         <span className="menuRapidView">{s.nom}</span>
@@ -119,8 +99,8 @@ class MenuRapid extends Component {
                 </li>
             ));
 
-            gestionsReact = plugins.filter(s => s.reactComponent === 'true').map(s => (
-                    <li className="nav-item pr-4">
+            gestionsReact = plugins.filter(s => s.reactComponent === 'true').map((s, i) => (
+                    <li className="nav-item pr-4" key={i}>
                         <a className="navCarpeta" href={"javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"} title={s.nom}>
                             <img src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} alt="" title="" className="imc-icona" />
                             <span className="menuRapidView">{s.nom}</span>
@@ -132,7 +112,7 @@ class MenuRapid extends Component {
                 enllasosPseusoPluginMenu = "";
             } else {
                 enllasosPseusoPluginMenu = this.state.menupseudoplugin.map((s, i) => (
-                    <li className="nav-item pr-4">
+                    <li className="nav-item pr-4" key={i}>
                         <a className="navCarpeta" href={s.url} target="_blank" title={s.label}>
                             <img src={s.urllogo} alt="" title={s.label} className="imc-icona" />
                             <span className="menuRapidView">{s.label}</span>
@@ -143,8 +123,8 @@ class MenuRapid extends Component {
 
             const seccions = this.state.seccions;
             
-            seccionsS = seccions.map(s => (
-                <li className="nav-item pr-4" onClick={() => this.mostrarNovaSeccio(s.seccioID) }>                    
+            seccionsS = seccions.map((s, i) => (
+                <li className="nav-item pr-4" onClick={() => this.mostrarNovaSeccio(s.seccioID) } key={i}>
                     <a className="navCarpeta"    >
                         <img src={s.iconaID} title={s.nom} alt={s.descripcio} className="imc-icona" />
                         <span className="menuRapidView">{s.nom}</span>
@@ -157,13 +137,10 @@ class MenuRapid extends Component {
             <div>
                 <nav className="navbar navbar-expand-sm bg-white p-0 fixo" id="menuRapid">
                     <ul className="navbar-nav p-3 mRapidGlobal" id="llistaMenuRapid">
-                        {/*{gestions}*/}
-                        {/*{accessibilitat}*/}
                         {seccionsS}
                         {gestionsHtml}
                         {gestionsReact}
                         {enllasosPseusoPluginMenu}
-                        {/*{dades}*/}
                     </ul>
                 </nav>
             </div>

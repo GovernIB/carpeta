@@ -12,7 +12,7 @@ class IniciPublic extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         var url = window.location.href + "webui/nomEntitat";
         axios.get(url).then(res => {
             this.setState({ nomEntitat: res.data })

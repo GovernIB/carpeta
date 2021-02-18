@@ -17,34 +17,6 @@ class MenuDesllisant extends Component {
 		}
 	}
 
-	componentWillMount() {
-		var url = window.location.href + `pluginfront/veureplugins`;
-		axios.get(url).then(res => {
-			this.setState({ plugins: res.data })
-		});
-		var url2 = window.location.href + `webui/menuslidelinks`;
-		axios.get(url2).then(res => {
-			this.setState({ menuEnllasos: res.data })
-		});
-
-		var url3 = window.location.href + `webui/idiomesFront`;
-		axios.get(url3).then(res => {
-			this.setState({ idiomes: res.data })
-		})
-
-		var url4 = window.location.href + `webui/menupseudoplugin`;
-		axios.get(url4).then(res => {
-			this.setState({ menupseudoplugin: res.data })
-		});
-
-		// 0 == Nivell Arell        
-        var url5 = window.location.href + `webui/seccions/0`;
-		axios.get(url5).then(res => {
-			this.setState({ seccions: res.data })
-        });
-
-		
-	}
 
 	infoHtml(missatge, pluginID) {
 		alert(missatge);
@@ -89,6 +61,31 @@ class MenuDesllisant extends Component {
 	}
 
 	componentDidMount() {
+		var url = window.location.href + `pluginfront/veureplugins`;
+		axios.get(url).then(res => {
+			this.setState({ plugins: res.data })
+		});
+		var url2 = window.location.href + `webui/menuslidelinks`;
+		axios.get(url2).then(res => {
+			this.setState({ menuEnllasos: res.data })
+		});
+
+		var url3 = window.location.href + `webui/idiomesFront`;
+		axios.get(url3).then(res => {
+			this.setState({ idiomes: res.data })
+		})
+
+		var url4 = window.location.href + `webui/menupseudoplugin`;
+		axios.get(url4).then(res => {
+			this.setState({ menupseudoplugin: res.data })
+		});
+
+		// 0 == Nivell Arell
+		var url5 = window.location.href + `webui/seccions/0`;
+		axios.get(url5).then(res => {
+			this.setState({ seccions: res.data })
+		});
+
 		i18n.on('languageChanged', function(lng) {
 			sessionStorage.setItem("langActual", lng);
 			var url = window.location.href + `webui/canviarIdioma/${lng}`;
@@ -117,8 +114,8 @@ class MenuDesllisant extends Component {
 		var numEntitats = sessionStorage.getItem("numEntitats");
 
 		var seccionsS;
-		seccionsS = this.state.seccions.map(s => (
-			<li>
+		seccionsS = this.state.seccions.map((s, i) => (
+			<li key={i}>
 				<a href="javascript:" onClick={() => this.mostrarNovaSeccio(s.seccioID) } title={s.nom}>
 					<img src={s.iconaID} title="" alt={s.descripcio} className="imc-icona iconaEnllas" />
 					<span>{s.nom}</span>
@@ -133,7 +130,7 @@ class MenuDesllisant extends Component {
 			enllasosMenu = "";
 		} else{
 			enllasosMenu = this.state.menuEnllasos.map((s, i) => (
-				<li>
+				<li key={i}>
 					<a href={s.url} title={s.nom}>
 						<img src={s.urllogo} title="" alt="" className="imc-icona iconaEnllas" />
 						<span>{s.label}</span>
@@ -149,7 +146,7 @@ class MenuDesllisant extends Component {
 			enllasosPseusoPluginMenu = "";
 		} else {
 			enllasosPseusoPluginMenu = this.state.menupseudoplugin.map((s, i) => (
-				<li>
+				<li key={i}>
 					<a href={s.url} target="_blank" title={s.nom}>
 						<img src={s.urllogo} title="" alt="" className="imc-icona iconaEnllas" />
 						<span>{s.label}</span>
@@ -177,44 +174,44 @@ class MenuDesllisant extends Component {
 		}
 
 		if (i18n.language === 'ca') {
-			boto_ca = idiomes.filter(s => s === 'ca').map(s => (
-				<strong className="lletraIdioma">{t('menuIdioma_ca')}</strong>
+			boto_ca = idiomes.filter(s => s === 'ca').map((s, i)  => (
+				<strong className="lletraIdioma" key={i}>{t('menuIdioma_ca')}</strong>
 			));
-			boto_es = idiomes.filter(s => s === 'es').map(s => (
+			boto_es = idiomes.filter(s => s === 'es').map((s, i)  => (
 				<button onClick={() => i18n.changeLanguage('es')}
-						className="boton-menu lletraIdioma">{t('menuIdioma_es')}</button>
+						className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_es')}</button>
 			));
-			boto_en = idiomes.filter(s => s === 'en').map(s => (
+			boto_en = idiomes.filter(s => s === 'en').map((s, i)  => (
 				<button onClick={() => i18n.changeLanguage('en')}
-						className="boton-menu lletraIdioma">{t('menuIdioma_en')}</button>
+						className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_en')}</button>
 			));
 		}
 
 		if (i18n.language === 'es') {
-			boto_ca = idiomes.filter(s => s === 'ca').map(s => (
+			boto_ca = idiomes.filter(s => s === 'ca').map((s, i)  => (
 				<button onClick={() => i18n.changeLanguage('ca')}
-					className="boton-menu lletraIdioma">{t('menuIdioma_ca')}</button>
+					className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_ca')}</button>
 			));
-			boto_es = idiomes.filter(s => s === 'es').map(s => (
-				<strong className="lletraIdioma">{t('menuIdioma_es')}</strong>
+			boto_es = idiomes.filter(s => s === 'es').map((s, i)  => (
+				<strong className="lletraIdioma" key={i}>{t('menuIdioma_es')}</strong>
 			));
-			boto_en = idiomes.filter(s => s === 'en').map(s => (
+			boto_en = idiomes.filter(s => s === 'en').map((s, i)  => (
 				<button onClick={() => i18n.changeLanguage('en')}
-						className="boton-menu lletraIdioma">{t('menuIdioma_en')}</button>
+						className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_en')}</button>
 			));
 		}
 
 		if (i18n.language === 'en') {
-			boto_ca = idiomes.filter(s => s === 'ca').map(s => (
+			boto_ca = idiomes.filter(s => s === 'ca').map((s, i)  => (
 				<button onClick={() => i18n.changeLanguage('ca')}
-						className="boton-menu lletraIdioma">{t('menuIdioma_ca')}</button>
+						className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_ca')}</button>
 			));
-			boto_es = idiomes.filter(s => s === 'es').map(s => (
+			boto_es = idiomes.filter(s => s === 'es').map((s, i)  => (
 				<button onClick={() => i18n.changeLanguage('es')}
-						className="boton-menu lletraIdioma">{t('menuIdioma_es')}</button>
+						className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_es')}</button>
 			));
-			boto_en = idiomes.filter(s => s === 'en').map(s => (
-				<strong className="lletraIdioma">{t('menuIdioma_en')}</strong>
+			boto_en = idiomes.filter(s => s === 'en').map((s, i)  => (
+				<strong className="lletraIdioma" key={i}>{t('menuIdioma_en')}</strong>
 			));
 		}
 
@@ -240,46 +237,46 @@ class MenuDesllisant extends Component {
 			sortir = <li><a href="sortir" className="imc-marc-ico imc--sortir" id="imc-marc-sortir"
 							title={t('menuSortir')}><span>{t('menuSortir')}</span></a></li>;
 
-			plugHtml = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 0).map(s => (
-				<li><a href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}
+			plugHtml = plugins.filter(s => s.reactComponent === 'false').filter(s=> s.gravetat === 0).map((s, i)  => (
+				<li key={i}><a href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}
 					title={s.nom}><img
 					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></a></li>
 			));
-			plugHtmlInfo = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 1).map(s => (
-				<li><button title={s.nom} className="botoMenu alert1menu" onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}><img
+			plugHtmlInfo = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 1).map((s, i)  => (
+				<li key={i}><button title={s.nom} className="botoMenu alert1menu" onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}><img
 					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
-			plugHtmlWarning = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 2).map(s => (
-				<li><button title={s.nom} className="botoMenu alert2menu" onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}><img
+			plugHtmlWarning = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 2).map((s, i)  => (
+				<li key={i}><button title={s.nom} className="botoMenu alert2menu" onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}><img
 					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
-			plugHtmlError = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 3).map(s => (
-				<li><button title={s.nom} className="botoMenu alert3menu" onClick={(event) => this.error(s.missatge)}><img
+			plugHtmlError = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 3).map((s, i)  => (
+				<li key={i}><button title={s.nom} className="botoMenu alert3menu" onClick={(event) => this.error(s.missatge)}><img
 					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
 
-			plugReact = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 0).map(s => (
-				<li><a href={"javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"}
+			plugReact = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 0).map((s, i)  => (
+				<li key={i}><a href={"javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"}
 					title={s.nom}><img
 					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></a></li>
 			));
-			plugReactInfo = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 1).map(s => (
-				<li><button title={s.nom} className="botoMenu alert1menu" onClick={(event) => this.infoReact(s.missatge,s.pluginID)}><img
+			plugReactInfo = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 1).map((s, i)  => (
+				<li key={i}><button title={s.nom} className="botoMenu alert1menu" onClick={(event) => this.infoReact(s.missatge,s.pluginID)}><img
 					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
-			plugReactWarning = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 2).map(s => (
-				<li><button title={s.nom} className="botoMenu alert2menu" onClick={(event) => this.infoReact(s.missatge,s.pluginID)}><img
+			plugReactWarning = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 2).map((s, i)  => (
+				<li key={i}><button title={s.nom} className="botoMenu alert2menu" onClick={(event) => this.infoReact(s.missatge,s.pluginID)}><img
 					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
-			plugReactError = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 3).map(s => (
-				<li><button title={s.nom} className="botoMenu alert3menu" onClick={(event) => this.error(s.missatge)}><img
+			plugReactError = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 3).map((s, i)  => (
+				<li key={i}><button title={s.nom} className="botoMenu alert3menu" onClick={(event) => this.error(s.missatge)}><img
 					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));

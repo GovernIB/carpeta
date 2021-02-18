@@ -12,7 +12,7 @@ class AvisosFront extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         var url = window.location.href + "webui/avisosfrontpublic";
         axios.get(url).then(res => {
             this.setState({ avisosPublic: res.data })

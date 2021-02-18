@@ -13,7 +13,7 @@ class LegacyComponentClass extends Component{
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         var url = window.location.href + `pluginfront/veureplugins`;
         axios.get(url).then(res => {
             const plugins = res.data;
