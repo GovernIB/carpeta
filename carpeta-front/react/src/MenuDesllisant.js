@@ -23,7 +23,7 @@ class MenuDesllisant extends Component {
 	}
 
 
-	componentWillMount() {
+	componentDidMount() {
 
 
 		console.log("MENU DESLISSTANT componentWillMount()");
@@ -64,6 +64,24 @@ class MenuDesllisant extends Component {
 		
 	}
 
+
+	componentWillReceiveProps(lng) {
+
+
+
+		componentDidMount();
+
+		/*
+		i18n.on('languageChanged', function(lng) {
+			sessionStorage.setItem("langActual", lng);
+			var url = window.location.href + `webui/canviarIdioma/${lng}`;
+			axios.get(url).then(res => {
+				const lang = res.data;
+			})
+		});
+		*/
+	}
+
 	infoHtml(missatge, pluginID) {
 		alert(missatge);
 		//var contingut = newwPluginnHtml('contingut', '1', pluginID);
@@ -84,22 +102,7 @@ class MenuDesllisant extends Component {
 		alert(missatge);
 	}
 
-	componentWillReceiveProps(lng) {
 
-
-
-		componentDidMount();
-
-		/*
-		i18n.on('languageChanged', function(lng) {
-			sessionStorage.setItem("langActual", lng);
-			var url = window.location.href + `webui/canviarIdioma/${lng}`;
-			axios.get(url).then(res => {
-				const lang = res.data;
-			})
-		});
-		*/
-	}
 
 	mostrarNovaSeccio(seccioID) {
 
