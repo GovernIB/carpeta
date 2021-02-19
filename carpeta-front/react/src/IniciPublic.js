@@ -12,9 +12,11 @@ class IniciPublic extends Component {
         }
     }
 
-    componentWillMount() {
+
+    componentDidMount() {
         var baseURL = sessionStorage.getItem('contextPath');
         var url = baseURL + "/webui/nomEntitat";
+
         axios.get(url).then(res => {
             this.setState({ nomEntitat: res.data })
         });

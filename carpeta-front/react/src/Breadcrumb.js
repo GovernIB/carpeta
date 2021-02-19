@@ -17,6 +17,7 @@ class Breadcrumb extends Component{
         }
     }
 
+
     componentWillMount() {
       /*
         var url = window.location.href + `pluginfront/veureplugins`;

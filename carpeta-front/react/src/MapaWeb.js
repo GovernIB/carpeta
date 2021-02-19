@@ -12,9 +12,10 @@ class MapaWeb extends Component {
 		}
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		var baseURL = sessionStorage.getItem('contextPath');
 		var url = baseURL + `/pluginfront/veureplugins`;
+
 		axios.get(url).then(res => {
 			const plugins = res.data;
 			this.setState({ plugins });
@@ -47,6 +48,7 @@ class MapaWeb extends Component {
 			logoClau = '';
 			informacio = <a href="javascript:newInici('contingut', '1');">{t('mapaWebInformacio')}</a>;
 
+
 			plug = plugins.map(s => (<p className="lh15 upper">
 			     {/*
 			     <a
@@ -61,14 +63,16 @@ class MapaWeb extends Component {
 			dades = <a href="javascript:newDadesPersonals('contingut', '1');">{t('mapaWebDades')}</a>;
 		}
 		if (autenticat === '0') {
-			logoClau = <span class="oi oi-lock-locked colorClave" title={t('mapaWebClave')}></span>;
+			logoClau = <span className="oi oi-lock-locked colorClave" title={t('mapaWebClave')}/>;
 			informacio = <a href="javascript:newInici('contingut', '0');">{t('mapaWebInformacio')}</a>;
+
 
 			plug = <p className="lh15 upper">XYZ ZZZ FALTA ENLLAÇ A LOGIN</p>; /* XYZ ZZZ Aqui enllaç a LOGIN !!!!!! */
 			/*
 			plugins.map(s => (
 				<p className="lh15 upper"><a href="javascript: var loc = new URL(window.location.href);  window.location.href=('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host) )">{s.nom}</a> {logoClau}</p>));
 */
+
 			dades = <a href="javascript: var loc = new URL(window.location.href);  window.location.href=('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host) )">{t('mapaWebDades')}</a>;
 		}
 
@@ -91,7 +95,6 @@ class MapaWeb extends Component {
 									<p className="lh15 upper">{informacio}</p>
 								</li>
 								<li className="list-group-item">
-									{/*<p className="titol h5 upper">{t('mapaWebPlugins')}</p>*/}
 									{plug}
 								</li>
 								<li className="list-group-item">

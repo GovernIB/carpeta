@@ -11,9 +11,11 @@ class BarraMenu extends Component {
 		}
 	}
 
-	componentWillMount() {
+
+	componentDidMount() {
 		var baseURL = sessionStorage.getItem('contextPath');
 		var url = baseURL + `/webui/menubarlinks`;
+
 		axios.get(url).then(res => {
 			const enllasosMenuBar = res.data;
 			this.setState({ enllasosMenuBar });
@@ -40,7 +42,7 @@ class BarraMenu extends Component {
 			enllasosBarraMenu = "";
 		} else{
 			enllasosBarraMenu = this.state.enllasosMenuBar.map((s, i) => (
-				<li className="itemBar">
+				<li className="itemBar" key={i}>
 					<a href={s.url} className="imc-bt-menubar">
 						<img src={s.urllogo} title="" alt="" className="logoMenuBar"/>
 						<span>{s.label}</span>

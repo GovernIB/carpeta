@@ -20,7 +20,7 @@ class LlistatDePlugins extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
 
         const seccioID = this.props.seccioID ? this.props.seccioID : 0;
 
@@ -161,11 +161,13 @@ class LlistatDePlugins extends Component {
         var plugReactWarning;
         var plugReactError;
 
+
         seccionsS = seccions.map(s => (
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
                 {/*<button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}
                         onClick={() => this.mostrarNovaSeccio(s.seccioID) }> */}
                     <Link to={"/seccio/" + s.seccioID} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}  >
+
                     <span className="card-title titol pl-1 h3">
                         <img src={s.iconaID} alt="" title="" className="imc-icona" />
                     </span>
@@ -176,8 +178,8 @@ class LlistatDePlugins extends Component {
             </div>
         ));
 
-        menuPseudoPlugin = menupseudoplugin.map(s => (
-            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
+        menuPseudoPlugin = menupseudoplugin.map((s, i) => (
+            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
                 <button alt={s.label} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}
                         onClick={ () => window.open(s.url) } >
                     <span className="card-title titol pl-1 h3"><img
@@ -191,9 +193,11 @@ class LlistatDePlugins extends Component {
         ));
 
 
+
         plugHtml = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 0).map(s => (
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
             {/*
+
                 <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}
                         onClick={event => window.location.href = "javascript:newwPluginnHtml('contingut', '1', '" + s.pluginID + "');"}> */}
                 <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`} to={"/pluginhtml/" + s.pluginID} >
@@ -207,8 +211,9 @@ class LlistatDePlugins extends Component {
                 {/*</button>*/}
             </div>
         ));
-        plugHtmlInfo = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 1).map(s => (
-            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
+        
+        plugHtmlInfo = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 1).map((s, i) => (
+            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
                 <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
                         onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}>
                     <span className="card-title titol pl-1 h3"><img src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} alt="" title="" className="imc-icona" /></span>
@@ -217,8 +222,8 @@ class LlistatDePlugins extends Component {
                 </button>
             </div>
         ));
-        plugHtmlWarning = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 2).map(s => (
-            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
+        plugHtmlWarning = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 2).map((s, i) => (
+            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
                 <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
                         onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}>
                     <span className="card-title titol pl-1 h3"><img
@@ -230,8 +235,8 @@ class LlistatDePlugins extends Component {
                 </button>
             </div>
         ));
-        plugHtmlError = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 3).map(s => (
-            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
+        plugHtmlError = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 3).map((s, i) => (
+            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
                 <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
                         onClick={(event) => this.error(s.missatge)}>
                     <span className="card-title titol pl-1 h3"><img
@@ -244,11 +249,13 @@ class LlistatDePlugins extends Component {
             </div>
         ));
 
+
         plugReact = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 0).map(s => (
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
                 {/*<button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
                         onClick={event => window.location.href = "javascript:newwPluginnReact('contingut', '1', '" + s.pluginID + "');"}> */}
                     <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`} to={"/pluginreact/" + s.pluginID} >
+
                     <span className="card-title titol pl-1 h3"><img
                         src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
                         alt="" title=""
@@ -259,8 +266,8 @@ class LlistatDePlugins extends Component {
                 {/*</button>*/}
             </div>
         ));
-        plugReactInfo = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 1).map(s => (
-            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
+        plugReactInfo = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 1).map((s, i) => (
+            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
                 <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
                         onClick={(event) => this.infoReact(s.missatge,s.pluginID)}>
                     <span className="card-title titol pl-1 h3"><img
@@ -272,8 +279,8 @@ class LlistatDePlugins extends Component {
                 </button>
             </div>
         ));
-        plugReactWarning = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 2).map(s => (
-            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
+        plugReactWarning = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 2).map((s, i) => (
+            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
                 <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
                         onClick={(event) => this.infoReact(s.missatge,s.pluginID)}>
                     <span className="card-title titol pl-1 h3"><img
@@ -285,8 +292,8 @@ class LlistatDePlugins extends Component {
                 </button>
             </div>
         ));
-        plugReactError = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 3).map(s => (
-            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
+        plugReactError = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 3).map((s, i) => (
+            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
                 <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
                         onClick={(event) => this.error(s.missatge)}>
                     <span className="card-title titol pl-1 h3"><img

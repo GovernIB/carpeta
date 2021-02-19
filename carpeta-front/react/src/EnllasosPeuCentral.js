@@ -12,13 +12,15 @@ class EnllasosPeuCentral extends Component {
         }
     }
 
-    componentWillMount() {  
+
+    componentDidMount() {  
 
         var baseURL = sessionStorage.getItem('contextPath');
         var url =  baseURL + "/webui/centralfooterlinks";
         axios.get(url).then(res => {
             this.setState({ enllasosPeuCentral: res.data })
         });
+
     }
 
     componentWillReceiveProps(lng) {
@@ -47,7 +49,7 @@ class EnllasosPeuCentral extends Component {
             enllasosPeuCentral = "";
         } else{
             enllasosPeuCentral = this.state.enllasosPeuCentral.map((s, i) => (
-                <li>
+                <li key={i}>
                     <a href={s.url}>
                         <span>{s.label}</span>
                         <img src={s.urllogo} title="" alt="" />

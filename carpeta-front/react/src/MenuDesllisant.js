@@ -22,6 +22,7 @@ class MenuDesllisant extends Component {
 		}
 	}
 
+
 	componentWillMount() {
 
 
@@ -29,6 +30,7 @@ class MenuDesllisant extends Component {
 
 		var baseURL = sessionStorage.getItem('contextPath');
 		var url = baseURL + `/pluginfront/veureplugins`;
+
 		axios.get(url).then(res => {
 			this.setState({ plugins: res.data, loading: this.state.loading + 1 });
 		});
@@ -37,7 +39,9 @@ class MenuDesllisant extends Component {
 			this.setState({ menuEnllasos: res.data, loading: this.state.loading + 1 });
 		});
 
+
 		var url3 =  baseURL + `/webui/idiomesFront`;
+
 		axios.get(url3).then(res => {
 			this.setState({ idiomes: res.data, loading: this.state.loading + 1 });
 
@@ -50,6 +54,7 @@ class MenuDesllisant extends Component {
 		});
 
 		// 0 == Nivell Arell        
+
         var url5 =  baseURL + `/webui/seccions/0`;
 		axios.get(url5).then(res => {
 			this.setState({ seccions: res.data, loading: this.state.loading + 1 });
@@ -83,37 +88,9 @@ class MenuDesllisant extends Component {
 
 
 
-		//componentWillMount();
+		componentDidMount();
 
 		/*
-
-		var url = window.location.href + `pluginfront/veureplugins`;
-		axios.get(url).then(res => {
-			this.setState({ plugins: res.data })
-		});
-		var url2 = window.location.href + `webui/menuslidelinks`;
-		axios.get(url2).then(res => {
-			this.setState({ menuEnllasos: res.data })
-		});
-		var url3 = window.location.href + `webui/idiomesFront`;
-		axios.get(url3).then(res => {
-			this.setState({ idiomes: res.data })
-		})
-
-		var url4 = window.location.href + `webui/menupseudoplugin`;
-		axios.get(url4).then(res => {
-			this.setState({ menupseudoplugin: res.data })
-		});
-
-		// 0 == Nivell Arell        
-		var url5 = window.location.href + `webui/seccions/0`;
-		axios.get(url5).then(res => {
-			this.setState({ seccions: res.data })
-		});
-		*/
-	}
-
-	componentDidMount() {
 		i18n.on('languageChanged', function(lng) {
 			sessionStorage.setItem("langActual", lng);
 			var url = window.location.href + `webui/canviarIdioma/${lng}`;
@@ -121,6 +98,7 @@ class MenuDesllisant extends Component {
 				const lang = res.data;
 			})
 		});
+		*/
 	}
 
 	mostrarNovaSeccio(seccioID) {
@@ -155,14 +133,14 @@ class MenuDesllisant extends Component {
 		var canviarDeFront = sessionStorage.getItem("canviarDeFront");
 		var numEntitats = sessionStorage.getItem("numEntitats");
 
-		
+
 
 		let enllasosMenu;
 		if(!this.state.menuEnllasos.length || autenticat === '0'){
 			enllasosMenu = "";
 		} else{
 			enllasosMenu = this.state.menuEnllasos.map((s, i) => (
-				<li>
+				<li key={i}>
 					<a href={s.url} title={s.nom}>
 						<img src={s.urllogo} title="" alt="" className="imc-icona iconaEnllas" />
 						<span>{s.label}</span>
@@ -170,6 +148,7 @@ class MenuDesllisant extends Component {
 				</li>
 			))
 		}
+
 
 
 		const idiomes = this.state.idiomes;
@@ -191,44 +170,44 @@ class MenuDesllisant extends Component {
 		}
 
 		if (i18n.language === 'ca') {
-			boto_ca = idiomes.filter(s => s === 'ca').map(s => (
-				<strong className="lletraIdioma">{t('menuIdioma_ca')}</strong>
+			boto_ca = idiomes.filter(s => s === 'ca').map((s, i)  => (
+				<strong className="lletraIdioma" key={i}>{t('menuIdioma_ca')}</strong>
 			));
-			boto_es = idiomes.filter(s => s === 'es').map(s => (
+			boto_es = idiomes.filter(s => s === 'es').map((s, i)  => (
 				<button onClick={() => i18n.changeLanguage('es')}
-						className="boton-menu lletraIdioma">{t('menuIdioma_es')}</button>
+						className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_es')}</button>
 			));
-			boto_en = idiomes.filter(s => s === 'en').map(s => (
+			boto_en = idiomes.filter(s => s === 'en').map((s, i)  => (
 				<button onClick={() => i18n.changeLanguage('en')}
-						className="boton-menu lletraIdioma">{t('menuIdioma_en')}</button>
+						className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_en')}</button>
 			));
 		}
 
 		if (i18n.language === 'es') {
-			boto_ca = idiomes.filter(s => s === 'ca').map(s => (
+			boto_ca = idiomes.filter(s => s === 'ca').map((s, i)  => (
 				<button onClick={() => i18n.changeLanguage('ca')}
-					className="boton-menu lletraIdioma">{t('menuIdioma_ca')}</button>
+					className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_ca')}</button>
 			));
-			boto_es = idiomes.filter(s => s === 'es').map(s => (
-				<strong className="lletraIdioma">{t('menuIdioma_es')}</strong>
+			boto_es = idiomes.filter(s => s === 'es').map((s, i)  => (
+				<strong className="lletraIdioma" key={i}>{t('menuIdioma_es')}</strong>
 			));
-			boto_en = idiomes.filter(s => s === 'en').map(s => (
+			boto_en = idiomes.filter(s => s === 'en').map((s, i)  => (
 				<button onClick={() => i18n.changeLanguage('en')}
-						className="boton-menu lletraIdioma">{t('menuIdioma_en')}</button>
+						className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_en')}</button>
 			));
 		}
 
 		if (i18n.language === 'en') {
-			boto_ca = idiomes.filter(s => s === 'ca').map(s => (
+			boto_ca = idiomes.filter(s => s === 'ca').map((s, i)  => (
 				<button onClick={() => i18n.changeLanguage('ca')}
-						className="boton-menu lletraIdioma">{t('menuIdioma_ca')}</button>
+						className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_ca')}</button>
 			));
-			boto_es = idiomes.filter(s => s === 'es').map(s => (
+			boto_es = idiomes.filter(s => s === 'es').map((s, i)  => (
 				<button onClick={() => i18n.changeLanguage('es')}
-						className="boton-menu lletraIdioma">{t('menuIdioma_es')}</button>
+						className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_es')}</button>
 			));
-			boto_en = idiomes.filter(s => s === 'en').map(s => (
-				<strong className="lletraIdioma">{t('menuIdioma_en')}</strong>
+			boto_en = idiomes.filter(s => s === 'en').map((s, i)  => (
+				<strong className="lletraIdioma" key={i}>{t('menuIdioma_en')}</strong>
 			));
 		}
 
@@ -289,6 +268,7 @@ class MenuDesllisant extends Component {
 
 			sortir = <li><a href="sortir" className="imc-marc-ico imc--sortir" id="imc-marc-sortir"
 							title={t('menuSortir')}><span>{t('menuSortir')}</span></a></li>;
+
 
 			plugHtml = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 0).map(s => (
 				<li>

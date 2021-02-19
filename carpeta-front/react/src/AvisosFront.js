@@ -12,11 +12,12 @@ class AvisosFront extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
 
         var baseURL = sessionStorage.getItem('contextPath');
 
         var url =  baseURL + "/webui/avisosfrontpublic";
+
         axios.get(url).then(res => {
             this.setState({ avisosPublic: res.data })
         });

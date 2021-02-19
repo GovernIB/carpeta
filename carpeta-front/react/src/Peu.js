@@ -24,7 +24,8 @@ class Peu extends Component {
 		}));
 	}
 
-	componentWillMount() {
+
+	componentDidMount() {
 		var baseURL = sessionStorage.getItem('contextPath');
 		var url =  baseURL + `/webui/suport`;
 		axios.get(url).then(res => {
@@ -50,23 +51,23 @@ class Peu extends Component {
 
 		const dadesSuport = this.state.dadesSuport;
 
-		var suportWeb = dadesSuport.filter(s => s.tipus === '1').map(s =>
-			<li className="pb-2 liAjuda">{t('suportConsulta')} <a href={s.valor}>{t('suportWeb')}</a></li>
+		var suportWeb = dadesSuport.filter(s => s.tipus === '1').map((s, i) =>
+			<li className="pb-2 liAjuda" key={i}>{t('suportConsulta')} <a href={s.valor}>{t('suportWeb')}</a></li>
 		);
-		var suportTelefon = dadesSuport.filter(s => s.tipus === '2').map(s =>
-			<li className="pb-2 liAjuda">{t('suportCrida')} <p className="text-verd"> {s.valor}</p></li>
+		var suportTelefon = dadesSuport.filter(s => s.tipus === '2').map((s, i) =>
+			<li className="pb-2 liAjuda" key={i}>{t('suportCrida')} <p className="text-verd"> {s.valor}</p></li>
 		);
-		var suportMail = dadesSuport.filter(s => s.tipus === '3').map(s =>
-			<li className="pb-2 liAjuda">{t('suportMail')} <a href={"mailto:'"+s.valor+"'"}>{s.valor}</a></li>
+		var suportMail = dadesSuport.filter(s => s.tipus === '3').map((s, i) =>
+			<li className="pb-2 liAjuda" key={i}>{t('suportMail')} <a href={"mailto:'"+s.valor+"'"}>{s.valor}</a></li>
 		);
-		var suportFAQ = dadesSuport.filter(s => s.tipus === '4').map(s =>
-			<li className="pb-2 liAjuda">{t('suportConsulta')} <a href={s.valor}>{t('suportFAQ')}</a></li>
+		var suportFAQ = dadesSuport.filter(s => s.tipus === '4').map((s, i) =>
+			<li className="pb-2 liAjuda" key={i}>{t('suportConsulta')} <a href={s.valor}>{t('suportFAQ')}</a></li>
 		);
-		var suportConsulta = dadesSuport.filter(s => s.tipus === '5').map(s =>
-			<li className="pb-2 liAjuda">{t('suportConsultaTecnica')} <p className="text-verd"> {s.valor}</p></li>
+		var suportConsulta = dadesSuport.filter(s => s.tipus === '5').map((s, i) =>
+			<li className="pb-2 liAjuda" key={i}>{t('suportConsultaTecnica')} <p className="text-verd"> {s.valor}</p></li>
 		);
-		var suportAutenticacio = dadesSuport.filter(s => s.tipus === '6').map(s =>
-			<li className="pb-2 liAjuda">{t('suportAutenticacio')} <p className="text-verd"> {s.valor}</p></li>
+		var suportAutenticacio = dadesSuport.filter(s => s.tipus === '6').map((s, i) =>
+			<li className="pb-2 liAjuda" key={i}>{t('suportAutenticacio')} <p className="text-verd"> {s.valor}</p></li>
 		);
 
 

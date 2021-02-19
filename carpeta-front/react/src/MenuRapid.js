@@ -20,7 +20,8 @@ class MenuRapid extends Component {
         this.mostrarNovaSeccio = this.mostrarNovaSeccio.bind(this);
     }
 
-    componentWillMount() {
+
+    componentDidMount() {
         var baseURL = sessionStorage.getItem('contextPath');
         var url = baseURL + `/pluginfront/veureplugins`;
         axios.get(url).then(res => {
@@ -95,6 +96,7 @@ class MenuRapid extends Component {
         var gestionsReact;
         var enllasosPseusoPluginMenu;
         var seccionsS;
+
     
         // var dades;
         // var gestions;
@@ -124,11 +126,13 @@ class MenuRapid extends Component {
                     {/*<a className="navCarpeta" href={"javascript:newwPluginnHtml('contingut', '1', '" + s.pluginID + "');"} title={s.nom}>*/}
                     <Link className="navCarpeta" to={"/pluginhtml/" + s.pluginID} >
                         <img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} alt="" title="" className="imc-icona" />
+
                         <span className="menuRapidView">{s.nom}</span>
                         </Link>
                     {/*</a>*/}
                 </li>
             ));
+
 
             gestionsReact = plugins.filter(s => s.reactComponent === 'true').map(s => (
                     <li className="nav-item pr-4">
@@ -145,7 +149,7 @@ class MenuRapid extends Component {
                 enllasosPseusoPluginMenu = "";
             } else {
                 enllasosPseusoPluginMenu = this.state.menupseudoplugin.map((s, i) => (
-                    <li className="nav-item pr-4">
+                    <li className="nav-item pr-4" key={i}>
                         <a className="navCarpeta" href={s.url} target="_blank" title={s.label}>
                             <img src={s.urllogo} alt="" title={s.label} className="imc-icona" />
                             <span className="menuRapidView">{s.label}</span>
@@ -160,6 +164,7 @@ class MenuRapid extends Component {
                 <li className="nav-item pr-4" > 
                 <Link to={"/seccio/" + s.seccioID} className="navCarpeta">
                     {/*<a className="navCarpeta"    > */}
+
                         <img src={s.iconaID} title={s.nom} alt={s.descripcio} className="imc-icona" />
                         <span className="menuRapidView">{s.nom}</span>
                     {/*</a>*/}
@@ -172,12 +177,10 @@ class MenuRapid extends Component {
             <div>
                 <nav className="navbar navbar-expand-sm bg-white p-0 fixo" id="menuRapid">
                     <ul className="navbar-nav p-3 mRapidGlobal" id="llistaMenuRapid">
-                        {/*{gestions}*/}
                         {seccionsS}
                         {gestionsHtml}
                         {gestionsReact}
                         {enllasosPseusoPluginMenu}
-                        {/*{dades}*/}
                     </ul>
                 </nav>
             </div>
