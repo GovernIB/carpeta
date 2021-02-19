@@ -7,20 +7,21 @@ class EnllasosLateral extends Component {
     constructor(){
         super();
         this.state = {
-            infologolateral: [],
             laterallinks: []
         }
     }
 
     componentWillMount() {
-        var url = window.location.href + "webui/laterallinks";
+        var baseURL = sessionStorage.getItem('contextPath');
+        var url = baseURL + "/webui/laterallinks";
         axios.get(url).then(res => {
             this.setState({ laterallinks: res.data })
         });
     }
 
     componentWillReceiveProps(lng) {
-        var url = window.location.href + "webui/laterallinks";
+        var baseURL = sessionStorage.getItem('contextPath');
+        var url = baseURL + "/webui/laterallinks";
         axios.get(url).then(res => {
             this.setState({ laterallinks: res.data })
         });
@@ -30,9 +31,11 @@ class EnllasosLateral extends Component {
 
         const {t} = this.props;
 
+        var auth = sessionStorage.getItem('autenticat');
+
         let laterallink;
 
-        if(!this.state.laterallinks.length){
+        if(!this.state.laterallinks.length || auth == '0'){
             laterallink = "";
         } else{
             laterallink = this.state.laterallinks.map((s, i) => (

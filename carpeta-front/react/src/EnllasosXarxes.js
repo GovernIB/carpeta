@@ -11,7 +11,8 @@ class EnllasosXarxes extends Component {
     }
 
     componentWillMount() {
-        fetch(window.location.href + 'webui/socialnetworks')
+        var baseURL = sessionStorage.getItem('contextPath');
+        fetch(baseURL + '/webui/socialnetworks')
             .then((response) => {
                 return response.json()
             })

@@ -13,14 +13,16 @@ class IniciPublic extends Component {
     }
 
     componentWillMount() {
-        var url = window.location.href + "webui/nomEntitat";
+        var baseURL = sessionStorage.getItem('contextPath');
+        var url = baseURL + "/webui/nomEntitat";
         axios.get(url).then(res => {
             this.setState({ nomEntitat: res.data })
         });
     }
 
     componentWillReceiveProps(lng) {
-        var url = window.location.href + "webui/nomEntitat";
+        var baseURL = sessionStorage.getItem('contextPath');
+        var url = baseURL +  "/webui/nomEntitat";
         axios.get(url).then(res => {
             this.setState({ nomEntitat: res.data })
         });
@@ -32,6 +34,7 @@ class IniciPublic extends Component {
         const { t } = this.props;
 
         let entitatNom = this.state.nomEntitat;
+        var contextPath = sessionStorage.getItem('contextPath');
 
         return (
             <div className="container-contenido homePage">
@@ -64,7 +67,7 @@ class IniciPublic extends Component {
                         <div className="col-md-5 border-0 columna2Inici">
 
                             <p className="margen-top-clave pb-3">
-                                <a className="btn btn-primary carpeta-btn botoAccedirCarpeta" href="javascript: var loc = new URL(window.location.href);  window.location.href=('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host) )" role="button"><span
+                                <a className="btn btn-primary carpeta-btn botoAccedirCarpeta" href="javascript: var loc = new URL(window.location.href);  window.location.href=('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host ) )" role="button"><span
                                     className="oi oi-account-login" title=""
                                     aria-hidden="true" /> {t('paginaIniciBotoAccedir')}</a>
                             </p>

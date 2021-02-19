@@ -11,7 +11,8 @@ class LogoLateral extends Component {
     }
 
     componentWillMount() {
-        fetch(window.location.href + "webui/infologolateral")
+        var baseURL = sessionStorage.getItem('contextPath');
+        fetch(baseURL + "/webui/infologolateral")
             .then((response) => {
                 return response.json()
             })

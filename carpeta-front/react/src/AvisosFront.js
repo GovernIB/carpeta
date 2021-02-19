@@ -13,22 +13,27 @@ class AvisosFront extends Component {
     }
 
     componentWillMount() {
-        var url = window.location.href + "webui/avisosfrontpublic";
+
+        var baseURL = sessionStorage.getItem('contextPath');
+
+        var url =  baseURL + "/webui/avisosfrontpublic";
         axios.get(url).then(res => {
             this.setState({ avisosPublic: res.data })
         });
-        var url2 = window.location.href + "webui/avisosfrontprivat";
+        var url2 = baseURL + "/webui/avisosfrontprivat";
         axios.get(url2).then(res => {
             this.setState({ avisosPrivat: res.data })
         })
     }
 
     componentWillReceiveProps(lng) {
-        var url = window.location.href + "webui/avisosfrontpublic";
+
+        var baseURL = sessionStorage.getItem('contextPath');
+        var url = baseURL +  "/webui/avisosfrontpublic";
         axios.get(url).then(res => {
             this.setState({ avisosPublic: res.data })
         });
-        var url2 = window.location.href + "webui/avisosfrontprivat";
+        var url2 = baseURL + "/webui/avisosfrontprivat";
         axios.get(url2).then(res => {
             this.setState({ avisosPrivat: res.data })
         })

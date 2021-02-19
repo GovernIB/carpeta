@@ -25,7 +25,8 @@ class Peu extends Component {
 	}
 
 	componentWillMount() {
-		var url = window.location.href + `webui/suport`;
+		var baseURL = sessionStorage.getItem('contextPath');
+		var url =  baseURL + `/webui/suport`;
 		axios.get(url).then(res => {
 			const dadesSuport = res.data;
 			this.setState({ dadesSuport: dadesSuport });
@@ -33,7 +34,8 @@ class Peu extends Component {
 	}
 
 	componentWillReceiveProps(lng) {
-		var url = window.location.href + `webui/suport`;
+		var baseURL = sessionStorage.getItem('contextPath');
+		var url = baseURL + `/webui/suport`;
 		axios.get(url).then(res => {
 			const dadesSuport = res.data;
 			this.setState({ dadesSuport: dadesSuport });
@@ -41,6 +43,7 @@ class Peu extends Component {
 	}
 	
 	render() {
+		
 
 		var autenticat = this.props.autenticat;
 		const {t} = this.props;

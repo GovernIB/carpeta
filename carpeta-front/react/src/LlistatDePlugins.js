@@ -3,7 +3,11 @@ import { withTranslation } from 'react-i18next';
 import i18n from 'i18next';
 import axios from "axios";
 
-
+import { HashRouter, Switch, Route, Link,useHistory } from "react-router-dom";
+/**
+ * 
+ * @author anadal Migració a ROUTER
+ */
 class LlistatDePlugins extends Component {
 
     constructor() {
@@ -20,32 +24,33 @@ class LlistatDePlugins extends Component {
 
         const seccioID = this.props.seccioID ? this.props.seccioID : 0;
 
-        console.log(" NOU LLISTAT AAAAAA - " + seccioID);
+        console.log(" NOU LLISTAT AAAAAA - SECCIO " + seccioID);
 
+        var baseURL = sessionStorage.getItem('contextPath');
         // 0 == Nivell Arell
-        var url = window.location.href + `pluginfront/veureplugins/` + seccioID;
+        var url = baseURL + `/pluginfront/veureplugins/` + seccioID;
         axios.get(url).then(res => {
             const plugins = res.data;
             this.setState({ plugins });
         })
 
-        var url2 = window.location.href + "webui/nomEntitat";
+        var url2 = baseURL + "/webui/nomEntitat";
         axios.get(url2).then(res => {
             this.setState({ nomEntitat: res.data })
         });
        // 0 == Nivell Arell    
-        var url4 = window.location.href + `webui/menupseudoplugin/` + seccioID;
+        var url4 = baseURL + `/webui/menupseudoplugin/` + seccioID;
 		axios.get(url4).then(res => {
 			this.setState({ menupseudoplugin: res.data })
         });
         // 0 == Nivell Arell        
-        var url5 = window.location.href + `webui/seccions/` + seccioID;
+        var url5 = baseURL + `/webui/seccions/` + seccioID;
 		axios.get(url5).then(res => {
 			this.setState({ seccions: res.data })
         });
 
         if (seccioID != 0) {
-            var url6 = window.location.href + `webui/seccio/` + seccioID;
+            var url6 = baseURL + `/webui/seccio/` + seccioID;
 		    axios.get(url6).then(res => {
 			    this.setState({ seccio: res.data })
             });
@@ -58,33 +63,35 @@ class LlistatDePlugins extends Component {
         // XYZ ZZZ componentWillMount();
         const seccioID = this.props.seccioID ? this.props.seccioID : 0;
 
-        console.log(" NOU LLISTAT BBBBB [" + lng + "] - " + seccioID);
+        console.log(" NOU LLISTAT BBBBB [" + lng + "] - SECCIO " + seccioID);
+
+        var baseURL = sessionStorage.getItem('contextPath');
 
         // 0 == Nivell Arell
-        var url = window.location.href + `pluginfront/veureplugins/` + seccioID;
+        var url = baseURL +  `/pluginfront/veureplugins/` + seccioID;
         axios.get(url).then(res => {
             const plugins = res.data;
             this.setState({ plugins });
         })
 
-        var url2 = window.location.href + "webui/nomEntitat";
+        var url2 = baseURL +  "/webui/nomEntitat";
         axios.get(url2).then(res => {
             this.setState({ nomEntitat: res.data })
         });
 
 
-        var url4 = window.location.href + `webui/menupseudoplugin/` + seccioID;
+        var url4 = baseURL + `/webui/menupseudoplugin/` + seccioID;
 		axios.get(url4).then(res => {
 			this.setState({ menupseudoplugin: res.data })
         });
         
-        var url5 = window.location.href + `webui/seccions/` + seccioID;
+        var url5 = baseURL + `/webui/seccions/` + seccioID;
 		axios.get(url5).then(res => {
 			this.setState({ seccions: res.data })
         });
 
         if (seccioID != 0) {
-            var url6 = window.location.href + `webui/seccio/` + seccioID;
+            var url6 = baseURL + `/webui/seccio/` + seccioID;
 		    axios.get(url6).then(res => {
 			    this.setState({ seccio: res.data })
             });
@@ -95,14 +102,18 @@ class LlistatDePlugins extends Component {
 
     infoHtml(missatge, pluginID) {
         alert(missatge);
-        var contingut = newPluginHtml('contingut', '1', pluginID);
-        window.location.href(contingut);
+        const history = useHistory();
+		history.push("/pluginhtml/" + pluginID);
+        //var contingut = newwPluginnHtml('contingut', '1', pluginID);
+        //window.location.href(contingut);
     }
 
     infoReact(missatge, pluginID) {
         alert(missatge);
-        var contingut = newPluginReact('contingut', '1', pluginID);
-        window.location.href(contingut);
+        const history = useHistory();
+		history.push("/pluginreact/" + pluginID);
+        //var contingut = newwPluginnReact('contingut', '1', pluginID);
+        //window.location.href(contingut);
     }
 
     error(missatge) {
@@ -113,8 +124,10 @@ class LlistatDePlugins extends Component {
     mostrarNovaSeccio(seccioID) {
 
         console.log("Entra a mostrarNovaSeccio");
-        const { t } = this.props;
-        ReactDOM.render(<LlistatDePlugins seccioID={seccioID}  t={t} />, document.getElementById('contingut'));
+        const history = useHistory();
+		history.push("/seccio/" + seccioID);
+        //const { t } = this.props;
+        //ReactDOM.render(<LlistatDePlugins seccioID={seccioID}  t={t} />, document.getElementById('contingut'));
         console.log("Surt mostrarNovaSeccio");
 
     }
@@ -122,13 +135,14 @@ class LlistatDePlugins extends Component {
 
     render() {
 
-        document.querySelector("#continguts").classList.remove('espaiContingut');
+        //document.querySelector("#continguts").classList.remove('espaiContingut');
 
         const { t } = this.props;
 
         let entitatNom = this.state.nomEntitat;
 
-        var urlBase = window.location.href;
+        //var urlBase = window.location.href;
+        var urlBase = sessionStorage.getItem('contextPath');
 
         const seccions = this.state.seccions;
 
@@ -149,14 +163,16 @@ class LlistatDePlugins extends Component {
 
         seccionsS = seccions.map(s => (
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
-                <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}
-                        onClick={() => this.mostrarNovaSeccio(s.seccioID) }>
+                {/*<button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}
+                        onClick={() => this.mostrarNovaSeccio(s.seccioID) }> */}
+                    <Link to={"/seccio/" + s.seccioID} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}  >
                     <span className="card-title titol pl-1 h3">
                         <img src={s.iconaID} alt="" title="" className="imc-icona" />
                     </span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>
                     <span className="card-text mb-3 mt-3 alignCenter">{s.descripcio}</span>
-                </button>
+                    </Link>
+                {/* </button> */ }
             </div>
         ));
 
@@ -177,15 +193,18 @@ class LlistatDePlugins extends Component {
 
         plugHtml = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 0).map(s => (
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
+            {/*
                 <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}
-                        onClick={event => window.location.href = "javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}>
+                        onClick={event => window.location.href = "javascript:newwPluginnHtml('contingut', '1', '" + s.pluginID + "');"}> */}
+                <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`} to={"/pluginhtml/" + s.pluginID} >
                     <span className="card-title titol pl-1 h3"><img
-                        src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+                        src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
                         alt="" title=""
                         className="imc-icona" /></span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>
                     <span className="card-text mb-3 mt-3 alignCenter">{s.descripcio}</span>
-                </button>
+                </Link>
+                {/*</button>*/}
             </div>
         ));
         plugHtmlInfo = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 1).map(s => (
@@ -203,7 +222,7 @@ class LlistatDePlugins extends Component {
                 <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
                         onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}>
                     <span className="card-title titol pl-1 h3"><img
-                        src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+                        src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
                         alt="" title=""
                         className="imc-icona" /></span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>
@@ -216,7 +235,7 @@ class LlistatDePlugins extends Component {
                 <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
                         onClick={(event) => this.error(s.missatge)}>
                     <span className="card-title titol pl-1 h3"><img
-                        src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+                        src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
                         alt="" title=""
                         className="imc-icona" /></span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>
@@ -227,15 +246,17 @@ class LlistatDePlugins extends Component {
 
         plugReact = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 0).map(s => (
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
-                <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
-                        onClick={event => window.location.href = "javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"}>
+                {/*<button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
+                        onClick={event => window.location.href = "javascript:newwPluginnReact('contingut', '1', '" + s.pluginID + "');"}> */}
+                    <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`} to={"/pluginreact/" + s.pluginID} >
                     <span className="card-title titol pl-1 h3"><img
-                        src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+                        src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
                         alt="" title=""
                         className="imc-icona" /></span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>
                     <span className="card-text mb-3 mt-3 alignCenter">{s.descripcio}</span>
-                </button>
+                    </Link>
+                {/*</button>*/}
             </div>
         ));
         plugReactInfo = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 1).map(s => (
@@ -243,7 +264,7 @@ class LlistatDePlugins extends Component {
                 <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
                         onClick={(event) => this.infoReact(s.missatge,s.pluginID)}>
                     <span className="card-title titol pl-1 h3"><img
-                        src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+                        src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
                         alt="" title=""
                         className="imc-icona" /></span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>
@@ -256,7 +277,7 @@ class LlistatDePlugins extends Component {
                 <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
                         onClick={(event) => this.infoReact(s.missatge,s.pluginID)}>
                     <span className="card-title titol pl-1 h3"><img
-                        src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+                        src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
                         alt="" title=""
                         className="imc-icona" /></span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>
@@ -269,7 +290,7 @@ class LlistatDePlugins extends Component {
                 <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
                         onClick={(event) => this.error(s.missatge)}>
                     <span className="card-title titol pl-1 h3"><img
-                        src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+                        src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
                         alt="" title=""
                         className="imc-icona" /></span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
+import { HashRouter, Switch, Route, Link } from "react-router-dom";
 import axios from "axios";
 
 class EnllasosPeuCentral extends Component {
@@ -11,18 +12,18 @@ class EnllasosPeuCentral extends Component {
         }
     }
 
-    componentWillMount() {          
-        fetch(window.location.href + 'webui/centralfooterlinks')
-            .then((response) => {
-                return response.json()
-            })
-            .then((enllasosPeuCentral) => {
-                this.setState({ enllasosPeuCentral: enllasosPeuCentral })
-            })
+    componentWillMount() {  
+
+        var baseURL = sessionStorage.getItem('contextPath');
+        var url =  baseURL + "/webui/centralfooterlinks";
+        axios.get(url).then(res => {
+            this.setState({ enllasosPeuCentral: res.data })
+        });
     }
 
     componentWillReceiveProps(lng) {
-        var url = window.location.href + "webui/centralfooterlinks";
+        var baseURL = sessionStorage.getItem('contextPath');
+        var url = baseURL + "/webui/centralfooterlinks";
         axios.get(url).then(res => {
             this.setState({ enllasosPeuCentral: res.data })
         });
@@ -58,7 +59,7 @@ class EnllasosPeuCentral extends Component {
 
         return (
             <ul>
-                {mapa}
+                <li><Link to={"/mapaweb/"} > { t('peuMapa') }</Link></li>
                 {enllasosPeuCentral}
             </ul>
         );

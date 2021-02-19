@@ -3,12 +3,17 @@ import { withTranslation } from 'react-i18next';
 import i18n from 'i18next';
 import axios from 'axios'
 import LlistatDePlugins from './LlistatDePlugins';
-
+import { HashRouter, Switch, Route, Link,useHistory } from "react-router-dom";
+/**
+ * 
+ * @author anadal Migració a ROUTER
+ */
 class MenuDesllisant extends Component {
 
 	constructor(){
 		super();
 		this.state = {
+			loading: 0,
 			plugins: [],
 			menuEnllasos: [],
 			idiomes: [],
@@ -18,29 +23,37 @@ class MenuDesllisant extends Component {
 	}
 
 	componentWillMount() {
-		var url = window.location.href + `pluginfront/veureplugins`;
+
+
+		console.log("MENU DESLISSTANT componentWillMount()");
+
+		var baseURL = sessionStorage.getItem('contextPath');
+		var url = baseURL + `/pluginfront/veureplugins`;
 		axios.get(url).then(res => {
-			this.setState({ plugins: res.data })
+			this.setState({ plugins: res.data, loading: this.state.loading + 1 });
 		});
-		var url2 = window.location.href + `webui/menuslidelinks`;
+		var url2 =  baseURL + `/webui/menuslidelinks`;
 		axios.get(url2).then(res => {
-			this.setState({ menuEnllasos: res.data })
+			this.setState({ menuEnllasos: res.data, loading: this.state.loading + 1 });
 		});
 
-		var url3 = window.location.href + `webui/idiomesFront`;
+		var url3 =  baseURL + `/webui/idiomesFront`;
 		axios.get(url3).then(res => {
-			this.setState({ idiomes: res.data })
+			this.setState({ idiomes: res.data, loading: this.state.loading + 1 });
+
+			console.log("FINAL DE LESTURA DE IDIOMES !!!!! " + this.state.idiomes);
 		})
 
-		var url4 = window.location.href + `webui/menupseudoplugin`;
+		var url4 =  baseURL + `/webui/menupseudoplugin`;
 		axios.get(url4).then(res => {
-			this.setState({ menupseudoplugin: res.data })
+			this.setState({ menupseudoplugin: res.data, loading: this.state.loading + 1 });
 		});
 
 		// 0 == Nivell Arell        
-        var url5 = window.location.href + `webui/seccions/0`;
+        var url5 =  baseURL + `/webui/seccions/0`;
 		axios.get(url5).then(res => {
-			this.setState({ seccions: res.data })
+			this.setState({ seccions: res.data, loading: this.state.loading + 1 });
+			
         });
 
 		
@@ -48,14 +61,18 @@ class MenuDesllisant extends Component {
 
 	infoHtml(missatge, pluginID) {
 		alert(missatge);
-		var contingut = newPluginHtml('contingut', '1', pluginID);
-		window.location.href(contingut);
+		//var contingut = newwPluginnHtml('contingut', '1', pluginID);
+		const history = useHistory();
+		history.push("/pluginhtml/" + pluginID)
+		//window.location.href(contingut);
 	}
 
 	infoReact(missatge, pluginID) {
 		alert(missatge);
-		var contingut = newPluginReact('contingut', '1', pluginID);
-		window.location.href(contingut);
+		const history = useHistory();
+		history.push("/pluginreact/" + pluginID);
+		//var contingut = newwPluginnReact('contingut', '1', pluginID);
+		//window.location.href(contingut);
 	}
 
 	error(missatge) {
@@ -63,6 +80,13 @@ class MenuDesllisant extends Component {
 	}
 
 	componentWillReceiveProps(lng) {
+
+
+
+		//componentWillMount();
+
+		/*
+
 		var url = window.location.href + `pluginfront/veureplugins`;
 		axios.get(url).then(res => {
 			this.setState({ plugins: res.data })
@@ -86,6 +110,7 @@ class MenuDesllisant extends Component {
 		axios.get(url5).then(res => {
 			this.setState({ seccions: res.data })
 		});
+		*/
 	}
 
 	componentDidMount() {
@@ -101,35 +126,39 @@ class MenuDesllisant extends Component {
 	mostrarNovaSeccio(seccioID) {
 
         console.log("DESLLISSANT Entra a mostrarNovaSeccio");
-        const { t } = this.props;
-        ReactDOM.render(<LlistatDePlugins seccioID={seccioID}  t={t} />, document.getElementById('contingut'));
+
+		const history = useHistory();
+		history.push("/seccio/" + seccioID);
+        
+        //const { t } = this.props;
+        //ReactDOM.render(<LlistatDePlugins seccioID={seccioID}  t={t} />, document.getElementById('contingut'));
         console.log("DESLLISSTANT Surt mostrarNovaSeccio");
 
     }
 
+
+
 	render() {
+
+		console.log("MENU DESLLISSANT loading = " + this.state.loading);
+
+		if ( this.state.loading < 5 ) {
+			return '';
+		}
+
 
 		const {t} = this.props;
 		var autenticat = this.props.autenticat;
-		var urlBase = window.location.href;
+		//var urlBase = window.location.href;
+		var urlBase = sessionStorage.getItem('contextPath');
 		var defaultEntityCode = sessionStorage.getItem("defaultEntityCode");
 		var canviarDeFront = sessionStorage.getItem("canviarDeFront");
 		var numEntitats = sessionStorage.getItem("numEntitats");
 
-		var seccionsS;
-		seccionsS = this.state.seccions.map(s => (
-			<li>
-				<a href="javascript:" onClick={() => this.mostrarNovaSeccio(s.seccioID) } title={s.nom}>
-					<img src={s.iconaID} title="" alt={s.descripcio} className="imc-icona iconaEnllas" />
-					<span>{s.nom}</span>
-				</a>
-			</li>
-
-        ));
-
+		
 
 		let enllasosMenu;
-		if(!this.state.menuEnllasos.length){
+		if(!this.state.menuEnllasos.length || autenticat === '0'){
 			enllasosMenu = "";
 		} else{
 			enllasosMenu = this.state.menuEnllasos.map((s, i) => (
@@ -143,24 +172,9 @@ class MenuDesllisant extends Component {
 		}
 
 
-		let enllasosPseusoPluginMenu;
-
-		if(!this.state.menupseudoplugin.length){
-			enllasosPseusoPluginMenu = "";
-		} else {
-			enllasosPseusoPluginMenu = this.state.menupseudoplugin.map((s, i) => (
-				<li>
-					<a href={s.url} target="_blank" title={s.nom}>
-						<img src={s.urllogo} title="" alt="" className="imc-icona iconaEnllas" />
-						<span>{s.label}</span>
-					</a>
-				</li>
-			))
-		}
-
-
-
 		const idiomes = this.state.idiomes;
+
+		console.log("\n MENU DESLLISSANT IDIOMES: " + idiomes);
 
 		var boto_ca;
 		var boto_es;
@@ -222,6 +236,16 @@ class MenuDesllisant extends Component {
 		const plugins = this.state.plugins;
 
 		var accessibilitat;
+		accessibilitat = <li> 
+		<Link to="/accessibilitat" className="imc-marc-ico imc--accessibilitat" >
+	{/*<a href="javascript:newwAccessibilitat('contingut', '1');"
+							className="imc-marc-ico imc--accessibilitat" id="imc-marc-accessibilitat"
+							title={t('menuAccessibilitat')}> */ }
+				<span>{t('menuAccessibilitat')}</span>
+		</Link>{/*</a>*/}
+		</li>;
+
+
 		var plugHtml;
 		var plugHtmlInfo;
 		var plugHtmlWarning;
@@ -232,64 +256,97 @@ class MenuDesllisant extends Component {
 		var plugReactError;
 		var sortir;
 		var canviarEntitat;
+		var seccionsS;
+		var enllasosPseusoPluginMenu;
+
 		if (autenticat === '1') {
-			accessibilitat = <li><a href="javascript:newAccessibilitat('contingut', '1');"
-									className="imc-marc-ico imc--accessibilitat" id="imc-marc-accessibilitat"
-									title={t('menuAccessibilitat')}><span>{t('menuAccessibilitat')}</span></a></li>;
+
+
+			if(!this.state.menupseudoplugin.length ){
+				enllasosPseusoPluginMenu = "";
+			} else {
+				enllasosPseusoPluginMenu = this.state.menupseudoplugin.map((s, i) => (
+					<li>
+						<a href={s.url} target="_blank" title={s.nom}>
+							<img src={s.urllogo} title="" alt="" className="imc-icona iconaEnllas" />
+							<span>{s.label}</span>
+						</a>
+					</li>
+				))
+			}
+
+			seccionsS = this.state.seccions.map(s => (
+				<li>
+					{/*<a href="javascript:" onClick={() => this.mostrarNovaSeccio(s.seccioID) } title={s.nom}>*/}
+					<Link to={"/seccio/" + s.seccioID} >
+						<img src={s.iconaID} title="" alt={s.descripcio} className="imc-icona iconaEnllas" />
+						<span>{s.nom}</span>
+					</Link>
+					{/*</a>*/}
+				</li>
+			));
+		
 
 			sortir = <li><a href="sortir" className="imc-marc-ico imc--sortir" id="imc-marc-sortir"
 							title={t('menuSortir')}><span>{t('menuSortir')}</span></a></li>;
 
 			plugHtml = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 0).map(s => (
-				<li><a href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}
-					title={s.nom}><img
-					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-					className="imc-icona" title="" alt="" /><span>{s.nom}</span></a></li>
+				<li>
+				{/*
+				<a href={"javascript:newwPluginnHtml('contingut', '1', '" + s.pluginID + "');"} title={s.nom}> */}
+					<Link to={"/pluginhtml/" + s.pluginID} >
+					<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+					className="imc-icona" title="" alt="" /><span>{s.nom}</span>
+					</Link>
+					{/*</a> */}
+				</li>
 			));
 			plugHtmlInfo = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 1).map(s => (
 				<li><button title={s.nom} className="botoMenu alert1menu" onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}><img
-					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
 			plugHtmlWarning = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 2).map(s => (
 				<li><button title={s.nom} className="botoMenu alert2menu" onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}><img
-					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
 			plugHtmlError = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 3).map(s => (
 				<li><button title={s.nom} className="botoMenu alert3menu" onClick={(event) => this.error(s.missatge)}><img
-					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
 
 			plugReact = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 0).map(s => (
-				<li><a href={"javascript:newPluginReact('contingut', '1', '" + s.pluginID + "');"}
-					title={s.nom}><img
-					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-					className="imc-icona" title="" alt="" /><span>{s.nom}</span></a></li>
+				<li>
+				    {/*<a href={"javascript:newwPluginnReact('contingut', '1', '" + s.pluginID + "');"} title={s.nom}>*/}
+					<Link to={"/pluginreact/" + s.pluginID} >
+					<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+					className="imc-icona" title="" alt="" /><span>{s.nom}</span>
+					</Link>
+					{/*</a>*/}
+				</li>
 			));
 			plugReactInfo = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 1).map(s => (
 				<li><button title={s.nom} className="botoMenu alert1menu" onClick={(event) => this.infoReact(s.missatge,s.pluginID)}><img
-					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
 			plugReactWarning = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 2).map(s => (
 				<li><button title={s.nom} className="botoMenu alert2menu" onClick={(event) => this.infoReact(s.missatge,s.pluginID)}><img
-					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
 			plugReactError = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 3).map(s => (
 				<li><button title={s.nom} className="botoMenu alert3menu" onClick={(event) => this.error(s.missatge)}><img
-					src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
 
 		}
 
 		if (autenticat === '0') {
-			accessibilitat = <li><a href="javascript:newAccessibilitat('contingut', '0');"
-									className="imc-marc-ico imc--accessibilitat" id="imc-marc-accessibilitat"
-									title={t('menuAccessibilitat')}><span>{t('menuAccessibilitat')}</span></a></li>;
+			
 			seccionsS = '';
 			plugHtml = '';
 			plugReact = '';
@@ -312,17 +369,18 @@ class MenuDesllisant extends Component {
 			if (i18n.language === 'es') {
 				canviarEntitat =
 					<li><a href="/carpetafront/entitat?lang=es" className="imc-marc-ico imc--registres"
-						   title={t('menuEntitat')}><span>{t('menuEntitat')}</span></a></li>;
+						title={t('menuEntitat')}><span>{t('menuEntitat')}</span></a></li>;
 			}
 			if (i18n.language === 'en') {
 				canviarEntitat =
 					<li><a href="/carpetafront/entitat?lang=en" className="imc-marc-ico imc--registres"
-						   title={t('menuEntitat')}><span>{t('menuEntitat')}</span></a></li>;
+						title={t('menuEntitat')}><span>{t('menuEntitat')}</span></a></li>;
 			}
 		} else{
 			canviarEntitat = "";
 		}
 
+		console.log("MENUDESLLISSANT :: INICI RENDER ");
 		return (
 			<div className="imc-marc" id="imc-marc" tabIndex="-1" aria-hidden="true">
 				<div className="imc--fons"></div>

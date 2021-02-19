@@ -2,7 +2,7 @@ var autenticat = sessionStorage.getItem('autenticat');
 
 
 export const Inici  = [
-  {id: 'inici',label: 'breadcrumbInici'}
+  {id: '/inici',label: 'breadcrumbInici'}
 ];
 
 export const Accessibilitat  = [
@@ -24,12 +24,7 @@ export const Accessibilitat  = [
 //   {id: 'javascript:newInici("contingut", "0");',label: 'breadcrumbInici'},
 //   {id: 'registres',label: 'breadcrumbRegistres'}
 // ];
-//
-// export const DetallRegistre  = [
-//   {id: 'javascript:newInici("contingut", "0");',label: 'breadcrumbInici'},
-//   {id: 'javascript:newRegistres("contingut", "0");',label: 'breadcrumbRegistres'},
-//   {id: 'detallRegistre',label: 'breadcrumbDetallRegistre'}
-// ];
+
 //
 // export const Notificacions  = [
 //   {id: 'javascript:newInici("contingut", "0");',label: 'breadcrumbInici'},

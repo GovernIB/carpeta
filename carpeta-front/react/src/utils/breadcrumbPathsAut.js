@@ -25,11 +25,7 @@ export const Accessibilitat  = [
 //   {id: 'registres',label: 'breadcrumbRegistres'}
 // ];
 //
-// export const DetallRegistre  = [
-//   {id: 'javascript:newInici("contingut", "1");',label: 'breadcrumbInici'},
-//   {id: 'javascript:newRegistres("contingut", "1");',label: 'breadcrumbRegistres'},
-//   {id: 'detallRegistre',label: 'breadcrumbDetallRegistre'}
-// ];
+
 //
 // export const Notificacions  = [
 //   {id: 'javascript:newInici("contingut", "1");',label: 'breadcrumbInici'},

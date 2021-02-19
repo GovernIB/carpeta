@@ -12,7 +12,8 @@ class BarraMenu extends Component {
 	}
 
 	componentWillMount() {
-		var url = window.location.href + `webui/menubarlinks`;
+		var baseURL = sessionStorage.getItem('contextPath');
+		var url = baseURL + `/webui/menubarlinks`;
 		axios.get(url).then(res => {
 			const enllasosMenuBar = res.data;
 			this.setState({ enllasosMenuBar });
@@ -20,7 +21,8 @@ class BarraMenu extends Component {
 	}
 
 	componentWillReceiveProps(lng) {
-		var url = window.location.href + `webui/menubarlinks`;
+		var baseURL = sessionStorage.getItem('contextPath');
+		var url = baseURL + `/webui/menubarlinks`;
 		axios.get(url).then(res => {
 			const enllasosMenuBar = res.data;
 			this.setState({ enllasosMenuBar });
@@ -30,10 +32,11 @@ class BarraMenu extends Component {
 	render() {
 
         const { t } = this.props;
+		var auth = sessionStorage.getItem('autenticat');
 
 		let enllasosBarraMenu;
 
-		if(!this.state.enllasosMenuBar.length){
+		if(!this.state.enllasosMenuBar.length || auth == '0'){
 			enllasosBarraMenu = "";
 		} else{
 			enllasosBarraMenu = this.state.enllasosMenuBar.map((s, i) => (

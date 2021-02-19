@@ -7,11 +7,26 @@ class PluginHtml extends Component {
 
     constructor() {
         super();
-        this.state = {loading: true}
+        this.state = {
+            contingut:'',
+            loading: true}
     }
+
+    /*
+    componentWillMount() {
+        var baseURL = sessionStorage.getItem('contextPath');
+        var url = baseURL + `/pluginfront/veureplugins`;
+        axios.get(url).then(res => {
+            const pluginID = this.props.match.params.pluginId;
+            console.log("PLUGIN HTML ID =" + pluginID + "  !!!!!!!");
+            this.setState({ contingut:res.data, loading: false });
+        });
+    }
+    */
 
     componentWillReceiveProps() {
         this.setState({ loading: true });
+        
         this.fakeRequest().then(() => {
             const el = document.querySelector(".loader-container");
             if (el) {
@@ -19,9 +34,11 @@ class PluginHtml extends Component {
                 this.setState({ loading: false });
             }
         });
+        
     }
 
     componentDidMount() {
+        
         this.fakeRequest().then(() => {
             const el = document.querySelector(".loader-container");
             if (el) {
@@ -29,6 +46,7 @@ class PluginHtml extends Component {
                 this.setState({ loading: false });
             }
         });
+        
     }
 
     fakeRequest() {
@@ -40,19 +58,25 @@ class PluginHtml extends Component {
 
         if (this.state.loading) {
             document.querySelector("#carregant").classList.remove('loaderOcult');
+            console.log("PLUGIN HTML CARREGANT !!!!!!!");
             return null;
         }
 
+        console.log("PLUGIN HTML 111111  !!!!!!!");
         document.querySelector("#continguts").classList.add('espaiContingut');
 
-        const {t} = this.props;
-        const pluginID = this.props.pluginID;
+        console.log("PLUGIN HTML 222222  !!!!!!!");
 
+        const {t} = this.props;
+        const pluginID = this.props.match.params.pluginId;
+        console.log("PLUGIN HTML ID =" + pluginID + "  !!!!!!!");
+
+        
         var data = new FormData();
         var codiPlugin;
 
-        var urlBase = window.location.href;
-        var url = urlBase + "pluginfront/showplugin/" + pluginID + "/" + i18n.language;
+        var urlBase = sessionStorage.getItem('contextPath');
+        var url = urlBase + "/pluginfront/showplugin/" + pluginID + "/" + i18n.language;
 
         var xhr = new XMLHttpRequest();
         xhr.open('POST', url, true);
@@ -62,11 +86,12 @@ class PluginHtml extends Component {
                     codiPlugin = this.responseText;
                     document.getElementById("substituir").innerHTML = codiPlugin;
                 } else {
-                    window.location.href = window.location.href;
+                    //window.location.href = window.location.href;
                 }
             }
         };
         xhr.send(data);
+        
 
         var lastSize = 0;
 
@@ -75,16 +100,13 @@ class PluginHtml extends Component {
             var iframe = document.getElementById('myiframe');
 
 
-            setTimeout(checkIframeSize, 1000);
-
             if(!iframe) {
-                console.log("XYZ ZZZ Sortim de IFRAME (frame val null)");
+                console.log("Sortim de IFRAME (frame val null)");
                 return;
             }
 
-            
+            setTimeout(checkIframeSize, 1000);
 
-            
             var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
             // var iframeDocument;
             // if(iframe.contentDocument != null) {

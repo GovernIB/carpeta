@@ -7,10 +7,11 @@ class NivellAutenticacio extends Component {
 
         const {t} = this.props;
 
+        const styleItalic = {fontStyle: 'italic'};
         var nivell = sessionStorage.getItem("usuariNivell");
 
-        return (
-            <span className="pl-3 nivellAut">{t('nivellAutenticacio')}: {t('nivellAutenticacio'+ nivell)}</span>
+        return (            
+            <span style={styleItalic} className="pl-3 nivellAut h4">{t('nivellAutenticacio')}: {t('nivellAutenticacio'+ nivell)}</span>
         );
     }
 }

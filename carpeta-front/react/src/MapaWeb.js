@@ -13,7 +13,8 @@ class MapaWeb extends Component {
 	}
 
 	componentWillMount() {
-		var url = window.location.href + `pluginfront/veureplugins`;
+		var baseURL = sessionStorage.getItem('contextPath');
+		var url = baseURL + `/pluginfront/veureplugins`;
 		axios.get(url).then(res => {
 			const plugins = res.data;
 			this.setState({ plugins });
@@ -21,7 +22,8 @@ class MapaWeb extends Component {
 	}
 
 	componentWillReceiveProps(lng) {
-		var url = window.location.href + `pluginfront/veureplugins`;
+		var baseURL = sessionStorage.getItem('contextPath');
+		var url = baseURL + `/pluginfront/veureplugins`;
 		axios.get(url).then(res => {
 			const plugins = res.data;
 			this.setState({ plugins });
@@ -35,7 +37,7 @@ class MapaWeb extends Component {
 		var autenticat = sessionStorage.getItem('autenticat');
 		const plugins = this.state.plugins;
 
-		var plug;
+		//var plug;
 
 		var informacio;
 		var dades;
@@ -45,8 +47,16 @@ class MapaWeb extends Component {
 			logoClau = '';
 			informacio = <a href="javascript:newInici('contingut', '1');">{t('mapaWebInformacio')}</a>;
 
-			plug = plugins.map(s => (<p className="lh15 upper"><a
-				href={"javascript:newPluginHtml('contingut', '1', '" + s.pluginID + "');"}>{s.nom}</a></p>));
+			plug = plugins.map(s => (<p className="lh15 upper">
+			     {/*
+			     <a
+				href={"javascript:('contingut', '1', '" + s.pluginID + "');"}>
+				{s.nom}</a>
+				*/}
+				<Link to="/pluginhtml/{s.pluginID}" >
+				{s.nom}
+				</Link>
+				</p>));
 
 			dades = <a href="javascript:newDadesPersonals('contingut', '1');">{t('mapaWebDades')}</a>;
 		}
@@ -54,9 +64,11 @@ class MapaWeb extends Component {
 			logoClau = <span class="oi oi-lock-locked colorClave" title={t('mapaWebClave')}></span>;
 			informacio = <a href="javascript:newInici('contingut', '0');">{t('mapaWebInformacio')}</a>;
 
-			plug = plugins.map(s => (
+			plug = <p className="lh15 upper">XYZ ZZZ FALTA ENLLAÇ A LOGIN</p>; /* XYZ ZZZ Aqui enllaç a LOGIN !!!!!! */
+			/*
+			plugins.map(s => (
 				<p className="lh15 upper"><a href="javascript: var loc = new URL(window.location.href);  window.location.href=('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host) )">{s.nom}</a> {logoClau}</p>));
-
+*/
 			dades = <a href="javascript: var loc = new URL(window.location.href);  window.location.href=('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host) )">{t('mapaWebDades')}</a>;
 		}
 

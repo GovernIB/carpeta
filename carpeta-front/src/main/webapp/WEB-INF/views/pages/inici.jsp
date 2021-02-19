@@ -50,110 +50,59 @@
   </head>
 
   <body>
-
-  <sec:authorize access="!isAuthenticated()">
+  
+  
+    <sec:authorize access="!isAuthenticated()">
 	  <script type="text/javascript">
 		  window.onload = function($) {
 			  sessionStorage.setItem('autenticat', '0');
-			  <%--console.log('entitat: ' + '${entitat}');--%>
 			  sessionStorage.setItem('entitat', '${entitat}');
 			  sessionStorage.setItem('defaultEntityCode', '${defaultEntityCode}');
 			  sessionStorage.setItem('maxInactiveInterval','${maxInactiveInterval}');
 			  sessionStorage.setItem('numEntitats', '${numEntitats}');
 			  sessionStorage.setItem('canviarDeFront', '${canviarDeFront}');
-			  sessionStorage.removeItem('pluginActiu');
-			  // sessionStorage.setItem('idTimeOut', '1');
-			  var aut = sessionStorage.getItem('autenticat');
-			  newMenuDesllisant('menuDesllisant', aut);
-			  newPeu('peu', aut);
-			  newMenuRapid('menuRapid', aut);
+			  sessionStorage.setItem('contextPath', '${pageContext.request.contextPath}');
+
 		  }
 	  </script>
   </sec:authorize>
   
-	<!-- Menú vertical -->
-	<div id = "menuLateral"></div>
-	
-	<!-- Contingut dret --> 
-	<div class="contenedor" id="contenedor">
+  <sec:authorize access="isAuthenticated()">
+  
+  
+  
+		<sec:authentication var="user" property="principal.usuarioClave.nombreCompleto" />
+		<sec:authentication var="userName" property="principal.usuarioClave.nombre" />
+		<sec:authentication var="userSurname1" property="principal.usuarioClave.apellido1" />
+		<sec:authentication var="userSurname2" property="principal.usuarioClave.apellido2" />
+		<sec:authentication var="userDNI" property="principal.usuarioClave.nif" />
+		<sec:authentication var="userMethod" property="principal.usuarioClave.metodoAutentificacion" />
+		<sec:authentication var="userLevelAut" property="principal.usuarioClave.qaa" />
+		<script type="text/javascript">
+			window.onload = function($) {
 
-		<!-- Capçalera -->
-		<div id = "barraMenu"></div>
+				var element = document.getElementById('contenedor');
+				element.setAttribute('style','margin-top: 4.5em !important');
 
-		<sec:authorize access="isAuthenticated()">
-			<sec:authentication var="user" property="principal.usuarioClave.nombreCompleto" />
-			<sec:authentication var="userName" property="principal.usuarioClave.nombre" />
-			<sec:authentication var="userSurname1" property="principal.usuarioClave.apellido1" />
-			<sec:authentication var="userSurname2" property="principal.usuarioClave.apellido2" />
-			<sec:authentication var="userDNI" property="principal.usuarioClave.nif" />
-			<sec:authentication var="userMethod" property="principal.usuarioClave.metodoAutentificacion" />
-			<sec:authentication var="userLevelAut" property="principal.usuarioClave.qaa" />
-			<div class="imc-titol usuari">
-				<nav class="imc--contingut">
-						<span class="estilUsuari">
-							<c:if test="${user != null}">
-								<span class="oi oi-person pr-2" aria-hidden="true"> </span><sec:authentication property="principal.usuarioClave.nombreCompleto" />
-								<!-- Nivell d'autenticació -->
-								<span id="nivellAutenticacio" class="imc--autenticacio"></span>
-							</c:if>
-						</span>
-					</h3>
-				</nav>
-			</div>
-			<script type="text/javascript">
-				window.onload = function($) {
-					var element = document.getElementById('contenedor');
-					var autenticat = '1';
-					sessionStorage.setItem('autenticat', '1');
-					element.setAttribute('style','margin-top: 4.5em !important');
-                    newMenuDesllisant('menuDesllisant', autenticat);
-					newInici('contingut', autenticat);
-					newPeu('peu', autenticat);
-					newAvisosFront('avisosFront', autenticat);
-					newMenuRapid('menuRapid', autenticat);
-					newNivellAutenticacio('nivellAutenticacio', autenticat);
-					// Passa dades personals a React
-					sessionStorage.setItem('usuariNomComplet', '${user}');
-					sessionStorage.setItem('usuariNom', '${userName}');
-					sessionStorage.setItem('usuariLlinatge1', '${userSurname1}');
-					sessionStorage.setItem('usuariLlinatge2', '${userSurname2}');
-					sessionStorage.setItem('usuariDNI', '${userDNI}');
-					sessionStorage.setItem('usuariMetode', '${userMethod}');
-					sessionStorage.setItem('usuariNivell', '${userLevelAut}');
-					var aut = sessionStorage.getItem('autenticat');
-				}
-			</script>
-		</sec:authorize>
+				// Passa dades personals a React
+				var autenticat = '1';
+                sessionStorage.setItem('autenticat', autenticat);
+				sessionStorage.setItem('usuariNomComplet', '${user}');
+				sessionStorage.setItem('usuariNom', '${userName}');
+				sessionStorage.setItem('usuariLlinatge1', '${userSurname1}');
+				sessionStorage.setItem('usuariLlinatge2', '${userSurname2}');
+				sessionStorage.setItem('usuariDNI', '${userDNI}');
+				sessionStorage.setItem('usuariMetode', '${userMethod}');
+				sessionStorage.setItem('usuariNivell', '${userLevelAut}');
+				
+				sessionStorage.setItem('contextPath', '${pageContext.request.contextPath}');
+				
 
-		<!-- Menú Ràpid-->
-		<div id = "menuRapid"></div>
-
-		<!-- Menú desplegable -->
-		<div id = "menuDesllisant"></div>
-
-		<!-- Zona Contingut -->
-		<div class="imc-continguts" id="continguts">
-
-			<!-- Molla de pa -->
-			<div id = "mollaPa"></div>
-
-			<!-- Avisos Front -->
-			<div id = "avisosFront"></div>
-
-			<!-- Contingut pàgina -->
-			<div id="carregant" class="loader-container centrat loaderOcult">
-				<div class="loader"></div>
-			</div>
-			<div id="contingut" class="pt-2"></div>
-
-		</div>
-		<!-- Fi Zona Contingut -->
-
-		<!-- Peu -->
-		<div id = "peu" class="capsaPeu"></div>
-
-
-	</div>
+			}
+		</script>
+	</sec:authorize>
+  
+    <div id="fullpagecarpetafront"></div>
 
 	<!-- js react -->
 	<script src = "${pageContext.request.contextPath}/dist/reactjs_main.js" type="text/javascript"></script>
