@@ -1,5 +1,5 @@
 {
-  "name": "Carpeta",
+  "name": "carpeta_react",
   "version": "1.2.3",
   "description": "Front Carpeta versio 1.0",
   "main": "src/main.js",
@@ -10,7 +10,7 @@
     "build": "node_modules/.bin/webpack --config webpack.config.js --mode=production"
   },
   "keywords": [],
-  "author": "xmassoft",
+  "author": "Fundacio BIT - Govern Digital",
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.9.6",

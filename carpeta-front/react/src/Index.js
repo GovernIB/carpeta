@@ -14,19 +14,30 @@ import PluginHtml from './PluginHtml';
 import PluginReact from './PluginReact';
 import Accessibilitat from './Accessibilitat';
 import NivellAutenticacio from './NivellAutenticacio';
-//import i18n from 'i18next';
+
+// NO ESBORRAR LA SEGÜENT LINIA  !!!!!!
 import i18n from './i18n';
 
-import { HashRouter, Switch, Route, Link } from "react-router-dom";
+import { HashRouter, Switch, Route, Link, useHistory } from "react-router-dom";
 
-import * as breadcrumbPaths from './utils/breadcrumbPaths';
-import * as breadcrumbPathsAut from './utils/breadcrumbPathsAut';
+
 import LlistatDePlugins from './LlistatDePlugins';
 
 /**
  * @author anadal Migracio A Routes i passar de index.jsp a Index.js
  */
 class Index extends Component {
+
+
+/*
+    componentWillMount() {
+        const history = useHistory();
+        history.listen((location, action) => {
+            console.log(`The current URL is ${location.pathname}${location.search}${location.hash}`)
+            console.log(`The last navigation action was ${action}`)
+        });
+    }
+*/
 
 
     render() {
@@ -67,7 +78,7 @@ class Index extends Component {
         style={styleContenidor} 
 */
         return (
-            <HashRouter>
+            <HashRouter  >
             { /* Mrar si aquest div es pot llevar */}
             
             <div>
