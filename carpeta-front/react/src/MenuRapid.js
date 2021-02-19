@@ -8,6 +8,9 @@ import { HashRouter, Switch, Route, Link,useHistory } from "react-router-dom";
  * 
  * @author anadal Migració a ROUTER
  */
+
+
+
 class MenuRapid extends Component {
 
     constructor(){

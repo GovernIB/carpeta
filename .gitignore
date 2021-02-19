@@ -56,3 +56,7 @@ nb-configuration.xml
 /genapp/lastconfig.properties
 /carpeta-front/react/dist
 /carpeta-front/react/node_modules
+/deps.bat
+/front.bat
+/genapp.bat
+/genapp/genapp.bat
