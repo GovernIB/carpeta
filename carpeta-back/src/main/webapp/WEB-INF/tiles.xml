@@ -79,6 +79,10 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/usuariForm.jsp" />
     </definition>
     
+    <definition name="errorSenseRolesViewCommon" template="/WEB-INF/jsp/layout/onlycontentlayout.jsp">
+        <put-attribute name="titol" value="usuari.usuari" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/common/errorSenseRoles.jsp" />
+    </definition>
     
     
 

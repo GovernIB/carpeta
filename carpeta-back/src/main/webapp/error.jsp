@@ -44,7 +44,8 @@ try {
 
     // Agafam la excepció que s'ha produit.
     Exception e = pageContext.getException();
-    boolean sessioinvalida = false;;
+    boolean sessioinvalida = false;
+    boolean senseroles = false;
     String missatgeSessioInvalida = "";
     String missatgeTipusError="";
     String redirect = null;
@@ -72,6 +73,10 @@ try {
             default:
                 missatgeTipusError = I18NUtils.tradueix("error.jsp.desconegut");
         }
+        
+        if ( pageContext.getErrorData().getStatusCode() == 403 )
+            senseroles = true;
+        
     } else {
     	
       log.error("Error: " + e.getMessage(), e);
@@ -131,6 +136,11 @@ try {
 
     request.getSession().setAttribute("locale", LocaleContextHolder.getLocale().toString());
 
+    if (senseroles){
+    	
+    	pageContext.forward("/public/senseroles");
+    	
+    }
 
 %>
 <fmt:setLocale value="${locale}"/>
@@ -139,6 +149,8 @@ try {
 <link href="<c:url value="/css/default.css"/>" rel="stylesheet">
 <script src="<c:url value="/js/jquery.js" />"></script>
 <script src="<c:url value="/js/bootstrap.min.js"/>"></script>
+
+
 
 <script type="text/javascript">
   function showError(){
