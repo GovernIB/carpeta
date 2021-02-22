@@ -1,31 +1,47 @@
 import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
 import axios from "axios";
+import i18n from 'i18next';
 
 class EnllasosLateral extends Component {
 
     constructor(){
         super();
         this.state = {
+            loading: true,
             laterallinks: []
         }
+        this.canviIdioma = this.canviIdioma.bind(this);
+        i18n.on('languageChanged', this.canviIdioma);
     }
 
+    canviIdioma(lng) {
 
-componentDidMount() {
+
+        console.log(" CANVI IDIOMA EN ENLLASSOS LATERAL A ]" + lng+ "[")
+
+        this.setState({ laterallinks: [], loading:true })
+        this.componentWillReceiveProps(lng);
+
+    }
+
+    componentDidMount() {
+
         var baseURL = sessionStorage.getItem('contextPath');
         var url = baseURL + "/webui/laterallinks";
 
         axios.get(url).then(res => {
-            this.setState({ laterallinks: res.data })
+            this.setState({ laterallinks: res.data, loading:false })
         });
     }
+
+    
 
     componentWillReceiveProps(lng) {
         var baseURL = sessionStorage.getItem('contextPath');
         var url = baseURL + "/webui/laterallinks";
         axios.get(url).then(res => {
-            this.setState({ laterallinks: res.data })
+            this.setState({ laterallinks: res.data, loading:false })
         });
     }
 
@@ -37,7 +53,7 @@ componentDidMount() {
 
         let laterallink;
 
-        if(!this.state.laterallinks.length || auth == '0'){
+        if(!this.state.laterallinks.length || auth == '0' || this.state.loading){
             laterallink = "";
         } else{
             laterallink = this.state.laterallinks.map((s, i) => (

@@ -3,7 +3,8 @@ import { withTranslation } from 'react-i18next';
 import i18n from 'i18next';
 import axios from 'axios'
 import LlistatDePlugins from './LlistatDePlugins';
-import { HashRouter, Switch, Route, Link,useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
 /**
  * 
  * @author anadal Migració a ROUTER
@@ -119,40 +120,29 @@ class MenuDesllisant extends Component {
 
 	infoHtml(missatge, pluginID) {
 		alert(missatge);
-		//var contingut = newwPluginnHtml('contingut', '1', pluginID);
-		const history = useHistory();
-		history.push("/pluginhtml/" + pluginID)
-		//window.location.href(contingut);
+		
+		if (this.props.history) {
+            console.log("MENU DESLLISSANT => EXISTEIX  HISTORY !!!!!");
+            this.props.history.push("/pluginhtml/" + pluginID);
+        } else {
+            console.log("MENU DESLLISSANT => NO PUC LLEGIR HISTORY !!!!!");
+        }
 	}
 
 	infoReact(missatge, pluginID) {
 		alert(missatge);
-		const history = useHistory();
-		history.push("/pluginreact/" + pluginID);
-		//var contingut = newwPluginnReact('contingut', '1', pluginID);
-		//window.location.href(contingut);
+
+		if (this.props.history) {
+            console.log("MENU DESLLISSANT => EXISTEIX  HISTORY !!!!!");
+            this.props.history.push("/pluginreact/" + pluginID);
+        } else {
+            console.log("MENU DESLLISSANT => NO PUC LLEGIR HISTORY !!!!!");
+        }
 	}
 
 	error(missatge) {
 		alert(missatge);
 	}
-
-
-
-	mostrarNovaSeccio(seccioID) {
-
-        console.log("DESLLISSANT Entra a mostrarNovaSeccio");
-
-		const history = useHistory();
-		history.push("/seccio/" + seccioID);
-        
-        //const { t } = this.props;
-        //ReactDOM.render(<LlistatDePlugins seccioID={seccioID}  t={t} />, document.getElementById('contingut'));
-        console.log("DESLLISSTANT Surt mostrarNovaSeccio");
-
-    }
-
-
 
 	render() {
 
@@ -294,7 +284,7 @@ class MenuDesllisant extends Component {
 
 			seccionsS = this.state.seccions.map(s => (
 				<li>
-					{/*<a href="javascript:" onClick={() => this.mostrarNovaSeccio(s.seccioID) } title={s.nom}>*/}
+					
 					<Link to={"/seccio/" + s.seccioID} >
 						<img src={s.iconaID} title="" alt={s.descripcio} className="imc-icona iconaEnllas" />
 						<span>{s.nom}</span>
@@ -431,4 +421,5 @@ class MenuDesllisant extends Component {
 	}
 }
 
-export default withTranslation()(MenuDesllisant);
+export default withTranslation()(withRouter(MenuDesllisant));
+

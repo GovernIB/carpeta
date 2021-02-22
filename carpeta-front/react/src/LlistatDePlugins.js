@@ -3,7 +3,8 @@ import { withTranslation } from 'react-i18next';
 import i18n from 'i18next';
 import axios from "axios";
 
-import { HashRouter, Switch, Route, Link,useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
 /**
  * 
  * @author anadal Migració a ROUTER
@@ -101,51 +102,48 @@ class LlistatDePlugins extends Component {
     }
 
     infoHtml(missatge, pluginID) {
+        
         alert(missatge);
-        const history = useHistory();
-
-        var baseSeccio;
-        if (seccioID == 0) {
-            baseSeccio = '';
+        if (this.props.history) {
+            var seccioID = this.props.seccioID ? this.props.seccioID : 0;
+            var baseSeccio;
+            if (seccioID == 0) {
+                baseSeccio = '';
+            } else {
+                baseSeccio = '/seccio/' + seccioID;
+            }
+            this.props.history.push(baseSeccio + "/pluginhtml/" + pluginID);
         } else {
-            baseSeccio = '/seccio/' + seccioID;
-        }
-		history.push(baseSeccio + "/pluginhtml/" + pluginID);
+            console.log("LLISTAT PLUGINS INFOHTML => NO PUC LLEGIR HISTORY !!!!!");
+        };
+
+        // XYZ ZZZ
         //var contingut = newwPluginnHtml('contingut', '1', pluginID);
         //window.location.href(contingut);
     }
 
     infoReact(missatge, pluginID) {
         alert(missatge);
-        const history = useHistory();
-
-        var baseSeccio;
-        if (seccioID == 0) {
-            baseSeccio = '';
+        
+        if (this.props.history) {
+            var seccioID = this.props.seccioID ? this.props.seccioID : 0;
+            var baseSeccio;
+            if (seccioID == 0) {
+                baseSeccio = '';
+            } else {
+                baseSeccio = '/seccio/' + seccioID;
+            }
+            this.props.history.push(baseSeccio + "/pluginreact/" + pluginID);
         } else {
-            baseSeccio = '/seccio/' + seccioID ;
-        }
-		history.push(baseSeccio + "/pluginreact/" + pluginID);
-        //var contingut = newwPluginnReact('contingut', '1', pluginID);
-        //window.location.href(contingut);
+            console.log("LLISTAT PLUGINS INFOREACT => NO PUC LLEGIR HISTORY !!!!!");
+        };
+ 
     }
 
     error(missatge) {
         alert(missatge);
     }
 
-/*
-    mostrarNovaSeccio(seccioID) {
-
-        console.log("Entra a mostrarNovaSeccio");
-        const history = useHistory();
-		history.push("/seccio/" + seccioID);
-        //const { t } = this.props;
-        //ReactDOM.render(<LlistatDePlugins seccioID={seccioID}  t={t} />, document.getElementById('contingut'));
-        console.log("Surt mostrarNovaSeccio");
-
-    }
-*/
 
     render() {
 
@@ -186,17 +184,13 @@ class LlistatDePlugins extends Component {
 
         seccionsS = seccions.map(s => (
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
-                {/*<button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}
-                        onClick={() => this.mostrarNovaSeccio(s.seccioID) }> */}
                     <Link to={baseSeccio + "/seccio/" + s.seccioID} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}  >
-
                     <span className="card-title titol pl-1 h3">
                         <img src={s.iconaID} alt="" title="" className="imc-icona" />
                     </span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>
                     <span className="card-text mb-3 mt-3 alignCenter">{s.descripcio}</span>
                     </Link>
-                {/* </button> */ }
             </div>
         ));
 
@@ -385,4 +379,4 @@ class LlistatDePlugins extends Component {
 
 }
 
-export default withTranslation()(LlistatDePlugins);
+export default withTranslation()(withRouter(LlistatDePlugins));

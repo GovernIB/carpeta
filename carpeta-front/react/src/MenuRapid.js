@@ -20,7 +20,6 @@ class MenuRapid extends Component {
             menupseudoplugin: [],
 			seccions : []
         }
-        this.mostrarNovaSeccio = this.mostrarNovaSeccio.bind(this);
     }
 
 
@@ -65,27 +64,8 @@ class MenuRapid extends Component {
     }
 
     componentDidUpdate() {
-        /*
-        var aut = sessionStorage.getItem('autenticat');
-        if (aut === '1') {
-            document.getElementById('menuRapid').classList.remove('d-none');
-        }else{
-            document.getElementById('menuRapid').classList.add('d-none');
-        }
-        */
     }
 
-    mostrarNovaSeccio(seccioID) {
-
-        console.log("RAPID Entra a mostrarNovaSeccio");
-        const history = useHistory();
-		history.push("/seccio/" + seccioID);
-        //
-        //const { t } = this.props;  t={t}
-        //ReactDOM.render(<LlistatDePlugins seccioID={seccioID}  />, document.getElementById('contingut'));
-        console.log("RAPID Surt mostrarNovaSeccio");
-
-    }
 
     render() {
 
@@ -162,15 +142,12 @@ class MenuRapid extends Component {
             }
 
             const seccions = this.state.seccions;
-            /*onClick={() => this.mostrarNovaSeccio(s.seccioID) }*/
+            
             seccionsS = seccions.map(s => (                
                 <li className="nav-item pr-4" > 
                 <Link to={"/seccio/" + s.seccioID} className="navCarpeta">
-                    {/*<a className="navCarpeta"    > */}
-
                         <img src={s.iconaID} title={s.nom} alt={s.descripcio} className="imc-icona" />
                         <span className="menuRapidView">{s.nom}</span>
-                    {/*</a>*/}
                     </Link>
                 </li>
             ));
