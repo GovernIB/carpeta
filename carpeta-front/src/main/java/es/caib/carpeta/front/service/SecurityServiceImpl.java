@@ -20,6 +20,9 @@ public class SecurityServiceImpl implements SecurityService {
     public String iniciarSesionAutentificacion(String urlCallBackLoginOk, String urCallBackLoginError,
             String language) throws Exception {
 
+        log.info("\n\n\nUrl CALLBACK: " + urlCallBackLoginOk 
+                + "\nURL ERROR: " + urCallBackLoginError + "\n\n\n");
+
         return pluginLogin.startAuthentication(urlCallBackLoginOk, urCallBackLoginError, language);
 
     }
@@ -44,6 +47,8 @@ public class SecurityServiceImpl implements SecurityService {
 
     @Override
     public String iniciarSesionLogout(String urlCallBackLogout, String language) throws Exception {
+        
+        
 
         String urlLogout = pluginLogin.logout(urlCallBackLogout, language);
 

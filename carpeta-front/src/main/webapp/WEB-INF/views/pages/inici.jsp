@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ca" style="" class=" js flexbox flexboxlegacy hashchange backgroundsize boxshadow textshadow opacity cssanimations cssgradients csstransforms csstransitions fontface generatedcontent localstorage svg" lang="ca">
   <head>
-    <title>Carpeta Ciutadana - Front</title>
+    <title>Carpeta Ciutadana - Front <%=title%></title>
 	<link rel="shortcut icon" type="image/x-ico" href="${pageContext.request.contextPath}/webui/icona">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -51,10 +51,10 @@
 
   <body>
   
-  
-    <sec:authorize access="!isAuthenticated()">
+
+    <sec:authorize access="!isAuthenticated()"> 
 	  <script type="text/javascript">
-		  window.onload = function($) {
+		  //window.onload = function($) {
 			  sessionStorage.setItem('autenticat', '0');
 			  sessionStorage.setItem('entitat', '${entitat}');
 			  sessionStorage.setItem('defaultEntityCode', '${defaultEntityCode}');
@@ -63,13 +63,13 @@
 			  sessionStorage.setItem('canviarDeFront', '${canviarDeFront}');
 			  sessionStorage.setItem('contextPath', '${pageContext.request.contextPath}');
 
-		  }
+		//  }
 	  </script>
   </sec:authorize>
+
   
-  <sec:authorize access="isAuthenticated()">
-  
-  
+
+     <sec:authorize access="isAuthenticated()">  
   
 		<sec:authentication var="user" property="principal.usuarioClave.nombreCompleto" />
 		<sec:authentication var="userName" property="principal.usuarioClave.nombre" />
@@ -79,10 +79,10 @@
 		<sec:authentication var="userMethod" property="principal.usuarioClave.metodoAutentificacion" />
 		<sec:authentication var="userLevelAut" property="principal.usuarioClave.qaa" />
 		<script type="text/javascript">
-			window.onload = function($) {
+			
 
-				var element = document.getElementById('contenedor');
-				element.setAttribute('style','margin-top: 4.5em !important');
+				//var element = document.getElementById('contenedor');
+				//element.setAttribute('style','margin-top: 4.5em !important');
 
 				// Passa dades personals a React
 				var autenticat = '1';
@@ -97,10 +97,12 @@
 				
 				sessionStorage.setItem('contextPath', '${pageContext.request.contextPath}');
 				
+				
 
-			}
+			
 		</script>
-	</sec:authorize>
+	  </sec:authorize> 
+
   
     <div id="fullpagecarpetafront"></div>
 

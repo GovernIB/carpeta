@@ -8,8 +8,11 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.ejb.EJB;
+import javax.servlet.http.HttpServletRequest;
 
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_ACCES_LOGIN_AUTENTICAT;
 import es.caib.carpeta.commons.utils.UsuarioClave;
@@ -75,8 +78,7 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
 
         UsernamePasswordAuthenticationToken upat;
         upat = new UsernamePasswordAuthenticationToken(usuarioAutenticado, authentication.getCredentials(), usuarioAutenticado.getAuthorities());
-        
-        
+
         return upat;
     }
 

@@ -4,6 +4,8 @@ import i18n from 'i18next';
 import LlistatDePlugins from './LlistatDePlugins';
 import IniciPublic from './IniciPublic';
 import ExpirarSessio from "./ExpirarSessio";
+import { withRouter } from "react-router";
+
 
 
 /**
@@ -21,6 +23,11 @@ class Inici extends Component {
 
 		//var autenticat = this.props.autenticat;
 		var autenticat = sessionStorage.getItem('autenticat');
+
+		console.log("INICI :: AUTH = " + autenticat);
+
+
+
 
 		clearTimeout(sessionStorage.getItem('idTimeOut'));
 
@@ -43,4 +50,4 @@ class Inici extends Component {
 	}
 }
 
-export default withTranslation()(Inici);
+export default withTranslation()(withRouter(Inici));

@@ -126,6 +126,9 @@ public class InicioController extends CommonFrontController {
     public ModelAndView inicio(HttpServletRequest request, HttpServletResponse response, HttpSession session)
             throws I18NException {
 
+        
+        log.info("\n XYZ ZZZ ENTRA A INICI CONTROLLER !!!! \n");
+        
         ModelAndView mav = new ModelAndView("inici");
 
         // Posam la sessió de 30 minuts
@@ -208,6 +211,8 @@ public class InicioController extends CommonFrontController {
         } catch (Throwable e) {
             processException(e, response);
         }
+        
+        log.info("\n XYZ ZZZ SURT DE INICI !!!! \n");
 
         return mav;
 

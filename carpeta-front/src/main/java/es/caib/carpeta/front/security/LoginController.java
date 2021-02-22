@@ -10,6 +10,8 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.ejb.EJB;
@@ -72,10 +74,10 @@ public class LoginController {
 
         // String urluser = protocol + "//" + host + request.getContextPath();
 
-        String urluser = request.getParameter("urlbase") + request.getContextPath();
+        String callbackurl = request.getParameter("urlbase") + request.getContextPath();
 
-        log.info(" XXX XYZ  urluser => " + urluser);
-        request.getSession().setAttribute(SESSION_RETURN_URL_POST_LOGIN, urluser);
+        log.info(" XXX XYZ LOGIN CALLBACK  => ]" + callbackurl + "[");
+        request.getSession().setAttribute(SESSION_RETURN_URL_POST_LOGIN, callbackurl);
 
         return "redirect:/login";
     }
@@ -145,11 +147,15 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/redirigirLogin")
-    public ModelAndView redirigirLogin(HttpServletRequest request, HttpServletResponse response) throws I18NException {
+    public String redirigirLogin(HttpServletRequest request, HttpServletResponse response) throws I18NException {
 
-        log.info("Dentro de redirigirLogin: " + sesionHttp.getUrlEntrada());
+        log.info("\nDentro de redirigirLogin: ]" + sesionHttp.getUrlEntrada() + "[\n");
+        String callbackurl = (String)request.getSession().getAttribute(SESSION_RETURN_URL_POST_LOGIN);
+        log.info(" XXX XYZ redirigirLogin CALLBACK  => ]" + callbackurl + "[");
+        
 
         // Gestionamos la url de entrada a la aplicación previa a autenticarse
+        /** XYZ ZZZ
         try {
             if (StringUtils.isNotEmpty(sesionHttp.getUrlEntrada())) {
                 response.sendRedirect(sesionHttp.getUrlEntrada());
@@ -159,8 +165,14 @@ public class LoginController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        */
 
-        return new ModelAndView("inici");
+        log.info("\n XYZ ZZZZ redirigirLogin => /\n");
+        return "redirect:/";
+
+        // XYZ ZZZ
+
+        //return new ModelAndView("inici");
 
     }
 
