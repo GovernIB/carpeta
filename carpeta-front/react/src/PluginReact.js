@@ -35,10 +35,12 @@ class PluginReact extends Component {
 
 		const {t} = this.props;
 
-        console.log(" PLUGIN HTML RENDER 111 " +  this.props.match.params.pluginId + "!!!!!");
-        console.log(" PLUGIN HTML RENDER 222 " +  this.props.pluginID + "!!!!!");
+        //console.log(" PLUGIN HTML RENDER 111 " +  this.props.match.params.pluginId + "!!!!!");
+        console.log(" PLUGIN HTML RENDER 222 pluginID " +  this.props.pluginID + "!!!!!");
+        console.log(" PLUGIN HTML RENDER 333 seccioID " +  this.props.seccioID + "!!!!!");
 
 		const pluginID = this.props.pluginID;; //this.props.match.params.pluginId; //
+       
 
         if (!this.state.loaded) {
 

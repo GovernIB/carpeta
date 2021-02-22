@@ -140,17 +140,16 @@ class Index extends Component {
                                     <Route path="/mapaweb" component={MapaWeb} />
 
                                     <Route
-                                        path="/pluginhtml/:pluginId"
+                                        path="/seccio/:seccioId/pluginhtml/:pluginId"
                                         render={(props) => {
-                                            return <PluginHtml {...props} autenticat={auth} />
+                                            return <PluginHtml {...props} seccioID={props.match.params.seccioId} pluginID={props.match.params.pluginId} autenticat={auth} />
                                         }}
                                     />
 
-                                    {/*//alert("\nMOSTRAR PLUGIN REACT" + props.match.params.pluginId + "\n");   */}
                                     <Route
-                                        path="/pluginreact/:pluginId"
+                                        path="/seccio/:seccioId/pluginreact/:pluginId"
                                         render={(props) => {
-                                            return <PluginReact {...props} pluginID={props.match.params.pluginId} autenticat={auth} />
+                                            return <PluginReact {...props} seccioID={props.match.params.seccioId} pluginID={props.match.params.pluginId} autenticat={auth} />
                                         }}
                                     />
 
@@ -160,6 +159,22 @@ class Index extends Component {
                                             return <LlistatDePlugins {...props} seccioID={props.match.params.seccioId} autenticat={auth} />
                                         }}
                                     />
+                                    <Route
+                                        path="/pluginhtml/:pluginId"
+                                        render={(props) => {
+                                            return <PluginHtml {...props} seccioID={0}  autenticat={auth} />
+                                        }}
+                                    />
+
+                                    {/*//alert("\nMOSTRAR PLUGIN REACT" + props.match.params.pluginId + "\n");   */}
+                                    <Route
+                                        path="/pluginreact/:pluginId"
+                                        render={(props) => {
+                                            return <PluginReact {...props} seccioID={0} pluginID={props.match.params.pluginId} autenticat={auth} />
+                                        }}
+                                    />
+
+                                  
 
                                 </Switch>
                             </div>

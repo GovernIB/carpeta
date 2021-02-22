@@ -103,7 +103,14 @@ class LlistatDePlugins extends Component {
     infoHtml(missatge, pluginID) {
         alert(missatge);
         const history = useHistory();
-		history.push("/pluginhtml/" + pluginID);
+
+        var baseSeccio;
+        if (seccioID == 0) {
+            baseSeccio = '';
+        } else {
+            baseSeccio = '/seccio/' + seccioID;
+        }
+		history.push(baseSeccio + "/pluginhtml/" + pluginID);
         //var contingut = newwPluginnHtml('contingut', '1', pluginID);
         //window.location.href(contingut);
     }
@@ -111,7 +118,14 @@ class LlistatDePlugins extends Component {
     infoReact(missatge, pluginID) {
         alert(missatge);
         const history = useHistory();
-		history.push("/pluginreact/" + pluginID);
+
+        var baseSeccio;
+        if (seccioID == 0) {
+            baseSeccio = '';
+        } else {
+            baseSeccio = '/seccio/' + seccioID ;
+        }
+		history.push(baseSeccio + "/pluginreact/" + pluginID);
         //var contingut = newwPluginnReact('contingut', '1', pluginID);
         //window.location.href(contingut);
     }
@@ -120,7 +134,7 @@ class LlistatDePlugins extends Component {
         alert(missatge);
     }
 
-
+/*
     mostrarNovaSeccio(seccioID) {
 
         console.log("Entra a mostrarNovaSeccio");
@@ -131,7 +145,7 @@ class LlistatDePlugins extends Component {
         console.log("Surt mostrarNovaSeccio");
 
     }
-
+*/
 
     render() {
 
@@ -161,12 +175,20 @@ class LlistatDePlugins extends Component {
         var plugReactWarning;
         var plugReactError;
 
+        var baseSeccio;
+        var seccioID = this.props.seccioID;
+        if (seccioID == 0) {
+            baseSeccio = '';
+        } else {
+            baseSeccio = '/seccio/' + seccioID;
+        }
+
 
         seccionsS = seccions.map(s => (
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
                 {/*<button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}
                         onClick={() => this.mostrarNovaSeccio(s.seccioID) }> */}
-                    <Link to={"/seccio/" + s.seccioID} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}  >
+                    <Link to={baseSeccio + "/seccio/" + s.seccioID} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}  >
 
                     <span className="card-title titol pl-1 h3">
                         <img src={s.iconaID} alt="" title="" className="imc-icona" />
@@ -200,7 +222,7 @@ class LlistatDePlugins extends Component {
 
                 <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}
                         onClick={event => window.location.href = "javascript:newwPluginnHtml('contingut', '1', '" + s.pluginID + "');"}> */}
-                <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`} to={"/pluginhtml/" + s.pluginID} >
+                <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`} to={baseSeccio +  "/pluginhtml/" + s.pluginID} >
                     <span className="card-title titol pl-1 h3"><img
                         src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
                         alt="" title=""
@@ -254,7 +276,7 @@ class LlistatDePlugins extends Component {
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
                 {/*<button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
                         onClick={event => window.location.href = "javascript:newwPluginnReact('contingut', '1', '" + s.pluginID + "');"}> */}
-                    <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`} to={"/pluginreact/" + s.pluginID} >
+                    <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`} to={baseSeccio + "/pluginreact/" + s.pluginID} >
 
                     <span className="card-title titol pl-1 h3"><img
                         src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}

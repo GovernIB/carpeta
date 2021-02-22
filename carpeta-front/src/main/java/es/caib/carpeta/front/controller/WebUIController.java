@@ -1,6 +1,8 @@
 package es.caib.carpeta.front.controller;
 
 import com.google.gson.Gson;
+
+import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.ejb.PropietatGlobalService;
 import es.caib.carpeta.front.utils.SesionHttp;
@@ -490,9 +492,18 @@ public class WebUIController extends CommonFrontController {
             String lang = LocaleContextHolder.getLocale().getLanguage();
 
             SeccioJPA seccioJPA = (SeccioJPA) seccio;
+            
+            log.info("/seccio/" + seccioID + " ==> " + lang);
 
-            String nom = seccioJPA.getNomTraduccions().get(lang).getValor();
-            String descripcio = seccioJPA.getDescripcioTraduccions().get(lang).getValor();
+            String nom ,descripcio;
+            if (seccioJPA.getNomTraduccions().get(lang) == null) {  
+                log.error(" TENIM UN LLENGUATGE DESCONEGUT [" + lang + "] !!!!!", new Exception());
+                nom = seccioJPA.getNomTraduccions().get(Configuracio.getDefaultLanguage()).getValor();
+                descripcio = seccioJPA.getDescripcioTraduccions().get(Configuracio.getDefaultLanguage()).getValor();                
+            } else {
+                nom = seccioJPA.getNomTraduccions().get(lang).getValor();
+                descripcio = seccioJPA.getDescripcioTraduccions().get(lang).getValor();
+            }
 
             String urllogo = request.getContextPath() + WEBUI_PATH + ENLLAZ_LOGO_PATH + "/"
                     + HibernateFileUtil.encryptFileID(seccioJPA.getIconaID());
