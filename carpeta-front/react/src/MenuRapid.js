@@ -104,7 +104,7 @@ class MenuRapid extends Component {
             //     </div>
             // </li>;
 
-            gestionsHtml = plugins.filter(s => s.reactComponent === 'false').map(s => (
+            gestionsHtml = plugins.filter(s => s.reactComponent === 'false').map((s, i) => (
                 <li className="nav-item pr-4">
                     {/*<a className="navCarpeta" href={"javascript:newwPluginnHtml('contingut', '1', '" + s.pluginID + "');"} title={s.nom}>*/}
                     <Link className="navCarpeta" to={"/pluginhtml/" + s.pluginID} >
@@ -117,7 +117,7 @@ class MenuRapid extends Component {
             ));
 
 
-            gestionsReact = plugins.filter(s => s.reactComponent === 'true').map(s => (
+            gestionsReact = plugins.filter(s => s.reactComponent === 'true').map((s, i) => (
                     <li className="nav-item pr-4">
                         {/*<a className="navCarpeta" href={"javascript:newwPluginnReact('contingut', '1', '" + s.pluginID + "');"} title={s.nom}>*/}
                         <Link className="navCarpeta" to={"/pluginreact/" + s.pluginID} >
@@ -142,8 +142,7 @@ class MenuRapid extends Component {
             }
 
             const seccions = this.state.seccions;
-            
-            seccionsS = seccions.map(s => (                
+            seccionsS = seccions.map((s, i) => (                
                 <li className="nav-item pr-4" > 
                 <Link to={"/seccio/" + s.seccioID} className="navCarpeta">
                         <img src={s.iconaID} title={s.nom} alt={s.descripcio} className="imc-icona" />
