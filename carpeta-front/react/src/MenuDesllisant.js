@@ -174,7 +174,7 @@ class MenuDesllisant extends Component {
 
 
 		const {t} = this.props;
-		var autenticat = this.props.autenticat;
+		var autenticat = sessionStorage.getItem('autenticat');
 		//var urlBase = window.location.href;
 		var urlBase = sessionStorage.getItem('contextPath');
 		var defaultEntityCode = sessionStorage.getItem("defaultEntityCode");
@@ -291,7 +291,7 @@ class MenuDesllisant extends Component {
 				enllasosPseusoPluginMenu = "";
 			} else {
 				enllasosPseusoPluginMenu = this.state.menupseudoplugin.map((s, i) => (
-					<li>
+					<li id={i}>
 						<a href={s.url} target="_blank" title={s.nom}>
 							<img src={s.urllogo} title="" alt="" className="imc-icona iconaEnllas" />
 							<span>{s.label}</span>
@@ -300,8 +300,8 @@ class MenuDesllisant extends Component {
 				))
 			}
 
-			seccionsS = this.state.seccions.map(s => (
-				<li>
+			seccionsS = this.state.seccions.map((s, i) => (
+				<li id={i}>
 					
 					<Link to={"/seccio/" + s.seccioID} >
 						<img src={s.iconaID} title="" alt={s.descripcio} className="imc-icona iconaEnllas" />

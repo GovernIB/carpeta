@@ -1,15 +1,17 @@
-import React, {Component,Suspense} from 'react';
+import React, { Component, Suspense } from 'react';
 import { withTranslation } from 'react-i18next';
 import i18n from 'i18next';
 import ExpirarSessio from "./ExpirarSessio";
+import { withRouter } from "react-router";
 
 class PluginHtml extends Component {
 
     constructor() {
         super();
         this.state = {
-            contingut:'',
-            loading: true}
+            contingut: '',
+            loading: true
+        }
     }
 
     /*
@@ -25,28 +27,31 @@ class PluginHtml extends Component {
     */
 
     componentWillReceiveProps() {
-        this.setState({ loading: true });
-        
-        this.fakeRequest().then(() => {
-            const el = document.querySelector(".loader-container");
-            if (el) {
-                document.querySelector("#carregant").classList.add('loaderOcult');
-                this.setState({ loading: false });
-            }
-        });
-        
+        var autenticat = sessionStorage.getItem('autenticat');;
+        if (autenticat === '1') {
+            this.setState({ loading: true });
+            this.fakeRequest().then(() => {
+                const el = document.querySelector(".loader-container");
+                if (el) {
+                    document.querySelector("#carregant").classList.add('loaderOcult');
+                    this.setState({ loading: false });
+                }
+            });
+        }
+
     }
 
     componentDidMount() {
-        
-        this.fakeRequest().then(() => {
-            const el = document.querySelector(".loader-container");
-            if (el) {
-                document.querySelector("#carregant").classList.add('loaderOcult');
-                this.setState({ loading: false });
-            }
-        });
-        
+        var autenticat = sessionStorage.getItem('autenticat');;
+        if (autenticat === '1') {
+            this.fakeRequest().then(() => {
+                const el = document.querySelector(".loader-container");
+                if (el) {
+                    document.querySelector("#carregant").classList.add('loaderOcult');
+                    this.setState({ loading: false });
+                }
+            });
+        }
     }
 
     fakeRequest() {
@@ -55,6 +60,13 @@ class PluginHtml extends Component {
 
 
     render() {
+
+        var autenticat = sessionStorage.getItem('autenticat');;
+        if (autenticat === '0') {
+            console.log("S'HA INTENTAT MOSTRAR UN PLUGIN PERO NOOOO ESTAM AUTENTICATS");
+            this.props.history.push("/");
+            return '';
+        }
 
         if (this.state.loading) {
             document.querySelector("#carregant").classList.remove('loaderOcult');
@@ -67,11 +79,11 @@ class PluginHtml extends Component {
 
         console.log("PLUGIN HTML 222222  !!!!!!!");
 
-        const {t} = this.props;
+        const { t } = this.props;
         const pluginID = this.props.match.params.pluginId;
         console.log("PLUGIN HTML ID =" + pluginID + "  !!!!!!!");
 
-        
+
         var data = new FormData();
         var codiPlugin;
 
@@ -91,7 +103,7 @@ class PluginHtml extends Component {
             }
         };
         xhr.send(data);
-        
+
 
         var lastSize = 0;
 
@@ -100,7 +112,7 @@ class PluginHtml extends Component {
             var iframe = document.getElementById('myiframe');
 
 
-            if(!iframe) {
+            if (!iframe) {
                 console.log("Sortim de IFRAME (frame val null)");
                 return;
             }
@@ -117,7 +129,7 @@ class PluginHtml extends Component {
             var h1 = $(iframeDocument.body).height();
             var h2 = iframeDocument.body.scrollHeight;
             var h = h1;
-            if(h2 != null) {
+            if (h2 != null) {
                 h = Math.max(h1, h2);
             }
             // var h = Math.max(h1, h2);
@@ -129,7 +141,7 @@ class PluginHtml extends Component {
                 lastSize = h;
                 document.getElementById('myiframe').style.height = h + "px";
                 lastSize = $(iframeDocument.body).height();
-                if(iframeDocument.body != null) {
+                if (iframeDocument.body != null) {
                     h = Math.max($(iframeDocument.body).height(), iframeDocument.body.scrollHeight);
                 }
                 // lastSize = Math.max($(iframeDocument.body).height(), iframeDocument.body.scrollHeight);
@@ -154,4 +166,4 @@ class PluginHtml extends Component {
     }
 }
 
-export default withTranslation()(PluginHtml);
+export default withTranslation()(withRouter(PluginHtml));

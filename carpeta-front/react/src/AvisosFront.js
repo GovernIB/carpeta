@@ -61,8 +61,8 @@ class AvisosFront extends Component {
             if (!this.state.avisos.length) {
                 avisFront = "";
             } else {
-                avisFront = this.state.avisos.map((s, i) => (
-                    <div className={`alert avis${s.gravetat} alert-dismissible fade show`} role="alert">
+                avisFront = this.state.avisos.map((s, i) => (                    
+                    <div key={i} className={`alert avis${s.gravetat} alert-dismissible fade show`} role="alert">                       
                         {s.label}
                         <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -75,7 +75,7 @@ class AvisosFront extends Component {
                 avisFront = "";
             } else {
                 avisFront = this.state.avisos.map((s, i) => (
-                    <div className={`alert avis${s.gravetat} alert-dismissible fade show`} role="alert">
+                    <div key={i} className={`alert avis${s.gravetat} alert-dismissible fade show`} role="alert">
                         {s.label}
                         <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
