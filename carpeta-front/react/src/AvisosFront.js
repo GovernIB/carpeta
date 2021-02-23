@@ -1,56 +1,67 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import axios from "axios";
 
+/** 
+ * @autor anadal  Avisos del Front carrega avisos públics i privats #373 
+ */
 class AvisosFront extends Component {
 
-    constructor(){
+    constructor() {
         super();
         this.state = {
-            avisosPublic: [],
-            avisosPrivat: []
+            avisos: []
         }
     }
 
     componentDidMount() {
 
         var baseURL = sessionStorage.getItem('contextPath');
+        var auth = sessionStorage.getItem('autenticat');
 
-        var url =  baseURL + "/webui/avisosfrontpublic";
-
-        axios.get(url).then(res => {
-            this.setState({ avisosPublic: res.data })
-        });
-        var url2 = baseURL + "/webui/avisosfrontprivat";
-        axios.get(url2).then(res => {
-            this.setState({ avisosPrivat: res.data })
-        })
+        if (auth === '0') {
+            var url = baseURL + "/webui/avisosfrontpublic";
+            axios.get(url).then(res => {
+                this.setState({ avisos: res.data })
+            });
+        } else {
+            var url2 = baseURL + "/webui/avisosfrontprivat";
+            axios.get(url2).then(res => {
+                this.setState({ avisos: res.data })
+            })
+        }
     }
 
     componentWillReceiveProps(lng) {
 
         var baseURL = sessionStorage.getItem('contextPath');
-        var url = baseURL +  "/webui/avisosfrontpublic";
-        axios.get(url).then(res => {
-            this.setState({ avisosPublic: res.data })
-        });
-        var url2 = baseURL + "/webui/avisosfrontprivat";
-        axios.get(url2).then(res => {
-            this.setState({ avisosPrivat: res.data })
-        })
+        var auth = sessionStorage.getItem('autenticat');
+
+        if (auth === '0') {
+            var url = baseURL + "/webui/avisosfrontpublic";
+            axios.get(url).then(res => {
+                this.setState({ avisos: res.data });
+            });
+        } else {
+            var url2 = baseURL + "/webui/avisosfrontprivat";
+            axios.get(url2).then(res => {
+                this.setState({ avisos: res.data });
+            });
+        }
     }
 
     render() {
 
-        const {t} = this.props;
-        var autenticat = this.props.autenticat;
+        const { t } = this.props;
+        var autenticat = sessionStorage.getItem('autenticat');
+
         let avisFront;
 
-        if(autenticat === '0') {
-            if (!this.state.avisosPublic.length) {
+        if (autenticat === '0') {
+            if (!this.state.avisos.length) {
                 avisFront = "";
             } else {
-                avisFront = this.state.avisosPublic.map((s, i) => (
+                avisFront = this.state.avisos.map((s, i) => (
                     <div className={`alert avis${s.gravetat} alert-dismissible fade show`} role="alert">
                         {s.label}
                         <button type="button" className="close" data-dismiss="alert" aria-label="Close">
@@ -59,11 +70,11 @@ class AvisosFront extends Component {
                     </div>
                 ))
             }
-        } else if(autenticat === '1') {
-            if (!this.state.avisosPrivat.length) {
+        } else {
+            if (!this.state.avisos.length) {
                 avisFront = "";
             } else {
-                avisFront = this.state.avisosPrivat.map((s, i) => (
+                avisFront = this.state.avisos.map((s, i) => (
                     <div className={`alert avis${s.gravetat} alert-dismissible fade show`} role="alert">
                         {s.label}
                         <button type="button" className="close" data-dismiss="alert" aria-label="Close">
