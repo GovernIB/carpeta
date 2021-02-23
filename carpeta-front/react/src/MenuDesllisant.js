@@ -21,6 +21,7 @@ class MenuDesllisant extends Component {
 			menupseudoplugin: [],
 			seccions : []
 		}
+		this.canviarIdioma = this.canviarIdioma.bind(this);
 	}
 
 
@@ -66,6 +67,11 @@ class MenuDesllisant extends Component {
 	}
 
 
+
+
+
+
+
 	componentWillReceiveProps(lng) {
 
 		// XYZ ZZZ  componentDidMount i componentWillReceiveProps contenen el mateix, es podrien centralitzar en un sol mètode ????
@@ -108,13 +114,7 @@ class MenuDesllisant extends Component {
 
 		
 		
-		i18n.on('languageChanged', function(lng) {
-			sessionStorage.setItem("langActual", lng);
-			var url = window.location.href + `webui/canviarIdioma/${lng}`;
-			axios.get(url).then(res => {
-				const lang = res.data;
-			})
-		});
+		
 		
 	}
 
@@ -144,6 +144,26 @@ class MenuDesllisant extends Component {
 		alert(missatge);
 	}
 
+	
+	canviarIdioma(lng) {
+
+		// Canviam servidor
+		var baseURL = sessionStorage.getItem('contextPath');
+
+		var url = baseURL + `/webui/canviarIdioma/${lng}`;
+		axios.get(url).then(res => {
+			const lang = res.data;
+
+			// Canviam en local
+			sessionStorage.setItem("langActual", lng);
+			i18n.changeLanguage(lng);
+
+		    this.setState({ loading: 0 });
+		}).catch(error => {
+			alert("XYZ ZZZ No s'ha pogut actualitzar l´idioma. Error: " + error);
+		});
+	}
+
 	render() {
 
 		console.log("MENU DESLLISSANT loading = " + this.state.loading);
@@ -161,12 +181,10 @@ class MenuDesllisant extends Component {
 		var canviarDeFront = sessionStorage.getItem("canviarDeFront");
 		var numEntitats = sessionStorage.getItem("numEntitats");
 
-
-
 		let enllasosMenu;
-		if(!this.state.menuEnllasos.length || autenticat === '0'){
+		if(!this.state.menuEnllasos.length || autenticat === '0') {
 			enllasosMenu = "";
-		} else{
+		} else {
 			enllasosMenu = this.state.menuEnllasos.map((s, i) => (
 				<li key={i}>
 					<a href={s.url} title={s.nom}>
@@ -202,36 +220,36 @@ class MenuDesllisant extends Component {
 				<strong className="lletraIdioma" key={i}>{t('menuIdioma_ca')}</strong>
 			));
 			boto_es = idiomes.filter(s => s === 'es').map((s, i)  => (
-				<button onClick={() => i18n.changeLanguage('es')}
+				<button onClick={() => this.canviarIdioma('es')}
 						className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_es')}</button>
 			));
 			boto_en = idiomes.filter(s => s === 'en').map((s, i)  => (
-				<button onClick={() => i18n.changeLanguage('en')}
+				<button onClick={() => this.canviarIdioma('en')}
 						className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_en')}</button>
 			));
 		}
 
 		if (i18n.language === 'es') {
 			boto_ca = idiomes.filter(s => s === 'ca').map((s, i)  => (
-				<button onClick={() => i18n.changeLanguage('ca')}
+				<button onClick={() => this.canviarIdioma('ca')}
 					className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_ca')}</button>
 			));
 			boto_es = idiomes.filter(s => s === 'es').map((s, i)  => (
 				<strong className="lletraIdioma" key={i}>{t('menuIdioma_es')}</strong>
 			));
 			boto_en = idiomes.filter(s => s === 'en').map((s, i)  => (
-				<button onClick={() => i18n.changeLanguage('en')}
+				<button onClick={() => this.canviarIdioma('en')}
 						className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_en')}</button>
 			));
 		}
 
 		if (i18n.language === 'en') {
 			boto_ca = idiomes.filter(s => s === 'ca').map((s, i)  => (
-				<button onClick={() => i18n.changeLanguage('ca')}
+				<button onClick={() => this.canviarIdioma('ca')}
 						className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_ca')}</button>
 			));
 			boto_es = idiomes.filter(s => s === 'es').map((s, i)  => (
-				<button onClick={() => i18n.changeLanguage('es')}
+				<button onClick={() => this.canviarIdioma('es')}
 						className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_es')}</button>
 			));
 			boto_en = idiomes.filter(s => s === 'en').map((s, i)  => (

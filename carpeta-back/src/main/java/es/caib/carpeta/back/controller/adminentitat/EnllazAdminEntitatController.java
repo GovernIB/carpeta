@@ -68,7 +68,7 @@ public class EnllazAdminEntitatController extends EnllazController {
             enllazFilterForm.addHiddenField(ENTITATID);
             enllazFilterForm.addHiddenField(DESCRIPCIOID);
         }
-
+        
         return enllazFilterForm;
     }
 
@@ -82,6 +82,7 @@ public class EnllazAdminEntitatController extends EnllazController {
         }
 
         enllazForm.addHiddenField(ENTITATID);
+        enllazForm.setAttachedAdditionalJspCode(true);
 
         return enllazForm;
     }
