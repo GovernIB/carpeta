@@ -1,12 +1,14 @@
+import { Link } from "react-router-dom";
+
 var autenticat = sessionStorage.getItem('autenticat');
 
 
-export const Inici  = [
-  {id: '/inici',label: 'breadcrumbInici'}
-];
+// export const Inici  = [
+//   {id: '/inici',label: 'breadcrumbInici'}
+// ];
 
 export const Accessibilitat  = [
-  {id: 'javascript:newInici("contingut", "0");',label: 'breadcrumbInici'},
+  // {id: <Link to={"/"} />,label: 'breadcrumbInici'},
   {id: 'accessibilitat',label: 'breadcrumbAccessibilitat'}
 ];
 
@@ -32,6 +34,6 @@ export const Accessibilitat  = [
 // ];
 
 export const MapaWeb  = [
-  {id: 'javascript:newInici("contingut", "0");',label: 'breadcrumbInici'},
+  // {id: <Link to={"/"} />,label: 'breadcrumbInici'},
   {id: 'mapaWeb',label: 'breadcrumbMapaWeb'}
 ];

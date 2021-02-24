@@ -2,7 +2,10 @@ import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
 import i18n from 'i18next';
 import axios from "axios";
-import {Helmet} from "react-helmet";
+
+/**
+ * @author anadal Valors per defecte o html de l'entitat
+ */
 
 class IniciPublic extends Component {
 

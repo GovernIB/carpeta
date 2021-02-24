@@ -35,7 +35,7 @@ class EnllasosLateral extends Component {
         });
     }
 
-    
+
 
     componentWillReceiveProps(lng) {
         var baseURL = sessionStorage.getItem('contextPath');

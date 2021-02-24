@@ -35,7 +35,7 @@ class Inici extends Component {
 
 		return (
 
-			<div className="container-contenido espaiContingut" id="contingutCentral">
+			<div className="container-contenido" id="contingutCentral">
 				<ExpirarSessio />
 				{
 					{

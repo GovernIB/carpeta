@@ -2,7 +2,7 @@ import React, { Component, Suspense } from 'react';
 import i18n from 'i18next';
 import { withTranslation } from 'react-i18next';
 import axios from "axios";
-import { HashRouter, Switch, Route, Link, useHistory } from "react-router-dom";
+import { HashRouter, Switch, Route, Link, useHistory, NavLink  } from "react-router-dom";
 import { withRouter } from "react-router";
 
 /**
@@ -79,25 +79,39 @@ class Breadcrumb extends Component {
         let itemDOMS = [];
 
 
-        itemDOMS.push(<li key='inici'><Link to={'/'}>{i18n.t('mollaInici')}</Link></li>);
+    // itemDOMS.push(<li key='inici'><Link to={ '/' }>{ i18n.t('mollaInici') }</Link></li>);
 
-        let items = this.state.items;
+    let items = this.props.items;
 
+    var pluginID = sessionStorage.getItem('pluginActiu');
+    var pluginNom = "";
+    if(pluginID !== null) {
+        pluginNom = plugins.filter(s => s.pluginID === pluginID).map(s => (
+            <p>{s.nom}</p>
+        ));
+    }
 
-        //
-        if (items) {
-            const TOTAL_ITEMS = items.length;
+    if (typeof items !== "undefined") {
 
-            items.forEach(({ id, label }, index) => {
+        itemDOMS.push(<li key='inici'><NavLink to={ '/' }>{ i18n.t('mollaInici') }</NavLink></li>);
 
-                if (index < TOTAL_ITEMS - 1) {
-                    itemDOMS.push(<li key={index}><span className="imc-separador"> &gt; </span>
-                        <Link to={id}>{i18n.t(label)}</Link></li>);
+        const TOTAL_ITEMS = items.length;
+
+        items.forEach(({id, label}, index) => {
+
+            if(index < TOTAL_ITEMS - 1) {
+                itemDOMS.push(<li key={index}><a href={ id }><Link to={ id }>{i18n.t(label)}</Link></a></li>);
+            } else  {
+
+                if(i18n.t(label) === 'plugin'){
+                    itemDOMS.push(<li id="plugin" key={index}>{pluginNom}</li>);
+                }else {
+                    itemDOMS.push(<li key={index}><span className="imc-separador"> &gt; </span>{i18n.t(label)}</li>);
                 }
+            }
 
-
-            });
-        }
+        });
+    }
 
         return (
             <div>

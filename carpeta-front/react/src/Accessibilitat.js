@@ -1,17 +1,24 @@
 import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
 import ExpirarSessio from "./ExpirarSessio";
+import Breadcrumb from "./Breadcrumb";
+import * as breadcrumbPaths from './utils/breadcrumbPaths';
+import * as breadcrumbPathsAut from './utils/breadcrumbPathsAut';
 
 class Accessibilitat extends Component {
 
     render() {
 
         const { t } = this.props;
+        var autenticat = sessionStorage.getItem('autenticat');
 
         clearTimeout(sessionStorage.getItem('idTimeOut'));
 
+        var motlla = <Breadcrumb items={breadcrumbPaths.Accessibilitat} autenticat={autenticat}/>;
+
         return (
             <div className="container-contenido">
+                {motlla}
                 <ExpirarSessio />
                 <div className="infoNoMenu">
                     <h2><p className="titol h2">{t('accessibilitatTitol')}</p></h2>

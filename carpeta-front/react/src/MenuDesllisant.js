@@ -262,7 +262,7 @@ class MenuDesllisant extends Component {
 
 		var accessibilitat;
 		accessibilitat = <li> 
-		<Link to="/accessibilitat" className="imc-marc-ico imc--accessibilitat" >
+		<Link to="/accessibilitat" className="imc-marc-ico imc--accessibilitat" params={{ items: "hello" }}>
 	{/*<a href="javascript:newwAccessibilitat('contingut', '1');"
 							className="imc-marc-ico imc--accessibilitat" id="imc-marc-accessibilitat"
 							title={t('menuAccessibilitat')}> */ }
@@ -409,7 +409,7 @@ class MenuDesllisant extends Component {
 		console.log("MENUDESLLISSANT :: INICI RENDER ");
 		return (
 			<div className="imc-marc" id="imc-marc" tabIndex="-1" aria-hidden="true">
-				<div className="imc--fons"></div>
+				<div className="imc--fons"/>
 
 				<div className="imc-marc-menu" id="imc-marc-menu" aria-hidden="true">
 					<div className="imc-cercador" id="imc-cercador">
