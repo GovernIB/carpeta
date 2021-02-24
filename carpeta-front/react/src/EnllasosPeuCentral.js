@@ -32,7 +32,7 @@ class EnllasosPeuCentral extends Component {
     }
 
     render() {
-        var autenticat = this.props.autenticat;        
+        var autenticat = sessionStorage.getItem('autenticat');    
         const {t} = this.props;
 
         var mapa;

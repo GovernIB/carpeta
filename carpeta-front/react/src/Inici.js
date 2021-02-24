@@ -21,7 +21,7 @@ class Inici extends Component {
 
 	render() {
 
-		//var autenticat = this.props.autenticat;
+
 		var autenticat = sessionStorage.getItem('autenticat');
 
 		console.log("INICI :: AUTH = " + autenticat);

@@ -50,25 +50,20 @@ class MapaWeb extends Component {
 
 		if (autenticat === '1') {
 			logoClau = '';
-			informacio = <a href="javascript:newInici('contingut', '1');">{t('mapaWebInformacio')}</a>;
+			informacio = <Link to="/">{t('mapaWebInformacio')}</Link>;
 
 
 			plug = plugins.map(s => (<p className="lh15 upper">
-			     {/*
-			     <a
-				href={"javascript:('contingut', '1', '" + s.pluginID + "');"}>
-				{s.nom}</a>
-				*/}
 				<Link to="/pluginhtml/{s.pluginID}" >
 				{s.nom}
 				</Link>
 				</p>));
 
-			dades = <a href="javascript:newDadesPersonals('contingut', '1');">{t('mapaWebDades')}</a>;
+			dades = "";
 		}
 		if (autenticat === '0') {
 			logoClau = <span className="oi oi-lock-locked colorClave" title={t('mapaWebClave')}/>;
-			informacio = <a href="javascript:newInici('contingut', '0');">{t('mapaWebInformacio')}</a>;
+			informacio = <Link to="/">{t('mapaWebInformacio')}</Link>;
 
 
 			plug = <p className="lh15 upper">XYZ ZZZ FALTA ENLLAÇ A LOGIN</p>; /* XYZ ZZZ Aqui enllaç a LOGIN !!!!!! */
@@ -82,11 +77,11 @@ class MapaWeb extends Component {
 
 		clearTimeout(sessionStorage.getItem('idTimeOut'));
 
-		var motlla = <Breadcrumb items={breadcrumbPaths.MapaWeb} autenticat={autenticat}/>
+		//var motlla = <Breadcrumb items={breadcrumbPaths.MapaWeb} autenticat={autenticat}/>
 
 		return (
 			<div className="container-contenido">
-				{motlla}
+				{ /*{motlla}*/}
 				<ExpirarSessio />
 
 				<div className="infoNoMenu">

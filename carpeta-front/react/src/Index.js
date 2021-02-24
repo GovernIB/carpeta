@@ -97,36 +97,30 @@ class Index extends Component {
         return (
             <div>
                 {/* -- Menú vertical */}
-                {/*<div id = "menuLateral"></div>*/}
                 <MenuLateral />
 
                 {/* Contingut dret */}
                 <div className="contenedor" id="contenedor">
 
                     {/* Capçalera */}
-                    {/*<div id = "barraMenu"></div>*/}
                     <BarraMenu />
 
                     {infoUsuari}
 
                     {/* Menú Ràpid */}
-                    {/*<div id = "menuRapid"></div>*/}
-                    <MenuRapid autenticat={auth} />
+                    <MenuRapid  />
 
                     {/* Menú desplegable */}
-                    {/*<div id = "menuDesllisant"></div>*/}
-                    <MenuDesllisant autenticat={auth} />
+                    <MenuDesllisant  />
 
                     {/* Zona Contingut */}
                     <div className="imc-continguts" id="continguts">
 
                         {/* Molla de pa */}
-                        {/*<div id = "mollaPa"></div>*/}
-                        <Breadcrumb autenticat={auth} />
+                        <Breadcrumb  />
 
                         {/* Avisos Front */}
-                        {/*<div id = "avisosFront"></div>*/}
-                        <AvisosFront autenticat={auth} />
+                        <AvisosFront  />
 
                         {/* Contingut pàgina */}
                         <div id="carregant" className="loader-container centrat loaderOcult">
@@ -151,27 +145,27 @@ class Index extends Component {
                                 <Route
                                     path="/seccio/:seccioId/pluginhtml/:pluginId"
                                     render={(props) => {
-                                        return <PluginHtml {...props} seccioID={props.match.params.seccioId} pluginID={props.match.params.pluginId} autenticat={auth} />
+                                        return <PluginHtml {...props} seccioID={props.match.params.seccioId} pluginID={props.match.params.pluginId} />
                                     }}
                                 />
 
                                 <Route
                                     path="/seccio/:seccioId/pluginreact/:pluginId"
                                     render={(props) => {
-                                        return <PluginReact {...props} seccioID={props.match.params.seccioId} pluginID={props.match.params.pluginId} autenticat={auth} />
+                                        return <PluginReact {...props} seccioID={props.match.params.seccioId} pluginID={props.match.params.pluginId}  />
                                     }}
                                 />
 
                                 <Route
                                     path="/seccio/:seccioId"
                                     render={(props) => {
-                                        return <LlistatDePlugins {...props} seccioID={props.match.params.seccioId} autenticat={auth} />
+                                        return <LlistatDePlugins {...props} seccioID={props.match.params.seccioId}  />
                                     }}
                                 />
                                 <Route
                                     path="/pluginhtml/:pluginId"
                                     render={(props) => {
-                                        return <PluginHtml {...props} seccioID={0}  autenticat={auth} />
+                                        return <PluginHtml {...props} seccioID={0}  />
                                     }}
                                 />
 
@@ -179,7 +173,7 @@ class Index extends Component {
                                 <Route
                                     path="/pluginreact/:pluginId"
                                     render={(props) => {
-                                        return <PluginReact {...props} seccioID={0} pluginID={props.match.params.pluginId} autenticat={auth} />
+                                        return <PluginReact {...props} seccioID={0} pluginID={props.match.params.pluginId}  />
                                     }}
                                 />
                             </Switch>
@@ -189,8 +183,7 @@ class Index extends Component {
                     {/* Fi Zona Contingut */}
 
                     {/* Peu */}
-                    {/* <div id = "peu" class="capsaPeu"></div> */}
-                    <Peu autenticat={auth} />
+                    <Peu />
 
 
                 </div>

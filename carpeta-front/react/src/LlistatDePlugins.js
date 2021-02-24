@@ -125,9 +125,6 @@ class LlistatDePlugins extends Component {
             console.log("LLISTAT PLUGINS INFOHTML => NO PUC LLEGIR HISTORY !!!!!");
         };
 
-        // XYZ ZZZ
-        //var contingut = newwPluginnHtml('contingut', '1', pluginID);
-        //window.location.href(contingut);
     }
 
     infoReact(missatge, pluginID) {
@@ -161,9 +158,6 @@ class LlistatDePlugins extends Component {
             this.props.history.push("/");
             return '';
         }
-
-
-        //document.querySelector("#continguts").classList.remove('espaiContingut');
 
         const { t } = this.props;
 

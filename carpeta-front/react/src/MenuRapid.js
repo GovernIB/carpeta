@@ -70,7 +70,7 @@ class MenuRapid extends Component {
     render() {
 
         const {t} = this.props;
-        var autenticat = this.props.autenticat;
+        var autenticat = sessionStorage.getItem('autenticat');
         const plugins = this.state.plugins;
         //var urlBase = window.location.href;
         var urlBase = sessionStorage.getItem('contextPath');

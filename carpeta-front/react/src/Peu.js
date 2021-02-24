@@ -46,7 +46,7 @@ class Peu extends Component {
 	render() {
 		
 
-		var autenticat = this.props.autenticat;
+		var autenticat = sessionStorage.getItem('autenticat');
 		const {t} = this.props;
 
 		const dadesSuport = this.state.dadesSuport;
