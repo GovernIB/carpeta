@@ -2,6 +2,10 @@ import React, { Component, Suspense } from 'react';
 import { withTranslation } from 'react-i18next';
 import axios from "axios";
 import ExpirarSessio from "./ExpirarSessio";
+import Breadcrumb from "./Breadcrumb";
+import { Link } from "react-router-dom";
+import * as breadcrumbPaths from "./utils/breadcrumbPaths";
+import * as breadcrumbPathsAut from "./utils/breadcrumbPathsAut";
 
 class MapaWeb extends Component {
 
@@ -38,7 +42,7 @@ class MapaWeb extends Component {
 		var autenticat = sessionStorage.getItem('autenticat');
 		const plugins = this.state.plugins;
 
-		//var plug;
+		var plug;
 
 		var informacio;
 		var dades;
@@ -78,8 +82,11 @@ class MapaWeb extends Component {
 
 		clearTimeout(sessionStorage.getItem('idTimeOut'));
 
+		var motlla = <Breadcrumb items={breadcrumbPaths.MapaWeb} autenticat={autenticat}/>
+
 		return (
 			<div className="container-contenido">
+				{motlla}
 				<ExpirarSessio />
 
 				<div className="infoNoMenu">

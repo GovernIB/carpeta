@@ -52,27 +52,29 @@ class BarraMenu extends Component {
 		}
 
 		return (
-			<header className="imc-titol">
+			<div id = "barraMenu">
+				<header className="imc-titol">
 
-				<nav className="imc--contingut">
+					<nav className="imc--contingut">
 
-					{/*<a href="{this.context.router.goBack()}" className="imc-torna"*/}
-					{/*   title={t('menuTorna')}><span>{t('menuTorna')}</span></a>*/}
-					<h1>
-						<span>{t('menuTitol')}</span>
-					</h1>
+						{/*<a href="{this.context.router.goBack()}" className="imc-torna"*/}
+						{/*   title={t('menuTorna')}><span>{t('menuTorna')}</span></a>*/}
+						<h1>
+							<span>{t('menuTitol')}</span>
+						</h1>
 
-					<ul>
-						{enllasosBarraMenu}
-						<li>
-							<button type="button" className="imc-bt-menu" id="imc-bt-menu" title={t('menuMenu')}>
-								{/*<span>{t('menuMenu')}</span>*/}
-							</button>
-						</li>
-					</ul>
-				</nav>
+						<ul>
+							{enllasosBarraMenu}
+							<li>
+								<button type="button" className="imc-bt-menu" id="imc-bt-menu" title={t('menuMenu')}>
+									{/*<span>{t('menuMenu')}</span>*/}
+								</button>
+							</li>
+						</ul>
+					</nav>
 
-			</header>
+				</header>
+			</div>
 		)
 	}
 }

@@ -38,7 +38,7 @@ class Index extends Component {
 
     constructor() {
         super();
-        
+
 
 
     }
@@ -85,9 +85,9 @@ class Index extends Component {
 
         /*
                 const styleContenidor = (auth === '1')? { marginTop: '4.5em !important'} : {};
-                style={styleContenidor} 
-        
-        
+                style={styleContenidor}
+
+
                 */
 
 
@@ -130,13 +130,14 @@ class Index extends Component {
 
                         {/* Contingut pàgina */}
                         <div id="carregant" className="loader-container centrat loaderOcult">
-                            <div className="loader"></div>
+                            <div className="loader"/>
                         </div>
 
                         {/*  XYZ ZZZ   S'ha de substituir per Routes*/}
                         <div id="contingut" className="pt-2">
                         </div>
 
+                        {auth === '1' ? <div className="pt-5" /> : <div/>}
                         <div id="contingut2222" className="pt-2">
                             <Switch>
                                 <Route exact path="/" component={Inici} refresh="true" />

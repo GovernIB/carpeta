@@ -3,6 +3,8 @@ import { withTranslation } from 'react-i18next';
 import i18n from 'i18next';
 import ExpirarSessio from "./ExpirarSessio";
 import { withRouter } from "react-router";
+import Breadcrumb from "./Breadcrumb";
+import * as breadcrumbPathsAut from "./utils/breadcrumbPathsAut";
 
 class PluginHtml extends Component {
 
@@ -155,9 +157,12 @@ class PluginHtml extends Component {
 
         clearTimeout(sessionStorage.getItem('idTimeOut'));
 
+        var motlla = <Breadcrumb items={breadcrumbPathsAut.Plugin} autenticat={autenticat}/>
+
 
         return (
             <div>
+                {motlla}
                 <ExpirarSessio />
                 <div id="substituir" />
             </div>

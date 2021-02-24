@@ -417,6 +417,9 @@ img:hover {
 .titolCentrat{
 	display: contents !important;
 }
+.ocult{
+	display: none;
+}
 
 
 /* HomePage */

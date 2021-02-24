@@ -142,7 +142,7 @@ class MenuRapid extends Component {
             }
 
             const seccions = this.state.seccions;
-            seccionsS = seccions.map((s, i) => (                
+            seccionsS = seccions.map((s, i) => (
                 <li className="nav-item pr-4" > 
                 <Link to={"/seccio/" + s.seccioID} className="navCarpeta">
                         <img src={s.iconaID} title={s.nom} alt={s.descripcio} className="imc-icona" />
@@ -152,9 +152,12 @@ class MenuRapid extends Component {
             ));
         }
 
-        return (
-            <div>
-                <nav className="navbar navbar-expand-sm bg-white p-0 fixo" id="menuRapid">
+
+        var mostrar = "";
+
+        if(seccionsS != null || gestionsHtml != null || gestionsReact != null || enllasosPseusoPluginMenu != null){
+            mostrar = <div>
+                <nav className="navbar navbar-expand-sm bg-white p-0 fixo ocult" id="menuRapid">
                     <ul className="navbar-nav p-3 mRapidGlobal" id="llistaMenuRapid">
                         {seccionsS}
                         {gestionsHtml}
@@ -162,6 +165,22 @@ class MenuRapid extends Component {
                         {enllasosPseusoPluginMenu}
                     </ul>
                 </nav>
+            </div>;
+        }
+
+        return (
+            <div id = "menuRapid">
+                {/*<div>*/}
+                {/*    <nav className="navbar navbar-expand-sm bg-white p-0 fixo ocult" id="menuRapid">*/}
+                {/*        <ul className="navbar-nav p-3 mRapidGlobal" id="llistaMenuRapid">*/}
+                {/*            {seccionsS}*/}
+                {/*            {gestionsHtml}*/}
+                {/*            {gestionsReact}*/}
+                {/*            {enllasosPseusoPluginMenu}*/}
+                {/*        </ul>*/}
+                {/*    </nav>*/}
+                {/*</div>*/}
+                {mostrar}
             </div>
         );
     }

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
 import i18n from 'i18next';
 import axios from "axios";
-import {Helmet} from "react-helmet";
+// import {Helmet} from "react-helmet";
 
 class IniciPublic extends Component {
 
