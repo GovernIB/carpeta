@@ -167,7 +167,8 @@
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('plugin.propietats'); ta.wrap='hard';">Hard Wrap</a>
         </div>
       </div>
-      <script type="text/javascript">			$('#dropdownMenuButton_propietats').on('click', function(){
+      <script type="text/javascript">
+			$('#dropdownMenuButton_propietats').on('click', function(){
 					var valor = ($('#dropdownMenuContainer_propietats').css('display') != 'none') ? 'none' : 'block';
                  $('#dropdownMenuContainer_propietats').css('display', valor);
                  return false;

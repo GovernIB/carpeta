@@ -151,13 +151,13 @@
                   </span>
                 </div>
                 <script type="text/javascript">
-                    $('#logoCapBackID').on('change', function(){
-                        var ruta = $('#logoCapBackID').val(); 
-                        var rutaArray = ruta.split('\\');
-                        $('#logoCapBackID-custom-file-label').css('display','block');
-                        $('#logoCapBackID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
-                    });
-                </script>                </c:otherwise>
+					$('#logoCapBackID').on('change', function(){
+						var ruta = $('#logoCapBackID').val(); 
+						var rutaArray = ruta.split('\\');
+						$('#logoCapBackID-custom-file-label').css('display','block');
+						$('#logoCapBackID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+					});
+				</script>                </c:otherwise>
                 </c:choose>
               </div>
             </c:if>
@@ -203,13 +203,13 @@
                   </span>
                 </div>
                 <script type="text/javascript">
-                    $('#logoPeuBackID').on('change', function(){
-                        var ruta = $('#logoPeuBackID').val(); 
-                        var rutaArray = ruta.split('\\');
-                        $('#logoPeuBackID-custom-file-label').css('display','block');
-                        $('#logoPeuBackID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
-                    });
-                </script>                </c:otherwise>
+					$('#logoPeuBackID').on('change', function(){
+						var ruta = $('#logoPeuBackID').val(); 
+						var rutaArray = ruta.split('\\');
+						$('#logoPeuBackID-custom-file-label').css('display','block');
+						$('#logoPeuBackID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+					});
+				</script>                </c:otherwise>
                 </c:choose>
               </div>
             </c:if>
@@ -255,13 +255,13 @@
                   </span>
                 </div>
                 <script type="text/javascript">
-                    $('#logoLateralFrontID').on('change', function(){
-                        var ruta = $('#logoLateralFrontID').val(); 
-                        var rutaArray = ruta.split('\\');
-                        $('#logoLateralFrontID-custom-file-label').css('display','block');
-                        $('#logoLateralFrontID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
-                    });
-                </script>                </c:otherwise>
+					$('#logoLateralFrontID').on('change', function(){
+						var ruta = $('#logoLateralFrontID').val(); 
+						var rutaArray = ruta.split('\\');
+						$('#logoLateralFrontID-custom-file-label').css('display','block');
+						$('#logoLateralFrontID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+					});
+				</script>                </c:otherwise>
                 </c:choose>
               </div>
             </c:if>
@@ -325,13 +325,13 @@
                   </span>
                 </div>
                 <script type="text/javascript">
-                    $('#iconID').on('change', function(){
-                        var ruta = $('#iconID').val(); 
-                        var rutaArray = ruta.split('\\');
-                        $('#iconID-custom-file-label').css('display','block');
-                        $('#iconID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
-                    });
-                </script>                </c:otherwise>
+					$('#iconID').on('change', function(){
+						var ruta = $('#iconID').val(); 
+						var rutaArray = ruta.split('\\');
+						$('#iconID-custom-file-label').css('display','block');
+						$('#iconID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+					});
+				</script>                </c:otherwise>
                 </c:choose>
               </div>
             </c:if>
@@ -390,11 +390,11 @@
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('entitat.entitatDescFront'); ta.wrap='hard';">Hard Wrap</a>
         </div>
       </div>
-      <script type="text/javascript">			
-	                $('#dropdownMenuButton_entitatDescFront').on('click', function(){
+      <script type="text/javascript">
+			$('#dropdownMenuButton_entitatDescFront').on('click', function(){
 					var valor = ($('#dropdownMenuContainer_entitatDescFront').css('display') != 'none') ? 'none' : 'block';
-                    $('#dropdownMenuContainer_entitatDescFront').css('display', valor);
-                    return false;
+                 $('#dropdownMenuContainer_entitatDescFront').css('display', valor);
+                 return false;
 				});
       </script>           </td>
         </tr>
@@ -580,7 +580,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_loginText_${idioma.idiomaID}">
                <form:errors path="entitat.loginText.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="entitat.loginText.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGINTEXTID)? ' uneditable-input' : ''}" maxlength="4000" />
+               <form:textarea path="entitat.loginText.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGINTEXTID)? ' uneditable-input' : ''}" maxlength="4000"  rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" />
            </div>
            </c:forEach>
          </div>
@@ -632,13 +632,13 @@
                   </span>
                 </div>
                 <script type="text/javascript">
-                    $('#fitxerCssID').on('change', function(){
-                        var ruta = $('#fitxerCssID').val(); 
-                        var rutaArray = ruta.split('\\');
-                        $('#fitxerCssID-custom-file-label').css('display','block');
-                        $('#fitxerCssID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
-                    });
-                </script>                </c:otherwise>
+					$('#fitxerCssID').on('change', function(){
+						var ruta = $('#fitxerCssID').val(); 
+						var rutaArray = ruta.split('\\');
+						$('#fitxerCssID-custom-file-label').css('display','block');
+						$('#fitxerCssID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+					});
+				</script>                </c:otherwise>
                 </c:choose>
               </div>
             </c:if>

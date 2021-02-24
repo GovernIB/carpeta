@@ -77,7 +77,7 @@ public class EntitatSuperAdminController extends EntitatController {
          
          
          entitatForm.addHiddenField(PLUGINLOGINID);
-         entitatForm.addHiddenField(LOGINTEXTID);
+         //entitatForm.addHiddenField(LOGINTEXTID);
          entitatForm.addHiddenField(CONTEXT);
          entitatForm.addHiddenField(COMMIT);
          

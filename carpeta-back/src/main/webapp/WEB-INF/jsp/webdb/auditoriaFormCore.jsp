@@ -54,7 +54,8 @@
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('auditoria.objecte'); ta.wrap='hard';">Hard Wrap</a>
         </div>
       </div>
-      <script type="text/javascript">			$('#dropdownMenuButton_objecte').on('click', function(){
+      <script type="text/javascript">
+			$('#dropdownMenuButton_objecte').on('click', function(){
 					var valor = ($('#dropdownMenuContainer_objecte').css('display') != 'none') ? 'none' : 'block';
                  $('#dropdownMenuContainer_objecte').css('display', valor);
                  return false;

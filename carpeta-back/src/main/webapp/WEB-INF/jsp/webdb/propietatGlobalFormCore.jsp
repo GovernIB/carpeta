@@ -41,7 +41,8 @@
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('propietatGlobal.value'); ta.wrap='hard';">Hard Wrap</a>
         </div>
       </div>
-      <script type="text/javascript">			$('#dropdownMenuButton_value').on('click', function(){
+      <script type="text/javascript">
+			$('#dropdownMenuButton_value').on('click', function(){
 					var valor = ($('#dropdownMenuContainer_value').css('display') != 'none') ? 'none' : 'block';
                  $('#dropdownMenuContainer_value').css('display', valor);
                  return false;

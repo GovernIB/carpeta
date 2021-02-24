@@ -144,7 +144,8 @@
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('acces.metodeAutenticacio'); ta.wrap='hard';">Hard Wrap</a>
         </div>
       </div>
-      <script type="text/javascript">			$('#dropdownMenuButton_metodeAutenticacio').on('click', function(){
+      <script type="text/javascript">
+			$('#dropdownMenuButton_metodeAutenticacio').on('click', function(){
 					var valor = ($('#dropdownMenuContainer_metodeAutenticacio').css('display') != 'none') ? 'none' : 'block';
                  $('#dropdownMenuContainer_metodeAutenticacio').css('display', valor);
                  return false;

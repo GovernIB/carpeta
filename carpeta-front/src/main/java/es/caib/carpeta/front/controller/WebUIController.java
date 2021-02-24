@@ -177,10 +177,43 @@ public class WebUIController extends CommonFrontController {
         public void setLabelDescription(String labelDescription) {
             this.labelDescription = labelDescription;
         }
-        
-        
-
     }
+    
+    /**
+     * 
+     * @author anadal
+     *
+     */
+    public static class EntitatInfo {
+        protected String nom;
+        protected String html;
+        
+        
+        public EntitatInfo() {
+            super();
+        }
+        public EntitatInfo(String nom, String html) {
+            super();
+            this.nom = nom;
+            this.html = html;
+        }
+        public String getNom() {
+            return nom;
+        }
+        public void setNom(String nom) {
+            this.nom = nom;
+        }
+        public String getHtml() {
+            return html;
+        }
+        public void setHtml(String html) {
+            this.html = html;
+        }
+        
+    
+    }
+    
+
 
     public static class AvisInfo {
         protected String label;
@@ -771,7 +804,7 @@ public class WebUIController extends CommonFrontController {
     }
 
     @RequestMapping(value = "/nomEntitat", method = RequestMethod.GET)
-    public void getNomEntitat(HttpServletRequest request, HttpServletResponse response) {
+    public void getEntitatNom(HttpServletRequest request, HttpServletResponse response) {
 
         try {
             String lang = LocaleContextHolder.getLocale().getLanguage();
@@ -788,6 +821,50 @@ public class WebUIController extends CommonFrontController {
             processException(e, response);
         }
     }
+    
+    
+    @RequestMapping(value = "/infoEntitat", method = RequestMethod.GET)
+    public void getEntitatInfo(HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+            String lang = LocaleContextHolder.getLocale().getLanguage();
+            String codiEntitat = sesionHttp.getEntitat();
+
+            EntitatJPA entitat = entitatEjb.findByCodi(codiEntitat);
+            
+            EntitatInfo ei = new EntitatInfo();
+            
+            ei.setNom(entitat.getNom().getTraduccio(lang).getValor());
+            
+            if (entitat.getLoginText() != null && entitat.getLoginText().getTraduccio(lang) != null) {
+                ei.setHtml(entitat.getLoginText().getTraduccio(lang).getValor());
+                log.info(" XYZ ZZZ RETORNAT HTML PER ENTITAT " + codiEntitat);
+            }
+
+//            response.setCharacterEncoding("utf-8");
+//            response.setContentType("text/html");
+//            response.getWriter().println(entitat.getNom().getTraduccio(lang).getValor());
+//            response.flushBuffer();
+            
+            
+            // Passar JSON
+            Gson gson = new Gson();
+            String json = gson.toJson(ei);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF8");
+
+            byte[] utf8JsonString = json.getBytes("UTF8");
+
+            response.getOutputStream().write(utf8JsonString);
+            
+            
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
+    }
+    
 
     @RequestMapping(value = "/idiomesFront", method = RequestMethod.GET)
     public void getIdiomes(HttpServletRequest request, HttpServletResponse response) {

@@ -23,7 +23,8 @@
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.descripcio'); ta.wrap='hard';">Hard Wrap</a>
         </div>
       </div>
-      <script type="text/javascript">			$('#dropdownMenuButton_descripcio').on('click', function(){
+      <script type="text/javascript">
+			$('#dropdownMenuButton_descripcio').on('click', function(){
 					var valor = ($('#dropdownMenuContainer_descripcio').css('display') != 'none') ? 'none' : 'block';
                  $('#dropdownMenuContainer_descripcio').css('display', valor);
                  return false;
@@ -226,7 +227,8 @@
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.peticio'); ta.wrap='hard';">Hard Wrap</a>
         </div>
       </div>
-      <script type="text/javascript">			$('#dropdownMenuButton_peticio').on('click', function(){
+      <script type="text/javascript">
+			$('#dropdownMenuButton_peticio').on('click', function(){
 					var valor = ($('#dropdownMenuContainer_peticio').css('display') != 'none') ? 'none' : 'block';
                  $('#dropdownMenuContainer_peticio').css('display', valor);
                  return false;
@@ -256,7 +258,8 @@
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.error'); ta.wrap='hard';">Hard Wrap</a>
         </div>
       </div>
-      <script type="text/javascript">			$('#dropdownMenuButton_error').on('click', function(){
+      <script type="text/javascript">
+			$('#dropdownMenuButton_error').on('click', function(){
 					var valor = ($('#dropdownMenuContainer_error').css('display') != 'none') ? 'none' : 'block';
                  $('#dropdownMenuContainer_error').css('display', valor);
                  return false;
@@ -286,7 +289,8 @@
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.excepcio'); ta.wrap='hard';">Hard Wrap</a>
         </div>
       </div>
-      <script type="text/javascript">			$('#dropdownMenuButton_excepcio').on('click', function(){
+      <script type="text/javascript">
+			$('#dropdownMenuButton_excepcio').on('click', function(){
 					var valor = ($('#dropdownMenuContainer_excepcio').css('display') != 'none') ? 'none' : 'block';
                  $('#dropdownMenuContainer_excepcio').css('display', valor);
                  return false;
