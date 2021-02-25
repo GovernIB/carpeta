@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${pageContext.response.locale.language}" style="" class=" js flexbox flexboxlegacy hashchange backgroundsize boxshadow textshadow opacity cssanimations cssgradients csstransforms csstransitions fontface generatedcontent localstorage svg" lang="${pageContext.response.locale.language}">
 <head>
     <title>Carpeta Ciutadana</title>
-    <link rel="shortcut icon" type="image/x-ico" href="${pageContext.request.contextPath}/src/assets/images/icon.png">
+    <link rel="shortcut icon" type="image/x-ico" href="<c:url value="/src/assets/images/icon.png"/>">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="${pageContext.response.locale.language}"/>
@@ -16,34 +16,34 @@
 
     <!-- Scripts -->
     <!-- google analytics -->
-    <script type="text/javascript" async="" src="${pageContext.request.contextPath}/src/assets/js/ga.js"></script>
-    <script src="${pageContext.request.contextPath}/src/assets/js/jquery-3.5.0.js"></script>
-    <script src="${pageContext.request.contextPath}/src/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" async="" src="<c:url value="/src/assets/js/ga.js"/>"></script>
+    <script src="<c:url value="/src/assets/js/jquery-3.5.0.js"/>"></script>
+    <script src="<c:url value="/src/assets/js/bootstrap.min.js"/>"></script>
     <!-- Datetimpicker -->
-    <script src="${pageContext.request.contextPath}/src/assets/js/moment-with-locales.min.js"></script>
-    <script src="${pageContext.request.contextPath}/src/assets/js/bootstrap-datetimepicker.js"></script>
+    <script src="<c:url value="/src/assets/js/moment-with-locales.min.js"/>"></script>
+    <script src="<c:url value="/src/assets/js/bootstrap-datetimepicker.js"/>"></script>
     <!-- Necessari per les cookies -->
-    <script type="text/javascript" src="${pageContext.request.contextPath}/src/assets/js/jquery.slimscroll.min.js"></script>
-    <script src="${pageContext.request.contextPath}/src/assets/js/modernizr.js"></script>
+    <script type="text/javascript" src="<c:url value="/src/assets/js/jquery.slimscroll.min.js"/>"></script>
+    <script src="<c:url value="/src/assets/js/modernizr.js"/>"></script>
     <!-- Del Goib -->
-    <script src="${pageContext.request.contextPath}/src/assets/js/globales.js" type="text/javascript"></script>
+    <script src="<c:url value="/src/assets/js/globales.js"/>" type="text/javascript"></script>
     <!-- Bootstrap compatibilitat amb IE -->
-    <script src="${pageContext.request.contextPath}/src/assets/js/respond.js" type="text/javascript"></script>
+    <script src="<c:url value="/src/assets/js/respond.js"/>" type="text/javascript"></script>
 
-    <script src="${pageContext.request.contextPath}/src/assets/js/jquery.dataTables.min.js" type="text/javascript"></script>
-    <script src="${pageContext.request.contextPath}/src/assets/js/datetime-moment.js" type="text/javascript"></script>
+    <script src="<c:url value="/src/assets/js/jquery.dataTables.min.js"/>" type="text/javascript"></script>
+    <script src="<c:url value="/src/assets/js/datetime-moment.js"/>" type="text/javascript"></script>
 
     <!-- Scripts per Components React -->
-    <script src="${pageContext.request.contextPath}/src/utils/carpeta_react.js" type="text/javascript"></script>
+    <script src="<c:url value="/src/utils/carpeta_react.js"/>" type="text/javascript"></script>
 
     <!-- ESTILS -->
-    <link href="${pageContext.request.contextPath}/src/assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/src/assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/src/assets/css/goib.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/src/assets/css/carpeta.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/src/assets/css/open-iconic-bootstrap.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/src/assets/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/src/assets/css/datatables.min.css" rel="stylesheet">
+    <link href="<c:url value="/src/assets/css/bootstrap.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/src/assets/css/bootstrap-datetimepicker.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/src/assets/css/goib.css"/>" rel="stylesheet">
+    <link href="<c:url value="/src/assets/css/carpeta.css"/>" rel="stylesheet">
+    <link href="<c:url value="/src/assets/css/open-iconic-bootstrap.css"/>" rel="stylesheet">
+    <link href="<c:url value="/src/assets/css/jquery.dataTables.min.css"/>" rel="stylesheet">
+    <link href="<c:url value="/src/assets/css/datatables.min.css"/>" rel="stylesheet">
 
 </head>
 
@@ -54,7 +54,7 @@
         <div class="imc-logo">
             <div>
                 <a href="javascript:window.location.reload(true)" class="imc--goib" title="<fmt:message key="entitats.carpeta"/>">
-                    <img src="${pageContext.request.contextPath}/src/assets/images/icon.png" title="" alt="" class="logo-govern" style="max-width: 70%;"/>
+                    <img src="<c:url value="/src/assets/images/icon.png"/>" title="" alt="" class="logo-govern" style="max-width: 70%;"/>
                     <span><fmt:message key="entitats.carpeta"/></span>
                 </a>
             </div>
@@ -112,8 +112,7 @@
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
                                                 <button class="card col-md-12 align-items-lg-center capsaPlugin pt-3" onclick="location.href='<c:url value="/e/${entitat.codi}"/>'">
                                                     <span class="card-title titol pl-1 h3">
-                                                        <c:set var="url" value="http://localhost:8080/carpetafront/webui/entityicon/${entitat.entitatID}"/>
-                                                        <img src="${url}" alt="" title="" class="imc-icona">
+                                                        <img src="<c:url value="/webui/entityicon/${entitat.entitatID}"/>" alt="" title="" class="imc-icona">
                                                     </span>
                                                     <span class="titolPlugin titol h3 titolCentrat">${entitat.nom.getTraduccio(lang).valor}</span>
 <%--                                                    <span class="card-text mb-3 mt-3 alignCenter">REGWEB3 Registre electrònic</span>--%>
@@ -180,11 +179,11 @@
     </div>
 
 <!-- js react -->
-<script src = "${pageContext.request.contextPath}/dist/reactjs_main.js" type="text/javascript"></script>
+<script src = "<c:url value="/dist/reactjs_main.js"/>" type="text/javascript"></script>
 <!-- menú lateral -->
-<script src="${pageContext.request.contextPath}/src/assets/js/menu-lateral.js" type="text/javascript"></script>
+<script src="<c:url value="/src/assets/js/menu-lateral.js"/>" type="text/javascript"></script>
 <!-- acceptar cookies -->
-<script src="${pageContext.request.contextPath}/src/assets/js/aceptar_cookies.js" type="text/javascript"></script>
+<script src="<c:url value="/src/assets/js/aceptar_cookies.js"/>" type="text/javascript"></script>
 
 </body>
 </html>
