@@ -2,7 +2,7 @@ import React, { Component, Suspense } from 'react';
 import i18n from 'i18next';
 import { withTranslation } from 'react-i18next';
 import axios from "axios";
-import { HashRouter, Switch, Route, Link, useHistory, NavLink  } from "react-router-dom";
+import { HashRouter, Switch, Route, Link, useHistory, NavLink } from "react-router-dom";
 import { withRouter } from "react-router";
 
 /**
@@ -10,12 +10,23 @@ import { withRouter } from "react-router";
  */
 class Breadcrumb extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
         this.state = {
             items: []
         };
+
         this.canviatRoute = this.canviatRoute.bind(this);
+
+        if (this.props.currentlocation) {
+            console.log(" BREADCRUMB Constructor currentlocation => " + this.props.currentlocation);
+        }
+
+        //if (this.props.currentlocation && this.props.currentlocation.pathname != '/') {
+        //    this.canviatRoute(this.props.currentlocation, "PUSH");
+        //}
+        
     }
 
     componentDidMount() {
@@ -33,36 +44,38 @@ class Breadcrumb extends Component {
 
     canviatRoute(location, action) {
 
-        console.log("CANVIAT ROUTE !!!!!!!");
-        {
-            // location is an object like window.location
-            console.log("MMMMMMMMMMMMMMMMMMMM A: " + action   + " LP: " + location.pathname + "   LS: " + location.state);
+        console.log("CANVIAT ROUTE  A: " + action + " LP: " + location.pathname + "   LS: " + location.state);
 
-            var novaruta = location.pathname;
+        var novaruta = location.pathname;
 
-            // NOMES FUNCIONA PER UN NIVELL DE SECCIO, MÉS S?HA DE PROGRAMAR
-            var match = novaruta.match('^\/seccio\/([0-9]+)\/plugin(react|html)\/([0-9]+)');
+        // NOMES FUNCIONA PER UN NIVELL DE SECCIO, MÉS S?HA DE PROGRAMAR
+        var match = novaruta.match('^\/seccio\/([0-9]+)\/plugin(react|html)\/([0-9]+)');
 
-            console.log("MATCH === " + match);
+        console.log("MATCH === " + match);
 
-            if (match) {
-                //  Es plugin d'una Secció ????
-                var seccioID = match[1];
-                console.log("MATCH[SECCIO] === " + seccioID);
-                var baseURL = sessionStorage.getItem('contextPath');
-                var url6 = baseURL + `/webui/seccio/` + seccioID;
-                console.log("URL INFO SECCIO ==> " + url6);
-                axios.get(url6).then(res => {
-                    var seccio = res.data;
-                    console.log("BREADCRUMB ==> ACTUALITZANT STATE ==> " + seccio.nom + " [" + seccio.seccioID + "]");
-                    this.setState({ items: [{ id: '/seccio/' + seccio.seccioID , label: seccio.nom  },{ id: novaruta, label:"plugin" + match[2]}] });
-                });
+        if (match) {
+            //  Es plugin d'una Secció ????
+            var seccioID = match[1];
+            console.log("MATCH[SECCIO] === " + seccioID);
+            var baseURL = sessionStorage.getItem('contextPath');
+            var url6 = baseURL + `/webui/seccio/` + seccioID;
+            console.log("URL INFO SECCIO ==> " + url6);
+            axios.get(url6).then(res => {
+                var seccio = res.data;
+                console.log("BREADCRUMB ==> ACTUALITZANT STATE ==> " + seccio.nom + " [" + seccio.seccioID + "]");
+                this.setState({ items: [{ id: '/seccio/' + seccio.seccioID, label: seccio.nom }, { id: novaruta, label: "plugin" + match[2] }] });
+            });
+        } else {
+            if (location.pathname == '/') {
+                this.setState({ items: [] });
             } else {
                 // Altre cosa ...
+                console.log("BreadCRUMB ALTRE COSA : " + location.pathname);
                 this.setState({ items: [{ id: location.pathname, label: location.pathname }] });
             }
         }
     }
+
 
 
     componentWillMount() {
@@ -73,57 +86,52 @@ class Breadcrumb extends Component {
     }
 
     render() {
-
-        //var autenticat = sessionStorage.getItem('autenticat');
-
         let itemDOMS = [];
 
+        var items = this.state.items;
 
-    // itemDOMS.push(<li key='inici'><Link to={ '/' }>{ i18n.t('mollaInici') }</Link></li>);
+        let renderHTML = '';
 
-    let items = this.props.items;
+        if (typeof items !== "undefined" && items.length != 0) {
 
-    var pluginID = sessionStorage.getItem('pluginActiu');
-    var pluginNom = "";
-    if(pluginID !== null) {
-        pluginNom = plugins.filter(s => s.pluginID === pluginID).map(s => (
-            <p>{s.nom}</p>
-        ));
-    }
+            //itemDOMS.push(<li key='inici'><NavLink to={'/'}>{i18n.t('mollaInici')}</NavLink></li>);
+            const TOTAL_ITEMS = items.length;
 
-    if (typeof items !== "undefined") {
+            itemDOMS.push(<li key='inici'><Link to={'/'}>{i18n.t('mollaInici')}</Link></li>);
 
-        itemDOMS.push(<li key='inici'><NavLink to={ '/' }>{ i18n.t('mollaInici') }</NavLink></li>);
+            console.log("RENDER Breadcrumb items: " + TOTAL_ITEMS);
 
-        const TOTAL_ITEMS = items.length;
-
-        items.forEach(({id, label}, index) => {
-
-            if(index < TOTAL_ITEMS - 1) {
-                itemDOMS.push(<li key={index}><a href={ id }><Link to={ id }>{i18n.t(label)}</Link></a></li>);
-            } else  {
-
-                if(i18n.t(label) === 'plugin'){
-                    itemDOMS.push(<li id="plugin" key={index}>{pluginNom}</li>);
-                }else {
-                    itemDOMS.push(<li key={index}><span className="imc-separador"> &gt; </span>{i18n.t(label)}</li>);
+            items.forEach(({ id, label }, index) => {
+                if (index < TOTAL_ITEMS - 1) {
+                    itemDOMS.push(<li key={index}><span className="imc-separador"> &gt;</span><Link to={id}>{label}</Link></li>);
+                } /*else {
+                    if (i18n.t(label) === 'plugin') {
+                        itemDOMS.push(<li id="plugin" key={index}>{pluginNom}</li>);
+                    } else {
+                        itemDOMS.push(<li key={index}><span className="imc-separador"> &gt; </span>{i18n.t(label)}</li>);
+                    }
                 }
-            }
+                */
 
-        });
-    }
+            });
+
+            renderHTML = <ul className="mollaPa" id="imc-molla-pa">
+                            {itemDOMS}
+                        </ul>;
+
+
+        }
+
+        console.log("RENDER Breadcrumb itemsDOMS: " + itemDOMS.length);
 
         return (
-            <div>
-                {itemDOMS.length > 0 &&
-                    <ul className="mollaPa" id="imc-molla-pa">
-                        {itemDOMS}
-                    </ul>
-                }
+            <div id="breadcrumb">
+                {renderHTML}
             </div>
         )
     }
 }
+
 
 export default withTranslation()(withRouter(Breadcrumb));
 /*

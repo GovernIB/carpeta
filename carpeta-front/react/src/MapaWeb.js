@@ -77,7 +77,7 @@ class MapaWeb extends Component {
 
 		clearTimeout(sessionStorage.getItem('idTimeOut'));
 
-		//var motlla = <Breadcrumb items={breadcrumbPaths.MapaWeb} autenticat={autenticat}/>
+		//var motlla = <*Breadcrumb items={breadcrumbPaths.MapaWeb} autenticat={autenticat}/>
 
 		return (
 			<div className="container-contenido">

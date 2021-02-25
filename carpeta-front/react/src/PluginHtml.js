@@ -76,8 +76,8 @@ class PluginHtml extends Component {
             return null;
         }
 
-        console.log("PLUGIN HTML 111111  !!!!!!!");
-        document.querySelector("#continguts").classList.add('espaiContingut');
+        //console.log("PLUGIN HTML 111111  !!!!!!!");
+        //document.querySelector("#continguts").classList.add('espaiContingut');
 
         console.log("PLUGIN HTML 222222  !!!!!!!");
 
@@ -157,12 +157,12 @@ class PluginHtml extends Component {
 
         clearTimeout(sessionStorage.getItem('idTimeOut'));
 
-        var motlla = <Breadcrumb items={breadcrumbPathsAut.Plugin} autenticat={autenticat}/>
+        //var motlla = <*Breadcrumb items={breadcrumbPathsAut.Plugin} autenticat={autenticat}/>
 
 
         return (
             <div>
-                {motlla}
+                {/*motlla*/}
                 <ExpirarSessio />
                 <div id="substituir" />
             </div>

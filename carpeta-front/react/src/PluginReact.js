@@ -73,11 +73,11 @@ class PluginReact extends Component {
 
         clearTimeout(sessionStorage.getItem('idTimeOut'));
 
-        var motlla = <Breadcrumb items={breadcrumbPathsAut.Plugin} autenticat={autenticat}/>
+        //var motlla = <*Breadcrumb items={breadcrumbPathsAut.Plugin} autenticat={autenticat}/>
 
 		return (
             <div>
-                {motlla}
+                {/*motlla*/}
                 <div id="contentplugin"></div>
 
                 <div>

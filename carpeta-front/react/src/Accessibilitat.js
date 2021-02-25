@@ -14,11 +14,11 @@ class Accessibilitat extends Component {
 
         clearTimeout(sessionStorage.getItem('idTimeOut'));
 
-        var motlla = <Breadcrumb items={breadcrumbPaths.Accessibilitat} autenticat={autenticat}/>;
+        //var motlla = <*Breadcrumb items={breadcrumbPaths.Accessibilitat} autenticat={autenticat}/>;
 
         return (
             <div className="container-contenido">
-                {motlla}
+                {/*motlla*/}
                 <ExpirarSessio />
                 <div className="infoNoMenu">
                     <h2><p className="titol h2">{t('accessibilitatTitol')}</p></h2>

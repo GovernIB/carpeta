@@ -157,7 +157,7 @@ class MenuRapid extends Component {
 
         if(seccionsS != null || gestionsHtml != null || gestionsReact != null || enllasosPseusoPluginMenu != null){
             mostrar = <div>
-                <nav className="navbar navbar-expand-sm bg-white p-0 fixo ocult" id="menuRapid">
+                <nav className="navbar navbar-expand-sm bg-white p-0" id="menuRapid">
                     <ul className="navbar-nav p-3 mRapidGlobal" id="llistaMenuRapid">
                         {seccionsS}
                         {gestionsHtml}

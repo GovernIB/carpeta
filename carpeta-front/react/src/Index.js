@@ -63,7 +63,7 @@ class Index extends Component {
         var user = sessionStorage.getItem('usuariNomComplet');
 
         var infoUsuari;
-        if (auth == '1' && user != null) {
+        if (auth === '1' && user != null) {
             infoUsuari = <div className="imc-titol usuari">
                 <nav className="imc--contingut">
                     <h3>
@@ -83,16 +83,13 @@ class Index extends Component {
             infoUsuari = '';
         }
 
-        /*
-                const styleContenidor = (auth === '1')? { marginTop: '4.5em !important'} : {};
-                style={styleContenidor}
-
-
-                */
+    
+        const currentlocation = this.props.location;
+        console.log("\n\n   XXXXXXXXXX   LOCATION: " + currentlocation.pathname);
 
 
 
-
+        const styleContenidor = (auth === '1')? { marginTop: '80px'} : { marginTop: '40px'};
 
         return (
             <div>
@@ -100,7 +97,7 @@ class Index extends Component {
                 <MenuLateral />
 
                 {/* Contingut dret */}
-                <div className="contenedor" id="contenedor">
+                <div className="contenedor" id="contenedor" style={styleContenidor}>
 
                     {/* Capçalera */}
                     <BarraMenu />
@@ -114,10 +111,10 @@ class Index extends Component {
                     <MenuDesllisant  />
 
                     {/* Zona Contingut */}
-                    <div className="imc-continguts" id="continguts">
+                    <div className="imc-continguts" id="continguts" >
 
                         {/* Molla de pa */}
-                        <Breadcrumb  />
+                        <Breadcrumb  currentlocation={currentlocation} />
 
                         {/* Avisos Front */}
                         <AvisosFront  />
@@ -127,12 +124,8 @@ class Index extends Component {
                             <div className="loader"/>
                         </div>
 
-                        {/*  XYZ ZZZ   S'ha de substituir per Routes*/}
-                        <div id="contingut" className="pt-2">
-                        </div>
 
-                        {auth === '1' ? <div className="pt-5" /> : <div/>}
-                        <div id="contingut2222" className="pt-2">
+                        <div id="contingutok" className="pt-2">
                             <Switch>
                                 <Route exact path="/" component={Inici} refresh="true" />
 

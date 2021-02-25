@@ -7,28 +7,36 @@ class BarraMenu extends Component {
 	constructor(){
 		super();
 		this.state = {
-			enllasosMenuBar: []
+			enllasosMenuBar: null
 		}
 	}
 
 
 	componentDidMount() {
-		var baseURL = sessionStorage.getItem('contextPath');
-		var url = baseURL + `/webui/menubarlinks`;
 
-		axios.get(url).then(res => {
-			const enllasosMenuBar = res.data;
-			this.setState({ enllasosMenuBar });
-		})
+		var auth = sessionStorage.getItem('autenticat');
+
+		if (auth ==='1') {
+			var baseURL = sessionStorage.getItem('contextPath');
+			var url = baseURL + `/webui/menubarlinks`;
+
+			axios.get(url).then(res => {
+				const enllasosMenuBar = res.data;
+				this.setState({ enllasosMenuBar });
+			});
+		}
 	}
 
 	componentWillReceiveProps(lng) {
-		var baseURL = sessionStorage.getItem('contextPath');
-		var url = baseURL + `/webui/menubarlinks`;
-		axios.get(url).then(res => {
-			const enllasosMenuBar = res.data;
-			this.setState({ enllasosMenuBar });
-		})
+		var auth = sessionStorage.getItem('autenticat');
+		if (auth ==='1') {
+			var baseURL = sessionStorage.getItem('contextPath');
+			var url = baseURL + `/webui/menubarlinks`;
+			axios.get(url).then(res => {
+				const enllasosMenuBar = res.data;
+				this.setState({ enllasosMenuBar });
+			});
+		}
 	}
 
 	render() {
@@ -38,7 +46,7 @@ class BarraMenu extends Component {
 
 		let enllasosBarraMenu;
 
-		if(!this.state.enllasosMenuBar.length || auth == '0'){
+		if(auth === '0' || !this.state.enllasosMenuBar ){
 			enllasosBarraMenu = "";
 		} else{
 			enllasosBarraMenu = this.state.enllasosMenuBar.map((s, i) => (
