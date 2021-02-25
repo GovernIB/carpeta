@@ -36,19 +36,10 @@ class Index extends Component {
 
 
 
-    constructor() {
-        super();
-
-
-
+    constructor(props) {
+        super(props);
     }
-    componentWillMount() {
-        console.log("Entra a INDEX WILL MOUNT");
-
-    }
-    componentWillUnmount() {
-
-    }
+  
 
 
     render() {

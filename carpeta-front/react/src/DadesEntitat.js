@@ -11,7 +11,7 @@ class DadesEntitat extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
 
         var urlBase = window.location.href;
         var url = urlBase + "webui/textinformatiuentitat";

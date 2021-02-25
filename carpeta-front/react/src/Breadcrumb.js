@@ -23,9 +23,7 @@ class Breadcrumb extends Component {
             console.log(" BREADCRUMB Constructor currentlocation => " + this.props.currentlocation);
         }
 
-        //if (this.props.currentlocation && this.props.currentlocation.pathname != '/') {
-        //    this.canviatRoute(this.props.currentlocation, "PUSH");
-        //}
+        
         
     }
 
@@ -76,14 +74,6 @@ class Breadcrumb extends Component {
         }
     }
 
-
-
-    componentWillMount() {
-    }
-
-    componentWillReceiveProps(lng) {
-
-    }
 
     render() {
         let itemDOMS = [];

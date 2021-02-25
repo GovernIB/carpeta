@@ -87,9 +87,9 @@ class IniciPublic extends Component {
                                 <div className="col-md-5 border-0 columna2Inici">
 
                                     <p className="margen-top-clave pb-3">
-                                        <a className="btn btn-primary carpeta-btn botoAccedirCarpeta" href="javascript: var loc = new URL(window.location.href);  window.location.href=('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host ) )" role="button"><span
+                                        <span className="btn btn-primary carpeta-btn botoAccedirCarpeta" onClick={ () => {  var loc = new URL(window.location.href);  window.location.href=('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host ) )} } role="button"><span
                                             className="oi oi-account-login" title=""
-                                            aria-hidden="true" /> {t('paginaIniciBotoAccedir')}</a>
+                                            aria-hidden="true" /> {t('paginaIniciBotoAccedir')}</span>
                                     </p>
 
                                     <p className="titol h5">{t('tramitacioAnonimaTitol')}</p>
