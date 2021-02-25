@@ -53,7 +53,15 @@
             <version>1.1.8</version>
             <type>war</type>
         </dependency>
-        <!-- FRONT END
+		<!-- FRONT END -->
+		<!-- API EXTERNA START -->
+		<dependency>
+            <groupId>es.caib.carpeta</groupId>
+            <artifactId>carpeta-api-externa</artifactId>
+			<version>1.1.8</version>
+            <type>war</type>
+        </dependency>
+        <!-- API EXTERNA END
 
         <dependency>
             <groupId>es.caib.carpeta</groupId>
@@ -215,7 +223,15 @@
                             <contextRoot>/carpetafront</contextRoot>
                             <bundleFileName>carpeta-front.war</bundleFileName>
                         </webModule>
-                        <!-- FRONT END
+                        <!-- FRONT END -->
+						<!-- API EXTERNA START -->
+						<webModule>
+                            <groupId>es.caib.carpeta</groupId>
+                            <artifactId>carpeta-api-externa</artifactId>
+                            <contextRoot>/carpeta/api/externa</contextRoot>
+                            <bundleFileName>carpeta-api-externa.war</bundleFileName>
+                        </webModule>
+						<!-- API EXTERNA END 
                         <webModule>
                             <groupId>es.caib.carpeta</groupId>
                             <artifactId>carpeta-api</artifactId>

@@ -504,6 +504,7 @@
         <module>carpeta-ejb</module>
         <module>carpeta-back</module>
         <module>carpeta-front</module>
+		<module>carpeta-api-externa</module>
         <!--
         <module>carpeta-api</module>
         -->
