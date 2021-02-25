@@ -102,6 +102,9 @@ img:hover {
 	text-transform: uppercase;
 	padding-right: 1em;
 }
+.estilUsuari, .nivellAut { 
+	font-size: 1.1rem;
+}
 .usuari{
 	top: 2.5em;
 	/*height: 2em;*/
