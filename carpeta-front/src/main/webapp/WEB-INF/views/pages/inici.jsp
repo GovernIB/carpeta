@@ -16,36 +16,36 @@
 	
 	<!-- Scripts -->
 	<!-- google analytics -->
-	<script type="text/javascript" async="" src="${pageContext.request.contextPath}/src/assets/js/ga.js"></script>
-	<script src="${pageContext.request.contextPath}/src/assets/js/jquery-3.5.0.js"></script>
-	<script src="${pageContext.request.contextPath}/src/assets/js/jquery-ui.min.js"></script>
-	<script src="${pageContext.request.contextPath}/src/assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" async="" src="<c:url value="/src/assets/js/ga.js"/>"></script>
+	<script src="<c:url value="/src/assets/js/jquery-3.5.0.js"/>"></script>
+	<script src="<c:url value="/src/assets/js/jquery-ui.min.js"/>"></script>
+	<script src="<c:url value="/src/assets/js/bootstrap.min.js"/>"></script>
 	<!-- Datetimpicker -->
-	<script src="${pageContext.request.contextPath}/src/assets/js/moment-with-locales.min.js"></script>
-	<script src="${pageContext.request.contextPath}/src/assets/js/bootstrap-datetimepicker.js"></script>
+	<script src="<c:url value="/src/assets/js/moment-with-locales.min.js"/>"></script>
+	<script src="<c:url value="/src/assets/js/bootstrap-datetimepicker.js"/>"></script>
 	<!-- Necessari per les cookies -->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/src/assets/js/jquery.slimscroll.min.js"></script>
-	<script src="${pageContext.request.contextPath}/src/assets/js/modernizr.js"></script>
+	<script type="text/javascript" src="<c:url value="/src/assets/js/jquery.slimscroll.min.js"/>"></script>
+	<script src="<c:url value="/src/assets/js/modernizr.js"/>"></script>
 	<!-- Del Goib -->
-	<script src="${pageContext.request.contextPath}/src/assets/js/globales.js" type="text/javascript"></script>
+	<script src="<c:url value="/src/assets/js/globales.js"/>" type="text/javascript"></script>
 	<!-- Bootstrap compatibilitat amb IE -->
-	<script src="${pageContext.request.contextPath}/src/assets/js/respond.js" type="text/javascript"></script>
+	<script src="<c:url value="/src/assets/js/respond.js"/>" type="text/javascript"></script>
 	
-	<script src="${pageContext.request.contextPath}/src/assets/js/jquery.dataTables.min.js" type="text/javascript"></script>
-	<script src="${pageContext.request.contextPath}/src/assets/js/datetime-moment.js" type="text/javascript"></script>
+	<script src="<c:url value="/src/assets/js/jquery.dataTables.min.js"/>" type="text/javascript"></script>
+	<script src="<c:url value="/src/assets/js/datetime-moment.js"/>" type="text/javascript"></script>
 
 	<!-- Scripts per Components React -->
-	<script src="${pageContext.request.contextPath}/src/utils/carpeta_react.js" type="text/javascript"></script>
+	<script src="<c:url value="/src/utils/carpeta_react.js"/>" type="text/javascript"></script>
 
 	<!-- ESTILS -->
-	<link href="${pageContext.request.contextPath}/src/assets/css/bootstrap.min.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/src/assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/src/assets/css/jquery-ui.min.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/src/assets/css/goib.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/src/assets/css/carpeta.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/src/assets/css/open-iconic-bootstrap.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/src/assets/css/jquery.dataTables.min.css" rel="stylesheet">
-	<link href="${pageContext.request.contextPath}/src/assets/css/datatables.min.css" rel="stylesheet">
+	<link href="<c:url value="/src/assets/css/bootstrap.min.css"/>" rel="stylesheet">
+	<link href="<c:url value="/src/assets/css/bootstrap-datetimepicker.min.css"/>" rel="stylesheet">
+	<link href="<c:url value="/src/assets/css/jquery-ui.min.css"/>" rel="stylesheet">
+	<link href="<c:url value="/src/assets/css/goib.css"/>" rel="stylesheet">
+	<link href="<c:url value="/src/assets/css/carpeta.css"/>" rel="stylesheet">
+	<link href="<c:url value="/src/assets/css/open-iconic-bootstrap.css"/>" rel="stylesheet">
+	<link href="<c:url value="/src/assets/css/jquery.dataTables.min.css"/>" rel="stylesheet">
+	<link href="<c:url value="/src/assets/css/datatables.min.css"/>" rel="stylesheet">
 
   </head>
 
@@ -107,13 +107,13 @@
     <div id="fullpagecarpetafront"></div>
 
 	<!-- js react -->
-	<script src = "${pageContext.request.contextPath}/dist/reactjs_main.js" type="text/javascript"></script>
+	<script src = "<c:url value="/dist/reactjs_main.js"/>" type="text/javascript"></script>
 	<!-- menú lateral -->
-	<script src="${pageContext.request.contextPath}/src/assets/js/menu-lateral.js" type="text/javascript"></script>
+	<script src="<c:url value="/src/assets/js/menu-lateral.js"/>" type="text/javascript"></script>
 	<!-- acceptar cookies -->
-	<script src="${pageContext.request.contextPath}/src/assets/js/aceptar_cookies.js" type="text/javascript"></script>
+	<script src="<c:url value="/src/assets/js/aceptar_cookies.js"/>" type="text/javascript"></script>
 	<!-- Tramitacio Anomima   -->
-	<%-- <script src="${pageContext.request.contextPath}/src/assets/js/tramitacio_anonima.js" type="text/javascript"></script> --%>
+	<%-- <script src="<c:url value="/src/assets/js/tramitacio_anonima.js"/>" type="text/javascript"></script> --%>
 
   </body>
 </html>
