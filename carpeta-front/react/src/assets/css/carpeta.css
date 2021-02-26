@@ -101,7 +101,7 @@ img:hover {
 	text-transform: uppercase;
 	padding-right: 1em;
 }
-.estilUsuari, .nivellAut { 
+.estilUsuari, .nivellAut {
     font-size: 1.1rem;
 }
 .usuari{
@@ -126,12 +126,12 @@ img:hover {
 }*/
 .boton-menu{
 	background-color: transparent;
-	font-size: 1.1em;
-	font-weight: bold;
-	color: #545454;
-	text-transform: uppercase;
-	padding: 1em 0.6em;
-	border: none;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #545454;
+  text-transform: uppercase;
+  padding: 0.7em 0.6em;
+  border: none;
 }
 .boton-menu:hover{
   	color: #cc073c;

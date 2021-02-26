@@ -108,8 +108,6 @@
 
 	<!-- js react -->
 	<script src = "<c:url value="/dist/reactjs_main.js"/>" type="text/javascript"></script>
-	<!-- menú lateral -->
-	<script src="<c:url value="/src/assets/js/menu-lateral.js"/>" type="text/javascript"></script>
 	<!-- acceptar cookies -->
 	<script src="<c:url value="/src/assets/js/aceptar_cookies.js"/>" type="text/javascript"></script>
 	<!-- Tramitacio Anomima   -->

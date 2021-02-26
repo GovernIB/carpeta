@@ -5,8 +5,9 @@ import axios from 'axios'
 import LlistatDePlugins from './LlistatDePlugins';
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
+import { menuDesllisantJS } from "./assets/js/menu-lateral";
 /**
- * 
+ *
  * @author anadal Migració a ROUTER
  */
 class MenuDesllisant extends Component {
@@ -36,7 +37,6 @@ class MenuDesllisant extends Component {
 
 	componentDidMount() {
 
-
 		console.log("MENU DESLISSTANT componentDidMount()");
 
 		var baseURL = sessionStorage.getItem('contextPath');
@@ -64,15 +64,16 @@ class MenuDesllisant extends Component {
 			this.setState({ menupseudoplugin: res.data, loading: this.state.loading + 1 });
 		});
 
-		// 0 == Nivell Arell        
+		// 0 == Nivell Arell
 
         var url5 =  baseURL + `/webui/seccions/0`;
 		axios.get(url5).then(res => {
 			this.setState({ seccions: res.data, loading: this.state.loading + 1 });
-			
+
         });
 
-		
+		menuDesllisantJS();
+
 	}
 
 
@@ -112,12 +113,12 @@ class MenuDesllisant extends Component {
 			this.setState({ menupseudoplugin: res.data, loading: this.state.loading + 1 });
 		});
 
-		// 0 == Nivell Arell        
+		// 0 == Nivell Arell
 
         var url5 =  baseURL + `/webui/seccions/0`;
 		axios.get(url5).then(res => {
 			this.setState({ seccions: res.data, loading: this.state.loading + 1 });
-			
+
         });
 
 	}
@@ -125,7 +126,7 @@ class MenuDesllisant extends Component {
 
 	infoHtml(missatge, pluginID) {
 		alert(missatge);
-		
+
 		if (this.props.history) {
             console.log("MENU DESLLISSANT => EXISTEIX  HISTORY !!!!!");
             this.props.history.push("/pluginhtml/" + pluginID);
@@ -149,7 +150,7 @@ class MenuDesllisant extends Component {
 		alert(missatge);
 	}
 
-	
+
 	canviarIdioma(lng) {
 
 		// Canviam servidor
@@ -265,7 +266,7 @@ class MenuDesllisant extends Component {
 		const plugins = this.state.plugins;
 
 		var accessibilitat;
-		accessibilitat = <li> 
+		accessibilitat = <li>
 		<Link to="/accessibilitat" className="imc-marc-ico imc--accessibilitat" params={{ items: "hello" }}>
 	{/*<a href="javascript:newwAccessibilitat('contingut', '1');"
 							className="imc-marc-ico imc--accessibilitat" id="imc-marc-accessibilitat"
@@ -306,7 +307,7 @@ class MenuDesllisant extends Component {
 
 			seccionsS = this.state.seccions.map((s, i) => (
 				<li id={i}>
-					
+
 					<Link to={"/seccio/" + s.seccioID} >
 						<img src={s.iconaID} title="" alt={s.descripcio} className="imc-icona iconaEnllas" />
 						<span>{s.nom}</span>
@@ -314,7 +315,7 @@ class MenuDesllisant extends Component {
 					{/*</a>*/}
 				</li>
 			));
-		
+
 
 			sortir = <li><a href="sortir" className="imc-marc-ico imc--sortir" id="imc-marc-sortir"
 							title={t('menuSortir')}><span>{t('menuSortir')}</span></a></li>;
@@ -376,7 +377,7 @@ class MenuDesllisant extends Component {
 		}
 
 		if (autenticat === '0') {
-			
+
 			seccionsS = '';
 			plugHtml = '';
 			plugReact = '';
@@ -411,33 +412,33 @@ class MenuDesllisant extends Component {
 		}
 
 		console.log("MENUDESLLISSANT :: INICI RENDER ");
-		return (
-			<div className="imc-marc" id="imc-marc" tabIndex="-1" aria-hidden="true">
-				<div className="imc--fons"/>
 
-				<div className="imc-marc-menu" id="imc-marc-menu" aria-hidden="true">
-					<div className="imc-cercador" id="imc-cercador">
-					</div>
-					<ul>
-						{enllasosMenu}
-						<li className="imc-marc-ico imc--idioma">
-							{boto_ca} {separacio1} {boto_es} {separacio2} {boto_en}
-						</li>
-						{accessibilitat}
-						{seccionsS}
-						{plugHtml}
-						{plugHtmlInfo}
-						{plugHtmlWarning}
-						{plugHtmlError}
-						{plugReact}
-						{plugReactInfo}
-						{plugReactWarning}
-						{plugReactError}
-						{enllasosPseusoPluginMenu}
-						{sortir}
-						{canviarEntitat}
-					</ul>
+
+
+		return (
+			<div>
+				<div className="imc-cercador" id="imc-cercador">
 				</div>
+				<ul>
+					{enllasosMenu}
+					<li className="imc-marc-ico imc--idioma">
+						{boto_ca} {separacio1} {boto_es} {separacio2} {boto_en}
+					</li>
+					{accessibilitat}
+					{seccionsS}
+					{plugHtml}
+					{plugHtmlInfo}
+					{plugHtmlWarning}
+					{plugHtmlError}
+					{plugReact}
+					{plugReactInfo}
+					{plugReactWarning}
+					{plugReactError}
+					{enllasosPseusoPluginMenu}
+					{sortir}
+					{canviarEntitat}
+				</ul>
+
 			</div>
 		);
 	}

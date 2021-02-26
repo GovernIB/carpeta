@@ -1,6 +1,5 @@
-// Document JavaScript
+function menuDesllisantJS() {
 
-// elements
 
 var	imc_html = $("html"),
 	imc_marc = $("#imc-marc"),
@@ -84,7 +83,7 @@ $.fn.appRellisca = function(opcions){
 
 				posX = e.touches[0].screenX;
 				menu_pos = parseInt(elm.css("transform").split(',')[4]);
-				menu_pos_limit = menu_pos/2;
+				var menu_pos_limit = menu_pos/2;
 				pos_marcX = menu_pos;
 
 				elm
@@ -236,3 +235,5 @@ Modernizr
 
 		}
 	});
+}
+export { menuDesllisantJS }
