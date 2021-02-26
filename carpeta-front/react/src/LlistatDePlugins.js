@@ -157,8 +157,8 @@ class LlistatDePlugins extends Component {
         const styleDesc =  { fontSize: '80%', color: '#666', textAlign: 'center' } ;
 
 
-        seccionsS = seccions.map(s => (
-            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
+        seccionsS = seccions.map((s, i) => (
+            <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
                 <Link to={baseSeccio + "/seccio/" + s.seccioID} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}  >
                     <span className="card-title titol pl-1 h3">
                         <img src={s.iconaID} alt="" title="" className="imc-icona" />
@@ -170,7 +170,7 @@ class LlistatDePlugins extends Component {
         ));
 
         menuPseudoPlugin = menupseudoplugin.map((s, i) => (
-            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
+            <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" >
                 <button alt={s.label} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}
                     onClick={() => window.open(s.url)} >
                     <span className="card-title titol pl-1 h3"><img
@@ -185,8 +185,8 @@ class LlistatDePlugins extends Component {
 
 
 
-        plugHtml = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 0).map(s => (
-            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
+        plugHtml = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 0).map((s, i) => (
+            <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
                 {/*
 
                 <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}
@@ -241,8 +241,8 @@ class LlistatDePlugins extends Component {
         ));
 
 
-        plugReact = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 0).map(s => (
-            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
+        plugReact = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 0).map((s, i) => (
+            <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
                 {/*<button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
                         onClick={event => window.location.href = "javascript:newwPluginnReact('contingut', '1', '" + s.pluginID + "');"}> */}
                 <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`} to={baseSeccio + "/pluginreact/" + s.pluginID} >

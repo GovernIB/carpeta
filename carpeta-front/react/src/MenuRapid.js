@@ -77,20 +77,17 @@ class MenuRapid extends Component {
 
 
             gestionsHtml = plugins.filter(s => s.reactComponent === 'false').map((s, i) => (
-                <li className="nav-item pr-4">
-                    {/*<a className="navCarpeta" href={"javascript:newwPluginnHtml('contingut', '1', '" + s.pluginID + "');"} title={s.nom}>*/}
+                <li key={i} className="nav-item pr-4">
                     <Link className="navCarpeta" to={"/pluginhtml/" + s.pluginID} >
                         <img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} alt="" title="" className="imc-icona" />
-
                         <span className="menuRapidView">{s.nom}</span>
                         </Link>
-                    {/*</a>*/}
                 </li>
             ));
 
 
             gestionsReact = plugins.filter(s => s.reactComponent === 'true').map((s, i) => (
-                    <li className="nav-item pr-4">
+                    <li key={i} className="nav-item pr-4">
                         {/*<a className="navCarpeta" href={"javascript:newwPluginnReact('contingut', '1', '" + s.pluginID + "');"} title={s.nom}>*/}
                         <Link className="navCarpeta" to={"/pluginreact/" + s.pluginID} >
                             <img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} alt="" title="" className="imc-icona" />
@@ -104,7 +101,7 @@ class MenuRapid extends Component {
                 enllasosPseusoPluginMenu = "";
             } else {
                 enllasosPseusoPluginMenu = this.state.menupseudoplugin.map((s, i) => (
-                    <li className="nav-item pr-4" key={i}>
+                    <li key={i} className="nav-item pr-4" key={i}>
                         <a className="navCarpeta" href={s.url} target="_blank" title={s.label}>
                             <img src={s.urllogo} alt="" title={s.label} className="imc-icona" />
                             <span className="menuRapidView">{s.label}</span>
@@ -115,7 +112,7 @@ class MenuRapid extends Component {
 
             const seccions = this.state.seccions;
             seccionsS = seccions.map((s, i) => (
-                <li className="nav-item pr-4" > 
+                <li key={i} className="nav-item pr-4" > 
                 <Link to={"/seccio/" + s.seccioID} className="navCarpeta">
                         <img src={s.iconaID} title={s.nom} alt={s.descripcio} className="imc-icona" />
                         <span className="menuRapidView">{s.nom}</span>

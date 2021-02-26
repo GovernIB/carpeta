@@ -34,6 +34,21 @@ class PluginReact extends Component {
 
                 }
             );
+
+            const pluginID = this.props.pluginID;
+            var urlBase = sessionStorage.getItem('contextPath');
+            var url = urlBase + "/pluginfront/showreactplugin/" + pluginID + "/" + i18n.language;
+
+            //  $(document).ready(function () {
+
+            // Per provocar el render !!!!
+                this.setState({loaded: true });
+
+                sessionStorage.setItem('idioma', i18n.language);
+                $('#contentplugin').load(url);
+            //}
+            
+            
         }
     }
 
@@ -47,13 +62,19 @@ class PluginReact extends Component {
             return '';
         }
 
+        /*
+        if (!this.state.loaded) {
+            return null;
+        }
+        */
+
 		const {t} = this.props;
 
         console.log(" PLUGIN REACT RENDER 222 pluginID " +  this.props.pluginID + "!!!!!");
         console.log(" PLUGIN REACT RENDER 333 seccioID " +  this.props.seccioID + "!!!!!");
 
 		const pluginID = this.props.pluginID;; //this.props.match.params.pluginId; //
-
+/*
         if (!this.state.loaded) {
 
             console.log("CARREGA INICIAL DEL PLUGIN !!!!!");
@@ -70,16 +91,12 @@ class PluginReact extends Component {
         } else {
             console.log("PLUGIN JA CARREGAT !!!!!");
         }
-
+*/
         clearTimeout(sessionStorage.getItem('idTimeOut'));
-
-        //var motlla = <*Breadcrumb items={breadcrumbPathsAut.Plugin} autenticat={autenticat}/>
 
 		return (
             <div>
-                {/*motlla*/}
                 <div id="contentplugin"></div>
-
                 <div>
                     <ExpirarSessio />
                     <div id="substituir"></div>

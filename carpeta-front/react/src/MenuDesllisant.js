@@ -257,7 +257,7 @@ class MenuDesllisant extends Component {
 				enllasosPseusoPluginMenu = "";
 			} else {
 				enllasosPseusoPluginMenu = this.state.menupseudoplugin.map((s, i) => (
-					<li id={i}>
+					<li key={i}>
 						<a href={s.url} target="_blank" title={s.nom}>
 							<img src={s.urllogo} title="" alt="" className="imc-icona iconaEnllas" />
 							<span>{s.label}</span>
@@ -267,7 +267,7 @@ class MenuDesllisant extends Component {
 			}
 
 			seccionsS = this.state.seccions.map((s, i) => (
-				<li id={i}>
+				<li key={i}>
 
 					<Link to={"/seccio/" + s.seccioID} >
 						<img src={s.iconaID} title="" alt={s.descripcio} className="imc-icona iconaEnllas" />
@@ -282,8 +282,8 @@ class MenuDesllisant extends Component {
 							title={t('menuSortir')}><span>{t('menuSortir')}</span></a></li>;
 
 
-			plugHtml = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 0).map(s => (
-				<li>
+			plugHtml = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 0).map((s,i) => (
+				<li key={i}>
 				{/*
 				<a href={"javascript:newwPluginnHtml('contingut', '1', '" + s.pluginID + "');"} title={s.nom}> */}
 					<Link to={"/pluginhtml/" + s.pluginID} >
@@ -293,24 +293,24 @@ class MenuDesllisant extends Component {
 					{/*</a> */}
 				</li>
 			));
-			plugHtmlInfo = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 1).map(s => (
-				<li><button title={s.nom} className="botoMenu alert1menu" onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}><img
+			plugHtmlInfo = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 1).map((s,i) => (
+				<li key={i}><button title={s.nom} className="botoMenu alert1menu" onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}><img
 					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
-			plugHtmlWarning = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 2).map(s => (
-				<li><button title={s.nom} className="botoMenu alert2menu" onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}><img
+			plugHtmlWarning = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 2).map((s,i) => (
+				<li key={i}><button title={s.nom} className="botoMenu alert2menu" onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}><img
 					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
 			plugHtmlError = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 3).map(s => (
-				<li><button title={s.nom} className="botoMenu alert3menu" onClick={(event) => this.error(s.missatge)}><img
+				<li key={i}><button title={s.nom} className="botoMenu alert3menu" onClick={(event) => this.error(s.missatge)}><img
 					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
 
-			plugReact = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 0).map(s => (
-				<li>
+			plugReact = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 0).map((s,i) => (
+				<li key={i}>
 				    {/*<a href={"javascript:newwPluginnReact('contingut', '1', '" + s.pluginID + "');"} title={s.nom}>*/}
 					<Link to={"/pluginreact/" + s.pluginID} >
 					<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
@@ -319,18 +319,18 @@ class MenuDesllisant extends Component {
 					{/*</a>*/}
 				</li>
 			));
-			plugReactInfo = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 1).map(s => (
-				<li><button title={s.nom} className="botoMenu alert1menu" onClick={(event) => this.infoReact(s.missatge,s.pluginID)}><img
+			plugReactInfo = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 1).map((s,i) => (
+				<li key={i}><button title={s.nom} className="botoMenu alert1menu" onClick={(event) => this.infoReact(s.missatge,s.pluginID)}><img
 					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
-			plugReactWarning = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 2).map(s => (
-				<li><button title={s.nom} className="botoMenu alert2menu" onClick={(event) => this.infoReact(s.missatge,s.pluginID)}><img
+			plugReactWarning = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 2).map((s,i) => (
+				<li key={i}><button title={s.nom} className="botoMenu alert2menu" onClick={(event) => this.infoReact(s.missatge,s.pluginID)}><img
 					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
-			plugReactError = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 3).map(s => (
-				<li><button title={s.nom} className="botoMenu alert3menu" onClick={(event) => this.error(s.missatge)}><img
+			plugReactError = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 3).map((s,i) => (
+				<li key={i}><button title={s.nom} className="botoMenu alert3menu" onClick={(event) => this.error(s.missatge)}><img
 					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
