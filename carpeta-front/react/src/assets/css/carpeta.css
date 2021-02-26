@@ -166,6 +166,16 @@ img:hover {
 .imc-logo li a::before {
 	content: none;
 }
+.imc-logo ul li a .imatgeMobil {
+    filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+}
+.imc-logo ul li .imatgeMobil:hover {
+    filter: grayscale(0%);
+    -moz-filter: grayscale(0%);
+    -webkit-filter: grayscale(0%);
+}
 .alert1{
 	border-color: blue;
 	border-width: medium;
@@ -423,7 +433,14 @@ img:hover {
 .ocult{
 	display: none;
 }
-
+.imc-bt-xarxa img:hover {
+     filter: opacity(0.8);
+     -webkit-filter: opacity(0.8);
+     -moz-filter: opacity(0.8);
+}
+a.imc-bt-xarxa:hover {
+    background-color: #eee !important;
+}
 
 /* HomePage */
 .homePage .titol.h5 { text-transform: none !important; }
