@@ -126,15 +126,15 @@ img:hover {
 }*/
 .boton-menu{
 	background-color: transparent;
-  font-size: 1.1em;
-  font-weight: bold;
-  color: #545454;
-  text-transform: uppercase;
-  padding: 1em 0.6em;
-  border: none;
+	font-size: 1.1em;
+	font-weight: bold;
+	color: #545454;
+	text-transform: uppercase;
+	padding: 1em 0.6em;
+	border: none;
 }
 .boton-menu:hover{
-  color: #cc073c;
+  	color: #cc073c;
 }
 .imc-separador{
 	/*font-size: 0.750em;*/
@@ -583,7 +583,7 @@ body {
 	padding: 0;
 }
 a.nav-link.movil:hover {
-	 color: #000 !important;
+	color: #000 !important;
 }
 a.dropdown-item.movil:hover {
 	color: #4dba79 !important;
