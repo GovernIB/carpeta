@@ -61,3 +61,6 @@ nb-configuration.xml
 /genapp.bat
 /genapp/genapp.bat
 /genapp
+/dependencies.txt
+/scripts/bbdd/genappbase.sql
+/scripts/bbdd/postgresql/nouplugin.sql
