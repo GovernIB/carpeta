@@ -19,6 +19,13 @@ class LlistatDePlugins extends Component {
             seccions: [],
             seccio: null
         }
+        this.canviIdioma = this.canviIdioma.bind(this);
+        i18n.on('languageChanged', this.canviIdioma);
+    }
+
+    canviIdioma(lng) {
+        console.log(" CANVI IDIOMA EN LLISTAT DE PLUGINS A ]" + lng+ "[")
+        this.componentDidMount();
     }
 
     componentDidMount() {
@@ -63,6 +70,7 @@ class LlistatDePlugins extends Component {
 
     }
 
+    /*
     componentWillReceiveProps(lng) {
 
         // XYZ ZZZ componentWillMount();
@@ -108,6 +116,7 @@ class LlistatDePlugins extends Component {
 
 
     }
+    */
 
     infoHtml(missatge, pluginID) {
 
@@ -192,7 +201,7 @@ class LlistatDePlugins extends Component {
         }
 
         
-        const styleDesc =  { fontSize: '80%', color: '#666' } ;
+        const styleDesc =  { fontSize: '80%', color: '#666', textAlign: 'center' } ;
 
 
         seccionsS = seccions.map(s => (

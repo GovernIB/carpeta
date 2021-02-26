@@ -22,7 +22,16 @@ class MenuDesllisant extends Component {
 			seccions : []
 		}
 		this.canviarIdioma = this.canviarIdioma.bind(this);
-	}
+
+		this.canviatIdioma = this.canviatIdioma.bind(this);
+        i18n.on('languageChanged', this.canviatIdioma);
+    }
+
+    canviatIdioma(lng) {
+        console.log(" CANVIAT IDIOMA EN LLISTAT DE PLUGINS A ]" + lng+ "[")
+		this.setState({ loading: 0 });
+        this.componentDidMount();
+    }
 
 
 	componentDidMount() {
@@ -71,7 +80,7 @@ class MenuDesllisant extends Component {
 
 
 
-
+/*
 	componentWillReceiveProps(lng) {
 
 		// XYZ ZZZ  componentDidMount i componentWillReceiveProps contenen el mateix, es podrien centralitzar en un sol mètode ????
@@ -111,12 +120,8 @@ class MenuDesllisant extends Component {
 			
         });
 
-
-		
-		
-		
-		
 	}
+	*/
 
 	infoHtml(missatge, pluginID) {
 		alert(missatge);
@@ -158,7 +163,6 @@ class MenuDesllisant extends Component {
 			sessionStorage.setItem("langActual", lng);
 			i18n.changeLanguage(lng);
 
-		    this.setState({ loading: 0 });
 		}).catch(error => {
 			alert("XYZ ZZZ No s'ha pogut actualitzar l´idioma. Error: " + error);
 		});
