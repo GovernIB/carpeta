@@ -14,34 +14,15 @@ class PluginHtml extends Component {
             contingut: '',
             loading: true
         }
+        this.canviatIdioma = this.canviatIdioma.bind(this);
+        i18n.on('languageChanged', this.canviatIdioma);
     }
 
-    /*
-    componentWillMount() {
-        var baseURL = sessionStorage.getItem('contextPath');
-        var url = baseURL + `/pluginfront/veureplugins`;
-        axios.get(url).then(res => {
-            const pluginID = this.props.match.params.pluginId;
-            console.log("PLUGIN HTML ID =" + pluginID + "  !!!!!!!");
-            this.setState({ contingut:res.data, loading: false });
-        });
+    canviatIdioma(lng) {
+        console.log(" CANVIAT IDIOMA EN IniciPublic A ]" + lng+ "[");
+        this.componentDidMount();
     }
-    */
 
-    componentWillReceiveProps() {
-        var autenticat = sessionStorage.getItem('autenticat');;
-        if (autenticat === '1') {
-            this.setState({ loading: true });
-            this.fakeRequest().then(() => {
-                const el = document.querySelector(".loader-container");
-                if (el) {
-                    document.querySelector("#carregant").classList.add('loaderOcult');
-                    this.setState({ loading: false });
-                }
-            });
-        }
-
-    }
 
     componentDidMount() {
         var autenticat = sessionStorage.getItem('autenticat');;

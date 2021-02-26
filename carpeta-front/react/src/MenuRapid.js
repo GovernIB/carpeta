@@ -4,6 +4,7 @@ import axios from "axios";
 import i18n from "i18next";
 import LlistatDePlugins from './LlistatDePlugins';
 import { HashRouter, Switch, Route, Link,useHistory } from "react-router-dom";
+
 /**
  * 
  * @author anadal Migració a ROUTER
@@ -20,6 +21,13 @@ class MenuRapid extends Component {
             menupseudoplugin: [],
 			seccions : []
         }
+        this.canviatIdioma = this.canviatIdioma.bind(this);
+        i18n.on('languageChanged', this.canviatIdioma);
+    }
+
+    canviatIdioma(lng) {
+        console.log(" CANVIAT IDIOMA EN MenuRapid A ]" + lng+ "[");
+        this.componentDidMount();
     }
 
 
@@ -43,28 +51,7 @@ class MenuRapid extends Component {
         });
     }
 
-    componentWillReceiveProps(lng) {
-        var baseURL = sessionStorage.getItem('contextPath');
-        var url = baseURL + `/pluginfront/veureplugins`;
-        axios.get(url).then(res => {
-            const plugins = res.data;
-            this.setState({ plugins });
-        });
 
-        var url4 = baseURL + `/webui/menupseudoplugin/0`;
-		axios.get(url4).then(res => {
-			this.setState({ menupseudoplugin: res.data })
-		});
-
-		// 0 == Nivell Arell        
-        var url5 = baseURL + `/webui/seccions/0`;
-		axios.get(url5).then(res => {
-			this.setState({ seccions: res.data })
-        });
-    }
-
-    componentDidUpdate() {
-    }
 
 
     render() {
@@ -72,7 +59,6 @@ class MenuRapid extends Component {
         const {t} = this.props;
         var autenticat = sessionStorage.getItem('autenticat');
         const plugins = this.state.plugins;
-        //var urlBase = window.location.href;
         var urlBase = sessionStorage.getItem('contextPath');
 
         var gestionsHtml;
@@ -86,23 +72,9 @@ class MenuRapid extends Component {
 
         if(autenticat === '0'){
 
-   
-            // dades = "";
 
         } else if(autenticat === '1'){
-         
-            //
-            // dades = <li className="nav-item">
-            //         <a href="javascript:newDadesPersonals('contingut', '1');" className="imc-marc-ico navCarpeta imc--dades"><span>{t('menuDades')}</span></a>
-            //     </li>;
 
-            // gestions = <li className="nav-item pr-5">
-            //     <button className="imc-marc-ico dropdown-toggle menuRapid imc--gestions" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>{t('menuGestions')}</span></button>
-            //     <div className="dropdown-menu submenuRapid" aria-labelledby="dropdownMenuButton">
-            //         {gestionsHtml}
-            //         {gestionsReact}
-            //     </div>
-            // </li>;
 
             gestionsHtml = plugins.filter(s => s.reactComponent === 'false').map((s, i) => (
                 <li className="nav-item pr-4">
@@ -170,16 +142,6 @@ class MenuRapid extends Component {
 
         return (
             <div id = "menuRapid">
-                {/*<div>*/}
-                {/*    <nav className="navbar navbar-expand-sm bg-white p-0 fixo ocult" id="menuRapid">*/}
-                {/*        <ul className="navbar-nav p-3 mRapidGlobal" id="llistaMenuRapid">*/}
-                {/*            {seccionsS}*/}
-                {/*            {gestionsHtml}*/}
-                {/*            {gestionsReact}*/}
-                {/*            {enllasosPseusoPluginMenu}*/}
-                {/*        </ul>*/}
-                {/*    </nav>*/}
-                {/*</div>*/}
                 {mostrar}
             </div>
         );

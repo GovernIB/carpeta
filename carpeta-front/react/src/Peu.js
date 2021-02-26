@@ -5,6 +5,7 @@ import EnllasosXarxes from "./EnllasosXarxes";
 import EnllasosPeuCentral from './EnllasosPeuCentral';
 import {Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import axios from "axios";
+import i18n from 'i18next';
 
 class Peu extends Component {
 
@@ -16,7 +17,14 @@ class Peu extends Component {
 		};
 
 		this.toggle = this.toggle.bind(this);
-	}
+		this.canviatIdioma = this.canviatIdioma.bind(this);
+        i18n.on('languageChanged', this.canviatIdioma);
+    }
+
+    canviatIdioma(lng) {
+        console.log(" CANVIAT IDIOMA EN PEU A ]" + lng+ "[");
+        this.componentDidMount();
+    }
 
 	toggle() {
 		this.setState(prevState => ({
@@ -29,19 +37,11 @@ class Peu extends Component {
 		var baseURL = sessionStorage.getItem('contextPath');
 		var url =  baseURL + `/webui/suport`;
 		axios.get(url).then(res => {
-			const dadesSuport = res.data;
-			this.setState({ dadesSuport: dadesSuport });
-		})
+			this.setState({ dadesSuport: res.data });
+		});
 	}
 
-	componentWillReceiveProps(lng) {
-		var baseURL = sessionStorage.getItem('contextPath');
-		var url = baseURL + `/webui/suport`;
-		axios.get(url).then(res => {
-			const dadesSuport = res.data;
-			this.setState({ dadesSuport: dadesSuport });
-		})
-	}
+
 	
 	render() {
 		

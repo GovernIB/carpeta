@@ -100,7 +100,7 @@ class Index extends Component {
 
                     {/* Menú desplegable */}
                     <div className="imc-marc" id="imc-marc" tabIndex="-1" aria-hidden="true">
-                        <div className="imc--fons"/>
+                        <div className="imc--fons" id="imc--fons"/>
                         <div className="imc-marc-menu" id="imc-marc-menu" aria-hidden="true">
                             <MenuDesllisant  />
                         </div>

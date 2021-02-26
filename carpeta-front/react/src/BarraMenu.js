@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
 import axios from "axios";
+import i18n from 'i18next';
 
 class BarraMenu extends Component {
 
@@ -9,7 +10,14 @@ class BarraMenu extends Component {
 		this.state = {
 			enllasosMenuBar: null
 		}
-	}
+		this.canviatIdioma = this.canviatIdioma.bind(this);
+        i18n.on('languageChanged', this.canviatIdioma);
+    }
+
+    canviatIdioma(lng) {
+        console.log(" CANVIAT IDIOMA EN BarraMenu A ]" + lng+ "[");
+        this.componentDidMount();
+    }
 
 
 	componentDidMount() {
@@ -21,23 +29,11 @@ class BarraMenu extends Component {
 			var url = baseURL + `/webui/menubarlinks`;
 
 			axios.get(url).then(res => {
-				const enllasosMenuBar = res.data;
-				this.setState({ enllasosMenuBar });
+				this.setState({ enllasosMenuBar : res.data });
 			});
 		}
 	}
 
-	componentWillReceiveProps(lng) {
-		var auth = sessionStorage.getItem('autenticat');
-		if (auth ==='1') {
-			var baseURL = sessionStorage.getItem('contextPath');
-			var url = baseURL + `/webui/menubarlinks`;
-			axios.get(url).then(res => {
-				const enllasosMenuBar = res.data;
-				this.setState({ enllasosMenuBar });
-			});
-		}
-	}
 
 	render() {
 
@@ -58,6 +54,7 @@ class BarraMenu extends Component {
 				</li>
 			))
 		}
+		
 
 		return (
 			<div id = "barraMenu">

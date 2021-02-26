@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import axios from "axios";
+import i18n from 'i18next';
 
 /** 
  * @autor anadal  Avisos del Front carrega avisos públics i privats #373 
@@ -12,6 +13,13 @@ class AvisosFront extends Component {
         this.state = {
             avisos: []
         }
+        this.canviatIdioma = this.canviatIdioma.bind(this);
+        i18n.on('languageChanged', this.canviatIdioma);
+    }
+
+    canviatIdioma(lng) {
+        console.log(" CANVIAT IDIOMA EN AVISOS FRONT A ]" + lng+ "[");
+        this.componentDidMount();
     }
 
     componentDidMount() {
@@ -32,23 +40,6 @@ class AvisosFront extends Component {
         }
     }
 
-    componentWillReceiveProps(lng) {
-
-        var baseURL = sessionStorage.getItem('contextPath');
-        var auth = sessionStorage.getItem('autenticat');
-
-        if (auth === '0') {
-            var url = baseURL + "/webui/avisosfrontpublic";
-            axios.get(url).then(res => {
-                this.setState({ avisos: res.data });
-            });
-        } else {
-            var url2 = baseURL + "/webui/avisosfrontprivat";
-            axios.get(url2).then(res => {
-                this.setState({ avisos: res.data });
-            });
-        }
-    }
 
     render() {
 

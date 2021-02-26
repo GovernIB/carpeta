@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
 import { HashRouter, Switch, Route, Link } from "react-router-dom";
 import axios from "axios";
+import i18n from 'i18next';
 
 class EnllasosPeuCentral extends Component {
 
@@ -10,6 +11,13 @@ class EnllasosPeuCentral extends Component {
         this.state = {
             enllasosPeuCentral: []
         }
+        this.canviatIdioma = this.canviatIdioma.bind(this);
+        i18n.on('languageChanged', this.canviatIdioma);
+    }
+
+    canviatIdioma(lng) {
+        console.log(" CANVIAT IDIOMA EN EnllassosPeuCentral A ]" + lng+ "[");
+        this.componentDidMount();
     }
 
 
@@ -23,13 +31,7 @@ class EnllasosPeuCentral extends Component {
 
     }
 
-    componentWillReceiveProps(lng) {
-        var baseURL = sessionStorage.getItem('contextPath');
-        var url = baseURL + "/webui/centralfooterlinks";
-        axios.get(url).then(res => {
-            this.setState({ enllasosPeuCentral: res.data })
-        });
-    }
+
 
     render() {
         var autenticat = sessionStorage.getItem('autenticat');    

@@ -29,8 +29,13 @@ class MenuDesllisant extends Component {
     }
 
     canviatIdioma(lng) {
-        console.log(" CANVIAT IDIOMA EN LLISTAT DE PLUGINS A ]" + lng+ "[")
+        console.log(" CANVIAT IDIOMA EN MENU DESLLISTANT A ]" + lng+ "[")
 		this.setState({ loading: 0 });
+
+		
+	
+		
+
         this.componentDidMount();
     }
 
@@ -76,54 +81,6 @@ class MenuDesllisant extends Component {
 
 	}
 
-
-
-
-
-
-/*
-	componentWillReceiveProps(lng) {
-
-		// XYZ ZZZ  componentDidMount i componentWillReceiveProps contenen el mateix, es podrien centralitzar en un sol mètode ????
-
-		console.log("MENU DESLISSTANT componentWillReceiveProps()");
-
-		var baseURL = sessionStorage.getItem('contextPath');
-		var url = baseURL + `/pluginfront/veureplugins`;
-
-		axios.get(url).then(res => {
-			this.setState({ plugins: res.data, loading: this.state.loading + 1 });
-		});
-		var url2 =  baseURL + `/webui/menuslidelinks`;
-		axios.get(url2).then(res => {
-			this.setState({ menuEnllasos: res.data, loading: this.state.loading + 1 });
-		});
-
-
-		var url3 =  baseURL + `/webui/idiomesFront`;
-
-		axios.get(url3).then(res => {
-			this.setState({ idiomes: res.data, loading: this.state.loading + 1 });
-
-			console.log("FINAL DE LESTURA DE IDIOMES !!!!! " + this.state.idiomes);
-		})
-
-		var url4 =  baseURL + `/webui/menupseudoplugin`;
-		axios.get(url4).then(res => {
-			this.setState({ menupseudoplugin: res.data, loading: this.state.loading + 1 });
-		});
-
-		// 0 == Nivell Arell
-
-        var url5 =  baseURL + `/webui/seccions/0`;
-		axios.get(url5).then(res => {
-			this.setState({ seccions: res.data, loading: this.state.loading + 1 });
-
-        });
-
-	}
-	*/
-
 	infoHtml(missatge, pluginID) {
 		alert(missatge);
 
@@ -167,6 +124,10 @@ class MenuDesllisant extends Component {
 		}).catch(error => {
 			alert("XYZ ZZZ No s'ha pogut actualitzar l´idioma. Error: " + error);
 		});
+
+
+		var f = document.getElementById("imc--fons");
+		f.click();
 	}
 
 	render() {

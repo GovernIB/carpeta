@@ -15,6 +15,13 @@ class IniciPublic extends Component {
             nomEntitat: null,
             codiHtml: null
         }
+        this.canviatIdioma = this.canviatIdioma.bind(this);
+        i18n.on('languageChanged', this.canviatIdioma);
+    }
+
+    canviatIdioma(lng) {
+        console.log(" CANVIAT IDIOMA EN IniciPublic A ]" + lng+ "[");
+        this.componentDidMount();
     }
 
 
@@ -30,18 +37,6 @@ class IniciPublic extends Component {
         });
     }
 
-    componentWillReceiveProps(lng) {
-
-        this.componentDidMount();
-        /*
-
-        var baseURL = sessionStorage.getItem('contextPath');
-        var url = baseURL +  "/webui/nomEntitat";
-        axios.get(url).then(res => {
-            this.setState({ nomEntitat: res.data })
-        });
-        */
-    }
 
 
     render() {

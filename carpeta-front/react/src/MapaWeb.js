@@ -6,6 +6,7 @@ import Breadcrumb from "./Breadcrumb";
 import { Link } from "react-router-dom";
 import * as breadcrumbPaths from "./utils/breadcrumbPaths";
 import * as breadcrumbPathsAut from "./utils/breadcrumbPathsAut";
+import i18n from 'i18next';
 
 class MapaWeb extends Component {
 
@@ -14,7 +15,14 @@ class MapaWeb extends Component {
 		this.state = {
 			plugins: []
 		}
-	}
+		this.canviatIdioma = this.canviatIdioma.bind(this);
+        i18n.on('languageChanged', this.canviatIdioma);
+    }
+
+    canviatIdioma(lng) {
+        console.log(" CANVIAT IDIOMA EN mapaWeb A ]" + lng+ "[");
+        this.componentDidMount();
+    }
 
 	componentDidMount() {
 		var baseURL = sessionStorage.getItem('contextPath');
@@ -26,14 +34,6 @@ class MapaWeb extends Component {
 		})
 	}
 
-	componentWillReceiveProps(lng) {
-		var baseURL = sessionStorage.getItem('contextPath');
-		var url = baseURL + `/pluginfront/veureplugins`;
-		axios.get(url).then(res => {
-			const plugins = res.data;
-			this.setState({ plugins });
-		})
-	}
 
 	render() {
 

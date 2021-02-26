@@ -72,6 +72,9 @@ class Breadcrumb extends Component {
                 this.setState({ items: [{ id: location.pathname, label: location.pathname }] });
             }
         }
+
+        var f = document.getElementById("imc--fons");
+		f.click();
     }
 
 

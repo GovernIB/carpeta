@@ -11,18 +11,13 @@ class EnllasosLateral extends Component {
             loading: true,
             laterallinks: []
         }
-        this.canviIdioma = this.canviIdioma.bind(this);
-        i18n.on('languageChanged', this.canviIdioma);
+        this.canviatIdioma = this.canviatIdioma.bind(this);
+        i18n.on('languageChanged', this.canviatIdioma);
     }
 
-    canviIdioma(lng) {
-
-
-        console.log(" CANVI IDIOMA EN ENLLASSOS LATERAL A ]" + lng+ "[")
-
-        this.setState({ laterallinks: [], loading:true })
-        this.componentWillReceiveProps(lng);
-
+    canviatIdioma(lng) {
+        console.log(" CANVIAT IDIOMA EN EnllassosLateral A ]" + lng+ "[");
+        this.componentDidMount();
     }
 
     componentDidMount() {
@@ -30,16 +25,6 @@ class EnllasosLateral extends Component {
         var baseURL = sessionStorage.getItem('contextPath');
         var url = baseURL + "/webui/laterallinks";
 
-        axios.get(url).then(res => {
-            this.setState({ laterallinks: res.data, loading:false })
-        });
-    }
-
-
-
-    componentWillReceiveProps(lng) {
-        var baseURL = sessionStorage.getItem('contextPath');
-        var url = baseURL + "/webui/laterallinks";
         axios.get(url).then(res => {
             this.setState({ laterallinks: res.data, loading:false })
         });
