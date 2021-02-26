@@ -505,9 +505,6 @@
         <module>carpeta-back</module>
         <module>carpeta-front</module>
 		<module>carpeta-api-externa</module>
-        <!--
-        <module>carpeta-api</module>
-        -->
         <module>carpeta-ear</module>
         <module>carpeta-pluginsib</module>
         <module>scripts</module>
