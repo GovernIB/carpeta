@@ -80,7 +80,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         registerUserData(userData);
 
-        String startURL = absolutePluginRequestPath + "/" + OPCIONS;
+        String startURL = absolutePluginRequestPath + "/" + OPCIONS_PAGE;
 
         log.info(" getStartUrl( ); => " + startURL);
         return startURL;
@@ -96,12 +96,15 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         log.info("NotibCarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
                 + administrationEncriptedID);
 
-        if (query.startsWith(OPCIONS)) {
+        if (query.startsWith(OPCIONS_PAGE)) {
 
             opcions(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
                     administrationEncriptedID, locale, isGet);
+        } else if (query.startsWith(COMUNICACIONS_ESPERA_PAGE)) {
 
-        } else if (query.startsWith(COMUNICACIONS)) {
+            comunicacionsEspera(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
+        } else  if (query.startsWith(COMUNICACIONS_PAGE)) {
 
             comunicacions(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
                     administrationEncriptedID, locale, isGet);
@@ -127,7 +130,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
-    protected static final String OPCIONS = "opcions";
+    protected static final String OPCIONS_PAGE = "opcions";
 
     public void opcions(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
@@ -176,7 +179,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         map.put("notificacionesUrl", getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.url"));
 
         // CAIB
-        String comunicacionesURL = absolutePluginRequestPath + "/" + COMUNICACIONS;
+        String comunicacionesURL = absolutePluginRequestPath + "/" + COMUNICACIONS_ESPERA_PAGE;
 
         map.put("comunicacionesURL", comunicacionesURL);
 
@@ -210,6 +213,32 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         }
         return fullPage;
     }
+    
+    
+    // --------------------------------------------------------------------------------------
+    // ------------------- COMUNICACIONS ESPERA ----------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+    protected static final String COMUNICACIONS_ESPERA_PAGE = "espera";
+
+    public void comunicacionsEspera(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet) {
+
+
+        try {
+            
+            String rutaDesti = absolutePluginRequestPath + "/" + COMUNICACIONS_PAGE;
+            
+            esperaPage(absolutePluginRequestPath, response, locale, rutaDesti);
+            
+        } catch (Exception e) {
+            log.error("Error enviant pagian d'espera de Sistra: " + e.getMessage(), e);
+        }
+    }
+
+    
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
@@ -217,7 +246,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
-    protected static final String COMUNICACIONS = "comunicacions";
+    protected static final String COMUNICACIONS_PAGE = "comunicacions";
 
     public void comunicacions(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
