@@ -12,17 +12,17 @@ class DadesEntitat extends Component {
     }
 
     componentDidMount() {
-        var urlBase = window.location.href;
-        var url = urlBase + "webui/textinformatiuentitat";
+        var baseURL = sessionStorage.getItem('contextPath');
+        var url = baseURL + "/webui/textinformatiuentitat";
         axios.get(url).then(res => {            
-            this.setState({ infoEntitat: escape.data });
+            this.setState({ infoEntitat: res.data });
         });
     }
 
 
     render() {
         return (
-            <div id="substituir" className="imc-peu-govern">{this.state.infoEntitat}</div>
+            <div className="imc-peu-govern" dangerouslySetInnerHTML={{__html: this.state.infoEntitat}} />
         );
     }
 }
