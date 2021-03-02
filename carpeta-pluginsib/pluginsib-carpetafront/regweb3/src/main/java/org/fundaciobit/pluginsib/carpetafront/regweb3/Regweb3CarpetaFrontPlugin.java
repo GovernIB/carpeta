@@ -138,7 +138,7 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         registerUserData(userData);
         
-        String startURL = absolutePluginRequestPath + "/" + LLISTAT_REGISTRES_PAGE;
+        String startURL = absolutePluginRequestPath + "/" + ESPERA_PAGE;
 
         log.info(" getStartUrl( ); => " + startURL);
         return startURL;
@@ -156,7 +156,11 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: " + administrationEncriptedID);
 
 
-        if (query.startsWith(LLISTAT_REGISTRES_PAGE)) {
+        if (query.startsWith(ESPERA_PAGE)) {
+            espera(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
+            
+        } else if (query.startsWith(LLISTAT_REGISTRES_PAGE)) {
 
             llistatDeRegistres(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData, administrationEncriptedID, locale, isGet);
 
@@ -198,6 +202,32 @@ public class Regweb3CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         return getTraduccio("justificantetitle", locale);
     }
 
+
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // ------------------- ESPERA ----------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+    protected static final String ESPERA_PAGE = "espera";
+
+    public void espera(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet) {
+
+
+        try {
+            
+            String rutaDesti = absolutePluginRequestPath + "/" + LLISTAT_REGISTRES_PAGE;
+            
+            esperaPage(absolutePluginRequestPath, response, locale, rutaDesti);
+            
+        } catch (Exception e) {
+            log.error("Error enviant pagian d'espera de Sistra: " + e.getMessage(), e);
+        }
+    }
+
+    
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------

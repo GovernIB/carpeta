@@ -19,13 +19,14 @@ class PluginHtml extends Component {
     }
 
     canviatIdioma(lng) {
-        console.log(" CANVIAT IDIOMA EN IniciPublic A ]" + lng+ "[");
+        console.log(" CANVIAT IDIOMA EN PluginHTML A ]" + lng+ "[");
         this.componentDidMount();
     }
 
 
     componentDidMount() {
-        var autenticat = sessionStorage.getItem('autenticat');;
+        var autenticat = sessionStorage.getItem('autenticat');
+        /*
         if (autenticat === '1') {
             this.fakeRequest().then(() => {
                 const el = document.querySelector(".loader-container");
@@ -34,7 +35,7 @@ class PluginHtml extends Component {
                     this.setState({ loading: false });
                 }
             });
-        }
+        }*/
     }
 
     fakeRequest() {
@@ -51,11 +52,13 @@ class PluginHtml extends Component {
             return '';
         }
 
+        /*
         if (this.state.loading) {
             document.querySelector("#carregant").classList.remove('loaderOcult');
             console.log("PLUGIN HTML CARREGANT !!!!!!!");
             return null;
         }
+        */
 
         //console.log("PLUGIN HTML 111111  !!!!!!!");
         //document.querySelector("#continguts").classList.add('espaiContingut');
@@ -138,12 +141,8 @@ class PluginHtml extends Component {
 
         clearTimeout(sessionStorage.getItem('idTimeOut'));
 
-        //var motlla = <*Breadcrumb items={breadcrumbPathsAut.Plugin} autenticat={autenticat}/>
-
-
         return (
             <div>
-                {/*motlla*/}
                 <ExpirarSessio />
                 <div id="substituir" />
             </div>
