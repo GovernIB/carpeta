@@ -3,7 +3,6 @@ package es.caib.carpeta.front.security;
 
 import es.caib.carpeta.ejb.PropietatGlobalService;
 import es.caib.carpeta.logic.utils.EjbManager;
-import es.caib.carpeta.persistence.EntitatJPA;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import org.apache.commons.logging.Log;
@@ -13,8 +12,6 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.ejb.EJB;
@@ -28,10 +25,8 @@ import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_FRO
 import es.caib.carpeta.front.config.LoginRequestCache;
 import es.caib.carpeta.front.service.SecurityService;
 import es.caib.carpeta.front.utils.SesionHttp;
-import es.caib.carpeta.front.utils.StringUtils;
 import es.caib.carpeta.logic.AuditoriaLogicaService;
 import es.caib.carpeta.logic.LogCarpetaLogicaService;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 

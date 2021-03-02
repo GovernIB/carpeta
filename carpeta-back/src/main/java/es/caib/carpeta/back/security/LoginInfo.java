@@ -10,7 +10,6 @@ import org.springframework.security.core.GrantedAuthority;
 import es.caib.carpeta.persistence.EntitatJPA;
 import es.caib.carpeta.persistence.UsuariJPA;
 import es.caib.carpeta.persistence.UsuariEntitatJPA;
-import es.caib.carpeta.back.security.LoginException;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;

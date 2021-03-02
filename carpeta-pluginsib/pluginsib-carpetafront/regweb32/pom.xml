@@ -31,7 +31,6 @@
         <dependency>
             <groupId>javax.xml.ws</groupId>
             <artifactId>jaxws-api</artifactId>
-            <version>2.3.1</version>
         </dependency>
 
         <dependency>
