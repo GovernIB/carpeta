@@ -54,6 +54,7 @@ class Index extends Component {
         var user = sessionStorage.getItem('usuariNomComplet');
 
         var infoUsuari;
+        var estilContingut;
         if (auth === '1' && user != null) {
             infoUsuari = <div className="imc-titol usuari">
                 <nav className="imc--contingut">
@@ -70,8 +71,10 @@ class Index extends Component {
                     </h3>
                 </nav>
             </div>;
+            estilContingut="imc-continguts pt-5";
         } else {
             infoUsuari = '';
+            estilContingut="imc-continguts";
         }
 
     
@@ -107,7 +110,7 @@ class Index extends Component {
                     </div>
 
                     {/* Zona Contingut */}
-                    <div className="imc-continguts" id="continguts" >
+                    <div className={estilContingut} id="continguts" >
 
                         {/* Molla de pa */}
                         <Breadcrumb  currentlocation={currentlocation} />
