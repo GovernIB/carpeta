@@ -115,10 +115,11 @@ class Index extends Component {
                         {/* Avisos Front */}
                         <AvisosFront  />
 
-                        {/* Contingut pàgina */}
+                        {/* Contingut pàgina 
                         <div id="carregant" className="loader-container centrat loaderOcult">
                             <div className="loader"/>
                         </div>
+                        */}
 
 
                         <div id="contingutok" className="pt-2">

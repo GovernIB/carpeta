@@ -33,10 +33,6 @@ public class Regweb32DetallRegistre extends Regweb32CarpetaFrontPlugin{
 
 
 
-    public static final String VALIDEZ_DOCUMENTO_COPIA  = "1";
-    public static final String VALIDEZ_DOCUMENTO_COPIA_ORIGINAL  = "3";
-    public static final String VALIDEZ_DOCUMENTO_ORIGINAL  = "4";
-
     public static final String MIME_PDF  = "application/pdf";
 
 
@@ -44,9 +40,6 @@ public class Regweb32DetallRegistre extends Regweb32CarpetaFrontPlugin{
         return getTraduccio("detalletitle", locale);
     }
 
-    public String getJustificantTitle(Locale locale) {
-        return getTraduccio("justificantetitle", locale);
-    }
 
 
     // --------------------------------------------------------------------------------------
@@ -161,13 +154,9 @@ public class Regweb32DetallRegistre extends Regweb32CarpetaFrontPlugin{
         String urlAnnexe = absolutePluginRequestPath  + "/" + ANNEXE_REGISTRE_PAGE +"?numeroRegistroFormateado="+registre.getNumeroRegistro()+"&idAnnexe=";
         map.put("urlAnnexe",urlAnnexe);
 
-        log.info("TIENE ANEXOS " + registre.getAnexos().size());
-
-
 
 
         //Montamos la url de descarga del justificante
-
         if(registre.getJustificante()!= null){
             JustificanteReferenciaWs justificantRegistre = getReferenciaJustificantRegistre(entidad,registre.getNumeroRegistro(),regWebAsientoRegistralWs, locale);
             if(justificantRegistre.getCsv()!= null){
@@ -308,9 +297,6 @@ public class Regweb32DetallRegistre extends Regweb32CarpetaFrontPlugin{
     public JustificanteReferenciaWs getReferenciaJustificantRegistre(String entidad, String numeroRegistroFormateado, RegWebAsientoRegistralWs regWebAsientoRegistralWs, Locale locale)
             throws Exception {
 
-
-
-
         JustificanteReferenciaWs justificante;
 
         try{
@@ -330,8 +316,6 @@ public class Regweb32DetallRegistre extends Regweb32CarpetaFrontPlugin{
 
     public JustificanteWs getJustificantRegistre(String entidad, String numeroRegistroFormateado, Long tipoRegistro,RegWebAsientoRegistralWs regWebAsientoRegistralWs, Locale locale)
             throws Exception {
-
-
 
         JustificanteWs justificante;
 
@@ -426,9 +410,6 @@ public class Regweb32DetallRegistre extends Regweb32CarpetaFrontPlugin{
             obtenerContentType(fileContentWs.getFileInfoWs().getMime(), response, fileContentWs.getFileInfoWs().getFilename(), null, fileContentWs.getData());
         }
 
-
-
-
     }
 
 
@@ -461,25 +442,7 @@ public class Regweb32DetallRegistre extends Regweb32CarpetaFrontPlugin{
     @Override
     public RegWebAsientoRegistralWs getRegWebAsientoRegistralWsService() throws Exception {
 
-        /*final String regweb3Url = getPropertyRequired(REGWEB3_PROPERTY_BASE + "url");
 
-        final String username = getPropertyRequired(REGWEB3_PROPERTY_BASE + "user");
-
-        final String password = getPropertyRequired(REGWEB3_PROPERTY_BASE + "pass");
-
-        final URL wsdl = new URL(regweb3Url + "?wsdl");
-
-
-        RegWebAsientoRegistralWsService service = new RegWebAsientoRegistralWsService(wsdl);
-
-        RegWebAsientoRegistralWs api = service.getRegWebAsientoRegistralWs();
-
-
-        Map<String, Object> reqContext = ((BindingProvider) api).getRequestContext();
-        reqContext.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, regweb3Url);
-        reqContext.put(BindingProvider.USERNAME_PROPERTY, username);
-        reqContext.put(BindingProvider.PASSWORD_PROPERTY, password);
-*/
         return super.getRegWebAsientoRegistralWsService();
     }
 

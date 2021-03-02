@@ -1,6 +1,7 @@
 package es.caib.carpeta.pluginsib.carpetafront.api;
 
 import org.apache.commons.io.IOUtils;
+import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,7 @@ import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
@@ -194,6 +196,28 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
     public abstract String getPropertyBase();
 
     protected abstract FileInfo getResourceIcon(Locale locale);
+    
+    
+    protected void esperaPage(String absolutePluginRequestPath, HttpServletResponse response, Locale locale,
+            String rutaDesti) throws IOException {
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html");
+        
+        InputStream input = this.getClass().getResourceAsStream("/" + WEBRESOURCECOMMON + "/templates/espera.html");
+        String plantilla = IOUtils.toString(input, "UTF-8");
+
+        Map<String, Object> map = new HashMap<String, Object>();
+
+        map.put("resources", absolutePluginRequestPath + "/" + WEBRESOURCECOMMON);
+        map.put("ruta_desti", rutaDesti);            
+        
+        map.put("ruta_imatge_espera", absolutePluginRequestPath + "/" + WEBRESOURCECOMMON + "/img/espera.gif");
+
+        String webpage = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
+
+        response.getWriter().println(webpage);
+        response.flushBuffer();
+    }
 
     /**
      * Mètode que retorna la icona del plugin
