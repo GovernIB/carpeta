@@ -9,7 +9,7 @@ es.caib.carpeta.pluginsib.carpetafront.regweb3.url=http://localhost:8080/regweb3
 es.caib.carpeta.pluginsib.carpetafront.regweb3.user=caibapp
 es.caib.carpeta.pluginsib.carpetafront.regweb3.pass=setpassword
 es.caib.carpeta.pluginsib.carpetafront.regweb3.entidad=A04003003
-es.caib.carpeta.pluginsib.carpetafront.regweb3.web=http://localhost:9080/carpeta/registro/detalle/{0}
+es.caib.carpeta.pluginsib.carpetafront.regweb3.concsv.url=https://dev.caib.es/concsv/view.xhtml?hash=
 
 
 

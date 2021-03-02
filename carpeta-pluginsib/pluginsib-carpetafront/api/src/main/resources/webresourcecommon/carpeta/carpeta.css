@@ -454,3 +454,16 @@ img:hover {
 }
 
 /* FI RESPONSIVE */
+
+
+/* Per paginació */
+.page-link{
+    color: #32814B;
+}
+.page-item.active .page-link {
+    background-color: #32814B;
+    border-color: #32814B;
+}
+.page-link:focus, .page-link:hover {
+    color: #000;
+}

@@ -1,0 +1,17 @@
+# Class => org.fundaciobit.pluginsib.carpetafront.regweb33.Regweb32CarpetaFrontPlugin
+
+# Common
+es.caib.carpeta.pluginsib.carpetafront.regweb32.development=true
+
+
+#
+es.caib.carpeta.pluginsib.carpetafront.regweb32.url=http://registre3.fundaciobit.org/regweb3/ws/v3/RegWebAsientoRegistral
+es.caib.carpeta.pluginsib.carpetafront.regweb32.user=caibapp
+es.caib.carpeta.pluginsib.carpetafront.regweb32.pass=setpassword
+es.caib.carpeta.pluginsib.carpetafront.regweb32.entidad=A04003003
+es.caib.carpeta.pluginsib.carpetafront.regweb32.concsv.url=https://dev.caib.es/concsv/view.xhtml?hash=
+
+
+
+
+

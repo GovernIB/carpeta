@@ -17,6 +17,7 @@
         <module>api</module>
         <module>sistra</module>
         <module>regweb3</module>
+        <module>regweb32</module>
         <module>notib</module>
         <module>dadespersonalsreact</module>
         <module>reactexample</module>
