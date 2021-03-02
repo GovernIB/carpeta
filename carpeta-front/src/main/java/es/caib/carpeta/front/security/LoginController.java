@@ -1,6 +1,9 @@
 package es.caib.carpeta.front.security;
 
 
+import es.caib.carpeta.ejb.PropietatGlobalService;
+import es.caib.carpeta.logic.utils.EjbManager;
+import es.caib.carpeta.persistence.EntitatJPA;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import org.apache.commons.logging.Log;
@@ -190,10 +193,19 @@ public class LoginController {
 
         String codiEntitat = sesionHttp.getEntitat();
 
+        log.info("WWWWWWWWWWWWWW Codi entitat: " + codiEntitat + " WWWWWWWWWWWWWWWWWW");
+
         securityService.iniciarSesionLogout(url_callback_logout, IDIOMA);
         HttpSession session = request.getSession(false);
         if (session != null) {
             session.invalidate();
+        }
+
+        if(codiEntitat == null) {
+            //Agafam l'entitat per defecte
+            PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
+            codiEntitat = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
+            log.info("WWWWWWWWWWWWWW entitat es null, posam DefaultEntity: " + codiEntitat + "WWWWWWWWWWWWWWWWWW");
         }
 
         return "redirect:/e/"+codiEntitat;

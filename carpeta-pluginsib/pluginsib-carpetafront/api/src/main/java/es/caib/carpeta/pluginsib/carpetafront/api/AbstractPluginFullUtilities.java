@@ -3,14 +3,30 @@ package es.caib.carpeta.pluginsib.carpetafront.api;
 //import org.apache.commons.fileupload.FileItem;
 //import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 //import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+
 import org.fundaciobit.pluginsib.core.utils.AbstractPluginPropertiesTranslations;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
+
+import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.util.*;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.URLEncoder;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.CharsetEncoder;
+import java.nio.charset.CodingErrorAction;
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import java.util.Locale;
+import java.util.Properties;
 
 /**
  * 
@@ -359,6 +375,68 @@ public abstract class AbstractPluginFullUtilities extends AbstractPluginProperti
       return mime;
     }
 
+    protected void obtenerContentType(String contentType, HttpServletResponse response, String filename, MimetypesFileTypeMap mimeTypesMap, byte[] data) throws IOException, Exception {
+        OutputStream output;
+        if (contentType == null) {
+            try {
+                File tmp = File.createTempFile("regweb_annex_", filename);
+                FileOutputStream fos = new FileOutputStream(tmp);
+                fos.write(data);
+                fos.flush();
+                fos.close();
+                contentType = mimeTypesMap.getContentType(tmp);
+                if (!tmp.delete()) {
+                    tmp.deleteOnExit();
+                }
+            } catch (Throwable th) {
+                log.error("Error intentant obtenir el tipus MIME: " + th.getMessage(), th);
+                contentType = "application/octet-stream";
+            }
+        }
+        response.setContentType(contentType);
+        response.setHeader("Content-Disposition", getContentDispositionHeader(true,filename));
+        response.setContentLength(data.length);
+
+        output = response.getOutputStream();
+        output.write(data);
+
+        output.flush();
+
+    }
+
+
+
+    /**
+     * Retorna el contingut de la capçalera <i>Content-Disposition</i> que compleix
+     * amb https://tools.ietf.org/html/rfc6266#section-5
+     * @param attachment si és true empra attachment, sinó inline
+     * @param filename nom del fitxer suggerit
+     * @return contingut de la capçalera.
+     * @throws Exception
+     */
+    public static String getContentDispositionHeader(boolean attachment, String filename)
+            throws Exception {
+
+        // Preparam el nom suggerit en UTF-8
+        // No podem emprar URLEncoder.encode perquè només és per paràmetres http i
+        // converteix els espais a "+" enlloc de a "%20"
+        String utf8filename = URLEncoder.encode(filename, "UTF-8");
+
+        // Asseguram que el filename suggerit en ISO-8859-1 no té caràcters incompatibles
+        CharsetEncoder charsetEncoder = ISO_8859_1.newEncoder();
+        if (!charsetEncoder.canEncode(filename)) {
+            charsetEncoder.onUnmappableCharacter(CodingErrorAction.REPLACE);
+            charsetEncoder.replaceWith("_".getBytes(ISO_8859_1) );
+            ByteBuffer buffer = charsetEncoder.encode(CharBuffer.wrap(filename));
+            filename = new String(buffer.array(), ISO_8859_1);
+        }
+
+        // Implementació de RFC6266. La majoria de navegadors soporten la codificació en UTF-8 emprant
+        // "filename*=", pels que no ho soportin, ficam "filename=" abans.
+        return (attachment ? "attachment" : "inline")
+                + "; filename=\"" + filename + "\""
+                + "; filename*=UTF-8''" + utf8filename;
+    }
 
     
 
