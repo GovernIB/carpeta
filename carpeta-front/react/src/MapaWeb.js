@@ -45,7 +45,7 @@ class MapaWeb extends Component {
 		var plug;
 
 		var informacio;
-		var dades;
+		// var dades;
 		var logoClau;
 
 		if (autenticat === '1') {
@@ -59,7 +59,7 @@ class MapaWeb extends Component {
 				</Link>
 				</p>));
 
-			dades = "";
+			// dades = "";
 		}
 		if (autenticat === '0') {
 			logoClau = <span className="oi oi-lock-locked colorClave" title={t('mapaWebClave')}/>;
@@ -72,7 +72,7 @@ class MapaWeb extends Component {
 				<p className="lh15 upper"><a href="javascript: var loc = new URL(window.location.href);  window.location.href=('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host) )">{s.nom}</a> {logoClau}</p>));
 */
 
-			dades = <a href="javascript: var loc = new URL(window.location.href);  window.location.href=('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host) )">{t('mapaWebDades')}</a>;
+			// dades = <a href="javascript: var loc = new URL(window.location.href);  window.location.href=('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host) )">{t('mapaWebDades')}</a>;
 		}
 
 		clearTimeout(sessionStorage.getItem('idTimeOut'));
@@ -99,9 +99,9 @@ class MapaWeb extends Component {
 								<li className="list-group-item">
 									{plug}
 								</li>
-								<li className="list-group-item">
-									<p className="lh15 upper">{dades} {logoClau}</p>
-								</li>
+								{/*<li className="list-group-item">*/}
+								{/*	<p className="lh15 upper">{dades} {logoClau}</p>*/}
+								{/*</li>*/}
 							</ul>
 						</div>
 
