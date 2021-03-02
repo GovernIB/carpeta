@@ -26,7 +26,7 @@ class EnllasosLateral extends Component {
         var url = baseURL + "/webui/laterallinks";
 
         axios.get(url).then(res => {
-            this.setState({ laterallinks: res.data, loading:false })
+            this.setState({ laterallinks: res.data, loading:false });
         });
     }
 
@@ -38,7 +38,7 @@ class EnllasosLateral extends Component {
 
         let laterallink;
 
-        if(!this.state.laterallinks.length || auth == '0' || this.state.loading){
+        if(!this.state.laterallinks.length || this.state.loading){ 
             laterallink = "";
         } else{
             laterallink = this.state.laterallinks.map((s, i) => (
