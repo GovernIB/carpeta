@@ -181,9 +181,6 @@ public class Regweb32CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             regweb32DetallRegistre.detallDeRegistre(absolutePluginRequestPath, relativePluginRequestPath, query,
                         request, response, userData, administrationEncriptedID, getEntidad(), getConcsvUrl(),getRegWebAsientoRegistralWsService(), locale, isGet);
 
-            //TODO mirar de pasar el registro de la lista ya obtenida
-
-            //detallDeRegistre(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData, administrationEncriptedID, locale, isGet);
         } else if (query.startsWith(JUSTIFICANT_REGISTRE_PAGE)) {
 
             regweb32DetallRegistre.justificantDeRegistre(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData, administrationEncriptedID,getEntidad(), getConcsvUrl(), getRegWebAsientoRegistralWsService(), locale, isGet);
@@ -211,9 +208,6 @@ public class Regweb32CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         return getTraduccio("detalletitle", locale);
     }
 
-    public String getJustificantTitle(Locale locale) {
-        return getTraduccio("justificantetitle", locale);
-    }
 
 
     // --------------------------------------------------------------------------------------
@@ -229,7 +223,6 @@ public class Regweb32CarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     List<AsientoWs> listRegistros = new ArrayList<>();
 
     int totalResults = 0;
-    int RESULTATS_PER_PAGINA = 10;
 
     public void llistatDeRegistres(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
                                    HttpServletRequest request, HttpServletResponse response, UserData userData,
