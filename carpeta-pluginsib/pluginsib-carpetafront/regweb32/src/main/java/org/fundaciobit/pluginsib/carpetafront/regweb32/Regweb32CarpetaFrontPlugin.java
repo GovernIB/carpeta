@@ -163,7 +163,11 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
 
         try {
 
-            if (query.startsWith(LLISTAT_REGISTRES_PAGE)) {
+        	if (query.startsWith(ESPERA_PAGE)) {	
+            	
+            	espera(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData, administrationEncriptedID, 0, locale, isGet);
+            	
+            } else if (query.startsWith(LLISTAT_REGISTRES_PAGE)) {
 
                 String pageNumber = request.getParameter("pageNumber");
                 if (pageNumber == null) {
@@ -214,6 +218,33 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
     @Override
     public String getDetalleTitle(Locale locale) {
         return getTraduccio("detalletitle", locale);
+    }
+    
+    
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // -------------------     E   S   P   E   R   A                         ----------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+    protected static final String ESPERA_PAGE = "espera";
+    
+    public void espera(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+                       HttpServletRequest request, HttpServletResponse response, UserData userData,
+                       String administrationEncriptedID, int pageNumber, Locale locale, boolean isGet) {
+    	
+    	try { 
+    		
+    		String rutaDesti = absolutePluginRequestPath + "/" + LLISTAT_REGISTRES_PAGE; 
+    		
+    		esperaPage(absolutePluginRequestPath, response, locale, rutaDesti);
+    		
+    	}catch(Exception e) {
+    		
+    		log.error("Error enviant a página d'espera de Registre " + e.getMessage(), e);
+    	}
+    	
+    	
     }
 
     // --------------------------------------------------------------------------------------
