@@ -1,5 +1,5 @@
 ﻿
-
+BEGIN;
 -- 08/02/2021 Permetre Seccions en Plugins i enllaços de tipus PseudoPlugin #335
 
 create sequence car_seccio_seq start with 1000 increment by  1;
@@ -66,3 +66,5 @@ es.caib.carpeta.pluginsib.carpetafront.regweb32.url=[=SP["es.caib.carpeta.plugin
 es.caib.carpeta.pluginsib.carpetafront.regweb32.user=[=SP["es.caib.carpeta.pluginsib.carpetafront.regweb32.user"]]
 es.caib.carpeta.pluginsib.carpetafront.regweb32.pass=[=SP["es.caib.carpeta.pluginsib.carpetafront.regweb32.pass"]]
 es.caib.carpeta.pluginsib.carpetafront.regweb32.entidad=A04003003', true, 97);
+
+COMMIT;

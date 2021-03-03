@@ -1,4 +1,6 @@
-﻿-- 13/01/2021 Es crearan auditories només de les accions del backoffice #278
+﻿
+BEGIN;
+-- 13/01/2021 Es crearan auditories només de les accions del backoffice #278
 
 ALTER TABLE car_auditoria DROP COLUMN usuariclave;
 ALTER TABLE car_auditoria DROP COLUMN pluginid;
@@ -37,5 +39,7 @@ es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.testsurname=FUSTER'
 
 --29/01/2021 Taula de Logs i Accessos a un altre TableSpace #315
 ALTER TABLE car_log ALTER COLUMN error TYPE text;
+
+COMMIT;
 
 

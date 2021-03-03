@@ -1,4 +1,4 @@
-﻿
+﻿BEGIN;
 
 -- 30/11/2020  FRONT: Diàleg d'ajuda al Front #261
 
@@ -85,6 +85,7 @@ INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (87, 'es', 
 
 
 INSERT INTO car_plugin(pluginid, nomid, classe, tipus, propietats, actiu, descripcioid) VALUES (85, 86, 'org.fundaciobit.pluginsib.carpetafront.dadespersonalsreact.DadesPersonalsReactCarpetaFrontPlugin', 1, NULL, true, 87);
+COMMIT;
 
 
 

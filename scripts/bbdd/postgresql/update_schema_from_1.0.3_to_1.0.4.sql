@@ -1,4 +1,4 @@
-
+BEGIN;
 
 -- 06-10-2020 Afegir gestio d'Enllaços a Back #138
 
@@ -63,3 +63,5 @@ create index car_entitat_pluginloginid_fk_i on car_entitat (pluginloginid);
 -- 22/10/2020 Retornar Informació des de la capa de Lògica els avisos dels PLugins #187
 
 ALTER TABLE car_avis ALTER COLUMN entitatid DROP NOT NULL;
+
+COMMIT;
