@@ -42,7 +42,7 @@ class Breadcrumb extends Component {
 
     canviatRoute(location, action) {
 
-        console.log("CANVIAT ROUTE  A: " + action + " LP: " + location.pathname + "   LS: " + location.state);
+        console.log("CANVIAT ROUTE  A: " + action + " LP: " + location.pathname + "   LS: " + location.nomPagina);
 
         var novaruta = location.pathname;
 
@@ -64,12 +64,12 @@ class Breadcrumb extends Component {
                 this.setState({ items: [{ id: '/seccio/' + seccio.seccioID, label: seccio.nom }, { id: novaruta, label: "plugin" + match[2] }] });
             });
         } else {
-            if (location.pathname == '/') {
+            if (location.pathname === '/') {
                 this.setState({ items: [] });
             } else {
                 // Altre cosa ...
                 console.log("BreadCRUMB ALTRE COSA : " + location.pathname);
-                this.setState({ items: [{ id: location.pathname, label: location.pathname }] });
+                this.setState({ items: [{ id: location.pathname, label: location.nomPagina }] });
             }
         }
 
@@ -97,14 +97,14 @@ class Breadcrumb extends Component {
             items.forEach(({ id, label }, index) => {
                 if (index < TOTAL_ITEMS - 1) {
                     itemDOMS.push(<li key={index}><span className="imc-separador"> &gt;</span><Link to={id}>{label}</Link></li>);
-                } /*else {
+                } else {
                     if (i18n.t(label) === 'plugin') {
                         itemDOMS.push(<li id="plugin" key={index}>{pluginNom}</li>);
                     } else {
                         itemDOMS.push(<li key={index}><span className="imc-separador"> &gt; </span>{i18n.t(label)}</li>);
                     }
                 }
-                */
+
 
             });
 

@@ -37,13 +37,13 @@ class EnllasosPeuCentral extends Component {
         var autenticat = sessionStorage.getItem('autenticat');    
         const {t} = this.props;
 
-        var mapa;
-		if (autenticat === '1'){
-			mapa = <li><a href="javascript:newMapaWeb('contingut', '1');">{ t('peuMapa') }</a></li>;
-		} 
-		if(autenticat === '0'){
-			mapa = <li><a href="javascript:newMapaWeb('contingut', '0');">{ t('peuMapa') }</a></li>;
-		}
+        // var mapa;
+		// if (autenticat === '1'){
+		// 	mapa = <li><a href="javascript:newMapaWeb('contingut', '1');">{ t('peuMapa') }</a></li>;
+		// }
+		// if(autenticat === '0'){
+		// 	mapa = <li><a href="javascript:newMapaWeb('contingut', '0');">{ t('peuMapa') }</a></li>;
+		// }
 
         let enllasosPeuCentral;
         
@@ -63,7 +63,7 @@ class EnllasosPeuCentral extends Component {
 
         return (
             <ul>
-                <li><Link to={"/mapaweb/"} > { t('peuMapa') }</Link></li>
+                <li><Link to={{pathname: `/mapaweb`, nomPagina: 'peuMapa' }}> { t('peuMapa') }</Link></li>
                 {enllasosPeuCentral}
             </ul>
         );
