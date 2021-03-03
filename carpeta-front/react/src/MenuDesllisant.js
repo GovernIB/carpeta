@@ -228,7 +228,7 @@ class MenuDesllisant extends Component {
 
 		var accessibilitat;
 		accessibilitat = <li>
-		<Link to="/accessibilitat" className="imc-marc-ico imc--accessibilitat" params={{ items: "hello" }}>
+		<Link to={{pathname: `/accessibilitat`, nomPagina: 'menuAccessibilitat' }} className="imc-marc-ico imc--accessibilitat">
 	{/*<a href="javascript:newwAccessibilitat('contingut', '1');"
 							className="imc-marc-ico imc--accessibilitat" id="imc-marc-accessibilitat"
 							title={t('menuAccessibilitat')}> */ }
