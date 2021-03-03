@@ -94,7 +94,7 @@ public abstract class AbstractPluginLogicaEJB<I extends IPlugin> extends PluginL
             addPluginToCache(pluginID, pluginInstance);
 
         }
-        return (I) pluginInstance;
+        return ((I) pluginInstance);
 
     }
 

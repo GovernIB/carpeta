@@ -28,7 +28,6 @@ import es.caib.carpeta.logic.AuditoriaLogicaService;
 import es.caib.carpeta.logic.LogCarpetaLogicaService;
 import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaService;
 import es.caib.carpeta.model.entity.Plugin;
-import java.net.URL;
 
 
 /**
@@ -63,39 +62,7 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
     
     
     
-   @RequestMapping(value = "/testplugin/{pluginID}", method = RequestMethod.GET)
-   public ModelAndView startTestPlugin(@PathVariable("pluginID") Long pluginID,
-          HttpServletRequest request, HttpServletResponse response,
-          PluginFilterForm filterForm) throws Exception, I18NException {
-
-      // long temps = System.currentTimeMillis();
-
-
-       String administrationID= request.getParameter("administrationID");
-
-       String urlBase = request.getParameter("urlBase");
-       
-       log.info("startTestPlugin:: administrationID = " + administrationID);
-       log.info("startTestPlugin:: URL BASE = " + urlBase);
-       String contextPath = request.getContextPath();
-       
-       log.info("startTestPlugin:: contextPath => " + contextPath);
-       
-       URL url = new URL(urlBase);
-       
-       int port = url.getPort();
-       
-       String base = url.getProtocol() + "://" + url.getHost() + (port == -1? "" : (":" +port)) + contextPath; 
-       
-       log.info("startTestPlugin:: BASE = " + base);
-       
-       String view = "testPlugin";
-
-
-       return CarpetaFrontModuleSuperAdminController.startPrivateSignatureProcess(request, response, view, pluginID, administrationID, base);
-
-    }
-    
+   
    
    
    @RequestMapping(value = "/reload/{pluginID}", method = RequestMethod.GET)
@@ -119,11 +86,9 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
 
        if (pluginFilterForm.isNou()) {
            
-           pluginFilterForm.addAdditionalButtonForEachItem(new AdditionalButton("fas fa-play-circle",
-                   "test", "javascript:testPlugin({0});", "btn-info"));
-           
-           
-           
+           //pluginFilterForm.addAdditionalButtonForEachItem(new AdditionalButton("fas fa-play-circle",
+           //        "test", "javascript:testPlugin({0});", "btn-info"));
+
            pluginFilterForm.addAdditionalButtonForEachItem(new AdditionalButton("fas fa-sync",
                    "reload", getContextWeb() + "/reload/{0}", "btn-warning"));
            

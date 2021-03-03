@@ -108,8 +108,8 @@ public class Sistra1ServiceImpl {
 
         long num = backofficeFacade.obtenerTotalElementosExpediente(fee);
 
-        int pagina = 1;
-        int tamPagina = (int) num;
+        //int pagina = 1;
+        //int tamPagina = (int) num;
 
         ElementosExpediente el = backofficeFacade.obtenerElementosExpediente(fee, null, null);
 

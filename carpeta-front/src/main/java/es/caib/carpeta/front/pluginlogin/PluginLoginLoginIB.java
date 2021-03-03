@@ -29,9 +29,9 @@ import es.caib.loginib.rest.api.v1.RLogoutParams;
  * @author anadal
  *
  */
-public class PluginLoginLoginIB {
+public class PluginLoginLoginIB implements IPluginLogin {
 
-    private static final Logger log = LoggerFactory.getLogger(PluginLoginLoginIB.class);
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     private String METODES_AUTENTICACIO = Configuracio.getLoginIBMethodAuth();
     private String CODI_ENTITAT = Configuracio.getLoginIBEntidad();
