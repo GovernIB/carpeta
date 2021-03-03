@@ -18,7 +18,6 @@ import es.caib.regweb3.ws.api.v3.ResultadoBusquedaWs;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -31,7 +30,7 @@ import java.util.Properties;
  */
 public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
 
-    /* XYZ ZZZ  NOM 3 a 32 */
+    /* XYZ ZZZ NOM 3 a 32 */
     public static final String REGWEB32_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "regweb32.";
 
     public static final String MIME_JPG = "image/jpeg";
@@ -102,7 +101,6 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
 
     @Override
     public BasicServiceInformation existsInformation(UserData administrationID) throws Exception {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -142,10 +140,10 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
 
     // Propietat que indica la url de descarrega del justificant
     @Override
-    public String getConcsvUrl() {
+    public String getConcsvUrl() throws Exception {
 
-        /** ES REQUERIDA !!!!  XYZ ZZZ  */
-        return getProperty(REGWEB32_PROPERTY_BASE + "concsv.url");
+        /** ES REQUERIDA !!!! XYZ ZZZ */
+        return getPropertyRequired(REGWEB32_PROPERTY_BASE + "concsv.url");
     }
 
     @Override
@@ -224,9 +222,9 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
 
     protected static final String LLISTAT_REGISTRES_PAGE = "llistatRegistres32";
 
-    List<AsientoWs> listRegistros = new ArrayList<>();
+    // List<AsientoWs> listRegistros2 = new ArrayList<>();
 
-    int totalResults = 0;
+    // int totalResults = 0;
 
     public void llistatDeRegistres(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
@@ -258,13 +256,12 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
 
         Map<String, Object> map = new HashMap<String, Object>();
 
-        List<AsientoWs> registres;
+        ResultadoBusquedaWs result;
+        result = getRegistres(userData.getAdministrationID(), entidad, pageNumber, locale);
 
-        if (isDevelopment()) {
-            registres = getRegistresDebug(userData.getAdministrationID(), entidad, pageNumber, locale);
-        } else {
-            registres = getRegistres(userData.getAdministrationID(), entidad, pageNumber, locale);
-        }
+        @SuppressWarnings("unchecked")
+        List<AsientoWs> registres = (List<AsientoWs>) (List<?>) result.getResults();
+        int totalResults = result.getTotalResults();
 
         InputStream input = this.getClass().getResourceAsStream("/webpage/regweb32.html");
 
@@ -294,7 +291,7 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
         map.put("registros", registres);
 
         // Calculam la paginació
-        Paginacio paginacio = new Paginacio(this.totalResults, pageNumber);
+        Paginacio paginacio = new Paginacio(totalResults, pageNumber);
         String firstUrl = absolutePluginRequestPath + "/" + LLISTAT_REGISTRES_PAGE + "?pageNumber=1";
         String lastUrl = absolutePluginRequestPath + "/" + LLISTAT_REGISTRES_PAGE + "?pageNumber="
                 + paginacio.getTotalPages();
@@ -318,34 +315,7 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
 
     }
 
-    private List<AsientoWs> getRegistresDebug(String administrationID, String entidad, int pageNumber, Locale locale)
-            throws Exception {
-
-        List<AsientoWs> registros = this.getRegistres(administrationID, entidad, pageNumber, locale);
-
-        if (registros == null || registros.isEmpty()) {
-            log.info(" REGISTRES NULL o EMPTY: " + registros);
-
-        } else {
-            int x = 1;
-            for (AsientoWs ar : registros) {
-
-                log.info(" -------------  REGISTRE [" + x + " ] -------------------");
-                log.info("ar.getNumeroRegistroFormateado() => " + (ar.getNumeroRegistro()));
-                log.info("ar.getResumen() => " + ar.getExtracto());
-                log.info("ar.getFechaRegistro(); => " + ar.getFechaRegistro());
-                log.info("ar.getUnidadTramitacionDestinoDenominacion() => " + ar.getDenominacionDestino());
-
-                x++;
-
-            }
-
-        }
-
-        return registros;
-    }
-
-    public List<AsientoWs> getRegistres(String administrationID, String entidad, int pageNumber, Locale locale)
+    public ResultadoBusquedaWs getRegistres(String administrationID, String entidad, int pageNumber, Locale locale)
             throws Exception {
 
         RegWebAsientoRegistralWs service = getRegWebAsientoRegistralWsService();
@@ -353,11 +323,35 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
         ResultadoBusquedaWs result = service.obtenerAsientosCiudadanoCarpeta(entidad, administrationID, pageNumber,
                 locale.getLanguage());
 
-        @SuppressWarnings("unchecked")
-        List<AsientoWs> registros = (List<AsientoWs>) (List<?>) result.getResults();
-        this.listRegistros = registros;
-        this.totalResults = result.getTotalResults();
-        return registros;
+        // @SuppressWarnings("unchecked")
+        // List<AsientoWs> registros = (List<AsientoWs>) (List<?>) result.getResults();
+        // this.totalResults = result.getTotalResults();
+
+        if (isDevelopment()) {
+            @SuppressWarnings("unchecked")
+            List<AsientoWs> registros = (List<AsientoWs>) (List<?>) result.getResults();
+
+            if (registros == null || registros.isEmpty()) {
+                log.info(" REGISTRES NULL o EMPTY: " + registros);
+
+            } else {
+                int x = 1;
+                for (AsientoWs ar : registros) {
+
+                    log.info(" -------------  REGISTRE [" + x + " ] -------------------");
+                    log.info("ar.getNumeroRegistroFormateado() => " + (ar.getNumeroRegistro()));
+                    log.info("ar.getResumen() => " + ar.getExtracto());
+                    log.info("ar.getFechaRegistro(); => " + ar.getFechaRegistro());
+                    log.info("ar.getUnidadTramitacionDestinoDenominacion() => " + ar.getDenominacionDestino());
+
+                    x++;
+
+                }
+
+            }
+        }
+
+        return result;
     }
 
     protected static final String DETALL_REGISTRE_PAGE = "detallRegistre32";

@@ -65,21 +65,12 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
     public abstract String getEntidad() throws Exception;
 
     // Propietat que indica la url de descarrega del justificant
-    public abstract String getConcsvUrl();
+    public abstract String getConcsvUrl() throws Exception;
 
     @Override
     public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet) {
-        /*
-         * log.info("Regweb32CarpetaFrontPlugin::requestCarpetaFront => query: ]" +
-         * query + "["); log.
-         * info("Regweb32CarpetaFrontPlugin::requestCarpetaFront => administrationID: "
-         * + userData.getAdministrationID()); log.
-         * info("Regweb32CarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
-         * + administrationEncriptedID);
-         */
-        // Regweb32DetallRegistre regweb32DetallRegistre = new Regweb32DetallRegistre();
 
         try {
 
@@ -143,17 +134,16 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
     }
 
     public String getDetallDeRegistrePage(String absolutePluginRequestPath, String numeroRegistroFormateado,
-            String administrationID, /* String entidad, String concsvUrl, */ Locale locale, String error)
-            throws Exception {
+            String administrationID, Locale locale, String error) throws Exception {
 
         Map<String, Object> map = new HashMap<String, Object>();
 
         AsientoWs registre;
 
         if (isDevelopment()) {
-            registre = getDetallRegistreDebug(numeroRegistroFormateado, administrationID, /* entidad, */ locale);
+            registre = getDetallRegistreDebug(numeroRegistroFormateado, administrationID, locale);
         } else {
-            registre = getDetallRegistre(numeroRegistroFormateado, administrationID, /* entidad, */ locale);
+            registre = getDetallRegistre(numeroRegistroFormateado, administrationID, locale);
         }
 
         InputStream input = this.getClass().getResourceAsStream("/webpage/detall32.html");
@@ -213,7 +203,6 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
             JustificanteReferenciaWs justificantRegistre = getReferenciaJustificantRegistre(/* entidad, */
                     registre.getNumeroRegistro(), locale);
             if (justificantRegistre.getCsv() != null) {
-                // XYZ ZZZ getCONCSVURL ??????
                 map.put("justificanteCsv", getConcsvUrl().concat(justificantRegistre.getCsv()));
             } else if (justificantRegistre.getUrl() != null) {
                 map.put("justificanteUrl", justificantRegistre.getUrl());
@@ -232,15 +221,12 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
 
     }
 
-    private AsientoWs getDetallRegistreDebug(String numeroRegistroFormateado, String administrationID, /*
-                                                                                                        * String
-                                                                                                        * entidad,
-                                                                                                        */
-            Locale locale) throws Exception {
+    private AsientoWs getDetallRegistreDebug(String numeroRegistroFormateado, String administrationID, Locale locale)
+            throws Exception {
 
         // TODO Obtener idioma
 
-        AsientoWs registro = getDetallRegistre(numeroRegistroFormateado, administrationID, /* entidad, */ locale);
+        AsientoWs registro = getDetallRegistre(numeroRegistroFormateado, administrationID, locale);
 
         if (registro == null) {
             System.out.println(" REGISTRE NULL o EMPTY: " + registro);
@@ -281,7 +267,7 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
 
     public void justificantDeRegistre(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
-            String administrationEncriptedID, /* String entidad, String concsvUrl, */ Locale locale, boolean isGet) {
+            String administrationEncriptedID, Locale locale, boolean isGet) {
 
         try {
 
@@ -295,11 +281,6 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
                     Long.valueOf(tipoRegistro), userData.getAdministrationID(), /* entidad, concsvUrl, */ locale,
                     request, response);
 
-            /*
-             * try { response.getWriter().println(webpage); response.flushBuffer(); } catch
-             * (IOException e) { log.error("Error obtening writer: " + e.getMessage(), e); }
-             */
-
         } catch (Exception e) {
             log.error("Error llistant registres: " + e.getMessage(), e);
         }
@@ -307,12 +288,11 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
     }
 
     public void getJustificantDeRegistrePage(String absolutePluginRequestPath, String numeroRegistroFormateado,
-            Long tipoRegistro, String administrationID, /* String entidad, String concsvUrl, */ Locale locale,
-            HttpServletRequest request, HttpServletResponse response) throws Exception {
+            Long tipoRegistro, String administrationID, Locale locale, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
         // Obtenim justificant
-        JustificanteWs justificantRegistre = getJustificantRegistre(/* entidad, */ numeroRegistroFormateado,
-                tipoRegistro, locale);
+        JustificanteWs justificantRegistre = getJustificantRegistre(numeroRegistroFormateado, tipoRegistro, locale);
 
         // Indicam si s'ha produit un error en obtenció de l'annexe
 
@@ -324,7 +304,7 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
             errorJustificant = getTraduccio("justificante.error.generando", locale);
 
             String webpage = getDetallDeRegistrePage(absolutePluginRequestPath, numeroRegistroFormateado,
-                    administrationID, /* entidad, concsvUrl, */ locale, errorJustificant);
+                    administrationID, locale, errorJustificant);
             try {
                 response.getWriter().println(webpage);
                 response.flushBuffer();
@@ -339,8 +319,8 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
         }
     }
 
-    public JustificanteReferenciaWs getReferenciaJustificantRegistre(
-            /* String entidad, */ String numeroRegistroFormateado, Locale locale) throws Exception {
+    public JustificanteReferenciaWs getReferenciaJustificantRegistre(String numeroRegistroFormateado, Locale locale)
+            throws Exception {
 
         JustificanteReferenciaWs justificante;
 
@@ -357,8 +337,8 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
 
     }
 
-    public JustificanteWs getJustificantRegistre(/* String entidad, */ String numeroRegistroFormateado,
-            Long tipoRegistro, Locale locale) throws Exception {
+    public JustificanteWs getJustificantRegistre(String numeroRegistroFormateado, Long tipoRegistro, Locale locale)
+            throws Exception {
 
         JustificanteWs justificante;
 
@@ -385,7 +365,7 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
 
     public void annexeDeRegistre(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
-            String administrationEncriptedID, /* String entidad, String concsvUrl, */ Locale locale, boolean isGet) {
+            String administrationEncriptedID, Locale locale, boolean isGet) {
 
         try {
 
@@ -396,14 +376,7 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
             String idAnnexe = request.getParameter("idAnnexe");
 
             getAnnexeDeRegistrePage(absolutePluginRequestPath, numeroRegistroFormateado, Long.valueOf(idAnnexe),
-                    userData.getAdministrationID(), /* entidad, concsvUrl, */ locale, request, response);
-
-            /*
-             * try { response.getWriter().println(webpage); response.flushBuffer();
-             * 
-             * } catch (IOException e) { log.error("Error obtening writer: " +
-             * e.getMessage(), e); }
-             */
+                    userData.getAdministrationID(), locale, request, response);
 
         } catch (Exception e) {
             log.error("Error obtenint annexe: " + e.getMessage(), e);
@@ -426,7 +399,7 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
 
             errorAnnexe = getTraduccio("annexo.error.obtenent", locale);
             String webpage = getDetallDeRegistrePage(absolutePluginRequestPath, numeroRegistroFormateado,
-                    administrationID, /* entidad, concsvUrl, */ locale, errorAnnexe);
+                    administrationID, locale, errorAnnexe);
 
             try {
                 response.getWriter().println(webpage);
@@ -444,7 +417,7 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
 
     }
 
-    public FileContentWs getAnnexeRegistre(/* String entitat, */ Long idAnnexe, Locale locale) throws Exception {
+    public FileContentWs getAnnexeRegistre(Long idAnnexe, Locale locale) throws Exception {
 
         FileContentWs annexe;
 
