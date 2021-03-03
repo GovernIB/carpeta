@@ -23,20 +23,6 @@ ALTER TABLE car_acces RENAME COLUMN nivellseguretat  TO metodeautenticacio;
 ALTER TABLE car_auditoria ADD objecte varchar2(255 char);
 
 
--- 26/01/2021 Dades Personals de l'usuari emprant PINBAL #290
-UPDATE car_plugin SET  propietats='# Class => org.fundaciobit.pluginsib.carpetafront.dadespersonalsreact.DadesPersonalsReactCarpetaFrontPlugin
-
-es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.baseurl=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.baseurl"]]
-es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.username=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.username"]]
-es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.password=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.password"]]
-
-# Necessari en DEV i PRE. NO es fan cridades reals sinó d,un joc de proves
-# Exemples:   - 30000056Y, FUSTER
-#             - 41107605G, JAUME
-es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.testnif=30000056Y
-es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.testsurname=FUSTER'  WHERE pluginid=85;
-
-
 --29/01/2021 Taula de Logs i Accessos a un altre TableSpace #315
 ALTER TABLE car_log RENAME COLUMN error TO error2;
 ALTER TABLE car_log ADD (error CLOB);
@@ -46,7 +32,6 @@ ALTER TABLE car_log DROP COLUMN error2;
 
 alter table car_log move lob (excepcio) store as CAR_LOG_EXCEPCIO_lob (tablespace carpeta_lob index CAR_LOG_EXCEPCIO_lob_i);
 
-ALTER TABLE car_log MOVE TABLESPACE CARPETA_DADES;
 ALTER INDEX CAR_LOG_PK REBUILD;
 
 
@@ -54,23 +39,6 @@ alter table car_plugin move lob (propietats) store as CAR_LOG_PROPIETATS_lob (ta
 
 ALTER INDEX CAR_PLUGIN_PK REBUILD;
 
-
-ALTER TABLE CAR_ACCES MOVE TABLESPACE CARPETA_DADES;
 ALTER INDEX CAR_ACCES_PK REBUILD;
-
-
-ALTER INDEX car_avis_entitatid_fk_i REBUILD TABLESPACE CARPETA_INDEX;
-ALTER INDEX car_enllaz_logoid_fk_i REBUILD TABLESPACE CARPETA_INDEX;
-ALTER INDEX car_enllaz_urlid_fk_i REBUILD TABLESPACE CARPETA_INDEX;
-ALTER INDEX car_entitat_fitxercss_fk_i REBUILD TABLESPACE CARPETA_INDEX;
-ALTER INDEX car_entitat_logintextid_fk_i REBUILD TABLESPACE CARPETA_INDEX;
-ALTER INDEX car_entitat_logolatfront_fk_i REBUILD TABLESPACE CARPETA_INDEX;
-ALTER INDEX car_entitat_nom_fk_i REBUILD TABLESPACE CARPETA_INDEX;
-ALTER INDEX car_plugin_logoid_fk_i REBUILD TABLESPACE CARPETA_INDEX;
-ALTER INDEX car_plugent_pluginid_fk_i REBUILD TABLESPACE CARPETA_INDEX;
-ALTER INDEX car_propglob_entitatid_fk_i REBUILD TABLESPACE CARPETA_INDEX;
-ALTER INDEX car_usuari_idiomaid_fk_i REBUILD TABLESPACE CARPETA_INDEX;
-ALTER INDEX car_usuent_entitatid_fk_i REBUILD TABLESPACE CARPETA_INDEX;
-
 
 

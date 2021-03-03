@@ -14,7 +14,7 @@
         qaa number(10,0),
         resultat number(1,0) not null,
         tipus number(10,0) not null
-    )TABLESPACE CARPETA_DADES;
+    );
 
     create table car_auditoria (
        auditoriaid number(19,0) not null,
@@ -108,7 +108,7 @@
         pluginid number(19,0),
         temps number(19,0),
         tipus number(10,0) not null
-    ) TABLESPACE CARPETA_DADES
+    ) 
      lob (error) store as car_log_error_lob
           (tablespace CARPETA_LOB
              index car_log_error_lob_i)
