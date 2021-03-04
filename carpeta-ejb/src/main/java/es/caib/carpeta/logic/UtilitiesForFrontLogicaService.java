@@ -32,6 +32,8 @@ public interface UtilitiesForFrontLogicaService {
     public List<EntitatJPA> getEntitatsFull(String language) throws I18NException;
 
     public List<Idioma> getIdiomes() throws I18NException;
+    
+    public PluginInfo getFrontPluginInfo( String language, Long pluginID) throws I18NException;
 
     public List<PluginInfo> getFrontPlugins(String codiEntitat, String language, Long seccioID) throws I18NException;
 

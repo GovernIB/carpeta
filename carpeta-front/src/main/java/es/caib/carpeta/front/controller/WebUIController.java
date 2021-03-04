@@ -13,6 +13,7 @@ import es.caib.carpeta.persistence.EntitatJPA;
 import es.caib.carpeta.persistence.SeccioJPA;
 import es.caib.carpeta.logic.SeccioLogicaService;
 import es.caib.carpeta.logic.utils.EjbManager;
+import es.caib.carpeta.logic.utils.PluginInfo;
 import es.caib.carpeta.model.entity.Avis;
 import es.caib.carpeta.model.entity.Enllaz;
 import es.caib.carpeta.model.entity.Idioma;
@@ -68,6 +69,11 @@ public class WebUIController extends CommonFrontController {
 
     public static final String ENLLAZ_LOGO_PATH = "/enllazlogo";
 
+    
+    
+    
+    
+    
     
     /**
      * 
@@ -515,33 +521,57 @@ public class WebUIController extends CommonFrontController {
             processException(e, response);
         }
     }
+    
+    
+    
+    @RequestMapping(value = "/seccioplugin/{seccioID}/{pluginID}", method = RequestMethod.GET)
+    public void getSeccioPlugin(HttpServletRequest request, HttpServletResponse response,
+            @PathVariable("seccioID") Long seccioID,@PathVariable("pluginID") Long pluginID) {
+        try {
+            
+            String lang = LocaleContextHolder.getLocale().getLanguage();
+            log.info("/seccioplugin/" + seccioID + "/" + pluginID + " ==> " + lang);
+            
+            
+            
+            
+                    
+            PluginInfo pluginInfo = utilsEjb.getFrontPluginInfo(  lang, pluginID);
+            
+            SeccioInfo seccioInfo = getSeccioInfo(request, seccioID, lang);
+
+            // Passar enllazosInfo a
+            Gson gson = new Gson();
+            String json = gson.toJson(new Object[] { seccioInfo, pluginInfo });
+
+            log.info(" Seccio-Plugin amb ID = " + seccioID + "-" + pluginID  + ":\n" + json + "\n");
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF8");
+
+            byte[] utf8JsonString = json.getBytes("UTF8");
+
+            response.getOutputStream().write(utf8JsonString);
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
+    }
+
+    
+    
 
     @RequestMapping(value = "/seccio/{seccioID}", method = RequestMethod.GET)
     public void getSeccio(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("seccioID") Long seccioID) {
         try {
-            Seccio seccio = seccioLogicaEjb.findByPrimaryKey(seccioID);
-
-            String lang = LocaleContextHolder.getLocale().getLanguage();
-
-            SeccioJPA seccioJPA = (SeccioJPA) seccio;
             
+            String lang = LocaleContextHolder.getLocale().getLanguage();
             log.info("/seccio/" + seccioID + " ==> " + lang);
-
-            String nom ,descripcio;
-            if (seccioJPA.getNomTraduccions().get(lang) == null) {  
-                log.error(" TENIM UN LLENGUATGE DESCONEGUT [" + lang + "] !!!!!", new Exception());
-                nom = seccioJPA.getNomTraduccions().get(Configuracio.getDefaultLanguage()).getValor();
-                descripcio = seccioJPA.getDescripcioTraduccions().get(Configuracio.getDefaultLanguage()).getValor();                
-            } else {
-                nom = seccioJPA.getNomTraduccions().get(lang).getValor();
-                descripcio = seccioJPA.getDescripcioTraduccions().get(lang).getValor();
-            }
-
-            String urllogo = request.getContextPath() + WEBUI_PATH + ENLLAZ_LOGO_PATH + "/"
-                    + HibernateFileUtil.encryptFileID(seccioJPA.getIconaID());
-
-            SeccioInfo seccioInfo = new SeccioInfo(seccioJPA.getSeccioID(), nom, descripcio, urllogo);
+            
+            
+            
+            SeccioInfo seccioInfo = getSeccioInfo(request, seccioID, lang);
 
             // Passar enllazosInfo a
             Gson gson = new Gson();
@@ -559,6 +589,28 @@ public class WebUIController extends CommonFrontController {
         } catch (Throwable e) {
             processException(e, response);
         }
+    }
+
+    protected SeccioInfo getSeccioInfo(HttpServletRequest request, Long seccioID, String lang) {
+        Seccio seccio = seccioLogicaEjb.findByPrimaryKey(seccioID);
+
+        SeccioJPA seccioJPA = (SeccioJPA) seccio;
+
+        String nom ,descripcio;
+        if (seccioJPA.getNomTraduccions().get(lang) == null) {  
+            log.error(" TENIM UN LLENGUATGE DESCONEGUT [" + lang + "] !!!!!", new Exception());
+            nom = seccioJPA.getNomTraduccions().get(Configuracio.getDefaultLanguage()).getValor();
+            descripcio = seccioJPA.getDescripcioTraduccions().get(Configuracio.getDefaultLanguage()).getValor();                
+        } else {
+            nom = seccioJPA.getNomTraduccions().get(lang).getValor();
+            descripcio = seccioJPA.getDescripcioTraduccions().get(lang).getValor();
+        }
+
+        String urllogo = request.getContextPath() + WEBUI_PATH + ENLLAZ_LOGO_PATH + "/"
+                + HibernateFileUtil.encryptFileID(seccioJPA.getIconaID());
+
+        SeccioInfo seccioInfo = new SeccioInfo(seccioJPA.getSeccioID(), nom, descripcio, urllogo);
+        return seccioInfo;
     }
     
     
@@ -913,6 +965,36 @@ public class WebUIController extends CommonFrontController {
             processException(e, response);
         }
 
+    }
+    
+    
+    @RequestMapping(value = "/plugin/{pluginID}", method = RequestMethod.GET)
+    public void getPlugin(HttpServletRequest request, HttpServletResponse response,
+            @PathVariable("pluginID") Long pluginID) {
+        try {
+            
+            String lang = LocaleContextHolder.getLocale().getLanguage();
+            
+            PluginInfo pluginInfo = utilsEjb.getFrontPluginInfo(  lang, pluginID);
+            
+           
+
+            // Passar enllazosInfo a
+            Gson gson = new Gson();
+            String json = gson.toJson(pluginInfo);
+
+            log.info(" PluginInfo amb ID = " + pluginID + ":\n" + json + "\n");
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF8");
+
+            byte[] utf8JsonString = json.getBytes("UTF8");
+
+            response.getOutputStream().write(utf8JsonString);
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
     }
 
 }

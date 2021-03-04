@@ -61,9 +61,7 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
 
     @EJB(mappedName = FitxerLogicaService.JNDI_NAME)
     protected FitxerLogicaService fitxerLogicaEjb;
-    
-    @EJB(mappedName = es.caib.carpeta.ejb.PluginService.JNDI_NAME)
-    protected es.caib.carpeta.ejb.PluginService pluginEjb;
+
 
     /**
      * Retorna codi i nom en l'idioma seleccionat
@@ -165,6 +163,30 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
 
         return pluginsInfo;
     }
+    
+    
+    @Override
+    public PluginInfo getFrontPluginInfo( String language, Long pluginID) throws I18NException {
+
+        Plugin plugin = pluginCarpetaFrontEjb.findByPrimaryKey(pluginID);
+
+
+        PluginInfo pluginInfo;
+        {
+             {
+                PluginJPA p = (PluginJPA) plugin;
+
+                
+
+                pluginInfo = new PluginInfo(String.valueOf(plugin.getPluginID()),
+                        p.getNom().getTraduccio(language).getValor(),
+                        p.getDescripcio().getTraduccio(language).getValor(),
+                        "", 0L, "");
+            }
+        }
+
+        return pluginInfo;
+    }
 
     @Override
     public FileInfo getIconaPlugin(Long pluginID, String language) throws I18NException {
@@ -172,7 +194,7 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
     	FileInfo fi = null; 
     	
 		// miram si el plugin té associat una icona. 
-    	List<Plugin> pluginItem = pluginEjb.select(PluginFields.PLUGINID.equal(pluginID));
+    	List<Plugin> pluginItem = pluginCarpetaFrontEjb.select(PluginFields.PLUGINID.equal(pluginID));
     	if (pluginItem.size() > 0) {
     		
     		try {

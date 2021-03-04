@@ -23,17 +23,24 @@ class Breadcrumb extends Component {
             console.log(" BREADCRUMB Constructor currentlocation => " + this.props.currentlocation);
         }
 
+        this.canviatIdioma = this.canviatIdioma.bind(this);
+        i18n.on('languageChanged', this.canviatIdioma);
     }
 
-    componentDidMount() {
+    canviatIdioma(lng) {
+        console.log(" CANVIAT IDIOMA EN BREADCRUMB A ]" + lng+ "[");
+        this.canviatRoute(this.props.currentlocation, "PUSH");
+    }
 
+
+
+    componentDidMount() {
         if (this.props.history) {
             console.log("EXISTEIX  HISTORY !!!!!");
             this.props.history.listen(this.canviatRoute);
         } else {
             console.log("NO PUC LLEGIR HISTORY !!!!!");
         }
-
     }
 
 
@@ -54,31 +61,81 @@ class Breadcrumb extends Component {
             var seccioID = match[1];
             console.log("MATCH[SECCIO] === " + seccioID);
             var baseURL = sessionStorage.getItem('contextPath');
-            var url6 = baseURL + `/webui/seccio/` + seccioID;
-            console.log("URL INFO SECCIO ==> " + url6);
+            var url6 = baseURL + `/webui/seccioplugin/` + seccioID + `/` + match[3];
+            console.log("URL INFO SECCIO - PLUGIN ==> " + url6);
             axios.get(url6).then(res => {
-                var seccio = res.data;
-                console.log("BREADCRUMB ==> ACTUALITZANT STATE ==> " + seccio.nom + " [" + seccio.seccioID + "]");
-                this.setState({ items: [{ id: '/seccio/' + seccio.seccioID, label: seccio.nom }, { id: novaruta, label: "plugin" + match[2] }] });
+
+                var seccioNom;
+                var pluginNom;
+
+                var seccio = res.data[0];
+                seccioNom = seccio.nom;                
+                
+                var pluginInfo = res.data[1];
+                pluginNom =  pluginInfo.nom;
+               
+                console.log("BREADCRUMB ==> ACTUALITZANT STATE SECCIO-PLUGIN ==> " + seccioNom + " / " + pluginNom + "]");
+                 
+
+               this.setState({ items: [{ id: '/seccio/' + seccioID, label: seccioNom }, { id: novaruta, label: pluginNom }] });
             });
+
+
+
         } else {
             if (location.pathname === '/') {
                 this.setState({ items: [] });
             } else {
-                // Altre cosa ...
-                console.log("BreadCRUMB ALTRE COSA : " + location.pathname);
-                if(location.nomPagina !== 'plugin') {
-                    this.setState({items: [{id: location.pathname, label: location.nomPagina}]});
-                // Es un plugin
-                }else{
-                    var plugPath = novaruta.match('^\/plugin(react|html)\/([0-9]+)');
+                
+
+                var pluginMatch = novaruta.match('^\/plugin(react|html)\/([0-9]+)');
+
+                if (pluginMatch) {
+
+                    // Es un plugin
+
+                    console.log("BreadCRUMB ES UN PLUGIN : " + pluginMatch[1] + " -  " + pluginMatch[2]);
+
                     var baseURL2 = sessionStorage.getItem('contextPath');
+
+
+                    var url7 = baseURL2 + `/webui/plugin/` + pluginMatch[2];
+                    axios.get(url7).then(res => {
+                        var pluginInfo = res.data;
+                        this.setState({items: [{id: location.pathname, label: pluginInfo.nom}]})
+                    });
+
+                    /*
                     var url7 = baseURL2 + `/pluginfront/veureplugins/`;
                     axios.get(url7).then(res => {
-                        res.data.filter(s => s.pluginID === plugPath[2]).map((s, i) => (
+                        res.data.filter(s => s.pluginID === pluginMatch[2]).map((s, i) => (
                             this.setState({items: [{id: location.pathname, label: s.nom}]})
                         ));
-                    })
+                    });
+                    */
+                } else {
+
+
+                    var seccioMatch = novaruta.match('^\/seccio\/([0-9]+)');
+
+
+                    if (seccioMatch) {
+                        var baseURL = sessionStorage.getItem('contextPath');
+                        var url6 = baseURL + `/webui/seccio/` + seccioMatch[1];
+                        console.log("URL INFO SECCIO ==> " + url6);
+                        axios.get(url6).then(res => {
+                            var seccio = res.data;
+                            console.log("BREADCRUMB ==> ACTUALITZANT STATE SECCIO ==> " + seccio.nom + " [" + seccio.seccioID + "]");
+                            this.setState({ items: [{ id: '/seccio/' + seccio.seccioID, label: seccio.nom }] });
+                        });
+
+                    } else {
+
+                        const {t} = this.props;
+                        // Altre cosa ...
+                        console.log("BreadCRUMB ALTRE COSA : " + location.pathname);
+                        this.setState({items: [{id: location.pathname, label: t(location.nomPagina)}]});
+                    }
                 }
             }
         }
@@ -107,10 +164,11 @@ class Breadcrumb extends Component {
                 if (index < TOTAL_ITEMS - 1) {
                     itemDOMS.push(<li key={index}><span className="imc-separador"> &gt;</span><Link to={id}>{label}</Link></li>);
                 } else {
-                    if (label === 'plugin') {
+                    /*if (label === 'plugin') {
                         itemDOMS.push(<li id="plugin" key={index}>{pluginNom}</li>);
-                    } else {
-                        itemDOMS.push(<li key={index}><span className="imc-separador"> &gt; </span>{i18n.t(label)}</li>);
+                    } else */ 
+                    {
+                        itemDOMS.push(<li key={index}><span className="imc-separador"> &gt; </span>{label}</li>);
                     }
                 }
 

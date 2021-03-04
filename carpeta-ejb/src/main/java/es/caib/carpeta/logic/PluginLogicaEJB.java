@@ -41,8 +41,7 @@ public class PluginLogicaEJB extends PluginEJB implements PluginLogicaService {
       return p != null;
     }
   }
-  
-  
+
   @Override
   public void delete(Plugin instance) {
     if (instance != null) {
@@ -52,7 +51,7 @@ public class PluginLogicaEJB extends PluginEJB implements PluginLogicaService {
       super.delete(instance);
     }
   }
-  
+
   @Override
   public void clearCache() {
     synchronized (pluginsCache) {
