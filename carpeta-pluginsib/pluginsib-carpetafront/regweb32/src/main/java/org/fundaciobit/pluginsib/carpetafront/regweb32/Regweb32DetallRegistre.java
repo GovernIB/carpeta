@@ -176,7 +176,7 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
                 "registro.interesado.nombre", "registro.interesado.documento", "registro.interesado.tipo",
                 "registro.anexos", "registro.anexos.vacio", "registro.anexo.name", "registro.anexo.mime",
                 "registro.anexo.size", "registro.anexo.file", "carpeta.descargar", "justificante.generar",
-                "carpeta.catala", "carpeta.castella", "justificante.generando", "anexo.obtener" };
+                "carpeta.catala", "carpeta.castella", "justificante.generando", "anexo.obtener", "registro.anexo.nodisponible" };
 
         for (String t : traduccions) {
             map.put(t.replace('.', '_'), getTraduccio(t, locale));

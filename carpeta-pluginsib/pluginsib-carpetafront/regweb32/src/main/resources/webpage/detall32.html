@@ -120,24 +120,24 @@
                                         <#if justificanteCsv?has_content>
 
                                             <div class="text-center">
-                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="window.open('${justificanteCsv}')"><span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span>${carpeta_descargar}</button>
+                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="window.open('${justificanteCsv}')"><span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span>${carpeta_descargar}</button>
                                             </div>
                                         </#if>
 
                                         <#if justificanteUrl?has_content>
                                             <div class="text-center">
-                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="window.open('${justificanteUrl}')"><span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span>${carpeta_descargar}</button>
+                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="window.open('${justificanteUrl}')"><span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span>${carpeta_descargar}</button>
                                             </div>
                                         </#if>
 
                                         <#if justificanteId?has_content>
                                             <div class="text-center">
-                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarAnnex('${justificanteId?long?c}')"><span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span> ${carpeta_descargar}</button>
+                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarAnnex('${justificanteId?long?c}')"><span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span> ${carpeta_descargar}</button>
                                             </div>
                                         </#if>
                                         <#if !justificanteCsv?has_content && !justificanteUrl?has_content &&  !justificanteId?has_content>
                                         <div class="text-center">
-                                            <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm"  onclick="javascript:window.open('${urlJustificant}')" ><span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span>${carpeta_descargar}</button>
+                                            <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm"  onclick="javascript:window.open('${urlJustificant}')" ><span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span>${carpeta_descargar}</button>
                                         </div>
                                         </#if>
 
@@ -210,9 +210,13 @@
                                             <tr>
                                                 <td>${anexo?index +1}</td>
                                                 <td>${anexo.name}</td>
+                                                <#if anexo.mime?has_content >
                                                 <td>${anexo.mime} </td>
                                                 <td>${anexo.size} KB</td>
-                                                <td><button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarAnnex('${anexo.fileID?long?c}')"><span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span> ${carpeta_descargar}</button></td>
+                                                <td><button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarAnnex('${anexo.fileID?long?c}')"><span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span></button></td>
+                                                <#else>
+                                                    <td colspan="3"><span class="alert alert-danger">${registro_anexo_nodisponible}</span></td>
+                                                </#if>
                                             </tr>
 
                                             </#list>
