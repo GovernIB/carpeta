@@ -135,7 +135,7 @@
                                                 <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarAnnex('${justificanteId?long?c}')"><span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span> ${carpeta_descargar}</button>
                                             </div>
                                         </#if>
-                                        <#if !justificanteCsv?has_content && !justificanteUrl?has_content &&  !justificanteId?has_content>
+                                        <#if !justificanteUrl?has_content &&  !justificanteId?has_content>
                                         <div class="text-center">
                                             <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm"  onclick="javascript:window.open('${urlJustificant}')" ><span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span>${carpeta_descargar}</button>
                                         </div>
