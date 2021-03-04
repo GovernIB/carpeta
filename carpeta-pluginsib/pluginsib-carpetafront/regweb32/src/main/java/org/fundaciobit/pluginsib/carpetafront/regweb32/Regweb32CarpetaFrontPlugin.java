@@ -138,14 +138,6 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
 
     }
 
-    // Propietat que indica la url de descarrega del justificant
-    @Override
-    public String getConcsvUrl() throws Exception {
-
-        /** ES REQUERIDA !!!! XYZ ZZZ */
-        return getPropertyRequired(REGWEB32_PROPERTY_BASE + "concsv.url");
-    }
-
     @Override
     public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
@@ -157,7 +149,6 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
         log.info("Regweb32CarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
                 + administrationEncriptedID);
 
-        // Regweb32DetallRegistre regweb32DetallRegistre = new Regweb32DetallRegistre();
 
         try {
 
@@ -177,27 +168,7 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
                 llistatDeRegistres(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                         userData, administrationEncriptedID, Integer.parseInt(pageNumber) - 1, locale, isGet);
 
-            } /*
-               * else if (query.startsWith(Regweb32DetallRegistre.DETALL_REGISTRE_PAGE)) {
-               * 
-               * regweb32DetallRegistre.detallDeRegistre(absolutePluginRequestPath,
-               * relativePluginRequestPath, query, request, response, userData,
-               * administrationEncriptedID, getEntidad(),
-               * getConcsvUrl(),getRegWebAsientoRegistralWsService(), locale, isGet);
-               * 
-               * } else if (query.startsWith(JUSTIFICANT_REGISTRE_PAGE)) {
-               * 
-               * regweb32DetallRegistre.justificantDeRegistre(absolutePluginRequestPath,
-               * relativePluginRequestPath, query, request, response, userData,
-               * administrationEncriptedID,getEntidad(), getConcsvUrl(),
-               * getRegWebAsientoRegistralWsService(), locale, isGet); } else if
-               * (query.startsWith(ANNEXE_REGISTRE_PAGE)) {
-               * 
-               * regweb32DetallRegistre.annexeDeRegistre(absolutePluginRequestPath,
-               * relativePluginRequestPath, query, request, response, userData,
-               * administrationEncriptedID,getEntidad(), getConcsvUrl(),
-               * getRegWebAsientoRegistralWsService(),locale, isGet); }
-               */ else {
+            }  else {
 
                 super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request,
                         response, userData, administrationEncriptedID, locale, isGet);
@@ -253,9 +224,6 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
 
     protected static final String LLISTAT_REGISTRES_PAGE = "llistatRegistres32";
 
-    // List<AsientoWs> listRegistros2 = new ArrayList<>();
-
-    // int totalResults = 0;
 
     public void llistatDeRegistres(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
@@ -353,10 +321,6 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
 
         ResultadoBusquedaWs result = service.obtenerAsientosCiudadanoCarpeta(entidad, administrationID, pageNumber,
                 locale.getLanguage());
-
-        // @SuppressWarnings("unchecked")
-        // List<AsientoWs> registros = (List<AsientoWs>) (List<?>) result.getResults();
-        // this.totalResults = result.getTotalResults();
 
         if (isDevelopment()) {
             @SuppressWarnings("unchecked")
