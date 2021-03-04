@@ -77,7 +77,7 @@ class LlistatDePlugins extends Component {
         if (this.props.history) {
             var seccioID = this.props.seccioID ? this.props.seccioID : 0;
             var baseSeccio;
-            if (seccioID == 0) {
+            if (seccioID === 0) {
                 baseSeccio = '';
             } else {
                 baseSeccio = '/seccio/' + seccioID;
@@ -95,7 +95,7 @@ class LlistatDePlugins extends Component {
         if (this.props.history) {
             var seccioID = this.props.seccioID ? this.props.seccioID : 0;
             var baseSeccio;
-            if (seccioID == 0) {
+            if (seccioID === 0) {
                 baseSeccio = '';
             } else {
                 baseSeccio = '/seccio/' + seccioID;
@@ -184,14 +184,9 @@ class LlistatDePlugins extends Component {
         ));
 
 
-
         plugHtml = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 0).map((s, i) => (
             <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
-                {/*
-
-                <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}
-                        onClick={event => window.location.href = "javascript:newwPluginnHtml('contingut', '1', '" + s.pluginID + "');"}> */}
-                <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`} to={baseSeccio + "/pluginhtml/" + s.pluginID} >
+                <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`} to={{pathname: baseSeccio + "/pluginhtml/" + s.pluginID, nomPagina: "plugin" }} >
                     <span className="card-title titol pl-1 h3"><img
                         src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
                         alt="" title=""
@@ -199,54 +194,47 @@ class LlistatDePlugins extends Component {
                     <span className="titolPlugin  titol h3">{s.nom}</span>
                     <span className="card-text mb-3 mt-3 alignCenter" style={styleDesc}>{s.descripcio}</span>
                 </Link>
-                {/*</button>*/}
             </div>
         ));
 
         plugHtmlInfo = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 1).map((s, i) => (
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
-                <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
-                    onClick={(event) => this.infoHtml(s.missatge, s.pluginID)}>
+                <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`} to={{pathname: baseSeccio + "/pluginhtml/" + s.pluginID, nomPagina: "plugin" }} >
                     <span className="card-title titol pl-1 h3"><img src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} alt="" title="" className="imc-icona" /></span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>
                     <span className="card-text mb-3 mt-3 alignCenter" style={styleDesc}>{s.descripcio}</span>
-                </button>
+                </Link>
             </div>
         ));
         plugHtmlWarning = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 2).map((s, i) => (
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
-                <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
-                    onClick={(event) => this.infoHtml(s.missatge, s.pluginID)}>
+                <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`} to={{pathname: baseSeccio + "/pluginhtml/" + s.pluginID, nomPagina: "plugin" }} >
                     <span className="card-title titol pl-1 h3"><img
                         src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
                         alt="" title=""
                         className="imc-icona" /></span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>
                     <span className="card-text mb-3 mt-3 alignCenter" style={styleDesc}>{s.descripcio}</span>
-                </button>
+                </Link>
             </div>
         ));
         plugHtmlError = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 3).map((s, i) => (
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
-                <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
-                    onClick={(event) => this.error(s.missatge)}>
+                <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`} to={{pathname: baseSeccio + "/pluginhtml/" + s.pluginID, nomPagina: "plugin" }} >
                     <span className="card-title titol pl-1 h3"><img
                         src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
                         alt="" title=""
                         className="imc-icona" /></span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>
                     <span className="card-text mb-3 mt-3 alignCenter" style={styleDesc}>{s.descripcio}</span>
-                </button>
+                </Link>
             </div>
         ));
 
 
         plugReact = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 0).map((s, i) => (
             <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
-                {/*<button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
-                        onClick={event => window.location.href = "javascript:newwPluginnReact('contingut', '1', '" + s.pluginID + "');"}> */}
-                <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`} to={baseSeccio + "/pluginreact/" + s.pluginID} >
-
+                <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`} to={{pathname: baseSeccio + "/pluginreact/" + s.pluginID, nomPagina: "plugin" }} >
                     <span className="card-title titol pl-1 h3"><img
                         src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
                         alt="" title=""
@@ -254,46 +242,42 @@ class LlistatDePlugins extends Component {
                     <span className="titolPlugin  titol h3">{s.nom}</span>
                     <span className="card-text mb-3 mt-3 alignCenter" style={styleDesc}>{s.descripcio}</span>
                 </Link>
-                {/*</button>*/}
             </div>
         ));
         plugReactInfo = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 1).map((s, i) => (
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
-                <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
-                    onClick={(event) => this.infoReact(s.missatge, s.pluginID)}>
+                <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`} to={{pathname: baseSeccio + "/pluginreact/" + s.pluginID, nomPagina: "plugin" }} >
                     <span className="card-title titol pl-1 h3"><img
                         src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
                         alt="" title=""
                         className="imc-icona" /></span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>
                     <span className="card-text mb-3 mt-3 alignCenter" style={styleDesc}>{s.descripcio}</span>
-                </button>
+                </Link>
             </div>
         ));
         plugReactWarning = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 2).map((s, i) => (
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
-                <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
-                    onClick={(event) => this.infoReact(s.missatge, s.pluginID)}>
+                <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`} to={{pathname: baseSeccio + "/pluginreact/" + s.pluginID, nomPagina: "plugin" }} >
                     <span className="card-title titol pl-1 h3"><img
                         src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
                         alt="" title=""
                         className="imc-icona" /></span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>
                     <span className="card-text mb-3 mt-3 alignCenter" style={styleDesc}>{s.descripcio}</span>
-                </button>
+                </Link>
             </div>
         ));
         plugReactError = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 3).map((s, i) => (
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
-                <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`}
-                    onClick={(event) => this.error(s.missatge)}>
+                <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`} to={{pathname: baseSeccio + "/pluginreact/" + s.pluginID, nomPagina: "plugin" }} >
                     <span className="card-title titol pl-1 h3"><img
                         src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
                         alt="" title=""
                         className="imc-icona" /></span>
                     <span className="titolPlugin  titol h3">{s.nom}</span>
                     <span className="card-text mb-3 mt-3 alignCenter " style={styleDesc}>{s.descripcio}</span>
-                </button>
+                </Link>
             </div>
         ));
 

@@ -23,8 +23,6 @@ class Breadcrumb extends Component {
             console.log(" BREADCRUMB Constructor currentlocation => " + this.props.currentlocation);
         }
 
-        
-        
     }
 
     componentDidMount() {
@@ -69,7 +67,19 @@ class Breadcrumb extends Component {
             } else {
                 // Altre cosa ...
                 console.log("BreadCRUMB ALTRE COSA : " + location.pathname);
-                this.setState({ items: [{ id: location.pathname, label: location.nomPagina }] });
+                if(location.nomPagina !== 'plugin') {
+                    this.setState({items: [{id: location.pathname, label: location.nomPagina}]});
+                // Es un plugin
+                }else{
+                    var plugPath = novaruta.match('^\/plugin(react|html)\/([0-9]+)');
+                    var baseURL2 = sessionStorage.getItem('contextPath');
+                    var url7 = baseURL2 + `/pluginfront/veureplugins/`;
+                    axios.get(url7).then(res => {
+                        res.data.filter(s => s.pluginID === plugPath[2]).map((s, i) => (
+                            this.setState({items: [{id: location.pathname, label: s.nom}]})
+                        ));
+                    })
+                }
             }
         }
 
@@ -85,9 +95,8 @@ class Breadcrumb extends Component {
 
         let renderHTML = '';
 
-        if (typeof items !== "undefined" && items.length != 0) {
+        if (typeof items !== "undefined" && items.length !== 0) {
 
-            //itemDOMS.push(<li key='inici'><NavLink to={'/'}>{i18n.t('mollaInici')}</NavLink></li>);
             const TOTAL_ITEMS = items.length;
 
             itemDOMS.push(<li key='inici'><Link to={'/'}>{i18n.t('mollaInici')}</Link></li>);
@@ -98,7 +107,7 @@ class Breadcrumb extends Component {
                 if (index < TOTAL_ITEMS - 1) {
                     itemDOMS.push(<li key={index}><span className="imc-separador"> &gt;</span><Link to={id}>{label}</Link></li>);
                 } else {
-                    if (i18n.t(label) === 'plugin') {
+                    if (label === 'plugin') {
                         itemDOMS.push(<li id="plugin" key={index}>{pluginNom}</li>);
                     } else {
                         itemDOMS.push(<li key={index}><span className="imc-separador"> &gt; </span>{i18n.t(label)}</li>);

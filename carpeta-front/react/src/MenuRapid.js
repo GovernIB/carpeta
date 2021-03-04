@@ -2,14 +2,12 @@ import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
 import axios from "axios";
 import i18n from "i18next";
-import LlistatDePlugins from './LlistatDePlugins';
 import { HashRouter, Switch, Route, Link,useHistory } from "react-router-dom";
 
 /**
  * 
  * @author anadal Migració a ROUTER
  */
-
 
 
 class MenuRapid extends Component {
@@ -52,8 +50,6 @@ class MenuRapid extends Component {
     }
 
 
-
-
     render() {
 
         const {t} = this.props;
@@ -66,30 +62,20 @@ class MenuRapid extends Component {
         var enllasosPseusoPluginMenu;
         var seccionsS;
 
-    
-        // var dades;
-        // var gestions;
-
-        if(autenticat === '0'){
-
-
-        } else if(autenticat === '1'){
-
+        if(autenticat === '1'){
 
             gestionsHtml = plugins.filter(s => s.reactComponent === 'false').map((s, i) => (
                 <li key={i} className="nav-item pr-4">
-                    <Link className="navCarpeta" to={"/pluginhtml/" + s.pluginID} >
+                    <Link className="navCarpeta" to={{pathname: "/pluginhtml/" + s.pluginID, nomPagina: "plugin" }} >
                         <img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} alt="" title="" className="imc-icona" />
                         <span className="menuRapidView">{s.nom}</span>
                         </Link>
                 </li>
             ));
 
-
             gestionsReact = plugins.filter(s => s.reactComponent === 'true').map((s, i) => (
                     <li key={i} className="nav-item pr-4">
-                        {/*<a className="navCarpeta" href={"javascript:newwPluginnReact('contingut', '1', '" + s.pluginID + "');"} title={s.nom}>*/}
-                        <Link className="navCarpeta" to={"/pluginreact/" + s.pluginID} >
+                        <Link className="navCarpeta" to={{pathname: "/pluginreact/" + s.pluginID, nomPagina: "plugin" }} >
                             <img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} alt="" title="" className="imc-icona" />
                             <span className="menuRapidView">{s.nom}</span>
                         </Link>
@@ -113,7 +99,7 @@ class MenuRapid extends Component {
             const seccions = this.state.seccions;
             seccionsS = seccions.map((s, i) => (
                 <li key={i} className="nav-item pr-4" > 
-                <Link to={"/seccio/" + s.seccioID} className="navCarpeta">
+                    <Link to={{pathname: "/seccio/" + s.seccioID, nomPagina: "seccio" }}>
                         <img src={s.iconaID} title={s.nom} alt={s.descripcio} className="imc-icona" />
                         <span className="menuRapidView">{s.nom}</span>
                     </Link>

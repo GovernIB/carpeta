@@ -24,14 +24,14 @@ class BarraMenu extends Component {
 
 		var auth = sessionStorage.getItem('autenticat');
 
-		if (auth ==='1') {
+		// if (auth ==='1') {
 			var baseURL = sessionStorage.getItem('contextPath');
 			var url = baseURL + `/webui/menubarlinks`;
 
 			axios.get(url).then(res => {
 				this.setState({ enllasosMenuBar : res.data });
 			});
-		}
+		// }
 	}
 
 
@@ -42,7 +42,8 @@ class BarraMenu extends Component {
 
 		let enllasosBarraMenu;
 
-		if(auth === '0' || !this.state.enllasosMenuBar ){
+		// if(auth === '0' || !this.state.enllasosMenuBar ){
+		if(!this.state.enllasosMenuBar ){
 			enllasosBarraMenu = "";
 		} else{
 			enllasosBarraMenu = this.state.enllasosMenuBar.map((s, i) => (
