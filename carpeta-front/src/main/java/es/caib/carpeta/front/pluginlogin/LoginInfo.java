@@ -6,6 +6,11 @@ package es.caib.carpeta.front.pluginlogin;
  *
  */
 public class LoginInfo {
+    
+    public static final int NIVELL_AUTENTICACIO_BAIX= 1;
+    public static final int NIVELL_AUTENTICACIO_MITJA =2;
+    public static final int NIVELL_AUTENTICACIO_ALT =3;
+    
 
     private String username;
     private String name;
@@ -13,7 +18,7 @@ public class LoginInfo {
     private String surname2;
     private String administrationID;
     private String authenticationMethod;
-    private String qaa;
+    private int qaa;
     private String identityProvider;
 
     public LoginInfo() {
@@ -21,7 +26,7 @@ public class LoginInfo {
     }
 
     public LoginInfo(String username, String name, String surname1, String surname2, String administrationID,
-            String authenticationMethod, String qaa, String identityProvider) {
+            String authenticationMethod, int qaa, String identityProvider) {
         super();
         this.username = username;
         this.name = name;
@@ -81,11 +86,11 @@ public class LoginInfo {
         this.authenticationMethod = authenticationMethod;
     }
 
-    public String getQaa() {
+    public int getQaa() {
         return qaa;
     }
 
-    public void setQaa(String qaa) {
+    public void setQaa(int qaa) {
         this.qaa = qaa;
     }
 

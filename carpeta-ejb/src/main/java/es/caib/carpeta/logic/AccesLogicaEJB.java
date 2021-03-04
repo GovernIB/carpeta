@@ -40,7 +40,7 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaService {
         accesJPA.setIp(ipAddress);
         accesJPA.setNif(usuarioClave.getNif());
         accesJPA.setDataAcces(dataDarrerAcces);
-        accesJPA.setQaa(Integer.parseInt(usuarioClave.getQaa()));
+        accesJPA.setQaa(usuarioClave.getQaa());
 
         // S'ha d'arreglar a https://github.com/GovernIB/carpeta/issues/308
         // Això està be ????

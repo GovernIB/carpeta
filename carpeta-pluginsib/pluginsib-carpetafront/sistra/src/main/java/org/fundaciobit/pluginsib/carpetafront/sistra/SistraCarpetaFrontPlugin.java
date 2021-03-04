@@ -600,7 +600,7 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         usuarioInfo.setNif(userData.getAdministrationID());
         usuarioInfo.setAutenticacion("c");
         usuarioInfo.setMetodoAutenticacion(userData.getAuthenticationMethod());
-        usuarioInfo.setQaa(userData.getQaa());
+        usuarioInfo.setQaa("" + userData.getQaa());
 
         infoTicket.setUsuarioAutenticadoInfo(usuarioInfo);
 

@@ -156,5 +156,10 @@ public class Configuracio implements Constants {
     public static String getLoginIBUrl() {
         return getProperty(CARPETA_PROPERTY_LOGINIB + "url");
     }
+    
+    public static String getLoginClass() {
+        return getProperty(Constants.CARPETA_PROPERTY_BASE + "pluginsib.login.class");
+    }
+    
 
 }

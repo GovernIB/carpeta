@@ -12,7 +12,7 @@ public class UsuarioClave {
     private String apellido2;
     private String nif;
     private String metodoAutentificacion;
-    private String qaa;
+    private int qaa;
     private String proveedorDeIdentidad;
 
     public String getNombre() {
@@ -55,11 +55,11 @@ public class UsuarioClave {
         this.metodoAutentificacion = metodoAutentificacion;
     }
 
-    public String getQaa() {
+    public int getQaa() {
         return qaa;
     }
 
-    public void setQaa(String qaa) {
+    public void setQaa(int qaa) {
         this.qaa = qaa;
     }
 

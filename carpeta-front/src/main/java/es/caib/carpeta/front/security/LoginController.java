@@ -86,17 +86,18 @@ public class LoginController {
 
 
         long temps = System.currentTimeMillis();
-        //Cream les dades bàsiques de la petició per els logs
-        StringBuilder peticio = new StringBuilder();
-        peticio.append("Usuari: no definit").append("\n");
-        peticio.append("classe: ").append(getClass().getName()).append("\n");
+       
 
         // Error login
         if ("true".equals(request.getParameter("error"))) {
 
             //Log no autenticat/error
-
-            logLogicaEjb.crearLog("Autenticació del Front", ESTAT_LOG_ERROR,TIPUS_LOG_AUTENTICACIO_FRONT,System.currentTimeMillis() - temps ,null,"Error de login",peticio.toString(),"",null);
+            //Cream les dades bàsiques de la petició per els logs
+            StringBuilder peticio = new StringBuilder();
+            peticio.append("Usuari: no definit").append("\n");
+            peticio.append("classe: ").append(getClass().getName()).append("\n");
+            logLogicaEjb.crearLog("Autenticació del Front", ESTAT_LOG_ERROR,TIPUS_LOG_AUTENTICACIO_FRONT,
+                    System.currentTimeMillis() - temps ,null,"Error de login",peticio.toString(),"",null);
             log.info("Error de login");
 
 

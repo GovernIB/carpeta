@@ -60,7 +60,7 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
         public final long startDate;
 
         public InternalUserData(String name, String surname1, String surname2, String administrationID,
-                String authenticationMethod, String qaa) {
+                String authenticationMethod, int qaa) {
             super(name, surname1, surname2, administrationID, authenticationMethod, qaa);
             this.startDate = System.currentTimeMillis();
         }

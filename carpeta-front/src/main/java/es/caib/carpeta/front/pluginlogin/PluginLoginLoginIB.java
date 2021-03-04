@@ -47,6 +47,10 @@ public class PluginLoginLoginIB implements IPluginLogin {
 
     
 
+    public PluginLoginLoginIB() {
+        super();
+    }
+
     public String startAuthentication(String urlCallBackLoginOk, String urCallBackLoginError, String language) throws Exception {
         final RLoginParams param = new RLoginParams();
         param.setAplicacion(APLICACIO_CODI);
@@ -114,7 +118,20 @@ public class PluginLoginLoginIB implements IPluginLogin {
             loginInfo.setSurname2(datosAutenticacion.getApellido2());
             loginInfo.setAdministrationID(datosAutenticacion.getNif());
             loginInfo.setAuthenticationMethod(datosAutenticacion.getMetodoAutenticacion());
-            loginInfo.setQaa(datosAutenticacion.getQaa());
+            
+            
+            int qaa;
+            try {
+                qaa = Integer.parseInt(datosAutenticacion.getQaa());
+            } catch (Exception e) {
+               log.error(" Nivell d'Autenticacio QAA desconegut ]" + datosAutenticacion.getQaa() + "[", e);
+                
+               qaa =  LoginInfo.NIVELL_AUTENTICACIO_BAIX;
+            }
+            
+            
+            
+            loginInfo.setQaa(qaa);
             // S'ha mogut la petició al issue "LoginIB no retorna informació del Provider de l'autenticacio #310 "
             //  TODO este valor no viene informado por LoginIB, tendriamos que hablar
             // con loginIb a ver si pueden enviarnoslo.

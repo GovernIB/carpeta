@@ -42,7 +42,7 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) {
 
-        log.info("Dentro de CarpetaAuthProvider");
+        log.info("Dentro de CarpetaFront AuthProvider");
         // Obtiene user/pass
         final String usuario = authentication.getName();
         final String passwd = authentication.getCredentials().toString();

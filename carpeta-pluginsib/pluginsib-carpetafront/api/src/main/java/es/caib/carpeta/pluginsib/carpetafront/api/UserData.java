@@ -12,7 +12,7 @@ public class UserData {
     protected String surname2;
     protected String administrationID;
     protected String authenticationMethod;
-    protected String qaa;
+    protected int qaa;
 
     public UserData() {
         super();
@@ -26,7 +26,7 @@ public class UserData {
     
     
     public UserData(String name, String surname1, String surname2, String administrationID, 
-            String authenticationMethod, String qaa) {
+            String authenticationMethod, int qaa) {
         super();
         this.name = name;
         this.surname1 = surname1;
@@ -76,11 +76,11 @@ public class UserData {
         this.authenticationMethod = authenticationMethod;
     }
 
-    public String getQaa() {
+    public int getQaa() {
         return qaa;
     }
 
-    public void setQaa(String qaa) {
+    public void setQaa(int qaa) {
         this.qaa = qaa;
     }
 

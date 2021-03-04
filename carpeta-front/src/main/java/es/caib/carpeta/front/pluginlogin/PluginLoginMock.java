@@ -3,6 +3,9 @@ package es.caib.carpeta.front.pluginlogin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import es.caib.carpeta.commons.utils.Configuracio;
+import es.caib.carpeta.commons.utils.Constants;
+
 /**
  * 
  * @author anadal
@@ -17,7 +20,7 @@ public class PluginLoginMock implements IPluginLogin  {
     public String startAuthentication(String urlCallBackLoginOk, String urCallBackLoginError, String language)
             throws Exception {
         
-        return urlCallBackLoginOk;
+        return urlCallBackLoginOk + "?" + Constants.TICKET_PARAM + "=" + System.currentTimeMillis();
     }
 
     @Override
@@ -30,13 +33,19 @@ public class PluginLoginMock implements IPluginLogin  {
         loginInfo.setName("Pep");
         loginInfo.setSurname1("Fuster");
         loginInfo.setSurname2("Gonella");
-        loginInfo.setAdministrationID("30000056Y");
+
+        String dni = Configuracio.getProperty("es.caib.carpeta.pluginsib.login.mock.administrationid");
+        if (dni == null) {
+          loginInfo.setAdministrationID("30000056Y");
+        } else {
+          loginInfo.setAdministrationID(dni);
+        }
         loginInfo.setAuthenticationMethod("None");
-        loginInfo.setQaa("Molt Baix");
+        loginInfo.setQaa(1);
         // S'ha mogut la petició al issue "LoginIB no retorna informació del Provider de l'autenticacio #310 "
         //  TODO este valor no viene informado por LoginIB, tendriamos que hablar
         // con loginIb a ver si pueden enviarnoslo.
-        loginInfo.setIdentityProvider("Clave"); 
+        loginInfo.setIdentityProvider("Mock"); 
         return loginInfo;
     }
 
