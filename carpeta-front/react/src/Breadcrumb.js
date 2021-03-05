@@ -35,12 +35,7 @@ class Breadcrumb extends Component {
 
 
     componentDidMount() {
-        if (this.props.history) {
-            console.log("EXISTEIX  HISTORY !!!!!");
-            this.props.history.listen(this.canviatRoute);
-        } else {
-            console.log("NO PUC LLEGIR HISTORY !!!!!");
-        }
+        this.props.history.listen(this.canviatRoute);  
     }
 
 

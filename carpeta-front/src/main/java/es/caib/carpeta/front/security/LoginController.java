@@ -23,6 +23,7 @@ import es.caib.carpeta.commons.utils.Constants;
 import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_ERROR;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_FRONT;
 import es.caib.carpeta.front.config.LoginRequestCache;
+import es.caib.carpeta.front.controller.WebUIController;
 import es.caib.carpeta.front.service.SecurityService;
 import es.caib.carpeta.front.utils.SesionHttp;
 import es.caib.carpeta.logic.AuditoriaLogicaService;
@@ -194,6 +195,7 @@ public class LoginController {
         securityService.iniciarSesionLogout(url_callback_logout, IDIOMA);
         HttpSession session = request.getSession(false);
         if (session != null) {
+            session.removeAttribute(WebUIController.SESSION_FULLINFO_MAP);
             session.invalidate();
         }
 
@@ -202,7 +204,8 @@ public class LoginController {
             PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
             codiEntitat = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
             log.info("WWWWWWWWWWWWWW entitat es null, posam DefaultEntity: " + codiEntitat + "WWWWWWWWWWWWWWWWWW");
-        }
+        }       
+        
 
         return "redirect:/e/"+codiEntitat;
 
