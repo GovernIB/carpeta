@@ -37,35 +37,17 @@ class LlistatDePlugins extends Component {
         var autenticat = sessionStorage.getItem('autenticat');;
         if (autenticat === '1') {
 
-            var baseURL = sessionStorage.getItem('contextPath');
-            // 0 == Nivell Arell
-            var url = baseURL + `/pluginfront/veureplugins/` + seccioID;
-            axios.get(url).then(res => {
-                const plugins = res.data;
-                this.setState({ plugins });
-            })
-
-            var url2 = baseURL + "/webui/nomEntitat";
-            axios.get(url2).then(res => {
-                this.setState({ nomEntitat: res.data })
-            });
-            // 0 == Nivell Arell    
-            var url4 = baseURL + `/webui/menupseudoplugin/` + seccioID;
-            axios.get(url4).then(res => {
-                this.setState({ menupseudoplugin: res.data })
-            });
-            // 0 == Nivell Arell        
-            var url5 = baseURL + `/webui/seccions/` + seccioID;
-            axios.get(url5).then(res => {
-                this.setState({ seccions: res.data })
-            });
-
-            if (seccioID != 0) {
-                var url6 = baseURL + `/webui/seccio/` + seccioID;
-                axios.get(url6).then(res => {
-                    this.setState({ seccio: res.data })
-                });
-            }
+           var baseURL = sessionStorage.getItem('contextPath');
+           var url = baseURL + `/webui/fullinfo/` + seccioID;
+           axios.get(url).then(res => {
+               var fulldata = res.data;
+               this.setState({  plugins: fulldata.veureplugins, 
+                                nomEntitat: fulldata.nomEntitat,
+                                menupseudoplugin: fulldata.menupseudoplugin,
+                                seccions: fulldata.seccions,
+                                seccio: fulldata.seccio                                
+                                });
+           });
         }
 
     }

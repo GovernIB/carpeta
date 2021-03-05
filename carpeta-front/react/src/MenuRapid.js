@@ -30,23 +30,16 @@ class MenuRapid extends Component {
 
 
     componentDidMount() {
+
+        // 0 == Nivell Arell
         var baseURL = sessionStorage.getItem('contextPath');
-        var url = baseURL + `/pluginfront/veureplugins`;
-        axios.get(url).then(res => {
-            const plugins = res.data;
-            this.setState({ plugins });
-        });
-
-        var url4 = baseURL + `/webui/menupseudoplugin/0`;
-		axios.get(url4).then(res => {
-			this.setState({ menupseudoplugin: res.data })
+		var url = baseURL + `/webui/fullinfo/0`;
+		axios.get(url).then(res => {
+			var fulldata = res.data;
+			this.setState({ plugins: fulldata.veureplugins, 
+							menupseudoplugin: fulldata.menupseudoplugin,
+							seccions: fulldata.seccions});
 		});
-
-		// 0 == Nivell Arell        
-        var url5 = baseURL + `/webui/seccions/0`;
-		axios.get(url5).then(res => {
-			this.setState({ seccions: res.data })
-        });
     }
 
 

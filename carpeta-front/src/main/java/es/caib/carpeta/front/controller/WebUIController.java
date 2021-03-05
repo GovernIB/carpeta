@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.ejb.PropietatGlobalService;
-import es.caib.carpeta.front.utils.SesionHttp;
 import es.caib.carpeta.hibernate.HibernateFileUtil;
 import es.caib.carpeta.persistence.AvisJPA;
 import es.caib.carpeta.persistence.EnllazJPA;
@@ -38,9 +37,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Conjunt de cridades REST per obtenir informació per a la presentació de la
@@ -51,13 +52,13 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping(value = WebUIController.WEBUI_PATH)
-public class WebUIController extends CommonFrontController {
+public class WebUIController extends PluginFrontController {
     
     @EJB(mappedName = SeccioLogicaService.JNDI_NAME)
     SeccioLogicaService seccioLogicaEjb;
 
-    @Autowired
-    private SesionHttp sesionHttp;
+//    @Autowired
+//    private SesionHttp sesionHttp;
 
     public static final String WEBUI_PATH = "/webui";
 
@@ -478,33 +479,7 @@ public class WebUIController extends CommonFrontController {
             String lang = LocaleContextHolder.getLocale().getLanguage();
             String codiEntitat = sesionHttp.getEntitat();
 
-            List<Enllaz> enllazos = utilsEjb.getEnllazosByType(codiEntitat, lang, enllazType, seccioID);
-
-            List<EnllazInfo> enllazosInfo = new ArrayList<WebUIController.EnllazInfo>();
-            
-            for (Enllaz enllaz : enllazos) {
-
-                EnllazJPA enllazJPA = (EnllazJPA) enllaz;
-
-                String label = enllazJPA.getNomTraduccions().get(lang).getValor();
-                String url = enllazJPA.getUrlTraduccions().get(lang).getValor();
-
-                String urllogo = request.getContextPath() + WEBUI_PATH + ENLLAZ_LOGO_PATH + "/"
-                        + HibernateFileUtil.encryptFileID(enllazJPA.getLogoID());
-
-                
-                EnllazInfo ei = new EnllazInfo(label, url, urllogo);
-                
-                if (enllazType == Constants.TIPUS_ENLLAZ_FRONT_PSEUDOPLUGIN) {
-                    if (enllazJPA.getDescripcio() == null) {
-                        ei.setLabelDescription(label);
-                    } else {
-                        ei.setLabelDescription(enllazJPA.getDescripcioTraduccions().get(lang).getValor());
-                    }
-                }
-                
-                enllazosInfo.add(ei);
-            }
+            List<EnllazInfo> enllazosInfo = getEnllazos(request, enllazType, seccioID, lang, codiEntitat);
 
             // Passar enllazosInfo a 
             Gson gson = new Gson();
@@ -521,6 +496,38 @@ public class WebUIController extends CommonFrontController {
             processException(e, response);
         }
     }
+
+    protected List<EnllazInfo> getEnllazos(HttpServletRequest request, final int enllazType, Long seccioID, String lang,
+            String codiEntitat) throws I18NException {
+        List<Enllaz> enllazos = utilsEjb.getEnllazosByType(codiEntitat, lang, enllazType, seccioID);
+
+        List<EnllazInfo> enllazosInfo = new ArrayList<WebUIController.EnllazInfo>();
+        
+        for (Enllaz enllaz : enllazos) {
+
+            EnllazJPA enllazJPA = (EnllazJPA) enllaz;
+
+            String label = enllazJPA.getNomTraduccions().get(lang).getValor();
+            String url = enllazJPA.getUrlTraduccions().get(lang).getValor();
+
+            String urllogo = request.getContextPath() + WEBUI_PATH + ENLLAZ_LOGO_PATH + "/"
+                    + HibernateFileUtil.encryptFileID(enllazJPA.getLogoID());
+
+            
+            EnllazInfo ei = new EnllazInfo(label, url, urllogo);
+            
+            if (enllazType == Constants.TIPUS_ENLLAZ_FRONT_PSEUDOPLUGIN) {
+                if (enllazJPA.getDescripcio() == null) {
+                    ei.setLabelDescription(label);
+                } else {
+                    ei.setLabelDescription(enllazJPA.getDescripcioTraduccions().get(lang).getValor());
+                }
+            }
+            
+            enllazosInfo.add(ei);
+        }
+        return enllazosInfo;
+    }
     
     
     
@@ -531,16 +538,11 @@ public class WebUIController extends CommonFrontController {
             
             String lang = LocaleContextHolder.getLocale().getLanguage();
             log.info("/seccioplugin/" + seccioID + "/" + pluginID + " ==> " + lang);
-            
-            
-            
-            
-                    
+  
             PluginInfo pluginInfo = utilsEjb.getFrontPluginInfo(  lang, pluginID);
             
             SeccioInfo seccioInfo = getSeccioInfo(request, seccioID, lang);
 
-            // Passar enllazosInfo a
             Gson gson = new Gson();
             String json = gson.toJson(new Object[] { seccioInfo, pluginInfo });
 
@@ -634,24 +636,7 @@ public class WebUIController extends CommonFrontController {
             
             log.info(" XYZ ZZZ ENTITAT ID = " + entitatID );
             
-            List<Seccio> seccions = seccioLogicaEjb.findByEntity(entitatID, seccioPareID);
-
-            List<SeccioInfo> seccioInfo = new ArrayList<SeccioInfo>();
-            
-            String lang = LocaleContextHolder.getLocale().getLanguage();
-
-            for (Seccio seccio : seccions) {
-
-                SeccioJPA seccioJPA = (SeccioJPA) seccio;
-
-                String nom = seccioJPA.getNomTraduccions().get(lang).getValor();
-                String descripcio = seccioJPA.getDescripcioTraduccions().get(lang).getValor();
-
-                String urllogo = request.getContextPath() + WEBUI_PATH + ENLLAZ_LOGO_PATH + "/"
-                        + HibernateFileUtil.encryptFileID(seccioJPA.getIconaID());
-
-                seccioInfo.add(new SeccioInfo(seccioJPA.getSeccioID(), nom, descripcio, urllogo));
-            }
+            List<SeccioInfo> seccioInfo = getSeccionsInfo(request, seccioPareID, entitatID);
 
             // Passar enllazosInfo a 
             Gson gson = new Gson();
@@ -671,6 +656,29 @@ public class WebUIController extends CommonFrontController {
         } catch (Throwable e) {
             processException(e, response);
         }
+    }
+
+    protected List<SeccioInfo> getSeccionsInfo(HttpServletRequest request, final Long seccioPareID, long entitatID)
+            throws I18NException {
+        List<Seccio> seccions = seccioLogicaEjb.findByEntity(entitatID, seccioPareID);
+
+        List<SeccioInfo> seccioInfo = new ArrayList<SeccioInfo>();
+        
+        String lang = LocaleContextHolder.getLocale().getLanguage();
+
+        for (Seccio seccio : seccions) {
+
+            SeccioJPA seccioJPA = (SeccioJPA) seccio;
+
+            String nom = seccioJPA.getNomTraduccions().get(lang).getValor();
+            String descripcio = seccioJPA.getDescripcioTraduccions().get(lang).getValor();
+
+            String urllogo = request.getContextPath() + WEBUI_PATH + ENLLAZ_LOGO_PATH + "/"
+                    + HibernateFileUtil.encryptFileID(seccioJPA.getIconaID());
+
+            seccioInfo.add(new SeccioInfo(seccioJPA.getSeccioID(), nom, descripcio, urllogo));
+        }
+        return seccioInfo;
     }
     
     
@@ -743,6 +751,8 @@ public class WebUIController extends CommonFrontController {
             WebUtils.setSessionAttribute(request, SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, idiomaFinal);
         } catch (Throwable e) {
             processException(e, response);
+        } finally {
+            request.getSession().removeAttribute(SESSION_FULLINFO_MAP);
         }
     }
 
@@ -923,12 +933,7 @@ public class WebUIController extends CommonFrontController {
 
         try {
 
-            List<Idioma> idiomesFront = idiomaEjb.select(IdiomaFields.SUPORTAT.equal(true), new OrderBy(IdiomaFields.ORDRE));
-
-            List<String> idiomaInfo = new ArrayList<>();
-            for (Idioma idioma : idiomesFront) {
-                idiomaInfo.add(idioma.getIdiomaID());
-            }
+            List<String> idiomaInfo = getIdiomes();
 
             // Passar JSON
             Gson gson = new Gson();
@@ -944,6 +949,16 @@ public class WebUIController extends CommonFrontController {
         } catch (Throwable e) {
             processException(e, response);
         }
+    }
+
+    protected List<String> getIdiomes() throws I18NException {
+        List<Idioma> idiomesFront = idiomaEjb.select(IdiomaFields.SUPORTAT.equal(true), new OrderBy(IdiomaFields.ORDRE));
+
+        List<String> idiomaInfo = new ArrayList<>();
+        for (Idioma idioma : idiomesFront) {
+            idiomaInfo.add(idioma.getIdiomaID());
+        }
+        return idiomaInfo;
     }
 
     @RequestMapping(value = "/entityicon/{entityID}", method = RequestMethod.GET)
@@ -995,6 +1010,112 @@ public class WebUIController extends CommonFrontController {
         } catch (Throwable e) {
             processException(e, response);
         }
+    }
+    
+    
+    public static final String SESSION_FULLINFO_MAP = "SESSION_FULLINFO_MAP";
+    
+    
+    
+    @RequestMapping(value = "/fullinfo/{seccioID}" , method = RequestMethod.GET)
+    public void getFullInfo(HttpServletRequest request, HttpServletResponse response,
+          @PathVariable("seccioID") Long seccioID) throws I18NException {
+            
+        try {
+
+            if (seccioID != null && seccioID == 0) {
+                seccioID = null;
+            }
+
+            String lang = LocaleContextHolder.getLocale().getLanguage();
+
+            String codiEntitat = sesionHttp.getEntitat();
+            Long entitatID = sesionHttp.getEntitatID();
+            
+            String fullID = codiEntitat + "_" + seccioID; // + "_" + lang; ???? 
+            
+            @SuppressWarnings("unchecked")
+            Map<String, Map<String, Object>> cacheFullInfo = (Map<String, Map<String, Object>>) request.getSession().getAttribute(SESSION_FULLINFO_MAP);
+            
+            Map<String, Object> fullInfo = null;
+            
+            if (cacheFullInfo == null) {
+                log.info(" Carregant FullInfo de BBDD ... ");
+                cacheFullInfo = new TreeMap<String, Map<String, Object>>();
+                request.getSession().setAttribute(SESSION_FULLINFO_MAP, cacheFullInfo);
+            } else {
+                log.info(" Emprant Cache de FullInfo ... ");
+                fullInfo = cacheFullInfo.get(fullID);
+            }
+
+            if (fullInfo == null) {
+                fullInfo = new HashMap<String, Object>();
+                
+                // Plugins
+                List<PluginInfo> pluginsEntitat = utilsEjb.getFrontPlugins(codiEntitat, lang, seccioID);
+                fullInfo.put("veureplugins", pluginsEntitat);
+                
+                // Menus de Links
+                {
+                    final int enllazType = Constants.TIPUS_ENLLAZ_FRONT_MENU_DESLLISANT;
+                    List<EnllazInfo> menusdelinks = getEnllazos(request, enllazType, seccioID, lang,
+                            codiEntitat);
+                    fullInfo.put("menuslidelinks", menusdelinks);
+                }
+                
+                // Idiomes 
+                {
+                    List<String> idiomaInfo = getIdiomes();
+                    fullInfo.put("idiomesFront", idiomaInfo);
+                }
+                
+                // menupseudoplugin
+                {
+                    final int enllazType = Constants.TIPUS_ENLLAZ_FRONT_PSEUDOPLUGIN;
+                    List<EnllazInfo> menusdePseudoPlugins = getEnllazos(request, enllazType, seccioID, lang,
+                            codiEntitat);
+                    fullInfo.put("menupseudoplugin", menusdePseudoPlugins);
+                }
+                
+                // seccions
+                {
+                    List<SeccioInfo> seccioInfo = getSeccionsInfo(request, seccioID, entitatID);
+                    fullInfo.put("seccions", seccioInfo);
+                }
+                
+                // seccio
+                if (seccioID != null){
+                    SeccioInfo seccioInfo = getSeccioInfo(request, seccioID, lang);
+                    fullInfo.put("seccio", seccioInfo);
+                }
+                
+                // Nom entitat
+                {
+                    EntitatJPA entitat = entitatEjb.findByCodi(codiEntitat);
+                    fullInfo.put("nomEntitat", entitat.getNom().getTraduccio(lang).getValor());
+                }
+
+                cacheFullInfo.put(fullID, fullInfo);
+
+            }
+            
+            // Passar JSON de pluginsEntitat
+            Gson gson = new Gson();
+            String json = gson.toJson(fullInfo);
+            
+            //log.info(" FULLINFO  amb seccioID = " + seccioID + ":\n" + json + "\n");
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF8");
+
+            byte[] utf8JsonString = json.getBytes("UTF8");
+
+            response.getOutputStream().write(utf8JsonString);
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
+        
     }
 
 }

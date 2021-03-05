@@ -51,7 +51,7 @@ import java.util.Locale;
 public class PluginFrontController extends CommonFrontController {
 
     @Autowired
-    private SesionHttp sesionHttp;
+    protected SesionHttp sesionHttp;
 
     @EJB(mappedName = UtilitiesForFrontLogicaService.JNDI_NAME)
     UtilitiesForFrontLogicaService utilsEjb;
