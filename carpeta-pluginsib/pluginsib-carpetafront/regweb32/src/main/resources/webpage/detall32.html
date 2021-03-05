@@ -48,7 +48,7 @@
 
     function generantJustificant(){
         mostrarCarregantDetall();
-        window.location.replace('${urlJustificant}');
+        window.open('${justificanteUrl}')
         amagarCarregantDetall();
     }
 
@@ -120,17 +120,9 @@
                                     <div class="col mr-2">
                                         <div class="font-weight-bold verde text-uppercase mb-3 text-center h3">${registro_justificante}</div>
 
-
-                                        <#if justificanteCsv?has_content>
-
-                                            <div class="text-center">
-                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="window.open('${justificanteCsv}')"><span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span>${carpeta_descargar}</button>
-                                            </div>
-                                        </#if>
-
                                         <#if justificanteUrl?has_content>
                                             <div class="text-center">
-                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="window.open('${justificanteUrl}')"><span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span>${carpeta_descargar}</button>
+                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="generantJustificant()"><span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span>${carpeta_descargar}</button>
                                             </div>
                                         </#if>
 
@@ -140,8 +132,8 @@
                                             </div>
                                         </#if>
                                         <#if !justificanteUrl?has_content &&  !justificanteId?has_content>
-                                        <div class="text-center">
-                                            <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm"  onclick="javascript:window.open('${urlJustificant}')" ><span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span>${carpeta_descargar}</button>
+                                        <div class="text-center pt-3 text-danger">
+                                        <#if errorJustificant?has_content ><span class="oi oi-warning pr-1"> </span>${errorJustificant}</#if>
                                         </div>
                                         </#if>
 

@@ -4,15 +4,22 @@ import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import org.apache.commons.io.IOUtils;
 
+import javax.ejb.EJB;
+import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import es.caib.carpeta.logic.LogCarpetaLogicaService;
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.regweb3.ws.api.v3.AsientoWs;
 import es.caib.regweb3.ws.api.v3.FileContentWs;
 import es.caib.regweb3.ws.api.v3.JustificanteWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWs;
+
+import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_ERROR;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_PLUGIN_FRONT;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -34,6 +41,8 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
     public static final String VALIDEZ_DOCUMENTO_COPIA  = "1";
     public static final String VALIDEZ_DOCUMENTO_COPIA_ORIGINAL  = "3";
     public static final String VALIDEZ_DOCUMENTO_ORIGINAL  = "4";
+    
+    protected LogCarpetaLogicaService logLogicaEjb;
 
     public Regweb32DetallRegistre() {
         super();
@@ -210,6 +219,7 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
 
 
         // Montamos la url de descarga del justificante
+        String errorJustificant = "";
         if (registre.getJustificante() != null) {
             FileContentWs justificantRegistre = getAnnexeRegistre(registre.getJustificante().getFileID(),locale);
             if (justificantRegistre.getUrl() != null) {
@@ -218,11 +228,33 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
                 //TODO Aqui deberiamos enviar el FileInfo para que se lo descargue
                 map.put("justificantId", justificantRegistre.getFileInfoWs().getFileID());
             }
-
+        }else {
+        	errorJustificant = getTraduccio("justificante.error.generando", locale);
         }
 
         // Indicamos si se ha producido un error
         map.put("error", error);
+        map.put("errorJustificant", errorJustificant);
+        
+        if (error != null || errorJustificant != "" ) {
+	        // Registram l'error als logs del back
+	        try {
+	    		if (logLogicaEjb == null) {
+	        		logLogicaEjb = (LogCarpetaLogicaService) new InitialContext()
+	                        .lookup(LogCarpetaLogicaService.JNDI_NAME);
+	    		}
+	        	
+	            StringBuilder peticio = new StringBuilder();
+	            peticio.append("Error descàrrega justificant").append("\n");
+	            peticio.append("classe: ").append(getClass().getName()).append("\n");
+	            peticio.append("error: " + error + " " + errorJustificant).append("\n");
+	            logLogicaEjb.crearLog("Error descàrrega", ESTAT_LOG_ERROR, TIPUS_LOG_PLUGIN_FRONT,
+	                    System.currentTimeMillis() ,null,peticio.toString(),"Error plugin regweb32","",null);
+	
+	    	} catch(Exception e) {
+	    		log.error("LogCarpetaLogicaService exception: " + e.getMessage());
+	    	}
+        }
 
         String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
 
@@ -304,8 +336,8 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
         JustificanteWs justificantRegistre = getJustificantRegistre(numeroRegistroFormateado, tipoRegistro, locale);
 
         // Indicam si s'ha produit un error en obtenció de l'annexe
-
         String errorJustificant = "";
+        
         if (justificantRegistre == null) {
 
             response.setCharacterEncoding("utf-8");
@@ -340,6 +372,26 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
 
         } catch (Exception e) {
             justificante = null;
+            
+         // Cream el log al back
+        	try {
+        		if (logLogicaEjb == null) {
+	        		logLogicaEjb = (LogCarpetaLogicaService) new InitialContext()
+	                        .lookup(LogCarpetaLogicaService.JNDI_NAME);
+        		}
+            	
+                StringBuilder peticio = new StringBuilder();
+                peticio.append("Error descàrrega justificant").append("\n");
+                peticio.append("classe: ").append(getClass().getName()).append("\n");
+                peticio.append("Registre: " + numeroRegistroFormateado).append("\n");
+                peticio.append("Error: " + e.getMessage()).append("\n");
+                logLogicaEjb.crearLog("Descàrrega justificant regweb32", ESTAT_LOG_ERROR, TIPUS_LOG_PLUGIN_FRONT,
+                        System.currentTimeMillis() ,null,peticio.toString(),"Error plugin regweb32","",null);
+
+        	} catch(Exception ex) {
+        		log.error("LogCarpetaLogicaService: error EJB lookup");
+        		log.error(ex.getMessage());
+        	}
         }
 
         return justificante;
@@ -385,6 +437,7 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
         // Indicam si s'ha produit un error en obtenció de l'annexe
         String errorAnnexe = "";
         if (fileContentWs == null) {
+        	
             response.setCharacterEncoding("utf-8");
             response.setContentType("text/html");
 
@@ -418,6 +471,27 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
 
         } catch (Exception e) {
             annexe = null;
+            
+            try {
+	    		if (logLogicaEjb == null) {
+	        		logLogicaEjb = (LogCarpetaLogicaService) new InitialContext()
+	                        .lookup(LogCarpetaLogicaService.JNDI_NAME);
+	    		}
+	        	
+	        	//Log error descàrrega justificant
+	            StringBuilder peticio = new StringBuilder();
+	            peticio.append("Error descàrrega annex").append("\n");
+	            peticio.append("classe: ").append(getClass().getName()).append("\n");
+	            peticio.append("IdAnnexe: " + idAnnexe).append("\n");
+	            peticio.append("Error" + annexe.getError()).append("\n");
+	            peticio.append(e.getMessage());
+	            logLogicaEjb.crearLog("Error descàrrega justificant o annex", ESTAT_LOG_ERROR, TIPUS_LOG_PLUGIN_FRONT,
+	                    System.currentTimeMillis() ,null,peticio.toString(),"Error plugin regweb32","",null);
+	
+	    	} catch(Exception ex) {
+	    		log.error("LogCarpetaLogicaService exception: " + ex.getMessage());
+	    	}
+            
         }
 
         return annexe;
