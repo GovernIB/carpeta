@@ -199,8 +199,8 @@
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">${registro_anexo_name}</th>
-                                                <th scope="col">${registro_anexo_mime}</th>
-                                                <th scope="col">${registro_anexo_size}</th>
+                                                <th scope="col">${registro_anexo_validezdocumento}</th>
+                                                <!--<th scope="col">${registro_anexo_size}</th>-->
                                                 <th scope="col">${registro_anexo_file}</th>
                                             </tr>
                                             </thead>
@@ -210,9 +210,14 @@
                                             <tr>
                                                 <td>${anexo?index +1}</td>
                                                 <td>${anexo.name}</td>
+                                                <td><#if anexo.validezDocumento?has_content >
+                                                        <#if validezDocumento[anexo.validezDocumento]?has_content >
+                                                            ${validezDocumento[anexo.validezDocumento]}
+                                                        </#if>
+                                                    </#if>
+                                                </td>
                                                 <#if anexo.mime?has_content >
-                                                <td>${anexo.mime} </td>
-                                                <td>${anexo.size} KB</td>
+                                                <!--<td>${anexo.size} KB</td>-->
                                                 <td><button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarAnnex('${anexo.fileID?long?c}')"><span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span></button></td>
                                                 <#else>
                                                     <td colspan="3"><span class="alert alert-danger">${registro_anexo_nodisponible}</span></td>

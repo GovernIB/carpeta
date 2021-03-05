@@ -31,6 +31,10 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
 
     public static final String MIME_PDF = "application/pdf";
 
+    public static final String VALIDEZ_DOCUMENTO_COPIA  = "1";
+    public static final String VALIDEZ_DOCUMENTO_COPIA_ORIGINAL  = "3";
+    public static final String VALIDEZ_DOCUMENTO_ORIGINAL  = "4";
+
     public Regweb32DetallRegistre() {
         super();
     }
@@ -167,12 +171,21 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
 
         map.put("registroIdioma", registroIdioma);
 
+
+        Map<String, String> VALIDEZ_DOCUMENTAL_ANEXO = new HashMap<String, String>() {{
+            put(VALIDEZ_DOCUMENTO_COPIA, getTraduccio("registro.anexo.validezdocumento.1",locale));
+            put(VALIDEZ_DOCUMENTO_COPIA_ORIGINAL, getTraduccio("registro.anexo.validezdocumento.3",locale));
+            put(VALIDEZ_DOCUMENTO_ORIGINAL, getTraduccio("registro.anexo.validezdocumento.4",locale));
+        }};
+
+        map.put("validezDocumento", VALIDEZ_DOCUMENTAL_ANEXO);
+
         String[] traduccions = { "registro.titulo.detalle", "registro.entrada", "registro.fecha", "registro.numero",
                 "registro.oficina", "registro.destinatario", "registro.tipo.doc", "registro.extracto", "carpeta.idioma",
                 "registro.presencial", "registro.codigoSia", "registro.justificante", "registro.interesados",
                 "registro.interesado.nombre", "registro.interesado.documento", "registro.interesado.tipo",
                 "registro.anexos", "registro.anexos.vacio", "registro.anexo.name", "registro.anexo.mime",
-                "registro.anexo.size", "registro.anexo.file", "carpeta.descargar", "justificante.generar",
+                "registro.anexo.size", "registro.anexo.file", "registro.anexo.validezdocumento","carpeta.descargar", "justificante.generar",
                 "carpeta.catala", "carpeta.castella", "justificante.generando", "anexo.obtener", "registro.anexo.nodisponible" };
 
         for (String t : traduccions) {
