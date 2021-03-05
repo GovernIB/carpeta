@@ -79,7 +79,7 @@ class Index extends Component {
 
     
         const currentlocation = this.props.location;
-        console.log("\n\n   XXXXXXXXXX   LOCATION: " + currentlocation.pathname);
+        //console.log("\n\n   XXXXXXXXXX   LOCATION: " + currentlocation.pathname);
 
 
 

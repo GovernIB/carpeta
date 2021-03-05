@@ -1,8 +1,7 @@
 import React, { Component, Suspense } from 'react';
 import { withTranslation } from 'react-i18next';
 import i18n from 'i18next';
-import axios from 'axios'
-import LlistatDePlugins from './LlistatDePlugins';
+import axios from 'axios';
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import { menuDesllisantJS } from "./assets/js/menu-lateral";
@@ -15,7 +14,6 @@ class MenuDesllisant extends Component {
 	constructor(){
 		super();
 		this.state = {
-			loading: 0,
 			plugins: [],
 			menuEnllasos: [],
 			idiomes: [],
@@ -30,12 +28,7 @@ class MenuDesllisant extends Component {
 
     canviatIdioma(lng) {
         console.log(" CANVIAT IDIOMA EN MENU DESLLISTANT A ]" + lng+ "[")
-		this.setState({ loading: 0 });
-
 		
-	
-		
-
         this.componentDidMount();
     }
 
@@ -45,37 +38,30 @@ class MenuDesllisant extends Component {
 		console.log("MENU DESLISSTANT componentDidMount()");
 
 		var baseURL = sessionStorage.getItem('contextPath');
-		var url = baseURL + `/pluginfront/veureplugins`;
 
-		axios.get(url).then(res => {
-			this.setState({ plugins: res.data, loading: this.state.loading + 1 });
-		});
-		var url2 =  baseURL + `/webui/menuslidelinks`;
-		axios.get(url2).then(res => {
-			this.setState({ menuEnllasos: res.data, loading: this.state.loading + 1 });
-		});
+		var autenticat = sessionStorage.getItem('autenticat');;
+        if (autenticat === '1') {
 
 
-		var url3 =  baseURL + `/webui/idiomesFront`;
+			// 0 == Nivell Arell
+			var url = baseURL + `/webui/fullinfo/0`;
+			axios.get(url).then(res => {
+				var fulldata = res.data;
+				this.setState({ plugins: fulldata.veureplugins, 
+								menuEnllasos: fulldata.menuslidelinks,
+								idiomes: fulldata.idiomesFront,
+								menupseudoplugin: fulldata.menupseudoplugin,
+								seccions: fulldata.seccions});
+			});
+		} else {
 
-		axios.get(url3).then(res => {
-			this.setState({ idiomes: res.data, loading: this.state.loading + 1 });
+			var url3 =  baseURL + `/webui/idiomesFront`;
+			axios.get(url3).then(res => {
+				this.setState({ idiomes: res.data });
+				console.log("FINAL DE LECTURA DE IDIOMES !!!!! " + this.state.idiomes);
+			})
 
-			console.log("FINAL DE LESTURA DE IDIOMES !!!!! " + this.state.idiomes);
-		})
-
-		var url4 =  baseURL + `/webui/menupseudoplugin`;
-		axios.get(url4).then(res => {
-			this.setState({ menupseudoplugin: res.data, loading: this.state.loading + 1 });
-		});
-
-		// 0 == Nivell Arell
-
-        var url5 =  baseURL + `/webui/seccions/0`;
-		axios.get(url5).then(res => {
-			this.setState({ seccions: res.data, loading: this.state.loading + 1 });
-
-        });
+		}
 
 		menuDesllisantJS();
 
@@ -84,23 +70,13 @@ class MenuDesllisant extends Component {
 	infoHtml(missatge, pluginID) {
 		alert(missatge);
 
-		if (this.props.history) {
-            console.log("MENU DESLLISSANT => EXISTEIX  HISTORY !!!!!");
-            this.props.history.push("/pluginhtml/" + pluginID);
-        } else {
-            console.log("MENU DESLLISSANT => NO PUC LLEGIR HISTORY !!!!!");
-        }
+        this.props.history.push("/pluginhtml/" + pluginID);
+        
 	}
 
 	infoReact(missatge, pluginID) {
 		alert(missatge);
-
-		if (this.props.history) {
-            console.log("MENU DESLLISSANT => EXISTEIX  HISTORY !!!!!");
-            this.props.history.push("/pluginreact/" + pluginID);
-        } else {
-            console.log("MENU DESLLISSANT => NO PUC LLEGIR HISTORY !!!!!");
-        }
+		this.props.history.push("/pluginreact/" + pluginID);
 	}
 
 	error(missatge) {
@@ -122,7 +98,7 @@ class MenuDesllisant extends Component {
 			i18n.changeLanguage(lng);
 
 		}).catch(error => {
-			alert("XYZ ZZZ No s'ha pogut actualitzar l´idioma. Error: " + error);
+			alert("No s'ha pogut actualitzar l´idioma. Error: " + error);
 		});
 
 
@@ -132,12 +108,9 @@ class MenuDesllisant extends Component {
 
 	render() {
 
-		console.log("MENU DESLLISSANT loading = " + this.state.loading);
+		console.log("MENU DESLLISSANT RENDER "); 
 
-		if ( this.state.loading < 5 ) {
-			return '';
-		}
-
+		
 
 		const {t} = this.props;
 		var autenticat = sessionStorage.getItem('autenticat');
@@ -165,7 +138,7 @@ class MenuDesllisant extends Component {
 
 		const idiomes = this.state.idiomes;
 
-		console.log("\n MENU DESLLISSANT IDIOMES: " + idiomes);
+		console.log(" MENU DESLLISSANT IDIOMES: " + idiomes);
 
 		var boto_ca;
 		var boto_es;
@@ -229,11 +202,8 @@ class MenuDesllisant extends Component {
 		var accessibilitat;
 		accessibilitat = <li>
 		<Link to={{pathname: `/accessibilitat`, nomPagina: 'menuAccessibilitat' }} className="imc-marc-ico imc--accessibilitat">
-	{/*<a href="javascript:newwAccessibilitat('contingut', '1');"
-							className="imc-marc-ico imc--accessibilitat" id="imc-marc-accessibilitat"
-							title={t('menuAccessibilitat')}> */ }
 				<span>{t('menuAccessibilitat')}</span>
-		</Link>{/*</a>*/}
+		</Link>
 		</li>;
 
 
@@ -283,14 +253,11 @@ class MenuDesllisant extends Component {
 
 
 			plugHtml = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 0).map((s,i) => (
-				<li key={i}>
-				{/*
-				<a href={"javascript:newwPluginnHtml('contingut', '1', '" + s.pluginID + "');"} title={s.nom}> */}
+				<li key={i}>				
 					<Link to={"/pluginhtml/" + s.pluginID} >
 					<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span>
 					</Link>
-					{/*</a> */}
 				</li>
 			));
 			plugHtmlInfo = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 1).map((s,i) => (
@@ -310,13 +277,12 @@ class MenuDesllisant extends Component {
 			));
 
 			plugReact = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 0).map((s,i) => (
-				<li key={i}>
-				    {/*<a href={"javascript:newwPluginnReact('contingut', '1', '" + s.pluginID + "');"} title={s.nom}>*/}
+				<li key={i}>				    
 					<Link to={"/pluginreact/" + s.pluginID} >
 					<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span>
 					</Link>
-					{/*</a>*/}
+					
 				</li>
 			));
 			plugReactInfo = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 1).map((s,i) => (
@@ -372,10 +338,7 @@ class MenuDesllisant extends Component {
 			canviarEntitat = "";
 		}
 
-		console.log("MENUDESLLISSANT :: INICI RENDER ");
-
-
-
+		
 		return (
 			<div>
 				<div className="imc-cercador" id="imc-cercador">
