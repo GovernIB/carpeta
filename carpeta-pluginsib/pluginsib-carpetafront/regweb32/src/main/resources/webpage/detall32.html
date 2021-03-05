@@ -41,11 +41,15 @@
     function mostrarCarregantDetall() {
         $("#carregantDetallRegistre").removeClass("loaderOcult");
     }
-
+    
+    function amagarCarregantDetall() {
+    	$("#carregantDetallRegistre").addClass("loaderOcult");
+    }
 
     function generantJustificant(){
         mostrarCarregantDetall();
         window.location.replace('${urlJustificant}');
+        amagarCarregantDetall();
     }
 
     function descarregarAnnex(idAnnexe){
