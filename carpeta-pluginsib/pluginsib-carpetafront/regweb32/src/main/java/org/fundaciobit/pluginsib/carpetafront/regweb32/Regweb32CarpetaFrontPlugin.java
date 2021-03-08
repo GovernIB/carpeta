@@ -125,7 +125,7 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
 
         registerUserData(userData);
 
-        String startURL = absolutePluginRequestPath + "/" + LLISTAT_REGISTRES_PAGE;
+        String startURL = absolutePluginRequestPath + "/" + ESPERA_PAGE ;
 
         log.info(" getStartUrl( ); => " + startURL);
         return startURL;
@@ -230,6 +230,8 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
             String administrationEncriptedID, int pageNumber, Locale locale, boolean isGet) {
 
         try {
+            
+            Thread.sleep(5000);
 
             response.setCharacterEncoding("utf-8");
             response.setContentType("text/html");

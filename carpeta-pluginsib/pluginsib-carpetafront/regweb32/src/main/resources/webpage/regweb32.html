@@ -30,25 +30,29 @@
     <link href="${resources}/carpeta/open-iconic-bootstrap.css" rel="stylesheet">
     <link href="${resources}/carpeta/jquery.dataTables.min.css" rel="stylesheet">
     <link href="${resources}/carpeta/datatables.min.css" rel="stylesheet">
-</head>
 
+
+    <script type="text/javascript">
+
+        function espera() {
+           //console.log("ESPERA ...");
+    	   $('#llistat').hide();
+           $("#carregantDetallRegistre").removeClass("loaderOcult");
+        }
+
+
+        function mostrantDetall(numeroRegistroFormateado){
+            espera();
+            window.location.replace('${urlDetalle}'+numeroRegistroFormateado);
+        }
+       
+    </script>
+</head>
+<body class="fonsPlugin" >
 <div id="carregantDetallRegistre" class="loader-container centrat loaderOcult">
     <div class="loader"></div>
 </div>
-<script type="text/javascript">
-    function mostrarCarregantLlistat() {
-        $("#carregantDetallRegistre").removeClass("loaderOcult");
-    }
-
-    function mostrantDetall(numeroRegistroFormateado){
-        mostrarCarregantLlistat()
-        window.location.replace('${urlDetalle}'+numeroRegistroFormateado);
-    }
-
-
-</script>
-<body class="fonsPlugin">
-<div class="container-contenido">
+<div id="llistat" class="container-contenido">
     <div class="infoNoMenu">
         <h2><p class="titol h2">${registro_listado}</p></h2>
         <div class="col-md-12 border-0 float-left p-0">
@@ -114,31 +118,31 @@
                                     </#if>
                                     <#if paginacio.currentIndex!=0>
 
-                                        <li class="page-item"><a class="page-link" href="${firstUrl}" ><<</a></li>
-                                        <li class="page-item"><a class="page-link" href="${prevUrl}" ><</a></li>
+                                        <li class="page-item"><a class="page-link" onclick="espera();" href="${firstUrl}" ><<</a></li>
+                                        <li class="page-item"><a class="page-link" onclick="espera();" href="${prevUrl}" ><</a></li>
 
                                     </#if>
 
                                     <#list paginacio.beginIndex..paginacio.endIndex as j>
                                          <#if paginacio.currentIndex==j-1>
-                                             <li  class="page-item active"><a class="page-link" href="#">${j}</a></li>
+                                             <li  class="page-item active"><a class="page-link" onclick="espera();" href="#">${j}</a></li>
                                          </#if>
                                          <#if paginacio.currentIndex!=j-1>
                                              <!--<li  class="page-item"><a class="page-link" href="#" onclick="mostrantLListatRegistres(${j})">${j}</a></li>-->
-                                             <li  class="page-item"><a class="page-link" href="${pageUrl}${j}">${j}</a></li>
+                                             <li  class="page-item"><a class="page-link" onclick="espera();" href="${pageUrl}${j}">${j}</a></li>
                                          </#if>
 
                                     </#list>
 
 
                                     <#if paginacio.currentIndex==paginacio.totalPages-1>
-                                        <li  class="page-item disabled"><a class="page-link" href="#"> &gt;</a></li>
+                                        <li  class="page-item disabled"><a class="page-link"  href="#"> &gt;</a></li>
                                         <li  class="page-item disabled"><a class="page-link"  href="#">&gt;&gt;</a></li>
                                     </#if>
 
                                     <#if paginacio.currentIndex!=paginacio.totalPages-1>
-                                        <li class="page-item"><a class="page-link" href="${nextUrl}" >&gt;</a></li>
-                                        <li class="page-item"><a class="page-link" href="${lastUrl}" >&gt;&gt;</a></li>
+                                        <li class="page-item"><a class="page-link" href="${nextUrl}" onclick="espera();" >&gt;</a></li>
+                                        <li class="page-item"><a class="page-link" href="${lastUrl}" onclick="espera();" >&gt;&gt;</a></li>
                                     </#if>
 
                                 </ul>

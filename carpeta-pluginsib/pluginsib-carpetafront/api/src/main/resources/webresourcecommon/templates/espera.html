@@ -2,25 +2,30 @@
 <!-- saved from url=(0040)https://dev.caib.es/carpeta/tramite/list -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ca" lang="ca">
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Tràmits - Carpeta Ciutadana</title>
+    <title>Espera - Carpeta Ciutadana</title>
     <link rel="shortcut icon" type="image/x-ico" href="http://www.caib.es/sites/favicon.png">
     <meta http-equiv="Content-Language" content="ca">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="_csrf" content="">
+        <meta name="_csrf" content="">
     <meta name="_csrf_header" content="">
     <!-- SCRIPTS -->
     <script src="${resources}/carpeta/jquery-3.5.0.js"></script>
+    <!-- ESTILS -->
+    <link href="${resources}/carpeta/carpeta.css" rel="stylesheet">
+    <link href="${resources}/carpeta/open-iconic-bootstrap.css" rel="stylesheet">
 
+    <script>
+        $(document).ready(function() {
+            document.location.href='${ruta_desti}';
+        });
+    </script>
 </head>
 <body>
-<script>
-$( document ).ready(function() {
-    document.location.href='${ruta_desti}';
-});
-</script>
 
-<img src="${ruta_imatge_espera}" />
+<div  id="carregant" class="loader-container centrat ">
+    <div class="loader"/>
+</div>
 
 </body>
 </html>

@@ -26,22 +26,7 @@ class PluginHtml extends Component {
 
     componentDidMount() {
         var autenticat = sessionStorage.getItem('autenticat');
-        /*
-        if (autenticat === '1') {
-            this.fakeRequest().then(() => {
-                const el = document.querySelector(".loader-container");
-                if (el) {
-                    document.querySelector("#carregant").classList.add('loaderOcult');
-                    this.setState({ loading: false });
-                }
-            });
-        }*/
     }
-
-    fakeRequest() {
-        return new Promise(resolve => setTimeout(() => resolve(), 1000));
-    };
-
 
     render() {
 
@@ -51,17 +36,6 @@ class PluginHtml extends Component {
             this.props.history.push("/");
             return '';
         }
-
-        /*
-        if (this.state.loading) {
-            document.querySelector("#carregant").classList.remove('loaderOcult');
-            console.log("PLUGIN HTML CARREGANT !!!!!!!");
-            return null;
-        }
-        */
-
-        //console.log("PLUGIN HTML 111111  !!!!!!!");
-        //document.querySelector("#continguts").classList.add('espaiContingut');
 
         console.log("PLUGIN HTML 222222  !!!!!!!");
 

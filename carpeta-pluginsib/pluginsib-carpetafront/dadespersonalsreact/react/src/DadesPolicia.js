@@ -91,7 +91,11 @@ class DadesPolicia extends Component {
             }
         } else {
             
-            return <img src={logoespera} alt="Esperar ..." />;
+            //return <img src={logoespera} alt="Esperar ..." />;
+            
+            return <div  id="carregant" className="loader-container centrat ">
+                        <div className="loader"/>
+                    </div>;
         }
         
         const { t } = this.props;

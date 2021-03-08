@@ -211,8 +211,7 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
         map.put("resources", absolutePluginRequestPath + "/" + WEBRESOURCECOMMON);
         map.put("ruta_desti", rutaDesti);            
         
-        map.put("ruta_imatge_espera", absolutePluginRequestPath + "/" + WEBRESOURCECOMMON + "/img/espera.gif");
-
+        
         String webpage = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
 
         response.getWriter().println(webpage);

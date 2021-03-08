@@ -57,8 +57,6 @@ public class WebUIController extends PluginFrontController {
     @EJB(mappedName = SeccioLogicaService.JNDI_NAME)
     SeccioLogicaService seccioLogicaEjb;
 
-//    @Autowired
-//    private SesionHttp sesionHttp;
 
     public static final String WEBUI_PATH = "/webui";
 
