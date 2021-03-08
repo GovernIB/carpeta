@@ -82,7 +82,9 @@ class MapaWeb extends Component {
 		return (
 			<div className="container-contenido">
 				{ /*{motlla}*/}
-				<ExpirarSessio />
+				{autenticat === '1' &&
+					<ExpirarSessio/>
+				}
 
 				<div className="infoNoMenu">
 					<h2><p className="titol h2">{t('mapaWebTitol')}</p></h2>
