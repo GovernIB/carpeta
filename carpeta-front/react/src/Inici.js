@@ -36,7 +36,9 @@ class Inici extends Component {
 		return (
 
 			<div className="container-contenido" id="contingutCentral">
-				<ExpirarSessio />
+				{autenticat === '1' &&
+					<ExpirarSessio/>
+				}
 				{
 					{
 						'0': <IniciPublic />,						
