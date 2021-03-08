@@ -52,7 +52,7 @@ public class PropietatGlobalSuperAdminController extends PropietatGlobalControll
 
     @Override
     public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
-        return isSuperAdmin() ? PropietatGlobalFields.ENTITATID.isNull()
+        return isSuperAdmin() ? null 
                 : PropietatGlobalFields.ENTITATID.equal(LoginInfo.getInstance().getEntitatID());
     }
 
@@ -73,7 +73,7 @@ public class PropietatGlobalSuperAdminController extends PropietatGlobalControll
         if (propietatGlobalForm.isNou()) {
             if (isSuperAdmin()) {
                 propietatGlobalForm.getPropietatGlobal().setEntitatID(null);
-                propietatGlobalForm.addHiddenField(ENTITATID);
+                //propietatGlobalForm.addHiddenField(ENTITATID);
             } else {
                 propietatGlobalForm.getPropietatGlobal().setEntitatID(LoginInfo.getInstance().getEntitatID());
                 propietatGlobalForm.addReadOnlyField(ENTITATID);
@@ -88,7 +88,7 @@ public class PropietatGlobalSuperAdminController extends PropietatGlobalControll
             HttpServletRequest request) throws I18NException {
         PropietatGlobalFilterForm propietatGlobalFilterForm = super.getPropietatGlobalFilterForm(pagina, mav, request);
 
-        if (propietatGlobalFilterForm.isNou()) {
+        if (propietatGlobalFilterForm.isNou() && !isSuperAdmin()) {
             propietatGlobalFilterForm.addHiddenField(ENTITATID);
         }
 
