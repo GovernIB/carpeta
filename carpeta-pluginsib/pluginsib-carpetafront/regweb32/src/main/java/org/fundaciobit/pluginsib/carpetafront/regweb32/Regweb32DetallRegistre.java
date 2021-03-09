@@ -483,7 +483,7 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
 	            peticio.append("Error descàrrega annex").append("\n");
 	            peticio.append("classe: ").append(getClass().getName()).append("\n");
 	            peticio.append("IdAnnexe: " + idAnnexe).append("\n");
-	            peticio.append("Error" + annexe.getError()).append("\n");
+	            //peticio.append("Error" + annexe.getError()).append("\n");
 	            peticio.append(e.getMessage());
 	            logLogicaEjb.crearLog("Error descàrrega justificant o annex", ESTAT_LOG_ERROR, TIPUS_LOG_PLUGIN_FRONT,
 	                    System.currentTimeMillis() ,null,peticio.toString(),"Error plugin regweb32","",null);

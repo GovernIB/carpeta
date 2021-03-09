@@ -2,12 +2,12 @@ import React, { Component, Suspense } from 'react';
 import { withTranslation } from 'react-i18next';
 import axios from "axios";
 import ExpirarSessio from "./ExpirarSessio";
-import Breadcrumb from "./Breadcrumb";
 import { Link } from "react-router-dom";
-import * as breadcrumbPaths from "./utils/breadcrumbPaths";
-import * as breadcrumbPathsAut from "./utils/breadcrumbPathsAut";
 import i18n from 'i18next';
 
+/**
+ * @author Adaptació a fillInfo
+ */
 class MapaWeb extends Component {
 
 	constructor(){
@@ -20,18 +20,28 @@ class MapaWeb extends Component {
     }
 
     canviatIdioma(lng) {
-        console.log(" CANVIAT IDIOMA EN mapaWeb A ]" + lng+ "[");
+        console.log(" CANVIAT IDIOMA EN MapaWeb A ]" + lng+ "[");
         this.componentDidMount();
     }
 
 	componentDidMount() {
-		var baseURL = sessionStorage.getItem('contextPath');
-		var url = baseURL + `/pluginfront/veureplugins`;
 
-		axios.get(url).then(res => {
-			const plugins = res.data;
-			this.setState({ plugins });
-		})
+		var autenticat = sessionStorage.getItem('autenticat');
+
+		if (autenticat === '1') {
+
+			var baseURL = sessionStorage.getItem('contextPath');
+
+			// 0 == Nivell Arell
+			var url = baseURL + `/webui/fullinfo/0`;
+			axios.get(url).then(res => {
+				var fulldata = res.data;
+				this.setState({ plugins: fulldata.veureplugins, 
+								menuEnllasos: fulldata.menuslidelinks,								
+								menupseudoplugin: fulldata.menupseudoplugin,
+								seccions: fulldata.seccions});
+			});
+		}
 	}
 
 
@@ -39,52 +49,83 @@ class MapaWeb extends Component {
 
 		const {t} = this.props;
 
-		var autenticat = sessionStorage.getItem('autenticat');
-		const plugins = this.state.plugins;
-
-		var plug;
-
-		var informacio;
-		// var dades;
 		var logoClau;
 
+		let enllazos = [];
+
+
+		var accessibilitat = <p key={0} className="lh15 upper">
+								<Link to={{pathname: `/accessibilitat`, nomPagina: 'menuAccessibilitat' }} className="imc-marc-ico imc--accessibilitat">
+									<span>{t('menuAccessibilitat')}</span>
+								</Link>
+							</p>;
+
+		enllazos.push(accessibilitat);
+		
+
+		var autenticat = sessionStorage.getItem('autenticat');
 		if (autenticat === '1') {
 			logoClau = '';
-			informacio = <Link to="/">{t('mapaWebInformacio')}</Link>;
+			var urlBase = sessionStorage.getItem('contextPath');
 
+			const plugins = this.state.plugins;
+			
+			if (this.state.plugins) {
+			    plugins.filter(s => s.reactComponent === 'false').map((s, i) => {
+					enllazos.push(
+						<p key={'ph' + i} className="lh15 upper">
+						<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} className="imc-icona" title="" alt="" />
+						<Link to={"/pluginhtml/" + s.pluginID} >{s.nom}</Link>
+						</p>)
+					});
 
-			plug = plugins.map(s => (<p className="lh15 upper">
-				<Link to="/pluginhtml/{s.pluginID}" >
-				{s.nom}
-				</Link>
-				</p>));
+                plugins.filter(s => s.reactComponent === 'true').map((s, i) => {
+					enllazos.push(
+				    <p key={'pr' + i} className="lh15 upper">
+						<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} className="imc-icona" title="" alt="" />
+				        <Link to={"/pluginreact/" + s.pluginID} >{s.nom}</Link>
+				    </p>);
+				});
+			}
 
-			// dades = "";
+			
+			if(this.state.menupseudoplugin) {
+				this.state.menupseudoplugin.map((s, i) => {
+					enllazos.push(
+					<p key={'ps' + i} className="lh15 upper">
+						<a href={s.url} target="_blank" title={s.nom}>
+							<img src={s.urllogo} title="" alt="" className="imc-icona iconaEnllas" />
+							<span>{s.label}</span>
+						</a>
+					</p>
+				)})
+			}
+
+			
+			if (this.state.seccions) {
+			    this.state.seccions.map((s, i) => {
+					enllazos.push(
+					<p key={'s' + i} className="lh15 upper">
+					<Link to={"/seccio/" + s.seccioID} >
+						<img src={s.iconaID} title="" alt={s.descripcio} className="imc-icona iconaEnllas" />
+						<span>{s.nom}</span>
+					</Link>
+				</p>
+			    )});
+			}
+		
+
 		}
 		if (autenticat === '0') {
 			logoClau = <span className="oi oi-lock-locked colorClave" title={t('mapaWebClave')}/>;
-			informacio = <Link to="/">{t('mapaWebInformacio')}</Link>;
-
-
-			plug = <p className="lh15 upper">XYZ ZZZ FALTA ENLLAÇ A LOGIN</p>; /* XYZ ZZZ Aqui enllaç a LOGIN !!!!!! */
-			/*
-			plugins.map(s => (
-				<p className="lh15 upper"><a href="javascript: var loc = new URL(window.location.href);  window.location.href=('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host) )">{s.nom}</a> {logoClau}</p>));
-*/
-
-			// dades = <a href="javascript: var loc = new URL(window.location.href);  window.location.href=('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host) )">{t('mapaWebDades')}</a>;
 		}
 
 		clearTimeout(sessionStorage.getItem('idTimeOut'));
 
-		//var motlla = <*Breadcrumb items={breadcrumbPaths.MapaWeb} autenticat={autenticat}/>
-
 		return (
 			<div className="container-contenido">
-				{ /*{motlla}*/}
-				{autenticat === '1' &&
-					<ExpirarSessio/>
-				}
+	
+				{autenticat === '1' && <ExpirarSessio/>	}
 
 				<div className="infoNoMenu">
 					<h2><p className="titol h2">{t('mapaWebTitol')}</p></h2>
@@ -96,14 +137,11 @@ class MapaWeb extends Component {
 						<div className="card">
 							<ul className="list-group list-group-flush">
 								<li className="list-group-item">
-									<p className="lh15 upper">{informacio}</p>
+									<p className="lh15 upper"><Link to="/">{t('mapaWebInformacio')}</Link></p>
 								</li>
 								<li className="list-group-item">
-									{plug}
+									{enllazos}
 								</li>
-								{/*<li className="list-group-item">*/}
-								{/*	<p className="lh15 upper">{dades} {logoClau}</p>*/}
-								{/*</li>*/}
 							</ul>
 						</div>
 
