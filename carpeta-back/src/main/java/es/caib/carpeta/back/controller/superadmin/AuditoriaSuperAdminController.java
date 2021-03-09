@@ -104,6 +104,7 @@ public class AuditoriaSuperAdminController extends AuditoriaController {
 
             auditoriaFilterForm.setOrderBy(AuditoriaFields.DATAAUDIT.javaName);
             auditoriaFilterForm.setOrderAsc(false);
+            auditoriaFilterForm.setVisibleMultipleSelection(false);
         }
         return auditoriaFilterForm;
     }
