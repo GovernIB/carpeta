@@ -90,6 +90,7 @@ public class LogCarpetaSuperAdminController extends LogCarpetaController {
             logCarpetaFilterForm.addGroupByField(ESTAT);
             logCarpetaFilterForm.setOrderBy(LogCarpetaFields.DATAINICI.javaName);
             logCarpetaFilterForm.setOrderAsc(false);
+            logCarpetaFilterForm.setVisibleMultipleSelection(false);
 
         }
 
