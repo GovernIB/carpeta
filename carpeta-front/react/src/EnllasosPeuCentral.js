@@ -62,7 +62,7 @@ class EnllasosPeuCentral extends Component {
         }
 
         return (
-            <ul>
+            <ul className="enllasosPeu">
                 <li><Link to={{pathname: `/mapaweb`, nomPagina: 'peuMapa' }}> { t('peuMapa') }</Link></li>
                 {enllasosPeuCentral}
             </ul>

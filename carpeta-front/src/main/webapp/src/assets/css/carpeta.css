@@ -371,7 +371,8 @@ img:hover {
 	float: right!important;
 }
 .col2peu{
-	padding-left: 3rem!important;
+	/*padding-left: 3rem!important;*/
+	text-align-last: center;
 }
 .nivellAut{
 	text-transform: none;
@@ -442,6 +443,10 @@ img:hover {
 }
 a.imc-bt-xarxa:hover {
     background-color: #eee !important;
+}
+.enllasosPeu{
+	text-align-last: center;
+	width: 100%;
 }
 
 
@@ -649,9 +654,9 @@ thead>tr>th.sorting {
 .padL-4-5 {
 	padding-left: 3em !important;
 }
-#continguts {
-	margin-top: 2em;
-}
+/*#continguts {*/
+/*	margin-top: 2em;*/
+/*}*/
 .fonsPlugin{
 	padding-top: 0em !important;
 }
@@ -733,6 +738,7 @@ body {
 }
 .usuari {
 	top: 2em !important;
+	height: auto;
 }
 }
 
