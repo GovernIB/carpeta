@@ -8,6 +8,7 @@ import org.fundaciobit.genapp.common.web.form.AdditionalButton;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -85,20 +86,63 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
        PluginFilterForm pluginFilterForm = super.getPluginFilterForm(pagina, mav, request);
 
        if (pluginFilterForm.isNou()) {
-           
-           //pluginFilterForm.addAdditionalButtonForEachItem(new AdditionalButton("fas fa-play-circle",
-           //        "test", "javascript:testPlugin({0});", "btn-info"));
 
            pluginFilterForm.addAdditionalButtonForEachItem(new AdditionalButton("fas fa-sync",
                    "reload", getContextWeb() + "/reload/{0}", "btn-warning"));
            
-           
            pluginFilterForm.setAttachedAdditionalJspCode(true);
-                   
+
+           pluginFilterForm.getHiddenFields().remove(CONTEXT);
        }
        
        return pluginFilterForm;
     
+   }
+   
+   @Override
+   public void postValidate(HttpServletRequest request,PluginForm pluginForm, BindingResult result)  throws I18NException {
+
+       PluginJPA __target__ = pluginForm.getPlugin();
+       
+       if (pluginForm.isNou()) { // Creació
+           // ================ CREATION
+
+           // Check Unique - no PK
+           if (result.getFieldErrorCount(CONTEXT.fullName) == 0) {
+             java.lang.String __context = __target__.getContext();
+             Long __count_ = null;
+             try { __count_ = this.pluginEjb.count(org.fundaciobit.genapp.common.query.Where.AND(CONTEXT.equal(__context))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+             if (__count_ == null || __count_ != 0) {        
+                 result.rejectValue(CONTEXT.fullName, "genapp.validation.unique", new Object[] { String.valueOf(__context), get(CONTEXT) }, "Contexte repetit"
+                     //new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__context)),
+                     //     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CONTEXT))
+                         );
+             }
+           }
+
+           // Check Unique - PK no AutoIncrement amb UNA SOLA PK 
+         } else {
+           // ================ UPDATE
+
+           // ====== Check Unique MULTIPLES - EDIT  =======
+
+           // Check Unique - no PK
+           if (result.getFieldErrorCount(CONTEXT.fullName) == 0 ) {
+             java.lang.String __context = __target__.getContext();
+             java.lang.Long __pluginID = __target__.getPluginID();
+             Long __count_ = null;
+             try { __count_ = pluginEjb.count(org.fundaciobit.genapp.common.query.Where.AND(CONTEXT.equal(__context), PLUGINID.notEqual(__pluginID))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+             if (__count_ == null || __count_ != 0) {        
+                 result.rejectValue(CONTEXT.fullName, "genapp.validation.unique", new Object[] { String.valueOf(__context), get(CONTEXT) }, "Contexte repetit"
+                         //new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__context)),
+                         //     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CONTEXT))
+                             );
+             }
+           }
+
+         }
+       
+       
    }
 
 
