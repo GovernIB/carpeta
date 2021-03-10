@@ -43,6 +43,10 @@ private static final long serialVersionUID = 838506947L;
 	@Column(name="descripcioid",nullable = false,length = 19)
 	long descripcioID;
 
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="SECCIO_SEQ")
+	@Column(name="context",nullable = false,unique = true,length = 50)
+	java.lang.String context;
+
 	@Column(name="activa",nullable = false,length = 1)
 	boolean activa;
 
@@ -64,10 +68,11 @@ private static final long serialVersionUID = 838506947L;
   }
 
   /** Constructor amb tots els camps  */
-  public SeccioJPA(long seccioID , long nomID , long descripcioID , boolean activa , long iconaID , java.lang.Long seccioPareID , long entitatID) {
+  public SeccioJPA(long seccioID , long nomID , long descripcioID , java.lang.String context , boolean activa , long iconaID , java.lang.Long seccioPareID , long entitatID) {
     this.seccioID=seccioID;
     this.nomID=nomID;
     this.descripcioID=descripcioID;
+    this.context=context;
     this.activa=activa;
     this.iconaID=iconaID;
     this.seccioPareID=seccioPareID;
@@ -82,10 +87,21 @@ private static final long serialVersionUID = 838506947L;
     this.seccioPareID=seccioPareID;
     this.entitatID=entitatID;
 }
+  /** Constructor dels valors Not Null */
+  public SeccioJPA(long seccioID , long nomID , long descripcioID , java.lang.String context , boolean activa , long iconaID , long entitatID) {
+    this.seccioID=seccioID;
+    this.nomID=nomID;
+    this.descripcioID=descripcioID;
+    this.context=context;
+    this.activa=activa;
+    this.iconaID=iconaID;
+    this.entitatID=entitatID;
+}
   public SeccioJPA(Seccio __bean) {
     this.setSeccioID(__bean.getSeccioID());
     this.setNomID(__bean.getNomID());
     this.setDescripcioID(__bean.getDescripcioID());
+    this.setContext(__bean.getContext());
     this.setActiva(__bean.isActiva());
     this.setIconaID(__bean.getIconaID());
     this.setSeccioPareID(__bean.getSeccioPareID());
@@ -113,6 +129,13 @@ private static final long serialVersionUID = 838506947L;
 	};
 	public void setDescripcioID(long _descripcioID_) {
 		this.descripcioID = _descripcioID_;
+	};
+
+	public java.lang.String getContext() {
+		return(context);
+	};
+	public void setContext(java.lang.String _context_) {
+		this.context = _context_;
 	};
 
 	public boolean isActiva() {
@@ -272,6 +295,7 @@ private static final long serialVersionUID = 838506947L;
     __tmp.setSeccioID(__bean.getSeccioID());
     __tmp.setNomID(__bean.getNomID());
     __tmp.setDescripcioID(__bean.getDescripcioID());
+    __tmp.setContext(__bean.getContext());
     __tmp.setActiva(__bean.isActiva());
     __tmp.setIconaID(__bean.getIconaID());
     __tmp.setSeccioPareID(__bean.getSeccioPareID());

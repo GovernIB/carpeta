@@ -23,6 +23,8 @@ public interface SeccioLogicaService extends SeccioService {
     
     public SeccioJPA findByPrimaryKey(Long _ID_);
     
+    public SeccioJPA findByContext(String context) throws I18NException;
+    
     public List<Seccio> findByEntity(long entitatID, Long seccioPareID) throws I18NException;
 
 }

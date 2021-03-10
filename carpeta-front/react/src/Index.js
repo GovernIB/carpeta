@@ -14,6 +14,7 @@ import PluginHtml from './PluginHtml';
 import PluginReact from './PluginReact';
 import Accessibilitat from './Accessibilitat';
 import NivellAutenticacio from './NivellAutenticacio';
+import * as Constants from './Constants';
 
 // NO ESBORRAR LA SEGÜENT LINIA  !!!!!!
 import i18n from './i18n';
@@ -118,13 +119,6 @@ class Index extends Component {
                         {/* Avisos Front */}
                         <AvisosFront  />
 
-                        {/* Contingut pàgina 
-                        <div id="carregant" className="loader-container centrat loaderOcult">
-                            <div className="loader"/>
-                        </div>
-                        */}
-
-
                         <div id="contingutok" className="pt-2">
                             <Switch>
                                 <Route exact path="/" component={Inici} refresh="true" />
@@ -136,37 +130,36 @@ class Index extends Component {
                                 <Route path="/mapaweb" component={MapaWeb} />
 
                                 <Route
-                                    path="/seccio/:seccioId/pluginhtml/:pluginId"
+                                    path= {Constants.SECCIO_PATH + ":seccioContext" + Constants.PLUGINHTML_PATH + ":pluginContext"}
                                     render={(props) => {
-                                        return <PluginHtml {...props} seccioID={props.match.params.seccioId} pluginID={props.match.params.pluginId} />
+                                        return <PluginHtml {...props} seccioContext={props.match.params.seccioContext} pluginContext={props.match.params.pluginContext} />
                                     }}
                                 />
 
                                 <Route
-                                    path="/seccio/:seccioId/pluginreact/:pluginId"
+                                    path={Constants.SECCIO_PATH + ":seccioContext" + Constants.PLUGINREACT_PATH + ":pluginContext"}
                                     render={(props) => {
-                                        return <PluginReact {...props} seccioID={props.match.params.seccioId} pluginID={props.match.params.pluginId}  />
+                                        return <PluginReact {...props} seccioContext={props.match.params.seccioContext} pluginContext={props.match.params.pluginContext}  />
                                     }}
                                 />
 
                                 <Route
-                                    path="/seccio/:seccioId"
+                                    path= {Constants.SECCIO_PATH + ":seccioContext"}
                                     render={(props) => {
-                                        return <LlistatDePlugins {...props} seccioID={props.match.params.seccioId}  />
+                                        return <LlistatDePlugins {...props} seccioContext={props.match.params.seccioContext}  />
                                     }}
                                 />
                                 <Route
-                                    path="/pluginhtml/:pluginId"
+                                    path={ Constants.PLUGINHTML_PATH + ":pluginContext" }
                                     render={(props) => {
-                                        return <PluginHtml {...props} seccioID={0}  />
+                                        return <PluginHtml {...props} seccioContext={0}  />
                                     }}
                                 />
 
-                                {/*//alert("\nMOSTRAR PLUGIN REACT" + props.match.params.pluginId + "\n");   */}
                                 <Route
-                                    path="/pluginreact/:pluginId"
+                                    path={ Constants.PLUGINREACT_PATH + ":pluginId" }
                                     render={(props) => {
-                                        return <PluginReact {...props} seccioID={0} pluginID={props.match.params.pluginId}  />
+                                        return <PluginReact {...props} seccioContext={0} pluginContext={props.match.params.pluginContext}  />
                                     }}
                                 />
                             </Switch>

@@ -2,8 +2,9 @@ import React, { Component, Suspense } from 'react';
 import i18n from 'i18next';
 import { withTranslation } from 'react-i18next';
 import axios from "axios";
-import { HashRouter, Switch, Route, Link, useHistory, NavLink } from "react-router-dom";
+import {  Link } from "react-router-dom";
 import { withRouter } from "react-router";
+import * as Constants from './Constants';
 
 /**
  * @author anadal Migracio A Routes
@@ -47,16 +48,16 @@ class Breadcrumb extends Component {
         var novaruta = location.pathname;
 
         // NOMES FUNCIONA PER UN NIVELL DE SECCIO, MÉS S?HA DE PROGRAMAR
-        var match = novaruta.match('^\/seccio\/([0-9]+)\/plugin(react|html)\/([0-9]+)');
+        var match = novaruta.match('^' + Constants.SECCIO_MATCH + '([a-z0-9]+)(' + Constants.PLUGINHTML_MATCH+  '|' + Constants.PLUGINREACT_MATCH + ')([a-z0-9]+)');
 
         console.log("MATCH === " + match);
 
         if (match) {
             //  Es plugin d'una Secció ????
-            var seccioID = match[1];
-            console.log("MATCH[SECCIO] === " + seccioID);
+            var seccioContext = match[1];
+            console.log("MATCH[SECCIO] === " + seccioContext);
             var baseURL = sessionStorage.getItem('contextPath');
-            var url6 = baseURL + `/webui/seccioplugin/` + seccioID + `/` + match[3];
+            var url6 = baseURL + `/webui/seccioplugin/` + seccioContext + `/` + match[3];
             console.log("URL INFO SECCIO - PLUGIN ==> " + url6);
             axios.get(url6).then(res => {
 
@@ -72,7 +73,7 @@ class Breadcrumb extends Component {
                 console.log("BREADCRUMB ==> ACTUALITZANT STATE SECCIO-PLUGIN ==> " + seccioNom + " / " + pluginNom + "]");
                  
 
-               this.setState({ items: [{ id: '/seccio/' + seccioID, label: seccioNom }, { id: novaruta, label: pluginNom }] });
+               this.setState({ items: [{ id: Constants.SECCIO_PATH + seccioContext, label: seccioNom }, { id: novaruta, label: pluginNom }] });
             });
 
 
@@ -83,7 +84,7 @@ class Breadcrumb extends Component {
             } else {
                 
 
-                var pluginMatch = novaruta.match('^\/plugin(react|html)\/([0-9]+)');
+                var pluginMatch = novaruta.match('^(' + Constants.PLUGINHTML_MATCH+  '|' + Constants.PLUGINREACT_MATCH + ')([a-z0-9]+)');
 
                 if (pluginMatch) {
 
@@ -100,18 +101,10 @@ class Breadcrumb extends Component {
                         this.setState({items: [{id: location.pathname, label: pluginInfo.nom}]})
                     });
 
-                    /*
-                    var url7 = baseURL2 + `/pluginfront/veureplugins/`;
-                    axios.get(url7).then(res => {
-                        res.data.filter(s => s.pluginID === pluginMatch[2]).map((s, i) => (
-                            this.setState({items: [{id: location.pathname, label: s.nom}]})
-                        ));
-                    });
-                    */
                 } else {
 
 
-                    var seccioMatch = novaruta.match('^\/seccio\/([0-9]+)');
+                    var seccioMatch = novaruta.match('^' +  Constants.SECCIO_MATCH + '([a-z0-9]+)');
 
 
                     if (seccioMatch) {
@@ -120,8 +113,8 @@ class Breadcrumb extends Component {
                         console.log("URL INFO SECCIO ==> " + url6);
                         axios.get(url6).then(res => {
                             var seccio = res.data;
-                            console.log("BREADCRUMB ==> ACTUALITZANT STATE SECCIO ==> " + seccio.nom + " [" + seccio.seccioID + "]");
-                            this.setState({ items: [{ id: '/seccio/' + seccio.seccioID, label: seccio.nom }] });
+                            console.log("BREADCRUMB ==> ACTUALITZANT STATE SECCIO ==> " + seccio.nom + " [" + seccio.context + "]");
+                            this.setState({ items: [{ id: '/seccio/' + seccio.context, label: seccio.nom }] });
                         });
 
                     } else {

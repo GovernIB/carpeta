@@ -4,6 +4,7 @@ import axios from "axios";
 import ExpirarSessio from "./ExpirarSessio";
 import { Link } from "react-router-dom";
 import i18n from 'i18next';
+import * as Constants from './Constants';
 
 /**
  * @author Adaptació a fillInfo
@@ -75,7 +76,7 @@ class MapaWeb extends Component {
 					enllazos.push(
 						<p key={'ph' + i} className="lh15 upper">
 						<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} className="imc-icona" title="" alt="" />
-						<Link to={"/pluginhtml/" + s.pluginID} >{s.nom}</Link>
+						<Link to={Constants.PLUGINHTML_PATH + s.context} >{s.nom}</Link>
 						</p>)
 					});
 
@@ -83,7 +84,7 @@ class MapaWeb extends Component {
 					enllazos.push(
 				    <p key={'pr' + i} className="lh15 upper">
 						<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} className="imc-icona" title="" alt="" />
-				        <Link to={"/pluginreact/" + s.pluginID} >{s.nom}</Link>
+				        <Link to={Constants.PLUGINREACT_PATH + s.context} >{s.nom}</Link>
 				    </p>);
 				});
 			}
@@ -106,7 +107,7 @@ class MapaWeb extends Component {
 			    this.state.seccions.map((s, i) => {
 					enllazos.push(
 					<p key={'s' + i} className="lh15 upper">
-					<Link to={"/seccio/" + s.seccioID} >
+					<Link to={Constants.SECCIO_PATH + s.context} >
 						<img src={s.iconaID} title="" alt={s.descripcio} className="imc-icona iconaEnllas" />
 						<span>{s.nom}</span>
 					</Link>

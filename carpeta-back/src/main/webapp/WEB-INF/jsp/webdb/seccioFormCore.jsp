@@ -72,6 +72,24 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,SeccioFields.CONTEXT)}">
+        <tr id="seccio_context_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[SeccioFields.CONTEXT])?'seccio.context':__theForm.labels[SeccioFields.CONTEXT]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[SeccioFields.CONTEXT]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[SeccioFields.CONTEXT]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="seccio.context" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,SeccioFields.CONTEXT)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,SeccioFields.CONTEXT)? ' uneditable-input' : ''}"  style="" maxlength="50" path="seccio.context"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,SeccioFields.ACTIVA)}">
         <tr id="seccio_activa_rowid">
           <td>

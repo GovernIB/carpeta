@@ -104,6 +104,19 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,PluginFields.CONTEXT)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="plugin.context" var="context" />
+              <fmt:message key="genapp.form.searchby" var="cercapercontext" >                
+                 <fmt:param value="${context}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${context}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapercontext}" path="context" />
+            </div>
+
+
+        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,PluginFields.CLASSE)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">

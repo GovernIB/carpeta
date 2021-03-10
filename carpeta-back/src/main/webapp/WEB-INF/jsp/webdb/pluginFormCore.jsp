@@ -72,6 +72,24 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,PluginFields.CONTEXT)}">
+        <tr id="plugin_context_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[PluginFields.CONTEXT])?'plugin.context':__theForm.labels[PluginFields.CONTEXT]}" />
+              <c:if test="${not empty __theForm.help[PluginFields.CONTEXT]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.CONTEXT]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="plugin.context" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.CONTEXT)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,PluginFields.CONTEXT)? ' uneditable-input' : ''}"  style="" maxlength="50" path="plugin.context"   />
+
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginFields.LOGOID)}">
         <tr id="plugin_logoID_rowid">
           <td>

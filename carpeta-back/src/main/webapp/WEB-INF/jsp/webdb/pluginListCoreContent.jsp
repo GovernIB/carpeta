@@ -45,6 +45,11 @@
           </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.CONTEXT)}">
+          <td>
+          ${plugin.context}
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.LOGOID)}">
           <td>
             <c:if test="${not empty plugin.logo}">

@@ -4,7 +4,6 @@ import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import org.apache.commons.io.IOUtils;
 
-import javax.ejb.EJB;
 import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

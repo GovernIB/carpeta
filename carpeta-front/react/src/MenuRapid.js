@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import { withTranslation } from 'react-i18next';
 import axios from "axios";
 import i18n from "i18next";
-import { HashRouter, Switch, Route, Link,useHistory } from "react-router-dom";
+import {  Link } from "react-router-dom";
+import * as Constants from './Constants';
 
 /**
  * 
@@ -59,7 +60,7 @@ class MenuRapid extends Component {
 
             gestionsHtml = plugins.filter(s => s.reactComponent === 'false').map((s, i) => (
                 <li key={i} className="nav-item pr-4">
-                    <Link className="navCarpeta" to={{pathname: "/pluginhtml/" + s.pluginID, nomPagina: "plugin" }} >
+                    <Link className="navCarpeta" to={{pathname: Constants.PLUGINHTML_PATH + s.context, nomPagina: "plugin" }} >
                         <img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} alt="" title="" className="imc-icona" />
                         <span className="menuRapidView">{s.nom}</span>
                         </Link>
@@ -68,7 +69,7 @@ class MenuRapid extends Component {
 
             gestionsReact = plugins.filter(s => s.reactComponent === 'true').map((s, i) => (
                     <li key={i} className="nav-item pr-4">
-                        <Link className="navCarpeta" to={{pathname: "/pluginreact/" + s.pluginID, nomPagina: "plugin" }} >
+                        <Link className="navCarpeta" to={{pathname: Constants.PLUGINREACT_PATH + s.context, nomPagina: "plugin" }} >
                             <img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} alt="" title="" className="imc-icona" />
                             <span className="menuRapidView">{s.nom}</span>
                         </Link>
@@ -92,7 +93,7 @@ class MenuRapid extends Component {
             const seccions = this.state.seccions;
             seccionsS = seccions.map((s, i) => (
                 <li key={i} className="nav-item pr-4" > 
-                    <Link to={{pathname: "/seccio/" + s.seccioID, nomPagina: "seccio" }}>
+                    <Link to={{pathname: Constants.SECCIO_PATH + s.context, nomPagina: "seccio" }}>
                         <img src={s.iconaID} title={s.nom} alt={s.descripcio} className="imc-icona" />
                         <span className="menuRapidView">{s.nom}</span>
                     </Link>

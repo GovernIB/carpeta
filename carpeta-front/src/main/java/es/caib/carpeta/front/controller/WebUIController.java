@@ -56,7 +56,6 @@ public class WebUIController extends PluginFrontController {
     @EJB(mappedName = SeccioLogicaService.JNDI_NAME)
     SeccioLogicaService seccioLogicaEjb;
 
-
     public static final String WEBUI_PATH = "/webui";
 
     public static final String WEBUI_FAVICON_PATH = "/icona";
@@ -81,6 +80,7 @@ public class WebUIController extends PluginFrontController {
     public static class SeccioInfo {
 
         protected long seccioID;
+        protected String context;
         protected String nom;
         protected String descripcio;        
         protected String iconaID;
@@ -89,12 +89,13 @@ public class WebUIController extends PluginFrontController {
             super();
         }
 
-        public SeccioInfo(long seccioID, String nom, String descripcio, String iconaID) {
+        public SeccioInfo(long seccioID, String nom,  String descripcio, String context, String iconaID) {
             super();
             this.seccioID = seccioID;
             this.nom = nom;
             this.descripcio = descripcio;
             this.iconaID = iconaID;
+            this.context = context;
         }
 
         public long getSeccioID() {
@@ -121,6 +122,14 @@ public class WebUIController extends PluginFrontController {
         }
         public void setIconaID(String iconaID) {
             this.iconaID = iconaID;
+        }
+
+        public String getContext() {
+            return context;
+        }
+
+        public void setContext(String context) {
+            this.context = context;
         }
 
     }
@@ -528,22 +537,24 @@ public class WebUIController extends PluginFrontController {
     
     
     
-    @RequestMapping(value = "/seccioplugin/{seccioID}/{pluginID}", method = RequestMethod.GET)
+    @RequestMapping(value = "/seccioplugin/{seccioContext}/{pluginContext}", method = RequestMethod.GET)
     public void getSeccioPlugin(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("seccioID") Long seccioID,@PathVariable("pluginID") Long pluginID) {
+            @PathVariable("seccioContext") String seccioContext, @PathVariable("pluginContext") String pluginContext) {
         try {
             
             String lang = LocaleContextHolder.getLocale().getLanguage();
-            log.info("/seccioplugin/" + seccioID + "/" + pluginID + " ==> " + lang);
+            log.info("/seccioplugin/" + seccioContext + "/" + pluginContext + " ==> " + lang);
+            
+            Long pluginID = utilsEjb.getFrontPluginIDByContext(pluginContext);
   
             PluginInfo pluginInfo = utilsEjb.getFrontPluginInfo(  lang, pluginID);
             
-            SeccioInfo seccioInfo = getSeccioInfo(request, seccioID, lang);
+            SeccioInfo seccioInfo = getSeccioInfo(request, seccioContext, lang);
 
             Gson gson = new Gson();
             String json = gson.toJson(new Object[] { seccioInfo, pluginInfo });
 
-            log.info(" Seccio-Plugin amb ID = " + seccioID + "-" + pluginID  + ":\n" + json + "\n");
+            log.info(" Seccio-Plugin amb seccioContext = " + seccioContext + "-" + pluginContext  + ":\n" + json + "\n");
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF8");
@@ -560,23 +571,23 @@ public class WebUIController extends PluginFrontController {
     
     
 
-    @RequestMapping(value = "/seccio/{seccioID}", method = RequestMethod.GET)
+    @RequestMapping(value = "/seccio/{seccioContext}", method = RequestMethod.GET)
     public void getSeccio(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("seccioID") Long seccioID) {
+            @PathVariable("seccioContext") String seccioContext) {
         try {
             
             String lang = LocaleContextHolder.getLocale().getLanguage();
-            log.info("/seccio/" + seccioID + " ==> " + lang);
+            log.info("/seccio/" + seccioContext + " ==> " + lang);
             
             
             
-            SeccioInfo seccioInfo = getSeccioInfo(request, seccioID, lang);
+            SeccioInfo seccioInfo = getSeccioInfo(request, seccioContext, lang);
 
             // Passar enllazosInfo a
             Gson gson = new Gson();
             String json = gson.toJson(seccioInfo);
 
-            log.info(" Seccio amb ID = " + seccioID + ":\n" + json + "\n");
+            log.info(" Seccio amb Context = " + seccioContext + ":\n" + json + "\n");
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF8");
@@ -590,8 +601,9 @@ public class WebUIController extends PluginFrontController {
         }
     }
 
-    protected SeccioInfo getSeccioInfo(HttpServletRequest request, Long seccioID, String lang) {
-        Seccio seccio = seccioLogicaEjb.findByPrimaryKey(seccioID);
+    protected SeccioInfo getSeccioInfo(HttpServletRequest request, String seccioContext, String lang) throws I18NException {
+        
+        Seccio seccio = seccioLogicaEjb.findByContext(seccioContext);
 
         SeccioJPA seccioJPA = (SeccioJPA) seccio;
 
@@ -608,7 +620,7 @@ public class WebUIController extends PluginFrontController {
         String urllogo = request.getContextPath() + WEBUI_PATH + ENLLAZ_LOGO_PATH + "/"
                 + HibernateFileUtil.encryptFileID(seccioJPA.getIconaID());
 
-        SeccioInfo seccioInfo = new SeccioInfo(seccioJPA.getSeccioID(), nom, descripcio, urllogo);
+        SeccioInfo seccioInfo = new SeccioInfo(seccioJPA.getSeccioID(), nom, descripcio, seccioJPA.getContext(), urllogo);
         return seccioInfo;
     }
     
@@ -673,7 +685,7 @@ public class WebUIController extends PluginFrontController {
             String urllogo = request.getContextPath() + WEBUI_PATH + ENLLAZ_LOGO_PATH + "/"
                     + HibernateFileUtil.encryptFileID(seccioJPA.getIconaID());
 
-            seccioInfo.add(new SeccioInfo(seccioJPA.getSeccioID(), nom, descripcio, urllogo));
+            seccioInfo.add(new SeccioInfo(seccioJPA.getSeccioID(), nom, descripcio, seccioJPA.getContext(), urllogo));
         }
         return seccioInfo;
     }
@@ -1014,14 +1026,14 @@ public class WebUIController extends PluginFrontController {
     
     
     
-    @RequestMapping(value = "/fullinfo/{seccioID}" , method = RequestMethod.GET)
+    @RequestMapping(value = "/fullinfo/{seccioContext}" , method = RequestMethod.GET)
     public void getFullInfo(HttpServletRequest request, HttpServletResponse response,
-          @PathVariable("seccioID") Long seccioID) throws I18NException {
+          @PathVariable("seccioContext") String seccioContext) throws I18NException {
             
         try {
 
-            if (seccioID != null && seccioID == 0) {
-                seccioID = null;
+            if (seccioContext != null && seccioContext.equals("0")) {
+                seccioContext = null;
             }
 
             String lang = LocaleContextHolder.getLocale().getLanguage();
@@ -1029,7 +1041,7 @@ public class WebUIController extends PluginFrontController {
             String codiEntitat = sesionHttp.getEntitat();
             Long entitatID = sesionHttp.getEntitatID();
             
-            String fullID = codiEntitat + "_" + seccioID; // + "_" + lang; ???? 
+            String fullID = codiEntitat + "_" + seccioContext; // + "_" + lang; ???? 
             
             @SuppressWarnings("unchecked")
             Map<String, Map<String, Object>> cacheFullInfo = (Map<String, Map<String, Object>>) request.getSession().getAttribute(SESSION_FULLINFO_MAP);
@@ -1047,6 +1059,17 @@ public class WebUIController extends PluginFrontController {
 
             if (fullInfo == null) {
                 fullInfo = new HashMap<String, Object>();
+                
+                final Long seccioID;
+                
+                // seccio
+                if (seccioContext != null){
+                    SeccioInfo seccioInfo = getSeccioInfo(request, seccioContext, lang);
+                    fullInfo.put("seccio", seccioInfo);
+                    seccioID = seccioInfo.getSeccioID();
+                } else {
+                    seccioID = null;
+                }
                 
                 // Plugins
                 List<PluginInfo> pluginsEntitat = utilsEjb.getFrontPlugins(codiEntitat, lang, seccioID);
@@ -1080,11 +1103,7 @@ public class WebUIController extends PluginFrontController {
                     fullInfo.put("seccions", seccioInfo);
                 }
                 
-                // seccio
-                if (seccioID != null){
-                    SeccioInfo seccioInfo = getSeccioInfo(request, seccioID, lang);
-                    fullInfo.put("seccio", seccioInfo);
-                }
+                
                 
                 // Nom entitat
                 {

@@ -10,6 +10,7 @@ public class PluginInfo {
     String pluginID;
     String nom;
     String descripcio;
+    String context;
     String reactComponent;
     Long gravetat;
     String missatge;
@@ -18,10 +19,11 @@ public class PluginInfo {
         super();
     }
 
-    public PluginInfo(String pluginID, String nom, String descripcio, String reactComponent, Long gravetat, String missatge) {
+    public PluginInfo(String pluginID, String nom, String descripcio, String context, String reactComponent, Long gravetat, String missatge) {
         super();
         this.nom = nom;
         this.descripcio = descripcio;
+        this.context = context;
         this.pluginID = pluginID;
         this.reactComponent = reactComponent;
         this.gravetat = gravetat;
@@ -75,5 +77,15 @@ public class PluginInfo {
     public void setMissatge(String missatge) {
         this.missatge = missatge;
     }
+
+    public String getContext() {
+        return context;
+    }
+
+    public void setContext(String context) {
+        this.context = context;
+    }
+    
+    
 
 }

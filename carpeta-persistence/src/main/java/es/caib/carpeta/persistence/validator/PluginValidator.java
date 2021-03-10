@@ -53,6 +53,25 @@ public class PluginValidator<I extends Plugin>
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(TIPUS)));
 
     // Check size
+    if (__vr.getFieldErrorCount(CONTEXT) == 0) {
+      java.lang.String __context = __target__.getContext();
+      if (__context!= null && __context.length() > 50) {
+        __vr.rejectValue(CONTEXT, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CONTEXT)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(50)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(CONTEXT) == 0) {
+      String val = __target__.getContext();
+      if (val != null && val.trim().length() != 0) {
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile("[a-z0-9]{5,}");
+        if (!p.matcher(val).matches()) {
+          __vr.rejectValue(CONTEXT, "genapp.validation.malformed",
+             new org.fundaciobit.genapp.common.i18n.I18NArgumentString(val), new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CONTEXT)));
+        }
+      }
+    }
+
     if (__vr.getFieldErrorCount(CLASSE) == 0) {
       java.lang.String __classe = __target__.getClasse();
       if (__classe!= null && __classe.length() > 255) {

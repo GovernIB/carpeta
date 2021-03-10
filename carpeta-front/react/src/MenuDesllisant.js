@@ -5,6 +5,8 @@ import axios from 'axios';
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import { menuDesllisantJS } from "./assets/js/menu-lateral";
+import * as Constants from './Constants';
+
 /**
  *
  * @author anadal Migració a ROUTER
@@ -67,16 +69,16 @@ class MenuDesllisant extends Component {
 
 	}
 
-	infoHtml(missatge, pluginID) {
+	infoHtml(missatge, pluginContext) {
 		alert(missatge);
 
-        this.props.history.push("/pluginhtml/" + pluginID);
+        this.props.history.push(Constants.PLUGINHTML_PATH + pluginContext);
         
 	}
 
-	infoReact(missatge, pluginID) {
+	infoReact(missatge, pluginContext) {
 		alert(missatge);
-		this.props.history.push("/pluginreact/" + pluginID);
+		this.props.history.push(Constants.PLUGINREACT_PATH + pluginContext);
 	}
 
 	error(missatge) {
@@ -114,9 +116,7 @@ class MenuDesllisant extends Component {
 
 		const {t} = this.props;
 		var autenticat = sessionStorage.getItem('autenticat');
-		//var urlBase = window.location.href;
 		var urlBase = sessionStorage.getItem('contextPath');
-		var defaultEntityCode = sessionStorage.getItem("defaultEntityCode");
 		var canviarDeFront = sessionStorage.getItem("canviarDeFront");
 		var numEntitats = sessionStorage.getItem("numEntitats");
 
@@ -239,7 +239,7 @@ class MenuDesllisant extends Component {
 			seccionsS = this.state.seccions.map((s, i) => (
 				<li key={i}>
 
-					<Link to={"/seccio/" + s.seccioID} >
+					<Link to={Constants.SECCIO_PATH + s.context} >
 						<img src={s.iconaID} title="" alt={s.descripcio} className="imc-icona iconaEnllas" />
 						<span>{s.nom}</span>
 					</Link>
@@ -254,19 +254,19 @@ class MenuDesllisant extends Component {
 
 			plugHtml = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 0).map((s,i) => (
 				<li key={i}>				
-					<Link to={"/pluginhtml/" + s.pluginID} >
+					<Link to={Constants.PLUGINHTML_PATH + s.context} >
 					<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span>
 					</Link>
 				</li>
 			));
 			plugHtmlInfo = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 1).map((s,i) => (
-				<li key={i}><button title={s.nom} className="botoMenu alert1menu" onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}><img
+				<li key={i}><button title={s.nom} className="botoMenu alert1menu" onClick={(event) => this.infoHtml(s.missatge,s.context)}><img
 					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
 			plugHtmlWarning = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 2).map((s,i) => (
-				<li key={i}><button title={s.nom} className="botoMenu alert2menu" onClick={(event) => this.infoHtml(s.missatge,s.pluginID)}><img
+				<li key={i}><button title={s.nom} className="botoMenu alert2menu" onClick={(event) => this.infoHtml(s.missatge,s.context)}><img
 					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
@@ -278,7 +278,7 @@ class MenuDesllisant extends Component {
 
 			plugReact = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 0).map((s,i) => (
 				<li key={i}>				    
-					<Link to={"/pluginreact/" + s.pluginID} >
+					<Link to={Constants.PLUGINREACT_PATH + s.context} >
 					<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span>
 					</Link>
@@ -286,12 +286,12 @@ class MenuDesllisant extends Component {
 				</li>
 			));
 			plugReactInfo = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 1).map((s,i) => (
-				<li key={i}><button title={s.nom} className="botoMenu alert1menu" onClick={(event) => this.infoReact(s.missatge,s.pluginID)}><img
+				<li key={i}><button title={s.nom} className="botoMenu alert1menu" onClick={(event) => this.infoReact(s.missatge,s.context)}><img
 					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
 			plugReactWarning = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 2).map((s,i) => (
-				<li key={i}><button title={s.nom} className="botoMenu alert2menu" onClick={(event) => this.infoReact(s.missatge,s.pluginID)}><img
+				<li key={i}><button title={s.nom} className="botoMenu alert2menu" onClick={(event) => this.infoReact(s.missatge,s.context)}><img
 					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));

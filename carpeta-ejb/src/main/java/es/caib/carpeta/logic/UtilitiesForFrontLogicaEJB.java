@@ -38,7 +38,7 @@ import java.util.Map;
 @PermitAll
 @Stateless
 public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaService {
-    
+
     protected Logger log = Logger.getLogger(this.getClass());
 
     @EJB(mappedName = es.caib.carpeta.ejb.EntitatService.JNDI_NAME)
@@ -61,7 +61,6 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
 
     @EJB(mappedName = FitxerLogicaService.JNDI_NAME)
     protected FitxerLogicaService fitxerLogicaEjb;
-
 
     /**
      * Retorna codi i nom en l'idioma seleccionat
@@ -129,6 +128,14 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
     }
 
     @Override
+    public Long getFrontPluginIDByContext(String pluginContext) throws I18NException {
+
+        Long pluginID = pluginCarpetaFrontEjb.executeQueryOne(PluginFields.PLUGINID,
+                PluginFields.CONTEXT.equal(pluginContext));
+        return pluginID;
+    }
+
+    @Override
     public List<PluginInfo> getFrontPlugins(String codiEntitat, String language, Long seccioID) throws I18NException {
 
         List<Long> pluginsEntitat = pluginEntitatLogicaEjb.getPluginsEntitat(codiEntitat, true, seccioID);
@@ -138,52 +145,45 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
         List<PluginInfo> pluginsInfo = new ArrayList<PluginInfo>(plugins.size());
 
         for (Plugin plugin : plugins) {
-            if(plugin.isActiu()) {
+            if (plugin.isActiu()) {
                 PluginJPA p = (PluginJPA) plugin;
 
                 ICarpetaFrontPlugin cfp = pluginCarpetaFrontEjb.getInstanceByPluginID(p.getPluginID());
 
                 List<Avis> avisos = avisEjb.findActiveByPluginID(p.getPluginID());
 
-                // Ara hi pot haver més d'un avís actiu al mateix temps, només es mostra el de major gravetat,
-                // ja que cada tipus d'avis te una forma diferent de visualitzar el plugin al Front
+                // Ara hi pot haver més d'un avís actiu al mateix temps, només es mostra el de
+                // major gravetat,
+                // ja que cada tipus d'avis te una forma diferent de visualitzar el plugin al
+                // Front
                 Long gravetatAvis = (long) 0;
                 String missatgeAvis = "";
                 if (avisos.size() > 0) {
                     gravetatAvis = (long) avisos.get(0).getGravetat();
-                    missatgeAvis = ((AvisJPA)avisos.get(0)).getDescripcio().getTraduccio(language).getValor();
+                    missatgeAvis = ((AvisJPA) avisos.get(0)).getDescripcio().getTraduccio(language).getValor();
                 }
 
                 pluginsInfo.add(new PluginInfo(String.valueOf(plugin.getPluginID()),
                         p.getNom().getTraduccio(language).getValor(),
-                        p.getDescripcio().getTraduccio(language).getValor(),
+                        p.getDescripcio().getTraduccio(language).getValor(), p.getContext(),
                         String.valueOf(cfp.isReactComponent()), gravetatAvis, missatgeAvis));
             }
         }
 
         return pluginsInfo;
     }
-    
-    
+
     @Override
-    public PluginInfo getFrontPluginInfo( String language, Long pluginID) throws I18NException {
+    public PluginInfo getFrontPluginInfo(String language, Long pluginID) throws I18NException {
 
         Plugin plugin = pluginCarpetaFrontEjb.findByPrimaryKey(pluginID);
 
-
         PluginInfo pluginInfo;
-        {
-             {
-                PluginJPA p = (PluginJPA) plugin;
 
-                
+        PluginJPA p = (PluginJPA) plugin;
 
-                pluginInfo = new PluginInfo(String.valueOf(plugin.getPluginID()),
-                        p.getNom().getTraduccio(language).getValor(),
-                        p.getDescripcio().getTraduccio(language).getValor(),
-                        "", 0L, "");
-            }
-        }
+        pluginInfo = new PluginInfo(String.valueOf(plugin.getPluginID()), p.getNom().getTraduccio(language).getValor(),
+                p.getDescripcio().getTraduccio(language).getValor(), p.getContext(), "", 0L, "");
 
         return pluginInfo;
     }
@@ -191,35 +191,35 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
     @Override
     public FileInfo getIconaPlugin(Long pluginID, String language) throws I18NException {
 
-    	FileInfo fi = null; 
-    	
-		// miram si el plugin té associat una icona. 
-    	List<Plugin> pluginItem = pluginCarpetaFrontEjb.select(PluginFields.PLUGINID.equal(pluginID));
-    	if (pluginItem.size() > 0) {
-    		
-    		try {
-    			Fitxer f = pluginItem.get(0).getLogo();
-        		if(f != null) {
-        			File file = FileSystemManager.getFile(f.getFitxerID());
-            		if (file != null) {
-            			FileInputStream fis = new FileInputStream(file);
-    		    		fi = new FileInfo(f.getNom(), f.getMime(), org.apache.commons.io.IOUtils.toByteArray(fis));
-    		    		fis.close();
-    		    	}
-        		}
-    			
-    		}  catch(Exception e) {
-				log.error("getIconaPlugin - Error carregant fitxer.");
-			}
-    		
-    	}
-    	
-    	// Si no té icona associat, miram el properties
-    	// Si no está definit a properties, posam el per defecte
-    	if (fi == null){
+        FileInfo fi = null;
+
+        // miram si el plugin té associat una icona.
+        List<Plugin> pluginItem = pluginCarpetaFrontEjb.select(PluginFields.PLUGINID.equal(pluginID));
+        if (pluginItem.size() > 0) {
+
+            try {
+                Fitxer f = pluginItem.get(0).getLogo();
+                if (f != null) {
+                    File file = FileSystemManager.getFile(f.getFitxerID());
+                    if (file != null) {
+                        FileInputStream fis = new FileInputStream(file);
+                        fi = new FileInfo(f.getNom(), f.getMime(), org.apache.commons.io.IOUtils.toByteArray(fis));
+                        fis.close();
+                    }
+                }
+
+            } catch (Exception e) {
+                log.error("getIconaPlugin - Error carregant fitxer.");
+            }
+
+        }
+
+        // Si no té icona associat, miram el properties
+        // Si no está definit a properties, posam el per defecte
+        if (fi == null) {
             ICarpetaFrontPlugin plugin = pluginCarpetaFrontEjb.getInstanceByPluginID(pluginID);
             fi = plugin.getIcon(new Locale(language));
-    	}
+        }
 
         return fi;
 
@@ -227,24 +227,20 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
 
     // es.caib.carpeta.commons.utils.Constants.TIPUS_ENLLAZ_FRONT_XARXA_SOCIAL
     @Override
-    public List<Enllaz> getEnllazosByType(String codiEntitat, String language, int enllazType, Long seccioID) throws I18NException {
+    public List<Enllaz> getEnllazosByType(String codiEntitat, String language, int enllazType, Long seccioID)
+            throws I18NException {
 
         EnllazQueryPath eqp = new EnllazQueryPath();
 
         Where w;
         if (seccioID == null) {
-            w = EnllazFields.SECCIOID.isNull(); 
-         } else {
+            w = EnllazFields.SECCIOID.isNull();
+        } else {
             w = EnllazFields.SECCIOID.equal(seccioID);
-         }
-        
-        
+        }
+
         List<Enllaz> enllazos = enllazEjb.select(
-                Where.AND(
-                        eqp.ENTITAT().CODI().equal(codiEntitat),
-                        EnllazFields.TIPUS.equal(enllazType),
-                        w
-                        ), 
+                Where.AND(eqp.ENTITAT().CODI().equal(codiEntitat), EnllazFields.TIPUS.equal(enllazType), w),
                 new OrderBy(EnllazFields.ENLLAZID));
         return enllazos;
     }
@@ -272,11 +268,10 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
     @Override
     public List<Avis> getAvisosByType(String codiEntitat, int avisType) throws I18NException {
 
-       List<Avis> avisos = avisEjb.findActiveAvisos(codiEntitat, avisType);
-       return avisos;
+        List<Avis> avisos = avisEjb.findActiveAvisos(codiEntitat, avisType);
+        return avisos;
     }
-    
-    
+
     @Override
     public Map<String, String> getSuportEntitat(String codiEntitat, String lang) throws I18NException {
 
@@ -292,27 +287,26 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
             entitat = entitats.get(0);
         }
 
-        //Locale loc = new Locale(lang.toLowerCase());
+        // Locale loc = new Locale(lang.toLowerCase());
 
-        if(entitat.getSuportWeb() != null){
+        if (entitat.getSuportWeb() != null) {
             suport.put(String.valueOf(Constants.TIPUS_SUPORT_WEB), entitat.getSuportWeb());
         }
-        if(entitat.getSuportTelefon() != null){
+        if (entitat.getSuportTelefon() != null) {
             suport.put(String.valueOf(Constants.TIPUS_SUPORT_TELEFON), entitat.getSuportTelefon());
         }
-        if(entitat.getSuportEmail() != null){
+        if (entitat.getSuportEmail() != null) {
             suport.put(String.valueOf(Constants.TIPUS_SUPORT_MAIL), entitat.getSuportEmail());
         }
-        if(entitat.getSuportFAQ() != null){
+        if (entitat.getSuportFAQ() != null) {
             suport.put(String.valueOf(Constants.TIPUS_SUPORT_FAQ), entitat.getSuportFAQ());
         }
-        if(entitat.getSuportqssi() != null){
+        if (entitat.getSuportqssi() != null) {
             suport.put(String.valueOf(Constants.TIPUS_SUPORT_CONSULTA_TECNICA), entitat.getSuportqssi());
         }
-        if(entitat.getSuportautenticacio() != null){
+        if (entitat.getSuportautenticacio() != null) {
             suport.put(String.valueOf(Constants.TIPUS_SUPORT_AUTENTICACIO), entitat.getSuportautenticacio());
         }
-
 
         return suport;
 
@@ -329,7 +323,7 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
 
             try {
                 Fitxer f = entitatItem.get(0).getIcon();
-                if(f != null) {
+                if (f != null) {
                     File file = FileSystemManager.getFile(f.getFitxerID());
                     if (file != null) {
                         FileInputStream fis = new FileInputStream(file);
@@ -338,7 +332,7 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
                     }
                 }
 
-            }  catch(Exception e) {
+            } catch (Exception e) {
                 log.error("getIconaEntitat - Error carregant fitxer.");
             }
 

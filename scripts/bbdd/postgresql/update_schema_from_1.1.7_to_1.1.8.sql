@@ -45,4 +45,19 @@ ALTER TABLE car_enllaz ADD COLUMN descripcioid bigint;
 ALTER TABLE car_enllaz ADD CONSTRAINT car_enllaz_traduccio_desid_fk FOREIGN KEY (descripcioid) REFERENCES car_traduccio (traduccioid) ON UPDATE NO ACTION ON DELETE NO ACTION;
 create index car_enllaz_descripcioid_fk_i on car_enllaz (descripcioid);
 
+
+
+-- 09/03/2021  Urls "amigables" #404 
+
+ALTER TABLE car_seccio
+  ADD COLUMN context character varying(50) NOT NULL DEFAULT nextval('car_seccio_seq');
+ALTER TABLE car_seccio
+  ADD CONSTRAINT car_seccio_context_uk UNIQUE (context);
+
+
+ALTER TABLE car_plugin
+  ADD COLUMN context character varying(50);
+  
+UPDATE car_plugin SET context=pluginid WHERE tipus = 1;
+
 COMMIT;

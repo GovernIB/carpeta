@@ -15,6 +15,7 @@ public interface PluginFields extends java.io.Serializable {
 	 public static final LongField PLUGINID = new LongField(_TABLE_MODEL, "pluginID", "pluginid");  // PK
 	 public static final LongField NOMID = new LongField(_TABLE_MODEL, "nomID", "nomid");
 	 public static final LongField DESCRIPCIOID = new LongField(_TABLE_MODEL, "descripcioID", "descripcioid");
+	 public static final StringField CONTEXT = new StringField(_TABLE_MODEL, "context", "context");
 	 public static final LongField LOGOID = new LongField(_TABLE_MODEL, "logoID", "logoid");
 	 public static final StringField CLASSE = new StringField(_TABLE_MODEL, "classe", "classe");
 	 public static final StringField PROPIETATS = new StringField(_TABLE_MODEL, "propietats", "propietats");
@@ -26,6 +27,7 @@ public interface PluginFields extends java.io.Serializable {
     PLUGINID,
     NOMID,
     DESCRIPCIOID,
+    CONTEXT,
     LOGOID,
     CLASSE,
     PROPIETATS,

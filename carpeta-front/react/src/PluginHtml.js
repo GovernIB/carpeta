@@ -40,15 +40,15 @@ class PluginHtml extends Component {
         console.log("PLUGIN HTML 222222  !!!!!!!");
 
         const { t } = this.props;
-        const pluginID = this.props.match.params.pluginId;
-        console.log("PLUGIN HTML ID =" + pluginID + "  !!!!!!!");
+        const pluginContext = this.props.match.params.pluginContext;
+        console.log("PLUGIN HTML Context =" + pluginContext + "  !!!!!!!");
 
 
         var data = new FormData();
         var codiPlugin;
 
         var urlBase = sessionStorage.getItem('contextPath');
-        var url = urlBase + "/pluginfront/showplugin/" + pluginID + "/" + i18n.language;
+        var url = urlBase + "/pluginfront/showplugin/" + pluginContext + "/" + i18n.language;
 
         var xhr = new XMLHttpRequest();
         xhr.open('POST', url, true);

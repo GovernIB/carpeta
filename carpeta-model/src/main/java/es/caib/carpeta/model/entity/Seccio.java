@@ -11,6 +11,9 @@ public interface Seccio extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public long getDescripcioID();
 	public void setDescripcioID(long _descripcioID_);
 
+	public java.lang.String getContext();
+	public void setContext(java.lang.String _context_);
+
 	public boolean isActiva();
 	public void setActiva(boolean _activa_);
 

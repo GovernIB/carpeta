@@ -94,22 +94,26 @@ public class PluginFrontController extends CommonFrontController {
     }
 
 
-    @RequestMapping(value = "/showplugin/{pluginID}/{idioma}", method = RequestMethod.POST)
-    public ModelAndView showNormalPlugin(@PathVariable("pluginID") String pluginID, @PathVariable("idioma") String idioma,
+    @RequestMapping(value = "/showplugin/{pluginContext}/{idioma}", method = RequestMethod.POST)
+    public ModelAndView showNormalPlugin(@PathVariable("pluginContext") String pluginContext, @PathVariable("idioma") String idioma,
                                          HttpServletRequest request,
                                          HttpServletResponse response, Authentication authentication) throws Exception, I18NException {
 
+        Long pluginID = utilsEjb.getFrontPluginIDByContext(pluginContext);
         final boolean isreact=false;
         return showPlugin(pluginID,  idioma,
                 request,
                 response, authentication, isreact);
     }
 
-    @RequestMapping(value = "/showreactplugin/{pluginID}/{idioma}", method = RequestMethod.POST)
-    public ModelAndView showReactPlugin(@PathVariable("pluginID") String pluginID, @PathVariable("idioma") String idioma,
+    @RequestMapping(value = "/showreactplugin/{pluginContext}/{idioma}", method = RequestMethod.POST)
+    public ModelAndView showReactPlugin(@PathVariable("pluginContext") String pluginContext, @PathVariable("idioma") String idioma,
                                         HttpServletRequest request,
                                         HttpServletResponse response, Authentication authentication) throws Exception, I18NException {
         final boolean isreact=true;
+        
+        Long pluginID = utilsEjb.getFrontPluginIDByContext(pluginContext);
+        
         return showPlugin(pluginID,  idioma,
                 request,
                 response, authentication, isreact);
@@ -117,7 +121,7 @@ public class PluginFrontController extends CommonFrontController {
 
 
 
-    protected ModelAndView showPlugin(String pluginID,  String idioma,
+    protected ModelAndView showPlugin(Long pluginID,  String idioma,
                                       HttpServletRequest request,
                                       HttpServletResponse response, Authentication authentication, boolean isreact) throws Exception, I18NException {
 
@@ -182,7 +186,7 @@ public class PluginFrontController extends CommonFrontController {
 
 
     private String startPublicSignatureProcess(HttpServletRequest request, HttpServletResponse response,
-                                               String pluginID, String administrationID, String baseFront, UsuarioClave usuarioClave)
+                                               Long pluginID, String administrationID, String baseFront, UsuarioClave usuarioClave)
             throws Exception, I18NException {
 
         String urlToShowPluginPage = null;
@@ -203,13 +207,13 @@ public class PluginFrontController extends CommonFrontController {
             //ACCESS
 
 
-            accesLogicaEjb.crearAcces(usuarioClave,TIPUS_ACCES_PLUGIN, entitatJPA.getEntitatID(),Long.parseLong(pluginID),new Timestamp(new Date().getTime()),LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress(), true);
+            accesLogicaEjb.crearAcces(usuarioClave,TIPUS_ACCES_PLUGIN, entitatJPA.getEntitatID(),pluginID,new Timestamp(new Date().getTime()),LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress(), true);
 
 
 
         } catch (Throwable e) {
 
-            accesLogicaEjb.crearAcces(usuarioClave,TIPUS_ACCES_PLUGIN, entitatJPA.getEntitatID(),Long.parseLong(pluginID),new Timestamp(new Date().getTime()),LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress(), false);
+            accesLogicaEjb.crearAcces(usuarioClave,TIPUS_ACCES_PLUGIN, entitatJPA.getEntitatID(),pluginID,new Timestamp(new Date().getTime()),LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress(), false);
 
             processException(e, response);
         }

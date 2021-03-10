@@ -42,7 +42,7 @@ class Inici extends Component {
 				{
 					{
 						'0': <IniciPublic />,						
-						'1': <LlistatDePlugins seccioID='0' />
+						'1': <LlistatDePlugins seccioContext={0} />
 					}[autenticat]
 				}
 			</div>

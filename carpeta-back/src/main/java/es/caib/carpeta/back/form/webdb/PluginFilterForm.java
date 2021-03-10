@@ -87,6 +87,17 @@ public class PluginFilterForm extends CarpetaBaseFilterForm implements PluginFie
   }
 
 
+  private java.lang.String context;
+
+  public java.lang.String getContext() {
+    return this.context;
+  }
+
+  public void setContext(java.lang.String context) {
+    this.context = context;
+  }
+
+
   private java.lang.String classe;
 
   public java.lang.String getClasse() {
@@ -142,6 +153,7 @@ public class PluginFilterForm extends CarpetaBaseFilterForm implements PluginFie
     this.nomIDFins = __toClone.nomIDFins;
     this.descripcioIDDesde = __toClone.descripcioIDDesde;
     this.descripcioIDFins = __toClone.descripcioIDFins;
+    this.context = __toClone.context;
     this.classe = __toClone.classe;
     this.propietats = __toClone.propietats;
     this.tipusDesde = __toClone.tipusDesde;

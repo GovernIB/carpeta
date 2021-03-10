@@ -25,10 +25,26 @@ public class SeccioLogicaEJB extends SeccioEJB implements SeccioLogicaService {
     
     
     @PermitAll
+    @Override
     public SeccioJPA findByPrimaryKey(Long _ID_) {
         return super.findByPrimaryKey(_ID_);
     }
     
+    
+    @PermitAll
+    @Override
+    public SeccioJPA findByContext(String context) throws I18NException {
+
+        List<Seccio> list = select(CONTEXT.equal(context));
+        
+        if (list == null || list.size() == 0) {
+            return null;
+        } else {
+            return (SeccioJPA)list.get(0);
+        }
+        
+        
+    }
     
 
     @Override

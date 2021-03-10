@@ -87,6 +87,17 @@ public class SeccioFilterForm extends CarpetaBaseFilterForm implements SeccioFie
   }
 
 
+  private java.lang.String context;
+
+  public java.lang.String getContext() {
+    return this.context;
+  }
+
+  public void setContext(java.lang.String context) {
+    this.context = context;
+  }
+
+
   private java.lang.Long seccioPareIDDesde;
 
   public java.lang.Long getSeccioPareIDDesde() {
@@ -142,6 +153,7 @@ public class SeccioFilterForm extends CarpetaBaseFilterForm implements SeccioFie
     this.nomIDFins = __toClone.nomIDFins;
     this.descripcioIDDesde = __toClone.descripcioIDDesde;
     this.descripcioIDFins = __toClone.descripcioIDFins;
+    this.context = __toClone.context;
     this.seccioPareIDDesde = __toClone.seccioPareIDDesde;
     this.seccioPareIDFins = __toClone.seccioPareIDFins;
     this.entitatIDDesde = __toClone.entitatIDDesde;

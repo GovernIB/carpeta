@@ -46,3 +46,16 @@ ALTER TABLE car_enllaz ADD COLUMN descripcioid NUMBER(19,0);
 ALTER TABLE car_enllaz ADD CONSTRAINT car_enllaz_traduccio_desid_fk FOREIGN KEY (descripcioid) REFERENCES car_traduccio (traduccioid);
 create index car_enllaz_descripcioid_fk_i on car_enllaz (descripcioid);
 
+
+-- 09/03/2021  Urls "amigables" #404 
+
+ALTER TABLE car_seccio
+  ADD COLUMN context VARCHAR2(50) NOT NULL DEFAULT car_seccio_seq.nextval;
+ALTER TABLE car_seccio
+  ADD CONSTRAINT car_seccio_context_uk UNIQUE (context);
+
+
+ALTER TABLE car_plugin
+  ADD COLUMN context VARCHAR2(50);
+  
+UPDATE car_plugin SET context=pluginid WHERE tipus = 1;

@@ -35,9 +35,9 @@ class PluginReact extends Component {
                 }
             );
 
-            const pluginID = this.props.pluginID;
+            const pluginContext = this.props.pluginContext;
             var urlBase = sessionStorage.getItem('contextPath');
-            var url = urlBase + "/pluginfront/showreactplugin/" + pluginID + "/" + i18n.language;
+            var url = urlBase + "/pluginfront/showreactplugin/" + pluginContext + "/" + i18n.language;
 
             //  $(document).ready(function () {
 
@@ -62,36 +62,13 @@ class PluginReact extends Component {
             return '';
         }
 
-        /*
-        if (!this.state.loaded) {
-            return null;
-        }
-        */
 
 		const {t} = this.props;
 
-        console.log(" PLUGIN REACT RENDER 222 pluginID " +  this.props.pluginID + "!!!!!");
-        console.log(" PLUGIN REACT RENDER 333 seccioID " +  this.props.seccioID + "!!!!!");
+        console.log(" PLUGIN REACT RENDER 222 pluginContext " +  this.props.pluginContext + "!!!!!");
+        console.log(" PLUGIN REACT RENDER 333 seccioContext " +  this.props.seccioContext + "!!!!!");
 
-		const pluginID = this.props.pluginID;; //this.props.match.params.pluginId; //
-/*
-        if (!this.state.loaded) {
-
-            console.log("CARREGA INICIAL DEL PLUGIN !!!!!");
-
-            var urlBase = sessionStorage.getItem('contextPath');
-            var url = urlBase + "/pluginfront/showreactplugin/" + pluginID + "/" + i18n.language;
-
-            $(document).ready(function () {
-                sessionStorage.setItem('idioma', i18n.language);
-                $('#contentplugin').load(url);
-            });
-            
-            this.setState({loaded: true });
-        } else {
-            console.log("PLUGIN JA CARREGAT !!!!!");
-        }
-*/
+		const pluginContext = this.props.pluginContext;; 
         clearTimeout(sessionStorage.getItem('idTimeOut'));
 
 		return (

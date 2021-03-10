@@ -23,6 +23,10 @@ public class PluginQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new LongField(getQueryPath(), PluginFields.DESCRIPCIOID);
   }
 
+  public StringField CONTEXT() {
+    return new StringField(getQueryPath(), PluginFields.CONTEXT);
+  }
+
   public LongField LOGOID() {
     return new LongField(getQueryPath(), PluginFields.LOGOID);
   }

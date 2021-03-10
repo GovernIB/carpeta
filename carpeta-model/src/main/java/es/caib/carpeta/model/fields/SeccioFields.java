@@ -15,6 +15,7 @@ public interface SeccioFields extends java.io.Serializable {
 	 public static final LongField SECCIOID = new LongField(_TABLE_MODEL, "seccioID", "seccioid");  // PK
 	 public static final LongField NOMID = new LongField(_TABLE_MODEL, "nomID", "nomid");
 	 public static final LongField DESCRIPCIOID = new LongField(_TABLE_MODEL, "descripcioID", "descripcioid");
+	 public static final StringField CONTEXT = new StringField(_TABLE_MODEL, "context", "context");
 	 public static final BooleanField ACTIVA = new BooleanField(_TABLE_MODEL, "activa", "activa");
 	 public static final LongField ICONAID = new LongField(_TABLE_MODEL, "iconaID", "iconaid");
 	 public static final LongField SECCIOPAREID = new LongField(_TABLE_MODEL, "seccioPareID", "secciopareid");
@@ -25,6 +26,7 @@ public interface SeccioFields extends java.io.Serializable {
     SECCIOID,
     NOMID,
     DESCRIPCIOID,
+    CONTEXT,
     ACTIVA,
     ICONAID,
     SECCIOPAREID,
