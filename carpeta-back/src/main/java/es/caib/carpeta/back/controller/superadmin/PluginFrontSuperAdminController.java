@@ -86,7 +86,6 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
        PluginFilterForm pluginFilterForm = super.getPluginFilterForm(pagina, mav, request);
 
        if (pluginFilterForm.isNou()) {
-
            pluginFilterForm.addAdditionalButtonForEachItem(new AdditionalButton("fas fa-sync",
                    "reload", getContextWeb() + "/reload/{0}", "btn-warning"));
            
@@ -94,14 +93,15 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
 
            pluginFilterForm.getHiddenFields().remove(CONTEXT);
        }
-       
        return pluginFilterForm;
-    
    }
-   
+
+
    @Override
    public void postValidate(HttpServletRequest request,PluginForm pluginForm, BindingResult result)  throws I18NException {
 
+       super.postValidate(request, pluginForm, result);
+       
        PluginJPA __target__ = pluginForm.getPlugin();
        
        if (pluginForm.isNou()) { // Creació

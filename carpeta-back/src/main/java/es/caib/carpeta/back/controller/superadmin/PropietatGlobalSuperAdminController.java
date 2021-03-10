@@ -1,10 +1,8 @@
 package es.caib.carpeta.back.controller.superadmin;
 
-
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.query.Where;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -52,8 +50,7 @@ public class PropietatGlobalSuperAdminController extends PropietatGlobalControll
 
     @Override
     public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
-        return isSuperAdmin() ? null 
-                : PropietatGlobalFields.ENTITATID.equal(LoginInfo.getInstance().getEntitatID());
+        return isSuperAdmin() ? null : PropietatGlobalFields.ENTITATID.equal(LoginInfo.getInstance().getEntitatID());
     }
 
     protected boolean isSuperAdmin() {
@@ -73,7 +70,7 @@ public class PropietatGlobalSuperAdminController extends PropietatGlobalControll
         if (propietatGlobalForm.isNou()) {
             if (isSuperAdmin()) {
                 propietatGlobalForm.getPropietatGlobal().setEntitatID(null);
-                //propietatGlobalForm.addHiddenField(ENTITATID);
+                // propietatGlobalForm.addHiddenField(ENTITATID);
             } else {
                 propietatGlobalForm.getPropietatGlobal().setEntitatID(LoginInfo.getInstance().getEntitatID());
                 propietatGlobalForm.addReadOnlyField(ENTITATID);
@@ -94,30 +91,31 @@ public class PropietatGlobalSuperAdminController extends PropietatGlobalControll
 
         return propietatGlobalFilterForm;
     }
-    
+
     @Override
     public String getEntityNameCode() {
         return "propietatGlobal.superadmin.titol";
-      }
+    }
 
     @Override
     public String getEntityNameCodePlural() {
         return "propietatGlobal.superadmin.titol.plural";
     }
 
-
     @Override
-    public PropietatGlobalJPA create(HttpServletRequest request, PropietatGlobalJPA propietatGlobal) throws Exception, I18NException, I18NValidationException {
+    public PropietatGlobalJPA create(HttpServletRequest request, PropietatGlobalJPA propietatGlobal)
+            throws Exception, I18NException, I18NValidationException {
         PropietatGlobalJPA propietatGlobalJPA = super.create(request, propietatGlobal);
 
-        try{
-            if(isSuperAdmin()){
+        try {
+            if (isSuperAdmin()) {
                 LoginInfo loginInfo = LoginInfo.getInstance();
-                auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PROPGLOB,null,loginInfo.getUsuariPersona().getUsername(), propietatGlobalJPA.getCodi());
+                auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PROPGLOB, null,
+                        loginInfo.getUsuariPersona().getUsername(), propietatGlobalJPA.getCodi());
             }
-        }catch(I18NException e){
+        } catch (I18NException e) {
 
-            String msg = "Error creant auditoria "+ "("+  e.getMessage() + ")";
+            String msg = "Error creant auditoria " + "(" + e.getMessage() + ")";
             log.error(msg, e);
         }
 
@@ -125,24 +123,23 @@ public class PropietatGlobalSuperAdminController extends PropietatGlobalControll
 
     }
 
-
     @Override
-    public void delete(HttpServletRequest request, PropietatGlobal propietatGlobal) throws Exception,I18NException {
+    public void delete(HttpServletRequest request, PropietatGlobal propietatGlobal) throws Exception, I18NException {
         String codi = propietatGlobal.getCodi();
-        super.delete(request,propietatGlobal);
+        super.delete(request, propietatGlobal);
 
-        try{
-            if(isSuperAdmin()){
+        try {
+            if (isSuperAdmin()) {
                 LoginInfo loginInfo = LoginInfo.getInstance();
-                auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ELIMINAT_PROPGLOB,null,loginInfo.getUsuariPersona().getUsername(), codi);
+                auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ELIMINAT_PROPGLOB, null,
+                        loginInfo.getUsuariPersona().getUsername(), codi);
             }
-        }catch(I18NException e){
+        } catch (I18NException e) {
 
-            String msg = "Error creant auditoria "+ "("+  e.getMessage() + ")";
+            String msg = "Error creant auditoria " + "(" + e.getMessage() + ")";
             log.error(msg, e);
         }
 
     }
-
 
 }

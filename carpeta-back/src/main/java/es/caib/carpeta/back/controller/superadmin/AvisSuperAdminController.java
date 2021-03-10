@@ -67,8 +67,9 @@ public class AvisSuperAdminController extends AvisController {
 			throws I18NException {
 		AvisFilterForm avisFilterForm = super.getAvisFilterForm(pagina, mav, request);
 		
-		if(!isSuperAdmin())
+		if(!isSuperAdmin()) {
 			avisFilterForm.addHiddenField(ENTITATID);
+		}
 		
 		avisFilterForm.addHiddenField(AVISID);
 		
