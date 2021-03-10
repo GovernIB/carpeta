@@ -55,9 +55,9 @@ class Index extends Component {
         var user = sessionStorage.getItem('usuariNomComplet');
 
         var infoUsuari;
-        var estilContingut;
+        var estilContingut = (auth === '1')? { paddingTop: '3em'} : {paddingTop: '0em'};
         if (auth === '1' && user != null) {
-            infoUsuari = <div className="imc-titol usuari">
+            infoUsuari = <div className="imc-titol usuari" style={{minHeight: '70px'}}>
                 <nav className="imc--contingut">
                     <h3>
                         <span className="estilUsuari">
@@ -72,10 +72,8 @@ class Index extends Component {
                     </h3>
                 </nav>
             </div>;
-            estilContingut="imc-continguts pt-5";
         } else {
             infoUsuari = '';
-            estilContingut="imc-continguts";
         }
 
     
@@ -84,7 +82,7 @@ class Index extends Component {
 
 
 
-        const styleContenidor = (auth === '1')? { marginTop: '80px'} : { marginTop: '40px'};
+        const styleContenidor = (auth === '1')? { marginTop: '5.5em'} : { marginTop: '2em'};
 
         return (
             <div>
@@ -111,7 +109,7 @@ class Index extends Component {
                     </div>
 
                     {/* Zona Contingut */}
-                    <div className={estilContingut} id="continguts" >
+                    <div className="imc-continguts" style={estilContingut} id="continguts" >
 
                         {/* Molla de pa */}
                         <Breadcrumb  currentlocation={currentlocation} />
