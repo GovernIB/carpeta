@@ -37,29 +37,31 @@
 <div id="carregantDetallRegistre" class="loader-container centrat loaderOcult">
     <div class="loader"></div>
 </div>
+
 <script type="text/javascript">
     function mostrarCarregantDetall() {
         $("#carregantDetallRegistre").removeClass("loaderOcult");
     }
-    
+
     function amagarCarregantDetall() {
-    	$("#carregantDetallRegistre").addClass("loaderOcult");
+        $("#carregantDetallRegistre").addClass("loaderOcult");
+    }
+
+    function descarregarJustificant(){
+        window.open('${justificanteUrl}')
     }
 
     function generantJustificant(){
-        mostrarCarregantDetall();
-        window.open('${justificanteUrl}')
-        amagarCarregantDetall();
+        window.open('${urlGeneracioJustificant}')
     }
 
-    function descarregarAnnex(idAnnexe){
-        window.location.replace('${urlAnnexe}'+idAnnexe);
+    function descarregarAnnex(idAnnexe) {
+        window.open('${urlAnnexe}' + idAnnexe);
     }
 
 </script>
 <!-- Contenido -->
 <div class="container-contenido">
-    <div class="text-center pt-3 text-danger"><#if error?has_content ><span class="oi oi-warning pr-1"> </span>${error}</#if></div>
     <div class="infoNoMenu">
         <h2><p class="titol h2">${registro_titulo_detalle} NUM REG ${registro.numeroRegistro}</p></h2>
 
@@ -122,7 +124,7 @@
 
                                         <#if justificanteUrl?has_content>
                                             <div class="text-center">
-                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="generantJustificant()"><span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span>${carpeta_descargar}</button>
+                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarJustificant()"><span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span>${carpeta_descargar}</button>
                                             </div>
                                         </#if>
 
@@ -131,10 +133,18 @@
                                                 <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarAnnex('${justificanteId?long?c}')"><span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span> ${carpeta_descargar}</button>
                                             </div>
                                         </#if>
-                                        <#if !justificanteUrl?has_content &&  !justificanteId?has_content>
-                                        <div class="text-center pt-3 text-danger">
-                                        <#if errorJustificant?has_content ><span class="oi oi-warning pr-1"> </span>${errorJustificant}</#if>
-                                        </div>
+                                        <#if !justificanteUrl?has_content && !justificanteId?has_content && error?has_content>
+                                            <div class="text-center">
+                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="generantJustificant()"><span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span> ${carpeta_descargar}</button>
+                                            </div>
+                                            <div class="text-center pt-3 text-danger">
+                                                <span class="oi oi-warning pr-1"> </span>${error}
+                                            </div>
+                                        </#if>
+                                        <#if !justificanteUrl?has_content && !justificanteId?has_content && !error?has_content>
+                                            <div class="text-center">
+                                             <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="generantJustificant()"><span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span> ${carpeta_descargar}</button>
+                                            </div>
                                         </#if>
 
                                     </div>
