@@ -136,21 +136,15 @@
             <td>
               <form:errors path="acces.metodeAutenticacio" cssClass="errorField alert alert-danger" />
               <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.METODEAUTENTICACIO)? 'true' : 'false'}" path="acces.metodeAutenticacio"  />
-      <div id="dropdownMenuButton_metodeAutenticacio" style="vertical-align:top;display:inline;position:relative;">
-        <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
-        <div id="dropdownMenuContainer_metodeAutenticacio" class="dropdown-menu">
+      <div class="dropdown" style="vertical-align:top;display:inline;">
+        <button id="dropdownMenuButton_metodeAutenticacio" class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left:0px;"><span class="caret"></span></button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_metodeAutenticacio">
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('acces.metodeAutenticacio'); ta.wrap='off';" >No Wrap</a>
           <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('acces.metodeAutenticacio'); ta.wrap='soft';">Soft Wrap</a>
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('acces.metodeAutenticacio'); ta.wrap='hard';">Hard Wrap</a>
         </div>
       </div>
-      <script type="text/javascript">
-			$('#dropdownMenuButton_metodeAutenticacio').on('click', function(){
-					var valor = ($('#dropdownMenuContainer_metodeAutenticacio').css('display') != 'none') ? 'none' : 'block';
-                 $('#dropdownMenuContainer_metodeAutenticacio').css('display', valor);
-                 return false;
-				});
-      </script>           </td>
+           </td>
         </tr>
         </c:if>
         
@@ -239,7 +233,12 @@
             </c:forEach>
             <%-- El camp pot ser null, per la qual cosa afegim una entrada buida si no s'ha definit abans --%>
             <c:if test="${not containEmptyValue}">
-            <form:option value="" ></form:option>
+              <c:if test="${empty __theForm.acces.pluginID }">
+                  <form:option value="" selected="true" ></form:option>
+              </c:if>
+              <c:if test="${not empty __theForm.acces.pluginID }">
+                  <form:option value="" ></form:option>
+              </c:if>
             </c:if>
           </form:select>
           </c:if>

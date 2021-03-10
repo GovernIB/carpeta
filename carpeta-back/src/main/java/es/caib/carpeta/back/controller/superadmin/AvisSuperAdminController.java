@@ -57,7 +57,6 @@ public class AvisSuperAdminController extends AvisController {
 	@Override
 	public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
 		
-		/* AvisFields.ENTITATID.isNotNull() */
 		return isSuperAdmin() ? null 
 				: AvisFields.ENTITATID.equal(LoginInfo.getInstance().getEntitatID());
 	}

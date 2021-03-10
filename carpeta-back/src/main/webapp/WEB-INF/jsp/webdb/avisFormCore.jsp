@@ -64,7 +64,12 @@
             </c:forEach>
             <%-- El camp pot ser null, per la qual cosa afegim una entrada buida si no s'ha definit abans --%>
             <c:if test="${not containEmptyValue}">
-            <form:option value="" ></form:option>
+              <c:if test="${empty __theForm.avis.entitatID }">
+                  <form:option value="" selected="true" ></form:option>
+              </c:if>
+              <c:if test="${not empty __theForm.avis.entitatID }">
+                  <form:option value="" ></form:option>
+              </c:if>
             </c:if>
           </form:select>
           </c:if>
@@ -241,7 +246,12 @@
             </c:forEach>
             <%-- El camp pot ser null, per la qual cosa afegim una entrada buida si no s'ha definit abans --%>
             <c:if test="${not containEmptyValue}">
-            <form:option value="" ></form:option>
+              <c:if test="${empty __theForm.avis.pluginFrontID }">
+                  <form:option value="" selected="true" ></form:option>
+              </c:if>
+              <c:if test="${not empty __theForm.avis.pluginFrontID }">
+                  <form:option value="" ></form:option>
+              </c:if>
             </c:if>
           </form:select>
           </c:if>

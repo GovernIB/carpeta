@@ -46,21 +46,15 @@
             <td>
               <form:errors path="auditoria.objecte" cssClass="errorField alert alert-danger" />
               <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.OBJECTE)? 'true' : 'false'}" path="auditoria.objecte"  />
-      <div id="dropdownMenuButton_objecte" style="vertical-align:top;display:inline;position:relative;">
-        <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
-        <div id="dropdownMenuContainer_objecte" class="dropdown-menu">
+      <div class="dropdown" style="vertical-align:top;display:inline;">
+        <button id="dropdownMenuButton_objecte" class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left:0px;"><span class="caret"></span></button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_objecte">
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('auditoria.objecte'); ta.wrap='off';" >No Wrap</a>
           <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('auditoria.objecte'); ta.wrap='soft';">Soft Wrap</a>
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('auditoria.objecte'); ta.wrap='hard';">Hard Wrap</a>
         </div>
       </div>
-      <script type="text/javascript">
-			$('#dropdownMenuButton_objecte').on('click', function(){
-					var valor = ($('#dropdownMenuContainer_objecte').css('display') != 'none') ? 'none' : 'block';
-                 $('#dropdownMenuContainer_objecte').css('display', valor);
-                 return false;
-				});
-      </script>           </td>
+           </td>
         </tr>
         </c:if>
         
@@ -149,7 +143,12 @@
             </c:forEach>
             <%-- El camp pot ser null, per la qual cosa afegim una entrada buida si no s'ha definit abans --%>
             <c:if test="${not containEmptyValue}">
-            <form:option value="" ></form:option>
+              <c:if test="${empty __theForm.auditoria.entitatID }">
+                  <form:option value="" selected="true" ></form:option>
+              </c:if>
+              <c:if test="${not empty __theForm.auditoria.entitatID }">
+                  <form:option value="" ></form:option>
+              </c:if>
             </c:if>
           </form:select>
           </c:if>

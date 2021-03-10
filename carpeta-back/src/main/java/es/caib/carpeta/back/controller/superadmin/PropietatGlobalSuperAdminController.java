@@ -85,8 +85,14 @@ public class PropietatGlobalSuperAdminController extends PropietatGlobalControll
             HttpServletRequest request) throws I18NException {
         PropietatGlobalFilterForm propietatGlobalFilterForm = super.getPropietatGlobalFilterForm(pagina, mav, request);
 
-        if (propietatGlobalFilterForm.isNou() && !isSuperAdmin()) {
-            propietatGlobalFilterForm.addHiddenField(ENTITATID);
+        if (propietatGlobalFilterForm.isNou()) {
+            
+            if (!isSuperAdmin()) {
+                propietatGlobalFilterForm.addHiddenField(ENTITATID);
+            }
+            
+            propietatGlobalFilterForm.addHiddenField(PROPIETAGLOBALID);
+            
         }
 
         return propietatGlobalFilterForm;

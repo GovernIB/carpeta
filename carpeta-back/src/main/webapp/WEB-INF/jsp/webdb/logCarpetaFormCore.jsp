@@ -15,21 +15,15 @@
             <td>
               <form:errors path="logCarpeta.descripcio" cssClass="errorField alert alert-danger" />
               <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.DESCRIPCIO)? 'true' : 'false'}" path="logCarpeta.descripcio"  />
-      <div id="dropdownMenuButton_descripcio" style="vertical-align:top;display:inline;position:relative;">
-        <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
-        <div id="dropdownMenuContainer_descripcio" class="dropdown-menu">
+      <div class="dropdown" style="vertical-align:top;display:inline;">
+        <button id="dropdownMenuButton_descripcio" class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left:0px;"><span class="caret"></span></button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_descripcio">
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.descripcio'); ta.wrap='off';" >No Wrap</a>
           <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.descripcio'); ta.wrap='soft';">Soft Wrap</a>
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.descripcio'); ta.wrap='hard';">Hard Wrap</a>
         </div>
       </div>
-      <script type="text/javascript">
-			$('#dropdownMenuButton_descripcio').on('click', function(){
-					var valor = ($('#dropdownMenuContainer_descripcio').css('display') != 'none') ? 'none' : 'block';
-                 $('#dropdownMenuContainer_descripcio').css('display', valor);
-                 return false;
-				});
-      </script>           </td>
+           </td>
         </tr>
         </c:if>
         
@@ -122,7 +116,12 @@
             </c:forEach>
             <%-- El camp pot ser null, per la qual cosa afegim una entrada buida si no s'ha definit abans --%>
             <c:if test="${not containEmptyValue}">
-            <form:option value="" ></form:option>
+              <c:if test="${empty __theForm.logCarpeta.pluginID }">
+                  <form:option value="" selected="true" ></form:option>
+              </c:if>
+              <c:if test="${not empty __theForm.logCarpeta.pluginID }">
+                  <form:option value="" ></form:option>
+              </c:if>
             </c:if>
           </form:select>
           </c:if>
@@ -219,21 +218,15 @@
             <td>
               <form:errors path="logCarpeta.peticio" cssClass="errorField alert alert-danger" />
               <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.PETICIO)? 'true' : 'false'}" path="logCarpeta.peticio"  />
-      <div id="dropdownMenuButton_peticio" style="vertical-align:top;display:inline;position:relative;">
-        <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
-        <div id="dropdownMenuContainer_peticio" class="dropdown-menu">
+      <div class="dropdown" style="vertical-align:top;display:inline;">
+        <button id="dropdownMenuButton_peticio" class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left:0px;"><span class="caret"></span></button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_peticio">
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.peticio'); ta.wrap='off';" >No Wrap</a>
           <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.peticio'); ta.wrap='soft';">Soft Wrap</a>
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.peticio'); ta.wrap='hard';">Hard Wrap</a>
         </div>
       </div>
-      <script type="text/javascript">
-			$('#dropdownMenuButton_peticio').on('click', function(){
-					var valor = ($('#dropdownMenuContainer_peticio').css('display') != 'none') ? 'none' : 'block';
-                 $('#dropdownMenuContainer_peticio').css('display', valor);
-                 return false;
-				});
-      </script>           </td>
+           </td>
         </tr>
         </c:if>
         
@@ -250,21 +243,15 @@
             <td>
               <form:errors path="logCarpeta.error" cssClass="errorField alert alert-danger" />
               <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ERROR)? 'true' : 'false'}" path="logCarpeta.error"  />
-      <div id="dropdownMenuButton_error" style="vertical-align:top;display:inline;position:relative;">
-        <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
-        <div id="dropdownMenuContainer_error" class="dropdown-menu">
+      <div class="dropdown" style="vertical-align:top;display:inline;">
+        <button id="dropdownMenuButton_error" class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left:0px;"><span class="caret"></span></button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_error">
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.error'); ta.wrap='off';" >No Wrap</a>
           <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.error'); ta.wrap='soft';">Soft Wrap</a>
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.error'); ta.wrap='hard';">Hard Wrap</a>
         </div>
       </div>
-      <script type="text/javascript">
-			$('#dropdownMenuButton_error').on('click', function(){
-					var valor = ($('#dropdownMenuContainer_error').css('display') != 'none') ? 'none' : 'block';
-                 $('#dropdownMenuContainer_error').css('display', valor);
-                 return false;
-				});
-      </script>           </td>
+           </td>
         </tr>
         </c:if>
         
@@ -281,21 +268,15 @@
             <td>
               <form:errors path="logCarpeta.excepcio" cssClass="errorField alert alert-danger" />
               <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.EXCEPCIO)? 'true' : 'false'}" path="logCarpeta.excepcio"  />
-      <div id="dropdownMenuButton_excepcio" style="vertical-align:top;display:inline;position:relative;">
-        <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
-        <div id="dropdownMenuContainer_excepcio" class="dropdown-menu">
+      <div class="dropdown" style="vertical-align:top;display:inline;">
+        <button id="dropdownMenuButton_excepcio" class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left:0px;"><span class="caret"></span></button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_excepcio">
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.excepcio'); ta.wrap='off';" >No Wrap</a>
           <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.excepcio'); ta.wrap='soft';">Soft Wrap</a>
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('logCarpeta.excepcio'); ta.wrap='hard';">Hard Wrap</a>
         </div>
       </div>
-      <script type="text/javascript">
-			$('#dropdownMenuButton_excepcio').on('click', function(){
-					var valor = ($('#dropdownMenuContainer_excepcio').css('display') != 'none') ? 'none' : 'block';
-                 $('#dropdownMenuContainer_excepcio').css('display', valor);
-                 return false;
-				});
-      </script>           </td>
+           </td>
         </tr>
         </c:if>
         
