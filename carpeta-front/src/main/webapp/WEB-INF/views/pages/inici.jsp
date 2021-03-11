@@ -110,8 +110,6 @@
 	<script src = "<c:url value="/dist/reactjs_main.js"/>" type="text/javascript"></script>
 	<!-- acceptar cookies -->
 	<script src="<c:url value="/src/assets/js/aceptar_cookies.js"/>" type="text/javascript"></script>
-	<!-- Tramitacio Anomima   -->
-	<%-- <script src="<c:url value="/src/assets/js/tramitacio_anonima.js"/>" type="text/javascript"></script> --%>
 
   </body>
 </html>
