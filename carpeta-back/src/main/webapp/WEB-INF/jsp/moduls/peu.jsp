@@ -70,7 +70,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title"><fmt:message key="ajuda.titol" /></h5>
+        <div class="modal-title h5"><fmt:message key="ajuda.titol" /></div>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

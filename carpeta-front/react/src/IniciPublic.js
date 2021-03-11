@@ -90,19 +90,19 @@ class IniciPublic extends Component {
                                     <p className="titol h5">{t('tramitacioAnonimaTitol')}</p>
                                     <p className="lh15 pb-3"><a href="#" id="tramitacioModalBtn" data-toggle="modal" data-target="#tramitacioModal"><span className="oi oi-external-link" />{t('tramitacioEnllaz')}</a></p>
                                     
-                                    <div className="modal fade" id="tramitacioModal" tabIndex="-1" aria-labelledby="tramitacioLabel" aria-hidden="true">
+                                    <div className="modal fade" id="tramitacioModal" tabIndex="-1" aria-hidden="true">
                                         <div className="modal-dialog">
                                             <div className="modal-content">
                                             <div className="modal-header">
-                                                <h5 className="modal-title" id="tramitacioModalLabel">{t('iniciarTramitacioAnonimaTitol')}</h5>
-                                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                                <div className="modal-title h5" id="tramitacioModalLabel">{t('iniciarTramitacioAnonimaTitol')}</div>
+                                                <button type="button" className="close" data-dismiss="modal">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div className="modal-body">
                                                 <div className="alert alert-danger" role="alert">{t('errorTramitacioAnonima')}</div>
                                                 <p>{t('descTramitacioAnonima')}</p>
-                                                <input type="text" id="clauAnonima" />
+                                                <input aria-label="IdTramit" type="text" id="clauAnonima" />
                                             </div>
                                             <div className="modal-footer">
                                                 <button type="button" className="btn btn-secondary" data-dismiss="modal">{t('cancelarTramitacioAnonima')}</button>
