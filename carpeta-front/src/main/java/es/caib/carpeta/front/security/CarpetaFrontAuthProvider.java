@@ -17,12 +17,14 @@ import es.caib.carpeta.ejb.PropietatGlobalService;
 import es.caib.carpeta.front.config.UsuarioAutenticado;
 import es.caib.carpeta.front.service.SecurityService;
 import es.caib.carpeta.persistence.EntitatJPA;
+import es.caib.carpeta.persistence.UsuariEntitatJPA;
 import es.caib.carpeta.logic.AccesLogicaService;
 import es.caib.carpeta.logic.UtilitiesForFrontLogicaService;
 import es.caib.carpeta.logic.utils.EjbManager;
 import java.net.InetAddress;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 
 @Component
@@ -38,31 +40,43 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
     
     @EJB(mappedName = UtilitiesForFrontLogicaService.JNDI_NAME)
     protected UtilitiesForFrontLogicaService utilsEjb;
+    
 
     @Override
     public Authentication authenticate(Authentication authentication) {
 
         log.info("Dentro de CarpetaFront AuthProvider");
+        
         // Obtiene user/pass
         final String usuario = authentication.getName();
         final String passwd = authentication.getCredentials().toString();
 
         log.info("Usuario: " + usuario);
-        log.info("Password: " + passwd);
 
         UsuarioClave usuarioClave = null;
 
         try {
 
             usuarioClave = securityService.validarTicketAutentificacion(passwd);
-
-            //Agafam l'entitat per defecte
-            PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
-            String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
-            EntitatJPA entitat = utilsEjb.getEntitat(defaultEntityCode);
-            long entitatID = entitat.getEntitatID();
-            accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_LOGIN_AUTENTICAT, entitatID, null, new Timestamp(new Date().getTime()), LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress(), true);
-
+          
+            if (usuarioClave != null) {
+            	long entitatID = 0L;
+            	
+            	List<UsuariEntitatJPA> usuariEntitats = utilsEjb.getEntitatsByNIF(usuarioClave.getNif());
+            	if (usuariEntitats.size() > 0) {
+            		entitatID = usuariEntitats.get(0).getEntitatID();
+            	}
+            	
+	            if (entitatID < 1L) {
+	            	//Agafam l'entitat per defecte
+	                PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
+	                String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
+	                EntitatJPA entitat = utilsEjb.getEntitat(defaultEntityCode);
+	                entitatID = entitat.getEntitatID();
+	            }
+	            
+	            accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_LOGIN_AUTENTICAT, entitatID, null, new Timestamp(new Date().getTime()), LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress(), true);
+            }
 
         } catch (Exception ie){
             log.error("S'ha produit un error : " + ie.getMessage(), ie);

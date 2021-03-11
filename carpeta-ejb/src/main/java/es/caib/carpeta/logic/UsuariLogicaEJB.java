@@ -67,6 +67,20 @@ public class UsuariLogicaEJB extends UsuariEJB implements UsuariLogicaService {
 
 	}
 	
+	@Override
+	@PermitAll
+	public UsuariJPA findByNif(String nif) throws I18NException {
+		
+		TypedQuery<UsuariJPA> query = getEntityManager().createQuery(
+				"select u from UsuariJPA u "
+				+ "left join fetch u." + EntitatFields._TABLE_MODEL
+				+ " where u."+ UsuariFields.NIF.javaName  +" = :nif", UsuariJPA.class);
+		query.setParameter("nif", nif);
+		
+		List<UsuariJPA> resultats = query.getResultList();
+		return (resultats.size() > 0) ? resultats.get(0) : null;
+		
+	}
 
 
 }

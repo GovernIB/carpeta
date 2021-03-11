@@ -4,6 +4,8 @@ import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.persistence.AvisJPA;
 import es.caib.carpeta.persistence.EntitatJPA;
 import es.caib.carpeta.persistence.PluginJPA;
+import es.caib.carpeta.persistence.UsuariEntitatJPA;
+import es.caib.carpeta.persistence.UsuariJPA;
 import es.caib.carpeta.logic.utils.PluginInfo;
 import es.caib.carpeta.model.entity.*;
 import es.caib.carpeta.model.fields.*;
@@ -61,6 +63,12 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
 
     @EJB(mappedName = FitxerLogicaService.JNDI_NAME)
     protected FitxerLogicaService fitxerLogicaEjb;
+    
+    @EJB(mappedName = UsuariLogicaService.JNDI_NAME)
+    protected UsuariLogicaService usuariLogicaEjb;
+    
+    @EJB(mappedName = UsuariEntitatLogicaService.JNDI_NAME)
+    protected UsuariEntitatLogicaService usuariEntitatLogicaEjb;
 
     /**
      * Retorna codi i nom en l'idioma seleccionat
@@ -340,6 +348,17 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
 
         return fi;
 
+    }
+    
+    @Override
+    public List<UsuariEntitatJPA> getEntitatsByNIF(String nif) throws I18NException {
+    	
+    	UsuariJPA usuari = usuariLogicaEjb.findByNif(nif);
+    	if (usuari != null) {
+			return usuariEntitatLogicaEjb.findAllByUsuariIdWithEntitat(usuari.getUsuariID());
+		} 
+    	
+    	return null;
     }
 
 }
