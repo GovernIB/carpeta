@@ -18,7 +18,7 @@ Certificat digital o DNI electrònic</li><li><span class="oi oi-arrow-right"></s
 Clau permanent</li></ul><br class="clearBoth"></div><div class="col-md-5 border-0 columna2Inici">
 <p class="margen-top-clave pb-3"><a class="btn btn-primary carpeta-btn botoAccedirCarpeta" 
 href="javascript: var loc=new URL(window.location.href); 
-window.location.href=(''prelogin?urlbase='' + encodeURIComponent(loc.protocol + ''\'' + loc.host ) )" role="button">
+window.location.href=(''prelogin?urlbase='' + encodeURIComponent(loc.protocol + ''\\'' + loc.host ) )" role="button">
 <span class="oi oi-account-login" title="" aria-hidden="true"></span> Accedeix a la Carpeta</a></p><p class="titol h5">Teniu una clau de tramitació?</p>
 <p class="lh15 pb-3"><a href="#" id="tramitacioModalBtn" data-toggle="modal" data-target="#tramitacioModal">
 <span class="oi oi-external-link"></span>Accediu aquí per reprendre tramitació anònima</a></p>
@@ -52,7 +52,7 @@ Certificado digital o DNI electrónico</li><li><span class="oi oi-arrow-right"><
 Clave permanente</li></ul><br class="clearBoth"></div><div class="col-md-5 border-0 columna2Inici"><p class="margen-top-clave pb-3">
 <a class="btn btn-primary carpeta-btn botoAccedirCarpeta" 
 href="javascript: var loc=new URL(window.location.href); 
-window.location.href=(''prelogin?urlbase='' + encodeURIComponent(loc.protocol + ''\'' + loc.host ) )" role="button">
+window.location.href=(''prelogin?urlbase='' + encodeURIComponent(loc.protocol + ''\\'' + loc.host ) )" role="button">
 <span class="oi oi-account-login" title="" aria-hidden="true"></span> Accede a la Carpeta</a></p>
 <p class="titol h5">¿Tienes una clave de tramitación?</p><p class="lh15 pb-3"><a href="#" id="tramitacioModalBtn" data-toggle="modal" data-target="#tramitacioModal">
 <span class="oi oi-external-link"></span>Accede aquí para retomar un trámite anónimo</a></p><div class="modal fade" id="tramitacioModal" tabindex="-1" aria-labelledby="tramitacioLabel" aria-hidden="true">
