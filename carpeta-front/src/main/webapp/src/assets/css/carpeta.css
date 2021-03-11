@@ -155,7 +155,7 @@ img:hover {
 	display: none;
 }
 .fonsPlugin{
-	background-color: #F8F8F8;
+	background-color: #F8F8F8 !important;
 }
 .titol{
     text-transform: uppercase;
