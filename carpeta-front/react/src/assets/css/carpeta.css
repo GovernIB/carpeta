@@ -714,6 +714,9 @@ body {
 .usuari {
 	top: 2em !important;
 }
+#menuRapid{
+	display: none;
+}
 }
 
 /*Se aplican cuando el width es menor que 576*/
