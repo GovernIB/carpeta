@@ -1,6 +1,7 @@
 package es.caib.carpeta.logic;
 
 import es.caib.carpeta.persistence.EntitatJPA;
+import es.caib.carpeta.persistence.UsuariEntitatJPA;
 import es.caib.carpeta.logic.utils.PluginInfo;
 import es.caib.carpeta.model.entity.Avis;
 import es.caib.carpeta.model.entity.Enllaz;
@@ -56,5 +57,7 @@ public interface UtilitiesForFrontLogicaService {
     public Map<String, String> getSuportEntitat(String codiEntitat, String lang) throws I18NException;
 
     public FileInfo getIconEntity(Long codiEntitat) throws I18NException;
+    
+    public List<UsuariEntitatJPA> getEntitatsByNIF(String nif) throws I18NException;
 
 }

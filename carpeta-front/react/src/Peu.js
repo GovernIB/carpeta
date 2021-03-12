@@ -91,7 +91,7 @@ class Peu extends Component {
 					</div>
 				</div>
 
-				<div className="modal fade" id="ajudaModal" tabIndex="-1" aria-labelledby="ajudaLabel" aria-hidden="true">
+				<div className="modal fade" id="ajudaModal" tabIndex="-1" aria-hidden="true">
 					<div className="modal-dialog">
 						<div className="modal-content">
 							<div className="modal-header">

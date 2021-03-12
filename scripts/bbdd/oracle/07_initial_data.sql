@@ -78,7 +78,9 @@ INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (76, 'es', 
 
 
 
-INSERT INTO car_plugin(pluginid, nomid, classe, tipus, propietats, actiu, descripcioid) VALUES (3, 66, 'org.fundaciobit.pluginsib.carpetafront.notib.NotibCarpetaFrontPlugin', 1, '# Class => org.fundaciobit.pluginsib.carpetafront.notib.NotibCarpetaFrontPlugin
+INSERT INTO car_plugin(pluginid, nomid, classe, tipus, propietats, actiu, descripcioid) VALUES (3, 66, 
+'org.fundaciobit.pluginsib.carpetafront.notib.NotibCarpetaFrontPlugin', 1, 
+'# Class => org.fundaciobit.pluginsib.carpetafront.notib.NotibCarpetaFrontPlugin
 
 # Common
 es.caib.carpeta.pluginsib.carpetafront.notib.development=true
@@ -105,7 +107,9 @@ INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (87, 'ca', 
 INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (87, 'es', 'Datos Personales');
 
 
-INSERT INTO car_plugin(pluginid, nomid, classe, tipus, propietats, actiu, descripcioid) VALUES (4, 86, 'org.fundaciobit.pluginsib.carpetafront.dadespersonalsreact.DadesPersonalsReactCarpetaFrontPlugin', 1, '# Class => org.fundaciobit.pluginsib.carpetafront.dadespersonalsreact.DadesPersonalsReactCarpetaFrontPlugin
+INSERT INTO car_plugin(pluginid, nomid, classe, tipus, propietats, actiu, descripcioid) VALUES (4, 86, 
+'org.fundaciobit.pluginsib.carpetafront.dadespersonalsreact.DadesPersonalsReactCarpetaFrontPlugin', 1, 
+'# Class => org.fundaciobit.pluginsib.carpetafront.dadespersonalsreact.DadesPersonalsReactCarpetaFrontPlugin
 
 es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.baseurl=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.baseurl"]]
 es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.username=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.username"]]
@@ -123,5 +127,6 @@ es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.testsurname=FUSTER'
 -- Propietat Global
 
 INSERT INTO car_propietatglobal(
-            propietatglobalid, codi, value, descripcio, entitatid) VALUES (24, 'es.caib.carpeta.defaultentitycode', '', '<p>Codi de l''entitat per defecte a la que es donarà d''alta automàticament a un usuari just després d''haver-se creat a Carpeta</p>', NULL);
+            propietatglobalid, codi, value, descripcio, entitatid) VALUES (24, 'es.caib.carpeta.defaultentitycode', '', 
+			'<p>Codi de l''entitat per defecte a la que es donarà d''alta automàticament a un usuari just després d''haver-se creat a Carpeta</p>', NULL);
 

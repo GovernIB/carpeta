@@ -1,4 +1,4 @@
--- Afegir més dades a la taula d'Entitat #147
+-- Afegir mÃ©s dades a la taula d'Entitat #147
 
 
 INSERT INTO car_traduccio VALUES (111);
@@ -158,7 +158,7 @@ INSERT INTO car_traduccio VALUES (253);
 INSERT INTO car_traduccio VALUES (254);
 
 INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (253, 'en', 'Legal Warning');
-INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (253, 'ca', 'Avís Legal');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (253, 'ca', 'AvÃ­s Legal');
 INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (253, 'es', 'Aviso Legal');
 INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (254, 'en', 'http://www.caib.es/govern/external/infoLegal.do?lang=es');
 INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor)  VALUES (254, 'ca', 'http://www.caib.es/govern/external/infoLegal.do?lang=ca');
@@ -187,7 +187,7 @@ INSERT INTO car_enllaz(enllazid, tipus, urlid, nomid, entitatid, logoid) VALUES 
 
 
 --Nou plugin de Regweb3
---11/02/2021 Nou plugin de Registre atacants als nous mètodes de RegWeb 3.2 #333
+--11/02/2021 Nou plugin de Registre atacants als nous mÃ¨todes de RegWeb 3.2 #333
 INSERT INTO car_traduccio VALUES (96);
 INSERT INTO car_traduccio VALUES (97);
 
@@ -200,7 +200,8 @@ INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (97, 'es', 
 
 
 
-INSERT INTO car_plugin(pluginid, nomid, classe, tipus, propietats, actiu, descripcioid) VALUES (5, 96, 'org.fundaciobit.pluginsib.carpetafront.regweb32.Regweb32CarpetaFrontPlugin', 1, '# Common
+INSERT INTO car_plugin(pluginid, nomid, classe, tipus, propietats, actiu, descripcioid) VALUES (5, 96, 
+'org.fundaciobit.pluginsib.carpetafront.regweb32.Regweb32CarpetaFrontPlugin', 1, '# Common
 es.caib.carpeta.pluginsib.carpetafront.regweb32.development=true
 es.caib.carpeta.pluginsib.carpetafront.regweb32.concsv.url=https://dev.caib.es/concsv/view.xhtml?hash=
 # Regweb3.2

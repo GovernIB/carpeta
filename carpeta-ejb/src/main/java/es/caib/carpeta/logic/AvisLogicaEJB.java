@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 
+import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.ejb.AvisEJB;
 import es.caib.carpeta.model.entity.Avis;
 import es.caib.carpeta.model.fields.AvisQueryPath;
@@ -50,8 +51,12 @@ public class AvisLogicaEJB extends AvisEJB  implements AvisLogicaService {
 	    
 	    Where w1 = getDatesWhere();
 	    Where w2 = AvisFields.ENTITATID.equal(entitatID);
+	    Where w3 = AvisFields.TIPUS.equal(Constants.TIPUS_AVIS_BACK);
         
-	    Where w = Where.AND(w1,w2);
+	    Where w4 = Where.AND(w1,w2);
+	    Where w5 = Where.AND(w1,w3);
+	    
+	    Where w = Where.OR(w4,w5);
 	    
 	    OrderBy o = new OrderBy(AvisFields.GRAVETAT, OrderType.DESC);
 	    

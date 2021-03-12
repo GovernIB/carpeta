@@ -81,7 +81,11 @@
                             <td data-order="${registro.fechaRegistro?string('yyyyMMddHHmm')}">
                                 ${registro.fechaRegistro?string("dd-MM-yyyy HH:mm")}
                             </td>
-                            <td>${registro.extracto}</td>
+                            <td>
+                                <label data-toggle="tooltip" data-placement="top" title="${registro.extracto}">
+                                    <p class="tallarExtracte">${registro.extracto}</p>
+                                </label>
+                            </td>
                             <td>${registro.denominacionDestino}</td>
                         </tr>
                         </#list>
@@ -98,7 +102,12 @@
                                 }
                             });*/
                         });
+
+                        $(function () {
+                            $('[data-toggle="tooltip"]').tooltip()
+                        })
                     </script>
+
 
 
                     <div class="row"  style="width:100%; text-align:center;" >

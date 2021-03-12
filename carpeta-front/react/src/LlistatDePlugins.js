@@ -135,7 +135,7 @@ class LlistatDePlugins extends Component {
         }
 
         
-        const styleDesc =  { fontSize: '80%', color: '#666', textAlign: 'center' } ;
+        const styleDesc =  { fontSize: '85%', color: '#666', textAlign: 'center' } ;
 
 
         seccionsS = seccions.map((s, i) => (

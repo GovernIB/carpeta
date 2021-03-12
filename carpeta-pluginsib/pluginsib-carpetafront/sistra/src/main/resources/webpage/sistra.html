@@ -50,8 +50,8 @@
                 <form id="fechaBusqueda" action="${form_action}" method="post">
                     <div class="row">
                         <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="fechaInicio" placeholder="dd/mm/yyyy">${carpeta_fecha_inicio}</label>
+                            <div class="form-group pl-2 pr-2">
+                                <label for="fechaInicio" placeholder="dd/mm/yyyy" class="float-left">${carpeta_fecha_inicio}</label>
                                 <div class="input-group">
                                     <input id="fechaInicio" name="fechaInicio" class="form-control form-control-sm"
                                            required="required" type="text"
@@ -61,8 +61,8 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="fechaFin" placeholder="dd/mm/yyyy">${carpeta_fecha_fin}</label>
+                            <div class="form-group pl-2 pr-2">
+                                <label for="fechaFin" placeholder="dd/mm/yyyy" class="float-left">${carpeta_fecha_fin}</label>
                                 <div class="input-group">
                                     <input id="fechaFin" name="fechaFin" class="form-control form-control-sm" required="required" type="text" value="${form_dataFi?string('dd/MM/yyyy')}" maxlength="10">
                                     <span class="input-group-text"><span class="oi oi-calendar"></span></span>
@@ -70,8 +70,8 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="estado">${tramite_estado}</label>
+                            <div class="form-group pl-2 pr-2">
+                                <label for="estado" class="float-left">${tramite_estado}</label>
                                 <select name="tramiteFinalizado" id="tramiteFinalizado" class="form-control form-control-sm">
                                     <option value="A" <#if form_estat == "A">selected="selected"</#if>>${tramite_todos}</option>
                                     <option value="S" <#if form_estat == "S">selected="selected"</#if>>${tramite_finalizado}</option>
@@ -80,7 +80,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary carpeta-btn" onclick="mostrarCarregant()">${carpeta_buscar}</button>
+                    <button type="submit" class="btn btn-primary carpeta-btn ml-2 float-left" onclick="mostrarCarregant()">${carpeta_buscar}</button>
                 </form>
                 <#if isget>
                 <br/>

@@ -215,7 +215,6 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
                 + registre.getNumeroRegistro() + "&idAnnexe=";
         map.put("urlAnnexe", urlAnnexe);
 
-        log.info(" ERROR QUE NOS LLEGA "  + error);
 
         map.put("error", error);
         map.put("justificanteUrl", "");

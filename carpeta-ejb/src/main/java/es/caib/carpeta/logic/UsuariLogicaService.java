@@ -24,6 +24,9 @@ public interface UsuariLogicaService extends UsuariService  {
 	
 	public UsuariJPA findByUsername(String username) throws I18NException;
 	
+	
+	public UsuariJPA findByNif(String nif) throws I18NException;
+	
 	/*
 	public UsuariJPA getUserInfoFromUserInformation(String username) throws javax.ejb.EJBException;
 	

@@ -155,7 +155,7 @@ img:hover {
 	display: none;
 }
 .fonsPlugin{
-	background-color: #F8F8F8;
+	background-color: #F8F8F8 !important;
 }
 .titol{
     text-transform: uppercase;
@@ -448,6 +448,9 @@ a.imc-bt-xarxa:hover {
 	text-align-last: center;
 	width: 100%;
 }
+.mollaPa li a {
+	color: #6B6B6B;
+}
 
 
 /* HomePage */
@@ -715,6 +718,9 @@ body {
 }
 .usuari {
 	top: 2em !important;
+}
+#menuRapid{
+	display: none;
 }
 }
 
