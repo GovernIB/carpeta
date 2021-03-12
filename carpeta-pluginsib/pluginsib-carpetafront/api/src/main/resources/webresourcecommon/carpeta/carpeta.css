@@ -901,3 +901,6 @@ body {
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
+.totLinia{
+	white-space: nowrap;
+}

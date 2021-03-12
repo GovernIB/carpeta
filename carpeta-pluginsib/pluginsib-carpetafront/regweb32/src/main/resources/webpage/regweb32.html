@@ -77,8 +77,8 @@
                         <#list registros as registro >
 
                         <tr class="clickable-row"  onclick="mostrantDetall('${registro.numeroRegistro}')">
-                            <td>${registro.numeroRegistro}</td>
-                            <td data-order="${registro.fechaRegistro?string('yyyyMMddHHmm')}">
+                            <td class="totLinia">${registro.numeroRegistro}</td>
+                            <td class="totLinia" data-order="${registro.fechaRegistro?string('yyyyMMddHHmm')}">
                                 ${registro.fechaRegistro?string("dd-MM-yyyy HH:mm")}
                             </td>
                             <td>
