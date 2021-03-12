@@ -20,6 +20,8 @@
         <module>regweb32</module>
         <module>notib</module>
         <module>dadespersonalsreact</module>
+		<module>dadeslogin</module>
+		<module>pinbalpolicia</module>
         <module>reactexample</module>
     </modules>
 

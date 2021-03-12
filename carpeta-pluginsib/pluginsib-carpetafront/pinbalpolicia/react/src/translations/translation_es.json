@@ -1,0 +1,18 @@
+{
+  "dadespersonalsTitol": "Datos del Documento de Identidad",
+    "dadespersonalsDescripcio": "Desde aqui  puede consultar los datos que aparecen en vuestro DNI.",
+    "dadespersonalsNom": "Nombre",
+    "dadespersonalsLlinatge1": "Primer apellido",
+    "dadespersonalsLlinatge2": "Segundo apellido",
+    "dadespersonalsDni": "DNI",
+    "dadespersonalsMetode": "Autenticación",
+    "nacionalidad": "Nacionalidad",
+    "sexo": "Sexo",
+	"datosNacimiento_fecha": "Fecha de Nacimiento",
+    "datosNacimiento_localidad": "Localidad de Nacimiento",
+    "datosNacimiento_provincia": "Provincia de Nacimiento",
+	"nombrePadre": "Nombre del Padre",
+	"nombreMadre": "Nombre de la Madre",
+    "fechaCaducidad": "Fecha Caducidad"
+    
+}

@@ -1,0 +1,34 @@
+# Class => org.fundaciobit.pluginsib.carpetafront.pinbalpolicia.PinbalPoliciaCarpetaFrontPlugin
+
+es.caib.carpeta.pluginsib.carpetafront.pinbalpolicia.pinbal.baseurl=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.baseurl"]]
+es.caib.carpeta.pluginsib.carpetafront.pinbalpolicia.pinbal.username=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.username"]]
+es.caib.carpeta.pluginsib.carpetafront.pinbalpolicia.pinbal.password=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.password"]]
+
+
+
+es.caib.carpeta.pluginsib.carpetafront.pinbalpolicia.pinbal.codicertificat=SVDDGPCIWS02
+
+es.caib.carpeta.pluginsib.carpetafront.pinbalpolicia.pinbal.nifemisor=S2816015H
+es.caib.carpeta.pluginsib.carpetafront.pinbalpolicia.pinbal.nomemisor=DGP
+
+es.caib.carpeta.pluginsib.carpetafront.pinbalpolicia.pinbal.niffuncionari=43125996F
+es.caib.carpeta.pluginsib.carpetafront.pinbalpolicia.pinbal.nomfuncionari=Ana Bustos Nadal
+
+es.caib.carpeta.pluginsib.carpetafront.pinbalpolicia.pinbal.codiprocediment=CODSVDR_GBA_20121107
+es.caib.carpeta.pluginsib.carpetafront.pinbalpolicia.pinbal.nomprocediment=PRUEBAS DE INTEGRACION PARA GOBIERNO DE BALEARES
+		
+es.caib.carpeta.pluginsib.carpetafront.pinbalpolicia.pinbal.finalitat=Baremacions per el proces d'escolaritzacio
+
+es.caib.carpeta.pluginsib.carpetafront.pinbalpolicia.pinbal.identificadorsolicitant=S0711001H
+es.caib.carpeta.pluginsib.carpetafront.pinbalpolicia.pinbal.nomsolicitant=Conselleria d'Educació
+es.caib.carpeta.pluginsib.carpetafront.pinbalpolicia.pinbal.unitattramitadora=Servei d'escolarització
+		
+
+
+# Necessari en DEV i PRE. NO es fan cridades reals sinó d,un joc de proves
+# Exemples:   - 30000056Y, FUSTER
+#             - 41107605G, JAUME
+es.caib.carpeta.pluginsib.carpetafront.pinbalpolicia.pinbal.testnif=30000056Y
+es.caib.carpeta.pluginsib.carpetafront.pinbalpolicia.pinbal.testsurname=FUSTER
+
+

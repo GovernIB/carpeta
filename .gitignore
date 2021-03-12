@@ -66,3 +66,11 @@ nb-configuration.xml
 /scripts/bbdd/postgresql/nouplugin.sql
 /carpeta-front/react/package-lock.json
 /scripts/config/carpeta-mail-service.xml
+/carpeta-pluginsib/pluginsib-carpetafront/dadeslogin/react/node_modules
+/carpeta-pluginsib/pluginsib-carpetafront/pinbalpolicia/react/node_modules
+/carpeta-pluginsib/pluginsib-carpetafront/dadeslogin/holder.html
+/carpeta-pluginsib/pluginsib-carpetafront/dadeslogin/react/package-lock.json
+/carpeta-pluginsib/pluginsib-carpetafront/dadeslogin/react/readme.txt
+/carpeta-pluginsib/pluginsib-carpetafront/pinbalpolicia/holder.html
+/carpeta-pluginsib/pluginsib-carpetafront/pinbalpolicia/react/package-lock.json
+/carpeta-pluginsib/pluginsib-carpetafront/pinbalpolicia/react/readme.txt
