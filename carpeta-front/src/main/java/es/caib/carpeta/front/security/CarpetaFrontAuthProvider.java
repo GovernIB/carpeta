@@ -63,7 +63,7 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
             	long entitatID = 0L;
             	
             	List<UsuariEntitatJPA> usuariEntitats = utilsEjb.getEntitatsByNIF(usuarioClave.getNif());
-            	if (usuariEntitats.size() > 0) {
+            	if (usuariEntitats != null && usuariEntitats.size() > 0) {
             		entitatID = usuariEntitats.get(0).getEntitatID();
             	}
             	
