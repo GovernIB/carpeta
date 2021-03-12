@@ -894,3 +894,10 @@ body {
 }
 
 /* FI RESPONSIVE */
+
+.tallarExtracte {
+	width: 400px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
