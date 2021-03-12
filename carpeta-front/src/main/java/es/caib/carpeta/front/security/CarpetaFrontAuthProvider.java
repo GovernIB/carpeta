@@ -26,6 +26,8 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+import es.caib.carpeta.front.utils.SesionHttp;
+
 
 @Component
 public class CarpetaFrontAuthProvider implements AuthenticationProvider {
@@ -34,6 +36,9 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
 
     @Autowired
     SecurityService securityService;
+    
+    @Autowired
+    private SesionHttp sesionHttp;
 
     @EJB(mappedName = AccesLogicaService.JNDI_NAME)
     protected AccesLogicaService accesLogicaEjb;
@@ -60,21 +65,25 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
             usuarioClave = securityService.validarTicketAutentificacion(passwd);
           
             if (usuarioClave != null) {
-            	long entitatID = 0L;
             	
-            	List<UsuariEntitatJPA> usuariEntitats = utilsEjb.getEntitatsByNIF(usuarioClave.getNif());
-            	if (usuariEntitats != null && usuariEntitats.size() > 0) {
-            		entitatID = usuariEntitats.get(0).getEntitatID();
+            	// Primer miram a veure si hi ha una entitat a sessio
+            	long entitatID = sesionHttp.getEntitatID();
+            	
+            	if (entitatID < 1L) {
+            		// Recuperam les entitats associades a l'usuari si no hi ha entitatID a sessió
+	            	List<UsuariEntitatJPA> usuariEntitats = utilsEjb.getEntitatsByNIF(usuarioClave.getNif());
+	            	if (usuariEntitats != null && usuariEntitats.size() > 0) {
+	            		entitatID = usuariEntitats.get(0).getEntitatID();
+	            	}
+	            	
+	            	if (entitatID < 1L) {
+		            	//Agafam l'entitat per defecte
+		                PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
+		                String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
+		                EntitatJPA entitat = utilsEjb.getEntitat(defaultEntityCode);
+		                entitatID = entitat.getEntitatID();
+		            }
             	}
-            	
-	            if (entitatID < 1L) {
-	            	//Agafam l'entitat per defecte
-	                PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
-	                String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
-	                EntitatJPA entitat = utilsEjb.getEntitat(defaultEntityCode);
-	                entitatID = entitat.getEntitatID();
-	            }
-	            
 	            accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_LOGIN_AUTENTICAT, entitatID, null, new Timestamp(new Date().getTime()), LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress(), true);
             }
 
