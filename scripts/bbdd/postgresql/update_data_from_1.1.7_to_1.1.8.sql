@@ -1,4 +1,4 @@
-BEGIN;
+﻿BEGIN;
 
 
 --11/02/2021 Nou plugin de Registre atacants als nous mètodes de RegWeb 3.2 #333
@@ -26,6 +26,17 @@ es.caib.carpeta.pluginsib.carpetafront.regweb32.entidad=A04003003', true, 97);
 
 
 -- Plugin React de Policia: completar propietats #427
+
+
+
+INSERT INTO public.car_traduccio (traduccioid) VALUES (91);
+INSERT INTO public.car_traduccio (traduccioid) VALUES (92);
+
+
+INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (91, 'ca', 'Dades Personals Policia');
+INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (91, 'es', 'Datos Personales Policia');
+INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (92, 'ca', 'Dades Personals de la  Policia que apareixen al DNI');
+INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (92, 'es', 'Datos Personales de la Policia que aparecen en el DNI');
 
 
 
@@ -59,30 +70,20 @@ es.caib.carpeta.pluginsib.carpetafront.pinbalpolicia.pinbal.testnif=30000056Y
 es.caib.carpeta.pluginsib.carpetafront.pinbalpolicia.pinbal.testsurname=FUSTER', true, 92, NULL, 'dadespersonalspolicia');
 
 
-INSERT INTO public.car_traduccio (traduccioid) VALUES (91);
-INSERT INTO public.car_traduccio (traduccioid) VALUES (92);
+
+INSERT INTO public.car_traduccio (traduccioid) VALUES (93);
+INSERT INTO public.car_traduccio (traduccioid) VALUES (94);
 
 
-INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (91, 'ca', 'Dades Personals Policia');
-INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (91, 'es', 'Datos Personales Policia');
-INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (92, 'ca', 'Dades Personals de la  Policia que apareixen al DNI');
-INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (92, 'es', 'Datos Personales de la Policia que aparecen en el DNI');
+INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (93, 'ca', 'Dades Login');
+INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (93, 'es', 'Datos Login');
+INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (94, 'ca', 'Informació de les dades de Login');
+INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (94, 'es', 'Información de los datos de Login');
 
 
-INSERT INTO car_plugin (pluginid, nomid, classe, tipus, propietats, actiu, descripcioid, logoid, context) VALUES (95, 96, 'org.fundaciobit.pluginsib.carpetafront.dadeslogin.DadesLoginCarpetaFrontPlugin', 1, '# Class => org.fundaciobit.pluginsib.carpetafront.dadeslogin.DadesLoginCarpetaFrontPlugin', true, 97, NULL, 'dadeslogin');
+INSERT INTO car_plugin (pluginid, nomid, classe, tipus, propietats, actiu, descripcioid, logoid, context) VALUES (95, 93, 'org.fundaciobit.pluginsib.carpetafront.dadeslogin.DadesLoginCarpetaFrontPlugin', 1, '# Class => org.fundaciobit.pluginsib.carpetafront.dadeslogin.DadesLoginCarpetaFrontPlugin', true, 94, NULL, 'dadeslogin');
 
 
-
-INSERT INTO public.car_traduccio (traduccioid) VALUES (96);
-INSERT INTO public.car_traduccio (traduccioid) VALUES (97);
-
-
-
-
-INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (96, 'ca', 'Dades Login');
-INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (96, 'es', 'Datos Login');
-INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (97, 'ca', 'Informació de les dades de Login');
-INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (97, 'es', 'Información de los datos de Login');
 
 
 COMMIT;

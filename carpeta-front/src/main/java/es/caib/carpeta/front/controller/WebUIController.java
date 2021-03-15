@@ -992,12 +992,14 @@ public class WebUIController extends PluginFrontController {
     }
     
     
-    @RequestMapping(value = "/plugin/{pluginID}", method = RequestMethod.GET)
+    @RequestMapping(value = "/plugin/{pluginContext}", method = RequestMethod.GET)
     public void getPlugin(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("pluginID") Long pluginID) {
+            @PathVariable("pluginContext") String pluginContext) {
         try {
             
             String lang = LocaleContextHolder.getLocale().getLanguage();
+            
+            Long pluginID = utilsEjb.getFrontPluginIDByContext(pluginContext);
             
             PluginInfo pluginInfo = utilsEjb.getFrontPluginInfo(  lang, pluginID);
             
