@@ -126,7 +126,7 @@ class MenuDesllisant extends Component {
 		} else {
 			enllasosMenu = this.state.menuEnllasos.map((s, i) => (
 				<li key={i}>
-					<a href={s.url} title={s.nom}>
+					<a href={s.url} title={s.nom} target="_blank">
 						<img src={s.urllogo} title="" alt="" className="imc-icona iconaEnllas" />
 						<span>{s.label}</span>
 					</a>

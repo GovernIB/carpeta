@@ -1,4 +1,4 @@
-function menuDesllisantJS() {
+
 
 	var imc_html = $("html"),
 		imc_marc = $("#imc-marc"),
@@ -234,5 +234,5 @@ function menuDesllisantJS() {
 
 			}
 		});
-}
-export { menuDesllisantJS }
+
+
