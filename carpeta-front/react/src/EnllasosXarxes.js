@@ -36,7 +36,7 @@ class EnllasosXarxes extends Component {
             seguir = t('peuSeguir');
             enllasos = this.state.enllasosXarxes.map((s, i) => (
                 <li key={i}>
-                    <a href={s.url} className="imc-bt-xarxa border-0" title={s.label}>
+                    <a href={s.url} className="imc-bt-xarxa border-0" title={s.label} target="_blank">
                         <img src={s.urllogo} title="" alt=""/>
                         <span>{s.label}</span>
                     </a>

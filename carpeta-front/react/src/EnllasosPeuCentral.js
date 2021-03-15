@@ -52,10 +52,9 @@ class EnllasosPeuCentral extends Component {
         } else{
             enllasosPeuCentral = this.state.enllasosPeuCentral.map((s, i) => (
                 <li key={i}>
-                    <a href={s.url}>
+                    <a href={s.url} target="_blank">
                         <span>{s.label}</span>
                         <img src={s.urllogo} title="" alt="" />
-                        
                     </a>
                 </li>
             ))
