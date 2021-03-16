@@ -140,6 +140,12 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
 
         Long pluginID = pluginCarpetaFrontEjb.executeQueryOne(PluginFields.PLUGINID,
                 PluginFields.CONTEXT.equal(pluginContext));
+
+        if (pluginID == null) {
+            log.error("S'ha cridata a getFrontPluginIDByContext amb pluginContext = ]" 
+              + pluginContext + "[ però no s'ha trobat el plugin associat a aquest contexte");
+        }
+        
         return pluginID;
     }
 

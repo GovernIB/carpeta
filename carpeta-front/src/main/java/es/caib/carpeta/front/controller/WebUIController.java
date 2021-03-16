@@ -1001,6 +1001,9 @@ public class WebUIController extends PluginFrontController {
             
             Long pluginID = utilsEjb.getFrontPluginIDByContext(pluginContext);
             
+            
+            
+            
             PluginInfo pluginInfo = utilsEjb.getFrontPluginInfo(  lang, pluginID);
             
            
