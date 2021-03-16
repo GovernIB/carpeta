@@ -18,7 +18,7 @@ if [ $? == 0 ]; then
   
     echo on
     echo --------- COPIANT EAR ---------
-    cp ./ear/target/carpeta.ear $CARPETA_DEPLOY_DIR
+    cp ./carpeta-ear/target/carpeta.ear $CARPETA_DEPLOY_DIR
 
   fi
 fi
