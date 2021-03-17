@@ -1,5 +1,6 @@
 package es.caib.carpeta.logic;
 
+import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
 
@@ -10,7 +11,9 @@ import es.caib.carpeta.ejb.SeccioEJB;
 import es.caib.carpeta.model.entity.Seccio;
 import es.caib.carpeta.persistence.SeccioJPA;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Fundació BIT.
@@ -22,6 +25,9 @@ public class SeccioLogicaEJB extends SeccioEJB implements SeccioLogicaService {
 
     @EJB(mappedName = EntitatLogicaService.JNDI_NAME)
     protected EntitatLogicaService entitatLogicaEjb;
+    
+    @EJB(mappedName = FitxerLogicaService.JNDI_NAME)
+	protected FitxerLogicaService fitxersEjb;
     
     
     @PermitAll
@@ -58,6 +64,25 @@ public class SeccioLogicaEJB extends SeccioEJB implements SeccioLogicaService {
         }
         
         return select(Where.AND(ENTITATID.equal(entitatID), w, ACTIVA.equal(true)));
+    }
+    
+    @Override
+    public Set<Long> deleteFull(Seccio seccio, boolean deleteFiles) throws I18NException {
+    	
+    	delete(seccio);
+		
+		fitxersEjb.delete(seccio.getIconaID());
+		
+		Set<Long> fitxers = new HashSet<Long>();
+		fitxers.add(seccio.getIconaID());
+		
+		if (deleteFiles) {
+			if(!FileSystemManager.eliminarArxius(fitxers)) {
+				log.error("Error esborrant fitxers de la seccio ID " + seccio.getSeccioID(), new Exception());
+			}
+		}
+		return fitxers;
+    	
     }
 
 }

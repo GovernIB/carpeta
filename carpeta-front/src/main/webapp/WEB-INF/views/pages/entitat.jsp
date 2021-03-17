@@ -83,15 +83,23 @@
                 <div class="imc-marc-menu" id="imc-marc-menu" aria-hidden="true">
                     <div class="imc-cercador" id="imc-cercador"></div>
                     <ul>
+                        <%-- Només català i castellà --%>
                         <c:if test="${lang=='ca'}">
-                            <li class="imc-marc-ico imc--idioma"><strong class="lletraIdioma"><fmt:message key="entitats.catala"/></strong> \ <button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=es"/>'"><fmt:message key="entitats.castellano"/></button> \ <button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=en"/>'"><fmt:message key="entitats.english"/></button></li>
+                            <li class="imc-marc-ico imc--idioma"><strong class="lletraIdioma"><fmt:message key="entitats.catala"/></strong> \ <button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=es"/>'"><fmt:message key="entitats.castellano"/></button></li>
                         </c:if>
                         <c:if test="${lang=='es'}">
-                            <li class="imc-marc-ico imc--idioma"><button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=ca"/>'"><fmt:message key="entitats.catala"/></button> \ <strong class="lletraIdioma"><fmt:message key="entitats.castellano"/></strong> \ <button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=en"/>'"><fmt:message key="entitats.english"/></button></li>
+                            <li class="imc-marc-ico imc--idioma"><button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=ca"/>'"><fmt:message key="entitats.catala"/></button> \ <strong class="lletraIdioma"><fmt:message key="entitats.castellano"/></strong></li>
                         </c:if>
-                        <c:if test="${lang=='en'}">
-                            <li class="imc-marc-ico imc--idioma"><button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=ca"/>'"><fmt:message key="entitats.catala"/></button> \ <button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=es"/>'"><fmt:message key="entitats.castellano"/></button> \ <strong class="lletraIdioma"><fmt:message key="entitats.english"/></strong></li>
-                        </c:if>
+                        <%-- Si hi ha Anglès --%>
+<%--                        <c:if test="${lang=='ca'}">--%>
+<%--                            <li class="imc-marc-ico imc--idioma"><strong class="lletraIdioma"><fmt:message key="entitats.catala"/></strong> \ <button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=es"/>'"><fmt:message key="entitats.castellano"/></button> \ <button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=en"/>'"><fmt:message key="entitats.english"/></button></li>--%>
+<%--                        </c:if>--%>
+<%--                        <c:if test="${lang=='es'}">--%>
+<%--                            <li class="imc-marc-ico imc--idioma"><button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=ca"/>'"><fmt:message key="entitats.catala"/></button> \ <strong class="lletraIdioma"><fmt:message key="entitats.castellano"/></strong> \ <button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=en"/>'"><fmt:message key="entitats.english"/></button></li>--%>
+<%--                        </c:if>--%>
+<%--                        <c:if test="${lang=='en'}">--%>
+<%--                            <li class="imc-marc-ico imc--idioma"><button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=ca"/>'"><fmt:message key="entitats.catala"/></button> \ <button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=es"/>'"><fmt:message key="entitats.castellano"/></button> \ <strong class="lletraIdioma"><fmt:message key="entitats.english"/></strong></li>--%>
+<%--                        </c:if>--%>
                     </ul>
                 </div>
             </div>

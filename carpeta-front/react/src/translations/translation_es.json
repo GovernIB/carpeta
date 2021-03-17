@@ -17,6 +17,7 @@
 	"menuEntitat": "Cambiar entidad",
 	"menuGestions": "Mis gestiones",
 	"menuDades": "Datos personales",
+	"menuCanviarEntitat": "Cambiar de Entidad",
 
 
 	"menuLateralGovern": "Govern Illes Balears",
@@ -132,7 +133,8 @@
 	"breadcrumbMapaWeb": "Mapa Web",
 	"breadcrumbPlugin": "plugin",
 	"breadcrumbSuport": "Soporte",
-	
+	"breadcrumbCanviarEntitat": "Cambiar Entidad",
+
 	
 	"mapaWebTitol": "MAPA WEB",
 	"mapaWebDescripcio": "El mapa web te permite obtener una visión general de las secciones de Carpeta Ciutadana",
@@ -167,6 +169,9 @@
 	"nivellAutenticacio": "Nivel de autenticación",
 	"nivellAutenticacio1": "BAJO",
 	"nivellAutenticacio2": "MEDIO",
-	"nivellAutenticacio3": "ALTO"
+	"nivellAutenticacio3": "ALTO",
+
+	"canviarEntitatTitol": "CAMBIAR DE ENTIDAD",
+	"canviarEntitatDescripcio": "Estas son las Carpetas Ciudadanas disponibles a les que puede acceder."
 
 }

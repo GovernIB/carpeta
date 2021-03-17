@@ -206,6 +206,18 @@ class MenuDesllisant extends Component {
 		</Link>
 		</li>;
 
+		var canvEntitat;
+		if(canviarDeFront === 'true' && numEntitats > 1) {
+			canvEntitat = <li>
+				<Link to={{pathname: `/canviarEntitat`, nomPagina: 'menuCanviarEntitat'}}
+					  className="imc-marc-ico imc--canviarEntitat">
+					<span>{t('menuCanviarEntitat')}</span>
+				</Link>
+			</li>;
+		} else{
+			canviarEntitat = "";
+		}
+
 
 		var plugHtml;
 		var plugHtmlInfo;
@@ -360,7 +372,8 @@ class MenuDesllisant extends Component {
 					{plugReactError}
 					{enllasosPseusoPluginMenu}
 					{sortir}
-					{canviarEntitat}
+					{/*{canviarEntitat}*/}
+					{canvEntitat}
 				</ul>
 
 			</div>

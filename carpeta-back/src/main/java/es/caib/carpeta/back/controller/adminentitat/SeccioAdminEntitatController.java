@@ -1,5 +1,6 @@
 package es.caib.carpeta.back.controller.adminentitat;
 
+import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -13,6 +14,8 @@ import es.caib.carpeta.back.controller.webdb.SeccioController;
 import es.caib.carpeta.back.form.webdb.SeccioFilterForm;
 import es.caib.carpeta.back.form.webdb.SeccioForm;
 import es.caib.carpeta.back.security.LoginInfo;
+import es.caib.carpeta.logic.SeccioLogicaService;
+import es.caib.carpeta.model.entity.Seccio;
 import es.caib.carpeta.model.fields.SeccioFields;
 import es.caib.carpeta.persistence.SeccioJPA;
 
@@ -26,6 +29,9 @@ import es.caib.carpeta.persistence.SeccioJPA;
 @SessionAttributes(types = { SeccioForm.class, SeccioFilterForm.class })
 public class SeccioAdminEntitatController extends SeccioController {
 
+	@EJB(mappedName = SeccioLogicaService.JNDI_NAME)
+	protected SeccioLogicaService seccioLogicaEjb;
+	
     @Override
     public String getTileForm() {
         return "seccioFormAdminEntitat";
@@ -78,5 +84,10 @@ public class SeccioAdminEntitatController extends SeccioController {
 
         return seccioFilterForm;
     }
+    
+    @Override
+    public void delete(HttpServletRequest request, Seccio seccio) throws Exception,I18NException {
+        seccioLogicaEjb.deleteFull(seccio,true);
+      }
 
 }
