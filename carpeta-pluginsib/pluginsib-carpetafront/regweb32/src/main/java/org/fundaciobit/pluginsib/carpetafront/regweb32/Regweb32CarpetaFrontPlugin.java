@@ -151,8 +151,7 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
 
 
         try {
-
-        	if (query.startsWith(ESPERA_PAGE)) {	
+            if (query.startsWith(ESPERA_PAGE)) {
             	
             	espera(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData, administrationEncriptedID, 0, locale, isGet);
             	
@@ -173,8 +172,15 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
                 super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request,
                         response, userData, administrationEncriptedID, locale, isGet);
             }
+
         } catch (Exception e) {
-            log.error("Error detall registre: " + e.getMessage(), e);
+            try{
+                errorPage(e.getLocalizedMessage(), e, request, response, locale);
+                log.error("Error detall registre: " + e.getMessage(), e);
+            }catch(Exception e2){
+                log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
+            }
+
         }
 
     }
@@ -202,15 +208,18 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
                        HttpServletRequest request, HttpServletResponse response, UserData userData,
                        String administrationEncriptedID, int pageNumber, Locale locale, boolean isGet) {
     	
-    	try { 
-    		
-    		String rutaDesti = absolutePluginRequestPath + "/" + LLISTAT_REGISTRES_PAGE; 
-    		
+    	try {
+    		String rutaDesti = absolutePluginRequestPath + "/" + LLISTAT_REGISTRES_PAGE;
     		esperaPage(absolutePluginRequestPath, response, locale, rutaDesti);
     		
     	}catch(Exception e) {
-    		
-    		log.error("Error enviant a página d'espera de Registre " + e.getMessage(), e);
+
+            try{
+                errorPage(e.getMessage(), e, request, response, locale);
+                log.error("Error enviant a página d'espera de Registre " + e.getMessage(), e);
+            }catch(Exception e2){
+                log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
+            }
     	}
     	
     	
@@ -245,15 +254,22 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
             } catch (IOException e) {
                 log.error("Error obtening writer: " + e.getMessage(), e);
             }
-
         } catch (Exception e) {
-            log.error("Error llistant registres: " + e.getMessage(), e);
+
+            try{
+                errorPage(e.getLocalizedMessage(), e,request, response, locale);
+                log.error("Error llistant registres: " + e.getMessage(), e);
+            }catch(Exception e2){
+                log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
+            }
+
         }
 
     }
 
     public String getLlistatDeRegistresPage(String absolutePluginRequestPath, String relativePluginRequestPath,
             UserData userData, String entidad, int pageNumber, Locale locale, boolean isGet) throws Exception {
+
 
         Map<String, Object> map = new HashMap<String, Object>();
 
@@ -277,9 +293,9 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
 
         map.put("title", getTitle(locale));
 
-        String[] traduccions = { "registro.listado", "registro.descripcion", "registro.numero", "registro.fecha",
+        String[] traduccions = {"registro.listado", "registro.descripcion", "registro.numero", "registro.fecha",
                 "registro.extracto", "registro.destinatario", "registro.vacio", "carpeta.acciones",
-                "registro.detalle" };
+                "registro.detalle"};
 
         for (String t : traduccions) {
             map.put(t.replace('.', '_'), getTraduccio(t, locale));
@@ -311,6 +327,7 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
         map.put("paginacio", paginacio);
 
         String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
+
 
         return generat;
 
@@ -352,8 +369,6 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
     }
 
     protected static final String DETALL_REGISTRE_PAGE = "detallRegistre32";
-    protected static final String JUSTIFICANT_REGISTRE_PAGE = "justificantRegistre";
-    protected static final String ANNEXE_REGISTRE_PAGE = "annexeRegistre";
 
     /**
      * @return

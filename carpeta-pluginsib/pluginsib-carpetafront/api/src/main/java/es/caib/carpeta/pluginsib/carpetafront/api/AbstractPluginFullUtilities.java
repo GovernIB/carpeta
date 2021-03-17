@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URLEncoder;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -496,6 +497,59 @@ public abstract class AbstractPluginFullUtilities extends AbstractPluginProperti
       return str.toString();
     }
 
-    
-    
+
+    // --------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // ---------------------------- E R R O R P A G E ----------------------
+    // -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+
+    protected void errorPage(String errorMsg, Throwable th, HttpServletRequest request,
+                             HttpServletResponse response, Locale locale) throws Exception {
+
+        if (th == null) {
+            log.error("AbstractPluginFullUtilities::errorPage() " + errorMsg);
+        } else {
+            log.error("AbstractPluginFullUtilities::errorPage() " + errorMsg, th);
+        }
+
+        if (locale == null) {
+            locale = request.getLocale();
+        }
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html");
+
+        PrintWriter out =  response.getWriter();
+
+        out.println("<html>");
+
+        out.println("<body>");
+        out.println("<table>");
+        out.println("<tr>");
+        out.println("<td width=\"*\">");
+        out.println("<h4 style=\"color:red\">" + errorMsg + "</h4>");
+        out.println("</td>");
+
+        if (th != null) {
+            out.println("<tr>");
+
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            th.printStackTrace(pw);
+            out.println(sw.toString().replace("\n", "<br/>"));
+
+            out.println("</tr>");
+        }
+
+        out.println("</table>");
+        out.println("</body>");
+        out.println("</html>");
+
+        out.flush();
+
+
+    }
+
+
+
 }
