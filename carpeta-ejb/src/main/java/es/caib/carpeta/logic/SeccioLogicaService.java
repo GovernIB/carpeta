@@ -9,6 +9,7 @@ import es.caib.carpeta.model.entity.Seccio;
 import es.caib.carpeta.persistence.SeccioJPA;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Fundació BIT.
@@ -26,5 +27,7 @@ public interface SeccioLogicaService extends SeccioService {
     public SeccioJPA findByContext(String context) throws I18NException;
     
     public List<Seccio> findByEntity(long entitatID, Long seccioPareID) throws I18NException;
+    
+    public Set<Long> deleteFull(Seccio seccio, boolean deleteFiles) throws I18NException;
 
 }

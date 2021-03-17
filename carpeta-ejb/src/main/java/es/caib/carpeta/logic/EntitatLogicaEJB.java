@@ -16,6 +16,7 @@ import es.caib.carpeta.ejb.PropietatGlobalService;
 import es.caib.carpeta.ejb.UsuariEntitatService;
 import es.caib.carpeta.model.entity.Enllaz;
 import es.caib.carpeta.model.entity.Entitat;
+import es.caib.carpeta.model.entity.Seccio;
 import es.caib.carpeta.model.fields.AccesFields;
 import es.caib.carpeta.model.fields.AvisFields;
 import es.caib.carpeta.model.fields.EnllazFields;
@@ -23,11 +24,15 @@ import es.caib.carpeta.model.fields.EntitatFields;
 import es.caib.carpeta.model.fields.FitxerFields;
 import es.caib.carpeta.model.fields.PluginEntitatFields;
 import es.caib.carpeta.model.fields.PropietatGlobalFields;
+import es.caib.carpeta.model.fields.SeccioFields;
 import es.caib.carpeta.model.fields.UsuariEntitatFields;
 import es.caib.carpeta.persistence.EntitatJPA;
+
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 
 /**
  * 
@@ -46,6 +51,9 @@ public class EntitatLogicaEJB extends EntitatEJB implements EntitatLogicaService
 	
 	@EJB(mappedName = EnllazLogicaService.JNDI_NAME)
 	protected EnllazLogicaService enllazLogicaEjb;
+	
+	@EJB(mappedName = SeccioLogicaService.JNDI_NAME)
+	protected SeccioLogicaService seccioLogicaEjb;
 	
 	@EJB(mappedName = AvisService.JNDI_NAME)
 	protected AvisService avisEjb;
@@ -86,6 +94,12 @@ public class EntitatLogicaEJB extends EntitatEJB implements EntitatLogicaService
 			fitxers.addAll(enllazLogicaEjb.deleteFull(e,false));
 		}
 		
+		// Seccio BBDD + fitxers
+		List<Seccio> seccions = seccioLogicaEjb.select(SeccioFields.ENTITATID.equal(entitat.getEntitatID()));
+		for (Seccio s : seccions) {
+			fitxers.addAll(seccioLogicaEjb.deleteFull(s,false));
+		}
+		
 		// ENTITAT 
 		Set<Long> fitxersEntitat = new HashSet<Long>();
 		fitxersEntitat.add(entitat.getFitxerCssID());
@@ -93,21 +107,26 @@ public class EntitatLogicaEJB extends EntitatEJB implements EntitatLogicaService
 		fitxersEntitat.add(entitat.getLogoLateralFrontID());
 		fitxersEntitat.add(entitat.getLogoPeuBackID());
 		fitxersEntitat.add(entitat.getIconID());
+		fitxersEntitat.removeAll(Collections.singleton(null));
 		fitxers.addAll(fitxersEntitat);
 		
 		// eliminar la entitat de BBDD
 		delete(entitat);
+		
+		// obligam a realitzar les transaccions abans de eliminar els fitxers per evitar errors de constraint #434 
+		getEntityManager().flush();
 		
 		// Borram els fitxers de BBDD
 		fitxersEjb.delete(FitxerFields.FITXERID.in(fitxersEntitat));
 		
 		// eliminar els fitxers físics
 		if (deleteFiles) {
+			fitxers.removeAll(Collections.singleton(null));
 			if (!FileSystemManager.eliminarArxius(fitxers)) {
 				log.error("Error esborrant fitxers de la entitat amb ID " + entitat.getEntitatID(), new Exception());
 			}
 		}
-			
+		
 	}
 
 	/** Cerca una entiat a través del seu coodi**/
