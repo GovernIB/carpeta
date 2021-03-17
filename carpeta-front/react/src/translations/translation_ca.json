@@ -17,6 +17,7 @@
 	"menuEntitat": "Canviar entitat",
 	"menuGestions": "Les meves gestions",
 	"menuDades": "Dades personals",
+	"menuCanviarEntitat": "Canviar d'Entitat",
 
 
 	"menuLateralGovern": "Govern Illes Balears",
@@ -133,6 +134,7 @@
 	"breadcrumbMapaWeb": "Mapa Web",
 	"breadcrumbPlugin": "plugin",
 	"breadcrumbSuport": "Suport",
+	"breadcrumbCanviarEntitat": "Canviar Entitat",
 
 	
 	"mapaWebTitol": "MAPA WEB",
@@ -168,5 +170,8 @@
 	"nivellAutenticacio": "Nivell d'autenticació",
 	"nivellAutenticacio1": "BAIX",
 	"nivellAutenticacio2": "MITJÀ",
-	"nivellAutenticacio3": "ALT"
+	"nivellAutenticacio3": "ALT",
+
+	"canviarEntitatTitol": "CANVIAR D'ENTITAT",
+	"canviarEntitatDescripcio": "Aquestes són les Carpetes Ciutadanes disponibles a les que pot accedir."
 }

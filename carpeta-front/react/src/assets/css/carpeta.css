@@ -449,6 +449,9 @@ a.imc-bt-xarxa:hover {
 .mollaPa li a {
 	color: #6B6B6B;
 }
+.imc--canviarEntitat::before {
+	background-image: url(../images/canviarEntitat.png);
+}
 
 /* HomePage */
 .homePage .titol.h5 { text-transform: none !important; }
