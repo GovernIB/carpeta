@@ -37,3 +37,8 @@ export const MapaWeb  = [
   // {id: <Link to={"/"} />,label: 'breadcrumbInici'},
   {id: 'mapaWeb',label: 'breadcrumbMapaWeb'}
 ];
+
+export const CanviarEntitat  = [
+  // {id: <Link to={"/"} />,label: 'breadcrumbInici'},
+  {id: 'canviarEntitat',label: 'breadcrumbCanviarEntitat'}
+];

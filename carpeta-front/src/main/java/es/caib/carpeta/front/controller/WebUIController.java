@@ -6,6 +6,7 @@ import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.ejb.PropietatGlobalService;
 import es.caib.carpeta.hibernate.HibernateFileUtil;
+import es.caib.carpeta.model.entity.*;
 import es.caib.carpeta.persistence.AvisJPA;
 import es.caib.carpeta.persistence.EnllazJPA;
 import es.caib.carpeta.persistence.EntitatJPA;
@@ -13,10 +14,6 @@ import es.caib.carpeta.persistence.SeccioJPA;
 import es.caib.carpeta.logic.SeccioLogicaService;
 import es.caib.carpeta.logic.utils.EjbManager;
 import es.caib.carpeta.logic.utils.PluginInfo;
-import es.caib.carpeta.model.entity.Avis;
-import es.caib.carpeta.model.entity.Enllaz;
-import es.caib.carpeta.model.entity.Idioma;
-import es.caib.carpeta.model.entity.Seccio;
 import es.caib.carpeta.model.fields.EntitatFields;
 import es.caib.carpeta.model.fields.IdiomaFields;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
@@ -65,6 +62,8 @@ public class WebUIController extends PluginFrontController {
     public static final String WEBUI_INFOLOGOLATERAL_PATH = "/infologolateral";
 
     public static final String ENLLAZ_LOGO_PATH = "/enllazlogo";
+
+    public static final String ENTITAT_ICONA_PATH = "/entityicon";
 
     
     
@@ -291,6 +290,51 @@ public class WebUIController extends PluginFrontController {
         public void setValor(String valor) {
             this.valor = valor;
         }
+
+    }
+
+    public static class EntitatCanviInfo {
+        protected String nom;
+        protected String descripcio;
+        protected String urlIcona;
+        protected String codi;
+
+
+        public EntitatCanviInfo() {
+            super();
+        }
+        public EntitatCanviInfo(String nom, String descripcio, String urlIcona, String codi) {
+            super();
+            this.nom = nom;
+            this.descripcio = descripcio;
+            this.urlIcona = urlIcona;
+            this.codi = codi;
+        }
+        public String getNom() {
+            return nom;
+        }
+        public void setNom(String nom) {
+            this.nom = nom;
+        }
+        public String getDescripcio() {
+            return descripcio;
+        }
+        public void setDescripcio(String descripcio) {
+            this.descripcio = descripcio;
+        }
+        public String getUrlIcona() {
+            return urlIcona;
+        }
+        public void setUrlIcona(String urlIcona) {
+            this.urlIcona = urlIcona;
+        }
+        public String getCodi() {
+            return codi;
+        }
+        public void setCodi(String codi) {
+            this.codi = codi;
+        }
+
 
     }
 
@@ -856,11 +900,26 @@ public class WebUIController extends PluginFrontController {
         try {
             String lang = LocaleContextHolder.getLocale().getLanguage();
 
-            List<StringKeyValue> entitats = utilsEjb.getEntitats(lang);
+            List<EntitatJPA> entitats = utilsEjb.getEntitatsFull(lang);
+
+            List<EntitatCanviInfo> entitatsInfo = new ArrayList<>();
+
+            for (Entitat entitat : entitats) {
+
+                EntitatJPA entitatJPA = (EntitatJPA) entitat;
+
+                String nom = entitatJPA.getNom().getTraduccio(lang).getValor();
+                String descripcio = entitatJPA.getEntitatDescFront();
+                String urlIcona = request.getContextPath() + WEBUI_PATH + ENTITAT_ICONA_PATH + "/"
+                        + entitatJPA.getEntitatID();
+                String codi = entitatJPA.getCodi();
+
+                entitatsInfo.add(new EntitatCanviInfo(nom, descripcio, urlIcona, codi));
+            }
 
             // Passar JSON
             Gson gson = new Gson();
-            String json = gson.toJson(entitats);
+            String json = gson.toJson(entitatsInfo);
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF8");
