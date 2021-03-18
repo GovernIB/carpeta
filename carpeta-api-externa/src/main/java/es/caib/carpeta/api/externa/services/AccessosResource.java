@@ -114,7 +114,7 @@ public class AccessosResource {
 								Configuracio.getDefaultLanguage() : "ca"; 
 								
 			// Comprobam que la diferencia entre dates no supera el maxDays
-			int maxDays = Integer.valueOf(EjbManager.getAccesosMaxDays(propietatGlobalEjb));
+			int maxDays = Integer.valueOf(EjbManager.getAccesosMaxDies(propietatGlobalEjb));
 			long daysBeetween = Duration.between(dataIniciDate.atStartOfDay(), dataFiDate.atStartOfDay()).toDays(); 	
 			if (daysBeetween > maxDays) {
 				// .entity("La diferencia entre data inici i fi no pot ser superior a " + maxDays)

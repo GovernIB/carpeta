@@ -115,8 +115,8 @@ public final class EjbManager {
 		return authenticationLogicaEjb;
 	}
 	
-	public static String getAccesosMaxDays(PropietatGlobalService propietatGlobalEjb) throws I18NException {
-		final String partialProp = "accesosmaxdays";
+	public static String getAccesosMaxDies(PropietatGlobalService propietatGlobalEjb) throws I18NException {
+		final String partialProp = "accesosmaxdies";
 		String valor = getPropertyValue(propietatGlobalEjb, partialProp); 
 		return ( valor != null && valor != "") ? valor : "365";
 	}
