@@ -56,7 +56,7 @@ public class AccessosResource {
 	protected AccesLogicaService accesEjb;
 
 	@GET
-	@Operation(operationId = "hello", summary = "Retorna la llista d`accessos a CARPETA")
+	@Operation(operationId = "accessos", summary = "Retorna la llista d`accessos a CARPETA")
 	@APIResponse(
             responseCode = "200",
             description = "Llista d'accessos a l'aplicació",
@@ -84,19 +84,26 @@ public class AccessosResource {
 			
 			// Si no hi ha parametres de dates, es retorna per defecte el darrer mes
 			// Li suman 1 dia per fer les cerques inclusives
+			LocalDate dataFiDate; 
 			if(dataFiRequest == null) {
-				dataFiRequest = LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+				dataFiDate = LocalDate.now().plusDays(1);
+				dataFiRequest = dataFiDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			}else {
-				dataFiRequest = LocalDate.parse(dataFiRequest,DateTimeFormatter.ofPattern("yyyy-MM-dd")).plusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+				dataFiDate = LocalDate.parse(dataFiRequest,DateTimeFormatter.ofPattern("yyyy-MM-dd")).plusDays(1);
+				dataFiRequest = dataFiDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			}
 			
+			LocalDate dataIniciDate;
 			if (dataIniciRequest == null) {
-				dataIniciRequest = LocalDate.parse(dataFiRequest, DateTimeFormatter.ofPattern("yyyy-MM-dd")).minusMonths(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+				dataIniciDate = LocalDate.parse(dataFiRequest, DateTimeFormatter.ofPattern("yyyy-MM-dd")).minusMonths(1);
+				dataIniciRequest = dataIniciDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+			}else {
+				dataIniciDate = LocalDate.parse(dataIniciRequest, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			}
 			
-			// si no hi ha entitatId, es retorna la propietatGlobal defaultEntity 
+			// si no hi ha entitatId, es retorna la propietatGlobal defaultEntity
+			PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
 			if (entitatRequest == null) {
-				PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
 			    entitatRequest = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
 			}
 			
@@ -105,6 +112,14 @@ public class AccessosResource {
 					idiomaRequest : 
 						(Configuracio.getDefaultLanguage() != null) ? 
 								Configuracio.getDefaultLanguage() : "ca"; 
+								
+			// Comprobam que la diferencia entre dates no supera el maxDays
+			int maxDays = Integer.valueOf(EjbManager.getAccesosMaxDays(propietatGlobalEjb));
+			long daysBeetween = Duration.between(dataIniciDate.atStartOfDay(), dataFiDate.atStartOfDay()).toDays(); 	
+			if (daysBeetween > maxDays) {
+				// .entity("La diferencia entre data inici i fi no pot ser superior a " + maxDays)
+				return Response.status(Status.BAD_REQUEST).build();
+			}
 			
 			// si falta entitat, retorna error 400
 			if(entitatRequest != null) {
@@ -167,7 +182,7 @@ public class AccessosResource {
 			log.error("Error cridada api rest estadistiques accesos: " + e.getMessage());
 		}
 		
-		return Response.status(Status.BAD_REQUEST).build();
+		return Response.status(Status.BAD_REQUEST).build(); //.entity("Paràmetres incorrectes")
 		
 	}
 	
