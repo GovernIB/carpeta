@@ -66,31 +66,40 @@
 
 
 	<!-- Modal -->
-	<div id="modalAjuda" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <div class="modal-title h5"><fmt:message key="ajuda.titol" /></div>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-            <p>
-				<fmt:message key="ajuda.missatge" />
-			</p>
-			<ul>
-				<li><fmt:message key="ajuda.suporttecnic" />
-					<a href="mailto: governdigital.carpeta@fundaciobit.org"> governdigital.carpeta@fundaciobit.org</a></li>
-				<li><fmt:message key="ajuda.suportfrontback" />
-					<a href="mailto: scalafat@dgtic.caib.es">scalafat@dgtic.caib.es</a></li>
-			</ul>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal"><fmt:message key="tancar" /></button>
-      </div>
+    <div id="modalAjuda" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title h5">
+                        <fmt:message key="ajuda.titol" />
+                    </div>
+                    <button type="button" class="close"
+                        data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <fmt:message key="ajuda.missatge" />
+                    </p>
+                    <ul>
+                        <li><fmt:message key="ajuda.suporttecnic" />
+                            <a
+                            href="mailto: governdigital.carpeta@fundaciobit.org">
+                                governdigital.carpeta@fundaciobit.org</a></li>
+                        <li><fmt:message
+                                key="ajuda.suportfrontback" /> <a
+                            href="mailto: scalafat@dgtic.caib.es">scalafat@dgtic.caib.es</a></li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">
+                        <fmt:message key="tancar" />
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
 </footer>

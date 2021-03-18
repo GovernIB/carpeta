@@ -3,6 +3,8 @@ package es.caib.carpeta.logic;
 import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.persistence.PluginJPA;
 import es.caib.carpeta.model.entity.Plugin;
+
+import org.fundaciobit.genapp.common.i18n.I18NArgumentString;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.pluginsib.core.IPlugin;
@@ -76,11 +78,15 @@ public abstract class AbstractPluginLogicaEJB<I extends IPlugin> extends PluginL
                     String plantilla = plugin.getPropietats();
                     String generat = TemplateEngine.processExpressionLanguageSquareBrackets(plantilla, map, new Locale("ca"));
                     
+                    //log.error("PROPIETATS DESPRES DE generat:\n" + generat + "\n");
+                    
+                    
                     prop.load(new StringReader(generat));
                                         
                 } catch (Exception e) {
-                    // TODO Crec que no es cridarà mai
-                    e.printStackTrace();
+                   throw new I18NException(e, "comodi", 
+                      new I18NArgumentString("Error desconegut processant propietats del plugin "
+                        + pluginID + ": " + e.getMessage()));
                 }
             }
 
