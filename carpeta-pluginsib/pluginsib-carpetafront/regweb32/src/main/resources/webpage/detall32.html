@@ -105,9 +105,10 @@
                                             <dt class="col-sm-3 pb-2">${registro_presencial}</dt>
                                             <dd class="col-sm-7">${registro.isPresencial()?then('Sí', 'No')}</dd>
 
-                                            <dt class="col-sm-3 pb-2">${registro_codigoSia}</dt>
-                                            <dd class="col-sm-7"><#if registro.codigoSia?has_content >${registro.codigoSia?long?c}</#if></dd>
-
+                                            <#if registro.codigoSia?has_content >
+                                                <dt class="col-sm-3 pb-2">${registro_codigoSia}</dt>
+                                                <dd class="col-sm-7">${registro.codigoSia?long?c}</dd>
+                                            </#if>
 
                                         </dl>
 
@@ -212,7 +213,6 @@
                                             </thead>
                                             <tbody>
                                             <#list registro.anexos as anexo >
-
                                             <tr>
                                                 <td>${anexo?index +1}</td>
                                                 <td>${anexo.name}</td>
@@ -226,10 +226,9 @@
                                                 <!--<td>${anexo.size} KB</td>-->
                                                 <td><button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarAnnex('${anexo.fileID?long?c}')"><span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span></button></td>
                                                 <#else>
-                                                    <td colspan="3"><span class="alert alert-danger">${registro_anexo_nodisponible}</span></td>
+                                                    <td colspan="3"><span>${registro_anexo_nodisponible}</span></td>
                                                 </#if>
                                             </tr>
-
                                             </#list>
                                             </tbody>
                                         </table>
