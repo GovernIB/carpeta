@@ -3,6 +3,7 @@ package es.caib.carpeta.front.controller;
 import es.caib.carpeta.ejb.PropietatGlobalService;
 import es.caib.carpeta.front.service.SecurityService;
 import es.caib.carpeta.front.utils.SesionHttp;
+import es.caib.carpeta.model.entity.Idioma;
 import es.caib.carpeta.persistence.EntitatJPA;
 import es.caib.carpeta.logic.EntitatLogicaService;
 import es.caib.carpeta.logic.UtilitiesForFrontLogicaService;
@@ -25,6 +26,7 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -63,6 +65,14 @@ public class InicioController extends CommonFrontController {
 
                 mav.addObject("entitats", entitats);
                 mav.addObject("lang", lang);
+                List<Idioma> idiomes = utilsEjb.getIdiomes();
+                List<Idioma> idiomesActius = new ArrayList<>();
+                for(Idioma idioma : idiomes){
+                    if(idioma.isSuportat()){
+                        idiomesActius.add(idioma);
+                    }
+                }
+                mav.addObject("idiomes", idiomesActius);
 
             }
             // Primera vegada que entra al front però sap on anar
@@ -153,6 +163,14 @@ public class InicioController extends CommonFrontController {
                     mav.addObject("numEntitats", entitats.size());
                     mav.addObject("canviarDeFront", canviardefront);
                     mav.addObject("lang", lang);
+                    List<Idioma> idiomes = utilsEjb.getIdiomes();
+                    List<Idioma> idiomesActius = new ArrayList<>();
+                    for(Idioma idioma : idiomes){
+                        if(idioma.isSuportat()){
+                            idiomesActius.add(idioma);
+                        }
+                    }
+                    mav.addObject("idiomes", idiomesActius);
 
                 } else {
 

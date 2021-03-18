@@ -82,24 +82,48 @@
                 <div class="imc--fons"></div>
                 <div class="imc-marc-menu" id="imc-marc-menu" aria-hidden="true">
                     <div class="imc-cercador" id="imc-cercador"></div>
-                    <ul>
-                        <%-- Només català i castellà --%>
-                        <c:if test="${lang=='ca'}">
-                            <li class="imc-marc-ico imc--idioma"><strong class="lletraIdioma"><fmt:message key="entitats.catala"/></strong> \ <button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=es"/>'"><fmt:message key="entitats.castellano"/></button></li>
-                        </c:if>
-                        <c:if test="${lang=='es'}">
-                            <li class="imc-marc-ico imc--idioma"><button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=ca"/>'"><fmt:message key="entitats.catala"/></button> \ <strong class="lletraIdioma"><fmt:message key="entitats.castellano"/></strong></li>
-                        </c:if>
-                        <%-- Si hi ha Anglès --%>
-<%--                        <c:if test="${lang=='ca'}">--%>
-<%--                            <li class="imc-marc-ico imc--idioma"><strong class="lletraIdioma"><fmt:message key="entitats.catala"/></strong> \ <button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=es"/>'"><fmt:message key="entitats.castellano"/></button> \ <button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=en"/>'"><fmt:message key="entitats.english"/></button></li>--%>
-<%--                        </c:if>--%>
-<%--                        <c:if test="${lang=='es'}">--%>
-<%--                            <li class="imc-marc-ico imc--idioma"><button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=ca"/>'"><fmt:message key="entitats.catala"/></button> \ <strong class="lletraIdioma"><fmt:message key="entitats.castellano"/></strong> \ <button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=en"/>'"><fmt:message key="entitats.english"/></button></li>--%>
-<%--                        </c:if>--%>
-<%--                        <c:if test="${lang=='en'}">--%>
-<%--                            <li class="imc-marc-ico imc--idioma"><button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=ca"/>'"><fmt:message key="entitats.catala"/></button> \ <button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=es"/>'"><fmt:message key="entitats.castellano"/></button> \ <strong class="lletraIdioma"><fmt:message key="entitats.english"/></strong></li>--%>
-<%--                        </c:if>--%>
+                    <li>
+                        <li class="imc-marc-ico imc--idioma" style="padding-left: 1em;">
+                            <c:forEach var="idioma" items="${idiomes}" varStatus="loop">
+                                <c:choose>
+                                    <c:when test="${idioma.idiomaID=='ca'}">
+                                        <fmt:message key="entitats.catala" var="nomCatala"/>
+                                        <c:set var="nomIdioma" value="${nomCatala}"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:choose>
+                                            <c:when test="${idioma.idiomaID=='es'}">
+                                                <fmt:message key="entitats.castellano" var="nomCastella"/>
+                                                <c:set var="nomIdioma" value="${nomCastella}"/>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:if test="${idioma.idiomaID=='en'}">
+                                                    <fmt:message key="entitats.english" var="nomAngles"/>
+                                                    <c:set var="nomIdioma" value="${nomAngles}"/>
+                                                </c:if>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:otherwise>
+                                </c:choose>
+
+                                <c:choose>
+                                    <c:when test="${lang==idioma.idiomaID}">
+                                        <strong class="lletraIdioma">${nomIdioma}</strong>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=${idioma.idiomaID}"/>'">
+                                            ${nomIdioma}
+                                        </button>
+                                    </c:otherwise>
+                                </c:choose>
+
+                                <c:if test="${!loop.last}">
+                                    &nbsp;\&nbsp;
+                                </c:if>
+
+                            </c:forEach>
+                        </li>
+
                     </ul>
                 </div>
             </div>
