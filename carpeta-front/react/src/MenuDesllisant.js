@@ -162,16 +162,14 @@ class MenuDesllisant extends Component {
 		</Link>
 		</li>;
 
-		var canvEntitat;
+		var canviarEntitat = "";
 		if(canviarDeFront === 'true' && numEntitats > 1) {
-			canvEntitat = <li>
+			canviarEntitat = <li>
 				<Link to={{pathname: `/canviarEntitat`, nomPagina: 'menuCanviarEntitat'}}
 					  className="imc-marc-ico imc--canviarEntitat">
 					<span>{t('menuCanviarEntitat')}</span>
 				</Link>
 			</li>;
-		} else{
-			canviarEntitat = "";
 		}
 
 
@@ -184,7 +182,6 @@ class MenuDesllisant extends Component {
 		var plugReactWarning;
 		var plugReactError;
 		var sortir;
-		var canviarEntitat;
 		var seccionsS;
 		var enllasosPseusoPluginMenu;
 
@@ -286,26 +283,6 @@ class MenuDesllisant extends Component {
 			enllasosPseusoPluginMenu = '';
 		}
 
-		if(canviarDeFront === 'true' && numEntitats > 1){
-			if (i18n.language === 'ca') {
-				canviarEntitat =
-					<li><a href="/carpetafront/entitat?lang=ca" className="imc-marc-ico imc--registres"
-						title={t('menuEntitat')}><span>{t('menuEntitat')}</span></a></li>;
-			}
-			if (i18n.language === 'es') {
-				canviarEntitat =
-					<li><a href="/carpetafront/entitat?lang=es" className="imc-marc-ico imc--registres"
-						title={t('menuEntitat')}><span>{t('menuEntitat')}</span></a></li>;
-			}
-			if (i18n.language === 'en') {
-				canviarEntitat =
-					<li><a href="/carpetafront/entitat?lang=en" className="imc-marc-ico imc--registres"
-						title={t('menuEntitat')}><span>{t('menuEntitat')}</span></a></li>;
-			}
-		} else{
-			canviarEntitat = "";
-		}
-
 		
 		return (
 			<div>
@@ -328,8 +305,7 @@ class MenuDesllisant extends Component {
 					{plugReactError}
 					{enllasosPseusoPluginMenu}
 					{sortir}
-					{/*{canviarEntitat}*/}
-					{canvEntitat}
+					{canviarEntitat}
 				</ul>
 
 			</div>
