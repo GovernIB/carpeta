@@ -140,61 +140,17 @@ class MenuDesllisant extends Component {
 
 		console.log(" MENU DESLLISSANT IDIOMES: " + idiomes);
 
-		var boto_ca;
-		var boto_es;
-		var boto_en;
-		var separacio1 = "";
-		var separacio2 = "";
+		var idioma_seleccionat;
+		var idiomes_seleccionables;
+		var langActual = sessionStorage.getItem("langActual");
 
-		if(idiomes.length === 2){
-			separacio1 = "\\";
-		}
-		if(idiomes.length === 3){
-			separacio1 = "\\";
-			separacio2 = "\\";
-		}
-
-		if (i18n.language === 'ca') {
-			boto_ca = idiomes.filter(s => s === 'ca').map((s, i)  => (
-				<strong className="lletraIdioma" key={i}>{t('menuIdioma_ca')}</strong>
+		idioma_seleccionat = idiomes.filter(s => s === langActual).map((s, i) => (
+				<strong className="lletraIdioma" key={i}>{t('menuIdioma_'+ s)}</strong>
 			));
-			boto_es = idiomes.filter(s => s === 'es').map((s, i)  => (
-				<button onClick={() => this.canviarIdioma('es')}
-						className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_es')}</button>
+		idiomes_seleccionables = idiomes.filter(s => s !== langActual).map((s, i) => (
+				<span><button onClick={() => this.canviarIdioma(s)}
+						className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_' + s)}</button> \ </span>
 			));
-			boto_en = idiomes.filter(s => s === 'en').map((s, i)  => (
-				<button onClick={() => this.canviarIdioma('en')}
-						className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_en')}</button>
-			));
-		}
-
-		if (i18n.language === 'es') {
-			boto_ca = idiomes.filter(s => s === 'ca').map((s, i)  => (
-				<button onClick={() => this.canviarIdioma('ca')}
-					className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_ca')}</button>
-			));
-			boto_es = idiomes.filter(s => s === 'es').map((s, i)  => (
-				<strong className="lletraIdioma" key={i}>{t('menuIdioma_es')}</strong>
-			));
-			boto_en = idiomes.filter(s => s === 'en').map((s, i)  => (
-				<button onClick={() => this.canviarIdioma('en')}
-						className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_en')}</button>
-			));
-		}
-
-		if (i18n.language === 'en') {
-			boto_ca = idiomes.filter(s => s === 'ca').map((s, i)  => (
-				<button onClick={() => this.canviarIdioma('ca')}
-						className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_ca')}</button>
-			));
-			boto_es = idiomes.filter(s => s === 'es').map((s, i)  => (
-				<button onClick={() => this.canviarIdioma('es')}
-						className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_es')}</button>
-			));
-			boto_en = idiomes.filter(s => s === 'en').map((s, i)  => (
-				<strong className="lletraIdioma" key={i}>{t('menuIdioma_en')}</strong>
-			));
-		}
 
 
 		const plugins = this.state.plugins;
@@ -358,7 +314,7 @@ class MenuDesllisant extends Component {
 				<ul>
 					{enllasosMenu}
 					<li className="imc-marc-ico imc--idioma">
-						{boto_ca} {separacio1} {boto_es} {separacio2} {boto_en}
+						{idiomes_seleccionables} {idioma_seleccionat}
 					</li>
 					{accessibilitat}
 					{seccionsS}
