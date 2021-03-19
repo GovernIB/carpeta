@@ -516,32 +516,25 @@ public abstract class AbstractPluginFullUtilities extends AbstractPluginProperti
         if (locale == null) {
             locale = request.getLocale();
         }
-        response.setCharacterEncoding("utf-8");
-        response.setContentType("text/html");
+
 
         PrintWriter out =  response.getWriter();
 
         out.println("<html>");
-
         out.println("<body>");
-        out.println("<table>");
-        out.println("<tr>");
-        out.println("<td width=\"*\">");
         out.println("<h4 style=\"color:red\">" + errorMsg + "</h4>");
-        out.println("</td>");
 
         if (th != null) {
-            out.println("<tr>");
 
+            out.println("<div style=\"border:1px solid #D3D3D3; border-radius: 15px;\">");
+            out.println("<pre>");
             StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            th.printStackTrace(pw);
-            out.println(sw.toString().replace("\n", "<br/>"));
+            th.printStackTrace(out);
+            out.println(sw.toString());
+            out.println("</pre>");
+            out.println("</div>");
 
-            out.println("</tr>");
         }
-
-        out.println("</table>");
         out.println("</body>");
         out.println("</html>");
 
