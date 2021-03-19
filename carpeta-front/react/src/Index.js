@@ -56,7 +56,7 @@ class Index extends Component {
         var user = sessionStorage.getItem('usuariNomComplet');
 
         var infoUsuari;
-        var estilContingut = (auth === '1')? { paddingTop: '3em'} : {paddingTop: '0em'};
+        var estilContingut = (auth === '1')? { paddingTop: '6em'} : {paddingTop: '0em'};
         if (auth === '1' && user != null) {
             infoUsuari = <div className="imc-titol usuari" style={{minHeight: '70px'}}>
                 <nav className="imc--contingut">

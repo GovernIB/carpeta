@@ -433,7 +433,7 @@ img:hover {
 .fixo{
 	position: fixed;
 	width: 100%;
-	height: 3em;
+	/*height: 3em;*/
 	z-index: 5;
 }
 .espaiContingut {
@@ -493,7 +493,10 @@ a.imc-bt-xarxa:hover {
 /*Se aplican cuando el width es menor que 1410px*/
 @media only screen and (max-width: 1410px), only screen and (max-device-width: 1410px) {
 .mRapidGlobal {
-	padding-left: 3.5em !important;
+	/*padding-left: 3.5em !important;*/
+	width: calc(100% - 12em);
+	padding-top: 1em;
+	padding-bottom: 1em;
 }
 }
 
