@@ -90,6 +90,14 @@ img:hover {
 .clickable-row{
 	cursor: pointer;
 }
+.imc-titol {
+	padding-left: 6em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+}
+.imc-titol .imc--contingut {
+	width: calc(100% - 8em);
+}
 .imc-titol h5 span {
 	font-weight: normal;
 	color: #fff;
@@ -122,10 +130,11 @@ img:hover {
 	align-self: center;
 }
 
-/* Canvis per React */
-/*.imc-continguts {
-    max-width: 100% !important;
-}*/
+
+.imc-continguts {
+	width: calc(100% - 12em);
+	margin: 5em auto 2em auto;
+}
 .boton-menu{
 	background-color: transparent;
   font-size: 1.1em;
@@ -453,6 +462,9 @@ a.imc-bt-xarxa:hover {
 }
 .imc--canviarEntitat::before {
 	background-image: url(../images/canviarEntitat.png);
+}
+.imc-peu-govern, .imc-peu-opcions, .imc-peu-xarxes {
+	width: 33%;
 }
 
 /* HomePage */
