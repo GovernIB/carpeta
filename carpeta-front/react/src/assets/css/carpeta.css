@@ -91,7 +91,7 @@ img:hover {
 	cursor: pointer;
 }
 .imc-titol {
-	padding-left: 6em;
+	/*padding-left: 6em;*/
 	padding-top: 0.5em;
 	padding-bottom: 0.5em;
 }
@@ -466,6 +466,13 @@ a.imc-bt-xarxa:hover {
 .imc-peu-govern, .imc-peu-opcions, .imc-peu-xarxes {
 	width: 33%;
 }
+.mRapidGlobal {
+	/*padding-left: 3.5em !important;*/
+	width: calc(100% - 8em);
+	padding-top: 1em;
+	padding-bottom: 1em;
+	max-width: 1260px;
+}
 
 /* HomePage */
 .homePage .titol.h5 { text-transform: none !important; }
@@ -488,12 +495,12 @@ a.imc-bt-xarxa:hover {
 
 /*Se aplican cuando el width es menor que 1410px*/
 @media only screen and (max-width: 1410px), only screen and (max-device-width: 1410px) {
-.mRapidGlobal {
-	/*padding-left: 3.5em !important;*/
-	width: calc(100% - 12em);
-	padding-top: 1em;
-	padding-bottom: 1em;
-}
+/*.mRapidGlobal {*/
+/*	!*padding-left: 3.5em !important;*!*/
+/*	width: calc(100% - 12em);*/
+/*	padding-top: 1em;*/
+/*	padding-bottom: 1em;*/
+/*}*/
 }
 
 /*Se aplican cuando el width es menor que 1224px*/
@@ -521,7 +528,7 @@ img {
 /*Se aplican cuando el width es menor que 1128px*/
 @media only screen and (max-width: 1128px), only screen and (max-device-width: 1128px) {
 .mRapidGlobal{
-	padding-left: 4em !important;
+	/*padding-left: 4em !important;*/
 }
 .opcionesAcceso {
 	width: 220px !important;
@@ -732,7 +739,7 @@ body {
 	font-size: 1.6em !important;
 }
 .usuari {
-	top: 2em !important;
+	/*top: 2em !important;*/
 }
 #menuRapid{
 	display: none;
@@ -758,7 +765,7 @@ body {
 	font-size: 1.3em !important;
 }
 .usuari {
-	top: 2em !important;
+	/*top: 2em !important;*/
 	height: auto;
 }
 }
