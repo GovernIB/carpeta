@@ -104,7 +104,7 @@ class PluginHtml extends Component {
                 if (iframeDocument.body != null) {
                     h = Math.max($(iframeDocument.body).height(), iframeDocument.body.scrollHeight);
                 }
-                // lastSize = Math.max($(iframeDocument.body).height(), iframeDocument.body.scrollHeight);
+                lastSize = Math.max($(iframeDocument.body).height(), iframeDocument.body.scrollHeight);
             }
         }
 

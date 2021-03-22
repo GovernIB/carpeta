@@ -522,19 +522,18 @@ public abstract class AbstractPluginFullUtilities extends AbstractPluginProperti
 
         out.println("<html>");
         out.println("<body>");
+
+        out.println("<div style=\"border:1px solid #D3D3D3; border-radius: 15px;background: #fff;padding: 10px 30px;\">");
         out.println("<h4 style=\"color:red\">" + errorMsg + "</h4>");
-
         if (th != null) {
-
-            out.println("<div style=\"border:1px solid #D3D3D3; border-radius: 15px;\">");
-            out.println("<pre>");
+            out.println("<pre style=\"word-wrap: break-word;white-space: pre-wrap;\">");
             StringWriter sw = new StringWriter();
             th.printStackTrace(out);
             out.println(sw.toString());
             out.println("</pre>");
-            out.println("</div>");
-
         }
+        out.println("</div>");
+
         out.println("</body>");
         out.println("</html>");
 
