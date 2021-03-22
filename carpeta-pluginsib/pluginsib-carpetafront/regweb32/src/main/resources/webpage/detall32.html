@@ -102,6 +102,9 @@
                                             <dt class="col-sm-3 pb-2">${carpeta_idioma}</dt>
                                             <dd class="col-sm-7"><#if registro.idioma?has_content >${registroIdioma[registro.idioma]}</#if></dd>
 
+                                            <dt class="col-sm-3 pb-2">${registro_estado}</dt>
+                                            <dd class="col-sm-7"><#if registro.estado?has_content >${registroEstado[registro.estado]}</#if></dd>
+
                                             <dt class="col-sm-3 pb-2">${registro_presencial}</dt>
                                             <dd class="col-sm-7">${registro.isPresencial()?then('Sí', 'No')}</dd>
 

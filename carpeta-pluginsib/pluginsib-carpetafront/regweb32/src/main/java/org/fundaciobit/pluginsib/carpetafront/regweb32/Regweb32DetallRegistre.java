@@ -191,6 +191,18 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
 
         map.put("registroIdioma", registroIdioma);
 
+        // Traduccions estado Registro
+        String[] registroEstado = { "", getTraduccio("registro.estado.1", locale),
+                getTraduccio("registro.estado.2", locale),getTraduccio("registro.estado.3", locale),getTraduccio("registro.estado.4", locale),
+                getTraduccio("registro.estado.5", locale),getTraduccio("registro.estado.6", locale),getTraduccio("registro.estado.7", locale),
+                getTraduccio("registro.estado.8", locale),getTraduccio("registro.estado.9", locale),getTraduccio("registro.estado.10", locale),
+                getTraduccio("registro.estado.11", locale),getTraduccio("registro.estado.12", locale),getTraduccio("registro.estado.13", locale)};
+
+        map.put("registroEstado", registroEstado);
+
+
+
+
 
         Map<String, String> VALIDEZ_DOCUMENTAL_ANEXO = new HashMap<String, String>() {{
             put(VALIDEZ_DOCUMENTO_COPIA, getTraduccio("registro.anexo.validezdocumento.1",locale));
@@ -201,7 +213,7 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
         map.put("validezDocumento", VALIDEZ_DOCUMENTAL_ANEXO);
 
         String[] traduccions = { "registro.titulo.detalle", "registro.entrada", "registro.fecha", "registro.numero",
-                "registro.oficina", "registro.destinatario", "registro.tipo.doc", "registro.extracto", "carpeta.idioma",
+                "registro.oficina", "registro.destinatario", "registro.tipo.doc", "registro.extracto", "registro.estado","carpeta.idioma",
                 "registro.presencial", "registro.codigoSia", "registro.justificante", "registro.interesados",
                 "registro.interesado.nombre", "registro.interesado.documento", "registro.interesado.tipo",
                 "registro.anexos", "registro.anexos.vacio", "registro.anexos.nodisponibles","registro.anexo.name", "registro.anexo.mime",
