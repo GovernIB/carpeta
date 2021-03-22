@@ -204,7 +204,7 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
                 "registro.oficina", "registro.destinatario", "registro.tipo.doc", "registro.extracto", "carpeta.idioma",
                 "registro.presencial", "registro.codigoSia", "registro.justificante", "registro.interesados",
                 "registro.interesado.nombre", "registro.interesado.documento", "registro.interesado.tipo",
-                "registro.anexos", "registro.anexos.vacio", "registro.anexo.name", "registro.anexo.mime",
+                "registro.anexos", "registro.anexos.vacio", "registro.anexos.nodisponibles","registro.anexo.name", "registro.anexo.mime",
                 "registro.anexo.size", "registro.anexo.file", "registro.anexo.validezdocumento","carpeta.descargar", "justificante.generar",
                 "carpeta.catala", "carpeta.castella", "justificante.generando", "anexo.obtener", "registro.anexo.nodisponible" };
 
