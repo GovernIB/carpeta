@@ -11,7 +11,7 @@ class NivellAutenticacio extends Component {
         var nivell = sessionStorage.getItem("usuariNivell");
 
         return (            
-            <span style={styleItalic} className="pl-3 nivellAut h4">{t('nivellAutenticacio')}: {t('nivellAutenticacio'+ nivell)}</span>
+            <span className="pl-2 nivellAut h4"> - &nbsp;{t('nivellAutenticacio')}: {t('nivellAutenticacio'+ nivell)}</span>
         );
     }
 }

@@ -61,6 +61,7 @@ img:hover {
 
 .imc--llista--capses{
 	box-sizing: border-box;
+	padding-bottom: 0em;
 }
 .imc--capsa{
 	background-color: #e9e9e9;
@@ -112,7 +113,7 @@ img:hover {
 	padding-right: 1em;
 }
 .estilUsuari, .nivellAut {
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 .usuari{
 	top: 2.5em;
@@ -472,6 +473,9 @@ a.imc-bt-xarxa:hover {
 	padding-top: 1em;
 	padding-bottom: 1em;
 	max-width: 1260px;
+}
+.imc-peu {
+	padding-top: 2em;
 }
 
 /* HomePage */
@@ -898,7 +902,7 @@ body {
 		padding: 3rem;
 	}
 	.estilUsuari {
-		font-size: 1.1em !important;
+		font-size: 1em !important;
 	}
 	.imc--autenticacio {
 		font-size: 1.1em !important;
