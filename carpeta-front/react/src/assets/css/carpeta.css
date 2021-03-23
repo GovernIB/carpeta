@@ -98,6 +98,7 @@ img:hover {
 }
 .imc-titol .imc--contingut {
 	width: calc(100% - 8em);
+	max-width: 1260px !important;
 }
 .imc-titol h5 span {
 	font-weight: normal;
