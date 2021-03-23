@@ -125,8 +125,8 @@ try {
         LogCarpetaLogicaService logCarpetaLogicaEjb;
         logCarpetaLogicaEjb = EjbManager.getLogCarpetaLogicaEJB();
         
-        String missatge = (missatgeSessioInvalida == null ? "":  missatgeSessioInvalida)
-                          + (missatgeTipusError == null ? "" : missatgeTipusError);
+        String missatge = (missatgeSessioInvalida == null ? I18NUtils.tradueix("error.jsp.desconegut"):  missatgeSessioInvalida)
+                          + (missatgeTipusError == null ? I18NUtils.tradueix("error.jsp.desconegut") : missatgeTipusError);
         
         Utils.createLog(logCarpetaLogicaEjb, missatge, request, null, null, e);
         
