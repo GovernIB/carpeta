@@ -48,9 +48,9 @@
             <div class="card-body tablaRegistros">
                 <!--  XYZ ZZZ Falta muntar URL Correcte -->
                 <form id="fechaBusqueda" action="${form_action}" method="post">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="form-group pl-2 pr-2">
+                    <div class="row pb-2 ml-0 mr-0">
+                        <div class="col-md-4 pl-0">
+                            <div class="form-group pl-0 pr-2">
                                 <label for="fechaInicio" placeholder="dd/mm/yyyy" class="float-left">${carpeta_fecha_inicio}</label>
                                 <div class="input-group">
                                     <input id="fechaInicio" name="fechaInicio" class="form-control form-control-sm"
@@ -80,7 +80,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary carpeta-btn ml-2 float-left" onclick="mostrarCarregant()">${carpeta_buscar}</button>
+                    <button type="submit" class="btn btn-primary carpeta-btn ml-0 float-left" onclick="mostrarCarregant()">${carpeta_buscar}</button>
                 </form>
                 <#if isget>
                 <br/>
@@ -96,7 +96,7 @@
                     $("#carregantTramits").addClass("loaderOcult");
                 });
             </script>
-            <div class="mt-5">
+            <div class="mt-5 pt-5">
 <!--                <p class="card-text mb-5">${tramite_continuar}</p>-->
                 <table id="dataTable_paginate" class="table table-striped table-bordered table-hover"
                        style="width:100%">
@@ -192,7 +192,7 @@
                     }  
                 </script>
                 <#else>
-                <div class="alert alert-secondary mt-5" role="alert">
+                <div class="alert alert-secondary mt-5 pt-5" role="alert">
                     ${tramite_vacio}
                 </div>
             </#if>

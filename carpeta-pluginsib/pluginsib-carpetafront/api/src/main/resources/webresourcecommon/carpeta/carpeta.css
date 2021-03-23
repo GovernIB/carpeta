@@ -443,6 +443,13 @@ img:hover {
 a.imc-bt-xarxa:hover {
     background-color: #eee !important;
 }
+.tablaRegistros {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+.dataTables_length{
+	padding-bottom: 1rem!important;
+}
 
 
 /* HomePage */
