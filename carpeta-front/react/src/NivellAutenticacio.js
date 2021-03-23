@@ -10,8 +10,11 @@ class NivellAutenticacio extends Component {
         const styleItalic = {fontStyle: 'italic'};
         var nivell = sessionStorage.getItem("usuariNivell");
 
-        return (            
-            <span className="pl-2 nivellAut h4"> - &nbsp;{t('nivellAutenticacio')}: {t('nivellAutenticacio'+ nivell)}</span>
+        return (
+            <span id="nivellAutenticacio" className="imc--autenticacio">
+                <span className="separdorAuten pl-2">-</span>
+                <span className="pl-2 nivellAut h4">{t('nivellAutenticacio')}: {t('nivellAutenticacio'+ nivell)}</span>
+            </span>
         );
     }
 }

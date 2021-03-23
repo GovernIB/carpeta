@@ -65,9 +65,9 @@ class Index extends Component {
                             {/* <c:if test="${user != null}"> */}
                             <span className="oi oi-person pr-2" aria-hidden="true"> </span>{user}
                             {/* <!-- Nivell d'autenticació --> */}
-                            <span id="nivellAutenticacio" className="imc--autenticacio">
+                            {/*<span id="nivellAutenticacio" className="imc--autenticacio">*/}
                                 <NivellAutenticacio />
-                            </span>
+                            {/*</span>*/}
                             {/* </c:if> */}
                         </span>
                     </h3>

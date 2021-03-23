@@ -734,8 +734,11 @@ body {
 }
 .imc--autenticacio{
 	display: table !important;
-	padding-left: 0.7em !important;
+	padding-left: 1.5em !important;
 	font-size: 0.7em !important;
+}
+.separdorAuten{
+	display: none;
 }
 .estilUsuari{
 	font-size: 0.8em !important;
