@@ -159,7 +159,10 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
         try {
             usuariPersona = authenticationLogicaEjb.findByUsername(username);
-            entitatCodi = usuariPersona.getEntitat()!=null?usuariPersona.getEntitat().getCodi():null;
+            if(usuariPersona!=null){
+                entitatCodi = usuariPersona.getEntitat()!=null?usuariPersona.getEntitat().getCodi():null;
+            }
+
         } catch (I18NException e1) {
             String msg = I18NUtils.getMessage(e1);
             log.error("Error llegint si l'usuari es troba a la BBDD: " + msg, e1);
