@@ -62,6 +62,10 @@ class MenuDesllisant extends Component {
 				this.setState({ idiomes: res.data });
 				console.log("FINAL DE LECTURA DE IDIOMES !!!!! " + this.state.idiomes);
 			})
+			var url4 =  baseURL + `/webui/menuslidelinks`;
+			axios.get(url4).then(res => {
+				this.setState({ menuEnllasos: res.data });
+			})
 
 		}
 
@@ -121,7 +125,7 @@ class MenuDesllisant extends Component {
 		var numEntitats = sessionStorage.getItem("numEntitats");
 
 		let enllasosMenu;
-		if(!this.state.menuEnllasos.length || autenticat === '0') {
+		if(!this.state.menuEnllasos.length) {
 			enllasosMenu = "";
 		} else {
 			enllasosMenu = this.state.menuEnllasos.map((s, i) => (
@@ -290,11 +294,11 @@ class MenuDesllisant extends Component {
 				<div className="imc-cercador" id="imc-cercador">
 				</div>
 				<ul>
-					{enllasosMenu}
 					<li className="imc-marc-ico imc--idioma">
 						{idiomes_seleccionables} {idioma_seleccionat}
 					</li>
 					{accessibilitat}
+					{enllasosMenu}
 					{seccionsS}
 					{plugHtml}
 					{plugHtmlInfo}
