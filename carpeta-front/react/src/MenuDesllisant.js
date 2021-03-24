@@ -143,13 +143,14 @@ class MenuDesllisant extends Component {
 		var idioma_seleccionat;
 		var idiomes_seleccionables;
 		var langActual = sessionStorage.getItem("langActual");
+		console.log("idioma actual: " + langActual);
 
 		idioma_seleccionat = idiomes.filter(s => s === langActual).map((s, i) => (
 				<strong className="lletraIdioma" key={i}>{t('menuIdioma_'+ s)}</strong>
 			));
 		idiomes_seleccionables = idiomes.filter(s => s !== langActual).map((s, i) => (
-				<span><button onClick={() => this.canviarIdioma(s)}
-						className="boton-menu lletraIdioma" key={i}>{t('menuIdioma_' + s)}</button> \ </span>
+				<span key={i}><button onClick={() => this.canviarIdioma(s)}
+						className="boton-menu lletraIdioma">{t('menuIdioma_' + s)}</button> \ </span>
 			));
 
 
