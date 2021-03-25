@@ -13,8 +13,10 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.SubQuery;
 import org.fundaciobit.genapp.common.query.Where;
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -63,8 +65,12 @@ public class UsuariPersonaCommonController extends UsuariController {
         
         readOnlyFields.remove(IDIOMAID);
         
-        usuariForm.setReadOnlyFields(readOnlyFields);
+        /* Quan entra per primera vegada desde keycloak, si el NIF és NUL, permet introduirlo */
+        if( _jpa.getNif() == null || _jpa.getNif().length() < 1) {
+        	readOnlyFields.remove(NIF);
+        }
         
+        usuariForm.setReadOnlyFields(readOnlyFields);
         
         usuariForm.setDeleteButtonVisible(false);
 
@@ -125,6 +131,25 @@ public class UsuariPersonaCommonController extends UsuariController {
     public List<StringKeyValue> getReferenceListForIdiomaID(HttpServletRequest request,
             ModelAndView mav, Where where)  throws I18NException {
          return super.getReferenceListForIdiomaID(request, mav, Where.AND(where, IdiomaFields.SUPORTAT.equal(true)));
+    }
+    
+    @Override
+    public void preValidate(HttpServletRequest request,UsuariForm usuariForm, BindingResult result)  throws I18NException {
+    	
+    	// Revisar que NIF no sigui NULL
+    	String nif =  (String)result.getFieldValue(get(NIF));
+    	
+    	if(nif == null || nif.length() < 1) {
+    		result.rejectValue(
+					get(NIF),
+					"genapp.validation.required",
+					new String[] { I18NUtils
+							.tradueix(get(NIF)) }, null
+					);
+    	}
+    	
+    	super.preValidate(request, usuariForm, result);
+    
     }
     
 }
