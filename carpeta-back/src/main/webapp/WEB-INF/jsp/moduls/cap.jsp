@@ -27,16 +27,20 @@
 			</div>
 			
 			<div class="logoAplicacio">
-				<sec:authorize access="hasRole('ROLE_ADMIN')">
-					<c:if test="${not empty loginInfo.entitat.logoCapBack}">
-					  <img src="<c:url value="${car:fileUrl(loginInfo.entitat.logoCapBack)}" />" alt="${loginInfo.entitat.logoCapBack.nom}" title="${loginInfo.entitat.codi}" />
-		            </c:if>
-				</sec:authorize>
+				<c:if test="${ pipella == 'adminentitat'}">
+					<sec:authorize access="hasRole('ROLE_ADMIN')">
+						<c:if test="${not empty loginInfo.entitat.logoCapBack}">
+						  <img src="<c:url value="${car:fileUrl(loginInfo.entitat.logoCapBack)}" />" alt="${loginInfo.entitat.logoCapBack.nom}" title="${loginInfo.entitat.codi}" />
+						</c:if>
+					</sec:authorize>
+				</c:if>
 			</div>
 
 			<div>
 				<h1 class="titol">${version.projectName}</h1>
-				<span class="entidadName">${loginInfo.entitat.nom.traduccions[lang].valor} <c:if test="${not empty fn:trim(loginInfo.entitat.codi)}"> (${loginInfo.entitat.codi })</c:if></span>
+				<c:if test="${ pipella == 'adminentitat'}">
+					<span class="entidadName">${loginInfo.entitat.nom.traduccions[lang].valor} <c:if test="${not empty fn:trim(loginInfo.entitat.codi)}"> (${loginInfo.entitat.codi })</c:if></span>
+				</c:if>
 			</div>
 			<div>
 				<div>

@@ -48,11 +48,13 @@
 		  <br/>
 		  <center>
 			  <ul class="ajudaPeu">
+				  <c:if test="${ pipella == 'adminentitat'}">
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
 					<c:if test="${not empty loginInfo.entitat.logoPeuBack}">
 						  <li><img class="logoAplicacio" src="<c:url value="${car:fileUrl(loginInfo.entitat.logoPeuBack)}"/>" alt="${loginInfo.entitat.logoPeuBack.nom}"  title="${loginInfo.entitat.codi}" /></li>
 				    </c:if>
 					</sec:authorize>
+				  </c:if>
 
 					<!-- Button to trigger modal -->
 				  <li><small><a href="#modalAjuda" role="button"
