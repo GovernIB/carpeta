@@ -1,9 +1,5 @@
 package es.caib.carpeta.back.controller.common;
 
-import es.caib.carpeta.back.security.LoginInfo;
-import es.caib.carpeta.commons.utils.Configuracio;
-import es.caib.carpeta.model.entity.Usuari;
-
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import es.caib.carpeta.back.security.LoginInfo;
+import es.caib.carpeta.commons.utils.Configuracio;
+import es.caib.carpeta.logic.UsuariLogicaService;
+import es.caib.carpeta.model.entity.Usuari;
+import es.caib.carpeta.persistence.UsuariJPA;
+
 
 /**
  * 
@@ -30,8 +32,9 @@ public class PrincipalController {
 
 	protected final Logger log = Logger.getLogger(getClass());
 	
-	@EJB(mappedName= es.caib.carpeta.ejb.UsuariService.JNDI_NAME)
-	protected es.caib.carpeta.ejb.UsuariService usuariEjb; 
+
+	@EJB(mappedName = UsuariLogicaService.JNDI_NAME)
+	protected UsuariLogicaService usuariLogicaEjb;
 
 	@RequestMapping(value = "/common/principal.html")
 	public ModelAndView principal(HttpSession session, HttpServletRequest request, HttpServletResponse response)
@@ -57,10 +60,18 @@ public class PrincipalController {
 		
 	}
 
-	@RequestMapping(value = "/canviarIdioma/{idioma}", method = RequestMethod.GET)
+	@RequestMapping(value = "/canviarIdioma/{idioma}/{pipella}", method = RequestMethod.GET)
 	public ModelAndView canviarIdioma(HttpServletRequest request, HttpServletResponse response,
-			@PathVariable(name = "idioma") String idioma) throws Exception {
+			@PathVariable(name = "idioma") String idioma, @PathVariable String pipella) throws Exception {
 		es.caib.carpeta.back.utils.CarpetaSessionLocaleResolver.setLocaleManually(request, idioma);
+
+		if ("superadmin".equals(pipella)) {
+			return new ModelAndView(new RedirectView("/superadmin/buit", true));
+		}
+		if ("adminentitat".equals(pipella)) {
+			return new ModelAndView(new RedirectView("/adminentitat/buit", true));
+		}
+
 		return new ModelAndView("principal");
 	}
 
@@ -116,23 +127,31 @@ public class PrincipalController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/canviarEntitat/{idEntitat}", method = RequestMethod.GET)
+	@RequestMapping(value = "/canviarEntitat/{idEntitat}/{pipella}", method = RequestMethod.GET)
 	public ModelAndView canviarEntitat(HttpSession session, HttpServletRequest request, HttpServletResponse response,
-			@PathVariable String idEntitat) throws Exception {
+			@PathVariable String idEntitat, @PathVariable String pipella) throws Exception {
 
 		LoginInfo loginInfo = LoginInfo.getInstance();
-		
+
 		// Guardam la darrera entitat a base de dades
-    	Usuari usuariAutenticat = usuariEjb.findByPrimaryKey(loginInfo.getUsuariPersona().getUsuariID());
-    	usuariAutenticat.setDarreraEntitat(Long.parseLong(idEntitat,10));
-    	usuariEjb.update(usuariAutenticat);
-    	
+    	Usuari usuariAutenticat = usuariLogicaEjb.findByPrimaryKey(loginInfo.getUsuariPersona().getUsuariID());
+    	usuariAutenticat.setDarreraEntitat(Long.parseLong(idEntitat));
+
+    	usuariLogicaEjb.update((UsuariJPA)usuariAutenticat);
+
 		// Guardam la darrera entitat a logininfo
-    	loginInfo.setEntitatID(Long.parseLong(idEntitat,10));
+    	loginInfo.setEntitatID(Long.parseLong(idEntitat));
 		
 		HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
 				.getRequest();	
 		httpRequest.getSession().setAttribute("loginInfo", loginInfo);
+
+		if ("superadmin".equals(pipella)) {
+			return new ModelAndView(new RedirectView("/superadmin/buit", true));
+		}
+		if ("adminentitat".equals(pipella)) {
+			return new ModelAndView(new RedirectView("/adminentitat/buit", true));
+		}
 		
 		return new ModelAndView("principal");
 	

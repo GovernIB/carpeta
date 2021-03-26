@@ -159,7 +159,7 @@
 							<tr>
 								<c:forEach var="idioma" items="${languages}" varStatus="status">
 									<td><a class="dropdown-item"
-										href="<c:url value="/canviarIdioma/${idioma.idiomaID}"></c:url>"> <img
+										href="<c:url value="/canviarIdioma/${idioma.idiomaID}/${pipella}"></c:url>"> <img
 											src="<c:url value="/img/${idioma.idiomaID}_petit_${onlylang eq idioma.idiomaID? 'on' : 'off'}.gif"/>"
 											alt="${idioma.nom}" width="17" height="14" border="0" />
 									</a></td>
@@ -171,7 +171,7 @@
 						
 						<h6 class="dropdown-header"><fmt:message key="menu.entitats" /></h6>
 						<c:forEach items="${loginInfo.entitats}" var="item">
-                        <a class="dropdown-item <c:if test='${item.key == loginInfo.entitat.entitatID}'>active</c:if>" href="<c:url value="/canviarEntitat/${item.key}"/>"><c:out value="${item.value.nom.traduccions[lang].valor}" /></a>
+                        <a class="dropdown-item <c:if test='${item.key == loginInfo.entitat.entitatID}'>active</c:if>" href="<c:url value="/canviarEntitat/${item.key}/${pipella}"/>"><c:out value="${item.value.nom.traduccions[lang].valor}" /></a>
                         </c:forEach>
 						
 						

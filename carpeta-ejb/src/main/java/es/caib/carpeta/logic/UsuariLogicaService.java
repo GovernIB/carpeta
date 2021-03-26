@@ -1,8 +1,8 @@
 package es.caib.carpeta.logic;
 
-import javax.ejb.Local;
-
 import org.fundaciobit.genapp.common.i18n.I18NException;
+
+import javax.ejb.Local;
 
 import es.caib.carpeta.ejb.UsuariService;
 import es.caib.carpeta.persistence.UsuariJPA;
@@ -26,6 +26,8 @@ public interface UsuariLogicaService extends UsuariService  {
 	
 	
 	public UsuariJPA findByNif(String nif) throws I18NException;
+
+	public UsuariJPA update(UsuariJPA usuari) throws I18NException, javax.ejb.EJBException;
 	
 	/*
 	public UsuariJPA getUserInfoFromUserInformation(String username) throws javax.ejb.EJBException;

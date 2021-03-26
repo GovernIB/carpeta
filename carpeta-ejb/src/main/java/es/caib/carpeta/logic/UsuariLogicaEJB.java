@@ -1,19 +1,17 @@
 package es.caib.carpeta.logic;
 
 
-import java.util.List;
+import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import javax.annotation.security.PermitAll;
-
-
 import javax.ejb.Stateless;
 import javax.persistence.TypedQuery;
 
-import org.fundaciobit.genapp.common.i18n.I18NException;
 import es.caib.carpeta.ejb.UsuariEJB;
 import es.caib.carpeta.model.fields.EntitatFields;
 import es.caib.carpeta.model.fields.UsuariFields;
 import es.caib.carpeta.persistence.UsuariJPA;
+import java.util.List;
 
 /**
  * 
@@ -82,6 +80,13 @@ public class UsuariLogicaEJB extends UsuariEJB implements UsuariLogicaService {
 		
 	}
 
+
+	@Override
+	@PermitAll
+	public UsuariJPA update(UsuariJPA usuari) throws I18NException, javax.ejb.EJBException {
+		super.update(usuari);
+		return usuari;
+	}
 
 }
 
