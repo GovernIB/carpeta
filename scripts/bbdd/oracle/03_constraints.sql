@@ -24,6 +24,8 @@
 
     alter table car_propietatglobal add constraint car_propietatglobal_pk primary key (propietatglobalid);
 
+    alter table car_seccio add constraint car_seccio_pk primary key (seccioid);
+
     alter table car_traduccio add constraint car_traduccio_pk primary key (traduccioid);
 
     alter table car_traducciomap add constraint car_traducmap_pk primary key (traducciomapid, idiomaid);
@@ -58,6 +60,11 @@
        references car_plugin;
 
     alter table car_enllaz 
+       add constraint car_enllaz_traduccio_desid_fk 
+       foreign key (descripcioid) 
+       references car_traduccio;
+
+    alter table car_enllaz 
        add constraint car_enllaz_entitat_ent_fk 
        foreign key (entitatid) 
        references car_entitat;
@@ -71,6 +78,11 @@
        add constraint car_enllaz_traduccio_nomid_fk 
        foreign key (nomid) 
        references car_traduccio;
+
+    alter table car_enllaz 
+       add constraint car_enllaz_seccio_sec_fk 
+       foreign key (seccioid) 
+       references car_seccio;
 
     alter table car_enllaz 
        add constraint car_enllaz_traduccio_urlid_fk 
@@ -142,10 +154,35 @@
        foreign key (pluginid) 
        references car_plugin;
 
+    alter table car_pluginentitat 
+       add constraint car_plugent_seccio_sec_fk 
+       foreign key (seccioid) 
+       references car_seccio;
+
     alter table car_propietatglobal 
        add constraint car_propglob_entitat_fk 
        foreign key (entitatid) 
        references car_entitat;
+
+    alter table car_seccio 
+       add constraint car_seccio_traduccio_des_fk 
+       foreign key (descripcioid) 
+       references car_traduccio;
+
+    alter table car_seccio 
+       add constraint car_seccio_entitat_ent_fk 
+       foreign key (entitatid) 
+       references car_entitat;
+
+    alter table car_seccio 
+       add constraint car_seccio_fitxer_icon_fk 
+       foreign key (iconaid) 
+       references car_fitxer;
+
+    alter table car_seccio 
+       add constraint car_seccio_traduccio_nom_fk 
+       foreign key (nomid) 
+       references car_traduccio;
 
     alter table car_traducciomap 
        add constraint car_traducmap_traduccio_fk 
@@ -178,6 +215,9 @@
 
     alter table car_pluginentitat 
        add constraint car_plugent_plug_ent_uk unique (pluginid, entitatid);
+
+    alter table car_seccio 
+       add constraint UK_kow6m5nai4e8hi4kh6hg4vej8 unique (context);
 
     alter table car_usuari 
        add constraint UK_tdrt8u1p7bryex2oy8ogbpufq unique (nif);

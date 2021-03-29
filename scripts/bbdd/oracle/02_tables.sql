@@ -38,9 +38,11 @@
 
     create table car_enllaz (
        enllazid number(19,0) not null,
+        descripcioid number(19,0),
         entitatid number(19,0) not null,
         logoid number(19,0) not null,
         nomid number(19,0) not null,
+        seccioid number(19,0),
         tipus number(10,0) not null,
         urlid number(19,0) not null
     );
@@ -108,33 +110,26 @@
         pluginid number(19,0),
         temps number(19,0),
         tipus number(10,0) not null
-    ) 
-     lob (error) store as car_log_error_lob
-          (tablespace CARPETA_LOB
-             index car_log_error_lob_i)
-     lob (excepcio) store as car_log_excepcio_lob
-          (tablespace CARPETA_LOB
-             index car_log_excepcio_lob_i);
-
+    );
 
     create table car_plugin (
        pluginid number(19,0) not null,
         actiu number(1,0) not null,
         classe varchar2(255 char) not null,
+        context varchar2(50 char),
         descripcioid number(19,0) not null,
         logoid number(19,0),
         nomid number(19,0) not null,
         propietats clob,
         tipus number(10,0) not null
-    )lob (propietats) store as car_log_propietats_lob
-          (tablespace CARPETA_LOB
-             index car_log_propietats_lob_i);
+    );
 
     create table car_pluginentitat (
        pluginentitatid number(19,0) not null,
         actiu number(1,0) not null,
         entitatid number(19,0) not null,
-        pluginid number(19,0) not null
+        pluginid number(19,0) not null,
+        seccioid number(19,0)
     );
 
     create table car_propietatglobal (
@@ -143,6 +138,17 @@
         descripcio varchar2(1000 char),
         entitatid number(19,0),
         value varchar2(4000 char)
+    );
+
+    create table car_seccio (
+       seccioid number(19,0) not null,
+        activa number(1,0) not null,
+        context varchar2(50 char) not null,
+        descripcioid number(19,0) not null,
+        entitatid number(19,0) not null,
+        iconaid number(19,0) not null,
+        nomid number(19,0) not null,
+        secciopareid number(19,0)
     );
 
     create table car_traduccio (
@@ -173,6 +179,8 @@
         entitatid number(19,0) not null,
         usuariid number(19,0) not null
     );
+
+
 
 
 

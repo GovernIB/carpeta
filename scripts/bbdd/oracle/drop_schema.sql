@@ -23,6 +23,8 @@
 
     drop table car_propietatglobal cascade constraints;
 
+    drop table car_seccio cascade constraints;
+
     drop table car_traduccio cascade constraints;
 
     drop table car_traducciomap cascade constraints;
@@ -52,6 +54,8 @@
     drop sequence car_pluginentitat_seq;
 
     drop sequence car_propietatglobal_seq;
+
+    drop sequence car_seccio_seq;
 
     drop sequence car_traduccio_seq;
 

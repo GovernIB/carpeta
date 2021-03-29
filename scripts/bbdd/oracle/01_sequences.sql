@@ -9,6 +9,7 @@ create sequence car_log_seq start with 1000 increment by  1;
 create sequence car_plugin_seq start with 1000 increment by  1;
 create sequence car_pluginentitat_seq start with 1000 increment by  1;
 create sequence car_propietatglobal_seq start with 1000 increment by  1;
+create sequence car_seccio_seq start with 1000 increment by  1;
 create sequence car_traduccio_seq start with 1000 increment by  1;
 create sequence car_usuari_seq start with 1000 increment by  1;
 create sequence car_usuarientitat_seq start with 1000 increment by  1;

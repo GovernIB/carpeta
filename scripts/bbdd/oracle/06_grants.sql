@@ -9,6 +9,7 @@
     grant select on car_plugin_seq to www_carpeta;
     grant select on car_pluginentitat_seq to www_carpeta;
     grant select on car_propietatglobal_seq to www_carpeta;
+    grant select on car_seccio_seq to www_carpeta;
     grant select on car_traduccio_seq to www_carpeta;
     grant select on car_usuari_seq to www_carpeta;
     grant select on car_usuarientitat_seq to www_carpeta;
@@ -24,6 +25,7 @@
     grant select,insert,delete,update on car_plugin to www_carpeta;
     grant select,insert,delete,update on car_pluginentitat to www_carpeta;
     grant select,insert,delete,update on car_propietatglobal to www_carpeta;
+    grant select,insert,delete,update on car_seccio to www_carpeta;
     grant select,insert,delete,update on car_traduccio to www_carpeta;
     grant select,insert,delete,update on car_traducciomap to www_carpeta;
     grant select,insert,delete,update on car_usuari to www_carpeta;
