@@ -39,6 +39,10 @@ private static final long serialVersionUID = 489209138L;
 	@Column(name="nomid",nullable = false,length = 19)
 	long nomID;
 
+	@Index(name="car_entitat_descripcioid_fk_i")
+	@Column(name="descripcioid",length = 19)
+	java.lang.Long descripcioID;
+
 	@Column(name="codi",nullable = false,length = 30)
 	java.lang.String codi;
 
@@ -122,9 +126,10 @@ private static final long serialVersionUID = 489209138L;
   }
 
   /** Constructor amb tots els camps  */
-  public EntitatJPA(long entitatID , long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.String suportFAQ , java.lang.String suportqssi , java.lang.String suportautenticacio , java.lang.Long pluginLoginID , java.lang.Long loginTextID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit) {
+  public EntitatJPA(long entitatID , long nomID , java.lang.Long descripcioID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.String suportFAQ , java.lang.String suportqssi , java.lang.String suportautenticacio , java.lang.Long pluginLoginID , java.lang.Long loginTextID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit) {
     this.entitatID=entitatID;
     this.nomID=nomID;
+    this.descripcioID=descripcioID;
     this.codi=codi;
     this.codiDir3=codiDir3;
     this.activa=activa;
@@ -149,8 +154,9 @@ private static final long serialVersionUID = 489209138L;
     this.commit=commit;
 }
   /** Constructor sense valors autoincrementals */
-  public EntitatJPA(long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.String suportFAQ , java.lang.String suportqssi , java.lang.String suportautenticacio , java.lang.Long pluginLoginID , java.lang.Long loginTextID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit) {
+  public EntitatJPA(long nomID , java.lang.Long descripcioID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.String suportFAQ , java.lang.String suportqssi , java.lang.String suportautenticacio , java.lang.Long pluginLoginID , java.lang.Long loginTextID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit) {
     this.nomID=nomID;
+    this.descripcioID=descripcioID;
     this.codi=codi;
     this.codiDir3=codiDir3;
     this.activa=activa;
@@ -193,6 +199,7 @@ private static final long serialVersionUID = 489209138L;
   public EntitatJPA(Entitat __bean) {
     this.setEntitatID(__bean.getEntitatID());
     this.setNomID(__bean.getNomID());
+    this.setDescripcioID(__bean.getDescripcioID());
     this.setCodi(__bean.getCodi());
     this.setCodiDir3(__bean.getCodiDir3());
     this.setActiva(__bean.isActiva());
@@ -239,6 +246,13 @@ private static final long serialVersionUID = 489209138L;
 	};
 	public void setNomID(long _nomID_) {
 		this.nomID = _nomID_;
+	};
+
+	public java.lang.Long getDescripcioID() {
+		return(descripcioID);
+	};
+	public void setDescripcioID(java.lang.Long _descripcioID_) {
+		this.descripcioID = _descripcioID_;
 	};
 
 	public java.lang.String getCodi() {
@@ -539,6 +553,31 @@ private static final long serialVersionUID = 489209138L;
   }
 
 
+// IMP Field:traduccioid | Table: car_traduccio | Type: 1  
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
+	@ForeignKey(name="car_entitat_traduccio_des_fk")
+	@JoinColumn(name = "descripcioid", referencedColumnName ="traduccioID", nullable = true, insertable=false, updatable=false)
+	private TraduccioJPA descripcio;
+
+	public TraduccioJPA getDescripcio() {
+    return this.descripcio;
+  }
+
+	public  void setDescripcio(TraduccioJPA descripcio) {
+    this.descripcio = descripcio;
+  }
+
+  @javax.xml.bind.annotation.XmlTransient
+  public java.util.Map<String, es.caib.carpeta.persistence.TraduccioMapJPA> getDescripcioTraduccions() {
+    return this.descripcio.getTraduccions();
+  }
+
+  public void setDescripcioTraduccions(java.util.Map<String, es.caib.carpeta.persistence.TraduccioMapJPA> __traduccions__) {
+    this.descripcio.setTraduccions(__traduccions__);
+  }
+
+
 // IMP Field:fitxerid | Table: car_fitxer | Type: 1  
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -661,6 +700,7 @@ private static final long serialVersionUID = 489209138L;
     EntitatJPA __tmp = new EntitatJPA();
     __tmp.setEntitatID(__bean.getEntitatID());
     __tmp.setNomID(__bean.getNomID());
+    __tmp.setDescripcioID(__bean.getDescripcioID());
     __tmp.setCodi(__bean.getCodi());
     __tmp.setCodiDir3(__bean.getCodiDir3());
     __tmp.setActiva(__bean.isActiva());
@@ -759,6 +799,10 @@ private static final long serialVersionUID = 489209138L;
     if(!"TraduccioJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.loginText) || org.hibernate.Hibernate.isInitialized(__jpa.getLoginText()) ) ) {
       __tmp.setLoginText(TraduccioJPA.copyJPA(__jpa.getLoginText(), __alreadyCopied,"EntitatJPA"));
+    }
+    if(!"TraduccioJPA".equals(origenJPA) && 
+       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.descripcio) || org.hibernate.Hibernate.isInitialized(__jpa.getDescripcio()) ) ) {
+      __tmp.setDescripcio(TraduccioJPA.copyJPA(__jpa.getDescripcio(), __alreadyCopied,"EntitatJPA"));
     }
     if(!"TraduccioJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.nom) || org.hibernate.Hibernate.isInitialized(__jpa.getNom()) ) ) {

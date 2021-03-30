@@ -250,6 +250,20 @@ public class EntitatValidator<I extends Entitat>
       }
     }
 
+    if (__vr.getFieldErrorCount(DESCRIPCIOID) == 0) {
+      java.lang.Long __descripcioid = __target__.getDescripcioID();
+      if (__descripcioid != null ) {
+        Long __count_ = null;
+        try { __count_ = __traduccioManager.count(TraduccioFields.TRADUCCIOID.equal(__descripcioid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ == 0) {        
+          __vr.rejectValue(DESCRIPCIOID, "error.notfound",
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccio"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccioID"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__descripcioid)));
+        }
+      }
+    }
+
     if (__vr.getFieldErrorCount(PLUGINLOGINID) == 0) {
       java.lang.Long __pluginloginid = __target__.getPluginLoginID();
       if (__pluginloginid != null ) {

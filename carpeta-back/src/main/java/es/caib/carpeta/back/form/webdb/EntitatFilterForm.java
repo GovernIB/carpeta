@@ -65,6 +65,28 @@ public class EntitatFilterForm extends CarpetaBaseFilterForm implements EntitatF
   }
 
 
+  private java.lang.Long descripcioIDDesde;
+
+  public java.lang.Long getDescripcioIDDesde() {
+    return this.descripcioIDDesde;
+  }
+
+  public void setDescripcioIDDesde(java.lang.Long descripcioIDDesde) {
+    this.descripcioIDDesde = descripcioIDDesde;
+  }
+
+
+  private java.lang.Long descripcioIDFins;
+
+  public java.lang.Long getDescripcioIDFins() {
+    return this.descripcioIDFins;
+  }
+
+  public void setDescripcioIDFins(java.lang.Long descripcioIDFins) {
+    this.descripcioIDFins = descripcioIDFins;
+  }
+
+
   private java.lang.String codi;
 
   public java.lang.String getCodi() {
@@ -272,6 +294,8 @@ public class EntitatFilterForm extends CarpetaBaseFilterForm implements EntitatF
     this.entitatIDFins = __toClone.entitatIDFins;
     this.nomIDDesde = __toClone.nomIDDesde;
     this.nomIDFins = __toClone.nomIDFins;
+    this.descripcioIDDesde = __toClone.descripcioIDDesde;
+    this.descripcioIDFins = __toClone.descripcioIDFins;
     this.codi = __toClone.codi;
     this.codiDir3 = __toClone.codiDir3;
     this.colorMenu = __toClone.colorMenu;
@@ -291,6 +315,7 @@ public class EntitatFilterForm extends CarpetaBaseFilterForm implements EntitatF
     this.context = __toClone.context;
     this.commit = __toClone.commit;
     this.mapOfTraduccioForNomID = __toClone.mapOfTraduccioForNomID;
+    this.mapOfTraduccioForDescripcioID = __toClone.mapOfTraduccioForDescripcioID;
     this.mapOfPluginForPluginLoginID = __toClone.mapOfPluginForPluginLoginID;
     this.mapOfTraduccioForLoginTextID = __toClone.mapOfTraduccioForLoginTextID;
   }
@@ -335,6 +360,18 @@ public class EntitatFilterForm extends CarpetaBaseFilterForm implements EntitatF
 
   public void setMapOfTraduccioForNomID(Map<String, String> mapOfTraduccioForNomID) {
     this.mapOfTraduccioForNomID = mapOfTraduccioForNomID;
+  }
+
+
+
+  private Map<String, String> mapOfTraduccioForDescripcioID;
+
+  public Map<String, String> getMapOfTraduccioForDescripcioID() {
+    return this.mapOfTraduccioForDescripcioID;
+  }
+
+  public void setMapOfTraduccioForDescripcioID(Map<String, String> mapOfTraduccioForDescripcioID) {
+    this.mapOfTraduccioForDescripcioID = mapOfTraduccioForDescripcioID;
   }
 
 

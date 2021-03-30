@@ -63,6 +63,7 @@ public class EntitatWebValidator extends AbstractWebValidator<EntitatForm, Entit
 
 java.util.List<Field<?>> _ignoreFields = new java.util.ArrayList<Field<?>>();
 _ignoreFields.add(NOMID);
+_ignoreFields.add(DESCRIPCIOID);
 _ignoreFields.add(LOGINTEXTID);
     WebValidationResult<EntitatForm> wvr;
     wvr = new WebValidationResult<EntitatForm>(errors, _ignoreFields);
@@ -117,6 +118,46 @@ _ignoreFields.add(LOGINTEXTID);
           }
       } else {
         errors.rejectValue("entitat.nom", "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(NOMID.fullName)}, null);
+      }
+    }
+    {
+      // IF CAMP ES NOT NULL verificar que totes les traduccions son not null
+      es.caib.carpeta.persistence.TraduccioJPA tradJPA = __jpa.getDescripcio();
+      if (tradJPA != null) {
+        // TODO ERROR
+        java.util.Map<String,es.caib.carpeta.persistence.TraduccioMapJPA> _trad = tradJPA.getTraduccions();
+        int countNull= 0;
+        int countNotNull = 0;
+        for (String _idioma : _trad.keySet()) {
+          es.caib.carpeta.persistence.TraduccioMapJPA _map = _trad.get(_idioma);
+          if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
+            countNull++;
+          } else {
+            countNotNull++;
+          }
+        }
+
+        if (countNull == _trad.size()) {
+          // OK Tot esta buit ==> passam el camp a NULL
+          __jpa.setDescripcioID(null);
+          __jpa.setDescripcio(null);
+        } else {
+          if (countNotNull  == _trad.size()) {
+            // OK Tot esta ple
+          } else {
+            for (String _idioma : _trad.keySet()) {
+              es.caib.carpeta.persistence.TraduccioMapJPA _map = _trad.get(_idioma);
+              if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
+                errors.rejectValue("entitat.descripcio", "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(DESCRIPCIOID.fullName)}, null);
+                errors.rejectValue("entitat.descripcio.traduccions["+ _idioma +"].valor",
+                  "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(DESCRIPCIOID.fullName)}, null);
+              }
+            }
+          }
+        }
+      } else {
+          __jpa.setDescripcioID(null);
+          __jpa.setDescripcio(null);
       }
     }
     {

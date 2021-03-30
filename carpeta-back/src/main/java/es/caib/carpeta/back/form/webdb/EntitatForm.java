@@ -41,6 +41,7 @@ public class EntitatForm extends CarpetaBaseForm {
     super(__toClone);
       this.entitat = __toClone.entitat;
     this.listOfTraduccioForNomID = __toClone.listOfTraduccioForNomID;
+    this.listOfTraduccioForDescripcioID = __toClone.listOfTraduccioForDescripcioID;
     this.listOfPluginForPluginLoginID = __toClone.listOfPluginForPluginLoginID;
     this.listOfTraduccioForLoginTextID = __toClone.listOfTraduccioForLoginTextID;
   }
@@ -145,6 +146,18 @@ public class EntitatForm extends CarpetaBaseForm {
 
   public void setListOfTraduccioForNomID(List<StringKeyValue> listOfTraduccioForNomID) {
     this.listOfTraduccioForNomID = listOfTraduccioForNomID;
+  }
+
+
+
+  private List<StringKeyValue> listOfTraduccioForDescripcioID;
+
+  public List<StringKeyValue> getListOfTraduccioForDescripcioID() {
+    return this.listOfTraduccioForDescripcioID;
+  }
+
+  public void setListOfTraduccioForDescripcioID(List<StringKeyValue> listOfTraduccioForDescripcioID) {
+    this.listOfTraduccioForDescripcioID = listOfTraduccioForDescripcioID;
   }
 
 

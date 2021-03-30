@@ -12,6 +12,7 @@ private static final long serialVersionUID = -2014602951L;
 
 	long entitatID;// PK
 	long nomID;
+	java.lang.Long descripcioID;
 	java.lang.String codi;
 	java.lang.String codiDir3;
 	boolean activa;
@@ -41,9 +42,10 @@ private static final long serialVersionUID = -2014602951L;
   }
 
   /** Constructor amb tots els camps  */
-  public EntitatBean(long entitatID , long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.String suportFAQ , java.lang.String suportqssi , java.lang.String suportautenticacio , java.lang.Long pluginLoginID , java.lang.Long loginTextID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit) {
+  public EntitatBean(long entitatID , long nomID , java.lang.Long descripcioID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.String suportFAQ , java.lang.String suportqssi , java.lang.String suportautenticacio , java.lang.Long pluginLoginID , java.lang.Long loginTextID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit) {
     this.entitatID=entitatID;
     this.nomID=nomID;
+    this.descripcioID=descripcioID;
     this.codi=codi;
     this.codiDir3=codiDir3;
     this.activa=activa;
@@ -68,8 +70,9 @@ private static final long serialVersionUID = -2014602951L;
     this.commit=commit;
 }
   /** Constructor sense valors autoincrementals */
-  public EntitatBean(long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.String suportFAQ , java.lang.String suportqssi , java.lang.String suportautenticacio , java.lang.Long pluginLoginID , java.lang.Long loginTextID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit) {
+  public EntitatBean(long nomID , java.lang.Long descripcioID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.String suportFAQ , java.lang.String suportqssi , java.lang.String suportautenticacio , java.lang.Long pluginLoginID , java.lang.Long loginTextID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit) {
     this.nomID=nomID;
+    this.descripcioID=descripcioID;
     this.codi=codi;
     this.codiDir3=codiDir3;
     this.activa=activa;
@@ -112,6 +115,7 @@ private static final long serialVersionUID = -2014602951L;
   public EntitatBean(Entitat __bean) {
     this.setEntitatID(__bean.getEntitatID());
     this.setNomID(__bean.getNomID());
+    this.setDescripcioID(__bean.getDescripcioID());
     this.setCodi(__bean.getCodi());
     this.setCodiDir3(__bean.getCodiDir3());
     this.setActiva(__bean.isActiva());
@@ -158,6 +162,13 @@ private static final long serialVersionUID = -2014602951L;
 	};
 	public void setNomID(long _nomID_) {
 		this.nomID = _nomID_;
+	};
+
+	public java.lang.Long getDescripcioID() {
+		return(descripcioID);
+	};
+	public void setDescripcioID(java.lang.Long _descripcioID_) {
+		this.descripcioID = _descripcioID_;
 	};
 
 	public java.lang.String getCodi() {
@@ -323,6 +334,7 @@ private static final long serialVersionUID = -2014602951L;
     EntitatBean __tmp = new EntitatBean();
     __tmp.setEntitatID(__bean.getEntitatID());
     __tmp.setNomID(__bean.getNomID());
+    __tmp.setDescripcioID(__bean.getDescripcioID());
     __tmp.setCodi(__bean.getCodi());
     __tmp.setCodiDir3(__bean.getCodiDir3());
     __tmp.setActiva(__bean.isActiva());

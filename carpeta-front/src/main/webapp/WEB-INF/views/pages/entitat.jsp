@@ -147,7 +147,7 @@
                                                         <img src="<c:url value="/webui/entityicon/${entitat.entitatID}"/>" alt="" title="" class="imc-icona">
                                                     </span>
                                                     <span class="titolPlugin titol h3 titolCentrat">${entitat.nom.getTraduccio(lang).valor}</span>
-<%--                                                    <span class="card-text mb-3 mt-3 alignCenter">REGWEB3 Registre electrònic</span>--%>
+                                                    <span class="card-text mb-3 mt-3 alignCenter"><i>${(empty entitat.descripcio)?'':entitat.descripcio.getTraduccio(lang).valor}</i></span>
                                                 </button>
                                             </div>
                                         </c:forEach>
