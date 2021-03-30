@@ -74,3 +74,5 @@ nb-configuration.xml
 /carpeta-pluginsib/pluginsib-carpetafront/pinbalpolicia/holder.html
 /carpeta-pluginsib/pluginsib-carpetafront/pinbalpolicia/react/package-lock.json
 /carpeta-pluginsib/pluginsib-carpetafront/pinbalpolicia/react/readme.txt
+/carpeta-back/src/main/java/es/caib/carpeta/back/controller/all/PublicController.java
+/carpeta-back/src/main/webapp/WEB-INF/jsp/all/homepublic.jsp

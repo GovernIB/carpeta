@@ -18,6 +18,7 @@ private static final long serialVersionUID = 223694536L;
 	long iconaID;
 	java.lang.Long seccioPareID;
 	long entitatID;
+	int ordre;
 
 
   /** Constructor Buit */
@@ -25,7 +26,7 @@ private static final long serialVersionUID = 223694536L;
   }
 
   /** Constructor amb tots els camps  */
-  public SeccioBean(long seccioID , long nomID , long descripcioID , java.lang.String context , boolean activa , long iconaID , java.lang.Long seccioPareID , long entitatID) {
+  public SeccioBean(long seccioID , long nomID , long descripcioID , java.lang.String context , boolean activa , long iconaID , java.lang.Long seccioPareID , long entitatID , int ordre) {
     this.seccioID=seccioID;
     this.nomID=nomID;
     this.descripcioID=descripcioID;
@@ -34,18 +35,20 @@ private static final long serialVersionUID = 223694536L;
     this.iconaID=iconaID;
     this.seccioPareID=seccioPareID;
     this.entitatID=entitatID;
+    this.ordre=ordre;
 }
   /** Constructor sense valors autoincrementals */
-  public SeccioBean(long nomID , long descripcioID , boolean activa , long iconaID , java.lang.Long seccioPareID , long entitatID) {
+  public SeccioBean(long nomID , long descripcioID , boolean activa , long iconaID , java.lang.Long seccioPareID , long entitatID , int ordre) {
     this.nomID=nomID;
     this.descripcioID=descripcioID;
     this.activa=activa;
     this.iconaID=iconaID;
     this.seccioPareID=seccioPareID;
     this.entitatID=entitatID;
+    this.ordre=ordre;
 }
   /** Constructor dels valors Not Null */
-  public SeccioBean(long seccioID , long nomID , long descripcioID , java.lang.String context , boolean activa , long iconaID , long entitatID) {
+  public SeccioBean(long seccioID , long nomID , long descripcioID , java.lang.String context , boolean activa , long iconaID , long entitatID , int ordre) {
     this.seccioID=seccioID;
     this.nomID=nomID;
     this.descripcioID=descripcioID;
@@ -53,6 +56,7 @@ private static final long serialVersionUID = 223694536L;
     this.activa=activa;
     this.iconaID=iconaID;
     this.entitatID=entitatID;
+    this.ordre=ordre;
 }
   public SeccioBean(Seccio __bean) {
     this.setSeccioID(__bean.getSeccioID());
@@ -63,6 +67,7 @@ private static final long serialVersionUID = 223694536L;
     this.setIconaID(__bean.getIconaID());
     this.setSeccioPareID(__bean.getSeccioPareID());
     this.setEntitatID(__bean.getEntitatID());
+    this.setOrdre(__bean.getOrdre());
     // Fitxer
     this.setIcona(FitxerBean.toBean(__bean.getIcona()));
 	}
@@ -123,6 +128,13 @@ private static final long serialVersionUID = 223694536L;
 		this.entitatID = _entitatID_;
 	};
 
+	public int getOrdre() {
+		return(ordre);
+	};
+	public void setOrdre(int _ordre_) {
+		this.ordre = _ordre_;
+	};
+
 
 
   // ======================================
@@ -138,6 +150,7 @@ private static final long serialVersionUID = 223694536L;
     __tmp.setIconaID(__bean.getIconaID());
     __tmp.setSeccioPareID(__bean.getSeccioPareID());
     __tmp.setEntitatID(__bean.getEntitatID());
+    __tmp.setOrdre(__bean.getOrdre());
     // Fitxer
     __tmp.setIcona(FitxerBean.toBean(__bean.getIcona()));
 		return __tmp;

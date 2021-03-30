@@ -155,11 +155,18 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
         List<Long> pluginsEntitat = pluginEntitatLogicaEjb.getPluginsEntitat(codiEntitat, true, seccioID);
 
         List<Plugin> plugins = pluginCarpetaFrontEjb.getAllPlugins(PluginFields.PLUGINID.in(pluginsEntitat));
+        Map<Long, Plugin> mapPlugins = new HashMap<Long, Plugin>();
+        for (Plugin plugin : plugins) {
+            mapPlugins.put(plugin.getPluginID(), plugin);
+        }
+        
 
         List<PluginInfo> pluginsInfo = new ArrayList<PluginInfo>(plugins.size());
 
-        for (Plugin plugin : plugins) {
-            if (plugin.isActiu()) {
+        for (Long pluginID : pluginsEntitat) {
+            Plugin plugin = mapPlugins.get(pluginID);
+            
+            if (plugin != null) {
                 PluginJPA p = (PluginJPA) plugin;
 
                 ICarpetaFrontPlugin cfp = pluginCarpetaFrontEjb.getInstanceByPluginID(p.getPluginID());
@@ -246,16 +253,21 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
 
         EnllazQueryPath eqp = new EnllazQueryPath();
 
-        Where w;
+        final Where w1;
         if (seccioID == null) {
-            w = EnllazFields.SECCIOID.isNull();
+            w1 = EnllazFields.SECCIOID.isNull();
         } else {
-            w = EnllazFields.SECCIOID.equal(seccioID);
+            w1 = EnllazFields.SECCIOID.equal(seccioID);
         }
 
+        final Where w2 = eqp.ENTITAT().CODI().equal(codiEntitat);
+        final Where w3 = EnllazFields.TIPUS.equal(enllazType);
+        final Where w4 = EnllazFields.ACTIU.equal(true);
+        
+        
         List<Enllaz> enllazos = enllazEjb.select(
-                Where.AND(eqp.ENTITAT().CODI().equal(codiEntitat), EnllazFields.TIPUS.equal(enllazType), w),
-                new OrderBy(EnllazFields.ENLLAZID));
+                Where.AND(w1, w2 , w3, w4),
+                new OrderBy(EnllazFields.ORDRE));
         return enllazos;
     }
 

@@ -26,6 +26,9 @@ public interface Seccio extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public long getEntitatID();
 	public void setEntitatID(long _entitatID_);
 
+	public int getOrdre();
+	public void setOrdre(int _ordre_);
+
   // Fitxer
   public <F extends Fitxer> F getIcona();
 

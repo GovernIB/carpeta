@@ -37,6 +37,41 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.DESCRIPCIOID)}">
+        <tr id="entitat_descripcioID_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.DESCRIPCIOID])?'entitat.descripcioID':__theForm.labels[EntitatFields.DESCRIPCIOID]}" />
+              <c:if test="${not empty __theForm.help[EntitatFields.DESCRIPCIOID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.DESCRIPCIOID]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+       <form:errors path="entitat.descripcio" cssClass="errorField alert alert-danger" />
+       <div class="row-fluid  col-md-8">
+         <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
+             <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
+            <li class="nav-item ">
+                 <a class="nav-link ${(counter.index == 0)? 'active':''}" href="#${counter.index}_tab_descripcio_${idioma.idiomaID}" data-toggle="tab">${idioma.nom}</a>
+            </li>
+          </c:forEach>
+           
+         </ul>
+         <div class="tab-content well well-white" style="padding:8px;margin:0px;">
+           <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
+           <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_descripcio_${idioma.idiomaID}">
+               <form:errors path="entitat.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
+               <form:input path="entitat.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.DESCRIPCIOID)? ' uneditable-input' : ''}" maxlength="4000" />
+           </div>
+           </c:forEach>
+         </div>
+       </div>
+
+           </td>
+        </tr>
+        </c:if>
+        
         <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.CODI)}">
         <tr id="entitat_codi_rowid">
           <td>
@@ -382,15 +417,21 @@
             <td>
               <form:errors path="entitat.entitatDescFront" cssClass="errorField alert alert-danger" />
               <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.ENTITATDESCFRONT)? 'true' : 'false'}" path="entitat.entitatDescFront"  />
-      <div class="dropdown" style="vertical-align:top;display:inline;">
-        <button id="dropdownMenuButton_entitatDescFront" class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left:0px;"><span class="caret"></span></button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_entitatDescFront">
+      <div id="dropdownMenuButton_entitatDescFront" style="vertical-align:top;display:inline;position:relative;">
+        <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
+        <div id="dropdownMenuContainer_entitatDescFront" class="dropdown-menu">
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('entitat.entitatDescFront'); ta.wrap='off';" >No Wrap</a>
           <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('entitat.entitatDescFront'); ta.wrap='soft';">Soft Wrap</a>
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('entitat.entitatDescFront'); ta.wrap='hard';">Hard Wrap</a>
         </div>
       </div>
-           </td>
+      <script type="text/javascript">
+			$('#dropdownMenuButton_entitatDescFront').on('click', function(){
+					var valor = ($('#dropdownMenuContainer_entitatDescFront').css('display') != 'none') ? 'none' : 'block';
+                 $('#dropdownMenuContainer_entitatDescFront').css('display', valor);
+                 return false;
+				});
+      </script>           </td>
         </tr>
         </c:if>
         

@@ -261,3 +261,43 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EnllazFields.ACTIU)}">
+        <tr id="enllaz_actiu_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EnllazFields.ACTIU])?'enllaz.actiu':__theForm.labels[EnllazFields.ACTIU]}" />
+              <c:if test="${not empty __theForm.help[EnllazFields.ACTIU]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EnllazFields.ACTIU]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,EnllazFields.ACTIU)}" >
+              <form:errors path="enllaz.actiu" cssClass="errorField alert alert-danger" />
+              <form:checkbox cssClass="form-control" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,EnllazFields.ACTIU)? 'false' : 'true'}" path="enllaz.actiu"  style="width:1%"/>
+          </c:if>
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,EnllazFields.ACTIU)}" >
+                <fmt:message key="genapp.checkbox.${__theForm.enllaz.actiu}" />
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EnllazFields.ORDRE)}">
+        <tr id="enllaz_ordre_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EnllazFields.ORDRE])?'enllaz.ordre':__theForm.labels[EnllazFields.ORDRE]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[EnllazFields.ORDRE]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EnllazFields.ORDRE]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="enllaz.ordre" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EnllazFields.ORDRE)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,EnllazFields.ORDRE)? ' uneditable-input' : ''}"  style=""  path="enllaz.ordre"   />
+
+           </td>
+        </tr>
+        </c:if>
+        

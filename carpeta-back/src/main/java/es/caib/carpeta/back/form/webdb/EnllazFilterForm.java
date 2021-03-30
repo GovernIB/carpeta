@@ -175,6 +175,28 @@ public class EnllazFilterForm extends CarpetaBaseFilterForm implements EnllazFie
   }
 
 
+  private java.lang.Integer ordreDesde;
+
+  public java.lang.Integer getOrdreDesde() {
+    return this.ordreDesde;
+  }
+
+  public void setOrdreDesde(java.lang.Integer ordreDesde) {
+    this.ordreDesde = ordreDesde;
+  }
+
+
+  private java.lang.Integer ordreFins;
+
+  public java.lang.Integer getOrdreFins() {
+    return this.ordreFins;
+  }
+
+  public void setOrdreFins(java.lang.Integer ordreFins) {
+    this.ordreFins = ordreFins;
+  }
+
+
   public EnllazFilterForm() {
   }
   
@@ -194,6 +216,8 @@ public class EnllazFilterForm extends CarpetaBaseFilterForm implements EnllazFie
     this.entitatIDFins = __toClone.entitatIDFins;
     this.seccioIDDesde = __toClone.seccioIDDesde;
     this.seccioIDFins = __toClone.seccioIDFins;
+    this.ordreDesde = __toClone.ordreDesde;
+    this.ordreFins = __toClone.ordreFins;
     this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
     this.mapOfTraduccioForNomID = __toClone.mapOfTraduccioForNomID;
     this.mapOfTraduccioForDescripcioID = __toClone.mapOfTraduccioForDescripcioID;

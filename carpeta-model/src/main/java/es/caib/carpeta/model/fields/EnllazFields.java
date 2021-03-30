@@ -20,6 +20,8 @@ public interface EnllazFields extends java.io.Serializable {
 	 public static final LongField ENTITATID = new LongField(_TABLE_MODEL, "entitatID", "entitatid");
 	 public static final LongField LOGOID = new LongField(_TABLE_MODEL, "logoID", "logoid");
 	 public static final LongField SECCIOID = new LongField(_TABLE_MODEL, "seccioID", "seccioid");
+	 public static final BooleanField ACTIU = new BooleanField(_TABLE_MODEL, "actiu", "actiu");
+	 public static final IntegerField ORDRE = new IntegerField(_TABLE_MODEL, "ordre", "ordre");
 
 
   public static final Field<?>[] ALL_ENLLAZ_FIELDS = {
@@ -30,7 +32,9 @@ public interface EnllazFields extends java.io.Serializable {
     URLID,
     ENTITATID,
     LOGOID,
-    SECCIOID
+    SECCIOID,
+    ACTIU,
+    ORDRE
   };
 
 

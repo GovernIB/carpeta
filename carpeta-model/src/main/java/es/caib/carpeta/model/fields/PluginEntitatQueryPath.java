@@ -31,6 +31,10 @@ public class PluginEntitatQueryPath extends org.fundaciobit.genapp.common.query.
     return new LongField(getQueryPath(), PluginEntitatFields.SECCIOID);
   }
 
+  public IntegerField ORDRE() {
+    return new IntegerField(getQueryPath(), PluginEntitatFields.ORDRE);
+  }
+
 
 
   @Override

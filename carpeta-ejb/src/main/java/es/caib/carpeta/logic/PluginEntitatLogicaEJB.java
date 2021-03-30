@@ -10,6 +10,7 @@ import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.Where;
 
 import es.caib.carpeta.ejb.PluginEntitatEJB;
@@ -30,7 +31,7 @@ public class PluginEntitatLogicaEJB extends PluginEntitatEJB implements PluginEn
 	@PermitAll
 	public List<PluginEntitatJPA> findAllByEntitatId(@NotNull long entitatId) throws I18NException {
 
-		List<PluginEntitat> list = select(PluginEntitatFields.ENTITATID.equal(entitatId));
+		List<PluginEntitat> list = select(PluginEntitatFields.ENTITATID.equal(entitatId), new OrderBy(PluginEntitatFields.ORDRE));
 
 		List<PluginEntitatJPA> list2 = new ArrayList<PluginEntitatJPA>(list.size());
 		for (PluginEntitat pluginEntitat : list) {
@@ -70,7 +71,7 @@ public class PluginEntitatLogicaEJB extends PluginEntitatEJB implements PluginEn
 	                    peqp.ENTITAT().CODI().equal(codiEntitat),
 	                    PluginEntitatFields.ACTIU.equal(true),
 	                    w
-	                    ));
+	                    ), new OrderBy(PluginEntitatFields.ORDRE));
 	    
 	    return pluginIDs;
 
@@ -82,7 +83,7 @@ public class PluginEntitatLogicaEJB extends PluginEntitatEJB implements PluginEn
 		
 		TypedQuery<Long> query = getEntityManager().createQuery(
 				"select a.pluginID from PluginEntitatJPA a "
-						+ "where a.entitat.codi = :codiEntitat",Long.class);
+						+ "where a.entitat.codi = :codiEntitat order by a." + PluginEntitatFields.ORDRE.javaName,Long.class);
 		query.setParameter("codiEntitat", codiEntitat);
 
 		return query.getResultList();

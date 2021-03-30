@@ -58,8 +58,8 @@ public class SeccioJPAManager
 		return list.toArray(new Seccio[list.size()]);
 	};
 
-	public synchronized Seccio create( long _nomID_, long _descripcioID_, boolean _activa_, long _iconaID_, java.lang.Long _seccioPareID_, long _entitatID_) throws I18NException {
-		SeccioJPA __bean =  new SeccioJPA(_nomID_,_descripcioID_,_activa_,_iconaID_,_seccioPareID_,_entitatID_);
+	public synchronized Seccio create( long _nomID_, long _descripcioID_, boolean _activa_, long _iconaID_, java.lang.Long _seccioPareID_, long _entitatID_, int _ordre_) throws I18NException {
+		SeccioJPA __bean =  new SeccioJPA(_nomID_,_descripcioID_,_activa_,_iconaID_,_seccioPareID_,_entitatID_,_ordre_);
 		return create(__bean);
 	}
 

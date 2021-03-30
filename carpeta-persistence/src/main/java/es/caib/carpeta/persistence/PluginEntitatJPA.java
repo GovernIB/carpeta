@@ -49,6 +49,9 @@ private static final long serialVersionUID = -695907131L;
 	@Column(name="seccioid",length = 19)
 	java.lang.Long seccioID;
 
+	@Column(name="ordre",nullable = false,length = 10)
+	int ordre;
+
 
 
   /** Constructor Buit */
@@ -56,19 +59,21 @@ private static final long serialVersionUID = -695907131L;
   }
 
   /** Constructor amb tots els camps  */
-  public PluginEntitatJPA(long pluginEntitatID , long pluginID , long entitatID , boolean actiu , java.lang.Long seccioID) {
+  public PluginEntitatJPA(long pluginEntitatID , long pluginID , long entitatID , boolean actiu , java.lang.Long seccioID , int ordre) {
     this.pluginEntitatID=pluginEntitatID;
     this.pluginID=pluginID;
     this.entitatID=entitatID;
     this.actiu=actiu;
     this.seccioID=seccioID;
+    this.ordre=ordre;
 }
   /** Constructor sense valors autoincrementals */
-  public PluginEntitatJPA(long pluginID , long entitatID , boolean actiu , java.lang.Long seccioID) {
+  public PluginEntitatJPA(long pluginID , long entitatID , boolean actiu , java.lang.Long seccioID , int ordre) {
     this.pluginID=pluginID;
     this.entitatID=entitatID;
     this.actiu=actiu;
     this.seccioID=seccioID;
+    this.ordre=ordre;
 }
   public PluginEntitatJPA(PluginEntitat __bean) {
     this.setPluginEntitatID(__bean.getPluginEntitatID());
@@ -76,6 +81,7 @@ private static final long serialVersionUID = -695907131L;
     this.setEntitatID(__bean.getEntitatID());
     this.setActiu(__bean.isActiu());
     this.setSeccioID(__bean.getSeccioID());
+    this.setOrdre(__bean.getOrdre());
 	}
 
 	public long getPluginEntitatID() {
@@ -111,6 +117,13 @@ private static final long serialVersionUID = -695907131L;
 	};
 	public void setSeccioID(java.lang.Long _seccioID_) {
 		this.seccioID = _seccioID_;
+	};
+
+	public int getOrdre() {
+		return(ordre);
+	};
+	public void setOrdre(int _ordre_) {
+		this.ordre = _ordre_;
 	};
 
 
@@ -183,6 +196,7 @@ private static final long serialVersionUID = -695907131L;
     __tmp.setEntitatID(__bean.getEntitatID());
     __tmp.setActiu(__bean.isActiu());
     __tmp.setSeccioID(__bean.getSeccioID());
+    __tmp.setOrdre(__bean.getOrdre());
 		return __tmp;
 	}
 

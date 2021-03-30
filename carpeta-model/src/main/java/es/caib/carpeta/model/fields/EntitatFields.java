@@ -14,6 +14,7 @@ public interface EntitatFields extends java.io.Serializable {
 
 	 public static final LongField ENTITATID = new LongField(_TABLE_MODEL, "entitatID", "entitatid");  // PK
 	 public static final LongField NOMID = new LongField(_TABLE_MODEL, "nomID", "nomid");
+	 public static final LongField DESCRIPCIOID = new LongField(_TABLE_MODEL, "descripcioID", "descripcioid");
 	 public static final StringField CODI = new StringField(_TABLE_MODEL, "codi", "codi");
 	 public static final StringField CODIDIR3 = new StringField(_TABLE_MODEL, "codiDir3", "codidir3");
 	 public static final BooleanField ACTIVA = new BooleanField(_TABLE_MODEL, "activa", "activa");
@@ -41,6 +42,7 @@ public interface EntitatFields extends java.io.Serializable {
   public static final Field<?>[] ALL_ENTITAT_FIELDS = {
     ENTITATID,
     NOMID,
+    DESCRIPCIOID,
     CODI,
     CODIDIR3,
     ACTIVA,

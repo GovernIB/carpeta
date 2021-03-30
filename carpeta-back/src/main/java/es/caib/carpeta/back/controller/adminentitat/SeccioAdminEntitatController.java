@@ -58,7 +58,6 @@ public class SeccioAdminEntitatController extends SeccioController {
             throws I18NException {
         SeccioForm seccioForm = super.getSeccioForm(_jpa, __isView, request, mav);
 
-        seccioForm.addHiddenField(ACTIVA);
         seccioForm.addHiddenField(ENTITATID);
         seccioForm.addHiddenField(SECCIOPAREID);
 
@@ -76,7 +75,6 @@ public class SeccioAdminEntitatController extends SeccioController {
             throws I18NException {
         SeccioFilterForm seccioFilterForm = super.getSeccioFilterForm(pagina, mav, request);
         if (seccioFilterForm.isNou()) {
-            seccioFilterForm.addHiddenField(ACTIVA);
             seccioFilterForm.addHiddenField(ENTITATID);
             seccioFilterForm.addHiddenField(ICONAID);
             seccioFilterForm.addHiddenField(SECCIOPAREID);

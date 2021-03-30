@@ -17,6 +17,9 @@ public interface PluginEntitat extends org.fundaciobit.genapp.common.IGenAppEnti
 	public java.lang.Long getSeccioID();
 	public void setSeccioID(java.lang.Long _seccioID_);
 
+	public int getOrdre();
+	public void setOrdre(int _ordre_);
+
 
 
   // ======================================

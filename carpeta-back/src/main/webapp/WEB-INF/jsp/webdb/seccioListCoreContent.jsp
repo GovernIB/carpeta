@@ -78,6 +78,11 @@
           </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,SeccioFields.ORDRE)}">
+          <td>
+          ${seccio.ordre}
+          </td>
+        </c:if>
 
 
         <!--  /** Additional Fields */  -->

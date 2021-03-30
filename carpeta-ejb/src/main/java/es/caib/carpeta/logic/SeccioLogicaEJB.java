@@ -2,6 +2,7 @@ package es.caib.carpeta.logic;
 
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.Where;
 
 import javax.annotation.security.PermitAll;
@@ -9,6 +10,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import es.caib.carpeta.ejb.SeccioEJB;
 import es.caib.carpeta.model.entity.Seccio;
+import es.caib.carpeta.model.fields.SeccioFields;
 import es.caib.carpeta.persistence.SeccioJPA;
 
 import java.util.HashSet;
@@ -61,9 +63,8 @@ public class SeccioLogicaEJB extends SeccioEJB implements SeccioLogicaService {
            w = SECCIOPAREID.isNull(); 
         } else {
            w = SECCIOPAREID.equal(seccioPareID);
-        }
-        
-        return select(Where.AND(ENTITATID.equal(entitatID), w, ACTIVA.equal(true)));
+        }        
+        return select(Where.AND(ENTITATID.equal(entitatID), w, ACTIVA.equal(true)), new OrderBy(SeccioFields.ORDRE));
     }
     
     @Override

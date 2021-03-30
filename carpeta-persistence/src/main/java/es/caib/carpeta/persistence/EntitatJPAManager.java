@@ -58,8 +58,8 @@ public class EntitatJPAManager
 		return list.toArray(new Entitat[list.size()]);
 	};
 
-	public synchronized Entitat create( long _nomID_, java.lang.String _codi_, java.lang.String _codiDir3_, boolean _activa_, java.lang.String _colorMenu_, long _logoCapBackID_, long _logoPeuBackID_, long _logoLateralFrontID_, java.lang.String _versio_, long _iconID_, java.lang.String _webEntitat_, java.lang.String _entitatDescFront_, java.lang.String _suportWeb_, java.lang.String _suportTelefon_, java.lang.String _suportEmail_, java.lang.String _suportFAQ_, java.lang.String _suportqssi_, java.lang.String _suportautenticacio_, java.lang.Long _pluginLoginID_, java.lang.Long _loginTextID_, java.lang.Long _fitxerCssID_, java.lang.String _context_, java.lang.String _commit_) throws I18NException {
-		EntitatJPA __bean =  new EntitatJPA(_nomID_,_codi_,_codiDir3_,_activa_,_colorMenu_,_logoCapBackID_,_logoPeuBackID_,_logoLateralFrontID_,_versio_,_iconID_,_webEntitat_,_entitatDescFront_,_suportWeb_,_suportTelefon_,_suportEmail_,_suportFAQ_,_suportqssi_,_suportautenticacio_,_pluginLoginID_,_loginTextID_,_fitxerCssID_,_context_,_commit_);
+	public synchronized Entitat create( long _nomID_, java.lang.Long _descripcioID_, java.lang.String _codi_, java.lang.String _codiDir3_, boolean _activa_, java.lang.String _colorMenu_, long _logoCapBackID_, long _logoPeuBackID_, long _logoLateralFrontID_, java.lang.String _versio_, long _iconID_, java.lang.String _webEntitat_, java.lang.String _entitatDescFront_, java.lang.String _suportWeb_, java.lang.String _suportTelefon_, java.lang.String _suportEmail_, java.lang.String _suportFAQ_, java.lang.String _suportqssi_, java.lang.String _suportautenticacio_, java.lang.Long _pluginLoginID_, java.lang.Long _loginTextID_, java.lang.Long _fitxerCssID_, java.lang.String _context_, java.lang.String _commit_) throws I18NException {
+		EntitatJPA __bean =  new EntitatJPA(_nomID_,_descripcioID_,_codi_,_codiDir3_,_activa_,_colorMenu_,_logoCapBackID_,_logoPeuBackID_,_logoLateralFrontID_,_versio_,_iconID_,_webEntitat_,_entitatDescFront_,_suportWeb_,_suportTelefon_,_suportEmail_,_suportFAQ_,_suportqssi_,_suportautenticacio_,_pluginLoginID_,_loginTextID_,_fitxerCssID_,_context_,_commit_);
 		return create(__bean);
 	}
 
@@ -117,6 +117,18 @@ public class EntitatJPAManager
               getEntityManager().persist(_trad);
             } 
             transientInstance.setNomID(_trad.getTraduccioID());
+          }
+        }
+      }
+      if (transientInstance.getDescripcioID() == null) {
+        if (transientInstance instanceof EntitatJPA) {
+          EntitatJPA _jpa = (EntitatJPA)transientInstance;
+          TraduccioJPA _trad = _jpa.getDescripcio();
+           if (_trad != null) {
+            if (_trad.getTraduccioID() == 0) {
+              getEntityManager().persist(_trad);
+            } 
+            transientInstance.setDescripcioID(_trad.getTraduccioID());
           }
         }
       }

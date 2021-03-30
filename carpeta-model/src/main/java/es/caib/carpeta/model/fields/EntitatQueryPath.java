@@ -19,6 +19,10 @@ public class EntitatQueryPath extends org.fundaciobit.genapp.common.query.QueryP
     return new LongField(getQueryPath(), EntitatFields.NOMID);
   }
 
+  public LongField DESCRIPCIOID() {
+    return new LongField(getQueryPath(), EntitatFields.DESCRIPCIOID);
+  }
+
   public StringField CODI() {
     return new StringField(getQueryPath(), EntitatFields.CODI);
   }
@@ -232,6 +236,14 @@ public class EntitatQueryPath extends org.fundaciobit.genapp.common.query.QueryP
     return new TraduccioQueryPath(new QueryPath() {
       public String getQueryPath() {
           return EntitatQueryPath.this.getQueryPath() + "nom" + ".";
+      }
+    });
+  }
+
+  public TraduccioQueryPath DESCRIPCIO() {
+    return new TraduccioQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return EntitatQueryPath.this.getQueryPath() + "descripcio" + ".";
       }
     });
   }

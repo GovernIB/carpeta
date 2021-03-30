@@ -58,6 +58,11 @@
           </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginEntitatFields.ORDRE)}">
+          <td>
+          ${pluginEntitat.ordre}
+          </td>
+        </c:if>
 
 
         <!--  /** Additional Fields */  -->

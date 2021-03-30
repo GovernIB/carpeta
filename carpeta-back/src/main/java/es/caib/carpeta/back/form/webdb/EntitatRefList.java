@@ -39,6 +39,7 @@ public class EntitatRefList extends RefListBase
   public EntitatRefList() {
     setSelects(new Select<?>[] { CODI.select, CODIDIR3.select });
     addCampTraduible(NOMID.select);
+    addCampTraduible(DESCRIPCIOID.select);
     addCampTraduible(LOGINTEXTID.select);
   }
   public List<StringKeyValue> getReferenceList(Field<?> keyField, Where where, OrderBy ... orderBy) throws I18NException {

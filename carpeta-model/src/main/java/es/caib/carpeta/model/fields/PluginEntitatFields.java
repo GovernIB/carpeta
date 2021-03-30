@@ -17,6 +17,7 @@ public interface PluginEntitatFields extends java.io.Serializable {
 	 public static final LongField ENTITATID = new LongField(_TABLE_MODEL, "entitatID", "entitatid");
 	 public static final BooleanField ACTIU = new BooleanField(_TABLE_MODEL, "actiu", "actiu");
 	 public static final LongField SECCIOID = new LongField(_TABLE_MODEL, "seccioID", "seccioid");
+	 public static final IntegerField ORDRE = new IntegerField(_TABLE_MODEL, "ordre", "ordre");
 
 
   public static final Field<?>[] ALL_PLUGINENTITAT_FIELDS = {
@@ -24,7 +25,8 @@ public interface PluginEntitatFields extends java.io.Serializable {
     PLUGINID,
     ENTITATID,
     ACTIU,
-    SECCIOID
+    SECCIOID,
+    ORDRE
   };
 
 

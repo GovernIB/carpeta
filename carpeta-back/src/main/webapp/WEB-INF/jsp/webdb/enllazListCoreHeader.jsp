@@ -36,6 +36,12 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EnllazFields.SECCIOID)}">
         <th>${car:getSortIcons(__theFilterForm,EnllazFields.SECCIOID)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EnllazFields.ACTIU)}">
+        <th>${car:getSortIcons(__theFilterForm,EnllazFields.ACTIU)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EnllazFields.ORDRE)}">
+        <th>${car:getSortIcons(__theFilterForm,EnllazFields.ORDRE)}</th>
+        </c:if>
 
 
         <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">
