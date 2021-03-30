@@ -9,8 +9,10 @@ import javax.validation.constraints.NotNull;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.*;
 
+import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.StringUtils;
 import es.caib.carpeta.ejb.LogCarpetaEJB;
 import es.caib.carpeta.persistence.LogCarpetaJPA;
@@ -87,6 +89,25 @@ public class LogCarpetaLogicaEJB extends LogCarpetaEJB implements LogCarpetaLogi
         }
 
 
+    }
+    
+    @Override
+    public void esborrarLog(long dies) throws I18NException {
+    	
+    	LocalDateTime avui = LocalDateTime.now(); 
+    	avui.toLocalDate().minusDays(dies);
+    
+    	Where w = LogCarpetaFields.DATAINICI.lessThanOrEqual(Timestamp.valueOf(avui));
+    	
+    	if (Configuracio.isDesenvolupament()){
+    		List<LogCarpeta> llista = select(w);
+    		for(LogCarpeta l : llista) {
+    			log.info("Eliminam registre " + l.getLogID() + " de la entitat " + l.getEntitatCodi() + " amb data " + l.getDataInici());    		
+    		}
+    	}
+    	
+    	delete(w);
+    	
     }
 
 
