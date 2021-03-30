@@ -155,11 +155,18 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
         List<Long> pluginsEntitat = pluginEntitatLogicaEjb.getPluginsEntitat(codiEntitat, true, seccioID);
 
         List<Plugin> plugins = pluginCarpetaFrontEjb.getAllPlugins(PluginFields.PLUGINID.in(pluginsEntitat));
+        Map<Long, Plugin> mapPlugins = new HashMap<Long, Plugin>();
+        for (Plugin plugin : plugins) {
+            mapPlugins.put(plugin.getPluginID(), plugin);
+        }
+        
 
         List<PluginInfo> pluginsInfo = new ArrayList<PluginInfo>(plugins.size());
 
-        for (Plugin plugin : plugins) {
-            if (plugin.isActiu()) {
+        for (Long pluginID : pluginsEntitat) {
+            Plugin plugin = mapPlugins.get(pluginID);
+            
+            if (plugin != null) {
                 PluginJPA p = (PluginJPA) plugin;
 
                 ICarpetaFrontPlugin cfp = pluginCarpetaFrontEjb.getInstanceByPluginID(p.getPluginID());
@@ -260,8 +267,7 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
         
         List<Enllaz> enllazos = enllazEjb.select(
                 Where.AND(w1, w2 , w3, w4),
-                // XYZ ZZZ ORDER
-                new OrderBy(EnllazFields.ENLLAZID));
+                new OrderBy(EnllazFields.ORDRE));
         return enllazos;
     }
 

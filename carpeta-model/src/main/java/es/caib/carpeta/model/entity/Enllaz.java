@@ -29,6 +29,9 @@ public interface Enllaz extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public boolean isActiu();
 	public void setActiu(boolean _actiu_);
 
+	public int getOrdre();
+	public void setOrdre(int _ordre_);
+
   // Fitxer
   public <F extends Fitxer> F getLogo();
 

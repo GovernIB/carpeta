@@ -58,8 +58,8 @@ public class PluginEntitatJPAManager
 		return list.toArray(new PluginEntitat[list.size()]);
 	};
 
-	public synchronized PluginEntitat create( long _pluginID_, long _entitatID_, boolean _actiu_, java.lang.Long _seccioID_) throws I18NException {
-		PluginEntitatJPA __bean =  new PluginEntitatJPA(_pluginID_,_entitatID_,_actiu_,_seccioID_);
+	public synchronized PluginEntitat create( long _pluginID_, long _entitatID_, boolean _actiu_, java.lang.Long _seccioID_, int _ordre_) throws I18NException {
+		PluginEntitatJPA __bean =  new PluginEntitatJPA(_pluginID_,_entitatID_,_actiu_,_seccioID_,_ordre_);
 		return create(__bean);
 	}
 

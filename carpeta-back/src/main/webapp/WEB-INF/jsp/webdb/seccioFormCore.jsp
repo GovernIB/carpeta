@@ -235,3 +235,21 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,SeccioFields.ORDRE)}">
+        <tr id="seccio_ordre_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[SeccioFields.ORDRE])?'seccio.ordre':__theForm.labels[SeccioFields.ORDRE]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[SeccioFields.ORDRE]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[SeccioFields.ORDRE]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="seccio.ordre" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,SeccioFields.ORDRE)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,SeccioFields.ORDRE)? ' uneditable-input' : ''}"  style=""  path="seccio.ordre"   />
+
+           </td>
+        </tr>
+        </c:if>
+        

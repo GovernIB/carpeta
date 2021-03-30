@@ -109,6 +109,28 @@ public class PluginEntitatFilterForm extends CarpetaBaseFilterForm implements Pl
   }
 
 
+  private java.lang.Integer ordreDesde;
+
+  public java.lang.Integer getOrdreDesde() {
+    return this.ordreDesde;
+  }
+
+  public void setOrdreDesde(java.lang.Integer ordreDesde) {
+    this.ordreDesde = ordreDesde;
+  }
+
+
+  private java.lang.Integer ordreFins;
+
+  public java.lang.Integer getOrdreFins() {
+    return this.ordreFins;
+  }
+
+  public void setOrdreFins(java.lang.Integer ordreFins) {
+    this.ordreFins = ordreFins;
+  }
+
+
   public PluginEntitatFilterForm() {
   }
   
@@ -122,6 +144,8 @@ public class PluginEntitatFilterForm extends CarpetaBaseFilterForm implements Pl
     this.entitatIDFins = __toClone.entitatIDFins;
     this.seccioIDDesde = __toClone.seccioIDDesde;
     this.seccioIDFins = __toClone.seccioIDFins;
+    this.ordreDesde = __toClone.ordreDesde;
+    this.ordreFins = __toClone.ordreFins;
     this.mapOfPluginForPluginID = __toClone.mapOfPluginForPluginID;
     this.mapOfEntitatForEntitatID = __toClone.mapOfEntitatForEntitatID;
     this.mapOfSeccioForSeccioID = __toClone.mapOfSeccioForSeccioID;

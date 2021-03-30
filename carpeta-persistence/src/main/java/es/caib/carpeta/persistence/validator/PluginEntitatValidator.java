@@ -48,6 +48,10 @@ public class PluginEntitatValidator<I extends PluginEntitat>
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ACTIU)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,ORDRE, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ORDRE)));
+
     // Check size
     if (__isNou__) { // Creació
       // ================ CREATION

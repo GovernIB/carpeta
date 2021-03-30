@@ -142,6 +142,28 @@ public class SeccioFilterForm extends CarpetaBaseFilterForm implements SeccioFie
   }
 
 
+  private java.lang.Integer ordreDesde;
+
+  public java.lang.Integer getOrdreDesde() {
+    return this.ordreDesde;
+  }
+
+  public void setOrdreDesde(java.lang.Integer ordreDesde) {
+    this.ordreDesde = ordreDesde;
+  }
+
+
+  private java.lang.Integer ordreFins;
+
+  public java.lang.Integer getOrdreFins() {
+    return this.ordreFins;
+  }
+
+  public void setOrdreFins(java.lang.Integer ordreFins) {
+    this.ordreFins = ordreFins;
+  }
+
+
   public SeccioFilterForm() {
   }
   
@@ -158,6 +180,8 @@ public class SeccioFilterForm extends CarpetaBaseFilterForm implements SeccioFie
     this.seccioPareIDFins = __toClone.seccioPareIDFins;
     this.entitatIDDesde = __toClone.entitatIDDesde;
     this.entitatIDFins = __toClone.entitatIDFins;
+    this.ordreDesde = __toClone.ordreDesde;
+    this.ordreFins = __toClone.ordreFins;
     this.mapOfTraduccioForNomID = __toClone.mapOfTraduccioForNomID;
     this.mapOfTraduccioForDescripcioID = __toClone.mapOfTraduccioForDescripcioID;
     this.mapOfValuesForSeccioPareID = __toClone.mapOfValuesForSeccioPareID;

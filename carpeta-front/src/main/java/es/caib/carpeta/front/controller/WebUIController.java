@@ -549,6 +549,7 @@ public class WebUIController extends PluginFrontController {
 
     protected List<EnllazInfo> getEnllazos(HttpServletRequest request, final int enllazType, Long seccioID, String lang,
             String codiEntitat) throws I18NException {
+
         List<Enllaz> enllazos = utilsEjb.getEnllazosByType(codiEntitat, lang, enllazType, seccioID);
 
         List<EnllazInfo> enllazosInfo = new ArrayList<WebUIController.EnllazInfo>();

@@ -65,8 +65,11 @@ public class EnllazAdminEntitatController extends EnllazController {
         EnllazFilterForm enllazFilterForm = super.getEnllazFilterForm(pagina, mav, request);
 
         if (enllazFilterForm.isNou()) {
+            enllazFilterForm.addHiddenField(ENLLAZID);
             enllazFilterForm.addHiddenField(ENTITATID);
+            enllazFilterForm.addHiddenField(EnllazFields.LOGOID);
             enllazFilterForm.addHiddenField(DESCRIPCIOID);
+            enllazFilterForm.addHiddenField(EnllazFields.URLID);
         }
         
         return enllazFilterForm;

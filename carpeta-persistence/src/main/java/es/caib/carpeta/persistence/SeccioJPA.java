@@ -61,6 +61,9 @@ private static final long serialVersionUID = 838506947L;
 	@Column(name="entitatid",nullable = false,length = 19)
 	long entitatID;
 
+	@Column(name="ordre",nullable = false,length = 10)
+	int ordre;
+
 
 
   /** Constructor Buit */
@@ -68,7 +71,7 @@ private static final long serialVersionUID = 838506947L;
   }
 
   /** Constructor amb tots els camps  */
-  public SeccioJPA(long seccioID , long nomID , long descripcioID , java.lang.String context , boolean activa , long iconaID , java.lang.Long seccioPareID , long entitatID) {
+  public SeccioJPA(long seccioID , long nomID , long descripcioID , java.lang.String context , boolean activa , long iconaID , java.lang.Long seccioPareID , long entitatID , int ordre) {
     this.seccioID=seccioID;
     this.nomID=nomID;
     this.descripcioID=descripcioID;
@@ -77,18 +80,20 @@ private static final long serialVersionUID = 838506947L;
     this.iconaID=iconaID;
     this.seccioPareID=seccioPareID;
     this.entitatID=entitatID;
+    this.ordre=ordre;
 }
   /** Constructor sense valors autoincrementals */
-  public SeccioJPA(long nomID , long descripcioID , boolean activa , long iconaID , java.lang.Long seccioPareID , long entitatID) {
+  public SeccioJPA(long nomID , long descripcioID , boolean activa , long iconaID , java.lang.Long seccioPareID , long entitatID , int ordre) {
     this.nomID=nomID;
     this.descripcioID=descripcioID;
     this.activa=activa;
     this.iconaID=iconaID;
     this.seccioPareID=seccioPareID;
     this.entitatID=entitatID;
+    this.ordre=ordre;
 }
   /** Constructor dels valors Not Null */
-  public SeccioJPA(long seccioID , long nomID , long descripcioID , java.lang.String context , boolean activa , long iconaID , long entitatID) {
+  public SeccioJPA(long seccioID , long nomID , long descripcioID , java.lang.String context , boolean activa , long iconaID , long entitatID , int ordre) {
     this.seccioID=seccioID;
     this.nomID=nomID;
     this.descripcioID=descripcioID;
@@ -96,6 +101,7 @@ private static final long serialVersionUID = 838506947L;
     this.activa=activa;
     this.iconaID=iconaID;
     this.entitatID=entitatID;
+    this.ordre=ordre;
 }
   public SeccioJPA(Seccio __bean) {
     this.setSeccioID(__bean.getSeccioID());
@@ -106,6 +112,7 @@ private static final long serialVersionUID = 838506947L;
     this.setIconaID(__bean.getIconaID());
     this.setSeccioPareID(__bean.getSeccioPareID());
     this.setEntitatID(__bean.getEntitatID());
+    this.setOrdre(__bean.getOrdre());
     // Fitxer
     this.setIcona(FitxerJPA.toJPA(__bean.getIcona()));
 	}
@@ -164,6 +171,13 @@ private static final long serialVersionUID = 838506947L;
 	};
 	public void setEntitatID(long _entitatID_) {
 		this.entitatID = _entitatID_;
+	};
+
+	public int getOrdre() {
+		return(ordre);
+	};
+	public void setOrdre(int _ordre_) {
+		this.ordre = _ordre_;
 	};
 
 
@@ -300,6 +314,7 @@ private static final long serialVersionUID = 838506947L;
     __tmp.setIconaID(__bean.getIconaID());
     __tmp.setSeccioPareID(__bean.getSeccioPareID());
     __tmp.setEntitatID(__bean.getEntitatID());
+    __tmp.setOrdre(__bean.getOrdre());
     // Fitxer
     __tmp.setIcona(FitxerJPA.toJPA(__bean.getIcona()));
 		return __tmp;

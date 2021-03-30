@@ -126,3 +126,21 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,PluginEntitatFields.ORDRE)}">
+        <tr id="pluginEntitat_ordre_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[PluginEntitatFields.ORDRE])?'pluginEntitat.ordre':__theForm.labels[PluginEntitatFields.ORDRE]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[PluginEntitatFields.ORDRE]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[PluginEntitatFields.ORDRE]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="pluginEntitat.ordre" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ORDRE)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ORDRE)? ' uneditable-input' : ''}"  style=""  path="pluginEntitat.ordre"   />
+
+           </td>
+        </tr>
+        </c:if>
+        

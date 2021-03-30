@@ -50,6 +50,10 @@ public class SeccioValidator<I extends Seccio>
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ENTITATID)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,ORDRE, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ORDRE)));
+
     // Check size
     if (__vr.getFieldErrorCount(CONTEXT) == 0) {
       java.lang.String __context = __target__.getContext();

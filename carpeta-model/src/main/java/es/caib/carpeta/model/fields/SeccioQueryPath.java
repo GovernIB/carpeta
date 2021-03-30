@@ -43,6 +43,10 @@ public class SeccioQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new LongField(getQueryPath(), SeccioFields.ENTITATID);
   }
 
+  public IntegerField ORDRE() {
+    return new IntegerField(getQueryPath(), SeccioFields.ORDRE);
+  }
+
 
 
   @Override

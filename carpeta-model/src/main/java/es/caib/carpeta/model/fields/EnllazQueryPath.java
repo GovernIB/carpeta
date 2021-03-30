@@ -47,6 +47,10 @@ public class EnllazQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new BooleanField(getQueryPath(), EnllazFields.ACTIU);
   }
 
+  public IntegerField ORDRE() {
+    return new IntegerField(getQueryPath(), EnllazFields.ORDRE);
+  }
+
 
 
   @Override
