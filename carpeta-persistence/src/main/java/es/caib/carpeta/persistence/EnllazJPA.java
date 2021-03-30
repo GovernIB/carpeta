@@ -59,6 +59,9 @@ private static final long serialVersionUID = -1473310087L;
 	@Column(name="seccioid",length = 19)
 	java.lang.Long seccioID;
 
+	@Column(name="actiu",nullable = false,length = 1)
+	boolean actiu;
+
 
 
   /** Constructor Buit */
@@ -66,7 +69,7 @@ private static final long serialVersionUID = -1473310087L;
   }
 
   /** Constructor amb tots els camps  */
-  public EnllazJPA(long enllazID , int tipus , long nomID , java.lang.Long descripcioID , long urlID , long entitatID , long logoID , java.lang.Long seccioID) {
+  public EnllazJPA(long enllazID , int tipus , long nomID , java.lang.Long descripcioID , long urlID , long entitatID , long logoID , java.lang.Long seccioID , boolean actiu) {
     this.enllazID=enllazID;
     this.tipus=tipus;
     this.nomID=nomID;
@@ -75,9 +78,10 @@ private static final long serialVersionUID = -1473310087L;
     this.entitatID=entitatID;
     this.logoID=logoID;
     this.seccioID=seccioID;
+    this.actiu=actiu;
 }
   /** Constructor sense valors autoincrementals */
-  public EnllazJPA(int tipus , long nomID , java.lang.Long descripcioID , long urlID , long entitatID , long logoID , java.lang.Long seccioID) {
+  public EnllazJPA(int tipus , long nomID , java.lang.Long descripcioID , long urlID , long entitatID , long logoID , java.lang.Long seccioID , boolean actiu) {
     this.tipus=tipus;
     this.nomID=nomID;
     this.descripcioID=descripcioID;
@@ -85,15 +89,17 @@ private static final long serialVersionUID = -1473310087L;
     this.entitatID=entitatID;
     this.logoID=logoID;
     this.seccioID=seccioID;
+    this.actiu=actiu;
 }
   /** Constructor dels valors Not Null */
-  public EnllazJPA(long enllazID , int tipus , long nomID , long urlID , long entitatID , long logoID) {
+  public EnllazJPA(long enllazID , int tipus , long nomID , long urlID , long entitatID , long logoID , boolean actiu) {
     this.enllazID=enllazID;
     this.tipus=tipus;
     this.nomID=nomID;
     this.urlID=urlID;
     this.entitatID=entitatID;
     this.logoID=logoID;
+    this.actiu=actiu;
 }
   public EnllazJPA(Enllaz __bean) {
     this.setEnllazID(__bean.getEnllazID());
@@ -104,6 +110,7 @@ private static final long serialVersionUID = -1473310087L;
     this.setEntitatID(__bean.getEntitatID());
     this.setLogoID(__bean.getLogoID());
     this.setSeccioID(__bean.getSeccioID());
+    this.setActiu(__bean.isActiu());
     // Fitxer
     this.setLogo(FitxerJPA.toJPA(__bean.getLogo()));
 	}
@@ -162,6 +169,13 @@ private static final long serialVersionUID = -1473310087L;
 	};
 	public void setSeccioID(java.lang.Long _seccioID_) {
 		this.seccioID = _seccioID_;
+	};
+
+	public boolean isActiu() {
+		return(actiu);
+	};
+	public void setActiu(boolean _actiu_) {
+		this.actiu = _actiu_;
 	};
 
 
@@ -312,6 +326,7 @@ private static final long serialVersionUID = -1473310087L;
     __tmp.setEntitatID(__bean.getEntitatID());
     __tmp.setLogoID(__bean.getLogoID());
     __tmp.setSeccioID(__bean.getSeccioID());
+    __tmp.setActiu(__bean.isActiu());
     // Fitxer
     __tmp.setLogo(FitxerJPA.toJPA(__bean.getLogo()));
 		return __tmp;

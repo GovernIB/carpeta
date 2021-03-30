@@ -152,7 +152,6 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         <location>/error.jsp</location>
     </error-page>
 
-
  
     <security-constraint>
         <web-resource-collection>

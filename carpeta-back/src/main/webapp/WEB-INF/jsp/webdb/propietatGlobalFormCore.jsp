@@ -33,15 +33,21 @@
             <td>
               <form:errors path="propietatGlobal.value" cssClass="errorField alert alert-danger" />
               <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.VALUE)? 'true' : 'false'}" path="propietatGlobal.value"  />
-      <div class="dropdown" style="vertical-align:top;display:inline;">
-        <button id="dropdownMenuButton_value" class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left:0px;"><span class="caret"></span></button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_value">
+      <div id="dropdownMenuButton_value" style="vertical-align:top;display:inline;position:relative;">
+        <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
+        <div id="dropdownMenuContainer_value" class="dropdown-menu">
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('propietatGlobal.value'); ta.wrap='off';" >No Wrap</a>
           <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('propietatGlobal.value'); ta.wrap='soft';">Soft Wrap</a>
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('propietatGlobal.value'); ta.wrap='hard';">Hard Wrap</a>
         </div>
       </div>
-           </td>
+      <script type="text/javascript">
+			$('#dropdownMenuButton_value').on('click', function(){
+					var valor = ($('#dropdownMenuContainer_value').css('display') != 'none') ? 'none' : 'block';
+                 $('#dropdownMenuContainer_value').css('display', valor);
+                 return false;
+				});
+      </script>           </td>
         </tr>
         </c:if>
         

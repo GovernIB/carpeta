@@ -246,15 +246,21 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
 
         EnllazQueryPath eqp = new EnllazQueryPath();
 
-        Where w;
+        final Where w1;
         if (seccioID == null) {
-            w = EnllazFields.SECCIOID.isNull();
+            w1 = EnllazFields.SECCIOID.isNull();
         } else {
-            w = EnllazFields.SECCIOID.equal(seccioID);
+            w1 = EnllazFields.SECCIOID.equal(seccioID);
         }
 
+        final Where w2 = eqp.ENTITAT().CODI().equal(codiEntitat);
+        final Where w3 = EnllazFields.TIPUS.equal(enllazType);
+        final Where w4 = EnllazFields.ACTIU.equal(true);
+        
+        
         List<Enllaz> enllazos = enllazEjb.select(
-                Where.AND(eqp.ENTITAT().CODI().equal(codiEntitat), EnllazFields.TIPUS.equal(enllazType), w),
+                Where.AND(w1, w2 , w3, w4),
+                // XYZ ZZZ ORDER
                 new OrderBy(EnllazFields.ENLLAZID));
         return enllazos;
     }

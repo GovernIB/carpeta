@@ -382,15 +382,21 @@
             <td>
               <form:errors path="entitat.entitatDescFront" cssClass="errorField alert alert-danger" />
               <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.ENTITATDESCFRONT)? 'true' : 'false'}" path="entitat.entitatDescFront"  />
-      <div class="dropdown" style="vertical-align:top;display:inline;">
-        <button id="dropdownMenuButton_entitatDescFront" class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="margin-left:0px;"><span class="caret"></span></button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton_entitatDescFront">
+      <div id="dropdownMenuButton_entitatDescFront" style="vertical-align:top;display:inline;position:relative;">
+        <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
+        <div id="dropdownMenuContainer_entitatDescFront" class="dropdown-menu">
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('entitat.entitatDescFront'); ta.wrap='off';" >No Wrap</a>
           <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('entitat.entitatDescFront'); ta.wrap='soft';">Soft Wrap</a>
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('entitat.entitatDescFront'); ta.wrap='hard';">Hard Wrap</a>
         </div>
       </div>
-           </td>
+      <script type="text/javascript">
+			$('#dropdownMenuButton_entitatDescFront').on('click', function(){
+					var valor = ($('#dropdownMenuContainer_entitatDescFront').css('display') != 'none') ? 'none' : 'block';
+                 $('#dropdownMenuContainer_entitatDescFront').css('display', valor);
+                 return false;
+				});
+      </script>           </td>
         </tr>
         </c:if>
         

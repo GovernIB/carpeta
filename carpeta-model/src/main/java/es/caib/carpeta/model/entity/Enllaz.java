@@ -26,6 +26,9 @@ public interface Enllaz extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.Long getSeccioID();
 	public void setSeccioID(java.lang.Long _seccioID_);
 
+	public boolean isActiu();
+	public void setActiu(boolean _actiu_);
+
   // Fitxer
   public <F extends Fitxer> F getLogo();
 

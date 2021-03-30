@@ -257,6 +257,9 @@ public class EnllazController
     }
 
 
+      fillValuesToGroupByItemsBoolean("genapp.checkbox", groupByItemsMap, ACTIU);
+
+
     return groupByItemsMap;
   }
 

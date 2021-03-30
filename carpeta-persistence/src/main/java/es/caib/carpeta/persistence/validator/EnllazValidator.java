@@ -52,6 +52,10 @@ public class EnllazValidator<I extends Enllaz>
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ENTITATID)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,ACTIU, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ACTIU)));
+
     // Check size
     if (__isNou__) { // Creació
       // ================ CREATION

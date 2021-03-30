@@ -62,7 +62,7 @@ public class SeccioLogicaEJB extends SeccioEJB implements SeccioLogicaService {
         } else {
            w = SECCIOPAREID.equal(seccioPareID);
         }
-        
+        // XYZ ZZZ Ordre
         return select(Where.AND(ENTITATID.equal(entitatID), w, ACTIVA.equal(true)));
     }
     
