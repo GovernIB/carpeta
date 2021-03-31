@@ -105,6 +105,11 @@
                                             <dt class="col-sm-3 pb-2">${registro_estado}</dt>
                                             <dd class="col-sm-7"><#if registro.estado?has_content >${registroEstado[registro.estado]}</#if></dd>
 
+                                            <#if registro.descripcionEstado?has_content >
+                                                <dt class="col-sm-3 pb-2">${registro_descripcion_estado}</dt>
+                                                <dd class="col-sm-7">${registro.descripcionEstado}</dd>
+                                            </#if>
+
                                             <dt class="col-sm-3 pb-2">${registro_presencial}</dt>
                                             <dd class="col-sm-7">${registro.isPresencial()?then('Sí', 'No')}</dd>
 

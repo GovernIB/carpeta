@@ -213,9 +213,9 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
         map.put("validezDocumento", VALIDEZ_DOCUMENTAL_ANEXO);
 
         String[] traduccions = { "registro.titulo.detalle", "registro.entrada", "registro.fecha", "registro.numero",
-                "registro.oficina", "registro.destinatario", "registro.tipo.doc", "registro.extracto", "registro.estado","carpeta.idioma",
-                "registro.presencial", "registro.codigoSia", "registro.justificante", "registro.interesados",
-                "registro.interesado.nombre", "registro.interesado.documento", "registro.interesado.tipo",
+                "registro.oficina", "registro.destinatario", "registro.tipo.doc", "registro.extracto", "registro.estado",
+                "registro.descripcion.estado" ,"carpeta.idioma","registro.presencial", "registro.codigoSia", "registro.justificante",
+                "registro.interesados", "registro.interesado.nombre", "registro.interesado.documento", "registro.interesado.tipo",
                 "registro.anexos", "registro.anexos.vacio", "registro.anexos.nodisponibles","registro.anexo.name", "registro.anexo.mime",
                 "registro.anexo.size", "registro.anexo.file", "registro.anexo.validezdocumento","carpeta.descargar", "justificante.generar",
                 "carpeta.catala", "carpeta.castella", "justificante.generando", "anexo.obtener", "registro.anexo.nodisponible" };
@@ -293,6 +293,7 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
                     "ar.getEntidadRegistralInicioDenominacion() => " + registro.getDenominacionOficinaOrigen());
             System.out.println("ar.getTipoDocumentacionFisicaCodigo() => " + registro.getTipoDocumetacionFisica());
             System.out.println("Anexos retornados => " + registro.getAnexos().size());
+            System.out.println("ar.descripcionEstado() => " + registro.getDescripcionEstado());
 
         }
 
