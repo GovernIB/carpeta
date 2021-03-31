@@ -224,31 +224,31 @@ class MenuDesllisant extends Component {
 
 			plugHtml = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 0).map((s,i) => (
 				<li key={i}>				
-					<Link to={Constants.PLUGINHTML_PATH + s.context} >
+					<Link to={Constants.PLUGINHTML_PATH + s.context} title={s.nom}>
 					<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span>
 					</Link>
 				</li>
 			));
 			plugHtmlInfo = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 1).map((s,i) => (
-				<li key={i}><button title={s.nom} className="botoMenu alert1menu" onClick={(event) => this.infoHtml(s.missatge,s.context)}><img
+				<li key={i}><button title={s.missatge} className="botoMenu alert1menu" onClick={(event) => this.infoHtml(s.missatge,s.context)}><img
 					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
 			plugHtmlWarning = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 2).map((s,i) => (
-				<li key={i}><button title={s.nom} className="botoMenu alert2menu" onClick={(event) => this.infoHtml(s.missatge,s.context)}><img
+				<li key={i}><button title={s.missatge} className="botoMenu alert2menu" onClick={(event) => this.infoHtml(s.missatge,s.context)}><img
 					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
-			plugHtmlError = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 3).map(s => (
-				<li key={i}><button title={s.nom} className="botoMenu alert3menu" onClick={(event) => this.error(s.missatge)}><img
+			plugHtmlError = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 3).map((s,i) => (
+				<li key={i}><button title={s.missatge} className="botoMenu alert3menu" onClick={(event) => this.error(s.missatge)}><img
 					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
 
 			plugReact = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 0).map((s,i) => (
 				<li key={i}>				    
-					<Link to={Constants.PLUGINREACT_PATH + s.context} >
+					<Link to={Constants.PLUGINREACT_PATH + s.context} title={s.nom} >
 					<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span>
 					</Link>
@@ -256,17 +256,17 @@ class MenuDesllisant extends Component {
 				</li>
 			));
 			plugReactInfo = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 1).map((s,i) => (
-				<li key={i}><button title={s.nom} className="botoMenu alert1menu" onClick={(event) => this.infoReact(s.missatge,s.context)}><img
+				<li key={i}><button title={s.missatge} className="botoMenu alert1menu" onClick={(event) => this.infoReact(s.missatge,s.context)}><img
 					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
 			plugReactWarning = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 2).map((s,i) => (
-				<li key={i}><button title={s.nom} className="botoMenu alert2menu" onClick={(event) => this.infoReact(s.missatge,s.context)}><img
+				<li key={i}><button title={s.missatge} className="botoMenu alert2menu" onClick={(event) => this.infoReact(s.missatge,s.context)}><img
 					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
 			plugReactError = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 3).map((s,i) => (
-				<li key={i}><button title={s.nom} className="botoMenu alert3menu" onClick={(event) => this.error(s.missatge)}><img
+				<li key={i}><button title={s.missatge} className="botoMenu alert3menu" onClick={(event) => this.error(s.missatge)}><img
 					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
 					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
 			));
