@@ -1,8 +1,6 @@
 package es.caib.carpeta.front.security;
 
 
-import es.caib.carpeta.ejb.PropietatGlobalService;
-import es.caib.carpeta.logic.utils.EjbManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import org.apache.commons.logging.Log;
@@ -22,12 +20,14 @@ import javax.servlet.http.HttpSession;
 import es.caib.carpeta.commons.utils.Constants;
 import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_ERROR;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_FRONT;
+import es.caib.carpeta.ejb.PropietatGlobalService;
 import es.caib.carpeta.front.config.LoginRequestCache;
 import es.caib.carpeta.front.controller.WebUIController;
 import es.caib.carpeta.front.service.SecurityService;
 import es.caib.carpeta.front.utils.SesionHttp;
 import es.caib.carpeta.logic.AuditoriaLogicaService;
 import es.caib.carpeta.logic.LogCarpetaLogicaService;
+import es.caib.carpeta.logic.utils.EjbManager;
 import java.net.MalformedURLException;
 import java.net.URL;
 
