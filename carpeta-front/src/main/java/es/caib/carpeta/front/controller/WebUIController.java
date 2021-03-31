@@ -2,24 +2,9 @@ package es.caib.carpeta.front.controller;
 
 import com.google.gson.Gson;
 
-import es.caib.carpeta.commons.utils.Configuracio;
-import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.ejb.PropietatGlobalService;
-import es.caib.carpeta.hibernate.HibernateFileUtil;
-import es.caib.carpeta.model.entity.*;
-import es.caib.carpeta.persistence.AvisJPA;
-import es.caib.carpeta.persistence.EnllazJPA;
-import es.caib.carpeta.persistence.EntitatJPA;
-import es.caib.carpeta.persistence.SeccioJPA;
-import es.caib.carpeta.logic.SeccioLogicaService;
-import es.caib.carpeta.logic.utils.EjbManager;
-import es.caib.carpeta.logic.utils.PluginInfo;
-import es.caib.carpeta.model.fields.EntitatFields;
-import es.caib.carpeta.model.fields.IdiomaFields;
-import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
-import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.OrderBy;
+
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +16,23 @@ import org.springframework.web.util.WebUtils;
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import es.caib.carpeta.commons.utils.Configuracio;
+import es.caib.carpeta.commons.utils.Constants;
+import es.caib.carpeta.hibernate.HibernateFileUtil;
+import es.caib.carpeta.logic.SeccioLogicaService;
+import es.caib.carpeta.logic.utils.PluginInfo;
+import es.caib.carpeta.model.entity.Avis;
+import es.caib.carpeta.model.entity.Enllaz;
+import es.caib.carpeta.model.entity.Entitat;
+import es.caib.carpeta.model.entity.Idioma;
+import es.caib.carpeta.model.entity.Seccio;
+import es.caib.carpeta.model.fields.IdiomaFields;
+import es.caib.carpeta.persistence.AvisJPA;
+import es.caib.carpeta.persistence.EnllazJPA;
+import es.caib.carpeta.persistence.EntitatJPA;
+import es.caib.carpeta.persistence.SeccioJPA;
+import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -370,7 +372,7 @@ public class WebUIController extends PluginFrontController {
 
     }
 
-    @RequestMapping(value = WEBUI_LOGOLATERAL_PATH, method = RequestMethod.GET)
+   @RequestMapping(value = WEBUI_LOGOLATERAL_PATH, method = RequestMethod.GET)
     public void getEntitatLogoLateral(HttpServletRequest request, HttpServletResponse response) {
 
         try {
@@ -448,13 +450,13 @@ public class WebUIController extends PluginFrontController {
     }
 
 
-    @RequestMapping(value = "/socialnetworkslinks", method = RequestMethod.GET)
+   /* @RequestMapping(value = "/socialnetworkslinks", method = RequestMethod.GET)
     public void getSocialNetworks(HttpServletRequest request, HttpServletResponse response) {
 
         final int enllazType = es.caib.carpeta.commons.utils.Constants.TIPUS_ENLLAZ_FRONT_XARXA_SOCIAL;
 
         getEnllazosJSON(request, response, enllazType);
-    }
+    }*/
 
 
     @RequestMapping(value = "/laterallinks", method = RequestMethod.GET)
@@ -482,18 +484,18 @@ public class WebUIController extends PluginFrontController {
         getEnllazosJSON(request, response, enllazType);
     }
 
-    @RequestMapping(value = "/menuslidelinks", method = RequestMethod.GET)
+   /* @RequestMapping(value = "/menuslidelinks", method = RequestMethod.GET)
     public void getMenuSlideLinks(HttpServletRequest request, HttpServletResponse response) {
 
         final int enllazType = Constants.TIPUS_ENLLAZ_FRONT_MENU_DESLLISANT;
                
 
         getEnllazosJSON(request, response, enllazType);
-    }
+    }*/
     
     
     // XYZ ZZZ
-    @RequestMapping(value = "/menupseudoplugin", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/menupseudoplugin", method = RequestMethod.GET)
     public void getMenuPseudoPlugin(HttpServletRequest request, HttpServletResponse response ) {
 
         final int enllazType = Constants.TIPUS_ENLLAZ_FRONT_PSEUDOPLUGIN;
@@ -501,16 +503,16 @@ public class WebUIController extends PluginFrontController {
         Long seccioPareID = null;
 
         getEnllazosJSON(request, response, enllazType, seccioPareID);
-    }
+    }*/
     
     
-    @RequestMapping(value = "/menupseudoplugin/{seccioPareID}", method = RequestMethod.GET)
+   /* @RequestMapping(value = "/menupseudoplugin/{seccioPareID}", method = RequestMethod.GET)
     public void getMenuPseudoPlugin(HttpServletRequest request, HttpServletResponse response, @PathVariable("seccioPareID") Long seccioPareID) {
 
         final int enllazType = Constants.TIPUS_ENLLAZ_FRONT_PSEUDOPLUGIN;
 
         getEnllazosJSON(request, response, enllazType, seccioPareID);
-    }
+    }*/
 
     
     protected void getEnllazosJSON(HttpServletRequest request, HttpServletResponse response, final int enllazType) {
@@ -679,7 +681,7 @@ public class WebUIController extends PluginFrontController {
 
         getSeccionsJSON(request, response, seccioPareID);
     }
-    
+
     
     
     
@@ -859,7 +861,7 @@ public class WebUIController extends PluginFrontController {
         }
     }
 
-    @RequestMapping(value = "/entityDefault", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/entityDefault", method = RequestMethod.GET)
     public void getEntityDefault(HttpServletRequest request, HttpServletResponse response) {
 
         try {
@@ -893,7 +895,7 @@ public class WebUIController extends PluginFrontController {
         } catch (Throwable e) {
             processException(e, response);
         }
-    }
+    }*/
 
     @RequestMapping(value = "/entitats", method = RequestMethod.GET)
     public void getEntitats(HttpServletRequest request, HttpServletResponse response) {
@@ -933,7 +935,7 @@ public class WebUIController extends PluginFrontController {
             processException(e, response);
         }
     }
-
+/*
     @RequestMapping(value = "/nomEntitat", method = RequestMethod.GET)
     public void getEntitatNom(HttpServletRequest request, HttpServletResponse response) {
 
@@ -951,7 +953,7 @@ public class WebUIController extends PluginFrontController {
         } catch (Throwable e) {
             processException(e, response);
         }
-    }
+    }*/
     
     
     @RequestMapping(value = "/infoEntitat", method = RequestMethod.GET)
