@@ -4,6 +4,7 @@ package org.fundaciobit.pluginsib.carpetafront.dadeslogin;
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
+import es.caib.carpeta.pluginsib.carpetafront.api.TitlesInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 
 
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.IOUtils;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
+import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -55,15 +57,6 @@ public class DadesLoginCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         return null;
     }
 
-    @Override
-    public String getTitle(Locale locale) {
-        return getTraduccio("title", locale);
-    }
-
-    @Override
-    public String getSubTitle(Locale locale) {
-        return getTraduccio("subtitle", locale);
-    }
 
     @Override
     public String getResourceBundleName() {
@@ -160,9 +153,14 @@ public class DadesLoginCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             Map<String, Object> map = new HashMap<String, Object>();
 
-            map.put("title", getTitle(locale));
+            Gson json = new Gson();
 
-            map.put("subtitle", getSubTitle(locale));
+            
+            TitlesInfo titles = getTitlesInfo();
+
+            map.put("titles", json.toJson(titles.getTitlesByLang()));
+
+            map.put("subtitles", json.toJson(titles.getSubtitlesByLang()));
 
             log.info("absolutePluginRequestPath ==> " + absolutePluginRequestPath);
 
@@ -171,8 +169,7 @@ public class DadesLoginCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             String pathtojs = absolutePluginRequestPath + "/" + REACT_JS_PAGE;
 
             map.put("pathtojs", pathtojs);
-            
-            
+
             map.put("usuariNom", userData.getName());
             map.put("usuariLlinatge1", userData.getSurname1());
             map.put("usuariLlinatge2", userData.getSurname2());

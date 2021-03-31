@@ -28,7 +28,14 @@
             <version>2.5</version>
             <scope>provided</scope>
         </dependency>
-
+        
+        
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+        
+        
         <dependency>
             <groupId>org.fundaciobit.pluginsib.utils</groupId>
             <artifactId>pluginsib-utils-templateengine</artifactId>

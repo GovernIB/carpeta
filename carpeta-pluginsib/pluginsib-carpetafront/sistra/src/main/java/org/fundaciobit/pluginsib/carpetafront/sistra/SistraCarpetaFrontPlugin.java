@@ -74,10 +74,9 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     @Override
     public BasicServiceInformation existsInformation(UserData administrationID) throws Exception {
-        // TODO Auto-generated method stub
         return null;
     }
-
+/*
     @Override
     public String getTitle(Locale locale) {
         return getTraduccio("title", locale);
@@ -87,7 +86,7 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     public String getSubTitle(Locale locale) {
         return getTraduccio("subtitle", locale);
     }
-
+*/
     @Override
     public String getResourceBundleName() {
         return "carpetafrontsistra";

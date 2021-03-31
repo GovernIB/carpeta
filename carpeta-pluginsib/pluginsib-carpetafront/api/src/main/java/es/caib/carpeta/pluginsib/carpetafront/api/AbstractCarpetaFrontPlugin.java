@@ -48,6 +48,74 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
     public AbstractCarpetaFrontPlugin(String propertyKeyBase) {
         super(propertyKeyBase);
     }
+    
+    
+    
+    // ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
+    // ------------------- CACHE DE TITOLS i SUBTITOLS ----------------------------
+    // ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
+
+    
+    private TitlesInfo titlesInfo = null;;
+    
+
+    @Override
+    public void setTitlesInfo(TitlesInfo titlesInfo) {
+        this.titlesInfo = titlesInfo;
+    }
+    
+    @Override
+    public TitlesInfo getTitlesInfo() {
+        return titlesInfo;
+    }
+
+    
+    @Override
+    public final String getTitle(Locale locale) {
+        
+        String tipus = "title";
+        String lang = locale.getLanguage();
+        
+        return getTitolSubtitol(tipus, lang);
+    }
+    
+    
+    @Override
+    public final String getSubTitle(Locale locale) {
+        
+        String tipus = "subtitle";
+        String lang = locale.getLanguage();
+        
+        return getTitolSubtitol(tipus, lang);
+        
+    }
+
+    protected String getTitolSubtitol(String tipus, String lang) {
+        String value = getProperty(getPropertyKeyBase() + tipus + "." + lang);
+        
+        if (value == null) {
+            if (titlesInfo != null) {
+                if ("title".equals(tipus)) {
+                    value = getTitlesInfo().getTitlesByLang().get(lang);
+                } else {
+                    value = getTitlesInfo().getSubtitlesByLang().get(lang); 
+                }
+            } 
+        }
+        
+        if (value == null) {
+            value="Algun error ha provocat que no es pogues obtenir el " 
+                + tipus + " de la informació de títols/subtitols passada a traves del mètode initTitles "
+                + " També pot definir la propietat [" + getPropertyBase() + tipus + "." + lang + "]";
+        }
+        
+        return value;
+    }
+
+   
+
 
     // ----------------------------------------------------------------------------
     // ----------------------------------------------------------------------------
@@ -55,7 +123,12 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
     // ----------------------------------------------------------------------------
     // ----------------------------------------------------------------------------
 
-    public static class InternalUserData extends UserData {
+
+
+
+
+
+    protected static class InternalUserData extends UserData {
 
         public final long startDate;
 
@@ -76,8 +149,13 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
         }
 
     }
+    
+    
+    
+    
+    
 
-    private static final Map<String, InternalUserData> userDataMap = new HashMap<String, AbstractCarpetaFrontPlugin.InternalUserData>();
+    private final Map<String, InternalUserData> userDataMap = new HashMap<String, AbstractCarpetaFrontPlugin.InternalUserData>();
 
     protected void registerUserData(UserData userData) {
         synchronized (userDataMap) {

@@ -59,6 +59,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         return null;
     }
 
+    /*
     @Override
     public String getTitle(Locale locale) {
         return getTraduccio("title", locale);
@@ -68,6 +69,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     public String getSubTitle(Locale locale) {
         return getTraduccio("subtitle", locale);
     }
+    */
 
     @Override
     public String getResourceBundleName() {

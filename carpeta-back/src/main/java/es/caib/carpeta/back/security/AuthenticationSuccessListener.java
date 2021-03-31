@@ -32,7 +32,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-
 /**
  *
  * @author anadal(u80067)
@@ -71,8 +70,8 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
     public synchronized void onApplicationEvent(InteractiveAuthenticationSuccessEvent event) {
 
         long temps = System.currentTimeMillis(); // Para calcular el tiempo de logs, estadisticas y auditorias
-        StringBuilder peticio = new StringBuilder(); //Guardarem les dades de la petició per als logs
-        String entitatCodi ="";
+        StringBuilder peticio = new StringBuilder(); // Guardarem les dades de la petició per als logs
+        String entitatCodi = "";
 
         try {
             authenticationLogicaEjb = EjbManager.getAuthenticationLogicaEJB();
@@ -87,7 +86,8 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
             // TODO traduccio
             peticio.append("Usuari: no definit").append("\n");
             peticio.append("classe: ").append(getClass().getName()).append("\n");
-            authenticationLogicaEjb.crearLog("Autenticació al back",temps,peticio,null,"NO PUC ACCEDIR A LA INFORMACIO de AUTENTICACIO",null);
+            authenticationLogicaEjb.crearLog("Autenticació al back", temps, peticio.toString(), null,
+                    "NO PUC ACCEDIR A LA INFORMACIO de AUTENTICACIO", null);
 
             throw new LoginException("NO PUC ACCEDIR A LA INFORMACIO de AUTENTICACIO");
 
@@ -96,7 +96,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
         User user = (User) au.getPrincipal();
         String username = user.getUsername();
 
-        //Montam les dades bàsiques de la petició per a la creació dels logs
+        // Montam les dades bàsiques de la petició per a la creació dels logs
         peticio = new StringBuilder();
         peticio.append("Usuari: ").append(username).append("\n");
         peticio.append("classe: ").append(getClass().getName()).append("\n");
@@ -109,42 +109,42 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
             if (!username.equals(loginInfo.getUsuariPersona().getUsername())) {
                 peticio.append("Usuari: ").append(username).append("\n");
-                entitatCodi = loginInfo.getEntitat()!=null?loginInfo.getEntitat().getCodi():null;
-                authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username,temps,peticio,null,"Amb aquest navegador ja s'ha autenticat amb un altre usuari. Tanqui el navegador completament.",entitatCodi);
+                entitatCodi = loginInfo.getEntitat() != null ? loginInfo.getEntitat().getCodi() : null;
+                authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, temps,
+                        peticio.toString(), null,
+                        "Amb aquest navegador ja s'ha autenticat amb un altre usuari. Tanqui el navegador completament.",
+                        entitatCodi);
                 throw new LoginException("Amb aquest navegador ja s'ha autenticat amb un altre usuari."
                         + " Tanqui el navegador completament.");
 
             }
 
-
         } catch (Throwable e) {
             // OK
-            // Si és llança un error significa que ja hi ha una sessió oberta 
+            // Si és llança un error significa que ja hi ha una sessió oberta
         }
 
         final boolean isDebug = log.isDebugEnabled();
 
         // Cercam si té el ROLE_ADMIN o ROLE_SUPER
-        
+
         boolean containsRoleAdEn = false;
         boolean containsRoleSuper = false;
         Collection<GrantedAuthority> seyconAuthorities;
         {
-        
-        
+
             seyconAuthorities = user.getAuthorities();
 
-    
             if (seyconAuthorities.size() == 0) {
                 log.info(" ======= NO TE CAP ROL =========== ");
-    
+
             } else {
-    
+
                 for (GrantedAuthority grantedAuthority : seyconAuthorities) {
                     String rol = grantedAuthority.getAuthority();
-    
+
                     log.info("Rol SEYCON : " + rol);
-    
+
                     if (Constants.ROLE_ADMIN.equals(rol)) {
                         containsRoleAdEn = true;
                     }
@@ -159,20 +159,19 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
         try {
             usuariPersona = authenticationLogicaEjb.findByUsername(username);
-            if(usuariPersona!=null){
-                entitatCodi = usuariPersona.getEntitat()!=null?usuariPersona.getEntitat().getCodi():null;
+            if (usuariPersona != null) {
+                entitatCodi = usuariPersona.getEntitat() != null ? usuariPersona.getEntitat().getCodi() : null;
             }
 
         } catch (I18NException e1) {
             String msg = I18NUtils.getMessage(e1);
             log.error("Error llegint si l'usuari es troba a la BBDD: " + msg, e1);
-            authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username,temps,peticio,e1,"Error llegint si l'usuari es troba a la BBDD: " + msg,entitatCodi);
+            authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, temps, peticio.toString(),
+                    e1, "Error llegint si l'usuari es troba a la BBDD: " + msg, entitatCodi);
             usuariPersona = null;
         }
-        
-        boolean necesitaConfigurar = false;
 
-       
+        boolean necesitaConfigurar = false;
 
         if (usuariPersona == null) {
             log.info(" La persona amb username  '" + username + "' no esta registrada !!!!");
@@ -182,16 +181,16 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                 try {
                     UsuariJPA persona;
                     // Obtenir informació de l'USUARI del SISTEMA de PLUGIN USER INFORMATION
-                    
+
                     {
                         persona = PluginUserInformationUtils.getUserInfoFromUserInformation(username);
                     }
-                    
-                    
-                    
 
                     if (persona == null) {
-                        authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username,temps,peticio,null,"No hem trobat informació de la Persona amb username  "+username+" dins del sistema de UserInformation",entitatCodi);
+                        authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, temps,
+                                peticio.toString(), null, "No hem trobat informació de la Persona amb username  "
+                                        + username + " dins del sistema de UserInformation",
+                                entitatCodi);
                         log.error("No hem trobat informació de la Persona amb username  '" + username
                                 + "' dins del sistema de UserInformation");
 
@@ -202,7 +201,6 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                         log.info("Contains role AdminEntitat: " + containsRoleAdEn);
                         if (containsRoleAdEn) {
 
-
                             PropietatGlobalService propietatGlobalEjb;
                             try {
                                 propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
@@ -211,14 +209,12 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                                 throw new LoginException("No puc obtenir PropietatLogicaEJB  " + e.getMessage(), e);
                             }
 
-
                             String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
                             log.info("Default Entity Code => " + defaultEntityCode);
 
                             if (defaultEntityCode != null && defaultEntityCode.trim().length() != 0) {
 
-                                Long defaultEntity = authenticationLogicaEjb.executeQueryOne(
-                                        defaultEntityCode);
+                                Long defaultEntity = authenticationLogicaEjb.executeQueryOne(defaultEntityCode);
 
                                 log.info("Default Entity ID => " + defaultEntity);
 
@@ -245,7 +241,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                             usuariPersona = persona;
 
                         }
-                        entitatCodi = usuariPersona.getEntitat()!=null?usuariPersona.getEntitat().getCodi():null;
+                        entitatCodi = usuariPersona.getEntitat() != null ? usuariPersona.getEntitat().getCodi() : null;
                         log.info("necesitaConfigurarUsuari = " + necesitaConfigurar);
                     }
 
@@ -259,8 +255,10 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                     } else {
                         msg = e.getMessage();
                     }
-                    authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username,temps,peticio,e,"Error llegint informacio del plugin de User Information o creant l'usuari a la BBDD: "
-                            + msg,entitatCodi);
+                    authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, temps, peticio.toString(), e,
+                            "Error llegint informacio del plugin de User Information o creant l'usuari a la BBDD: "
+                                    + msg,
+                            entitatCodi);
 
                     log.error("Error llegint informacio del plugin de User Information o creant l'usuari a la BBDD: "
                             + msg, e);
@@ -276,13 +274,14 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
             try {
                 usuariEntitats = new HashSet<UsuariEntitatJPA>(
                         authenticationLogicaEjb.findAllByUsuariIdWithEntitat(usuariPersona.getUsuariID()));
-                //Obtenim el codi de l'entitat
-                if(usuariEntitats.size()>0){
+                // Obtenim el codi de l'entitat
+                if (usuariEntitats.size() > 0) {
                     entitatCodi = usuariEntitats.iterator().next().getEntitat().getCodi();
                 }
             } catch (I18NException e) {
                 log.error(I18NUtils.getMessage(e), e);
-                authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username,temps,peticio,e, "",entitatCodi);
+                authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, temps,
+                        peticio.toString(), e, "", entitatCodi);
             }
 
             log.info("Total UsuariEntitats:" + usuariEntitats.size());
@@ -302,8 +301,9 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
             log.error("Authentication Info:\n" + au);
             log.error("");
 
-            authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username,temps,peticio,null,
-                    "L´usuari "+username+" està assignat a una o varies entitats però no té el rol CAR_ADMIN",entitatCodi);
+            authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, temps, peticio.toString(),
+                    null, "L´usuari " + username + " està assignat a una o varies entitats però no té el rol CAR_ADMIN",
+                    entitatCodi);
 
             // Com enviar-ho a la PAGINA WEB
             BasePreparer.loginErrorMessage.put(username, translation);
@@ -323,8 +323,8 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
             EntitatJPA entitat = usuariEntitat.getEntitat();
 
             if (entitat == null) {
-               log.warn("Entitat val null");
-               continue;
+                log.warn("Entitat val null");
+                continue;
             }
 
             Long entitatID = entitat.getEntitatID();
@@ -366,8 +366,10 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                 // l'Administrador
                 I18NTranslation translation = new I18NTranslation("error.senseentitat", username);
                 BasePreparer.loginErrorMessage.put(username, translation);
-                authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username,temps,peticio,null,
-                        "L´usuari "+username+" no té cap entitat associada. Consulti amb l´Administrador d´Entitat",null);
+                authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, temps,
+                        peticio.toString(), null,
+                        "L´usuari " + username + " no té cap entitat associada. Consulti amb l´Administrador d´Entitat",
+                        null);
 
             } else {
                 // Les entitats a les que pertany estan desactivades
@@ -375,8 +377,10 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                 I18NTranslation translation = new I18NTranslation("error.senseentitatvalida", username);
                 BasePreparer.loginErrorMessage.put(username, translation);
                 entitatCodi = usuariEntitats.iterator().next().getEntitat().getCodi();
-                authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username,temps,peticio,null,
-                        "Les entitats a les que pertany estan desactivades. L´usuari "+username+" no té cap entitat vàlida associada",entitatCodi);
+                authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, temps, peticio.toString(), null,
+                        "Les entitats a les que pertany estan desactivades. L´usuari " + username
+                                + " no té cap entitat vàlida associada",
+                        entitatCodi);
             }
         }
 
@@ -387,20 +391,20 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                 log.debug(">>>>>> Entitat predeterminada " + entitatIDActual);
             }
         }
-        
-        if(usuariPersona != null) {
-	        Long darreraEntitatUsuari = usuariPersona.getDarreraEntitat(); 
-	        if (darreraEntitatUsuari != null) {
-	        	Set <GrantedAuthority> listaAutorizaciones = rolesPerEntitat.get(darreraEntitatUsuari);
-	            for (GrantedAuthority autorizacion : listaAutorizaciones) {
-	            	if (Constants.ROLE_ADMIN.equals(autorizacion.getAuthority())) {
-	            		entitatIDActual = darreraEntitatUsuari;
-	            		log.info("Canvi EntitatIDActual = " + darreraEntitatUsuari);
-	            	}
-	            } 	
-	        }
+
+        if (usuariPersona != null) {
+            Long darreraEntitatUsuari = usuariPersona.getDarreraEntitat();
+            if (darreraEntitatUsuari != null) {
+                Set<GrantedAuthority> listaAutorizaciones = rolesPerEntitat.get(darreraEntitatUsuari);
+                for (GrantedAuthority autorizacion : listaAutorizaciones) {
+                    if (Constants.ROLE_ADMIN.equals(autorizacion.getAuthority())) {
+                        entitatIDActual = darreraEntitatUsuari;
+                        log.info("Canvi EntitatIDActual = " + darreraEntitatUsuari);
+                    }
+                }
+            }
         }
-       
+
         LoginInfo loginInfo;
         // create a new authentication token
 
@@ -420,7 +424,8 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
         try {
             // AUDITORIA
             if (loginInfo.getUsuariPersona() != null) {
-              authenticationLogicaEjb.crearAuditoria(loginInfo.getEntitatID(),loginInfo.getUsuariPersona().getUsername());
+                authenticationLogicaEjb.crearAuditoria(loginInfo.getEntitatID(),
+                        loginInfo.getUsuariPersona().getUsername());
             }
         } catch (I18NException ie) {
             log.error("S'ha produit un error creant el log");
@@ -440,7 +445,5 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
             return -o1.getAuthority().compareTo(o2.getAuthority());
         }
     };
-
-
 
 }

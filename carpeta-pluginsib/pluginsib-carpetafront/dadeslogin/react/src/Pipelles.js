@@ -20,9 +20,9 @@ class Pipelles extends Component {
         
         return (
             <div className="infoNoMenu">
-                <h2><p className="titol h2">{t('dadespersonalsTitol')}</p></h2>
+                <h2><p className="titol h2">{this.props.dades.titles[i18n.language]}}</p></h2>
                 <div className="col-md-12 border-0 float-left p-0">
-                    <p className="lh15">{t('dadespersonalsDescripcio')} </p>
+                    <p className="lh15">{this.props.subtitles[i18n.language]} </p>
                     
                     <div class="tab-pane fade show active" id="dadespersonals" role="tabpanel" aria-labelledby="home-tab">
                              <DadesPersonals dades={dades2} />

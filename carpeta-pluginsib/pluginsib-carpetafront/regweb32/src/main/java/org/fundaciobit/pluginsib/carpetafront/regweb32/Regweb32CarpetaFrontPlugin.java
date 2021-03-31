@@ -104,15 +104,6 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
         return null;
     }
 
-    @Override
-    public String getTitle(Locale locale) {
-        return getTraduccio("title", locale);
-    }
-
-    @Override
-    public String getSubTitle(Locale locale) {
-        return getTraduccio("subtitle", locale);
-    }
 
     @Override
     public String getResourceBundleName() {
@@ -227,7 +218,7 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
-    // ------------------- L L I S T A T DE REGISTRES ----------------
+    // ------------------- L L I S T A T   D E   R E G I S T R E S ----------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
@@ -259,7 +250,7 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
             try{
                 errorPage(e.getLocalizedMessage(), e,request, response, locale);
                 log.error("Error llistant registres: " + e.getMessage(), e);
-            }catch(Exception e2){
+            } catch(Exception e2) {
                 log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
             }
 

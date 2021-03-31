@@ -44,10 +44,10 @@ public class AuthenticationLogicaEJB implements AuthenticationLogicaService {
 
 
     @Override
-    public void crearLog(String descripcio, Long temps, StringBuilder peticio, Throwable th, String error,String entitatCodi) {
+    public void crearLog(String descripcio, Long temps, String peticio, Throwable th, String error,String entitatCodi) {
        logCarpetaLogicaEjb.crearLog(descripcio, ESTAT_LOG_ERROR, TIPUS_LOG_AUTENTICACIO_BACK,
                System.currentTimeMillis() - temps, th, error,
-               peticio.toString(), entitatCodi, null);
+               peticio, entitatCodi, null);
     }
 
     @Override

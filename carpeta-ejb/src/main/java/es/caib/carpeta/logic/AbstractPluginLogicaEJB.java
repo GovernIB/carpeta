@@ -53,6 +53,8 @@ public abstract class AbstractPluginLogicaEJB<I extends IPlugin> extends PluginL
         // Where.OR(ENTITATID.isNull(), ENTITATID.equal(entitatID))
         );
     }
+   
+    
 
     @Override
     public I getInstanceByPluginID(long pluginID) throws I18NException {

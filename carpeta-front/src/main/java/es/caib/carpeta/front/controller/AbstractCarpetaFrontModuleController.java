@@ -17,10 +17,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import es.caib.carpeta.hibernate.HibernateFileUtil;
+import es.caib.carpeta.logic.AuthenticationLogicaService;
 import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaService;
 import es.caib.carpeta.logic.UsuariEntitatLogicaService;
+import es.caib.carpeta.persistence.PluginJPA;
+import es.caib.carpeta.persistence.TraduccioMapJPA;
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.ICarpetaFrontPlugin;
+import es.caib.carpeta.pluginsib.carpetafront.api.TitlesInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 
 import java.io.IOException;
@@ -29,6 +33,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Base64;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  *
@@ -49,6 +54,9 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
     @EJB(mappedName = PluginDeCarpetaFrontLogicaService.JNDI_NAME)
     protected PluginDeCarpetaFrontLogicaService pluginCarpetaFrontEjb;
+    
+    @EJB(mappedName = AuthenticationLogicaService.JNDI_NAME)
+    protected AuthenticationLogicaService authenticationLogicaEjb;
 
     @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}/{urlBase}")
     public ModelAndView showCarpetaFrontModule(HttpServletRequest request, HttpServletResponse response,
@@ -103,6 +111,28 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
                 + absoluteControllerBase + "\nabsoluteRequestPluginBasePath = " + absoluteRequestPluginBasePath
                 + "\nrelativeControllerBase = " + relativeControllerBase + "\nrelativeRequestPluginBasePath = "
                 + relativeRequestPluginBasePath + "\n\n\n");
+        
+        
+        
+        TitlesInfo titlesInfo = carpetaFront.getTitlesInfo();
+        if (titlesInfo == null) {
+        
+            PluginJPA plugin = (PluginJPA) this.pluginCarpetaFrontEjb.findByPrimaryKey(pluginID);
+
+            titlesInfo = new TitlesInfo();
+            Map<String, TraduccioMapJPA> titles= plugin.getNomTraduccions();
+            for (String lang: titles.keySet()) {
+                titlesInfo.getTitlesByLang().put(lang, titles.get(lang).getValor());
+            }
+            Map<String, TraduccioMapJPA> subtitles= plugin.getDescripcioTraduccions();
+            for (String lang: subtitles.keySet()) {
+                titlesInfo.getSubtitlesByLang().put(lang, subtitles.get(lang).getValor());
+            }
+            
+            carpetaFront.setTitlesInfo(titlesInfo);
+        }
+        
+        
 
         String urlToPluginWebPage = carpetaFront.getStartUrl(absoluteRequestPluginBasePath,
                 relativeRequestPluginBasePath, request, getUserData(administrationID), administrationIDEncriptat);
@@ -190,8 +220,16 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
         try {
             requestPlugin(request, response, pluginIDStr, administrationIDEncripted, query, locale, isGet, debug);
-        } catch (Exception e) {
-            throw new IOException(e.getMessage(), e);
+        } catch (Throwable th) {
+            
+            
+            try {
+                authenticationLogicaEjb.crearLog("Request a Plugin", null,uri,th,"Error desconegut cridant a un request d'un plugin: " + th.getMessage(), null);
+            } catch (Throwable th2) {               
+            }
+            
+            
+            throw new IOException(th.getMessage(), th);
         }
 
     }

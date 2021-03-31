@@ -9,7 +9,7 @@ console.log(" +++++++++++++++   CARREGANT COMPONENT 1 ¿¿¿¿¿¿¿¿¿¿¿");
 
 newInstancePlugin = function createReactCompAppIntern(nomComponent, props) {
 
-  ReactDOM.render(<DadesPolicia pathtodocumentidentitat={props.pathtodocumentidentitat} />, document.getElementById(nomComponent));
+  ReactDOM.render(<DadesPolicia pathtodocumentidentitat={props.pathtodocumentidentitat} titles={props.titles} subtitles={props.subtitles} />, document.getElementById(nomComponent));
 };
 
 

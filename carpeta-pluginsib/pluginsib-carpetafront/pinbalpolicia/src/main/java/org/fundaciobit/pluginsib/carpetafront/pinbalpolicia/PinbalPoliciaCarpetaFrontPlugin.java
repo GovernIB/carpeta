@@ -5,6 +5,7 @@ import es.caib.carpeta.pinbal.ws.recobriment.facade.SVDDGPCIWS02v3RecobrimentFac
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
+import es.caib.carpeta.pluginsib.carpetafront.api.TitlesInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.pinbal.ws.recobriment.Consentimiento;
 import es.caib.pinbal.ws.recobriment.TipoDocumentacion;
@@ -61,6 +62,7 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
         return null;
     }
 
+    /*
     @Override
     public String getTitle(Locale locale) {
         return getTraduccio("title", locale);
@@ -70,6 +72,7 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
     public String getSubTitle(Locale locale) {
         return getTraduccio("subtitle", locale);
     }
+    */
 
     @Override
     public String getResourceBundleName() {
@@ -169,10 +172,15 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
             String plantilla = IOUtils.toString(input, "UTF-8");
 
             Map<String, Object> map = new HashMap<String, Object>();
+            
+            Gson json = new Gson();
 
-            map.put("title", getTitle(locale));
+           
+            TitlesInfo titles = getTitlesInfo();
 
-            map.put("subtitle", getSubTitle(locale));
+            map.put("titles", json.toJson(titles.getTitlesByLang()));
+
+            map.put("subtitles", json.toJson(titles.getSubtitlesByLang()));
 
             log.info("absolutePluginRequestPath ==> " + absolutePluginRequestPath);
 

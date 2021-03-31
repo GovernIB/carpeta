@@ -59,15 +59,6 @@ public class DadesPersonalsReactCarpetaFrontPlugin extends AbstractCarpetaFrontP
         return null;
     }
 
-    @Override
-    public String getTitle(Locale locale) {
-        return getTraduccio("title", locale);
-    }
-
-    @Override
-    public String getSubTitle(Locale locale) {
-        return getTraduccio("subtitle", locale);
-    }
 
     @Override
     public String getResourceBundleName() {
