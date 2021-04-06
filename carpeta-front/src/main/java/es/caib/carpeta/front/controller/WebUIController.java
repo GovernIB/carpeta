@@ -484,14 +484,14 @@ public class WebUIController extends PluginFrontController {
         getEnllazosJSON(request, response, enllazType);
     }
 
-   /* @RequestMapping(value = "/menuslidelinks", method = RequestMethod.GET)
+    @RequestMapping(value = "/menuslidelinks", method = RequestMethod.GET)
     public void getMenuSlideLinks(HttpServletRequest request, HttpServletResponse response) {
 
         final int enllazType = Constants.TIPUS_ENLLAZ_FRONT_MENU_DESLLISANT;
                
 
         getEnllazosJSON(request, response, enllazType);
-    }*/
+    }
     
     
     // XYZ ZZZ
