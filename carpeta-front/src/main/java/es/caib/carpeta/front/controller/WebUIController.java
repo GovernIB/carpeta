@@ -201,15 +201,17 @@ public class WebUIController extends PluginFrontController {
     public static class EntitatInfo {
         protected String nom;
         protected String html;
-        
+        protected String color;
+
         
         public EntitatInfo() {
             super();
         }
-        public EntitatInfo(String nom, String html) {
+        public EntitatInfo(String nom, String html, String color) {
             super();
             this.nom = nom;
             this.html = html;
+            this.color = color;
         }
         public String getNom() {
             return nom;
@@ -222,6 +224,12 @@ public class WebUIController extends PluginFrontController {
         }
         public void setHtml(String html) {
             this.html = html;
+        }
+        public String getColor() {
+            return color;
+        }
+        public void setColor(String color) {
+            this.color = color;
         }
         
     
@@ -968,6 +976,7 @@ public class WebUIController extends PluginFrontController {
             EntitatInfo ei = new EntitatInfo();
             
             ei.setNom(entitat.getNom().getTraduccio(lang).getValor());
+            ei.setColor(entitat.getColorMenu());
             
             if (entitat.getLoginText() != null && entitat.getLoginText().getTraduccio(lang) != null) {
                 ei.setHtml(entitat.getLoginText().getTraduccio(lang).getValor());
