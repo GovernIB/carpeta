@@ -63,7 +63,6 @@ class BarraMenu extends Component {
 			))
 		}
 
-		console.log("COLOR MENUUUUUUUUUUUUU: " + this.state.colorMenu);
 		const styleColorMenu = (this.state.colorMenu === null)? { backgroundColor : '#32814B'} : { backgroundColor : "#"+this.state.colorMenu};
 
 		return (
