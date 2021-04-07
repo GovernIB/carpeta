@@ -147,6 +147,11 @@ class MenuDesllisant extends Component {
 		var idioma_seleccionat;
 		var idiomes_seleccionables;
 		var langActual = sessionStorage.getItem("langActual");
+		if(langActual === null){
+			console.log("Canvi idioma null a ca");
+			langActual = 'ca';
+			sessionStorage.setItem("langActual", "ca");
+		}
 		console.log("idioma actual: " + langActual);
 
 		idioma_seleccionat = idiomes.filter(s => s === langActual).map((s, i) => (
