@@ -190,7 +190,7 @@ public class LoginController {
 
         String codiEntitat = sesionHttp.getEntitat();
 
-        log.info("WWWWWWWWWWWWWW Codi entitat: " + codiEntitat + " WWWWWWWWWWWWWWWWWW");
+//        log.info("WWWWWWWWWWWWWW Codi entitat: " + codiEntitat + " WWWWWWWWWWWWWWWWWW");
 
         securityService.iniciarSesionLogout(url_callback_logout, IDIOMA);
         HttpSession session = request.getSession(false);
@@ -200,10 +200,15 @@ public class LoginController {
         }
 
         if(codiEntitat == null) {
-            //Agafam l'entitat per defecte
+            //Agafam l'entitat per defecte, si en té
             PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
-            codiEntitat = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
-            log.info("WWWWWWWWWWWWWW entitat es null, posam DefaultEntity: " + codiEntitat + "WWWWWWWWWWWWWWWWWW");
+
+            if(EjbManager.getDefaultEntityCode(propietatGlobalEjb) == null){
+                return "redirect:/entitat";
+            }else{
+                codiEntitat = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
+            }
+//            log.info("WWWWWWWWWWWWWW entitat es null, posam DefaultEntity: " + codiEntitat + "WWWWWWWWWWWWWWWWWW");
         }       
         
 
