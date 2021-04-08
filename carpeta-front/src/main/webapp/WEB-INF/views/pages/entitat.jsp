@@ -85,26 +85,8 @@
                     <li>
                         <li class="imc-marc-ico imc--idioma" style="padding-left: 1em;">
                             <c:forEach var="idioma" items="${idiomes}" varStatus="loop">
-                                <c:choose>
-                                    <c:when test="${idioma.idiomaID=='ca'}">
-                                        <fmt:message key="entitats.catala" var="nomCatala"/>
-                                        <c:set var="nomIdioma" value="${nomCatala}"/>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <c:choose>
-                                            <c:when test="${idioma.idiomaID=='es'}">
-                                                <fmt:message key="entitats.castellano" var="nomCastella"/>
-                                                <c:set var="nomIdioma" value="${nomCastella}"/>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <c:if test="${idioma.idiomaID=='en'}">
-                                                    <fmt:message key="entitats.english" var="nomAngles"/>
-                                                    <c:set var="nomIdioma" value="${nomAngles}"/>
-                                                </c:if>
-                                            </c:otherwise>
-                                        </c:choose>
-                                    </c:otherwise>
-                                </c:choose>
+                                <fmt:message key="idioma.${idioma.idiomaID}" var="idMenu"/>
+                                <c:set var="nomIdioma" value="${idMenu}"/>
 
                                 <c:choose>
                                     <c:when test="${lang==idioma.idiomaID}">

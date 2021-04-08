@@ -16,7 +16,9 @@ import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.BooleanField;
 import org.fundaciobit.genapp.common.query.OrderBy;
+import org.fundaciobit.genapp.common.query.OrderType;
 import org.fundaciobit.genapp.common.query.Where;
 
 import javax.annotation.security.PermitAll;
@@ -129,7 +131,8 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
     @Override
     public List<Idioma> getIdiomes() throws I18NException {
 
-        List<Idioma> idiomes = idiomaEjb.select();
+        OrderBy orderBy = new OrderBy(new BooleanField("idioma", "ordre", "ordre"), OrderType.ASC);
+        List<Idioma> idiomes = idiomaEjb.select(orderBy);
 
         return idiomes;
 
