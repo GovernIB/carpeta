@@ -8,7 +8,8 @@ class BarraMenu extends Component {
 	constructor(){
 		super();
 		this.state = {
-			enllasosMenuBar: null
+			enllasosMenuBar: null,
+			colorMenu: null
 		}
 		this.canviatIdioma = this.canviatIdioma.bind(this);
         i18n.on('languageChanged', this.canviatIdioma);
@@ -32,6 +33,12 @@ class BarraMenu extends Component {
 				this.setState({ enllasosMenuBar : res.data });
 			});
 		// }
+
+		var url2 = baseURL + `/webui/infoEntitat`;
+
+		axios.get(url2).then(res => {
+			this.setState({ colorMenu : res.data.color });
+		});
 	}
 
 
@@ -55,11 +62,12 @@ class BarraMenu extends Component {
 				</li>
 			))
 		}
-		
+
+		const styleColorMenu = (this.state.colorMenu === null)? { backgroundColor : '#32814B'} : { backgroundColor : "#"+this.state.colorMenu};
 
 		return (
 			<div id = "barraMenu">
-				<header className="imc-titol">
+				<header className="imc-titol" style={styleColorMenu}>
 
 					<nav className="imc--contingut">
 

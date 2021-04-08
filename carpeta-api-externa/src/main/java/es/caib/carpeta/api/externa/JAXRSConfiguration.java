@@ -1,10 +1,7 @@
 package es.caib.carpeta.api.externa;
 
 import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
-import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
-import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
-import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
 import org.eclipse.microprofile.openapi.annotations.servers.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +30,7 @@ import javax.ws.rs.core.Application;
 @OpenAPIDefinition(
         info = @Info(title = "API REST EXTERNA", version = "1.0.0"),
         servers = {
-                @Server(url = "/carpeta/api/externa")
+                @Server(url = "/carpetaapi/externa")
         }
 )
 public class JAXRSConfiguration extends Application {

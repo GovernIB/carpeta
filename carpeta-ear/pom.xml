@@ -246,7 +246,7 @@
 						<webModule>
                             <groupId>es.caib.carpeta</groupId>
                             <artifactId>carpeta-api-externa</artifactId>
-                            <contextRoot>/carpeta/api/externa</contextRoot>
+                            <contextRoot>/carpetaapi/externa</contextRoot>
                             <bundleFileName>carpeta-api-externa.war</bundleFileName>
                         </webModule>
 						<!-- API EXTERNA END 

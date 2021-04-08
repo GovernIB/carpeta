@@ -26,6 +26,7 @@ import { withRouter } from "react-router";
 
 
 import LlistatDePlugins from './LlistatDePlugins';
+import axios from "axios";
 
 /**
  * @author anadal Migracio A Routes i passar de index.jsp a Index.js
@@ -40,6 +41,19 @@ class Index extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            colorMenu: null
+        }
+    }
+
+    componentDidMount() {
+
+        var baseURL = sessionStorage.getItem('contextPath');
+        var url = baseURL + `/webui/infoEntitat`;
+
+        axios.get(url).then(res => {
+            this.setState({ colorMenu : res.data.color });
+        });
     }
   
 
@@ -57,8 +71,9 @@ class Index extends Component {
 
         var infoUsuari;
         var estilContingut = (auth === '1')? { paddingTop: '6em'} : {paddingTop: '0em'};
+        const styleColorMenu = (this.state.colorMenu === null)? { backgroundColor : '#32814B', minHeight: '70px'} : { minHeight: '70px', backgroundColor : "#"+this.state.colorMenu};
         if (auth === '1' && user != null) {
-            infoUsuari = <div className="imc-titol usuari" style={{minHeight: '70px'}}>
+            infoUsuari = <div className="imc-titol usuari" style={styleColorMenu}>
                 <nav className="imc--contingut">
                     <h3>
                         <span className="estilUsuari">
