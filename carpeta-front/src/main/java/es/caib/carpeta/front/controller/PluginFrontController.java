@@ -77,11 +77,12 @@ public class PluginFrontController extends CommonFrontController {
         try {
 
             String lang = LocaleContextHolder.getLocale().getLanguage();
-            String codiEntitat = sesionHttp.getEntitat();
+            //String codiEntitat = sesionHttp.getEntitat();
+            Long entitatID = sesionHttp.getEntitatID();
             
             final Long seccioID = null;
 
-            List<PluginInfo> plugins = utilsEjb.getFrontPlugins(codiEntitat, lang, seccioID);
+            List<PluginInfo> plugins = utilsEjb.getFrontPlugins(entitatID, lang, seccioID);
 
             mav.addObject("plugins", plugins);
 
@@ -221,14 +222,28 @@ public class PluginFrontController extends CommonFrontController {
         return urlToShowPluginPage;
     }
 
-
-    @RequestMapping(value = "/pluginicon/{pluginid}/{idioma}", method = RequestMethod.GET)
-    public void  getPluginIcon(@PathVariable("pluginid") Long pluginid,@PathVariable("idioma") String idioma, HttpServletRequest request, HttpServletResponse response) throws Exception, I18NException  {
+    
+    @RequestMapping(value = {"/pluginicon/{pluginid}"}, method = RequestMethod.GET)
+    public void  getPluginIcon(@PathVariable("pluginid") Long pluginid,
+            HttpServletRequest request, HttpServletResponse response) throws Exception, I18NException  {
+        getPluginIcon(pluginid, null, request, response);
+    }
+    
+    
+    
+    @RequestMapping(value = { "/pluginicon/{pluginid}/{idioma}"}, method = RequestMethod.GET)
+    public void  getPluginIcon(@PathVariable("pluginid") Long pluginid,
+            @PathVariable("idioma") String idioma,
+            HttpServletRequest request, HttpServletResponse response) throws Exception, I18NException  {
 
         try {
-            LocaleContextHolder.setLocale(new Locale(idioma));
-
-            Locale.setDefault(new Locale(idioma));
+            
+            if (idioma == null) {
+                idioma = LocaleContextHolder.getLocale().getLanguage();
+            }
+            
+            //LocaleContextHolder.setLocale(new Locale(idioma));
+            //Locale.setDefault(new Locale(idioma));
 
             FileInfo fi = utilsEjb.getIconaPlugin(pluginid, idioma);
 
@@ -259,9 +274,10 @@ public class PluginFrontController extends CommonFrontController {
             
 
             String lang = LocaleContextHolder.getLocale().getLanguage();
-            String codiEntitat = sesionHttp.getEntitat();
+            //String codiEntitat = sesionHttp.getEntitat();
+            Long entitatID = sesionHttp.getEntitatID();
 
-            List<PluginInfo> pluginsEntitat = utilsEjb.getFrontPlugins(codiEntitat, lang, seccioID);
+            List<PluginInfo> pluginsEntitat = utilsEjb.getFrontPlugins(entitatID, lang, seccioID);
 
             // Passar JSON de pluginsEntitat
             Gson gson = new Gson();

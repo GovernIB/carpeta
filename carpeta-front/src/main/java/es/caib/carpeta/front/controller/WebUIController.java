@@ -35,6 +35,7 @@ import es.caib.carpeta.persistence.SeccioJPA;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -67,11 +68,7 @@ public class WebUIController extends PluginFrontController {
 
     public static final String ENTITAT_ICONA_PATH = "/entityicon";
 
-    
-    
-    
-    
-    
+
     
     /**
      * 
@@ -85,18 +82,20 @@ public class WebUIController extends PluginFrontController {
         protected String nom;
         protected String descripcio;        
         protected String iconaID;
+        protected int ordre;
 
         public SeccioInfo() {
             super();
         }
 
-        public SeccioInfo(long seccioID, String nom,  String descripcio, String context, String iconaID) {
+        public SeccioInfo(long seccioID, String nom,  String descripcio, String context, String iconaID, int ordre) {
             super();
             this.seccioID = seccioID;
             this.nom = nom;
             this.descripcio = descripcio;
             this.iconaID = iconaID;
             this.context = context;
+            this.ordre = ordre;
         }
 
         public long getSeccioID() {
@@ -133,6 +132,14 @@ public class WebUIController extends PluginFrontController {
             this.context = context;
         }
 
+        public int getOrdre() {
+            return ordre;
+        }
+
+        public void setOrdre(int ordre) {
+            this.ordre = ordre;
+        }
+
     }
 
     
@@ -144,20 +151,37 @@ public class WebUIController extends PluginFrontController {
      *
      */
     public static class EnllazInfo {
+        
+        protected String enllazID;
         protected String label;
         protected String labelDescription;
         protected String url;
         protected String urllogo;
+        protected int ordre;
 
         public EnllazInfo() {
             super();
         }
 
-        public EnllazInfo(String label, String url, String urllogo) {
+        public EnllazInfo(String enllazID, String label, String labelDescription, String url, String urllogo, int ordre) {
             super();
+            this.enllazID = enllazID;
             this.label = label;
+            this.labelDescription = labelDescription;
             this.url = url;
             this.urllogo = urllogo;
+            this.ordre = ordre;
+        }
+        
+        
+        
+
+        public String getEnllazID() {
+            return enllazID;
+        }
+
+        public void setEnllazID(String enllazID) {
+            this.enllazID = enllazID;
         }
 
         public String getLabel() {
@@ -191,6 +215,17 @@ public class WebUIController extends PluginFrontController {
         public void setLabelDescription(String labelDescription) {
             this.labelDescription = labelDescription;
         }
+
+        public int getOrdre() {
+            return ordre;
+        }
+
+        public void setOrdre(int ordre) {
+            this.ordre = ordre;
+        }
+        
+        
+        
     }
     
     /**
@@ -352,9 +387,10 @@ public class WebUIController extends PluginFrontController {
 
             List<EnllazInfo> enllazosInfo = new ArrayList<WebUIController.EnllazInfo>();
             
-            EnllazInfo enllazInfo = new EnllazInfo(entitat.getNom().getTraduccio(idioma).getValor(),
-                    entitat.getWebEntitat(), request.getContextPath() + WEBUI_PATH + WEBUI_LOGOLATERAL_PATH);
+            EnllazInfo enllazInfo = new EnllazInfo(null, entitat.getNom().getTraduccio(idioma).getValor(),
+                     null, entitat.getWebEntitat(), request.getContextPath() + WEBUI_PATH + WEBUI_LOGOLATERAL_PATH, 0);
 
+            
             enllazosInfo.add(enllazInfo);
             
             // Passar JSON 
@@ -493,6 +529,47 @@ public class WebUIController extends PluginFrontController {
         getEnllazosJSON(request, response, enllazType);
     }
     
+    @RequestMapping(value = "/menuslidelinkssorted", method = RequestMethod.GET)
+    public void getMenuSlideLinksSorted(HttpServletRequest request, HttpServletResponse response) {
+
+        final int enllazType = Constants.TIPUS_ENLLAZ_FRONT_MENU_DESLLISANT;
+               
+
+        try {
+            Long seccioID = null;
+            
+            String lang = LocaleContextHolder.getLocale().getLanguage();
+            String codiEntitat = sesionHttp.getEntitat();
+
+            List<EnllazInfo> enllazosInfo = getEnllazos(request, enllazType, seccioID, lang, codiEntitat);
+
+            List<ItemInfo> itemsInfo = new ArrayList<ItemInfo>();
+            
+            for (EnllazInfo enllazInfo : enllazosInfo) {
+                itemsInfo.add(ItemInfo.createFromEnllazInfo(enllazInfo));
+            }
+            
+            Map<String, Object> fullInfo = null;
+            fullInfo = new TreeMap<String, Object>();            
+            fullInfo.put("items", itemsInfo);
+            
+            
+            // Passar itemsInfo a JSON
+            Gson gson = new Gson();
+            String json = gson.toJson(fullInfo);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF8");
+
+            byte[] utf8JsonString = json.getBytes("UTF8");
+            
+            response.getOutputStream().write(utf8JsonString);
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
+    }
+    
     
     // XYZ ZZZ
     /*@RequestMapping(value = "/menupseudoplugin", method = RequestMethod.GET)
@@ -566,17 +643,19 @@ public class WebUIController extends PluginFrontController {
             String urllogo = request.getContextPath() + WEBUI_PATH + ENLLAZ_LOGO_PATH + "/"
                     + HibernateFileUtil.encryptFileID(enllazJPA.getLogoID());
 
-            
-            EnllazInfo ei = new EnllazInfo(label, url, urllogo);
-            
+            String desc;
             if (enllazType == Constants.TIPUS_ENLLAZ_FRONT_PSEUDOPLUGIN) {
                 if (enllazJPA.getDescripcio() == null) {
-                    ei.setLabelDescription(label);
+                    desc = label;
                 } else {
-                    ei.setLabelDescription(enllazJPA.getDescripcioTraduccions().get(lang).getValor());
+                    desc = enllazJPA.getDescripcioTraduccions().get(lang).getValor();
                 }
+            } else {
+                desc = null;
             }
             
+            EnllazInfo ei = new EnllazInfo(String.valueOf(enllazJPA.getEnllazID()),
+                    label, desc, url, urllogo, enllazJPA.getOrdre());            
             enllazosInfo.add(ei);
         }
         return enllazosInfo;
@@ -592,9 +671,14 @@ public class WebUIController extends PluginFrontController {
             String lang = LocaleContextHolder.getLocale().getLanguage();
             log.info("/seccioplugin/" + seccioContext + "/" + pluginContext + " ==> " + lang);
             
+            long entitatID = sesionHttp.getEntitatID();
+            /*
             Long pluginID = utilsEjb.getFrontPluginIDByContext(pluginContext);
   
             PluginInfo pluginInfo = utilsEjb.getFrontPluginInfo(  lang, pluginID);
+            */
+            PluginInfo pluginInfo = utilsEjb.getFrontPluginInfoByContext(lang, pluginContext, entitatID);
+            
             
             SeccioInfo seccioInfo = getSeccioInfo(request, seccioContext, lang);
 
@@ -667,7 +751,7 @@ public class WebUIController extends PluginFrontController {
         String urllogo = request.getContextPath() + WEBUI_PATH + ENLLAZ_LOGO_PATH + "/"
                 + HibernateFileUtil.encryptFileID(seccioJPA.getIconaID());
 
-        SeccioInfo seccioInfo = new SeccioInfo(seccioJPA.getSeccioID(), nom, descripcio, seccioJPA.getContext(), urllogo);
+        SeccioInfo seccioInfo = new SeccioInfo(seccioJPA.getSeccioID(), nom, descripcio, seccioJPA.getContext(), urllogo, seccioJPA.getOrdre());
         return seccioInfo;
     }
     
@@ -732,7 +816,9 @@ public class WebUIController extends PluginFrontController {
             String urllogo = request.getContextPath() + WEBUI_PATH + ENLLAZ_LOGO_PATH + "/"
                     + HibernateFileUtil.encryptFileID(seccioJPA.getIconaID());
 
-            seccioInfo.add(new SeccioInfo(seccioJPA.getSeccioID(), nom, descripcio, seccioJPA.getContext(), urllogo));
+            
+            
+            seccioInfo.add(new SeccioInfo(seccioJPA.getSeccioID(), nom, descripcio, seccioJPA.getContext(), urllogo, seccioJPA.getOrdre()));
         }
         return seccioInfo;
     }
@@ -809,6 +895,7 @@ public class WebUIController extends PluginFrontController {
             processException(e, response);
         } finally {
             request.getSession().removeAttribute(SESSION_FULLINFO_MAP);
+            request.getSession().removeAttribute(SESSION_FULLINFO_SORTED_MAP);
         }
     }
 
@@ -1063,10 +1150,10 @@ public class WebUIController extends PluginFrontController {
             
             Long pluginID = utilsEjb.getFrontPluginIDByContext(pluginContext);
             
+            Long entitatID = sesionHttp.getEntitatID();
             
             
-            
-            PluginInfo pluginInfo = utilsEjb.getFrontPluginInfo(  lang, pluginID);
+            PluginInfo pluginInfo = utilsEjb.getFrontPluginInfo(lang, pluginID, entitatID);
             
            
 
@@ -1139,7 +1226,11 @@ public class WebUIController extends PluginFrontController {
                 }
                 
                 // Plugins
-                List<PluginInfo> pluginsEntitat = utilsEjb.getFrontPlugins(codiEntitat, lang, seccioID);
+                
+                log.info(" XYZ ZZZ  REQUEST CALL fullinfo \n entitatID == " + entitatID + "\n");
+                
+                
+                List<PluginInfo> pluginsEntitat = utilsEjb.getFrontPlugins(entitatID, lang, seccioID);
                 fullInfo.put("veureplugins", pluginsEntitat);
                 
                 // Menus de Links
@@ -1178,6 +1269,167 @@ public class WebUIController extends PluginFrontController {
                     fullInfo.put("nomEntitat", entitat.getNom().getTraduccio(lang).getValor());
                 }
 
+                cacheFullInfo.put(fullID, fullInfo);
+
+            }
+            
+            // Passar JSON de pluginsEntitat
+            Gson gson = new Gson();
+            String json = gson.toJson(fullInfo);
+            
+            //log.info(" FULLINFO  amb seccioID = " + seccioID + ":\n" + json + "\n");
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF8");
+
+            byte[] utf8JsonString = json.getBytes("UTF8");
+
+            response.getOutputStream().write(utf8JsonString);
+
+        } catch (Throwable e) {
+            processException(e, response);
+        }
+        
+    }
+    
+    
+    public static final String SESSION_FULLINFO_SORTED_MAP = "SESSION_FULLINFO_SORTED_MAP";
+    
+    
+    
+    @RequestMapping(value = "/fullinfosortedauth/{seccioContext}" , method = RequestMethod.GET)
+    public void getFullInfoSortedAuth(HttpServletRequest request, HttpServletResponse response,
+          @PathVariable("seccioContext") String seccioContext) throws I18NException {
+        
+        final boolean autenticat = true;
+        getInternalFullInfoSorted(request, response,
+                seccioContext, autenticat);
+        
+    }
+    
+    @RequestMapping(value = "/fullinfosorted/{seccioContext}" , method = RequestMethod.GET)
+    public void getFullInfoSorted(HttpServletRequest request, HttpServletResponse response,
+          @PathVariable("seccioContext") String seccioContext) throws I18NException {
+        
+        final boolean autenticat = false;
+        getInternalFullInfoSorted(request, response,
+                seccioContext, autenticat);
+        
+    }
+    
+    protected void getInternalFullInfoSorted(HttpServletRequest request, HttpServletResponse response,
+            String seccioContext, boolean autenticat) throws I18NException {
+          
+          
+      
+            
+        try {
+
+            if (seccioContext != null && seccioContext.equals("0")) {
+                seccioContext = null;
+            }
+
+            String lang = LocaleContextHolder.getLocale().getLanguage();
+
+            String codiEntitat = sesionHttp.getEntitat();
+            Long entitatID = sesionHttp.getEntitatID();
+            
+            String fullID = codiEntitat + "_" + seccioContext + "_" + autenticat; // + "_" + lang; ???? 
+            
+            @SuppressWarnings("unchecked")
+            Map<String, Map<String, Object>> cacheFullInfo = (Map<String, Map<String, Object>>) request.getSession().getAttribute(SESSION_FULLINFO_SORTED_MAP);
+            
+            Map<String, Object> fullInfo = null;
+            
+            if (cacheFullInfo == null) 
+            {
+                log.info(" Carregant FullInfo de BBDD ... ");
+                cacheFullInfo = new TreeMap<String, Map<String, Object>>();
+                request.getSession().setAttribute(SESSION_FULLINFO_SORTED_MAP, cacheFullInfo);
+            } else {
+                log.info(" Emprant Cache de FullInfo ... ");
+                fullInfo = cacheFullInfo.get(fullID);
+            }
+
+            if (fullInfo == null) {
+                fullInfo = new HashMap<String, Object>();
+                
+                // Idiomes 
+                {
+                    List<String> idiomaInfo = getIdiomes();
+                    fullInfo.put("idiomesFront", idiomaInfo);
+                }
+                
+                // Nom entitat
+                {
+                    EntitatJPA entitat = entitatEjb.findByCodi(codiEntitat);
+                    fullInfo.put("nomEntitat", entitat.getNom().getTraduccio(lang).getValor());
+                }
+                
+                // seccio
+                final Long seccioID;
+                if (seccioContext != null){
+                    SeccioInfo seccioInfo = getSeccioInfo(request, seccioContext, lang);
+                    fullInfo.put("seccio", seccioInfo);
+                    seccioID = seccioInfo.getSeccioID();
+                } else {
+                    seccioID = null;
+                }
+                
+                List<ItemInfo> items = new ArrayList<ItemInfo>();
+                
+                // Menus de Links
+                {
+                    final int enllazType = Constants.TIPUS_ENLLAZ_FRONT_MENU_DESLLISANT;
+                    List<EnllazInfo> menusdelinks = getEnllazos(request, enllazType, seccioID, lang,
+                            codiEntitat);
+                    for (EnllazInfo enllazInfo : menusdelinks) {
+                        items.add(ItemInfo.createFromEnllazInfo(enllazInfo));
+                    }
+                    
+                    //fullInfo.put("menuslidelinks", menusdelinks);
+                    
+                }
+                
+                
+                if (autenticat) {
+
+                    
+                    
+                    // Plugins
+                    {
+                        List<PluginInfo> pluginsEntitat = utilsEjb.getFrontPlugins(entitatID, lang, seccioID);
+                      //fullInfo.put("veureplugins", pluginsEntitat);
+                        for (PluginInfo pluginInfo : pluginsEntitat) {
+                            items.add(ItemInfo.createFromPluginInfo(pluginInfo));
+                        }
+                    }
+
+                    // menupseudoplugin
+                    {
+                        final int enllazType = Constants.TIPUS_ENLLAZ_FRONT_PSEUDOPLUGIN;
+                        List<EnllazInfo> menusdePseudoPlugins = getEnllazos(request, enllazType, seccioID, lang,
+                                codiEntitat);
+                        //fullInfo.put("menupseudoplugin", menusdePseudoPlugins);
+                        for (EnllazInfo enllazInfo : menusdePseudoPlugins) {
+                            items.add(ItemInfo.createFromPseuDoPlugin(enllazInfo));
+                        }
+                    }
+                    
+                    // seccions
+                    {
+                        List<SeccioInfo> seccioInfo = getSeccionsInfo(request, seccioID, entitatID);
+                        //fullInfo.put("seccions", seccioInfo);
+                        for (SeccioInfo s : seccioInfo) {
+                            items.add(ItemInfo.createFromSeccioInfo(s));
+                        }
+                    }
+                }
+                
+                Collections.sort(items);
+                
+                fullInfo.put("items", items);
+                
                 cacheFullInfo.put(fullID, fullInfo);
 
             }

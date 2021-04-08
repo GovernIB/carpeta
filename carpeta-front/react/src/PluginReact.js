@@ -3,9 +3,12 @@ import { withTranslation } from 'react-i18next';
 import i18n from 'i18next';
 import ExpirarSessio from "./ExpirarSessio";
 import { withRouter } from "react-router";
-import Breadcrumb from "./Breadcrumb";
-import * as breadcrumbPathsAut from "./utils/breadcrumbPathsAut";
 
+/**
+ * @author jpernia
+ * @author anadal
+ * 
+ */
 class PluginReact extends Component {
 
 
@@ -13,11 +16,16 @@ class PluginReact extends Component {
         super(props);
 
         this.state = {
-            loaded: false            
+            loaded: false,
+            pluginContext: null            
         };
+
+        this.reloadReactPlugin = this.reloadReactPlugin.bind(this);
     }
 
     componentDidMount() {
+
+        console.log('PLUGIN REACT  Entra a componentDidMount()');
 
         var autenticat = sessionStorage.getItem('autenticat');
         if (autenticat === '1') {
@@ -35,21 +43,29 @@ class PluginReact extends Component {
                 }
             );
 
-            const pluginContext = this.props.pluginContext;
-            var urlBase = sessionStorage.getItem('contextPath');
-            var url = urlBase + "/pluginfront/showreactplugin/" + pluginContext + "/" + i18n.language;
-
-            //  $(document).ready(function () {
-
-            // Per provocar el render !!!!
-                this.setState({loaded: true });
-
-                sessionStorage.setItem('idioma', i18n.language);
-                $('#contentplugin').load(url);
-            //}
             
+            this.reloadReactPlugin();
             
         }
+    }
+
+
+    reloadReactPlugin() {
+
+        const pluginContext = this.props.pluginContext;
+
+        console.log('PLUGIN REACT  Entra a reloadReactPlugin()');
+
+        var urlBase = sessionStorage.getItem('contextPath');
+        var url = urlBase + "/pluginfront/showreactplugin/" + pluginContext + "/" + i18n.language;
+
+        // Per provocar el render !!!!
+        this.setState({loaded: true, pluginContext: pluginContext });
+
+        sessionStorage.setItem('idioma', i18n.language);
+        $('#contentpluginreact').load(url);
+       
+
     }
 
 
@@ -63,23 +79,26 @@ class PluginReact extends Component {
         }
 
 
-		const {t} = this.props;
-
-        console.log(" PLUGIN REACT RENDER 222 pluginContext " +  this.props.pluginContext + "!!!!!");
+        console.log(" PLUGIN REACT RENDER 111 pluginContext state " +  this.state.pluginContext + "!!!!!");
+        console.log(" PLUGIN REACT RENDER 222       pluginContext " +  this.props.pluginContext + "!!!!!");
         console.log(" PLUGIN REACT RENDER 333 seccioContext " +  this.props.seccioContext + "!!!!!");
 
-		const pluginContext = this.props.pluginContext;; 
+
+        if (this.props.pluginContext != this.state.pluginContext) {
+
+            console.log(" PLUGIN REACT RENDER plugin context DIFERENTS !!!!");
+
+            setTimeout( () =>  this.reloadReactPlugin(), 500);
+            
+        }
+
         clearTimeout(sessionStorage.getItem('idTimeOut'));
 
 		return (
             <div>
-                <div id="contentplugin"></div>
-                <div>
-                    <ExpirarSessio />
-                    <div id="substituir"></div>
-                </div>
+                <div id="contentpluginreact"></div>
+                <ExpirarSessio />
             </div>
-
 		);
 
 	}

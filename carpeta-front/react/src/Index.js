@@ -156,9 +156,8 @@ class Index extends Component {
                                         return <PluginHtml {...props} seccioContext={0}  />
                                     }}
                                 />
-
                                 <Route
-                                    path={ Constants.PLUGINREACT_PATH + ":pluginId" }
+                                    path={ Constants.PLUGINREACT_PATH + ":pluginContext" }
                                     render={(props) => {
                                         return <PluginReact {...props} seccioContext={0} pluginContext={props.match.params.pluginContext}  />
                                     }}

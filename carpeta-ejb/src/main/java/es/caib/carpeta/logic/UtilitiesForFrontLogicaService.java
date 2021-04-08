@@ -36,9 +36,11 @@ public interface UtilitiesForFrontLogicaService {
     
     public Long getFrontPluginIDByContext(String pluginContext) throws I18NException;
     
-    public PluginInfo getFrontPluginInfo( String language, Long pluginID) throws I18NException;
+    public PluginInfo getFrontPluginInfo(String language, long pluginID, long entitatID) throws I18NException;
+    
+    public PluginInfo getFrontPluginInfoByContext(String language, String pluginContext, long entitatID) throws I18NException;
 
-    public List<PluginInfo> getFrontPlugins(String codiEntitat, String language, Long seccioID) throws I18NException;
+    public List<PluginInfo> getFrontPlugins(Long entitatID, String language, Long seccioID) throws I18NException;
 
     public FileInfo getIconaPlugin(Long pluginID, String language) throws I18NException;
 

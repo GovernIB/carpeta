@@ -11,15 +11,17 @@ public class PluginInfo {
     String nom;
     String descripcio;
     String context;
-    String reactComponent;
+    boolean reactComponent;
     Long gravetat;
     String missatge;
+    int order;
 
     public PluginInfo() {
         super();
     }
 
-    public PluginInfo(String pluginID, String nom, String descripcio, String context, String reactComponent, Long gravetat, String missatge) {
+    public PluginInfo(String pluginID, String nom, String descripcio, String context,
+            boolean reactComponent, Long gravetat, String missatge, int order) {
         super();
         this.nom = nom;
         this.descripcio = descripcio;
@@ -28,6 +30,7 @@ public class PluginInfo {
         this.reactComponent = reactComponent;
         this.gravetat = gravetat;
         this.missatge = missatge;
+        this.order = order;
     }
 
     public String getPluginID() {
@@ -54,11 +57,11 @@ public class PluginInfo {
         this.descripcio = descripcio;
     }
 
-    public String isReactComponent() {
+    public boolean isReactComponent() {
         return reactComponent;
     }
 
-    public void setReactComponent(String reactComponent) {
+    public void setReactComponent(boolean reactComponent) {
         this.reactComponent = reactComponent;
     }
 
@@ -85,7 +88,15 @@ public class PluginInfo {
     public void setContext(String context) {
         this.context = context;
     }
-    
-    
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
+   
 
 }

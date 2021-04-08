@@ -150,9 +150,9 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
     }
 
     @Override
-    public List<PluginInfo> getFrontPlugins(String codiEntitat, String language, Long seccioID) throws I18NException {
+    public List<PluginInfo> getFrontPlugins(Long entitatID, String language, Long seccioID) throws I18NException {
 
-        List<Long> pluginsEntitat = pluginEntitatLogicaEjb.getPluginsEntitat(codiEntitat, true, seccioID);
+        List<Long> pluginsEntitat = pluginEntitatLogicaEjb.getPluginsEntitat(entitatID, true, seccioID);
 
         List<Plugin> plugins = pluginCarpetaFrontEjb.getAllPlugins(PluginFields.PLUGINID.in(pluginsEntitat));
         Map<Long, Plugin> mapPlugins = new HashMap<Long, Plugin>();
@@ -169,6 +169,9 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
             if (plugin != null) {
                 PluginJPA p = (PluginJPA) plugin;
 
+                pluginsInfo.add(getInternalPluginInfo(language, p, entitatID));
+                
+                /*
                 ICarpetaFrontPlugin cfp = pluginCarpetaFrontEjb.getInstanceByPluginID(p.getPluginID());
 
                 List<Avis> avisos = avisEjb.findActiveByPluginID(p.getPluginID());
@@ -188,6 +191,7 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
                         p.getNom().getTraduccio(language).getValor(),
                         p.getDescripcio().getTraduccio(language).getValor(), p.getContext(),
                         String.valueOf(cfp.isReactComponent()), gravetatAvis, missatgeAvis));
+                        */
             }
         }
 
@@ -195,19 +199,98 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
     }
 
     @Override
-    public PluginInfo getFrontPluginInfo(String language, Long pluginID) throws I18NException {
+    public PluginInfo getFrontPluginInfo(String language, long pluginID, long entitatID) throws I18NException {
 
         Plugin plugin = pluginCarpetaFrontEjb.findByPrimaryKey(pluginID);
 
+        
+        return getInternalPluginInfo(language, (PluginJPA)plugin, entitatID);
+        
+        /*
         PluginInfo pluginInfo;
 
         PluginJPA p = (PluginJPA) plugin;
 
         pluginInfo = new PluginInfo(String.valueOf(plugin.getPluginID()), p.getNom().getTraduccio(language).getValor(),
-                p.getDescripcio().getTraduccio(language).getValor(), p.getContext(), "", 0L, "");
+                p.getDescripcio().getTraduccio(language).getValor(), p.getContext(), "", 0L, "", plugin.get);
+
+        return pluginInfo;
+        */
+    }
+    
+    
+    
+    public PluginInfo getFrontPluginInfoByContext(String language, String pluginContext, long entitatID) throws I18NException {
+        /*
+        Long pluginID = pluginCarpetaFrontEjb.executeQueryOne(PluginFields.PLUGINID,
+                PluginFields.CONTEXT.equal(pluginContext));
+
+        if (pluginID == null) {
+            log.error("S'ha cridata a getFrontPluginIDByContext amb pluginContext = ]" 
+              + pluginContext + "[ però no s'ha trobat el plugin associat a aquest contexte");
+            return null;
+        }
+        PluginJPA p;
+        {
+            Plugin plugin = pluginCarpetaFrontEjb.findByPrimaryKey(pluginID);
+            p = (PluginJPA) plugin;
+        }
+        */
+        PluginJPA p;
+        {
+          List<Plugin> plugins = pluginCarpetaFrontEjb.select(PluginFields.CONTEXT.equal(pluginContext));
+          
+          if (plugins==null || plugins.isEmpty()) {
+              log.error("S'ha cridat a getFrontPluginInfoByContext amb pluginContext = ]" 
+                      + pluginContext + "[ però no s'ha trobat el plugin associat a aquest contexte");
+                    return null;
+          }
+
+          p = (PluginJPA) plugins.get(0);
+        }
+        
+        return getInternalPluginInfo(language, p, entitatID);
+        
+        
+    }
+
+    protected PluginInfo getInternalPluginInfo(String language, PluginJPA p, long entitatID) throws I18NException {
+        
+        int ordre = pluginEntitatLogicaEjb.executeQueryOne(PluginEntitatFields.ORDRE,
+                            Where.AND(
+                              PluginEntitatFields.PLUGINID.equal(p.getPluginID()),
+                              PluginEntitatFields.ENTITATID.equal(entitatID)
+                            )
+                       );
+
+        ICarpetaFrontPlugin cfp = pluginCarpetaFrontEjb.getInstanceByPluginID(p.getPluginID());
+        
+        List<Avis> avisos = avisEjb.findActiveByPluginID(p.getPluginID());
+
+        // Ara hi pot haver més d'un avís actiu al mateix temps, només es mostra el de
+        // major gravetat,
+        // ja que cada tipus d'avis te una forma diferent de visualitzar el plugin al
+        // Front
+        Long gravetatAvis = 0L;
+        String missatgeAvis = null;
+        if (avisos.size() > 0) {
+            gravetatAvis = (long) avisos.get(0).getGravetat();
+            missatgeAvis = ((AvisJPA) avisos.get(0)).getDescripcio().getTraduccio(language).getValor();
+        }
+        
+        
+        PluginInfo pluginInfo;
+        pluginInfo = new PluginInfo(String.valueOf(p.getPluginID()), p.getNom().getTraduccio(language).getValor(),
+                p.getDescripcio().getTraduccio(language).getValor(), p.getContext(), cfp.isReactComponent(),
+                gravetatAvis, missatgeAvis, ordre);
 
         return pluginInfo;
     }
+    
+    
+    
+    
+    
 
     @Override
     public FileInfo getIconaPlugin(Long pluginID, String language) throws I18NException {

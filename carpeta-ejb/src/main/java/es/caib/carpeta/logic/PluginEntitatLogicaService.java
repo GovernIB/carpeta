@@ -24,6 +24,8 @@ public interface PluginEntitatLogicaService extends PluginEntitatService  {
 
 	public List<Long> getPluginsEntitat(String codiEntitat, boolean actiu, Long seccioID) throws I18NException;
 	
+	public List<Long> getPluginsEntitat(long entitatID, boolean actiu, Long seccioID) throws I18NException;
+	
 	public List<Long> getAllPluginsByEntitat(String codiEntitat) throws I18NException;
 
 }

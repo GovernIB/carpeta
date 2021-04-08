@@ -77,6 +77,30 @@ public class PluginEntitatLogicaEJB extends PluginEntitatEJB implements PluginEn
 
 	}
 	
+	
+	
+	public List<Long> getPluginsEntitat(long entitatID, boolean actiu, Long seccioID) throws I18NException {
+
+        Where w;
+        if (seccioID == null) {
+           w = PluginEntitatFields.SECCIOID.isNull(); 
+        } else {
+           w = PluginEntitatFields.SECCIOID.equal(seccioID);
+        }
+        
+        List<Long> pluginIDs = executeQuery(PluginEntitatFields.PLUGINID,
+                Where.AND(
+                        PluginEntitatFields.ENTITATID.equal(entitatID),
+                        PluginEntitatFields.ACTIU.equal(true),
+                        w
+                        ), new OrderBy(PluginEntitatFields.ORDRE));
+        
+        return pluginIDs;
+	    
+	}
+	
+	
+	
 	/** Cerca tots els plugins associats a una entitat **/
 	@Override
 	public List<Long> getAllPluginsByEntitat(String codiEntitat) throws I18NException {

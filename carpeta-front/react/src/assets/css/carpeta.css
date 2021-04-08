@@ -212,6 +212,9 @@ img:hover {
 	text-align: justify;
 	background-color: #ffffff;
 }
+.alert0menu{
+	border: none;
+}
 .alert1menu{
 	border: groove;
 	border-color: blue;

@@ -13,26 +13,23 @@ import * as Constants from './Constants';
  */
 class MenuDesllisant extends Component {
 
-	constructor(){
+	constructor() {
 		super();
 		this.state = {
-			plugins: [],
-			menuEnllasos: [],
 			idiomes: [],
-			menupseudoplugin: [],
-			seccions : []
+			items: [] // plugins, menuEnllasos, menupseudoplugin i seccions
 		}
 		this.canviarIdioma = this.canviarIdioma.bind(this);
 
 		this.canviatIdioma = this.canviatIdioma.bind(this);
-        i18n.on('languageChanged', this.canviatIdioma);
-    }
+		i18n.on('languageChanged', this.canviatIdioma);
+	}
 
-    canviatIdioma(lng) {
-        console.log(" CANVIAT IDIOMA EN MENU DESLLISTANT A ]" + lng+ "[")
-		
-        this.componentDidMount();
-    }
+	canviatIdioma(lng) {
+		console.log(" CANVIAT IDIOMA EN MENU DESLLISTANT A ]" + lng + "[")
+
+		this.componentDidMount();
+	}
 
 
 	componentDidMount() {
@@ -41,53 +38,53 @@ class MenuDesllisant extends Component {
 
 		var baseURL = sessionStorage.getItem('contextPath');
 
-		var autenticat = sessionStorage.getItem('autenticat');;
-        if (autenticat === '1') {
-
-
+		var autenticat = sessionStorage.getItem('autenticat');
+		var url;
+		if (autenticat === '1') {
 			// 0 == Nivell Arell
-			var url = baseURL + `/webui/fullinfo/0`;
-			axios.get(url).then(res => {
-				var fulldata = res.data;
-				this.setState({ plugins: fulldata.veureplugins, 
-								menuEnllasos: fulldata.menuslidelinks,
-								idiomes: fulldata.idiomesFront,
-								menupseudoplugin: fulldata.menupseudoplugin,
-								seccions: fulldata.seccions});
-			});
+			url = baseURL + `/webui/fullinfosortedauth/0`;
 		} else {
-
-			var url3 =  baseURL + `/webui/idiomesFront`;
-			axios.get(url3).then(res => {
-				this.setState({ idiomes: res.data });
-				console.log("FINAL DE LECTURA DE IDIOMES !!!!! " + this.state.idiomes);
-			})
-			var url4 =  baseURL + `/webui/menuslidelinks`;
-			axios.get(url4).then(res => {
-				this.setState({ menuEnllasos: res.data });
-			})
-
+			// 0 == Nivell Arell
+			url = baseURL + `/webui/fullinfosorted/0`;
 		}
+
+		axios.get(url).then(res => {
+			var fulldata = res.data;
+			this.setState({
+				idiomes: fulldata.idiomesFront,
+				items: fulldata.items
+			});
+		});
 
 		menuDesllisantJS();
 
 	}
 
-	infoHtml(missatge, pluginContext) {
-		alert(missatge);
 
-        this.props.history.push(Constants.PLUGINHTML_PATH + pluginContext);
-        
+	mostrarPlugin(gravetat, missatge, pluginContext, reactComponent) {
+		switch (gravetat) {
+			case 0:
+				// No fer res
+				break;
+			case 1:
+			case 2:
+				// Mostrar Alert
+				alert(missatge);
+				break;
+			case 3:
+				// Mostrar Alert
+				alert(missatge);
+				return;
+		}
+
+		if (reactComponent) {
+			this.props.history.push(Constants.PLUGINREACT_PATH + pluginContext);
+		} else {
+			this.props.history.push(Constants.PLUGINHTML_PATH + pluginContext);
+		}
 	}
 
-	infoReact(missatge, pluginContext) {
-		alert(missatge);
-		this.props.history.push(Constants.PLUGINREACT_PATH + pluginContext);
-	}
 
-	error(missatge) {
-		alert(missatge);
-	}
 
 
 	canviarIdioma(lng) {
@@ -114,31 +111,11 @@ class MenuDesllisant extends Component {
 
 	render() {
 
-		console.log("MENU DESLLISSANT RENDER "); 
+		console.log("MENU DESLLISSANT RENDER ");
 
-		
-
-		const {t} = this.props;
+		const { t } = this.props;
 		var autenticat = sessionStorage.getItem('autenticat');
 		var urlBase = sessionStorage.getItem('contextPath');
-		var canviarDeFront = sessionStorage.getItem("canviarDeFront");
-		var numEntitats = sessionStorage.getItem("numEntitats");
-
-		let enllasosMenu;
-		if(!this.state.menuEnllasos.length) {
-			enllasosMenu = "";
-		} else {
-			enllasosMenu = this.state.menuEnllasos.map((s, i) => (
-				<li key={i}>
-					<a href={s.url} title={s.nom} target="_blank">
-						<img src={s.urllogo} title="" alt="" className="imc-icona iconaEnllas" />
-						<span>{s.label}</span>
-					</a>
-				</li>
-			))
-		}
-
-
 
 		const idiomes = this.state.idiomes;
 
@@ -147,7 +124,7 @@ class MenuDesllisant extends Component {
 		var idioma_seleccionat;
 		var idiomes_seleccionables;
 		var langActual = sessionStorage.getItem("langActual");
-		if(langActual === null){
+		if (langActual === null) {
 			console.log("Canvi idioma null a ca");
 			langActual = 'ca';
 			sessionStorage.setItem("langActual", "ca");
@@ -155,145 +132,86 @@ class MenuDesllisant extends Component {
 		console.log("idioma actual: " + langActual);
 
 		idioma_seleccionat = idiomes.filter(s => s === langActual).map((s, i) => (
-				<strong className="lletraIdioma" key={i}>{t('menuIdioma_'+ s)}</strong>
-			));
+			<strong className="lletraIdioma" key={i}>{t('menuIdioma_' + s)}</strong>
+		));
 		idiomes_seleccionables = idiomes.filter(s => s !== langActual).map((s, i) => (
-				<span key={i}><button onClick={() => this.canviarIdioma(s)}
-						className="boton-menu lletraIdioma">{t('menuIdioma_' + s)}</button> \ </span>
-			));
+			<span key={i}><button onClick={() => this.canviarIdioma(s)}
+				className="boton-menu lletraIdioma">{t('menuIdioma_' + s)}</button> \ </span>
+		));
+
+		let allItems = [];
 
 
-		const plugins = this.state.plugins;
-
-		var accessibilitat;
-		accessibilitat = <li>
-		<Link to={{pathname: `/accessibilitat`, nomPagina: 'menuAccessibilitat' }} className="imc-marc-ico imc--accessibilitat">
+		allItems.push(<li key="acc">
+			<Link to={{ pathname: `/accessibilitat`, nomPagina: 'menuAccessibilitat' }} className="imc-marc-ico imc--accessibilitat">
 				<span>{t('menuAccessibilitat')}</span>
-		</Link>
-		</li>;
+			</Link>
+		</li>);
 
-		var canviarEntitat = "";
-		if(canviarDeFront === 'true' && numEntitats > 1) {
-			canviarEntitat = <li>
-				<Link to={{pathname: `/canviarEntitat`, nomPagina: 'menuCanviarEntitat'}}
-					  className="imc-marc-ico imc--canviarEntitat">
-					<span>{t('menuCanviarEntitat')}</span>
-				</Link>
-			</li>;
-		}
+		this.state.items.forEach((s, i) => {
+			switch (s.tipus) {
 
+				case 0: // Plugin react
+				case 1: // Plugin html
+					allItems.push(
+						<li key={i}>
+							<button title={s.missatge} className={"botoMenu alert" + s.gravetat + "menu"}
+								onClick={(event) => this.mostrarPlugin(s.gravetat, s.missatge, s.context, s.tipus == 0 ? true : false)}>
+								<img src={urlBase + s.urllogo} className="imc-icona" title="" alt="" />
+								<span>{s.nom} </span>
+							</button>
+						</li>)
+					break;
 
-		var plugHtml;
-		var plugHtmlInfo;
-		var plugHtmlWarning;
-		var plugHtmlError;
-		var plugReact;
-		var plugReactInfo;
-		var plugReactWarning;
-		var plugReactError;
-		var sortir;
-		var seccionsS;
-		var enllasosPseusoPluginMenu;
+				case 2: // Enllaz
+					allItems.push(<li key={i}>
+						<a href={s.url} title={s.nom} target="_blank">
+							<img src={s.urllogo} title="" alt="" className="imc-icona iconaEnllas" />
+							<span>{s.nom}</span>
+						</a>
+					</li>);
+					break;
 
-		if (autenticat === '1') {
+				case 3: // Seccio
+					allItems.push(<li key={i}>
+						<Link to={Constants.SECCIO_PATH + s.context} >
+							<img src={s.urllogo} title="" alt={s.descripcio} className="imc-icona iconaEnllas" />
+							<span>{s.nom} </span>
+						</Link>
+					</li>)
+					break;
 
-
-			if(!this.state.menupseudoplugin.length ){
-				enllasosPseusoPluginMenu = "";
-			} else {
-				enllasosPseusoPluginMenu = this.state.menupseudoplugin.map((s, i) => (
-					<li key={i}>
+				case 4: // PseudoPlugin
+					allItems.push(<li key={i}>
 						<a href={s.url} target="_blank" title={s.nom}>
 							<img src={s.urllogo} title="" alt="" className="imc-icona iconaEnllas" />
-							<span>{s.label}</span>
+							<span>{s.nom} </span>
 						</a>
-					</li>
-				))
+					</li>);
+					break;
+
 			}
-
-			seccionsS = this.state.seccions.map((s, i) => (
-				<li key={i}>
-
-					<Link to={Constants.SECCIO_PATH + s.context} >
-						<img src={s.iconaID} title="" alt={s.descripcio} className="imc-icona iconaEnllas" />
-						<span>{s.nom}</span>
-					</Link>
-					{/*</a>*/}
-				</li>
-			));
+		})
 
 
-			sortir = <li><a href="sortir" className="imc-marc-ico imc--sortir" id="imc-marc-sortir"
-							title={t('menuSortir')}><span>{t('menuSortir')}</span></a></li>;
 
-
-			plugHtml = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 0).map((s,i) => (
-				<li key={i}>				
-					<Link to={Constants.PLUGINHTML_PATH + s.context} title={s.nom}>
-					<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-					className="imc-icona" title="" alt="" /><span>{s.nom}</span>
-					</Link>
-				</li>
-			));
-			plugHtmlInfo = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 1).map((s,i) => (
-				<li key={i}><button title={s.missatge} className="botoMenu alert1menu" onClick={(event) => this.infoHtml(s.missatge,s.context)}><img
-					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
-			));
-			plugHtmlWarning = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 2).map((s,i) => (
-				<li key={i}><button title={s.missatge} className="botoMenu alert2menu" onClick={(event) => this.infoHtml(s.missatge,s.context)}><img
-					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
-			));
-			plugHtmlError = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 3).map((s,i) => (
-				<li key={i}><button title={s.missatge} className="botoMenu alert3menu" onClick={(event) => this.error(s.missatge)}><img
-					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
-			));
-
-			plugReact = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 0).map((s,i) => (
-				<li key={i}>				    
-					<Link to={Constants.PLUGINREACT_PATH + s.context} title={s.nom} >
-					<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-					className="imc-icona" title="" alt="" /><span>{s.nom}</span>
-					</Link>
-					
-				</li>
-			));
-			plugReactInfo = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 1).map((s,i) => (
-				<li key={i}><button title={s.missatge} className="botoMenu alert1menu" onClick={(event) => this.infoReact(s.missatge,s.context)}><img
-					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
-			));
-			plugReactWarning = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 2).map((s,i) => (
-				<li key={i}><button title={s.missatge} className="botoMenu alert2menu" onClick={(event) => this.infoReact(s.missatge,s.context)}><img
-					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
-			));
-			plugReactError = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 3).map((s,i) => (
-				<li key={i}><button title={s.missatge} className="botoMenu alert3menu" onClick={(event) => this.error(s.missatge)}><img
-					src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-					className="imc-icona" title="" alt="" /><span>{s.nom}</span></button></li>
-			));
-
+		var numEntitats = sessionStorage.getItem("numEntitats");
+		var canviarDeFront = sessionStorage.getItem("canviarDeFront");
+		if (canviarDeFront === 'true' && numEntitats > 1) {
+			allItems.push(<li key="canvent">
+				<Link to={{ pathname: `/canviarEntitat`, nomPagina: 'menuCanviarEntitat' }}
+					className="imc-marc-ico imc--canviarEntitat">
+					<span>{t('menuCanviarEntitat')}</span>
+				</Link>
+			</li>);
 		}
 
-		if (autenticat === '0') {
-
-			seccionsS = '';
-			plugHtml = '';
-			plugReact = '';
-			plugHtmlInfo = '';
-			plugHtmlWarning = '';
-			plugHtmlError = '';
-			plugReactInfo = '';
-			plugReactWarning = '';
-			plugReactError = '';
-			sortir = '';
-			enllasosPseusoPluginMenu = '';
+		if (autenticat === '1') {
+			allItems.push(<li key="exit"><a href="sortir" className="imc-marc-ico imc--sortir" id="imc-marc-sortir"
+				title={t('menuSortir')}><span>{t('menuSortir')}</span></a></li>);
 		}
 
-		
+
 		return (
 			<div>
 				<div className="imc-cercador" id="imc-cercador">
@@ -302,22 +220,8 @@ class MenuDesllisant extends Component {
 					<li className="imc-marc-ico imc--idioma">
 						{idiomes_seleccionables} {idioma_seleccionat}
 					</li>
-					{accessibilitat}
-					{enllasosMenu}
-					{seccionsS}
-					{plugHtml}
-					{plugHtmlInfo}
-					{plugHtmlWarning}
-					{plugHtmlError}
-					{plugReact}
-					{plugReactInfo}
-					{plugReactWarning}
-					{plugReactError}
-					{enllasosPseusoPluginMenu}
-					{sortir}
-					{canviarEntitat}
+					{allItems}
 				</ul>
-
 			</div>
 		);
 	}
