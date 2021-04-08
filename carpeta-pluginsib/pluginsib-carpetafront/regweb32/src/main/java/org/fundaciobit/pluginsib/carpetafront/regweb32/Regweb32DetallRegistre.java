@@ -305,7 +305,7 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
 
         RegWebAsientoRegistralWs regWebAsientoRegistralWs = getRegWebAsientoRegistralWsService();
 
-        AsientoWs registro = regWebAsientoRegistralWs.obtenerAsientoCiudadanoCarpeta(getEntidad(), administrationID,
+        AsientoWs registro = regWebAsientoRegistralWs.obtenerAsientoCiudadano(getEntidad(), administrationID,
                 numeroRegistroFormateado, locale.getLanguage());
 
         return registro;

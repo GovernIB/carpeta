@@ -329,7 +329,7 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
 
         RegWebAsientoRegistralWs service = getRegWebAsientoRegistralWsService();
 
-        ResultadoBusquedaWs result = service.obtenerAsientosCiudadanoCarpeta(entidad, administrationID, pageNumber,
+        ResultadoBusquedaWs result = service.obtenerAsientosCiudadano(entidad, administrationID, pageNumber,
                 locale.getLanguage());
 
         if (isDevelopment()) {
