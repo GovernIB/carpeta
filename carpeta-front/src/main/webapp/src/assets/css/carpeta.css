@@ -311,8 +311,10 @@ img:hover {
 	vertical-align: text-top;
 }
 .iconaEnllas{
-	max-width: 2em;
-	opacity: .6;
+	max-width: 5em;
+	max-height: 1.5em;
+	height: auto;
+	/*opacity: .6;*/
 }
 .text-verd{
 	display: contents;
