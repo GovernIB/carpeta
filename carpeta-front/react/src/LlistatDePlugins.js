@@ -33,12 +33,17 @@ class LlistatDePlugins extends Component {
 
         const seccioContext = this.props.seccioContext ? this.props.seccioContext : 0;
 
-        console.log(" NOU LLISTAT AAAAAA - SECCIO " + seccioContext);
+        var autenticat = sessionStorage.getItem('autenticat');
+        console.log(" LlistatDePlugins - SECCIO " + seccioContext + "(AUTH: ]" + autenticat+ "[)");
 
-        var autenticat = sessionStorage.getItem('autenticat');;
+        
         if (autenticat === '1') {
 
            var baseURL = sessionStorage.getItem('contextPath');
+
+
+           console.log()
+
            var url = baseURL + `/webui/fullinfo/` + seccioContext;
            axios.get(url).then(res => {
                var fulldata = res.data;
@@ -49,6 +54,8 @@ class LlistatDePlugins extends Component {
                                 seccio: fulldata.seccio                                
                                 });
            });
+        } else {
+            console.error("S'ha cridat a LListat de Plugins sense estar AUTHENTICAT !!!!!");
         }
 
     }
@@ -165,7 +172,7 @@ class LlistatDePlugins extends Component {
         ));
 
 
-        plugHtml = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 0).map((s, i) => (
+        plugHtml = plugins.filter(s => s.reactComponent === false).filter(s => s.gravetat === 0).map((s, i) => (
             <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
                 <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`} to={{pathname: baseSeccio + Constants.PLUGINHTML_PATH + s.context, nomPagina: "plugin" }} title={s.nom} >
                     <span className="card-title titol pl-1 h3"><img
@@ -178,7 +185,7 @@ class LlistatDePlugins extends Component {
             </div>
         ));
 
-        plugHtmlInfo = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 1).map((s, i) => (
+        plugHtmlInfo = plugins.filter(s => s.reactComponent === false).filter(s => s.gravetat === 1).map((s, i) => (
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
                 <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`} to={{pathname: baseSeccio + Constants.PLUGINHTML_PATH + s.context, nomPagina: "plugin" }} title={s.missatge} >
                     <span className="card-title titol pl-1 h3"><img src={urlBase + "pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} alt="" title="" className="imc-icona" /></span>
@@ -187,7 +194,7 @@ class LlistatDePlugins extends Component {
                 </Link>
             </div>
         ));
-        plugHtmlWarning = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 2).map((s, i) => (
+        plugHtmlWarning = plugins.filter(s => s.reactComponent === false).filter(s => s.gravetat === 2).map((s, i) => (
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
                 <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`} to={{pathname: baseSeccio + Constants.PLUGINHTML_PATH + s.context, nomPagina: "plugin" }} title={s.missatge} >
                     <span className="card-title titol pl-1 h3"><img
@@ -199,7 +206,7 @@ class LlistatDePlugins extends Component {
                 </Link>
             </div>
         ));
-        plugHtmlError = plugins.filter(s => s.reactComponent === 'false').filter(s => s.gravetat === 3).map((s, i) => (
+        plugHtmlError = plugins.filter(s => s.reactComponent === false).filter(s => s.gravetat === 3).map((s, i) => (
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
                 <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`} to={{pathname: baseSeccio + Constants.PLUGINHTML_PATH + s.context, nomPagina: "plugin" }} title={s.missatge} >
                     <span className="card-title titol pl-1 h3"><img
@@ -213,7 +220,7 @@ class LlistatDePlugins extends Component {
         ));
 
 
-        plugReact = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 0).map((s, i) => (
+        plugReact = plugins.filter(s => s.reactComponent === true).filter(s => s.gravetat === 0).map((s, i) => (
             <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
                 <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`} to={{pathname: baseSeccio + Constants.PLUGINREACT_PATH + s.context, nomPagina: "plugin" }} title={s.nom} >
                     <span className="card-title titol pl-1 h3"><img
@@ -225,7 +232,7 @@ class LlistatDePlugins extends Component {
                 </Link>
             </div>
         ));
-        plugReactInfo = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 1).map((s, i) => (
+        plugReactInfo = plugins.filter(s => s.reactComponent === true).filter(s => s.gravetat === 1).map((s, i) => (
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
                 <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`} to={{pathname: baseSeccio + Constants.PLUGINREACT_PATH + s.context, nomPagina: "plugin" }} title={s.missatge} >
                     <span className="card-title titol pl-1 h3"><img
@@ -237,7 +244,7 @@ class LlistatDePlugins extends Component {
                 </Link>
             </div>
         ));
-        plugReactWarning = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 2).map((s, i) => (
+        plugReactWarning = plugins.filter(s => s.reactComponent === true).filter(s => s.gravetat === 2).map((s, i) => (
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
                 <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`} to={{pathname: baseSeccio + Constants.PLUGINREACT_PATH + s.context, nomPagina: "plugin" }} title={s.missatge} >
                     <span className="card-title titol pl-1 h3"><img
@@ -249,7 +256,7 @@ class LlistatDePlugins extends Component {
                 </Link>
             </div>
         ));
-        plugReactError = plugins.filter(s => s.reactComponent === 'true').filter(s => s.gravetat === 3).map((s, i) => (
+        plugReactError = plugins.filter(s => s.reactComponent === true).filter(s => s.gravetat === 3).map((s, i) => (
             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
                 <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${s.gravetat}`} to={{pathname: baseSeccio + Constants.PLUGINREACT_PATH + s.context, nomPagina: "plugin" }} title={s.missatge} >
                     <span className="card-title titol pl-1 h3"><img

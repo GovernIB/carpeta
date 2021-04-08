@@ -1194,6 +1194,8 @@ public class WebUIController extends PluginFrontController {
           @PathVariable("seccioContext") String seccioContext) throws I18NException {
             
         try {
+            
+            log.info(" XYZ ZZZ  REQUEST CALL fullinfo \n seccioContext == " + seccioContext + "\n");
 
             if (seccioContext != null && seccioContext.equals("0")) {
                 seccioContext = null;
@@ -1204,7 +1206,7 @@ public class WebUIController extends PluginFrontController {
             String codiEntitat = sesionHttp.getEntitat();
             Long entitatID = sesionHttp.getEntitatID();
             
-            String fullID = codiEntitat + "_" + seccioContext; // + "_" + lang; ???? 
+            String fullID = codiEntitat + "_" + seccioContext; // + "_" + lang; ????
             
             @SuppressWarnings("unchecked")
             Map<String, Map<String, Object>> cacheFullInfo = (Map<String, Map<String, Object>>) request.getSession().getAttribute(SESSION_FULLINFO_MAP);

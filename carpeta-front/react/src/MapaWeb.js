@@ -72,7 +72,7 @@ class MapaWeb extends Component {
 			const plugins = this.state.plugins;
 			
 			if (this.state.plugins) {
-			    plugins.filter(s => s.reactComponent === 'false').map((s, i) => {
+			    plugins.filter(s => s.reactComponent === false).map((s, i) => {
 					enllazos.push(
 						<p key={'ph' + i} className="lh15 upper">
 						<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} className="imc-icona" title="" alt="" />
@@ -80,7 +80,7 @@ class MapaWeb extends Component {
 						</p>)
 					});
 
-                plugins.filter(s => s.reactComponent === 'true').map((s, i) => {
+                plugins.filter(s => s.reactComponent === true).map((s, i) => {
 					enllazos.push(
 				    <p key={'pr' + i} className="lh15 upper">
 						<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} className="imc-icona" title="" alt="" />

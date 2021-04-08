@@ -58,7 +58,7 @@ class MenuRapid extends Component {
 
         if(autenticat === '1'){
 
-            gestionsHtml = plugins.filter(s => s.reactComponent === 'false').map((s, i) => (
+            gestionsHtml = plugins.filter(s => s.reactComponent === false).map((s, i) => (
                 <li key={i} className="nav-item pr-4">
                     <Link className="navCarpeta" to={{pathname: Constants.PLUGINHTML_PATH + s.context, nomPagina: "plugin" }} >
                         <img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} alt="" title="" className="imc-icona" />
@@ -67,7 +67,7 @@ class MenuRapid extends Component {
                 </li>
             ));
 
-            gestionsReact = plugins.filter(s => s.reactComponent === 'true').map((s, i) => (
+            gestionsReact = plugins.filter(s => s.reactComponent === true).map((s, i) => (
                     <li key={i} className="nav-item pr-4">
                         <Link className="navCarpeta" to={{pathname: Constants.PLUGINREACT_PATH + s.context, nomPagina: "plugin" }} >
                             <img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} alt="" title="" className="imc-icona" />
