@@ -81,9 +81,9 @@ class MenuRapid extends Component {
                     case 4: // PseudoPlugin
                         allItems.push(
                             <li key={i} className="nav-item pr-4" key={i}>
-                                <a className="navCarpeta" href={s.url} target="_blank" title={s.label}>
-                                    <img src={s.urllogo} alt="" title={s.label} className="imc-icona" />
-                                    <span className="menuRapidView">{s.label}</span>
+                                <a className="navCarpeta" href={s.url} target="_blank" title={s.nom}>
+                                    <img src={s.urllogo} alt="" title={s.nom} className="imc-icona" />
+                                    <span className="menuRapidView">{s.nom}</span>
                                 </a>
                             </li>
                         );
