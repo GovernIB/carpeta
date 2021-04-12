@@ -16,9 +16,7 @@ class MenuRapid extends Component {
     constructor(){
         super();
         this.state = {
-            plugins: [],
-            menupseudoplugin: [],
-			seccions : []
+            items: [] // plugins, menupseudoplugin, seccions
         }
         this.canviatIdioma = this.canviatIdioma.bind(this);
         i18n.on('languageChanged', this.canviatIdioma);
@@ -34,87 +32,72 @@ class MenuRapid extends Component {
 
         // 0 == Nivell Arell
         var baseURL = sessionStorage.getItem('contextPath');
-		var url = baseURL + `/webui/fullinfo/0`;
+        var autenticat = sessionStorage.getItem('autenticat');
+		var url = (autenticat === '1') ? baseURL + `/webui/fullinfosortedauth/0` : baseURL + `/webui/fullinfosorted/0`;
 		axios.get(url).then(res => {
 			var fulldata = res.data;
-			this.setState({ plugins: fulldata.veureplugins, 
-							menupseudoplugin: fulldata.menupseudoplugin,
-							seccions: fulldata.seccions});
+			this.setState({ items: fulldata.items });
 		});
     }
 
 
     render() {
 
-        const {t} = this.props;
+        const { t } = this.props;
         var autenticat = sessionStorage.getItem('autenticat');
         const plugins = this.state.plugins;
         var urlBase = sessionStorage.getItem('contextPath');
 
-        var gestionsHtml;
-        var gestionsReact;
-        var enllasosPseusoPluginMenu;
-        var seccionsS;
+        let allItems = []; 
+        let mostrar = "";
 
         if(autenticat === '1'){
+            this.state.items.forEach((s, i) => {
+                switch(s.tipus) {
+                    
+                    case 0: // Plugin react
+                    case 1: // Plugin html
+                        allItems.push(
+                            <li key={i} className="nav-item pr-4">
+                                <Link className="navCarpeta" to={{pathname: Constants.PLUGINHTML_PATH + s.context, nomPagina: "plugin" }} >
+                                    <img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} alt="" title="" className="imc-icona" />
+                                    <span className="menuRapidView">{s.nom}</span>
+                                    </Link>
+                            </li>
+                        );
+                        break;
 
-            gestionsHtml = plugins.filter(s => s.reactComponent === false).map((s, i) => (
-                <li key={i} className="nav-item pr-4">
-                    <Link className="navCarpeta" to={{pathname: Constants.PLUGINHTML_PATH + s.context, nomPagina: "plugin" }} >
-                        <img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} alt="" title="" className="imc-icona" />
-                        <span className="menuRapidView">{s.nom}</span>
-                        </Link>
-                </li>
-            ));
+                    case 3: // Seccio
+                        allItems.push(
+                            <li key={i} className="nav-item pr-4" > 
+                                <Link to={{pathname: Constants.SECCIO_PATH + s.context, nomPagina: "seccio" }}>
+                                    <img src={s.iconaID} title={s.nom} alt={s.descripcio} className="imc-icona" />
+                                    <span className="menuRapidView">{s.nom}</span>
+                                </Link>
+                            </li>
+                        );
+                        break;
 
-            gestionsReact = plugins.filter(s => s.reactComponent === true).map((s, i) => (
-                    <li key={i} className="nav-item pr-4">
-                        <Link className="navCarpeta" to={{pathname: Constants.PLUGINREACT_PATH + s.context, nomPagina: "plugin" }} >
-                            <img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} alt="" title="" className="imc-icona" />
-                            <span className="menuRapidView">{s.nom}</span>
-                        </Link>
-                        {/* </a> */}
-                    </li>
-            ));
+                    case 4: // PseudoPlugin
+                        allItems.push(
+                            <li key={i} className="nav-item pr-4" key={i}>
+                                <a className="navCarpeta" href={s.url} target="_blank" title={s.label}>
+                                    <img src={s.urllogo} alt="" title={s.label} className="imc-icona" />
+                                    <span className="menuRapidView">{s.label}</span>
+                                </a>
+                            </li>
+                        );
+                        break;
+                }
+            });
 
-            if(!this.state.menupseudoplugin.length){
-                enllasosPseusoPluginMenu = "";
-            } else {
-                enllasosPseusoPluginMenu = this.state.menupseudoplugin.map((s, i) => (
-                    <li key={i} className="nav-item pr-4" key={i}>
-                        <a className="navCarpeta" href={s.url} target="_blank" title={s.label}>
-                            <img src={s.urllogo} alt="" title={s.label} className="imc-icona" />
-                            <span className="menuRapidView">{s.label}</span>
-                        </a>
-                    </li>
-                ))
-            }
-
-            const seccions = this.state.seccions;
-            seccionsS = seccions.map((s, i) => (
-                <li key={i} className="nav-item pr-4" > 
-                    <Link to={{pathname: Constants.SECCIO_PATH + s.context, nomPagina: "seccio" }}>
-                        <img src={s.iconaID} title={s.nom} alt={s.descripcio} className="imc-icona" />
-                        <span className="menuRapidView">{s.nom}</span>
-                    </Link>
-                </li>
-            ));
-        }
-
-
-        var mostrar = "";
-
-        if(seccionsS != null || gestionsHtml != null || gestionsReact != null || enllasosPseusoPluginMenu != null){
             mostrar = <div>
-                <nav className="navbar navbar-expand-sm bg-white p-0 fixo" id="menuRapid">
-                    <ul className="navbar-nav mRapidGlobal" style={{ padding: '0.5rem!important'}} id="llistaMenuRapid">
-                        {seccionsS}
-                        {gestionsHtml}
-                        {gestionsReact}
-                        {enllasosPseusoPluginMenu}
-                    </ul>
-                </nav>
-            </div>;
+                        <nav className="navbar navbar-expand-sm bg-white p-0 fixo" id="menuRapid">
+                            <ul className="navbar-nav mRapidGlobal" style={{ padding: '0.5rem!important'}} id="llistaMenuRapid">
+                                {allItems}
+                            </ul>
+                        </nav>
+                    </div>;
         }
 
         return (
