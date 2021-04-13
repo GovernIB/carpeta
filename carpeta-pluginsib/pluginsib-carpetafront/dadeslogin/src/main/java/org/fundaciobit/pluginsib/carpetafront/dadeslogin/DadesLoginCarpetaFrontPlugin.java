@@ -157,6 +157,24 @@ public class DadesLoginCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             
             TitlesInfo titles = getTitlesInfo();
+            
+            String baseProperty = DADESLOGIN_PROPERTY_BASE;
+            
+            for(String lang : titles.getTitlesByLang().keySet()) {
+                String trad = getProperty(baseProperty + "titol." + lang);
+                if (trad != null) {
+                    titles.getTitlesByLang().put(lang, trad);
+                }
+            }
+            
+            for(String lang : titles.getSubtitlesByLang().keySet()) {
+                String trad = getProperty(baseProperty + "subtitol." + lang);
+                if (trad != null) {
+                    titles.getSubtitlesByLang().put(lang, trad);
+                }
+            }
+            
+            
 
             map.put("titles", json.toJson(titles.getTitlesByLang()));
 
