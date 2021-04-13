@@ -45,7 +45,6 @@ class MenuRapid extends Component {
 
         const { t } = this.props;
         var autenticat = sessionStorage.getItem('autenticat');
-        const plugins = this.state.plugins;
         var urlBase = sessionStorage.getItem('contextPath');
 
         let allItems = []; 
@@ -60,7 +59,8 @@ class MenuRapid extends Component {
                         allItems.push(
                             <li key={i} className="nav-item pr-4">
                                 <Link className="navCarpeta" to={{pathname: Constants.PLUGINHTML_PATH + s.context, nomPagina: "plugin" }} >
-                                    <img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} alt="" title="" className="imc-icona" />
+                                    <img src={urlBase + s.urllogo} alt="" title="" className="imc-icona" />
+                                    <img src={s.urllogo} alt="" title="" className="imc-icona" />
                                     <span className="menuRapidView">{s.nom}</span>
                                     </Link>
                             </li>
@@ -71,7 +71,7 @@ class MenuRapid extends Component {
                         allItems.push(
                             <li key={i} className="nav-item pr-4" > 
                                 <Link to={{pathname: Constants.SECCIO_PATH + s.context, nomPagina: "seccio" }}>
-                                    <img src={s.iconaID} title={s.nom} alt={s.descripcio} className="imc-icona" />
+                                    <img src={s.urllogo} title={s.nom} alt={s.nom} className="imc-icona" />
                                     <span className="menuRapidView">{s.nom}</span>
                                 </Link>
                             </li>
