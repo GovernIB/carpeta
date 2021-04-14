@@ -13,6 +13,7 @@ import MapaWeb from './MapaWeb';
 import PluginHtml from './PluginHtml';
 import PluginReact from './PluginReact';
 import Accessibilitat from './Accessibilitat';
+import AvisLegal from './AvisLegal';
 import CanviarEntitat from './CanviarEntitat';
 import NivellAutenticacio from './NivellAutenticacio';
 import * as Constants from './Constants';
@@ -142,6 +143,8 @@ class Index extends Component {
                                 <Route path="/accessibilitat" component={Accessibilitat}  />
 
                                 <Route path="/mapaweb" component={MapaWeb} />
+
+                                <Route path="/avislegal" component={AvisLegal} />
 
                                 <Route path="/canviarEntitat" component={CanviarEntitat} />
 

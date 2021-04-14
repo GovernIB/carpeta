@@ -63,6 +63,7 @@ class EnllasosPeuCentral extends Component {
         return (
             <ul className="enllasosPeu">
                 <li><Link to={{pathname: `/mapaweb`, nomPagina: 'peuMapa' }}> { t('peuMapa') }</Link></li>
+                <li><Link to={{pathname: `/avislegal`, nomPagina: 'peuAvis' }}> { t('peuAvis') } <img src="/carpetafront/src/assets/images/legal.png" className="ml-0" title={t('avisLegalTitol')} alt={t('avisLegalTitol')} /></Link></li>
                 {enllasosPeuCentral}
             </ul>
         );
