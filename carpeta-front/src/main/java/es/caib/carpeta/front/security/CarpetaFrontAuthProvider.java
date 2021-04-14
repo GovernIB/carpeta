@@ -25,6 +25,7 @@ import java.net.InetAddress;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import es.caib.carpeta.front.utils.SesionHttp;
 
@@ -84,7 +85,7 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
 		                entitatID = entitat.getEntitatID();
 		            }
             	}
-	            accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_LOGIN_AUTENTICAT, entitatID, null, new Timestamp(new Date().getTime()), LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress(), true);
+            	accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_LOGIN_AUTENTICAT, entitatID, null, new Timestamp(new Date().getTime()), Locale.getDefault().getLanguage(), InetAddress.getLocalHost().getHostAddress(), true);
             }
 
         } catch (Exception ie){
