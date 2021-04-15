@@ -200,7 +200,13 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
 
         map.put("registroEstado", registroEstado);
 
+        String[] registroExplicacionEstado = { "", getTraduccio("registro.estado.explicacion.1", locale),
+                getTraduccio("registro.estado.explicacion.2", locale),getTraduccio("registro.estado.explicacion.3", locale),getTraduccio("registro.estado.explicacion.4", locale),
+                getTraduccio("registro.estado.explicacion.5", locale),getTraduccio("registro.estado.explicacion.6", locale),getTraduccio("registro.estado.explicacion.7", locale),
+                getTraduccio("registro.estado.explicacion.8", locale),getTraduccio("registro.estado.explicacion.9", locale),getTraduccio("registro.estado.explicacion.10", locale),
+                getTraduccio("registro.estado.explicacion.11", locale),getTraduccio("registro.estado.explicacion.12", locale),getTraduccio("registro.estado.explicacion.13", locale)};
 
+        map.put("registroExplicacionEstado", registroExplicacionEstado);
 
 
 

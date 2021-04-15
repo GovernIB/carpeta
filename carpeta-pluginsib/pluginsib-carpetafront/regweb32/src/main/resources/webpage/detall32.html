@@ -59,6 +59,10 @@
         window.location.replace('${urlAnnexe}' + idAnnexe);
     }
 
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
 </script>
 <!-- Contenido -->
 <div class="container-contenido">
@@ -102,9 +106,17 @@
                                             <dt class="col-sm-3 pb-2">${carpeta_idioma}</dt>
                                             <dd class="col-sm-7"><#if registro.idioma?has_content >${registroIdioma[registro.idioma]}</#if></dd>
 
-                                            <dt class="col-sm-3 pb-2">${registro_estado}</dt>
-                                            <dd class="col-sm-7"><#if registro.estado?has_content >${registroEstado[registro.estado]}</#if></dd>
 
+                                            <dt class="col-sm-3 pb-2">${registro_estado}</dt>
+                                            <dd class="col-sm-7">
+                                                <#if registro.estado?has_content >
+                                                <label data-toggle="tooltip" data-placement="top" title="${registroExplicacionEstado[registro.estado]}">${registroEstado[registro.estado]} </label>
+                                                </#if>
+                                            </dd>
+
+
+
+                                            <!-- Descripcion estado muestra el valor del campo decodificacionTipoAnotacion de un registro -->
                                             <#if registro.descripcionEstado?has_content >
                                                 <dt class="col-sm-3 pb-2">${registro_descripcion_estado}</dt>
                                                 <dd class="col-sm-7">${registro.descripcionEstado}</dd>
