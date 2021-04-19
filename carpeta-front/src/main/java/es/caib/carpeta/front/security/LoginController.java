@@ -85,6 +85,10 @@ public class LoginController {
     @RequestMapping(value="/login")
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception, I18NException {
 
+        // Eliminam errors anteriors de la sessió
+        if(sesionHttp.getErrorLogin() != null){
+            sesionHttp.setErrorLogin(null);
+        }
 
         long temps = System.currentTimeMillis();
        
@@ -127,15 +131,16 @@ public class LoginController {
             String language = LocaleContextHolder.getLocale().getLanguage();
 
             String url;
+            ModelAndView mav = new ModelAndView();
             try {
                 
               url = securityService.iniciarSesionAutentificacion(url_callback_login, url_callback_error, language);
             
             } catch (Exception e) {
                 log.error("Error Iniciant la sessió de seguretat amb Cl@ve: " + e.getMessage(), e);
-                //  FALTA MOSTRAR ERROR
-                // Solucionarà a "Mostrar error al fallar autenticació de front #309"
                 url = baseURL;
+                sesionHttp.setErrorLogin(e.getMessage());
+                return new ModelAndView("redirect:" + url);
             }
 
             log.info("Url autentificacion: " + url);

@@ -54,7 +54,6 @@
 
     <sec:authorize access="!isAuthenticated()"> 
 	  <script type="text/javascript">
-		  //window.onload = function($) {
 			  sessionStorage.setItem('autenticat', '0');
 			  sessionStorage.setItem('entitat', '${entitat}');
 			  sessionStorage.setItem('defaultEntityCode', '${defaultEntityCode}');
@@ -62,8 +61,7 @@
 			  sessionStorage.setItem('numEntitats', '${numEntitats}');
 			  sessionStorage.setItem('canviarDeFront', '${canviarDeFront}');
 			  sessionStorage.setItem('contextPath', '${pageContext.request.contextPath}');
-
-		//  }
+			  sessionStorage.setItem('errorLogin', '${errorLogin}');
 	  </script>
   </sec:authorize>
 
@@ -94,10 +92,8 @@
 				sessionStorage.setItem('usuariDNI', '${userDNI}');
 				sessionStorage.setItem('usuariMetode', '${userMethod}');
 				sessionStorage.setItem('usuariNivell', '${userLevelAut}');
-				
 				sessionStorage.setItem('contextPath', '${pageContext.request.contextPath}');
-				
-				
+				sessionStorage.setItem('errorLogin', '${errorLogin}');
 
 			
 		</script>

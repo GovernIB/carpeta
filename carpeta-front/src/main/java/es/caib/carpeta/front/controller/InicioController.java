@@ -154,6 +154,8 @@ public class InicioController extends CommonFrontController {
 
             List<EntitatJPA> entitats = utilsEjb.getEntitatsFull(lang);
 
+            String errorDeLogin = sesionHttp.getErrorLogin();
+
             if (defaultEntityCode == null && sesionHttp.getEntitat() == null) {
 
                 if (entitats.size() > 1) {
@@ -223,6 +225,7 @@ public class InicioController extends CommonFrontController {
                 mav.addObject("entitat", sesionHttp.getEntitat());
                 mav.addObject("numEntitats", entitats.size());
                 mav.addObject("canviarDeFront", canviardefront);
+                mav.addObject("errorLogin", errorDeLogin);
 
             }
 

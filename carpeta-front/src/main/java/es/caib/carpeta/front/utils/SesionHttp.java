@@ -19,6 +19,7 @@ public class SesionHttp {
     private String urlEntrada;
     private String entitat;
     private long entitatID;
+    private String errorLogin;
 
     public SesionHttp() {
     }
@@ -61,6 +62,14 @@ public class SesionHttp {
 
     public void setEntitatID(long entitatID) {
         this.entitatID = entitatID;
+    }
+
+    public String getErrorLogin() {
+        return errorLogin;
+    }
+
+    public void setErrorLogin(String errorLogin) {
+        this.errorLogin = errorLogin;
     }
 
 }
