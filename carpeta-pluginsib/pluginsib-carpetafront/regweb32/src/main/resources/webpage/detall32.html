@@ -39,6 +39,22 @@
 </div>
 
 <script type="text/javascript">
+    $(document).ready(function(){
+        $('#estatInfo').click(function(){
+            if ($('#tooltipDetall').is (':hidden'))
+                $('#tooltipDetall').show();
+            else
+                $('#tooltipDetall').hide();
+            return false;
+        });
+
+        $('body,html').click(function(){
+            $('#tooltipDetall').hide();
+        });
+    });
+</script>
+
+<script type="text/javascript">
     function mostrarCarregantDetall() {
         $("#carregantDetallRegistre").removeClass("loaderOcult");
     }
@@ -59,9 +75,9 @@
         window.location.replace('${urlAnnexe}' + idAnnexe);
     }
 
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
+    // $(function () {
+    //     $('[data-toggle="tooltip"]').tooltip()
+    // })
 
 </script>
 <!-- Contenido -->
@@ -110,7 +126,7 @@
                                             <dt class="col-sm-3 pb-2">${registro_estado}</dt>
                                             <dd class="col-sm-7">
                                                 <#if registro.estado?has_content >
-                                                <label data-toggle="tooltip" data-placement="top" title="${registroExplicacionEstado[registro.estado]}">${registroEstado[registro.estado]} </label>
+                                                <div id="tooltipDetall" data-toggle="tooltip" data-placement="top" title="" class="tooltipClicable">${registroExplicacionEstado[registro.estado]}</div>${registroEstado[registro.estado]} <a href="#" id="estatInfo"><span class="oi oi-info pl-2"></span></a>
                                                 </#if>
                                             </dd>
 

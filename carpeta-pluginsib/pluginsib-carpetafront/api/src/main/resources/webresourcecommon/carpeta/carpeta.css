@@ -464,6 +464,36 @@ a.imc-bt-xarxa:hover {
 	text-align: center;
 }
 
+.tooltipClicable {
+	display:none;
+	background-color: black;
+	color: #fff;
+	border-radius: 6px;
+	padding: 5px;
+	position: absolute;
+	top: 30px;
+	word-wrap:break-word;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	margin-bottom:2em;
+	z-index: 1;
+	text-align: center;
+	opacity: 80%;
+}
+
+.tooltipClicable:after{
+	content:'';
+	display:block;
+	position:absolute;
+	top:-20px;
+	left:30px;
+	width:0;
+	height:0;
+	border-color: transparent transparent black transparent;
+	border-style: solid;
+	border-width: 10px;
+}
+
 
 /* HomePage */
 .homePage .titol.h5 { text-transform: none !important; }
@@ -481,6 +511,7 @@ a.imc-bt-xarxa:hover {
 #iniciarTramitacioBtn:hover { background-color:#000000; border-color:#000000;}
 #tramitacioModalBtn{ color: #32814b; }
 #clauAnonima{width:50%;color:#666;padding:10px;}
+
 
 
 
