@@ -37,7 +37,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Properties;
 
 /**
  * 
@@ -302,9 +310,9 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         String[] traduccions = { "tramite.listado", "tramite.descripcion", "tramite.tramite", "tramite.fecha.inicio",
                 "tramite.acceso", "tramite.vacio", "carpeta.buscar", "carpeta.fecha.inicio", "carpeta.fecha.fin",
                 "tramite.continuar", "tramite.genericerror", "tramite.versionsistra", "tramite.estado",
-                "tramite.finalizado", "tramite.nofinalizado", "tramite.nofinalizadopresencial", "tramite.todos", "tramite.detalle", "tramite.ver",
-                "tramite.continuar", "tramite.modal.titulo", "tramite.modal.texte", "tramite.modal.continuarBtn",
-                "tramite.modal.cancelarBtn" };
+                "tramite.finalizado", "tramite.nofinalizado", "tramite.nofinalizadopresencial", "tramite.todos", 
+                "tramite.detalle", "tramite.ver", "tramite.registrado", "tramite.continuar", "tramite.modal.titulo", 
+                "tramite.modal.texte", "tramite.modal.continuarBtn", "tramite.modal.cancelarBtn" };
 
         for (String t : traduccions) {
             map.put(t.replace('.', '_'), getTraduccio(t, locale));
@@ -360,9 +368,15 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             // plugin de NOTIB #231
             // Només mostram els de tipus ENVIO, PREENVIO i PREREGISTRO
             List<TipoElementoExpediente> coms = new ArrayList<TipoElementoExpediente>();
-            coms.add(TipoElementoExpediente.ENVIO);
-            coms.add(TipoElementoExpediente.PREENVIO);
-            coms.add(TipoElementoExpediente.PREREGISTRO);
+            
+            if (finalizado.equals("R")) {
+            	coms.add(TipoElementoExpediente.REGISTRO);
+            }else {
+            	coms.add(TipoElementoExpediente.ENVIO);
+                coms.add(TipoElementoExpediente.PREENVIO);
+                coms.add(TipoElementoExpediente.PREREGISTRO);
+                coms.add(TipoElementoExpediente.REGISTRO);
+            }
 
             TiposElementoExpediente teess = new TiposElementoExpediente();
             for (TipoElementoExpediente tee : coms) {
@@ -381,12 +395,12 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             int pagina = 0;
             int tamPagina = (int) num;
-
+            
             ElementosExpediente tramitesAcabados = backofficeFacade
                     .obtenerElementosExpediente(filtroElementosExpediente, pagina, tamPagina);
-
+            
             for (ElementoExpediente item : tramitesAcabados.getElemento()) {
-
+            	
                 TramitePersistenteGenerico tpg = new TramitePersistenteGenerico(item, 1);
 
                 Boolean estaPendent = item.isPendiente();
@@ -394,10 +408,13 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 // Casuística tràmits SISTRA1 #317
                 tpg.setMostraModal(item.getTipo() != TipoElementoExpediente.ENVIO && estaPendent);
 
-                if ((estaPendent && !finalizado.equals("S")) || (!estaPendent && !finalizado.equals("N"))) {
+                if (   ((estaPendent && !finalizado.equals("S")) || (!estaPendent && !finalizado.equals("N"))) || 
+                	    (finalizado.equals("R") && item.getTipo() == TipoElementoExpediente.REGISTRO)
+                	) {
                     tramits.add(tpg);
                 }
             }
+        
         }
 
         // Tràmits no acabats
@@ -442,6 +459,8 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 log.info("tp.getIdioma() => " + tp.getIdioma());
                 log.info("tp.getTipo() => " + tp.getTipo());
                 log.info("tp.getFechaUltimoAcceso() => " + tp.getFechaUltimoAcceso());
+                if(tp.esRegistrado())
+                	log.info("tp.getNumero() => " + tp.getNumero());
                 x++;
             }
         }
@@ -462,6 +481,10 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         bindingProvider.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, sistraUrl);
         bindingProvider.getRequestContext().put(BindingProvider.USERNAME_PROPERTY, username);
         bindingProvider.getRequestContext().put(BindingProvider.PASSWORD_PROPERTY, password);
+        
+        // JAXBContext context = JAXBContext.newInstance(ElementoExpediente.class);
+        // Unmarshaller unmarshaller = context.createUnmarshaller();
+        // unmarshaller.setEventHandler(new javax.xml.bind.helpers.DefaultValidationEventHandler());
 
         return backofficeFacade;
     }
@@ -613,24 +636,6 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         return url;
     }
-
-    /*
-     * // SISTRA 1 public String obtenerTiquetAcceso(String idSesionTramitacion,
-     * UserData usuario) throws Exception {
-     * 
-     * BackofficeFacade backofficeFacade = getBackofficeFacade();
-     * 
-     * UsuarioAutenticadoInfo usuarioAutenticadoInfo = new UsuarioAutenticadoInfo();
-     * usuarioAutenticadoInfo.setNombre(usuario.getName());
-     * usuarioAutenticadoInfo.setApellido1(usuario.getSurname1());
-     * usuarioAutenticadoInfo.setApellido2(usuario.getSurname2());
-     * usuarioAutenticadoInfo.setMetodoAutenticacion(getPropertyRequired(
-     * SISTRA1_PROPERTY_BASE + "level"));
-     * usuarioAutenticadoInfo.setNif(usuario.getAdministrationID());
-     * 
-     * String url = backofficeFacade.obtenerTiquetAcceso(idSesionTramitacion,
-     * usuarioAutenticadoInfo); return url; }
-     */
 
     /**
      * Mètode que retorna la icona del plugin

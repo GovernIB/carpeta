@@ -76,6 +76,7 @@
                                     <option value="A" <#if form_estat == "A">selected="selected"</#if>>${tramite_todos}</option>
                                     <option value="S" <#if form_estat == "S">selected="selected"</#if>>${tramite_finalizado}</option>
                                     <option value="N" <#if form_estat == "N">selected="selected"</#if>>${tramite_nofinalizado}</option>
+                                    <option value="R" <#if form_estat == "R">selected="selected"</#if>>${tramite_registrado}</option>
                                 </select>
                             </div>
                         </div>
@@ -125,7 +126,7 @@
                             <td><#if tramite.esMostraModal()!>${tramite_nofinalizadopresencial}<#else>${tramite_nofinalizado}</#if></td>
 <!--                            <td align="center"><span class="oi oi-external-link" title="${tramite_continuar}"></span></td>-->
                         <#else>
-                            <td>${tramite_finalizado}</td>
+                            <td><#if tramite.esRegistrado()!>${tramite_registrado}<#else>${tramite_finalizado}</#if></td>
 <!--                            <td>${tramite_finalizado}<#if tramite.tipo?has_content>: <span style="text-transform:lowercase">${tramite.tipo}</span></#if></td>-->
 <!--                            <td align="center"><span class="oi oi-eye" title="${tramite_ver}"></span></td>-->
                         </#if>
