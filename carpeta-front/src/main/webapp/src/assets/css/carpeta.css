@@ -713,7 +713,7 @@ body {
 	font-size: 100% !important;
 }
 .imc-titol h1 {
-	width: calc(100% - 10em) !important;
+	width: calc(100% - 4em) !important;
 }
 .imc-bt-menubar {
 	margin-right: 0.5em;

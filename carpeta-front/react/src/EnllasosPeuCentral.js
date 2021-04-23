@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { withTranslation } from 'react-i18next';
-import { HashRouter, Switch, Route, Link } from "react-router-dom";
+import {withTranslation} from 'react-i18next';
+import {Link} from "react-router-dom";
 import axios from "axios";
 import i18n from 'i18next';
 
@@ -60,10 +60,21 @@ class EnllasosPeuCentral extends Component {
             ))
         }
 
+        var entitatActiva = sessionStorage.getItem('entitat');
+        console.log("ENTITAT ENLLASOS: " + entitatActiva);
+
+        var avisLegal;
+
+        if(entitatActiva === 'caib'){
+            avisLegal = <li><Link to={{pathname: `/avislegal`, nomPagina: 'peuAvis' }}> { t('peuAvis') } <img src="/carpetafront/src/assets/images/legal.png" className="ml-0" title={t('avisLegalTitol')} alt={t('avisLegalTitol')} /></Link></li>;
+        } else{
+            avisLegal = "";
+        }
+
         return (
             <ul className="enllasosPeu">
                 <li><Link to={{pathname: `/mapaweb`, nomPagina: 'peuMapa' }}> { t('peuMapa') }</Link></li>
-                <li><Link to={{pathname: `/avislegal`, nomPagina: 'peuAvis' }}> { t('peuAvis') } <img src="/carpetafront/src/assets/images/legal.png" className="ml-0" title={t('avisLegalTitol')} alt={t('avisLegalTitol')} /></Link></li>
+                {avisLegal}
                 {enllasosPeuCentral}
             </ul>
         );
