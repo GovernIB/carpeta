@@ -3,13 +3,12 @@ package es.caib.carpeta.front.controller;
 import es.caib.carpeta.ejb.PropietatGlobalService;
 import es.caib.carpeta.front.service.SecurityService;
 import es.caib.carpeta.front.utils.SesionHttp;
-import es.caib.carpeta.model.entity.Idioma;
-import es.caib.carpeta.persistence.EntitatJPA;
 import es.caib.carpeta.logic.EntitatLogicaService;
 import es.caib.carpeta.logic.UtilitiesForFrontLogicaService;
 import es.caib.carpeta.logic.utils.EjbManager;
+import es.caib.carpeta.model.entity.Idioma;
 import es.caib.carpeta.model.fields.EntitatFields;
-
+import es.caib.carpeta.persistence.EntitatJPA;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -187,6 +186,7 @@ public class InicioController extends CommonFrontController {
                     mav.addObject("entitat", codiEntitat);
                     mav.addObject("numEntitats", entitats.size());
                     mav.addObject("canviarDeFront", canviardefront);
+                    mav.addObject("lang", lang);
 
                 }
 
@@ -206,6 +206,7 @@ public class InicioController extends CommonFrontController {
                     mav.addObject("defaultEntityCode", defaultEntityCode);
                     mav.addObject("numEntitats", entitats.size());
                     mav.addObject("canviarDeFront", canviardefront);
+                    mav.addObject("lang", lang);
 
                 } else {
 
@@ -213,9 +214,11 @@ public class InicioController extends CommonFrontController {
                         mav.addObject("entitat", sesionHttp.getEntitat());
                         mav.addObject("numEntitats", entitats.size());
                         mav.addObject("canviarDeFront", canviardefront);
+                        mav.addObject("lang", lang);
                     } else {
                         mav = new ModelAndView("entitat");
                         mav.addObject("entitats", entitats);
+                        mav.addObject("lang", lang);
                     }
 
                 }
@@ -226,6 +229,7 @@ public class InicioController extends CommonFrontController {
                 mav.addObject("numEntitats", entitats.size());
                 mav.addObject("canviarDeFront", canviardefront);
                 mav.addObject("errorLogin", errorDeLogin);
+                mav.addObject("lang", lang);
 
             }
 

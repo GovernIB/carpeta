@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${pageContext.response.locale.language}" style="" class=" js flexbox flexboxlegacy hashchange backgroundsize boxshadow textshadow opacity cssanimations cssgradients csstransforms csstransitions fontface generatedcontent localstorage svg" lang="${pageContext.response.locale.language}">
 <head>
-    <title>Carpeta Ciutadana</title>
+    <title><fmt:message key="titol.tab" /></title>
     <link rel="shortcut icon" type="image/x-ico" href="<c:url value="/src/assets/images/icon.png"/>">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

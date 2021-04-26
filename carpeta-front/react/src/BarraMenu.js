@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { withTranslation } from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import axios from "axios";
 import i18n from 'i18next';
 
@@ -50,7 +50,7 @@ class BarraMenu extends Component {
 		let enllasosBarraMenu;
 
 		// if(auth === '0' || !this.state.enllasosMenuBar ){
-		if(!this.state.enllasosMenuBar ){
+		if(!this.state.enllasosMenuBar){
 			enllasosBarraMenu = "";
 		} else{
 			enllasosBarraMenu = this.state.enllasosMenuBar.map((s, i) => (
