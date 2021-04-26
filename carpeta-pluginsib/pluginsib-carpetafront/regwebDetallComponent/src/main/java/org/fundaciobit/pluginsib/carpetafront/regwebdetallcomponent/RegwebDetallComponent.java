@@ -1,86 +1,101 @@
-package org.fundaciobit.pluginsib.carpetafront.regweb32;
+package org.fundaciobit.pluginsib.carpetafront.regwebdetallcomponent;
 
-import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
-
-import org.apache.commons.io.IOUtils;
-
-import javax.naming.InitialContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_ERROR;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_PLUGIN_FRONT;
 import es.caib.carpeta.logic.LogCarpetaLogicaService;
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
+import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.regweb3.ws.api.v3.AsientoWs;
 import es.caib.regweb3.ws.api.v3.FileContentWs;
 import es.caib.regweb3.ws.api.v3.JustificanteWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWs;
+import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWsService;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.naming.InitialContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.BindingProvider;
+
+import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_ERROR;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_PLUGIN_FRONT;
+
+import org.apache.commons.io.IOUtils;
+import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
+
 /**
  * Created by Fundació BIT.
  *
- * @author mgonzalez Date: 11/02/2021
- * @author anadal Independitzar de RegWeb32
+ * @author jagarcia Date: 15/04/2021
  */
 
-public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin {
+public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 
-    public static final String MIME_PDF = "application/pdf";
+	public static final String MIME_PDF = "application/pdf";
+	
+	public static final String RESOURCE_BUNDLE_NAME = "carpetafrontregwebdetallcomponent";
 
     public static final String VALIDEZ_DOCUMENTO_COPIA  = "1";
     public static final String VALIDEZ_DOCUMENTO_COPIA_ORIGINAL  = "3";
     public static final String VALIDEZ_DOCUMENTO_ORIGINAL  = "4";
     
+    public static final String REGWEB32_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "regweb32.";
+    
     protected LogCarpetaLogicaService logLogicaEjb;
+	
+	
+	public RegwebDetallComponent() {
+		super();
+	}
 
-    public Regweb32DetallRegistre() {
-        super();
-    }
+	public RegwebDetallComponent(String propertyKeyBase, Properties properties) {
+		super(propertyKeyBase, properties);
+	}
 
-    /**
-     * @param propertyKeyBase
-     * @param properties
-     */
-    public Regweb32DetallRegistre(String propertyKeyBase, Properties properties) {
-        super(propertyKeyBase, properties);
-    }
-
-    /**
-     * @param propertyKeyBase
-     */
-    public Regweb32DetallRegistre(String propertyKeyBase) {
-        super(propertyKeyBase);
-    }
-
+	public RegwebDetallComponent(String propertyKeyBase) {
+		super(propertyKeyBase);
+	}
+	
+	
+	// --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
+    // ------------------- M E T O D E S                 A B S T R A C T E S ----------------
     // --------------------------------------------------------------------------------------
-    // ------------------- M E T O D E S A B S T R A C T E S ----------------
-    // --------------------------------------------------------------------------------------
+	
+	public abstract String getDetalleTitle(Locale locale);
+	
+	public abstract boolean isDevelopment();
+    
+	public abstract String getEntidad() throws Exception;
 
-    public abstract String getDetalleTitle(Locale locale);
+    public abstract String getPropertyBase();
 
-    public abstract boolean isDevelopment();
-
-    public abstract RegWebAsientoRegistralWs getRegWebAsientoRegistralWsService() throws Exception;
-
-    public abstract String getEntidad() throws Exception;
-
+    protected abstract FileInfo getResourceIcon(Locale locale);
+    
     @Override
+    public boolean isReactComponent() {
+        return false;
+    }
+    
+    @Override
+    public String getResourceBundleName() {
+        return RESOURCE_BUNDLE_NAME;
+    }
+	
+	@Override
     public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet) {
 
         try {
 
-            if (query.startsWith(Regweb32DetallRegistre.DETALL_REGISTRE_PAGE)) {
+            if (query.startsWith(DETALL_REGISTRE_PAGE)) {
 
                 detallDeRegistre(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                         userData, administrationEncriptedID,  locale, isGet);
@@ -89,6 +104,7 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
 
                 justificantDeRegistre(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                         userData, administrationEncriptedID, locale, isGet);
+                
             } else if (query.startsWith(ANNEXE_REGISTRE_PAGE)) {
 
                 annexeDeRegistre(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
@@ -105,6 +121,7 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
             try{
                 errorPage(e.getLocalizedMessage(), e, request, response, locale);
                 log.error("Error detall registre: " + e.getMessage(), e);
+                
             }catch(Exception e2){
                 log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
             }
@@ -112,14 +129,40 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
         }
 
     }
+	
+	/**
+     * @return
+     * @throws Exception
+     */
+    public RegWebAsientoRegistralWs getRegWebAsientoRegistralWsService() throws Exception {
 
+        final String regweb3Url = getPropertyRequired(REGWEB32_PROPERTY_BASE + "url");
+
+        final String username = getPropertyRequired(REGWEB32_PROPERTY_BASE + "user");
+
+        final String password = getPropertyRequired(REGWEB32_PROPERTY_BASE + "pass");
+
+        final URL wsdl = new URL(regweb3Url + "?wsdl");
+
+        RegWebAsientoRegistralWsService service = new RegWebAsientoRegistralWsService(wsdl);
+        RegWebAsientoRegistralWs api = service.getRegWebAsientoRegistralWs();
+
+        Map<String, Object> reqContext = ((BindingProvider) api).getRequestContext();
+        reqContext.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, regweb3Url);
+        reqContext.put(BindingProvider.USERNAME_PROPERTY, username);
+        reqContext.put(BindingProvider.PASSWORD_PROPERTY, password);
+
+        return api;
+    }
+	
+	
+	// --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
-    // --------------------------------------------------------------------------------------
-    // ------------------- DETALL DE REGISTRE ----------------
+    // ------------------- DETALL DE REGISTRE -----------------------------------------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
-    protected static final String DETALL_REGISTRE_PAGE = "detallRegistre32";
+    protected static final String DETALL_REGISTRE_PAGE = "detallRegistre";
 
     public void detallDeRegistre(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
@@ -154,6 +197,7 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
 
     }
 
+    
     public String getDetallDeRegistrePage(String absolutePluginRequestPath, String numeroRegistroFormateado,
             String administrationID, Locale locale, String error) throws Exception {
 
@@ -180,54 +224,71 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
         map.put("detalletitle", getDetalleTitle(locale));
 
         // Traduccions tipoInteresado
-        String[] tipoInteresado = { "", getTraduccio("registro.tipoInteresado.1", locale),
-                getTraduccio("registro.tipoInteresado.2", locale), getTraduccio("registro.tipoInteresado.3", locale) };
+        String[] tipoInteresado = { "", getTraduccio(RESOURCE_BUNDLE_NAME, "registro.tipoInteresado.1", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.tipoInteresado.2", locale), getTraduccio(RESOURCE_BUNDLE_NAME, "registro.tipoInteresado.3", locale) };
 
         map.put("tipoInteresado", tipoInteresado);
 
         // Traduccions idioma Registro
-        String[] registroIdioma = { "", getTraduccio("registro.idioma.1", locale),
-                getTraduccio("registro.idioma.2", locale) };
+        String[] registroIdioma = { "", getTraduccio(RESOURCE_BUNDLE_NAME, "registro.idioma.1", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.idioma.2", locale) };
 
         map.put("registroIdioma", registroIdioma);
 
         // Traduccions estado Registro
-        String[] registroEstado = { "", getTraduccio("registro.estado.1", locale),
-                getTraduccio("registro.estado.2", locale),getTraduccio("registro.estado.3", locale),getTraduccio("registro.estado.4", locale),
-                getTraduccio("registro.estado.5", locale),getTraduccio("registro.estado.6", locale),getTraduccio("registro.estado.7", locale),
-                getTraduccio("registro.estado.8", locale),getTraduccio("registro.estado.9", locale),getTraduccio("registro.estado.10", locale),
-                getTraduccio("registro.estado.11", locale),getTraduccio("registro.estado.12", locale),getTraduccio("registro.estado.13", locale)};
+        String[] registroEstado = { "", getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.1", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.2", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.3", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.4", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.5", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.6", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.7", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.8", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.9", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.10", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.11", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.12", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.13", locale)};
 
         map.put("registroEstado", registroEstado);
 
-        String[] registroExplicacionEstado = { "", getTraduccio("registro.estado.explicacion.1", locale),
-                getTraduccio("registro.estado.explicacion.2", locale),getTraduccio("registro.estado.explicacion.3", locale),getTraduccio("registro.estado.explicacion.4", locale),
-                getTraduccio("registro.estado.explicacion.5", locale),getTraduccio("registro.estado.explicacion.6", locale),getTraduccio("registro.estado.explicacion.7", locale),
-                getTraduccio("registro.estado.explicacion.8", locale),getTraduccio("registro.estado.explicacion.9", locale),getTraduccio("registro.estado.explicacion.10", locale),
-                getTraduccio("registro.estado.explicacion.11", locale),getTraduccio("registro.estado.explicacion.12", locale),getTraduccio("registro.estado.explicacion.13", locale)};
+        String[] registroExplicacionEstado = { "", 
+        		getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.explicacion.1", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.explicacion.2", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.explicacion.3", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.explicacion.4", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.explicacion.5", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.explicacion.6", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.explicacion.7", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.explicacion.8", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.explicacion.9", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.explicacion.10", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.explicacion.11", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.explicacion.12", locale),
+                getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.explicacion.13", locale)};
 
         map.put("registroExplicacionEstado", registroExplicacionEstado);
 
-
-
+        
         Map<String, String> VALIDEZ_DOCUMENTAL_ANEXO = new HashMap<String, String>() {{
-            put(VALIDEZ_DOCUMENTO_COPIA, getTraduccio("registro.anexo.validezdocumento.1",locale));
-            put(VALIDEZ_DOCUMENTO_COPIA_ORIGINAL, getTraduccio("registro.anexo.validezdocumento.3",locale));
-            put(VALIDEZ_DOCUMENTO_ORIGINAL, getTraduccio("registro.anexo.validezdocumento.4",locale));
+            put(VALIDEZ_DOCUMENTO_COPIA, getTraduccio(RESOURCE_BUNDLE_NAME, "registro.anexo.validezdocumento.1",locale));
+            put(VALIDEZ_DOCUMENTO_COPIA_ORIGINAL, getTraduccio(RESOURCE_BUNDLE_NAME, "registro.anexo.validezdocumento.3",locale));
+            put(VALIDEZ_DOCUMENTO_ORIGINAL, getTraduccio(RESOURCE_BUNDLE_NAME, "registro.anexo.validezdocumento.4",locale));
         }};
 
         map.put("validezDocumento", VALIDEZ_DOCUMENTAL_ANEXO);
 
         String[] traduccions = { "registro.titulo.detalle", "registro.entrada", "registro.fecha", "registro.numero",
-                "registro.oficina", "registro.destinatario", "registro.tipo.doc", "registro.extracto", "registro.estado",
+                "registro.oficina", "registro.destinatario", "registro.tipo.doc", "registro.extracto", 
                 "registro.descripcion.estado" ,"carpeta.idioma","registro.presencial", "registro.codigoSia", "registro.justificante",
                 "registro.interesados", "registro.interesado.nombre", "registro.interesado.documento", "registro.interesado.tipo",
-                "registro.anexos", "registro.anexos.vacio", "registro.anexos.nodisponibles","registro.anexo.name", "registro.anexo.mime",
-                "registro.anexo.size", "registro.anexo.file", "registro.anexo.validezdocumento","carpeta.descargar", "justificante.generar",
-                "carpeta.catala", "carpeta.castella", "justificante.generando", "anexo.obtener", "registro.anexo.nodisponible" };
+                "registro.anexos", "registro.anexos.vacio", "registro.anexos.nodisponibles","registro.anexo.name", 
+                "registro.anexo.size", "registro.anexo.file", "registro.anexo.validezdocumento","carpeta.descargar", "registro.anexo.nodisponible",
+                "carpeta.catala", "carpeta.castella", "registro.anexo.mime", "registro.estado", "justificante.generar", "justificante.generando", "anexo.obtener"  };
+        
 
         for (String t : traduccions) {
-            map.put(t.replace('.', '_'), getTraduccio(t, locale));
+            map.put(t.replace('.', '_'), getTraduccio(RESOURCE_BUNDLE_NAME, t, locale));
         }
 
         map.put("registro", registre);
@@ -247,11 +308,9 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
                 + registre.getNumeroRegistro() + "&idAnnexe=";
         map.put("urlAnnexe", urlAnnexe);
 
-
         map.put("error", error);
         map.put("justificanteUrl", "");
         map.put("justificanteId", "");
-
 
         // Montamos la url de descarga del justificante
         String errorJustificant = "";
@@ -268,19 +327,17 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
                     map.put("justificanteId", justificantRegistre.getFileInfoWs().getFileID());
                 }
             }else{
-                errorJustificant = getTraduccio("justificante.error.obteniendo", locale);
+                errorJustificant = getTraduccio(RESOURCE_BUNDLE_NAME, "justificante.error.obteniendo", locale);
                 map.put("error", errorJustificant);
             }
         }
 
-
         String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
 
         return generat;
-
     }
 
-    private AsientoWs getDetallRegistreDebug(String numeroRegistroFormateado, String administrationID, Locale locale)
+    public AsientoWs getDetallRegistreDebug(String numeroRegistroFormateado, String administrationID, Locale locale)
             throws Exception {
 
         // TODO Obtener idioma
@@ -288,25 +345,22 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
         AsientoWs registro = getDetallRegistre(numeroRegistroFormateado, administrationID, locale);
 
         if (registro == null) {
-            System.out.println(" REGISTRE NULL o EMPTY: " + registro);
+            log.info(" REGISTRE NULL o EMPTY: " + registro);
         } else {
-            System.out.println(" -------------  REGISTRE  -------------------");
-            System.out.println("ar.getNumeroRegistroFormateado() => " + (registro.getNumeroRegistro()));
-            System.out.println("ar.getResumen() => " + registro.getExtracto());
-            System.out.println("ar.getFechaRegistro(); => " + registro.getFechaRegistro());
-            System.out.println("ar.getUnidadTramitacionDestinoDenominacion() => " + registro.getDenominacionDestino());
-            System.out.println(
-                    "ar.getEntidadRegistralInicioDenominacion() => " + registro.getDenominacionOficinaOrigen());
-            System.out.println("ar.getTipoDocumentacionFisicaCodigo() => " + registro.getTipoDocumetacionFisica());
-            System.out.println("Anexos retornados => " + registro.getAnexos().size());
-            System.out.println("ar.descripcionEstado() => " + registro.getDescripcionEstado());
-
+        	log.info(" -------------  REGISTRE  -------------------");
+        	log.info("ar.getNumeroRegistroFormateado() => " + (registro.getNumeroRegistro()));
+        	log.info("ar.getResumen() => " + registro.getExtracto());
+        	log.info("ar.getFechaRegistro(); => " + registro.getFechaRegistro());
+        	log.info("ar.getUnidadTramitacionDestinoDenominacion() => " + registro.getDenominacionDestino());
+        	log.info("ar.getEntidadRegistralInicioDenominacion() => " + registro.getDenominacionOficinaOrigen());
+        	log.info("ar.getTipoDocumentacionFisicaCodigo() => " + registro.getTipoDocumetacionFisica());
+        	log.info("Anexos retornados => " + registro.getAnexos().size());
+        	log.info("ar.descripcionEstado() => " + registro.getDescripcionEstado());
         }
-
         return registro;
     }
 
-    public AsientoWs getDetallRegistre(String numeroRegistroFormateado, String administrationID, /* String entidad, */
+    public AsientoWs getDetallRegistre(String numeroRegistroFormateado, String administrationID,
             Locale locale) throws Exception {
 
         RegWebAsientoRegistralWs regWebAsientoRegistralWs = getRegWebAsientoRegistralWsService();
@@ -409,7 +463,7 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
 
             response.setCharacterEncoding("utf-8");
             response.setContentType("text/html");
-            errorJustificant = getTraduccio("justificante.error.generando", locale);
+            errorJustificant = getTraduccio(RESOURCE_BUNDLE_NAME, "justificante.error.generando", locale);
 
             String webpage = getDetallDeRegistrePage(absolutePluginRequestPath, numeroRegistroFormateado,
                     administrationID, locale, errorJustificant);
@@ -505,7 +559,6 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
                 peticio.append("Error descàrrega annex").append("\n");
                 peticio.append("classe: ").append(getClass().getName()).append("\n");
                 peticio.append("IdAnnexe: " + idAnnexe).append("\n");
-                //peticio.append("Error" + annexe.getError()).append("\n");
                 peticio.append(e.getMessage());
                 logLogicaEjb.crearLog("Error descàrrega justificant o annex", ESTAT_LOG_ERROR, TIPUS_LOG_PLUGIN_FRONT,
                         System.currentTimeMillis() ,null,peticio.toString(),"Error plugin regweb32","",null);
@@ -536,7 +589,7 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
             response.setCharacterEncoding("utf-8");
             response.setContentType("text/html");
 
-            errorAnnexe = getTraduccio("annexo.error.obtenent", locale);
+            errorAnnexe = getTraduccio(RESOURCE_BUNDLE_NAME, "annexo.error.obtenent", locale);
             String webpage = getDetallDeRegistrePage(absolutePluginRequestPath, numeroRegistroFormateado,
                     administrationID, locale, errorAnnexe);
 
@@ -566,5 +619,6 @@ public abstract class Regweb32DetallRegistre extends AbstractCarpetaFrontPlugin 
         return annexe;
 
     }
-
+	
+	
 }

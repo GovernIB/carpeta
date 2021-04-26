@@ -2,7 +2,6 @@ package org.fundaciobit.pluginsib.carpetafront.sistra;
 
 import es.caib.carpeta.commons.utils.BasicAuthenticator;
 import es.caib.carpeta.commons.utils.DateUtils;
-import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
@@ -21,6 +20,7 @@ import es.caib.zonaper.ws.v2.model.elementoexpediente.TiposElementoExpediente;
 import es.caib.zonaper.ws.v2.services.BackofficeFacade;
 import es.caib.zonaper.ws.v2.services.BackofficeFacadeService;
 import org.apache.commons.io.IOUtils;
+import org.fundaciobit.pluginsib.carpetafront.regwebdetallcomponent.RegwebDetallComponent;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,7 +52,7 @@ import java.util.Properties;
  * 
  * @author anadal
  */
-public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
+public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
     public static final String SISTRA_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "sistra.";
     public static final String SISTRA1_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "sistra1.";
@@ -84,17 +84,7 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     public BasicServiceInformation existsInformation(UserData administrationID) throws Exception {
         return null;
     }
-/*
-    @Override
-    public String getTitle(Locale locale) {
-        return getTraduccio("title", locale);
-    }
 
-    @Override
-    public String getSubTitle(Locale locale) {
-        return getTraduccio("subtitle", locale);
-    }
-*/
     @Override
     public String getResourceBundleName() {
         return "carpetafrontsistra";
@@ -257,9 +247,9 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             try {
                 if (isDevelopment()) {
                     tramits = getTramitsDebug(formDataInici, formDataFi, userData.getAdministrationID(), formEstat,
-                            locale);
+                            locale, absolutePluginRequestPath);
                 } else {
-                    tramits = getTramits(formDataInici, formDataFi, userData.getAdministrationID(), formEstat, locale);
+                    tramits = getTramits(formDataInici, formDataFi, userData.getAdministrationID(), formEstat, locale, absolutePluginRequestPath);
                 }
             } catch (SOAPFaultException e) {
                 tramits = null;
@@ -345,7 +335,7 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
      * @throws Exception
      */
     public List<TramitePersistenteGenerico> getTramits(Date fechaInicio, Date fechaFin, String documento,
-            String finalizado, Locale locale) throws Exception {
+            String finalizado, Locale locale, String absolutePluginRequestPath) throws Exception {
 
         BackofficeFacade backofficeFacade = getBackofficeFacade();
 
@@ -407,6 +397,9 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
                 // Casuística tràmits SISTRA1 #317
                 tpg.setMostraModal(item.getTipo() != TipoElementoExpediente.ENVIO && estaPendent);
+                
+                // Si es tipus Registro => redirigim a pagina de detall Registre
+                tpg.setUrl(absolutePluginRequestPath + "/" + DETALL_REGISTRE_PAGE + "?numeroRegistroFormateado=" + tpg.getNumero());
 
                 if (   ((estaPendent && !finalizado.equals("S")) || (!estaPendent && !finalizado.equals("N"))) || 
                 	    (finalizado.equals("R") && item.getTipo() == TipoElementoExpediente.REGISTRO)
@@ -437,10 +430,10 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     }
 
     private List<TramitePersistenteGenerico> getTramitsDebug(Date formDataInici, Date formDataFi,
-            String administrationID, String finalizado, Locale locale) throws Exception {
+            String administrationID, String finalizado, Locale locale, String absolutePluginRequestPath) throws Exception {
 
         List<TramitePersistenteGenerico> tramits = this.getTramits(formDataInici, formDataFi, administrationID,
-                finalizado, locale);
+                finalizado, locale, absolutePluginRequestPath);
 
         if (tramits == null || tramits.isEmpty()) {
             log.info(" TRAMITS SISTRA1 NULL o EMPTY: " + tramits);
@@ -482,10 +475,6 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         bindingProvider.getRequestContext().put(BindingProvider.USERNAME_PROPERTY, username);
         bindingProvider.getRequestContext().put(BindingProvider.PASSWORD_PROPERTY, password);
         
-        // JAXBContext context = JAXBContext.newInstance(ElementoExpediente.class);
-        // Unmarshaller unmarshaller = context.createUnmarshaller();
-        // unmarshaller.setEventHandler(new javax.xml.bind.helpers.DefaultValidationEventHandler());
-
         return backofficeFacade;
     }
 
@@ -652,5 +641,15 @@ public class SistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     public String getPropertyBase() {
         return SISTRA_PROPERTY_BASE;
     }
+
+	@Override
+	public String getDetalleTitle(Locale locale) {
+		return getTraduccio("detalletitle", locale);
+	}
+
+	@Override
+	public String getEntidad() throws Exception {
+		return getPropertyRequired(SISTRA_PROPERTY_BASE + "entidad");
+	}
 
 }

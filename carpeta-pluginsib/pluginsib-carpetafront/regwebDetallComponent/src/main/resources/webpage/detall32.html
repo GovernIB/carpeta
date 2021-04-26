@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0040)https://dev.caib.es/carpeta/registro/detalle -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ca" lang="ca">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -39,22 +38,6 @@
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function(){
-        $('#estatInfo').click(function(){
-            if ($('#tooltipDetall').is (':hidden'))
-                $('#tooltipDetall').show();
-            else
-                $('#tooltipDetall').hide();
-            return false;
-        });
-
-        $('body,html').click(function(){
-            $('#tooltipDetall').hide();
-        });
-    });
-</script>
-
-<script type="text/javascript">
     function mostrarCarregantDetall() {
         $("#carregantDetallRegistre").removeClass("loaderOcult");
     }
@@ -74,10 +57,6 @@
     function descarregarAnnex(idAnnexe) {
         window.location.replace('${urlAnnexe}' + idAnnexe);
     }
-
-    // $(function () {
-    //     $('[data-toggle="tooltip"]').tooltip()
-    // })
 
 </script>
 <!-- Contenido -->
@@ -122,17 +101,9 @@
                                             <dt class="col-sm-3 pb-2">${carpeta_idioma}</dt>
                                             <dd class="col-sm-7"><#if registro.idioma?has_content >${registroIdioma[registro.idioma]}</#if></dd>
 
-
                                             <dt class="col-sm-3 pb-2">${registro_estado}</dt>
-                                            <dd class="col-sm-7">
-                                                <#if registro.estado?has_content >
-                                                <div id="tooltipDetall" data-toggle="tooltip" data-placement="top" title="" class="tooltipClicable">${registroExplicacionEstado[registro.estado]}</div>${registroEstado[registro.estado]} <a href="#" id="estatInfo"><span class="oi oi-info pl-2"></span></a>
-                                                </#if>
-                                            </dd>
+                                            <dd class="col-sm-7"><#if registro.estado?has_content >${registroEstado[registro.estado]}</#if></dd>
 
-
-
-                                            <!-- Descripcion estado muestra el valor del campo decodificacionTipoAnotacion de un registro -->
                                             <#if registro.descripcionEstado?has_content >
                                                 <dt class="col-sm-3 pb-2">${registro_descripcion_estado}</dt>
                                                 <dd class="col-sm-7">${registro.descripcionEstado}</dd>

@@ -1,6 +1,7 @@
 package org.fundaciobit.pluginsib.carpetafront.regweb32;
 
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
+import org.fundaciobit.pluginsib.carpetafront.regwebdetallcomponent.RegwebDetallComponent;
 
 import org.apache.commons.io.IOUtils;
 
@@ -28,10 +29,7 @@ import java.util.Properties;
  * @author anadal
  * @author mgonzalez
  */
-public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
-
-    /* XYZ ZZZ NOM 3 a 32 */
-    public static final String REGWEB32_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "regweb32.";
+public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 
     public static final String MIME_JPG = "image/jpeg";
     public static final String MIME_XML1 = "text/xml";
@@ -327,7 +325,7 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
     public ResultadoBusquedaWs getRegistres(String administrationID, String entidad, int pageNumber, Locale locale)
             throws Exception {
 
-        RegWebAsientoRegistralWs service = getRegWebAsientoRegistralWsService();
+        RegWebAsientoRegistralWs service = super.getRegWebAsientoRegistralWsService();
 
         ResultadoBusquedaWs result = service.obtenerAsientosCiudadanoCarpeta(entidad, administrationID, pageNumber,
                 locale.getLanguage());
@@ -359,33 +357,6 @@ public class Regweb32CarpetaFrontPlugin extends Regweb32DetallRegistre {
         return result;
     }
 
-    protected static final String DETALL_REGISTRE_PAGE = "detallRegistre32";
-
-    /**
-     * @return
-     * @throws Exception
-     */
-    public RegWebAsientoRegistralWs getRegWebAsientoRegistralWsService() throws Exception {
-
-        final String regweb3Url = getPropertyRequired(REGWEB32_PROPERTY_BASE + "url");
-
-        final String username = getPropertyRequired(REGWEB32_PROPERTY_BASE + "user");
-
-        final String password = getPropertyRequired(REGWEB32_PROPERTY_BASE + "pass");
-
-        final URL wsdl = new URL(regweb3Url + "?wsdl");
-
-        RegWebAsientoRegistralWsService service = new RegWebAsientoRegistralWsService(wsdl);
-
-        RegWebAsientoRegistralWs api = service.getRegWebAsientoRegistralWs();
-
-        Map<String, Object> reqContext = ((BindingProvider) api).getRequestContext();
-        reqContext.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, regweb3Url);
-        reqContext.put(BindingProvider.USERNAME_PROPERTY, username);
-        reqContext.put(BindingProvider.PASSWORD_PROPERTY, password);
-
-        return api;
-    }
 
     /**
      * Mètode que retorna la icona del plugin

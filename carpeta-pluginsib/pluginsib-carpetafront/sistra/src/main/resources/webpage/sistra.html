@@ -35,10 +35,12 @@
     <div class="loader"></div>
 </div>
 <script type="text/javascript">
+
     function mostrarCarregant() {
     	$('#llistat').hide();
         $("#carregantTramits").removeClass("loaderOcult");
     }
+    
 </script>
 <div id="llistat" class="container-contenido">
     <div class="infoNoMenu">
@@ -88,7 +90,8 @@
                 <#else>
                 <#if missatgeError?has_content >
                 <div class="alert alert-danger mt-5" role="warning">
-                    ${tramite_genericerror} ${missatgeError}
+                    ${tramite_genericerror}
+                    <div class="ocult">${missatgeError}</div>
                 </div>
             </#if>
             <#if tramits?has_content>
@@ -98,16 +101,13 @@
                 });
             </script>
             <div class="mt-5 pt-5">
-<!--                <p class="card-text mb-5">${tramite_continuar}</p>-->
                 <table id="dataTable_paginate" class="table table-striped table-bordered table-hover"
                        style="width:100%">
                     <thead class="table-success">
                     <tr>
                         <th>${tramite_tramite}</th>
                         <th style="width:120px !important">${tramite_fecha_inicio}</th>
-<!--                        <th>${tramite_acceso}</th>-->
                         <th>${tramite_estado}</th>
-<!--                        <th>${tramite_detalle}</th>-->
                         <#if development>
                             <th>${tramite_versionsistra}</th>
                         </#if>
@@ -116,19 +116,15 @@
                     <tbody>
                     <#setting date_format="MM/dd/yyyy hh">
                     <#list tramits as tramite >
-                    <tr class="clickableRow" data-url="${tramite.url}" data-mostramodal="${tramite.esMostraModal()?then('S','N')}" data-pending="${tramite.isPendiente()?then('S','N')}" data-version="${tramite.versionSistra}" style="cursor:pointer">
+                    <tr class="clickableRow" data-numero="${tramite.numero}" data-url="${tramite.url}" data-mostramodal="${tramite.esMostraModal()?then('S','N')}" data-pending="${tramite.isPendiente()?then('S','N')}" data-version="${tramite.versionSistra}" style="cursor:pointer">
                         <td>${tramite.descripcionTramite}</td>
                         <td data-order="${tramite.fechaInicio?string("yyyyMMddHHmm")}">
                             ${tramite.fechaInicio?string("dd-MM-yyyy HH:mm")}
                         </td>
-<!--                        <td>${tramite.fechaUltimoAcceso?string("dd-MM-yyyy HH:mm")}</td>-->
                         <#if tramite.isPendiente()!>
                             <td><#if tramite.esMostraModal()!>${tramite_nofinalizadopresencial}<#else>${tramite_nofinalizado}</#if></td>
-<!--                            <td align="center"><span class="oi oi-external-link" title="${tramite_continuar}"></span></td>-->
                         <#else>
                             <td><#if tramite.esRegistrado()!>${tramite_registrado}<#else>${tramite_finalizado}</#if></td>
-<!--                            <td>${tramite_finalizado}<#if tramite.tipo?has_content>: <span style="text-transform:lowercase">${tramite.tipo}</span></#if></td>-->
-<!--                            <td align="center"><span class="oi oi-eye" title="${tramite_ver}"></span></td>-->
                         </#if>
                         <#if development>
                         <td>${tramite.versionSistra}</td>
@@ -149,8 +145,11 @@
                         });
                         
                         $('.clickableRow').click(function(event) {
-                        	event.preventDefault();       
-                        	if ($(this).data('pending') == 'S' && $(this).data('mostramodal') == 'S'){
+                        	event.preventDefault();
+                        	if ($(this).data('numero') != '') {
+                        		 mostrarCarregant();
+                        		window.location.replace($(this).data('url'));
+                        	}else if ($(this).data('pending') == 'S' && $(this).data('mostramodal') == 'S'){
                         		openModalConfirm($(this).data('url'));
                         	}else{
                         		window.open($(this).data('url'), '_blank');

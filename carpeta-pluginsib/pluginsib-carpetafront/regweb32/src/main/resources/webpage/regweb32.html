@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0040)https://dev.caib.es/carpeta/tramite/list -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ca" lang="ca">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -14,7 +13,7 @@
     <script src="${resources}/carpeta/jquery-3.5.0.js"></script>
     <script src="${resources}/carpeta/popper.min.js"></script>
     <script src="${resources}/carpeta/bootstrap.min.js"></script>
-    <!-- Datetimpicker -->
+    <!-- Datetimepicker -->
     <script src="${resources}/carpeta/moment-with-locales.min.js"></script>
     <script src="${resources}/carpeta/bootstrap-datetimepicker.js"></script>
     <!-- Del Goib -->
@@ -35,7 +34,6 @@
     <script type="text/javascript">
 
         function espera() {
-           //console.log("ESPERA ...");
     	   $('#llistat').hide();
            $("#carregantDetallRegistre").removeClass("loaderOcult");
         }
@@ -58,7 +56,6 @@
         <div class="col-md-12 border-0 float-left p-0">
             <p class="lh15 text-estrofa">${registro_descripcion}</p>
             <div class="card-body tablaRegistros">
-
 
                 <#if registros?has_content>
                 <div class="mt-5">
@@ -93,14 +90,7 @@
                     </table>
                     <script type="text/javascript">
                         $(document).ready(function () {
-
                             $.fn.dataTable.moment('DD/MM/YYY HH:mm');
-                            /*$('#dataTable_paginate').DataTable({
-                                "order": [[1, "desc"]],
-                                "language": {
-                                    "url": "${resources}/i18n/${lang}.json"
-                                }
-                            });*/
                         });
 
                         $(function () {
@@ -134,10 +124,9 @@
 
                                     <#list paginacio.beginIndex..paginacio.endIndex as j>
                                          <#if paginacio.currentIndex==j-1>
-                                             <li  class="page-item active"><a class="page-link" onclick="espera();" href="#">${j}</a></li>
+                                             <li class="page-item active"><a class="page-link" onclick="espera();" href="#">${j}</a></li>
                                          </#if>
                                          <#if paginacio.currentIndex!=j-1>
-                                             <!--<li  class="page-item"><a class="page-link" href="#" onclick="mostrantLListatRegistres(${j})">${j}</a></li>-->
                                              <li  class="page-item"><a class="page-link" onclick="espera();" href="${pageUrl}${j}">${j}</a></li>
                                          </#if>
 
@@ -158,8 +147,6 @@
                             </nav>
                        </div>
                     </div>
-
-
 
                 <#else>
                     <div class="alert alert-secondary mt-5" role="alert">
