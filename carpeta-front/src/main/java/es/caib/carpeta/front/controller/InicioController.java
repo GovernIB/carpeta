@@ -63,7 +63,7 @@ public class InicioController extends CommonFrontController {
                 List<EntitatJPA> entitats = utilsEjb.getEntitatsFull(lang);
 
                 mav.addObject("entitats", entitats);
-                mav.addObject("lang", lang);
+                mav.addObject("langActual", lang);
                 List<Idioma> idiomes = utilsEjb.getIdiomes();
                 List<Idioma> idiomesActius = new ArrayList<>();
                 for(Idioma idioma : idiomes){
@@ -86,7 +86,7 @@ public class InicioController extends CommonFrontController {
                 List<EntitatJPA> entitats = utilsEjb.getEntitatsFull(lang);
 
                 mav.addObject("entitats", entitats);
-                mav.addObject("lang", lang);
+                mav.addObject("langActual", lang);
 
             }
 
@@ -163,7 +163,6 @@ public class InicioController extends CommonFrontController {
                     mav.addObject("entitats", entitats);
                     mav.addObject("numEntitats", entitats.size());
                     mav.addObject("canviarDeFront", canviardefront);
-                    mav.addObject("lang", lang);
                     List<Idioma> idiomes = utilsEjb.getIdiomes();
                     List<Idioma> idiomesActius = new ArrayList<>();
                     for(Idioma idioma : idiomes){
@@ -172,6 +171,7 @@ public class InicioController extends CommonFrontController {
                         }
                     }
                     mav.addObject("idiomes", idiomesActius);
+                    mav.addObject("langActual", lang);
 
                 } else {
 
@@ -186,7 +186,6 @@ public class InicioController extends CommonFrontController {
                     mav.addObject("entitat", codiEntitat);
                     mav.addObject("numEntitats", entitats.size());
                     mav.addObject("canviarDeFront", canviardefront);
-                    mav.addObject("lang", lang);
 
                 }
 
@@ -206,7 +205,6 @@ public class InicioController extends CommonFrontController {
                     mav.addObject("defaultEntityCode", defaultEntityCode);
                     mav.addObject("numEntitats", entitats.size());
                     mav.addObject("canviarDeFront", canviardefront);
-                    mav.addObject("lang", lang);
 
                 } else {
 
@@ -214,11 +212,9 @@ public class InicioController extends CommonFrontController {
                         mav.addObject("entitat", sesionHttp.getEntitat());
                         mav.addObject("numEntitats", entitats.size());
                         mav.addObject("canviarDeFront", canviardefront);
-                        mav.addObject("lang", lang);
                     } else {
                         mav = new ModelAndView("entitat");
                         mav.addObject("entitats", entitats);
-                        mav.addObject("lang", lang);
                     }
 
                 }
@@ -229,7 +225,6 @@ public class InicioController extends CommonFrontController {
                 mav.addObject("numEntitats", entitats.size());
                 mav.addObject("canviarDeFront", canviardefront);
                 mav.addObject("errorLogin", errorDeLogin);
-                mav.addObject("lang", lang);
 
             }
 

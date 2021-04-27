@@ -83,14 +83,14 @@
                 <div class="imc--fons"></div>
                 <div class="imc-marc-menu" id="imc-marc-menu" aria-hidden="true">
                     <div class="imc-cercador" id="imc-cercador"></div>
-                    <li>
+                    <ul>
                         <li class="imc-marc-ico imc--idioma" style="padding-left: 1em;">
                             <c:forEach var="idioma" items="${idiomes}" varStatus="loop">
                                 <fmt:message key="idioma.${idioma.idiomaID}" var="idMenu"/>
                                 <c:set var="nomIdioma" value="${idMenu}"/>
 
                                 <c:choose>
-                                    <c:when test="${lang==idioma.idiomaID}">
+                                    <c:when test="${langActual==idioma.idiomaID}">
                                         <strong class="lletraIdioma">${nomIdioma}</strong>
                                     </c:when>
                                     <c:otherwise>
@@ -129,8 +129,8 @@
                                                     <span class="card-title titol pl-1 h3">
                                                         <img src="<c:url value="/webui/entityicon/${entitat.entitatID}"/>" alt="" title="" class="imc-icona">
                                                     </span>
-                                                    <span class="titolPlugin titol h3 titolCentrat">${entitat.nom.getTraduccio(lang).valor}</span>
-                                                    <span class="card-text mb-3 mt-3 alignCenter"><i>${(empty entitat.descripcio)?'':entitat.descripcio.getTraduccio(lang).valor}</i></span>
+                                                    <span class="titolPlugin titol h3 titolCentrat">${entitat.nom.getTraduccio(langActual).valor}</span>
+                                                    <span class="card-text mb-3 mt-3 alignCenter"><i>${(empty entitat.descripcio)?'':entitat.descripcio.getTraduccio(langActual).valor}</i></span>
                                                 </button>
                                             </div>
                                         </c:forEach>

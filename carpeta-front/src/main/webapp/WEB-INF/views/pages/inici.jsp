@@ -62,6 +62,7 @@
 			  sessionStorage.setItem('canviarDeFront', '${canviarDeFront}');
 			  sessionStorage.setItem('contextPath', '${pageContext.request.contextPath}');
 			  sessionStorage.setItem('errorLogin', '${errorLogin}');
+			  sessionStorage.setItem('langActual', '${pageContext.response.locale}');
 	  </script>
   </sec:authorize>
 

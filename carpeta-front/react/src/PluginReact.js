@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import { withTranslation } from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import i18n from 'i18next';
 import ExpirarSessio from "./ExpirarSessio";
-import { withRouter } from "react-router";
+import {withRouter} from "react-router";
 
 /**
  * @author jpernia
@@ -64,7 +64,14 @@ class PluginReact extends Component {
 
         sessionStorage.setItem('idioma', i18n.language);
         $('#contentpluginreact').load(url);
-       
+
+
+        if (window['changeLanguagePlugin']) {
+            console.log('2 changeLanguagePlugin => EXISTEIX !!!!');
+            window['changeLanguagePlugin'](i18n.language);
+        } else {
+            console.log('2 changeLanguagePlugin => NOOOO EXISTEIX !!!!');
+        }
 
     }
 
