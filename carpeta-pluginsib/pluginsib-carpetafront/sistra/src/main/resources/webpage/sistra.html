@@ -34,14 +34,6 @@
 <div id="carregantTramits" class="loader-container centrat loaderOcult">
     <div class="loader"></div>
 </div>
-<script type="text/javascript">
-
-    function mostrarCarregant() {
-    	$('#llistat').hide();
-        $("#carregantTramits").removeClass("loaderOcult");
-    }
-    
-</script>
 <div id="llistat" class="container-contenido">
     <div class="infoNoMenu">
         <h2><p class="titol h2">${tramite_listado}</p></h2>
@@ -90,8 +82,8 @@
                 <#else>
                 <#if missatgeError?has_content >
                 <div class="alert alert-danger mt-5" role="warning">
-                    ${tramite_genericerror}
-                    <div class="ocult">${missatgeError}</div>
+                    ${tramite_genericerror} <a href="#" id="veureError">${error_veure_detalls}</a><a href="#" id="ocultaError" class="ocult">${error_amaga_detalls}</a>
+                    <div id="divOcult" class="ocult">${missatgeError}</div>
                 </div>
             </#if>
             <#if tramits?has_content>
@@ -155,7 +147,25 @@
                         		window.open($(this).data('url'), '_blank');
                        		}
                         });
+                        
+                        $('#veureError').click(function(){ 
+                        	$('#ocultaError').removeClass('ocult');
+                            $('#veureError').addClass('ocult');
+                        	$('#divOcult').css('display','block'); 
+                        });
+                        
+                        $('#ocultaError').click(function(){ 
+                        	$('#ocultaError').addClass('ocult');
+                        	$('#veureError').removeClass('ocult');
+                        	$('#divOcult').css('display','none'); 
+                        });
                     });
+                    
+                    
+                    function mostrarCarregant() {
+                        $('#llistat').hide();
+                        $("#carregantTramits").removeClass("loaderOcult");
+                    }
                     
                     function goParentTo(url) {
                         window.open(url, '_blank');

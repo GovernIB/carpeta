@@ -1,6 +1,7 @@
 package org.fundaciobit.pluginsib.carpetafront.sistra;
 
 import es.caib.carpeta.commons.utils.BasicAuthenticator;
+import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.DateUtils;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
@@ -253,7 +254,14 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
                 }
             } catch (SOAPFaultException e) {
                 tramits = null;
-                missatgeError = "Sistra1: " + e.getMessage() + "\n";
+                
+                // Controlar excepció Sistra1 dintre plugin de tramitació #478 
+                if (Configuracio.isCAIB() && e.getMessage().contains("es.caib.zonaper.modelInterfaz.ExcepcionPAD")) {
+                	missatgeError = "";
+                }else {
+                	missatgeError = "Sistra1: " + e.getMessage() + "\n";
+                }
+                
             }
 
             if (tramits != null) {
@@ -302,7 +310,8 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
                 "tramite.continuar", "tramite.genericerror", "tramite.versionsistra", "tramite.estado",
                 "tramite.finalizado", "tramite.nofinalizado", "tramite.nofinalizadopresencial", "tramite.todos", 
                 "tramite.detalle", "tramite.ver", "tramite.registrado", "tramite.continuar", "tramite.modal.titulo", 
-                "tramite.modal.texte", "tramite.modal.continuarBtn", "tramite.modal.cancelarBtn" };
+                "tramite.modal.texte", "tramite.modal.continuarBtn", "tramite.modal.cancelarBtn", "error.veure.detalls",
+                "error.amaga.detalls"};
 
         for (String t : traduccions) {
             map.put(t.replace('.', '_'), getTraduccio(t, locale));
