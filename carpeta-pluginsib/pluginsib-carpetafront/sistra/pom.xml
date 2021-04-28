@@ -92,7 +92,7 @@
         <dependency>
             <groupId>es.caib.sistra</groupId>
             <artifactId>zonaper-ws-api</artifactId>
-            <version>3.5.1</version>
+            <version>3.5.24</version>
         </dependency>
         
         
