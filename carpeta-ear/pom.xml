@@ -114,11 +114,11 @@
         </dependency>
 
 
-        <dependency>
+        <!-- >dependency>
             <artifactId>carpeta-pluginsib-carpetafront-regweb3</artifactId>
             <groupId>es.caib.carpeta</groupId>
             <version>1.1.9</version>
-        </dependency>
+        </dependency -->
         
         <dependency>
             <artifactId>carpeta-pluginsib-carpetafront-notib</artifactId>
@@ -152,6 +152,12 @@
 
         <dependency>
             <artifactId>carpeta-pluginsib-carpetafront-regweb32</artifactId>
+            <groupId>es.caib.carpeta</groupId>
+            <version>1.1.9</version>
+        </dependency>
+        
+        <dependency>
+            <artifactId>carpeta-pluginsib-carpetafront-regwebdetallcomponent</artifactId>
             <groupId>es.caib.carpeta</groupId>
             <version>1.1.9</version>
         </dependency>
