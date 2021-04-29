@@ -78,7 +78,7 @@ class PluginReact extends Component {
 
 	render() {
 
-        var autenticat = sessionStorage.getItem('autenticat');;
+        var autenticat = sessionStorage.getItem('autenticat');
         if (autenticat === '0') {
             console.log("S'HA INTENTAT MOSTRAR UN PLUGIN PERO NOOOO ESTAM AUTENTICATS");
             this.props.history.push("/");

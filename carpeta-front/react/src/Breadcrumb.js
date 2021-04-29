@@ -1,9 +1,9 @@
-import React, { Component, Suspense } from 'react';
+import React, {Component} from 'react';
 import i18n from 'i18next';
-import { withTranslation } from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import axios from "axios";
-import {  Link } from "react-router-dom";
-import { withRouter } from "react-router";
+import {Link} from "react-router-dom";
+import {withRouter} from "react-router";
 import * as Constants from './Constants';
 
 /**
@@ -149,16 +149,16 @@ class Breadcrumb extends Component {
             console.log("RENDER Breadcrumb items: " + TOTAL_ITEMS);
 
             items.forEach(({ id, label }, index) => {
-                if (index < TOTAL_ITEMS - 1) {
+                // if (index < TOTAL_ITEMS - 1) {
                     itemDOMS.push(<li key={index}><span className="imc-separador"> &gt;</span><Link to={id}>{label}</Link></li>);
-                } else {
-                    /*if (label === 'plugin') {
-                        itemDOMS.push(<li id="plugin" key={index}>{pluginNom}</li>);
-                    } else */ 
-                    {
-                        itemDOMS.push(<li key={index}><span className="imc-separador"> &gt; </span>{label}</li>);
-                    }
-                }
+                // } else {
+                //     /*if (label === 'plugin') {
+                //         itemDOMS.push(<li id="plugin" key={index}>{pluginNom}</li>);
+                //     } else */
+                //     {
+                //         itemDOMS.push(<li key={index}><span className="imc-separador"> &gt; </span>{label}</li>);
+                //     }
+                // }
 
 
             });

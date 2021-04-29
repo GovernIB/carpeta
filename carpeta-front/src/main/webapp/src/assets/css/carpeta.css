@@ -467,6 +467,7 @@ a.imc-bt-xarxa:hover {
 }
 .mollaPa li a {
 	color: #6B6B6B;
+	text-decoration: none;
 }
 .imc--canviarEntitat::before {
 	background-image: url(../images/canviarEntitat.png);

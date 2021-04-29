@@ -1,10 +1,8 @@
-import React, { Component, Suspense } from 'react';
-import { withTranslation } from 'react-i18next';
+import React, {Component} from 'react';
+import {withTranslation} from 'react-i18next';
 import i18n from 'i18next';
 import ExpirarSessio from "./ExpirarSessio";
-import { withRouter } from "react-router";
-import Breadcrumb from "./Breadcrumb";
-import * as breadcrumbPathsAut from "./utils/breadcrumbPathsAut";
+import {withRouter} from "react-router";
 
 class PluginHtml extends Component {
 
@@ -30,7 +28,7 @@ class PluginHtml extends Component {
 
     render() {
 
-        var autenticat = sessionStorage.getItem('autenticat');;
+        var autenticat = sessionStorage.getItem('autenticat');
         if (autenticat === '0') {
             console.log("S'HA INTENTAT MOSTRAR UN PLUGIN PERO NOOOO ESTAM AUTENTICATS");
             this.props.history.push("/");
