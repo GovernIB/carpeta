@@ -30,7 +30,7 @@
 				<c:if test="${ pipella == 'adminentitat'}">
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
 						<c:if test="${not empty loginInfo.entitat.logoCapBack}">
-						  <img src="<c:url value="${car:fileUrl(loginInfo.entitat.logoCapBack)}" />" alt="${loginInfo.entitat.logoCapBack.nom}" title="${loginInfo.entitat.codi}" style="max-height: 2.5em"/>
+						  <img src="<c:url value="${car:fileUrl(loginInfo.entitat.logoCapBack)}" />" alt="${loginInfo.entitat.logoCapBack.nom}" title="${loginInfo.entitat.codi}" />
 						</c:if>
 					</sec:authorize>
 				</c:if>
