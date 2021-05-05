@@ -59,7 +59,7 @@ public class AccessosResource {
 	@Operation(operationId = "accessos", summary = "Retorna la llista d`accessos a CARPETA")
 	@APIResponse(
             responseCode = "200",
-            description = "Llista d'accessos a l'aplicació",
+            description = "Llista d'accessos a CARPETA",
             content = @Content(mediaType = "application/json"))
 	public Response estadistiques(		
 			
@@ -72,7 +72,7 @@ public class AccessosResource {
             @Parameter(description = "Codi de l'entitat de la qual obtenim les estadistiques")
             @QueryParam("entitat") String entitatRequest,
             
-            @Parameter(description = "Idioma")
+            @Parameter(description = "Codi de l'idioma")
             @QueryParam("idioma") String idiomaRequest
 			) {
 		
@@ -114,7 +114,7 @@ public class AccessosResource {
 								Configuracio.getDefaultLanguage() : "ca"; 
 								
 			// Comprobam que la diferencia entre dates no supera el maxDays
-			int maxDays = Integer.valueOf(EjbManager.getAccesosMaxDies(propietatGlobalEjb));
+			int maxDays = Integer.valueOf(EjbManager.getAccessosMaxDies(propietatGlobalEjb));
 			long daysBeetween = Duration.between(dataIniciDate.atStartOfDay(), dataFiDate.atStartOfDay()).toDays(); 	
 			if (daysBeetween > maxDays) {
 				// .entity("La diferencia entre data inici i fi no pot ser superior a " + maxDays)
@@ -179,7 +179,7 @@ public class AccessosResource {
 				
 			}
 		} catch (I18NException e) {
-			log.error("Error cridada api rest estadistiques accesos: " + e.getMessage());
+			log.error("Error cridada api rest estadistiques accessos: " + e.getMessage());
 		}
 		
 		return Response.status(Status.BAD_REQUEST).build(); //.entity("Paràmetres incorrectes")

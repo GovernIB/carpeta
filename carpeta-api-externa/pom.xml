@@ -103,7 +103,7 @@
                     </webResources>
                 </configuration>
             </plugin>
-            <!-- Genera el descriptor openapi.json de forma estàtica després el posarem l'arrel del WAR -->
+            <!-- Genera el descriptor swagger.json de forma estàtica després el posarem l'arrel del WAR -->
             <plugin>
                 <groupId>org.apache.geronimo</groupId>
                 <artifactId>geronimo-openapi-maven-plugin</artifactId>
@@ -118,7 +118,7 @@
                             <endpointClasses>
                                 <endpointClass>es.caib.carpeta.api.externa.services.AccessosResource</endpointClass>
                             </endpointClasses>
-                            <output>${project.build.directory}/openapi/openapi.json</output>
+                            <output>${project.build.directory}/openapi/swagger.json</output>
                             <info>
                                 <version>${project.version}</version>
                                 <title>${project.name}</title>
@@ -213,7 +213,7 @@
                             <replacements>
                                 <replacement>
                                     <token>https://petstore.swagger.io/v2/swagger.json</token>
-                                    <value>./openapi.json</value>
+                                    <value>./swagger.json</value>
                                 </replacement>
                             </replacements>
                         </configuration>
