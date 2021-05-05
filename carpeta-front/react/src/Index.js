@@ -1,6 +1,5 @@
-
-import React, { Component } from 'react';
-import { withTranslation } from 'react-i18next';
+import React, {Component} from 'react';
+import {withTranslation} from 'react-i18next';
 import BarraMenu from './BarraMenu';
 import MenuDesllisant from './MenuDesllisant';
 import MenuLateral from './MenuLateral';
@@ -19,11 +18,9 @@ import NivellAutenticacio from './NivellAutenticacio';
 import * as Constants from './Constants';
 
 // NO ESBORRAR LA SEGÜENT LINIA  !!!!!!
-import i18n from './i18n';
 
-import { HashRouter, Switch, Route, useLocation, useHistory } from "react-router-dom";
-import { withRouter } from "react-router";
-
+import {Route, Switch} from "react-router-dom";
+import {withRouter} from "react-router";
 
 
 import LlistatDePlugins from './LlistatDePlugins';
@@ -43,7 +40,8 @@ class Index extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            colorMenu: null
+            colorMenu: null,
+            error: null
         }
     }
 
@@ -52,9 +50,21 @@ class Index extends Component {
         var baseURL = sessionStorage.getItem('contextPath');
         var url = baseURL + `/webui/infoEntitat`;
 
-        axios.get(url).then(res => {
-            this.setState({ colorMenu : res.data.color });
-        });
+        axios.get(url)
+            .then(res => {
+                this.setState({ colorMenu : res.data.color });
+            })
+            .catch(error => {
+                console.log(JSON.stringify(error));
+                if (error.response) {
+                    console.log("error.response.data: " + error.response.data);
+                    console.log("error.response.status: " + error.response.status);
+                    console.log("error.response.headers: " + error.response.headers);
+                }
+                this.setState({
+                    error: JSON.stringify(error)
+                });
+            });
     }
   
 
@@ -72,7 +82,18 @@ class Index extends Component {
 
         var infoUsuari;
         var estilContingut = (auth === '1')? { paddingTop: '6em'} : {paddingTop: '0em'};
-        const styleColorMenu = (this.state.colorMenu === null)? { backgroundColor : '#32814B', minHeight: '70px'} : { minHeight: '70px', backgroundColor : "#"+this.state.colorMenu};
+
+        let styleColorMenu;
+
+        if (this.state.error) {
+            styleColorMenu = <div className="alert alert-danger" role="alert">{this.state.error}</div>;
+        } else {
+            styleColorMenu = (this.state.colorMenu === null) ? {
+                backgroundColor: '#32814B',
+                minHeight: '70px'
+            } : {minHeight: '70px', backgroundColor: "#" + this.state.colorMenu};
+        }
+
         if (auth === '1' && user != null) {
             infoUsuari = <div className="imc-titol usuari" style={styleColorMenu}>
                 <nav className="imc--contingut">

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { withTranslation } from 'react-i18next';
+import React, {Component} from 'react';
+import {withTranslation} from 'react-i18next';
 import i18n from 'i18next';
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { withRouter } from "react-router";
+import {Link} from "react-router-dom";
+import {withRouter} from "react-router";
 import * as Constants from './Constants';
 
 /**
@@ -18,6 +18,7 @@ class LlistatDePlugins extends Component {
             items: [], // plugins, pseudoplugin i seccions
             nomEntitat: "",
             seccio: "",
+            error: null
         }
         this.canviIdioma = this.canviIdioma.bind(this);
         i18n.on('languageChanged', this.canviIdioma);
@@ -39,12 +40,24 @@ class LlistatDePlugins extends Component {
 
            const baseURL = sessionStorage.getItem('contextPath');
            const url = baseURL + `/webui/fullinfosortedauth/` + seccioContext;
-           axios.get(url).then(res => {
-               const fulldata = res.data;
-               this.setState({  items: fulldata.items, 
-                                nomEntitat: fulldata.nomEntitat                              
-                            });
-           });
+           axios.get(url)
+               .then(res => {
+                   const fulldata = res.data;
+                   this.setState({ items: fulldata.items, nomEntitat: fulldata.nomEntitat })
+                })
+               .catch(error => {
+                   console.log(JSON.stringify(error));
+                   if (error.response) {
+                       console.log("error.response.data: " + error.response.data);
+                       console.log("error.response.status: " + error.response.status);
+                       console.log("error.response.headers: " + error.response.headers);
+                   }
+                   this.setState({
+                       items:false,
+                       nomEntitat: [],
+                       error: JSON.stringify(error)
+                   });
+               });
         } else {
             console.error("S'ha cridat a LListat de Plugins sense estar AUTHENTICAT !!!!!");
         }
@@ -103,62 +116,89 @@ class LlistatDePlugins extends Component {
 
         let allItems = [];
 
-        this.state.items.forEach((s, i) => {
-            const gravetatCssClass = (s.gravetat > 0) ? `alert${s.gravetat}` : '';
-            switch(s.tipus) {
-                
-                case 0: // Plugin react
-                    allItems.push(
-                        <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
-                            <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${gravetatCssClass}`} to={{pathname: baseSeccio + Constants.PLUGINREACT_PATH + s.context, nomPagina: "plugin" }} title={s.missatge} >
-                                <span className="card-title titol pl-1 h3"><img src={urlBase + s.urllogo} alt={s.nom} title="" className="imc-icona" /></span>
-                                <span className="titolPlugin titol h3">{s.nom}</span>
-                                <span className="card-text mb-3 mt-3 alignCenter" style={styleDesc}>{s.descripcio}</span>
-                            </Link>
-                        </div>
-                    );
-                    break;
-                case 1: // Plugin html
-                    allItems.push(
-                        <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
-                            <Link className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 ${gravetatCssClass}`} to={{pathname: baseSeccio + Constants.PLUGINHTML_PATH + s.context, nomPagina: "plugin" }} title={s.missatge} >
-                                <span className="card-title titol pl-1 h3"><img src={urlBase + s.urllogo} alt={s.nom} title="" className="imc-icona" /></span>
-                                <span className="titolPlugin titol h3">{s.nom}</span>
-                                <span className="card-text mb-3 mt-3 alignCenter" style={styleDesc}>{s.descripcio}</span>
-                            </Link>
-                        </div>
-                    );
-                    break;
+        if (this.state.error) {
+            allItems = <div className="alert alert-danger" role="alert">{this.state.error}</div>;
+        } else {
 
-                case 3: // Seccio
-                    allItems.push(
-                        <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
-                            <Link to={baseSeccio + Constants.SECCIO_PATH + s.context} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}  >
-                                <span className="card-title titol pl-1 h3"><img src={s.urllogo} alt={s.nom} title="" className="imc-icona" /></span>
-                                <span className="titolPlugin  titol h3">{s.nom}</span>
-                                <span className="card-text mb-3 mt-3 alignCenter" style={styleDesc}>{s.descripcio}</span>
-                            </Link>
-                        </div>
-                    );
-                    break;
+            this.state.items.forEach((s, i) => {
+                const gravetatCssClass = (s.gravetat > 0) ? `alert${s.gravetat}` : '';
+                switch (s.tipus) {
 
-                case 4: // PseudoPlugin
-                    allItems.push(
-                        <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" >
-                            <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`} onClick={() => window.open(s.url)} >
-                                <span className="card-title titol pl-1 h3"><img src={s.urllogo} alt={s.nom} title="" className="imc-icona" /></span>
-                                <span className="titolPlugin  titol h3">{s.nom}</span>
-                                <span className="card-text mb-3 mt-3 alignCenter" style={styleDesc}>{s.descripcio}</span>
-                            </button>
-                        </div>
-                    );
-                    break;
-            }
-        });
+                    case 0: // Plugin react
+                        allItems.push(
+                            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
+                                <Link
+                                    className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${gravetatCssClass}`}
+                                    to={{
+                                        pathname: baseSeccio + Constants.PLUGINREACT_PATH + s.context,
+                                        nomPagina: "plugin"
+                                    }} title={s.missatge}>
+                                    <span className="card-title titol pl-1 h3"><img src={urlBase + s.urllogo}
+                                                                                    alt={s.nom} title=""
+                                                                                    className="imc-icona"/></span>
+                                    <span className="titolPlugin titol h3">{s.nom}</span>
+                                    <span className="card-text mb-3 mt-3 alignCenter"
+                                          style={styleDesc}>{s.descripcio}</span>
+                                </Link>
+                            </div>
+                        );
+                        break;
+                    case 1: // Plugin html
+                        allItems.push(
+                            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
+                                <Link
+                                    className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 ${gravetatCssClass}`}
+                                    to={{
+                                        pathname: baseSeccio + Constants.PLUGINHTML_PATH + s.context,
+                                        nomPagina: "plugin"
+                                    }} title={s.missatge}>
+                                    <span className="card-title titol pl-1 h3"><img src={urlBase + s.urllogo}
+                                                                                    alt={s.nom} title=""
+                                                                                    className="imc-icona"/></span>
+                                    <span className="titolPlugin titol h3">{s.nom}</span>
+                                    <span className="card-text mb-3 mt-3 alignCenter"
+                                          style={styleDesc}>{s.descripcio}</span>
+                                </Link>
+                            </div>
+                        );
+                        break;
+
+                    case 3: // Seccio
+                        allItems.push(
+                            <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
+                                <Link to={baseSeccio + Constants.SECCIO_PATH + s.context}
+                                      className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}>
+                                    <span className="card-title titol pl-1 h3"><img src={s.urllogo} alt={s.nom} title=""
+                                                                                    className="imc-icona"/></span>
+                                    <span className="titolPlugin  titol h3">{s.nom}</span>
+                                    <span className="card-text mb-3 mt-3 alignCenter"
+                                          style={styleDesc}>{s.descripcio}</span>
+                                </Link>
+                            </div>
+                        );
+                        break;
+
+                    case 4: // PseudoPlugin
+                        allItems.push(
+                            <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
+                                <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}
+                                        onClick={() => window.open(s.url)}>
+                                    <span className="card-title titol pl-1 h3"><img src={s.urllogo} alt={s.nom} title=""
+                                                                                    className="imc-icona"/></span>
+                                    <span className="titolPlugin  titol h3">{s.nom}</span>
+                                    <span className="card-text mb-3 mt-3 alignCenter"
+                                          style={styleDesc}>{s.descripcio}</span>
+                                </button>
+                            </div>
+                        );
+                        break;
+                }
+            });
+        }
 
         let titolHeader;
         let subtitolHeader;
-        if (this.props.seccioContext == 0) {
+        if (this.props.seccioContext === 0) {
             titolHeader = t('paginaIniciTitolPrivat') + entitatNom;
             subtitolHeader = t('paginaIniciIntroduccioPrivat');
         } else {

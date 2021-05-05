@@ -91,7 +91,7 @@ public class InicioController extends CommonFrontController {
             }
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionHtml(e, request, response);
         }
 
         return mav;
@@ -124,7 +124,7 @@ public class InicioController extends CommonFrontController {
             sesionHttp.setEntitatID(entitatID);
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionHtml(e, request, response);
         }
 
         return "redirect:/";
@@ -229,10 +229,27 @@ public class InicioController extends CommonFrontController {
             }
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionHtml(e, request, response);
         }
         
         log.info("\n XYZ ZZZ SURT DE INICI !!!! \n");
+
+        return mav;
+
+    }
+
+    @RequestMapping(value = { "/error"}, method = RequestMethod.GET)
+    public ModelAndView error(HttpServletRequest request, HttpServletResponse response, Exception e) throws I18NException {
+
+        ModelAndView mav = new ModelAndView("error");
+
+        try {
+
+            mav.addObject("error", e.getMessage());
+
+        } catch (Throwable e1) {
+            log.error("Error: " + e1.getMessage(), e1);
+        }
 
         return mav;
 

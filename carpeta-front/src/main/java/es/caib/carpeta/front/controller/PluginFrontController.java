@@ -1,11 +1,20 @@
 package es.caib.carpeta.front.controller;
 
 import com.google.gson.Gson;
-
-import org.fundaciobit.genapp.common.i18n.I18NException;
-
+import es.caib.carpeta.commons.utils.UsuarioClave;
+import es.caib.carpeta.front.config.UsuarioAutenticado;
+import es.caib.carpeta.front.utils.SesionHttp;
+import es.caib.carpeta.hibernate.HibernateFileUtil;
+import es.caib.carpeta.logic.AccesLogicaService;
+import es.caib.carpeta.logic.AuditoriaLogicaService;
+import es.caib.carpeta.logic.LogCarpetaLogicaService;
+import es.caib.carpeta.logic.UtilitiesForFrontLogicaService;
+import es.caib.carpeta.logic.utils.PluginInfo;
+import es.caib.carpeta.persistence.EntitatJPA;
+import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.core.Authentication;
@@ -19,25 +28,14 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_ACCES_PLUGIN;
-import es.caib.carpeta.commons.utils.UsuarioClave;
-import es.caib.carpeta.front.config.UsuarioAutenticado;
-import es.caib.carpeta.front.utils.SesionHttp;
-import es.caib.carpeta.hibernate.HibernateFileUtil;
-import es.caib.carpeta.persistence.EntitatJPA;
-import es.caib.carpeta.logic.AccesLogicaService;
-import es.caib.carpeta.logic.AuditoriaLogicaService;
-import es.caib.carpeta.logic.LogCarpetaLogicaService;
-import es.caib.carpeta.logic.UtilitiesForFrontLogicaService;
-import es.caib.carpeta.logic.utils.PluginInfo;
-import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import java.net.InetAddress;
 import java.sql.Timestamp;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_ACCES_PLUGIN;
 
 
 /**
@@ -87,7 +85,7 @@ public class PluginFrontController extends CommonFrontController {
             mav.addObject("plugins", plugins);
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
 
         return mav;
@@ -132,6 +130,8 @@ public class PluginFrontController extends CommonFrontController {
         UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado) authentication.getPrincipal();
         administrationID = usuarioAutenticado.getUsuarioClave().getNif();
 
+        String urlToShowPluginPage = startPublicSignatureProcess(request, response, pluginID, administrationID, baseFront,usuarioAutenticado.getUsuarioClave());
+        ModelAndView mav = new ModelAndView(new RedirectView(urlToShowPluginPage));
 
         try {
 
@@ -160,25 +160,25 @@ public class PluginFrontController extends CommonFrontController {
             */
             baseFront = urlBase;
 
+
+
+
+            if (isreact) {
+                mav = new ModelAndView(new RedirectView(urlToShowPluginPage));
+            } else {
+                final String view = "plugin_contenidor"; // => \WEB-INF\views\pages\plugin_contenidor.jsp
+
+                mav = new ModelAndView(view);
+                // mav.addObject("signaturesSetID", signaturesSetID);
+                mav.addObject("urlToShowPluginPage", urlToShowPluginPage);
+            }
+
+
         } catch (Throwable e) {
-            processException(e, response);
+            EntitatJPA entitatJPA = entitatEjb.findByCodi(sesionHttp.getEntitat());
+            accesLogicaEjb.crearAcces(usuarioAutenticado.getUsuarioClave(), TIPUS_ACCES_PLUGIN, entitatJPA.getEntitatID(),pluginID,new Timestamp(new Date().getTime()),LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress(), false);
+            processExceptionHtml(e, request, response);
         }
-
-
-        String urlToShowPluginPage = startPublicSignatureProcess(request, response, pluginID, administrationID, baseFront,usuarioAutenticado.getUsuarioClave());
-
-        ModelAndView mav;
-
-        if (isreact) {
-            mav = new ModelAndView(new RedirectView(urlToShowPluginPage));
-        } else {
-            final String view = "plugin_contenidor"; // => \WEB-INF\views\pages\plugin_contenidor.jsp
-
-            mav = new ModelAndView(view);
-            // mav.addObject("signaturesSetID", signaturesSetID);
-            mav.addObject("urlToShowPluginPage", urlToShowPluginPage);
-        }
-
 
         return mav;
 
@@ -193,7 +193,7 @@ public class PluginFrontController extends CommonFrontController {
         String urlToShowPluginPage = null;
         EntitatJPA entitatJPA = entitatEjb.findByCodi(sesionHttp.getEntitat());
 
-        try {
+//        try {
 
             String context = AbstractCarpetaFrontModuleController.PUBLIC_CONTEXTWEB;
 
@@ -207,17 +207,15 @@ public class PluginFrontController extends CommonFrontController {
 
             //ACCESS
 
-
             accesLogicaEjb.crearAcces(usuarioClave,TIPUS_ACCES_PLUGIN, entitatJPA.getEntitatID(),pluginID,new Timestamp(new Date().getTime()),LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress(), true);
 
 
-
-        } catch (Throwable e) {
-
-            accesLogicaEjb.crearAcces(usuarioClave,TIPUS_ACCES_PLUGIN, entitatJPA.getEntitatID(),pluginID,new Timestamp(new Date().getTime()),LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress(), false);
-
-            processException(e, response);
-        }
+//        } catch (Throwable e) {
+//
+//            accesLogicaEjb.crearAcces(usuarioClave,TIPUS_ACCES_PLUGIN, entitatJPA.getEntitatID(),pluginID,new Timestamp(new Date().getTime()),LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress(), false);
+//
+//            processExceptionHtml(e, request, response);
+//        }
 
         return urlToShowPluginPage;
     }
@@ -256,7 +254,7 @@ public class PluginFrontController extends CommonFrontController {
             }
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
 
     }
@@ -291,7 +289,7 @@ public class PluginFrontController extends CommonFrontController {
             response.getOutputStream().write(utf8JsonString);
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
         
     }

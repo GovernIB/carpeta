@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import { withTranslation } from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 
 class LogoLateral extends Component {
 
     constructor(){
         super();
         this.state = {
-            infologolateral: []
+            infologolateral: [],
+            error: null
         }
     }
 
@@ -20,28 +21,46 @@ class LogoLateral extends Component {
             .then((infologolateral) => {
                 this.setState({ infologolateral: infologolateral })
             })
+            .catch(error => {
+                console.log(JSON.stringify(error));
+                if (error.response) {
+                    console.log("error.response.data: " + error.response.data);
+                    console.log("error.response.status: " + error.response.status);
+                    console.log("error.response.headers: " + error.response.headers);
+                }
+                this.setState({
+                    infologolateral: [],
+                    error: JSON.stringify(error)
+                });
+            });
+
     }
 
     render() {
 
         const {t} = this.props;
 
-        let infologolateral;
+        let content;
 
-        if(!this.state.infologolateral.length){
-            infologolateral = "";
-        } else{
-            infologolateral = this.state.infologolateral.map((s, i) => (
-                <a href={s.url} className="imc--goib" title={s.label} key={i} target="_blank">
-                    <img src={s.urllogo} style={{maxWidth: "70%"}} title="" alt="" className="logo-govern" />
-                    <span>{s.label}</span>
-                </a>
-            ))
+        if (this.state.error) {
+            content = <div className="alert alert-danger" role="alert">{this.state.error}</div>;
+        } else {
+
+            if (!this.state.infologolateral.length) {
+                content = "";
+            } else {
+                content = this.state.infologolateral.map((s, i) => (
+                    <a href={s.url} className="imc--goib" title={s.label} key={i} target="_blank">
+                        <img src={s.urllogo} style={{maxWidth: "70%"}} title="" alt="" className="logo-govern"/>
+                        <span>{s.label}</span>
+                    </a>
+                ))
+            }
         }
 
         return (
             <div>
-                {infologolateral}
+                {content}
             </div>
         );
     }

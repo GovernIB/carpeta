@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { withTranslation } from 'react-i18next';
+import React, {Component} from 'react';
+import {withTranslation} from 'react-i18next';
 import axios from "axios";
 import i18n from 'i18next';
 
@@ -11,7 +11,8 @@ class AvisosFront extends Component {
     constructor() {
         super();
         this.state = {
-            avisos: []
+            avisos: [],
+            error: null
         }
         this.canviatIdioma = this.canviatIdioma.bind(this);
         i18n.on('languageChanged', this.canviatIdioma);
@@ -29,14 +30,41 @@ class AvisosFront extends Component {
 
         if (auth === '0') {
             var url = baseURL + "/webui/avisosfrontpublic";
-            axios.get(url).then(res => {
-                this.setState({ avisos: res.data })
-            });
+            axios.get(url)
+                .then(res => {
+                    this.setState({ avisos: res.data })
+                })
+                .catch(error => {
+                    console.log(JSON.stringify(error));
+                    if (error.response) {
+                        console.log("error.response.data: " + error.response.data);
+                        console.log("error.response.status: " + error.response.status);
+                        console.log("error.response.headers: " + error.response.headers);
+                    }
+                    this.setState({
+                        avisos: "",
+                        error: JSON.stringify(error)
+                    });
+                });
+
         } else {
             var url2 = baseURL + "/webui/avisosfrontprivat";
-            axios.get(url2).then(res => {
-                this.setState({ avisos: res.data })
-            })
+            axios.get(url2)
+                .then(res => {
+                    this.setState({ avisos: res.data })
+                })
+                .catch(error => {
+                    console.log(JSON.stringify(error));
+                    if (error.response) {
+                        console.log("error.response.data: " + error.response.data);
+                        console.log("error.response.status: " + error.response.status);
+                        console.log("error.response.headers: " + error.response.headers);
+                    }
+                    this.setState({
+                        avisos: "",
+                        error: JSON.stringify(error)
+                    });
+                });
         }
     }
 
@@ -46,33 +74,38 @@ class AvisosFront extends Component {
         const { t } = this.props;
         var autenticat = sessionStorage.getItem('autenticat');
 
-        let avisFront;
+        let content;
 
-        if (autenticat === '0') {
-            if (!this.state.avisos.length) {
-                avisFront = "";
-            } else {
-                avisFront = this.state.avisos.map((s, i) => (                    
-                    <div key={i} className={`alert avis${s.gravetat} alert-dismissible fade show`} role="alert">                       
-                        {s.label}
-                        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                ))
-            }
+        if (this.state.error) {
+            content = <div className="alert alert-danger" role="alert">{this.state.error}</div>;
         } else {
-            if (!this.state.avisos.length) {
-                avisFront = "";
+
+            if (autenticat === '0') {
+                if (!this.state.avisos.length) {
+                    content = "";
+                } else {
+                    content = this.state.avisos.map((s, i) => (
+                        <div key={i} className={`alert avis${s.gravetat} alert-dismissible fade show`} role="alert">
+                            {s.label}
+                            <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    ))
+                }
             } else {
-                avisFront = this.state.avisos.map((s, i) => (
-                    <div key={i} className={`alert avis${s.gravetat} alert-dismissible fade show`} role="alert">
-                        {s.label}
-                        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                ))
+                if (!this.state.avisos.length) {
+                    content = "";
+                } else {
+                    content = this.state.avisos.map((s, i) => (
+                        <div key={i} className={`alert avis${s.gravetat} alert-dismissible fade show`} role="alert">
+                            {s.label}
+                            <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    ))
+                }
             }
         }
 
@@ -89,7 +122,7 @@ class AvisosFront extends Component {
 
         return (
             <div>
-                {avisFront}
+                {content}
                 {avisError}
             </div>
         );

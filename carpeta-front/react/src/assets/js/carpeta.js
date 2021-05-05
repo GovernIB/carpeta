@@ -1,3 +1,5 @@
+import React from "react";
+
 $(document).ready(function () {
   $('#dataTable_paginate').DataTable();
   $('.dataTables_length').addClass('bs-select');
@@ -81,3 +83,12 @@ $(function() {
 		}
 	});
 });
+
+export function mostrarError(error) {
+	return <div className="alert avis3 alert-dismissible fade show" role="alert">
+		{error}
+		<button type="button" className="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>;
+}

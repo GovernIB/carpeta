@@ -9,7 +9,8 @@ class EnllasosPeuCentral extends Component {
     constructor(){
         super();
         this.state = {
-            enllasosPeuCentral: []
+            enllasosPeuCentral: [],
+            error: null
         }
         this.canviatIdioma = this.canviatIdioma.bind(this);
         i18n.on('languageChanged', this.canviatIdioma);
@@ -25,9 +26,23 @@ class EnllasosPeuCentral extends Component {
 
         var baseURL = sessionStorage.getItem('contextPath');
         var url =  baseURL + "/webui/centralfooterlinks";
-        axios.get(url).then(res => {
-            this.setState({ enllasosPeuCentral: res.data })
-        });
+        axios.get(url)
+            .then(res => {
+                this.setState({ enllasosPeuCentral: res.data })
+            })
+            .catch(error => {
+                console.log(JSON.stringify(error));
+                if (error.response) {
+                    console.log("error.response.data: " + error.response.data);
+                    console.log("error.response.status: " + error.response.status);
+                    console.log("error.response.headers: " + error.response.headers);
+                }
+                this.setState({
+                    loading:false,
+                    enllasosPeuCentral: "",
+                    error: JSON.stringify(error)
+                });
+            });
 
     }
 
@@ -45,19 +60,24 @@ class EnllasosPeuCentral extends Component {
 		// 	mapa = <li><a href="javascript:newMapaWeb('contingut', '0');">{ t('peuMapa') }</a></li>;
 		// }
 
-        let enllasosPeuCentral;
-        
-        if(!this.state.enllasosPeuCentral.length){
-            enllasosPeuCentral = "";
-        } else{
-            enllasosPeuCentral = this.state.enllasosPeuCentral.map((s, i) => (
-                <li key={i}>
-                    <a href={s.url} target="_blank">
-                        <span>{s.label}</span>
-                        <img src={s.urllogo} title="" alt="" />
-                    </a>
-                </li>
-            ))
+        let content;
+
+        if (this.state.error) {
+            content = <div className="alert alert-danger" role="alert">{this.state.error}</div>;
+        } else {
+
+            if (!this.state.enllasosPeuCentral.length) {
+                content = "";
+            } else {
+                content = this.state.enllasosPeuCentral.map((s, i) => (
+                    <li key={i}>
+                        <a href={s.url} target="_blank">
+                            <span>{s.label}</span>
+                            <img src={s.urllogo} title="" alt=""/>
+                        </a>
+                    </li>
+                ))
+            }
         }
 
         var entitatActiva = sessionStorage.getItem('entitat');
@@ -75,7 +95,7 @@ class EnllasosPeuCentral extends Component {
             <ul className="enllasosPeu">
                 <li><Link to={{pathname: `/mapaweb`, nomPagina: 'peuMapa' }}> { t('peuMapa') }</Link></li>
                 {avisLegal}
-                {enllasosPeuCentral}
+                {content}
             </ul>
         );
     }

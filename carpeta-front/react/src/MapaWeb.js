@@ -1,8 +1,8 @@
-import React, { Component, Suspense } from 'react';
-import { withTranslation } from 'react-i18next';
+import React, {Component} from 'react';
+import {withTranslation} from 'react-i18next';
 import axios from "axios";
 import ExpirarSessio from "./ExpirarSessio";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import i18n from 'i18next';
 import * as Constants from './Constants';
 
@@ -14,7 +14,8 @@ class MapaWeb extends Component {
 	constructor(){
 		super();
 		this.state = {
-			plugins: []
+			plugins: [],
+			error: null
 		}
 		this.canviatIdioma = this.canviatIdioma.bind(this);
         i18n.on('languageChanged', this.canviatIdioma);
@@ -35,13 +36,25 @@ class MapaWeb extends Component {
 
 			// 0 == Nivell Arell
 			var url = baseURL + `/webui/fullinfo/0`;
-			axios.get(url).then(res => {
-				var fulldata = res.data;
-				this.setState({ plugins: fulldata.veureplugins, 
-								menuEnllasos: fulldata.menuslidelinks,								
-								menupseudoplugin: fulldata.menupseudoplugin,
-								seccions: fulldata.seccions});
-			});
+			axios.get(url)
+				.then(res => {
+					var fulldata = res.data;
+					this.setState({ plugins: fulldata.veureplugins,
+									menuEnllasos: fulldata.menuslidelinks,
+									menupseudoplugin: fulldata.menupseudoplugin,
+									seccions: fulldata.seccions});
+				})
+				.catch(error => {
+					console.log(JSON.stringify(error));
+					if (error.response) {
+						console.log("error.response.data: " + error.response.data);
+						console.log("error.response.status: " + error.response.status);
+						console.log("error.response.headers: " + error.response.headers);
+					}
+					this.setState({
+						error: JSON.stringify(error)
+					});
+				});
 		}
 	}
 
@@ -54,71 +67,81 @@ class MapaWeb extends Component {
 
 		let enllazos = [];
 
+		if (this.state.error) {
+			enllazos = <div className="alert alert-danger" role="alert">{this.state.error}</div>;
+		} else {
 
-		var accessibilitat = <p key={0} className="lh15 upper">
-								<Link to={{pathname: `/accessibilitat`, nomPagina: 'menuAccessibilitat' }} className="imc-marc-ico imc--accessibilitat">
-									<span>{t('menuAccessibilitat')}</span>
-								</Link>
-							</p>;
 
-		enllazos.push(accessibilitat);
-		
+			var accessibilitat = <p key={0} className="lh15 upper">
+				<Link to={{pathname: `/accessibilitat`, nomPagina: 'menuAccessibilitat'}}
+					  className="imc-marc-ico imc--accessibilitat">
+					<span>{t('menuAccessibilitat')}</span>
+				</Link>
+			</p>;
 
-		var autenticat = sessionStorage.getItem('autenticat');
-		if (autenticat === '1') {
-			logoClau = '';
-			var urlBase = sessionStorage.getItem('contextPath');
+			enllazos.push(accessibilitat);
 
-			const plugins = this.state.plugins;
-			
-			if (this.state.plugins) {
-			    plugins.filter(s => s.reactComponent === false).map((s, i) => {
-					enllazos.push(
-						<p key={'ph' + i} className="lh15 upper">
-						<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} className="imc-icona" title="" alt="" />
-						<Link to={Constants.PLUGINHTML_PATH + s.context} >{s.nom}</Link>
-						</p>)
+
+			var autenticat = sessionStorage.getItem('autenticat');
+			if (autenticat === '1') {
+				logoClau = '';
+				var urlBase = sessionStorage.getItem('contextPath');
+
+				const plugins = this.state.plugins;
+
+				if (this.state.plugins) {
+					plugins.filter(s => s.reactComponent === false).map((s, i) => {
+						enllazos.push(
+							<p key={'ph' + i} className="lh15 upper">
+								<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+									 className="imc-icona" title="" alt=""/>
+								<Link to={Constants.PLUGINHTML_PATH + s.context}>{s.nom}</Link>
+							</p>)
 					});
 
-                plugins.filter(s => s.reactComponent === true).map((s, i) => {
-					enllazos.push(
-				    <p key={'pr' + i} className="lh15 upper">
-						<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""} className="imc-icona" title="" alt="" />
-				        <Link to={Constants.PLUGINREACT_PATH + s.context} >{s.nom}</Link>
-				    </p>);
-				});
-			}
+					plugins.filter(s => s.reactComponent === true).map((s, i) => {
+						enllazos.push(
+							<p key={'pr' + i} className="lh15 upper">
+								<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
+									 className="imc-icona" title="" alt=""/>
+								<Link to={Constants.PLUGINREACT_PATH + s.context}>{s.nom}</Link>
+							</p>);
+					});
+				}
 
-			
-			if(this.state.menupseudoplugin) {
-				this.state.menupseudoplugin.map((s, i) => {
-					enllazos.push(
-					<p key={'ps' + i} className="lh15 upper">
-						<a href={s.url} target="_blank" title={s.nom}>
-							<img src={s.urllogo} title="" alt="" className="imc-icona iconaEnllas" />
-							<span>{s.label}</span>
-						</a>
-					</p>
-				)})
-			}
 
-			
-			if (this.state.seccions) {
-			    this.state.seccions.map((s, i) => {
-					enllazos.push(
-					<p key={'s' + i} className="lh15 upper">
-					<Link to={Constants.SECCIO_PATH + s.context} >
-						<img src={s.iconaID} title="" alt={s.descripcio} className="imc-icona iconaEnllas" />
-						<span>{s.nom}</span>
-					</Link>
-				</p>
-			    )});
-			}
-		
+				if (this.state.menupseudoplugin) {
+					this.state.menupseudoplugin.map((s, i) => {
+						enllazos.push(
+							<p key={'ps' + i} className="lh15 upper">
+								<a href={s.url} target="_blank" title={s.nom}>
+									<img src={s.urllogo} title="" alt="" className="imc-icona iconaEnllas"/>
+									<span>{s.label}</span>
+								</a>
+							</p>
+						)
+					})
+				}
 
-		}
-		if (autenticat === '0') {
-			logoClau = <span className="oi oi-lock-locked colorClave" title={t('mapaWebClave')}/>;
+
+				if (this.state.seccions) {
+					this.state.seccions.map((s, i) => {
+						enllazos.push(
+							<p key={'s' + i} className="lh15 upper">
+								<Link to={Constants.SECCIO_PATH + s.context}>
+									<img src={s.iconaID} title="" alt={s.descripcio} className="imc-icona iconaEnllas"/>
+									<span>{s.nom}</span>
+								</Link>
+							</p>
+						)
+					});
+				}
+
+
+			}
+			if (autenticat === '0') {
+				logoClau = <span className="oi oi-lock-locked colorClave" title={t('mapaWebClave')}/>;
+			}
 		}
 
 		clearTimeout(sessionStorage.getItem('idTimeOut'));

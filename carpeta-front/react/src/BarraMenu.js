@@ -9,7 +9,8 @@ class BarraMenu extends Component {
 		super();
 		this.state = {
 			enllasosMenuBar: null,
-			colorMenu: null
+			colorMenu: null,
+			error: null
 		}
 		this.canviatIdioma = this.canviatIdioma.bind(this);
         i18n.on('languageChanged', this.canviatIdioma);
@@ -29,16 +30,44 @@ class BarraMenu extends Component {
 			var baseURL = sessionStorage.getItem('contextPath');
 			var url = baseURL + `/webui/menubarlinks`;
 
-			axios.get(url).then(res => {
-				this.setState({ enllasosMenuBar : res.data });
-			});
+			axios.get(url)
+				.then(res => {
+					this.setState({ enllasosMenuBar : res.data });
+				})
+				.catch(error => {
+					console.log(JSON.stringify(error));
+					if (error.response) {
+						console.log("error.response.data: " + error.response.data);
+						console.log("error.response.status: " + error.response.status);
+						console.log("error.response.headers: " + error.response.headers);
+					}
+					this.setState({
+						loading:false,
+						entitats: "",
+						error: JSON.stringify(error)
+					});
+				});
 		// }
 
 		var url2 = baseURL + `/webui/infoEntitat`;
 
-		axios.get(url2).then(res => {
-			this.setState({ colorMenu : res.data.color });
-		});
+		axios.get(url2)
+			.then(res => {
+				this.setState({ colorMenu : res.data.color });
+			})
+			.catch(error => {
+				console.log(JSON.stringify(error));
+				if (error.response) {
+					console.log("error.response.data: " + error.response.data);
+					console.log("error.response.status: " + error.response.status);
+					console.log("error.response.headers: " + error.response.headers);
+				}
+				this.setState({
+					loading:false,
+					entitats: "",
+					error: JSON.stringify(error)
+				});
+			});
 	}
 
 
@@ -47,20 +76,25 @@ class BarraMenu extends Component {
         const { t } = this.props;
 		var auth = sessionStorage.getItem('autenticat');
 
-		let enllasosBarraMenu;
+		let content;
 
-		// if(auth === '0' || !this.state.enllasosMenuBar ){
-		if(!this.state.enllasosMenuBar){
-			enllasosBarraMenu = "";
-		} else{
-			enllasosBarraMenu = this.state.enllasosMenuBar.map((s, i) => (
-				<li className="itemBar" key={i}>
-					<a href={s.url} className="imc-bt-menubar" target="_blank">
-						<img src={s.urllogo} title="" alt="" className="logoMenuBar"/>
-						<span>{s.label}</span>
-					</a>
-				</li>
-			))
+		if (this.state.error) {
+			content = <div className="alert alert-danger" role="alert">{this.state.error}</div>;
+		} else {
+
+			// if(auth === '0' || !this.state.enllasosMenuBar ){
+			if (!this.state.enllasosMenuBar) {
+				content = "";
+			} else {
+				content = this.state.enllasosMenuBar.map((s, i) => (
+					<li className="itemBar" key={i}>
+						<a href={s.url} className="imc-bt-menubar" target="_blank">
+							<img src={s.urllogo} title="" alt="" className="logoMenuBar"/>
+							<span>{s.label}</span>
+						</a>
+					</li>
+				))
+			}
 		}
 
 		const styleColorMenu = (this.state.colorMenu === null)? { backgroundColor : '#32814B'} : { backgroundColor : "#"+this.state.colorMenu};
@@ -78,7 +112,7 @@ class BarraMenu extends Component {
 						</h1>
 
 						<ul>
-							{enllasosBarraMenu}
+							{content}
 							<li>
 								<button type="button" className="imc-bt-menu" id="imc-bt-menu" title={t('menuMenu')}>
 									{/*<span>{t('menuMenu')}</span>*/}

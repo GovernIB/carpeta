@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import { withTranslation } from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import i18n from 'i18next';
 import axios from "axios";
-import {Link} from "react-router-dom";
-import * as Constants from "./Constants";
 
 class CanviarEntitat extends Component {
 
@@ -11,7 +9,8 @@ class CanviarEntitat extends Component {
         super();
         this.state = {
             loading: true,
-            entitats: []
+            entitats: [],
+            error: null
         }
         this.canviatIdioma = this.canviatIdioma.bind(this);
         i18n.on('languageChanged', this.canviatIdioma);
@@ -26,32 +25,53 @@ class CanviarEntitat extends Component {
         var baseURL = sessionStorage.getItem('contextPath');
         var url = baseURL + "/webui/entitats";
 
-        axios.get(url).then(res => {
-            this.setState({ entitats: res.data, loading:false });
-        });
+        axios.get(url)
+            .then(res => {
+                this.setState({ entitats: res.data, loading:false, error: "" });
+            })
+            .catch(error => {
+                console.log(" AXIOS ERROR ERROR ERROR ");
+                console.log(JSON.stringify(error));
+                if (error.response) {
+                    console.log("error.response.data: " + error.response.data);
+                    console.log("error.response.status: " + error.response.status);
+                    console.log("error.response.headers: " + error.response.headers);
+                }
+                this.setState({
+                    loading:false,
+                    entitats: "",
+                    error: JSON.stringify(error)
+                });
+            });
     }
 
 
 
     render() {
+
         const {t} = this.props;
+        let content;
 
-        const entities = this.state.entitats;
-        var baseURL = sessionStorage.getItem('contextPath');
-        var entitats;
+        if (this.state.error) {
+            content = <div className="alert alert-danger" role="alert">{this.state.error}</div>;
+        } else {
 
-        entitats = entities.map((s, i) => (
-            <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
-                <a className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`} href={baseURL + "/e/" + s.codi} >
+            const entities = this.state.entitats;
+            var baseURL = sessionStorage.getItem('contextPath');
+
+            content = entities.map((s, i) => (
+                <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
+                    <a className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}
+                       href={baseURL + "/e/" + s.codi}>
                     <span className="card-title titol pl-1 h3">
-                        <img src={s.urlIcona} title={s.nom} alt={s.nom} className="imc-icona" />
+                        <img src={s.urlIcona} title={s.nom} alt={s.nom} className="imc-icona"/>
                     </span>
-                    <span className="titolPlugin titol h3 titolCentrat">{s.nom}</span>
-                </a>
-            </div>
-        ));
+                        <span className="titolPlugin titol h3 titolCentrat">{s.nom}</span>
+                    </a>
+                </div>
+            ));
 
-
+        }
 
 
         return (
@@ -69,7 +89,7 @@ class CanviarEntitat extends Component {
                         <div className="card-body imc--llista--capses">
 
                             <div className="row mb-0">
-                                {entitats}
+                                {content}
                             </div>
 
                         </div>

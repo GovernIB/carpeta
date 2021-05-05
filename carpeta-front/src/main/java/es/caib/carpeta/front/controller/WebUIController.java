@@ -1,10 +1,20 @@
 package es.caib.carpeta.front.controller;
 
 import com.google.gson.Gson;
-
+import es.caib.carpeta.commons.utils.Configuracio;
+import es.caib.carpeta.commons.utils.Constants;
+import es.caib.carpeta.hibernate.HibernateFileUtil;
+import es.caib.carpeta.logic.SeccioLogicaService;
+import es.caib.carpeta.logic.utils.PluginInfo;
+import es.caib.carpeta.model.entity.*;
+import es.caib.carpeta.model.fields.IdiomaFields;
+import es.caib.carpeta.persistence.AvisJPA;
+import es.caib.carpeta.persistence.EnllazJPA;
+import es.caib.carpeta.persistence.EntitatJPA;
+import es.caib.carpeta.persistence.SeccioJPA;
+import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.OrderBy;
-
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,31 +26,8 @@ import org.springframework.web.util.WebUtils;
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import es.caib.carpeta.commons.utils.Configuracio;
-import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.hibernate.HibernateFileUtil;
-import es.caib.carpeta.logic.SeccioLogicaService;
-import es.caib.carpeta.logic.utils.PluginInfo;
-import es.caib.carpeta.model.entity.Avis;
-import es.caib.carpeta.model.entity.Enllaz;
-import es.caib.carpeta.model.entity.Entitat;
-import es.caib.carpeta.model.entity.Idioma;
-import es.caib.carpeta.model.entity.Seccio;
-import es.caib.carpeta.model.fields.IdiomaFields;
-import es.caib.carpeta.persistence.AvisJPA;
-import es.caib.carpeta.persistence.EnllazJPA;
-import es.caib.carpeta.persistence.EntitatJPA;
-import es.caib.carpeta.persistence.SeccioJPA;
-import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * Conjunt de cridades REST per obtenir informació per a la presentació de la
@@ -411,7 +398,7 @@ public class WebUIController extends PluginFrontController {
             response.getWriter().write(json);
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
 
     }
@@ -427,7 +414,7 @@ public class WebUIController extends PluginFrontController {
             descarregaFitxer(response, iconaEntitatId);
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
 
     }
@@ -445,7 +432,7 @@ public class WebUIController extends PluginFrontController {
 
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
 
     }
@@ -462,7 +449,7 @@ public class WebUIController extends PluginFrontController {
 
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
 
     }
@@ -479,7 +466,7 @@ public class WebUIController extends PluginFrontController {
             descarregaFitxer(response, fileID);
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
 
     }
@@ -574,7 +561,7 @@ public class WebUIController extends PluginFrontController {
             response.getOutputStream().write(utf8JsonString);
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
     }
     
@@ -630,7 +617,7 @@ public class WebUIController extends PluginFrontController {
             response.getOutputStream().write(utf8JsonString);
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
     }
 
@@ -703,7 +690,7 @@ public class WebUIController extends PluginFrontController {
             response.getOutputStream().write(utf8JsonString);
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
     }
 
@@ -736,7 +723,7 @@ public class WebUIController extends PluginFrontController {
             response.getOutputStream().write(utf8JsonString);
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
     }
 
@@ -802,7 +789,7 @@ public class WebUIController extends PluginFrontController {
             response.getOutputStream().write(utf8JsonString);
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
     }
 
@@ -855,7 +842,7 @@ public class WebUIController extends PluginFrontController {
 
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
     }
 
@@ -887,7 +874,7 @@ public class WebUIController extends PluginFrontController {
             response.getOutputStream().write(utf8JsonString);
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
     }
 
@@ -900,7 +887,7 @@ public class WebUIController extends PluginFrontController {
             LocaleContextHolder.setLocale(idiomaFinal);
             WebUtils.setSessionAttribute(request, SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, idiomaFinal);
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         } finally {
             request.getSession().removeAttribute(SESSION_FULLINFO_MAP);
             request.getSession().removeAttribute(SESSION_FULLINFO_SORTED_MAP);
@@ -952,7 +939,7 @@ public class WebUIController extends PluginFrontController {
             response.getOutputStream().write(utf8JsonString);
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
     }
 
@@ -1027,7 +1014,7 @@ public class WebUIController extends PluginFrontController {
             response.getOutputStream().write(utf8JsonString);
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
     }
 /*
@@ -1086,11 +1073,10 @@ public class WebUIController extends PluginFrontController {
             byte[] utf8JsonString = json.getBytes("UTF8");
 
             response.getOutputStream().write(utf8JsonString);
-            
-            
+
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
     }
     
@@ -1114,7 +1100,7 @@ public class WebUIController extends PluginFrontController {
             response.getOutputStream().write(utf8JsonString);
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
     }
 
@@ -1144,7 +1130,7 @@ public class WebUIController extends PluginFrontController {
             }
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
 
     }
@@ -1180,7 +1166,7 @@ public class WebUIController extends PluginFrontController {
             response.getOutputStream().write(utf8JsonString);
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
     }
     
@@ -1298,7 +1284,7 @@ public class WebUIController extends PluginFrontController {
             response.getOutputStream().write(utf8JsonString);
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
         
     }
@@ -1330,10 +1316,7 @@ public class WebUIController extends PluginFrontController {
     
     protected void getInternalFullInfoSorted(HttpServletRequest request, HttpServletResponse response,
             String seccioContext, boolean autenticat) throws I18NException {
-          
-          
-      
-            
+
         try {
 
             if (seccioContext != null && seccioContext.equals("0")) {
@@ -1459,7 +1442,7 @@ public class WebUIController extends PluginFrontController {
             response.getOutputStream().write(utf8JsonString);
 
         } catch (Throwable e) {
-            processException(e, response);
+            processExceptionRest(e, request, response);
         }
         
     }

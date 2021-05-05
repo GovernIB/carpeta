@@ -3,7 +3,6 @@ import {withTranslation} from 'react-i18next';
 import DadesEntitat from './DadesEntitat';
 import EnllasosXarxes from "./EnllasosXarxes";
 import EnllasosPeuCentral from './EnllasosPeuCentral';
-import {Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import axios from "axios";
 import i18n from 'i18next';
 
@@ -13,7 +12,8 @@ class Peu extends Component {
 		super();
 		this.state = {
 			dadesSuport: [],
-			modal: false
+			modal: false,
+			error: false
 		};
 
 		this.toggle = this.toggle.bind(this);
@@ -36,9 +36,21 @@ class Peu extends Component {
 	componentDidMount() {
 		var baseURL = sessionStorage.getItem('contextPath');
 		var url =  baseURL + `/webui/suport`;
-		axios.get(url).then(res => {
-			this.setState({ dadesSuport: res.data });
-		});
+		axios.get(url)
+			.then(res => {
+				this.setState({ dadesSuport: res.data });
+			})
+			.catch(error => {
+				console.log(JSON.stringify(error));
+				if (error.response) {
+					console.log("error.response.data: " + error.response.data);
+					console.log("error.response.status: " + error.response.status);
+					console.log("error.response.headers: " + error.response.headers);
+				}
+				this.setState({
+					error: JSON.stringify(error)
+				});
+			});
 	}
 
 
@@ -50,26 +62,36 @@ class Peu extends Component {
 		const {t} = this.props;
 
 		const dadesSuport = this.state.dadesSuport;
+		let content;
 
-		var suportWeb = dadesSuport.filter(s => s.tipus === '1').map((s, i) =>
-			<li className="pb-2 liAjuda" key={i}>{t('suportConsulta')} <a href={s.valor}>{t('suportWeb')}</a></li>
-		);
-		var suportTelefon = dadesSuport.filter(s => s.tipus === '2').map((s, i) =>
-			<li className="pb-2 liAjuda" key={i}>{t('suportCrida')} <p className="text-verd"> {s.valor}</p></li>
-		);
-		var suportMail = dadesSuport.filter(s => s.tipus === '3').map((s, i) =>
-			<li className="pb-2 liAjuda" key={i}>{t('suportMail')} <a href={"mailto:'"+s.valor+"'"}>{s.valor}</a></li>
-		);
-		var suportFAQ = dadesSuport.filter(s => s.tipus === '4').map((s, i) =>
-			<li className="pb-2 liAjuda" key={i}>{t('suportConsulta')} <a href={s.valor}>{t('suportFAQ')}</a></li>
-		);
-		var suportConsulta = dadesSuport.filter(s => s.tipus === '5').map((s, i) =>
-			<li className="pb-2 liAjuda" key={i}>{t('suportConsultaTecnica')} <p className="text-verd"> {s.valor}</p></li>
-		);
-		var suportAutenticacio = dadesSuport.filter(s => s.tipus === '6').map((s, i) =>
-			<li className="pb-2 liAjuda" key={i}>{t('suportAutenticacio')} <p className="text-verd"> {s.valor}</p></li>
-		);
+		if (this.state.error) {
+			content = <div className="alert alert-danger" role="alert">{this.state.error}</div>;
+		} else {
 
+			var suportWeb = dadesSuport.filter(s => s.tipus === '1').map((s, i) =>
+				<li className="pb-2 liAjuda" key={i}>{t('suportConsulta')} <a href={s.valor}>{t('suportWeb')}</a></li>
+			);
+			var suportTelefon = dadesSuport.filter(s => s.tipus === '2').map((s, i) =>
+				<li className="pb-2 liAjuda" key={i}>{t('suportCrida')} <p className="text-verd"> {s.valor}</p></li>
+			);
+			var suportMail = dadesSuport.filter(s => s.tipus === '3').map((s, i) =>
+				<li className="pb-2 liAjuda" key={i}>{t('suportMail')} <a
+					href={"mailto:'" + s.valor + "'"}>{s.valor}</a></li>
+			);
+			var suportFAQ = dadesSuport.filter(s => s.tipus === '4').map((s, i) =>
+				<li className="pb-2 liAjuda" key={i}>{t('suportConsulta')} <a href={s.valor}>{t('suportFAQ')}</a></li>
+			);
+			var suportConsulta = dadesSuport.filter(s => s.tipus === '5').map((s, i) =>
+				<li className="pb-2 liAjuda" key={i}>{t('suportConsultaTecnica')} <p
+					className="text-verd"> {s.valor}</p></li>
+			);
+			var suportAutenticacio = dadesSuport.filter(s => s.tipus === '6').map((s, i) =>
+				<li className="pb-2 liAjuda" key={i}>{t('suportAutenticacio')} <p className="text-verd"> {s.valor}</p>
+				</li>
+			);
+
+			content = '';
+		}
 
 		return (
 			<footer className="imc-peu">
@@ -102,6 +124,7 @@ class Peu extends Component {
 							</div>
 							<div className="modal-body">
 								<ul className="pl-3 ajuda">
+									{content}
 									{suportWeb}
 									{suportTelefon}
 									{suportMail}

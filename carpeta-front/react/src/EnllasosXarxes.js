@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import { withTranslation } from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 
 class EnllasosXarxes extends Component {
 
     constructor(){
         super();
         this.state = {
-            enllasosXarxes: []
+            enllasosXarxes: [],
+            error: null
         }
     }
 
@@ -21,6 +22,18 @@ class EnllasosXarxes extends Component {
             .then((enllasosXarxes) => {
                 this.setState({ enllasosXarxes: enllasosXarxes })
             })
+            .catch(error => {
+                console.log(JSON.stringify(error));
+                if (error.response) {
+                    console.log("error.response.data: " + error.response.data);
+                    console.log("error.response.status: " + error.response.status);
+                    console.log("error.response.headers: " + error.response.headers);
+                }
+                this.setState({
+                    enllasosXarxes: "",
+                    error: JSON.stringify(error)
+                });
+            });
     }
 
     render() {
@@ -28,20 +41,26 @@ class EnllasosXarxes extends Component {
         const {t} = this.props;
 
         var seguir;
-        let enllasos;
-        if (!this.state.enllasosXarxes.length) {
-            seguir = "";
-            enllasos = "";
+        let content;
+
+        if (this.state.error) {
+            content = <div className="alert alert-danger" role="alert">{this.state.error}</div>;
         } else {
-            seguir = t('peuSeguir');
-            enllasos = this.state.enllasosXarxes.map((s, i) => (
-                <li key={i}>
-                    <a href={s.url} className="imc-bt-xarxa border-0" title={s.label} target="_blank">
-                        <img src={s.urllogo} title="" alt=""/>
-                        <span>{s.label}</span>
-                    </a>
-                </li>
-            ))
+
+            if (!this.state.enllasosXarxes.length) {
+                seguir = "";
+                content = "";
+            } else {
+                seguir = t('peuSeguir');
+                content = this.state.enllasosXarxes.map((s, i) => (
+                    <li key={i}>
+                        <a href={s.url} className="imc-bt-xarxa border-0" title={s.label} target="_blank">
+                            <img src={s.urllogo} title="" alt=""/>
+                            <span>{s.label}</span>
+                        </a>
+                    </li>
+                ))
+            }
         }
 
 
@@ -49,7 +68,7 @@ class EnllasosXarxes extends Component {
             <div>
                 <p>{seguir}</p>
                 <ul>
-                    {enllasos}
+                    {content}
                 </ul>
             </div>
         );

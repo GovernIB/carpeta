@@ -15,7 +15,8 @@ class Breadcrumb extends Component {
         super(props);
 
         this.state = {
-            items: []
+            items: [],
+            error: null
         };
 
         this.canviatRoute = this.canviatRoute.bind(this);
@@ -59,22 +60,35 @@ class Breadcrumb extends Component {
             var baseURL = sessionStorage.getItem('contextPath');
             var url6 = baseURL + `/webui/seccioplugin/` + seccioContext + `/` + match[3];
             console.log("URL INFO SECCIO - PLUGIN ==> " + url6);
-            axios.get(url6).then(res => {
+            axios.get(url6)
+                .then(res => {
 
-                var seccioNom;
-                var pluginNom;
+                    var seccioNom;
+                    var pluginNom;
 
-                var seccio = res.data[0];
-                seccioNom = seccio.nom;                
-                
-                var pluginInfo = res.data[1];
-                pluginNom =  pluginInfo.nom;
-               
-                console.log("BREADCRUMB ==> ACTUALITZANT STATE SECCIO-PLUGIN ==> " + seccioNom + " / " + pluginNom + "]");
-                 
+                    var seccio = res.data[0];
+                    seccioNom = seccio.nom;
 
-               this.setState({ items: [{ id: Constants.SECCIO_PATH + seccioContext, label: seccioNom }, { id: novaruta, label: pluginNom }] });
-            });
+                    var pluginInfo = res.data[1];
+                    pluginNom =  pluginInfo.nom;
+
+                    console.log("BREADCRUMB ==> ACTUALITZANT STATE SECCIO-PLUGIN ==> " + seccioNom + " / " + pluginNom + "]");
+
+
+                   this.setState({ items: [{ id: Constants.SECCIO_PATH + seccioContext, label: seccioNom }, { id: novaruta, label: pluginNom }] });
+                })
+                .catch(error => {
+                    console.log(JSON.stringify(error));
+                    if (error.response) {
+                        console.log("error.response.data: " + error.response.data);
+                        console.log("error.response.status: " + error.response.status);
+                        console.log("error.response.headers: " + error.response.headers);
+                    }
+                    this.setState({
+                        items: "",
+                        error: JSON.stringify(error)
+                    });
+                });
 
 
 
@@ -96,10 +110,23 @@ class Breadcrumb extends Component {
 
 
                     var url7 = baseURL2 + `/webui/plugin/` + pluginMatch[2];
-                    axios.get(url7).then(res => {
-                        var pluginInfo = res.data;
-                        this.setState({items: [{id: location.pathname, label: pluginInfo.nom}]})
-                    });
+                    axios.get(url7)
+                        .then(res => {
+                            var pluginInfo = res.data;
+                            this.setState({items: [{id: location.pathname, label: pluginInfo.nom}]})
+                        })
+                        .catch(error => {
+                            console.log(JSON.stringify(error));
+                            if (error.response) {
+                                console.log("error.response.data: " + error.response.data);
+                                console.log("error.response.status: " + error.response.status);
+                                console.log("error.response.headers: " + error.response.headers);
+                            }
+                            this.setState({
+                                items: "",
+                                error: JSON.stringify(error)
+                            });
+                        });
 
                 } else {
 
@@ -111,11 +138,24 @@ class Breadcrumb extends Component {
                         var baseURL = sessionStorage.getItem('contextPath');
                         var url6 = baseURL + `/webui/seccio/` + seccioMatch[1];
                         console.log("URL INFO SECCIO ==> " + url6);
-                        axios.get(url6).then(res => {
-                            var seccio = res.data;
-                            console.log("BREADCRUMB ==> ACTUALITZANT STATE SECCIO ==> " + seccio.nom + " [" + seccio.context + "]");
-                            this.setState({ items: [{ id: '/seccio/' + seccio.context, label: seccio.nom }] });
-                        });
+                        axios.get(url6)
+                            .then(res => {
+                                var seccio = res.data;
+                                console.log("BREADCRUMB ==> ACTUALITZANT STATE SECCIO ==> " + seccio.nom + " [" + seccio.context + "]");
+                                this.setState({ items: [{ id: '/seccio/' + seccio.context, label: seccio.nom }] });
+                            })
+                            .catch(error => {
+                                console.log(JSON.stringify(error));
+                                if (error.response) {
+                                    console.log("error.response.data: " + error.response.data);
+                                    console.log("error.response.status: " + error.response.status);
+                                    console.log("error.response.headers: " + error.response.headers);
+                                }
+                                this.setState({
+                                    items: "",
+                                    error: JSON.stringify(error)
+                                });
+                            });
 
                     } else {
 
@@ -140,34 +180,40 @@ class Breadcrumb extends Component {
 
         let renderHTML = '';
 
-        if (typeof items !== "undefined" && items.length !== 0) {
+        if (this.state.error) {
+            renderHTML = <div className="alert alert-danger" role="alert">{this.state.error}</div>;
+        } else {
 
-            const TOTAL_ITEMS = items.length;
+            if (typeof items !== "undefined" && items.length !== 0) {
 
-            itemDOMS.push(<li key='inici'><Link to={'/'}>{i18n.t('mollaInici')}</Link></li>);
+                const TOTAL_ITEMS = items.length;
 
-            console.log("RENDER Breadcrumb items: " + TOTAL_ITEMS);
+                itemDOMS.push(<li key='inici'><Link to={'/'}>{i18n.t('mollaInici')}</Link></li>);
 
-            items.forEach(({ id, label }, index) => {
-                // if (index < TOTAL_ITEMS - 1) {
-                    itemDOMS.push(<li key={index}><span className="imc-separador"> &gt;</span><Link to={id}>{label}</Link></li>);
-                // } else {
-                //     /*if (label === 'plugin') {
-                //         itemDOMS.push(<li id="plugin" key={index}>{pluginNom}</li>);
-                //     } else */
-                //     {
-                //         itemDOMS.push(<li key={index}><span className="imc-separador"> &gt; </span>{label}</li>);
-                //     }
-                // }
+                console.log("RENDER Breadcrumb items: " + TOTAL_ITEMS);
 
-
-            });
-
-            renderHTML = <ul className="mollaPa" id="imc-molla-pa">
-                            {itemDOMS}
-                        </ul>;
+                items.forEach(({id, label}, index) => {
+                    // if (index < TOTAL_ITEMS - 1) {
+                    itemDOMS.push(<li key={index}><span className="imc-separador"> &gt;</span><Link
+                        to={id}>{label}</Link></li>);
+                    // } else {
+                    //     /*if (label === 'plugin') {
+                    //         itemDOMS.push(<li id="plugin" key={index}>{pluginNom}</li>);
+                    //     } else */
+                    //     {
+                    //         itemDOMS.push(<li key={index}><span className="imc-separador"> &gt; </span>{label}</li>);
+                    //     }
+                    // }
 
 
+                });
+
+                renderHTML = <ul className="mollaPa" id="imc-molla-pa">
+                    {itemDOMS}
+                </ul>;
+
+
+            }
         }
 
         console.log("RENDER Breadcrumb itemsDOMS: " + itemDOMS.length);
