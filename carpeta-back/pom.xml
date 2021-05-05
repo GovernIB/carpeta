@@ -78,6 +78,16 @@
             <groupId>org.fundaciobit.genapp</groupId>
             <artifactId>genapp-web</artifactId>
             <version>${genapp.version}</version>
+            <exclusions>
+               <exclusion>
+                  <artifactId>spring-web</artifactId>
+                  <groupId>org.springframework</groupId>
+               </exclusion>
+               <exclusion>
+                  <artifactId>spring-webmvc</artifactId>
+                  <groupId>org.springframework</groupId>
+               </exclusion>
+            </exclusions>
         </dependency>
         
         

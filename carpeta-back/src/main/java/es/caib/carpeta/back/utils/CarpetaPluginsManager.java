@@ -17,7 +17,7 @@ import org.fundaciobit.pluginsib.userinformation.IUserInformationPlugin;
  * 
  */
 public class CarpetaPluginsManager implements Constants {
-
+/*
 	protected static Logger log = Logger.getLogger(CarpetaPluginsManager.class);
 
 	public static final String USERINFORMATION_PLUGIN_KEY = CARPETA_PROPERTY_BASE + "userinformationplugin";
@@ -52,5 +52,5 @@ public class CarpetaPluginsManager implements Constants {
 		}
 		return userInformationPlugin;
 	}
-
+*/
 }

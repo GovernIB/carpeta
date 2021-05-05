@@ -183,7 +183,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                     // Obtenir informació de l'USUARI del SISTEMA de PLUGIN USER INFORMATION
 
                     {
-                        persona = PluginUserInformationUtils.getUserInfoFromUserInformation(username);
+                        persona = PluginUserInformationUtils.getUserInfoFromUserInformation(username, authenticationLogicaEjb);
                     }
 
                     if (persona == null) {

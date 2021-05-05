@@ -1,8 +1,12 @@
 package es.caib.carpeta.logic;
 
+import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.pluginsib.core.utils.PluginsManager;
+import org.fundaciobit.pluginsib.userinformation.IUserInformationPlugin;
 
 import javax.ejb.EJB;
+import javax.ejb.EJBException;
 import javax.ejb.Stateless;
 import javax.validation.constraints.NotNull;
 
@@ -11,8 +15,12 @@ import static es.caib.carpeta.commons.utils.Constants.TIPUS_AUDIT_ENTRADA_BACK;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_BACK;
 import es.caib.carpeta.persistence.UsuariEntitatJPA;
 import es.caib.carpeta.persistence.UsuariJPA;
+//import es.caib.carpeta.back.utils.CarpetaPluginsManager;
+import es.caib.carpeta.commons.utils.Configuracio;
+import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.model.fields.EntitatFields;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * Created by Fundació BIT.
@@ -21,10 +29,13 @@ import java.util.List;
  * Issue #249
  *
  * @author mgonzalez
+ * @author anadal (userInformation)
  * Date: 11/01/2021
  */
 @Stateless
 public class AuthenticationLogicaEJB implements AuthenticationLogicaService {
+    
+    protected Logger log = Logger.getLogger(AuthenticationLogicaEJB.class);
 
     @EJB(mappedName = UsuariEntitatLogicaService.JNDI_NAME)
     protected UsuariEntitatLogicaService usuariEntitatLogicaEjb;
@@ -78,6 +89,42 @@ public class AuthenticationLogicaEJB implements AuthenticationLogicaService {
     @Override
     public List<UsuariEntitatJPA> findAllByUsuariIdWithEntitat(@NotNull long usuarioID) throws I18NException{
       return usuariEntitatLogicaEjb.findAllByUsuariIdWithEntitat(usuarioID);
+    }
+    
+    
+    
+
+    public static final String USERINFORMATION_PLUGIN_KEY = Constants.CARPETA_PROPERTY_BASE + "userinformationplugin";
+
+    public static IUserInformationPlugin userInformationPlugin = null;
+
+    public IUserInformationPlugin getUserInformationPluginInstance() throws EJBException { 
+        if (userInformationPlugin == null) {
+            
+            Properties props = Configuracio.getFilesProperties();
+
+            String className = props.getProperty(USERINFORMATION_PLUGIN_KEY);
+            Object pluginInstance;
+            try {
+                pluginInstance = PluginsManager.instancePluginByClassName(className, Constants.CARPETA_PROPERTY_BASE, props);
+                
+                if (pluginInstance == null) {
+                  log.error("pluginInstance RETORNAT és null ");
+                }
+                
+            } catch (Exception th) {
+                String msg = "Error no controlat instanciant Plugin de userInformation: " + th.getMessage();
+                log.error(msg, th);
+                pluginInstance = null;
+                throw new EJBException("plugin.donotinstantiateplugin", th);
+            }
+            
+            if (pluginInstance == null) {
+                throw new EJBException("plugin.donotinstantiateplugin");
+            }
+            userInformationPlugin = (IUserInformationPlugin) pluginInstance;
+        }
+        return userInformationPlugin;
     }
     
     

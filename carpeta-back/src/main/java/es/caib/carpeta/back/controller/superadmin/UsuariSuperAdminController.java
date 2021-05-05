@@ -25,6 +25,7 @@ import es.caib.carpeta.back.form.webdb.UsuariForm;
 import es.caib.carpeta.back.utils.PluginUserInformationUtils;
 import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.persistence.UsuariJPA;
+import es.caib.carpeta.logic.AuthenticationLogicaService;
 import es.caib.carpeta.logic.UsuariLogicaService;
 
 /**
@@ -41,6 +42,9 @@ public class UsuariSuperAdminController extends UsuariController {
 
     @EJB(mappedName = UsuariLogicaService.JNDI_NAME)
     protected UsuariLogicaService usuariPersonaLogicaEjb;
+    
+    @EJB(mappedName = AuthenticationLogicaService.JNDI_NAME)
+    protected AuthenticationLogicaService authenticationLogicaEjb;
 
     @Override
     public String getTileForm() {
@@ -56,6 +60,9 @@ public class UsuariSuperAdminController extends UsuariController {
     public String getSessionAttributeFilterForm() {
         return "UsuariSuperAdmin_FilterForm";
     }
+    
+    
+    
 
     @RequestMapping(value = "/checkusername", method = RequestMethod.GET)
     public ModelAndView checkUsuariGet(HttpServletRequest request, HttpServletResponse response) throws I18NException {
@@ -93,7 +100,7 @@ public class UsuariSuperAdminController extends UsuariController {
 
                 } else {
 
-                    persona = PluginUserInformationUtils.getUserInfoFromUserInformation(username);
+                    persona = PluginUserInformationUtils.getUserInfoFromUserInformation(username, authenticationLogicaEjb);
 
                     if (persona == null) {
                         throw new Exception("Username not found");

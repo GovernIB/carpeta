@@ -1,7 +1,9 @@
 package es.caib.carpeta.logic;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.pluginsib.userinformation.IUserInformationPlugin;
 
+import javax.ejb.EJBException;
 import javax.ejb.Local;
 import javax.validation.constraints.NotNull;
 
@@ -33,4 +35,6 @@ public interface AuthenticationLogicaService {
     public UsuariEntitatJPA create( UsuariEntitatJPA usuariEntitat) throws I18NException;
 
     public List<UsuariEntitatJPA> findAllByUsuariIdWithEntitat(@NotNull long usuarioID) throws I18NException;
+    
+    public IUserInformationPlugin getUserInformationPluginInstance() throws EJBException;
 }

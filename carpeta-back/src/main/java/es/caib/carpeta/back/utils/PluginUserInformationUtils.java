@@ -21,6 +21,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import es.caib.carpeta.back.security.LoginException;
 import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.Constants;
+import es.caib.carpeta.logic.AuthenticationLogicaService;
 import es.caib.carpeta.persistence.UsuariJPA;
 
 /**
@@ -33,9 +34,10 @@ public class PluginUserInformationUtils {
 
     protected static final Logger log = Logger.getLogger(PluginUserInformationUtils.class);
 
-    public static UsuariJPA getUserInfoFromUserInformation(String username) throws javax.ejb.EJBException {
+    public static UsuariJPA getUserInfoFromUserInformation(String username, AuthenticationLogicaService authEJB) throws javax.ejb.EJBException {
 
         UserInfo info;
+        
         if (Configuracio.isCAIB()) {
 
             // PLUGIN DE CAIB !!!!!
@@ -76,15 +78,18 @@ public class PluginUserInformationUtils {
 
         } else {
 
+            /*
             IUserInformationPlugin plugin = es.caib.carpeta.back.utils.CarpetaPluginsManager
                     .getUserInformationPluginInstance();
+                    */
+            IUserInformationPlugin plugin = authEJB.getUserInformationPluginInstance();
 
             log.info("UserInformationPlugin => " + plugin);
 
             try {
                 info = plugin.getUserInfoByUserName(username);
             } catch (Exception e) {
-                log.error("Error intentant obtenir informaciód de l'usari " + username + ": " + e.getMessage(), e);
+                log.error("Error intentant obtenir informació de l'usari " + username + ": " + e.getMessage(), e);
                 info = null;
             }
 
@@ -100,7 +105,7 @@ public class PluginUserInformationUtils {
         return persona;
     }
 
-    // @Override
+
     protected static UsuariJPA userInfo2UsuariJPA(UserInfo info) {
         UsuariJPA persona;
 
@@ -160,6 +165,7 @@ public class PluginUserInformationUtils {
         return persona;
     }
 
+    
     protected static UserInfo userRepresentationToUserInfo(AccessToken token) throws Exception {
 
 
