@@ -85,7 +85,7 @@ footer .logoPeu img.logoAplicacio { width:150px; height:auto; margin-bottom:10px
 .buitContainer h3 { text-align:center; margin-bottom:40px; }
 .buitContainer > p { text-align:center; }
 .buitContainer .card p { font-size: 0.85rem; }
-.buitContainer .card { background-color:#efefef; height: 225px;}
+.buitContainer .card { background-color:#efefef; min-height: 225px; margin-bottom: 15px;}
 .buitContainer .row { margin-bottom:25px; }
 .buitContainer h5 { font-weight:600; }
 .buitContainer ul { list-style:none; }
@@ -158,6 +158,12 @@ footer .logoPeu img.logoAplicacio { width:150px; height:auto; margin-bottom:10px
 		float: none;
 		padding: 0;
 	}
+	.container.main {
+	   padding-top:205px;
+	}
+	#navbarCollapse {
+	   display: block;
+	}
 	a.nav-link.mobil:hover {
 		color: #000 !important;
 	}
@@ -206,6 +212,14 @@ footer .logoPeu img.logoAplicacio { width:150px; height:auto; margin-bottom:10px
 	.containerPeu{
 		margin-left: 0 !important;
 		margin-right: 0 !important;
+	}
+	
+	.buitContainer ul{
+	   margin-left: -35px;
+	   margin-bottom: 0.5rem;
+	}
+	.buitContainer ul li::before {
+	   margin-left: 0px;
 	}
 }
 /* FI */
@@ -309,11 +323,9 @@ footer .logoPeu img.logoAplicacio { width:150px; height:auto; margin-bottom:10px
 	margin-right: 20px;
 	margin-left: 5px;
 }
-/*
-.imatgeGovern, .logoAplicacio img{
-	width: 50px;
+header .logoAplicacio img{
+    max-height: 2.5em;
 }
-*/
 .iconoCapsalera{
 	font-size: 0;
 	list-style: none;
