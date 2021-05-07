@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-import { withTranslation } from 'react-i18next';
-import i18n from 'i18next';
+import {withTranslation} from 'react-i18next';
+import i18n from './i18n';
 import LlistatDePlugins from './LlistatDePlugins';
 import IniciPublic from './IniciPublic';
 import ExpirarSessio from "./ExpirarSessio";
-import { withRouter } from "react-router";
-
+import {withRouter} from "react-router";
 
 
 /**

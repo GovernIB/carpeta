@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { withTranslation } from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 
 
 class ExpirarSessio extends Component {
@@ -8,7 +8,8 @@ class ExpirarSessio extends Component {
     loadDialog(maxInactiveInterval) {
         var sessionAlive = maxInactiveInterval;
         if(sessionAlive === null){
-            sessionAlive = 30 * 60;
+            console.log("SESSSSSSSSSSSS: " + sessionStorage.getItem('maxInactiveInterval'));
+            sessionAlive = sessionStorage.getItem('maxInactiveInterval') * 60;
         }
         var notifyBefore = 30;
         var newTimer = setTimeout(function() {

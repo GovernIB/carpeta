@@ -95,8 +95,8 @@
 				sessionStorage.setItem('usuariNivell', '${userLevelAut}');
 				sessionStorage.setItem('contextPath', '${pageContext.request.contextPath}');
 				sessionStorage.setItem('errorLogin', '${errorLogin}');
+				sessionStorage.setItem('maxInactiveInterval', '${maxInactiveInterval}');
 
-			
 		</script>
 	  </sec:authorize> 
 
