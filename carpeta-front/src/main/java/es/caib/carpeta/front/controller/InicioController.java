@@ -140,14 +140,19 @@ public class InicioController extends CommonFrontController {
         
         ModelAndView mav = new ModelAndView("inici");
 
-        // Posam la sessió de 30 minuts
-        mav.addObject("maxInactiveInterval", 30 * 60);
+        // Posam la sessió de la variable global (per 60 segons)
+        PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
+        if(EjbManager.getFrontSessionTime(propietatGlobalEjb) != null) {
+            int frontSessionTime = Integer.parseInt(EjbManager.getFrontSessionTime(propietatGlobalEjb));
+            mav.addObject("maxInactiveInterval", frontSessionTime * 60);
+        }else{
+            mav.addObject("maxInactiveInterval", 30 * 60);
+        }
 
         try {
 
             String lang = LocaleContextHolder.getLocale().getLanguage();
 
-            PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
             String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
             String canviardefront = EjbManager.getCanviarDeFront(propietatGlobalEjb);
 

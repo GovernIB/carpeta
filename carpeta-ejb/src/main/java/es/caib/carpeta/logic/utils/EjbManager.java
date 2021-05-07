@@ -1,13 +1,5 @@
 package es.caib.carpeta.logic.utils;
 
-import org.fundaciobit.genapp.common.i18n.I18NArgumentString;
-import org.fundaciobit.genapp.common.i18n.I18NException;
-import org.fundaciobit.genapp.common.query.Where;
-
-import org.apache.log4j.Logger;
-
-import javax.naming.InitialContext;
-
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.ejb.IdiomaService;
 import es.caib.carpeta.ejb.PropietatGlobalService;
@@ -16,6 +8,12 @@ import es.caib.carpeta.logic.AuthenticationLogicaService;
 import es.caib.carpeta.logic.AvisLogicaService;
 import es.caib.carpeta.logic.LogCarpetaLogicaService;
 import es.caib.carpeta.model.fields.PropietatGlobalFields;
+import org.apache.log4j.Logger;
+import org.fundaciobit.genapp.common.i18n.I18NArgumentString;
+import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.Where;
+
+import javax.naming.InitialContext;
 
 
 /**
@@ -146,6 +144,13 @@ public final class EjbManager {
 		final String partialProp = "esborrarlogs.dies";
 
 		return getPropertyValueLong(propietatGlobalEjb, partialProp);
+
+	}
+
+	public static String getFrontSessionTime(PropietatGlobalService propietatGlobalEjb) throws I18NException {
+		final String partialProp = "frontsessiontime";
+
+		return getPropertyValue(propietatGlobalEjb, partialProp);
 
 	}
 
