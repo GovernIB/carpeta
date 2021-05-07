@@ -142,8 +142,12 @@ public class InicioController extends CommonFrontController {
 
         // Posam la sessió de la variable global (per 60 segons)
         PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
-        int frontSessionTime = Integer.parseInt(EjbManager.getFrontSessionTime(propietatGlobalEjb));
-        mav.addObject("maxInactiveInterval", frontSessionTime * 60);
+        if(EjbManager.getFrontSessionTime(propietatGlobalEjb) != null) {
+            int frontSessionTime = Integer.parseInt(EjbManager.getFrontSessionTime(propietatGlobalEjb));
+            mav.addObject("maxInactiveInterval", frontSessionTime * 60);
+        }else{
+            mav.addObject("maxInactiveInterval", 30 * 60);
+        }
 
         try {
 
