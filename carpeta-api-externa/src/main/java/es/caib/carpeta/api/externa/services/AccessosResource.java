@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,12 +22,13 @@ import javax.ws.rs.core.Response.Status;
 import org.apache.log4j.Logger;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.fundaciobit.genapp.common.i18n.I18NException;
-import com.google.gson.Gson;
 
 import es.caib.carpeta.api.externa.model.AccesDTO;
+import es.caib.carpeta.api.externa.model.PaginaAccesDTO;
 import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.ejb.PropietatGlobalService;
@@ -60,7 +62,7 @@ public class AccessosResource {
 	@APIResponse(
             responseCode = "200",
             description = "Llista d'accessos a CARPETA",
-            content = @Content(mediaType = "application/json"))
+            content = @Content(	mediaType = "application/json", schema = @Schema(implementation = PaginaAccesDTO.class)))
 	public Response estadistiques(		
 			
 			@Parameter(description = "Data d'inici, en format YYYY-MM-DD, a partir de la qual volem obtenir estadistiques") 
@@ -118,7 +120,7 @@ public class AccessosResource {
 			long daysBeetween = Duration.between(dataIniciDate.atStartOfDay(), dataFiDate.atStartOfDay()).toDays(); 	
 			if (daysBeetween > maxDays) {
 				// .entity("La diferencia entre data inici i fi no pot ser superior a " + maxDays)
-				return Response.status(Status.BAD_REQUEST).build();
+				return Response.status(Status.BAD_REQUEST).entity(Collections.emptyList()).build();
 			}
 			
 			// si falta entitat, retorna error 400
@@ -172,17 +174,14 @@ public class AccessosResource {
 							));
 				}
 				
-				Gson gson = new Gson();
-				String json = gson.toJson(accesosInfo);
-				
-				return Response.ok(json, MediaType.APPLICATION_JSON).build();
+				return Response.ok().entity(new PaginaAccesDTO(accesosInfo)).build();
 				
 			}
 		} catch (I18NException e) {
 			log.error("Error cridada api rest estadistiques accessos: " + e.getMessage());
 		}
 		
-		return Response.status(Status.BAD_REQUEST).build(); //.entity("Paràmetres incorrectes")
+		return Response.status(Status.BAD_REQUEST).entity(Collections.emptyList()).build(); //.entity("Paràmetres incorrectes")
 		
 	}
 	

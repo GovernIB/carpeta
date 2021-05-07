@@ -2,6 +2,8 @@ package es.caib.carpeta.api.externa.model;
 
 import java.util.Date;
 
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+
 /**
  * Dades d'un accés
  * 
@@ -9,6 +11,7 @@ import java.util.Date;
  *
  */
 
+@Schema(name = "Acces")
 public class AccesDTO {
 
 	private String proveidor;
