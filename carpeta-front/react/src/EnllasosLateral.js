@@ -17,7 +17,7 @@ class EnllasosLateral extends Component {
     }
 
     canviatIdioma(lng) {
-        console.log(" CANVIAT IDIOMA EN EnllassosLateral A ]" + lng+ "[");
+        // console.log(" CANVIAT IDIOMA EN EnllassosLateral A ]" + lng+ "[");
         this.componentDidMount();
     }
 

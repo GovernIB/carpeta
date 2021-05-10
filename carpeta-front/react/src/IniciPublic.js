@@ -21,7 +21,7 @@ class IniciPublic extends Component {
     }
 
     canviatIdioma(lng) {
-        console.log(" CANVIAT IDIOMA EN IniciPublic A ]" + lng+ "[");
+        // console.log(" CANVIAT IDIOMA EN IniciPublic A ]" + lng+ "[");
         this.componentDidMount();
     }
 
@@ -61,11 +61,11 @@ class IniciPublic extends Component {
         } else {
 
             if (this.state.codiHtml) {
-                console.log("  SIIII DEFINTI CODI HTML PER ENTITAT");
+                // console.log("  SIIII DEFINTI CODI HTML PER ENTITAT");
                 htmlCode = <div dangerouslySetInnerHTML={{__html: this.state.codiHtml}}/>
             } else {
 
-                console.log("  NO S'HA DEFINTI CODI HTML PER ENTITAT");
+                // console.log("  NO S'HA DEFINTI CODI HTML PER ENTITAT");
 
                 const {t} = this.props;
                 let entitatNom = this.state.nomEntitat;

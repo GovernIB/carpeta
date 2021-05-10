@@ -30,7 +30,6 @@ class CanviarEntitat extends Component {
                 this.setState({ entitats: res.data, loading:false, error: "" });
             })
             .catch(error => {
-                console.log(" AXIOS ERROR ERROR ERROR ");
                 console.log(JSON.stringify(error));
                 if (error.response) {
                     console.log("error.response.data: " + error.response.data);

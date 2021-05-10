@@ -18,7 +18,6 @@ import NivellAutenticacio from './NivellAutenticacio';
 import * as Constants from './Constants';
 
 // NO ESBORRAR LA SEGÜENT LINIA  !!!!!!
-
 import {Route, Switch} from "react-router-dom";
 import {withRouter} from "react-router";
 
@@ -75,7 +74,7 @@ class Index extends Component {
         var auth = sessionStorage.getItem('autenticat');
 
 
-        console.log(" XYZ ZZZ   \n INDEX :: Auth Val: " + auth + "\n");
+        // console.log(" XYZ ZZZ   \n INDEX :: Auth Val: " + auth + "\n");
 
 
         var user = sessionStorage.getItem('usuariNomComplet');

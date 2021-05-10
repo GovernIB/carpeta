@@ -21,16 +21,16 @@ class Breadcrumb extends Component {
 
         this.canviatRoute = this.canviatRoute.bind(this);
 
-        if (this.props.currentlocation) {
-            console.log(" BREADCRUMB Constructor currentlocation => " + this.props.currentlocation);
-        }
+        // if (this.props.currentlocation) {
+        //     console.log(" BREADCRUMB Constructor currentlocation => " + this.props.currentlocation);
+        // }
 
         this.canviatIdioma = this.canviatIdioma.bind(this);
         i18n.on('languageChanged', this.canviatIdioma);
     }
 
     canviatIdioma(lng) {
-        console.log(" CANVIAT IDIOMA EN BREADCRUMB A ]" + lng+ "[");
+        // console.log(" CANVIAT IDIOMA EN BREADCRUMB A ]" + lng+ "[");
         this.canviatRoute(this.props.currentlocation, "PUSH");
     }
 
@@ -51,15 +51,15 @@ class Breadcrumb extends Component {
         // NOMES FUNCIONA PER UN NIVELL DE SECCIO, MÉS S?HA DE PROGRAMAR
         var match = novaruta.match('^' + Constants.SECCIO_MATCH + '([a-z0-9]+)(' + Constants.PLUGINHTML_MATCH+  '|' + Constants.PLUGINREACT_MATCH + ')([a-z0-9]+)');
 
-        console.log("MATCH === " + match);
+        // console.log("MATCH === " + match);
 
         if (match) {
             //  Es plugin d'una Secció ????
             var seccioContext = match[1];
-            console.log("MATCH[SECCIO] === " + seccioContext);
+            // console.log("MATCH[SECCIO] === " + seccioContext);
             var baseURL = sessionStorage.getItem('contextPath');
             var url6 = baseURL + `/webui/seccioplugin/` + seccioContext + `/` + match[3];
-            console.log("URL INFO SECCIO - PLUGIN ==> " + url6);
+            // console.log("URL INFO SECCIO - PLUGIN ==> " + url6);
             axios.get(url6)
                 .then(res => {
 
@@ -72,7 +72,7 @@ class Breadcrumb extends Component {
                     var pluginInfo = res.data[1];
                     pluginNom =  pluginInfo.nom;
 
-                    console.log("BREADCRUMB ==> ACTUALITZANT STATE SECCIO-PLUGIN ==> " + seccioNom + " / " + pluginNom + "]");
+                    // console.log("BREADCRUMB ==> ACTUALITZANT STATE SECCIO-PLUGIN ==> " + seccioNom + " / " + pluginNom + "]");
 
 
                    this.setState({ items: [{ id: Constants.SECCIO_PATH + seccioContext, label: seccioNom }, { id: novaruta, label: pluginNom }] });
@@ -104,7 +104,7 @@ class Breadcrumb extends Component {
 
                     // Es un plugin
 
-                    console.log("BreadCRUMB ES UN PLUGIN : " + pluginMatch[1] + " -  " + pluginMatch[2]);
+                    // console.log("BreadCRUMB ES UN PLUGIN : " + pluginMatch[1] + " -  " + pluginMatch[2]);
 
                     var baseURL2 = sessionStorage.getItem('contextPath');
 
@@ -137,11 +137,11 @@ class Breadcrumb extends Component {
                     if (seccioMatch) {
                         var baseURL = sessionStorage.getItem('contextPath');
                         var url6 = baseURL + `/webui/seccio/` + seccioMatch[1];
-                        console.log("URL INFO SECCIO ==> " + url6);
+                        // console.log("URL INFO SECCIO ==> " + url6);
                         axios.get(url6)
                             .then(res => {
                                 var seccio = res.data;
-                                console.log("BREADCRUMB ==> ACTUALITZANT STATE SECCIO ==> " + seccio.nom + " [" + seccio.context + "]");
+                                // console.log("BREADCRUMB ==> ACTUALITZANT STATE SECCIO ==> " + seccio.nom + " [" + seccio.context + "]");
                                 this.setState({ items: [{ id: '/seccio/' + seccio.context, label: seccio.nom }] });
                             })
                             .catch(error => {
@@ -161,7 +161,7 @@ class Breadcrumb extends Component {
 
                         const {t} = this.props;
                         // Altre cosa ...
-                        console.log("BreadCRUMB ALTRE COSA : " + location.pathname);
+                        // console.log("BreadCRUMB ALTRE COSA : " + location.pathname);
                         this.setState({items: [{id: location.pathname, label: t(location.nomPagina)}]});
                     }
                 }
@@ -190,7 +190,7 @@ class Breadcrumb extends Component {
 
                 itemDOMS.push(<li key='inici'><Link to={'/'}>{i18n.t('mollaInici')}</Link></li>);
 
-                console.log("RENDER Breadcrumb items: " + TOTAL_ITEMS);
+                // console.log("RENDER Breadcrumb items: " + TOTAL_ITEMS);
 
                 items.forEach(({id, label}, index) => {
                     // if (index < TOTAL_ITEMS - 1) {
@@ -216,7 +216,7 @@ class Breadcrumb extends Component {
             }
         }
 
-        console.log("RENDER Breadcrumb itemsDOMS: " + itemDOMS.length);
+        // console.log("RENDER Breadcrumb itemsDOMS: " + itemDOMS.length);
 
         return (
             <div id="breadcrumb">

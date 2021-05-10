@@ -25,7 +25,7 @@ class LlistatDePlugins extends Component {
     }
 
     canviIdioma(lng) {
-        console.log(" CANVI IDIOMA EN LLISTAT DE PLUGINS A ]" + lng+ "[")
+        // console.log(" CANVI IDIOMA EN LLISTAT DE PLUGINS A ]" + lng+ "[")
         this.componentDidMount();
     }
 
@@ -34,7 +34,7 @@ class LlistatDePlugins extends Component {
         const seccioContext = this.props.seccioContext ? this.props.seccioContext : 0;
 
         let autenticat = sessionStorage.getItem('autenticat');
-        console.log(" LlistatDePlugins - SECCIO " + seccioContext + "(AUTH: ]" + autenticat+ "[)");
+        // console.log(" LlistatDePlugins - SECCIO " + seccioContext + "(AUTH: ]" + autenticat+ "[)");
         
         if (autenticat === '1') {
 
@@ -73,8 +73,8 @@ class LlistatDePlugins extends Component {
             const baseSeccio = (seccioContext === 0) ? '' : Constants.SECCIO_PATH + seccioContext;
             this.props.history.push(baseSeccio + Constants.PLUGINHTML_PATH + pluginContext);
         } else {
-            console.log("LLISTAT PLUGINS INFOHTML => NO PUC LLEGIR HISTORY !!!!!");
-        };
+            console.log("LLISTAT PLUGINS INFOHTML => NO ES POT LLEGIR HISTORY !!!!!");
+        }
 
     }
 
@@ -86,8 +86,8 @@ class LlistatDePlugins extends Component {
             const baseSeccio = (seccioContext === 0) ? '' : SECCIO_PATH + seccioContext;
             this.props.history.push(baseSeccio + Constants.PLUGINREACT_PATH + pluginContext);
         } else {
-            console.log("LLISTAT PLUGINS INFOREACT => NO PUC LLEGIR HISTORY !!!!!");
-        };
+            console.log("LLISTAT PLUGINS INFOHTML => NO ES POT LLEGIR HISTORY !!!!!");
+        }
 
     }
 
@@ -100,7 +100,7 @@ class LlistatDePlugins extends Component {
 
         const autenticat = sessionStorage.getItem('autenticat');;
         if (autenticat === '0') {
-            console.log("S'HA INTENTAT MOSTRAR UNA SECCIO PERO NOOOO ESTAM AUTENTICATS");
+            console.log("S'HA INTENTAT MOSTRAR UNA SECCIO SENSE ESTAR AUTENTICATS");
             this.props.history.push("/");
             return '';
         }

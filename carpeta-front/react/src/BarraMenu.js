@@ -17,7 +17,7 @@ class BarraMenu extends Component {
     }
 
     canviatIdioma(lng) {
-        console.log(" CANVIAT IDIOMA EN BarraMenu A ]" + lng+ "[");
+        // console.log(" CANVIAT IDIOMA EN BarraMenu A ]" + lng+ "[");
         this.componentDidMount();
     }
 

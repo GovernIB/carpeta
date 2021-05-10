@@ -19,7 +19,7 @@ class AvisosFront extends Component {
     }
 
     canviatIdioma(lng) {
-        console.log(" CANVIAT IDIOMA EN AVISOS FRONT A ]" + lng+ "[");
+        // console.log(" CANVIAT IDIOMA EN AVISOS FRONT A ]" + lng+ "[");
         this.componentDidMount();
     }
 

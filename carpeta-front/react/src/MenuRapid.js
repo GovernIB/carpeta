@@ -24,7 +24,7 @@ class MenuRapid extends Component {
     }
 
     canviatIdioma(lng) {
-        console.log(" CANVIAT IDIOMA EN MenuRapid A ]" + lng+ "[");
+        // console.log(" CANVIAT IDIOMA EN MenuRapid A ]" + lng+ "[");
         this.componentDidMount();
     }
 

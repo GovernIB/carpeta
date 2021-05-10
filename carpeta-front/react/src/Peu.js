@@ -22,7 +22,7 @@ class Peu extends Component {
     }
 
     canviatIdioma(lng) {
-        console.log(" CANVIAT IDIOMA EN PEU A ]" + lng+ "[");
+        // console.log(" CANVIAT IDIOMA EN PEU A ]" + lng+ "[");
         this.componentDidMount();
     }
 

@@ -22,7 +22,7 @@ class MapaWeb extends Component {
     }
 
     canviatIdioma(lng) {
-        console.log(" CANVIAT IDIOMA EN MapaWeb A ]" + lng+ "[");
+        // console.log(" CANVIAT IDIOMA EN MapaWeb A ]" + lng+ "[");
         this.componentDidMount();
     }
 

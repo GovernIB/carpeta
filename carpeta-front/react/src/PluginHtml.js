@@ -17,7 +17,7 @@ class PluginHtml extends Component {
     }
 
     canviatIdioma(lng) {
-        console.log(" CANVIAT IDIOMA EN PluginHTML A ]" + lng+ "[");
+        // console.log(" CANVIAT IDIOMA EN PluginHTML A ]" + lng+ "[");
         this.componentDidMount();
     }
 
@@ -30,16 +30,16 @@ class PluginHtml extends Component {
 
         var autenticat = sessionStorage.getItem('autenticat');
         if (autenticat === '0') {
-            console.log("S'HA INTENTAT MOSTRAR UN PLUGIN PERO NOOOO ESTAM AUTENTICATS");
+            console.log("S'HA INTENTAT MOSTRAR UN PLUGIN SENSE ESTAR AUTENTICAT");
             this.props.history.push("/");
             return '';
         }
 
-        console.log("PLUGIN HTML 222222  !!!!!!!");
+        // console.log("PLUGIN HTML 222222  !!!!!!!");
 
         const { t } = this.props;
         const pluginContext = this.props.match.params.pluginContext;
-        console.log("PLUGIN HTML Context =" + pluginContext + "  !!!!!!!");
+        console.log("PLUGIN HTML Context =" + pluginContext + "  !");
 
 
         var data = new FormData();
@@ -71,7 +71,7 @@ class PluginHtml extends Component {
 
 
             if (!iframe) {
-                console.log("Sortim de IFRAME (frame val null)");
+                // console.log("Sortim de IFRAME (frame val null)");
                 return;
             }
 

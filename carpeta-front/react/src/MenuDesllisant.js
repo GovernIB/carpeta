@@ -27,7 +27,7 @@ class MenuDesllisant extends Component {
 	}
 
 	canviatIdioma(lng) {
-		console.log(" CANVIAT IDIOMA EN MENU DESLLISTANT A ]" + lng + "[")
+		// console.log(" CANVIAT IDIOMA EN MENU DESLLISTANT A ]" + lng + "[")
 
 		this.componentDidMount();
 	}
@@ -35,7 +35,7 @@ class MenuDesllisant extends Component {
 
 	componentDidMount() {
 
-		console.log("MENU DESLISSTANT componentDidMount()");
+		// console.log("MENU DESLISSTANT componentDidMount()");
 
 		var baseURL = sessionStorage.getItem('contextPath');
 
@@ -125,7 +125,7 @@ class MenuDesllisant extends Component {
 
 	render() {
 
-		console.log("MENU DESLLISSANT RENDER ");
+		// console.log("MENU DESLLISSANT RENDER ");
 
 		const { t } = this.props;
 		var autenticat = sessionStorage.getItem('autenticat');
@@ -133,17 +133,17 @@ class MenuDesllisant extends Component {
 
 		const idiomes = this.state.idiomes;
 
-		console.log(" MENU DESLLISSANT IDIOMES: " + idiomes);
+		// console.log(" MENU DESLLISSANT IDIOMES: " + idiomes);
 
 		var idioma_seleccionat;
 		var idiomes_seleccionables;
 		var langActual = sessionStorage.getItem("langActual");
 		if (langActual === null) {
-			console.log("Canvi idioma null a ca");
+			// console.log("Canvi idioma null a ca");
 			langActual = 'ca';
 			sessionStorage.setItem("langActual", "ca");
 		}
-		console.log("idioma actual: " + langActual);
+		console.log("Idioma actual: " + langActual);
 
 		idioma_seleccionat = idiomes.filter(s => s === langActual).map((s, i) => (
 			<strong className="lletraIdioma" key={i}>{t('menuIdioma_' + s)}</strong>

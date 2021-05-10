@@ -25,19 +25,19 @@ class PluginReact extends Component {
 
     componentDidMount() {
 
-        console.log('PLUGIN REACT  Entra a componentDidMount()');
+        // console.log('PLUGIN REACT  Entra a componentDidMount()');
 
         var autenticat = sessionStorage.getItem('autenticat');
         if (autenticat === '1') {
 
             i18n.on('languageChanged', function(lng) { 
-                    console.log('PLUGIN REACT  Idioma canviat a ' + lng );
+                    // console.log('PLUGIN REACT  Idioma canviat a ' + lng );
                     
                     if (window['changeLanguagePlugin']) {
-                        console.log('changeLanguagePlugin => EXISTEIX !!!!');
+                        // console.log('changeLanguagePlugin => EXISTEIX !!!!');
                         window['changeLanguagePlugin'](lng);
                     } else {
-                        console.log('changeLanguagePlugin => NOOOO EXISTEIX !!!!');
+                        // console.log('changeLanguagePlugin => NOOOO EXISTEIX !!!!');
                     }
 
                 }
@@ -54,7 +54,7 @@ class PluginReact extends Component {
 
         const pluginContext = this.props.pluginContext;
 
-        console.log('PLUGIN REACT  Entra a reloadReactPlugin()');
+        // console.log('PLUGIN REACT  Entra a reloadReactPlugin()');
 
         var urlBase = sessionStorage.getItem('contextPath');
         var url = urlBase + "/pluginfront/showreactplugin/" + pluginContext + "/" + i18n.language;
@@ -67,10 +67,10 @@ class PluginReact extends Component {
 
 
         if (window['changeLanguagePlugin']) {
-            console.log('2 changeLanguagePlugin => EXISTEIX !!!!');
+            // console.log('2 changeLanguagePlugin => EXISTEIX !!!!');
             window['changeLanguagePlugin'](i18n.language);
         } else {
-            console.log('2 changeLanguagePlugin => NOOOO EXISTEIX !!!!');
+            // console.log('2 changeLanguagePlugin => NOOOO EXISTEIX !!!!');
         }
 
     }
@@ -80,20 +80,20 @@ class PluginReact extends Component {
 
         var autenticat = sessionStorage.getItem('autenticat');
         if (autenticat === '0') {
-            console.log("S'HA INTENTAT MOSTRAR UN PLUGIN PERO NOOOO ESTAM AUTENTICATS");
+            console.log("S'HA INTENTAT MOSTRAR UN PLUGIN SENSE ESTAR AUTENTICAT");
             this.props.history.push("/");
             return '';
         }
 
 
-        console.log(" PLUGIN REACT RENDER 111 pluginContext state " +  this.state.pluginContext + "!!!!!");
-        console.log(" PLUGIN REACT RENDER 222       pluginContext " +  this.props.pluginContext + "!!!!!");
-        console.log(" PLUGIN REACT RENDER 333 seccioContext " +  this.props.seccioContext + "!!!!!");
+        console.log(" PLUGIN REACT RENDER pluginContext state " +  this.state.pluginContext + "!");
+        console.log(" PLUGIN REACT RENDER pluginContext " +  this.props.pluginContext + "!");
+        console.log(" PLUGIN REACT RENDER seccioContext " +  this.props.seccioContext + "!");
 
 
         if (this.props.pluginContext != this.state.pluginContext) {
 
-            console.log(" PLUGIN REACT RENDER plugin context DIFERENTS !!!!");
+            // console.log(" PLUGIN REACT RENDER plugin context DIFERENTS !!!!");
 
             setTimeout( () =>  this.reloadReactPlugin(), 500);
             

@@ -17,7 +17,7 @@ class EnllasosPeuCentral extends Component {
     }
 
     canviatIdioma(lng) {
-        console.log(" CANVIAT IDIOMA EN EnllassosPeuCentral A ]" + lng+ "[");
+        // console.log(" CANVIAT IDIOMA EN EnllassosPeuCentral A ]" + lng+ "[");
         this.componentDidMount();
     }
 
@@ -81,7 +81,7 @@ class EnllasosPeuCentral extends Component {
         }
 
         var entitatActiva = sessionStorage.getItem('entitat');
-        console.log("ENTITAT ENLLASOS: " + entitatActiva);
+        // console.log("ENTITAT ENLLASOS: " + entitatActiva);
 
         var avisLegal;
 

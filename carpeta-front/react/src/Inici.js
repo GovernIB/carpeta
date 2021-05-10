@@ -23,9 +23,15 @@ class Inici extends Component {
 
 		var autenticat = sessionStorage.getItem('autenticat');
 
-		console.log("INICI :: AUTH = " + autenticat);
+		switch (autenticat) {
 
-
+			case 0: // Plugin react
+				console.log("INICI NO AUTENTICAT");
+				break;
+			case 1: // Plugin html
+				console.log("INICI AUTENTICAT");
+				break;
+		}
 
 
 		clearTimeout(sessionStorage.getItem('idTimeOut'));
