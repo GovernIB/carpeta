@@ -1,6 +1,5 @@
 package es.caib.carpeta.commons.utils;
 
-import es.caib.carpeta.utils.Version;
 
 /**
 * Codi autogenerat a partir del fitxer StaticVersion.java.template.

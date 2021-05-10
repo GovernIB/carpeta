@@ -11,7 +11,7 @@ import es.caib.carpeta.model.dao.IUsuariManager;
 @Local
 public interface UsuariService extends UsuariIJPAManager,IUsuariManager {
 
- public static final String JNDI_NAME = "java:app/carpeta-ejb/UsuariEJB!es.caib.carpeta.ejb.UsuariService";
+    public static final String JNDI_NAME = "java:app/carpeta-ejb/UsuariEJB!es.caib.carpeta.ejb.UsuariService";
 
     public UsuariJPA findByPrimaryKey(Long _ID_);
 }

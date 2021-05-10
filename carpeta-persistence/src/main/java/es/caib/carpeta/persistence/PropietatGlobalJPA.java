@@ -26,24 +26,24 @@ public class PropietatGlobalJPA implements PropietatGlobal {
 
 private static final long serialVersionUID = 1545722544L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="PROPIETATGLOBAL_SEQ")
-	@Index(name="car_propietatglobal_pk_i")
-	@Column(name="propietatglobalid",nullable = false,length = 19)
-	long propietaGlobalID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="PROPIETATGLOBAL_SEQ")
+    @Index(name="car_propietatglobal_pk_i")
+    @Column(name="propietatglobalid",nullable = false,length = 19)
+    long propietaGlobalID;
 
-	@Column(name="codi",nullable = false,length = 250)
-	java.lang.String codi;
+    @Column(name="codi",nullable = false,length = 250)
+    java.lang.String codi;
 
-	@Column(name="value",length = 4000)
-	java.lang.String value;
+    @Column(name="value",length = 4000)
+    java.lang.String value;
 
-	@Column(name="descripcio",length = 1000)
-	java.lang.String descripcio;
+    @Column(name="descripcio",length = 1000)
+    java.lang.String descripcio;
 
-	@Index(name="car_propglob_entitatid_fk_i")
-	@Column(name="entitatid",length = 19)
-	java.lang.Long entitatID;
+    @Index(name="car_propglob_entitatid_fk_i")
+    @Column(name="entitatid",length = 19)
+    java.lang.Long entitatID;
 
 
 
@@ -131,16 +131,16 @@ private static final long serialVersionUID = 1545722544L;
 
 // IMP Field:entitatid | Table: car_entitat | Type: 1  
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="car_propglob_entitat_fk")
-	@JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = true, insertable=false, updatable=false)
-	private EntitatJPA entitat;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ForeignKey(name="car_propglob_entitat_fk")
+    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = true, insertable=false, updatable=false)
+    private EntitatJPA entitat;
 
-	public EntitatJPA getEntitat() {
+    public EntitatJPA getEntitat() {
     return this.entitat;
   }
 
-	public  void setEntitat(EntitatJPA entitat) {
+    public  void setEntitat(EntitatJPA entitat) {
     this.entitat = entitat;
   }
 

@@ -9,36 +9,33 @@ import es.caib.carpeta.model.entity.PluginEntitat;
 import es.caib.carpeta.persistence.PluginEntitatJPA;
 import es.caib.carpeta.persistence.PluginEntitatJPAManager;
 
-import es.caib.carpeta.utils.Constants;
+import es.caib.carpeta.commons.utils.Constants;
 
 @Stateless
 public class PluginEntitatEJB extends PluginEntitatJPAManager implements PluginEntitatService {
 
-  @Override
-	@RolesAllowed({Constants.CAR_ADMIN,
-        Constants.CAR_USER})
-	public void delete(PluginEntitat instance) {
-		super.delete(instance);
-	}
+    @Override
+    @RolesAllowed({Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS})
+    public void delete(PluginEntitat instance) {
+        super.delete(instance);
+    }
 
-  @Override
-	@RolesAllowed({Constants.CAR_ADMIN,Constants.CAR_USER})
-	public PluginEntitat create(PluginEntitat instance) throws I18NException {
-		return super.create(instance);
-	}
+    @Override
+    @RolesAllowed({Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS})
+    public PluginEntitat create(PluginEntitat instance) throws I18NException {
+        return super.create(instance);
+    }
 
-  @Override
-	@RolesAllowed({Constants.CAR_ADMIN,
-        Constants.CAR_USER})
-	public PluginEntitat update(PluginEntitat instance) throws I18NException {
-		 return super.update(instance);
-	}
+    @Override
+    @RolesAllowed({Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS})
+    public PluginEntitat update(PluginEntitat instance) throws I18NException {
+         return super.update(instance);
+    }
 
-  @Override
-	@RolesAllowed({Constants.CAR_ADMIN,
-        Constants.CAR_USER})
-  public PluginEntitatJPA findByPrimaryKey(Long _ID_) {
-    return (PluginEntitatJPA)super.findByPrimaryKey(_ID_);
-  }
+    @Override
+    @RolesAllowed({Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS})
+    public PluginEntitatJPA findByPrimaryKey(Long _ID_) {
+        return (PluginEntitatJPA)super.findByPrimaryKey(_ID_);
+    }
 
 }

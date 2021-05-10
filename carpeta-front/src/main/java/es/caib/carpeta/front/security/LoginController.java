@@ -1,6 +1,5 @@
 package es.caib.carpeta.front.security;
 
-
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
 import org.apache.commons.logging.Log;
@@ -30,7 +29,6 @@ import es.caib.carpeta.logic.LogCarpetaLogicaService;
 import es.caib.carpeta.logic.utils.EjbManager;
 import java.net.MalformedURLException;
 import java.net.URL;
-
 
 /**
  *
@@ -81,30 +79,28 @@ public class LoginController {
         return "redirect:/login";
     }
 
-
-    @RequestMapping(value="/login")
-    public ModelAndView login(HttpServletRequest request, HttpServletResponse response) throws Exception, I18NException {
+    @RequestMapping(value = "/login")
+    public ModelAndView login(HttpServletRequest request, HttpServletResponse response)
+            throws Exception, I18NException {
 
         // Eliminam errors anteriors de la sessió
-        if(sesionHttp.getErrorLogin() != null){
+        if (sesionHttp.getErrorLogin() != null) {
             sesionHttp.setErrorLogin(null);
         }
 
         long temps = System.currentTimeMillis();
-       
 
         // Error login
         if ("true".equals(request.getParameter("error"))) {
 
-            //Log no autenticat/error
-            //Cream les dades bàsiques de la petició per els logs
+            // Log no autenticat/error
+            // Cream les dades bàsiques de la petició per els logs
             StringBuilder peticio = new StringBuilder();
             peticio.append("Usuari: no definit").append("\n");
             peticio.append("classe: ").append(getClass().getName()).append("\n");
-            logLogicaEjb.crearLog("Autenticació del Front", ESTAT_LOG_ERROR,TIPUS_LOG_AUTENTICACIO_FRONT,
-                    System.currentTimeMillis() - temps ,null,"Error de login",peticio.toString(),"",null);
+            logLogicaEjb.crearLog("Autenticació del Front", ESTAT_LOG_ERROR, TIPUS_LOG_AUTENTICACIO_FRONT,
+                    System.currentTimeMillis() - temps, null, "Error de login", peticio.toString(), "", null);
             log.info("Error de login");
-
 
         }
         final SavedRequest savedRequest = loginRequestCache.getRequest(request, response);
@@ -131,11 +127,10 @@ public class LoginController {
             String language = LocaleContextHolder.getLocale().getLanguage();
 
             String url;
-            ModelAndView mav = new ModelAndView();
             try {
-                
-              url = securityService.iniciarSesionAutentificacion(url_callback_login, url_callback_error, language);
-            
+
+                url = securityService.iniciarSesionAutentificacion(url_callback_login, url_callback_error, language);
+
             } catch (Exception e) {
                 log.error("Error Iniciant la sessió de seguretat amb Cl@ve: " + e.getMessage(), e);
                 url = baseURL;
@@ -155,29 +150,23 @@ public class LoginController {
     public String redirigirLogin(HttpServletRequest request, HttpServletResponse response) throws I18NException {
 
         log.info("\nDentro de redirigirLogin: ]" + sesionHttp.getUrlEntrada() + "[\n");
-        String callbackurl = (String)request.getSession().getAttribute(SESSION_RETURN_URL_POST_LOGIN);
+        String callbackurl = (String) request.getSession().getAttribute(SESSION_RETURN_URL_POST_LOGIN);
         log.info(" XXX XYZ redirigirLogin CALLBACK  => ]" + callbackurl + "[");
-        
 
         // Gestionamos la url de entrada a la aplicación previa a autenticarse
-        /** XYZ ZZZ
-        try {
-            if (StringUtils.isNotEmpty(sesionHttp.getUrlEntrada())) {
-                response.sendRedirect(sesionHttp.getUrlEntrada());
-            } else {
-                response.sendRedirect("/carpetafront");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        */
+        /**
+         * XYZ ZZZ try { if (StringUtils.isNotEmpty(sesionHttp.getUrlEntrada())) {
+         * response.sendRedirect(sesionHttp.getUrlEntrada()); } else {
+         * response.sendRedirect("/carpetafront"); } } catch (IOException e) {
+         * e.printStackTrace(); }
+         */
 
         log.info("\n XYZ ZZZZ redirigirLogin => /\n");
         return "redirect:/";
 
         // XYZ ZZZ
 
-        //return new ModelAndView("inici");
+        // return new ModelAndView("inici");
 
     }
 
@@ -204,20 +193,19 @@ public class LoginController {
             session.invalidate();
         }
 
-        if(codiEntitat == null) {
-            //Agafam l'entitat per defecte, si en té
+        if (codiEntitat == null) {
+            // Agafam l'entitat per defecte, si en té
             PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
 
-            if(EjbManager.getDefaultEntityCode(propietatGlobalEjb) == null){
+            if (EjbManager.getDefaultEntityCode(propietatGlobalEjb) == null) {
                 return "redirect:/entitat";
-            }else{
+            } else {
                 codiEntitat = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
             }
 //            log.info("WWWWWWWWWWWWWW entitat es null, posam DefaultEntity: " + codiEntitat + "WWWWWWWWWWWWWWWWWW");
-        }       
-        
+        }
 
-        return "redirect:/e/"+codiEntitat;
+        return "redirect:/e/" + codiEntitat;
 
     }
 

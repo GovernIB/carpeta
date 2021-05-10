@@ -29,40 +29,40 @@ public class SeccioJPA implements Seccio {
 
 private static final long serialVersionUID = 838506947L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="SECCIO_SEQ")
-	@Index(name="car_seccio_pk_i")
-	@Column(name="seccioid",nullable = false,length = 19)
-	long seccioID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="SECCIO_SEQ")
+    @Index(name="car_seccio_pk_i")
+    @Column(name="seccioid",nullable = false,length = 19)
+    long seccioID;
 
-	@Index(name="car_seccio_nomid_fk_i")
-	@Column(name="nomid",nullable = false,length = 19)
-	long nomID;
+    @Index(name="car_seccio_nomid_fk_i")
+    @Column(name="nomid",nullable = false,length = 19)
+    long nomID;
 
-	@Index(name="car_seccio_descripcioid_fk_i")
-	@Column(name="descripcioid",nullable = false,length = 19)
-	long descripcioID;
+    @Index(name="car_seccio_descripcioid_fk_i")
+    @Column(name="descripcioid",nullable = false,length = 19)
+    long descripcioID;
 
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="SECCIO_SEQ")
-	@Column(name="context",nullable = false,unique = true,length = 50)
-	java.lang.String context;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="SECCIO_SEQ")
+    @Column(name="context",nullable = false,unique = true,length = 50)
+    java.lang.String context;
 
-	@Column(name="activa",nullable = false,length = 1)
-	boolean activa;
+    @Column(name="activa",nullable = false,length = 1)
+    boolean activa;
 
-	@Index(name="car_seccio_iconaid_fk_i")
-	@Column(name="iconaid",nullable = false,length = 19)
-	long iconaID;
+    @Index(name="car_seccio_iconaid_fk_i")
+    @Column(name="iconaid",nullable = false,length = 19)
+    long iconaID;
 
-	@Column(name="secciopareid",length = 19)
-	java.lang.Long seccioPareID;
+    @Column(name="secciopareid",length = 19)
+    java.lang.Long seccioPareID;
 
-	@Index(name="car_seccio_entitatid_fk_i")
-	@Column(name="entitatid",nullable = false,length = 19)
-	long entitatID;
+    @Index(name="car_seccio_entitatid_fk_i")
+    @Column(name="entitatid",nullable = false,length = 19)
+    long entitatID;
 
-	@Column(name="ordre",nullable = false,length = 10)
-	int ordre;
+    @Column(name="ordre",nullable = false,length = 10)
+    int ordre;
 
 
 
@@ -197,42 +197,42 @@ private static final long serialVersionUID = 838506947L;
 
 // EXP  Field:seccioid | Table: car_enllaz | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "seccio")
-	private Set<EnllazJPA> enllazs = new HashSet<EnllazJPA>(0);
-	public  Set<EnllazJPA> getEnllazs() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "seccio")
+    private Set<EnllazJPA> enllazs = new HashSet<EnllazJPA>(0);
+    public  Set<EnllazJPA> getEnllazs() {
     return this.enllazs;
   }
 
-	public void setEnllazs(Set<EnllazJPA> enllazs) {
-	  this.enllazs = enllazs;
-	}
+    public void setEnllazs(Set<EnllazJPA> enllazs) {
+      this.enllazs = enllazs;
+    }
 
 
 // EXP  Field:seccioid | Table: car_pluginentitat | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "seccio")
-	private Set<PluginEntitatJPA> pluginEntitats = new HashSet<PluginEntitatJPA>(0);
-	public  Set<PluginEntitatJPA> getPluginEntitats() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "seccio")
+    private Set<PluginEntitatJPA> pluginEntitats = new HashSet<PluginEntitatJPA>(0);
+    public  Set<PluginEntitatJPA> getPluginEntitats() {
     return this.pluginEntitats;
   }
 
-	public void setPluginEntitats(Set<PluginEntitatJPA> pluginEntitats) {
-	  this.pluginEntitats = pluginEntitats;
-	}
+    public void setPluginEntitats(Set<PluginEntitatJPA> pluginEntitats) {
+      this.pluginEntitats = pluginEntitats;
+    }
 
 
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
-	@ForeignKey(name="car_seccio_traduccio_nom_fk")
-	@JoinColumn(name = "nomid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false)
-	private TraduccioJPA nom;
+    @ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
+    @ForeignKey(name="car_seccio_traduccio_nom_fk")
+    @JoinColumn(name = "nomid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false)
+    private TraduccioJPA nom;
 
-	public TraduccioJPA getNom() {
+    public TraduccioJPA getNom() {
     return this.nom;
   }
 
-	public  void setNom(TraduccioJPA nom) {
+    public  void setNom(TraduccioJPA nom) {
     this.nom = nom;
   }
 
@@ -248,16 +248,16 @@ private static final long serialVersionUID = 838506947L;
 
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
-	@ForeignKey(name="car_seccio_traduccio_des_fk")
-	@JoinColumn(name = "descripcioid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false)
-	private TraduccioJPA descripcio;
+    @ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
+    @ForeignKey(name="car_seccio_traduccio_des_fk")
+    @JoinColumn(name = "descripcioid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false)
+    private TraduccioJPA descripcio;
 
-	public TraduccioJPA getDescripcio() {
+    public TraduccioJPA getDescripcio() {
     return this.descripcio;
   }
 
-	public  void setDescripcio(TraduccioJPA descripcio) {
+    public  void setDescripcio(TraduccioJPA descripcio) {
     this.descripcio = descripcio;
   }
 
@@ -273,31 +273,31 @@ private static final long serialVersionUID = 838506947L;
 
 // IMP Field:fitxerid | Table: car_fitxer | Type: 1  
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@ForeignKey(name="car_seccio_fitxer_icon_fk")
-	@JoinColumn(name = "iconaid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false)
-	private FitxerJPA icona;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @ForeignKey(name="car_seccio_fitxer_icon_fk")
+    @JoinColumn(name = "iconaid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false)
+    private FitxerJPA icona;
 
-	public FitxerJPA getIcona() {
+    public FitxerJPA getIcona() {
     return this.icona;
   }
 
-	public  void setIcona(FitxerJPA icona) {
+    public  void setIcona(FitxerJPA icona) {
     this.icona = icona;
   }
 
 // IMP Field:entitatid | Table: car_entitat | Type: 1  
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="car_seccio_entitat_ent_fk")
-	@JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false)
-	private EntitatJPA entitat;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ForeignKey(name="car_seccio_entitat_ent_fk")
+    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false)
+    private EntitatJPA entitat;
 
-	public EntitatJPA getEntitat() {
+    public EntitatJPA getEntitat() {
     return this.entitat;
   }
 
-	public  void setEntitat(EntitatJPA entitat) {
+    public  void setEntitat(EntitatJPA entitat) {
     this.entitat = entitat;
   }
 

@@ -11,57 +11,57 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 
 
 public class LogCarpetaJPAManager
-		 extends AbstractJPAManager<LogCarpeta, Long>
-		 implements LogCarpetaIJPAManager, ILogCarpetaManager, LogCarpetaFields {
+         extends AbstractJPAManager<LogCarpeta, Long>
+         implements LogCarpetaIJPAManager, ILogCarpetaManager, LogCarpetaFields {
 
 
 
 
-  private static final long serialVersionUID = 1505320484L;
+    private static final long serialVersionUID = 1505320484L;
 
-	 public static final TableName<LogCarpeta> _TABLENAME =  new TableName<LogCarpeta>("LogCarpetaJPA");
-
-
-  @PersistenceContext
-  protected EntityManager __em;
-
-  public LogCarpetaJPAManager() {
-  }
-
-  protected LogCarpetaJPAManager(EntityManager __em) {
-    this.__em = __em;
-  }
-
-  @Override
-  public EntityManager getEntityManager() {
-    return this.__em;
-  }
-	public Class<?> getJPAClass() {
-		return LogCarpetaJPA. class;
-	}
+    public static final TableName<LogCarpeta> _TABLENAME =  new TableName<LogCarpeta>("LogCarpetaJPA");
 
 
+    @PersistenceContext
+    protected EntityManager __em;
 
-	public TableName<LogCarpeta> getTableName() {
-		return _TABLENAME;
-	}
+    public LogCarpetaJPAManager() {
+    }
+
+    protected LogCarpetaJPAManager(EntityManager __em) {
+      this.__em = __em;
+    }
+
+    @Override
+    public EntityManager getEntityManager() {
+      return this.__em;
+    }
+    public Class<?> getJPAClass() {
+        return LogCarpetaJPA. class;
+    }
 
 
-	@Override
-	protected String getTableNameVariable() {
-		return _TABLE_MODEL;
-	}
+
+    public TableName<LogCarpeta> getTableName() {
+        return _TABLENAME;
+    }
 
 
-	public LogCarpeta[] listToArray(List<LogCarpeta> list)  {
-		if(list == null) { return null; };
-		return list.toArray(new LogCarpeta[list.size()]);
-	};
+    @Override
+    protected String getTableNameVariable() {
+        return _TABLE_MODEL;
+    }
 
-	public synchronized LogCarpeta create( java.lang.String _descripcio_, int _tipus_, int _estat_, java.lang.Long _pluginID_, java.lang.String _entitatCodi_, java.lang.Long _temps_, java.sql.Timestamp _dataInici_, java.lang.String _peticio_, java.lang.String _error_, java.lang.String _excepcio_) throws I18NException {
-		LogCarpetaJPA __bean =  new LogCarpetaJPA(_descripcio_,_tipus_,_estat_,_pluginID_,_entitatCodi_,_temps_,_dataInici_,_peticio_,_error_,_excepcio_);
-		return create(__bean);
-	}
+
+    public LogCarpeta[] listToArray(List<LogCarpeta> list)  {
+        if(list == null) { return null; };
+        return list.toArray(new LogCarpeta[list.size()]);
+    };
+
+    public synchronized LogCarpeta create( java.lang.String _descripcio_, int _tipus_, int _estat_, java.lang.Long _pluginID_, java.lang.String _entitatCodi_, java.lang.Long _temps_, java.sql.Timestamp _dataInici_, java.lang.String _peticio_, java.lang.String _error_, java.lang.String _excepcio_) throws I18NException {
+        LogCarpetaJPA __bean =  new LogCarpetaJPA(_descripcio_,_tipus_,_estat_,_pluginID_,_entitatCodi_,_temps_,_dataInici_,_peticio_,_error_,_excepcio_);
+        return create(__bean);
+    }
 
 
 
@@ -72,25 +72,25 @@ public class LogCarpetaJPAManager
 
 
 
-	public LogCarpeta findByPrimaryKey(long _logID_) {
-	  return __em.find(LogCarpetaJPA.class, _logID_);  
-	}
-	@Override
-	protected LogCarpeta getJPAInstance(LogCarpeta __bean) {
-		return convertToJPA(__bean);
-	}
+    public LogCarpeta findByPrimaryKey(long _logID_) {
+        return __em.find(LogCarpetaJPA.class, _logID_);  
+    }
+    @Override
+    protected LogCarpeta getJPAInstance(LogCarpeta __bean) {
+        return convertToJPA(__bean);
+    }
 
 
-	public static LogCarpetaJPA convertToJPA(LogCarpeta __bean) {
-	  if (__bean == null) {
-	    return null;
-	  }
-	  if(__bean instanceof LogCarpetaJPA) {
-	    return (LogCarpetaJPA)__bean;
-	  }
-	  
-	  return LogCarpetaJPA.toJPA(__bean);
-	}
+    public static LogCarpetaJPA convertToJPA(LogCarpeta __bean) {
+      if (__bean == null) {
+        return null;
+      }
+      if(__bean instanceof LogCarpetaJPA) {
+        return (LogCarpetaJPA)__bean;
+      }
+      
+      return LogCarpetaJPA.toJPA(__bean);
+    }
 
 
 }

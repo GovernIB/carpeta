@@ -26,23 +26,23 @@ public class FitxerJPA implements Fitxer {
 
 private static final long serialVersionUID = -252813913L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="FITXER_SEQ")
-	@Index(name="car_fitxer_pk_i")
-	@Column(name="fitxerid",nullable = false,length = 19)
-	long fitxerID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="FITXER_SEQ")
+    @Index(name="car_fitxer_pk_i")
+    @Column(name="fitxerid",nullable = false,length = 19)
+    long fitxerID;
 
-	@Column(name="nom",nullable = false,length = 255)
-	java.lang.String nom;
+    @Column(name="nom",nullable = false,length = 255)
+    java.lang.String nom;
 
-	@Column(name="mime",nullable = false,length = 255)
-	java.lang.String mime;
+    @Column(name="mime",nullable = false,length = 255)
+    java.lang.String mime;
 
-	@Column(name="tamany",nullable = false,length = 19)
-	long tamany;
+    @Column(name="tamany",nullable = false,length = 19)
+    long tamany;
 
-	@Column(name="descripcio",length = 1000)
-	java.lang.String descripcio;
+    @Column(name="descripcio",length = 1000)
+    java.lang.String descripcio;
 
 
 
@@ -129,106 +129,106 @@ private static final long serialVersionUID = -252813913L;
 
 // EXP  Field:logoid | Table: car_enllaz | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "logoID")
-	private Set<EnllazJPA> enllazs = new HashSet<EnllazJPA>(0);
-	public  Set<EnllazJPA> getEnllazs() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "logoID")
+    private Set<EnllazJPA> enllazs = new HashSet<EnllazJPA>(0);
+    public  Set<EnllazJPA> getEnllazs() {
     return this.enllazs;
   }
 
-	public void setEnllazs(Set<EnllazJPA> enllazs) {
-	  this.enllazs = enllazs;
-	}
+    public void setEnllazs(Set<EnllazJPA> enllazs) {
+      this.enllazs = enllazs;
+    }
 
 
 // EXP  Field:fitxercss | Table: car_entitat | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "fitxerCssID")
-	private Set<EntitatJPA> entitat_fitxercsss = new HashSet<EntitatJPA>(0);
-	public  Set<EntitatJPA> getEntitat_fitxercsss() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "fitxerCssID")
+    private Set<EntitatJPA> entitat_fitxercsss = new HashSet<EntitatJPA>(0);
+    public  Set<EntitatJPA> getEntitat_fitxercsss() {
     return this.entitat_fitxercsss;
   }
 
-	public void setEntitat_fitxercsss(Set<EntitatJPA> entitat_fitxercsss) {
-	  this.entitat_fitxercsss = entitat_fitxercsss;
-	}
+    public void setEntitat_fitxercsss(Set<EntitatJPA> entitat_fitxercsss) {
+      this.entitat_fitxercsss = entitat_fitxercsss;
+    }
 
 
 // EXP  Field:iconid | Table: car_entitat | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "iconID")
-	private Set<EntitatJPA> entitat_iconids = new HashSet<EntitatJPA>(0);
-	public  Set<EntitatJPA> getEntitat_iconids() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "iconID")
+    private Set<EntitatJPA> entitat_iconids = new HashSet<EntitatJPA>(0);
+    public  Set<EntitatJPA> getEntitat_iconids() {
     return this.entitat_iconids;
   }
 
-	public void setEntitat_iconids(Set<EntitatJPA> entitat_iconids) {
-	  this.entitat_iconids = entitat_iconids;
-	}
+    public void setEntitat_iconids(Set<EntitatJPA> entitat_iconids) {
+      this.entitat_iconids = entitat_iconids;
+    }
 
 
 // EXP  Field:logocapbackid | Table: car_entitat | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "logoCapBackID")
-	private Set<EntitatJPA> entitat_logocapbackids = new HashSet<EntitatJPA>(0);
-	public  Set<EntitatJPA> getEntitat_logocapbackids() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "logoCapBackID")
+    private Set<EntitatJPA> entitat_logocapbackids = new HashSet<EntitatJPA>(0);
+    public  Set<EntitatJPA> getEntitat_logocapbackids() {
     return this.entitat_logocapbackids;
   }
 
-	public void setEntitat_logocapbackids(Set<EntitatJPA> entitat_logocapbackids) {
-	  this.entitat_logocapbackids = entitat_logocapbackids;
-	}
+    public void setEntitat_logocapbackids(Set<EntitatJPA> entitat_logocapbackids) {
+      this.entitat_logocapbackids = entitat_logocapbackids;
+    }
 
 
 // EXP  Field:logolateralfrontid | Table: car_entitat | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "logoLateralFrontID")
-	private Set<EntitatJPA> entitat_logolateralfrontids = new HashSet<EntitatJPA>(0);
-	public  Set<EntitatJPA> getEntitat_logolateralfrontids() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "logoLateralFrontID")
+    private Set<EntitatJPA> entitat_logolateralfrontids = new HashSet<EntitatJPA>(0);
+    public  Set<EntitatJPA> getEntitat_logolateralfrontids() {
     return this.entitat_logolateralfrontids;
   }
 
-	public void setEntitat_logolateralfrontids(Set<EntitatJPA> entitat_logolateralfrontids) {
-	  this.entitat_logolateralfrontids = entitat_logolateralfrontids;
-	}
+    public void setEntitat_logolateralfrontids(Set<EntitatJPA> entitat_logolateralfrontids) {
+      this.entitat_logolateralfrontids = entitat_logolateralfrontids;
+    }
 
 
 // EXP  Field:logopeubackid | Table: car_entitat | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "logoPeuBackID")
-	private Set<EntitatJPA> entitat_logopeubackids = new HashSet<EntitatJPA>(0);
-	public  Set<EntitatJPA> getEntitat_logopeubackids() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "logoPeuBackID")
+    private Set<EntitatJPA> entitat_logopeubackids = new HashSet<EntitatJPA>(0);
+    public  Set<EntitatJPA> getEntitat_logopeubackids() {
     return this.entitat_logopeubackids;
   }
 
-	public void setEntitat_logopeubackids(Set<EntitatJPA> entitat_logopeubackids) {
-	  this.entitat_logopeubackids = entitat_logopeubackids;
-	}
+    public void setEntitat_logopeubackids(Set<EntitatJPA> entitat_logopeubackids) {
+      this.entitat_logopeubackids = entitat_logopeubackids;
+    }
 
 
 // EXP  Field:logoid | Table: car_plugin | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "logoID")
-	private Set<PluginJPA> plugins = new HashSet<PluginJPA>(0);
-	public  Set<PluginJPA> getPlugins() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "logoID")
+    private Set<PluginJPA> plugins = new HashSet<PluginJPA>(0);
+    public  Set<PluginJPA> getPlugins() {
     return this.plugins;
   }
 
-	public void setPlugins(Set<PluginJPA> plugins) {
-	  this.plugins = plugins;
-	}
+    public void setPlugins(Set<PluginJPA> plugins) {
+      this.plugins = plugins;
+    }
 
 
 // EXP  Field:iconaid | Table: car_seccio | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "iconaID")
-	private Set<SeccioJPA> seccios = new HashSet<SeccioJPA>(0);
-	public  Set<SeccioJPA> getSeccios() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "iconaID")
+    private Set<SeccioJPA> seccios = new HashSet<SeccioJPA>(0);
+    public  Set<SeccioJPA> getSeccios() {
     return this.seccios;
   }
 
-	public void setSeccios(Set<SeccioJPA> seccios) {
-	  this.seccios = seccios;
-	}
+    public void setSeccios(Set<SeccioJPA> seccios) {
+      this.seccios = seccios;
+    }
 
 
 

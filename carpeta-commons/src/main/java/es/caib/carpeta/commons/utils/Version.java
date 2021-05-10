@@ -1,4 +1,4 @@
-package es.caib.carpeta.utils;
+package es.caib.carpeta.commons.utils;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;

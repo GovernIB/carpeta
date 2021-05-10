@@ -3,7 +3,7 @@ package es.caib.carpeta.back.listener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import es.caib.carpeta.utils.Version;
+import es.caib.carpeta.commons.utils.Version;
 
 import javax.inject.Inject;
 import javax.servlet.ServletContextEvent;

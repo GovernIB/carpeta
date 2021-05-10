@@ -11,7 +11,7 @@ import es.caib.carpeta.model.dao.IEnllazManager;
 @Local
 public interface EnllazService extends EnllazIJPAManager,IEnllazManager {
 
- public static final String JNDI_NAME = "java:app/carpeta-ejb/EnllazEJB!es.caib.carpeta.ejb.EnllazService";
+    public static final String JNDI_NAME = "java:app/carpeta-ejb/EnllazEJB!es.caib.carpeta.ejb.EnllazService";
 
     public EnllazJPA findByPrimaryKey(Long _ID_);
 }

@@ -11,7 +11,7 @@ import es.caib.carpeta.model.dao.IPluginEntitatManager;
 @Local
 public interface PluginEntitatService extends PluginEntitatIJPAManager,IPluginEntitatManager {
 
- public static final String JNDI_NAME = "java:app/carpeta-ejb/PluginEntitatEJB!es.caib.carpeta.ejb.PluginEntitatService";
+    public static final String JNDI_NAME = "java:app/carpeta-ejb/PluginEntitatEJB!es.caib.carpeta.ejb.PluginEntitatService";
 
     public PluginEntitatJPA findByPrimaryKey(Long _ID_);
 }

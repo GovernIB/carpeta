@@ -28,22 +28,22 @@ public class UsuariEntitatJPA implements UsuariEntitat {
 
 private static final long serialVersionUID = 2031334771L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="USUARIENTITAT_SEQ")
-	@Index(name="car_usuarientitat_pk_i")
-	@Column(name="usuarientitatid",nullable = false,length = 19)
-	long usuariEntitatID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="USUARIENTITAT_SEQ")
+    @Index(name="car_usuarientitat_pk_i")
+    @Column(name="usuarientitatid",nullable = false,length = 19)
+    long usuariEntitatID;
 
-	@Index(name="car_usuent_usuariid_fk_i")
-	@Column(name="usuariid",nullable = false,length = 19)
-	long usuariID;
+    @Index(name="car_usuent_usuariid_fk_i")
+    @Column(name="usuariid",nullable = false,length = 19)
+    long usuariID;
 
-	@Index(name="car_usuent_entitatid_fk_i")
-	@Column(name="entitatid",nullable = false,length = 19)
-	long entitatID;
+    @Index(name="car_usuent_entitatid_fk_i")
+    @Column(name="entitatid",nullable = false,length = 19)
+    long entitatID;
 
-	@Column(name="actiu",nullable = false,length = 1)
-	boolean actiu;
+    @Column(name="actiu",nullable = false,length = 1)
+    boolean actiu;
 
 
 
@@ -116,31 +116,31 @@ private static final long serialVersionUID = 2031334771L;
 
 // IMP Field:usuariid | Table: car_usuari | Type: 1  
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="car_usuent_usuari_fk")
-	@JoinColumn(name = "usuariid", referencedColumnName ="usuariID", nullable = false, insertable=false, updatable=false)
-	private UsuariJPA usuari;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ForeignKey(name="car_usuent_usuari_fk")
+    @JoinColumn(name = "usuariid", referencedColumnName ="usuariID", nullable = false, insertable=false, updatable=false)
+    private UsuariJPA usuari;
 
-	public UsuariJPA getUsuari() {
+    public UsuariJPA getUsuari() {
     return this.usuari;
   }
 
-	public  void setUsuari(UsuariJPA usuari) {
+    public  void setUsuari(UsuariJPA usuari) {
     this.usuari = usuari;
   }
 
 // IMP Field:entitatid | Table: car_entitat | Type: 1  
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="car_usuent_entitat_fk")
-	@JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false)
-	private EntitatJPA entitat;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ForeignKey(name="car_usuent_entitat_fk")
+    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false)
+    private EntitatJPA entitat;
 
-	public EntitatJPA getEntitat() {
+    public EntitatJPA getEntitat() {
     return this.entitat;
   }
 
-	public  void setEntitat(EntitatJPA entitat) {
+    public  void setEntitat(EntitatJPA entitat) {
     this.entitat = entitat;
   }
 

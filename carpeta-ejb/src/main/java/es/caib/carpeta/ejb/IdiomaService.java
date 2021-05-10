@@ -11,7 +11,7 @@ import es.caib.carpeta.model.dao.IIdiomaManager;
 @Local
 public interface IdiomaService extends IdiomaIJPAManager,IIdiomaManager {
 
- public static final String JNDI_NAME = "java:app/carpeta-ejb/IdiomaEJB!es.caib.carpeta.ejb.IdiomaService";
+    public static final String JNDI_NAME = "java:app/carpeta-ejb/IdiomaEJB!es.caib.carpeta.ejb.IdiomaService";
 
     public IdiomaJPA findByPrimaryKey(String _ID_);
 }

@@ -11,7 +11,7 @@ import es.caib.carpeta.model.dao.IAccesManager;
 @Local
 public interface AccesService extends AccesIJPAManager,IAccesManager {
 
- public static final String JNDI_NAME = "java:app/carpeta-ejb/AccesEJB!es.caib.carpeta.ejb.AccesService";
+    public static final String JNDI_NAME = "java:app/carpeta-ejb/AccesEJB!es.caib.carpeta.ejb.AccesService";
 
     public AccesJPA findByPrimaryKey(Long _ID_);
 }

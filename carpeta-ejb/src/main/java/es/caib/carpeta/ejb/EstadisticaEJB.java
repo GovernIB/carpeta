@@ -9,36 +9,33 @@ import es.caib.carpeta.model.entity.Estadistica;
 import es.caib.carpeta.persistence.EstadisticaJPA;
 import es.caib.carpeta.persistence.EstadisticaJPAManager;
 
-import es.caib.carpeta.utils.Constants;
+import es.caib.carpeta.commons.utils.Constants;
 
 @Stateless
 public class EstadisticaEJB extends EstadisticaJPAManager implements EstadisticaService {
 
-  @Override
-	@RolesAllowed({Constants.CAR_ADMIN,
-        Constants.CAR_USER})
-	public void delete(Estadistica instance) {
-		super.delete(instance);
-	}
+    @Override
+    @RolesAllowed({Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS})
+    public void delete(Estadistica instance) {
+        super.delete(instance);
+    }
 
-  @Override
-	@RolesAllowed({Constants.CAR_ADMIN,Constants.CAR_USER})
-	public Estadistica create(Estadistica instance) throws I18NException {
-		return super.create(instance);
-	}
+    @Override
+    @RolesAllowed({Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS})
+    public Estadistica create(Estadistica instance) throws I18NException {
+        return super.create(instance);
+    }
 
-  @Override
-	@RolesAllowed({Constants.CAR_ADMIN,
-        Constants.CAR_USER})
-	public Estadistica update(Estadistica instance) throws I18NException {
-		 return super.update(instance);
-	}
+    @Override
+    @RolesAllowed({Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS})
+    public Estadistica update(Estadistica instance) throws I18NException {
+         return super.update(instance);
+    }
 
-  @Override
-	@RolesAllowed({Constants.CAR_ADMIN,
-        Constants.CAR_USER})
-  public EstadisticaJPA findByPrimaryKey(Long _ID_) {
-    return (EstadisticaJPA)super.findByPrimaryKey(_ID_);
-  }
+    @Override
+    @RolesAllowed({Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS})
+    public EstadisticaJPA findByPrimaryKey(Long _ID_) {
+        return (EstadisticaJPA)super.findByPrimaryKey(_ID_);
+    }
 
 }

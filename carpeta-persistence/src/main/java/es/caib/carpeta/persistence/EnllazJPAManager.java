@@ -11,57 +11,57 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 
 
 public class EnllazJPAManager
-		 extends AbstractJPAManager<Enllaz, Long>
-		 implements EnllazIJPAManager, IEnllazManager, EnllazFields {
+         extends AbstractJPAManager<Enllaz, Long>
+         implements EnllazIJPAManager, IEnllazManager, EnllazFields {
 
 
 
 
-  private static final long serialVersionUID = 411601652L;
+    private static final long serialVersionUID = 411601652L;
 
-	 public static final TableName<Enllaz> _TABLENAME =  new TableName<Enllaz>("EnllazJPA");
-
-
-  @PersistenceContext
-  protected EntityManager __em;
-
-  public EnllazJPAManager() {
-  }
-
-  protected EnllazJPAManager(EntityManager __em) {
-    this.__em = __em;
-  }
-
-  @Override
-  public EntityManager getEntityManager() {
-    return this.__em;
-  }
-	public Class<?> getJPAClass() {
-		return EnllazJPA. class;
-	}
+    public static final TableName<Enllaz> _TABLENAME =  new TableName<Enllaz>("EnllazJPA");
 
 
+    @PersistenceContext
+    protected EntityManager __em;
 
-	public TableName<Enllaz> getTableName() {
-		return _TABLENAME;
-	}
+    public EnllazJPAManager() {
+    }
+
+    protected EnllazJPAManager(EntityManager __em) {
+      this.__em = __em;
+    }
+
+    @Override
+    public EntityManager getEntityManager() {
+      return this.__em;
+    }
+    public Class<?> getJPAClass() {
+        return EnllazJPA. class;
+    }
 
 
-	@Override
-	protected String getTableNameVariable() {
-		return _TABLE_MODEL;
-	}
+
+    public TableName<Enllaz> getTableName() {
+        return _TABLENAME;
+    }
 
 
-	public Enllaz[] listToArray(List<Enllaz> list)  {
-		if(list == null) { return null; };
-		return list.toArray(new Enllaz[list.size()]);
-	};
+    @Override
+    protected String getTableNameVariable() {
+        return _TABLE_MODEL;
+    }
 
-	public synchronized Enllaz create( int _tipus_, long _nomID_, java.lang.Long _descripcioID_, long _urlID_, long _entitatID_, long _logoID_, java.lang.Long _seccioID_, boolean _actiu_, int _ordre_) throws I18NException {
-		EnllazJPA __bean =  new EnllazJPA(_tipus_,_nomID_,_descripcioID_,_urlID_,_entitatID_,_logoID_,_seccioID_,_actiu_,_ordre_);
-		return create(__bean);
-	}
+
+    public Enllaz[] listToArray(List<Enllaz> list)  {
+        if(list == null) { return null; };
+        return list.toArray(new Enllaz[list.size()]);
+    };
+
+    public synchronized Enllaz create( int _tipus_, long _nomID_, java.lang.Long _descripcioID_, long _urlID_, long _entitatID_, long _logoID_, java.lang.Long _seccioID_, boolean _actiu_, int _ordre_) throws I18NException {
+        EnllazJPA __bean =  new EnllazJPA(_tipus_,_nomID_,_descripcioID_,_urlID_,_entitatID_,_logoID_,_seccioID_,_actiu_,_ordre_);
+        return create(__bean);
+    }
 
 
 
@@ -72,25 +72,25 @@ public class EnllazJPAManager
 
 
 
-	public Enllaz findByPrimaryKey(long _enllazID_) {
-	  return __em.find(EnllazJPA.class, _enllazID_);  
-	}
-	@Override
-	protected Enllaz getJPAInstance(Enllaz __bean) {
-		return convertToJPA(__bean);
-	}
+    public Enllaz findByPrimaryKey(long _enllazID_) {
+        return __em.find(EnllazJPA.class, _enllazID_);  
+    }
+    @Override
+    protected Enllaz getJPAInstance(Enllaz __bean) {
+        return convertToJPA(__bean);
+    }
 
 
-	public static EnllazJPA convertToJPA(Enllaz __bean) {
-	  if (__bean == null) {
-	    return null;
-	  }
-	  if(__bean instanceof EnllazJPA) {
-	    return (EnllazJPA)__bean;
-	  }
-	  
-	  return EnllazJPA.toJPA(__bean);
-	}
+    public static EnllazJPA convertToJPA(Enllaz __bean) {
+      if (__bean == null) {
+        return null;
+      }
+      if(__bean instanceof EnllazJPA) {
+        return (EnllazJPA)__bean;
+      }
+      
+      return EnllazJPA.toJPA(__bean);
+    }
 
   @Override
   public Enllaz create(Enllaz transientInstance) throws I18NException {

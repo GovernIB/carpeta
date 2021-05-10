@@ -22,27 +22,27 @@ public class EstadisticaJPA implements Estadistica {
 
 private static final long serialVersionUID = -2066559243L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ESTADISTICA_SEQ")
-	@Index(name="car_estadistica_pk_i")
-	@Column(name="estadisticaid",nullable = false,length = 19)
-	long estadisticaID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ESTADISTICA_SEQ")
+    @Index(name="car_estadistica_pk_i")
+    @Column(name="estadisticaid",nullable = false,length = 19)
+    long estadisticaID;
 
-	@Column(name="tipus",nullable = false,length = 10)
-	int tipus;
+    @Column(name="tipus",nullable = false,length = 10)
+    int tipus;
 
-	@Column(name="dataestadistica",nullable = false,length = 29,precision = 6)
-	java.sql.Timestamp dataEstadistica;
+    @Column(name="dataestadistica",nullable = false,length = 29,precision = 6)
+    java.sql.Timestamp dataEstadistica;
 
-	@Column(name="comptador",nullable = false,length = 10)
-	int comptador;
+    @Column(name="comptador",nullable = false,length = 10)
+    int comptador;
 
-	@Column(name="pluginid",length = 19)
-	java.lang.Long pluginID;
+    @Column(name="pluginid",length = 19)
+    java.lang.Long pluginID;
 
-	@Index(name="car_estadistica_entitatid_fk_i")
-	@Column(name="entitatid",length = 19)
-	java.lang.Long entitatID;
+    @Index(name="car_estadistica_entitatid_fk_i")
+    @Column(name="entitatid",length = 19)
+    java.lang.Long entitatID;
 
 
 

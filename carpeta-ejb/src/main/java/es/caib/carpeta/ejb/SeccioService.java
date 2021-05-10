@@ -11,7 +11,7 @@ import es.caib.carpeta.model.dao.ISeccioManager;
 @Local
 public interface SeccioService extends SeccioIJPAManager,ISeccioManager {
 
- public static final String JNDI_NAME = "java:app/carpeta-ejb/SeccioEJB!es.caib.carpeta.ejb.SeccioService";
+    public static final String JNDI_NAME = "java:app/carpeta-ejb/SeccioEJB!es.caib.carpeta.ejb.SeccioService";
 
     public SeccioJPA findByPrimaryKey(Long _ID_);
 }

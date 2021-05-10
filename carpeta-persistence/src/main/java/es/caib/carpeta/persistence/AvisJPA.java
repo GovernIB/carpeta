@@ -26,35 +26,35 @@ public class AvisJPA implements Avis {
 
 private static final long serialVersionUID = 1036906268L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="AVIS_SEQ")
-	@Index(name="car_avis_pk_i")
-	@Column(name="avisid",nullable = false,length = 19)
-	long avisID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="AVIS_SEQ")
+    @Index(name="car_avis_pk_i")
+    @Column(name="avisid",nullable = false,length = 19)
+    long avisID;
 
-	@Index(name="car_avis_descripcioid_fk_i")
-	@Column(name="descripcioid",nullable = false,length = 19)
-	long descripcioID;
+    @Index(name="car_avis_descripcioid_fk_i")
+    @Column(name="descripcioid",nullable = false,length = 19)
+    long descripcioID;
 
-	@Index(name="car_avis_entitatid_fk_i")
-	@Column(name="entitatid",length = 19)
-	java.lang.Long entitatID;
+    @Index(name="car_avis_entitatid_fk_i")
+    @Column(name="entitatid",length = 19)
+    java.lang.Long entitatID;
 
-	@Column(name="datainici",length = 29,precision = 6)
-	java.sql.Timestamp dataInici;
+    @Column(name="datainici",length = 29,precision = 6)
+    java.sql.Timestamp dataInici;
 
-	@Column(name="datafi",length = 29,precision = 6)
-	java.sql.Timestamp dataFi;
+    @Column(name="datafi",length = 29,precision = 6)
+    java.sql.Timestamp dataFi;
 
-	@Column(name="tipus",nullable = false,length = 10)
-	int tipus;
+    @Column(name="tipus",nullable = false,length = 10)
+    int tipus;
 
-	@Column(name="gravetat",nullable = false,length = 10)
-	int gravetat;
+    @Column(name="gravetat",nullable = false,length = 10)
+    int gravetat;
 
-	@Index(name="car_avis_pluginfrontid_fk_i")
-	@Column(name="pluginfrontid",length = 19)
-	java.lang.Long pluginFrontID;
+    @Index(name="car_avis_pluginfrontid_fk_i")
+    @Column(name="pluginfrontid",length = 19)
+    java.lang.Long pluginFrontID;
 
 
 
@@ -174,16 +174,16 @@ private static final long serialVersionUID = 1036906268L;
 
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
-	@ForeignKey(name="car_avis_traduccio_desc_fk")
-	@JoinColumn(name = "descripcioid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false)
-	private TraduccioJPA descripcio;
+    @ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
+    @ForeignKey(name="car_avis_traduccio_desc_fk")
+    @JoinColumn(name = "descripcioid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false)
+    private TraduccioJPA descripcio;
 
-	public TraduccioJPA getDescripcio() {
+    public TraduccioJPA getDescripcio() {
     return this.descripcio;
   }
 
-	public  void setDescripcio(TraduccioJPA descripcio) {
+    public  void setDescripcio(TraduccioJPA descripcio) {
     this.descripcio = descripcio;
   }
 
@@ -199,31 +199,31 @@ private static final long serialVersionUID = 1036906268L;
 
 // IMP Field:entitatid | Table: car_entitat | Type: 1  
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="car_avis_entitat_ent_fk")
-	@JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = true, insertable=false, updatable=false)
-	private EntitatJPA entitat;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ForeignKey(name="car_avis_entitat_ent_fk")
+    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = true, insertable=false, updatable=false)
+    private EntitatJPA entitat;
 
-	public EntitatJPA getEntitat() {
+    public EntitatJPA getEntitat() {
     return this.entitat;
   }
 
-	public  void setEntitat(EntitatJPA entitat) {
+    public  void setEntitat(EntitatJPA entitat) {
     this.entitat = entitat;
   }
 
 // IMP Field:pluginid | Table: car_plugin | Type: 1  
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="car_avis_plugin_pfront_fk")
-	@JoinColumn(name = "pluginfrontid", referencedColumnName ="pluginID", nullable = true, insertable=false, updatable=false)
-	private PluginJPA plugin;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ForeignKey(name="car_avis_plugin_pfront_fk")
+    @JoinColumn(name = "pluginfrontid", referencedColumnName ="pluginID", nullable = true, insertable=false, updatable=false)
+    private PluginJPA plugin;
 
-	public PluginJPA getPlugin() {
+    public PluginJPA getPlugin() {
     return this.plugin;
   }
 
-	public  void setPlugin(PluginJPA plugin) {
+    public  void setPlugin(PluginJPA plugin) {
     this.plugin = plugin;
   }
 

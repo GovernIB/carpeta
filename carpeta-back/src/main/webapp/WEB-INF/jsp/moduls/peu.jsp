@@ -1,4 +1,4 @@
-<%@page import="es.caib.carpeta.utils.Version"
+<%@page import="es.caib.carpeta.commons.utils.Version"
 %><%@page import="es.caib.carpeta.commons.utils.Configuracio"
 %><%@ page contentType="text/html;charset=UTF-8" language="java"
 %><%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>

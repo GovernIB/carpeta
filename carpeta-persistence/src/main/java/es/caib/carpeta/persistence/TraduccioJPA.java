@@ -36,11 +36,11 @@ public class TraduccioJPA implements Traduccio {
 private static final long serialVersionUID = -326205279L;
 
   /**  */
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="TRADUCCIO_SEQ")
-	@Index(name="car_traduccio_pk_i")
-	@Column(name="traduccioid",nullable = false,length = 19)
-	long traduccioID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="TRADUCCIO_SEQ")
+    @Index(name="car_traduccio_pk_i")
+    @Column(name="traduccioid",nullable = false,length = 19)
+    long traduccioID;
 
 
 
@@ -80,145 +80,145 @@ private static final long serialVersionUID = -326205279L;
 
 // EXP  Field:descripcioid | Table: car_avis | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "descripcioID")
-	private Set<AvisJPA> aviss = new HashSet<AvisJPA>(0);
-	public  Set<AvisJPA> getAviss() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "descripcioID")
+    private Set<AvisJPA> aviss = new HashSet<AvisJPA>(0);
+    public  Set<AvisJPA> getAviss() {
     return this.aviss;
   }
 
-	public void setAviss(Set<AvisJPA> aviss) {
-	  this.aviss = aviss;
-	}
+    public void setAviss(Set<AvisJPA> aviss) {
+      this.aviss = aviss;
+    }
 
 
 // EXP  Field:descripcioid | Table: car_enllaz | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "descripcioID")
-	private Set<EnllazJPA> enllaz_descripcioids = new HashSet<EnllazJPA>(0);
-	public  Set<EnllazJPA> getEnllaz_descripcioids() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "descripcioID")
+    private Set<EnllazJPA> enllaz_descripcioids = new HashSet<EnllazJPA>(0);
+    public  Set<EnllazJPA> getEnllaz_descripcioids() {
     return this.enllaz_descripcioids;
   }
 
-	public void setEnllaz_descripcioids(Set<EnllazJPA> enllaz_descripcioids) {
-	  this.enllaz_descripcioids = enllaz_descripcioids;
-	}
+    public void setEnllaz_descripcioids(Set<EnllazJPA> enllaz_descripcioids) {
+      this.enllaz_descripcioids = enllaz_descripcioids;
+    }
 
 
 // EXP  Field:nomid | Table: car_enllaz | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "nomID")
-	private Set<EnllazJPA> enllaz_nomids = new HashSet<EnllazJPA>(0);
-	public  Set<EnllazJPA> getEnllaz_nomids() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "nomID")
+    private Set<EnllazJPA> enllaz_nomids = new HashSet<EnllazJPA>(0);
+    public  Set<EnllazJPA> getEnllaz_nomids() {
     return this.enllaz_nomids;
   }
 
-	public void setEnllaz_nomids(Set<EnllazJPA> enllaz_nomids) {
-	  this.enllaz_nomids = enllaz_nomids;
-	}
+    public void setEnllaz_nomids(Set<EnllazJPA> enllaz_nomids) {
+      this.enllaz_nomids = enllaz_nomids;
+    }
 
 
 // EXP  Field:urlid | Table: car_enllaz | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "urlID")
-	private Set<EnllazJPA> enllaz_urlids = new HashSet<EnllazJPA>(0);
-	public  Set<EnllazJPA> getEnllaz_urlids() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "urlID")
+    private Set<EnllazJPA> enllaz_urlids = new HashSet<EnllazJPA>(0);
+    public  Set<EnllazJPA> getEnllaz_urlids() {
     return this.enllaz_urlids;
   }
 
-	public void setEnllaz_urlids(Set<EnllazJPA> enllaz_urlids) {
-	  this.enllaz_urlids = enllaz_urlids;
-	}
+    public void setEnllaz_urlids(Set<EnllazJPA> enllaz_urlids) {
+      this.enllaz_urlids = enllaz_urlids;
+    }
 
 
 // EXP  Field:descripcioid | Table: car_entitat | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "descripcioID")
-	private Set<EntitatJPA> entitat_descripcioids = new HashSet<EntitatJPA>(0);
-	public  Set<EntitatJPA> getEntitat_descripcioids() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "descripcioID")
+    private Set<EntitatJPA> entitat_descripcioids = new HashSet<EntitatJPA>(0);
+    public  Set<EntitatJPA> getEntitat_descripcioids() {
     return this.entitat_descripcioids;
   }
 
-	public void setEntitat_descripcioids(Set<EntitatJPA> entitat_descripcioids) {
-	  this.entitat_descripcioids = entitat_descripcioids;
-	}
+    public void setEntitat_descripcioids(Set<EntitatJPA> entitat_descripcioids) {
+      this.entitat_descripcioids = entitat_descripcioids;
+    }
 
 
 // EXP  Field:logintextid | Table: car_entitat | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "loginTextID")
-	private Set<EntitatJPA> entitat_logintextids = new HashSet<EntitatJPA>(0);
-	public  Set<EntitatJPA> getEntitat_logintextids() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "loginTextID")
+    private Set<EntitatJPA> entitat_logintextids = new HashSet<EntitatJPA>(0);
+    public  Set<EntitatJPA> getEntitat_logintextids() {
     return this.entitat_logintextids;
   }
 
-	public void setEntitat_logintextids(Set<EntitatJPA> entitat_logintextids) {
-	  this.entitat_logintextids = entitat_logintextids;
-	}
+    public void setEntitat_logintextids(Set<EntitatJPA> entitat_logintextids) {
+      this.entitat_logintextids = entitat_logintextids;
+    }
 
 
 // EXP  Field:nomid | Table: car_entitat | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "nomID")
-	private Set<EntitatJPA> entitat_nomids = new HashSet<EntitatJPA>(0);
-	public  Set<EntitatJPA> getEntitat_nomids() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "nomID")
+    private Set<EntitatJPA> entitat_nomids = new HashSet<EntitatJPA>(0);
+    public  Set<EntitatJPA> getEntitat_nomids() {
     return this.entitat_nomids;
   }
 
-	public void setEntitat_nomids(Set<EntitatJPA> entitat_nomids) {
-	  this.entitat_nomids = entitat_nomids;
-	}
+    public void setEntitat_nomids(Set<EntitatJPA> entitat_nomids) {
+      this.entitat_nomids = entitat_nomids;
+    }
 
 
 // EXP  Field:descripcioid | Table: car_plugin | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "descripcioID")
-	private Set<PluginJPA> plugin_descripcioids = new HashSet<PluginJPA>(0);
-	public  Set<PluginJPA> getPlugin_descripcioids() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "descripcioID")
+    private Set<PluginJPA> plugin_descripcioids = new HashSet<PluginJPA>(0);
+    public  Set<PluginJPA> getPlugin_descripcioids() {
     return this.plugin_descripcioids;
   }
 
-	public void setPlugin_descripcioids(Set<PluginJPA> plugin_descripcioids) {
-	  this.plugin_descripcioids = plugin_descripcioids;
-	}
+    public void setPlugin_descripcioids(Set<PluginJPA> plugin_descripcioids) {
+      this.plugin_descripcioids = plugin_descripcioids;
+    }
 
 
 // EXP  Field:nomid | Table: car_plugin | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "nomID")
-	private Set<PluginJPA> plugin_nomids = new HashSet<PluginJPA>(0);
-	public  Set<PluginJPA> getPlugin_nomids() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "nomID")
+    private Set<PluginJPA> plugin_nomids = new HashSet<PluginJPA>(0);
+    public  Set<PluginJPA> getPlugin_nomids() {
     return this.plugin_nomids;
   }
 
-	public void setPlugin_nomids(Set<PluginJPA> plugin_nomids) {
-	  this.plugin_nomids = plugin_nomids;
-	}
+    public void setPlugin_nomids(Set<PluginJPA> plugin_nomids) {
+      this.plugin_nomids = plugin_nomids;
+    }
 
 
 // EXP  Field:descripcioid | Table: car_seccio | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "descripcioID")
-	private Set<SeccioJPA> seccio_descripcioids = new HashSet<SeccioJPA>(0);
-	public  Set<SeccioJPA> getSeccio_descripcioids() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "descripcioID")
+    private Set<SeccioJPA> seccio_descripcioids = new HashSet<SeccioJPA>(0);
+    public  Set<SeccioJPA> getSeccio_descripcioids() {
     return this.seccio_descripcioids;
   }
 
-	public void setSeccio_descripcioids(Set<SeccioJPA> seccio_descripcioids) {
-	  this.seccio_descripcioids = seccio_descripcioids;
-	}
+    public void setSeccio_descripcioids(Set<SeccioJPA> seccio_descripcioids) {
+      this.seccio_descripcioids = seccio_descripcioids;
+    }
 
 
 // EXP  Field:nomid | Table: car_seccio | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "nomID")
-	private Set<SeccioJPA> seccio_nomids = new HashSet<SeccioJPA>(0);
-	public  Set<SeccioJPA> getSeccio_nomids() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "nomID")
+    private Set<SeccioJPA> seccio_nomids = new HashSet<SeccioJPA>(0);
+    public  Set<SeccioJPA> getSeccio_nomids() {
     return this.seccio_nomids;
   }
 
-	public void setSeccio_nomids(Set<SeccioJPA> seccio_nomids) {
-	  this.seccio_nomids = seccio_nomids;
-	}
+    public void setSeccio_nomids(Set<SeccioJPA> seccio_nomids) {
+      this.seccio_nomids = seccio_nomids;
+    }
 
 
   @ElementCollection(fetch= FetchType.EAGER, targetClass = es.caib.carpeta.persistence.TraduccioMapJPA.class)

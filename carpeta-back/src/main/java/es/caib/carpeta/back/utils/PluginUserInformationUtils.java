@@ -78,10 +78,6 @@ public class PluginUserInformationUtils {
 
         } else {
 
-            /*
-            IUserInformationPlugin plugin = es.caib.carpeta.back.utils.CarpetaPluginsManager
-                    .getUserInformationPluginInstance();
-                    */
             IUserInformationPlugin plugin = authEJB.getUserInformationPluginInstance();
 
             log.info("UserInformationPlugin => " + plugin);

@@ -1,4 +1,4 @@
-package es.caib.carpeta.utils;
+package es.caib.carpeta.commons.utils;
 /**
 * Codi autogenerat a partir del fitxer StaticVersion.java.template.
 */

@@ -42,69 +42,69 @@ public final class CarpetaJPADaoManagers implements ICarpetaDaoManagers{
     this.car_usuarientitat = new UsuariEntitatJPAManager(__em);
   }
 
-	public IAccesManager getAccesManager() {
-	  return this.car_acces;
-	};
+    public IAccesManager getAccesManager() {
+        return this.car_acces;
+    };
 
-	public IAuditoriaManager getAuditoriaManager() {
-	  return this.car_auditoria;
-	};
+    public IAuditoriaManager getAuditoriaManager() {
+        return this.car_auditoria;
+    };
 
-	public IAvisManager getAvisManager() {
-	  return this.car_avis;
-	};
+    public IAvisManager getAvisManager() {
+        return this.car_avis;
+    };
 
-	public IEnllazManager getEnllazManager() {
-	  return this.car_enllaz;
-	};
+    public IEnllazManager getEnllazManager() {
+        return this.car_enllaz;
+    };
 
-	public IEntitatManager getEntitatManager() {
-	  return this.car_entitat;
-	};
+    public IEntitatManager getEntitatManager() {
+        return this.car_entitat;
+    };
 
-	public IEstadisticaManager getEstadisticaManager() {
-	  return this.car_estadistica;
-	};
+    public IEstadisticaManager getEstadisticaManager() {
+        return this.car_estadistica;
+    };
 
-	public IFitxerManager getFitxerManager() {
-	  return this.car_fitxer;
-	};
+    public IFitxerManager getFitxerManager() {
+        return this.car_fitxer;
+    };
 
-	public IIdiomaManager getIdiomaManager() {
-	  return this.car_idioma;
-	};
+    public IIdiomaManager getIdiomaManager() {
+        return this.car_idioma;
+    };
 
-	public ILogCarpetaManager getLogCarpetaManager() {
-	  return this.car_log;
-	};
+    public ILogCarpetaManager getLogCarpetaManager() {
+        return this.car_log;
+    };
 
-	public IPluginManager getPluginManager() {
-	  return this.car_plugin;
-	};
+    public IPluginManager getPluginManager() {
+        return this.car_plugin;
+    };
 
-	public IPluginEntitatManager getPluginEntitatManager() {
-	  return this.car_pluginentitat;
-	};
+    public IPluginEntitatManager getPluginEntitatManager() {
+        return this.car_pluginentitat;
+    };
 
-	public IPropietatGlobalManager getPropietatGlobalManager() {
-	  return this.car_propietatglobal;
-	};
+    public IPropietatGlobalManager getPropietatGlobalManager() {
+        return this.car_propietatglobal;
+    };
 
-	public ISeccioManager getSeccioManager() {
-	  return this.car_seccio;
-	};
+    public ISeccioManager getSeccioManager() {
+        return this.car_seccio;
+    };
 
-	public ITraduccioManager getTraduccioManager() {
-	  return this.car_traduccio;
-	};
+    public ITraduccioManager getTraduccioManager() {
+        return this.car_traduccio;
+    };
 
-	public IUsuariManager getUsuariManager() {
-	  return this.car_usuari;
-	};
+    public IUsuariManager getUsuariManager() {
+        return this.car_usuari;
+    };
 
-	public IUsuariEntitatManager getUsuariEntitatManager() {
-	  return this.car_usuarientitat;
-	};
+    public IUsuariEntitatManager getUsuariEntitatManager() {
+        return this.car_usuarientitat;
+    };
 
 
 }

@@ -19,7 +19,7 @@ import es.caib.carpeta.back.form.webdb.PluginEntitatForm;
 
 import es.caib.carpeta.back.controller.webdb.PluginEntitatController;
 import es.caib.carpeta.back.security.LoginInfo;
-import es.caib.carpeta.commons.utils.Constants;
+import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.persistence.PluginEntitatJPA;
 import es.caib.carpeta.persistence.PluginJPA;
 import es.caib.carpeta.logic.AuditoriaLogicaService;
@@ -127,7 +127,7 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
             LoginInfo loginInfo = LoginInfo.getInstance();
             auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PLUGIN, loginInfo.getEntitatID(),
                     loginInfo.getUsuariPersona().getUsername(),
-                    plugin.getNomTraduccions().get(Constants.DEFAULT_LANGUAGE).getValor());
+                    plugin.getNomTraduccions().get(Configuracio.getDefaultLanguage()).getValor());
         } catch (I18NException e) {
             String msg = "Error creant auditoria " + "(" + e.getMessage() + ")";
             log.error(msg, e);
@@ -145,7 +145,7 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
             LoginInfo loginInfo = LoginInfo.getInstance();
             auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ELIMINAT_PLUGIN, null,
                     loginInfo.getUsuariPersona().getUsername(),
-                    plugin.getNomTraduccions().get(Constants.DEFAULT_LANGUAGE).getValor());
+                    plugin.getNomTraduccions().get(Configuracio.getDefaultLanguage()).getValor());
         } catch (I18NException e) {
 
             String msg = "Error creant auditoria " + "(" + e.getMessage() + ")";

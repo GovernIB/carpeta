@@ -29,95 +29,95 @@ public class EntitatJPA implements Entitat {
 
 private static final long serialVersionUID = 489209138L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ENTITAT_SEQ")
-	@Index(name="car_entitat_pk_i")
-	@Column(name="entitatid",nullable = false,length = 19)
-	long entitatID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ENTITAT_SEQ")
+    @Index(name="car_entitat_pk_i")
+    @Column(name="entitatid",nullable = false,length = 19)
+    long entitatID;
 
-	@Index(name="car_entitat_nom_fk_i")
-	@Column(name="nomid",nullable = false,length = 19)
-	long nomID;
+    @Index(name="car_entitat_nom_fk_i")
+    @Column(name="nomid",nullable = false,length = 19)
+    long nomID;
 
-	@Index(name="car_entitat_descripcioid_fk_i")
-	@Column(name="descripcioid",length = 19)
-	java.lang.Long descripcioID;
+    @Index(name="car_entitat_descripcioid_fk_i")
+    @Column(name="descripcioid",length = 19)
+    java.lang.Long descripcioID;
 
-	@Column(name="codi",nullable = false,length = 30)
-	java.lang.String codi;
+    @Column(name="codi",nullable = false,length = 30)
+    java.lang.String codi;
 
-	@Column(name="codidir3",nullable = false,length = 255)
-	java.lang.String codiDir3;
+    @Column(name="codidir3",nullable = false,length = 255)
+    java.lang.String codiDir3;
 
-	@Column(name="activa",nullable = false,length = 1)
-	boolean activa;
+    @Column(name="activa",nullable = false,length = 1)
+    boolean activa;
 
-	@Column(name="colormenu",nullable = false,length = 100)
-	java.lang.String colorMenu;
+    @Column(name="colormenu",nullable = false,length = 100)
+    java.lang.String colorMenu;
 
-	@Index(name="car_entitat_logocapback_fk_i")
-	@Column(name="logocapbackid",nullable = false,length = 19)
-	long logoCapBackID;
+    @Index(name="car_entitat_logocapback_fk_i")
+    @Column(name="logocapbackid",nullable = false,length = 19)
+    long logoCapBackID;
 
-	@Index(name="car_entitat_logopeuback_fk_i")
-	@Column(name="logopeubackid",nullable = false,length = 19)
-	long logoPeuBackID;
+    @Index(name="car_entitat_logopeuback_fk_i")
+    @Column(name="logopeubackid",nullable = false,length = 19)
+    long logoPeuBackID;
 
-	@Index(name="car_entitat_logolatfront_fk_i")
-	@Column(name="logolateralfrontid",nullable = false,length = 19)
-	long logoLateralFrontID;
+    @Index(name="car_entitat_logolatfront_fk_i")
+    @Column(name="logolateralfrontid",nullable = false,length = 19)
+    long logoLateralFrontID;
 
-	@Column(name="versio",nullable = false,length = 50)
-	java.lang.String versio;
+    @Column(name="versio",nullable = false,length = 50)
+    java.lang.String versio;
 
-	@Index(name="car_entitat_iconid_fk_i")
-	@Column(name="iconid",nullable = false,length = 19)
-	long iconID;
+    @Index(name="car_entitat_iconid_fk_i")
+    @Column(name="iconid",nullable = false,length = 19)
+    long iconID;
 
-	@Column(name="webentitat",nullable = false,length = 255)
-	java.lang.String webEntitat;
+    @Column(name="webentitat",nullable = false,length = 255)
+    java.lang.String webEntitat;
 
-	@Column(name="entitatdescfront",nullable = false,length = 4000)
-	java.lang.String entitatDescFront;
+    @Column(name="entitatdescfront",nullable = false,length = 4000)
+    java.lang.String entitatDescFront;
 
-	@Column(name="suportweb",length = 255)
-	java.lang.String suportWeb;
+    @Column(name="suportweb",length = 255)
+    java.lang.String suportWeb;
 
-	@Column(name="suporttelefon",length = 255)
-	java.lang.String suportTelefon;
+    @Column(name="suporttelefon",length = 255)
+    java.lang.String suportTelefon;
 
-	@Column(name="suportemail",length = 255)
-	java.lang.String suportEmail;
+    @Column(name="suportemail",length = 255)
+    java.lang.String suportEmail;
 
   /** Preguntes Freqüents */
-	@Column(name="suportfaq",length = 255)
-	java.lang.String suportFAQ;
+    @Column(name="suportfaq",length = 255)
+    java.lang.String suportFAQ;
 
   /**  Queixes i suggeriments  */
-	@Column(name="suportqssi",length = 255)
-	java.lang.String suportqssi;
+    @Column(name="suportqssi",length = 255)
+    java.lang.String suportqssi;
 
   /** Suport autenticació Front */
-	@Column(name="suportautenticacio",length = 255)
-	java.lang.String suportautenticacio;
+    @Column(name="suportautenticacio",length = 255)
+    java.lang.String suportautenticacio;
 
-	@Index(name="car_entitat_pluginloginid_fk_i")
-	@Column(name="pluginloginid",length = 19)
-	java.lang.Long pluginLoginID;
+    @Index(name="car_entitat_pluginloginid_fk_i")
+    @Column(name="pluginloginid",length = 19)
+    java.lang.Long pluginLoginID;
 
-	@Index(name="car_entitat_logintextid_fk_i")
-	@Column(name="logintextid",length = 19)
-	java.lang.Long loginTextID;
+    @Index(name="car_entitat_logintextid_fk_i")
+    @Column(name="logintextid",length = 19)
+    java.lang.Long loginTextID;
 
-	@Index(name="car_entitat_fitxercss_fk_i")
-	@Column(name="fitxercss",length = 19)
-	java.lang.Long fitxerCssID;
+    @Index(name="car_entitat_fitxercss_fk_i")
+    @Column(name="fitxercss",length = 19)
+    java.lang.Long fitxerCssID;
 
-	@Column(name="context",length = 255)
-	java.lang.String context;
+    @Column(name="context",length = 255)
+    java.lang.String context;
 
-	@Column(name="commit",length = 255)
-	java.lang.String commit;
+    @Column(name="commit",length = 255)
+    java.lang.String commit;
 
 
 
@@ -426,120 +426,120 @@ private static final long serialVersionUID = 489209138L;
 
 // EXP  Field:entitatid | Table: car_acces | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
-	private Set<AccesJPA> access = new HashSet<AccesJPA>(0);
-	public  Set<AccesJPA> getAccess() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
+    private Set<AccesJPA> access = new HashSet<AccesJPA>(0);
+    public  Set<AccesJPA> getAccess() {
     return this.access;
   }
 
-	public void setAccess(Set<AccesJPA> access) {
-	  this.access = access;
-	}
+    public void setAccess(Set<AccesJPA> access) {
+      this.access = access;
+    }
 
 
 // EXP  Field:entitatid | Table: car_avis | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
-	private Set<AvisJPA> aviss = new HashSet<AvisJPA>(0);
-	public  Set<AvisJPA> getAviss() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
+    private Set<AvisJPA> aviss = new HashSet<AvisJPA>(0);
+    public  Set<AvisJPA> getAviss() {
     return this.aviss;
   }
 
-	public void setAviss(Set<AvisJPA> aviss) {
-	  this.aviss = aviss;
-	}
+    public void setAviss(Set<AvisJPA> aviss) {
+      this.aviss = aviss;
+    }
 
 
 // EXP  Field:entitatid | Table: car_enllaz | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
-	private Set<EnllazJPA> enllazs = new HashSet<EnllazJPA>(0);
-	public  Set<EnllazJPA> getEnllazs() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
+    private Set<EnllazJPA> enllazs = new HashSet<EnllazJPA>(0);
+    public  Set<EnllazJPA> getEnllazs() {
     return this.enllazs;
   }
 
-	public void setEnllazs(Set<EnllazJPA> enllazs) {
-	  this.enllazs = enllazs;
-	}
+    public void setEnllazs(Set<EnllazJPA> enllazs) {
+      this.enllazs = enllazs;
+    }
 
 
 // EXP  Field:entitatid | Table: car_pluginentitat | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
-	private Set<PluginEntitatJPA> pluginEntitats = new HashSet<PluginEntitatJPA>(0);
-	public  Set<PluginEntitatJPA> getPluginEntitats() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
+    private Set<PluginEntitatJPA> pluginEntitats = new HashSet<PluginEntitatJPA>(0);
+    public  Set<PluginEntitatJPA> getPluginEntitats() {
     return this.pluginEntitats;
   }
 
-	public void setPluginEntitats(Set<PluginEntitatJPA> pluginEntitats) {
-	  this.pluginEntitats = pluginEntitats;
-	}
+    public void setPluginEntitats(Set<PluginEntitatJPA> pluginEntitats) {
+      this.pluginEntitats = pluginEntitats;
+    }
 
 
 // EXP  Field:entitatid | Table: car_propietatglobal | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
-	private Set<PropietatGlobalJPA> propietatGlobals = new HashSet<PropietatGlobalJPA>(0);
-	public  Set<PropietatGlobalJPA> getPropietatGlobals() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
+    private Set<PropietatGlobalJPA> propietatGlobals = new HashSet<PropietatGlobalJPA>(0);
+    public  Set<PropietatGlobalJPA> getPropietatGlobals() {
     return this.propietatGlobals;
   }
 
-	public void setPropietatGlobals(Set<PropietatGlobalJPA> propietatGlobals) {
-	  this.propietatGlobals = propietatGlobals;
-	}
+    public void setPropietatGlobals(Set<PropietatGlobalJPA> propietatGlobals) {
+      this.propietatGlobals = propietatGlobals;
+    }
 
 
 // EXP  Field:entitatid | Table: car_seccio | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
-	private Set<SeccioJPA> seccios = new HashSet<SeccioJPA>(0);
-	public  Set<SeccioJPA> getSeccios() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
+    private Set<SeccioJPA> seccios = new HashSet<SeccioJPA>(0);
+    public  Set<SeccioJPA> getSeccios() {
     return this.seccios;
   }
 
-	public void setSeccios(Set<SeccioJPA> seccios) {
-	  this.seccios = seccios;
-	}
+    public void setSeccios(Set<SeccioJPA> seccios) {
+      this.seccios = seccios;
+    }
 
 
 // EXP  Field:darreraentitat | Table: car_usuari | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
-	private Set<UsuariJPA> usuaris = new HashSet<UsuariJPA>(0);
-	public  Set<UsuariJPA> getUsuaris() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
+    private Set<UsuariJPA> usuaris = new HashSet<UsuariJPA>(0);
+    public  Set<UsuariJPA> getUsuaris() {
     return this.usuaris;
   }
 
-	public void setUsuaris(Set<UsuariJPA> usuaris) {
-	  this.usuaris = usuaris;
-	}
+    public void setUsuaris(Set<UsuariJPA> usuaris) {
+      this.usuaris = usuaris;
+    }
 
 
 // EXP  Field:entitatid | Table: car_usuarientitat | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
-	private Set<UsuariEntitatJPA> usuariEntitats = new HashSet<UsuariEntitatJPA>(0);
-	public  Set<UsuariEntitatJPA> getUsuariEntitats() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
+    private Set<UsuariEntitatJPA> usuariEntitats = new HashSet<UsuariEntitatJPA>(0);
+    public  Set<UsuariEntitatJPA> getUsuariEntitats() {
     return this.usuariEntitats;
   }
 
-	public void setUsuariEntitats(Set<UsuariEntitatJPA> usuariEntitats) {
-	  this.usuariEntitats = usuariEntitats;
-	}
+    public void setUsuariEntitats(Set<UsuariEntitatJPA> usuariEntitats) {
+      this.usuariEntitats = usuariEntitats;
+    }
 
 
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
-	@ForeignKey(name="car_entitat_traduccio_nom_fk")
-	@JoinColumn(name = "nomid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false)
-	private TraduccioJPA nom;
+    @ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
+    @ForeignKey(name="car_entitat_traduccio_nom_fk")
+    @JoinColumn(name = "nomid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false)
+    private TraduccioJPA nom;
 
-	public TraduccioJPA getNom() {
+    public TraduccioJPA getNom() {
     return this.nom;
   }
 
-	public  void setNom(TraduccioJPA nom) {
+    public  void setNom(TraduccioJPA nom) {
     this.nom = nom;
   }
 
@@ -555,16 +555,16 @@ private static final long serialVersionUID = 489209138L;
 
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
-	@ForeignKey(name="car_entitat_traduccio_des_fk")
-	@JoinColumn(name = "descripcioid", referencedColumnName ="traduccioID", nullable = true, insertable=false, updatable=false)
-	private TraduccioJPA descripcio;
+    @ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
+    @ForeignKey(name="car_entitat_traduccio_des_fk")
+    @JoinColumn(name = "descripcioid", referencedColumnName ="traduccioID", nullable = true, insertable=false, updatable=false)
+    private TraduccioJPA descripcio;
 
-	public TraduccioJPA getDescripcio() {
+    public TraduccioJPA getDescripcio() {
     return this.descripcio;
   }
 
-	public  void setDescripcio(TraduccioJPA descripcio) {
+    public  void setDescripcio(TraduccioJPA descripcio) {
     this.descripcio = descripcio;
   }
 
@@ -580,91 +580,91 @@ private static final long serialVersionUID = 489209138L;
 
 // IMP Field:fitxerid | Table: car_fitxer | Type: 1  
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@ForeignKey(name="car_entitat_fitxer_lcb_fk")
-	@JoinColumn(name = "logocapbackid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false)
-	private FitxerJPA logoCapBack;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @ForeignKey(name="car_entitat_fitxer_lcb_fk")
+    @JoinColumn(name = "logocapbackid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false)
+    private FitxerJPA logoCapBack;
 
-	public FitxerJPA getLogoCapBack() {
+    public FitxerJPA getLogoCapBack() {
     return this.logoCapBack;
   }
 
-	public  void setLogoCapBack(FitxerJPA logoCapBack) {
+    public  void setLogoCapBack(FitxerJPA logoCapBack) {
     this.logoCapBack = logoCapBack;
   }
 
 // IMP Field:fitxerid | Table: car_fitxer | Type: 1  
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@ForeignKey(name="car_entitat_fitxer_lpb_fk")
-	@JoinColumn(name = "logopeubackid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false)
-	private FitxerJPA logoPeuBack;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @ForeignKey(name="car_entitat_fitxer_lpb_fk")
+    @JoinColumn(name = "logopeubackid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false)
+    private FitxerJPA logoPeuBack;
 
-	public FitxerJPA getLogoPeuBack() {
+    public FitxerJPA getLogoPeuBack() {
     return this.logoPeuBack;
   }
 
-	public  void setLogoPeuBack(FitxerJPA logoPeuBack) {
+    public  void setLogoPeuBack(FitxerJPA logoPeuBack) {
     this.logoPeuBack = logoPeuBack;
   }
 
 // IMP Field:fitxerid | Table: car_fitxer | Type: 1  
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@ForeignKey(name="car_entitat_fitxer_llf_fk")
-	@JoinColumn(name = "logolateralfrontid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false)
-	private FitxerJPA logoLateralFront;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @ForeignKey(name="car_entitat_fitxer_llf_fk")
+    @JoinColumn(name = "logolateralfrontid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false)
+    private FitxerJPA logoLateralFront;
 
-	public FitxerJPA getLogoLateralFront() {
+    public FitxerJPA getLogoLateralFront() {
     return this.logoLateralFront;
   }
 
-	public  void setLogoLateralFront(FitxerJPA logoLateralFront) {
+    public  void setLogoLateralFront(FitxerJPA logoLateralFront) {
     this.logoLateralFront = logoLateralFront;
   }
 
 // IMP Field:fitxerid | Table: car_fitxer | Type: 1  
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@ForeignKey(name="car_entitat_fitxer_icon_fk")
-	@JoinColumn(name = "iconid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false)
-	private FitxerJPA icon;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @ForeignKey(name="car_entitat_fitxer_icon_fk")
+    @JoinColumn(name = "iconid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false)
+    private FitxerJPA icon;
 
-	public FitxerJPA getIcon() {
+    public FitxerJPA getIcon() {
     return this.icon;
   }
 
-	public  void setIcon(FitxerJPA icon) {
+    public  void setIcon(FitxerJPA icon) {
     this.icon = icon;
   }
 
 // IMP Field:pluginid | Table: car_plugin | Type: 1  
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="car_entitat_plugin_login_fk")
-	@JoinColumn(name = "pluginloginid", referencedColumnName ="pluginID", nullable = true, insertable=false, updatable=false)
-	private PluginJPA plugin;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ForeignKey(name="car_entitat_plugin_login_fk")
+    @JoinColumn(name = "pluginloginid", referencedColumnName ="pluginID", nullable = true, insertable=false, updatable=false)
+    private PluginJPA plugin;
 
-	public PluginJPA getPlugin() {
+    public PluginJPA getPlugin() {
     return this.plugin;
   }
 
-	public  void setPlugin(PluginJPA plugin) {
+    public  void setPlugin(PluginJPA plugin) {
     this.plugin = plugin;
   }
 
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
-	@ForeignKey(name="car_entitat_traduccio_log_fk")
-	@JoinColumn(name = "logintextid", referencedColumnName ="traduccioID", nullable = true, insertable=false, updatable=false)
-	private TraduccioJPA loginText;
+    @ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
+    @ForeignKey(name="car_entitat_traduccio_log_fk")
+    @JoinColumn(name = "logintextid", referencedColumnName ="traduccioID", nullable = true, insertable=false, updatable=false)
+    private TraduccioJPA loginText;
 
-	public TraduccioJPA getLoginText() {
+    public TraduccioJPA getLoginText() {
     return this.loginText;
   }
 
-	public  void setLoginText(TraduccioJPA loginText) {
+    public  void setLoginText(TraduccioJPA loginText) {
     this.loginText = loginText;
   }
 
@@ -680,16 +680,16 @@ private static final long serialVersionUID = 489209138L;
 
 // IMP Field:fitxerid | Table: car_fitxer | Type: 1  
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@ForeignKey(name="car_entitat_fitxer_css_fk")
-	@JoinColumn(name = "fitxercss", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false)
-	private FitxerJPA fitxerCss;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @ForeignKey(name="car_entitat_fitxer_css_fk")
+    @JoinColumn(name = "fitxercss", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false)
+    private FitxerJPA fitxerCss;
 
-	public FitxerJPA getFitxerCss() {
+    public FitxerJPA getFitxerCss() {
     return this.fitxerCss;
   }
 
-	public  void setFitxerCss(FitxerJPA fitxerCss) {
+    public  void setFitxerCss(FitxerJPA fitxerCss) {
     this.fitxerCss = fitxerCss;
   }
 

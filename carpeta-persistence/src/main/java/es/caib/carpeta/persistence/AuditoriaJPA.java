@@ -22,27 +22,27 @@ public class AuditoriaJPA implements Auditoria {
 
 private static final long serialVersionUID = 129744773L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="AUDITORIA_SEQ")
-	@Index(name="car_auditoria_pk_i")
-	@Column(name="auditoriaid",nullable = false,length = 19)
-	long auditoriaID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="AUDITORIA_SEQ")
+    @Index(name="car_auditoria_pk_i")
+    @Column(name="auditoriaid",nullable = false,length = 19)
+    long auditoriaID;
 
-	@Column(name="tipus",nullable = false,length = 10)
-	int tipus;
+    @Column(name="tipus",nullable = false,length = 10)
+    int tipus;
 
-	@Column(name="objecte",length = 255)
-	java.lang.String objecte;
+    @Column(name="objecte",length = 255)
+    java.lang.String objecte;
 
-	@Column(name="dataaudit",nullable = false,length = 29,precision = 6)
-	java.sql.Timestamp dataAudit;
+    @Column(name="dataaudit",nullable = false,length = 29,precision = 6)
+    java.sql.Timestamp dataAudit;
 
-	@Column(name="username",length = 255)
-	java.lang.String username;
+    @Column(name="username",length = 255)
+    java.lang.String username;
 
-	@Index(name="car_auditoria_entitatid_fk_i")
-	@Column(name="entitatid",length = 19)
-	java.lang.Long entitatID;
+    @Index(name="car_auditoria_entitatid_fk_i")
+    @Column(name="entitatid",length = 19)
+    java.lang.Long entitatID;
 
 
 

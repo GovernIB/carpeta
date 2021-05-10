@@ -11,7 +11,7 @@ import es.caib.carpeta.model.dao.ILogCarpetaManager;
 @Local
 public interface LogCarpetaService extends LogCarpetaIJPAManager,ILogCarpetaManager {
 
- public static final String JNDI_NAME = "java:app/carpeta-ejb/LogCarpetaEJB!es.caib.carpeta.ejb.LogCarpetaService";
+    public static final String JNDI_NAME = "java:app/carpeta-ejb/LogCarpetaEJB!es.caib.carpeta.ejb.LogCarpetaService";
 
     public LogCarpetaJPA findByPrimaryKey(Long _ID_);
 }

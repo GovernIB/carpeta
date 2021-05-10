@@ -11,7 +11,7 @@ import es.caib.carpeta.model.dao.IAuditoriaManager;
 @Local
 public interface AuditoriaService extends AuditoriaIJPAManager,IAuditoriaManager {
 
- public static final String JNDI_NAME = "java:app/carpeta-ejb/AuditoriaEJB!es.caib.carpeta.ejb.AuditoriaService";
+    public static final String JNDI_NAME = "java:app/carpeta-ejb/AuditoriaEJB!es.caib.carpeta.ejb.AuditoriaService";
 
     public AuditoriaJPA findByPrimaryKey(Long _ID_);
 }

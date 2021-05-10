@@ -11,7 +11,7 @@ import es.caib.carpeta.model.dao.IPropietatGlobalManager;
 @Local
 public interface PropietatGlobalService extends PropietatGlobalIJPAManager,IPropietatGlobalManager {
 
- public static final String JNDI_NAME = "java:app/carpeta-ejb/PropietatGlobalEJB!es.caib.carpeta.ejb.PropietatGlobalService";
+    public static final String JNDI_NAME = "java:app/carpeta-ejb/PropietatGlobalEJB!es.caib.carpeta.ejb.PropietatGlobalService";
 
     public PropietatGlobalJPA findByPrimaryKey(Long _ID_);
 }

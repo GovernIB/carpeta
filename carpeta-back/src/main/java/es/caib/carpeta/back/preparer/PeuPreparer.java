@@ -13,7 +13,7 @@ import org.apache.tiles.preparer.ViewPreparer;
 import org.apache.tiles.request.Request;
 
 import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.utils.Version;
+import es.caib.carpeta.commons.utils.Version;
 
 import org.springframework.stereotype.Component;
 

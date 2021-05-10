@@ -29,37 +29,37 @@ public class UsuariJPA implements Usuari {
 
 private static final long serialVersionUID = -1105822054L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="USUARI_SEQ")
-	@Index(name="car_usuari_pk_i")
-	@Column(name="usuariid",nullable = false,length = 19)
-	long usuariID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="USUARI_SEQ")
+    @Index(name="car_usuari_pk_i")
+    @Column(name="usuariid",nullable = false,length = 19)
+    long usuariID;
 
-	@Column(name="username",nullable = false,unique = true,length = 255)
-	java.lang.String username;
+    @Column(name="username",nullable = false,unique = true,length = 255)
+    java.lang.String username;
 
-	@Column(name="nom",nullable = false,length = 255)
-	java.lang.String nom;
+    @Column(name="nom",nullable = false,length = 255)
+    java.lang.String nom;
 
-	@Column(name="llinatge1",nullable = false,length = 255)
-	java.lang.String llinatge1;
+    @Column(name="llinatge1",nullable = false,length = 255)
+    java.lang.String llinatge1;
 
-	@Column(name="llinatge2",length = 255)
-	java.lang.String llinatge2;
+    @Column(name="llinatge2",length = 255)
+    java.lang.String llinatge2;
 
-	@Column(name="email",length = 255)
-	java.lang.String email;
+    @Column(name="email",length = 255)
+    java.lang.String email;
 
-	@Column(name="nif",unique = true,length = 255)
-	java.lang.String nif;
+    @Column(name="nif",unique = true,length = 255)
+    java.lang.String nif;
 
-	@Index(name="car_usuari_darreraentitat_fk_i")
-	@Column(name="darreraentitat",length = 19)
-	java.lang.Long darreraEntitat;
+    @Index(name="car_usuari_darreraentitat_fk_i")
+    @Column(name="darreraentitat",length = 19)
+    java.lang.Long darreraEntitat;
 
-	@Index(name="car_usuari_idiomaid_fk_i")
-	@Column(name="idiomaid",nullable = false,length = 5)
-	java.lang.String idiomaID;
+    @Index(name="car_usuari_idiomaid_fk_i")
+    @Column(name="idiomaid",nullable = false,length = 5)
+    java.lang.String idiomaID;
 
 
 
@@ -190,44 +190,44 @@ private static final long serialVersionUID = -1105822054L;
 
 // EXP  Field:usuariid | Table: car_usuarientitat | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuari")
-	private Set<UsuariEntitatJPA> usuariEntitats = new HashSet<UsuariEntitatJPA>(0);
-	public  Set<UsuariEntitatJPA> getUsuariEntitats() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuari")
+    private Set<UsuariEntitatJPA> usuariEntitats = new HashSet<UsuariEntitatJPA>(0);
+    public  Set<UsuariEntitatJPA> getUsuariEntitats() {
     return this.usuariEntitats;
   }
 
-	public void setUsuariEntitats(Set<UsuariEntitatJPA> usuariEntitats) {
-	  this.usuariEntitats = usuariEntitats;
-	}
+    public void setUsuariEntitats(Set<UsuariEntitatJPA> usuariEntitats) {
+      this.usuariEntitats = usuariEntitats;
+    }
 
 
 // IMP Field:entitatid | Table: car_entitat | Type: 1  
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="car_usuari_entitat_last_fk")
-	@JoinColumn(name = "darreraentitat", referencedColumnName ="entitatID", nullable = true, insertable=false, updatable=false)
-	private EntitatJPA entitat;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ForeignKey(name="car_usuari_entitat_last_fk")
+    @JoinColumn(name = "darreraentitat", referencedColumnName ="entitatID", nullable = true, insertable=false, updatable=false)
+    private EntitatJPA entitat;
 
-	public EntitatJPA getEntitat() {
+    public EntitatJPA getEntitat() {
     return this.entitat;
   }
 
-	public  void setEntitat(EntitatJPA entitat) {
+    public  void setEntitat(EntitatJPA entitat) {
     this.entitat = entitat;
   }
 
 // IMP Field:idiomaid | Table: car_idioma | Type: 1  
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="car_usuari_idioma_idi_fk")
-	@JoinColumn(name = "idiomaid", referencedColumnName ="idiomaID", nullable = false, insertable=false, updatable=false)
-	private IdiomaJPA idioma;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ForeignKey(name="car_usuari_idioma_idi_fk")
+    @JoinColumn(name = "idiomaid", referencedColumnName ="idiomaID", nullable = false, insertable=false, updatable=false)
+    private IdiomaJPA idioma;
 
-	public IdiomaJPA getIdioma() {
+    public IdiomaJPA getIdioma() {
     return this.idioma;
   }
 
-	public  void setIdioma(IdiomaJPA idioma) {
+    public  void setIdioma(IdiomaJPA idioma) {
     this.idioma = idioma;
   }
 

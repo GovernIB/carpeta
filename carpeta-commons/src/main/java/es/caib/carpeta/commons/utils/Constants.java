@@ -20,9 +20,18 @@ public interface Constants {
     String ROLE_SUPER = "ROLE_SUPER";
     String ROLE_ADMIN = "ROLE_ADMIN";
 
+    
+    // EJB HIGH LEVEL ROLES
+    public static final String ROLE_EJB_FULL_ACCESS  = CAR_SUPER;
+    public static final String ROLE_EJB_BASIC_ACCESS =CAR_ADMIN;
+    
+    
+    
+    /* -------------- IDIOMES --------------*/
+    String IDIOMA_CATALA = "ca";
+    String IDIOMA_CASTELLA = "es";
+    String IDIOMA_ANGLES = "en";
 
-    /* -------------- IDIOMAS --------------*/
-    String DEFAULT_LANGUAGE = "ca";
 
 
     /* -------------- LOGINIB --------------*/

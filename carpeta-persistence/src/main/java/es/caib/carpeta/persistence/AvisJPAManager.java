@@ -11,57 +11,57 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 
 
 public class AvisJPAManager
-		 extends AbstractJPAManager<Avis, Long>
-		 implements AvisIJPAManager, IAvisManager, AvisFields {
+         extends AbstractJPAManager<Avis, Long>
+         implements AvisIJPAManager, IAvisManager, AvisFields {
 
 
 
 
-  private static final long serialVersionUID = 1008320753L;
+    private static final long serialVersionUID = 1008320753L;
 
-	 public static final TableName<Avis> _TABLENAME =  new TableName<Avis>("AvisJPA");
-
-
-  @PersistenceContext
-  protected EntityManager __em;
-
-  public AvisJPAManager() {
-  }
-
-  protected AvisJPAManager(EntityManager __em) {
-    this.__em = __em;
-  }
-
-  @Override
-  public EntityManager getEntityManager() {
-    return this.__em;
-  }
-	public Class<?> getJPAClass() {
-		return AvisJPA. class;
-	}
+    public static final TableName<Avis> _TABLENAME =  new TableName<Avis>("AvisJPA");
 
 
+    @PersistenceContext
+    protected EntityManager __em;
 
-	public TableName<Avis> getTableName() {
-		return _TABLENAME;
-	}
+    public AvisJPAManager() {
+    }
+
+    protected AvisJPAManager(EntityManager __em) {
+      this.__em = __em;
+    }
+
+    @Override
+    public EntityManager getEntityManager() {
+      return this.__em;
+    }
+    public Class<?> getJPAClass() {
+        return AvisJPA. class;
+    }
 
 
-	@Override
-	protected String getTableNameVariable() {
-		return _TABLE_MODEL;
-	}
+
+    public TableName<Avis> getTableName() {
+        return _TABLENAME;
+    }
 
 
-	public Avis[] listToArray(List<Avis> list)  {
-		if(list == null) { return null; };
-		return list.toArray(new Avis[list.size()]);
-	};
+    @Override
+    protected String getTableNameVariable() {
+        return _TABLE_MODEL;
+    }
 
-	public synchronized Avis create( long _descripcioID_, java.lang.Long _entitatID_, java.sql.Timestamp _dataInici_, java.sql.Timestamp _dataFi_, int _tipus_, int _gravetat_, java.lang.Long _pluginFrontID_) throws I18NException {
-		AvisJPA __bean =  new AvisJPA(_descripcioID_,_entitatID_,_dataInici_,_dataFi_,_tipus_,_gravetat_,_pluginFrontID_);
-		return create(__bean);
-	}
+
+    public Avis[] listToArray(List<Avis> list)  {
+        if(list == null) { return null; };
+        return list.toArray(new Avis[list.size()]);
+    };
+
+    public synchronized Avis create( long _descripcioID_, java.lang.Long _entitatID_, java.sql.Timestamp _dataInici_, java.sql.Timestamp _dataFi_, int _tipus_, int _gravetat_, java.lang.Long _pluginFrontID_) throws I18NException {
+        AvisJPA __bean =  new AvisJPA(_descripcioID_,_entitatID_,_dataInici_,_dataFi_,_tipus_,_gravetat_,_pluginFrontID_);
+        return create(__bean);
+    }
 
 
 
@@ -72,25 +72,25 @@ public class AvisJPAManager
 
 
 
-	public Avis findByPrimaryKey(long _avisID_) {
-	  return __em.find(AvisJPA.class, _avisID_);  
-	}
-	@Override
-	protected Avis getJPAInstance(Avis __bean) {
-		return convertToJPA(__bean);
-	}
+    public Avis findByPrimaryKey(long _avisID_) {
+        return __em.find(AvisJPA.class, _avisID_);  
+    }
+    @Override
+    protected Avis getJPAInstance(Avis __bean) {
+        return convertToJPA(__bean);
+    }
 
 
-	public static AvisJPA convertToJPA(Avis __bean) {
-	  if (__bean == null) {
-	    return null;
-	  }
-	  if(__bean instanceof AvisJPA) {
-	    return (AvisJPA)__bean;
-	  }
-	  
-	  return AvisJPA.toJPA(__bean);
-	}
+    public static AvisJPA convertToJPA(Avis __bean) {
+      if (__bean == null) {
+        return null;
+      }
+      if(__bean instanceof AvisJPA) {
+        return (AvisJPA)__bean;
+      }
+      
+      return AvisJPA.toJPA(__bean);
+    }
 
   @Override
   public Avis create(Avis transientInstance) throws I18NException {

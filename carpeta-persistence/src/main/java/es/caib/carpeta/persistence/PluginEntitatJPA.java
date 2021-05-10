@@ -28,29 +28,29 @@ public class PluginEntitatJPA implements PluginEntitat {
 
 private static final long serialVersionUID = -695907131L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="PLUGINENTITAT_SEQ")
-	@Index(name="car_pluginentitat_pk_i")
-	@Column(name="pluginentitatid",nullable = false,length = 19)
-	long pluginEntitatID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="PLUGINENTITAT_SEQ")
+    @Index(name="car_pluginentitat_pk_i")
+    @Column(name="pluginentitatid",nullable = false,length = 19)
+    long pluginEntitatID;
 
-	@Index(name="car_plugent_pluginid_fk_i")
-	@Column(name="pluginid",nullable = false,length = 19)
-	long pluginID;
+    @Index(name="car_plugent_pluginid_fk_i")
+    @Column(name="pluginid",nullable = false,length = 19)
+    long pluginID;
 
-	@Index(name="car_plugent_entitatid_fk_i")
-	@Column(name="entitatid",nullable = false,length = 19)
-	long entitatID;
+    @Index(name="car_plugent_entitatid_fk_i")
+    @Column(name="entitatid",nullable = false,length = 19)
+    long entitatID;
 
-	@Column(name="actiu",nullable = false,length = 1)
-	boolean actiu;
+    @Column(name="actiu",nullable = false,length = 1)
+    boolean actiu;
 
-	@Index(name="car_plugent_seccioid_fk_i")
-	@Column(name="seccioid",length = 19)
-	java.lang.Long seccioID;
+    @Index(name="car_plugent_seccioid_fk_i")
+    @Column(name="seccioid",length = 19)
+    java.lang.Long seccioID;
 
-	@Column(name="ordre",nullable = false,length = 10)
-	int ordre;
+    @Column(name="ordre",nullable = false,length = 10)
+    int ordre;
 
 
 
@@ -143,46 +143,46 @@ private static final long serialVersionUID = -695907131L;
 
 // IMP Field:pluginid | Table: car_plugin | Type: 1  
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="car_plugent_plugin_fk")
-	@JoinColumn(name = "pluginid", referencedColumnName ="pluginID", nullable = false, insertable=false, updatable=false)
-	private PluginJPA plugin;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ForeignKey(name="car_plugent_plugin_fk")
+    @JoinColumn(name = "pluginid", referencedColumnName ="pluginID", nullable = false, insertable=false, updatable=false)
+    private PluginJPA plugin;
 
-	public PluginJPA getPlugin() {
+    public PluginJPA getPlugin() {
     return this.plugin;
   }
 
-	public  void setPlugin(PluginJPA plugin) {
+    public  void setPlugin(PluginJPA plugin) {
     this.plugin = plugin;
   }
 
 // IMP Field:entitatid | Table: car_entitat | Type: 1  
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="car_plugent_entitat_fk")
-	@JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false)
-	private EntitatJPA entitat;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ForeignKey(name="car_plugent_entitat_fk")
+    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false)
+    private EntitatJPA entitat;
 
-	public EntitatJPA getEntitat() {
+    public EntitatJPA getEntitat() {
     return this.entitat;
   }
 
-	public  void setEntitat(EntitatJPA entitat) {
+    public  void setEntitat(EntitatJPA entitat) {
     this.entitat = entitat;
   }
 
 // IMP Field:seccioid | Table: car_seccio | Type: 1  
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="car_plugent_seccio_sec_fk")
-	@JoinColumn(name = "seccioid", referencedColumnName ="seccioID", nullable = true, insertable=false, updatable=false)
-	private SeccioJPA seccio;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ForeignKey(name="car_plugent_seccio_sec_fk")
+    @JoinColumn(name = "seccioid", referencedColumnName ="seccioID", nullable = true, insertable=false, updatable=false)
+    private SeccioJPA seccio;
 
-	public SeccioJPA getSeccio() {
+    public SeccioJPA getSeccio() {
     return this.seccio;
   }
 
-	public  void setSeccio(SeccioJPA seccio) {
+    public  void setSeccio(SeccioJPA seccio) {
     this.seccio = seccio;
   }
 

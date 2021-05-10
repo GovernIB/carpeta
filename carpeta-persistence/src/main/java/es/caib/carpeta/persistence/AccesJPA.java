@@ -26,52 +26,52 @@ public class AccesJPA implements Acces {
 
 private static final long serialVersionUID = -2081832820L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ACCES_SEQ")
-	@Index(name="car_acces_pk_i")
-	@Column(name="accesid",nullable = false,length = 19)
-	long accesID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ACCES_SEQ")
+    @Index(name="car_acces_pk_i")
+    @Column(name="accesid",nullable = false,length = 19)
+    long accesID;
 
-	@Column(name="tipus",nullable = false,length = 10)
-	int tipus;
+    @Column(name="tipus",nullable = false,length = 10)
+    int tipus;
 
-	@Column(name="nom",length = 255)
-	java.lang.String nom;
+    @Column(name="nom",length = 255)
+    java.lang.String nom;
 
-	@Column(name="llinatges",length = 255)
-	java.lang.String llinatges;
+    @Column(name="llinatges",length = 255)
+    java.lang.String llinatges;
 
-	@Column(name="nif",length = 50)
-	java.lang.String nif;
+    @Column(name="nif",length = 50)
+    java.lang.String nif;
 
-	@Column(name="ip",length = 100)
-	java.lang.String ip;
+    @Column(name="ip",length = 100)
+    java.lang.String ip;
 
-	@Column(name="proveidoridentitat",length = 255)
-	java.lang.String proveidorIdentitat;
+    @Column(name="proveidoridentitat",length = 255)
+    java.lang.String proveidorIdentitat;
 
-	@Column(name="metodeautenticacio",length = 255)
-	java.lang.String metodeAutenticacio;
+    @Column(name="metodeautenticacio",length = 255)
+    java.lang.String metodeAutenticacio;
 
-	@Column(name="qaa",length = 10)
-	java.lang.Integer qaa;
+    @Column(name="qaa",length = 10)
+    java.lang.Integer qaa;
 
-	@Column(name="dataacces",length = 29,precision = 6)
-	java.sql.Timestamp dataAcces;
+    @Column(name="dataacces",length = 29,precision = 6)
+    java.sql.Timestamp dataAcces;
 
-	@Column(name="pluginid",length = 10)
-	java.lang.Long pluginID;
+    @Column(name="pluginid",length = 10)
+    java.lang.Long pluginID;
 
-	@Index(name="car_acces_entitatid_fk_i")
-	@Column(name="entitatid",nullable = false,length = 19)
-	long entitatID;
+    @Index(name="car_acces_entitatid_fk_i")
+    @Column(name="entitatid",nullable = false,length = 19)
+    long entitatID;
 
   /** Hauria d'estar enllaçat amb la taula idioma */
-	@Column(name="idioma",length = 50)
-	java.lang.String idioma;
+    @Column(name="idioma",length = 50)
+    java.lang.String idioma;
 
-	@Column(name="resultat",nullable = false,length = 1)
-	boolean resultat;
+    @Column(name="resultat",nullable = false,length = 1)
+    boolean resultat;
 
 
 
@@ -251,16 +251,16 @@ private static final long serialVersionUID = -2081832820L;
 
 // IMP Field:entitatid | Table: car_entitat | Type: 1  
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@ForeignKey(name="car_acces_entitat_entitatid_fk")
-	@JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false)
-	private EntitatJPA entitat;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ForeignKey(name="car_acces_entitat_entitatid_fk")
+    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false)
+    private EntitatJPA entitat;
 
-	public EntitatJPA getEntitat() {
+    public EntitatJPA getEntitat() {
     return this.entitat;
   }
 
-	public  void setEntitat(EntitatJPA entitat) {
+    public  void setEntitat(EntitatJPA entitat) {
     this.entitat = entitat;
   }
 

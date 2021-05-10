@@ -9,36 +9,33 @@ import es.caib.carpeta.model.entity.LogCarpeta;
 import es.caib.carpeta.persistence.LogCarpetaJPA;
 import es.caib.carpeta.persistence.LogCarpetaJPAManager;
 
-import es.caib.carpeta.utils.Constants;
+import es.caib.carpeta.commons.utils.Constants;
 
 @Stateless
 public class LogCarpetaEJB extends LogCarpetaJPAManager implements LogCarpetaService {
 
-  @Override
-	@RolesAllowed({Constants.CAR_ADMIN,
-        Constants.CAR_USER})
-	public void delete(LogCarpeta instance) {
-		super.delete(instance);
-	}
+    @Override
+    @RolesAllowed({Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS})
+    public void delete(LogCarpeta instance) {
+        super.delete(instance);
+    }
 
-  @Override
-	@RolesAllowed({Constants.CAR_ADMIN,Constants.CAR_USER})
-	public LogCarpeta create(LogCarpeta instance) throws I18NException {
-		return super.create(instance);
-	}
+    @Override
+    @RolesAllowed({Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS})
+    public LogCarpeta create(LogCarpeta instance) throws I18NException {
+        return super.create(instance);
+    }
 
-  @Override
-	@RolesAllowed({Constants.CAR_ADMIN,
-        Constants.CAR_USER})
-	public LogCarpeta update(LogCarpeta instance) throws I18NException {
-		 return super.update(instance);
-	}
+    @Override
+    @RolesAllowed({Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS})
+    public LogCarpeta update(LogCarpeta instance) throws I18NException {
+         return super.update(instance);
+    }
 
-  @Override
-	@RolesAllowed({Constants.CAR_ADMIN,
-        Constants.CAR_USER})
-  public LogCarpetaJPA findByPrimaryKey(Long _ID_) {
-    return (LogCarpetaJPA)super.findByPrimaryKey(_ID_);
-  }
+    @Override
+    @RolesAllowed({Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS})
+    public LogCarpetaJPA findByPrimaryKey(Long _ID_) {
+        return (LogCarpetaJPA)super.findByPrimaryKey(_ID_);
+    }
 
 }

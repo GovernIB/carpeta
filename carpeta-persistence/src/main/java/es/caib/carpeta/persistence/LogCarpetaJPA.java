@@ -24,46 +24,46 @@ public class LogCarpetaJPA implements LogCarpeta {
 
 private static final long serialVersionUID = 1140880713L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="LOGCARPETA_SEQ")
-	@Index(name="car_log_pk_i")
-	@Column(name="logid",nullable = false,length = 19)
-	long logID;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="LOGCARPETA_SEQ")
+    @Index(name="car_log_pk_i")
+    @Column(name="logid",nullable = false,length = 19)
+    long logID;
 
-	@Column(name="descripcio",nullable = false,length = 2000)
-	java.lang.String descripcio;
+    @Column(name="descripcio",nullable = false,length = 2000)
+    java.lang.String descripcio;
 
-	@Column(name="tipus",nullable = false,length = 10)
-	int tipus;
+    @Column(name="tipus",nullable = false,length = 10)
+    int tipus;
 
-	@Column(name="estat",nullable = false,length = 10)
-	int estat;
+    @Column(name="estat",nullable = false,length = 10)
+    int estat;
 
-	@Index(name="car_log_pluginid_fk_i")
-	@Column(name="pluginid",length = 19)
-	java.lang.Long pluginID;
+    @Index(name="car_log_pluginid_fk_i")
+    @Column(name="pluginid",length = 19)
+    java.lang.Long pluginID;
 
-	@Column(name="entitatcodi",length = 9)
-	java.lang.String entitatCodi;
+    @Column(name="entitatcodi",length = 9)
+    java.lang.String entitatCodi;
 
-	@Column(name="temps",length = 19)
-	java.lang.Long temps;
+    @Column(name="temps",length = 19)
+    java.lang.Long temps;
 
-	@Column(name="datainici",nullable = false,length = 29,precision = 6)
-	java.sql.Timestamp dataInici;
+    @Column(name="datainici",nullable = false,length = 29,precision = 6)
+    java.sql.Timestamp dataInici;
 
-	@Column(name="peticio",length = 255)
-	java.lang.String peticio;
+    @Column(name="peticio",length = 255)
+    java.lang.String peticio;
 
-	@Column(name="error",length = 2147483647)
+    @Column(name="error",length = 2147483647)
     @Lob
     @Type(type = "org.hibernate.type.TextType")
-	java.lang.String error;
+    java.lang.String error;
 
-	@Column(name="excepcio",length = 2147483647)
+    @Column(name="excepcio",length = 2147483647)
     @Lob
     @Type(type = "org.hibernate.type.TextType")
-	java.lang.String excepcio;
+    java.lang.String excepcio;
 
 
 

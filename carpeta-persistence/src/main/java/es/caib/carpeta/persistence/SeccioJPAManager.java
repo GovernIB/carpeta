@@ -11,57 +11,57 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 
 
 public class SeccioJPAManager
-		 extends AbstractJPAManager<Seccio, Long>
-		 implements SeccioIJPAManager, ISeccioManager, SeccioFields {
+         extends AbstractJPAManager<Seccio, Long>
+         implements SeccioIJPAManager, ISeccioManager, SeccioFields {
 
 
 
 
-  private static final long serialVersionUID = -903996310L;
+    private static final long serialVersionUID = -903996310L;
 
-	 public static final TableName<Seccio> _TABLENAME =  new TableName<Seccio>("SeccioJPA");
-
-
-  @PersistenceContext
-  protected EntityManager __em;
-
-  public SeccioJPAManager() {
-  }
-
-  protected SeccioJPAManager(EntityManager __em) {
-    this.__em = __em;
-  }
-
-  @Override
-  public EntityManager getEntityManager() {
-    return this.__em;
-  }
-	public Class<?> getJPAClass() {
-		return SeccioJPA. class;
-	}
+    public static final TableName<Seccio> _TABLENAME =  new TableName<Seccio>("SeccioJPA");
 
 
+    @PersistenceContext
+    protected EntityManager __em;
 
-	public TableName<Seccio> getTableName() {
-		return _TABLENAME;
-	}
+    public SeccioJPAManager() {
+    }
+
+    protected SeccioJPAManager(EntityManager __em) {
+      this.__em = __em;
+    }
+
+    @Override
+    public EntityManager getEntityManager() {
+      return this.__em;
+    }
+    public Class<?> getJPAClass() {
+        return SeccioJPA. class;
+    }
 
 
-	@Override
-	protected String getTableNameVariable() {
-		return _TABLE_MODEL;
-	}
+
+    public TableName<Seccio> getTableName() {
+        return _TABLENAME;
+    }
 
 
-	public Seccio[] listToArray(List<Seccio> list)  {
-		if(list == null) { return null; };
-		return list.toArray(new Seccio[list.size()]);
-	};
+    @Override
+    protected String getTableNameVariable() {
+        return _TABLE_MODEL;
+    }
 
-	public synchronized Seccio create( long _nomID_, long _descripcioID_, boolean _activa_, long _iconaID_, java.lang.Long _seccioPareID_, long _entitatID_, int _ordre_) throws I18NException {
-		SeccioJPA __bean =  new SeccioJPA(_nomID_,_descripcioID_,_activa_,_iconaID_,_seccioPareID_,_entitatID_,_ordre_);
-		return create(__bean);
-	}
+
+    public Seccio[] listToArray(List<Seccio> list)  {
+        if(list == null) { return null; };
+        return list.toArray(new Seccio[list.size()]);
+    };
+
+    public synchronized Seccio create( long _nomID_, long _descripcioID_, boolean _activa_, long _iconaID_, java.lang.Long _seccioPareID_, long _entitatID_, int _ordre_) throws I18NException {
+        SeccioJPA __bean =  new SeccioJPA(_nomID_,_descripcioID_,_activa_,_iconaID_,_seccioPareID_,_entitatID_,_ordre_);
+        return create(__bean);
+    }
 
 
 
@@ -72,25 +72,25 @@ public class SeccioJPAManager
 
 
 
-	public Seccio findByPrimaryKey(long _seccioID_) {
-	  return __em.find(SeccioJPA.class, _seccioID_);  
-	}
-	@Override
-	protected Seccio getJPAInstance(Seccio __bean) {
-		return convertToJPA(__bean);
-	}
+    public Seccio findByPrimaryKey(long _seccioID_) {
+        return __em.find(SeccioJPA.class, _seccioID_);  
+    }
+    @Override
+    protected Seccio getJPAInstance(Seccio __bean) {
+        return convertToJPA(__bean);
+    }
 
 
-	public static SeccioJPA convertToJPA(Seccio __bean) {
-	  if (__bean == null) {
-	    return null;
-	  }
-	  if(__bean instanceof SeccioJPA) {
-	    return (SeccioJPA)__bean;
-	  }
-	  
-	  return SeccioJPA.toJPA(__bean);
-	}
+    public static SeccioJPA convertToJPA(Seccio __bean) {
+      if (__bean == null) {
+        return null;
+      }
+      if(__bean instanceof SeccioJPA) {
+        return (SeccioJPA)__bean;
+      }
+      
+      return SeccioJPA.toJPA(__bean);
+    }
 
   @Override
   public Seccio create(Seccio transientInstance) throws I18NException {

@@ -24,19 +24,19 @@ public class IdiomaJPA implements Idioma {
 
 private static final long serialVersionUID = 1367253670L;
 
-	@Id
-	@Index(name="car_idioma_pk_i")
-	@Column(name="idiomaid",nullable = false,length = 5)
-	java.lang.String idiomaID;
+    @Id
+    @Index(name="car_idioma_pk_i")
+    @Column(name="idiomaid",nullable = false,length = 5)
+    java.lang.String idiomaID;
 
-	@Column(name="nom",nullable = false,length = 50)
-	java.lang.String nom;
+    @Column(name="nom",nullable = false,length = 50)
+    java.lang.String nom;
 
-	@Column(name="suportat",nullable = false,length = 1)
-	boolean suportat;
+    @Column(name="suportat",nullable = false,length = 1)
+    boolean suportat;
 
-	@Column(name="ordre",nullable = false,length = 10)
-	int ordre;
+    @Column(name="ordre",nullable = false,length = 10)
+    int ordre;
 
 
 
@@ -108,15 +108,15 @@ private static final long serialVersionUID = 1367253670L;
 
 // EXP  Field:idiomaid | Table: car_usuari | Type: 0  
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "idioma")
-	private Set<UsuariJPA> usuaris = new HashSet<UsuariJPA>(0);
-	public  Set<UsuariJPA> getUsuaris() {
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "idioma")
+    private Set<UsuariJPA> usuaris = new HashSet<UsuariJPA>(0);
+    public  Set<UsuariJPA> getUsuaris() {
     return this.usuaris;
   }
 
-	public void setUsuaris(Set<UsuariJPA> usuaris) {
-	  this.usuaris = usuaris;
-	}
+    public void setUsuaris(Set<UsuariJPA> usuaris) {
+      this.usuaris = usuaris;
+    }
 
 
 

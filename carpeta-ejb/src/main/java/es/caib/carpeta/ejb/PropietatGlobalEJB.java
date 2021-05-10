@@ -9,36 +9,33 @@ import es.caib.carpeta.model.entity.PropietatGlobal;
 import es.caib.carpeta.persistence.PropietatGlobalJPA;
 import es.caib.carpeta.persistence.PropietatGlobalJPAManager;
 
-import es.caib.carpeta.utils.Constants;
+import es.caib.carpeta.commons.utils.Constants;
 
 @Stateless
 public class PropietatGlobalEJB extends PropietatGlobalJPAManager implements PropietatGlobalService {
 
-  @Override
-	@RolesAllowed({Constants.CAR_ADMIN,
-        Constants.CAR_USER})
-	public void delete(PropietatGlobal instance) {
-		super.delete(instance);
-	}
+    @Override
+    @RolesAllowed({Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS})
+    public void delete(PropietatGlobal instance) {
+        super.delete(instance);
+    }
 
-  @Override
-	@RolesAllowed({Constants.CAR_ADMIN,Constants.CAR_USER})
-	public PropietatGlobal create(PropietatGlobal instance) throws I18NException {
-		return super.create(instance);
-	}
+    @Override
+    @RolesAllowed({Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS})
+    public PropietatGlobal create(PropietatGlobal instance) throws I18NException {
+        return super.create(instance);
+    }
 
-  @Override
-	@RolesAllowed({Constants.CAR_ADMIN,
-        Constants.CAR_USER})
-	public PropietatGlobal update(PropietatGlobal instance) throws I18NException {
-		 return super.update(instance);
-	}
+    @Override
+    @RolesAllowed({Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS})
+    public PropietatGlobal update(PropietatGlobal instance) throws I18NException {
+         return super.update(instance);
+    }
 
-  @Override
-	@RolesAllowed({Constants.CAR_ADMIN,
-        Constants.CAR_USER})
-  public PropietatGlobalJPA findByPrimaryKey(Long _ID_) {
-    return (PropietatGlobalJPA)super.findByPrimaryKey(_ID_);
-  }
+    @Override
+    @RolesAllowed({Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS})
+    public PropietatGlobalJPA findByPrimaryKey(Long _ID_) {
+        return (PropietatGlobalJPA)super.findByPrimaryKey(_ID_);
+    }
 
 }
