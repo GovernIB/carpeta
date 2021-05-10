@@ -130,6 +130,10 @@ public class PluginFrontController extends CommonFrontController {
         UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado) authentication.getPrincipal();
         administrationID = usuarioAutenticado.getUsuarioClave().getNif();
 
+        //TODO canviar, mirar javascript window.location.href
+        String urlBase = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
+        baseFront = urlBase;
+
         String urlToShowPluginPage = startPublicSignatureProcess(request, response, pluginID, administrationID, baseFront,usuarioAutenticado.getUsuarioClave());
         ModelAndView mav = new ModelAndView(new RedirectView(urlToShowPluginPage));
 
@@ -141,9 +145,6 @@ public class PluginFrontController extends CommonFrontController {
 
             //String pluginID = request.getParameter("pluginID");
             //String administrationID= request.getParameter("administrationID");
-
-            //TODO canviar, mirar javascript window.location.href
-            String urlBase = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
 
             log.info("showPlugin:: urlBase = " + urlBase);
             log.info("showPlugin:: pluginID = " + pluginID);
@@ -158,9 +159,6 @@ public class PluginFrontController extends CommonFrontController {
             baseBack = url.getProtocol() + "://" + url.getHost() + (port == -1 ? "" : (":" + port)) + contextPath;
             log.info("showPlugin:: BASE BACK = " + baseBack);
             */
-            baseFront = urlBase;
-
-
 
 
             if (isreact) {
