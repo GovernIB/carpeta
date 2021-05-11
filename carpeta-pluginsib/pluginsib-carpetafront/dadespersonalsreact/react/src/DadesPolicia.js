@@ -1,7 +1,5 @@
-
-import React, { Component } from 'react';
-import { withTranslation } from 'react-i18next';
-import logoespera from './espera.gif';
+import React, {Component} from 'react';
+import {withTranslation} from 'react-i18next';
 import axios from "axios";
 
 /**
@@ -29,7 +27,7 @@ class DadesPolicia extends Component {
         var url2 = this.props.pathtodocumentidentitat;
         axios.get(url2).then(res => {
 
-            console.log(" AXIOS OK OK OK OK OK");
+            // console.log(" AXIOS OK OK OK OK OK");
 
             this.setState({
                 ...this.state, 
@@ -38,7 +36,7 @@ class DadesPolicia extends Component {
             });
         }).catch(function (error) {
 
-            console.log(" AXIOS ERROR ERROR ERROR ");
+            // console.log(" AXIOS ERROR ERROR ERROR ");
 
             console.log(JSON.stringify(error));
             const restdata = { "error": JSON.stringify(error) };
@@ -61,19 +59,19 @@ class DadesPolicia extends Component {
 
 
     componentDidMount() {
-        console.log("POLICIA DID MOUNT " + this.props.pathtodocumentidentitat);
+        // console.log("POLICIA DID MOUNT " + this.props.pathtodocumentidentitat);
         this.props.setClick(this.onShowPipella);
     }
 
 
     onShowPipella() {
-        console.log("POLICIA  Mètode onShowPipella cridat " + this.props.pathtodocumentidentitat);
+        // console.log("POLICIA  Mètode onShowPipella cridat " + this.props.pathtodocumentidentitat);
         const { isLoaded, data } = this.state;
 
         if (isLoaded) {
-            console.log("No carregam res. JA ESTA CARREGAT !!!");
+            // console.log("No carregam res. JA ESTA CARREGAT !!!");
         } else {
-            console.log("FENT CRIDADA REST. ESPERA 5 segons !!!");
+            // console.log("FENT CRIDADA REST. ESPERA 5 segons !!!");
             setTimeout(this.canviaEstat, 2000);
         }
     }

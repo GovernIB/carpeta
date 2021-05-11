@@ -1,29 +1,20 @@
 package org.fundaciobit.pluginsib.carpetafront.regweb32;
 
-import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
-import org.fundaciobit.pluginsib.carpetafront.regwebdetallcomponent.RegwebDetallComponent;
-
-import org.apache.commons.io.IOUtils;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.BindingProvider;
-
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.regweb3.ws.api.v3.AsientoWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWs;
-import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWsService;
 import es.caib.regweb3.ws.api.v3.ResultadoBusquedaWs;
+import org.apache.commons.io.IOUtils;
+import org.fundaciobit.pluginsib.carpetafront.regwebdetallcomponent.RegwebDetallComponent;
+import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * @author anadal
@@ -132,12 +123,13 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet) {
 
-        log.info("Regweb32CarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
-        log.info("Regweb32CarpetaFrontPlugin::requestCarpetaFront => administrationID: "
-                + userData.getAdministrationID());
-        log.info("Regweb32CarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
-                + administrationEncriptedID);
-
+        if (isDevelopment()) {
+            log.info("Regweb32CarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
+            log.info("Regweb32CarpetaFrontPlugin::requestCarpetaFront => administrationID: "
+                    + userData.getAdministrationID());
+            log.info("Regweb32CarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
+                    + administrationEncriptedID);
+        }
 
         try {
             if (query.startsWith(ESPERA_PAGE)) {

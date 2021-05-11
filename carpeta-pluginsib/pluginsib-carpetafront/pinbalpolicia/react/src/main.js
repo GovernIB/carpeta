@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import DadesPolicia from "./DadesPolicia";
 import i18n from './i18n';
 
 
-
-console.log(" +++++++++++++++   CARREGANT COMPONENT 1 ¿¿¿¿¿¿¿¿¿¿¿");
+// console.log(" +++++++++++++++   CARREGANT COMPONENT 1 ¿¿¿¿¿¿¿¿¿¿¿");
 
 newInstancePlugin = function createReactCompAppIntern(nomComponent, props) {
 
@@ -13,7 +12,7 @@ newInstancePlugin = function createReactCompAppIntern(nomComponent, props) {
 };
 
 
-console.log(" +++++++++++++++   CARREGANT COMPONENT 2 ¿¿¿¿¿¿¿¿¿¿¿");
+// console.log(" +++++++++++++++   CARREGANT COMPONENT 2 ¿¿¿¿¿¿¿¿¿¿¿");
 
 changeLanguagePlugin = function changeLanguageReactCompAppIntern(lng) {
 
@@ -22,4 +21,4 @@ changeLanguagePlugin = function changeLanguageReactCompAppIntern(lng) {
 
 
 
-console.log(" +++++++++++++++   FINAL CARREGA DE COMPONENTS !!!!!!!");
+// console.log(" +++++++++++++++   FINAL CARREGA DE COMPONENTS !!!!!!!");

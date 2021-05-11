@@ -1,5 +1,6 @@
 package org.fundaciobit.pluginsib.carpetafront.dadespersonalsreact;
 
+import com.google.gson.Gson;
 import es.caib.carpeta.pinbal.ws.recobriment.client.SVDDGPCIWS02v3Client;
 import es.caib.carpeta.pinbal.ws.recobriment.datosespecificos.SVDDGPCIWS02v3RespuestaDatosEspecificos;
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
@@ -8,15 +9,11 @@ import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.scsp.esquemas.SVDDGPCIWS02v3.respuesta.datosespecificos.DatosTitular;
 import es.caib.scsp.pinbal.ws.recobriment.facade.RespuestaClientAdapter;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.io.IOUtils;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
-import com.google.gson.Gson;
-
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -84,11 +81,11 @@ public class DadesPersonalsReactCarpetaFrontPlugin extends AbstractCarpetaFrontP
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet) {
 
-        log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
-        log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => administrationID: "
-                + userData.getAdministrationID());
-        log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
-                + administrationEncriptedID);
+//        log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
+//        log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => administrationID: "
+//                + userData.getAdministrationID());
+//        log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
+//                + administrationEncriptedID);
 
         if (query.startsWith(INDEX_HTML_PAGE)) {
 

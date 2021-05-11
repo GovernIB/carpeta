@@ -1,11 +1,19 @@
 package es.caib.carpeta.back.security;
 
+import es.caib.carpeta.back.preparer.BasePreparer;
+import es.caib.carpeta.back.utils.PluginUserInformationUtils;
+import es.caib.carpeta.commons.utils.Constants;
+import es.caib.carpeta.ejb.PropietatGlobalService;
+import es.caib.carpeta.logic.AuthenticationLogicaService;
+import es.caib.carpeta.logic.utils.EjbManager;
+import es.caib.carpeta.persistence.EntitatJPA;
+import es.caib.carpeta.persistence.UsuariEntitatJPA;
+import es.caib.carpeta.persistence.UsuariJPA;
+import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NTranslation;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
-
-import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.security.core.Authentication;
@@ -15,22 +23,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
-import es.caib.carpeta.back.preparer.BasePreparer;
-import es.caib.carpeta.back.utils.PluginUserInformationUtils;
-import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.ejb.PropietatGlobalService;
-import es.caib.carpeta.persistence.EntitatJPA;
-import es.caib.carpeta.persistence.UsuariEntitatJPA;
-import es.caib.carpeta.persistence.UsuariJPA;
-import es.caib.carpeta.logic.AuthenticationLogicaService;
-import es.caib.carpeta.logic.utils.EjbManager;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  *
@@ -198,7 +191,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
                         UsuariEntitatJPA usuariEntitat = null;
 
-                        log.info("Contains role AdminEntitat: " + containsRoleAdEn);
+//                        log.info("Contains role AdminEntitat: " + containsRoleAdEn);
                         if (containsRoleAdEn) {
 
                             PropietatGlobalService propietatGlobalEjb;
@@ -285,7 +278,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
             }
 
             log.info("Total UsuariEntitats:" + usuariEntitats.size());
-            log.info("isCAR_ADMIN: " + containsRoleAdEn);
+//            log.info("isCAR_ADMIN: " + containsRoleAdEn);
         }
 
         if (usuariEntitats == null) {
@@ -355,9 +348,9 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
             usuariEntitatPerEntitatID.put(entitatID, usuariEntitat);
         }
 
-        log.info(" entitats.size()  => " + entitats.size());
-        log.info(" containsRoleSuper  => " + containsRoleSuper);
-        log.info(" !containsRoleSuper => " + !containsRoleSuper);
+//        log.info(" entitats.size()  => " + entitats.size());
+//        log.info(" containsRoleSuper  => " + containsRoleSuper);
+//        log.info(" !containsRoleSuper => " + !containsRoleSuper);
 
         if (entitats.size() == 0 && containsRoleAdEn) {
 
@@ -409,10 +402,10 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
         // create a new authentication token
 
         log.info("user => " + user);
-        log.info("usuariPersona => " + usuariPersona);
+//        log.info("usuariPersona => " + usuariPersona);
         log.info("entitatIDActual => " + entitatIDActual);
-        log.info("rolesPerEntitat  => " + rolesPerEntitat);
-        log.info("usuariEntitatPerEntitatID => " + usuariEntitatPerEntitatID);
+//        log.info("rolesPerEntitat  => " + rolesPerEntitat);
+//        log.info("usuariEntitatPerEntitatID => " + usuariEntitatPerEntitatID);
         log.info("necesitaConfigurar => " + necesitaConfigurar);
 
         loginInfo = new LoginInfo(username, user, usuariPersona, entitatIDActual, entitats, rolesPerEntitat,

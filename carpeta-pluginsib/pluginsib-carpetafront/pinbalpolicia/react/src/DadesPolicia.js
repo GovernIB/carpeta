@@ -1,6 +1,5 @@
-
-import React, { Component } from 'react';
-import { withTranslation } from 'react-i18next';
+import React, {Component} from 'react';
+import {withTranslation} from 'react-i18next';
 import axios from "axios";
 import i18n from './i18n';
 
@@ -19,12 +18,12 @@ class DadesPolicia extends Component {
     }
 
     componentDidMount() {
-        console.log("POLICIA DID MOUNT " + this.props.pathtodocumentidentitat);
+        // console.log("POLICIA DID MOUNT " + this.props.pathtodocumentidentitat);
 
         var url2 = this.props.pathtodocumentidentitat;
         axios.get(url2).then(res => {
 
-            console.log(" AXIOS OK OK OK OK OK");
+            // console.log(" AXIOS OK OK OK OK OK");
 
             this.setState({
                 ...this.state, 
@@ -33,7 +32,7 @@ class DadesPolicia extends Component {
             });
         }).catch(function (error) {
 
-            console.log(" AXIOS ERROR ERROR ERROR ");
+            // console.log(" AXIOS ERROR ERROR ERROR ");
 
             console.log(JSON.stringify(error));
             const restdata = { "error": JSON.stringify(error) };
@@ -56,7 +55,7 @@ class DadesPolicia extends Component {
 
     render() {
         const isLoaded = this.state.isLoaded;
-        console.log("RENDER POLICIA  URL on atacar " + this.props.pathtodocumentidentitat);
+        // console.log("RENDER POLICIA  URL on atacar " + this.props.pathtodocumentidentitat);
         
 
         let content;

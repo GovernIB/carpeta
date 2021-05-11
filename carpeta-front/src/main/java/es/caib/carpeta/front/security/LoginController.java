@@ -1,9 +1,17 @@
 package es.caib.carpeta.front.security;
 
-import org.fundaciobit.genapp.common.i18n.I18NException;
-
+import es.caib.carpeta.commons.utils.Constants;
+import es.caib.carpeta.ejb.PropietatGlobalService;
+import es.caib.carpeta.front.config.LoginRequestCache;
+import es.caib.carpeta.front.controller.WebUIController;
+import es.caib.carpeta.front.service.SecurityService;
+import es.caib.carpeta.front.utils.SesionHttp;
+import es.caib.carpeta.logic.AuditoriaLogicaService;
+import es.caib.carpeta.logic.LogCarpetaLogicaService;
+import es.caib.carpeta.logic.utils.EjbManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.web.savedrequest.SavedRequest;
@@ -15,20 +23,11 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import es.caib.carpeta.commons.utils.Constants;
-import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_ERROR;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_FRONT;
-import es.caib.carpeta.ejb.PropietatGlobalService;
-import es.caib.carpeta.front.config.LoginRequestCache;
-import es.caib.carpeta.front.controller.WebUIController;
-import es.caib.carpeta.front.service.SecurityService;
-import es.caib.carpeta.front.utils.SesionHttp;
-import es.caib.carpeta.logic.AuditoriaLogicaService;
-import es.caib.carpeta.logic.LogCarpetaLogicaService;
-import es.caib.carpeta.logic.utils.EjbManager;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_ERROR;
+import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_FRONT;
 
 /**
  *
@@ -73,7 +72,7 @@ public class LoginController {
 
         String callbackurl = request.getParameter("urlbase") + request.getContextPath();
 
-        log.info(" XXX XYZ LOGIN CALLBACK  => ]" + callbackurl + "[");
+//        log.info(" XXX XYZ LOGIN CALLBACK  => ]" + callbackurl + "[");
         request.getSession().setAttribute(SESSION_RETURN_URL_POST_LOGIN, callbackurl);
 
         return "redirect:/login";

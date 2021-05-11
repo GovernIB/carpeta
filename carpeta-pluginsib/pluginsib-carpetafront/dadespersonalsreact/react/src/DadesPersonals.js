@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { withTranslation } from 'react-i18next';
-import i18n from './i18n';
+import React, {Component} from 'react';
+import {withTranslation} from 'react-i18next';
+
 /**
  *  @author anadal
  */
@@ -9,7 +9,7 @@ class DadesPersonals extends Component {
 
     constructor(props) {
         super(props);
-        console.log('  CONSTRUCTOR DADES PERSONALS !!!!!');
+        // console.log('  CONSTRUCTOR DADES PERSONALS !!!!!');
     }
 
 

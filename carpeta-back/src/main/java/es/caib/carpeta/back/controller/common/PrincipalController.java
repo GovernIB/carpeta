@@ -1,5 +1,10 @@
 package es.caib.carpeta.back.controller.common;
 
+import es.caib.carpeta.back.security.LoginInfo;
+import es.caib.carpeta.commons.utils.Configuracio;
+import es.caib.carpeta.logic.UsuariLogicaService;
+import es.caib.carpeta.model.entity.Usuari;
+import es.caib.carpeta.persistence.UsuariJPA;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,12 +19,6 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import es.caib.carpeta.back.security.LoginInfo;
-import es.caib.carpeta.commons.utils.Configuracio;
-import es.caib.carpeta.logic.UsuariLogicaService;
-import es.caib.carpeta.model.entity.Usuari;
-import es.caib.carpeta.persistence.UsuariJPA;
 
 
 /**
@@ -45,8 +44,8 @@ public class PrincipalController {
 		if (initialized == null) {
 			//HtmlUtils.saveMessageInfo(request, "MessageInfo : Benvingut a Carpeta");
 
-			log.info(" request.isUserInRole(ROLE_ADMIN) =>    "  + request.isUserInRole("ROLE_ADMIN") );
-			log.info(" request.isUserInRole(ROLE_SUPER) =>    "  + request.isUserInRole("ROLE_SUPER") );
+//			log.info(" request.isUserInRole(ROLE_ADMIN) =>    "  + request.isUserInRole("ROLE_ADMIN") );
+//			log.info(" request.isUserInRole(ROLE_SUPER) =>    "  + request.isUserInRole("ROLE_SUPER") );
 
             if (request.isUserInRole("ROLE_SUPER")) {
                 return new ModelAndView(new RedirectView("/superadmin/buit", true));

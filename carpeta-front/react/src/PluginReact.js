@@ -86,9 +86,9 @@ class PluginReact extends Component {
         }
 
 
-        console.log(" PLUGIN REACT RENDER pluginContext state " +  this.state.pluginContext + "!");
+        // console.log(" PLUGIN REACT RENDER pluginContext state " +  this.state.pluginContext + "!");
         console.log(" PLUGIN REACT RENDER pluginContext " +  this.props.pluginContext + "!");
-        console.log(" PLUGIN REACT RENDER seccioContext " +  this.props.seccioContext + "!");
+        // console.log(" PLUGIN REACT RENDER seccioContext " +  this.props.seccioContext + "!");
 
 
         if (this.props.pluginContext != this.state.pluginContext) {

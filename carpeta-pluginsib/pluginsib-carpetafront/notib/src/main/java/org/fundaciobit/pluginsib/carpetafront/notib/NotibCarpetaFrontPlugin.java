@@ -1,28 +1,19 @@
 package org.fundaciobit.pluginsib.carpetafront.notib;
 
-import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementoExpediente;
-import es.caib.zonaper.ws.v2.model.elementoexpediente.TipoElementoExpediente;
-
-import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
-
-import org.apache.commons.io.IOUtils;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
+import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementoExpediente;
+import es.caib.zonaper.ws.v2.model.elementoexpediente.TipoElementoExpediente;
+import org.apache.commons.io.IOUtils;
+import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * @author anadal
@@ -84,7 +75,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         String startURL = absolutePluginRequestPath + "/" + OPCIONS_PAGE;
 
-        log.info(" getStartUrl( ); => " + startURL);
+        log.info(" NOTIB getStartUrl( ); => " + startURL);
         return startURL;
     }
 
@@ -93,10 +84,12 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet) {
 
-        log.info("NotibCarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
-        log.info("NotibCarpetaFrontPlugin::requestCarpetaFront => administrationID: " + userData.getAdministrationID());
-        log.info("NotibCarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
-                + administrationEncriptedID);
+        if (isDevelopment()) {
+            log.info("NotibCarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
+            log.info("NotibCarpetaFrontPlugin::requestCarpetaFront => administrationID: " + userData.getAdministrationID());
+            log.info("NotibCarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
+                    + administrationEncriptedID);
+        }
 
         if (query.startsWith(OPCIONS_PAGE)) {
 
