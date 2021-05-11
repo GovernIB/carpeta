@@ -64,16 +64,24 @@ public class DadesPersonalsReactCarpetaFrontPlugin extends AbstractCarpetaFrontP
     public String getResourceBundleName() {
         return "carpetafrontdadespersonalsreact";
     }
+    
+    public static final String SESSION_PARAMETER = "DADES_PERSONALS_PLUGIN_PARAMETER";
+    
 
     @Override
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
-            HttpServletRequest request, UserData userData, String administrationIDEncriptat) throws Exception {
+            HttpServletRequest request, UserData userData, String administrationIDEncriptat, String parameter) throws Exception {
 
         registerUserData(userData);
 
         String startURL = absolutePluginRequestPath + "/" + INDEX_HTML_PAGE;
 
         // String startURL = absolutePluginRequestPath + "/" + REACT_JS_PAGE;
+        
+        if (parameter != null && parameter.trim().length() != 0) {
+            log.info("DadesPersonalsReactCarpetaFrontPlugin:: PARAMETER => ]" + parameter + "[");
+           request.getSession().setAttribute(SESSION_PARAMETER, parameter);
+        }
 
         log.info(" getStartUrl( ); => " + startURL);
         return startURL;

@@ -59,22 +59,66 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
     protected AuthenticationLogicaService authenticationLogicaEjb;
 
     @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}/{urlBase}")
-    public ModelAndView showCarpetaFrontModule(HttpServletRequest request, HttpServletResponse response,
+    public ModelAndView showCarpetaFrontModuleWithUrlBase(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("pluginID") Long pluginID,
             @PathVariable("administrationIDEncriptat") String administrationIDEncriptat,
             @PathVariable("urlBase") String urlBase) throws Exception {
+        
+        
+        log.info("showCarpetaFrontModule:: pluginID => " + pluginID);
+        log.info("showCarpetaFrontModule:: administrationIDEncriptat => " + administrationIDEncriptat);
+        log.info("showCarpetaFrontModule:: urlBase => " + urlBase);
+        
+
+        String urlBaseDec = new String(Base64.getUrlDecoder().decode(urlBase), "utf-8");
+
+        request.getSession().setAttribute(SESSION_URL_BASE, urlBaseDec);
+        
+        final String parameter = null;
+
+        return showCarpetaFrontModule(request, response, pluginID, administrationIDEncriptat, parameter);
+    }
+    
+    
+    @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}/{urlBase}/p/{parameter}")
+    public ModelAndView showCarpetaFrontModuleWithUrlBaseAndParameter(HttpServletRequest request, HttpServletResponse response,
+            @PathVariable("pluginID") Long pluginID,
+            @PathVariable("administrationIDEncriptat") String administrationIDEncriptat,
+            @PathVariable("urlBase") String urlBase,
+            @PathVariable("parameter") String parameter) throws Exception {
+        
+        
+        log.info("showCarpetaFrontModule:: pluginID => " + pluginID);
+        log.info("showCarpetaFrontModule:: administrationIDEncriptat => " + administrationIDEncriptat);
+        log.info("showCarpetaFrontModule:: urlBase => " + urlBase);
+        
 
         String urlBaseDec = new String(Base64.getUrlDecoder().decode(urlBase), "utf-8");
 
         request.getSession().setAttribute(SESSION_URL_BASE, urlBaseDec);
 
-        return showCarpetaFrontModule(request, response, pluginID, administrationIDEncriptat);
+        return showCarpetaFrontModule(request, response, pluginID, administrationIDEncriptat, parameter);
     }
 
+    /*
     @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}")
     public ModelAndView showCarpetaFrontModule(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("pluginID") Long pluginID,
             @PathVariable("administrationIDEncriptat") String administrationIDEncriptat) throws Exception {
+        
+        final String parameter = null;
+        return showCarpetaFrontModuleWithParameter(request, response, pluginID,
+               administrationIDEncriptat,parameter);
+    }
+        
+        
+    @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}/p/{parameter}")
+    */ 
+    protected ModelAndView showCarpetaFrontModule(HttpServletRequest request, HttpServletResponse response,
+            @PathVariable("pluginID") Long pluginID,
+            @PathVariable("administrationIDEncriptat") String administrationIDEncriptat,
+            @PathVariable("parameter") String parameter
+            ) throws Exception {
 
         String administrationID = HibernateFileUtil.decryptString(administrationIDEncriptat);
 
@@ -133,9 +177,11 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         }
         
         
+        log.info("\n Cridant a  carpetaFront.getStartUrl() amb PluginParameter =>  " + parameter);
+        
 
         String urlToPluginWebPage = carpetaFront.getStartUrl(absoluteRequestPluginBasePath,
-                relativeRequestPluginBasePath, request, getUserData(administrationID), administrationIDEncriptat);
+                relativeRequestPluginBasePath, request, getUserData(administrationID), administrationIDEncriptat, parameter);
 
         log.info("\n\n\n SHOW PLUGIN 2222 urlToPluginWebPage =>  " + urlToPluginWebPage);
 

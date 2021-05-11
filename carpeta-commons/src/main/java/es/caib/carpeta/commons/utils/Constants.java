@@ -23,7 +23,7 @@ public interface Constants {
     
     // EJB HIGH LEVEL ROLES
     public static final String ROLE_EJB_FULL_ACCESS  = CAR_SUPER;
-    public static final String ROLE_EJB_BASIC_ACCESS =CAR_ADMIN;
+    public static final String ROLE_EJB_BASIC_ACCESS = CAR_ADMIN;
     
     
     

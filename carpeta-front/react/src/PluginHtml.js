@@ -41,12 +41,20 @@ class PluginHtml extends Component {
         const pluginContext = this.props.match.params.pluginContext;
         console.log("PLUGIN HTML Context =" + pluginContext + "  !");
 
+        const pluginParameter = this.props.match.params.pluginParameter;
+        console.log("PLUGIN HTML Parameter = ]" + pluginParameter + "[");
+
 
         var data = new FormData();
         var codiPlugin;
 
         var urlBase = sessionStorage.getItem('contextPath');
-        var url = urlBase + "/pluginfront/showplugin/" + pluginContext + "/" + i18n.language;
+        var url;
+        if (pluginParameter) {
+           url = urlBase + "/pluginfront/showplugin/" + pluginContext + "/" + i18n.language + "/p/" + pluginParameter;
+        } else {
+           url = urlBase + "/pluginfront/showplugin/" + pluginContext + "/" + i18n.language;
+        }
 
         var xhr = new XMLHttpRequest();
         xhr.open('POST', url, true);

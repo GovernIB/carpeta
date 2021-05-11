@@ -188,10 +188,24 @@ class Index extends Component {
                                         return <LlistatDePlugins {...props} seccioContext={props.match.params.seccioContext}  />
                                     }}
                                 />
+
                                 <Route
-                                    path={ Constants.PLUGINHTML_PATH + ":pluginContext" }
+                                    path={ Constants.PLUGINHTML_PATH + ":pluginContext/p/:pluginParameter"  }
                                     render={(props) => {
-                                        return <PluginHtml {...props} seccioContext={0}  />
+                                        return <PluginHtml {...props} seccioContext={0} pluginContext={props.match.params.pluginContext} pluginParameter={props.match.params.pluginParameter} />
+                                    }}
+                                />
+                                <Route
+                                    path={ Constants.PLUGINREACT_PATH + ":pluginContext/p/:pluginParameter" }
+                                    render={(props) => {
+                                        return <PluginReact {...props} seccioContext={0} pluginContext={props.match.params.pluginContext} pluginParameter={props.match.params.pluginParameter} />
+                                    }}
+                                />
+
+                                <Route
+                                    path={ Constants.PLUGINHTML_PATH + ":pluginContext"  }
+                                    render={(props) => {
+                                        return <PluginHtml {...props} seccioContext={0} pluginContext={props.match.params.pluginContext} />
                                     }}
                                 />
                                 <Route

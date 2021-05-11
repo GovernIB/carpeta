@@ -9,6 +9,8 @@ import es.caib.carpeta.logic.utils.EjbManager;
 import es.caib.carpeta.model.entity.Idioma;
 import es.caib.carpeta.model.fields.EntitatFields;
 import es.caib.carpeta.persistence.EntitatJPA;
+import es.caib.carpeta.pluginsib.carpetafront.api.AbstractPluginFullUtilities;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -136,7 +138,7 @@ public class InicioController extends CommonFrontController {
             throws I18NException {
 
         
-        log.info("\n XYZ ZZZ ENTRA A INICI CONTROLLER !!!! \n");
+        log.info("\n XYZ ZZZ ENTRA A INICI CONTROLLER:\n" + AbstractPluginFullUtilities.servletRequestInfoToStr(request) +  " \n");
         
         ModelAndView mav = new ModelAndView("inici");
 

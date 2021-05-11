@@ -81,7 +81,7 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
 
     @Override
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
-            HttpServletRequest request, UserData userData, String administrationIDEncriptat) throws Exception {
+            HttpServletRequest request, UserData userData, String administrationIDEncriptat, String parameter) throws Exception {
 
         registerUserData(userData);
 

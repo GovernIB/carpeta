@@ -7,18 +7,15 @@ import org.apache.commons.io.IOUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.ws.BindingProvider;
 
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.regweb3.ws.api.v3.AsientoWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWs;
-import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWsService;
 import es.caib.regweb3.ws.api.v3.ResultadoBusquedaWs;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -107,14 +104,21 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
     public String getResourceBundleName() {
         return "carpetafrontregweb32";
     }
+    
+    public static final String SESSION_PARAMETER = "REGWEB32_PLUGIN_PARAMETER";
 
     @Override
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
-            HttpServletRequest request, UserData userData, String administrationIDEncriptat) throws Exception {
+            HttpServletRequest request, UserData userData, String administrationIDEncriptat, String parameter) throws Exception {
 
         registerUserData(userData);
 
         String startURL = absolutePluginRequestPath + "/" + ESPERA_PAGE ;
+        
+        if (parameter != null && parameter.trim().length() != 0) {
+            log.info("DadesPersonalsReactCarpetaFrontPlugin:: PARAMETER => ]" + parameter + "[");
+           request.getSession().setAttribute(SESSION_PARAMETER, parameter);
+        }
 
         log.info(" getStartUrl( ); => " + startURL);
         return startURL;
@@ -228,14 +232,14 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             String administrationEncriptedID, int pageNumber, Locale locale, boolean isGet) {
 
         try {
-            
-            Thread.sleep(5000);
 
             response.setCharacterEncoding("utf-8");
             response.setContentType("text/html");
 
+            String pluginParameter  = (String)request.getSession().getAttribute(SESSION_PARAMETER);
+
             String webpage = getLlistatDeRegistresPage(absolutePluginRequestPath, relativePluginRequestPath, userData,
-                    getEntidad(), pageNumber, locale, isGet);
+                    getEntidad(), pageNumber, locale, isGet, pluginParameter);
 
             try {
                 response.getWriter().println(webpage);
@@ -257,7 +261,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
     }
 
     public String getLlistatDeRegistresPage(String absolutePluginRequestPath, String relativePluginRequestPath,
-            UserData userData, String entidad, int pageNumber, Locale locale, boolean isGet) throws Exception {
+            UserData userData, String entidad, int pageNumber, Locale locale, boolean isGet, String pluginParameter) throws Exception {
 
 
         Map<String, Object> map = new HashMap<String, Object>();
@@ -314,6 +318,8 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
         map.put("pageUrl", pageUrl);
 
         map.put("paginacio", paginacio);
+
+        map.put("pluginParameter", pluginParameter);
 
         String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
 

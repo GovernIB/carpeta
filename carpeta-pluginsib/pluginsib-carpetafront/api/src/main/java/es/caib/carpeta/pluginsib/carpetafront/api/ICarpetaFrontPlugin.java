@@ -26,7 +26,7 @@ public interface ICarpetaFrontPlugin extends IPlugin {
     public BasicServiceInformation existsInformation(UserData userData) throws Exception;
 
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
-            HttpServletRequest request, UserData userdata, String administrationEncriptedID) throws Exception;
+            HttpServletRequest request, UserData userdata, String administrationEncriptedID, String parameter) throws Exception;
 
     public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, String administrationID, String administrationEncriptedID, Locale locale, boolean isGet)
