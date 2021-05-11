@@ -13,12 +13,12 @@ import org.slf4j.LoggerFactory;
 public class PluginLoginMock implements IPluginLogin  {
     
     
-     private final Logger log = LoggerFactory.getLogger(this.getClass());
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public String startAuthentication(String urlCallBackLoginOk, String urCallBackLoginError, String language)
             throws Exception {
-        
+        log.info("Start authentication with MOCK");
         return urlCallBackLoginOk + "?" + Constants.TICKET_PARAM + "=" + System.currentTimeMillis();
     }
 

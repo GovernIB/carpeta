@@ -9,7 +9,6 @@ import es.caib.carpeta.logic.utils.EjbManager;
 import es.caib.carpeta.model.entity.Idioma;
 import es.caib.carpeta.model.fields.EntitatFields;
 import es.caib.carpeta.persistence.EntitatJPA;
-import es.caib.carpeta.pluginsib.carpetafront.api.AbstractPluginFullUtilities;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

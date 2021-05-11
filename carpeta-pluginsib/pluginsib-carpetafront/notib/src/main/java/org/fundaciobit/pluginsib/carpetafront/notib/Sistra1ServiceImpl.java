@@ -106,7 +106,7 @@ public class Sistra1ServiceImpl {
         fee.setFechaInicio(fechaIni);
         fee.setFechaFin(fechaFi);
 
-        long num = backofficeFacade.obtenerTotalElementosExpediente(fee);
+        //long num = backofficeFacade.obtenerTotalElementosExpediente(fee);
 
         //int pagina = 1;
         //int tamPagina = (int) num;
