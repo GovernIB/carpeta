@@ -664,7 +664,7 @@ public class WebUIController extends PluginFrontController {
         try {
             
             String lang = LocaleContextHolder.getLocale().getLanguage();
-            log.info("/seccioplugin/" + seccioContext + "/" + pluginContext + " ==> " + lang);
+//            log.info("/seccioplugin/" + seccioContext + "/" + pluginContext + " ==> " + lang);
             
             long entitatID = sesionHttp.getEntitatID();
             /*
@@ -703,9 +703,7 @@ public class WebUIController extends PluginFrontController {
         try {
             
             String lang = LocaleContextHolder.getLocale().getLanguage();
-            log.info("/seccio/" + seccioContext + " ==> " + lang);
-            
-            
+//            log.info("/seccio/" + seccioContext + " ==> " + lang);
             
             SeccioInfo seccioInfo = getSeccioInfo(request, seccioContext, lang);
 
@@ -769,7 +767,7 @@ public class WebUIController extends PluginFrontController {
             
             long entitatID = sesionHttp.getEntitatID();
             
-            log.info(" XYZ ZZZ ENTITAT ID = " + entitatID );
+//            log.info(" XYZ ZZZ ENTITAT ID = " + entitatID );
             
             List<SeccioInfo> seccioInfo = getSeccionsInfo(request, seccioPareID, entitatID);
 
@@ -1054,7 +1052,7 @@ public class WebUIController extends PluginFrontController {
             
             if (entitat.getLoginText() != null && entitat.getLoginText().getTraduccio(lang) != null) {
                 ei.setHtml(entitat.getLoginText().getTraduccio(lang).getValor());
-                log.info(" XYZ ZZZ RETORNAT HTML PER ENTITAT " + codiEntitat);
+//                log.info(" XYZ ZZZ RETORNAT HTML PER ENTITAT " + codiEntitat);
             }
 
 //            response.setCharacterEncoding("utf-8");
@@ -1200,11 +1198,11 @@ public class WebUIController extends PluginFrontController {
             Map<String, Object> fullInfo = null;
             
             if (cacheFullInfo == null) {
-                log.info(" Carregant FullInfo de BBDD ... ");
+//                log.info(" Carregant FullInfo de BBDD ... ");
                 cacheFullInfo = new TreeMap<String, Map<String, Object>>();
                 request.getSession().setAttribute(SESSION_FULLINFO_MAP, cacheFullInfo);
             } else {
-                log.info(" Emprant Cache de FullInfo ... ");
+//                log.info(" Emprant Cache de FullInfo ... ");
                 fullInfo = cacheFullInfo.get(fullID);
             }
 
@@ -1337,11 +1335,11 @@ public class WebUIController extends PluginFrontController {
             
             if (cacheFullInfo == null) 
             {
-                log.info(" Carregant FullInfo de BBDD ... ");
+//                log.info(" Carregant FullInfo de BBDD ... ");
                 cacheFullInfo = new TreeMap<String, Map<String, Object>>();
                 request.getSession().setAttribute(SESSION_FULLINFO_SORTED_MAP, cacheFullInfo);
             } else {
-                log.info(" Emprant Cache de FullInfo ... ");
+//                log.info(" Emprant Cache de FullInfo ... ");
                 fullInfo = cacheFullInfo.get(fullID);
             }
 

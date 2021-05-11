@@ -57,7 +57,6 @@ public class InicioController extends CommonFrontController {
 
             PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
             String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
-//            log.info("Default Entity Code => " + defaultEntityCode);
 
             // Primera vegada que entra al front i no sap on anar
             if (defaultEntityCode == null && sesionHttp.getEntitat() == null) {
@@ -137,8 +136,6 @@ public class InicioController extends CommonFrontController {
     public ModelAndView inicio(HttpServletRequest request, HttpServletResponse response, HttpSession session)
             throws I18NException {
 
-        
-        log.info("\n XYZ ZZZ ENTRA A INICI CONTROLLER:\n" + AbstractPluginFullUtilities.servletRequestInfoToStr(request) +  " \n");
         
         ModelAndView mav = new ModelAndView("inici");
 
@@ -227,7 +224,6 @@ public class InicioController extends CommonFrontController {
                 }
             } else if (sesionHttp.getEntitat() != null) {
 
-                log.info("ASSIGNAM ENTITAT 2: " + sesionHttp.getEntitat());
                 mav.addObject("entitat", sesionHttp.getEntitat());
                 mav.addObject("numEntitats", entitats.size());
                 mav.addObject("canviarDeFront", canviardefront);
@@ -238,8 +234,6 @@ public class InicioController extends CommonFrontController {
         } catch (Throwable e) {
             processExceptionHtml(e, request, response);
         }
-        
-        log.info("\n XYZ ZZZ SURT DE INICI !!!! \n");
 
         return mav;
 

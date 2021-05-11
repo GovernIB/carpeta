@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { withTranslation } from 'react-i18next';
+import React, {Component} from 'react';
+import {withTranslation} from 'react-i18next';
 import DadesPersonals from './DadesPersonals';
 import DadesPolicia from './DadesPolicia';
-import i18n from './i18n';
+
 /**
  *  @author anadal
  */
@@ -47,7 +47,7 @@ class Pipelles extends Component {
 
 
     render() {
-        console.log('  RENDER PIPELLES !!!!!');
+        // console.log('  RENDER PIPELLES !!!!!');
         const { t } = this.props;
         const dades2 = this.props.dades;
         const pathtodocumentidentitat = this.props.dades.pathtodocumentidentitat;

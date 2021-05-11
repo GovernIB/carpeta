@@ -1,18 +1,16 @@
 package es.caib.carpeta.back.security;
 
-import java.util.Map;
-import java.util.Set;
-
+import es.caib.carpeta.persistence.EntitatJPA;
+import es.caib.carpeta.persistence.UsuariEntitatJPA;
+import es.caib.carpeta.persistence.UsuariJPA;
 import org.apache.log4j.Logger;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
-
-import es.caib.carpeta.persistence.EntitatJPA;
-import es.caib.carpeta.persistence.UsuariJPA;
-import es.caib.carpeta.persistence.UsuariEntitatJPA;
-
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Informació disponible durant el cicle de vida de l'aplicació en la Sessio
@@ -52,16 +50,16 @@ public class LoginInfo {
             Map<Long, EntitatJPA> entitats, Map<Long, Set<GrantedAuthority>> rolesPerEntitat,
             Map<Long, UsuariEntitatJPA> usuariEntitatPerEntitatID, boolean needConfigUser) {
         this.username = username;
-        log.info(" ---------- PRE LoginInfo -------------- ");
+        log.info(" ---------- LoginInfo -------------- ");
         this.springSecurityUser = springSecurityUser;
         this.usuariPersona = usuariPersona;
         this.entitats = entitats;
         this.rolesPerEntitat = rolesPerEntitat;
         this.usuariEntitatPerEntitatID = usuariEntitatPerEntitatID;
         this.needConfigUser = needConfigUser;
-        log.info(" ---------- PRE 1 -------------- ");
+//        log.info(" ---------- PRE 1 -------------- ");
         setEntitatID(entitatIDActual);
-        log.info(" ---------- POST -------------- ");
+//        log.info(" ---------- POST -------------- ");
 
     }
 

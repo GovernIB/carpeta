@@ -10,14 +10,9 @@ import es.caib.sistramit.rest.api.externa.v1.RFiltroTramitePersistencia;
 import es.caib.sistramit.rest.api.externa.v1.RInfoTicketAcceso;
 import es.caib.sistramit.rest.api.externa.v1.RTramitePersistencia;
 import es.caib.sistramit.rest.api.externa.v1.RUsuarioAutenticadoInfo;
+import es.caib.zonaper.ws.v2.model.elementoexpediente.*;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitePersistente;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitesPersistentes;
-import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementoExpediente;
-import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementosExpediente;
-import es.caib.zonaper.ws.v2.model.elementoexpediente.FiltroElementosExpediente;
-import es.caib.zonaper.ws.v2.model.elementoexpediente.ObjectFactory;
-import es.caib.zonaper.ws.v2.model.elementoexpediente.TipoElementoExpediente;
-import es.caib.zonaper.ws.v2.model.elementoexpediente.TiposElementoExpediente;
 import es.caib.zonaper.ws.v2.services.BackofficeFacade;
 import es.caib.zonaper.ws.v2.services.BackofficeFacadeService;
 import org.apache.commons.io.IOUtils;
@@ -38,15 +33,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * 
@@ -108,11 +95,13 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet) {
 
-        log.info("SistraCarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
-        log.info(
-                "SistraCarpetaFrontPlugin::requestCarpetaFront => administrationID: " + userData.getAdministrationID());
-        log.info("SistraCarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
-                + administrationEncriptedID);
+        if (isDevelopment()) {
+            log.info("SistraCarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
+            log.info(
+                    "SistraCarpetaFrontPlugin::requestCarpetaFront => administrationID: " + userData.getAdministrationID());
+            log.info("SistraCarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
+                    + administrationEncriptedID);
+        }
 
         if (query.startsWith(ESPERA_PAGE)) {
             espera(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,

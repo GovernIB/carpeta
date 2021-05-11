@@ -1,10 +1,9 @@
 package es.caib.carpeta.front.pluginlogin;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.Constants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 
@@ -26,7 +25,7 @@ public class PluginLoginMock implements IPluginLogin  {
     @Override
     public LoginInfo validateAuthenticationTicket(String ticket) throws Exception {
         
-        log.info("Entramn a validar ... ");
+//        log.info("Entramn a validar ... ");
         final LoginInfo loginInfo = new LoginInfo();
 
         loginInfo.setUsername("");
