@@ -147,7 +147,16 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             }
 
         } catch (Exception e) {
-            log.error("Error llistant registres: " + e.getMessage(), e);
+
+            try {
+
+                log.error("Error llistant registres: " + e.getMessage(), e);
+                errorPage(e.getMessage(), e,request, response, locale);
+
+            } catch (Exception exception) {
+                log.info(exception);
+            }
+
         }
 
     }
@@ -229,7 +238,16 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             esperaPage(absolutePluginRequestPath, response, locale, rutaDesti);
             
         } catch (Exception e) {
-            log.error("Error enviant pagian d'espera de Sistra: " + e.getMessage(), e);
+
+            try {
+
+                log.error("Error enviant pagian d'espera de Sistra: " + e.getMessage(), e);
+                errorPage(e.getMessage(), e,request, response, locale);
+
+            } catch (Exception exception) {
+                log.info(exception);
+            }
+
         }
     }
 
@@ -261,11 +279,29 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 response.getWriter().println(webpage);
                 response.flushBuffer();
             } catch (IOException e) {
-                log.error("Error obtening writer: " + e.getMessage(), e);
+
+                try {
+
+                    log.error("Error obtening writer: " + e.getMessage(), e);
+                    errorPage(e.getMessage(), e,request, response, locale);
+
+                } catch (Exception exception) {
+                    log.info(exception);
+                }
+
             }
 
         } catch (Exception e) {
-            log.error("Error llistant registres: " + e.getMessage(), e);
+
+            try {
+
+                log.error("Error llistant registres: " + e.getMessage(), e);
+                errorPage(e.getMessage(), e,request, response, locale);
+
+            } catch (Exception exception) {
+                log.info(exception);
+            }
+
         }
 
     }
