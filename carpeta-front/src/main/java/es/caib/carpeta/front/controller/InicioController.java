@@ -1,6 +1,7 @@
 package es.caib.carpeta.front.controller;
 
 import es.caib.carpeta.ejb.PropietatGlobalService;
+import es.caib.carpeta.front.security.LoginController;
 import es.caib.carpeta.front.service.SecurityService;
 import es.caib.carpeta.front.utils.SesionHttp;
 import es.caib.carpeta.logic.EntitatLogicaService;
@@ -26,7 +27,11 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @Controller
@@ -46,7 +51,7 @@ public class InicioController extends CommonFrontController {
 
     protected final Log log = LogFactory.getLog(getClass());
 
-    @RequestMapping(value = { "/entitat"}, method = RequestMethod.GET)
+    @RequestMapping(value = { "/entitat" }, method = RequestMethod.GET)
     public ModelAndView llistarEntitats(HttpServletRequest request, HttpServletResponse response) throws I18NException {
 
         ModelAndView mav = new ModelAndView("entitat");
@@ -66,8 +71,8 @@ public class InicioController extends CommonFrontController {
                 mav.addObject("langActual", lang);
                 List<Idioma> idiomes = utilsEjb.getIdiomes();
                 List<Idioma> idiomesActius = new ArrayList<>();
-                for(Idioma idioma : idiomes){
-                    if(idioma.isSuportat()){
+                for (Idioma idioma : idiomes) {
+                    if (idioma.isSuportat()) {
                         idiomesActius.add(idioma);
                     }
                 }
@@ -98,15 +103,32 @@ public class InicioController extends CommonFrontController {
 
     }
 
+    public static final String SESSION_INITIAL_URL = "SESSION_INITIAL_URL";
+
+    @RequestMapping(value = { "/fa/{fullAddress}" }, method = RequestMethod.GET)
+    public void fullAddress(@PathVariable("fullAddress") String fullAddress, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        String urlBaseDec = new String(Base64.getDecoder().decode(fullAddress), "utf-8");
+
+        log.info(" REBUT FULL ADRRESS  DES DE JAVASCRIPT: ]" + urlBaseDec + "[");
+
+        request.getSession().setAttribute(SESSION_INITIAL_URL, urlBaseDec);
+
+        response.sendError(HttpServletResponse.SC_OK);
+    }
+
     @RequestMapping(value = { "/e/{codiEntitat}" }, method = RequestMethod.GET)
     public String triarEntitat(@PathVariable("codiEntitat") String codiEntitat, HttpServletRequest request,
             HttpServletResponse response) throws I18NException {
 
         try {
             // Eliminam sessió anterior
-            if(sesionHttp.getEntitat() != null) {
+            if (sesionHttp.getEntitat() != null) {
                 if (!sesionHttp.getEntitat().equals(codiEntitat)) {
-                    String baseURL = (String) request.getSession().getAttribute("SESSION_RETURN_URL_POST_LOGIN");
+                    String initialURL = (String) request.getSession().getAttribute(SESSION_INITIAL_URL);
+                    String baseURL = (String) request.getSession()
+                            .getAttribute(LoginController.SESSION_RETURN_URL_POST_LOGIN);
                     String url_callback_logout = baseURL + "/salir";
                     String IDIOMA = LocaleContextHolder.getLocale().getLanguage();
                     securityService.iniciarSesionLogout(url_callback_logout, IDIOMA);
@@ -115,6 +137,9 @@ public class InicioController extends CommonFrontController {
                         session.invalidate();
                     }
                     SecurityContextHolder.getContext().setAuthentication(null);
+                    if (initialURL != null) {
+                        request.getSession().setAttribute(SESSION_INITIAL_URL, initialURL);
+                    }
                 }
             }
 
@@ -127,7 +152,47 @@ public class InicioController extends CommonFrontController {
             processExceptionHtml(e, request, response);
         }
 
-        return "redirect:/";
+        // http://localhost:8080/carpetafront/#/moduls/registre32
+
+        String fullUrlRedirect = (String) request.getSession().getAttribute(InicioController.SESSION_INITIAL_URL);
+
+        if (fullUrlRedirect == null) {
+            fullUrlRedirect = "/";
+        } else {
+
+            try {
+                URL url = new URL(fullUrlRedirect);
+
+                String file = url.getFile();
+
+                log.info("\n\n XYZ ZZZ PATH FILE ]" + file + "[\n\n");
+
+                if (file == null || file.trim().length() == 0) {
+                    // OK NO passam a LOGIN
+                } else {
+
+                    String cp = request.getContextPath();
+
+                    if (file.startsWith(cp + "/seccio/") || file.startsWith(cp + "/modul/")
+                            || file.startsWith(cp + "/moduls/")) {
+
+                        fullUrlRedirect = "/prelogin?urlbase=" + URLEncoder.encode(url.getProtocol() + "://"
+                                + url.getHost() + ((url.getPort() == -1) ? "" : (":" + url.getPort())), "UTF-8");
+
+                    }
+                }
+
+            } catch (Exception e) {
+
+                log.error("Error parsejant url " + fullUrlRedirect, e);
+                fullUrlRedirect = "/";
+            }
+
+        }
+
+        log.info("\n XYZ ZZZZ SELECCIO ENTITAT  redirigir a => " + fullUrlRedirect + "\n");
+
+        return "redirect:" + fullUrlRedirect;
 
     }
 
@@ -135,15 +200,14 @@ public class InicioController extends CommonFrontController {
     public ModelAndView inicio(HttpServletRequest request, HttpServletResponse response, HttpSession session)
             throws I18NException {
 
-        
         ModelAndView mav = new ModelAndView("inici");
 
         // Posam la sessió de la variable global (per 60 segons)
         PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
-        if(EjbManager.getFrontSessionTime(propietatGlobalEjb) != null) {
+        if (EjbManager.getFrontSessionTime(propietatGlobalEjb) != null) {
             int frontSessionTime = Integer.parseInt(EjbManager.getFrontSessionTime(propietatGlobalEjb));
             mav.addObject("maxInactiveInterval", frontSessionTime * 60);
-        }else{
+        } else {
             mav.addObject("maxInactiveInterval", 30 * 60);
         }
 
@@ -168,8 +232,8 @@ public class InicioController extends CommonFrontController {
                     mav.addObject("canviarDeFront", canviardefront);
                     List<Idioma> idiomes = utilsEjb.getIdiomes();
                     List<Idioma> idiomesActius = new ArrayList<>();
-                    for(Idioma idioma : idiomes){
-                        if(idioma.isSuportat()){
+                    for (Idioma idioma : idiomes) {
+                        if (idioma.isSuportat()) {
                             idiomesActius.add(idioma);
                         }
                     }
@@ -178,10 +242,10 @@ public class InicioController extends CommonFrontController {
 
                 } else {
 
-
                     String codiEntitat = entitats.get(0).getCodi();
 
-                    long entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID, EntitatFields.CODI.equal(codiEntitat));
+                    long entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID,
+                            EntitatFields.CODI.equal(codiEntitat));
                     sesionHttp.setEntitatID(entitatID);
 
                     sesionHttp.setEntitat(codiEntitat);
@@ -198,11 +262,11 @@ public class InicioController extends CommonFrontController {
 
                 if (entitat != null) {
 
-                    long entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID, EntitatFields.CODI.equal(defaultEntityCode));
+                    long entitatID = entitatEjb.executeQueryOne(EntitatFields.ENTITATID,
+                            EntitatFields.CODI.equal(defaultEntityCode));
                     sesionHttp.setEntitatID(entitatID);
 
                     sesionHttp.setEntitat(defaultEntityCode);
-
 
                     mav.addObject("entitat", sesionHttp.getEntitat());
                     mav.addObject("defaultEntityCode", defaultEntityCode);
@@ -238,8 +302,9 @@ public class InicioController extends CommonFrontController {
 
     }
 
-    @RequestMapping(value = { "/error"}, method = RequestMethod.GET)
-    public ModelAndView error(HttpServletRequest request, HttpServletResponse response, Exception e) throws I18NException {
+    @RequestMapping(value = { "/error" }, method = RequestMethod.GET)
+    public ModelAndView error(HttpServletRequest request, HttpServletResponse response, Exception e)
+            throws I18NException {
 
         ModelAndView mav = new ModelAndView("error");
 

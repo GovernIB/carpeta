@@ -198,5 +198,16 @@
 <!-- acceptar cookies -->
 <script src="<c:url value="/src/assets/js/aceptar_cookies.js"/>" type="text/javascript"></script>
 
+<script>
+  var encURI = window.btoa(window.location.href);
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {       
+  };
+  xhttp.open("GET", '<c:url value="/fa/"/>' + encURI, true);
+  //xhttp.setRequestHeader("Content-type", "application/json");
+  xhttp.send();
+
+</script>
+
 </body>
 </html>

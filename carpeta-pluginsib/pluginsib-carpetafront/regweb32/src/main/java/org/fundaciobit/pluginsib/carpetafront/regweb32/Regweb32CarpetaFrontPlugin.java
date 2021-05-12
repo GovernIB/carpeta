@@ -109,7 +109,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
         return "carpetafrontregweb32";
     }
     
-    public static final String SESSION_PARAMETER = "REGWEB32_PLUGIN_PARAMETER";
+    //public static final String SESSION_PARAMETER = "REGWEB32_PLUGIN_PARAMETER";
 
     @Override
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
@@ -117,11 +117,14 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 
         registerUserData(userData);
 
-        String startURL = absolutePluginRequestPath + "/" + ESPERA_PAGE ;
+        String startURL;
         
         if (parameter != null && parameter.trim().length() != 0) {
-            log.info("DadesPersonalsReactCarpetaFrontPlugin:: PARAMETER => ]" + parameter + "[");
-           request.getSession().setAttribute(SESSION_PARAMETER, parameter);
+           log.info("DadesPersonalsReactCarpetaFrontPlugin:: PARAMETER => ]" + parameter + "[");
+           //request.getSession().setAttribute(SESSION_PARAMETER, parameter);
+            startURL = absolutePluginRequestPath + "/" + ESPERA_DETALL_PAGE + "?numeroRegistroFormateado=" + parameter;
+        } else {
+            startURL = absolutePluginRequestPath + "/" + ESPERA_LLISTAT_PAGE ;
         }
 
         log.info(" getStartUrl( ); => " + startURL);
@@ -149,10 +152,14 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
         }
 
         try {
-            if (query.startsWith(ESPERA_PAGE)) {
+            if (query.startsWith(ESPERA_LLISTAT_PAGE)) {
             	
-            	espera(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData, administrationEncriptedID, 0, locale, isGet);
+            	esperaLlistat(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData, administrationEncriptedID, 0, locale, isGet);
             	
+            } else if (query.startsWith(ESPERA_DETALL_PAGE)) {
+                
+                esperaDetall(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData, administrationEncriptedID, 0, locale, isGet);
+                
             } else if (query.startsWith(LLISTAT_REGISTRES_PAGE)) {
 
                 String pageNumber = request.getParameter("pageNumber");
@@ -196,13 +203,13 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
     
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
-    // -------------------     E   S   P   E   R   A                         ----------------
+    // -------------------     E   S   P   E   R   A    L L I S T A T        ----------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
-    protected static final String ESPERA_PAGE = "espera";
+    protected static final String ESPERA_LLISTAT_PAGE = "esperallistat";
     
-    public void espera(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+    public void esperaLlistat(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
                        HttpServletRequest request, HttpServletResponse response, UserData userData,
                        String administrationEncriptedID, int pageNumber, Locale locale, boolean isGet) {
     	
@@ -222,6 +229,41 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
     	
     	
     }
+    
+    
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // -------------------     E   S   P   E   R   A    D E T A L L          ----------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+    protected static final String ESPERA_DETALL_PAGE = "esperadetall";
+    
+    public void esperaDetall(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+                       HttpServletRequest request, HttpServletResponse response, UserData userData,
+                       String administrationEncriptedID, int pageNumber, Locale locale, boolean isGet) {
+        
+        try {
+            
+            // DETALL_REGISTRE_PAGE + "?numeroRegistroFormateado=" + parameter;
+            String numeroRegistroFormateado = request.getParameter("numeroRegistroFormateado");
+            String rutaDesti = absolutePluginRequestPath + "/" + DETALL_REGISTRE_PAGE + "?numeroRegistroFormateado=" + numeroRegistroFormateado;
+            esperaPage(absolutePluginRequestPath, response, locale, rutaDesti);
+            
+        }catch(Exception e) {
+
+            try{
+                errorPage(e.getMessage(), e, request, response, locale);
+                log.error("Error enviant a página d'espera de Registre " + e.getMessage(), e);
+            }catch(Exception e2){
+                log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
+            }
+        }
+        
+        
+    }
+    
+    
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
@@ -241,10 +283,10 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             response.setCharacterEncoding("utf-8");
             response.setContentType("text/html");
 
-            String pluginParameter  = (String)request.getSession().getAttribute(SESSION_PARAMETER);
+            
 
             String webpage = getLlistatDeRegistresPage(absolutePluginRequestPath, relativePluginRequestPath, userData,
-                    getEntidad(), pageNumber, locale, isGet, pluginParameter);
+                    getEntidad(), pageNumber, locale, isGet);
 
             try {
                 response.getWriter().println(webpage);
@@ -266,7 +308,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
     }
 
     public String getLlistatDeRegistresPage(String absolutePluginRequestPath, String relativePluginRequestPath,
-            UserData userData, String entidad, int pageNumber, Locale locale, boolean isGet, String pluginParameter) throws Exception {
+            UserData userData, String entidad, int pageNumber, Locale locale, boolean isGet) throws Exception {
 
 
         Map<String, Object> map = new HashMap<String, Object>();
@@ -323,8 +365,6 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
         map.put("pageUrl", pageUrl);
 
         map.put("paginacio", paginacio);
-
-        map.put("pluginParameter", pluginParameter);
 
         String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
 

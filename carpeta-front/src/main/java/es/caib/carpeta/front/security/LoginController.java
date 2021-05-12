@@ -3,6 +3,7 @@ package es.caib.carpeta.front.security;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.ejb.PropietatGlobalService;
 import es.caib.carpeta.front.config.LoginRequestCache;
+import es.caib.carpeta.front.controller.InicioController;
 import es.caib.carpeta.front.controller.WebUIController;
 import es.caib.carpeta.front.service.SecurityService;
 import es.caib.carpeta.front.utils.SesionHttp;
@@ -72,7 +73,7 @@ public class LoginController {
 
         String callbackurl = request.getParameter("urlbase") + request.getContextPath();
 
-//        log.info(" XXX XYZ LOGIN CALLBACK  => ]" + callbackurl + "[");
+        log.info(" XXX XYZ PRELOGIN CALLBACK  => ]" + callbackurl + "[");
         request.getSession().setAttribute(SESSION_RETURN_URL_POST_LOGIN, callbackurl);
 
         return "redirect:/login";
@@ -148,9 +149,10 @@ public class LoginController {
     @RequestMapping(value = "/redirigirLogin")
     public String redirigirLogin(HttpServletRequest request, HttpServletResponse response) throws I18NException {
 
-        log.info("\nDentro de redirigirLogin: ]" + sesionHttp.getUrlEntrada() + "[\n");
-        String callbackurl = (String) request.getSession().getAttribute(SESSION_RETURN_URL_POST_LOGIN);
-        log.info(" XXX XYZ redirigirLogin CALLBACK  => ]" + callbackurl + "[");
+        log.info("\nDentro de redirigirLogin: sesionHttp.getUrlEntrada() => ]" + sesionHttp.getUrlEntrada() + "[\n");
+        
+        //String callbackurl = (String) request.getSession().getAttribute(SESSION_RETURN_URL_POST_LOGIN);
+        //log.info(" XXX XYZ redirigirLogin CALLBACK  => ]" + callbackurl + "[");
 
         // Gestionamos la url de entrada a la aplicación previa a autenticarse
         /**
@@ -160,8 +162,23 @@ public class LoginController {
          * e.printStackTrace(); }
          */
 
-        log.info("\n XYZ ZZZZ redirigirLogin => /\n");
-        return "redirect:/";
+        
+        
+        
+        String fullUrlRedirect = (String)request.getSession().getAttribute(InicioController.SESSION_INITIAL_URL);
+        
+        log.info("\nDentro de redirigirLogin: fullUrlRedirect => ]" + fullUrlRedirect + "[\n");
+        
+        if (fullUrlRedirect == null) {
+            fullUrlRedirect = "/";
+        } else {
+            request.getSession().removeAttribute(InicioController.SESSION_INITIAL_URL);
+        }
+        
+        log.info("\n XYZ ZZZZ redirigirLogin => " + fullUrlRedirect + "\n");
+        
+        
+        return "redirect:" + fullUrlRedirect ;
 
         // XYZ ZZZ
 

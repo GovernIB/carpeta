@@ -13,6 +13,7 @@ import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWsService;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -174,6 +175,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
             response.setContentType("text/html");
 
             String numeroRegistroFormateado = request.getParameter("numeroRegistroFormateado");
+                       
 
             String webpage = getDetallDeRegistrePage(absolutePluginRequestPath, numeroRegistroFormateado,
                     userData.getAdministrationID(), locale, "");

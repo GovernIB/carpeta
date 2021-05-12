@@ -31,7 +31,23 @@ class PluginHtml extends Component {
         var autenticat = sessionStorage.getItem('autenticat');
         if (autenticat === '0') {
             console.log("S'HA INTENTAT MOSTRAR UN PLUGIN SENSE ESTAR AUTENTICAT");
-            this.props.history.push("/");
+
+            var urlBase = sessionStorage.getItem('contextPath');
+            
+
+            // ANAM A AUTENTICACIO
+            var encURI = window.btoa(window.location.href);
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+            };
+            xhttp.open("GET", urlBase + "/fa/" + encURI, true);
+            xhttp.send();
+
+            //this.props.history.push("/");
+
+            var loc = new URL(window.location.href);
+            window.location.href = ('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host));
+
             return '';
         }
 
