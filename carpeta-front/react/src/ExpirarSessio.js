@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {withTranslation} from 'react-i18next';
+import axios from "axios";
 
 
 class ExpirarSessio extends Component {
@@ -45,7 +46,15 @@ class ExpirarSessio extends Component {
                         }
                     ],
                     close: function(event, ui) {
-                        $('#expirat').dialog({
+                        var baseURL = sessionStorage.getItem('contextPath');
+                        var url = baseURL + '/sortir';
+
+                        axios.get(url)
+                            .then(res => {
+                                console.log("expirar sessió: " + res.statusText);
+                            });
+
+                        $('#expirat').delay(5000).dialog({
                             maxWidth:400,
                             maxHeight: 200,
                             width: 400,
@@ -60,7 +69,6 @@ class ExpirarSessio extends Component {
                                         $( this ).dialog( "close" );
                                         var baseURL = sessionStorage.getItem('contextPath');
                                         var url = baseURL + '/sortir';
-                                        // var url = window.location.href + 'e/' + sessionStorage.getItem('entitat');
                                         window.location.replace(url);
                                     }
                                 }
