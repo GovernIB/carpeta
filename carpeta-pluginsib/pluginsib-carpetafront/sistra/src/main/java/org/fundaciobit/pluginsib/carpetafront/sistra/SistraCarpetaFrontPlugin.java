@@ -33,7 +33,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Properties;
+import java.util.TimeZone;
+
 
 /**
  * 
@@ -173,6 +183,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             if (isGet) {
 
                 Calendar cal = Calendar.getInstance();
+                cal.setTimeZone(TimeZone.getTimeZone("Europe/Madrid"));
                 formDataFi = cal.getTime();
                 cal.add(Calendar.MONTH, -6);
                 formDataInici = cal.getTime();
@@ -190,10 +201,11 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
                     log.info("formStatus: " + formEstat);
                 }
 
-                SimpleDateFormat SDF = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                sdf.setTimeZone(TimeZone.getTimeZone("Europe/Madrid"));
 
-                formDataInici = SDF.parse(formDataIniciStr);
-                formDataFi = SDF.parse(formDataFiStr);
+                formDataInici = sdf.parse(formDataIniciStr);
+                formDataFi = sdf.parse(formDataFiStr);
 
             }
 

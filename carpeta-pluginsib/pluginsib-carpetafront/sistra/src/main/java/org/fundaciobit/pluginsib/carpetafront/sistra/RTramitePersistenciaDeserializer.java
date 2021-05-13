@@ -9,6 +9,7 @@ import es.caib.sistramit.rest.api.externa.v1.RTramitePersistencia;
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 import java.util.logging.Logger;
 
 import static javax.json.stream.JsonParser.Event;
@@ -28,6 +29,10 @@ public class RTramitePersistenciaDeserializer implements JsonbDeserializer<RTram
                 Event event = parser.next();
                 if (event == Event.KEY_NAME) {
                     String keyName = parser.getString();
+                    
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                    dateFormat.setTimeZone(TimeZone.getTimeZone("Europe/Madrid"));
+                    
                     parser.next();
                    switch (keyName) {
                         case "idTramite":
@@ -46,10 +51,10 @@ public class RTramitePersistenciaDeserializer implements JsonbDeserializer<RTram
                             tramite.setVersionTramite(parser.getInt());
                         break;
                         case "fechaInicio":
-                            tramite.setFechaInicio(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(parser.getString()));
+                            tramite.setFechaInicio(dateFormat.parse(parser.getString()));
                         break;
                         case "fechaUltimoAcceso":                    	
-                            tramite.setFechaUltimoAcceso(new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(parser.getString()));
+                            tramite.setFechaUltimoAcceso(dateFormat.parse(parser.getString()));
                         break;
                     }
                 }
