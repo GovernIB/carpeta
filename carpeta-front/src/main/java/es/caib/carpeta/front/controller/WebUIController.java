@@ -1393,7 +1393,7 @@ public class WebUIController extends PluginFrontController {
                         List<PluginInfo> pluginsEntitat = utilsEjb.getFrontPlugins(entitatID, lang, seccioID);
                       //fullInfo.put("veureplugins", pluginsEntitat);
                         for (PluginInfo pluginInfo : pluginsEntitat) {
-                            items.add(ItemInfo.createFromPluginInfo(pluginInfo));
+                            items.add(ItemInfo.createFromPluginInfo(pluginInfo, request));
                         }
                     }
 

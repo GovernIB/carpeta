@@ -5,6 +5,8 @@ import es.caib.carpeta.front.controller.WebUIController.EnllazInfo;
 import es.caib.carpeta.front.controller.WebUIController.SeccioInfo;
 import es.caib.carpeta.logic.utils.PluginInfo;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 
  * @author anadal
@@ -125,11 +127,11 @@ public class ItemInfo implements Comparable<ItemInfo> {
         this.order = order;
     }
 
-    public static ItemInfo createFromPluginInfo(PluginInfo p) {
+    public static ItemInfo createFromPluginInfo(PluginInfo p, HttpServletRequest request) {
         return new ItemInfo(p.getPluginID(), p.getNom(), p.getDescripcio(), p.getContext(),
                 p.isReactComponent() ? TIPUS_REACT_PLUGIN : TIPUS_HTML_PLUGIN,
-                p.getGravetat() == null ? 0 : (int) (long) p.getGravetat(), p.getMissatge(), null,                        
-                        "/pluginfront/pluginicon/" + p.getPluginID(), p.getOrder());
+                p.getGravetat() == null ? 0 : (int) (long) p.getGravetat(), p.getMissatge(), null,
+                 request.getContextPath() + "/pluginfront/pluginicon/" + p.getPluginID(), p.getOrder());
     }
 
     public static ItemInfo createFromSeccioInfo(SeccioInfo s) {
