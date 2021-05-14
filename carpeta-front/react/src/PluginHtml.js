@@ -28,8 +28,10 @@ class PluginHtml extends Component {
 
     render() {
 
+        var isPublic = this.props.isPublic;
+        console.log(" PLUGIN HTML: isPublic? " + isPublic);
         var autenticat = sessionStorage.getItem('autenticat');
-        if (autenticat === '0') {
+        if (autenticat === '0' && !isPublic) {
             console.log("S'HA INTENTAT MOSTRAR UN PLUGIN SENSE ESTAR AUTENTICAT");
 
             var urlBase = sessionStorage.getItem('contextPath');
@@ -51,11 +53,11 @@ class PluginHtml extends Component {
             return '';
         }
 
-        // console.log("PLUGIN HTML 222222  !!!!!!!");
+        console.log("PLUGIN HTML 222222  !!!!!!!");
 
         const { t } = this.props;
         const pluginContext = this.props.match.params.pluginContext;
-        console.log("PLUGIN HTML Context =" + pluginContext + "  !");
+        console.log("PLUGIN HTML Context =" + pluginContext);
 
         const pluginParameter = this.props.match.params.pluginParameter;
         console.log("PLUGIN HTML Parameter = ]" + pluginParameter + "[");

@@ -1,0 +1,11 @@
+# Class => org.fundaciobit.pluginsib.carpetafront.reprendretramitsistra.ReprendreTramitSistraCarpetaFrontPlugin
+
+# Common
+es.caib.carpeta.pluginsib.carpetafront.reprendretramitsistra.development=true
+
+
+# Sistra 1
+es.caib.carpeta.pluginsib.carpetafront.reprendretramitsistra.url=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.url"]]
+es.caib.carpeta.pluginsib.carpetafront.reprendretramitsistra.user=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.user"]]
+es.caib.carpeta.pluginsib.carpetafront.reprendretramitsistra.pass=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.pass"]]
+

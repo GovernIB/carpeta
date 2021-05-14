@@ -24,6 +24,7 @@
 		<module>pinbalpolicia</module>
         <module>reactexample</module>
         <module>regwebdetallcomponent</module>
+		<module>reprendretramitsistra</module>
     </modules>
 
     <dependencies>

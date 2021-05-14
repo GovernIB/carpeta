@@ -33,7 +33,6 @@ import java.util.Properties;
  * 
  * @author anadal
  * 
- * TODO revisar noms i variables amb SCANWEB
  *
  */
 public abstract class AbstractPluginFullUtilities extends AbstractPluginPropertiesTranslations {
@@ -505,7 +504,7 @@ public abstract class AbstractPluginFullUtilities extends AbstractPluginProperti
     // -------------------------------------------------------------------------
 
     protected void errorPage(String errorMsg, Throwable th, HttpServletRequest request,
-                             HttpServletResponse response, Locale locale) throws Exception {
+                             HttpServletResponse response, Locale locale)  {
 
         if (th == null) {
             log.error("AbstractPluginFullUtilities::errorPage() " + errorMsg);
@@ -518,7 +517,13 @@ public abstract class AbstractPluginFullUtilities extends AbstractPluginProperti
         }
 
 
-        PrintWriter out =  response.getWriter();
+        PrintWriter out;
+        try {
+            out = response.getWriter();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
 
         out.println("<html>");
         out.println("<body>");

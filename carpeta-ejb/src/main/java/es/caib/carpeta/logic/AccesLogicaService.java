@@ -2,6 +2,7 @@ package es.caib.carpeta.logic;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
+import javax.annotation.security.PermitAll;
 import javax.ejb.Local;
 import javax.validation.constraints.NotNull;
 
@@ -21,6 +22,7 @@ import java.util.List;
 public interface AccesLogicaService extends AccesService {
     public static final String JNDI_NAME = "java:app/carpeta-ejb/AccesLogicaEJB!es.caib.carpeta.logic.AccesLogicaService";
 
+    @PermitAll
     public void crearAcces(UsuarioClave usuarioClave, @NotNull int tipus, long entitatID, Long pluginID,
             Timestamp dataDarrerAcces, String idioma, String ipAddress, boolean resultat) throws I18NException;
 

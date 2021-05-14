@@ -125,12 +125,13 @@ class LlistatDePlugins extends Component {
                 switch (s.tipus) {
 
                     case 0: // Plugin react
+                    case 1: // Plugin html
                         allItems.push(
                             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
                                 <Link
                                     className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert${gravetatCssClass}`}
                                     to={{
-                                        pathname: baseSeccio + Constants.PLUGINREACT_PATH + s.context,
+                                        pathname: baseSeccio + ((s.tipus == 0) ? Constants.PLUGINREACT_PATH :Constants.PLUGINHTML_PATH)+ s.context,
                                         nomPagina: "plugin"
                                     }} title={s.missatge}>
                                     <span className="card-title titol pl-1 h3"><img src={urlBase + s.urllogo}
@@ -143,6 +144,7 @@ class LlistatDePlugins extends Component {
                             </div>
                         );
                         break;
+                        /*
                     case 1: // Plugin html
                         allItems.push(
                             <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0" key={i}>
@@ -162,7 +164,7 @@ class LlistatDePlugins extends Component {
                             </div>
                         );
                         break;
-
+*/
                     case 3: // Seccio
                         allItems.push(
                             <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">

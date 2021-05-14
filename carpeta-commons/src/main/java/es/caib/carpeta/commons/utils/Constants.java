@@ -44,7 +44,9 @@ public interface Constants {
     
     
     /*   TIPUS DE PLUGINS     */
-    public static final int PLUGIN_TIPUS_FRONT = 1;
+    public static final int PLUGIN_TIPUS_FRONT_PRIVAT = 1;
+    public static final int PLUGIN_TIPUS_FRONT_PUBLIC = 2;
+    public static final int PLUGIN_TIPUS_FRONT_PUBLIC_I_PRIVAT = 3;
     
     /* Tipus Avis */
     public static final int TIPUS_AVIS_FRONT_ABANS_LOGIN = 1;

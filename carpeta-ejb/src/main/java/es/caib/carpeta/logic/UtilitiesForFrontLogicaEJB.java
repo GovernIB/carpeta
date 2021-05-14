@@ -153,23 +153,50 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
     }
 
     @Override
-    public List<PluginInfo> getFrontPlugins(Long entitatID, String language, Long seccioID) throws I18NException {
+    public List<PluginInfo> getFrontPlugins(Long entitatID, String language, 
+            Long seccioID, boolean autenticat) throws I18NException {
 
-        List<Long> pluginsEntitat = pluginEntitatLogicaEjb.getPluginsEntitat(entitatID, true, seccioID);
+        
+        
+        final Where w1;
+        {
+          // XYZ ZZZ Optimitzar emprant SubQuery
+          List<Long> pluginsEntitat = pluginEntitatLogicaEjb.getPluginsEntitat(entitatID, true, seccioID);
+          w1 = PluginFields.PLUGINID.in(pluginsEntitat);
+        } 
+        final Where w2;
+        if (autenticat) {
+           w2 = Where.OR(
+                   PluginFields.TIPUS.equal(Constants.PLUGIN_TIPUS_FRONT_PRIVAT),
+                   PluginFields.TIPUS.equal(Constants.PLUGIN_TIPUS_FRONT_PUBLIC_I_PRIVAT)
+                  );
+            
+        } else {
+            w2 = Where.OR(
+                    PluginFields.TIPUS.equal(Constants.PLUGIN_TIPUS_FRONT_PUBLIC),
+                    PluginFields.TIPUS.equal(Constants.PLUGIN_TIPUS_FRONT_PUBLIC_I_PRIVAT)
+                    );
+        }
 
-        List<Plugin> plugins = pluginCarpetaFrontEjb.getAllPlugins(PluginFields.PLUGINID.in(pluginsEntitat));
         Map<Long, Plugin> mapPlugins = new HashMap<Long, Plugin>();
-        for (Plugin plugin : plugins) {
-            mapPlugins.put(plugin.getPluginID(), plugin);
+        {
+              List<Plugin> plugins = pluginCarpetaFrontEjb.getAllPlugins(Where.AND(w1,w2));
+              
+              log.info(" XYZ ZZZ PLUGINS QUE PASSEN FILTRE XXXXXX[ auth = " + autenticat + "] => " + plugins.size());
+            
+              for (Plugin plugin : plugins) {
+                  mapPlugins.put(plugin.getPluginID(), plugin);
+              }
         }
         
 
-        List<PluginInfo> pluginsInfo = new ArrayList<PluginInfo>(plugins.size());
+        List<PluginInfo> pluginsInfo = new ArrayList<PluginInfo>();
 
-        for (Long pluginID : pluginsEntitat) {
+        for (Long pluginID : mapPlugins.keySet()) {
             Plugin plugin = mapPlugins.get(pluginID);
             
-            if (plugin != null) {
+            /*if (plugin != null) */
+            {
                 PluginJPA p = (PluginJPA) plugin;
 
                 pluginsInfo.add(getInternalPluginInfo(language, p, entitatID));
@@ -285,7 +312,7 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
         PluginInfo pluginInfo;
         pluginInfo = new PluginInfo(String.valueOf(p.getPluginID()), p.getNom().getTraduccio(language).getValor(),
                 p.getDescripcio().getTraduccio(language).getValor(), p.getContext(), cfp.isReactComponent(),
-                gravetatAvis, missatgeAvis, ordre);
+                gravetatAvis, missatgeAvis, ordre, p.getTipus());
 
         return pluginInfo;
     }

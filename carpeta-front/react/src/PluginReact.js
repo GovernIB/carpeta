@@ -78,12 +78,14 @@ class PluginReact extends Component {
 
 	render() {
 
+        var isPublic = this.props.isPublic;
+
         var autenticat = sessionStorage.getItem('autenticat');
-        if (autenticat === '0') {
+        if (autenticat === '0' && !isPublic) {
+        
             console.log("S'HA INTENTAT MOSTRAR UN PLUGIN SENSE ESTAR AUTENTICAT");
 
             var urlBase = sessionStorage.getItem('contextPath');
-            
 
             // ANAM A AUTENTICACIO
             var encURI = window.btoa(window.location.href);
@@ -94,6 +96,8 @@ class PluginReact extends Component {
             xhttp.send();
 
             //this.props.history.push("/");
+
+            
 
             var loc = new URL(window.location.href);
             window.location.href = ('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host));

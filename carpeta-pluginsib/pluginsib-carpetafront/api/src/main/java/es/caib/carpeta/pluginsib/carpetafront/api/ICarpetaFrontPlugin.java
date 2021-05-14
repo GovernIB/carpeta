@@ -35,4 +35,6 @@ public interface ICarpetaFrontPlugin extends IPlugin {
     public FileInfo getIcon(Locale locale);
     
     public boolean isReactComponent();
+    
+    public boolean isPublic();
 }

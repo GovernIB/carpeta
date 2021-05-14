@@ -5,6 +5,7 @@ import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.OrderType;
 import org.fundaciobit.genapp.common.query.Where;
 
+import javax.annotation.security.PermitAll;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.validation.constraints.NotNull;
@@ -29,23 +30,30 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaService {
     @EJB(mappedName = EntitatLogicaService.JNDI_NAME)
     protected EntitatLogicaService entitatLogicaEjb;
 
+    @PermitAll
     @Override
     public void crearAcces(UsuarioClave usuarioClave, @NotNull int tipus, long entitatID, Long pluginID,
                            Timestamp dataDarrerAcces, String idioma, String ipAddress, boolean resultat ) throws I18NException {
 
         AccesJPA accesJPA = new AccesJPA();
 
-        accesJPA.setNom(usuarioClave.getNombre());
-        accesJPA.setLlinatges(usuarioClave.getApellido1() + " " + usuarioClave.getApellido2());
-        accesJPA.setIp(ipAddress);
-        accesJPA.setNif(usuarioClave.getNif());
-        accesJPA.setDataAcces(dataDarrerAcces);
-        accesJPA.setQaa(usuarioClave.getQaa());
-
-        // S'ha d'arreglar a https://github.com/GovernIB/carpeta/issues/308
-        // Això està be ????
-        accesJPA.setMetodeAutenticacio(usuarioClave.getMetodoAutentificacion());
-        accesJPA.setProveidorIdentitat(usuarioClave.getProveedorDeIdentidad());
+        if (usuarioClave != null) {
+            // Accés a un plugin PUBLIC de forma no autenticada
+            accesJPA.setNom(usuarioClave.getNombre());
+            accesJPA.setLlinatges(usuarioClave.getApellido1() + " " + usuarioClave.getApellido2());
+            accesJPA.setIp(ipAddress);
+            accesJPA.setNif(usuarioClave.getNif());
+            accesJPA.setDataAcces(dataDarrerAcces);
+            accesJPA.setQaa(usuarioClave.getQaa());
+    
+            // S'ha d'arreglar a https://github.com/GovernIB/carpeta/issues/308
+            // Això està be ????
+            accesJPA.setMetodeAutenticacio(usuarioClave.getMetodoAutentificacion());
+            accesJPA.setProveidorIdentitat(usuarioClave.getProveedorDeIdentidad());
+        }
+        
+        
+        
         accesJPA.setIdioma(idioma);
         accesJPA.setResultat(resultat);
 

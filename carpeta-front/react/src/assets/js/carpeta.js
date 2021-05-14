@@ -9,7 +9,7 @@ $(document).ready(function () {
 //Enlaces entoda la fila de la tabla
 jQuery(document).ready(function($) {
 	$(".clickable-row").click(function() {
-		alert("clicable");
+		//alert("clicable");
 		var $th = $(this);
 		// window.open($th.attr('data-href'), $th.attr('data-target'));
 		goTo($th.attr('data-href'));

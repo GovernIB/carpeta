@@ -7,21 +7,22 @@ package es.caib.carpeta.logic.utils;
  */
 public class PluginInfo {
 
-    String pluginID;
-    String nom;
-    String descripcio;
-    String context;
-    boolean reactComponent;
-    Long gravetat;
-    String missatge;
-    int order;
+    protected String pluginID;
+    protected String nom;
+    protected String descripcio;
+    protected String context;
+    protected boolean reactComponent;
+    protected Long gravetat;
+    protected String missatge;
+    protected int order;
+    protected int tipusPlugin;
 
     public PluginInfo() {
         super();
     }
 
-    public PluginInfo(String pluginID, String nom, String descripcio, String context,
-            boolean reactComponent, Long gravetat, String missatge, int order) {
+    public PluginInfo(String pluginID, String nom, String descripcio, String context, boolean reactComponent,
+            Long gravetat, String missatge, int order, int tipusPlugin) {
         super();
         this.nom = nom;
         this.descripcio = descripcio;
@@ -31,6 +32,7 @@ public class PluginInfo {
         this.gravetat = gravetat;
         this.missatge = missatge;
         this.order = order;
+        this.tipusPlugin = tipusPlugin;
     }
 
     public String getPluginID() {
@@ -97,6 +99,12 @@ public class PluginInfo {
         this.order = order;
     }
 
-   
+    public int getTipusPlugin() {
+        return tipusPlugin;
+    }
+
+    public void setTipusPlugin(int tipusPlugin) {
+        this.tipusPlugin = tipusPlugin;
+    }
 
 }

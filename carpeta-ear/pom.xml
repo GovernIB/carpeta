@@ -1,67 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>es.caib.carpeta</groupId>
-        <artifactId>carpeta</artifactId>
-        <version>1.1.10</version>
-    </parent>
-
-    <artifactId>carpeta-ear</artifactId>
-    <packaging>ear</packaging>
-    <name>Carpeta - EAR</name>
-    <description>Arxiu d'aplicació EAR de carpeta</description>
-
-    <properties>
-        <!-- Format del timestamp -->
-        <maven.build.timestamp.format>dd/MM/yyyy HH:mm</maven.build.timestamp.format>
-    </properties>
-
-    <dependencies>
-        <!-- Especificacions i llibreries proporcionades per JBoss -->
-        <dependency>
-            <groupId>org.jboss.spec</groupId>
-            <artifactId>jboss-javaee-8.0</artifactId>
-            <type>pom</type>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <!-- Mòduls que van dins l'application.xml -->
-        <dependency>
-            <groupId>es.caib.carpeta</groupId>
-            <artifactId>carpeta-ejb</artifactId>
-            <version>1.1.10</version>
-            <type>ejb</type>
-        </dependency>
-
-        <!-- BACK START -->
-        <dependency>
-            <groupId>es.caib.carpeta</groupId>
-            <artifactId>carpeta-back</artifactId>
-            <version>1.1.10</version>
-            <type>war</type>
-        </dependency>
-        <!-- BACK END -->
-        <!-- FRONT START -->
-        <dependency>
-            <groupId>es.caib.carpeta</groupId>
-            <artifactId>carpeta-front</artifactId>
-            <version>1.1.10</version>
-            <type>war</type>
-        </dependency>
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>es.caib.carpeta</groupId>
+		<artifactId>carpeta</artifactId>
+		<version>1.1.10</version>
+	</parent>
+	<artifactId>carpeta-ear</artifactId>
+	<packaging>ear</packaging>
+	<name>Carpeta - EAR</name>
+	<description>Arxiu d'aplicació EAR de carpeta</description>
+	<properties>
+		<!-- Format del timestamp -->
+		<maven.build.timestamp.format>dd/MM/yyyy HH:mm</maven.build.timestamp.format>
+	</properties>
+	<dependencies>
+		<!-- Especificacions i llibreries proporcionades per JBoss -->
+		<dependency>
+			<groupId>org.jboss.spec</groupId>
+			<artifactId>jboss-javaee-8.0</artifactId>
+			<type>pom</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Mòduls que van dins l'application.xml -->
+		<dependency>
+			<groupId>es.caib.carpeta</groupId>
+			<artifactId>carpeta-ejb</artifactId>
+			<version>1.1.10</version>
+			<type>ejb</type>
+		</dependency>
+		<!-- BACK START -->
+		<dependency>
+			<groupId>es.caib.carpeta</groupId>
+			<artifactId>carpeta-back</artifactId>
+			<version>1.1.10</version>
+			<type>war</type>
+		</dependency>
+		<!-- BACK END -->
+		<!-- FRONT START -->
+		<dependency>
+			<groupId>es.caib.carpeta</groupId>
+			<artifactId>carpeta-front</artifactId>
+			<version>1.1.10</version>
+			<type>war</type>
+		</dependency>
 		<!-- FRONT END -->
 		<!-- API EXTERNA START -->
 		<dependency>
-            <groupId>es.caib.carpeta</groupId>
-            <artifactId>carpeta-api-externa</artifactId>
+			<groupId>es.caib.carpeta</groupId>
+			<artifactId>carpeta-api-externa</artifactId>
 			<version>1.1.10</version>
-            <type>war</type>
-        </dependency>
-        <!-- API EXTERNA END
+			<type>war</type>
+		</dependency>
+		<!-- API EXTERNA END
 
         <dependency>
             <groupId>es.caib.carpeta</groupId>
@@ -69,192 +65,166 @@
             <version>1.1.1</version>
             <type>war</type>
         </dependency> -->
-        <!--
+		<!--
         Mòduls que van dins el lib/
         Tenir en compte a l'hora de incloure dependències només si és imprescindible i no està ja dins
         un mòdul sobre el que es pugui establir una dependència als descriptors.
         https://docs.jboss.org/author/display/AS72/Implicit+module+dependencies+for+deployments
         -->
-        
-        <dependency>
-            <groupId>es.caib.carpeta</groupId>
-            <artifactId>carpeta-model</artifactId>
-            <version>1.1.10</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>es.caib.carpeta</groupId>
-            <artifactId>carpeta-persistence</artifactId>
-            <version>1.1.10</version>
-        </dependency>
-        <dependency>
-            <groupId>es.caib.carpeta</groupId>
-            <artifactId>carpeta-commons</artifactId>
-            <version>1.1.10</version>
-        </dependency>
-        
-        
-        <!-- XYZ ZZZ -->
-        
-        
-      <!-- ====================================== -->
-      <!-- =====  PLUGINS DE CARPETA FRONT  ===== -->
-      <!-- ====================================== -->
-        
-     <dependency>
-         <artifactId>carpeta-pluginsib-carpetafront-api</artifactId>
-         <groupId>es.caib.carpeta</groupId>
-         <version>1.1.10</version>
-     </dependency>
-
-        <dependency>
-            <artifactId>carpeta-pluginsib-carpetafront-sistra</artifactId>
-            <groupId>es.caib.carpeta</groupId>
-            <version>1.1.10</version>
-        </dependency>
-
-
-        <!-- >dependency>
-            <artifactId>carpeta-pluginsib-carpetafront-regweb3</artifactId>
-            <groupId>es.caib.carpeta</groupId>
-            <version>1.1.9</version>
-        </dependency -->
-        
-        <dependency>
-            <artifactId>carpeta-pluginsib-carpetafront-notib</artifactId>
-            <groupId>es.caib.carpeta</groupId>
-            <version>1.1.10</version>
-        </dependency>
-        
-        <dependency>
-            <artifactId>carpeta-pluginsib-carpetafront-reactexample</artifactId>
-            <groupId>es.caib.carpeta</groupId>
-            <version>1.1.10</version>
-        </dependency>
-        
-        <dependency>
-            <artifactId>carpeta-pluginsib-carpetafront-dadespersonalsreact</artifactId>
-            <groupId>es.caib.carpeta</groupId>
-            <version>1.1.10</version>
-        </dependency>
-
 		<dependency>
-            <artifactId>carpeta-pluginsib-carpetafront-dadeslogin</artifactId>
-            <groupId>es.caib.carpeta</groupId>
-            <version>1.1.10</version>
-        </dependency>
-		
+			<groupId>es.caib.carpeta</groupId>
+			<artifactId>carpeta-model</artifactId>
+			<version>1.1.10</version>
+		</dependency>
 		<dependency>
-            <artifactId>carpeta-pluginsib-carpetafront-pinbalpolicia</artifactId>
-            <groupId>es.caib.carpeta</groupId>
-            <version>1.1.10</version>
-        </dependency>
+			<groupId>es.caib.carpeta</groupId>
+			<artifactId>carpeta-persistence</artifactId>
+			<version>1.1.10</version>
+		</dependency>
+		<dependency>
+			<groupId>es.caib.carpeta</groupId>
+			<artifactId>carpeta-commons</artifactId>
+			<version>1.1.10</version>
+		</dependency>
 
-        <dependency>
-            <artifactId>carpeta-pluginsib-carpetafront-regweb32</artifactId>
-            <groupId>es.caib.carpeta</groupId>
-            <version>1.1.10</version>
-        </dependency>
-        
-        <dependency>
-            <artifactId>carpeta-pluginsib-carpetafront-regwebdetallcomponent</artifactId>
-            <groupId>es.caib.carpeta</groupId>
-            <version>1.1.10</version>
-        </dependency>
+		<!-- ====================================== -->
+		<!-- =====  PLUGINS DE CARPETA FRONT  ===== -->
+		<!-- ====================================== -->
+		<dependency>
+			<artifactId>carpeta-pluginsib-carpetafront-api</artifactId>
+			<groupId>es.caib.carpeta</groupId>
+			<version>1.1.10</version>
+		</dependency>
+		<dependency>
+			<artifactId>carpeta-pluginsib-carpetafront-sistra</artifactId>
+			<groupId>es.caib.carpeta</groupId>
+			<version>1.1.10</version>
+		</dependency>
+		<dependency>
+			<artifactId>carpeta-pluginsib-carpetafront-reprendretramitsistra</artifactId>
+			<groupId>es.caib.carpeta</groupId>
+			<version>1.1.10</version>
+		</dependency>
+		<dependency>
+			<artifactId>carpeta-pluginsib-carpetafront-notib</artifactId>
+			<groupId>es.caib.carpeta</groupId>
+			<version>1.1.10</version>
+		</dependency>
+		<dependency>
+			<artifactId>carpeta-pluginsib-carpetafront-reactexample</artifactId>
+			<groupId>es.caib.carpeta</groupId>
+			<version>1.1.10</version>
+		</dependency>
+		<dependency>
+			<artifactId>carpeta-pluginsib-carpetafront-dadespersonalsreact</artifactId>
+			<groupId>es.caib.carpeta</groupId>
+			<version>1.1.10</version>
+		</dependency>
+		<dependency>
+			<artifactId>carpeta-pluginsib-carpetafront-dadeslogin</artifactId>
+			<groupId>es.caib.carpeta</groupId>
+			<version>1.1.10</version>
+		</dependency>
+		<dependency>
+			<artifactId>carpeta-pluginsib-carpetafront-pinbalpolicia</artifactId>
+			<groupId>es.caib.carpeta</groupId>
+			<version>1.1.10</version>
+		</dependency>
+		<dependency>
+			<artifactId>carpeta-pluginsib-carpetafront-regweb32</artifactId>
+			<groupId>es.caib.carpeta</groupId>
+			<version>1.1.10</version>
+		</dependency>
+		<dependency>
+			<artifactId>carpeta-pluginsib-carpetafront-regwebdetallcomponent</artifactId>
+			<groupId>es.caib.carpeta</groupId>
+			<version>1.1.10</version>
+		</dependency>
 
-
-        <!-- ====================================== -->
-        <!-- ===== PLUGINS DE USERINFORMATION ===== -->
-        <!-- ====================================== -->
-        
-        <dependency>
-            <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
-            <artifactId>pluginsib-userinformation-keycloak</artifactId>
-            <version>2.0.1</version>
-            <exclusions>
-                <exclusion>
-                   <artifactId>resteasy-jaxrs</artifactId>
-                   <groupId>org.jboss.resteasy</groupId>
-                </exclusion>
-                 <exclusion>
-                   <artifactId>resteasy-client</artifactId>
-                   <groupId>org.jboss.resteasy</groupId>
-                </exclusion>
-                 <exclusion>
-                   <artifactId>resteasy-jackson2-provide</artifactId>
-                   <groupId>org.jboss.resteasy</groupId>
-                </exclusion>
-            </exclusions>
-      </dependency>
-
-
-      <dependency>
-        <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
-        <artifactId>pluginsib-userinformation-database</artifactId>				  
-        <version>2.0.0</version>
-      </dependency>
-
-
-      <dependency>
-        <groupId>org.fundaciobit.pluginsib.userinformation</groupId>
-        <artifactId>pluginsib-userinformation-ldap</artifactId>				  
-        <version>2.0.0</version>
-      </dependency>
-        
-        
-    </dependencies>
-
-    <build>
-        <!-- El nom del EAR sempre és el nom del projecte d'acord amb un 4.2 de l'Estàndard CAIB -->
-        <finalName>${project.parent.artifactId}</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-ear-plugin</artifactId>
-                <configuration>
-                    <generateApplicationXml>true</generateApplicationXml>
-                    <defaultLibBundleDir>lib</defaultLibBundleDir>
-                    <includeLibInApplicationXml>false</includeLibInApplicationXml>
-                    <!--suppress UnresolvedMavenProperty --><!-- Nom mòduls d'acord amb punt 4.2 de l'Estàndard CAIB -->
-                    <outputFileNameMapping>@{artifactId}@-@{version}@.@{extension}@</outputFileNameMapping>
-                    <version>8</version>
-                    <archive>
-                        <manifestEntries>
-                            <project-version>${project.version}</project-version>
-                            <project-buildtime>${maven.build.timestamp}</project-buildtime>
-                            <scm-revision>${buildNumber}</scm-revision>
-                        </manifestEntries>
-                    </archive>
-                    <modules>
-                        <ejbModule>
-                            <groupId>es.caib.carpeta</groupId>
-                            <artifactId>carpeta-ejb</artifactId>
-                            <bundleFileName>carpeta-ejb.jar</bundleFileName>
-                        </ejbModule>
-
-                        <!-- BACK START -->
-                        <webModule>
-                            <groupId>es.caib.carpeta</groupId>
-                            <artifactId>carpeta-back</artifactId>
-                            <contextRoot>/carpetaback</contextRoot>
-                            <bundleFileName>carpeta-back.war</bundleFileName>
-                        </webModule>
-                        <!-- BACK END -->
-                        <!-- FRONT START -->
-                        <webModule>
-                            <groupId>es.caib.carpeta</groupId>
-                            <artifactId>carpeta-front</artifactId>
-                            <contextRoot>/carpetafront</contextRoot>
-                            <bundleFileName>carpeta-front.war</bundleFileName>
-                        </webModule>
-                        <!-- FRONT END -->
+		<!-- ====================================== -->
+		<!-- ===== PLUGINS DE USERINFORMATION ===== -->
+		<!-- ====================================== -->
+		<dependency>
+			<groupId>org.fundaciobit.pluginsib.userinformation</groupId>
+			<artifactId>pluginsib-userinformation-keycloak</artifactId>
+			<version>2.0.1</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>resteasy-jaxrs</artifactId>
+					<groupId>org.jboss.resteasy</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>resteasy-client</artifactId>
+					<groupId>org.jboss.resteasy</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>resteasy-jackson2-provide</artifactId>
+					<groupId>org.jboss.resteasy</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.fundaciobit.pluginsib.userinformation</groupId>
+			<artifactId>pluginsib-userinformation-database</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.fundaciobit.pluginsib.userinformation</groupId>
+			<artifactId>pluginsib-userinformation-ldap</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<!-- El nom del EAR sempre és el nom del projecte d'acord amb un 4.2 de l'Estàndard CAIB -->
+		<finalName>${project.parent.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<configuration>
+					<generateApplicationXml>true</generateApplicationXml>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<includeLibInApplicationXml>false</includeLibInApplicationXml>
+					<!--suppress UnresolvedMavenProperty -->
+					<!-- Nom mòduls d'acord amb punt 4.2 de l'Estàndard CAIB -->
+					<outputFileNameMapping>@{artifactId}@-@{version}@.@{extension}@</outputFileNameMapping>
+					<version>8</version>
+					<archive>
+						<manifestEntries>
+							<project-version>${project.version}</project-version>
+							<project-buildtime>${maven.build.timestamp}</project-buildtime>
+							<scm-revision>${buildNumber}</scm-revision>
+						</manifestEntries>
+					</archive>
+					<modules>
+						<ejbModule>
+							<groupId>es.caib.carpeta</groupId>
+							<artifactId>carpeta-ejb</artifactId>
+							<bundleFileName>carpeta-ejb.jar</bundleFileName>
+						</ejbModule>
+						<!-- BACK START -->
+						<webModule>
+							<groupId>es.caib.carpeta</groupId>
+							<artifactId>carpeta-back</artifactId>
+							<contextRoot>/carpetaback</contextRoot>
+							<bundleFileName>carpeta-back.war</bundleFileName>
+						</webModule>
+						<!-- BACK END -->
+						<!-- FRONT START -->
+						<webModule>
+							<groupId>es.caib.carpeta</groupId>
+							<artifactId>carpeta-front</artifactId>
+							<contextRoot>/carpetafront</contextRoot>
+							<bundleFileName>carpeta-front.war</bundleFileName>
+						</webModule>
+						<!-- FRONT END -->
 						<!-- API EXTERNA START -->
 						<webModule>
-                            <groupId>es.caib.carpeta</groupId>
-                            <artifactId>carpeta-api-externa</artifactId>
-                            <contextRoot>/carpetaapi/externa</contextRoot>
-                            <bundleFileName>carpeta-api-externa.war</bundleFileName>
-                        </webModule>
+							<groupId>es.caib.carpeta</groupId>
+							<artifactId>carpeta-api-externa</artifactId>
+							<contextRoot>/carpetaapi/externa</contextRoot>
+							<bundleFileName>carpeta-api-externa.war</bundleFileName>
+						</webModule>
 						<!-- API EXTERNA END 
                         <webModule>
                             <groupId>es.caib.carpeta</groupId>
@@ -262,60 +232,59 @@
                             <contextRoot>/carpeta/api</contextRoot>
                         </webModule>
                          -->
-                    </modules>
-                </configuration>
-            </plugin>
-            <!--
+					</modules>
+				</configuration>
+			</plugin>
+			<!--
                 Per arrencar/desplegar automàticament l'aplicació.
                 Documentació ús: https://codehaus-cargo.github.io/cargo/Maven2+plugin.html
                 configuració: https://codehaus-cargo.github.io/cargo/Maven2+Plugin+Reference+Guide.html
             -->
-            <plugin>
-                <groupId>org.codehaus.cargo</groupId>
-                <artifactId>cargo-maven2-plugin</artifactId>
-                <configuration>
-                    <skip>false</skip>
-                    <deployables>
-                        <deployable>
-                            <properties>
-                                <name>${project.build.finalName}</name>
-                            </properties>
-                        </deployable>
-                    </deployables>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
-    <profiles>
-        <!-- Garantir que es fixa la variable d'entorn JBOSS_HOME -->
-        <profile>
-            <id>fix JBOSS_HOME</id>
-            <activation>
-                <property>
-                    <name>!env.JBOSS_HOME</name>
-                </property>
-            </activation>
-            <properties>
-                <env.JBOSS_HOME>HA DE FIXAR LA VARIABLE D'ENTORN JBOSS_HOME</env.JBOSS_HOME>
-            </properties>
-        </profile>
-        <profile>
-            <id>revisionnumber</id>
-            <activation>
-                <property>
-                    <name>revisionnumber</name>
-                </property>
-            </activation>
-            <build>
-                <plugins>
-                    <!-- Defineix la propietat ${buildNumber} que s'empra al filtrat -->
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>buildnumber-maven-plugin</artifactId>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
+				<configuration>
+					<skip>false</skip>
+					<deployables>
+						<deployable>
+							<properties>
+								<name>${project.build.finalName}</name>
+							</properties>
+						</deployable>
+					</deployables>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<profiles>
+		<!-- Garantir que es fixa la variable d'entorn JBOSS_HOME -->
+		<profile>
+			<id>fix JBOSS_HOME</id>
+			<activation>
+				<property>
+					<name>!env.JBOSS_HOME</name>
+				</property>
+			</activation>
+			<properties>
+				<env.JBOSS_HOME>HA DE FIXAR LA VARIABLE D'ENTORN JBOSS_HOME</env.JBOSS_HOME>
+			</properties>
+		</profile>
+		<profile>
+			<id>revisionnumber</id>
+			<activation>
+				<property>
+					<name>revisionnumber</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<!-- Defineix la propietat ${buildNumber} que s'empra al filtrat -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>buildnumber-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

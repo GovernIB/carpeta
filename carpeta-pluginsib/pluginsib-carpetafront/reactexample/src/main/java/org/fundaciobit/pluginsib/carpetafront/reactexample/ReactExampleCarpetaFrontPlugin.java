@@ -65,6 +65,13 @@ public class ReactExampleCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         return getTraduccio("subtitle", locale);
     }
     */
+    
+    
+    @Override
+    public boolean isPublic() {
+        return true;
+    }
+    
 
     @Override
     public String getResourceBundleName() {
@@ -88,10 +95,7 @@ public class ReactExampleCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet) {
 
-        log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
-        log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => administrationID: " + userData.getAdministrationID());
-        log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
-                + administrationEncriptedID);
+       
 
         if (query.startsWith(INDEX_HTML_PAGE)) {
 

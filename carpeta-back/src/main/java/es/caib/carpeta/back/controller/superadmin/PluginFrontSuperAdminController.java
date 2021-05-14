@@ -1,7 +1,9 @@
 package es.caib.carpeta.back.controller.superadmin;
 
+import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
+import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
@@ -13,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
+
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
@@ -54,7 +59,38 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
 
     @Override
     public int getTipus() {
-        return Constants.PLUGIN_TIPUS_FRONT;
+        return Constants.PLUGIN_TIPUS_FRONT_PRIVAT;
+    }
+
+    @Override
+    public List<StringKeyValue> getReferenceListForTipus(HttpServletRequest request, ModelAndView mav, Where where)
+            throws I18NException {
+        List<StringKeyValue> __tmp = new java.util.ArrayList<StringKeyValue>();
+        __tmp.add(new StringKeyValue("1", I18NUtils.tradueix("pluginfrontal.tipus.1")));
+        __tmp.add(new StringKeyValue("2", I18NUtils.tradueix("pluginfrontal.tipus.2")));
+        __tmp.add(new StringKeyValue("3", I18NUtils.tradueix("pluginfrontal.tipus.3")));
+        return __tmp;
+    }
+
+    @Override
+    public PluginForm getPluginForm(PluginJPA _jpa, boolean __isView, HttpServletRequest request, ModelAndView mav)
+            throws I18NException {
+        PluginForm pluginForm = super.getPluginForm(_jpa, __isView, request, mav);
+
+        pluginForm.getHiddenFields().remove(TIPUS);
+
+        return pluginForm;
+    }
+    
+    
+    
+    
+
+    @Override
+    public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
+        return Where.OR(TIPUS.equal(Constants.PLUGIN_TIPUS_FRONT_PRIVAT),
+                TIPUS.equal(Constants.PLUGIN_TIPUS_FRONT_PUBLIC),
+                TIPUS.equal(Constants.PLUGIN_TIPUS_FRONT_PUBLIC_I_PRIVAT));
     }
 
     @RequestMapping(value = "/reload/{pluginID}", method = RequestMethod.GET)
@@ -84,6 +120,8 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
             pluginFilterForm.setAttachedAdditionalJspCode(true);
 
             pluginFilterForm.getHiddenFields().remove(CONTEXT);
+            pluginFilterForm.getHiddenFields().remove(TIPUS);
+            pluginFilterForm.addHiddenField(DESCRIPCIOID);
         }
         return pluginFilterForm;
     }
@@ -174,8 +212,8 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
 
     @Override
     public void delete(HttpServletRequest request, Plugin plugin) throws Exception, I18NException {
-        String nom = findByPrimaryKey(request, plugin.getPluginID()).getNomTraduccions().get(Configuracio.getDefaultLanguage())
-                .getValor();
+        String nom = findByPrimaryKey(request, plugin.getPluginID()).getNomTraduccions()
+                .get(Configuracio.getDefaultLanguage()).getValor();
         super.delete(request, plugin);
 
         try {

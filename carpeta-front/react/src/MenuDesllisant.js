@@ -74,7 +74,7 @@ class MenuDesllisant extends Component {
 	}
 
 
-	mostrarPlugin(gravetat, missatge, pluginContext, reactComponent) {
+	mostrarPlugin(gravetat, missatge, pluginContext, tipus) {
 		switch (gravetat) {
 			case 0:
 				// No fer res
@@ -90,11 +90,33 @@ class MenuDesllisant extends Component {
 				return;
 		}
 
-		if (reactComponent) {
-			this.props.history.push(Constants.PLUGINREACT_PATH + pluginContext);
-		} else {
-			this.props.history.push(Constants.PLUGINHTML_PATH + pluginContext);
+
+
+		var url;
+		switch(tipus) {
+
+		
+			case -1: // Plugin html public
+				url = Constants.PLUGINHTML_PUBLIC_PATH + pluginContext;
+			break;
+			case -2: // Plugin react public	
+			  url = Constants.PLUGINREACT_PUBLIC_PATH + pluginContext;				
+			break;
+			case 0: // Plugin react
+				url = Constants.PLUGINREACT_PATH + pluginContext;
+			break;
+			case 1: // Plugin html
+				url = Constants.PLUGINHTML_PATH + pluginContext;
+			break;
+			default:
+				alert("El sistema no reconeix un plugin amb tipus " + tipus);
+				return;
+
 		}
+
+
+		this.props.history.push(url);
+		
 	}
 
 
@@ -169,12 +191,15 @@ class MenuDesllisant extends Component {
 			this.state.items.forEach((s, i) => {
 				switch (s.tipus) {
 
+
+					case -1: // Plugin html public
+					case -2: // Plugin react public					
 					case 0: // Plugin react
 					case 1: // Plugin html
 						allItems.push(
 							<li key={i}>
 								<button title={s.missatge} className={"botoMenu alert" + s.gravetat + "menu"}
-										onClick={(event) => this.mostrarPlugin(s.gravetat, s.missatge, s.context, s.tipus == 0 ? true : false)}>
+										onClick={(event) => this.mostrarPlugin(s.gravetat, s.missatge, s.context, s.tipus)}>
 									<img src={urlBase + s.urllogo} className="imc-icona" title="" alt=""/>
 									<span>{s.nom} </span>
 								</button>
