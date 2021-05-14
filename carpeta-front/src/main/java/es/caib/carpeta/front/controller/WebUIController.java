@@ -1398,6 +1398,7 @@ public class WebUIController extends PluginFrontController {
                 if (autenticat) {
 
                     
+
                     // menupseudoplugin
                     {
                         final int enllazType = Constants.TIPUS_ENLLAZ_FRONT_PSEUDOPLUGIN;
