@@ -131,7 +131,7 @@ public class ItemInfo implements Comparable<ItemInfo> {
         return new ItemInfo(p.getPluginID(), p.getNom(), p.getDescripcio(), p.getContext(),
                 p.isReactComponent() ? TIPUS_REACT_PLUGIN : TIPUS_HTML_PLUGIN,
                 p.getGravetat() == null ? 0 : (int) (long) p.getGravetat(), p.getMissatge(), null,
-                 request.getContextPath() + "/pluginfront/pluginicon/" + p.getPluginID(), p.getOrder());
+                  "/pluginfront/pluginicon/" + p.getPluginID(), p.getOrder());
     }
 
     public static ItemInfo createFromSeccioInfo(SeccioInfo s) {
