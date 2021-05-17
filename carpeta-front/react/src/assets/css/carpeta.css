@@ -189,6 +189,9 @@ img:hover {
     -moz-filter: grayscale(0%);
     -webkit-filter: grayscale(0%);
 }
+.alert{
+	border: 1px solid rgba(0,0,0,.125);
+}
 .alert1{
 	border-color: blue;
 	border-width: medium;
