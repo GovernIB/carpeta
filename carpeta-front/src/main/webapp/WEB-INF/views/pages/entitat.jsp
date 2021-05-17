@@ -201,8 +201,7 @@
 <script>
   var encURI = window.btoa(window.location.href);
   var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {       
-  };
+  xhttp.onreadystatechange = function() { };
   xhttp.open("GET", '<c:url value="/fa/"/>' + encURI, true);
   //xhttp.setRequestHeader("Content-type", "application/json");
   xhttp.send();

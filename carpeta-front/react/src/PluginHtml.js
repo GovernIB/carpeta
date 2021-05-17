@@ -40,8 +40,7 @@ class PluginHtml extends Component {
             // ANAM A AUTENTICACIO
             var encURI = window.btoa(window.location.href);
             var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-            };
+            xhttp.onreadystatechange = function() {  };
             xhttp.open("GET", urlBase + "/fa/" + encURI, true);
             xhttp.send();
 

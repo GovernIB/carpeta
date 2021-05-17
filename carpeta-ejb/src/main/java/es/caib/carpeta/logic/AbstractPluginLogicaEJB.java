@@ -49,7 +49,7 @@ public abstract class AbstractPluginLogicaEJB<I extends IPlugin> extends PluginL
         }
         
         
-        log.info("\n\n getAllPlugins(): WHERE => " + where.toSQL());
+        //log.info("\n\n getAllPlugins(): WHERE => " + where.toSQL());
         
         
         return select(where);
