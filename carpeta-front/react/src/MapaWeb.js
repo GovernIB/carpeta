@@ -91,7 +91,7 @@ class MapaWeb extends Component {
 								enllazos.push(
 									<p key={'pr' + i} className="lh15 upper">
 										<Link to={Constants.PLUGINREACT_PATH + s.context}>
-											<img src={urlBase + s.urllogo} alt="" title="" className="imc-icona"/>
+											<img src={urlBase + s.urllogo} alt={s.nom} title="" className="imc-icona"/>
 											{s.nom}
 										</Link>
 									</p>);
@@ -100,10 +100,10 @@ class MapaWeb extends Component {
 							case 1: // Plugin html
 								enllazos.push(
 									<p key={'ph' + i} className="lh15 upper">
-										<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-											 className="imc-icona" title="" alt=""/>
+										{/*<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}*/}
+										{/*	 className="imc-icona" title="" alt=""/>*/}
 										<Link to={Constants.PLUGINHTML_PATH + s.context}>
-											<img src={urlBase + s.urllogo} alt="" title="" className="imc-icona"/>
+											<img src={urlBase + s.urllogo} alt={s.nom} title="" className="imc-icona"/>
 											{s.nom}
 										</Link>
 									</p>);
@@ -113,7 +113,7 @@ class MapaWeb extends Component {
 								enllazos.push(
 									<p key={'s' + i} className="lh15 upper">
 										<Link to={Constants.SECCIO_PATH + s.context}>
-											<img src={s.urllogo} title={s.nom} alt={s.nom} className="imc-icona"/>
+											<img src={s.urllogo} title="" alt={s.nom} className="imc-icona"/>
 											<span className="menuRapidView">{s.nom}</span>
 										</Link>
 									</p>
@@ -124,7 +124,7 @@ class MapaWeb extends Component {
 								enllazos.push(
 									<p key={'ps' + i} className="lh15 upper">
 										<a href={s.url} target="_blank" title={s.nom}>
-											<img src={s.urllogo} alt="" title={s.nom} className="imc-icona"/>
+											<img src={s.urllogo} alt={s.nom} title="" className="imc-icona"/>
 											<span className="menuRapidView">{s.nom}</span>
 										</a>
 									</p>

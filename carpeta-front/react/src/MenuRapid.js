@@ -78,8 +78,8 @@ class MenuRapid extends Component {
                                 <li key={i} className="nav-item pr-4">
                                     <Link className="navCarpeta"
                                           to={{pathname: Constants.PLUGINHTML_PATH + s.context, nomPagina: "plugin"}}>
-                                        <img src={urlBase + s.urllogo} alt="" title="" className="imc-icona"/>
-                                        <img src={s.urllogo} alt="" title="" className="imc-icona"/>
+                                        <img src={urlBase + s.urllogo} alt={s.nom} title="" className="imc-icona"/>
+                                        {/*<img src={s.urllogo} alt="" title="" className="imc-icona"/>*/}
                                         <span className="menuRapidView">{s.nom}</span>
                                     </Link>
                                 </li>
@@ -90,7 +90,7 @@ class MenuRapid extends Component {
                             allItems.push(
                                 <li key={i} className="nav-item pr-4">
                                     <Link to={{pathname: Constants.SECCIO_PATH + s.context, nomPagina: "seccio"}}>
-                                        <img src={s.urllogo} title={s.nom} alt={s.nom} className="imc-icona"/>
+                                        <img src={s.urllogo} title="" alt={s.nom} className="imc-icona"/>
                                         <span className="menuRapidView">{s.nom}</span>
                                     </Link>
                                 </li>
@@ -101,7 +101,7 @@ class MenuRapid extends Component {
                             allItems.push(
                                 <li key={i} className="nav-item pr-4" key={i}>
                                     <a className="navCarpeta" href={s.url} target="_blank" title={s.nom}>
-                                        <img src={s.urllogo} alt="" title={s.nom} className="imc-icona"/>
+                                        <img src={s.urllogo} alt={s.nom} title="" className="imc-icona"/>
                                         <span className="menuRapidView">{s.nom}</span>
                                     </a>
                                 </li>

@@ -200,7 +200,7 @@ class MenuDesllisant extends Component {
 							<li key={i}>
 								<button title={s.missatge} className={"botoMenu alert" + s.gravetat + "menu"}
 										onClick={(event) => this.mostrarPlugin(s.gravetat, s.missatge, s.context, s.tipus)}>
-									<img src={urlBase + s.urllogo} className="imc-icona" title="" alt=""/>
+									<img src={urlBase + s.urllogo} className="imc-icona" title="" alt={s.nom} />
 									<span>{s.nom} </span>
 								</button>
 							</li>)
@@ -209,7 +209,7 @@ class MenuDesllisant extends Component {
 					case 2: // Enllaz
 						allItems.push(<li key={i}>
 							<a href={s.url} title={s.nom} target="_blank">
-								<img src={s.urllogo} title="" alt="" className="imc-icona iconaEnllas"/>
+								<img src={s.urllogo} title="" alt={s.nom} className="imc-icona iconaEnllas"/>
 								<span>{s.nom}</span>
 							</a>
 						</li>);
@@ -227,7 +227,7 @@ class MenuDesllisant extends Component {
 					case 4: // PseudoPlugin
 						allItems.push(<li key={i}>
 							<a href={s.url} target="_blank" title={s.nom}>
-								<img src={s.urllogo} title="" alt="" className="imc-icona iconaEnllas"/>
+								<img src={s.urllogo} title="" alt={s.nom} className="imc-icona iconaEnllas"/>
 								<span>{s.nom} </span>
 							</a>
 						</li>);

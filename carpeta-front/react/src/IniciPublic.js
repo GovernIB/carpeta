@@ -56,6 +56,8 @@ class IniciPublic extends Component {
 
         var htmlCode;
 
+        var baseURL = sessionStorage.getItem('contextPath');
+
         if (this.state.error) {
             htmlCode = <div className="alert alert-danger" role="alert">{this.state.error}</div>;
         } else {
@@ -89,12 +91,21 @@ class IniciPublic extends Component {
                                 className="oi oi-account-login"/>{t('paginaIniciAcces')}</p>
 
                             <p className="lh15">{t('paginaIniciClave')}</p>
-                            <div className="pt-3 imc--logoclave"/>
-                            <ul className="lh15 pl-5 pt-3 opcionesAcceso">
-                                <li><span className="oi oi-arrow-right"/>{t('paginaIniciClave1')}</li>
-                                <li><span className="oi oi-arrow-right"/>{t('paginaIniciClave2')}</li>
-                                <li><span className="oi oi-arrow-right"/>{t('paginaIniciClave3')}</li>
-                            </ul>
+
+                            <div className="row">
+                                <div className="pt-3 col-5">
+                                    <img src={baseURL + "/src/assets/images/solicitar_clave_acceso_dgt.png"} alt={t('paginaIniciLogoClave')} title={t('paginaIniciLogoClave')} />
+                                </div>
+                                <div className="pt-3 col-5">
+                                    <ul className="lh15 pt-3 opcionesAcceso">
+                                        <li><span className="oi oi-arrow-right"/>{t('paginaIniciClave1')}</li>
+                                        <li><span className="oi oi-arrow-right"/>{t('paginaIniciClave2')}</li>
+                                        <li><span className="oi oi-arrow-right"/>{t('paginaIniciClave3')}</li>
+                                    </ul>
+                                </div>
+
+                            </div>
+
                             <br className="clearBoth"/>
                         </div>
 

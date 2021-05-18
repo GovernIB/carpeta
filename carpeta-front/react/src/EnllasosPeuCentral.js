@@ -73,7 +73,7 @@ class EnllasosPeuCentral extends Component {
                     <li key={i}>
                         <a href={s.url} target="_blank">
                             <span>{s.label}</span>
-                            <img src={s.urllogo} title="" alt=""/>
+                            <img src={s.urllogo} title="" alt={s.label}/>
                         </a>
                     </li>
                 ))

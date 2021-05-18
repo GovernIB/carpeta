@@ -51,7 +51,7 @@ class LogoLateral extends Component {
             } else {
                 content = this.state.infologolateral.map((s, i) => (
                     <a href={s.url} className="imc--goib" title={s.label} key={i} target="_blank">
-                        <img src={s.urllogo} style={{maxWidth: "70%"}} title="" alt="" className="logo-govern"/>
+                        <img src={s.urllogo} style={{maxWidth: "70%"}} title="" alt={s.label} className="logo-govern"/>
                         <span>{s.label}</span>
                     </a>
                 ))
