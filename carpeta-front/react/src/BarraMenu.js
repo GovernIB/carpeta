@@ -89,7 +89,7 @@ class BarraMenu extends Component {
 				content = this.state.enllasosMenuBar.map((s, i) => (
 					<li className="itemBar" key={i}>
 						<a href={s.url} className="imc-bt-menubar" target="_blank">
-							<img src={s.urllogo} title="" alt="" className="logoMenuBar"/>
+							<img src={s.urllogo} title="" alt={s.label} className="logoMenuBar"/>
 							<span>{s.label}</span>
 						</a>
 					</li>
@@ -103,22 +103,28 @@ class BarraMenu extends Component {
 			<div id = "barraMenu">
 				<header className="imc-titol" style={styleColorMenu}>
 
-					<nav className="imc--contingut">
+					<nav className="">
+						<div className="row imc--contingut">
 
 						{/*<a href="{this.context.router.goBack()}" className="imc-torna"*/}
 						{/*   title={t('menuTorna')}><span>{t('menuTorna')}</span></a>*/}
-						<h1>
-							<span>{t('menuTitol')}</span>
-						</h1>
 
-						<ul>
-							{content}
-							<li>
-								<button type="button" className="imc-bt-menu" id="imc-bt-menu" title={t('menuMenu')}>
+							<div className="col-11 pl-0">
+								<h1>
+									<span>{t('menuTitol')}</span>
+								</h1>
+
+								<ul>
+									{content}
+								</ul>
+							</div>
+
+							<div className="col-1 pr-0">
+								<button type="button" className="imc-bt-menu float-right" id="imc-bt-menu" title={t('menuMenu')}>
 									{/*<span>{t('menuMenu')}</span>*/}
 								</button>
-							</li>
-						</ul>
+							</div>
+						</div>
 					</nav>
 
 				</header>

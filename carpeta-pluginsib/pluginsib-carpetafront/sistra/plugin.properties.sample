@@ -3,16 +3,23 @@
 # Common
 es.caib.carpeta.pluginsib.carpetafront.sistra.development=true
 
+#es.caib.carpeta.pluginsib.carpetafront.sistra.logo=D:\\dades\\dades\\CarpetesPersonals\\ProgramacioPortaFIB3\\carpeta\\carpeta-pluginsib\\pluginsib-carpetafront\\reactexample\\src\\main\\resources\\logo\\logo-reactexample.png
+
 
 # Sistra 1
-es.caib.carpeta.pluginsib.carpetafront.sistra1.url=https://dev.caib.es/sistraback/zonaperws/services/v2/BackofficeFacade
-es.caib.carpeta.pluginsib.carpetafront.sistra1.user=usr
-es.caib.carpeta.pluginsib.carpetafront.sistra1.pass=pwd
+es.caib.carpeta.pluginsib.carpetafront.sistra1.url=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.url"]]
+es.caib.carpeta.pluginsib.carpetafront.sistra1.user=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.user"]]
+es.caib.carpeta.pluginsib.carpetafront.sistra1.pass=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.pass"]]
 es.caib.carpeta.pluginsib.carpetafront.sistra1.level=2
-# {0} will be replaced with IdSesionTramitacion
-es.caib.carpeta.pluginsib.carpetafront.sistra1.web=https://www.caib.es/sistrafront/zonaperfront/protected/init.do
+es.caib.carpeta.pluginsib.carpetafront.sistra1.web=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.web"]]
 
 # Sistra 2
-es.caib.carpeta.pluginsib.carpetafront.sistra2.url=https://dev.caib.es/sistramitws/rest/externa/v1
-es.caib.carpeta.pluginsib.carpetafront.sistra2.user=usr
-es.caib.carpeta.pluginsib.carpetafront.sistra2.pass=pwd
+es.caib.carpeta.pluginsib.carpetafront.sistra2.url=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra2.url"]]
+es.caib.carpeta.pluginsib.carpetafront.sistra2.user=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra2.user"]]
+es.caib.carpeta.pluginsib.carpetafront.sistra2.pass=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra2.pass"]]
+
+# Regweb3.2
+es.caib.carpeta.pluginsib.carpetafront.regweb32.url=[=SP["es.caib.carpeta.pluginsib.carpetafront.regweb32.url"]]
+es.caib.carpeta.pluginsib.carpetafront.regweb32.user=[=SP["es.caib.carpeta.pluginsib.carpetafront.regweb32.user"]]
+es.caib.carpeta.pluginsib.carpetafront.regweb32.pass=[=SP["es.caib.carpeta.pluginsib.carpetafront.regweb32.pass"]]
+es.caib.carpeta.pluginsib.carpetafront.sistra.entidad=A04003003

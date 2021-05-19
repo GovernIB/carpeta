@@ -1224,8 +1224,9 @@ public class WebUIController extends PluginFrontController {
                 
                 log.info(" XYZ ZZZ  REQUEST CALL fullinfo \n entitatID == " + entitatID + "\n");
                 
-                
-                List<PluginInfo> pluginsEntitat = utilsEjb.getFrontPlugins(entitatID, lang, seccioID);
+                // XYZ ZZZ Suportar multiples nivells de PLugins Publics ????
+                final boolean autenticat = true;
+                List<PluginInfo> pluginsEntitat = utilsEjb.getFrontPlugins(entitatID, lang, seccioID, autenticat);
                 fullInfo.put("veureplugins", pluginsEntitat);
                 
                 // Menus de Links
@@ -1384,18 +1385,19 @@ public class WebUIController extends PluginFrontController {
                 }
                 
                 
+                // PLUGINS segons autenticat
+                {
+                    List<PluginInfo> pluginsEntitat = utilsEjb.getFrontPlugins(entitatID, lang, seccioID, autenticat);
+                  //fullInfo.put("veureplugins", pluginsEntitat);
+                    for (PluginInfo pluginInfo : pluginsEntitat) {
+                        items.add(ItemInfo.createFromPluginInfo(pluginInfo));
+                    }
+                }
+                
+                
                 if (autenticat) {
 
                     
-                    
-                    // Plugins
-                    {
-                        List<PluginInfo> pluginsEntitat = utilsEjb.getFrontPlugins(entitatID, lang, seccioID);
-                      //fullInfo.put("veureplugins", pluginsEntitat);
-                        for (PluginInfo pluginInfo : pluginsEntitat) {
-                            items.add(ItemInfo.createFromPluginInfo(pluginInfo));
-                        }
-                    }
 
                     // menupseudoplugin
                     {
@@ -1416,7 +1418,8 @@ public class WebUIController extends PluginFrontController {
                             items.add(ItemInfo.createFromSeccioInfo(s));
                         }
                     }
-                }
+                } 
+                
                 
                 Collections.sort(items);
                 
@@ -1424,7 +1427,7 @@ public class WebUIController extends PluginFrontController {
                 
                 cacheFullInfo.put(fullID, fullInfo);
 
-            }
+                }
             
             // Passar JSON de pluginsEntitat
             Gson gson = new Gson();

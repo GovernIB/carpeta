@@ -22,11 +22,23 @@ public class CarpetaFrontModulePublicController extends AbstractCarpetaFrontModu
     @Override
     public UserData getUserData(String administrationID) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        
-        UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado) authentication.getPrincipal();
-        UsuarioClave uc = usuarioAutenticado.getUsuarioClave();
 
-        return new UserData(uc.getNombre(), uc.getApellido1(), uc.getApellido2(), uc.getNif(), uc.getMetodoAutentificacion(), uc.getQaa());
+        UserData userData = null;
+
+        if (authentication != null) {
+
+            Object principal = authentication.getPrincipal();
+
+            if (principal != null && principal instanceof UsuarioAutenticado) {
+
+                UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado) principal;
+                UsuarioClave uc = usuarioAutenticado.getUsuarioClave();
+                userData = new UserData(uc.getNombre(), uc.getApellido1(), uc.getApellido2(), uc.getNif(),
+                        uc.getMetodoAutentificacion(), uc.getQaa());
+            }
+        }
+
+        return userData;
     }
 
 }

@@ -55,7 +55,7 @@
         <div class="imc-logo">
             <div>
                 <a href="javascript:window.location.reload(true)" class="imc--goib" title="<fmt:message key="entitats.carpeta"/>">
-                    <img src="<c:url value="/src/assets/images/icon.png"/>" title="" alt="" class="logo-govern" style="max-width: 70%;"/>
+                    <img src="<c:url value="/src/assets/images/icon.png"/>" title="" alt="<fmt:message key="entitats.carpeta"/>" class="logo-govern" style="max-width: 70%;"/>
                     <span><fmt:message key="entitats.carpeta"/></span>
                 </a>
             </div>
@@ -127,7 +127,7 @@
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
                                                 <button class="card col-md-12 align-items-lg-center capsaPlugin pt-3" onclick="location.href='<c:url value="/e/${entitat.codi}"/>'">
                                                     <span class="card-title titol pl-1 h3">
-                                                        <img src="<c:url value="/webui/entityicon/${entitat.entitatID}"/>" alt="" title="" class="imc-icona">
+                                                        <img src="<c:url value="/webui/entityicon/${entitat.entitatID}"/>" alt="${entitat.nom.getTraduccio(langActual).valor}" title="" class="imc-icona">
                                                     </span>
                                                     <span class="titolPlugin titol h3 titolCentrat">${entitat.nom.getTraduccio(langActual).valor}</span>
                                                     <span class="card-text mb-3 mt-3 alignCenter"><i>${(empty entitat.descripcio)?'':entitat.descripcio.getTraduccio(langActual).valor}</i></span>
@@ -201,8 +201,7 @@
 <script>
   var encURI = window.btoa(window.location.href);
   var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {       
-  };
+  xhttp.onreadystatechange = function() { };
   xhttp.open("GET", '<c:url value="/fa/"/>' + encURI, true);
   //xhttp.setRequestHeader("Content-type", "application/json");
   xhttp.send();

@@ -64,6 +64,7 @@ public class PluginFrontController extends CommonFrontController {
 
     protected final Log log = LogFactory.getLog(getClass());
 
+    /*
     @RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
     public ModelAndView showAllPlugins(HttpServletRequest request, HttpServletResponse response) throws I18NException {
 
@@ -88,6 +89,7 @@ public class PluginFrontController extends CommonFrontController {
         return mav;
 
     }
+    */
 
     @RequestMapping(value = "/showplugin/{pluginContext}/{idioma}", method = RequestMethod.POST)
     public ModelAndView showNormalPlugin(@PathVariable("pluginContext") String pluginContext,
@@ -152,19 +154,26 @@ public class PluginFrontController extends CommonFrontController {
             HttpServletResponse response, Authentication authentication, boolean isreact, String pluginParameter)
             throws Exception, I18NException {
 
-        String administrationID = "";
-        String baseFront = "";
+        final String administrationID;
+        final UsuarioClave usuarioClave; 
 
-        UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado) authentication.getPrincipal();
-        administrationID = usuarioAutenticado.getUsuarioClave().getNif();
+        if (authentication != null) {
+            UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado) authentication.getPrincipal();
+            administrationID = usuarioAutenticado.getUsuarioClave().getNif();
+            usuarioClave = usuarioAutenticado.getUsuarioClave();
+        } else {
+            administrationID = null;
+            usuarioClave = null;
+        }
 
         // TODO canviar, mirar javascript window.location.href
         String urlBase = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
                 + request.getContextPath();
+        String baseFront = "";
         baseFront = urlBase;
 
         String urlToShowPluginPage = startPublicSignatureProcess(request, response, pluginID, administrationID,
-                baseFront, usuarioAutenticado.getUsuarioClave(), pluginParameter);
+                baseFront, usuarioClave , pluginParameter);
         ModelAndView mav = new ModelAndView(new RedirectView(urlToShowPluginPage));
 
         try {
@@ -192,20 +201,31 @@ public class PluginFrontController extends CommonFrontController {
             if (isreact) {
                 mav = new ModelAndView(new RedirectView(urlToShowPluginPage));
             } else {
+                
+                log.info("XXXXXXXXXXXXXXXX   PLUGIN HTML 11111111");
+                
                 final String view = "plugin_contenidor"; // => \WEB-INF\views\pages\plugin_contenidor.jsp
 
                 mav = new ModelAndView(view);
                 // mav.addObject("signaturesSetID", signaturesSetID);
                 mav.addObject("urlToShowPluginPage", urlToShowPluginPage);
+            
+                log.info("XXXXXXXXXXXXXXXX   PLUGIN HTML 22222222222");
             }
 
         } catch (Throwable e) {
+            /* XYZ ZZZ S?HA DE REGISTRRA UN ERROR NO UN ACCESS
             EntitatJPA entitatJPA = entitatEjb.findByCodi(sesionHttp.getEntitat());
+            
             accesLogicaEjb.crearAcces(usuarioAutenticado.getUsuarioClave(), TIPUS_ACCES_PLUGIN,
                     entitatJPA.getEntitatID(), pluginID, new Timestamp(new Date().getTime()),
                     LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress(), false);
+            */
             processExceptionHtml(e, request, response);
         }
+        
+        
+        log.info(" FINAL de showPlugin !!!!!!!!!!!");
 
         return mav;
 
@@ -223,6 +243,12 @@ public class PluginFrontController extends CommonFrontController {
         log.info("startPublicSignatureProcess => pluginParameter: ]" + pluginParameter + "[");
 
         String context = AbstractCarpetaFrontModuleController.PUBLIC_CONTEXTWEB;
+        
+        if (administrationID == null) {
+            // XYZ ZZZ
+            administrationID = "12345678Z";
+        }
+        
 
         String administrationIDEncriptat = HibernateFileUtil.encryptString(administrationID);
 
@@ -303,7 +329,8 @@ public class PluginFrontController extends CommonFrontController {
             // String codiEntitat = sesionHttp.getEntitat();
             Long entitatID = sesionHttp.getEntitatID();
 
-            List<PluginInfo> pluginsEntitat = utilsEjb.getFrontPlugins(entitatID, lang, seccioID);
+            final boolean autenticat = true; 
+            List<PluginInfo> pluginsEntitat = utilsEjb.getFrontPlugins(entitatID, lang, seccioID, autenticat);
 
             // Passar JSON de pluginsEntitat
             Gson gson = new Gson();

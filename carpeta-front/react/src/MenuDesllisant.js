@@ -18,7 +18,8 @@ class MenuDesllisant extends Component {
 		this.state = {
 			idiomes: [],
 			items: [], // plugins, menuEnllasos, menupseudoplugin i seccions
-			error: null
+			error: null,
+			colorMenu: null
 		}
 		this.canviarIdioma = this.canviarIdioma.bind(this);
 
@@ -69,12 +70,32 @@ class MenuDesllisant extends Component {
 				});
 			});
 
+		var url2 = baseURL + `/webui/infoEntitat`;
+
+		axios.get(url2)
+			.then(res => {
+				this.setState({ colorMenu : res.data.color });
+			})
+			.catch(error => {
+				console.log(JSON.stringify(error));
+				if (error.response) {
+					console.log("error.response.data: " + error.response.data);
+					console.log("error.response.status: " + error.response.status);
+					console.log("error.response.headers: " + error.response.headers);
+				}
+				this.setState({
+					loading:false,
+					entitats: "",
+					error: JSON.stringify(error)
+				});
+			});
+
 		menuDesllisantJS();
 
 	}
 
 
-	mostrarPlugin(gravetat, missatge, pluginContext, reactComponent) {
+	mostrarPlugin(gravetat, missatge, pluginContext, tipus) {
 		switch (gravetat) {
 			case 0:
 				// No fer res
@@ -90,11 +111,33 @@ class MenuDesllisant extends Component {
 				return;
 		}
 
-		if (reactComponent) {
-			this.props.history.push(Constants.PLUGINREACT_PATH + pluginContext);
-		} else {
-			this.props.history.push(Constants.PLUGINHTML_PATH + pluginContext);
+
+
+		var url;
+		switch(tipus) {
+
+		
+			case -1: // Plugin html public
+				url = Constants.PLUGINHTML_PUBLIC_PATH + pluginContext;
+			break;
+			case -2: // Plugin react public	
+			  url = Constants.PLUGINREACT_PUBLIC_PATH + pluginContext;				
+			break;
+			case 0: // Plugin react
+				url = Constants.PLUGINREACT_PATH + pluginContext;
+			break;
+			case 1: // Plugin html
+				url = Constants.PLUGINHTML_PATH + pluginContext;
+			break;
+			default:
+				alert("El sistema no reconeix un plugin amb tipus " + tipus);
+				return;
+
 		}
+
+
+		this.props.history.push(url);
+		
 	}
 
 
@@ -169,13 +212,16 @@ class MenuDesllisant extends Component {
 			this.state.items.forEach((s, i) => {
 				switch (s.tipus) {
 
+
+					case -1: // Plugin html public
+					case -2: // Plugin react public					
 					case 0: // Plugin react
 					case 1: // Plugin html
 						allItems.push(
 							<li key={i}>
 								<button title={s.missatge} className={"botoMenu alert" + s.gravetat + "menu"}
-										onClick={(event) => this.mostrarPlugin(s.gravetat, s.missatge, s.context, s.tipus == 0 ? true : false)}>
-									<img src={urlBase + s.urllogo} className="imc-icona" title="" alt=""/>
+										onClick={(event) => this.mostrarPlugin(s.gravetat, s.missatge, s.context, s.tipus)}>
+									<img src={urlBase + s.urllogo} className="imc-icona" title="" alt={s.nom} />
 									<span>{s.nom} </span>
 								</button>
 							</li>)
@@ -184,7 +230,7 @@ class MenuDesllisant extends Component {
 					case 2: // Enllaz
 						allItems.push(<li key={i}>
 							<a href={s.url} title={s.nom} target="_blank">
-								<img src={s.urllogo} title="" alt="" className="imc-icona iconaEnllas"/>
+								<img src={s.urllogo} title="" alt={s.nom} className="imc-icona iconaEnllas"/>
 								<span>{s.nom}</span>
 							</a>
 						</li>);
@@ -202,7 +248,7 @@ class MenuDesllisant extends Component {
 					case 4: // PseudoPlugin
 						allItems.push(<li key={i}>
 							<a href={s.url} target="_blank" title={s.nom}>
-								<img src={s.urllogo} title="" alt="" className="imc-icona iconaEnllas"/>
+								<img src={s.urllogo} title="" alt={s.nom} className="imc-icona iconaEnllas"/>
 								<span>{s.nom} </span>
 							</a>
 						</li>);
@@ -229,9 +275,11 @@ class MenuDesllisant extends Component {
 			}
 		}
 
+		const styleColorMenu = (this.state.colorMenu === null)? { backgroundColor : '#32814B'} : { backgroundColor : "#"+this.state.colorMenu};
+
 		return (
 			<div>
-				<div className="imc-cercador" id="imc-cercador">
+				<div className="imc-cercador" id="imc-cercador" style={styleColorMenu}>
 				</div>
 				<ul>
 					<li className="imc-marc-ico imc--idioma">

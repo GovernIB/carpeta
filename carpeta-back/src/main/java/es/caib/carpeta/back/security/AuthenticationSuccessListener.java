@@ -22,6 +22,9 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.util.WebUtils;
 
 import java.util.*;
 
@@ -147,6 +150,18 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                 }
             }
         }
+
+        // Rol actiu
+        ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+
+        if(containsRoleSuper){
+            WebUtils.setSessionAttribute(sra.getRequest(), "rolBack", Constants.ROLE_SUPER);
+        } else if(containsRoleAdEn){
+            WebUtils.setSessionAttribute(sra.getRequest(), "rolBack", Constants.ROLE_ADMIN);
+        } else{
+            WebUtils.setSessionAttribute(sra.getRequest(), "rolBack", null);
+        }
+
 
         UsuariJPA usuariPersona;
 
@@ -417,8 +432,16 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
         try {
             // AUDITORIA
             if (loginInfo.getUsuariPersona() != null) {
-                authenticationLogicaEjb.crearAuditoria(loginInfo.getEntitatID(),
-                        loginInfo.getUsuariPersona().getUsername());
+
+                if (Constants.ROLE_SUPER.equals(WebUtils.getRequiredSessionAttribute(sra.getRequest(), "rolBack"))) {
+                    authenticationLogicaEjb.crearAuditoria(null,
+                            loginInfo.getUsuariPersona().getUsername());
+
+                } else if (Constants.ROLE_ADMIN.equals(WebUtils.getRequiredSessionAttribute(sra.getRequest(), "rolBack"))){
+                    authenticationLogicaEjb.crearAuditoria(loginInfo.getEntitatID(),
+                            loginInfo.getUsuariPersona().getUsername());
+                }
+
             }
         } catch (I18NException ie) {
             log.error("S'ha produit un error creant el log");

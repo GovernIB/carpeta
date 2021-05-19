@@ -96,7 +96,7 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
         String value = getProperty(getPropertyKeyBase() + tipus + "." + lang);
         
         if (value == null) {
-            if (titlesInfo != null) {
+            if (getTitlesInfo() != null) {
                 if ("title".equals(tipus)) {
                     value = getTitlesInfo().getTitlesByLang().get(lang);
                 } else {
@@ -107,7 +107,7 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
         
         if (value == null) {
             value="Algun error ha provocat que no es pogues obtenir el " 
-                + tipus + " de la informació de títols/subtitols passada a traves del mètode initTitles "
+                + tipus + " de la informació de títols/subtitols passada a traves del mètode setTitlesInfo(). "
                 + " També pot definir la propietat [" + getPropertyBase() + tipus + "." + lang + "]";
         }
         
@@ -115,6 +115,10 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
     }
 
    
+    @Override
+    public boolean isPublic() {
+        return false;
+    }
 
 
     // ----------------------------------------------------------------------------
@@ -158,10 +162,12 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
     private final Map<String, InternalUserData> userDataMap = new HashMap<String, AbstractCarpetaFrontPlugin.InternalUserData>();
 
     protected void registerUserData(UserData userData) {
-        synchronized (userDataMap) {
-            cleanOldUserData();
-            userDataMap.put(userData.getAdministrationID(), new InternalUserData(userData));
-
+        if (userData != null) {
+            synchronized (userDataMap) {
+                cleanOldUserData();
+                userDataMap.put(userData.getAdministrationID(), new InternalUserData(userData));
+    
+            }
         }
 
     }
@@ -216,7 +222,7 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
 
             UserData userData = getUserData(administrationID);
 
-            if (userData == null) {
+            if (userData == null && !isPublic()) {
                 String titol = (isGet ? "GET" : "POST") + " " + getTitle(new Locale("ca"))
                         + ": No tenim informació de l´usuari amb AdministrationID [" + administrationID
                         + "]. Recordi a cridar  registerUserData() en el mètode getStartUrl()";
@@ -240,22 +246,30 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
     public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet) {
+        
+        String administrationID;
+        if (userData == null) {
+            administrationID = null;
+        } else {
+            administrationID = userData.getAdministrationID();
+        }
+        
 
         if (query.startsWith(WEBRESOURCE)) {
 
-            retornarRecursLocal(absolutePluginRequestPath, relativePluginRequestPath, userData.getAdministrationID(),
+            retornarRecursLocal(absolutePluginRequestPath, relativePluginRequestPath, administrationID,
                     query, request, response, locale);
 
         } else if (query.startsWith(WEBRESOURCECOMMON)) {
 
-            retornarRecursLocal(absolutePluginRequestPath, relativePluginRequestPath, userData.getAdministrationID(),
+            retornarRecursLocal(absolutePluginRequestPath, relativePluginRequestPath, administrationID,
                     query, request, response, locale);
 
         } else {
             // XYZ Fer un missatges com toca
             String titol = (isGet ? "GET" : "POST") + " " + getTitle(new Locale("ca")) + " DESCONEGUT";
             requestNotFoundError(titol, absolutePluginRequestPath, relativePluginRequestPath, query,
-                    userData.getAdministrationID(), request, response, locale);
+                    administrationID, request, response, locale);
         }
     }
 

@@ -26,6 +26,8 @@ public class PluginForm extends CarpetaBaseForm {
       this.plugin = __toClone.plugin;
     this.listOfTraduccioForNomID = __toClone.listOfTraduccioForNomID;
     this.listOfTraduccioForDescripcioID = __toClone.listOfTraduccioForDescripcioID;
+    this.listOfTraduccioForTitolLlargID = __toClone.listOfTraduccioForTitolLlargID;
+    this.listOfTraduccioForSubtitolLlargID = __toClone.listOfTraduccioForSubtitolLlargID;
     this.listOfValuesForTipus = __toClone.listOfValuesForTipus;
   }
   
@@ -85,6 +87,30 @@ public class PluginForm extends CarpetaBaseForm {
 
   public void setListOfTraduccioForDescripcioID(List<StringKeyValue> listOfTraduccioForDescripcioID) {
     this.listOfTraduccioForDescripcioID = listOfTraduccioForDescripcioID;
+  }
+
+
+
+  private List<StringKeyValue> listOfTraduccioForTitolLlargID;
+
+  public List<StringKeyValue> getListOfTraduccioForTitolLlargID() {
+    return this.listOfTraduccioForTitolLlargID;
+  }
+
+  public void setListOfTraduccioForTitolLlargID(List<StringKeyValue> listOfTraduccioForTitolLlargID) {
+    this.listOfTraduccioForTitolLlargID = listOfTraduccioForTitolLlargID;
+  }
+
+
+
+  private List<StringKeyValue> listOfTraduccioForSubtitolLlargID;
+
+  public List<StringKeyValue> getListOfTraduccioForSubtitolLlargID() {
+    return this.listOfTraduccioForSubtitolLlargID;
+  }
+
+  public void setListOfTraduccioForSubtitolLlargID(List<StringKeyValue> listOfTraduccioForSubtitolLlargID) {
+    this.listOfTraduccioForSubtitolLlargID = listOfTraduccioForSubtitolLlargID;
   }
 
 

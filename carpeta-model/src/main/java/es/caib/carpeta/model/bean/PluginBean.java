@@ -13,6 +13,8 @@ private static final long serialVersionUID = 1605894563L;
 	long pluginID;// PK
 	long nomID;
 	java.lang.Long descripcioID;
+	java.lang.Long titolLlargID;
+	java.lang.Long subtitolLlargID;
 	java.lang.String context;
 	java.lang.Long logoID;
 	java.lang.String classe;
@@ -26,10 +28,12 @@ private static final long serialVersionUID = 1605894563L;
   }
 
   /** Constructor amb tots els camps  */
-  public PluginBean(long pluginID , long nomID , java.lang.Long descripcioID , java.lang.String context , java.lang.Long logoID , java.lang.String classe , java.lang.String propietats , boolean actiu , int tipus) {
+  public PluginBean(long pluginID , long nomID , java.lang.Long descripcioID , java.lang.Long titolLlargID , java.lang.Long subtitolLlargID , java.lang.String context , java.lang.Long logoID , java.lang.String classe , java.lang.String propietats , boolean actiu , int tipus) {
     this.pluginID=pluginID;
     this.nomID=nomID;
     this.descripcioID=descripcioID;
+    this.titolLlargID=titolLlargID;
+    this.subtitolLlargID=subtitolLlargID;
     this.context=context;
     this.logoID=logoID;
     this.classe=classe;
@@ -38,9 +42,11 @@ private static final long serialVersionUID = 1605894563L;
     this.tipus=tipus;
 }
   /** Constructor sense valors autoincrementals */
-  public PluginBean(long nomID , java.lang.Long descripcioID , java.lang.String context , java.lang.Long logoID , java.lang.String classe , java.lang.String propietats , boolean actiu , int tipus) {
+  public PluginBean(long nomID , java.lang.Long descripcioID , java.lang.Long titolLlargID , java.lang.Long subtitolLlargID , java.lang.String context , java.lang.Long logoID , java.lang.String classe , java.lang.String propietats , boolean actiu , int tipus) {
     this.nomID=nomID;
     this.descripcioID=descripcioID;
+    this.titolLlargID=titolLlargID;
+    this.subtitolLlargID=subtitolLlargID;
     this.context=context;
     this.logoID=logoID;
     this.classe=classe;
@@ -61,6 +67,8 @@ private static final long serialVersionUID = 1605894563L;
     this.setPluginID(__bean.getPluginID());
     this.setNomID(__bean.getNomID());
     this.setDescripcioID(__bean.getDescripcioID());
+    this.setTitolLlargID(__bean.getTitolLlargID());
+    this.setSubtitolLlargID(__bean.getSubtitolLlargID());
     this.setContext(__bean.getContext());
     this.setLogoID(__bean.getLogoID());
     this.setClasse(__bean.getClasse());
@@ -90,6 +98,20 @@ private static final long serialVersionUID = 1605894563L;
 	};
 	public void setDescripcioID(java.lang.Long _descripcioID_) {
 		this.descripcioID = _descripcioID_;
+	};
+
+	public java.lang.Long getTitolLlargID() {
+		return(titolLlargID);
+	};
+	public void setTitolLlargID(java.lang.Long _titolLlargID_) {
+		this.titolLlargID = _titolLlargID_;
+	};
+
+	public java.lang.Long getSubtitolLlargID() {
+		return(subtitolLlargID);
+	};
+	public void setSubtitolLlargID(java.lang.Long _subtitolLlargID_) {
+		this.subtitolLlargID = _subtitolLlargID_;
 	};
 
 	public java.lang.String getContext() {
@@ -144,6 +166,8 @@ private static final long serialVersionUID = 1605894563L;
     __tmp.setPluginID(__bean.getPluginID());
     __tmp.setNomID(__bean.getNomID());
     __tmp.setDescripcioID(__bean.getDescripcioID());
+    __tmp.setTitolLlargID(__bean.getTitolLlargID());
+    __tmp.setSubtitolLlargID(__bean.getSubtitolLlargID());
     __tmp.setContext(__bean.getContext());
     __tmp.setLogoID(__bean.getLogoID());
     __tmp.setClasse(__bean.getClasse());

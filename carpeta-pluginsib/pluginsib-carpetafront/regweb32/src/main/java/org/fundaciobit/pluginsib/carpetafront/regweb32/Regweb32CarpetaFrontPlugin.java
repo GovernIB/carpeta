@@ -376,10 +376,9 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 
         String plantilla = IOUtils.toString(input, "UTF-8");
 
-        // XYZ ZZZ
+
         map.put("resources", absolutePluginRequestPath + "/" + WEBRESOURCECOMMON);
 
-        // XYZ ZZZ
         map.put("form_action", absolutePluginRequestPath + "/" + LLISTAT_REGISTRES_PAGE);
         map.put("lang", locale.getLanguage());
 

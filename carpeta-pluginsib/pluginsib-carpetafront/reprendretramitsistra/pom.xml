@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>carpeta-pluginsib-carpetafront-reprendretramitsistra</artifactId>
+
+    <name>Carpeta - PluginsIB - Carpeta Front - Reprendre Tramit Sistra</name>
+    
+    <parent>
+        <groupId>es.caib.carpeta</groupId>        
+        <artifactId>carpeta-pluginsib-carpetafront</artifactId>
+        <version>1.1.10</version>
+    </parent>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>es.caib.carpeta</groupId>
+            <version>1.1.10</version>
+            <artifactId>carpeta-pluginsib-carpetafront-api</artifactId>
+        </dependency>
+        
+       
+        <dependency>
+            <groupId>es.caib.carpeta</groupId>
+            <artifactId>carpeta-commons</artifactId>
+            <version>1.1.10</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.xml.ws</groupId>
+            <artifactId>jaxws-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+		    <groupId>javax.ws.rs</groupId>
+		    <artifactId>javax.ws.rs-api</artifactId>
+		    <version>2.0</version>
+		    <scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>javax.json</groupId>
+		    <artifactId>javax.json-api</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+            <scope>provided</scope>
+        </dependency>
+		
+
+        <dependency>
+             <groupId>org.fundaciobit.pluginsib.utils</groupId>
+             <artifactId>pluginsib-utils-templateengine</artifactId>
+             <version>2.0.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>rt</artifactId>
+            <version>2.3.1</version>
+            <scope>test</scope>
+            <exclusions>
+              <exclusion>
+               <groupId>xml-apis</groupId>
+               <artifactId>xml-apis</artifactId>
+              </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- Sistra1 -->
+        <dependency>
+            <groupId>es.caib.sistra</groupId>
+            <artifactId>zonaper-ws-api</artifactId>
+            <version>3.5.24</version>
+        </dependency>
+        
+        
+        
+        <dependency>
+		    <groupId>javax.json.bind</groupId>
+		    <artifactId>javax.json.bind-api</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+
+    </dependencies>
+</project>

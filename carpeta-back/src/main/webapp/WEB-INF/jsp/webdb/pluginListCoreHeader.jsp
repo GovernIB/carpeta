@@ -21,6 +21,12 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.DESCRIPCIOID)}">
         <th>${car:getSortIcons(__theFilterForm,PluginFields.DESCRIPCIOID)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.TITOLLLARGID)}">
+        <th>${car:getSortIcons(__theFilterForm,PluginFields.TITOLLLARGID)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.SUBTITOLLLARGID)}">
+        <th>${car:getSortIcons(__theFilterForm,PluginFields.SUBTITOLLLARGID)}</th>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.CONTEXT)}">
         <th>${car:getSortIcons(__theFilterForm,PluginFields.CONTEXT)}</th>
         </c:if>

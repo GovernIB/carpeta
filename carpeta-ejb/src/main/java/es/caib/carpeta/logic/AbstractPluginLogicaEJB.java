@@ -12,8 +12,12 @@ import org.fundaciobit.pluginsib.core.utils.PluginsManager;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import java.io.StringReader;
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Properties;
 
 /**
  *
@@ -23,7 +27,9 @@ import java.util.*;
 public abstract class AbstractPluginLogicaEJB<I extends IPlugin> extends PluginLogicaEJB
         implements AbstractPluginLogicaService<I> {
 
-    protected abstract int getTipusDePlugin();
+
+    
+    protected abstract Where getWhereTipusDePlugin();
 
     protected abstract String getName();
 
@@ -37,23 +43,39 @@ public abstract class AbstractPluginLogicaEJB<I extends IPlugin> extends PluginL
     public List<Plugin> getAllPlugins(Where w) throws I18NException {
         Where where;
         if (w == null) {
-            where = Where.AND(TIPUS.equal(getTipusDePlugin()), ACTIU.equal(true));
+            where = Where.AND(getWhereTipusDePlugin(), ACTIU.equal(true));
         } else {
-            where = Where.AND(w, TIPUS.equal(getTipusDePlugin()), ACTIU.equal(true));
+            where = Where.AND(w, getWhereTipusDePlugin(), ACTIU.equal(true));
         }
+        
+        
+        //log.info("\n\n getAllPlugins(): WHERE => " + where.toSQL());
+        
+        
         return select(where);
     }
     
 
     @Override
     public Where getWhere() {
-        return Where.AND(TIPUS.equal(getTipusDePlugin()), ACTIU.equal(true)
+        return Where.AND(getWhereTipusDePlugin(), ACTIU.equal(true)
 
         // TODO Elegim plugin entre les genèriques o entre els específics per l'entitat
         // Where.OR(ENTITATID.isNull(), ENTITATID.equal(entitatID))
         );
     }
    
+    
+    @Override
+    public boolean existsInstanceForPluginID(long pluginID) throws I18NException {
+        IPlugin pluginInstance = getPluginFromCache(pluginID);
+
+        if (pluginInstance == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     
 
     @Override
@@ -113,7 +135,7 @@ public abstract class AbstractPluginLogicaEJB<I extends IPlugin> extends PluginL
 
         List<I> plugins = new ArrayList<I>();
 
-        Where where = Where.AND(TIPUS.equal(getTipusDePlugin()), ACTIU.equal(true));
+        Where where = Where.AND(getWhereTipusDePlugin(), ACTIU.equal(true));
 
         if (filterByPluginID != null && filterByPluginID.size() != 0) {
             where = Where.AND(where, PLUGINID.in(filterByPluginID));

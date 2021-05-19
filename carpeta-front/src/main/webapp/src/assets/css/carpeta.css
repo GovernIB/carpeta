@@ -73,7 +73,7 @@ img:hover {
 	align-self: center;
 }
 .imc--logoclave{ 
-	background-image: url(../images/solicitar_clave_acceso_dgt.png); 
+	/*background-image: url(../images/solicitar_clave_acceso_dgt.png); */
 	background-repeat: no-repeat;
 	width: 180px;
     height: 87px;
@@ -188,6 +188,9 @@ img:hover {
     filter: grayscale(0%);
     -moz-filter: grayscale(0%);
     -webkit-filter: grayscale(0%);
+}
+.alert{
+	border: 1px solid rgba(0,0,0,.125);
 }
 .alert1{
 	border-color: blue;
@@ -494,7 +497,11 @@ a.imc-bt-xarxa:hover {
 .homePage ul .oi{margin-left:-25px;}
 .homePage ul li { margin-left:25px; }
 .homePage .imc--logoclave{ height: 100px; float:left; }
-.homePage .opcionesAcceso { width: 320px; margin-left: 190px; margin-right: 20px; }
+.homePage .opcionesAcceso {
+	width: 320px;
+	/*margin-left: 190px; */
+	/*margin-right: 20px; */
+}
 .homePage .carpeta-btn .oi {color:#fff; }
 .homePage .carpeta-btn { font-size: 20px; padding: 12px 30px;}
 #tramitacioModal .modal-title { color: #32814b; }

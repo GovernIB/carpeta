@@ -25,6 +25,8 @@ public interface AbstractPluginLogicaService<I> extends PluginLogicaService {
     public List<Plugin> getAllPlugins(Where w) throws I18NException;
 
     public I getInstanceByPluginID(long pluginID) throws I18NException;
+    
+    public boolean existsInstanceForPluginID(long pluginID) throws I18NException;
 
     public List<I> getPluginInstancesBy(List<Long> filterByPluginID, List<String> filterByPluginCode)
             throws I18NException;

@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_ERROR;
 import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_AUTENTICACIO_FRONT;
@@ -172,6 +173,24 @@ public class LoginController {
         if (fullUrlRedirect == null) {
             fullUrlRedirect = "/";
         } else {
+            
+            // Codificam el paràmetre final
+            
+            int pos = fullUrlRedirect.lastIndexOf("/p/");
+            if (pos != -1) {
+                
+                String p1 = fullUrlRedirect.substring(0, pos);
+                String p2 = fullUrlRedirect.substring(pos + "/p/".length());
+                
+                p2 = URLEncoder.encode(p2);
+                
+                fullUrlRedirect = p1 + "/p/" + p2;
+      
+                log.info("\nDentro de redirigirLogin: fullUrlRedirect => POST ENCODE ]" + fullUrlRedirect + "[\n");
+            }
+            
+            
+            
             request.getSession().removeAttribute(InicioController.SESSION_INITIAL_URL);
         }
         

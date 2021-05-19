@@ -23,6 +23,14 @@ public class PluginQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new LongField(getQueryPath(), PluginFields.DESCRIPCIOID);
   }
 
+  public LongField TITOLLLARGID() {
+    return new LongField(getQueryPath(), PluginFields.TITOLLLARGID);
+  }
+
+  public LongField SUBTITOLLLARGID() {
+    return new LongField(getQueryPath(), PluginFields.SUBTITOLLLARGID);
+  }
+
   public StringField CONTEXT() {
     return new StringField(getQueryPath(), PluginFields.CONTEXT);
   }
@@ -110,6 +118,22 @@ public class PluginQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new TraduccioQueryPath(new QueryPath() {
       public String getQueryPath() {
           return PluginQueryPath.this.getQueryPath() + "descripcio" + ".";
+      }
+    });
+  }
+
+  public TraduccioQueryPath TITOLLLARG() {
+    return new TraduccioQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return PluginQueryPath.this.getQueryPath() + "titolLlarg" + ".";
+      }
+    });
+  }
+
+  public TraduccioQueryPath SUBTITOLLLARG() {
+    return new TraduccioQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return PluginQueryPath.this.getQueryPath() + "subtitolLlarg" + ".";
       }
     });
   }

@@ -208,6 +208,26 @@ public class PluginController
       };
     }
 
+    // Field titolLlargID
+    {
+      _listSKV = getReferenceListForTitolLlargID(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfTraduccioForTitolLlargID(_tmp);
+      if (filterForm.getGroupByFields().contains(TITOLLLARGID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, TITOLLLARGID, false);
+      };
+    }
+
+    // Field subtitolLlargID
+    {
+      _listSKV = getReferenceListForSubtitolLlargID(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfTraduccioForSubtitolLlargID(_tmp);
+      if (filterForm.getGroupByFields().contains(SUBTITOLLLARGID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, SUBTITOLLLARGID, false);
+      };
+    }
+
 
       fillValuesToGroupByItemsBoolean("genapp.checkbox", groupByItemsMap, ACTIU);
 
@@ -238,6 +258,8 @@ public class PluginController
     __mapping = new java.util.HashMap<Field<?>, java.util.Map<String, String>>();
     __mapping.put(NOMID, filterForm.getMapOfTraduccioForNomID());
     __mapping.put(DESCRIPCIOID, filterForm.getMapOfTraduccioForDescripcioID());
+    __mapping.put(TITOLLLARGID, filterForm.getMapOfTraduccioForTitolLlargID());
+    __mapping.put(SUBTITOLLLARGID, filterForm.getMapOfTraduccioForSubtitolLlargID());
     __mapping.put(TIPUS, filterForm.getMapOfValuesForTipus());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
@@ -274,6 +296,24 @@ public class PluginController
         trad.addTraduccio(idioma.getIdiomaID(), new es.caib.carpeta.persistence.TraduccioMapJPA());
       }
       pluginForm.getPlugin().setDescripcio(trad);
+    }
+
+    
+    if (pluginForm.getPlugin().getTitolLlarg() == null){
+      es.caib.carpeta.persistence.TraduccioJPA trad = new es.caib.carpeta.persistence.TraduccioJPA();
+      for (es.caib.carpeta.model.entity.Idioma idioma : pluginForm.getIdiomesTraduccio()) {
+        trad.addTraduccio(idioma.getIdiomaID(), new es.caib.carpeta.persistence.TraduccioMapJPA());
+      }
+      pluginForm.getPlugin().setTitolLlarg(trad);
+    }
+
+    
+    if (pluginForm.getPlugin().getSubtitolLlarg() == null){
+      es.caib.carpeta.persistence.TraduccioJPA trad = new es.caib.carpeta.persistence.TraduccioJPA();
+      for (es.caib.carpeta.model.entity.Idioma idioma : pluginForm.getIdiomesTraduccio()) {
+        trad.addTraduccio(idioma.getIdiomaID(), new es.caib.carpeta.persistence.TraduccioMapJPA());
+      }
+      pluginForm.getPlugin().setSubtitolLlarg(trad);
     }
 
     mav.addObject("pluginForm" ,pluginForm);
@@ -703,6 +743,58 @@ public java.lang.Long stringToPK(String value) {
 
 
   public List<StringKeyValue> getReferenceListForDescripcioID(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    return traduccioRefList.getReferenceList(TraduccioFields.TRADUCCIOID, where );
+  }
+
+  public List<StringKeyValue> getReferenceListForTitolLlargID(HttpServletRequest request,
+       ModelAndView mav, PluginFilterForm pluginFilterForm,
+       List<Plugin> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (pluginFilterForm.isHiddenField(TITOLLLARGID)
+      && !pluginFilterForm.isGroupByField(TITOLLLARGID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    if (!_groupByItemsMap.containsKey(TITOLLLARGID)) {
+      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
+      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
+      for (Plugin _item : list) {
+        if(_item.getTitolLlargID() == null) { continue; };
+        _pkList.add(_item.getTitolLlargID());
+        }
+        _w = TraduccioFields.TRADUCCIOID.in(_pkList);
+      }
+    return getReferenceListForTitolLlargID(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForTitolLlargID(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    return traduccioRefList.getReferenceList(TraduccioFields.TRADUCCIOID, where );
+  }
+
+  public List<StringKeyValue> getReferenceListForSubtitolLlargID(HttpServletRequest request,
+       ModelAndView mav, PluginFilterForm pluginFilterForm,
+       List<Plugin> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (pluginFilterForm.isHiddenField(SUBTITOLLLARGID)
+      && !pluginFilterForm.isGroupByField(SUBTITOLLLARGID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    if (!_groupByItemsMap.containsKey(SUBTITOLLLARGID)) {
+      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
+      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
+      for (Plugin _item : list) {
+        if(_item.getSubtitolLlargID() == null) { continue; };
+        _pkList.add(_item.getSubtitolLlargID());
+        }
+        _w = TraduccioFields.TRADUCCIOID.in(_pkList);
+      }
+    return getReferenceListForSubtitolLlargID(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForSubtitolLlargID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return traduccioRefList.getReferenceList(TraduccioFields.TRADUCCIOID, where );
   }

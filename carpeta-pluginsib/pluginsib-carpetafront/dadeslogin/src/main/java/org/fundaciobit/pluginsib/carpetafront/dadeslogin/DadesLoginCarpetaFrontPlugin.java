@@ -158,6 +158,7 @@ public class DadesLoginCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             
             TitlesInfo titles = getTitlesInfo();
             
+            /*
             String baseProperty = DADESLOGIN_PROPERTY_BASE;
             
             for(String lang : titles.getTitlesByLang().keySet()) {
@@ -173,7 +174,7 @@ public class DadesLoginCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     titles.getSubtitlesByLang().put(lang, trad);
                 }
             }
-            
+            */
             
 
             map.put("titles", json.toJson(titles.getTitlesByLang()));
@@ -181,8 +182,6 @@ public class DadesLoginCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             map.put("subtitles", json.toJson(titles.getSubtitlesByLang()));
 
             log.info("absolutePluginRequestPath ==> " + absolutePluginRequestPath);
-
-            // int pos = absolutePluginRequestPath.indexOf(INDEX_HTML_PAGE);
 
             String pathtojs = absolutePluginRequestPath + "/" + REACT_JS_PAGE;
 

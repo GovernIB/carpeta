@@ -45,6 +45,22 @@
           </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.TITOLLLARGID)}">
+          <td>
+          <c:set var="tmp">${plugin.titolLlargID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${plugin.titolLlarg.traduccions[lang].valor}
+          </c:if>
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.SUBTITOLLLARGID)}">
+          <td>
+          <c:set var="tmp">${plugin.subtitolLlargID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${plugin.subtitolLlarg.traduccions[lang].valor}
+          </c:if>
+          </td>
+        </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PluginFields.CONTEXT)}">
           <td>
           ${plugin.context}

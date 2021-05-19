@@ -77,3 +77,4 @@ nb-configuration.xml
 /carpeta-back/src/main/java/es/caib/carpeta/back/controller/all/PublicController.java
 /carpeta-back/src/main/webapp/WEB-INF/jsp/all/homepublic.jsp
 /carpeta-pluginsib/pluginsib-carpetafront/apisistrav1
+/carpeta-pluginsib/pluginsib-carpetafront/reprendretramitsistra/plugin.properties

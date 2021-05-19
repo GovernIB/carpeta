@@ -14,7 +14,7 @@ class MapaWeb extends Component {
 	constructor(){
 		super();
 		this.state = {
-			plugins: [],
+			items: [],
 			error: null
 		}
 		this.canviatIdioma = this.canviatIdioma.bind(this);
@@ -28,34 +28,27 @@ class MapaWeb extends Component {
 
 	componentDidMount() {
 
+		// 0 == Nivell Arell
+		var baseURL = sessionStorage.getItem('contextPath');
 		var autenticat = sessionStorage.getItem('autenticat');
-
-		if (autenticat === '1') {
-
-			var baseURL = sessionStorage.getItem('contextPath');
-
-			// 0 == Nivell Arell
-			var url = baseURL + `/webui/fullinfo/0`;
-			axios.get(url)
-				.then(res => {
-					var fulldata = res.data;
-					this.setState({ plugins: fulldata.veureplugins,
-									menuEnllasos: fulldata.menuslidelinks,
-									menupseudoplugin: fulldata.menupseudoplugin,
-									seccions: fulldata.seccions});
-				})
-				.catch(error => {
-					console.log(JSON.stringify(error));
-					if (error.response) {
-						console.log("error.response.data: " + error.response.data);
-						console.log("error.response.status: " + error.response.status);
-						console.log("error.response.headers: " + error.response.headers);
-					}
-					this.setState({
-						error: JSON.stringify(error)
-					});
+		var url = (autenticat === '1') ? baseURL + `/webui/fullinfosortedauth/0` : baseURL + `/webui/fullinfosorted/0`;
+		axios.get(url)
+			.then(res => {
+				var fulldata = res.data;
+				this.setState({ items: fulldata.items });
+			})
+			.catch(error => {
+				console.log(JSON.stringify(error));
+				if (error.response) {
+					console.log("error.response.data: " + error.response.data);
+					console.log("error.response.status: " + error.response.status);
+					console.log("error.response.headers: " + error.response.headers);
+				}
+				this.setState({
+					error: JSON.stringify(error)
 				});
-		}
+			});
+
 	}
 
 
@@ -87,56 +80,60 @@ class MapaWeb extends Component {
 				logoClau = '';
 				var urlBase = sessionStorage.getItem('contextPath');
 
-				const plugins = this.state.plugins;
+				if (this.state.error) {
+					enllazos.push( <div className="alert alert-danger" role="alert">{this.state.error}</div>);
+				} else {
 
-				if (this.state.plugins) {
-					plugins.filter(s => s.reactComponent === false).map((s, i) => {
-						enllazos.push(
-							<p key={'ph' + i} className="lh15 upper">
-								<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-									 className="imc-icona" title="" alt=""/>
-								<Link to={Constants.PLUGINHTML_PATH + s.context}>{s.nom}</Link>
-							</p>)
+					this.state.items.forEach((s, i) => {
+						switch (s.tipus) {
+
+							case 0: // Plugin react
+								enllazos.push(
+									<p key={'pr' + i} className="lh15 upper">
+										<Link to={Constants.PLUGINREACT_PATH + s.context}>
+											<img src={urlBase + s.urllogo} alt={s.nom} title="" className="imc-icona"/>
+											{s.nom}
+										</Link>
+									</p>);
+								break;
+
+							case 1: // Plugin html
+								enllazos.push(
+									<p key={'ph' + i} className="lh15 upper">
+										{/*<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}*/}
+										{/*	 className="imc-icona" title="" alt=""/>*/}
+										<Link to={Constants.PLUGINHTML_PATH + s.context}>
+											<img src={urlBase + s.urllogo} alt={s.nom} title="" className="imc-icona"/>
+											{s.nom}
+										</Link>
+									</p>);
+								break;
+
+							case 3: // Seccio
+								enllazos.push(
+									<p key={'s' + i} className="lh15 upper">
+										<Link to={Constants.SECCIO_PATH + s.context}>
+											<img src={s.urllogo} title="" alt={s.nom} className="imc-icona"/>
+											<span className="menuRapidView">{s.nom}</span>
+										</Link>
+									</p>
+								);
+								break;
+
+							case 4: // PseudoPlugin
+								enllazos.push(
+									<p key={'ps' + i} className="lh15 upper">
+										<a href={s.url} target="_blank" title={s.nom}>
+											<img src={s.urllogo} alt={s.nom} title="" className="imc-icona"/>
+											<span className="menuRapidView">{s.nom}</span>
+										</a>
+									</p>
+								);
+								break;
+						}
 					});
 
-					plugins.filter(s => s.reactComponent === true).map((s, i) => {
-						enllazos.push(
-							<p key={'pr' + i} className="lh15 upper">
-								<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}
-									 className="imc-icona" title="" alt=""/>
-								<Link to={Constants.PLUGINREACT_PATH + s.context}>{s.nom}</Link>
-							</p>);
-					});
 				}
-
-
-				if (this.state.menupseudoplugin) {
-					this.state.menupseudoplugin.map((s, i) => {
-						enllazos.push(
-							<p key={'ps' + i} className="lh15 upper">
-								<a href={s.url} target="_blank" title={s.nom}>
-									<img src={s.urllogo} title="" alt="" className="imc-icona iconaEnllas"/>
-									<span>{s.label}</span>
-								</a>
-							</p>
-						)
-					})
-				}
-
-
-				if (this.state.seccions) {
-					this.state.seccions.map((s, i) => {
-						enllazos.push(
-							<p key={'s' + i} className="lh15 upper">
-								<Link to={Constants.SECCIO_PATH + s.context}>
-									<img src={s.iconaID} title="" alt={s.descripcio} className="imc-icona iconaEnllas"/>
-									<span>{s.nom}</span>
-								</Link>
-							</p>
-						)
-					});
-				}
-
 
 			}
 			if (autenticat === '0') {
