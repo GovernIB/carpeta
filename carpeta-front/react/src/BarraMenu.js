@@ -109,7 +109,7 @@ class BarraMenu extends Component {
 						{/*<a href="{this.context.router.goBack()}" className="imc-torna"*/}
 						{/*   title={t('menuTorna')}><span>{t('menuTorna')}</span></a>*/}
 
-							<div className="col-11">
+							<div className="col-11 pl-0">
 								<h1>
 									<span>{t('menuTitol')}</span>
 								</h1>
@@ -119,8 +119,8 @@ class BarraMenu extends Component {
 								</ul>
 							</div>
 
-							<div className="col-1">
-								<button type="button" className="imc-bt-menu" id="imc-bt-menu" title={t('menuMenu')}>
+							<div className="col-1 pr-0">
+								<button type="button" className="imc-bt-menu float-right" id="imc-bt-menu" title={t('menuMenu')}>
 									{/*<span>{t('menuMenu')}</span>*/}
 								</button>
 							</div>

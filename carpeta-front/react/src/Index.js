@@ -96,7 +96,7 @@ class Index extends Component {
         if (auth === '1' && user != null) {
             infoUsuari = <div className="imc-titol usuari" style={styleColorMenu}>
                 <nav className="imc--contingut">
-                    <h3>
+                    {/*<h3>*/}
                         <span className="estilUsuari">
                             {/* <c:if test="${user != null}"> */}
                             <span className="oi oi-person pr-2" aria-hidden="true"> </span>{user}
@@ -106,7 +106,7 @@ class Index extends Component {
                             {/*</span>*/}
                             {/* </c:if> */}
                         </span>
-                    </h3>
+                    {/*</h3>*/}
                 </nav>
             </div>;
         } else {
