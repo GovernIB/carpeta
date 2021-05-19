@@ -25,7 +25,8 @@
         <dependency>
             <groupId>es.caib.regweb3</groupId>
             <artifactId>regweb3-ws-api</artifactId>
-            <version>3.2</version>
+            <version>3.2.1</version>
+            <scope>provided</scope>
         </dependency>
         
         <dependency>
@@ -68,6 +69,7 @@
             <groupId>javax.ejb</groupId>
             <artifactId>javax.ejb-api</artifactId>
             <version>3.2.2</version>
+            <scope>provided</scope>
         </dependency>
         
         <dependency>
@@ -82,6 +84,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-	
+        
 	</dependencies>
 </project>
