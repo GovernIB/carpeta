@@ -29,12 +29,6 @@
         </dependency>
 
         <dependency>
-            <groupId>es.caib.regweb3</groupId>
-            <artifactId>regweb3-ws-api</artifactId>
-            <version>3.2</version>
-        </dependency>
-
-        <dependency>
             <groupId>javax.xml.ws</groupId>
             <artifactId>jaxws-api</artifactId>
         </dependency>

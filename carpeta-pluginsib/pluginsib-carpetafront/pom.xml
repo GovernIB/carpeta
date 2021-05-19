@@ -16,13 +16,10 @@
     <modules>
         <module>api</module>
         <module>sistra</module>
-        <!-- module>regweb3</module -->
         <module>regweb32</module>
         <module>notib</module>
-        <module>dadespersonalsreact</module>
 		<module>dadeslogin</module>
 		<module>pinbalpolicia</module>
-        <module>reactexample</module>
         <module>regwebdetallcomponent</module>
 		<module>reprendretramitsistra</module>
     </modules>
