@@ -128,6 +128,34 @@ public class PluginValidator<I extends Plugin>
       }
     }
 
+    if (__vr.getFieldErrorCount(TITOLLLARGID) == 0) {
+      java.lang.Long __titolllargid = __target__.getTitolLlargID();
+      if (__titolllargid != null ) {
+        Long __count_ = null;
+        try { __count_ = __traduccioManager.count(TraduccioFields.TRADUCCIOID.equal(__titolllargid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ == 0) {        
+          __vr.rejectValue(TITOLLLARGID, "error.notfound",
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccio"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccioID"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__titolllargid)));
+        }
+      }
+    }
+
+    if (__vr.getFieldErrorCount(SUBTITOLLLARGID) == 0) {
+      java.lang.Long __subtitolllargid = __target__.getSubtitolLlargID();
+      if (__subtitolllargid != null ) {
+        Long __count_ = null;
+        try { __count_ = __traduccioManager.count(TraduccioFields.TRADUCCIOID.equal(__subtitolllargid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        if (__count_ == null || __count_ == 0) {        
+          __vr.rejectValue(SUBTITOLLLARGID, "error.notfound",
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccio"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccioID"),
+         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__subtitolllargid)));
+        }
+      }
+    }
+
   } // Final de mètode
   public String get(Field<?> field) {
     return field.fullName;

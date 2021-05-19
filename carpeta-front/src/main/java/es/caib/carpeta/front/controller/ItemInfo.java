@@ -6,7 +6,6 @@ import es.caib.carpeta.front.controller.WebUIController.EnllazInfo;
 import es.caib.carpeta.front.controller.WebUIController.SeccioInfo;
 import es.caib.carpeta.logic.utils.PluginInfo;
 
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * 

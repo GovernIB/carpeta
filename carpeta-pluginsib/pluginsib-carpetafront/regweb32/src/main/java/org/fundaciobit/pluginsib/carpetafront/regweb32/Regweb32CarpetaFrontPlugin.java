@@ -324,16 +324,17 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 
         String plantilla = IOUtils.toString(input, "UTF-8");
 
-        // XYZ ZZZ
+
         map.put("resources", absolutePluginRequestPath + "/" + WEBRESOURCECOMMON);
 
-        // XYZ ZZZ
         map.put("form_action", absolutePluginRequestPath + "/" + LLISTAT_REGISTRES_PAGE);
         map.put("lang", locale.getLanguage());
 
         map.put("title", getTitle(locale));
+        map.put("registro_listado", getTitle(locale));
+        map.put("registro_descripcion", getSubTitle(locale));
 
-        String[] traduccions = {"registro.listado", "registro.descripcion", "registro.numero", "registro.fecha",
+        String[] traduccions = {"registro.numero", "registro.fecha",
                 "registro.extracto", "registro.destinatario", "registro.vacio", "carpeta.acciones",
                 "registro.detalle"};
 

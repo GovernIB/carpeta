@@ -62,18 +62,6 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
         return null;
     }
 
-    /*
-    @Override
-    public String getTitle(Locale locale) {
-        return getTraduccio("title", locale);
-    }
-
-    @Override
-    public String getSubTitle(Locale locale) {
-        return getTraduccio("subtitle", locale);
-    }
-    */
-
     @Override
     public String getResourceBundleName() {
         return "carpetafrontpinbalpolicia";
@@ -81,7 +69,8 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
 
     @Override
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
-            HttpServletRequest request, UserData userData, String administrationIDEncriptat, String parameter) throws Exception {
+            HttpServletRequest request, UserData userData, String administrationIDEncriptat, String parameter)
+            throws Exception {
 
         registerUserData(userData);
 
@@ -172,10 +161,9 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
             String plantilla = IOUtils.toString(input, "UTF-8");
 
             Map<String, Object> map = new HashMap<String, Object>();
-            
+
             Gson json = new Gson();
 
-           
             TitlesInfo titles = getTitlesInfo();
 
             map.put("titles", json.toJson(titles.getTitlesByLang()));
@@ -229,11 +217,10 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
             String query, HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet) {
 
+        response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
 
-            response.setContentType("application/json");
-            response.setCharacterEncoding("utf-8");
-
-            DadesPolicia dadesPolicia = new DadesPolicia();
+        DadesPolicia dadesPolicia = new DadesPolicia();
 
         try {
             final String PINBAL_PROPERTY_BASE = PINBALPOLICIA_PROPERTY_BASE + "pinbal.";
@@ -371,8 +358,6 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
                 dt.setFechaCaducidad(sdf_out.format(sdf_in.parse(dt.getFechaCaducidad())));
 
                 dt.getDatosNacimiento().setFecha(sdf_out.format(sdf_in.parse(dt.getDatosNacimiento().getFecha())));
-                
-                
 
                 dadesPolicia.setDatosTitular(dt);
             } else {

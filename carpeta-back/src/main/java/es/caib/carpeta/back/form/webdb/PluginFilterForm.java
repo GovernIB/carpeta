@@ -87,6 +87,50 @@ public class PluginFilterForm extends CarpetaBaseFilterForm implements PluginFie
   }
 
 
+  private java.lang.Long titolLlargIDDesde;
+
+  public java.lang.Long getTitolLlargIDDesde() {
+    return this.titolLlargIDDesde;
+  }
+
+  public void setTitolLlargIDDesde(java.lang.Long titolLlargIDDesde) {
+    this.titolLlargIDDesde = titolLlargIDDesde;
+  }
+
+
+  private java.lang.Long titolLlargIDFins;
+
+  public java.lang.Long getTitolLlargIDFins() {
+    return this.titolLlargIDFins;
+  }
+
+  public void setTitolLlargIDFins(java.lang.Long titolLlargIDFins) {
+    this.titolLlargIDFins = titolLlargIDFins;
+  }
+
+
+  private java.lang.Long subtitolLlargIDDesde;
+
+  public java.lang.Long getSubtitolLlargIDDesde() {
+    return this.subtitolLlargIDDesde;
+  }
+
+  public void setSubtitolLlargIDDesde(java.lang.Long subtitolLlargIDDesde) {
+    this.subtitolLlargIDDesde = subtitolLlargIDDesde;
+  }
+
+
+  private java.lang.Long subtitolLlargIDFins;
+
+  public java.lang.Long getSubtitolLlargIDFins() {
+    return this.subtitolLlargIDFins;
+  }
+
+  public void setSubtitolLlargIDFins(java.lang.Long subtitolLlargIDFins) {
+    this.subtitolLlargIDFins = subtitolLlargIDFins;
+  }
+
+
   private java.lang.String context;
 
   public java.lang.String getContext() {
@@ -153,6 +197,10 @@ public class PluginFilterForm extends CarpetaBaseFilterForm implements PluginFie
     this.nomIDFins = __toClone.nomIDFins;
     this.descripcioIDDesde = __toClone.descripcioIDDesde;
     this.descripcioIDFins = __toClone.descripcioIDFins;
+    this.titolLlargIDDesde = __toClone.titolLlargIDDesde;
+    this.titolLlargIDFins = __toClone.titolLlargIDFins;
+    this.subtitolLlargIDDesde = __toClone.subtitolLlargIDDesde;
+    this.subtitolLlargIDFins = __toClone.subtitolLlargIDFins;
     this.context = __toClone.context;
     this.classe = __toClone.classe;
     this.propietats = __toClone.propietats;
@@ -160,6 +208,8 @@ public class PluginFilterForm extends CarpetaBaseFilterForm implements PluginFie
     this.tipusFins = __toClone.tipusFins;
     this.mapOfTraduccioForNomID = __toClone.mapOfTraduccioForNomID;
     this.mapOfTraduccioForDescripcioID = __toClone.mapOfTraduccioForDescripcioID;
+    this.mapOfTraduccioForTitolLlargID = __toClone.mapOfTraduccioForTitolLlargID;
+    this.mapOfTraduccioForSubtitolLlargID = __toClone.mapOfTraduccioForSubtitolLlargID;
     this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
   }
   
@@ -215,6 +265,30 @@ public class PluginFilterForm extends CarpetaBaseFilterForm implements PluginFie
 
   public void setMapOfTraduccioForDescripcioID(Map<String, String> mapOfTraduccioForDescripcioID) {
     this.mapOfTraduccioForDescripcioID = mapOfTraduccioForDescripcioID;
+  }
+
+
+
+  private Map<String, String> mapOfTraduccioForTitolLlargID;
+
+  public Map<String, String> getMapOfTraduccioForTitolLlargID() {
+    return this.mapOfTraduccioForTitolLlargID;
+  }
+
+  public void setMapOfTraduccioForTitolLlargID(Map<String, String> mapOfTraduccioForTitolLlargID) {
+    this.mapOfTraduccioForTitolLlargID = mapOfTraduccioForTitolLlargID;
+  }
+
+
+
+  private Map<String, String> mapOfTraduccioForSubtitolLlargID;
+
+  public Map<String, String> getMapOfTraduccioForSubtitolLlargID() {
+    return this.mapOfTraduccioForSubtitolLlargID;
+  }
+
+  public void setMapOfTraduccioForSubtitolLlargID(Map<String, String> mapOfTraduccioForSubtitolLlargID) {
+    this.mapOfTraduccioForSubtitolLlargID = mapOfTraduccioForSubtitolLlargID;
   }
 
 

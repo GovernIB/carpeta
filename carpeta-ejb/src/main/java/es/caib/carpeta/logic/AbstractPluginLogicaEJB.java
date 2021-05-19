@@ -66,6 +66,17 @@ public abstract class AbstractPluginLogicaEJB<I extends IPlugin> extends PluginL
     }
    
     
+    @Override
+    public boolean existsInstanceForPluginID(long pluginID) throws I18NException {
+        IPlugin pluginInstance = getPluginFromCache(pluginID);
+
+        if (pluginInstance == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
 
     @Override
     public I getInstanceByPluginID(long pluginID) throws I18NException {

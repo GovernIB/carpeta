@@ -182,7 +182,7 @@ public class ReprendreTramitSistraCarpetaFrontPlugin extends AbstractCarpetaFron
             map.put("esParametre", esParametre);
 
             map.put("titol", getTitle(locale));
-            map.put("subtitol", getTitle(locale));
+            map.put("subtitol", getSubTitle(locale));
 
             map.put("contextPath", request.getContextPath());
 

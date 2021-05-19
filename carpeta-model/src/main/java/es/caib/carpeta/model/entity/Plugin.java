@@ -11,6 +11,12 @@ public interface Plugin extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.Long getDescripcioID();
 	public void setDescripcioID(java.lang.Long _descripcioID_);
 
+	public java.lang.Long getTitolLlargID();
+	public void setTitolLlargID(java.lang.Long _titolLlargID_);
+
+	public java.lang.Long getSubtitolLlargID();
+	public void setSubtitolLlargID(java.lang.Long _subtitolLlargID_);
+
 	public java.lang.String getContext();
 	public void setContext(java.lang.String _context_);
 

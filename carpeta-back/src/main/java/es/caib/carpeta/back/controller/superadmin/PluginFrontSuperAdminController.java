@@ -3,6 +3,7 @@ package es.caib.carpeta.back.controller.superadmin;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
+import org.fundaciobit.genapp.common.query.Field;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.HtmlUtils;
 import org.fundaciobit.genapp.common.web.form.AdditionalButton;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +31,7 @@ import es.caib.carpeta.back.security.LoginInfo;
 import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.persistence.PluginJPA;
+import es.caib.carpeta.pluginsib.carpetafront.api.ICarpetaFrontPlugin;
 import es.caib.carpeta.logic.AuditoriaLogicaService;
 import es.caib.carpeta.logic.LogCarpetaLogicaService;
 import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaService;
@@ -76,15 +78,19 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
     public PluginForm getPluginForm(PluginJPA _jpa, boolean __isView, HttpServletRequest request, ModelAndView mav)
             throws I18NException {
         PluginForm pluginForm = super.getPluginForm(_jpa, __isView, request, mav);
-
-        pluginForm.getHiddenFields().remove(TIPUS);
-
+        Set<Field<?>> hiddens = pluginForm.getHiddenFields();
+        hiddens.remove(TITOLLLARGID);
+        hiddens.remove(SUBTITOLLLARGID);
+        hiddens.remove(TIPUS);
+        
+        pluginForm.addHelpToField(NOMID, I18NUtils.tradueix("titolcurt.help"));
+        pluginForm.addHelpToField(DESCRIPCIOID, I18NUtils.tradueix("subtitolcurt.help"));
+        pluginForm.addHelpToField(TITOLLLARGID, I18NUtils.tradueix("titolllarg.help"));
+        pluginForm.addHelpToField(SUBTITOLLLARGID, I18NUtils.tradueix("subtitolllarg.help"));
+        
+        
         return pluginForm;
     }
-    
-    
-    
-    
 
     @Override
     public Where getAdditionalCondition(HttpServletRequest request) throws I18NException {
@@ -119,9 +125,12 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
 
             pluginFilterForm.setAttachedAdditionalJspCode(true);
 
-            pluginFilterForm.getHiddenFields().remove(CONTEXT);
-            pluginFilterForm.getHiddenFields().remove(TIPUS);
+            Set<Field<?>> hiddens = pluginFilterForm.getHiddenFields();
+            hiddens.remove(CONTEXT);
+            hiddens.remove(TIPUS);
+
             pluginFilterForm.addHiddenField(DESCRIPCIOID);
+
         }
         return pluginFilterForm;
     }
@@ -226,5 +235,30 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
             log.error(msg, e);
         }
     }
+    
+    
+    @Override
+    public String getRedirectWhenModified(HttpServletRequest request, PluginForm pluginForm, Throwable __e) {
+        String r = super.getRedirectWhenModified(request, pluginForm, __e);
+        if (__e == null) {
+            // Actualitzam els títols
+            long pluginID = pluginForm.getPlugin().getPluginID();
+            try {
+                
+                if (pluginCarpetaFrontEjb.existsInstanceForPluginID(pluginID)) {
+                    ICarpetaFrontPlugin plug = pluginCarpetaFrontEjb.getInstanceByPluginID(pluginID);
+                    plug.setTitlesInfo(pluginCarpetaFrontEjb.getTitlesInfo(pluginID));
+                    
+                    log.info(" XYZ ZZZ  Actualitzades traduccions de títols/subtítols del plugin amb ID "
+                            +  pluginID);
+                }
+            } catch (I18NException e) {
+                log.error("Error actualitzant les traduccions de títols/subtítols del plugin amb ID "
+                    + pluginID + ": " + e.getMessage(), e);
+            }
+        }
+        
+        return r;
+      }
 
 }

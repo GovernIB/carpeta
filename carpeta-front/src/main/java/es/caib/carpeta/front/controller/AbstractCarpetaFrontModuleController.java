@@ -20,8 +20,6 @@ import es.caib.carpeta.hibernate.HibernateFileUtil;
 import es.caib.carpeta.logic.AuthenticationLogicaService;
 import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaService;
 import es.caib.carpeta.logic.UsuariEntitatLogicaService;
-import es.caib.carpeta.persistence.PluginJPA;
-import es.caib.carpeta.persistence.TraduccioMapJPA;
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.ICarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.TitlesInfo;
@@ -33,7 +31,6 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Base64;
 import java.util.Locale;
-import java.util.Map;
 
 /**
  *
@@ -54,7 +51,7 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
     @EJB(mappedName = PluginDeCarpetaFrontLogicaService.JNDI_NAME)
     protected PluginDeCarpetaFrontLogicaService pluginCarpetaFrontEjb;
-    
+
     @EJB(mappedName = AuthenticationLogicaService.JNDI_NAME)
     protected AuthenticationLogicaService authenticationLogicaEjb;
 
@@ -63,35 +60,29 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
             @PathVariable("pluginID") Long pluginID,
             @PathVariable("administrationIDEncriptat") String administrationIDEncriptat,
             @PathVariable("urlBase") String urlBase) throws Exception {
-        
-        
+
         log.info("showCarpetaFrontModule:: pluginID => " + pluginID);
         log.info("showCarpetaFrontModule:: administrationIDEncriptat => " + administrationIDEncriptat);
         log.info("showCarpetaFrontModule:: urlBase => " + urlBase);
-        
 
         String urlBaseDec = new String(Base64.getUrlDecoder().decode(urlBase), "utf-8");
 
         request.getSession().setAttribute(SESSION_URL_BASE, urlBaseDec);
-        
+
         final String parameter = null;
 
         return showCarpetaFrontModule(request, response, pluginID, administrationIDEncriptat, parameter);
     }
-    
-    
+
     @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}/{urlBase}/p/{parameter}")
-    public ModelAndView showCarpetaFrontModuleWithUrlBaseAndParameter(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("pluginID") Long pluginID,
+    public ModelAndView showCarpetaFrontModuleWithUrlBaseAndParameter(HttpServletRequest request,
+            HttpServletResponse response, @PathVariable("pluginID") Long pluginID,
             @PathVariable("administrationIDEncriptat") String administrationIDEncriptat,
-            @PathVariable("urlBase") String urlBase,
-            @PathVariable("parameter") String parameter) throws Exception {
-        
-        
+            @PathVariable("urlBase") String urlBase, @PathVariable("parameter") String parameter) throws Exception {
+
         log.info("showCarpetaFrontModule:: pluginID => " + pluginID);
         log.info("showCarpetaFrontModule:: administrationIDEncriptat => " + administrationIDEncriptat);
         log.info("showCarpetaFrontModule:: urlBase => " + urlBase);
-        
 
         String urlBaseDec = new String(Base64.getUrlDecoder().decode(urlBase), "utf-8");
 
@@ -101,24 +92,27 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
     }
 
     /*
-    @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}")
-    public ModelAndView showCarpetaFrontModule(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("pluginID") Long pluginID,
-            @PathVariable("administrationIDEncriptat") String administrationIDEncriptat) throws Exception {
-        
-        final String parameter = null;
-        return showCarpetaFrontModuleWithParameter(request, response, pluginID,
-               administrationIDEncriptat,parameter);
-    }
-        
-        
-    @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}/p/{parameter}")
-    */ 
+     * @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}")
+     * public ModelAndView showCarpetaFrontModule(HttpServletRequest request,
+     * HttpServletResponse response,
+     * 
+     * @PathVariable("pluginID") Long pluginID,
+     * 
+     * @PathVariable("administrationIDEncriptat") String administrationIDEncriptat)
+     * throws Exception {
+     * 
+     * final String parameter = null; return
+     * showCarpetaFrontModuleWithParameter(request, response, pluginID,
+     * administrationIDEncriptat,parameter); }
+     * 
+     * 
+     * @RequestMapping(value =
+     * "/showplugin/{pluginID}/{administrationIDEncriptat}/p/{parameter}")
+     */
     protected ModelAndView showCarpetaFrontModule(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("pluginID") Long pluginID,
             @PathVariable("administrationIDEncriptat") String administrationIDEncriptat,
-            @PathVariable("parameter") String parameter
-            ) throws Exception {
+            @PathVariable("parameter") String parameter) throws Exception {
 
         String administrationID = HibernateFileUtil.decryptString(administrationIDEncriptat);
 
@@ -155,33 +149,18 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
                 + absoluteControllerBase + "\nabsoluteRequestPluginBasePath = " + absoluteRequestPluginBasePath
                 + "\nrelativeControllerBase = " + relativeControllerBase + "\nrelativeRequestPluginBasePath = "
                 + relativeRequestPluginBasePath + "\n\n\n");
-        
-        
-        
+
         TitlesInfo titlesInfo = carpetaFront.getTitlesInfo();
         if (titlesInfo == null) {
-        
-            PluginJPA plugin = (PluginJPA) this.pluginCarpetaFrontEjb.findByPrimaryKey(pluginID);
-
-            titlesInfo = new TitlesInfo();
-            Map<String, TraduccioMapJPA> titles= plugin.getNomTraduccions();
-            for (String lang: titles.keySet()) {
-                titlesInfo.getTitlesByLang().put(lang, titles.get(lang).getValor());
-            }
-            Map<String, TraduccioMapJPA> subtitles= plugin.getDescripcioTraduccions();
-            for (String lang: subtitles.keySet()) {
-                titlesInfo.getSubtitlesByLang().put(lang, subtitles.get(lang).getValor());
-            }
-            
+            titlesInfo = this.pluginCarpetaFrontEjb.getTitlesInfo(pluginID);
             carpetaFront.setTitlesInfo(titlesInfo);
         }
-        
-        
+
         log.info("\n Cridant a  carpetaFront.getStartUrl() amb PluginParameter =>  " + parameter);
-        
 
         String urlToPluginWebPage = carpetaFront.getStartUrl(absoluteRequestPluginBasePath,
-                relativeRequestPluginBasePath, request, getUserData(administrationID), administrationIDEncriptat, parameter);
+                relativeRequestPluginBasePath, request, getUserData(administrationID), administrationIDEncriptat,
+                parameter);
 
         log.info("\n\n\n SHOW PLUGIN 2222 urlToPluginWebPage =>  " + urlToPluginWebPage);
 
@@ -218,7 +197,6 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
     protected void processServlet(HttpServletRequest request, HttpServletResponse response, boolean isGet)
             throws ServletException, IOException {
-
 
         final boolean debug = log.isDebugEnabled();
 
@@ -267,14 +245,13 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         try {
             requestPlugin(request, response, pluginIDStr, administrationIDEncripted, query, locale, isGet, debug);
         } catch (Throwable th) {
-            
-            
+
             try {
-                authenticationLogicaEjb.crearLog("Request a Plugin", null,uri,th,"Error desconegut cridant a un request d'un plugin: " + th.getMessage(), null);
-            } catch (Throwable th2) {               
+                authenticationLogicaEjb.crearLog("Request a Plugin", null, uri, th,
+                        "Error desconegut cridant a un request d'un plugin: " + th.getMessage(), null);
+            } catch (Throwable th2) {
             }
-            
-            
+
             throw new IOException(th.getMessage(), th);
         }
 
@@ -336,8 +313,8 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
                 pluginID, administrationIDEncripted);
 
         if (debug) {
-          log.debug("absoluteRequestPluginBasePath => " + absoluteRequestPluginBasePath);
-          log.debug("relativeRequestPluginBasePath => " + relativeRequestPluginBasePath);
+            log.debug("absoluteRequestPluginBasePath => " + absoluteRequestPluginBasePath);
+            log.debug("relativeRequestPluginBasePath => " + relativeRequestPluginBasePath);
         }
 
         carpetaFrontPlugin.requestCarpetaFront(absoluteRequestPluginBasePath, relativeRequestPluginBasePath, query,
@@ -354,7 +331,6 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
     protected ModelAndView generateErrorMAV(HttpServletRequest request, Long pluginID, String msg, Throwable th) {
 
         String urlFinal = processError(request, pluginID, msg, th);
-
 
         ModelAndView mav = new ModelAndView(new RedirectView("/superadmin/pluginfront/list", true));
         // request.getSession().setAttribute("URL_FINAL", urlError);
@@ -394,16 +370,13 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         return urlFinal;
     }
 
-
-
     public static ModelAndView startPublicSignatureProcess(HttpServletRequest request, HttpServletResponse response,
             String view, long pluginID, String administrationID, String urlBase) throws I18NException {
         return startSignatureProcess(request, response, view, pluginID, administrationID, urlBase);
     }
 
     private static ModelAndView startSignatureProcess(HttpServletRequest request, HttpServletResponse response,
-            String view, long pluginID, String administrationID, String urlBase)
-            throws I18NException {
+            String view, long pluginID, String administrationID, String urlBase) throws I18NException {
 
         // response.addHeader("X-Frame-Options", "SAMEORIGIN");
 

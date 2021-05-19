@@ -40,6 +40,8 @@ public class PluginRefList extends RefListBase
     setSelects(new Select<?>[] { NOMID.select });
     addCampTraduible(NOMID.select);
     addCampTraduible(DESCRIPCIOID.select);
+    addCampTraduible(TITOLLLARGID.select);
+    addCampTraduible(SUBTITOLLLARGID.select);
   }
   public List<StringKeyValue> getReferenceList(Field<?> keyField, Where where, OrderBy ... orderBy) throws I18NException {
     Select<Long> _transSelect = checkTranslationFields();
