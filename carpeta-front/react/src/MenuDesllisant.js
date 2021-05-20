@@ -18,7 +18,8 @@ class MenuDesllisant extends Component {
 		this.state = {
 			idiomes: [],
 			items: [], // plugins, menuEnllasos, menupseudoplugin i seccions
-			error: null
+			error: null,
+			colorMenu: null
 		}
 		this.canviarIdioma = this.canviarIdioma.bind(this);
 
@@ -65,6 +66,26 @@ class MenuDesllisant extends Component {
 					console.log("error.response.headers: " + error.response.headers);
 				}
 				this.setState({
+					error: JSON.stringify(error)
+				});
+			});
+
+		var url2 = baseURL + `/webui/infoEntitat`;
+
+		axios.get(url2)
+			.then(res => {
+				this.setState({ colorMenu : res.data.color });
+			})
+			.catch(error => {
+				console.log(JSON.stringify(error));
+				if (error.response) {
+					console.log("error.response.data: " + error.response.data);
+					console.log("error.response.status: " + error.response.status);
+					console.log("error.response.headers: " + error.response.headers);
+				}
+				this.setState({
+					loading:false,
+					entitats: "",
 					error: JSON.stringify(error)
 				});
 			});
@@ -254,9 +275,11 @@ class MenuDesllisant extends Component {
 			}
 		}
 
+		const styleColorMenu = (this.state.colorMenu === null)? { backgroundColor : '#32814B'} : { backgroundColor : "#"+this.state.colorMenu};
+
 		return (
 			<div>
-				<div className="imc-cercador" id="imc-cercador">
+				<div className="imc-cercador" id="imc-cercador" style={styleColorMenu}>
 				</div>
 				<ul>
 					<li className="imc-marc-ico imc--idioma">
