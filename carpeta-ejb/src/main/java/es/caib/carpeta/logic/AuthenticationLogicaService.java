@@ -35,6 +35,7 @@ public interface AuthenticationLogicaService {
     public UsuariEntitatJPA create( UsuariEntitatJPA usuariEntitat) throws I18NException;
 
     public List<UsuariEntitatJPA> findAllByUsuariIdWithEntitat(@NotNull long usuarioID) throws I18NException;
-    
+
     public IUserInformationPlugin getUserInformationPluginInstance() throws EJBException;
+ 
 }
