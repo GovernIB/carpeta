@@ -92,12 +92,13 @@ public class AuthenticationLogicaEJB implements AuthenticationLogicaService {
     }
     
     
-    
+  
 
     public static final String USERINFORMATION_PLUGIN_KEY = Constants.CARPETA_PROPERTY_BASE + "userinformationplugin";
 
     public static IUserInformationPlugin userInformationPlugin = null;
 
+    @Override
     public IUserInformationPlugin getUserInformationPluginInstance() throws EJBException { 
         if (userInformationPlugin == null) {
             
@@ -126,6 +127,5 @@ public class AuthenticationLogicaEJB implements AuthenticationLogicaService {
         }
         return userInformationPlugin;
     }
-    
     
 }

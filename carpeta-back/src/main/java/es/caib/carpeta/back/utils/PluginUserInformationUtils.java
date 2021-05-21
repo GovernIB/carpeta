@@ -34,14 +34,21 @@ public class PluginUserInformationUtils {
 
     protected static final Logger log = Logger.getLogger(PluginUserInformationUtils.class);
 
-    public static UsuariJPA getUserInfoFromUserInformation(String username, AuthenticationLogicaService authEJB) throws javax.ejb.EJBException {
+    /**
+     * 
+     * @param username
+     * @param authEJB
+     * @return
+     * @throws javax.ejb.EJBException
+     */
+    public static UsuariJPA getUserInfoFromUserInformation(String username, AuthenticationLogicaService authEJB)
+            throws javax.ejb.EJBException {
 
         UserInfo info;
-        
+
         if (Configuracio.isCAIB()) {
 
             // PLUGIN DE CAIB !!!!!
-
             ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
             if (sra == null || sra.getRequest() == null) {
                 String msg = "ServletRequestAttributes o HttpServletRequest val null ";
@@ -75,11 +82,10 @@ public class PluginUserInformationUtils {
 
             }
 
-
+            return null;
         } else {
 
             IUserInformationPlugin plugin = authEJB.getUserInformationPluginInstance();
-
             log.info("UserInformationPlugin => " + plugin);
 
             try {
@@ -88,7 +94,6 @@ public class PluginUserInformationUtils {
                 log.error("Error intentant obtenir informació de l'usari " + username + ": " + e.getMessage(), e);
                 info = null;
             }
-
         }
 
         UsuariJPA persona = null;
@@ -101,7 +106,11 @@ public class PluginUserInformationUtils {
         return persona;
     }
 
-
+    /**
+     * 
+     * @param info
+     * @return
+     */
     protected static UsuariJPA userInfo2UsuariJPA(UserInfo info) {
         UsuariJPA persona;
 
@@ -161,14 +170,11 @@ public class PluginUserInformationUtils {
         return persona;
     }
 
-    
     protected static UserInfo userRepresentationToUserInfo(AccessToken token) throws Exception {
-
 
         final String KEYCLOAKCAIB = Constants.CARPETA_PROPERTY_BASE + "pluginsib.userinformation.keycloakcaib.";
         final String MAPPING_PROPERTY = KEYCLOAKCAIB + "mapping.";
         final String ISDEBUG_PROPERTY = KEYCLOAKCAIB + "debug";
-
 
         final boolean debug = "true".equals(Configuracio.getProperty(ISDEBUG_PROPERTY));
 
@@ -253,19 +259,19 @@ public class PluginUserInformationUtils {
                             int genderValue = Integer.parseInt(attributeUserValue);
                             switch (genderValue) {
 
-                            case -1:
-                                ui.setGender(Gender.UNKNOWN);
+                                case -1:
+                                    ui.setGender(Gender.UNKNOWN);
                                 break;
-                            case 0:
-                                ui.setGender(Gender.FEMALE);
-                                break;
-
-                            case 1:
-                                ui.setGender(Gender.MALE);
+                                case 0:
+                                    ui.setGender(Gender.FEMALE);
                                 break;
 
-                            default:
-                                throw new Exception();
+                                case 1:
+                                    ui.setGender(Gender.MALE);
+                                break;
+
+                                default:
+                                    throw new Exception();
 
                             }
 

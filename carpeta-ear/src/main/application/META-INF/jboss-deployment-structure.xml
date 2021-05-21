@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jboss-deployment-structure xmlns="urn:jboss:deployment-structure:1.2">
-    <!--
+	<!--
     Permet introduïr configuracions relacionades amb el desplegament.
     Com ara ignorar mòduls del servidor si el nostre EAR conté versions més recents.
     -->
 	<deployment>
-        <dependencies>
-            <module name="org.hibernate" />
-        </dependencies>
-    </deployment>
+		<dependencies>
+			<module name="org.hibernate"/>
+			<module name="org.keycloak.keycloak-core"/>
+			<module name="org.keycloak.keycloak-adapter-spi"/>
+			<module name="org.keycloak.keycloak-adapter-subsystem"/>
+			<module name="org.keycloak.keycloak-authz-client"/>
+			<module name="org.keycloak.keycloak-common"/>
+			<module name="org.keycloak.keycloak-jboss-adapter-core"/>
+			<module name="org.keycloak.keycloak-undertow-adapter"/>
+			<module name="org.keycloak.keycloak-wildfly-adapter"/>
+			<module name="org.keycloak.keycloak-wildfly-elytron-oidc-adapter"/>
+			<module name="org.keycloak.keycloak-wildfly-subsystem"/>
+		</dependencies>
+	</deployment>
 </jboss-deployment-structure>

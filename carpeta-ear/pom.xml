@@ -57,8 +57,8 @@
 			<version>1.1.10</version>
 			<type>war</type>
 		</dependency>
-		<!-- API EXTERNA END
-
+		<!-- API EXTERNA END -->
+        <!--
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-api</artifactId>
@@ -138,20 +138,18 @@
 			<groupId>org.fundaciobit.pluginsib.userinformation</groupId>
 			<artifactId>pluginsib-userinformation-keycloak</artifactId>
 			<version>2.0.1</version>
+			<!-- Veure fitxer [carpeta-ear]\src\main\application\META-INF\jboss-deployment-structure.xml -->
 			<exclusions>
 				<exclusion>
-					<artifactId>resteasy-jaxrs</artifactId>
-					<groupId>org.jboss.resteasy</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>resteasy-client</artifactId>
-					<groupId>org.jboss.resteasy</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>resteasy-jackson2-provide</artifactId>
-					<groupId>org.jboss.resteasy</groupId>
-				</exclusion>
+					<groupId>org.keycloak</groupId>
+					<artifactId>keycloak-core</artifactId>
+			    </exclusion>
+   				<exclusion>
+					<groupId>org.keycloak</groupId>
+					<artifactId>keycloak-common</artifactId>
+			    </exclusion>			
 			</exclusions>
+			
 		</dependency>
 		<dependency>
 			<groupId>org.fundaciobit.pluginsib.userinformation</groupId>
@@ -215,8 +213,9 @@
 							<contextRoot>/carpetaapi/externa</contextRoot>
 							<bundleFileName>carpeta-api-externa.war</bundleFileName>
 						</webModule>
-						<!-- API EXTERNA END 
-                        <webModule>
+						<!-- API EXTERNA END -->
+                        <!--
+						<webModule>
                             <groupId>es.caib.carpeta</groupId>
                             <artifactId>carpeta-api</artifactId>
                             <contextRoot>/carpeta/api</contextRoot>

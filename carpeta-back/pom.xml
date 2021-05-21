@@ -341,7 +341,7 @@
         </dependency>
         
         <!-- Llibreries de keycloak. Parxe CAIB -->
-
+<!-- 
         <dependency>
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-core</artifactId>
@@ -377,13 +377,38 @@
            <artifactId>jackson-annotations</artifactId>
            <scope>provided</scope>
         </dependency>
+        -->
         
         <dependency>
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-spring-security-adapter</artifactId>
             <version>${keycloak.version}</version>
         </dependency>
-        
+		 <!-- Veure fitxer [carpeta-ear]\src\main\application\META-INF\jboss-deployment-structure.xml -->
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-core</artifactId>
+            <version>${keycloak.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-common</artifactId>
+            <version>${keycloak.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-adapter-spi</artifactId>
+            <version>${keycloak.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-adapter-core</artifactId>
+            <version>${keycloak.version}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -433,49 +458,7 @@
                 <version>${hibernate.version}</version>
             </dependency>
 
-            <!-- Dependències de test -->
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>${junit.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <!-- fixar versió de jboss-logging ja que Hibernate i RestEasy 
-                fan referència a varies versions -->
-            <dependency>
-                <groupId>org.jboss.logging</groupId>
-                <artifactId>jboss-logging</artifactId>
-                <version>${jboss-logging.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <!-- Dependències per tests REST - implementació del Client JAX-RS -->
-            <dependency>
-                <groupId>org.jboss.resteasy</groupId>
-                <artifactId>resteasy-client</artifactId>
-                <version>${resteasy.version}</version>
-                <scope>test</scope>
-                <exclusions>
-                    <!-- JSON-API ja està inclòs dins les apis JAVA EE 8 -->
-                    <exclusion>
-                        <groupId>javax.json</groupId>
-                        <artifactId>javax.json-api</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <!-- Dependències per tests REST - suport estàndar per JSONB -->
-            <dependency>
-                <groupId>org.jboss.resteasy</groupId>
-                <artifactId>resteasy-json-binding-provider</artifactId>
-                <version>${resteasy.version}</version>
-                <scope>test</scope>
-                <exclusions>
-                    <!-- JSON-API ja està inclòs dins les apis JAVA EE 8 -->
-                    <exclusion>
-                        <groupId>javax.json</groupId>
-                        <artifactId>javax.json-api</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
