@@ -159,6 +159,10 @@ public class ReprendreTramitSistraCarpetaFrontPlugin extends AbstractCarpetaFron
 
                         BackofficeFacade backofficeFacade = getBackofficeFacade();
                         String urlAnonimo = backofficeFacade.obtenerUrlAccesoAnonimo(clau);
+                        
+                        if (urlAnonimo == null) {
+                        	map.put("missatgeError", getTraduccio("error.noclau", locale) );
+                        }
 
                         map.put("id", clau);
                         map.put("url", urlAnonimo);
@@ -187,7 +191,7 @@ public class ReprendreTramitSistraCarpetaFrontPlugin extends AbstractCarpetaFron
             map.put("contextPath", request.getContextPath());
 
             String[] traduccions = { "label.reprendre", "label_info_finestra", 
-                    "label_no_pipella"};
+                    "label_no_pipella", "label_continuar", "label_clau"};
 
             for (String t : traduccions) {
                 map.put(t.replace('.', '_'), getTraduccio(t, locale));

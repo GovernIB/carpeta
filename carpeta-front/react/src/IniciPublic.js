@@ -122,36 +122,8 @@ class IniciPublic extends Component {
                             </p>
 
                             <p className="titol h5">{t('tramitacioAnonimaTitol')}</p>
-                            <p className="lh15 pb-3"><a href="#" id="tramitacioModalBtn" data-toggle="modal"
-                                                        data-target="#tramitacioModal"><span
+                            <p className="lh15 pb-3"><a href={baseURL + '/#/publicmoduls/reprendretramit'} id="tramitacioModalBtn"><span
                                 className="oi oi-external-link"/>{t('tramitacioEnllaz')}</a></p>
-
-                            <div className="modal fade" id="tramitacioModal" tabIndex="-1" aria-hidden="true">
-                                <div className="modal-dialog">
-                                    <div className="modal-content">
-                                        <div className="modal-header">
-                                            <div className="modal-title h5"
-                                                 id="tramitacioModalLabel">{t('iniciarTramitacioAnonimaTitol')}</div>
-                                            <button type="button" className="close" data-dismiss="modal">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div className="modal-body">
-                                            <div className="alert alert-danger"
-                                                 role="alert">{t('errorTramitacioAnonima')}</div>
-                                            <p>{t('descTramitacioAnonima')}</p>
-                                            <input aria-label="IdTramit" type="text" id="clauAnonima"/>
-                                        </div>
-                                        <div className="modal-footer">
-                                            <button type="button" className="btn btn-secondary"
-                                                    data-dismiss="modal">{t('cancelarTramitacioAnonima')}</button>
-                                            <button type="button" id="iniciarTramitacioBtn"
-                                                    className="btn btn-primary">{t('iniciarTramitacioAnonimaBtn')}</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
 
                             <p className="titol h5">{t('paginaIniciProblemes')}</p>
                             <p className="lh15">{t('paginaIniciAjuda')}</p>
