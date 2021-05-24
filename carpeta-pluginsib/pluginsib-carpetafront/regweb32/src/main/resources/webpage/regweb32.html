@@ -44,8 +44,8 @@
             
                 <form id="fechaBusqueda" action="" method="post">
                     <div class="row pb-2 ml-0 mr-0">
-                        <div class="col-md-2">
-                            <div class="form-group pl-2 pr-2" style="padding-right:50px">
+                        <div class="col-md-2 pl-0">
+                            <div class="form-group pr-2" style="padding-right:50px">
                                 <label for="numero" class="float-left">${registro_numero}</label>
                                 <input type="text" name="numero" id="numero" class="form-control form-control-sm" value="<#if form_numero?has_content>${form_numero}</#if>" />
                             </div>
@@ -102,7 +102,7 @@
                         <#setting date_format="MM/dd/yyyy hh">
                         <#list registros as registroItem >
 
-                        <tr class="clickable-row"  onclick="mostrantDetall('${registroItem.numeroRegistro}')">
+                        <tr class="clickable-row" onclick="mostrantDetall('${registroItem.numeroRegistro}')" onkeypress="mostrantDetall('${registroItem.numeroRegistro}')" tabindex=${registroItem?counter}>
                             <td class="totLinia">${registroItem.numeroRegistro}</td>
                             <td class="totLinia" data-order="$registroItem.fechaRegistro?string('yyyyMMddHHmm')}">
                                 ${registroItem.fechaRegistro?string("dd-MM-yyyy HH:mm")}

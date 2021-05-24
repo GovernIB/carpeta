@@ -87,8 +87,8 @@ class BarraMenu extends Component {
 				content = "";
 			} else {
 				content = this.state.enllasosMenuBar.map((s, i) => (
-					<li className="itemBar" key={i}>
-						<a href={s.url} className="imc-bt-menubar" target="_blank">
+					<li className="itemBar pl-5" key={i}>
+						<a href={s.url} className="imc-bt-menubar pl-0" target="_blank">
 							<img src={s.urllogo} title="" alt={s.label} className="logoMenuBar"/>
 							<span>{s.label}</span>
 						</a>

@@ -12,6 +12,42 @@ a:hover{
 .h2, h2{
 	font-size: 1.1em !important;
 }
+.form-control:focus{
+	border-color:#32814B;
+	outline: 0;
+}
+
+/* Navegació amb tab */
+a:focus-visible {
+	border: 1px solid #32814B;
+}
+button:focus-visible {
+	border: 1px solid #32814B;
+}
+input:focus-visible {
+	border: 1px solid #32814B;
+}
+.boton-menu:focus-visible,
+.botoSuport:focus-visible,
+.close:focus-visible,
+.imc-bt-xarxa:focus-visible,
+.botoMenu:focus-visible{
+	outline: 1px solid #32814B !important;
+}
+.botoAccedirCarpeta:focus-visible{
+	outline: 1px solid #000 !important;
+}
+.alert-dismissible .close:focus-visible {
+	outline: 1px solid #32814B !important;
+}
+.capsaPlugin:focus-visible{
+	outline: 1px solid #32814B !important;
+}
+
+button:active{
+	outline: none !important;
+}
+/* FI Navegació amb tab */
 
 /* Botó color Carpeta */
 .btn-primary.carpeta-btn {
@@ -27,6 +63,15 @@ a:hover{
 	border: none #000 !important;
 	outline: none !important;
 	box-shadow: none !important;
+}
+.btn-primary.carpeta-btn:focus-visible{
+	outline: 1px solid #32814B !important;
+}
+.page-link:focus-visible{
+	outline: 2px solid #32814B !important;
+}
+.clickable-row:focus-visible{
+	outline: 2px solid #32814B !important;
 }
 /* Fi Botó color Carpeta */
 

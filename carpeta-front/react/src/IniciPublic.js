@@ -112,13 +112,13 @@ class IniciPublic extends Component {
                         <div className="col-md-5 border-0 columna2Inici">
 
                             <p className="margen-top-clave pb-3">
-                                        <span className="btn btn-primary carpeta-btn botoAccedirCarpeta"
-                                              onClick={() => {
-                                                  var loc = new URL(window.location.href);
-                                                  window.location.href = ('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host))
-                                              }} role="button"><span
-                                            className="oi oi-account-login" title=""
-                                            aria-hidden="true"/> {t('paginaIniciBotoAccedir')}</span>
+                                <button className="btn btn-primary carpeta-btn botoAccedirCarpeta"
+                                      onClick={() => {
+                                          var loc = new URL(window.location.href);
+                                          window.location.href = ('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host))
+                                      }}>
+                                    <span className="oi oi-account-login" title="" aria-hidden="true"/> {t('paginaIniciBotoAccedir')}
+                                </button>
                             </p>
 
                             <p className="titol h5">{t('tramitacioAnonimaTitol')}</p>

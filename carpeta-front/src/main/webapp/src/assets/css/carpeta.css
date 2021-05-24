@@ -12,6 +12,37 @@ a:hover{
 	font-size: 1.1em !important;
 }
 
+/* Navegació amb tab */
+a:focus-visible {
+	border: 1px solid #32814B;
+}
+button:focus-visible {
+	border: 1px solid #32814B;
+}
+input:focus-visible {
+	border: 1px solid #32814B;
+}
+.boton-menu:focus-visible,
+.botoSuport:focus-visible,
+.close:focus-visible,
+.imc-bt-xarxa:focus-visible,
+.botoMenu:focus-visible{
+	outline: 1px solid #32814B !important;
+}
+.botoAccedirCarpeta:focus-visible{
+	outline: 1px solid #000 !important;
+}
+.alert-dismissible .close:focus-visible {
+	outline: 1px solid #32814B !important;
+}
+.capsaPlugin:focus-visible{
+	outline: 1px solid #32814B !important;
+}
+button:active{
+	outline: none !important;
+}
+/* FI Navegació amb tab */
+
 /* Botó color Carpeta */
 .btn-primary.carpeta-btn {
 	background-color: #32814B;
@@ -20,12 +51,20 @@ a:hover{
 	color: #ffffff !important;
 }
 .btn-primary.carpeta-btn:hover,
-.btn-primary.carpeta-btn:focus,
 .btn-primary.carpeta-btn:active{
 	background-color: #000 !important;
 	border: none #000 !important;
 	outline: none !important;
 	box-shadow: none !important;
+}
+.btn-primary.carpeta-btn:focus-visible{
+	outline: 1px solid #32814B !important;
+}
+.page-link:focus-visible{
+	outline: 2px solid #32814B !important;
+}
+.clickable-row:focus-visible{
+	outline: 2px solid #32814B !important;
 }
 /* Fi Botó color Carpeta */
 
@@ -118,7 +157,7 @@ img:hover {
 	font-size: 1rem;
 }
 .usuari{
-	top: 2.5em;
+	top: 2.8em;
 	/*height: 2em;*/
 }
 .imc-icona{
@@ -273,7 +312,7 @@ img:hover {
 	color: #000;
 	text-decoration: none;
 }
-.menuRapid:active:focus:visited{
+.menuRapid:active:visited{
 	border: 0px;
 	color: #000;
 	text-decoration: none;
@@ -300,11 +339,10 @@ img:hover {
 .imc-bt-menubar { display: inline-block; height: 2em; padding-left: 2.7em; margin-right: 2em; vertical-align: middle;}
 .imc-bt-menubar span { display: block; color: #fff; text-transform: uppercase; float: left;}
 
-.imc-bt-menubar:hover,
-.imc-bt-menubar:focus {
-	color: #fff;
-	background-color: transparent;
-}
+/*.imc-bt-menubar:hover {*/
+/*	color: #fff;*/
+/*	background-color: transparent;*/
+/*}*/
 .logoMenuBar{
 	margin-right: 0.5em;
 	width: 20px;
