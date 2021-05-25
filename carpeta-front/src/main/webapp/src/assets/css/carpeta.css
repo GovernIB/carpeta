@@ -69,7 +69,10 @@ button:active{
 .clickableRow:focus-visible{
 	outline: 2px solid #32814B !important;
 }
-.paginate_button{
+.paginate_button:focus-visible{
+	outline: 2px solid #32814B !important;
+}
+.filaNotib:focus-visible{
 	outline: 2px solid #32814B !important;
 }
 /* Fi Botó color Carpeta */
