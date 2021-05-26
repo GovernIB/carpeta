@@ -10,7 +10,6 @@ import es.caib.carpeta.logic.utils.EjbManager;
 import es.caib.carpeta.model.entity.Idioma;
 import es.caib.carpeta.model.fields.EntitatFields;
 import es.caib.carpeta.persistence.EntitatJPA;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -27,7 +26,6 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -122,6 +120,10 @@ public class InicioController extends CommonFrontController {
     public String triarEntitat(@PathVariable("codiEntitat") String codiEntitat, HttpServletRequest request,
             HttpServletResponse response) throws I18NException {
 
+        String IDIOMA = LocaleContextHolder.getLocale().getLanguage();
+        EntitatJPA entitat = entitatEjb.findByCodi(codiEntitat);
+        sesionHttp.setNomEntitat(entitat.getNom().getTraduccio(IDIOMA).getValor());
+
         try {
             // Eliminam sessió anterior
             if (sesionHttp.getEntitat() != null) {
@@ -130,7 +132,7 @@ public class InicioController extends CommonFrontController {
                     String baseURL = (String) request.getSession()
                             .getAttribute(LoginController.SESSION_RETURN_URL_POST_LOGIN);
                     String url_callback_logout = baseURL + "/salir";
-                    String IDIOMA = LocaleContextHolder.getLocale().getLanguage();
+
                     securityService.iniciarSesionLogout(url_callback_logout, IDIOMA);
                     HttpSession session = request.getSession(false);
                     if (session != null) {
@@ -251,6 +253,7 @@ public class InicioController extends CommonFrontController {
                     sesionHttp.setEntitat(codiEntitat);
 
                     mav.addObject("entitat", codiEntitat);
+                    mav.addObject("nomEntitat", entitats.get(0).getNom());
                     mav.addObject("numEntitats", entitats.size());
                     mav.addObject("canviarDeFront", canviardefront);
 
@@ -269,6 +272,7 @@ public class InicioController extends CommonFrontController {
                     sesionHttp.setEntitat(defaultEntityCode);
 
                     mav.addObject("entitat", sesionHttp.getEntitat());
+                    mav.addObject("nomEntitat", entitat.getNom());
                     mav.addObject("defaultEntityCode", defaultEntityCode);
                     mav.addObject("numEntitats", entitats.size());
                     mav.addObject("canviarDeFront", canviardefront);
@@ -277,6 +281,7 @@ public class InicioController extends CommonFrontController {
 
                     if (sesionHttp.getEntitat() != null) {
                         mav.addObject("entitat", sesionHttp.getEntitat());
+                        mav.addObject("nomEntitat", sesionHttp.getNomEntitat());
                         mav.addObject("numEntitats", entitats.size());
                         mav.addObject("canviarDeFront", canviardefront);
                     } else {
@@ -288,6 +293,7 @@ public class InicioController extends CommonFrontController {
             } else if (sesionHttp.getEntitat() != null) {
 
                 mav.addObject("entitat", sesionHttp.getEntitat());
+                mav.addObject("nomEntitat", sesionHttp.getNomEntitat());
                 mav.addObject("numEntitats", entitats.size());
                 mav.addObject("canviarDeFront", canviardefront);
                 mav.addObject("errorLogin", errorDeLogin);

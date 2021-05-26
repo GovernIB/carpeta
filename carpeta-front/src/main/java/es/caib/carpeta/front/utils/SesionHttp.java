@@ -20,6 +20,7 @@ public class SesionHttp {
     private String entitat;
     private long entitatID;
     private String errorLogin;
+    private String nomEntitat;
 
     public SesionHttp() {
     }
@@ -70,6 +71,12 @@ public class SesionHttp {
 
     public void setErrorLogin(String errorLogin) {
         this.errorLogin = errorLogin;
+    }
+
+    public String getNomEntitat() { return nomEntitat; }
+
+    public void setNomEntitat(String nomEntitat) {
+        this.nomEntitat = nomEntitat;
     }
 
 }

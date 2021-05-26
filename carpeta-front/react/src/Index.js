@@ -15,6 +15,7 @@ import Accessibilitat from './Accessibilitat';
 import AvisLegal from './AvisLegal';
 import CanviarEntitat from './CanviarEntitat';
 import NivellAutenticacio from './NivellAutenticacio';
+import TitolPipella from './TitolPipella';
 import * as Constants from './Constants';
 
 // NO ESBORRAR LA SEGÜENT LINIA  !!!!!!
@@ -123,6 +124,10 @@ class Index extends Component {
 
         return (
             <div>
+
+                {/* -- Títol de la pipella */}
+                <TitolPipella/>
+
                 {/* -- Menú vertical */}
                 <MenuLateral />
 
