@@ -108,7 +108,7 @@
                     <tbody>
                     <#setting date_format="MM/dd/yyyy hh">
                     <#list tramits as tramite >
-                    <tr class="clickableRow" data-numero="${tramite.numero}" data-url="${tramite.url}" onkeypress="window.open('${tramite.url}')" data-mostramodal="${tramite.esMostraModal()?then('S','N')}" data-pending="${tramite.isPendiente()?then('S','N')}" data-version="${tramite.versionSistra}" style="cursor:pointer" tabindex=${tramite?counter}>
+                    <tr class="clickableRow" data-numero="${tramite.numero}" data-url="${tramite.url}" data-mostramodal="${tramite.esMostraModal()?then('S','N')}" data-pending="${tramite.isPendiente()?then('S','N')}" data-version="${tramite.versionSistra}" style="cursor:pointer" tabindex=${tramite?counter}>
                         <td>${tramite.descripcionTramite}</td>
                         <td data-order="${tramite.fechaInicio?string("yyyyMMddHHmm")}">
                             ${tramite.fechaInicio?string("dd-MM-yyyy HH:mm")}
@@ -136,16 +136,13 @@
                             }
                         });
                         
-                        $('.clickableRow').click(function(event) {
+                        $('.clickableRow').click(function(event){
                         	event.preventDefault();
-                        	if ($(this).data('numero') != '') {
-                        		 mostrarCarregant();
-                        		window.location.replace($(this).data('url'));
-                        	}else if ($(this).data('pending') == 'S' && $(this).data('mostramodal') == 'S'){
-                        		openModalConfirm($(this).data('url'));
-                        	}else{
-                        		window.open($(this).data('url'), '_blank');
-                       		}
+                        	carregarUrl($(this));
+                        });
+                        $('.clickableRow').keypress(function(event){
+                        	event.preventDefault();
+                        	carregarUrl($(this));
                         });
                         
                         $('#veureError').click(function(){ 
@@ -161,6 +158,16 @@
                         });
                     });
                     
+                    function carregarUrl(obj) {
+                        if (obj.data('numero') != '') {
+                             mostrarCarregant();
+                            window.location.replace(obj.data('url'));
+                        }else if (obj.data('pending') == 'S' && obj.data('mostramodal') == 'S'){
+                            openModalConfirm(obj.data('url'));
+                        }else{
+                            window.open(obj.data('url'), '_blank');
+                        }
+                    }
                     
                     function mostrarCarregant() {
                         $('#llistat').hide();
