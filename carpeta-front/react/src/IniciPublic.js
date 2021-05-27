@@ -116,13 +116,13 @@ class IniciPublic extends Component {
                                       onClick={() => {
                                           var loc = new URL(window.location.href);
                                           window.location.href = ('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host))
-                                      }}>
+                                      }} tabIndex="2">
                                     <span className="oi oi-account-login" title="" aria-hidden="true"/> {t('paginaIniciBotoAccedir')}
                                 </button>
                             </p>
 
                             <p className="titol h5">{t('tramitacioAnonimaTitol')}</p>
-                            <p className="lh15 pb-3"><a href={baseURL + '/#/publicmoduls/reprendretramit'} id="tramitacioModalBtn"><span
+                            <p className="lh15 pb-3"><a href={baseURL + '/#/publicmoduls/reprendretramit'} id="tramitacioModalBtn" tabIndex="3"><span
                                 className="oi oi-external-link"/>{t('tramitacioEnllaz')}</a></p>
 
                             <p className="titol h5">{t('paginaIniciProblemes')}</p>
@@ -132,13 +132,13 @@ class IniciPublic extends Component {
                                     href="http://clave.gob.es/clave_Home/clave.html"
                                     title={t('paginaIniciAjudaClaveText')}
                                     target="_blank"
-                                    rel="noopener noreferrer">{t('paginaIniciAjudaClave')}</a>
+                                    rel="noopener noreferrer" tabIndex="4">{t('paginaIniciAjudaClave')}</a>
                                 </li>
                                 <li><span className="oi oi-arrow-right"/> {t('paginaIniciAjuda2')}</li>
                                 <li><span className="oi oi-arrow-right"/> {t('paginaIniciAjuda3')} <a
                                     href="https://ssweb.seap.minhap.es/ayuda/consulta/Claveciudadanos"
                                     title={t('paginaIniciAjudaBustiaText')}
-                                    target="_blank" rel="noopener noreferrer">{t('paginaIniciAjudaBustia')}</a></li>
+                                    target="_blank" rel="noopener noreferrer" tabIndex="5">{t('paginaIniciAjudaBustia')}</a></li>
                             </ul>
 
                         </div>

@@ -61,7 +61,7 @@ class CanviarEntitat extends Component {
             content = entities.map((s, i) => (
                 <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
                     <a className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}
-                       href={baseURL + "/e/" + s.codi}>
+                       href={baseURL + "/e/" + s.codi} tabIndex={1+i}>
                     <span className="card-title titol pl-1 h3">
                         <img src={s.urlIcona} title={s.nom} alt={s.nom} className="imc-icona"/>
                     </span>

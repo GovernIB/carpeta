@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import { withTranslation } from 'react-i18next';
+import {withTranslation} from 'react-i18next';
 import ExpirarSessio from "./ExpirarSessio";
-import Breadcrumb from "./Breadcrumb";
-import * as breadcrumbPaths from './utils/breadcrumbPaths';
-import * as breadcrumbPathsAut from './utils/breadcrumbPathsAut';
 
 class Accessibilitat extends Component {
+
+    componentDidMount() {
+        $('[tabIndex=1]').focus();
+    }
 
     render() {
 
@@ -17,7 +18,7 @@ class Accessibilitat extends Component {
         //var motlla = <*Breadcrumb items={breadcrumbPaths.Accessibilitat} autenticat={autenticat}/>;
 
         return (
-            <div className="container-contenido">
+            <div className="container-contenido" tabIndex="1">
                 {/*motlla*/}
                 {autenticat === '1' &&
                     <ExpirarSessio/>
@@ -28,24 +29,24 @@ class Accessibilitat extends Component {
                     <div className="col-md-12 border-0 float-left p-0">
                         <p className="lh15">{t('accessibilitatDeclaracio1')} <a
                             href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2018-12699" target="_blank"
-                            rel="noopener noreferrer">{t('accessibilitatDecret')}</a> {t('accessibilitatDeclaracio2')}
+                            rel="noopener noreferrer" tabIndex="2">{t('accessibilitatDecret')}</a> {t('accessibilitatDeclaracio2')}
                         </p>
                         <p className="lh15">{t('accessibilitatDeclaracio3')} <a href="https://www.caib.es/carpeta/"
                                                                                 target="_blank"
-                                                                                rel="noopener noreferrer">https://www.caib.es/carpeta/</a> {t('accessibilitatDeclaracio4')}
+                                                                                rel="noopener noreferrer" tabIndex="3">https://www.caib.es/carpeta/</a> {t('accessibilitatDeclaracio4')}
                         </p>
 
                         <p className="titol h3">{t('accessibilitatCompliment')}</p>
                         <p className="lh15">{t('accessibilitatCompliment1')} <a
                             href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2018-12699" target="_blank"
-                            rel="noopener noreferrer">{t('accessibilitatDecret')}</a>{t('accessibilitatCompliment2')}
+                            rel="noopener noreferrer" tabIndex="4">{t('accessibilitatDecret')}</a>{t('accessibilitatCompliment2')}
                         </p>
 
                         <p className="titol h3">{t('accessibilitatNoAccessible')}</p>
                         <p className="lh15">{t('accessibilitatNoAccessible1')}</p>
                         <p className="lh15">{t('accessibilitatNoAccessible2')} <a
                             href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2018-12699" target="_blank"
-                            rel="noopener noreferrer">{t('accessibilitatDecret')}</a>.</p>
+                            rel="noopener noreferrer" tabIndex="5">{t('accessibilitatDecret')}</a>.</p>
                         <div className="mb-3">
                             <ul className="lh15 pl-5 pt-1">
                                 <li>{t('accessibilitatNoAccessible3')}</li>
@@ -61,16 +62,16 @@ class Accessibilitat extends Component {
                         <p className="titol h3">{t('accessibilitatObservacions')}</p>
                         <p className="lh15">{t('accessibilitatObservacions1')} <a
                             href="https://www.caib.es/sistrafront/sistrafront/inicio?language=ca&modelo=PD0018ENCW&version=1"
-                            target="_blank" rel="noopener noreferrer">{t('accessibilitatObservacions5')}</a>.</p>
+                            target="_blank" rel="noopener noreferrer" tabIndex="6">{t('accessibilitatObservacions5')}</a>.</p>
                         <p className="lh15">{t('accessibilitatObservacions2')} <a href="http://dgtic.caib.es/"
                                                                                   target="_blank"
-                                                                                  rel="noopener noreferrer">{t('accessibilitatObservacions3')}</a> {t('accessibilitatObservacions4')}
+                                                                                  rel="noopener noreferrer" tabIndex="7">{t('accessibilitatObservacions3')}</a> {t('accessibilitatObservacions4')}
                         </p>
 
                         <p className="titol h3">{t('accessibilitatProcediment')}</p>
                         <p className="lh15">{t('accessibilitatProcediment1')} <a
                             href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2018-12699" target="_blank"
-                            rel="noopener noreferrer">{t('accessibilitatDecret')}</a> {t('accessibilitatProcediment2')}
+                            rel="noopener noreferrer" tabIndex="8">{t('accessibilitatDecret')}</a> {t('accessibilitatProcediment2')}
                         </p>
 
                         <p className="titol h3">{t('accessibilitatOpcional')}</p>
@@ -78,7 +79,7 @@ class Accessibilitat extends Component {
                         <p className="lh15">{t('accessibilitatOpcional2')}</p>
                         <p className="lh15">{t('accessibilitatOpcional3')}</p>
                         <p className="lh15"><a className="mr-auto" href="https://www.w3.org/WAI/WCAG1AA-Conformance"
-                                               target="_blank" rel="noopener noreferrer">
+                                               target="_blank" rel="noopener noreferrer" tabIndex="9">
                             <img src="/carpetafront/src/assets/images/wcag2AA.png" title={t('accessibilitatAccesWAI')} alt={t('accessibilitatAccesWAI')} />
                         </a></p>
                         <p className="lh15">{t('accessibilitatOpcional4')}</p>

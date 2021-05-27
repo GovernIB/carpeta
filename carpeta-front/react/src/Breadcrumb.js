@@ -188,14 +188,14 @@ class Breadcrumb extends Component {
 
                 const TOTAL_ITEMS = items.length;
 
-                itemDOMS.push(<li key='inici'><Link to={'/'}>{i18n.t('mollaInici')}</Link></li>);
+                itemDOMS.push(<li key='inici'><Link to={'/'} tabIndex="90">{i18n.t('mollaInici')}</Link></li>);
 
                 // console.log("RENDER Breadcrumb items: " + TOTAL_ITEMS);
 
                 items.forEach(({id, label}, index) => {
                     // if (index < TOTAL_ITEMS - 1) {
                     itemDOMS.push(<li key={index}><span className="imc-separador"> &gt;</span><Link
-                        to={id}>{label}</Link></li>);
+                        to={id} tabindex={91+index}>{label}</Link></li>);
                     // } else {
                     //     /*if (label === 'plugin') {
                     //         itemDOMS.push(<li id="plugin" key={index}>{pluginNom}</li>);

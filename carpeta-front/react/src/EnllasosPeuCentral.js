@@ -71,7 +71,7 @@ class EnllasosPeuCentral extends Component {
             } else {
                 content = this.state.enllasosPeuCentral.map((s, i) => (
                     <li key={i}>
-                        <a href={s.url} target="_blank">
+                        <a href={s.url} target="_blank"  tabIndex={403+i}>
                             <span>{s.label}</span>
                             <img src={s.urllogo} title="" alt={s.label}/>
                         </a>
@@ -86,14 +86,14 @@ class EnllasosPeuCentral extends Component {
         var avisLegal;
 
         if(entitatActiva === 'caib'){
-            avisLegal = <li><Link to={{pathname: `/avislegal`, nomPagina: 'peuAvis' }}> { t('peuAvis') } <img src="/carpetafront/src/assets/images/legal.png" className="ml-0" title={t('avisLegalTitol')} alt={t('avisLegalTitol')} /></Link></li>;
+            avisLegal = <li><Link to={{pathname: `/avislegal`, nomPagina: 'peuAvis' }}  tabIndex="402"> { t('peuAvis') } <img src="/carpetafront/src/assets/images/legal.png" className="ml-0" title={t('avisLegalTitol')} alt={t('avisLegalTitol')} /></Link></li>;
         } else{
             avisLegal = "";
         }
 
         return (
             <ul className="enllasosPeu">
-                <li><Link to={{pathname: `/mapaweb`, nomPagina: 'peuMapa' }}> { t('peuMapa') }</Link></li>
+                <li><Link to={{pathname: `/mapaweb`, nomPagina: 'peuMapa' }} tabIndex="401"> { t('peuMapa') }</Link></li>
                 {avisLegal}
                 {content}
             </ul>

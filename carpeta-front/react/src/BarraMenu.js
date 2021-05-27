@@ -68,6 +68,11 @@ class BarraMenu extends Component {
 					error: JSON.stringify(error)
 				});
 			});
+
+		$( ".imc-bt-menu" )
+			.focusin(function() {
+				$( ".imc-marc-menu").css("-webkit-transform", "translateX(-100%)");
+			});
 	}
 
 
@@ -88,7 +93,7 @@ class BarraMenu extends Component {
 			} else {
 				content = this.state.enllasosMenuBar.map((s, i) => (
 					<li className="itemBar pl-5" key={i}>
-						<a href={s.url} className="imc-bt-menubar pl-0" target="_blank">
+						<a href={s.url} className="imc-bt-menubar pl-0" target="_blank" tabIndex={290+i}>
 							<img src={s.urllogo} title="" alt={s.label} className="logoMenuBar"/>
 							<span>{s.label}</span>
 						</a>
@@ -99,37 +104,35 @@ class BarraMenu extends Component {
 
 		const styleColorMenu = (this.state.colorMenu === null)? { backgroundColor : '#32814B'} : { backgroundColor : "#"+this.state.colorMenu};
 
-		return (
-			<div id = "barraMenu">
-				<header className="imc-titol" style={styleColorMenu}>
+		return <div id = "barraMenu">
+			<header className="imc-titol" style={styleColorMenu}>
 
-					<nav className="">
-						<div className="row imc--contingut">
+				<nav className="">
+					<div className="row imc--contingut">
 
-						{/*<a href="{this.context.router.goBack()}" className="imc-torna"*/}
-						{/*   title={t('menuTorna')}><span>{t('menuTorna')}</span></a>*/}
+					{/*<a href="{this.context.router.goBack()}" className="imc-torna"*/}
+					{/*   title={t('menuTorna')}><span>{t('menuTorna')}</span></a>*/}
 
-							<div className="col-11 pl-0">
-								<h1>
-									<span>{t('menuTitol')}</span>
-								</h1>
+						<div className="col-11 pl-0">
+							<h1>
+								<span>{t('menuTitol')}</span>
+							</h1>
 
-								<ul>
-									{content}
-								</ul>
-							</div>
-
-							<div className="col-1 pr-0">
-								<button type="button" className="imc-bt-menu float-right" id="imc-bt-menu" title={t('menuMenu')}>
-									{/*<span>{t('menuMenu')}</span>*/}
-								</button>
-							</div>
+							<ul>
+								{content}
+							</ul>
 						</div>
-					</nav>
 
-				</header>
-			</div>
-		)
+						<div className="col-1 pr-0">
+							<button type="button" className="imc-bt-menu float-right" id="imc-bt-menu" title={t('menuMenu')} tabIndex="200">
+								{/*<span>{t('menuMenu')}</span>*/}
+							</button>
+						</div>
+					</div>
+				</nav>
+
+			</header>
+		</div>
 	}
 }
 

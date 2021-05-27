@@ -77,7 +77,7 @@ class MenuRapid extends Component {
                             allItems.push(
                                 <li key={i} className="nav-item pr-4">
                                     <Link className="navCarpeta"
-                                          to={{pathname: Constants.PLUGINHTML_PATH + s.context, nomPagina: "plugin"}}>
+                                          to={{pathname: Constants.PLUGINHTML_PATH + s.context, nomPagina: "plugin"}} tabIndex={101+i}>
                                         <img src={urlBase + s.urllogo} alt={s.nom} title="" className="imc-icona"/>
                                         {/*<img src={s.urllogo} alt="" title="" className="imc-icona"/>*/}
                                         <span className="menuRapidView">{s.nom}</span>
@@ -89,7 +89,7 @@ class MenuRapid extends Component {
                         case 3: // Seccio
                             allItems.push(
                                 <li key={i} className="nav-item pr-4">
-                                    <Link to={{pathname: Constants.SECCIO_PATH + s.context, nomPagina: "seccio"}}>
+                                    <Link to={{pathname: Constants.SECCIO_PATH + s.context, nomPagina: "seccio"}} tabIndex={101+i}>
                                         <img src={s.urllogo} title="" alt={s.nom} className="imc-icona"/>
                                         <span className="menuRapidView">{s.nom}</span>
                                     </Link>
@@ -100,7 +100,7 @@ class MenuRapid extends Component {
                         case 4: // PseudoPlugin
                             allItems.push(
                                 <li key={i} className="nav-item pr-4" key={i}>
-                                    <a className="navCarpeta" href={s.url} target="_blank" title={s.nom}>
+                                    <a className="navCarpeta" href={s.url} target="_blank" title={s.nom} tabIndex={101+i}>
                                         <img src={s.urllogo} alt={s.nom} title="" className="imc-icona"/>
                                         <span className="menuRapidView">{s.nom}</span>
                                     </a>

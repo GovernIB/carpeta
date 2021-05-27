@@ -49,6 +49,8 @@ class MapaWeb extends Component {
 				});
 			});
 
+		$('[tabIndex=1]').focus();
+
 	}
 
 
@@ -67,7 +69,7 @@ class MapaWeb extends Component {
 
 			var accessibilitat = <p key={0} className="lh15 upper">
 				<Link to={{pathname: `/accessibilitat`, nomPagina: 'menuAccessibilitat'}}
-					  className="imc-marc-ico imc--accessibilitat">
+					  className="imc-marc-ico imc--accessibilitat" tabIndex="3">
 					<span>{t('menuAccessibilitat')}</span>
 				</Link>
 			</p>;
@@ -90,7 +92,7 @@ class MapaWeb extends Component {
 							case 0: // Plugin react
 								enllazos.push(
 									<p key={'pr' + i} className="lh15 upper">
-										<Link to={Constants.PLUGINREACT_PATH + s.context}>
+										<Link to={Constants.PLUGINREACT_PATH + s.context} tabIndex={4+i}>
 											<img src={urlBase + s.urllogo} alt={s.nom} title="" className="imc-icona"/>
 											{s.nom}
 										</Link>
@@ -102,7 +104,7 @@ class MapaWeb extends Component {
 									<p key={'ph' + i} className="lh15 upper">
 										{/*<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}*/}
 										{/*	 className="imc-icona" title="" alt=""/>*/}
-										<Link to={Constants.PLUGINHTML_PATH + s.context}>
+										<Link to={Constants.PLUGINHTML_PATH + s.context} tabIndex={4+i}>
 											<img src={urlBase + s.urllogo} alt={s.nom} title="" className="imc-icona"/>
 											{s.nom}
 										</Link>
@@ -112,7 +114,7 @@ class MapaWeb extends Component {
 							case 3: // Seccio
 								enllazos.push(
 									<p key={'s' + i} className="lh15 upper">
-										<Link to={Constants.SECCIO_PATH + s.context}>
+										<Link to={Constants.SECCIO_PATH + s.context} tabIndex={4+i}>
 											<img src={s.urllogo} title="" alt={s.nom} className="imc-icona"/>
 											<span className="menuRapidView">{s.nom}</span>
 										</Link>
@@ -123,7 +125,7 @@ class MapaWeb extends Component {
 							case 4: // PseudoPlugin
 								enllazos.push(
 									<p key={'ps' + i} className="lh15 upper">
-										<a href={s.url} target="_blank" title={s.nom}>
+										<a href={s.url} target="_blank" title={s.nom} tabIndex={4+i}>
 											<img src={s.urllogo} alt={s.nom} title="" className="imc-icona"/>
 											<span className="menuRapidView">{s.nom}</span>
 										</a>
@@ -144,7 +146,7 @@ class MapaWeb extends Component {
 		clearTimeout(sessionStorage.getItem('idTimeOut'));
 
 		return (
-			<div className="container-contenido">
+			<div className="container-contenido" tabIndex="1">
 	
 				{autenticat === '1' && <ExpirarSessio/>	}
 
@@ -158,7 +160,7 @@ class MapaWeb extends Component {
 						<div className="card">
 							<ul className="list-group list-group-flush">
 								<li className="list-group-item">
-									<p className="lh15 upper"><Link to="/">{t('mapaWebInformacio')}</Link></p>
+									<p className="lh15 upper"><Link to="/" tabIndex="2">{t('mapaWebInformacio')}</Link></p>
 								</li>
 								<li className="list-group-item">
 									{enllazos}

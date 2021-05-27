@@ -102,7 +102,7 @@ class Peu extends Component {
 					<div className="imc-peu-opcions">
 
 						<div className="pb-3 col2peu">
-							<button type="button" id="dialogAjuda" data-toggle="modal" data-target="#ajudaModal" className="botoSuport">{t('suportAqui')}</button>
+							<button type="button" id="dialogAjuda" data-toggle="modal" data-target="#ajudaModal" className="botoSuport" tabIndex="400">{t('suportAqui')}</button>
 						</div>
 
 						<EnllasosPeuCentral autenticat={autenticat} />
