@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
+import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
 import es.caib.regweb3.ws.api.v3.AsientoWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWs;
 import es.caib.regweb3.ws.api.v3.ResultadoBusquedaWs;
@@ -118,7 +119,8 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 
     @Override
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
-            HttpServletRequest request, UserData userData, String administrationIDEncriptat, String parameter) throws Exception {
+            HttpServletRequest request, UserData userData, String administrationIDEncriptat, 
+            String parameter, IListenerLogCarpeta logCarpeta) throws Exception {
 
         registerUserData(userData);
 
@@ -146,7 +148,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
     @Override
     public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
-            String administrationEncriptedID, Locale locale, boolean isGet) {
+            String administrationEncriptedID, Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
 
         if (isDevelopment()) {
             log.info("Regweb32CarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
@@ -173,7 +175,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             }  else {
 
                 super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request,
-                        response, userData, administrationEncriptedID, locale, isGet);
+                        response, userData, administrationEncriptedID, locale, isGet, logCarpeta);
             }
 
         } catch (Exception e) {

@@ -23,7 +23,10 @@ public interface LogCarpetaLogicaService extends LogCarpetaService {
 
     public List<LogCarpetaJPA> findByEntidadByTipus(@NotNull String entitatCodi, @NotNull Integer tipus)throws I18NException;
 
-    public void crearLog(String descripcio, int estat, int tipus, long temps, Throwable th, String error, String peticio, String entitatCodi, Long pluginID) ;
+    public void crearLog(String descripcio, int estat, int tipus, long temps, Throwable th, String error, String peticio, String entitatCodi, Long pluginID);
+    
+    /* Métode per registrar els errors que es produeixen als plugins */
+    public void crearLogCarpeta(String descripcio, String error, String peticio, String entitatCodi, Long pluginID);
     
     public void esborrarLog(long dies) throws I18NException;
 }

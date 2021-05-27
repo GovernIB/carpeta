@@ -3,6 +3,7 @@ package org.fundaciobit.pluginsib.carpetafront.notib;
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
+import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementoExpediente;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.TipoElementoExpediente;
@@ -69,7 +70,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     @Override
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
-            HttpServletRequest request, UserData userData, String administrationIDEncriptat, String parameter) throws Exception {
+            HttpServletRequest request, UserData userData, String administrationIDEncriptat, String parameter, IListenerLogCarpeta logCarpeta) throws Exception {
 
         registerUserData(userData);
 
@@ -82,7 +83,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     @Override
     public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
-            String administrationEncriptedID, Locale locale, boolean isGet) {
+            String administrationEncriptedID, Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
 
         if (isDevelopment()) {
             log.info("NotibCarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
@@ -106,7 +107,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         } else {
 
             super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                    userData, administrationEncriptedID, locale, isGet);
+                    userData, administrationEncriptedID, locale, isGet, logCarpeta);
         }
 
     }

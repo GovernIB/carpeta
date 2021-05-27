@@ -13,9 +13,11 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 import es.caib.carpeta.commons.utils.Configuracio;
+import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.commons.utils.StringUtils;
 import es.caib.carpeta.ejb.LogCarpetaEJB;
 import es.caib.carpeta.persistence.LogCarpetaJPA;
+import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
 import es.caib.carpeta.model.entity.LogCarpeta;
 import es.caib.carpeta.model.fields.*;
 
@@ -26,7 +28,7 @@ import es.caib.carpeta.model.fields.*;
  * Date: 13/10/2020
  */
 @Stateless
-public class LogCarpetaLogicaEJB extends LogCarpetaEJB implements LogCarpetaLogicaService {
+public class LogCarpetaLogicaEJB extends LogCarpetaEJB implements LogCarpetaLogicaService  {
 
 
     @Override
@@ -85,6 +87,37 @@ public class LogCarpetaLogicaEJB extends LogCarpetaEJB implements LogCarpetaLogi
             log.error(" ==============================================" );
             log.error(" TIPUS EXCEPCIO: " + t.getClass());
             log.error(th.getMessage(), t);
+
+        }
+
+
+    }
+    
+    
+    /*
+     * Métode per registrar els errors que es produeixen als plugins
+     */
+    @Override
+    public void crearLogCarpeta(String descripcio, String error, String peticio, String entitatCodi, Long pluginID){
+    	
+        LogCarpetaJPA logCarpeta = new LogCarpetaJPA();
+        logCarpeta.setTipus(Constants.TIPUS_LOG_PLUGIN_FRONT);
+        logCarpeta.setTemps(System.currentTimeMillis());
+        logCarpeta.setDescripcio(descripcio);
+        logCarpeta.setDataInici(new Timestamp(System.currentTimeMillis()));
+        logCarpeta.setEstat(Constants.ESTAT_LOG_ERROR);
+        logCarpeta.setExcepcio(null);
+        logCarpeta.setError(error);
+        logCarpeta.setPeticio(peticio);
+        logCarpeta.setEntitatCodi(entitatCodi);
+        logCarpeta.setPluginID(pluginID);
+
+        try {
+            create(logCarpeta);
+        } catch(Throwable t) {
+
+            log.error(" ==============================================" );
+            log.error(" TIPUS EXCEPCIO: " + t.getClass());
 
         }
 

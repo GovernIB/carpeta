@@ -211,7 +211,7 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
     @Override
     public final void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath,
             String query, HttpServletRequest request, HttpServletResponse response, String administrationID,
-            String administrationEncriptedID, Locale locale, boolean isGet) {
+            String administrationEncriptedID, Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
         if (administrationID == null || administrationID.trim().length() == 0) {
             String titol = (isGet ? "GET" : "POST") + " " + getTitle(new Locale("ca"))
                     + " No s'ha passat AdministrationID";
@@ -232,7 +232,7 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
             } else {
 
                 requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                        userData, administrationEncriptedID, locale, isGet);
+                        userData, administrationEncriptedID, locale, isGet, logCarpeta);
 
             }
 
@@ -245,7 +245,7 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
     */
     public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
-            String administrationEncriptedID, Locale locale, boolean isGet) {
+            String administrationEncriptedID, Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
         
         String administrationID;
         if (userData == null) {

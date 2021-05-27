@@ -5,6 +5,7 @@ import es.caib.carpeta.pinbal.ws.recobriment.facade.SVDDGPCIWS02v3RecobrimentFac
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
+import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
 import es.caib.carpeta.pluginsib.carpetafront.api.TitlesInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.pinbal.ws.recobriment.Consentimiento;
@@ -69,7 +70,8 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
 
     @Override
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
-            HttpServletRequest request, UserData userData, String administrationIDEncriptat, String parameter)
+            HttpServletRequest request, UserData userData, String administrationIDEncriptat, 
+            String parameter, IListenerLogCarpeta logCarpeta)
             throws Exception {
 
         registerUserData(userData);
@@ -83,7 +85,7 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
     @Override
     public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
-            String administrationEncriptedID, Locale locale, boolean isGet) {
+            String administrationEncriptedID, Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
 
         log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
         log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => administrationID: "
@@ -107,7 +109,7 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
         } else {
 
             super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                    userData, administrationEncriptedID, locale, isGet);
+                    userData, administrationEncriptedID, locale, isGet, logCarpeta);
         }
 
     }

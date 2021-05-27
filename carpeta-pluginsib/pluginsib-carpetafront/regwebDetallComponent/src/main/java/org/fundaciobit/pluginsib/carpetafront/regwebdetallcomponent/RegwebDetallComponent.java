@@ -2,6 +2,7 @@ package org.fundaciobit.pluginsib.carpetafront.regwebdetallcomponent;
 
 import es.caib.carpeta.logic.LogCarpetaLogicaService;
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
+import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.regweb3.ws.api.v3.AsientoWs;
@@ -87,11 +88,12 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
     public String getResourceBundleName() {
         return RESOURCE_BUNDLE_NAME;
     }
+    
 	
 	@Override
     public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
-            String administrationEncriptedID, Locale locale, boolean isGet) {
+            String administrationEncriptedID, Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
 
         try {
 
@@ -113,14 +115,21 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
             } else {
 
                 super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request,
-                        response, userData, administrationEncriptedID, locale, isGet);
+                        response, userData, administrationEncriptedID, locale, isGet, logCarpeta);
             }
-
         } catch (Exception e) {
 
             try{
                 errorPage(e.getLocalizedMessage(), e, request, response, locale);
                 log.error("Error detall registre: " + e.getMessage(), e);
+                
+                
+                StringBuilder peticio = new StringBuilder();
+                peticio.append("Error plugin regwebdetall").append("\n");
+                peticio.append("classe: ").append(getClass().getName()).append("\n");
+                peticio.append("Error: " + e.getMessage()).append("\n");
+                
+                logCarpeta.crearLogCarpeta("Error plugin regwebdetall", peticio.toString(), "Error plugin regweb32"); 
                 
             }catch(Exception e2){
                 log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);

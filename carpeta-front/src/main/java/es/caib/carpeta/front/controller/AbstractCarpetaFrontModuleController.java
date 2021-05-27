@@ -3,6 +3,7 @@ package es.caib.carpeta.front.controller;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,12 +17,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import es.caib.carpeta.ejb.PropietatGlobalService;
+import es.caib.carpeta.front.utils.ListenerLogCarpeta;
+import es.caib.carpeta.front.utils.SesionHttp;
 import es.caib.carpeta.hibernate.HibernateFileUtil;
 import es.caib.carpeta.logic.AuthenticationLogicaService;
+import es.caib.carpeta.logic.LogCarpetaLogicaService;
 import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaService;
 import es.caib.carpeta.logic.UsuariEntitatLogicaService;
+import es.caib.carpeta.logic.utils.EjbManager;
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.ICarpetaFrontPlugin;
+import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
 import es.caib.carpeta.pluginsib.carpetafront.api.TitlesInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 
@@ -49,11 +56,17 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
     @EJB(mappedName = UsuariEntitatLogicaService.JNDI_NAME)
     protected UsuariEntitatLogicaService usuariEntitatEjb;
 
+    @Autowired
+    protected SesionHttp sesionHttp;
+    
     @EJB(mappedName = PluginDeCarpetaFrontLogicaService.JNDI_NAME)
     protected PluginDeCarpetaFrontLogicaService pluginCarpetaFrontEjb;
 
     @EJB(mappedName = AuthenticationLogicaService.JNDI_NAME)
     protected AuthenticationLogicaService authenticationLogicaEjb;
+    
+    @EJB(mappedName = LogCarpetaLogicaService.JNDI_NAME)
+    protected LogCarpetaLogicaService logCarpetaLogicaEjb;
 
     @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}/{urlBase}")
     public ModelAndView showCarpetaFrontModuleWithUrlBase(HttpServletRequest request, HttpServletResponse response,
@@ -158,9 +171,24 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
         log.info("\n Cridant a  carpetaFront.getStartUrl() amb PluginParameter =>  " + parameter);
 
+        String codiEntitat = null;
+        if(sesionHttp != null && sesionHttp.getEntitat() != null) {
+        	codiEntitat = sesionHttp.getEntitat();
+        	log.info("IListenerLogCarpeta->codiEntitat = sesionHttp.getEntitat() => " + codiEntitat);
+        }else {
+        	PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
+            String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
+        	if(defaultEntityCode != null) {
+        		codiEntitat = defaultEntityCode;
+        		log.info("IListenerLogCarpeta->codiEntitat = defaultEntityCode => " + codiEntitat);
+        	}
+        }
+        
+        IListenerLogCarpeta logCarpeta = new ListenerLogCarpeta(pluginID, codiEntitat, logCarpetaLogicaEjb);
+        
         String urlToPluginWebPage = carpetaFront.getStartUrl(absoluteRequestPluginBasePath,
                 relativeRequestPluginBasePath, request, getUserData(administrationID), administrationIDEncriptat,
-                parameter);
+                parameter, logCarpeta);
 
         log.info("\n\n\n SHOW PLUGIN 2222 urlToPluginWebPage =>  " + urlToPluginWebPage);
 
@@ -316,9 +344,25 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
             log.debug("absoluteRequestPluginBasePath => " + absoluteRequestPluginBasePath);
             log.debug("relativeRequestPluginBasePath => " + relativeRequestPluginBasePath);
         }
-
+        
+        
+        String codiEntitat = null;
+        if(sesionHttp != null && sesionHttp.getEntitat() != null) {
+    		codiEntitat = sesionHttp.getEntitat();
+    		log.info("IListenerLogCarpeta->codiEntitat = sesionHttp.getEntitat() => " + codiEntitat);
+        }else {
+        	PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
+            String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
+        	if(defaultEntityCode != null) {
+        		codiEntitat = defaultEntityCode;
+        		log.info("IListenerLogCarpeta->codiEntitat = defaultEntityCode => " + codiEntitat);
+        	}
+        }
+        
+        IListenerLogCarpeta logCarpeta = new ListenerLogCarpeta(pluginID, codiEntitat, logCarpetaLogicaEjb);
+        
         carpetaFrontPlugin.requestCarpetaFront(absoluteRequestPluginBasePath, relativeRequestPluginBasePath, query,
-                request, response, administrationID, administrationIDEncripted, locale, isGet);
+                request, response, administrationID, administrationIDEncripted, locale, isGet, logCarpeta);
 
     }
 
