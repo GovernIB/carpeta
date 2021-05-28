@@ -170,7 +170,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             } else if (query.startsWith(LLISTAT_REGISTRES_PAGE)) {
 
                 llistatDeRegistres(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                        userData, administrationEncriptedID, locale, isGet);
+                        userData, administrationEncriptedID, locale, isGet, logCarpeta);
 
             }  else {
 
@@ -180,8 +180,9 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 
         } catch (Exception e) {
             try{
+            	
                 errorPage(e.getLocalizedMessage(), e, request, response, locale);
-                log.error("Error detall registre: " + e.getMessage(), e);
+                log.error("Error plugin registre: " + e.getMessage(), e);
             }catch(Exception e2){
                 log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
             }
@@ -275,7 +276,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 
     public void llistatDeRegistres(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
-            String administrationEncriptedID, Locale locale, boolean isGet) {
+            String administrationEncriptedID, Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
 
         try {
         	
@@ -346,6 +347,13 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
         } catch (Exception e) {
 
             try{
+            	
+            	StringBuilder peticio = new StringBuilder();
+                peticio.append("[REGWEB32] Error").append("\n");
+                peticio.append("classe: ").append(getClass().getName()).append("\n");
+                peticio.append("Error: " + e.getMessage()).append("\n");
+                logCarpeta.crearLogCarpeta("[REGWEB32] Error plugin", peticio.toString(), "[REGWEB32] Error plugin");
+            	
                 errorPage(e.getLocalizedMessage(), e,request, response, locale);
                 log.error("Error llistant registres: " + e.getMessage(), e);
             } catch(Exception e2) {
@@ -473,6 +481,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 
         RegWebAsientoRegistralWs service = super.getRegWebAsientoRegistralWsService();
 
+        /* Equivalencia estats REGWEB3.2 amb estats visibles al SELECT */
         List<Integer> formEstats = new ArrayList<Integer>();
         if (formEstat != null) {
         	switch(formEstat) {

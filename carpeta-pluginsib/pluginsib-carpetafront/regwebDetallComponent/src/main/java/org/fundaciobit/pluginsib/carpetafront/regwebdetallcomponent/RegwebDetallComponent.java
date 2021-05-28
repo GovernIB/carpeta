@@ -1,6 +1,5 @@
 package org.fundaciobit.pluginsib.carpetafront.regwebdetallcomponent;
 
-import es.caib.carpeta.logic.LogCarpetaLogicaService;
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
@@ -19,13 +18,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.BindingProvider;
-
-import static es.caib.carpeta.commons.utils.Constants.ESTAT_LOG_ERROR;
-import static es.caib.carpeta.commons.utils.Constants.TIPUS_LOG_PLUGIN_FRONT;
 
 import org.apache.commons.io.IOUtils;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
@@ -47,9 +42,6 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
     public static final String VALIDEZ_DOCUMENTO_ORIGINAL  = "4";
     
     public static final String REGWEB32_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "regweb32.";
-    
-    protected LogCarpetaLogicaService logLogicaEjb;
-	
 	
 	public RegwebDetallComponent() {
 		super();
@@ -100,36 +92,30 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
             if (query.startsWith(DETALL_REGISTRE_PAGE)) {
 
                 detallDeRegistre(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                        userData, administrationEncriptedID,  locale, isGet);
+                        userData, administrationEncriptedID,  locale, isGet, logCarpeta);
 
             } else if (query.startsWith(JUSTIFICANT_REGISTRE_PAGE)) {
 
                 justificantDeRegistre(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                        userData, administrationEncriptedID, locale, isGet);
+                        userData, administrationEncriptedID, locale, isGet, logCarpeta);
                 
             } else if (query.startsWith(ANNEXE_REGISTRE_PAGE)) {
 
                 annexeDeRegistre(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                        userData, administrationEncriptedID, locale, isGet);
+                        userData, administrationEncriptedID, locale, isGet, logCarpeta);
 
             } else {
 
                 super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request,
                         response, userData, administrationEncriptedID, locale, isGet, logCarpeta);
             }
+            
         } catch (Exception e) {
 
             try{
+            	
                 errorPage(e.getLocalizedMessage(), e, request, response, locale);
                 log.error("Error detall registre: " + e.getMessage(), e);
-                
-                
-                StringBuilder peticio = new StringBuilder();
-                peticio.append("Error plugin regwebdetall").append("\n");
-                peticio.append("classe: ").append(getClass().getName()).append("\n");
-                peticio.append("Error: " + e.getMessage()).append("\n");
-                
-                logCarpeta.crearLogCarpeta("Error plugin regwebdetall", peticio.toString(), "Error plugin regweb32"); 
                 
             }catch(Exception e2){
                 log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
@@ -175,7 +161,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 
     public void detallDeRegistre(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
-            String administrationEncriptedID,  Locale locale, boolean isGet) {
+            String administrationEncriptedID,  Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
 
         try {
 
@@ -198,6 +184,13 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
         } catch (Exception e) {
 
             try{
+            	
+            	StringBuilder peticio = new StringBuilder();
+                peticio.append("[REGWEBDETALLCOMPONENT] Error").append("\n");
+                peticio.append("classe: ").append(getClass().getName()).append("\n");
+                peticio.append("Error: " + e.getMessage()).append("\n");
+                logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error plugin", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error plugin"); 
+            	
                 errorPage(e.getLocalizedMessage(), e, request, response, locale);
                 log.error("Error detall registre: " + e.getMessage(), e);
             }catch(Exception e2){
@@ -391,7 +384,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 
     public void justificantDeRegistre(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
-            String administrationEncriptedID, Locale locale, boolean isGet) {
+            String administrationEncriptedID, Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
 
         try {
 
@@ -403,7 +396,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 
             getJustificantDeRegistrePage(absolutePluginRequestPath, numeroRegistroFormateado,
                     Long.valueOf(tipoRegistro), userData.getAdministrationID(),  locale,
-                    request, response);
+                    request, response, logCarpeta);
 
         } catch (Exception e) {
 
@@ -420,7 +413,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 
     public void getJustificantDeRegistrePage(String absolutePluginRequestPath, String numeroRegistroFormateado,
             Long tipoRegistro, String administrationID, Locale locale, HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+            HttpServletResponse response, IListenerLogCarpeta logCarpeta) throws Exception {
 
         // Obtenim justificant
         JustificanteWs justificantRegistre;
@@ -430,35 +423,16 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 
             justificantRegistre = null;
 
-
-            // Cream el log al back
-            try {
-                if (logLogicaEjb == null) {
-                    logLogicaEjb = (LogCarpetaLogicaService) new InitialContext()
-                            .lookup(LogCarpetaLogicaService.JNDI_NAME);
-                }
-
+            try{
+                            
                 StringBuilder peticio = new StringBuilder();
-                peticio.append("Error descàrrega justificant").append("\n");
+                peticio.append("[REGWEBDETALLCOMPONENT] Error descàrrega justificant").append("\n");
                 peticio.append("classe: ").append(getClass().getName()).append("\n");
                 peticio.append("Registre: " + numeroRegistroFormateado).append("\n");
                 peticio.append("Error: " + e.getMessage()).append("\n");
-                logLogicaEjb.crearLog("Descàrrega justificant regweb32", ESTAT_LOG_ERROR, TIPUS_LOG_PLUGIN_FRONT,
-                        System.currentTimeMillis() ,null,peticio.toString(),"Error plugin regweb32","",null);
-
-            } catch(Exception ex) {
-
-                log.error(ex.getMessage());
-                try{
-                    errorPage(ex.getLocalizedMessage(), ex, request, response, locale);
-                    log.error("LogCarpetaLogicaService: error EJB lookup");
-                }catch(Exception e2){
-                    log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
-                }
-            }
-
-            try{
-                errorPage(e.getLocalizedMessage(), e, request, response, locale);
+                logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error justificant", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error justificant");
+                
+				errorPage(e.getLocalizedMessage(), e, request, response, locale);
                 log.error("Error obtenint justificant: " + e.getMessage(), e);
             }catch(Exception e2){
                 log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
@@ -468,7 +442,8 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 
         // Indicam si s'ha produit un error en obtenció de l'annexe
         String errorJustificant = "";
-        
+        try { 
+        	
         if (justificantRegistre == null) {
 
             response.setCharacterEncoding("utf-8");
@@ -495,6 +470,25 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
             obtenerContentType(MIME_PDF, response, "justificant_" + numeroRegistroFormateado + ".pdf", null,
                     justificantRegistre.getJustificante());
         }
+        
+    } catch (Exception ex) {
+
+        try{
+        	
+        	StringBuilder peticio = new StringBuilder();
+            peticio.append("[REGWEBDETALLCOMPONENT] Error justificant").append("\n");
+            peticio.append("classe: ").append(getClass().getName()).append("\n");
+            peticio.append("Error: " + ex.getMessage()).append("\n");
+            logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error justificant", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error justificant"); 
+        	
+            errorPage(ex.getLocalizedMessage(), ex, request, response, locale);
+            log.error("Error detall registre: " + ex.getMessage(), ex);
+        }catch(Exception ex2){
+            log.error("Error mostrant pàgina d'error: " + ex2.getMessage(), ex2);
+        }
+    }
+        
+        
     }
 
     public JustificanteWs getJustificantRegistre(String numeroRegistroFormateado, Long tipoRegistro, Locale locale)
@@ -520,7 +514,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 
     public void annexeDeRegistre(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
-            String administrationEncriptedID, Locale locale, boolean isGet) {
+            String administrationEncriptedID, Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
 
         try {
 
@@ -531,7 +525,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
             String idAnnexe = request.getParameter("idAnnexe");
 
             getAnnexeDeRegistrePage(absolutePluginRequestPath, numeroRegistroFormateado, Long.valueOf(idAnnexe),
-                    userData.getAdministrationID(), locale, request, response);
+                    userData.getAdministrationID(), locale, request, response, logCarpeta);
 
         } catch (Exception e) {
 
@@ -548,43 +542,28 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 
     public void getAnnexeDeRegistrePage(String absolutePluginRequestPath, String numeroRegistroFormateado,
             Long idAnnexe, String administrationID, Locale locale,
-            HttpServletRequest request, HttpServletResponse response) throws Exception {
+            HttpServletRequest request, HttpServletResponse response, IListenerLogCarpeta logCarpeta) throws Exception {
 
         // Obtenim annexe
         FileContentWs fileContentWs;
         try{
+        	
             fileContentWs= getAnnexeRegistre(idAnnexe, locale);
+            
         }catch (Exception e){
 
             fileContentWs = null;
 
-            try {
-                if (logLogicaEjb == null) {
-                    logLogicaEjb = (LogCarpetaLogicaService) new InitialContext()
-                            .lookup(LogCarpetaLogicaService.JNDI_NAME);
-                }
-
-                //Log error descàrrega justificant
+            try{
+                
                 StringBuilder peticio = new StringBuilder();
-                peticio.append("Error descàrrega annex").append("\n");
+                peticio.append("[REGWEBDETALLCOMPONENT] Error descàrrega annex").append("\n");
                 peticio.append("classe: ").append(getClass().getName()).append("\n");
                 peticio.append("IdAnnexe: " + idAnnexe).append("\n");
-                peticio.append(e.getMessage());
-                logLogicaEjb.crearLog("Error descàrrega justificant o annex", ESTAT_LOG_ERROR, TIPUS_LOG_PLUGIN_FRONT,
-                        System.currentTimeMillis() ,null,peticio.toString(),"Error plugin regweb32","",null);
-
-            } catch(Exception ex) {
-                log.error("LogCarpetaLogicaService exception: " + ex.getMessage());
-                try{
-                    errorPage(ex.getLocalizedMessage(), ex, request, response, locale);
-                    log.error("LogCarpetaLogicaService exception: " + ex.getMessage());
-                }catch(Exception e2){
-                    log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
-                }
-            }
-
-            try{
-                errorPage(e.getLocalizedMessage(), e, request, response, locale);
+                peticio.append("Error: " + e.getMessage()).append("\n");
+                logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error annex", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error annex");
+                
+				errorPage(e.getLocalizedMessage(), e, request, response, locale);
                 log.error("Error obtenint annexe: " + e.getMessage(), e);
             }catch(Exception e2){
                 log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
@@ -594,6 +573,8 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 
         // Indicam si s'ha produit un error en obtenció de l'annexe
         String errorAnnexe = "";
+    try {
+    	
         if (fileContentWs == null) {
         	
             response.setCharacterEncoding("utf-8");
@@ -616,6 +597,23 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
             obtenerContentType(fileContentWs.getFileInfoWs().getMime(), response,
                     fileContentWs.getFileInfoWs().getFilename(), null, fileContentWs.getData());
         }
+        
+    } catch (Exception ex) {
+
+        try{
+        	
+        	StringBuilder peticio = new StringBuilder();
+            peticio.append("[REGWEBDETALLCOMPONENT] Error annexe").append("\n");
+            peticio.append("classe: ").append(getClass().getName()).append("\n");
+            peticio.append("Error: " + ex.getMessage()).append("\n");
+            logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error annexe", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error annexe"); 
+        	
+            errorPage(ex.getLocalizedMessage(), ex, request, response, locale);
+            log.error("Error detall registre: " + ex.getMessage(), ex);
+        }catch(Exception ex2){
+            log.error("Error mostrant pàgina d'error: " + ex2.getMessage(), ex2);
+        }
+    }
 
     }
 
