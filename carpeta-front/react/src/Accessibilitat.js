@@ -29,7 +29,7 @@ class Accessibilitat extends Component {
                     <div className="col-md-12 border-0 float-left p-0">
                         <p className="lh15">{t('accessibilitatDeclaracio1')} <a
                             href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2018-12699" target="_blank"
-                            rel="noopener noreferrer" tabIndex="2">{t('accessibilitatDecret')}</a> {t('accessibilitatDeclaracio2')}
+                            rel="noopener noreferrer" tabIndex="2" aria-labelledby={t('accessibilitatDecret')}>{t('accessibilitatDecret')}</a> {t('accessibilitatDeclaracio2')}
                         </p>
                         <p className="lh15">{t('accessibilitatDeclaracio3')} <a href="https://www.caib.es/carpeta/"
                                                                                 target="_blank"

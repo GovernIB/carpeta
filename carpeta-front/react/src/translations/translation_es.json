@@ -218,6 +218,10 @@
 	"nivellAutenticacio3": "ALTO",
 
 	"canviarEntitatTitol": "CAMBIAR DE ENTIDAD",
-	"canviarEntitatDescripcio": "Estas son las Carpetas Ciudadanas disponibles a les que puede acceder."
+	"canviarEntitatDescripcio": "Estas son las Carpetas Ciudadanas disponibles a les que puede acceder.",
+
+	"accedirEnllas": "Acceder al enlace",
+	"accedirBoto": "Acceder al botón",
+	"accedirPlugin": "Acceder al plugin "
 
 }

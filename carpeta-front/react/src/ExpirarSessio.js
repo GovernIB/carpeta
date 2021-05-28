@@ -13,6 +13,8 @@ class ExpirarSessio extends Component {
         }
         var notifyBefore = 30;
         var newTimer = setTimeout(function() {
+            $('#dialog').removeClass("noVisible");
+            $('#expirat').removeClass("noVisible");
             $(function() {
                 const entitatActual = sessionStorage.getItem('entitat');
                 $('#dialog').dialog({
@@ -45,6 +47,7 @@ class ExpirarSessio extends Component {
                             }
                         }
                     ],
+
                     close: function(event, ui) {
                         var baseURL = sessionStorage.getItem('contextPath');
                         var url = baseURL + '/sortir';
