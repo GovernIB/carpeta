@@ -430,6 +430,7 @@ img:hover {
 }
 .noVisible{
 	display: none;
+	visibility: hidden;
 }
 .ui-dialog .ui-dialog-title {
 	color: #fff;
