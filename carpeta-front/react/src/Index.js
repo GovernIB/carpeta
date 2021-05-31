@@ -101,12 +101,12 @@ class Index extends Component {
             var icona;
             var esEmpresa = sessionStorage.getItem('usuariEsEmpresa'); 
             console.log("Index.js :: esEmpresa = " + esEmpresa)
-            if (esEmpresa == true) {
+            if (esEmpresa == 'true') {
                 icona =  <img src={'./src/assets/images/buildingsolid.svg'} width='18px' height='18px' />;
             } else {
                 // És una Persona
                 var representantExisteix = sessionStorage.getItem('representantExisteix');
-                if (representantExisteix == true) {
+                if (representantExisteix == 'true') {
                     icona = <span className="oi oi-people pr-2" aria-hidden="true"></span>;
                 } else {
                     icona = <span className="oi oi-person pr-2" aria-hidden="true"></span>;

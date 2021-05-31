@@ -188,11 +188,14 @@ public class DadesLoginCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             map.put("pathtojs", pathtojs);
 
+            /*
             map.put("usuariNom", userData.getName());
-            map.put("usuariLlinatge1", userData.getSurname1());
-            map.put("usuariLlinatge2", userData.getSurname2());
+            map.put("usuariLlinatge1", userData.getSurname1()== null?"":userData.getSurname1());
+            map.put("usuariLlinatge2", userData.getSurname2()== null?"":userData.getSurname2());
             map.put("usuariDNI", userData.getAdministrationID());
             map.put("usuariMetode", userData.getAuthenticationMethod());
+            */
+            map.put("userData", json.toJson(userData));
 
             String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
 

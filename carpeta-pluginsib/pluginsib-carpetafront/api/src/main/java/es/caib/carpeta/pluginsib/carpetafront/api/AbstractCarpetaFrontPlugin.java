@@ -128,22 +128,18 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
     // ----------------------------------------------------------------------------
 
 
-
-
-
-
     protected static class InternalUserData extends UserData {
 
         public final long startDate;
 
         public InternalUserData(String name, String surname1, String surname2, String administrationID,
-                String authenticationMethod, int qaa) {
-            super(name, surname1, surname2, administrationID, authenticationMethod, qaa);
+                String authenticationMethod, int qaa, boolean business, UserDataRepresentative representative) {
+            super(name, surname1, surname2, administrationID, authenticationMethod, qaa, business, representative);
             this.startDate = System.currentTimeMillis();
         }
 
         public InternalUserData(UserData ud) {
-            super(ud.name, ud.surname1, ud.surname2, ud.administrationID, ud.authenticationMethod, ud.qaa);
+            super(ud.name, ud.surname1, ud.surname2, ud.administrationID, ud.authenticationMethod, ud.qaa, ud.business, ud.representative);
             this.startDate = System.currentTimeMillis();
         }
 

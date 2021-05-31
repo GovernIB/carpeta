@@ -13,7 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js" charset="utf-8"></script>
-	
+
 	<!-- Scripts -->
 	<!-- google analytics -->
 	<script type="text/javascript" async="" src="<c:url value="/src/assets/js/ga.js"/>"></script>
@@ -111,7 +111,7 @@
 				sessionStorage.setItem('contextPath', '${pageContext.request.contextPath}');
 				sessionStorage.setItem('errorLogin', '${errorLogin}');
 				sessionStorage.setItem('maxInactiveInterval', '${maxInactiveInterval}');
-				
+
 				<c:if test="${not empty userRepresentant }" >
 				sessionStorage.setItem('representantExisteix', true);
 				sessionStorage.setItem('representantNom', '${representantName}');
@@ -119,7 +119,7 @@
                 sessionStorage.setItem('representantLlinatge2', '${representantSurname2}');
                 sessionStorage.setItem('representantDNI', '${representantDNI}');
 				</c:if>
-				
+
 				<c:if test="${empty userRepresentant }" >
                 sessionStorage.setItem('representantExisteix', false);
                 </c:if>

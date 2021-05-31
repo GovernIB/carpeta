@@ -10,16 +10,17 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.commons.utils.StringUtils;
 import es.caib.carpeta.ejb.LogCarpetaEJB;
 import es.caib.carpeta.persistence.LogCarpetaJPA;
-import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
 import es.caib.carpeta.model.entity.LogCarpeta;
-import es.caib.carpeta.model.fields.*;
+import es.caib.carpeta.model.fields.LogCarpetaFields;
+
 
 /**
  * Created by Fundació BIT.

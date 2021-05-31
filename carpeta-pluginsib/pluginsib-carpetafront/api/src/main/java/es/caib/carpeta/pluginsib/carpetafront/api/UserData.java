@@ -13,6 +13,8 @@ public class UserData {
     protected String administrationID;
     protected String authenticationMethod;
     protected int qaa;
+    protected boolean business;
+    protected UserDataRepresentative representative;
 
     public UserData() {
         super();
@@ -23,10 +25,8 @@ public class UserData {
         this.administrationID = administrationID;
     }
 
-    
-    
-    public UserData(String name, String surname1, String surname2, String administrationID, 
-            String authenticationMethod, int qaa) {
+    public UserData(String name, String surname1, String surname2, String administrationID, String authenticationMethod,
+            int qaa, boolean business, UserDataRepresentative representative) {
         super();
         this.name = name;
         this.surname1 = surname1;
@@ -34,6 +34,8 @@ public class UserData {
         this.administrationID = administrationID;
         this.authenticationMethod = authenticationMethod;
         this.qaa = qaa;
+        this.business = business;
+        this.representative = representative;
     }
 
     public String getName() {
@@ -82,6 +84,22 @@ public class UserData {
 
     public void setQaa(int qaa) {
         this.qaa = qaa;
+    }
+
+    public boolean isBusiness() {
+        return business;
+    }
+
+    public void setBusiness(boolean business) {
+        this.business = business;
+    }
+
+    public UserDataRepresentative getRepresentative() {
+        return representative;
+    }
+
+    public void setRepresentative(UserDataRepresentative representative) {
+        this.representative = representative;
     }
 
 }

@@ -16,7 +16,7 @@ class NivellAutenticacio extends Component {
 
         console.log( "NIVELLAutenticacio::esRepresentant => " + esRepresentant);
 
-        if (esRepresentant == true) {
+        if (esRepresentant == 'true') {
 
             console.log( "NIVELLAutenticacio::esRepresentant 2222 => " + esRepresentant);
             contingut = t('representant') + ": " + sessionStorage.getItem('representantNom') 
