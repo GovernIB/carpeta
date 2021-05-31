@@ -72,17 +72,31 @@ class DadesPolicia extends Component {
                 content = <div class="alert alert-danger" role="alert">{data.error}</div>;
             } else {
                 const { t } = this.props;
+
+
+                var llinatge1;
+                var llinatge2;
+                if (data.datosTitular.apellido1 == '') {
+                    llinatge1="";
+                    llinatge2="";
+                } else {
+                   llinatge1 = <li className="list-group-item"><label
+                    className="lh15">{t('dadespersonalsLlinatge1')}:&nbsp;</label><label
+                        className="titol h5">{data.datosTitular.apellido1}</label></li>;
+                    llinatge2 = <li className="list-group-item"><label
+                    className="lh15">{t('dadespersonalsLlinatge2')}:&nbsp;</label><label
+                        className="titol h5">{data.datosTitular.apellido2}</label></li>;
+                }
+
+
+
                 content = <ul className="list-group list-group-flush">
                 <li className="list-group-item">
                     <label className="lh15" >{t('dadespersonalsNom')}:&nbsp;</label>
                     <label className="titol h5">{data.datosTitular.nombre}</label>
                 </li>                                
-                <li className="list-group-item"><label
-                    className="lh15">{t('dadespersonalsLlinatge1')}:&nbsp;</label><label
-                        className="titol h5">{data.datosTitular.apellido1}</label></li>
-                <li className="list-group-item"><label
-                    className="lh15">{t('dadespersonalsLlinatge2')}:&nbsp;</label><label
-                        className="titol h5">{data.datosTitular.apellido2}</label></li>
+                {llinatge1}
+                {llinatge2}
                 <li className="list-group-item"><label className="lh15">{t('nacionalidad')}:&nbsp;</label><label
                     className="titol h5">{data.datosTitular.nacionalidad}</label></li>
                 <li className="list-group-item"><label className="lh15">{t('sexo')}:&nbsp;</label>

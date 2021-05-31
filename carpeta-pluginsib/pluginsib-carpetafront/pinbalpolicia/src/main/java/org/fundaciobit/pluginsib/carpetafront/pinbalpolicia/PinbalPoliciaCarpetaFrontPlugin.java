@@ -185,8 +185,8 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
             map.put("pathtodocumentidentitat", pathtodocumentidentitat);
 
             map.put("usuariNom", userData.getName());
-            map.put("usuariLlinatge1", userData.getSurname1());
-            map.put("usuariLlinatge2", userData.getSurname2());
+            map.put("usuariLlinatge1", userData.getSurname1() == null? "" : userData.getSurname1());
+            map.put("usuariLlinatge2", userData.getSurname2() == null? "" : userData.getSurname2());
             map.put("usuariDNI", userData.getAdministrationID());
             map.put("usuariMetode", userData.getAuthenticationMethod());
 
@@ -201,7 +201,7 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
 
         } catch (Exception e) {
             // XYZ ZZZ
-            log.error("Error llistant registres: " + e.getMessage(), e);
+            log.error("Error generant pàgina bàsica: " + e.getMessage(), e);
         }
 
     }
@@ -225,10 +225,15 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
         DadesPolicia dadesPolicia = new DadesPolicia();
 
         try {
+
+            if (userData.isBusiness() ) {
+                // "No es pot consultar la informació de DNI d'una empresa.
+                throw new Exception(getTraduccio("error.empresa", locale)); 
+            }
+
             final String PINBAL_PROPERTY_BASE = PINBALPOLICIA_PROPERTY_BASE + "pinbal.";
 
             // Estado
-
             final String codigoEstado = null;
             final String codigoEstadoSecundario = null;
             final String literalError = null;
@@ -236,19 +241,16 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
             final Integer tiempoEstimadoRespuesta = null;
 
             // Atributos
-
             final String codigoCertificado = getPropertyRequired(PINBAL_PROPERTY_BASE + "codicertificat"); // "SVDDGPCIWS02";
             final String idPeticion = null;
             final String numElementos = "1";
             final String timeStamp = null;
 
             // Emisor (obtingut de la documentació SCSP del servei)
-
             final String nifEmisor = getPropertyRequired(PINBAL_PROPERTY_BASE + "nifemisor"); // "S2816015H";
             final String nombreEmisor = getPropertyRequired(PINBAL_PROPERTY_BASE + "nomemisor"); // "DGP";
 
             // Funcionario
-
             final String nifFuncionario = getPropertyRequired(PINBAL_PROPERTY_BASE + "niffuncionari"); // "43125996F";
             final String nombreCompletoFuncionario = getPropertyRequired(PINBAL_PROPERTY_BASE + "nomfuncionari"); // "Ana
                                                                                                                   // Bustos
@@ -256,15 +258,9 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
             final String seudonimo = null;
 
             // Procedimiento
-
             final String codProcedimiento = getPropertyRequired(PINBAL_PROPERTY_BASE + "codiprocediment"); // "CODSVDR_GBA_20121107";
-            final String nombreProcedimiento = getPropertyRequired(PINBAL_PROPERTY_BASE + "nomprocediment"); // "PRUEBAS
-                                                                                                             // DE
-                                                                                                             // INTEGRACION
-                                                                                                             // PARA
-                                                                                                             // GOBIERNO
-                                                                                                             // DE
-                                                                                                             // BALEARES";
+            // "PRUEBAS DE INTEGRACION PARA GOBIERNO DE BALEARES";
+            final String nombreProcedimiento = getPropertyRequired(PINBAL_PROPERTY_BASE + "nomprocediment"); 
 
             // Solicitante
             final String codigoUnidadTramitadora = null;
