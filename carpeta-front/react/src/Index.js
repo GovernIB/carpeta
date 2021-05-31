@@ -18,6 +18,7 @@ import NivellAutenticacio from './NivellAutenticacio';
 import TitolPipella from './TitolPipella';
 import * as Constants from './Constants';
 
+
 // NO ESBORRAR LA SEGÜENT LINIA  !!!!!!
 import {Route, Switch} from "react-router-dom";
 import {withRouter} from "react-router";
@@ -78,7 +79,8 @@ class Index extends Component {
         // console.log(" XYZ ZZZ   \n INDEX :: Auth Val: " + auth + "\n");
 
 
-        var user = sessionStorage.getItem('usuariNomComplet');
+        var usuariNomComplet = sessionStorage.getItem('usuariNomComplet');
+        
 
         var infoUsuari;
         var estilContingut = (auth === '1')? { paddingTop: '6em'} : {paddingTop: '0em'};
@@ -94,20 +96,33 @@ class Index extends Component {
             } : {minHeight: '70px', backgroundColor: "#" + this.state.colorMenu};
         }
 
-        if (auth === '1' && user != null) {
+        if (auth === '1' && usuariNomComplet != null) {
+
+            var icona;
+            var esEmpresa = sessionStorage.getItem('usuariEsEmpresa'); 
+            console.log("Index.js :: esEmpresa = " + esEmpresa)
+            if (esEmpresa == true) {
+                icona =  <img src={'./src/assets/images/buildingsolid.svg'} width='18px' height='18px' />;
+            } else {
+                // És una Persona
+                var representantExisteix = sessionStorage.getItem('representantExisteix');
+                if (representantExisteix == true) {
+                    icona = <span className="oi oi-people pr-2" aria-hidden="true"></span>;
+                } else {
+                    icona = <span className="oi oi-person pr-2" aria-hidden="true"></span>;
+                }
+            }
+
             infoUsuari = <div className="imc-titol usuari" style={styleColorMenu}>
                 <nav className="imc--contingut">
-                    {/*<h3>*/}
+                    
                         <span className="estilUsuari">
-                            {/* <c:if test="${user != null}"> */}
-                            <span className="oi oi-person pr-2" aria-hidden="true"> </span>{user}
-                            {/* <!-- Nivell d'autenticació --> */}
-                            {/*<span id="nivellAutenticacio" className="imc--autenticacio">*/}
-                                <NivellAutenticacio />
-                            {/*</span>*/}
-                            {/* </c:if> */}
+                            
+                            {icona} {usuariNomComplet}
+                            
+                            <NivellAutenticacio />
                         </span>
-                    {/*</h3>*/}
+                    
                 </nav>
             </div>;
         } else {

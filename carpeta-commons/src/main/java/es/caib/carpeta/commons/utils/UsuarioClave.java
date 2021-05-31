@@ -14,6 +14,24 @@ public class UsuarioClave {
     private String metodoAutentificacion;
     private int qaa;
     private String proveedorDeIdentidad;
+    private boolean empresa;
+
+    private UsuarioClaveRepresentante usuarioClaveRepresentante;
+
+    public UsuarioClave(String nombre, String apellido1, String apellido2, String nif, boolean empresa,
+            String metodoAutentificacion, int qaa, String proveedorDeIdentidad,
+            UsuarioClaveRepresentante usuarioClaveRepresentante) {
+        super();
+        this.nombre = nombre;
+        this.apellido1 = apellido1;
+        this.apellido2 = apellido2;
+        this.nif = nif;
+        this.empresa = empresa;
+        this.metodoAutentificacion = metodoAutentificacion;
+        this.qaa = qaa;
+        this.proveedorDeIdentidad = proveedorDeIdentidad;
+        this.usuarioClaveRepresentante = usuarioClaveRepresentante;
+    }
 
     public String getNombre() {
         return nombre;
@@ -47,6 +65,14 @@ public class UsuarioClave {
         this.nif = nif;
     }
 
+    public boolean isEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(boolean empresa) {
+        this.empresa = empresa;
+    }
+
     public String getMetodoAutentificacion() {
         return metodoAutentificacion;
     }
@@ -69,6 +95,14 @@ public class UsuarioClave {
 
     public void setProveedorDeIdentidad(String proveedorDeIdentidad) {
         this.proveedorDeIdentidad = proveedorDeIdentidad;
+    }
+
+    public UsuarioClaveRepresentante getUsuarioClaveRepresentante() {
+        return usuarioClaveRepresentante;
+    }
+
+    public void setUsuarioClaveRepresentante(UsuarioClaveRepresentante usuarioClaveRepresentante) {
+        this.usuarioClaveRepresentante = usuarioClaveRepresentante;
     }
 
     public String getNombreCompleto() {

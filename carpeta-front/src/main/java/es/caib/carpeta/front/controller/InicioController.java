@@ -109,15 +109,12 @@ public class InicioController extends CommonFrontController {
 
         String urlBaseDec = new String(Base64.getDecoder().decode(fullAddress), "utf-8");
         
-        if (urlBaseDec.indexOf("entitat?lang=") == -1) {
+        if (urlBaseDec.indexOf("entitat?lang=") == -1 && !urlBaseDec.endsWith("/entitat")  ) {
           log.info(" REBUT FULL ADRRESS  DES DE JAVASCRIPT: ]" + urlBaseDec + "[");
           request.getSession().setAttribute(SESSION_INITIAL_URL, urlBaseDec);
         } else {
           log.info(" IGNORANT  FULL ADRRESS  DES DE JAVASCRIPT: ]" + urlBaseDec + "[");
         }
-
-        
-
         response.sendError(HttpServletResponse.SC_OK);
     }
 

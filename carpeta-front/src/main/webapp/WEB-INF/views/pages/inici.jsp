@@ -70,15 +70,29 @@
 
      <sec:authorize access="isAuthenticated()">  
   
-		<sec:authentication var="user" property="principal.usuarioClave.nombreCompleto" />
+		<sec:authentication var="usuariNomComplet" property="principal.usuarioClave.nombreCompleto" />
 		<sec:authentication var="userName" property="principal.usuarioClave.nombre" />
 		<sec:authentication var="userSurname1" property="principal.usuarioClave.apellido1" />
 		<sec:authentication var="userSurname2" property="principal.usuarioClave.apellido2" />
 		<sec:authentication var="userDNI" property="principal.usuarioClave.nif" />
 		<sec:authentication var="userMethod" property="principal.usuarioClave.metodoAutentificacion" />
 		<sec:authentication var="userLevelAut" property="principal.usuarioClave.qaa" />
+        <sec:authentication var="userEsEmpresa" property="principal.usuarioClave.empresa" />
+        
+        
+        <sec:authentication var="userRepresentant" property="principal.usuarioClave.usuarioClaveRepresentante" />
+        
+        
+        <c:if test="${not empty userRepresentant }" >
+            <c:set var="representantName" value="${userRepresentant.nombre}" />
+            <c:set var="representantSurname1" value="${userRepresentant.apellido1}" />
+            <c:set var="representantSurname2" value="${userRepresentant.apellido2}" />
+            <c:set var="representantDNI" value="${userRepresentant.nif}" />
+        </c:if>
+        
+        
+        
 		<script type="text/javascript">
-			
 
 				//var element = document.getElementById('contenedor');
 				//element.setAttribute('style','margin-top: 4.5em !important');
@@ -86,16 +100,30 @@
 				// Passa dades personals a React
 				var autenticat = '1';
                 sessionStorage.setItem('autenticat', autenticat);
-				sessionStorage.setItem('usuariNomComplet', '${user}');
+				sessionStorage.setItem('usuariNomComplet', '${usuariNomComplet}');
 				sessionStorage.setItem('usuariNom', '${userName}');
 				sessionStorage.setItem('usuariLlinatge1', '${userSurname1}');
 				sessionStorage.setItem('usuariLlinatge2', '${userSurname2}');
 				sessionStorage.setItem('usuariDNI', '${userDNI}');
+				sessionStorage.setItem('usuariEsEmpresa', ${userEsEmpresa});
 				sessionStorage.setItem('usuariMetode', '${userMethod}');
 				sessionStorage.setItem('usuariNivell', '${userLevelAut}');
 				sessionStorage.setItem('contextPath', '${pageContext.request.contextPath}');
 				sessionStorage.setItem('errorLogin', '${errorLogin}');
 				sessionStorage.setItem('maxInactiveInterval', '${maxInactiveInterval}');
+				
+				<c:if test="${not empty userRepresentant }" >
+				sessionStorage.setItem('representantExisteix', true);
+				sessionStorage.setItem('representantNom', '${representantName}');
+                sessionStorage.setItem('representantLlinatge1', '${representantSurname1}');
+                sessionStorage.setItem('representantLlinatge2', '${representantSurname2}');
+                sessionStorage.setItem('representantDNI', '${representantDNI}');
+				</c:if>
+				
+				<c:if test="${empty userRepresentant }" >
+                sessionStorage.setItem('representantExisteix', false);
+                </c:if>
+				
 
 		</script>
 	  </sec:authorize> 

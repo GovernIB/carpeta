@@ -58,11 +58,6 @@ public class LoginController {
     @EJB(mappedName = AuditoriaLogicaService.JNDI_NAME)
     protected AuditoriaLogicaService auditoriaLogicaEjb;
 
-    // @Autowired
-    // private RequestMappingHandlerMapping requestMappingHandlerMapping;
-
-    // @Value("${es.caib.carpeta.loginib.entidad}")
-    // private String entidad;
 
     @RequestMapping(value = "/prelogin")
     public String prelogin(HttpServletRequest request, HttpServletResponse response

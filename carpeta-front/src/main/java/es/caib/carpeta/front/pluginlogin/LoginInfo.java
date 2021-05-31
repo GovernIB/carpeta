@@ -6,11 +6,10 @@ package es.caib.carpeta.front.pluginlogin;
  *
  */
 public class LoginInfo {
-    
-    public static final int NIVELL_AUTENTICACIO_BAIX= 1;
-    public static final int NIVELL_AUTENTICACIO_MITJA =2;
-    public static final int NIVELL_AUTENTICACIO_ALT =3;
-    
+
+    public static final int NIVELL_AUTENTICACIO_BAIX = 1;
+    public static final int NIVELL_AUTENTICACIO_MITJA = 2;
+    public static final int NIVELL_AUTENTICACIO_ALT = 3;
 
     private String username;
     private String name;
@@ -20,13 +19,32 @@ public class LoginInfo {
     private String authenticationMethod;
     private int qaa;
     private String identityProvider;
+    private boolean business;
+    private LoginInfoRepresentative representative;
 
+    /**
+     * 
+     */
     public LoginInfo() {
         super();
     }
 
+    /**
+     * 
+     * @param username
+     * @param name
+     * @param surname1
+     * @param surname2
+     * @param administrationID
+     * @param authenticationMethod
+     * @param qaa
+     * @param identityProvider
+     * @param business
+     * @param representative
+     */
     public LoginInfo(String username, String name, String surname1, String surname2, String administrationID,
-            String authenticationMethod, int qaa, String identityProvider) {
+            String authenticationMethod, int qaa, String identityProvider, boolean business,
+            LoginInfoRepresentative representative) {
         super();
         this.username = username;
         this.name = name;
@@ -36,6 +54,8 @@ public class LoginInfo {
         this.authenticationMethod = authenticationMethod;
         this.qaa = qaa;
         this.identityProvider = identityProvider;
+        this.business = business;
+        this.representative = representative;
     }
 
     public String getUsername() {
@@ -100,6 +120,22 @@ public class LoginInfo {
 
     public void setIdentityProvider(String identityProvider) {
         this.identityProvider = identityProvider;
+    }
+
+    public boolean isBusiness() {
+        return business;
+    }
+
+    public void setBusiness(boolean business) {
+        this.business = business;
+    }
+
+    public LoginInfoRepresentative getRepresentative() {
+        return representative;
+    }
+
+    public void setRepresentative(LoginInfoRepresentative representative) {
+        this.representative = representative;
     }
 
 }
