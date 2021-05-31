@@ -198,7 +198,7 @@ class MenuDesllisant extends Component {
 		));
 		idiomes_seleccionables = idiomes.filter(s => s !== langActual).map((s, i) => (
 			<span key={i}><button onClick={() => this.canviarIdioma(s)}
-				className="boton-menu lletraIdioma" tabIndex={201+i}>{t('menuIdioma_' + s)}</button> \ </span>
+				className="boton-menu lletraIdioma" tabIndex={201+i} aria-labelledby={t('menuIdioma_' + s)} aria-describedby={t('accedirIdioma') + t('menuIdioma_' + s)}>{t('menuIdioma_' + s)}</button> \ </span>
 		));
 
 		let allItems = [];
@@ -218,7 +218,7 @@ class MenuDesllisant extends Component {
 						allItems.push(
 							<li key={i}>
 								<button title={s.missatge} className={"botoMenu alert" + s.gravetat + "menu"}
-										onClick={(event) => this.mostrarPlugin(s.gravetat, s.missatge, s.context, s.tipus)} tabIndex={205+i}>
+										onClick={(event) => this.mostrarPlugin(s.gravetat, s.missatge, s.context, s.tipus)} tabIndex={205+i} aria-labelledby={s.nom} aria-describedby={t('accedirPlugin') + s.nom}>
 									<img src={urlBase + s.urllogo} className="imc-icona" title="" alt={s.nom} />
 									<span>{s.nom} </span>
 								</button>
@@ -227,7 +227,7 @@ class MenuDesllisant extends Component {
 
 					case 2: // Enllaz
 						allItems.push(<li key={i}>
-							<a href={s.url} title={s.nom} target="_blank" tabIndex={205+i}>
+							<a href={s.url} title={s.nom} target="_blank" tabIndex={205+i} aria-labelledby={s.nom} aria-describedby={t('accedirEnllas') + s.nom}>
 								<img src={s.urllogo} title="" alt={s.nom} className="imc-icona iconaEnllas"/>
 								<span>{s.nom}</span>
 							</a>
@@ -236,7 +236,7 @@ class MenuDesllisant extends Component {
 
 					case 3: // Seccio
 						allItems.push(<li key={i}>
-							<Link to={Constants.SECCIO_PATH + s.context} tabIndex={205+i}>
+							<Link to={Constants.SECCIO_PATH + s.context} tabIndex={205+i} aria-labelledby={s.nom} aria-describedby={t('accedirSeccio') + s.nom}>
 								<img src={s.urllogo} title="" alt={s.descripcio} className="imc-icona iconaEnllas"/>
 								<span>{s.nom} </span>
 							</Link>
@@ -245,7 +245,7 @@ class MenuDesllisant extends Component {
 
 					case 4: // PseudoPlugin
 						allItems.push(<li key={i}>
-							<a href={s.url} target="_blank" title={s.nom} tabIndex={205+i}>
+							<a href={s.url} target="_blank" title={s.nom} tabIndex={205+i} aria-labelledby={s.nom} aria-describedby={t('accedirPlugin') + s.nom}>
 								<img src={s.urllogo} title="" alt={s.nom} className="imc-icona iconaEnllas"/>
 								<span>{s.nom} </span>
 							</a>
@@ -261,7 +261,7 @@ class MenuDesllisant extends Component {
 			if (canviarDeFront === 'true' && numEntitats > 1) {
 				allItems.push(<li key="canvent">
 					<Link to={{pathname: `/canviarEntitat`, nomPagina: 'menuCanviarEntitat'}}
-						  className="imc-marc-ico imc--canviarEntitat" tabIndex="250">
+						  className="imc-marc-ico imc--canviarEntitat" tabIndex="250" aria-labelledby={t('menuCanviarEntitat')} aria-describedby={t('accedirSeccio') + t('menuCanviarEntitat')}>
 						<span>{t('menuCanviarEntitat')}</span>
 					</Link>
 				</li>);
@@ -269,12 +269,12 @@ class MenuDesllisant extends Component {
 
 			if (autenticat === '1') {
 				allItems.push(<li key="exit"><a href="sortir" className="imc-marc-ico imc--sortir" id="imc-marc-sortir"
-												title={t('menuSortir')} tabIndex="260"><span>{t('menuSortir')}</span></a></li>);
+												title={t('menuSortir')} tabIndex="260" aria-labelledby={t('menuSortir')} aria-describedby={t('accedirEnllas') + t('menuSortir')}><span>{t('menuSortir')}</span></a></li>);
 			}
 
 			allItems.push(<li key="acc">
 				<Link to={{pathname: `/accessibilitat`, nomPagina: 'menuAccessibilitat'}}
-					  className="imc-marc-ico imc--accessibilitat" tabIndex="270">
+					  className="imc-marc-ico imc--accessibilitat" tabIndex="270" aria-labelledby={t('menuAccessibilitat')} aria-describedby={t('accedirSeccio') + t('menuAccessibilitat')}>
 					<span>{t('menuAccessibilitat')}</span>
 				</Link>
 			</li>);

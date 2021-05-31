@@ -222,7 +222,17 @@
 	"canviarEntitatTitol": "CANVIAR D'ENTITAT",
 	"canviarEntitatDescripcio": "Aquestes són les Carpetes Ciutadanes disponibles a les que pot accedir.",
 
-	"accedirEnllas": "Accedir a l'enllaç",
-	"accedirBoto": "Accedir al botó",
-	"accedirPlugin": "Accedir al plugin "
+	"accedirEnllas": "Accedir a l'enllaç ",
+	"accedirBoto": "Accedir al botó ",
+	"accedirPlugin": "Accedir al plugin ",
+	"accedirSeccio": "Accedir a la secció ",
+	"accedirEntitat": "Accedir a l'entitat ",
+	"accedirIdioma": "Accedir a l'idioma ",
+	"enviarMail": "Enviar mail a ",
+	"tancarAvis": "Tancar avís",
+	"tancarAjuda": "Tancar suport",
+	"contacteAccess": "Contacte accessibilitat",
+	"accessibilitatWAI": "Descripció de la Web Accessibility Initiative Doble A",
+	"tancar": "Tancar",
+	"menuHamburguesa": "Menú hamburguesa"
 }

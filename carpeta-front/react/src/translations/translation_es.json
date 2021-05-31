@@ -222,8 +222,18 @@
 	"canviarEntitatTitol": "CAMBIAR DE ENTIDAD",
 	"canviarEntitatDescripcio": "Estas son las Carpetas Ciudadanas disponibles a les que puede acceder.",
 
-	"accedirEnllas": "Acceder al enlace",
-	"accedirBoto": "Acceder al botón",
-	"accedirPlugin": "Acceder al plugin "
+	"accedirEnllas": "Acceder al enlace ",
+	"accedirBoto": "Acceder al botón ",
+	"accedirPlugin": "Acceder al plugin ",
+	"accedirSeccio": "Acceder a la sección ",
+	"accedirEntitat": "Acceder a la entidad ",
+	"accedirIdioma": "Acceder al idioma ",
+	"enviarMail": "Enviar mail a ",
+	"tancarAvis": "Cerrar aviso",
+	"tancarAjuda": "Cerrar soporte",
+	"contacteAccess": "Contacto accesibilidad",
+	"accessibilitatWAI": "Descripción de la Web Accessibility Initiative Doble A",
+	"tancar": "Cerrar",
+	"menuHamburguesa": "Menú hamburguesa"
 
 }

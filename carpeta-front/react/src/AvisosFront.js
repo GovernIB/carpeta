@@ -87,7 +87,7 @@ class AvisosFront extends Component {
                     content = this.state.avisos.map((s, i) => (
                         <div key={i} className={`alert avis${s.gravetat} alert-dismissible fade show`} role="alert">
                             {s.label}
-                            <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                            <button type="button" className="close" data-dismiss="alert" aria-label={t('tancar')} aria-describedby={t('tancarAvis')}>
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -100,7 +100,7 @@ class AvisosFront extends Component {
                     content = this.state.avisos.map((s, i) => (
                         <div key={i} className={`alert avis${s.gravetat} alert-dismissible fade show`} role="alert">
                             {s.label}
-                            <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                            <button type="button" className="close" data-dismiss="alert" aria-label={t('tancar')} aria-describedby={t('tancarAvis')}>
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -114,7 +114,7 @@ class AvisosFront extends Component {
         if (error.length) {
             avisError = <div className="alert avis3 alert-dismissible fade show" role="alert">
                 {error}
-                <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                <button type="button" className="close" data-dismiss="alert" aria-label={t('tancar')} aria-describedby={t('tancarAvis')}>
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>;

@@ -170,7 +170,7 @@ $.fn.appMenu = function(opcions){
 					.on('click.appMenu', mostra);
 
 				imc_marc
-					.attr({ "tabindex": "-1", "aria-hidden": "true" })
+					.attr({ "tabIndex": "-1", "aria-hidden": "true" })
 					.appRellisca();
 
 			},
@@ -198,6 +198,8 @@ $.fn.appMenu = function(opcions){
 				elm
 					.off(".appMenu")
 					.on('click.appMenu', mostra);
+
+				$( ".imc-marc-menu").css("transform", "");
 
 			};
 
