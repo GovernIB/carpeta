@@ -198,6 +198,8 @@
 						.off(".appMenu")
 						.on('click.appMenu', mostra);
 
+					$( ".imc-marc-menu").css("transform", "");
+
 				};
 
 			// inicia
