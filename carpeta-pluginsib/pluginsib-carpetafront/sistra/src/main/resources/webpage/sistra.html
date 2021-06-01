@@ -48,7 +48,7 @@
                                 <label for="fechaInicio" placeholder="dd/mm/yyyy" class="float-left">${carpeta_fecha_inicio}</label>
                                 <div class="input-group">
                                     <input id="fechaInicio" name="fechaInicio" class="form-control form-control-sm"
-                                           required="required" type="text"
+                                           required="required" type="date"
                                            value="${form_dataInici?string('dd/MM/yyyy')}" maxlength="10">
                                     <span class="input-group-text"><span class="oi oi-calendar"></span></span>
                                 </div>
@@ -58,7 +58,7 @@
                             <div class="form-group pl-2 pr-2">
                                 <label for="fechaFin" placeholder="dd/mm/yyyy" class="float-left">${carpeta_fecha_fin}</label>
                                 <div class="input-group">
-                                    <input id="fechaFin" name="fechaFin" class="form-control form-control-sm" required="required" type="text" value="${form_dataFi?string('dd/MM/yyyy')}" maxlength="10">
+                                    <input id="fechaFin" name="fechaFin" class="form-control form-control-sm" required="required" type="date" value="${form_dataFi?string('dd/MM/yyyy')}" maxlength="10">
                                     <span class="input-group-text"><span class="oi oi-calendar"></span></span>
                                 </div>
                             </div>
