@@ -75,11 +75,11 @@ class IniciPublic extends Component {
 
                 htmlCode = <div className="row mr-0 ml-0">
                     <div className="infoNoMenu">
-                        <h2><p className="titol h2">{t('paginaIniciTitol')} {entitatNom}</p></h2>
+                        <h2 className="titol h2">{t('paginaIniciTitol')} {entitatNom}</h2>
 
                         <div className="col-md-5 border-0 float-left p-0">
-                            <h3 className="apartat"><p className="titol h5 margen-top-clave"><span
-                                className="oi oi-person"/>{t('paginaIniciQuefer')}</p></h3>
+                            <h3 className="apartat titol h5 margen-top-clave"><span
+                                className="oi oi-person"/>{t('paginaIniciQuefer')}</h3>
                             <ul className="lh15 pl-5 pt-3">
                                 <li><span className="oi oi-arrow-right"/>{t('paginaIniciQuefer1')}</li>
                                 <li><span className="oi oi-arrow-right"/>{t('paginaIniciQuefer2')}</li>
@@ -87,8 +87,8 @@ class IniciPublic extends Component {
                                 <li><span className="oi oi-arrow-right"/>{t('paginaIniciQuefer4')}</li>
                             </ul>
 
-                            <h3 className="apartat"><p className="titol h5 margen-top-clave"><span
-                                className="oi oi-account-login"/>{t('paginaIniciAcces')}</p></h3>
+                            <h3 className="apartat titol h5 margen-top-clave"><span
+                                className="oi oi-account-login"/>{t('paginaIniciAcces')}</h3>
 
                             <p className="lh15">{t('paginaIniciClave')}</p>
 
@@ -121,11 +121,11 @@ class IniciPublic extends Component {
                                 </button>
                             </p>
 
-                            <h3 className="apartat"><p className="titol h5">{t('tramitacioAnonimaTitol')}</p></h3>
+                            <h3 className="apartat titol h5">{t('tramitacioAnonimaTitol')}</h3>
                             <p className="lh15 pb-3"><a href={baseURL + '/#/publicmoduls/reprendretramit'} id="tramitacioModalBtn" tabIndex="3" aria-labelledby={t('tramitacioEnllaz')} aria-describedby={t('accedirEnllas') + t('tramitacioEnllaz')}><span
                                 className="oi oi-external-link"/>{t('tramitacioEnllaz')}</a></p>
 
-                            <h3 className="apartat"><p className="titol h5">{t('paginaIniciProblemes')}</p></h3>
+                            <h3 className="apartat titol h5">{t('paginaIniciProblemes')}</h3>
                             <p className="lh15">{t('paginaIniciAjuda')}</p>
                             <ul className="lh15 pl-5 pt-3">
                                 <li><span className="oi oi-arrow-right"/> {t('paginaIniciAjuda1')} <a

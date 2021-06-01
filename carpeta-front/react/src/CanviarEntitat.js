@@ -65,7 +65,7 @@ class CanviarEntitat extends Component {
                         <span className="card-title titol pl-1 h3">
                             <img src={s.urlIcona} title={s.nom} alt={s.nom} className="imc-icona"/>
                         </span>
-                        <h3 className="apartat"><span className="titolPlugin titol h3 titolCentrat">{s.nom}</span></h3>
+                        <h3 className="apartat titolPlugin titol h3 titolCentrat">{s.nom}</h3>
                     </a>
                 </div>
             ));
@@ -78,7 +78,7 @@ class CanviarEntitat extends Component {
 
                 <div className="infoNoMenu">
 
-                    <h2><p className="titol h2">{t('canviarEntitatTitol')}</p></h2>
+                    <h2 className="titol h2">{t('canviarEntitatTitol')}</h2>
 
                     <div className="col-md-12 border-0 pl-0 pr-0">
 

@@ -137,7 +137,7 @@ class LlistatDePlugins extends Component {
                                     <span className="card-title titol pl-1 h3"><img src={urlBase + s.urllogo}
                                                                                     alt={s.nom} title=""
                                                                                     className="imc-icona"/></span>
-                                    <h3 className="apartat"><span className="titolPlugin titol h3">{s.nom}</span></h3>
+                                    <h3 className="apartat titolPlugin titol h3">{s.nom}</h3>
                                     <span className="card-text mb-3 mt-3 alignCenter"
                                           style={styleDesc}>{s.descripcio}</span>
                                 </Link>
@@ -172,7 +172,7 @@ class LlistatDePlugins extends Component {
                                       className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`} tabIndex={2+i} aria-labelledby={s.nom} aria-describedby={t('accedirSeccio') + s.nom}>
                                     <span className="card-title titol pl-1 h3"><img src={s.urllogo} alt={s.nom} title=""
                                                                                     className="imc-icona"/></span>
-                                    <h3 className="apartat"><span className="titolPlugin titol h3">{s.nom}</span></h3>
+                                    <h3 className="apartat titolPlugin titol h3">{s.nom}</h3>
                                     <span className="card-text mb-3 mt-3 alignCenter"
                                           style={styleDesc}>{s.descripcio}</span>
                                 </Link>
@@ -187,7 +187,7 @@ class LlistatDePlugins extends Component {
                                         onClick={() => window.open(s.url)} tabIndex={2+i} aria-labelledby={s.nom} aria-describedby={t('accedirPlugin') + s.nom}>
                                     <span className="card-title titol pl-1 h3"><img src={s.urllogo} alt={s.nom} title=""
                                                                                     className="imc-icona"/></span>
-                                    <h3 className="apartat"><span className="titolPlugin titol h3">{s.nom}</span></h3>
+                                    <h3 className="apartat titolPlugin titol h3">{s.nom}</h3>
                                     <span className="card-text mb-3 mt-3 alignCenter"
                                           style={styleDesc}>{s.descripcio}</span>
                                 </button>
@@ -220,7 +220,7 @@ class LlistatDePlugins extends Component {
 
                 <div className="infoNoMenu">
 
-                    <h2><p className="titol h2">{titolHeader}</p></h2>
+                    <h2 className="titol h2">{titolHeader}</h2>
 
                     <div className="col-md-12 border-0 pl-0 pr-0">
 

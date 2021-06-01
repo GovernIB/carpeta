@@ -151,7 +151,7 @@ class MapaWeb extends Component {
 				{autenticat === '1' && <ExpirarSessio/>	}
 
 				<div className="infoNoMenu">
-					<h2><p className="titol h2">{t('mapaWebTitol')}</p></h2>
+					<h2 className="titol h2">{t('mapaWebTitol')}</h2>
 
 					<div className="col-md-12 border-0 pl-0 pr-0">
 

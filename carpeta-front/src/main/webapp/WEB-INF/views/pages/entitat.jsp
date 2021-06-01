@@ -129,7 +129,7 @@
                                                     <span class="card-title titol pl-1 h3">
                                                         <img src="<c:url value="/webui/entityicon/${entitat.entitatID}"/>" alt="${entitat.nom.getTraduccio(langActual).valor}" title="" class="imc-icona">
                                                     </span>
-                                                    <h2 class="apartat"><span class="titolPlugin titol h3 titolCentrat">${entitat.nom.getTraduccio(langActual).valor}</span></h2>
+                                                    <h2 class="apartat titolPlugin titol h3 titolCentrat">${entitat.nom.getTraduccio(langActual).valor}</h2>
                                                     <span class="card-text mb-3 mt-3 alignCenter"><i>${(empty entitat.descripcio)?'':entitat.descripcio.getTraduccio(langActual).valor}</i></span>
                                                 </button>
                                             </div>
