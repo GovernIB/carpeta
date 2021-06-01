@@ -35,6 +35,7 @@ import es.caib.carpeta.pluginsib.carpetafront.api.ICarpetaFrontPlugin;
 import es.caib.carpeta.logic.AuditoriaLogicaService;
 import es.caib.carpeta.logic.LogCarpetaLogicaService;
 import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaService;
+import es.caib.carpeta.logic.PluginLogicaService;
 import es.caib.carpeta.model.entity.Plugin;
 
 /**
@@ -58,6 +59,9 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
 
     @EJB(mappedName = AuditoriaLogicaService.JNDI_NAME)
     protected AuditoriaLogicaService auditoriaLogicaEjb;
+    
+    @EJB(mappedName = PluginLogicaService.JNDI_NAME)
+    protected PluginLogicaService pluginLogicaServiceEjb;
 
     @Override
     public int getTipus() {
@@ -223,19 +227,24 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
     public void delete(HttpServletRequest request, Plugin plugin) throws Exception, I18NException {
         String nom = findByPrimaryKey(request, plugin.getPluginID()).getNomTraduccions()
                 .get(Configuracio.getDefaultLanguage()).getValor();
-        super.delete(request, plugin);
+        
+        if (pluginLogicaServiceEjb.deleteFull(plugin.getPluginID())){
+        	
+        	try {
+                LoginInfo loginInfo = LoginInfo.getInstance();
+                auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ELIMINAT_PLUGIN, null,
+                        loginInfo.getUsuariPersona().getUsername(), nom);
+            } catch (I18NException e) {
 
-        try {
-            LoginInfo loginInfo = LoginInfo.getInstance();
-            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ELIMINAT_PLUGIN, null,
-                    loginInfo.getUsuariPersona().getUsername(), nom);
-        } catch (I18NException e) {
-
-            String msg = "Error creant auditoria " + "(" + e.getMessage() + ")";
-            log.error(msg, e);
+                String msg = "Error creant auditoria " + "(" + e.getMessage() + ")";
+                log.error(msg, e);
+            }
+        	
+        }else {
+        	throw new I18NException("plugin.error.associat");
         }
+        
     }
-    
     
     @Override
     public String getRedirectWhenModified(HttpServletRequest request, PluginForm pluginForm, Throwable __e) {

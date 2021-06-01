@@ -2,6 +2,8 @@ package es.caib.carpeta.logic;
 
 import javax.ejb.Local;
 
+import org.fundaciobit.genapp.common.i18n.I18NException;
+
 import es.caib.carpeta.persistence.PluginJPA;
 
 
@@ -24,5 +26,7 @@ public interface PluginLogicaService extends es.caib.carpeta.ejb.PluginService {
 
     @Override
     public PluginJPA findByPrimaryKey(long _ID_);
+    
+    public boolean deleteFull(Long pluginID) throws I18NException;
 
 }
