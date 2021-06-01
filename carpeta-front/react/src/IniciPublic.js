@@ -78,8 +78,8 @@ class IniciPublic extends Component {
                         <h2><p className="titol h2">{t('paginaIniciTitol')} {entitatNom}</p></h2>
 
                         <div className="col-md-5 border-0 float-left p-0">
-                            <p className="titol h5 margen-top-clave"><span
-                                className="oi oi-person"/>{t('paginaIniciQuefer')}</p>
+                            <h3 className="apartat"><p className="titol h5 margen-top-clave"><span
+                                className="oi oi-person"/>{t('paginaIniciQuefer')}</p></h3>
                             <ul className="lh15 pl-5 pt-3">
                                 <li><span className="oi oi-arrow-right"/>{t('paginaIniciQuefer1')}</li>
                                 <li><span className="oi oi-arrow-right"/>{t('paginaIniciQuefer2')}</li>
@@ -87,8 +87,8 @@ class IniciPublic extends Component {
                                 <li><span className="oi oi-arrow-right"/>{t('paginaIniciQuefer4')}</li>
                             </ul>
 
-                            <p className="titol h5 margen-top-clave"><span
-                                className="oi oi-account-login"/>{t('paginaIniciAcces')}</p>
+                            <h3 className="apartat"><p className="titol h5 margen-top-clave"><span
+                                className="oi oi-account-login"/>{t('paginaIniciAcces')}</p></h3>
 
                             <p className="lh15">{t('paginaIniciClave')}</p>
 
@@ -121,11 +121,11 @@ class IniciPublic extends Component {
                                 </button>
                             </p>
 
-                            <p className="titol h5">{t('tramitacioAnonimaTitol')}</p>
+                            <h3 className="apartat"><p className="titol h5">{t('tramitacioAnonimaTitol')}</p></h3>
                             <p className="lh15 pb-3"><a href={baseURL + '/#/publicmoduls/reprendretramit'} id="tramitacioModalBtn" tabIndex="3" aria-labelledby={t('tramitacioEnllaz')} aria-describedby={t('accedirEnllas') + t('tramitacioEnllaz')}><span
                                 className="oi oi-external-link"/>{t('tramitacioEnllaz')}</a></p>
 
-                            <p className="titol h5">{t('paginaIniciProblemes')}</p>
+                            <h3 className="apartat"><p className="titol h5">{t('paginaIniciProblemes')}</p></h3>
                             <p className="lh15">{t('paginaIniciAjuda')}</p>
                             <ul className="lh15 pl-5 pt-3">
                                 <li><span className="oi oi-arrow-right"/> {t('paginaIniciAjuda1')} <a

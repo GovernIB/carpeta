@@ -1,7 +1,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" 
 %><%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" 
 %><!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ca" style="" class=" js flexbox flexboxlegacy hashchange backgroundsize boxshadow textshadow opacity cssanimations cssgradients csstransforms csstransitions fontface generatedcontent localstorage svg" lang="ca">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${pageContext.response.locale.language}" style="" class=" js flexbox flexboxlegacy hashchange backgroundsize boxshadow textshadow opacity cssanimations cssgradients csstransforms csstransitions fontface generatedcontent localstorage svg" lang="${pageContext.response.locale.language}">
 <head>	
 	<link rel="shortcut icon" type="image/x-ico" href="http://www.caib.es/sites/favicon.png">
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

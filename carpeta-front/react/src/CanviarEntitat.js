@@ -62,10 +62,10 @@ class CanviarEntitat extends Component {
                 <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
                     <a className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}
                        href={baseURL + "/e/" + s.codi} tabIndex={1+i} aria-labelledby={s.nom} aria-describedby={t('accedirEntitat') + s.nom}>
-                    <span className="card-title titol pl-1 h3">
-                        <img src={s.urlIcona} title={s.nom} alt={s.nom} className="imc-icona"/>
-                    </span>
-                        <span className="titolPlugin titol h3 titolCentrat">{s.nom}</span>
+                        <span className="card-title titol pl-1 h3">
+                            <img src={s.urlIcona} title={s.nom} alt={s.nom} className="imc-icona"/>
+                        </span>
+                        <h3 className="apartat"><span className="titolPlugin titol h3 titolCentrat">{s.nom}</span></h3>
                     </a>
                 </div>
             ));

@@ -76,7 +76,7 @@ class AvisLegal extends Component {
                     </div>
 
                     <div className="col-md-12 border-0 float-left p-0 pt-2">
-                        <p className="titol h2">{t('avisLegalPolitica')}</p>
+                        <h3 className="apartat"><p className="titol h2">{t('avisLegalPolitica')}</p></h3>
                         <p className="lh15">
                             <b>{t('avisLegalPolitica1')}</b>
                             {t('avisLegalPolitica2')}
@@ -101,7 +101,7 @@ class AvisLegal extends Component {
                     </div>
 
                     <div className="col-md-12 border-0 float-left p-0 pt-2">
-                        <p className="titol h2">{t('avisLegalCookies1')} <em>{t('avisLegalCookies2')}</em> {t('avisLegalCookies3')}</p>
+                        <h3 className="apartat"><p className="titol h2">{t('avisLegalCookies1')} <em>{t('avisLegalCookies2')}</em> {t('avisLegalCookies3')}</p></h3>
                         <p className="lh15">
                             {t('avisLegalCookies4')}
                             <em>{t('avisLegalCookies5')}</em>

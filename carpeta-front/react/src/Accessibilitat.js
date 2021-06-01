@@ -36,13 +36,13 @@ class Accessibilitat extends Component {
                                                                                 rel="noopener noreferrer" tabIndex="3" aria-labelledby="https://www.caib.es/carpeta/" aria-describedby={t('accedirEnllas') + "https://www.caib.es/carpeta/"}>https://www.caib.es/carpeta/</a> {t('accessibilitatDeclaracio4')}
                         </p>
 
-                        <p className="titol h3">{t('accessibilitatCompliment')}</p>
+                        <h3 className="apartat"><p className="titol h3">{t('accessibilitatCompliment')}</p></h3>
                         <p className="lh15">{t('accessibilitatCompliment1')} <a
                             href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2018-12699" target="_blank"
                             rel="noopener noreferrer" tabIndex="4" aria-labelledby={t('accessibilitatDecret')} aria-describedby={t('accedirEnllas') + t('accessibilitatDecret')}>{t('accessibilitatDecret')}</a>{t('accessibilitatCompliment2')}
                         </p>
 
-                        <p className="titol h3">{t('accessibilitatNoAccessible')}</p>
+                        <h3 className="apartat"><p className="titol h3">{t('accessibilitatNoAccessible')}</p></h3>
                         <p className="lh15">{t('accessibilitatNoAccessible1')}</p>
                         <p className="lh15">{t('accessibilitatNoAccessible2')} <a
                             href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2018-12699" target="_blank"
@@ -55,7 +55,7 @@ class Accessibilitat extends Component {
                             </ul>
                         </div>
 
-                        <p className="titol h3">{t('accessibilitatPreparacio')}</p>
+                        <h3 className="apartat"><p className="titol h3">{t('accessibilitatPreparacio')}</p></h3>
                         <p className="lh15">{t('accessibilitatPreparacio1')}</p>
                         <p className="lh15">{t('accessibilitatPreparacio2')}</p>
 
@@ -68,13 +68,13 @@ class Accessibilitat extends Component {
                                                                                   rel="noopener noreferrer" tabIndex="7" aria-labelledby={t('accessibilitatObservacions3')} aria-describedby={t('accedirEnllas') + t('accessibilitatObservacions3')}>{t('accessibilitatObservacions3')}</a> {t('accessibilitatObservacions4')}
                         </p>
 
-                        <p className="titol h3">{t('accessibilitatProcediment')}</p>
+                        <h3 className="apartat"><p className="titol h3">{t('accessibilitatProcediment')}</p></h3>
                         <p className="lh15">{t('accessibilitatProcediment1')} <a
                             href="https://www.boe.es/diario_boe/txt.php?id=BOE-A-2018-12699" target="_blank"
                             rel="noopener noreferrer" tabIndex="8" aria-labelledby={t('accessibilitatDecret')} aria-describedby={t('accedirEnllas') + t('accessibilitatDecret')}>{t('accessibilitatDecret')}</a> {t('accessibilitatProcediment2')}
                         </p>
 
-                        <p className="titol h3">{t('accessibilitatOpcional')}</p>
+                        <h3 className="apartat"><p className="titol h3">{t('accessibilitatOpcional')}</p></h3>
                         <p className="lh15">{t('accessibilitatOpcional1')}</p>
                         <p className="lh15">{t('accessibilitatOpcional2')}</p>
                         <p className="lh15">{t('accessibilitatOpcional3')}</p>
