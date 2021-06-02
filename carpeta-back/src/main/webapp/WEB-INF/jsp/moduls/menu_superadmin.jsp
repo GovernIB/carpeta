@@ -34,6 +34,12 @@
             code="plugin.tipus.1.plural" /></span>
 </a>
 
+<a class="dropdown-item" href="<c:url value="/superadmin/iconic"/>">
+   <span
+    style="${(fn:contains(url, 'superadmin/iconic'))? "font-weight:bold;" : ""}"><spring:message
+            code="iconic.menu" /></span>
+</a>
+
 <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
 <a class="dropdown-item"

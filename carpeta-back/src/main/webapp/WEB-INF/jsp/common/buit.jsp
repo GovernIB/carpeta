@@ -139,9 +139,10 @@
 	                <p class="card-text"><spring:message code="menu.superadmin.plugins.descripcio" /></p>
 	                <ul>
 	                    <li><a href="<c:url value="/superadmin/pluginfront/list"/>"><spring:message code="plugin.tipus.frontal" /></a></li>
+                        <li><a href="<c:url value="/superadmin/iconic"/>"><spring:message code="iconic.menu" /></a></li>
 	                </ul>
 	            </div>
-	        </div>
+ 	        </div>
         </div>
         
         
