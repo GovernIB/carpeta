@@ -30,7 +30,9 @@ input:focus-visible {
 	outline: 1px solid #32814B !important;
 }
 .botoAccedirCarpeta:focus-visible{
-	outline: 1px solid #000 !important;
+	outline: 2px solid #32814B !important;
+	outline-offset: 1px;
+	background-color: #000 !important;
 }
 .alert-dismissible .close:focus-visible {
 	outline: 1px solid #32814B !important;
