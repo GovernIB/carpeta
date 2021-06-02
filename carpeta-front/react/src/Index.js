@@ -102,7 +102,7 @@ class Index extends Component {
             var esEmpresa = sessionStorage.getItem('usuariEsEmpresa'); 
             console.log("Index.js :: esEmpresa = " + esEmpresa)
             if (esEmpresa == 'true') {
-                icona =  <img src={'./src/assets/images/buildingsolid.svg'} width='18px' height='18px' />;
+                icona =  <img src={'./src/assets/images/buildingsolid.png'}  />;
             } else {
                 // És una Persona
                 var representantExisteix = sessionStorage.getItem('representantExisteix');
