@@ -83,6 +83,9 @@ button:active{
 .margen-top-clave{
 	padding-top: 3rem !important;
 }
+.apartat{
+	font-size: 1em !important;
+}
 
 .container-contenido {
     margin-left: 0 !important;

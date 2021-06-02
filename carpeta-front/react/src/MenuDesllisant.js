@@ -166,6 +166,11 @@ class MenuDesllisant extends Component {
 				alert("No s'ha pogut actualitzar l´idioma. Error: " + error);
 			});
 
+			// Canviam lang al html
+			$(document).ready(function() {
+				$("html").attr("lang", lng).attr("xml:lang", lng);
+			});
+
 
 		var f = document.getElementById("imc--fons");
 		f.click();
@@ -194,11 +199,11 @@ class MenuDesllisant extends Component {
 		console.log("Idioma actual: " + langActual);
 
 		idioma_seleccionat = idiomes.filter(s => s === langActual).map((s, i) => (
-			<strong className="lletraIdioma" key={i}>{t('menuIdioma_' + s)}</strong>
+			<strong className="lletraIdioma" key={i} lang={s}>{t('menuIdioma_' + s)}</strong>
 		));
 		idiomes_seleccionables = idiomes.filter(s => s !== langActual).map((s, i) => (
 			<span key={i}><button onClick={() => this.canviarIdioma(s)}
-				className="boton-menu lletraIdioma" tabIndex={201+i} aria-labelledby={t('menuIdioma_' + s)} aria-describedby={t('accedirIdioma') + t('menuIdioma_' + s)}>{t('menuIdioma_' + s)}</button> \ </span>
+				className="boton-menu lletraIdioma" tabIndex={201+i} aria-labelledby={t('menuIdioma_' + s)} aria-describedby={t('accedirIdioma') + t('menuIdioma_' + s)} lang={s}>{t('menuIdioma_' + s)}</button> \ </span>
 		));
 
 		let allItems = [];

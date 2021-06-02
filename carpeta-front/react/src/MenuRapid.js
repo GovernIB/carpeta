@@ -111,7 +111,7 @@ class MenuRapid extends Component {
                 });
 
                 content = <div>
-                    <nav className="navbar navbar-expand-sm bg-white p-0 fixo" id="menuRapid">
+                    <nav className="navbar navbar-expand-sm bg-white p-0 fixo">
                         <ul className="navbar-nav mRapidGlobal" style={{padding: '0.5rem!important'}}
                             id="llistaMenuRapid">
                             {allItems}
@@ -122,7 +122,7 @@ class MenuRapid extends Component {
         }
 
         return (
-            <div id = "menuRapid">
+            <div id="menuRapid">
                 {content}
             </div>
         );

@@ -120,7 +120,7 @@ class DadesPolicia extends Component {
         
         return (
             <div className="infoNoMenu">
-                <h2><p className="titol h2">{this.props.titles[i18n.language]}</p></h2>
+                <h2 className="titol h2">{this.props.titles[i18n.language]}</h2>
                 <div className="col-md-12 border-0 float-left p-0">
                     <p className="lh15">{this.props.subtitles[i18n.language]} </p>
                     <div className="infoNoMenu">
