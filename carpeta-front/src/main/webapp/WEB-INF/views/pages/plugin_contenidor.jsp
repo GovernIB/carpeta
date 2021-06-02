@@ -1,4 +1,4 @@
-<iframe src="${urlToShowPluginPage}" class="" style="min-height:300px;" frameborder='0' width="100%" height="400px"  id="myiframe" scrolling="auto" title="Frame del plugin">
+<iframe src="${urlToShowPluginPage}" class="" style="min-height:300px;width:100%;height:400px;" frameborder='0' id="myiframe" scrolling="auto" title="Frame del plugin">
 <p>NO IFRAME</p>
 </iframe>
 
