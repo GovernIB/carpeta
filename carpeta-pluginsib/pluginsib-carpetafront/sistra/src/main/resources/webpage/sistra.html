@@ -12,15 +12,10 @@
     <!-- SCRIPTS -->
     <script src="${resources}/carpeta/jquery-3.5.0.js"></script>
     <script src="${resources}/carpeta/bootstrap.min.js"></script>
-    <!-- Datetimepicker -->
-    <script src="${resources}/carpeta/moment-with-locales.min.js"></script>
-    <script src="${resources}/carpeta/bootstrap-datetimepicker.js"></script>
-    <!-- Del Goib -->
-    <!--    <script src="${resources}/carpeta/globales.js" type="text/javascript"></script>-->
     <!-- DataTables -->
     <script src="${resources}/carpeta/jquery.dataTables.min.js" type="text/javascript"></script>
     <script src="${resources}/carpeta/datetime-moment.js" type="text/javascript"></script>
-    <script src="${resourcessistra}/carpeta/carpeta_sistra.js" type="text/javascript"></script>
+    <!--  script src="${resourcessistra}/carpeta/carpeta_sistra.js" type="text/javascript"></script -->
     <!-- ESTILS -->
     <link href="${resources}/carpeta/bootstrap.min.css" rel="stylesheet">
     <link href="${resources}/carpeta/bootstrap-datetimepicker.min.css" rel="stylesheet">
@@ -40,26 +35,23 @@
         <div class="col-md-12 border-0 float-left p-0">
             <p class="lh15 text-estrofa">${tramite_descripcion}</p>
             <div class="card-body tablaRegistros">
-                <!--  XYZ ZZZ Falta muntar URL Correcte -->
                 <form id="fechaBusqueda" action="${form_action}" method="post">
                     <div class="row pb-2 ml-0 mr-0">
                         <div class="col-md-4 pl-0">
                             <div class="form-group pl-0 pr-2">
-                                <label for="fechaInicio" placeholder="dd/mm/yyyy" class="float-left">${carpeta_fecha_inicio}</label>
+                                <label for="fechaInicio" placeholder="yyyy-MM-dd" class="float-left">${carpeta_fecha_inicio}</label>
                                 <div class="input-group">
                                     <input id="fechaInicio" name="fechaInicio" class="form-control form-control-sm"
                                            required="required" type="date"
-                                           value="${form_dataInici?string('dd/MM/yyyy')}" maxlength="10">
-                                    <span class="input-group-text"><span class="oi oi-calendar"></span></span>
+                                           value="${form_dataInici?string('yyyy-MM-dd')}" maxlength="10">
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group pl-2 pr-2">
-                                <label for="fechaFin" placeholder="dd/mm/yyyy" class="float-left">${carpeta_fecha_fin}</label>
+                                <label for="fechaFin" placeholder="yyyy-MM-dd" class="float-left">${carpeta_fecha_fin}</label>
                                 <div class="input-group">
-                                    <input id="fechaFin" name="fechaFin" class="form-control form-control-sm" required="required" type="date" value="${form_dataFi?string('dd/MM/yyyy')}" maxlength="10">
-                                    <span class="input-group-text"><span class="oi oi-calendar"></span></span>
+                                    <input id="fechaFin" name="fechaFin" class="form-control form-control-sm" required="required" type="date" value="${form_dataFi?string('yyyy-MM-dd')}" maxlength="10">
                                 </div>
                             </div>
                         </div>
@@ -125,89 +117,6 @@
                     </#list>
                     </tbody>
                 </table>
-                <script type="text/javascript">
-                    $(document).ready(function () {
-                        var idioma = sessionStorage.getItem('idioma');
-                        $.fn.dataTable.moment('D/MM/YYY HH:mm');
-                        $('#dataTable_paginate').DataTable({
-                            "order": [[1, "desc"]],
-                            "language": {
-                                "url": "${resources}/i18n/" + idioma + ".json"
-                            }
-                        });
-                        
-                        $('.clickableRow').click(function(event){
-                        	event.preventDefault();
-                        	carregarUrl($(this));
-                        });
-                        $('.clickableRow').keypress(function(event){
-                        	event.preventDefault();
-                        	carregarUrl($(this));
-                        });
-                        
-                        $('#veureError').click(function(){ 
-                        	$('#ocultaError').removeClass('ocult');
-                            $('#veureError').addClass('ocult');
-                        	$('#divOcult').css('display','block'); 
-                        });
-                        
-                        $('#ocultaError').click(function(){ 
-                        	$('#ocultaError').addClass('ocult');
-                        	$('#veureError').removeClass('ocult');
-                        	$('#divOcult').css('display','none'); 
-                        });
-                    });
-                    
-                    function carregarUrl(obj) {
-                        if (obj.data('numero') != '') {
-                             mostrarCarregant();
-                            window.location.replace(obj.data('url'));
-                        }else if (obj.data('pending') == 'S' && obj.data('mostramodal') == 'S'){
-                            openModalConfirm(obj.data('url'));
-                        }else{
-                            window.open(obj.data('url'), '_blank');
-                        }
-                    }
-                    
-                    function mostrarCarregant() {
-                        $('#llistat').hide();
-                        $("#carregantTramits").removeClass("loaderOcult");
-                    }
-                    
-                    function goParentTo(url) {
-                        window.open(url, '_blank');
-                        $('#myModal').modal('hide');
-                    }
-
-                    function openModalConfirm(url) {
-                        $('body')
-                        .append(
-                                  '<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">'
-                                + '<div class="modal-dialog" role="document">'
-                                + '<div class="modal-content">'
-                                
-                                + '<div class="modal-header">'
-                                + '<h3 id="myModalLabel">${tramite_modal_titulo}</h3>'
-                                + '<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="font-weight: normal;font-size: 20px;">x</button>'
-                                + '</div>'
-                                
-                                + '<div class="modal-body">'
-                                + '<p>${tramite_modal_texte}</p>'
-                                + '</div>'
-                                
-                                + '<div class="modal-footer">'
-                                + '<button class="btn btn-success" type="button" onclick="goParentTo(\''+url+'\')">${tramite_modal_continuarBtn}</button>'
-                                + '<button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">${tramite_modal_cancelarBtn}</button>'
-                                
-                                + '</div>'
-                                
-                                + '</div>'
-                                + '</div>'
-                                + '</div>');
-                        
-                        $('#myModal').modal('show');
-                    }  
-                </script>
                 <#else>
                 <div class="alert alert-secondary mt-5 pt-5" role="alert">
                     ${tramite_vacio}
@@ -218,5 +127,88 @@
 </div>
 </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var idioma = sessionStorage.getItem('idioma');
+        $('#dataTable_paginate').DataTable({
+            "order": [[1, "desc"]],
+            "language": {
+                "url": "${resources}/i18n/" + idioma + ".json"
+            }
+        });
+        
+        $('.clickableRow').click(function(event){
+            event.preventDefault();
+            carregarUrl($(this));
+        });
+        
+        $('.clickableRow').keypress(function(event){
+            event.preventDefault();
+            carregarUrl($(this));
+        });
+        
+        $('#veureError').click(function(){ 
+            $('#ocultaError').removeClass('ocult');
+            $('#veureError').addClass('ocult');
+            $('#divOcult').css('display','block'); 
+        });
+        
+        $('#ocultaError').click(function(){ 
+            $('#ocultaError').addClass('ocult');
+            $('#veureError').removeClass('ocult');
+            $('#divOcult').css('display','none'); 
+        });
+    });
+    
+    function carregarUrl(obj) {
+        if (obj.data('numero') != '') {
+             mostrarCarregant();
+            window.location.replace(obj.data('url'));
+        }else if (obj.data('pending') == 'S' && obj.data('mostramodal') == 'S'){
+            openModalConfirm(obj.data('url'));
+        }else{
+            window.open(obj.data('url'), '_blank');
+        }
+    }
+    
+    function mostrarCarregant() {
+        $('#llistat').hide();
+        $("#carregantTramits").removeClass("loaderOcult");
+    }
+    
+    function goParentTo(url) {
+        window.open(url, '_blank');
+        $('#myModal').modal('hide');
+    }
+
+    function openModalConfirm(url) {
+        $('body')
+        .append(
+                  '<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">'
+                + '<div class="modal-dialog" role="document">'
+                + '<div class="modal-content">'
+                
+                + '<div class="modal-header">'
+                + '<h3 id="myModalLabel">${tramite_modal_titulo}</h3>'
+                + '<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="font-weight: normal;font-size: 20px;">x</button>'
+                + '</div>'
+                
+                + '<div class="modal-body">'
+                + '<p>${tramite_modal_texte}</p>'
+                + '</div>'
+                
+                + '<div class="modal-footer">'
+                + '<button class="btn btn-success" type="button" onclick="goParentTo(\''+url+'\')">${tramite_modal_continuarBtn}</button>'
+                + '<button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">${tramite_modal_cancelarBtn}</button>'
+                
+                + '</div>'
+                
+                + '</div>'
+                + '</div>'
+                + '</div>');
+        
+        $('#myModal').modal('show');
+    }  
+</script>
 </body>
 </html>
