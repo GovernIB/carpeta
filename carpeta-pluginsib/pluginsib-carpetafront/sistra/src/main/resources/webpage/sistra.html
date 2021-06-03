@@ -27,7 +27,7 @@
     <link href="${resources}/carpeta/datatables.min.css" rel="stylesheet">
 </head>
 <body class="fonsPlugin">
-<div id="carregantTramits" class="loader-container centrat loaderOcult">
+<div id="carregantTramits" class="loader-container centrat loaderOcult" role="alert">
     <div class="loader"></div>
 </div>
 <div id="llistat" class="container-contenido">
@@ -42,7 +42,7 @@
                             <div class="form-group pl-0 pr-2">
                                 <label for="fechaInicio" placeholder="yyyy-MM-dd" class="float-left">${carpeta_fecha_inicio}</label>
                                 <div class="input-group input-group-fecha-inicio">
-                                    <input id="fechaInicio" name="fechaInicio" class="form-control form-control-sm"
+                                    <input id="fechaInicio" name="fechaInicio" class="form-control form-control-sm estilCalendar"
                                            required="required" type="date"
                                            value="${form_dataInici?string('yyyy-MM-dd')}" maxlength="10">
                                     <span class="input-group-text"><span class="oi oi-calendar"></span></span>
@@ -53,7 +53,8 @@
                             <div class="form-group pl-2 pr-2">
                                 <label for="fechaFin" placeholder="yyyy-MM-dd" class="float-left">${carpeta_fecha_fin}</label>
                                 <div class="input-group input-group-fecha-fin">
-                                    <input id="fechaFin" name="fechaFin" class="form-control form-control-sm" required="required" type="date" value="${form_dataFi?string('yyyy-MM-dd')}" maxlength="10">
+                                    <input id="fechaFin" name="fechaFin" class="form-control form-control-sm estilCalendar" 
+                                           required="required" type="date" value="${form_dataFi?string('yyyy-MM-dd')}" maxlength="10">
                                     <span class="input-group-text"><span class="oi oi-calendar"></span></span>
                                 </div>
                             </div>
