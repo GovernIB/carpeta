@@ -1,8 +1,10 @@
 package es.caib.carpeta.back.controller.superadmin;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,14 +12,19 @@ import javax.servlet.http.HttpServletRequest;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
+import org.fundaciobit.genapp.common.query.ITableManager;
+import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 
 import es.caib.carpeta.back.controller.webdb.PluginController;
 import es.caib.carpeta.back.form.webdb.PluginFilterForm;
 import es.caib.carpeta.back.form.webdb.PluginForm;
+import es.caib.carpeta.back.utils.OrdenacioPerTraduible;
 import es.caib.carpeta.persistence.PluginJPA;
+import es.caib.carpeta.model.entity.Plugin;
 import es.caib.carpeta.model.fields.PluginFields;
 
 /**
@@ -78,6 +85,11 @@ public abstract class AbstractPluginSuperAdminController extends PluginControlle
             hiddenFields.remove(PluginFields.ACTIU);
 
             pluginFilterForm.setHiddenFields(hiddenFields);
+            
+            pluginFilterForm.setDefaultOrderBy(new OrderBy[] { new OrderBy(NOMID) });            
+            
+            pluginFilterForm.setAllItemsPerPage(new int[] {-1});
+            pluginFilterForm.setItemsPerPage(-1);
         }
 
         return pluginFilterForm;
@@ -102,5 +114,34 @@ public abstract class AbstractPluginSuperAdminController extends PluginControlle
     }
 
     public abstract int getTipus();
+    
+    @Override
+    public List<Plugin> executeSelect(ITableManager<Plugin, Long> ejb, Where where,
+            final OrderBy[] orderBy, final Integer itemsPerPage, final int inici)
+            throws I18NException {
+        
+        List<Plugin> list = super.executeSelect(pluginEjb, where, orderBy, itemsPerPage, inici);
+        
+        Field<?> field = PluginFields.NOMID;
+        
+        Map<Long, String> nomPerID = new HashMap<Long, String>();
+        
+        String lang = LocaleContextHolder.getLocale().getLanguage(); 
+        
+        for (Plugin plugin : list) {
+            nomPerID.put(plugin.getPluginID(), ((PluginJPA)plugin).getNom().getTraduccio(lang).getValor());
+        }
+        
+        new OrdenacioPerTraduible<Plugin, Long>() {
+            @Override
+            public Long getPK(Plugin o1) {
+                return o1.getPluginID();
+            }
+        }.ordenar(list, field, nomPerID, orderBy);
+               
+        return list;
+        
+    }
+    
 
 }

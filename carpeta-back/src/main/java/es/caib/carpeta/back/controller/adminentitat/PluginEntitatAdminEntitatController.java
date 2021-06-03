@@ -3,8 +3,12 @@ package es.caib.carpeta.back.controller.adminentitat;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.i18n.I18NValidationException;
+import org.fundaciobit.genapp.common.query.Field;
+import org.fundaciobit.genapp.common.query.ITableManager;
+import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.SubQuery;
 import org.fundaciobit.genapp.common.query.Where;
+import org.fundaciobit.genapp.common.utils.Utils;
 import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +23,7 @@ import es.caib.carpeta.back.form.webdb.PluginEntitatForm;
 
 import es.caib.carpeta.back.controller.webdb.PluginEntitatController;
 import es.caib.carpeta.back.security.LoginInfo;
+import es.caib.carpeta.back.utils.OrdenacioPerTraduible;
 import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.persistence.PluginEntitatJPA;
 import es.caib.carpeta.persistence.PluginJPA;
@@ -29,6 +34,7 @@ import es.caib.carpeta.model.fields.PluginFields;
 import es.caib.carpeta.model.fields.SeccioFields;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 
@@ -96,6 +102,15 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
         } else {
             pluginEntitatFilterForm.setAddButtonVisible(true);
         }
+        
+        if (pluginEntitatFilterForm.isNou()) {
+            pluginEntitatFilterForm.setDefaultOrderBy( new OrderBy[] { new OrderBy(PLUGINID)});
+            
+            pluginEntitatFilterForm.setAllItemsPerPage(new int[] {-1});
+            pluginEntitatFilterForm.setItemsPerPage(-1);
+            
+        }
+        
 
         return pluginEntitatFilterForm;
     }
@@ -163,5 +178,33 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
 
         return list;
     }
+    
+    
+    @Override
+    public List<PluginEntitat> executeSelect(ITableManager<PluginEntitat, Long> ejb, Where where,
+            final OrderBy[] orderBy, final Integer itemsPerPage, final int inici)
+            throws I18NException {
+        
+        List<PluginEntitat> list = super.executeSelect(pluginEntitatEjb, where, orderBy, itemsPerPage, inici);
+        
+        final Field<?> field = PluginEntitatFields.PLUGINID;
+        Map<String, String> nomPerID = Utils.listToMap(getReferenceListForPluginID(null, null, null));
+        
+        
+        new OrdenacioPerTraduible<PluginEntitat, String>() {
+            @Override
+            public String getPK(PluginEntitat o1) {
+                return String.valueOf(o1.getPluginID());
+            }
+        }.ordenar(list, field, nomPerID, orderBy);
+        
+        
+        return list;
+        
+    }
+    
+
+    
+    
 
 }

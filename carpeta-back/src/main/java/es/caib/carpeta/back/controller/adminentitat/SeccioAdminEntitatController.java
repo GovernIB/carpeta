@@ -1,10 +1,18 @@
 package es.caib.carpeta.back.controller.adminentitat;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.Field;
+import org.fundaciobit.genapp.common.query.ITableManager;
+import org.fundaciobit.genapp.common.query.OrderBy;
 import org.fundaciobit.genapp.common.query.Where;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -14,6 +22,7 @@ import es.caib.carpeta.back.controller.webdb.SeccioController;
 import es.caib.carpeta.back.form.webdb.SeccioFilterForm;
 import es.caib.carpeta.back.form.webdb.SeccioForm;
 import es.caib.carpeta.back.security.LoginInfo;
+import es.caib.carpeta.back.utils.OrdenacioPerTraduible;
 import es.caib.carpeta.logic.SeccioLogicaService;
 import es.caib.carpeta.model.entity.Seccio;
 import es.caib.carpeta.model.fields.SeccioFields;
@@ -29,9 +38,9 @@ import es.caib.carpeta.persistence.SeccioJPA;
 @SessionAttributes(types = { SeccioForm.class, SeccioFilterForm.class })
 public class SeccioAdminEntitatController extends SeccioController {
 
-	@EJB(mappedName = SeccioLogicaService.JNDI_NAME)
-	protected SeccioLogicaService seccioLogicaEjb;
-	
+    @EJB(mappedName = SeccioLogicaService.JNDI_NAME)
+    protected SeccioLogicaService seccioLogicaEjb;
+
     @Override
     public String getTileForm() {
         return "seccioFormAdminEntitat";
@@ -78,14 +87,48 @@ public class SeccioAdminEntitatController extends SeccioController {
             seccioFilterForm.addHiddenField(ENTITATID);
             seccioFilterForm.addHiddenField(ICONAID);
             seccioFilterForm.addHiddenField(SECCIOPAREID);
+            seccioFilterForm.addHiddenField(DESCRIPCIOID);
+            
+            seccioFilterForm.setDefaultOrderBy( new OrderBy[] { new OrderBy(NOMID)});
+            
+            seccioFilterForm.setAllItemsPerPage(new int[] {-1});
+            seccioFilterForm.setItemsPerPage(-1);
         }
 
         return seccioFilterForm;
     }
+
+    @Override
+    public void delete(HttpServletRequest request, Seccio seccio) throws Exception, I18NException {
+        seccioLogicaEjb.deleteFull(seccio, true);
+    }
+
     
     @Override
-    public void delete(HttpServletRequest request, Seccio seccio) throws Exception,I18NException {
-        seccioLogicaEjb.deleteFull(seccio,true);
-      }
-
+    public List<Seccio> executeSelect(ITableManager<Seccio, Long> ejb, Where where,
+            final OrderBy[] orderBy, final Integer itemsPerPage, final int inici)
+            throws I18NException {
+        
+        List<Seccio> list = super.executeSelect(seccioEjb, where, orderBy, itemsPerPage, inici);
+        
+        Field<?> field = SeccioFields.NOMID;
+        
+        Map<Long, String> nomPerID = new HashMap<Long, String>();
+        
+        String lang = LocaleContextHolder.getLocale().getLanguage(); 
+        
+        for (Seccio seccio : list) {
+            nomPerID.put(seccio.getSeccioID(), ((SeccioJPA)seccio).getNom().getTraduccio(lang).getValor());
+        }
+        
+        new OrdenacioPerTraduible<Seccio, Long>() {
+            @Override
+            public Long getPK(Seccio o1) {
+                return o1.getSeccioID();
+            }
+        }.ordenar(list, field, nomPerID, orderBy);
+               
+        return list;
+        
+    }
 }
