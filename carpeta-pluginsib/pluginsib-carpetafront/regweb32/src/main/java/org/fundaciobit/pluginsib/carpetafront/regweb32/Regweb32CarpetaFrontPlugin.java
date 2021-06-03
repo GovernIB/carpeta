@@ -300,7 +300,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             
             String parametros = "";
     		Calendar cal = Calendar.getInstance();
-    		SimpleDateFormat SDF = new SimpleDateFormat("dd/MM/yyyy");
+    		SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
             
             if(formDataFiStr != null && formDataFiStr != "") {
             	formDataFi = SDF.parse(formDataFiStr);
@@ -330,7 +330,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             	log.info("ESTAT => " + formEstat); 
             }
         
-            Thread.sleep(5000);
+            //Thread.sleep(5000);
 
             response.setCharacterEncoding("utf-8");
             response.setContentType("text/html");
@@ -374,14 +374,25 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
         map.put("form_dataFi", formDataFi);
         map.put("form_dataInici", formDataInici);
         map.put("form_estat", formEstat);
-
-        ResultadoBusquedaWs result;
-        result = getRegistres(userData.getAdministrationID(), entidad, formNumero, formDataInici, formDataFi, formEstat, pageNumber, locale);
-
+        
         @SuppressWarnings("unchecked")
-        List<AsientoWs> registres = (List<AsientoWs>) (List<?>) result.getResults();
-        int totalResults = result.getTotalResults();
+        List<AsientoWs> registres;
+        int totalResults = 0;
+        
+        if(isGet) {
+        	registres = null;
+        	map.put("cerca", "");
+        }else {
 
+	        ResultadoBusquedaWs result;
+	        result = getRegistres(userData.getAdministrationID(), entidad, formNumero, formDataInici, formDataFi, formEstat, pageNumber, locale);
+	
+	        //@SuppressWarnings("unchecked")
+	        registres = (List<AsientoWs>) (List<?>) result.getResults();
+	        totalResults = result.getTotalResults();
+	        map.put("cerca", "true");
+        }
+        
         InputStream input = this.getClass().getResourceAsStream("/webpage/regweb32.html");
 
         String plantilla = IOUtils.toString(input, "UTF-8");
@@ -410,7 +421,9 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 
         map.put("registroEstado", registroEstado);
         
-        String[] registroEstadoSelect = { "", getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.1", locale),
+        String[] registroEstadoSelect = { 
+        		getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.todos", locale), 
+        		getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.1", locale),
         		getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.4", locale),
         		getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.10", locale),
                 getTraduccio(RESOURCE_BUNDLE_NAME, "registro.estado.11", locale)};
