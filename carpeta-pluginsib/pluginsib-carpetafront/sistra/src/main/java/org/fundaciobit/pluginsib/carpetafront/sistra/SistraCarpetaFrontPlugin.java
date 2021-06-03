@@ -200,7 +200,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
                     log.info("formStatus: " + formEstat);
                 }
 
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 sdf.setTimeZone(TimeZone.getTimeZone("Europe/Madrid"));
 
                 formDataInici = sdf.parse(formDataIniciStr);

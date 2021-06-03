@@ -94,7 +94,10 @@ class IniciPublic extends Component {
 
                             <div className="row">
                                 <div className="pt-3 col-5">
-                                    <img src={baseURL + "/src/assets/images/solicitar_clave_acceso_dgt.png"} alt={t('paginaIniciLogoClave')} title={t('paginaIniciLogoClave')} />
+                                    <a className="mr-auto" href="http://clave.gob.es/clave_Home/clave.html"
+                                       target="_blank" rel="noopener noreferrer" tabIndex="6" aria-label={t('paginaIniciAjudaClaveText')} aria-describedby={t('accedirEnllas') + t('paginaIniciAjudaClaveText')}>
+                                        <img src={baseURL + "/src/assets/images/solicitar_clave_acceso_dgt.png"} alt={t('paginaIniciLogoClave')} title={t('paginaIniciLogoClave')} />
+                                    </a>
                                 </div>
                                 <div className="pt-3 col-5">
                                     <ul className="lh15 pt-3 opcionesAcceso">
