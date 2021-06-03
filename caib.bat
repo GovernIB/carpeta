@@ -1,2 +1,2 @@
 
-compile.bat -Pcaib
+compile.bat -Dcaib

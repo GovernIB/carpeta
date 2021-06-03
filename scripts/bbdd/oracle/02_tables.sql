@@ -38,10 +38,12 @@
 
     create table car_enllaz (
        enllazid number(19,0) not null,
+        actiu number(1,0) not null,
         descripcioid number(19,0),
         entitatid number(19,0) not null,
         logoid number(19,0) not null,
         nomid number(19,0) not null,
+        ordre number(10,0) not null,
         seccioid number(19,0),
         tipus number(10,0) not null,
         urlid number(19,0) not null
@@ -55,6 +57,7 @@
         colormenu varchar2(100 char) not null,
         commit varchar2(255 char),
         context varchar2(255 char),
+        descripcioid number(19,0),
         entitatdescfront varchar2(4000 char) not null,
         fitxercss number(19,0),
         iconid number(19,0) not null,
@@ -121,13 +124,16 @@
         logoid number(19,0),
         nomid number(19,0) not null,
         propietats clob,
-        tipus number(10,0) not null
+        subtitolllargid number(19,0),
+        tipus number(10,0) not null,
+        titolllargid number(19,0)
     );
 
     create table car_pluginentitat (
        pluginentitatid number(19,0) not null,
         actiu number(1,0) not null,
         entitatid number(19,0) not null,
+        ordre number(10,0) not null,
         pluginid number(19,0) not null,
         seccioid number(19,0)
     );
@@ -148,6 +154,7 @@
         entitatid number(19,0) not null,
         iconaid number(19,0) not null,
         nomid number(19,0) not null,
+        ordre number(10,0) not null,
         secciopareid number(19,0)
     );
 
@@ -179,7 +186,6 @@
         entitatid number(19,0) not null,
         usuariid number(19,0) not null
     );
-
 
 
 

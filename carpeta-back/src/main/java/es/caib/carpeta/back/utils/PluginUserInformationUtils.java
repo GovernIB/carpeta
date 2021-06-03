@@ -11,9 +11,9 @@ import org.apache.log4j.Logger;
 import org.fundaciobit.pluginsib.userinformation.IUserInformationPlugin;
 import org.fundaciobit.pluginsib.userinformation.UserInfo;
 import org.fundaciobit.pluginsib.userinformation.UserInfo.Gender;
-import org.keycloak.KeycloakSecurityContext;
-import org.keycloak.adapters.RefreshableKeycloakSecurityContext;
-import org.keycloak.representations.AccessToken;
+import org.keycloak.KeycloakSecurityContext; // core
+import org.keycloak.adapters.RefreshableKeycloakSecurityContext; // adaptercore
+import org.keycloak.representations.AccessToken; // core
 import org.springframework.stereotype.Controller;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

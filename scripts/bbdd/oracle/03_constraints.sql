@@ -90,6 +90,11 @@
        references car_traduccio;
 
     alter table car_entitat 
+       add constraint car_entitat_traduccio_des_fk 
+       foreign key (descripcioid) 
+       references car_traduccio;
+
+    alter table car_entitat 
        add constraint car_entitat_fitxer_css_fk 
        foreign key (fitxercss) 
        references car_fitxer;
@@ -142,6 +147,16 @@
     alter table car_plugin 
        add constraint car_plugin_traduccio_nom_fk 
        foreign key (nomid) 
+       references car_traduccio;
+
+    alter table car_plugin 
+       add constraint car_plugin_traduccio_stlar_fk 
+       foreign key (subtitolllargid) 
+       references car_traduccio;
+
+    alter table car_plugin 
+       add constraint car_plugin_traduccio_tllarg_fk 
+       foreign key (titolllargid) 
        references car_traduccio;
 
     alter table car_pluginentitat 

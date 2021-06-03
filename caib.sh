@@ -1,5 +1,5 @@
 #!/bin/bash
 
-./compile.sh -Pcaib
+./compile.sh -Dcaib
 
 

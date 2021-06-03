@@ -14,6 +14,11 @@
 		<!-- Format del timestamp -->
 		<maven.build.timestamp.format>dd/MM/yyyy HH:mm</maven.build.timestamp.format>
 	</properties>
+	
+	
+	
+	
+	
 	<dependencies>
 		<!-- Especificacions i llibreries proporcionades per JBoss -->
 		<dependency>
@@ -134,34 +139,116 @@
 		<!-- ====================================== -->
 		<!-- ===== PLUGINS DE USERINFORMATION ===== -->
 		<!-- ====================================== -->
-		<dependency>
-			<groupId>org.fundaciobit.pluginsib.userinformation</groupId>
-			<artifactId>pluginsib-userinformation-keycloak</artifactId>
-			<version>2.0.1</version>
-			<!-- Veure fitxer [carpeta-ear]\src\main\application\META-INF\jboss-deployment-structure.xml -->
-			<exclusions>
-				<exclusion>
-					<groupId>org.keycloak</groupId>
-					<artifactId>keycloak-core</artifactId>
-			    </exclusion>
-   				<exclusion>
-					<groupId>org.keycloak</groupId>
-					<artifactId>keycloak-common</artifactId>
-			    </exclusion>			
-			</exclusions>
-			
-		</dependency>
-		<dependency>
-			<groupId>org.fundaciobit.pluginsib.userinformation</groupId>
-			<artifactId>pluginsib-userinformation-database</artifactId>
-			<version>2.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.fundaciobit.pluginsib.userinformation</groupId>
-			<artifactId>pluginsib-userinformation-ldap</artifactId>
-			<version>2.0.0</version>
-		</dependency>
+		
+		<!-- VEURE PROFILES més abaix. -->
+
 	</dependencies>
+
+    <profiles>
+
+        <profile>
+            <id>nokeycloak</id>
+            <activation>
+                <property>
+                    <name>!caib</name>
+                </property>
+            </activation>
+            <dependencies>
+                    <!-- ====================================== -->
+					<!-- ===== PLUGINS DE USERINFORMATION ===== -->
+					<!-- ====================================== -->
+					<dependency>
+						<groupId>org.fundaciobit.pluginsib.userinformation</groupId>
+						<artifactId>pluginsib-userinformation-keycloak</artifactId>
+						<version>2.0.1</version>
+		            </dependency>
+					
+					<dependency>
+						<groupId>org.fundaciobit.pluginsib.userinformation</groupId>
+						<artifactId>pluginsib-userinformation-database</artifactId>
+						<version>2.0.0</version>
+					</dependency>
+				
+					<dependency>
+						<groupId>org.fundaciobit.pluginsib.userinformation</groupId>
+						<artifactId>pluginsib-userinformation-ldap</artifactId>
+						<version>2.0.0</version>
+					</dependency>
+            </dependencies>
+        </profile>
+	
+	    <profile>
+            <id>caib</id>
+            <activation>
+                <property>
+                    <name>caib</name>
+                </property>
+            </activation> 
+            <properties>
+                <auth.method>KEYCLOAK</auth.method>
+            </properties>
+            <dependencies>
+                    <!-- ====================================== -->
+					<!-- ===== PLUGINS DE USERINFORMATION ===== -->
+					<!-- ====================================== -->
+					<dependency>
+						<groupId>org.fundaciobit.pluginsib.userinformation</groupId>
+						<artifactId>pluginsib-userinformation-keycloakcaib</artifactId>
+						<version>2.0.0</version>
+						<!-- NO  les necessitam ja que estan al MODUL KeyCloak de JBOSS -->
+						<!-- Veure fitxer [carpeta-ear]\src\main\application\META-INF\jboss-deployment-structure.xml -->
+						<exclusions>
+							<exclusion>
+								<groupId>org.keycloak</groupId>
+								<artifactId>keycloak-core</artifactId>
+							</exclusion>
+							<exclusion>
+								<groupId>org.keycloak</groupId>
+								<artifactId>keycloak-common</artifactId>
+							</exclusion>			
+						</exclusions>
+		            </dependency>
+            </dependencies>
+        </profile>
+		
+		
+		<!-- Garantir que es fixa la variable d'entorn JBOSS_HOME -->
+		<profile>
+			<id>fix JBOSS_HOME</id>
+			<activation>
+				<property>
+					<name>!env.JBOSS_HOME</name>
+				</property>
+			</activation>
+			<properties>
+				<env.JBOSS_HOME>HA DE FIXAR LA VARIABLE D'ENTORN JBOSS_HOME</env.JBOSS_HOME>
+			</properties>
+		</profile>
+		<profile>
+			<id>revisionnumber</id>
+			<activation>
+				<property>
+					<name>revisionnumber</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<!-- Defineix la propietat ${buildNumber} que s'empra al filtrat -->
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>buildnumber-maven-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+        
+    </profiles>
+	
+	
+	
+	
+	
+	
 	<build>
 		<!-- El nom del EAR sempre és el nom del projecte d'acord amb un 4.2 de l'Estàndard CAIB -->
 		<finalName>${project.parent.artifactId}</finalName>
@@ -245,35 +332,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<profiles>
-		<!-- Garantir que es fixa la variable d'entorn JBOSS_HOME -->
-		<profile>
-			<id>fix JBOSS_HOME</id>
-			<activation>
-				<property>
-					<name>!env.JBOSS_HOME</name>
-				</property>
-			</activation>
-			<properties>
-				<env.JBOSS_HOME>HA DE FIXAR LA VARIABLE D'ENTORN JBOSS_HOME</env.JBOSS_HOME>
-			</properties>
-		</profile>
-		<profile>
-			<id>revisionnumber</id>
-			<activation>
-				<property>
-					<name>revisionnumber</name>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<!-- Defineix la propietat ${buildNumber} que s'empra al filtrat -->
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>buildnumber-maven-plugin</artifactId>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 </project>
