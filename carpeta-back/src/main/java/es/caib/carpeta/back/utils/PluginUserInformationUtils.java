@@ -77,12 +77,9 @@ public class PluginUserInformationUtils {
                         log.error(msg);
                         throw new LoginException(msg);
                     }
-
                 }
-
             }
-
-            return null;
+            
         } else {
 
             IUserInformationPlugin plugin = authEJB.getUserInformationPluginInstance();
