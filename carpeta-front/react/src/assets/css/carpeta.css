@@ -553,6 +553,8 @@ a.imc-bt-xarxa:hover {
 	-webkit-appearance: none;
 }
 
+.imc--recarregar::before { background-image: url(../images/recarregar.PNG); }
+
 /* HomePage */
 .homePage .titol.h5 { text-transform: none !important; }
 .homePage ul { list-style:none;  }

@@ -185,6 +185,8 @@
 						.off(".appMenu")
 						.on('click.appMenu', amaga);
 
+					$( ".imc-marc-menu").css("transform", "translateX(-100%)");
+
 				},
 				amaga = function () {
 
@@ -210,7 +212,10 @@
 	}
 
 	imc_bt_menu
-		.appMenu();
+		.appMenu()
+		.focusin(function() {
+			$( ".imc-marc-menu").css("-webkit-transform", "translateX(-100%)");
+		})
 
 // css scroll slim
 

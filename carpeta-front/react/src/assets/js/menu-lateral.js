@@ -170,7 +170,7 @@ $.fn.appMenu = function(opcions){
 					.on('click.appMenu', mostra);
 
 				imc_marc
-					.attr({ "tabIndex": "-1", "aria-hidden": "true" })
+					.attr({ "tabindex": "-1", "aria-hidden": "true" })
 					.appRellisca();
 
 			},
@@ -185,6 +185,8 @@ $.fn.appMenu = function(opcions){
 				marc_fons
 					.off(".appMenu")
 					.on('click.appMenu', amaga);
+
+				$( ".imc-marc-menu").css("transform", "translateX(-100%)");
 
 			},
 			amaga = function() {
@@ -211,7 +213,10 @@ $.fn.appMenu = function(opcions){
 }
 
 imc_bt_menu
-	.appMenu();
+	.appMenu()
+	.focusin(function() {
+		$( ".imc-marc-menu").css("-webkit-transform", "translateX(-100%)");
+	})
 
 // css scroll slim
 
