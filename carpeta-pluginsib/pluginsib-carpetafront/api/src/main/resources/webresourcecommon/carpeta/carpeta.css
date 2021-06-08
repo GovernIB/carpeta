@@ -99,19 +99,19 @@ img:hover {
 }
 
 .imc--sortir::before {
-	background-image: url(../images/sortir.png);
+	background-image: url(sortir.png);
 	opacity: 1 !important;
 }
 .imc--tramits::before {
-	background-image: url(../images/tramits.png);
+	background-image: url(tramits.png);
 	opacity: 1 !important;
 }
 .imc--registres::before {
-	background-image: url(../images/registres.png);
+	background-image: url(registres.png);
 	opacity: 1 !important;
 }
 .imc--notificacions::before {
-	background-image: url(../images/notificacions.png);
+	background-image: url(notificacions.png);
 	opacity: 1 !important;
 }
 
@@ -132,19 +132,19 @@ img:hover {
 	align-self: center;
 }
 .imc--logoclave{ 
-	background-image: url(../images/solicitar_clave_acceso_dgt.png); 
+	background-image: url(solicitar_clave_acceso_dgt.png);
 	background-repeat: no-repeat;
 	width: 180px;
     height: 87px;
 }
 .imc--logowai{ 
-	background-image: url(../images/wcag2AA.png); 
+	background-image: url(wcag2AA.png);
 	background-repeat: no-repeat;
 	width: 88px;
     height: 31px;
 }
-.imc--gestions::before { background-image: url(../images/folder.png); }
-.imc--dades::before { background-image: url(../images/dades.PNG); }
+.imc--gestions::before { background-image: url(folder.png); }
+.imc--dades::before { background-image: url(dades.PNG); }
 .upper{
 	text-transform: uppercase;
 }
@@ -562,6 +562,13 @@ a.imc-bt-xarxa:hover {
 .estilCalendar::-webkit-calendar-picker-indicator {
 	display: none;
 	-webkit-appearance: none;
+}
+
+.imc--recarregar::before { background-image: url(recarregar.PNG); }
+
+.errorConnexio{
+	padding-left: 5em;
+	margin-top: 8em;
 }
 
 
