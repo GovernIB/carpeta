@@ -3,6 +3,7 @@ import {withTranslation} from 'react-i18next';
 import i18n from 'i18next';
 import ExpirarSessio from "./ExpirarSessio";
 import {withRouter} from "react-router";
+import axios from "axios";
 
 class PluginHtml extends Component {
 
@@ -24,6 +25,28 @@ class PluginHtml extends Component {
 
     componentDidMount() {
         var autenticat = sessionStorage.getItem('autenticat');
+
+        // Obtenim el nom del plugin per posar al title del iframe
+        const pluginContext = this.props.match.params.pluginContext;
+        console.log("contexthhh: " + pluginContext);
+        var baseURL = sessionStorage.getItem('contextPath');
+        var url = baseURL + `/webui/plugin/` + pluginContext;
+        axios.get(url)
+            .then(res => {
+                var pluginInfo = res.data;
+                sessionStorage.setItem("nomPlugin", pluginInfo.nom);
+            })
+            .catch(error => {
+                console.log(JSON.stringify(error));
+                if (error.response) {
+                    console.log("error.response.data: " + error.response.data);
+                    console.log("error.response.status: " + error.response.status);
+                    console.log("error.response.headers: " + error.response.headers);
+                }
+                this.setState({
+                    error: JSON.stringify(error)
+                });
+            });
     }
 
     render() {
@@ -129,6 +152,10 @@ class PluginHtml extends Component {
                 }
                 lastSize = Math.max($(iframeDocument.body).height(), iframeDocument.body.scrollHeight);
             }
+
+            // Canviam el title de l'iframe
+            iframe.setAttribute("title", sessionStorage.getItem("nomPlugin"));
+
         }
 
         $(document).ready(function () {

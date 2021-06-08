@@ -54,7 +54,7 @@
     <div>
         <div class="imc-logo">
             <div>
-                <a href="javascript:window.location.reload(true)" class="imc--goib" title="<fmt:message key="entitats.carpeta"/>">
+                <a href="javascript:window.location.reload(true)" class="imc--goib" title="<fmt:message key="entitats.carpeta"/>" tabindex="1">
                     <img src="<c:url value="/src/assets/images/icon.png"/>" title="" alt="<fmt:message key="entitats.carpeta"/>" class="logo-govern" style="max-width: 70%;"/>
                     <span><fmt:message key="entitats.carpeta"/></span>
                 </a>
@@ -71,7 +71,7 @@
                 <nav class="imc--contingut">
                     <h1><span class="text-uppercase"><fmt:message key="entitats.carpeta"/></span></h1>
                     <ul>
-                        <li><button type="button" class="imc-bt-menu" id="imc-bt-menu" title="<fmt:message key="entitats.menu"/>"></button></li>
+                        <li><button type="button" class="imc-bt-menu" id="imc-bt-menu" title="<fmt:message key="entitats.menu"/>" tabindex="10"></button></li>
                     </ul>
                 </nav>
             </header>
@@ -94,7 +94,7 @@
                                         <strong class="lletraIdioma">${nomIdioma}</strong>
                                     </c:when>
                                     <c:otherwise>
-                                        <button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=${idioma.idiomaID}"/>'">
+                                        <button class="boton-menu lletraIdioma" onclick="location.href='<c:url value="/entitat?lang=${idioma.idiomaID}"/>'" tabindex=${20 + loop.index}>
                                             ${nomIdioma}
                                         </button>
                                     </c:otherwise>
@@ -107,10 +107,23 @@
                             </c:forEach>
                         </li>
 
+                        <li style="padding-left: 1em;">
+                            <a href="javascript:window.location.reload(true)" title="<fmt:message key="entitats.carpeta"/>" class="imc-marc-ico imc--recarregar" aria-labelledby="<fmt:message key="entitats.carpeta"/>" aria-describedby="<fmt:message key="entitats.carpeta"/>" tabindex="30">
+                            <span><fmt:message key="entitats.carpeta"/></span>
+                            </a>
+                        </li>
+
                     </ul>
                 </div>
             </div>
         </div>
+
+        <script type="text/javascript">
+            $( ".imc--recarregar" )
+                .focusout(function() {
+                    $( ".imc-marc-menu").css("transform", "");
+                });
+        </script>
 
         <!-- Zona Contingut -->
         <div class="imc-continguts">
@@ -125,7 +138,7 @@
 
                                         <c:forEach items="${entitats}" var="entitat" varStatus="index">
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
-                                                <button class="card col-md-12 align-items-lg-center capsaPlugin pt-3" onclick="location.href='<c:url value="/e/${entitat.codi}"/>'">
+                                                <button class="card col-md-12 align-items-lg-center capsaPlugin pt-3" onclick="location.href='<c:url value="/e/${entitat.codi}"/>'" tabindex=${100 + index.index}>
                                                     <span class="card-title titol pl-1 h3">
                                                         <img src="<c:url value="/webui/entityicon/${entitat.entitatID}"/>" alt="${entitat.nom.getTraduccio(langActual).valor}" title="" class="imc-icona">
                                                     </span>
@@ -155,7 +168,7 @@
                     </div>
                     <div class="imc-peu-opcions">
                         <div class="pb-3 col2peu">
-                            <button type="button" id="dialogAjuda" data-toggle="modal" data-target="#ajudaModal" class="botoSuport"><fmt:message key="entitats.ajuda"/></button>
+                            <button type="button" id="dialogAjuda" data-toggle="modal" data-target="#ajudaModal" class="botoSuport" tabindex="200"><fmt:message key="entitats.ajuda"/></button>
                         </div>
                     </div>
                     <div class="imc-peu-xarxes">

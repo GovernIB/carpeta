@@ -69,10 +69,6 @@ class BarraMenu extends Component {
 				});
 			});
 
-		$( ".imc-bt-menu" )
-			.focusin(function() {
-				$( ".imc-marc-menu").css("-webkit-transform", "translateX(-100%)");
-			});
 	}
 
 

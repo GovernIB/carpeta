@@ -43,7 +43,11 @@ class LlistatDePlugins extends Component {
            axios.get(url)
                .then(res => {
                    const fulldata = res.data;
-                   this.setState({ items: fulldata.items, nomEntitat: fulldata.nomEntitat })
+                   this.setState({ 
+                       items: fulldata.items, 
+                       nomEntitat: fulldata.nomEntitat, 
+                       seccio: (fulldata.hasOwnProperty('seccio')) ? fulldata.seccio : null 
+                    })
                 })
                .catch(error => {
                    console.log(JSON.stringify(error));
