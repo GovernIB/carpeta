@@ -47,9 +47,16 @@ class MenuRapid extends Component {
                     console.log("error.response.status: " + error.response.status);
                     console.log("error.response.headers: " + error.response.headers);
                 }
-                this.setState({
-                    error: JSON.stringify(error)
-                });
+                if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                    this.setState({
+                        error: "error500plugin"
+                    });
+                } else{
+                    this.setState({
+                        error: JSON.stringify(error)
+                    });
+                }
+
             });
     }
 
@@ -66,7 +73,7 @@ class MenuRapid extends Component {
         if (autenticat === '1') {
 
             if (this.state.error) {
-                content = <div className="alert alert-danger" role="alert">{this.state.error}</div>;
+                content = <div className="alert alert-danger errorConnexio" role="alert">{t(this.state.error)}</div>;
             } else {
 
                 this.state.items.forEach((s, i) => {

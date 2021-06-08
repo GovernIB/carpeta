@@ -555,6 +555,11 @@ a.imc-bt-xarxa:hover {
 
 .imc--recarregar::before { background-image: url(../images/recarregar.PNG); }
 
+.errorConnexio{
+	padding-left: 5em;
+	margin-top: 8em;
+}
+
 /* HomePage */
 .homePage .titol.h5 { text-transform: none !important; }
 .homePage ul { list-style:none;  }

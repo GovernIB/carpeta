@@ -233,5 +233,7 @@
 	"contacteAccess": "Contacte accessibilitat",
 	"accessibilitatWAI": "Descripció de la Web Accessibility Initiative Doble A",
 	"tancar": "Close",
-	"menuHamburguesa": "Menú hamburguesa"
+	"menuHamburguesa": "Menú hamburguesa",
+
+	"error500plugin": "Error 500. No es pot accedir a qualque plugin, revisar la configuració dels plugins."
 }
