@@ -73,7 +73,7 @@ public class PluginUserInformationUtils {
                         info = userRepresentationToUserInfo(token);
                     } catch (Exception e) {
 
-                        String msg = "Error transformant informació de KeyCloak a UserINFO o de userInfo a UsuariJPA ";
+                        String msg = "Error transformant informació de KeyCloak a UserInfo ";
                         log.error(msg);
                         throw new LoginException(msg);
                     }

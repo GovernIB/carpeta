@@ -1,6 +1,6 @@
 <#setting date_format="dd-MM-yyyy HH:mm">
 <div class="infoNoMenu">
-    <h2 class="titol h2">${comunicacion_listado_notib}</h2>
+    <h2 class="titol h2">${comunicacion_listado}</h2>
     <div class="col-md-12 border-0 float-left p-0">
         <p class="lh15 text-estrofa">${comunicacion_descripcion}</p>
 
@@ -24,27 +24,30 @@
                         </thead>
                         <tbody>
                         <#list comunicacions as com >
-                            <tr style="cursor: pointer" class="filaNotib" data-target="_blank" data-href="${urldetallbase}/${com.id}" tabindex=${com?counter}>
-                                <td>${com.descripcio}</td>
-                                <td>${com.dataEnviament?string("dd-MM-yyyy HH:mm")}</td>
+                           <#if com.url??>
+                              <tr style="cursor: pointer" class="filaNotib" data-target="_blank" data-href="${com.url}" tabindex=${com?counter}>
+                           <#else>
+                              <tr style="cursor: pointer" class="filaNotib" tabindex=${com?counter}>
+                           </#if>
+                                <td>${com.descripcion}</td>
+                                <td>${com.fecha?string?datetime("yyyy-MM-dd'T'HH:mm:ss.SSSX")?string("dd-MM-yyyy HH:mm")}</td>
                             </tr>
                         </#list>
                         </tbody>
                     </table>
                 </#if>
             </div>
+
         </div>
+
     </div>
+
 </div>
 <script>
     $('tr').click(function() {
         var url = $(this).attr('data-href');
-        if (url) {
-           console.log("La url és " + url)
-          // var url = $(this).find('.url_sistra').html();
-          //url = url.replace(/&amp;/g, "&");
-          //window.open(url, '_blank');
-          document.location.href = url;
-        }
+        // var url = $(this).find('.url_sistra').html();
+        url = url.replace(/&amp;/g, "&");
+        window.open(url, '_blank');
     });
 </script>
