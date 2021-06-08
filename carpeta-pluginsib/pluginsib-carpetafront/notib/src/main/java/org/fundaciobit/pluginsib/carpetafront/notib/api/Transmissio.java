@@ -43,6 +43,10 @@ public class Transmissio {
     
     
 
+    public Transmissio() {
+        super();
+    }
+
     public Transmissio(Long id, String emisor, String organGestor, String procediment, String numExpedient,
             String concepte, String descripcio, Date dataEnviament, Estat estat, Date dataEstat, Document document,
             Persona titular, List<Persona> destinataris, SubEstat subestat, Date dataSubestat, boolean error,

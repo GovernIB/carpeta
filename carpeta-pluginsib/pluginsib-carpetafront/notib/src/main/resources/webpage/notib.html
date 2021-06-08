@@ -18,15 +18,21 @@
                     <table id="dataTable_paginate" class="table table-striped table-bordered table-hover" style="width:100%">
                         <thead class="table-success">
                         <tr>
-                            <th>${comunicacion_descripcion_comunicacion}</th>
                             <th>${comunicacion_fecha}</th>
+                            <th>${comunicacion_emissor}</th>
+                            <th>${comunicacion_concepte}</th>
+                            <th>${comunicacion_descripcion_comunicacion}</th>
+                            <th>${comunicacion_estat}</th>
                         </tr>
                         </thead>
                         <tbody>
                         <#list comunicacions as com >
-                            <tr style="cursor: pointer" class="filaNotib" data-target="_blank" data-href="${urldetallbase}/${com.id}" tabindex=${com?counter}>
-                                <td>${com.descripcio}</td>
-                                <td>${com.dataEnviament?string("dd-MM-yyyy HH:mm")}</td>
+                            <tr style="cursor: pointer" class="filaNotib" data-target="_blank" data-href="${urldetallbase}/${com.id?string.computer}" tabindex=${com?counter}>
+                                <td><#if com.dataEnviament??> ${com.dataEnviament?string("dd-MM-yyyy HH:mm")}</#if></td>
+                                <td><#if com.emisor??>${com.emisor}</#if></td>                                
+                                <td><#if com.concepte??>${com.concepte}</#if></td>
+                                <td><#if com.descripcio??>${com.descripcio}</#if></td>                                
+                                <td><#if com.estat??>${com.estat}</#if></td>
                             </tr>
                         </#list>
                         </tbody>
@@ -35,6 +41,7 @@
             </div>
         </div>
     </div>
+    
 </div>
 <script>
     $('tr').click(function() {
