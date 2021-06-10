@@ -1,6 +1,6 @@
 <#setting date_format="dd-MM-yyyy HH:mm">
 <div class="infoNoMenu">
-    <h2 class="titol h2">${comunicacion_listado_notib}</h2>
+    <h2 class="titol h2">${comunicacion_listado}</h2>
     <div class="col-md-12 border-0 float-left p-0">
         <p class="lh15 text-estrofa">${comunicacion_descripcion}</p>
 
@@ -18,40 +18,36 @@
                     <table id="dataTable_paginate" class="table table-striped table-bordered table-hover" style="width:100%">
                         <thead class="table-success">
                         <tr>
-                            <th>${comunicacion_fecha}</th>
-                            <th>${comunicacion_emissor}</th>
-                            <th>${comunicacion_concepte}</th>
                             <th>${comunicacion_descripcion_comunicacion}</th>
-                            <th>${comunicacion_estat}</th>
+                            <th>${comunicacion_fecha}</th>
                         </tr>
                         </thead>
                         <tbody>
                         <#list comunicacions as com >
-                            <tr style="cursor: pointer" class="filaNotib" data-target="_blank" data-href="${urldetallbase}/${com.id?string.computer}" tabindex=${com?counter}>
-                                <td><#if com.dataEnviament??> ${com.dataEnviament?string("dd-MM-yyyy HH:mm")}</#if></td>
-                                <td><#if com.emisor??>${com.emisor}</#if></td>                                
-                                <td><#if com.concepte??>${com.concepte}</#if></td>
-                                <td><#if com.descripcio??>${com.descripcio}</#if></td>                                
-                                <td><#if com.estat??>${com.estat}</#if></td>
+                           <#if com.url??>
+                              <tr style="cursor: pointer" class="filaNotib" data-target="_blank" data-href="${com.url}" tabindex=${com?counter}>
+                           <#else>
+                              <tr style="cursor: pointer" class="filaNotib" tabindex=${com?counter}>
+                           </#if>
+                                <td>${com.descripcion}</td>
+                                <td>${com.fecha?string?datetime("yyyy-MM-dd'T'HH:mm:ss.SSSX")?string("dd-MM-yyyy HH:mm")}</td>
                             </tr>
                         </#list>
                         </tbody>
                     </table>
                 </#if>
             </div>
+
         </div>
+
     </div>
-    
+
 </div>
 <script>
     $('tr').click(function() {
         var url = $(this).attr('data-href');
-        if (url) {
-           console.log("La url és " + url)
-          // var url = $(this).find('.url_sistra').html();
-          //url = url.replace(/&amp;/g, "&");
-          //window.open(url, '_blank');
-          document.location.href = url;
-        }
+        // var url = $(this).find('.url_sistra').html();
+        url = url.replace(/&amp;/g, "&");
+        window.open(url, '_blank');
     });
 </script>

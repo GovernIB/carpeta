@@ -1,0 +1,21 @@
+<div class="infoNoMenu">
+    <h2 class="titol h2">${titol}</h2>
+    <div class="col-md-12 border-0 float-left p-0">
+        <p class="lh15 text-estrofa">${subtitol}</p>
+        <div class="card-body tablaRegistros">
+            <div class="mt-0">
+                <table id="dataTable_paginate" class="table table-striped table-bordered table-hover" style="width:100%">                        
+                    <tbody>
+                    <#list clauvalors as kv >
+                        <tr style="cursor: pointer" class="filaNotib" tabindex=${kv?counter}>                           
+                            <td>${kv.key}</td>
+                            <td>${kv.value}</td>
+                        </tr>
+                    </#list>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<center><a href="${urltornar}" class="btn btn-primary">${tornar}</a></center>

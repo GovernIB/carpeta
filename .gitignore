@@ -78,3 +78,7 @@ nb-configuration.xml
 /carpeta-back/src/main/webapp/WEB-INF/jsp/all/homepublic.jsp
 /carpeta-pluginsib/pluginsib-carpetafront/apisistrav1
 /carpeta-pluginsib/pluginsib-carpetafront/reprendretramitsistra/plugin.properties
+/carpeta-api-client-generator
+/carpeta-api-client
+/carpeta-pluginsib/pluginsib-carpetafront/notib-client-generator
+/carpeta-pluginsib/pluginsib-carpetafront/notib-api-client-v1

@@ -2,14 +2,21 @@
 
 # Common
 es.caib.carpeta.pluginsib.carpetafront.notib.development=true
+es.caib.carpeta.pluginsib.carpetafront.notib.usenotibapi=true
+
+
+#
+# Notificacions CAIB: NOTIB
+es.caib.carpeta.pluginsib.carpetafront.notib.url=[=SP["es.caib.carpeta.pluginsib.carpetafront.notib.url"]]
+es.caib.carpeta.pluginsib.carpetafront.notib.user=[=SP["es.caib.carpeta.pluginsib.carpetafront.notib.user"]]
+es.caib.carpeta.pluginsib.carpetafront.notib.pass=[=SP["es.caib.carpeta.pluginsib.carpetafront.notib.pass"]]
+
 
 #
 # Notificacions CAIB: Sistra 1
-es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.url=https://dev.caib.es/sistraback/zonaperws/services/v2/BackofficeFacade
-es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.user=user
-es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.pass=pass
-es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.level=2
-es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.web=https://www.caib.es/sistrafront/zonaperfront/protected/init.do
+es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.url=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.url"]]
+es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.user=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.user"]]
+es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.pass=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.pass"]]
 
 
 # Notificacions Estatals
