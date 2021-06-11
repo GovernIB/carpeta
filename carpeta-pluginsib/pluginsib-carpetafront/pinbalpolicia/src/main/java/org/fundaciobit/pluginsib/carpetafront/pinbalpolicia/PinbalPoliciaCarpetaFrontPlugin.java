@@ -1,6 +1,6 @@
 package org.fundaciobit.pluginsib.carpetafront.pinbalpolicia;
 
-import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
+import es.caib.carpeta.pluginsib.carpetafront.api.AbstractPinbalCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
@@ -8,15 +8,10 @@ import es.caib.carpeta.pluginsib.carpetafront.api.TitlesInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 
 import es.caib.pinbal.client.recobriment.model.ScspSolicitante;
-import es.caib.pinbal.client.recobriment.ClientBase;
-import es.caib.pinbal.client.recobriment.ClientGeneric;
-import es.caib.pinbal.client.recobriment.model.ScspConfirmacionPeticion;
-
 import es.caib.pinbal.client.recobriment.model.ScspFuncionario;
 import es.caib.pinbal.client.recobriment.model.ScspTitular;
 import es.caib.pinbal.client.recobriment.model.ScspTitular.ScspTipoDocumentacion;
 import es.caib.pinbal.client.recobriment.model.Solicitud;
-import es.caib.pinbal.client.recobriment.model.SolicitudBase;
 import es.caib.pinbal.client.recobriment.model.ScspRespuesta;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,8 +38,9 @@ import java.util.Properties;
 
 /**
  * @author anadal
+ * @author jagarcia
  */
-public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
+public class PinbalPoliciaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin {
 
     public static final String PINBALPOLICIA_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "pinbalpolicia.";
 
@@ -52,7 +48,7 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
      *
      */
     public PinbalPoliciaCarpetaFrontPlugin() {
-        super();
+        super(); 
     }
 
     /**
@@ -69,6 +65,7 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
     public PinbalPoliciaCarpetaFrontPlugin(String propertyKeyBase) {
         super(propertyKeyBase);
     }
+    
 
     @Override
     public BasicServiceInformation existsInformation(UserData administrationID) throws Exception {
@@ -114,10 +111,12 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
 
             reactjs(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
                     administrationEncriptedID, locale, isGet);
+            
         } else if (query.startsWith(DOCUMENT_IDENTITAT_REST_SERVICE)) {
 
             documentIdentitatRestService(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                     userData, administrationEncriptedID, locale, isGet);
+            
         } else {
 
             super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
@@ -146,6 +145,8 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
     public String getPropertyBase() {
         return PINBALPOLICIA_PROPERTY_BASE;
     }
+    
+    
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
@@ -218,7 +219,7 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
-    // ------------------- DOCUMENT IDENTITAT PAGE (Cridades a PInbal)
+    // ------------------- DOCUMENT IDENTITAT PAGE (Cridades a Pinbal)
     // ----------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
@@ -241,42 +242,32 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
                 throw new Exception(getTraduccio("error.empresa", locale)); 
             }
 
-            final String PINBAL_PROPERTY_BASE = PINBALPOLICIA_PROPERTY_BASE + "pinbal.";
-
-            // Atributos 
-            final String codigoCertificado = getPropertyRequired(PINBAL_PROPERTY_BASE + "codicertificat"); // "SVDDGPCIWS02";
-
-            // Procedimiento
-            final String codProcedimiento = getPropertyRequired(PINBAL_PROPERTY_BASE + "codiprocediment"); // "CODSVDR_GBA_20121107";
-
-            // Solicitante
-            final String finalidad = getPropertyRequired(PINBAL_PROPERTY_BASE + "finalitat"); // "Baremacions per el proces d'escolaritzacio";
-            final String identificadorSolicitante = getPropertyRequired(PINBAL_PROPERTY_BASE + "identificadorsolicitant"); // "S0711001H";
-            final String unidadTramitadora = getPropertyRequired(PINBAL_PROPERTY_BASE + "unitattramitadora"); // "Servei d'escolarització";
-
             // Titular
             final String apellido1; // = "JAUME";
             final String apellido2 = "";
             final String documentacion; // = "41107605G";
             final String nombre = "";
-            
-            // ScspTitular.ScspTipoDocumentacion.DNI, ScspTitular.ScspTipoDocumentacion.NIE
-            final ScspTipoDocumentacion tipoDocumentacion = ScspTipoDocumentacion.DNI;
 
+            // ScspTitular.ScspTipoDocumentacion.DNI, ScspTitular.ScspTipoDocumentacion.NIE
+            ScspTipoDocumentacion tipoDocumentacion = ScspTipoDocumentacion.DNI;
+            
             // Dades del Titular del DNI
             {
-                String nif = getProperty(PINBALPOLICIA_PROPERTY_BASE + "pinbal.testnif");
-                String surname = getProperty(PINBALPOLICIA_PROPERTY_BASE + "pinbal.testsurname");
+                String nif = getProperty(PINBALPOLICIA_PROPERTY_BASE + "testnif");
+                String surname = getProperty(PINBALPOLICIA_PROPERTY_BASE + "testsurname");
 
                 if (nif == null || surname == null) {
                     nif = userData.getAdministrationID();
                     surname = userData.getSurname1();
                 }
-                
-                // XYZ ZZZ veure com diferenciar un document de l'altre.
 
                 documentacion = nif.toUpperCase();
                 apellido1 = surname.toUpperCase();
+                
+                // Si no es un digit el primer caracter, es tracta d'un NIE 
+                if (!Character.isDigit(documentacion.charAt(0))) {
+                	tipoDocumentacion = ScspTitular.ScspTipoDocumentacion.NIE;
+                }
             }
             
             ScspTitular titular = new ScspTitular();
@@ -291,29 +282,19 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
             funcionario.setNifFuncionario(documentacion);
             funcionario.setNombreCompletoFuncionario(nombre + " " + apellido1);
             
-
-            // Dades de connexio
-            String baseurl = getProperty(PINBALPOLICIA_PROPERTY_BASE + "pinbal.baseurl");
-            String username = getProperty(PINBALPOLICIA_PROPERTY_BASE + "pinbal.username");
-            String password = getProperty(PINBALPOLICIA_PROPERTY_BASE + "pinbal.password");
             
-            
-            Solicitud solicitud = new SolicitudServeiWeb();
-            solicitud.setIdentificadorSolicitante(identificadorSolicitante);
-            solicitud.setUnidadTramitadora(unidadTramitadora);
-            solicitud.setCodigoProcedimiento(codProcedimiento);
-            solicitud.setFinalidad(finalidad);
-            solicitud.setConsentimiento(ScspSolicitante.ScspConsentimiento.Si);
-            solicitud.setFuncionario(funcionario);
-            solicitud.setTitular(titular);
+            SolicitudPolicia solicitud = new SolicitudPolicia(null);
+            omplirDadesSolicitutComunes(solicitud, funcionario, titular);
             
             ScspRespuesta resposta;
             
             try {
             	
-            	ClientGeneric clientRest = new ClientGeneric(baseurl,username,password);
-
-                resposta = clientRest.peticionSincrona(codigoCertificado, List.of(solicitud));
+            	/*
+            	 * Petició a PINBAL i processament de la resposta XML
+            	 */
+            	
+                resposta = getConnexio(List.of(solicitud)); 
                 
                 String datosEspecificos = resposta.getTransmisiones().get(0).getDatosEspecificos();
                 
@@ -335,8 +316,8 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
                     dadesPolicia.setDatosTitular(dt);
                 }else {
 
-                    String error = "Error amb Estado " + dte.getRetorno().get(0).getEstado().get(0).getCodigoEstado() + " | Estado Secundario: "
-                            + " | Literal Error: " + dte.getRetorno().get(0).getEstado().get(0).getLiteralError();
+                    String error = "Error amb Estado " + dte.getRetorno().get(0).getEstado().get(0).getCodigoEstado() 
+                            + " | " + dte.getRetorno().get(0).getEstado().get(0).getLiteralError();
                            
                     dadesPolicia.setError(error);
                 }
@@ -409,9 +390,16 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
 
     }
 
-
-	public static class SolicitudServeiWeb extends Solicitud {
+    /*
+     * Solicitud datos especificos
+     */
+	public static class SolicitudPolicia extends Solicitud {
 		protected  String numeroSoporte;
+
+		public SolicitudPolicia(String numeroSoporte) {
+			super();
+			this.numeroSoporte = numeroSoporte;
+		}
 
 		@Override
 		public String getDatosEspecificos() { // xml
@@ -429,6 +417,10 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
 		}
 	}
     
+	
+	/*
+	 * Informació que passam a la vista i pintam al plugin
+	 */
     public class DadesPolicia {
 
         protected String error = "";

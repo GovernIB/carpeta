@@ -39,6 +39,20 @@
             <version>1.2.0</version>
             <scope>compile</scope>
         </dependency>
+        
+        <dependency>
+            <groupId>es.caib.pinbal</groupId>
+            <artifactId>pinbal-client</artifactId>
+            <version>1.4.24</version>
+            <exclusions>
+                <!-- evitar conflicte amb JAX-RS de JBoss -->
+                <exclusion>
+                    <groupId>javax.ws.rs</groupId>
+                    <artifactId>jsr311-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
     </dependencies>
 
 
