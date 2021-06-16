@@ -1,38 +1,46 @@
 package org.fundaciobit.pluginsib.carpetafront.pinbalpolicia;
 
-import es.caib.carpeta.pinbal.ws.recobriment.datosespecificos.SVDDGPCIWS02v3RespuestaDatosEspecificos;
-import es.caib.carpeta.pinbal.ws.recobriment.facade.SVDDGPCIWS02v3RecobrimentFacade;
-import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
+import es.caib.carpeta.pluginsib.carpetafront.api.AbstractPinbalCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
 import es.caib.carpeta.pluginsib.carpetafront.api.TitlesInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
-import es.caib.pinbal.ws.recobriment.Consentimiento;
-import es.caib.pinbal.ws.recobriment.TipoDocumentacion;
-import es.caib.scsp.esquemas.SVDDGPCIWS02v3.respuesta.datosespecificos.DatosTitular;
-import es.caib.scsp.pinbal.ws.recobriment.facade.RespuestaClientAdapter;
+
+import es.caib.pinbal.client.recobriment.model.ScspSolicitante;
+import es.caib.pinbal.client.recobriment.model.ScspFuncionario;
+import es.caib.pinbal.client.recobriment.model.ScspTitular;
+import es.caib.pinbal.client.recobriment.model.ScspTitular.ScspTipoDocumentacion;
+import es.caib.pinbal.client.recobriment.model.Solicitud;
+import es.caib.pinbal.client.recobriment.model.ScspRespuesta;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.io.IOUtils;
+import org.fundaciobit.pluginsib.carpetafront.pinbalpolicia.model.DatosEspecificos;
+import org.fundaciobit.pluginsib.carpetafront.pinbalpolicia.model.DatosTitular;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringReader;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 
 /**
  * @author anadal
+ * @author jagarcia
  */
-public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
+public class PinbalPoliciaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin {
 
     public static final String PINBALPOLICIA_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "pinbalpolicia.";
 
@@ -40,7 +48,7 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
      *
      */
     public PinbalPoliciaCarpetaFrontPlugin() {
-        super();
+        super(); 
     }
 
     /**
@@ -57,6 +65,7 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
     public PinbalPoliciaCarpetaFrontPlugin(String propertyKeyBase) {
         super(propertyKeyBase);
     }
+    
 
     @Override
     public BasicServiceInformation existsInformation(UserData administrationID) throws Exception {
@@ -87,10 +96,10 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
 
-        log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
-        log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => administrationID: "
+        log.info("PinbalPoliciaCarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
+        log.info("PinbalPoliciaCarpetaFrontPlugin::requestCarpetaFront => administrationID: "
                 + userData.getAdministrationID());
-        log.info("Regweb3CarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
+        log.info("PinbalPoliciaCarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
                 + administrationEncriptedID);
 
         if (query.startsWith(INDEX_HTML_PAGE)) {
@@ -102,10 +111,12 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
 
             reactjs(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
                     administrationEncriptedID, locale, isGet);
+            
         } else if (query.startsWith(DOCUMENT_IDENTITAT_REST_SERVICE)) {
 
             documentIdentitatRestService(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                     userData, administrationEncriptedID, locale, isGet);
+            
         } else {
 
             super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
@@ -134,6 +145,8 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
     public String getPropertyBase() {
         return PINBALPOLICIA_PROPERTY_BASE;
     }
+    
+    
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
@@ -174,8 +187,6 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
 
             log.info("absolutePluginRequestPath ==> " + absolutePluginRequestPath);
 
-            // int pos = absolutePluginRequestPath.indexOf(INDEX_HTML_PAGE);
-
             String pathtojs = absolutePluginRequestPath + "/" + REACT_JS_PAGE;
 
             map.put("pathtojs", pathtojs);
@@ -208,7 +219,7 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
-    // ------------------- DOCUMENT IDENTITAT PAGE (Cridades a PInbal)
+    // ------------------- DOCUMENT IDENTITAT PAGE (Cridades a Pinbal)
     // ----------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
@@ -231,68 +242,19 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
                 throw new Exception(getTraduccio("error.empresa", locale)); 
             }
 
-            final String PINBAL_PROPERTY_BASE = PINBALPOLICIA_PROPERTY_BASE + "pinbal.";
-
-            // Estado
-            final String codigoEstado = null;
-            final String codigoEstadoSecundario = null;
-            final String literalError = null;
-            final String literalErrorSec = null;
-            final Integer tiempoEstimadoRespuesta = null;
-
-            // Atributos
-            final String codigoCertificado = getPropertyRequired(PINBAL_PROPERTY_BASE + "codicertificat"); // "SVDDGPCIWS02";
-            final String idPeticion = null;
-            final String numElementos = "1";
-            final String timeStamp = null;
-
-            // Emisor (obtingut de la documentació SCSP del servei)
-            final String nifEmisor = getPropertyRequired(PINBAL_PROPERTY_BASE + "nifemisor"); // "S2816015H";
-            final String nombreEmisor = getPropertyRequired(PINBAL_PROPERTY_BASE + "nomemisor"); // "DGP";
-
-            // Funcionario
-            final String nifFuncionario = getPropertyRequired(PINBAL_PROPERTY_BASE + "niffuncionari"); // "43125996F";
-            final String nombreCompletoFuncionario = getPropertyRequired(PINBAL_PROPERTY_BASE + "nomfuncionari"); // "Ana
-                                                                                                                  // Bustos
-                                                                                                                  // Nadal";
-            final String seudonimo = null;
-
-            // Procedimiento
-            final String codProcedimiento = getPropertyRequired(PINBAL_PROPERTY_BASE + "codiprocediment"); // "CODSVDR_GBA_20121107";
-            // "PRUEBAS DE INTEGRACION PARA GOBIERNO DE BALEARES";
-            final String nombreProcedimiento = getPropertyRequired(PINBAL_PROPERTY_BASE + "nomprocediment"); 
-
-            // Solicitante
-            final String codigoUnidadTramitadora = null;
-            final Consentimiento consentimiento = Consentimiento.SI;
-            final String finalidad = getPropertyRequired(PINBAL_PROPERTY_BASE + "finalitat"); // "Baremacions per el
-                                                                                              // proces
-                                                                                              // d'escolaritzacio";
-            final String idExpediente = "";// "Q9WREU";
-            final String identificadorSolicitante = getPropertyRequired(
-                    PINBAL_PROPERTY_BASE + "identificadorsolicitant"); // "S0711001H";
-            final String nombreSolicitante = getPropertyRequired(PINBAL_PROPERTY_BASE + "nomsolicitant"); // "Conselleria
-                                                                                                          // d'Educació";
-            final String unidadTramitadora = getPropertyRequired(PINBAL_PROPERTY_BASE + "unitattramitadora"); // "Servei
-                                                                                                              // d'escolarització";
-
-            // Transmision
-            final String fechaGeneracion = "";
-            final String idSolicitud = "";
-            final String idTransmision = "";
-
             // Titular
             final String apellido1; // = "JAUME";
             final String apellido2 = "";
             final String documentacion; // = "41107605G";
             final String nombre = "";
-            final String nombreCompleto = "";
-            final TipoDocumentacion tipoDocumentacion = TipoDocumentacion.DNI;
 
+            // ScspTitular.ScspTipoDocumentacion.DNI, ScspTitular.ScspTipoDocumentacion.NIE
+            ScspTipoDocumentacion tipoDocumentacion = ScspTipoDocumentacion.DNI;
+            
             // Dades del Titular del DNI
             {
-                String nif = getProperty(PINBALPOLICIA_PROPERTY_BASE + "pinbal.testnif");
-                String surname = getProperty(PINBALPOLICIA_PROPERTY_BASE + "pinbal.testsurname");
+                String nif = getProperty(PINBALPOLICIA_PROPERTY_BASE + "testnif");
+                String surname = getProperty(PINBALPOLICIA_PROPERTY_BASE + "testsurname");
 
                 if (nif == null || surname == null) {
                     nif = userData.getAdministrationID();
@@ -301,70 +263,69 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
 
                 documentacion = nif.toUpperCase();
                 apellido1 = surname.toUpperCase();
+                
+                // Si no es un digit el primer caracter, es tracta d'un NIE 
+                if (!Character.isDigit(documentacion.charAt(0))) {
+                	tipoDocumentacion = ScspTitular.ScspTipoDocumentacion.NIE;
+                }
             }
+            
+            ScspTitular titular = new ScspTitular();
+            titular.setTipoDocumentacion(tipoDocumentacion);
+            titular.setDocumentacion(documentacion);
+            titular.setNombre(nombre);
+            titular.setApellido1(apellido1);
+            titular.setApellido2(apellido2);
+            
+            // Mateix Titular
+            final ScspFuncionario funcionario = new ScspFuncionario();
+            funcionario.setNifFuncionario(documentacion);
+            funcionario.setNombreCompletoFuncionario(nombre + " " + apellido1);
+            
+            
+            SolicitudPolicia solicitud = new SolicitudPolicia(null);
+            omplirDadesSolicitutComunes(solicitud, funcionario, titular);
+            
+            ScspRespuesta resposta;
+            
+            try {
+            	
+            	/*
+            	 * Petició a PINBAL i processament de la resposta XML
+            	 */
+            	
+                resposta = getConnexio(List.of(solicitud)); 
+                
+                String datosEspecificos = resposta.getTransmisiones().get(0).getDatosEspecificos();
+                
+                JAXBContext contexto = JAXBContext.newInstance(DatosEspecificos.class);
+                
+                Unmarshaller datosEspecificosItem = contexto.createUnmarshaller();
+                
+                DatosEspecificos dte = (DatosEspecificos) datosEspecificosItem.unmarshal(new StringReader(datosEspecificos));
+                
+                if("00".equals(dte.getRetorno().get(0).getEstado().get(0).getCodigoEstado())) {
+                	DatosTitular dt = dte.getRetorno().get(0).getDatosTitular().get(0);
+                	SimpleDateFormat sdf_in = new SimpleDateFormat("yyyyMMdd");
+                    SimpleDateFormat sdf_out = new SimpleDateFormat("dd/MM/yyyy");
+                    
+                    dt.setFechaCaducidad(sdf_out.format(sdf_in.parse(dt.getFechaCaducidad())));
+                    
+                    dt.getDatosNacimiento().get(0).setFecha(sdf_out.format(sdf_in.parse(dt.getDatosNacimiento().get(0).getFecha())));
+                    
+                    dadesPolicia.setDatosTitular(dt);
+                }else {
 
-            // Dades de connexio
-            String baseurl = getProperty(PINBALPOLICIA_PROPERTY_BASE + "pinbal.baseurl");
-            String username = getProperty(PINBALPOLICIA_PROPERTY_BASE + "pinbal.username");
-            String password = getProperty(PINBALPOLICIA_PROPERTY_BASE + "pinbal.password");
-
-            String app = "es.caib.carpeta.";
-            System.setProperty(app + "pinbal.client.baseURL", baseurl);
-            System.setProperty(app + "pinbal.client.username", username);
-            System.setProperty(app + "pinbal.client.password", password);
-
-            final SVDDGPCIWS02v3RecobrimentFacade facade;
-            facade = new SVDDGPCIWS02v3RecobrimentFacade(app);
-
-            RespuestaClientAdapter<SVDDGPCIWS02v3RespuestaDatosEspecificos> result;
-            result = facade.peticionSincrona(codigoEstado, codigoEstadoSecundario, literalError, literalErrorSec,
-                    tiempoEstimadoRespuesta, codigoCertificado, idPeticion, numElementos, timeStamp, nifEmisor,
-                    nombreEmisor, nifFuncionario, nombreCompletoFuncionario, seudonimo, codProcedimiento,
-                    nombreProcedimiento, codigoUnidadTramitadora, consentimiento, finalidad, idExpediente,
-                    identificadorSolicitante, nombreSolicitante, unidadTramitadora, apellido1, apellido2, documentacion,
-                    nombre, nombreCompleto, tipoDocumentacion, fechaGeneracion, idSolicitud, idTransmision);
-
-            // SVDDGPCIWS02v3Client client = new SVDDGPCIWS02v3Client(app);
-
-            // RespuestaClientAdapter<SVDDGPCIWS02v3RespuestaDatosEspecificos> result;
-
-            // result = client.peticionSincrona("30000056Y", "FUSTER");
-            // result = client.peticionSincrona("41107605G", "JAUME");
-            // result = client.peticionSincrona(nif.toUpperCase(), surname.toUpperCase());
-
-            // log.info("\n Result OBject: " + result + "\n");
-            log.info("\n  Result::getLiteralError: " + result.getLiteralError() + "\n");
-            log.info("\n  Result::getLiteralErrorSec: " + result.getLiteralErrorSec() + "\n");
-
-            SVDDGPCIWS02v3RespuestaDatosEspecificos rde;
-            rde = result.getTransmisionesClient().get(0).getDatosEspecificos();
-
-            es.caib.scsp.esquemas.SVDDGPCIWS02v3.respuesta.datosespecificos.Estado estat = rde.getRetorno().getEstado();
-
-            log.info("\nEstado  " + estat.getCodigoEstado() + "\n");
-            log.info("\nEstado Secundario  " + estat.getCodigoEstadoSecundario() + "\n");
-
-            /*
-             * Result::getLiteralError: Tramitada Result::getLiteralErrorSec: null Estado 00
-             * Estado Secundario null
-             */
-            if ("00".equals(estat.getCodigoEstado())) {
-                DatosTitular dt = rde.getRetorno().getDatosTitular();
-                SimpleDateFormat sdf_in = new SimpleDateFormat("yyyyMMdd");
-                SimpleDateFormat sdf_out = new SimpleDateFormat("dd/MM/yyyy");
-
-                dt.setFechaCaducidad(sdf_out.format(sdf_in.parse(dt.getFechaCaducidad())));
-
-                dt.getDatosNacimiento().setFecha(sdf_out.format(sdf_in.parse(dt.getDatosNacimiento().getFecha())));
-
-                dadesPolicia.setDatosTitular(dt);
-            } else {
-
-                String error = "Error amb Estado " + estat.getCodigoEstado() + " | Estado Secundario: "
-                        + estat.getCodigoEstadoSecundario() + " | Literal Error: " + result.getLiteralError()
-                        + " | Literal Error Secundario: " + result.getLiteralErrorSec();
-                dadesPolicia.setError(error);
-            }
+                    String error = "Error amb Estado " + dte.getRetorno().get(0).getEstado().get(0).getCodigoEstado() 
+                            + " | " + dte.getRetorno().get(0).getEstado().get(0).getLiteralError();
+                           
+                    dadesPolicia.setError(error);
+                }
+                
+            } catch (Exception e) {
+            	resposta = null;
+                log.error("Error petición PinbalDadesPolicia: " + e.getMessage());
+            } 
 
         } catch (Throwable e) {
 
@@ -376,8 +337,8 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
         }
 
         Gson json = new Gson();
-
         String generat = json.toJson(dadesPolicia, DadesPolicia.class);
+        
         log.info("\nDADES POLICIA JSON: " + generat + "\n");
 
         try {
@@ -429,6 +390,37 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
 
     }
 
+    /*
+     * Solicitud datos especificos
+     */
+	public static class SolicitudPolicia extends Solicitud {
+		protected  String numeroSoporte;
+
+		public SolicitudPolicia(String numeroSoporte) {
+			super();
+			this.numeroSoporte = numeroSoporte;
+		}
+
+		@Override
+		public String getDatosEspecificos() { // xml
+			StringBuilder xmlBuilder = new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+			xmlBuilder.append("<DatosEspecificos>");
+			if (numeroSoporte != null && !numeroSoporte.isEmpty()) {
+				xmlBuilder.append("<Consulta>");
+				xmlBuilder.append(
+						xmlOptionalStringParameter(this.numeroSoporte, "NumeroSoporte")
+				);
+				xmlBuilder.append("</Consulta>");
+			}
+			xmlBuilder.append("</DatosEspecificos>");
+			return xmlBuilder.toString();
+		}
+	}
+    
+	
+	/*
+	 * Informació que passam a la vista i pintam al plugin
+	 */
     public class DadesPolicia {
 
         protected String error = "";
@@ -452,5 +444,6 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin 
         }
 
     }
+    
 
 }

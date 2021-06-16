@@ -288,8 +288,7 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
     
     protected void esperaPage(String absolutePluginRequestPath, HttpServletResponse response, Locale locale,
             String rutaDesti) throws IOException {
-        response.setCharacterEncoding("utf-8");
-        response.setContentType("text/html");
+
         
         InputStream input = this.getClass().getResourceAsStream("/" + WEBRESOURCECOMMON + "/templates/espera.html");
         String plantilla = IOUtils.toString(input, "UTF-8");
@@ -302,6 +301,8 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
         
         String webpage = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
 
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("text/html");
         response.getWriter().println(webpage);
         response.flushBuffer();
     }

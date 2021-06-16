@@ -1,0 +1,94 @@
+package es.caib.carpeta.pluginsib.carpetafront.api;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Properties;
+
+import es.caib.pinbal.client.recobriment.ClientGeneric;
+import es.caib.pinbal.client.recobriment.model.ScspFuncionario;
+import es.caib.pinbal.client.recobriment.model.ScspRespuesta;
+import es.caib.pinbal.client.recobriment.model.ScspSolicitante;
+import es.caib.pinbal.client.recobriment.model.ScspTitular;
+import es.caib.pinbal.client.recobriment.model.Solicitud;
+
+public abstract class AbstractPinbalCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
+
+	public AbstractPinbalCarpetaFrontPlugin() {
+		super();	
+	}
+
+	public AbstractPinbalCarpetaFrontPlugin(String propertyKeyBase, Properties properties) {
+		super(propertyKeyBase, properties);
+	}
+
+	public AbstractPinbalCarpetaFrontPlugin(String propertyKeyBase) {
+		super(propertyKeyBase);
+	}
+	
+
+	public void omplirDadesSolicitutComunes(Solicitud solicitud, ScspFuncionario funcionario, ScspTitular titular) {
+		
+		try {
+			
+			String propertyBase = getPropertyBase();
+			
+			final String codProcedimiento = getPropertyRequired(propertyBase + "codiprocediment"); // "CODSVDR_GBA_20121107";
+			final String finalidad = getPropertyRequired(propertyBase + "finalitat"); // "Baremacions per el proces d'escolaritzacio";
+			final String identificadorSolicitante = getPropertyRequired(propertyBase + "identificadorsolicitant"); // "S0711001H";
+			final String unidadTramitadora = getPropertyRequired(propertyBase + "unitattramitadora"); // "Servei d'escolarització";
+			
+			if (isDevelopment()) {
+		        log.info(" ========================= CARREGANT INFO ==============================");		        
+		        log.info("codProcedimiento =>" + codProcedimiento);
+		        log.info("finalidad =>" + finalidad);
+		        log.info("identificadorSolicitante =>" + identificadorSolicitante);
+		        log.info("unidadTramitadora =>" + unidadTramitadora);
+		        log.info(" =======================================================================");
+	        }
+			
+			solicitud.setIdentificadorSolicitante(identificadorSolicitante);
+	        solicitud.setUnidadTramitadora(unidadTramitadora);
+	        solicitud.setCodigoProcedimiento(codProcedimiento);
+	        solicitud.setFinalidad(finalidad);
+	        solicitud.setConsentimiento(ScspSolicitante.ScspConsentimiento.Si);
+	        solicitud.setFuncionario(funcionario);
+	        solicitud.setTitular(titular);
+			
+		} catch (Exception e) {
+			log.error("PinbalPoliciaCarpetaFrontPlugin: error omplirDadesSolicitutComunes => " + e.getMessage());
+		} 
+	}
+	
+	
+	// CONNEXIÓ 
+	public ScspRespuesta getConnexio(List<Solicitud> solicituds) throws IOException { 
+		
+		ScspRespuesta resposta;
+		
+		try {
+			
+			String propertyBase = getPropertyBase();
+			final String baseUrl = getProperty(propertyBase + "baseurl"); 
+			final String userName = getProperty(propertyBase + "username");
+			final String password = getProperty(propertyBase + "password");
+			
+			final String codigoCertificado = getPropertyRequired(propertyBase + "codicertificat"); // "SVDDGPCIWS02";
+			
+			ClientGeneric clientRest = new ClientGeneric(baseUrl,userName,password);
+			resposta = clientRest.peticionSincrona(codigoCertificado, solicituds);
+	        
+		} catch (Exception e) {
+			resposta = null;
+			log.error("PinbalPoliciaCarpetaFrontPlugin: error getConnexio => " + e.getMessage());
+		}
+        
+		return resposta;
+	}
+	
+	
+    public boolean isDevelopment() {
+        return "true".equals(getProperty(getPropertyBase() + "development"));
+    }
+	
+	
+}
