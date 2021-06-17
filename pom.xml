@@ -468,8 +468,12 @@
 					</execution>
 				</executions>
 			</plugin>
-		</plugins>
-	</build>
+
+        </plugins>
+
+
+    </build>
+
 	<repositories>
 		<!-- Repositori oficial de JBoss -->
 		<repository>

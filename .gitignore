@@ -82,3 +82,7 @@ nb-configuration.xml
 /carpeta-api-client
 /carpeta-pluginsib/pluginsib-carpetafront/notib-client-generator
 /carpeta-pluginsib/pluginsib-carpetafront/notib-api-client-v1
+/carpeta-apodera/connexio.properties
+/carpeta-apodera/Casos de Prueba
+/carpeta-apodera/soapui
+/carpeta-apodera/target
