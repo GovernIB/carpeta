@@ -3,9 +3,6 @@
 # Common
 es.caib.carpeta.pluginsib.carpetafront.sistra.development=true
 
-#es.caib.carpeta.pluginsib.carpetafront.sistra.logo=D:\\dades\\dades\\CarpetesPersonals\\ProgramacioPortaFIB3\\carpeta\\carpeta-pluginsib\\pluginsib-carpetafront\\reactexample\\src\\main\\resources\\logo\\logo-reactexample.png
-
-
 # Sistra 1
 es.caib.carpeta.pluginsib.carpetafront.sistra1.url=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.url"]]
 es.caib.carpeta.pluginsib.carpetafront.sistra1.user=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.user"]]
