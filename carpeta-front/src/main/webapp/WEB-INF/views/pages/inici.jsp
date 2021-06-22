@@ -10,9 +10,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js" charset="utf-8"></script>
+	<!-- Scripts React-->
+    <script type="text/javascript" src="<c:url value="/src/assets/js/react.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/src/assets/js/react-dom.js"/>"></script>
+    <script type="text/javascript" src="<c:url value="/src/assets/js/babel.min.js"/>"></script>
 
 	<!-- Scripts -->
 	<!-- google analytics -->
