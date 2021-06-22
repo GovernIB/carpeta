@@ -7,7 +7,6 @@ import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
 import es.caib.carpeta.pluginsib.carpetafront.api.TitlesInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 
-import es.caib.pinbal.client.recobriment.model.ScspSolicitante;
 import es.caib.pinbal.client.recobriment.model.ScspFuncionario;
 import es.caib.pinbal.client.recobriment.model.ScspTitular;
 import es.caib.pinbal.client.recobriment.model.ScspTitular.ScspTipoDocumentacion;
@@ -233,7 +232,24 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontP
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
 
-        DadesPolicia dadesPolicia = new DadesPolicia();
+        DadesPolicia dadesPolicia = cridadaRest(userData, locale);
+
+        Gson json = new Gson();
+        String generat = json.toJson(dadesPolicia, DadesPolicia.class);
+        
+        log.info("\nDADES POLICIA JSON: " + generat + "\n");
+
+        try {
+            response.getWriter().println(generat);
+            response.flushBuffer();
+        } catch (IOException e) {
+            log.error("Error obtening writer: " + e.getMessage(), e);
+        }
+
+    }
+
+	public DadesPolicia cridadaRest(UserData userData, Locale locale) {
+		DadesPolicia dadesPolicia = new DadesPolicia();
 
         try {
 
@@ -287,45 +303,38 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontP
             omplirDadesSolicitutComunes(solicitud, funcionario, titular);
             
             ScspRespuesta resposta;
+            	
+        	/*
+        	 * Petició a PINBAL i processament de la resposta XML
+        	 */
+        	
+            resposta = getConnexio(List.of(solicitud)); 
             
-            try {
-            	
-            	/*
-            	 * Petició a PINBAL i processament de la resposta XML
-            	 */
-            	
-                resposta = getConnexio(List.of(solicitud)); 
+            String datosEspecificos = resposta.getTransmisiones().get(0).getDatosEspecificos();
+            
+            JAXBContext contexto = JAXBContext.newInstance(DatosEspecificos.class);
+            
+            Unmarshaller datosEspecificosItem = contexto.createUnmarshaller();
+            
+            DatosEspecificos dte = (DatosEspecificos) datosEspecificosItem.unmarshal(new StringReader(datosEspecificos));
+            
+            if("00".equals(dte.getRetorno().get(0).getEstado().get(0).getCodigoEstado())) {
+            	DatosTitular dt = dte.getRetorno().get(0).getDatosTitular().get(0);
+            	SimpleDateFormat sdf_in = new SimpleDateFormat("yyyyMMdd");
+                SimpleDateFormat sdf_out = new SimpleDateFormat("dd/MM/yyyy");
                 
-                String datosEspecificos = resposta.getTransmisiones().get(0).getDatosEspecificos();
+                dt.setFechaCaducidad(sdf_out.format(sdf_in.parse(dt.getFechaCaducidad())));
                 
-                JAXBContext contexto = JAXBContext.newInstance(DatosEspecificos.class);
+                dt.getDatosNacimiento().get(0).setFecha(sdf_out.format(sdf_in.parse(dt.getDatosNacimiento().get(0).getFecha())));
                 
-                Unmarshaller datosEspecificosItem = contexto.createUnmarshaller();
-                
-                DatosEspecificos dte = (DatosEspecificos) datosEspecificosItem.unmarshal(new StringReader(datosEspecificos));
-                
-                if("00".equals(dte.getRetorno().get(0).getEstado().get(0).getCodigoEstado())) {
-                	DatosTitular dt = dte.getRetorno().get(0).getDatosTitular().get(0);
-                	SimpleDateFormat sdf_in = new SimpleDateFormat("yyyyMMdd");
-                    SimpleDateFormat sdf_out = new SimpleDateFormat("dd/MM/yyyy");
-                    
-                    dt.setFechaCaducidad(sdf_out.format(sdf_in.parse(dt.getFechaCaducidad())));
-                    
-                    dt.getDatosNacimiento().get(0).setFecha(sdf_out.format(sdf_in.parse(dt.getDatosNacimiento().get(0).getFecha())));
-                    
-                    dadesPolicia.setDatosTitular(dt);
-                }else {
+                dadesPolicia.setDatosTitular(dt);
+            }else {
 
-                    String error = "Error amb Estado " + dte.getRetorno().get(0).getEstado().get(0).getCodigoEstado() 
-                            + " | " + dte.getRetorno().get(0).getEstado().get(0).getLiteralError();
-                           
-                    dadesPolicia.setError(error);
-                }
-                
-            } catch (Exception e) {
-            	resposta = null;
-                log.error("Error petición PinbalDadesPolicia: " + e.getMessage());
-            } 
+                String error = "Error amb Estado " + dte.getRetorno().get(0).getEstado().get(0).getCodigoEstado() 
+                        + " | " + dte.getRetorno().get(0).getEstado().get(0).getLiteralError();
+                       
+                dadesPolicia.setError(error);
+            }
 
         } catch (Throwable e) {
 
@@ -335,20 +344,8 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontP
 
             log.error(msg, e);
         }
-
-        Gson json = new Gson();
-        String generat = json.toJson(dadesPolicia, DadesPolicia.class);
-        
-        log.info("\nDADES POLICIA JSON: " + generat + "\n");
-
-        try {
-            response.getWriter().println(generat);
-            response.flushBuffer();
-        } catch (IOException e) {
-            log.error("Error obtening writer: " + e.getMessage(), e);
-        }
-
-    }
+		return dadesPolicia;
+	}
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------

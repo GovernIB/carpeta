@@ -1,6 +1,5 @@
 package es.caib.carpeta.pluginsib.carpetafront.api;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
@@ -24,7 +23,7 @@ public abstract class AbstractPinbalCarpetaFrontPlugin extends AbstractCarpetaFr
 	public AbstractPinbalCarpetaFrontPlugin(String propertyKeyBase) {
 		super(propertyKeyBase);
 	}
-	
+
 
 	public void omplirDadesSolicitutComunes(Solicitud solicitud, ScspFuncionario funcionario, ScspTitular titular) {
 		
@@ -55,36 +54,51 @@ public abstract class AbstractPinbalCarpetaFrontPlugin extends AbstractCarpetaFr
 	        solicitud.setTitular(titular);
 			
 		} catch (Exception e) {
-			log.error("PinbalPoliciaCarpetaFrontPlugin: error omplirDadesSolicitutComunes => " + e.getMessage());
+			log.error("AbstractPinbalCarpetaFrontPlugin: error omplirDadesSolicitutComunes => " + e.getMessage());
 		} 
 	}
 	
 	
 	// CONNEXIÓ 
-	public ScspRespuesta getConnexio(List<Solicitud> solicituds) throws IOException { 
+	public ScspRespuesta getConnexio(List<Solicitud> solicituds) throws Exception { 
 		
 		ScspRespuesta resposta;
 		
-		try {
-			
-			String propertyBase = getPropertyBase();
-			final String baseUrl = getProperty(propertyBase + "baseurl"); 
-			final String userName = getProperty(propertyBase + "username");
-			final String password = getProperty(propertyBase + "password");
-			
-			final String codigoCertificado = getPropertyRequired(propertyBase + "codicertificat"); // "SVDDGPCIWS02";
-			
-			ClientGeneric clientRest = new ClientGeneric(baseUrl,userName,password);
-			resposta = clientRest.peticionSincrona(codigoCertificado, solicituds);
-	        
-		} catch (Exception e) {
-			resposta = null;
-			log.error("PinbalPoliciaCarpetaFrontPlugin: error getConnexio => " + e.getMessage());
-		}
-        
+		String propertyBase = getPropertyBase();
+		final String baseUrl = getProperty(propertyBase + "baseurl"); 
+		final String userName = getProperty(propertyBase + "username");
+		final String password = getProperty(propertyBase + "password");
+		
+		final String codigoCertificado = getPropertyRequired(propertyBase + "codicertificat"); 
+		
+		ClientGeneric clientRest = new ClientGeneric(baseUrl,userName,password);
+		resposta = clientRest.peticionSincrona(codigoCertificado, solicituds);
+	     
 		return resposta;
 	}
 	
+	// JUSTIFICANT
+	/*
+	public ScspJustificante getJustificant(String idPeticio) throws Exception {
+			
+		if(idPeticio == null || "".equals(idPeticio)) {
+			log.info("GetJustificant - PeticióID NULL ");
+			return null;
+		}
+		
+		log.info("GetJustificant - PeticióID: " + idPeticio);
+		
+		String propertyBase = getPropertyBase();
+		final String baseUrl = getProperty(propertyBase + "baseurl"); 
+		final String userName = getProperty(propertyBase + "username");
+		final String password = getProperty(propertyBase + "password");
+		
+		ClientGeneric clientRest = new ClientGeneric(baseUrl,userName,password);
+		ScspJustificante justificant = clientRest.getJustificante(idPeticio);
+		
+		return justificant;
+	}
+	*/
 	
     public boolean isDevelopment() {
         return "true".equals(getProperty(getPropertyBase() + "development"));
