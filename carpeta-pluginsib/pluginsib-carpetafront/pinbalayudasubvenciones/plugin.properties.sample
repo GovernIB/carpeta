@@ -1,0 +1,27 @@
+# Class => org.fundaciobit.pluginsib.carpetafront.pinbalayudasubvenciones.PinbalAyudaSubvencionesCarpetaFrontPlugin
+
+# Connexió
+es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.baseurl=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.baseurl"]]
+es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.username=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.username"]]
+es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.password=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.password"]]
+
+# Informació per la sol·licitud
+es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.codicertificat=SVDCCAACPASWS01
+
+es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.codiprocediment=CODSVDR_GBA_20121107
+es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.finalitat=Consulta estar al corrent de pagament a CAIB
+es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.identificadorsolicitant=S0711001H
+es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.unitattramitadora=Servei d'escolarització
+
+# Datos Específicos Sol·licitud
+es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.codigoprovincia=07
+es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.codigocomunidadautonoma=04
+
+# Necessari en DEV i PRE. NO es fan cridades reals sinó d,un joc de proves
+# Exemples:   - 30000056Y, FUSTER
+#             - 41107605G, JAUME
+es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.testnif=30000056Y
+es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.testsurname=FUSTER
+
+# Common
+es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.development=true

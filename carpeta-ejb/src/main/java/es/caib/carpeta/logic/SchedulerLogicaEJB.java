@@ -57,6 +57,7 @@ public class SchedulerLogicaEJB implements SchedulerLogicaService {
 		        expression.hour(hora);
 		        expression.minute(0);
 		        expression.second(0);
+		        expression.timezone("Europe/Madrid");
 
 		        if(Configuracio.isDesenvolupament()) {
 		        	log.info("---------------------------  SCHEDULER STARTUP ------------------------ ");		

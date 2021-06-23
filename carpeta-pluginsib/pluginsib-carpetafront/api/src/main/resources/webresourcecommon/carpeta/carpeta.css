@@ -571,6 +571,12 @@ a.imc-bt-xarxa:hover {
 	margin-top: 8em;
 }
 
+#dadespinbalayudascontainer .descarregaJustificant { text-align:center; } 
+#dadespinbalayudascontainer .descarregaJustificant span.oi { font-size: 3rem; display:block; margin: 10px; }
+#dadespinbalayudascontainer .contenedorInfoPersonal { border-top: 1px solid #ececec; }
+#dadespinbalayudascontainer .contenedorInfoPersonal div{ display: inline-block; vertical-align: top; }
+#dadespinbalayudascontainer .contenedorInfoPersonal strong { display: block; }
+
 
 /* HomePage */
 .homePage .titol.h5 { text-transform: none !important; }

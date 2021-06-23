@@ -1,0 +1,17 @@
+{
+  "pinbalSubvencionesTitulo": "Estar al corrent de pagament amb l'Administració de la Comunitat Autònoma de les Illes Balears per ajudes i subvencions",
+  "pinbalSubvencionesDescripcion": "Des d'aquí pot consultar el resultat de la seva consulta: ",
+  "pinbalSubvencionesDni": "DNI",
+  "pinbalSubvencionesNom": "Nom",
+  "pinbalSubvencionesApellido1" : "Primer Cognom",
+  "pinbalSubvencionesApellido2" : "Segon Cognom",
+  "pinbalSubvencionesResultado": "Resultado de la consulta",
+  "pinbalSubvencionesFecha": "A dia ",
+  "pinbalSubvencionesHora": " a les ",
+  "pinbalSubvencionesH": "h:",
+  "pinbalSubvencionesCodigo0": "El contribuent es troba al corrent en les seves obligacions tributàries.",
+  "pinbalSubvencionesCodigo1": "El contribuent no es troba al corrent en les seves obligacions tributàries.",
+  "pinbalSubvencionesCodigo2": "S'ha trobat més d'un registre per a les dades del titular indicats.",
+  "pinbalSubvencionesCodigo3": "Per a la persona consultada no hi ha informació en la CCAA.",
+  "pinbalSubvencionesDescargarJustificante": "Descàrregar justificant"
+}

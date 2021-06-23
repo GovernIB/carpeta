@@ -5,6 +5,7 @@ import java.util.Properties;
 
 import es.caib.pinbal.client.recobriment.ClientGeneric;
 import es.caib.pinbal.client.recobriment.model.ScspFuncionario;
+import es.caib.pinbal.client.recobriment.model.ScspJustificante;
 import es.caib.pinbal.client.recobriment.model.ScspRespuesta;
 import es.caib.pinbal.client.recobriment.model.ScspSolicitante;
 import es.caib.pinbal.client.recobriment.model.ScspTitular;
@@ -78,15 +79,11 @@ public abstract class AbstractPinbalCarpetaFrontPlugin extends AbstractCarpetaFr
 	}
 	
 	// JUSTIFICANT
-	/*
 	public ScspJustificante getJustificant(String idPeticio) throws Exception {
 			
 		if(idPeticio == null || "".equals(idPeticio)) {
-			log.info("GetJustificant - PeticióID NULL ");
 			return null;
 		}
-		
-		log.info("GetJustificant - PeticióID: " + idPeticio);
 		
 		String propertyBase = getPropertyBase();
 		final String baseUrl = getProperty(propertyBase + "baseurl"); 
@@ -98,7 +95,7 @@ public abstract class AbstractPinbalCarpetaFrontPlugin extends AbstractCarpetaFr
 		
 		return justificant;
 	}
-	*/
+	
 	
     public boolean isDevelopment() {
         return "true".equals(getProperty(getPropertyBase() + "development"));

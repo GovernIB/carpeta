@@ -131,7 +131,7 @@ public class LogCarpetaLogicaEJB extends LogCarpetaEJB implements LogCarpetaLogi
     	LocalDateTime avui = LocalDateTime.now(); 
     	avui.toLocalDate().minusDays(dies);
     
-    	Where w = LogCarpetaFields.DATAINICI.lessThanOrEqual(Timestamp.valueOf(avui));
+    	Where w = LogCarpetaFields.DATAINICI.greaterThanOrEqual(Timestamp.valueOf(avui));
     	
     	if (Configuracio.isDesenvolupament()){
     		List<LogCarpeta> llista = select(w);
