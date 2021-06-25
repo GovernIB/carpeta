@@ -1,4 +1,4 @@
-package org.fundaciobit.pluginsib.carpetafront.pinbalayudasubvenciones;
+package org.fundaciobit.pluginsib.carpetafront.pinbalayudas;
 
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractPinbalCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
@@ -19,7 +19,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.io.IOUtils;
-import org.fundaciobit.pluginsib.carpetafront.pinbalayudasubvenciones.model.DatosEspecificos;
+import org.fundaciobit.pluginsib.carpetafront.pinbalayudas.model.DatosEspecificos;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import com.google.gson.Gson;
@@ -40,14 +40,14 @@ import java.util.Properties;
 /**
  * @author jagarcia
  */
-public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin {
+public class PinbalAyudasCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin {
 
-    public static final String PINBALSUBVENCIONES_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "pinbalsubvenciones.";
+    public static final String PINBALSUBVENCIONES_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "pinbalayudas.";
 
     /**
      *
      */
-    public PinbalAyudaSubvencionesCarpetaFrontPlugin() {
+    public PinbalAyudasCarpetaFrontPlugin() {
         super();
     }
 
@@ -55,14 +55,14 @@ public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCar
      * @param propertyKeyBase
      * @param properties
      */
-    public PinbalAyudaSubvencionesCarpetaFrontPlugin(String propertyKeyBase, Properties properties) {
+    public PinbalAyudasCarpetaFrontPlugin(String propertyKeyBase, Properties properties) {
         super(propertyKeyBase, properties);
     }
 
     /**
      * @param propertyKeyBase
      */
-    public PinbalAyudaSubvencionesCarpetaFrontPlugin(String propertyKeyBase) {
+    public PinbalAyudasCarpetaFrontPlugin(String propertyKeyBase) {
         super(propertyKeyBase);
     }
 
@@ -73,7 +73,7 @@ public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCar
 
     @Override
     public String getResourceBundleName() {
-        return "carpetafrontpinbalayudasubvenciones";
+        return "carpetafront.pinbalayudas";
     }
 
     @Override
@@ -95,10 +95,10 @@ public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCar
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
 
-        log.info("PinbalAyudaSubvencionesCarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
-        log.info("PinbalAyudaSubvencionesCarpetaFrontPlugin::requestCarpetaFront => administrationID: "
+        log.info("PinbalAyudasCarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
+        log.info("PinbalAyudasCarpetaFrontPlugin::requestCarpetaFront => administrationID: "
                 + userData.getAdministrationID());
-        log.info("PinbalAyudaSubvencionesCarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
+        log.info("PinbalAyudasCarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
                 + administrationEncriptedID);
 
         if (query.startsWith(INDEX_HTML_PAGE)) {
