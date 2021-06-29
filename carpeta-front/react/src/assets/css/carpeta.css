@@ -560,6 +560,15 @@ a.imc-bt-xarxa:hover {
 	margin-top: 8em;
 }
 
+.titolAplicacio{
+	color: #ffffff;
+	text-transform: uppercase;
+}
+.titolAplicacio:hover {
+	color: #ffffff;
+	text-transform: uppercase;
+}
+
 /* HomePage */
 .homePage .titol.h5 { text-transform: none !important; }
 .homePage ul { list-style:none;  }

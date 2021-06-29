@@ -69,7 +69,7 @@
         <div>
             <header class="imc-titol">
                 <nav class="imc--contingut">
-                    <h1><span class="text-uppercase"><fmt:message key="entitats.carpeta"/></span></h1>
+                    <h1><a class="titolAplicacio" tabindex="9" aria-labelledby="<fmt:message key="accesInici"/>" aria-describedby="<fmt:message key="enllasInici"/>" href="${pageContext.request.contextPath}"><fmt:message key="entitats.carpeta"/></a></h1>
                     <ul>
                         <li><button type="button" class="imc-bt-menu" id="imc-bt-menu" title="<fmt:message key="entitats.menu"/>" tabindex="10"></button></li>
                     </ul>

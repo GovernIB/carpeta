@@ -571,6 +571,15 @@ a.imc-bt-xarxa:hover {
 	margin-top: 8em;
 }
 
+.titolAplicacio{
+	color: #ffffff;
+	text-transform: uppercase;
+}
+.titolAplicacio:hover {
+	color: #ffffff;
+	text-transform: uppercase;
+}
+
 #dadespinbalayudascontainer .descarregaJustificant { text-align:center; } 
 #dadespinbalayudascontainer .descarregaJustificant span.oi { font-size: 3rem; display:block; margin: 10px; }
 #dadespinbalayudascontainer .contenedorInfoPersonal { border-top: 1px solid #ececec; }

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {withTranslation} from 'react-i18next';
 import axios from "axios";
 import i18n from 'i18next';
+import {Link} from "react-router-dom";
 
 class BarraMenu extends Component {
 
@@ -89,7 +90,7 @@ class BarraMenu extends Component {
 			} else {
 				content = this.state.enllasosMenuBar.map((s, i) => (
 					<li className="itemBar pl-5" key={i}>
-						<a href={s.url} className="imc-bt-menubar pl-0" target="_blank" tabIndex={290+i} aria-labelledby={s.label} aria-describedby={t('accedirEnllas') + s.label}>
+						<a href={s.url} className="imc-bt-menubar pl-0" target="_blank" tabIndex={291+i} aria-labelledby={s.label} aria-describedby={t('accedirEnllas') + s.label}>
 							<img src={s.urllogo} title="" alt={s.label} className="logoMenuBar"/>
 							<span>{s.label}</span>
 						</a>
@@ -111,7 +112,7 @@ class BarraMenu extends Component {
 
 						<div className="col-11 pl-0">
 							<h1>
-								<span>{t('menuTitol')}</span>
+								<Link to={'/'} className="titolAplicacio" tabIndex="291" aria-labelledby={i18n.t('mollaInici')} aria-describedby={i18n.t('accedirEnllas') + i18n.t('mollaInici')}>{t('menuTitol')}</Link>
 							</h1>
 
 							<ul>
