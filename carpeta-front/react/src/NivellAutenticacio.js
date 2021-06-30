@@ -27,7 +27,7 @@ class NivellAutenticacio extends Component {
                       + " - ";
         }
 
-        contingut = contingut + t('nivellAutenticacio') + ":" + t('nivellAutenticacio'+ nivell);
+        contingut = contingut + t('nivellAutenticacio') + ": " + t('nivellAutenticacio'+ nivell);
 
 
         return (

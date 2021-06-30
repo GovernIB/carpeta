@@ -165,8 +165,8 @@ img:hover {
 	text-transform: uppercase;
 	padding-right: 1em;
 }
-.estilUsuari, .nivellAut { 
-	font-size: 1.1rem;
+.estilUsuari, .nivellAut {
+	font-size: 0.9rem;
 }
 .usuari{
 	top: 2.5em;
@@ -578,6 +578,9 @@ a.imc-bt-xarxa:hover {
 .titolAplicacio:hover {
 	color: #ffffff;
 	text-transform: uppercase;
+}
+.lletraRapid{
+	font-size: 14px;
 }
 
 #dadespinbalayudascontainer .descarregaJustificant { text-align:center; } 
