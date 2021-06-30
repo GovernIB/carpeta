@@ -9,7 +9,23 @@ a:hover{
 	text-decoration: none;
 }
 .h2, h2{
-	font-size: 1.1em !important;
+	font-size: 1em !important;
+}
+.subtitol{
+	font-size: 15px;
+	margin-top: 2%;
+	margin-bottom: 1%;
+}
+.subtitolSuperior{
+	font-size: 15px;
+	margin-top: 2%;
+}
+.subtitolInferior{
+	font-size: 15px;
+	margin-bottom: 1%;
+}
+.subtitolInterior{
+	font-size: 15px;
 }
 
 /* Navegació amb tab */
@@ -571,6 +587,10 @@ a.imc-bt-xarxa:hover {
 }
 .lletraRapid{
 	font-size: 14px;
+}
+.borderMenu{
+	border-bottom: 1px solid lightgray;
+	border-radius: 0px;
 }
 
 

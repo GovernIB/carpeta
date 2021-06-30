@@ -131,7 +131,7 @@
                 <div class="container-contenido homePage">
                     <div class="row mr-0 ml-0">
                         <div class="infoNoMenu">
-                            <p class="lh15"><fmt:message key="entitats.llista"/></p>
+                            <p class="lh15 subtitol"><fmt:message key="entitats.llista"/></p>
                             <div class="col-md-12 border-0 float-left pt-3 pl-0">
                                 <div class="card-body imc--llista--capses">
                                     <div class="row mb-0">

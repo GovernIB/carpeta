@@ -57,7 +57,7 @@ class AvisLegal extends Component {
                 <div className="infoNoMenu">
                     <h2 className="titol h2">{t('avisLegalInformacio')}</h2>
                     <div className="col-md-12 border-0 float-left p-0">
-                        <p className="lh15">
+                        <p className="lh15 subtitolSuperior">
                             {t('avisLegalInformacio1')}
                             <a href="http://www.caib.es" target="_blank" rel="noopener noreferrer" tabIndex="2" aria-labelledby="caib.es" aria-describedby={t('accedirEnllas') + "caib.es"}>caib.es</a>,
                             <a href="http://www.caib.cat" target="_blank" rel="noopener noreferrer" tabIndex="3" aria-labelledby="caib.cat" aria-describedby={t('accedirEnllas') + "caib.cat"}> caib.cat</a>
@@ -65,11 +65,11 @@ class AvisLegal extends Component {
                             <a href="http://www.illesbalears.cat" target="_blank" rel="noopener noreferrer" tabIndex="4" aria-labelledby="illesbalears.cat" aria-describedby={t('accedirEnllas') + "illesbalears.cat"}>illesbalears.cat</a>
                             {t('avisLegalInformacio2')}
                         </p>
-                        <p className="lh15">{t('avisLegalInformacio3')}</p>
-                        <p className="lh15">{t('avisLegalInformacio4')}</p>
-                        <p className="lh15">{t('avisLegalInformacio5')}</p>
-                        <p className="lh15">{t('avisLegalInformacio6')}</p>
-                        <p className="lh15">
+                        <p className="lh15 subtitolInterior">{t('avisLegalInformacio3')}</p>
+                        <p className="lh15 subtitolInterior">{t('avisLegalInformacio4')}</p>
+                        <p className="lh15 subtitolInterior">{t('avisLegalInformacio5')}</p>
+                        <p className="lh15 subtitolInterior">{t('avisLegalInformacio6')}</p>
+                        <p className="lh15 subtitolInterior">
                             {t('avisLegalInformacio7')}
                             {enllas1}.
                         </p>
@@ -77,23 +77,23 @@ class AvisLegal extends Component {
 
                     <div className="col-md-12 border-0 float-left p-0 pt-2">
                         <h3 className="apartat titol h2">{t('avisLegalPolitica')}</h3>
-                        <p className="lh15">
+                        <p className="lh15 subtitolInterior">
                             <b>{t('avisLegalPolitica1')}</b>
                             {t('avisLegalPolitica2')}
                             <b>{t('avisLegalPolitica3')}</b>
                             {t('avisLegalPolitica4')}
                         </p>
-                        <p className="lh15">
+                        <p className="lh15 subtitolInterior">
                             <b>{t('avisLegalPolitica5')}</b>
                             {t('avisLegalPolitica6')}
                         </p>
-                        <p className="lh15">
+                        <p className="lh15 subtitolInterior">
                             <b>{t('avisLegalPolitica7')}</b>
                             {t('avisLegalPolitica8')}
                             {enllas2}
                             {t('avisLegalPolitica10')}
                         </p>
-                        <p className="lh15">
+                        <p className="lh15 subtitolInterior">
                             <b>{t('avisLegalPolitica11')}</b>
                             {t('avisLegalPolitica12')}
                             <a href="mailto:'protecciodades@dpd.caib.es'" tabIndex="7" aria-labelledby="protecciodades@dpd.caib.es" aria-describedby={t('enviarMail') + "protecciodades@dpd.caib.es"}>protecciodades@dpd.caib.es</a>.
@@ -102,17 +102,17 @@ class AvisLegal extends Component {
 
                     <div className="col-md-12 border-0 float-left p-0 pt-2">
                         <h3 className="apartat titol h2">{t('avisLegalCookies1')} <em>{t('avisLegalCookies2')}</em> {t('avisLegalCookies3')}</h3>
-                        <p className="lh15">
+                        <p className="lh15 subtitolInterior">
                             {t('avisLegalCookies4')}
                             <em>{t('avisLegalCookies5')}</em>
                             {t('avisLegalCookies6')}
                         </p>
-                        <p className="lh15">
+                        <p className="lh15 subtitolInterior">
                             {t('avisLegalCookies7')}
                             <a href="https://www.aepd.es/" target="_blank" rel="noopener noreferrer" tabIndex="8" aria-labelledby={t('avisLegalCookies8')} aria-describedby={t('accedirEnllas') + t('avisLegalCookies8')}>{t('avisLegalCookies8')}</a>
                             {t('avisLegalCookies9')}
                         </p>
-                        <p className="lh15">
+                        <p className="lh15 subtitolInterior">
                             {t('avisLegalCookies10')}
                         </p>
                         <div className="mb-3">
@@ -126,7 +126,7 @@ class AvisLegal extends Component {
                                 <li><b>{t('avisLegalCookies18')}</b><p className="mt-0">{t('avisLegalCookies19')}</p></li>
                             </ul>
                         </div>
-                        <p className="lh15">
+                        <p className="lh15 subtitolInterior">
                             {t('avisLegalCookies20')}
                         </p>
                         <div className="mb-3">

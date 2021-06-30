@@ -83,7 +83,7 @@ class CanviarEntitat extends Component {
                     <div className="col-md-12 border-0 pl-0 pr-0">
 
 
-                        <p className="lh15">{t('canviarEntitatDescripcio')}</p>
+                        <p className="lh15 subtitol">{t('canviarEntitatDescripcio')}</p>
 
                         <div className="card-body imc--llista--capses">
 

@@ -238,7 +238,7 @@ class LlistatDePlugins extends Component {
                     <div className="col-md-12 border-0 pl-0 pr-0">
 
 
-                        <p className="lh15">{subtitolHeader}</p>
+                        <p className="lh15 subtitol">{subtitolHeader}</p>
 
                         <div className="card-body imc--llista--capses">
 

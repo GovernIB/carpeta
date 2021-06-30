@@ -155,7 +155,7 @@ class MapaWeb extends Component {
 
 					<div className="col-md-12 border-0 pl-0 pr-0">
 
-						<p className="lh15">{t('mapaWebDescripcio')}</p>
+						<p className="lh15 subtitol">{t('mapaWebDescripcio')}</p>
 
 						<div className="card">
 							<ul className="list-group list-group-flush">

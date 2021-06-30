@@ -118,7 +118,7 @@ class MenuRapid extends Component {
                 });
 
                 content = <div>
-                    <nav className="navbar navbar-expand-sm bg-white p-0 fixo">
+                    <nav className="navbar navbar-expand-sm bg-white p-0 fixo borderMenu">
                         <ul className="navbar-nav mRapidGlobal" style={{padding: '0.5rem!important'}}
                             id="llistaMenuRapid">
                             {allItems}
