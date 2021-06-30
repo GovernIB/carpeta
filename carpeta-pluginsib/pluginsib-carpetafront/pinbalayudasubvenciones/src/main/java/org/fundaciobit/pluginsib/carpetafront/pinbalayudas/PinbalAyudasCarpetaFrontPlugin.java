@@ -116,12 +116,7 @@ public class PinbalAyudasCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPl
             serveiRestService(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                     userData, administrationEncriptedID, locale, isGet);
             
-        } else if (query.startsWith(DOWNLOAD_JUSTIFICANT_SERVICE)) {
-        	
-        	 downloadJustificantService(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                    userData, administrationEncriptedID, locale, isGet);
-            
-        } else {
+        }  else {
 
             super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                     userData, administrationEncriptedID, locale, isGet, logCarpeta);
@@ -217,64 +212,6 @@ public class PinbalAyudasCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPl
 
     }
     
-    // --------------------------------------------------------------------------------------
-    // --------------------------------------------------------------------------------------
-    // ------------------- DOWNLOAD JUSTIFICANT PAGE (Cridades a PInbal) --------------------
-    // --------------------------------------------------------------------------------------
-    // --------------------------------------------------------------------------------------
-    
-    protected static final String DOWNLOAD_JUSTIFICANT_SERVICE = "obtenirJustificant";
-    
-    public static final String MIME_PDF = "application/pdf";
-    
-    public void getJustificantPage(String absolutePluginRequestPath, String numeroPeticion,
-            Locale locale, HttpServletRequest request, HttpServletResponse response) throws Exception {
-    	
-    	if(!numeroPeticion.isEmpty() && !"".equals(numeroPeticion)) {
-    		
-    		// TODO Comprobar permisos usuari autenticat
-        	ScspJustificante justificant = obtenirJustificant(numeroPeticion);
-        	
-        	if( justificant != null ) {
-
-        		OutputStream output;
-                response.setContentType(justificant.getContentType());
-                response.setHeader("Content-Disposition", getContentDispositionHeader(true, justificant.getNom()));
-                response.setContentLength((int) justificant.getLongitud());
-
-                output = response.getOutputStream();
-                output.write(justificant.getContingut());
-
-                output.flush();
-        	}
-    	}
-    	
-    }
-
-	public ScspJustificante obtenirJustificant(String numeroPeticion) throws Exception{
-		return getJustificant(numeroPeticion);
-	}
-    
-    public void downloadJustificantService(String absolutePluginRequestPath, String relativePluginRequestPath,
-            String query, HttpServletRequest request, HttpServletResponse response, UserData userData,
-            String administrationEncriptedID, Locale locale, boolean isGet) {
-    	
-    	try {
-    		
-    		response.setCharacterEncoding("utf-8");
-            response.setContentType("text/html");
-            
-            String numeroPeticion = request.getParameter("peticion");
-            
-            getJustificantPage(absolutePluginRequestPath, numeroPeticion, locale, request, response);
-    		
-    	}catch(Exception e) {
-    		
-    		log.error("Error obtenint justificant: " + e.getMessage(), e);
-    		
-    	}
-
-    }
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
@@ -393,14 +330,7 @@ public class PinbalAyudasCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPl
                 
                 datosAyuda.setDescripcion(dte.getRetorno().get(0).getEstado().get(0).getLiteralError());
                 
-                String peticionId = resposta.getAtributos().getIdPeticion();
                 
-                datosAyuda.setIdPeticion(peticionId);
-                
-                String justificantUrl = absolutePluginRequestPath + "/" + DOWNLOAD_JUSTIFICANT_SERVICE + "?peticion=" + peticionId;
-                
-                datosAyuda.setJustificanteUrl(justificantUrl);
-            	
             }else {
             	resposta = null;
             	datosAyuda.setError("Error servei. No hi ha resposta.");
@@ -498,8 +428,6 @@ public class PinbalAyudasCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPl
         protected String fecha = "";
         protected String codigo = "";
         protected String descripcion = "";
-        protected String idPeticion = "";
-        protected String justificanteUrl = "";
 
         public String getError() {
             return error;
@@ -549,28 +477,12 @@ public class PinbalAyudasCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPl
 			this.codigo = codigo;
 		}
 		
-		public String getIdPeticion() {
-			return idPeticion;
-		}
-
-		public void setIdPeticion(String idPeticion) {
-			this.idPeticion = idPeticion;
-		}
-		
 		public String getDescripcion() {
 			return descripcion;
 		}
 
 		public void setDescripcion(String descripcion) {
 			this.descripcion = descripcion;
-		}
-
-		public String getJustificanteUrl() {
-			return justificanteUrl;
-		}
-
-		public void setJustificanteUrl(String justificanteUrl) {
-			this.justificanteUrl = justificanteUrl;
 		}
 
 		public DatosAyudaSubvenciones() {
