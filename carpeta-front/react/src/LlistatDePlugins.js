@@ -125,7 +125,7 @@ class LlistatDePlugins extends Component {
         let urlBase = sessionStorage.getItem('contextPath')
 
         const baseSeccio = (this.props.seccioContext == 0) ? '' : Constants.SECCIO_PATH + this.props.seccioContext;
-        const styleDesc =  { fontSize: '85%', color: '#666', textAlign: 'center' } ;
+        const styleDesc =  { fontSize: '84%', color: '#666', textAlign: 'center' } ;
 
         let allItems = [];
 
@@ -151,7 +151,7 @@ class LlistatDePlugins extends Component {
                                                                                     alt={s.nom} title=""
                                                                                     className="imc-icona"/></span>
                                     <h3 className="apartat titolPlugin titol h3">{s.nom}</h3>
-                                    <span className="card-text mb-3 mt-3 alignCenter"
+                                    <span className="card-text alignCenter"
                                           style={styleDesc}>{s.descripcio}</span>
                                 </Link>
                             </div>
@@ -171,7 +171,7 @@ class LlistatDePlugins extends Component {
                                                                                     alt={s.nom} title=""
                                                                                     className="imc-icona"/></span>
                                     <span className="titolPlugin titol h3">{s.nom}</span>
-                                    <span className="card-text mb-3 mt-3 alignCenter"
+                                    <span className="card-text alignCenter"
                                           style={styleDesc}>{s.descripcio}</span>
                                 </Link>
                             </div>
@@ -186,7 +186,7 @@ class LlistatDePlugins extends Component {
                                     <span className="card-title titol pl-1 h3"><img src={s.urllogo} alt={s.nom} title=""
                                                                                     className="imc-icona"/></span>
                                     <h3 className="apartat titolPlugin titol h3">{s.nom}</h3>
-                                    <span className="card-text mb-3 mt-3 alignCenter"
+                                    <span className="card-text alignCenter"
                                           style={styleDesc}>{s.descripcio}</span>
                                 </Link>
                             </div>
@@ -201,7 +201,7 @@ class LlistatDePlugins extends Component {
                                     <span className="card-title titol pl-1 h3"><img src={s.urllogo} alt={s.nom} title=""
                                                                                     className="imc-icona"/></span>
                                     <h3 className="apartat titolPlugin titol h3">{s.nom}</h3>
-                                    <span className="card-text mb-3 mt-3 alignCenter"
+                                    <span className="card-text alignCenter"
                                           style={styleDesc}>{s.descripcio}</span>
                                 </button>
                             </div>
