@@ -619,6 +619,9 @@ a.imc-bt-xarxa:hover {
 .llistaEnllasos li a:hover{
 	color: #000;
 }
+.font15{
+	font-size: 15px;
+}
 
 #dadespinbalayudascontainer .descarregaJustificant { text-align:center; } 
 #dadespinbalayudascontainer .descarregaJustificant span.oi { font-size: 3rem; display:block; margin: 10px; }
