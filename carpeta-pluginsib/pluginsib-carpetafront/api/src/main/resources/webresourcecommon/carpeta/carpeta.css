@@ -602,6 +602,23 @@ a.imc-bt-xarxa:hover {
 	border-bottom: 1px solid lightgray;
 	border-radius: 0px;
 }
+.senseEstilLlista{
+	list-style: none;
+}
+.llistaEnllasos li{
+	background: #fff;
+	border: 1px solid lightgray;
+	padding: 1% 2%;
+	margin-bottom: 1%;
+	margin-right: 2%;
+	font-size: 14px;
+}
+.llistaEnllasos li a{
+	color: #cc073c;
+}
+.llistaEnllasos li a:hover{
+	color: #000;
+}
 
 #dadespinbalayudascontainer .descarregaJustificant { text-align:center; } 
 #dadespinbalayudascontainer .descarregaJustificant span.oi { font-size: 3rem; display:block; margin: 10px; }
