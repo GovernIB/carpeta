@@ -13,6 +13,7 @@ import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWsService;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -314,27 +315,38 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
         map.put("error", error);
         map.put("justificanteUrl", "");
         map.put("justificanteId", "");
+        map.put("justificantData", "");
+        map.put("justificantSenseGenerar", "");
+        map.put("justificantFileName","");
 
-        // Montamos la url de descarga del justificante
         String errorJustificant = "";
         if (registre.getJustificante() != null) {
+        	
             FileContentWs justificantRegistre = getAnnexeRegistre(registre.getJustificante().getFileID(),locale);
             if(justificantRegistre != null) {
-                justificantRegistre.setUrl(null);
+            	// Si retorna URL, es descarrega d'arxiu
                 if (justificantRegistre.getUrl() != null) {
                     map.put("justificanteUrl", justificantRegistre.getUrl());
                 } else {
-
-                    //TODO Aqui deberiamos enviar el FileInfo para que se lo descargue
-                    log.info(" JUSTIFICANTE ID " + justificantRegistre.getFileInfoWs().getFileID());
+                	// Es genera a filesystem i ens retorna Data.
                     map.put("justificanteId", justificantRegistre.getFileInfoWs().getFileID());
+                    if(justificantRegistre.getData() != null) {
+                    	map.put("justificantData", new String(Base64.getEncoder().encode(justificantRegistre.getData())));
+                    	map.put("justificantFileName", justificantRegistre.getFileInfoWs().getFilename());
+                    }else {
+                    	map.put("justificanteId", "");
+                    	map.put("justificantData", "");
+                        map.put("error",getTraduccio(RESOURCE_BUNDLE_NAME, "justificante.error.obteniendo", locale));
+                    }
                 }
             }else{
-                errorJustificant = getTraduccio(RESOURCE_BUNDLE_NAME, "justificante.error.obteniendo", locale);
+                errorJustificant = getTraduccio(RESOURCE_BUNDLE_NAME, "justificante.error.obteniendo", locale);                
                 map.put("error", errorJustificant);
             }
+        }else {
+        	map.put("justificantSenseGenerar", "true");
         }
-
+      
         String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
 
         return generat;
@@ -444,49 +456,49 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
         String errorJustificant = "";
         try { 
         	
-        if (justificantRegistre == null) {
-
-            response.setCharacterEncoding("utf-8");
-            response.setContentType("text/html");
-            errorJustificant = getTraduccio(RESOURCE_BUNDLE_NAME, "justificante.error.generando", locale);
-
-            String webpage = getDetallDeRegistrePage(absolutePluginRequestPath, numeroRegistroFormateado,
-                    administrationID, locale, errorJustificant);
-            try {
-                response.getWriter().println(webpage);
-                response.flushBuffer();
-
-            } catch (IOException e) {
-
-                try{
-                    errorPage(e.getLocalizedMessage(), e, request, response, locale);
-                    log.error("Error obtening writer: " + e.getMessage(), e);
-                }catch(Exception e2){
-                    log.error("Error mostrant pàgina d'error: " + e.getMessage(), e);
-                }
-            }
-        } else {
-
-            obtenerContentType(MIME_PDF, response, "justificant_" + numeroRegistroFormateado + ".pdf", null,
-                    justificantRegistre.getJustificante());
-        }
-        
-    } catch (Exception ex) {
-
-        try{
-        	
-        	StringBuilder peticio = new StringBuilder();
-            peticio.append("[REGWEBDETALLCOMPONENT] Error justificant").append("\n");
-            peticio.append("classe: ").append(getClass().getName()).append("\n");
-            peticio.append("Error: " + ex.getMessage()).append("\n");
-            logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error justificant", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error justificant"); 
-        	
-            errorPage(ex.getLocalizedMessage(), ex, request, response, locale);
-            log.error("Error detall registre: " + ex.getMessage(), ex);
-        }catch(Exception ex2){
-            log.error("Error mostrant pàgina d'error: " + ex2.getMessage(), ex2);
-        }
-    }
+	        if (justificantRegistre == null) {
+	
+	            response.setCharacterEncoding("utf-8");
+	            response.setContentType("text/html");
+	            errorJustificant = getTraduccio(RESOURCE_BUNDLE_NAME, "justificante.error.generando", locale);
+	
+	            String webpage = getDetallDeRegistrePage(absolutePluginRequestPath, numeroRegistroFormateado,
+	                    administrationID, locale, errorJustificant);
+	            try {
+	                response.getWriter().println(webpage);
+	                response.flushBuffer();
+	
+	            } catch (IOException e) {
+	
+	                try{
+	                    errorPage(e.getLocalizedMessage(), e, request, response, locale);
+	                    log.error("Error obtening writer: " + e.getMessage(), e);
+	                }catch(Exception e2){
+	                    log.error("Error mostrant pàgina d'error: " + e.getMessage(), e);
+	                }
+	            }
+	        } else {
+	
+	            obtenerContentType(MIME_PDF, response, "justificant_" + numeroRegistroFormateado + ".pdf", null,
+	                    justificantRegistre.getJustificante());
+	        }
+	        
+	    } catch (Exception ex) {
+	
+	        try{
+	        	
+	        	StringBuilder peticio = new StringBuilder();
+	            peticio.append("[REGWEBDETALLCOMPONENT] Error justificant").append("\n");
+	            peticio.append("classe: ").append(getClass().getName()).append("\n");
+	            peticio.append("Error: " + ex.getMessage()).append("\n");
+	            logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error justificant", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error justificant"); 
+	        	
+	            errorPage(ex.getLocalizedMessage(), ex, request, response, locale);
+	            log.error("Error detall registre: " + ex.getMessage(), ex);
+	        }catch(Exception ex2){
+	            log.error("Error mostrant pàgina d'error: " + ex2.getMessage(), ex2);
+	        }
+	    }
         
         
     }
@@ -573,47 +585,47 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 
         // Indicam si s'ha produit un error en obtenció de l'annexe
         String errorAnnexe = "";
-    try {
-    	
-        if (fileContentWs == null) {
-        	
-            response.setCharacterEncoding("utf-8");
-            response.setContentType("text/html");
-
-            errorAnnexe = getTraduccio(RESOURCE_BUNDLE_NAME, "annexo.error.obtenent", locale);
-            String webpage = getDetallDeRegistrePage(absolutePluginRequestPath, numeroRegistroFormateado,
-                    administrationID, locale, errorAnnexe);
-
-            try {
-                response.getWriter().println(webpage);
-                response.flushBuffer();
-
-            } catch (IOException e) {
-                log.error("Error obtening writer: " + e.getMessage(), e);
-            }
-
-        } else {
-
-            obtenerContentType(fileContentWs.getFileInfoWs().getMime(), response,
-                    fileContentWs.getFileInfoWs().getFilename(), null, fileContentWs.getData());
-        }
-        
-    } catch (Exception ex) {
-
-        try{
-        	
-        	StringBuilder peticio = new StringBuilder();
-            peticio.append("[REGWEBDETALLCOMPONENT] Error annexe").append("\n");
-            peticio.append("classe: ").append(getClass().getName()).append("\n");
-            peticio.append("Error: " + ex.getMessage()).append("\n");
-            logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error annexe", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error annexe"); 
-        	
-            errorPage(ex.getLocalizedMessage(), ex, request, response, locale);
-            log.error("Error detall registre: " + ex.getMessage(), ex);
-        }catch(Exception ex2){
-            log.error("Error mostrant pàgina d'error: " + ex2.getMessage(), ex2);
-        }
-    }
+	    try {
+	    	
+	        if (fileContentWs == null) {
+	        	
+	            response.setCharacterEncoding("utf-8");
+	            response.setContentType("text/html");
+	
+	            errorAnnexe = getTraduccio(RESOURCE_BUNDLE_NAME, "annexo.error.obtenent", locale);
+	            String webpage = getDetallDeRegistrePage(absolutePluginRequestPath, numeroRegistroFormateado,
+	                    administrationID, locale, errorAnnexe);
+	
+	            try {
+	                response.getWriter().println(webpage);
+	                response.flushBuffer();
+	
+	            } catch (IOException e) {
+	                log.error("Error obtening writer: " + e.getMessage(), e);
+	            }
+	
+	        } else {
+	
+	            obtenerContentType(fileContentWs.getFileInfoWs().getMime(), response,
+	                    fileContentWs.getFileInfoWs().getFilename(), null, fileContentWs.getData());
+	        }
+	        
+	    } catch (Exception ex) {
+	
+	        try{
+	        	
+	        	StringBuilder peticio = new StringBuilder();
+	            peticio.append("[REGWEBDETALLCOMPONENT] Error annexe").append("\n");
+	            peticio.append("classe: ").append(getClass().getName()).append("\n");
+	            peticio.append("Error: " + ex.getMessage()).append("\n");
+	            logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error annexe", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error annexe"); 
+	        	
+	            errorPage(ex.getLocalizedMessage(), ex, request, response, locale);
+	            log.error("Error detall registre: " + ex.getMessage(), ex);
+	        }catch(Exception ex2){
+	            log.error("Error mostrant pàgina d'error: " + ex2.getMessage(), ex2);
+	        }
+	    }
 
     }
 
