@@ -20,7 +20,7 @@
 		<!-- Logo i nom aplicació -->
 		<div class="navbar-brand menuGovern">
 			<div class="logoGovern">
-				<a href="http://www.fundaciobit.org"> <img
+				<a href="/carpetaback"> <img
 					src="<c:url value="/img/carpeta.png"/>"
 					alt="FundacioBit-Govern Digital" />
 				</a>

@@ -193,7 +193,7 @@ img:hover {
     padding-right: 0.5em;
 }
 .capsaPlugin{
-	height: 14rem;
+	height: 12rem;
 }
 .titolPlugin{
 	display: flow-root;
@@ -530,7 +530,7 @@ a.imc-bt-xarxa:hover {
 	padding-bottom: 1rem!important;
 }
 .descripcioCard{
-	font: normal 85% 'Noto Sans', 'TrebuchetMS', 'Trebuchet MS', Arial, Helvetica, sans-serif;
+	font: normal 84% 'Noto Sans', 'TrebuchetMS', 'Trebuchet MS', Arial, Helvetica, sans-serif;
 	color: rgb(102, 102, 102);
 	text-align: center;
 }
@@ -565,7 +565,7 @@ a.imc-bt-xarxa:hover {
 	border-width: 10px;
 }
 .apartat{
-	font-size: 1em !important;
+	font-size: 0.9em !important;
 }
 .iframeClass{
 	min-height: 300px;
@@ -601,6 +601,26 @@ a.imc-bt-xarxa:hover {
 .borderMenu{
 	border-bottom: 1px solid lightgray;
 	border-radius: 0px;
+}
+.senseEstilLlista{
+	list-style: none;
+}
+.llistaEnllasos li{
+	background: #fff;
+	border: 1px solid lightgray;
+	padding: 1% 2%;
+	margin-bottom: 1%;
+	margin-right: 2%;
+	font-size: 14px;
+}
+.llistaEnllasos li a{
+	color: #cc073c;
+}
+.llistaEnllasos li a:hover{
+	color: #000;
+}
+.font15{
+	font-size: 15px;
 }
 
 #dadespinbalayudascontainer .descarregaJustificant { text-align:center; } 

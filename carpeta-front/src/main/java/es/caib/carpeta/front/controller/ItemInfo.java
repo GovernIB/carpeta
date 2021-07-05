@@ -21,6 +21,7 @@ public class ItemInfo implements Comparable<ItemInfo> {
     public static final int TIPUS_ENLLAZ = 2;
     public static final int TIPUS_SECCIO = 3;
     public static final int TIPUS_PSEUDOPLUGIN = 4;
+    public static final int TIPUS_ENUNCLIC = 7;
 
     protected String id;
     protected String nom;
@@ -172,6 +173,12 @@ public class ItemInfo implements Comparable<ItemInfo> {
 
         return new ItemInfo(String.valueOf(e.getEnllazID()), e.getLabel(), e.getLabelDescription(), null,
                 TIPUS_PSEUDOPLUGIN, 0, null, e.getUrl(), e.getUrllogo(), e.getOrdre());
+    }
+
+    public static ItemInfo createFromEnunclic(EnllazInfo e) {
+
+        return new ItemInfo(String.valueOf(e.getEnllazID()), e.getLabel(), e.getLabelDescription(), null,
+                TIPUS_ENUNCLIC, 0, null, e.getUrl(), e.getUrllogo(), e.getOrdre());
     }
 
     @Override

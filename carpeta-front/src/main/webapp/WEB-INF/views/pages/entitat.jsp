@@ -137,13 +137,13 @@
                                     <div class="row mb-0">
 
                                         <c:forEach items="${entitats}" var="entitat" varStatus="index">
-                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
-                                                <button class="card col-md-12 align-items-lg-center capsaPlugin pt-3" onclick="location.href='<c:url value="/e/${entitat.codi}"/>'" tabindex=${100 + index.index}>
+                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0">
+                                                <button class="card col-md-12 align-items-lg-center capsaPlugin pt-3 alert" onclick="location.href='<c:url value="/e/${entitat.codi}"/>'" tabindex=${100 + index.index}>
                                                     <span class="card-title titol pl-1 h3">
                                                         <img src="<c:url value="/webui/entityicon/${entitat.entitatID}"/>" alt="${entitat.nom.getTraduccio(langActual).valor}" title="" class="imc-icona">
                                                     </span>
                                                     <h2 class="apartat titolPlugin titol h3 titolCentrat">${entitat.nom.getTraduccio(langActual).valor}</h2>
-                                                    <span class="card-text mb-3 mt-3 alignCenter"><i>${(empty entitat.descripcio)?'':entitat.descripcio.getTraduccio(langActual).valor}</i></span>
+                                                    <span class="card-text alignCenter"><i>${(empty entitat.descripcio)?'':entitat.descripcio.getTraduccio(langActual).valor}</i></span>
                                                 </button>
                                             </div>
                                         </c:forEach>
