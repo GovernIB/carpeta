@@ -1409,6 +1409,16 @@ public class WebUIController extends PluginFrontController {
                             items.add(ItemInfo.createFromPseuDoPlugin(enllazInfo));
                         }
                     }
+
+                    // Enllasos En un clic
+                    {
+                        int enllazType = Constants.TIPUS_ENLLAZ_FRONT_EN_UN_CLIC;
+                        List<EnllazInfo> enllasosEnunclic = getEnllazos(request, enllazType, seccioID, lang,
+                                codiEntitat);
+                        for (EnllazInfo enllazInfo : enllasosEnunclic) {
+                            items.add(ItemInfo.createFromEnunclic(enllazInfo));
+                        }
+                    }
                     
                     // seccions
                     {

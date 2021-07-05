@@ -179,13 +179,6 @@ class LlistatDePlugins extends Component {
                         );
                         break;
 */
-                    case 2: // Enllaz
-                        enllasos.push(<li key={i} className="col-md-5 float-left">
-                            <a href={s.url} title={s.nom} target="_blank" tabIndex={65+i} aria-labelledby={s.nom} aria-describedby={t('accedirEnllas') + s.nom}>
-                                <span>{s.nom}</span>
-                            </a>
-                        </li>);
-                        break;
 
                     case 3: // Seccio
                         allItems.push(
@@ -216,6 +209,14 @@ class LlistatDePlugins extends Component {
                             </div>
                         );
                         break;
+
+                    case 7: // Enllaz "En un clic"
+                        enllasos.push(<li key={i} className="col-md-5 float-left">
+                            <a href={s.url} title={s.nom} target="_blank" tabIndex={65+i} aria-labelledby={s.nom} aria-describedby={t('accedirEnllas') + s.nom}>
+                                <span>{s.nom}</span>
+                            </a>
+                        </li>);
+                        break;
                 }
             });
         }
@@ -234,6 +235,18 @@ class LlistatDePlugins extends Component {
                 titolHeader = seccio.nom;
                 subtitolHeader = seccio.descripcio;
             }
+        }
+
+        let titolEnunclic="";
+        let enllasosEnunclic="";
+        if(enllasos.length > 0){
+            titolEnunclic = <div className="h2 mt-4">{t('iniciPrivatEnllasos')}</div>;
+            enllasosEnunclic = <div className="col-md-12 border-0 pl-0 pr-0 llistaEnllasos">
+                <p className="lh15 subtitol">{t('iniciPrivatDescEnllas')}</p>
+                <ul className="lh15 pl-4 pt-3 subtitolInterior senseEstilLlista">
+                    {enllasos}
+                </ul>
+            </div>;
         }
 
         return (
@@ -258,13 +271,8 @@ class LlistatDePlugins extends Component {
 
                     </div>
 
-                    <div className="h2 mt-4">{t('iniciPrivatEnllasos')}</div>
-                    <div className="col-md-12 border-0 pl-0 pr-0 llistaEnllasos">
-                        <p className="lh15 subtitol">{t('iniciPrivatDescEnllas')}</p>
-                        <ul className="lh15 pl-4 pt-3 subtitolInterior senseEstilLlista">
-                            {enllasos}
-                        </ul>
-                    </div>
+                    {titolEnunclic}
+                    {enllasosEnunclic}
 
                 </div>
             </div>
