@@ -1425,7 +1425,11 @@ public class WebUIController extends PluginFrontController {
                         List<SeccioInfo> seccioInfo = getSeccionsInfo(request, seccioID, entitatID);
                         //fullInfo.put("seccions", seccioInfo);
                         for (SeccioInfo s : seccioInfo) {
-                            items.add(ItemInfo.createFromSeccioInfo(s));
+
+                            //seleccionar plugins que són d'aquesta secció
+                            List<PluginInfo> pluginsSeccio = utilsEjb.getFrontPlugins(entitatID, lang, s.seccioID, true);
+
+                            items.add(ItemInfo.createFromSeccioInfo(s, pluginsSeccio));
                         }
                     }
                 } 

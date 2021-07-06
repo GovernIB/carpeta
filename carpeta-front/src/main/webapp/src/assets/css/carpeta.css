@@ -388,6 +388,24 @@ img:hover {
 	display: contents;
 	color: #32814B;
 }
+.linkVerd{
+	color: #32814B;
+	font-size: 14px;
+	width: auto;
+}
+.linkVerd:active:focus:visited{
+	background-color: #fff !important;
+	text-decoration: none;
+	color: #000 !important;
+}
+.dropdown-item.active, .dropdown-item:active {
+	color: #000;
+	text-decoration: none;
+	background-color: #fff;
+}
+.maxCont{
+	width: max-content;
+}
 .botoSuport{
 	color: #cc073c;
 	padding: 0px;
