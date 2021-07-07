@@ -168,38 +168,40 @@
                     </div>
                     <div class="imc-peu-opcions">
                         <div class="pb-3 col2peu">
-                            <button type="button" id="dialogAjuda" data-toggle="modal" data-target="#ajudaModal" class="botoSuport" tabindex="200"><fmt:message key="entitats.ajuda"/></button>
+<%--                            <button type="button" id="dialogAjuda" data-toggle="modal" data-target="#ajudaModal" class="botoSuport" tabindex="200"><fmt:message key="entitats.ajuda"/></button>--%>
                         </div>
                     </div>
                     <div class="imc-peu-xarxes">
 
                     </div>
                 </div>
-                <div class="modal fade" id="ajudaModal" tabindex="-1" aria-labelledby="ajudaLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <p class="card-title titol h2"><fmt:message key="entitats.ajuda.titol"/></p>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <ul class="pl-3 ajuda">
-                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.suportweb1"/>  <a href='http://www.caib.es/sites/suportinformatic/es/inicio-5586/?campa=yes'><fmt:message key="entitats.ajuda.suportweb2"/></a></li>
-                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.telefon1"/>  <p class="text-verd"> <fmt:message key="entitats.ajuda.telefon2"/></p></li>
-                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.correu1"/>  <a href="mailto:'suport@caib.es'"><fmt:message key="entitats.ajuda.correu2"/></a></li>
-                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.faq1"/>  <a href="http://www.faq.com"><fmt:message key="entitats.ajuda.faq2"/></a></li>
-                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.consulta1"/>  <p class="text-verd"> <fmt:message key="entitats.ajuda.consulta2"/></p></li>
-                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.problemes1"/>  <p class="text-verd"> <fmt:message key="entitats.ajuda.problemes2"/></p></li>
-                                </ul>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="botoSuport" data-dismiss="modal" aria-label="Close"><fmt:message key="entitats.ajuda.tanca"/></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<%--                <div class="modal fade" id="ajudaModal" tabindex="-1" aria-labelledby="ajudaLabel" aria-hidden="true">--%>
+<%--                    <div class="modal-dialog">--%>
+<%--                        <div class="modal-content">--%>
+<%--                            <div class="modal-header">--%>
+<%--                                <p class="card-title titol h2"><fmt:message key="entitats.ajuda.titol"/></p>--%>
+<%--                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
+<%--                                    <span aria-hidden="true">×</span>--%>
+<%--                                </button>--%>
+<%--                            </div>--%>
+<%--                            <div class="modal-body">--%>
+<%--                                <ul class="pl-3 ajuda">--%>
+<%--                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.suportweb1"/>  <a href='http://www.caib.es/sites/suportinformatic/es/inicio-5586/?campa=yes'><fmt:message key="entitats.ajuda.suportweb2"/></a></li>--%>
+<%--                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.faq1"/>  <a href="http://www.faq.com"><fmt:message key="entitats.ajuda.faq2"/></a></li>--%>
+<%--                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.consulta1"/>  <a href=""><fmt:message key="entitats.ajuda.consulta2"/></p></li>--%>
+<%--                                    --%>
+<%--                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.telefon1"/>  <p class="text-verd"> <fmt:message key="entitats.ajuda.telefon2"/></p></li>--%>
+<%--                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.correu1"/>  <a href="mailto:'suport@caib.es'"><fmt:message key="entitats.ajuda.correu2"/></a></li>--%>
+<%--                                    --%>
+<%--                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.problemes1"/>  <p class="text-verd"> <fmt:message key="entitats.ajuda.problemes2"/></p></li>--%>
+<%--                                </ul>--%>
+<%--                            </div>--%>
+<%--                            <div class="modal-footer">--%>
+<%--                                <button type="button" class="botoSuport" data-dismiss="modal" aria-label="Close"><fmt:message key="entitats.ajuda.tanca"/></button>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
             </footer>
         </div>
 
