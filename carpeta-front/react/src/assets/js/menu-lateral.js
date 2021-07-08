@@ -214,8 +214,9 @@ $.fn.appMenu = function(opcions){
 
 imc_bt_menu
 	.appMenu()
-	.focusin(function() {
+	.click(function() {
 		$( ".imc-marc-menu").css("-webkit-transform", "translateX(-100%)");
+		$( ".imc-marc-menu").css("display", "block");
 	})
 
 // css scroll slim

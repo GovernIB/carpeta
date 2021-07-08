@@ -240,6 +240,7 @@
 	"accessibilitatWAI": "Descripción de la Web Accessibility Initiative Doble A",
 	"tancar": "Cerrar",
 	"menuHamburguesa": "Menú hamburguesa",
+	"menuHamburguesaTanca": "Cierra menú hamburguesa",
 
 	"error500plugin": "Error 500. No se puede acceder a algún plugin, revisar la configuración de los plugins."
 
