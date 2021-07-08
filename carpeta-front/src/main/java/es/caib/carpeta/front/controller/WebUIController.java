@@ -55,7 +55,7 @@ public class WebUIController extends PluginFrontController {
 
     public static final String ENTITAT_ICONA_PATH = "/entityicon";
 
-
+    public static final String ENTITAT_CUSTOM_CSS = "/customcss";
     
     /**
      * 
@@ -436,6 +436,25 @@ public class WebUIController extends PluginFrontController {
         }
 
     }
+    
+    
+    @RequestMapping(value = ENTITAT_CUSTOM_CSS + "/{entitatid}", method = RequestMethod.GET)
+    public void getCustomCss(@PathVariable("entitatid") String entitatid, HttpServletRequest request, HttpServletResponse response) {
+    	
+    	try {
+    		
+    		if(entitatid != null) {
+    			Long customCssEntitatId = utilsEjb.getCustomCssEntitat(entitatid);
+                if (customCssEntitatId != null)
+                	descarregaFitxer(response, customCssEntitatId);
+    		}
+    		
+    	} catch (Throwable e) {
+            processExceptionRest(e, request, response);
+        }
+    	
+    }
+    
 
     @RequestMapping(value = WEBUI_FAVICON_PATH + "/{entitatid}", method = RequestMethod.GET)
     public void getEntitatIcona(@PathVariable("entitatid") String entitatid, HttpServletRequest request, HttpServletResponse response) {

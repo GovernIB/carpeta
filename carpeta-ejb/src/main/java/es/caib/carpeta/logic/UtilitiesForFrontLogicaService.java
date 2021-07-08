@@ -48,6 +48,8 @@ public interface UtilitiesForFrontLogicaService {
     
     public Fitxer getFileInfo(Long fitxerID) throws I18NException;
     
+    public Long getCustomCssEntitat(String codiEntitat) throws I18NException;
+    
     public long getIconaEntitat(String codiEntitat) throws I18NException;
     
     public long getLogolateralEntitat(String codiEntitat) throws I18NException;

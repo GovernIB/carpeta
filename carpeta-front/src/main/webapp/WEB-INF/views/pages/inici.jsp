@@ -48,6 +48,8 @@
 	<link href="<c:url value="/src/assets/css/jquery.dataTables.min.css"/>" rel="stylesheet">
 	<link href="<c:url value="/src/assets/css/datatables.min.css"/>" rel="stylesheet">
 
+    <link href="${pageContext.request.contextPath}/webui/customcss/${entitat}" rel="stylesheet">
+
   </head>
 
   <body>

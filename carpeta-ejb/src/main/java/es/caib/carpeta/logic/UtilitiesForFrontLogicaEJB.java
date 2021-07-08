@@ -393,6 +393,11 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
     public long getIconaEntitat(String codiEntitat) throws I18NException {
         return entitatEjb.executeQueryOne(EntitatFields.ICONID, EntitatFields.CODI.equal(codiEntitat));
     }
+    
+    @Override
+    public Long getCustomCssEntitat(String codiEntitat) throws I18NException {
+        return entitatEjb.executeQueryOne(EntitatFields.FITXERCSSID, EntitatFields.CODI.equal(codiEntitat));
+    }
 
     @Override
     public long getLogolateralEntitat(String codiEntitat) throws I18NException {
