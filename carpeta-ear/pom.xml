@@ -140,6 +140,11 @@
 			<groupId>es.caib.carpeta</groupId>
 			<version>1.1.12</version>
 		</dependency>
+		<dependency>
+			<artifactId>carpeta-pluginsib-carpetafront-pinbalfamilia</artifactId>
+			<groupId>es.caib.carpeta</groupId>
+			<version>1.1.12</version>
+		</dependency>
 
 		<!-- ====================================== -->
 		<!-- ===== PLUGINS DE USERINFORMATION ===== -->

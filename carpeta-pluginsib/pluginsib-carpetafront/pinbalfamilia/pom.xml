@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>carpeta-pluginsib-carpetafront-pinbalfamilia</artifactId>
+
+    <name>Carpeta - PluginsIB - Carpeta Front - PINBAL familia numerosa</name>
+
+    <parent>
+        <groupId>es.caib.carpeta</groupId>
+        <artifactId>carpeta-pluginsib-carpetafront</artifactId>
+        <version>1.1.12</version>
+    </parent>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>es.caib.carpeta</groupId>
+            <version>1.1.12</version>
+            <artifactId>carpeta-pluginsib-carpetafront-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.fundaciobit.pluginsib.utils</groupId>
+            <artifactId>pluginsib-utils-templateengine</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+
+
+        <!-- PINBAL DADES -->
+        <!--   dependency>
+            <groupId>es.caib.carpeta</groupId>                
+            <artifactId>carpeta-pinbal-ws-client</artifactId>
+            <version>1.0.0</version>
+            <exclusions>
+            <exclusion>
+                <artifactId>junit</artifactId>
+                <groupId>junit</groupId>
+            </exclusion>
+            </exclusions>
+        </dependency -->
+        
+        <dependency>
+            <groupId>es.caib.pinbal</groupId>
+            <artifactId>pinbal-client</artifactId>
+            <version>1.4.24</version>
+            <exclusions>
+                <!-- evitar conflicte amb JAX-RS de JBoss -->
+                <exclusion>
+                    <groupId>javax.ws.rs</groupId>
+                    <artifactId>jsr311-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.0.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.26</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-common</artifactId>
+            <version>2.22.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
+            <version>2.3.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>2.3.2</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+</project>

@@ -23,6 +23,7 @@
         <module>regwebdetallcomponent</module>
 		<module>reprendretramitsistra</module>
 		<module>pinbalayudasubvenciones</module>
+		<module>pinbalfamilia</module>
     </modules>
 
     <dependencies>
