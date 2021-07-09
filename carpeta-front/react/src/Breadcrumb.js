@@ -76,6 +76,7 @@ class Breadcrumb extends Component {
 
 
                    this.setState({ items: [{ id: Constants.SECCIO_PATH + seccioContext, label: seccioNom }, { id: novaruta, label: pluginNom }] });
+                    document.title = pluginNom + " - " + i18n.t('menuTitol');
                 })
                 .catch(error => {
                     console.log(JSON.stringify(error));
@@ -114,6 +115,7 @@ class Breadcrumb extends Component {
                         .then(res => {
                             var pluginInfo = res.data;
                             this.setState({items: [{id: location.pathname, label: pluginInfo.nom}]})
+                            document.title = pluginInfo.nom + " - " + i18n.t('menuTitol');
                         })
                         .catch(error => {
                             console.log(JSON.stringify(error));
@@ -143,6 +145,7 @@ class Breadcrumb extends Component {
                                 var seccio = res.data;
                                 // console.log("BREADCRUMB ==> ACTUALITZANT STATE SECCIO ==> " + seccio.nom + " [" + seccio.context + "]");
                                 this.setState({ items: [{ id: '/seccio/' + seccio.context, label: seccio.nom }] });
+                                document.title = seccio.nom + " - " + i18n.t('menuTitol');
                             })
                             .catch(error => {
                                 console.log(JSON.stringify(error));
@@ -163,6 +166,7 @@ class Breadcrumb extends Component {
                         // Altre cosa ...
                         // console.log("BreadCRUMB ALTRE COSA : " + location.pathname);
                         this.setState({items: [{id: location.pathname, label: t(location.nomPagina)}]});
+                        document.title = t(location.nomPagina) + " - " + t('menuTitol');
                     }
                 }
             }

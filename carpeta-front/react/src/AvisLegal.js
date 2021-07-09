@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {withTranslation} from 'react-i18next';
 import ExpirarSessio from "./ExpirarSessio";
+import DocumentTitle from "react-document-title";
 
 
 class AvisLegal extends Component {
@@ -51,6 +52,9 @@ class AvisLegal extends Component {
 
         return (
             <div className="container-contenido" tabIndex="1">
+
+                <DocumentTitle title={t('peuAvis') + " - " + t('menuTitol')} />
+
                 {autenticat === '1' &&
                 <ExpirarSessio/>
                 }

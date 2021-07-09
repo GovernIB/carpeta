@@ -4,6 +4,7 @@ import i18n from 'i18next';
 import ExpirarSessio from "./ExpirarSessio";
 import {withRouter} from "react-router";
 import axios from "axios";
+import DocumentTitle from "react-document-title";
 
 class PluginHtml extends Component {
 
@@ -11,6 +12,7 @@ class PluginHtml extends Component {
         super();
         this.state = {
             contingut: '',
+            // pluginTitol: '',
             loading: true
         }
         this.canviatIdioma = this.canviatIdioma.bind(this);
@@ -35,6 +37,8 @@ class PluginHtml extends Component {
             .then(res => {
                 var pluginInfo = res.data;
                 sessionStorage.setItem("nomPlugin", pluginInfo.nom);
+                console.log("111: " + pluginInfo.nom);
+                // this.setState({ pluginTitol: pluginInfo.nom });
             })
             .catch(error => {
                 console.log(JSON.stringify(error));
@@ -78,6 +82,9 @@ class PluginHtml extends Component {
         console.log("PLUGIN HTML 222222  !!!!!!!");
 
         const { t } = this.props;
+
+        let titolPipella = sessionStorage.getItem("nomPlugin") + " - " + t('menuTitol');
+
         const pluginContext = this.props.match.params.pluginContext;
         console.log("PLUGIN HTML Context =" + pluginContext);
 
@@ -167,6 +174,7 @@ class PluginHtml extends Component {
 
         return (
             <div>
+                <DocumentTitle title={titolPipella} />
                 <ExpirarSessio />
                 <div id="substituir" />
             </div>

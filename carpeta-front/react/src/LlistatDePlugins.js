@@ -5,6 +5,7 @@ import axios from "axios";
 import {Link} from "react-router-dom";
 import {withRouter} from "react-router";
 import * as Constants from './Constants';
+import DocumentTitle from "react-document-title";
 
 /**
  * 
@@ -252,6 +253,8 @@ class LlistatDePlugins extends Component {
         return (
 
             <div className="row mr-0 ml-0">
+
+                <DocumentTitle title={i18n.t('pipellaAutenticat') + " - " + t('menuTitol')} />
 
                 <div className="infoNoMenu">
 

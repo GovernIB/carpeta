@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {withTranslation} from 'react-i18next';
 import ExpirarSessio from "./ExpirarSessio";
+import DocumentTitle from "react-document-title";
 
 class Accessibilitat extends Component {
 
@@ -19,6 +20,9 @@ class Accessibilitat extends Component {
 
         return (
             <div className="container-contenido" tabIndex="1">
+
+                <DocumentTitle title={t('menuAccessibilitat') + " - " + t('menuTitol')} />
+
                 {/*motlla*/}
                 {autenticat === '1' &&
                     <ExpirarSessio/>

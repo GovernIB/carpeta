@@ -5,6 +5,7 @@ import ExpirarSessio from "./ExpirarSessio";
 import {Link} from "react-router-dom";
 import i18n from 'i18next';
 import * as Constants from './Constants';
+import DocumentTitle from 'react-document-title';
 
 /**
  * @author Adaptació a fillInfo
@@ -147,6 +148,8 @@ class MapaWeb extends Component {
 
 		return (
 			<div className="container-contenido" tabIndex="1">
+
+				<DocumentTitle title={t('peuMapa') + " - " + t('menuTitol')} />
 	
 				{autenticat === '1' && <ExpirarSessio/>	}
 
