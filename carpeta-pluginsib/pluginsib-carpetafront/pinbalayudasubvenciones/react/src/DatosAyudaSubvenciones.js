@@ -17,10 +17,10 @@ class DatosAyudaSubvenciones extends Component {
         };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
 
         const url2 = this.props.pathtoservei;
-        axios.get(url2).then(res => {
+        await axios.get(url2).then(res => {
 
             // console.log(" AXIOS OK OK OK OK OK", res.data);
 

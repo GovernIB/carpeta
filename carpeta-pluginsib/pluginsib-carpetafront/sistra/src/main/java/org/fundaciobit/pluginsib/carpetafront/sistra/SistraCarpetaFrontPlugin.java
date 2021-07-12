@@ -8,8 +8,10 @@ import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.sistramit.rest.api.externa.v1.RFiltroTramitePersistencia;
+//import es.caib.sistramit.rest.api.externa.v1.RFiltroTramiteFinalizado;
 import es.caib.sistramit.rest.api.externa.v1.RInfoTicketAcceso;
 import es.caib.sistramit.rest.api.externa.v1.RTramitePersistencia;
+//import es.caib.sistramit.rest.api.externa.v1.RTramiteFinalizado;
 import es.caib.sistramit.rest.api.externa.v1.RUsuarioAutenticadoInfo;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.*;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitePersistente;
@@ -532,6 +534,32 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
                 }
             }
         }
+        
+        // tramiteFinalizado 
+        /*
+        final RFiltroTramiteFinalizado filtroTraFin = new RFiltroTramiteFinalizado();
+        filtroTraFin.setFechaDesde(fechaInicio);
+        filtroTraFin.setFechaHasta(DateUtils.sumarRestarDiasFecha(fechaFin, 1));
+        filtroTraFin.setNif(documento);
+        
+        List<RTramiteFinalizado> tramitesFinalizados = clientCaibTer
+        		.target(getPropertyRequired(SISTRA2_PROPERTY_BASE + "url") + "/tramiteFinalizado")
+        		.request(MediaType.APPLICATION_JSON).post(Entity.entity(filtroTraFin, MediaType.APPLICATION_JSON), 
+        				new GenericType<List<RTramiteFinalizado>>() {
+                });
+        
+        if(tramitesFinalizados != null || !tramitesFinalizados.isEmpty()) {
+        	for(RTramiteFinalizado tf : tramitesFinalizados) {
+        		if (finalizado.equals("A") || finalizado.equals("N")) {
+        			TramitePersistenteGenerico tpg = new TramitePersistenteGenerico(tf, 2);
+                    tpg.setUrl(absolutePluginRequestPath + "/" + DETALL_REGISTRE_PAGE + "?numeroRegistroFormateado="
+                        + tpg.getNumero());
+        			tramits.add(tpg);
+        		}
+        	}
+        }
+        */
+        
         return tramits;
     }
 
@@ -559,12 +587,14 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
                 log.info("tp.getVersionSistra() => " + tp.getVersionSistra());
                 log.info("tp.getUrl() => " + tp.getUrl());
                 log.info("tp.isPendiente() => " + tp.isPendiente());
+                log.info("tp.getNumero() => " + tp.getNumero());
                 x++;
             }
         }
         return tramits;
 
     }
+    
 
     private Client getClientBasicAuthenticator() throws Exception {
 

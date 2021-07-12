@@ -63,7 +63,7 @@ class Accessibilitat extends Component {
                         <p className="lh15 subtitolInterior">{t('accessibilitatPreparacio1')}</p>
                         <p className="lh15 subtitolInterior">{t('accessibilitatPreparacio2')}</p>
 
-                        <p className="titol h3">{t('accessibilitatObservacions')}</p>
+                        <h2 className="titol h2">{t('accessibilitatObservacions')}</h2>
                         <p className="lh15 subtitolInterior">{t('accessibilitatObservacions1')} <a
                             href="https://www.caib.es/sistrafront/sistrafront/inicio?language=ca&modelo=PD0018ENCW&version=1"
                             target="_blank" rel="noopener noreferrer" tabIndex="6" aria-labelledby={t('contacteAccess')} aria-describedby={t('accedirEnllas') + t('contacteAccess')}>{t('accessibilitatObservacions5')}</a>.</p>

@@ -18,7 +18,6 @@ class DadesPersonals extends Component {
         console.log('  RENDER DADES PERSONALS!!!!!');
 
         const { t } = this.props;
-
         
         const dades = this.props.dades;
 
@@ -30,7 +29,7 @@ class DadesPersonals extends Component {
 
             representant =  <div>
                             <br/>
-                            <h4>{t('representant')}</h4>
+                            <p className="titol h4">{t('representant')}</p>
                             <div className="col-md-12 border-0 float-left p-0">
                             <div className="card">
                                 <ul className="list-group list-group-flush">
@@ -51,7 +50,7 @@ class DadesPersonals extends Component {
                             </div>
                             </div>
                             </div>;
-            tipus=t('representat');
+            tipus=<p className="titol h4">{t('representat')}</p>;
 
         } else {
             representant = "";
@@ -64,7 +63,7 @@ class DadesPersonals extends Component {
         if (userData.business) {
             llinatge1 = "";
             llinatge2 = "";
-            tipus= t('empresa');
+            tipus= <p className="titol h4">{t('empresa')}</p>;
         } else {
             llinatge1 = <li className="list-group-item"><label
                             className="lh15">{t('dadespersonalsLlinatge1')}: &nbsp;</label><label
@@ -78,7 +77,7 @@ class DadesPersonals extends Component {
 
         return (
             <div className="infoNoMenu">
-                <h4>{tipus}</h4>
+                {tipus}
                 <div className="col-md-12 border-0 float-left p-0">
                     <div className="card">
                         <ul className="list-group list-group-flush">
