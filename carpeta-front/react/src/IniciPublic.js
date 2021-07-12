@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {withTranslation} from 'react-i18next';
 import i18n from 'i18next';
 import axios from "axios";
+import DocumentTitle from "react-document-title";
 
 /**
  * @author anadal Valors per defecte o html de l'entitat
@@ -57,6 +58,7 @@ class IniciPublic extends Component {
         var htmlCode;
 
         var baseURL = sessionStorage.getItem('contextPath');
+        let entitatNom = this.state.nomEntitat;
 
         if (this.state.error) {
             htmlCode = <div className="alert alert-danger" role="alert">{this.state.error}</div>;
@@ -70,7 +72,6 @@ class IniciPublic extends Component {
                 // console.log("  NO S'HA DEFINTI CODI HTML PER ENTITAT");
 
                 const {t} = this.props;
-                let entitatNom = this.state.nomEntitat;
                 //var contextPath = sessionStorage.getItem('contextPath');
 
                 htmlCode = <div className="row mr-0 ml-0">
@@ -155,6 +156,9 @@ class IniciPublic extends Component {
 
         return (
             <div className="container-contenido homePage">
+
+                <DocumentTitle title={i18n.t('menuTitol') + " - " + entitatNom} />
+
                 {htmlCode}
             </div>
         );

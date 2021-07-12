@@ -115,11 +115,11 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             pageNomunicacionsNotib(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
                     administrationEncriptedID, locale, isGet);
-        } else if (query.startsWith(NOTIFICACIONS_NOTIB_DETALL_PAGE)) {
+        } /*else if (query.startsWith(NOTIFICACIONS_NOTIB_DETALL_PAGE)) {
 
             notificacioNotibDetall(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
                     administrationEncriptedID, locale, isGet);
-        } else {
+        } */ else {
 
             super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                     userData, administrationEncriptedID, locale, isGet, logCarpeta);
@@ -467,7 +467,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             map.put("comunicacions", notificacions);
             
 
-            map.put("urldetallbase", absolutePluginRequestPath + "/" + NOTIFICACIONS_NOTIB_DETALL_PAGE);
+            //map.put("urldetallbase", absolutePluginRequestPath + "/" + NOTIFICACIONS_NOTIB_DETALL_PAGE);
+            map.put("urldetallbase", getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.url") + "#");
 
             // TRADUCCIONS
 

@@ -241,5 +241,7 @@
 	"menuHamburguesa": "Menú hamburguesa",
 	"menuHamburguesaTanca": "Tanca menú hamburguesa",
 
-	"error500plugin": "Error 500. No es pot accedir a qualque plugin, revisar la configuració dels plugins."
+	"error500plugin": "Error 500. No es pot accedir a qualque plugin, revisar la configuració dels plugins.",
+
+	"pipellaAutenticat": "Zona privada"
 }

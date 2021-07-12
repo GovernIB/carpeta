@@ -105,7 +105,7 @@ class MenuRapid extends Component {
                                         <Link className="navCarpeta dropdown-item linkVerd"
                                               to={{pathname: Constants.SECCIO_PATH + s.context + Constants.PLUGINREACT_PATH + p.context, nomPagina: "plugin"
                                               }} tabIndex={101 + i + j + 1} aria-labelledby={p.nom}
-                                              aria-describedby={t('accedirPlugin') + p.nom} key={100 + i + p}>
+                                              aria-describedby={t('accedirPlugin') + p.nom} key={100 + i + j + 1}>
                                             <img src={urlBase + "/pluginfront/pluginicon/" + p.pluginID + "/" + i18n.language + ""} alt={p.nom} title="" className="imc-icona"/>
                                             <span className="menuRapidView">{p.nom}</span>
                                         </Link>
@@ -115,7 +115,7 @@ class MenuRapid extends Component {
                                         <Link className="navCarpeta dropdown-item linkVerd"
                                               to={{pathname: Constants.SECCIO_PATH + s.context + Constants.PLUGINHTML_PATH + p.context, nomPagina: "plugin"
                                               }} tabIndex={101 + i + j + 1} aria-labelledby={p.nom}
-                                              aria-describedby={t('accedirPlugin') + p.nom} key={100 + i + p}>
+                                              aria-describedby={t('accedirPlugin') + p.nom} key={100 + i + j + 1}>
                                             <img src={urlBase + "/pluginfront/pluginicon/" + p.pluginID + "/" + i18n.language + ""} alt={p.nom} title="" className="imc-icona"/>
                                             <span className="menuRapidView">{p.nom}</span>
                                         </Link>

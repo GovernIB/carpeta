@@ -3,6 +3,7 @@ package org.fundaciobit.pluginsib.carpetafront.sistra;
 import java.util.Date;
 
 import es.caib.sistramit.rest.api.externa.v1.RTramitePersistencia;
+//import es.caib.sistramit.rest.api.externa.v1.RTramiteFinalizado;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementoExpediente;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.TipoElementoExpediente;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitePersistente;
@@ -152,7 +153,23 @@ public class TramitePersistenteGenerico {
 		this.mostraModal = false;
 		this.numero = "";
 	}
-	
+	/*
+	public TramitePersistenteGenerico(RTramiteFinalizado tramite, int versionSistra) {
+		this.idSesionTramitacion = tramite.getIdSesionTramitacion();
+		this.idioma = tramite.getIdioma();
+		this.idTramite = tramite.getIdTramite();
+		this.versionTramite = tramite.getVersionTramite();
+		this.descripcionTramite = tramite.getDescripcionTramite();
+		this.fechaInicio = tramite.getFechaFin();
+		this.fechaUltimoAcceso = tramite.getFechaFin();
+		this.versionSistra = versionSistra;
+		this.pendiente = false;
+		this.url = "";
+		this.tipo = null;
+		this.mostraModal = false;
+		this.numero = tramite.getNumeroRegistro();
+	}
+	*/
 	public TramitePersistenteGenerico(TramitePersistente tramite, int versionSistra) {
 		this.idSesionTramitacion = tramite.getIdSesionTramitacion();
 		this.idioma = tramite.getIdioma();
