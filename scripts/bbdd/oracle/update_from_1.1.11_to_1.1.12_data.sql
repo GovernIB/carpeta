@@ -11,7 +11,7 @@ INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (10
 INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (101, 'es', 'Este servicio permite consultar los datos de familia numerosa.');
 
 
-INSERT INTO car_plugin (pluginid, nomid, classe, tipus, propietats, actiu, descripcioid, logoid, context) VALUES (91, 100, 'org.fundaciobit.pluginsib.carpetafront.pinbalfamilia.PinbalFamiliaCarpetaFrontPlugin', 1, '# Class => org.fundaciobit.pluginsib.carpetafront.pinbalfamilia.PinbalFamiliaCarpetaFrontPlugin
+INSERT INTO car_plugin (pluginid, nomid, classe, tipus, propietats, actiu, descripcioid, logoid, context) VALUES (92, 100, 'org.fundaciobit.pluginsib.carpetafront.pinbalfamilia.PinbalFamiliaCarpetaFrontPlugin', 1, '# Class => org.fundaciobit.pluginsib.carpetafront.pinbalfamilia.PinbalFamiliaCarpetaFrontPlugin
 
 es.caib.carpeta.pluginsib.carpetafront.pinbalfamilia.baseurl=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.baseurl"]]
 es.caib.carpeta.pluginsib.carpetafront.pinbalfamilia.username=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.username"]]
