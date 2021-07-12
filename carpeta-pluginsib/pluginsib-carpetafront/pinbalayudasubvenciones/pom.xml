@@ -4,21 +4,21 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>carpeta-pluginsib-carpetafront-pinbalayudasubvenciones</artifactId>
+    <artifactId>carpeta-pluginsib-carpetafront-pinbalayudas</artifactId>
 
     <name>Carpeta - PluginsIB - Carpeta Front - PINBAL Ayuda Subvenciones</name>
 
     <parent>
         <groupId>es.caib.carpeta</groupId>
         <artifactId>carpeta-pluginsib-carpetafront</artifactId>
-        <version>1.1.11</version>
+        <version>1.1.12</version>
     </parent>
 
     <dependencies>
 
         <dependency>
             <groupId>es.caib.carpeta</groupId>
-            <version>1.1.11</version>
+            <version>1.1.12</version>
             <artifactId>carpeta-pluginsib-carpetafront-api</artifactId>
         </dependency>
 

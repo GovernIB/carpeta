@@ -5,6 +5,9 @@ import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.front.controller.WebUIController.EnllazInfo;
 import es.caib.carpeta.front.controller.WebUIController.SeccioInfo;
 import es.caib.carpeta.logic.utils.PluginInfo;
+import es.caib.carpeta.model.entity.Plugin;
+
+import java.util.List;
 
 
 /**
@@ -21,6 +24,7 @@ public class ItemInfo implements Comparable<ItemInfo> {
     public static final int TIPUS_ENLLAZ = 2;
     public static final int TIPUS_SECCIO = 3;
     public static final int TIPUS_PSEUDOPLUGIN = 4;
+    public static final int TIPUS_ENUNCLIC = 7;
 
     protected String id;
     protected String nom;
@@ -31,6 +35,7 @@ public class ItemInfo implements Comparable<ItemInfo> {
     protected String missatge;
     protected String url;
     protected String urllogo;
+    protected List<PluginInfo> plugins;
 
     protected int order;
 
@@ -47,6 +52,22 @@ public class ItemInfo implements Comparable<ItemInfo> {
         this.url = url;
         this.urllogo = urllogo;
         this.order = order;
+    }
+
+    public ItemInfo(String id, String nom, String descripcio, String context, int tipus, int gravetat, String missatge,
+                    String url, String urllogo, int order, List<PluginInfo> plugins) {
+        super();
+        this.id = id;
+        this.nom = nom;
+        this.descripcio = descripcio;
+        this.context = context;
+        this.tipus = tipus;
+        this.gravetat = gravetat;
+        this.missatge = missatge;
+        this.url = url;
+        this.urllogo = urllogo;
+        this.order = order;
+        this.plugins = plugins;
     }
 
     public String getId() {
@@ -154,12 +175,12 @@ public class ItemInfo implements Comparable<ItemInfo> {
 
     }
 
-    public static ItemInfo createFromSeccioInfo(SeccioInfo s) {
+    public static ItemInfo createFromSeccioInfo(SeccioInfo s, List<PluginInfo> pluginsSeccio) {
         // long seccioID, String nom, String descripcio, String context, String iconaID)
         // {
 
         return new ItemInfo(String.valueOf(s.getSeccioID()), s.getNom(), s.getDescripcio(), s.getContext(),
-                TIPUS_SECCIO, 0, null, null, s.getIconaID(), s.getOrdre());
+                TIPUS_SECCIO, 0, null, null, s.getIconaID(), s.getOrdre(), pluginsSeccio);
     }
 
     public static ItemInfo createFromEnllazInfo(EnllazInfo e) {
@@ -172,6 +193,12 @@ public class ItemInfo implements Comparable<ItemInfo> {
 
         return new ItemInfo(String.valueOf(e.getEnllazID()), e.getLabel(), e.getLabelDescription(), null,
                 TIPUS_PSEUDOPLUGIN, 0, null, e.getUrl(), e.getUrllogo(), e.getOrdre());
+    }
+
+    public static ItemInfo createFromEnunclic(EnllazInfo e) {
+
+        return new ItemInfo(String.valueOf(e.getEnllazID()), e.getLabel(), e.getLabelDescription(), null,
+                TIPUS_ENUNCLIC, 0, null, e.getUrl(), e.getUrllogo(), e.getOrdre());
     }
 
     @Override

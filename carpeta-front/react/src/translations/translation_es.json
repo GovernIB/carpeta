@@ -193,6 +193,8 @@
 	
 	
 	"iniciPrivatTitol": "INICIO PRIVADO",
+	"iniciPrivatEnllasos": "EN UN CLIC",
+	"iniciPrivatDescEnllas": "Enlaces rápidos y directos para la ciudadanía.",
 
 	"suportTanca": "Cierra",
 	"suportAqui": "Consulte nuestra ayuda",
@@ -200,12 +202,14 @@
 	"suportTitol": "¿Necesitas ayuda?",
 	"suportPer": "Para ",
 	"suportCrida": "Llame al teléfono ",
-	"suportConsulta": "Consulte nuestro apartado ",
+	"suportConsulta": "Consulte el ",
+	"suportConsultaFAQ": "Consulta las ",
 	"suportMail": "Envíe un correo a ",
-	"suportWeb": "Soporte Web",
-	"suportFAQ": "Preguntas Frecuentes (FAQ)",
-	"suportConsultaTecnica": "Háganos llegar su consulta técnica ",
-	"suportAutenticacio": "Problemas relacionados con la autenticación: ",
+	"suportWeb": "soporte Web",
+	"suportFAQ": "preguntas frecuentes (FAQ)",
+	"suportConsultaTecnica": "Háganos llegar su ",
+	"suportConsultaTecnicaEnllas": "consulta técnica",
+	"suportAutenticacio": "Problemas relacionados con la autenticación, llama al ",
 
 	"sessioAvisDescripcio": "Su sesión finalizará en 30 segundos. ¿Quiere continuar la sesión?",
 	"sessioAvisTitol": "Información Expiración Sesión",
@@ -228,6 +232,7 @@
 	"accedirSeccio": "Acceder a la sección ",
 	"accedirEntitat": "Acceder a la entidad ",
 	"accedirIdioma": "Acceder al idioma ",
+	"accedirTelefon": "Accedir al teléfono ",
 	"enviarMail": "Enviar mail a ",
 	"tancarAvis": "Cerrar aviso",
 	"tancarAjuda": "Cerrar soporte",
@@ -235,7 +240,10 @@
 	"accessibilitatWAI": "Descripción de la Web Accessibility Initiative Doble A",
 	"tancar": "Cerrar",
 	"menuHamburguesa": "Menú hamburguesa",
+	"menuHamburguesaTanca": "Cierra menú hamburguesa",
 
-	"error500plugin": "Error 500. No se puede acceder a algún plugin, revisar la configuración de los plugins."
+	"error500plugin": "Error 500. No se puede acceder a algún plugin, revisar la configuración de los plugins.",
+
+	"pipellaAutenticat": "Zona privada"
 
 }

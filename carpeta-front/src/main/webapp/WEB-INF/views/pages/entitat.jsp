@@ -69,7 +69,7 @@
         <div>
             <header class="imc-titol">
                 <nav class="imc--contingut">
-                    <h1><span class="text-uppercase"><fmt:message key="entitats.carpeta"/></span></h1>
+                    <h1><a class="titolAplicacio" tabindex="9" aria-labelledby="<fmt:message key="accesInici"/>" aria-describedby="<fmt:message key="enllasInici"/>" href="${pageContext.request.contextPath}"><fmt:message key="entitats.carpeta"/></a></h1>
                     <ul>
                         <li><button type="button" class="imc-bt-menu" id="imc-bt-menu" title="<fmt:message key="entitats.menu"/>" tabindex="10"></button></li>
                     </ul>
@@ -131,19 +131,19 @@
                 <div class="container-contenido homePage">
                     <div class="row mr-0 ml-0">
                         <div class="infoNoMenu">
-                            <p class="lh15"><fmt:message key="entitats.llista"/></p>
+                            <p class="lh15 subtitol"><fmt:message key="entitats.llista"/></p>
                             <div class="col-md-12 border-0 float-left pt-3 pl-0">
                                 <div class="card-body imc--llista--capses">
                                     <div class="row mb-0">
 
                                         <c:forEach items="${entitats}" var="entitat" varStatus="index">
-                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
-                                                <button class="card col-md-12 align-items-lg-center capsaPlugin pt-3" onclick="location.href='<c:url value="/e/${entitat.codi}"/>'" tabindex=${100 + index.index}>
+                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0">
+                                                <button class="card col-md-12 align-items-lg-center capsaPlugin pt-3 alert" onclick="location.href='<c:url value="/e/${entitat.codi}"/>'" tabindex=${100 + index.index}>
                                                     <span class="card-title titol pl-1 h3">
                                                         <img src="<c:url value="/webui/entityicon/${entitat.entitatID}"/>" alt="${entitat.nom.getTraduccio(langActual).valor}" title="" class="imc-icona">
                                                     </span>
                                                     <h2 class="apartat titolPlugin titol h3 titolCentrat">${entitat.nom.getTraduccio(langActual).valor}</h2>
-                                                    <span class="card-text mb-3 mt-3 alignCenter"><i>${(empty entitat.descripcio)?'':entitat.descripcio.getTraduccio(langActual).valor}</i></span>
+                                                    <span class="card-text alignCenter"><i>${(empty entitat.descripcio)?'':entitat.descripcio.getTraduccio(langActual).valor}</i></span>
                                                 </button>
                                             </div>
                                         </c:forEach>
@@ -168,38 +168,40 @@
                     </div>
                     <div class="imc-peu-opcions">
                         <div class="pb-3 col2peu">
-                            <button type="button" id="dialogAjuda" data-toggle="modal" data-target="#ajudaModal" class="botoSuport" tabindex="200"><fmt:message key="entitats.ajuda"/></button>
+<%--                            <button type="button" id="dialogAjuda" data-toggle="modal" data-target="#ajudaModal" class="botoSuport" tabindex="200"><fmt:message key="entitats.ajuda"/></button>--%>
                         </div>
                     </div>
                     <div class="imc-peu-xarxes">
 
                     </div>
                 </div>
-                <div class="modal fade" id="ajudaModal" tabindex="-1" aria-labelledby="ajudaLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <p class="card-title titol h2"><fmt:message key="entitats.ajuda.titol"/></p>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <ul class="pl-3 ajuda">
-                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.suportweb1"/>  <a href='http://www.caib.es/sites/suportinformatic/es/inicio-5586/?campa=yes'><fmt:message key="entitats.ajuda.suportweb2"/></a></li>
-                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.telefon1"/>  <p class="text-verd"> <fmt:message key="entitats.ajuda.telefon2"/></p></li>
-                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.correu1"/>  <a href="mailto:'suport@caib.es'"><fmt:message key="entitats.ajuda.correu2"/></a></li>
-                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.faq1"/>  <a href="http://www.faq.com"><fmt:message key="entitats.ajuda.faq2"/></a></li>
-                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.consulta1"/>  <p class="text-verd"> <fmt:message key="entitats.ajuda.consulta2"/></p></li>
-                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.problemes1"/>  <p class="text-verd"> <fmt:message key="entitats.ajuda.problemes2"/></p></li>
-                                </ul>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="botoSuport" data-dismiss="modal" aria-label="Close"><fmt:message key="entitats.ajuda.tanca"/></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<%--                <div class="modal fade" id="ajudaModal" tabindex="-1" aria-labelledby="ajudaLabel" aria-hidden="true">--%>
+<%--                    <div class="modal-dialog">--%>
+<%--                        <div class="modal-content">--%>
+<%--                            <div class="modal-header">--%>
+<%--                                <p class="card-title titol h2"><fmt:message key="entitats.ajuda.titol"/></p>--%>
+<%--                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
+<%--                                    <span aria-hidden="true">×</span>--%>
+<%--                                </button>--%>
+<%--                            </div>--%>
+<%--                            <div class="modal-body">--%>
+<%--                                <ul class="pl-3 ajuda">--%>
+<%--                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.suportweb1"/>  <a href='http://www.caib.es/sites/suportinformatic/es/inicio-5586/?campa=yes'><fmt:message key="entitats.ajuda.suportweb2"/></a></li>--%>
+<%--                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.faq1"/>  <a href="http://www.faq.com"><fmt:message key="entitats.ajuda.faq2"/></a></li>--%>
+<%--                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.consulta1"/>  <a href=""><fmt:message key="entitats.ajuda.consulta2"/></p></li>--%>
+<%--                                    --%>
+<%--                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.telefon1"/>  <p class="text-verd"> <fmt:message key="entitats.ajuda.telefon2"/></p></li>--%>
+<%--                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.correu1"/>  <a href="mailto:'suport@caib.es'"><fmt:message key="entitats.ajuda.correu2"/></a></li>--%>
+<%--                                    --%>
+<%--                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.problemes1"/>  <p class="text-verd"> <fmt:message key="entitats.ajuda.problemes2"/></p></li>--%>
+<%--                                </ul>--%>
+<%--                            </div>--%>
+<%--                            <div class="modal-footer">--%>
+<%--                                <button type="button" class="botoSuport" data-dismiss="modal" aria-label="Close"><fmt:message key="entitats.ajuda.tanca"/></button>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
             </footer>
         </div>
 

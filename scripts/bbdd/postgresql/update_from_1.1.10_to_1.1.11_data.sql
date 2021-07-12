@@ -36,28 +36,28 @@ INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (99
 INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (99, 'es', 'Este servicio permite obtener los datos de la situación del estado de deuda del ciudadano o empresa.');
 
 
-INSERT INTO public.car_plugin (pluginid, nomid, classe, tipus, propietats, actiu, descripcioid, logoid, context) VALUES (91, 98, 'org.fundaciobit.pluginsib.carpetafront.pinbalayudasubvenciones.PinbalAyudaSubvencionesCarpetaFrontPlugin', 1, '# Class => org.fundaciobit.pluginsib.carpetafront.pinbalayudasubvenciones.PinbalAyudaSubvencionesCarpetaFrontPlugin
+INSERT INTO public.car_plugin (pluginid, nomid, classe, tipus, propietats, actiu, descripcioid, logoid, context) VALUES (91, 98, 'org.fundaciobit.pluginsib.carpetafront.pinbalayudas.PinbalAyudasCarpetaFrontPlugin', 1, '# Class => org.fundaciobit.pluginsib.carpetafront.pinbalayudas.PinbalAyudasCarpetaFrontPlugin
 
-es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.baseurl=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.baseurl"]]
-es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.username=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.username"]]
-es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.password=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.password"]]
+es.caib.carpeta.pluginsib.carpetafront.pinbalayudas.baseurl=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.baseurl"]]
+es.caib.carpeta.pluginsib.carpetafront.pinbalayudas.username=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.username"]]
+es.caib.carpeta.pluginsib.carpetafront.pinbalayudas.password=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.password"]]
 
-es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.codicertificat=SVDCCAACPASWS01
+es.caib.carpeta.pluginsib.carpetafront.pinbalayudas.codicertificat=SVDCCAACPASWS01
 
-es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.codiprocediment=CODSVDR_GBA_20121107
-es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.finalitat=Consulta estar al corrent de pagament a CAIB
-es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.identificadorsolicitant=S0711001H
-es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.unitattramitadora=Servei d''escolarització
+es.caib.carpeta.pluginsib.carpetafront.pinbalayudas.codiprocediment=CODSVDR_GBA_20121107
+es.caib.carpeta.pluginsib.carpetafront.pinbalayudas.finalitat=Consulta estar al corrent de pagament a CAIB
+es.caib.carpeta.pluginsib.carpetafront.pinbalayudas.identificadorsolicitant=S0711001H
+es.caib.carpeta.pluginsib.carpetafront.pinbalayudas.unitattramitadora=Servei d''escolarització
 
-es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.codigoprovincia=07
-es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.codigocomunidadautonoma=04
+es.caib.carpeta.pluginsib.carpetafront.pinbalayudas.codigoprovincia=07
+es.caib.carpeta.pluginsib.carpetafront.pinbalayudas.codigocomunidadautonoma=04
 
 # Necessari en DEV i PRE. NO es fan cridades reals sinó d,un joc de proves
 # Exemples:   - 30000056Y, FUSTER
 #             - 41107605G, JAUME
-es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.testnif=30000056Y
-es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.testsurname=FUSTER
+es.caib.carpeta.pluginsib.carpetafront.pinbalayudas.testnif=30000056Y
+es.caib.carpeta.pluginsib.carpetafront.pinbalayudas.testsurname=FUSTER
 
-es.caib.carpeta.pluginsib.carpetafront.pinbalsubvenciones.development=true', true, 99, NULL, 'ajudasubvencions');
+es.caib.carpeta.pluginsib.carpetafront.pinbalayudas.development=true', true, 99, NULL, 'ajudasubvencions');
 
 COMMIT;

@@ -1,4 +1,4 @@
-package org.fundaciobit.pluginsib.carpetafront.pinbalayudasubvenciones.model;
+package org.fundaciobit.pluginsib.carpetafront.pinbalfamilia.model;
 
 import java.util.ArrayList;
 

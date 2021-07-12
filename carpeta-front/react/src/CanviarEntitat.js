@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {withTranslation} from 'react-i18next';
 import i18n from 'i18next';
 import axios from "axios";
+import DocumentTitle from "react-document-title";
 
 class CanviarEntitat extends Component {
 
@@ -59,8 +60,8 @@ class CanviarEntitat extends Component {
             var baseURL = sessionStorage.getItem('contextPath');
 
             content = entities.map((s, i) => (
-                <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 mb-5 pl-0">
-                    <a className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}
+                <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0">
+                    <a className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert`}
                        href={baseURL + "/e/" + s.codi} tabIndex={1+i} aria-labelledby={s.nom} aria-describedby={t('accedirEntitat') + s.nom}>
                         <span className="card-title titol pl-1 h3">
                             <img src={s.urlIcona} title={s.nom} alt={s.nom} className="imc-icona"/>
@@ -76,6 +77,8 @@ class CanviarEntitat extends Component {
         return (
             <div className="row mr-0 ml-0">
 
+                <DocumentTitle title={i18n.t('breadcrumbCanviarEntitat') + " - " + t('menuTitol')} />
+
                 <div className="infoNoMenu">
 
                     <h2 className="titol h2">{t('canviarEntitatTitol')}</h2>
@@ -83,7 +86,7 @@ class CanviarEntitat extends Component {
                     <div className="col-md-12 border-0 pl-0 pr-0">
 
 
-                        <p className="lh15">{t('canviarEntitatDescripcio')}</p>
+                        <p className="lh15 subtitol">{t('canviarEntitatDescripcio')}</p>
 
                         <div className="card-body imc--llista--capses">
 

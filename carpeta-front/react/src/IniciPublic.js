@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {withTranslation} from 'react-i18next';
 import i18n from 'i18next';
 import axios from "axios";
+import DocumentTitle from "react-document-title";
 
 /**
  * @author anadal Valors per defecte o html de l'entitat
@@ -57,6 +58,7 @@ class IniciPublic extends Component {
         var htmlCode;
 
         var baseURL = sessionStorage.getItem('contextPath');
+        let entitatNom = this.state.nomEntitat;
 
         if (this.state.error) {
             htmlCode = <div className="alert alert-danger" role="alert">{this.state.error}</div>;
@@ -70,7 +72,6 @@ class IniciPublic extends Component {
                 // console.log("  NO S'HA DEFINTI CODI HTML PER ENTITAT");
 
                 const {t} = this.props;
-                let entitatNom = this.state.nomEntitat;
                 //var contextPath = sessionStorage.getItem('contextPath');
 
                 htmlCode = <div className="row mr-0 ml-0">
@@ -80,7 +81,7 @@ class IniciPublic extends Component {
                         <div className="col-md-5 border-0 float-left p-0">
                             <h3 className="apartat titol h5 margen-top-clave"><span
                                 className="oi oi-person"/>{t('paginaIniciQuefer')}</h3>
-                            <ul className="lh15 pl-5 pt-3">
+                            <ul className="lh15 pl-5 pt-3 subtitolSuperior">
                                 <li><span className="oi oi-arrow-right"/>{t('paginaIniciQuefer1')}</li>
                                 <li><span className="oi oi-arrow-right"/>{t('paginaIniciQuefer2')}</li>
                                 <li><span className="oi oi-arrow-right"/>{t('paginaIniciQuefer3')}</li>
@@ -90,7 +91,7 @@ class IniciPublic extends Component {
                             <h3 className="apartat titol h5 margen-top-clave"><span
                                 className="oi oi-account-login"/>{t('paginaIniciAcces')}</h3>
 
-                            <p className="lh15">{t('paginaIniciClave')}</p>
+                            <p className="lh15 subtitolInterior">{t('paginaIniciClave')}</p>
 
                             <div className="row">
                                 <div className="pt-3 col-5">
@@ -100,7 +101,7 @@ class IniciPublic extends Component {
                                     </a>
                                 </div>
                                 <div className="pt-3 col-5">
-                                    <ul className="lh15 pt-3 opcionesAcceso">
+                                    <ul className="lh15 pt-3 opcionesAcceso subtitolInterior">
                                         <li><span className="oi oi-arrow-right"/>{t('paginaIniciClave1')}</li>
                                         <li><span className="oi oi-arrow-right"/>{t('paginaIniciClave2')}</li>
                                         <li><span className="oi oi-arrow-right"/>{t('paginaIniciClave3')}</li>
@@ -125,12 +126,12 @@ class IniciPublic extends Component {
                             </p>
 
                             <h3 className="apartat titol h5">{t('tramitacioAnonimaTitol')}</h3>
-                            <p className="lh15 pb-3"><a href={baseURL + '/#/publicmoduls/reprendretramit'} id="tramitacioModalBtn" tabIndex="3" aria-labelledby={t('tramitacioEnllaz')} aria-describedby={t('accedirEnllas') + t('tramitacioEnllaz')}><span
+                            <p className="lh15 pb-3 subtitolSuperior"><a href={baseURL + '/#/publicmoduls/reprendretramit'} id="tramitacioModalBtn" tabIndex="3" aria-labelledby={t('tramitacioEnllaz')} aria-describedby={t('accedirEnllas') + t('tramitacioEnllaz')}><span
                                 className="oi oi-external-link"/>{t('tramitacioEnllaz')}</a></p>
 
                             <h3 className="apartat titol h5">{t('paginaIniciProblemes')}</h3>
-                            <p className="lh15">{t('paginaIniciAjuda')}</p>
-                            <ul className="lh15 pl-5 pt-3">
+                            <p className="lh15 subtitolInterior">{t('paginaIniciAjuda')}</p>
+                            <ul className="lh15 pl-5 pt-3 subtitolInterior">
                                 <li><span className="oi oi-arrow-right"/> {t('paginaIniciAjuda1')} <a
                                     href="http://clave.gob.es/clave_Home/clave.html"
                                     title={t('paginaIniciAjudaClaveText')}
@@ -155,6 +156,9 @@ class IniciPublic extends Component {
 
         return (
             <div className="container-contenido homePage">
+
+                <DocumentTitle title={i18n.t('menuTitol') + " - " + entitatNom} />
+
                 {htmlCode}
             </div>
         );

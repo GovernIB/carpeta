@@ -10,7 +10,23 @@ a:hover{
 	text-decoration: none;
 }
 .h2, h2{
-	font-size: 1.1em !important;
+	font-size: 1em !important;
+}
+.subtitol{
+	font-size: 15px;
+	margin-top: 2%;
+	margin-bottom: 1%;
+}
+.subtitolSuperior{
+	font-size: 15px;
+	margin-top: 2%;
+}
+.subtitolInferior{
+	font-size: 15px;
+	margin-bottom: 1%;
+}
+.subtitolInterior{
+	font-size: 15px;
 }
 .form-control:focus{
 	border-color:#32814B;
@@ -165,8 +181,8 @@ img:hover {
 	text-transform: uppercase;
 	padding-right: 1em;
 }
-.estilUsuari, .nivellAut { 
-	font-size: 1.1rem;
+.estilUsuari, .nivellAut {
+	font-size: 0.9rem;
 }
 .usuari{
 	top: 2.5em;
@@ -177,7 +193,7 @@ img:hover {
     padding-right: 0.5em;
 }
 .capsaPlugin{
-	height: 14rem;
+	height: 12rem;
 }
 .titolPlugin{
 	display: flow-root;
@@ -366,6 +382,24 @@ img:hover {
 	display: contents;
 	color: #32814B;
 }
+.linkVerd{
+	color: #32814B;
+	font-size: 14px;
+	width: auto;
+}
+.linkVerd:active:focus:visited{
+	background-color: #fff !important;
+	text-decoration: none;
+	color: #000 !important;
+}
+.dropdown-item.active, .dropdown-item:active {
+	color: #000;
+	text-decoration: none;
+	background-color: #fff;
+}
+.maxCont{
+	width: max-content;
+}
 .botoSuport{
 	color: #cc073c;
 	padding: 0px;
@@ -514,7 +548,7 @@ a.imc-bt-xarxa:hover {
 	padding-bottom: 1rem!important;
 }
 .descripcioCard{
-	font: normal 85% 'Noto Sans', 'TrebuchetMS', 'Trebuchet MS', Arial, Helvetica, sans-serif;
+	font: normal 84% 'Noto Sans', 'TrebuchetMS', 'Trebuchet MS', Arial, Helvetica, sans-serif;
 	color: rgb(102, 102, 102);
 	text-align: center;
 }
@@ -549,7 +583,7 @@ a.imc-bt-xarxa:hover {
 	border-width: 10px;
 }
 .apartat{
-	font-size: 1em !important;
+	font-size: 0.9em !important;
 }
 .iframeClass{
 	min-height: 300px;
@@ -569,6 +603,48 @@ a.imc-bt-xarxa:hover {
 .errorConnexio{
 	padding-left: 5em;
 	margin-top: 8em;
+}
+
+.titolAplicacio{
+	color: #ffffff;
+	text-transform: uppercase;
+}
+.titolAplicacio:hover {
+	color: #ffffff;
+	text-transform: uppercase;
+}
+.lletraRapid{
+	font-size: 14px;
+}
+.borderMenu{
+	border-bottom: 1px solid lightgray;
+	border-radius: 0px;
+}
+.senseEstilLlista{
+	list-style: none;
+}
+.llistaEnllasos li{
+	background: #fff;
+	border: 1px solid lightgray;
+	padding: 1% 2%;
+	margin-bottom: 1%;
+	margin-right: 2%;
+	font-size: 14px;
+}
+.llistaEnllasos li a{
+	color: #cc073c;
+}
+.llistaEnllasos li a:hover{
+	color: #000;
+}
+.font15{
+	font-size: 15px;
+}
+.font15em{
+	font-size: 1.5em;
+}
+.imc-marc-menu{
+	display: none;
 }
 
 #dadespinbalayudascontainer .descarregaJustificant { text-align:center; } 

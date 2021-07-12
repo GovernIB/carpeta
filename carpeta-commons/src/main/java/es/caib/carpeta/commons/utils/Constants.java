@@ -81,6 +81,7 @@ public interface Constants {
     public static final int TIPUS_ENLLAZ_FRONT_PSEUDOPLUGIN = 4;
     public static final int TIPUS_ENLLAZ_FRONT_MENU_BARRA = 5;
     public static final int TIPUS_ENLLAZ_FRONT_MENU_DESLLISANT = 6;
+    public static final int TIPUS_ENLLAZ_FRONT_EN_UN_CLIC = 7;
 
     public static final int[] TIPUS_ENLLAZ_ALL = {
             TIPUS_ENLLAZ_FRONT_XARXA_SOCIAL,
@@ -88,7 +89,8 @@ public interface Constants {
             TIPUS_ENLLAZ_FRONT_PEU_CENTRAL,
             TIPUS_ENLLAZ_FRONT_PSEUDOPLUGIN,
             TIPUS_ENLLAZ_FRONT_MENU_BARRA,
-            TIPUS_ENLLAZ_FRONT_MENU_DESLLISANT
+            TIPUS_ENLLAZ_FRONT_MENU_DESLLISANT,
+            TIPUS_ENLLAZ_FRONT_EN_UN_CLIC
     };
 
 

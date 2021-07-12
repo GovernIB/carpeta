@@ -1,4 +1,4 @@
-package org.fundaciobit.pluginsib.carpetafront.pinbalayudasubvenciones.model;
+package org.fundaciobit.pluginsib.carpetafront.pinbalfamilia.model;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

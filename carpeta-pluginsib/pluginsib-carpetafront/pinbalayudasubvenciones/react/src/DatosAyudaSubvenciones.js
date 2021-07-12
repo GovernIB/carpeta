@@ -47,9 +47,6 @@ class DatosAyudaSubvenciones extends Component {
         
     }
 
-
-    
-
     render() {
         const isLoaded = this.state.isLoaded;
 
@@ -87,12 +84,6 @@ class DatosAyudaSubvenciones extends Component {
 
 				content = <div>
                     {alerta}
-                    <div className="descarregaJustificant pt-3">
-                        <div className="col-md-6 pl-0 pr-0">
-                            <span className="oi oi-file"></span>
-                            <a href={data.justificanteUrl} target="_blank">{t('pinbalSubvencionesDescargarJustificante')}</a>
-                        </div>
-                    </div>
                     <div className="contenedorInfoPersonal mt-2">
                         <div className="col-md-2 pl-0 pr-0 mt-3"><strong>{t('pinbalSubvencionesDni')}</strong>{data.dni}</div>
                         <div className="col-md-3 pl-0 pr-0 mt-3"><strong>{t('pinbalSubvencionesNom')}</strong>{data.nombre}</div>

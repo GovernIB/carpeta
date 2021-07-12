@@ -98,9 +98,13 @@ class MenuDesllisant extends Component {
 
 		menuDesllisantJS();
 
-		$( ".imc--accessibilitat" )
+		$( "#tancaMenu" )
 			.focusout(function() {
 				$( ".imc-marc-menu").css("transform", "");
+				$( ".imc-marc-menu").css("display", "none");
+			})
+			.click(function() {
+				$( ".imc-marc-menu").css("transform", "none");
 			});
 
 	}
@@ -122,11 +126,8 @@ class MenuDesllisant extends Component {
 				return;
 		}
 
-
-
 		var url;
 		switch(tipus) {
-
 		
 			case -1: // Plugin html public
 				url = Constants.PLUGINHTML_PUBLIC_PATH + pluginContext;
@@ -145,7 +146,6 @@ class MenuDesllisant extends Component {
 				return;
 
 		}
-
 
 		this.props.history.push(url);
 		
@@ -180,6 +180,17 @@ class MenuDesllisant extends Component {
 
 		var f = document.getElementById("imc--fons");
 		f.click();
+	}
+
+	tancaM() {
+		console.log("entram!!!!!!");
+		var a = document.getElementsByClassName( ".imc-marc-menu");
+		console.log(a.length);
+		// for(var i=0, len=a.length; i<len; i++){
+		// 	console.log(i);
+		// 	a[i].style["transform"] = "";
+		// }
+		$( ".imc-marc-menu").css("transform", "");
 	}
 
 	render() {
@@ -218,6 +229,13 @@ class MenuDesllisant extends Component {
 			allItems = <div className="alert alert-danger" role="alert">{t(this.state.error)}</div>;
 		} else {
 
+			allItems.push(<li key="acc">
+				<Link to={{pathname: `/accessibilitat`, nomPagina: 'menuAccessibilitat'}}
+					  className="imc-marc-ico imc--accessibilitat" tabIndex="207" aria-labelledby={t('menuAccessibilitat')} aria-describedby={t('accedirSeccio') + t('menuAccessibilitat')}>
+					<span>{t('menuAccessibilitat')}</span>
+				</Link>
+			</li>);
+
 			this.state.items.forEach((s, i) => {
 				switch (s.tipus) {
 
@@ -229,7 +247,7 @@ class MenuDesllisant extends Component {
 						allItems.push(
 							<li key={i}>
 								<button title={s.missatge} className={"botoMenu alert" + s.gravetat + "menu"}
-										onClick={(event) => this.mostrarPlugin(s.gravetat, s.missatge, s.context, s.tipus)} tabIndex={205+i} aria-labelledby={s.nom} aria-describedby={t('accedirPlugin') + s.nom}>
+										onClick={(event) => this.mostrarPlugin(s.gravetat, s.missatge, s.context, s.tipus)} tabIndex={208+i} aria-labelledby={s.nom} aria-describedby={t('accedirPlugin') + s.nom}>
 									<img src={urlBase + s.urllogo} className="imc-icona" title="" alt={s.nom} />
 									<span>{s.nom} </span>
 								</button>
@@ -238,7 +256,7 @@ class MenuDesllisant extends Component {
 
 					case 2: // Enllaz
 						allItems.push(<li key={i}>
-							<a href={s.url} title={s.nom} target="_blank" tabIndex={205+i} aria-labelledby={s.nom} aria-describedby={t('accedirEnllas') + s.nom}>
+							<a href={s.url} title={s.nom} target="_blank" tabIndex={208+i} aria-labelledby={s.nom} aria-describedby={t('accedirEnllas') + s.nom}>
 								<img src={s.urllogo} title="" alt={s.nom} className="imc-icona iconaEnllas"/>
 								<span>{s.nom}</span>
 							</a>
@@ -247,7 +265,7 @@ class MenuDesllisant extends Component {
 
 					case 3: // Seccio
 						allItems.push(<li key={i}>
-							<Link to={Constants.SECCIO_PATH + s.context} tabIndex={205+i} aria-labelledby={s.nom} aria-describedby={t('accedirSeccio') + s.nom}>
+							<Link to={Constants.SECCIO_PATH + s.context} tabIndex={208+i} aria-labelledby={s.nom} aria-describedby={t('accedirSeccio') + s.nom}>
 								<img src={s.urllogo} title="" alt={s.descripcio} className="imc-icona iconaEnllas"/>
 								<span>{s.nom} </span>
 							</Link>
@@ -256,7 +274,7 @@ class MenuDesllisant extends Component {
 
 					case 4: // PseudoPlugin
 						allItems.push(<li key={i}>
-							<a href={s.url} target="_blank" title={s.nom} tabIndex={205+i} aria-labelledby={s.nom} aria-describedby={t('accedirPlugin') + s.nom}>
+							<a href={s.url} target="_blank" title={s.nom} tabIndex={208+i} aria-labelledby={s.nom} aria-describedby={t('accedirPlugin') + s.nom}>
 								<img src={s.urllogo} title="" alt={s.nom} className="imc-icona iconaEnllas"/>
 								<span>{s.nom} </span>
 							</a>
@@ -283,13 +301,6 @@ class MenuDesllisant extends Component {
 												title={t('menuSortir')} tabIndex="260" aria-labelledby={t('menuSortir')} aria-describedby={t('accedirEnllas') + t('menuSortir')}><span>{t('menuSortir')}</span></a></li>);
 			}
 
-			allItems.push(<li key="acc">
-				<Link to={{pathname: `/accessibilitat`, nomPagina: 'menuAccessibilitat'}}
-					  className="imc-marc-ico imc--accessibilitat" tabIndex="270" aria-labelledby={t('menuAccessibilitat')} aria-describedby={t('accedirSeccio') + t('menuAccessibilitat')}>
-					<span>{t('menuAccessibilitat')}</span>
-				</Link>
-			</li>);
-
 		}
 
 		const styleColorMenu = (this.state.colorMenu === null)? { backgroundColor : '#32814B'} : { backgroundColor : "#"+this.state.colorMenu};
@@ -297,6 +308,10 @@ class MenuDesllisant extends Component {
 		return (
 			<div>
 				<div className="imc-cercador" id="imc-cercador" style={styleColorMenu}>
+					<button type="button" className="float-right" id="tancaMenu" title={t('menuHamburguesaTanca')} tabIndex="290"
+							aria-label={t('menuHamburguesaTanca')} aria-describedby={t('accedirBoto') + t('menuHamburguesaTanca')}>
+						<p className="font15em">×</p>
+					</button>
 				</div>
 				<ul>
 					<li className="imc-marc-ico imc--idioma">

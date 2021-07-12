@@ -9,6 +9,7 @@ import org.apache.commons.io.IOUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import es.caib.carpeta.commons.utils.DateUtils;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
@@ -384,6 +385,8 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
         	map.put("cerca", "");
         }else {
 
+        	formDataFi = DateUtils.sumarRestarDiasFecha(formDataFi, 1);
+        	
 	        ResultadoBusquedaWs result;
 	        result = getRegistres(userData.getAdministrationID(), entidad, formNumero, formDataInici, formDataFi, formEstat, pageNumber, locale);
 	

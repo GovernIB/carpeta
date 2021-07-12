@@ -71,22 +71,21 @@ class Peu extends Component {
 			var suportWeb = dadesSuport.filter(s => s.tipus === '1').map((s, i) =>
 				<li className="pb-2 liAjuda" key={i}>{t('suportConsulta')} <a href={s.valor} aria-labelledby={t('suportWeb')} aria-describedby={t('accedirEnllas') + t('suportWeb')}>{t('suportWeb')}</a></li>
 			);
+			var suportFAQ = dadesSuport.filter(s => s.tipus === '4').map((s, i) =>
+				<li className="pb-2 liAjuda" key={i}>{t('suportConsultaFAQ')} <a href={s.valor} aria-labelledby={t('suportFAQ')} aria-describedby={t('accedirEnllas') + t('suportFAQ')}>{t('suportFAQ')}</a></li>
+			);
+			var suportConsulta = dadesSuport.filter(s => s.tipus === '5').map((s, i) =>
+				<li className="pb-2 liAjuda" key={i}>{t('suportConsultaTecnica')} <a href={s.valor} aria-labelledby={t('suportConsultaTecnicaEnllas')} aria-describedby={t('accedirEnllas') + t('suportConsultaTecnicaEnllas')}>{t('suportConsultaTecnicaEnllas')}</a></li>
+			);
 			var suportTelefon = dadesSuport.filter(s => s.tipus === '2').map((s, i) =>
-				<li className="pb-2 liAjuda" key={i}>{t('suportCrida')} <p className="text-verd"> {s.valor}</p></li>
+				<li className="pb-2 liAjuda" key={i}>{t('suportCrida')} <a href={"tel:+34" + s.valor} aria-labelledby={s.valor} aria-describedby={t('accedirTelefon') + s.valor}>{s.valor}</a></li>
 			);
 			var suportMail = dadesSuport.filter(s => s.tipus === '3').map((s, i) =>
 				<li className="pb-2 liAjuda" key={i}>{t('suportMail')} <a
 					href={"mailto:'" + s.valor + "'"} aria-labelledby={s.valor} aria-describedby={t('enviarMail') + s.valor}>{s.valor}</a></li>
 			);
-			var suportFAQ = dadesSuport.filter(s => s.tipus === '4').map((s, i) =>
-				<li className="pb-2 liAjuda" key={i}>{t('suportConsulta')} <a href={s.valor} aria-labelledby={t('suportFAQ')} aria-describedby={t('accedirEnllas') + t('suportFAQ')}>{t('suportFAQ')}</a></li>
-			);
-			var suportConsulta = dadesSuport.filter(s => s.tipus === '5').map((s, i) =>
-				<li className="pb-2 liAjuda" key={i}>{t('suportConsultaTecnica')} <p
-					className="text-verd"> {s.valor}</p></li>
-			);
 			var suportAutenticacio = dadesSuport.filter(s => s.tipus === '6').map((s, i) =>
-				<li className="pb-2 liAjuda" key={i}>{t('suportAutenticacio')} <p className="text-verd"> {s.valor}</p>
+				<li className="pb-2 liAjuda" key={i}>{t('suportAutenticacio')} <a href={"tel:+34" + s.valor} aria-labelledby={s.valor} aria-describedby={t('accedirTelefon') + s.valor}>{s.valor}</a>
 				</li>
 			);
 
@@ -126,10 +125,10 @@ class Peu extends Component {
 								<ul className="pl-3 ajuda">
 									{content}
 									{suportWeb}
-									{suportTelefon}
-									{suportMail}
 									{suportFAQ}
 									{suportConsulta}
+									{suportTelefon}
+									{suportMail}
 									{suportAutenticacio}
 								</ul>
 							</div>

@@ -1,11 +1,11 @@
-package org.fundaciobit.pluginsib.carpetafront.pinbalayudasubvenciones.test;
+package org.fundaciobit.pluginsib.carpetafront.pinbalayudas.test;
 
 import java.io.FileInputStream;
 import java.util.Properties;
 
 import org.apache.log4j.BasicConfigurator;
-import org.fundaciobit.pluginsib.carpetafront.pinbalayudasubvenciones.PinbalAyudaSubvencionesCarpetaFrontPlugin;
-import org.fundaciobit.pluginsib.carpetafront.pinbalayudasubvenciones.PinbalAyudaSubvencionesCarpetaFrontPlugin.DatosAyudaSubvenciones;
+import org.fundaciobit.pluginsib.carpetafront.pinbalayudas.PinbalAyudasCarpetaFrontPlugin;
+import org.fundaciobit.pluginsib.carpetafront.pinbalayudas.PinbalAyudasCarpetaFrontPlugin.DatosAyudaSubvenciones;
 
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.pinbal.client.recobriment.model.ScspJustificante;
@@ -23,7 +23,7 @@ public class Test {
 			
 			prop.load(new FileInputStream("plugin.properties"));
 			
-			PinbalAyudaSubvencionesCarpetaFrontPlugin pinbalAyuda = new PinbalAyudaSubvencionesCarpetaFrontPlugin(base, prop);
+			PinbalAyudasCarpetaFrontPlugin pinbalAyuda = new PinbalAyudasCarpetaFrontPlugin(base, prop);
 			
 			UserData userData = new UserData();
 			

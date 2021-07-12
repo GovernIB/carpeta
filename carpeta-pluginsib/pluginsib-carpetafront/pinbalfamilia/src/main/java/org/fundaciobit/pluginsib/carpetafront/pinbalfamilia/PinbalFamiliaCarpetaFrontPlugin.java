@@ -1,4 +1,4 @@
-package org.fundaciobit.pluginsib.carpetafront.pinbalayudasubvenciones;
+package org.fundaciobit.pluginsib.carpetafront.pinbalfamilia;
 
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractPinbalCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
@@ -7,7 +7,6 @@ import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
 import es.caib.carpeta.pluginsib.carpetafront.api.TitlesInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.pinbal.client.recobriment.model.ScspFuncionario;
-import es.caib.pinbal.client.recobriment.model.ScspJustificante;
 import es.caib.pinbal.client.recobriment.model.ScspTitular;
 import es.caib.pinbal.client.recobriment.model.ScspTitular.ScspTipoDocumentacion;
 import es.caib.pinbal.client.recobriment.model.Solicitud;
@@ -19,17 +18,20 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.io.IOUtils;
-import org.fundaciobit.pluginsib.carpetafront.pinbalayudasubvenciones.model.DatosEspecificos;
+import org.fundaciobit.pluginsib.carpetafront.pinbalfamilia.model.BeneficiarioRetorno;
+import org.fundaciobit.pluginsib.carpetafront.pinbalfamilia.model.DatosEspecificos;
+import org.fundaciobit.pluginsib.carpetafront.pinbalfamilia.model.Estado;
+import org.fundaciobit.pluginsib.carpetafront.pinbalfamilia.model.TituloFamiliaNumerosaRetorno;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.StringReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -40,14 +42,14 @@ import java.util.Properties;
 /**
  * @author jagarcia
  */
-public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin {
+public class PinbalFamiliaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin {
 
-    public static final String PINBALSUBVENCIONES_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "pinbalsubvenciones.";
+    public static final String PINBALFAMILIA_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "pinbalfamilia.";
 
     /**
      *
      */
-    public PinbalAyudaSubvencionesCarpetaFrontPlugin() {
+    public PinbalFamiliaCarpetaFrontPlugin() {
         super();
     }
 
@@ -55,14 +57,14 @@ public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCar
      * @param propertyKeyBase
      * @param properties
      */
-    public PinbalAyudaSubvencionesCarpetaFrontPlugin(String propertyKeyBase, Properties properties) {
+    public PinbalFamiliaCarpetaFrontPlugin(String propertyKeyBase, Properties properties) {
         super(propertyKeyBase, properties);
     }
 
     /**
      * @param propertyKeyBase
      */
-    public PinbalAyudaSubvencionesCarpetaFrontPlugin(String propertyKeyBase) {
+    public PinbalFamiliaCarpetaFrontPlugin(String propertyKeyBase) {
         super(propertyKeyBase);
     }
 
@@ -73,7 +75,7 @@ public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCar
 
     @Override
     public String getResourceBundleName() {
-        return "carpetafrontpinbalayudasubvenciones";
+        return "carpetafront.pinbalfamilia";
     }
 
     @Override
@@ -95,10 +97,10 @@ public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCar
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
 
-        log.info("PinbalAyudaSubvencionesCarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
-        log.info("PinbalAyudaSubvencionesCarpetaFrontPlugin::requestCarpetaFront => administrationID: "
+        log.info("PinbalFamiliaCarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
+        log.info("PinbalFamiliaCarpetaFrontPlugin::requestCarpetaFront => administrationID: "
                 + userData.getAdministrationID());
-        log.info("PinbalAyudaSubvencionesCarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
+        log.info("PinbalFamiliaCarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
                 + administrationEncriptedID);
 
         if (query.startsWith(INDEX_HTML_PAGE)) {
@@ -116,12 +118,7 @@ public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCar
             serveiRestService(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                     userData, administrationEncriptedID, locale, isGet);
             
-        } else if (query.startsWith(DOWNLOAD_JUSTIFICANT_SERVICE)) {
-        	
-        	 downloadJustificantService(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                    userData, administrationEncriptedID, locale, isGet);
-            
-        } else {
+        }  else {
 
             super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                     userData, administrationEncriptedID, locale, isGet, logCarpeta);
@@ -142,12 +139,12 @@ public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCar
      */
     @Override
     public FileInfo getResourceIcon(Locale locale) {
-        return getImageFromResource(locale, "/logo/logo-pinbalsubvenciones.png", "image/png");
+        return getImageFromResource(locale, "/logo/logo-pinbalfamilia.png", "image/png");
     }
 
     @Override
     public String getPropertyBase() {
-        return PINBALSUBVENCIONES_PROPERTY_BASE;
+        return PINBALFAMILIA_PROPERTY_BASE;
     }
 
     // --------------------------------------------------------------------------------------
@@ -166,7 +163,7 @@ public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCar
 
             response.setContentType("text/html");
 
-            String resource = "/webpage_pinbalsubvenciones/index.html";
+            String resource = "/webpage_pinbalfamilia/index.html";
 
             response.setHeader("Content-Disposition",
                     "inline;filename=\"" + java.net.URLEncoder.encode(INDEX_HTML_PAGE, "UTF-8") + "\"");
@@ -217,64 +214,6 @@ public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCar
 
     }
     
-    // --------------------------------------------------------------------------------------
-    // --------------------------------------------------------------------------------------
-    // ------------------- DOWNLOAD JUSTIFICANT PAGE (Cridades a PInbal) --------------------
-    // --------------------------------------------------------------------------------------
-    // --------------------------------------------------------------------------------------
-    
-    protected static final String DOWNLOAD_JUSTIFICANT_SERVICE = "obtenirJustificant";
-    
-    public static final String MIME_PDF = "application/pdf";
-    
-    public void getJustificantPage(String absolutePluginRequestPath, String numeroPeticion,
-            Locale locale, HttpServletRequest request, HttpServletResponse response) throws Exception {
-    	
-    	if(!numeroPeticion.isEmpty() && !"".equals(numeroPeticion)) {
-    		
-    		// TODO Comprobar permisos usuari autenticat
-        	ScspJustificante justificant = obtenirJustificant(numeroPeticion);
-        	
-        	if( justificant != null ) {
-
-        		OutputStream output;
-                response.setContentType(justificant.getContentType());
-                response.setHeader("Content-Disposition", getContentDispositionHeader(true, justificant.getNom()));
-                response.setContentLength((int) justificant.getLongitud());
-
-                output = response.getOutputStream();
-                output.write(justificant.getContingut());
-
-                output.flush();
-        	}
-    	}
-    	
-    }
-
-	public ScspJustificante obtenirJustificant(String numeroPeticion) throws Exception{
-		return getJustificant(numeroPeticion);
-	}
-    
-    public void downloadJustificantService(String absolutePluginRequestPath, String relativePluginRequestPath,
-            String query, HttpServletRequest request, HttpServletResponse response, UserData userData,
-            String administrationEncriptedID, Locale locale, boolean isGet) {
-    	
-    	try {
-    		
-    		response.setCharacterEncoding("utf-8");
-            response.setContentType("text/html");
-            
-            String numeroPeticion = request.getParameter("peticion");
-            
-            getJustificantPage(absolutePluginRequestPath, numeroPeticion, locale, request, response);
-    		
-    	}catch(Exception e) {
-    		
-    		log.error("Error obtenint justificant: " + e.getMessage(), e);
-    		
-    	}
-
-    }
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
@@ -282,7 +221,7 @@ public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCar
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
-    protected static final String SERVEI_REST_SERVICE = "corrientepagosubvenciones";
+    protected static final String SERVEI_REST_SERVICE = "consultafamilianumerosa";
 
     public void serveiRestService(String absolutePluginRequestPath, String relativePluginRequestPath,
             String query, HttpServletRequest request, HttpServletResponse response, UserData userData,
@@ -291,12 +230,12 @@ public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCar
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
 
-        DatosAyudaSubvenciones datosAyuda = cridadaRest(userData, absolutePluginRequestPath);
+        DatosFamilia datos = cridadaRest(userData, absolutePluginRequestPath);
         
         Gson json = new Gson();
-        String generat = json.toJson(datosAyuda, DatosAyudaSubvenciones.class);
+        String generat = json.toJson(datos, DatosFamilia.class);
         
-        log.info("\nDADES AYUDA SUBVENCIONES JSON: " + generat + "\n");
+        log.info("\nDADES JSON: " + generat + "\n");
         
         try {
             response.getWriter().println(generat);
@@ -307,9 +246,9 @@ public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCar
 
     }
 
-	public DatosAyudaSubvenciones cridadaRest(UserData userData, String absolutePluginRequestPath) {
+	public DatosFamilia cridadaRest(UserData userData, String absolutePluginRequestPath) {
 		
-		DatosAyudaSubvenciones datosAyuda = new DatosAyudaSubvenciones();
+		DatosFamilia datos = new DatosFamilia();
         ScspRespuesta resposta;
         
         try {
@@ -325,8 +264,8 @@ public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCar
             
             // Dades del Titular del DNI
             {
-                String nif = getProperty(PINBALSUBVENCIONES_PROPERTY_BASE + "testnif");
-                String surname = getProperty(PINBALSUBVENCIONES_PROPERTY_BASE + "testsurname");
+                String nif = getProperty(PINBALFAMILIA_PROPERTY_BASE + "testnif");
+                String surname = getProperty(PINBALFAMILIA_PROPERTY_BASE + "testsurname");
 
                 if (nif == null || surname == null) {
                     nif = userData.getAdministrationID();
@@ -357,20 +296,19 @@ public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCar
             titular.setApellido1(apellido1);
             titular.setApellido2(apellido2);
             
-            datosAyuda.setDni(documentacion);
-            datosAyuda.setNombre(nombre);
-            datosAyuda.setApellido1(apellido1);
-            datosAyuda.setApellido2(apellido2);
+            datos.setDni(documentacion);
+            datos.setNombre(nombre);
+            datos.setApellido1(apellido1);
+            datos.setApellido2(apellido2);
             
             // Mateix Titular
             final ScspFuncionario funcionario = new ScspFuncionario();
             funcionario.setNifFuncionario(documentacion);
             funcionario.setNombreCompletoFuncionario(nombre + " " + apellido1);
             
-            String codigoProvincia = getProperty(PINBALSUBVENCIONES_PROPERTY_BASE + "codigoprovincia");
-            String codigoComunidadAutonoma = getProperty(PINBALSUBVENCIONES_PROPERTY_BASE + "codigocomunidadautonoma");
+            String codigoComunidadAutonoma = getProperty(PINBALFAMILIA_PROPERTY_BASE + "codigocomunidadautonoma");
             
-            SolicitudAyudaSubvenciones solicitud = new SolicitudAyudaSubvenciones(codigoProvincia, codigoComunidadAutonoma);
+            SolicitudFamiliaNumerosa solicitud = new SolicitudFamiliaNumerosa(codigoComunidadAutonoma);
             omplirDadesSolicitutComunes(solicitud, funcionario, titular);
           
         	/*
@@ -389,31 +327,80 @@ public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCar
                 
                 DatosEspecificos dte = (DatosEspecificos) datosEspecificosItem.unmarshal(new StringReader(datosEspecificos));
                  
-                datosAyuda.setCodigo(dte.getRetorno().get(0).getEstado().get(0).getCodigoEstado());
+                Estado estado = dte.getRetorno().get(0).getEstado().get(0);
                 
-                datosAyuda.setDescripcion(dte.getRetorno().get(0).getEstado().get(0).getLiteralError());
+                // TRAMITADA
+                if("0003".equals(resposta.getAtributos().getEstado().getCodigoEstado())){
+                    
+                    datos.setCodigo(estado.getCodigoEstado());
+                    datos.setDescripcion(estado.getLiteralError());
+                    
+                    if (dte.getRetorno().get(0).getTituloFamiliaNumerosa().size() > 0) {
+                    	
+                    	TituloFamiliaNumerosaRetorno titulo = dte.getRetorno().get(0).getTituloFamiliaNumerosa().get(0);
+                    	
+                    	datos.setTituloNumeroTitulo(titulo.getNumeroTitulo());
+                    	datos.setTituloCategoria(titulo.getCategoria());
+                    	datos.setTituloVigente(titulo.getTituloVigente());
+                    	datos.setTituloCaducidad(titulo.getFechaCaducidad());
+                    	datos.setTituloNumeroHijos(titulo.getNumeroHijos());
+                    	datos.setTituloExpedicion(titulo.getFechaExpedicion());
+                    	
+                    	/*
+                    	log.info("Número de titulo: " + titulo.getNumeroTitulo());
+                        log.info("Categoria: " + titulo.getCategoria());
+                        log.info("Vigencia título: " + titulo.getTituloVigente());
+                        log.info("Caducidad: " + titulo.getFechaCaducidad());
+                        log.info("Núm hijos: " + titulo.getNumeroHijos());
+                        */ 
+                    }
+                    
+                    if (dte.getRetorno().get(0).getBeneficiarios().size() > 0) {
+                    	ArrayList<BeneficiarioRetorno> beneficiarios = dte.getRetorno().get(0).getBeneficiarios().get(0).getBeneficiarios();
+                        
+                    	datos.setBeneficiarios(beneficiarios.size());
+                    	for (BeneficiarioRetorno beneficiarioTemp : beneficiarios) {
+                    		if(documentacion.equals(beneficiarioTemp.getDocumentacion())) {
+                    			datos.setNombre(beneficiarioTemp.getNombre());
+                    			datos.setApellido1(beneficiarioTemp.getApellido1());
+                    			datos.setApellido2(beneficiarioTemp.getApellido2());
+                    			datos.setTituloTitular(beneficiarioTemp.getTitular());
+                    		}
+                    	}
+                    	
+                    	/*
+                    	log.info("Núm de beneficiarios: " + beneficiarios.size());
+                        int x = 0;
+        				for (BeneficiarioRetorno beneficiarioTemp : beneficiarios) {
+        					System.out.println("Beneficiario documentacion" + x + " : " + beneficiarioTemp.getDocumentacion());
+        					System.out.println("Beneficiario tipo " + x + " : " + beneficiarioTemp.getTipoDocumentacion());
+        					System.out.println("Beneficiario nombre " + x + " : " + beneficiarioTemp.getNombre() + " " + beneficiarioTemp.getApellido1() + " " + beneficiarioTemp.getApellido2());
+        					System.out.println("------------------------------------");
+        					x++;
+        				}
+        				*/
+                    }
+                	
+                }else {
+                	
+                	datos.setError(resposta.getAtributos().getEstado().getCodigoEstado() + " :  " + resposta.getAtributos().getEstado().getLiteralError());
+                	
+                }
                 
-                String peticionId = resposta.getAtributos().getIdPeticion();
                 
-                datosAyuda.setIdPeticion(peticionId);
-                
-                String justificantUrl = absolutePluginRequestPath + "/" + DOWNLOAD_JUSTIFICANT_SERVICE + "?peticion=" + peticionId;
-                
-                datosAyuda.setJustificanteUrl(justificantUrl);
-            	
             }else {
             	resposta = null;
-            	datosAyuda.setError("Error servei. No hi ha resposta.");
+            	datos.setError("Error servei. No hi ha resposta.");
             }
 
         } catch (Throwable e) {
         	resposta = null;
             String msg = "Error consulta: " + e.getMessage();
-            datosAyuda.setError(msg);
+            datos.setError(msg);
             log.error(msg, e);
         }
 
-        return datosAyuda;
+        return datos;
 	}
 
     // --------------------------------------------------------------------------------------
@@ -435,7 +422,7 @@ public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCar
             response.setHeader("Content-Disposition",
                     "inline;filename=\"" + java.net.URLEncoder.encode(REACT_JS_PAGE, "UTF-8") + "\"");
 
-            String resource = "/webpage_pinbalsubvenciones/reactjs_main.js";
+            String resource = "/webpage_pinbalfamilia/reactjs_main.js";
 
             response.setCharacterEncoding("utf-8");
 
@@ -457,14 +444,15 @@ public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCar
     }
 
 
-	public static class SolicitudAyudaSubvenciones extends Solicitud {
+	public static class SolicitudFamiliaNumerosa extends Solicitud {
 		
-		protected  String codigoProvincia;
-		protected  String codigoComunidadAutonoma;
+		protected String codigoComunidadAutonoma;
 		
-		public SolicitudAyudaSubvenciones(String codigoProvincia, String codigoComunidadAutonoma) {
+		// DD/MM/AAAA
+		protected Date fecha = new Date();
+		
+		public SolicitudFamiliaNumerosa(String codigoComunidadAutonoma) {
 			super();
-			this.codigoProvincia = codigoProvincia;
 			this.codigoComunidadAutonoma = codigoComunidadAutonoma;
 		}
 
@@ -472,14 +460,12 @@ public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCar
 		public String getDatosEspecificos() { // xml
 			StringBuilder xmlBuilder = new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 			xmlBuilder.append("<DatosEspecificos>");
-			if (!isEmptyString(codigoProvincia)) {
+			if (!isEmptyString(codigoComunidadAutonoma)) {
 				xmlBuilder.append("<Consulta>");
-				xmlBuilder.append(
-						xmlOptionalStringParameter(this.codigoComunidadAutonoma, "CodigoComunidadAutonoma")
-				);
-				xmlBuilder.append(
-						xmlOptionalStringParameter(this.codigoProvincia, "CodigoProvincia")
-				);
+				xmlBuilder.append("<TituloFamiliaNumerosa>");
+				xmlBuilder.append(xmlOptionalStringParameter(this.codigoComunidadAutonoma, "CodigoComunidadAutonoma"));
+				xmlBuilder.append(xmlOptionalStringParameter(new SimpleDateFormat("dd/MM/yyyy").format(this.fecha),"FechaConsulta"));
+				xmlBuilder.append("</TituloFamiliaNumerosa>");
 				xmlBuilder.append("</Consulta>");
 
 			}
@@ -488,19 +474,28 @@ public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCar
 		}
 	}
     
-    public class DatosAyudaSubvenciones {
+    public class DatosFamilia {
 
-        protected String error = "";       
+        protected String error = "";
+        protected String codigo = "";
+        protected String descripcion = "";
         protected String dni = "";
         protected String nombre = "";
         protected String apellido1 = "";
         protected String apellido2 = "";
         protected String fecha = "";
-        protected String codigo = "";
-        protected String descripcion = "";
-        protected String idPeticion = "";
-        protected String justificanteUrl = "";
-
+        
+        protected String tituloNumeroTitulo;
+        protected String tituloCategoria;
+        protected String tituloVigente;
+        protected String tituloExpedicion;
+        protected String tituloCaducidad;
+        protected String tituloNumeroHijos;
+        protected String tituloTitular;
+       
+        protected int beneficiarios; 
+         
+        
         public String getError() {
             return error;
         }
@@ -549,14 +544,6 @@ public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCar
 			this.codigo = codigo;
 		}
 		
-		public String getIdPeticion() {
-			return idPeticion;
-		}
-
-		public void setIdPeticion(String idPeticion) {
-			this.idPeticion = idPeticion;
-		}
-		
 		public String getDescripcion() {
 			return descripcion;
 		}
@@ -565,21 +552,77 @@ public class PinbalAyudaSubvencionesCarpetaFrontPlugin extends AbstractPinbalCar
 			this.descripcion = descripcion;
 		}
 
-		public String getJustificanteUrl() {
-			return justificanteUrl;
+		public String getTituloNumeroTitulo() {
+			return tituloNumeroTitulo;
 		}
 
-		public void setJustificanteUrl(String justificanteUrl) {
-			this.justificanteUrl = justificanteUrl;
+		public void setTituloNumeroTitulo(String tituloNumeroTitulo) {
+			this.tituloNumeroTitulo = tituloNumeroTitulo;
 		}
 
-		public DatosAyudaSubvenciones() {
+		public String getTituloCategoria() {
+			return tituloCategoria;
+		}
+
+		public void setTituloCategoria(String tituloCategoria) {
+			this.tituloCategoria = tituloCategoria;
+		}
+
+		public String getTituloVigente() {
+			return tituloVigente;
+		}
+
+		public void setTituloVigente(String tituloVigente) {
+			this.tituloVigente = tituloVigente;
+		}
+
+		public String getTituloExpedicion() {
+			return tituloExpedicion;
+		}
+
+		public void setTituloExpedicion(String tituloExpedicion) {
+			this.tituloExpedicion = tituloExpedicion;
+		}
+
+		public String getTituloCaducidad() {
+			return tituloCaducidad;
+		}
+
+		public void setTituloCaducidad(String tituloCaducidad) {
+			this.tituloCaducidad = tituloCaducidad;
+		}
+
+		public String getTituloNumeroHijos() {
+			return tituloNumeroHijos;
+		}
+
+		public void setTituloNumeroHijos(String tituloNumeroHijos) {
+			this.tituloNumeroHijos = tituloNumeroHijos;
+		}
+
+		public String getTituloTitular() {
+			return tituloTitular;
+		}
+
+		public void setTituloTitular(String tituloTitular) {
+			this.tituloTitular = tituloTitular;
+		}
+
+		public int getBeneficiarios() {
+			return beneficiarios;
+		}
+
+		public void setBeneficiarios(int beneficiarios) {
+			this.beneficiarios = beneficiarios;
+		}
+
+		public DatosFamilia() {
 			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 			Date fecha = new Date();
 			this.fecha = dateFormat.format(fecha);
 		}
 
-		public DatosAyudaSubvenciones(String dni, String nombre) {
+		public DatosFamilia(String dni, String nombre) {
 			super();
 			this.dni = dni;
 			this.nombre = nombre;

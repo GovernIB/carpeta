@@ -55,7 +55,7 @@ public class WebUIController extends PluginFrontController {
 
     public static final String ENTITAT_ICONA_PATH = "/entityicon";
 
-
+    public static final String ENTITAT_CUSTOM_CSS = "/customcss";
     
     /**
      * 
@@ -436,6 +436,25 @@ public class WebUIController extends PluginFrontController {
         }
 
     }
+    
+    
+    @RequestMapping(value = ENTITAT_CUSTOM_CSS + "/{entitatid}", method = RequestMethod.GET)
+    public void getCustomCss(@PathVariable("entitatid") String entitatid, HttpServletRequest request, HttpServletResponse response) {
+    	
+    	try {
+    		
+    		if(entitatid != null) {
+    			Long customCssEntitatId = utilsEjb.getCustomCssEntitat(entitatid);
+                if (customCssEntitatId != null)
+                	descarregaFitxer(response, customCssEntitatId);
+    		}
+    		
+    	} catch (Throwable e) {
+            processExceptionRest(e, request, response);
+        }
+    	
+    }
+    
 
     @RequestMapping(value = WEBUI_FAVICON_PATH + "/{entitatid}", method = RequestMethod.GET)
     public void getEntitatIcona(@PathVariable("entitatid") String entitatid, HttpServletRequest request, HttpServletResponse response) {
@@ -1409,13 +1428,27 @@ public class WebUIController extends PluginFrontController {
                             items.add(ItemInfo.createFromPseuDoPlugin(enllazInfo));
                         }
                     }
+
+                    // Enllasos En un clic
+                    {
+                        int enllazType = Constants.TIPUS_ENLLAZ_FRONT_EN_UN_CLIC;
+                        List<EnllazInfo> enllasosEnunclic = getEnllazos(request, enllazType, seccioID, lang,
+                                codiEntitat);
+                        for (EnllazInfo enllazInfo : enllasosEnunclic) {
+                            items.add(ItemInfo.createFromEnunclic(enllazInfo));
+                        }
+                    }
                     
                     // seccions
                     {
                         List<SeccioInfo> seccioInfo = getSeccionsInfo(request, seccioID, entitatID);
                         //fullInfo.put("seccions", seccioInfo);
                         for (SeccioInfo s : seccioInfo) {
-                            items.add(ItemInfo.createFromSeccioInfo(s));
+
+                            //seleccionar plugins que són d'aquesta secció
+                            List<PluginInfo> pluginsSeccio = utilsEjb.getFrontPlugins(entitatID, lang, s.seccioID, true);
+
+                            items.add(ItemInfo.createFromSeccioInfo(s, pluginsSeccio));
                         }
                     }
                 } 
