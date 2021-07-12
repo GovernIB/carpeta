@@ -70,7 +70,7 @@
                         <#setting date_format="MM/dd/yyyy hh">
                         <#list registros as registro >
 
-                        <tr class="clickable-row"  onclick="mostrantDetall('${registro.numeroRegistroFormateado}')">
+                        <tr class="clickable-row"  onclick="mostrantDetall('${registro.numeroRegistroFormateado}')" tabindex="${registro?counter}+501">
                             <td>${registro.numeroRegistroFormateado}</td>
                             <td data-order="${registro.fechaRegistro?string('yyyyMMddHHmm')}">
                                 ${registro.fechaRegistro?string("dd-MM-yyyy HH:mm")}

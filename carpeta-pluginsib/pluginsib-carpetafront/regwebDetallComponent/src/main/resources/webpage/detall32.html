@@ -178,14 +178,14 @@
 
                                         <#if justificanteUrl?has_content>
                                             <div class="text-center">
-                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarJustificant()"><span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span>${carpeta_descargar}</button>
+                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarJustificant()" tabindex="501"><span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span>${carpeta_descargar}</button>
                                             </div>
                                         </#if>
 
                                         <#if justificanteId?has_content && justificantData?has_content>
                                             <div class="text-center">
                                                 <!--   button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarAnnex('${justificanteId?long?c}')"><span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span> ${carpeta_descargar}</button -->
-                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="downloadPDF()">
+                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="downloadPDF()" tabindex="502">
                                                     <span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span> ${carpeta_descargar}
                                                 </button>
                                             </div>

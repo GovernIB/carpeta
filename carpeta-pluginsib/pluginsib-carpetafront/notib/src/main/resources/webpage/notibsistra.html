@@ -25,9 +25,9 @@
                         <tbody>
                         <#list comunicacions as com >
                            <#if com.url??>
-                              <tr style="cursor: pointer" class="filaNotib" data-target="_blank" data-href="${com.url}" tabindex=${com?counter}>
+                              <tr style="cursor: pointer" class="filaNotib" data-target="_blank" data-href="${com.url}" tabindex="${com?counter}+501">
                            <#else>
-                              <tr style="cursor: pointer" class="filaNotib" tabindex=${com?counter}>
+                              <tr style="cursor: pointer" class="filaNotib" tabindex="${com?counter}+501">
                            </#if>
                                 <td>${com.descripcion}</td>
                                 <td>${com.fecha?string?datetime("yyyy-MM-dd'T'HH:mm:ss.SSSX")?string("dd-MM-yyyy HH:mm")}</td>

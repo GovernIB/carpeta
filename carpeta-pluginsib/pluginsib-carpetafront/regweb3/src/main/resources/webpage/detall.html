@@ -111,12 +111,12 @@
 
                                         <#if justificante?has_content>
                                         <div class="text-center">
-                                            <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="window.open('${justificante}')"><span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span>${carpeta_descargar}</button>
+                                            <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="window.open('${justificante}')" tabindex="501"><span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span>${carpeta_descargar}</button>
                                         </div>
                                         <#else>
 
                                         <div class="text-center">
-                                            <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm"  onclick="generantJustificant()" ><span class="oi" title="" alt="" aria-hidden="true"></span>${justificante_generar}</button>
+                                            <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm"  onclick="generantJustificant()" tabindex="502"><span class="oi" title="" alt="" aria-hidden="true"></span>${justificante_generar}</button>
                                         </div>
                                         </#if>
                                         <div class="text-center pt-3 text-danger"><#if errorGeneracioJustificant?has_content >${errorGeneracioJustificant}</#if></div>

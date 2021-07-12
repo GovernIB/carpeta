@@ -87,7 +87,7 @@ class MenuRapid extends Component {
                             allItems.push(
                                 <li key={i} className="nav-item pr-4 lletraRapid">
                                     <Link className="navCarpeta"
-                                          to={{pathname: Constants.PLUGINHTML_PATH + s.context, nomPagina: "plugin"}} tabIndex={101+i} aria-labelledby={s.nom} aria-describedby={t('accedirPlugin') + s.nom}>
+                                          to={{pathname: Constants.PLUGINHTML_PATH + s.context, nomPagina: "plugin"}} tabIndex={301+i} aria-labelledby={s.nom} aria-describedby={t('accedirPlugin') + s.nom}>
                                         <img src={urlBase + s.urllogo} alt={s.nom} title="" className="imc-icona"/>
                                         {/*<img src={s.urllogo} alt="" title="" className="imc-icona"/>*/}
                                         <span className="menuRapidView">{s.nom}</span>
@@ -104,7 +104,7 @@ class MenuRapid extends Component {
                                     plugins.push(
                                         <Link className="navCarpeta dropdown-item linkVerd"
                                               to={{pathname: Constants.SECCIO_PATH + s.context + Constants.PLUGINREACT_PATH + p.context, nomPagina: "plugin"
-                                              }} tabIndex={101 + i + j + 1} aria-labelledby={p.nom}
+                                              }} tabIndex={301 + i + j + 1} aria-labelledby={p.nom}
                                               aria-describedby={t('accedirPlugin') + p.nom} key={100 + i + j + 1}>
                                             <img src={urlBase + "/pluginfront/pluginicon/" + p.pluginID + "/" + i18n.language + ""} alt={p.nom} title="" className="imc-icona"/>
                                             <span className="menuRapidView">{p.nom}</span>
@@ -114,7 +114,7 @@ class MenuRapid extends Component {
                                     plugins.push(
                                         <Link className="navCarpeta dropdown-item linkVerd"
                                               to={{pathname: Constants.SECCIO_PATH + s.context + Constants.PLUGINHTML_PATH + p.context, nomPagina: "plugin"
-                                              }} tabIndex={101 + i + j + 1} aria-labelledby={p.nom}
+                                              }} tabIndex={301 + i + j + 1} aria-labelledby={p.nom}
                                               aria-describedby={t('accedirPlugin') + p.nom} key={100 + i + j + 1}>
                                             <img src={urlBase + "/pluginfront/pluginicon/" + p.pluginID + "/" + i18n.language + ""} alt={p.nom} title="" className="imc-icona"/>
                                             <span className="menuRapidView">{p.nom}</span>
@@ -128,7 +128,7 @@ class MenuRapid extends Component {
                             allItems.push(
                                 <li key={i} className="nav-item pr-4 lletraRapid dropdown">
                                     <Link to={{pathname: Constants.SECCIO_PATH + s.context, nomPagina: "seccio"}}
-                                          tabIndex={101 + i} aria-labelledby={s.nom}
+                                          tabIndex={301 + i} aria-labelledby={s.nom}
                                           aria-describedby={t('accedirSeccio') + s.nom} className="nav-link dropdown-toggle pt-0 pb-0" id={"navbarDropdown" + i}>
                                         <img src={s.urllogo} title="" alt={s.nom} className="imc-icona"/>
                                         <span className="menuRapidView">{s.nom}</span>
@@ -144,7 +144,7 @@ class MenuRapid extends Component {
                         case 4: // PseudoPlugin
                             allItems.push(
                                 <li key={i} className="nav-item pr-4 lletraRapid">
-                                    <a className="navCarpeta" href={s.url} target="_blank" title={s.nom} tabIndex={101+i} aria-labelledby={s.nom} aria-describedby={t('accedirPlugin') + s.nom}>
+                                    <a className="navCarpeta" href={s.url} target="_blank" title={s.nom} tabIndex={301+i} aria-labelledby={s.nom} aria-describedby={t('accedirPlugin') + s.nom}>
                                         <img src={s.urllogo} alt={s.nom} title="" className="imc-icona"/>
                                         <span className="menuRapidView">{s.nom}</span>
                                     </a>

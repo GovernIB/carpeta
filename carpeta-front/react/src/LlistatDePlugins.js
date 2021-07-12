@@ -148,7 +148,7 @@ class LlistatDePlugins extends Component {
                                     to={{
                                         pathname: baseSeccio + ((s.tipus == 0) ? Constants.PLUGINREACT_PATH :Constants.PLUGINHTML_PATH)+ s.context,
                                         nomPagina: "plugin"
-                                    }} title={s.missatge} tabIndex={2+i} aria-labelledby={s.nom} aria-describedby={t('accedirPlugin') + s.nom}>
+                                    }} title={s.missatge} tabIndex={502+i} aria-labelledby={s.nom} aria-describedby={t('accedirPlugin') + s.nom}>
                                     <span className="card-title titol pl-1 h3"><img src={urlBase + s.urllogo}
                                                                                     alt={s.nom} title=""
                                                                                     className="imc-icona"/></span>
@@ -185,7 +185,7 @@ class LlistatDePlugins extends Component {
                         allItems.push(
                             <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0">
                                 <Link to={baseSeccio + Constants.SECCIO_PATH + s.context}
-                                      className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`} tabIndex={2+i} aria-labelledby={s.nom} aria-describedby={t('accedirSeccio') + s.nom}>
+                                      className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`} tabIndex={502+i} aria-labelledby={s.nom} aria-describedby={t('accedirSeccio') + s.nom}>
                                     <span className="card-title titol pl-1 h3"><img src={s.urllogo} alt={s.nom} title=""
                                                                                     className="imc-icona"/></span>
                                     <h3 className="apartat titolPlugin titol h3">{s.nom}</h3>
@@ -200,7 +200,7 @@ class LlistatDePlugins extends Component {
                         allItems.push(
                             <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0">
                                 <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3`}
-                                        onClick={() => window.open(s.url)} tabIndex={2+i} aria-labelledby={s.nom} aria-describedby={t('accedirPlugin') + s.nom}>
+                                        onClick={() => window.open(s.url)} tabIndex={502+i} aria-labelledby={s.nom} aria-describedby={t('accedirPlugin') + s.nom}>
                                     <span className="card-title titol pl-1 h3"><img src={s.urllogo} alt={s.nom} title=""
                                                                                     className="imc-icona"/></span>
                                     <h3 className="apartat titolPlugin titol h3">{s.nom}</h3>
@@ -213,7 +213,7 @@ class LlistatDePlugins extends Component {
 
                     case 7: // Enllaz "En un clic"
                         enllasos.push(<li key={i} className="col-md-5 float-left">
-                            <a href={s.url} title={s.nom} target="_blank" tabIndex={65+i} aria-labelledby={s.nom} aria-describedby={t('accedirEnllas') + s.nom}>
+                            <a href={s.url} title={s.nom} target="_blank" tabIndex={565+i} aria-labelledby={s.nom} aria-describedby={t('accedirEnllas') + s.nom}>
                                 <span>{s.nom}</span>
                             </a>
                         </li>);
