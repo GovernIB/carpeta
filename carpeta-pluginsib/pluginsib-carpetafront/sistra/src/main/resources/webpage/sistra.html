@@ -44,7 +44,7 @@
                                 <div class="input-group input-group-fecha-inicio">
                                     <input id="fechaInicio" name="fechaInicio" class="form-control form-control-sm estilCalendar"
                                            required="required" type="date"
-                                           value="${form_dataInici?string('yyyy-MM-dd')}" maxlength="10" tabindex="501">
+                                           value="${form_dataInici?string('yyyy-MM-dd')}" maxlength="10" tabindex="501" aria-labelledby="fechaInicio">
                                     <span class="input-group-text"><span class="oi oi-calendar"></span></span>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                                 <label for="fechaFin" placeholder="yyyy-MM-dd" class="float-left">${carpeta_fecha_fin}</label>
                                 <div class="input-group input-group-fecha-fin">
                                     <input id="fechaFin" name="fechaFin" class="form-control form-control-sm estilCalendar" 
-                                           required="required" type="date" value="${form_dataFi?string('yyyy-MM-dd')}" maxlength="10" tabindex="502">
+                                           required="required" type="date" value="${form_dataFi?string('yyyy-MM-dd')}" maxlength="10" tabindex="502" aria-labelledby="fechaFin">
                                     <span class="input-group-text"><span class="oi oi-calendar"></span></span>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                         <div class="col-md-3">
                             <div class="form-group pl-2 pr-2">
                                 <label for="estado" class="float-left">${tramite_estado}</label>
-                                <select name="tramiteFinalizado" id="tramiteFinalizado" class="form-control form-control-sm" tabindex="503">
+                                <select name="tramiteFinalizado" id="tramiteFinalizado" class="form-control form-control-sm" tabindex="503" aria-labelledby="estado">
                                     <option value="A" <#if form_estat == "A">selected="selected"</#if>>${tramite_todos}</option>
                                     <option value="S" <#if form_estat == "S">selected="selected"</#if>>${tramite_finalizado}</option>
                                     <option value="N" <#if form_estat == "N">selected="selected"</#if>>${tramite_nofinalizado}</option>

@@ -43,7 +43,7 @@
                         <div class="col-md-3 pl-0 pr-8">
                             <div class="form-group pr-2" style="padding-right:50px">
                                 <label for="numero" class="float-left">${registro_numero}</label>
-                                <input type="text" name="numero" id="numero" class="form-control form-control-sm" value="<#if form_numero?has_content>${form_numero}</#if>" tabindex="501"/>
+                                <input type="text" name="numero" id="numero" aria-labelledby="numero" class="form-control form-control-sm" value="<#if form_numero?has_content>${form_numero}</#if>" tabindex="501"/>
                             </div>
                         </div>
                     
@@ -52,7 +52,7 @@
                                 <label for="fechaInicio" placeholder="yyyy-mm-dd" class="float-left">${carpeta_fecha_inicio}</label>
                                 <div class="input-group input-group-fecha-inicio">
                                     <input id="fechaInicio" name="fechaInicio" class="form-control form-control-sm estilCalendar"
-                                           required="required" type="date" value="${form_dataInici?string('yyyy-MM-dd')}" maxlength="10" tabindex="502">
+                                           required="required" type="date" value="${form_dataInici?string('yyyy-MM-dd')}" maxlength="10" tabindex="502" aria-labelledby="fechaInicio">
                                     <span class="input-group-text"><span class="oi oi-calendar"></span></span>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                                 <label for="fechaFin" placeholder="yyyy-mm-dd" class="float-left">${carpeta_fecha_fin}</label>
                                 <div class="input-group input-group-fecha-fin">
                                     <input id="fechaFin" name="fechaFin" class="form-control form-control-sm estilCalendar" 
-                                           required="required" type="date" value="${form_dataFi?string('yyyy-MM-dd')}" maxlength="10" tabindex="503">
+                                           required="required" type="date" value="${form_dataFi?string('yyyy-MM-dd')}" maxlength="10" tabindex="503" aria-labelledby="fechaFin">
                                     <span class="input-group-text"><span class="oi oi-calendar"></span></span>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                         <div class="col-md-2 pl-0 pr-0">
                             <div class="form-group pl-2 pr-2">
                                 <label for="estado" class="float-left">${registro_estado}</label>
-                                <select name="estado" id="estado" class="form-control form-control-sm" tabindex="504">
+                                <select name="estado" id="estado" class="form-control form-control-sm" tabindex="504" aria-labelledby="estado">
                                     <#list registroEstadoSelect as regEstado >
                                     <option value="${regEstado?index}" <#if form_estat == regEstado?index?c>selected="selected"</#if> >${regEstado}</option>
                                     </#list>
