@@ -466,6 +466,21 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("comunicacions", notificacions);
             
+            /*
+            if (isDevelopment()) {
+                
+                for (Transmissio t : notificacions) {
+                    log.info("NE: " + t.getNumExpedient() 
+                    + " | DEn: " + t.getDataEnviament() 
+                    + " | DEs: " + t.getDataEstat() 
+                    + " | DSu: " + t.getDataSubestat() 
+                    + " | Desc: " + t.getDescripcio() );
+                }
+                
+            }
+            */
+            
+            
 
             //map.put("urldetallbase", absolutePluginRequestPath + "/" + NOTIFICACIONS_NOTIB_DETALL_PAGE);
             map.put("urldetallbase", getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.url") + "#");

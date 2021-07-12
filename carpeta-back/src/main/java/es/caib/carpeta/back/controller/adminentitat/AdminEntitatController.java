@@ -37,16 +37,17 @@ public class AdminEntitatController {
             LoginInfo loginInfo = LoginInfo.getInstance();
 
             // Crea auditoria si hi ha canvi de rol a AdminEntitat
+            final Long entitatID = loginInfo.getEntitatID();
             if (!Constants.ROLE_ADMIN.equals(WebUtils.getRequiredSessionAttribute(request,"rolBack"))) {
-                authenticationLogicaEjb.crearAuditoria(loginInfo.getEntitatID(), loginInfo.getUsuariPersona().getUsername());
+                authenticationLogicaEjb.crearAuditoria(entitatID, loginInfo.getUsuariPersona().getUsername());
                 WebUtils.setSessionAttribute(request, "rolBack", Constants.ROLE_ADMIN);
-                WebUtils.setSessionAttribute(request, "entitatAdmin", loginInfo.getEntitatID());
+                WebUtils.setSessionAttribute(request, "entitatAdmin", entitatID);
             }
 
             // Crea auditoria si hi ha canvi d'entitat pel rol AdminEntitat
-            if (!WebUtils.getRequiredSessionAttribute(request,"entitatAdmin").equals(loginInfo.getEntitatID())) {
-                authenticationLogicaEjb.crearAuditoria(loginInfo.getEntitatID(), loginInfo.getUsuariPersona().getUsername());
-                WebUtils.setSessionAttribute(request, "entitatAdmin", loginInfo.getEntitatID());
+            if (entitatID!= null && entitatID.equals(WebUtils.getSessionAttribute(request,"entitatAdmin"))) {
+                authenticationLogicaEjb.crearAuditoria(entitatID, loginInfo.getUsuariPersona().getUsername());
+                WebUtils.setSessionAttribute(request, "entitatAdmin", entitatID);
             }
 
         } catch (I18NException e) {
