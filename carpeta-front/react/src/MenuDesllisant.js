@@ -310,7 +310,7 @@ class MenuDesllisant extends Component {
 				<div className="imc-cercador" id="imc-cercador" style={styleColorMenu}>
 					<button type="button" className="float-right" id="tancaMenu" title={t('menuHamburguesaTanca')} tabIndex="290"
 							aria-label={t('menuHamburguesaTanca')} aria-describedby={t('accedirBoto') + t('menuHamburguesaTanca')}>
-						<p className="font15em">×</p>
+						X
 					</button>
 				</div>
 				<ul>

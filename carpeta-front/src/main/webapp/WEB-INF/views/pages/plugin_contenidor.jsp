@@ -1,4 +1,4 @@
-<iframe src="${urlToShowPluginPage}" class="iframeClass" id="myiframe" title="Frame del plugin">
+<iframe src="${urlToShowPluginPage}" class="iframeClass" id="myiframe" title="Frame del plugin" tabindex="500">
 </iframe>
 
 <script type="text/javascript" language="javascript"> 
