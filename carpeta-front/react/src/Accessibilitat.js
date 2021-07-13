@@ -89,7 +89,6 @@ class Accessibilitat extends Component {
                         <p className="lh15 subtitolInferior">{t('accessibilitatOpcional4')}</p>
 
                     </div>
-
                 </div>
             </div>
         );

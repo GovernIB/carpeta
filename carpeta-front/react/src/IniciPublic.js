@@ -116,11 +116,11 @@ class IniciPublic extends Component {
                         <div className="col-md-5 border-0 columna2Inici">
 
                             <p className="margen-top-clave pb-3">
-                                <button className="btn btn-primary carpeta-btn botoAccedirCarpeta"
+                                <button className="btn btn-primary carpeta-btn botoAccedirCarpeta" title={t('accedirBoto') + t('paginaIniciBotoAccedir')}
                                       onClick={() => {
                                           var loc = new URL(window.location.href);
                                           window.location.href = ('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host))
-                                      }} tabIndex="503" aria-labelledby={t('paginaIniciBotoAccedir')} aria-describedby={t('accedirBoto') + t('paginaIniciBotoAccedir')}>
+                                      }} tabIndex="503" aria-labelledby={t('paginaIniciBotoAccedir')}>
                                     <span className="oi oi-account-login" title="" aria-hidden="true"/> {t('paginaIniciBotoAccedir')}
                                 </button>
                             </p>
