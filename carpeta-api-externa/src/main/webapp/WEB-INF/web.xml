@@ -11,5 +11,34 @@
         <param-name>es.caib.carpeta.commons.rest.supportedLocales</param-name>
         <param-value>ca,es</param-value>
     </context-param>
+    
+    
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>carpeta_api_externa_secured</web-resource-name>
+            <url-pattern>/services/secure</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>CAR_ADMIN</role-name>
+            <role-name>CAR_SUPER</role-name>
+        </auth-constraint>
+    </security-constraint>
+     
+    
+    <login-config>
+        <!-- Per defecte BASIC. Si profile -Pcaib llavors KEYCLOAK  -->
+        <auth-method>KEYCLOAK</auth-method>
+        <realm-name>Govern de les Illes Balears</realm-name>
+    </login-config>
+
+    <security-role>
+        <description>Super Administrador de Carpeta</description>
+        <role-name>CAR_SUPER</role-name>
+    </security-role>
+
+    <security-role>
+        <description>Administrador d'Entitat de Carpeta</description>
+        <role-name>CAR_ADMIN</role-name>
+    </security-role>
 
 </web-app>

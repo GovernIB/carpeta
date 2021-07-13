@@ -151,6 +151,20 @@
 		<!-- ====================================== -->
 		
 		<!-- VEURE PROFILES més abaix. -->
+		
+		
+		<!-- WS START -->
+        <!-- WS de CARPETA -->
+        <!--  http://localhost:8080/carpeta-ws-server/ws/v1/HelloWorld -->
+        <!--  http://localhost:8080/carpeta-ws-server/ws/v1/HelloWorldWithSecurity -->
+        <!--  ... 
+        <dependency>
+            <groupId>es.caib.carpeta</groupId>
+            <artifactId>carpeta-ws-server</artifactId>
+            <version>1.1.12</version>
+            <type>ejb</type>
+        </dependency>
+         WS END -->
 
 	</dependencies>
 
@@ -311,13 +325,13 @@
 							<bundleFileName>carpeta-api-externa.war</bundleFileName>
 						</webModule>
 						<!-- API EXTERNA END -->
-                        <!--
-						<webModule>
+                        <!-- WS START
+                        <ejbModule>
                             <groupId>es.caib.carpeta</groupId>
-                            <artifactId>carpeta-api</artifactId>
-                            <contextRoot>/carpeta/api</contextRoot>
-                        </webModule>
-                         -->
+                            <artifactId>carpeta-ws-server</artifactId>
+                            <bundleFileName>carpeta-ws-server.jar</bundleFileName>
+                        </ejbModule>
+                         WS END -->
 					</modules>
 				</configuration>
 			</plugin>
