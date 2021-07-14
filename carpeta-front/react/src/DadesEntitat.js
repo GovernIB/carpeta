@@ -45,7 +45,7 @@ class DadesEntitat extends Component {
         }
 
         return (
-            <div className="imc-peu-govern" dangerouslySetInnerHTML={content} />
+            <div className="imc-peu-govern" dangerouslySetInnerHTML={content} tabIndex="600"/>
         );
     }
 }
