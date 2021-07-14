@@ -61,8 +61,8 @@ class EnllasosLateral extends Component {
                 content = "";
             } else {
                 content = this.state.laterallinks.map((s, i) => (
-                    <li key={i}>
-                        <a href={s.url} className="" title={s.label} target="_blank" tabIndex={11+i} aria-label={s.label} aria-describedby={t('accedirEnllas') + s.label}>
+                    <li key={i} id={"enllasLat"+i}>
+                        <a href={s.url} className="" title={s.label} target="_blank" tabIndex={11+i} aria-labelledby={"enllasLat"+i}>
                             <img src={s.urllogo} title={s.label} alt={s.label} className="imatgeMobil"/>
                         </a>
                     </li>

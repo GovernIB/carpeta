@@ -68,8 +68,8 @@
         <!-- Capçalera -->
         <div>
             <header class="imc-titol">
-                <nav class="imc--contingut">
-                    <h1><a class="titolAplicacio" tabindex="9" aria-labelledby="<fmt:message key="accesInici"/>" aria-describedby="<fmt:message key="enllasInici"/>" href="${pageContext.request.contextPath}"><fmt:message key="entitats.carpeta"/></a></h1>
+                <nav class="imc--contingut" id="entitatInici">
+                    <h1><a class="titolAplicacio" tabindex="9" aria-labelledby="entitatInici" href="${pageContext.request.contextPath}"><fmt:message key="entitats.carpeta"/></a></h1>
                     <ul>
                         <li><button type="button" class="imc-bt-menu" id="imc-bt-menu" title="<fmt:message key="entitats.menu"/>" tabindex="10"></button></li>
                     </ul>
@@ -108,8 +108,8 @@
                         </li>
 
                         <li style="padding-left: 1em;">
-                            <a href="javascript:window.location.reload(true)" title="<fmt:message key="entitats.carpeta"/>" class="imc-marc-ico imc--recarregar" aria-labelledby="<fmt:message key="entitats.carpeta"/>" aria-describedby="<fmt:message key="entitats.carpeta"/>" tabindex="30">
-                            <span><fmt:message key="entitats.carpeta"/></span>
+                            <a href="javascript:window.location.reload(true)" title="<fmt:message key="entitats.carpeta"/>" class="imc-marc-ico imc--recarregar" aria-labelledby="entitatTitol" tabindex="30">
+                            <span id="entitatTitol"><fmt:message key="entitats.carpeta"/></span>
                             </a>
                         </li>
 
@@ -175,33 +175,6 @@
 
                     </div>
                 </div>
-<%--                <div class="modal fade" id="ajudaModal" tabindex="-1" aria-labelledby="ajudaLabel" aria-hidden="true">--%>
-<%--                    <div class="modal-dialog">--%>
-<%--                        <div class="modal-content">--%>
-<%--                            <div class="modal-header">--%>
-<%--                                <p class="card-title titol h2"><fmt:message key="entitats.ajuda.titol"/></p>--%>
-<%--                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">--%>
-<%--                                    <span aria-hidden="true">×</span>--%>
-<%--                                </button>--%>
-<%--                            </div>--%>
-<%--                            <div class="modal-body">--%>
-<%--                                <ul class="pl-3 ajuda">--%>
-<%--                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.suportweb1"/>  <a href='http://www.caib.es/sites/suportinformatic/es/inicio-5586/?campa=yes'><fmt:message key="entitats.ajuda.suportweb2"/></a></li>--%>
-<%--                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.faq1"/>  <a href="http://www.faq.com"><fmt:message key="entitats.ajuda.faq2"/></a></li>--%>
-<%--                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.consulta1"/>  <a href=""><fmt:message key="entitats.ajuda.consulta2"/></p></li>--%>
-<%--                                    --%>
-<%--                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.telefon1"/>  <p class="text-verd"> <fmt:message key="entitats.ajuda.telefon2"/></p></li>--%>
-<%--                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.correu1"/>  <a href="mailto:'suport@caib.es'"><fmt:message key="entitats.ajuda.correu2"/></a></li>--%>
-<%--                                    --%>
-<%--                                    <li class="pb-2 liAjuda"><fmt:message key="entitats.ajuda.problemes1"/>  <p class="text-verd"> <fmt:message key="entitats.ajuda.problemes2"/></p></li>--%>
-<%--                                </ul>--%>
-<%--                            </div>--%>
-<%--                            <div class="modal-footer">--%>
-<%--                                <button type="button" class="botoSuport" data-dismiss="modal" aria-label="Close"><fmt:message key="entitats.ajuda.tanca"/></button>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
             </footer>
         </div>
 

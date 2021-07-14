@@ -9,11 +9,9 @@ import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementoExpediente;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.TipoElementoExpediente;
 import org.apache.commons.io.IOUtils;
 import org.fundaciobit.pluginsib.carpetafront.notib.api.Document;
-import org.fundaciobit.pluginsib.carpetafront.notib.api.Estat;
 import org.fundaciobit.pluginsib.carpetafront.notib.api.NotibClientRest;
 import org.fundaciobit.pluginsib.carpetafront.notib.api.Persona;
 import org.fundaciobit.pluginsib.carpetafront.notib.api.Resposta;
-import org.fundaciobit.pluginsib.carpetafront.notib.api.SubEstat;
 import org.fundaciobit.pluginsib.carpetafront.notib.api.Transmissio;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 

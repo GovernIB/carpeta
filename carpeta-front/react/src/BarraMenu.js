@@ -89,8 +89,8 @@ class BarraMenu extends Component {
 				content = "";
 			} else {
 				content = this.state.enllasosMenuBar.map((s, i) => (
-					<li className="itemBar pl-5" key={i}>
-						<a href={s.url} className="imc-bt-menubar pl-0" target="_blank" tabIndex={111+i} aria-labelledby={s.label} aria-describedby={t('accedirEnllas') + s.label}>
+					<li className="itemBar pl-5" key={i} id={"enllas"+i}>
+						<a href={s.url} className="imc-bt-menubar pl-0" target="_blank" tabIndex={111+i} aria-labelledby={"enllas"+i}>
 							<img src={s.urllogo} title="" alt={s.label} className="logoMenuBar"/>
 							<span>{s.label}</span>
 						</a>
@@ -111,8 +111,8 @@ class BarraMenu extends Component {
 					{/*   title={t('menuTorna')}><span>{t('menuTorna')}</span></a>*/}
 
 						<div className="col-11 pl-0">
-							<h1>
-								<Link to={'/'} className="titolAplicacio" tabIndex="101" aria-labelledby={i18n.t('mollaInici')} aria-describedby={i18n.t('accedirEnllas') + i18n.t('mollaInici')}>{t('menuTitol')}</Link>
+							<h1 id="inici">
+								<Link to={'/'} className="titolAplicacio" tabIndex="101" aria-labelledby="inici">{t('menuTitol')}</Link>
 							</h1>
 
 							<ul>
@@ -121,8 +121,8 @@ class BarraMenu extends Component {
 						</div>
 
 						<div className="col-1 pr-0">
-							<button type="button" className="imc-bt-menu float-right" id="imc-bt-menu" title={t('menuMenu')} tabIndex="190" aria-label={t('menuHamburguesa')} aria-describedby={t('accedirBoto') + t('menuHamburguesa')}>
-								{/*<span>{t('menuMenu')}</span>*/}
+							<button type="button" className="imc-bt-menu float-right" id="imc-bt-menu" title={t('menuMenu')} tabIndex="190" aria-label={t('menuHamburguesa')} aria-describedby="menuHamburguesa">
+								<span className="noVisible" id="menuHamburguesa">{t('accedirBoto') + t('menuHamburguesa')}</span>
 							</button>
 						</div>
 					</div>

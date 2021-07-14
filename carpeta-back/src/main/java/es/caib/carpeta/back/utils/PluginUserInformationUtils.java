@@ -223,8 +223,11 @@ public class PluginUserInformationUtils {
                             "phoneNumber", "password", "gender", "address", "company", "website"));
 
             Map<String, Object> userAttributes = token.getOtherClaims();
-            if (userAttributes != null) {
-
+            if (userAttributes == null || userAttributes.isEmpty() ) {
+                
+                log.error(" El camp userAttributes rebut de KeyCloak per l'usuari " + token.getPreferredUsername() + " val null o es buit.");
+                
+            } else {
                 if (debug) {
                     for (String key : userAttributes.keySet()) {
                         String value = (String) userAttributes.get(key);

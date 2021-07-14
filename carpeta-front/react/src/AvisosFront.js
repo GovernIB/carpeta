@@ -85,9 +85,9 @@ class AvisosFront extends Component {
                     content = "";
                 } else {
                     content = this.state.avisos.map((s, i) => (
-                        <div key={i} className={`alert avis${s.gravetat} alert-dismissible fade show`} role="alert">
+                        <div key={i} className={`alert avis${s.gravetat} alert-dismissible fade show`} role="alert" id={"tancarAvis"+i}>
                             {s.label}
-                            <button type="button" className="close" data-dismiss="alert" aria-label={t('tancar')} aria-describedby={t('tancarAvis')}>
+                            <button type="button" className="close" data-dismiss="alert" aria-label={t('tancar')} aria-describedby={"tancarAvis"+i}>
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -98,9 +98,9 @@ class AvisosFront extends Component {
                     content = "";
                 } else {
                     content = this.state.avisos.map((s, i) => (
-                        <div key={i} className={`alert avis${s.gravetat} alert-dismissible fade show`} role="alert">
+                        <div key={i} className={`alert avis${s.gravetat} alert-dismissible fade show`} role="alert" id={"tancarAvisAutenticat"+i}>
                             {s.label}
-                            <button type="button" className="close" data-dismiss="alert" aria-label={t('tancar')} aria-describedby={t('tancarAvis')}>
+                            <button type="button" className="close" data-dismiss="alert" aria-label={t('tancar')} aria-describedby={"tancarAvisAutenticat"+i}>
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -112,9 +112,9 @@ class AvisosFront extends Component {
         var error = sessionStorage.getItem('errorLogin');
         var avisError = "";
         if (error.length) {
-            avisError = <div className="alert avis3 alert-dismissible fade show" role="alert">
+            avisError = <div className="alert avis3 alert-dismissible fade show" role="alert" id="tancarError">
                 {error}
-                <button type="button" className="close" data-dismiss="alert" aria-label={t('tancar')} aria-describedby={t('tancarAvis')}>
+                <button type="button" className="close" data-dismiss="alert" aria-label={t('tancar')} aria-describedby="tancarError">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>;

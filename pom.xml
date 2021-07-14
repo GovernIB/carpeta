@@ -505,6 +505,9 @@
 		<module>carpeta-api-externa</module>
 		<module>carpeta-ear</module>
 		<module>carpeta-pluginsib</module>
+		<!--
+		<module>carpeta-ws</module>
+		-->
 		<module>scripts</module>
 	</modules>
 </project>

@@ -98,7 +98,7 @@
                         <#setting date_format="MM/dd/yyyy hh">
                         <#list registros as registroItem >
 
-                        <tr class="clickable-row" onclick="mostrantDetall('${registroItem.numeroRegistro}')" onkeypress="mostrantDetall('${registroItem.numeroRegistro}')" tabindex="${registroItem?counter}+506">
+                        <tr class="clickable-row" onclick="mostrantDetall('${registroItem.numeroRegistro}')" onkeypress="mostrantDetall('${registroItem.numeroRegistro}')">
                             <td class="totLinia">${registroItem.numeroRegistro}</td>
                             <td class="totLinia" data-order="$registroItem.fechaRegistro?string('yyyyMMddHHmm')}">
                                 ${registroItem.fechaRegistro?string("dd-MM-yyyy HH:mm")}
@@ -209,6 +209,12 @@
             
             $(".input-group-fecha-inicio .oi-calendar").click(function(){ 
                 $('#fechaInicio').focus(); 
+            });
+        });
+
+        $(document).ready(function () {
+            $("tr").each(function(i) {
+                $(this).attr("tabindex", i+510);
             });
         });
         

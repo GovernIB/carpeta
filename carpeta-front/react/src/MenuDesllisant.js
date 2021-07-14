@@ -105,6 +105,7 @@ class MenuDesllisant extends Component {
 			})
 			.click(function() {
 				$( ".imc-marc-menu").css("transform", "none");
+				$("html").removeClass("imc-menu-visible");
 			});
 
 	}
@@ -182,16 +183,6 @@ class MenuDesllisant extends Component {
 		f.click();
 	}
 
-	tancaM() {
-		console.log("entram!!!!!!");
-		var a = document.getElementsByClassName( ".imc-marc-menu");
-		console.log(a.length);
-		// for(var i=0, len=a.length; i<len; i++){
-		// 	console.log(i);
-		// 	a[i].style["transform"] = "";
-		// }
-		$( ".imc-marc-menu").css("transform", "");
-	}
 
 	render() {
 
@@ -219,8 +210,8 @@ class MenuDesllisant extends Component {
 			<strong className="lletraIdioma" key={i} lang={s}>{t('menuIdioma_' + s)}</strong>
 		));
 		idiomes_seleccionables = idiomes.filter(s => s !== langActual).map((s, i) => (
-			<span key={i}><button onClick={() => this.canviarIdioma(s)}
-				className="boton-menu lletraIdioma" tabIndex={201+i} aria-labelledby={t('menuIdioma_' + s)} aria-describedby={t('accedirIdioma') + t('menuIdioma_' + s)} lang={s}>{t('menuIdioma_' + s)}</button> \ </span>
+			<span key={i} id={"idiomaMenu"+i}><button onClick={() => this.canviarIdioma(s)}
+				className="boton-menu lletraIdioma" tabIndex={201+i} aria-labelledby={"idiomaMenu"+i} lang={s}>{t('menuIdioma_' + s)}</button> \ </span>
 		));
 
 		let allItems = [];
@@ -231,8 +222,8 @@ class MenuDesllisant extends Component {
 
 			allItems.push(<li key="acc">
 				<Link to={{pathname: `/accessibilitat`, nomPagina: 'menuAccessibilitat'}}
-					  className="imc-marc-ico imc--accessibilitat" tabIndex="207" aria-labelledby={t('menuAccessibilitat')} aria-describedby={t('accedirSeccio') + t('menuAccessibilitat')}>
-					<span>{t('menuAccessibilitat')}</span>
+					  className="imc-marc-ico imc--accessibilitat" tabIndex="207" aria-labelledby="accessibilitatMenu">
+					<span id="accessibilitatMenu">{t('menuAccessibilitat')}</span>
 				</Link>
 			</li>);
 
@@ -247,36 +238,36 @@ class MenuDesllisant extends Component {
 						allItems.push(
 							<li key={i}>
 								<button title={s.missatge} className={"botoMenu alert" + s.gravetat + "menu"}
-										onClick={(event) => this.mostrarPlugin(s.gravetat, s.missatge, s.context, s.tipus)} tabIndex={208+i} aria-labelledby={s.nom} aria-describedby={t('accedirPlugin') + s.nom}>
+										onClick={(event) => this.mostrarPlugin(s.gravetat, s.missatge, s.context, s.tipus)} tabIndex={208+i} aria-labelledby={"botoMenu"+i}>
 									<img src={urlBase + s.urllogo} className="imc-icona" title="" alt={s.nom} />
-									<span>{s.nom} </span>
+									<span id={"botoMenu"+i}>{s.nom} </span>
 								</button>
 							</li>)
 						break;
 
 					case 2: // Enllaz
 						allItems.push(<li key={i}>
-							<a href={s.url} title={s.nom} target="_blank" tabIndex={208+i} aria-labelledby={s.nom} aria-describedby={t('accedirEnllas') + s.nom}>
+							<a href={s.url} title={s.nom} target="_blank" tabIndex={208+i} aria-labelledby={"botoMenu"+i}>
 								<img src={s.urllogo} title="" alt={s.nom} className="imc-icona iconaEnllas"/>
-								<span>{s.nom}</span>
+								<span id={"botoMenu"+i}>{s.nom}</span>
 							</a>
 						</li>);
 						break;
 
 					case 3: // Seccio
 						allItems.push(<li key={i}>
-							<Link to={Constants.SECCIO_PATH + s.context} tabIndex={208+i} aria-labelledby={s.nom} aria-describedby={t('accedirSeccio') + s.nom}>
+							<Link to={Constants.SECCIO_PATH + s.context} tabIndex={208+i} aria-labelledby={"botoMenu"+i}>
 								<img src={s.urllogo} title="" alt={s.descripcio} className="imc-icona iconaEnllas"/>
-								<span>{s.nom} </span>
+								<span id={"botoMenu"+i}>{s.nom} </span>
 							</Link>
 						</li>)
 						break;
 
 					case 4: // PseudoPlugin
 						allItems.push(<li key={i}>
-							<a href={s.url} target="_blank" title={s.nom} tabIndex={208+i} aria-labelledby={s.nom} aria-describedby={t('accedirPlugin') + s.nom}>
+							<a href={s.url} target="_blank" title={s.nom} tabIndex={208+i} aria-labelledby={"botoMenu"+i}>
 								<img src={s.urllogo} title="" alt={s.nom} className="imc-icona iconaEnllas"/>
-								<span>{s.nom} </span>
+								<span id={"botoMenu"+i}>{s.nom} </span>
 							</a>
 						</li>);
 						break;
@@ -290,15 +281,15 @@ class MenuDesllisant extends Component {
 			if (canviarDeFront === 'true' && numEntitats > 1) {
 				allItems.push(<li key="canvent">
 					<Link to={{pathname: `/canviarEntitat`, nomPagina: 'menuCanviarEntitat'}}
-						  className="imc-marc-ico imc--canviarEntitat" tabIndex="250" aria-labelledby={t('menuCanviarEntitat')} aria-describedby={t('accedirSeccio') + t('menuCanviarEntitat')}>
-						<span>{t('menuCanviarEntitat')}</span>
+						  className="imc-marc-ico imc--canviarEntitat" tabIndex="250" aria-labelledby="canviarEntitatMenu">
+						<span id="canviarEntitatMenu">{t('menuCanviarEntitat')}</span>
 					</Link>
 				</li>);
 			}
 
 			if (autenticat === '1') {
 				allItems.push(<li key="exit"><a href="sortir" className="imc-marc-ico imc--sortir" id="imc-marc-sortir"
-												title={t('menuSortir')} tabIndex="260" aria-labelledby={t('menuSortir')} aria-describedby={t('accedirEnllas') + t('menuSortir')}><span>{t('menuSortir')}</span></a></li>);
+												title={t('menuSortir')} tabIndex="260" aria-labelledby="sortirMenu"><span id="sortirMenu">{t('menuSortir')}</span></a></li>);
 			}
 
 		}
@@ -309,8 +300,9 @@ class MenuDesllisant extends Component {
 			<div>
 				<div className="imc-cercador" id="imc-cercador" style={styleColorMenu}>
 					<button type="button" className="float-right" id="tancaMenu" title={t('menuHamburguesaTanca')} tabIndex="290"
-							aria-label={t('menuHamburguesaTanca')} aria-describedby={t('accedirBoto') + t('menuHamburguesaTanca')}>
-						<p className="font15em">×</p>
+							aria-label={t('menuHamburguesaTanca')} aria-describedby="tancarMenuHamburguesa">
+						X
+						<span className="noVisible" id="tancarMenuHamburguesa">{t('accedirBoto') + t('menuHamburguesaTanca')}</span>
 					</button>
 				</div>
 				<ul>

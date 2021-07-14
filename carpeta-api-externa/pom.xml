@@ -117,6 +117,7 @@
                             <application>es.caib.carpeta.api.externa.JAXRSConfiguration</application>
                             <endpointClasses>
                                 <endpointClass>es.caib.carpeta.api.externa.services.AccessosResource</endpointClass>
+                                <endpointClass>es.caib.carpeta.api.externa.services.SecureExampleRestService</endpointClass>
                             </endpointClasses>
                             <output>${project.build.directory}/openapi/swagger.json</output>
                             <info>
