@@ -85,10 +85,15 @@ class Breadcrumb extends Component {
                         console.log("error.response.status: " + error.response.status);
                         console.log("error.response.headers: " + error.response.headers);
                     }
-                    this.setState({
-                        items: "",
-                        error: JSON.stringify(error)
-                    });
+
+                    if (error.response.status != '500'){
+                        this.setState({
+                            items: "",
+                            error: JSON.stringify(error)
+                        });
+                    } else {
+                        window.location.href = baseURL;
+                    } 
                 });
 
 
@@ -124,10 +129,16 @@ class Breadcrumb extends Component {
                                 console.log("error.response.status: " + error.response.status);
                                 console.log("error.response.headers: " + error.response.headers);
                             }
-                            this.setState({
-                                items: "",
-                                error: JSON.stringify(error)
-                            });
+
+                            if (error.response.status != '500'){
+                                this.setState({
+                                    items: "",
+                                    error: JSON.stringify(error)
+                                });
+                            } else {
+                                window.location.href = baseURL2;
+                            }
+
                         });
 
                 } else {
@@ -154,10 +165,15 @@ class Breadcrumb extends Component {
                                     console.log("error.response.status: " + error.response.status);
                                     console.log("error.response.headers: " + error.response.headers);
                                 }
-                                this.setState({
-                                    items: "",
-                                    error: JSON.stringify(error)
-                                });
+
+                                if (error.response.status != '500'){
+                                    this.setState({
+                                        items: "",
+                                        error: JSON.stringify(error)
+                                    });
+                                } else {
+                                    window.location.href = baseURL;
+                                }
                             });
 
                     } else {
