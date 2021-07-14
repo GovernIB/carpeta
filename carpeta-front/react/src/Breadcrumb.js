@@ -192,14 +192,14 @@ class Breadcrumb extends Component {
 
                 const TOTAL_ITEMS = items.length;
 
-                itemDOMS.push(<li key='inici'><Link to={'/'} tabIndex="401" aria-labelledby={i18n.t('mollaInici')} aria-describedby={i18n.t('accedirEnllas') + i18n.t('mollaInici')}>{i18n.t('mollaInici')}</Link></li>);
+                itemDOMS.push(<li key='inici' id="mollaInici"><Link to={'/'} tabIndex="401" aria-labelledby="mollaInici">{i18n.t('mollaInici')}</Link></li>);
 
                 // console.log("RENDER Breadcrumb items: " + TOTAL_ITEMS);
 
                 items.forEach(({id, label}, index) => {
                     // if (index < TOTAL_ITEMS - 1) {
-                    itemDOMS.push(<li key={index}><span className="imc-separador"> &gt;</span><Link
-                        to={id} tabIndex={401+index} aria-labelledby={label} aria-describedby={i18n.t('accedirEnllas') + label}>{label}</Link></li>);
+                    itemDOMS.push(<li key={index} id={"molla"+index}><span className="imc-separador"> &gt;</span><Link
+                        to={id} tabIndex={401+index} aria-labelledby={"molla"+index}>{label}</Link></li>);
                     // } else {
                     //     /*if (label === 'plugin') {
                     //         itemDOMS.push(<li id="plugin" key={index}>{pluginNom}</li>);

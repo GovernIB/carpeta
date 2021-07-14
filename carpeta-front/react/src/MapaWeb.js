@@ -70,8 +70,8 @@ class MapaWeb extends Component {
 
 			var accessibilitat = <p key={0} className="lh15 upper">
 				<Link to={{pathname: `/accessibilitat`, nomPagina: 'menuAccessibilitat'}}
-					  className="imc-marc-ico imc--accessibilitat" tabIndex="503" aria-labelledby={t('menuAccessibilitat')} aria-describedby={t('accedirSeccio') + t('menuAccessibilitat')}>
-					<span>{t('menuAccessibilitat')}</span>
+					  className="imc-marc-ico imc--accessibilitat" tabIndex="503" aria-labelledby="accesAccessibilitat">
+					<span id="accesAccessibilitat">{t('menuAccessibilitat')}</span>
 				</Link>
 			</p>;
 
@@ -92,8 +92,8 @@ class MapaWeb extends Component {
 
 							case 0: // Plugin react
 								enllazos.push(
-									<p key={'pr' + i} className="lh15 upper">
-										<Link to={Constants.PLUGINREACT_PATH + s.context} tabIndex={504+i} aria-labelledby={s.nom} aria-describedby={t('accedirPlugin') + s.nom}>
+									<p key={'pr' + i} className="lh15 upper" id={"mapaPlugin"+i}>
+										<Link to={Constants.PLUGINREACT_PATH + s.context} tabIndex={504+i} aria-labelledby={"mapaPlugin"+i}>
 											<img src={urlBase + s.urllogo} alt={s.nom} title="" className="imc-icona"/>
 											{s.nom}
 										</Link>
@@ -102,10 +102,10 @@ class MapaWeb extends Component {
 
 							case 1: // Plugin html
 								enllazos.push(
-									<p key={'ph' + i} className="lh15 upper">
+									<p key={'ph' + i} className="lh15 upper" id={"mapaPlugin"+i}>
 										{/*<img src={urlBase + "/pluginfront/pluginicon/" + s.pluginID + "/" + i18n.language + ""}*/}
 										{/*	 className="imc-icona" title="" alt=""/>*/}
-										<Link to={Constants.PLUGINHTML_PATH + s.context} tabIndex={504+i} aria-labelledby={s.nom} aria-describedby={t('accedirPlugin') + s.nom}>
+										<Link to={Constants.PLUGINHTML_PATH + s.context} tabIndex={504+i} aria-labelledby={"mapaPlugin"+i}>
 											<img src={urlBase + s.urllogo} alt={s.nom} title="" className="imc-icona"/>
 											{s.nom}
 										</Link>
@@ -114,8 +114,8 @@ class MapaWeb extends Component {
 
 							case 3: // Seccio
 								enllazos.push(
-									<p key={'s' + i} className="lh15 upper">
-										<Link to={Constants.SECCIO_PATH + s.context} tabIndex={504+i} aria-labelledby={s.nom} aria-describedby={t('accedirSeccio') + s.nom}>
+									<p key={'s' + i} className="lh15 upper" id={"mapaSeccio"+i}>
+										<Link to={Constants.SECCIO_PATH + s.context} tabIndex={504+i} aria-labelledby={"mapaSeccio"+i}>
 											<img src={s.urllogo} title="" alt={s.nom} className="imc-icona"/>
 											<span className="menuRapidView">{s.nom}</span>
 										</Link>
@@ -125,8 +125,8 @@ class MapaWeb extends Component {
 
 							case 4: // PseudoPlugin
 								enllazos.push(
-									<p key={'ps' + i} className="lh15 upper">
-										<a href={s.url} target="_blank" title={s.nom} tabIndex={504+i} aria-labelledby={s.nom} aria-describedby={t('accedirPlugin') + s.nom}>
+									<p key={'ps' + i} className="lh15 upper" id={"mapaPseudo"+i}>
+										<a href={s.url} target="_blank" title={s.nom} tabIndex={504+i} aria-labelledby={"mapaPseudo"+i}>
 											<img src={s.urllogo} alt={s.nom} title="" className="imc-icona"/>
 											<span className="menuRapidView">{s.nom}</span>
 										</a>
@@ -162,8 +162,8 @@ class MapaWeb extends Component {
 
 						<div className="card">
 							<ul className="list-group list-group-flush">
-								<li className="list-group-item">
-									<p className="lh15 upper"><Link to="/" tabIndex="502" aria-labelledby={t('mapaWebInformacio')} aria-describedby={t('accedirSeccio') + t('mapaWebInformacio')}>{t('mapaWebInformacio')}</Link></p>
+								<li className="list-group-item" id="infoMapaWeb">
+									<p className="lh15 upper"><Link to="/" tabIndex="502" aria-labelledby="infoMapaWeb">{t('mapaWebInformacio')}</Link></p>
 								</li>
 								<li className="list-group-item">
 									{enllazos}

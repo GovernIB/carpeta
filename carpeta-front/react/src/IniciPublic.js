@@ -91,12 +91,12 @@ class IniciPublic extends Component {
                             <h3 className="apartat titol h5 margen-top-clave"><span
                                 className="oi oi-account-login"/>{t('paginaIniciAcces')}</h3>
 
-                            <p className="lh15 subtitolInterior">{t('paginaIniciClave')}</p>
+                            <p className="lh15 subtitolInterior" id="queEsClave">{t('paginaIniciClave')}</p>
 
                             <div className="row">
                                 <div className="pt-3 col-5">
                                     <a className="mr-auto" href="http://clave.gob.es/clave_Home/clave.html"
-                                       target="_blank" rel="noopener noreferrer" tabIndex="502" aria-label={t('paginaIniciAjudaClaveText')} aria-describedby={t('accedirEnllas') + t('paginaIniciAjudaClaveText')}>
+                                       target="_blank" rel="noopener noreferrer" tabIndex="502" aria-label={t('paginaIniciAjudaClaveText')} aria-describedby="queEsClave">
                                         <img src={baseURL + "/src/assets/images/solicitar_clave_acceso_dgt.png"} alt={t('paginaIniciLogoClave')} title={t('paginaIniciLogoClave')} />
                                     </a>
                                 </div>
@@ -115,34 +115,34 @@ class IniciPublic extends Component {
 
                         <div className="col-md-5 border-0 columna2Inici">
 
-                            <p className="margen-top-clave pb-3">
+                            <p className="margen-top-clave pb-3" id="accedirCarpetaPrivat">
                                 <button className="btn btn-primary carpeta-btn botoAccedirCarpeta" title={t('accedirBoto') + t('paginaIniciBotoAccedir')}
                                       onClick={() => {
                                           var loc = new URL(window.location.href);
                                           window.location.href = ('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host))
-                                      }} tabIndex="503" aria-labelledby={t('paginaIniciBotoAccedir')}>
+                                      }} tabIndex="503" aria-labelledby="accedirCarpetaPrivat">
                                     <span className="oi oi-account-login" title="" aria-hidden="true"/> {t('paginaIniciBotoAccedir')}
                                 </button>
                             </p>
 
                             <h3 className="apartat titol h5">{t('tramitacioAnonimaTitol')}</h3>
-                            <p className="lh15 pb-3 subtitolSuperior"><a href={baseURL + '/#/publicmoduls/reprendretramit'} id="tramitacioModalBtn" tabIndex="504" aria-labelledby={t('tramitacioEnllaz')} aria-describedby={t('accedirEnllas') + t('tramitacioEnllaz')}><span
+                            <p className="lh15 pb-3 subtitolSuperior" id="reprendreTramitacio"><a href={baseURL + '/#/publicmoduls/reprendretramit'} id="tramitacioModalBtn" tabIndex="504" aria-labelledby="reprendreTramitacio"><span
                                 className="oi oi-external-link"/>{t('tramitacioEnllaz')}</a></p>
 
                             <h3 className="apartat titol h5">{t('paginaIniciProblemes')}</h3>
                             <p className="lh15 subtitolInterior">{t('paginaIniciAjuda')}</p>
                             <ul className="lh15 pl-5 pt-3 subtitolInterior">
-                                <li><span className="oi oi-arrow-right"/> {t('paginaIniciAjuda1')} <a
+                                <li><span className="oi oi-arrow-right" id="accClave"/> {t('paginaIniciAjuda1')} <a
                                     href="http://clave.gob.es/clave_Home/clave.html"
                                     title={t('paginaIniciAjudaClaveText')}
                                     target="_blank"
-                                    rel="noopener noreferrer" tabIndex="505" aria-labelledby={t('paginaIniciAjudaClave')} aria-describedby={t('accedirEnllas') + t('paginaIniciAjudaClave')}>{t('paginaIniciAjudaClave')}</a>
+                                    rel="noopener noreferrer" tabIndex="505" aria-labelledby="accClave">{t('paginaIniciAjudaClave')}</a>
                                 </li>
                                 <li><span className="oi oi-arrow-right"/> {t('paginaIniciAjuda2')}</li>
-                                <li><span className="oi oi-arrow-right"/> {t('paginaIniciAjuda3')} <a
+                                <li><span className="oi oi-arrow-right" id="bustiaAtencio"/> {t('paginaIniciAjuda3')} <a
                                     href="https://ssweb.seap.minhap.es/ayuda/consulta/Claveciudadanos"
                                     title={t('paginaIniciAjudaBustiaText')}
-                                    target="_blank" rel="noopener noreferrer" tabIndex="506" aria-labelledby={t('paginaIniciAjudaBustia')} aria-describedby={t('accedirEnllas') + t('paginaIniciAjudaBustia')}>{t('paginaIniciAjudaBustia')}</a></li>
+                                    target="_blank" rel="noopener noreferrer" tabIndex="506" aria-labelledby="bustiaAtencio">{t('paginaIniciAjudaBustia')}</a></li>
                             </ul>
 
                         </div>

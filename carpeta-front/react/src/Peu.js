@@ -69,23 +69,23 @@ class Peu extends Component {
 		} else {
 
 			var suportWeb = dadesSuport.filter(s => s.tipus === '1').map((s, i) =>
-				<li className="pb-2 liAjuda" key={i}>{t('suportConsulta')} <a href={s.valor} aria-labelledby={t('suportWeb')} aria-describedby={t('accedirEnllas') + t('suportWeb')}>{t('suportWeb')}</a></li>
+				<li className="pb-2 liAjuda" key={i} id="linkSuportWeb">{t('suportConsulta')} <a href={s.valor} aria-labelledby="linkSuportWeb">{t('suportWeb')}</a></li>
 			);
 			var suportFAQ = dadesSuport.filter(s => s.tipus === '4').map((s, i) =>
-				<li className="pb-2 liAjuda" key={i}>{t('suportConsultaFAQ')} <a href={s.valor} aria-labelledby={t('suportFAQ')} aria-describedby={t('accedirEnllas') + t('suportFAQ')}>{t('suportFAQ')}</a></li>
+				<li className="pb-2 liAjuda" key={i} id="linkSuportFaq">{t('suportConsultaFAQ')} <a href={s.valor} aria-labelledby="linkSuportFaq">{t('suportFAQ')}</a></li>
 			);
 			var suportConsulta = dadesSuport.filter(s => s.tipus === '5').map((s, i) =>
-				<li className="pb-2 liAjuda" key={i}>{t('suportConsultaTecnica')} <a href={s.valor} aria-labelledby={t('suportConsultaTecnicaEnllas')} aria-describedby={t('accedirEnllas') + t('suportConsultaTecnicaEnllas')}>{t('suportConsultaTecnicaEnllas')}</a></li>
+				<li className="pb-2 liAjuda" key={i} id="linkSuportConsulta">{t('suportConsultaTecnica')} <a href={s.valor} aria-labelledby="linkSuportConsulta">{t('suportConsultaTecnicaEnllas')}</a></li>
 			);
 			var suportTelefon = dadesSuport.filter(s => s.tipus === '2').map((s, i) =>
-				<li className="pb-2 liAjuda" key={i}>{t('suportCrida')} <a href={"tel:+34" + s.valor} aria-labelledby={s.valor} aria-describedby={t('accedirTelefon') + s.valor}>{s.valor}</a></li>
+				<li className="pb-2 liAjuda" key={i} id="linkSuportTlf">{t('suportCrida')} <a href={"tel:+34" + s.valor} aria-labelledby="linkSuportTlf">{s.valor}</a></li>
 			);
 			var suportMail = dadesSuport.filter(s => s.tipus === '3').map((s, i) =>
-				<li className="pb-2 liAjuda" key={i}>{t('suportMail')} <a
-					href={"mailto:'" + s.valor + "'"} aria-labelledby={s.valor} aria-describedby={t('enviarMail') + s.valor}>{s.valor}</a></li>
+				<li className="pb-2 liAjuda" key={i} id="linkSuportMail">{t('suportMail')} <a
+					href={"mailto:'" + s.valor + "'"} aria-labelledby="linkSuportMail">{s.valor}</a></li>
 			);
 			var suportAutenticacio = dadesSuport.filter(s => s.tipus === '6').map((s, i) =>
-				<li className="pb-2 liAjuda" key={i}>{t('suportAutenticacio')} <a href={"tel:+34" + s.valor} aria-labelledby={s.valor} aria-describedby={t('accedirTelefon') + s.valor}>{s.valor}</a>
+				<li className="pb-2 liAjuda" key={i} id="linkSuportAut">{t('suportAutenticacio')} <a href={"tel:+34" + s.valor} aria-labelledby="linkSuportAut">{s.valor}</a>
 				</li>
 			);
 
@@ -100,8 +100,8 @@ class Peu extends Component {
 
 					<div className="imc-peu-opcions">
 
-						<div className="pb-3 col2peu">
-							<button type="button" id="dialogAjuda" data-toggle="modal" data-target="#ajudaModal" className="botoSuport" tabIndex="611" aria-labelledby={t('suportAqui')} aria-describedby={t('accedirEnllas') + t('suportAqui')}>{t('suportAqui')}</button>
+						<div className="pb-3 col2peu" id="botoSuportModal">
+							<button type="button" id="dialogAjuda" data-toggle="modal" data-target="#ajudaModal" className="botoSuport" tabIndex="611" aria-labelledby="botoSuportModal">{t('suportAqui')}</button>
 						</div>
 
 						<EnllasosPeuCentral autenticat={autenticat} />
@@ -117,8 +117,9 @@ class Peu extends Component {
 						<div className="modal-content">
 							<div className="modal-header">
 								<p className="card-title titol h2">{t('suportTitol')}</p>
-								<button type="button" className="close" data-dismiss="modal" aria-label={t('tancar')} aria-describedby={t('tancarAjuda')}>
+								<button type="button" className="close" data-dismiss="modal" aria-label={t('tancar')} aria-describedby="tancarBotoSuport">
 									<span aria-hidden="true">&times;</span>
+									<span className="noVisible" id="tancarBotoSuport">{t('tancarAjuda')}</span>
 								</button>
 							</div>
 							<div className="modal-body">
@@ -132,8 +133,8 @@ class Peu extends Component {
 									{suportAutenticacio}
 								</ul>
 							</div>
-							<div className="modal-footer">
-								<button type="button" className="botoSuport" data-dismiss="modal" aria-labelledby={t('tancar')} aria-describedby={t('tancarAjuda')}>{t('suportTanca')}</button>
+							<div className="modal-footer" id="tancarSuportModal">
+								<button type="button" className="botoSuport" data-dismiss="modal" aria-labelledby="tancarSuportModal">{t('suportTanca')}</button>
 							</div>
 						</div>
 					</div>
