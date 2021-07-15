@@ -102,6 +102,7 @@ class MenuDesllisant extends Component {
 			.focusout(function() {
 				$( ".imc-marc-menu").css("transform", "");
 				$( ".imc-marc-menu").css("display", "none");
+				$("html").removeClass("imc-menu-visible");
 			})
 			.click(function() {
 				$( ".imc-marc-menu").css("transform", "none");
