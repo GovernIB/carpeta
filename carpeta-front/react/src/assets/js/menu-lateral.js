@@ -201,7 +201,9 @@ $.fn.appMenu = function(opcions){
 					.off(".appMenu")
 					.on('click.appMenu', mostra);
 
-				$( ".imc-marc-menu").css("transform", "");
+				$( ".imc-marc-menu")
+					.css("transform", "")
+					.css("display", "none");
 
 			};
 

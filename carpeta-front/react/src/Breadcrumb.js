@@ -210,7 +210,7 @@ class Breadcrumb extends Component {
                 items.forEach(({id, label}, index) => {
                     // if (index < TOTAL_ITEMS - 1) {
                     itemDOMS.push(<li key={index} id={"molla"+index}><span className="imc-separador"> &gt;</span><Link
-                        to={id} tabIndex={401+index} aria-labelledby={"molla"+index}>{label}</Link></li>);
+                        to={id} tabIndex={402+index} aria-labelledby={"molla"+index}>{label}</Link></li>);
                     // } else {
                     //     /*if (label === 'plugin') {
                     //         itemDOMS.push(<li id="plugin" key={index}>{pluginNom}</li>);

@@ -87,7 +87,7 @@ class AvisosFront extends Component {
                     content = this.state.avisos.map((s, i) => (
                         <div key={i} className={`alert avis${s.gravetat} alert-dismissible fade show`} role="alert" id={"tancarAvis"+i}>
                             {s.label}
-                            <button type="button" className="close" data-dismiss="alert" aria-label={t('tancar')} aria-describedby={"tancarAvis"+i}>
+                            <button type="button" className="close" data-dismiss="alert" aria-label={t('tancar')} aria-describedby={"tancarAvis"+i} tabIndex={451+i}>
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -100,7 +100,7 @@ class AvisosFront extends Component {
                     content = this.state.avisos.map((s, i) => (
                         <div key={i} className={`alert avis${s.gravetat} alert-dismissible fade show`} role="alert" id={"tancarAvisAutenticat"+i}>
                             {s.label}
-                            <button type="button" className="close" data-dismiss="alert" aria-label={t('tancar')} aria-describedby={"tancarAvisAutenticat"+i}>
+                            <button type="button" className="close" data-dismiss="alert" aria-label={t('tancar')} aria-describedby={"tancarAvisAutenticat"+i} tabIndex={451+i}>
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
