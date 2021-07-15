@@ -43,7 +43,7 @@
                         <div class="col-md-3 pl-0 pr-8">
                             <div class="form-group pr-2" style="padding-right:50px">
                                 <label for="numero" class="float-left">${registro_numero}</label>
-                                <input type="text" name="numero" id="numero" aria-labelledby="numero" class="form-control form-control-sm" value="<#if form_numero?has_content>${form_numero}</#if>" tabindex="501"/>
+                                <input type="text" name="numero" id="numero" placeholder="${registro_numero}" maxlength="25" aria-labelledby="numero" class="form-control form-control-sm" value="<#if form_numero?has_content>${form_numero}</#if>" tabindex="501"/>
                             </div>
                         </div>
                     
@@ -52,7 +52,9 @@
                                 <label for="fechaInicio" placeholder="yyyy-mm-dd" class="float-left">${carpeta_fecha_inicio}</label>
                                 <div class="input-group input-group-fecha-inicio">
                                     <input id="fechaInicio" name="fechaInicio" class="form-control form-control-sm estilCalendar"
-                                           required="required" type="date" value="${form_dataInici?string('yyyy-MM-dd')}" maxlength="10" tabindex="502" aria-labelledby="fechaInicio">
+                                           required="required" type="date" value="${form_dataInici?string('yyyy-MM-dd')}" 
+                                           min="1900-01-01" max="2100-12-31"
+                                           maxlength="10" tabindex="502" aria-labelledby="fechaInicio">
                                     <span class="input-group-text"><span class="oi oi-calendar"></span></span>
                                 </div>
                             </div>
@@ -62,7 +64,9 @@
                                 <label for="fechaFin" placeholder="yyyy-mm-dd" class="float-left">${carpeta_fecha_fin}</label>
                                 <div class="input-group input-group-fecha-fin">
                                     <input id="fechaFin" name="fechaFin" class="form-control form-control-sm estilCalendar" 
-                                           required="required" type="date" value="${form_dataFi?string('yyyy-MM-dd')}" maxlength="10" tabindex="503" aria-labelledby="fechaFin">
+                                           required="required" type="date" value="${form_dataFi?string('yyyy-MM-dd')}"
+                                           min="1900-01-01" max="2100-12-31" 
+                                           maxlength="10" tabindex="503" aria-labelledby="fechaFin">
                                     <span class="input-group-text"><span class="oi oi-calendar"></span></span>
                                 </div>
                             </div>
@@ -78,7 +82,10 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary carpeta-btn ml-0 float-left" onclick="espera()" tabindex="505">${carpeta_buscar}</button>
+                    <div id="errorContainer" class="row pb-2 ml-0 mr-0 ocult">
+                        <div class="alert alert-warning" role="alert" id="errorMsg"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary carpeta-btn ml-0 float-left" onclick="validaFormulari();return false;" tabindex="505">${carpeta_buscar}</button>
                 </form>
 
                 <#if registros?has_content>
@@ -202,6 +209,20 @@
             window.location.replace('${urlDetalle}'+numeroRegistroFormateado);
         }
         
+        function validaFormulari(){
+        	if($('#fechaInicio').val() <= $('#fechaFin').val()){
+        		$('#llistat').hide();
+                $("#carregantDetallRegistre").removeClass("loaderOcult");
+                $('#fechaBusqueda').submit();
+        		return true;
+        	}
+        	$('#errorMsg').html("${error_dates}");
+            $('#errorContainer').removeClass("ocult");
+            $('.input-group-fecha-inicio').css('border','1px solid red');
+            $('.input-group-fecha-fin').css('border','1px solid red');
+        	return false;
+        }
+        
         $(document).ready(function () {
         	$(".input-group-fecha-fin .oi-calendar").click(function(){ 
                 $('#fechaFin').focus(); 
@@ -210,12 +231,29 @@
             $(".input-group-fecha-inicio .oi-calendar").click(function(){ 
                 $('#fechaInicio').focus(); 
             });
-        });
-
-        $(document).ready(function () {
+            
+            if (navigator.appVersion.indexOf("Chrome/") != -1) {
+                $('.input-group-fecha-inicio .input-group-text').css('display','none');
+                $('.input-group-fecha-fin .input-group-text').css('display','none');
+            }
+            
+            $('#fechaFin').blur(function(e){
+                if ($('#fechaInicio').val() > $('#fechaFin').val()){
+                    $('#errorMsg').html("${error_dates}");
+                    $('#errorContainer').removeClass("ocult");
+                    $('.input-group-fecha-inicio').css('border','1px solid red');
+                    $('.input-group-fecha-fin').css('border','1px solid red');
+                }else{
+                    $('#errorContainer').addClass("ocult");
+                    $('.input-group-fecha-inicio').css('border','none');
+                    $('.input-group-fecha-fin').css('border','none');
+                }
+            });
+            
             $("tr").each(function(i) {
                 $(this).attr("tabindex", i+510);
             });
+            
         });
         
     </script>

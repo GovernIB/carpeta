@@ -582,11 +582,14 @@ a.imc-bt-xarxa:hover {
 	border: none;
 	overflow:hidden;
 }
+/*
 .estilCalendar::-webkit-inner-spin-button,
 .estilCalendar::-webkit-calendar-picker-indicator {
 	display: none;
 	-webkit-appearance: none;
 }
+*/
+
 
 .imc--recarregar::before { background-image: url(../images/recarregar.PNG); }
 

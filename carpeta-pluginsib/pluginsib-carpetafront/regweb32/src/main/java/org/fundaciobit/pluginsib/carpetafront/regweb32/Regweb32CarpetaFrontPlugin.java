@@ -452,7 +452,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 
         String[] traduccions = {"registro.listado", "registro.descripcion", "registro.numero", "registro.fecha",
                 "registro.extracto", "registro.destinatario", "registro.vacio", "carpeta.acciones",  "registro.estado",
-                "registro.detalle", "carpeta.fecha.inicio", "carpeta.fecha.fin", "carpeta.todos", "carpeta.buscar"};
+                "registro.detalle", "carpeta.fecha.inicio", "carpeta.fecha.fin", "carpeta.todos", "carpeta.buscar", "error.dates"};
 
         for (String t : traduccions) {
             map.put(t.replace('.', '_'), getTraduccio(t, locale));
