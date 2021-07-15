@@ -131,8 +131,8 @@
 		</script>
 	  </sec:authorize> 
 
-  
-    <div id="fullpagecarpetafront"></div>
+
+    <div id="fullpagecarpetafront" tabindex="-1" class="noEnfocar"></div>
 
 	<!-- js react -->
 	<script src = "<c:url value="/dist/reactjs_main.js"/>" type="text/javascript"></script>

@@ -72,6 +72,9 @@ class Index extends Component {
 
     render() {
 
+        const enfocar = document.querySelector("#fullpagecarpetafront");
+        enfocar.focus();
+
 
         var auth = sessionStorage.getItem('autenticat');
 
@@ -129,11 +132,6 @@ class Index extends Component {
             infoUsuari = '';
         }
 
-    
-        const currentlocation = this.props.location;
-        //console.log("\n\n   XXXXXXXXXX   LOCATION: " + currentlocation.pathname);
-
-
 
         const styleContenidor = (auth === '1')? { marginTop: '5.5em'} : { marginTop: '2em'};
 
@@ -169,7 +167,7 @@ class Index extends Component {
                     <div className="imc-continguts" style={estilContingut} id="continguts" >
 
                         {/* Molla de pa */}
-                        <Breadcrumb  currentlocation={currentlocation} />
+                        <Breadcrumb />
 
                         {/* Avisos Front */}
                         <AvisosFront  />

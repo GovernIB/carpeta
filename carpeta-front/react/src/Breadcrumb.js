@@ -21,17 +21,12 @@ class Breadcrumb extends Component {
 
         this.canviatRoute = this.canviatRoute.bind(this);
 
-        // if (this.props.currentlocation) {
-        //     console.log(" BREADCRUMB Constructor currentlocation => " + this.props.currentlocation);
-        // }
-
         this.canviatIdioma = this.canviatIdioma.bind(this);
         i18n.on('languageChanged', this.canviatIdioma);
     }
 
     canviatIdioma(lng) {
         // console.log(" CANVIAT IDIOMA EN BREADCRUMB A ]" + lng+ "[");
-        this.canviatRoute(this.props.currentlocation, "PUSH");
     }
 
 

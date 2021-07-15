@@ -460,6 +460,11 @@ img:hover {
 }
 .noVisible{
 	display: none;
+	visibility: hidden;
+}
+.noEnfocar:focus {
+	border: 0;
+	outline: none;
 }
 .ui-dialog .ui-dialog-title {
 	color: #fff;
