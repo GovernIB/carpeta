@@ -468,6 +468,18 @@ img:hover {
 	display: none;
 	visibility: hidden;
 }
+.noEnfocar:focus {
+	border: 0;
+	outline: none;
+}
+.fonsTransparent{
+	background-color: rgba(0,0,0,0) !important;
+}
+.fonsTransparent:hover,
+.fonsTransparent:focus-visible{
+	background-color: #000 !important;
+	border: 0 !important;
+}
 .ui-dialog .ui-dialog-title {
 	color: #fff;
 }

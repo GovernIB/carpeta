@@ -21,17 +21,12 @@ class Breadcrumb extends Component {
 
         this.canviatRoute = this.canviatRoute.bind(this);
 
-        // if (this.props.currentlocation) {
-        //     console.log(" BREADCRUMB Constructor currentlocation => " + this.props.currentlocation);
-        // }
-
         this.canviatIdioma = this.canviatIdioma.bind(this);
         i18n.on('languageChanged', this.canviatIdioma);
     }
 
     canviatIdioma(lng) {
         // console.log(" CANVIAT IDIOMA EN BREADCRUMB A ]" + lng+ "[");
-        this.canviatRoute(this.props.currentlocation, "PUSH");
     }
 
 
@@ -215,7 +210,7 @@ class Breadcrumb extends Component {
                 items.forEach(({id, label}, index) => {
                     // if (index < TOTAL_ITEMS - 1) {
                     itemDOMS.push(<li key={index} id={"molla"+index}><span className="imc-separador"> &gt;</span><Link
-                        to={id} tabIndex={401+index} aria-labelledby={"molla"+index}>{label}</Link></li>);
+                        to={id} tabIndex={402+index} aria-labelledby={"molla"+index}>{label}</Link></li>);
                     // } else {
                     //     /*if (label === 'plugin') {
                     //         itemDOMS.push(<li id="plugin" key={index}>{pluginNom}</li>);
