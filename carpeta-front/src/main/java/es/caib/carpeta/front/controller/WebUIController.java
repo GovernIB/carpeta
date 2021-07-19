@@ -442,6 +442,7 @@ public class WebUIController extends PluginFrontController {
     public void getCustomCss(@PathVariable("entitatid") String entitatid, HttpServletRequest request, HttpServletResponse response) {
     	
     	try {
+    		response.setContentType("text/css");
     		
     		if(entitatid != null) {
     			Long customCssEntitatId = utilsEjb.getCustomCssEntitat(entitatid);
