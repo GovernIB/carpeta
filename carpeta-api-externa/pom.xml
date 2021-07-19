@@ -11,6 +11,12 @@
     <packaging>war</packaging>
     <name>Carpeta - API REST - EXTERNA</name>
     <description>API REST EXTERNA de Carpeta</description>
+    
+    <properties>
+      <auth.method>BASIC</auth.method>
+    </properties>
+    
+
 
     <dependencies>
         <!-- Especificacions i llibreries proporcionades per JBoss -->
@@ -168,6 +174,20 @@
     </build>
 
     <profiles>
+
+       <profile>
+            <id>caib</id>
+            <activation>
+                <property>
+                    <name>caib</name>
+                </property>
+            </activation> 
+            <properties>
+                <auth.method>KEYCLOAK</auth.method>
+            </properties>
+        </profile>
+    
+    
         <!-- Profile per incloure swagger-ui dins el mòdul -->
         <profile>
             <id>swagger-ui</id>

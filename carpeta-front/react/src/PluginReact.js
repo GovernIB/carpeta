@@ -3,6 +3,7 @@ import {withTranslation} from 'react-i18next';
 import i18n from 'i18next';
 import ExpirarSessio from "./ExpirarSessio";
 import {withRouter} from "react-router";
+import PropTypes from 'prop-types';
 
 /**
  * @author jpernia
@@ -130,5 +131,13 @@ class PluginReact extends Component {
 
 	}
 }
+
+
+PluginReact.propTypes = {
+    seccioContext : PropTypes.string.isRequired,
+    pluginContext: PropTypes.string.isRequired,
+    pluginParameter: PropTypes.string,
+    isPublic: PropTypes.bool
+};
 
 export default withTranslation()(withRouter(PluginReact));

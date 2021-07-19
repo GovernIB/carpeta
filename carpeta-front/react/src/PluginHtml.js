@@ -5,7 +5,11 @@ import ExpirarSessio from "./ExpirarSessio";
 import {withRouter} from "react-router";
 import axios from "axios";
 import DocumentTitle from "react-document-title";
+import PropTypes from 'prop-types';
 
+/**
+ * 
+ */
 class PluginHtml extends Component {
 
     constructor() {
@@ -182,5 +186,14 @@ class PluginHtml extends Component {
 
     }
 }
+
+
+PluginHtml.propTypes = {
+    seccioContext : PropTypes.string.isRequired,
+    pluginContext: PropTypes.string.isRequired,
+    pluginParameter: PropTypes.string,
+    isPublic: PropTypes.bool
+};
+
 
 export default withTranslation()(withRouter(PluginHtml));

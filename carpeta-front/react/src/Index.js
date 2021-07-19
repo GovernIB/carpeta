@@ -210,52 +210,52 @@ class Index extends Component {
                                 <Route
                                     path={ Constants.PLUGINHTML_PATH + ":pluginContext/p/:pluginParameter"  }
                                     render={(props) => {
-                                        return <PluginHtml {...props} seccioContext={0} pluginContext={props.match.params.pluginContext} pluginParameter={props.match.params.pluginParameter} />
+                                        return <PluginHtml {...props} seccioContext={'0'} pluginContext={props.match.params.pluginContext} pluginParameter={props.match.params.pluginParameter} />
                                     }}
                                 />
                                 <Route
                                     path={ Constants.PLUGINREACT_PATH + ":pluginContext/p/:pluginParameter" }
                                     render={(props) => {
-                                        return <PluginReact {...props} seccioContext={0} pluginContext={props.match.params.pluginContext} pluginParameter={props.match.params.pluginParameter} />
+                                        return <PluginReact {...props} seccioContext={'0'} pluginContext={props.match.params.pluginContext} pluginParameter={props.match.params.pluginParameter} />
                                     }}
                                 />
 
                                 <Route
                                     path={ Constants.PLUGINHTML_PATH + ":pluginContext"  }
                                     render={(props) => {
-                                        return <PluginHtml {...props} seccioContext={0} pluginContext={props.match.params.pluginContext} />
+                                        return <PluginHtml {...props} seccioContext={'0'} pluginContext={props.match.params.pluginContext} />
                                     }}
                                 />
                                 <Route
                                     path={ Constants.PLUGINREACT_PATH + ":pluginContext" }
                                     render={(props) => {
-                                        return <PluginReact {...props} seccioContext={0} pluginContext={props.match.params.pluginContext}  />
+                                        return <PluginReact {...props} seccioContext={'0'} pluginContext={props.match.params.pluginContext}  />
                                     }}
                                 />
 
                                 <Route
                                     path={ Constants.PLUGINHTML_PUBLIC_PATH + ":pluginContext/p/:pluginParameter"  }
                                     render={(props) => {
-                                        return <PluginHtml {...props} seccioContext={0} pluginContext={props.match.params.pluginContext} pluginParameter={props.match.params.pluginParameter} isPublic={true} />
+                                        return <PluginHtml {...props} seccioContext={'0'} pluginContext={props.match.params.pluginContext} pluginParameter={props.match.params.pluginParameter} isPublic={true} />
                                     }}
                                 />
                                 <Route
                                     path={ Constants.PLUGINREACT_PUBLIC_PATH + ":pluginContext/p/:pluginParameter" }
                                     render={(props) => {
-                                        return <PluginReact {...props} seccioContext={0} pluginContext={props.match.params.pluginContext} pluginParameter={props.match.params.pluginParameter} isPublic={true} />
+                                        return <PluginReact {...props} seccioContext={'0'} pluginContext={props.match.params.pluginContext} pluginParameter={props.match.params.pluginParameter} isPublic={true} />
                                     }}
                                 />
 
                                 <Route
                                     path={ Constants.PLUGINHTML_PUBLIC_PATH + ":pluginContext"  }
                                     render={(props) => {
-                                        return <PluginHtml {...props} seccioContext={0} pluginContext={props.match.params.pluginContext} isPublic={true} />
+                                        return <PluginHtml {...props} seccioContext={'0'} pluginContext={props.match.params.pluginContext} isPublic={true} />
                                     }}
                                 />
                                 <Route
                                     path={ Constants.PLUGINREACT_PUBLIC_PATH + ":pluginContext" }
                                     render={(props) => {
-                                        return <PluginReact {...props} seccioContext={0} pluginContext={props.match.params.pluginContext} isPublic={true} />
+                                        return <PluginReact {...props} seccioContext={'0'} pluginContext={props.match.params.pluginContext} isPublic={true} />
                                     }}
                                 />
                                

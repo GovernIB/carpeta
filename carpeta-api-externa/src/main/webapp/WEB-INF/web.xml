@@ -23,11 +23,10 @@
             <role-name>CAR_SUPER</role-name>
         </auth-constraint>
     </security-constraint>
-     
-    
+
     <login-config>
         <!-- Per defecte BASIC. Si profile -Pcaib llavors KEYCLOAK  -->
-        <auth-method>KEYCLOAK</auth-method>
+        <auth-method>${auth.method}</auth-method>
         <realm-name>Govern de les Illes Balears</realm-name>
     </login-config>
 

@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import {withRouter} from "react-router";
 import * as Constants from './Constants';
 import DocumentTitle from "react-document-title";
+import PropTypes from 'prop-types';
 
 /**
  * 
@@ -32,7 +33,7 @@ class LlistatDePlugins extends Component {
 
     componentDidMount() {
 
-        const seccioContext = this.props.seccioContext ? this.props.seccioContext : 0;
+        const seccioContext = this.props.seccioContext ? this.props.seccioContext : '0';
 
         let autenticat = sessionStorage.getItem('autenticat');
         // console.log(" LlistatDePlugins - SECCIO " + seccioContext + "(AUTH: ]" + autenticat+ "[)");
@@ -83,8 +84,8 @@ class LlistatDePlugins extends Component {
 
         alert(missatge);
         if (this.props.history) {
-            const seccioContext = this.props.seccioContext ? this.props.seccioContext : 0;
-            const baseSeccio = (seccioContext === 0) ? '' : Constants.SECCIO_PATH + seccioContext;
+            const seccioContext = this.props.seccioContext ? this.props.seccioContext : '0';
+            const baseSeccio = (seccioContext === '0') ? '' : Constants.SECCIO_PATH + seccioContext;
             this.props.history.push(baseSeccio + Constants.PLUGINHTML_PATH + pluginContext);
         } else {
             console.log("LLISTAT PLUGINS INFOHTML => NO ES POT LLEGIR HISTORY !!!!!");
@@ -97,7 +98,7 @@ class LlistatDePlugins extends Component {
 
         if (this.props.history) {
             const seccioContext = this.props.seccioContext ? this.props.seccioContext : 0;
-            const baseSeccio = (seccioContext === 0) ? '' : SECCIO_PATH + seccioContext;
+            const baseSeccio = (seccioContext === '0') ? '' : SECCIO_PATH + seccioContext;
             this.props.history.push(baseSeccio + Constants.PLUGINREACT_PATH + pluginContext);
         } else {
             console.log("LLISTAT PLUGINS INFOHTML => NO ES POT LLEGIR HISTORY !!!!!");
@@ -125,7 +126,7 @@ class LlistatDePlugins extends Component {
 
         let urlBase = sessionStorage.getItem('contextPath')
 
-        const baseSeccio = (this.props.seccioContext == 0) ? '' : Constants.SECCIO_PATH + this.props.seccioContext;
+        const baseSeccio = (this.props.seccioContext === '0') ? '' : Constants.SECCIO_PATH + this.props.seccioContext;
         const styleDesc =  { fontSize: '84%', color: '#666', textAlign: 'center' } ;
 
         let allItems = [];
@@ -224,7 +225,7 @@ class LlistatDePlugins extends Component {
 
         let titolHeader;
         let subtitolHeader;
-        if (this.props.seccioContext === 0) {
+        if (this.props.seccioContext === '0') {
             titolHeader = t('paginaIniciTitolPrivat') + entitatNom;
             subtitolHeader = t('paginaIniciIntroduccioPrivat');
         } else {
@@ -284,5 +285,11 @@ class LlistatDePlugins extends Component {
     }
 
 }
+
+
+LlistatDePlugins.propTypes = {
+    seccioContext : PropTypes.string.isRequired
+};
+
 
 export default withTranslation()(withRouter(LlistatDePlugins));
