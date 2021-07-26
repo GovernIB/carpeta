@@ -196,7 +196,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             try {
 
                 log.error("Error llistant registres: " + e.getMessage(), e);
-                errorPage(e.getMessage(), e, request, response, locale);
+                errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
 
             } catch (Exception exception) {
                 log.info(exception);
@@ -231,7 +231,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             try {
 
                 log.error("Error enviant pagian d'espera de Sistra: " + e.getMessage(), e);
-                errorPage(e.getMessage(), e, request, response, locale);
+                errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
 
             } catch (Exception exception) {
                 log.info(exception);
@@ -267,7 +267,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             try {
 
                 log.error("Error enviant pagian d'espera de NOTIB: " + e.getMessage(), e);
-                errorPage(e.getMessage(), e, request, response, locale);
+                errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
 
             } catch (Exception exception) {
                 log.info(exception);
@@ -292,14 +292,14 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             String webpage = getComunicacionsPageSistra(absolutePluginRequestPath, userData, locale);
 
-            responsePage(request, response, locale, webpage);
+            responsePage(request, response, locale, webpage, absolutePluginRequestPath);
 
         } catch (Exception e) {
 
             try {
 
                 log.error("Error llistant notificaions sistra: " + e.getMessage(), e);
-                errorPage(e.getMessage(), e, request, response, locale);
+                errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
 
             } catch (Exception exception) {
                 log.info(exception);
@@ -310,7 +310,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     }
 
     protected void responsePage(HttpServletRequest request, HttpServletResponse response, Locale locale,
-            String webpage) {
+            String webpage, String absolutePluginRequestPath) {
         try {
             response.setCharacterEncoding("utf-8");
             response.setContentType("text/html");
@@ -321,7 +321,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             try {
 
                 log.error("Error obtening writer: " + e.getMessage(), e);
-                errorPage(e.getMessage(), e, request, response, locale);
+                errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
 
             } catch (Exception exception) {
                 log.info(exception);
@@ -500,12 +500,12 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             String fullPage = encapsulaEnPaginaHtml(absolutePluginRequestPath, locale, map, generat);
 
-            responsePage(request, response, locale, fullPage);
+            responsePage(request, response, locale, fullPage, absolutePluginRequestPath);
 
         } catch (Exception e) {
 
             log.error("Error llistant notificacions sistra: " + e.getMessage(), e);
-            errorPage(e.getMessage(), e, request, response, locale);
+            errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
 
         }
 
@@ -647,11 +647,11 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             String fullPage = encapsulaEnPaginaHtml(absolutePluginRequestPath, locale, map, generat);
 
-            responsePage(request, response, locale, fullPage);
+            responsePage(request, response, locale, fullPage, absolutePluginRequestPath);
 
         } catch (Exception e) {
             log.error("Error detall notificació notib: " + e.getMessage(), e);
-            errorPage(e.getMessage(), e, request, response, locale);
+            errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
         }
 
     }

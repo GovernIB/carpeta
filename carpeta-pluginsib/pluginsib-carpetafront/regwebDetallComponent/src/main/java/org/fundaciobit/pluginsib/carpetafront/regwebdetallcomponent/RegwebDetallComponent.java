@@ -115,7 +115,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 
             try{
             	
-                errorPage(e.getLocalizedMessage(), e, request, response, locale);
+                errorPage(e.getLocalizedMessage(), e, request, response, absolutePluginRequestPath, locale);
                 log.error("Error detall registre: " + e.getMessage(), e);
                 
             }catch(Exception e2){
@@ -192,7 +192,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
                 peticio.append("Error: " + e.getMessage()).append("\n");
                 logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error plugin", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error plugin"); 
             	
-                errorPage(e.getLocalizedMessage(), e, request, response, locale);
+                errorPage(e.getLocalizedMessage(), e, request, response, absolutePluginRequestPath, locale);
                 log.error("Error detall registre: " + e.getMessage(), e);
             }catch(Exception e2){
                 log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
@@ -413,7 +413,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
         } catch (Exception e) {
 
             try{
-                errorPage(e.getLocalizedMessage(), e, request, response, locale);
+                errorPage(e.getLocalizedMessage(), e, request, response, absolutePluginRequestPath, locale);
                 log.error("Error obtenint justificant: " + e.getMessage(), e);
             }catch(Exception e2){
                 log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
@@ -444,7 +444,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
                 peticio.append("Error: " + e.getMessage()).append("\n");
                 logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error justificant", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error justificant");
                 
-				errorPage(e.getLocalizedMessage(), e, request, response, locale);
+				errorPage(e.getLocalizedMessage(), e, request, response, absolutePluginRequestPath, locale);
                 log.error("Error obtenint justificant: " + e.getMessage(), e);
             }catch(Exception e2){
                 log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
@@ -471,7 +471,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 	            } catch (IOException e) {
 	
 	                try{
-	                    errorPage(e.getLocalizedMessage(), e, request, response, locale);
+	                    errorPage(e.getLocalizedMessage(), e, request, response, absolutePluginRequestPath, locale);
 	                    log.error("Error obtening writer: " + e.getMessage(), e);
 	                }catch(Exception e2){
 	                    log.error("Error mostrant pàgina d'error: " + e.getMessage(), e);
@@ -493,7 +493,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 	            peticio.append("Error: " + ex.getMessage()).append("\n");
 	            logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error justificant", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error justificant"); 
 	        	
-	            errorPage(ex.getLocalizedMessage(), ex, request, response, locale);
+	            errorPage(ex.getLocalizedMessage(), ex, request, response, absolutePluginRequestPath, locale);
 	            log.error("Error detall registre: " + ex.getMessage(), ex);
 	        }catch(Exception ex2){
 	            log.error("Error mostrant pàgina d'error: " + ex2.getMessage(), ex2);
@@ -542,7 +542,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
         } catch (Exception e) {
 
             try{
-                errorPage(e.getLocalizedMessage(), e, request, response, locale);
+                errorPage(e.getLocalizedMessage(), e, request, response, absolutePluginRequestPath, locale);
                 log.error("Error obtenint annexe: " + e.getMessage(), e);
             }catch(Exception e2){
                 log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
@@ -575,7 +575,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
                 peticio.append("Error: " + e.getMessage()).append("\n");
                 logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error annex", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error annex");
                 
-				errorPage(e.getLocalizedMessage(), e, request, response, locale);
+				errorPage(e.getLocalizedMessage(), e, request, response, absolutePluginRequestPath, locale);
                 log.error("Error obtenint annexe: " + e.getMessage(), e);
             }catch(Exception e2){
                 log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
@@ -620,7 +620,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 	            peticio.append("Error: " + ex.getMessage()).append("\n");
 	            logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error annexe", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error annexe"); 
 	        	
-	            errorPage(ex.getLocalizedMessage(), ex, request, response, locale);
+	            errorPage(ex.getLocalizedMessage(), ex, request, response, absolutePluginRequestPath, locale);
 	            log.error("Error detall registre: " + ex.getMessage(), ex);
 	        }catch(Exception ex2){
 	            log.error("Error mostrant pàgina d'error: " + ex2.getMessage(), ex2);

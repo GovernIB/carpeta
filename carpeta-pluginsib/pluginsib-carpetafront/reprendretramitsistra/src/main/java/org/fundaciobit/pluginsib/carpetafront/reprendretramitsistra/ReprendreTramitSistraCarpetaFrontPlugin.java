@@ -214,7 +214,7 @@ public class ReprendreTramitSistraCarpetaFrontPlugin extends AbstractCarpetaFron
 
             log.error("Error llistant tràmits: " + e.getMessage(), e);
 
-            super.errorPage(administrationEncriptedID, e, request, response, locale);
+            //errorPage(administrationEncriptedID, e, request, response, absolutePluginRequestPath, locale);
         }
     }
 

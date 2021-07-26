@@ -27,6 +27,8 @@ import java.util.Set;
  */
 public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtilities implements ICarpetaFrontPlugin {
 
+	public static final String RESOURCE_BUNDLE_NAME = "carpetafrontapi";
+	
     /**
      * 
      */
@@ -48,7 +50,6 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
     public AbstractCarpetaFrontPlugin(String propertyKeyBase) {
         super(propertyKeyBase);
     }
-    
     
     
     // ----------------------------------------------------------------------------
@@ -306,6 +307,57 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
         response.getWriter().println(webpage);
         response.flushBuffer();
     }
+    
+    
+    // --------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    // ---------------------------- E R R O R P A G E ----------------------
+    // -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
+
+    
+    protected void errorPage(String errorMsg, Throwable th, HttpServletRequest request,
+            HttpServletResponse response, String absolutePluginRequestPath,  Locale locale) {
+
+    	try {
+	    	if (th == null) {
+	            log.error("AbstractPluginFullUtilities::errorPage() " + errorMsg);
+	        } else {
+	            log.error("AbstractPluginFullUtilities::errorPage() " + errorMsg, th);
+	        }
+	
+	        if (locale == null) {
+	            locale = request.getLocale();
+	        }
+	    	
+	        InputStream input = this.getClass().getResourceAsStream("/" + WEBRESOURCECOMMON + "/templates/errorpage.html");
+	        String plantilla = IOUtils.toString(input, "UTF-8");
+	
+	        Map<String, Object> map = new HashMap<String, Object>();
+	        
+	        String[] traduccions = { "error.generic", "error.amaga.detalls", 
+	        		"error.veure.detalls", "error.tornar"};
+
+            for (String t : traduccions) {
+            	String traduccion = getTraduccio(RESOURCE_BUNDLE_NAME, t, locale);
+            	System.out.println("t => " + traduccion);
+                map.put(t.replace('.', '_'), traduccion);
+            }
+	
+	        map.put("resources", absolutePluginRequestPath + "/" + WEBRESOURCECOMMON);
+	        map.put("error", errorMsg);            
+	        
+	        String webpage = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
+	
+	        response.setCharacterEncoding("utf-8");
+	        response.setContentType("text/html");
+        	response.getWriter().println(webpage);
+			response.flushBuffer();
+		} catch (IOException e) {
+			log.error("Error obtenint el writter: " + e.getMessage());
+		}
+    }
+    
 
     /**
      * Mètode que retorna la icona del plugin

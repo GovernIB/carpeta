@@ -497,55 +497,6 @@ public abstract class AbstractPluginFullUtilities extends AbstractPluginProperti
     }
 
 
-    // --------------------------------------------------------------------------
-    // -------------------------------------------------------------------------
-    // ---------------------------- E R R O R P A G E ----------------------
-    // -------------------------------------------------------------------------
-    // -------------------------------------------------------------------------
-
-    protected void errorPage(String errorMsg, Throwable th, HttpServletRequest request,
-                             HttpServletResponse response, Locale locale)  {
-
-        if (th == null) {
-            log.error("AbstractPluginFullUtilities::errorPage() " + errorMsg);
-        } else {
-            log.error("AbstractPluginFullUtilities::errorPage() " + errorMsg, th);
-        }
-
-        if (locale == null) {
-            locale = request.getLocale();
-        }
-
-
-        PrintWriter out;
-        try {
-            out = response.getWriter();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return;
-        }
-
-        out.println("<html>");
-        out.println("<body>");
-
-        out.println("<div style=\"border:1px solid #D3D3D3; border-radius: 15px;background: #fff;padding: 10px 30px;\">");
-        out.println("<h4 style=\"color:red\">" + errorMsg + "</h4>");
-        if (th != null) {
-            out.println("<pre style=\"word-wrap: break-word;white-space: pre-wrap;\">");
-            StringWriter sw = new StringWriter();
-            th.printStackTrace(out);
-            out.println(sw.toString());
-            out.println("</pre>");
-        }
-        out.println("</div>");
-
-        out.println("</body>");
-        out.println("</html>");
-
-        out.flush();
-
-
-    }
 
 
 

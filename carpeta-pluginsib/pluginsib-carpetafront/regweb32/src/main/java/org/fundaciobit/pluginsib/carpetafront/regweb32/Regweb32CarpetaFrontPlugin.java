@@ -182,7 +182,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
         } catch (Exception e) {
             try{
             	
-                errorPage(e.getLocalizedMessage(), e, request, response, locale);
+                errorPage(e.getLocalizedMessage(), e, request, response, absolutePluginRequestPath, locale);
                 log.error("Error plugin registre: " + e.getMessage(), e);
             }catch(Exception e2){
                 log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
@@ -222,7 +222,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
     	}catch(Exception e) {
 
             try{
-                errorPage(e.getMessage(), e, request, response, locale);
+                errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
                 log.error("Error enviant a página d'espera de Registre " + e.getMessage(), e);
             }catch(Exception e2){
                 log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
@@ -255,7 +255,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
         }catch(Exception e) {
 
             try{
-                errorPage(e.getMessage(), e, request, response, locale);
+                errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
                 log.error("Error enviant a página d'espera de Registre " + e.getMessage(), e);
             }catch(Exception e2){
                 log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
@@ -355,7 +355,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
                 peticio.append("Error: " + e.getMessage()).append("\n");
                 logCarpeta.crearLogCarpeta("[REGWEB32] Error plugin", peticio.toString(), "[REGWEB32] Error plugin");
             	
-                errorPage(e.getLocalizedMessage(), e,request, response, locale);
+                errorPage(e.getLocalizedMessage(), e,request, response, absolutePluginRequestPath, locale);
                 log.error("Error llistant registres: " + e.getMessage(), e);
             } catch(Exception e2) {
                 log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
@@ -452,7 +452,8 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 
         String[] traduccions = {"registro.listado", "registro.descripcion", "registro.numero", "registro.fecha",
                 "registro.extracto", "registro.destinatario", "registro.vacio", "carpeta.acciones",  "registro.estado",
-                "registro.detalle", "carpeta.fecha.inicio", "carpeta.fecha.fin", "carpeta.todos", "carpeta.buscar", "error.dates"};
+                "registro.detalle", "carpeta.fecha.inicio", "carpeta.fecha.fin", "carpeta.todos", "carpeta.buscar", 
+                "error.dates", "error.data"};
 
         for (String t : traduccions) {
             map.put(t.replace('.', '_'), getTraduccio(t, locale));
