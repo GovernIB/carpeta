@@ -39,7 +39,7 @@
                 <form id="fechaBusqueda" action="${form_action}" method="post">
                     <div class="row pb-2 ml-0 mr-0">
                         <div class="col-md-4 pl-0">
-                            <div class="form-group pl-0 pr-2">
+                            <div class="form-group pl-0 pr-4">
                                 <label for="fechaInicio" placeholder="yyyy-MM-dd" class="float-left">${carpeta_fecha_inicio}</label>
                                 <div class="input-group input-group-fecha-inicio">
                                     <input id="fechaInicio" name="fechaInicio" class="form-control form-control-sm estilCalendar"
@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="form-group pl-2 pr-2">
+                            <div class="form-group pr-4">
                                 <label for="fechaFin" placeholder="yyyy-MM-dd" class="float-left">${carpeta_fecha_fin}</label>
                                 <div class="input-group input-group-fecha-fin">
                                     <input id="fechaFin" name="fechaFin" class="form-control form-control-sm estilCalendar" 
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <div class="form-group pl-2 pr-2">
+                            <div class="form-group pr-2">
                                 <label for="estado" class="float-left">${tramite_estado}</label>
                                 <select name="tramiteFinalizado" id="tramiteFinalizado" class="form-control form-control-sm" tabindex="503" aria-labelledby="estado">
                                     <option value="A" <#if form_estat == "A">selected="selected"</#if>>${tramite_todos}</option>
@@ -177,27 +177,33 @@
         	$('#fechaInicio').focus(); 
         });
         
+        $('#fechaInicio').blur(function(e){ 
+            e.preventDefault();
+            validarFecha($(this));
+        });
+        
         $('#fechaFin').blur(function(e){
-        	if ($('#fechaInicio').val() > $('#fechaFin').val()){
-        		$('#errorMsg').html("${error_dates}");
-                $('#errorContainer').removeClass("ocult");
-                $('.input-group-fecha-inicio').css('border','1px solid red');
-                $('.input-group-fecha-fin').css('border','1px solid red');
-        	}else{
-        		$('#errorContainer').addClass("ocult");
-                $('.input-group-fecha-inicio').css('border','none');
-                $('.input-group-fecha-fin').css('border','none');
-        	}
-        });       
+            e.preventDefault();
+            validarFecha($(this));  
+        });     
         
         if (navigator.appVersion.indexOf("Chrome/") != -1) {
         	$('.input-group-fecha-inicio .input-group-text').css('display','none');
         	$('.input-group-fecha-fin .input-group-text').css('display','none');
         }
         
+        $("tr").each(function(i) {
+            $(this).attr("tabindex", i+510);
+        });
+        
     });
     
     function validaFormulari(){
+    	
+    	if(!validarFecha($('#fechaInicio')) || !validarFecha($('#fechaFin'))){
+            return false;
+        }
+    	
     	if($('#fechaInicio').val() <= $('#fechaFin').val()){
     		$('#llistat').hide();
             $("#carregantTramits").removeClass("loaderOcult");
@@ -209,6 +215,20 @@
          $('.input-group-fecha-inicio').css('border','1px solid red');
          $('.input-group-fecha-fin').css('border','1px solid red');
         return false;
+    }
+    
+    function validarFecha(obj) {
+        console.log(obj.name);
+        if (isNaN(Date.parse(obj.val()))){
+            $('#errorMsg').html("${error_data}");
+            $('#errorContainer').removeClass("ocult");
+            obj.css('border','1px solid red');
+            return false;
+        }else{
+            $('#errorContainer').addClass("ocult");
+            obj.css('border','none');
+            return true;
+        }
     }
     
     function carregarUrl(obj) {
@@ -260,12 +280,7 @@
         
         $('#myModal').modal('show');
     }
-
-    $(document).ready(function () {
-        $("tr").each(function(i) {
-            $(this).attr("tabindex", i+510);
-        });
-    });
+    
 </script>
 </body>
 </html>

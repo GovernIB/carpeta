@@ -498,6 +498,9 @@ img:hover {
 .lletraIdioma{
 	font-size: 1em;
 }
+.lletraDetallsError { 
+	font-size: 0.75rem; 
+}
 
 .loader {
 	border: 16px solid #f3f3f3;

@@ -317,7 +317,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
                 "tramite.nofinalizado", "tramite.nofinalizadopresencial", "tramite.todos", "tramite.detalle",
                 "tramite.ver", "tramite.registrado", "tramite.continuar", "tramite.modal.titulo", "tramite.modal.texte",
                 "tramite.modal.continuarBtn", "tramite.modal.cancelarBtn", "error.veure.detalls",
-                "error.amaga.detalls", "error.dates" };
+                "error.amaga.detalls", "error.dates", "error.data" };
 
         for (String t : traduccions) {
             map.put(t.replace('.', '_'), getTraduccio(t, locale));

@@ -125,9 +125,7 @@ class DadesPolicia extends Component {
                     <p className="lh15">{this.props.subtitles[i18n.language]} </p>
                     <div className="infoNoMenu">
                         <div className="col-md-12 border-0 float-left p-0">
-                            <div className="card">
-                                {content}
-                            </div>
+                            {content}
                         </div>
                     </div>
                 </div>

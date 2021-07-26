@@ -85,10 +85,10 @@ class DatosAyudaSubvenciones extends Component {
 				content = <div>
                     {alerta}
                     <div className="contenedorInfoPersonal mt-2">
-                        <div className="col-md-2 pl-0 pr-0 mt-3"><strong>{t('pinbalSubvencionesDni')}</strong>{data.dni}</div>
-                        <div className="col-md-3 pl-0 pr-0 mt-3"><strong>{t('pinbalSubvencionesNom')}</strong>{data.nombre}</div>
-                        <div className="col-md-3 pl-0 pr-0 mt-3"><strong>{t('pinbalSubvencionesApellido1')}</strong>{data.apellido1}</div>
-                        <div className="col-md-3 pl-0 pr-0 mt-3"><strong>{t('pinbalSubvencionesApellido2')}</strong>{data.apellido2}</div>
+                        <div className="col pl-0 pr-0 mt-3"><strong>{t('pinbalSubvencionesDni')}</strong>{data.dni}</div>
+                        <div className="col pl-0 pr-0 mt-3"><strong>{t('pinbalSubvencionesNom')}</strong>{data.nombre}</div>
+                        <div className="col pl-0 pr-0 mt-3"><strong>{t('pinbalSubvencionesApellido1')}</strong>{data.apellido1}</div>
+                        <div className="col pl-0 pr-0 mt-3"><strong>{t('pinbalSubvencionesApellido2')}</strong>{data.apellido2}</div>
                     </div>
 				</div>;
 

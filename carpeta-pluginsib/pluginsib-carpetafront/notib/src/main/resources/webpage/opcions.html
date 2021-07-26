@@ -6,29 +6,29 @@
 
         <p class="lh15 subtitol">${notificaciones_descripcion}</p>
 
-        <div class="card-body imc--llista--capses" style="display: flex;">
+        <div class="card-body imc--llista--capses">
 
-            <div class="row mb-0" style="display: contents;">
+            <div class="row mb-0">
 
                 <!-- Notificacions NOTIB -->
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pl-0">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0 alert">
                     <button class="card col-md-12 align-items-lg-center capsaPlugin pt-3" onClick="${notificacionesUrl}" tabindex="501">
-                    <span class="card-title titol pl-1 h3" title="${menu_notificaciones}" alt="${menu_notificaciones}" style="align-self: center;">
+                    <span class="card-title titol pl-1 h3" title="${menu_notificaciones}" alt="${menu_notificaciones}">
                         <span class="oi oi-envelope-closed imagenMenu" aria-hidden="true" style="color:#265D3C;"></span>
                     </span>
                         <h3 class="apartat titolPlugin titol h3" style="align-self: center;">${menu_notificacion}</h3>
-                    <span class="card-text descripcioCard">${notificaciones_notificaciones}</span>
+                    <span class="card-text descripcioCard pl-3 pr-3">${notificaciones_notificaciones}</span>
                     </button>
                 </div>
 
                 <!-- Notificaciones SISTRA-->
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pl-0">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0 alert">
                     <button class="card col-md-12 align-items-lg-center capsaPlugin pt-3" onClick="window.location.href ='${comunicacionesURL}'">
-                    <span class="card-title titol pl-1 h3" title="${menu_notificaciones_otras}" alt="${menu_notificaciones_otras}" style="align-self: center;">
+                    <span class="card-title titol pl-1 h3" title="${menu_notificaciones_otras}" alt="${menu_notificaciones_otras}">
                         <span class="oi oi-box imagenMenu" aria-hidden="true" style="color:#265D3C;"></span>
                     </span>
-                        <h3 class="apartat titolPlugin titol h3" style="align-self: center;">${menu_notificaciones_otras}</h3>
-                        <span class="card-text descripcioCard">${notificaciones_otras}</span>
+                        <h3 class="apartat titolPlugin titol h3">${menu_notificaciones_otras}</h3>
+                        <span class="card-text descripcioCard pl-3 pr-3">${notificaciones_otras}</span>
                     </button>
                 </div>
 
