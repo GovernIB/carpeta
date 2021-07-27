@@ -105,7 +105,7 @@
                         <#setting date_format="MM/dd/yyyy hh">
                         <#list registros as registroItem >
 
-                        <tr class="clickable-row" onclick="mostrantDetall('${registroItem.numeroRegistro}')" onkeypress="mostrantDetall('${registroItem.numeroRegistro}')">
+                        <tr class="clickable-row" onclick="mostrantDetall('${registroItem.numeroRegistro}')" onkeypress="mostrantDetall('${registroItem.numeroRegistro}')" tabindex="511">
                             <td class="totLinia">${registroItem.numeroRegistro}</td>
                             <td class="totLinia" data-order="$registroItem.fechaRegistro?string('yyyyMMddHHmm')}">
                                 ${registroItem.fechaRegistro?string("dd-MM-yyyy HH:mm")}
@@ -263,10 +263,6 @@
             $('#fechaFin').blur(function(e){
             	e.preventDefault();
             	validarFecha($(this));	
-            });
-            
-            $("tr").each(function(i) {
-                $(this).attr("tabindex", i+510);
             });
             
         });

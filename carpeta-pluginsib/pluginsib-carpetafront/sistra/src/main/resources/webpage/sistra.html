@@ -110,7 +110,7 @@
                     <tbody>
                     <#setting date_format="MM/dd/yyyy hh">
                     <#list tramits as tramite >
-                    <tr class="clickableRow" data-numero="${tramite.numero}" data-url="${tramite.url}" data-mostramodal="${tramite.esMostraModal()?then('S','N')}" data-pending="${tramite.isPendiente()?then('S','N')}" data-version="${tramite.versionSistra}" style="cursor:pointer">
+                    <tr class="clickableRow" data-numero="${tramite.numero}" data-url="${tramite.url}" data-mostramodal="${tramite.esMostraModal()?then('S','N')}" data-pending="${tramite.isPendiente()?then('S','N')}" data-version="${tramite.versionSistra}" style="cursor:pointer" tabindex="511">
                         <td>${tramite.descripcionTramite}</td>
                         <td data-order="${tramite.fechaInicio?string("yyyyMMddHHmm")}">
                             ${tramite.fechaInicio?string("dd-MM-yyyy HH:mm")}
@@ -177,15 +177,15 @@
         	$('#fechaInicio').focus(); 
         });
         
-        $('#fechaInicio').blur(function(e){ 
+        $('#fechaInicio').blur(function(e){
             e.preventDefault();
             validarFecha($(this));
         });
-        
+
         $('#fechaFin').blur(function(e){
             e.preventDefault();
-            validarFecha($(this));  
-        });     
+            validarFecha($(this));
+        });
         
         if (navigator.appVersion.indexOf("Chrome/") != -1) {
         	$('.input-group-fecha-inicio .input-group-text').css('display','none');
@@ -195,15 +195,15 @@
         $("tr").each(function(i) {
             $(this).attr("tabindex", i+510);
         });
-        
+
     });
     
     function validaFormulari(){
-    	
+
     	if(!validarFecha($('#fechaInicio')) || !validarFecha($('#fechaFin'))){
             return false;
         }
-    	
+
     	if($('#fechaInicio').val() <= $('#fechaFin').val()){
     		$('#llistat').hide();
             $("#carregantTramits").removeClass("loaderOcult");
@@ -230,7 +230,7 @@
             return true;
         }
     }
-    
+
     function carregarUrl(obj) {
         if (obj.data('numero') != '') {
              mostrarCarregant();
@@ -280,7 +280,7 @@
         
         $('#myModal').modal('show');
     }
-    
+
 </script>
 </body>
 </html>

@@ -59,15 +59,6 @@ class MenuRapid extends Component {
 
             });
 
-        // $( "#menuSuperior" )
-        //     .focusin(function() {
-        //         console.log("focusin");
-        //         $( "#submenu").css("display", "block");
-        //     })
-        //     .focusout(function() {
-        //         console.log("focusout");
-        //         $( "#submenu").css("display", "none");
-        //     });
     }
 
 
@@ -139,11 +130,11 @@ class MenuRapid extends Component {
                                 <li key={i} className="nav-item pr-4 lletraRapid dropdown" id="menuSuperior">
                                     <Link to={{pathname: Constants.SECCIO_PATH + s.context, nomPagina: "seccio"}}
                                           tabIndex={301 + i} aria-labelledby={"menuRapidBoto"+i}
-                                          className="nav-link dropdown-toggle pt-0 pb-0" id={"navbarDropdown" + i}>
+                                          className="nav-link dropdown-toggle pt-0 pb-0" id={"navbarDropdown" + i} onFocus={function(){$("#submenu"+i).css("display", "block")}}>
                                         <img src={s.urllogo} title={t('iconaDe') + " " + s.nom} alt={s.nom} className="imc-icona"/>
                                         <span className="menuRapidView" id={"menuRapidBoto"+i}>{s.nom}</span>
                                     </Link>
-                                    <div className="dropdown-menu p-0 m-0 maxCont" id="submenu" aria-labelledby={"navbarDropdown" + i}>
+                                    <div className="dropdown-menu p-0 m-0 maxCont" id={"submenu"+i} aria-labelledby={"navbarDropdown" + i}>
                                         {plugins}
                                     </div>
                                 </li>
