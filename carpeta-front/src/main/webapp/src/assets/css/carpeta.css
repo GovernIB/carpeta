@@ -508,6 +508,10 @@ img:hover {
 .lletraDetallsError { 
     font-size: 0.75rem; 
 }
+.alert.alert-danger a.lletraDetallsError {
+    color: #721c24;
+    font-weight: bold;
+}
 
 .loader {
 	border: 16px solid #f3f3f3;

@@ -187,9 +187,9 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
             try{
             	
             	StringBuilder peticio = new StringBuilder();
-                peticio.append("[REGWEBDETALLCOMPONENT] Error").append("\n");
                 peticio.append("classe: ").append(getClass().getName()).append("\n");
                 peticio.append("Error: " + e.getMessage()).append("\n");
+                peticio.append("Cause: " + e.getCause());
                 logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error plugin", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error plugin"); 
             	
                 errorPage(e.getLocalizedMessage(), e, request, response, absolutePluginRequestPath, locale);
