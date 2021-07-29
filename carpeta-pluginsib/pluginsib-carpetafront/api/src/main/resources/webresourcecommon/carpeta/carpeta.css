@@ -668,6 +668,12 @@ a.imc-bt-xarxa:hover {
 .imc-marc-menu{
 	display: none;
 }
+.disBlok{
+	display: block;
+}
+.maxContent{
+	width: max-content;
+}
 
 #dadespinbalayudascontainer .descarregaJustificant { text-align:center; } 
 #dadespinbalayudascontainer .descarregaJustificant span.oi { font-size: 3rem; display:block; margin: 10px; }

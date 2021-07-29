@@ -70,6 +70,9 @@ class MenuRapid extends Component {
 
         let allItems = [];
         let content;
+        let k = 0;
+        let l = 0;
+        let iActiu = 0;
 
         if (autenticat === '1') {
 
@@ -80,15 +83,17 @@ class MenuRapid extends Component {
                 this.state.items.forEach((s, i) => {
 
                     let plugins = [];
+                    k = k + 1;
+                    l = 0;
 
                     switch (s.tipus) {
 
                         case 0: // Plugin react
                         case 1: // Plugin html
                             allItems.push(
-                                <li key={i} className="nav-item pr-4 lletraRapid">
+                                <li key={k} className="nav-item pr-4 lletraRapid">
                                     <Link className="navCarpeta"
-                                          to={{pathname: Constants.PLUGINHTML_PATH + s.context, nomPagina: "plugin"}} tabIndex={301+i} aria-labelledby={"menuRapidBoto"+i}>
+                                          to={{pathname: Constants.PLUGINHTML_PATH + s.context, nomPagina: "plugin"}} tabIndex={301+k} aria-labelledby={"menuRapidBoto"+i} onFocus={function(){$("#submenu"+iActiu).css("display", "none");iActiu=i;}}>
                                         <img src={urlBase + s.urllogo} alt={s.nom} title={t('iconaDe') + " " + s.nom} className="imc-icona"/>
                                         {/*<img src={s.urllogo} alt="" title="" className="imc-icona"/>*/}
                                         <span className="menuRapidView" id={"menuRapidBoto"+i}>{s.nom}</span>
@@ -103,49 +108,52 @@ class MenuRapid extends Component {
                             s.plugins.forEach((p, j) => {
                                 if(p.reactComponent === true) {
                                     plugins.push(
-                                        <Link className="navCarpeta dropdown-item linkVerd"
-                                              to={{pathname: Constants.SECCIO_PATH + s.context + Constants.PLUGINREACT_PATH + p.context, nomPagina: "plugin"
-                                              }} tabIndex={301 + i + j + 1} aria-labelledby={"menuRapidBoto"+i}
-                                              key={100 + i + j + 1}>
-                                            <img src={urlBase + "/pluginfront/pluginicon/" + p.pluginID + "/" + i18n.language + ""} alt={p.nom} title={t('iconaDe') + " " + p.nom} className="imc-icona"/>
-                                            <span className="menuRapidView" id={"menuRapidBoto"+i}>{p.nom}</span>
-                                        </Link>
+                                        <li key={k}>
+                                            <Link className="navCarpeta dropdown-item linkVerd"
+                                                  to={{pathname: Constants.SECCIO_PATH + s.context + Constants.PLUGINREACT_PATH + p.context, nomPagina: "plugin"
+                                                  }} tabIndex={301 + k + j} aria-labelledby={"menuRapidBoto"+i}>
+                                                <img src={urlBase + "/pluginfront/pluginicon/" + p.pluginID + "/" + i18n.language + ""} alt={p.nom} title={t('iconaDe') + " " + p.nom} className="imc-icona"/>
+                                                <span className="menuRapidView" id={"menuRapidBoto"+i}>{p.nom}</span>
+                                            </Link>
+                                        </li>
                                     );
                                 }else{
                                     plugins.push(
-                                        <Link className="navCarpeta dropdown-item linkVerd"
-                                              to={{pathname: Constants.SECCIO_PATH + s.context + Constants.PLUGINHTML_PATH + p.context, nomPagina: "plugin"
-                                              }} tabIndex={301 + i + j + 1} aria-labelledby={"menuRapidBoto"+i}
-                                              key={100 + i + j + 1}>
-                                            <img src={urlBase + "/pluginfront/pluginicon/" + p.pluginID + "/" + i18n.language + ""} alt={p.nom} title={t('iconaDe') + " " + p.nom} className="imc-icona"/>
-                                            <span className="menuRapidView" id={"menuRapidBoto"+i}>{p.nom}</span>
-                                        </Link>
+                                        <li key={k}>
+                                            <Link className="navCarpeta dropdown-item linkVerd"
+                                                  to={{pathname: Constants.SECCIO_PATH + s.context + Constants.PLUGINHTML_PATH + p.context, nomPagina: "plugin"
+                                                  }} tabIndex={301 + k + j} aria-labelledby={"menuRapidBoto"+i}>
+                                                <img src={urlBase + "/pluginfront/pluginicon/" + p.pluginID + "/" + i18n.language + ""} alt={p.nom} title={t('iconaDe') + " " + p.nom} className="imc-icona"/>
+                                                <span className="menuRapidView" id={"menuRapidBoto"+i}>{p.nom}</span>
+                                            </Link>
+                                        </li>
                                     );
                                 }
+                                k = k + 1;
+                                l = j + 1;
 
                             })
 
                             // seccio global
                             allItems.push(
-                                <li key={i} className="nav-item pr-4 lletraRapid dropdown" id="menuSuperior">
-                                    <Link to={{pathname: Constants.SECCIO_PATH + s.context, nomPagina: "seccio"}}
-                                          tabIndex={301 + i} aria-labelledby={"menuRapidBoto"+i}
-                                          className="nav-link dropdown-toggle pt-0 pb-0" id={"navbarDropdown" + i} onFocus={function(){$("#submenu"+i).css("display", "block")}}>
+                                <div className="btn-group navCarpeta pr-4" key={k}>
+                                    <button type="button" className="btn btn-default dropdown-toggle p-0 lletraRapid disBlok text-verd"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-labelledby={"menuRapidBoto"+i} tabIndex={301 + k - l} id={"navbarDropdown" + i}>
                                         <img src={s.urllogo} title={t('iconaDe') + " " + s.nom} alt={s.nom} className="imc-icona"/>
-                                        <span className="menuRapidView" id={"menuRapidBoto"+i}>{s.nom}</span>
-                                    </Link>
-                                    <div className="dropdown-menu p-0 m-0 maxCont" id={"submenu"+i} aria-labelledby={"navbarDropdown" + i}>
+                                        <span className="menuRapidView">{s.nom}</span>
+                                    </button>
+                                    <ul className="dropdown-menu maxContent" aria-labelledby={"navbarDropdown" + i} id={"submenu"+i}>
                                         {plugins}
-                                    </div>
-                                </li>
+                                    </ul>
+                                </div>
                             );
 
                             break;
 
                         case 4: // PseudoPlugin
                             allItems.push(
-                                <li key={i} className="nav-item pr-4 lletraRapid">
-                                    <a className="navCarpeta" href={s.url} target="_blank" title={s.nom} tabIndex={301+i} aria-labelledby={"menuRapidBoto"+i}>
+                                <li key={k} className="nav-item pr-4 lletraRapid">
+                                    <a className="navCarpeta" href={s.url} target="_blank" title={s.nom} tabIndex={301+k} aria-labelledby={"menuRapidBoto"+i} onFocus={function(){$("#submenu"+iActiu).css("display", "none");iActiu=i;}}>
                                         <img src={s.urllogo} alt={s.nom} title={t('iconaDe') + " " + s.nom} className="imc-icona"/>
                                         <span className="menuRapidView" id={"menuRapidBoto"+i}>{s.nom}</span>
                                     </a>
