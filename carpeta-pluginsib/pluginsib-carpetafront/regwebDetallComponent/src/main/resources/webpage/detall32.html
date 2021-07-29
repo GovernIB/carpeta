@@ -261,7 +261,6 @@
                                                 <th scope="col">#</th>
                                                 <th scope="col">${registro_anexo_name}</th>
                                                 <th scope="col">${registro_anexo_validezdocumento}</th>
-                                                <!--<th scope="col">${registro_anexo_size}</th>-->
                                                 <th scope="col">${registro_anexo_file}</th>
                                             </tr>
                                             </thead>
@@ -276,11 +275,16 @@
                                                         </#if>
                                                     </#if>
                                                 </td>
-                                                <#if anexo.mime?has_content >
-                                                <!--<td>${anexo.size} KB</td>-->
-                                                <td><button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarAnnex('${anexo.fileID?long?c}')"><span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span></button></td>
+                                                <#if !anexo.confidencial?has_content>
+                                                    <#if anexo.mime?has_content>
+		                                                <td><button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarAnnex('${anexo.fileID?long?c}')">
+		                                                        <span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span>
+		                                                    </button></td>
+	                                                <#else>
+		                                                    <td colspan="3"><span>${registro_anexo_nodisponible}</span></td>
+	                                                </#if>
                                                 <#else>
-                                                    <td colspan="3"><span>${registro_anexo_nodisponible}</span></td>
+                                                    <td colspan="3"><span>${registro_anexo_confidencial}</span></td>
                                                 </#if>
                                             </tr>
                                             </#list>

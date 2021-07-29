@@ -6,6 +6,7 @@ import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.regweb3.ws.api.v3.AsientoWs;
 import es.caib.regweb3.ws.api.v3.FileContentWs;
+import es.caib.regweb3.ws.api.v3.FileInfoWs;
 import es.caib.regweb3.ws.api.v3.JustificanteWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWsService;
@@ -288,7 +289,8 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
                 "registro.interesados", "registro.interesado.nombre", "registro.interesado.documento", "registro.interesado.tipo",
                 "registro.anexos", "registro.anexos.vacio", "registro.anexos.nodisponibles","registro.anexo.name", 
                 "registro.anexo.size", "registro.anexo.file", "registro.anexo.validezdocumento","carpeta.descargar", "registro.anexo.nodisponible",
-                "carpeta.catala", "carpeta.castella", "registro.anexo.mime", "registro.estado", "justificante.generar", "justificante.generando", "anexo.obtener"  };
+                "carpeta.catala", "carpeta.castella", "registro.anexo.mime", "registro.estado", "justificante.generar", "justificante.generando", 
+                "anexo.obtener", "registro.anexo.confidencial"  };
         
 
         for (String t : traduccions) {
@@ -371,6 +373,13 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
         	log.info("ar.getTipoDocumentacionFisicaCodigo() => " + registro.getTipoDocumetacionFisica());
         	log.info("Anexos retornados => " + registro.getAnexos().size());
         	log.info("ar.descripcionEstado() => " + registro.getDescripcionEstado());
+        	
+        	log.info(" --------------- ANEXOS ---------------------");
+        	for (FileInfoWs annexo : registro.getAnexos()) {
+				log.info("Anexo.isConfidencial => " + annexo.isConfidencial());
+				log.info("Anexo.getName => " + annexo.getName());
+				log.info("Anexo.getHash => " + annexo.getHash());
+			}
         }
         return registro;
     }
