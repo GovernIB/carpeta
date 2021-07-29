@@ -111,7 +111,7 @@ class MenuRapid extends Component {
                                         <li key={k}>
                                             <Link className="navCarpeta dropdown-item linkVerd"
                                                   to={{pathname: Constants.SECCIO_PATH + s.context + Constants.PLUGINREACT_PATH + p.context, nomPagina: "plugin"
-                                                  }} tabIndex={301 + k + j} aria-labelledby={"menuRapidBoto"+i}>
+                                                  }} tabIndex={301 + k + j} aria-labelledby={"menuRapidBoto"+i} onClick={function(){$("#submenu"+iActiu).css("display", "none")}}>
                                                 <img src={urlBase + "/pluginfront/pluginicon/" + p.pluginID + "/" + i18n.language + ""} alt={p.nom} title={t('iconaDe') + " " + p.nom} className="imc-icona"/>
                                                 <span className="menuRapidView" id={"menuRapidBoto"+i}>{p.nom}</span>
                                             </Link>
@@ -122,7 +122,7 @@ class MenuRapid extends Component {
                                         <li key={k}>
                                             <Link className="navCarpeta dropdown-item linkVerd"
                                                   to={{pathname: Constants.SECCIO_PATH + s.context + Constants.PLUGINHTML_PATH + p.context, nomPagina: "plugin"
-                                                  }} tabIndex={301 + k + j} aria-labelledby={"menuRapidBoto"+i}>
+                                                  }} tabIndex={301 + k + j} aria-labelledby={"menuRapidBoto"+i} onClick={function(){$("#submenu"+iActiu).css("display", "none")}}>
                                                 <img src={urlBase + "/pluginfront/pluginicon/" + p.pluginID + "/" + i18n.language + ""} alt={p.nom} title={t('iconaDe') + " " + p.nom} className="imc-icona"/>
                                                 <span className="menuRapidView" id={"menuRapidBoto"+i}>{p.nom}</span>
                                             </Link>
@@ -138,7 +138,7 @@ class MenuRapid extends Component {
                             allItems.push(
                                 <div className="btn-group navCarpeta pr-4" key={k}>
                                     <button type="button" className="btn btn-default dropdown-toggle p-0 lletraRapid disBlok text-verd"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-labelledby={"menuRapidBoto"+i} tabIndex={301 + k - l} id={"navbarDropdown" + i}>
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-labelledby={"menuRapidBoto"+i} tabIndex={301 + k - l} id={"navbarDropdown" + i} onFocus={function(){$("#submenu"+iActiu).css("display", "none");iActiu=i;$("#submenu"+i).css("display", "block")}}>
                                         <img src={s.urllogo} title={t('iconaDe') + " " + s.nom} alt={s.nom} className="imc-icona"/>
                                         <span className="menuRapidView">{s.nom}</span>
                                     </button>
