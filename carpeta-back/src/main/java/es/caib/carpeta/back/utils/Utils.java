@@ -176,8 +176,12 @@ public class Utils implements Constants {
           peticio = peticio + I18NUtils.tradueix(code, String.valueOf(pk)) + "\n";;
       }
 
-      logCarpetaLogicaEjb.crearLog(msg, ESTAT_LOG_ERROR, TIPUS_LOG_GESTIO_BACK, -1, e, msg,
+      try{
+        logCarpetaLogicaEjb.crearLog(msg, ESTAT_LOG_ERROR, TIPUS_LOG_GESTIO_BACK, -1, e, msg,
               peticio , entitatCodi, null);
+      }catch(Exception le){
+          log.error("S'ha produit un error creant un Log: " + le.getMessage(), le);
+      }
   }
 
 

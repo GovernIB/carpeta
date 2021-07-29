@@ -264,11 +264,14 @@ public class PluginFrontController extends CommonFrontController {
 
         log.info(" urlToShowPluginPage => " + urlToShowPluginPage);
 
-        // ACCESS
-
-        accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_PLUGIN, entitatJPA.getEntitatID(), pluginID,
-                new Timestamp(new Date().getTime()), LocaleContextHolder.getLocale().getLanguage(),
-                InetAddress.getLocalHost().getHostAddress(), true);
+        try {
+            // ACCESS
+            accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_PLUGIN, entitatJPA.getEntitatID(), pluginID,
+                    new Timestamp(new Date().getTime()), LocaleContextHolder.getLocale().getLanguage(),
+                    InetAddress.getLocalHost().getHostAddress(), true);
+        }catch(Exception e){
+            log.error("S'ha produit un error creant un Accés: " + e.getMessage(), e);
+        }
 
 //        } catch (Throwable e) {
 //
