@@ -9,24 +9,30 @@ a:hover{
 	color: #000;
 	text-decoration: none;
 }
+.container-contenido a {
+    color: #000566;
+}
 .h2, h2{
 	font-size: 1em !important;
 }
 .subtitol{
-	font-size: 15px;
+	font-size: 0.85em;
 	margin-top: 2%;
 	margin-bottom: 1%;
 }
 .subtitolSuperior{
-	font-size: 15px;
+	font-size: 0.92em;
 	margin-top: 2%;
 }
 .subtitolInferior{
-	font-size: 15px;
+	font-size: 0.92em;
 	margin-bottom: 1%;
 }
 .subtitolInterior{
-	font-size: 15px;
+	font-size: 0.92em;
+}
+.form-control {
+	border-color: #808080 !important;
 }
 .form-control:focus{
 	border-color:#32814B;
@@ -255,6 +261,9 @@ img:hover {
     filter: grayscale(0%);
     -moz-filter: grayscale(0%);
     -webkit-filter: grayscale(0%);
+}
+.alert{
+    border: 1px solid #808080;
 }
 .alert1{
 	border-color: blue;
@@ -639,7 +648,7 @@ a.imc-bt-xarxa:hover {
 	font-size: 14px;
 }
 .borderMenu{
-	border-bottom: 1px solid lightgray;
+	border-bottom: 1px solid #808080;
 	border-radius: 0px;
 }
 .senseEstilLlista{
@@ -673,6 +682,18 @@ a.imc-bt-xarxa:hover {
 }
 .maxContent{
 	width: max-content;
+}
+
+
+/* Plugins pinbal */
+.infoNoMenu dl.row > div { 
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
 }
 
 #dadespinbalayudascontainer .descarregaJustificant { text-align:center; } 
@@ -899,6 +920,7 @@ thead>tr>th.sorting {
 .col-md-5 {
 	max-width: 100%;
 }
+
 }
 
 /*Se aplican cuando el width es menor que 692*/
@@ -948,6 +970,12 @@ body {
 }
 .usuari {
 	top: 2em !important;
+}
+.form-group label{
+    font-size: 0.9em;
+}
+input.form-control, select.form-control {
+    font-size: 0.8em;
 }
 }
 
@@ -1141,4 +1169,25 @@ body {
 }
 .totLinia{
 	white-space: nowrap;
+}
+
+
+/* GENERAL */
+.close { font-size: 2em !important; }
+.btn { font-size: 1em !important; }
+.table {font-size: 0.8em !important; }
+.pagination-sm .page-link { font-size: 0.875em !important; }
+.alert-warning { font-size: 0.85em !important; }
+.btn-primary.carpeta-btn { font-size: 1em !important; }
+.imc-continguts { padding-top: 5em !important; }
+p.subtitol { font-size: 0.8em !important; }
+
+.infoNoMenu dl.row > div { 
+	display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
 }

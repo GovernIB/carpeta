@@ -8,6 +8,9 @@ a:hover{
 	color: #000;
 	text-decoration: none;
 }
+.container-contenido a {
+    color: #000566;
+}
 .h2, h2{
 	font-size: 1em !important;
 }
@@ -26,6 +29,9 @@ a:hover{
 }
 .subtitolInterior{
 	font-size: 0.92em;
+}
+.form-control {
+    border-color: #808080 !important;
 }
 
 /* Navegació amb tab */
@@ -138,7 +144,7 @@ img:hover {
 	align-self: center;
 }
 .imc--logoclave{ 
-	/*background-image: url(src/assets/images/solicitar_clave_acceso_dgt.png);*/
+	background-image: url(src/assets/images/solicitar_clave_acceso_dgt.png);
 	background-repeat: no-repeat;
 	width: 180px;
     height: 87px;
@@ -256,7 +262,7 @@ img:hover {
     -webkit-filter: grayscale(0%);
 }
 .alert{
-	border: 1px solid rgba(0,0,0,.125);
+	border: 1px solid #808080;
 }
 .alert1{
 	border-color: blue;
@@ -508,6 +514,10 @@ img:hover {
 .lletraDetallsError { 
     font-size: 0.75rem; 
 }
+.alert.alert-danger a.lletraDetallsError {
+    color: #721c24;
+    font-weight: bold;
+}
 
 .loader {
 	border: 16px solid #f3f3f3;
@@ -623,7 +633,7 @@ a.imc-bt-xarxa:hover {
 	font-size: 14px;
 }
 .borderMenu{
-	border-bottom: 1px solid lightgray;
+	border-bottom: 1px solid #808080;
 	border-radius: 0px;
 }
 .senseEstilLlista{
@@ -658,6 +668,25 @@ a.imc-bt-xarxa:hover {
 .maxContent{
 	width: max-content;
 }
+
+/* Plugins pinbal */
+.infoNoMenu dl.row > div { 
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+}
+
+#dadespinbalayudascontainer .descarregaJustificant { text-align:center; } 
+#dadespinbalayudascontainer .descarregaJustificant span.oi { font-size: 3rem; display:block; margin: 10px; }
+#dadespinbalayudascontainer .contenedorInfoPersonal { border-top: 1px solid #ececec; }
+#dadespinbalayudascontainer .contenedorInfoPersonal div{ display: inline-block; vertical-align: top; }
+#dadespinbalayudascontainer .contenedorInfoPersonal strong { display: block; }
+
+
 
 /* HomePage */
 .homePage .titol.h5 { text-transform: none !important; }
@@ -938,6 +967,12 @@ body {
 #menuRapid{
 	display: none;
 }
+.form-group label{
+	font-size: 0.9em;
+}
+input.form-control, select.form-control {
+	font-size: 0.8em;
+}
 }
 
 /*Se aplican cuando el width es menor que 576*/
@@ -1129,3 +1164,5 @@ body {
 .pagination-sm .page-link { font-size: 0.875em !important; }
 .alert-warning { font-size: 0.85em !important; }
 .btn-primary.carpeta-btn { font-size: 1em !important; }
+.imc-continguts { padding-top: 5em !important; }
+p.subtitol { font-size: 0.8em !important; }
