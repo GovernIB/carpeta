@@ -20,10 +20,8 @@ class DadesPolicia extends Component {
     componentDidMount() {
         // console.log("POLICIA DID MOUNT " + this.props.pathtodocumentidentitat);
 
-        var url2 = this.props.pathtodocumentidentitat;
+        const url2 = this.props.pathtodocumentidentitat;
         axios.get(url2).then(res => {
-
-            // console.log(" AXIOS OK OK OK OK OK");
 
             this.setState({
                 ...this.state, 
@@ -32,9 +30,6 @@ class DadesPolicia extends Component {
             });
         }).catch(function (error) {
 
-            // console.log(" AXIOS ERROR ERROR ERROR ");
-
-            console.log(JSON.stringify(error));
             const restdata = { "error": JSON.stringify(error) };
             if (error.response) {
                 console.log("error.response.data: " + error.response.data);
@@ -55,9 +50,7 @@ class DadesPolicia extends Component {
 
     render() {
         const isLoaded = this.state.isLoaded;
-        // console.log("RENDER POLICIA  URL on atacar " + this.props.pathtodocumentidentitat);
-        
-
+    
         let content;
 
         if (!isLoaded) {
@@ -73,47 +66,65 @@ class DadesPolicia extends Component {
             } else {
                 const { t } = this.props;
 
-
                 var llinatge1;
                 var llinatge2;
                 if (data.datosTitular.apellido1 == '') {
                     llinatge1="";
                     llinatge2="";
                 } else {
-                   llinatge1 = <li className="list-group-item"><label
-                    className="lh15">{t('dadespersonalsLlinatge1')}:&nbsp;</label><label
-                        className="titol h5">{data.datosTitular.apellido1}</label></li>;
-                    llinatge2 = <li className="list-group-item"><label
-                    className="lh15">{t('dadespersonalsLlinatge2')}:&nbsp;</label><label
-                        className="titol h5">{data.datosTitular.apellido2}</label></li>;
+                   llinatge1 = <div class="mt-3">
+                        <dt className="col-sm-3">{t('dadespersonalsLlinatge1')}</dt>
+                        <dd className="col-sm-7">{data.datosTitular.apellido1}</dd>
+                    </div>;
+                   
+                    llinatge2 = <div class="mt-3">
+                        <dt className="col-sm-3">{t('dadespersonalsLlinatge2')}</dt>
+                        <dd className="col-sm-7">{data.datosTitular.apellido2}</dd>
+                    </div>;
                 }
 
 
 
-                content = <ul className="list-group list-group-flush">
-                <li className="list-group-item">
-                    <label className="lh15" >{t('dadespersonalsNom')}:&nbsp;</label>
-                    <label className="titol h5">{data.datosTitular.nombre}</label>
-                </li>                                
-                {llinatge1}
-                {llinatge2}
-                <li className="list-group-item"><label className="lh15">{t('nacionalidad')}:&nbsp;</label><label
-                    className="titol h5">{data.datosTitular.nacionalidad}</label></li>
-                <li className="list-group-item"><label className="lh15">{t('sexo')}:&nbsp;</label>
-                    <label className="titol h5">{data.datosTitular.sexo}</label></li>
-                <li className="list-group-item"><label className="lh15">{t('datosNacimiento_fecha')}:&nbsp;</label><label
-                    className="titol h5">{data.datosTitular.datosNacimiento[0].fecha}</label></li>
-                <li className="list-group-item"><label className="lh15">{t('datosNacimiento_localidad')}:&nbsp;</label><label
-                    className="titol h5">{data.datosTitular.datosNacimiento[0].localidad}</label></li>
-                    <li className="list-group-item"><label className="lh15">{t('datosNacimiento_provincia')}:&nbsp;</label><label
-                    className="titol h5">{data.datosTitular.datosNacimiento[0].provincia}</label></li>
-                <li className="list-group-item"><label className="lh15">{t('nombrePadre')}:&nbsp;</label>
-                    <label className="titol h5">{data.datosTitular.nombrePadre}</label></li>
-                <li className="list-group-item"><label className="lh15">{t('nombreMadre')}:&nbsp;</label><label
-                    className="titol h5">{data.datosTitular.nombreMadre}</label></li>
-                <li className="list-group-item"><label className="lh15">{t('fechaCaducidad')}:&nbsp;</label>
-                    <label className="titol h5">{data.datosTitular.fechaCaducidad}</label></li>
-            </ul>;
+                content = <dl className="row">
+                    <div>
+                        <dt className="col-sm-3">{t('dadespersonalsNom')}</dt>
+                        <dd className="col-sm-7">{data.datosTitular.nombre}</dd>
+                    </div>
+                    {llinatge1}
+                    {llinatge2}
+                    <div class="mt-3">
+                        <dt className="col-sm-3">{t('nacionalidad')}</dt>
+                        <dd className="col-sm-7">{data.datosTitular.nacionalidad}</dd>
+                    </div>
+                    <div class="mt-3">
+                        <dt className="col-sm-3">{t('sexo')}</dt>
+                        <dd className="col-sm-7">{data.datosTitular.sexo}</dd>
+                    </div>
+                    <div class="mt-3">
+                        <dt className="col-sm-3">{t('datosNacimiento_fecha')}</dt>
+                        <dd className="col-sm-7">{data.datosTitular.datosNacimiento[0].fecha}</dd>
+                    </div>
+                    <div class="mt-3">
+                        <dt className="col-sm-3">{t('datosNacimiento_localidad')}</dt>
+                        <dd className="col-sm-7">{data.datosTitular.datosNacimiento[0].localidad}</dd>
+                    </div>
+                    <div class="mt-3">
+                        <dt className="col-sm-3">{t('datosNacimiento_provincia')}</dt>
+                        <dd className="col-sm-7">{data.datosTitular.datosNacimiento[0].provincia}</dd>
+                    </div>
+                    <div class="mt-3">
+                        <dt className="col-sm-3">{t('nombrePadre')}</dt>
+                        <dd className="col-sm-7">{data.datosTitular.nombrePadre}</dd>
+                    </div>
+                    <div class="mt-3">                   
+                        <dt className="col-sm-3">{t('nombreMadre')}</dt>
+                        <dd className="col-sm-7">{data.datosTitular.nombreMadre}</dd>
+                    </div>
+                    <div class="mt-3">                  
+                        <dt className="col-sm-3">{t('fechaCaducidad')}</dt>
+                        <dd className="col-sm-7">{data.datosTitular.fechaCaducidad}</dd>
+                    </div>
+            </dl>;
             }
         }
 

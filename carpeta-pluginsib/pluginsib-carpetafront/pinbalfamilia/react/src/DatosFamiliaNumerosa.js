@@ -63,59 +63,71 @@ class DatosFamiliaNumerosa extends Component {
             } else {
 
                 const { t } = this.props;
-				
-                let alerta;
 
                 if ( data.codigo == '0'){
-                    alerta = <div className="alert alert-success" role="alert">
-                        {t('pinbalFamiliaFecha')} {data.fecha} : {t('pinbalFamiliaCodigo'+data.codigo)}
-                    </div>;
+                    content = 
+                    <>
+                        <div className="alert alert-success" role="alert">
+                            {t('pinbalFamiliaFecha')} {data.fecha} : {t('pinbalFamiliaCodigo'+data.codigo)}
+                        </div>
+                        <dl className="row">
+                            <div>
+                                <dt className="col-sm-3">{t('pinbalFamiliaNumero')}</dt>
+                                <dd className="col-sm-7">{data.tituloNumeroTitulo}</dd>
+                            </div>
+                            <div class="mt-3">
+                                <dt className="col-sm-3">{t('pinbalFamiliaCategoria')}</dt>
+                                <dd className="col-sm-7">{t('pinbalFamiliaCategoria'+data.tituloCategoria)}</dd>
+                            </div>
+                            <div class="mt-3">
+                                <dt className="col-sm-3">{t('pinbalFamiliaExpedicion')}</dt>
+                                <dd className="col-sm-7">{data.tituloExpedicion}</dd>
+                            </div>
+                            <div class="mt-3">
+                                <dt className="col-sm-3">{t('pinbalFamiliaCaducidad')}</dt>
+                                <dd className="col-sm-7">{data.tituloCaducidad}</dd>
+                            </div>
+                            <div class="mt-3">
+                                <dt className="col-sm-3">{t('pinbalFamiliaHijos')}</dt>
+                                <dd className="col-sm-7">{data.tituloNumeroHijos}</dd>
+                            </div>
+                            <div class="mt-3 mb-3">
+                                <dt className="col-sm-3">{t('pinbalFamiliaBeneficiarios')}</dt>
+                                <dd className="col-sm-7">{data.beneficiarios}</dd>
+                            </div>
+                        </dl>           
+
+                        <dl className="row" style={{ borderTop: '1px solid #ececec' }}>
+                            <div>
+                                <dt className="col-sm-3">{t('pinbalFamiliaDni')}</dt>
+                                <dd className="col-sm-7">{data.dni}</dd>
+                            </div>    
+                            <div class="mt-3">
+                                <dt className="col-sm-3">{t('pinbalFamiliaNom')}</dt>
+                                <dd className="col-sm-7">{data.nombre}</dd>
+                            </div>    
+                            <div class="mt-3">
+                                <dt className="col-sm-3">{t('pinbalFamiliaApellido1')}</dt>
+                                <dd className="col-sm-7">{data.apellido1}</dd>
+                            </div>    
+                            <div class="mt-3">
+                                <dt className="col-sm-3">{t('pinbalFamiliaApellido2')}</dt>
+                                <dd className="col-sm-7">{data.apellido2}</dd>
+                            </div>    
+                            <div class="mt-3">
+                                <dt className="col-sm-3">{t('pinbalFamiliaTitular')}</dt>
+                                <dd className="col-sm-7">{t('pinbalFamiliaTitular'+data.tituloTitular)}</dd>
+                            </div> 
+                        </dl>             
+                    </>;
                 } else {
-                    alerta = <div className="alert alert-warning" role="alert">
-                        {t('pinbalFamiliaFecha')} {data.fecha} : {t('pinbalFamiliaCodigo'+data.codigo)}
-                    </div>;
+                    content = 
+                    <>
+                        <div className="alert alert-warning" role="alert">
+                            {t('pinbalFamiliaFecha')} {data.fecha} : {t('pinbalFamiliaCodigo'+data.codigo)}
+                        </div>
+                    </>;
                 }
-
-				content = <div>
-                    {alerta}
-                    <dl className="row">
-                        <dt className="col-sm-3">{t('pinbalFamiliaNumero')}</dt>
-                        <dd className="col-sm-7">{data.tituloNumeroTitulo}</dd>
-
-                        <dt className="col-sm-3 mt-3">{t('pinbalFamiliaCategoria')}</dt>
-                        <dd className="col-sm-7 mt-3">{t('pinbalFamiliaCategoria'+data.tituloCategoria)}</dd>
-
-                        <dt className="col-sm-3 mt-3">{t('pinbalFamiliaExpedicion')}</dt>
-                        <dd className="col-sm-7 mt-3">{data.tituloExpedicion}</dd>
-
-                        <dt className="col-sm-3 mt-3">{t('pinbalFamiliaCaducidad')}</dt>
-                        <dd className="col-sm-7 mt-3">{data.tituloCaducidad}</dd>
-
-                        <dt className="col-sm-3 mt-3">{t('pinbalFamiliaHijos')}</dt>
-                        <dd className="col-sm-7 mt-3">{data.tituloNumeroHijos}</dd>
-
-                        <dt className="col-sm-3 mt-3 mb-3">{t('pinbalFamiliaBeneficiarios')}</dt>
-                        <dd className="col-sm-7 mt-3 mb-3">{data.beneficiarios}</dd>
-                    </dl>
-
-                    <dl className="row" style={{ borderTop: '1px solid #ececec' }}>
-                        <dt className="col-sm-3 mt-3">{t('pinbalFamiliaDni')}</dt>
-                        <dd className="col-sm-7 mt-3">{data.dni}</dd>
-
-                        <dt className="col-sm-3 mt-3">{t('pinbalFamiliaNom')}</dt>
-                        <dd className="col-sm-7 mt-3">{data.nombre}</dd>
-
-                        <dt className="col-sm-3 mt-3">{t('pinbalFamiliaApellido1')}</dt>
-                        <dd className="col-sm-7 mt-3">{data.apellido1}</dd>
-
-                        <dt className="col-sm-3 mt-3">{t('pinbalFamiliaApellido2')}</dt>
-                        <dd className="col-sm-7 mt-3">{data.apellido2}</dd>
-
-                        <dt className="col-sm-3 mt-3">{t('pinbalFamiliaTitular')}</dt>
-                        <dd className="col-sm-7 mt-3">{t('pinbalFamiliaTitular'+data.tituloTitular)}</dd>
-                    </dl>   
-				</div>;
-
             }
         }
 

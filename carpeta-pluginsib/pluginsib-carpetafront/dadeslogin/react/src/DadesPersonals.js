@@ -27,29 +27,34 @@ class DadesPersonals extends Component {
         var representant;
         if (userData.representative) {
 
-            representant =  <div>
-                            <br/>
-                            <p className="titol h4">{t('representant')}</p>
-                            <div className="col-md-12 border-0 float-left p-0">
-                            <div className="card">
-                                <ul className="list-group list-group-flush">
-                                    <li className="list-group-item">
-                                        <label className="lh15" >{t('dadespersonalsNom')}: &nbsp;</label>
-                                        <label className="titol h5">{userData.representative.name}</label>
-                                </li>
-                                    <li className="list-group-item"><label
-                                        className="lh15">{t('dadespersonalsLlinatge1')}: &nbsp;</label><label
-                                            className="titol h5">{userData.representative.surname1}</label></li>
-                                    <li className="list-group-item"><label
-                                        className="lh15">{t('dadespersonalsLlinatge2')}: &nbsp;</label><label
-                                            className="titol h5">{userData.representative.surname2}</label></li>
-                                    <li className="list-group-item"><label className="lh15">{t('dadespersonalsDni')}: &nbsp;</label><label
-                                        className="titol h5">{userData.representative.administrationID}</label></li>
-                                
-                                </ul>
+            representant = 
+                <div>
+                    <p className="titol h4">{t('representant')}</p>
+                    <div className="col-md-12 border-0 float-left p-0">
+                        <dl className="row">
+                            <div class="mt-3">
+                                <dt className="col-sm-3">{t('dadespersonalsNom')}</dt>
+                                <dd className="col-sm-7">{userData.representative.name}</dd>
                             </div>
+                            
+                            <div class="mt-3">
+                                <dt className="col-sm-3">{t('dadespersonalsLlinatge1')}</dt>
+                                <dd className="col-sm-7">{userData.representative.surname1}</dd>
                             </div>
-                            </div>;
+                            
+                            <div class="mt-3">
+                                <dt className="col-sm-3">{t('dadespersonalsLlinatge2')}</dt>
+                                <dd className="col-sm-7">{userData.representative.surname2}</dd>
+                            </div>
+
+                            <div class="mt-3">
+                                <dt className="col-sm-3">{t('dadespersonalsDni')}</dt>
+                                <dd className="col-sm-7">{userData.representative.administrationID}</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>;
+            
             tipus=<p className="titol h4">{t('representat')}</p>;
 
         } else {
@@ -65,12 +70,15 @@ class DadesPersonals extends Component {
             llinatge2 = "";
             tipus= <p className="titol h4">{t('empresa')}</p>;
         } else {
-            llinatge1 = <li className="list-group-item"><label
-                            className="lh15">{t('dadespersonalsLlinatge1')}: &nbsp;</label><label
-                                className="titol h5">{userData.surname1}</label></li>;
-            llinatge2 = <li className="list-group-item"><label
-                            className="lh15">{t('dadespersonalsLlinatge2')}: &nbsp;</label><label
-                                className="titol h5">{userData.surname2}</label></li>;
+            llinatge1 = <div class="mt-3">
+                <dt className="col-sm-3">{t('dadespersonalsLlinatge1')}</dt>
+                <dd className="col-sm-7">{userData.surname1}</dd>
+            </div>;
+            
+            llinatge2 = <div class="mt-3">
+                <dt className="col-sm-3">{t('dadespersonalsLlinatge2')}</dt>
+                <dd className="col-sm-7">{userData.surname2}</dd>
+            </div>;
         }
 
 
@@ -79,31 +87,29 @@ class DadesPersonals extends Component {
             <div className="infoNoMenu">
                 {tipus}
                 <div className="col-md-12 border-0 float-left p-0">
-                    <div className="card">
-                        <ul className="list-group list-group-flush">
-                            <li className="list-group-item">
-                                <label className="lh15" >{t('dadespersonalsNom')}: &nbsp;</label>
-                                <label className="titol h5">{userData.name}</label>
-                            </li>
-                            {llinatge1}
-                            {llinatge2}
-                            <li className="list-group-item"><label className="lh15">{t('dadespersonalsDni')}: &nbsp;</label><label
-                                className="titol h5">{userData.administrationID}</label>
-                            </li>
-                            <li className="list-group-item"><label className="lh15">{t('dadespersonalsMetode')}: &nbsp;</label>
-                                <label className="titol h5">{userData.authenticationMethod}</label>
-                            </li>
-                        </ul>
-                    </div>
+                    <dl className="row">
+                        <div>
+                            <dt className="col-sm-3">{t('dadespersonalsNom')}</dt>
+                            <dd className="col-sm-7">{userData.name}</dd>
+                        </div>
+                        {llinatge1}
+                        {llinatge2}
+                        
+                        <div class="mt-3">
+                            <dt className="col-sm-3">{t('dadespersonalsDni')}</dt>
+                            <dd className="col-sm-7">{userData.administrationID}</dd>
+                        </div>
+
+                        <div class="mt-3">
+                            <dt className="col-sm-3">{t('dadespersonalsMetode')}</dt>
+                            <dd className="col-sm-7">{userData.authenticationMethod}</dd>
+                        </div>
+
+                    </dl>
                 </div>
                 {representant}
-                
-
-
             </div>
-
         );
-
 
     }
 }
