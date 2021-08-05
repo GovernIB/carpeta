@@ -257,18 +257,29 @@
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>2.7</version>
 				<configuration>   
-            </configuration>
+                </configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>src/main/webapp/src</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			
 		</plugins>
 		<resources>
 			<resource>
 				<directory>${basedir}/react/src/assets</directory>
 				<targetPath>${basedir}/src/main/webapp/src/assets</targetPath>
-				<filtering>false</filtering>
-			</resource>
-			<resource>
-				<directory>${basedir}/react/src/utils</directory>
-				<targetPath>${basedir}/src/main/webapp/src/utils</targetPath>
 				<filtering>false</filtering>
 			</resource>
 		</resources>
