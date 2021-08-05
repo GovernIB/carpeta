@@ -16,8 +16,6 @@ class Accessibilitat extends Component {
 
         clearTimeout(sessionStorage.getItem('idTimeOut'));
 
-        //var motlla = <*Breadcrumb items={breadcrumbPaths.Accessibilitat} autenticat={autenticat}/>;
-
         return (
             <div className="container-contenido" tabIndex="501">
 

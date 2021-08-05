@@ -1,305 +1,276 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <artifactId>carpeta</artifactId>
-        <groupId>es.caib.carpeta</groupId>
-        <version>1.1.13</version>
-    </parent>
-
-    <artifactId>carpeta-front</artifactId>
-    <packaging>war</packaging>
-    <name>Carpeta - Front</name>
-    <description>Front de carpeta</description>
-
-    <dependencies>
-
-        <!-- Especificacions i llibreries proporcionades per JBoss -->
-        <dependency>
-            <groupId>org.jboss.spec</groupId>
-            <artifactId>jboss-javaee-8.0</artifactId>
-            <type>pom</type>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <!-- Altres mòduls del projecte -->
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>carpeta</artifactId>
+		<groupId>es.caib.carpeta</groupId>
+		<version>1.1.13</version>
+	</parent>
+	<artifactId>carpeta-front</artifactId>
+	<packaging>war</packaging>
+	<name>Carpeta - Front</name>
+	<description>Front de carpeta</description>
+	<dependencies>
+		<!-- Especificacions i llibreries proporcionades per JBoss -->
+		<dependency>
+			<groupId>org.jboss.spec</groupId>
+			<artifactId>jboss-javaee-8.0</artifactId>
+			<type>pom</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Altres mòduls del projecte -->
 		<dependency>
 			<groupId>es.caib.apodera</groupId>
 			<artifactId>apodera-client</artifactId>
 			<version>1.0.0</version>
-        </dependency>
-		
-		
-        <dependency>
-            <groupId>es.caib.carpeta</groupId>
-            <artifactId>carpeta-commons</artifactId>
-            <version>1.1.13</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>es.caib.carpeta</groupId>
-            <artifactId>carpeta-persistence</artifactId>
-            <version>1.1.13</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>es.caib.carpeta</groupId>
-            <artifactId>carpeta-ejb</artifactId>
-            <version>1.1.13</version>
-            <scope>provided</scope>
-        </dependency>
-       
-        <!-- Spring MVC -->
-        
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aspects</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>${spring-security.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-            <version>${spring-security.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-taglibs</artifactId>
-            <version>${spring-security.version}</version>
-        </dependency>
-
-        <!-- Sptring Test -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${spring.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- LoginIB -->
-        
-      
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-client</artifactId>
-            <version>2.33</version>
-        </dependency>
-        
-   
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-client</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        
-      
-        
-        <dependency>
-            <groupId>es.caib.loginib</groupId>
-            <artifactId>loginib-rest-api</artifactId>
-            <version>1.0.1</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-beans</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-context</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-aop</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-        </dependency>
-        
-        <dependency>
-           <groupId>com.fasterxml.jackson.core</groupId>
-           <artifactId>jackson-core</artifactId>
-           <scope>provided</scope>
-        </dependency>
-        
-
-        <dependency>
-           <groupId>com.fasterxml.jackson.core</groupId>
-           <artifactId>jackson-databind</artifactId>
-           <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-           <groupId>com.fasterxml.jackson.core</groupId>
-           <artifactId>jackson-annotations</artifactId>
-           <scope>provided</scope>
-        </dependency>
-        
-        <dependency>
-           <groupId>net.bytebuddy</groupId>
-           <artifactId>byte-buddy</artifactId>
-           <scope>provided</scope>
-           <!--  1.9.11.redhat-00002 -->
-        </dependency>
-        
-        
-        <dependency>
-           <groupId>io.springfox</groupId>
-           <artifactId>springfox-core</artifactId>
-           <version>2.7.0</version>
-           <scope>provided</scope>
-        </dependency>
-        
-        <dependency>
-           <groupId>io.springfox</groupId>
-           <artifactId>springfox-spi</artifactId>
-           <version>2.7.0</version>
-           <scope>provided</scope>
-        </dependency>
-        
-        <dependency>
-           <groupId>io.springfox</groupId>
-           <artifactId>springfox-schema</artifactId>
-           <version>2.7.0</version>
-           <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-           <groupId>io.springfox</groupId>
-           <artifactId>springfox-swagger2</artifactId>
-           <version>2.7.0</version>
-           <scope>provided</scope>
-           <exclusions>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-beans</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-context</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-aop</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        
-        
-        <dependency>
-           <groupId>io.springfox</groupId>
-           <artifactId>springfox-swagger-common</artifactId>
-           <version>2.7.0</version>
-           <scope>provided</scope>
-        </dependency>
-        
-        <dependency>
-           <groupId>io.springfox</groupId>
-           <artifactId>springfox-spring-web</artifactId>
-           <version>2.7.0</version>
-           <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-           <groupId>com.google.guava</groupId>
-           <artifactId>guava</artifactId>
-           <scope>provided</scope>
-        </dependency>
-
-        
-        
-        <!--  Utilitats -->
-        <dependency>
-            <groupId>org.fundaciobit.genapp</groupId>
-            <artifactId>genapp-web</artifactId>
-            <version>${genapp.version}</version>
-            <exclusions>
-               <exclusion>
-                  <artifactId>spring-web</artifactId>
-                  <groupId>org.springframework</groupId>
-               </exclusion>
-               <exclusion>
-                  <artifactId>spring-webmvc</artifactId>
-                  <groupId>org.springframework</groupId>
-               </exclusion>
-            </exclusions>
-        </dependency>
-        
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        
-        <dependency>
-            <groupId>javax.activation</groupId>
-            <artifactId>javax.activation-api</artifactId>
-            <version>1.2.0</version>
-            <scope>provided</scope>
-        </dependency>
-        
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.fundaciobit.genapp</groupId>
-            <artifactId>genapp-core</artifactId>
-            <version>${genapp.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        
-        <!-- Sistra1 -->
-        <dependency>
-            <groupId>es.caib.sistra</groupId>
-            <artifactId>zonaper-ws-api</artifactId>
-            <version>3.5.24</version>
-            <scope>provided</scope>
-        </dependency>
-        
-
-    </dependencies>
-
-    <build>
-        <finalName>${project.artifactId}-${project.version}</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+		</dependency>
+		<dependency>
+			<groupId>es.caib.carpeta</groupId>
+			<artifactId>carpeta-commons</artifactId>
+			<version>1.1.13</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>es.caib.carpeta</groupId>
+			<artifactId>carpeta-persistence</artifactId>
+			<version>1.1.13</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>es.caib.carpeta</groupId>
+			<artifactId>carpeta-ejb</artifactId>
+			<version>1.1.13</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Spring MVC -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring-security.version}</version>
+		</dependency>
+		<!-- Sptring Test -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- LoginIB -->
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>2.33</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-client</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>es.caib.loginib</groupId>
+			<artifactId>loginib-rest-api</artifactId>
+			<version>1.0.1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-beans</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-context</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-aop</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.bytebuddy</groupId>
+			<artifactId>byte-buddy</artifactId>
+			<scope>provided</scope>
+			<!--  1.9.11.redhat-00002 -->
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-core</artifactId>
+			<version>2.7.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-spi</artifactId>
+			<version>2.7.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-schema</artifactId>
+			<version>2.7.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.7.0</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-beans</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-context</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-aop</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-common</artifactId>
+			<version>2.7.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-spring-web</artifactId>
+			<version>2.7.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!--  Utilitats -->
+		<dependency>
+			<groupId>org.fundaciobit.genapp</groupId>
+			<artifactId>genapp-web</artifactId>
+			<version>${genapp.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-web</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-webmvc</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.activation</groupId>
+			<artifactId>javax.activation-api</artifactId>
+			<version>1.2.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.fundaciobit.genapp</groupId>
+			<artifactId>genapp-core</artifactId>
+			<version>${genapp.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Sistra1 -->
+		<dependency>
+			<groupId>es.caib.sistra</groupId>
+			<artifactId>zonaper-ws-api</artifactId>
+			<version>3.5.24</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>${project.artifactId}-${project.version}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.7</version>
+				<configuration>   
+            </configuration>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<directory>${basedir}/react/src/assets</directory>
+				<targetPath>${basedir}/src/main/webapp/src/assets</targetPath>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>${basedir}/react/src/utils</directory>
+				<targetPath>${basedir}/src/main/webapp/src/utils</targetPath>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+	</build>
 </project>
