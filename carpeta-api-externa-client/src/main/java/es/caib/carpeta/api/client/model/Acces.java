@@ -22,7 +22,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
  * Acces
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2021-08-06T10:44:32.074700+02:00[Europe/Paris]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2021-08-06T10:49:23.474020800+02:00[Europe/Paris]")
 public class Acces {
   @JsonProperty("qaa")
   private Integer qaa = null;
@@ -36,11 +36,11 @@ public class Acces {
   @JsonProperty("entitat")
   private String entitat = null;
 
-  @JsonProperty("idioma")
-  private String idioma = null;
-
   @JsonProperty("metodeAutenticacio")
   private String metodeAutenticacio = null;
+
+  @JsonProperty("idioma")
+  private String idioma = null;
 
   @JsonProperty("proveidor")
   private String proveidor = null;
@@ -120,24 +120,6 @@ public class Acces {
     this.entitat = entitat;
   }
 
-  public Acces idioma(String idioma) {
-    this.idioma = idioma;
-    return this;
-  }
-
-   /**
-   * Get idioma
-   * @return idioma
-  **/
-  @Schema(description = "")
-  public String getIdioma() {
-    return idioma;
-  }
-
-  public void setIdioma(String idioma) {
-    this.idioma = idioma;
-  }
-
   public Acces metodeAutenticacio(String metodeAutenticacio) {
     this.metodeAutenticacio = metodeAutenticacio;
     return this;
@@ -154,6 +136,24 @@ public class Acces {
 
   public void setMetodeAutenticacio(String metodeAutenticacio) {
     this.metodeAutenticacio = metodeAutenticacio;
+  }
+
+  public Acces idioma(String idioma) {
+    this.idioma = idioma;
+    return this;
+  }
+
+   /**
+   * Get idioma
+   * @return idioma
+  **/
+  @Schema(description = "")
+  public String getIdioma() {
+    return idioma;
+  }
+
+  public void setIdioma(String idioma) {
+    this.idioma = idioma;
   }
 
   public Acces proveidor(String proveidor) {
@@ -206,15 +206,15 @@ public class Acces {
         Objects.equals(this.data, acces.data) &&
         Objects.equals(this.plugin, acces.plugin) &&
         Objects.equals(this.entitat, acces.entitat) &&
-        Objects.equals(this.idioma, acces.idioma) &&
         Objects.equals(this.metodeAutenticacio, acces.metodeAutenticacio) &&
+        Objects.equals(this.idioma, acces.idioma) &&
         Objects.equals(this.proveidor, acces.proveidor) &&
         Objects.equals(this.tipus, acces.tipus);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(qaa, data, plugin, entitat, idioma, metodeAutenticacio, proveidor, tipus);
+    return Objects.hash(qaa, data, plugin, entitat, metodeAutenticacio, idioma, proveidor, tipus);
   }
 
 
@@ -227,8 +227,8 @@ public class Acces {
     sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("    plugin: ").append(toIndentedString(plugin)).append("\n");
     sb.append("    entitat: ").append(toIndentedString(entitat)).append("\n");
-    sb.append("    idioma: ").append(toIndentedString(idioma)).append("\n");
     sb.append("    metodeAutenticacio: ").append(toIndentedString(metodeAutenticacio)).append("\n");
+    sb.append("    idioma: ").append(toIndentedString(idioma)).append("\n");
     sb.append("    proveidor: ").append(toIndentedString(proveidor)).append("\n");
     sb.append("    tipus: ").append(toIndentedString(tipus)).append("\n");
     sb.append("}");
