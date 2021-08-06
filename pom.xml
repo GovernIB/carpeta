@@ -470,33 +470,52 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			<plugin>
+				<groupId>com.github.github</groupId>
+				<artifactId>site-maven-plugin</artifactId>
+				<version>0.12</version> 
+				<configuration>
+				  <!-- git commit message -->
+				  <message>Maven artifacts for ${project.version}</message> 
+				  <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> 
+				  <noJekyll>true</noJekyll>   
+				  <!-- remote branch name -->
+				  <branch>refs/heads/gh-pages</branch> 
+				  <includes>
+					<include>**/*</include>
+				  </includes>
+				  <path>maven</path>
+				  <!-- github repo name -->
+				  <repositoryName>maven</repositoryName>      
+				  <!-- github username or organization  -->
+				  <repositoryOwner>GovernIB</repositoryOwner>    
+				  <server>github_governib_maven</server>
+				  <merge>true</merge>
+				  <dryRun>false</dryRun>
+				</configuration>
+				<executions>
+				  <execution>
+					<goals>
+					  <goal>site</goal>
+					</goals>
+					<phase>deploy</phase>
+				  </execution>
+				</executions>
+			</plugin>
 
         </plugins>
 
-
     </build>
+	
+    <distributionManagement>
+		<repository>
+		  <id>github_governib_maven</id>
+		  <name>GitHub GovernIB Maven Repository</name>
+		  <url>file://${project.build.directory}/mvn-repo</url>
+		</repository>
+	</distributionManagement>
 
-	<repositories>
-		<!-- Repositori oficial de JBoss -->
-		<repository>
-			<id>jboss-eap-repository-group</id>
-			<name>JBoss EAP Maven Repository</name>
-			<url>https://maven.repository.redhat.com/ga/</url>
-			<layout>default</layout>
-			<releases>
-				<updatePolicy>never</updatePolicy>
-			</releases>
-			<snapshots>
-				<updatePolicy>never</updatePolicy>
-			</snapshots>
-		</repository>
-		<!-- Repositori del GovernIB amb llibreries compartides, plugins, clients d'altres eines... -->
-		<repository>
-			<id>github-governib-maven</id>
-			<name>GitHub GovernIB Maven Repository</name>
-			<url>https://governib.github.io/maven/maven/</url>
-		</repository>
-	</repositories>
 	<modules>
 		<module>carpeta-commons</module>
 		<module>carpeta-model</module>
