@@ -102,3 +102,15 @@ nb-configuration.xml
 /carpeta-ws
 /carpeta-front/src/main/webapp/src/assets
 /carpeta-front/src/main/webapp/src
+/carpeta-api-externa-client/.swagger-codegen-ignore
+/carpeta-api-externa-client/.travis.yml
+/carpeta-api-externa-client/build.gradle
+/carpeta-api-externa-client/build.sbt
+/carpeta-api-externa-client/git_push.sh
+/carpeta-api-externa-client/gradle.properties
+/carpeta-api-externa-client/gradlew
+/carpeta-api-externa-client/gradlew.bat
+/carpeta-api-externa-client/settings.gradle
+/carpeta-api-externa-client/gradle
+/carpeta-api-externa-client/target
+/carpeta-api-externa-client/.swagger-codegen

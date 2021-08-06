@@ -418,45 +418,6 @@
             </exclusions>
         </dependency>
         
-        <!-- Llibreries de keycloak. Parxe CAIB -->
-<!-- 
-        <dependency>
-            <groupId>org.keycloak</groupId>
-            <artifactId>keycloak-core</artifactId>
-            <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.bouncycastle</groupId>
-                    <artifactId>bcprov-jdk15on</artifactId>
-                </exclusion>            
-            </exclusions>
-        </dependency>
-        
-        <dependency>
-           <groupId>org.bouncycastle</groupId>
-           <artifactId>bcprov-jdk15on</artifactId>
-           <scope>provided</scope>
-        </dependency>
-        
-        <dependency>
-           <groupId>com.fasterxml.jackson.core</groupId>
-           <artifactId>jackson-core</artifactId>
-           <scope>provided</scope>
-        </dependency>
-        
-        <dependency>
-           <groupId>com.fasterxml.jackson.core</groupId>
-           <artifactId>jackson-databind</artifactId>
-           <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-           <groupId>com.fasterxml.jackson.core</groupId>
-           <artifactId>jackson-annotations</artifactId>
-           <scope>provided</scope>
-        </dependency>
-        -->
-
     </dependencies>
 
     <dependencyManagement>

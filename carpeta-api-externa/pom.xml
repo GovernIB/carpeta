@@ -9,14 +9,12 @@
 
     <artifactId>carpeta-api-externa</artifactId>
     <packaging>war</packaging>
-    <name>Carpeta - API REST - EXTERNA</name>
-    <description>API REST EXTERNA de Carpeta</description>
+    <name>Carpeta - API Rest - Externa</name>
     
     <properties>
       <auth.method>BASIC</auth.method>
+      <default.package>es.caib.carpeta.api.client</default.package>
     </properties>
-    
-
 
     <dependencies>
         <!-- Especificacions i llibreries proporcionades per JBoss -->
@@ -185,6 +183,90 @@
             <properties>
                 <auth.method>KEYCLOAK</auth.method>
             </properties>
+        </profile>
+        
+        
+        <!-- Profile per regenerar client rest -->
+        <profile>
+            <id>regenerateapiclient</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <property>
+                    <name>regenerateapi</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                         <!--   IMPORTANT: S'ha de canvia per https://github.com/OpenAPITools/openapi-generator/tree/master/modules/openapi-generator-maven-plugin -->
+                        <groupId>io.swagger.codegen.v3</groupId>
+                        <artifactId>swagger-codegen-maven-plugin</artifactId>
+                        <version>3.0.27</version>
+
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <phase>install</phase>
+                                <configuration>
+                                <!-- https://github.com/swagger-api/swagger-codegen/blob/master/modules/swagger-codegen-maven-plugin/README.md#general-configuration-parameters -->
+
+                                    <inputSpec>${project.basedir}/target/openapi/swagger.json</inputSpec>
+                                   
+                                    <language>java</language>
+                                    
+                                    <configHelp>java</configHelp>
+                                    
+                                    <library>resteasy</library>
+                                    
+                                    <configOptions>
+                                       <groupId>es.caib.carpeta</groupId>
+                                       <artifactId>carpeta-api-externa-client</artifactId>
+                                       <artifactVersion>1.1</artifactVersion>
+                    
+                                       <dateLibrary>joda</dateLibrary>
+                                       
+                                       <useTags>true</useTags>
+                                       
+                                       
+                                    </configOptions>
+                                    
+                                    <!--
+                                    <ignoreFileOverride>${project.basedir}/.swagger-codegen-ignore</ignoreFileOverride>
+                                    ** AMOLLA DOCUMENTACIO PER PANTALLA***
+                                    <configHelp>true</configHelp>
+                                    
+                                    <library>jersey2</library>
+                                    
+                                    <library>resttemplate</library>
+                                    
+                                    <configOptions>
+                                        <dateLibrary>joda</dateLibrary>
+                                    </configOptions>
+   
+                                    <supportingFilesToGenerate>mvn</supportingFilesToGenerate>
+                                    -->
+                                    <addCompileSourceRoot>false</addCompileSourceRoot>
+                                    
+                                    <output>${project.basedir}/../carpeta-api-externa-client</output>
+                                    <!-- ${default.package}.-->
+                                    <apiPackage>${default.package}.api</apiPackage>
+                                    <modelPackage>${default.package}.model</modelPackage>
+                                    <invokerPackage>${default.package}.services</invokerPackage> 
+                                    
+                                    
+                                    <variableNamingConvention>camelCase</variableNamingConvention>
+                                    <!-- <serializableModel>true</serializableModel> -->
+                                    <fullJavaUtil>true</fullJavaUtil>
+                                    
+                                    
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     
     

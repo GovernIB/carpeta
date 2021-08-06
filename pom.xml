@@ -457,7 +457,9 @@
 						<!-- Per detectar problemes de dependències -->
 						<banDuplicatePomDependencyVersions/>
 						<dependencyConvergence/>
+						<!-- Evita tenir versions diferents en els diferents mòduls						
 						<reactorModuleConvergence/>
+						-->
 					</rules>
 				</configuration>
 				<executions>
@@ -503,6 +505,7 @@
 		<module>carpeta-back</module>
 		<module>carpeta-front</module>
 		<module>carpeta-api-externa</module>
+		<module>carpeta-api-externa-client</module>
 		<module>carpeta-ear</module>
 		<module>carpeta-pluginsib</module>
 		<!--
