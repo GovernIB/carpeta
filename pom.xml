@@ -516,6 +516,25 @@
 		</repository>
 	</distributionManagement>
 
+	<repositories>
+		<repository>
+			<id>github-governib-maven</id>
+			<name>GitHub GovernIB Maven Repository</name>
+			<url>https://governib.github.io/maven/maven/</url>
+		</repository>
+		<repository>
+			<id>jboss-releases</id>
+			<name>JBoss Releases Repository</name>
+			<url>https://maven.repository.redhat.com/ga/</url>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<updatePolicy>never</updatePolicy>
+			</snapshots>
+		</repository>	
+	</repositories>
+
 	<modules>
 		<module>carpeta-commons</module>
 		<module>carpeta-model</module>
