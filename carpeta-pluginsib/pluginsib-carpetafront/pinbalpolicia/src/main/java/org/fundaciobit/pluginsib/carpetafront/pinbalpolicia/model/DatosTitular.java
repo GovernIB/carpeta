@@ -55,7 +55,7 @@ public class DatosTitular {
 		return nacionalidad;
 	}
 	public void setNacionalidad(String nacionalidad) {
-		this.nacionalidad = nacionalidad;
+		this.nacionalidad = nacionalidad.replace("A�?A", "AÑA");
 	}
 	
 	@XmlElement(name="Sexo")
