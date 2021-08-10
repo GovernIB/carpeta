@@ -141,6 +141,16 @@
 			<groupId>es.caib.carpeta</groupId>
 			<version>1.1.13</version>
 		</dependency>
+		<dependency>
+            <artifactId>carpeta-pluginsib-carpetafront-pinbalcontrataciones</artifactId>
+            <groupId>es.caib.carpeta</groupId>
+            <version>1.1.13</version>
+        </dependency>
+		<!-- dependency>
+            <artifactId>carpeta-pluginsib-carpetafront-pinbaldiscapacidad</artifactId>
+            <groupId>es.caib.carpeta</groupId>
+            <version>1.1.13</version>
+        </dependency -->
 
 		<!-- ====================================== -->
 		<!-- ===== PLUGINS DE USERINFORMATION ===== -->
