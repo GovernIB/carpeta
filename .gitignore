@@ -99,10 +99,14 @@ nb-configuration.xml
 /carpeta-pluginsib/pluginsib-carpetafront/pinbalcontrataciones/react/readme.txt
 /carpeta-pluginsib/pluginsib-carpetafront/pinbalcontrataciones/.vscode
 /carpeta-pluginsib/pluginsib-carpetafront/pinbalcontrataciones/plugin.properties
+/carpeta-pluginsib/pluginsib-carpetafront/pinbaldiscapacidad/react/node_modules
+/carpeta-pluginsib/pluginsib-carpetafront/pinbaldiscapacidad/react/package-lock.json
+/carpeta-pluginsib/pluginsib-carpetafront/pinbaldiscapacidad/react/readme.txt
+/carpeta-pluginsib/pluginsib-carpetafront/pinbaldiscapacidad/.vscode
+/carpeta-pluginsib/pluginsib-carpetafront/pinbaldiscapacidad/plugin.properties
 /carpeta-api-client
 /carpeta-api-client-generator
 /carpeta-pluginsib/pluginsib-carpetafront/pinbalconvivencia
-/carpeta-pluginsib/pluginsib-carpetafront/pinbaldiscapacidad
 /carpeta-ws
 /carpeta-front/src/main/webapp/src/assets
 /carpeta-front/src/main/webapp/src

@@ -146,11 +146,11 @@
             <groupId>es.caib.carpeta</groupId>
             <version>1.1.13</version>
         </dependency>
-		<!-- dependency>
+		<dependency>
             <artifactId>carpeta-pluginsib-carpetafront-pinbaldiscapacidad</artifactId>
             <groupId>es.caib.carpeta</groupId>
             <version>1.1.13</version>
-        </dependency -->
+        </dependency>
 
 		<!-- ====================================== -->
 		<!-- ===== PLUGINS DE USERINFORMATION ===== -->

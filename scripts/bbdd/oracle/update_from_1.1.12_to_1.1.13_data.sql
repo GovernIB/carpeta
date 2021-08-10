@@ -34,5 +34,39 @@ es.caib.carpeta.pluginsib.carpetafront.pinbalcontrataciones.testsurname=FUSTER
 
 es.caib.carpeta.pluginsib.carpetafront.pinbalcontrataciones.development=true', true, 103, NULL, 'pinbalcontractacions');
 
+--  Integració del Servei de consulta de dades de discapacitat #556
+
+INSERT INTO public.car_traduccio (traduccioid) VALUES (104);
+INSERT INTO public.car_traduccio (traduccioid) VALUES (105);
+
+INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (104, 'ca', 'Consulta de dades de discapacitat');
+INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (104, 'es', 'Consulta de datos de discapacidad');
+INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (105, 'ca', 'Aquest servei permet consultar dades de discapacitat');
+INSERT INTO public.car_traducciomap (traducciomapid, idiomaid, valor) VALUES (105, 'es', 'Este servicio permite obtener los datos de discapacidad');
+
+
+INSERT INTO car_plugin (pluginid, nomid, classe, tipus, propietats, actiu, descripcioid, logoid, context) VALUES (94, 104, 'org.fundaciobit.pluginsib.carpetafront.pinbaldiscapacidad.PinbalDiscapacidadCarpetaFrontPlugin', 1, '# Class => org.fundaciobit.pluginsib.carpetafront.pinbaldiscapacidad.PinbalDiscapacidadCarpetaFrontPlugin
+
+es.caib.carpeta.pluginsib.carpetafront.pinbaldiscapacidad.baseurl=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.baseurl"]]
+es.caib.carpeta.pluginsib.carpetafront.pinbaldiscapacidad.username=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.username"]]
+es.caib.carpeta.pluginsib.carpetafront.pinbaldiscapacidad.password=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.password"]]
+
+es.caib.carpeta.pluginsib.carpetafront.pinbaldiscapacidad.codicertificat=SVDSCDDWS01
+
+es.caib.carpeta.pluginsib.carpetafront.pinbaldiscapacidad.codiprocediment=CODSVDR_GBA_20121107
+es.caib.carpeta.pluginsib.carpetafront.pinbaldiscapacidad.finalitat=Consulta dades discapacitat
+es.caib.carpeta.pluginsib.carpetafront.pinbaldiscapacidad.identificadorsolicitant=S0711001H
+es.caib.carpeta.pluginsib.carpetafront.pinbaldiscapacidad.unitattramitadora=Servei d''escolarització
+
+es.caib.carpeta.pluginsib.carpetafront.pinbaldiscapacidad.codigocomunidadautonoma=04
+es.caib.carpeta.pluginsib.carpetafront.pinbaldiscapacidad.codigoprovincia=07
+
+# Necessari en DEV i PRE. NO es fan cridades reals sinó d,un joc de proves
+# Exemples:   - 24255536N, FUSTER
+es.caib.carpeta.pluginsib.carpetafront.pinbaldiscapacidad.testnif=24255536N
+es.caib.carpeta.pluginsib.carpetafront.pinbaldiscapacidad.testsurname=FUSTER
+
+es.caib.carpeta.pluginsib.carpetafront.pinbaldiscapacidad.development=true', true, 105, NULL, 'dadesdiscapacitat');
+
 
 

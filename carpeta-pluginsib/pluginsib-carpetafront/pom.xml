@@ -25,7 +25,7 @@
 		<module>pinbalayudasubvenciones</module>
 		<module>pinbalfamilia</module>
 		<module>pinbalcontrataciones</module>
-		<!-- module>pinbaldiscapacidad</module -->
+		<module>pinbaldiscapacidad</module>
     </modules>
 
     <dependencies>
