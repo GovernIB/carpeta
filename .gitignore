@@ -114,3 +114,4 @@ nb-configuration.xml
 /carpeta-api-externa-client/gradle
 /carpeta-api-externa-client/target
 /carpeta-api-externa-client/.swagger-codegen
+/carpeta-front/reactnative/CarpetaApp/package-lock.json
