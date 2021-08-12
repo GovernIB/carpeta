@@ -123,7 +123,7 @@ public class TramitePersistenteGenerico {
 	}
 	
 	public Boolean esRegistrado() {
-		 return this.tipo == TipoElementoExpediente.REGISTRO;
+		 return this.tipo == TipoElementoExpediente.REGISTRO || !this.numero.isEmpty();
 	}
 	
 	public void setMostraModal(Boolean mostraModal) {
