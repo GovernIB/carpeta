@@ -1,0 +1,135 @@
+
+
+
+
+
+CONFIGURAR ENTORN ????
+=================
+
+
+npm install -g react-native-cli
+
+
+
+ANDROID
+=======
+   + Configure: 
+        (1) Descarregar Android Studio https://developer.android.com/studio/ i instal·lar
+		(2) set ANDROID_SDK_ROOT=D:\programs\Android\Sdk
+		(3) set PATH=%ANDROID_SDK_ROOT%\platform-tools;%PATH%
+		(4) Obrir Android Studio. Anar a Projects (menu lateral), pitjar opció "More Actions" i elegir "AVD Manager". Crear un No dispositiu: Pixel 3 XL,. Next. Pitjar Download de Marshmallow. Seleccionar Marshmallow i Next. Finish. Pitjar en el PLay.
+   + Execute: 
+        (1) Obrir consola
+		(2) Anar directori reactnative/CarpetaApp 
+		(3) Executar "npm run android"
+
+
+
+WEB
+====
+
+    + Configure:
+		(1) npm install -g jest
+
+    + Execute:  npm run web
+
+
+
+VISUAL STUDIO CODE
+==================
+
++ Extensions: ESLint, Prettier, 
++ Anar a File >> Preferences >> Settings. Cercar 'javascript.validate'. Desactivar el CHECK.
+
+
+
+
+
+CREAR APP DE PROVA (ja està fet, no s'ha de repetir)
+=====================================================
+
+
+react-native init CarpetaApp
+
+https://reactnative.dev/docs/environment-setup
+
+https://aureliomerenda.medium.com/create-a-native-web-app-with-react-native-web-419acac86b82
+
+
+
+
+
+
+
+
+
+================================================================
+                      A L T R E S
+================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+WEB
+    + Configure: 
+		(1) npm i react react-dom react-native-web
+		(2) npm i --dev react-scripts
+		
+		(3) npm install -g jest
+
+
+
+
+
+		
+		(2) npm i webpack babel-loader babel-preset-react babel-preset-es2015
+		(3) npm i webpack-dev-server --save-dev
+		(4) npm i -D webpack-cli
+		(5) npm i --save-dev html-webpack-plugin
+		(6) npm install --save-dev @babel/preset-env
+		(7) npm install --save-dev @babel/preset-react
+		(8) npm install --save-dev babel-preset-react-native
+		(9) npm install --save-dev @babel/plugin-proposal-private-property-in-object
+		(10) npm install --save file-loader url-loader
+		(11) npm i react-scripts --save
+
+	
+	.\node_modules\.bin\webpack serve --host 127.0.0.1 --port 80
+
+
+	
+	.\node_modules\.bin\webpack-dev-server -inline
+
+
+
+
+??????  npm install -g expo-cli
+
+
+-----
+IOS: 
+   + Configure: 
+   + Execute: react-native run-ios
+
+react-native run-android # to try on an android device, OR
+ # to try on an ios device
+ 
+ -------
+ WINDOWS <<<<  NO >>>>>>:
+   + Configure:
+        (1) npm install -g @react-navigation/native
+		(2) npm install --save-dev @babel/preset-env
+		(3) npm install  "typescript@>=3.3.0-dev"
+        (4)	npx react-native-windows-init --overwrite
+   + Execute: npx react-native run-windows
+   
+   
