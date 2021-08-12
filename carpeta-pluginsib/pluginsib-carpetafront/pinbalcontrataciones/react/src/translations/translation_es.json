@@ -1,0 +1,18 @@
+{
+  "pinbalSubvencionesTitulo": "Estar al corriente de las obligaciones tributarias con la Administración de la Comunidad Autónoma de las Illes Balears",
+  "pinbalSubvencionesDescripcion": "Desde aqui puede consultar el resultado de la consulta",
+  "pinbalSubvencionesDni": "DNI",
+  "pinbalSubvencionesNom": "Nombre",
+  "pinbalSubvencionesApellido1" : "Primer Apellido",
+  "pinbalSubvencionesApellido2" : "Segundo Apellido",
+  "pinbalSubvencionesResultado": "Resultado de la consulta",
+  "pinbalSubvencionesFecha": "En fecha ",
+  "pinbalSubvencionesHora": " a las ",
+  "pinbalSubvencionesH": "h:",
+  "pinbalSubvencionesCodigo0": "El contribuyente se encuentra al corriente en sus obligaciones tributarias.",
+  "pinbalSubvencionesCodigo1": "El contribuyente no se encuentra al corriente en sus obligaciones tributarias.",
+  "pinbalSubvencionesCodigo2": "Se ha encontrado más de un registro para los datos del titular indicados.",
+  "pinbalSubvencionesCodigo3": "Para la persona consultada no hay información en la CCAA.",
+  "pinbalSubvencionesDescargarJustificante": "Descargar justificante",
+  "pinbalSubvencionesError": "Ha ocurrido un error"
+}
