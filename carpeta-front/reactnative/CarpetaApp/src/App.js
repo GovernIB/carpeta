@@ -19,6 +19,7 @@ import {
  * @author anadal(u80067)
  * @format
  * @flow strict-local
+ *
  */
 
 class App extends Component {
@@ -50,7 +51,7 @@ class App extends Component {
                 </Section>
                 <Section title="See Your Changes & Platform" isDarkMode={isDarkMode}>
                   Hello World _See_Your_Changes_ !!! {'\n'}
-                  Platform: {Platform.OS} v{Platform.Version}
+                  Platform: {Platform.OS} {Platform.Version && 'v' + Platform.Version}
                 </Section>
                 <Section title="Open External Browser" isDarkMode={isDarkMode}>
                   <TouchableOpacity onPress={this.openLink}>
@@ -60,10 +61,9 @@ class App extends Component {
                     </Text>
                   </TouchableOpacity>
                 </Section>
-
                 <Section title="Inline Web View: " isDarkMode={isDarkMode}>
                   <View style={styles.borderdotted}>
-                    <VistaWeb url="https://google.es" />
+                    <VistaWeb url="http://otae.fundaciobit.org" />
                   </View>
                 </Section>
               </View>

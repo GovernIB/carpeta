@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,
+    flex: 1,
   },
   sectionTitle: {
     fontSize: 24,
