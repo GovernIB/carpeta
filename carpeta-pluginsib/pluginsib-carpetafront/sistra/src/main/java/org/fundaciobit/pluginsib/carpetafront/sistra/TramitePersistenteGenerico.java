@@ -3,7 +3,7 @@ package org.fundaciobit.pluginsib.carpetafront.sistra;
 import java.util.Date;
 
 import es.caib.sistramit.rest.api.externa.v1.RTramitePersistencia;
-//import es.caib.sistramit.rest.api.externa.v1.RTramiteFinalizado;
+import es.caib.sistramit.rest.api.externa.v1.RTramiteFinalizado;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementoExpediente;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.TipoElementoExpediente;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitePersistente;
@@ -123,7 +123,7 @@ public class TramitePersistenteGenerico {
 	}
 	
 	public Boolean esRegistrado() {
-		 return this.tipo == TipoElementoExpediente.REGISTRO;
+		 return this.tipo == TipoElementoExpediente.REGISTRO || !this.numero.isEmpty();
 	}
 	
 	public void setMostraModal(Boolean mostraModal) {
@@ -153,7 +153,7 @@ public class TramitePersistenteGenerico {
 		this.mostraModal = false;
 		this.numero = "";
 	}
-	/*
+	
 	public TramitePersistenteGenerico(RTramiteFinalizado tramite, int versionSistra) {
 		this.idSesionTramitacion = tramite.getIdSesionTramitacion();
 		this.idioma = tramite.getIdioma();
@@ -169,7 +169,7 @@ public class TramitePersistenteGenerico {
 		this.mostraModal = false;
 		this.numero = tramite.getNumeroRegistro();
 	}
-	*/
+	
 	public TramitePersistenteGenerico(TramitePersistente tramite, int versionSistra) {
 		this.idSesionTramitacion = tramite.getIdSesionTramitacion();
 		this.idioma = tramite.getIdioma();
@@ -200,6 +200,16 @@ public class TramitePersistenteGenerico {
 		this.tipo = tramite.getTipo();
 		this.mostraModal = false;
 		this.numero = (this.esRegistrado()) ? (String)tramite.getNumero().getValue() : "";
+	}
+	
+	public String toString() {
+		return "{'idSesionTramitacion': " + this.idSesionTramitacion +
+				"'idTramite':" + this.idTramite +
+				"'descripcionTramite':" + this.descripcionTramite +
+				"'url':" + this.url +
+				"'numero':" + this.numero +
+				"'versionSistra':" + this.versionSistra +
+			    "}";
 	}
 	
 }
