@@ -16,7 +16,7 @@ ANDROID
    + Configure: 
         (1) Descarregar Android Studio https://developer.android.com/studio/ i instal·lar
 		(2) set ANDROID_SDK_ROOT=D:\programs\Android\Sdk
-		(3) set PATH=%ANDROID_SDK_ROOT%\platform-tools;%PATH%
+		(3) set PATH=%ANDROID_SDK_ROOT%\platform-tools;%ANDROID_SDK_ROOT%\emulator;%PATH%
 		(4) Obrir Android Studio. Anar a Projects (menu lateral), pitjar opció "More Actions" i elegir "AVD Manager". Crear un No dispositiu: Pixel 3 XL,. Next. Pitjar Download de Marshmallow. Seleccionar Marshmallow i Next. Finish. Pitjar en el PLay.
    + Execute: 
         (1) Obrir consola

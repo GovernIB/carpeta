@@ -5,7 +5,6 @@ import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.front.controller.WebUIController.EnllazInfo;
 import es.caib.carpeta.front.controller.WebUIController.SeccioInfo;
 import es.caib.carpeta.logic.utils.PluginInfo;
-import es.caib.carpeta.model.entity.Plugin;
 
 import java.util.List;
 
