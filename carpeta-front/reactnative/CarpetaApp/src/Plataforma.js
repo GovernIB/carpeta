@@ -10,16 +10,20 @@ import React, {Component} from 'react';
 // I18N
 import {withTranslation} from 'react-i18next';
 
-import {Text, StyleSheet, Platform} from 'react-native';
+import {Text, StyleSheet, Platform, View} from 'react-native';
+import HolaCaracola from './components/HolaCaracola';
 
 class Plataforma extends Component {
   render() {
     return (
-      <Text style={styles.plataforma}>
-        Platform.OS: {Platform.OS}
-        {'\n'}
-        Platform.Version: {Platform.Version}
-      </Text>
+      <View>
+        <Text style={styles.plataforma}>
+          Platform.OS: {Platform.OS}
+          {'\n'}
+          Platform.Version: {Platform.Version}
+        </Text>
+        <HolaCaracola />
+      </View>
     );
   }
 }

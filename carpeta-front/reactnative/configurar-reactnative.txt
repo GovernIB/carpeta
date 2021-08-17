@@ -31,7 +31,6 @@ WEB
     + Configure:
 		(1) npm install -g jest
 		(2) npm install
-		(3) Copiar fitxer WebView.web.js a .\CarpetaApp\node_modules\react-native-webview
 
     + Execute:  npm run web
 

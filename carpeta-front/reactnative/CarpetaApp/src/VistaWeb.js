@@ -1,14 +1,12 @@
-//import * as constants from './Constants.js';
 import React, {Component} from 'react';
-import {StyleSheet, Dimensions, Platform, View, Text} from 'react-native';
-import WebView from 'react-native-webview';
+import {View, Text, Dimensions, StyleSheet} from 'react-native';
+import VistaWebComponent from './components/VistaWebComponent';
 
 /**
  * @author anadal(u80067)
  * @format
  * @flow strict-local
  */
-
 const dim = Dimensions.get('window');
 
 class VistaWeb extends Component {
@@ -18,43 +16,26 @@ class VistaWeb extends Component {
 
   render() {
     var text = 'WIDTH: ' + dim.width;
-
-    if (Platform.OS === 'web') {
-      return (
-        <View style={styles.iframeContainer}>
-          <Text>{text}</Text>
-          <iframe src={this.props.url} height={dim.height - 40} styles={styles.iframe} />
-        </View>
-      );
-    }
+    var url = 'http://otae.fundaciobit.org';
 
     return (
-      <View style={styles.classWebView}>
+      <View style={styles.borderdotted}>
         <Text>{text}</Text>
-        <WebView
-          originWhitelist={['*']}
-          automaticallyAdjustContentInsets={true}
-          scrollEnabled={true}
-          // source={{html: '<h1>Hello world</h1>'}}
-          source={{uri: this.props.url}}
-          style={styles.classWebView}
-        />
+
+        <VistaWebComponent url={url} debug={true} />
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  classWebView: {
-    width: dim.width - 40,
-    height: dim.height - 40,
-  },
-  iframeContainer: {
-    width: dim.width - 80,
-  },
-  iframe: {
-    width: dim.width - 140,
-    //height: 500,
+  borderdotted: {
+    borderWidth: 3,
+    borderColor: 'red',
+    borderStyle: 'dotted',
+    borderRadius: 1,
+    flex: 1,
+    position: 'relative',
   },
 });
 
