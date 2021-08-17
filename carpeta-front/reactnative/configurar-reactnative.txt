@@ -40,8 +40,10 @@ WEB
 VISUAL STUDIO CODE
 ==================
 
-+ Extensions: ESLint, Prettier, 
++ Seleccionar tamany de linia màxim ????
++ Extensions: ESLint, Prettier, TODO Highlight (FIXME:),Reactjs code snippets, vscode-author-generator
 + Anar a File >> Preferences >> Settings. Cercar 'javascript.validate'. Desactivar el CHECK.
+
 
 
 
@@ -74,7 +76,9 @@ https://aureliomerenda.medium.com/create-a-native-web-app-with-react-native-web-
 
 
 
+I18N
 
+npm install --save-dev react-native-localize i18n-js lodash.memoize
 
 
 
