@@ -22,7 +22,10 @@ class Plataforma extends Component {
           {'\n'}
           Platform.Version: {Platform.Version}
         </Text>
-        <HolaCaracola />
+        <Text>
+          Exemple de Càrrega de classes segons Plataforma =>{'\n'}
+          <HolaCaracola />
+        </Text>
       </View>
     );
   }

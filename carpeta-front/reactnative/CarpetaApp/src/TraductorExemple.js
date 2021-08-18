@@ -33,7 +33,8 @@ class TraductorExemple extends Component {
     return (
       <Text>
         Missatge Traduït (Actual: {i18n.language}) =>{' '}
-        {'\n' /* FIXME:  Surt de la pàgina en ANDROID */} {t('paginaIniciTitol')}
+        {'\n' /* FIXME:  El missatge surt de la pantalla en ANDROID per la dreta*/}{' '}
+        {t('paginaIniciTitol')}
       </Text>
     );
   }

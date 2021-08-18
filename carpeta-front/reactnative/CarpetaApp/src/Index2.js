@@ -26,7 +26,6 @@ class Index2 extends Component {
   }
 
   render() {
-    var isDarkMode = false;
     return (
       <View style={styles.container}>
         {/* MENU SUPERIOR */}
@@ -48,7 +47,7 @@ class Index2 extends Component {
             exact
             path="/"
             render={props => {
-              return <Home isDarkMode={isDarkMode} />;
+              return <Home />;
             }}
           />
           <Route

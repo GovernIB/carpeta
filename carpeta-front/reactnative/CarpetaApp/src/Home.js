@@ -19,8 +19,7 @@ class Home extends Component {
 
   render() {
     //const {t} = this.props;
-    //var isDarkMode = false;
-    return <Text>HOLA DE DE HOME</Text>;
+    return <Text>PAGINA DE PRESENTACIÓ - HOME</Text>;
   }
 }
 

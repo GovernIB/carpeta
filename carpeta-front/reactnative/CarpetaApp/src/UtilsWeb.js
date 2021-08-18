@@ -22,27 +22,14 @@ class UtilsWeb extends Component {
     Linking.openURL('https://egghead.io');
   }
 
-  /*
-    <UseColorSchemeHook>
-      {isDarkMode => (
-        <SafeAreaView
-          //  FIXME:
-          // eslint-disable-next-line react-native/no-inline-styles
-          style={{
-            flex: 1,
-            backgroundColor: isDarkMode ? constants.Color_BLACK : constants.Color_WHITE,
-          }}>
-          <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} /> */
-
   render() {
-    var isDarkMode = false;
     return (
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={{}}>
         <View
           style={{
-            backgroundColor: isDarkMode ? constants.Color_BLACK : constants.Color_WHITE,
+            backgroundColor: constants.Color_WHITE,
           }}>
-          <Section title="Open External Browser" isDarkMode={isDarkMode}>
+          <Section title="Open External Browser">
             <TouchableOpacity onPress={this.openLink}>
               <Text style={styles.link}>
                 Link to https://egghead.io/{' == '}
@@ -50,7 +37,7 @@ class UtilsWeb extends Component {
               </Text>
             </TouchableOpacity>
           </Section>
-          <Section title="Inline Web View: " isDarkMode={isDarkMode}>
+          <Section title="Inline Web View: ">
             <VistaWeb />
           </Section>
         </View>

@@ -1,7 +1,10 @@
-// I18N
-//import * as RNLocalize from 'react-native-localize';
-//import i18n from 'i18n-js';
-//import memoize from 'lodash.memoize';
+/**
+ * @author anadal (u80067)
+ * @email governdigital.carpeta@fundaciobit.org
+ * @create date 17-08-2021 15:18:13
+ * @modify date 17-08-2021 15:18:13
+ * @desc [description]
+ */
 
 import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
@@ -23,7 +26,7 @@ const resources = {
   },
 };
 
-const langActual = 'ca'; // ?????????
+const langActual = 'ca'; // FIXME: S'haurà d'obtenir no se d'on !!!!
 
 export const setLocale = locale => {
   i18n.locale = locale;
@@ -32,7 +35,6 @@ export const setLocale = locale => {
 i18n.use(initReactI18next).init({
   resources,
   lng: langActual,
-  // fallbackLng: "ca", // use ca if detected lng is not available
 
   react: {
     useSuspense: false,

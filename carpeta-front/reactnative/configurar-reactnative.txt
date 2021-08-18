@@ -40,7 +40,7 @@ VISUAL STUDIO CODE
 ==================
 
 + Seleccionar tamany de linia màxim ????
-+ Extensions: ESLint, Prettier, TODO Highlight (FIXME:),Reactjs code snippets, vscode-author-generator
++ Extensions: ESLint, Prettier, TODO Highlight (FIXME:),Reactjs code snippets (rcc i Ctrl+Espai), vscode-author-generator (F1 + 'au' + RETORN)
 + Anar a File >> Preferences >> Settings. Cercar 'javascript.validate'. Desactivar el CHECK.
 
 

@@ -1,6 +1,15 @@
-//import * as constants from './Constants.js';
+/**
+ * @author anadal (u80067)
+ * @email governdigital.carpeta@fundaciobit.org
+ * @create date 17-08-2021 15:21:17
+ * @modify date 17-08-2021 15:21:17
+ * @desc [description]
+ * @format
+ * @flow strict-local
+ */
+
+import * as constants from './Constants.js';
 import React, {Component} from 'react';
-//import {UseColorSchemeHook} from './UseColorShemeHook.js';
 import Section from './Section.js';
 import {ScrollView, StyleSheet, View} from 'react-native';
 
@@ -9,49 +18,22 @@ import TraductorControl from './TraductorControl.js';
 import TraductorExemple from './TraductorExemple.js';
 import Plataforma from './Plataforma.js';
 
-/**
- * @author anadal(u80067)
- * @format
- * @flow strict-local
- *
- */
-
 class TraduccionsAndPlataforma extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    var isDarkMode = false;
-    /*
-    var mystyles = StyleSheet.create({
-      safe: {
-        flex: 1,
-        backgroundColor: isDarkMode ? constants.Color_BLACK : constants.Color_WHITE,
-      },
-    });
-
-    }
-      <UseColorSchemeHook>
-        {isDarkMode => (
-          <SafeAreaView
-            //  FIXME:
-            // eslint-disable-next-line react-native/no-inline-styles
-            style={mystyles.safe}>
-            <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'}>
-              <Text>{t('menuTitol')}</Text>{' '}
-            </StatusBar><ScrollView contentInsetAdjustmentBehavior="automatic" style={mystyles.safe}></ScrollView>
-        */
     return (
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={{}}>
         <View style={styles.borderdotted}>
-          <Section title="Traduccions" isDarkMode={isDarkMode}>
+          <Section title="Traduccions">
             <View>
               <TraductorExemple />
               <TraductorControl />
             </View>
           </Section>
-          <Section title="Plataforma" isDarkMode={isDarkMode}>
+          <Section title="Plataforma">
             <Plataforma />
           </Section>
         </View>
@@ -59,11 +41,6 @@ class TraduccionsAndPlataforma extends Component {
     );
   }
 }
-/*}
-          </SafeAreaView>
-        )}
-              </UseColorSchemeHook> */
-//  FIXME:
 
 const styles = StyleSheet.create({
   borderdotted: {
@@ -73,7 +50,7 @@ const styles = StyleSheet.create({
     borderRadius: 1,
     flex: 1,
     position: 'relative',
-    //    backgroundColor: isDarkMode ? constants.Color_BLACK : constants.Color_WHITE,
+    backgroundColor: constants.Color_WHITE,
   },
 });
 
