@@ -35,8 +35,10 @@
 	<script src="<c:url value="/src/assets/js/jquery.dataTables.min.js"/>" type="text/javascript"></script>
 	<script src="<c:url value="/src/assets/js/datetime-moment.js"/>" type="text/javascript"></script>
 
-	<!-- Scripts per Components React -->
-	<script src="<c:url value="/src/utils/carpeta_react.js"/>" type="text/javascript"></script>
+<%-- XYZ ZZZ
+    <!-- Scripts per Components React -->
+    <script src="<c:url value="/src/utils/carpeta_react.js"/>" type="text/javascript"></script>
+--%>
 
 	<!-- ESTILS -->
 	<link href="<c:url value="/src/assets/css/bootstrap.min.css"/>" rel="stylesheet">

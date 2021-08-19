@@ -165,7 +165,7 @@ nav {
 
 .imc-logo { font-size:90%; position: fixed; z-index: 6; top: 0; left: 0; width: 3.5em; height: 100%; text-align: center; background-color: #fff; border-right: 1px solid #EBEBEB; box-shadow: 1px 1px 1px #ebebeb; }
 
-.imc-logo a.imc--goib { display: block; width: 100%; height: 15em; margin: 1.3em 0 1.6em; background: transparent url(src/assets/images/logo_vertical.svg) no-repeat center center / 65% auto; }
+.imc-logo a.imc--goib { display: block; width: 100%; height: 15em; margin: 1.3em 0 1.6em; background: transparent url(../images/logo_vertical.svg) no-repeat center center / 65% auto; }
 
 .imc-logo li { padding-bottom: .7em; }
 .imc-logo li a { display: block; width: 3.5em; height: 3em; padding: 0; }
@@ -214,7 +214,7 @@ nav {
 .imc-titol li { display: inline; }
 
 
-.imc-bt-directori { display: inline-block; height: 2em; padding-left: 2.7em; margin-right: 2em; vertical-align: middle; background: transparent url(src/assets/images/directori.svg) no-repeat left center / auto 110%; }
+.imc-bt-directori { display: inline-block; height: 2em; padding-left: 2.7em; margin-right: 2em; vertical-align: middle; background: transparent url(../images/directori.svg) no-repeat left center / auto 110%; }
 .imc-bt-directori span { display: block; color: #fff; text-transform: uppercase; padding-top: .4em; }
 
 .imc-bt-directori:hover,
@@ -223,7 +223,7 @@ nav {
     background-color: transparent;
 }
 
-.imc-bt-menu { display: inline-block; width: 2em; height: 2em; border: none; vertical-align: middle; background: transparent url(src/assets/images/menu.svg) no-repeat center center / 85% auto; }
+.imc-bt-menu { display: inline-block; width: 2em; height: 2em; border: none; vertical-align: middle; background: transparent url(../images/menu.svg) no-repeat center center / 85% auto; }
 .imc-bt-menu span { display: block; position: absolute; top: -999em; left: -999em; }
 
 .imc-bt-menu:hover,
@@ -301,10 +301,10 @@ html.imc-menu-visible .imc-marc .imc-marc-menu {
 .imc-marc-ico span { display: inline-block; vertical-align: middle; margin-left: .5em; }
 .imc-marc-ico::before { content: ""; display: inline-block; width: 1.5em; height: 1.5em; vertical-align: middle; background: transparent no-repeat center center / 80% auto; opacity: .6; }
 
-.imc--avanzada::before { background-image: url(src/assets/images/cercador_000.svg); }
-.imc--accessibilitat::before { background-image: url(src/assets/images/accessibilitat_000.svg); }
+.imc--avanzada::before { background-image: url(../images/cercador_000.svg); }
+.imc--accessibilitat::before { background-image: url(../images/accessibilitat_000.svg); }
 
-.imc--idioma::before { content: ""; display: inline-block; width: 1.5em; height: 1.5em; vertical-align: middle; background: transparent url(src/assets/images/idioma.svg) no-repeat center center / 80% auto; opacity: .6; }
+.imc--idioma::before { content: ""; display: inline-block; width: 1.5em; height: 1.5em; vertical-align: middle; background: transparent url(../images/idioma.svg) no-repeat center center / 80% auto; opacity: .6; }
 
 /* FI Menú desplegable */
 
@@ -1214,7 +1214,7 @@ footer * , header *, header *:before, header *:after, footer *:before, footer *:
 		width: 2em;
 		height: 2em;
 		vertical-align: middle;
-		background: transparent url(/images/item.svg) no-repeat left center / auto 100%;
+		background: transparent url(../images/item.svg) no-repeat left center / auto 100%;
 		-webkit-transform: rotate(180deg);
 		-moz-transform: rotate(180deg);
 		-o-transform: rotate(180deg);
@@ -1324,7 +1324,7 @@ footer * , header *, header *:before, header *:after, footer *:before, footer *:
 	.imc-peu-opcions,
 	.imc-peu-xarxes { width: 100%; font-size: 100%; text-align: center; padding-bottom: 1.5em; }
 
-	.imc-bt-menu { background: transparent url(src/assets/images/menu.svg) no-repeat right center / 75% auto; }
+	.imc-bt-menu { background: transparent url(../images/menu.svg) no-repeat right center / 75% auto; }
 
 	.imc-am-mobil { display: block; }
 
