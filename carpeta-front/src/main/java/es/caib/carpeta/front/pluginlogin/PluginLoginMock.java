@@ -10,42 +10,47 @@ import org.slf4j.LoggerFactory;
  * @author anadal
  *
  */
-public class PluginLoginMock implements IPluginLogin  {
-    
-    
+public class PluginLoginMock implements IPluginLogin {
+
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Override
-    public String startAuthentication(String urlCallBackLoginOk, String urCallBackLoginError, String language)
-            throws Exception {
+    public String startAuthentication(String urlCallBackLoginOk, String urCallBackLoginError,
+            String language) throws Exception {
         log.info("Start authentication with MOCK");
         return urlCallBackLoginOk + "?" + Constants.TICKET_PARAM + "=" + System.currentTimeMillis();
     }
 
     @Override
     public LoginInfo validateAuthenticationTicket(String ticket) throws Exception {
-        
+
 //        log.info("Entramn a validar ... ");
-        final LoginInfo loginInfo = new LoginInfo();
 
-        loginInfo.setUsername("");
-        loginInfo.setName("Pep");
-        loginInfo.setSurname1("Fuster");
-        loginInfo.setSurname2("Gonella");
+        String username = "";
+        String name = "Pep";
+        String surname1 = "Fuster";
+        String surname2 = "Gonella";
 
-        String dni = Configuracio.getProperty("es.caib.carpeta.pluginsib.login.mock.administrationid");
-        if (dni == null) {
-          loginInfo.setAdministrationID("30000056Y");
-        } else {
-          loginInfo.setAdministrationID(dni);
+        String administrationID = Configuracio
+                .getProperty("es.caib.carpeta.pluginsib.login.mock.administrationid");
+        if (administrationID == null) {
+            administrationID = "30000056Y";
         }
-        loginInfo.setAuthenticationMethod("None");
-        loginInfo.setQaa(1);
-        // S'ha mogut la petició al issue "LoginIB no retorna informació del Provider de l'autenticacio #310 "
-        //  TODO este valor no viene informado por LoginIB, tendriamos que hablar
+        String authenticationMethod = "None";
+
+        // S'ha mogut la petició al issue "LoginIB no retorna informació del Provider de
+        // l'autenticacio #310 "
+        // TODO este valor no viene informado por LoginIB, tendriamos que hablar
         // con loginIb a ver si pueden enviarnoslo.
-        loginInfo.setIdentityProvider("Mock"); 
-        return loginInfo;
+        String identityProvider = "Mock";
+
+        boolean business = false;
+
+        int qaa = 1;
+        LoginInfoRepresentative representative = null;
+
+        return new LoginInfo(username, name, surname1, surname2, administrationID,
+                authenticationMethod, qaa, identityProvider, business, representative);
     }
 
     @Override

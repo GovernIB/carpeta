@@ -50,7 +50,8 @@ public class CarpetaSecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureForwardUrl("/login?error=true")
                 .permitAll()
                 .and().logout().logoutSuccessUrl("/sortir")
-                .and().headers().frameOptions().sameOrigin();
+                .and().headers();
+                //XYZ ZZZ .frameOptions().disable().addHeaderWriter(new StaticHeadersWriter("X-FRAME-OPTIONS", "ALLOW-FROM 10.215.216.17"));;
     }
 
     @Bean

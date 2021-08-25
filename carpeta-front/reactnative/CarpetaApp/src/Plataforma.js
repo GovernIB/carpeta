@@ -10,23 +10,26 @@ import React, {Component} from 'react';
 // I18N
 import {withTranslation} from 'react-i18next';
 
-import {Text, StyleSheet, Platform, View} from 'react-native';
+import {Text, StyleSheet, Platform, ScrollView} from 'react-native';
 import HolaCaracola from './components/HolaCaracola';
+import Section from './Section';
 
 class Plataforma extends Component {
   render() {
     return (
-      <View>
-        <Text style={styles.plataforma}>
-          Platform.OS: {Platform.OS}
-          {'\n'}
-          Platform.Version: {Platform.Version}
-        </Text>
-        <Text>
-          Exemple de Càrrega de classes segons Plataforma =>{'\n'}
-          <HolaCaracola />
-        </Text>
-      </View>
+      <ScrollView contentInsetAdjustmentBehavior="automatic" style={{}}>
+        <Section title="Plataforma">
+          <Text style={styles.plataforma}>
+            Platform.OS: {Platform.OS}
+            {'\n'}
+            Platform.Version: {Platform.Version}
+          </Text>
+          <Text>
+            {'\n\n'}Exemple de Càrrega de classes segons Plataforma =>{'\n'}
+            <HolaCaracola />
+          </Text>
+        </Section>
+      </ScrollView>
     );
   }
 }

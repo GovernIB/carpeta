@@ -26,6 +26,8 @@ class Section extends Component {
   }
 }
 
+// FIXME: falten PropTypes !!!!
+
 const styles = StyleSheet.create({
   sectionContainer: {
     marginTop: 32,

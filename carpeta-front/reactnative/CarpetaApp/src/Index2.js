@@ -12,11 +12,15 @@ import React, {Component} from 'react';
 import {withTranslation} from 'react-i18next';
 
 import {StyleSheet, Text, View} from 'react-native';
+
 import {Link, Route, Switch, withRouter} from './components/Routing';
 
 import Home from './Home';
-import TraduccionsAndPlataforma from './TraduccionsAndPlataforma.js';
-import UtilsWeb from './UtilsWeb.js';
+import LoginIB from './LoginIB';
+import LoginIBCallBackBrowser from './LoginIBCallBackBrowser';
+import Plataforma from './Plataforma';
+import Traduccions from './Traduccions.js';
+import VistaWebIncrustada from './VistaWebIncrustada';
 
 // FIXME: Canviar nom per Index
 
@@ -33,11 +37,17 @@ class Index2 extends Component {
           <Link to="/" style={styles.navItem}>
             <Text>Home</Text>
           </Link>
-          <Link to="/utilsweb" style={styles.navItem}>
-            <Text>Utilitats Web</Text>
+          <Link to="/vistawebincrustada" style={styles.navItem}>
+            <Text>Web Incrustada</Text>
           </Link>
-          <Link to="/traduccionsplataforma" style={styles.navItem}>
-            <Text>Traduccions i plataforma</Text>
+          <Link to="/traduccions" style={styles.navItem}>
+            <Text>Traduccions</Text>
+          </Link>
+          <Link to="/plataforma" style={styles.navItem}>
+            <Text>Plataforma</Text>
+          </Link>
+          <Link to="/loginib" style={styles.navItem}>
+            <Text>LoginIB</Text>
           </Link>
         </View>
 
@@ -51,15 +61,39 @@ class Index2 extends Component {
             }}
           />
           <Route
-            path="/traduccionsplataforma"
+            path="/traduccions"
+            component={Traduccions}
+            /*
             render={props => {
-              return <TraduccionsAndPlataforma />;
+              return <Traduccions />;
+            }}
+            */
+          />
+          <Route
+            path="/plataforma"
+            render={props => {
+              return <Plataforma />;
             }}
           />
           <Route
-            path="/utilsweb"
+            path="/vistawebincrustada"
+            component={VistaWebIncrustada}
+            /*
             render={props => {
-              return <UtilsWeb />;
+              return <VistaWebIncrustada />;
+            }}
+            */
+          />
+          <Route
+            path="/loginib"
+            render={props => {
+              return <LoginIB {...props} />;
+            }}
+          />
+          <Route
+            path="/loginibcallbackbrowser/:codilogin"
+            render={props => {
+              return <LoginIBCallBackBrowser {...props} codilogin={props.match.params.codilogin} />;
             }}
           />
         </Switch>

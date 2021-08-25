@@ -12,6 +12,7 @@ import i18n from './i18n';
 import {withTranslation} from 'react-i18next';
 
 import {Button, View, StyleSheet} from 'react-native';
+import Section from './Section';
 
 class TraductorControl extends Component {
   constructor(props) {
@@ -26,12 +27,12 @@ class TraductorControl extends Component {
 
   render() {
     return (
-      <View>
+      <Section title="Exemple de Control de traducció">
         <View style={styles.fixToText}>
           <Button title="Català" onPress={() => this.canviarIdioma('ca')} />
           <Button title="Castellà" onPress={() => this.canviarIdioma('es')} />
         </View>
-      </View>
+      </Section>
     );
   }
 }

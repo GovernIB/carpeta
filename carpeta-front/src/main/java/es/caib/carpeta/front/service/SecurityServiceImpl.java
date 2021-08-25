@@ -1,17 +1,23 @@
 package es.caib.carpeta.front.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.UsuarioClave;
 import es.caib.carpeta.commons.utils.UsuarioClaveRepresentante;
+import es.caib.carpeta.front.controller.InicioController;
 import es.caib.carpeta.front.pluginlogin.IPluginLogin;
 import es.caib.carpeta.front.pluginlogin.LoginInfo;
 import es.caib.carpeta.front.pluginlogin.LoginInfoRepresentative;
 import es.caib.carpeta.front.pluginlogin.PluginLoginLoginIB;
+import es.caib.carpeta.front.pluginlogin.PluginLoginReactNative;
 
 /**
  * 
@@ -26,8 +32,25 @@ public class SecurityServiceImpl implements SecurityService {
     // protected PluginLoginLoginIB pluginLoginInternal = new PluginLoginLoginIB();
 
     private IPluginLogin pluginLoginInternal = null;
+    
+    private static final IPluginLogin pluginLoginReactNative = new PluginLoginReactNative();
 
     private IPluginLogin getPluginLogin() throws Exception {
+        
+        HttpServletRequest request;
+        request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
+                        .getRequest();
+        
+        Boolean isReactNative = (Boolean)request.getSession().getAttribute(InicioController.SESSION_IS_REACTNATIVE);
+        
+        
+        log.info("\n\nEntra a SecurityServiceImpl::getPluginLogin() => isReactNative = " + isReactNative + "\n\n");
+        
+        
+        if (isReactNative != null) {
+            return pluginLoginReactNative;
+        }
+
         if (pluginLoginInternal == null) {
 
             String pluginClass = Configuracio.getLoginClass();

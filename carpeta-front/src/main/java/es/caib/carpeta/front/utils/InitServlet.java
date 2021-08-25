@@ -32,7 +32,8 @@ public class InitServlet extends HttpServlet {
         try {
             ReloadableResourceBundleMessageSource ms = new ReloadableResourceBundleMessageSource();
             String[] basenames = { "missatges", // /WEB-INF/classes/
-                    "logicmissatges", "genapp", "carpeta_genapp" };
+                   // "logicmissatges", "genapp", "carpeta_genapp" 
+                    };
             ms.setDefaultEncoding("UTF-8");
             ms.setBasenames(basenames);
             I18NUtils.setMessageSource(ms);

@@ -22,12 +22,6 @@ public class LoginInfo {
     private boolean business;
     private LoginInfoRepresentative representative;
 
-    /**
-     * 
-     */
-    public LoginInfo() {
-        super();
-    }
 
     /**
      * 

@@ -10,34 +10,33 @@
 
 import * as constants from './Constants.js';
 import React, {Component} from 'react';
-import Section from './Section.js';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 
 import {withTranslation} from 'react-i18next';
 import TraductorControl from './TraductorControl.js';
 import TraductorExemple from './TraductorExemple.js';
-import Plataforma from './Plataforma.js';
+import {UseColorSchemeHook} from './UseColorShemeHook.js';
 
-class TraduccionsAndPlataforma extends Component {
+class Traduccions extends Component {
   constructor(props) {
     super(props);
   }
 
   render() {
     return (
-      <ScrollView contentInsetAdjustmentBehavior="automatic" style={{}}>
-        <View style={styles.borderdotted}>
-          <Section title="Traduccions">
-            <View>
+      <UseColorSchemeHook>
+        {isDarkMode => (
+          <ScrollView contentInsetAdjustmentBehavior="automatic" style={{}}>
+            <View style={styles.borderdotted}>
               <TraductorExemple />
               <TraductorControl />
+              <View>
+                <Text>ISDARKMODE = ]{isDarkMode}[</Text>
+              </View>
             </View>
-          </Section>
-          <Section title="Plataforma">
-            <Plataforma />
-          </Section>
-        </View>
-      </ScrollView>
+          </ScrollView>
+        )}
+      </UseColorSchemeHook>
     );
   }
 }
@@ -55,4 +54,4 @@ const styles = StyleSheet.create({
 });
 
 // I18N
-export default withTranslation()(TraduccionsAndPlataforma);
+export default withTranslation()(Traduccions);
