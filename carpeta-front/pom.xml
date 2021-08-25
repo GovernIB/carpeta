@@ -276,6 +276,7 @@
 			</plugin>
 			
 		</plugins>
+		
 		<resources>
 			<resource>
 				<directory>${basedir}/react/src/assets</directory>
@@ -283,5 +284,6 @@
 				<filtering>false</filtering>
 			</resource>
 		</resources>
+		
 	</build>
 </project>

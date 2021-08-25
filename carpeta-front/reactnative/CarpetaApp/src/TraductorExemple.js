@@ -10,10 +10,7 @@ import React, {Component} from 'react';
 import {Text} from 'react-native';
 import i18n from './i18n';
 import {withTranslation} from 'react-i18next';
-
-/**
- *
- */
+import Section from './Section';
 
 class TraductorExemple extends Component {
   constructor(props) {
@@ -31,11 +28,13 @@ class TraductorExemple extends Component {
   render() {
     const {t} = this.props;
     return (
-      <Text>
-        Missatge Traduït (Actual: {i18n.language}) =>{' '}
-        {'\n' /* FIXME:  El missatge surt de la pantalla en ANDROID per la dreta*/}{' '}
-        {t('paginaIniciTitol')}
-      </Text>
+      <Section title="Exemple de Traduccio">
+        <Text>
+          Missatge Traduït (Actual: {i18n.language}) =>{' '}
+          {'\n' /* FIXME:  El missatge surt de la pantalla en ANDROID per la dreta*/}{' '}
+          {t('paginaIniciTitol')}
+        </Text>
+      </Section>
     );
   }
 }

@@ -1,7 +1,7 @@
 import * as constants from './Constants.js';
 import React, {Component} from 'react';
 import Section from './Section.js';
-import VistaWeb from './VistaWeb.js';
+import VistaWeb from './VistaWebIncrustada.js';
 import {Linking, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 import {withTranslation} from 'react-i18next';
@@ -10,7 +10,7 @@ import {withTranslation} from 'react-i18next';
  * @author anadal(u80067)
  * @format
  * @flow strict-local
- *
+ * FIXME: TODO: ESBORRAR !!!!
  */
 
 class UtilsWeb extends Component {

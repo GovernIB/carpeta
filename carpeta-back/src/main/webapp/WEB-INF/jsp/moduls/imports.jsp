@@ -3,7 +3,6 @@
 
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<META HTTP-EQUIV="Access-Control-Allow-Origin" CONTENT="http://10.215.216.175:8080">
 
 <title>Benvingut a Carpeta</title>
 

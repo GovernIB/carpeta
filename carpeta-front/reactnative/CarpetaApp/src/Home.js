@@ -1,16 +1,17 @@
-//import * as constants from './Constants.js';
+/**
+ * @author anadal (u80067)
+ * @email governdigital.carpeta@fundaciobit.org
+ * @create date 19-08-2021 12:39:30
+ * @modify date 19-08-2021 12:39:30
+ * @desc [description]
+ * @format
+ * @flow strict-local
+ */
+
 import React, {Component} from 'react';
-//import {UseColorSchemeHook} from './UseColorShemeHook.js';
 import {Text} from 'react-native';
 
 import {withTranslation} from 'react-i18next';
-
-/**
- * @author anadal(u80067)
- * @format
- * @flow strict-local
- *
- */
 
 class Home extends Component {
   constructor(props) {
@@ -18,7 +19,6 @@ class Home extends Component {
   }
 
   render() {
-    //const {t} = this.props;
     return <Text>PAGINA DE PRESENTACIÓ - HOME</Text>;
   }
 }

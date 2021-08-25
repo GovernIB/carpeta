@@ -119,7 +119,10 @@ class IniciPublic extends Component {
                                 <button className="btn btn-primary carpeta-btn botoAccedirCarpeta" title={t('accedirBoto') + t('paginaIniciBotoAccedir')}
                                       onClick={() => {
                                           var loc = new URL(window.location.href);
-                                          window.location.href = ('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host))
+                                          
+                                          var theUrl = baseURL + '/public/doLogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host);
+                                          //alert('Obrin DOLOGIN => ' + theUrl);
+                                          window.location.href = theUrl
                                       }} tabIndex="503" aria-labelledby="accedirCarpetaPrivat">
                                     <span className="oi oi-account-login" title="" aria-hidden="true"/> {t('paginaIniciBotoAccedir')}
                                 </button>
