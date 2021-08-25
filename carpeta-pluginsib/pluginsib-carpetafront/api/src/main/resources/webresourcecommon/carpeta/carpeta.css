@@ -739,6 +739,12 @@ a.imc-bt-xarxa:hover {
 #dadespinbalayudascontainer .contenedorInfoPersonal div{ display: inline-block; vertical-align: top; }
 #dadespinbalayudascontainer .contenedorInfoPersonal strong { display: block; }
 
+#dadespinbalmatriculacontainer .descarregaJustificant { text-align:center; }
+#dadespinbalmatriculacontainer .descarregaJustificant span.oi { font-size: 3rem; display:block; margin: 10px; }
+#dadespinbalmatriculacontainer .contenedorInfoPersonal { border-top: 1px solid #ececec; }
+#dadespinbalmatriculacontainer .contenedorInfoPersonal div{ display: inline-block; vertical-align: top; }
+#dadespinbalmatriculacontainer .contenedorInfoPersonal strong { display: block; }
+
 /* HomePage */
 .homePage .titol.h5 { text-transform: none !important; }
 .homePage ul { list-style:none;  }
@@ -1013,7 +1019,7 @@ body {
 	font-size: 1.6em !important;
 }
 .usuari {
-	/*top: 2em !important;*/
+	top: 2em !important;
 }
 #menuRapid{
 	display: none;
@@ -1033,20 +1039,34 @@ input.form-control, select.form-control {
 }
 .nivellAut{
 	font-size: 0.7em;
+	padding-left: 0em!important;
 }
 .imc--contingut{
 	font-size: 0.8em !important;
 }
 .imc--autenticacio{
 	display: table !important;
-	padding-left: 0.5em !important;
+	padding-left: 0em !important;
 }
 .imc-titol h1 {
 	font-size: 1.3em !important;
 }
 .usuari {
 	/*top: 2em !important;*/
-	height: auto;
+	/*height: auto;*/
+}
+.marge-mobil{
+	padding-top: 0.5em!important;
+}
+.form-mobil{
+	padding-right: 0rem!important;
+	padding-left: 0rem!important;
+}
+.camp-form-mobil{
+	width: 100%!important;
+}
+.taula-mobil{
+	margin-top: 4em!important;
 }
 }
 
@@ -1084,6 +1104,14 @@ body {
 .navbar-expand-sm .navbar-nav {
 	-ms-flex-direction: row;
 	flex-direction: row;
+}
+.contingut-entitat{
+	padding-top: 0em !important;
+	margin-left: 4em;
+	width: 80%;
+}
+.imc-icona {
+	padding-right: 0em;
 }
 }
 
@@ -1227,7 +1255,7 @@ body {
 .pagination-sm .page-link { font-size: 0.875em !important; }
 .alert-warning { font-size: 0.85em !important; }
 .btn-primary.carpeta-btn { font-size: 1em !important; }
-.imc-continguts { padding-top: 5em !important; }
+/*.imc-continguts { padding-top: 5em !important; }*/
 p.subtitol { font-size: 0.8em !important; }
 
 .infoNoMenu dl.row > div {
