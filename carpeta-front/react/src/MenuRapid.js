@@ -89,6 +89,18 @@ class MenuRapid extends Component {
                     switch (s.tipus) {
 
                         case 0: // Plugin react
+                            allItems.push(
+                                <li key={k} className="nav-item pr-4 lletraRapid">
+                                    <Link className="navCarpeta"
+                                          to={{pathname: Constants.PLUGINREACT_PATH + s.context, nomPagina: "plugin"}} tabIndex={301+k} aria-labelledby={"menuRapidBoto"+i} onFocus={function(){$("#submenu"+iActiu).css("display", "none");iActiu=i;}}>
+                                        <img src={urlBase + s.urllogo} alt={s.nom} title={t('iconaDe') + " " + s.nom} className="imc-icona"/>
+                                        {/*<img src={s.urllogo} alt="" title="" className="imc-icona"/>*/}
+                                        <span className="menuRapidView" id={"menuRapidBoto"+i}>{s.nom}</span>
+                                    </Link>
+                                </li>
+                            );
+                            break;
+
                         case 1: // Plugin html
                             allItems.push(
                                 <li key={k} className="nav-item pr-4 lletraRapid">
@@ -140,7 +152,7 @@ class MenuRapid extends Component {
                                     <button type="button" className="btn btn-default dropdown-toggle p-0 lletraRapid disBlok text-verd"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-labelledby={"menuRapidBoto"+i} tabIndex={301 + k - l} id={"navbarDropdown" + i} onFocus={function(){$("#submenu"+iActiu).css("display", "none");iActiu=i;$("#submenu"+i).css("display", "block")}}>
                                         <img src={s.urllogo} title={t('iconaDe') + " " + s.nom} alt={s.nom} className="imc-icona"/>
-                                        <span className="menuRapidView">{s.nom}</span>
+                                        <span className="menuRapidView lletraRapid">{s.nom}</span>
                                     </button>
                                     <ul className="dropdown-menu maxContent" aria-labelledby={"navbarDropdown" + i} id={"submenu"+i}>
                                         {plugins}
