@@ -45,7 +45,9 @@
     </div>
     <script>
         $(document).ready(function() {
-        	 window.open("${url}", '_blank');
+            var pagTornar = sessionStorage.getItem("pagTornar");
+            console.log("PGGGGGGGGGGGGGGGGGGGGGGG: " + pagTornar);
+            window.open("${url}", '_blank');
         });
     </script>
 </#if>
@@ -93,5 +95,10 @@ var counterBack = setInterval(function(){
 <input type="submit" class = "btn btn-primary carpeta-btn" value="${label_continuar}"/>
 </form>
 </#if>
+
+<div class="col-md-12 border-0 float-left p-0" id="botoTornarReprendre" style="margin-top: 20px">
+    <button type="button" data-toggle="modal" class="botoSuport" tabindex="520" aria-labelledby="botoTornarReprendre" onclick="parent.location.href=sessionStorage.getItem('pagTornar');">${boto_tornar}</button>
+</div>
+
 </body>
 </html>

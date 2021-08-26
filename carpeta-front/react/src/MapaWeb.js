@@ -173,6 +173,12 @@ class MapaWeb extends Component {
 
 					</div>
 
+					<div className="col-md-12 border-0 float-left p-0" id="botoTornarMapa" style={{ marginTop: '20px' }}>
+						<button type="button" data-toggle="modal" onClick={() => {
+							window.location.href = sessionStorage.getItem("pagTornar")
+						}} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarMapa">{t('tornar')}</button>
+					</div>
+
 				</div>
 
 			</div>

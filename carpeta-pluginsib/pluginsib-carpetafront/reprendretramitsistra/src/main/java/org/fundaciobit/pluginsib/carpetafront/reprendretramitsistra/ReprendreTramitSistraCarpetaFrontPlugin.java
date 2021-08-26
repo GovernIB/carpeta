@@ -193,7 +193,7 @@ public class ReprendreTramitSistraCarpetaFrontPlugin extends AbstractCarpetaFron
             map.put("contextPath", request.getContextPath());
 
             String[] traduccions = { "label.reprendre", "label_info_finestra", 
-                    "label_no_pipella", "label_continuar", "label_clau"};
+                    "label_no_pipella", "label_continuar", "label_clau", "boto_tornar"};
 
             for (String t : traduccions) {
                 map.put(t.replace('.', '_'), getTraduccio(t, locale));
