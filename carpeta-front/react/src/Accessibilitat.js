@@ -87,6 +87,12 @@ class Accessibilitat extends Component {
                         <p className="lh15 subtitolInferior">{t('accessibilitatOpcional4')}</p>
 
                     </div>
+
+                    <div className="pb-3 col2peu" id="botoTornarAcces">
+                        <button type="button" data-toggle="modal" onClick={() => {
+                            window.location.href = sessionStorage.getItem("pagTornar")
+                        }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarAcces">{t('tornar')}</button>
+                    </div>
                 </div>
             </div>
         );

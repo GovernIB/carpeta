@@ -68,6 +68,7 @@
 			  sessionStorage.setItem('contextPath', '${pageContext.request.contextPath}');
 			  sessionStorage.setItem('errorLogin', '${errorLogin}');
 			  sessionStorage.setItem('langActual', '${pageContext.response.locale}');
+			  sessionStorage.setItem('pagTornar', '${pageContext.request.contextPath}');
 	  </script>
   </sec:authorize>
 
@@ -128,6 +129,8 @@
 				<c:if test="${empty userRepresentant }" >
                 sessionStorage.setItem('representantExisteix', false);
                 </c:if>
+
+				sessionStorage.setItem('pagTornar', '${pageContext.request.contextPath}');
 				
 
 		</script>

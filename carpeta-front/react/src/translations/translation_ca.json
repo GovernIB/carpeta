@@ -245,5 +245,6 @@
 	"error500plugin": "Error 500. No es pot accedir a qualque plugin, revisar la configuració dels plugins.",
 
 	"pipellaAutenticat": "Zona privada",
-	"iconaDe": "Icona de"
+	"iconaDe": "Icona de",
+	"tornar": "Tornar"
 }

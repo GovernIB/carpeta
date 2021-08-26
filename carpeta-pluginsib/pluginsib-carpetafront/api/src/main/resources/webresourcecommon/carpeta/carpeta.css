@@ -694,11 +694,12 @@ a.imc-bt-xarxa:hover {
 }
 .llistaEnllasos li{
 	background: #fff;
-	border: 1px solid lightgray;
+	border: 1px solid #808080;
 	padding: 1% 2%;
 	margin-bottom: 1%;
 	margin-right: 2%;
 	font-size: 14px;
+	border-radius: .25rem;
 }
 .llistaEnllasos li a{
 	color: #cc073c;
@@ -1067,6 +1068,10 @@ input.form-control, select.form-control {
 }
 .taula-mobil{
 	margin-top: 4em!important;
+}
+.floatEnll{
+	float: left!important;
+	width: 95%;
 }
 }
 
