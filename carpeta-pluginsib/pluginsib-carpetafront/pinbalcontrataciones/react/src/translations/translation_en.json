@@ -14,5 +14,6 @@
   "pinbalSubvencionesCodigo2": "Se ha encontrado más de un registro para los datos del titular indicados.",
   "pinbalSubvencionesCodigo3": "Para la persona consultada no hay información en la CCAA.",
   "pinbalSubvencionesDescargarJustificante": "Download justificante",
-  "pinbalSubvencionesError": "Ha ocurrido un error"
+  "pinbalSubvencionesError": "Ha ocurrido un error",
+  "pinbalSubvencionesTornar": "Torna"
 }

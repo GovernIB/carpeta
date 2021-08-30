@@ -50,6 +50,8 @@ class DatosAyudaSubvenciones extends Component {
     render() {
         const isLoaded = this.state.isLoaded;
 
+        const { t } = this.props;
+
         let content;
 
         if (!isLoaded) {
@@ -63,8 +65,6 @@ class DatosAyudaSubvenciones extends Component {
             if (data.error) {  
                 content = <div className="alert alert-danger" role="alert">{data.error}</div>;
             } else {
-
-                const { t } = this.props;
 				
                 let alerta;
 
@@ -106,6 +106,11 @@ class DatosAyudaSubvenciones extends Component {
                             {content}
                         </div>
                     </div>
+                </div>
+                <div className="col-md-12 border-0 float-left p-0" id="botoTornarContrataciones" style={{ marginTop: '20px' }}>
+                    <button type="button" data-toggle="modal" onClick={() => {
+                        window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
+                    }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarContrataciones">{t('pinbalSubvencionesTornar')}</button>
                 </div>
             </div>
             );

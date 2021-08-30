@@ -30,5 +30,6 @@
   "pinbalFamiliaExpedicion": "Fecha expedición",
   "pinbalFamiliaCaducidad": "Fecha caducidad",
   "pinbalFamiliaHijos": "Número de hijos",
-  "pinbalFamiliaBeneficiarios": "Beneficiarios"
+  "pinbalFamiliaBeneficiarios": "Beneficiarios",
+  "pinbalFamiliaTornar": "Torna"
 }

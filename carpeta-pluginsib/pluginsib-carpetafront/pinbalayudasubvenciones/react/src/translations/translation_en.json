@@ -12,5 +12,6 @@
   "pinbalSubvencionesCodigo0": "El contribuyente se encuentra al corriente en sus obligaciones tributarias.",
   "pinbalSubvencionesCodigo1": "El contribuyente no se encuentra al corriente en sus obligaciones tributarias.",
   "pinbalSubvencionesCodigo2": "Se ha encontrado más de un registro para los datos del titular indicados.",
-  "pinbalSubvencionesCodigo3": "Para la persona consultada no hay información en la CCAA."
+  "pinbalSubvencionesCodigo3": "Para la persona consultada no hay información en la CCAA.",
+  "pinbalSubvencionesTornar": "Torna"
 }
