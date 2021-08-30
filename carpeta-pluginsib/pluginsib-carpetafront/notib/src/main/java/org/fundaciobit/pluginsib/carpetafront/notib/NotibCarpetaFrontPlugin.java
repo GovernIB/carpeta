@@ -156,9 +156,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             String plantilla = IOUtils.toString(input, "UTF-8");
 
             String[] traduccions = { "menu.notificaciones", "notificaciones.descripcion", "menu.notificacion",
-                    "notificaciones.notificaciones",
-
-                    "menu.notificaciones.otras", "notificaciones.otras" };
+                    "notificaciones.notificaciones", "menu.notificaciones.otras", "notificaciones.otras", "boto_tornar"};
 
             for (String t : traduccions) {
                 map.put(t.replace('.', '_'), getTraduccio(t, locale));

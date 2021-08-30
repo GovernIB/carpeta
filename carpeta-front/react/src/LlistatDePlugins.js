@@ -113,7 +113,7 @@ class LlistatDePlugins extends Component {
 
     render() {
 
-        const autenticat = sessionStorage.getItem('autenticat');;
+        const autenticat = sessionStorage.getItem('autenticat');
         if (autenticat === '0') {
             console.log("S'HA INTENTAT MOSTRAR UNA SECCIO SENSE ESTAR AUTENTICATS");
             this.props.history.push("/");
@@ -127,6 +127,19 @@ class LlistatDePlugins extends Component {
         let urlBase = sessionStorage.getItem('contextPath')
 
         const baseSeccio = (this.props.seccioContext === '0') ? '' : Constants.SECCIO_PATH + this.props.seccioContext;
+
+        let botoTornarEnrera = '';
+        if (this.props.seccioContext !== '0') {
+            botoTornarEnrera = <div className="col-md-12 border-0 float-left pt-0 pr-0 pb-0 pl-1"
+                                          id="botoTornarModul"
+                                          style={{marginTop: '20px'}}>
+                <button type="button" data-toggle="modal"
+                        onClick={() => window.location.href = sessionStorage.getItem("pagTornar")}
+                        className="botoSuport" tabIndex="520" aria-labelledby="botoTornarModul">{t('tornar')}</button>
+            </div>;
+        }
+
+
         const styleDesc =  { fontSize: '84%', color: '#666', textAlign: 'center' } ;
 
         let allItems = [];
@@ -284,6 +297,9 @@ class LlistatDePlugins extends Component {
                     {enllasosEnunclic}
 
                 </div>
+
+                {botoTornarEnrera}
+
             </div>
 
         );

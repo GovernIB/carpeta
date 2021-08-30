@@ -13,6 +13,7 @@
     "datosNacimiento_provincia": "Provincia de Naixement",
 	"nombrePadre": "Nom del Pare",
 	"nombreMadre": "Nom de la Mare",
-    "fechaCaducidad": "Data de Caducitat"
+    "fechaCaducidad": "Data de Caducitat",
+    "tornar": "Torna"
 
 }
