@@ -25,7 +25,17 @@
     <link href="${resources}/carpeta/open-iconic-bootstrap.css" rel="stylesheet">
     <link href="${resources}/carpeta/jquery.dataTables.min.css" rel="stylesheet">
     <link href="${resources}/carpeta/datatables.min.css" rel="stylesheet">
+    <script type="text/javascript">
+        var head  = document.getElementsByTagName('head')[0];
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = sessionStorage.getItem("cssExtern");
+        head.appendChild(link);
+    </script>
 </head>
+
+
 <body class="fonsPlugin" >
 <div id="carregantDetallRegistre" class="loader-container centrat loaderOcult" role="alert">
     <div class="loader"></div>

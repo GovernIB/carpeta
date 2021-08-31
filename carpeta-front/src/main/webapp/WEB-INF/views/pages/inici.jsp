@@ -69,6 +69,7 @@
 			  sessionStorage.setItem('errorLogin', '${errorLogin}');
 			  sessionStorage.setItem('langActual', '${pageContext.response.locale}');
 			  sessionStorage.setItem('pagTornar', '${pageContext.request.contextPath}');
+			  sessionStorage.setItem('cssExtern', '${pageContext.request.contextPath}/webui/customcss/${entitat}');
 	  </script>
   </sec:authorize>
 
@@ -131,6 +132,7 @@
                 </c:if>
 
 				sessionStorage.setItem('pagTornar', '${pageContext.request.contextPath}');
+				sessionStorage.setItem('cssExtern', '${pageContext.request.contextPath}/webui/customcss/${entitat}');
 				
 
 		</script>

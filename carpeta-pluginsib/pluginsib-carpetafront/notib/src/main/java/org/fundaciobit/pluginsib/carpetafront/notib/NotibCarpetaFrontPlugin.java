@@ -336,7 +336,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         // TRADUCCIONS
 
         String[] traduccions = { "comunicacion.listado", "comunicacion.vacio", "comunicacion.descripcion.comunicacion",
-                "comunicacion.fecha", "comunicacion.descripcion" };
+                "comunicacion.fecha", "comunicacion.descripcion" , "boto_tornar"};
 
         for (String t : traduccions) {
             map.put(t.replace('.', '_'), getTraduccio(t, locale));
