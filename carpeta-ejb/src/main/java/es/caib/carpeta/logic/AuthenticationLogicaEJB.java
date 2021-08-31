@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.pluginsib.core.utils.PluginsManager;
 import org.fundaciobit.pluginsib.userinformation.IUserInformationPlugin;
+import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
@@ -19,7 +20,14 @@ import es.caib.carpeta.persistence.UsuariJPA;
 import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.model.fields.EntitatFields;
+
+import java.io.PrintWriter;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -106,7 +114,25 @@ public class AuthenticationLogicaEJB implements AuthenticationLogicaService {
     public IUserInformationPlugin getUserInformationPluginInstance() throws EJBException { 
         if (userInformationPlugin == null) {
             
-            Properties props = Configuracio.getFilesProperties();
+            Properties props = new Properties();
+            
+            try {
+                String plantilla = getPropertiesAsString(Configuracio.getFilesProperties());
+
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("SP", Configuracio.getSystemProperties());
+
+                String generat = TemplateEngine.processExpressionLanguageSquareBrackets(plantilla, map, new Locale("ca"));
+
+                //log.error("PROPIETATS DESPRES DE generat:\n" + generat + "\n");
+
+                props.load(new StringReader(generat));
+            } catch(Exception e) {
+                throw new EJBException(e);
+            }
+            
+            
+            
 
             String className = props.getProperty(USERINFORMATION_PLUGIN_KEY);
             Object pluginInstance;
@@ -130,6 +156,17 @@ public class AuthenticationLogicaEJB implements AuthenticationLogicaService {
             userInformationPlugin = (IUserInformationPlugin) pluginInstance;
         }
         return userInformationPlugin;
+    }
+
+    /**
+     * 
+     * @param prop
+     * @return
+     */
+    public static String getPropertiesAsString(Properties prop) {    
+        StringWriter writer = new StringWriter();
+        prop.list(new PrintWriter(writer));
+        return writer.getBuffer().toString();
     }
     
 }

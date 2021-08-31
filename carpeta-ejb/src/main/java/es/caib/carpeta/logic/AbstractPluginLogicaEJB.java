@@ -97,7 +97,7 @@ public abstract class AbstractPluginLogicaEJB<I extends IPlugin> extends PluginL
                 try {
                     
                     Map<String, Object> map = new HashMap<String, Object>();
-                    map.put("SP", Configuracio.getSystemAndFileProperties());
+                    map.put("SP", Configuracio.getJavaAndCarpetaFileProperties());
                     
                     String plantilla = plugin.getPropietats();
                     String generat = TemplateEngine.processExpressionLanguageSquareBrackets(plantilla, map, new Locale("ca"));

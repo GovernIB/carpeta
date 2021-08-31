@@ -18,8 +18,31 @@ public class Configuracio implements Constants {
     private static final Logger LOG = LoggerFactory.getLogger(Configuracio.class);
 
     private static final Properties fileProperties = new Properties();
-    
+
     private static final Properties fileAndSystemProperties = new Properties();
+
+    /*
+     * Només agafa les Propietats definides dins carpeta.system.properties Seguim
+     * els estandars de la CAIB veure document "propietats.pdf" Issue #120
+     */
+    public static Properties getSystemProperties() {
+
+        Properties systemProperties = new Properties();
+        {
+
+            String propertySystemFile = System.getProperty(Constants.CARPETA_PROPERTY_BASE + "system.properties");
+            File systemFile = new File(propertySystemFile);
+
+            try {
+                systemProperties.load(new FileInputStream(systemFile));
+            } catch (IOException e) {
+                LOG.error("No es pot carregar algun dels fitxers de propietats ... ", e);
+            }
+        }
+
+        return systemProperties;
+
+    }
 
     /*
      * Agafa els fitxers de propietats definits a l'standalone
@@ -27,16 +50,16 @@ public class Configuracio implements Constants {
      * Seguim els estandars de la CAIB veure document "propietats.pdf" Issue #120
      */
     public static Properties getFilesProperties() {
-        
+
         if (fileProperties.isEmpty()) {
             // matches the property name as defined in the system-properties element in
             // WildFly
             String propertyFile = System.getProperty(Constants.CARPETA_PROPERTY_BASE + "properties");
             File file = new File(propertyFile);
-    
+
             String propertySystemFile = System.getProperty(Constants.CARPETA_PROPERTY_BASE + "system.properties");
             File systemFile = new File(propertySystemFile);
-    
+
             try {
                 fileProperties.load(new FileInputStream(file));
                 fileProperties.load(new FileInputStream(systemFile));
@@ -44,12 +67,12 @@ public class Configuracio implements Constants {
                 LOG.error("No es pot carregar algun dels fitxers de propietats ... ", e);
             }
         }
-        
+
         return fileProperties;
 
     }
 
-    public static Properties getSystemAndFileProperties() {
+    public static Properties getJavaAndCarpetaFileProperties() {
 
         if (fileAndSystemProperties.isEmpty()) {
             fileAndSystemProperties.putAll(getFilesProperties());
@@ -60,12 +83,12 @@ public class Configuracio implements Constants {
 
     public static String getProperty(String key) {
 
-        return  getFilesProperties().getProperty(key);
+        return getFilesProperties().getProperty(key);
 
     }
 
     public static String getProperty(String key, String def) {
-        
+
         return getFilesProperties().getProperty(key, def);
 
     }
@@ -112,7 +135,7 @@ public class Configuracio implements Constants {
         if (path == null || path.trim().length() == 0) {
             return null;
         } else {
-          return new File(path);
+            return new File(path);
         }
     }
 
@@ -135,11 +158,10 @@ public class Configuracio implements Constants {
     public static String getLoginIBAplicacionCode() {
         return getProperty(CARPETA_PROPERTY_LOGINIB + "aplicacion");
     }
-    
+
     public static String getLoginIBAplicacionDescription() {
         return getProperty(CARPETA_PROPERTY_LOGINIB + "aplicaciondescripcion");
     }
-
 
     public static String getLoginIBNivelQAA() {
         return getProperty(CARPETA_PROPERTY_LOGINIB + "nivel_qaa");
@@ -156,10 +178,9 @@ public class Configuracio implements Constants {
     public static String getLoginIBUrl() {
         return getProperty(CARPETA_PROPERTY_LOGINIB + "url");
     }
-    
+
     public static String getLoginClass() {
         return getProperty(Constants.CARPETA_PROPERTY_BASE + "pluginsib.login.class");
     }
-    
 
 }
