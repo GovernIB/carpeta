@@ -27,6 +27,7 @@ class Breadcrumb extends Component {
 
     canviatIdioma(lng) {
         // console.log(" CANVIAT IDIOMA EN BREADCRUMB A ]" + lng+ "[");
+        this.canviatRoute(this.props.location , this.props.action);
     }
 
 

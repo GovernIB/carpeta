@@ -54,7 +54,6 @@ class IniciPublic extends Component {
 
 
     render() {
-        console.log("PAG TORNAR: " + sessionStorage.getItem("pagTornar"));
 
         var htmlCode;
 
