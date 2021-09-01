@@ -22,7 +22,10 @@
     <div id="divOcult" class="lletraDetallsError mt-2 ocult">${error}</div>
 </div>
 
-<button class="btn btn-primary carpeta-btn ml-0 float-left" id="tornarBtn">${error_tornar}</button>
+<!--<button class="btn btn-primary carpeta-btn ml-0 float-left" id="tornarBtn">${error_tornar}</button>-->
+<div class="col-md-12 border-0 float-left p-0" id="botoTornarError" style="margin-top: 20px">
+    <button type="button" data-toggle="modal" class="botoSuport" tabindex="520" aria-labelledby="botoTornarError" onclick="parent.location.href=sessionStorage.getItem('pagTornar');">${error_tornar}</button>
+</div>
 
 <script type="text/javascript">
 $(document).ready(function () {
