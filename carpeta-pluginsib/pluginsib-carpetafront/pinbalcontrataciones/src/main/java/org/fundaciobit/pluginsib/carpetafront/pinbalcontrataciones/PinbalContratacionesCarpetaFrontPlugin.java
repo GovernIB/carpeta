@@ -231,7 +231,7 @@ public class PinbalContratacionesCarpetaFrontPlugin extends AbstractPinbalCarpet
         Gson json = new Gson();
         String generat = json.toJson(datos, DatosContrataciones.class);
         
-        log.info("\nDADES JSON: " + generat + "\n");
+        // log.info("\nDADES JSON: " + generat + "\n");
         
         try {
             response.getWriter().println(generat);
@@ -409,18 +409,27 @@ public class PinbalContratacionesCarpetaFrontPlugin extends AbstractPinbalCarpet
 		public String getDatosEspecificos() { // xml
 			StringBuilder xmlBuilder = new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 			xmlBuilder.append("<DatosEspecificos>");
-			if (!isEmptyString(codigoProvincia) && !isEmptyString(codigoComunidadAutonoma)) {
-				xmlBuilder.append("<Consulta>");
+			xmlBuilder.append("<Consulta>");
+			
+			if (!isEmptyString(codigoComunidadAutonoma)) {
 				xmlBuilder.append(
 						xmlOptionalStringParameter(this.codigoComunidadAutonoma, "CodigoComunidadAutonoma")
 				);
+			}
+			
+			if (!isEmptyString(codigoProvincia)) {
 				xmlBuilder.append(
 						xmlOptionalStringParameter(this.codigoProvincia, "CodigoProvincia")
 				);
-				xmlBuilder.append("</Consulta>");
-
 			}
+				
+			
+				
+			xmlBuilder.append("</Consulta>");
 			xmlBuilder.append("</DatosEspecificos>");
+			
+			// System.out.println("DATOS ESPECIFICOS CONTRATACIONES: " + xmlBuilder.toString());
+			
 			return xmlBuilder.toString();
 		}
 	}

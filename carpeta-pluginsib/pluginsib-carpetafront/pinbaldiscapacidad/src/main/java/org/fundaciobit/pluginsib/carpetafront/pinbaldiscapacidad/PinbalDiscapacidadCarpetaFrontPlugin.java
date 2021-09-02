@@ -21,7 +21,6 @@ import org.apache.commons.io.IOUtils;
 import org.fundaciobit.pluginsib.carpetafront.pinbaldiscapacidad.model.CertificadoDatosDiscapacidad;
 import org.fundaciobit.pluginsib.carpetafront.pinbaldiscapacidad.model.DatosEspecificos;
 import org.fundaciobit.pluginsib.carpetafront.pinbaldiscapacidad.model.Estado;
-import org.fundaciobit.pluginsib.carpetafront.pinbaldiscapacidad.model.RespuestaMovilidad;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import com.google.gson.Gson;
@@ -31,7 +30,6 @@ import java.io.InputStream;
 import java.io.StringReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -338,7 +336,7 @@ public class PinbalDiscapacidadCarpetaFrontPlugin extends AbstractPinbalCarpetaF
                 
                 // TRAMITADA
                 if("0003".equals(resposta.getAtributos().getEstado().getCodigoEstado())){
-                    
+                	
                     datos.setCodigo(estado.getCodigoEstado());
                     datos.setDescripcion(estado.getLiteralError());
                     
@@ -382,11 +380,12 @@ public class PinbalDiscapacidadCarpetaFrontPlugin extends AbstractPinbalCarpetaF
                     	
                     }
                 	
-                }else {
+                }
+                /*else {
                 	
                 	datos.setError(resposta.getAtributos().getEstado().getCodigoEstado() + " :  " + resposta.getAtributos().getEstado().getLiteralError());
                 	
-                }
+                }*/
                 
                 
             }else {
