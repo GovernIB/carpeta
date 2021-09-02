@@ -409,18 +409,27 @@ public class PinbalContratacionesCarpetaFrontPlugin extends AbstractPinbalCarpet
 		public String getDatosEspecificos() { // xml
 			StringBuilder xmlBuilder = new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 			xmlBuilder.append("<DatosEspecificos>");
-			if (!isEmptyString(codigoProvincia) && !isEmptyString(codigoComunidadAutonoma)) {
-				xmlBuilder.append("<Consulta>");
+			xmlBuilder.append("<Consulta>");
+			
+			if (!isEmptyString(codigoComunidadAutonoma)) {
 				xmlBuilder.append(
 						xmlOptionalStringParameter(this.codigoComunidadAutonoma, "CodigoComunidadAutonoma")
 				);
+			}
+			
+			if (!isEmptyString(codigoProvincia)) {
 				xmlBuilder.append(
 						xmlOptionalStringParameter(this.codigoProvincia, "CodigoProvincia")
 				);
-				xmlBuilder.append("</Consulta>");
-
 			}
+				
+			
+				
+			xmlBuilder.append("</Consulta>");
 			xmlBuilder.append("</DatosEspecificos>");
+			
+			log.info("DATOS ESPECIFICOS CONTRATACIONES: " + xmlBuilder.toString());
+			
 			return xmlBuilder.toString();
 		}
 	}

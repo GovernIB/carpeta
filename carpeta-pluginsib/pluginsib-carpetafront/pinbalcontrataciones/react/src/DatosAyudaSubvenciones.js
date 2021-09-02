@@ -70,25 +70,25 @@ class DatosAyudaSubvenciones extends Component {
 
                 if ( data.codigo == '0'){
                     alerta = <div className="alert alert-success" role="alert">
-                        {t('pinbalSubvencionesFecha')} {data.fecha} : {t('pinbalSubvencionesCodigo'+data.codigo)}
+                        {t('pinbalContratacionesFecha')} {data.fecha} : {t('pinbalContratacionesCodigo'+data.codigo)}
                     </div>;
                 } else if( data.codigo == '1'){
                     alerta = <div className="alert alert-danger" role="alert">
-                        {t('pinbalSubvencionesFecha')} {data.fecha} : {t('pinbalSubvencionesCodigo'+data.codigo)}
+                        {t('pinbalContratacionesFecha')} {data.fecha} : {t('pinbalContratacionesCodigo'+data.codigo)}
                     </div>;
                 } else {
                     alerta = <div className="alert alert-warning" role="alert">
-                        {t('pinbalSubvencionesFecha')} {data.fecha} : {t('pinbalSubvencionesCodigo'+data.codigo)}
+                        {t('pinbalContratacionesFecha')} {data.fecha} : {t('pinbalContratacionesCodigo'+data.codigo)}
                     </div>;
                 }
 
 				content = <div>
                     {alerta}
                     <div className="contenedorInfoPersonal mt-2">
-                        <div className="col-md-2 pl-0 pr-0 mt-3"><strong>{t('pinbalSubvencionesDni')}</strong>{data.dni}</div>
-                        <div className="col-md-3 pl-0 pr-0 mt-3"><strong>{t('pinbalSubvencionesNom')}</strong>{data.nombre}</div>
-                        <div className="col-md-3 pl-0 pr-0 mt-3"><strong>{t('pinbalSubvencionesApellido1')}</strong>{data.apellido1}</div>
-                        <div className="col-md-3 pl-0 pr-0 mt-3"><strong>{t('pinbalSubvencionesApellido2')}</strong>{data.apellido2}</div>
+                        <div className="col-md-2 pl-0 pr-0 mt-3"><strong>{t('pinbalContratacionesDni')}</strong>{data.dni}</div>
+                        <div className="col-md-3 pl-0 pr-0 mt-3"><strong>{t('pinbalContratacionesNom')}</strong>{data.nombre}</div>
+                        <div className="col-md-3 pl-0 pr-0 mt-3"><strong>{t('pinbalContratacionesApellido1')}</strong>{data.apellido1}</div>
+                        <div className="col-md-3 pl-0 pr-0 mt-3"><strong>{t('pinbalContratacionesApellido2')}</strong>{data.apellido2}</div>
                     </div>
 				</div>;
 
@@ -110,7 +110,7 @@ class DatosAyudaSubvenciones extends Component {
                 <div className="col-md-12 border-0 float-left p-0" id="botoTornarContrataciones" style={{ marginTop: '20px' }}>
                     <button type="button" data-toggle="modal" onClick={() => {
                         window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                    }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarContrataciones">{t('pinbalSubvencionesTornar')}</button>
+                    }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarContrataciones">{t('pinbalContratacionesTornar')}</button>
                 </div>
             </div>
             );
