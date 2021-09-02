@@ -428,7 +428,7 @@ public class PinbalContratacionesCarpetaFrontPlugin extends AbstractPinbalCarpet
 			xmlBuilder.append("</Consulta>");
 			xmlBuilder.append("</DatosEspecificos>");
 			
-			log.info("DATOS ESPECIFICOS CONTRATACIONES: " + xmlBuilder.toString());
+			// System.out.println("DATOS ESPECIFICOS CONTRATACIONES: " + xmlBuilder.toString());
 			
 			return xmlBuilder.toString();
 		}
