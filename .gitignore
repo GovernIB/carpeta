@@ -123,3 +123,7 @@ nb-configuration.xml
 /carpeta-api-externa-client/target
 /carpeta-api-externa-client/.swagger-codegen
 /carpeta-front/reactnative/CarpetaApp/package-lock.json
+/carpeta-pluginsib/pluginsib-carpetafront/pinbalmatricula/plugin.properties
+/carpeta-pluginsib/pluginsib-carpetafront/pinbalmatricula/react/node_modules/
+/carpeta-pluginsib/pluginsib-carpetafront/pinbalmatricula/react/package-lock.json
+/carpeta-pluginsib/pluginsib-carpetafront/pinbalmatricula/react/node_modules

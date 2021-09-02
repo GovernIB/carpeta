@@ -1,0 +1,22 @@
+{
+  "pinbalMatriculaTitulo": "Servei de consulta d'estar matriculat a centre educatiu",
+  "pinbalMatriculaDescripcion": "Des d'aquí pot consultar el resultat de la seva consulta: ",
+  "pinbalMatriculaDocument": "Document",
+  "pinbalMatriculaNom": "Nom",
+  "pinbalMatriculaApellido1" : "Primer Cognom",
+  "pinbalMatriculaApellido2" : "Segon Cognom",
+  "pinbalMatriculaResultado": "Resultado de la consulta",
+  "pinbalMatriculaFecha": "A dia ",
+  "pinbalMatriculaHora": " a les ",
+  "pinbalMatriculaH": "h:",
+  "pinbalMatriculaVigent": "Matrícula Vigent",
+  "pinbalMatriculaFutura": "Matrícula Futura",
+  "pinbalMatriculaNaixement": "Data naixement",
+  "pinbalMatriculaProces": "Data procés",
+  "pinbalMatriculaCodigo0": "El titular de la consulta està matriculat a un centre educatiu.",
+  "pinbalMatriculaCodigo1": "El titular de la consulta no està matriculat a un centre educatiu.",
+  "pinbalMatriculaCodigo2": "Existeix més d'una persona amb les dades facilitades associades al titular de la consulta.",
+  "pinbalMatriculaCodigo3": "No existeix cap persona associada a les dades facilitades del titular de la consulta.",
+  "pinbalMatriculaTornar": "Torna"
+
+}

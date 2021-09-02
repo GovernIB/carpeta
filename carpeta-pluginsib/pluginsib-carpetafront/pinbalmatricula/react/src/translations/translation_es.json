@@ -1,0 +1,21 @@
+{
+  "pinbalMatriculaTitulo": "Servicio de consulta de estar matriculado en centro educativo",
+  "pinbalMatriculaDescripcion": "Desde aqui puede consultar el resultado de la consulta",
+  "pinbalMatriculaDocument": "Documento",
+  "pinbalMatriculaNom": "Nombre",
+  "pinbalMatriculaApellido1" : "Primer Apellido",
+  "pinbalMatriculaApellido2" : "Segundo Apellido",
+  "pinbalMatriculaResultado": "Resultado de la consulta",
+  "pinbalMatriculaFecha": "En fecha ",
+  "pinbalMatriculaHora": " a las ",
+  "pinbalMatriculaH": "h:",
+  "pinbalMatriculaVigent": "Matrícula Vigente",
+  "pinbalMatriculaFutura": "Matrícula Futura",
+  "pinbalMatriculaNaixement": "Fecha nacimiento",
+  "pinbalMatriculaProces": "Fecha proceso",
+  "pinbalMatriculaCodigo0": "El titular de la consulta está matriculado en un centro educativo.",
+  "pinbalMatriculaCodigo1": "El titular de la consulta no está matriculado en un centro educativo.",
+  "pinbalMatriculaCodigo2": "Existe más de una persona con los datos facilitados asociados al titular de la consulta.",
+  "pinbalMatriculaCodigo3": "No existe ninguna persona asociada a los datos facilitados del titular de la consulta.",
+  "pinbalMatriculaTornar": "Volver"
+}

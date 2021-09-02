@@ -1,0 +1,23 @@
+# Class => org.fundaciobit.pluginsib.carpetafront.pinbalmatricula.PinbalMatriculaCarpetaFrontPlugin
+
+# Connexió
+es.caib.carpeta.pluginsib.carpetafront.pinbalmatricula.baseurl=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.baseurl"]]
+es.caib.carpeta.pluginsib.carpetafront.pinbalmatricula.username=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.username"]]
+es.caib.carpeta.pluginsib.carpetafront.pinbalmatricula.password=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.password"]]
+
+# Informació per la sol·licitud
+es.caib.carpeta.pluginsib.carpetafront.pinbalmatricula.codicertificat=SCMCEDU
+
+es.caib.carpeta.pluginsib.carpetafront.pinbalmatricula.codiprocediment=CODSVDR_GBA_20121107
+es.caib.carpeta.pluginsib.carpetafront.pinbalmatricula.finalitat=Consulta estar al corrent de pagament a CAIB
+es.caib.carpeta.pluginsib.carpetafront.pinbalmatricula.identificadorsolicitant=S0711001H
+es.caib.carpeta.pluginsib.carpetafront.pinbalmatricula.unitattramitadora=Servei d'escolarització
+
+# Necessari en DEV i PRE. NO es fan cridades reals sinó d,un joc de proves
+# Exemples:   - 30000056Y, FUSTER
+#             - 41107605G, JAUME
+es.caib.carpeta.pluginsib.carpetafront.pinbalmatricula.testnif=30000056Y
+es.caib.carpeta.pluginsib.carpetafront.pinbalmatricula.testsurname=FUSTER
+
+# Common
+es.caib.carpeta.pluginsib.carpetafront.pinbalmatricula.development=true
