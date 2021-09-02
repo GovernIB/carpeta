@@ -231,7 +231,7 @@ public class PinbalContratacionesCarpetaFrontPlugin extends AbstractPinbalCarpet
         Gson json = new Gson();
         String generat = json.toJson(datos, DatosContrataciones.class);
         
-        log.info("\nDADES JSON: " + generat + "\n");
+        // log.info("\nDADES JSON: " + generat + "\n");
         
         try {
             response.getWriter().println(generat);
