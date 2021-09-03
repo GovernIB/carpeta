@@ -1,13 +1,11 @@
 
+INIT
+====
 
-
-
-
-CONFIGURAR ENTORN ????
-=================
-
-
-npm install -g react-native-cli
++ Execute: 
+        (1) Obrir consola
+		(2) Anar directori reactnative/CarpetaApp 
+		(3) Executar "npm install"
 
 
 
@@ -42,9 +40,28 @@ VISUAL STUDIO CODE
 + Seleccionar tamany de linia màxim ????
 + Extensions: ESLint, Prettier, TODO Highlight (FIXME:),Reactjs code snippets (rcc i Ctrl+Espai), vscode-author-generator (F1 + 'au' + RETORN)
 + Anar a File >> Preferences >> Settings. Cercar 'javascript.validate'. Desactivar el CHECK.
++ Execute: 
+        (1) Obrir consola
+		(2) Anar directori reactnative/CarpetaApp 
+		(3) Executar "code ."
 
 
 
+
+
+
+
+
+================================================================
+                      A L T R E S
+================================================================
+
+
+CONFIGURAR ENTORN ????
+=================
+
+
+npm install -g react-native-cli
 
 
 
@@ -60,15 +77,6 @@ https://aureliomerenda.medium.com/create-a-native-web-app-with-react-native-web-
 
 
 
-
-
-
-
-
-
-================================================================
-                      A L T R E S
-================================================================
 
 
 
