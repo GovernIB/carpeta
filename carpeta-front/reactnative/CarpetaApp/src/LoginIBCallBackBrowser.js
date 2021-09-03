@@ -16,6 +16,7 @@ class LoginIBCallBackBrowser extends React.Component {
     this.state = {};
   }
 
+  /*
   obrirWeb() {
     var loginUrl = Url_Base + '/carpetafront/public/lrn/' + this.props.codilogin;
 
@@ -23,11 +24,13 @@ class LoginIBCallBackBrowser extends React.Component {
 
     this.setState({url: loginUrl});
   }
+  */
 
   render() {
     console.log('LOGINIB CALLBACK => Render ... CodiLogin =]' + this.props.codilogin + '[');
 
-    var loginUrl = Url_Base + '/carpetafront/public/lrn/' + this.props.codilogin;
+    var loginUrl =
+      Url_Base + '/carpetafront/public/homePageAppPostWebLogin/' + this.props.codilogin;
 
     console.log('LOGINIB CALLBACK => Obrint URL ' + loginUrl);
 

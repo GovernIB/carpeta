@@ -66,17 +66,29 @@ class LoginIB extends Component {
       console.log('loginCode => ' + loginCode);
 
       this.props.history.push('/loginibcallbackbrowser/' + loginCode);
+    } /* else if (url.includes('/browser/')) {
+      var param = route.split('/').join('_');
+
+      var pos = param.lastIndexOf('_');
+
+      var loginCode = param.substring(pos + 1, param.length);
+
+      console.log('OPEN BROWSER !!!!  loginCode => ' + loginCode);
+
+      // XYZ ZZZ ContextPath no pot ser a pinyofix FIXME:
+      var theUrlBrowser =
+        Url_Base +
+        '/carpetafront/public/preLoginApp/' +
+        loginCode +
+        '?urlbase=' +
+        encodeURIComponent(Url_Base);
+      Linking.openURL(theUrlBrowser);
     }
+    */
   };
 
-  openLink() {
-    // FIXME: Canviar per algo de Carpeta FRONT !!!
-    Linking.openURL(
-      Url_Base + '/carpetafront/public/ea/caib?urlbase=' + encodeURIComponent(Url_Base),
-    );
-  }
-
   render() {
+    // XYZ ZZZ ContextPath no pot ser a pinyofix FIXME:
     var reactNativeHomepage =
       Url_Base +
       '/carpetafront/public/rnhp/' +
@@ -87,9 +99,11 @@ class LoginIB extends Component {
     return (
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={{}}>
         <Section title="LoginIB: Open External Browser And Return to App">
+          {/*}
           <TouchableOpacity onPress={this.openLink} style={styles.borderdotted}>
             <Text style={styles.link}>DO LOGIN</Text>
           </TouchableOpacity>
+          */}
 
           <VistaWebComponent url={reactNativeHomepage} debug={true} />
         </Section>

@@ -198,10 +198,6 @@ public class LoginController {
         
         return "redirect:" + fullUrlRedirect ;
 
-        // XYZ ZZZ
-
-        // return new ModelAndView("inici");
-
     }
 
     @RequestMapping(value = "/sortir")
@@ -219,6 +215,8 @@ public class LoginController {
         String codiEntitat = sesionHttp.getEntitat();
 
 //        log.info("WWWWWWWWWWWWWW Codi entitat: " + codiEntitat + " WWWWWWWWWWWWWWWWWW");
+        Boolean isReactNative = (Boolean) request.getSession()
+                .getAttribute(InicioController.SESSION_IS_REACTNATIVE);
 
         securityService.iniciarSesionLogout(url_callback_logout, IDIOMA);
         HttpSession session = request.getSession(false);
@@ -237,6 +235,10 @@ public class LoginController {
                 codiEntitat = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
             }
 //            log.info("WWWWWWWWWWWWWW entitat es null, posam DefaultEntity: " + codiEntitat + "WWWWWWWWWWWWWWWWWW");
+        }
+        
+        if (isReactNative != null) {
+            request.getSession().setAttribute(InicioController.SESSION_IS_REACTNATIVE, isReactNative);
         }
 
         return "redirect:/e/" + codiEntitat;

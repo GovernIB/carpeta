@@ -161,6 +161,8 @@ public class InicioController extends CommonFrontController {
     public static final String SESSION_IS_REACTNATIVE = "SESSION_IS_REACTNATIVE";
 
     public static final String SESSION_LOGIN_CODE = "SESSION_LOGIN_CODE";
+    
+    public static final String SESSION_DO_LOGIN_WITH_REACTNATIVE = "SESSION_DO_LOGIN_WITH_REACTNATIVE";
 
     private static final Map<String, ReactNativeLogin> reactNativeLogins = new HashMap<String, InicioController.ReactNativeLogin>();
 
@@ -181,32 +183,84 @@ public class InicioController extends CommonFrontController {
 
         return rnl;
     }
+    
+    
+    /**
+     * Entorn WebView
+     */
+    @RequestMapping(value = { "/public/rnhp/{codiEntitat}" }, method = RequestMethod.GET)
+    public String reactNativeHomePage(@PathVariable("codiEntitat") String codiEntitat,
+            HttpServletRequest request, HttpServletResponse response)
+            throws I18NException, IOException {
+        
+        request.getSession().invalidate();
+        
+        
+        log.info("reactNativeHomePage => ENTRA A reactNativeHomePage");
 
+        assignEntitat(codiEntitat, request, response);
+        
+        String urlBase = request.getParameter("urlbase");
+
+        log.info("reactNativeHomePage => URL BASE: ]" + urlBase + "[");
+
+        String loginCode = UUID.randomUUID().toString().replace(' ', '0');
+
+        log.info("XYZ ZZZ ENTRA A doLogin APP => Cream codiLogin: ]" + loginCode + "[");
+        
+        reactNativeLogins.put(loginCode, new ReactNativeLogin(codiEntitat, urlBase));
+
+        request.getSession().setAttribute(InicioController.SESSION_LOGIN_CODE, loginCode);
+        
+
+        request.getSession().setAttribute(SESSION_IS_REACTNATIVE, Boolean.TRUE);
+        log.info(" reactNativeHomePage => posant SESSION_IS_REACTNATIVE  a ]"
+                + request.getSession().getAttribute(SESSION_IS_REACTNATIVE) + "[");
+
+        return "redirect:/";
+    }
+    
+    
+
+    /**
+     * Entorn WebView si loginCode != null
+     */
     @RequestMapping(value = { "/public/doLogin" }, method = RequestMethod.GET)
     public ModelAndView doLogin(HttpServletRequest request, HttpServletResponse response)
             throws I18NException, IOException {
 
         log.info("XYZ ZZZ ENTRA A doLogin ...");
-        
-        
+
         String urlBase = request.getParameter("urlbase");
         log.info("XYZ ZZZ ENTRA A doLogin => urlbase = ]" + urlBase + "[");
-
-        Boolean isRN = (Boolean) request.getSession().getAttribute(SESSION_IS_REACTNATIVE);
-        log.info("XYZ ZZZ ENTRA A doLogin => SESSION_IS_REACTNATIVE = ]" + isRN + "[");
-        if (isRN == null) {
-
+        
+        String loginCode = request.getParameter("loginCode");
+        log.info("XYZ ZZZ ENTRA A doLogin => loginCode = ]" + loginCode  + "[");
+        
+        
+        //Boolean isRN = (Boolean) request.getSession().getAttribute(SESSION_IS_REACTNATIVE);
+        //log.info("XYZ ZZZ ENTRA A doLogin => IS ReactNative = ]" + isRN  + "[");
+        
+        if (loginCode == null) {
+            // Això és Web
             return new ModelAndView(new RedirectView(
                     "/prelogin?urlbase=" + URLEncoder.encode(urlBase, "UTF-8"), true));
 
         } else {
 
-            log.info("XYZ ZZZ ENTRA A doLogin => Obri pagina carpetaappdologin E:" + sesionHttp.getEntitat() );
+            // Això és React Native
+            String codiEntitat = sesionHttp.getEntitat();
             
+            log.info("XYZ ZZZ ENTRA A doLogin APP => Obri pagina carpetaappdologin E:" + codiEntitat );
+            
+ 
+            // Això obrirà un Browser al dispositiu Mòbil
             ModelAndView mav = new ModelAndView("carpetaappdologin");
-
-            mav.addObject("codientitat", sesionHttp.getEntitat());
-            mav.addObject("urlbase", URLEncoder.encode(urlBase, "UTF-8"));
+            
+            mav.addObject("codiLogin", loginCode);
+            mav.addObject("codientitat", codiEntitat);
+            mav.addObject("urlbase", urlBase);
+            mav.addObject("urlbaseEncoded", URLEncoder.encode(urlBase, "UTF-8"));
 
             return mav;
 
@@ -216,143 +270,192 @@ public class InicioController extends CommonFrontController {
 
     }
 
-    @RequestMapping(value = { "/public/rnhp/{codiEntitat}" }, method = RequestMethod.GET)
-    public String reactNativeHomePage(@PathVariable("codiEntitat") String codiEntitat,
+    
+
+    /**
+     * Aqui ja estam el Browser del Mobil. Sense cap referència amb la pàgina del WebView,
+     *  hem de recollir informació del codiLogin
+     * @param codiEntitat
+     * @param request
+     * @param response
+     * @return
+     * @throws I18NException
+     * @throws IOException
+     */
+    @RequestMapping(value = { "/public/preLoginApp/{codiLogin}" }, method = RequestMethod.GET)
+    public String preLoginApp(@PathVariable("codiLogin") String codiLogin,
             HttpServletRequest request, HttpServletResponse response)
-            throws I18NException, IOException {
+            throws Exception {
+
+        log.info("preLoginApp => START  codiLogin: ]" + codiLogin + "[");
         
-        log.info("XYZ ZZZ ENTRA A reactNativeHomePage");
+        ReactNativeLogin rnl = reactNativeLogins.get(codiLogin);
+        
+        log.info("preLoginApp => ReactNativeLogin: ]" + rnl + "[");
+        
+        assignEntitat(rnl.codiEntitat, request, response);
 
-        assignEntitat(codiEntitat, request, response);
 
-        request.getSession().setAttribute(SESSION_IS_REACTNATIVE, Boolean.TRUE);
-        log.info(" reactNativeHomePage => posant SESSION_IS_REACTNATIVE  a ]"
-                + request.getSession().getAttribute(SESSION_IS_REACTNATIVE) + "[");
 
-        return "redirect:/";
-    }
+        String urlReturn = rnl.urlBase + request.getContextPath() + "/public/postLoginApp/" + codiLogin;
 
-    @RequestMapping(value = { "/public/ea/{codiEntitat}" }, method = RequestMethod.GET)
-    public String loginAndroidBegin(@PathVariable("codiEntitat") String codiEntitat,
-            HttpServletRequest request, HttpServletResponse response)
-            throws I18NException, IOException {
-
-        assignEntitat(codiEntitat, request, response);
-
-        String codiLogin = UUID.randomUUID().toString().replace(' ', '0');
-
-        String urlBase = request.getParameter("urlbase");
-
-        log.info("loginAndroidBegin => URL BASE: ]" + urlBase + "[");
-
-        String urlReturn = urlBase + request.getContextPath() + "/public/eaf/" + codiLogin + "/"
-                + codiEntitat;
-
-        log.info("loginAndroidBegin => URL DE RETORN: " + urlReturn);
+        log.info("preLoginApp => URL DE RETORN: " + urlReturn);
 
         request.getSession().setAttribute(InicioController.SESSION_INITIAL_URL, urlReturn);
+        
+        //log.info("preLoginApp => Assignam SESSION_IS_REACTNATIVE a True");
+        //request.getSession().setAttribute(SESSION_IS_REACTNATIVE, Boolean.TRUE);
 
         // return "redirect:/";
 
         // return triarEntitat(codiEntitat, request, response);
 
-        reactNativeLogins.put(codiLogin, new ReactNativeLogin(codiEntitat, urlBase));
+       
 
-        return "redirect:/prelogin?urlbase=" + URLEncoder.encode(urlBase, "UTF-8");
+        return "redirect:/prelogin?urlbase=" + URLEncoder.encode( rnl.urlBase, "UTF-8");
 
     }
 
-    @RequestMapping(value = { "/public/eaf/{codiLogin}/{codiEntitat}" }, method = RequestMethod.GET)
-    public ModelAndView loginAndroidFinal(@PathVariable("codiLogin") String codiLogin,
-            @PathVariable("codiEntitat") String codiEntitat, HttpServletRequest request,
-            HttpServletResponse response) throws I18NException, IOException {
+    @RequestMapping(value = { "/public/postLoginApp/{codiLogin}" }, method = RequestMethod.GET)
+    public ModelAndView postLoginApp(@PathVariable("codiLogin") String codiLogin,
+            //@PathVariable("codiEntitat") String codiEntitat, 
+            HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        log.info(" ENTRA A loginAndroidFinal(" + codiLogin + ")");
-
-        // response.setContentType("text/html");
-        // response.setCharacterEncoding("UTF8");
+        log.info("postLoginApp =>  ENTRA (" + codiLogin + ")");
+        
+        
+        ReactNativeLogin rnl = reactNativeLogins.get(codiLogin);
+        
+        log.info("postLoginApp => ReactNativeLogin: ]" + rnl + "[");
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        ModelAndView mav = new ModelAndView("carpetaapp");
-        mav.addObject("codiLogin", codiLogin);
 
-        if (authentication != null) {
+        ModelAndView mav;
+
+        if (authentication != null && authentication.getPrincipal() != null && 
+                (authentication.getPrincipal() instanceof UsuarioAutenticado)) {
+            
+            // Aquest jsp retorna el control a l'APP
+            mav = new ModelAndView("carpetaapp");
+            mav.addObject("codiLogin", codiLogin);
 
             Object principal = authentication.getPrincipal();
 
-            if (principal != null && principal instanceof UsuarioAutenticado) {
-
+            {
                 UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado) principal;
 
-                log.info("loginAndroidFinal => Registram codiLogin ]" + codiLogin + "[");
+                log.info("postLoginApp => Registram codiLogin ]" + codiLogin + "[");
 
-                ReactNativeLogin rnl = reactNativeLogins.get(codiLogin);
+                
                 rnl.setUsuarioAutenticado(usuarioAutenticado);
 
                 UsuarioClave uc = usuarioAutenticado.getUsuarioClave();
 
                 mav.addObject("uc", uc);
 
-                assignEntitat(codiEntitat, request, response);
+                assignEntitat(rnl.codiEntitat, request, response);
 
             }
+            
+            
+            
+        } else {
+            
+            mav = new ModelAndView("error");
+            
+            String msg = "postLoginApp =>  Authentication o Principal val null !!!!!!!";
+            
+                    
+            log.warn(msg);
+            
+            request.setAttribute("error", msg);
+           
         }
 
         return mav;
 
     }
 
-    @RequestMapping(value = { "/public/lrn/{codiLogin}" }, method = RequestMethod.GET)
-    public String loginReactNativeBegin(@PathVariable("codiLogin") String codiLogin,
+    /**
+     *  Aqui ja estam a WebView ...
+     */
+    @RequestMapping(value = { "/public/homePageAppPostWebLogin/{codiLogin}" }, method = RequestMethod.GET)
+    public String homePageAppPostWebLogin(@PathVariable("codiLogin") String codiLogin,
             HttpServletRequest request, HttpServletResponse response)
             throws I18NException, IOException {
-
-        log.info("loginReactNative => ENTRA a LRN  (" + codiLogin + ")");
+        
+        log.info("homePageAppPostWebLogin => ENTRA (codiLogin: " + codiLogin + ")");
 
         ReactNativeLogin rnl = reactNativeLogins.get(codiLogin);
+        
+        log.info("homePageAppPostWebLogin =>  ReactNativeLogin   (" + rnl + ")");
 
+        assignEntitat(rnl.codiEntitat, request, response);
+        
         request.getSession().setAttribute(SESSION_IS_REACTNATIVE, Boolean.TRUE);
-        log.info(" loginReactNative => posant SESSION_IS_REACTNATIVE  a ]"
+        log.info(" homePageAppPostWebLogin => posant SESSION_IS_REACTNATIVE  a ]"
                 + request.getSession().getAttribute(SESSION_IS_REACTNATIVE) + "[");
+        
+        // Això és per passar informació al PLugin de Login de React Native
         request.getSession().setAttribute(InicioController.SESSION_LOGIN_CODE, codiLogin);
 
-        log.info(" loginReactNative => posant SESSION_LOGIN_CODE a ]"
+        log.info(" homePageAppPostWebLogin => posant SESSION_LOGIN_CODE a ]"
                 + request.getSession().getAttribute(SESSION_LOGIN_CODE) + "[");
 
-        String urlReturn = /* Configuracio.getAppUrl() */ rnl.urlBase + request.getContextPath()
-                + "/public/lrnf/" + codiLogin;
+        // Despres del Login amb el Plugin de Login de ReactNative anar a aquesta pàgina 
+        String urlReturn =  rnl.urlBase + request.getContextPath()
+                + "/public/postReactNativeLogin/" + codiLogin;
 
-        log.info("loginAndroid => URL DE RETORN: " + urlReturn);
+        log.info("homePageAppPostWebLogin => URL DE RETORN: " + urlReturn);
 
+        
         request.getSession().setAttribute(InicioController.SESSION_INITIAL_URL, urlReturn);
-
+        
+        request.getSession().setAttribute(SESSION_DO_LOGIN_WITH_REACTNATIVE, Boolean.TRUE);
+        log.info(" homePageAppPostWebLogin => posant SESSION_DO_LOGIN_WITH_REACTNATIVE  a ]"
+                + request.getSession().getAttribute(SESSION_DO_LOGIN_WITH_REACTNATIVE) + "[");
+        
+        
+        // Aqui al definir SESSION_DO_LOGIN_WITH_REACTNATIVE = true utilitzarà el plugin de React Native
+        
         return "redirect:/prelogin?urlbase=" + URLEncoder.encode(rnl.urlBase, "UTF-8");
     }
 
-    @RequestMapping(value = { "/public/lrnf/{codiLogin}" }, method = RequestMethod.GET)
-    public String loginReactNativeFinal(@PathVariable("codiLogin") String codiLogin,
+    
+    /** WebView: Ja hem fet el Login emprant el PLugin de Login de  react Native
+     *  i ara mostrarem la pàgina loguejada 
+     */
+    @RequestMapping(value = { "/public/postReactNativeLogin/{codiLogin}" }, method = RequestMethod.GET)
+    public String postReactNativeLogin(@PathVariable("codiLogin") String codiLogin,
             HttpServletRequest request, HttpServletResponse response)
             throws I18NException, IOException {
 
-        log.info("loginReactNativeFINAL => ENTRA a LRN  (" + codiLogin + ")");
+        log.info("postReactNativeLogin => ENTRA (codiLogin: " + codiLogin + ")");
 
         ReactNativeLogin rnl = reactNativeLogins.get(codiLogin);
+        
+        log.info("postReactNativeLogin =>  ReactNativeLogin   (" + rnl + ")");
 
-        assignEntitat(rnl.codiEntitat, request, response);
+        //assignEntitat(rnl.codiEntitat, request, response);
+        request.getSession().setAttribute(SESSION_IS_REACTNATIVE, Boolean.TRUE);
+        log.info(" postReactNativeLogin => posant SESSION_IS_REACTNATIVE  a ]" +
+          request.getSession().getAttribute(SESSION_IS_REACTNATIVE) + "[");
+        request.getSession().setAttribute(InicioController.SESSION_LOGIN_CODE, codiLogin);
 
-        /*
-         * request.getSession().setAttribute(SESSION_IS_REACTNATIVE, Boolean.TRUE);
-         * log.info(" loginReactNative => posant SESSION_IS_REACTNATIVE  a ]" +
-         * request.getSession().getAttribute(SESSION_IS_REACTNATIVE) + "[");
-         * request.getSession().setAttribute(InicioController.SESSION_LOGIN_CODE,
-         * codiLogin);
-         * 
-         * log.info(" loginReactNative => posant SESSION_LOGIN_CODE a ]" +
-         * request.getSession().getAttribute(SESSION_LOGIN_CODE) + "[");
-         */
+         //Esborrar codiLogin !!!!!!!
+         reactNativeLogins.remove(codiLogin);
+         
+         request.getSession().removeAttribute(SESSION_LOGIN_CODE);
+         
+         request.getSession().removeAttribute(SESSION_DO_LOGIN_WITH_REACTNATIVE);
+         
+         request.getSession().removeAttribute(InicioController.SESSION_INITIAL_URL);
+         
         return "redirect:/";
     }
+
+    
 
     @RequestMapping(value = { "/e/{codiEntitat}" }, method = RequestMethod.GET)
     public String triarEntitat(@PathVariable("codiEntitat") String codiEntitat,
@@ -414,6 +517,13 @@ public class InicioController extends CommonFrontController {
         sesionHttp.setNomEntitat(entitat.getNom().getTraduccio(IDIOMA).getValor());
 
         try {
+            
+            Boolean isReactNative = (Boolean) request.getSession()
+                    .getAttribute(SESSION_IS_REACTNATIVE);
+            log.info("\n  ASSIGNENTITAT PRE SESSION_IS_REACTNATIVE => " + isReactNative);
+
+            String loginCode = (String) request.getSession()
+                    .getAttribute(SESSION_LOGIN_CODE);
             // Eliminam sessió anterior
             if (sesionHttp.getEntitat() != null) {
                 if (!sesionHttp.getEntitat().equals(codiEntitat)) {
@@ -422,11 +532,6 @@ public class InicioController extends CommonFrontController {
                     String baseURL = (String) request.getSession()
                             .getAttribute(LoginController.SESSION_RETURN_URL_POST_LOGIN);
                     String url_callback_logout = baseURL + "/salir";
-
-                    Boolean isReactNative = (Boolean) request.getSession()
-                            .getAttribute(SESSION_IS_REACTNATIVE);
-                    String loginCode = (String) request.getSession()
-                            .getAttribute(SESSION_LOGIN_CODE);
 
                     securityService.iniciarSesionLogout(url_callback_logout, IDIOMA);
                     HttpSession session = request.getSession(false);
@@ -438,14 +543,19 @@ public class InicioController extends CommonFrontController {
                         request.getSession().setAttribute(SESSION_INITIAL_URL, initialURL);
                     }
 
-                    if (isReactNative != null) {
-                        request.getSession().setAttribute(SESSION_IS_REACTNATIVE, isReactNative);
-                    }
-
-                    if (loginCode != null) {
-                        request.getSession().setAttribute(SESSION_LOGIN_CODE, loginCode);
-                    }
+                   
                 }
+            }
+            
+            if (isReactNative != null) {
+                request.getSession().setAttribute(SESSION_IS_REACTNATIVE, isReactNative);
+            }
+
+            log.info("\n  ASSIGNENTITAT POST SESSION_IS_REACTNATIVE => " + request.getSession()
+    .getAttribute(SESSION_IS_REACTNATIVE));
+
+            if (loginCode != null) {
+                request.getSession().setAttribute(SESSION_LOGIN_CODE, loginCode);
             }
 
             sesionHttp.setEntitat(codiEntitat);
@@ -464,6 +574,13 @@ public class InicioController extends CommonFrontController {
             HttpSession session) throws I18NException {
 
         ModelAndView mav = new ModelAndView("inici");
+        
+        String loginCode = (String)request.getSession().getAttribute(SESSION_LOGIN_CODE);
+        //Boolean isRN = (Boolean)request.getSession().getAttribute(SESSION_IS_REACTNATIVE);
+        if (loginCode != null) {
+          mav.addObject("loginCode", loginCode);
+        }
+        
 
         // Posam la sessió de la variable global (per 60 segons)
         PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();

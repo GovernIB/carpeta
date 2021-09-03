@@ -6,10 +6,13 @@
 <script>
 function redireccionar() {
 	//setTimeout(function() {
+		
+	
+		
 	window.location.href = 'carpetaapp://carpeta/show/${codiLogin}';
 	//}, 2000);
 
-    document.forms['redirectForm'].submit();
+    //document.forms['redirectForm'].submit();
   
 }
 </script>

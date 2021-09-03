@@ -45,11 +45,6 @@ class UtilsWeb extends Component {
     );
   }
 }
-/*
-
-          </SafeAreaView>
-        )}
-      </UseColorSchemeHook>*/
 
 const styles = StyleSheet.create({
   link: {

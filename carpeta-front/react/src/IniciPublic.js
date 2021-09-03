@@ -121,7 +121,12 @@ class IniciPublic extends Component {
                                           var loc = new URL(window.location.href);
                                           
                                           var theUrl = baseURL + '/public/doLogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host);
-                                          //alert('Obrin DOLOGIN => ' + theUrl);
+                                          // Es des d'APP?
+                                          var loginCode = sessionStorage.getItem('loginCode');
+                                          if (loginCode) {
+                                              theUrl = theUrl + '&loginCode=' + loginCode;
+                                          }
+                                          //alert('Obrim DOLOGIN => ' + theUrl);
                                           window.location.href = theUrl
                                       }} tabIndex="503" aria-labelledby="accedirCarpetaPrivat">
                                     <span className="oi oi-account-login" title="" aria-hidden="true"/> {t('paginaIniciBotoAccedir')}

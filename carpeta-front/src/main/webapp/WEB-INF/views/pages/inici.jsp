@@ -59,6 +59,9 @@
 
     <sec:authorize access="!isAuthenticated()"> 
 	  <script type="text/javascript">
+              <c:if test="${not empty loginCode}">
+                sessionStorage.setItem('loginCode', '${loginCode}');
+              </c:if>
 			  sessionStorage.setItem('autenticat', '0');
 			  sessionStorage.setItem('entitat', '${entitat}');
 			  sessionStorage.setItem('defaultEntityCode', '${defaultEntityCode}');
@@ -77,6 +80,7 @@
 
      <sec:authorize access="isAuthenticated()">  
   
+  
 		<sec:authentication var="usuariNomComplet" property="principal.usuarioClave.nombreCompleto" />
 		<sec:authentication var="userName" property="principal.usuarioClave.nombre" />
 		<sec:authentication var="userSurname1" property="principal.usuarioClave.apellido1" />
@@ -85,11 +89,9 @@
 		<sec:authentication var="userMethod" property="principal.usuarioClave.metodoAutentificacion" />
 		<sec:authentication var="userLevelAut" property="principal.usuarioClave.qaa" />
         <sec:authentication var="userEsEmpresa" property="principal.usuarioClave.empresa" />
-        
-        
+
         <sec:authentication var="userRepresentant" property="principal.usuarioClave.usuarioClaveRepresentante" />
-        
-        
+
         <c:if test="${not empty userRepresentant }" >
             <c:set var="representantName" value="${userRepresentant.nombre}" />
             <c:set var="representantSurname1" value="${userRepresentant.apellido1}" />
@@ -101,8 +103,9 @@
         
 		<script type="text/javascript">
 
-				//var element = document.getElementById('contenedor');
-				//element.setAttribute('style','margin-top: 4.5em !important');
+				<c:if test="${not empty loginCode}">
+                  sessionStorage.setItem('loginCode', '${loginCode}');
+                </c:if>
 
 				// Passa dades personals a React
 				var autenticat = '1';

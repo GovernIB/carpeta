@@ -31,7 +31,7 @@ public class InitServlet extends HttpServlet {
         // Sistema de Traduccions WEB
         try {
             ReloadableResourceBundleMessageSource ms = new ReloadableResourceBundleMessageSource();
-            String[] basenames = { "missatges", // /WEB-INF/classes/
+            String[] basenames = { "classpath:/missatges", // /WEB-INF/classes/
                    // "logicmissatges", "genapp", "carpeta_genapp" 
                     };
             ms.setDefaultEncoding("UTF-8");

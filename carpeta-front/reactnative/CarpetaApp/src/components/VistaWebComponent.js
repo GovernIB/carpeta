@@ -8,11 +8,18 @@
 import React, {Component} from 'react';
 import {Dimensions, Linking, StyleSheet, Text, View} from 'react-native';
 import WebView from 'react-native-webview';
+import {Url_Base} from '../Constants';
 
 // FIXME: Falta els propptypes per this.props.url
 const dim = Dimensions.get('window');
 
 class VistaWebComponent extends Component {
+  alreadyopen = false;
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     var debugEntry = '';
 
@@ -34,27 +41,53 @@ class VistaWebComponent extends Component {
           ref={ref => {
             this.webview = ref;
           }}
-          /*
           onNavigationStateChange={event => {
-            //this.webview.stopLoading()
+            //this.webview.stopLoading();
             var url = event.url;
-            if (url.includes('/rnhp/')) {
-              console.log('Obring URl => ]' + url + '[');
-              Linking.openURL(url);
+            console.log('Check URL => ]' + url + '[');
+
+            if (url.includes('/public/doLogin?')) {
+              console.log('');
+              console.log(' alreadyopen => ' + this.alreadyopen);
+              console.log('');
+
+              if (this.alreadyopen) {
+                this.alreadyopen = false;
+              } else {
+                this.alreadyopen = true;
+
+                var pos = url.lastIndexOf('=');
+
+                var loginCode = url.substring(pos + 1, url.length);
+
+                console.log('LoginCode => ' + loginCode);
+
+                var theUrlBrowser =
+                  Url_Base +
+                  '/carpetafront/public/preLoginApp/' +
+                  loginCode +
+                  '?urlbase=' +
+                  encodeURIComponent(Url_Base);
+
+                console.log(new Date().toUTCString() + '  Obring URL => ]' + theUrlBrowser + '[');
+                Linking.openURL(theUrlBrowser);
+              }
+              return false;
             }
+            return true;
           }}
           /*
+          useWebKit={true}
+          scalesPageToFit={true}
+          allowFileAccess={true}
           injectedJavaScriptBeforeContentLoaded={`
           window.onerror = function(message, sourcefile, lineno, colno, error) {
             window.alert("Message: " + message + " - Source: " + sourcefile + " Line: " + lineno + ":" + colno);
             return false;
           };
           true;
-        `}
-          useWebKit={true}
+        }
           startInLoadingState={true}
-          scalesPageToFit={true}
-          allowFileAccess={true}
           domStorageEnabled={true}
           allowUniversalAccessFromFileURLs={true}
           allowFileAccessFromFileURLs={true}onError={syntheticEvent => {

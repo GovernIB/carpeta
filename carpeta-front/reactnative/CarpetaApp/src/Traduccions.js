@@ -15,7 +15,7 @@ import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {withTranslation} from 'react-i18next';
 import TraductorControl from './TraductorControl.js';
 import TraductorExemple from './TraductorExemple.js';
-import {UseColorSchemeHook} from './UseColorShemeHook.js';
+//import {UseColorSchemeHook} from './UseColorShemeHook.js';
 
 class Traduccions extends Component {
   constructor(props) {
@@ -23,21 +23,21 @@ class Traduccions extends Component {
   }
 
   render() {
+    /* <UseColorSchemeHook> {isDarkMode => (*/
     return (
-      <UseColorSchemeHook>
-        {isDarkMode => (
-          <ScrollView contentInsetAdjustmentBehavior="automatic" style={{}}>
-            <View style={styles.borderdotted}>
-              <TraductorExemple />
-              <TraductorControl />
+      <ScrollView contentInsetAdjustmentBehavior="automatic" style={{}}>
+        <View style={styles.borderdotted}>
+          <TraductorExemple />
+          <TraductorControl />
+          {/*
               <View>
                 <Text>ISDARKMODE = ]{isDarkMode}[</Text>
               </View>
-            </View>
-          </ScrollView>
-        )}
-      </UseColorSchemeHook>
+               */}
+        </View>
+      </ScrollView>
     );
+    //   )} </UseColorSchemeHook>
   }
 }
 

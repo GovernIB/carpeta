@@ -12,7 +12,7 @@ export const Color_BLACK = '#000000';
 export const Color_WHITE = '#FFFFFF';
 
 // FIXME: Això hauria de ser configurable !!!!
-export const Url_Base = 'http://10.215.216.175:8080';
+export const Url_Base = 'http://192.168.1.65:8080'; //'http://10.215.216.175:8080';
 
 // FIXME: Això hauria de ser configurable !!!!
 export const Codi_Entitat = 'caib';

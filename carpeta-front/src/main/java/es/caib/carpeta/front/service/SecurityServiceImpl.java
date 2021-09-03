@@ -41,10 +41,10 @@ public class SecurityServiceImpl implements SecurityService {
         request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes())
                         .getRequest();
         
-        Boolean isReactNative = (Boolean)request.getSession().getAttribute(InicioController.SESSION_IS_REACTNATIVE);
+        Boolean isReactNative = (Boolean)request.getSession().getAttribute(InicioController.SESSION_DO_LOGIN_WITH_REACTNATIVE);
         
         
-        log.info("\n\nEntra a SecurityServiceImpl::getPluginLogin() => isReactNative = " + isReactNative + "\n\n");
+        log.info("\n\nEntra a SecurityServiceImpl::getPluginLogin() => SESSION_DO_LOGIN_WITH_REACTNATIVE = " + isReactNative + "\n\n");
         
         
         if (isReactNative != null) {
