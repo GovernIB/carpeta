@@ -340,6 +340,8 @@ public class PinbalDiscapacidadCarpetaFrontPlugin extends AbstractPinbalCarpetaF
                     datos.setCodigo(estado.getCodigoEstado());
                     datos.setDescripcion(estado.getLiteralError());
                     
+                    log.info("Datos discapacidad: " + dte.getRetorno().get(0).getCertificadoDatosDiscapacidad().size());
+                    
                     if (dte.getRetorno().get(0).getCertificadoDatosDiscapacidad().size() > 0) {
                     	
                     	CertificadoDatosDiscapacidad certificado = dte.getRetorno().get(0).getCertificadoDatosDiscapacidad().get(0);
@@ -354,7 +356,7 @@ public class PinbalDiscapacidadCarpetaFrontPlugin extends AbstractPinbalCarpetaF
                     	datos.setTiposDiscapacidad(certificado.getTiposDiscapacidad());
                     	
                     	// DEBUG
-                    	/*
+                    	
                     	log.info("codigoComunidadAutonoma => " + certificado.getCodigoComunidadAutonoma());
                     	log.info("codigoProvincia => " + certificado.getCodigoProvincia());
                     	log.info("expediente => " + certificado.getExpediente());
@@ -366,7 +368,7 @@ public class PinbalDiscapacidadCarpetaFrontPlugin extends AbstractPinbalCarpetaF
                     	log.info("validezPermanente => " + certificado.getValidezPermanente());
                     	log.info("tiposDiscapacidad => " + certificado.getTiposDiscapacidad());
                     	log.info("Núm de RespuestaMovilidad: " + certificado.getRespuestaMovilidad().size());
-                    	
+                    	/*
                     	if (certificado.getRespuestaMovilidad().size() > 0) {
                     		ArrayList<RespuestaMovilidad> respuestaMovilidad = certificado.getRespuestaMovilidad();
                     		int x = 0;
@@ -375,18 +377,19 @@ public class PinbalDiscapacidadCarpetaFrontPlugin extends AbstractPinbalCarpetaF
                     			log.info("Respuesta[" + x + "][Puntuacion] => " + respuesta.getPuntuacion());
                     			x++;
                     		}
-                    	}
-                    	*/
+                    	}*/
                     	
+                    	
+                    }else {
+                    	// No disponible
+                    	datos.setCodigo("999");
                     }
                 	
                 }
-                /*else {
-                	
-                	datos.setError(resposta.getAtributos().getEstado().getCodigoEstado() + " :  " + resposta.getAtributos().getEstado().getLiteralError());
-                	
-                }*/
-                
+                else {
+                	// No disponible
+                	datos.setCodigo("999");                	
+                }
                 
             }else {
             	resposta = null;
