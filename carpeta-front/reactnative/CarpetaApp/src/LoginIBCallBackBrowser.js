@@ -6,31 +6,36 @@
  * @desc
  */
 import React from 'react';
-import {StyleSheet, ScrollView} from 'react-native';
+import {StyleSheet, ScrollView, Text} from 'react-native';
 import VistaWebComponent from './components/VistaWebComponent';
-import {Url_Base} from './Constants';
+import Persistencia from './Persistencia';
 
 class LoginIBCallBackBrowser extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.calledWhenDataLoaded = this.calledWhenDataLoaded.bind(this);
+
+    this.storage = new Persistencia();
+    // Carrega els valors de forma asincrona i quan ha acabat crida a la funcio passada per paràmetre
+    this.storage.load(this.calledWhenDataLoaded);
+
+    this.state = {loadedData: false, urlcarpeta: ''};
   }
 
-  /*
-  obrirWeb() {
-    var loginUrl = Url_Base + '/carpetafront/public/lrn/' + this.props.codilogin;
+  calledWhenDataLoaded(urlcarpeta, codientitat) {
+    console.log('ENTRA A DORENDER ');
 
-    console.log('LoginIBCallBackBrowser => Obrint WebView a ' + loginUrl);
-
-    this.setState({url: loginUrl});
+    this.setState({loadedData: true, urlcarpeta: urlcarpeta});
   }
-  */
 
   render() {
+    if (!this.state.loadedData) {
+      return <Text>Loading data ...</Text>;
+    }
     console.log('LOGINIB CALLBACK => Render ... CodiLogin =]' + this.props.codilogin + '[');
 
     var loginUrl =
-      Url_Base + '/carpetafront/public/homePageAppPostWebLogin/' + this.props.codilogin;
+      this.state.urlcarpeta + '/public/homePageAppPostWebLogin/' + this.props.codilogin;
 
     console.log('LOGINIB CALLBACK => Obrint URL ' + loginUrl);
 

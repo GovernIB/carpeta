@@ -30,8 +30,8 @@ class Section extends Component {
 
 const styles = StyleSheet.create({
   sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+    marginTop: 0,
+    paddingHorizontal: 0,
     flex: 1,
   },
   sectionTitle: {
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     color: constants.Color_BLACK,
   },
   sectionDescription: {
-    marginTop: 8,
+    marginTop: 0,
     fontSize: 18,
     fontWeight: '400',
   },

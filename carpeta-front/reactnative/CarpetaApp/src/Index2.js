@@ -16,11 +16,12 @@ import {StyleSheet, Text, View} from 'react-native';
 import {Link, Route, Switch, withRouter} from './components/Routing';
 
 import Home from './Home';
-import LoginIB from './LoginIB';
+import CarpetaWeb from './CarpetaWeb';
 import LoginIBCallBackBrowser from './LoginIBCallBackBrowser';
 import Plataforma from './Plataforma';
 import Traduccions from './Traduccions.js';
 import VistaWebIncrustada from './VistaWebIncrustada';
+import PersistenciaControl from './PersistenciaControl';
 
 // FIXME: Canviar nom per Index
 
@@ -38,16 +39,19 @@ class Index2 extends Component {
             <Text>Home</Text>
           </Link>
           <Link to="/vistawebincrustada" style={styles.navItem}>
-            <Text>Web Incrustada</Text>
+            <Text>WebView</Text>
           </Link>
           <Link to="/traduccions" style={styles.navItem}>
             <Text>Traduccions</Text>
           </Link>
           <Link to="/plataforma" style={styles.navItem}>
-            <Text>Plataforma</Text>
+            <Text>Platform</Text>
           </Link>
-          <Link to="/loginib" style={styles.navItem}>
-            <Text>LoginIB</Text>
+          <Link to="/carpeta" style={styles.navItem}>
+            <Text>Carpeta</Text>
+          </Link>
+          <Link to="/config" style={styles.navItem}>
+            <Text>Config.</Text>
           </Link>
         </View>
 
@@ -61,18 +65,16 @@ class Index2 extends Component {
             }}
           />
           <Route
-            path="/traduccions"
-            component={Traduccions}
-            /*
+            path="/config"
             render={props => {
-              return <Traduccions />;
+              return <PersistenciaControl {...props} />;
             }}
-            */
           />
+          <Route path="/traduccions" component={Traduccions} />
           <Route
             path="/plataforma"
             render={props => {
-              return <Plataforma />;
+              return <Plataforma {...props} />;
             }}
           />
           <Route
@@ -85,9 +87,9 @@ class Index2 extends Component {
             */
           />
           <Route
-            path="/loginib"
+            path="/carpeta"
             render={props => {
-              return <LoginIB {...props} />;
+              return <CarpetaWeb {...props} />;
             }}
           />
           <Route
@@ -104,8 +106,8 @@ class Index2 extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 25,
-    padding: 10,
+    //marginTop: 25,
+    //padding: 10,
   },
 
   nav: {
