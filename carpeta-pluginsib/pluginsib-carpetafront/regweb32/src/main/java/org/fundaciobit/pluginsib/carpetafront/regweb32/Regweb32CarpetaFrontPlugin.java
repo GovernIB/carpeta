@@ -165,7 +165,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             	esperaLlistat(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData, administrationEncriptedID, 0, locale, isGet);
             	
             } else if (query.startsWith(ESPERA_DETALL_PAGE)) {
-                
+            	
                 esperaDetall(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData, administrationEncriptedID, 0, locale, isGet);
                 
             } else if (query.startsWith(LLISTAT_REGISTRES_PAGE)) {
@@ -380,7 +380,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
         List<AsientoWs> registres;
         int totalResults = 0;
         
-        if(isGet) {
+        if(isGet && parametros.isEmpty()) {
         	registres = null;
         	map.put("cerca", "");
         }else {
