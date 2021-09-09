@@ -199,7 +199,7 @@ public class TramitePersistenteGenerico {
 		this.url = tramite.getUrl();
 		this.tipo = tramite.getTipo();
 		this.mostraModal = false;
-		this.numero = (this.esRegistrado()) ? (String)tramite.getNumero().getValue() : "";
+		this.numero = (tramite.getTipo() == TipoElementoExpediente.REGISTRO && tramite.getNumero() != null) ? (String)tramite.getNumero().getValue() : "";
 	}
 	
 	public String toString() {
