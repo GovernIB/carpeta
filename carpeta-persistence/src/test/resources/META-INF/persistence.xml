@@ -29,15 +29,8 @@
         <shared-cache-mode>NONE</shared-cache-mode>
         <!-- Desactivar validació -->
         <validation-mode>NONE</validation-mode>
-        
-        
 
         <properties>
-        
-        <property name="hibernate.show_sql" value="true"/>
-<property name="hibernate.format_sql" value="true"/>
-<property name="hibernate.use_sql_comments" value="true"/>
-        
          
         </properties>
     </persistence-unit>

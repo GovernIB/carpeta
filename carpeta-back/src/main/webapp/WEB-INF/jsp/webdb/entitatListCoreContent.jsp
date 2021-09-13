@@ -177,6 +177,16 @@
           ${entitat.commit}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.AVISLEGAL)}">
+          <td>
+          ${entitat.avisLegal}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.ACCESSIBILITAT)}">
+          <td>
+          ${entitat.accessibilitat}
+          </td>
+        </c:if>
 
 
         <!--  /** Additional Fields */  -->

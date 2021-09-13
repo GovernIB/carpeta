@@ -41,11 +41,15 @@
         <div class="col">
             <div class="card">
             <div class="card-body">
-                <h5><spring:message code="menu.adminentitat.usuariEntitat.titol" /></h5>
-                <p class="card-text"><spring:message code="menu.adminentitat.usuariEntitat.descripcio" /></p>
-                <ul>
-                    <li><a href="<c:url value="/adminentitat/usuarientitat/list"/>"><spring:message
-            code="usuariEntitat.usuariEntitat.plural" /></a></li>
+                 <h5><spring:message code="menu.superadmin.entitats.titol" /></h5>
+                 <p class="card-text"><spring:message code="menu.superadmin.entitats.descripcio" /></p>
+                 <ul>
+                    <li><a href="<c:url value="/adminentitat/entitat/edit"/>"><spring:message code="menu.adminentitat.lamevaentitat" /></a></li>
+                    <li>
+                        <a href="<c:url value="/adminentitat/usuarientitat/list"/>">
+                           <spring:message  code="usuariEntitat.usuariEntitat.plural" />
+                        </a>
+                    </li>
                 </ul>
             </div>
             </div>

@@ -37,6 +37,8 @@ public interface EntitatFields extends java.io.Serializable {
 	 public static final LongField FITXERCSSID = new LongField(_TABLE_MODEL, "fitxerCssID", "fitxercss");
 	 public static final StringField CONTEXT = new StringField(_TABLE_MODEL, "context", "context");
 	 public static final StringField COMMIT = new StringField(_TABLE_MODEL, "commit", "commit");
+	 public static final StringField AVISLEGAL = new StringField(_TABLE_MODEL, "avisLegal", "avislegal");
+	 public static final StringField ACCESSIBILITAT = new StringField(_TABLE_MODEL, "accessibilitat", "accessibilitat");
 
 
   public static final Field<?>[] ALL_ENTITAT_FIELDS = {
@@ -64,7 +66,9 @@ public interface EntitatFields extends java.io.Serializable {
     LOGINTEXTID,
     FITXERCSSID,
     CONTEXT,
-    COMMIT
+    COMMIT,
+    AVISLEGAL,
+    ACCESSIBILITAT
   };
 
 

@@ -43,6 +43,14 @@ public class Configuracio implements Constants {
         return systemProperties;
 
     }
+    
+    /**
+     * Per retrocompatibilitat !!!
+     * @return
+     */
+    public static Properties getSystemAndFileProperties() {
+        return getFilesProperties();
+    }
 
     /*
      * Agafa els fitxers de propietats definits a l'standalone

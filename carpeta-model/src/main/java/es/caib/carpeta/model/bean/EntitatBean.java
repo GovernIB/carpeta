@@ -35,6 +35,8 @@ private static final long serialVersionUID = -2014602951L;
 	java.lang.Long fitxerCssID;
 	java.lang.String context;
 	java.lang.String commit;
+	java.lang.String avisLegal;
+	java.lang.String accessibilitat;
 
 
   /** Constructor Buit */
@@ -42,7 +44,7 @@ private static final long serialVersionUID = -2014602951L;
   }
 
   /** Constructor amb tots els camps  */
-  public EntitatBean(long entitatID , long nomID , java.lang.Long descripcioID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.String suportFAQ , java.lang.String suportqssi , java.lang.String suportautenticacio , java.lang.Long pluginLoginID , java.lang.Long loginTextID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit) {
+  public EntitatBean(long entitatID , long nomID , java.lang.Long descripcioID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.String suportFAQ , java.lang.String suportqssi , java.lang.String suportautenticacio , java.lang.Long pluginLoginID , java.lang.Long loginTextID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit , java.lang.String avisLegal , java.lang.String accessibilitat) {
     this.entitatID=entitatID;
     this.nomID=nomID;
     this.descripcioID=descripcioID;
@@ -68,9 +70,11 @@ private static final long serialVersionUID = -2014602951L;
     this.fitxerCssID=fitxerCssID;
     this.context=context;
     this.commit=commit;
+    this.avisLegal=avisLegal;
+    this.accessibilitat=accessibilitat;
 }
   /** Constructor sense valors autoincrementals */
-  public EntitatBean(long nomID , java.lang.Long descripcioID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.String suportFAQ , java.lang.String suportqssi , java.lang.String suportautenticacio , java.lang.Long pluginLoginID , java.lang.Long loginTextID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit) {
+  public EntitatBean(long nomID , java.lang.Long descripcioID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront , java.lang.String suportWeb , java.lang.String suportTelefon , java.lang.String suportEmail , java.lang.String suportFAQ , java.lang.String suportqssi , java.lang.String suportautenticacio , java.lang.Long pluginLoginID , java.lang.Long loginTextID , java.lang.Long fitxerCssID , java.lang.String context , java.lang.String commit , java.lang.String avisLegal , java.lang.String accessibilitat) {
     this.nomID=nomID;
     this.descripcioID=descripcioID;
     this.codi=codi;
@@ -95,6 +99,8 @@ private static final long serialVersionUID = -2014602951L;
     this.fitxerCssID=fitxerCssID;
     this.context=context;
     this.commit=commit;
+    this.avisLegal=avisLegal;
+    this.accessibilitat=accessibilitat;
 }
   /** Constructor dels valors Not Null */
   public EntitatBean(long entitatID , long nomID , java.lang.String codi , java.lang.String codiDir3 , boolean activa , java.lang.String colorMenu , long logoCapBackID , long logoPeuBackID , long logoLateralFrontID , java.lang.String versio , long iconID , java.lang.String webEntitat , java.lang.String entitatDescFront) {
@@ -138,6 +144,8 @@ private static final long serialVersionUID = -2014602951L;
     this.setFitxerCssID(__bean.getFitxerCssID());
     this.setContext(__bean.getContext());
     this.setCommit(__bean.getCommit());
+    this.setAvisLegal(__bean.getAvisLegal());
+    this.setAccessibilitat(__bean.getAccessibilitat());
     // Fitxer
     this.setLogoCapBack(FitxerBean.toBean(__bean.getLogoCapBack()));
     // Fitxer
@@ -325,6 +333,20 @@ private static final long serialVersionUID = -2014602951L;
 		this.commit = _commit_;
 	};
 
+	public java.lang.String getAvisLegal() {
+		return(avisLegal);
+	};
+	public void setAvisLegal(java.lang.String _avisLegal_) {
+		this.avisLegal = _avisLegal_;
+	};
+
+	public java.lang.String getAccessibilitat() {
+		return(accessibilitat);
+	};
+	public void setAccessibilitat(java.lang.String _accessibilitat_) {
+		this.accessibilitat = _accessibilitat_;
+	};
+
 
 
   // ======================================
@@ -357,6 +379,8 @@ private static final long serialVersionUID = -2014602951L;
     __tmp.setFitxerCssID(__bean.getFitxerCssID());
     __tmp.setContext(__bean.getContext());
     __tmp.setCommit(__bean.getCommit());
+    __tmp.setAvisLegal(__bean.getAvisLegal());
+    __tmp.setAccessibilitat(__bean.getAccessibilitat());
     // Fitxer
     __tmp.setLogoCapBack(FitxerBean.toBean(__bean.getLogoCapBack()));
     // Fitxer

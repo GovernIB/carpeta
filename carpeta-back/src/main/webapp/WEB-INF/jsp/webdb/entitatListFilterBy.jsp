@@ -340,6 +340,32 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.AVISLEGAL)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="entitat.avisLegal" var="avisLegal" />
+              <fmt:message key="genapp.form.searchby" var="cercaperavisLegal" >                
+                 <fmt:param value="${avisLegal}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${avisLegal}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperavisLegal}" path="avisLegal" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.ACCESSIBILITAT)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="entitat.accessibilitat" var="accessibilitat" />
+              <fmt:message key="genapp.form.searchby" var="cercaperaccessibilitat" >                
+                 <fmt:param value="${accessibilitat}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${accessibilitat}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperaccessibilitat}" path="accessibilitat" />
+            </div>
+
+
+        </c:if>
 
       <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">
       <c:if test="${ __entry.key >= 0 && not empty __entry.value.searchBy }">

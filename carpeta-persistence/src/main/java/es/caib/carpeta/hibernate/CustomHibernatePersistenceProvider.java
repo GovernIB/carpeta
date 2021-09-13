@@ -30,7 +30,7 @@ public class CustomHibernatePersistenceProvider extends HibernatePersistenceProv
 			projecteProperties.putAll(properties);
 		}
 		
-		Properties fitxerProperties = Configuracio.getJavaAndCarpetaFileProperties();
+		Properties fitxerProperties = Configuracio.getSystemAndFileProperties();
 		if(fitxerProperties != null) {
 			fitxerProperties.forEach((k,v) -> {
                String kStr = k.toString();

@@ -27,7 +27,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_nom_${idioma.idiomaID}">
                <form:errors path="entitat.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="entitat.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.NOMID)? ' uneditable-input' : ''}" maxlength="4000" />
+               <form:input path="entitat.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.NOMID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EntitatFields.NOMID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -62,7 +62,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_descripcio_${idioma.idiomaID}">
                <form:errors path="entitat.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="entitat.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.DESCRIPCIOID)? ' uneditable-input' : ''}" maxlength="4000" />
+               <form:input path="entitat.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.DESCRIPCIOID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EntitatFields.DESCRIPCIOID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -620,7 +620,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_loginText_${idioma.idiomaID}">
                <form:errors path="entitat.loginText.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="entitat.loginText.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGINTEXTID)? ' uneditable-input' : ''}" maxlength="4000" />
+               <form:input path="entitat.loginText.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGINTEXTID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGINTEXTID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -718,6 +718,40 @@
             <form:errors path="entitat.commit" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.COMMIT)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,EntitatFields.COMMIT)? ' uneditable-input' : ''}"  style="" maxlength="255" path="entitat.commit"   />
 
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.AVISLEGAL)}">
+        <tr id="entitat_avisLegal_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.AVISLEGAL])?'entitat.avisLegal':__theForm.labels[EntitatFields.AVISLEGAL]}" />
+              <c:if test="${not empty __theForm.help[EntitatFields.AVISLEGAL]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.AVISLEGAL]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+              <form:errors path="entitat.avisLegal" cssClass="errorField alert alert-danger" />
+              <form:textarea cssClass="col-md-8 ${gen:contains(__theForm.readOnlyFields ,EntitatFields.AVISLEGAL)? 'mceEditorReadOnly':'mceEditor'}"  path="entitat.avisLegal"  />
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.ACCESSIBILITAT)}">
+        <tr id="entitat_accessibilitat_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.ACCESSIBILITAT])?'entitat.accessibilitat':__theForm.labels[EntitatFields.ACCESSIBILITAT]}" />
+              <c:if test="${not empty __theForm.help[EntitatFields.ACCESSIBILITAT]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.ACCESSIBILITAT]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+              <form:errors path="entitat.accessibilitat" cssClass="errorField alert alert-danger" />
+              <form:textarea cssClass="col-md-8 ${gen:contains(__theForm.readOnlyFields ,EntitatFields.ACCESSIBILITAT)? 'mceEditorReadOnly':'mceEditor'}"  path="entitat.accessibilitat"  />
            </td>
         </tr>
         </c:if>

@@ -77,6 +77,12 @@ public interface Entitat extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public java.lang.String getCommit();
 	public void setCommit(java.lang.String _commit_);
 
+	public java.lang.String getAvisLegal();
+	public void setAvisLegal(java.lang.String _avisLegal_);
+
+	public java.lang.String getAccessibilitat();
+	public void setAccessibilitat(java.lang.String _accessibilitat_);
+
   // Fitxer
   public <F extends Fitxer> F getLogoCapBack();
   // Fitxer

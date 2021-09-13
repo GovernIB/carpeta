@@ -285,6 +285,28 @@ public class EntitatFilterForm extends CarpetaBaseFilterForm implements EntitatF
   }
 
 
+  private java.lang.String avisLegal;
+
+  public java.lang.String getAvisLegal() {
+    return this.avisLegal;
+  }
+
+  public void setAvisLegal(java.lang.String avisLegal) {
+    this.avisLegal = avisLegal;
+  }
+
+
+  private java.lang.String accessibilitat;
+
+  public java.lang.String getAccessibilitat() {
+    return this.accessibilitat;
+  }
+
+  public void setAccessibilitat(java.lang.String accessibilitat) {
+    this.accessibilitat = accessibilitat;
+  }
+
+
   public EntitatFilterForm() {
   }
   
@@ -314,6 +336,8 @@ public class EntitatFilterForm extends CarpetaBaseFilterForm implements EntitatF
     this.loginTextIDFins = __toClone.loginTextIDFins;
     this.context = __toClone.context;
     this.commit = __toClone.commit;
+    this.avisLegal = __toClone.avisLegal;
+    this.accessibilitat = __toClone.accessibilitat;
     this.mapOfTraduccioForNomID = __toClone.mapOfTraduccioForNomID;
     this.mapOfTraduccioForDescripcioID = __toClone.mapOfTraduccioForDescripcioID;
     this.mapOfPluginForPluginLoginID = __toClone.mapOfPluginForPluginLoginID;
