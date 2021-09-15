@@ -236,6 +236,8 @@
         }
         
         function validaFormulari(){
+
+            posarFocus();
         	
         	if(!validarFecha($('#fechaInicio')) || !validarFecha($('#fechaFin'))){
         		return false;
@@ -252,6 +254,11 @@
             $('.input-group-fecha-inicio').css('border','1px solid red');
             $('.input-group-fecha-fin').css('border','1px solid red');
         	return false;
+        }
+
+        function posarFocus() {
+            const enfocar = parent.document.getElementById("fullpagecarpetafront");
+            enfocar.focus();
         }
         
         $(document).ready(function () {

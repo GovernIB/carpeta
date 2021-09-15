@@ -204,13 +204,15 @@
         	$('.input-group-fecha-fin .input-group-text').css('display','none');
         }
         
-        $("tr").each(function(i) {
-            $(this).attr("tabindex", i+510);
-        });
+        // $("tr").each(function(i) {
+        //     $(this).attr("tabindex", i+510);
+        // });
 
     });
     
     function validaFormulari(){
+
+        posarFocus();
 
     	if(!validarFecha($('#fechaInicio')) || !validarFecha($('#fechaFin'))){
             return false;
@@ -262,6 +264,11 @@
     function goParentTo(url) {
         window.open(url, '_blank');
         $('#myModal').modal('hide');
+    }
+
+    function posarFocus() {
+        const enfocar = parent.document.getElementById("fullpagecarpetafront");
+        enfocar.focus();
     }
 
     function openModalConfirm(url) {
