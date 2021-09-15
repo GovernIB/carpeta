@@ -190,19 +190,35 @@ public class EntitatValidator<I extends Entitat>
       }
     }
 
-    if (__vr.getFieldErrorCount(AVISLEGAL) == 0) {
-      java.lang.String __avislegal = __target__.getAvisLegal();
-      if (__avislegal!= null && __avislegal.length() > 2147483647) {
-        __vr.rejectValue(AVISLEGAL, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(AVISLEGAL)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(2147483647)));
+    if (__vr.getFieldErrorCount(AVISLEGALCA) == 0) {
+      java.lang.String __avislegalca = __target__.getAvisLegalCa();
+      if (__avislegalca!= null && __avislegalca.length() > 2147483647) {
+        __vr.rejectValue(AVISLEGALCA, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(AVISLEGALCA)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(2147483647)));
       }
     }
 
-    if (__vr.getFieldErrorCount(ACCESSIBILITAT) == 0) {
-      java.lang.String __accessibilitat = __target__.getAccessibilitat();
-      if (__accessibilitat!= null && __accessibilitat.length() > 2147483647) {
-        __vr.rejectValue(ACCESSIBILITAT, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ACCESSIBILITAT)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(2147483647)));
+    if (__vr.getFieldErrorCount(AVISLEGALES) == 0) {
+      java.lang.String __avislegales = __target__.getAvisLegalEs();
+      if (__avislegales!= null && __avislegales.length() > 2147483647) {
+        __vr.rejectValue(AVISLEGALES, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(AVISLEGALES)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(2147483647)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(ACCESSIBILITATCA) == 0) {
+      java.lang.String __accessibilitatca = __target__.getAccessibilitatCa();
+      if (__accessibilitatca!= null && __accessibilitatca.length() > 2147483647) {
+        __vr.rejectValue(ACCESSIBILITATCA, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ACCESSIBILITATCA)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(2147483647)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(ACCESSIBILITATES) == 0) {
+      java.lang.String __accessibilitates = __target__.getAccessibilitatEs();
+      if (__accessibilitates!= null && __accessibilitates.length() > 2147483647) {
+        __vr.rejectValue(ACCESSIBILITATES, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ACCESSIBILITATES)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(2147483647)));
       }
     }
 

@@ -722,36 +722,70 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.AVISLEGAL)}">
-        <tr id="entitat_avisLegal_rowid">
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.AVISLEGALCA)}">
+        <tr id="entitat_avisLegalCa_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[EntitatFields.AVISLEGAL])?'entitat.avisLegal':__theForm.labels[EntitatFields.AVISLEGAL]}" />
-              <c:if test="${not empty __theForm.help[EntitatFields.AVISLEGAL]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.AVISLEGAL]}" ></i>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.AVISLEGALCA])?'entitat.avisLegalCa':__theForm.labels[EntitatFields.AVISLEGALCA]}" />
+              <c:if test="${not empty __theForm.help[EntitatFields.AVISLEGALCA]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.AVISLEGALCA]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-              <form:errors path="entitat.avisLegal" cssClass="errorField alert alert-danger" />
-              <form:textarea cssClass="col-md-8 ${gen:contains(__theForm.readOnlyFields ,EntitatFields.AVISLEGAL)? 'mceEditorReadOnly':'mceEditor'}"  path="entitat.avisLegal"  />
+              <form:errors path="entitat.avisLegalCa" cssClass="errorField alert alert-danger" />
+              <form:textarea cssClass="col-md-8 ${gen:contains(__theForm.readOnlyFields ,EntitatFields.AVISLEGALCA)? 'mceEditorReadOnly':'mceEditor'}"  path="entitat.avisLegalCa"  />
            </td>
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.ACCESSIBILITAT)}">
-        <tr id="entitat_accessibilitat_rowid">
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.AVISLEGALES)}">
+        <tr id="entitat_avisLegalEs_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[EntitatFields.ACCESSIBILITAT])?'entitat.accessibilitat':__theForm.labels[EntitatFields.ACCESSIBILITAT]}" />
-              <c:if test="${not empty __theForm.help[EntitatFields.ACCESSIBILITAT]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.ACCESSIBILITAT]}" ></i>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.AVISLEGALES])?'entitat.avisLegalEs':__theForm.labels[EntitatFields.AVISLEGALES]}" />
+              <c:if test="${not empty __theForm.help[EntitatFields.AVISLEGALES]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.AVISLEGALES]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-              <form:errors path="entitat.accessibilitat" cssClass="errorField alert alert-danger" />
-              <form:textarea cssClass="col-md-8 ${gen:contains(__theForm.readOnlyFields ,EntitatFields.ACCESSIBILITAT)? 'mceEditorReadOnly':'mceEditor'}"  path="entitat.accessibilitat"  />
+              <form:errors path="entitat.avisLegalEs" cssClass="errorField alert alert-danger" />
+              <form:textarea cssClass="col-md-8 ${gen:contains(__theForm.readOnlyFields ,EntitatFields.AVISLEGALES)? 'mceEditorReadOnly':'mceEditor'}"  path="entitat.avisLegalEs"  />
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.ACCESSIBILITATCA)}">
+        <tr id="entitat_accessibilitatCa_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.ACCESSIBILITATCA])?'entitat.accessibilitatCa':__theForm.labels[EntitatFields.ACCESSIBILITATCA]}" />
+              <c:if test="${not empty __theForm.help[EntitatFields.ACCESSIBILITATCA]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.ACCESSIBILITATCA]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+              <form:errors path="entitat.accessibilitatCa" cssClass="errorField alert alert-danger" />
+              <form:textarea cssClass="col-md-8 ${gen:contains(__theForm.readOnlyFields ,EntitatFields.ACCESSIBILITATCA)? 'mceEditorReadOnly':'mceEditor'}"  path="entitat.accessibilitatCa"  />
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,EntitatFields.ACCESSIBILITATES)}">
+        <tr id="entitat_accessibilitatEs_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[EntitatFields.ACCESSIBILITATES])?'entitat.accessibilitatEs':__theForm.labels[EntitatFields.ACCESSIBILITATES]}" />
+              <c:if test="${not empty __theForm.help[EntitatFields.ACCESSIBILITATES]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.ACCESSIBILITATES]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+              <form:errors path="entitat.accessibilitatEs" cssClass="errorField alert alert-danger" />
+              <form:textarea cssClass="col-md-8 ${gen:contains(__theForm.readOnlyFields ,EntitatFields.ACCESSIBILITATES)? 'mceEditorReadOnly':'mceEditor'}"  path="entitat.accessibilitatEs"  />
            </td>
         </tr>
         </c:if>

@@ -87,11 +87,17 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.COMMIT)}">
         <th>${car:getSortIcons(__theFilterForm,EntitatFields.COMMIT)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.AVISLEGAL)}">
-        <th>${car:getSortIcons(__theFilterForm,EntitatFields.AVISLEGAL)}</th>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.AVISLEGALCA)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.AVISLEGALCA)}</th>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.ACCESSIBILITAT)}">
-        <th>${car:getSortIcons(__theFilterForm,EntitatFields.ACCESSIBILITAT)}</th>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.AVISLEGALES)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.AVISLEGALES)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.ACCESSIBILITATCA)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.ACCESSIBILITATCA)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.ACCESSIBILITATES)}">
+        <th>${car:getSortIcons(__theFilterForm,EntitatFields.ACCESSIBILITATES)}</th>
         </c:if>
 
 

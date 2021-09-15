@@ -285,25 +285,47 @@ public class EntitatFilterForm extends CarpetaBaseFilterForm implements EntitatF
   }
 
 
-  private java.lang.String avisLegal;
+  private java.lang.String avisLegalCa;
 
-  public java.lang.String getAvisLegal() {
-    return this.avisLegal;
+  public java.lang.String getAvisLegalCa() {
+    return this.avisLegalCa;
   }
 
-  public void setAvisLegal(java.lang.String avisLegal) {
-    this.avisLegal = avisLegal;
+  public void setAvisLegalCa(java.lang.String avisLegalCa) {
+    this.avisLegalCa = avisLegalCa;
   }
 
 
-  private java.lang.String accessibilitat;
+  private java.lang.String avisLegalEs;
 
-  public java.lang.String getAccessibilitat() {
-    return this.accessibilitat;
+  public java.lang.String getAvisLegalEs() {
+    return this.avisLegalEs;
   }
 
-  public void setAccessibilitat(java.lang.String accessibilitat) {
-    this.accessibilitat = accessibilitat;
+  public void setAvisLegalEs(java.lang.String avisLegalEs) {
+    this.avisLegalEs = avisLegalEs;
+  }
+
+
+  private java.lang.String accessibilitatCa;
+
+  public java.lang.String getAccessibilitatCa() {
+    return this.accessibilitatCa;
+  }
+
+  public void setAccessibilitatCa(java.lang.String accessibilitatCa) {
+    this.accessibilitatCa = accessibilitatCa;
+  }
+
+
+  private java.lang.String accessibilitatEs;
+
+  public java.lang.String getAccessibilitatEs() {
+    return this.accessibilitatEs;
+  }
+
+  public void setAccessibilitatEs(java.lang.String accessibilitatEs) {
+    this.accessibilitatEs = accessibilitatEs;
   }
 
 
@@ -336,8 +358,10 @@ public class EntitatFilterForm extends CarpetaBaseFilterForm implements EntitatF
     this.loginTextIDFins = __toClone.loginTextIDFins;
     this.context = __toClone.context;
     this.commit = __toClone.commit;
-    this.avisLegal = __toClone.avisLegal;
-    this.accessibilitat = __toClone.accessibilitat;
+    this.avisLegalCa = __toClone.avisLegalCa;
+    this.avisLegalEs = __toClone.avisLegalEs;
+    this.accessibilitatCa = __toClone.accessibilitatCa;
+    this.accessibilitatEs = __toClone.accessibilitatEs;
     this.mapOfTraduccioForNomID = __toClone.mapOfTraduccioForNomID;
     this.mapOfTraduccioForDescripcioID = __toClone.mapOfTraduccioForDescripcioID;
     this.mapOfPluginForPluginLoginID = __toClone.mapOfPluginForPluginLoginID;

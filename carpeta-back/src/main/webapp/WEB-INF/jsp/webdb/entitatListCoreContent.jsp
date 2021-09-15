@@ -177,14 +177,24 @@
           ${entitat.commit}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.AVISLEGAL)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.AVISLEGALCA)}">
           <td>
-          ${entitat.avisLegal}
+          ${entitat.avisLegalCa}
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.ACCESSIBILITAT)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.AVISLEGALES)}">
           <td>
-          ${entitat.accessibilitat}
+          ${entitat.avisLegalEs}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.ACCESSIBILITATCA)}">
+          <td>
+          ${entitat.accessibilitatCa}
+          </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,EntitatFields.ACCESSIBILITATES)}">
+          <td>
+          ${entitat.accessibilitatEs}
           </td>
         </c:if>
 

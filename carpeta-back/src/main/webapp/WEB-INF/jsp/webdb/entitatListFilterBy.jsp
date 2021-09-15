@@ -340,28 +340,54 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.AVISLEGAL)}">
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.AVISLEGALCA)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="entitat.avisLegal" var="avisLegal" />
-              <fmt:message key="genapp.form.searchby" var="cercaperavisLegal" >                
-                 <fmt:param value="${avisLegal}"/>
+              <fmt:message key="entitat.avisLegalCa" var="avisLegalCa" />
+              <fmt:message key="genapp.form.searchby" var="cercaperavisLegalCa" >                
+                 <fmt:param value="${avisLegalCa}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${avisLegal}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperavisLegal}" path="avisLegal" />
+              <span class="add-on"><c:out value="${avisLegalCa}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperavisLegalCa}" path="avisLegalCa" />
             </div>
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.ACCESSIBILITAT)}">
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.AVISLEGALES)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="entitat.accessibilitat" var="accessibilitat" />
-              <fmt:message key="genapp.form.searchby" var="cercaperaccessibilitat" >                
-                 <fmt:param value="${accessibilitat}"/>
+              <fmt:message key="entitat.avisLegalEs" var="avisLegalEs" />
+              <fmt:message key="genapp.form.searchby" var="cercaperavisLegalEs" >                
+                 <fmt:param value="${avisLegalEs}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${accessibilitat}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercaperaccessibilitat}" path="accessibilitat" />
+              <span class="add-on"><c:out value="${avisLegalEs}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperavisLegalEs}" path="avisLegalEs" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.ACCESSIBILITATCA)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="entitat.accessibilitatCa" var="accessibilitatCa" />
+              <fmt:message key="genapp.form.searchby" var="cercaperaccessibilitatCa" >                
+                 <fmt:param value="${accessibilitatCa}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${accessibilitatCa}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperaccessibilitatCa}" path="accessibilitatCa" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,EntitatFields.ACCESSIBILITATES)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="entitat.accessibilitatEs" var="accessibilitatEs" />
+              <fmt:message key="genapp.form.searchby" var="cercaperaccessibilitatEs" >                
+                 <fmt:param value="${accessibilitatEs}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${accessibilitatEs}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperaccessibilitatEs}" path="accessibilitatEs" />
             </div>
 
 

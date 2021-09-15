@@ -111,12 +111,20 @@ public class EntitatQueryPath extends org.fundaciobit.genapp.common.query.QueryP
     return new StringField(getQueryPath(), EntitatFields.COMMIT);
   }
 
-  public StringField AVISLEGAL() {
-    return new StringField(getQueryPath(), EntitatFields.AVISLEGAL);
+  public StringField AVISLEGALCA() {
+    return new StringField(getQueryPath(), EntitatFields.AVISLEGALCA);
   }
 
-  public StringField ACCESSIBILITAT() {
-    return new StringField(getQueryPath(), EntitatFields.ACCESSIBILITAT);
+  public StringField AVISLEGALES() {
+    return new StringField(getQueryPath(), EntitatFields.AVISLEGALES);
+  }
+
+  public StringField ACCESSIBILITATCA() {
+    return new StringField(getQueryPath(), EntitatFields.ACCESSIBILITATCA);
+  }
+
+  public StringField ACCESSIBILITATES() {
+    return new StringField(getQueryPath(), EntitatFields.ACCESSIBILITATES);
   }
 
 
