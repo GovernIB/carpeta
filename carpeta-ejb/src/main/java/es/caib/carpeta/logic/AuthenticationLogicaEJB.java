@@ -21,6 +21,7 @@ import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.model.fields.EntitatFields;
 
+import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
@@ -124,7 +125,7 @@ public class AuthenticationLogicaEJB implements AuthenticationLogicaService {
 
                 String generat = TemplateEngine.processExpressionLanguageSquareBrackets(plantilla, map, new Locale("ca"));
 
-                //log.error("PROPIETATS DESPRES DE generat:\n" + generat + "\n");
+                //log.error("XYZ ZZZ  PROPIETATS DESPRES DE generat:\n" + generat + "\n");
 
                 props.load(new StringReader(generat));
             } catch(Exception e) {
@@ -140,11 +141,11 @@ public class AuthenticationLogicaEJB implements AuthenticationLogicaService {
                 pluginInstance = PluginsManager.instancePluginByClassName(className, Constants.CARPETA_PROPERTY_BASE, props);
                 
                 if (pluginInstance == null) {
-                  log.error("pluginInstance RETORNAT és null ");
+                  log.error("PluginsManager.instancePluginByClassName(" + className + ") HA RETORNAT null ");
                 }
                 
             } catch (Exception th) {
-                String msg = "Error no controlat instanciant Plugin de userInformation: " + th.getMessage();
+                String msg = "Error no controlat instanciant Plugin de userInformation(" + className + "): " + th.getMessage();
                 log.error(msg, th);
                 pluginInstance = null;
                 throw new EJBException("plugin.donotinstantiateplugin", th);
@@ -163,10 +164,10 @@ public class AuthenticationLogicaEJB implements AuthenticationLogicaService {
      * @param prop
      * @return
      */
-    public static String getPropertiesAsString(Properties prop) {    
-        StringWriter writer = new StringWriter();
-        prop.list(new PrintWriter(writer));
-        return writer.getBuffer().toString();
+    public static String getPropertiesAsString(Properties prop) throws Exception {    
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        prop.store(baos, "");
+        return new String(baos.toByteArray());
     }
     
 }
