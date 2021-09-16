@@ -18,7 +18,13 @@ const resources = {
   }
 };
 
-const langActual = sessionStorage.getItem("langActual");
+let langActual = sessionStorage.getItem("langActual");
+if (langActual === null) {
+    langActual = 'ca';
+    sessionStorage.setItem("langActual", "ca");
+}
+
+console.log("langActual i18n: " + langActual);
   
   i18n
   // .use(detector) // web lang detect

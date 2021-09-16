@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -160,6 +162,35 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
     // --------------------------------------------------------------------------------------
 
     protected static final String DETALL_REGISTRE_PAGE = "detallRegistre";
+    
+    
+    protected String checkRegWebNumberFormat(String numeroFormateado) throws Exception {
+    	
+    	// Patró codi correcte REGWEB
+    	String patro = getPropertyRequired(REGWEB32_PROPERTY_BASE + "regex.pattern");
+    	
+    	if (patro != null) {
+    		
+    		final Pattern pattern = Pattern.compile(patro);
+            final Matcher matcher = pattern.matcher(numeroFormateado);
+            
+            if (!matcher.matches()) {
+            	
+            	log.info("checkRegWebNumberFormat => change " + numeroFormateado);
+            	
+            	final Pattern urlRegex = Pattern.compile(getPropertyRequired(REGWEB32_PROPERTY_BASE + "regex.url"));
+            	final String subst = getPropertyRequired(REGWEB32_PROPERTY_BASE + "regex.replace");
+            	
+            	final Matcher matcherReplace = urlRegex.matcher(numeroFormateado);
+            	
+            	return matcherReplace.replaceAll(subst);
+            }
+    	}
+    	
+        return numeroFormateado;
+    	
+    }
+    
 
     public void detallDeRegistre(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
@@ -170,8 +201,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
             response.setCharacterEncoding("utf-8");
             response.setContentType("text/html");
 
-            String numeroRegistroFormateado = request.getParameter("numeroRegistroFormateado");
-                       
+            String numeroRegistroFormateado = checkRegWebNumberFormat(request.getParameter("numeroRegistroFormateado"));
 
             String webpage = getDetallDeRegistrePage(absolutePluginRequestPath, numeroRegistroFormateado,
                     userData.getAdministrationID(), locale, "");
