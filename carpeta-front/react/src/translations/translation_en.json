@@ -49,6 +49,7 @@
 	"paginaIniciQuefer2": "Consultar els vostres registres d'entrada i descarregar-vos els justificants.",
 	"paginaIniciQuefer3": "Rebre notificacions i comunicacions.",
 	"paginaIniciQuefer4": "Consultar les vostres dades personals.",
+	"paginaIniciAcces": "Com podeu accedir a la Carpeta Ciutadana?",
 	"paginaIniciClave": "L'accés a la teva Carpeta Ciutadana requereix que t'identifiquis mitjançant el sistema d'autenticació de Cl@ve a través de:",
 	"paginaIniciClave1": "Certificat digital o DNI electrònic",
 	"paginaIniciClave2": "Clau PIN",
@@ -89,6 +90,7 @@
 	"accessibilitatDeclaracio2": ", de 7 de setembre, d'accessibilitat dels llocs web i aplicacions per a dispositius mòbils del sector públic.",
 	"accessibilitatDeclaracio3": "La present declaració d'accessibilitat s’aplica al lloc web ",
 	"accessibilitatDeclaracio4": " i exclou les pàgines que condueixen a enllaços externs.",
+	"accessibilitatDeclaracioBuida": "No s'ha definit la declaració d'accessibilitat per aquesta entitat.",
 	"accessibilitatCompliment": "Situació de compliment",
 	"accessibilitatCompliment1": "a) Aquest lloc web s'até parcialment al",
 	"accessibilitatCompliment2": ", a causa de les excepcions i de la falta de conformitat dels aspectes que s'indiquen a continuació.",
@@ -162,6 +164,7 @@
 	"avisLegalCookies18": "Xarxes socials.",
 	"avisLegalCookies19": "Cada xarxa social utilitza les seves pròpies galetes quan es fa ús de botons del tipus «M'agrada» o «Compartir».",
 	"avisLegalCookies20": "Com es desactiven les galetes? El bloqueig o la desactivació de totes les galetes ajuda a protegir la privacitat, però també pot limitar l'experiència d'alguna de les seccions del lloc web, així com limitar funcionalitats o, fins i tot, impedir la correcta navegació o utilització d'alguns serveis. Si es vol saber com desactivar les galetes en els navegadors més populars, es pot accedir als següents tutorials:",
+	"avisLegalBuid": "No s'ha definit l'Avís Legal per aquesta entitat.",
 
 
 	"paginaerrorTitol": "ERROR",
