@@ -53,7 +53,7 @@
                         <div class="col-md-3 pl-0 pr-8 form-mobil">
                             <div class="form-group pr-2" style="padding-right:50px">
                                 <label for="numero" class="float-left">${registro_numero}</label>
-                                <input type="text" name="numero" id="numero" placeholder="${registro_numero}" maxlength="25" aria-labelledby="numero" class="form-control form-control-sm camp-form-mobil" value="<#if form_numero?has_content>${form_numero}</#if>" tabindex="501"/>
+                                <input type="text" name="numero" id="numero" placeholder="${registro_numero}" maxlength="25" aria-labelledby="numero" class="form-control form-control-sm camp-form-mobil focusIn" value="<#if form_numero?has_content>${form_numero}</#if>" tabindex="501"/>
                             </div>
                         </div>
                     
@@ -61,7 +61,7 @@
                             <div class="form-group pl-0 pr-4 form-mobil">
                                 <label for="fechaInicio" placeholder="yyyy-mm-dd" class="float-left">${carpeta_fecha_inicio}</label>
                                 <div class="input-group input-group-fecha-inicio">
-                                    <input id="fechaInicio" name="fechaInicio" class="form-control form-control-sm estilCalendar"
+                                    <input id="fechaInicio" name="fechaInicio" class="form-control form-control-sm estilCalendar focusIn"
                                            required="required" type="date" value="${form_dataInici?string('yyyy-MM-dd')}" 
                                            min="1900-01-01" max="2100-12-31"
                                            maxlength="10" tabindex="502" aria-labelledby="fechaInicio">
@@ -73,7 +73,7 @@
                             <div class="form-group pr-4 form-mobil">
                                 <label for="fechaFin" placeholder="yyyy-mm-dd" class="float-left">${carpeta_fecha_fin}</label>
                                 <div class="input-group input-group-fecha-fin">
-                                    <input id="fechaFin" name="fechaFin" class="form-control form-control-sm estilCalendar" 
+                                    <input id="fechaFin" name="fechaFin" class="form-control form-control-sm estilCalendar focusIn"
                                            required="required" type="date" value="${form_dataFi?string('yyyy-MM-dd')}"
                                            min="1900-01-01" max="2100-12-31" 
                                            maxlength="10" tabindex="503" aria-labelledby="fechaFin">
@@ -84,7 +84,7 @@
                         <div class="col-md-2 pl-0 pr-0">
                             <div class="form-group pr-4">
                                 <label for="estado" class="float-left">${registro_estado}</label>
-                                <select name="estado" id="estado" class="form-control form-control-sm" tabindex="504" aria-labelledby="estado">
+                                <select name="estado" id="estado" class="form-control form-control-sm focusIn" tabindex="504" aria-labelledby="estado">
                                     <#list registroEstadoSelect as regEstado >
                                     <option value="${regEstado?index}" <#if form_estat == regEstado?index?c>selected="selected"</#if> >${regEstado}</option>
                                     </#list>

@@ -50,7 +50,7 @@
                             <div class="form-group pl-0 pr-4 form-mobil">
                                 <label for="fechaInicio" placeholder="yyyy-MM-dd" class="float-left">${carpeta_fecha_inicio}</label>
                                 <div class="input-group input-group-fecha-inicio camp-form-mobil">
-                                    <input id="fechaInicio" name="fechaInicio" class="form-control form-control-sm estilCalendar"
+                                    <input id="fechaInicio" name="fechaInicio" class="form-control form-control-sm estilCalendar focusIn"
                                            required="required" type="date" value="${form_dataInici?string('yyyy-MM-dd')}"
                                            min="1900-01-01" max="2100-12-31" 
                                            maxlength="10" tabindex="501" aria-labelledby="fechaInicio">
@@ -62,7 +62,7 @@
                             <div class="form-group pr-4 form-mobil">
                                 <label for="fechaFin" placeholder="yyyy-MM-dd" class="float-left">${carpeta_fecha_fin}</label>
                                 <div class="input-group input-group-fecha-fin">
-                                    <input id="fechaFin" name="fechaFin" class="form-control form-control-sm estilCalendar" 
+                                    <input id="fechaFin" name="fechaFin" class="form-control form-control-sm estilCalendar focusIn"
                                            required="required" type="date" value="${form_dataFi?string('yyyy-MM-dd')}" 
                                            min="1900-01-01" max="2100-12-31"
                                            maxlength="10" tabindex="502" aria-labelledby="fechaFin">
@@ -73,7 +73,7 @@
                         <div class="col-md-3 form-mobil">
                             <div class="form-group pr-2 camp-form-mobil">
                                 <label for="estado" class="float-left">${tramite_estado}</label>
-                                <select name="tramiteFinalizado" id="tramiteFinalizado" class="form-control form-control-sm" tabindex="503" aria-labelledby="estado">
+                                <select name="tramiteFinalizado" id="tramiteFinalizado" class="form-control form-control-sm focusIn" tabindex="503" aria-labelledby="estado">
                                     <option value="A" <#if form_estat == "A">selected="selected"</#if>>${tramite_todos}</option>
                                     <option value="S" <#if form_estat == "S">selected="selected"</#if>>${tramite_finalizado}</option>
                                     <option value="N" <#if form_estat == "N">selected="selected"</#if>>${tramite_nofinalizado}</option>

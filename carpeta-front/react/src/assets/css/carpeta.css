@@ -71,6 +71,10 @@ input:focus-visible {
 button:active{
 	outline: none !important;
 }
+.focusIn:focus-visible{
+	border-color:#32814B!important;
+	border-width: 2px;
+}
 /* FI Navegació amb tab */
 
 /* Botó color Carpeta */
@@ -969,6 +973,10 @@ thead>tr>th.sorting {
 .col-md-5 {
 	max-width: 100%;
 }
+.floatEnll{
+	float: none!important;
+	width: 95%;
+}
 }
 
 /*Se aplican cuando el width es menor que 692*/
@@ -1031,6 +1039,9 @@ body {
 input.form-control, select.form-control {
 	font-size: 0.8em;
 }
+.marge-mobil{
+	padding-top: 3em!important;
+}
 }
 
 /*Se aplican cuando el width es menor que 576*/
@@ -1069,10 +1080,6 @@ input.form-control, select.form-control {
 }
 .taula-mobil{
 	margin-top: 4em!important;
-}
-.floatEnll{
-	float: left!important;
-	width: 95%;
 }
 }
 

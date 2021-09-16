@@ -164,7 +164,9 @@ class Index extends Component {
                     </div>
 
                     {/* Zona Contingut */}
-                    <div className="imc-continguts noEnfocar marge-mobil" style={estilContingut} id="continguts" tabIndex="399" onFocus={function(){$("[id*='submenu']").css("display", "none");}}>
+                    <div tabIndex="399" onFocus={function () { $("[id*='submenu']").css("display", "none"); }}/>
+                    <div className="imc-continguts marge-mobil" style={estilContingut} id="continguts">
+                    {/*<div className="imc-continguts noEnfocar marge-mobil" style={estilContingut} id="continguts" tabIndex="399" onFocus={function(){$("[id*='submenu']").css("display", "none");}}>*/}
 
                         {/* Molla de pa */}
                         <Breadcrumb />
