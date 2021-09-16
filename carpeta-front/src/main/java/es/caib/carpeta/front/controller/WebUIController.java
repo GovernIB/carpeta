@@ -224,16 +224,20 @@ public class WebUIController extends PluginFrontController {
         protected String nom;
         protected String html;
         protected String color;
+        protected String htmlAccessibilitat;
+        protected String htmlAvislegal;
 
         
         public EntitatInfo() {
             super();
         }
-        public EntitatInfo(String nom, String html, String color) {
+        public EntitatInfo(String nom, String html, String color, String htmlAccessibilitat, String htmlAvislegal) {
             super();
             this.nom = nom;
             this.html = html;
             this.color = color;
+            this.htmlAccessibilitat = htmlAccessibilitat;
+            this.htmlAvislegal = htmlAvislegal;
         }
         public String getNom() {
             return nom;
@@ -253,7 +257,10 @@ public class WebUIController extends PluginFrontController {
         public void setColor(String color) {
             this.color = color;
         }
-        
+        public String getHtmlAccessibilitat() { return htmlAccessibilitat; }
+        public void setHtmlAccessibilitat(String htmlAccessibilitat) { this.htmlAccessibilitat = htmlAccessibilitat; }
+        public String getHtmlAvislegal() { return htmlAvislegal; }
+        public void setHtmlAvislegal(String htmlAvislegal) { this.htmlAvislegal = htmlAvislegal; }
     
     }
     
@@ -1073,6 +1080,38 @@ public class WebUIController extends PluginFrontController {
             if (entitat.getLoginText() != null && entitat.getLoginText().getTraduccio(lang) != null) {
                 ei.setHtml(entitat.getLoginText().getTraduccio(lang).getValor());
 //                log.info(" XYZ ZZZ RETORNAT HTML PER ENTITAT " + codiEntitat);
+            }
+
+            // Mira si té declaració d'Accessibilitat i Avís Legal definida al back, segons idioma del front
+            switch(lang) {
+                case "ca":
+                    if (entitat.getAccessibilitatCa() != null) {
+                        ei.setHtmlAccessibilitat(entitat.getAccessibilitatCa());
+                    }else{
+                        ei.setHtmlAccessibilitat("");
+                    }
+
+                    if (entitat.getAvisLegalCa() != null) {
+                        ei.setHtmlAvislegal(entitat.getAvisLegalCa());
+                    }else{
+                        ei.setHtmlAvislegal("");
+                    }
+
+                    break;
+                case "es":
+                    if (entitat.getAccessibilitatEs() != null) {
+                        ei.setHtmlAccessibilitat(entitat.getAccessibilitatEs());
+                    }else{
+                        ei.setHtmlAccessibilitat("");
+                    }
+
+                    if (entitat.getAvisLegalEs() != null) {
+                        ei.setHtmlAvislegal(entitat.getAvisLegalEs());
+                    }else{
+                        ei.setHtmlAvislegal("");
+                    }
+
+                    break;
             }
 
 //            response.setCharacterEncoding("utf-8");
