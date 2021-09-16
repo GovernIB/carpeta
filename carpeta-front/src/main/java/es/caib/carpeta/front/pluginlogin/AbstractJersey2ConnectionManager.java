@@ -34,7 +34,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public class AbstractJersey2ConnectionManager {
     
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
+    protected final Logger log = LoggerFactory.getLogger(this.getClass());
 
     final boolean ignoreServerCertificates;
 
