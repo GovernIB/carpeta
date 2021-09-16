@@ -43,6 +43,7 @@ class PluginHtml extends Component {
                 sessionStorage.setItem("nomPlugin", pluginInfo.nom);
                 console.log("111: " + pluginInfo.nom);
                 // this.setState({ pluginTitol: pluginInfo.nom });
+                document.title = pluginInfo.nom + " - " + i18n.t('menuTitol');
             })
             .catch(error => {
                 console.log(JSON.stringify(error));
@@ -70,15 +71,11 @@ class PluginHtml extends Component {
 
             // ANAM A AUTENTICACIO
             var encURI = window.btoa(window.location.href);
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {  };
-            xhttp.open("GET", urlBase + "/fa/" + encURI, true);
-            xhttp.send();
-
-            //this.props.history.push("/");
-
-            var loc = new URL(window.location.href);
-            window.location.href = ('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host));
+            axios.get(urlBase + "/fa/" + encURI)
+                .then( res => {
+                    var loc = new URL(window.location.href);
+                    window.location.href = ('prelogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host));
+                });
 
             return '';
         }
