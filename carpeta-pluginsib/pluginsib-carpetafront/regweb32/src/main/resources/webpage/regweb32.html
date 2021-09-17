@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${lang}" lang="${lang}">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"
+      xml:lang="${lang}" lang="${lang}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>${title}</title>
     <link rel="shortcut icon" type="image/x-ico" href="http://www.caib.es/sites/favicon.png">
-    <meta http-equiv="Content-Language" content="${lang}">
+<!--    <meta http-equiv="Content-Language" content="${lang}">-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="_csrf" content="">
@@ -48,7 +49,8 @@
             <p class="lh15 text-estrofa subtitol">${registro_descripcion}</p>
             <div class="card-body tablaRegistros">
             
-                <form id="fechaBusqueda" action="" method="post">
+                <form id="fechaBusqueda" action="#" method="post">
+                    <script>document.querySelector("form").setAttribute("action", "")</script>
                     <div class="row pb-2 ml-0 mr-0">
                         <div class="col-md-3 pl-0 pr-8 form-mobil">
                             <div class="form-group pr-2" style="padding-right:50px">
@@ -59,24 +61,24 @@
                     
                         <div class="col-md-3 pl-0 form-mobil">
                             <div class="form-group pl-0 pr-4 form-mobil">
-                                <label for="fechaInicio" placeholder="yyyy-mm-dd" class="float-left">${carpeta_fecha_inicio}</label>
+                                <label for="fechaInicio" class="float-left">${carpeta_fecha_inicio}</label>
                                 <div class="input-group input-group-fecha-inicio">
                                     <input id="fechaInicio" name="fechaInicio" class="form-control form-control-sm estilCalendar focusIn"
                                            required="required" type="date" value="${form_dataInici?string('yyyy-MM-dd')}" 
                                            min="1900-01-01" max="2100-12-31"
-                                           maxlength="10" tabindex="502" aria-labelledby="fechaInicio">
+                                           tabindex="502" aria-labelledby="fechaInicio">
                                     <span class="input-group-text"><span class="oi oi-calendar"></span></span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3 pl-0 form-mobil">
                             <div class="form-group pr-4 form-mobil">
-                                <label for="fechaFin" placeholder="yyyy-mm-dd" class="float-left">${carpeta_fecha_fin}</label>
+                                <label for="fechaFin" class="float-left">${carpeta_fecha_fin}</label>
                                 <div class="input-group input-group-fecha-fin">
                                     <input id="fechaFin" name="fechaFin" class="form-control form-control-sm estilCalendar focusIn"
                                            required="required" type="date" value="${form_dataFi?string('yyyy-MM-dd')}"
                                            min="1900-01-01" max="2100-12-31" 
-                                           maxlength="10" tabindex="503" aria-labelledby="fechaFin">
+                                           tabindex="503" aria-labelledby="fechaFin">
                                     <span class="input-group-text"><span class="oi oi-calendar"></span></span>
                                 </div>
                             </div>
@@ -122,13 +124,13 @@
                             </td>
                             <td>
                                 <label data-toggle="tooltip" data-placement="top" title="${registroItem.extracto}">
-                                    <p class="tallarExtracte">${registroItem.extracto}</p>
+                                    <input type="hidden" class="tallarExtracte">${registroItem.extracto}</input>
                                 </label>
                             </td>
                             <td>
                                 <#if registroItem.estado?has_content >
                                 <label data-toggle="tooltipDetall" data-placement="top" title="${registroExplicacionEstado[registroItem.estado]}">
-                                    <p>${registroEstado[registroItem.estado]}</p>
+                                    <input type="hidden">${registroEstado[registroItem.estado]}</input>
                                 </label>
                                 <#else>
                                 <p>${registroEstado[1]}</p>
