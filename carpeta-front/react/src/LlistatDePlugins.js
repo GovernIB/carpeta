@@ -163,7 +163,7 @@ class LlistatDePlugins extends Component {
                                     to={{
                                         pathname: baseSeccio + ((s.tipus == 0) ? Constants.PLUGINREACT_PATH :Constants.PLUGINHTML_PATH)+ s.context,
                                         nomPagina: "plugin"
-                                    }} title={s.missatge} tabIndex={502+i} aria-labelledby={"nomPlug"+i}>
+                                    }} tabIndex={502+i} aria-labelledby={"nomPlug"+i} title={t('accedir') + " " + s.nom}>
                                     <span className="card-title titol pl-1 h3"><img src={urlBase + s.urllogo}
                                                                                     alt={s.nom} title={t('iconaDe') + " " + s.nom}
                                                                                     className="imc-icona"/></span>
@@ -200,7 +200,7 @@ class LlistatDePlugins extends Component {
                         allItems.push(
                             <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0">
                                 <Link to={baseSeccio + Constants.SECCIO_PATH + s.context}
-                                      className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert`} tabIndex={502+i} aria-labelledby={"nomSecc"+i}>
+                                      className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert`} tabIndex={502+i} aria-labelledby={"nomSecc"+i} title={t('accedir') + " " + s.nom}>
                                     <span className="card-title titol pl-1 h3"><img src={s.urllogo} alt={s.nom} title={t('iconaDe') + " " + s.nom}
                                                                                     className="imc-icona"/></span>
                                     <h3 className="apartat titolPlugin titol h3" id={"nomSecc"+i}>{s.nom}</h3>
