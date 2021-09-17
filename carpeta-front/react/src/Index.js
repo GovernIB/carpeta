@@ -212,7 +212,7 @@ class Index extends Component {
                                 <Route
                                     path={ Constants.PLUGINHTML_PATH + ":pluginContext/p/:pluginParameter/:pluginParameter2"  }
                                     render={(props) => {
-                                        return <PluginHtml {...props} seccioContext={'0'} pluginContext={props.match.params.pluginContext} pluginParameter={props.match.params.pluginParameter + '/' + props.match.params.pluginParameter2} />
+                                        return <PluginHtml {...props} seccioContext={'0'} pluginContext={props.match.params.pluginContext} pluginParameter={encodeURI(props.match.params.pluginParameter + '/' + props.match.params.pluginParameter2)} />
                                     }}
                                 />
                                 <Route
