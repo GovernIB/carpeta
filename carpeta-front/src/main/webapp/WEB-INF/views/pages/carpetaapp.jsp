@@ -5,21 +5,13 @@
 <head>
 <script>
 function redireccionar() {
-	//setTimeout(function() {
-		
-	
-		
-	window.location.href = 'carpetaapp://carpeta/show/${codiLogin}';
-	//}, 2000);
-
-    //document.forms['redirectForm'].submit();
-  
+	window.location.href = '${urlApp}';
 }
 </script>
 </head>
 <body onload="redireccionar()">
 
-    <form id="redirectForm" method="post" action="carpetaapp://carpeta/show/${codiLogin}" enctype="application/x-www-form-urlencoded">
+    <form id="redirectForm" method="post" action="${urlApp}" enctype="application/x-www-form-urlencoded">
     </form>
     </form>
     <br />
@@ -28,8 +20,8 @@ function redireccionar() {
     <br />
     <h1>
         <input type="button" style="font-size: 44"
-            value="carpetaapp://carpeta/show/${codiLogin}"
-            onclick="window.location.href='carpetaapp://carpeta/show/${codiLogin}'" />
+            value="${urlApp}"
+            onclick="window.location.href='${urlApp}'" />
         <script>
            document.write(document.cookie);
         </script>           
