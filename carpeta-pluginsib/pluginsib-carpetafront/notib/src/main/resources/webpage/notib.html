@@ -29,7 +29,7 @@
                         </thead>
                         <tbody>
                         <#list comunicacions?sort_by("dataEnviament")?reverse as com >
-                            <tr style="cursor: pointer" class="filaNotib" data-target="_blank" data-href="${urldetallbase}<#--/${com.id?string.computer}-->" tabindex="${com?counter}+501">
+                            <tr style="cursor: pointer" class="filaNotib" data-target="_blank" data-href="${urldetallbase}<#--/${com.id?string.computer}-->" tabindex="501">
                                 <td><#if com.dataEnviament??> ${com.dataEnviament?string("dd-MM-yyyy HH:mm")}</#if></td>
                                 <td><#if com.emisor??>${com.emisor}</#if></td>                                
                                 <td><#if com.concepte??>${com.concepte}</#if></td>
