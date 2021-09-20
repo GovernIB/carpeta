@@ -4,7 +4,7 @@
 <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Tràmits - Carpeta Ciutadana</title>
     <link rel="shortcut icon" type="image/x-ico" href="http://www.caib.es/sites/favicon.png">
-    <meta http-equiv="Content-Language" content="${lang}">
+<!--    <meta http-equiv="Content-Language" content="${lang}">-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="_csrf" content="">
@@ -48,31 +48,31 @@
                     <div class="row pb-2 ml-0 mr-0">
                         <div class="col-md-4 pl-0">
                             <div class="form-group pl-0 pr-4 form-mobil">
-                                <label for="fechaInicio" placeholder="yyyy-MM-dd" class="float-left">${carpeta_fecha_inicio}</label>
+                                <label for="fechaInicio" class="float-left">${carpeta_fecha_inicio}</label>
                                 <div class="input-group input-group-fecha-inicio camp-form-mobil">
                                     <input id="fechaInicio" name="fechaInicio" class="form-control form-control-sm estilCalendar focusIn"
                                            required="required" type="date" value="${form_dataInici?string('yyyy-MM-dd')}"
                                            min="1900-01-01" max="2100-12-31" 
-                                           maxlength="10" tabindex="501" aria-labelledby="fechaInicio">
+                                           tabindex="501" aria-labelledby="fechaInicio">
                                     <span class="input-group-text"><span class="oi oi-calendar"></span></span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4 form-mobil">
                             <div class="form-group pr-4 form-mobil">
-                                <label for="fechaFin" placeholder="yyyy-MM-dd" class="float-left">${carpeta_fecha_fin}</label>
+                                <label for="fechaFin" class="float-left">${carpeta_fecha_fin}</label>
                                 <div class="input-group input-group-fecha-fin">
                                     <input id="fechaFin" name="fechaFin" class="form-control form-control-sm estilCalendar focusIn"
                                            required="required" type="date" value="${form_dataFi?string('yyyy-MM-dd')}" 
                                            min="1900-01-01" max="2100-12-31"
-                                           maxlength="10" tabindex="502" aria-labelledby="fechaFin">
+                                           tabindex="502" aria-labelledby="fechaFin">
                                     <span class="input-group-text"><span class="oi oi-calendar"></span></span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3 form-mobil">
                             <div class="form-group pr-2 camp-form-mobil">
-                                <label for="estado" class="float-left">${tramite_estado}</label>
+                                <label for="tramiteFinalizado" class="float-left" id="estado">${tramite_estado}</label>
                                 <select name="tramiteFinalizado" id="tramiteFinalizado" class="form-control form-control-sm focusIn" tabindex="503" aria-labelledby="estado">
                                     <option value="A" <#if form_estat == "A">selected="selected"</#if>>${tramite_todos}</option>
                                     <option value="S" <#if form_estat == "S">selected="selected"</#if>>${tramite_finalizado}</option>
@@ -204,9 +204,9 @@
         	$('.input-group-fecha-fin .input-group-text').css('display','none');
         }
         
-        // $("tr").each(function(i) {
-        //     $(this).attr("tabindex", i+510);
-        // });
+        $("tr").each(function(i) {
+            $(this).removeAttr("role");
+        });
 
     });
     
