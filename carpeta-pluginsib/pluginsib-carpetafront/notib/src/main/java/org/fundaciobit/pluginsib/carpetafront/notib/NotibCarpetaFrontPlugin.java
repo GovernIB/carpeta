@@ -7,6 +7,7 @@ import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementoExpediente;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.TipoElementoExpediente;
+import es.caib.zonaper.ws.v2.model.elementoexpediente.TiposElementoExpediente;
 import org.apache.commons.io.IOUtils;
 import org.fundaciobit.pluginsib.carpetafront.notib.api.Document;
 import org.fundaciobit.pluginsib.carpetafront.notib.api.NotibClientRest;
@@ -17,16 +18,12 @@ import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 
 /**
@@ -353,6 +350,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 Sistra1ServiceImpl.ELEMENTO_TODOS, userData.getAdministrationID(), locale);
 
         map.put("comunicacions", comunicaciones);
+        map.put("resources", absolutePluginRequestPath + "/" + WEBRESOURCECOMMON);
 
         InputStream input = this.getClass().getResourceAsStream("/webpage/notibsistra.html");
 

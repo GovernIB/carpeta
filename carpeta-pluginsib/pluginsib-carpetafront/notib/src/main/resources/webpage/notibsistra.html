@@ -17,10 +17,10 @@
 
                     <table id="dataTable_paginate" class="table table-striped table-bordered table-hover" style="width:100%">
                         <thead class="table-success">
-                        <tr>
-                            <th>${comunicacion_descripcion_comunicacion}</th>
-                            <th>${comunicacion_fecha}</th>
-                        </tr>
+                            <tr>
+                                <th>${comunicacion_descripcion_comunicacion}</th>
+                                <th>${comunicacion_fecha}</th>
+                            </tr>
                         </thead>
                         <tbody>
                         <#list comunicacions?sort_by("fecha")?reverse as com >
@@ -46,6 +46,20 @@
 <div class="col-md-12 border-0 float-left p-0" id="botoTornarNotSistra" style="margin-top: 20px">
     <button type="button" data-toggle="modal" class="botoSuport" tabindex="520" aria-labelledby="botoTornarNotSistra" onclick="parent.location.href=sessionStorage.getItem('pagTornar');">${boto_tornar}</button>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var idioma = sessionStorage.getItem('idioma');
+        $('#dataTable_paginate').DataTable({
+            "order": [[1, "desc"]],
+            "language": {
+                "url": "${resources}/i18n/" + idioma + ".json"
+            }
+        });
+        $("tr").each(function(i) {
+            $(this).removeAttr("role");
+        });
+    });
+</script>
 <script>
     $('tr').click(function() {
         var url = $(this).attr('data-href');

@@ -50,6 +50,20 @@
 <div class="col-md-12 border-0 float-left p-0" id="botoTornarNotDetall" style="margin-top: 20px">
     <button type="button" data-toggle="modal" class="botoSuport" tabindex="520" aria-labelledby="botoTornarNotDetall" onclick="parent.location.href=sessionStorage.getItem('pagTornar');">${boto_tornar}</button>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var idioma = sessionStorage.getItem('idioma');
+        $('#dataTable_paginate').DataTable({
+            "order": [[1, "desc"]],
+            "language": {
+                "url": "${resources}/i18n/" + idioma + ".json"
+            }
+        });
+        $("tr").each(function(i) {
+            $(this).removeAttr("role");
+        });
+    });
+</script>
 <script>
     $('tr').click(function() {
         var url = $(this).attr('data-href');
