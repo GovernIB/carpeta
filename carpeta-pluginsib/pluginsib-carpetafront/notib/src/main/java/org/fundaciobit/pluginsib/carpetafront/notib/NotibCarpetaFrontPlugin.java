@@ -488,6 +488,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 map.put(t.replace('.', '_'), getTraduccio(t, locale));
             }
 
+            map.put("resources", absolutePluginRequestPath + "/" + WEBRESOURCECOMMON);
+
             InputStream input = this.getClass().getResourceAsStream("/webpage/notib.html");
 
             String plantilla = IOUtils.toString(input, "UTF-8");
