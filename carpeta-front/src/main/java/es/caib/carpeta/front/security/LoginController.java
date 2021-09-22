@@ -173,8 +173,9 @@ public class LoginController {
             fullUrlRedirect = "/";
         } else {
             
-            // Codificam el paràmetre final
-            
+            /*  NO NECESSITAM CODIFICAR EL PARAMETRE FINAL: AQUEST JA HA DE VENIR CODIFICAT !!!!!
+
+            // Codificam el paràmetre final            
             int pos = fullUrlRedirect.lastIndexOf("/p/");
             if (pos != -1) {
                 
@@ -187,7 +188,7 @@ public class LoginController {
       
                 log.info("\nDentro de redirigirLogin: fullUrlRedirect => POST ENCODE ]" + fullUrlRedirect + "[\n");
             }
-            
+            */
             
             
             request.getSession().removeAttribute(InicioController.SESSION_INITIAL_URL);

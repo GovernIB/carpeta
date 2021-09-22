@@ -1,0 +1,23 @@
+
+
+
+
+
+https://code.tutsplus.com/es/tutorials/easier-react-native-development-with-expo--cms-30546
+
+
+
+(1) npm install -g expo-cli   (NO => npm install exp --global)
+
+(2) expo init CarpetaApp
+
+(3) expo run android 
+
+(4) expo build:android (Contrueix 
+    EXPO REGISTER: email: governdigital.carpeta@fundaciobit.org
+	               username: carpeta
+                   password: elmateixqueeldocumentdekeepass
+				   
+				   
+				   
+ (5) expo build:ios  ???

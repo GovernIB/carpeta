@@ -266,8 +266,6 @@ public class InicioController extends CommonFrontController {
 
             return mav;
 
-            // return "redirect:/public/ea/" + sesionHttp.getEntitat() + " ?urlbase=" +
-            // URLEncoder.encode(urlBase, "UTF-8");
         }
 
     }

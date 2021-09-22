@@ -13,7 +13,10 @@
       "backgroundColor": "#ffffff"
     },
     "packagerOpts": {
-      "sourceExts": ["web.js",".js"]
+      "sourceExts": [
+        "web.js",
+        ".js"
+      ]
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -22,14 +25,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "es.caib.carpeta.carpetaapp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-	  "package": "es.caib.carpeta.carpetaapp",
+      "package": "es.caib.carpeta.carpetaapp",
       "versionCode": 1
     },
     "web": {
