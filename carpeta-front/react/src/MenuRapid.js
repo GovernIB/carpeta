@@ -154,7 +154,7 @@ class MenuRapid extends Component {
                                         <img src={s.urllogo} title={t('iconaDe') + " " + s.nom} alt={s.nom} className="imc-icona"/>
                                         <span className="menuRapidView lletraRapid">{s.nom}</span>
                                     </button>
-                                    <ul className="dropdown-menu maxContent" aria-labelledby={"navbarDropdown" + i} id={"submenu"+i}>
+                                    <ul className="dropdown-menu maxContent" aria-labelledby={"menuRapidBoto" + i} id={"submenu"+i}>
                                         {plugins}
                                     </ul>
                                 </li>
