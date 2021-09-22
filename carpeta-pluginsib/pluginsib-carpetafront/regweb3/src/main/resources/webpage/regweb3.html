@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>${title}</title>
     <link rel="shortcut icon" type="image/x-ico" href="http://www.caib.es/sites/favicon.png">
-    <meta http-equiv="Content-Language" content="ca">
+<!--    <meta http-equiv="Content-Language" content="ca">-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="_csrf" content="">
@@ -98,6 +98,9 @@
                                 "language": {
                                     "url": "${resources}/i18n/${lang}.json"
                                 }
+                            })
+                            .on("draw", function(){
+                                $('#dataTable_paginate tr[role="row"]').removeAttr('role');
                             });
                         });
                     </script>

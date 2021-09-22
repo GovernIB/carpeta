@@ -58,7 +58,11 @@
             "language": {
                 "url": "${resources}/i18n/" + idioma + ".json"
             }
+        })
+        .on("draw", function(){
+            $('#dataTable_paginate tr[role="row"]').removeAttr('role');
         });
+
         $("tr").each(function(i) {
             $(this).removeAttr("role");
         });

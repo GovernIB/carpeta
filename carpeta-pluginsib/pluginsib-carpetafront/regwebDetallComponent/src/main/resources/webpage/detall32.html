@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>${detalletitle}</title>
     <link rel="shortcut icon" type="image/x-ico" href="http://www.caib.es/sites/favicon.png">
-    <meta http-equiv="Content-Language" content="ca">
+<!--    <meta http-equiv="Content-Language" content="ca">-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="_csrf" content="">
@@ -186,22 +186,22 @@
 
                                         <#if justificanteUrl?has_content>
                                             <div class="text-center">
-                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarJustificant()" tabindex="501"><span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span>${carpeta_descargar}</button>
+                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarJustificant()" tabindex="501"><span class="oi oi-data-transfer-download mr-2" title="" aria-hidden="true"></span>${carpeta_descargar}</button>
                                             </div>
                                         </#if>
 
                                         <#if justificanteId?has_content && justificantData?has_content>
                                             <div class="text-center">
-                                                <!--   button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarAnnex('${justificanteId?long?c}')"><span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span> ${carpeta_descargar}</button -->
+                                                <!--   button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarAnnex('${justificanteId?long?c}')"><span class="oi oi-data-transfer-download mr-2" title="" aria-hidden="true"></span> ${carpeta_descargar}</button -->
                                                 <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="downloadPDF()" tabindex="502">
-                                                    <span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span> ${carpeta_descargar}
+                                                    <span class="oi oi-data-transfer-download mr-2" title="" aria-hidden="true"></span> ${carpeta_descargar}
                                                 </button>
                                             </div>
                                         </#if>
                                         
                                         <#if !justificanteUrl?has_content && !justificanteId?has_content && justificantSenseGenerar?has_content>
                                             <div class="text-center">
-                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="generantJustificant()"><span class="oi oi-data-transfer-download mr-2" title="" alt="" aria-hidden="true"></span> ${carpeta_descargar}</button>
+                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="generantJustificant()"><span class="oi oi-data-transfer-download mr-2" title="" aria-hidden="true"></span> ${carpeta_descargar}</button>
                                             </div>                                 
                                         </#if>
                                         <#if !justificanteUrl?has_content && !justificanteId?has_content && !justificantSenseGenerar?has_content>
@@ -286,7 +286,7 @@
                                                 <#if !anexo.confidencial?has_content>
                                                     <#if anexo.mime?has_content>
 		                                                <td><button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarAnnex('${anexo.fileID?long?c}')">
-		                                                        <span class="oi oi-data-transfer-download" title="" alt="" aria-hidden="true"></span>
+		                                                        <span class="oi oi-data-transfer-download" title="" aria-hidden="true"></span>
 		                                                    </button></td>
 	                                                <#else>
 		                                                    <td colspan="3"><span>${registro_anexo_nodisponible}</span></td>
