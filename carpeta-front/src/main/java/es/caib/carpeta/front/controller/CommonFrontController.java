@@ -12,6 +12,7 @@ import org.apache.commons.logging.LogFactory;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
@@ -48,9 +49,6 @@ public abstract class CommonFrontController {
 
     @EJB(mappedName = LogCarpetaLogicaService.JNDI_NAME)
     protected LogCarpetaLogicaService logLogicaEjb;
-    
-    
-   
 
     protected void descarregaFitxer(HttpServletResponse response, Long fileID)
             throws I18NException, FileNotFoundException, IOException {
@@ -77,15 +75,42 @@ public abstract class CommonFrontController {
         }
     }
 
-    public void processExceptionHtml(Throwable e, HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView processExceptionHtmlMav(Throwable e, HttpServletRequest request,
+            HttpServletResponse response) {
 
         log.error(e.getMessage(), e);
 
         try {
             long temps = System.currentTimeMillis();
 
-            logLogicaEjb.crearLog("Error al Front", ESTAT_LOG_ERROR,TIPUS_LOG_AUTENTICACIO_FRONT,
-                    System.currentTimeMillis() - temps ,null,e.getMessage(),null,sesionHttp.getEntitat(),null);
+            logLogicaEjb.crearLog("Error al Front", ESTAT_LOG_ERROR, TIPUS_LOG_AUTENTICACIO_FRONT,
+                    System.currentTimeMillis() - temps, null, e.getMessage(), null,
+                    sesionHttp.getEntitat(), null);
+
+            HttpSession session = request.getSession(false);
+            session.setAttribute("error", e.getMessage());
+
+            // response.sendRedirect(request.getContextPath() + "/error");
+
+        } catch (Throwable e1) {
+            log.error("Error: " + e1.getMessage(), e1);
+        }
+
+        return new ModelAndView("error");
+
+    }
+
+    public void processExceptionHtml(Throwable e, HttpServletRequest request,
+            HttpServletResponse response) {
+
+        log.error(e.getMessage(), e);
+
+        try {
+            long temps = System.currentTimeMillis();
+
+            logLogicaEjb.crearLog("Error al Front", ESTAT_LOG_ERROR, TIPUS_LOG_AUTENTICACIO_FRONT,
+                    System.currentTimeMillis() - temps, null, e.getMessage(), null,
+                    sesionHttp.getEntitat(), null);
 
             HttpSession session = request.getSession(false);
             session.setAttribute("error", e.getMessage());
@@ -96,10 +121,10 @@ public abstract class CommonFrontController {
             log.error("Error: " + e1.getMessage(), e1);
         }
 
-
     }
 
-    public void processExceptionRest(Throwable e, HttpServletRequest request, HttpServletResponse response) {
+    public void processExceptionRest(Throwable e, HttpServletRequest request,
+            HttpServletResponse response) {
 
         log.error("HttpServletResponse.SC_INTERNAL_SERVER_ERROR: " + e.getMessage());
 
@@ -107,8 +132,9 @@ public abstract class CommonFrontController {
 
             long temps = System.currentTimeMillis();
 
-            logLogicaEjb.crearLog("Error al Front", ESTAT_LOG_ERROR,TIPUS_LOG_AUTENTICACIO_FRONT,
-                    System.currentTimeMillis() - temps ,null,e.getMessage(),null,sesionHttp.getEntitat(),null);
+            logLogicaEjb.crearLog("Error al Front", ESTAT_LOG_ERROR, TIPUS_LOG_AUTENTICACIO_FRONT,
+                    System.currentTimeMillis() - temps, null, e.getMessage(), null,
+                    sesionHttp.getEntitat(), null);
 
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
 

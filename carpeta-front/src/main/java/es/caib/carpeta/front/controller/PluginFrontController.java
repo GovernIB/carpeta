@@ -22,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -65,78 +66,126 @@ public class PluginFrontController extends CommonFrontController {
     protected final Log log = LogFactory.getLog(getClass());
 
     /*
-    @RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
-    public ModelAndView showAllPlugins(HttpServletRequest request, HttpServletResponse response) throws I18NException {
-
-        ModelAndView mav = new ModelAndView("plugins"); // => /src/main/webapp/WEB-INF/views/pages/plugins.jsp
-
-        try {
-
-            String lang = LocaleContextHolder.getLocale().getLanguage();
-            // String codiEntitat = sesionHttp.getEntitat();
-            Long entitatID = sesionHttp.getEntitatID();
-
-            final Long seccioID = null;
-
-            List<PluginInfo> plugins = utilsEjb.getFrontPlugins(entitatID, lang, seccioID);
-
-            mav.addObject("plugins", plugins);
-
-        } catch (Throwable e) {
-            processExceptionRest(e, request, response);
-        }
-
-        return mav;
-
-    }
-    */
+     * @RequestMapping(value = { "", "/" }, method = RequestMethod.GET) public
+     * ModelAndView showAllPlugins(HttpServletRequest request, HttpServletResponse
+     * response) throws I18NException {
+     * 
+     * ModelAndView mav = new ModelAndView("plugins"); // =>
+     * /src/main/webapp/WEB-INF/views/pages/plugins.jsp
+     * 
+     * try {
+     * 
+     * String lang = LocaleContextHolder.getLocale().getLanguage(); // String
+     * codiEntitat = sesionHttp.getEntitat(); Long entitatID =
+     * sesionHttp.getEntitatID();
+     * 
+     * final Long seccioID = null;
+     * 
+     * List<PluginInfo> plugins = utilsEjb.getFrontPlugins(entitatID, lang,
+     * seccioID);
+     * 
+     * mav.addObject("plugins", plugins);
+     * 
+     * } catch (Throwable e) { processExceptionRest(e, request, response); }
+     * 
+     * return mav;
+     * 
+     * }
+     */
 
     @RequestMapping(value = "/showplugin/{pluginContext}/{idioma}", method = RequestMethod.POST)
     public ModelAndView showNormalPlugin(@PathVariable("pluginContext") String pluginContext,
-            @PathVariable("idioma") String idioma, HttpServletRequest request, HttpServletResponse response,
-            Authentication authentication) throws Exception, I18NException {
+            @PathVariable("idioma") String idioma, HttpServletRequest request,
+            HttpServletResponse response, Authentication authentication)
+            throws Exception, I18NException {
 
         Long pluginID = utilsEjb.getFrontPluginIDByContext(pluginContext);
         final boolean isreact = false;
         final String pluginParameter = null;
-        return showPlugin(pluginID, idioma, request, response, authentication, isreact, pluginParameter);
+        return showPlugin(pluginID, idioma, request, response, authentication, isreact,
+                pluginParameter);
     }
 
-    @RequestMapping(value = "/showreactplugin/{pluginContext}/{idioma}", method = RequestMethod.POST)
+    @RequestMapping(
+            value = "/showreactplugin/{pluginContext}/{idioma}",
+            method = RequestMethod.POST)
     public ModelAndView showReactPlugin(@PathVariable("pluginContext") String pluginContext,
-            @PathVariable("idioma") String idioma, HttpServletRequest request, HttpServletResponse response,
-            Authentication authentication) throws Exception, I18NException {
+            @PathVariable("idioma") String idioma, HttpServletRequest request,
+            HttpServletResponse response, Authentication authentication)
+            throws Exception, I18NException {
         final boolean isreact = true;
         final String pluginParameter = null;
         Long pluginID = utilsEjb.getFrontPluginIDByContext(pluginContext);
 
-        return showPlugin(pluginID, idioma, request, response, authentication, isreact, pluginParameter);
+        return showPlugin(pluginID, idioma, request, response, authentication, isreact,
+                pluginParameter);
     }
 
-    @RequestMapping(value = "/showplugin/{pluginContext}/{idioma}/p/{pluginParameter}", method = RequestMethod.POST)
-    public ModelAndView showNormalPluginParameter(@PathVariable("pluginContext") String pluginContext,
-            @PathVariable("idioma") String idioma, @PathVariable("pluginParameter") String pluginParameter,
-            HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+    @RequestMapping(
+            value = "/showplugin/{pluginContext}/{idioma}/p/**", // {pluginParameter}
+            method = RequestMethod.POST)
+    public ModelAndView showNormalPluginParameter(
+            @PathVariable("pluginContext") String pluginContext,
+            @PathVariable("idioma") String idioma,
+            //@PathVariable("pluginParameter") String pluginParameter,
+            HttpServletRequest request,
+            HttpServletResponse response, Authentication authentication)
             throws Exception, I18NException {
+        
+        String fullPath = (String) request.getAttribute(
+                HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+        
+        int pos = fullPath.indexOf("/p/");
+        
+        // Rest Of URL
+        String pluginParameter = fullPath.substring(pos + "/p/".length());
+        
+        
+        log.info("PLUGIN HTMLREST OF URL(pluginParameter) => " + pluginParameter );
 
         Long pluginID = utilsEjb.getFrontPluginIDByContext(pluginContext);
         final boolean isreact = false;
-        return showPlugin(pluginID, idioma, request, response, authentication, isreact, pluginParameter);
+        return showPlugin(pluginID, idioma, request, response, authentication, isreact,
+                pluginParameter);
     }
+    
+    
+    
+    
+    
+    
 
-    @RequestMapping(value = "/showreactplugin/{pluginContext}/{idioma}/p/{pluginParameter}", method = RequestMethod.POST)
-    public ModelAndView showReactPluginParameter(@PathVariable("pluginContext") String pluginContext,
-            @PathVariable("idioma") String idioma, @PathVariable("pluginParameter") String pluginParameter,
-            HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+    @RequestMapping(
+            value = "/showreactplugin/{pluginContext}/{idioma}/p/**",
+            method = RequestMethod.POST)
+    public ModelAndView showReactPluginParameter(
+            @PathVariable("pluginContext") String pluginContext,
+            @PathVariable("idioma") String idioma,
+            //@PathVariable("pluginParameter") String pluginParameter,
+            HttpServletRequest request,
+            HttpServletResponse response, Authentication authentication)
             throws Exception, I18NException {
         final boolean isreact = true;
+        
+        
+        String fullPath = (String) request.getAttribute(
+                HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+        
+        int pos = fullPath.indexOf("/p/");
+        
+        // Rest Of URL
+        String pluginParameter = fullPath.substring(pos + "/p/".length());
+        
+        
+        log.info("PLUGIN REACT REST OF URL(pluginParameter) => " + pluginParameter );
+        
 
         Long pluginID = utilsEjb.getFrontPluginIDByContext(pluginContext);
 
-        return showPlugin(pluginID, idioma, request, response, authentication, isreact, pluginParameter);
+        return showPlugin(pluginID, idioma, request, response, authentication, isreact,
+                pluginParameter);
     }
 
-    
     /**
      * 
      * @param pluginID
@@ -151,32 +200,33 @@ public class PluginFrontController extends CommonFrontController {
      * @throws I18NException
      */
     protected ModelAndView showPlugin(Long pluginID, String idioma, HttpServletRequest request,
-            HttpServletResponse response, Authentication authentication, boolean isreact, String pluginParameter)
-            throws Exception, I18NException {
-
-        final String administrationID;
-        final UsuarioClave usuarioClave; 
-
-        if (authentication != null) {
-            UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado) authentication.getPrincipal();
-            administrationID = usuarioAutenticado.getUsuarioClave().getNif();
-            usuarioClave = usuarioAutenticado.getUsuarioClave();
-        } else {
-            administrationID = null;
-            usuarioClave = null;
-        }
-
-        // TODO canviar, mirar javascript window.location.href
-        String urlBase = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-                + request.getContextPath();
-        String baseFront = "";
-        baseFront = urlBase;
-
-        String urlToShowPluginPage = startPublicSignatureProcess(request, response, pluginID, administrationID,
-                baseFront, usuarioClave , pluginParameter);
-        ModelAndView mav = new ModelAndView(new RedirectView(urlToShowPluginPage));
-
+            HttpServletResponse response, Authentication authentication, boolean isreact,
+            String pluginParameter) throws Exception, I18NException {
         try {
+            log.info(" ENTRA A showPlugin(" + pluginID +  ", " + authentication + " )");
+
+            final String administrationID;
+            final UsuarioClave usuarioClave;
+
+            if (authentication != null) {
+                UsuarioAutenticado usuarioAutenticado = (UsuarioAutenticado) authentication
+                        .getPrincipal();
+                administrationID = usuarioAutenticado.getUsuarioClave().getNif();
+                usuarioClave = usuarioAutenticado.getUsuarioClave();
+            } else {
+                administrationID = null;
+                usuarioClave = null;
+            }
+
+            // TODO canviar, mirar javascript window.location.href
+            String urlBase = request.getScheme() + "://" + request.getServerName() + ":"
+                    + request.getServerPort() + request.getContextPath();
+            String baseFront = "";
+            baseFront = urlBase;
+
+            String urlToShowPluginPage = startPublicSignatureProcess(request, response, pluginID,
+                    administrationID, baseFront, usuarioClave, pluginParameter);
+            ModelAndView mav = new ModelAndView(new RedirectView(urlToShowPluginPage));
 
             Locale loc = new Locale(idioma);
             LocaleContextHolder.setLocale(loc);
@@ -201,54 +251,58 @@ public class PluginFrontController extends CommonFrontController {
             if (isreact) {
                 mav = new ModelAndView(new RedirectView(urlToShowPluginPage));
             } else {
-                
+
                 log.info("XXXXXXXXXXXXXXXX   PLUGIN HTML 11111111");
-                
-                final String view = "plugin_contenidor"; // => \WEB-INF\views\pages\plugin_contenidor.jsp
+
+                final String view = "plugin_contenidor"; // =>
+                                                         // \WEB-INF\views\pages\plugin_contenidor.jsp
 
                 mav = new ModelAndView(view);
                 // mav.addObject("signaturesSetID", signaturesSetID);
                 mav.addObject("urlToShowPluginPage", urlToShowPluginPage);
-            
+
                 log.info("XXXXXXXXXXXXXXXX   PLUGIN HTML 22222222222");
             }
 
+            log.info(" FINAL de showPlugin OK !!!!!!!!!!!");
+
+             return mav;
+
         } catch (Throwable e) {
-            /* XYZ ZZZ S?HA DE REGISTRRA UN ERROR NO UN ACCESS
-            EntitatJPA entitatJPA = entitatEjb.findByCodi(sesionHttp.getEntitat());
-            
-            accesLogicaEjb.crearAcces(usuarioAutenticado.getUsuarioClave(), TIPUS_ACCES_PLUGIN,
-                    entitatJPA.getEntitatID(), pluginID, new Timestamp(new Date().getTime()),
-                    LocaleContextHolder.getLocale().getLanguage(), InetAddress.getLocalHost().getHostAddress(), false);
-            */
-            processExceptionHtml(e, request, response);
+            /*
+             * XYZ ZZZ S?HA DE REGISTRRA UN ERROR NO UN ACCESS EntitatJPA entitatJPA =
+             * entitatEjb.findByCodi(sesionHttp.getEntitat());
+             * 
+             * accesLogicaEjb.crearAcces(usuarioAutenticado.getUsuarioClave(),
+             * TIPUS_ACCES_PLUGIN, entitatJPA.getEntitatID(), pluginID, new Timestamp(new
+             * Date().getTime()), LocaleContextHolder.getLocale().getLanguage(),
+             * InetAddress.getLocalHost().getHostAddress(), false);
+             */
+            return processExceptionHtmlMav(e, request, response);
         }
         
-        
-        log.info(" FINAL de showPlugin !!!!!!!!!!!");
-
-        return mav;
+       
 
     }
 
-    private String startPublicSignatureProcess(HttpServletRequest request, HttpServletResponse response, Long pluginID,
-            String administrationID, String baseFront, UsuarioClave usuarioClave, String pluginParameter)
-            throws Exception, I18NException {
+    private String startPublicSignatureProcess(HttpServletRequest request,
+            HttpServletResponse response, Long pluginID, String administrationID, String baseFront,
+            UsuarioClave usuarioClave, String pluginParameter) throws Exception, I18NException {
 
         String urlToShowPluginPage = null;
         EntitatJPA entitatJPA = entitatEjb.findByCodi(sesionHttp.getEntitat());
 
 //        try {
 
+        // /pluginfront/showplugin/registre32/ca/p/GOIB-E-155%2F2021
         log.info("startPublicSignatureProcess => pluginParameter: ]" + pluginParameter + "[");
 
         String context = AbstractCarpetaFrontModuleController.PUBLIC_CONTEXTWEB;
-        
+
         if (administrationID == null) {
             // XYZ ZZZ
             administrationID = "12345678Z";
         }
-        
 
         String administrationIDEncriptat = HibernateFileUtil.encryptString(administrationID);
 
@@ -259,17 +313,19 @@ public class PluginFrontController extends CommonFrontController {
         } else {
             urlToShowPluginPage = baseFront + context + "/showplugin/" + pluginID + "/"
                     + response.encodeURL(administrationIDEncriptat) + "/"
-                    + Base64.getUrlEncoder().encodeToString(baseFront.getBytes()) + "/p/" + pluginParameter;
+                    + Base64.getUrlEncoder().encodeToString(baseFront.getBytes()) + "/p/"
+                    + pluginParameter;
         }
 
         log.info(" urlToShowPluginPage => " + urlToShowPluginPage);
 
         try {
             // ACCESS
-            accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_PLUGIN, entitatJPA.getEntitatID(), pluginID,
-                    new Timestamp(new Date().getTime()), LocaleContextHolder.getLocale().getLanguage(),
+            accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_PLUGIN, entitatJPA.getEntitatID(),
+                    pluginID, new Timestamp(new Date().getTime()),
+                    LocaleContextHolder.getLocale().getLanguage(),
                     InetAddress.getLocalHost().getHostAddress(), true);
-        }catch(Exception e){
+        } catch (Exception e) {
             log.error("S'ha produit un error creant un Accés: " + e.getMessage(), e);
         }
 
@@ -290,8 +346,9 @@ public class PluginFrontController extends CommonFrontController {
     }
 
     @RequestMapping(value = { "/pluginicon/{pluginid}/{idioma}" }, method = RequestMethod.GET)
-    public void getPluginIcon(@PathVariable("pluginid") Long pluginid, @PathVariable("idioma") String idioma,
-            HttpServletRequest request, HttpServletResponse response) throws Exception, I18NException {
+    public void getPluginIcon(@PathVariable("pluginid") Long pluginid,
+            @PathVariable("idioma") String idioma, HttpServletRequest request,
+            HttpServletResponse response) throws Exception, I18NException {
 
         try {
 
@@ -306,7 +363,8 @@ public class PluginFrontController extends CommonFrontController {
 
             if (fi != null) {
                 response.setContentType(fi.getMime());
-                response.setHeader("Content-Disposition", "attachment; filename=\"" + fi.getName() + "\"");
+                response.setHeader("Content-Disposition",
+                        "attachment; filename=\"" + fi.getName() + "\"");
                 response.setContentLength((int) fi.getData().length);
 
                 response.getOutputStream().write(fi.getData());
@@ -332,8 +390,9 @@ public class PluginFrontController extends CommonFrontController {
             // String codiEntitat = sesionHttp.getEntitat();
             Long entitatID = sesionHttp.getEntitatID();
 
-            final boolean autenticat = true; 
-            List<PluginInfo> pluginsEntitat = utilsEjb.getFrontPlugins(entitatID, lang, seccioID, autenticat);
+            final boolean autenticat = true;
+            List<PluginInfo> pluginsEntitat = utilsEjb.getFrontPlugins(entitatID, lang, seccioID,
+                    autenticat);
 
             // Passar JSON de pluginsEntitat
             Gson gson = new Gson();
@@ -354,7 +413,8 @@ public class PluginFrontController extends CommonFrontController {
 
     // XYZ ZZZ
     @RequestMapping(value = "/veureplugins", method = RequestMethod.GET)
-    public void getAllPlugins(HttpServletRequest request, HttpServletResponse response) throws I18NException {
+    public void getAllPlugins(HttpServletRequest request, HttpServletResponse response)
+            throws I18NException {
 
         getAllPlugins(request, response, null);
 

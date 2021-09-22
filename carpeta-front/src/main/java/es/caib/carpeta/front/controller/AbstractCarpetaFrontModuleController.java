@@ -8,6 +8,7 @@ import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -68,11 +69,16 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
     @EJB(mappedName = LogCarpetaLogicaService.JNDI_NAME)
     protected LogCarpetaLogicaService logCarpetaLogicaEjb;
 
-    @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}/{urlBase}")
+    @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}/{urlBase}")  // 
     public ModelAndView showCarpetaFrontModuleWithUrlBase(HttpServletRequest request, HttpServletResponse response,
             @PathVariable("pluginID") Long pluginID,
             @PathVariable("administrationIDEncriptat") String administrationIDEncriptat,
-            @PathVariable("urlBase") String urlBase) throws Exception {
+            @PathVariable("urlBase") String urlBase
+            ) throws Exception {
+        
+        
+        
+
 
         log.info("showCarpetaFrontModule:: pluginID => " + pluginID);
         log.info("showCarpetaFrontModule:: administrationIDEncriptat => " + administrationIDEncriptat);
@@ -87,15 +93,41 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         return showCarpetaFrontModule(request, response, pluginID, administrationIDEncriptat, parameter);
     }
 
-    @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}/{urlBase}/p/{parameter}")
+    @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}/{urlBase}/p/**") // {parameter}")
     public ModelAndView showCarpetaFrontModuleWithUrlBaseAndParameter(HttpServletRequest request,
             HttpServletResponse response, @PathVariable("pluginID") Long pluginID,
             @PathVariable("administrationIDEncriptat") String administrationIDEncriptat,
-            @PathVariable("urlBase") String urlBase, @PathVariable("parameter") String parameter) throws Exception {
+            @PathVariable("urlBase") String urlBase
+            //@PathVariable("parameter") String parameter
+            ) throws Exception {
 
+        
+        
+        
+        
+        
+        
+        String fullPath = (String) request.getAttribute(
+                HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+        
+        
+        log.info("showCarpetaFrontModuleWithUrlBaseAndParameter FULL " + fullPath);
+        
+        String parameter = fullPath.substring(fullPath.lastIndexOf("/p/") + "/p/".length());
+        
+        log.info("showCarpetaFrontModuleWithUrlBaseAndParameter PARAMETER " + fullPath);
+        
         log.info("showCarpetaFrontModule:: pluginID => " + pluginID);
         log.info("showCarpetaFrontModule:: administrationIDEncriptat => " + administrationIDEncriptat);
         log.info("showCarpetaFrontModule:: urlBase => " + urlBase);
+        
+        
+        
+        
+        
+        
+        
+        
 
         String urlBaseDec = new String(Base64.getUrlDecoder().decode(urlBase), "utf-8");
 

@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.util.UrlPathHelper;
 
 import java.util.Locale;
 
@@ -46,8 +47,6 @@ public class CarpetaFrontConfig extends WebMvcConfigurerAdapter {
         return firewall;
     }
 
-
-
     // JSP
     @Bean
     public InternalResourceViewResolver getInternalResourceViewResolver() {
@@ -79,8 +78,20 @@ public class CarpetaFrontConfig extends WebMvcConfigurerAdapter {
     public LocaleChangeInterceptor getLocaleInterceptor(){
         LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
         interceptor.setParamName("lang");
-        System.out.println("interceptor: " + interceptor.getParamName());
+        //System.out.println("interceptor: " + interceptor.getParamName());
         return interceptor;
+    }
+    
+
+    
+    @Override
+    public void configurePathMatch(PathMatchConfigurer configurer) {
+        
+        System.setProperty("org.apache.tomcat.util.buf.UDecoder.ALLOW_ENCODED_SLASH", "true");
+        
+        UrlPathHelper urlPathHelper = new UrlPathHelper();
+        urlPathHelper.setUrlDecode(false);
+        configurer.setUrlPathHelper(urlPathHelper);
     }
 
     @Override
