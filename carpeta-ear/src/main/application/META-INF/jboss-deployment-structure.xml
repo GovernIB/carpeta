@@ -7,16 +7,16 @@
 	<deployment>
 		<dependencies>
 			<module name="org.hibernate"/>
-			<module name="org.keycloak.keycloak-core"/>
-			<module name="org.keycloak.keycloak-adapter-spi"/>
-			<module name="org.keycloak.keycloak-adapter-subsystem"/>
-			<module name="org.keycloak.keycloak-authz-client"/>
-			<module name="org.keycloak.keycloak-common"/>
-			<module name="org.keycloak.keycloak-jboss-adapter-core"/>
-			<module name="org.keycloak.keycloak-undertow-adapter"/>
-			<module name="org.keycloak.keycloak-wildfly-adapter"/>
-			<module name="org.keycloak.keycloak-wildfly-elytron-oidc-adapter"/>
-			<module name="org.keycloak.keycloak-wildfly-subsystem"/>
+			<module name="org.keycloak.keycloak-core" optional="TRUE"/>
+			<module name="org.keycloak.keycloak-adapter-spi" optional="TRUE"/>
+			<module name="org.keycloak.keycloak-adapter-subsystem" optional="TRUE"/>
+			<module name="org.keycloak.keycloak-authz-client" optional="TRUE"/>
+			<module name="org.keycloak.keycloak-common" optional="TRUE"/>
+			<module name="org.keycloak.keycloak-jboss-adapter-core" optional="TRUE"/>
+			<module name="org.keycloak.keycloak-undertow-adapter" optional="TRUE"/>
+			<module name="org.keycloak.keycloak-wildfly-adapter" optional="TRUE"/>
+			<module name="org.keycloak.keycloak-wildfly-elytron-oidc-adapter" optional="TRUE"/>
+			<module name="org.keycloak.keycloak-wildfly-subsystem" optional="TRUE"/>
 		</dependencies>
 	</deployment>
 </jboss-deployment-structure>
