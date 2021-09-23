@@ -1081,6 +1081,9 @@ input.form-control, select.form-control {
 .taula-mobil{
 	margin-top: 4em!important;
 }
+.dataTables_length, .dataTables_info, .dataTables_filter, .dataTables_paginate{
+	font-size: 0.7em !important;
+}
 }
 
 /*Se aplican cuando el width es menor que 480*/
