@@ -134,7 +134,7 @@ class IniciPublic extends Component {
                             </p>
 
                             <h3 className="apartat titol h5">{t('tramitacioAnonimaTitol')}</h3>
-                            <p className="lh15 pb-3 subtitolSuperior" id="reprendreTramitacio"><a href={baseURL + '/#/publicmoduls/reprendretramit'} id="tramitacioModalBtn" tabIndex="504" aria-labelledby="reprendreTramitacio"><span
+                            <p className="lh15 pb-3 subtitolSuperior" id="reprendreTramitacio"><a href={baseURL + '/#/publicmodul/reprendretramit'} id="tramitacioModalBtn" tabIndex="504" aria-labelledby="reprendreTramitacio"><span
                                 className="oi oi-external-link"/>{t('tramitacioEnllaz')}</a></p>
 
                             <h3 className="apartat titol h5">{t('paginaIniciProblemes')}</h3>
