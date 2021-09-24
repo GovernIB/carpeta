@@ -33,22 +33,22 @@ class DadesPersonals extends Component {
                     <div className="col-md-12 border-0 float-left p-0">
                         <dl className="row">
                             <div class="mt-3">
-                                <dt className="col-sm-3">{t('dadespersonalsNom')}</dt>
+                                <dt className="col-sm-3 mr-2">{t('dadespersonalsNom')}</dt>
                                 <dd className="col-sm-7">{userData.representative.name}</dd>
                             </div>
                             
                             <div class="mt-3">
-                                <dt className="col-sm-3">{t('dadespersonalsLlinatge1')}</dt>
+                                <dt className="col-sm-3 mr-2">{t('dadespersonalsLlinatge1')}</dt>
                                 <dd className="col-sm-7">{userData.representative.surname1}</dd>
                             </div>
                             
                             <div class="mt-3">
-                                <dt className="col-sm-3">{t('dadespersonalsLlinatge2')}</dt>
+                                <dt className="col-sm-3 mr-2">{t('dadespersonalsLlinatge2')}</dt>
                                 <dd className="col-sm-7">{userData.representative.surname2}</dd>
                             </div>
 
                             <div class="mt-3">
-                                <dt className="col-sm-3">{t('dadespersonalsDni')}</dt>
+                                <dt className="col-sm-3 mr-2">{t('dadespersonalsDni')}</dt>
                                 <dd className="col-sm-7">{userData.representative.administrationID}</dd>
                             </div>
                         </dl>
