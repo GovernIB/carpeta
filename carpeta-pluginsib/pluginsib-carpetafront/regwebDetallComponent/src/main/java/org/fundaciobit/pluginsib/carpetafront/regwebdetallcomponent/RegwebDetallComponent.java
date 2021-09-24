@@ -19,8 +19,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -192,7 +190,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
             response.setCharacterEncoding("utf-8");
             response.setContentType("text/html");
 
-            String numeroRegistroFormateado = checkRegWebNumberFormat(request.getParameter("numeroRegistroFormateado"));
+            String numeroRegistroFormateado = request.getParameter("numeroRegistroFormateado");
 
             if (codificat) {
                 numeroRegistroFormateado = new String(Base64.getUrlDecoder().decode(numeroRegistroFormateado));
@@ -229,44 +227,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 
     }
     
-    
-    
-    
-    protected String checkRegWebNumberFormat(String numeroFormateado) {
-    	
-    	try {
-    		
-	    	// Patró codi correcte REGWEB
-	    	String patro = getPropertyRequired(REGWEB32_PROPERTY_BASE + "regex.pattern");
-	    	
-	    	if (patro != null) {
-	    		
-	    		final Pattern pattern = Pattern.compile(patro);
-	            final Matcher matcher = pattern.matcher(numeroFormateado);
-	            
-	            if (!matcher.matches()) {
-	            	
-	            	log.info("checkRegWebNumberFormat => change " + numeroFormateado);
-	            	
-	            	final Pattern urlRegex = Pattern.compile(getPropertyRequired(REGWEB32_PROPERTY_BASE + "regex.url"));
-	            	final String subst = getPropertyRequired(REGWEB32_PROPERTY_BASE + "regex.replace");
-	            	
-	            	final Matcher matcherReplace = urlRegex.matcher(numeroFormateado);
-	            	
-	            	return matcherReplace.replaceAll(subst);
-	            }
-	    	}
-	    	
-    	} catch (Exception e) { }
-    	
-    	return numeroFormateado;
-    	
-    }
-    
-
-    
-
-    
+        
     public String getDetallDeRegistrePage(String absolutePluginRequestPath, String numeroRegistroFormateado,
             String administrationID, Locale locale, String error) throws Exception {
 
