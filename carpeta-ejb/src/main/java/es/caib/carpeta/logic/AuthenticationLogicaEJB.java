@@ -22,9 +22,7 @@ import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.model.fields.EntitatFields;
 
 import java.io.ByteArrayOutputStream;
-import java.io.PrintWriter;
 import java.io.StringReader;
-import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;

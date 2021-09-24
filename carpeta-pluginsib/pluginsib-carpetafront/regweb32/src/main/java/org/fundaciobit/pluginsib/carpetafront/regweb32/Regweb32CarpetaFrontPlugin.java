@@ -440,7 +440,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             result = getRegistres(userData.getAdministrationID(), entidad, formNumero,
                     formDataInici, formDataFi, formEstat, pageNumber, locale);
 
-            // @SuppressWarnings("unchecked")
+            //@SuppressWarnings("unchecked")
             registres = (List<AsientoWs>) (List<?>) result.getResults();
             totalResults = result.getTotalResults();
             map.put("cerca", "true");
