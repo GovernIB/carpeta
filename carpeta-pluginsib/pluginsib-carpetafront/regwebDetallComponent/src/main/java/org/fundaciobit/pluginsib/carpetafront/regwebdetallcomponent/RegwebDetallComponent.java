@@ -93,23 +93,19 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 
         try {
 
-            if (query.startsWith(DETALL_REGISTRE_PAGE)) {
-
+            if (query.startsWith(DETALL_REGISTRE_CODIFICAT_PAGE)) {
+                detallDeRegistreCodificat(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
+                        userData, administrationEncriptedID,  locale, isGet, logCarpeta);
+            } else if (query.startsWith(DETALL_REGISTRE_PAGE)) {
                 detallDeRegistre(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                         userData, administrationEncriptedID,  locale, isGet, logCarpeta);
-
-            } else if (query.startsWith(JUSTIFICANT_REGISTRE_PAGE)) {
-
+            }  else if (query.startsWith(JUSTIFICANT_REGISTRE_PAGE)) {
                 justificantDeRegistre(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                        userData, administrationEncriptedID, locale, isGet, logCarpeta);
-                
+                        userData, administrationEncriptedID, locale, isGet, logCarpeta);               
             } else if (query.startsWith(ANNEXE_REGISTRE_PAGE)) {
-
                 annexeDeRegistre(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                         userData, administrationEncriptedID, locale, isGet, logCarpeta);
-
             } else {
-
                 super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request,
                         response, userData, administrationEncriptedID, locale, isGet, logCarpeta);
             }
@@ -160,8 +156,80 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
     // ------------------- DETALL DE REGISTRE -----------------------------------------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
+    
+    
+    protected static final String DETALL_REGISTRE_CODIFICAT_PAGE = "detallRegistreCodificat";
+    
+    
+    public void detallDeRegistreCodificat(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID,  Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
+        final boolean codificat = true; 
+        internalDetallDeRegistre(absolutePluginRequestPath, relativePluginRequestPath, query,
+                request, response, userData,
+                administrationEncriptedID,  locale, isGet, logCarpeta, codificat);      
+    }
+    
 
     protected static final String DETALL_REGISTRE_PAGE = "detallRegistre";
+
+    public void detallDeRegistre(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID,  Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
+        final boolean codificat = false; 
+        internalDetallDeRegistre(absolutePluginRequestPath, relativePluginRequestPath, query,
+                request, response, userData,
+                administrationEncriptedID,  locale, isGet, logCarpeta, codificat);
+    }
+        
+        public void internalDetallDeRegistre(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+                HttpServletRequest request, HttpServletResponse response, UserData userData,
+                String administrationEncriptedID,  Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta,
+                boolean codificat) {
+
+        try {
+
+            response.setCharacterEncoding("utf-8");
+            response.setContentType("text/html");
+
+            String numeroRegistroFormateado = checkRegWebNumberFormat(request.getParameter("numeroRegistroFormateado"));
+
+            if (codificat) {
+                numeroRegistroFormateado = new String(Base64.getUrlDecoder().decode(numeroRegistroFormateado));
+                
+            }
+            
+            
+            String webpage = getDetallDeRegistrePage(absolutePluginRequestPath, numeroRegistroFormateado,
+                    userData.getAdministrationID(), locale, "");
+
+            try {
+                response.getWriter().println(webpage);
+                response.flushBuffer();
+            } catch (IOException e) {
+                log.error("Error obtening writer: " + e.getMessage(), e);
+            }
+
+        } catch (Exception e) {
+
+            try{
+                
+                StringBuilder peticio = new StringBuilder();
+                peticio.append("classe: ").append(getClass().getName()).append("\n");
+                peticio.append("Error: " + e.getMessage()).append("\n");
+                peticio.append("Cause: " + e.getCause());
+                logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error plugin", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error plugin"); 
+                
+                errorPage(e.getLocalizedMessage(), e, request, response, absolutePluginRequestPath, locale);
+                log.error("Error detall registre: " + e.getMessage(), e);
+            }catch(Exception e2){
+                log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
+            }
+        }
+
+    }
+    
+    
     
     
     protected String checkRegWebNumberFormat(String numeroFormateado) {
@@ -196,45 +264,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
     }
     
 
-    public void detallDeRegistre(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
-            HttpServletRequest request, HttpServletResponse response, UserData userData,
-            String administrationEncriptedID,  Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
-
-        try {
-
-            response.setCharacterEncoding("utf-8");
-            response.setContentType("text/html");
-
-            String numeroRegistroFormateado = checkRegWebNumberFormat(request.getParameter("numeroRegistroFormateado"));
-
-            String webpage = getDetallDeRegistrePage(absolutePluginRequestPath, numeroRegistroFormateado,
-                    userData.getAdministrationID(), locale, "");
-
-            try {
-                response.getWriter().println(webpage);
-                response.flushBuffer();
-            } catch (IOException e) {
-                log.error("Error obtening writer: " + e.getMessage(), e);
-            }
-
-        } catch (Exception e) {
-
-            try{
-            	
-            	StringBuilder peticio = new StringBuilder();
-                peticio.append("classe: ").append(getClass().getName()).append("\n");
-                peticio.append("Error: " + e.getMessage()).append("\n");
-                peticio.append("Cause: " + e.getCause());
-                logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error plugin", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error plugin"); 
-            	
-                errorPage(e.getLocalizedMessage(), e, request, response, absolutePluginRequestPath, locale);
-                log.error("Error detall registre: " + e.getMessage(), e);
-            }catch(Exception e2){
-                log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
-            }
-        }
-
-    }
+    
 
     
     public String getDetallDeRegistrePage(String absolutePluginRequestPath, String numeroRegistroFormateado,
