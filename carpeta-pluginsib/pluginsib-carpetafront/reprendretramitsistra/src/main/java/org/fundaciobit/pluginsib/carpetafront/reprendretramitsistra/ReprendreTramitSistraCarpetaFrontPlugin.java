@@ -4,6 +4,7 @@ import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
+import es.caib.carpeta.pluginsib.carpetafront.api.TitlesInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 
 import es.caib.zonaper.ws.v2.services.BackofficeFacade;
@@ -11,10 +12,13 @@ import es.caib.zonaper.ws.v2.services.BackofficeFacadeService;
 import org.apache.commons.io.IOUtils;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
+import com.google.gson.Gson;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.BindingProvider;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.HashMap;
@@ -68,6 +72,27 @@ public class ReprendreTramitSistraCarpetaFrontPlugin extends AbstractCarpetaFron
     public boolean isPublic() {
         return true;
     }
+    
+    
+    // ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
+    // ------------------- CACHE DE TITOLS i SUBTITOLS ----------------------------
+    // ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
+
+    
+    private TitlesInfo titlesInfo = null;;
+    
+
+    @Override
+    public void setTitlesInfo(TitlesInfo titlesInfo) {
+        this.titlesInfo = titlesInfo;
+    }
+    
+    @Override
+    public TitlesInfo getTitlesInfo() {
+        return titlesInfo;
+    }
 
     @Override
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
@@ -80,13 +105,18 @@ public class ReprendreTramitSistraCarpetaFrontPlugin extends AbstractCarpetaFron
         String startURL;
 
         if (parameter == null) {
-            startURL = absolutePluginRequestPath + "/" + SHOW_FORM_TRAMITID;
+            startURL = (isReactComponent()) ? absolutePluginRequestPath + "/" + INDEX_HTML_PAGE : absolutePluginRequestPath + "/" + SHOW_FORM_TRAMITID;
         } else {
             startURL = absolutePluginRequestPath + "/" + TRAMITACIO_ANONIMA_PARAMETRE + "/" + parameter;
         }
 
         log.info(" getStartUrl( ); => " + startURL);
         return startURL;
+    }
+    
+    @Override
+    public boolean isReactComponent() {
+    	return true;
     }
 
     @Override
@@ -102,18 +132,165 @@ public class ReprendreTramitSistraCarpetaFrontPlugin extends AbstractCarpetaFron
 
             mostrarForm(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
                     administrationEncriptedID, locale, isGet);
-
-        } else if (query.startsWith(TRAMITACIO_ANONIMA_PARAMETRE)) {
-
+            
+        } else if (query.startsWith(INDEX_HTML_PAGE)) {
+        	        	
+        	index(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
+        	
+        } else if (query.startsWith(REACT_JS_PAGE)) {
+        	
+            reactjs(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
+         
+        } else if (query.startsWith(URL_REST_SERVICE)) {
+        	
+        	consultaClau(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
+        
+    	} else if (query.startsWith(TRAMITACIO_ANONIMA_PARAMETRE)) {
+    		
             tramitacioAnonimaParametre(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                     userData, administrationEncriptedID, locale, isGet);
 
         } else {
+        	
+        	System.out.println("> > > > > > > > ReprendreTramitSistra :: ELSE");
 
             super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                     userData, administrationEncriptedID, locale, isGet, logCarpeta);
         }
 
+    }
+    
+    
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // -------------------- INDEX -----------------------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+    protected static final String INDEX_HTML_PAGE = "index.html";
+
+    public void index(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet) {
+
+        try {
+
+            response.setContentType("text/html");
+
+            String resource = "/webpage/index.html";
+
+            response.setHeader("Content-Disposition",
+                    "inline;filename=\"" + java.net.URLEncoder.encode(INDEX_HTML_PAGE, "UTF-8") + "\"");
+
+            response.setCharacterEncoding("utf-8");
+
+            InputStream input = this.getClass().getResourceAsStream(resource);
+
+            String plantilla = IOUtils.toString(input, "UTF-8");
+
+            Map<String, Object> map = new HashMap<String, Object>();
+
+            Gson json = new Gson();
+
+            TitlesInfo titles = getTitlesInfo();
+
+            map.put("titles", json.toJson(titles.getTitlesByLang()));
+
+            map.put("subtitles", json.toJson(titles.getSubtitlesByLang()));
+
+            log.info("absolutePluginRequestPath ==> " + absolutePluginRequestPath);
+
+            String pathtojs = absolutePluginRequestPath + "/" + REACT_JS_PAGE;
+
+            map.put("pathtojs", pathtojs);
+
+            String pathtoservei = absolutePluginRequestPath + "/" + URL_REST_SERVICE;
+
+            map.put("pathtoservei", pathtoservei);
+
+            String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
+
+            try {
+                response.getWriter().println(generat);
+                response.flushBuffer();
+            } catch (IOException e) {
+                log.error("Error obtening writer: " + e.getMessage(), e);
+            }
+
+        } catch (Exception e) {
+            // XYZ ZZZ
+            log.error("Error generant pàgina bàsica: " + e.getMessage(), e);
+        }
+
+    }
+    
+    
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // ------------------- CONSULTA REST ----------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    
+    protected static final String URL_REST_SERVICE = "consultaClau";
+    
+    public void consultaClau(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, Boolean isGet) {
+
+        String clau = request.getParameter("clau");
+        
+        try {
+
+            Map<String, String> dades = new HashMap<String, String>();
+
+            if (clau == null || clau.isEmpty()) {
+            	log.info("Clau null");
+                dades.put("error", getTraduccio("error.noclau", locale) );
+            } else {
+            	log.info("Consulta  resultats a sistra per la clau:" + clau);
+            	
+            	BackofficeFacade backofficeFacade = getBackofficeFacade();
+                String urlAnonimo = backofficeFacade.obtenerUrlAccesoAnonimo(clau);
+                if (urlAnonimo == null) {
+                	log.info("UrlAnonimo is NULL");
+                	dades.put("error", getTraduccio("error.noclau", locale) );
+                }else {
+                	log.info("UrlAnonimo: " + urlAnonimo);
+                }
+                dades.put("id", clau);
+                dades.put("url", urlAnonimo);
+            }
+            
+            
+            response.setContentType("application/json");
+            response.setCharacterEncoding("utf-8");
+            
+            Gson json = new Gson();
+            String generat = json.toJson(dades);
+            
+            log.info("Generat: " + generat);
+            
+            try {
+                response.getWriter().println(generat);
+                response.flushBuffer();
+                
+                // mav = new ModelAndView(new RedirectView(urlToShowPluginPage));
+                // return mav;
+                
+            } catch (IOException e) {
+                log.error("Error obtening writer: " + e.getMessage(), e);
+            }
+
+        } catch (Exception e) {
+            // XYZ ZZZ
+            log.error("Error generant pàgina bàsica: " + e.getMessage(), e);
+        }
+            
+
+        
     }
 
     // --------------------------------------------------------------------------------------
@@ -239,6 +416,48 @@ public class ReprendreTramitSistraCarpetaFrontPlugin extends AbstractCarpetaFron
         internalMostrarForm(absolutePluginRequestPath, request, response, administrationEncriptedID, locale, isGetNew,
                 clau);
     }
+
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // ------------------- JAVASCRIPT REACT ----------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+    protected static final String REACT_JS_PAGE = "reactjs_main.js";
+
+    public void reactjs(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet) {
+
+        try {
+
+            response.setContentType("application/javascript");
+
+            response.setHeader("Content-Disposition",
+                    "inline;filename=\"" + java.net.URLEncoder.encode(REACT_JS_PAGE, "UTF-8") + "\"");
+
+            String resource = "/webpage/reactjs_main.js";
+
+            response.setCharacterEncoding("utf-8");
+
+            InputStream input = this.getClass().getResourceAsStream(resource);
+
+            String plantilla = IOUtils.toString(input, "UTF-8");
+
+            try {
+                response.getWriter().println(plantilla);
+                response.flushBuffer();
+            } catch (IOException e) {
+                log.error("Error obtening writer: " + e.getMessage(), e);
+            }
+
+        } catch (Exception e) {
+            log.error("Error llistant registres XYZ ZZZ: " + e.getMessage(), e);
+        }
+
+    }
+
+    
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
