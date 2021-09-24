@@ -977,6 +977,9 @@ thead>tr>th.sorting {
 	float: none!important;
 	width: 95%;
 }
+.imc-peu-govern, .imc-peu-opcions, .imc-peu-xarxes {
+	width: 100%!important;
+}
 }
 
 /*Se aplican cuando el width es menor que 692*/
@@ -1265,7 +1268,7 @@ body {
 }
 
 /* GENERAL */
-.close { font-size: 2em !important; }
+.close { font-size: 2em !important; line-height: 0.7!important;}
 .btn { font-size: 1em !important; }
 .table {font-size: 0.8em !important; }
 .pagination-sm .page-link { font-size: 0.875em !important; }
