@@ -241,7 +241,7 @@ class MenuDesllisant extends Component {
 								<button title={s.missatge} className={"botoMenu alert" + s.gravetat + "menu"}
 										onClick={(event) => this.mostrarPlugin(s.gravetat, s.missatge, s.context, s.tipus)} tabIndex={208+i} aria-labelledby={"botoMenu"+i}>
 									<img src={urlBase + s.urllogo} className="imc-icona" title="" alt={s.nom} />
-									<span id={"botoMenu"+i}>{s.nom} </span>
+									<span id={"botoMenu"+i} className="ml-2">{s.nom} </span>
 								</button>
 							</li>)
 						break;
@@ -250,7 +250,7 @@ class MenuDesllisant extends Component {
 						allItems.push(<li key={i}>
 							<a href={s.url} title={s.nom} target="_blank" tabIndex={208+i} aria-labelledby={"botoMenu"+i}>
 								<img src={s.urllogo} title="" alt={s.nom} className="imc-icona iconaEnllas"/>
-								<span id={"botoMenu"+i}>{s.nom}</span>
+								<span id={"botoMenu"+i} className="ml-2">{s.nom}</span>
 							</a>
 						</li>);
 						break;
@@ -259,7 +259,7 @@ class MenuDesllisant extends Component {
 						allItems.push(<li key={i}>
 							<Link to={Constants.SECCIO_PATH + s.context} tabIndex={208+i} aria-labelledby={"botoMenu"+i}>
 								<img src={s.urllogo} title="" alt={s.descripcio} className="imc-icona iconaEnllas"/>
-								<span id={"botoMenu"+i}>{s.nom} </span>
+								<span id={"botoMenu"+i} className="ml-2">{s.nom} </span>
 							</Link>
 						</li>)
 						break;
@@ -268,7 +268,7 @@ class MenuDesllisant extends Component {
 						allItems.push(<li key={i}>
 							<a href={s.url} target="_blank" title={s.nom} tabIndex={208+i} aria-labelledby={"botoMenu"+i}>
 								<img src={s.urllogo} title="" alt={s.nom} className="imc-icona iconaEnllas"/>
-								<span id={"botoMenu"+i}>{s.nom} </span>
+								<span id={"botoMenu"+i} className="ml-2">{s.nom} </span>
 							</a>
 						</li>);
 						break;
