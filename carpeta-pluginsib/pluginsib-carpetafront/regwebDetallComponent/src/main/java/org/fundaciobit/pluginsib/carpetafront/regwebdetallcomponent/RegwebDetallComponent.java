@@ -195,8 +195,15 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
             String numeroRegistroFormateado = checkRegWebNumberFormat(request.getParameter("numeroRegistroFormateado"));
 
             if (codificat) {
-                numeroRegistroFormateado = new String(Base64.getUrlDecoder().decode(numeroRegistroFormateado));
-                
+                try {
+                  numeroRegistroFormateado = new String(Base64.getUrlDecoder().decode(numeroRegistroFormateado));
+                } catch(IllegalArgumentException iae) {
+                    // "El numero de Registre (" +numeroRegistroFormateado 
+                    // ") no està codificat correctament o el parametre de l'adreça web no és complet: " + iae.getMessage()
+                    String msg = getTraduccio("registro.parametro.errorformato", locale, numeroRegistroFormateado, iae.getMessage());
+                    errorPage(msg, iae, request, response, absolutePluginRequestPath, locale);
+                    return;
+                }
             }
             
             
