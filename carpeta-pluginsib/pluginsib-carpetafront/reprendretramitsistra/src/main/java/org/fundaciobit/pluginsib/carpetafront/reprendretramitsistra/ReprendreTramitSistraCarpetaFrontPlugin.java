@@ -155,8 +155,6 @@ public class ReprendreTramitSistraCarpetaFrontPlugin extends AbstractCarpetaFron
 
         } else {
         	
-        	System.out.println("> > > > > > > > ReprendreTramitSistra :: ELSE");
-
             super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                     userData, administrationEncriptedID, locale, isGet, logCarpeta);
         }
