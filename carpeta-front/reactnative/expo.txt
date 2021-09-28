@@ -23,5 +23,10 @@ https://code.tutsplus.com/es/tutorials/easier-react-native-development-with-expo
  (5) expo build:ios  ???
  
  
+ NOTIFICACIONS:
+ 
+ (1) Cercar log ExponentPushToken[XXXXXXXXXXXXXXXXXXX] a la consola d'execució.
+ (2) Anar a https://expo.dev/notifications i omplir 'To' amb el valor del punt (1). També omplir Message title i Message Body. 
+ (3) Pitjar "Send a Notification". Hauria d'apareixer una notificació al dispositiu
  
  
