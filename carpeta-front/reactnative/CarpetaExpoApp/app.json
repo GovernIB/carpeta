@@ -26,7 +26,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "es.caib.carpeta.carpetaapp"
+      "bundleIdentifier": "es.caib.carpeta.carpetaapp",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
