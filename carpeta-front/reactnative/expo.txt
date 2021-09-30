@@ -30,3 +30,7 @@ https://code.tutsplus.com/es/tutorials/easier-react-native-development-with-expo
  (3) Pitjar "Send a Notification". Hauria d'apareixer una notificació al dispositiu
  
  
+ NOTIFICACIONS IOS ?????
+ https://www.daily-coding.net/posts/expo-4-steps-to-run-push-on-ios-simulator
+ 
+ 

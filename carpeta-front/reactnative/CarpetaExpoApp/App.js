@@ -70,6 +70,7 @@ class App extends Component {
 
   componentDidMount() {
     registerForPushNotificationsAsync();
+
     Notifications.addNotificationReceivedListener(this._handleNotification);
 
     Notifications.addNotificationResponseReceivedListener(
