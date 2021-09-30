@@ -14,6 +14,7 @@ import { withTranslation } from "react-i18next";
 import { Router } from "./src/components/Routing";
 import Index from "./src/Index";
 import * as Notifications from "expo-notifications";
+//import { Notifications } from 'expo';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -26,26 +27,39 @@ Notifications.setNotificationHandler({
 //metodo que genera y registra el token unico
 async function registerForPushNotificationsAsync() {
   let token;
-  if (!Constants.isDevice && Platform.OS === "ios") {
-    // FIXME:
-    alert("Must use physical device for Push Notifications in IOS");
-    return;
-  } else {
-    const { status: existingStatus } =
+  
+  const { status: existingStatus } =
       await Notifications.getPermissionsAsync();
     let finalStatus = existingStatus;
     if (existingStatus !== "granted") {
       const { status } = await Notifications.requestPermissionsAsync();
       finalStatus = status;
     }
+    
     if (finalStatus !== "granted") {
       // FIXME:
-      alert("Failed to get push token for push notification!");
+      alert("Failed to get push token for push notification: " + finalStatus);
       return;
     }
-    token = (await Notifications.getExpoPushTokenAsync()).data;
-    console.log(token);
+    
 
+  
+  /* if (!Constants.isDevice && Platform.OS === "ios") {
+    // FIXME:
+    alert("Must use physical device for Push Notifications in IOS");
+    return;
+  }  else  */ {
+    
+   
+   var pushToken;
+   try {
+     pushToken =  await Notifications.getExpoPushTokenAsync();
+   } catch( e ) {
+      alert("Error fent Notifications.getExpoPushTokenAsync(): " + e);
+      return;
+   }
+   token = pushToken.data;
+    console.log(token);
     if (Platform.OS === "android") {
       Notifications.setNotificationChannelAsync("default", {
         name: "default",
