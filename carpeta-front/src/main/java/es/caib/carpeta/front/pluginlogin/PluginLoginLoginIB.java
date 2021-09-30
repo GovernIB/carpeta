@@ -94,7 +94,7 @@ public class PluginLoginLoginIB implements IPluginLogin {
         param.setQaa(Integer.parseInt(NIVELL_QAA));
         param.setMetodosAutenticacion(METODES_AUTENTICACIO);
         param.setAplicacion(APLICACIO_DESCRIPCIO);
-
+        param.setInicioClaveAutomatico(true);
         /*
          * XYZ ZZZ Jersey LoginIBApiJersey api = getLoginApiJersey(); String url =
          * api.login(param);
