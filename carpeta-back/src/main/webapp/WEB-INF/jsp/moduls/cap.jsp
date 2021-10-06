@@ -181,10 +181,14 @@
                             href="<c:url value="/canviarPipella/sobre"></c:url>"> <i
                             class="fas fa-info"></i> <fmt:message key="menu.sobre" /> </a>
 
+<% if (LoginInfo.getInstance().getUsuariPersona() != null) { %>
 						<a class="dropdown-item"
 							href="<c:url value="/common/usuari/"></c:url><%=LoginInfo.getInstance().getUsuariPersona().getUsuariID()%>/edit"> <i
 							class="fas fa-cog"></i> <fmt:message key="configuracio" />
-						</a> <a class="dropdown-item" href="<c:url value="/logout"></c:url>">
+                        </a> 
+<% } %>
+                            
+						<a class="dropdown-item" href="<c:url value="/logout"></c:url>">
 							<i class="fas fa-sign-out-alt"></i> <fmt:message key="sortir" />
 						</a>
 
