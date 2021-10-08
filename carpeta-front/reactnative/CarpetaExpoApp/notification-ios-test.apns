@@ -1,0 +1,10 @@
+{
+    "Simulator Target Bundle": "es.caib.carpeta.carpetaapp",
+    "aps": {
+        "alert": {
+            "title": "EXPO iOS Simulator PUSH",
+            "body": "It works!"
+        }
+    },
+    "experienceId": "@carpeta/CarpetaApp",
+}

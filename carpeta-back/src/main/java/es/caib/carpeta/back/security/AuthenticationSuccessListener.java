@@ -2,6 +2,7 @@ package es.caib.carpeta.back.security;
 
 import es.caib.carpeta.back.preparer.BasePreparer;
 import es.caib.carpeta.back.utils.PluginUserInformationUtils;
+import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.ejb.PropietatGlobalService;
 import es.caib.carpeta.logic.AuthenticationLogicaService;
@@ -185,14 +186,12 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
             log.info(" La persona amb username  '" + username + "' no esta registrada !!!!");
             // Revisar si és un Administrador que entra per primera vegada
 
-            {
+            
                 try {
                     UsuariJPA persona;
                     // Obtenir informació de l'USUARI del SISTEMA de PLUGIN USER INFORMATION
-
-                    {
-                        persona = PluginUserInformationUtils.getUserInfoFromUserInformation(username, authenticationLogicaEjb);
-                    }
+                    persona = PluginUserInformationUtils.getUserInfoFromUserInformation(username, authenticationLogicaEjb);
+                    
 
                     if (persona == null) {
                         authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, temps,
@@ -200,10 +199,21 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                                         + username + " dins del sistema de UserInformation",
                                 entitatCodi);
                         log.error("No hem trobat informació de la Persona amb username  '" + username
-                                + "' dins del sistema de UserInformation");
+                                + "' dins del sistema de UserInformation. Haurà d'omplir el propi usuari la informació.");
+                        
+                        java.lang.String usr = username;
+                        java.lang.String nom = username;
+                        java.lang.String llinatge1 = username;
+                        java.lang.String llinatge2 = null;
+                        java.lang.String email = null;
+                        java.lang.String nif = null;
+                        java.lang.Long darreraEntitat  = null;
+                        java.lang.String idiomaID = Configuracio.getDefaultLanguage();
+                        persona = new UsuariJPA(usr , nom , llinatge1 , llinatge2 ,  email ,  nif ,  darreraEntitat ,  idiomaID);
 
-                    } else {
-
+                    } 
+                    
+                    {
                         UsuariEntitatJPA usuariEntitat = null;
 
 //                        log.info("Contains role AdminEntitat: " + containsRoleAdEn);
@@ -271,7 +281,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                     log.error("Error llegint informacio del plugin de User Information o creant l'usuari a la BBDD: "
                             + msg, e);
                 }
-            }
+            
 
         }
 

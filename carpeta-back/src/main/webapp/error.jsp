@@ -1,9 +1,9 @@
-<%@page import="org.fundaciobit.genapp.common.i18n.I18NException"%>
-<%@page import="es.caib.carpeta.logic.LogCarpetaLogicaService"%>
-<%@page import="es.caib.carpeta.back.utils.Utils"%>
-<%@page import="es.caib.carpeta.logic.utils.EjbManager"%>
-<%@page import="es.caib.carpeta.logic.AuthenticationLogicaService"%>
-<%@page import="es.caib.carpeta.back.security.LoginException"
+<%@page import="org.fundaciobit.genapp.common.i18n.I18NException"
+%><%@page import="es.caib.carpeta.logic.LogCarpetaLogicaService"
+%><%@page import="es.caib.carpeta.back.utils.Utils"
+%><%@page import="es.caib.carpeta.logic.utils.EjbManager"
+%><%@page import="es.caib.carpeta.logic.AuthenticationLogicaService"
+%><%@page import="es.caib.carpeta.back.security.LoginException"
 %><%@page import="org.fundaciobit.genapp.common.web.i18n.I18NUtils"
 %><%@page import="org.apache.log4j.Logger"
 %><%@page import="org.fundaciobit.genapp.common.web.HtmlUtils"
@@ -43,7 +43,7 @@ try {
     } 
 
     // Agafam la excepció que s'ha produit.
-    Exception e = pageContext.getException();
+    Throwable e = pageContext.getException();
     boolean sessioinvalida = false;
     boolean senseroles = false;
     String missatgeSessioInvalida = "";
@@ -78,8 +78,15 @@ try {
             senseroles = true;
         
     } else {
+        
+      if (e instanceof org.springframework.web.util.NestedServletException) {
+          
+          e = ((org.springframework.web.util.NestedServletException)e).getCause();
+          
+      }
+        
     	
-      log.error("Error: " + e.getMessage(), e);
+      log.error("Error[" +e.getClass() + "]: " + e.getMessage(), e);
       // Si els errors són de perdua de sessio no mostram el botó per tornar a principal,
       // han de tancar navegador i tornar obrir sessió.
       boolean runAsException = ( e instanceof IllegalArgumentException
@@ -94,6 +101,7 @@ try {
             redirect = (String)request.getAttribute("javax.servlet.error.request_uri");
           }
       } else if (e instanceof I18NException){
+          log.error("Entra a I18NException ...");
           missatgeTipusError = I18NUtils.getMessage((I18NException)e);
       } else if (e instanceof org.springframework.web.util.NestedServletException) {
           org.springframework.web.util.NestedServletException nse;
@@ -169,13 +177,18 @@ try {
       <c:set var="stacktrace"  value="${pageContext.exception.stackTrace}"/>
       <div><h4><%=titolPagina%></h4></div>
       <br/>
+      
       <% if (!sessioinvalida) { %>
-        <c:if test = "${empty stacktrace}">
-            <%= missatgeTipusError%>
-        </c:if>
-        <c:if test = "${not empty stacktrace}">
-            <div><b>Error:</b>${pageContext.exception.message}&nbsp;(${requestScope['javax.servlet.forward.request_uri']})</div>
-        </c:if>
+        <div>
+        <b>Error:</b>
+        <% if (missatgeTipusError!= null) { %>
+          <%= missatgeTipusError%>
+        <% } else { %>
+          ${pageContext.exception.message}
+        <% } %>
+        <br/>
+        <b>URL:</b>${requestScope['javax.servlet.forward.request_uri']}
+        </div>
       <% } %>
       <div><b><%=missatgeSessioInvalida%></b></div>
       <br/>
@@ -188,12 +201,13 @@ try {
         </c:if>
 
         <!-- Mostram el botó de tornar a principal -->
-        <a href="<c:url value="/common/principal.html"/>" class="btn"><%=etiquetaBoto%></a>
+        <a class="btn btn-outline-success" href="<c:url value="/common/principal.html"/>" class="btn"><%=etiquetaBoto%></a>
         
         <br/>
         
         
-        <b>[[[[ MESSAGE: ${pageContext.exception.message}]]]</b>
+        <b>Missatge Original:</b>: ${pageContext.exception.message}<br/>
+        <b>MIssatge Processat:</b>: <%= missatgeTipusError%>
 
         <br/>
         <br/>

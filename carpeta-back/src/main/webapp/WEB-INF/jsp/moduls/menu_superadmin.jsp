@@ -18,6 +18,16 @@
             code="usuari.usuari.plural" /></span>
 </a>
 
+<a class="dropdown-item"
+    href="<c:url value="/superadmin/usuari/testerror1"/>"> <span
+    style="${(fn:contains(url, '/superadmin/usuari/testerror1'))? " font-weight:bold;" : ""}">Test Error Exception</span>
+</a>
+
+<a class="dropdown-item"
+    href="<c:url value="/superadmin/usuari/testerror2"/>"> <span
+    style="${(fn:contains(url, '/superadmin/usuari/testerror2'))? " font-weight:bold;" : ""}">Test Error I18NException</span>
+</a>
+
 <% } %>
 
 <a class="dropdown-item"
