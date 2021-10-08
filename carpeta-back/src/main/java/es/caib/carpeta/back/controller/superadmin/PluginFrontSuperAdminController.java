@@ -240,7 +240,7 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
                 log.error(msg, e);
             }
         	
-        }else {
+        } else {
         	throw new I18NException("plugin.error.associat");
         }
         

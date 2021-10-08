@@ -192,5 +192,22 @@ public class UsuariSuperAdminController extends UsuariController {
 
         return u;
     }
+    
+    @RequestMapping(value = "/testerror1", method = RequestMethod.GET)
+    public String testError1(HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+
+        throw new Exception("Prova d'un error normal (Exception)");
+
+    }
+
+    @RequestMapping(value = "/testerror2", method = RequestMethod.GET)
+    public String testError2(HttpServletRequest request, HttpServletResponse response)
+            throws Exception {
+
+        throw new I18NException("plugin.error.associat");
+
+    }
+    
 
 }
