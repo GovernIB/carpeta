@@ -414,9 +414,11 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
                 tpg.setMostraModal(item.getTipo() != TipoElementoExpediente.ENVIO && estaPendent);
 
                 // Si es tipus Registro => redirigim a pagina de detall Registre
-                tpg.setUrl(absolutePluginRequestPath + "/" + DETALL_REGISTRE_PAGE + "?numeroRegistroFormateado="
+                if(item.getTipo() == TipoElementoExpediente.REGISTRO) {
+                	tpg.setUrl(absolutePluginRequestPath + "/" + DETALL_REGISTRE_PAGE + "?numeroRegistroFormateado="
                         + tpg.getNumero());
-
+                }
+                
                 if (((estaPendent && !finalizado.equals("S")) || (!estaPendent && !finalizado.equals("N")))
                         || (finalizado.equals("R") && item.getTipo() == TipoElementoExpediente.REGISTRO)) {
                     tramits.add(tpg);
