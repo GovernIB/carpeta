@@ -452,6 +452,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             } 
             
             for (Transmissio t : notificacions) {
+                t.setOrganGestor(t.getOrganGestor().substring(t.getOrganGestor().indexOf("', nom='") + 8, t.getOrganGestor().indexOf("', llibre='")));
                 comunicacionsMap.put(t.getId(), t);
             }
         
@@ -482,7 +483,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             // TRADUCCIONS
 
             String[] traduccions = { "comunicacion.listado.notib", "comunicacion.vacio", "comunicacion.descripcion.comunicacion",
-                    "comunicacion.fecha", "comunicacion.descripcion", "comunicacion_emissor", "comunicacion_concepte", "comunicacion_estat", "boto_tornar" };
+                    "comunicacion.fecha", "comunicacion.descripcion", "comunicacion_emissor", "comunicacion_concepte", "comunicacion_estat", "comunicacion_organo", "comunicacion_dataEstat", "comunicacion_justificant", "comunicacion_certificacio", "boto_tornar" };
 
             for (String t : traduccions) {
                 map.put(t.replace('.', '_'), getTraduccio(t, locale));
