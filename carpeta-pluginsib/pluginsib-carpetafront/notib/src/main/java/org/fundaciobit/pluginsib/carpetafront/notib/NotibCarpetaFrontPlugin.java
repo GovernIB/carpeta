@@ -388,7 +388,12 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
 
             // TODO XYZ ZZZ aqui ha d'anar QUERY
-            int pagina = Integer.parseInt(query.substring(query.lastIndexOf('/') + 1, query.length()));
+            int pagina;
+            try {
+                pagina = Integer.parseInt(query.substring(query.lastIndexOf('/') + 1, query.length()));
+            }catch (NumberFormatException e){
+                pagina = 0;
+            }
             List<Transmissio> notificacions;
 
             {
@@ -503,7 +508,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         } catch (Exception e) {
 
-            log.error("Error llistant notificacions sistra: " + e.getMessage(), e);
+            log.error("Error llistant notificacions notib: " + e.getMessage(), e);
             errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
 
         }
