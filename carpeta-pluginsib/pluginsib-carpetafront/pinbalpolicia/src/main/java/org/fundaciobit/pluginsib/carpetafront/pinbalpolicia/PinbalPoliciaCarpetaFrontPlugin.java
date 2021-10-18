@@ -261,9 +261,9 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontP
 
             // Titular
             final String apellido1; // = "JAUME";
-            final String apellido2 = "";
+            final String apellido2;
             final String documentacion; // = "41107605G";
-            final String nombre = "";
+            final String nombre;
 
             // ScspTitular.ScspTipoDocumentacion.DNI, ScspTitular.ScspTipoDocumentacion.NIE
             ScspTipoDocumentacion tipoDocumentacion = ScspTipoDocumentacion.DNI;
@@ -274,12 +274,17 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontP
                 String surname = getProperty(PINBALPOLICIA_PROPERTY_BASE + "testsurname");
 
                 if (nif == null || surname == null) {
-                    nif = userData.getAdministrationID();
-                    surname = userData.getSurname1();
+                	documentacion = userData.getAdministrationID().toUpperCase();
+                	apellido1 = userData.getSurname1() == null? "" : userData.getSurname1().toUpperCase(); 
+                	apellido2 = userData.getSurname2() == null? "" : userData.getSurname2().toUpperCase(); 
+                	nombre = userData.getName() == null? "" : userData.getName().toUpperCase();
+                }else {
+                	/* DADES TEST */
+                	documentacion = nif.toUpperCase();
+                	apellido1 = surname.toUpperCase();
+                	apellido2 = "";
+                	nombre = "";
                 }
-
-                documentacion = nif.toUpperCase();
-                apellido1 = surname.toUpperCase();
                 
                 // Si no es un digit el primer caracter, es tracta d'un NIE 
                 if (!Character.isDigit(documentacion.charAt(0))) {

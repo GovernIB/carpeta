@@ -340,7 +340,6 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
 
             for (String t : traduccions) {
             	String traduccion = getTraduccio(RESOURCE_BUNDLE_NAME, t, locale);
-            	System.out.println("t => " + traduccion);
                 map.put(t.replace('.', '_'), traduccion);
             }
 	
