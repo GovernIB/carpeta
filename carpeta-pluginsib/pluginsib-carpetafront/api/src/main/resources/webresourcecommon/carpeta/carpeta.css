@@ -126,19 +126,19 @@ img:hover {
     border: 0px;
 }
 .imc--sortir::before {
-	background-image: url(src/assets/images/sortir.png);
+	background-image: url(../../../src/assets/images/sortir.png);
 	opacity: 1 !important;
 }
 .imc--tramits::before {
-	background-image: url(src/assets/images/tramits.png);
+	background-image: url(../../../src/assets/images/tramits.png);
 	opacity: 1 !important;
 }
 .imc--registres::before {
-	background-image: url(src/assets/images/registres.png);
+	background-image: url(../../../src/assets/images/registres.png);
 	opacity: 1 !important;
 }
 .imc--notificacions::before {
-	background-image: url(src/assets/images/notificacions.png);
+	background-image: url(../../../src/assets/images/notificacions.png);
 	opacity: 1 !important;
 }
 
@@ -725,6 +725,19 @@ a.imc-bt-xarxa:hover {
 }
 .maxContent{
 	width: max-content;
+}
+.page-item.active .page-link {
+	z-index: 0;
+	color: #fff;
+	background-color: #32814B;
+	border-color: #32814B;
+}
+.page-item.active .page-link:hover {
+	background-color: #000;
+	border-color: #000;
+}
+.page-item{
+	cursor: default;
 }
 
 /* Plugins pinbal */
