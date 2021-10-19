@@ -220,7 +220,7 @@ img:hover {
 }
 
 .imc-continguts {
-	width: calc(100% - 12em);
+	/*width: calc(100% - 12em);*/
 	margin: 5em auto 2em auto;
 }
 .boton-menu{
