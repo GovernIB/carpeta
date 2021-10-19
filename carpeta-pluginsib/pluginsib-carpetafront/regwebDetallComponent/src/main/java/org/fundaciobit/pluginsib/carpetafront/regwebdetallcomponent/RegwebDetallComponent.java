@@ -322,7 +322,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
                 "registro.anexos", "registro.anexos.vacio", "registro.anexos.nodisponibles","registro.anexo.name", 
                 "registro.anexo.size", "registro.anexo.file", "registro.anexo.validezdocumento","carpeta.descargar", "registro.anexo.nodisponible",
                 "carpeta.catala", "carpeta.castella", "registro.anexo.mime", "registro.estado", "justificante.generar", "justificante.generando", 
-                "anexo.obtener", "registro.anexo.confidencial"  };
+                "anexo.obtener", "registro.anexo.confidencial", "registro.exposa", "registro.solicita"  };
         
 
         for (String t : traduccions) {
@@ -405,6 +405,8 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
         	log.info("ar.getTipoDocumentacionFisicaCodigo() => " + registro.getTipoDocumetacionFisica());
         	log.info("Anexos retornados => " + registro.getAnexos().size());
         	log.info("ar.descripcionEstado() => " + registro.getDescripcionEstado());
+        	log.info("ar.getExpone() => " + registro.getExpone());
+        	log.info("ar.getSolicita() => " + registro.getSolicita());
         	
         	log.info(" --------------- ANEXOS ---------------------");
         	for (FileInfoWs annexo : registro.getAnexos()) {
@@ -423,7 +425,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 
         AsientoWs registro = regWebAsientoRegistralWs.obtenerAsientoCiudadanoCarpeta(getEntidad(), administrationID,
                 numeroRegistroFormateado, locale.getLanguage());
-
+           
         return registro;
     }
 

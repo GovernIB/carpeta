@@ -310,10 +310,29 @@
                                 </div>
                             </div>
                         </div>
-
-
+                        
+                        <#if registro.expone?has_content || registro.solicita?has_content>
+                        <div class="card border-left-carpeta shadow py-2 mb-3 alert">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2 font15">
+                                
+                                    <#if registro.expone?has_content>
+                                        <h3 class="font-weight-bold verde text-uppercase mb-3 text-center h3">${registro_exposa}</h3>
+                                        <p>${registro.expone}</p>
+                                    </#if>
+                                    
+                                    <#if registro.solicita?has_content>
+                                        <h3 class="font-weight-bold verde text-uppercase mb-3 text-center h3 mt-5">${registro_solicita}</h3>
+                                        <p>${registro.solicita}</p>
+                                    </#if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </#if>
+                        
                     </div>
-
                 </div>
         </div>
 
