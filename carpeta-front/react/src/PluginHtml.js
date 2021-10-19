@@ -30,6 +30,7 @@ class PluginHtml extends Component {
 
 
     componentDidMount() {
+        $('[tabIndex=1]').focus();
         var autenticat = sessionStorage.getItem('autenticat');
 
         // Obtenim el nom del plugin per posar al title del iframe

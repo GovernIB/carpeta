@@ -25,6 +25,7 @@ class PluginReact extends Component {
     }
 
     componentDidMount() {
+        $('[tabIndex=1]').focus();
 
         // console.log('PLUGIN REACT  Entra a componentDidMount()');
 
