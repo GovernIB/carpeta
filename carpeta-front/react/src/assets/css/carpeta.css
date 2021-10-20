@@ -235,6 +235,9 @@ img:hover {
 .boton-menu:hover{
 	color: #cc073c;
 }
+.linkVermell:hover{
+	color: #cc073c;
+}
 .imc-separador{
 	/*font-size: 0.750em;*/
 	padding-left: 0.5em;

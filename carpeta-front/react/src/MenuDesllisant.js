@@ -241,7 +241,7 @@ class MenuDesllisant extends Component {
 								<button title={s.missatge} className={"botoMenu alert" + s.gravetat + "menu"}
 										onClick={(event) => this.mostrarPlugin(s.gravetat, s.missatge, s.context, s.tipus)} tabIndex={208+i} aria-labelledby={"botoMenu"+i}>
 									<img src={urlBase + s.urllogo} className="imc-icona" title="" alt={s.nom} />
-									<span id={"botoMenu"+i} className="ml-2">{s.nom} </span>
+									<span id={"botoMenu"+i} className="ml-2 linkVermell">{s.nom} </span>
 								</button>
 							</li>)
 						break;
