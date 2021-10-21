@@ -141,6 +141,24 @@ img:hover {
 	background-image: url(../../../src/assets/images/notificacions.png);
 	opacity: 1 !important;
 }
+.imc-marc-ico::before {
+	content: none;
+}
+.styleLiniaMenu{
+	width: 30px;
+	text-align: -webkit-center;
+	/*-webkit-text-emphasis: filled;*/
+	transform: translate(0, 60%);
+}
+.iconaMenu{
+	font-size: large;
+	color: #32814B;
+	margin-left: 0!important;
+}
+.margesMenu{
+	padding-top: 0.7em!important;
+	padding-bottom: 0.7em!important;
+}
 
 .imc--llista--capses{
 	box-sizing: border-box;
@@ -300,7 +318,7 @@ img:hover {
 	color: #545454;
 	text-transform: uppercase;
 	padding: 1em 0;
-	width: 100%;
+	/*width: 100%;*/
 	text-align: justify;
 	background-color: #ffffff;
 }
@@ -658,6 +676,7 @@ a.imc-bt-xarxa:hover {
 }
 .apartat{
 	font-size: 0.9em !important;
+	text-align: center!important;
 }
 .iframeClass{
 	min-height: 300px;

@@ -333,7 +333,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         // TRADUCCIONS
 
         String[] traduccions = { "comunicacion.listado", "comunicacion.vacio", "comunicacion.descripcion.comunicacion",
-                "comunicacion.fecha", "comunicacion.descripcion" , "boto_tornar"};
+                "comunicacion.fecha", "comunicacion.descripcion" , "boto_tornar", "notificaciones.otras"};
 
         for (String t : traduccions) {
             map.put(t.replace('.', '_'), getTraduccio(t, locale));
@@ -488,7 +488,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             // TRADUCCIONS
 
             String[] traduccions = { "comunicacion.listado.notib", "comunicacion.vacio", "comunicacion.descripcion.comunicacion",
-                    "comunicacion.fecha", "comunicacion.descripcion", "comunicacion_emissor", "comunicacion_concepte", "comunicacion_estat", "comunicacion_organo", "comunicacion_dataEstat", "comunicacion_justificant", "comunicacion_certificacio", "boto_tornar" };
+                    "comunicacion.fecha", "comunicacion.descripcion", "comunicacion_emissor", "comunicacion_concepte", "comunicacion_estat", "comunicacion_organo", "comunicacion_dataEstat", "comunicacion_justificant", "comunicacion_certificacio", "boto_tornar", "notificaciones.notificaciones" };
 
             for (String t : traduccions) {
                 map.put(t.replace('.', '_'), getTraduccio(t, locale));
