@@ -319,8 +319,11 @@ img:hover {
 	text-transform: uppercase;
 	padding: 1em 0;
 	/*width: 100%;*/
-	text-align: justify;
+	text-align: left;
 	background-color: #ffffff;
+}
+.displayMenu{
+	display: inline-block;
 }
 .alert0menu{
 	border: none;
@@ -675,6 +678,9 @@ a.imc-bt-xarxa:hover {
 	border-width: 10px;
 }
 .apartat{
+	font-size: 0.9em !important;
+}
+.apartat2{
 	font-size: 0.9em !important;
 	text-align: center!important;
 }
