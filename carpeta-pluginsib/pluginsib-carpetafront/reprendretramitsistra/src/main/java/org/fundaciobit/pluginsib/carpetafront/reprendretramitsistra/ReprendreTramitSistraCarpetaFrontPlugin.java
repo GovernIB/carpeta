@@ -421,7 +421,7 @@ public class ReprendreTramitSistraCarpetaFrontPlugin extends AbstractCarpetaFron
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
-    protected static final String REACT_JS_PAGE = "reactjs_main.js";
+    protected static final String REACT_JS_PAGE = "reprendre_reactjs_main.js";
 
     public void reactjs(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
@@ -434,7 +434,7 @@ public class ReprendreTramitSistraCarpetaFrontPlugin extends AbstractCarpetaFron
             response.setHeader("Content-Disposition",
                     "inline;filename=\"" + java.net.URLEncoder.encode(REACT_JS_PAGE, "UTF-8") + "\"");
 
-            String resource = "/webpage/reactjs_main.js";
+            String resource = "/webpage/reprendre_reactjs_main.js";
 
             response.setCharacterEncoding("utf-8");
 
