@@ -376,6 +376,9 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
             if (finalizado.equals("R")) {
                 coms.add(TipoElementoExpediente.REGISTRO);
+            } else if (finalizado.equals("P")) {
+            	coms.add(TipoElementoExpediente.PREENVIO);
+                coms.add(TipoElementoExpediente.PREREGISTRO); 
             } else {
                 coms.add(TipoElementoExpediente.ENVIO);
                 coms.add(TipoElementoExpediente.PREENVIO);
@@ -419,8 +422,10 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
                         + tpg.getNumero());
                 }
                 
-                if (((estaPendent && !finalizado.equals("S")) || (!estaPendent && !finalizado.equals("N")))
-                        || (finalizado.equals("R") && item.getTipo() == TipoElementoExpediente.REGISTRO)) {
+                if ( finalizado.equals("A") ||
+                	 ((((estaPendent && finalizado.equals("N") && !tpg.esMostraModal()) || (!estaPendent && finalizado.equals("S"))) && item.getTipo() != TipoElementoExpediente.REGISTRO )) || 
+                		(finalizado.equals("R") && item.getTipo() == TipoElementoExpediente.REGISTRO) || 
+                		(finalizado.equals("P") && estaPendent)) {
                     tramits.add(tpg);
                 }
             }
@@ -428,7 +433,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
         }
 
         // Tràmits no acabats
-        if (!finalizado.equals("S")) {
+        if (!finalizado.equals("S") && !finalizado.equals("P") && !finalizado.equals("R")) {
             TramitesPersistentes tramites = backofficeFacade.obtenerPersistentes(documento,
 
                     DatatypeFactory.newInstance().newXMLGregorianCalendar(inicio),
@@ -551,7 +556,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
         
         if(tramitesFinalizados != null || !tramitesFinalizados.isEmpty()) {
         	for(RTramiteFinalizado tf : tramitesFinalizados) {
-        		if (finalizado.equals("A") || finalizado.equals("N")) {
+        		if ((finalizado.equals("A") || finalizado.equals("R"))) {
         			TramitePersistenteGenerico tpg = new TramitePersistenteGenerico(tf, 2);
                     tpg.setUrl(absolutePluginRequestPath + "/" + DETALL_REGISTRE_PAGE + "?numeroRegistroFormateado="
                         + tpg.getNumero());
