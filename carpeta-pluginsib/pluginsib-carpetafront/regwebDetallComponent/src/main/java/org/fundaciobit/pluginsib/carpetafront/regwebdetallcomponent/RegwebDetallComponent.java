@@ -322,7 +322,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
                 "registro.anexos", "registro.anexos.vacio", "registro.anexos.nodisponibles","registro.anexo.name", 
                 "registro.anexo.size", "registro.anexo.file", "registro.anexo.validezdocumento","carpeta.descargar", "registro.anexo.nodisponible",
                 "carpeta.catala", "carpeta.castella", "registro.anexo.mime", "registro.estado", "justificante.generar", "justificante.generando", 
-                "anexo.obtener", "registro.anexo.confidencial", "registro.exposa", "registro.solicita"  };
+                "anexo.obtener", "registro.anexo.confidencial", "registro.exposa", "registro.solicita", "registro.anexo.descargar"  };
         
 
         for (String t : traduccions) {
@@ -330,7 +330,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
         }
 
         map.put("registro", registre);
-
+        
         String urlDetalle = absolutePluginRequestPath + "/" + DETALL_REGISTRE_PAGE + "?numeroRegistroFormateado=";
         map.put("urlDetalle", urlDetalle);
 
@@ -361,6 +361,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
             	// Si retorna URL, es descarrega d'arxiu
                 if (justificantRegistre.getUrl() != null) {
                     map.put("justificanteUrl", justificantRegistre.getUrl());
+                    map.put("justificantFileName", justificantRegistre.getFileInfoWs().getName());
                 } else {
                 	// Es genera a filesystem i ens retorna Data.
                     map.put("justificanteId", justificantRegistre.getFileInfoWs().getFileID());
@@ -380,7 +381,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
         }else {
         	map.put("justificantSenseGenerar", "true");
         }
-      
+        
         String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
 
         return generat;
