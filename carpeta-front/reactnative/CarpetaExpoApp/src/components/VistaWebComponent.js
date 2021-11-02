@@ -19,6 +19,7 @@ class VistaWebComponent extends Component {
     super(props);
   }
 
+
   render() {
     if (this.props.debug) {
       console.log('AMB REACT NATIVE WEBVIEW X(' + this.props.url + ')');
@@ -41,6 +42,7 @@ class VistaWebComponent extends Component {
             }
             return true;
           }}
+          onSS
           source={{uri: this.props.url}}
           style={styles.classWebView}
         />

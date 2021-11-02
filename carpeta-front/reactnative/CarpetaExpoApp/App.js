@@ -1,3 +1,4 @@
+
 /**
  * @author anadal (u80067)
  * @email governdigital.carpeta@fundaciobit.org
@@ -6,15 +7,17 @@
  * @desc Punt d'entrada a l'APP i registre de Notificacions
  */
 
+
 import Constants from "expo-constants";
 import React, { Component } from "react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { withTranslation } from "react-i18next";
 
 import { Router } from "./src/components/Routing";
+import { sessionStorage } from "./src/SessionStorageClass";
 import Index from "./src/Index";
 import * as Notifications from "expo-notifications";
-
+import * as ScreenOrientation from "expo-screen-orientation";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -54,7 +57,8 @@ async function registerForPushNotificationsAsync() {
       return;
     }
     token = pushToken.data;
-    console.log(token);
+    console.log("ExponentPushToken: ]" + token + "[");
+    sessionStorage.setItem("expoPushToken", token);
     if (Platform.OS === "android") {
       Notifications.setNotificationChannelAsync("default", {
         name: "default",
@@ -76,6 +80,9 @@ class App extends Component {
   }
 
   componentDidMount() {
+
+    ScreenOrientation.unlockAsync();
+
     registerForPushNotificationsAsync();
 
     Notifications.addNotificationReceivedListener(this._handleNotification);
