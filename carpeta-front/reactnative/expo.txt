@@ -1,8 +1,6 @@
 
 
 
-
-
 https://code.tutsplus.com/es/tutorials/easier-react-native-development-with-expo--cms-30546
 
 

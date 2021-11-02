@@ -20,11 +20,16 @@ import java.util.stream.Collectors;
  */
 public class ExampleExpoServer {
     public static void main(String[] args) throws PushClientException, InterruptedException {
-        String recipient = "ExponentPushToken[_BD60MG6awR0jct4Ihz6v4]"; // To test, you must replace
-                                                                        // the recipient with a
-                                                                        // valid token!
-        String title = "My message title!";
-        String message = "A push message from ExampleExpoServer 2222";
+        
+        
+        // En la pàgina de Home de  CarpetaExpoApp apareix 
+        
+        //String recipient = "ExponentPushToken[_BD60MG6awR0jct4Ihz6v4]"; // Emulador Windows Màquina anadal
+        
+        String recipient = "ExponentPushToken[vIEL8-PxCfopfN5L0emQY9]"; // Tablet Samsung
+
+        String title = "Missatge des de Carpeta !!!!";
+        String message = "Aquí va una explicació de com és que se li ha enviat una notificació de Carpeta ...";
 
         if (!PushClient.isExponentPushToken(recipient)) {
             throw new Error("Token:" + recipient + " is not a valid token.");
