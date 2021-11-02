@@ -71,6 +71,7 @@ class MapaWeb extends Component {
 			var accessibilitat = <li className="list-group-item"><h3 key={0} className="lh15 upper h3 mt-2">
 				<Link to={{pathname: `/accessibilitat`, nomPagina: 'menuAccessibilitat'}}
 					  className="imc-marc-ico imc--accessibilitat" tabIndex="503" aria-labelledby="accesAccessibilitat">
+					<span className="oi oi-eye iconaMenu pl-2 pr-2" title={t('menuAccessibilitat')}/>
 					<span id="accesAccessibilitat">{t('menuAccessibilitat')}</span>
 				</Link>
 			</h3></li>;
@@ -167,7 +168,10 @@ class MapaWeb extends Component {
 						<div className="card">
 							<ul className="list-group list-group-flush">
 								<li className="list-group-item" id="infoMapaWeb">
-									<h3 className="lh15 upper h3 mt-2"><Link to="/" tabIndex="502" aria-labelledby="infoMapaWeb">{t('mapaWebInformacio')}</Link></h3>
+									<h3 className="lh15 upper h3 mt-2"><Link to="/" tabIndex="502" aria-labelledby="infoMapaWeb">
+										<span className="oi oi-italic iconaMenu pl-2 pr-3" title={t('mapaWebInformacio')}/>
+										<span id="accesInici">{t('mapaWebInformacio')}</span>
+									</Link></h3>
 								</li>
 								{/*<li className="list-group-item">*/}
 									{enllazos}
