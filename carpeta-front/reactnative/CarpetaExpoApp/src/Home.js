@@ -7,10 +7,10 @@
  * @format
  * @flow strict-local
  */
-import { sessionStorage } from "./SessionStorageClass";
+import { sessionStorageRN } from "./SessionStorageClass";
+import { Text, StyleSheet, Platform, ScrollView } from "react-native";
 
 import React, { Component } from "react";
-import { Text } from "react-native";
 
 import * as Linking from "expo-linking";
 
@@ -28,8 +28,8 @@ class Home extends Component {
   }
 
   checkLoadingExpoPushToken() {
-    console.log(" Entra a checkLoadingExpoPushToken ...");
-    if (!sessionStorage.getItem("expoPushToken")) {
+    console.log(" Entra a checkLoadingExpoPushToken ...");    
+    if (!sessionStorageRN.getItem("expoPushToken")) {
       console.log("expoPushToken no definit ...");
       setTimeout(() => {
         this.checkLoadingExpoPushToken();
@@ -42,7 +42,7 @@ class Home extends Component {
   }
 
   render() {
-    var expoPushToken = sessionStorage.getItem("expoPushToken");
+    var expoPushToken = sessionStorageRN.getItem("expoPushToken");
     if (!expoPushToken) {
       expoPushToken = "Loading ... ";
     }

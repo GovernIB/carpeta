@@ -31,7 +31,7 @@ class SessionStorageClass {
   }
 }
 
-let sessionStorage = (globalThis.sessionStorage =
-  globalThis.sessionStorage ?? new SessionStorageClass());
+let sessionStorageRN = (globalThis.sessionStorageRN =
+  globalThis.sessionStorageRN ?? new SessionStorageClass());
 
-export { SessionStorageClass, sessionStorage };
+export { SessionStorageClass, sessionStorageRN };

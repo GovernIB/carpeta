@@ -7,14 +7,14 @@
  * @desc Punt d'entrada a l'APP i registre de Notificacions
  */
 
-
+ import { Platform } from "react-native";
 import Constants from "expo-constants";
 import React, { Component } from "react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { withTranslation } from "react-i18next";
 
 import { Router } from "./src/components/Routing";
-import { sessionStorage } from "./src/SessionStorageClass";
+import { sessionStorageRN } from "./src/SessionStorageClass";
 import Index from "./src/Index";
 import * as Notifications from "expo-notifications";
 import * as ScreenOrientation from "expo-screen-orientation";
@@ -29,6 +29,18 @@ Notifications.setNotificationHandler({
 
 //metodo que genera y registra el token unico
 async function registerForPushNotificationsAsync() {
+
+
+  if (Platform.OS === "web") {
+    sessionStorageRN.setItem(
+      "expoPushToken",
+      "Entorn Web no suporta Notificacions"
+    );
+    return;
+  }
+
+
+
   let token;
 
   const { status: existingStatus } = await Notifications.getPermissionsAsync();
@@ -40,7 +52,9 @@ async function registerForPushNotificationsAsync() {
 
   if (finalStatus !== "granted") {
     // FIXME:
-    alert("Failed to get push token for push notification: " + finalStatus);
+    var msg = "Failed to get push token for push notification: " + finalStatus;
+    alert(msg);
+    sessionStorageRN.setItem("expoPushToken", msg);
     return;
   }
 
@@ -58,7 +72,7 @@ async function registerForPushNotificationsAsync() {
     }
     token = pushToken.data;
     console.log("ExponentPushToken: ]" + token + "[");
-    sessionStorage.setItem("expoPushToken", token);
+    sessionStorageRN.setItem("expoPushToken", token);
     if (Platform.OS === "android") {
       Notifications.setNotificationChannelAsync("default", {
         name: "default",
@@ -81,7 +95,9 @@ class App extends Component {
 
   componentDidMount() {
 
-    ScreenOrientation.unlockAsync();
+    if (Platform.OS != "web") {
+      ScreenOrientation.unlockAsync();
+    }
 
     registerForPushNotificationsAsync();
 
