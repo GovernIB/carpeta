@@ -891,9 +891,9 @@ body {
 .capsaMenu{
     min-height: 18rem !important;
 }
-.capsaPlugin{
-	height: 15rem;
-}
+/*.capsaPlugin{*/
+/*	height: 15rem;*/
+/*}*/
 .opcionesAcceso {
 	float: left;
 	margin-left: 0px !important;
@@ -996,9 +996,9 @@ thead>tr>th.sorting {
 .margen-top-clave{
 	text-align-last: center;
 }
-.capsaPlugin{
-	height: 16rem;
-}
+/*.capsaPlugin{*/
+/*	height: 16rem;*/
+/*}*/
 .padL-4-5 {
 	padding-left: 3em !important;
 }
@@ -1054,9 +1054,9 @@ body {
 .homePage ul li {
 	margin-left: 0px;
 }
-.capsaPlugin{
-	height: 17rem;
-}
+/*.capsaPlugin{*/
+/*	height: 17rem;*/
+/*}*/
 .imc--autenticacio{
 	display: table !important;
 	padding-left: 1.5em !important;
