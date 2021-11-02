@@ -17,7 +17,7 @@ class MenuRapid extends Component {
         super();
         this.state = {
             items: [], // plugins, menupseudoplugin, seccions
-            error: null
+            error: null,
         }
         this.canviatIdioma = this.canviatIdioma.bind(this);
         i18n.on('languageChanged', this.canviatIdioma);
@@ -58,9 +58,7 @@ class MenuRapid extends Component {
                 }
 
             });
-
     }
-
 
     render() {
 
@@ -150,7 +148,12 @@ class MenuRapid extends Component {
                             allItems.push(
                                 <li className="btn-group navCarpeta pr-4" key={k}>
                                     <button type="button" className="btn btn-default dropdown-toggle p-0 lletraRapid disBlok text-verd"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id={"menuRapidBoto"+i} tabIndex={301 + k - l} onFocus={function(){$("#submenu"+iActiu).css("display", "none");iActiu=i;$("#submenu"+i).css("display", "block")}}>
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id={"menuRapidBoto"+i} tabIndex={301 + k - l} 
+                                                onFocus={() => {
+                                                $("#submenu"+iActiu).css("display", "none");
+                                                iActiu=i;
+                                                $("#submenu"+i).css("display", "block");
+                                                }}>
                                         <img src={s.urllogo} title={t('iconaDe') + " " + s.nom} alt={s.nom} className="imc-icona"/>
                                         <span className="menuRapidView lletraRapid">{s.nom}</span>
                                     </button>

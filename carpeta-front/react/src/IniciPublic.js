@@ -76,7 +76,7 @@ class IniciPublic extends Component {
 
                 htmlCode = <div className="row mr-0 ml-0">
                     <div className="infoNoMenu">
-                        <h2 className="titol h2">{t('paginaIniciTitol')} {entitatNom}</h2>
+                        <h2 className="titol h2">{entitatNom}</h2>
 
                         <div className="col-md-5 border-0 float-left p-0">
                             <h3 className="apartat titol h5 margen-top-clave"><span

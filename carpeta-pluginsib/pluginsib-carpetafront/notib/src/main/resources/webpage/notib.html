@@ -2,7 +2,7 @@
 <div class="infoNoMenu">
     <h2 class="titol h2">${comunicacion_listado_notib}</h2>
     <div class="col-md-12 border-0 float-left p-0">
-        <p class="lh15 text-estrofa subtitol">${comunicacion_descripcion}</p>
+        <p class="lh15 text-estrofa subtitol">${notificaciones_notificaciones}</p>
 
         <div class="card-body tablaRegistros">
             <#if  comunicacions?has_content == false >
@@ -19,24 +19,28 @@
                         <thead class="table-success">
                         <tr>
                             <th>${comunicacion_fecha}</th>
-                            <th>${comunicacion_emissor}</th>
+                            <th>${comunicacion_organo}</th>
                             <th>${comunicacion_concepte}</th>
-                            <#--
-                            <th>${comunicacion_descripcion_comunicacion}</th>
-                             -->
+                            <th>${comunicacion_dataEstat}</th>
                             <th>${comunicacion_estat}</th>
+                            <!-- De moment no es mostren -->
+<!--                            <th>${comunicacion_justificant}</th>-->
+<!--                            <th>${comunicacion_certificacio}</th>-->
+
                         </tr>
                         </thead>
                         <tbody>
                         <#list comunicacions?sort_by("dataEnviament")?reverse as com >
                             <tr style="cursor: pointer" class="filaNotib" data-target="_blank" data-href="${urldetallbase}<#--/${com.id?string.computer}-->" tabindex="501">
-                                <td><#if com.dataEnviament??> ${com.dataEnviament?string("dd-MM-yyyy HH:mm")}</#if></td>
-                                <td><#if com.emisor??>${com.emisor}</#if></td>                                
+                                <#assign data = com.dataEnviament?string("yyyyMMddHHmm")>
+                                <td data-order="${data}"><#if com.dataEnviament??>${com.dataEnviament?string("dd-MM-yyyy HH:mm")}</#if></td>
+                                <td><#if com.organGestor??>${com.organGestor}</#if></td>
                                 <td><#if com.concepte??>${com.concepte}</#if></td>
-                                <#--
-                                <td><#if com.descripcio??>${com.descripcio}</#if></td>
-                                -->
+                                <td><#if com.dataEstat??>${com.dataEstat?string("dd-MM-yyyy HH:mm")}<#elseif com.dataSubestat??>${com.dataSubestat?string("dd-MM-yyyy")}</#if></td>
                                 <td><#if com.estat??>${com.estat}</#if></td>
+                                <!-- De moment no es mostren -->
+<!--                                <td><#if com.justificant??>${com.justificant}</#if></td>-->
+<!--                                <td><#if com.certificacio??>${com.certificacio}</#if></td>-->
                             </tr>
                         </#list>
                         </tbody>
@@ -54,7 +58,7 @@
     $(document).ready(function () {
         var idioma = sessionStorage.getItem('idioma');
         $('#dataTable_paginate').DataTable({
-            "order": [[1, "desc"]],
+            "order": [[0, "desc"]],
             "language": {
                 "url": "${resources}/i18n/" + idioma + ".json"
             }

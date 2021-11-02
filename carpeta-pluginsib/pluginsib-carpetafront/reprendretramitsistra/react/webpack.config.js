@@ -4,7 +4,7 @@ const config = {
 	entry: "./src/main.js",
 	output: {
 		path: path.resolve(__dirname, "dist"),
-		filename: "reactjs_main.js"
+		filename: "reprendre_reactjs_main.js"
 	},
 
 	module: {

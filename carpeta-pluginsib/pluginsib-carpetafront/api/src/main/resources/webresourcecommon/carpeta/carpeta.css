@@ -126,20 +126,38 @@ img:hover {
     border: 0px;
 }
 .imc--sortir::before {
-	background-image: url(src/assets/images/sortir.png);
+	background-image: url(../../../src/assets/images/sortir.png);
 	opacity: 1 !important;
 }
 .imc--tramits::before {
-	background-image: url(src/assets/images/tramits.png);
+	background-image: url(../../../src/assets/images/tramits.png);
 	opacity: 1 !important;
 }
 .imc--registres::before {
-	background-image: url(src/assets/images/registres.png);
+	background-image: url(../../../src/assets/images/registres.png);
 	opacity: 1 !important;
 }
 .imc--notificacions::before {
-	background-image: url(src/assets/images/notificacions.png);
+	background-image: url(../../../src/assets/images/notificacions.png);
 	opacity: 1 !important;
+}
+.imc-marc-ico::before {
+	content: none;
+}
+.styleLiniaMenu{
+	width: 30px;
+	text-align: -webkit-center;
+	/*-webkit-text-emphasis: filled;*/
+	transform: translate(0, 60%);
+}
+.iconaMenu{
+	font-size: large;
+	color: #32814B;
+	margin-left: 0!important;
+}
+.margesMenu{
+	padding-top: 0.7em!important;
+	padding-bottom: 0.7em!important;
 }
 
 .imc--llista--capses{
@@ -220,7 +238,7 @@ img:hover {
 }
 
 .imc-continguts {
-	width: calc(100% - 12em);
+	/*width: calc(100% - 12em);*/
 	margin: 5em auto 2em auto;
 }
 .boton-menu{
@@ -233,6 +251,9 @@ img:hover {
   	border: none;
 }
 .boton-menu:hover{
+	color: #cc073c;
+}
+.linkVermell:hover{
 	color: #cc073c;
 }
 .imc-separador{
@@ -297,9 +318,12 @@ img:hover {
 	color: #545454;
 	text-transform: uppercase;
 	padding: 1em 0;
-	width: 100%;
-	text-align: justify;
+	/*width: 100%;*/
+	text-align: left;
 	background-color: #ffffff;
+}
+.displayMenu{
+	display: inline-block;
 }
 .alert0menu{
 	border: none;
@@ -656,6 +680,10 @@ a.imc-bt-xarxa:hover {
 .apartat{
 	font-size: 0.9em !important;
 }
+.apartat2{
+	font-size: 0.9em !important;
+	text-align: center!important;
+}
 .iframeClass{
 	min-height: 300px;
 	width: 100%;
@@ -725,6 +753,19 @@ a.imc-bt-xarxa:hover {
 }
 .maxContent{
 	width: max-content;
+}
+.page-item.active .page-link {
+	z-index: 0;
+	color: #fff;
+	background-color: #32814B;
+	border-color: #32814B;
+}
+.page-item.active .page-link:hover {
+	background-color: #000;
+	border-color: #000;
+}
+.page-item{
+	cursor: default;
 }
 
 /* Plugins pinbal */

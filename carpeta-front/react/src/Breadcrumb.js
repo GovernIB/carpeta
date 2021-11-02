@@ -93,12 +93,10 @@ class Breadcrumb extends Component {
                 });
 
 
-
         } else {
             if (location.pathname === '/') {
                 this.setState({ items: [] });
             } else {
-                
 
                 var pluginMatch = novaruta.match('^(' + Constants.PLUGINHTML_MATCH+  '|' + Constants.PLUGINREACT_MATCH + ')([a-z0-9]+)');
 
@@ -109,7 +107,6 @@ class Breadcrumb extends Component {
                     // console.log("BreadCRUMB ES UN PLUGIN : " + pluginMatch[1] + " -  " + pluginMatch[2]);
 
                     var baseURL2 = sessionStorage.getItem('contextPath');
-
 
                     var url7 = baseURL2 + `/webui/plugin/` + pluginMatch[2];
                     axios.get(url7)
@@ -174,20 +171,17 @@ class Breadcrumb extends Component {
 
                     } else {
 
-                        const {t} = this.props;
-                        // Altre cosa ...
+                        var seccioMatch = novaruta.match('^' +  Constants.PLUGINREACT_PUBLIC_PATH + '([a-z0-9]+)');
 
-                        var publicMatch = novaruta.match('^' +  Constants.PLUGINHTML_PUBLIC_MATCH+ '([a-z0-9]+)');
-
-                        if (publicMatch) {
-
+                        if (seccioMatch) {
                             var baseURL = sessionStorage.getItem('contextPath');
-                            var url10 = baseURL + `/webui/plugin/` + publicMatch[1];
-                            axios.get(url10)
+                            var url8 = baseURL + `/webui/plugin/` + seccioMatch[1];
+                            // console.log("URL PUBLIC REACT ==> " + url8);
+                            axios.get(url8)
                                 .then(res => {
-                                    var pluginInfo = res.data;
-                                    this.setState({items: [{id: location.pathname, label: pluginInfo.nom}]})
-                                    document.title = pluginInfo.nom + " - " + i18n.t('menuTitol');
+                                    var seccio = res.data;
+                                    this.setState({ items: [{ id: '/publicmodul/' + seccio.context, label: seccio.nom }] });
+                                    document.title = seccio.nom + " - " + i18n.t('menuTitol');
                                 })
                                 .catch(error => {
                                     console.log(JSON.stringify(error));
@@ -197,7 +191,7 @@ class Breadcrumb extends Component {
                                         console.log("error.response.headers: " + error.response.headers);
                                     }
 
-                                    if (error.response.status != '500') {
+                                    if (error.response.status != '500'){
                                         this.setState({
                                             items: "",
                                             error: JSON.stringify(error)
@@ -205,14 +199,48 @@ class Breadcrumb extends Component {
                                     } else {
                                         window.location.href = baseURL;
                                     }
-
                                 });
-                        }else{
+
+                        } else {
+
+                            const {t} = this.props;
                             // Altre cosa ...
-                            // console.log("BreadCRUMB ALTRE COSA : " + location.pathname);
-                            this.setState({items: [{id: location.pathname, label: t(location.nomPagina)}]});
-                            document.title = t(location.nomPagina) + " - " + i18n.t('menuTitol');
-                            document.title = sessionStorage.getItem("nomPlugin") + " - " + i18n.t('menuTitol');
+                            var publicMatch = novaruta.match('^' + Constants.PLUGINHTML_PUBLIC_MATCH + '([a-z0-9]+)');
+
+                            if (publicMatch) {
+                                var baseURL = sessionStorage.getItem('contextPath');
+                                var url10 = baseURL + `/webui/plugin/` + publicMatch[1];
+                                axios.get(url10)
+                                    .then(res => {
+                                        var pluginInfo = res.data;
+                                        this.setState({items: [{id: location.pathname, label: pluginInfo.nom}]})
+                                        document.title = pluginInfo.nom + " - " + i18n.t('menuTitol');
+                                    })
+                                    .catch(error => {
+                                        console.log(JSON.stringify(error));
+                                        if (error.response) {
+                                            console.log("error.response.data: " + error.response.data);
+                                            console.log("error.response.status: " + error.response.status);
+                                            console.log("error.response.headers: " + error.response.headers);
+                                        }
+
+                                        if (error.response.status != '500') {
+                                            this.setState({
+                                                items: "",
+                                                error: JSON.stringify(error)
+                                            });
+                                        } else {
+                                            window.location.href = baseURL;
+                                        }
+
+                                    });
+                            } else {
+                                // Altre cosa ...
+                                // console.log("BreadCRUMB ALTRE COSA : " + location.pathname);
+                                this.setState({items: [{id: location.pathname, label: t(location.nomPagina)}]});
+                                document.title = t(location.nomPagina) + " - " + i18n.t('menuTitol');
+                                document.title = sessionStorage.getItem("nomPlugin") + " - " + i18n.t('menuTitol');
+                            }
                         }
                     }
                 }

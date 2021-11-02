@@ -186,7 +186,7 @@
 
                                         <#if justificanteUrl?has_content>
                                             <div class="text-center">
-                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarJustificant()" tabindex="501"><span class="oi oi-data-transfer-download mr-2" title="" aria-hidden="true"></span>${carpeta_descargar}</button>
+                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarJustificant()" tabindex="501"><span class="oi oi-data-transfer-download mr-2" title="${carpeta_descargar} ${registro_justificante}" aria-hidden="true"></span>${carpeta_descargar}</button>
                                             </div>
                                         </#if>
 
@@ -194,14 +194,14 @@
                                             <div class="text-center">
                                                 <!--   button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarAnnex('${justificanteId?long?c}')"><span class="oi oi-data-transfer-download mr-2" title="" aria-hidden="true"></span> ${carpeta_descargar}</button -->
                                                 <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="downloadPDF()" tabindex="502">
-                                                    <span class="oi oi-data-transfer-download mr-2" title="" aria-hidden="true"></span> ${carpeta_descargar}
+                                                    <span class="oi oi-data-transfer-download mr-2" title="${carpeta_descargar} ${registro_justificante}" aria-hidden="true"></span> ${carpeta_descargar}
                                                 </button>
                                             </div>
                                         </#if>
                                         
                                         <#if !justificanteUrl?has_content && !justificanteId?has_content && justificantSenseGenerar?has_content>
                                             <div class="text-center">
-                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="generantJustificant()"><span class="oi oi-data-transfer-download mr-2" title="" aria-hidden="true"></span> ${carpeta_descargar}</button>
+                                                <button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="generantJustificant()"><span class="oi oi-data-transfer-download mr-2" title="${carpeta_descargar} ${registro_justificante}" aria-hidden="true"></span> ${carpeta_descargar}</button>
                                             </div>                                 
                                         </#if>
                                         <#if !justificanteUrl?has_content && !justificanteId?has_content && !justificantSenseGenerar?has_content>
@@ -286,7 +286,7 @@
                                                 <#if !anexo.confidencial?has_content>
                                                     <#if anexo.mime?has_content>
 		                                                <td><button type="button" class="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onclick="descarregarAnnex('${anexo.fileID?long?c}')">
-		                                                        <span class="oi oi-data-transfer-download" title="" aria-hidden="true"></span>
+		                                                        <span class="oi oi-data-transfer-download" title="${registro_anexo_descargar} ${anexo.name}" alt="${registro_anexo_descargar} ${anexo.name}" aria-hidden="true"></span>
 		                                                    </button></td>
 	                                                <#else>
 		                                                    <td colspan="3"><span>${registro_anexo_nodisponible}</span></td>
@@ -310,10 +310,29 @@
                                 </div>
                             </div>
                         </div>
-
-
+                        
+                        <#if registro.expone?has_content || registro.solicita?has_content>
+                        <div class="card border-left-carpeta shadow py-2 mb-3 alert">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2 font15">
+                                
+                                    <#if registro.expone?has_content>
+                                        <h3 class="font-weight-bold verde text-uppercase mb-3 text-center h3">${registro_exposa}</h3>
+                                        <p>${registro.expone}</p>
+                                    </#if>
+                                    
+                                    <#if registro.solicita?has_content>
+                                        <h3 class="font-weight-bold verde text-uppercase mb-3 text-center h3 mt-5">${registro_solicita}</h3>
+                                        <p>${registro.solicita}</p>
+                                    </#if>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </#if>
+                        
                     </div>
-
                 </div>
         </div>
 

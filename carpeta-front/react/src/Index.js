@@ -47,6 +47,7 @@ class Index extends Component {
     }
 
     componentDidMount() {
+        $('[tabIndex=1]').focus();
 
         var baseURL = sessionStorage.getItem('contextPath');
         var url = baseURL + `/webui/infoEntitat`;
@@ -72,8 +73,8 @@ class Index extends Component {
 
     render() {
 
-        const enfocar = document.querySelector("#fullpagecarpetafront");
-        enfocar.focus();
+        // const enfocar = document.querySelector("#fullpagecarpetafront");
+        // enfocar.focus();
 
 
         var auth = sessionStorage.getItem('autenticat');

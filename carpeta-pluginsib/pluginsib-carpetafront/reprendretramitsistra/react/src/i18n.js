@@ -19,13 +19,20 @@ const resources = {
   }
 };
 
+let langActual = sessionStorage.getItem("langActual");
+if (langActual === null) {
+    langActual = 'ca';
+    sessionStorage.setItem("langActual", "ca");
+}
 
+// console.log("langActual i18n reprendretramit: " + langActual);
   
   i18n
   .use(detector) // web lang detect
   .use(initReactI18next)  
   .init({
     resources,
+    lng: langActual,
     //lng: "ca",
     //fallbackLng: "ca", // use en if detected lng is not available
 

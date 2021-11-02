@@ -333,7 +333,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         // TRADUCCIONS
 
         String[] traduccions = { "comunicacion.listado", "comunicacion.vacio", "comunicacion.descripcion.comunicacion",
-                "comunicacion.fecha", "comunicacion.descripcion" , "boto_tornar"};
+                "comunicacion.fecha", "comunicacion.descripcion" , "boto_tornar", "notificaciones.otras"};
 
         for (String t : traduccions) {
             map.put(t.replace('.', '_'), getTraduccio(t, locale));
@@ -388,7 +388,12 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
 
             // TODO XYZ ZZZ aqui ha d'anar QUERY
-            int pagina = Integer.parseInt(query.substring(query.lastIndexOf('/') + 1, query.length()));
+            int pagina;
+            try {
+                pagina = Integer.parseInt(query.substring(query.lastIndexOf('/') + 1, query.length()));
+            }catch (NumberFormatException e){
+                pagina = 0;
+            }
             List<Transmissio> notificacions;
 
             {
@@ -452,6 +457,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             } 
             
             for (Transmissio t : notificacions) {
+                t.setOrganGestor(t.getOrganGestor().substring(t.getOrganGestor().indexOf("', nom='") + 8, t.getOrganGestor().indexOf("', llibre='")));
                 comunicacionsMap.put(t.getId(), t);
             }
         
@@ -482,7 +488,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             // TRADUCCIONS
 
             String[] traduccions = { "comunicacion.listado.notib", "comunicacion.vacio", "comunicacion.descripcion.comunicacion",
-                    "comunicacion.fecha", "comunicacion.descripcion", "comunicacion_emissor", "comunicacion_concepte", "comunicacion_estat", "boto_tornar" };
+                    "comunicacion.fecha", "comunicacion.descripcion", "comunicacion_emissor", "comunicacion_concepte", "comunicacion_estat", "comunicacion_organo", "comunicacion_dataEstat", "comunicacion_justificant", "comunicacion_certificacio", "boto_tornar", "notificaciones.notificaciones" };
 
             for (String t : traduccions) {
                 map.put(t.replace('.', '_'), getTraduccio(t, locale));
@@ -502,7 +508,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         } catch (Exception e) {
 
-            log.error("Error llistant notificacions sistra: " + e.getMessage(), e);
+            log.error("Error llistant notificacions notib: " + e.getMessage(), e);
             errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
 
         }

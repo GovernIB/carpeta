@@ -77,6 +77,7 @@
                                     <option value="A" <#if form_estat == "A">selected="selected"</#if>>${tramite_todos}</option>
                                     <option value="S" <#if form_estat == "S">selected="selected"</#if>>${tramite_finalizado}</option>
                                     <option value="N" <#if form_estat == "N">selected="selected"</#if>>${tramite_nofinalizado}</option>
+                                    <option value="P" <#if form_estat == "P">selected="selected"</#if>>${tramite_nofinalizadopresencial}</option>
                                     <option value="R" <#if form_estat == "R">selected="selected"</#if>>${tramite_registrado}</option>
                                 </select>
                             </div>
@@ -136,7 +137,7 @@
                     </tbody>
                 </table>
                 <#else>
-                <div class="alert alert-secondary mt-5 pt-5" role="alert">
+                <div class="alert alert-secondary" style="margin-top: 5em!important" role="alert">
                     ${tramite_vacio}
                 </div>
             </#if>
