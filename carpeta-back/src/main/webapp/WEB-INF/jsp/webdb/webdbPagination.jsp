@@ -66,18 +66,18 @@ function reassignAction() {
             <c:url var="pageUrl" value="${contexte}/list/${i}" />
             <c:choose>
                 <c:when test="${i == currentIndex}">
-                    <li  class="page-item active"><a class="page-link" href="#"><c:out value="${i}" /></a></li>
+                    <li class="page-item active"><a class="page-link" href="#"><c:out value="${i}" /></a></li>
                 </c:when>
                 <c:otherwise>
-                    <li  class="page-item"><a class="page-link" href="#" onclick="submitForm('${pageUrl}', false)"><c:out value="${i}" /></a></li>
+                    <li class="page-item"><a class="page-link" href="#" onclick="submitForm('${pageUrl}', false)"><c:out value="${i}" /></a></li>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
 
         <c:choose>
             <c:when test="${currentIndex == totalPages}">
-                <li  class="page-item disabled"><a class="page-link" href="#"> &gt;</a></li>
-                <li  class="page-item disabled"><a class="page-link"  href="#">&gt;&gt;</a></li>
+                <li class="page-item disabled"><a class="page-link" href="#"> &gt;</a></li>
+                <li class="page-item disabled"><a class="page-link" href="#">&gt;&gt;</a></li>
             </c:when>
             <c:otherwise>
                 <li class="page-item"><a class="page-link" href="#" onclick="submitForm('${nextUrl}', false)">&gt;</a></li>
@@ -89,10 +89,9 @@ function reassignAction() {
     
     </c:if>
     </div>
-    
-    
-     <fmt:message var="allitems" key="genapp.form.allitems" />
-    <div class="col-4"  style="float:right;" id="${formName}_pagination_right" >
+
+    <fmt:message var="allitems" key="genapp.form.allitems" />
+    <div class="col-4" style="float:right;" id="${formName}_pagination_right" >
       <label><fmt:message key="genapp.form.itemsperpage" />:</label>
       <form:select cssClass="input-small" cssStyle="width:4em;"  onchange="document.${formName}.submit()" path="itemsPerPage" >
         <c:forEach var="num" items="${__theFilterForm.allItemsPerPage}">
@@ -100,9 +99,8 @@ function reassignAction() {
         </c:forEach>
       </form:select>
     </div>
-    
-    
+
     </div>
-    
+
 </div>
 

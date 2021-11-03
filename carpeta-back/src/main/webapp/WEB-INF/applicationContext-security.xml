@@ -1,92 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:sec="http://www.springframework.org/schema/security"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:sec="http://www.springframework.org/schema/security" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
 				http://www.springframework.org/schema/beans
 				http://www.springframework.org/schema/beans/spring-beans.xsd
 				http://www.springframework.org/schema/security
 				http://www.springframework.org/schema/security/spring-security.xsd">
-
-	<sec:http create-session="never" use-expressions="true"
-		auto-config="false"
-		entry-point-ref="preAuthenticatedProcessingFilterEntryPoint">
-        
-        
-        
-        <sec:headers>
-            <sec:frame-options  policy="SAMEORIGIN" />
-            <!--  <sec:hsts  disabled="true"/>  -->
-        </sec:headers>
-
-
-		<sec:csrf disabled="true" />
-
-        <sec:logout success-handler-ref="carpetaLogoutSuccessHandler" delete-cookies="JSESSIONID" />
-
-        <sec:intercept-url pattern="/fonts/**" access="permitAll" />
-		<sec:intercept-url pattern="/js/**" access="permitAll" />
-		<sec:intercept-url pattern="/public/**" access="permitAll" />
-		<sec:intercept-url pattern="/img/**"			access="permitAll" />
-		<sec:intercept-url pattern="/css/**"			access="permitAll" />
-		<sec:intercept-url pattern="/error.jsp"			access="permitAll" />
-		<sec:intercept-url pattern="/index.jsp"			access="permitAll" />
-
-		<sec:intercept-url pattern="/common/**"			access="hasAnyRole('ROLE_ADMIN', 'ROLE_SUPER')" />
-
-		<sec:intercept-url pattern="/user/**"	access="hasRole('ROLE_ADMIN')" />
-        <sec:intercept-url pattern="/adminentitat/**"   access="hasRole('ROLE_ADMIN')" />
-
-		<sec:intercept-url pattern="/admin/**" 			access="hasRole('ROLE_SUPER')" />
-        <sec:intercept-url pattern="/superadmin/**"            access="hasRole('ROLE_SUPER')" />
-         <sec:intercept-url pattern="/webdb/**" access="hasRole('ROLE_SUPER')"/>
-
-		<sec:custom-filter position="PRE_AUTH_FILTER"
-			ref="preauthFilter" />
-		<sec:session-management
-			session-fixation-protection="none" />
+	<sec:http create-session="never" use-expressions="true" auto-config="false" entry-point-ref="preAuthenticatedProcessingFilterEntryPoint">
+		<sec:headers>
+			<sec:frame-options policy="SAMEORIGIN"/>
+			<!--  <sec:hsts  disabled="true"/>  -->
+		</sec:headers>
+		<sec:csrf disabled="true"/>
+		<sec:logout success-handler-ref="carpetaLogoutSuccessHandler" delete-cookies="JSESSIONID"/>
+		<sec:intercept-url pattern="/fonts/**" access="permitAll"/>
+		<sec:intercept-url pattern="/js/**" access="permitAll"/>
+		<sec:intercept-url pattern="/public/**" access="permitAll"/>
+		<sec:intercept-url pattern="/img/**" access="permitAll"/>
+		<sec:intercept-url pattern="/css/**" access="permitAll"/>
+		<sec:intercept-url pattern="/error.jsp" access="permitAll"/>
+		<sec:intercept-url pattern="/index.jsp" access="permitAll"/>
+		<sec:intercept-url pattern="/common/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_SUPER')"/>
+		<sec:intercept-url pattern="/user/**" access="hasRole('ROLE_ADMIN')"/>
+		<sec:intercept-url pattern="/adminentitat/**" access="hasRole('ROLE_ADMIN')"/>
+		<sec:intercept-url pattern="/admin/**" access="hasRole('ROLE_SUPER')"/>
+		<sec:intercept-url pattern="/superadmin/**" access="hasRole('ROLE_SUPER')"/>
+		<sec:intercept-url pattern="/webdb/**" access="hasRole('ROLE_SUPER')"/>
+		<sec:custom-filter position="PRE_AUTH_FILTER" ref="preauthFilter"/>
+		<sec:session-management session-fixation-protection="none"/>
 	</sec:http>
-
-	<sec:authentication-manager
-		alias="authenticationManager">
-		<sec:authentication-provider
-			ref="preAuthenticatedAuthenticationProvider" />
+	<sec:authentication-manager alias="authenticationManager">
+		<sec:authentication-provider ref="preAuthenticatedAuthenticationProvider"/>
 	</sec:authentication-manager>
-
-
-    <bean id="defaultHttpFirewall" class="org.springframework.security.web.firewall.DefaultHttpFirewall"/>
-    <sec:http-firewall ref="defaultHttpFirewall"/>
-
-
-
-	<bean id="preAuthenticatedProcessingFilterEntryPoint"
-		class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint" />
-
-	<bean id="preAuthenticatedAuthenticationProvider"
-		class="org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider">
+	<bean id="defaultHttpFirewall" class="org.springframework.security.web.firewall.DefaultHttpFirewall"/>
+	<sec:http-firewall ref="defaultHttpFirewall"/>
+	<bean id="preAuthenticatedProcessingFilterEntryPoint" class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint"/>
+	<bean id="preAuthenticatedAuthenticationProvider" class="org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider">
 		<property name="preAuthenticatedUserDetailsService">
-			<bean
-				class="org.springframework.security.web.authentication.preauth.PreAuthenticatedGrantedAuthoritiesUserDetailsService" />
+			<bean class="org.springframework.security.web.authentication.preauth.PreAuthenticatedGrantedAuthoritiesUserDetailsService"/>
 		</property>
 	</bean>
-
-	<bean id="attributes2GrantedAuthoritiesMapper"
-		class="es.caib.carpeta.back.security.RolesBasedAttributes2GrantedAuthoritiesMapper">
+	<bean id="attributes2GrantedAuthoritiesMapper" class="es.caib.carpeta.back.security.RolesBasedAttributes2GrantedAuthoritiesMapper">
 		<property name="baseRoleMapping">
 			<map>
-				<entry key="CAR_ADMIN" value="ROLE_ADMIN" />
-				<entry key="CAR_SUPER" value="ROLE_SUPER" />
-				<entry key="@CAR_ADMIN" value="ROLE_ADMIN" />
-				<entry key="@CAR_SUPER" value="ROLE_SUPER" />
+				<entry key="CAR_ADMIN" value="ROLE_ADMIN"/>
+				<entry key="CAR_SUPER" value="ROLE_SUPER"/>
+				<entry key="@CAR_ADMIN" value="ROLE_ADMIN"/>
+				<entry key="@CAR_SUPER" value="ROLE_SUPER"/>
 			</map>
 		</property>
 	</bean>
-	
-	<bean id="carpetaLogoutSuccessHandler" class="es.caib.carpeta.back.security.CarpetaLogoutSuccessHandler" />
-
-
-	<bean id="mappableAttributesRetriever"
-		class="es.caib.carpeta.back.security.RolesBasedMappableAttributesRetriever">
+	<bean id="carpetaLogoutSuccessHandler" class="es.caib.carpeta.back.security.CarpetaLogoutSuccessHandler"/>
+	<bean id="mappableAttributesRetriever" class="es.caib.carpeta.back.security.RolesBasedMappableAttributesRetriever">
 		<property name="defaultMappableAttributes">
 			<set>
 				<value>CAR_ADMIN</value>
@@ -94,27 +57,15 @@
 			</set>
 		</property>
 	</bean>
-
-	<bean id="preauthFilter"
-		class="org.springframework.security.web.authentication.preauth.j2ee.J2eePreAuthenticatedProcessingFilter">
+	<bean id="preauthFilter" class="org.springframework.security.web.authentication.preauth.j2ee.J2eePreAuthenticatedProcessingFilter">
 		<property name="authenticationDetailsSource">
-			<bean
-				class="org.springframework.security.web.authentication.preauth.j2ee.J2eeBasedPreAuthenticatedWebAuthenticationDetailsSource">
-				<property name="mappableRolesRetriever"
-					ref="mappableAttributesRetriever" />
-				<property name="userRoles2GrantedAuthoritiesMapper"
-					ref="attributes2GrantedAuthoritiesMapper" />
+			<bean class="org.springframework.security.web.authentication.preauth.j2ee.J2eeBasedPreAuthenticatedWebAuthenticationDetailsSource">
+				<property name="mappableRolesRetriever" ref="mappableAttributesRetriever"/>
+				<property name="userRoles2GrantedAuthoritiesMapper" ref="attributes2GrantedAuthoritiesMapper"/>
 			</bean>
 		</property>
-		<property name="authenticationManager"
-			ref="authenticationManager" />
+		<property name="authenticationManager" ref="authenticationManager"/>
 	</bean>
-
-	<bean
-		class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
-
-
-	<bean
-		class="es.caib.carpeta.back.security.AuthenticationSuccessListener" />
-
+	<bean class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"/>
+	<bean class="es.caib.carpeta.back.security.AuthenticationSuccessListener"/>
 </beans>

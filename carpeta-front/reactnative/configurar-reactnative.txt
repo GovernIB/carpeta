@@ -21,6 +21,8 @@ ANDROID
 		(2) Anar directori reactnative/CarpetaApp 
 		(3) Executar "npm run android"
 
+    + Dispositius Disponibles
+	    % adb devices
 
 
 WEB
