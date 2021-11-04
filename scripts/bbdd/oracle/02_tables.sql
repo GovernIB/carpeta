@@ -51,7 +51,11 @@
 
     create table car_entitat (
        entitatid number(19,0) not null,
+        accessibilitatca clob,
+        accessibilitates clob,
         activa number(1,0) not null,
+        avislegalca clob,
+        avislegales clob,
         codi varchar2(30 char) not null,
         codidir3 varchar2(255 char) not null,
         colormenu varchar2(100 char) not null,

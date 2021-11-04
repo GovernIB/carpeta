@@ -56,10 +56,12 @@ create sequence car_usuarientitat_seq start with 1000 increment by  1;
 
     create table car_enllaz (
        enllazid number(19,0) not null,
+        actiu number(1,0) not null,
         descripcioid number(19,0),
         entitatid number(19,0) not null,
         logoid number(19,0) not null,
         nomid number(19,0) not null,
+        ordre number(10,0) not null,
         seccioid number(19,0),
         tipus number(10,0) not null,
         urlid number(19,0) not null,
@@ -68,12 +70,17 @@ create sequence car_usuarientitat_seq start with 1000 increment by  1;
 
     create table car_entitat (
        entitatid number(19,0) not null,
+        accessibilitatca long,
+        accessibilitates long,
         activa number(1,0) not null,
+        avislegalca long,
+        avislegales long,
         codi varchar2(30 char) not null,
         codidir3 varchar2(255 char) not null,
         colormenu varchar2(100 char) not null,
         commit varchar2(255 char),
         context varchar2(255 char),
+        descripcioid number(19,0),
         entitatdescfront varchar2(4000 char) not null,
         fitxercss number(19,0),
         iconid number(19,0) not null,
@@ -145,7 +152,9 @@ create sequence car_usuarientitat_seq start with 1000 increment by  1;
         logoid number(19,0),
         nomid number(19,0) not null,
         propietats long,
+        subtitolllargid number(19,0),
         tipus number(10,0) not null,
+        titolllargid number(19,0),
         primary key (pluginid)
     );
 
@@ -153,6 +162,7 @@ create sequence car_usuarientitat_seq start with 1000 increment by  1;
        pluginentitatid number(19,0) not null,
         actiu number(1,0) not null,
         entitatid number(19,0) not null,
+        ordre number(10,0) not null,
         pluginid number(19,0) not null,
         seccioid number(19,0),
         primary key (pluginentitatid)
@@ -175,6 +185,7 @@ create sequence car_usuarientitat_seq start with 1000 increment by  1;
         entitatid number(19,0) not null,
         iconaid number(19,0) not null,
         nomid number(19,0) not null,
+        ordre number(10,0) not null,
         secciopareid number(19,0),
         primary key (seccioid)
     );
@@ -227,6 +238,7 @@ create index car_enllaz_nomid_fk_i on car_enllaz (nomid);
 create index car_enllaz_seccioid_fk_i on car_enllaz (seccioid);
 create index car_enllaz_urlid_fk_i on car_enllaz (urlid);
 create index car_entitat_pk_i on car_entitat (entitatid);
+create index car_entitat_descripcioid_fk_i on car_entitat (descripcioid);
 create index car_entitat_fitxercss_fk_i on car_entitat (fitxercss);
 create index car_entitat_iconid_fk_i on car_entitat (iconid);
 create index car_entitat_logintextid_fk_i on car_entitat (logintextid);
@@ -245,6 +257,8 @@ create index car_plugin_pk_i on car_plugin (pluginid);
 create index car_plugin_descripcioid_fk_i on car_plugin (descripcioid);
 create index car_plugin_logoid_fk_i on car_plugin (logoid);
 create index car_plugin_nomid_fk_i on car_plugin (nomid);
+create index car_plugin_subtitllargid_fk_i on car_plugin (subtitolllargid);
+create index car_plugin_titolllargid_fk_i on car_plugin (titolllargid);
 create index car_pluginentitat_pk_i on car_pluginentitat (pluginentitatid);
 create index car_plugent_entitatid_fk_i on car_pluginentitat (entitatid);
 create index car_plugent_pluginid_fk_i on car_pluginentitat (pluginid);
@@ -330,6 +344,11 @@ create index car_usuent_usuariid_fk_i on car_usuarientitat (usuariid);
        references car_traduccio;
 
     alter table car_entitat 
+       add constraint car_entitat_traduccio_des_fk 
+       foreign key (descripcioid) 
+       references car_traduccio;
+
+    alter table car_entitat 
        add constraint car_entitat_fitxer_css_fk 
        foreign key (fitxercss) 
        references car_fitxer;
@@ -382,6 +401,16 @@ create index car_usuent_usuariid_fk_i on car_usuarientitat (usuariid);
     alter table car_plugin 
        add constraint car_plugin_traduccio_nom_fk 
        foreign key (nomid) 
+       references car_traduccio;
+
+    alter table car_plugin 
+       add constraint car_plugin_traduccio_stlar_fk 
+       foreign key (subtitolllargid) 
+       references car_traduccio;
+
+    alter table car_plugin 
+       add constraint car_plugin_traduccio_tllarg_fk 
+       foreign key (titolllargid) 
        references car_traduccio;
 
     alter table car_pluginentitat 
