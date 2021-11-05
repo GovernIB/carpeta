@@ -3,10 +3,7 @@ package org.fundaciobit.pluginsib.carpetafront.sistra;
 import es.caib.carpeta.commons.utils.BasicAuthenticator;
 import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.DateUtils;
-import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
-import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
-import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
-import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
+import es.caib.carpeta.pluginsib.carpetafront.api.*;
 import es.caib.sistramit.rest.api.externa.v1.RFiltroTramitePersistencia;
 import es.caib.sistramit.rest.api.externa.v1.RFiltroTramiteFinalizado;
 import es.caib.sistramit.rest.api.externa.v1.RInfoTicketAcceso;
@@ -36,16 +33,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Properties;
-import java.util.TimeZone;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import com.google.gson.Gson;
+
+import static java.util.Comparator.comparing;
 
 
 /**
@@ -91,6 +84,27 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
         return "carpetafrontsistra";
     }
 
+
+    // ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
+    // ------------------- CACHE DE TITOLS i SUBTITOLS ----------------------------
+    // ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
+
+
+    private TitlesInfo titlesInfo = null;;
+
+
+    @Override
+    public void setTitlesInfo(TitlesInfo titlesInfo) {
+        this.titlesInfo = titlesInfo;
+    }
+
+    @Override
+    public TitlesInfo getTitlesInfo() {
+        return titlesInfo;
+    }
+
     @Override
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
             HttpServletRequest request, UserData userData, String administrationIDEncriptat, 
@@ -99,10 +113,15 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
         super.registerUserData(userData);
 
-        String startURL = absolutePluginRequestPath + "/" + ESPERA_PAGE;
+        String startURL = (isReactComponent()) ? absolutePluginRequestPath + "/" + INDEX_HTML_PAGE : absolutePluginRequestPath + "/" + ESPERA_PAGE;
 
         log.info(" getStartUrl( ); => " + startURL);
         return startURL;
+    }
+
+    @Override
+    public boolean isReactComponent() {
+        return true;
     }
 
     @Override
@@ -131,6 +150,21 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
             obtenerTramiteSistra2(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                     userData, administrationEncriptedID, locale, isGet);
+
+        } else if (query.startsWith(INDEX_HTML_PAGE)) {
+
+            index(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
+
+        } else if (query.startsWith(REACT_JS_PAGE)) {
+
+            reactjs(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
+
+        } else if (query.startsWith(URL_REST_SERVICE)) {
+
+            consultaTramits(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
 
         } else {
 
@@ -161,6 +195,220 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
         } catch (Exception e) {
             log.error("Error enviant pagian d'espera de Sistra: " + e.getMessage(), e);
         }
+    }
+
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // -------------------- INDEX -----------------------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+    protected static final String INDEX_HTML_PAGE = "sistra_index.html";
+
+    public void index(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+                      HttpServletRequest request, HttpServletResponse response, UserData userData,
+                      String administrationEncriptedID, Locale locale, boolean isGet) {
+
+        try {
+
+            response.setContentType("text/html");
+
+            String resource = "/webpage/sistra_index.html";
+
+            response.setHeader("Content-Disposition",
+                    "inline;filename=\"" + java.net.URLEncoder.encode(INDEX_HTML_PAGE, "UTF-8") + "\"");
+
+            response.setCharacterEncoding("utf-8");
+
+            InputStream input = this.getClass().getResourceAsStream(resource);
+
+            String plantilla = IOUtils.toString(input, "UTF-8");
+
+            Map<String, Object> map = new HashMap<String, Object>();
+
+            Gson json = new Gson();
+
+            TitlesInfo titles = getTitlesInfo();
+
+            map.put("titles", json.toJson(titles.getTitlesByLang()));
+
+            map.put("subtitles", json.toJson(titles.getSubtitlesByLang()));
+
+            log.info("absolutePluginRequestPath ==> " + absolutePluginRequestPath);
+
+            String pathtojsSistra = absolutePluginRequestPath + "/" + REACT_JS_PAGE;
+
+            map.put("pathtojsSistra", pathtojsSistra);
+
+//            String pathtoservei = absolutePluginRequestPath + "/" + LLISTAT_TRAMITS_PAGE;
+            String pathtoservei = absolutePluginRequestPath + "/" + URL_REST_SERVICE;
+
+            map.put("pathtoservei", pathtoservei);
+
+            String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
+
+            try {
+                response.getWriter().println(generat);
+                response.flushBuffer();
+            } catch (IOException e) {
+                log.error("Error obtening writer: " + e.getMessage(), e);
+            }
+
+        } catch (Exception e) {
+            // XYZ ZZZ
+            log.error("Error generant pàgina bàsica: " + e.getMessage(), e);
+        }
+
+    }
+
+
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // ------------------- CONSULTA REST ----------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+    protected static final String URL_REST_SERVICE = "consultaTramits";
+
+    public void consultaTramits(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+                             HttpServletRequest request, HttpServletResponse response, UserData userData,
+                             String administrationEncriptedID, Locale locale, Boolean isGet) {
+
+        Date formDataInici;
+        Date formDataFi;
+        String formEstat;
+        int pagina;
+        int itemsPagina = 10;
+
+        String formDataIniciStr = request.getParameter("dataInici");
+        String formDataFiStr = request.getParameter("dataFi");
+        formEstat = request.getParameter("estat");
+        pagina = Integer.parseInt(request.getParameter("pageNumber"));
+        log.info("pageNumber: " + pagina);
+
+        try {
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            sdf.setTimeZone(TimeZone.getTimeZone("Europe/Madrid"));
+
+            formDataInici = sdf.parse(formDataIniciStr);
+            formDataFi = sdf.parse(formDataFiStr);
+
+            Map<String, String> dades = new HashMap<String, String>();
+            List<TramitePersistenteGenerico> tramitesGenericos = new ArrayList<TramitePersistenteGenerico>();
+            List<TramitePersistenteGenerico> sortedTramit = new ArrayList<TramitePersistenteGenerico>();
+            String missatgeError = "";
+
+            if (formDataInici == null ) {
+                dades.put("error", getTraduccio("error.dataInici.null", locale) );
+            } else {
+                if (formDataFi == null ) {
+                    dades.put("error", getTraduccio("error.dataFi.null", locale) );
+                } else {
+                    if (formEstat == null ) {
+                        dades.put("error", getTraduccio("error.estat.null", locale) );
+                    } else {
+                        log.info("Consulta  resultats a sistra per dataInici:" + formDataInici + " | Data fi: " + formDataFi + " | Estat: " + formEstat);
+
+                        List<TramitePersistenteGenerico> tramits;
+
+                        formDataFi = DateUtils.sumarRestarDiasFecha(formDataFi, 1);
+
+                        /* SISTRA1 */
+                        try {
+                            if (isDevelopment()) {
+                                tramits = getTramitsDebug(formDataInici, formDataFi, userData.getAdministrationID(), formEstat,
+                                        locale, absolutePluginRequestPath);
+                            } else {
+                                tramits = getTramits(formDataInici, formDataFi, userData.getAdministrationID(), formEstat, locale,
+                                        absolutePluginRequestPath);
+                            }
+                        } catch (SOAPFaultException e) {
+                            tramits = null;
+
+                            // Controlar excepció Sistra1 dintre plugin de tramitació #478
+                            if (Configuracio.isCAIB() && e.getMessage().contains("es.caib.zonaper.modelInterfaz.ExcepcionPAD")) {
+                                missatgeError = "";
+                            } else {
+                                missatgeError = "Sistra1: " + e.getMessage() + "\n";
+                            }
+
+                        }
+
+                        if (tramits != null) {
+                            tramitesGenericos.addAll(tramits);
+                        }
+
+                        /* SISTRA2 */
+                        try {
+                            if (isDevelopment()) {
+                                tramits = obtenerTramitesDebug(userData.getAdministrationID(), formDataInici, formDataFi, formEstat,
+                                        absolutePluginRequestPath);
+                            } else {
+                                tramits = obtenerTramites(userData.getAdministrationID(), formDataInici, formDataFi, formEstat,
+                                        absolutePluginRequestPath);
+                            }
+                        } catch (javax.ws.rs.client.ResponseProcessingException e) {
+                            tramits = null;
+                            e.printStackTrace();
+                            log.error("Sistra2 - No hi ha tramits:" + e.getMessage());
+                        } catch (Exception e) {
+                            tramits = null;
+                            missatgeError += "Sistra2: " + e.getMessage();
+                            log.error("Error Sistra2:" + e.getMessage());
+                        }
+
+                        if (tramits != null) {
+                            tramitesGenericos.addAll(tramits);
+                        }
+
+                        // Ordenam tràmits a mostrar
+                        sortedTramit = tramitesGenericos.stream()
+                                .sorted(Comparator.comparing(TramitePersistenteGenerico::getFechaInicio).reversed())
+                                .collect(Collectors.toList());
+
+                    }
+                }
+            }
+            List<TramitePersistenteGenerico> tramitsPagina = new ArrayList<TramitePersistenteGenerico>();
+
+            if(sortedTramit.size() > 0) {
+                if ((pagina * itemsPagina) + itemsPagina < sortedTramit.size()) {
+                    tramitsPagina = sortedTramit.subList(pagina * itemsPagina, (pagina * itemsPagina) + itemsPagina);
+                } else {
+                    tramitsPagina = sortedTramit.subList(pagina * itemsPagina, sortedTramit.size());
+                }
+            }
+
+            Map<String, Object> infoTramits = new HashMap<String, Object>();
+            infoTramits.put("tramits", tramitsPagina);
+            infoTramits.put("totalRegistres", sortedTramit.size());
+            infoTramits.put("registresPagina", itemsPagina);
+
+            Gson gson = new Gson();
+            String json = gson.toJson(infoTramits);
+
+            log.info("JSON: " + json);
+
+            try {
+
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
+
+                response.getWriter().write(json);
+
+            } catch (IOException e) {
+                log.error("Error obtenint writer: " + e.getMessage(), e);
+            }
+
+        } catch (Exception e) {
+            // XYZ ZZZ
+            log.error("Error generant pàgina bàsica: " + e.getMessage(), e);
+        }
+
+
+
+
     }
 
     // --------------------------------------------------------------------------------------
@@ -613,6 +861,46 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
         return ClientBuilder.newClient().register(new BasicAuthenticator(username, password))
                 .register(EntityLoggingFilter.class).register(JsonbConfigurator.class);
+    }
+
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // ------------------- JAVASCRIPT REACT ----------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+    protected static final String REACT_JS_PAGE = "sistra_reactjs_main.js";
+
+    public void reactjs(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+                        HttpServletRequest request, HttpServletResponse response, UserData userData,
+                        String administrationEncriptedID, Locale locale, boolean isGet) {
+
+        try {
+
+            response.setContentType("application/javascript");
+
+            response.setHeader("Content-Disposition",
+                    "inline;filename=\"" + java.net.URLEncoder.encode(REACT_JS_PAGE, "UTF-8") + "\"");
+
+            String resource = "/webpage/sistra_reactjs_main.js";
+
+            response.setCharacterEncoding("utf-8");
+
+            InputStream input = this.getClass().getResourceAsStream(resource);
+
+            String plantilla = IOUtils.toString(input, "UTF-8");
+
+            try {
+                response.getWriter().println(plantilla);
+                response.flushBuffer();
+            } catch (IOException e) {
+                log.error("Error obtening writer: " + e.getMessage(), e);
+            }
+
+        } catch (Exception e) {
+            log.error("Error llistant tràmits XYZ ZZZ: " + e.getMessage(), e);
+        }
+
     }
 
     // --------------------------------------------------------------------------------------
