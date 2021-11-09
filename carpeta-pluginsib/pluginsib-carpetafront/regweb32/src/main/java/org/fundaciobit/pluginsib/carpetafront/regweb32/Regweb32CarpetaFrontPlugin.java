@@ -346,6 +346,9 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             String parametros = "";
             Calendar cal = Calendar.getInstance();
             SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+            
+            // Número de registres a mostrar per pàgina
+            final int numItems = 10;
 
             if (formDataFiStr != null && formDataFiStr != "") {
                 formDataFi = SDF.parse(formDataFiStr);
@@ -382,7 +385,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 
             String webpage = getLlistatDeRegistresPage(absolutePluginRequestPath,
                     relativePluginRequestPath, userData, getEntidad(), formNumero, formDataInici,
-                    formDataFi, formEstat, parametros, Integer.parseInt(pageNumber) - 1, locale,
+                    formDataFi, formEstat, parametros, Integer.parseInt(pageNumber) - 1, numItems, locale,
                     isGet);
 
             try {
@@ -416,7 +419,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
     public String getLlistatDeRegistresPage(String absolutePluginRequestPath,
             String relativePluginRequestPath, UserData userData, String entidad, String formNumero,
             Date formDataInici, Date formDataFi, String formEstat, String parametros,
-            int pageNumber, Locale locale, boolean isGet) throws Exception {
+            int pageNumber, int numItems, Locale locale, boolean isGet) throws Exception {
 
         Map<String, Object> map = new HashMap<String, Object>();
 
@@ -424,6 +427,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
         map.put("form_dataFi", formDataFi);
         map.put("form_dataInici", formDataInici);
         map.put("form_estat", formEstat);
+        map.put("num_items", numItems);
 
         @SuppressWarnings("unchecked")
         List<AsientoWs> registres;
@@ -438,7 +442,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 
             ResultadoBusquedaWs result;
             result = getRegistres(userData.getAdministrationID(), entidad, formNumero,
-                    formDataInici, formDataFi, formEstat, pageNumber, locale);
+                    formDataInici, formDataFi, formEstat, pageNumber, numItems, locale);
 
             //@SuppressWarnings("unchecked")
             registres = (List<AsientoWs>) (List<?>) result.getResults();
@@ -548,7 +552,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 
     public ResultadoBusquedaWs getRegistres(String administrationID, String entidad,
             String formNumero, Date formDataInici, Date formDataFi, String formEstat,
-            int pageNumber, Locale locale) throws Exception {
+            int pageNumber, int numItems, Locale locale) throws Exception {
 
         RegWebAsientoRegistralWs service = super.getRegWebAsientoRegistralWsService();
 
@@ -593,7 +597,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
         ResultadoBusquedaWs result = service.obtenerAsientosCiudadanoCarpeta(entidad,
                 administrationID, pageNumber, locale.getLanguage(),
                 new Timestamp(formDataInici.getTime()), new Timestamp(formDataFi.getTime()),
-                formNumero, formEstats);
+                formNumero, formEstats, "", numItems);
 
         if (isDevelopment()) {
             @SuppressWarnings("unchecked")
