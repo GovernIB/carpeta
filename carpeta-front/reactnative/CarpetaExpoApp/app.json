@@ -35,6 +35,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "es.caib.carpeta.carpetaapp",
+	  "googleServicesFile": "./google-services.json",
       "versionCode": 1
     },
     "web": {
