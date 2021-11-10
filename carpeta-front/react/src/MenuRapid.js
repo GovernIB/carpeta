@@ -18,7 +18,9 @@ class MenuRapid extends Component {
         this.state = {
             items: [], // plugins, menupseudoplugin, seccions
             error: null,
+            added: false,
         }
+
         this.canviatIdioma = this.canviatIdioma.bind(this);
         i18n.on('languageChanged', this.canviatIdioma);
     }
@@ -28,6 +30,20 @@ class MenuRapid extends Component {
         this.componentDidMount();
     }
 
+    afegirListener() { 
+
+            document.addEventListener('click', function() {
+
+                let items = document.querySelectorAll('ul.dropdown-menu');
+                items.forEach(  function(elemento){ 
+                    if (elemento.classList.contains('show')){
+                        elemento.classList.remove('show') 
+                    }
+                });
+            }, false);
+        
+            this.setState({...this.state, added: true });
+    }
 
     componentDidMount() {
 
@@ -58,6 +74,27 @@ class MenuRapid extends Component {
                 }
 
             });
+
+            if (autenticat === '1' && !this.state.added)
+                this.afegirListener();  
+    }
+
+    componentWillUnmount(){
+        
+        console.log("UMOUNT: ", this.state);
+        if(this.state.added){
+            document.removeEventListener('click', function() {
+                console.log("REMOVE EVENT LISTENER");
+
+                let items = document.querySelectorAll('ul.dropdown-menu');
+                items.forEach(  function(elemento){ 
+                    if (elemento.classList.contains('show')){
+                        elemento.classList.remove('show') 
+                    }   
+                });
+            }, false);
+            this.setState({added:false});
+        }
     }
 
     render() {
@@ -90,7 +127,7 @@ class MenuRapid extends Component {
                             allItems.push(
                                 <li key={k} className="nav-item pr-4 lletraRapid">
                                     <Link className="navCarpeta"
-                                          to={{pathname: Constants.PLUGINREACT_PATH + s.context, nomPagina: "plugin"}} tabIndex={301+k} aria-labelledby={"menuRapidBoto"+i} onFocus={function(){$("#submenu"+iActiu).css("display", "none");iActiu=i;}}>
+                                          to={{pathname: Constants.PLUGINREACT_PATH + s.context, nomPagina: "plugin"}} tabIndex={301+k} aria-labelledby={"menuRapidBoto"+i} onFocus={function(){$("#submenu"+iActiu).removeClass('show');iActiu=i;}} >
                                         <img src={urlBase + s.urllogo} alt={s.nom} title={t('iconaDe') + " " + s.nom} className="imc-icona"/>
                                         {/*<img src={s.urllogo} alt="" title="" className="imc-icona"/>*/}
                                         <span className="menuRapidView" id={"menuRapidBoto"+i}>{s.nom}</span>
@@ -103,7 +140,7 @@ class MenuRapid extends Component {
                             allItems.push(
                                 <li key={k} className="nav-item pr-4 lletraRapid">
                                     <Link className="navCarpeta"
-                                          to={{pathname: Constants.PLUGINHTML_PATH + s.context, nomPagina: "plugin"}} tabIndex={301+k} aria-labelledby={"menuRapidBoto"+i} onFocus={function(){$("#submenu"+iActiu).css("display", "none");iActiu=i;}}>
+                                          to={{pathname: Constants.PLUGINHTML_PATH + s.context, nomPagina: "plugin"}} tabIndex={301+k} aria-labelledby={"menuRapidBoto"+i} onFocus={function(){$("#submenu"+iActiu).removeClass('show');iActiu=i;}} >
                                         <img src={urlBase + s.urllogo} alt={s.nom} title={t('iconaDe') + " " + s.nom} className="imc-icona"/>
                                         {/*<img src={s.urllogo} alt="" title="" className="imc-icona"/>*/}
                                         <span className="menuRapidView" id={"menuRapidBoto"+i}>{s.nom}</span>
@@ -121,7 +158,7 @@ class MenuRapid extends Component {
                                         <li key={k}>
                                             <Link className="navCarpeta dropdown-item linkVerd"
                                                   to={{pathname: Constants.SECCIO_PATH + s.context + Constants.PLUGINREACT_PATH + p.context, nomPagina: "plugin"
-                                                  }} tabIndex={301 + k + j + 1} aria-labelledby={"menuRapidBoto"+i} onClick={function(){$("#submenu"+iActiu).css("display", "none")}}>
+                                                  }} tabIndex={301 + k + j + 1} aria-labelledby={"menuRapidBoto"+i} onClick={function(){$("#submenu"+iActiu).removeClass('show')}}>
                                                 <img src={urlBase + "/pluginfront/pluginicon/" + p.pluginID + "/" + i18n.language + ""} alt={p.nom} title={t('iconaDe') + " " + p.nom} className="imc-icona"/>
                                                 <span className="menuRapidView">{p.nom}</span>
                                             </Link>
@@ -132,7 +169,7 @@ class MenuRapid extends Component {
                                         <li key={k}>
                                             <Link className="navCarpeta dropdown-item linkVerd"
                                                   to={{pathname: Constants.SECCIO_PATH + s.context + Constants.PLUGINHTML_PATH + p.context, nomPagina: "plugin"
-                                                  }} tabIndex={301 + k + j + 1} aria-labelledby={"menuRapidBoto"+i} onClick={function(){$("#submenu"+iActiu).css("display", "none")}}>
+                                                  }} tabIndex={301 + k + j + 1} aria-labelledby={"menuRapidBoto"+i} onClick={function(){$("#submenu"+iActiu).removeClass('show')}}>
                                                 <img src={urlBase + "/pluginfront/pluginicon/" + p.pluginID + "/" + i18n.language + ""} alt={p.nom} title={t('iconaDe') + " " + p.nom} className="imc-icona"/>
                                                 <span className="menuRapidView">{p.nom}</span>
                                             </Link>
@@ -149,11 +186,9 @@ class MenuRapid extends Component {
                                 <li className="btn-group navCarpeta pr-4" key={k}>
                                     <button type="button" className="btn btn-default dropdown-toggle p-0 lletraRapid disBlok text-verd"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id={"menuRapidBoto"+i} tabIndex={301 + k - l} 
-                                                onFocus={() => {
-                                                $("#submenu"+iActiu).css("display", "none");
-                                                iActiu=i;
-                                                $("#submenu"+i).css("display", "block");
-                                                }}>
+                                                onFocus={(event) => {$("#submenu"+iActiu).removeClass('show');iActiu=i;$("#submenu"+i).addClass('show');}}
+                                                
+                                                >
                                         <img src={s.urllogo} title={t('iconaDe') + " " + s.nom} alt={s.nom} className="imc-icona"/>
                                         <span className="menuRapidView lletraRapid">{s.nom}</span>
                                     </button>
@@ -168,7 +203,7 @@ class MenuRapid extends Component {
                         case 4: // PseudoPlugin
                             allItems.push(
                                 <li key={k} className="nav-item pr-4 lletraRapid">
-                                    <a className="navCarpeta" href={s.url} target="_blank" title={s.nom} tabIndex={301+k} aria-labelledby={"menuRapidBoto"+i} onFocus={function(){$("#submenu"+iActiu).css("display", "none");iActiu=i;}}>
+                                    <a className="navCarpeta" href={s.url} target="_blank" title={s.nom} tabIndex={301+k} aria-labelledby={"menuRapidBoto"+i} onFocus={function(){$("#submenu"+iActiu).removeClass('show');iActiu=i;}} >
                                         <img src={s.urllogo} alt={s.nom} title={t('iconaDe') + " " + s.nom} className="imc-icona"/>
                                         <span className="menuRapidView" id={"menuRapidBoto"+i}>{s.nom}</span>
                                     </a>

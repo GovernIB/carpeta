@@ -1,0 +1,22 @@
+{
+    "sistraTitle":"Trámites telemáticos",
+    "sistraSubtitle":"En este apartado puede consultar todos los trámites telemáticos que ha iniciado y están pendientes de finalizar o ya finalizados.",
+    "sistraCercaBoto":"Buscar",
+    "sistraTornar":"Volver",
+    "sistraDataInici":"Fecha Inicio",
+    "sistraDataFi":"Fecha Fin",
+    "sistraEstat":"Estado",
+    "sistraTots":"Todos",
+    "sistraFinalitzat":"Finalizado",
+    "sistraNoFinalitzat":"Inacabado",
+    "sistraRegistrat":"Registrado",
+    "sistraBuid":"No hay trámites",
+    "sistraTramit":"Trámite",
+    "sistraData":"Fecha de inicio",
+    "sistraNoFinalizatPresencial":"Pendiente comparecencia",
+    "sistraDataIniciError":"Fecha Inicio mayor que Fecha Fin",
+    "sistraModalTitol": "Aviso",
+    "sistraModalTexte": "La tramitación telemática ha finalizado. Acabe el procedimiento presentando la documentación correspondiente de forma presencial.",
+    "sistraModalBotoCancelar": "Cerrar",
+    "sistraModalBotoContinuar": "Ver detalle"
+}

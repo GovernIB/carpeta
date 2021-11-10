@@ -11,27 +11,27 @@
     <parent>
         <groupId>es.caib.carpeta</groupId>        
         <artifactId>carpeta-pluginsib-carpetafront</artifactId>
-        <version>1.1.14</version>
+        <version>1.1.15</version>
     </parent>
 
     <dependencies>
 
         <dependency>
             <groupId>es.caib.carpeta</groupId>
-            <version>1.1.14</version>
+            <version>1.1.15</version>
             <artifactId>carpeta-pluginsib-carpetafront-api</artifactId>
         </dependency>
         
         <dependency>
             <groupId>es.caib.carpeta</groupId>
-            <version>1.1.14</version>
+            <version>1.1.15</version>
             <artifactId>carpeta-pluginsib-carpetafront-regwebdetallcomponent</artifactId>
         </dependency>
         
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-commons</artifactId>
-            <version>1.1.14</version>
+            <version>1.1.15</version>
             <scope>provided</scope>
         </dependency>
 
@@ -114,6 +114,12 @@
                     <artifactId>spring-aop</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <scope>provided</scope>
         </dependency>
         
         <dependency>
