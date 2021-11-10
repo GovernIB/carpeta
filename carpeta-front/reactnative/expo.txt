@@ -16,7 +16,9 @@ https://code.tutsplus.com/es/tutorials/easier-react-native-development-with-expo
 	               username: carpeta
                    password: elmateixqueeldocumentdekeepass
 				   
-				   
+	Passes: (1) Y
+            (2) apk	
+			(3) Si demana fitxer passar-li AuthKey_2LWLJHW7VS.p8  
 				   
  (5) expo build:ios  ???
  
@@ -26,6 +28,18 @@ https://code.tutsplus.com/es/tutorials/easier-react-native-development-with-expo
  (1) Cercar log ExponentPushToken[XXXXXXXXXXXXXXXXXXX] a la consola d'execució.
  (2) Anar a https://expo.dev/notifications i omplir 'To' amb el valor del punt (1). També omplir Message title i Message Body. 
  (3) Pitjar "Send a Notification". Hauria d'apareixer una notificació al dispositiu
+ 
+ 
+ NOTIFICACIONS ANDROID FIREBASE
+ 
+ (1) Seguir Instruccions
+https://docs.expo.dev/push-notifications/using-fcm/
+
+(2) Dades Firebase
+
+Compte fundaciobit.governdigital@gmail.com
+https://console.firebase.google.com/u/1/project/carpetaappbalear/overview
+ 
  
  
  NOTIFICACIONS IOS ?????
