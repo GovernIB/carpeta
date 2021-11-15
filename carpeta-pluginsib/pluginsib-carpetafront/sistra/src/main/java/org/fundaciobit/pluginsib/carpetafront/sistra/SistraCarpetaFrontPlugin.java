@@ -650,7 +650,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             long num = backofficeFacade.obtenerTotalElementosExpediente(filtroElementosExpediente);
 
             int pagina = 0;
-            int tamPagina = (int) num;
+            int tamPagina = ( num > 0 ) ? (int) num : 0;
 
             ElementosExpediente tramitesAcabados = backofficeFacade
                     .obtenerElementosExpediente(filtroElementosExpediente, pagina, tamPagina);
