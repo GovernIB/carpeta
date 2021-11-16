@@ -16,11 +16,11 @@
           <form:errors path="pluginEntitat.pluginID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.PLUGINID)}" >
           <form:hidden path="pluginEntitat.pluginID"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.pluginEntitat.pluginID,__theForm.listOfPluginForPluginID)}"  />
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.pluginEntitat.pluginID,__theForm.listOfPluginForPluginID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.PLUGINID)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="pluginEntitat_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="form-control col-md-8" path="pluginEntitat.pluginID">
+          <form:select id="pluginEntitat_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="form-control col-md-9-optional" path="pluginEntitat.pluginID">
             <c:forEach items="${__theForm.listOfPluginForPluginID}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">
@@ -47,11 +47,11 @@
           <form:errors path="pluginEntitat.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ENTITATID)}" >
           <form:hidden path="pluginEntitat.entitatID"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.pluginEntitat.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.pluginEntitat.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ENTITATID)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="pluginEntitat_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-8" path="pluginEntitat.entitatID">
+          <form:select id="pluginEntitat_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-9-optional" path="pluginEntitat.entitatID">
             <c:forEach items="${__theForm.listOfEntitatForEntitatID}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">
@@ -77,7 +77,7 @@
             <td>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ACTIU)}" >
               <form:errors path="pluginEntitat.actiu" cssClass="errorField alert alert-danger" />
-              <form:checkbox cssClass="form-control" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ACTIU)? 'false' : 'true'}" path="pluginEntitat.actiu"  style="width:1%"/>
+              <form:checkbox cssClass="" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ACTIU)? 'false' : 'true'}" path="pluginEntitat.actiu" />
           </c:if>
           <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ACTIU)}" >
                 <fmt:message key="genapp.checkbox.${__theForm.pluginEntitat.actiu}" />
@@ -100,11 +100,11 @@
           <form:errors path="pluginEntitat.seccioID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.SECCIOID)}" >
           <form:hidden path="pluginEntitat.seccioID"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.pluginEntitat.seccioID,__theForm.listOfSeccioForSeccioID)}"  />
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.pluginEntitat.seccioID,__theForm.listOfSeccioForSeccioID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.SECCIOID)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="pluginEntitat_seccioID"  onchange="if(typeof onChangeSeccioID == 'function') {  onChangeSeccioID(this); };"  cssClass="form-control col-md-8" path="pluginEntitat.seccioID">
+          <form:select id="pluginEntitat_seccioID"  onchange="if(typeof onChangeSeccioID == 'function') {  onChangeSeccioID(this); };"  cssClass="form-control col-md-9-optional" path="pluginEntitat.seccioID">
             <c:forEach items="${__theForm.listOfSeccioForSeccioID}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">
@@ -138,7 +138,7 @@
             </td>
             <td>
             <form:errors path="pluginEntitat.ordre" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ORDRE)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ORDRE)? ' uneditable-input' : ''}"  style=""  path="pluginEntitat.ordre"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ORDRE)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ORDRE)? ' uneditable-input' : ''}"  style=""  path="pluginEntitat.ordre"   />
 
            </td>
         </tr>

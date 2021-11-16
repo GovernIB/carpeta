@@ -16,11 +16,11 @@
           <form:errors path="estadistica.tipus" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.TIPUS)}" >
           <form:hidden path="estadistica.tipus"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.estadistica.tipus,__theForm.listOfValuesForTipus)}"  />
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.estadistica.tipus,__theForm.listOfValuesForTipus)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,EstadisticaFields.TIPUS)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="estadistica_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-8" path="estadistica.tipus">
+          <form:select id="estadistica_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-9-optional" path="estadistica.tipus">
             <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">
@@ -85,7 +85,7 @@
             </td>
             <td>
             <form:errors path="estadistica.comptador" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EstadisticaFields.COMPTADOR)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.COMPTADOR)? ' uneditable-input' : ''}"  style=""  path="estadistica.comptador"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EstadisticaFields.COMPTADOR)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.COMPTADOR)? ' uneditable-input' : ''}"  style=""  path="estadistica.comptador"   />
 
            </td>
         </tr>
@@ -105,11 +105,11 @@
           <form:errors path="estadistica.pluginID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.PLUGINID)}" >
           <form:hidden path="estadistica.pluginID"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.estadistica.pluginID,__theForm.listOfValuesForPluginID)}"  />
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.estadistica.pluginID,__theForm.listOfValuesForPluginID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,EstadisticaFields.PLUGINID)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="estadistica_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="form-control col-md-8" path="estadistica.pluginID">
+          <form:select id="estadistica_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="form-control col-md-9-optional" path="estadistica.pluginID">
             <c:forEach items="${__theForm.listOfValuesForPluginID}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">
@@ -145,11 +145,11 @@
           <form:errors path="estadistica.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.ENTITATID)}" >
           <form:hidden path="estadistica.entitatID"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.estadistica.entitatID,__theForm.listOfValuesForEntitatID)}"  />
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.estadistica.entitatID,__theForm.listOfValuesForEntitatID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,EstadisticaFields.ENTITATID)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="estadistica_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-8" path="estadistica.entitatID">
+          <form:select id="estadistica_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-9-optional" path="estadistica.entitatID">
             <c:forEach items="${__theForm.listOfValuesForEntitatID}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">

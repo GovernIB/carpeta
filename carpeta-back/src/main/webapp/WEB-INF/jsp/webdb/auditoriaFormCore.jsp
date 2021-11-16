@@ -16,11 +16,11 @@
           <form:errors path="auditoria.tipus" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TIPUS)}" >
           <form:hidden path="auditoria.tipus"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.auditoria.tipus,__theForm.listOfValuesForTipus)}"  />
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.auditoria.tipus,__theForm.listOfValuesForTipus)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TIPUS)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="auditoria_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-8" path="auditoria.tipus">
+          <form:select id="auditoria_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-9-optional" path="auditoria.tipus">
             <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">
@@ -45,7 +45,7 @@
             </td>
             <td>
               <form:errors path="auditoria.objecte" cssClass="errorField alert alert-danger" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.OBJECTE)? 'true' : 'false'}" path="auditoria.objecte"  />
+              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.OBJECTE)? 'true' : 'false'}" path="auditoria.objecte"  />
       <div id="dropdownMenuButton_objecte" style="vertical-align:top;display:inline;position:relative;">
         <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
         <div id="dropdownMenuContainer_objecte" class="dropdown-menu">
@@ -116,7 +116,7 @@
             </td>
             <td>
             <form:errors path="auditoria.username" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USERNAME)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USERNAME)? ' uneditable-input' : ''}"  style="" maxlength="255" path="auditoria.username"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USERNAME)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USERNAME)? ' uneditable-input' : ''}"  style="" maxlength="255" path="auditoria.username"   />
 
            </td>
         </tr>
@@ -136,11 +136,11 @@
           <form:errors path="auditoria.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.ENTITATID)}" >
           <form:hidden path="auditoria.entitatID"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.auditoria.entitatID,__theForm.listOfValuesForEntitatID)}"  />
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.auditoria.entitatID,__theForm.listOfValuesForEntitatID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,AuditoriaFields.ENTITATID)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="auditoria_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-8" path="auditoria.entitatID">
+          <form:select id="auditoria_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-9-optional" path="auditoria.entitatID">
             <c:forEach items="${__theForm.listOfValuesForEntitatID}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">

@@ -16,11 +16,11 @@
           <form:errors path="enllaz.tipus" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,EnllazFields.TIPUS)}" >
           <form:hidden path="enllaz.tipus"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.enllaz.tipus,__theForm.listOfValuesForTipus)}"  />
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.enllaz.tipus,__theForm.listOfValuesForTipus)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,EnllazFields.TIPUS)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="enllaz_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-8" path="enllaz.tipus">
+          <form:select id="enllaz_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-9-optional" path="enllaz.tipus">
             <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">
@@ -45,7 +45,7 @@
             </td>
             <td>
        <form:errors path="enllaz.nom" cssClass="errorField alert alert-danger" />
-       <div class="row-fluid  col-md-8">
+       <div class="row-fluid col-md-9-optional">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
              <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
             <li class="nav-item ">
@@ -58,7 +58,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_nom_${idioma.idiomaID}">
                <form:errors path="enllaz.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="enllaz.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,EnllazFields.NOMID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EnllazFields.NOMID)}" maxlength="4000" />
+               <form:input path="enllaz.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EnllazFields.NOMID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EnllazFields.NOMID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -80,7 +80,7 @@
             </td>
             <td>
        <form:errors path="enllaz.descripcio" cssClass="errorField alert alert-danger" />
-       <div class="row-fluid  col-md-8">
+       <div class="row-fluid col-md-9-optional">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
              <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
             <li class="nav-item ">
@@ -93,7 +93,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_descripcio_${idioma.idiomaID}">
                <form:errors path="enllaz.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="enllaz.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,EnllazFields.DESCRIPCIOID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EnllazFields.DESCRIPCIOID)}" maxlength="4000" />
+               <form:input path="enllaz.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EnllazFields.DESCRIPCIOID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EnllazFields.DESCRIPCIOID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -115,7 +115,7 @@
             </td>
             <td>
        <form:errors path="enllaz.url" cssClass="errorField alert alert-danger" />
-       <div class="row-fluid  col-md-8">
+       <div class="row-fluid col-md-9-optional">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
              <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
             <li class="nav-item ">
@@ -128,7 +128,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_url_${idioma.idiomaID}">
                <form:errors path="enllaz.url.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="enllaz.url.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,EnllazFields.URLID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EnllazFields.URLID)}" maxlength="4000" />
+               <form:input path="enllaz.url.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EnllazFields.URLID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EnllazFields.URLID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -152,11 +152,11 @@
           <form:errors path="enllaz.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,EnllazFields.ENTITATID)}" >
           <form:hidden path="enllaz.entitatID"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.enllaz.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.enllaz.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,EnllazFields.ENTITATID)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="enllaz_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-8" path="enllaz.entitatID">
+          <form:select id="enllaz_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-9-optional" path="enllaz.entitatID">
             <c:forEach items="${__theForm.listOfEntitatForEntitatID}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">
@@ -185,9 +185,9 @@
               <a target="_blank" href="<c:url value="${car:fileUrl(logoID.logoID)}"/>">${logoID.logoID.nom}</a>
             </c:if>
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,EnllazFields.LOGOID)}" >
-              <div class="input-group">
-                <div class="custom-file col-md-8">
-                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EnllazFields.LOGOID)? 'true' : 'false'}" cssClass="custom-file-input form-control ${gen:contains(__theForm.readOnlyFields ,EnllazFields.LOGOID)? ' uneditable-input' : ''}"   path="logoID" type="file" />
+              <div class="input-group col-md-9-optional" style="padding: 0px">
+                <div class="custom-file">
+                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EnllazFields.LOGOID)? 'true' : 'false'}" cssClass="custom-file-input form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EnllazFields.LOGOID)? ' uneditable-input' : ''}"   path="logoID" type="file" />
                   <label class="custom-file-label" for="logoID">
                   </label>
                 </div>
@@ -235,11 +235,11 @@
           <form:errors path="enllaz.seccioID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,EnllazFields.SECCIOID)}" >
           <form:hidden path="enllaz.seccioID"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.enllaz.seccioID,__theForm.listOfSeccioForSeccioID)}"  />
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.enllaz.seccioID,__theForm.listOfSeccioForSeccioID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,EnllazFields.SECCIOID)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="enllaz_seccioID"  onchange="if(typeof onChangeSeccioID == 'function') {  onChangeSeccioID(this); };"  cssClass="form-control col-md-8" path="enllaz.seccioID">
+          <form:select id="enllaz_seccioID"  onchange="if(typeof onChangeSeccioID == 'function') {  onChangeSeccioID(this); };"  cssClass="form-control col-md-9-optional" path="enllaz.seccioID">
             <c:forEach items="${__theForm.listOfSeccioForSeccioID}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">
@@ -274,7 +274,7 @@
             <td>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,EnllazFields.ACTIU)}" >
               <form:errors path="enllaz.actiu" cssClass="errorField alert alert-danger" />
-              <form:checkbox cssClass="form-control" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,EnllazFields.ACTIU)? 'false' : 'true'}" path="enllaz.actiu"  style="width:1%"/>
+              <form:checkbox cssClass="" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,EnllazFields.ACTIU)? 'false' : 'true'}" path="enllaz.actiu" />
           </c:if>
           <c:if test="${gen:contains(__theForm.readOnlyFields ,EnllazFields.ACTIU)}" >
                 <fmt:message key="genapp.checkbox.${__theForm.enllaz.actiu}" />
@@ -295,7 +295,7 @@
             </td>
             <td>
             <form:errors path="enllaz.ordre" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EnllazFields.ORDRE)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,EnllazFields.ORDRE)? ' uneditable-input' : ''}"  style=""  path="enllaz.ordre"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EnllazFields.ORDRE)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EnllazFields.ORDRE)? ' uneditable-input' : ''}"  style=""  path="enllaz.ordre"   />
 
            </td>
         </tr>

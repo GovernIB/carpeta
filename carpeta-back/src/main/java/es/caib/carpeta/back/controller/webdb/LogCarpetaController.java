@@ -546,8 +546,8 @@ public java.lang.Long stringToPK(String value) {
 
     binder.setValidator(getWebValidator());
 
-    binder.setDisallowedFields("logID");
 
+    initDisallowedFields(binder, "logCarpeta.logID");
   }
 
   public LogCarpetaWebValidator getWebValidator() {

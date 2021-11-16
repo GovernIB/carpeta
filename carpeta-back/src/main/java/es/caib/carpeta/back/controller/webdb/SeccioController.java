@@ -602,9 +602,8 @@ public java.lang.Long stringToPK(String value) {
 
     binder.setValidator(getWebValidator());
 
-    binder.setDisallowedFields("seccioID");
-    binder.setDisallowedFields("context");
 
+    initDisallowedFields(binder, "seccio.seccioID", "seccio.context");
   }
 
   public SeccioWebValidator getWebValidator() {
