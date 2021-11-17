@@ -1,0 +1,17 @@
+<div id="notibcontainer"></div>
+<script type="text/javascript">
+var newInstancePlugin;
+var changeLanguagePlugin;
+</script>
+<script src="${pathtojsNotib}"></script>
+<script>
+var props = {
+        "titles" : ${titles},
+        "subtitles" : ${subtitles},
+        "pathtoservei" : "${pathtoservei}",
+        "notificacionesUrl" : "${notificacionesUrl}"
+
+};
+
+newInstancePlugin('notibcontainer', props);
+</script>

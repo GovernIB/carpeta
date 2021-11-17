@@ -41,9 +41,7 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaService {
             // Accés a un plugin PUBLIC de forma no autenticada
             accesJPA.setNom(usuarioClave.getNombre());
             accesJPA.setLlinatges(usuarioClave.getApellido1() + " " + usuarioClave.getApellido2());
-            accesJPA.setIp(ipAddress);
             accesJPA.setNif(usuarioClave.getNif());
-            accesJPA.setDataAcces(dataDarrerAcces);
             accesJPA.setQaa(usuarioClave.getQaa());
     
             // S'ha d'arreglar a https://github.com/GovernIB/carpeta/issues/308
@@ -51,9 +49,9 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaService {
             accesJPA.setMetodeAutenticacio(usuarioClave.getMetodoAutentificacion());
             accesJPA.setProveidorIdentitat(usuarioClave.getProveedorDeIdentidad());
         }
-        
-        
-        
+
+        accesJPA.setIp(ipAddress);
+        accesJPA.setDataAcces(dataDarrerAcces);
         accesJPA.setIdioma(idioma);
         accesJPA.setResultat(resultat);
 

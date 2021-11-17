@@ -1,0 +1,19 @@
+{
+    "notificacionsSistraTornar":"Volver",
+    "notificacionsSistraBoto":"Botón ",
+    "notificacionsSistraTitle":"Notificaciones",
+    "notificacionsSistraSubtitle":"Desde aquí puede acceder a las notificaciones pendientes y realizar la comparecencia electrónica, a las notificaciones realizadas y a las comunicaciones.",
+    "notificacionsSistraComunicacionListado": "Lista de notificaciones y comunicaciones",
+    "notificacionsSistraComunicacionDescripcion": "Descripción de la comunicación",
+    "notificacionsSistraComunicacionFecha": "Fecha de envío",
+    "notificacionsSistraDescripcion": "En este apartado puede consultar las comunicaciones y las notificaciones que ha recibido de la plataforma de tramitación.",
+    "notificacionsSistraComunicacionEmissor": "Emisor",
+    "notificacionsSistraComunicacionConcepte": "Concepto",
+    "notificacionsSistraComunicacionEstat": "Estado",
+    "notificacionsSistraComunicacionOrgano": "Órgano gestor",
+    "notificacionsSistraComunicacionDataEstat": "Fecha Estado",
+    "notificacionsSistraComunicacionJustificant": "Justificante",
+    "notificacionsSistraComunicacionCertificacio": "Certificación",
+    "notificacionsSistraBuid":"No hay notificaciones"
+
+}

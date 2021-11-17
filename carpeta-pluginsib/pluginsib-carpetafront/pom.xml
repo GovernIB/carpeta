@@ -18,6 +18,7 @@
         <module>sistra</module>
         <module>regweb32</module>
         <module>notib</module>
+        <module>notificacionssistra</module>
 		<module>dadeslogin</module>
 		<module>pinbalpolicia</module>
         <module>regwebdetallcomponent</module>

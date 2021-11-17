@@ -251,7 +251,6 @@ private static final long serialVersionUID = 1036906268L;
   static java.util.Set<AvisJPA> copyJPA(java.util.Set<AvisJPA> __jpaSet,
     java.util.Map<Object,Object> __alreadyCopied, String origenJPA) {
     if (__jpaSet == null) { return null; }
-    @SuppressWarnings("unchecked")
     java.util.Set<AvisJPA> __tmpSet = (java.util.Set<AvisJPA>) __alreadyCopied.get(__jpaSet);
     if (__tmpSet != null) { return __tmpSet; };
     __tmpSet = new java.util.HashSet<AvisJPA>(__jpaSet.size());

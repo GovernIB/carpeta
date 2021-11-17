@@ -1,0 +1,20 @@
+{
+    "notibTornar":"Torna",
+    "notibBoto":"Botó ",
+    "notibTitle":"Notificacions",
+    "notibSubtitle":"Des d'aquí podeu accedir a les notificacions pendents i realitzar la compareixença electrònica, a les notificacions realitzades i a les comunicacions.",
+    "notibComunicacionListado": "Llista de notificacions i comunicacions",
+    "notibcomunicacionVacio": "No hi ha notificacions",
+    "notibComunicacionDescripcion": "Descripció de la comunicació",
+    "notibComunicacionFecha": "Data d'enviament",
+    "notibDescripcion": "En aquest apartat pot consultar les comunicacions i les notificacions que ha rebut de la plataforma de tramitació.",
+    "notibComunicacionEmissor": "Emissor",
+    "notibComunicacionConcepte": "Concepte",
+    "notibComunicacionEstat": "Estat",
+    "notibComunicacionOrgano": "Òrgan gestor",
+    "notibComunicacionDataEstat": "Data Estat",
+    "notibComunicacionJustificant": "Justificant",
+    "notibComunicacionCertificacio": "Certificació",
+    "notibBuid":"No hi ha notificacions"
+
+}

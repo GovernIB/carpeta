@@ -12,13 +12,6 @@ es.caib.carpeta.pluginsib.carpetafront.notib.user=[=SP["es.caib.carpeta.pluginsi
 es.caib.carpeta.pluginsib.carpetafront.notib.pass=[=SP["es.caib.carpeta.pluginsib.carpetafront.notib.pass"]]
 
 
-#
-# Notificacions CAIB: Sistra 1
-es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.url=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.url"]]
-es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.user=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.user"]]
-es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.pass=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.pass"]]
-
-
 # Notificacions Estatals
 es.caib.carpeta.pluginsib.carpetafront.notib.notificaciones.url=https://sede.administracion.gob.es/carpeta/notificaciones/notifica/consultaNotificaciones.htm
 

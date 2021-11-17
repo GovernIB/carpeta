@@ -16,11 +16,11 @@
           <form:errors path="acces.tipus" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,AccesFields.TIPUS)}" >
           <form:hidden path="acces.tipus"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.acces.tipus,__theForm.listOfValuesForTipus)}"  />
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.acces.tipus,__theForm.listOfValuesForTipus)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,AccesFields.TIPUS)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="acces_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-8" path="acces.tipus">
+          <form:select id="acces_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-9-optional" path="acces.tipus">
             <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">
@@ -45,7 +45,7 @@
             </td>
             <td>
             <form:errors path="acces.nom" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.NOM)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,AccesFields.NOM)? ' uneditable-input' : ''}"  style="" maxlength="255" path="acces.nom"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.NOM)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,AccesFields.NOM)? ' uneditable-input' : ''}"  style="" maxlength="255" path="acces.nom"   />
 
            </td>
         </tr>
@@ -63,7 +63,7 @@
             </td>
             <td>
             <form:errors path="acces.llinatges" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.LLINATGES)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,AccesFields.LLINATGES)? ' uneditable-input' : ''}"  style="" maxlength="255" path="acces.llinatges"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.LLINATGES)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,AccesFields.LLINATGES)? ' uneditable-input' : ''}"  style="" maxlength="255" path="acces.llinatges"   />
 
            </td>
         </tr>
@@ -81,7 +81,7 @@
             </td>
             <td>
             <form:errors path="acces.nif" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.NIF)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,AccesFields.NIF)? ' uneditable-input' : ''}"  style="" maxlength="50" path="acces.nif"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.NIF)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,AccesFields.NIF)? ' uneditable-input' : ''}"  style="" maxlength="50" path="acces.nif"   />
 
            </td>
         </tr>
@@ -99,7 +99,7 @@
             </td>
             <td>
             <form:errors path="acces.ip" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.IP)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,AccesFields.IP)? ' uneditable-input' : ''}"  style="" maxlength="100" path="acces.ip"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.IP)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,AccesFields.IP)? ' uneditable-input' : ''}"  style="" maxlength="100" path="acces.ip"   />
 
            </td>
         </tr>
@@ -117,7 +117,7 @@
             </td>
             <td>
             <form:errors path="acces.proveidorIdentitat" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.PROVEIDORIDENTITAT)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,AccesFields.PROVEIDORIDENTITAT)? ' uneditable-input' : ''}"  style="" maxlength="255" path="acces.proveidorIdentitat"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.PROVEIDORIDENTITAT)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,AccesFields.PROVEIDORIDENTITAT)? ' uneditable-input' : ''}"  style="" maxlength="255" path="acces.proveidorIdentitat"   />
 
            </td>
         </tr>
@@ -135,7 +135,7 @@
             </td>
             <td>
               <form:errors path="acces.metodeAutenticacio" cssClass="errorField alert alert-danger" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.METODEAUTENTICACIO)? 'true' : 'false'}" path="acces.metodeAutenticacio"  />
+              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.METODEAUTENTICACIO)? 'true' : 'false'}" path="acces.metodeAutenticacio"  />
       <div id="dropdownMenuButton_metodeAutenticacio" style="vertical-align:top;display:inline;position:relative;">
         <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
         <div id="dropdownMenuContainer_metodeAutenticacio" class="dropdown-menu">
@@ -166,7 +166,7 @@
             </td>
             <td>
             <form:errors path="acces.qaa" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.QAA)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,AccesFields.QAA)? ' uneditable-input' : ''}"  style=""  path="acces.qaa"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.QAA)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,AccesFields.QAA)? ' uneditable-input' : ''}"  style=""  path="acces.qaa"   />
 
            </td>
         </tr>
@@ -226,11 +226,11 @@
           <form:errors path="acces.pluginID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,AccesFields.PLUGINID)}" >
           <form:hidden path="acces.pluginID"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.acces.pluginID,__theForm.listOfValuesForPluginID)}"  />
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.acces.pluginID,__theForm.listOfValuesForPluginID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,AccesFields.PLUGINID)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="acces_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="form-control col-md-8" path="acces.pluginID">
+          <form:select id="acces_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="form-control col-md-9-optional" path="acces.pluginID">
             <c:forEach items="${__theForm.listOfValuesForPluginID}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">
@@ -266,11 +266,11 @@
           <form:errors path="acces.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,AccesFields.ENTITATID)}" >
           <form:hidden path="acces.entitatID"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.acces.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.acces.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,AccesFields.ENTITATID)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="acces_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-8" path="acces.entitatID">
+          <form:select id="acces_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-9-optional" path="acces.entitatID">
             <c:forEach items="${__theForm.listOfEntitatForEntitatID}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">
@@ -295,7 +295,7 @@
             </td>
             <td>
             <form:errors path="acces.idioma" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.IDIOMA)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,AccesFields.IDIOMA)? ' uneditable-input' : ''}"  style="" maxlength="50" path="acces.idioma"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.IDIOMA)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,AccesFields.IDIOMA)? ' uneditable-input' : ''}"  style="" maxlength="50" path="acces.idioma"   />
 
            </td>
         </tr>
@@ -314,7 +314,7 @@
             <td>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,AccesFields.RESULTAT)}" >
               <form:errors path="acces.resultat" cssClass="errorField alert alert-danger" />
-              <form:checkbox cssClass="form-control" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,AccesFields.RESULTAT)? 'false' : 'true'}" path="acces.resultat"  style="width:1%"/>
+              <form:checkbox cssClass="" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,AccesFields.RESULTAT)? 'false' : 'true'}" path="acces.resultat" />
           </c:if>
           <c:if test="${gen:contains(__theForm.readOnlyFields ,AccesFields.RESULTAT)}" >
                 <fmt:message key="genapp.checkbox.${__theForm.acces.resultat}" />

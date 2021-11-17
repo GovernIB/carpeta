@@ -646,8 +646,8 @@ public java.lang.Long stringToPK(String value) {
 
     binder.setValidator(getWebValidator());
 
-    binder.setDisallowedFields("enllazID");
 
+    initDisallowedFields(binder, "enllaz.enllazID");
   }
 
   public EnllazWebValidator getWebValidator() {

@@ -1,0 +1,17 @@
+<div id="notificacionssistracontainer"></div>
+<script type="text/javascript">
+var newInstancePlugin;
+var changeLanguagePlugin;
+</script>
+<script src="${pathtojsNotificacionsSistra}"></script>
+<script>
+var props = {
+        "titles" : ${titles},
+        "subtitles" : ${subtitles},
+        "pathtoservei" : "${pathtoservei}",
+        "comunicacionesUrl" : "${comunicacionesUrl}"
+
+};
+
+newInstancePlugin('notificacionssistracontainer', props);
+</script>

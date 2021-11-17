@@ -1,10 +1,7 @@
 package org.fundaciobit.pluginsib.carpetafront.notib;
 
-import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
-import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
-import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
-import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
-import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
+import com.google.gson.Gson;
+import es.caib.carpeta.pluginsib.carpetafront.api.*;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementoExpediente;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.TipoElementoExpediente;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.TiposElementoExpediente;
@@ -20,10 +17,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.ws.soap.SOAPFaultException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 /**
@@ -65,6 +64,27 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         return "carpetafrontnotib";
     }
 
+    // ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
+    // ------------------- CACHE DE TITOLS i SUBTITOLS ----------------------------
+    // ----------------------------------------------------------------------------
+    // ----------------------------------------------------------------------------
+
+
+    private TitlesInfo titlesInfo = null;;
+
+
+    @Override
+    public void setTitlesInfo(TitlesInfo titlesInfo) {
+        this.titlesInfo = titlesInfo;
+    }
+
+    @Override
+    public TitlesInfo getTitlesInfo() {
+        return titlesInfo;
+    }
+
+
     @Override
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
             HttpServletRequest request, UserData userData, String administrationIDEncriptat, String parameter,
@@ -72,11 +92,17 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         registerUserData(userData);
 
-        String startURL = absolutePluginRequestPath + "/" + OPCIONS_PAGE;
+        String startURL = (isReactComponent()) ? absolutePluginRequestPath + "/" + INDEX_HTML_PAGE : absolutePluginRequestPath + "/" + NOTIFICACIONS_ESPERA_NOTIB_PAGE;
 
         log.info(" NOTIB getStartUrl( ); => " + startURL);
         return startURL;
     }
+
+    @Override
+    public boolean isReactComponent() {
+        return true;
+    }
+
 
     @Override
     public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
@@ -110,6 +136,21 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             pageNomunicacionsNotib(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
                     administrationEncriptedID, locale, isGet);
+        } else if (query.startsWith(INDEX_HTML_PAGE)) {
+
+            index(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
+
+        } else if (query.startsWith(REACT_JS_PAGE)) {
+
+            reactjs(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
+
+        } else if (query.startsWith(URL_REST_SERVICE)) {
+
+            consultaNotificacions(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
+
         } /*else if (query.startsWith(NOTIFICACIONS_NOTIB_DETALL_PAGE)) {
 
             notificacioNotibDetall(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
@@ -270,6 +311,177 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         }
     }
+
+
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // -------------------- INDEX -----------------------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+    protected static final String INDEX_HTML_PAGE = "notib_index.html";
+
+    public void index(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+                      HttpServletRequest request, HttpServletResponse response, UserData userData,
+                      String administrationEncriptedID, Locale locale, boolean isGet) {
+
+        try {
+
+            response.setContentType("text/html");
+
+            String resource = "/webpage/notib_index.html";
+
+            response.setHeader("Content-Disposition",
+                    "inline;filename=\"" + java.net.URLEncoder.encode(INDEX_HTML_PAGE, "UTF-8") + "\"");
+
+            response.setCharacterEncoding("utf-8");
+
+            InputStream input = this.getClass().getResourceAsStream(resource);
+
+            String plantilla = IOUtils.toString(input, "UTF-8");
+
+            Map<String, Object> map = new HashMap<String, Object>();
+
+            Gson json = new Gson();
+
+            TitlesInfo titles = getTitlesInfo();
+
+            map.put("titles", json.toJson(titles.getTitlesByLang()));
+
+            map.put("subtitles", json.toJson(titles.getSubtitlesByLang()));
+
+            log.info("absolutePluginRequestPath ==> " + absolutePluginRequestPath);
+
+            String pathtojsNotib = absolutePluginRequestPath + "/" + REACT_JS_PAGE;
+
+            map.put("pathtojsNotib", pathtojsNotib);
+
+            String pathtoservei = absolutePluginRequestPath + "/" + URL_REST_SERVICE;
+
+            map.put("pathtoservei", pathtoservei);
+
+            // GOVERN CENTRAL - NOTIB
+            boolean useNotibApi = "true".equalsIgnoreCase(getProperty(NOTIB_PROPERTY_BASE + "usenotibapi"));
+            String notificacionesUrl;
+
+            notificacionesUrl = absolutePluginRequestPath + "/" + NOTIFICACIONS_ESPERA_NOTIB_PAGE;
+            map.put("notificacionesUrl", notificacionesUrl);
+
+//            // CAIB - SISTRA 1
+//            String comunicacionesURL = absolutePluginRequestPath + "/" + NOTIFICACIONS_ESPERA_SISTRA_PAGE;
+//            map.put("comunicacionesUrl", comunicacionesURL);
+
+            String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
+
+            try {
+                response.getWriter().println(generat);
+                response.flushBuffer();
+            } catch (IOException e) {
+                log.error("Error obtening writer: " + e.getMessage(), e);
+            }
+
+        } catch (Exception e) {
+            // XYZ ZZZ
+            log.error("Error generant pàgina bàsica: " + e.getMessage(), e);
+        }
+
+    }
+
+
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // ------------------- CONSULTA REST ----------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+    protected static final String URL_REST_SERVICE = "consultaNotificacions";
+
+    public void consultaNotificacions(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+                                HttpServletRequest request, HttpServletResponse response, UserData userData,
+                                String administrationEncriptedID, Locale locale, Boolean isGet) {
+
+        try {
+
+            int pagina;
+            int itemsPagina = 10;
+
+            try {
+                pagina = Integer.parseInt(request.getParameter("pageNumber"));
+            }catch (NumberFormatException e){
+                pagina = 0;
+            }
+            List<Transmissio> notificacions;
+
+            {
+
+                if (notibClientRest == null) {
+
+                    String url = getPropertyRequired(NOTIB_PROPERTY_BASE + "url");
+                    String user = getPropertyRequired(NOTIB_PROPERTY_BASE + "user");
+                    String pass = getPropertyRequired(NOTIB_PROPERTY_BASE + "pass");
+
+                    notibClientRest = new NotibClientRest(url, user, pass);
+                }
+
+                String nif = userData.getAdministrationID();
+                Integer mida = 200;
+
+                Resposta resposta = notibClientRest.consultaNotificacions(nif, pagina, mida);
+
+                notificacions = resposta.getResultat();
+
+            }
+
+            if (notificacions == null) {
+                notificacions = new ArrayList<Transmissio>();
+            }
+
+            Collections.reverse(notificacions);
+
+            Map<Long, Transmissio> comunicacionsMap = (Map<Long, Transmissio>) request.getSession()
+                    .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
+
+            if (comunicacionsMap == null) {
+                comunicacionsMap = new HashMap<Long, Transmissio>();
+                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, comunicacionsMap);
+            }
+
+            for (Transmissio t : notificacions) {
+                t.setOrganGestor(t.getOrganGestor().substring(t.getOrganGestor().indexOf("', nom='") + 8, t.getOrganGestor().indexOf("', llibre='")));
+                comunicacionsMap.put(t.getId(), t);
+            }
+
+            Map<String, Object> infoNotificacions = new HashMap<String, Object>();
+            infoNotificacions.put("comunicacions", notificacions);
+            infoNotificacions.put("urldetallbase", getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.url") + "#");
+            infoNotificacions.put("registresPagina", itemsPagina);
+            infoNotificacions.put("totalRegistres", notificacions.size());
+
+            Gson gson = new Gson();
+            String json = gson.toJson(infoNotificacions);
+
+            try {
+
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
+
+                response.getWriter().write(json);
+
+            } catch (IOException e) {
+                log.error("Error obtenint writer: " + e.getMessage(), e);
+            }
+
+
+        } catch (Exception e) {
+
+            log.error("Error llistant notificacions notib: " + e.getMessage(), e);
+            errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
+
+        }
+
+    }
+
+
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
@@ -659,6 +871,48 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         }
 
     }
+
+
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // ------------------- JAVASCRIPT REACT ----------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+    protected static final String REACT_JS_PAGE = "notib_reactjs_main.js";
+
+    public void reactjs(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+                        HttpServletRequest request, HttpServletResponse response, UserData userData,
+                        String administrationEncriptedID, Locale locale, boolean isGet) {
+
+        try {
+
+            response.setContentType("application/javascript");
+
+            response.setHeader("Content-Disposition",
+                    "inline;filename=\"" + java.net.URLEncoder.encode(REACT_JS_PAGE, "UTF-8") + "\"");
+
+            String resource = "/webpage/notib_reactjs_main.js";
+
+            response.setCharacterEncoding("utf-8");
+
+            InputStream input = this.getClass().getResourceAsStream(resource);
+
+            String plantilla = IOUtils.toString(input, "UTF-8");
+
+            try {
+                response.getWriter().println(plantilla);
+                response.flushBuffer();
+            } catch (IOException e) {
+                log.error("Error obtening writer: " + e.getMessage(), e);
+            }
+
+        } catch (Exception e) {
+            log.error("Error llistant tràmits XYZ ZZZ: " + e.getMessage(), e);
+        }
+
+    }
+
 
     protected void processPersona(List<KeyValue> camps, Persona titular, String base) {
         if (titular != null) {

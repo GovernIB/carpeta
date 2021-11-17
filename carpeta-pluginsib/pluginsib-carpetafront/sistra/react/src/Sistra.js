@@ -369,7 +369,7 @@ class Sistra extends Component {
             if (minute < 10) {
                 minute = "0" + minute;
             }
-            return day + "/" + month + "/" + year + " " + hour + ":" + minute;
+            return day + "-" + month + "-" + year + " " + hour + ":" + minute;
         };
 
         $.siNo = function(variable) {
