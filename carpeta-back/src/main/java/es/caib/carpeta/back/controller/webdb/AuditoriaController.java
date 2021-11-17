@@ -526,8 +526,8 @@ public java.lang.Long stringToPK(String value) {
 
     binder.setValidator(getWebValidator());
 
-    binder.setDisallowedFields("auditoriaID");
 
+    initDisallowedFields(binder, "auditoria.auditoriaID");
   }
 
   public AuditoriaWebValidator getWebValidator() {

@@ -355,7 +355,6 @@ private static final long serialVersionUID = -1473310087L;
   static java.util.Set<EnllazJPA> copyJPA(java.util.Set<EnllazJPA> __jpaSet,
     java.util.Map<Object,Object> __alreadyCopied, String origenJPA) {
     if (__jpaSet == null) { return null; }
-    @SuppressWarnings("unchecked")
     java.util.Set<EnllazJPA> __tmpSet = (java.util.Set<EnllazJPA>) __alreadyCopied.get(__jpaSet);
     if (__tmpSet != null) { return __tmpSet; };
     __tmpSet = new java.util.HashSet<EnllazJPA>(__jpaSet.size());

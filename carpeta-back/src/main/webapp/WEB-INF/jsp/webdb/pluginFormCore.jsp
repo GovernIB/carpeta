@@ -14,7 +14,7 @@
             </td>
             <td>
        <form:errors path="plugin.nom" cssClass="errorField alert alert-danger" />
-       <div class="row-fluid  col-md-8">
+       <div class="row-fluid col-md-9-optional">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
              <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
             <li class="nav-item ">
@@ -27,7 +27,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_nom_${idioma.idiomaID}">
                <form:errors path="plugin.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="plugin.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,PluginFields.NOMID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,PluginFields.NOMID)}" maxlength="4000" />
+               <form:input path="plugin.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,PluginFields.NOMID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,PluginFields.NOMID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -49,7 +49,7 @@
             </td>
             <td>
        <form:errors path="plugin.descripcio" cssClass="errorField alert alert-danger" />
-       <div class="row-fluid  col-md-8">
+       <div class="row-fluid col-md-9-optional">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
              <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
             <li class="nav-item ">
@@ -62,7 +62,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_descripcio_${idioma.idiomaID}">
                <form:errors path="plugin.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="plugin.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,PluginFields.DESCRIPCIOID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,PluginFields.DESCRIPCIOID)}" maxlength="4000" />
+               <form:input path="plugin.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,PluginFields.DESCRIPCIOID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,PluginFields.DESCRIPCIOID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -84,7 +84,7 @@
             </td>
             <td>
        <form:errors path="plugin.titolLlarg" cssClass="errorField alert alert-danger" />
-       <div class="row-fluid  col-md-8">
+       <div class="row-fluid col-md-9-optional">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
              <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
             <li class="nav-item ">
@@ -97,7 +97,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_titolLlarg_${idioma.idiomaID}">
                <form:errors path="plugin.titolLlarg.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="plugin.titolLlarg.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,PluginFields.TITOLLLARGID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,PluginFields.TITOLLLARGID)}" maxlength="4000" />
+               <form:input path="plugin.titolLlarg.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,PluginFields.TITOLLLARGID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,PluginFields.TITOLLLARGID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -119,7 +119,7 @@
             </td>
             <td>
        <form:errors path="plugin.subtitolLlarg" cssClass="errorField alert alert-danger" />
-       <div class="row-fluid  col-md-8">
+       <div class="row-fluid col-md-9-optional">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
              <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
             <li class="nav-item ">
@@ -132,7 +132,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_subtitolLlarg_${idioma.idiomaID}">
                <form:errors path="plugin.subtitolLlarg.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="plugin.subtitolLlarg.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,PluginFields.SUBTITOLLLARGID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,PluginFields.SUBTITOLLLARGID)}" maxlength="4000" />
+               <form:input path="plugin.subtitolLlarg.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,PluginFields.SUBTITOLLLARGID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,PluginFields.SUBTITOLLLARGID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -154,7 +154,7 @@
             </td>
             <td>
             <form:errors path="plugin.context" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.CONTEXT)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,PluginFields.CONTEXT)? ' uneditable-input' : ''}"  style="" maxlength="50" path="plugin.context"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.CONTEXT)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,PluginFields.CONTEXT)? ' uneditable-input' : ''}"  style="" maxlength="50" path="plugin.context"   />
 
            </td>
         </tr>
@@ -176,9 +176,9 @@
               <a target="_blank" href="<c:url value="${car:fileUrl(logoID.logoID)}"/>">${logoID.logoID.nom}</a>
             </c:if>
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginFields.LOGOID)}" >
-              <div class="input-group">
-                <div class="custom-file col-md-8">
-                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.LOGOID)? 'true' : 'false'}" cssClass="custom-file-input form-control ${gen:contains(__theForm.readOnlyFields ,PluginFields.LOGOID)? ' uneditable-input' : ''}"   path="logoID" type="file" />
+              <div class="input-group col-md-9-optional" style="padding: 0px">
+                <div class="custom-file">
+                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.LOGOID)? 'true' : 'false'}" cssClass="custom-file-input form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,PluginFields.LOGOID)? ' uneditable-input' : ''}"   path="logoID" type="file" />
                   <label class="custom-file-label" for="logoID">
                   </label>
                 </div>
@@ -228,7 +228,7 @@
             </td>
             <td>
             <form:errors path="plugin.classe" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.CLASSE)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,PluginFields.CLASSE)? ' uneditable-input' : ''}"  style="" maxlength="255" path="plugin.classe"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.CLASSE)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,PluginFields.CLASSE)? ' uneditable-input' : ''}"  style="" maxlength="255" path="plugin.classe"   />
 
            </td>
         </tr>
@@ -246,7 +246,7 @@
             </td>
             <td>
               <form:errors path="plugin.propietats" cssClass="errorField alert alert-danger" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.PROPIETATS)? 'true' : 'false'}" path="plugin.propietats"  />
+              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.PROPIETATS)? 'true' : 'false'}" path="plugin.propietats"  />
       <div id="dropdownMenuButton_propietats" style="vertical-align:top;display:inline;position:relative;">
         <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
         <div id="dropdownMenuContainer_propietats" class="dropdown-menu">
@@ -278,7 +278,7 @@
             <td>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginFields.ACTIU)}" >
               <form:errors path="plugin.actiu" cssClass="errorField alert alert-danger" />
-              <form:checkbox cssClass="form-control" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,PluginFields.ACTIU)? 'false' : 'true'}" path="plugin.actiu"  style="width:1%"/>
+              <form:checkbox cssClass="" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,PluginFields.ACTIU)? 'false' : 'true'}" path="plugin.actiu" />
           </c:if>
           <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginFields.ACTIU)}" >
                 <fmt:message key="genapp.checkbox.${__theForm.plugin.actiu}" />
@@ -301,11 +301,11 @@
           <form:errors path="plugin.tipus" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginFields.TIPUS)}" >
           <form:hidden path="plugin.tipus"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.plugin.tipus,__theForm.listOfValuesForTipus)}"  />
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.plugin.tipus,__theForm.listOfValuesForTipus)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginFields.TIPUS)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="plugin_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-8" path="plugin.tipus">
+          <form:select id="plugin_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-9-optional" path="plugin.tipus">
             <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">

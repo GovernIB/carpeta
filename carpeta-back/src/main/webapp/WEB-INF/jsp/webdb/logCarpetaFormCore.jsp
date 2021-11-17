@@ -14,7 +14,7 @@
             </td>
             <td>
               <form:errors path="logCarpeta.descripcio" cssClass="errorField alert alert-danger" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.DESCRIPCIO)? 'true' : 'false'}" path="logCarpeta.descripcio"  />
+              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.DESCRIPCIO)? 'true' : 'false'}" path="logCarpeta.descripcio"  />
       <div id="dropdownMenuButton_descripcio" style="vertical-align:top;display:inline;position:relative;">
         <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
         <div id="dropdownMenuContainer_descripcio" class="dropdown-menu">
@@ -47,11 +47,11 @@
           <form:errors path="logCarpeta.tipus" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.TIPUS)}" >
           <form:hidden path="logCarpeta.tipus"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.logCarpeta.tipus,__theForm.listOfValuesForTipus)}"  />
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.logCarpeta.tipus,__theForm.listOfValuesForTipus)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.TIPUS)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="logCarpeta_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-8" path="logCarpeta.tipus">
+          <form:select id="logCarpeta_tipus"  onchange="if(typeof onChangeTipus == 'function') {  onChangeTipus(this); };"  cssClass="form-control col-md-9-optional" path="logCarpeta.tipus">
             <c:forEach items="${__theForm.listOfValuesForTipus}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">
@@ -78,11 +78,11 @@
           <form:errors path="logCarpeta.estat" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ESTAT)}" >
           <form:hidden path="logCarpeta.estat"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.logCarpeta.estat,__theForm.listOfValuesForEstat)}"  />
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.logCarpeta.estat,__theForm.listOfValuesForEstat)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ESTAT)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="logCarpeta_estat"  onchange="if(typeof onChangeEstat == 'function') {  onChangeEstat(this); };"  cssClass="form-control col-md-8" path="logCarpeta.estat">
+          <form:select id="logCarpeta_estat"  onchange="if(typeof onChangeEstat == 'function') {  onChangeEstat(this); };"  cssClass="form-control col-md-9-optional" path="logCarpeta.estat">
             <c:forEach items="${__theForm.listOfValuesForEstat}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">
@@ -109,11 +109,11 @@
           <form:errors path="logCarpeta.pluginID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.PLUGINID)}" >
           <form:hidden path="logCarpeta.pluginID"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.logCarpeta.pluginID,__theForm.listOfValuesForPluginID)}"  />
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.logCarpeta.pluginID,__theForm.listOfValuesForPluginID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.PLUGINID)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="logCarpeta_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="form-control col-md-8" path="logCarpeta.pluginID">
+          <form:select id="logCarpeta_pluginID"  onchange="if(typeof onChangePluginID == 'function') {  onChangePluginID(this); };"  cssClass="form-control col-md-9-optional" path="logCarpeta.pluginID">
             <c:forEach items="${__theForm.listOfValuesForPluginID}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">
@@ -147,7 +147,7 @@
             </td>
             <td>
             <form:errors path="logCarpeta.entitatCodi" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ENTITATCODI)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ENTITATCODI)? ' uneditable-input' : ''}"  style="" maxlength="9" path="logCarpeta.entitatCodi"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ENTITATCODI)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ENTITATCODI)? ' uneditable-input' : ''}"  style="" maxlength="9" path="logCarpeta.entitatCodi"   />
 
            </td>
         </tr>
@@ -165,7 +165,7 @@
             </td>
             <td>
             <form:errors path="logCarpeta.temps" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.TEMPS)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.TEMPS)? ' uneditable-input' : ''}"  style=""  path="logCarpeta.temps"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.TEMPS)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.TEMPS)? ' uneditable-input' : ''}"  style=""  path="logCarpeta.temps"   />
 
            </td>
         </tr>
@@ -223,7 +223,7 @@
             </td>
             <td>
               <form:errors path="logCarpeta.peticio" cssClass="errorField alert alert-danger" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.PETICIO)? 'true' : 'false'}" path="logCarpeta.peticio"  />
+              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.PETICIO)? 'true' : 'false'}" path="logCarpeta.peticio"  />
       <div id="dropdownMenuButton_peticio" style="vertical-align:top;display:inline;position:relative;">
         <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
         <div id="dropdownMenuContainer_peticio" class="dropdown-menu">
@@ -254,7 +254,7 @@
             </td>
             <td>
               <form:errors path="logCarpeta.error" cssClass="errorField alert alert-danger" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ERROR)? 'true' : 'false'}" path="logCarpeta.error"  />
+              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ERROR)? 'true' : 'false'}" path="logCarpeta.error"  />
       <div id="dropdownMenuButton_error" style="vertical-align:top;display:inline;position:relative;">
         <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
         <div id="dropdownMenuContainer_error" class="dropdown-menu">
@@ -285,7 +285,7 @@
             </td>
             <td>
               <form:errors path="logCarpeta.excepcio" cssClass="errorField alert alert-danger" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.EXCEPCIO)? 'true' : 'false'}" path="logCarpeta.excepcio"  />
+              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.EXCEPCIO)? 'true' : 'false'}" path="logCarpeta.excepcio"  />
       <div id="dropdownMenuButton_excepcio" style="vertical-align:top;display:inline;position:relative;">
         <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
         <div id="dropdownMenuContainer_excepcio" class="dropdown-menu">

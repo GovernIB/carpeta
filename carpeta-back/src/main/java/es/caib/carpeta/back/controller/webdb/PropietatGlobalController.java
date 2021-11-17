@@ -510,8 +510,8 @@ public java.lang.Long stringToPK(String value) {
 
     binder.setValidator(getWebValidator());
 
-    binder.setDisallowedFields("propietaGlobalID");
 
+    initDisallowedFields(binder, "propietatGlobal.propietaGlobalID");
   }
 
   public PropietatGlobalWebValidator getWebValidator() {

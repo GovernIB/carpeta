@@ -14,7 +14,7 @@
             </td>
             <td>
             <form:errors path="propietatGlobal.codi" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.CODI)? 'true' : 'false'}" cssClass="form-control ${gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.CODI)? ' uneditable-input' : ''}"  style="" maxlength="250" path="propietatGlobal.codi"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.CODI)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.CODI)? ' uneditable-input' : ''}"  style="" maxlength="250" path="propietatGlobal.codi"   />
 
            </td>
         </tr>
@@ -32,7 +32,7 @@
             </td>
             <td>
               <form:errors path="propietatGlobal.value" cssClass="errorField alert alert-danger" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;max-width:90%;" cssClass="form-control " readonly="${ gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.VALUE)? 'true' : 'false'}" path="propietatGlobal.value"  />
+              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.VALUE)? 'true' : 'false'}" path="propietatGlobal.value"  />
       <div id="dropdownMenuButton_value" style="vertical-align:top;display:inline;position:relative;">
         <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
         <div id="dropdownMenuContainer_value" class="dropdown-menu">
@@ -63,7 +63,7 @@
             </td>
             <td>
               <form:errors path="propietatGlobal.descripcio" cssClass="errorField alert alert-danger" />
-              <form:textarea cssClass="col-md-8 ${gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.DESCRIPCIO)? 'mceEditorReadOnly':'mceEditor'}"  path="propietatGlobal.descripcio"  />
+              <form:textarea cssClass=" ${gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.DESCRIPCIO)? 'mceEditorReadOnly':'mceEditor'}"  path="propietatGlobal.descripcio"  />
            </td>
         </tr>
         </c:if>
@@ -82,11 +82,11 @@
           <form:errors path="propietatGlobal.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.ENTITATID)}" >
           <form:hidden path="propietatGlobal.entitatID"/>
-          <input type="text" readonly="true" class="form-control input-xxlarge uneditable-input" value="${gen:findValue(__theForm.propietatGlobal.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.propietatGlobal.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
           </c:if>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.ENTITATID)}" >
           <c:set var="containEmptyValue"  value="false" />
-          <form:select id="propietatGlobal_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-8" path="propietatGlobal.entitatID">
+          <form:select id="propietatGlobal_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-9-optional" path="propietatGlobal.entitatID">
             <c:forEach items="${__theForm.listOfEntitatForEntitatID}" var="tmp">
                 <form:option value="${tmp.key}">${tmp.value}</form:option>
                 <c:if test="${empty tmp.key}">

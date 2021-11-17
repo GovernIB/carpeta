@@ -239,7 +239,6 @@ private static final long serialVersionUID = 1140880713L;
   static java.util.Set<LogCarpetaJPA> copyJPA(java.util.Set<LogCarpetaJPA> __jpaSet,
     java.util.Map<Object,Object> __alreadyCopied, String origenJPA) {
     if (__jpaSet == null) { return null; }
-    @SuppressWarnings("unchecked")
     java.util.Set<LogCarpetaJPA> __tmpSet = (java.util.Set<LogCarpetaJPA>) __alreadyCopied.get(__jpaSet);
     if (__tmpSet != null) { return __tmpSet; };
     __tmpSet = new java.util.HashSet<LogCarpetaJPA>(__jpaSet.size());
