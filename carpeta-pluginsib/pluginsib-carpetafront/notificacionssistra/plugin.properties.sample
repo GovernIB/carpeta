@@ -1,0 +1,10 @@
+# Class => org.fundaciobit.pluginsib.carpetafront.notificacionssistra.NotificacionsSistraCarpetaFrontPlugin
+
+# Common
+es.caib.carpeta.pluginsib.carpetafront.notificacionssistra.development=true
+
+#
+# Notificacions CAIB: Sistra 1
+es.caib.carpeta.pluginsib.carpetafront.notificacionssistra.sistra1.url=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.url"]]
+es.caib.carpeta.pluginsib.carpetafront.notificacionssistra.sistra1.user=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.user"]]
+es.caib.carpeta.pluginsib.carpetafront.notificacionssistra.sistra1.pass=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.pass"]]

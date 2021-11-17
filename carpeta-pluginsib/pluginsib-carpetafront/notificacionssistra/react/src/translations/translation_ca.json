@@ -1,0 +1,18 @@
+{
+    "notificacionsSistraTornar":"Torna",
+    "notificacionsSistraBoto":"Botó ",
+    "notificacionsSistraTitle":"Notificacions",
+    "notificacionsSistraSubtitle":"Des d'aquí podeu accedir a les notificacions pendents i realitzar la compareixença electrònica, a les notificacions realitzades i a les comunicacions.",
+    "notificacionsSistraComunicacionListado": "Llista de notificacions i comunicacions",
+    "notificacionsSistraComunicacionDescripcion": "Descripció de la comunicació",
+    "notificacionsSistraComunicacionFecha": "Data d'enviament",
+    "notificacionsSistraDescripcion": "En aquest apartat pot consultar les comunicacions i les notificacions que ha rebut de la plataforma de tramitació.",
+    "notificacionsSistraComunicacionEmissor": "Emissor",
+    "notificacionsSistraComunicacionConcepte": "Concepte",
+    "notificacionsSistraComunicacionEstat": "Estat",
+    "notificacionsSistraComunicacionOrgano": "Òrgan gestor",
+    "notificacionsSistraComunicacionDataEstat": "Data Estat",
+    "notificacionsSistraComunicacionJustificant": "Justificant",
+    "notificacionsSistraComunicacionCertificacio": "Certificació",
+    "notificacionsSistraBuid":"No hi ha notificacions"
+}
