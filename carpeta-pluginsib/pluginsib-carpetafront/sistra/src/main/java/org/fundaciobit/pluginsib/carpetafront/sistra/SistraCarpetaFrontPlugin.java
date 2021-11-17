@@ -388,7 +388,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             Gson gson = new Gson();
             String json = gson.toJson(infoTramits);
 
-            log.info("JSON: " + json);
+//            log.info("JSON: " + json);
 
             try {
 
