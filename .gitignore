@@ -141,4 +141,10 @@ nb-configuration.xml
 /carpeta-front/reactnative/CarpetaExpoApp/binaris
 /carpeta-pluginsib/pluginsib-carpetafront/sistra/react/node_modules
 /carpeta-pluginsib/pluginsib-carpetafront/sistra/react/package-lock.json
-
+/carpeta.bat
+/plugin.properties
+/copiar.bat
+/carpeta-pluginsib/pluginsib-carpetafront/notib/react/node_modules
+/carpeta-pluginsib/pluginsib-carpetafront/notib/react/package-lock.json
+/carpeta-pluginsib/pluginsib-carpetafront/notificacionssistra/react/node_modules/
+/carpeta-pluginsib/pluginsib-carpetafront/notificacionssistra/react/package-lock.json

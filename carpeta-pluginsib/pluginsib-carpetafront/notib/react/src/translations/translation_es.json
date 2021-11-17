@@ -1,0 +1,20 @@
+{
+    "notibTornar":"Volver",
+    "notibBoto":"Botón ",
+    "notibTitle":"Notificaciones",
+    "notibSubtitle":"Desde aquí puede acceder a las notificaciones pendientes y realizar la comparecencia electrónica, a las notificaciones realizadas y a las comunicaciones.",
+    "notibComunicacionListado": "Lista de notificaciones y comunicaciones",
+    "notibcomunicacionVacio": "No hay notificaciones",
+    "notibComunicacionDescripcion": "Descripción de la comunicación",
+    "notibComunicacionFecha": "Fecha de envío",
+    "notibDescripcion": "En este apartado puede consultar las comunicaciones y las notificaciones que ha recibido de la plataforma de tramitación.",
+    "notibComunicacionEmissor": "Emisor",
+    "notibComunicacionConcepte": "Concepto",
+    "notibComunicacionEstat": "Estado",
+    "notibComunicacionOrgano": "Órgano gestor",
+    "notibComunicacionDataEstat": "Fecha Estado",
+    "notibComunicacionJustificant": "Justificante",
+    "notibComunicacionCertificacio": "Certificación",
+    "notibBuid":"No hay notificaciones"
+
+}
