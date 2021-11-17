@@ -1,14 +1,16 @@
 {
     "registro_titulo_detalle": "Detall del Registre d'entrada",
     "registro_entrada": "Registre d'entrada",
-    "registro_fecha": "",
+    "registro_fecha": "Data",
+    "registro_fecha_inicio": "Data inici",
+    "registro_fecha_fin" : "Data fi",
     "registro_numero": "Número",
     "registro_oficina": "Oficina",
     "registro_destinatario": "Organisme destinatari",
     "registro_tipo_doc": "Tipus doc.",
     "registro_extracto": "Extracte",
     "carpeta_idioma": "Idioma",
-    "registro_estado": "",
+    "registro_estado": "Estat",
     "registro_descripcion_estado": "Motiu",
     "registro_presencial": "Presencial",
     "registro_codigoSia": "Codi SIA",
@@ -73,5 +75,7 @@
     "carpeta_castella" : "Castellà",
     "carpeta_todos" : "Tots",
     "registro_vacio": "No hi ha registres",
-    "reprendreTornar": "Tornar"
+    "reprendreTornar": "Tornar",
+    "carpeta_descargar": "Descàrrega",
+    "carpeta_buscar" : "Cerca"
 }

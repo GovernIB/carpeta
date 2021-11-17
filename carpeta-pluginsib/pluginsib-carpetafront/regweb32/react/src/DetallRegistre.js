@@ -41,17 +41,14 @@ class DetallRegistre extends Component {
                 error: false
             });
             
-            if (response.data != null){
-
-                console.log(response.data);
-
+            if (response.data.registre != null){
                 this.setState({
                     ...this.state,
-                    data: JSON.parse(response.data),
+                    data: response.data,
                     isLoaded: true
                 });
+                // JSON.parse(response.data.registre.replace(/'/g, '"')),
             }
-            
 
         }).catch( error => {
             console.log('Error axios', error);
@@ -62,16 +59,51 @@ class DetallRegistre extends Component {
         } );
     }
 
-    handlerJustificant(justificante){
-        console.log('descargar justificante');
-        console.log(justificante);
+    descarregarAnnex(annexId) {
+        fetch(this.state.data.urlAnnexe + annexId, { 
+            method: 'GET',
+            headers: { 
+                'Content-Type': 'application/pdf',
+            },
+        })
+        .then( (response) => response.blob())
+        .then( (blob) => {
+            const url = window.URL.createObjectURL(new Blob([blob]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute( 'download', `Annex-${annexId}.pdf`,);
+
+            document.body.appendChild(link);
+            link.click();
+            link.parentNode.removeChild(link);
+        });
     }
 
-    downloadPDF(datafile, dataName) {
+    generarJustificant(url){
+        fetch(url, { 
+            method: 'GET',
+            headers: { 
+                'Content-Type': 'application/pdf',
+            },
+        })
+        .then( (response) => response.blob())
+        .then( (blob) => {
+            const url = window.URL.createObjectURL(new Blob([blob]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute( 'download', `Justificant.pdf`,);
 
-        console.log("DESCARGAR DOWNLOAD PDF");
+            document.body.appendChild(link);
+            link.click();
+            link.parentNode.removeChild(link);
+        });
+    }
 
-        const linkSource = `data:application/pdf;base64, ${datafile}`;
+    downloadDoc(datafile, dataName) {
+
+        console.log("DESCARGAR DOWNLOAD DOC");
+
+        const linkSource = `data:application/pdf;base64,${datafile}`;
     	const downloadLink = document.createElement("a");
     	const fileName = `${dataName}`;
     	downloadLink.href = linkSource;
@@ -86,10 +118,33 @@ class DetallRegistre extends Component {
         	downloadLink.setAttribute('download', fileName);
         }
     	
+        console.log("DOWNLOAD BTN:", downloadLink);
     	downloadLink.click();
     }
 
     render() {
+
+        $.dateFormat = function(dateObject) {
+            var d = new Date(dateObject);
+            var day = d.getDate();
+            var month = d.getMonth() + 1;
+            var year = d.getFullYear();
+            var hour = d.getHours();
+            var minute = d.getMinutes();
+            if (day < 10) {
+                day = "0" + day;
+            }
+            if (month < 10) {
+                month = "0" + month;
+            }
+            if (hour < 10) {
+                hour = "0" + hour;
+            }
+            if (minute < 10) {
+                minute = "0" + minute;
+            }
+            return day + "/" + month + "/" + year + " " + hour + ":" + minute;
+        };
 
         const isLoaded = this.state.isLoaded;
 
@@ -107,9 +162,11 @@ class DetallRegistre extends Component {
         } else {
 
             if(this.state.data != null){
-
                 
-                let registre = JSON.parse(this.state.data.registre);
+                let registre = JSON.parse(this.state.data.registre.replace(/'/g, '"'));
+
+                console.log("RESPONSE", this.state.data);
+                //console.log("REGISTRE", registre);
 
                 const renderEstadoTooltip = () => <Tooltip id="registro_explicacion">{t('registro_explicacion_estado'+registre.estado)}</Tooltip>;
 
@@ -136,7 +193,7 @@ class DetallRegistre extends Component {
                                             <h3 className="font-weight-bold verde text-uppercase mb-3 text-center h3">{t('registro_entrada')}</h3>
                                             <dl className="row">
                                                 <dt className="col-sm-3 pb-2">{t('registro_fecha')}</dt>
-                                                <dd className="col-sm-7">{registre.fechaRegistro}</dd>
+                                                <dd className="col-sm-7">{$.dateFormat(registre.fechaRegistro)}</dd>
 
                                                 <dt className="col-sm-3 pb-2">{t('registro_numero')}</dt>
                                                 <dd className="col-sm-7">{registre.numeroRegistro}</dd>
@@ -155,9 +212,6 @@ class DetallRegistre extends Component {
 
                                                 <dt className="col-sm-3 pb-2">{t('carpeta_idioma')}</dt>
                                                 <dd className="col-sm-7">{t('registro_idioma_' + registre.idioma)}</dd>
-
-                                                <dt className="col-sm-3 pb-2">{t('registro_estado')}</dt>
-                                                <dd className="col-sm-7">{registre.estado}</dd>
 
                                                 <dt className="col-sm-3 pb-2">{t('registro_descripcion_estado')}</dt>
                                                 <dd className="col-sm-7">
@@ -179,16 +233,19 @@ class DetallRegistre extends Component {
                             <div className="card border-left-carpeta shadow py-2 mb-3 alert">
                                 <div className="card-body">
                                     <div className="row no-gutters">
-                                        <div className="col mr-2 font15">
+                                        <div className="col mr-2 font15 text-center">
                                             <h3 className="font-weight-bold verde text-uppercase mb-3 text-center h3">{t('registro_justificante')}</h3>
-                                            {typeof(registre.justificante) != 'undefined' && registre.justificante.confidencial == 'false' && <Button onClick={() => this.handlerJustificant(registre)}>{t('carpeta_descargar')}</Button>}
+                                            
+                                            { /* typeof(this.state.data.justificante) != 'undefined' && !this.state.data.justificante.confidencial && <Button onClick={() => this.handlerJustificant(registre)}>{t('carpeta_descargar')}</Button> */}
                                             
                                             {this.state.data.justificanteUrl != '' && <Button onClick={() => { window.open(this.state.data.justificanteUrl); }}>{t('carpeta_descargar')}</Button>}
 
-                                            {this.state.data.justificantSenseGenerar != '' && <Button onClick={() => { window.open(this.state.data.urlGeneracioJustificant); }}>{t('carpeta_descargar')}</Button>}
+                                            {this.state.data.justificanteUrl == '' && this.state.data.justificantSenseGenerar != '' && <Button onClick={() => { this.generarJustificant(this.state.data.urlGeneracioJustificant); }}>{t('carpeta_descargar')}</Button>}
 
-                                            {this.state.data.justificantId != '' && this.state.data.justificantData != '' && <Button onClick={downloadPDF(this.state.data.justificantData, this.state.data.justificantFileName)}>{t('carpeta_descargar')}</Button>}
+                                            {this.state.data.justificanteId != '' && this.state.data.justificantData != '' && <Button onClick={() => this.downloadDoc(this.state.data.justificantData, this.state.data.justificantFileName)}>{t('carpeta_descargar')}</Button>} 
 
+                                            {this.state.data.justificanteUrl == '' && this.state.data.justificantSenseGenerar == '' && this.state.data.justificanteId == '' && <div className="text-center pt-3 text-danger"><span className="oi oi-warning pr-1"> </span>{this.state.data.error}</div>}
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -214,9 +271,9 @@ class DetallRegistre extends Component {
                                                     <tbody>
                                                         { registre.interesados.map( (item) => <tr>
                                                             <td>#</td>
-                                                            <td>{item.interesado.apellido1} {item.interesado.apellido2}</td>
+                                                            <td>{item.interesado.nombre} {item.interesado.apellido1}</td>
                                                             <td>{item.interesado.documento}</td>
-                                                            <td>{item.interesado.tipoInteresado}</td>
+                                                            <td>{t('registro_tipo_interesado_'+item.interesado.tipoInteresado)}</td>
                                                         </tr> ) }
                                                     </tbody>
                                                 </Table>
@@ -231,6 +288,7 @@ class DetallRegistre extends Component {
                                         <div className="row no-gutters align-items-center">
                                             <div className="col mr-2 font15">
                                                 <h3 className="font-weight-bold verde text-uppercase mb-3 text-center h3">{t('registro_anexos')}</h3>
+                                                { registre.anexos.length > 0 &&
                                                 <Table hover className="table-sm">
                                                     <thead>
                                                         <tr>
@@ -244,11 +302,17 @@ class DetallRegistre extends Component {
                                                         { registre.anexos.map( (item) => <tr>
                                                             <td>#</td>
                                                             <td>{item.name}</td>
-                                                            <td>{item.validezDocumento}</td>
-                                                            <td>{item.condidencial === 'false' ? <Button className="d-sm-inline-block btn btn-sm btn-danger shadow-sm"></Button> : t('registro_anexo_nodisponible')}</td>
+                                                            <td>{t('registro_anexo_validezdocumento_'+item.validezDocumento)}</td>
+                                                            <td>{ (!item.confidencial) ? 
+                                                                    ((item.mime != '') ? 
+                                                                        <Button className="d-sm-inline-block btn btn-sm btn-danger shadow-sm" onClick={() => this.descarregarAnnex(item.fileID)}><span className="oi oi-data-transfer-download" title={t('registro_anexo_descargar') + " " + item.name} alt={t('registro_anexo_descargar') + " " + item.name} aria-hidden="true"></span></Button> 
+                                                                    : t('registro_anexo_nodisponible')) 
+                                                                   : t('registro_anexo_confidencial')
+                                                                }</td>
                                                         </tr> ) }
                                                     </tbody>
-                                                </Table>
+                                                </Table> }
+                                                { registre.anexos.length < 1 && <p className="text-center">{t('registro_anexos_vacio')}</p>}
                                             </div>
                                         </div>
                                     </div>

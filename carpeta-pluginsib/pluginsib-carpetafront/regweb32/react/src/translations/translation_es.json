@@ -1,7 +1,9 @@
 {
     "registro_titulo_detalle": "Detall del Registre d'entrada",
     "registro_entrada": "Registre d'entrada",
-    "registro_fecha": "Data",
+    "registro_fecha": "Fecha",
+    "registro_fecha_inicio": "Fecha inicio",
+    "registro_fecha_fin" : "Fecha fin",
     "registro_numero": "Número",
     "registro_oficina": "Oficina",
     "registro_destinatario": "Organisme destinatari",
@@ -73,6 +75,8 @@
     "carpeta_castella" : "Castellà",
     "carpeta_todos" : "Tots",
     "registro_vacio": "No hi ha registres",
-    "reprendreTornar": "Tornar"
+    "reprendreTornar": "Tornar",
+    "carpeta_descargar": "Descargar",
+    "carpeta_buscar" : "Cerca"
 
 }

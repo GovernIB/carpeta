@@ -32,6 +32,10 @@ import java.util.ArrayList;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 
+import es.caib.carpeta.pluginsib.carpetafront.api.TitlesInfo;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 /**
  * @author anadal
  * @author mgonzalez
@@ -131,7 +135,9 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             startURL = absolutePluginRequestPath + "/" + ESPERA_DETALL_CODIFICAT_PAGE
                     + "?numeroRegistroFormateado=" + parameter;
         } else {
-            startURL = absolutePluginRequestPath + "/" + ESPERA_LLISTAT_PAGE;
+        	
+            //startURL = absolutePluginRequestPath + "/" + ESPERA_LLISTAT_PAGE;
+        	startURL = (isReactComponent()) ? absolutePluginRequestPath + "/" + INDEX_REACT_PAGE : absolutePluginRequestPath + "/" + ESPERA_LLISTAT_PAGE;
         }
 
         log.info(" getStartUrl( ); => " + startURL);
@@ -181,7 +187,23 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
                 llistatDeRegistres(absolutePluginRequestPath, relativePluginRequestPath, query,
                         request, response, userData, administrationEncriptedID, locale, isGet,
                         logCarpeta);
-
+               
+            } else if (query.startsWith(INDEX_REACT_PAGE)) {
+                
+            	index(absolutePluginRequestPath, relativePluginRequestPath, query, request,
+                        response, userData, administrationEncriptedID, 0, locale, isGet);
+            
+            } else if (query.startsWith(REACT_JS_PAGE)) {
+            	
+                reactjs(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                        administrationEncriptedID, locale, isGet);
+                
+           } else if (query.startsWith(URL_REST_SERVICE)) {
+                	
+                llistatDeRegistresJson(absolutePluginRequestPath, relativePluginRequestPath, query,
+                        request, response, userData, administrationEncriptedID, locale, isGet,
+                        logCarpeta);
+           
             } else {
 
                 super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath,
@@ -207,11 +229,249 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
     public boolean isDevelopment() {
         return "true".equals(getProperty(REGWEB32_PROPERTY_BASE + "development"));
     }
+    
+    @Override
+    public boolean isReactComponent() {
+    	return true;
+    }
 
     @Override
     public String getDetalleTitle(Locale locale) {
         return getTraduccio("detalletitle", locale);
     }
+
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // ------------------- I N D E X  R E A C T  P A G E ----------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+    protected static final String INDEX_REACT_PAGE = "regweb32_index.html";
+    
+    public void index(String absolutePluginRequestPath, String relativePluginRequestPath,
+            String query, HttpServletRequest request, HttpServletResponse response,
+            UserData userData, String administrationEncriptedID, int pageNumber, Locale locale,
+            boolean isGet) {
+    	
+    	try {
+    		
+	    	response.setContentType("text/html");
+	
+	        String resource = "/webpage/regweb32_index.html";
+	
+	        response.setHeader("Content-Disposition",
+	                "inline;filename=\"" + java.net.URLEncoder.encode(INDEX_REACT_PAGE, "UTF-8") + "\"");
+	
+	        response.setCharacterEncoding("utf-8");
+	
+	        InputStream input = this.getClass().getResourceAsStream(resource);
+	
+	        String plantilla = IOUtils.toString(input, "UTF-8");
+	
+	        Map<String, Object> map = new HashMap<String, Object>();
+	
+	        Gson json = new Gson();
+	
+	        TitlesInfo titles = getTitlesInfo();
+
+	        map.put("titles", json.toJson(titles.getTitlesByLang()));
+	
+	        map.put("subtitles", json.toJson(titles.getSubtitlesByLang()));
+	
+	        log.info("absolutePluginRequestPath ==> " + absolutePluginRequestPath);
+	
+	        String pathtojs = absolutePluginRequestPath + "/" + REACT_JS_PAGE;
+	
+	        map.put("pathtojs", pathtojs);
+	        
+	        String pathtoservei = absolutePluginRequestPath + "/" + URL_REST_SERVICE;
+	
+	        map.put("pathtoservei", pathtoservei);
+	        
+	        String detallpathtoservei = absolutePluginRequestPath + "/" + super.DETALL_REACT_PAGE;
+	        
+	        map.put("detallpathtoservei", detallpathtoservei);
+	        
+	        String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
+	        
+	        try {
+	            response.getWriter().println(generat);
+	            response.flushBuffer();
+	        } catch (IOException e) {
+	            log.error("Error obtening writer: " + e.getMessage(), e);
+	        }
+	
+	    } catch (Exception e) {
+	        // XYZ ZZZ
+	        log.error("Error generant pàgina bàsica: " + e.getMessage(), e);
+	    }
+    	
+    }
+    
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // ------------------- C O N S U L T A  S E R V I C E ----------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    
+    protected static final String URL_REST_SERVICE = "consultaLlistat";
+    
+    public void llistatDeRegistresJson(String absolutePluginRequestPath,
+            String relativePluginRequestPath, String query, HttpServletRequest request,
+            HttpServletResponse response, UserData userData, String administrationEncriptedID,
+            Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
+    	
+    	try {
+    		
+    		/* Filtre número de registre */
+            String formNumero = request.getParameter("numero");
+
+            /* Filtre pàgina */
+            String pageNumber = request.getParameter("pageNumber");
+            if (pageNumber == null) {
+                pageNumber = "1";
+            }
+
+			// Número de registres a mostrar per pàgina
+            final int numItems = 10;
+
+            /* Filtre estat */
+            String formEstat = (request.getParameter("estado") != null)
+                    ? request.getParameter("estado")
+                    : "0";
+
+            /* Filtre dates */
+            Date formDataInici;
+            Date formDataFi;
+            String formDataIniciStr = request.getParameter("fechaInicio");
+            String formDataFiStr = request.getParameter("fechaFin");
+    		
+            String parametros = "";
+            Calendar cal = Calendar.getInstance();
+            SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+
+            if (formDataFiStr != null && formDataFiStr != "") {
+                formDataFi = SDF.parse(formDataFiStr);
+                parametros += "&fechaFin=" + formDataFiStr;
+            } else {
+                formDataFi = cal.getTime();
+            }
+
+            if (formDataIniciStr != null && formDataIniciStr != "") {
+                formDataInici = SDF.parse(formDataIniciStr);
+                parametros += "&fechaInicio=" + formDataIniciStr;
+            } else {
+                /* Inicialitzam darrers 6 mesos */
+                cal.add(Calendar.MONTH, -6);
+                formDataInici = cal.getTime();
+            }
+
+            if (formEstat != null && Integer.parseInt(formEstat) > 0) {
+                parametros += "&estado=" + formEstat;
+            }
+
+            if (isDevelopment()) {
+                log.info("NUMERO => " + formNumero);
+                log.info("PAGE NUMBER =>" + pageNumber);
+                log.info("DATA INICI => " + formDataIniciStr);
+                log.info("DATA FI => " + formDataFiStr);
+                log.info("ESTAT => " + formEstat);
+            }
+    		
+    		Map<String, String> dades = new HashMap<String, String>();
+    		
+    		dades.put("form_numero", formNumero);
+            dades.put("form_dataFi", formDataFiStr);
+            dades.put("form_dataInici", formDataIniciStr);
+            dades.put("form_estat", formEstat);
+			dades.put("num_items", String.valueOf(numItems));
+            dades.put("page", pageNumber);
+    		
+    		response.setContentType("application/json");
+            response.setCharacterEncoding("utf-8");
+            
+            
+            // CERCA
+            @SuppressWarnings("unchecked")
+            List<AsientoWs> registres;
+            int totalResults = 0;
+            
+            formDataFi = DateUtils.sumarRestarDiasFecha(formDataFi, 1);
+
+            ResultadoBusquedaWs result;
+            result = getRegistres(userData.getAdministrationID(), getEntidad(), formNumero,
+                    formDataInici, formDataFi, formEstat, Integer.parseInt(pageNumber), numItems, locale);
+
+            //@SuppressWarnings("unchecked")
+            registres = (List<AsientoWs>) (List<?>) result.getResults();
+            totalResults = result.getTotalResults();
+            
+            Gson jsonRegistres = new Gson();
+            dades.put("registres", jsonRegistres.toJson(registres));
+            dades.put("totalRegistres", String.valueOf(totalResults));
+                      
+            Gson json = new GsonBuilder().setDateFormat("dd-MM-yyyy HH:mm").create();
+            String generat = json.toJson(dades);
+            
+            log.info("Generat: " + generat);
+            
+            try {
+                response.getWriter().println(generat);
+                response.flushBuffer();
+                
+            } catch (IOException e) {
+                log.error("Error obtening writer: " + e.getMessage(), e);
+            }
+
+        } catch (Exception e) {
+            // XYZ ZZZ
+            log.error("Error generant pàgina bàsica: " + e.getMessage(), e);
+        }
+    	
+    }
+    
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // ------------------- JAVASCRIPT REACT ----------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+    protected static final String REACT_JS_PAGE = "regweb32_reactjs_main.js";
+
+    public void reactjs(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet) {
+
+        try {
+
+            response.setContentType("application/javascript");
+
+            response.setHeader("Content-Disposition",
+                    "inline;filename=\"" + java.net.URLEncoder.encode(REACT_JS_PAGE, "UTF-8") + "\"");
+
+            String resource = "/webpage/regweb32_reactjs_main.js";
+
+            response.setCharacterEncoding("utf-8");
+
+            InputStream input = this.getClass().getResourceAsStream(resource);
+
+            String plantilla = IOUtils.toString(input, "UTF-8");
+
+            try {
+                response.getWriter().println(plantilla);
+                response.flushBuffer();
+            } catch (IOException e) {
+                log.error("Error obtening writer: " + e.getMessage(), e);
+            }
+
+        } catch (Exception e) {
+            log.error("Error llistant registres XYZ ZZZ: " + e.getMessage(), e);
+        }
+
+    }
+
+    
+    
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
