@@ -2,6 +2,8 @@ package es.caib.carpeta.api.externa.services;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -147,27 +149,29 @@ public class AccessosResource {
 		
 		try {
 			
-			if (Configuracio.isDesenvolupament()) {
-				log.info("REQUEST API EXTERNA ACCESSOS: {inici=" + dataIniciRequest + "&fi=" + dataFiRequest + "&entitat=" + entitatRequest + "&idioma=" + idiomaRequest +"}");
-			}
-			
 			// Si no hi ha parametres de dates, es retorna per defecte el darrer mes
 			// Li suman 1 dia per fer les cerques inclusives
-			LocalDate dataFiDate; 
+			
+			ZoneId zoneId = ZoneId.of("Europe/Madrid");
+			ZonedDateTime dataFiDate;
 			if(dataFiRequest == null) {
-				dataFiDate = LocalDate.now().plusDays(1);
+				dataFiDate = ZonedDateTime.now(zoneId).plusDays(1);
 				dataFiRequest = dataFiDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			}else {
-				dataFiDate = LocalDate.parse(dataFiRequest,DateTimeFormatter.ofPattern("yyyy-MM-dd")).plusDays(1);
+				dataFiDate = LocalDate.parse(dataFiRequest,DateTimeFormatter.ofPattern("yyyy-MM-dd")).plusDays(1).atStartOfDay(zoneId);
 				dataFiRequest = dataFiDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			}
 			
-			LocalDate dataIniciDate;
+			ZonedDateTime dataIniciDate;
 			if (dataIniciRequest == null) {
-				dataIniciDate = LocalDate.parse(dataFiRequest, DateTimeFormatter.ofPattern("yyyy-MM-dd")).minusMonths(1);
+				dataIniciDate = LocalDate.parse(dataFiRequest, DateTimeFormatter.ofPattern("yyyy-MM-dd")).minusMonths(1).atStartOfDay(zoneId);
 				dataIniciRequest = dataIniciDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 			}else {
-				dataIniciDate = LocalDate.parse(dataIniciRequest, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+				dataIniciDate = LocalDate.parse(dataIniciRequest, DateTimeFormatter.ofPattern("yyyy-MM-dd")).atStartOfDay(zoneId);
+			}
+			
+			if (Configuracio.isDesenvolupament()) {
+				log.info("REQUEST API EXTERNA ACCESSOS: {inici=" + dataIniciRequest + "&fi=" + dataFiRequest + "&entitat=" + entitatRequest + "&idioma=" + idiomaRequest +"&timezone=" + dataFiDate.getZone() +"}");
 			}
 			
 			// si no hi ha entitatId, es retorna la propietatGlobal defaultEntity
@@ -184,7 +188,7 @@ public class AccessosResource {
 								
 			// Comprobam que la diferencia entre dates no supera el maxDays
 			int maxDays = Integer.valueOf(EjbManager.getAccessosMaxDies(propietatGlobalEjb));
-			long daysBeetween = Duration.between(dataIniciDate.atStartOfDay(), dataFiDate.atStartOfDay()).toDays(); 	
+			long daysBeetween = Duration.between(dataIniciDate, dataFiDate).toDays(); 
 			if (daysBeetween > maxDays) {
 				// .entity("La diferencia entre data inici i fi no pot ser superior a " + maxDays)
 				return Response.status(Status.BAD_REQUEST).entity(Collections.emptyList()).build();
