@@ -14,7 +14,11 @@ var props = {
 newInstancePlugin('sistracontainer', props);
 </script>
 
-<style>
+<style type="text/css">
+
+    #sistracontainer table tr, .pagination .page-item a { cursor: pointer; }
+    .page-item.active .page-link { background-color: #8fd19e; border-color: #8fd19e;}
+
     /*@charset "UTF-8";*/
     .react-datepicker__year-read-view--down-arrow,
     .react-datepicker__month-read-view--down-arrow,

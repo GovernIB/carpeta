@@ -206,17 +206,18 @@ class Regweb extends Component {
 
         const {t} = this.props;
 
-        let taulaRegistres; 
+        let taulaRegistres;
+        var tamanyTaula = { width: '99%'};
 
         if(this.state.data != null && this.state.pagination_total_items !== 0){
 
             let paginationNumbers = []; 
             for (let number = 1; number <= Math.ceil(this.state.pagination_total_items/10); number++) {
-                paginationNumbers.push(<Pagination.Item key={number} active={number.toString() == this.state.pagination_active.toString()} activeLabel="" onClick={(event) => this.handlePagination(event)} >{number}</Pagination.Item>,);
+                paginationNumbers.push(<Pagination.Item key={number} active={number === this.state.pagination_active} activeLabel="" onClick={(event) => this.handlePagination(event)} >{number}</Pagination.Item>,);
             }
 
            taulaRegistres = <>
-                <Table responsive striped hover> 
+                <Table responsive striped bordered hover style={tamanyTaula}>
                     <thead className="table-sucess">
                         <tr>
                             <th>{t('registro_numero')}</th>
@@ -319,6 +320,7 @@ class Regweb extends Component {
 
         let taulaRegistres; 
         let detallRegistreContainer;
+        var tamanyTaula = { width: '99%'};
 
         if (!isLoaded) {
             content = <div  id="carregant" className="loader-container centrat ">
@@ -413,11 +415,11 @@ class Regweb extends Component {
 
                 let paginationNumbers = []; 
                 for (let number = 1; number <= Math.ceil(this.state.pagination_total_items/10); number++) {
-                    paginationNumbers.push(<Pagination.Item key={number} active={number.toString() === this.state.pagination_active.toString()} activeLabel="" onClick={(event) => this.handlePagination(event)} >{number}</Pagination.Item>,);
+                    paginationNumbers.push(<Pagination.Item key={number} active={number === this.state.pagination_active} activeLabel="" onClick={(event) => this.handlePagination(event)} >{number}</Pagination.Item>,);
                 }
 
                taulaRegistres = <>
-                    <Table responsive striped hover> 
+                    <Table responsive striped bordered hover style={tamanyTaula}>
                         <thead className="table-success">
                             <tr>
                                 <th>{t('registro_numero')}</th>

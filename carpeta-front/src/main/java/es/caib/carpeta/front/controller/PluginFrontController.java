@@ -22,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -320,11 +321,16 @@ public class PluginFrontController extends CommonFrontController {
         log.info(" urlToShowPluginPage => " + urlToShowPluginPage);
 
         try {
+
             // ACCESS
-            accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_PLUGIN, entitatJPA.getEntitatID(),
-                    pluginID, new Timestamp(new Date().getTime()),
-                    LocaleContextHolder.getLocale().getLanguage(),
-                    InetAddress.getLocalHost().getHostAddress(), true);
+            if(pluginID != sesionHttp.getAccesPlugin()) {
+                accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_PLUGIN, entitatJPA.getEntitatID(),
+                        pluginID, new Timestamp(new Date().getTime()),
+                        LocaleContextHolder.getLocale().getLanguage(),
+                        InetAddress.getLocalHost().getHostAddress(), true);
+                sesionHttp.setAccesPlugin(pluginID);
+            }
+
         } catch (Exception e) {
             log.error("S'ha produit un error creant un Accés: " + e.getMessage(), e);
         }
