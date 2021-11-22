@@ -767,6 +767,12 @@ a.imc-bt-xarxa:hover {
 .page-item{
 	cursor: default;
 }
+ul.pagination li.page-item.active {
+	pointer-events: none;
+}
+.react-datepicker-popper{
+	z-index: 6;
+}
 
 /* Plugins pinbal */
 .infoNoMenu dl.row > div { 

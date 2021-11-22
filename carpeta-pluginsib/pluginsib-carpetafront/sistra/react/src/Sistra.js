@@ -41,6 +41,17 @@ class Sistra extends Component {
         this.handleChangeEstat = this.handleChangeEstat.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
+        const getLocale = locale => require(`date-fns/locale/${sessionStorage.getItem("langActual")}/index.js`)
+        this.locale = getLocale(this.props.language);
+
+        this.canviatIdioma = this.canviatIdioma.bind(this);
+        i18n.on('languageChanged', this.canviatIdioma);
+
+    }
+
+    canviatIdioma(lng) {
+        // console.log(" CANVIAT IDIOMA EN IniciPublic A ]" + lng+ "[");
+        this.componentDidMount();
     }
 
     handleChangeDataInici(e) {
@@ -161,6 +172,9 @@ class Sistra extends Component {
     }
 
     componentDidMount() {
+        const getLocale = locale => require(`date-fns/locale/${sessionStorage.getItem("langActual")}/index.js`)
+        this.locale = getLocale(this.props.language);
+
         this.setState({
             ...this.state,
             isLoaded: true
@@ -425,12 +439,14 @@ class Sistra extends Component {
                                         selected={this.state.dataInici}
                                         onChange={ (startDate) => this.handleChangeDataInici(startDate) }
                                         selectsStart
-                                        startDate={this.state.dataInici}
-                                        endDate={this.state.dataFi}
+                                        // startDate={this.state.dataInici}
+                                        // endDate={this.state.dataFi}
                                         name="dataInici"
                                         id="dataInici"
                                         dateFormat="dd/MM/yyyy"
                                         className="form-control form-control-sm estilCalendar focusIn"
+                                        locale={this.locale}
+                                        showYearDropdown={true}
                                     />
                                 </Form.Group>
                             </Col>
@@ -441,13 +457,15 @@ class Sistra extends Component {
                                         selected={this.state.dataFi}
                                         onChange={ (endDate) => this.handleChangeDataFi(endDate) }
                                         selectsEnd
-                                        startDate={this.state.dataInici}
-                                        endDate={this.state.dataFi}
+                                        // startDate={this.state.dataInici}
+                                        // endDate={this.state.dataFi}
                                         minDate={this.state.dataInici}
                                         name="dataFi"
                                         id="dataFi"
                                         dateFormat="dd/MM/yyyy"
                                         className="form-control form-control-sm estilCalendar focusIn"
+                                        locale={this.locale}
+                                        showYearDropdown={true}
                                     />
                                 </Form.Group>
                             </Col>
