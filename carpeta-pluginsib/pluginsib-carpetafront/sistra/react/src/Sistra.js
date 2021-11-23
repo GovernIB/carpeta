@@ -219,11 +219,6 @@ class Sistra extends Component {
         }
     }
 
-    goParentTo(url) {
-        window.open(url, '_blank');
-        $('#myModal').modal('hide');
-    }
-
 
     componentDidUpdate() {
 
@@ -300,7 +295,7 @@ class Sistra extends Component {
 
         function carregarUrl(obj) {
             if (obj.data('numero') !== '') {
-                window.location.replace(obj.data('url'));
+                window.open(obj.data('url'),'_blank');
             }else if (obj.data('pending') === 'S' && obj.data('mostramodal') === 'S'){
                 openModalConfirm(obj.data('url'));
             }else{
@@ -326,7 +321,7 @@ class Sistra extends Component {
                     + '</div>'
 
                     + '<div class="modal-footer">'
-                    + '<button class="btn btn-success" type="button" onclick="this.goParentTo(\''+url+'\')" tabindex="511">'+ t('sistraModalBotoContinuar') +'</button>'
+                    + '<button class="btn btn-success" type="button" onclick="window.open(\''+url+'\', \'_blank\');$(\'#myModal\').modal(\'hide\');" tabindex="511">'+ t('sistraModalBotoContinuar') +'</button>'
                     + '<button class="btn btn-danger" data-dismiss="modal" aria-hidden="true" tabindex="512">'+ t('sistraModalBotoCancelar') +'</button>'
 
                     + '</div>'
@@ -481,6 +476,7 @@ class Sistra extends Component {
                                         <option value="A" selected="selected">{t('sistraTots')}</option>
                                         <option value="S">{t('sistraFinalitzat')}</option>
                                         <option value="N">{t('sistraNoFinalitzat')}</option>
+                                        <option value="P">{t('sistraNoFinalizatPresencial')}</option>
                                         <option value="R">{t('sistraRegistrat')}</option>
                                     </Form.Select>
                                 </Form.Group>
