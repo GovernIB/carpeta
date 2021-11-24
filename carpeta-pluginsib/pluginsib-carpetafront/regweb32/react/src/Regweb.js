@@ -45,6 +45,16 @@ class Regweb extends Component {
         this.handleStateFilterParam = this.handleStateFilterParam.bind(this);
         this.handleSubmitSearcher = this.handleSubmitSearcher.bind(this);
 
+        const getLocale = Locale => require(`date-fns/locale/${sessionStorage.getItem("langActual")}/index.js`);
+        this.locale = getLocale(this.props.language);
+
+        this.canviatIdioma = this.canviatIdioma.bind(this);
+        i18n.on('languageChanged', this.canviatIdioma);
+
+    }
+
+    canviatIdioma(lng) {
+        this.componentDidMount();
     }
 
     handleStartDateFilterParam(e){
@@ -169,6 +179,10 @@ class Regweb extends Component {
     }
 
     componentDidMount() {
+
+        const getLocale = locale => require(`date-fns/locale/${sessionStorage.getItem("langActual")}/index.js`);
+        this.locale = getLocale(this.props.language);
+
         this.setState({
             ...this.state, 
             isLoaded: true
@@ -209,11 +223,11 @@ class Regweb extends Component {
         let taulaRegistres;
         var tamanyTaula = { width: '99%'};
 
-        if(this.state.data != null && this.state.pagination_total_items !== 0){
+        if(this.state.data != null && parseInt(this.state.pagination_total_items) > 0){
 
             let paginationNumbers = []; 
             for (let number = 1; number <= Math.ceil(this.state.pagination_total_items/10); number++) {
-                paginationNumbers.push(<Pagination.Item key={number} active={number === this.state.pagination_active} activeLabel="" onClick={(event) => this.handlePagination(event)} >{number}</Pagination.Item>,);
+                paginationNumbers.push(<Pagination.Item key={number} active={number.toString() == this.state.pagination_active.toString()} activeLabel="" onClick={(event) => this.handlePagination(event)} >{number}</Pagination.Item>,);
             }
 
            taulaRegistres = <>
@@ -239,21 +253,29 @@ class Regweb extends Component {
                     })}
                     </tbody>
                 </Table>
-                <Pagination>
+                <div style={{float:'left', marginTop: '9px;'}}>
+                        {t('carpeta_paginacion_1') + 
+                        ((parseInt(this.state.pagination_active,10)-1)*10+1) + 
+                        t('carpeta_paginacion_2') + 
+                        ( ((parseInt(this.state.pagination_active,10)*10) <= parseInt(this.state.pagination_total_items,10)) 
+                            ? parseInt(this.state.pagination_active,10)*10 
+                            : this.state.pagination_total_items
+                        ) + 
+                        t('carpeta_paginacion_3') + 
+                        this.state.pagination_total_items + 
+                        t('carpeta_paginacion_4')}
+                    </div>
+                <Pagination style={{float:'right'}}>
                     {paginationNumbers}
                 </Pagination>
             </>
 
-        } else{
-            if (this.state.totalRegistres === 0 && this.state.data !== null) {
-                taulaRegistres = <div className="pt-3 alert alert-secondary" style={{ float: 'left', width: '95%'}} role="alert">{t('registro_vacio')}</div>
-            }
         }
 
         let detallRegistreContainer;
         if ( this.state.numeroRegistro != null ){
             detallRegistreContainer = <DetallRegistre pathtoservei={props.detallpathtoservei} numero={this.state.numeroRegistro} />;
-            ReactDOM.render(<DetallRegistre pathtoservei={props.detallpathtoservei} numero={this.state.numeroRegistro} />, document.getElementById('detallregistrecontainer'));
+            ReactDOM.render(detallRegistreContainer, document.getElementById('detallregistrecontainer'));
         }
     }
 
@@ -355,12 +377,14 @@ class Regweb extends Component {
                                         selected={this.state.filter_startDate}
                                         onChange={ (startDate) => this.handleStartDateFilterParam(startDate) }
                                         selectsStart
-                                        startDate={this.state.filter_startDate}
-                                        endDate={this.state.filter_endDate} 
+                                        //startDate={this.state.filter_startDate}
+                                        //endDate={this.state.filter_endDate} 
                                         name="fechaInicio"
                                         id="fechaInicio"
                                         dateFormat="dd/MM/yyyy"
                                         className="form-control form-control-sm estilCalendar focusIn"
+                                        locale={this.locale}
+                                        showYearDropdown={true}
                                     />
                                 </Form.Group>
                             </Col>
@@ -371,13 +395,15 @@ class Regweb extends Component {
                                         selected={this.state.filter_endDate}
                                         onChange={ (endDate) => this.handleEndDateFilterParam(endDate) } 
                                         selectsEnd
-                                        startDate={this.state.filter_startDate}
-                                        endDate={this.state.filter_endDate} 
+                                        //startDate={this.state.filter_startDate}
+                                        //endDate={this.state.filter_endDate} 
                                         minDate={this.state.filter_startDate}
                                         name="fechaFin"
                                         id="fechaFin"
                                         dateFormat="dd/MM/yyyy"
                                         className="form-control form-control-sm estilCalendar focusIn"
+                                        locale={this.locale}
+                                        showYearDropdown={true}
                                     />
                                 </Form.Group>
                             </Col>
@@ -411,11 +437,11 @@ class Regweb extends Component {
                 </Form>
             </>
 
-            if(this.state.data != null){
+            if(this.state.data != null && parseInt(this.state.pagination_total_items,10) > 0){
 
                 let paginationNumbers = []; 
                 for (let number = 1; number <= Math.ceil(this.state.pagination_total_items/10); number++) {
-                    paginationNumbers.push(<Pagination.Item key={number} active={number === this.state.pagination_active} activeLabel="" onClick={(event) => this.handlePagination(event)} >{number}</Pagination.Item>,);
+                    paginationNumbers.push(<Pagination.Item key={number} active={number.toString() === this.state.pagination_active.toString()} activeLabel="" onClick={(event) => this.handlePagination(event)} >{number}</Pagination.Item>,); 
                 }
 
                taulaRegistres = <>
@@ -441,7 +467,19 @@ class Regweb extends Component {
                         })}
                         </tbody>
                     </Table>
-                    <Pagination>
+                    <div style={{float:'left', marginTop: '9px', width: '60%'}}>
+                        {t('carpeta_paginacion_1') + 
+                        ((parseInt(this.state.pagination_active,10)-1)*10+1) + 
+                        t('carpeta_paginacion_2') + 
+                        ( ((parseInt(this.state.pagination_active,10)*10) <= parseInt(this.state.pagination_total_items,10)) 
+                            ? parseInt(this.state.pagination_active,10)*10 
+                            : this.state.pagination_total_items
+                        ) + 
+                        t('carpeta_paginacion_3') + 
+                        this.state.pagination_total_items + 
+                        t('carpeta_paginacion_4')}
+                    </div>
+                    <Pagination style={{float:'right', paddingRight: '0.7em'}}>
                         {paginationNumbers}
                     </Pagination>
 
@@ -459,18 +497,20 @@ class Regweb extends Component {
         return (
             <div>
                 <div className="infoNoMenu">
-                    <h2 className="titol h2">{this.props.titles[i18n.language]}</h2>
-                    <div className="col-md-12 border-0 float-left p-0">
-                        <p className="lh15">{this.props.subtitles[i18n.language]} </p>
-                        <div className="infoNoMenu">
-                            <div className="col-md-12 border-0 float-left p-0">
-                                {this.state.error && <div className="alert alert-danger hide" role="alert">{this.state.error}</div>}                            
-                                {this.state.numeroRegistro == null && content}
-                                {this.state.numeroRegistro == null && taulaRegistres}
-                                
+                    {this.state.numeroRegistro == null && <>
+                        <h2 className="titol h2">{this.props.titles[i18n.language]}</h2>
+                        <div className="col-md-12 border-0 float-left p-0">
+                            <p className="lh15">{this.props.subtitles[i18n.language]} </p>
+                            <div className="infoNoMenu">
+                                <div className="col-md-12 border-0 float-left p-0">
+                                    {this.state.error && <div className="alert alert-danger hide" role="alert">{this.state.error}</div>}                            
+                                    {this.state.numeroRegistro == null && content}
+                                    {this.state.numeroRegistro == null && taulaRegistres}
+                                    {this.state.pagination_total_items.toString() === '0' && <div className="pt-3 alert alert-secondary" style={{ float: 'left', width: '95%'}} role="alert">{t('registro_vacio')}</div>}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </>}
                     {this.state.numeroRegistro != null && detallRegistreContainer}
                 </div>
             </div>);

@@ -77,5 +77,10 @@
     "registro_vacio": "No hi ha registres",
     "reprendreTornar": "Tornar",
     "carpeta_descargar": "Descàrrega",
-    "carpeta_buscar" : "Cerca"
+    "carpeta_buscar" : "Cerca",
+
+    "carpeta_paginacion_1": "Mostrant elements del ",
+    "carpeta_paginacion_2": " al ",
+    "carpeta_paginacion_3": " d'un total de ",
+    "carpeta_paginacion_4": " elements"
 }

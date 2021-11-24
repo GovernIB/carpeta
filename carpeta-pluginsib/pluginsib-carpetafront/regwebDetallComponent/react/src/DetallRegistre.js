@@ -4,7 +4,6 @@ import axios from "axios";
 import i18n from './i18n';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import { Tooltip } from 'bootstrap';
 
 /**
  *  @author jagarcia
@@ -86,8 +85,9 @@ class DetallRegistre extends Component {
                 'Content-Type': 'application/pdf',
             },
         })
-        .then( (response) => response.blob())
+        .then( (response) => { response.blob(); console.log("RESPONSE CONTENT TYPE:", response.headers.get("Content-Type"))} )
         .then( (blob) => {
+
             const url = window.URL.createObjectURL(new Blob([blob]));
             const link = document.createElement('a');
             link.href = url;
@@ -166,9 +166,6 @@ class DetallRegistre extends Component {
                 let registre = JSON.parse(this.state.data.registre.replace(/'/g, '"'));
 
                 console.log("RESPONSE", this.state.data);
-                //console.log("REGISTRE", registre);
-
-                const renderEstadoTooltip = () => <Tooltip id="registro_explicacion">{t('registro_explicacion_estado'+registre.estado)}</Tooltip>;
 
                 let solicitaExponeContainer = (typeof (registre.expone) != 'undefined' || typeof(registre.solicita) != 'undefined') ?
                 <div class="card border-left-carpeta shadow py-2 mb-3 alert">
@@ -179,6 +176,8 @@ class DetallRegistre extends Component {
                         </div>
                     </div>
                 </div> : "";
+
+                const iconoDescargar = <span className="oi oi-data-transfer-download mr-2" title={t('carpeta_descargar') + " " + t('registro_justificante')} aria-hidden="true"></span>;
 
                 content = 
                 <>  
@@ -198,31 +197,43 @@ class DetallRegistre extends Component {
                                                 <dt className="col-sm-3 pb-2">{t('registro_numero')}</dt>
                                                 <dd className="col-sm-7">{registre.numeroRegistro}</dd>
 
+                                                { registre.denominacionOficinaOrigen && <>
                                                 <dt className="col-sm-3 pb-2">{t('registro_oficina')}</dt>
                                                 <dd className="col-sm-7">{registre.denominacionOficinaOrigen}</dd>
-                                                
+                                                </>}
+
+                                                { registre.denominacionDestino && <>
                                                 <dt className="col-sm-3 pb-2">{t('registro_destinatario')}</dt>
                                                 <dd className="col-sm-7">{registre.denominacionDestino}</dd>
+                                                </>}
 
+                                                { registre.tipoDocumetacionFisica && <>
                                                 <dt className="col-sm-3 pb-2">{t('registro_tipo_doc')}</dt>
                                                 <dd className="col-sm-7">{registre.tipoDocumetacionFisica}</dd>
+                                                </>}
 
+                                                { registre.extracto && <>
                                                 <dt className="col-sm-3 pb-2">{t('registro_extracto')}</dt>
                                                 <dd className="col-sm-7">{registre.extracto}</dd>
+                                                </> }
 
+                                                { registre.idioma && <>
                                                 <dt className="col-sm-3 pb-2">{t('carpeta_idioma')}</dt>
                                                 <dd className="col-sm-7">{t('registro_idioma_' + registre.idioma)}</dd>
+                                                </> }
 
+                                                { registre.estado && <>
                                                 <dt className="col-sm-3 pb-2">{t('registro_descripcion_estado')}</dt>
-                                                <dd className="col-sm-7">
-                                                    {t('registro_estado_' + registre.estado)} 
-                                                </dd>
+                                                <dd className="col-sm-7">{t('registro_estado_' + registre.estado)} <span class="oi oi-info pl-2" onMouseOut={() => document.getElementById('descripcionTooltip').style.display='none'}  onMouseOver={ () => document.getElementById('descripcionTooltip').style.display='' }></span> <span id="descripcionTooltip" style={{display:'none'}}>{t('registro_estado_explicacion_'+registre.estado)}</span></dd>
+                                                </> }
 
                                                 <dt className="col-sm-3 pb-2">{t('registro_presencial')}</dt>
-                                                <dd className="col-sm-7">{ registre.presencial === 'true' ? 'Sí' :  'No'}</dd>
+                                                <dd className="col-sm-7">{ registre.presencial == 'true' ? 'Sí' :  'No'}</dd>
 
+                                                { registre.codigoSia  && <>
                                                 <dt className="col-sm-3 pb-2">{t('registro_codigoSia')}</dt>
                                                 <dd className="col-sm-7">{registre.codigoSia}</dd>
+                                                </>}
 
                                             </dl>
                                         </div>
@@ -236,13 +247,13 @@ class DetallRegistre extends Component {
                                         <div className="col mr-2 font15 text-center">
                                             <h3 className="font-weight-bold verde text-uppercase mb-3 text-center h3">{t('registro_justificante')}</h3>
                                             
-                                            { /* typeof(this.state.data.justificante) != 'undefined' && !this.state.data.justificante.confidencial && <Button onClick={() => this.handlerJustificant(registre)}>{t('carpeta_descargar')}</Button> */}
+                                            { /* typeof(this.state.data.justificante) != 'undefined' && !this.state.data.justificante.confidencial && <Button onClick={() => this.handlerJustificant(registre)}>{iconoDescargar} {t('carpeta_descargar')}</Button> */}
                                             
-                                            {this.state.data.justificanteUrl != '' && <Button onClick={() => { window.open(this.state.data.justificanteUrl); }}>{t('carpeta_descargar')}</Button>}
+                                            {this.state.data.justificanteUrl != '' && <Button className="btn btn-danger" onClick={() => { window.open(this.state.data.justificanteUrl); }}>{iconoDescargar} {t('carpeta_descargar')}</Button>}
 
-                                            {this.state.data.justificanteUrl == '' && this.state.data.justificantSenseGenerar != '' && <Button onClick={() => { this.generarJustificant(this.state.data.urlGeneracioJustificant); }}>{t('carpeta_descargar')}</Button>}
+                                            {this.state.data.justificanteUrl == '' && this.state.data.justificantSenseGenerar != '' && <Button className="btn btn-danger" onClick={() => { this.generarJustificant(this.state.data.urlGeneracioJustificant); }}>{iconoDescargar} {t('carpeta_descargar')}</Button>}
 
-                                            {this.state.data.justificanteId != '' && this.state.data.justificantData != '' && <Button onClick={() => this.downloadDoc(this.state.data.justificantData, this.state.data.justificantFileName)}>{t('carpeta_descargar')}</Button>} 
+                                            {this.state.data.justificanteId != '' && this.state.data.justificantData != '' && <Button className="btn btn-danger" onClick={() => this.downloadDoc(this.state.data.justificantData, this.state.data.justificantFileName)}>{iconoDescargar} {t('carpeta_descargar')}</Button>} 
 
                                             {this.state.data.justificanteUrl == '' && this.state.data.justificantSenseGenerar == '' && this.state.data.justificanteId == '' && <div className="text-center pt-3 text-danger"><span className="oi oi-warning pr-1"> </span>{this.state.data.error}</div>}
                                             
@@ -269,8 +280,8 @@ class DetallRegistre extends Component {
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        { registre.interesados.map( (item) => <tr>
-                                                            <td>#</td>
+                                                        { registre.interesados.map( (item, index) => <tr>
+                                                            <td>{index+1}</td>
                                                             <td>{item.interesado.nombre} {item.interesado.apellido1}</td>
                                                             <td>{item.interesado.documento}</td>
                                                             <td>{t('registro_tipo_interesado_'+item.interesado.tipoInteresado)}</td>
@@ -299,8 +310,8 @@ class DetallRegistre extends Component {
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        { registre.anexos.map( (item) => <tr>
-                                                            <td>#</td>
+                                                        { registre.anexos.map( (item,index) => <tr>
+                                                            <td>{index+1}</td>
                                                             <td>{item.name}</td>
                                                             <td>{t('registro_anexo_validezdocumento_'+item.validezDocumento)}</td>
                                                             <td>{ (!item.confidencial) ? 

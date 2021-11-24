@@ -651,6 +651,19 @@ a.imc-bt-xarxa:hover {
 	text-align: center;
 }
 
+#descripcionTooltip{
+    position: absolute;
+    padding: 8px;
+    border: 1px solid #aaa;
+    border-radius: 10px;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    top: -70px;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
+
 .tooltipClicable {
 	display:none;
 	background-color: black;
