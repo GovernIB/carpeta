@@ -619,6 +619,9 @@ a.imc-bt-xarxa:hover {
 	color: #6B6B6B;
 	text-decoration: none;
 }
+.mollaPa li {
+	color: #6B6B6B;
+}
 .imc--canviarEntitat::before {
 	background-image: url(../images/canviarEntitat.png);
 }
@@ -766,6 +769,9 @@ a.imc-bt-xarxa:hover {
 }
 .page-item{
 	cursor: default;
+}
+ul.pagination li.page-item.active {
+	pointer-events: none;
 }
 
 /* Plugins pinbal */

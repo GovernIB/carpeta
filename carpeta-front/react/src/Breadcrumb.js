@@ -272,17 +272,17 @@ class Breadcrumb extends Component {
                 // console.log("RENDER Breadcrumb items: " + TOTAL_ITEMS);
 
                 items.forEach(({id, label}, index) => {
-                    // if (index < TOTAL_ITEMS - 1) {
+                    if (index < TOTAL_ITEMS - 1) {
                     itemDOMS.push(<li key={index} id={"molla"+index}><span className="imc-separador"> &gt;</span><Link
                         to={id} tabIndex={402+index} aria-labelledby={"molla"+index}>{label}</Link></li>);
-                    // } else {
-                    //     /*if (label === 'plugin') {
-                    //         itemDOMS.push(<li id="plugin" key={index}>{pluginNom}</li>);
-                    //     } else */
-                    //     {
-                    //         itemDOMS.push(<li key={index}><span className="imc-separador"> &gt; </span>{label}</li>);
-                    //     }
-                    // }
+                    } else {
+                        /*if (label === 'plugin') {
+                            itemDOMS.push(<li id="plugin" key={index}>{pluginNom}</li>);
+                        } else */
+                        // {
+                            itemDOMS.push(<li key={index}><span className="imc-separador"> &gt; </span>{label}</li>);
+                        // }
+                    }
 
 
                 });
