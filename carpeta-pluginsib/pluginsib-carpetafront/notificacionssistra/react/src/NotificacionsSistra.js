@@ -174,7 +174,7 @@ class NotificacionsSistra extends Component {
         } else {
             content = "";
 
-            if(this.state.dataComunicacions !== null) {
+            if(this.state.dataComunicacions !== null && typeof(this.state.total_items) !== undefined  && typeof(this.state.dataComunicacions) !== undefined && this.state.total_items !== 0) {
                 let paginationNumbers = [];
                 for (let number = 1; number <= Math.ceil(this.state.total_items/10); number++) {
                     paginationNumbers.push(<Pagination.Item key={number} active={number === this.state.pagination_active} activeLabel="" onClick={(event) => this.handlePagination(event)} >{number}</Pagination.Item>,);
@@ -197,13 +197,29 @@ class NotificacionsSistra extends Component {
                         })}
                         </tbody>
                     </Table>
+                    <div style={{float:'left', marginTop: '9px;',width: '60%'}}>
+                        {t('carpeta_paginacion_1') +
+                        ((parseInt(this.state.pagination_active,10)-1)*10+1) +
+                        t('carpeta_paginacion_2') +
+                        ( ((parseInt(this.state.pagination_active,10)*10) <= parseInt(this.state.total_items,10))
+                                ? parseInt(this.state.pagination_active,10)*10
+                                : this.state.total_items
+                        ) +
+                        t('carpeta_paginacion_3') +
+                        this.state.total_items +
+                        t('carpeta_paginacion_4')}
+                    </div>
                     <Pagination>
                         {paginationNumbers}
                     </Pagination>
                 </>
 
             } else{
-                    taulaNotificacionsSistra = <div className="pt-3 alert alert-secondary" style={{ float: 'left', width: '95%'}} role="alert">{t('notificacionsSistraBuid')}</div>
+                if(this.state.total_items === 0 && this.state.dataComunicacions !== null) {
+                    taulaNotificacionsSistra =
+                        <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%'}}
+                             role="alert">{t('notificacionsSistraBuid')}</div>
+                }
             }
 
         }
