@@ -22,11 +22,12 @@ public class AccesDTO {
 	private String entitat;
 	private String tipus;
 	private String plugin;
+	private String idSessio;
 	
 	public AccesDTO() {
 	}
 
-	public AccesDTO(String proveidor, String metodeAutenticacio, java.lang.Integer qaa, Date data, String idioma, String entitat, String tipus, String plugin) {
+	public AccesDTO(String proveidor, String metodeAutenticacio, java.lang.Integer qaa, Date data, String idioma, String entitat, String tipus, String plugin, String idSessio) {
 		this.proveidor = proveidor;
 		this.metodeAutenticacio = metodeAutenticacio;
 		this.qaa = qaa;
@@ -35,6 +36,7 @@ public class AccesDTO {
 		this.entitat = entitat;
 		this.tipus = tipus;
 		this.plugin = plugin;
+		this.idSessio = idSessio;
 	}
 	
 	public String getProveidor() {
@@ -101,17 +103,26 @@ public class AccesDTO {
 		this.plugin = plugin;
 	}
 	
+	public String getIdSessio() {
+		return idSessio;
+	}
+	
+	public void setIdSessio(String idSessio) {
+		this.idSessio = idSessio;
+	}
+	
 	@Override
 	public String toString() {
 		return "AccesDTO{"  
 				+ "proveidor=" + proveidor
-				+ "metodeAutenticacio=" + metodeAutenticacio
-				+ "qaa=" + qaa
-				+ "data=" + data
-				+ "idioma=" + idioma
-				+ "entitat=" + entitat
-				+ "tipus=" + tipus
-				+ "plugin=" + plugin
+				+ ", metodeAutenticacio=" + metodeAutenticacio
+				+ ", qaa=" + qaa
+				+ ", data=" + data
+				+ ", idioma=" + idioma
+				+ ", entitat=" + entitat
+				+ ", tipus=" + tipus
+				+ ", plugin=" + plugin
+				+ ", idSessio=" + idSessio
 				+ "}";
 	}
 	

@@ -221,6 +221,7 @@ public class AccessosResource {
 				
 				String tipusAcces = "";
 				String nomPlugin = "";
+				String idSessio = "";
 				Long itemPluginId = item.getPluginID();
 				
 				switch(item.getTipus()) {
@@ -246,7 +247,8 @@ public class AccessosResource {
 						item.getIdioma(),
 						entitatRequest,
 						tipusAcces,
-						nomPlugin
+						nomPlugin,
+						idSessio
 						));
 			}
 			
