@@ -67,6 +67,10 @@ public class AccesQueryPath extends org.fundaciobit.genapp.common.query.QueryPat
     return new BooleanField(getQueryPath(), AccesFields.RESULTAT);
   }
 
+  public StringField IDSESSIO() {
+    return new StringField(getQueryPath(), AccesFields.IDSESSIO);
+  }
+
 
 
   @Override

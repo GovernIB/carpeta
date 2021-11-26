@@ -24,6 +24,7 @@ private static final long serialVersionUID = -112525025L;
 	long entitatID;
 	java.lang.String idioma;
 	boolean resultat;
+	java.lang.String idsessio;
 
 
   /** Constructor Buit */
@@ -31,7 +32,7 @@ private static final long serialVersionUID = -112525025L;
   }
 
   /** Constructor amb tots els camps  */
-  public AccesBean(long accesID , int tipus , java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String metodeAutenticacio , java.lang.Integer qaa , java.sql.Timestamp dataAcces , java.lang.Long pluginID , long entitatID , java.lang.String idioma , boolean resultat) {
+  public AccesBean(long accesID , int tipus , java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String metodeAutenticacio , java.lang.Integer qaa , java.sql.Timestamp dataAcces , java.lang.Long pluginID , long entitatID , java.lang.String idioma , boolean resultat , java.lang.String idsessio) {
     this.accesID=accesID;
     this.tipus=tipus;
     this.nom=nom;
@@ -46,9 +47,10 @@ private static final long serialVersionUID = -112525025L;
     this.entitatID=entitatID;
     this.idioma=idioma;
     this.resultat=resultat;
+    this.idsessio=idsessio;
 }
   /** Constructor sense valors autoincrementals */
-  public AccesBean(int tipus , java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String metodeAutenticacio , java.lang.Integer qaa , java.sql.Timestamp dataAcces , java.lang.Long pluginID , long entitatID , java.lang.String idioma , boolean resultat) {
+  public AccesBean(int tipus , java.lang.String nom , java.lang.String llinatges , java.lang.String nif , java.lang.String ip , java.lang.String proveidorIdentitat , java.lang.String metodeAutenticacio , java.lang.Integer qaa , java.sql.Timestamp dataAcces , java.lang.Long pluginID , long entitatID , java.lang.String idioma , boolean resultat , java.lang.String idsessio) {
     this.tipus=tipus;
     this.nom=nom;
     this.llinatges=llinatges;
@@ -62,6 +64,7 @@ private static final long serialVersionUID = -112525025L;
     this.entitatID=entitatID;
     this.idioma=idioma;
     this.resultat=resultat;
+    this.idsessio=idsessio;
 }
   /** Constructor dels valors Not Null */
   public AccesBean(long accesID , int tipus , long entitatID , boolean resultat) {
@@ -85,6 +88,7 @@ private static final long serialVersionUID = -112525025L;
     this.setEntitatID(__bean.getEntitatID());
     this.setIdioma(__bean.getIdioma());
     this.setResultat(__bean.isResultat());
+    this.setIdsessio(__bean.getIdsessio());
 	}
 
 	public long getAccesID() {
@@ -185,6 +189,13 @@ private static final long serialVersionUID = -112525025L;
 		this.resultat = _resultat_;
 	};
 
+	public java.lang.String getIdsessio() {
+		return(idsessio);
+	};
+	public void setIdsessio(java.lang.String _idsessio_) {
+		this.idsessio = _idsessio_;
+	};
+
 
 
   // ======================================
@@ -206,6 +217,7 @@ private static final long serialVersionUID = -112525025L;
     __tmp.setEntitatID(__bean.getEntitatID());
     __tmp.setIdioma(__bean.getIdioma());
     __tmp.setResultat(__bean.isResultat());
+    __tmp.setIdsessio(__bean.getIdsessio());
 		return __tmp;
 	}
 

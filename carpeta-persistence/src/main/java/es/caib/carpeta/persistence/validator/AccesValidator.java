@@ -101,6 +101,14 @@ public class AccesValidator<I extends Acces>
       }
     }
 
+    if (__vr.getFieldErrorCount(IDSESSIO) == 0) {
+      java.lang.String __idsessio = __target__.getIdsessio();
+      if (__idsessio!= null && __idsessio.length() > 255) {
+        __vr.rejectValue(IDSESSIO, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(IDSESSIO)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(255)));
+      }
+    }
+
     if (__isNou__) { // Creació
       // ================ CREATION
       // Fitxers 

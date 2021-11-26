@@ -538,6 +538,19 @@ private static final long serialVersionUID = 489209138L;
     }
 
 
+// EXP  Field:entitatid | Table: car_preguntesfrequents | Type: 0  
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
+    private Set<PreguntesFrequentsJPA> preguntesFrequentss = new HashSet<PreguntesFrequentsJPA>(0);
+    public  Set<PreguntesFrequentsJPA> getPreguntesFrequentss() {
+    return this.preguntesFrequentss;
+  }
+
+    public void setPreguntesFrequentss(Set<PreguntesFrequentsJPA> preguntesFrequentss) {
+      this.preguntesFrequentss = preguntesFrequentss;
+    }
+
+
 // EXP  Field:entitatid | Table: car_propietatglobal | Type: 0  
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
@@ -851,6 +864,10 @@ private static final long serialVersionUID = 489209138L;
     if(!"SeccioJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.seccios) || org.hibernate.Hibernate.isInitialized(__jpa.getSeccios())) ) {
       __tmp.setSeccios(SeccioJPA.copyJPA(__jpa.getSeccios(), __alreadyCopied,"EntitatJPA"));
+    }
+    if(!"PreguntesFrequentsJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.preguntesFrequentss) || org.hibernate.Hibernate.isInitialized(__jpa.getPreguntesFrequentss())) ) {
+      __tmp.setPreguntesFrequentss(PreguntesFrequentsJPA.copyJPA(__jpa.getPreguntesFrequentss(), __alreadyCopied,"EntitatJPA"));
     }
     if(!"AvisJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.aviss) || org.hibernate.Hibernate.isInitialized(__jpa.getAviss())) ) {

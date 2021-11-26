@@ -26,6 +26,7 @@ public interface AccesFields extends java.io.Serializable {
 	 public static final LongField ENTITATID = new LongField(_TABLE_MODEL, "entitatID", "entitatid");
 	 public static final StringField IDIOMA = new StringField(_TABLE_MODEL, "idioma", "idioma");
 	 public static final BooleanField RESULTAT = new BooleanField(_TABLE_MODEL, "resultat", "resultat");
+	 public static final StringField IDSESSIO = new StringField(_TABLE_MODEL, "idsessio", "idsessio");
 
 
   public static final Field<?>[] ALL_ACCES_FIELDS = {
@@ -42,7 +43,8 @@ public interface AccesFields extends java.io.Serializable {
     PLUGINID,
     ENTITATID,
     IDIOMA,
-    RESULTAT
+    RESULTAT,
+    IDSESSIO
   };
 
 
