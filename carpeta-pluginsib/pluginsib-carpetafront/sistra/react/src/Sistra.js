@@ -47,6 +47,10 @@ class Sistra extends Component {
         this.canviatIdioma = this.canviatIdioma.bind(this);
         i18n.on('languageChanged', this.canviatIdioma);
 
+        this.fechaInicio;
+        this.fechaFin;
+        this.estado;
+
     }
 
     canviatIdioma(lng) {
@@ -138,6 +142,10 @@ class Sistra extends Component {
                 estat: this.state.estat,
                 pageNumber: 0
             };
+
+            this.fechaInicio = this.state.dataInici;
+            this.fechaFin = this.state.dataFi;
+            this.estado = this.state.estat;
 
             await axios.get(url2, {params: params}).then((response) => {
 
@@ -536,11 +544,11 @@ class Sistra extends Component {
                 taulaTramits = <>
                     <div style={{float:'left', marginTop: '9px;',paddingBottom: '0.7em'}}>
                         {t('carpeta_criterio_1') +
-                        $.dateFormatCerca(this.state.dataInici) +
+                        $.dateFormatCerca(this.fechaInicio) +
                         t('carpeta_criterio_2') +
-                        $.dateFormatCerca(this.state.dataFi) +
+                        $.dateFormatCerca(this.fechaFin) +
                         t('carpeta_criterio_3') +
-                        $.nomEstat(this.state.estat) +
+                        $.nomEstat(this.estado) +
                         t('carpeta_criterio_4')}
                     </div>
                     <Table responsive striped bordered hover style={tamanyTaula}>
