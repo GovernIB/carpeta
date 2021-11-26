@@ -29,6 +29,7 @@ import org.apache.commons.io.IOUtils;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /**
  * Created by Fundació BIT.
@@ -115,29 +116,25 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
             if (query.startsWith(DETALL_REGISTRE_CODIFICAT_PAGE)) {
                 detallDeRegistreCodificat(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                         userData, administrationEncriptedID,  locale, isGet, logCarpeta);
-            
             } else if(query.startsWith(DETALL_REACT_PAGE)) {
-            	
             	detallDeRegistreJson(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                         userData, administrationEncriptedID,  locale, isGet, logCarpeta);
-            
-            
             } else if (query.startsWith(DETALL_REGISTRE_PAGE)) {
                 detallDeRegistre(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                         userData, administrationEncriptedID,  locale, isGet, logCarpeta);
-            }  else if (query.startsWith(JUSTIFICANT_REGISTRE_PAGE)) {
+            } else if (query.startsWith(JUSTIFICANT_REGISTRE_PAGE_JS)) {
+                justificantDeRegistreJson(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
+                        userData, administrationEncriptedID, locale, isGet, logCarpeta);
+            } else if (query.startsWith(JUSTIFICANT_REGISTRE_PAGE)) {
                 justificantDeRegistre(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                        userData, administrationEncriptedID, locale, isGet, logCarpeta);               
+                        userData, administrationEncriptedID, locale, isGet, logCarpeta);   
             } else if (query.startsWith(ANNEXE_REGISTRE_PAGE)) {
                 annexeDeRegistre(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                         userData, administrationEncriptedID, locale, isGet, logCarpeta);
             
             } else if(query.startsWith(DETALL_REACT_JS_PAGE)) {
-            
             	reactjs(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
                         administrationEncriptedID, locale, isGet);
-            	
-            
             } else {
                 super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request,
                         response, userData, administrationEncriptedID, locale, isGet, logCarpeta);
@@ -239,7 +236,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 	        	dades.put("registre", jsonRegistre.toJson(registre));
 	        	
 	        	// Montamos la url de generación del justificante
-	            String urlGeneracioJustificant = absolutePluginRequestPath + "/" + JUSTIFICANT_REGISTRE_PAGE
+	            String urlGeneracioJustificant = absolutePluginRequestPath + "/" + JUSTIFICANT_REGISTRE_PAGE_JS
 	                    + "?numeroRegistroFormateado=" + registre.getNumeroRegistro() + "&tipoRegistro="
 	                    + registre.getTipoRegistro();
 
@@ -620,6 +617,78 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
            
         return registro;
     }
+    
+ // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // ------------------- JUSTIFICANTE DE REGISTRE JSON ----------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+    protected static final String JUSTIFICANT_REGISTRE_PAGE_JS = "justificantRegistreJson";
+
+    public void justificantDeRegistreJson(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
+
+    	String numeroRegistroFormateado = request.getParameter("numeroRegistroFormateado");
+        String tipoRegistro = request.getParameter("tipoRegistro");
+    	
+        response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
+        
+        try {
+        	
+        	Map<String, String> dades = new HashMap<String, String>();
+        	
+        	dades.put("numero", numeroRegistroFormateado);
+        	       	
+            // Obtenim justificant
+            JustificanteWs justificantRegistre;
+            try {
+            	justificantRegistre = getJustificantRegistre(numeroRegistroFormateado, Long.valueOf(tipoRegistro), locale);
+            }catch(Exception e){
+                justificantRegistre = null;
+            }
+            
+            if (justificantRegistre != null) {
+            	/*obtenerContentType(MIME_PDF, response, "justificant_" + numeroRegistroFormateado + ".pdf", null,
+	                    justificantRegistre.getJustificante());*/
+            	dades.put("justificantData", new String(Base64.getEncoder().encode(justificantRegistre.getJustificante())));
+            	dades.put("justificantFilename", "justificant_" + numeroRegistroFormateado + ".pdf");
+            }else {
+            	
+            	dades.put("error", getTraduccio(RESOURCE_BUNDLE_NAME, "justificante.error.generando", locale));
+            }
+            
+            Gson json = new GsonBuilder().setDateFormat("dd-MM-yyyy HH:mm").create();
+            String generat = json.toJson(dades);
+            
+            log.info("Generat: " + generat);
+            
+            response.getWriter().println(generat);
+            response.flushBuffer();
+	            
+        }catch( Exception e) {
+        	
+        	try{
+                
+                StringBuilder peticio = new StringBuilder();
+                peticio.append("[REGWEBDETALLCOMPONENT] Error descàrrega justificant").append("\n");
+                peticio.append("classe: ").append(getClass().getName()).append("\n");
+                peticio.append("Registre: " + numeroRegistroFormateado).append("\n");
+                peticio.append("Error: " + e.getMessage()).append("\n");
+                logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error justificant", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error justificant");
+                
+                log.error("Error obtenint justificant: " + e.getMessage(), e);
+            }catch(Exception e2){
+                log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
+            }
+        	
+        }
+
+    }
+    
+    
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------

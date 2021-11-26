@@ -17,7 +17,7 @@ class DetallRegistre extends Component {
         this.state = {
             isLoaded: false,
             data: null,
-            error: false
+            error: ''
         };
 
     }
@@ -37,7 +37,7 @@ class DetallRegistre extends Component {
             this.setState({
                 ...this.state,
                 isLoaded: true,
-                error: false
+                error: ''
             });
             
             if (response.data.registre != null){
@@ -82,26 +82,22 @@ class DetallRegistre extends Component {
         fetch(url, { 
             method: 'GET',
             headers: { 
-                'Content-Type': 'application/pdf',
+                'Content-Type': 'application/json',
             },
         })
-        .then( (response) => { response.blob(); console.log("RESPONSE CONTENT TYPE:", response.headers.get("Content-Type"))} )
-        .then( (blob) => {
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
 
-            const url = window.URL.createObjectURL(new Blob([blob]));
-            const link = document.createElement('a');
-            link.href = url;
-            link.setAttribute( 'download', `Justificant.pdf`,);
-
-            document.body.appendChild(link);
-            link.click();
-            link.parentNode.removeChild(link);
-        });
+            if (data.error != null)
+                this.setState({...this.state, error: data.error});
+            else{
+                this.downloadDoc(data.justificantData, data.justificantFileName);
+            }
+        });   
     }
 
     downloadDoc(datafile, dataName) {
-
-        console.log("DESCARGAR DOWNLOAD DOC");
 
         const linkSource = `data:application/pdf;base64,${datafile}`;
     	const downloadLink = document.createElement("a");
@@ -119,7 +115,9 @@ class DetallRegistre extends Component {
         }
     	
         console.log("DOWNLOAD BTN:", downloadLink);
-    	downloadLink.click();
+        downloadLink.click();
+        //document.getElementById("downloadEnllaz").append(downloadLink);
+    	
     }
 
     render() {
@@ -251,11 +249,11 @@ class DetallRegistre extends Component {
                                             
                                             {this.state.data.justificanteUrl != '' && <Button className="btn btn-danger" onClick={() => { window.open(this.state.data.justificanteUrl); }}>{iconoDescargar} {t('carpeta_descargar')}</Button>}
 
-                                            {this.state.data.justificanteUrl == '' && this.state.data.justificantSenseGenerar != '' && <Button className="btn btn-danger" onClick={() => { this.generarJustificant(this.state.data.urlGeneracioJustificant); }}>{iconoDescargar} {t('carpeta_descargar')}</Button>}
+                                            {this.state.data.justificanteUrl == '' && this.state.data.justificantSenseGenerar != '' && this.state.error == '' && <Button className="btn btn-danger" onClick={() => { this.generarJustificant(this.state.data.urlGeneracioJustificant); }}>{iconoDescargar} {t('carpeta_descargar')}</Button>}
 
-                                            {this.state.data.justificanteId != '' && this.state.data.justificantData != '' && <Button className="btn btn-danger" onClick={() => this.downloadDoc(this.state.data.justificantData, this.state.data.justificantFileName)}>{iconoDescargar} {t('carpeta_descargar')}</Button>} 
+                                            {this.state.data.justificanteId != '' && this.state.data.justificantData != '' && this.state.error == '' && <Button className="btn btn-danger" onClick={() => this.downloadDoc(this.state.data.justificantData, this.state.data.justificantFileName)}>{iconoDescargar} {t('carpeta_descargar')}</Button>} 
 
-                                            {this.state.data.justificanteUrl == '' && this.state.data.justificantSenseGenerar == '' && this.state.data.justificanteId == '' && <div className="text-center pt-3 text-danger"><span className="oi oi-warning pr-1"> </span>{this.state.data.error}</div>}
+                                            {this.state.data.justificanteUrl == '' && this.state.data.justificantSenseGenerar == '' && this.state.data.justificanteId == '' && this.state.error != '' && <div className="text-center pt-3 text-danger"><span className="oi oi-warning pr-1"> </span>{this.state.error}</div>}
                                             
                                         </div>
                                     </div>

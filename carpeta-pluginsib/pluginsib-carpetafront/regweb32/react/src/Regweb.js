@@ -32,11 +32,12 @@ class Regweb extends Component {
             filter_number: null,
             filter_startDate: startDateObj,
             filter_endDate: endDateObj,
-            filter_status: null,
+            filter_status: 0,
             pagination_active: 1,
             pagination_total_items: 10,
             numeroRegistro: null,
-            error: false
+            error: false, 
+            criteriosTexto: ''
         };
 
         this.handleNumberFilterParam = this.handleNumberFilterParam.bind(this);
@@ -128,6 +129,7 @@ class Regweb extends Component {
 
     async handleSubmitSearcher(e) {
 
+        const {t} = this.props;
 
         let validatFormulari = this.validaFormulari();
 
@@ -135,11 +137,19 @@ class Regweb extends Component {
 
             e.preventDefault();
 
+            let criterisCercaText = 
+        t('carpeta_criterio_1') + $.dateFormatCerca(this.state.filter_startDate) +
+        t('carpeta_criterio_2') + $.dateFormatCerca(this.state.filter_endDate) +
+        t('carpeta_criterio_3') + $.nomEstat(this.state.filter_status) +
+        t('carpeta_criterio_4') + 
+        ((this.state.filter_number != null) ? t('carpeta_criterio_5') + this.state.filter_number : '');
+
             this.setState({
                 ...this.state, 
                 isLoaded: false,
                 error: false,
                 numeroRegistro: null,
+                criteriosTexto: criterisCercaText
             });  
 
             const url2 = this.props.pathtoservei;
@@ -231,6 +241,7 @@ class Regweb extends Component {
             }
 
            taulaRegistres = <>
+                <div style={{float:'left', marginTop: '9px;',paddingBottom: '0.7em'}}>{this.state.criteriosTexto}</div>
                 <Table responsive striped bordered hover style={tamanyTaula}>
                     <thead className="table-sucess">
                         <tr>
@@ -334,12 +345,33 @@ class Regweb extends Component {
             return day + "-" + month + "-" + year + " " + hour + ":" + minute;
         };
 
+        $.dateFormatCerca = function(dateObject) {
+            var d = new Date(dateObject);
+            var day = d.getDate();
+            var month = d.getMonth() + 1;
+            var year = d.getFullYear();
+            if (day < 10) {
+                day = "0" + day;
+            }
+            if (month < 10) {
+                month = "0" + month;
+            }
+            return day + "-" + month + "-" + year;
+        };
+
+        $.nomEstat = function(estat) {
+            console.log('estat:' + estat);
+            if (estat.toString() === '0') 
+                return t('registro_estado_todos')
+            return t('registro_estado_'+estat);
+        }
+
         const isLoaded = this.state.isLoaded;
 
         const { t } = this.props;
 
         let content;
-
+        
         let taulaRegistres; 
         let detallRegistreContainer;
         var tamanyTaula = { width: '99%'};
@@ -445,6 +477,7 @@ class Regweb extends Component {
                 }
 
                taulaRegistres = <>
+                    <div style={{float:'left', marginTop: '9px;',paddingBottom: '0.7em'}}>{this.state.criteriosTexto}</div>
                     <Table responsive striped bordered hover style={tamanyTaula}>
                         <thead className="table-success">
                             <tr>
@@ -506,7 +539,7 @@ class Regweb extends Component {
                                     {this.state.error && <div className="alert alert-danger hide" role="alert">{this.state.error}</div>}                            
                                     {this.state.numeroRegistro == null && content}
                                     {this.state.numeroRegistro == null && taulaRegistres}
-                                    {this.state.pagination_total_items.toString() === '0' && <div className="pt-3 alert alert-secondary" style={{ float: 'left', width: '95%'}} role="alert">{t('registro_vacio')}</div>}
+                                    {this.state.pagination_total_items.toString() === '0' && <><div style={{float:'left', marginTop: '9px;',paddingBottom: '0.7em'}}>{this.state.criteriosTexto}</div><div className="pt-3 alert alert-secondary" style={{ float: 'left', width: '95%'}} role="alert">{t('registro_vacio')}</div></>}
                                 </div>
                             </div>
                         </div>
