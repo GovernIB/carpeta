@@ -180,7 +180,7 @@ class Notib extends Component {
 
             const Header = [t('notibComunicacionFecha'), t('notibComunicacionConcepte'), t('notibComunicacionEstat')];
 
-            if(this.state.dataComunicacions !== null) {
+            if(this.state.dataComunicacions !== null && typeof(this.state.total_items) !== undefined  && typeof(this.state.dataComunicacions) !== undefined && this.state.total_items !== 0) {
                 let paginationNumbers = [];
                 for (let number = 1; number <= Math.ceil(this.state.total_items/10); number++) {
                     paginationNumbers.push(<Pagination.Item key={number} active={number === this.state.pagination_active} activeLabel="" onClick={(event) => this.handlePagination(event)} >{number}</Pagination.Item>,);
@@ -209,13 +209,28 @@ class Notib extends Component {
                         })}
                         </tbody>
                     </Table>
-                    <Pagination>
+                    <div style={{float:'left', marginTop: '9px;',width: '60%'}}>
+                        {t('carpeta_paginacion_1') +
+                        ((parseInt(this.state.pagination_active,10)-1)*10+1) +
+                        t('carpeta_paginacion_2') +
+                        ( ((parseInt(this.state.pagination_active,10)*10) <= parseInt(this.state.total_items,10))
+                                ? parseInt(this.state.pagination_active,10)*10
+                                : this.state.total_items
+                        ) +
+                        t('carpeta_paginacion_3') +
+                        this.state.total_items +
+                        t('carpeta_paginacion_4')}
+                    </div>
+                    <Pagination style={{float:'right',paddingRight: '0.7em'}}>
                         {paginationNumbers}
                     </Pagination>
                 </>
 
             } else{
-                    taulaNotib = <div className="pt-3 alert alert-secondary" style={{ float: 'left', width: '95%'}} role="alert">{t('notibBuid')}</div>
+                if(this.state.total_items === 0 && this.state.dataComunicacions !== null) {
+                    taulaNotib = <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%'}}
+                                      role="alert">{t('notibBuid')}</div>
+                }
             }
 
         }

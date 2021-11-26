@@ -221,6 +221,32 @@ private static final long serialVersionUID = -326205279L;
     }
 
 
+// EXP  Field:enunciatid | Table: car_preguntesfrequents | Type: 0  
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "enunciatID")
+    private Set<PreguntesFrequentsJPA> preguntesFrequents_enunciatids = new HashSet<PreguntesFrequentsJPA>(0);
+    public  Set<PreguntesFrequentsJPA> getPreguntesFrequents_enunciatids() {
+    return this.preguntesFrequents_enunciatids;
+  }
+
+    public void setPreguntesFrequents_enunciatids(Set<PreguntesFrequentsJPA> preguntesFrequents_enunciatids) {
+      this.preguntesFrequents_enunciatids = preguntesFrequents_enunciatids;
+    }
+
+
+// EXP  Field:respostaid | Table: car_preguntesfrequents | Type: 0  
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "respostaID")
+    private Set<PreguntesFrequentsJPA> preguntesFrequents_respostaids = new HashSet<PreguntesFrequentsJPA>(0);
+    public  Set<PreguntesFrequentsJPA> getPreguntesFrequents_respostaids() {
+    return this.preguntesFrequents_respostaids;
+  }
+
+    public void setPreguntesFrequents_respostaids(Set<PreguntesFrequentsJPA> preguntesFrequents_respostaids) {
+      this.preguntesFrequents_respostaids = preguntesFrequents_respostaids;
+    }
+
+
 // EXP  Field:descripcioid | Table: car_seccio | Type: 0  
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "descripcioID")
@@ -357,9 +383,17 @@ private static final long serialVersionUID = -326205279L;
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat_logintextids) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat_logintextids())) ) {
       __tmp.setEntitat_logintextids(EntitatJPA.copyJPA(__jpa.getEntitat_logintextids(), __alreadyCopied,"TraduccioJPA"));
     }
+    if(!"PreguntesFrequentsJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.preguntesFrequents_respostaids) || org.hibernate.Hibernate.isInitialized(__jpa.getPreguntesFrequents_respostaids())) ) {
+      __tmp.setPreguntesFrequents_respostaids(PreguntesFrequentsJPA.copyJPA(__jpa.getPreguntesFrequents_respostaids(), __alreadyCopied,"TraduccioJPA"));
+    }
     if(!"PluginJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.plugin_subtitolllargids) || org.hibernate.Hibernate.isInitialized(__jpa.getPlugin_subtitolllargids())) ) {
       __tmp.setPlugin_subtitolllargids(PluginJPA.copyJPA(__jpa.getPlugin_subtitolllargids(), __alreadyCopied,"TraduccioJPA"));
+    }
+    if(!"PreguntesFrequentsJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.preguntesFrequents_enunciatids) || org.hibernate.Hibernate.isInitialized(__jpa.getPreguntesFrequents_enunciatids())) ) {
+      __tmp.setPreguntesFrequents_enunciatids(PreguntesFrequentsJPA.copyJPA(__jpa.getPreguntesFrequents_enunciatids(), __alreadyCopied,"TraduccioJPA"));
     }
     if(!"AvisJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.aviss) || org.hibernate.Hibernate.isInitialized(__jpa.getAviss())) ) {

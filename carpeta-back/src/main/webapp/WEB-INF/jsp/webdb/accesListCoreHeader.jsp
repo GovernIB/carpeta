@@ -54,6 +54,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.RESULTAT)}">
         <th>${car:getSortIcons(__theFilterForm,AccesFields.RESULTAT)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,AccesFields.IDSESSIO)}">
+        <th>${car:getSortIcons(__theFilterForm,AccesFields.IDSESSIO)}</th>
+        </c:if>
 
 
         <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">

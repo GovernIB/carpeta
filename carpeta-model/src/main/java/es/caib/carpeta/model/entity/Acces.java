@@ -44,6 +44,9 @@ public interface Acces extends org.fundaciobit.genapp.common.IGenAppEntity {
 	public boolean isResultat();
 	public void setResultat(boolean _resultat_);
 
+	public java.lang.String getIdsessio();
+	public void setIdsessio(java.lang.String _idsessio_);
+
 
 
   // ======================================

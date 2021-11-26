@@ -18,5 +18,13 @@
     "sistraModalTitol": "Aviso",
     "sistraModalTexte": "La tramitación telemática ha finalizado. Acabe el procedimiento presentando la documentación correspondiente de forma presencial.",
     "sistraModalBotoCancelar": "Cerrar",
-    "sistraModalBotoContinuar": "Ver detalle"
+    "sistraModalBotoContinuar": "Ver detalle",
+    "carpeta_paginacion_1": "Mostrando elementos del ",
+    "carpeta_paginacion_2": " al ",
+    "carpeta_paginacion_3": " de un total de ",
+    "carpeta_paginacion_4": " elementos",
+    "carpeta_criterio_1": "Búsqueda entre el ",
+    "carpeta_criterio_2": " y el ",
+    "carpeta_criterio_3": " con el estado '",
+    "carpeta_criterio_4": "'"
 }

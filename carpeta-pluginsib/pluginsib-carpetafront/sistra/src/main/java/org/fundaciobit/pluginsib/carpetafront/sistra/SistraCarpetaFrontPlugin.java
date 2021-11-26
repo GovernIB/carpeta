@@ -284,7 +284,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
         String formDataFiStr = request.getParameter("dataFi");
         formEstat = request.getParameter("estat");
         pagina = Integer.parseInt(request.getParameter("pageNumber"));
-        log.info("pageNumber: " + pagina);
+//        log.info("pageNumber: " + pagina);
 
         try {
 
@@ -372,8 +372,10 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             }
             List<TramitePersistenteGenerico> tramitsPagina = new ArrayList<TramitePersistenteGenerico>();
 
+            int calcul = (pagina * itemsPagina) + itemsPagina;
+
             if(sortedTramit.size() > 0) {
-                if ((pagina * itemsPagina) + itemsPagina < sortedTramit.size()) {
+                if (calcul < sortedTramit.size()) {
                     tramitsPagina = sortedTramit.subList(pagina * itemsPagina, (pagina * itemsPagina) + itemsPagina);
                 } else {
                     tramitsPagina = sortedTramit.subList(pagina * itemsPagina, sortedTramit.size());
@@ -388,7 +390,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             Gson gson = new Gson();
             String json = gson.toJson(infoTramits);
 
-//            log.info("JSON: " + json);
+            log.info("JSON: " + json);
 
             try {
 

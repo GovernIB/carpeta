@@ -230,6 +230,17 @@ public class AccesFilterForm extends CarpetaBaseFilterForm implements AccesField
   }
 
 
+  private java.lang.String idsessio;
+
+  public java.lang.String getIdsessio() {
+    return this.idsessio;
+  }
+
+  public void setIdsessio(java.lang.String idsessio) {
+    this.idsessio = idsessio;
+  }
+
+
   public AccesFilterForm() {
   }
   
@@ -254,6 +265,7 @@ public class AccesFilterForm extends CarpetaBaseFilterForm implements AccesField
     this.entitatIDDesde = __toClone.entitatIDDesde;
     this.entitatIDFins = __toClone.entitatIDFins;
     this.idioma = __toClone.idioma;
+    this.idsessio = __toClone.idsessio;
     this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
     this.mapOfValuesForPluginID = __toClone.mapOfValuesForPluginID;
     this.mapOfEntitatForEntitatID = __toClone.mapOfEntitatForEntitatID;

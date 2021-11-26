@@ -21,6 +21,7 @@
 		<class>es.caib.carpeta.persistence.LogCarpetaJPA</class>
 		<class>es.caib.carpeta.persistence.PluginJPA</class>
 		<class>es.caib.carpeta.persistence.PluginEntitatJPA</class>
+		<class>es.caib.carpeta.persistence.PreguntesFrequentsJPA</class>
 		<class>es.caib.carpeta.persistence.PropietatGlobalJPA</class>
 		<class>es.caib.carpeta.persistence.SeccioJPA</class>
 		<class>es.caib.carpeta.persistence.TraduccioJPA</class>

@@ -14,6 +14,10 @@
     "notificacionsSistraComunicacionDataEstat": "Fecha Estado",
     "notificacionsSistraComunicacionJustificant": "Justificante",
     "notificacionsSistraComunicacionCertificacio": "Certificación",
-    "notificacionsSistraBuid":"No hay notificaciones"
+    "notificacionsSistraBuid":"No hay notificaciones",
+    "carpeta_paginacion_1": "Mostrando elementos del ",
+    "carpeta_paginacion_2": " al ",
+    "carpeta_paginacion_3": " de un total de ",
+    "carpeta_paginacion_4": " elementos"
 
 }

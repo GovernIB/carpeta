@@ -323,3 +323,21 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,AccesFields.IDSESSIO)}">
+        <tr id="acces_idsessio_rowid">
+          <td>
+            <label>
+              <fmt:message key="${(empty __theForm.labels[AccesFields.IDSESSIO])?'acces.idsessio':__theForm.labels[AccesFields.IDSESSIO]}" />
+              <c:if test="${not empty __theForm.help[AccesFields.IDSESSIO]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.IDSESSIO]}" ></i>
+              </c:if>
+             </label>
+            </td>
+            <td>
+            <form:errors path="acces.idsessio" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.IDSESSIO)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,AccesFields.IDSESSIO)? ' uneditable-input' : ''}"  style="" maxlength="255" path="acces.idsessio"   />
+
+           </td>
+        </tr>
+        </c:if>
+        

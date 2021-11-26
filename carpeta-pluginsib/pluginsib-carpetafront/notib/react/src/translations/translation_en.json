@@ -15,6 +15,9 @@
     "notibComunicacionDataEstat": "Data Estat",
     "notibComunicacionJustificant": "Justificant",
     "notibComunicacionCertificacio": "Certificació",
-    "notibBuid":"No hi ha notificacions"
-
+    "notibBuid":"No hi ha notificacions",
+    "carpeta_paginacion_1": "Mostrant elements del ",
+    "carpeta_paginacion_2": " al ",
+    "carpeta_paginacion_3": " d'un total de ",
+    "carpeta_paginacion_4": " elements"
 }

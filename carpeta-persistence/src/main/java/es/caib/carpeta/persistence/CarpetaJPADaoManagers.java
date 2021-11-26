@@ -17,6 +17,7 @@ public final class CarpetaJPADaoManagers implements ICarpetaDaoManagers{
    private final LogCarpetaJPAManager car_log;
    private final PluginJPAManager car_plugin;
    private final PluginEntitatJPAManager car_pluginentitat;
+   private final PreguntesFrequentsJPAManager car_preguntesfrequents;
    private final PropietatGlobalJPAManager car_propietatglobal;
    private final SeccioJPAManager car_seccio;
    private final TraduccioJPAManager car_traduccio;
@@ -35,6 +36,7 @@ public final class CarpetaJPADaoManagers implements ICarpetaDaoManagers{
     this.car_log = new LogCarpetaJPAManager(__em);
     this.car_plugin = new PluginJPAManager(__em);
     this.car_pluginentitat = new PluginEntitatJPAManager(__em);
+    this.car_preguntesfrequents = new PreguntesFrequentsJPAManager(__em);
     this.car_propietatglobal = new PropietatGlobalJPAManager(__em);
     this.car_seccio = new SeccioJPAManager(__em);
     this.car_traduccio = new TraduccioJPAManager(__em);
@@ -84,6 +86,10 @@ public final class CarpetaJPADaoManagers implements ICarpetaDaoManagers{
 
     public IPluginEntitatManager getPluginEntitatManager() {
         return this.car_pluginentitat;
+    };
+
+    public IPreguntesFrequentsManager getPreguntesFrequentsManager() {
+        return this.car_preguntesfrequents;
     };
 
     public IPropietatGlobalManager getPropietatGlobalManager() {

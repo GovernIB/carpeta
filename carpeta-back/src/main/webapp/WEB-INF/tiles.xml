@@ -201,6 +201,16 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/seccioList.jsp" />
     </definition>
     
+        <definition name="preguntesFrequentsFormAdminEntitat" extends="adminentitat">
+        <put-attribute name="titol" value="preguntesFrequents.preguntesFrequents" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/preguntesFrequentsForm.jsp" />
+    </definition>
+    
+    <definition name="preguntesFrequentsListAdminEntitat" extends="adminentitat">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/preguntesFrequentsList.jsp" />
+    </definition>
+    
+    
     
 
     <!--  ===========  SUPER ADMIN  ================== -->
@@ -494,6 +504,16 @@
     
     <definition name="pluginEntitatListWebDB" extends="webdb">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/pluginEntitatList.jsp" />
+    </definition>
+
+
+    <definition name="preguntesFrequentsFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="preguntesFrequents.preguntesFrequents" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/preguntesFrequentsForm.jsp" />
+    </definition>
+    
+    <definition name="preguntesFrequentsListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/preguntesFrequentsList.jsp" />
     </definition>
 
 

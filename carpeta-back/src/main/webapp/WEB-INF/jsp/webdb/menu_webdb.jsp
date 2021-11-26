@@ -84,6 +84,13 @@ ${entityname}
         </span></a>
         </li>
 
+    <%-- PreguntesFrequents --%>
+       <fmt:message var="entityname" key="preguntesFrequents.preguntesFrequents.plural"/>
+        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/preguntesFrequents/list/1"/>" ><span style="${(fn:contains(url, 'preguntesFrequents/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
+${entityname}
+        </span></a>
+        </li>
+
     <%-- PropietatGlobal --%>
        <fmt:message var="entityname" key="propietatGlobal.propietatGlobal.plural"/>
         <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/propietatGlobal/list/1"/>" ><span style="${(fn:contains(url, 'propietatGlobal/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
