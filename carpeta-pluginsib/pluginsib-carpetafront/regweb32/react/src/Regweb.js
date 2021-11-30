@@ -359,11 +359,14 @@ class Regweb extends Component {
             return day + "-" + month + "-" + year;
         };
 
-        $.nomEstat = function(estat) {
-            console.log('estat:' + estat);
-            if (estat.toString() === '0') 
-                return t('registro_estado_todos')
-            return t('registro_estado_'+estat);
+        $.nomEstat = function(estat) {                
+            switch(estat.toString()) {
+                case '0': return t('registro_estado_todos');
+                case '1': return t('registro_estado_1');
+                case '2': return t('registro_estado_4');
+                case '3': return t('registro_estado_10');
+                case '4': return t('registro_estado_11');
+              }
         }
 
         const isLoaded = this.state.isLoaded;
@@ -489,12 +492,12 @@ class Regweb extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                        {this.state.data.map(({ numeroRegistro, fechaRegistro, extracto, tipoRegistro, denominacionDestino }) => {
+                        {this.state.data.map(({ numeroRegistro, fechaRegistro, extracto, tipoRegistro, denominacionDestino, estado }) => {
                             return <tr key={numeroRegistro} onClick={(e) => this.handleItemClick(numeroRegistro) }>
                                     <td>{numeroRegistro}</td>
                                     <td>{$.dateFormat(fechaRegistro)}</td>
                                     <td>{extracto}</td>
-                                    <td>{t('registro_estado_'+tipoRegistro)}</td>
+                                    <td>{t('registro_estado_'+estado)}</td>
                                     <td>{denominacionDestino}</td>
                                 </tr>
                         })}
