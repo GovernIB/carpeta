@@ -45,9 +45,9 @@
           </c:if>
           </td>
         </c:if>
-        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,SeccioFields.CONTEXT)}">
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,SeccioFields.CONTEXTE)}">
           <td>
-          ${seccio.context}
+          ${seccio.contexte}
           </td>
         </c:if>
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,SeccioFields.ACTIVA)}">

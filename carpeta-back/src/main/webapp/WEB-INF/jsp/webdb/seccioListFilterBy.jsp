@@ -104,15 +104,15 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,SeccioFields.CONTEXT)}">
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,SeccioFields.CONTEXTE)}">
             <%-- FILTRE STRING --%>
             <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
-              <fmt:message key="seccio.context" var="context" />
-              <fmt:message key="genapp.form.searchby" var="cercapercontext" >                
-                 <fmt:param value="${context}"/>
+              <fmt:message key="seccio.contexte" var="contexte" />
+              <fmt:message key="genapp.form.searchby" var="cercapercontexte" >                
+                 <fmt:param value="${contexte}"/>
               </fmt:message>
-              <span class="add-on"><c:out value="${context}" />:</span>
-              <form:input cssClass="search-query input-medium" placeholder="${cercapercontext}" path="context" />
+              <span class="add-on"><c:out value="${contexte}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercapercontexte}" path="contexte" />
             </div>
 
 

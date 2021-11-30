@@ -55,21 +55,21 @@ public class SeccioValidator<I extends Seccio>
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ORDRE)));
 
     // Check size
-    if (__vr.getFieldErrorCount(CONTEXT) == 0) {
-      java.lang.String __context = __target__.getContext();
-      if (__context!= null && __context.length() > 50) {
-        __vr.rejectValue(CONTEXT, "genapp.validation.sizeexceeds",
-            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CONTEXT)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(50)));
+    if (__vr.getFieldErrorCount(CONTEXTE) == 0) {
+      java.lang.String __contexte = __target__.getContexte();
+      if (__contexte!= null && __contexte.length() > 50) {
+        __vr.rejectValue(CONTEXTE, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CONTEXTE)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(50)));
       }
     }
 
-    if (__vr.getFieldErrorCount(CONTEXT) == 0) {
-      String val = __target__.getContext();
+    if (__vr.getFieldErrorCount(CONTEXTE) == 0) {
+      String val = __target__.getContexte();
       if (val != null && val.trim().length() != 0) {
         java.util.regex.Pattern p = java.util.regex.Pattern.compile("[a-z0-9]{5,}");
         if (!p.matcher(val).matches()) {
-          __vr.rejectValue(CONTEXT, "genapp.validation.malformed",
-             new org.fundaciobit.genapp.common.i18n.I18NArgumentString(val), new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CONTEXT)));
+          __vr.rejectValue(CONTEXTE, "genapp.validation.malformed",
+             new org.fundaciobit.genapp.common.i18n.I18NArgumentString(val), new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CONTEXTE)));
         }
       }
     }
@@ -88,14 +88,14 @@ public class SeccioValidator<I extends Seccio>
       // ====== Check Unique MULTIPLES - NOU =======
 
       // Check Unique - no PK
-      if (__vr.getFieldErrorCount(CONTEXT) == 0) {
-        java.lang.String __context = __target__.getContext();
+      if (__vr.getFieldErrorCount(CONTEXTE) == 0) {
+        java.lang.String __contexte = __target__.getContexte();
         Long __count_ = null;
-        try { __count_ = __seccioManager.count(org.fundaciobit.genapp.common.query.Where.AND(CONTEXT.equal(__context))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        try { __count_ = __seccioManager.count(org.fundaciobit.genapp.common.query.Where.AND(CONTEXTE.equal(__contexte))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
         if (__count_ == null || __count_ != 0) {        
-            __vr.rejectValue(CONTEXT, "genapp.validation.unique",
-                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__context)),
-                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CONTEXT)));
+            __vr.rejectValue(CONTEXTE, "genapp.validation.unique",
+                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__contexte)),
+                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CONTEXTE)));
         }
       }
 
@@ -106,15 +106,15 @@ public class SeccioValidator<I extends Seccio>
       // ====== Check Unique MULTIPLES - EDIT  =======
 
       // Check Unique - no PK
-      if (__vr.getFieldErrorCount(CONTEXT) == 0 && __vr.getFieldErrorCount(SECCIOID) == 0) {
-        java.lang.String __context = __target__.getContext();
+      if (__vr.getFieldErrorCount(CONTEXTE) == 0 && __vr.getFieldErrorCount(SECCIOID) == 0) {
+        java.lang.String __contexte = __target__.getContexte();
         java.lang.Long __seccioid = __target__.getSeccioID();
         Long __count_ = null;
-        try { __count_ = __seccioManager.count(org.fundaciobit.genapp.common.query.Where.AND(CONTEXT.equal(__context), SECCIOID.notEqual(__seccioid))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
+        try { __count_ = __seccioManager.count(org.fundaciobit.genapp.common.query.Where.AND(CONTEXTE.equal(__contexte), SECCIOID.notEqual(__seccioid))); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
         if (__count_ == null || __count_ != 0) {        
-            __vr.rejectValue(CONTEXT, "genapp.validation.unique",
-                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__context)),
-                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CONTEXT)));
+            __vr.rejectValue(CONTEXTE, "genapp.validation.unique",
+                new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__contexte)),
+                     new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(CONTEXTE)));
         }
       }
 

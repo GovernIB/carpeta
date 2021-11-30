@@ -771,7 +771,7 @@ public class WebUIController extends PluginFrontController {
         String urllogo = request.getContextPath() + WEBUI_PATH + ENLLAZ_LOGO_PATH + "/"
                 + HibernateFileUtil.encryptFileID(seccioJPA.getIconaID());
 
-        SeccioInfo seccioInfo = new SeccioInfo(seccioJPA.getSeccioID(), nom, descripcio, seccioJPA.getContext(), urllogo, seccioJPA.getOrdre());
+        SeccioInfo seccioInfo = new SeccioInfo(seccioJPA.getSeccioID(), nom, descripcio, seccioJPA.getContexte(), urllogo, seccioJPA.getOrdre());
         return seccioInfo;
     }
     
@@ -838,7 +838,7 @@ public class WebUIController extends PluginFrontController {
 
             
             
-            seccioInfo.add(new SeccioInfo(seccioJPA.getSeccioID(), nom, descripcio, seccioJPA.getContext(), urllogo, seccioJPA.getOrdre()));
+            seccioInfo.add(new SeccioInfo(seccioJPA.getSeccioID(), nom, descripcio, seccioJPA.getContexte(), urllogo, seccioJPA.getOrdre()));
         }
         return seccioInfo;
     }

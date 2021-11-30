@@ -43,7 +43,7 @@ public class SeccioLogicaEJB extends SeccioEJB implements SeccioLogicaService {
     @Override
     public SeccioJPA findByContext(String context) throws I18NException {
 
-        List<Seccio> list = select(CONTEXT.equal(context));
+        List<Seccio> list = select(CONTEXTE.equal(context));
         
         if (list == null || list.size() == 0) {
             return null;

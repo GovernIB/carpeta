@@ -23,8 +23,8 @@ public class SeccioQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
     return new LongField(getQueryPath(), SeccioFields.DESCRIPCIOID);
   }
 
-  public StringField CONTEXT() {
-    return new StringField(getQueryPath(), SeccioFields.CONTEXT);
+  public StringField CONTEXTE() {
+    return new StringField(getQueryPath(), SeccioFields.CONTEXTE);
   }
 
   public BooleanField ACTIVA() {
