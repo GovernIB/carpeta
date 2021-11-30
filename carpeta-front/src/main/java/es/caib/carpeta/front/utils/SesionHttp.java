@@ -22,6 +22,7 @@ public class SesionHttp {
     private String errorLogin;
     private String nomEntitat;
     private long accesPlugin;
+    private String idSessio;
 
     public SesionHttp() {
     }
@@ -86,6 +87,14 @@ public class SesionHttp {
 
     public void setAccesPlugin(long accesPlugin) {
         this.accesPlugin = accesPlugin;
+    }
+    
+    public  String getIdSessio() {
+    	return idSessio;
+    }
+    
+    public void setIdSessio(String idSessio) {
+    	this.idSessio = idSessio;
     }
 
 }

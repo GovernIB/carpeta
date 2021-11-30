@@ -593,7 +593,9 @@ public class InicioController extends CommonFrontController {
         } else {
             mav.addObject("maxInactiveInterval", 30 * 60);
         }
-
+        
+        // Registram la variable de Id de Sessió per l'enregistrament dels accesos.
+        sesionHttp.setIdSessio(request.getSession().getId());
         try {
 
             String lang = LocaleContextHolder.getLocale().getLanguage();

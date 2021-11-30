@@ -24,7 +24,7 @@ public interface AccesLogicaService extends AccesService {
 
     @PermitAll
     public void crearAcces(UsuarioClave usuarioClave, @NotNull int tipus, long entitatID, Long pluginID,
-            Timestamp dataDarrerAcces, String idioma, String ipAddress, boolean resultat) throws I18NException;
+            Timestamp dataDarrerAcces, String idioma, String ipAddress, boolean resultat, String idSessio) throws I18NException;
 
     /* Llistat de accesos entre dues dates ordenat per data descendent */
     public List<Acces> findBetweenDates(Date inici, Date fi, String codiEntitat) throws I18NException;

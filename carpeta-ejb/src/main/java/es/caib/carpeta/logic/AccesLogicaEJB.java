@@ -33,7 +33,8 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaService {
     @PermitAll
     @Override
     public void crearAcces(UsuarioClave usuarioClave, @NotNull int tipus, long entitatID, Long pluginID,
-                           Timestamp dataDarrerAcces, String idioma, String ipAddress, boolean resultat ) throws I18NException {
+                           Timestamp dataDarrerAcces, String idioma, String ipAddress, boolean resultat, 
+                           String idSessio ) throws I18NException {
 
         AccesJPA accesJPA = new AccesJPA();
 
@@ -54,6 +55,7 @@ public class AccesLogicaEJB extends AccesEJB implements AccesLogicaService {
         accesJPA.setDataAcces(dataDarrerAcces);
         accesJPA.setIdioma(idioma);
         accesJPA.setResultat(resultat);
+        accesJPA.setIdsessio(idSessio);
 
         accesJPA.setTipus(tipus);
 

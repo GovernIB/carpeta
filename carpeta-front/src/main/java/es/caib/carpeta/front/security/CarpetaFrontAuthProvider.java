@@ -84,7 +84,9 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
 		                entitatID = entitat.getEntitatID();
 		            }
             	}
-            	accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_LOGIN_AUTENTICAT, entitatID, null, new Timestamp(new Date().getTime()), Locale.getDefault().getLanguage(), InetAddress.getLocalHost().getHostAddress(), true);
+            	accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_LOGIN_AUTENTICAT, entitatID, null, 
+            			new Timestamp(new Date().getTime()), Locale.getDefault().getLanguage(), 
+            			InetAddress.getLocalHost().getHostAddress(), true, sesionHttp.getIdSessio());
             }
 
         } catch (Exception ie){
