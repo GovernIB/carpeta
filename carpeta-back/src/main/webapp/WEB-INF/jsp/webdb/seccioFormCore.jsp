@@ -72,19 +72,19 @@
         </tr>
         </c:if>
         
-        <c:if test="${!gen:contains(__theForm.hiddenFields,SeccioFields.CONTEXT)}">
-        <tr id="seccio_context_rowid">
+        <c:if test="${!gen:contains(__theForm.hiddenFields,SeccioFields.CONTEXTE)}">
+        <tr id="seccio_contexte_rowid">
           <td>
             <label>
-              <fmt:message key="${(empty __theForm.labels[SeccioFields.CONTEXT])?'seccio.context':__theForm.labels[SeccioFields.CONTEXT]}" /> &nbsp;(*)
-              <c:if test="${not empty __theForm.help[SeccioFields.CONTEXT]}">
-              <i class="fas fa-info-circle" title="${__theForm.help[SeccioFields.CONTEXT]}" ></i>
+              <fmt:message key="${(empty __theForm.labels[SeccioFields.CONTEXTE])?'seccio.contexte':__theForm.labels[SeccioFields.CONTEXTE]}" /> &nbsp;(*)
+              <c:if test="${not empty __theForm.help[SeccioFields.CONTEXTE]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[SeccioFields.CONTEXTE]}" ></i>
               </c:if>
              </label>
             </td>
             <td>
-            <form:errors path="seccio.context" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,SeccioFields.CONTEXT)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,SeccioFields.CONTEXT)? ' uneditable-input' : ''}"  style="" maxlength="50" path="seccio.context"   />
+            <form:errors path="seccio.contexte" cssClass="errorField alert alert-danger" />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,SeccioFields.CONTEXTE)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,SeccioFields.CONTEXTE)? ' uneditable-input' : ''}"  style="" maxlength="50" path="seccio.contexte"   />
 
            </td>
         </tr>
