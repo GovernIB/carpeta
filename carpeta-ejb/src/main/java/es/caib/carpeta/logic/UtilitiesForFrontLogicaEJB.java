@@ -72,6 +72,9 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
     @EJB(mappedName = UsuariEntitatLogicaService.JNDI_NAME)
     protected UsuariEntitatLogicaService usuariEntitatLogicaEjb;
 
+    @EJB(mappedName = es.caib.carpeta.ejb.PreguntesFrequentsService.JNDI_NAME)
+    protected es.caib.carpeta.ejb.PreguntesFrequentsService faqEjb;
+
     /**
      * Retorna codi i nom en l'idioma seleccionat
      */
@@ -495,6 +498,20 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
 		} 
     	
     	return null;
+    }
+
+    @Override
+    public List<PreguntesFrequents> getFaqsByEntity(String codiEntitat, String language)
+            throws I18NException {
+
+        PreguntesFrequentsQueryPath fqp = new PreguntesFrequentsQueryPath();
+
+        final Where w1 = fqp.ENTITAT().CODI().equal(codiEntitat);
+
+        List<PreguntesFrequents> faqs = faqEjb.select(
+                Where.AND(w1),
+                new OrderBy(PreguntesFrequentsFields.ORDRE, OrderType.ASC));
+        return faqs;
     }
 
 }

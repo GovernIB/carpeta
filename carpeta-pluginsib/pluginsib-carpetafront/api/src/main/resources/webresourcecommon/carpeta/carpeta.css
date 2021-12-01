@@ -455,7 +455,7 @@ img:hover {
 	padding: 0px;
 	vertical-align: inherit;
 	line-height: 1em;
-	background-color: #fff;
+	background-color: transparent;
 	border: none;
 }
 .botoSuport:hover{
@@ -788,6 +788,9 @@ ul.pagination li.page-item.active {
 }
 .react-datepicker-popper{
 	z-index: 6;
+}
+.faq-row .row-title{
+	padding-bottom: 1.2em!important;
 }
 
 /* Plugins pinbal */

@@ -8,10 +8,7 @@ import es.caib.carpeta.logic.SeccioLogicaService;
 import es.caib.carpeta.logic.utils.PluginInfo;
 import es.caib.carpeta.model.entity.*;
 import es.caib.carpeta.model.fields.IdiomaFields;
-import es.caib.carpeta.persistence.AvisJPA;
-import es.caib.carpeta.persistence.EnllazJPA;
-import es.caib.carpeta.persistence.EntitatJPA;
-import es.caib.carpeta.persistence.SeccioJPA;
+import es.caib.carpeta.persistence.*;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.OrderBy;
@@ -374,6 +371,41 @@ public class WebUIController extends PluginFrontController {
             this.codi = codi;
         }
 
+
+    }
+
+    /**
+     *
+     * @author jpernia
+     *
+     */
+    public static class FaqInfo {
+
+        protected String title;
+        protected String content;
+
+        public FaqInfo() {
+            super();
+        }
+
+        public FaqInfo(String title, String content) {
+            super();
+            this.title = title;
+            this.content = content;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+        public void setTitle(String title) {
+            this.title = title;
+        }
+        public String getContent() {
+            return content;
+        }
+        public void setContent(String content) {
+            this.content = content;
+        }
 
     }
 
@@ -1519,6 +1551,44 @@ public class WebUIController extends PluginFrontController {
             processExceptionRest(e, request, response);
         }
         
+    }
+
+    @RequestMapping(value = "/faq", method = RequestMethod.GET)
+    public void getFaq(HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+            String codiEntitat = sesionHttp.getEntitat();
+            String lang = LocaleContextHolder.getLocale().getLanguage();
+
+            List<PreguntesFrequents> faqs = utilsEjb.getFaqsByEntity(codiEntitat, lang);
+
+            List<FaqInfo> faqsInfo = new ArrayList<FaqInfo>();
+
+            for (PreguntesFrequents faq : faqs) {
+
+                PreguntesFrequentsJPA faqJPA = (PreguntesFrequentsJPA) faq;
+
+                String title = faqJPA.getEnunciatTraduccions().get(lang).getValor();
+                String content = faqJPA.getRespostaTraduccions().get(lang).getValor();
+
+                FaqInfo fi = new FaqInfo(title, content);
+                faqsInfo.add(fi);
+            }
+
+            // Passar JSON
+            Gson gson = new Gson();
+            String json = gson.toJson(faqsInfo);
+
+//            log.info(json);
+
+            response.setContentType("application/json");
+
+            response.getWriter().write(json);
+
+        } catch (Throwable e) {
+            processExceptionRest(e, request, response);
+        }
+
     }
 
 }

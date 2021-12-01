@@ -15,6 +15,7 @@ import Accessibilitat from './Accessibilitat';
 import AvisLegal from './AvisLegal';
 import CanviarEntitat from './CanviarEntitat';
 import NivellAutenticacio from './NivellAutenticacio';
+import PreguntesFrequents from './PreguntesFrequents';
 // import TitolPipella from './TitolPipella';
 import * as Constants from './Constants';
 
@@ -188,6 +189,8 @@ class Index extends Component {
                                 <Route path="/avislegal" component={AvisLegal} />
 
                                 <Route path="/canviarEntitat" component={CanviarEntitat} />
+
+                                <Route path="/faq" component={PreguntesFrequents} />
 
                                 <Route
                                     path= {Constants.SECCIO_PATH + ":seccioContext" + Constants.PLUGINHTML_PATH + ":pluginContext"}
