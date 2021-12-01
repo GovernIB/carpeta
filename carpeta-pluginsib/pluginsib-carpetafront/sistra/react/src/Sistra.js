@@ -236,6 +236,9 @@ class Sistra extends Component {
 
     componentDidUpdate() {
 
+        $("#dataInici").attr("tabindex","501");
+        $("#dataFi").attr("tabindex","502");
+
         const { t } = this.props;
 
         let taulaTramits;
@@ -483,6 +486,7 @@ class Sistra extends Component {
                                         className="form-control form-control-sm estilCalendar focusIn"
                                         locale={this.locale}
                                         showYearDropdown={true}
+                                        preventOpenOnFocus={true}
                                     />
                                 </Form.Group>
                             </Col>
@@ -502,6 +506,7 @@ class Sistra extends Component {
                                         className="form-control form-control-sm estilCalendar focusIn"
                                         locale={this.locale}
                                         showYearDropdown={true}
+                                        preventOpenOnFocus={true}
                                     />
                                 </Form.Group>
                             </Col>
