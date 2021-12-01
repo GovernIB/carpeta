@@ -2,6 +2,7 @@
   "benvingut": "Benvingut a React i react-i18next",
   
 	"menuRecerca": "Recerca avançada",
+	"menuIdioma": "Idioma",
 	"menuIdioma_ca": "Català",
 	"menuIdioma_es": "Castellano",
 	"menuIdioma_en": "English",
@@ -18,6 +19,7 @@
 	"menuGestions": "Les meves gestions",
 	"menuDades": "Dades personals",
 	"menuCanviarEntitat": "Canviar d'Entitat",
+	"menuPreguntesFrecuents": "Preguntes freqüents",
 
 
 	"menuLateralGovern": "Govern Illes Balears",
@@ -205,7 +207,7 @@
 	"suportPer": "Per a ",
 	"suportCrida": "Crida al telèfon ",
 	"suportConsulta": "Consulta el ",
-	"suportConsultaFAQ": "Consulta les ",
+	"suportConsultaFAQ": "Consulta les nostres ",
 	"suportMail": "Envia un correu a ",
 	"suportWeb": "suport Web",
 	"suportFAQ": "preguntes freqüents (FAQ)",
@@ -249,5 +251,8 @@
 
 	"pipellaAutenticat": "Zona privada",
 	"iconaDe": "Icona de",
-	"tornar": "Torna"
+	"tornar": "Torna",
+
+	"faqTitol": "Preguntes freqüents (FAQ)",
+	"faqSubtitol": "A continuació pots consultar les preguntes més freqüents (i les seves respostes) sobre la Carpeta Ciutadana."
 }

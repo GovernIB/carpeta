@@ -1,12 +1,9 @@
 package es.caib.carpeta.logic;
 
+import es.caib.carpeta.model.entity.*;
 import es.caib.carpeta.persistence.EntitatJPA;
 import es.caib.carpeta.persistence.UsuariEntitatJPA;
 import es.caib.carpeta.logic.utils.PluginInfo;
-import es.caib.carpeta.model.entity.Avis;
-import es.caib.carpeta.model.entity.Enllaz;
-import es.caib.carpeta.model.entity.Fitxer;
-import es.caib.carpeta.model.entity.Idioma;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
@@ -63,5 +60,7 @@ public interface UtilitiesForFrontLogicaService {
     public FileInfo getIconEntity(Long codiEntitat) throws I18NException;
     
     public List<UsuariEntitatJPA> getEntitatsByNIF(String nif) throws I18NException;
+
+    public List<PreguntesFrequents> getFaqsByEntity(String codiEntitat, String language) throws I18NException;
 
 }

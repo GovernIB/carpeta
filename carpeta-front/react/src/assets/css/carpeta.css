@@ -455,7 +455,7 @@ img:hover {
 	padding: 0px;
 	vertical-align: inherit;
 	line-height: 1em;
-	background-color: #fff;
+	background-color: transparent;
 	border: none;
 }
 .botoSuport:hover{
@@ -785,6 +785,9 @@ a.imc-bt-xarxa:hover {
 }
 ul.pagination li.page-item.active {
 	pointer-events: none;
+}
+.faq-row .row-title{
+	padding-bottom: 1.2em!important;
 }
 
 /* Plugins pinbal */

@@ -235,8 +235,8 @@ class Breadcrumb extends Component {
 
                                     });
                             } else {
-                                // Altre cosa ...
-                                // console.log("BreadCRUMB ALTRE COSA : " + location.pathname);
+                                // Altra cosa (Accessibilitat, Avís Legal, FAQ ...)
+                                console.log("BreadCRUMB ALTRE COSA : " + location.pathname);
                                 this.setState({items: [{id: location.pathname, label: t(location.nomPagina)}]});
                                 document.title = t(location.nomPagina) + " - " + i18n.t('menuTitol');
                                 document.title = sessionStorage.getItem("nomPlugin") + " - " + i18n.t('menuTitol');

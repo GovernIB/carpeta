@@ -3,6 +3,7 @@ import {withTranslation} from 'react-i18next';
 import DadesEntitat from './DadesEntitat';
 import EnllasosXarxes from "./EnllasosXarxes";
 import EnllasosPeuCentral from './EnllasosPeuCentral';
+import {Link} from "react-router-dom";
 import axios from "axios";
 import i18n from 'i18next';
 
@@ -25,6 +26,10 @@ class Peu extends Component {
         // console.log(" CANVIAT IDIOMA EN PEU A ]" + lng+ "[");
         this.componentDidMount();
     }
+
+	handleClick() {
+		$("#ajudaModal").modal("hide");
+	}
 
 	toggle() {
 		this.setState(prevState => ({
@@ -53,7 +58,6 @@ class Peu extends Component {
 			});
 	}
 
-
 	
 	render() {
 		
@@ -72,7 +76,8 @@ class Peu extends Component {
 				<li className="pb-2 liAjuda" key={i} id="linkSuportWeb">{t('suportConsulta')} <a href={s.valor} aria-labelledby="linkSuportWeb">{t('suportWeb')}</a></li>
 			);
 			var suportFAQ = dadesSuport.filter(s => s.tipus === '4').map((s, i) =>
-				<li className="pb-2 liAjuda" key={i} id="linkSuportFaq">{t('suportConsultaFAQ')} <a href={s.valor} aria-labelledby="linkSuportFaq">{t('suportFAQ')}</a></li>
+				// <li className="pb-2 liAjuda" key={i} id="linkSuportFaq">{t('suportConsultaFAQ')} <a href={s.valor} aria-labelledby="linkSuportFaq">{t('suportFAQ')}</a></li>
+				<li className="pb-2 liAjuda" key={i} id="linkSuportFaq">{t('suportConsultaFAQ')} <Link to={{pathname: `/faq`, nomPagina: 'menuPreguntesFrecuents' }} aria-labelledby="linkSuportFaq" onClick={this.handleClick.bind(this)}>{t('suportFAQ')}</Link></li>
 			);
 			var suportConsulta = dadesSuport.filter(s => s.tipus === '5').map((s, i) =>
 				<li className="pb-2 liAjuda" key={i} id="linkSuportConsulta">{t('suportConsultaTecnica')} <a href={s.valor} aria-labelledby="linkSuportConsulta">{t('suportConsultaTecnicaEnllas')}</a></li>
