@@ -120,6 +120,11 @@ class DetallRegistre extends Component {
     	
     }
 
+    mostraTooltip(){
+        const estiloElemento = document.getElementById('descripcionTooltip').style.display;
+        document.getElementById('descripcionTooltip').style.display = (estiloElemento == 'none') ? 'block' : 'none';
+    }
+
     render() {
 
         $.dateFormat = function(dateObject) {
@@ -221,8 +226,8 @@ class DetallRegistre extends Component {
                                                 </> }
 
                                                 { registre.estado && <>
-                                                <dt className="col-sm-3 pb-2">{t('registro_descripcion_estado')}</dt>
-                                                <dd className="col-sm-7">{t('registro_estado_' + registre.estado)} <span class="oi oi-info pl-2" onMouseOut={() => document.getElementById('descripcionTooltip').style.display='none'}  onMouseOver={ () => document.getElementById('descripcionTooltip').style.display='' }></span> <span id="descripcionTooltip" style={{display:'none'}}>{t('registro_estado_explicacion_'+registre.estado)}</span></dd>
+                                                <dt className="col-sm-3 pb-2">{t('registro_estado')}</dt>
+                                                <dd className="col-sm-7">{t('registro_estado_' + registre.estado)} <span class="oi oi-info pl-2" onClick={() => this.mostraTooltip()}></span> <span id="descripcionTooltip" style={{display:'none'}}>{t('registro_estado_explicacion_'+registre.estado)}</span></dd>
                                                 </> }
 
                                                 <dt className="col-sm-3 pb-2">{t('registro_presencial')}</dt>
