@@ -31,7 +31,7 @@ class PreguntesFrequents extends Component {
 
         $( "#faqList" ).keyup(function() {
             $(".closed").removeClass('closed').addClass('expanded').attr('aria-expanded', true).attr('aria-hidden', true);
-            $(".row-content").css({height: '19px', visibility: 'visible', opacity: 'initial'}).attr('aria-expanded', true).attr('aria-hidden', false);
+            $(".row-content").css({height: 'auto', visibility: 'visible', opacity: 'initial'}).attr('aria-expanded', true).attr('aria-hidden', false);
         });
 
         const baseURL = sessionStorage.getItem('contextPath');
