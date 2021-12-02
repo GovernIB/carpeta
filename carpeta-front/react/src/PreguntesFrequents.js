@@ -29,7 +29,7 @@ class PreguntesFrequents extends Component {
 
     componentDidMount() {
 
-        $( "#faqList" ).focus(function() {
+        $( "#faqList" ).keyup(function() {
             $(".closed").removeClass('closed').addClass('expanded').attr('aria-expanded', true).attr('aria-hidden', true);
             $(".row-content").css({height: '19px', visibility: 'visible', opacity: 'initial'}).attr('aria-expanded', true).attr('aria-hidden', false);
         });
