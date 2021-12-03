@@ -384,12 +384,10 @@ class Regweb extends Component {
                         <div className="loader"/>
                     </div>;
         } else {
-
-            const estilsForm = (this.state.data == null) ? {marginBottom: '20px', minHeight: '450px'} : {marginBottom: '20px'};
-
+            
             content = 
             <>  
-                <Form id="fechaBusqueda" style={estilsForm}>
+                <Form id="fechaBusqueda" style={{marginBottom: '20px'}}>
                     <Container style={{ width: '95%', paddingLeft: '0', margin: '0' }}>
                         <Row>
                             <Col className="col-xs-12 mb-3">
