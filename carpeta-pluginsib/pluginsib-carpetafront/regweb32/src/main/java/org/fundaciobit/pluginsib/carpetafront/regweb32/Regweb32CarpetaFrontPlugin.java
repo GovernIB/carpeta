@@ -232,7 +232,11 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
     
     @Override
     public boolean isReactComponent() {
-    	return true;
+    	try {
+    		return ("true".equals(getPropertyRequired(REGWEB32_PROPERTY_BASE + "isreact")));
+    	}catch(Exception e) {
+    		return false;
+    	}
     }
 
     @Override
