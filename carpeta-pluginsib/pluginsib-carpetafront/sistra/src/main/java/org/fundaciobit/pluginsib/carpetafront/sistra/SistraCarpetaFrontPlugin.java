@@ -121,7 +121,11 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
     @Override
     public boolean isReactComponent() {
-        return true;
+        try {
+            return ("true".equals(getPropertyRequired(SISTRA_PROPERTY_BASE + "isreact")));
+        }catch(Exception e) {
+            return false;
+        }
     }
 
     @Override
@@ -204,6 +208,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
     // --------------------------------------------------------------------------------------
 
     protected static final String INDEX_HTML_PAGE = "sistra_index.html";
+//    protected static final String DETALL_REACT_PAGE = "detallRegistreJson";
 
     public void index(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
                       HttpServletRequest request, HttpServletResponse response, UserData userData,
@@ -244,6 +249,10 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             String pathtoservei = absolutePluginRequestPath + "/" + URL_REST_SERVICE;
 
             map.put("pathtoservei", pathtoservei);
+
+            String detallpathtoservei = absolutePluginRequestPath + "/" + super.DETALL_REACT_PAGE;
+
+            map.put("detallpathtoservei", detallpathtoservei);
 
             String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
 

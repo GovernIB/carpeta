@@ -209,7 +209,7 @@ class NotificacionsSistra extends Component {
                         this.state.total_items +
                         t('carpeta_paginacion_4')}
                     </div>
-                    <Pagination>
+                    <Pagination style={{float:'right',paddingRight: '0.7em'}}>
                         {paginationNumbers}
                     </Pagination>
                 </>

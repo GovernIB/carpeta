@@ -10,6 +10,8 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import DetallRegistre from './DetallRegistre';
+import ReactDOM from "react-dom";
 
 /**
  *  @author jpernia
@@ -33,6 +35,7 @@ class Sistra extends Component {
             pagination_active: 1,
             pagination_total_items: 10,
             total_items: 0,
+            numeroRegistro: null,
             error: false
         };
 
@@ -281,18 +284,6 @@ class Sistra extends Component {
             }
         }
 
-        $('.clickableRow')
-            .click(function(event){
-                console.log("CLICK");
-                event.preventDefault();
-                carregarUrl($(this));
-            })
-            .keypress(function(event){
-                console.log("KEYPRESS");
-                event.preventDefault();
-                carregarUrl($(this));
-            });
-
         $('#veureError').click(function(){
             $('#ocultaError').removeClass('ocult');
             $('#veureError').addClass('ocult');
@@ -309,46 +300,50 @@ class Sistra extends Component {
             $(this).removeAttr("role");
         });
 
-        function carregarUrl(obj) {
-            if (obj.data('numero') !== '') {
-                window.open(obj.data('url'),'_blank');
-            }else if (obj.data('pending') === 'S' && obj.data('mostramodal') === 'S'){
-                openModalConfirm(obj.data('url'));
-            }else{
-                window.open(obj.data('url'), '_blank');
-            }
+        let detallRegistreContainer;
+        if ( this.state.numeroRegistro != null ){
+            detallRegistreContainer = <DetallRegistre pathtoservei={props.detallpathtoservei} numero={this.state.numeroRegistro} />;
+            ReactDOM.render(detallRegistreContainer, document.getElementById('sistracontainer'));
         }
 
-        function openModalConfirm(url) {
+    }
 
-            $('body')
-                .append(
-                    '<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">'
-                    + '<div class="modal-dialog" role="document">'
-                    + '<div class="modal-content">'
+    handleItemClick(numeroRegistro) {
+        this.setState({
+            ...this.state,
+            isLoaded: false,
+            numeroRegistro: numeroRegistro
+        });
+    }
 
-                    + '<div class="modal-header">'
-                    + '<h3 id="myModalLabel">'+ t('sistraModalTitol') +'</h3>'
-                    + '<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="font-weight: normal;font-size: 20px;" tabindex="590">x</button>'
-                    + '</div>'
+    openModalConfirm(url) {
+        const { t } = this.props;
+        $('body')
+            .append(
+                '<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">'
+                + '<div class="modal-dialog" role="document">'
+                + '<div class="modal-content">'
 
-                    + '<div class="modal-body">'
-                    + '<p>'+ t('sistraModalTexte') +'</p>'
-                    + '</div>'
+                + '<div class="modal-header">'
+                + '<h3 id="myModalLabel">'+ t('sistraModalTitol') +'</h3>'
+                + '<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="font-weight: normal;font-size: 20px;" tabindex="590">x</button>'
+                + '</div>'
 
-                    + '<div class="modal-footer">'
-                    + '<button class="btn btn-success" type="button" onclick="window.open(\''+url+'\', \'_blank\');$(\'#myModal\').modal(\'hide\');" tabindex="511">'+ t('sistraModalBotoContinuar') +'</button>'
-                    + '<button class="btn btn-danger" data-dismiss="modal" aria-hidden="true" tabindex="512">'+ t('sistraModalBotoCancelar') +'</button>'
+                + '<div class="modal-body">'
+                + '<p>'+ t('sistraModalTexte') +'</p>'
+                + '</div>'
 
-                    + '</div>'
+                + '<div class="modal-footer">'
+                + '<button class="btn btn-success" type="button" onclick="window.open(\''+url+'\', \'_blank\');$(\'#myModal\').modal(\'hide\');" tabindex="511">'+ t('sistraModalBotoContinuar') +'</button>'
+                + '<button class="btn btn-danger" data-dismiss="modal" aria-hidden="true" tabindex="512">'+ t('sistraModalBotoCancelar') +'</button>'
 
-                    + '</div>'
-                    + '</div>'
-                    + '</div>');
+                + '</div>'
 
-            $('#myModal').modal('show');
-        }
+                + '</div>'
+                + '</div>'
+                + '</div>');
 
+        $('#myModal').modal('show');
     }
 
     render() {
@@ -459,6 +454,7 @@ class Sistra extends Component {
 
         let content;
         let taulaTramits;
+        let detallRegistreContainer;
 
         if (!isLoaded) {
              content = <div  id="carregant" className="loader-container centrat ">
@@ -566,11 +562,36 @@ class Sistra extends Component {
                         </thead>
                         <tbody>
                         {this.state.data.map(({descripcionTramite, fechaInicio, pendiente, numero, url, versionSistra, mostraModal, tipo}) => {
-                            return <tr className="clickableRow" data-numero={numero} data-url={url} data-version={versionSistra} style={cursorPointer} data-mostramodal={$.siNo(mostraModal)} data-pending={$.siNo(pendiente)} tabIndex="511">
-                                <td>{descripcionTramite}</td>
-                                <td data-order={$.dateOrder(fechaInicio)}>{$.dateFormat(fechaInicio)}</td>
-                                <td>{$.estatTramit(pendiente, mostraModal, tipo, numero)}</td>
-                            </tr>
+
+                            if(numero !== '')
+                                return <tr className="clickableRow" data-numero={numero} data-url={url}
+                                           data-version={versionSistra} style={cursorPointer} data-mostramodal={$.siNo(mostraModal)}
+                                           data-pending={$.siNo(pendiente)} tabIndex="511"
+                                           onClick={(e) => this.handleItemClick(numero) }>
+                                    <td>{descripcionTramite}</td>
+                                    <td data-order={$.dateOrder(fechaInicio)}>{$.dateFormat(fechaInicio)}</td>
+                                    <td>{$.estatTramit(pendiente, mostraModal, tipo, numero)}</td>
+                                </tr>
+
+                            if (numero === '' && pendiente && mostraModal)
+                                return <tr className="clickableRow" data-numero={numero} data-url={url}
+                                           data-version={versionSistra} style={cursorPointer} data-mostramodal={$.siNo(mostraModal)}
+                                           data-pending={$.siNo(pendiente)} tabIndex="511"
+                                           onClick={(e) => this.openModalConfirm(url) }>
+                                    <td>{descripcionTramite}</td>
+                                    <td data-order={$.dateOrder(fechaInicio)}>{$.dateFormat(fechaInicio)}</td>
+                                    <td>{$.estatTramit(pendiente, mostraModal, tipo, numero)}</td>
+                                </tr>
+
+                            if (numero === '' && (!pendiente || !mostraModal))
+                                return <tr className="clickableRow" data-numero={numero} data-url={url}
+                                           data-version={versionSistra} style={cursorPointer} data-mostramodal={$.siNo(mostraModal)}
+                                           data-pending={$.siNo(pendiente)} tabIndex="511"
+                                           onClick={(e) => window.open(url, '_blank') }>
+                                    <td>{descripcionTramite}</td>
+                                    <td data-order={$.dateOrder(fechaInicio)}>{$.dateFormat(fechaInicio)}</td>
+                                    <td>{$.estatTramit(pendiente, mostraModal, tipo, numero)}</td>
+                                </tr>
                         })}
                         </tbody>
                     </Table>
@@ -613,22 +634,25 @@ class Sistra extends Component {
         
         return (
             <div className="infoNoMenu">
-                <h2 className="titol h2">{this.props.titles[i18n.language]}</h2>
-                <div className="col-md-12 border-0 float-left p-0">
-                    <p className="lh15">{this.props.subtitles[i18n.language]} </p>
-                    <div className="infoNoMenu">
-                        <div className="col-md-12 border-0 float-left p-0">
-                            {this.state.error && <div className="alert alert-danger hide" role="alert">{this.state.error}</div>}
-                            {content}
+                {this.state.numeroRegistro == null && <>
+                    <h2 className="titol h2">{this.props.titles[i18n.language]}</h2>
+                    <div className="col-md-12 border-0 float-left p-0">
+                        <p className="lh15">{this.props.subtitles[i18n.language]} </p>
+                        <div className="infoNoMenu">
+                            <div className="col-md-12 border-0 float-left p-0">
+                                {this.state.error && <div className="alert alert-danger hide" role="alert">{this.state.error}</div>}
+                                {content}
+                            </div>
                         </div>
                     </div>
-                </div>
-                {taulaTramits}
-                <div className="col-md-12 border-0 float-left p-0" id="botoTornarSistra" style={{ marginTop: '20px' }}>
-                    <button type="button" data-toggle="modal" onClick={() => {
-                        window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                    }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarSistra">{t('sistraTornar')}</button>
-                </div>
+                    {taulaTramits}
+                    <div className="col-md-12 border-0 float-left p-0" id="botoTornarSistra" style={{ marginTop: '20px' }}>
+                        <button type="button" data-toggle="modal" onClick={() => {
+                            window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
+                        }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarSistra">{t('sistraTornar')}</button>
+                    </div>
+                </>}
+                {this.state.numeroRegistro != null && detallRegistreContainer}
             </div>
             );
             
