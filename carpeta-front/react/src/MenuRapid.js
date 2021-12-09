@@ -18,7 +18,7 @@ class MenuRapid extends Component {
         this.state = {
             items: [], // plugins, menupseudoplugin, seccions
             error: null,
-            added: false,
+            added: false
         }
 
         this.canviatIdioma = this.canviatIdioma.bind(this);
@@ -30,20 +30,21 @@ class MenuRapid extends Component {
         this.componentDidMount();
     }
 
-    afegirListener() { 
 
-            document.addEventListener('click', function() {
-
-                let items = document.querySelectorAll('ul.dropdown-menu');
-                items.forEach(  function(elemento){ 
-                    if (elemento.classList.contains('show')){
-                        elemento.classList.remove('show') 
-                    }
-                });
-            }, false);
-        
-            this.setState({...this.state, added: true });
-    }
+    // afegirListener() {
+    //
+    //     document.addEventListener('click', function() {
+    //
+    //         let items = document.querySelectorAll('ul.dropdown-menu');
+    //         items.forEach(  function(elemento){
+    //             if (elemento.classList.contains('show')){
+    //                 elemento.classList.remove('show')
+    //             }
+    //         });
+    //     }, false);
+    //
+    //     this.setState({...this.state, added: true });
+    // }
 
     componentDidMount() {
 
@@ -75,13 +76,12 @@ class MenuRapid extends Component {
 
             });
 
-            if (autenticat === '1' && !this.state.added)
-                this.afegirListener();  
+            // if (autenticat === '1' && !this.state.added)
+            //     this.afegirListener();
     }
 
     componentWillUnmount(){
-        
-        console.log("UMOUNT: ", this.state);
+
         if(this.state.added){
             document.removeEventListener('click', function() {
                 console.log("REMOVE EVENT LISTENER");
@@ -98,6 +98,11 @@ class MenuRapid extends Component {
     }
 
     render() {
+
+        // Per amagar dropdowns al fer clic defora
+        $(document).click(function(event){
+            $(".dropdown-menu").not($(".dropdown-menu").has(event.target)).removeClass("show");
+        });
 
         const { t } = this.props;
         var autenticat = sessionStorage.getItem('autenticat');
@@ -186,8 +191,8 @@ class MenuRapid extends Component {
                                 <li className="btn-group navCarpeta pr-4" key={k}>
                                     <button type="button" className="btn btn-default dropdown-toggle p-0 lletraRapid disBlok text-verd"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id={"menuRapidBoto"+i} tabIndex={301 + k - l} 
-                                                onFocus={(event) => {$("#submenu"+iActiu).removeClass('show');iActiu=i;$("#submenu"+i).addClass('show');}}
-                                                
+                                                onFocus={function(){$("#submenu"+iActiu).removeClass('show');iActiu=i;$("#submenu"+i).addClass('show');}}
+                                                onClick={function(){$("#submenu"+iActiu).removeClass('show');iActiu=i;$("#submenu"+i).addClass('show');}}
                                                 >
                                         <img src={s.urllogo} title={t('iconaDe') + " " + s.nom} alt={s.nom} className="imc-icona"/>
                                         <span className="menuRapidView lletraRapid">{s.nom}</span>
