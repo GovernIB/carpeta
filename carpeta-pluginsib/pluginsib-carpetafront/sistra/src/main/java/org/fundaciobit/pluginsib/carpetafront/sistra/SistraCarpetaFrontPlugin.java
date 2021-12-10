@@ -658,13 +658,13 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             filtroElementosExpediente.setIdioma(locale.getLanguage());
             filtroElementosExpediente.setTipos(teess);
 
-            long num = backofficeFacade.obtenerTotalElementosExpediente(filtroElementosExpediente);
-
-            int pagina = 0;
-            int tamPagina = ( num > 0 ) ? (int) num : 0;
+            // long num = backofficeFacade.obtenerTotalElementosExpediente(filtroElementosExpediente);
+            // int pagina = 0;
+            // int tamPagina = ( num > 0 ) ? (int) num : 0;
 
             ElementosExpediente tramitesAcabados = backofficeFacade
-                    .obtenerElementosExpediente(filtroElementosExpediente, pagina, tamPagina);
+                    .obtenerElementosExpediente(filtroElementosExpediente, null, null); // pagina, tamPagina
+
 
             for (ElementoExpediente item : tramitesAcabados.getElemento()) {
 

@@ -47,6 +47,12 @@ class DetallRegistre extends Component {
                     isLoaded: true
                 });
                 // JSON.parse(response.data.registre.replace(/'/g, '"')),
+            }else if (response.data.error != null){
+                this.setState({
+                    ...this.state,
+                    isLoaded: true,
+                    error: response.data.error
+                });
             }
 
         }).catch( error => {
@@ -259,7 +265,7 @@ class DetallRegistre extends Component {
                                             {this.state.data.justificanteId != '' && this.state.data.justificantData != '' && this.state.error == '' && <Button className="btn btn-danger" onClick={() => this.downloadDoc(this.state.data.justificantData, this.state.data.justificantFileName)}>{iconoDescargar} {t('carpeta_descargar')}</Button>} 
 
                                             {this.state.data.justificanteUrl == '' && this.state.data.justificantSenseGenerar == '' && this.state.data.justificanteId == '' && this.state.error != '' && <div className="text-center pt-3 text-danger"><span className="oi oi-warning pr-1"> </span>{this.state.error}</div>}
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -285,7 +291,8 @@ class DetallRegistre extends Component {
                                                     <tbody>
                                                         { registre.interesados.map( (item, index) => <tr>
                                                             <td>{index+1}</td>
-                                                            <td>{item.interesado.nombre} {item.interesado.apellido1}</td>
+                                                            {typeof item.interesado.razonSocial === 'undefined' && <td>{item.interesado.nombre} {item.interesado.apellido1} {item.interesado.apellido2}</td>}
+                                                            {typeof item.interesado.razonSocial !== 'undefined' && <td>{item.interesado.razonSocial}</td>}
                                                             <td>{item.interesado.documento}</td>
                                                             <td>{t('registro_tipo_interesado_'+item.interesado.tipoInteresado)}</td>
                                                         </tr> ) }
@@ -355,7 +362,7 @@ class DetallRegistre extends Component {
         
         return <>
             <div className="infoNoMenu" style={{marginTop: '10px'}}>
-                {this.state.error && errorContainer}
+                {this.state.error && <div className="alert alert-danger" role="alert">{this.state.error}</div>}
                 {content}
             </div>
         </>;    

@@ -77,10 +77,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 
     protected abstract FileInfo getResourceIcon(Locale locale);
     
-    @Override
-    public boolean isReactComponent() {
-        return true;
-    }
+    public abstract boolean isReactComponent();
     
     @Override
     public String getResourceBundleName() {
@@ -213,18 +210,17 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
             HttpServletResponse response, UserData userData, String administrationEncriptedID,
             Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
     	
+    	response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
+		
+    	String numeroRegistroFormateado = request.getParameter("numero");
+    	
+    	Map<String, String> dades = new HashMap<String, String>();
+    	
+    	AsientoWs registre;
     	
     	try {
     	
-    		response.setContentType("application/json");
-            response.setCharacterEncoding("utf-8");
-    		
-	    	String numeroRegistroFormateado = request.getParameter("numero");
-	    	
-	    	Map<String, String> dades = new HashMap<String, String>();
-	    	
-	    	AsientoWs registre;
-	
 	        if (isDevelopment()) {
 	            registre = getDetallRegistreDebug(numeroRegistroFormateado, userData.getAdministrationID(), locale);
 	        } else {
@@ -283,28 +279,26 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 	            }
 	        	
 	        }
-	        
-	        dades.put("locale", locale.getLanguage());
-	        
-	        Gson json = new Gson();
-            String generat = json.toJson(dades);
-            
-            log.info("Generat: " + generat);
-            
-            try {
-                response.getWriter().println(generat);
-                response.flushBuffer();
-                
-            } catch (IOException e) {
-                log.error("Error obtening writer: " + e.getMessage(), e);
-            }
-	        
-	        
-        
+       
     	}catch (Exception e) {
     		log.error("Error detallRegistreJson: " + e.getMessage() );
+    		dades.put("error", e.getMessage());
     	}
     	
+    	dades.put("locale", locale.getLanguage());
+        
+        Gson json = new Gson();
+        String generat = json.toJson(dades);
+        
+        log.info("Generat: " + generat);
+        
+        try {
+            response.getWriter().println(generat);
+            response.flushBuffer();
+            
+        } catch (IOException e) {
+            log.error("Error obtening writer: " + e.getMessage(), e);
+        }
     	
     }
 	

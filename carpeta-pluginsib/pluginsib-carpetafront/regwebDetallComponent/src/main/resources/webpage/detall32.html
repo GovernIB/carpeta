@@ -239,9 +239,10 @@
                                                 <tr>
                                                     <td>${interesado?index+1}</td>
                                                     <td>
-                                                        ${interesado.interesado.nombre}
+                                                        <#if interesado.interesado.nombre?has_content >${interesado.interesado.nombre}</#if>
                                                         <#if interesado.interesado.apellido1?has_content >${interesado.interesado.apellido1}</#if>
                                                         <#if interesado.interesado.apellido2?has_content >${interesado.interesado.apellido2}</#if>
+                                                        <#if interesado.interesado.razonSocial?has_content >${interesado.interesado.razonSocial}</#if>
                                                     </td>
                                                     <td><#if interesado.interesado.documento?has_content >${interesado.interesado.documento}</#if></td>
                                                     <td>${tipoInteresado[interesado.interesado.tipoInteresado]}</td>
