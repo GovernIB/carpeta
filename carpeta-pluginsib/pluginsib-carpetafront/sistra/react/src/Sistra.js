@@ -260,16 +260,16 @@ class Sistra extends Component {
                     <thead className="table-success">
                     <tr>
                         <th>{t('sistraTramit')}</th>
-                        <th style={tamanyData}>{t('sistraData')}</th>
-                        <th>{t('sistraEstat')}</th>
+                        <th style={{width: '8em'}}>{t('sistraData')}</th>
+                        <th style={{width: '12em'}}>{t('sistraEstat')}</th>
                     </tr>
                     </thead>
                     <tbody>
                     {this.state.data.map(({descripcionTramite, fechaInicio, pendiente, numero, url, versionSistra, mostraModal, tipo}) => {
                         return <tr className="clickableRow" data-numero={numero} data-url={url} onClick={()=>this.obrirTramit(url)} data-version={versionSistra} style={cursorPointer} data-mostramodal={$.siNo(mostraModal)} data-pending={$.siNo(pendiente)} tabIndex="511">
                             <td>{descripcionTramite}</td>
-                            <td data-order={$.dateOrder(fechaInicio)}>{$.dateFormat(fechaInicio)}</td>
-                            <td>{$.estatTramit(pendiente, mostraModal, tipo, numero)}</td>
+                            <td data-order={$.dateOrder(fechaInicio)} style={{width: '8em'}}>{$.dateFormat(fechaInicio)}</td>
+                            <td style={{width: '12em'}}>{$.estatTramit(pendiente, mostraModal, tipo, numero)}</td>
                         </tr>
                     })}
                     </tbody>
@@ -543,21 +543,21 @@ class Sistra extends Component {
                 }
 
                 taulaTramits = <>
-                    <div style={{float:'left', marginTop: '9px;',paddingBottom: '0.7em'}}>
-                        {t('carpeta_criterio_1') +
-                        $.dateFormatCerca(this.fechaInicio) +
-                        t('carpeta_criterio_2') +
-                        $.dateFormatCerca(this.fechaFin) +
-                        t('carpeta_criterio_3') +
-                        $.nomEstat(this.estado) +
-                        t('carpeta_criterio_4')}
-                    </div>
+                    {/*<div style={{float:'left', marginTop: '9px;',paddingBottom: '0.7em'}}>*/}
+                    {/*    {t('carpeta_criterio_1') +*/}
+                    {/*    $.dateFormatCerca(this.fechaInicio) +*/}
+                    {/*    t('carpeta_criterio_2') +*/}
+                    {/*    $.dateFormatCerca(this.fechaFin) +*/}
+                    {/*    t('carpeta_criterio_3') +*/}
+                    {/*    $.nomEstat(this.estado) +*/}
+                    {/*    t('carpeta_criterio_4')}*/}
+                    {/*</div>*/}
                     <Table responsive striped bordered hover style={tamanyTaula}>
                         <thead className="table-success">
                         <tr>
                             <th>{t('sistraTramit')}</th>
-                            <th style={tamanyData}>{t('sistraData')}</th>
-                            <th>{t('sistraEstat')}</th>
+                            <th style={{width: '8em'}}>{t('sistraData')}</th>
+                            <th style={{width: '12em'}}>{t('sistraEstat')}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -569,8 +569,8 @@ class Sistra extends Component {
                                            data-pending={$.siNo(pendiente)} tabIndex="511"
                                            onClick={(e) => this.handleItemClick(numero) }>
                                     <td>{descripcionTramite}</td>
-                                    <td data-order={$.dateOrder(fechaInicio)}>{$.dateFormat(fechaInicio)}</td>
-                                    <td>{$.estatTramit(pendiente, mostraModal, tipo, numero)}</td>
+                                    <td data-order={$.dateOrder(fechaInicio)} style={{width: '8em'}}>{$.dateFormat(fechaInicio)}</td>
+                                    <td style={{width: '12em'}}>{$.estatTramit(pendiente, mostraModal, tipo, numero)}</td>
                                 </tr>
 
                             if (numero === '' && pendiente && mostraModal)
