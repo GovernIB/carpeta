@@ -5,6 +5,9 @@ import es.caib.carpeta.commons.utils.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 /**
  * 
  * @author anadal
@@ -24,33 +27,26 @@ public class PluginLoginMock implements IPluginLogin {
     @Override
     public LoginInfo validateAuthenticationTicket(String ticket) throws Exception {
 
-//        log.info("Entramn a validar ... ");
+        String json = Configuracio.getProperty("es.caib.carpeta.pluginsib.login.mock.logininfo");
 
-        String username = "";
-        String name = "Pep";
-        String surname1 = "Fuster";
-        String surname2 = "Gonella";
-
-        String administrationID = Configuracio
-                .getProperty("es.caib.carpeta.pluginsib.login.mock.administrationid");
-        if (administrationID == null) {
-            administrationID = "30000056Y";
+        if (json == null || json.trim().length() == 0) {
+            throw new Exception(
+                    "No s'ha definit la propietat 'es.caib.carpeta.pluginsib.login.mock.logininfo'");
         }
-        String authenticationMethod = "None";
 
-        // S'ha mogut la petició al issue "LoginIB no retorna informació del Provider de
-        // l'autenticacio #310 "
-        // TODO este valor no viene informado por LoginIB, tendriamos que hablar
-        // con loginIb a ver si pueden enviarnoslo.
-        String identityProvider = "Mock";
+        Gson gson = new GsonBuilder().create();
 
-        boolean business = false;
+        try {
+            LoginInfo logininfo = gson.fromJson(json, LoginInfo.class);
 
-        int qaa = 1;
-        LoginInfoRepresentative representative = null;
+            return logininfo;
+        } catch (Exception e) {
+            String msg = "Error no controlat deserialitzant una estructura json de la classe LoginInfo: "
+                    + e.getMessage();
+            log.error(msg, e);
+            throw new Exception(msg, e);
+        }
 
-        return new LoginInfo(username, name, surname1, surname2, administrationID,
-                authenticationMethod, qaa, identityProvider, business, representative);
     }
 
     @Override
