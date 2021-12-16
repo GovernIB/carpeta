@@ -228,6 +228,9 @@ class Regweb extends Component {
 
     componentDidUpdate() {
 
+        $("#fechaInicio").attr("tabindex","502");
+        $("#fechaFin").attr("tabindex","503");
+
         const {t} = this.props;
 
         let taulaRegistres;
@@ -241,12 +244,12 @@ class Regweb extends Component {
             }
 
            taulaRegistres = <>
-                <div style={{float:'left', marginTop: '9px;',paddingBottom: '0.7em'}}>{this.state.criteriosTexto}</div>
+                {/*<div style={{float:'left', marginTop: '9px;',paddingBottom: '0.7em'}}>{this.state.criteriosTexto}</div>*/}
                 <Table responsive striped bordered hover style={tamanyTaula}>
                     <thead className="table-sucess">
                         <tr>
                             <th>{t('registro_numero')}</th>
-                            <th>{t('registro_fecha')}</th>
+                            <th style={{width: '8em'}}>{t('registro_fecha')}</th>
                             <th>{t('registro_extracto')}</th>
                             <th>{t('registro_estado')}</th>
                             <th>{t('registro_destinatario')}</th>
@@ -256,7 +259,7 @@ class Regweb extends Component {
                     {this.state.data.map(({ numeroRegistro, fechaRegistro, extracto, tipoRegistro, denominacionDestino }) => {
                         return <tr key={numeroRegistro} onClick={(e) => this.handleItemClick(numeroRegistro) }>
                                 <td>{numeroRegistro}</td>
-                                <td>{fechaRegistro}</td>
+                                <td style={{width: '8em'}}>{fechaRegistro}</td>
                                 <td>{extracto}</td>
                                 <td>{tipoRegistro}</td>
                                 <td>{denominacionDestino}</td>
@@ -399,7 +402,7 @@ class Regweb extends Component {
                                         tabIndex="501" 
                                         value={this.state.filter_number} 
                                         onChange={(e)=>{this.handleNumberFilterParam(e);}}
-                                        className="form-control form-control-sm"  
+                                        className="form-control form-control-sm focusIn"
                                     />
                                 </Form.Group>
                             </Col>
@@ -418,6 +421,7 @@ class Regweb extends Component {
                                         className="form-control form-control-sm estilCalendar focusIn"
                                         locale={this.locale}
                                         showYearDropdown={true}
+                                        preventOpenOnFocus={true}
                                     />
                                 </Form.Group>
                             </Col>
@@ -437,6 +441,7 @@ class Regweb extends Component {
                                         className="form-control form-control-sm estilCalendar focusIn"
                                         locale={this.locale}
                                         showYearDropdown={true}
+                                        preventOpenOnFocus={true}
                                     />
                                 </Form.Group>
                             </Col>
@@ -444,7 +449,7 @@ class Regweb extends Component {
                                 <Form.Group>
                                     <Form.Label>{t('registro_estado')}</Form.Label>
                                     <Form.Select id="estado"
-                                    name="estado" className="form-control form-control-sm"
+                                    name="estado" className="form-control form-control-sm focusIn"
                                     value={this.state.filter_status}
                                     tabindex="504" 
                                     aria-labelledby="estado"
@@ -478,13 +483,13 @@ class Regweb extends Component {
                 }
 
                taulaRegistres = <>
-                    <div style={{float:'left', marginTop: '9px;',paddingBottom: '0.7em'}}>{this.state.criteriosTexto}</div>
+                    {/*<div style={{float:'left', marginTop: '9px;',paddingBottom: '0.7em'}}>{this.state.criteriosTexto}</div>*/}
                     <Table responsive striped bordered hover style={tamanyTaula}>
                         <thead className="table-success">
                             <tr>
                                 <th>{t('registro_numero')}</th>
-                                <th>{t('registro_fecha')}</th>
-                                <th>{t('registro_fecha')}</th>
+                                <th style={{width: '8em'}}>{t('registro_fecha')}</th>
+                                <th>{t('registro_extracto')}</th>
                                 <th>{t('registro_estado')}</th>
                                 <th>{t('registro_destinatario')}</th>
                             </tr>
@@ -493,7 +498,7 @@ class Regweb extends Component {
                         {this.state.data.map(({ numeroRegistro, fechaRegistro, extracto, tipoRegistro, denominacionDestino, estado }) => {
                             return <tr key={numeroRegistro} onClick={(e) => this.handleItemClick(numeroRegistro) }>
                                     <td>{numeroRegistro}</td>
-                                    <td>{$.dateFormat(fechaRegistro)}</td>
+                                    <td style={{width: '8em'}}>{$.dateFormat(fechaRegistro)}</td>
                                     <td>{extracto}</td>
                                     <td>{t('registro_estado_'+estado)}</td>
                                     <td>{denominacionDestino}</td>
