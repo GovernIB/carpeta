@@ -249,7 +249,7 @@ class Regweb extends Component {
                     <thead className="table-sucess">
                         <tr>
                             <th>{t('registro_numero')}</th>
-                            <th style={{width: '8em'}}>{t('registro_fecha')}</th>
+                            <th style={{whiteSpace: 'nowrap'}}>{t('registro_fecha')}</th>
                             <th>{t('registro_extracto')}</th>
                             <th>{t('registro_estado')}</th>
                             <th>{t('registro_destinatario')}</th>
@@ -259,7 +259,7 @@ class Regweb extends Component {
                     {this.state.data.map(({ numeroRegistro, fechaRegistro, extracto, tipoRegistro, denominacionDestino }) => {
                         return <tr key={numeroRegistro} onClick={(e) => this.handleItemClick(numeroRegistro) }>
                                 <td>{numeroRegistro}</td>
-                                <td style={{width: '8em'}}>{fechaRegistro}</td>
+                                <td style={{whiteSpace: 'nowrap'}}>{fechaRegistro}</td>
                                 <td>{extracto}</td>
                                 <td>{tipoRegistro}</td>
                                 <td>{denominacionDestino}</td>
@@ -488,7 +488,7 @@ class Regweb extends Component {
                         <thead className="table-success">
                             <tr>
                                 <th>{t('registro_numero')}</th>
-                                <th style={{width: '8em'}}>{t('registro_fecha')}</th>
+                                <th style={{whiteSpace: 'nowrap'}}>{t('registro_fecha')}</th>
                                 <th>{t('registro_extracto')}</th>
                                 <th>{t('registro_estado')}</th>
                                 <th>{t('registro_destinatario')}</th>
@@ -498,7 +498,7 @@ class Regweb extends Component {
                         {this.state.data.map(({ numeroRegistro, fechaRegistro, extracto, tipoRegistro, denominacionDestino, estado }) => {
                             return <tr key={numeroRegistro} onClick={(e) => this.handleItemClick(numeroRegistro) }>
                                     <td>{numeroRegistro}</td>
-                                    <td style={{width: '8em'}}>{$.dateFormat(fechaRegistro)}</td>
+                                    <td style={{whiteSpace: 'nowrap'}}>{$.dateFormat(fechaRegistro)}</td>
                                     <td>{extracto}</td>
                                     <td>{t('registro_estado_'+estado)}</td>
                                     <td>{denominacionDestino}</td>
@@ -545,7 +545,9 @@ class Regweb extends Component {
                                     {this.state.error && <div className="alert alert-danger hide" role="alert">{this.state.error}</div>}                            
                                     {this.state.numeroRegistro == null && content}
                                     {this.state.numeroRegistro == null && taulaRegistres}
-                                    {this.state.pagination_total_items.toString() === '0' && <><div style={{float:'left', marginTop: '9px;',paddingBottom: '0.7em'}}>{this.state.criteriosTexto}</div><div className="pt-3 alert alert-secondary" style={{ float: 'left', width: '95%'}} role="alert">{t('registro_vacio')}</div></>}
+                                    {this.state.pagination_total_items.toString() === '0' && <>
+                                        {/*<div style={{float:'left', marginTop: '9px;',paddingBottom: '0.7em'}}>{this.state.criteriosTexto}</div>*/}
+                                        <div className="pt-3 alert alert-secondary" style={{ float: 'left', width: '95%'}} role="alert">{t('registro_vacio')}</div></>}
                                 </div>
                             </div>
                         </div>
