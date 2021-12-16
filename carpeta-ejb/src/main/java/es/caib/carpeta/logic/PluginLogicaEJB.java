@@ -13,7 +13,9 @@ import es.caib.carpeta.ejb.PluginEJB;
 import es.caib.carpeta.ejb.PluginEntitatService;
 import es.caib.carpeta.persistence.PluginJPA;
 import es.caib.carpeta.model.entity.Plugin;
+import es.caib.carpeta.model.fields.AccesFields;
 import es.caib.carpeta.model.fields.AvisFields;
+import es.caib.carpeta.model.fields.LogCarpetaFields;
 import es.caib.carpeta.model.fields.PluginEntitatFields;
 
 import java.util.HashMap;
@@ -37,6 +39,12 @@ public class PluginLogicaEJB extends PluginEJB implements PluginLogicaService {
   
   @EJB(mappedName = AvisService.JNDI_NAME)
   protected AvisService avisEjb;
+  
+  @EJB(mappedName = es.caib.carpeta.ejb.LogCarpetaService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.LogCarpetaService logCarpetaEjb;
+  
+  @EJB(mappedName = es.caib.carpeta.ejb.AccesService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.AccesService accesEjb;
   
   @Override
   public Plugin update(Plugin instance) throws I18NException {
@@ -97,22 +105,25 @@ public class PluginLogicaEJB extends PluginEJB implements PluginLogicaService {
     return (PluginJPA) super.findByPrimaryKey(_ID_);
   }
   
-  
+  @Override
+  @PermitAll
   public boolean deleteFull(Long pluginID) throws I18NException {
-	  
-	  // Eliminam si no está associat a cap entitat previament 
-	  if(pluginEntitatEjb.count(PluginEntitatFields.PLUGINID.equal(pluginID)) < 1) {
-		  
-		  avisEjb.delete(AvisFields.PLUGINFRONTID.equal(pluginID));
-		  
-		  // Acces. No s'eliminen
-		  
-		  delete(pluginID);
-		  
-		  return true;
-	  }
-	  return false;
-  }
 
+      // Eliminam si no está associat a cap entitat previament
+      if (pluginEntitatEjb.count(PluginEntitatFields.PLUGINID.equal(pluginID)) < 1) {
+
+          avisEjb.delete(AvisFields.PLUGINFRONTID.equal(pluginID));
+
+          logCarpetaEjb.delete(LogCarpetaFields.PLUGINID.equal(pluginID));
+
+          // Accesos: Per ara NO s'eliminen ???
+          accesEjb.delete(AccesFields.PLUGINID.equal(pluginID));
+
+          delete(pluginID);
+
+          return true;
+      }
+      return false;
+  }
 
 }
