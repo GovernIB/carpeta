@@ -260,16 +260,16 @@ class Sistra extends Component {
                     <thead className="table-success">
                     <tr>
                         <th>{t('sistraTramit')}</th>
-                        <th style={{width: '8em'}}>{t('sistraData')}</th>
-                        <th style={{width: '12em'}}>{t('sistraEstat')}</th>
+                        <th style={{whiteSpace: 'nowrap'}}>{t('sistraData')}</th>
+                        <th style={{whiteSpace: 'nowrap'}}>{t('sistraEstat')}</th>
                     </tr>
                     </thead>
                     <tbody>
                     {this.state.data.map(({descripcionTramite, fechaInicio, pendiente, numero, url, versionSistra, mostraModal, tipo}) => {
                         return <tr className="clickableRow" data-numero={numero} data-url={url} onClick={()=>this.obrirTramit(url)} data-version={versionSistra} style={cursorPointer} data-mostramodal={$.siNo(mostraModal)} data-pending={$.siNo(pendiente)} tabIndex="511">
                             <td>{descripcionTramite}</td>
-                            <td data-order={$.dateOrder(fechaInicio)} style={{width: '8em'}}>{$.dateFormat(fechaInicio)}</td>
-                            <td style={{width: '12em'}}>{$.estatTramit(pendiente, mostraModal, tipo, numero)}</td>
+                            <td data-order={$.dateOrder(fechaInicio)} style={{whiteSpace: 'nowrap'}}>{$.dateFormat(fechaInicio)}</td>
+                            <td style={{whiteSpace: 'nowrap'}}>{$.estatTramit(pendiente, mostraModal, tipo, numero)}</td>
                         </tr>
                     })}
                     </tbody>
@@ -556,8 +556,8 @@ class Sistra extends Component {
                         <thead className="table-success">
                         <tr>
                             <th>{t('sistraTramit')}</th>
-                            <th style={{width: '8em'}}>{t('sistraData')}</th>
-                            <th style={{width: '12em'}}>{t('sistraEstat')}</th>
+                            <th style={{whiteSpace: 'nowrap'}}>{t('sistraData')}</th>
+                            <th style={{whiteSpace: 'nowrap'}}>{t('sistraEstat')}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -569,8 +569,8 @@ class Sistra extends Component {
                                            data-pending={$.siNo(pendiente)} tabIndex="511"
                                            onClick={(e) => this.handleItemClick(numero) }>
                                     <td>{descripcionTramite}</td>
-                                    <td data-order={$.dateOrder(fechaInicio)} style={{width: '8em'}}>{$.dateFormat(fechaInicio)}</td>
-                                    <td style={{width: '12em'}}>{$.estatTramit(pendiente, mostraModal, tipo, numero)}</td>
+                                    <td data-order={$.dateOrder(fechaInicio)} style={{whiteSpace: 'nowrap'}}>{$.dateFormat(fechaInicio)}</td>
+                                    <td style={{whiteSpace: 'nowrap'}}>{$.estatTramit(pendiente, mostraModal, tipo, numero)}</td>
                                 </tr>
 
                             if (numero === '' && pendiente && mostraModal)
@@ -579,8 +579,8 @@ class Sistra extends Component {
                                            data-pending={$.siNo(pendiente)} tabIndex="511"
                                            onClick={(e) => this.openModalConfirm(url) }>
                                     <td>{descripcionTramite}</td>
-                                    <td data-order={$.dateOrder(fechaInicio)}>{$.dateFormat(fechaInicio)}</td>
-                                    <td>{$.estatTramit(pendiente, mostraModal, tipo, numero)}</td>
+                                    <td data-order={$.dateOrder(fechaInicio)} style={{whiteSpace: 'nowrap'}}>{$.dateFormat(fechaInicio)}</td>
+                                    <td style={{whiteSpace: 'nowrap'}}>{$.estatTramit(pendiente, mostraModal, tipo, numero)}</td>
                                 </tr>
 
                             if (numero === '' && (!pendiente || !mostraModal))
@@ -589,8 +589,8 @@ class Sistra extends Component {
                                            data-pending={$.siNo(pendiente)} tabIndex="511"
                                            onClick={(e) => window.open(url, '_blank') }>
                                     <td>{descripcionTramite}</td>
-                                    <td data-order={$.dateOrder(fechaInicio)}>{$.dateFormat(fechaInicio)}</td>
-                                    <td>{$.estatTramit(pendiente, mostraModal, tipo, numero)}</td>
+                                    <td data-order={$.dateOrder(fechaInicio)} style={{whiteSpace: 'nowrap'}}>{$.dateFormat(fechaInicio)}</td>
+                                    <td style={{whiteSpace: 'nowrap'}}>{$.estatTramit(pendiente, mostraModal, tipo, numero)}</td>
                                 </tr>
                         })}
                         </tbody>
