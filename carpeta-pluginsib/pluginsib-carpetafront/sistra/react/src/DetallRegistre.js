@@ -84,8 +84,11 @@ class DetallRegistre extends Component {
         });
     }
 
-    generarJustificant(url){
-        fetch(url, { 
+    async generarJustificant(url){
+
+        document.getElementById('justificantLoader').style.display = 'block';
+
+        await fetch(url, { 
             method: 'GET',
             headers: { 
                 'Content-Type': 'application/json',
@@ -94,20 +97,23 @@ class DetallRegistre extends Component {
         .then(response => response.json())
         .then(data => {
             console.log(data);
-
+            document.getElementById('justificantLoader').style.display = 'none';
             if (data.error != null)
                 this.setState({...this.state, error: data.error});
             else{
-                this.downloadDoc(data.justificantData, data.justificantFileName);
+                this.downloadDoc(data.justificantData, data.justificantFilename);
             }
         });   
     }
 
     downloadDoc(datafile, dataName) {
 
+        const {t} = this.props;
+
         const linkSource = `data:application/pdf;base64,${datafile}`;
     	const downloadLink = document.createElement("a");
-    	const fileName = `${dataName}`;
+    	const fileName = (typeof(dataName) !== 'undefined' && dataName != '') ? `${dataName}.pdf` : `justificant.pdf`;
+        
     	downloadLink.href = linkSource;
     	downloadLink.download = fileName;
     	
@@ -120,10 +126,9 @@ class DetallRegistre extends Component {
         	downloadLink.setAttribute('download', fileName);
         }
     	
-        console.log("DOWNLOAD BTN:", downloadLink);
+        downloadLink.appendChild(document.createTextNode(t('downloadjustificantText')));
+        document.getElementById("justificantEnllaz").append(downloadLink);
         downloadLink.click();
-        //document.getElementById("downloadEnllaz").append(downloadLink);
-    	
     }
 
     mostraTooltip(){
@@ -256,6 +261,8 @@ class DetallRegistre extends Component {
                                         <div className="col mr-2 font15 text-center">
                                             <h3 className="font-weight-bold verde text-uppercase mb-3 text-center h3">{t('registro_justificante')}</h3>
                                             
+                                            <div  id="justificantLoader" className="loader-container centrat" style={{display:'none', textAlign:'center', marginBottom:'20px'}}><div className="loader" style={{width: '40px', height: '40px', margin:'0 auto'}}/></div>
+
                                             { /* typeof(this.state.data.justificante) != 'undefined' && !this.state.data.justificante.confidencial && <Button onClick={() => this.handlerJustificant(registre)}>{iconoDescargar} {t('carpeta_descargar')}</Button> */}
                                             
                                             {this.state.data.justificanteUrl != '' && <Button className="btn btn-danger" onClick={() => { window.open(this.state.data.justificanteUrl); }}>{iconoDescargar} {t('carpeta_descargar')}</Button>}
@@ -265,6 +272,8 @@ class DetallRegistre extends Component {
                                             {this.state.data.justificanteId != '' && this.state.data.justificantData != '' && this.state.error == '' && <Button className="btn btn-danger" onClick={() => this.downloadDoc(this.state.data.justificantData, this.state.data.justificantFileName)}>{iconoDescargar} {t('carpeta_descargar')}</Button>} 
 
                                             {this.state.data.justificanteUrl == '' && this.state.data.justificantSenseGenerar == '' && this.state.data.justificanteId == '' && this.state.error != '' && <div className="text-center pt-3 text-danger"><span className="oi oi-warning pr-1"> </span>{this.state.error}</div>}
+
+                                            <p id="justificantEnllaz"></p>
 
                                         </div>
                                     </div>

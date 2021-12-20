@@ -97,5 +97,6 @@
     "anexo_error_obtenent" : "S'ha produit un error obtenint l'annex",
     "registro_anexo_confidencial": "Confidencial",
     "reprendreTornar": "Tornar",
-    "carpeta_descargar": "Descarregar"
+    "carpeta_descargar": "Descarregar",
+    "downloadjustificantText": "Fitxer descarregat. Fes click per descarregar-ho de nou"
 }
