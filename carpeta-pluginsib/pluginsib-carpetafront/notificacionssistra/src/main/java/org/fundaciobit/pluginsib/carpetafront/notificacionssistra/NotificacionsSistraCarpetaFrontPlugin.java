@@ -1,6 +1,7 @@
 package org.fundaciobit.pluginsib.carpetafront.notificacionssistra;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import es.caib.carpeta.pluginsib.carpetafront.api.*;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementoExpediente;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.TipoElementoExpediente;
@@ -14,6 +15,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import static java.lang.reflect.Modifier.TRANSIENT;
 
 
 /**
@@ -240,10 +243,18 @@ public class NotificacionsSistraCarpetaFrontPlugin extends AbstractCarpetaFrontP
             comunicacionsMap.put("registresPagina", itemsPagina);
             comunicacionsMap.put("totalRegistres", comunicaciones.size());
 
-            Gson gson = new Gson();
+//            Gson gson = new Gson();
+
+            Gson gson = new GsonBuilder()
+                    .excludeFieldsWithoutExposeAnnotation()
+                    .excludeFieldsWithModifiers(TRANSIENT)
+                    .create();
+
+            comunicacionsMap.forEach((key, value) -> System.out.println(key + ":" + value));
+
             String json = gson.toJson(comunicacionsMap);
 
-//            log.info(json);
+            log.info(json);
 
             try {
 
