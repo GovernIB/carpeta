@@ -239,30 +239,24 @@ public class NotificacionsSistraCarpetaFrontPlugin extends AbstractCarpetaFrontP
             List<ElementoExpediente> comunicaciones = sistra1Service.obtenerElementosExpediente(coms,
                     Sistra1ServiceImpl.ELEMENTO_TODOS, userData.getAdministrationID(), locale);
 
-            log.info("***********************************************************");
+            log.debug("***********************************************************");
             for(ElementoExpediente comunicacion : comunicaciones){
-                log.info("DESCRIPCIOON: " + comunicacion.getDescripcion());
-                log.info("URL: " + comunicacion.getUrl());
-                log.info("FECHA: " + comunicacion.getFecha());
+                log.debug("DESCRIPCIOON: " + comunicacion.getDescripcion());
+                log.debug("URL: " + comunicacion.getUrl());
+                log.debug("FECHA: " + comunicacion.getFecha());
             }
-            log.info("***********************************************************");
+            log.debug("***********************************************************");
 
             comunicacionsMap.put("comunicacions", comunicaciones);
             comunicacionsMap.put("registresPagina", itemsPagina);
             comunicacionsMap.put("totalRegistres", comunicaciones.size());
 
 //            Gson gson = new Gson();
-
-            Gson gson = new GsonBuilder()
-//                    .excludeFieldsWithoutExposeAnnotation()
-//                    .excludeFieldsWithModifiers(TRANSIENT)
-                    .create();
-
-            comunicacionsMap.forEach((key, value) -> System.out.println(key + ":" + value));
+            Gson gson = new GsonBuilder().create();
 
             String json = gson.toJson(comunicacionsMap);
 
-            log.info(json);
+            log.debug(json);
 
             try {
 

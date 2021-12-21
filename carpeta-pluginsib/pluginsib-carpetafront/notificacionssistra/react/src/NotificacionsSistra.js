@@ -166,8 +166,6 @@ class NotificacionsSistra extends Component {
         let content;
         let taulaNotificacionsSistra;
 
-        console.log("COMUNICACIONS: " + this.state.dataComunicacions);
-
 
         if (!isLoaded) {
             content = <div  id="carregant" className="loader-container centrat ">
