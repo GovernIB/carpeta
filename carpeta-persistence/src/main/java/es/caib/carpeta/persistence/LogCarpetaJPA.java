@@ -13,7 +13,6 @@ import org.hibernate.annotations.Type;
 import javax.persistence.Id;
 
 
-@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "car_log" )
 @SequenceGenerator(name="LOGCARPETA_SEQ", sequenceName="car_log_seq", allocationSize=1, initialValue=1000)

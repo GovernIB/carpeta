@@ -7,10 +7,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AuditoriaFields.TIPUS])?'auditoria.tipus':__theForm.labels[AuditoriaFields.TIPUS]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[AuditoriaFields.TIPUS]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.TIPUS]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="auditoria.tipus" cssClass="errorField alert alert-danger" />
@@ -38,10 +38,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AuditoriaFields.OBJECTE])?'auditoria.objecte':__theForm.labels[AuditoriaFields.OBJECTE]}" />
+             </label>
               <c:if test="${not empty __theForm.help[AuditoriaFields.OBJECTE]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.OBJECTE]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="auditoria.objecte" cssClass="errorField alert alert-danger" />
@@ -69,10 +69,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AuditoriaFields.DATAAUDIT])?'auditoria.dataAudit':__theForm.labels[AuditoriaFields.DATAAUDIT]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[AuditoriaFields.DATAAUDIT]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.DATAAUDIT]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="auditoria.dataAudit" cssClass="errorField alert alert-danger" />
@@ -109,14 +109,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AuditoriaFields.USERNAME])?'auditoria.username':__theForm.labels[AuditoriaFields.USERNAME]}" />
+             </label>
               <c:if test="${not empty __theForm.help[AuditoriaFields.USERNAME]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.USERNAME]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="auditoria.username" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USERNAME)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USERNAME)? ' uneditable-input' : ''}"  style="" maxlength="255" path="auditoria.username"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USERNAME)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USERNAME)? ' uneditable-input' : ''}"  style="" maxlength="255" path="auditoria.username"   />
 
            </td>
         </tr>
@@ -127,10 +127,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AuditoriaFields.ENTITATID])?'auditoria.entitatID':__theForm.labels[AuditoriaFields.ENTITATID]}" />
+             </label>
               <c:if test="${not empty __theForm.help[AuditoriaFields.ENTITATID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.ENTITATID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="auditoria.entitatID" cssClass="errorField alert alert-danger" />

@@ -5,7 +5,6 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 
 
-@SuppressWarnings("deprecation")
 @javax.persistence.Embeddable
 @Table(name = "car_traducciomap" )
 @javax.xml.bind.annotation.XmlRootElement

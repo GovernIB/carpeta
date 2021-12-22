@@ -7,10 +7,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginEntitatFields.PLUGINID])?'pluginEntitat.pluginID':__theForm.labels[PluginEntitatFields.PLUGINID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[PluginEntitatFields.PLUGINID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[PluginEntitatFields.PLUGINID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="pluginEntitat.pluginID" cssClass="errorField alert alert-danger" />
@@ -38,10 +38,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginEntitatFields.ENTITATID])?'pluginEntitat.entitatID':__theForm.labels[PluginEntitatFields.ENTITATID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[PluginEntitatFields.ENTITATID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[PluginEntitatFields.ENTITATID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="pluginEntitat.entitatID" cssClass="errorField alert alert-danger" />
@@ -69,10 +69,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginEntitatFields.ACTIU])?'pluginEntitat.actiu':__theForm.labels[PluginEntitatFields.ACTIU]}" />
+             </label>
               <c:if test="${not empty __theForm.help[PluginEntitatFields.ACTIU]}">
               <i class="fas fa-info-circle" title="${__theForm.help[PluginEntitatFields.ACTIU]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ACTIU)}" >
@@ -91,10 +91,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginEntitatFields.SECCIOID])?'pluginEntitat.seccioID':__theForm.labels[PluginEntitatFields.SECCIOID]}" />
+             </label>
               <c:if test="${not empty __theForm.help[PluginEntitatFields.SECCIOID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[PluginEntitatFields.SECCIOID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="pluginEntitat.seccioID" cssClass="errorField alert alert-danger" />
@@ -131,14 +131,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginEntitatFields.ORDRE])?'pluginEntitat.ordre':__theForm.labels[PluginEntitatFields.ORDRE]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[PluginEntitatFields.ORDRE]}">
               <i class="fas fa-info-circle" title="${__theForm.help[PluginEntitatFields.ORDRE]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="pluginEntitat.ordre" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ORDRE)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ORDRE)? ' uneditable-input' : ''}"  style=""  path="pluginEntitat.ordre"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ORDRE)? 'true' : 'false'}" cssClass="w-25 form-control  ${gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ORDRE)? ' uneditable-input' : ''}"  style=""  path="pluginEntitat.ordre"   />
 
            </td>
         </tr>

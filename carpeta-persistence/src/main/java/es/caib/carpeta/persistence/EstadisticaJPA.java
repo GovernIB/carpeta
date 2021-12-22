@@ -11,7 +11,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Id;
 
 
-@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "car_estadistica" )
 @SequenceGenerator(name="ESTADISTICA_SEQ", sequenceName="car_estadistica_seq", allocationSize=1, initialValue=1000)

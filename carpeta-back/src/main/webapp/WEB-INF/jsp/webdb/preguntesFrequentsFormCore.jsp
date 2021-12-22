@@ -7,10 +7,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[PreguntesFrequentsFields.ENUNCIATID])?'preguntesFrequents.enunciatID':__theForm.labels[PreguntesFrequentsFields.ENUNCIATID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[PreguntesFrequentsFields.ENUNCIATID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[PreguntesFrequentsFields.ENUNCIATID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
        <form:errors path="preguntesFrequents.enunciat" cssClass="errorField alert alert-danger" />
@@ -27,7 +27,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_enunciat_${idioma.idiomaID}">
                <form:errors path="preguntesFrequents.enunciat.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="preguntesFrequents.enunciat.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.ENUNCIATID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.ENUNCIATID)}" maxlength="4000" />
+               <form:input path="preguntesFrequents.enunciat.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control  ${gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.ENUNCIATID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.ENUNCIATID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -42,10 +42,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[PreguntesFrequentsFields.RESPOSTAID])?'preguntesFrequents.respostaID':__theForm.labels[PreguntesFrequentsFields.RESPOSTAID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[PreguntesFrequentsFields.RESPOSTAID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[PreguntesFrequentsFields.RESPOSTAID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
        <form:errors path="preguntesFrequents.resposta" cssClass="errorField alert alert-danger" />
@@ -62,7 +62,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_resposta_${idioma.idiomaID}">
                <form:errors path="preguntesFrequents.resposta.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="preguntesFrequents.resposta.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.RESPOSTAID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.RESPOSTAID)}" maxlength="4000" />
+               <form:input path="preguntesFrequents.resposta.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control  ${gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.RESPOSTAID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.RESPOSTAID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -77,14 +77,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[PreguntesFrequentsFields.ORDRE])?'preguntesFrequents.ordre':__theForm.labels[PreguntesFrequentsFields.ORDRE]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[PreguntesFrequentsFields.ORDRE]}">
               <i class="fas fa-info-circle" title="${__theForm.help[PreguntesFrequentsFields.ORDRE]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="preguntesFrequents.ordre" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.ORDRE)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.ORDRE)? ' uneditable-input' : ''}"  style=""  path="preguntesFrequents.ordre"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.ORDRE)? 'true' : 'false'}" cssClass="w-25 form-control  ${gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.ORDRE)? ' uneditable-input' : ''}"  style=""  path="preguntesFrequents.ordre"   />
 
            </td>
         </tr>
@@ -95,10 +95,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[PreguntesFrequentsFields.ENTITATID])?'preguntesFrequents.entitatID':__theForm.labels[PreguntesFrequentsFields.ENTITATID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[PreguntesFrequentsFields.ENTITATID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[PreguntesFrequentsFields.ENTITATID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="preguntesFrequents.entitatID" cssClass="errorField alert alert-danger" />

@@ -7,10 +7,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AvisFields.DESCRIPCIOID])?'avis.descripcioID':__theForm.labels[AvisFields.DESCRIPCIOID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[AvisFields.DESCRIPCIOID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AvisFields.DESCRIPCIOID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
        <form:errors path="avis.descripcio" cssClass="errorField alert alert-danger" />
@@ -27,7 +27,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_descripcio_${idioma.idiomaID}">
                <form:errors path="avis.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="avis.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,AvisFields.DESCRIPCIOID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,AvisFields.DESCRIPCIOID)}" maxlength="4000" />
+               <form:input path="avis.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control  ${gen:contains(__theForm.readOnlyFields ,AvisFields.DESCRIPCIOID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,AvisFields.DESCRIPCIOID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -42,10 +42,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AvisFields.ENTITATID])?'avis.entitatID':__theForm.labels[AvisFields.ENTITATID]}" />
+             </label>
               <c:if test="${not empty __theForm.help[AvisFields.ENTITATID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AvisFields.ENTITATID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="avis.entitatID" cssClass="errorField alert alert-danger" />
@@ -82,10 +82,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AvisFields.DATAINICI])?'avis.dataInici':__theForm.labels[AvisFields.DATAINICI]}" />
+             </label>
               <c:if test="${not empty __theForm.help[AvisFields.DATAINICI]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AvisFields.DATAINICI]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="avis.dataInici" cssClass="errorField alert alert-danger" />
@@ -122,10 +122,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AvisFields.DATAFI])?'avis.dataFi':__theForm.labels[AvisFields.DATAFI]}" />
+             </label>
               <c:if test="${not empty __theForm.help[AvisFields.DATAFI]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AvisFields.DATAFI]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="avis.dataFi" cssClass="errorField alert alert-danger" />
@@ -162,10 +162,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AvisFields.TIPUS])?'avis.tipus':__theForm.labels[AvisFields.TIPUS]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[AvisFields.TIPUS]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AvisFields.TIPUS]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="avis.tipus" cssClass="errorField alert alert-danger" />
@@ -193,10 +193,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AvisFields.GRAVETAT])?'avis.gravetat':__theForm.labels[AvisFields.GRAVETAT]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[AvisFields.GRAVETAT]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AvisFields.GRAVETAT]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="avis.gravetat" cssClass="errorField alert alert-danger" />
@@ -224,10 +224,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AvisFields.PLUGINFRONTID])?'avis.pluginFrontID':__theForm.labels[AvisFields.PLUGINFRONTID]}" />
+             </label>
               <c:if test="${not empty __theForm.help[AvisFields.PLUGINFRONTID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AvisFields.PLUGINFRONTID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="avis.pluginFrontID" cssClass="errorField alert alert-danger" />

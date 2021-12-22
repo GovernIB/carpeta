@@ -15,7 +15,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 
 
-@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "car_preguntesfrequents" )
 @SequenceGenerator(name="PREGUNTESFREQUENTS_SEQ", sequenceName="car_preguntesfrequents_seq", allocationSize=1, initialValue=1000)

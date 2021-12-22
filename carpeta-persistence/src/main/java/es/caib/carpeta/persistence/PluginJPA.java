@@ -20,7 +20,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 
 
-@SuppressWarnings("deprecation")
 @Entity
 @Table(name = "car_plugin" )
 @SequenceGenerator(name="PLUGIN_SEQ", sequenceName="car_plugin_seq", allocationSize=1, initialValue=1000)

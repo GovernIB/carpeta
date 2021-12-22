@@ -7,10 +7,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EnllazFields.TIPUS])?'enllaz.tipus':__theForm.labels[EnllazFields.TIPUS]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[EnllazFields.TIPUS]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EnllazFields.TIPUS]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="enllaz.tipus" cssClass="errorField alert alert-danger" />
@@ -38,10 +38,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EnllazFields.NOMID])?'enllaz.nomID':__theForm.labels[EnllazFields.NOMID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[EnllazFields.NOMID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EnllazFields.NOMID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
        <form:errors path="enllaz.nom" cssClass="errorField alert alert-danger" />
@@ -58,7 +58,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_nom_${idioma.idiomaID}">
                <form:errors path="enllaz.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="enllaz.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EnllazFields.NOMID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EnllazFields.NOMID)}" maxlength="4000" />
+               <form:input path="enllaz.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control  ${gen:contains(__theForm.readOnlyFields ,EnllazFields.NOMID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EnllazFields.NOMID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -73,10 +73,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EnllazFields.DESCRIPCIOID])?'enllaz.descripcioID':__theForm.labels[EnllazFields.DESCRIPCIOID]}" />
+             </label>
               <c:if test="${not empty __theForm.help[EnllazFields.DESCRIPCIOID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EnllazFields.DESCRIPCIOID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
        <form:errors path="enllaz.descripcio" cssClass="errorField alert alert-danger" />
@@ -93,7 +93,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_descripcio_${idioma.idiomaID}">
                <form:errors path="enllaz.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="enllaz.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EnllazFields.DESCRIPCIOID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EnllazFields.DESCRIPCIOID)}" maxlength="4000" />
+               <form:input path="enllaz.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control  ${gen:contains(__theForm.readOnlyFields ,EnllazFields.DESCRIPCIOID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EnllazFields.DESCRIPCIOID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -108,10 +108,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EnllazFields.URLID])?'enllaz.urlID':__theForm.labels[EnllazFields.URLID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[EnllazFields.URLID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EnllazFields.URLID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
        <form:errors path="enllaz.url" cssClass="errorField alert alert-danger" />
@@ -128,7 +128,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_url_${idioma.idiomaID}">
                <form:errors path="enllaz.url.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="enllaz.url.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EnllazFields.URLID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EnllazFields.URLID)}" maxlength="4000" />
+               <form:input path="enllaz.url.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control  ${gen:contains(__theForm.readOnlyFields ,EnllazFields.URLID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EnllazFields.URLID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -143,10 +143,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EnllazFields.ENTITATID])?'enllaz.entitatID':__theForm.labels[EnllazFields.ENTITATID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[EnllazFields.ENTITATID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EnllazFields.ENTITATID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="enllaz.entitatID" cssClass="errorField alert alert-danger" />
@@ -174,10 +174,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EnllazFields.LOGOID])?'enllaz.logoID':__theForm.labels[EnllazFields.LOGOID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[EnllazFields.LOGOID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EnllazFields.LOGOID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="enllaz.logoID" cssClass="errorField alert alert-danger" />
@@ -187,7 +187,7 @@
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,EnllazFields.LOGOID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">
                 <div class="custom-file">
-                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EnllazFields.LOGOID)? 'true' : 'false'}" cssClass="custom-file-input form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EnllazFields.LOGOID)? ' uneditable-input' : ''}"   path="logoID" type="file" />
+                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EnllazFields.LOGOID)? 'true' : 'false'}" cssClass="custom-file-input form-control  ${gen:contains(__theForm.readOnlyFields ,EnllazFields.LOGOID)? ' uneditable-input' : ''}"   path="logoID" type="file" />
                   <label class="custom-file-label" for="logoID">
                   </label>
                 </div>
@@ -226,10 +226,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EnllazFields.SECCIOID])?'enllaz.seccioID':__theForm.labels[EnllazFields.SECCIOID]}" />
+             </label>
               <c:if test="${not empty __theForm.help[EnllazFields.SECCIOID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EnllazFields.SECCIOID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="enllaz.seccioID" cssClass="errorField alert alert-danger" />
@@ -266,10 +266,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EnllazFields.ACTIU])?'enllaz.actiu':__theForm.labels[EnllazFields.ACTIU]}" />
+             </label>
               <c:if test="${not empty __theForm.help[EnllazFields.ACTIU]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EnllazFields.ACTIU]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,EnllazFields.ACTIU)}" >
@@ -288,14 +288,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EnllazFields.ORDRE])?'enllaz.ordre':__theForm.labels[EnllazFields.ORDRE]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[EnllazFields.ORDRE]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EnllazFields.ORDRE]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="enllaz.ordre" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EnllazFields.ORDRE)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EnllazFields.ORDRE)? ' uneditable-input' : ''}"  style=""  path="enllaz.ordre"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EnllazFields.ORDRE)? 'true' : 'false'}" cssClass="w-25 form-control  ${gen:contains(__theForm.readOnlyFields ,EnllazFields.ORDRE)? ' uneditable-input' : ''}"  style=""  path="enllaz.ordre"   />
 
            </td>
         </tr>

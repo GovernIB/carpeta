@@ -7,10 +7,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[LogCarpetaFields.DESCRIPCIO])?'logCarpeta.descripcio':__theForm.labels[LogCarpetaFields.DESCRIPCIO]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[LogCarpetaFields.DESCRIPCIO]}">
               <i class="fas fa-info-circle" title="${__theForm.help[LogCarpetaFields.DESCRIPCIO]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="logCarpeta.descripcio" cssClass="errorField alert alert-danger" />
@@ -38,10 +38,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[LogCarpetaFields.TIPUS])?'logCarpeta.tipus':__theForm.labels[LogCarpetaFields.TIPUS]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[LogCarpetaFields.TIPUS]}">
               <i class="fas fa-info-circle" title="${__theForm.help[LogCarpetaFields.TIPUS]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="logCarpeta.tipus" cssClass="errorField alert alert-danger" />
@@ -69,10 +69,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[LogCarpetaFields.ESTAT])?'logCarpeta.estat':__theForm.labels[LogCarpetaFields.ESTAT]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[LogCarpetaFields.ESTAT]}">
               <i class="fas fa-info-circle" title="${__theForm.help[LogCarpetaFields.ESTAT]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="logCarpeta.estat" cssClass="errorField alert alert-danger" />
@@ -100,10 +100,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[LogCarpetaFields.PLUGINID])?'logCarpeta.pluginID':__theForm.labels[LogCarpetaFields.PLUGINID]}" />
+             </label>
               <c:if test="${not empty __theForm.help[LogCarpetaFields.PLUGINID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[LogCarpetaFields.PLUGINID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="logCarpeta.pluginID" cssClass="errorField alert alert-danger" />
@@ -140,14 +140,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[LogCarpetaFields.ENTITATCODI])?'logCarpeta.entitatCodi':__theForm.labels[LogCarpetaFields.ENTITATCODI]}" />
+             </label>
               <c:if test="${not empty __theForm.help[LogCarpetaFields.ENTITATCODI]}">
               <i class="fas fa-info-circle" title="${__theForm.help[LogCarpetaFields.ENTITATCODI]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="logCarpeta.entitatCodi" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ENTITATCODI)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ENTITATCODI)? ' uneditable-input' : ''}"  style="" maxlength="9" path="logCarpeta.entitatCodi"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ENTITATCODI)? 'true' : 'false'}" cssClass="w-50 form-control  ${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.ENTITATCODI)? ' uneditable-input' : ''}"  style="" maxlength="9" path="logCarpeta.entitatCodi"   />
 
            </td>
         </tr>
@@ -158,14 +158,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[LogCarpetaFields.TEMPS])?'logCarpeta.temps':__theForm.labels[LogCarpetaFields.TEMPS]}" />
+             </label>
               <c:if test="${not empty __theForm.help[LogCarpetaFields.TEMPS]}">
               <i class="fas fa-info-circle" title="${__theForm.help[LogCarpetaFields.TEMPS]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="logCarpeta.temps" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.TEMPS)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.TEMPS)? ' uneditable-input' : ''}"  style=""  path="logCarpeta.temps"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.TEMPS)? 'true' : 'false'}" cssClass="w-25 form-control  ${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.TEMPS)? ' uneditable-input' : ''}"  style=""  path="logCarpeta.temps"   />
 
            </td>
         </tr>
@@ -176,10 +176,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[LogCarpetaFields.DATAINICI])?'logCarpeta.dataInici':__theForm.labels[LogCarpetaFields.DATAINICI]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[LogCarpetaFields.DATAINICI]}">
               <i class="fas fa-info-circle" title="${__theForm.help[LogCarpetaFields.DATAINICI]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="logCarpeta.dataInici" cssClass="errorField alert alert-danger" />
@@ -216,10 +216,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[LogCarpetaFields.PETICIO])?'logCarpeta.peticio':__theForm.labels[LogCarpetaFields.PETICIO]}" />
+             </label>
               <c:if test="${not empty __theForm.help[LogCarpetaFields.PETICIO]}">
               <i class="fas fa-info-circle" title="${__theForm.help[LogCarpetaFields.PETICIO]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="logCarpeta.peticio" cssClass="errorField alert alert-danger" />
@@ -247,10 +247,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[LogCarpetaFields.ERROR])?'logCarpeta.error':__theForm.labels[LogCarpetaFields.ERROR]}" />
+             </label>
               <c:if test="${not empty __theForm.help[LogCarpetaFields.ERROR]}">
               <i class="fas fa-info-circle" title="${__theForm.help[LogCarpetaFields.ERROR]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="logCarpeta.error" cssClass="errorField alert alert-danger" />
@@ -278,10 +278,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[LogCarpetaFields.EXCEPCIO])?'logCarpeta.excepcio':__theForm.labels[LogCarpetaFields.EXCEPCIO]}" />
+             </label>
               <c:if test="${not empty __theForm.help[LogCarpetaFields.EXCEPCIO]}">
               <i class="fas fa-info-circle" title="${__theForm.help[LogCarpetaFields.EXCEPCIO]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="logCarpeta.excepcio" cssClass="errorField alert alert-danger" />

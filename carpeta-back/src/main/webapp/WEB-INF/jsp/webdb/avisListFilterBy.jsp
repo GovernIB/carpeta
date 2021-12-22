@@ -27,7 +27,7 @@
       
       <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">
       <c:if test="${ __entry.key < 0 && not empty __entry.value.searchBy }">
-      <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+      <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
         <span class="add-on"><fmt:message key="${__entry.value.codeName}" />:</span>
         <fmt:message key="genapp.form.searchby" var="cercaperAF" >
           <fmt:param>
@@ -52,7 +52,7 @@
 
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AvisFields.AVISID)}">
             <%-- FILTRE NUMERO --%>      
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
               <span class="add-on"><fmt:message key="avis.avisID" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
@@ -70,7 +70,7 @@
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AvisFields.DESCRIPCIOID)}">
             <%-- FILTRE NUMERO --%>      
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
               <span class="add-on"><fmt:message key="avis.descripcioID" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
@@ -88,7 +88,7 @@
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AvisFields.ENTITATID)}">
             <%-- FILTRE NUMERO --%>      
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
               <span class="add-on"><fmt:message key="avis.entitatID" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
@@ -106,7 +106,7 @@
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AvisFields.DATAINICI)}">
             <%-- FILTRE DATE --%>
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
               <span class="add-on"><fmt:message key="avis.dataInici" />:</span>
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               <div id="dataIniciDesde" class="input-append">
@@ -152,7 +152,7 @@
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AvisFields.DATAFI)}">
             <%-- FILTRE DATE --%>
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
               <span class="add-on"><fmt:message key="avis.dataFi" />:</span>
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               <div id="dataFiDesde" class="input-append">
@@ -198,7 +198,7 @@
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AvisFields.TIPUS)}">
             <%-- FILTRE NUMERO --%>      
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
               <span class="add-on"><fmt:message key="avis.tipus" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
@@ -216,7 +216,7 @@
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AvisFields.GRAVETAT)}">
             <%-- FILTRE NUMERO --%>      
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
               <span class="add-on"><fmt:message key="avis.gravetat" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
@@ -234,7 +234,7 @@
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AvisFields.PLUGINFRONTID)}">
             <%-- FILTRE NUMERO --%>      
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
               <span class="add-on"><fmt:message key="avis.pluginFrontID" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
@@ -253,7 +253,7 @@
 
       <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">
       <c:if test="${ __entry.key >= 0 && not empty __entry.value.searchBy }">
-      <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+      <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
         <span class="add-on"><fmt:message key="${__entry.value.codeName}" />:</span>
         <fmt:message key="genapp.form.searchby" var="cercaperAF" >
           <fmt:param>

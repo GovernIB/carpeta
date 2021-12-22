@@ -7,14 +7,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[UsuariFields.USERNAME])?'usuari.username':__theForm.labels[UsuariFields.USERNAME]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[UsuariFields.USERNAME]}">
               <i class="fas fa-info-circle" title="${__theForm.help[UsuariFields.USERNAME]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="usuari.username" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuariFields.USERNAME)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,UsuariFields.USERNAME)? ' uneditable-input' : ''}"  style="" maxlength="255" path="usuari.username"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuariFields.USERNAME)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,UsuariFields.USERNAME)? ' uneditable-input' : ''}"  style="" maxlength="255" path="usuari.username"   />
 
            </td>
         </tr>
@@ -25,14 +25,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[UsuariFields.NOM])?'usuari.nom':__theForm.labels[UsuariFields.NOM]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[UsuariFields.NOM]}">
               <i class="fas fa-info-circle" title="${__theForm.help[UsuariFields.NOM]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="usuari.nom" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuariFields.NOM)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,UsuariFields.NOM)? ' uneditable-input' : ''}"  style="" maxlength="255" path="usuari.nom"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuariFields.NOM)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,UsuariFields.NOM)? ' uneditable-input' : ''}"  style="" maxlength="255" path="usuari.nom"   />
 
            </td>
         </tr>
@@ -43,14 +43,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[UsuariFields.LLINATGE1])?'usuari.llinatge1':__theForm.labels[UsuariFields.LLINATGE1]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[UsuariFields.LLINATGE1]}">
               <i class="fas fa-info-circle" title="${__theForm.help[UsuariFields.LLINATGE1]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="usuari.llinatge1" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuariFields.LLINATGE1)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,UsuariFields.LLINATGE1)? ' uneditable-input' : ''}"  style="" maxlength="255" path="usuari.llinatge1"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuariFields.LLINATGE1)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,UsuariFields.LLINATGE1)? ' uneditable-input' : ''}"  style="" maxlength="255" path="usuari.llinatge1"   />
 
            </td>
         </tr>
@@ -61,14 +61,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[UsuariFields.LLINATGE2])?'usuari.llinatge2':__theForm.labels[UsuariFields.LLINATGE2]}" />
+             </label>
               <c:if test="${not empty __theForm.help[UsuariFields.LLINATGE2]}">
               <i class="fas fa-info-circle" title="${__theForm.help[UsuariFields.LLINATGE2]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="usuari.llinatge2" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuariFields.LLINATGE2)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,UsuariFields.LLINATGE2)? ' uneditable-input' : ''}"  style="" maxlength="255" path="usuari.llinatge2"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuariFields.LLINATGE2)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,UsuariFields.LLINATGE2)? ' uneditable-input' : ''}"  style="" maxlength="255" path="usuari.llinatge2"   />
 
            </td>
         </tr>
@@ -79,14 +79,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[UsuariFields.EMAIL])?'usuari.email':__theForm.labels[UsuariFields.EMAIL]}" />
+             </label>
               <c:if test="${not empty __theForm.help[UsuariFields.EMAIL]}">
               <i class="fas fa-info-circle" title="${__theForm.help[UsuariFields.EMAIL]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="usuari.email" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuariFields.EMAIL)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,UsuariFields.EMAIL)? ' uneditable-input' : ''}"  style="" maxlength="255" path="usuari.email"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuariFields.EMAIL)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,UsuariFields.EMAIL)? ' uneditable-input' : ''}"  style="" maxlength="255" path="usuari.email"   />
 
            </td>
         </tr>
@@ -97,14 +97,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[UsuariFields.NIF])?'usuari.nif':__theForm.labels[UsuariFields.NIF]}" />
+             </label>
               <c:if test="${not empty __theForm.help[UsuariFields.NIF]}">
               <i class="fas fa-info-circle" title="${__theForm.help[UsuariFields.NIF]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="usuari.nif" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuariFields.NIF)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,UsuariFields.NIF)? ' uneditable-input' : ''}"  style="" maxlength="255" path="usuari.nif"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,UsuariFields.NIF)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,UsuariFields.NIF)? ' uneditable-input' : ''}"  style="" maxlength="255" path="usuari.nif"   />
 
            </td>
         </tr>
@@ -115,10 +115,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[UsuariFields.DARRERAENTITAT])?'usuari.darreraEntitat':__theForm.labels[UsuariFields.DARRERAENTITAT]}" />
+             </label>
               <c:if test="${not empty __theForm.help[UsuariFields.DARRERAENTITAT]}">
               <i class="fas fa-info-circle" title="${__theForm.help[UsuariFields.DARRERAENTITAT]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="usuari.darreraEntitat" cssClass="errorField alert alert-danger" />
@@ -155,10 +155,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[UsuariFields.IDIOMAID])?'usuari.idiomaID':__theForm.labels[UsuariFields.IDIOMAID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[UsuariFields.IDIOMAID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[UsuariFields.IDIOMAID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="usuari.idiomaID" cssClass="errorField alert alert-danger" />

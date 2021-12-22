@@ -7,10 +7,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[UsuariEntitatFields.USUARIID])?'usuariEntitat.usuariID':__theForm.labels[UsuariEntitatFields.USUARIID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[UsuariEntitatFields.USUARIID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[UsuariEntitatFields.USUARIID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="usuariEntitat.usuariID" cssClass="errorField alert alert-danger" />
@@ -38,10 +38,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[UsuariEntitatFields.ENTITATID])?'usuariEntitat.entitatID':__theForm.labels[UsuariEntitatFields.ENTITATID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[UsuariEntitatFields.ENTITATID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[UsuariEntitatFields.ENTITATID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="usuariEntitat.entitatID" cssClass="errorField alert alert-danger" />
@@ -69,10 +69,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[UsuariEntitatFields.ACTIU])?'usuariEntitat.actiu':__theForm.labels[UsuariEntitatFields.ACTIU]}" />
+             </label>
               <c:if test="${not empty __theForm.help[UsuariEntitatFields.ACTIU]}">
               <i class="fas fa-info-circle" title="${__theForm.help[UsuariEntitatFields.ACTIU]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,UsuariEntitatFields.ACTIU)}" >

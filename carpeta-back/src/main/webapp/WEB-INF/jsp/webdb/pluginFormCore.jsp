@@ -7,10 +7,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginFields.NOMID])?'plugin.nomID':__theForm.labels[PluginFields.NOMID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[PluginFields.NOMID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.NOMID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
        <form:errors path="plugin.nom" cssClass="errorField alert alert-danger" />
@@ -27,7 +27,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_nom_${idioma.idiomaID}">
                <form:errors path="plugin.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="plugin.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,PluginFields.NOMID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,PluginFields.NOMID)}" maxlength="4000" />
+               <form:input path="plugin.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control  ${gen:contains(__theForm.readOnlyFields ,PluginFields.NOMID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,PluginFields.NOMID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -42,10 +42,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginFields.DESCRIPCIOID])?'plugin.descripcioID':__theForm.labels[PluginFields.DESCRIPCIOID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[PluginFields.DESCRIPCIOID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.DESCRIPCIOID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
        <form:errors path="plugin.descripcio" cssClass="errorField alert alert-danger" />
@@ -62,7 +62,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_descripcio_${idioma.idiomaID}">
                <form:errors path="plugin.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="plugin.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,PluginFields.DESCRIPCIOID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,PluginFields.DESCRIPCIOID)}" maxlength="4000" />
+               <form:input path="plugin.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control  ${gen:contains(__theForm.readOnlyFields ,PluginFields.DESCRIPCIOID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,PluginFields.DESCRIPCIOID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -77,10 +77,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginFields.TITOLLLARGID])?'plugin.titolLlargID':__theForm.labels[PluginFields.TITOLLLARGID]}" />
+             </label>
               <c:if test="${not empty __theForm.help[PluginFields.TITOLLLARGID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.TITOLLLARGID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
        <form:errors path="plugin.titolLlarg" cssClass="errorField alert alert-danger" />
@@ -97,7 +97,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_titolLlarg_${idioma.idiomaID}">
                <form:errors path="plugin.titolLlarg.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="plugin.titolLlarg.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,PluginFields.TITOLLLARGID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,PluginFields.TITOLLLARGID)}" maxlength="4000" />
+               <form:input path="plugin.titolLlarg.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control  ${gen:contains(__theForm.readOnlyFields ,PluginFields.TITOLLLARGID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,PluginFields.TITOLLLARGID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -112,10 +112,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginFields.SUBTITOLLLARGID])?'plugin.subtitolLlargID':__theForm.labels[PluginFields.SUBTITOLLLARGID]}" />
+             </label>
               <c:if test="${not empty __theForm.help[PluginFields.SUBTITOLLLARGID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.SUBTITOLLLARGID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
        <form:errors path="plugin.subtitolLlarg" cssClass="errorField alert alert-danger" />
@@ -132,7 +132,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_subtitolLlarg_${idioma.idiomaID}">
                <form:errors path="plugin.subtitolLlarg.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="plugin.subtitolLlarg.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,PluginFields.SUBTITOLLLARGID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,PluginFields.SUBTITOLLLARGID)}" maxlength="4000" />
+               <form:input path="plugin.subtitolLlarg.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control  ${gen:contains(__theForm.readOnlyFields ,PluginFields.SUBTITOLLLARGID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,PluginFields.SUBTITOLLLARGID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -147,14 +147,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginFields.CONTEXT])?'plugin.context':__theForm.labels[PluginFields.CONTEXT]}" />
+             </label>
               <c:if test="${not empty __theForm.help[PluginFields.CONTEXT]}">
               <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.CONTEXT]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="plugin.context" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.CONTEXT)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,PluginFields.CONTEXT)? ' uneditable-input' : ''}"  style="" maxlength="50" path="plugin.context"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.CONTEXT)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,PluginFields.CONTEXT)? ' uneditable-input' : ''}"  style="" maxlength="50" path="plugin.context"   />
 
            </td>
         </tr>
@@ -165,10 +165,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginFields.LOGOID])?'plugin.logoID':__theForm.labels[PluginFields.LOGOID]}" />
+             </label>
               <c:if test="${not empty __theForm.help[PluginFields.LOGOID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.LOGOID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="plugin.logoID" cssClass="errorField alert alert-danger" />
@@ -178,7 +178,7 @@
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginFields.LOGOID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">
                 <div class="custom-file">
-                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.LOGOID)? 'true' : 'false'}" cssClass="custom-file-input form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,PluginFields.LOGOID)? ' uneditable-input' : ''}"   path="logoID" type="file" />
+                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.LOGOID)? 'true' : 'false'}" cssClass="custom-file-input form-control  ${gen:contains(__theForm.readOnlyFields ,PluginFields.LOGOID)? ' uneditable-input' : ''}"   path="logoID" type="file" />
                   <label class="custom-file-label" for="logoID">
                   </label>
                 </div>
@@ -221,14 +221,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginFields.CLASSE])?'plugin.classe':__theForm.labels[PluginFields.CLASSE]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[PluginFields.CLASSE]}">
               <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.CLASSE]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="plugin.classe" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.CLASSE)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,PluginFields.CLASSE)? ' uneditable-input' : ''}"  style="" maxlength="255" path="plugin.classe"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.CLASSE)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,PluginFields.CLASSE)? ' uneditable-input' : ''}"  style="" maxlength="255" path="plugin.classe"   />
 
            </td>
         </tr>
@@ -239,10 +239,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginFields.PROPIETATS])?'plugin.propietats':__theForm.labels[PluginFields.PROPIETATS]}" />
+             </label>
               <c:if test="${not empty __theForm.help[PluginFields.PROPIETATS]}">
               <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.PROPIETATS]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="plugin.propietats" cssClass="errorField alert alert-danger" />
@@ -270,10 +270,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginFields.ACTIU])?'plugin.actiu':__theForm.labels[PluginFields.ACTIU]}" />
+             </label>
               <c:if test="${not empty __theForm.help[PluginFields.ACTIU]}">
               <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.ACTIU]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginFields.ACTIU)}" >
@@ -292,10 +292,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginFields.TIPUS])?'plugin.tipus':__theForm.labels[PluginFields.TIPUS]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[PluginFields.TIPUS]}">
               <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.TIPUS]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="plugin.tipus" cssClass="errorField alert alert-danger" />

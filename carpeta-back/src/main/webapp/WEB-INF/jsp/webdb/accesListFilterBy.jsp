@@ -27,7 +27,7 @@
       
       <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">
       <c:if test="${ __entry.key < 0 && not empty __entry.value.searchBy }">
-      <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+      <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
         <span class="add-on"><fmt:message key="${__entry.value.codeName}" />:</span>
         <fmt:message key="genapp.form.searchby" var="cercaperAF" >
           <fmt:param>
@@ -52,7 +52,7 @@
 
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.ACCESID)}">
             <%-- FILTRE NUMERO --%>      
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
               <span class="add-on"><fmt:message key="acces.accesID" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
@@ -70,7 +70,7 @@
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.TIPUS)}">
             <%-- FILTRE NUMERO --%>      
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
               <span class="add-on"><fmt:message key="acces.tipus" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
@@ -166,7 +166,7 @@
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.QAA)}">
             <%-- FILTRE NUMERO --%>      
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
               <span class="add-on"><fmt:message key="acces.qaa" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
@@ -184,7 +184,7 @@
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.DATAACCES)}">
             <%-- FILTRE DATE --%>
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
               <span class="add-on"><fmt:message key="acces.dataAcces" />:</span>
               <span class="add-on"><fmt:message key="genapp.from" /></span>
               <div id="dataAccesDesde" class="input-append">
@@ -230,7 +230,7 @@
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.PLUGINID)}">
             <%-- FILTRE NUMERO --%>      
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
               <span class="add-on"><fmt:message key="acces.pluginID" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
@@ -248,7 +248,7 @@
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.ENTITATID)}">
             <%-- FILTRE NUMERO --%>      
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
               <span class="add-on"><fmt:message key="acces.entitatID" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
@@ -279,7 +279,7 @@
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.RESULTAT)}">
             <%-- FILTRE NUMERO --%>      
-            <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
               <span class="add-on"><fmt:message key="acces.resultat" />:</span>
 
               <span class="add-on"><fmt:message key="genapp.from" /></span>
@@ -311,7 +311,7 @@
 
       <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">
       <c:if test="${ __entry.key >= 0 && not empty __entry.value.searchBy }">
-      <div class="input-prepend input-append" style="padding-right: 4px;padding-bottom: 4px;">
+      <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
         <span class="add-on"><fmt:message key="${__entry.value.codeName}" />:</span>
         <fmt:message key="genapp.form.searchby" var="cercaperAF" >
           <fmt:param>

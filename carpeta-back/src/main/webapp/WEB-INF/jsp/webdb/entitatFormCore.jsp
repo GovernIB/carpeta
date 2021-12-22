@@ -7,10 +7,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.NOMID])?'entitat.nomID':__theForm.labels[EntitatFields.NOMID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.NOMID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.NOMID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
        <form:errors path="entitat.nom" cssClass="errorField alert alert-danger" />
@@ -27,7 +27,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_nom_${idioma.idiomaID}">
                <form:errors path="entitat.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="entitat.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EntitatFields.NOMID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EntitatFields.NOMID)}" maxlength="4000" />
+               <form:input path="entitat.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.NOMID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EntitatFields.NOMID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -42,10 +42,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.DESCRIPCIOID])?'entitat.descripcioID':__theForm.labels[EntitatFields.DESCRIPCIOID]}" />
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.DESCRIPCIOID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.DESCRIPCIOID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
        <form:errors path="entitat.descripcio" cssClass="errorField alert alert-danger" />
@@ -62,7 +62,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_descripcio_${idioma.idiomaID}">
                <form:errors path="entitat.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="entitat.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EntitatFields.DESCRIPCIOID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EntitatFields.DESCRIPCIOID)}" maxlength="4000" />
+               <form:input path="entitat.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.DESCRIPCIOID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EntitatFields.DESCRIPCIOID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -77,14 +77,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.CODI])?'entitat.codi':__theForm.labels[EntitatFields.CODI]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.CODI]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.CODI]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="entitat.codi" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.CODI)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EntitatFields.CODI)? ' uneditable-input' : ''}"  style="" maxlength="30" path="entitat.codi"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.CODI)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.CODI)? ' uneditable-input' : ''}"  style="" maxlength="30" path="entitat.codi"   />
 
            </td>
         </tr>
@@ -95,14 +95,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.CODIDIR3])?'entitat.codiDir3':__theForm.labels[EntitatFields.CODIDIR3]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.CODIDIR3]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.CODIDIR3]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="entitat.codiDir3" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.CODIDIR3)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EntitatFields.CODIDIR3)? ' uneditable-input' : ''}"  style="" maxlength="255" path="entitat.codiDir3"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.CODIDIR3)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.CODIDIR3)? ' uneditable-input' : ''}"  style="" maxlength="255" path="entitat.codiDir3"   />
 
            </td>
         </tr>
@@ -113,10 +113,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.ACTIVA])?'entitat.activa':__theForm.labels[EntitatFields.ACTIVA]}" />
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.ACTIVA]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.ACTIVA]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,EntitatFields.ACTIVA)}" >
@@ -135,14 +135,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.COLORMENU])?'entitat.colorMenu':__theForm.labels[EntitatFields.COLORMENU]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.COLORMENU]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.COLORMENU]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="entitat.colorMenu" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.COLORMENU)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EntitatFields.COLORMENU)? ' uneditable-input' : ''}"  style="" maxlength="100" path="entitat.colorMenu"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.COLORMENU)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.COLORMENU)? ' uneditable-input' : ''}"  style="" maxlength="100" path="entitat.colorMenu"   />
 
            </td>
         </tr>
@@ -153,10 +153,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.LOGOCAPBACKID])?'entitat.logoCapBackID':__theForm.labels[EntitatFields.LOGOCAPBACKID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.LOGOCAPBACKID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.LOGOCAPBACKID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="entitat.logoCapBackID" cssClass="errorField alert alert-danger" />
@@ -166,7 +166,7 @@
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOCAPBACKID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">
                 <div class="custom-file">
-                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOCAPBACKID)? 'true' : 'false'}" cssClass="custom-file-input form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOCAPBACKID)? ' uneditable-input' : ''}"   path="logoCapBackID" type="file" />
+                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOCAPBACKID)? 'true' : 'false'}" cssClass="custom-file-input form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOCAPBACKID)? ' uneditable-input' : ''}"   path="logoCapBackID" type="file" />
                   <label class="custom-file-label" for="logoCapBackID">
                   </label>
                 </div>
@@ -205,10 +205,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.LOGOPEUBACKID])?'entitat.logoPeuBackID':__theForm.labels[EntitatFields.LOGOPEUBACKID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.LOGOPEUBACKID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.LOGOPEUBACKID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="entitat.logoPeuBackID" cssClass="errorField alert alert-danger" />
@@ -218,7 +218,7 @@
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOPEUBACKID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">
                 <div class="custom-file">
-                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOPEUBACKID)? 'true' : 'false'}" cssClass="custom-file-input form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOPEUBACKID)? ' uneditable-input' : ''}"   path="logoPeuBackID" type="file" />
+                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOPEUBACKID)? 'true' : 'false'}" cssClass="custom-file-input form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOPEUBACKID)? ' uneditable-input' : ''}"   path="logoPeuBackID" type="file" />
                   <label class="custom-file-label" for="logoPeuBackID">
                   </label>
                 </div>
@@ -257,10 +257,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.LOGOLATERALFRONTID])?'entitat.logoLateralFrontID':__theForm.labels[EntitatFields.LOGOLATERALFRONTID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.LOGOLATERALFRONTID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.LOGOLATERALFRONTID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="entitat.logoLateralFrontID" cssClass="errorField alert alert-danger" />
@@ -270,7 +270,7 @@
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOLATERALFRONTID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">
                 <div class="custom-file">
-                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOLATERALFRONTID)? 'true' : 'false'}" cssClass="custom-file-input form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOLATERALFRONTID)? ' uneditable-input' : ''}"   path="logoLateralFrontID" type="file" />
+                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOLATERALFRONTID)? 'true' : 'false'}" cssClass="custom-file-input form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOLATERALFRONTID)? ' uneditable-input' : ''}"   path="logoLateralFrontID" type="file" />
                   <label class="custom-file-label" for="logoLateralFrontID">
                   </label>
                 </div>
@@ -309,14 +309,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.VERSIO])?'entitat.versio':__theForm.labels[EntitatFields.VERSIO]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.VERSIO]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.VERSIO]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="entitat.versio" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.VERSIO)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EntitatFields.VERSIO)? ' uneditable-input' : ''}"  style="" maxlength="50" path="entitat.versio"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.VERSIO)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.VERSIO)? ' uneditable-input' : ''}"  style="" maxlength="50" path="entitat.versio"   />
 
            </td>
         </tr>
@@ -327,10 +327,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.ICONID])?'entitat.iconID':__theForm.labels[EntitatFields.ICONID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.ICONID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.ICONID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="entitat.iconID" cssClass="errorField alert alert-danger" />
@@ -340,7 +340,7 @@
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,EntitatFields.ICONID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">
                 <div class="custom-file">
-                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.ICONID)? 'true' : 'false'}" cssClass="custom-file-input form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EntitatFields.ICONID)? ' uneditable-input' : ''}"   path="iconID" type="file" />
+                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.ICONID)? 'true' : 'false'}" cssClass="custom-file-input form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.ICONID)? ' uneditable-input' : ''}"   path="iconID" type="file" />
                   <label class="custom-file-label" for="iconID">
                   </label>
                 </div>
@@ -379,10 +379,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.WEBENTITAT])?'entitat.webEntitat':__theForm.labels[EntitatFields.WEBENTITAT]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.WEBENTITAT]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.WEBENTITAT]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
            <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.WEBENTITAT)}">
@@ -396,7 +396,7 @@
            <c:if test="${not (gen:contains(__theForm.readOnlyFields ,EntitatFields.WEBENTITAT))}">
 
             <form:errors path="entitat.webEntitat" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.WEBENTITAT)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EntitatFields.WEBENTITAT)? ' uneditable-input' : ''}"  style="" maxlength="255" path="entitat.webEntitat"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.WEBENTITAT)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.WEBENTITAT)? ' uneditable-input' : ''}"  style="" maxlength="255" path="entitat.webEntitat"   />
 
            </c:if>
 
@@ -409,10 +409,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.ENTITATDESCFRONT])?'entitat.entitatDescFront':__theForm.labels[EntitatFields.ENTITATDESCFRONT]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.ENTITATDESCFRONT]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.ENTITATDESCFRONT]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="entitat.entitatDescFront" cssClass="errorField alert alert-danger" />
@@ -440,10 +440,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.SUPORTWEB])?'entitat.suportWeb':__theForm.labels[EntitatFields.SUPORTWEB]}" />
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.SUPORTWEB]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.SUPORTWEB]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
            <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTWEB)}">
@@ -457,7 +457,7 @@
            <c:if test="${not (gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTWEB))}">
 
             <form:errors path="entitat.suportWeb" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTWEB)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTWEB)? ' uneditable-input' : ''}"  style="" maxlength="255" path="entitat.suportWeb"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTWEB)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTWEB)? ' uneditable-input' : ''}"  style="" maxlength="255" path="entitat.suportWeb"   />
 
            </c:if>
 
@@ -470,14 +470,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.SUPORTTELEFON])?'entitat.suportTelefon':__theForm.labels[EntitatFields.SUPORTTELEFON]}" />
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.SUPORTTELEFON]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.SUPORTTELEFON]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="entitat.suportTelefon" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTTELEFON)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTTELEFON)? ' uneditable-input' : ''}"  style="" maxlength="255" path="entitat.suportTelefon"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTTELEFON)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTTELEFON)? ' uneditable-input' : ''}"  style="" maxlength="255" path="entitat.suportTelefon"   />
 
            </td>
         </tr>
@@ -488,14 +488,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.SUPORTEMAIL])?'entitat.suportEmail':__theForm.labels[EntitatFields.SUPORTEMAIL]}" />
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.SUPORTEMAIL]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.SUPORTEMAIL]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="entitat.suportEmail" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTEMAIL)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTEMAIL)? ' uneditable-input' : ''}"  style="" maxlength="255" path="entitat.suportEmail"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTEMAIL)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTEMAIL)? ' uneditable-input' : ''}"  style="" maxlength="255" path="entitat.suportEmail"   />
 
            </td>
         </tr>
@@ -506,14 +506,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.SUPORTFAQ])?'entitat.suportFAQ':__theForm.labels[EntitatFields.SUPORTFAQ]}" />
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.SUPORTFAQ]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.SUPORTFAQ]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="entitat.suportFAQ" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTFAQ)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTFAQ)? ' uneditable-input' : ''}"  style="" maxlength="255" path="entitat.suportFAQ"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTFAQ)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTFAQ)? ' uneditable-input' : ''}"  style="" maxlength="255" path="entitat.suportFAQ"   />
 
            </td>
         </tr>
@@ -524,14 +524,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.SUPORTQSSI])?'entitat.suportqssi':__theForm.labels[EntitatFields.SUPORTQSSI]}" />
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.SUPORTQSSI]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.SUPORTQSSI]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="entitat.suportqssi" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTQSSI)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTQSSI)? ' uneditable-input' : ''}"  style="" maxlength="255" path="entitat.suportqssi"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTQSSI)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTQSSI)? ' uneditable-input' : ''}"  style="" maxlength="255" path="entitat.suportqssi"   />
 
            </td>
         </tr>
@@ -542,14 +542,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.SUPORTAUTENTICACIO])?'entitat.suportautenticacio':__theForm.labels[EntitatFields.SUPORTAUTENTICACIO]}" />
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.SUPORTAUTENTICACIO]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.SUPORTAUTENTICACIO]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="entitat.suportautenticacio" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTAUTENTICACIO)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTAUTENTICACIO)? ' uneditable-input' : ''}"  style="" maxlength="255" path="entitat.suportautenticacio"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTAUTENTICACIO)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.SUPORTAUTENTICACIO)? ' uneditable-input' : ''}"  style="" maxlength="255" path="entitat.suportautenticacio"   />
 
            </td>
         </tr>
@@ -560,10 +560,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.PLUGINLOGINID])?'entitat.pluginLoginID':__theForm.labels[EntitatFields.PLUGINLOGINID]}" />
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.PLUGINLOGINID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.PLUGINLOGINID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="entitat.pluginLoginID" cssClass="errorField alert alert-danger" />
@@ -600,10 +600,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.LOGINTEXTID])?'entitat.loginTextID':__theForm.labels[EntitatFields.LOGINTEXTID]}" />
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.LOGINTEXTID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.LOGINTEXTID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
        <form:errors path="entitat.loginText" cssClass="errorField alert alert-danger" />
@@ -620,7 +620,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_loginText_${idioma.idiomaID}">
                <form:errors path="entitat.loginText.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="entitat.loginText.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGINTEXTID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGINTEXTID)}" maxlength="4000" />
+               <form:input path="entitat.loginText.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGINTEXTID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGINTEXTID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -635,10 +635,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.FITXERCSSID])?'entitat.fitxerCssID':__theForm.labels[EntitatFields.FITXERCSSID]}" />
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.FITXERCSSID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.FITXERCSSID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="entitat.fitxerCssID" cssClass="errorField alert alert-danger" />
@@ -648,7 +648,7 @@
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,EntitatFields.FITXERCSSID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">
                 <div class="custom-file">
-                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.FITXERCSSID)? 'true' : 'false'}" cssClass="custom-file-input form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EntitatFields.FITXERCSSID)? ' uneditable-input' : ''}"   path="fitxerCssID" type="file" />
+                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.FITXERCSSID)? 'true' : 'false'}" cssClass="custom-file-input form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.FITXERCSSID)? ' uneditable-input' : ''}"   path="fitxerCssID" type="file" />
                   <label class="custom-file-label" for="fitxerCssID">
                   </label>
                 </div>
@@ -691,14 +691,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.CONTEXT])?'entitat.context':__theForm.labels[EntitatFields.CONTEXT]}" />
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.CONTEXT]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.CONTEXT]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="entitat.context" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.CONTEXT)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EntitatFields.CONTEXT)? ' uneditable-input' : ''}"  style="" maxlength="255" path="entitat.context"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.CONTEXT)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.CONTEXT)? ' uneditable-input' : ''}"  style="" maxlength="255" path="entitat.context"   />
 
            </td>
         </tr>
@@ -709,14 +709,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.COMMIT])?'entitat.commit':__theForm.labels[EntitatFields.COMMIT]}" />
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.COMMIT]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.COMMIT]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="entitat.commit" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.COMMIT)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,EntitatFields.COMMIT)? ' uneditable-input' : ''}"  style="" maxlength="255" path="entitat.commit"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EntitatFields.COMMIT)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,EntitatFields.COMMIT)? ' uneditable-input' : ''}"  style="" maxlength="255" path="entitat.commit"   />
 
            </td>
         </tr>
@@ -727,10 +727,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.AVISLEGALCA])?'entitat.avisLegalCa':__theForm.labels[EntitatFields.AVISLEGALCA]}" />
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.AVISLEGALCA]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.AVISLEGALCA]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="entitat.avisLegalCa" cssClass="errorField alert alert-danger" />
@@ -744,10 +744,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.AVISLEGALES])?'entitat.avisLegalEs':__theForm.labels[EntitatFields.AVISLEGALES]}" />
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.AVISLEGALES]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.AVISLEGALES]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="entitat.avisLegalEs" cssClass="errorField alert alert-danger" />
@@ -761,10 +761,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.ACCESSIBILITATCA])?'entitat.accessibilitatCa':__theForm.labels[EntitatFields.ACCESSIBILITATCA]}" />
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.ACCESSIBILITATCA]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.ACCESSIBILITATCA]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="entitat.accessibilitatCa" cssClass="errorField alert alert-danger" />
@@ -778,10 +778,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[EntitatFields.ACCESSIBILITATES])?'entitat.accessibilitatEs':__theForm.labels[EntitatFields.ACCESSIBILITATES]}" />
+             </label>
               <c:if test="${not empty __theForm.help[EntitatFields.ACCESSIBILITATES]}">
               <i class="fas fa-info-circle" title="${__theForm.help[EntitatFields.ACCESSIBILITATES]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="entitat.accessibilitatEs" cssClass="errorField alert alert-danger" />

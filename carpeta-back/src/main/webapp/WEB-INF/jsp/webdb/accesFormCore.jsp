@@ -7,10 +7,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AccesFields.TIPUS])?'acces.tipus':__theForm.labels[AccesFields.TIPUS]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[AccesFields.TIPUS]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.TIPUS]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="acces.tipus" cssClass="errorField alert alert-danger" />
@@ -38,14 +38,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AccesFields.NOM])?'acces.nom':__theForm.labels[AccesFields.NOM]}" />
+             </label>
               <c:if test="${not empty __theForm.help[AccesFields.NOM]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.NOM]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="acces.nom" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.NOM)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,AccesFields.NOM)? ' uneditable-input' : ''}"  style="" maxlength="255" path="acces.nom"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.NOM)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,AccesFields.NOM)? ' uneditable-input' : ''}"  style="" maxlength="255" path="acces.nom"   />
 
            </td>
         </tr>
@@ -56,14 +56,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AccesFields.LLINATGES])?'acces.llinatges':__theForm.labels[AccesFields.LLINATGES]}" />
+             </label>
               <c:if test="${not empty __theForm.help[AccesFields.LLINATGES]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.LLINATGES]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="acces.llinatges" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.LLINATGES)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,AccesFields.LLINATGES)? ' uneditable-input' : ''}"  style="" maxlength="255" path="acces.llinatges"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.LLINATGES)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,AccesFields.LLINATGES)? ' uneditable-input' : ''}"  style="" maxlength="255" path="acces.llinatges"   />
 
            </td>
         </tr>
@@ -74,14 +74,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AccesFields.NIF])?'acces.nif':__theForm.labels[AccesFields.NIF]}" />
+             </label>
               <c:if test="${not empty __theForm.help[AccesFields.NIF]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.NIF]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="acces.nif" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.NIF)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,AccesFields.NIF)? ' uneditable-input' : ''}"  style="" maxlength="50" path="acces.nif"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.NIF)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,AccesFields.NIF)? ' uneditable-input' : ''}"  style="" maxlength="50" path="acces.nif"   />
 
            </td>
         </tr>
@@ -92,14 +92,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AccesFields.IP])?'acces.ip':__theForm.labels[AccesFields.IP]}" />
+             </label>
               <c:if test="${not empty __theForm.help[AccesFields.IP]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.IP]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="acces.ip" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.IP)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,AccesFields.IP)? ' uneditable-input' : ''}"  style="" maxlength="100" path="acces.ip"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.IP)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,AccesFields.IP)? ' uneditable-input' : ''}"  style="" maxlength="100" path="acces.ip"   />
 
            </td>
         </tr>
@@ -110,14 +110,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AccesFields.PROVEIDORIDENTITAT])?'acces.proveidorIdentitat':__theForm.labels[AccesFields.PROVEIDORIDENTITAT]}" />
+             </label>
               <c:if test="${not empty __theForm.help[AccesFields.PROVEIDORIDENTITAT]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.PROVEIDORIDENTITAT]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="acces.proveidorIdentitat" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.PROVEIDORIDENTITAT)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,AccesFields.PROVEIDORIDENTITAT)? ' uneditable-input' : ''}"  style="" maxlength="255" path="acces.proveidorIdentitat"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.PROVEIDORIDENTITAT)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,AccesFields.PROVEIDORIDENTITAT)? ' uneditable-input' : ''}"  style="" maxlength="255" path="acces.proveidorIdentitat"   />
 
            </td>
         </tr>
@@ -128,10 +128,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AccesFields.METODEAUTENTICACIO])?'acces.metodeAutenticacio':__theForm.labels[AccesFields.METODEAUTENTICACIO]}" />
+             </label>
               <c:if test="${not empty __theForm.help[AccesFields.METODEAUTENTICACIO]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.METODEAUTENTICACIO]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="acces.metodeAutenticacio" cssClass="errorField alert alert-danger" />
@@ -159,14 +159,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AccesFields.QAA])?'acces.qaa':__theForm.labels[AccesFields.QAA]}" />
+             </label>
               <c:if test="${not empty __theForm.help[AccesFields.QAA]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.QAA]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="acces.qaa" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.QAA)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,AccesFields.QAA)? ' uneditable-input' : ''}"  style=""  path="acces.qaa"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.QAA)? 'true' : 'false'}" cssClass="w-25 form-control  ${gen:contains(__theForm.readOnlyFields ,AccesFields.QAA)? ' uneditable-input' : ''}"  style=""  path="acces.qaa"   />
 
            </td>
         </tr>
@@ -177,10 +177,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AccesFields.DATAACCES])?'acces.dataAcces':__theForm.labels[AccesFields.DATAACCES]}" />
+             </label>
               <c:if test="${not empty __theForm.help[AccesFields.DATAACCES]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.DATAACCES]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="acces.dataAcces" cssClass="errorField alert alert-danger" />
@@ -217,10 +217,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AccesFields.PLUGINID])?'acces.pluginID':__theForm.labels[AccesFields.PLUGINID]}" />
+             </label>
               <c:if test="${not empty __theForm.help[AccesFields.PLUGINID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.PLUGINID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="acces.pluginID" cssClass="errorField alert alert-danger" />
@@ -257,10 +257,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AccesFields.ENTITATID])?'acces.entitatID':__theForm.labels[AccesFields.ENTITATID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[AccesFields.ENTITATID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.ENTITATID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="acces.entitatID" cssClass="errorField alert alert-danger" />
@@ -288,14 +288,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AccesFields.IDIOMA])?'acces.idioma':__theForm.labels[AccesFields.IDIOMA]}" />
+             </label>
               <c:if test="${not empty __theForm.help[AccesFields.IDIOMA]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.IDIOMA]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="acces.idioma" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.IDIOMA)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,AccesFields.IDIOMA)? ' uneditable-input' : ''}"  style="" maxlength="50" path="acces.idioma"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.IDIOMA)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,AccesFields.IDIOMA)? ' uneditable-input' : ''}"  style="" maxlength="50" path="acces.idioma"   />
 
            </td>
         </tr>
@@ -306,10 +306,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AccesFields.RESULTAT])?'acces.resultat':__theForm.labels[AccesFields.RESULTAT]}" />
+             </label>
               <c:if test="${not empty __theForm.help[AccesFields.RESULTAT]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.RESULTAT]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,AccesFields.RESULTAT)}" >
@@ -328,14 +328,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[AccesFields.IDSESSIO])?'acces.idsessio':__theForm.labels[AccesFields.IDSESSIO]}" />
+             </label>
               <c:if test="${not empty __theForm.help[AccesFields.IDSESSIO]}">
               <i class="fas fa-info-circle" title="${__theForm.help[AccesFields.IDSESSIO]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="acces.idsessio" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.IDSESSIO)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,AccesFields.IDSESSIO)? ' uneditable-input' : ''}"  style="" maxlength="255" path="acces.idsessio"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.IDSESSIO)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,AccesFields.IDSESSIO)? ' uneditable-input' : ''}"  style="" maxlength="255" path="acces.idsessio"   />
 
            </td>
         </tr>

@@ -7,10 +7,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[SeccioFields.NOMID])?'seccio.nomID':__theForm.labels[SeccioFields.NOMID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[SeccioFields.NOMID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[SeccioFields.NOMID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
        <form:errors path="seccio.nom" cssClass="errorField alert alert-danger" />
@@ -27,7 +27,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_nom_${idioma.idiomaID}">
                <form:errors path="seccio.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="seccio.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,SeccioFields.NOMID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,SeccioFields.NOMID)}" maxlength="4000" />
+               <form:input path="seccio.nom.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control  ${gen:contains(__theForm.readOnlyFields ,SeccioFields.NOMID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,SeccioFields.NOMID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -42,10 +42,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[SeccioFields.DESCRIPCIOID])?'seccio.descripcioID':__theForm.labels[SeccioFields.DESCRIPCIOID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[SeccioFields.DESCRIPCIOID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[SeccioFields.DESCRIPCIOID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
        <form:errors path="seccio.descripcio" cssClass="errorField alert alert-danger" />
@@ -62,7 +62,7 @@
            <c:forEach items="${__theForm.idiomesTraduccio}" var="idioma" varStatus="counter">
            <div class="tab-pane ${(counter.index == 0)? 'active':'' }" id="${counter.index}_tab_descripcio_${idioma.idiomaID}">
                <form:errors path="seccio.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="errorField alert alert-danger"/>
-               <form:input path="seccio.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,SeccioFields.DESCRIPCIOID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,SeccioFields.DESCRIPCIOID)}" maxlength="4000" />
+               <form:input path="seccio.descripcio.traduccions['${idioma.idiomaID}'].valor" cssClass="form-control  ${gen:contains(__theForm.readOnlyFields ,SeccioFields.DESCRIPCIOID)? ' uneditable-input' : ''}" readonly="${gen:contains(__theForm.readOnlyFields ,SeccioFields.DESCRIPCIOID)}" maxlength="4000" />
            </div>
            </c:forEach>
          </div>
@@ -77,14 +77,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[SeccioFields.CONTEXTE])?'seccio.contexte':__theForm.labels[SeccioFields.CONTEXTE]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[SeccioFields.CONTEXTE]}">
               <i class="fas fa-info-circle" title="${__theForm.help[SeccioFields.CONTEXTE]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="seccio.contexte" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,SeccioFields.CONTEXTE)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,SeccioFields.CONTEXTE)? ' uneditable-input' : ''}"  style="" maxlength="50" path="seccio.contexte"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,SeccioFields.CONTEXTE)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,SeccioFields.CONTEXTE)? ' uneditable-input' : ''}"  style="" maxlength="50" path="seccio.contexte"   />
 
            </td>
         </tr>
@@ -95,10 +95,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[SeccioFields.ACTIVA])?'seccio.activa':__theForm.labels[SeccioFields.ACTIVA]}" />
+             </label>
               <c:if test="${not empty __theForm.help[SeccioFields.ACTIVA]}">
               <i class="fas fa-info-circle" title="${__theForm.help[SeccioFields.ACTIVA]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,SeccioFields.ACTIVA)}" >
@@ -117,10 +117,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[SeccioFields.ICONAID])?'seccio.iconaID':__theForm.labels[SeccioFields.ICONAID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[SeccioFields.ICONAID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[SeccioFields.ICONAID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
               <form:errors path="seccio.iconaID" cssClass="errorField alert alert-danger" />
@@ -130,7 +130,7 @@
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,SeccioFields.ICONAID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">
                 <div class="custom-file">
-                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,SeccioFields.ICONAID)? 'true' : 'false'}" cssClass="custom-file-input form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,SeccioFields.ICONAID)? ' uneditable-input' : ''}"   path="iconaID" type="file" />
+                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,SeccioFields.ICONAID)? 'true' : 'false'}" cssClass="custom-file-input form-control  ${gen:contains(__theForm.readOnlyFields ,SeccioFields.ICONAID)? ' uneditable-input' : ''}"   path="iconaID" type="file" />
                   <label class="custom-file-label" for="iconaID">
                   </label>
                 </div>
@@ -169,10 +169,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[SeccioFields.SECCIOPAREID])?'seccio.seccioPareID':__theForm.labels[SeccioFields.SECCIOPAREID]}" />
+             </label>
               <c:if test="${not empty __theForm.help[SeccioFields.SECCIOPAREID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[SeccioFields.SECCIOPAREID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="seccio.seccioPareID" cssClass="errorField alert alert-danger" />
@@ -209,10 +209,10 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[SeccioFields.ENTITATID])?'seccio.entitatID':__theForm.labels[SeccioFields.ENTITATID]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[SeccioFields.ENTITATID]}">
               <i class="fas fa-info-circle" title="${__theForm.help[SeccioFields.ENTITATID]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
           <form:errors path="seccio.entitatID" cssClass="errorField alert alert-danger" />
@@ -240,14 +240,14 @@
           <td>
             <label>
               <fmt:message key="${(empty __theForm.labels[SeccioFields.ORDRE])?'seccio.ordre':__theForm.labels[SeccioFields.ORDRE]}" /> &nbsp;(*)
+             </label>
               <c:if test="${not empty __theForm.help[SeccioFields.ORDRE]}">
               <i class="fas fa-info-circle" title="${__theForm.help[SeccioFields.ORDRE]}" ></i>
               </c:if>
-             </label>
             </td>
             <td>
             <form:errors path="seccio.ordre" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,SeccioFields.ORDRE)? 'true' : 'false'}" cssClass="form-control col-md-9-optional ${gen:contains(__theForm.readOnlyFields ,SeccioFields.ORDRE)? ' uneditable-input' : ''}"  style=""  path="seccio.ordre"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,SeccioFields.ORDRE)? 'true' : 'false'}" cssClass="w-25 form-control  ${gen:contains(__theForm.readOnlyFields ,SeccioFields.ORDRE)? ' uneditable-input' : ''}"  style=""  path="seccio.ordre"   />
 
            </td>
         </tr>
