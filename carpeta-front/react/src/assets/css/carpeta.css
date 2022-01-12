@@ -800,6 +800,9 @@ ul.pagination li.page-item.active {
     align-items: flex-start;
     width: 100%;
 }
+.borderError{
+	border: 1px solid red !important;
+}
 
 #dadespinbalayudascontainer .descarregaJustificant { text-align:center; } 
 #dadespinbalayudascontainer .descarregaJustificant span.oi { font-size: 3rem; display:block; margin: 10px; }

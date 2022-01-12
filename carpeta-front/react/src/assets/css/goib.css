@@ -1170,7 +1170,7 @@ footer * , header *, header *:before, header *:after, footer *:before, footer *:
 
 @media ( -webkit-min-device-pixel-ratio : 2) , ( min-resolution : 192dpi) {
 	#imagenCabecera1 {
-		background-image: url("/intranet/imgs/capsal/logo02.gif");
+		background-image: url("/imgs/capsal/logo02.gif");
 		background-size: contain;
 		margin: 0 auto;
 	}
