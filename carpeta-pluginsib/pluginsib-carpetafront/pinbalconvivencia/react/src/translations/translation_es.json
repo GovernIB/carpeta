@@ -1,0 +1,21 @@
+{
+  "pinbalConvivenciaTitulo": "Estar al corriente de las obligaciones tributarias con la Administración de la Comunidad Autónoma de las Illes Balears",
+  "pinbalConvivenciaDescripcion": "Desde aqui puede consultar el resultado de la consulta",
+  "pinbalConvivenciaDni": "DNI",
+  "pinbalConvivenciaNom": "Nombre",
+  "pinbalConvivenciaApellido1" : "Primer Apellido",
+  "pinbalConvivenciaApellido2" : "Segundo Apellido",
+  "pinbalConvivenciaResultado": "Resultado de la consulta",
+  "pinbalConvivenciaFecha": "En fecha ",
+  "pinbalConvivenciaHora": " a las ",
+  "pinbalConvivenciaH": "h:",
+  "pinbalConvivenciaCodigo0": "El contribuyente se encuentra al corriente en sus obligaciones tributarias.",
+  "pinbalConvivenciaCodigo1": "El contribuyente no se encuentra al corriente en sus obligaciones tributarias.",
+  "pinbalConvivenciaCodigo2": "Se ha encontrado más de un registro para los datos del titular indicados.",
+  "pinbalConvivenciaCodigo3": "Para la persona consultada no hay información en la CCAA.",
+  "pinbalConvivenciaMunicipioLabel": "Selecciona una localidad del desplegable: ",
+  "pinbalconvivenciaConsultaBtn": "Consultar",
+  "pinbalConvivenciaCodigo0003" : "Tramitada",
+  "pinbalConvivenciaCodigo0233" : "Titular no identificado",
+  "pinbalConvivenciaCodigo0232" : "Existe más de un registro para los datos aportados"
+}

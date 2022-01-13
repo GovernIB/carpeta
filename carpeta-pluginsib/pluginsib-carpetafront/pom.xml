@@ -28,6 +28,7 @@
 		<module>pinbalcontrataciones</module>
 		<module>pinbaldiscapacidad</module>
 		<module>pinbalmatricula</module>
+		<module>pinbalconvivencia</module>
     </modules>
 
     <dependencies>

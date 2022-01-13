@@ -1,0 +1,21 @@
+{
+  "pinbalConvivenciaTitulo": "Estar al corrent de pagament amb l'Administració de la Comunitat Autònoma de les Illes Balears per ajudes i subvencions",
+  "pinbalConvivenciaDescripcion": "Des d'aquí pot consultar el resultat de la seva consulta: ",
+  "pinbalConvivenciaDni": "DNI",
+  "pinbalConvivenciaNom": "Nom",
+  "pinbalConvivenciaApellido1" : "Primer Cognom",
+  "pinbalConvivenciaApellido2" : "Segon Cognom",
+  "pinbalConvivenciaResultado": "Resultado de la consulta",
+  "pinbalConvivenciaFecha": "A dia ",
+  "pinbalConvivenciaHora": " a les ",
+  "pinbalConvivenciaH": "h:",
+  "pinbalConvivenciaCodigo0": "El contribuent es troba al corrent en les seves obligacions tributàries.",
+  "pinbalConvivenciaCodigo1": "El contribuent no es troba al corrent en les seves obligacions tributàries.",
+  "pinbalConvivenciaCodigo2": "S'ha trobat més d'un registre per a les dades del titular indicats.",
+  "pinbalConvivenciaCodigo3": "Per a la persona consultada no hi ha informació en la CCAA.",
+  "pinbalConvivenciaMunicipioLabel": "Seleccioni un municipi del desplegable: ",
+  "pinbalconvivenciaConsultaBtn": "Consulta",
+  "pinbalConvivenciaCodigo0003" : "Tramitada",
+  "pinbalConvivenciaCodigo0233" : "Titular no identificat",
+  "pinbalConvivenciaCodigo0232" : "Hi ha més d'un registre per les dades aportades"
+}

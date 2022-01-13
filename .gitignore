@@ -106,7 +106,10 @@ nb-configuration.xml
 /carpeta-pluginsib/pluginsib-carpetafront/pinbaldiscapacidad/plugin.properties
 /carpeta-api-client
 /carpeta-api-client-generator
-/carpeta-pluginsib/pluginsib-carpetafront/pinbalconvivencia
+/carpeta-pluginsib/pluginsib-carpetafront/pinbalconvivencia/react/node_modules
+/carpeta-pluginsib/pluginsib-carpetafront/pinbalconvivencia/react/package-lock.json
+/carpeta-pluginsib/pluginsib-carpetafront/pinbalconvivencia/react/readme.txt
+/carpeta-pluginsib/pluginsib-carpetafront/pinbalconvivencia/plugin.properties
 /carpeta-ws
 /carpeta-front/src/main/webapp/src/assets
 /carpeta-front/src/main/webapp/src
