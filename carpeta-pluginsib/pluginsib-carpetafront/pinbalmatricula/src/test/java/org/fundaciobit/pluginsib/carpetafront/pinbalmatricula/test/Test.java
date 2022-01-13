@@ -10,6 +10,8 @@ import org.fundaciobit.pluginsib.carpetafront.pinbalmatricula.PinbalMatriculaCar
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.pinbal.client.recobriment.model.ScspJustificante;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class Test {
 
 
@@ -29,8 +31,10 @@ public class Test {
 			UserData userData = new UserData();
 			
 			String absolutePath = "";
+
+			HttpServletRequest request = null;
 			
-			DatosMatricula datosMatricula = pinbalMatricula.cridadaRest(userData, absolutePath);
+			DatosMatricula datosMatricula = pinbalMatricula.cridadaRest(userData, absolutePath, request);
 			
 			if(datosMatricula.getError() != null && !datosMatricula.getError().isEmpty()) {
 				System.err.println("Error:" + datosMatricula.getError());
