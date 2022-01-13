@@ -37,7 +37,8 @@ class DatosConvivencia extends Component {
             municipio: this.state.municipio
         }
 
-        console.log(datos);
+        document.getElementById("formulario").classList.add("d-none");
+        document.getElementById("carregant").classList.remove("d-none");
 
         axios.post(url2, {datos} ).then(res => {
 
@@ -46,6 +47,9 @@ class DatosConvivencia extends Component {
                 isLoaded: true,
                 data: res.data,
             });
+
+            document.getElementById("carregant").classList.add("d-none");
+
         }).catch(function (error) {
 
             console.log(JSON.stringify(error));
@@ -60,6 +64,8 @@ class DatosConvivencia extends Component {
                 isLoaded: true,
                 data: restdata
             });
+
+            document.getElementById("carregant").classList.add("d-none");
         });
 
         return false;
@@ -76,9 +82,8 @@ class DatosConvivencia extends Component {
 
         if (!isLoaded) {
            
-             content = 
-                    <>
-                        <form id="formulario" onSubmit={this.handleSubmit} method="GET">
+             content =  <>
+                 <form id="formulario" onSubmit={this.handleSubmit} method="GET">
                             <div className="form-group">
                                 <label for="codigoMunicipio">{t('pinbalConvivenciaMunicipioLabel')}</label>
                                 <div class="col-md-4 p-0 col-sm-6" style={{width:'90%'}}>
@@ -91,11 +96,12 @@ class DatosConvivencia extends Component {
                             </div>
                             <button type="submit" className="btn btn-primary">{t('pinbalconvivenciaConsultaBtn')}</button>
                         </form>
-                    </>;
+                </>;
 
         } else {
         
             const data = this.state.data;
+
             if (data.error) {  
                 content = <div className="alert alert-danger" role="alert">{data.error}</div>;
             } else {
@@ -104,13 +110,9 @@ class DatosConvivencia extends Component {
 
                 if ( data.codigo == '0003'){
 
-                    let periodosInscripcionContent; 
-                    let periodosInscripcionArray;
+                    let periodosInscripcionContent = '';                    
 
-                    Object.entries(data.periodosInscripcion).forEach( ([clave,valor]) => periodosInscripcionArray.push(<li>{clave} {valor}</li>) );
-
-                    console.log(periodosInscripcionArray);
-                    
+                    Object.entries(data.periodosInscripcion).forEach( ([clave,valor]) => periodosInscripcionContent += `<li>${clave} ${valor}</li>`);
 
                     alerta = <>
                         <div className="alert alert-success" role="alert">
@@ -123,11 +125,11 @@ class DatosConvivencia extends Component {
                                     <dt className="col-sm-3">Distrito</dt>
                                     <dd className="col-sm-7">{data.distrito}</dd>
                                 </div>
-                                <div class="mt-3">
+                                <div>
                                     <dt className="col-sm-3">Sección</dt>
                                     <dd className="col-sm-7">{data.seccion}</dd>
                                 </div>
-                                <div class="mt-3">
+                                <div>
                                     <dt className="col-sm-3">Hoja</dt>
                                     <dd className="col-sm-7">{data.hoja}</dd>
                                 </div>
@@ -175,7 +177,7 @@ class DatosConvivencia extends Component {
                             {periodosInscripcionContent && <dl className="row">
                                 <div>
                                     <dt className="col-sm-3">Periodos</dt>
-                                    <dd className="col-sm-7"><ul>{periodosInscripcionContent}</ul></dd>
+                                    <dd className="col-sm-7"><ul dangerouslySetInnerHTML={{__html: periodosInscripcionContent}}></ul></dd>
                                 </div>
                             </dl>}
                         </div>
@@ -203,6 +205,9 @@ class DatosConvivencia extends Component {
                     <div className="infoNoMenu">
                         <div className="col-md-12 border-0 float-left p-0">
                             {content}
+                            <div  id="carregant" className="loader-container centrat d-none">
+                                <div className="loader"/>
+                            </div>
                             <div className="col-md-12 border-0 float-left p-0" id="botoTornarDadesP" style={{ marginTop: '20px' }}>
                                 <button type="button" data-toggle="modal" onClick={() => {
                                     window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
