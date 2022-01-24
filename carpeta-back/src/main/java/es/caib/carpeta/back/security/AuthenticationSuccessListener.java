@@ -414,10 +414,12 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
             Long darreraEntitatUsuari = usuariPersona.getDarreraEntitat();
             if (darreraEntitatUsuari != null) {
                 Set<GrantedAuthority> listaAutorizaciones = rolesPerEntitat.get(darreraEntitatUsuari);
-                for (GrantedAuthority autorizacion : listaAutorizaciones) {
-                    if (Constants.ROLE_ADMIN.equals(autorizacion.getAuthority())) {
-                        entitatIDActual = darreraEntitatUsuari;
-                        log.info("Canvi EntitatIDActual = " + darreraEntitatUsuari);
+                if(listaAutorizaciones != null) {
+                    for (GrantedAuthority autorizacion : listaAutorizaciones) {
+                        if (Constants.ROLE_ADMIN.equals(autorizacion.getAuthority())) {
+                            entitatIDActual = darreraEntitatUsuari;
+                            log.info("Canvi EntitatIDActual = " + darreraEntitatUsuari);
+                        }
                     }
                 }
             }
