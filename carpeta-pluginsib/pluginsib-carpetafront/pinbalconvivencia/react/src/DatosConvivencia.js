@@ -33,14 +33,11 @@ class DatosConvivencia extends Component {
         event.preventDefault();
 
         const url2 = this.props.pathtoservei;
-        const datos = {
-            municipio: this.state.municipio
-        }
 
         document.getElementById("formulario").classList.add("d-none");
         document.getElementById("carregant").classList.remove("d-none");
 
-        axios.post(url2, {datos} ).then(res => {
+        axios.post(url2, 'municipio='+this.state.municipio ).then(res => {
 
             this.setState({
                 ...this.state, 
@@ -76,9 +73,11 @@ class DatosConvivencia extends Component {
 
         const isLoaded = this.state.isLoaded;
 
-        const { t } = this.props;
+        const { t, localitats } = this.props;
 
         let content;
+
+        const municipis = (localitats) ? JSON.parse(Buffer.from(this.props.localitats, 'base64')) : listaProvinciasMunicipios.localidades;
 
         if (!isLoaded) {
            
@@ -89,7 +88,7 @@ class DatosConvivencia extends Component {
                                 <div class="col-md-4 p-0 col-sm-6" style={{width:'90%'}}>
                                     <select name="codigoMunicipio" id="codigoMunicipio" className="form-control"  value={this.state.municipio} onChange={this.handleMunicipio}>
                                         {
-                                            listaProvinciasMunicipios.localidades.map( (item) => React.createElement('option', {value: parseInt(item.codmunicipio, 10) }, item.nombremunicipio))
+                                            municipis.map( (item) => React.createElement('option', {value: item.codigo}, item.nombre))
                                         }
                                     </select>
                                 </div>
@@ -111,8 +110,24 @@ class DatosConvivencia extends Component {
                 if ( data.codigo == '0003'){
 
                     let periodosInscripcionContent = '';                    
-
-                    Object.entries(data.periodosInscripcion).forEach( ([clave,valor]) => periodosInscripcionContent += `<li>${clave} ${valor}</li>`);
+                    data.personas.forEach(
+                        (item) => {
+                            let periodosContent = '';
+                            if(item.periodosInscripcion.length > 0){
+                                periodosContent = '<ul style="margin-left:30px;">';
+                                item.periodosInscripcion.forEach(  
+                                    (elemento) => periodosContent +=`<li>${t('pinbalConvivenciaDesde')} ${elemento.desde} ${elemento.descripcion}</li>`
+                                );
+                                periodosContent += '</ul>';
+                            }
+                            periodosInscripcionContent += `<div class="persona" style="border: 1px solid #ccc; padding: 10px 20px; border-radius: 10px; margin-bottom: 10px;">
+                                <p><strong>${item.nombre} ${item.apellido1} ${item.apellido2}</strong></p>
+                                <p>${item.tipodocumentacion}: ${item.documentacion}</p>
+                                <p>${t('pinbalConvivenciaFechaNacimiento')}: ${item.fechanacimiento}</p>
+                                ${periodosContent}
+                            </div>`
+                        }
+                    );
 
                     alerta = <>
                         <div className="alert alert-success" role="alert">
@@ -122,62 +137,69 @@ class DatosConvivencia extends Component {
                         <div className="col-md-12 border-0 float-left p-0">
                             <dl className="row">
                                 <div>
-                                    <dt className="col-sm-3">Distrito</dt>
+                                    <dt className="col-sm-3">{t('pinbalConvivenciaDistrito')}</dt>
                                     <dd className="col-sm-7">{data.distrito}</dd>
                                 </div>
                                 <div>
-                                    <dt className="col-sm-3">Sección</dt>
+                                    <dt className="col-sm-3">{t('pinbalConvivenciaSeccion')}</dt>
                                     <dd className="col-sm-7">{data.seccion}</dd>
                                 </div>
                                 <div>
-                                    <dt className="col-sm-3">Hoja</dt>
+                                    <dt className="col-sm-3">{t('pinbalConvivenciaHoja')}</dt>
                                     <dd className="col-sm-7">{data.hoja}</dd>
                                 </div>
                             </dl>
                             <hr/>
                             <dl className="row">
                                 <div>
-                                    <dt className="col-sm-3">Via</dt>
-                                    <dd className="col-sm-7">{data.via}</dd>
+                                    <dt className="col-sm-3">{t('pinbalConvivenciaVia')}</dt>
+                                    <dd className="col-sm-7">{data.tipoVia} {data.via}</dd>
                                 </div>
                                 {data.numero && <div>
-                                    <dt className="col-sm-3">Número</dt>
+                                    <dt className="col-sm-3">{t('pinbalConvivenciaNumero')}</dt>
                                     <dd className="col-sm-7">{data.numero}</dd>
                                 </div>}
                                 {data.kmt && <div>
-                                    <dt className="col-sm-3">Kmt</dt>
+                                    <dt className="col-sm-3">{t('pinbalConvivenciaKmt')}</dt>
                                     <dd className="col-sm-7">{data.kmt}</dd>
                                 </div>}
                                 {data.bloque && <div>
-                                    <dt className="col-sm-3">Bloque</dt>
+                                    <dt className="col-sm-3">{t('pinbalConvivenciaBloque')}</dt>
                                     <dd className="col-sm-7">{data.bloque}</dd>
                                 </div>}
                                 {data.portal && <div>
-                                    <dt className="col-sm-3">Portal</dt>
+                                    <dt className="col-sm-3">{t('pinbalConvivenciaPortal')}</dt>
                                     <dd className="col-sm-7">{data.portal}</dd>
                                 </div>}
                                 {data.escalera && <div>
-                                    <dt className="col-sm-3">Escalera</dt>
+                                    <dt className="col-sm-3">{t('pinbalConvivenciaEscalera')}</dt>
                                     <dd className="col-sm-7">{data.escalera}</dd>
                                 </div>}
                                 {data.planta && <div>
-                                    <dt className="col-sm-3">Planta</dt>
+                                    <dt className="col-sm-3">{t('pinbalConvivenciaPlanta')}</dt>
                                     <dd className="col-sm-7">{data.planta}</dd>
                                 </div>}
                                 {data.puerta && <div>
-                                    <dt className="col-sm-3">Puerta</dt>
+                                    <dt className="col-sm-3">{t('pinbalConvivenciaPuerta')}</dt>
                                     <dd className="col-sm-7">{data.puerta}</dd>
                                 </div>}
                                 <div>
-                                    <dt className="col-sm-3">Código Postal</dt>
+                                    <dt className="col-sm-3">{t('pinbalConvivenciaCodPostal')}</dt>
                                     <dd className="col-sm-7">{data.codPostal}</dd>
                                 </div>
                             </dl>
                             <hr/>
                             {periodosInscripcionContent && <dl className="row">
                                 <div>
-                                    <dt className="col-sm-3">Periodos</dt>
+                                    <dt className="col-sm-3">{t('pinbalConvivenciaPersonas')}</dt>
                                     <dd className="col-sm-7"><ul dangerouslySetInnerHTML={{__html: periodosInscripcionContent}}></ul></dd>
+                                </div>
+                            </dl>}
+                            <hr/>
+                            {data.fechaExpedicion && <dl className="row">
+                                <div>
+                                    <dt className="col-sm-3">{t('pinbalConvivenciaExpedicion')}</dt>
+                                    <dd className="col-sm-7">{data.fechaExpedicion}</dd>
                                 </div>
                             </dl>}
                         </div>

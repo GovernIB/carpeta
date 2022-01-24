@@ -7,7 +7,6 @@ import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
 import es.caib.carpeta.pluginsib.carpetafront.api.TitlesInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.pinbal.client.recobriment.model.ScspFuncionario;
-import es.caib.pinbal.client.recobriment.model.ScspJustificante;
 import es.caib.pinbal.client.recobriment.model.ScspTitular;
 import es.caib.pinbal.client.recobriment.model.ScspTitular.ScspTipoDocumentacion;
 import es.caib.pinbal.client.recobriment.model.Solicitud;
@@ -21,22 +20,25 @@ import javax.xml.bind.Unmarshaller;
 import org.apache.commons.io.IOUtils;
 import org.fundaciobit.pluginsib.carpetafront.pinbalconvivencia.model.ClaveHojaPadronal;
 import org.fundaciobit.pluginsib.carpetafront.pinbalconvivencia.model.DatosEspecificos;
+import org.fundaciobit.pluginsib.carpetafront.pinbalconvivencia.model.Documentacion;
 import org.fundaciobit.pluginsib.carpetafront.pinbalconvivencia.model.Domicilio;
-import org.fundaciobit.pluginsib.carpetafront.pinbalconvivencia.model.PeriodoInscripcion;
-import org.fundaciobit.pluginsib.carpetafront.pinbalconvivencia.model.Persona;
+import org.fundaciobit.pluginsib.carpetafront.pinbalconvivencia.model.MotivoInscripcion;
 import org.fundaciobit.pluginsib.carpetafront.pinbalconvivencia.model.Resultado;
+import org.fundaciobit.pluginsib.carpetafront.pinbalconvivencia.resposta.DatosConvivencia;
+import org.fundaciobit.pluginsib.carpetafront.pinbalconvivencia.resposta.Persona;
+import org.fundaciobit.pluginsib.carpetafront.pinbalconvivencia.resposta.PeriodoInscripcion;
+import org.fundaciobit.pluginsib.carpetafront.pinbalconvivencia.resposta.PeriodoInscripcionAdapter;
+import org.fundaciobit.pluginsib.carpetafront.pinbalconvivencia.resposta.PersonaAdapter;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.StringReader;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -197,6 +199,13 @@ public class PinbalConvivenciaCarpetaFrontPlugin extends AbstractPinbalCarpetaFr
             String pathtoservei = absolutePluginRequestPath + "/" + SERVEI_REST_SERVICE;
 
             map.put("pathtoservei", pathtoservei);
+            
+            String localidades = getProperty(PINBALCONVIVENCIA_PROPERTY_BASE + "localidades");
+            
+            map.put("localitats", "");
+            if (localidades != null) {
+            	map.put("localitats", Base64.getEncoder().encodeToString(localidades.getBytes()));
+            }
 
             map.put("usuariNom", userData.getName());
             map.put("usuariDNI", userData.getAdministrationID());
@@ -235,15 +244,15 @@ public class PinbalConvivenciaCarpetaFrontPlugin extends AbstractPinbalCarpetaFr
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
         
-        
         String codMunicipio = request.getParameter("municipio");
-        
-        System.out.println("SERVEI_REST_SERVICE => CódigoMunicipio: " + codMunicipio);
-        
+               
         DatosConvivencia datosConvivencia = cridadaRest(userData, codMunicipio, absolutePluginRequestPath);
         
-        Gson json = new Gson();
-        String generat = json.toJson(datosConvivencia, DatosConvivencia.class);
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(Persona.class, new PersonaAdapter().nullSafe());
+        builder.registerTypeAdapter(PeriodoInscripcion.class, new PeriodoInscripcionAdapter().nullSafe());
+        Gson gson = builder.create();
+        String generat = gson.toJson(datosConvivencia);
         
         log.info("\nDADES CONVIVENCIA JSON: " + generat + "\n");
         
@@ -348,29 +357,7 @@ public class PinbalConvivenciaCarpetaFrontPlugin extends AbstractPinbalCarpetaFr
                 
                 String codigoEstado = dte.getEstado().get(0).getCodigoEstado();
                 if(codigoEstado.startsWith("00")) {
-                	
-                	/*
-                	Personas
-                		- Persona
-                			- Nombre*
-                			- Apellido1*
-                			- Apellido2
-                			- Fecha Nacimiento
-                			- Documentación
-                				- Tipo*
-                					.NIF
-                					.DNI
-                					.NIE
-                					.Pasaporte
-            					- Valor*
-                			- NIA
-                			- PeriodoInscripcion
-                				- Desde* (yyyy-MM-dd)
-                				- MotivoInscripcion
-                					- CodigoVariacion
-                					- CausaVariacion
-                					- Descripcion*
-                	*/
+                	// TRAMITADA
                 	
                 	datosConvivencia.setCodigo(codigoEstado);
                 	datosConvivencia.setDescripcion(dte.getEstado().get(0).getLiteralError());
@@ -385,6 +372,7 @@ public class PinbalConvivenciaCarpetaFrontPlugin extends AbstractPinbalCarpetaFr
                 	Domicilio dm = elemento.getDomicilio().get(0);
                
                 	datosConvivencia.setVia(dm.getVia().get(0).getNombre());
+                	datosConvivencia.setTipoVia(dm.getVia().get(0).getTipo());
                 	datosConvivencia.setNumero(dm.getNumero().get(0).getValor());
                 	datosConvivencia.setKmt(dm.getKmt());
                 	datosConvivencia.setBloque(dm.getBloque());
@@ -395,19 +383,29 @@ public class PinbalConvivenciaCarpetaFrontPlugin extends AbstractPinbalCarpetaFr
                 	datosConvivencia.setCodPostal(dm.getCodigoPostal());
                
                 	int numPersonas = elemento.getPersonas().size();
+                	ArrayList<Persona> personas = new ArrayList<Persona>();
                 	
                 	for (int i = 0; i < numPersonas; i++) {
-                		Persona item = elemento.getPersonas().get(i);
-                		if (documentacion.equals(item.getDocumentacion().get(0).getValor())) {
-                			HashMap<String, String> periodosInscripcionConvivencia = new HashMap<String, String>();
-                			int numPeriodosInscripcion = item.getPeriodoInscripcion().size();
-                			for (int j = 0; j < numPeriodosInscripcion; j++) {
-                				PeriodoInscripcion periodoInscripcionItem = item.getPeriodoInscripcion().get(j);
-                				periodosInscripcionConvivencia.put(periodoInscripcionItem.getDesde(), periodoInscripcionItem.getMotivoInscripcion().get(0).getDescripcion());
-                			}
-                		}
+                		
+                		org.fundaciobit.pluginsib.carpetafront.pinbalconvivencia.model.Persona item = elemento.getPersonas().get(i);
+                		
+                		ArrayList<PeriodoInscripcion> periodos = new ArrayList<PeriodoInscripcion>();
+                		int numPeriodosInscripcion = item.getPeriodoInscripcion().size();
+                		for (int j = 0; j < numPeriodosInscripcion; j++) {
+            				org.fundaciobit.pluginsib.carpetafront.pinbalconvivencia.model.PeriodoInscripcion periodoInscripcionItem = item.getPeriodoInscripcion().get(j);
+            				MotivoInscripcion motivo = periodoInscripcionItem.getMotivoInscripcion().get(0);
+            				periodos.add(new PeriodoInscripcion( periodoInscripcionItem.getDesde(), motivo.getCodigoVariacion(), motivo.getCausaVariacion(), motivo.getDescripcion()));
+            			}
+                		
+                		Documentacion d = item.getDocumentacion().get(0);
+                		
+                		Persona per = new Persona(item.getNombre(), item.getApellido1(), item.getApellido2(), 
+                				item.getFechaNacimiento().toString(), d.getTipo(), d.getValor(), item.getNia(), periodos);
+                		
+                		personas.add(per);
                 	}
                 	
+                	datosConvivencia.setPersonas(personas);
                 	datosConvivencia.setFechaExpedicion(elemento.getFechaExpedicion());
                 	
                 }else {
@@ -443,7 +441,8 @@ public class PinbalConvivenciaCarpetaFrontPlugin extends AbstractPinbalCarpetaFr
     	datosConvivencia.setDistrito("Distrito Palma");
     	datosConvivencia.setSeccion("Seccion 1");
     	datosConvivencia.setHoja("Hoja 1");
-    	datosConvivencia.setVia("Ticia");
+    	datosConvivencia.setVia("DIRECCION");
+    	datosConvivencia.setTipoVia("PG");
     	datosConvivencia.setNumero("4");
     	datosConvivencia.setKmt("");
     	datosConvivencia.setBloque("");
@@ -454,12 +453,41 @@ public class PinbalConvivenciaCarpetaFrontPlugin extends AbstractPinbalCarpetaFr
     	datosConvivencia.setCodPostal("07003");
     	datosConvivencia.setError("");
     	
-    	HashMap<String, String> periodosInscripcion = new HashMap<String,String>();
-    	periodosInscripcion.put("2010-05-01", "Modificacion domicilio");
-    	periodosInscripcion.put("1984-02-25", "Alta domicilio");
+    	ArrayList<Persona> personas = new ArrayList<Persona>();
     	
-    	datosConvivencia.setPeriodosInscripcion(periodosInscripcion);
-        */ 
+    	org.fundaciobit.pluginsib.carpetafront.pinbalconvivencia.resposta.Persona per1 = new Persona();
+    	per1.setNombre("Miguel");
+    	per1.setApellido1("Apellido1");
+    	per1.setApellido2("Apellido2");
+    	per1.setFechaNacimiento("1972-08-27");
+    	per1.setTipoDocumentacion("NIF");
+    	per1.setDocumentacion("01234568J");
+    	per1.setNia("00045271F");
+    	ArrayList<PeriodoInscripcion> periodosInscripcion1 = new ArrayList<PeriodoInscripcion>();
+    	periodosInscripcion1.add(new PeriodoInscripcion("2015-12-17", "M", "CD", "Cambio Domicilio"));
+    	periodosInscripcion1.add(new PeriodoInscripcion("2016-12-15", "M", "CD", "Cambio Domicilio"));
+    	periodosInscripcion1.add(new PeriodoInscripcion("2020-06-08", "M", "CD", "Cambio Domicilio"));
+    	per1.setPeriodosInscripcion(periodosInscripcion1);
+    	personas.add(per1);
+    	
+    	Persona per2 = new Persona();
+    	per2.setNombre("Rosa");
+    	per2.setApellido1("Apellido1");
+    	per2.setApellido2("Apellido2");
+    	per2.setFechaNacimiento("1975-04-05");
+    	per2.setTipoDocumentacion("NIF");
+    	per2.setDocumentacion("43000111J");
+    	per2.setNia("00045272P");
+    	ArrayList<PeriodoInscripcion> periodosInscripcion2 = new ArrayList<PeriodoInscripcion>();
+    	periodosInscripcion2.add(new PeriodoInscripcion("2015-12-17", "M", "CD", "Cambio Domicilio"));
+    	periodosInscripcion2.add(new PeriodoInscripcion("2018-02-12", "M", "CD", "Cambio Domicilio"));
+    	periodosInscripcion2.add(new PeriodoInscripcion("2019-09-06", "M", "CD", "Cambio Domicilio"));
+    	periodosInscripcion2.add(new PeriodoInscripcion("2021-10-25", "M", "CD", "Cambio Domicilio"));
+    	per2.setPeriodosInscripcion(periodosInscripcion2);
+    	personas.add(per2);
+    	
+    	datosConvivencia.setPersonas(personas);
+        */
         return datosConvivencia;
 	}
 
@@ -532,8 +560,7 @@ public class PinbalConvivenciaCarpetaFrontPlugin extends AbstractPinbalCarpetaFr
 			if (!isEmptyString(provinciaSolicitud)) {
 				xmlBuilder.append(xmlOptionalStringParameter(this.provinciaSolicitud, "ProvinciaSolicitud"));
 			}
-			
-			
+						
 			
 			if (!isEmptyString(numeroDocumento)) {
 				xmlBuilder.append("<Titular>");
@@ -546,244 +573,9 @@ public class PinbalConvivenciaCarpetaFrontPlugin extends AbstractPinbalCarpetaFr
 			
 			xmlBuilder.append("</Solicitud>");
 			xmlBuilder.append("</DatosEspecificos>");
-			
-			System.out.println(xmlBuilder.toString());
-			
+						
 			return xmlBuilder.toString();
 		}
 	}
-    
-    public class DatosConvivencia {
-
-        protected String error = "";       
-        protected String dni = "";
-        protected String nombre = "";
-        protected String apellido1 = "";
-        protected String apellido2 = "";
-        protected String fecha = "";
-        protected String codigo = "";
-        protected String descripcion = "";
-        protected String distrito = "";
-    	protected String seccion = "";
-    	protected String hoja = "";
-    	protected String personas = "";
-    	protected String fechaExpedicion = "";
-
-    	protected String via = "";
-    	protected String numero = "";
-    	protected String kmt = "";
-    	protected String bloque = "";
-    	protected String portal = "";
-    	protected String escalera = "";
-    	protected String planta = "";
-    	protected String puerta = "";
-    	protected String codPostal = "";
-    	
-    	protected HashMap<String, String> periodosInscripcion = new HashMap<String, String>();
-    	
-    	public HashMap<String, String> getPeriodosInscripcion() {
-    		return periodosInscripcion;
-    	}
-    	
-    	public void setPeriodosInscripcion(HashMap<String, String> periodosInscripcion) {
-    		this.periodosInscripcion = periodosInscripcion;
-    	}
-    	
-		public String getFecha() {
-			return fecha;
-		}
-
-		public void setFecha(String fecha) {
-			this.fecha = fecha;
-		}
-
-		public String getVia() {
-			return via;
-		}
-
-		public void setVia(String via) {
-			this.via = via;
-		}
-
-		public String getNumero() {
-			return numero;
-		}
-
-		public void setNumero(String numero) {
-			this.numero = numero;
-		}
-
-		public String getKmt() {
-			return kmt;
-		}
-
-		public void setKmt(String kmt) {
-			this.kmt = kmt;
-		}
-
-		public String getBloque() {
-			return bloque;
-		}
-
-		public void setBloque(String bloque) {
-			this.bloque = bloque;
-		}
-
-		public String getPortal() {
-			return portal;
-		}
-
-		public void setPortal(String portal) {
-			this.portal = portal;
-		}
-
-		public String getEscalera() {
-			return escalera;
-		}
-
-		public void setEscalera(String escalera) {
-			this.escalera = escalera;
-		}
-
-		public String getPlanta() {
-			return planta;
-		}
-
-		public void setPlanta(String planta) {
-			this.planta = planta;
-		}
-
-		public String getPuerta() {
-			return puerta;
-		}
-
-		public void setPuerta(String puerta) {
-			this.puerta = puerta;
-		}
-
-		public String getCodPostal() {
-			return codPostal;
-		}
-
-		public void setCodPostal(String codPostal) {
-			this.codPostal = codPostal;
-		}
-
-		public String getError() {
-            return error;
-        }
-
-        public void setError(String error) {
-            this.error = error;
-        }
-
-		public String getDni() {
-			return dni;
-		}
-
-		public void setDni(String dni) {
-			this.dni = dni;
-		}
-
-		public String getNombre() {
-			return nombre;
-		}
-
-		public void setNombre(String nombre) {
-			this.nombre = nombre;
-		}
 		
-		public String getApellido1() {
-			return apellido1;
-		}
-
-		public void setApellido1(String apellido1) {
-			this.apellido1 = apellido1;
-		}
-
-		public String getApellido2() {
-			return apellido2;
-		}
-
-		public void setApellido2(String apellido2) {
-			this.apellido2 = apellido2;
-		}
-
-		public String getCodigo() {
-			return codigo;
-		}
-
-		public void setCodigo(String codigo) {
-			this.codigo = codigo;
-		}
-		
-		public String getDescripcion() {
-			return descripcion;
-		}
-
-		public void setDescripcion(String descripcion) {
-			this.descripcion = descripcion;
-		}
-
-		public String getDistrito() {
-			return distrito;
-		}
-		
-		public void setDistrito(String distrito) {
-			this.distrito = distrito;
-		}
-		
-		public String getSeccion() {
-			return seccion;
-		}
-		
-		public void setSeccion (String seccion) {
-			this.seccion = seccion;
-		}
-		
-		public String getHoja() {
-			return hoja;
-		}
-		
-		public void setHoja (String hoja) {
-			this.hoja = hoja;
-		}
-		
-		public String getPersonas() {
-			return personas;
-		}
-		
-		public void setPersonas (String personas) {
-			this.personas = personas;
-		}
-		
-		
-		public String getFechaExpedicion() {
-			return fechaExpedicion;
-		}
-		
-		public void setFechaExpedicion( String fecha) {
-			this.fechaExpedicion = fecha;
-		}
-		
-		
-		public DatosConvivencia() {
-			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-			Date fecha = new Date();
-			this.fecha = dateFormat.format(fecha);
-		}
-
-		public DatosConvivencia(String dni, String nombre) {
-			super();
-			this.dni = dni;
-			this.nombre = nombre;
-			
-			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-			Date fecha = new Date();
-			this.fecha = dateFormat.format(fecha);
-		}
-		
-    }
-    
-
 }
