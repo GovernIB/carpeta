@@ -88,5 +88,7 @@
     "carpeta_criterio_3": " amb l'estat '",
     "carpeta_criterio_4": "'",
     "carpeta_criterio_5": " i número ",
-    "downloadjustificantText": "Fitxer descarregat. Fes click per descarregar-ho de nou"
+    "downloadjustificantText": "Fitxer descarregat. Fes click per descarregar-ho de nou",
+
+    "registro_regPorPagina": "Registres per pàgina"
 }

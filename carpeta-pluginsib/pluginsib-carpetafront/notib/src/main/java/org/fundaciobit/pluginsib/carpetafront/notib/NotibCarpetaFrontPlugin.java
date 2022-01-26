@@ -405,12 +405,18 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             int pagina;
             int itemsPagina = 10;
 
+            /* Filtre número de registres per pàgina */
+            String formRegPorPagina = request.getParameter("registrosPorPagina");
+
             try {
                 pagina = Integer.parseInt(request.getParameter("pageNumber"));
             }catch (NumberFormatException e){
                 pagina = 0;
             }
             List<Transmissio> notificacions;
+
+            int regPag = Integer.parseInt(formRegPorPagina);
+            int notiNumero = 0;
 
             {
 
@@ -426,14 +432,20 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
 
-                Resposta resposta = notibClientRest.consultaNotificacions(nif, pagina, mida);
+//                Resposta resposta = notibClientRest.consultaNotificacions(nif, pagina, mida);
+                Resposta resposta = notibClientRest.consultaNotificacions(nif, 0, mida);
 
                 notificacions = resposta.getResultat();
+                notiNumero = resposta.getNumeroElementsTotals();
 
             }
 
+            int notificacionsTotals;
             if (notificacions == null) {
                 notificacions = new ArrayList<Transmissio>();
+                notificacionsTotals = 0;
+            }else{
+                notificacionsTotals = notiNumero;
             }
 
             Collections.reverse(notificacions);
@@ -452,10 +464,16 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             }
 
             Map<String, Object> infoNotificacions = new HashMap<String, Object>();
-            infoNotificacions.put("comunicacions", notificacions);
+            if((pagina+1)*regPag <= notificacionsTotals) {
+                infoNotificacions.put("comunicacions", notificacions.subList(pagina * regPag, (pagina + 1) * regPag));
+            }else{
+                infoNotificacions.put("comunicacions", notificacions.subList(pagina * regPag, notificacionsTotals));
+            }
             infoNotificacions.put("urldetallbase", getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.url") + "#");
-            infoNotificacions.put("registresPagina", itemsPagina);
-            infoNotificacions.put("totalRegistres", notificacions.size());
+//            infoNotificacions.put("registresPagina", itemsPagina);
+            infoNotificacions.put("registresPagina", formRegPorPagina);
+//            infoNotificacions.put("totalRegistres", notificacions.size());
+            infoNotificacions.put("totalRegistres", notificacionsTotals);
 
             Gson gson = new Gson();
             String json = gson.toJson(infoNotificacions);

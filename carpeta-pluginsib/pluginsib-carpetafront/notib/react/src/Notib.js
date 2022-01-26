@@ -4,6 +4,11 @@ import i18n from './i18n';
 import axios from "axios";
 import Table from 'react-bootstrap/Table';
 import Pagination  from 'react-bootstrap/Pagination';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 /**
  *  @author jpernia
@@ -18,20 +23,42 @@ class Notib extends Component {
             isLoaded: false,
             dataComunicacions: null,
             urldetallbase: null,
+            filter_regPorPagina: 10,
             pagination_active: 1,
             pagination_total_items: 10,
             total_items: 0,
-            error: false
+            error: false,
+            cercaRegistres: 10
         };
 
+        this.handleRegPorPaginaFilterParam = this.handleRegPorPaginaFilterParam.bind(this);
+
+        const getLocale = Locale => require(`date-fns/locale/${sessionStorage.getItem("langActual")}/index.js`);
+        this.locale = getLocale(this.props.language);
+
+        this.canviatIdioma = this.canviatIdioma.bind(this);
+        i18n.on('languageChanged', this.canviatIdioma);
+
     }
+
+    canviatIdioma(lng) {
+        this.componentDidMount();
+    }
+
+    handleRegPorPaginaFilterParam(e){
+        this.setState({
+            ...this.state,
+            filter_regPorPagina: e.target.value,
+        });
+    };
 
     componentDidMount() {
 
         const url = this.props.pathtoservei;
 
         const params = {
-            pageNumber: 0
+            pageNumber: 0,
+            registrosPorPagina: this.state.filter_regPorPagina
         };
 
         axios.get(url, {params: params}).then( (response) => {
@@ -65,7 +92,8 @@ class Notib extends Component {
         });
 
         const params = {
-            pageNumber: newPageNumber-1
+            pageNumber: newPageNumber-1,
+            registrosPorPagina: this.state.filter_regPorPagina
         };
         const url2 = this.props.pathtoservei;
 
@@ -88,6 +116,50 @@ class Notib extends Component {
                 error: true
             });
         } );
+
+    }
+
+    handleSubmitSearcher(e) {
+
+        const {t} = this.props;
+
+        e.preventDefault();
+
+        this.setState({
+            ...this.state,
+            isLoaded: false,
+            error: false,
+            cercaRegistres: this.state.filter_regPorPagina
+        });
+
+            const url2 = this.props.pathtoservei;
+
+            const params = {
+                registrosPorPagina: this.state.filter_regPorPagina,
+                pageNumber: this.state.pagination_active-1
+            };
+
+            axios.get(url2, {params: params}).then( (response) => {
+
+                if (response.data != null){
+                    this.setState({
+                        ...this.state,
+                        dataComunicacions: response.data.comunicacions,
+                        urldetallbase: response.data.urldetallbase,
+                        total_items: response.data.totalRegistres,
+                        pagination_active: 1,
+                        pagination_total_items: response.data.registresPagina,
+                        isLoaded: true
+                    });
+                }
+
+            }).catch( error => {
+                console.log('Error axios', error);
+                this.setState({
+                    ...this.state,
+                    error: true
+                });
+            } );
 
     }
 
@@ -171,6 +243,38 @@ class Notib extends Component {
         let content;
         let taulaNotib;
 
+        let formulari = <>
+            <Form id="fechaBusqueda" style={{marginBottom: '20px'}}>
+                <Container style={{ width: '95%', paddingLeft: '0', margin: '0' }}>
+                    <Row style={{ width: 'fit-content'}}>
+                        <Col className="col-xs-12 mb-3">
+                            <Form.Group>
+                                <Form.Label>{t('registro_regPorPagina')}</Form.Label>
+                                <Form.Select id="regPorPagina"
+                                             name="regPorPagina" className="form-control form-control-sm focusIn"
+                                             value={this.state.filter_regPorPagina}
+                                             tabindex="505"
+                                             aria-labelledby="regPorPagina"
+                                             onChange={(e) => {this.handleRegPorPaginaFilterParam(e); }}>
+                                    <option value="5" selected={this.state.filter_regPorPagina.toString() === '5'}>5</option>
+                                    <option value="10" selected={this.state.filter_regPorPagina.toString() === '10'}>10</option>
+                                    <option value="25" selected={this.state.filter_regPorPagina.toString() === '25'}>25</option>
+                                </Form.Select>
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <div id="errorContainer" className="row pb-2 ml-3 mr-0 ocult">
+                            <div className="alert alert-danger" role="alert" id="errorMsg"/>
+                        </div>
+                    </Row>
+                    <Row>
+                        <Button type="submit" className="btn btn-primary carpeta-btn ml-3 mt-2"  onClick={e => {this.handleSubmitSearcher(e)}} tabindex="505">{t('carpeta_buscar')}</Button>
+                    </Row>
+                </Container>
+            </Form>
+        </>
+
         if (!isLoaded) {
             content = <div  id="carregant" className="loader-container centrat ">
                 <div className="loader"/>
@@ -182,8 +286,11 @@ class Notib extends Component {
 
             if(this.state.dataComunicacions !== null && typeof(this.state.total_items) !== undefined  && typeof(this.state.dataComunicacions) !== undefined && this.state.total_items !== 0) {
                 let paginationNumbers = [];
-                for (let number = 1; number <= Math.ceil(this.state.total_items/10); number++) {
-                    paginationNumbers.push(<Pagination.Item key={number} active={number === this.state.pagination_active} activeLabel="" onClick={(event) => this.handlePagination(event)} >{number}</Pagination.Item>,);
+                for (let number = 1; number <= Math.ceil(this.state.total_items/this.state.cercaRegistres); number++) {
+                    paginationNumbers.push(<Pagination.Item key={number}
+                                                            active={number.toString() === this.state.pagination_active.toString()}
+                                                            activeLabel=""
+                                                            onClick={(event) => this.handlePagination(event)} >{number}</Pagination.Item>,);
                 }
 
                 taulaNotib = <>
@@ -211,10 +318,10 @@ class Notib extends Component {
                     </Table>
                     <div style={{float:'left', marginTop: '9px;',width: '60%'}}>
                         {t('carpeta_paginacion_1') +
-                        ((parseInt(this.state.pagination_active,10)-1)*10+1) +
+                        ((parseInt(this.state.pagination_active,10)-1)*parseInt(this.state.cercaRegistres, 10)+1) +
                         t('carpeta_paginacion_2') +
-                        ( ((parseInt(this.state.pagination_active,10)*10) <= parseInt(this.state.total_items,10))
-                                ? parseInt(this.state.pagination_active,10)*10
+                        ( ((parseInt(this.state.pagination_active,10)*parseInt(this.state.cercaRegistres, 10)) <= parseInt(this.state.total_items,10))
+                                ? parseInt(this.state.pagination_active,10)*parseInt(this.state.cercaRegistres, 10)
                                 : this.state.total_items
                         ) +
                         t('carpeta_paginacion_3') +
@@ -243,6 +350,7 @@ class Notib extends Component {
                     <p className="lh15">{this.props.subtitles[i18n.language]} </p>
                     <div className="infoNoMenu">
                         <div className="col-md-12 border-0 float-left p-0">
+                            {formulari}
                             {this.state.error && <div className="alert alert-danger hide" role="alert">{this.state.error}</div>}
                             {content}
                             <div className="card-body imc--llista--capses pl-0">

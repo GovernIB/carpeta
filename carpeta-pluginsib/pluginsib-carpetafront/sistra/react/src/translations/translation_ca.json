@@ -98,5 +98,7 @@
     "registro_anexo_confidencial": "Confidencial",
     "reprendreTornar": "Tornar",
     "carpeta_descargar": "Descarregar",
-    "downloadjustificantText": "Fitxer descarregat. Fes click per descarregar-ho de nou"
+    "downloadjustificantText": "Fitxer descarregat. Fes click per descarregar-ho de nou",
+
+    "registro_regPorPagina": "Registres per pàgina"
 }

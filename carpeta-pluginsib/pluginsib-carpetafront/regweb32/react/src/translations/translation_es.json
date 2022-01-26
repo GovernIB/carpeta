@@ -88,6 +88,8 @@
     "carpeta_criterio_3": " amb l'estat '",
     "carpeta_criterio_4": "'",
     "carpeta_criterio_5": " i número ",
-    "downloadjustificantText": "Fichero descargado. Clica sobre este enlace para descargarlo de nuevo"
+    "downloadjustificantText": "Fichero descargado. Clica sobre este enlace para descargarlo de nuevo",
+
+    "registro_regPorPagina": "Registros por página"
 
 }
