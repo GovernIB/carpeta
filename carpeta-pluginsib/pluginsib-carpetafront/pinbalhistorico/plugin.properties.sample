@@ -1,0 +1,27 @@
+# Class => org.fundaciobit.pluginsib.carpetafront.pinbalhistorico.PinbalHistoricoCarpetaFrontPlugin
+
+# Connexió
+es.caib.carpeta.pluginsib.carpetafront.pinbalhistorico.baseurl=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.baseurl"]]
+es.caib.carpeta.pluginsib.carpetafront.pinbalhistorico.username=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.username"]]
+es.caib.carpeta.pluginsib.carpetafront.pinbalhistorico.password=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.password"]]
+
+# Informació per la sol·licitud
+es.caib.carpeta.pluginsib.carpetafront.pinbalhistorico.codicertificat=SCDCPAJU
+
+es.caib.carpeta.pluginsib.carpetafront.pinbalhistorico.codiprocediment=CODSVDR_GBA_20121107
+es.caib.carpeta.pluginsib.carpetafront.pinbalhistorico.finalitat=Consulta dades convivencia
+es.caib.carpeta.pluginsib.carpetafront.pinbalhistorico.identificadorsolicitant=S0711001H
+es.caib.carpeta.pluginsib.carpetafront.pinbalhistorico.unitattramitadora=Servei d'escolarització
+
+# Datos Específicos Sol·licitud
+es.caib.carpeta.pluginsib.carpetafront.pinbalhistorico.codigoprovincia=07
+es.caib.carpeta.pluginsib.carpetafront.pinbalhistorico.codigocomunidadautonoma=04
+
+# Necessari en DEV i PRE. NO es fan cridades reals sinó d,un joc de proves
+# Exemples:   - 30000056Y, FUSTER
+#             - 41107605G, JAUME
+es.caib.carpeta.pluginsib.carpetafront.pinbalhistorico.testnif=30000056Y
+es.caib.carpeta.pluginsib.carpetafront.pinbalhistorico.testsurname=FUSTER
+
+# Common
+es.caib.carpeta.pluginsib.carpetafront.pinbalhistorico.development=true

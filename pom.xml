@@ -544,8 +544,8 @@
 		<module>carpeta-front</module>
 		<module>carpeta-api-externa</module>
 		<module>carpeta-api-externa-client</module>
-		<module>carpeta-ear</module>
 		<module>carpeta-pluginsib</module>
+		<module>carpeta-ear</module>
 		<!--
 		<module>carpeta-ws</module>
 		-->
