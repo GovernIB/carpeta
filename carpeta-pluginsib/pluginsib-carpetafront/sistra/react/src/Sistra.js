@@ -540,6 +540,7 @@ class Sistra extends Component {
                                 <Form.Label>{t('sistraDataInici')}</Form.Label>
 
                                 <DatePicker
+                                    portalId="root-portal"
                                     selected={this.state.dataInici}
                                     onChange={ (startDate) => this.handleChangeDataInici(startDate) }
                                     selectsStart
@@ -552,6 +553,18 @@ class Sistra extends Component {
                                     locale={this.locale}
                                     showYearDropdown={true}
                                     preventOpenOnFocus={true}
+                                    popperPlacement="bottom"
+                                    popperModifiers={{
+                                        flip: {
+                                            behavior: ["bottom"] // don't allow it to flip to be above
+                                        },
+                                        preventOverflow: {
+                                            enabled: false // tell it not to try to stay within the view (this prevents the popper from covering the element you clicked)
+                                        },
+                                        hide: {
+                                            enabled: false // turn off since needs preventOverflow to be enabled
+                                        }
+                                    }}
                                 />
                             </Form.Group>
                         </Col>
@@ -559,6 +572,7 @@ class Sistra extends Component {
                             <Form.Group>
                                 <Form.Label>{t('sistraDataFi')}</Form.Label>
                                 <DatePicker
+                                    portalId="root-portal"
                                     selected={this.state.dataFi}
                                     onChange={ (endDate) => this.handleChangeDataFi(endDate) }
                                     selectsEnd
@@ -572,6 +586,18 @@ class Sistra extends Component {
                                     locale={this.locale}
                                     showYearDropdown={true}
                                     preventOpenOnFocus={true}
+                                    popperPlacement="bottom"
+                                    popperModifiers={{
+                                        flip: {
+                                            behavior: ["bottom"] // don't allow it to flip to be above
+                                        },
+                                        preventOverflow: {
+                                            enabled: false // tell it not to try to stay within the view (this prevents the popper from covering the element you clicked)
+                                        },
+                                        hide: {
+                                            enabled: false // turn off since needs preventOverflow to be enabled
+                                        }
+                                    }}
                                 />
                             </Form.Group>
                         </Col>
