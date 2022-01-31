@@ -619,7 +619,7 @@ class Sistra extends Component {
                             </Form.Group>
                         </Col>
                     </Row>
-                    <Row style={{ width: 'fit-content'}}>
+                    <Row style={{ width: 'fit-content', display: 'none'}}>
                         <Col className="col-xs-12 mb-3">
                             <Form.Group>
                                 <Form.Label>{t('registro_regPorPagina')}</Form.Label>
@@ -779,6 +779,20 @@ class Sistra extends Component {
                                 {this.state.error && <div className="alert alert-danger hide" role="alert">{this.state.error}</div>}
                                 {content}
                             </div>
+                        </div>
+                    </div>
+                    <div className="col-md-12 border-0 float-left p-0" style={{width: '97%' }}>
+                        <div className="col-sd-1 float-right pb-2">
+                            <Form.Select id="rPP"
+                                         name="rPP" className="form-control form-control-sm focusIn"
+                                         value={this.state.filter_regPorPagina}
+                                         tabindex="510"
+                                         aria-labelledby="rPP"
+                                         onChange={(e) => {this.handleRegPorPaginaFilterParam(e); }}>
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                            </Form.Select>
                         </div>
                     </div>
                     {taulaTramits}
