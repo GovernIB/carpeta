@@ -327,7 +327,7 @@ public class PluginFrontController extends CommonFrontController {
                 accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_PLUGIN, entitatJPA.getEntitatID(),
                         pluginID, new Timestamp(new Date().getTime()),
                         LocaleContextHolder.getLocale().getLanguage(),
-                        InetAddress.getLocalHost().getHostAddress(), true, sesionHttp.getIdSessio());
+                        request.getRemoteAddr(), true, sesionHttp.getIdSessio());
                 sesionHttp.setAccesPlugin(pluginID);
             }
 
