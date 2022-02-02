@@ -295,6 +295,9 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
         pagina = Integer.parseInt(request.getParameter("pageNumber"));
 //        log.info("pageNumber: " + pagina);
 
+        /* Filtre número de registres per pàgina */
+        String formRegPorPagina = request.getParameter("registrosPorPagina");
+
         try {
 
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -381,20 +384,30 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             }
             List<TramitePersistenteGenerico> tramitsPagina = new ArrayList<TramitePersistenteGenerico>();
 
-            int calcul = (pagina * itemsPagina) + itemsPagina;
+//            int calcul = (pagina * itemsPagina) + itemsPagina;
+            int calcul = (pagina * Integer.parseInt(formRegPorPagina)) + Integer.parseInt(formRegPorPagina);
+
+//            if(sortedTramit.size() > 0) {
+//                if (calcul < sortedTramit.size()) {
+//                    tramitsPagina = sortedTramit.subList(pagina * itemsPagina, (pagina * itemsPagina) + itemsPagina);
+//                } else {
+//                    tramitsPagina = sortedTramit.subList(pagina * itemsPagina, sortedTramit.size());
+//                }
+//            }
 
             if(sortedTramit.size() > 0) {
                 if (calcul < sortedTramit.size()) {
-                    tramitsPagina = sortedTramit.subList(pagina * itemsPagina, (pagina * itemsPagina) + itemsPagina);
+                    tramitsPagina = sortedTramit.subList(pagina * Integer.parseInt(formRegPorPagina), (pagina * Integer.parseInt(formRegPorPagina)) + Integer.parseInt(formRegPorPagina));
                 } else {
-                    tramitsPagina = sortedTramit.subList(pagina * itemsPagina, sortedTramit.size());
+                    tramitsPagina = sortedTramit.subList(pagina * Integer.parseInt(formRegPorPagina), sortedTramit.size());
                 }
             }
 
             Map<String, Object> infoTramits = new HashMap<String, Object>();
             infoTramits.put("tramits", tramitsPagina);
             infoTramits.put("totalRegistres", sortedTramit.size());
-            infoTramits.put("registresPagina", itemsPagina);
+//            infoTramits.put("registresPagina", itemsPagina);
+            infoTramits.put("registresPagina", formRegPorPagina);
 
             Gson gson = new Gson();
             String json = gson.toJson(infoTramits);

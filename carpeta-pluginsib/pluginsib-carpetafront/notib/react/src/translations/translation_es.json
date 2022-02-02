@@ -19,5 +19,8 @@
     "carpeta_paginacion_1": "Mostrando elementos del ",
     "carpeta_paginacion_2": " al ",
     "carpeta_paginacion_3": " de un total de ",
-    "carpeta_paginacion_4": " elementos"
+    "carpeta_paginacion_4": " elementos",
+
+    "carpeta_buscar" : "Buscar",
+    "registro_regPorPagina": "Registros por página"
 }

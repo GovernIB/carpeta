@@ -24,7 +24,7 @@ class Regweb extends Component {
 
         let startDateObj = new Date();
         const endDateObj = new Date();
-        startDateObj.setMonth(endDateObj.getMonth()-6);
+        startDateObj.setMonth(endDateObj.getMonth()-1);
 
         this.state = {
             isLoaded: false,
@@ -33,17 +33,20 @@ class Regweb extends Component {
             filter_startDate: startDateObj,
             filter_endDate: endDateObj,
             filter_status: 0,
+            filter_regPorPagina: 10,
             pagination_active: 1,
             pagination_total_items: 10,
             numeroRegistro: null,
             error: false, 
-            criteriosTexto: ''
+            criteriosTexto: '',
+            cercaRegistres: 10
         };
 
         this.handleNumberFilterParam = this.handleNumberFilterParam.bind(this);
         this.handleStartDateFilterParam = this.handleStartDateFilterParam.bind(this);
         this.handleEndDateFilterParam = this.handleEndDateFilterParam.bind(this);
         this.handleStateFilterParam = this.handleStateFilterParam.bind(this);
+        this.handleRegPorPaginaFilterParam = this.handleRegPorPaginaFilterParam.bind(this);
         this.handleSubmitSearcher = this.handleSubmitSearcher.bind(this);
 
         const getLocale = Locale => require(`date-fns/locale/${sessionStorage.getItem("langActual")}/index.js`);
@@ -79,6 +82,13 @@ class Regweb extends Component {
         });
     };
 
+    handleRegPorPaginaFilterParam(e){
+        this.setState({
+            ...this.state,
+            filter_regPorPagina: e.target.value,
+        });
+    };
+
     handleNumberFilterParam(e) {       
         this.setState({
             ...this.state, 
@@ -101,12 +111,13 @@ class Regweb extends Component {
             fechaInicio: this.state.filter_startDate,
             fechaFin: this.state.filter_endDate,
             estado: this.state.filter_status,
+            registrosPorPagina: this.state.filter_regPorPagina,
             pageNumber: newPageNumber-1
         };
 
-        const url2 = this.props.pathtoservei;
+        const url3 = this.props.pathtoservei;
 
-        axios.get(url2, {params: params}).then( (response) => {
+        axios.get(url3, {params: params}).then( (response) => {
 
             if (response.data.registres != null){
                 this.setState({
@@ -127,7 +138,7 @@ class Regweb extends Component {
     }
 
 
-    async handleSubmitSearcher(e) {
+    handleSubmitSearcher(e) {
 
         const {t} = this.props;
 
@@ -138,18 +149,18 @@ class Regweb extends Component {
             e.preventDefault();
 
             let criterisCercaText = 
-        t('carpeta_criterio_1') + $.dateFormatCerca(this.state.filter_startDate) +
-        t('carpeta_criterio_2') + $.dateFormatCerca(this.state.filter_endDate) +
-        t('carpeta_criterio_3') + $.nomEstat(this.state.filter_status) +
-        t('carpeta_criterio_4') + 
-        ((this.state.filter_number != null) ? t('carpeta_criterio_5') + this.state.filter_number : '');
+                t('carpeta_criterio_1') + $.dateFormatCerca(this.state.filter_startDate) +
+                t('carpeta_criterio_2') + $.dateFormatCerca(this.state.filter_endDate) +
+                t('carpeta_criterio_3') + $.nomEstat(this.state.filter_status) +
+                t('carpeta_criterio_4') +
+                ((this.state.filter_number != null) ? t('carpeta_criterio_5') + this.state.filter_number : '');
 
             this.setState({
                 ...this.state, 
                 isLoaded: false,
                 error: false,
                 numeroRegistro: null,
-                criteriosTexto: criterisCercaText
+                cercaRegistres: this.state.filter_regPorPagina
             });  
 
             const url2 = this.props.pathtoservei;
@@ -159,10 +170,11 @@ class Regweb extends Component {
                 fechaInicio: this.state.filter_startDate,
                 fechaFin: this.state.filter_endDate,
                 estado: this.state.filter_status,
+                registrosPorPagina: this.state.filter_regPorPagina,
                 pageNumber: this.state.pagination_active-1
             };
 
-            await axios.get(url2, {params: params}).then( (response) => {
+            axios.get(url2, {params: params}).then( (response) => {
 
                 if (response.data.registres != null){
                     this.setState({
@@ -196,7 +208,61 @@ class Regweb extends Component {
         this.setState({
             ...this.state, 
             isLoaded: true
-        });     
+        });
+
+        const {t} = this.props;
+
+        let validatFormulari = this.validaFormulari();
+
+        if (validatFormulari){
+
+            let criterisCercaText =
+                t('carpeta_criterio_1') + $.dateFormatCerca(this.state.filter_startDate) +
+                t('carpeta_criterio_2') + $.dateFormatCerca(this.state.filter_endDate) +
+                t('carpeta_criterio_3') + $.nomEstat(this.state.filter_status) +
+                t('carpeta_criterio_4') +
+                ((this.state.filter_number != null) ? t('carpeta_criterio_5') + this.state.filter_number : '');
+
+            this.setState({
+                ...this.state,
+                isLoaded: false,
+                error: false,
+                numeroRegistro: null,
+                criteriosTexto: criterisCercaText
+            });
+
+            const url = this.props.pathtoservei;
+
+            const params = {
+                numero: this.state.filter_number,
+                fechaInicio: this.state.filter_startDate,
+                fechaFin: this.state.filter_endDate,
+                estado: this.state.filter_status,
+                registrosPorPagina: this.state.filter_regPorPagina,
+                pageNumber: this.state.pagination_active-1
+            };
+
+            axios.get(url, {params: params}).then( (response) => {
+
+                if (response.data.registres != null){
+                    this.setState({
+                        ...this.state,
+                        data: JSON.parse(response.data.registres),
+                        pagination_active: 1,
+                        pagination_total_items: response.data.totalRegistres,
+                        isLoaded: true
+                    });
+                }
+
+            }).catch( error => {
+                console.log('Error axios', error);
+                this.setState({
+                    ...this.state,
+                    error: true
+                });
+            } );
+
+        }
     }
 
     validaFormulari() {
@@ -238,13 +304,12 @@ class Regweb extends Component {
 
         if(this.state.data != null && parseInt(this.state.pagination_total_items) > 0){
 
-            let paginationNumbers = []; 
-            for (let number = 1; number <= Math.ceil(this.state.pagination_total_items/10); number++) {
+            let paginationNumbers = [];
+            for (let number = 1; number <= Math.ceil(this.state.pagination_total_items/this.state.cercaRegistres); number++) {
                 paginationNumbers.push(<Pagination.Item key={number} active={number.toString() == this.state.pagination_active.toString()} activeLabel="" onClick={(event) => this.handlePagination(event)} >{number}</Pagination.Item>,);
             }
 
            taulaRegistres = <>
-                {/*<div style={{float:'left', marginTop: '9px;',paddingBottom: '0.7em'}}>{this.state.criteriosTexto}</div>*/}
                 <Table responsive striped bordered hover style={tamanyTaula}>
                     <thead className="table-sucess">
                         <tr>
@@ -267,18 +332,19 @@ class Regweb extends Component {
                     })}
                     </tbody>
                 </Table>
-                <div style={{float:'left', marginTop: '9px;'}}>
-                        {t('carpeta_paginacion_1') + 
-                        ((parseInt(this.state.pagination_active,10)-1)*10+1) + 
-                        t('carpeta_paginacion_2') + 
-                        ( ((parseInt(this.state.pagination_active,10)*10) <= parseInt(this.state.pagination_total_items,10)) 
-                            ? parseInt(this.state.pagination_active,10)*10 
-                            : this.state.pagination_total_items
-                        ) + 
-                        t('carpeta_paginacion_3') + 
-                        this.state.pagination_total_items + 
-                        t('carpeta_paginacion_4')}
-                    </div>
+
+               <div style={{float:'left', marginTop: '9px', width: '60%'}}>
+                   {t('carpeta_paginacion_1') +
+                   ((parseInt(this.state.pagination_active,10)-1)*parseInt(this.state.cercaRegistres,10)+1) +
+                   t('carpeta_paginacion_2') +
+                   ( ((parseInt(this.state.pagination_active,10)*parseInt(this.state.cercaRegistres,10)) <= parseInt(this.state.pagination_total_items,10))
+                           ? parseInt(this.state.pagination_active,10)*parseInt(this.state.cercaRegistres,10)
+                           : this.state.pagination_total_items
+                   ) +
+                   t('carpeta_paginacion_3') +
+                   this.state.pagination_total_items +
+                   t('carpeta_paginacion_4')}
+               </div>
                 <Pagination style={{float:'right'}}>
                     {paginationNumbers}
                 </Pagination>
@@ -377,158 +443,222 @@ class Regweb extends Component {
         const { t } = this.props;
 
         let content;
+        let formulari;
         
         let taulaRegistres; 
         let detallRegistreContainer;
         var tamanyTaula = { width: '99%'};
 
-        if (!isLoaded) {
-            content = <div  id="carregant" className="loader-container centrat ">
-                        <div className="loader"/>
-                    </div>;
-        } else {
-            
-            content = 
-            <>  
-                <Form id="fechaBusqueda" style={{marginBottom: '20px'}}>
-                    <Container style={{ width: '95%', paddingLeft: '0', margin: '0' }}>
-                        <Row>
-                            <Col className="col-xs-12 mb-3">
-                                <Form.Group>
-                                    <Form.Label>{t('registro_numero')}</Form.Label>
-                                    <Form.Control 
-                                        type="text" id="numero" placeholder="Número" 
-                                        maxlength="25" 
-                                        tabIndex="501" 
-                                        value={this.state.filter_number} 
-                                        onChange={(e)=>{this.handleNumberFilterParam(e);}}
-                                        className="form-control form-control-sm focusIn"
-                                    />
-                                </Form.Group>
-                            </Col>
-                            <Col className="col-xs-12 mb-3">
-                                <Form.Group>
-                                    <Form.Label>{t('registro_fecha_inicio')}</Form.Label>
-                                    <DatePicker 
-                                        selected={this.state.filter_startDate}
-                                        onChange={ (startDate) => this.handleStartDateFilterParam(startDate) }
-                                        selectsStart
-                                        //startDate={this.state.filter_startDate}
-                                        //endDate={this.state.filter_endDate} 
-                                        name="fechaInicio"
-                                        id="fechaInicio"
-                                        dateFormat="dd/MM/yyyy"
-                                        className="form-control form-control-sm estilCalendar focusIn"
-                                        locale={this.locale}
-                                        showYearDropdown={true}
-                                        preventOpenOnFocus={true}
-                                    />
-                                </Form.Group>
-                            </Col>
-                            <Col className="col-xs-12 mb-3">
-                                <Form.Group>
-                                    <Form.Label>{t('registro_fecha_fin')}</Form.Label>
-                                    <DatePicker 
-                                        selected={this.state.filter_endDate}
-                                        onChange={ (endDate) => this.handleEndDateFilterParam(endDate) } 
-                                        selectsEnd
-                                        //startDate={this.state.filter_startDate}
-                                        //endDate={this.state.filter_endDate} 
-                                        minDate={this.state.filter_startDate}
-                                        name="fechaFin"
-                                        id="fechaFin"
-                                        dateFormat="dd/MM/yyyy"
-                                        className="form-control form-control-sm estilCalendar focusIn"
-                                        locale={this.locale}
-                                        showYearDropdown={true}
-                                        preventOpenOnFocus={true}
-                                    />
-                                </Form.Group>
-                            </Col>
-                            <Col className="col-xs-12 mb-3">
-                                <Form.Group>
-                                    <Form.Label>{t('registro_estado')}</Form.Label>
-                                    <Form.Select id="estado"
-                                    name="estado" className="form-control form-control-sm focusIn"
-                                    value={this.state.filter_status}
-                                    tabindex="504" 
-                                    aria-labelledby="estado"
-                                    onChange={(e) => {this.handleStateFilterParam(e); }}>
-                                        <option value="0" selected="selected">{t('registro_estado_todos')}</option>
-                                        <option value="1">{t('registro_estado_1')}</option>
-                                        <option value="2">{t('registro_estado_4')}</option>
-                                        <option value="3">{t('registro_estado_10')}</option>
-                                        <option value="4">{t('registro_estado_11')}</option>
-                                    </Form.Select>
-                                </Form.Group>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <div id="errorContainer" className="row pb-2 ml-3 mr-0 ocult">
-                                <div className="alert alert-danger" role="alert" id="errorMsg"/>
-                            </div>
-                        </Row>
-                        <Row>
-                            <Button type="submit" className="btn btn-primary carpeta-btn ml-3 mt-2"  onClick={(e) => {this.handleSubmitSearcher(e)}} tabindex="505">{t('carpeta_buscar')}</Button>
-                        </Row>
-                    </Container>
-                </Form>
+        formulari = <>
+            <Form id="fechaBusqueda" style={{marginBottom: '20px'}}>
+                <Container style={{ width: '95%', paddingLeft: '0', margin: '0' }}>
+                    <Row>
+                        <Col className="col-xs-12 mb-3">
+                            <Form.Group>
+                                <Form.Label>{t('registro_numero')}</Form.Label>
+                                <Form.Control
+                                    type="text" id="numero" placeholder="Número"
+                                    maxlength="25"
+                                    tabIndex="501"
+                                    value={this.state.filter_number}
+                                    onChange={(e)=>{this.handleNumberFilterParam(e);}}
+                                    className="form-control form-control-sm focusIn"
+                                />
+                            </Form.Group>
+                        </Col>
+                        <Col className="col-xs-12 mb-3">
+                            <Form.Group>
+                                <Form.Label>{t('registro_fecha_inicio')}</Form.Label>
+                                <DatePicker
+                                    portalId="root-portal"
+                                    selected={this.state.filter_startDate}
+                                    onChange={ (startDate) => this.handleStartDateFilterParam(startDate) }
+                                    selectsStart
+                                    //startDate={this.state.filter_startDate}
+                                    //endDate={this.state.filter_endDate}
+                                    name="fechaInicio"
+                                    id="fechaInicio"
+                                    dateFormat="dd/MM/yyyy"
+                                    className="form-control form-control-sm estilCalendar focusIn"
+                                    locale={this.locale}
+                                    showYearDropdown={true}
+                                    preventOpenOnFocus={true}
+                                    popperPlacement="bottom"
+                                    popperModifiers={{
+                                        flip: {
+                                            behavior: ["bottom"] // don't allow it to flip to be above
+                                        },
+                                        preventOverflow: {
+                                            enabled: false // tell it not to try to stay within the view (this prevents the popper from covering the element you clicked)
+                                        },
+                                        hide: {
+                                            enabled: false // turn off since needs preventOverflow to be enabled
+                                        }
+                                    }}
+                                />
+                            </Form.Group>
+                        </Col>
+                        <Col className="col-xs-12 mb-3">
+                            <Form.Group>
+                                <Form.Label>{t('registro_fecha_fin')}</Form.Label>
+                                <DatePicker
+                                    portalId="root-portal"
+                                    selected={this.state.filter_endDate}
+                                    onChange={ (endDate) => this.handleEndDateFilterParam(endDate) }
+                                    selectsEnd
+                                    //startDate={this.state.filter_startDate}
+                                    //endDate={this.state.filter_endDate}
+                                    minDate={this.state.filter_startDate}
+                                    name="fechaFin"
+                                    id="fechaFin"
+                                    dateFormat="dd/MM/yyyy"
+                                    className="form-control form-control-sm estilCalendar focusIn"
+                                    locale={this.locale}
+                                    showYearDropdown={true}
+                                    preventOpenOnFocus={true}
+                                    popperPlacement="bottom"
+                                    popperModifiers={{
+                                        flip: {
+                                            behavior: ["bottom"] // don't allow it to flip to be above
+                                        },
+                                        preventOverflow: {
+                                            enabled: false // tell it not to try to stay within the view (this prevents the popper from covering the element you clicked)
+                                        },
+                                        hide: {
+                                            enabled: false // turn off since needs preventOverflow to be enabled
+                                        }
+                                    }}
+                                />
+                            </Form.Group>
+                        </Col>
+                        <Col className="col-xs-12 mb-3">
+                            <Form.Group>
+                                <Form.Label>{t('registro_estado')}</Form.Label>
+                                <Form.Select id="estado"
+                                             name="estado" className="form-control form-control-sm focusIn"
+                                             value={this.state.filter_status}
+                                             tabindex="504"
+                                             aria-labelledby="estado"
+                                             onChange={(e) => {this.handleStateFilterParam(e); }}>
+                                    <option value="0" selected="selected">{t('registro_estado_todos')}</option>
+                                    <option value="1">{t('registro_estado_1')}</option>
+                                    <option value="2">{t('registro_estado_4')}</option>
+                                    <option value="3">{t('registro_estado_10')}</option>
+                                    <option value="4">{t('registro_estado_11')}</option>
+                                </Form.Select>
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row style={{ width: 'fit-content'}}>
+                        <Col className="col-xs-12 mb-3">
+                            <Form.Group>
+                                <Form.Label>{t('registro_regPorPagina')}</Form.Label>
+                                <Form.Select id="regPorPagina"
+                                             name="regPorPagina" className="form-control form-control-sm focusIn"
+                                             value={this.state.filter_regPorPagina}
+                                             tabindex="505"
+                                             aria-labelledby="regPorPagina"
+                                             onChange={(e) => {this.handleRegPorPaginaFilterParam(e); }}>
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                </Form.Select>
+                            </Form.Group>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <div id="errorContainer" className="row pb-2 ml-3 mr-0 ocult">
+                            <div className="alert alert-danger" role="alert" id="errorMsg"/>
+                        </div>
+                    </Row>
+                    <Row>
+                        <Button type="submit" className="btn btn-primary carpeta-btn ml-3 mt-2"  onClick={e => {this.handleSubmitSearcher(e)}} tabindex="505">{t('carpeta_buscar')}</Button>
+                    </Row>
+                </Container>
+            </Form>
             </>
 
-            if(this.state.data != null && parseInt(this.state.pagination_total_items,10) > 0){
+        if (!isLoaded) {
+            taulaRegistres = '';
 
-                let paginationNumbers = []; 
-                for (let number = 1; number <= Math.ceil(this.state.pagination_total_items/10); number++) {
-                    paginationNumbers.push(<Pagination.Item key={number} active={number.toString() === this.state.pagination_active.toString()} activeLabel="" onClick={(event) => this.handlePagination(event)} >{number}</Pagination.Item>,); 
-                }
+            content = <div  id="carregant" className="loader-container centrat ">
+                <div className="loader"/>
+            </div>;
+        } else {
+            const data = this.state.data;
 
-               taulaRegistres = <>
-                    {/*<div style={{float:'left', marginTop: '9px;',paddingBottom: '0.7em'}}>{this.state.criteriosTexto}</div>*/}
-                    <Table responsive striped bordered hover style={tamanyTaula}>
-                        <thead className="table-success">
-                            <tr>
-                                <th>{t('registro_numero')}</th>
-                                <th style={{whiteSpace: 'nowrap'}}>{t('registro_fecha')}</th>
-                                <th>{t('registro_extracto')}</th>
-                                <th>{t('registro_estado')}</th>
-                                <th>{t('registro_destinatario')}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {this.state.data.map(({ numeroRegistro, fechaRegistro, extracto, tipoRegistro, denominacionDestino, estado }) => {
-                            return <tr key={numeroRegistro} onClick={(e) => this.handleItemClick(numeroRegistro) }>
-                                    <td>{numeroRegistro}</td>
-                                    <td style={{whiteSpace: 'nowrap'}}>{$.dateFormat(fechaRegistro)}</td>
-                                    <td>{extracto}</td>
-                                    <td>{t('registro_estado_'+estado)}</td>
-                                    <td>{denominacionDestino}</td>
+            if (this.state.error) {
+                content = <div className="alert alert-danger" role="alert">{data.error}</div>;
+            } else {
+
+                if (this.state.data != null && parseInt(this.state.pagination_total_items, 10) > 0) {
+
+                        let paginationNumbers = [];
+                        for (let number = 1; number <= Math.ceil(this.state.pagination_total_items / this.state.cercaRegistres); number++) {
+                            paginationNumbers.push(<Pagination.Item key={number}
+                                                                    active={number.toString() === this.state.pagination_active.toString()}
+                                                                    activeLabel=""
+                                                                    onClick={(event) => this.handlePagination(event)}>{number}</Pagination.Item>,);
+                        }
+
+                        taulaRegistres = <>
+                            <Table responsive striped bordered hover style={tamanyTaula}>
+                                <thead className="table-success">
+                                <tr>
+                                    <th>{t('registro_numero')}</th>
+                                    <th style={{whiteSpace: 'nowrap'}}>{t('registro_fecha')}</th>
+                                    <th>{t('registro_extracto')}</th>
+                                    <th>{t('registro_estado')}</th>
+                                    <th>{t('registro_destinatario')}</th>
                                 </tr>
-                        })}
-                        </tbody>
-                    </Table>
-                    <div style={{float:'left', marginTop: '9px', width: '60%'}}>
-                        {t('carpeta_paginacion_1') + 
-                        ((parseInt(this.state.pagination_active,10)-1)*10+1) + 
-                        t('carpeta_paginacion_2') + 
-                        ( ((parseInt(this.state.pagination_active,10)*10) <= parseInt(this.state.pagination_total_items,10)) 
-                            ? parseInt(this.state.pagination_active,10)*10 
-                            : this.state.pagination_total_items
-                        ) + 
-                        t('carpeta_paginacion_3') + 
-                        this.state.pagination_total_items + 
-                        t('carpeta_paginacion_4')}
-                    </div>
-                    <Pagination style={{float:'right', paddingRight: '0.7em'}}>
-                        {paginationNumbers}
-                    </Pagination>
+                                </thead>
+                                <tbody>
+                                {this.state.data.map(({
+                                                          numeroRegistro,
+                                                          fechaRegistro,
+                                                          extracto,
+                                                          tipoRegistro,
+                                                          denominacionDestino,
+                                                          estado
+                                                      }) => {
+                                    return <tr key={numeroRegistro}
+                                               onClick={(e) => this.handleItemClick(numeroRegistro)}>
+                                        <td>{numeroRegistro}</td>
+                                        <td style={{whiteSpace: 'nowrap'}}>{$.dateFormat(fechaRegistro)}</td>
+                                        <td>{extracto}</td>
+                                        <td>{t('registro_estado_' + estado)}</td>
+                                        <td>{denominacionDestino}</td>
+                                    </tr>
+                                })}
+                                </tbody>
+                            </Table>
+                            <div style={{float: 'left', marginTop: '9px', width: '60%'}}>
+                                {t('carpeta_paginacion_1') +
+                                ((parseInt(this.state.pagination_active, 10) - 1) * parseInt(this.state.cercaRegistres, 10) + 1) +
+                                t('carpeta_paginacion_2') +
+                                (((parseInt(this.state.pagination_active, 10) * parseInt(this.state.cercaRegistres, 10)) <= parseInt(this.state.pagination_total_items, 10))
+                                        ? parseInt(this.state.pagination_active, 10) * parseInt(this.state.cercaRegistres, 10)
+                                        : this.state.pagination_total_items
+                                ) +
+                                t('carpeta_paginacion_3') +
+                                this.state.pagination_total_items +
+                                t('carpeta_paginacion_4')}
+                            </div>
+                            <Pagination style={{float: 'right', paddingRight: '0.7em'}}>
+                                {paginationNumbers}
+                            </Pagination>
 
-                    <div className="col-md-12 border-0 float-left p-0" id="botoTornarDiscapacidad" style={{ marginTop: '20px' }}>
-                        <button type="button" data-toggle="modal" onClick={() => {
-                            window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                        }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarDiscapacidad">{t('reprendreTornar')}</button>
-                    </div>
+                            <div className="col-md-12 border-0 float-left p-0" id="botoTornarDiscapacidad"
+                                 style={{marginTop: '20px'}}>
+                                <button type="button" data-toggle="modal" onClick={() => {
+                                    window.location.href = sessionStorage.getItem("pagTornar");
+                                    sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
+                                }} className="botoSuport" tabIndex="520"
+                                        aria-labelledby="botoTornarDiscapacidad">{t('reprendreTornar')}</button>
+                            </div>
 
-                </>
+                        </>
+                    }
 
             }
         }
@@ -542,11 +672,11 @@ class Regweb extends Component {
                             <p className="lh15">{this.props.subtitles[i18n.language]} </p>
                             <div className="infoNoMenu">
                                 <div className="col-md-12 border-0 float-left p-0">
+                                    {formulari}
                                     {this.state.error && <div className="alert alert-danger hide" role="alert">{this.state.error}</div>}                            
                                     {this.state.numeroRegistro == null && content}
                                     {this.state.numeroRegistro == null && taulaRegistres}
                                     {this.state.pagination_total_items.toString() === '0' && <>
-                                        {/*<div style={{float:'left', marginTop: '9px;',paddingBottom: '0.7em'}}>{this.state.criteriosTexto}</div>*/}
                                         <div className="pt-3 alert alert-secondary" style={{ float: 'left', width: '95%'}} role="alert">{t('registro_vacio')}</div></>}
                                 </div>
                             </div>

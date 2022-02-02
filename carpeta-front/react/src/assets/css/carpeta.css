@@ -803,6 +803,9 @@ ul.pagination li.page-item.active {
 .borderError{
 	border: 1px solid red !important;
 }
+.margRegSelect{
+	margin-right: 1.7rem!important;
+}
 
 #dadespinbalayudascontainer .descarregaJustificant { text-align:center; } 
 #dadespinbalayudascontainer .descarregaJustificant span.oi { font-size: 3rem; display:block; margin: 10px; }

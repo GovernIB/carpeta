@@ -17,5 +17,21 @@
   "pinbalconvivenciaConsultaBtn": "Consultar",
   "pinbalConvivenciaCodigo0003" : "Tramitada",
   "pinbalConvivenciaCodigo0233" : "Titular no identificat",
-  "pinbalConvivenciaCodigo0232" : "Hi ha més d'un registre per les dades aportades"
+  "pinbalConvivenciaCodigo0232" : "Hi ha més d'un registre per les dades aportades",
+  "pinbalConvivenciaDistrito" : "Distrito",
+  "pinbalConvivenciaSeccion" : "Sección",
+  "pinbalConvivenciaHoja" : "Hoja",
+  "pinbalConvivenciaVia" : "Via",
+  "pinbalConvivenciaNumero" : "Número",
+  "pinbalConvivenciaKmt" : "Kmt",
+  "pinbalConvivenciaBloque" : "Bloque",
+  "pinbalConvivenciaPortal" : "Portal",
+  "pinbalConvivenciaEscalera" : "Escalera",
+  "pinbalConvivenciaPlanta" : "Planta",
+  "pinbalConvivenciaPuerta" : "Puerta",
+  "pinbalConvivenciaCodPostal" : "Código Postal",
+  "pinbalConvivenciaPersonas": "Personas",
+  "pinbalConvivenciaPeriodos" : "Periodos",
+  "pinbalConvivenciaExpedicion": "Fecha expedición",
+  "pinbalConvivenciaDesde" : "Desde"
 }

@@ -330,6 +330,9 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
     		/* Filtre número de registre */
             String formNumero = request.getParameter("numero");
 
+            /* Filtre número de registres per pàgina */
+            String formRegPorPagina = request.getParameter("registrosPorPagina");
+
             /* Filtre pàgina */
             String pageNumber = request.getParameter("pageNumber");
             if (pageNumber == null) {
@@ -388,7 +391,8 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             dades.put("form_dataFi", formDataFiStr);
             dades.put("form_dataInici", formDataIniciStr);
             dades.put("form_estat", formEstat);
-			dades.put("num_items", String.valueOf(numItems));
+//			dades.put("num_items", String.valueOf(numItems));
+            dades.put("num_items", formRegPorPagina);
             dades.put("page", pageNumber);
     		
     		response.setContentType("application/json");
@@ -402,9 +406,12 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             
             formDataFi = DateUtils.sumarRestarDiasFecha(formDataFi, 1);
 
+            log.info("formRegPorPagina: " + formRegPorPagina);
+            log.info("pageNumber: " + pageNumber);
+
             ResultadoBusquedaWs result;
             result = getRegistres(userData.getAdministrationID(), getEntidad(), formNumero,
-                    formDataInici, formDataFi, formEstat, Integer.parseInt(pageNumber), numItems, locale);
+                    formDataInici, formDataFi, formEstat, Integer.parseInt(pageNumber), Integer.parseInt(formRegPorPagina), locale);
 
             //@SuppressWarnings("unchecked")
             registres = (List<AsientoWs>) (List<?>) result.getResults();
