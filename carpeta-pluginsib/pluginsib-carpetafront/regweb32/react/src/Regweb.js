@@ -448,6 +448,8 @@ class Regweb extends Component {
         let taulaRegistres; 
         let detallRegistreContainer;
         var tamanyTaula = { width: '99%'};
+        let selectRegistres;
+        let registresBuid;
 
         formulari = <>
             <Form id="fechaBusqueda" style={{marginBottom: '20px'}}>
@@ -549,7 +551,7 @@ class Regweb extends Component {
                             </Form.Group>
                         </Col>
                     </Row>
-                    <Row style={{ width: 'fit-content'}}>
+                    <Row style={{ width: 'fit-content', display: 'none'}}>
                         <Col className="col-xs-12 mb-3">
                             <Form.Group>
                                 <Form.Label>{t('registro_regPorPagina')}</Form.Label>
@@ -571,7 +573,7 @@ class Regweb extends Component {
                             <div className="alert alert-danger" role="alert" id="errorMsg"/>
                         </div>
                     </Row>
-                    <Row>
+                    <Row className="col-md-3 pl-0 row" style={{zIndex: '5'}}>
                         <Button type="submit" className="btn btn-primary carpeta-btn ml-3 mt-2"  onClick={e => {this.handleSubmitSearcher(e)}} tabindex="505">{t('carpeta_buscar')}</Button>
                     </Row>
                 </Container>
@@ -584,8 +586,13 @@ class Regweb extends Component {
             content = <div  id="carregant" className="loader-container centrat ">
                 <div className="loader"/>
             </div>;
+
+            selectRegistres = '';
+            registresBuid = '';
+
         } else {
             const data = this.state.data;
+            registresBuid = <div className="pt-3 alert alert-secondary mt-5" style={{ float: 'left', width: '95%'}} role="alert">{t('registro_vacio')}</div>;
 
             if (this.state.error) {
                 content = <div className="alert alert-danger" role="alert">{data.error}</div>;
@@ -600,6 +607,21 @@ class Regweb extends Component {
                                                                     activeLabel=""
                                                                     onClick={(event) => this.handlePagination(event)}>{number}</Pagination.Item>,);
                         }
+
+                        selectRegistres = <div className="col-md-6 border-0 float-right p-0">
+                            <div className="col-sd-1 float-right pb-2 margRegSelect">
+                                <Form.Select id="rPP"
+                                             name="rPP" className="form-control form-control-sm focusIn"
+                                             value={this.state.filter_regPorPagina}
+                                             tabindex="510"
+                                             aria-labelledby="rPP"
+                                             onChange={(e) => {this.handleRegPorPaginaFilterParam(e); }}>
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                </Form.Select>
+                            </div>
+                        </div>;
 
                         taulaRegistres = <>
                             <Table responsive striped bordered hover style={tamanyTaula}>
@@ -675,11 +697,27 @@ class Regweb extends Component {
                                     {formulari}
                                     {this.state.error && <div className="alert alert-danger hide" role="alert">{this.state.error}</div>}                            
                                     {this.state.numeroRegistro == null && content}
-                                    {this.state.numeroRegistro == null && taulaRegistres}
-                                    {this.state.pagination_total_items.toString() === '0' && <>
-                                        <div className="pt-3 alert alert-secondary" style={{ float: 'left', width: '95%'}} role="alert">{t('registro_vacio')}</div></>}
                                 </div>
                             </div>
+                        </div>
+                        {/*<div className="col-md-12 border-0 float-left p-0" style={{width: '97%' }}>*/}
+                        {/*    <div className="col-sd-1 float-right pb-2">*/}
+                        {/*        <Form.Select id="rPP"*/}
+                        {/*                     name="rPP" className="form-control form-control-sm focusIn"*/}
+                        {/*                     value={this.state.filter_regPorPagina}*/}
+                        {/*                     tabindex="510"*/}
+                        {/*                     aria-labelledby="rPP"*/}
+                        {/*                     onChange={(e) => {this.handleRegPorPaginaFilterParam(e); }}>*/}
+                        {/*            <option value="5">5</option>*/}
+                        {/*            <option value="10">10</option>*/}
+                        {/*            <option value="25">25</option>*/}
+                        {/*        </Form.Select>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
+                        <div className="float-left" style={{width: '97%',top: '-3.5em', position: 'relative'}}>
+                            {selectRegistres}
+                            {this.state.numeroRegistro == null && taulaRegistres}
+                            {this.state.pagination_total_items.toString() === '0' && registresBuid}
                         </div>
                     </>}
                     {this.state.numeroRegistro != null && detallRegistreContainer}

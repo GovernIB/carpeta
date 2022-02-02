@@ -242,11 +242,12 @@ class Notib extends Component {
 
         let content;
         let taulaNotib;
+        let selectRegistres;
 
         let formulari = <>
             <Form id="fechaBusqueda" style={{marginBottom: '20px'}}>
                 <Container style={{ width: '95%', paddingLeft: '0', margin: '0' }}>
-                    <Row style={{ width: 'fit-content'}}>
+                    <Row style={{ width: 'fit-content', display: 'none'}}>
                         <Col className="col-xs-12 mb-3">
                             <Form.Group>
                                 <Form.Label>{t('registro_regPorPagina')}</Form.Label>
@@ -268,7 +269,7 @@ class Notib extends Component {
                             <div className="alert alert-danger" role="alert" id="errorMsg"/>
                         </div>
                     </Row>
-                    <Row>
+                    <Row className="col-md-3 pl-0 row" style={{zIndex: '5'}}>
                         <Button type="submit" className="btn btn-primary carpeta-btn ml-3 mt-2"  onClick={e => {this.handleSubmitSearcher(e)}} tabindex="505">{t('carpeta_buscar')}</Button>
                     </Row>
                 </Container>
@@ -279,6 +280,9 @@ class Notib extends Component {
             content = <div  id="carregant" className="loader-container centrat ">
                 <div className="loader"/>
             </div>;
+
+            selectRegistres = '';
+
         } else {
             content = "";
 
@@ -292,6 +296,21 @@ class Notib extends Component {
                                                             activeLabel=""
                                                             onClick={(event) => this.handlePagination(event)} >{number}</Pagination.Item>,);
                 }
+
+                selectRegistres = <div className="col-md-6 border-0 float-right p-0">
+                    <div className="col-sd-1 float-right pb-2 margRegSelect">
+                        <Form.Select id="rPP"
+                                     name="rPP" className="form-control form-control-sm focusIn"
+                                     value={this.state.filter_regPorPagina}
+                                     tabindex="510"
+                                     aria-labelledby="rPP"
+                                     onChange={(e) => {this.handleRegPorPaginaFilterParam(e); }}>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                        </Form.Select>
+                    </div>
+                </div>;
 
                 taulaNotib = <>
                     <Table responsive striped bordered hover style={tamanyTaula}>
@@ -335,7 +354,7 @@ class Notib extends Component {
 
             } else{
                 if(this.state.total_items === 0 && this.state.dataComunicacions !== null) {
-                    taulaNotib = <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%'}}
+                    taulaNotib = <div className="pt-3 alert alert-secondary mt-5" style={{float: 'left', width: '95%'}}
                                       role="alert">{t('notibBuid')}</div>
                 }
             }
@@ -353,13 +372,16 @@ class Notib extends Component {
                             {formulari}
                             {this.state.error && <div className="alert alert-danger hide" role="alert">{this.state.error}</div>}
                             {content}
-                            <div className="card-body imc--llista--capses pl-0">
-                                {this.state.isLoaded && taulaNotib }
-                            </div>
+                            {/*<div className="card-body imc--llista--capses pl-0">*/}
+                            {/*    {this.state.isLoaded && taulaNotib }*/}
+                            {/*</div>*/}
                         </div>
                     </div>
                 </div>
-
+                <div className="float-left" style={{width: '97%',top: '-3.5em', position: 'relative'}}>
+                    {selectRegistres}
+                    {this.state.isLoaded && taulaNotib }
+                </div>
                 <div className="col-md-12 border-0 float-left p-0" id="botoTornarNotib" style={{ marginTop: '20px' }}>
                     <button type="button" data-toggle="modal" onClick={() => {
                         window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
