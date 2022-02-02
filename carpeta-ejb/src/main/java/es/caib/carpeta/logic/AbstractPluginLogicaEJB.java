@@ -96,7 +96,6 @@ public abstract class AbstractPluginLogicaEJB<I extends IPlugin> extends PluginL
 
             if (plugin.getPropietats() != null && plugin.getPropietats().trim().length() != 0) {
                 try {
-                    
                     Map<String, Object> map = new HashMap<String, Object>();
                     map.put("SP", Configuracio.getJavaAndCarpetaFileProperties());
                     
@@ -104,12 +103,10 @@ public abstract class AbstractPluginLogicaEJB<I extends IPlugin> extends PluginL
                     String generat = TemplateEngine.processExpressionLanguageSquareBrackets(plantilla, map, new Locale("ca"));
                     
                     //log.error("PROPIETATS DESPRES DE generat:\n" + generat + "\n");
-                    
-                    
                     prop.load(new StringReader(generat));
                                         
                 } catch (Exception e) {
-                   throw new I18NException(e, "comodi", 
+                   throw new I18NException(e, "genapp.comodi", 
                       new I18NArgumentString("Error desconegut processant propietats del plugin "
                         + pluginID + ": " + e.getMessage()));
                 }

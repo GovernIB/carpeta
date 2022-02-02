@@ -151,3 +151,5 @@ nb-configuration.xml
 /carpeta-pluginsib/pluginsib-carpetafront/notib/react/package-lock.json
 /carpeta-pluginsib/pluginsib-carpetafront/notificacionssistra/react/node_modules/
 /carpeta-pluginsib/pluginsib-carpetafront/notificacionssistra/react/package-lock.json
+/scripts/genapp/genapp.log
+/scripts/genapp/lastconfig.properties
