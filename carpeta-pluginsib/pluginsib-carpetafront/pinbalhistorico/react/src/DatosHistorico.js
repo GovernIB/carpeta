@@ -17,7 +17,7 @@ class DatosHistorico extends Component {
             isLoaded: false,
             data: null,
             municipio: null,
-            anyos: null
+            anyos: 1
         };
 
         this.handleMunicipio = this.handleMunicipio.bind(this);
@@ -43,7 +43,22 @@ class DatosHistorico extends Component {
         document.getElementById("formulario").classList.add("d-none");
         document.getElementById("carregant").classList.remove("d-none");
 
-        axios.post(url2, 'municipio='+this.state.municipio+'&anyos='+this.state.anyos).then(res => {
+        const municipiIsValid = (this.state.municipio) ? true : false;
+
+        if(!municipiIsValid){
+            const errorMsg = {"error":t('pinbalHistoricoValidaMunicipi')}
+            this.setState({
+                ...this.state,
+                isLoaded: true,
+                data: errorMsg
+            })
+            return false;
+        }
+
+        // Si no és un valor númeric, inserim el valor per defecte 1.
+        const numeroAnyos = (isNaN(Number(this.state.anyos))) ? 1 : this.state.anyos;
+
+        axios.post(url2, 'municipio='+this.state.municipio+'&anyos='+numeroAnyos).then(res => {
 
             this.setState({
                 ...this.state, 
@@ -73,6 +88,8 @@ class DatosHistorico extends Component {
 
         return false;
     };
+
+
     
 
     render() {
@@ -93,6 +110,7 @@ class DatosHistorico extends Component {
                                 <label for="codigoMunicipio">{t('pinbalHistoricoMunicipioLabel')}</label>
                                 <div class="col-md-4 p-0 col-sm-6" style={{width:'90%'}}>
                                     <select name="codigoMunicipio" id="codigoMunicipio" className="form-control"  value={this.state.municipio} onChange={this.handleMunicipio}>
+                                        <option value="">{t('pinbalHistoricoSelecciona')}</option>
                                         {
                                             municipis.map( (item) => React.createElement('option', {value: item.codigo}, item.nombre))
                                         }
@@ -121,23 +139,96 @@ class DatosHistorico extends Component {
 
                 if ( data.codigo == '0003'){
 
-                    let periodosInscripcionContent = '';                    
-                    data.personas.forEach(
+                    let periodosHistoricoContent = '';                    
+                    data.historico.forEach(
                         (item) => {
-                            let periodosContent = '';
-                            if(item.periodosInscripcion.length > 0){
-                                periodosContent = '<ul style="margin-left:30px;">';
-                                item.periodosInscripcion.forEach(  
-                                    (elemento) => periodosContent +=`<li>${t('pinbalHistoricoDesde')} ${elemento.desde} ${elemento.descripcion}</li>`
-                                );
-                                periodosContent += '</ul>';
-                            }
-                            periodosInscripcionContent += `<div class="persona" style="border: 1px solid #ccc; padding: 10px 20px; border-radius: 10px; margin-bottom: 10px;">
-                                <p><strong>${item.nombre} ${item.apellido1} ${item.apellido2}</strong></p>
-                                <p>${item.tipodocumentacion}: ${item.documentacion}</p>
-                                <p>${t('pinbalHistoricoFechaNacimiento')}: ${item.fechanacimiento}</p>
-                                ${periodosContent}
-                            </div>`
+                            periodosHistoricoContent += `
+                                <div class="domicilio" style="border: 1px solid #ccc; padding: 10px 20px; border-radius: 10px; margin-bottom: 10px;">
+                                    <strong>${t('pinbalHistoricoDesde')} ${item.desde} ${t('pinbalHistoricoHasta')} ${item.hasta}</strong>
+                                    <hr>
+                                    ${ item.motivoInscripcion[0] && `<dl class="row">
+                                    <div>
+                                        <dt class="col-sm-3">${t('pinbalHistoricoMotivoInscripcion')}</dt>
+                                        <dd class="col-sm-7">${item.motivoInscripcion[0].descripcion}</dd>
+                                    </div></dl>`}
+                                    ${ item.motivoBaja[0] && `<dl class="row">
+                                        <div>
+                                            <dt class="col-sm-3">${t('pinbalHistoricoMotivoBaja')}</dt>
+                                            <dd class="col-sm-7">${item.motivoBaja[0].descripcion}</dd>
+                                        </div></dl>`}
+                                    <dl class="row">
+                                        <div>
+                                            <dt class="col-sm-3">${t('pinbalHistoricoDistrito')}</dt>
+                                            <dd class="col-sm-7">${item.claveHojaPadronal[0].distrito}</dd>
+                                        </div>
+                                        <div>
+                                            <dt class="col-sm-3">${t('pinbalHistoricoSeccion')}</dt>
+                                            <dd class="col-sm-7">${item.claveHojaPadronal[0].seccion}</dd>
+                                        </div>
+                                        <div>
+                                            <dt class="col-sm-3">${t('pinbalHistoricoHoja')}</dt>
+                                            <dd class="col-sm-7">${item.claveHojaPadronal[0].hoja}</dd>
+                                        </div>
+
+                                        <div>
+                                            <dt class="col-sm-3">${t('pinbalHistoricoProvincia')}</dt>
+                                            <dd class="col-sm-7">${item.provinciaRespuesta[0].nombre}</dd>
+                                        </div>
+                                        <div>
+                                            <dt class="col-sm-3">${t('pinbalHistoricoMunicipio')}</dt>
+                                            <dd class="col-sm-7">${item.municipioRespuesta[0].nombre}</dd>
+                                        </div>
+                                        ${ item.entColectiva[0].nombre && `<div>
+                                            <dt class="col-sm-3">${t('pinbalHistoricoEntColectiva')}</dt>
+                                            <dd class="col-sm-7">${item.entColectiva[0].nombre}</dd>
+                                        </div>` }
+                                        ${ item.entSingular[0].nombre && `<div>
+                                            <dt class="col-sm-3">${t('pinbalHistoricoEntSingular')}</dt>
+                                            <dd class="col-sm-7">${item.entSingular[0].nombre}</dd>
+                                        </div>` }
+                                        ${ item.nucleo[0].nombre && `<div>
+                                            <dt class="col-sm-3">${t('pinbalHistoricoNucleo')}</dt>
+                                            <dd class="col-sm-7">${item.nucleo[0].nombre}</dd>
+                                        </div>` }
+                                      
+                                        <div>
+                                            <dt class="col-sm-3">${t('pinbalHistoricoVia')}</dt>
+                                            <dd class="col-sm-7">${item.direccion[0].via[0].tipo} ${item.direccion[0].via[0].nombre}</dd>
+                                        </div>
+                                        ${ item.direccion[0].numero && `<div>
+                                            <dt class="col-sm-3">${t('pinbalHistoricoNumero')}</dt>
+                                            <dd class="col-sm-7">${item.direccion[0].numero}</dd>
+                                        </div>` }
+                                        ${ item.direccion[0].kmt && `<div>
+                                            <dt class="col-sm-3">${t('pinbalHistoricoKmt')}</dt>
+                                            <dd class="col-sm-7">${item.direccion[0].kmt}</dd>
+                                        </div>` }
+                                        ${ item.direccion[0].bloque && `<div>
+                                            <dt class="col-sm-3">${t('pinbalHistoricoBloque')}</dt>
+                                            <dd class="col-sm-7">${item.direccion[0].bloque}</dd>
+                                        </div>` } 
+                                        ${ item.direccion[0].portal && `<div>
+                                            <dt class="col-sm-3">${t('pinbalHistoricoPortal')}</dt>
+                                            <dd class="col-sm-7">${item.direccion[0].portal}</dd>
+                                        </div>` }
+                                        ${ item.direccion[0].escalera && `<div>
+                                            <dt class="col-sm-3">${t('pinbalHistoricoEscalera')}</dt>
+                                            <dd class="col-sm-7">${item.direccion[0].escalera}</dd>
+                                        </div>` }
+                                        ${ item.direccion[0].planta && `<div>
+                                            <dt class="col-sm-3">${t('pinbalHistoricoPlanta')}</dt>
+                                            <dd class="col-sm-7">${item.direccion[0].planta}</dd>
+                                        </div>`}
+                                        ${ item.direccion[0].puerta && `<div>
+                                            <dt class="col-sm-3">${t('pinbalHistoricoPuerta')}</dt>
+                                            <dd class="col-sm-7">${item.direccion[0].puerta}</dd>
+                                        </div>` }
+                                        ${ item.direccion[0].codigoPostal && `<div>
+                                            <dt class="col-sm-3">${t('pinbalHistoricoCodPostal')}</dt>
+                                            <dd class="col-sm-7">${item.direccion[0].codigoPostal}</dd>
+                                        </div>` }
+                                    </dl>
+                                </div>`
                         }
                     );
 
@@ -147,67 +238,35 @@ class DatosHistorico extends Component {
                         </div>
                         <br/>
                         <div className="col-md-12 border-0 float-left p-0">
+
                             <dl className="row">
                                 <div>
-                                    <dt className="col-sm-3">{t('pinbalHistoricoDistrito')}</dt>
-                                    <dd className="col-sm-7">{data.distrito}</dd>
+                                    <dt className="col-sm-3">{t('pinbalHistoricoNom')}</dt>
+                                    <dd className="col-sm-7">{data.nombre}</dd>
                                 </div>
                                 <div>
-                                    <dt className="col-sm-3">{t('pinbalHistoricoSeccion')}</dt>
-                                    <dd className="col-sm-7">{data.seccion}</dd>
+                                    <dt className="col-sm-3">{t('pinbalHistoricoApellido1')}</dt>
+                                    <dd className="col-sm-7">{data.apellido1}</dd>
                                 </div>
                                 <div>
-                                    <dt className="col-sm-3">{t('pinbalHistoricoHoja')}</dt>
-                                    <dd className="col-sm-7">{data.hoja}</dd>
+                                    <dt className="col-sm-3">{t('pinbalHistoricoApellido2')}</dt>
+                                    <dd className="col-sm-7">{data.apellido2}</dd>
+                                </div>
+                                <div>
+                                    <dt className="col-sm-3">{t('pinbalHistoricoFechaNacimiento')}</dt>
+                                    <dd className="col-sm-7">{data.fechaNacimiento}</dd>
+                                </div>
+                                <div>
+                                    <dt className="col-sm-3">{t('pinbalHistoricoTipoDocumentacion')}</dt>
+                                    <dd className="col-sm-7">{data.tipoDocumentacion}</dd>
+                                </div>
+                                <div>
+                                    <dt className="col-sm-3">{t('pinbalHistoricoDocumentacion')}</dt>
+                                    <dd className="col-sm-7">{data.documentacion}</dd>
                                 </div>
                             </dl>
                             <hr/>
-                            <dl className="row">
-                                <div>
-                                    <dt className="col-sm-3">{t('pinbalHistoricoVia')}</dt>
-                                    <dd className="col-sm-7">{data.tipoVia} {data.via}</dd>
-                                </div>
-                                {data.numero && <div>
-                                    <dt className="col-sm-3">{t('pinbalHistoricoNumero')}</dt>
-                                    <dd className="col-sm-7">{data.numero}</dd>
-                                </div>}
-                                {data.kmt && <div>
-                                    <dt className="col-sm-3">{t('pinbalHistoricoKmt')}</dt>
-                                    <dd className="col-sm-7">{data.kmt}</dd>
-                                </div>}
-                                {data.bloque && <div>
-                                    <dt className="col-sm-3">{t('pinbalHistoricoBloque')}</dt>
-                                    <dd className="col-sm-7">{data.bloque}</dd>
-                                </div>}
-                                {data.portal && <div>
-                                    <dt className="col-sm-3">{t('pinbalHistoricoPortal')}</dt>
-                                    <dd className="col-sm-7">{data.portal}</dd>
-                                </div>}
-                                {data.escalera && <div>
-                                    <dt className="col-sm-3">{t('pinbalHistoricoEscalera')}</dt>
-                                    <dd className="col-sm-7">{data.escalera}</dd>
-                                </div>}
-                                {data.planta && <div>
-                                    <dt className="col-sm-3">{t('pinbalHistoricoPlanta')}</dt>
-                                    <dd className="col-sm-7">{data.planta}</dd>
-                                </div>}
-                                {data.puerta && <div>
-                                    <dt className="col-sm-3">{t('pinbalHistoricoPuerta')}</dt>
-                                    <dd className="col-sm-7">{data.puerta}</dd>
-                                </div>}
-                                <div>
-                                    <dt className="col-sm-3">{t('pinbalHistoricoCodPostal')}</dt>
-                                    <dd className="col-sm-7">{data.codPostal}</dd>
-                                </div>
-                            </dl>
-                            <hr/>
-                            {periodosInscripcionContent && <dl className="row">
-                                <div>
-                                    <dt className="col-sm-3">{t('pinbalHistoricoPersonas')}</dt>
-                                    <dd className="col-sm-7"><ul dangerouslySetInnerHTML={{__html: periodosInscripcionContent}}></ul></dd>
-                                </div>
-                            </dl>}
-                            <hr/>
+                            {periodosHistoricoContent && <div className="domicilis" dangerouslySetInnerHTML={{__html: periodosHistoricoContent}}></div>}
                             {data.fechaExpedicion && <dl className="row">
                                 <div>
                                     <dt className="col-sm-3">{t('pinbalHistoricoExpedicion')}</dt>

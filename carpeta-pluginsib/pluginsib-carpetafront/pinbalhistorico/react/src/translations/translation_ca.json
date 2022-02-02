@@ -35,5 +35,18 @@
   "pinbalHistoricoPeriodos" : "Períodes",
   "pinbalHistoricoExpedicion": "Data expedició",
   "pinbalHistoricoFechaNacimiento": "Data de naixement",
-  "pinbalHistoricoDesde" : "Des del"
+  "pinbalHistoricoDesde" : "Des del",
+  "pinbalHistoricoHasta" : "fins al",
+  "pinbalHistoricoProvincia": "Provincia",
+  "pinbalHistoricoMunicipio": "Municipi",
+  "pinbalHistoricoEntColectiva": "Entitat col·lectiva",
+  "pinbalHistoricoEntSingular": "Entitat singular",
+  "pinbalHistoricoNucleo": "Nucli",
+  "pinbalHistoricoTipoDocumentacion": "Tipus document",
+  "pinbalHistoricoDocumentacion": "Número",
+  "pinbalHistoricoDomicilios": "Domicilis",
+  "pinbalHistoricoMotivoInscripcion": "Motiu inscripció",
+  "pinbalHistoricoMotivoBaja" : "Motiu baixa",
+  "pinbalHistoricoSelecciona" : "Tria un municipi",
+  "pinbalHistoricoValidaMunicipi" : "Heu de triar un municipi."
 }

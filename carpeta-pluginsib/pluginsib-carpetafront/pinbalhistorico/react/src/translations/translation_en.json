@@ -34,5 +34,18 @@
   "pinbalHistoricoPersonas": "Personas",
   "pinbalHistoricoPeriodos" : "Periodos",
   "pinbalHistoricoExpedicion": "Fecha expedición",
-  "pinbalHistoricoDesde" : "Desde"
+  "pinbalHistoricoDesde" : "Desde",
+  "pinbalHistoricoHasta" : "hasta",
+  "pinbalHistoricoProvincia": "Provincia",
+  "pinbalHistoricoMunicipio": "Municipio",
+  "pinbalHistoricoEntColectiva": "Entidad colectiva",
+  "pinbalHistoricoEntSingular": "Entidad singular",
+  "pinbalHistoricoNucleo": "Núcleo",
+  "pinbalHistoricoTipoDocumentacion": "Tipo documento",
+  "pinbalHistoricoDocumentacion": "Número",
+  "pinbalHistoricoDomicilios": "Domicilios",
+  "pinbalHistoricoMotivoInscripcion": "Motivo inscripción",
+  "pinbalHistoricoMotivoBaja" : "Motivo baja",
+  "pinbalHistoricoSelecciona" : "Escoja un municipio",
+  "pinbalHistoricoValidaMunicipi" : "Debe escoger un municipio"
 }

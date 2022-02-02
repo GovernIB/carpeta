@@ -405,7 +405,7 @@ public class PinbalHistoricoCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
     	 * datos de test
     	 * 
     	 */
-        /*
+        
         datosHistorico.setError("");
         datosHistorico.setDni("12345678A");
         datosHistorico.setNombre("JUAN ANTONIO");
@@ -428,8 +428,8 @@ public class PinbalHistoricoCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
     	domicilio1.setEntSingular(new ArrayList<>(Arrays.asList(new EntSingular("42", "EntSingular"))));
     	domicilio1.setNucleo(new ArrayList<>(Arrays.asList(new Nucleo("43", "Nucleo"))));
     	domicilio1.setCodUnidadPoblacional("codUnidad");
-    	domicilio1.setDesde("1999-01-01");
-    	domicilio1.setHasta("2005-12-30");
+    	domicilio1.setDesde("01/01/1999");
+    	domicilio1.setHasta("30/12/2005");
     	domicilio1.setMotivoInscripcion(new ArrayList<>(Arrays.asList(new MotivoInscripcion("cod","mot","causa"))));
     	domicilio1.setMotivoBaja(new ArrayList<>(Arrays.asList(new MotivoBaja("1","2","3"))));
     	
@@ -444,7 +444,7 @@ public class PinbalHistoricoCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
     	direccion.setCodigoPostal("07003");
     	domicilio1.setDireccion(new ArrayList<>(Arrays.asList(direccion)));
     	datosHistorico.setHistorico(new ArrayList<>(Arrays.asList(domicilio1, domicilio1)));
-    	*/
+    	
         return datosHistorico;
 	}
 
