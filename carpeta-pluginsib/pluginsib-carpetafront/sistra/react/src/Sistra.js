@@ -353,7 +353,7 @@ class Sistra extends Component {
             </>
         } else{
             if(this.state.total_items === 0 && this.state.data !== null) {
-                taulaTramits = <div className="pt-3 alert alert-secondary" style={{ float: 'left', width: '95%'}} role="alert">{t('sistraBuid')}</div>
+                taulaTramits = <div className="pt-3 alert alert-secondary mt-5" style={{ float: 'left', width: '95%'}} role="alert">{t('sistraBuid')}</div>
             }
         }
 
@@ -530,6 +530,7 @@ class Sistra extends Component {
 
         let taulaTramits;
         let detallRegistreContainer;
+        let selectRegistres;
 
         formulari = <>
             <Form id="fechaBusqueda" style={{ marginBottom: '20px'}}>
@@ -540,6 +541,7 @@ class Sistra extends Component {
                                 <Form.Label>{t('sistraDataInici')}</Form.Label>
 
                                 <DatePicker
+                                    portalId="root-portal"
                                     selected={this.state.dataInici}
                                     onChange={ (startDate) => this.handleChangeDataInici(startDate) }
                                     selectsStart
@@ -552,6 +554,18 @@ class Sistra extends Component {
                                     locale={this.locale}
                                     showYearDropdown={true}
                                     preventOpenOnFocus={true}
+                                    popperPlacement="bottom"
+                                    popperModifiers={{
+                                        flip: {
+                                            behavior: ["bottom"] // don't allow it to flip to be above
+                                        },
+                                        preventOverflow: {
+                                            enabled: false // tell it not to try to stay within the view (this prevents the popper from covering the element you clicked)
+                                        },
+                                        hide: {
+                                            enabled: false // turn off since needs preventOverflow to be enabled
+                                        }
+                                    }}
                                 />
                             </Form.Group>
                         </Col>
@@ -559,6 +573,7 @@ class Sistra extends Component {
                             <Form.Group>
                                 <Form.Label>{t('sistraDataFi')}</Form.Label>
                                 <DatePicker
+                                    portalId="root-portal"
                                     selected={this.state.dataFi}
                                     onChange={ (endDate) => this.handleChangeDataFi(endDate) }
                                     selectsEnd
@@ -572,6 +587,18 @@ class Sistra extends Component {
                                     locale={this.locale}
                                     showYearDropdown={true}
                                     preventOpenOnFocus={true}
+                                    popperPlacement="bottom"
+                                    popperModifiers={{
+                                        flip: {
+                                            behavior: ["bottom"] // don't allow it to flip to be above
+                                        },
+                                        preventOverflow: {
+                                            enabled: false // tell it not to try to stay within the view (this prevents the popper from covering the element you clicked)
+                                        },
+                                        hide: {
+                                            enabled: false // turn off since needs preventOverflow to be enabled
+                                        }
+                                    }}
                                 />
                             </Form.Group>
                         </Col>
@@ -593,7 +620,7 @@ class Sistra extends Component {
                             </Form.Group>
                         </Col>
                     </Row>
-                    <Row style={{ width: 'fit-content'}}>
+                    <Row style={{ width: 'fit-content', display: 'none'}}>
                         <Col className="col-xs-12 mb-3">
                             <Form.Group>
                                 <Form.Label>{t('registro_regPorPagina')}</Form.Label>
@@ -615,7 +642,7 @@ class Sistra extends Component {
                             <div className="alert alert-danger" role="alert" id="errorMsg"/>
                         </div>
                     </Row>
-                    <Row>
+                    <Row className="col-md-3 pl-0 row" style={{zIndex: '5'}}>
                         <Button type="submit" className="btn btn-primary carpeta-btn ml-3 mt-2" onClick={(e) => {this.handleSubmit(e)}} tabindex="504">{t('sistraCercaBoto')}</Button>
                     </Row>
                 </Container>
@@ -628,6 +655,9 @@ class Sistra extends Component {
              content = <div  id="carregant" className="loader-container centrat ">
                         <div className="loader"/>
                     </div>;
+
+            selectRegistres = '';
+
         } else {
 
             if (this.state.error) {
@@ -643,6 +673,21 @@ class Sistra extends Component {
                                                                 activeLabel=""
                                                                 onClick={(event) => this.handlePagination(event)}>{number}</Pagination.Item>,);
                     }
+
+                    selectRegistres = <div className="col-md-6 border-0 float-right p-0">
+                                        <div className="col-sd-1 float-right pb-2 margRegSelect">
+                                            <Form.Select id="rPP"
+                                                name="rPP" className="form-control form-control-sm focusIn"
+                                                value={this.state.filter_regPorPagina}
+                                                tabindex="510"
+                                                aria-labelledby="rPP"
+                                                onChange={(e) => {this.handleRegPorPaginaFilterParam(e); }}>
+                                                <option value="5">5</option>
+                                                <option value="10">10</option>
+                                                <option value="25">25</option>
+                                            </Form.Select>
+                                        </div>
+                                    </div>;
 
                     taulaTramits = <>
                         <Table responsive striped bordered hover style={tamanyTaula}>
@@ -732,7 +777,7 @@ class Sistra extends Component {
                             {/*    $.nomEstat(this.state.estat) +*/}
                             {/*    t('carpeta_criterio_4')}*/}
                             {/*</div>*/}
-                            <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%'}}
+                            <div className="pt-3 alert alert-secondary mt-5" style={{float: 'left', width: '95%'}}
                                  role="alert">{t('sistraBuid')}</div>
                         </>
                     }
@@ -755,7 +800,10 @@ class Sistra extends Component {
                             </div>
                         </div>
                     </div>
-                    {taulaTramits}
+                    <div className="float-left" style={{width: '97%',top: '-3.5em', position: 'relative'}}>
+                        {selectRegistres}
+                        {taulaTramits}
+                    </div>
                     <div className="col-md-12 border-0 float-left p-0" id="botoTornarSistra" style={{ marginTop: '20px' }}>
                         <button type="button" data-toggle="modal" onClick={() => {
                             window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
