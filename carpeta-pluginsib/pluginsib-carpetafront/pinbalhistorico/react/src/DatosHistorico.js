@@ -127,7 +127,7 @@ class DatosHistorico extends Component {
                             <input type="number" id="numeroAnyos" className="form-control"  value={this.state.anyos} onChange={this.handleAnyos} />
                         </div>
                     </div>
-                    <button type="submit" className="btn btn-primary">{t('pinbalHistoricoConsultaBtn')}</button>
+                    <button type="submit" className="btn btn-primary carpeta-btn">{t('pinbalHistoricoConsultaBtn')}</button>
                 </form>;
 
         } else {
@@ -156,7 +156,7 @@ class DatosHistorico extends Component {
                                     <input type="number" id="numeroAnyos" className="form-control"  value={this.state.anyos} onChange={this.handleAnyos} />
                                 </div>
                             </div>
-                            <button type="submit" className="btn btn-primary">{t('pinbalHistoricoConsultaBtn')}</button>
+                            <button type="submit" className="btn btn-primary carpeta-btn">{t('pinbalHistoricoConsultaBtn')}</button>
                         </form>
                     </>
             } else {
