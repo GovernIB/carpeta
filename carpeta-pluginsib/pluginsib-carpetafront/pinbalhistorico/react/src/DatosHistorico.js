@@ -38,6 +38,8 @@ class DatosHistorico extends Component {
 
         event.preventDefault();
 
+        const { t } = this.props;
+
         const url2 = this.props.pathtoservei;
 
         document.getElementById("formulario").classList.add("d-none");
@@ -51,7 +53,9 @@ class DatosHistorico extends Component {
                 ...this.state,
                 isLoaded: true,
                 data: errorMsg
-            })
+            });
+            document.getElementById("carregant").classList.add("d-none");
+            document.getElementById("formulario").classList.remove("d-none");
             return false;
         }
 
@@ -106,25 +110,25 @@ class DatosHistorico extends Component {
            
              content =  <>
                  <form id="formulario" onSubmit={this.handleSubmit} method="GET">
-                            <div className="form-group">
-                                <label for="codigoMunicipio">{t('pinbalHistoricoMunicipioLabel')}</label>
-                                <div class="col-md-4 p-0 col-sm-6" style={{width:'90%'}}>
-                                    <select name="codigoMunicipio" id="codigoMunicipio" className="form-control"  value={this.state.municipio} onChange={this.handleMunicipio}>
-                                        <option value="">{t('pinbalHistoricoSelecciona')}</option>
-                                        {
-                                            municipis.map( (item) => React.createElement('option', {value: item.codigo}, item.nombre))
-                                        }
-                                    </select>
-                                </div>
-                            </div>
-                            <div className="form-group">
-                                <label for="numeroAnyos">{t('pinbalHistoricoAnyosLabel')}</label>
-                                <div class="col-md-4 p-0 col-sm-6" style={{width:'90%'}}>
-                                    <input type="number" id="numeroAnyos" className="form-control"  value={this.state.anyos} onChange={this.handleAnyos} />
-                                </div>
-                            </div>
-                            <button type="submit" className="btn btn-primary">{t('pinbalHistoricoConsultaBtn')}</button>
-                        </form>
+                    <div className="form-group">
+                        <label for="codigoMunicipio">{t('pinbalHistoricoMunicipioLabel')}</label>
+                        <div class="col-md-4 p-0 col-sm-6" style={{width:'90%'}}>
+                            <select name="codigoMunicipio" id="codigoMunicipio" className="form-control"  value={this.state.municipio} onChange={this.handleMunicipio}>
+                                <option value="">{t('pinbalHistoricoSelecciona')}</option>
+                                {
+                                    municipis.map( (item) => React.createElement('option', {value: item.codigo}, item.nombre))
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div className="form-group">
+                        <label for="numeroAnyos">{t('pinbalHistoricoAnyosLabel')}</label>
+                        <div class="col-md-4 p-0 col-sm-6" style={{width:'90%'}}>
+                            <input type="number" id="numeroAnyos" className="form-control"  value={this.state.anyos} onChange={this.handleAnyos} />
+                        </div>
+                    </div>
+                    <button type="submit" className="btn btn-primary">{t('pinbalHistoricoConsultaBtn')}</button>
+                </form>
                 </>;
 
         } else {
