@@ -596,6 +596,7 @@ public class InicioController extends CommonFrontController {
         
         // Registram la variable de Id de Sessió per l'enregistrament dels accesos.
         sesionHttp.setIdSessio(request.getSession().getId());
+        sesionHttp.setIpAddress(request.getRemoteAddr());
         try {
 
             String lang = LocaleContextHolder.getLocale().getLanguage();
