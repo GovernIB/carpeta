@@ -42,7 +42,7 @@ class DatosConvivencia extends Component {
         const municipiIsValid = (this.state.municipio) ? true : false;
 
         if(!municipiIsValid){
-            const errorMsg = {"error":t('pinbalHistoricoValidaMunicipi')}
+            const errorMsg = {"error":t('pinbalConvivenciaValidaMunicipi')}
             this.setState({
                 ...this.state,
                 isLoaded: true,
