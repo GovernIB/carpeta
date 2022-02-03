@@ -809,6 +809,12 @@ ul.pagination li.page-item.active {
 .margRegSelect{
 	margin-right: 1.7rem!important;
 }
+.pujarTaula{
+	top: -3.5em;
+}
+.margeBuid{
+	margin-top: 3.5rem!important;
+}
 
 #dadespinbalayudascontainer .descarregaJustificant { text-align:center; } 
 #dadespinbalayudascontainer .descarregaJustificant span.oi { font-size: 3rem; display:block; margin: 10px; }
@@ -1157,6 +1163,15 @@ input.form-control, select.form-control {
 }
 .dataTables_length, .dataTables_info, .dataTables_filter, .dataTables_paginate{
 	font-size: 0.7em !important;
+}
+.pujarTaula{
+	top: -2.5em;
+}
+.margeBuid{
+	margin-top: 5rem!important;
+}
+.selectMobil{
+	font-size: 0.7rem!important;
 }
 }
 

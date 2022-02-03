@@ -23,6 +23,7 @@ public class SesionHttp {
     private String nomEntitat;
     private long accesPlugin;
     private String idSessio;
+    private String ipAddress;
 
     public SesionHttp() {
     }
@@ -95,6 +96,14 @@ public class SesionHttp {
     
     public void setIdSessio(String idSessio) {
     	this.idSessio = idSessio;
+    }
+
+    public  String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
     }
 
 }

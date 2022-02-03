@@ -28,6 +28,21 @@ public interface SeccioLogicaService extends SeccioService {
     
     public List<Seccio> findByEntity(long entitatID, Long seccioPareID) throws I18NException;
     
-    public Set<Long> deleteFull(Seccio seccio, boolean deleteFiles) throws I18NException;
+
+    /**
+     * Esborra secció de BD, fitxer de BD i fitxer físic. 
+     * @param seccio
+     * @throws I18NException
+     */
+    public void deleteFull(Seccio seccio) throws I18NException;
+    
+
+    /**
+     * Esborra secció de BD i fitxer de BD (No esborra fitxer físic)
+     * @param seccio
+     * @return
+     * @throws I18NException
+     */
+    public Set<Long> deleteFullRecursive(Seccio seccio) throws I18NException;
 
 }

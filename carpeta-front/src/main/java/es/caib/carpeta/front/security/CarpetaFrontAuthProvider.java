@@ -20,7 +20,6 @@ import es.caib.carpeta.persistence.UsuariEntitatJPA;
 import es.caib.carpeta.logic.AccesLogicaService;
 import es.caib.carpeta.logic.UtilitiesForFrontLogicaService;
 import es.caib.carpeta.logic.utils.EjbManager;
-import java.net.InetAddress;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -84,9 +83,12 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
 		                entitatID = entitat.getEntitatID();
 		            }
             	}
+
+                javax.servlet.http.HttpServletRequest httpServletRequest = null;
+
             	accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_LOGIN_AUTENTICAT, entitatID, null, 
-            			new Timestamp(new Date().getTime()), Locale.getDefault().getLanguage(), 
-            			InetAddress.getLocalHost().getHostAddress(), true, sesionHttp.getIdSessio());
+            			new Timestamp(new Date().getTime()), Locale.getDefault().getLanguage(),
+                        sesionHttp.getIpAddress(), true, sesionHttp.getIdSessio());
             }
 
         } catch (Exception ie){

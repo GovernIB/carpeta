@@ -353,7 +353,7 @@ class Sistra extends Component {
             </>
         } else{
             if(this.state.total_items === 0 && this.state.data !== null) {
-                taulaTramits = <div className="pt-3 alert alert-secondary mt-5" style={{ float: 'left', width: '95%'}} role="alert">{t('sistraBuid')}</div>
+                taulaTramits = <div className="pt-3 alert alert-secondary margeBuid" style={{ float: 'left', width: '95%'}} role="alert">{t('sistraBuid')}</div>
             }
         }
 
@@ -611,11 +611,11 @@ class Sistra extends Component {
                                              tabindex="503"
                                              aria-labelledby="estado"
                                              onChange={(e) => {this.handleChangeEstat(e); }}>
-                                    <option value="A" selected={this.state.estat === 'A'}>{t('sistraTots')}</option>
-                                    <option value="S" selected={this.state.estat === 'S'}>{t('sistraFinalitzat')}</option>
-                                    <option value="N" selected={this.state.estat === 'N'}>{t('sistraNoFinalitzat')}</option>
-                                    <option value="P" selected={this.state.estat === 'P'}>{t('sistraNoFinalizatPresencial')}</option>
-                                    <option value="R" selected={this.state.estat === 'R'}>{t('sistraRegistrat')}</option>
+                                    <option value="A" className="form-control form-control-sm selectMobil" selected={this.state.estat === 'A'}>{t('sistraTots')}</option>
+                                    <option value="S" className="form-control form-control-sm selectMobil" selected={this.state.estat === 'S'}>{t('sistraFinalitzat')}</option>
+                                    <option value="N" className="form-control form-control-sm selectMobil" selected={this.state.estat === 'N'}>{t('sistraNoFinalitzat')}</option>
+                                    <option value="P" className="form-control form-control-sm selectMobil" selected={this.state.estat === 'P'}>{t('sistraNoFinalizatPresencial')}</option>
+                                    <option value="R" className="form-control form-control-sm selectMobil" selected={this.state.estat === 'R'}>{t('sistraRegistrat')}</option>
                                 </Form.Select>
                             </Form.Group>
                         </Col>
@@ -630,9 +630,9 @@ class Sistra extends Component {
                                              tabindex="505"
                                              aria-labelledby="regPorPagina"
                                              onChange={(e) => {this.handleRegPorPaginaFilterParam(e); }}>
-                                    <option value="5">5</option>
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
+                                    <option value="5" className="form-control form-control-sm selectMobil">5</option>
+                                    <option value="10" className="form-control form-control-sm selectMobil">10</option>
+                                    <option value="25" className="form-control form-control-sm selectMobil">25</option>
                                 </Form.Select>
                             </Form.Group>
                         </Col>
@@ -682,9 +682,9 @@ class Sistra extends Component {
                                                 tabindex="510"
                                                 aria-labelledby="rPP"
                                                 onChange={(e) => {this.handleRegPorPaginaFilterParam(e); }}>
-                                                <option value="5">5</option>
-                                                <option value="10">10</option>
-                                                <option value="25">25</option>
+                                                <option value="5" className="form-control form-control-sm selectMobil">5</option>
+                                                <option value="10" className="form-control form-control-sm selectMobil">10</option>
+                                                <option value="25" className="form-control form-control-sm selectMobil">25</option>
                                             </Form.Select>
                                         </div>
                                     </div>;
@@ -777,7 +777,7 @@ class Sistra extends Component {
                             {/*    $.nomEstat(this.state.estat) +*/}
                             {/*    t('carpeta_criterio_4')}*/}
                             {/*</div>*/}
-                            <div className="pt-3 alert alert-secondary mt-5" style={{float: 'left', width: '95%'}}
+                            <div className="pt-3 alert alert-secondary margeBuid" style={{float: 'left', width: '95%'}}
                                  role="alert">{t('sistraBuid')}</div>
                         </>
                     }
@@ -800,7 +800,7 @@ class Sistra extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="float-left" style={{width: '97%',top: '-3.5em', position: 'relative'}}>
+                    <div className="float-left pujarTaula" style={{width: '97%', position: 'relative'}}>
                         {selectRegistres}
                         {taulaTramits}
                     </div>
