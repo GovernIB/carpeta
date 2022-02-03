@@ -108,7 +108,7 @@ class DatosHistorico extends Component {
 
         if (!isLoaded) {
            
-             content =  <>
+             content =  
                  <form id="formulario" onSubmit={this.handleSubmit} method="GET">
                     <div className="form-group">
                         <label for="codigoMunicipio">{t('pinbalHistoricoMunicipioLabel')}</label>
@@ -128,15 +128,37 @@ class DatosHistorico extends Component {
                         </div>
                     </div>
                     <button type="submit" className="btn btn-primary">{t('pinbalHistoricoConsultaBtn')}</button>
-                </form>
-                </>;
+                </form>;
 
         } else {
         
             const data = this.state.data;
 
             if (data.error) {  
-                content = <div className="alert alert-danger" role="alert">{data.error}</div>;
+                content = 
+                    <>
+                        <div className="alert alert-danger" role="alert">{data.error}</div>
+                        <form id="formulario" onSubmit={this.handleSubmit} method="GET">
+                            <div className="form-group">
+                                <label for="codigoMunicipio">{t('pinbalHistoricoMunicipioLabel')}</label>
+                                <div class="col-md-4 p-0 col-sm-6" style={{width:'90%'}}>
+                                    <select name="codigoMunicipio" id="codigoMunicipio" className="form-control"  value={this.state.municipio} onChange={this.handleMunicipio}>
+                                        <option value="">{t('pinbalHistoricoSelecciona')}</option>
+                                        {
+                                            municipis.map( (item) => React.createElement('option', {value: item.codigo}, item.nombre))
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label for="numeroAnyos">{t('pinbalHistoricoAnyosLabel')}</label>
+                                <div class="col-md-4 p-0 col-sm-6" style={{width:'90%'}}>
+                                    <input type="number" id="numeroAnyos" className="form-control"  value={this.state.anyos} onChange={this.handleAnyos} />
+                                </div>
+                            </div>
+                            <button type="submit" className="btn btn-primary">{t('pinbalHistoricoConsultaBtn')}</button>
+                        </form>
+                    </>
             } else {
 				
                 let alerta;
