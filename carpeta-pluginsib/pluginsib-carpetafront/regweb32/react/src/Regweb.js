@@ -542,11 +542,11 @@ class Regweb extends Component {
                                              tabindex="504"
                                              aria-labelledby="estado"
                                              onChange={(e) => {this.handleStateFilterParam(e); }}>
-                                    <option value="0" selected="selected">{t('registro_estado_todos')}</option>
-                                    <option value="1">{t('registro_estado_1')}</option>
-                                    <option value="2">{t('registro_estado_4')}</option>
-                                    <option value="3">{t('registro_estado_10')}</option>
-                                    <option value="4">{t('registro_estado_11')}</option>
+                                    <option value="0" className="form-control form-control-sm selectMobil" selected="selected">{t('registro_estado_todos')}</option>
+                                    <option value="1" className="form-control form-control-sm selectMobil">{t('registro_estado_1')}</option>
+                                    <option value="2" className="form-control form-control-sm selectMobil">{t('registro_estado_4')}</option>
+                                    <option value="3" className="form-control form-control-sm selectMobil">{t('registro_estado_10')}</option>
+                                    <option value="4" className="form-control form-control-sm selectMobil">{t('registro_estado_11')}</option>
                                 </Form.Select>
                             </Form.Group>
                         </Col>
@@ -561,9 +561,9 @@ class Regweb extends Component {
                                              tabindex="505"
                                              aria-labelledby="regPorPagina"
                                              onChange={(e) => {this.handleRegPorPaginaFilterParam(e); }}>
-                                    <option value="5">5</option>
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
+                                    <option value="5" className="form-control form-control-sm selectMobil">5</option>
+                                    <option value="10" className="form-control form-control-sm selectMobil">10</option>
+                                    <option value="25" className="form-control form-control-sm selectMobil">25</option>
                                 </Form.Select>
                             </Form.Group>
                         </Col>
@@ -592,7 +592,7 @@ class Regweb extends Component {
 
         } else {
             const data = this.state.data;
-            registresBuid = <div className="pt-3 alert alert-secondary mt-5" style={{ float: 'left', width: '95%'}} role="alert">{t('registro_vacio')}</div>;
+            registresBuid = <div className="pt-3 alert alert-secondary margeBuid" style={{ float: 'left', width: '95%'}} role="alert">{t('registro_vacio')}</div>;
 
             if (this.state.error) {
                 content = <div className="alert alert-danger" role="alert">{data.error}</div>;
@@ -616,9 +616,9 @@ class Regweb extends Component {
                                              tabindex="510"
                                              aria-labelledby="rPP"
                                              onChange={(e) => {this.handleRegPorPaginaFilterParam(e); }}>
-                                    <option value="5">5</option>
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
+                                    <option value="5" className="form-control form-control-sm selectMobil">5</option>
+                                    <option value="10" className="form-control form-control-sm selectMobil">10</option>
+                                    <option value="25" className="form-control form-control-sm selectMobil">25</option>
                                 </Form.Select>
                             </div>
                         </div>;
@@ -700,21 +700,7 @@ class Regweb extends Component {
                                 </div>
                             </div>
                         </div>
-                        {/*<div className="col-md-12 border-0 float-left p-0" style={{width: '97%' }}>*/}
-                        {/*    <div className="col-sd-1 float-right pb-2">*/}
-                        {/*        <Form.Select id="rPP"*/}
-                        {/*                     name="rPP" className="form-control form-control-sm focusIn"*/}
-                        {/*                     value={this.state.filter_regPorPagina}*/}
-                        {/*                     tabindex="510"*/}
-                        {/*                     aria-labelledby="rPP"*/}
-                        {/*                     onChange={(e) => {this.handleRegPorPaginaFilterParam(e); }}>*/}
-                        {/*            <option value="5">5</option>*/}
-                        {/*            <option value="10">10</option>*/}
-                        {/*            <option value="25">25</option>*/}
-                        {/*        </Form.Select>*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
-                        <div className="float-left" style={{width: '97%',top: '-3.5em', position: 'relative'}}>
+                        <div className="float-left pujarTaula" style={{width: '97%', position: 'relative'}}>
                             {selectRegistres}
                             {this.state.numeroRegistro == null && taulaRegistres}
                             {this.state.pagination_total_items.toString() === '0' && registresBuid}
