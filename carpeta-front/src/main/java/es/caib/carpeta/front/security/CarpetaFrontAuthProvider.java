@@ -20,7 +20,6 @@ import es.caib.carpeta.persistence.UsuariEntitatJPA;
 import es.caib.carpeta.logic.AccesLogicaService;
 import es.caib.carpeta.logic.UtilitiesForFrontLogicaService;
 import es.caib.carpeta.logic.utils.EjbManager;
-import java.net.InetAddress;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;

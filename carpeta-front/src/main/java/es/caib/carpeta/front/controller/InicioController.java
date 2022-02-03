@@ -1,6 +1,5 @@
 package es.caib.carpeta.front.controller;
 
-import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.UsuarioClave;
 import es.caib.carpeta.ejb.PropietatGlobalService;
 import es.caib.carpeta.front.config.UsuarioAutenticado;

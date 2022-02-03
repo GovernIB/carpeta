@@ -32,9 +32,9 @@ import es.caib.carpeta.model.fields.EntitatFields;
 @SessionAttributes(types = { EntitatForm.class, EntitatFilterForm.class })
 public class EntitatSuperAdminController extends EntitatController {
 
-	@EJB(mappedName = EntitatLogicaService.JNDI_NAME)
-	protected EntitatLogicaService entitatLogicaEjb;
-	
+    @EJB(mappedName = EntitatLogicaService.JNDI_NAME)
+    protected EntitatLogicaService entitatLogicaEjb;
+
     @Override
     public String getTileForm() {
         return "entitatFormSuperAdmin";
@@ -51,13 +51,14 @@ public class EntitatSuperAdminController extends EntitatController {
     }
 
     @Override
-    public EntitatFilterForm getEntitatFilterForm(Integer pagina, ModelAndView mav, HttpServletRequest request)
-            throws I18NException {
+    public EntitatFilterForm getEntitatFilterForm(Integer pagina, ModelAndView mav,
+            HttpServletRequest request) throws I18NException {
         EntitatFilterForm entitatFilterForm = super.getEntitatFilterForm(pagina, mav, request);
 
         if (entitatFilterForm.isNou()) {
 
-            Set<Field<?>> hiddenFields = new HashSet<Field<?>>(Arrays.asList(EntitatFields.ALL_ENTITAT_FIELDS));
+            Set<Field<?>> hiddenFields = new HashSet<Field<?>>(
+                    Arrays.asList(EntitatFields.ALL_ENTITAT_FIELDS));
 
             hiddenFields.remove(EntitatFields.NOMID);
             hiddenFields.remove(EntitatFields.CODIDIR3);
@@ -69,27 +70,24 @@ public class EntitatSuperAdminController extends EntitatController {
         return entitatFilterForm;
 
     }
-    
+
     @Override
-    public EntitatForm getEntitatForm(EntitatJPA _jpa,
-            boolean __isView, HttpServletRequest request, ModelAndView mav) throws I18NException {
-         EntitatForm entitatForm = super.getEntitatForm(_jpa, __isView, request, mav);
-         
-         
-         entitatForm.addHiddenField(PLUGINLOGINID);
-         //entitatForm.addHiddenField(LOGINTEXTID);
-         entitatForm.addHiddenField(CONTEXT);
-         entitatForm.addHiddenField(COMMIT);
-         
-         
-         return entitatForm;
-       }
-    
-    
-    
+    public EntitatForm getEntitatForm(EntitatJPA _jpa, boolean __isView, HttpServletRequest request,
+            ModelAndView mav) throws I18NException {
+        EntitatForm entitatForm = super.getEntitatForm(_jpa, __isView, request, mav);
+
+        entitatForm.addHiddenField(PLUGINLOGINID);
+        // entitatForm.addHiddenField(LOGINTEXTID);
+        entitatForm.addHiddenField(CONTEXT);
+        entitatForm.addHiddenField(COMMIT);
+
+        return entitatForm;
+    }
+
     @Override
-    public void delete(HttpServletRequest request, Entitat entitat) throws Exception,I18NException {
-    	entitatLogicaEjb.deleteFull(entitat, true);
-      } 
+    public void delete(HttpServletRequest request, Entitat entitat)
+            throws Exception, I18NException {
+        entitatLogicaEjb.deleteFull(entitat);
+    }
 
 }

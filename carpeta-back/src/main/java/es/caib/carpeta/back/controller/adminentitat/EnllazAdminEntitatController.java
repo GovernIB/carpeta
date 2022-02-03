@@ -105,7 +105,7 @@ public class EnllazAdminEntitatController extends EnllazController {
 
     @Override
     public void delete(HttpServletRequest request, Enllaz enllaz) throws Exception, I18NException {
-        enllazLogicaEjb.deleteFull(enllaz, true);
+        enllazLogicaEjb.deleteFull(enllaz);
     }
 
     @Override

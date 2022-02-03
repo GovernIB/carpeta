@@ -132,7 +132,8 @@ public class SeccioAdminEntitatController extends SeccioController {
 
     @Override
     public void delete(HttpServletRequest request, Seccio seccio) throws Exception, I18NException {
-        seccioLogicaEjb.deleteFull(seccio, true);
+        // Ho esborra tot.
+        seccioLogicaEjb.deleteFull(seccio);
     }
 
     @Override
