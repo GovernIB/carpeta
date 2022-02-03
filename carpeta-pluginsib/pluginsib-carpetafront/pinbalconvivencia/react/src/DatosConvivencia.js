@@ -110,7 +110,7 @@ class DatosConvivencia extends Component {
                             </select>
                         </div>
                     </div>
-                    <button type="submit" className="btn btn-primary">{t('pinbalconvivenciaConsultaBtn')}</button>
+                    <button type="submit" className="btn btn-primary carpeta-btn">{t('pinbalconvivenciaConsultaBtn')}</button>
                 </form>
 
         } else {
@@ -132,7 +132,7 @@ class DatosConvivencia extends Component {
                                 </select>
                             </div>
                         </div>
-                        <button type="submit" className="btn btn-primary">{t('pinbalconvivenciaConsultaBtn')}</button>
+                        <button type="submit" className="btn btn-primary carpeta-btn">{t('pinbalconvivenciaConsultaBtn')}</button>
                     </form>
                     </>
             } else {
