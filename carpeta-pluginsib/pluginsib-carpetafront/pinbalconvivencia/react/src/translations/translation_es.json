@@ -34,5 +34,7 @@
   "pinbalConvivenciaPeriodos" : "Periodos",
   "pinbalConvivenciaExpedicion": "Fecha expedición",
   "pinbalConvivenciaFechaNacimiento": "Fecha de nacimiento",
-  "pinbalConvivenciaDesde" : "Desde"
+  "pinbalConvivenciaDesde" : "Desde",
+  "pinbalConvivenciaValidaMunicipi" : "Debe escoger un municipio",
+  "pinbalConvivenciaSelecciona": "Seleccione un municipio"
 }

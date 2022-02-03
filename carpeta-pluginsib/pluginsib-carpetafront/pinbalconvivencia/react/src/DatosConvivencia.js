@@ -32,10 +32,26 @@ class DatosConvivencia extends Component {
 
         event.preventDefault();
 
+        const { t } = this.props;
+
         const url2 = this.props.pathtoservei;
 
         document.getElementById("formulario").classList.add("d-none");
         document.getElementById("carregant").classList.remove("d-none");
+
+        const municipiIsValid = (this.state.municipio) ? true : false;
+
+        if(!municipiIsValid){
+            const errorMsg = {"error":t('pinbalHistoricoValidaMunicipi')}
+            this.setState({
+                ...this.state,
+                isLoaded: true,
+                data: errorMsg
+            });
+            document.getElementById("carregant").classList.add("d-none");
+            document.getElementById("formulario").classList.remove("d-none");
+            return false;
+        }
 
         axios.post(url2, 'municipio='+this.state.municipio ).then(res => {
 
@@ -81,28 +97,44 @@ class DatosConvivencia extends Component {
 
         if (!isLoaded) {
            
-             content =  <>
+             content =  
                  <form id="formulario" onSubmit={this.handleSubmit} method="GET">
-                            <div className="form-group">
-                                <label for="codigoMunicipio">{t('pinbalConvivenciaMunicipioLabel')}</label>
-                                <div class="col-md-4 p-0 col-sm-6" style={{width:'90%'}}>
-                                    <select name="codigoMunicipio" id="codigoMunicipio" className="form-control"  value={this.state.municipio} onChange={this.handleMunicipio}>
-                                        {
-                                            municipis.map( (item) => React.createElement('option', {value: item.codigo}, item.nombre))
-                                        }
-                                    </select>
-                                </div>
-                            </div>
-                            <button type="submit" className="btn btn-primary">{t('pinbalconvivenciaConsultaBtn')}</button>
-                        </form>
-                </>;
+                    <div className="form-group">
+                        <label for="codigoMunicipio">{t('pinbalConvivenciaMunicipioLabel')}</label>
+                        <div class="col-md-4 p-0 col-sm-6" style={{width:'90%'}}>
+                            <select name="codigoMunicipio" id="codigoMunicipio" className="form-control"  value={this.state.municipio} onChange={this.handleMunicipio}>
+                                <option value="">{t('pinbalConvivenciaSelecciona')}</option>
+                                {
+                                    municipis.map( (item) => React.createElement('option', {value: item.codigo}, item.nombre))
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" className="btn btn-primary">{t('pinbalconvivenciaConsultaBtn')}</button>
+                </form>
 
         } else {
         
             const data = this.state.data;
 
             if (data.error) {  
-                content = <div className="alert alert-danger" role="alert">{data.error}</div>;
+                content = <>
+                    <div className="alert alert-danger" role="alert">{data.error}</div>
+                    <form id="formulario" onSubmit={this.handleSubmit} method="GET">
+                        <div className="form-group">
+                            <label for="codigoMunicipio">{t('pinbalConvivenciaMunicipioLabel')}</label>
+                            <div class="col-md-4 p-0 col-sm-6" style={{width:'90%'}}>
+                                <select name="codigoMunicipio" id="codigoMunicipio" className="form-control"  value={this.state.municipio} onChange={this.handleMunicipio}>
+                                    <option value="">{t('pinbalConvivenciaSelecciona')}</option>
+                                    {
+                                        municipis.map( (item) => React.createElement('option', {value: item.codigo}, item.nombre))
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" className="btn btn-primary">{t('pinbalconvivenciaConsultaBtn')}</button>
+                    </form>
+                    </>
             } else {
 				
                 let alerta;
