@@ -25,7 +25,7 @@ function reassignAction() {
 </script>
 <div class="row" id="${formName}_pagination" style="width:100%; text-align:center;" >
 
-  <div class="col-4" style="float:left;" id="${formName}_pagination_left">
+  <div class="col-3" style="float:left;" id="${formName}_pagination_left">
   <c:if test="${__theFilterForm.visibleExportList}">
       
       <%
@@ -40,7 +40,7 @@ function reassignAction() {
   </div>
   
   
-  <div class="col-4">
+  <div class="col-6">
   <c:if test="${not empty __theFilterForm.itemsPerPage}">
 
     <c:url var="firstUrl" value="${contexte}/list/1" 
@@ -62,7 +62,20 @@ function reassignAction() {
             </c:otherwise>
         </c:choose>
 
-        <c:forEach var="i" begin="${beginIndex}" end="${endIndex}">
+        <c:if test="${((currentIndex - 5) >= 1) && ((currentIndex + 5) <= totalPages)}">
+            <c:set var="inici" value="${currentIndex - 5}"/>
+            <c:set var="final" value="${currentIndex + 5}"/>
+        </c:if>
+        <c:if test="${(currentIndex - 5) < 1}">
+            <c:set var="inici" value="1"/>
+            <c:set var="final" value="11"/>
+        </c:if>
+        <c:if test="${currentIndex + 5 > totalPages}">
+            <c:set var="final" value="${totalPages}"/>
+            <c:set var="inici" value="${totalPages - 10}"/>
+        </c:if>
+
+        <c:forEach var="i" begin="${inici}" end="${final}">
             <c:url var="pageUrl" value="${contexte}/list/${i}" />
             <c:choose>
                 <c:when test="${i == currentIndex}">
@@ -91,9 +104,9 @@ function reassignAction() {
     </div>
 
     <fmt:message var="allitems" key="genapp.form.allitems" />
-    <div class="col-4" style="float:right;" id="${formName}_pagination_right" >
+    <div class="col-3" style="float:right;" id="${formName}_pagination_right" >
       <label><fmt:message key="genapp.form.itemsperpage" />:</label>
-      <form:select cssClass="input-small" cssStyle="width:4em;"  onchange="document.${formName}.submit()" path="itemsPerPage" >
+      <form:select cssClass="input-small" cssStyle="width:4em;"  onchange="document.${formName}.submit()" path="itemsPerPage" >--%>
         <c:forEach var="num" items="${__theFilterForm.allItemsPerPage}">
            <form:option value="${num}" label="${ (num == -1)? allitems : num}"/>                 
         </c:forEach>
