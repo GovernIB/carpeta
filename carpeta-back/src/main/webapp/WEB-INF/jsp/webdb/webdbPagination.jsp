@@ -70,9 +70,13 @@ function reassignAction() {
             <c:set var="inici" value="1"/>
             <c:set var="final" value="11"/>
         </c:if>
-        <c:if test="${currentIndex + 5 > totalPages}">
+        <c:if test="${(currentIndex + 5 > totalPages) && (totalPages > 10)}">
             <c:set var="final" value="${totalPages}"/>
             <c:set var="inici" value="${totalPages - 10}"/>
+        </c:if>
+        <c:if test="${totalPages <= 10}">
+            <c:set var="final" value="${totalPages}"/>
+            <c:set var="inici" value="1"/>
         </c:if>
 
         <c:forEach var="i" begin="${inici}" end="${final}">
