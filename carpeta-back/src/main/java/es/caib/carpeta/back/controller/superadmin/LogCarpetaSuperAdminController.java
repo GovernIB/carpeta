@@ -1,5 +1,6 @@
 package es.caib.carpeta.back.controller.superadmin;
 
+import es.caib.carpeta.model.fields.AccesFields;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
@@ -88,6 +89,8 @@ public class LogCarpetaSuperAdminController extends LogCarpetaController {
                     new AdditionalButton("fas fa-eye", "genapp.viewtitle", getContextWeb() + "/view/{0}", "btn-info"));
             logCarpetaFilterForm.addGroupByField(TIPUS);
             logCarpetaFilterForm.addGroupByField(ESTAT);
+            logCarpetaFilterForm.addFilterByField(DATAINICI);
+
             logCarpetaFilterForm.setOrderBy(LogCarpetaFields.DATAINICI.javaName);
             logCarpetaFilterForm.setOrderAsc(false);
             logCarpetaFilterForm.setVisibleMultipleSelection(false);
