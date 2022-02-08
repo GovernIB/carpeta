@@ -251,6 +251,19 @@
 
 
         </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,LogCarpetaFields.IDSESSIO)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="logCarpeta.idSessio" var="idSessio" />
+              <fmt:message key="genapp.form.searchby" var="cercaperidSessio" >                
+                 <fmt:param value="${idSessio}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${idSessio}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperidSessio}" path="idSessio" />
+            </div>
+
+
+        </c:if>
 
       <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">
       <c:if test="${ __entry.key >= 0 && not empty __entry.value.searchBy }">

@@ -4,7 +4,7 @@
   
         <c:if test="${!gen:contains(__theForm.hiddenFields,AvisFields.DESCRIPCIOID)}">
         <tr id="avis_descripcioID_rowid">
-          <td>
+          <td id="avis_descripcioID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[AvisFields.DESCRIPCIOID])?'avis.descripcioID':__theForm.labels[AvisFields.DESCRIPCIOID]}" /> &nbsp;(*)
              </label>
@@ -12,7 +12,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[AvisFields.DESCRIPCIOID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="avis_descripcioID_columnvalueid">
        <form:errors path="avis.descripcio" cssClass="errorField alert alert-danger" />
        <div class="row-fluid col-md-9-optional">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
@@ -39,7 +39,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,AvisFields.ENTITATID)}">
         <tr id="avis_entitatID_rowid">
-          <td>
+          <td id="avis_entitatID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[AvisFields.ENTITATID])?'avis.entitatID':__theForm.labels[AvisFields.ENTITATID]}" />
              </label>
@@ -47,7 +47,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[AvisFields.ENTITATID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="avis_entitatID_columnvalueid">
           <form:errors path="avis.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,AvisFields.ENTITATID)}" >
           <form:hidden path="avis.entitatID"/>
@@ -79,7 +79,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,AvisFields.DATAINICI)}">
         <tr id="avis_dataInici_rowid">
-          <td>
+          <td id="avis_dataInici_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[AvisFields.DATAINICI])?'avis.dataInici':__theForm.labels[AvisFields.DATAINICI]}" />
              </label>
@@ -87,10 +87,8 @@
               <i class="fas fa-info-circle" title="${__theForm.help[AvisFields.DATAINICI]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="avis_dataInici_columnvalueid">
               <form:errors path="avis.dataInici" cssClass="errorField alert alert-danger" />
-    <div class="container">
-      <div class="row">
             <div class="form-group">
                 <div class="input-group date" id="avis_dataInici" data-target-input="nearest">
                       <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AvisFields.DATAINICI)? 'true' : 'false'}" cssClass="form-control datetimepicker-input"  data-target="#avis_dataInici" path="avis.dataInici" />
@@ -111,15 +109,13 @@
                     }
                 });
             });
-          </script>        </div>
-      </div>
-           </td>
+          </script>           </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,AvisFields.DATAFI)}">
         <tr id="avis_dataFi_rowid">
-          <td>
+          <td id="avis_dataFi_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[AvisFields.DATAFI])?'avis.dataFi':__theForm.labels[AvisFields.DATAFI]}" />
              </label>
@@ -127,10 +123,8 @@
               <i class="fas fa-info-circle" title="${__theForm.help[AvisFields.DATAFI]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="avis_dataFi_columnvalueid">
               <form:errors path="avis.dataFi" cssClass="errorField alert alert-danger" />
-    <div class="container">
-      <div class="row">
             <div class="form-group">
                 <div class="input-group date" id="avis_dataFi" data-target-input="nearest">
                       <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AvisFields.DATAFI)? 'true' : 'false'}" cssClass="form-control datetimepicker-input"  data-target="#avis_dataFi" path="avis.dataFi" />
@@ -151,15 +145,13 @@
                     }
                 });
             });
-          </script>        </div>
-      </div>
-           </td>
+          </script>           </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,AvisFields.TIPUS)}">
         <tr id="avis_tipus_rowid">
-          <td>
+          <td id="avis_tipus_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[AvisFields.TIPUS])?'avis.tipus':__theForm.labels[AvisFields.TIPUS]}" /> &nbsp;(*)
              </label>
@@ -167,7 +159,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[AvisFields.TIPUS]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="avis_tipus_columnvalueid">
           <form:errors path="avis.tipus" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,AvisFields.TIPUS)}" >
           <form:hidden path="avis.tipus"/>
@@ -190,7 +182,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,AvisFields.GRAVETAT)}">
         <tr id="avis_gravetat_rowid">
-          <td>
+          <td id="avis_gravetat_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[AvisFields.GRAVETAT])?'avis.gravetat':__theForm.labels[AvisFields.GRAVETAT]}" /> &nbsp;(*)
              </label>
@@ -198,7 +190,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[AvisFields.GRAVETAT]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="avis_gravetat_columnvalueid">
           <form:errors path="avis.gravetat" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,AvisFields.GRAVETAT)}" >
           <form:hidden path="avis.gravetat"/>
@@ -221,7 +213,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,AvisFields.PLUGINFRONTID)}">
         <tr id="avis_pluginFrontID_rowid">
-          <td>
+          <td id="avis_pluginFrontID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[AvisFields.PLUGINFRONTID])?'avis.pluginFrontID':__theForm.labels[AvisFields.PLUGINFRONTID]}" />
              </label>
@@ -229,7 +221,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[AvisFields.PLUGINFRONTID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="avis_pluginFrontID_columnvalueid">
           <form:errors path="avis.pluginFrontID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,AvisFields.PLUGINFRONTID)}" >
           <form:hidden path="avis.pluginFrontID"/>

@@ -34,7 +34,7 @@
 
           <%@include file="seccioListButtons.jsp" %>
 
-            
+
         </tr>
 
       </c:forEach>

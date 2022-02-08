@@ -95,7 +95,7 @@ public class LoginController {
             peticio.append("classe: ").append(getClass().getName()).append("\n");
             try{
                 logLogicaEjb.crearLog("Autenticació del Front", ESTAT_LOG_ERROR, TIPUS_LOG_AUTENTICACIO_FRONT,
-                    System.currentTimeMillis() - temps, null, "Error de login", peticio.toString(), "", null);
+                    System.currentTimeMillis() - temps, null, "Error de login", peticio.toString(), "", null, request.getRequestedSessionId());
             }catch(Exception e){
                 log.error("S'ha produit un error creant un Log: " + e.getMessage(), e);
             }

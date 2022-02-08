@@ -21,6 +21,7 @@ private static final long serialVersionUID = 1007346690L;
 	java.lang.String peticio;
 	java.lang.String error;
 	java.lang.String excepcio;
+	java.lang.String idSessio;
 
 
   /** Constructor Buit */
@@ -28,7 +29,7 @@ private static final long serialVersionUID = 1007346690L;
   }
 
   /** Constructor amb tots els camps  */
-  public LogCarpetaBean(long logID , java.lang.String descripcio , int tipus , int estat , java.lang.Long pluginID , java.lang.String entitatCodi , java.lang.Long temps , java.sql.Timestamp dataInici , java.lang.String peticio , java.lang.String error , java.lang.String excepcio) {
+  public LogCarpetaBean(long logID , java.lang.String descripcio , int tipus , int estat , java.lang.Long pluginID , java.lang.String entitatCodi , java.lang.Long temps , java.sql.Timestamp dataInici , java.lang.String peticio , java.lang.String error , java.lang.String excepcio , java.lang.String idSessio) {
     this.logID=logID;
     this.descripcio=descripcio;
     this.tipus=tipus;
@@ -40,9 +41,10 @@ private static final long serialVersionUID = 1007346690L;
     this.peticio=peticio;
     this.error=error;
     this.excepcio=excepcio;
+    this.idSessio=idSessio;
 }
   /** Constructor sense valors autoincrementals */
-  public LogCarpetaBean(java.lang.String descripcio , int tipus , int estat , java.lang.Long pluginID , java.lang.String entitatCodi , java.lang.Long temps , java.sql.Timestamp dataInici , java.lang.String peticio , java.lang.String error , java.lang.String excepcio) {
+  public LogCarpetaBean(java.lang.String descripcio , int tipus , int estat , java.lang.Long pluginID , java.lang.String entitatCodi , java.lang.Long temps , java.sql.Timestamp dataInici , java.lang.String peticio , java.lang.String error , java.lang.String excepcio , java.lang.String idSessio) {
     this.descripcio=descripcio;
     this.tipus=tipus;
     this.estat=estat;
@@ -53,6 +55,7 @@ private static final long serialVersionUID = 1007346690L;
     this.peticio=peticio;
     this.error=error;
     this.excepcio=excepcio;
+    this.idSessio=idSessio;
 }
   /** Constructor dels valors Not Null */
   public LogCarpetaBean(long logID , java.lang.String descripcio , int tipus , int estat , java.sql.Timestamp dataInici) {
@@ -74,6 +77,7 @@ private static final long serialVersionUID = 1007346690L;
     this.setPeticio(__bean.getPeticio());
     this.setError(__bean.getError());
     this.setExcepcio(__bean.getExcepcio());
+    this.setIdSessio(__bean.getIdSessio());
 	}
 
 	public long getLogID() {
@@ -153,6 +157,13 @@ private static final long serialVersionUID = 1007346690L;
 		this.excepcio = _excepcio_;
 	};
 
+	public java.lang.String getIdSessio() {
+		return(idSessio);
+	};
+	public void setIdSessio(java.lang.String _idSessio_) {
+		this.idSessio = _idSessio_;
+	};
+
 
 
   // ======================================
@@ -171,6 +182,7 @@ private static final long serialVersionUID = 1007346690L;
     __tmp.setPeticio(__bean.getPeticio());
     __tmp.setError(__bean.getError());
     __tmp.setExcepcio(__bean.getExcepcio());
+    __tmp.setIdSessio(__bean.getIdSessio());
 		return __tmp;
 	}
 

@@ -23,9 +23,9 @@ public class ListenerLogCarpeta implements IListenerLogCarpeta {
 	}
 
 	@Override
-	public void crearLogCarpeta(String descripcio, String error, String peticio) {
+	public void crearLogCarpeta(String descripcio, String error, String peticio, String idSessio) {
 		
-		this.logCarpetaLogicaService.crearLogCarpeta(descripcio, error, peticio, this.codiEntitat, this.pluginID);
+		this.logCarpetaLogicaService.crearLogCarpeta(descripcio, error, peticio, this.codiEntitat, this.pluginID, idSessio);
 
 	}
 

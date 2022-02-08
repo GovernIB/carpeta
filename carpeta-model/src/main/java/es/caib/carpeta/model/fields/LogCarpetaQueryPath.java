@@ -55,6 +55,10 @@ public class LogCarpetaQueryPath extends org.fundaciobit.genapp.common.query.Que
     return new StringField(getQueryPath(), LogCarpetaFields.EXCEPCIO);
   }
 
+  public StringField IDSESSIO() {
+    return new StringField(getQueryPath(), LogCarpetaFields.IDSESSIO);
+  }
+
 
 
   @Override

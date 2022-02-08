@@ -674,7 +674,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
                 peticio.append("classe: ").append(getClass().getName()).append("\n");
                 peticio.append("Error: " + e.getMessage()).append("\n");
                 logCarpeta.crearLogCarpeta("[REGWEB32] Error plugin", peticio.toString(),
-                        "[REGWEB32] Error plugin");
+                        "[REGWEB32] Error plugin", request.getRequestedSessionId());
 
                 errorPage(e.getLocalizedMessage(), e, request, response, absolutePluginRequestPath,
                         locale);

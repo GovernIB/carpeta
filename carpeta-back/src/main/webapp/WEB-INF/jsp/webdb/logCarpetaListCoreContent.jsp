@@ -86,6 +86,11 @@
           ${logCarpeta.excepcio}
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,LogCarpetaFields.IDSESSIO)}">
+          <td>
+          ${logCarpeta.idSessio}
+          </td>
+        </c:if>
 
 
         <!--  /** Additional Fields */  -->

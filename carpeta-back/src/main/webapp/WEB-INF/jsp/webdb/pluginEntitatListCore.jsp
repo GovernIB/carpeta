@@ -34,7 +34,7 @@
 
           <%@include file="pluginEntitatListButtons.jsp" %>
 
-            
+
         </tr>
 
       </c:forEach>

@@ -27,6 +27,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.util.WebUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 /**
@@ -79,12 +80,15 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
         SecurityContext sc = SecurityContextHolder.getContext();
         Authentication au = sc.getAuthentication();
 
+        HttpServletRequest httpRequest = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
+                .getRequest();
+
         if (au == null) {
             // TODO traduccio
             peticio.append("Usuari: no definit").append("\n");
             peticio.append("classe: ").append(getClass().getName()).append("\n");
             authenticationLogicaEjb.crearLog("Autenticació al back", temps, peticio.toString(), null,
-                    "NO PUC ACCEDIR A LA INFORMACIO de AUTENTICACIO", null);
+                    "NO PUC ACCEDIR A LA INFORMACIO de AUTENTICACIO", null, null);
 
             throw new LoginException("NO PUC ACCEDIR A LA INFORMACIO de AUTENTICACIO");
 
@@ -107,10 +111,11 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
             if (!username.equals(loginInfo.getUsuariPersona().getUsername())) {
                 peticio.append("Usuari: ").append(username).append("\n");
                 entitatCodi = loginInfo.getEntitat() != null ? loginInfo.getEntitat().getCodi() : null;
+
                 authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, temps,
                         peticio.toString(), null,
                         "Amb aquest navegador ja s'ha autenticat amb un altre usuari. Tanqui el navegador completament.",
-                        entitatCodi);
+                        entitatCodi, httpRequest.getRequestedSessionId());
                 throw new LoginException("Amb aquest navegador ja s'ha autenticat amb un altre usuari."
                         + " Tanqui el navegador completament.");
 
@@ -176,7 +181,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
             String msg = I18NUtils.getMessage(e1);
             log.error("Error llegint si l'usuari es troba a la BBDD: " + msg, e1);
             authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, temps, peticio.toString(),
-                    e1, "Error llegint si l'usuari es troba a la BBDD: " + msg, entitatCodi);
+                    e1, "Error llegint si l'usuari es troba a la BBDD: " + msg, entitatCodi, httpRequest.getRequestedSessionId());
             usuariPersona = null;
         }
 
@@ -197,7 +202,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                         authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, temps,
                                 peticio.toString(), null, "No hem trobat informació de la Persona amb username  "
                                         + username + " dins del sistema de UserInformation",
-                                entitatCodi);
+                                entitatCodi, httpRequest.getRequestedSessionId());
                         log.error("No hem trobat informació de la Persona amb username  '" + username
                                 + "' dins del sistema de UserInformation. Haurà d'omplir el propi usuari la informació.");
                         
@@ -276,7 +281,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                     authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, temps, peticio.toString(), e,
                             "Error llegint informacio del plugin de User Information o creant l'usuari a la BBDD: "
                                     + msg,
-                            entitatCodi);
+                            entitatCodi, httpRequest.getRequestedSessionId());
 
                     log.error("Error llegint informacio del plugin de User Information o creant l'usuari a la BBDD: "
                             + msg, e);
@@ -299,7 +304,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
             } catch (I18NException e) {
                 log.error(I18NUtils.getMessage(e), e);
                 authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, temps,
-                        peticio.toString(), e, "", entitatCodi);
+                        peticio.toString(), e, "", entitatCodi, httpRequest.getRequestedSessionId());
             }
 
             log.info("Total UsuariEntitats:" + usuariEntitats.size());
@@ -321,7 +326,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
 
             authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, temps, peticio.toString(),
                     null, "L´usuari " + username + " està assignat a una o varies entitats però no té el rol CAR_ADMIN",
-                    entitatCodi);
+                    entitatCodi, httpRequest.getRequestedSessionId());
 
             // Com enviar-ho a la PAGINA WEB
             BasePreparer.loginErrorMessage.put(username, translation);
@@ -387,7 +392,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                 authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, temps,
                         peticio.toString(), null,
                         "L´usuari " + username + " no té cap entitat associada. Consulti amb l´Administrador d´Entitat",
-                        null);
+                        null, httpRequest.getRequestedSessionId());
 
             } else {
                 // Les entitats a les que pertany estan desactivades
@@ -398,7 +403,7 @@ public class AuthenticationSuccessListener implements ApplicationListener<Intera
                 authenticationLogicaEjb.crearLog("Autenticació al back de l'usuari: " + username, temps, peticio.toString(), null,
                         "Les entitats a les que pertany estan desactivades. L´usuari " + username
                                 + " no té cap entitat vàlida associada",
-                        entitatCodi);
+                        entitatCodi, httpRequest.getRequestedSessionId());
             }
         }
 

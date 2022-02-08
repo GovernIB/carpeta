@@ -34,7 +34,7 @@
 
           <%@include file="auditoriaListButtons.jsp" %>
 
-            
+
         </tr>
 
       </c:forEach>

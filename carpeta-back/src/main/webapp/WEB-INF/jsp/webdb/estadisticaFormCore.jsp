@@ -4,7 +4,7 @@
   
         <c:if test="${!gen:contains(__theForm.hiddenFields,EstadisticaFields.TIPUS)}">
         <tr id="estadistica_tipus_rowid">
-          <td>
+          <td id="estadistica_tipus_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[EstadisticaFields.TIPUS])?'estadistica.tipus':__theForm.labels[EstadisticaFields.TIPUS]}" /> &nbsp;(*)
              </label>
@@ -12,7 +12,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[EstadisticaFields.TIPUS]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="estadistica_tipus_columnvalueid">
           <form:errors path="estadistica.tipus" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.TIPUS)}" >
           <form:hidden path="estadistica.tipus"/>
@@ -35,7 +35,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,EstadisticaFields.DATAESTADISTICA)}">
         <tr id="estadistica_dataEstadistica_rowid">
-          <td>
+          <td id="estadistica_dataEstadistica_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[EstadisticaFields.DATAESTADISTICA])?'estadistica.dataEstadistica':__theForm.labels[EstadisticaFields.DATAESTADISTICA]}" /> &nbsp;(*)
              </label>
@@ -43,10 +43,8 @@
               <i class="fas fa-info-circle" title="${__theForm.help[EstadisticaFields.DATAESTADISTICA]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="estadistica_dataEstadistica_columnvalueid">
               <form:errors path="estadistica.dataEstadistica" cssClass="errorField alert alert-danger" />
-    <div class="container">
-      <div class="row">
             <div class="form-group">
                 <div class="input-group date" id="estadistica_dataEstadistica" data-target-input="nearest">
                       <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EstadisticaFields.DATAESTADISTICA)? 'true' : 'false'}" cssClass="form-control datetimepicker-input"  data-target="#estadistica_dataEstadistica" path="estadistica.dataEstadistica" />
@@ -67,15 +65,13 @@
                     }
                 });
             });
-          </script>        </div>
-      </div>
-           </td>
+          </script>           </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,EstadisticaFields.COMPTADOR)}">
         <tr id="estadistica_comptador_rowid">
-          <td>
+          <td id="estadistica_comptador_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[EstadisticaFields.COMPTADOR])?'estadistica.comptador':__theForm.labels[EstadisticaFields.COMPTADOR]}" /> &nbsp;(*)
              </label>
@@ -83,7 +79,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[EstadisticaFields.COMPTADOR]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="estadistica_comptador_columnvalueid">
             <form:errors path="estadistica.comptador" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EstadisticaFields.COMPTADOR)? 'true' : 'false'}" cssClass="w-25 form-control  ${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.COMPTADOR)? ' uneditable-input' : ''}"  style=""  path="estadistica.comptador"   />
 
@@ -93,7 +89,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,EstadisticaFields.PLUGINID)}">
         <tr id="estadistica_pluginID_rowid">
-          <td>
+          <td id="estadistica_pluginID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[EstadisticaFields.PLUGINID])?'estadistica.pluginID':__theForm.labels[EstadisticaFields.PLUGINID]}" />
              </label>
@@ -101,7 +97,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[EstadisticaFields.PLUGINID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="estadistica_pluginID_columnvalueid">
           <form:errors path="estadistica.pluginID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.PLUGINID)}" >
           <form:hidden path="estadistica.pluginID"/>
@@ -133,7 +129,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,EstadisticaFields.ENTITATID)}">
         <tr id="estadistica_entitatID_rowid">
-          <td>
+          <td id="estadistica_entitatID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[EstadisticaFields.ENTITATID])?'estadistica.entitatID':__theForm.labels[EstadisticaFields.ENTITATID]}" />
              </label>
@@ -141,7 +137,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[EstadisticaFields.ENTITATID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="estadistica_entitatID_columnvalueid">
           <form:errors path="estadistica.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,EstadisticaFields.ENTITATID)}" >
           <form:hidden path="estadistica.entitatID"/>

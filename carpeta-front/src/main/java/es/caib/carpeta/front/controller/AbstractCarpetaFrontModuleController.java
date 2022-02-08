@@ -308,7 +308,7 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
             try {
                 authenticationLogicaEjb.crearLog("Request a Plugin", null, uri, th,
-                        "Error desconegut cridant a un request d'un plugin: " + th.getMessage(), null);
+                        "Error desconegut cridant a un request d'un plugin: " + th.getMessage(), null, request.getRequestedSessionId());
             } catch (Throwable th2) {
             }
 

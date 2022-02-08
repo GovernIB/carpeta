@@ -405,7 +405,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
                 peticio.append("classe: ").append(getClass().getName()).append("\n");
                 peticio.append("Error: " + e.getMessage()).append("\n");
                 peticio.append("Cause: " + e.getCause());
-                logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error plugin", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error plugin"); 
+                logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error plugin", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error plugin", request.getRequestedSessionId());
                 
                 errorPage(e.getLocalizedMessage(), e, request, response, absolutePluginRequestPath, locale);
                 log.error("Error detall registre: " + e.getMessage(), e);
@@ -671,7 +671,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
                 peticio.append("classe: ").append(getClass().getName()).append("\n");
                 peticio.append("Registre: " + numeroRegistroFormateado).append("\n");
                 peticio.append("Error: " + e.getMessage()).append("\n");
-                logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error justificant", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error justificant");
+                logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error justificant", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error justificant", request.getRequestedSessionId());
                 
                 log.error("Error obtenint justificant: " + e.getMessage(), e);
             }catch(Exception e2){
@@ -740,7 +740,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
                 peticio.append("classe: ").append(getClass().getName()).append("\n");
                 peticio.append("Registre: " + numeroRegistroFormateado).append("\n");
                 peticio.append("Error: " + e.getMessage()).append("\n");
-                logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error justificant", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error justificant");
+                logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error justificant", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error justificant", request.getRequestedSessionId());
                 
 				errorPage(e.getLocalizedMessage(), e, request, response, absolutePluginRequestPath, locale);
                 log.error("Error obtenint justificant: " + e.getMessage(), e);
@@ -789,7 +789,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 	            peticio.append("[REGWEBDETALLCOMPONENT] Error justificant").append("\n");
 	            peticio.append("classe: ").append(getClass().getName()).append("\n");
 	            peticio.append("Error: " + ex.getMessage()).append("\n");
-	            logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error justificant", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error justificant"); 
+	            logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error justificant", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error justificant", request.getRequestedSessionId());
 	        	
 	            errorPage(ex.getLocalizedMessage(), ex, request, response, absolutePluginRequestPath, locale);
 	            log.error("Error detall registre: " + ex.getMessage(), ex);
@@ -871,7 +871,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
                 peticio.append("classe: ").append(getClass().getName()).append("\n");
                 peticio.append("IdAnnexe: " + idAnnexe).append("\n");
                 peticio.append("Error: " + e.getMessage()).append("\n");
-                logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error annex", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error annex");
+                logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error annex", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error annex", request.getRequestedSessionId());
                 
 				errorPage(e.getLocalizedMessage(), e, request, response, absolutePluginRequestPath, locale);
                 log.error("Error obtenint annexe: " + e.getMessage(), e);
@@ -916,7 +916,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
 	            peticio.append("[REGWEBDETALLCOMPONENT] Error annexe").append("\n");
 	            peticio.append("classe: ").append(getClass().getName()).append("\n");
 	            peticio.append("Error: " + ex.getMessage()).append("\n");
-	            logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error annexe", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error annexe"); 
+	            logCarpeta.crearLogCarpeta("[REGWEBDETALLCOMPONENT] Error annexe", peticio.toString(), "[REGWEBDETALLCOMPONENT] Error annexe", request.getRequestedSessionId());
 	        	
 	            errorPage(ex.getLocalizedMessage(), ex, request, response, absolutePluginRequestPath, locale);
 	            log.error("Error detall registre: " + ex.getMessage(), ex);

@@ -54,7 +54,7 @@ public class LogCarpetaLogicaEJB extends LogCarpetaEJB implements LogCarpetaLogi
 
 
     @Override
-    public void crearLog(String descripcio, int estat, int tipus, long temps, Throwable th, String error, String peticio, String entitatCodi, Long pluginID) {
+    public void crearLog(String descripcio, int estat, int tipus, long temps, Throwable th, String error, String peticio, String entitatCodi, Long pluginID, String idSessio) {
 
         String exception = null;
         if(th != null) {
@@ -79,7 +79,7 @@ public class LogCarpetaLogicaEJB extends LogCarpetaEJB implements LogCarpetaLogi
         logCarpeta.setPeticio(peticio);
         logCarpeta.setEntitatCodi(entitatCodi);
         logCarpeta.setPluginID(pluginID);
-
+        logCarpeta.setIdSessio(idSessio);
 
         try {
             create(logCarpeta);
@@ -99,7 +99,7 @@ public class LogCarpetaLogicaEJB extends LogCarpetaEJB implements LogCarpetaLogi
      * Métode per registrar els errors que es produeixen als plugins
      */
     @Override
-    public void crearLogCarpeta(String descripcio, String error, String peticio, String entitatCodi, Long pluginID){
+    public void crearLogCarpeta(String descripcio, String error, String peticio, String entitatCodi, Long pluginID, String idSessio){
     	
         LogCarpetaJPA logCarpeta = new LogCarpetaJPA();
         logCarpeta.setTipus(Constants.TIPUS_LOG_PLUGIN_FRONT);
@@ -112,6 +112,7 @@ public class LogCarpetaLogicaEJB extends LogCarpetaEJB implements LogCarpetaLogi
         logCarpeta.setPeticio(peticio);
         logCarpeta.setEntitatCodi(entitatCodi);
         logCarpeta.setPluginID(pluginID);
+        logCarpeta.setIdSessio(idSessio);
 
         try {
             create(logCarpeta);

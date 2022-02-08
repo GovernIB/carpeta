@@ -76,16 +76,16 @@ public abstract class CommonFrontController {
     }
 
     public ModelAndView processExceptionHtmlMav(Throwable e, HttpServletRequest request,
-            HttpServletResponse response) {
+            HttpServletResponse response, long temps) {
 
         log.error(e.getMessage(), e);
 
         try {
-            long temps = System.currentTimeMillis();
+//            long temps = System.currentTimeMillis();
 
-            logLogicaEjb.crearLog("Error al Front", ESTAT_LOG_ERROR, TIPUS_LOG_AUTENTICACIO_FRONT,
+            logLogicaEjb.crearLog("Error al Front amb ID " + sesionHttp.getIdSessio(), ESTAT_LOG_ERROR, TIPUS_LOG_AUTENTICACIO_FRONT,
                     System.currentTimeMillis() - temps, null, e.getMessage(), null,
-                    sesionHttp.getEntitat(), null);
+                    sesionHttp.getEntitat(), null, request.getRequestedSessionId());
 
             HttpSession session = request.getSession(false);
             session.setAttribute("error", e.getMessage());
@@ -101,16 +101,16 @@ public abstract class CommonFrontController {
     }
 
     public void processExceptionHtml(Throwable e, HttpServletRequest request,
-            HttpServletResponse response) {
+            HttpServletResponse response, long temps) {
 
         log.error(e.getMessage(), e);
 
         try {
-            long temps = System.currentTimeMillis();
+//            long temps = System.currentTimeMillis();
 
-            logLogicaEjb.crearLog("Error al Front", ESTAT_LOG_ERROR, TIPUS_LOG_AUTENTICACIO_FRONT,
+            logLogicaEjb.crearLog("Error al Front amb ID " + sesionHttp.getIdSessio(), ESTAT_LOG_ERROR, TIPUS_LOG_AUTENTICACIO_FRONT,
                     System.currentTimeMillis() - temps, null, e.getMessage(), null,
-                    sesionHttp.getEntitat(), null);
+                    sesionHttp.getEntitat(), null, request.getRequestedSessionId());
 
             HttpSession session = request.getSession(false);
             session.setAttribute("error", e.getMessage());
@@ -132,9 +132,9 @@ public abstract class CommonFrontController {
 
             long temps = System.currentTimeMillis();
 
-            logLogicaEjb.crearLog("Error al Front", ESTAT_LOG_ERROR, TIPUS_LOG_AUTENTICACIO_FRONT,
+            logLogicaEjb.crearLog("Error al Front amb ID " + sesionHttp.getIdSessio(), ESTAT_LOG_ERROR, TIPUS_LOG_AUTENTICACIO_FRONT,
                     System.currentTimeMillis() - temps, null, e.getMessage(), null,
-                    sesionHttp.getEntitat(), null);
+                    sesionHttp.getEntitat(), null, request.getRequestedSessionId());
 
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
 

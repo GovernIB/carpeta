@@ -178,7 +178,7 @@ public class Utils implements Constants {
 
       try{
         logCarpetaLogicaEjb.crearLog(msg, ESTAT_LOG_ERROR, TIPUS_LOG_GESTIO_BACK, -1, e, msg,
-              peticio , entitatCodi, null);
+              peticio , entitatCodi, null, request.getRequestedSessionId());
       }catch(Exception le){
           log.error("S'ha produit un error creant un Log: " + le.getMessage(), le);
       }

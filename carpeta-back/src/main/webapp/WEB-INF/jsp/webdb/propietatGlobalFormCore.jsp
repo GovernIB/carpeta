@@ -4,7 +4,7 @@
   
         <c:if test="${!gen:contains(__theForm.hiddenFields,PropietatGlobalFields.CODI)}">
         <tr id="propietatGlobal_codi_rowid">
-          <td>
+          <td id="propietatGlobal_codi_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PropietatGlobalFields.CODI])?'propietatGlobal.codi':__theForm.labels[PropietatGlobalFields.CODI]}" /> &nbsp;(*)
              </label>
@@ -12,7 +12,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PropietatGlobalFields.CODI]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="propietatGlobal_codi_columnvalueid">
             <form:errors path="propietatGlobal.codi" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.CODI)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.CODI)? ' uneditable-input' : ''}"  style="" maxlength="250" path="propietatGlobal.codi"   />
 
@@ -22,7 +22,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PropietatGlobalFields.VALUE)}">
         <tr id="propietatGlobal_value_rowid">
-          <td>
+          <td id="propietatGlobal_value_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PropietatGlobalFields.VALUE])?'propietatGlobal.value':__theForm.labels[PropietatGlobalFields.VALUE]}" />
              </label>
@@ -30,12 +30,17 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PropietatGlobalFields.VALUE]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="propietatGlobal_value_columnvalueid">
               <form:errors path="propietatGlobal.value" cssClass="errorField alert alert-danger" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.VALUE)? 'true' : 'false'}" path="propietatGlobal.value"  />
+  <table style="width:100%">
+  <tr>
+  <td>
+       <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.VALUE)? 'true' : 'false'}" path="propietatGlobal.value"  />
+   </td>
+   <td style="width:40px">
       <div id="dropdownMenuButton_value" style="vertical-align:top;display:inline;position:relative;">
-        <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
-        <div id="dropdownMenuContainer_value" class="dropdown-menu">
+        <button  class="btn btn-secondary btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
+        <div id="dropdownMenuContainer_value" class="dropdown-menu dropdown-menu-right">
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('propietatGlobal.value'); ta.wrap='off';" >No Wrap</a>
           <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('propietatGlobal.value'); ta.wrap='soft';">Soft Wrap</a>
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('propietatGlobal.value'); ta.wrap='hard';">Hard Wrap</a>
@@ -47,13 +52,16 @@
                  $('#dropdownMenuContainer_value').css('display', valor);
                  return false;
 				});
-      </script>           </td>
+      </script>   </td>
+   </tr>
+   </table>
+           </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PropietatGlobalFields.DESCRIPCIO)}">
         <tr id="propietatGlobal_descripcio_rowid">
-          <td>
+          <td id="propietatGlobal_descripcio_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PropietatGlobalFields.DESCRIPCIO])?'propietatGlobal.descripcio':__theForm.labels[PropietatGlobalFields.DESCRIPCIO]}" />
              </label>
@@ -61,16 +69,16 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PropietatGlobalFields.DESCRIPCIO]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="propietatGlobal_descripcio_columnvalueid">
               <form:errors path="propietatGlobal.descripcio" cssClass="errorField alert alert-danger" />
-              <form:textarea cssClass=" ${gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.DESCRIPCIO)? 'mceEditorReadOnly':'mceEditor'}"  path="propietatGlobal.descripcio"  />
+       <form:textarea cssClass=" ${gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.DESCRIPCIO)? 'mceEditorReadOnly':'mceEditor'}"  path="propietatGlobal.descripcio"  />
            </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PropietatGlobalFields.ENTITATID)}">
         <tr id="propietatGlobal_entitatID_rowid">
-          <td>
+          <td id="propietatGlobal_entitatID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PropietatGlobalFields.ENTITATID])?'propietatGlobal.entitatID':__theForm.labels[PropietatGlobalFields.ENTITATID]}" />
              </label>
@@ -78,7 +86,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PropietatGlobalFields.ENTITATID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="propietatGlobal_entitatID_columnvalueid">
           <form:errors path="propietatGlobal.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,PropietatGlobalFields.ENTITATID)}" >
           <form:hidden path="propietatGlobal.entitatID"/>

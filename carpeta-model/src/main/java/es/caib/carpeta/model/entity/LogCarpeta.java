@@ -35,6 +35,9 @@ public interface LogCarpeta extends org.fundaciobit.genapp.common.IGenAppEntity 
 	public java.lang.String getExcepcio();
 	public void setExcepcio(java.lang.String _excepcio_);
 
+	public java.lang.String getIdSessio();
+	public void setIdSessio(java.lang.String _idSessio_);
+
 
 
   // ======================================

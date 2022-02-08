@@ -8,6 +8,6 @@ package es.caib.carpeta.pluginsib.carpetafront.api;
 
 public interface IListenerLogCarpeta {
 
-	public void crearLogCarpeta(String descripcio, String error, String peticio);
+	public void crearLogCarpeta(String descripcio, String error, String peticio, String idSessio);
 	
 }

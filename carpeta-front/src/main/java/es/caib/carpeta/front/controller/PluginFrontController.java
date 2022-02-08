@@ -201,6 +201,8 @@ public class PluginFrontController extends CommonFrontController {
     protected ModelAndView showPlugin(Long pluginID, String idioma, HttpServletRequest request,
             HttpServletResponse response, Authentication authentication, boolean isreact,
             String pluginParameter) throws Exception, I18NException {
+
+        long temps = System.currentTimeMillis();
         try {
             log.info(" ENTRA A showPlugin(" + pluginID +  ", " + authentication + " )");
 
@@ -251,7 +253,7 @@ public class PluginFrontController extends CommonFrontController {
                 mav = new ModelAndView(new RedirectView(urlToShowPluginPage));
             } else {
 
-                log.info("XXXXXXXXXXXXXXXX   PLUGIN HTML 11111111");
+//                log.info("XXXXXXXXXXXXXXXX   PLUGIN HTML 11111111");
 
                 final String view = "plugin_contenidor"; // =>
                                                          // \WEB-INF\views\pages\plugin_contenidor.jsp
@@ -260,7 +262,7 @@ public class PluginFrontController extends CommonFrontController {
                 // mav.addObject("signaturesSetID", signaturesSetID);
                 mav.addObject("urlToShowPluginPage", urlToShowPluginPage);
 
-                log.info("XXXXXXXXXXXXXXXX   PLUGIN HTML 22222222222");
+//                log.info("XXXXXXXXXXXXXXXX   PLUGIN HTML 22222222222");
             }
 
             log.info(" FINAL de showPlugin OK !!!!!!!!!!!");
@@ -277,7 +279,7 @@ public class PluginFrontController extends CommonFrontController {
              * Date().getTime()), LocaleContextHolder.getLocale().getLanguage(),
              * InetAddress.getLocalHost().getHostAddress(), false);
              */
-            return processExceptionHtmlMav(e, request, response);
+            return processExceptionHtmlMav(e, request, response, temps);
         }
         
        

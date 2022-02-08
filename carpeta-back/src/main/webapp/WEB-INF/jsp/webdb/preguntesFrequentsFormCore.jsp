@@ -4,7 +4,7 @@
   
         <c:if test="${!gen:contains(__theForm.hiddenFields,PreguntesFrequentsFields.ENUNCIATID)}">
         <tr id="preguntesFrequents_enunciatID_rowid">
-          <td>
+          <td id="preguntesFrequents_enunciatID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PreguntesFrequentsFields.ENUNCIATID])?'preguntesFrequents.enunciatID':__theForm.labels[PreguntesFrequentsFields.ENUNCIATID]}" /> &nbsp;(*)
              </label>
@@ -12,7 +12,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PreguntesFrequentsFields.ENUNCIATID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="preguntesFrequents_enunciatID_columnvalueid">
        <form:errors path="preguntesFrequents.enunciat" cssClass="errorField alert alert-danger" />
        <div class="row-fluid col-md-9-optional">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
@@ -39,7 +39,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PreguntesFrequentsFields.RESPOSTAID)}">
         <tr id="preguntesFrequents_respostaID_rowid">
-          <td>
+          <td id="preguntesFrequents_respostaID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PreguntesFrequentsFields.RESPOSTAID])?'preguntesFrequents.respostaID':__theForm.labels[PreguntesFrequentsFields.RESPOSTAID]}" /> &nbsp;(*)
              </label>
@@ -47,7 +47,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PreguntesFrequentsFields.RESPOSTAID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="preguntesFrequents_respostaID_columnvalueid">
        <form:errors path="preguntesFrequents.resposta" cssClass="errorField alert alert-danger" />
        <div class="row-fluid col-md-9-optional">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
@@ -74,7 +74,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PreguntesFrequentsFields.ORDRE)}">
         <tr id="preguntesFrequents_ordre_rowid">
-          <td>
+          <td id="preguntesFrequents_ordre_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PreguntesFrequentsFields.ORDRE])?'preguntesFrequents.ordre':__theForm.labels[PreguntesFrequentsFields.ORDRE]}" /> &nbsp;(*)
              </label>
@@ -82,7 +82,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PreguntesFrequentsFields.ORDRE]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="preguntesFrequents_ordre_columnvalueid">
             <form:errors path="preguntesFrequents.ordre" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.ORDRE)? 'true' : 'false'}" cssClass="w-25 form-control  ${gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.ORDRE)? ' uneditable-input' : ''}"  style=""  path="preguntesFrequents.ordre"   />
 
@@ -92,7 +92,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PreguntesFrequentsFields.ENTITATID)}">
         <tr id="preguntesFrequents_entitatID_rowid">
-          <td>
+          <td id="preguntesFrequents_entitatID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PreguntesFrequentsFields.ENTITATID])?'preguntesFrequents.entitatID':__theForm.labels[PreguntesFrequentsFields.ENTITATID]}" /> &nbsp;(*)
              </label>
@@ -100,7 +100,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PreguntesFrequentsFields.ENTITATID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="preguntesFrequents_entitatID_columnvalueid">
           <form:errors path="preguntesFrequents.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.ENTITATID)}" >
           <form:hidden path="preguntesFrequents.entitatID"/>

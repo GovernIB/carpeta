@@ -62,11 +62,11 @@ public class AuthenticationLogicaEJB implements AuthenticationLogicaService {
 
 
     @Override
-    public void crearLog(String descripcio, Long temps, String peticio, Throwable th, String error,String entitatCodi) {
+    public void crearLog(String descripcio, Long temps, String peticio, Throwable th, String error,String entitatCodi, String idSessio) {
        try{
             logCarpetaLogicaEjb.crearLog(descripcio, ESTAT_LOG_ERROR, TIPUS_LOG_AUTENTICACIO_BACK,
                System.currentTimeMillis() - temps, th, error,
-               peticio, entitatCodi, null);
+               peticio, entitatCodi, null, idSessio);
        }catch(Exception e){
            log.error("S'ha produit un error creant un Log: " + e.getMessage(), e);
        }

@@ -22,7 +22,7 @@ public interface AuthenticationLogicaService {
 
     public static final String JNDI_NAME = "java:app/carpeta-ejb/AuthenticationLogicaEJB!es.caib.carpeta.logic.AuthenticationLogicaService";
 
-    public void crearLog(String descripcio, Long temps, String peticio, Throwable th, String error,String entitatCodi);
+    public void crearLog(String descripcio, Long temps, String peticio, Throwable th, String error,String entitatCodi, String idSessio);
 
     public void crearAuditoria(Long entitatID,String username) throws I18NException;
 

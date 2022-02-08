@@ -4,7 +4,7 @@
   
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginFields.NOMID)}">
         <tr id="plugin_nomID_rowid">
-          <td>
+          <td id="plugin_nomID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginFields.NOMID])?'plugin.nomID':__theForm.labels[PluginFields.NOMID]}" /> &nbsp;(*)
              </label>
@@ -12,7 +12,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.NOMID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="plugin_nomID_columnvalueid">
        <form:errors path="plugin.nom" cssClass="errorField alert alert-danger" />
        <div class="row-fluid col-md-9-optional">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
@@ -39,7 +39,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginFields.DESCRIPCIOID)}">
         <tr id="plugin_descripcioID_rowid">
-          <td>
+          <td id="plugin_descripcioID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginFields.DESCRIPCIOID])?'plugin.descripcioID':__theForm.labels[PluginFields.DESCRIPCIOID]}" /> &nbsp;(*)
              </label>
@@ -47,7 +47,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.DESCRIPCIOID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="plugin_descripcioID_columnvalueid">
        <form:errors path="plugin.descripcio" cssClass="errorField alert alert-danger" />
        <div class="row-fluid col-md-9-optional">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
@@ -74,7 +74,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginFields.TITOLLLARGID)}">
         <tr id="plugin_titolLlargID_rowid">
-          <td>
+          <td id="plugin_titolLlargID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginFields.TITOLLLARGID])?'plugin.titolLlargID':__theForm.labels[PluginFields.TITOLLLARGID]}" />
              </label>
@@ -82,7 +82,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.TITOLLLARGID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="plugin_titolLlargID_columnvalueid">
        <form:errors path="plugin.titolLlarg" cssClass="errorField alert alert-danger" />
        <div class="row-fluid col-md-9-optional">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
@@ -109,7 +109,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginFields.SUBTITOLLLARGID)}">
         <tr id="plugin_subtitolLlargID_rowid">
-          <td>
+          <td id="plugin_subtitolLlargID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginFields.SUBTITOLLLARGID])?'plugin.subtitolLlargID':__theForm.labels[PluginFields.SUBTITOLLLARGID]}" />
              </label>
@@ -117,7 +117,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.SUBTITOLLLARGID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="plugin_subtitolLlargID_columnvalueid">
        <form:errors path="plugin.subtitolLlarg" cssClass="errorField alert alert-danger" />
        <div class="row-fluid col-md-9-optional">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
@@ -144,7 +144,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginFields.CONTEXT)}">
         <tr id="plugin_context_rowid">
-          <td>
+          <td id="plugin_context_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginFields.CONTEXT])?'plugin.context':__theForm.labels[PluginFields.CONTEXT]}" />
              </label>
@@ -152,9 +152,9 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.CONTEXT]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="plugin_context_columnvalueid">
             <form:errors path="plugin.context" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.CONTEXT)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,PluginFields.CONTEXT)? ' uneditable-input' : ''}"  style="" maxlength="50" path="plugin.context"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.CONTEXT)? 'true' : 'false'}" cssClass="w-75 form-control  ${gen:contains(__theForm.readOnlyFields ,PluginFields.CONTEXT)? ' uneditable-input' : ''}"  style="" maxlength="50" path="plugin.context"   />
 
            </td>
         </tr>
@@ -162,7 +162,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginFields.LOGOID)}">
         <tr id="plugin_logoID_rowid">
-          <td>
+          <td id="plugin_logoID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginFields.LOGOID])?'plugin.logoID':__theForm.labels[PluginFields.LOGOID]}" />
              </label>
@@ -170,7 +170,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.LOGOID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="plugin_logoID_columnvalueid">
               <form:errors path="plugin.logoID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginFields.LOGOID)}" >
               <a target="_blank" href="<c:url value="${car:fileUrl(logoID.logoID)}"/>">${logoID.logoID.nom}</a>
@@ -218,7 +218,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginFields.CLASSE)}">
         <tr id="plugin_classe_rowid">
-          <td>
+          <td id="plugin_classe_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginFields.CLASSE])?'plugin.classe':__theForm.labels[PluginFields.CLASSE]}" /> &nbsp;(*)
              </label>
@@ -226,7 +226,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.CLASSE]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="plugin_classe_columnvalueid">
             <form:errors path="plugin.classe" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.CLASSE)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,PluginFields.CLASSE)? ' uneditable-input' : ''}"  style="" maxlength="255" path="plugin.classe"   />
 
@@ -236,7 +236,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginFields.PROPIETATS)}">
         <tr id="plugin_propietats_rowid">
-          <td>
+          <td id="plugin_propietats_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginFields.PROPIETATS])?'plugin.propietats':__theForm.labels[PluginFields.PROPIETATS]}" />
              </label>
@@ -244,12 +244,17 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.PROPIETATS]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="plugin_propietats_columnvalueid">
               <form:errors path="plugin.propietats" cssClass="errorField alert alert-danger" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.PROPIETATS)? 'true' : 'false'}" path="plugin.propietats"  />
+  <table style="width:100%">
+  <tr>
+  <td>
+       <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,PluginFields.PROPIETATS)? 'true' : 'false'}" path="plugin.propietats"  />
+   </td>
+   <td style="width:40px">
       <div id="dropdownMenuButton_propietats" style="vertical-align:top;display:inline;position:relative;">
-        <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
-        <div id="dropdownMenuContainer_propietats" class="dropdown-menu">
+        <button  class="btn btn-secondary btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
+        <div id="dropdownMenuContainer_propietats" class="dropdown-menu dropdown-menu-right">
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('plugin.propietats'); ta.wrap='off';" >No Wrap</a>
           <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('plugin.propietats'); ta.wrap='soft';">Soft Wrap</a>
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('plugin.propietats'); ta.wrap='hard';">Hard Wrap</a>
@@ -261,13 +266,16 @@
                  $('#dropdownMenuContainer_propietats').css('display', valor);
                  return false;
 				});
-      </script>           </td>
+      </script>   </td>
+   </tr>
+   </table>
+           </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginFields.ACTIU)}">
         <tr id="plugin_actiu_rowid">
-          <td>
+          <td id="plugin_actiu_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginFields.ACTIU])?'plugin.actiu':__theForm.labels[PluginFields.ACTIU]}" />
              </label>
@@ -275,7 +283,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.ACTIU]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="plugin_actiu_columnvalueid">
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginFields.ACTIU)}" >
               <form:errors path="plugin.actiu" cssClass="errorField alert alert-danger" />
               <form:checkbox cssClass="" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,PluginFields.ACTIU)? 'false' : 'true'}" path="plugin.actiu" />
@@ -289,7 +297,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginFields.TIPUS)}">
         <tr id="plugin_tipus_rowid">
-          <td>
+          <td id="plugin_tipus_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginFields.TIPUS])?'plugin.tipus':__theForm.labels[PluginFields.TIPUS]}" /> &nbsp;(*)
              </label>
@@ -297,7 +305,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PluginFields.TIPUS]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="plugin_tipus_columnvalueid">
           <form:errors path="plugin.tipus" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginFields.TIPUS)}" >
           <form:hidden path="plugin.tipus"/>

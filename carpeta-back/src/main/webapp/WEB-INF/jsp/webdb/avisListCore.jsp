@@ -34,7 +34,7 @@
 
           <%@include file="avisListButtons.jsp" %>
 
-            
+
         </tr>
 
       </c:forEach>

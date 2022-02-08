@@ -4,7 +4,7 @@
   
         <c:if test="${!gen:contains(__theForm.hiddenFields,UsuariEntitatFields.USUARIID)}">
         <tr id="usuariEntitat_usuariID_rowid">
-          <td>
+          <td id="usuariEntitat_usuariID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[UsuariEntitatFields.USUARIID])?'usuariEntitat.usuariID':__theForm.labels[UsuariEntitatFields.USUARIID]}" /> &nbsp;(*)
              </label>
@@ -12,7 +12,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[UsuariEntitatFields.USUARIID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="usuariEntitat_usuariID_columnvalueid">
           <form:errors path="usuariEntitat.usuariID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,UsuariEntitatFields.USUARIID)}" >
           <form:hidden path="usuariEntitat.usuariID"/>
@@ -35,7 +35,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,UsuariEntitatFields.ENTITATID)}">
         <tr id="usuariEntitat_entitatID_rowid">
-          <td>
+          <td id="usuariEntitat_entitatID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[UsuariEntitatFields.ENTITATID])?'usuariEntitat.entitatID':__theForm.labels[UsuariEntitatFields.ENTITATID]}" /> &nbsp;(*)
              </label>
@@ -43,7 +43,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[UsuariEntitatFields.ENTITATID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="usuariEntitat_entitatID_columnvalueid">
           <form:errors path="usuariEntitat.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,UsuariEntitatFields.ENTITATID)}" >
           <form:hidden path="usuariEntitat.entitatID"/>
@@ -66,7 +66,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,UsuariEntitatFields.ACTIU)}">
         <tr id="usuariEntitat_actiu_rowid">
-          <td>
+          <td id="usuariEntitat_actiu_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[UsuariEntitatFields.ACTIU])?'usuariEntitat.actiu':__theForm.labels[UsuariEntitatFields.ACTIU]}" />
              </label>
@@ -74,7 +74,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[UsuariEntitatFields.ACTIU]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="usuariEntitat_actiu_columnvalueid">
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,UsuariEntitatFields.ACTIU)}" >
               <form:errors path="usuariEntitat.actiu" cssClass="errorField alert alert-danger" />
               <form:checkbox cssClass="" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,UsuariEntitatFields.ACTIU)? 'false' : 'true'}" path="usuariEntitat.actiu" />

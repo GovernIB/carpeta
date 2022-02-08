@@ -34,7 +34,7 @@
 
           <%@include file="logCarpetaListButtons.jsp" %>
 
-            
+
         </tr>
 
       </c:forEach>

@@ -58,8 +58,8 @@ public class LogCarpetaJPAManager
         return list.toArray(new LogCarpeta[list.size()]);
     };
 
-    public synchronized LogCarpeta create( java.lang.String _descripcio_, int _tipus_, int _estat_, java.lang.Long _pluginID_, java.lang.String _entitatCodi_, java.lang.Long _temps_, java.sql.Timestamp _dataInici_, java.lang.String _peticio_, java.lang.String _error_, java.lang.String _excepcio_) throws I18NException {
-        LogCarpetaJPA __bean =  new LogCarpetaJPA(_descripcio_,_tipus_,_estat_,_pluginID_,_entitatCodi_,_temps_,_dataInici_,_peticio_,_error_,_excepcio_);
+    public synchronized LogCarpeta create( java.lang.String _descripcio_, int _tipus_, int _estat_, java.lang.Long _pluginID_, java.lang.String _entitatCodi_, java.lang.Long _temps_, java.sql.Timestamp _dataInici_, java.lang.String _peticio_, java.lang.String _error_, java.lang.String _excepcio_, java.lang.String _idSessio_) throws I18NException {
+        LogCarpetaJPA __bean =  new LogCarpetaJPA(_descripcio_,_tipus_,_estat_,_pluginID_,_entitatCodi_,_temps_,_dataInici_,_peticio_,_error_,_excepcio_,_idSessio_);
         return create(__bean);
     }
 

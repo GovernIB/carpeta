@@ -208,6 +208,17 @@ public class LogCarpetaFilterForm extends CarpetaBaseFilterForm implements LogCa
   }
 
 
+  private java.lang.String idSessio;
+
+  public java.lang.String getIdSessio() {
+    return this.idSessio;
+  }
+
+  public void setIdSessio(java.lang.String idSessio) {
+    this.idSessio = idSessio;
+  }
+
+
   public LogCarpetaFilterForm() {
   }
   
@@ -230,6 +241,7 @@ public class LogCarpetaFilterForm extends CarpetaBaseFilterForm implements LogCa
     this.peticio = __toClone.peticio;
     this.error = __toClone.error;
     this.excepcio = __toClone.excepcio;
+    this.idSessio = __toClone.idSessio;
     this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
     this.mapOfValuesForEstat = __toClone.mapOfValuesForEstat;
     this.mapOfValuesForPluginID = __toClone.mapOfValuesForPluginID;

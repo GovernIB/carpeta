@@ -4,7 +4,7 @@
   
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginEntitatFields.PLUGINID)}">
         <tr id="pluginEntitat_pluginID_rowid">
-          <td>
+          <td id="pluginEntitat_pluginID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginEntitatFields.PLUGINID])?'pluginEntitat.pluginID':__theForm.labels[PluginEntitatFields.PLUGINID]}" /> &nbsp;(*)
              </label>
@@ -12,7 +12,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PluginEntitatFields.PLUGINID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="pluginEntitat_pluginID_columnvalueid">
           <form:errors path="pluginEntitat.pluginID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.PLUGINID)}" >
           <form:hidden path="pluginEntitat.pluginID"/>
@@ -35,7 +35,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginEntitatFields.ENTITATID)}">
         <tr id="pluginEntitat_entitatID_rowid">
-          <td>
+          <td id="pluginEntitat_entitatID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginEntitatFields.ENTITATID])?'pluginEntitat.entitatID':__theForm.labels[PluginEntitatFields.ENTITATID]}" /> &nbsp;(*)
              </label>
@@ -43,7 +43,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PluginEntitatFields.ENTITATID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="pluginEntitat_entitatID_columnvalueid">
           <form:errors path="pluginEntitat.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ENTITATID)}" >
           <form:hidden path="pluginEntitat.entitatID"/>
@@ -66,7 +66,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginEntitatFields.ACTIU)}">
         <tr id="pluginEntitat_actiu_rowid">
-          <td>
+          <td id="pluginEntitat_actiu_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginEntitatFields.ACTIU])?'pluginEntitat.actiu':__theForm.labels[PluginEntitatFields.ACTIU]}" />
              </label>
@@ -74,7 +74,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PluginEntitatFields.ACTIU]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="pluginEntitat_actiu_columnvalueid">
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ACTIU)}" >
               <form:errors path="pluginEntitat.actiu" cssClass="errorField alert alert-danger" />
               <form:checkbox cssClass="" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ACTIU)? 'false' : 'true'}" path="pluginEntitat.actiu" />
@@ -88,7 +88,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginEntitatFields.SECCIOID)}">
         <tr id="pluginEntitat_seccioID_rowid">
-          <td>
+          <td id="pluginEntitat_seccioID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginEntitatFields.SECCIOID])?'pluginEntitat.seccioID':__theForm.labels[PluginEntitatFields.SECCIOID]}" />
              </label>
@@ -96,7 +96,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PluginEntitatFields.SECCIOID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="pluginEntitat_seccioID_columnvalueid">
           <form:errors path="pluginEntitat.seccioID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.SECCIOID)}" >
           <form:hidden path="pluginEntitat.seccioID"/>
@@ -128,7 +128,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,PluginEntitatFields.ORDRE)}">
         <tr id="pluginEntitat_ordre_rowid">
-          <td>
+          <td id="pluginEntitat_ordre_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[PluginEntitatFields.ORDRE])?'pluginEntitat.ordre':__theForm.labels[PluginEntitatFields.ORDRE]}" /> &nbsp;(*)
              </label>
@@ -136,7 +136,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[PluginEntitatFields.ORDRE]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="pluginEntitat_ordre_columnvalueid">
             <form:errors path="pluginEntitat.ordre" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ORDRE)? 'true' : 'false'}" cssClass="w-25 form-control  ${gen:contains(__theForm.readOnlyFields ,PluginEntitatFields.ORDRE)? ' uneditable-input' : ''}"  style=""  path="pluginEntitat.ordre"   />
 

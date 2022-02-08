@@ -4,7 +4,7 @@
   
         <c:if test="${!gen:contains(__theForm.hiddenFields,SeccioFields.NOMID)}">
         <tr id="seccio_nomID_rowid">
-          <td>
+          <td id="seccio_nomID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[SeccioFields.NOMID])?'seccio.nomID':__theForm.labels[SeccioFields.NOMID]}" /> &nbsp;(*)
              </label>
@@ -12,7 +12,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[SeccioFields.NOMID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="seccio_nomID_columnvalueid">
        <form:errors path="seccio.nom" cssClass="errorField alert alert-danger" />
        <div class="row-fluid col-md-9-optional">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
@@ -39,7 +39,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,SeccioFields.DESCRIPCIOID)}">
         <tr id="seccio_descripcioID_rowid">
-          <td>
+          <td id="seccio_descripcioID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[SeccioFields.DESCRIPCIOID])?'seccio.descripcioID':__theForm.labels[SeccioFields.DESCRIPCIOID]}" /> &nbsp;(*)
              </label>
@@ -47,7 +47,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[SeccioFields.DESCRIPCIOID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="seccio_descripcioID_columnvalueid">
        <form:errors path="seccio.descripcio" cssClass="errorField alert alert-danger" />
        <div class="row-fluid col-md-9-optional">
          <ul class="nav nav-tabs" style="margin: 0 15px -1px;">
@@ -74,7 +74,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,SeccioFields.CONTEXTE)}">
         <tr id="seccio_contexte_rowid">
-          <td>
+          <td id="seccio_contexte_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[SeccioFields.CONTEXTE])?'seccio.contexte':__theForm.labels[SeccioFields.CONTEXTE]}" /> &nbsp;(*)
              </label>
@@ -82,9 +82,9 @@
               <i class="fas fa-info-circle" title="${__theForm.help[SeccioFields.CONTEXTE]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="seccio_contexte_columnvalueid">
             <form:errors path="seccio.contexte" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,SeccioFields.CONTEXTE)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,SeccioFields.CONTEXTE)? ' uneditable-input' : ''}"  style="" maxlength="50" path="seccio.contexte"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,SeccioFields.CONTEXTE)? 'true' : 'false'}" cssClass="w-75 form-control  ${gen:contains(__theForm.readOnlyFields ,SeccioFields.CONTEXTE)? ' uneditable-input' : ''}"  style="" maxlength="50" path="seccio.contexte"   />
 
            </td>
         </tr>
@@ -92,7 +92,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,SeccioFields.ACTIVA)}">
         <tr id="seccio_activa_rowid">
-          <td>
+          <td id="seccio_activa_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[SeccioFields.ACTIVA])?'seccio.activa':__theForm.labels[SeccioFields.ACTIVA]}" />
              </label>
@@ -100,7 +100,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[SeccioFields.ACTIVA]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="seccio_activa_columnvalueid">
           <c:if test="${!gen:contains(__theForm.readOnlyFields ,SeccioFields.ACTIVA)}" >
               <form:errors path="seccio.activa" cssClass="errorField alert alert-danger" />
               <form:checkbox cssClass="" onclick="javascript:return ${ gen:contains(__theForm.readOnlyFields ,SeccioFields.ACTIVA)? 'false' : 'true'}" path="seccio.activa" />
@@ -114,7 +114,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,SeccioFields.ICONAID)}">
         <tr id="seccio_iconaID_rowid">
-          <td>
+          <td id="seccio_iconaID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[SeccioFields.ICONAID])?'seccio.iconaID':__theForm.labels[SeccioFields.ICONAID]}" /> &nbsp;(*)
              </label>
@@ -122,7 +122,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[SeccioFields.ICONAID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="seccio_iconaID_columnvalueid">
               <form:errors path="seccio.iconaID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,SeccioFields.ICONAID)}" >
               <a target="_blank" href="<c:url value="${car:fileUrl(iconaID.iconaID)}"/>">${iconaID.iconaID.nom}</a>
@@ -166,7 +166,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,SeccioFields.SECCIOPAREID)}">
         <tr id="seccio_seccioPareID_rowid">
-          <td>
+          <td id="seccio_seccioPareID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[SeccioFields.SECCIOPAREID])?'seccio.seccioPareID':__theForm.labels[SeccioFields.SECCIOPAREID]}" />
              </label>
@@ -174,7 +174,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[SeccioFields.SECCIOPAREID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="seccio_seccioPareID_columnvalueid">
           <form:errors path="seccio.seccioPareID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,SeccioFields.SECCIOPAREID)}" >
           <form:hidden path="seccio.seccioPareID"/>
@@ -206,7 +206,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,SeccioFields.ENTITATID)}">
         <tr id="seccio_entitatID_rowid">
-          <td>
+          <td id="seccio_entitatID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[SeccioFields.ENTITATID])?'seccio.entitatID':__theForm.labels[SeccioFields.ENTITATID]}" /> &nbsp;(*)
              </label>
@@ -214,7 +214,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[SeccioFields.ENTITATID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="seccio_entitatID_columnvalueid">
           <form:errors path="seccio.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,SeccioFields.ENTITATID)}" >
           <form:hidden path="seccio.entitatID"/>
@@ -237,7 +237,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,SeccioFields.ORDRE)}">
         <tr id="seccio_ordre_rowid">
-          <td>
+          <td id="seccio_ordre_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[SeccioFields.ORDRE])?'seccio.ordre':__theForm.labels[SeccioFields.ORDRE]}" /> &nbsp;(*)
              </label>
@@ -245,7 +245,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[SeccioFields.ORDRE]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="seccio_ordre_columnvalueid">
             <form:errors path="seccio.ordre" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,SeccioFields.ORDRE)? 'true' : 'false'}" cssClass="w-25 form-control  ${gen:contains(__theForm.readOnlyFields ,SeccioFields.ORDRE)? ' uneditable-input' : ''}"  style=""  path="seccio.ordre"   />
 

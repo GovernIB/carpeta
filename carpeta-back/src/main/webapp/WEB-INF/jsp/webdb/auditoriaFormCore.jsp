@@ -4,7 +4,7 @@
   
         <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.TIPUS)}">
         <tr id="auditoria_tipus_rowid">
-          <td>
+          <td id="auditoria_tipus_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[AuditoriaFields.TIPUS])?'auditoria.tipus':__theForm.labels[AuditoriaFields.TIPUS]}" /> &nbsp;(*)
              </label>
@@ -12,7 +12,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.TIPUS]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="auditoria_tipus_columnvalueid">
           <form:errors path="auditoria.tipus" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.TIPUS)}" >
           <form:hidden path="auditoria.tipus"/>
@@ -35,7 +35,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.OBJECTE)}">
         <tr id="auditoria_objecte_rowid">
-          <td>
+          <td id="auditoria_objecte_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[AuditoriaFields.OBJECTE])?'auditoria.objecte':__theForm.labels[AuditoriaFields.OBJECTE]}" />
              </label>
@@ -43,12 +43,17 @@
               <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.OBJECTE]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="auditoria_objecte_columnvalueid">
               <form:errors path="auditoria.objecte" cssClass="errorField alert alert-danger" />
-              <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.OBJECTE)? 'true' : 'false'}" path="auditoria.objecte"  />
+  <table style="width:100%">
+  <tr>
+  <td>
+       <form:textarea rows="3" wrap="soft" style="overflow:auto;display: inline;resize:both;" cssClass="form-control col-md-9-optional" readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.OBJECTE)? 'true' : 'false'}" path="auditoria.objecte"  />
+   </td>
+   <td style="width:40px">
       <div id="dropdownMenuButton_objecte" style="vertical-align:top;display:inline;position:relative;">
-        <button  class="btn btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
-        <div id="dropdownMenuContainer_objecte" class="dropdown-menu">
+        <button  class="btn btn-secondary btn-sm dropdown-toggle" type="button" style="margin-left:0px;"><span class="caret"></span></button>
+        <div id="dropdownMenuContainer_objecte" class="dropdown-menu dropdown-menu-right">
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('auditoria.objecte'); ta.wrap='off';" >No Wrap</a>
           <a class="dropdown-item"  href="#" onclick="javascript:var ta=document.getElementById('auditoria.objecte'); ta.wrap='soft';">Soft Wrap</a>
           <a class="dropdown-item" href="#" onclick="javascript:var ta=document.getElementById('auditoria.objecte'); ta.wrap='hard';">Hard Wrap</a>
@@ -60,13 +65,16 @@
                  $('#dropdownMenuContainer_objecte').css('display', valor);
                  return false;
 				});
-      </script>           </td>
+      </script>   </td>
+   </tr>
+   </table>
+           </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.DATAAUDIT)}">
         <tr id="auditoria_dataAudit_rowid">
-          <td>
+          <td id="auditoria_dataAudit_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[AuditoriaFields.DATAAUDIT])?'auditoria.dataAudit':__theForm.labels[AuditoriaFields.DATAAUDIT]}" /> &nbsp;(*)
              </label>
@@ -74,10 +82,8 @@
               <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.DATAAUDIT]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="auditoria_dataAudit_columnvalueid">
               <form:errors path="auditoria.dataAudit" cssClass="errorField alert alert-danger" />
-    <div class="container">
-      <div class="row">
             <div class="form-group">
                 <div class="input-group date" id="auditoria_dataAudit" data-target-input="nearest">
                       <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.DATAAUDIT)? 'true' : 'false'}" cssClass="form-control datetimepicker-input"  data-target="#auditoria_dataAudit" path="auditoria.dataAudit" />
@@ -98,15 +104,13 @@
                     }
                 });
             });
-          </script>        </div>
-      </div>
-           </td>
+          </script>           </td>
         </tr>
         </c:if>
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.USERNAME)}">
         <tr id="auditoria_username_rowid">
-          <td>
+          <td id="auditoria_username_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[AuditoriaFields.USERNAME])?'auditoria.username':__theForm.labels[AuditoriaFields.USERNAME]}" />
              </label>
@@ -114,7 +118,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.USERNAME]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="auditoria_username_columnvalueid">
             <form:errors path="auditoria.username" cssClass="errorField alert alert-danger" />
             <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USERNAME)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.USERNAME)? ' uneditable-input' : ''}"  style="" maxlength="255" path="auditoria.username"   />
 
@@ -124,7 +128,7 @@
         
         <c:if test="${!gen:contains(__theForm.hiddenFields,AuditoriaFields.ENTITATID)}">
         <tr id="auditoria_entitatID_rowid">
-          <td>
+          <td id="auditoria_entitatID_columnlabelid">
             <label>
               <fmt:message key="${(empty __theForm.labels[AuditoriaFields.ENTITATID])?'auditoria.entitatID':__theForm.labels[AuditoriaFields.ENTITATID]}" />
              </label>
@@ -132,7 +136,7 @@
               <i class="fas fa-info-circle" title="${__theForm.help[AuditoriaFields.ENTITATID]}" ></i>
               </c:if>
             </td>
-            <td>
+          <td id="auditoria_entitatID_columnvalueid">
           <form:errors path="auditoria.entitatID" cssClass="errorField alert alert-danger" />
           <c:if test="${gen:contains(__theForm.readOnlyFields ,AuditoriaFields.ENTITATID)}" >
           <form:hidden path="auditoria.entitatID"/>

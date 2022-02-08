@@ -66,6 +66,8 @@ public class InicioController extends CommonFrontController {
 
         ModelAndView mav = new ModelAndView("entitat");
 
+        long temps = System.currentTimeMillis();
+
         try {
             String lang = LocaleContextHolder.getLocale().getLanguage();
 
@@ -106,7 +108,7 @@ public class InicioController extends CommonFrontController {
             }
 
         } catch (Throwable e) {
-            processExceptionHtml(e, request, response);
+            processExceptionHtml(e, request, response, temps);
         }
 
         return mav;
@@ -272,8 +274,7 @@ public class InicioController extends CommonFrontController {
     /**
      * Aqui ja estam el Browser del Mobil. Sense cap referència amb la pàgina del
      * WebView, hem de recollir informació del codiLogin
-     * 
-     * @param codiEntitat
+     *
      * @param request
      * @param response
      * @return
@@ -519,6 +520,7 @@ public class InicioController extends CommonFrontController {
         EntitatJPA entitat = entitatEjb.findByCodi(codiEntitat);
         sesionHttp.setNomEntitat(entitat.getNom().getTraduccio(IDIOMA).getValor());
 
+        long temps = System.currentTimeMillis();
         try {
 
             Boolean isReactNative = (Boolean) request.getSession()
@@ -566,7 +568,7 @@ public class InicioController extends CommonFrontController {
             sesionHttp.setEntitatID(entitatID);
 
         } catch (Throwable e) {
-            processExceptionHtml(e, request, response);
+            processExceptionHtml(e, request, response, temps);
         }
     }
 
@@ -575,6 +577,7 @@ public class InicioController extends CommonFrontController {
             HttpSession session) throws I18NException {
 
         ModelAndView mav = new ModelAndView("inici");
+        long temps = System.currentTimeMillis();
 
         String loginCode = (String) request.getSession().getAttribute(SESSION_LOGIN_CODE);
         // Boolean isRN =
@@ -684,7 +687,7 @@ public class InicioController extends CommonFrontController {
             }
 
         } catch (Throwable e) {
-            processExceptionHtml(e, request, response);
+            processExceptionHtml(e, request, response, temps);
         }
 
         return mav;

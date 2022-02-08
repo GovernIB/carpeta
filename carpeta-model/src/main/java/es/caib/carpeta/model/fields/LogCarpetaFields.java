@@ -23,6 +23,7 @@ public interface LogCarpetaFields extends java.io.Serializable {
 	 public static final StringField PETICIO = new StringField(_TABLE_MODEL, "peticio", "peticio");
 	 public static final StringField ERROR = new StringField(_TABLE_MODEL, "error", "error");
 	 public static final StringField EXCEPCIO = new StringField(_TABLE_MODEL, "excepcio", "excepcio");
+	 public static final StringField IDSESSIO = new StringField(_TABLE_MODEL, "idSessio", "idsessio");
 
 
   public static final Field<?>[] ALL_LOGCARPETA_FIELDS = {
@@ -36,7 +37,8 @@ public interface LogCarpetaFields extends java.io.Serializable {
     DATAINICI,
     PETICIO,
     ERROR,
-    EXCEPCIO
+    EXCEPCIO,
+    IDSESSIO
   };
 
 
