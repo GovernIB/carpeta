@@ -90,5 +90,7 @@
     "carpeta_criterio_5": " i número ",
     "downloadjustificantText": "Fitxer descarregat. Fes click per descarregar-ho de nou",
 
-    "registro_regPorPagina": "Registres per pàgina"
+    "registro_regPorPagina": "Registres per pàgina",
+    "registroMostra":"Mostra ",
+    "registroRegistres":" registres"
 }

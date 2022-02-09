@@ -297,18 +297,23 @@ class Notib extends Component {
                                                             onClick={(event) => this.handlePagination(event)} >{number}</Pagination.Item>,);
                 }
 
-                selectRegistres = <div className="col-md-6 border-0 float-right p-0">
-                    <div className="col-sd-1 float-right pb-2 margRegSelect">
-                        <Form.Select id="rPP"
-                                     name="rPP" className="form-control form-control-sm focusIn"
-                                     value={this.state.filter_regPorPagina}
-                                     tabindex="510"
-                                     aria-labelledby="rPP"
-                                     onChange={(e) => {this.handleRegPorPaginaFilterParam(e); }}>
-                            <option value="5" className="form-control form-control-sm selectMobil">5</option>
-                            <option value="10" className="form-control form-control-sm selectMobil">10</option>
-                            <option value="25" className="form-control form-control-sm selectMobil">25</option>
-                        </Form.Select>
+                selectRegistres = <div className="col-md-12 border-0 p-0">
+                    <div className="col-sd-1 pb-2 margRegSelect">
+                        <p className="lh15 mb-1">
+                            {t('notibMostra')}
+                            <Form.Select id="rPP"
+                                         name="rPP" className="focusIn"
+                                         value={this.state.filter_regPorPagina}
+                                         tabindex="510"
+                                         aria-labelledby="rPP"
+                                         style={{color: '#666'}}
+                                         onChange={(e) => {this.handleRegPorPaginaFilterParam(e); }}>
+                                <option value="5" className="form-control form-control-sm selectMobil">5</option>
+                                <option value="10" className="form-control form-control-sm selectMobil">10</option>
+                                <option value="25" className="form-control form-control-sm selectMobil">25</option>
+                            </Form.Select>
+                            {t('notibRegistres')}
+                        </p>
                     </div>
                 </div>;
 
@@ -354,7 +359,7 @@ class Notib extends Component {
 
             } else{
                 if(this.state.total_items === 0 && this.state.dataComunicacions !== null) {
-                    taulaNotib = <div className="pt-3 alert alert-secondary margeBuid" style={{float: 'left', width: '95%'}}
+                    taulaNotib = <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%'}}
                                       role="alert">{t('notibBuid')}</div>
                 }
             }
@@ -378,7 +383,7 @@ class Notib extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="float-left pujarTaula" style={{width: '97%', position: 'relative'}}>
+                <div className="float-left" style={{width: '97%', position: 'relative'}}>
                     {selectRegistres}
                     {this.state.isLoaded && taulaNotib }
                 </div>
