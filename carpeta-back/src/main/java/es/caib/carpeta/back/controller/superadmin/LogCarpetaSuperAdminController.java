@@ -89,12 +89,14 @@ public class LogCarpetaSuperAdminController extends LogCarpetaController {
                     new AdditionalButton("fas fa-eye", "genapp.viewtitle", getContextWeb() + "/view/{0}", "btn-info"));
             logCarpetaFilterForm.addGroupByField(TIPUS);
             logCarpetaFilterForm.addGroupByField(ESTAT);
+//            logCarpetaFilterForm.addGroupByField(DATAINICI);
             logCarpetaFilterForm.addFilterByField(DATAINICI);
             logCarpetaFilterForm.addFilterByField(IDSESSIO);
 
             logCarpetaFilterForm.setOrderBy(LogCarpetaFields.DATAINICI.javaName);
             logCarpetaFilterForm.setOrderAsc(false);
             logCarpetaFilterForm.setVisibleMultipleSelection(false);
+            logCarpetaFilterForm.setAttachedAdditionalJspCode(true);
 
         }
 
