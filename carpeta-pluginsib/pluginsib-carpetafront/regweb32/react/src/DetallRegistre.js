@@ -195,7 +195,7 @@ class DetallRegistre extends Component {
 
                 content = 
                 <>  
-                    <h2 className="titol h2">{t('registro_titulo_detalle')} NUM REG {registre.numeroRegistro}</h2>
+                    <h2 className="titol h2">{t('registro_titulo_detalle')} {registre.numeroRegistro}</h2>
                     <div className="col-md-12 border-0 float-left p-0">
                     <div className="card-body pl-0 pr-0" style={{flexFlow: "row wrap", display: "flex"}}>
                         <div className="pri-col-deta-reg col-md-6">
