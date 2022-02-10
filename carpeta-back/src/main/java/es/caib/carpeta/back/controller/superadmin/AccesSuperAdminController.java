@@ -98,6 +98,7 @@ public class AccesSuperAdminController extends AccesController {
             OrderBy[] orderByDef = {new OrderBy(AccesFields.DATAACCES.javaName,OrderType.DESC)};
             accesFilterForm.setDefaultOrderBy(orderByDef);
             accesFilterForm.setVisibleMultipleSelection(false);
+            accesFilterForm.setAttachedAdditionalJspCode(true);
 
         }
 
