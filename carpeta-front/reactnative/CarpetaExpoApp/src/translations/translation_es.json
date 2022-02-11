@@ -39,7 +39,7 @@
 
   "mollaInici": "Inicio",
 
-  "paginaIniciTitol": "Os damos la bienvenida a la Carpeta Ciudadana - ",
+  "paginaIniciTitol": "Le damos la bienvenida a la Carpeta Ciudadana - ",
   "paginaIniciQuefer": "¿Qué puede hacer en la Carpeta Ciudadana?",
   "paginaIniciQuefer1": "Consultar el estado de vuestros trámites telemáticos.",
   "paginaIniciQuefer2": "Consultar vuestros registros de entrada y descargaros los justificantes.",
@@ -61,8 +61,8 @@
   "paginaIniciLogoClave": "Logo Clave",
   "paginaIniciAjudaClaveText": "Acceder Cl@ve",
   "paginaIniciAjudaBustiaText": "Acceder Buzón Cl@ve",
-  "paginaIniciTitolPrivat": "Os damos la bienvenida a la Carpeta Ciudadana - ",
-  "paginaIniciIntroduccioPrivat": "La Carpeta Ciudadana es una area privada que les facilita la relación con la Administración, desde la cual puede acceder de forma ágil y sencilla a sus trámites y gestiones, y también consultar sus datos personales en poder de la Administración. Actualmente, la Carpeta Ciudadana permite consultar las funcionalidades siguientes:",
+  "paginaIniciTitolPrivat": "Le damos la bienvenida a la Carpeta Ciudadana - ",
+  "paginaIniciIntroduccioPrivat": "La Carpeta Ciudadana es una área privada que le facilita la relación con la Administración, desde la cual puede acceder de forma ágil y sencilla a sus trámites y gestiones, y también consultar sus datos personales en poder de la Administración. Actualmente, la Carpeta Ciudadana permite consultar las siguientes funcionalidades:",
   "paginaIniciLlistaTramits": "Trámites sin enviar",
   "paginaIniciDescripcioTramits": "En este apartado puede consultar todos los trámites telemáticos que ha iniciado y están pendientes de finalizar.",
   "paginaIniciLlistaRegistres": "Registros y trámites enviados",
