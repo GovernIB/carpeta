@@ -37,6 +37,7 @@ class DadesEntitat extends Component {
     render() {
 
         let content;
+        let entitatNom = sessionStorage.getItem('entitatNom');
 
         if (this.state.error) {
             content = <div className="alert alert-danger" role="alert">{this.state.error}</div>;
@@ -45,7 +46,10 @@ class DadesEntitat extends Component {
         }
 
         return (
-            <div className="imc-peu-govern" dangerouslySetInnerHTML={content} tabIndex="600"/>
+            <div className="imc-peu-govern" tabIndex="600">
+                <div style={{fontWeight:'bold', textTransform: 'uppercase'}}>© {entitatNom}</div>
+                <div dangerouslySetInnerHTML={content} />
+            </div>
         );
     }
 }

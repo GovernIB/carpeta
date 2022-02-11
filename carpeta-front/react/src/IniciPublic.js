@@ -59,6 +59,7 @@ class IniciPublic extends Component {
 
         var baseURL = sessionStorage.getItem('contextPath');
         let entitatNom = this.state.nomEntitat;
+        sessionStorage.setItem('entitatNom', entitatNom);
 
         if (this.state.error) {
             htmlCode = <div className="alert alert-danger" role="alert">{this.state.error}</div>;
