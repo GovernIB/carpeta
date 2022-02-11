@@ -4,7 +4,7 @@
     "reprendreIniciaBoto":"Iniciar",
     "reprendreInfoFinestra":"Se ha abierto una ventana para poder continuar con la tramitación con la clave",
     "reprendreNoPipella":"Si no le aparece una nueva pestaña puede hacer click aquí:",
-    "reprendreClau":"Introduzca el código del trámite y clique el botón Iniciar para  conocer su estado:",
+    "reprendreClau":"Introduzca la clave del trámite y clique el botón «Iniciar» para conocer el estado de su tramitación:",
     "reprendreContinuar":"Iniciar",
     "reprendreTornar":"Volver",
     "reprendreNoClau":"No se ha introducido la clave de tramitación o la clave es errónea." 
