@@ -64,7 +64,9 @@ private static final long serialVersionUID = 1140880713L;
     @Type(type = "org.hibernate.type.TextType")
     java.lang.String excepcio;
 
-    @Column(name="idsessio",length = 255)
+    @Column(name="idsessio",length = 2147483647)
+    @Lob
+    @Type(type = "org.hibernate.type.TextType")
     java.lang.String idSessio;
 
 

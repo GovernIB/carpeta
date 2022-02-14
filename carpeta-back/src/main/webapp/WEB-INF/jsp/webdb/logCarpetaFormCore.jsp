@@ -190,7 +190,7 @@
               </c:if>
             </td>
           <td id="logCarpeta_dataInici_columnvalueid">
-              <form:errors path="logCarpeta.dataInici" cssClass="errorField alert alert-danger" />
+    <form:errors path="logCarpeta.dataInici" cssClass="errorField alert alert-danger" />
             <div class="form-group">
                 <div class="input-group date" id="logCarpeta_dataInici" data-target-input="nearest">
                       <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.DATAINICI)? 'true' : 'false'}" cssClass="form-control datetimepicker-input"  data-target="#logCarpeta_dataInici" path="logCarpeta.dataInici" />
@@ -201,7 +201,7 @@
                     </c:if>
                 </div>
             </div>
-          <script type="text/javascript">
+        <script type="text/javascript">
             $(function () {
                 $('#logCarpeta_dataInici').datetimepicker({
                     format: '${gen:getJSDateTimePattern()}',
@@ -211,7 +211,7 @@
                     }
                 });
             });
-          </script>           </td>
+        </script>           </td>
         </tr>
         </c:if>
         
@@ -323,7 +323,7 @@
             </td>
           <td id="logCarpeta_idSessio_columnvalueid">
             <form:errors path="logCarpeta.idSessio" cssClass="errorField alert alert-danger" />
-            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.IDSESSIO)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.IDSESSIO)? ' uneditable-input' : ''}"  style="" maxlength="255" path="logCarpeta.idSessio"   />
+            <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.IDSESSIO)? 'true' : 'false'}" cssClass="w-100 form-control  ${gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.IDSESSIO)? ' uneditable-input' : ''}"  style="" maxlength="2147483647" path="logCarpeta.idSessio"   />
 
            </td>
         </tr>

@@ -88,7 +88,7 @@
               </c:if>
             </td>
           <td id="avis_dataInici_columnvalueid">
-              <form:errors path="avis.dataInici" cssClass="errorField alert alert-danger" />
+    <form:errors path="avis.dataInici" cssClass="errorField alert alert-danger" />
             <div class="form-group">
                 <div class="input-group date" id="avis_dataInici" data-target-input="nearest">
                       <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AvisFields.DATAINICI)? 'true' : 'false'}" cssClass="form-control datetimepicker-input"  data-target="#avis_dataInici" path="avis.dataInici" />
@@ -99,7 +99,7 @@
                     </c:if>
                 </div>
             </div>
-          <script type="text/javascript">
+        <script type="text/javascript">
             $(function () {
                 $('#avis_dataInici').datetimepicker({
                     format: '${gen:getJSDateTimePattern()}',
@@ -109,7 +109,7 @@
                     }
                 });
             });
-          </script>           </td>
+        </script>           </td>
         </tr>
         </c:if>
         
@@ -124,7 +124,7 @@
               </c:if>
             </td>
           <td id="avis_dataFi_columnvalueid">
-              <form:errors path="avis.dataFi" cssClass="errorField alert alert-danger" />
+    <form:errors path="avis.dataFi" cssClass="errorField alert alert-danger" />
             <div class="form-group">
                 <div class="input-group date" id="avis_dataFi" data-target-input="nearest">
                       <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AvisFields.DATAFI)? 'true' : 'false'}" cssClass="form-control datetimepicker-input"  data-target="#avis_dataFi" path="avis.dataFi" />
@@ -135,7 +135,7 @@
                     </c:if>
                 </div>
             </div>
-          <script type="text/javascript">
+        <script type="text/javascript">
             $(function () {
                 $('#avis_dataFi').datetimepicker({
                     format: '${gen:getJSDateTimePattern()}',
@@ -145,7 +145,7 @@
                     }
                 });
             });
-          </script>           </td>
+        </script>           </td>
         </tr>
         </c:if>
         
