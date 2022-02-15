@@ -14,6 +14,7 @@ import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
 import es.caib.regweb3.ws.api.v3.AsientoWs;
+import es.caib.regweb3.ws.api.v3.FileInfoWs;
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWs;
 import es.caib.regweb3.ws.api.v3.ResultadoBusquedaWs;
 
@@ -898,6 +899,10 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 
         return result;
     }
+    
+    
+    
+    
 
     /**
      * Mètode que retorna la icona del plugin

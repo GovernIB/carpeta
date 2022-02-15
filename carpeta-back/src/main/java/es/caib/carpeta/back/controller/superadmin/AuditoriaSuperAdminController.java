@@ -101,6 +101,7 @@ public class AuditoriaSuperAdminController extends AuditoriaController {
              * auditoriaFilterForm.addGroupByField(TIPUS);
              * auditoriaFilterForm.addGroupByField(ENTITATID);
              */
+            auditoriaFilterForm.addGroupByField(DATAAUDIT);
 
             auditoriaFilterForm.setOrderBy(AuditoriaFields.DATAAUDIT.javaName);
             auditoriaFilterForm.setOrderAsc(false);
