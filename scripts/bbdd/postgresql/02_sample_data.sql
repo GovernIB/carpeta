@@ -89,7 +89,12 @@ es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.user=[=SP["es.caib.carpeta.
 es.caib.carpeta.pluginsib.carpetafront.notib.sistra1.pass=[=SP["es.caib.carpeta.pluginsib.carpetafront.sistra1.pass"]]
 
 # NOTIFICACIONES
-es.caib.carpeta.pluginsib.carpetafront.notib.notificaciones.url=https://sede.administracion.gob.es/carpeta/notificaciones/notifica/consultaNotificaciones.htm', true, 76);
+es.caib.carpeta.pluginsib.carpetafront.notib.notificaciones.url=https://sede.administracion.gob.es/carpeta/notificaciones/notifica/consultaNotificaciones.htm
+
+# Detall Notificacions CAIB: NOTIB
+es.caib.carpeta.pluginsib.carpetafront.notib.notificaciones.detalle.pendientes.url=https://dehu.redsara.es/notificaciones-pendientes
+es.caib.carpeta.pluginsib.carpetafront.notib.notificaciones.detalle.realizadas.url=https://dehu.redsara.es/notificaciones-realizadas
+es.caib.carpeta.pluginsib.carpetafront.notib.comunicaciones.detalle.url=https://dehu.redsara.es/comunicaciones', true, 76);
 
 
 

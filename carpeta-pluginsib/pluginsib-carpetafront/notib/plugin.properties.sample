@@ -12,6 +12,11 @@ es.caib.carpeta.pluginsib.carpetafront.notib.user=[=SP["es.caib.carpeta.pluginsi
 es.caib.carpeta.pluginsib.carpetafront.notib.pass=[=SP["es.caib.carpeta.pluginsib.carpetafront.notib.pass"]]
 
 
-# Notificacions Estatals
+# NOTIFICACIONES
 es.caib.carpeta.pluginsib.carpetafront.notib.notificaciones.url=https://sede.administracion.gob.es/carpeta/notificaciones/notifica/consultaNotificaciones.htm
+
+# Detall Notificacions CAIB: NOTIB
+es.caib.carpeta.pluginsib.carpetafront.notib.notificaciones.detalle.pendientes.url=https://dehu.redsara.es/notificaciones-pendientes
+es.caib.carpeta.pluginsib.carpetafront.notib.notificaciones.detalle.realizadas.url=https://dehu.redsara.es/notificaciones-realizadas
+es.caib.carpeta.pluginsib.carpetafront.notib.comunicaciones.detalle.url=https://dehu.redsara.es/comunicaciones
 
