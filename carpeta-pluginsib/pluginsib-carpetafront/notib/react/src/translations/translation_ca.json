@@ -1,7 +1,7 @@
 {
     "notibTornar":"Torna",
     "notibBoto":"Botó ",
-    "notibTitle":"Notificacions",
+    "notibTitle":"Notificacions i Comunicacions",
     "notibSubtitle":"Des d'aquí podeu accedir a les notificacions pendents i realitzar la compareixença electrònica, a les notificacions realitzades i a les comunicacions.",
     "notibComunicacionListado": "Llista de notificacions i comunicacions",
     "notibcomunicacionVacio": "No hi ha notificacions",
@@ -24,5 +24,15 @@
     "carpeta_paginacion_4": " elements",
 
     "carpeta_buscar" : "Cerca",
-    "registro_regPorPagina": "Registres per pàgina"
+    "registro_regPorPagina": "Registres per pàgina",
+    "notibNotificacions": "Notificacions",
+    "notibComunicacions": "Comunicacions",
+    "notibTipus": "Tipus",
+    "notibNotificacio": "Notificació",
+    "notibComunicacio": "Comunicació",
+    "notibSituacio": "Situació",
+    "notibTotes": "Totes",
+    "notibPendents": "Pendents",
+    "notibLlegides": "Llegides",
+    "notibComunicacionsBuid": "No hi ha comunicacions"
 }

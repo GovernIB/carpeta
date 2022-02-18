@@ -1,7 +1,7 @@
 {
     "notibTornar":"Volver",
     "notibBoto":"Botón ",
-    "notibTitle":"Notificaciones",
+    "notibTitle":"Notificaciones y Comunicaciones",
     "notibSubtitle":"Desde aquí puede acceder a las notificaciones pendientes y realizar la comparecencia electrónica, a las notificaciones realizadas y a las comunicaciones.",
     "notibComunicacionListado": "Lista de notificaciones y comunicaciones",
     "notibcomunicacionVacio": "No hay notificaciones",
@@ -24,5 +24,15 @@
     "carpeta_paginacion_4": " elementos",
 
     "carpeta_buscar" : "Buscar",
-    "registro_regPorPagina": "Registros por página"
+    "registro_regPorPagina": "Registros por página",
+    "notibNotificacions": "Notificaciones",
+    "notibComunicacions": "Comunicaciones",
+    "notibTipus": "Tipo",
+    "notibNotificacio": "Notificación",
+    "notibComunicacio": "Comunicación",
+    "notibSituacio": "Situación",
+    "notibTotes": "Todas",
+    "notibPendents": "Pendientes",
+    "notibLlegides": "Leídas",
+    "notibComunicacionsBuid": "No hay comunicaciones"
 }

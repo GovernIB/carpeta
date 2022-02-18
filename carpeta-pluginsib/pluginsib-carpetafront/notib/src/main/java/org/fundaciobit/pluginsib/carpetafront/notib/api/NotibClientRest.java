@@ -90,6 +90,151 @@ public class NotibClientRest {
          throw new RuntimeException(ex);
      }
     }
+
+    public Resposta consultaComunicacions(
+            String nif,
+            Integer pagina,
+            Integer mida) {
+        try {
+            String urlAmbMetode = baseUrl + CARPETA_SERVICE_PATH + "/comunicacions/" + nif;
+            String paginacio = "";
+            if (pagina != null && mida != null) {
+                paginacio = "?pagina=" + pagina + "&mida=" + mida;
+            }
+            Client jerseyClient = generarClient();
+            if (username != null) {
+                autenticarClient(
+                        jerseyClient,
+                        urlAmbMetode,
+                        username,
+                        password);
+            }
+            String json = jerseyClient.
+                    resource(urlAmbMetode + paginacio).
+                    type("application/json").
+                    get(String.class);
+            ObjectMapper mapper  = new ObjectMapper();
+            return mapper.readValue(json, Resposta.class);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public Resposta consultaNotificacionsPendents(
+            String nif,
+            Integer pagina,
+            Integer mida) {
+        try {
+            String urlAmbMetode = baseUrl + CARPETA_SERVICE_PATH + "/notificacions/" + nif + "/pendents";
+            String paginacio = "";
+            if (pagina != null && mida != null) {
+                paginacio = "?pagina=" + pagina + "&mida=" + mida;
+            }
+            Client jerseyClient = generarClient();
+            if (username != null) {
+                autenticarClient(
+                        jerseyClient,
+                        urlAmbMetode,
+                        username,
+                        password);
+            }
+            String json = jerseyClient.
+                    resource(urlAmbMetode + paginacio).
+                    type("application/json").
+                    get(String.class);
+            ObjectMapper mapper  = new ObjectMapper();
+            return mapper.readValue(json, Resposta.class);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public Resposta consultaNotificacionsLlegides(
+            String nif,
+            Integer pagina,
+            Integer mida) {
+        try {
+            String urlAmbMetode = baseUrl + CARPETA_SERVICE_PATH + "/notificacions/" + nif + "/llegides";
+            String paginacio = "";
+            if (pagina != null && mida != null) {
+                paginacio = "?pagina=" + pagina + "&mida=" + mida;
+            }
+            Client jerseyClient = generarClient();
+            if (username != null) {
+                autenticarClient(
+                        jerseyClient,
+                        urlAmbMetode,
+                        username,
+                        password);
+            }
+            String json = jerseyClient.
+                    resource(urlAmbMetode + paginacio).
+                    type("application/json").
+                    get(String.class);
+            ObjectMapper mapper  = new ObjectMapper();
+            return mapper.readValue(json, Resposta.class);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public Resposta consultaComunicacionsPendents(
+            String nif,
+            Integer pagina,
+            Integer mida) {
+        try {
+            String urlAmbMetode = baseUrl + CARPETA_SERVICE_PATH + "/comunicacions/" + nif + "/pendents";
+            String paginacio = "";
+            if (pagina != null && mida != null) {
+                paginacio = "?pagina=" + pagina + "&mida=" + mida;
+            }
+            Client jerseyClient = generarClient();
+            if (username != null) {
+                autenticarClient(
+                        jerseyClient,
+                        urlAmbMetode,
+                        username,
+                        password);
+            }
+            String json = jerseyClient.
+                    resource(urlAmbMetode + paginacio).
+                    type("application/json").
+                    get(String.class);
+            ObjectMapper mapper  = new ObjectMapper();
+            return mapper.readValue(json, Resposta.class);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public Resposta consultaComunicacionsLlegides(
+            String nif,
+            Integer pagina,
+            Integer mida) {
+        try {
+            String urlAmbMetode = baseUrl + CARPETA_SERVICE_PATH + "/comunicacions/" + nif + "/llegides";
+            String paginacio = "";
+            if (pagina != null && mida != null) {
+                paginacio = "?pagina=" + pagina + "&mida=" + mida;
+            }
+            Client jerseyClient = generarClient();
+            if (username != null) {
+                autenticarClient(
+                        jerseyClient,
+                        urlAmbMetode,
+                        username,
+                        password);
+            }
+            String json = jerseyClient.
+                    resource(urlAmbMetode + paginacio).
+                    type("application/json").
+                    get(String.class);
+            ObjectMapper mapper  = new ObjectMapper();
+            return mapper.readValue(json, Resposta.class);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
     
     public Arxiu consultaDocument(
          Long notificacioId) {

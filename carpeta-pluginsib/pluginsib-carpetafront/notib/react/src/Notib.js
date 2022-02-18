@@ -23,15 +23,22 @@ class Notib extends Component {
             isLoaded: false,
             dataComunicacions: null,
             urldetallbase: null,
+            urldetallbase2: null,
             filter_regPorPagina: 10,
+            filter_type: '0',
+            filter_status: '0',
             pagination_active: 1,
             pagination_total_items: 10,
             total_items: 0,
             error: false,
-            cercaRegistres: 10
+            cercaRegistres: 10,
+            nomTipus: i18n.t('notibNotificacio'),
+            missatgeBuid: i18n.t('notibBuid')
         };
 
         this.handleRegPorPaginaFilterParam = this.handleRegPorPaginaFilterParam.bind(this);
+        this.handleTypeFilterParam = this.handleTypeFilterParam.bind(this);
+        this.handleStatusFilterParam = this.handleStatusFilterParam.bind(this);
 
         const getLocale = Locale => require(`date-fns/locale/${sessionStorage.getItem("langActual")}/index.js`);
         this.locale = getLocale(this.props.language);
@@ -43,6 +50,17 @@ class Notib extends Component {
 
     canviatIdioma(lng) {
         this.componentDidMount();
+    }
+
+    assignarUrlDetall(estat) {
+        console.log("ESTAT: " + estat);
+        if(estat === 'FINALIZADA' || estat === 'FINALITZADA' || estat === 'PROCESADA' || estat === 'PROCESSADA'){
+            console.log("entram realitzada");
+            return this.state.urldetallbase2;
+        } else{
+            console.log("entram pendent");
+            return this.state.urldetallbase;
+        }
     }
 
     handleRegPorPaginaFilterParam(e){
@@ -58,7 +76,9 @@ class Notib extends Component {
 
         const params = {
             pageNumber: 0,
-            registrosPorPagina: this.state.filter_regPorPagina
+            registrosPorPagina: this.state.filter_regPorPagina,
+            tipo: this.state.filter_type,
+            estado: this.state.filter_status
         };
 
         axios.get(url, {params: params}).then( (response) => {
@@ -67,6 +87,7 @@ class Notib extends Component {
                     ...this.state,
                     dataComunicacions: response.data.comunicacions,
                     urldetallbase: response.data.urldetallbase,
+                    urldetallbase2: response.data.urldetallbase2,
                     total_items: response.data.totalRegistres,
                     isLoaded: true
                 });
@@ -93,7 +114,9 @@ class Notib extends Component {
 
         const params = {
             pageNumber: newPageNumber-1,
-            registrosPorPagina: this.state.filter_regPorPagina
+            registrosPorPagina: this.state.filter_regPorPagina,
+            tipo: this.state.filter_type,
+            estado: this.state.filter_status
         };
         const url2 = this.props.pathtoservei;
 
@@ -103,6 +126,7 @@ class Notib extends Component {
                     ...this.state,
                     dataComunicacions: response.data.comunicacions,
                     urldetallbase: response.data.urldetallbase,
+                    urldetallbase2: response.data.urldetallbase2,
                     total_items: response.data.totalRegistres,
                     pagination_total_items: response.data.registresPagina,
                     pagination_active: newPageNumber,
@@ -119,6 +143,23 @@ class Notib extends Component {
 
     }
 
+    handleTypeFilterParam(e){
+
+        this.setState({
+            ...this.state,
+            filter_type: e.target.value,
+            filter_status: '0'
+        });
+
+    };
+
+    handleStatusFilterParam(e){
+        this.setState({
+            ...this.state,
+            filter_status: e.target.value
+        });
+    };
+
     handleSubmitSearcher(e) {
 
         const {t} = this.props;
@@ -132,11 +173,37 @@ class Notib extends Component {
             cercaRegistres: this.state.filter_regPorPagina
         });
 
-            const url2 = this.props.pathtoservei;
+
+        if(this.state.filter_type === '0'){
+            this.setState({ ...this.state, nomTipus: t('notibNotificacio'), missatgeBuid: t('notibBuid') });
+        } else if (this.state.filter_type === '1'){
+            this.setState({ ...this.state, nomTipus: t('notibComunicacio'), missatgeBuid: t('notibComunicacionsBuid') });
+        }
+
+        let url2;
+        if(this.state.filter_type === '0') {
+            if(this.state.filter_status === '0') {
+                url2 = this.props.pathtoservei;
+            } else if(this.state.filter_status === '1') {
+                url2 = this.props.notificacionesPendientesUrl;
+            } else if(this.state.filter_status === '2') {
+                url2 = this.props.notificacionesLeidasUrl;
+            }
+        }else if(this.state.filter_type === '1'){
+            if(this.state.filter_status === '0') {
+                url2 = this.props.comunicacionesTodasUrl;
+            } else if(this.state.filter_status === '1') {
+                url2 = this.props.comunicacionesPendientesUrl;
+            } else if(this.state.filter_status === '2') {
+                url2 = this.props.comunicacionesLeidasUrl;
+            }
+        }
 
             const params = {
                 registrosPorPagina: this.state.filter_regPorPagina,
-                pageNumber: this.state.pagination_active-1
+                pageNumber: this.state.pagination_active-1,
+                tipo: this.state.filter_type,
+                estado: this.state.filter_status
             };
 
             axios.get(url2, {params: params}).then( (response) => {
@@ -146,6 +213,7 @@ class Notib extends Component {
                         ...this.state,
                         dataComunicacions: response.data.comunicacions,
                         urldetallbase: response.data.urldetallbase,
+                        urldetallbase2: response.data.urldetallbase2,
                         total_items: response.data.totalRegistres,
                         pagination_active: 1,
                         pagination_total_items: response.data.registresPagina,
@@ -168,12 +236,19 @@ class Notib extends Component {
             .click(function(event){
                 console.log("CLICK");
                 event.preventDefault();
-                carregarUrl($(this));
+                console.log("THIS: " + $(this).data('href'));
+                console.log("ORDER: " + $(this).data('order'));
+                window.open($(this).data('href'), '_blank');
+                // carregarUrl($(this));
+                event.stopPropagation();
             })
             .keypress(function(event){
                 console.log("KEYPRESS");
                 event.preventDefault();
-                carregarUrl($(this));
+                console.log("THIS: " + $(this).data('href'));
+                // carregarUrl($(this));
+                window.open($(this).data('href'), '_blank');
+                event.stopPropagation();
             });
 
         $("tr").each(function(i) {
@@ -181,7 +256,7 @@ class Notib extends Component {
         });
 
         function carregarUrl(obj) {
-            window.open(obj.data('url'), '_blank');
+            window.open(obj.data('href'), '_blank');
         }
     }
 
@@ -247,6 +322,37 @@ class Notib extends Component {
         let formulari = <>
             <Form id="fechaBusqueda" style={{marginBottom: '20px'}}>
                 <Container style={{ width: '95%', paddingLeft: '0', margin: '0' }}>
+                    <Row>
+                        <Col className="col-xs-12 mb-3" style={{maxWidth:'fit-content'}}>
+                            <Form.Group>
+                                <Form.Label>{t('notibTipus')}</Form.Label>
+                                <Form.Select id="tipo"
+                                             name="tipo" className="form-control form-control-sm focusIn"
+                                             value={this.state.filter_type}
+                                             tabindex="504"
+                                             aria-labelledby="tipo"
+                                             onChange={(e) => {this.handleTypeFilterParam(e); }}>
+                                    <option value="0" className="form-control form-control-sm selectMobil" selected="selected">{t('notibNotificacions')}</option>
+                                    <option value="1" className="form-control form-control-sm selectMobil">{t('notibComunicacions')}</option>
+                                </Form.Select>
+                            </Form.Group>
+                        </Col>
+                        <Col className="col-xs-12 mb-3" style={{maxWidth:'fit-content'}}>
+                            <Form.Group>
+                                <Form.Label>{t('notibComunicacionEstat')}</Form.Label>
+                                <Form.Select id="estat"
+                                             name="estat" className="form-control form-control-sm focusIn"
+                                             value={this.state.filter_status}
+                                             tabindex="505"
+                                             aria-labelledby="estat"
+                                             onChange={(e) => {this.handleStatusFilterParam(e); }}>
+                                    <option value="0" className="form-control form-control-sm selectMobil" selected="selected">{t('notibTotes')}</option>
+                                    <option value="1" className="form-control form-control-sm selectMobil">{t('notibPendents')}</option>
+                                    <option value="2" className="form-control form-control-sm selectMobil">{t('notibLlegides')}</option>
+                                </Form.Select>
+                            </Form.Group>
+                        </Col>
+                    </Row>
                     <Row style={{ width: 'fit-content', display: 'none'}}>
                         <Col className="col-xs-12 mb-3">
                             <Form.Group>
@@ -269,7 +375,7 @@ class Notib extends Component {
                             <div className="alert alert-danger" role="alert" id="errorMsg"/>
                         </div>
                     </Row>
-                    <Row className="col-md-3 pl-0 row" style={{zIndex: '5'}}>
+                    <Row className="col-md-3 pl-0 row" style={{zIndex: '4'}}>
                         <Button type="submit" className="btn btn-primary carpeta-btn ml-3 mt-2"  onClick={e => {this.handleSubmitSearcher(e)}} tabindex="505">{t('carpeta_buscar')}</Button>
                     </Row>
                 </Container>
@@ -281,7 +387,8 @@ class Notib extends Component {
                 <div className="loader"/>
             </div>;
 
-            selectRegistres = '';
+            selectRegistres = "";
+            taulaNotib = "";
 
         } else {
             content = "";
@@ -318,23 +425,25 @@ class Notib extends Component {
                 </div>;
 
                 taulaNotib = <>
-                    <Table responsive striped bordered hover style={tamanyTaula}>
+                    <Table id="tableId" responsive striped bordered hover style={tamanyTaula}>
                         <thead className="table-success">
                         <tr>
                             <th style={tamanyData}>{t('notibComunicacionFecha')}</th>
                             <th>{t('notibComunicacionOrgano')}</th>
                             <th>{t('notibComunicacionConcepte')}</th>
                             <th style={tamanyData}>{t('notibComunicacionDataEstat')}</th>
+                            <th>{t('notibTipus')}</th>
                             <th>{t('notibComunicacionEstat')}</th>
                         </tr>
                         </thead>
                         <tbody>
                         {this.state.dataComunicacions.map(({emisor, organGestor, procediment, concepte, descripcio, dataEnviament, estat, dataEstat}) => {
-                            return <tr className="clickableRow" data-target="_blank" data-url={this.state.urldetallbase} style={cursorPointer} tabIndex="511">
+                            return <tr className="clickableRow" data-target="_blank" data-href={estat === 'FINALIZADA' || estat === 'FINALITZADA' || estat === 'PROCESADA' || estat === 'PROCESSADA' ? this.state.urldetallbase2 : this.state.urldetallbase} style={cursorPointer} tabIndex="511">
                                 <td data-order={$.dateOrder(dataEnviament)}>{$.dateFormat(dataEnviament)}</td>
                                 <td>{organGestor}</td>
                                 <td>{concepte}</td>
                                 <td>{$.dateFormat(dataEstat)}</td>
+                                <td>{this.state.nomTipus}</td>
                                 <td>{estat}</td>
                             </tr>
                         })}
@@ -359,8 +468,10 @@ class Notib extends Component {
 
             } else{
                 if(this.state.total_items === 0 && this.state.dataComunicacions !== null) {
+
                     taulaNotib = <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%'}}
-                                      role="alert">{t('notibBuid')}</div>
+                                          role="alert">{this.state.missatgeBuid}</div>
+
                 }
             }
 
@@ -377,9 +488,6 @@ class Notib extends Component {
                             {formulari}
                             {this.state.error && <div className="alert alert-danger hide" role="alert">{this.state.error}</div>}
                             {content}
-                            {/*<div className="card-body imc--llista--capses pl-0">*/}
-                            {/*    {this.state.isLoaded && taulaNotib }*/}
-                            {/*</div>*/}
                         </div>
                     </div>
                 </div>

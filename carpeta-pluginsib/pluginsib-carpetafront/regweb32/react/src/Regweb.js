@@ -573,7 +573,7 @@ class Regweb extends Component {
                             <div className="alert alert-danger" role="alert" id="errorMsg"/>
                         </div>
                     </Row>
-                    <Row className="col-md-3 pl-0 row" style={{zIndex: '5'}}>
+                    <Row className="col-md-3 pl-0 row" style={{zIndex: '4'}}>
                         <Button type="submit" className="btn btn-primary carpeta-btn ml-3 mt-2"  onClick={e => {this.handleSubmitSearcher(e)}} tabindex="505">{t('carpeta_buscar')}</Button>
                     </Row>
                 </Container>
