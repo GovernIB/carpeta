@@ -110,10 +110,10 @@
 				// Passa dades personals a React
 				var autenticat = '1';
                 sessionStorage.setItem('autenticat', autenticat);
-				sessionStorage.setItem('usuariNomComplet', '${usuariNomComplet}');
-				sessionStorage.setItem('usuariNom', '${userName}');
-				sessionStorage.setItem('usuariLlinatge1', '${userSurname1}');
-				sessionStorage.setItem('usuariLlinatge2', '${userSurname2}');
+				sessionStorage.setItem('usuariNomComplet', "${usuariNomComplet}");
+				sessionStorage.setItem('usuariNom', "${userName}");
+				sessionStorage.setItem('usuariLlinatge1', "${userSurname1}");
+				sessionStorage.setItem('usuariLlinatge2', "${userSurname2}");
 				sessionStorage.setItem('usuariDNI', '${userDNI}');
 				sessionStorage.setItem('usuariEsEmpresa', ${userEsEmpresa});
 				sessionStorage.setItem('usuariMetode', '${userMethod}');
@@ -124,9 +124,9 @@
 
 				<c:if test="${not empty userRepresentant }" >
 				sessionStorage.setItem('representantExisteix', true);
-				sessionStorage.setItem('representantNom', '${representantName}');
-                sessionStorage.setItem('representantLlinatge1', '${representantSurname1}');
-                sessionStorage.setItem('representantLlinatge2', '${representantSurname2}');
+				sessionStorage.setItem('representantNom', "${representantName}");
+                sessionStorage.setItem('representantLlinatge1', "${representantSurname1}");
+                sessionStorage.setItem('representantLlinatge2', "${representantSurname2}");
                 sessionStorage.setItem('representantDNI', '${representantDNI}');
 				</c:if>
 
