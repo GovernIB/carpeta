@@ -232,32 +232,11 @@ class Notib extends Component {
     }
 
     componentDidUpdate() {
-        $('.clickableRow')
-            .click(function(event){
-                console.log("CLICK");
-                event.preventDefault();
-                console.log("THIS: " + $(this).data('href'));
-                console.log("ORDER: " + $(this).data('order'));
-                window.open($(this).data('href'), '_blank');
-                // carregarUrl($(this));
-                event.stopPropagation();
-            })
-            .keypress(function(event){
-                console.log("KEYPRESS");
-                event.preventDefault();
-                console.log("THIS: " + $(this).data('href'));
-                // carregarUrl($(this));
-                window.open($(this).data('href'), '_blank');
-                event.stopPropagation();
-            });
 
         $("tr").each(function(i) {
             $(this).removeAttr("role");
         });
 
-        function carregarUrl(obj) {
-            window.open(obj.data('href'), '_blank');
-        }
     }
 
 
@@ -438,7 +417,7 @@ class Notib extends Component {
                         </thead>
                         <tbody>
                         {this.state.dataComunicacions.map(({emisor, organGestor, procediment, concepte, descripcio, dataEnviament, estat, dataEstat}) => {
-                            return <tr className="clickableRow" data-target="_blank" data-href={estat === 'FINALIZADA' || estat === 'FINALITZADA' || estat === 'PROCESADA' || estat === 'PROCESSADA' ? this.state.urldetallbase2 : this.state.urldetallbase} style={cursorPointer} tabIndex="511">
+                            return <tr className="" data-target="_blank" onClick={() => window.open(estat === 'FINALIZADA' || estat === 'FINALITZADA' || estat === 'PROCESADA' || estat === 'PROCESSADA' ? this.state.urldetallbase2 : this.state.urldetallbase, '_blank')} style={cursorPointer} tabIndex="511">
                                 <td data-order={$.dateOrder(dataEnviament)}>{$.dateFormat(dataEnviament)}</td>
                                 <td>{organGestor}</td>
                                 <td>{concepte}</td>
