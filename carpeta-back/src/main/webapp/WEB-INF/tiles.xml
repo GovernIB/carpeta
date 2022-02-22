@@ -209,6 +209,15 @@
     <definition name="preguntesFrequentsListAdminEntitat" extends="adminentitat">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/preguntesFrequentsList.jsp" />
     </definition>
+
+    <definition name="entitatFormAdminEntitat" extends="adminentitat">
+        <put-attribute name="titol" value="entitat.entitat" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/entitatForm.jsp" />
+    </definition>
+
+    <definition name="entitatListAdminEntitat" extends="adminentitat">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/entitatList.jsp" />
+    </definition>
     
     
     

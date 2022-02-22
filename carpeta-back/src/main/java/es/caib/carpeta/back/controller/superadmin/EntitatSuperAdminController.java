@@ -35,14 +35,18 @@ public class EntitatSuperAdminController extends EntitatController {
     @EJB(mappedName = EntitatLogicaService.JNDI_NAME)
     protected EntitatLogicaService entitatLogicaEjb;
 
+    public boolean isSuperAdmin(){
+        return true;
+    }
+
     @Override
     public String getTileForm() {
-        return "entitatFormSuperAdmin";
+        return isSuperAdmin()?"entitatFormSuperAdmin":"entitatFormAdminEntitat";
     }
 
     @Override
     public String getTileList() {
-        return "entitatListSuperAdmin";
+        return isSuperAdmin()?"entitatListSuperAdmin":"entitatListAdminEntitat";
     }
 
     @Override

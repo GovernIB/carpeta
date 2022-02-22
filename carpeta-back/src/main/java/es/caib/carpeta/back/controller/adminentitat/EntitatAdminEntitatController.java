@@ -38,6 +38,11 @@ public class EntitatAdminEntitatController extends EntitatSuperAdminController {
     }
 
     @Override
+    public boolean isSuperAdmin(){
+        return false;
+    }
+
+    @Override
     public EntitatForm getEntitatForm(EntitatJPA _jpa, boolean __isView, HttpServletRequest request,
             ModelAndView mav) throws I18NException {
         EntitatForm entitatForm = super.getEntitatForm(_jpa, __isView, request, mav);
@@ -53,6 +58,7 @@ public class EntitatAdminEntitatController extends EntitatSuperAdminController {
         entitatForm.addReadOnlyField(CODI);
         entitatForm.addReadOnlyField(CODIDIR3);
         entitatForm.addReadOnlyField(ACTIVA);
+        entitatForm.addReadOnlyField(VERSIO);
 
         entitatForm.setDeleteButtonVisible(false);
         entitatForm.setCancelButtonVisible(false);
