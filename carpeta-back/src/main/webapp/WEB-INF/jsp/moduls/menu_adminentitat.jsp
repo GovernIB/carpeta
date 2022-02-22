@@ -10,6 +10,12 @@
 <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
 <a class="dropdown-item"
+   href="<c:url value="/adminentitat/entitat/edit"/>"> <span
+        style="${(fn:contains(url, 'adminentitat/usuarientitat'))? " font-weight:bold;" : ""}"><spring:message
+        code="menu.adminentitat.lamevaentitat" /></span>
+</a>
+
+<a class="dropdown-item"
     href="<c:url value="/adminentitat/usuarientitat/list"/>"> <span
     style="${(fn:contains(url, 'adminentitat/usuarientitat'))? " font-weight:bold;" : ""}"><spring:message
             code="usuariEntitat.usuariEntitat.plural" /></span>
