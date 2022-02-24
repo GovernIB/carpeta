@@ -302,9 +302,9 @@ class Notib extends Component {
             <Form id="fechaBusqueda" style={{marginBottom: '20px'}}>
                 <Container style={{ width: '95%', paddingLeft: '0', margin: '0' }}>
                     <Row>
-                        <Col className="col-xs-12 mb-3" style={{maxWidth:'fit-content'}}>
+                        <div className="col-xs-12 mb-3 selectNotib">
                             <Form.Group>
-                                <Form.Label>{t('notibTipus')}</Form.Label>
+                                <Form.Label style={{float:'left'}}>{t('notibTipus')}</Form.Label>
                                 <Form.Select id="tipo"
                                              name="tipo" className="form-control form-control-sm focusIn"
                                              value={this.state.filter_type}
@@ -315,10 +315,10 @@ class Notib extends Component {
                                     <option value="1" className="form-control form-control-sm selectMobil">{t('notibComunicacions')}</option>
                                 </Form.Select>
                             </Form.Group>
-                        </Col>
-                        <Col className="col-xs-12 mb-3" style={{maxWidth:'fit-content'}}>
+                        </div>
+                        <div className="col-xs-12 mb-3 selectNotib">
                             <Form.Group>
-                                <Form.Label>{t('notibComunicacionEstat')}</Form.Label>
+                                <Form.Label style={{float:'left'}}>{t('notibComunicacionEstat')}</Form.Label>
                                 <Form.Select id="estat"
                                              name="estat" className="form-control form-control-sm focusIn"
                                              value={this.state.filter_status}
@@ -330,7 +330,7 @@ class Notib extends Component {
                                     <option value="2" className="form-control form-control-sm selectMobil">{t('notibLlegides')}</option>
                                 </Form.Select>
                             </Form.Group>
-                        </Col>
+                        </div>
                     </Row>
                     <Row style={{ width: 'fit-content', display: 'none'}}>
                         <Col className="col-xs-12 mb-3">

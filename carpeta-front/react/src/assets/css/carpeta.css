@@ -812,6 +812,11 @@ ul.pagination li.page-item.active {
 .margeBuid{
 	margin-top: 3.5rem!important;
 }
+.selectNotib{
+	width: 10em;
+	padding-left: 1em;
+	padding-right: 3em;
+}
 
 #dadespinbalayudascontainer .descarregaJustificant { text-align:center; } 
 #dadespinbalayudascontainer .descarregaJustificant span.oi { font-size: 3rem; display:block; margin: 10px; }
@@ -1215,6 +1220,9 @@ body {
 }
 .imc-icona {
 	padding-right: 0em;
+}
+.selectNotib{
+	padding-left: 0.5em;
 }
 }
 
