@@ -15,7 +15,7 @@
     "notibComunicacionDataEstat": "Fecha Estado",
     "notibComunicacionJustificant": "Justificante",
     "notibComunicacionCertificacio": "Certificación",
-    "notibBuid":"No hay notificaciones",
+    "notibBuid":"No hay Notificaciones ni Comunicaciones",
     "notibMostra":"Muestra ",
     "notibRegistres":" registros",
     "carpeta_paginacion_1": "Mostrando elementos del ",
@@ -34,5 +34,6 @@
     "notibTotes": "Todas",
     "notibPendents": "Pendientes",
     "notibLlegides": "Leídas",
-    "notibComunicacionsBuid": "No hay comunicaciones"
+    "notibComunicacionsBuid": "No hay Comunicaciones",
+    "notibNotificacionsBuid": "No hay Notificaciones"
 }

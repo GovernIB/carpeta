@@ -4,20 +4,12 @@ import com.google.gson.Gson;
 import es.caib.carpeta.pluginsib.carpetafront.api.*;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementoExpediente;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.TipoElementoExpediente;
-import es.caib.zonaper.ws.v2.model.elementoexpediente.TiposElementoExpediente;
 import org.apache.commons.io.IOUtils;
-import org.fundaciobit.pluginsib.carpetafront.notib.api.Document;
-import org.fundaciobit.pluginsib.carpetafront.notib.api.NotibClientRest;
-import org.fundaciobit.pluginsib.carpetafront.notib.api.Persona;
-import org.fundaciobit.pluginsib.carpetafront.notib.api.Resposta;
-import org.fundaciobit.pluginsib.carpetafront.notib.api.Transmissio;
+import org.fundaciobit.pluginsib.carpetafront.notib.api.*;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
-import javax.xml.ws.soap.SOAPFaultException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -147,7 +139,22 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             reactjs(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
                     administrationEncriptedID, locale, isGet);
 
-        } else if (query.startsWith(URL_REST_SERVICE)) {
+        } else if (query.startsWith(URL_REST_SERVICE_TOTES)) {
+
+            consultaTotes(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
+
+        } else if (query.startsWith(URL_REST_SERVICE_TOTES_PENDENTS)) {
+
+            consultaTotesPendents(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
+
+        } else if (query.startsWith(URL_REST_SERVICE_TOTES_LLEGIDES)) {
+
+            consultaTotesLlegides(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
+
+        } else if (query.startsWith(URL_REST_SERVICE_NOTIFICACIONS)) {
 
             consultaNotificacions(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
                     administrationEncriptedID, locale, isGet);
@@ -382,20 +389,20 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             map.put("pathtojsNotib", pathtojsNotib);
 
-            String pathtoservei = absolutePluginRequestPath + "/" + URL_REST_SERVICE;
-
+            String pathtoservei = absolutePluginRequestPath + "/" + URL_REST_SERVICE_TOTES;
             map.put("pathtoservei", pathtoservei);
+
+            String pathtoserveiPendientesUrl = absolutePluginRequestPath + "/" + URL_REST_SERVICE_TOTES_PENDENTS;
+            map.put("pathtoserveiPendientesUrl", pathtoserveiPendientesUrl);
+
+            String pathtoserveiLeidasUrl = absolutePluginRequestPath + "/" + URL_REST_SERVICE_TOTES_LLEGIDES;
+            map.put("pathtoserveiLeidasUrl", pathtoserveiLeidasUrl);
 
             // GOVERN CENTRAL - NOTIB
             boolean useNotibApi = "true".equalsIgnoreCase(getProperty(NOTIB_PROPERTY_BASE + "usenotibapi"));
-            String notificacionesUrl;
 
-            notificacionesUrl = absolutePluginRequestPath + "/" + NOTIFICACIONS_ESPERA_NOTIB_PAGE;
-            map.put("notificacionesUrl", notificacionesUrl);
-
-//            // CAIB - SISTRA 1
-//            String comunicacionesURL = absolutePluginRequestPath + "/" + NOTIFICACIONS_ESPERA_SISTRA_PAGE;
-//            map.put("comunicacionesUrl", comunicacionesURL);
+            String notificacionesTodasUrl = absolutePluginRequestPath + "/" + URL_REST_SERVICE_NOTIFICACIONS;
+            map.put("notificacionesTodasUrl", notificacionesTodasUrl);
 
             String notificacionesPendientesUrl = absolutePluginRequestPath + "/" + URL_REST_SERVICE_NOTIFICACIONS_PENDENTS;
             map.put("notificacionesPendientesUrl", notificacionesPendientesUrl);
@@ -435,7 +442,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
-    protected static final String URL_REST_SERVICE = "consultaNotificacions";
+    protected static final String URL_REST_SERVICE_NOTIFICACIONS = "consultaNotificacions";
 
     public void consultaNotificacions(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
                                 HttpServletRequest request, HttpServletResponse response, UserData userData,
@@ -454,10 +461,12 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             }catch (NumberFormatException e){
                 pagina = 0;
             }
-            List<Transmissio> notificacions;
+            List<Transmissio> notificacionsList;
+            List<ComunicacioNotificacio> sortedNotificacions = new ArrayList<ComunicacioNotificacio>();
+            ArrayList<ComunicacioNotificacio> cns = new ArrayList<ComunicacioNotificacio>();
 
             int regPag = Integer.parseInt(formRegPorPagina);
-            int notiNumero = 0;
+            int comNumero = 0;
 
             {
 
@@ -473,54 +482,63 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
 
-//                Resposta resposta = notibClientRest.consultaNotificacions(nif, pagina, mida);
-                Resposta resposta = notibClientRest.consultaNotificacions(nif, 0, mida);
+                Resposta respostaNotificacions = notibClientRest.consultaNotificacions(nif, 0, mida);
 
-                notificacions = resposta.getResultat();
-                notiNumero = resposta.getNumeroElementsTotals();
+                notificacionsList = respostaNotificacions.getResultat();
+                for(Transmissio notificacio : notificacionsList){
+                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
+                    cn.setTransmissio(notificacio);
+                    cn.setData(notificacio.getDataEnviament());
+                    cn.setTipus("notificacio");
+                    cns.add(cn);
+                }
+
+                // Ordenam comunicacions a mostrar
+                sortedNotificacions = cns.stream()
+                        .sorted(Comparator.comparing(ComunicacioNotificacio::getData).reversed())
+                        .collect(Collectors.toList());
+
+                comNumero = sortedNotificacions.size();
 
             }
 
             int notificacionsTotals;
-            if (notificacions == null) {
-                notificacions = new ArrayList<Transmissio>();
+            if (notificacionsList == null) {
+                notificacionsList = new ArrayList<Transmissio>();
                 notificacionsTotals = 0;
             }else{
-                notificacionsTotals = notiNumero;
+                notificacionsTotals = comNumero;
             }
 
-            Collections.reverse(notificacions);
 
-            Map<Long, Transmissio> comunicacionsMap = (Map<Long, Transmissio>) request.getSession()
+            Map<Long, Transmissio> notificacionsMap = (Map<Long, Transmissio>) request.getSession()
                     .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
 
-            if (comunicacionsMap == null) {
-                comunicacionsMap = new HashMap<Long, Transmissio>();
-                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, comunicacionsMap);
+            if (notificacionsMap == null) {
+                notificacionsMap = new HashMap<Long, Transmissio>();
+                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, notificacionsMap);
             }
 
-            for (Transmissio t : notificacions) {
-                t.setOrganGestor(t.getOrganGestor().substring(t.getOrganGestor().indexOf("', nom='") + 8, t.getOrganGestor().indexOf("', llibre='")));
-                comunicacionsMap.put(t.getId(), t);
+            for (ComunicacioNotificacio t : sortedNotificacions) {
+                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor().substring(t.getTransmissio().getOrganGestor().indexOf("', nom='") + 8, t.getTransmissio().getOrganGestor().indexOf("', llibre='")));
+                notificacionsMap.put(t.getTransmissio().getId(), t);
             }
 
             Map<String, Object> infoNotificacions = new HashMap<String, Object>();
             if((pagina+1)*regPag <= notificacionsTotals) {
-                infoNotificacions.put("comunicacions", notificacions.subList(pagina * regPag, (pagina + 1) * regPag));
+                infoNotificacions.put("comunicacions", sortedNotificacions.subList(pagina * regPag, (pagina + 1) * regPag));
             }else{
-                infoNotificacions.put("comunicacions", notificacions.subList(pagina * regPag, notificacionsTotals));
+                infoNotificacions.put("comunicacions", sortedNotificacions.subList(pagina * regPag, notificacionsTotals));
             }
             infoNotificacions.put("urldetallbase", getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.pendientes.url") + "#");
             infoNotificacions.put("urldetallbase2", getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.realizadas.url") + "#");
-//            infoNotificacions.put("registresPagina", itemsPagina);
             infoNotificacions.put("registresPagina", formRegPorPagina);
-//            infoNotificacions.put("totalRegistres", notificacions.size());
             infoNotificacions.put("totalRegistres", notificacionsTotals);
 
             Gson gson = new Gson();
             String json = gson.toJson(infoNotificacions);
 
-            log.info(json);
+//            log.info(json);
 
             try {
 
@@ -814,10 +832,12 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             }catch (NumberFormatException e){
                 pagina = 0;
             }
-            List<Transmissio> notificacionsPendents;
+            List<Transmissio> notificacionsPendentsList;
+            List<ComunicacioNotificacio> sortedNotificacionsPendents = new ArrayList<ComunicacioNotificacio>();
+            ArrayList<ComunicacioNotificacio> cns = new ArrayList<ComunicacioNotificacio>();
 
             int regPag = Integer.parseInt(formRegPorPagina);
-            int notiNumero = 0;
+            int comNumero = 0;
 
             {
 
@@ -833,22 +853,34 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
 
-                Resposta resposta = notibClientRest.consultaNotificacionsPendents(nif, 0, mida);
+                Resposta respostaNotificacionsPendents = notibClientRest.consultaNotificacionsPendents(nif, 0, mida);
 
-                notificacionsPendents = resposta.getResultat();
-                notiNumero = resposta.getNumeroElementsTotals();
+                notificacionsPendentsList = respostaNotificacionsPendents.getResultat();
+                for(Transmissio notificacio : notificacionsPendentsList){
+                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
+                    cn.setTransmissio(notificacio);
+                    cn.setData(notificacio.getDataEnviament());
+                    cn.setTipus("notificacio");
+                    cns.add(cn);
+                }
+
+                // Ordenam comunicacions a mostrar
+                sortedNotificacionsPendents = cns.stream()
+                        .sorted(Comparator.comparing(ComunicacioNotificacio::getData).reversed())
+                        .collect(Collectors.toList());
+
+                comNumero = sortedNotificacionsPendents.size();
 
             }
 
             int notificacionsPendentsTotals;
-            if (notificacionsPendents == null) {
-                notificacionsPendents = new ArrayList<Transmissio>();
+            if (notificacionsPendentsList == null) {
+                notificacionsPendentsList = new ArrayList<Transmissio>();
                 notificacionsPendentsTotals = 0;
             }else{
-                notificacionsPendentsTotals = notiNumero;
+                notificacionsPendentsTotals = comNumero;
             }
 
-            Collections.reverse(notificacionsPendents);
 
             Map<Long, Transmissio> notificacionsPendentsMap = (Map<Long, Transmissio>) request.getSession()
                     .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
@@ -858,16 +890,16 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, notificacionsPendentsMap);
             }
 
-            for (Transmissio t : notificacionsPendents) {
-                t.setOrganGestor(t.getOrganGestor().substring(t.getOrganGestor().indexOf("', nom='") + 8, t.getOrganGestor().indexOf("', llibre='")));
-                notificacionsPendentsMap.put(t.getId(), t);
+            for (ComunicacioNotificacio t : sortedNotificacionsPendents) {
+                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor().substring(t.getTransmissio().getOrganGestor().indexOf("', nom='") + 8, t.getTransmissio().getOrganGestor().indexOf("', llibre='")));
+                notificacionsPendentsMap.put(t.getTransmissio().getId(), t);
             }
 
             Map<String, Object> infoNotificacionsPendents = new HashMap<String, Object>();
             if((pagina+1)*regPag <= notificacionsPendentsTotals) {
-                infoNotificacionsPendents.put("comunicacions", notificacionsPendents.subList(pagina * regPag, (pagina + 1) * regPag));
+                infoNotificacionsPendents.put("comunicacions", sortedNotificacionsPendents.subList(pagina * regPag, (pagina + 1) * regPag));
             }else{
-                infoNotificacionsPendents.put("comunicacions", notificacionsPendents.subList(pagina * regPag, notificacionsPendentsTotals));
+                infoNotificacionsPendents.put("comunicacions", sortedNotificacionsPendents.subList(pagina * regPag, notificacionsPendentsTotals));
             }
             infoNotificacionsPendents.put("urldetallbase", getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.pendientes.url") + "#");
             infoNotificacionsPendents.put("urldetallbase2", getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.pendientes.url") + "#");
@@ -877,7 +909,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             Gson gson = new Gson();
             String json = gson.toJson(infoNotificacionsPendents);
 
-            log.info(json);
+//            log.info(json);
 
             try {
 
@@ -925,10 +957,12 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             }catch (NumberFormatException e){
                 pagina = 0;
             }
-            List<Transmissio> notificacionsLlegides;
+            List<Transmissio> notificacionsLlegidesList;
+            List<ComunicacioNotificacio> sortedNotificacionsLlegides = new ArrayList<ComunicacioNotificacio>();
+            ArrayList<ComunicacioNotificacio> cns = new ArrayList<ComunicacioNotificacio>();
 
             int regPag = Integer.parseInt(formRegPorPagina);
-            int notiNumero = 0;
+            int comNumero = 0;
 
             {
 
@@ -944,22 +978,34 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
 
-                Resposta resposta = notibClientRest.consultaNotificacionsLlegides(nif, 0, mida);
+                Resposta respostaNotificacionsLlegides = notibClientRest.consultaNotificacionsLlegides(nif, 0, mida);
 
-                notificacionsLlegides = resposta.getResultat();
-                notiNumero = resposta.getNumeroElementsTotals();
+                notificacionsLlegidesList = respostaNotificacionsLlegides.getResultat();
+                for(Transmissio notificacio : notificacionsLlegidesList){
+                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
+                    cn.setTransmissio(notificacio);
+                    cn.setData(notificacio.getDataEnviament());
+                    cn.setTipus("notificacio");
+                    cns.add(cn);
+                }
+
+                // Ordenam comunicacions a mostrar
+                sortedNotificacionsLlegides = cns.stream()
+                        .sorted(Comparator.comparing(ComunicacioNotificacio::getData).reversed())
+                        .collect(Collectors.toList());
+
+                comNumero = sortedNotificacionsLlegides.size();
 
             }
 
             int notificacionsLlegidesTotals;
-            if (notificacionsLlegides == null) {
-                notificacionsLlegides = new ArrayList<Transmissio>();
+            if (notificacionsLlegidesList == null) {
+                notificacionsLlegidesList = new ArrayList<Transmissio>();
                 notificacionsLlegidesTotals = 0;
             }else{
-                notificacionsLlegidesTotals = notiNumero;
+                notificacionsLlegidesTotals = comNumero;
             }
 
-            Collections.reverse(notificacionsLlegides);
 
             Map<Long, Transmissio> notificacionsLlegidesMap = (Map<Long, Transmissio>) request.getSession()
                     .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
@@ -969,16 +1015,16 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, notificacionsLlegidesMap);
             }
 
-            for (Transmissio t : notificacionsLlegides) {
-                t.setOrganGestor(t.getOrganGestor().substring(t.getOrganGestor().indexOf("', nom='") + 8, t.getOrganGestor().indexOf("', llibre='")));
-                notificacionsLlegidesMap.put(t.getId(), t);
+            for (ComunicacioNotificacio t : sortedNotificacionsLlegides) {
+                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor().substring(t.getTransmissio().getOrganGestor().indexOf("', nom='") + 8, t.getTransmissio().getOrganGestor().indexOf("', llibre='")));
+                notificacionsLlegidesMap.put(t.getTransmissio().getId(), t);
             }
 
             Map<String, Object> infoNotificacionsLlegides = new HashMap<String, Object>();
             if((pagina+1)*regPag <= notificacionsLlegidesTotals) {
-                infoNotificacionsLlegides.put("comunicacions", notificacionsLlegides.subList(pagina * regPag, (pagina + 1) * regPag));
+                infoNotificacionsLlegides.put("comunicacions", sortedNotificacionsLlegides.subList(pagina * regPag, (pagina + 1) * regPag));
             }else{
-                infoNotificacionsLlegides.put("comunicacions", notificacionsLlegides.subList(pagina * regPag, notificacionsLlegidesTotals));
+                infoNotificacionsLlegides.put("comunicacions", sortedNotificacionsLlegides.subList(pagina * regPag, notificacionsLlegidesTotals));
             }
             infoNotificacionsLlegides.put("urldetallbase", getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.realizadas.url") + "#");
             infoNotificacionsLlegides.put("urldetallbase2", getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.realizadas.url") + "#");
@@ -988,7 +1034,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             Gson gson = new Gson();
             String json = gson.toJson(infoNotificacionsLlegides);
 
-            log.info(json);
+//            log.info(json);
 
             try {
 
@@ -1037,7 +1083,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             }catch (NumberFormatException e){
                 pagina = 0;
             }
-            List<Transmissio> comunicacions;
+            List<Transmissio> comunicacionsList;
+            List<ComunicacioNotificacio> sortedComunicacions = new ArrayList<ComunicacioNotificacio>();
+            ArrayList<ComunicacioNotificacio> cns = new ArrayList<ComunicacioNotificacio>();
 
             int regPag = Integer.parseInt(formRegPorPagina);
             int comNumero = 0;
@@ -1056,22 +1104,34 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
 
-                Resposta resposta = notibClientRest.consultaComunicacions(nif, 0, mida);
+                Resposta respostaComunicacions = notibClientRest.consultaComunicacions(nif, 0, mida);
 
-                comunicacions = resposta.getResultat();
-                comNumero = resposta.getNumeroElementsTotals();
+                comunicacionsList = respostaComunicacions.getResultat();
+                for(Transmissio comunicacio : comunicacionsList){
+                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
+                    cn.setTransmissio(comunicacio);
+                    cn.setData(comunicacio.getDataEnviament());
+                    cn.setTipus("comunicacio");
+                    cns.add(cn);
+                }
+
+                // Ordenam comunicacions a mostrar
+                sortedComunicacions = cns.stream()
+                        .sorted(Comparator.comparing(ComunicacioNotificacio::getData).reversed())
+                        .collect(Collectors.toList());
+
+                comNumero = sortedComunicacions.size();
 
             }
 
             int comunicacionsTotals;
-            if (comunicacions == null) {
-                comunicacions = new ArrayList<Transmissio>();
+            if (comunicacionsList == null) {
+                comunicacionsList = new ArrayList<Transmissio>();
                 comunicacionsTotals = 0;
             }else{
                 comunicacionsTotals = comNumero;
             }
 
-            Collections.reverse(comunicacions);
 
             Map<Long, Transmissio> comunicacionsMap = (Map<Long, Transmissio>) request.getSession()
                     .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
@@ -1081,26 +1141,27 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, comunicacionsMap);
             }
 
-            for (Transmissio t : comunicacions) {
-                t.setOrganGestor(t.getOrganGestor().substring(t.getOrganGestor().indexOf("', nom='") + 8, t.getOrganGestor().indexOf("', llibre='")));
-                comunicacionsMap.put(t.getId(), t);
+            for (ComunicacioNotificacio t : sortedComunicacions) {
+                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor().substring(t.getTransmissio().getOrganGestor().indexOf("', nom='") + 8, t.getTransmissio().getOrganGestor().indexOf("', llibre='")));
+                comunicacionsMap.put(t.getTransmissio().getId(), t);
             }
 
             Map<String, Object> infoComunicacions = new HashMap<String, Object>();
             if((pagina+1)*regPag <= comunicacionsTotals) {
-                infoComunicacions.put("comunicacions", comunicacions.subList(pagina * regPag, (pagina + 1) * regPag));
+                infoComunicacions.put("comunicacions", sortedComunicacions.subList(pagina * regPag, (pagina + 1) * regPag));
             }else{
-                infoComunicacions.put("comunicacions", comunicacions.subList(pagina * regPag, comunicacionsTotals));
+                infoComunicacions.put("comunicacions", sortedComunicacions.subList(pagina * regPag, comunicacionsTotals));
             }
             infoComunicacions.put("urldetallbase", getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
             infoComunicacions.put("urldetallbase2", getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
+            infoComunicacions.put("urldetallbase3", getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
             infoComunicacions.put("registresPagina", formRegPorPagina);
             infoComunicacions.put("totalRegistres", comunicacionsTotals);
 
             Gson gson = new Gson();
             String json = gson.toJson(infoComunicacions);
 
-            log.info(json);
+//            log.info(json);
 
             try {
 
@@ -1148,7 +1209,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             }catch (NumberFormatException e){
                 pagina = 0;
             }
-            List<Transmissio> comunicacionsPendents;
+            List<Transmissio> comunicacionsPendentsList;
+            List<ComunicacioNotificacio> sortedComunicacionsPendents = new ArrayList<ComunicacioNotificacio>();
+            ArrayList<ComunicacioNotificacio> cns = new ArrayList<ComunicacioNotificacio>();
 
             int regPag = Integer.parseInt(formRegPorPagina);
             int comNumero = 0;
@@ -1167,22 +1230,34 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
 
-                Resposta resposta = notibClientRest.consultaComunicacionsPendents(nif, 0, mida);
+                Resposta respostaComunicacionsPendents = notibClientRest.consultaComunicacionsPendents(nif, 0, mida);
 
-                comunicacionsPendents = resposta.getResultat();
-                comNumero = resposta.getNumeroElementsTotals();
+                comunicacionsPendentsList = respostaComunicacionsPendents.getResultat();
+                for(Transmissio comunicacio : comunicacionsPendentsList){
+                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
+                    cn.setTransmissio(comunicacio);
+                    cn.setData(comunicacio.getDataEnviament());
+                    cn.setTipus("comunicacio");
+                    cns.add(cn);
+                }
+
+                // Ordenam comunicacions a mostrar
+                sortedComunicacionsPendents = cns.stream()
+                        .sorted(Comparator.comparing(ComunicacioNotificacio::getData).reversed())
+                        .collect(Collectors.toList());
+
+                comNumero = sortedComunicacionsPendents.size();
 
             }
 
             int comunicacionsPendentsTotals;
-            if (comunicacionsPendents == null) {
-                comunicacionsPendents = new ArrayList<Transmissio>();
+            if (comunicacionsPendentsList == null) {
+                comunicacionsPendentsList = new ArrayList<Transmissio>();
                 comunicacionsPendentsTotals = 0;
             }else{
                 comunicacionsPendentsTotals = comNumero;
             }
 
-            Collections.reverse(comunicacionsPendents);
 
             Map<Long, Transmissio> comunicacionsPendentsMap = (Map<Long, Transmissio>) request.getSession()
                     .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
@@ -1192,26 +1267,27 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, comunicacionsPendentsMap);
             }
 
-            for (Transmissio t : comunicacionsPendents) {
-                t.setOrganGestor(t.getOrganGestor().substring(t.getOrganGestor().indexOf("', nom='") + 8, t.getOrganGestor().indexOf("', llibre='")));
-                comunicacionsPendentsMap.put(t.getId(), t);
+            for (ComunicacioNotificacio t : sortedComunicacionsPendents) {
+                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor().substring(t.getTransmissio().getOrganGestor().indexOf("', nom='") + 8, t.getTransmissio().getOrganGestor().indexOf("', llibre='")));
+                comunicacionsPendentsMap.put(t.getTransmissio().getId(), t);
             }
 
             Map<String, Object> infoComunicacionsPendents = new HashMap<String, Object>();
             if((pagina+1)*regPag <= comunicacionsPendentsTotals) {
-                infoComunicacionsPendents.put("comunicacions", comunicacionsPendents.subList(pagina * regPag, (pagina + 1) * regPag));
+                infoComunicacionsPendents.put("comunicacions", sortedComunicacionsPendents.subList(pagina * regPag, (pagina + 1) * regPag));
             }else{
-                infoComunicacionsPendents.put("comunicacions", comunicacionsPendents.subList(pagina * regPag, comunicacionsPendentsTotals));
+                infoComunicacionsPendents.put("comunicacions", sortedComunicacionsPendents.subList(pagina * regPag, comunicacionsPendentsTotals));
             }
             infoComunicacionsPendents.put("urldetallbase", getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
             infoComunicacionsPendents.put("urldetallbase2", getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
+            infoComunicacionsPendents.put("urldetallbase3", getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
             infoComunicacionsPendents.put("registresPagina", formRegPorPagina);
             infoComunicacionsPendents.put("totalRegistres", comunicacionsPendentsTotals);
 
             Gson gson = new Gson();
             String json = gson.toJson(infoComunicacionsPendents);
 
-            log.info(json);
+//            log.info(json);
 
             try {
 
@@ -1259,7 +1335,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             }catch (NumberFormatException e){
                 pagina = 0;
             }
-            List<Transmissio> comunicacionsLlegides;
+            List<Transmissio> comunicacionsLlegidesList;
+            List<ComunicacioNotificacio> sortedComunicacionsLlegides = new ArrayList<ComunicacioNotificacio>();
+            ArrayList<ComunicacioNotificacio> cns = new ArrayList<ComunicacioNotificacio>();
 
             int regPag = Integer.parseInt(formRegPorPagina);
             int comNumero = 0;
@@ -1278,51 +1356,480 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
 
-                Resposta resposta = notibClientRest.consultaComunicacionsLlegides(nif, 0, mida);
+                Resposta respostaComunicacionsLlegides = notibClientRest.consultaComunicacionsLlegides(nif, 0, mida);
 
-                comunicacionsLlegides = resposta.getResultat();
-                comNumero = resposta.getNumeroElementsTotals();
+                comunicacionsLlegidesList = respostaComunicacionsLlegides.getResultat();
+                for(Transmissio comunicacio : comunicacionsLlegidesList){
+                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
+                    cn.setTransmissio(comunicacio);
+                    cn.setData(comunicacio.getDataEnviament());
+                    cn.setTipus("comunicacio");
+                    cns.add(cn);
+                }
+
+                // Ordenam comunicacions a mostrar
+                sortedComunicacionsLlegides = cns.stream()
+                        .sorted(Comparator.comparing(ComunicacioNotificacio::getData).reversed())
+                        .collect(Collectors.toList());
+
+                comNumero = sortedComunicacionsLlegides.size();
 
             }
 
             int comunicacionsLlegidesTotals;
-            if (comunicacionsLlegides == null) {
-                comunicacionsLlegides = new ArrayList<Transmissio>();
+            if (comunicacionsLlegidesList == null) {
+                comunicacionsLlegidesList = new ArrayList<Transmissio>();
                 comunicacionsLlegidesTotals = 0;
             }else{
                 comunicacionsLlegidesTotals = comNumero;
             }
 
-            Collections.reverse(comunicacionsLlegides);
 
-            Map<Long, Transmissio> comunicacionsPendentsMap = (Map<Long, Transmissio>) request.getSession()
+            Map<Long, Transmissio> comunicacionsLlegidesMap = (Map<Long, Transmissio>) request.getSession()
                     .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
 
-            if (comunicacionsPendentsMap == null) {
-                comunicacionsPendentsMap = new HashMap<Long, Transmissio>();
-                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, comunicacionsPendentsMap);
+            if (comunicacionsLlegidesMap == null) {
+                comunicacionsLlegidesMap = new HashMap<Long, Transmissio>();
+                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, comunicacionsLlegidesMap);
             }
 
-            for (Transmissio t : comunicacionsLlegides) {
-                t.setOrganGestor(t.getOrganGestor().substring(t.getOrganGestor().indexOf("', nom='") + 8, t.getOrganGestor().indexOf("', llibre='")));
-                comunicacionsPendentsMap.put(t.getId(), t);
+            for (ComunicacioNotificacio t : sortedComunicacionsLlegides) {
+                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor().substring(t.getTransmissio().getOrganGestor().indexOf("', nom='") + 8, t.getTransmissio().getOrganGestor().indexOf("', llibre='")));
+                comunicacionsLlegidesMap.put(t.getTransmissio().getId(), t);
             }
 
             Map<String, Object> infoComunicacionsLlegides = new HashMap<String, Object>();
             if((pagina+1)*regPag <= comunicacionsLlegidesTotals) {
-                infoComunicacionsLlegides.put("comunicacions", comunicacionsLlegides.subList(pagina * regPag, (pagina + 1) * regPag));
+                infoComunicacionsLlegides.put("comunicacions", sortedComunicacionsLlegides.subList(pagina * regPag, (pagina + 1) * regPag));
             }else{
-                infoComunicacionsLlegides.put("comunicacions", comunicacionsLlegides.subList(pagina * regPag, comunicacionsLlegidesTotals));
+                infoComunicacionsLlegides.put("comunicacions", sortedComunicacionsLlegides.subList(pagina * regPag, comunicacionsLlegidesTotals));
             }
             infoComunicacionsLlegides.put("urldetallbase", getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
             infoComunicacionsLlegides.put("urldetallbase2", getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
+            infoComunicacionsLlegides.put("urldetallbase3", getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
             infoComunicacionsLlegides.put("registresPagina", formRegPorPagina);
             infoComunicacionsLlegides.put("totalRegistres", comunicacionsLlegidesTotals);
 
             Gson gson = new Gson();
             String json = gson.toJson(infoComunicacionsLlegides);
 
-            log.info(json);
+//            log.info(json);
+
+            try {
+
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
+
+                response.getWriter().write(json);
+
+            } catch (IOException e) {
+                log.error("Error obtenint writer: " + e.getMessage(), e);
+            }
+
+
+        } catch (Exception e) {
+
+            log.error("Error llistant Comunicacions Llegides NOTIB: " + e.getMessage(), e);
+            errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
+
+        }
+
+    }
+
+
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // ------------------- CONSULTA REST NOTIFICACIONS I COMUNICACIONS NOTIB --------------------------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+    protected static final String URL_REST_SERVICE_TOTES = "totesnotib";
+
+    public void consultaTotes(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+                                      HttpServletRequest request, HttpServletResponse response, UserData userData,
+                                      String administrationEncriptedID, Locale locale, Boolean isGet) {
+
+        try {
+
+            int pagina;
+            int itemsPagina = 10;
+
+            /* Filtre número de registres per pàgina */
+            String formRegPorPagina = request.getParameter("registrosPorPagina");
+
+            try {
+                pagina = Integer.parseInt(request.getParameter("pageNumber"));
+            }catch (NumberFormatException e){
+                pagina = 0;
+            }
+            List<Transmissio> comunicacionsList;
+            List<Transmissio> notificacionsList;
+            List<Transmissio> totes = new ArrayList<Transmissio>();
+            List<ComunicacioNotificacio> sortedTotes = new ArrayList<ComunicacioNotificacio>();
+            ArrayList<ComunicacioNotificacio> cns= new ArrayList<ComunicacioNotificacio>();
+
+            int regPag = Integer.parseInt(formRegPorPagina);
+            int comNumero = 0;
+
+            {
+
+                if (notibClientRest == null) {
+
+                    String url = getPropertyRequired(NOTIB_PROPERTY_BASE + "url");
+                    String user = getPropertyRequired(NOTIB_PROPERTY_BASE + "user");
+                    String pass = getPropertyRequired(NOTIB_PROPERTY_BASE + "pass");
+
+                    notibClientRest = new NotibClientRest(url, user, pass);
+                }
+
+                String nif = userData.getAdministrationID();
+                Integer mida = 200;
+
+                Resposta respostaNotificacions = notibClientRest.consultaNotificacions(nif, 0, mida);
+                Resposta respostaComunicacions = notibClientRest.consultaComunicacions(nif, 0, mida);
+
+                comunicacionsList = respostaComunicacions.getResultat();
+                for(Transmissio comunicacio : comunicacionsList){
+                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
+                    cn.setTransmissio(comunicacio);
+                    cn.setData(comunicacio.getDataEnviament());
+                    cn.setTipus("comunicacio");
+                    cns.add(cn);
+                }
+
+                notificacionsList = respostaNotificacions.getResultat();
+                for(Transmissio notificacio : notificacionsList){
+                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
+                    cn.setTransmissio(notificacio);
+                    cn.setData(notificacio.getDataEnviament());
+                    cn.setTipus("notificacio");
+                    cns.add(cn);
+                }
+
+                // Ordenam comunicacions a mostrar
+                sortedTotes = cns.stream()
+                        .sorted(Comparator.comparing(ComunicacioNotificacio::getData).reversed())
+                        .collect(Collectors.toList());
+
+                comNumero = sortedTotes.size();
+
+            }
+
+            int totesTotals;
+            if (totes == null) {
+                totes = new ArrayList<Transmissio>();
+                totesTotals = 0;
+            }else{
+                totesTotals = comNumero;
+            }
+
+//            Collections.reverse(comunicacions);
+
+            Map<Long, Transmissio> totesMap = (Map<Long, Transmissio>) request.getSession()
+                    .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
+
+            if (totesMap == null) {
+                totesMap = new HashMap<Long, Transmissio>();
+                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, totesMap);
+            }
+
+            for (ComunicacioNotificacio t : sortedTotes) {
+                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor().substring(t.getTransmissio().getOrganGestor().indexOf("', nom='") + 8, t.getTransmissio().getOrganGestor().indexOf("', llibre='")));
+                totesMap.put(t.getTransmissio().getId(), t);
+            }
+
+            Map<String, Object> infoComunicacions = new HashMap<String, Object>();
+            if((pagina+1)*regPag <= totesTotals) {
+                infoComunicacions.put("comunicacions", sortedTotes.subList(pagina * regPag, (pagina + 1) * regPag));
+            }else{
+                infoComunicacions.put("comunicacions", sortedTotes.subList(pagina * regPag, totesTotals));
+            }
+            infoComunicacions.put("urldetallbase", getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.pendientes.url") + "#");
+            infoComunicacions.put("urldetallbase2", getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.realizadas.url") + "#");
+            infoComunicacions.put("urldetallbase3", getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
+            infoComunicacions.put("registresPagina", formRegPorPagina);
+            infoComunicacions.put("totalRegistres", totesTotals);
+
+            Gson gson = new Gson();
+            String json = gson.toJson(infoComunicacions);
+
+//            log.info(json);
+
+            try {
+
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
+
+                response.getWriter().write(json);
+
+            } catch (IOException e) {
+                log.error("Error obtenint writer: " + e.getMessage(), e);
+            }
+
+
+        } catch (Exception e) {
+
+            log.error("Error llistant Comunicacions NOTIB: " + e.getMessage(), e);
+            errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
+
+        }
+
+    }
+
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // ------------------- CONSULTA REST NOTIFICACIONS I COMUNICACIONS PENDENTS NOTIB -----------------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+    protected static final String URL_REST_SERVICE_TOTES_PENDENTS = "totespendentsnotib";
+
+    public void consultaTotesPendents(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+                                              HttpServletRequest request, HttpServletResponse response, UserData userData,
+                                              String administrationEncriptedID, Locale locale, Boolean isGet) {
+
+        try {
+
+            int pagina;
+            int itemsPagina = 10;
+
+            /* Filtre número de registres per pàgina */
+            String formRegPorPagina = request.getParameter("registrosPorPagina");
+
+            try {
+                pagina = Integer.parseInt(request.getParameter("pageNumber"));
+            }catch (NumberFormatException e){
+                pagina = 0;
+            }
+            List<Transmissio> comunicacionsPendentsList;
+            List<Transmissio> notificacionsPendentsList;
+            List<Transmissio> pendents = new ArrayList<Transmissio>();
+            List<ComunicacioNotificacio> sortedTotesPendents = new ArrayList<ComunicacioNotificacio>();
+            ArrayList<ComunicacioNotificacio> cns= new ArrayList<ComunicacioNotificacio>();
+
+            int regPag = Integer.parseInt(formRegPorPagina);
+            int comNumero = 0;
+
+            {
+
+                if (notibClientRest == null) {
+
+                    String url = getPropertyRequired(NOTIB_PROPERTY_BASE + "url");
+                    String user = getPropertyRequired(NOTIB_PROPERTY_BASE + "user");
+                    String pass = getPropertyRequired(NOTIB_PROPERTY_BASE + "pass");
+
+                    notibClientRest = new NotibClientRest(url, user, pass);
+                }
+
+                String nif = userData.getAdministrationID();
+                Integer mida = 200;
+
+                Resposta respostaNotificacionsPendents = notibClientRest.consultaNotificacionsPendents(nif, 0, mida);
+                Resposta respostaComunicacionsPendents = notibClientRest.consultaComunicacionsPendents(nif, 0, mida);
+
+                comunicacionsPendentsList = respostaComunicacionsPendents.getResultat();
+                for(Transmissio comunicacio : comunicacionsPendentsList){
+                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
+                    cn.setTransmissio(comunicacio);
+                    cn.setData(comunicacio.getDataEnviament());
+                    cn.setTipus("comunicacio");
+                    cns.add(cn);
+                }
+
+                notificacionsPendentsList = respostaNotificacionsPendents.getResultat();
+                for(Transmissio notificacio : notificacionsPendentsList){
+                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
+                    cn.setTransmissio(notificacio);
+                    cn.setData(notificacio.getDataEnviament());
+                    cn.setTipus("notificacio");
+                    cns.add(cn);
+                }
+
+                // Ordenam comunicacions a mostrar
+                sortedTotesPendents = cns.stream()
+                        .sorted(Comparator.comparing(ComunicacioNotificacio::getData).reversed())
+                        .collect(Collectors.toList());
+
+                comNumero = sortedTotesPendents.size();
+
+            }
+
+            int totesPendentsTotals;
+            if (pendents == null) {
+                pendents = new ArrayList<Transmissio>();
+                totesPendentsTotals = 0;
+            }else{
+                totesPendentsTotals = comNumero;
+            }
+
+
+            Map<Long, Transmissio> totesPendentsMap = (Map<Long, Transmissio>) request.getSession()
+                    .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
+
+            if (totesPendentsMap == null) {
+                totesPendentsMap = new HashMap<Long, Transmissio>();
+                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, totesPendentsMap);
+            }
+
+            for (ComunicacioNotificacio t : sortedTotesPendents) {
+                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor().substring(t.getTransmissio().getOrganGestor().indexOf("', nom='") + 8, t.getTransmissio().getOrganGestor().indexOf("', llibre='")));
+                totesPendentsMap.put(t.getTransmissio().getId(), t);
+            }
+
+            Map<String, Object> infoTotesPendents = new HashMap<String, Object>();
+            if((pagina+1)*regPag <= totesPendentsTotals) {
+                infoTotesPendents.put("comunicacions", sortedTotesPendents.subList(pagina * regPag, (pagina + 1) * regPag));
+            }else{
+                infoTotesPendents.put("comunicacions", sortedTotesPendents.subList(pagina * regPag, totesPendentsTotals));
+            }
+            infoTotesPendents.put("urldetallbase", getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.pendientes.url") + "#");
+            infoTotesPendents.put("urldetallbase2", getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.realizadas.url") + "#");
+            infoTotesPendents.put("urldetallbase3", getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
+            infoTotesPendents.put("registresPagina", formRegPorPagina);
+            infoTotesPendents.put("totalRegistres", totesPendentsTotals);
+
+            Gson gson = new Gson();
+            String json = gson.toJson(infoTotesPendents);
+
+//            log.info(json);
+
+            try {
+
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
+
+                response.getWriter().write(json);
+
+            } catch (IOException e) {
+                log.error("Error obtenint writer: " + e.getMessage(), e);
+            }
+
+
+        } catch (Exception e) {
+
+            log.error("Error llistant Comunicacions Pendents NOTIB: " + e.getMessage(), e);
+            errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
+
+        }
+
+    }
+
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+    // ------------------- CONSULTA REST NOTIFICACIONS I COMUNICACIONS LLEGIDES NOTIB -----------------------
+    // --------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------
+
+    protected static final String URL_REST_SERVICE_TOTES_LLEGIDES = "totesllegidesnotib";
+
+    public void consultaTotesLlegides(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+                                              HttpServletRequest request, HttpServletResponse response, UserData userData,
+                                              String administrationEncriptedID, Locale locale, Boolean isGet) {
+
+        try {
+
+            int pagina;
+            int itemsPagina = 10;
+
+            /* Filtre número de registres per pàgina */
+            String formRegPorPagina = request.getParameter("registrosPorPagina");
+
+            try {
+                pagina = Integer.parseInt(request.getParameter("pageNumber"));
+            }catch (NumberFormatException e){
+                pagina = 0;
+            }
+            List<Transmissio> comunicacionsLlegidesList;
+            List<Transmissio> notificacionsLlegidesList;
+            List<Transmissio> llegides = new ArrayList<Transmissio>();
+            List<ComunicacioNotificacio> sortedTotesLlegides = new ArrayList<ComunicacioNotificacio>();
+            ArrayList<ComunicacioNotificacio> cns= new ArrayList<ComunicacioNotificacio>();
+
+            int regPag = Integer.parseInt(formRegPorPagina);
+            int comNumero = 0;
+
+            {
+
+                if (notibClientRest == null) {
+
+                    String url = getPropertyRequired(NOTIB_PROPERTY_BASE + "url");
+                    String user = getPropertyRequired(NOTIB_PROPERTY_BASE + "user");
+                    String pass = getPropertyRequired(NOTIB_PROPERTY_BASE + "pass");
+
+                    notibClientRest = new NotibClientRest(url, user, pass);
+                }
+
+                String nif = userData.getAdministrationID();
+                Integer mida = 200;
+
+                Resposta respostaNotificacionsLlegides = notibClientRest.consultaNotificacionsLlegides(nif, 0, mida);
+                Resposta respostaComunicacionsLlegides = notibClientRest.consultaComunicacionsLlegides(nif, 0, mida);
+
+                comunicacionsLlegidesList = respostaComunicacionsLlegides.getResultat();
+                for(Transmissio comunicacio : comunicacionsLlegidesList){
+                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
+                    cn.setTransmissio(comunicacio);
+                    cn.setData(comunicacio.getDataEnviament());
+                    cn.setTipus("comunicacio");
+                    cns.add(cn);
+                }
+
+                notificacionsLlegidesList = respostaNotificacionsLlegides.getResultat();
+                for(Transmissio notificacio : notificacionsLlegidesList){
+                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
+                    cn.setTransmissio(notificacio);
+                    cn.setData(notificacio.getDataEnviament());
+                    cn.setTipus("notificacio");
+                    cns.add(cn);
+                }
+
+                // Ordenam comunicacions a mostrar
+                sortedTotesLlegides = cns.stream()
+                        .sorted(Comparator.comparing(ComunicacioNotificacio::getData).reversed())
+                        .collect(Collectors.toList());
+
+                comNumero = sortedTotesLlegides.size();
+
+            }
+
+            int totesLlegidesTotals;
+            if (llegides == null) {
+                llegides = new ArrayList<Transmissio>();
+                totesLlegidesTotals = 0;
+            }else{
+                totesLlegidesTotals = comNumero;
+            }
+
+
+            Map<Long, Transmissio> totesLlegidesMap = (Map<Long, Transmissio>) request.getSession()
+                    .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
+
+            if (totesLlegidesMap == null) {
+                totesLlegidesMap = new HashMap<Long, Transmissio>();
+                request.getSession().setAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB, totesLlegidesMap);
+            }
+
+            for (ComunicacioNotificacio t : sortedTotesLlegides) {
+                t.getTransmissio().setOrganGestor(t.getTransmissio().getOrganGestor().substring(t.getTransmissio().getOrganGestor().indexOf("', nom='") + 8, t.getTransmissio().getOrganGestor().indexOf("', llibre='")));
+                totesLlegidesMap.put(t.getTransmissio().getId(), t);
+            }
+
+            Map<String, Object> infoTotesLlegides = new HashMap<String, Object>();
+            if((pagina+1)*regPag <= totesLlegidesTotals) {
+                infoTotesLlegides.put("comunicacions", sortedTotesLlegides.subList(pagina * regPag, (pagina + 1) * regPag));
+            }else{
+                infoTotesLlegides.put("comunicacions", sortedTotesLlegides.subList(pagina * regPag, totesLlegidesTotals));
+            }
+            infoTotesLlegides.put("urldetallbase", getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.pendientes.url") + "#");
+            infoTotesLlegides.put("urldetallbase2", getPropertyRequired(NOTIB_PROPERTY_BASE + "notificaciones.detalle.realizadas.url") + "#");
+            infoTotesLlegides.put("urldetallbase3", getPropertyRequired(NOTIB_PROPERTY_BASE + "comunicaciones.detalle.url") + "#");
+            infoTotesLlegides.put("registresPagina", formRegPorPagina);
+            infoTotesLlegides.put("totalRegistres", totesLlegidesTotals);
+
+            Gson gson = new Gson();
+            String json = gson.toJson(infoTotesLlegides);
+
+//            log.info(json);
 
             try {
 

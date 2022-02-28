@@ -15,7 +15,7 @@
     "notibComunicacionDataEstat": "Data Estat",
     "notibComunicacionJustificant": "Justificant",
     "notibComunicacionCertificacio": "Certificació",
-    "notibBuid":"No hi ha notificacions",
+    "notibBuid":"No hi ha Notificacions ni Comunicacions",
     "notibMostra":"Mostra ",
     "notibRegistres":" registres",
     "carpeta_paginacion_1": "Mostrant elements del ",
@@ -34,5 +34,6 @@
     "notibTotes": "Totes",
     "notibPendents": "Pendents",
     "notibLlegides": "Llegides",
-    "notibComunicacionsBuid": "No hi ha comunicacions"
+    "notibComunicacionsBuid": "No hi ha Comunicacions",
+    "notibNotificacionsBuid": "No hi ha Notificacions"
 }

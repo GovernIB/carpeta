@@ -24,6 +24,7 @@ class Notib extends Component {
             dataComunicacions: null,
             urldetallbase: null,
             urldetallbase2: null,
+            urldetallbase3: null,
             filter_regPorPagina: 10,
             filter_type: '0',
             filter_status: '0',
@@ -32,7 +33,6 @@ class Notib extends Component {
             total_items: 0,
             error: false,
             cercaRegistres: 10,
-            nomTipus: i18n.t('notibNotificacio'),
             missatgeBuid: i18n.t('notibBuid')
         };
 
@@ -52,16 +52,15 @@ class Notib extends Component {
         this.componentDidMount();
     }
 
-    assignarUrlDetall(estat) {
-        console.log("ESTAT: " + estat);
-        if(estat === 'FINALIZADA' || estat === 'FINALITZADA' || estat === 'PROCESADA' || estat === 'PROCESSADA'){
-            console.log("entram realitzada");
-            return this.state.urldetallbase2;
-        } else{
-            console.log("entram pendent");
-            return this.state.urldetallbase;
-        }
-    }
+    // assignarUrlDetall(estat, tipus) {
+    //     if(tipus) {
+    //         if (estat === 'FINALIZADA' || estat === 'FINALITZADA' || estat === 'PROCESADA' || estat === 'PROCESSADA') {
+    //             return this.state.urldetallbase2;
+    //         } else {
+    //             return this.state.urldetallbase;
+    //         }
+    //     }
+    // }
 
     handleRegPorPaginaFilterParam(e){
         this.setState({
@@ -88,6 +87,7 @@ class Notib extends Component {
                     dataComunicacions: response.data.comunicacions,
                     urldetallbase: response.data.urldetallbase,
                     urldetallbase2: response.data.urldetallbase2,
+                    urldetallbase3: response.data.urldetallbase3,
                     total_items: response.data.totalRegistres,
                     isLoaded: true
                 });
@@ -127,6 +127,7 @@ class Notib extends Component {
                     dataComunicacions: response.data.comunicacions,
                     urldetallbase: response.data.urldetallbase,
                     urldetallbase2: response.data.urldetallbase2,
+                    urldetallbase3: response.data.urldetallbase3,
                     total_items: response.data.totalRegistres,
                     pagination_total_items: response.data.registresPagina,
                     pagination_active: newPageNumber,
@@ -175,9 +176,11 @@ class Notib extends Component {
 
 
         if(this.state.filter_type === '0'){
-            this.setState({ ...this.state, nomTipus: t('notibNotificacio'), missatgeBuid: t('notibBuid') });
-        } else if (this.state.filter_type === '1'){
-            this.setState({ ...this.state, nomTipus: t('notibComunicacio'), missatgeBuid: t('notibComunicacionsBuid') });
+            this.setState({ ...this.state, missatgeBuid: t('notibBuid') });
+        } else if(this.state.filter_type === '1'){
+            this.setState({ ...this.state, missatgeBuid: t('notibNotificacionsBuid') });
+        } else if (this.state.filter_type === '2'){
+            this.setState({ ...this.state, missatgeBuid: t('notibComunicacionsBuid') });
         }
 
         let url2;
@@ -185,11 +188,19 @@ class Notib extends Component {
             if(this.state.filter_status === '0') {
                 url2 = this.props.pathtoservei;
             } else if(this.state.filter_status === '1') {
+                url2 = this.props.pathtoserveiPendientesUrl;
+            } else if(this.state.filter_status === '2') {
+                url2 = this.props.pathtoserveiLeidasUrl;
+            }
+        }else if(this.state.filter_type === '1') {
+            if(this.state.filter_status === '0') {
+                url2 = this.props.notificacionesTodasUrl;
+            } else if(this.state.filter_status === '1') {
                 url2 = this.props.notificacionesPendientesUrl;
             } else if(this.state.filter_status === '2') {
                 url2 = this.props.notificacionesLeidasUrl;
             }
-        }else if(this.state.filter_type === '1'){
+        }else if(this.state.filter_type === '2'){
             if(this.state.filter_status === '0') {
                 url2 = this.props.comunicacionesTodasUrl;
             } else if(this.state.filter_status === '1') {
@@ -214,6 +225,7 @@ class Notib extends Component {
                         dataComunicacions: response.data.comunicacions,
                         urldetallbase: response.data.urldetallbase,
                         urldetallbase2: response.data.urldetallbase2,
+                        urldetallbase3: response.data.urldetallbase3,
                         total_items: response.data.totalRegistres,
                         pagination_active: 1,
                         pagination_total_items: response.data.registresPagina,
@@ -311,8 +323,9 @@ class Notib extends Component {
                                              tabindex="504"
                                              aria-labelledby="tipo"
                                              onChange={(e) => {this.handleTypeFilterParam(e); }}>
-                                    <option value="0" className="form-control form-control-sm selectMobil" selected="selected">{t('notibNotificacions')}</option>
-                                    <option value="1" className="form-control form-control-sm selectMobil">{t('notibComunicacions')}</option>
+                                    <option value="0" className="form-control form-control-sm selectMobil" selected="selected">{t('notibTotes')}</option>
+                                    <option value="1" className="form-control form-control-sm selectMobil">{t('notibNotificacions')}</option>
+                                    <option value="2" className="form-control form-control-sm selectMobil">{t('notibComunicacions')}</option>
                                 </Form.Select>
                             </Form.Group>
                         </div>
@@ -416,14 +429,16 @@ class Notib extends Component {
                         </tr>
                         </thead>
                         <tbody>
-                        {this.state.dataComunicacions.map(({emisor, organGestor, procediment, concepte, descripcio, dataEnviament, estat, dataEstat}) => {
-                            return <tr className="" data-target="_blank" onClick={() => window.open(estat === 'FINALIZADA' || estat === 'FINALITZADA' || estat === 'PROCESADA' || estat === 'PROCESSADA' ? this.state.urldetallbase2 : this.state.urldetallbase, '_blank')} style={cursorPointer} tabIndex="511">
-                                <td data-order={$.dateOrder(dataEnviament)}>{$.dateFormat(dataEnviament)}</td>
-                                <td>{organGestor}</td>
-                                <td>{concepte}</td>
-                                <td>{$.dateFormat(dataEstat)}</td>
-                                <td>{this.state.nomTipus}</td>
-                                <td>{estat}</td>
+                        {this.state.dataComunicacions.map(({transmissio, tipus}) => {
+                            return <tr className="" data-target="_blank" onClick={() =>
+                                window.open(tipus === 'notificacio' ? (transmissio.estat === 'FINALIZADA' || transmissio.estat === 'FINALITZADA' || transmissio.estat === 'PROCESADA' || transmissio.estat === 'PROCESSADA' ? this.state.urldetallbase2 : this.state.urldetallbase) : this.state.urldetallbase3, '_blank')}
+                                       style={cursorPointer} tabIndex="511">
+                                <td data-order={$.dateOrder(transmissio.dataEnviament)}>{$.dateFormat(transmissio.dataEnviament)}</td>
+                                <td>{transmissio.organGestor}</td>
+                                <td>{transmissio.concepte}</td>
+                                <td>{$.dateFormat(transmissio.dataEstat)}</td>
+                                <td>{tipus === 'notificacio' ? i18n.t('notibNotificacio') : i18n.t('notibComunicacio')}</td>
+                                <td>{transmissio.estat}</td>
                             </tr>
                         })}
                         </tbody>
