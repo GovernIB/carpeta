@@ -32,6 +32,8 @@ create index car_faq_entitatid_fk_i on car_preguntesfrequents (entitatid);
 
 ALTER TABLE car_acces ADD COLUMN idsessio character varying(255);
 
+--   Millores a les cerques dins Accessos i Logs del Backoffice #633
+ALTER TABLE car_log ADD COLUMN idsessio text;
 
 
 COMMIT;
