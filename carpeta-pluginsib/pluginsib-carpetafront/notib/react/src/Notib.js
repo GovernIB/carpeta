@@ -40,6 +40,8 @@ class Notib extends Component {
         this.handleTypeFilterParam = this.handleTypeFilterParam.bind(this);
         this.handleStatusFilterParam = this.handleStatusFilterParam.bind(this);
 
+        this.handleSubmitSearcher = this.handleSubmitSearcher.bind(this);
+
         const getLocale = Locale => require(`date-fns/locale/${sessionStorage.getItem("langActual")}/index.js`);
         this.locale = getLocale(this.props.language);
 
@@ -52,21 +54,77 @@ class Notib extends Component {
         this.componentDidMount();
     }
 
-    // assignarUrlDetall(estat, tipus) {
-    //     if(tipus) {
-    //         if (estat === 'FINALIZADA' || estat === 'FINALITZADA' || estat === 'PROCESADA' || estat === 'PROCESSADA') {
-    //             return this.state.urldetallbase2;
-    //         } else {
-    //             return this.state.urldetallbase;
-    //         }
-    //     }
-    // }
 
     handleRegPorPaginaFilterParam(e){
+
         this.setState({
-            ...this.state,
             filter_regPorPagina: e.target.value,
+            isLoaded: false,
+            error: false,
+            cercaRegistres: this.state.filter_regPorPagina
         });
+
+        e.preventDefault();
+
+        let url3;
+        if(this.state.filter_type === '0') {
+            if(this.state.filter_status === '0') {
+                url3 = this.props.pathtoservei;
+            } else if(this.state.filter_status === '1') {
+                url3 = this.props.pathtoserveiPendientesUrl;
+            } else if(this.state.filter_status === '2') {
+                url3 = this.props.pathtoserveiLeidasUrl;
+            }
+        }else if(this.state.filter_type === '1') {
+            if(this.state.filter_status === '0') {
+                url3 = this.props.notificacionesTodasUrl;
+            } else if(this.state.filter_status === '1') {
+                url3 = this.props.notificacionesPendientesUrl;
+            } else if(this.state.filter_status === '2') {
+                url3 = this.props.notificacionesLeidasUrl;
+            }
+        }else if(this.state.filter_type === '2'){
+            if(this.state.filter_status === '0') {
+                url3 = this.props.comunicacionesTodasUrl;
+            } else if(this.state.filter_status === '1') {
+                url3 = this.props.comunicacionesPendientesUrl;
+            } else if(this.state.filter_status === '2') {
+                url3 = this.props.comunicacionesLeidasUrl;
+            }
+        }
+
+        const params = {
+            registrosPorPagina: e.target.value,
+            pageNumber: this.state.pagination_active-1,
+            tipo: this.state.filter_type,
+            estado: this.state.filter_status
+        };
+
+        axios.get(url3, {params: params}).then( (response) => {
+
+            if (response.data != null){
+                this.setState({
+                    ...this.state,
+                    dataComunicacions: response.data.comunicacions,
+                    urldetallbase: response.data.urldetallbase,
+                    urldetallbase2: response.data.urldetallbase2,
+                    urldetallbase3: response.data.urldetallbase3,
+                    total_items: response.data.totalRegistres,
+                    pagination_active: 1,
+                    pagination_total_items: response.data.registresPagina,
+                    isLoaded: true
+                });
+            }
+
+        }).catch( error => {
+            console.log('Error axios', error);
+            this.setState({
+                ...this.state,
+                error: true
+            });
+        } );
+
+
     };
 
     componentDidMount() {
@@ -210,36 +268,36 @@ class Notib extends Component {
             }
         }
 
-            const params = {
-                registrosPorPagina: this.state.filter_regPorPagina,
-                pageNumber: this.state.pagination_active-1,
-                tipo: this.state.filter_type,
-                estado: this.state.filter_status
-            };
+        const params = {
+            registrosPorPagina: this.state.filter_regPorPagina,
+            pageNumber: this.state.pagination_active-1,
+            tipo: this.state.filter_type,
+            estado: this.state.filter_status
+        };
 
-            axios.get(url2, {params: params}).then( (response) => {
+        axios.get(url2, {params: params}).then( (response) => {
 
-                if (response.data != null){
-                    this.setState({
-                        ...this.state,
-                        dataComunicacions: response.data.comunicacions,
-                        urldetallbase: response.data.urldetallbase,
-                        urldetallbase2: response.data.urldetallbase2,
-                        urldetallbase3: response.data.urldetallbase3,
-                        total_items: response.data.totalRegistres,
-                        pagination_active: 1,
-                        pagination_total_items: response.data.registresPagina,
-                        isLoaded: true
-                    });
-                }
-
-            }).catch( error => {
-                console.log('Error axios', error);
+            if (response.data != null){
                 this.setState({
                     ...this.state,
-                    error: true
+                    dataComunicacions: response.data.comunicacions,
+                    urldetallbase: response.data.urldetallbase,
+                    urldetallbase2: response.data.urldetallbase2,
+                    urldetallbase3: response.data.urldetallbase3,
+                    total_items: response.data.totalRegistres,
+                    pagination_active: 1,
+                    pagination_total_items: response.data.registresPagina,
+                    isLoaded: true
                 });
-            } );
+            }
+
+        }).catch( error => {
+            console.log('Error axios', error);
+            this.setState({
+                ...this.state,
+                error: true
+            });
+        } );
 
     }
 
@@ -368,7 +426,7 @@ class Notib extends Component {
                         </div>
                     </Row>
                     <Row className="col-md-3 pl-0 row" style={{zIndex: '4'}}>
-                        <Button type="submit" className="btn btn-primary carpeta-btn ml-3 mt-2"  onClick={e => {this.handleSubmitSearcher(e)}} tabindex="505">{t('carpeta_buscar')}</Button>
+                        <Button type="submit" id="botoSubmit" className="btn btn-primary carpeta-btn ml-3 mt-2" onClick={e => {this.handleSubmitSearcher(e)}} tabindex="505">{t('carpeta_buscar')}</Button>
                     </Row>
                 </Container>
             </Form>
