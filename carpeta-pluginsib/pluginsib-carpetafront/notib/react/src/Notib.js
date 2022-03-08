@@ -95,7 +95,7 @@ class Notib extends Component {
 
         const params = {
             registrosPorPagina: e.target.value,
-            pageNumber: this.state.pagination_active-1,
+            pageNumber: 1,
             tipo: this.state.filter_type,
             estado: this.state.filter_status
         };
