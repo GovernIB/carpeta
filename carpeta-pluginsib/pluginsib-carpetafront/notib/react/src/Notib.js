@@ -412,6 +412,7 @@ class Notib extends Component {
                                              value={this.state.filter_regPorPagina}
                                              tabindex="505"
                                              aria-labelledby="regPorPagina"
+                                             style={{color: '#666', borderRadius: '0.2rem'}}
                                              onChange={(e) => {this.handleRegPorPaginaFilterParam(e); }}>
                                     <option value="5" className="form-control form-control-sm selectMobil" selected={this.state.filter_regPorPagina.toString() === '5'}>5</option>
                                     <option value="10" className="form-control form-control-sm selectMobil" selected={this.state.filter_regPorPagina.toString() === '10'}>10</option>
