@@ -61,7 +61,7 @@ class Notib extends Component {
             filter_regPorPagina: e.target.value,
             isLoaded: false,
             error: false,
-            cercaRegistres: this.state.filter_regPorPagina
+            cercaRegistres: e.target.value
         });
 
         e.preventDefault();
@@ -463,7 +463,7 @@ class Notib extends Component {
                                          value={this.state.filter_regPorPagina}
                                          tabindex="510"
                                          aria-labelledby="rPP"
-                                         style={{color: '#666'}}
+                                         style={{color: '#666', borderRadius: '0.2rem'}}
                                          onChange={(e) => {this.handleRegPorPaginaFilterParam(e); }}>
                                 <option value="5" className="form-control form-control-sm selectMobil">5</option>
                                 <option value="10" className="form-control form-control-sm selectMobil">10</option>
