@@ -92,6 +92,7 @@
 
     "registro_regPorPagina": "Registros por página",
     "registroMostra":"Muestra ",
-    "registroRegistres":" registros"
+    "registroRegistres":" registros",
+    "registroProblema": "Ha habido algún problema de comunicación."
 
 }

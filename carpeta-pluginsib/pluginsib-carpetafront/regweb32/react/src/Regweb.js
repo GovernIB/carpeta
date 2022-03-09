@@ -86,7 +86,42 @@ class Regweb extends Component {
         this.setState({
             ...this.state,
             filter_regPorPagina: e.target.value,
+            isLoaded: false,
+            error: false,
+            cercaRegistres: e.target.value
         });
+
+        const params = {
+            numero: this.state.filter_number,
+            fechaInicio: this.state.filter_startDate,
+            fechaFin: this.state.filter_endDate,
+            estado: this.state.filter_status,
+            registrosPorPagina: e.target.value,
+            pageNumber: 0
+        };
+
+        const url3 = this.props.pathtoservei;
+
+        axios.get(url3, {params: params}).then( (response) => {
+
+            if (response.data.registres != null){
+                this.setState({
+                    ...this.state,
+                    data: JSON.parse(response.data.registres),
+                    pagination_active: 1,
+                    pagination_total_items: response.data.totalRegistres,
+                    isLoaded: true
+                });
+            }
+
+        }).catch( error => {
+            console.log('Error axios', error);
+            this.setState({
+                ...this.state,
+                error: true
+            });
+        } );
+
     };
 
     handleNumberFilterParam(e) {       
@@ -104,6 +139,7 @@ class Regweb extends Component {
             ...this.state,
             pagination_active: newPageNumber,
             error: false,
+            isLoaded: false
         }); 
 
         const params = {
@@ -125,6 +161,7 @@ class Regweb extends Component {
                     data: JSON.parse(response.data.registres),
                     pagination_active: newPageNumber,
                     pagination_total_items: response.data.totalRegistres,
+                    isLoaded: true
                 });
             }
             
@@ -302,7 +339,7 @@ class Regweb extends Component {
         let taulaRegistres;
         var tamanyTaula = { width: '99%'};
 
-        if(this.state.data != null && parseInt(this.state.pagination_total_items) > 0){
+        if(this.state.data && typeof (this.state.total_items) !== undefined && typeof (this.state.data) !== undefined && this.state.total_items !== 0) {
 
             let paginationNumbers = [];
             for (let number = 1; number <= Math.ceil(this.state.pagination_total_items/this.state.cercaRegistres); number++) {
@@ -349,6 +386,14 @@ class Regweb extends Component {
                     {paginationNumbers}
                 </Pagination>
             </>
+
+        } else if(!this.state.data) {
+
+            taulaRegistres = <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%', color: '#721c24', backgroundColor: '#f8d7da'}}
+                                role="alert">{t('registroProblema')}</div>
+
+        } else if(this.state.total_items === 0 && this.state.data !== null) {
+            taulaRegistres = <div className="pt-3 alert alert-secondary margeBuid" style={{ float: 'left', width: '95%'}} role="alert">{t('registro_vacio')}</div>
 
         }
 
@@ -560,6 +605,7 @@ class Regweb extends Component {
                                              value={this.state.filter_regPorPagina}
                                              tabindex="505"
                                              aria-labelledby="regPorPagina"
+                                             style={{color: '#666', borderRadius: '0.2rem'}}
                                              onChange={(e) => {this.handleRegPorPaginaFilterParam(e); }}>
                                     <option value="5" className="form-control form-control-sm selectMobil">5</option>
                                     <option value="10" className="form-control form-control-sm selectMobil">10</option>
@@ -598,7 +644,7 @@ class Regweb extends Component {
                 content = <div className="alert alert-danger" role="alert">{data.error}</div>;
             } else {
 
-                if (this.state.data != null && parseInt(this.state.pagination_total_items, 10) > 0) {
+                if (this.state.data != null && parseInt(this.state.pagination_total_items, 10) > 0 && this.state.data && typeof (this.state.total_items) !== undefined && typeof (this.state.data) !== undefined && this.state.total_items !== 0) {
 
                         let paginationNumbers = [];
                         for (let number = 1; number <= Math.ceil(this.state.pagination_total_items / this.state.cercaRegistres); number++) {
@@ -617,7 +663,7 @@ class Regweb extends Component {
                                                  value={this.state.filter_regPorPagina}
                                                  tabindex="510"
                                                  aria-labelledby="rPP"
-                                                 style={{color: '#666'}}
+                                                 style={{color: '#666', borderRadius: '0.2rem'}}
                                                  onChange={(e) => {this.handleRegPorPaginaFilterParam(e); }}>
                                         <option value="5" className="form-control form-control-sm selectMobil">5</option>
                                         <option value="10" className="form-control form-control-sm selectMobil">10</option>
@@ -685,7 +731,16 @@ class Regweb extends Component {
                             </div>
 
                         </>
-                    }
+
+                } else if(!this.state.data) {
+
+                    taulaRegistres = <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%', color: '#721c24', backgroundColor: '#f8d7da'}}
+                                          role="alert">{t('registroProblema')}</div>
+
+                } else if(this.state.total_items === 0 && this.state.data !== null) {
+                    taulaRegistres = <div className="pt-3 alert alert-secondary margeBuid" style={{ float: 'left', width: '95%'}} role="alert">{t('registro_vacio')}</div>
+
+                }
 
             }
         }

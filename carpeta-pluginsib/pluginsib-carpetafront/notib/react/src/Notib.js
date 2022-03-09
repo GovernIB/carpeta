@@ -167,7 +167,8 @@ class Notib extends Component {
         this.setState({
             ...this.state,
             pagination_active: newPageNumber,
-            error: false
+            error: false,
+            isLoaded: false
         });
 
         const params = {
@@ -446,7 +447,7 @@ class Notib extends Component {
 
             const Header = [t('notibComunicacionFecha'), t('notibComunicacionConcepte'), t('notibComunicacionEstat')];
 
-            if(this.state.dataComunicacions !== null && typeof(this.state.total_items) !== undefined  && typeof(this.state.dataComunicacions) !== undefined && this.state.total_items !== 0) {
+            if(this.state.dataComunicacions && typeof (this.state.total_items) !== undefined && typeof (this.state.dataComunicacions) !== undefined && this.state.total_items !== 0) {
                 let paginationNumbers = [];
                 for (let number = 1; number <= Math.ceil(this.state.total_items/this.state.cercaRegistres); number++) {
                     paginationNumbers.push(<Pagination.Item key={number}
@@ -519,13 +520,16 @@ class Notib extends Component {
                     </Pagination>
                 </>
 
-            } else{
-                if(this.state.total_items === 0 && this.state.dataComunicacions !== null) {
+            } else if(!this.state.dataComunicacions) {
 
-                    taulaNotib = <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%'}}
-                                          role="alert">{this.state.missatgeBuid}</div>
+                taulaNotib = <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%', color: '#721c24', backgroundColor: '#f8d7da'}}
+                                  role="alert">{t('notibProblema')}</div>
 
-                }
+            } else if(this.state.total_items === 0 && this.state.dataComunicacions !== null) {
+
+                taulaNotib = <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%'}}
+                                  role="alert">{this.state.missatgeBuid}</div>
+
             }
 
         }

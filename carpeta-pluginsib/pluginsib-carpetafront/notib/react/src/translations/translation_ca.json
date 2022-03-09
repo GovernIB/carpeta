@@ -35,5 +35,6 @@
     "notibPendents": "Pendents",
     "notibLlegides": "Llegides",
     "notibComunicacionsBuid": "No hi ha Comunicacions",
-    "notibNotificacionsBuid": "No hi ha Notificacions"
+    "notibNotificacionsBuid": "No hi ha Notificacions",
+    "notibProblema": "Hi ha hagut qualque problema de comunicació."
 }

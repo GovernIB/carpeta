@@ -92,5 +92,6 @@
 
     "registro_regPorPagina": "Registres per pàgina",
     "registroMostra":"Mostra ",
-    "registroRegistres":" registres"
+    "registroRegistres":" registres",
+    "registroProblema": "Hi ha hagut qualque problema de comunicació."
 }

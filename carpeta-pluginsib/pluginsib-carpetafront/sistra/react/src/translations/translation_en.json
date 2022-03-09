@@ -102,5 +102,6 @@
     "carpeta_descargar": "Descarregar",
     "downloadjustificantText": "Fitxer descarregat. Fes click per descarregar-ho de nou",
 
-    "registro_regPorPagina": "Registres per pàgina"
+    "registro_regPorPagina": "Registres per pàgina",
+    "sistraProblema": "Hi ha hagut qualque problema de comunicació."
 }

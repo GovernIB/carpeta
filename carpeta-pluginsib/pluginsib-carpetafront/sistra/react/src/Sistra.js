@@ -84,10 +84,46 @@ class Sistra extends Component {
 
     }
     handleRegPorPaginaFilterParam(e){
+
         this.setState({
             ...this.state,
             filter_regPorPagina: e.target.value,
+            isLoaded: false,
+            error: false,
+            cercaRegistres: e.target.value
         });
+
+        const params = {
+            dataInici: this.state.dataInici,
+            dataFi: this.state.dataFi,
+            estat: this.state.estat,
+            registrosPorPagina: e.target.value,
+            pageNumber: 0
+        };
+
+        const url3 = this.props.pathtoservei;
+
+        axios.get(url3, {params: params}).then( (response) => {
+
+            if (response.data != null){
+                this.setState({
+                    ...this.state,
+                    data: response.data.tramits,
+                    pagination_active: 1,
+                    total_items: response.data.totalRegistres,
+                    pagination_total_items: response.data.registresPagina,
+                    isLoaded: true
+                });
+            }
+
+        }).catch( error => {
+            console.log('Error axios', error);
+            this.setState({
+                ...this.state,
+                error: true
+            });
+        } );
+
     };
 
     handlePagination(event){
@@ -96,7 +132,8 @@ class Sistra extends Component {
         this.setState({
             ...this.state,
             pagination_active: newPageNumber,
-            error: false
+            error: false,
+            isLoaded: false
         });
 
         const params = {
@@ -117,7 +154,8 @@ class Sistra extends Component {
                     data: response.data.tramits,
                     pagination_active: newPageNumber,
                     total_items: response.data.totalRegistres,
-                    pagination_total_items: response.data.registresPagina
+                    pagination_total_items: response.data.registresPagina,
+                    isLoaded: true
                 });
             }
 
@@ -322,7 +360,7 @@ class Sistra extends Component {
         var tamanyData = { width: '120px !important'};
         var cursorPointer = { cursor: 'pointer'};
 
-        if(this.state.total_items !== 0 && this.state.data !== null) {
+        if(this.state.data && typeof (this.state.total_items) !== undefined && typeof (this.state.data) !== undefined && this.state.total_items !== 0) {
             let paginationNumbers = [];
             for (let number = 1; number <= Math.ceil(this.state.total_items/this.state.cercaRegistres); number++) {
                 paginationNumbers.push(<Pagination.Item key={number} active={number === this.state.pagination_active} activeLabel="" onClick={(event) => this.handlePagination(event)} >{number}</Pagination.Item>,);
@@ -351,10 +389,14 @@ class Sistra extends Component {
                     {paginationNumbers}
                 </Pagination>
             </>
-        } else{
-            if(this.state.total_items === 0 && this.state.data !== null) {
-                taulaTramits = <div className="pt-3 alert alert-secondary margeBuid" style={{ float: 'left', width: '95%'}} role="alert">{t('sistraBuid')}</div>
-            }
+        } else if(!this.state.data) {
+
+            taulaTramits = <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%', color: '#721c24', backgroundColor: '#f8d7da'}}
+                              role="alert">{t('sistraProblema')}</div>
+
+        } else if(this.state.total_items === 0 && this.state.data !== null) {
+            taulaTramits = <div className="pt-3 alert alert-secondary margeBuid" style={{ float: 'left', width: '95%'}} role="alert">{t('sistraBuid')}</div>
+
         }
 
         $('#veureError').click(function(){
@@ -629,6 +671,7 @@ class Sistra extends Component {
                                              value={this.state.filter_regPorPagina}
                                              tabindex="505"
                                              aria-labelledby="regPorPagina"
+                                             style={{color: '#666', borderRadius: '0.2rem'}}
                                              onChange={(e) => {this.handleRegPorPaginaFilterParam(e); }}>
                                     <option value="5" className="form-control form-control-sm selectMobil">5</option>
                                     <option value="10" className="form-control form-control-sm selectMobil">10</option>
@@ -664,7 +707,7 @@ class Sistra extends Component {
                 content = <div className="alert alert-danger" role="alert">{data.error}</div>;
             } else {
 
-                if (typeof (this.state.total_items) !== undefined && typeof (this.state.data) !== undefined && this.state.data !== null && this.state.total_items !== 0) {
+                if(this.state.data && typeof (this.state.total_items) !== undefined && typeof (this.state.data) !== undefined && this.state.total_items !== 0) {
                     let paginationNumbers = [];
 
                     for (let number = 1; number <= Math.ceil(this.state.total_items / this.state.cercaRegistres); number++) {
@@ -683,7 +726,7 @@ class Sistra extends Component {
                                                     value={this.state.filter_regPorPagina}
                                                     tabindex="510"
                                                     aria-labelledby="rPP"
-                                                    style={{color: '#666'}}
+                                                    style={{color: '#666', borderRadius: '0.2rem'}}
                                                     onChange={(e) => {this.handleRegPorPaginaFilterParam(e); }}>
                                                     <option value="5" className="form-control form-control-sm selectMobil">5</option>
                                                     <option value="10" className="form-control form-control-sm selectMobil">10</option>
@@ -770,23 +813,27 @@ class Sistra extends Component {
                         </Pagination>
                     </>
 
-                } else {
-                    if (this.state.total_items === 0 && this.state.data !== null) {
-                        taulaTramits = <>
-                            {/*<div style={{float: 'left', marginTop: '9px;', paddingBottom: '0.7em'}}>*/}
-                            {/*    {t('carpeta_criterio_1') +*/}
-                            {/*    $.dateFormatCerca(this.state.dataInici) +*/}
-                            {/*    t('carpeta_criterio_2') +*/}
-                            {/*    $.dateFormatCerca(this.state.dataFi) +*/}
-                            {/*    t('carpeta_criterio_3') +*/}
-                            {/*    $.nomEstat(this.state.estat) +*/}
-                            {/*    t('carpeta_criterio_4')}*/}
-                            {/*</div>*/}
-                            <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%'}}
-                                 role="alert">{t('sistraBuid')}</div>
-                        </>
-                    }
+                } else if(!this.state.data) {
+
+                    taulaTramits = <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%', color: '#721c24', backgroundColor: '#f8d7da'}}
+                                        role="alert">{t('sistraProblema')}</div>
+
+                } else if (this.state.total_items === 0 && this.state.data !== null) {
+                    taulaTramits = <>
+                        {/*<div style={{float: 'left', marginTop: '9px;', paddingBottom: '0.7em'}}>*/}
+                        {/*    {t('carpeta_criterio_1') +*/}
+                        {/*    $.dateFormatCerca(this.state.dataInici) +*/}
+                        {/*    t('carpeta_criterio_2') +*/}
+                        {/*    $.dateFormatCerca(this.state.dataFi) +*/}
+                        {/*    t('carpeta_criterio_3') +*/}
+                        {/*    $.nomEstat(this.state.estat) +*/}
+                        {/*    t('carpeta_criterio_4')}*/}
+                        {/*</div>*/}
+                        <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%'}}
+                             role="alert">{t('sistraBuid')}</div>
+                    </>
                 }
+
             }
         }
 
