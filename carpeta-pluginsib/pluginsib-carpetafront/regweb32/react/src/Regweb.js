@@ -37,7 +37,7 @@ class Regweb extends Component {
             pagination_active: 1,
             pagination_total_items: 10,
             numeroRegistro: null,
-            error: false, 
+            error: null,
             criteriosTexto: '',
             cercaRegistres: 10
         };
@@ -87,7 +87,7 @@ class Regweb extends Component {
             ...this.state,
             filter_regPorPagina: e.target.value,
             isLoaded: false,
-            error: false,
+            error: null,
             cercaRegistres: e.target.value
         });
 
@@ -110,17 +110,31 @@ class Regweb extends Component {
                     data: JSON.parse(response.data.registres),
                     pagination_active: 1,
                     pagination_total_items: response.data.totalRegistres,
+                    isLoaded: true,
+                    error: null
+                });
+            }
+
+        }).catch(error => {
+            console.log(JSON.stringify(error));
+            if (error.response) {
+                console.log("error.response.data: " + error.response.data);
+                console.log("error.response.status: " + error.response.status);
+                console.log("error.response.headers: " + error.response.headers);
+            }
+            if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                this.setState({
+                    error: "error500plugin",
+                    isLoaded: true
+                });
+            } else{
+                this.setState({
+                    error: JSON.stringify(error),
                     isLoaded: true
                 });
             }
 
-        }).catch( error => {
-            console.log('Error axios', error);
-            this.setState({
-                ...this.state,
-                error: true
-            });
-        } );
+        });
 
     };
 
@@ -138,7 +152,7 @@ class Regweb extends Component {
         this.setState({
             ...this.state,
             pagination_active: newPageNumber,
-            error: false,
+            error: null,
             isLoaded: false
         }); 
 
@@ -161,17 +175,31 @@ class Regweb extends Component {
                     data: JSON.parse(response.data.registres),
                     pagination_active: newPageNumber,
                     pagination_total_items: response.data.totalRegistres,
-                    isLoaded: true
+                    isLoaded: true,
+                    error: null
                 });
             }
             
-        }).catch( error => {
-            console.log('Error axios', error);
-            this.setState({
-                ...this.state,
-                error: true
-            });
-        } );
+        }).catch(error => {
+            console.log(JSON.stringify(error));
+            if (error.response) {
+                console.log("error.response.data: " + error.response.data);
+                console.log("error.response.status: " + error.response.status);
+                console.log("error.response.headers: " + error.response.headers);
+            }
+            if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                this.setState({
+                    error: "error500plugin",
+                    isLoaded: true
+                });
+            } else{
+                this.setState({
+                    error: JSON.stringify(error),
+                    isLoaded: true
+                });
+            }
+
+        });
     }
 
 
@@ -195,7 +223,7 @@ class Regweb extends Component {
             this.setState({
                 ...this.state, 
                 isLoaded: false,
-                error: false,
+                error: null,
                 numeroRegistro: null,
                 cercaRegistres: this.state.filter_regPorPagina
             });  
@@ -219,17 +247,31 @@ class Regweb extends Component {
                         data: JSON.parse(response.data.registres),
                         pagination_active: 1,
                         pagination_total_items: response.data.totalRegistres,
+                        isLoaded: true,
+                        error: null
+                    });
+                }
+
+            }).catch(error => {
+                console.log(JSON.stringify(error));
+                if (error.response) {
+                    console.log("error.response.data: " + error.response.data);
+                    console.log("error.response.status: " + error.response.status);
+                    console.log("error.response.headers: " + error.response.headers);
+                }
+                if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                    this.setState({
+                        error: "error500plugin",
+                        isLoaded: true
+                    });
+                } else{
+                    this.setState({
+                        error: JSON.stringify(error),
                         isLoaded: true
                     });
                 }
 
-            }).catch( error => {
-                console.log('Error axios', error);
-                this.setState({
-                    ...this.state,
-                    error: true
-                });
-            } );
+            });
 
         } else{
             e.preventDefault();
@@ -263,7 +305,7 @@ class Regweb extends Component {
             this.setState({
                 ...this.state,
                 isLoaded: false,
-                error: false,
+                error: null,
                 numeroRegistro: null,
                 criteriosTexto: criterisCercaText
             });
@@ -287,17 +329,31 @@ class Regweb extends Component {
                         data: JSON.parse(response.data.registres),
                         pagination_active: 1,
                         pagination_total_items: response.data.totalRegistres,
+                        isLoaded: true,
+                        error: null
+                    });
+                }
+
+            }).catch(error => {
+                console.log(JSON.stringify(error));
+                if (error.response) {
+                    console.log("error.response.data: " + error.response.data);
+                    console.log("error.response.status: " + error.response.status);
+                    console.log("error.response.headers: " + error.response.headers);
+                }
+                if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                    this.setState({
+                        error: "error500plugin",
+                        isLoaded: true
+                    });
+                } else{
+                    this.setState({
+                        error: JSON.stringify(error),
                         isLoaded: true
                     });
                 }
 
-            }).catch( error => {
-                console.log('Error axios', error);
-                this.setState({
-                    ...this.state,
-                    error: true
-                });
-            } );
+            });
 
         }
     }
@@ -386,11 +442,6 @@ class Regweb extends Component {
                     {paginationNumbers}
                 </Pagination>
             </>
-
-        } else if(!this.state.data) {
-
-            taulaRegistres = <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%', color: '#721c24', backgroundColor: '#f8d7da'}}
-                                role="alert">{t('registroProblema')}</div>
 
         } else if(this.state.total_items === 0 && this.state.data !== null) {
             taulaRegistres = <div className="pt-3 alert alert-secondary margeBuid" style={{ float: 'left', width: '95%'}} role="alert">{t('registro_vacio')}</div>
@@ -640,10 +691,6 @@ class Regweb extends Component {
             const data = this.state.data;
             registresBuid = <div className="pt-3 alert alert-secondary" style={{ float: 'left', width: '95%'}} role="alert">{t('registro_vacio')}</div>;
 
-            if (this.state.error) {
-                content = <div className="alert alert-danger" role="alert">{data.error}</div>;
-            } else {
-
                 if (this.state.data != null && parseInt(this.state.pagination_total_items, 10) > 0 && this.state.data && typeof (this.state.total_items) !== undefined && typeof (this.state.data) !== undefined && this.state.total_items !== 0) {
 
                         let paginationNumbers = [];
@@ -732,17 +779,10 @@ class Regweb extends Component {
 
                         </>
 
-                } else if(!this.state.data) {
-
-                    taulaRegistres = <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%', color: '#721c24', backgroundColor: '#f8d7da'}}
-                                          role="alert">{t('registroProblema')}</div>
-
                 } else if(this.state.total_items === 0 && this.state.data !== null) {
                     taulaRegistres = <div className="pt-3 alert alert-secondary margeBuid" style={{ float: 'left', width: '95%'}} role="alert">{t('registro_vacio')}</div>
-
                 }
 
-            }
         }
         
         return (

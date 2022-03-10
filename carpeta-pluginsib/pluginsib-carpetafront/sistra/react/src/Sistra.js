@@ -36,7 +36,7 @@ class Sistra extends Component {
             pagination_total_items: 10,
             total_items: 0,
             numeroRegistro: null,
-            error: false,
+            error: null,
             filter_regPorPagina: 10,
             cercaRegistres: 10
         };
@@ -89,7 +89,7 @@ class Sistra extends Component {
             ...this.state,
             filter_regPorPagina: e.target.value,
             isLoaded: false,
-            error: false,
+            error: null,
             cercaRegistres: e.target.value
         });
 
@@ -112,17 +112,31 @@ class Sistra extends Component {
                     pagination_active: 1,
                     total_items: response.data.totalRegistres,
                     pagination_total_items: response.data.registresPagina,
+                    isLoaded: true,
+                    error: null
+                });
+            }
+
+        }).catch(error => {
+            console.log(JSON.stringify(error));
+            if (error.response) {
+                console.log("error.response.data: " + error.response.data);
+                console.log("error.response.status: " + error.response.status);
+                console.log("error.response.headers: " + error.response.headers);
+            }
+            if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                this.setState({
+                    error: "error500plugin",
+                    isLoaded: true
+                });
+            } else{
+                this.setState({
+                    error: JSON.stringify(error),
                     isLoaded: true
                 });
             }
 
-        }).catch( error => {
-            console.log('Error axios', error);
-            this.setState({
-                ...this.state,
-                error: true
-            });
-        } );
+        });
 
     };
 
@@ -132,7 +146,7 @@ class Sistra extends Component {
         this.setState({
             ...this.state,
             pagination_active: newPageNumber,
-            error: false,
+            error: null,
             isLoaded: false
         });
 
@@ -155,18 +169,32 @@ class Sistra extends Component {
                     pagination_active: newPageNumber,
                     total_items: response.data.totalRegistres,
                     pagination_total_items: response.data.registresPagina,
-                    isLoaded: true
+                    isLoaded: true,
+                    error: null
                 });
             }
 
 
-        }).catch( error => {
-            console.log('Error axios', error);
-            this.setState({
-                ...this.state,
-                error: true
-            });
-        } );
+        }).catch(error => {
+            console.log(JSON.stringify(error));
+            if (error.response) {
+                console.log("error.response.data: " + error.response.data);
+                console.log("error.response.status: " + error.response.status);
+                console.log("error.response.headers: " + error.response.headers);
+            }
+            if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                this.setState({
+                    error: "error500plugin",
+                    isLoaded: true
+                });
+            } else{
+                this.setState({
+                    error: JSON.stringify(error),
+                    isLoaded: true
+                });
+            }
+
+        });
 
     }
 
@@ -206,7 +234,7 @@ class Sistra extends Component {
                     ...this.state,
                     isLoaded: true,
                     pagination_active: 1,
-                    error: false
+                    error: null
                 });
 
                 if (response.data != null) {
@@ -226,11 +254,24 @@ class Sistra extends Component {
                 }
 
             }).catch(error => {
-                console.log('Error axios', error);
-                this.setState({
-                    ...this.state,
-                    error: true
-                });
+                console.log(JSON.stringify(error));
+                if (error.response) {
+                    console.log("error.response.data: " + error.response.data);
+                    console.log("error.response.status: " + error.response.status);
+                    console.log("error.response.headers: " + error.response.headers);
+                }
+                if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                    this.setState({
+                        error: "error500plugin",
+                        isLoaded: true
+                    });
+                } else{
+                    this.setState({
+                        error: JSON.stringify(error),
+                        isLoaded: true
+                    });
+                }
+
             });
 
         } else{
@@ -277,7 +318,7 @@ class Sistra extends Component {
                     ...this.state,
                     isLoaded: true,
                     pagination_active: 1,
-                    error: false
+                    error: null
                 });
 
                 if (response.data != null) {
@@ -297,11 +338,24 @@ class Sistra extends Component {
                 }
 
             }).catch(error => {
-                console.log('Error axios', error);
-                this.setState({
-                    ...this.state,
-                    error: true
-                });
+                console.log(JSON.stringify(error));
+                if (error.response) {
+                    console.log("error.response.data: " + error.response.data);
+                    console.log("error.response.status: " + error.response.status);
+                    console.log("error.response.headers: " + error.response.headers);
+                }
+                if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                    this.setState({
+                        error: "error500plugin",
+                        isLoaded: true
+                    });
+                } else{
+                    this.setState({
+                        error: JSON.stringify(error),
+                        isLoaded: true
+                    });
+                }
+
             });
 
         } else{
@@ -389,10 +443,6 @@ class Sistra extends Component {
                     {paginationNumbers}
                 </Pagination>
             </>
-        } else if(!this.state.data) {
-
-            taulaTramits = <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%', color: '#721c24', backgroundColor: '#f8d7da'}}
-                              role="alert">{t('sistraProblema')}</div>
 
         } else if(this.state.total_items === 0 && this.state.data !== null) {
             taulaTramits = <div className="pt-3 alert alert-secondary margeBuid" style={{ float: 'left', width: '95%'}} role="alert">{t('sistraBuid')}</div>
@@ -703,10 +753,6 @@ class Sistra extends Component {
 
         } else {
 
-            if (this.state.error) {
-                content = <div className="alert alert-danger" role="alert">{data.error}</div>;
-            } else {
-
                 if(this.state.data && typeof (this.state.total_items) !== undefined && typeof (this.state.data) !== undefined && this.state.total_items !== 0) {
                     let paginationNumbers = [];
 
@@ -813,11 +859,6 @@ class Sistra extends Component {
                         </Pagination>
                     </>
 
-                } else if(!this.state.data) {
-
-                    taulaTramits = <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%', color: '#721c24', backgroundColor: '#f8d7da'}}
-                                        role="alert">{t('sistraProblema')}</div>
-
                 } else if (this.state.total_items === 0 && this.state.data !== null) {
                     taulaTramits = <>
                         {/*<div style={{float: 'left', marginTop: '9px;', paddingBottom: '0.7em'}}>*/}
@@ -834,7 +875,6 @@ class Sistra extends Component {
                     </>
                 }
 
-            }
         }
 
         

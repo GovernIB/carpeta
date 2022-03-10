@@ -555,7 +555,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         } catch (Exception e) {
 
             log.error("Error llistant Notificacions NOTIB: " + e.getMessage(), e);
-            errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
+            errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
 
         }
 
@@ -926,7 +926,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         } catch (Exception e) {
 
             log.error("Error llistant Notificacions Pendents NOTIB: " + e.getMessage(), e);
-            errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
+            errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
 
         }
 
@@ -1051,7 +1051,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         } catch (Exception e) {
 
             log.error("Error llistant Notificacions Llegides NOTIB: " + e.getMessage(), e);
-            errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
+            errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
 
         }
 
@@ -1178,7 +1178,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         } catch (Exception e) {
 
             log.error("Error llistant Comunicacions NOTIB: " + e.getMessage(), e);
-            errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
+            errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
 
         }
 
@@ -1304,7 +1304,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         } catch (Exception e) {
 
             log.error("Error llistant Comunicacions Pendents NOTIB: " + e.getMessage(), e);
-            errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
+            errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
 
         }
 
@@ -1430,7 +1430,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         } catch (Exception e) {
 
             log.error("Error llistant Comunicacions Llegides NOTIB: " + e.getMessage(), e);
-            errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
+            errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
 
         }
 
@@ -1570,7 +1570,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         } catch (Exception e) {
 
             log.error("Error llistant Comunicacions NOTIB: " + e.getMessage(), e);
-            errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
+            errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
 
         }
 
@@ -1708,7 +1708,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         } catch (Exception e) {
 
             log.error("Error llistant Comunicacions Pendents NOTIB: " + e.getMessage(), e);
-            errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
+            errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
 
         }
 
@@ -1846,7 +1846,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         } catch (Exception e) {
 
             log.error("Error llistant Comunicacions Llegides NOTIB: " + e.getMessage(), e);
-            errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
+            errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
 
         }
 

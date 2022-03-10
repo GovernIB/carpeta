@@ -315,6 +315,25 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
     // -------------------------------------------------------------------------
     // -------------------------------------------------------------------------
 
+    protected void errorRest(String errorMsg, Throwable th, HttpServletRequest request,
+                             HttpServletResponse response, String absolutePluginRequestPath,  Locale locale) {
+
+        try {
+            if (th == null) {
+                log.error("AbstractPluginFullUtilities::errorREST() " + errorMsg);
+            } else {
+                log.error("AbstractPluginFullUtilities::errorREST() " + errorMsg, th);
+            }
+
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, errorMsg);
+
+        } catch (IOException e) {
+            log.error("Error enviant un internal server error: " + e.getMessage());
+        }
+
+
+    }
+
     
     protected void errorPage(String errorMsg, Throwable th, HttpServletRequest request,
             HttpServletResponse response, String absolutePluginRequestPath,  Locale locale) {

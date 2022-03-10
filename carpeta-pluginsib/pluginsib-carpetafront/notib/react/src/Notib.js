@@ -31,7 +31,7 @@ class Notib extends Component {
             pagination_active: 1,
             pagination_total_items: 10,
             total_items: 0,
-            error: false,
+            error: null,
             cercaRegistres: 10,
             missatgeBuid: i18n.t('notibBuid')
         };
@@ -60,7 +60,7 @@ class Notib extends Component {
         this.setState({
             filter_regPorPagina: e.target.value,
             isLoaded: false,
-            error: false,
+            error: null,
             cercaRegistres: e.target.value
         });
 
@@ -112,17 +112,31 @@ class Notib extends Component {
                     total_items: response.data.totalRegistres,
                     pagination_active: 1,
                     pagination_total_items: response.data.registresPagina,
+                    isLoaded: true,
+                    error: null
+                });
+            }
+
+        }).catch(error => {
+            console.log(JSON.stringify(error));
+            if (error.response) {
+                console.log("error.response.data: " + error.response.data);
+                console.log("error.response.status: " + error.response.status);
+                console.log("error.response.headers: " + error.response.headers);
+            }
+            if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                this.setState({
+                    error: "error500plugin",
+                    isLoaded: true
+                });
+            } else{
+                this.setState({
+                    error: JSON.stringify(error),
                     isLoaded: true
                 });
             }
 
-        }).catch( error => {
-            console.log('Error axios', error);
-            this.setState({
-                ...this.state,
-                error: true
-            });
-        } );
+        });
 
 
     };
@@ -147,16 +161,30 @@ class Notib extends Component {
                     urldetallbase2: response.data.urldetallbase2,
                     urldetallbase3: response.data.urldetallbase3,
                     total_items: response.data.totalRegistres,
-                    isLoaded: true
+                    isLoaded: true,
+                    error: null
                 });
             }
-        }).catch( error => {
-            console.log('Error axios', error);
-            this.setState({
-                ...this.state,
-                error: true
+        }).catch(error => {
+                console.log(JSON.stringify(error));
+                if (error.response) {
+                    console.log("error.response.data: " + error.response.data);
+                    console.log("error.response.status: " + error.response.status);
+                    console.log("error.response.headers: " + error.response.headers);
+                }
+                if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                    this.setState({
+                        error: "error500plugin",
+                        isLoaded: true
+                    });
+                } else{
+                    this.setState({
+                        error: JSON.stringify(error),
+                        isLoaded: true
+                    });
+                }
+
             });
-        } );
 
     }
 
@@ -167,7 +195,7 @@ class Notib extends Component {
         this.setState({
             ...this.state,
             pagination_active: newPageNumber,
-            error: false,
+            error: null,
             isLoaded: false
         });
 
@@ -190,16 +218,30 @@ class Notib extends Component {
                     total_items: response.data.totalRegistres,
                     pagination_total_items: response.data.registresPagina,
                     pagination_active: newPageNumber,
-                    isLoaded: true
+                    isLoaded: true,
+                    error: null
                 });
             }
-        }).catch( error => {
-            console.log('Error axios', error);
-            this.setState({
-                ...this.state,
-                error: true
+        }).catch(error => {
+                console.log(JSON.stringify(error));
+                if (error.response) {
+                    console.log("error.response.data: " + error.response.data);
+                    console.log("error.response.status: " + error.response.status);
+                    console.log("error.response.headers: " + error.response.headers);
+                }
+                if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                    this.setState({
+                        error: "error500plugin",
+                        isLoaded: true
+                    });
+                } else{
+                    this.setState({
+                        error: JSON.stringify(error),
+                        isLoaded: true
+                    });
+                }
+
             });
-        } );
 
     }
 
@@ -229,7 +271,7 @@ class Notib extends Component {
         this.setState({
             ...this.state,
             isLoaded: false,
-            error: false,
+            error: null,
             cercaRegistres: this.state.filter_regPorPagina
         });
 
@@ -288,17 +330,31 @@ class Notib extends Component {
                     total_items: response.data.totalRegistres,
                     pagination_active: 1,
                     pagination_total_items: response.data.registresPagina,
-                    isLoaded: true
+                    isLoaded: true,
+                    error: null
                 });
             }
 
-        }).catch( error => {
-            console.log('Error axios', error);
-            this.setState({
-                ...this.state,
-                error: true
+        }).catch(error => {
+                console.log(JSON.stringify(error));
+                if (error.response) {
+                    console.log("error.response.data: " + error.response.data);
+                    console.log("error.response.status: " + error.response.status);
+                    console.log("error.response.headers: " + error.response.headers);
+                }
+                if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                    this.setState({
+                        error: "error500plugin",
+                        isLoaded: true
+                    });
+                } else{
+                    this.setState({
+                        error: JSON.stringify(error),
+                        isLoaded: true
+                    });
+                }
+
             });
-        } );
 
     }
 
@@ -519,11 +575,6 @@ class Notib extends Component {
                         {paginationNumbers}
                     </Pagination>
                 </>
-
-            } else if(!this.state.dataComunicacions) {
-
-                taulaNotib = <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%', color: '#721c24', backgroundColor: '#f8d7da'}}
-                                  role="alert">{t('notibProblema')}</div>
 
             } else if(this.state.total_items === 0 && this.state.dataComunicacions !== null) {
 

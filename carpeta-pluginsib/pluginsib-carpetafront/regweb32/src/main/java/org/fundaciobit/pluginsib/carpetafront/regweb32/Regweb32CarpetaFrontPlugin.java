@@ -425,7 +425,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             Gson json = new GsonBuilder().setDateFormat("dd-MM-yyyy HH:mm").create();
             String generat = json.toJson(dades);
             
-            log.info("Generat: " + generat);
+//            log.info("Generat: " + generat);
             
             try {
                 response.getWriter().println(generat);
@@ -436,8 +436,8 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             }
 
         } catch (Exception e) {
-            // XYZ ZZZ
             log.error("Error generant pàgina bàsica: " + e.getMessage(), e);
+            errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
         }
     	
     }
