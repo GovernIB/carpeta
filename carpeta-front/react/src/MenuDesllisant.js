@@ -329,6 +329,14 @@ class MenuDesllisant extends Component {
 
 			}
 
+			// allItems.push(<li key="config">
+			// 	<div>
+			// 		<div className="float-left styleLiniaMenu">
+			// 			<span className="oi oi-power-standby iconaMenu" title="ConfigAPP"/>
+			// 		</div>
+			// 		<a href="configureApp" className="imc-marc-ico imc--sortir margesMenu" id="imc-marc-sortir"
+			// 		   title="configAPP" tabIndex="261" aria-labelledby="configAPP"><span id="configAPP">ConfigAPP</span></a></div></li>);
+
 		}
 
 		const styleColorMenu = (this.state.colorMenu === null)? { backgroundColor : '#32814B'} : { backgroundColor : "#"+this.state.colorMenu};

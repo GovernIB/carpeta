@@ -49,15 +49,15 @@ class LoginIBCallBackBrowser extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  borderdotted: {
-    borderWidth: 3,
-    borderColor: 'red',
-    borderStyle: 'dotted',
-    borderRadius: 1,
-    //flex: 1,
-    //position: 'relative',
-    //height: 500,
-  },
+  // borderdotted: {
+  //   borderWidth: 3,
+  //   borderColor: 'red',
+  //   borderStyle: 'dotted',
+  //   borderRadius: 1,
+  //   //flex: 1,
+  //   //position: 'relative',
+  //   //height: 500,
+  // },
 
   fixToText: {
     flexDirection: 'row',

@@ -11,7 +11,7 @@ import React, { Component } from "react";
 // I18N
 import { withTranslation } from "react-i18next";
 
-import { StyleSheet, Text, View } from "react-native";
+import {Button, StyleSheet, Text, View} from "react-native";
 
 import { Link, Route, Switch, withRouter } from "./components/Routing";
 
@@ -21,40 +21,69 @@ import LoginIBCallBackBrowser from "./LoginIBCallBackBrowser";
 import Plataforma from "./Plataforma";
 import PersistenciaControl from "./PersistenciaControl";
 import ExemplesDeComponents from "./ExemplesDeComponents";
+import {Redirect} from "react-router-dom";
 
 class Index extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isHidden: false,
+    };
+    this.ocultarVista.bind(this);
+  }
+
+
+  ocultarVista() {
+     console.log('Entered 1111111111 !!!!!!!!!!!!!!!!/' + this.state.isHidden);
+    //this.setState({ isHidden: true });
+    this.props.history.push('/config/');
+
+    console.log('Entered 22222222 !!!!!!!!!!!!!!!!/'  + this.state.isHidden);
+
   }
 
   render() {
+
+    console.log('RENDERRRR   '  + this.state.isHidden);
     return (
+
       <View style={styles.container}>
         {/* MENU SUPERIOR */}
-        <View style={styles.nav}>
-          <Link to="/" style={styles.navItem}>
-            <Text>Home</Text>
-          </Link>
-          <Link to="/components" style={styles.navItem}>
-            <Text>Components</Text>
-          </Link>
-          <Link to="/carpeta" style={styles.navItem}>
-            <Text>Carpeta</Text>
-          </Link>
+        <View style={styles.nav} hide={this.state.isHidden}>
+          {/*<Link to="/" style={styles.navItem}>*/}
+          {/*  <Text>Home</Text>*/}
+          {/*</Link>*/}
+          {/*<Link to="/components" style={styles.navItem}>*/}
+          {/*  <Text>Components</Text>*/}
+          {/*</Link>*/}
+          {/*<Link to="/carpeta" style={styles.navItem}>*/}
+          {/*  <Text>Carpeta</Text>*/}
+          {/*</Link>
           <Link to="/config" style={styles.navItem}>
-            <Text>Config.</Text>
+            <Text>⁝</Text>
           </Link>
+          */}
+
+              <Button title='⁝' onPress={()=>this.ocultarVista()} color="#32814B"/>
+            {/*    <Text>XX</Text> <Link to=""  style={styles.navItem}  >
+          </Link>*/ }
+
+
         </View>
 
         {/* Contingut de la Pagina */}
-        <Switch>
+        <Switch onValueChange={value => this.setState({ isHidden: value })}  value={this.state.isHidden}>
           <Route
             exact
             path="/"
-            render={(props) => {
-              return <Home />;
-            }}
-          />
+            // render={(props) => {
+            //   return <Home />;
+            // }}
+            >
+            <Redirect to="/carpeta" />
+          </Route>
+
+
           <Route
             path="/config"
             render={(props) => {
@@ -93,23 +122,29 @@ const styles = StyleSheet.create({
 
   nav: {
     flexDirection: "row",
-    justifyContent: "space-around",
-    borderStyle: "solid",
-    borderColor: "black",
-    borderWidth: 1,
-    paddingTop: 5,
-    paddingBottom: 5,
+    // justifyContent: "space-around",
+    // borderStyle: "solid",
+    // borderColor: "black",
+    // borderWidth: 0,
+    // paddingTop: 1,
+    // paddingBottom: 1,
+    // float: "right"
+    // justifyContent: "flex-end",
+    alignSelf: 'flex-end',
+    position: "absolute",
+    zIndex: 10,
+    backgroundColor: "#32814B",
   },
   navItem: {
     flex: 1,
     fontWeight: "bold",
     alignItems: "center",
-    padding: 2,
-    margin: 2,
-    borderStyle: "solid",
-    borderColor: "red",
-    borderWidth: 2,
-    borderRadius: 10,
+    // padding: 1,
+    // margin: 1,
+    // borderStyle: "solid",
+    // borderColor: "black",
+    // borderWidth: 0,
+    // borderRadius: 3,
   },
 });
 

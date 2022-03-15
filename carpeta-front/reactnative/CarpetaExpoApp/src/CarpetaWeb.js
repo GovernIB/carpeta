@@ -48,7 +48,14 @@ class CarpetaWeb extends Component {
 
   callWhenNavigationStateChange(event) {
     var url = event.url;
-    //console.log('Check URL => ]' + url + '[');
+    // console.log('Check URL => ]' + url + '[');
+
+    // if (url.includes('/configureApp')) {
+    //
+    //   this.props.history.push('/config/');
+    //
+    //   return false;
+    // }
 
     if (url.includes('/public/doLogin?')) {
       //console.log('');
@@ -167,14 +174,13 @@ class CarpetaWeb extends Component {
 }
 
 const styles = StyleSheet.create({
-  borderdotted: {
-    /*
-    borderWidth: 1,
-    borderColor: 'red',
-    borderStyle: 'dotted',    
-    borderRadius: 1,
-    */
-  },
+  /*borderdotted: {
+      borderWidth: 1,
+   borderColor: 'red',
+   borderStyle: 'dotted',
+   borderRadius: 1,
+
+ },*/
   link: {
     marginTop: 8,
     fontSize: 18,
