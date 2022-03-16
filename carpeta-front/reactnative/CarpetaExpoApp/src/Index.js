@@ -134,6 +134,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     zIndex: 10,
     backgroundColor: "#32814B",
+    opacity: 0.0
   },
   navItem: {
     flex: 1,
@@ -146,6 +147,7 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     paddingHorizontal: 9,
     backgroundColor: '#32814B',
+    opacity: 0.0
   },
   buttonText: {
     color: '#32814B',
