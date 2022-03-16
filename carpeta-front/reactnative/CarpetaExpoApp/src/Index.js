@@ -11,7 +11,7 @@ import React, { Component } from "react";
 // I18N
 import { withTranslation } from "react-i18next";
 
-import {Button, StyleSheet, Text, View} from "react-native";
+import {Button, StyleSheet, Text, View, TouchableOpacity} from "react-native";
 
 import { Link, Route, Switch, withRouter } from "./components/Routing";
 
@@ -64,7 +64,11 @@ class Index extends Component {
           </Link>
           */}
 
-              <Button title='⁝' onPress={()=>this.ocultarVista()} color="#32814B"/>
+              <TouchableOpacity title='X' onPress={()=>this.ocultarVista()} >
+                <View style={styles.button}>
+                  <Text style={styles.buttonText}>X</Text>
+                </View>
+              </TouchableOpacity>
             {/*    <Text>XX</Text> <Link to=""  style={styles.navItem}  >
           </Link>*/ }
 
@@ -123,14 +127,10 @@ const styles = StyleSheet.create({
   nav: {
     flexDirection: "row",
     // justifyContent: "space-around",
-    // borderStyle: "solid",
-    // borderColor: "black",
-    // borderWidth: 0,
-    // paddingTop: 1,
-    // paddingBottom: 1,
-    // float: "right"
-    // justifyContent: "flex-end",
-    alignSelf: 'flex-end',
+    borderStyle: "solid",
+    borderColor: "#32814B",
+    borderWidth: 0,
+    alignSelf: 'flex-start',
     position: "absolute",
     zIndex: 10,
     backgroundColor: "#32814B",
@@ -139,13 +139,19 @@ const styles = StyleSheet.create({
     flex: 1,
     fontWeight: "bold",
     alignItems: "center",
-    // padding: 1,
-    // margin: 1,
-    // borderStyle: "solid",
-    // borderColor: "black",
-    // borderWidth: 0,
-    // borderRadius: 3,
   },
+
+  button: {
+    borderRadius: 8,
+    paddingVertical: 14,
+    paddingHorizontal: 9,
+    backgroundColor: '#32814B',
+  },
+  buttonText: {
+    color: '#32814B',
+    fontSize: 8,
+    textAlign: 'center',
+  }
 });
 
 export default withTranslation()(withRouter(Index));
