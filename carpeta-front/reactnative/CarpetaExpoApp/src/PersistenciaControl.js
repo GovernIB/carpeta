@@ -66,7 +66,7 @@ class PersistenciaControl extends Component {
     return (
       <View>
         <View style={styles.fixToText}>
-          <Text style={styles.label}>URL Servidor:</Text>
+          <Text style={styles.label}>     URL Servidor:</Text>
         </View>
         <View style={styles.fixToText}>
           <TextInput
