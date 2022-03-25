@@ -443,7 +443,7 @@ class DatosMatricula extends Component {
                     {this.state.radioSelectedOption === 'option3' &&
                     <>
                         <Row className="pt-2">
-                            <Col md={3} xs={12}>
+                            <Col md={3} xs={12} className="ajustaForm">
                                 <Form.Group>
                                     <Form.Label style={{ float: 'left', paddingTop: '0.5em'}}>{t('pinbalMatriculaNomTitular')}</Form.Label>
                                     <Form.Control
@@ -457,7 +457,7 @@ class DatosMatricula extends Component {
                                     />
                                 </Form.Group>
                             </Col>
-                            <Col md={3} xs={12}>
+                            <Col md={3} xs={12} className="ajustaForm">
                                 <Form.Group>
                                     <Form.Label style={{ float: 'left', paddingTop: '0.5em'}}>{t('pinbalMatriculaPrimerLliTitular')}</Form.Label>
                                     <Form.Control
@@ -471,7 +471,7 @@ class DatosMatricula extends Component {
                                     />
                                 </Form.Group>
                             </Col>
-                            <Col md={3} xs={12}>
+                            <Col md={3} xs={12} className="ajustaForm">
                                 <Form.Group>
                                     <Form.Label style={{ float: 'left', paddingTop: '0.5em'}}>{t('pinbalMatriculaSegonLliTitular')}</Form.Label>
                                     <Form.Control
@@ -487,7 +487,7 @@ class DatosMatricula extends Component {
                             </Col>
                         </Row>
                         <Row className="pt-2">
-                            <Col md={2} xs={12}>
+                            <Col md={2} xs={12} className="ajustaForm70">
                                 <Form.Group>
                                     <Form.Label style={{ float: 'left', paddingTop: '0.5em'}}>{t('pinbalMatriculaNaixement')}</Form.Label>
                                     <DatePicker
@@ -500,7 +500,7 @@ class DatosMatricula extends Component {
                                         locale={this.locale}
                                         showYearDropdown={true}
                                         preventOpenOnFocus={true}
-                                        popperPlacement="top-end"
+                                        popperPlacement="top"
                                     />
                                 </Form.Group>
                             </Col>

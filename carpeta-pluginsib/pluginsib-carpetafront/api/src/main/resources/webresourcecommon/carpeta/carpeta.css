@@ -158,6 +158,7 @@ img:hover {
 .margesMenu{
 	padding-top: 0.7em!important;
 	padding-bottom: 0.7em!important;
+	margin-left: 2em;
 }
 
 .imc--llista--capses{
@@ -423,7 +424,7 @@ img:hover {
 	vertical-align: text-top;
 }
 .iconaEnllas{
-	max-width: 5em;
+	/*max-width: 5em;*/
 	max-height: 1.5em;
 	height: auto;
 	/*opacity: .6;*/
@@ -1177,6 +1178,31 @@ input.form-control, select.form-control {
 }
 .selectMobil{
 	font-size: 0.7rem!important;
+}
+.margesMenu{
+	margin-left: 1em!important;
+}
+.floatEnll{
+	font-size: inherit!important;
+}
+.react-datepicker{
+	-webkit-transform: scale(2.5,2.5);
+}
+.react-datepicker-popper {
+	padding-top: 6.5em!important;
+	margin-left: 5em!important;
+}
+.react-datepicker__triangle{
+	transform: translate3d(50px, 0px, 0px)!important;
+}
+.ajustaForm{
+	min-width: -webkit-fill-available;
+}
+.ajustaForm70{
+	min-width: 70%;
+}
+.react-datepicker-popper[data-placement^=top] {
+	padding-bottom: 6em!important;
 }
 }
 

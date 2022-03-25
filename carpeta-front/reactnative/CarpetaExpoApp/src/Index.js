@@ -11,8 +11,8 @@ import React, { Component } from "react";
 // I18N
 import { withTranslation } from "react-i18next";
 
-import {Button, StyleSheet, Text, View, TouchableOpacity} from "react-native";
-
+import {Button, StyleSheet, Text, View, TouchableOpacity, Linking, Alert} from "react-native";
+import {openLink, tryDeepLinking} from './Utils';
 import { Link, Route, Switch, withRouter } from "./components/Routing";
 
 import Home from "./Home";
@@ -22,6 +22,7 @@ import Plataforma from "./Plataforma";
 import PersistenciaControl from "./PersistenciaControl";
 import ExemplesDeComponents from "./ExemplesDeComponents";
 import {Redirect} from "react-router-dom";
+import {InAppBrowser} from "react-native-inappbrowser-reborn";
 
 class Index extends Component {
   constructor(props) {
@@ -44,15 +45,24 @@ class Index extends Component {
 
   render() {
 
-    console.log('RENDERRRR   '  + this.state.isHidden);
+    // console.log('RENDERRRR   '  + this.state.isHidden);
+    // let url = "https://www.uib.es";
+    // const [statusBarStyle] = 'dark-content';
+    //
+    // const onOpenLink = async () => {
+    //   await this.openLink(url,statusBarStyle);
+    // };
+
     return (
 
       <View style={styles.container}>
         {/* MENU SUPERIOR */}
         <View style={styles.nav} hide={this.state.isHidden}>
-          {/*<Link to="/" style={styles.navItem}>*/}
-          {/*  <Text>Home</Text>*/}
-          {/*</Link>*/}
+          {/*<TouchableOpacity title='clic' onPress={()=> openLink()}>*/}
+          {/*  <View style={styles.navItem}>*/}
+          {/*    <Text>Google</Text>*/}
+          {/*  </View>*/}
+          {/*</TouchableOpacity>*/}
           {/*<Link to="/components" style={styles.navItem}>*/}
           {/*  <Text>Components</Text>*/}
           {/*</Link>*/}

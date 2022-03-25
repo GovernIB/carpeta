@@ -244,7 +244,8 @@ class MenuDesllisant extends Component {
 						allItems.push(
 							<li key={i}>
 								<div>
-									<div className="float-left styleLiniaMenu" style={{transform: "translate(0, 25%)"}}>
+									<div className="float-left styleLiniaMenu" style={{transform: "translate(0, 40%)"}}>
+									{/*<div className="float-left styleLiniaMenu">*/}
 										<img src={urlBase + s.urllogo} className="iconaMenu" title="" alt={s.nom} />
 									</div>
 									<button title={s.missatge} className={"botoMenu margesMenu alert" + s.gravetat + "menu"}

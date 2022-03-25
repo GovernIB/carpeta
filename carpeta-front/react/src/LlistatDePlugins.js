@@ -164,10 +164,10 @@ class LlistatDePlugins extends Component {
                                         pathname: baseSeccio + ((s.tipus == 0) ? Constants.PLUGINREACT_PATH :Constants.PLUGINHTML_PATH)+ s.context,
                                         nomPagina: "plugin"
                                     }} tabIndex={502+i} aria-labelledby={"nomPlug"+i} title={t('accedir') + " " + s.nom}>
-                                    <span className="card-title titol pl-1 h3"><img src={urlBase + s.urllogo}
+                                    <span className="card-title titol pl-1 h3 alignCenter"><img src={urlBase + s.urllogo}
                                                                                     alt={s.nom} title={t('iconaDe') + " " + s.nom}
                                                                                     className="imc-icona"/></span>
-                                    <h3 className="apartat2 titolPlugin titol h3" id={"nomPlug"+i}>{s.nom}</h3>
+                                    <h3 className="apartat2 titolPlugin titol h3 alignCenter" id={"nomPlug"+i}>{s.nom}</h3>
                                     <span className="card-text alignCenter"
                                           style={styleDesc}>{s.descripcio}</span>
                                 </Link>
@@ -201,9 +201,9 @@ class LlistatDePlugins extends Component {
                             <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0">
                                 <Link to={baseSeccio + Constants.SECCIO_PATH + s.context}
                                       className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert`} tabIndex={502+i} aria-labelledby={"nomSecc"+i} title={t('accedir') + " " + s.nom}>
-                                    <span className="card-title titol pl-1 h3"><img src={s.urllogo} alt={s.nom} title={t('iconaDe') + " " + s.nom}
+                                    <span className="card-title titol pl-1 h3 alignCenter"><img src={s.urllogo} alt={s.nom} title={t('iconaDe') + " " + s.nom}
                                                                                     className="imc-icona"/></span>
-                                    <h3 className="apartat2 titolPlugin titol h3" id={"nomSecc"+i}>{s.nom}</h3>
+                                    <h3 className="apartat2 titolPlugin titol h3 alignCenter" id={"nomSecc"+i}>{s.nom}</h3>
                                     <span className="card-text alignCenter"
                                           style={styleDesc}>{s.descripcio}</span>
                                 </Link>
@@ -216,9 +216,9 @@ class LlistatDePlugins extends Component {
                             <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0">
                                 <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert`}
                                         onClick={() => window.open(s.url)} tabIndex={502+i} aria-labelledby={"nomPseudo"+i}>
-                                    <span className="card-title titol pl-1 h3"><img src={s.urllogo} alt={s.nom} title={t('iconaDe') + " " + s.nom}
+                                    <span className="card-title titol pl-1 h3 alignCenter"><img src={s.urllogo} alt={s.nom} title={t('iconaDe') + " " + s.nom}
                                                                                     className="imc-icona"/></span>
-                                    <h3 className="apartat2 titolPlugin titol h3" id={"nomPseudo"+i}>{s.nom}</h3>
+                                    <h3 className="apartat2 titolPlugin titol h3 alignCenter" id={"nomPseudo"+i}>{s.nom}</h3>
                                     <span className="card-text alignCenter"
                                           style={styleDesc}>{s.descripcio}</span>
                                 </button>
