@@ -97,7 +97,7 @@ class DatosAyudaSubvenciones extends Component {
                                 <dt className="col-sm-3">{t('pinbalSubvencionesApellido1')}</dt>
                                 <dd className="col-sm-7">{data.apellido1}</dd>
                             </div>}
-                            {data.apellido2 && <div claclassNamess="mt-3">
+                            {data.apellido2 && <div className="mt-3">
                                 <dt className="col-sm-3">{t('pinbalSubvencionesApellido2')}</dt>
                                 <dd className="col-sm-7">{data.apellido2}</dd>
                             </div>}

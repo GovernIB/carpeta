@@ -85,10 +85,24 @@ class DatosAyudaSubvenciones extends Component {
 				content = <div>
                     {alerta}
                     <div className="contenedorInfoPersonal mt-2">
-                        <div className="col-md-2 pl-0 pr-0 mt-3"><strong>{t('pinbalContratacionesDni')}</strong>{data.dni}</div>
-                        <div className="col-md-3 pl-0 pr-0 mt-3"><strong>{t('pinbalContratacionesNom')}</strong>{data.nombre}</div>
-                        <div className="col-md-3 pl-0 pr-0 mt-3"><strong>{t('pinbalContratacionesApellido1')}</strong>{data.apellido1}</div>
-                        <div className="col-md-3 pl-0 pr-0 mt-3"><strong>{t('pinbalContratacionesApellido2')}</strong>{data.apellido2}</div>
+                        <dl className="row">
+                            {data.dni && <div>
+                                <dt className="col-sm-3">{t('pinbalContratacionesDni')}</dt>
+                                <dd className="col-sm-7">{data.dni}</dd>
+                            </div>}
+                            {data.nombre && <div className="mt-3">
+                                <dt className="col-sm-3">{t('pinbalContratacionesNom')}</dt>
+                                <dd className="col-sm-7">{data.nombre}</dd>
+                            </div>}
+                            {data.apellido1 && <div className="mt-3">
+                                <dt className="col-sm-3">{t('pinbalContratacionesApellido1')}</dt>
+                                <dd className="col-sm-7">{data.apellido1}</dd>
+                            </div>}
+                            {data.apellido2 && <div className="mt-3">
+                                <dt className="col-sm-3">{t('pinbalContratacionesApellido2')}</dt>
+                                <dd className="col-sm-7">{data.apellido2}</dd>
+                            </div>}
+                        </dl>
                     </div>
 				</div>;
 
