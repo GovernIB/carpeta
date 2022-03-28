@@ -401,7 +401,7 @@ class DatosMatricula extends Component {
 
                     {this.state.radioSelectedOption === 'option2' &&
                     <Row className="pt-2">
-                        <Col className="col-xs-12 mb-4">
+                        <Col md={4} xs={12} className="ajustaForm">
                             <Form.Group>
                                 <Form.Label id="tipoDocum">{t('pinbalMatriculaTipusDocument')}</Form.Label>
                                 <Form.Select id="tipusDocument"
@@ -423,7 +423,7 @@ class DatosMatricula extends Component {
                                 </Form.Select>
                             </Form.Group>
                         </Col>
-                        <Col className="col-xs-12 mb-4">
+                        <Col md={4} xs={12} className="ajustaForm">
                             <Form.Group>
                                 <Form.Label>{t('pinbalMatriculaDNI')}</Form.Label>
                                 <Form.Control

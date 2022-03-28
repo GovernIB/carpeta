@@ -85,22 +85,22 @@ class DatosAyudaSubvenciones extends Component {
                     {alerta}
                     <div className="contenedorInfoPersonal mt-2">
                         <dl className="row">
-                            <div>
+                            {data.dni && <div>
                                 <dt className="col-sm-3">{t('pinbalSubvencionesDni')}</dt>
                                 <dd className="col-sm-7">{data.dni}</dd>
-                            </div>
-                            <div class="mt-3">
+                            </div>}
+                            {data.nombre && <div className="mt-3">
                                 <dt className="col-sm-3">{t('pinbalSubvencionesNom')}</dt>
                                 <dd className="col-sm-7">{data.nombre}</dd>
-                            </div>
-                            <div class="mt-3">
+                            </div>}
+                            {data.apellido1 && <div className="mt-3">
                                 <dt className="col-sm-3">{t('pinbalSubvencionesApellido1')}</dt>
                                 <dd className="col-sm-7">{data.apellido1}</dd>
-                            </div>
-                            <div class="mt-3">
+                            </div>}
+                            {data.apellido2 && <div claclassNamess="mt-3">
                                 <dt className="col-sm-3">{t('pinbalSubvencionesApellido2')}</dt>
                                 <dd className="col-sm-7">{data.apellido2}</dd>
-                            </div>
+                            </div>}
                         </dl>
                     </div>
 				</div>;
