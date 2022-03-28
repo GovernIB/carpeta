@@ -1222,6 +1222,9 @@ input.form-control, select.form-control {
 .react-datepicker-popper[data-placement^=top] {
 	padding-bottom: 6em!important;
 }
+.font15 {
+	font-size: 30px;
+}
 }
 
 /*Se aplican cuando el width es menor que 480*/
