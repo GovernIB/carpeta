@@ -182,7 +182,7 @@
           <td id="enllaz_logoID_columnvalueid">
               <form:errors path="enllaz.logoID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,EnllazFields.LOGOID)}" >
-              <a target="_blank" href="<c:url value="${car:fileUrl(logoID.logoID)}"/>">${logoID.logoID.nom}</a>
+              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.enllaz.logo)}"/>">${__theForm.enllaz.logo.nom}</a>
             </c:if>
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,EnllazFields.LOGOID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">

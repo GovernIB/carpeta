@@ -1,6 +1,5 @@
 package es.caib.carpeta.logic;
 
-import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
 

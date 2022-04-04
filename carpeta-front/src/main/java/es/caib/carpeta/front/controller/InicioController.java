@@ -9,6 +9,7 @@ import es.caib.carpeta.front.utils.SesionHttp;
 import es.caib.carpeta.logic.EntitatLogicaService;
 import es.caib.carpeta.logic.UtilitiesForFrontLogicaService;
 import es.caib.carpeta.logic.utils.EjbManager;
+import es.caib.carpeta.model.entity.Ciutada;
 import es.caib.carpeta.model.entity.Idioma;
 import es.caib.carpeta.model.fields.EntitatFields;
 import es.caib.carpeta.persistence.EntitatJPA;
@@ -388,15 +389,33 @@ public class InicioController extends CommonFrontController {
             method = RequestMethod.GET)
     public String homePageAppPostWebLogin(@PathVariable("codiLogin") String codiLogin,
             HttpServletRequest request, HttpServletResponse response)
-            throws I18NException, IOException {
+            throws I18NException, Exception {
 
-        log.info("homePageAppPostWebLogin => ENTRA (codiLogin: " + codiLogin + ")");
+        log.info("\n\nhomePageAppPostWebLogin => ENTRA (codiLogin: " + codiLogin + ")\n\n");
 
         ReactNativeLogin rnl = reactNativeLogins.get(codiLogin);
+        
+        if (rnl == null) {
+            throw new Exception("No trobam cap Login realitzat des de ReactNative amb codi ]" + codiLogin + "[");
+        }
 
         log.info("homePageAppPostWebLogin =>  ReactNativeLogin   (" + rnl + ")");
 
         assignEntitat(rnl.codiEntitat, request, response);
+        
+        String expopushtoken = request.getParameter("expopushtoken");
+        if (expopushtoken == null) {
+           log.warn("A la cridada a /public/homePageAppPostWebLogin no s'ha rebut el parametre /public/homePageAppPostWebLogin", new Exception());
+        } else {
+            
+            UsuarioClave uc = rnl.getUsuarioAutenticado().getUsuarioClave();
+            
+            Ciutada c = utilsEjb.updateMobileIdOfCiutada(uc, expopushtoken);
+            
+            log.info(" Assignat EXPOPUSHTOKEN ]" + expopushtoken + "[ a usuari {" + c.getNif() + " , " + c.getRepresentantNif() + "}");
+            
+        }
+        
 
         request.getSession().setAttribute(SESSION_IS_REACTNATIVE, Boolean.TRUE);
         log.info(" homePageAppPostWebLogin => posant SESSION_IS_REACTNATIVE  a ]"

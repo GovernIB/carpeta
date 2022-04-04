@@ -1,26 +1,26 @@
 package es.caib.carpeta.back.controller.superadmin;
 
-import java.io.*;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 
 import es.caib.carpeta.model.entity.Fitxer;
-import es.caib.carpeta.model.entity.PluginEntitat;
 import es.caib.carpeta.persistence.FitxerJPA;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemHeaders;
-import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;
-import org.fundaciobit.genapp.common.query.ITableManager;
-import org.fundaciobit.genapp.common.query.OrderBy;
-import org.fundaciobit.genapp.common.query.Where;
 import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

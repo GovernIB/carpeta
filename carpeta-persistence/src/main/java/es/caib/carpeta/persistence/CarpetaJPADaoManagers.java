@@ -9,6 +9,7 @@ public final class CarpetaJPADaoManagers implements ICarpetaDaoManagers{
    private final AccesJPAManager car_acces;
    private final AuditoriaJPAManager car_auditoria;
    private final AvisJPAManager car_avis;
+   private final CiutadaJPAManager car_ciutada;
    private final EnllazJPAManager car_enllaz;
    private final EntitatJPAManager car_entitat;
    private final EstadisticaJPAManager car_estadistica;
@@ -28,6 +29,7 @@ public final class CarpetaJPADaoManagers implements ICarpetaDaoManagers{
     this.car_acces = new AccesJPAManager(__em);
     this.car_auditoria = new AuditoriaJPAManager(__em);
     this.car_avis = new AvisJPAManager(__em);
+    this.car_ciutada = new CiutadaJPAManager(__em);
     this.car_enllaz = new EnllazJPAManager(__em);
     this.car_entitat = new EntitatJPAManager(__em);
     this.car_estadistica = new EstadisticaJPAManager(__em);
@@ -54,6 +56,10 @@ public final class CarpetaJPADaoManagers implements ICarpetaDaoManagers{
 
     public IAvisManager getAvisManager() {
         return this.car_avis;
+    };
+
+    public ICiutadaManager getCiutadaManager() {
+        return this.car_ciutada;
     };
 
     public IEnllazManager getEnllazManager() {

@@ -12,11 +12,18 @@
   <form:hidden path="nou" />
   
   <%@include file="avisFormCorePre.jsp" %>
+
   <%@include file="avisFormCore.jsp" %>
 
   <%@include file="avisFormCorePost.jsp" %>
 
   <%@include file="avisFormButtons.jsp" %>
+
+  <c:if test="${not empty avisForm.sections}">
+     <c:set var="__basename" value="avis" scope="page" />
+     <%@include file="sections.jsp"%>
+  </c:if>
+
 
   <c:if test="${avisForm.attachedAdditionalJspCode}">
      <%@include file="../webdbmodificable/avisFormModificable.jsp" %>

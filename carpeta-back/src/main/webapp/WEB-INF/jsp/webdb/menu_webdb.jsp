@@ -28,6 +28,13 @@ ${entityname}
         </span></a>
         </li>
 
+    <%-- Ciutada --%>
+       <fmt:message var="entityname" key="ciutada.ciutada.plural"/>
+        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/ciutada/list/1"/>" ><span style="${(fn:contains(url, 'ciutada/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
+${entityname}
+        </span></a>
+        </li>
+
     <%-- Enllaz --%>
        <fmt:message var="entityname" key="enllaz.enllaz.plural"/>
         <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/enllaz/list/1"/>" ><span style="${(fn:contains(url, 'enllaz/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >

@@ -370,6 +370,19 @@
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/idiomaList.jsp" />
     </definition>
     
+    <definition name="ciutadaFormSuperAdmin" extends="superadmin">
+        <put-attribute name="titol" value="ciutada.ciutada" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/ciutadaForm.jsp" />
+    </definition>
+    
+    <definition name="ciutadaListSuperAdmin" extends="superadmin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/ciutadaList.jsp" />
+    </definition>
+    
+    <definition name="sendmessageSuperAdmin" extends="superadmin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/superadmin/sendmessage.jsp" />
+    </definition>
+    
 
     <!--  ===========  DESENVOLUPAMENT ================== -->
     
@@ -433,6 +446,16 @@
     
     <definition name="avisListWebDB" extends="webdb">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/avisList.jsp" />
+    </definition>
+
+
+    <definition name="ciutadaFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="ciutada.ciutada" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/ciutadaForm.jsp" />
+    </definition>
+    
+    <definition name="ciutadaListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/ciutadaList.jsp" />
     </definition>
 
 

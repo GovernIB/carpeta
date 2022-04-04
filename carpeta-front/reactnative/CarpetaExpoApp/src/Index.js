@@ -12,7 +12,7 @@ import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
 
 import {Button, StyleSheet, Text, View, TouchableOpacity, Linking, Alert} from "react-native";
-import {openLink, tryDeepLinking} from './Utils';
+import {openLink, tryDeepLinking} from './UtilsWeb';
 import { Link, Route, Switch, withRouter } from "./components/Routing";
 
 import Home from "./Home";
@@ -22,7 +22,7 @@ import Plataforma from "./Plataforma";
 import PersistenciaControl from "./PersistenciaControl";
 import ExemplesDeComponents from "./ExemplesDeComponents";
 import {Redirect} from "react-router-dom";
-import {InAppBrowser} from "react-native-inappbrowser-reborn";
+
 
 class Index extends Component {
   constructor(props) {

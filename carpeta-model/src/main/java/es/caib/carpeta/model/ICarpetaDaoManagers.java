@@ -6,6 +6,7 @@ public interface ICarpetaDaoManagers {
 	public IAccesManager getAccesManager();
 	public IAuditoriaManager getAuditoriaManager();
 	public IAvisManager getAvisManager();
+	public ICiutadaManager getCiutadaManager();
 	public IEnllazManager getEnllazManager();
 	public IEntitatManager getEntitatManager();
 	public IEstadisticaManager getEstadisticaManager();

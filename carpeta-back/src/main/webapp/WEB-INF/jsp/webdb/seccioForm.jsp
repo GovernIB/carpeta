@@ -12,11 +12,18 @@
   <form:hidden path="nou" />
   
   <%@include file="seccioFormCorePre.jsp" %>
+
   <%@include file="seccioFormCore.jsp" %>
 
   <%@include file="seccioFormCorePost.jsp" %>
 
   <%@include file="seccioFormButtons.jsp" %>
+
+  <c:if test="${not empty seccioForm.sections}">
+     <c:set var="__basename" value="seccio" scope="page" />
+     <%@include file="sections.jsp"%>
+  </c:if>
+
 
   <c:if test="${seccioForm.attachedAdditionalJspCode}">
      <%@include file="../webdbmodificable/seccioFormModificable.jsp" %>

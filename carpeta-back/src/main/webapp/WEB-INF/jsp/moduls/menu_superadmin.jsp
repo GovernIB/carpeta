@@ -88,6 +88,16 @@
         code="idioma.idioma.plural" /> </span>
 </a>
 
+
+<hr style="margin-top: 6px; margin-bottom: 6px;" />
+
+
+<a class="dropdown-item"
+   href="<c:url value="/superadmin/ciutada/list"/>"> <span
+        style="${(fn:contains(url, '/superadmin/ciutada'))? " font-weight:bold;" : ""}"><spring:message
+        code="ciutada.ciutada.plural" /> </span>
+</a>
+
 <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
 

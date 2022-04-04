@@ -161,7 +161,7 @@
           <td id="entitat_logoCapBackID_columnvalueid">
               <form:errors path="entitat.logoCapBackID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOCAPBACKID)}" >
-              <a target="_blank" href="<c:url value="${car:fileUrl(logoCapBackID.logoCapBackID)}"/>">${logoCapBackID.logoCapBackID.nom}</a>
+              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.entitat.logoCapBack)}"/>">${__theForm.entitat.logoCapBack.nom}</a>
             </c:if>
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOCAPBACKID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">
@@ -213,7 +213,7 @@
           <td id="entitat_logoPeuBackID_columnvalueid">
               <form:errors path="entitat.logoPeuBackID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOPEUBACKID)}" >
-              <a target="_blank" href="<c:url value="${car:fileUrl(logoPeuBackID.logoPeuBackID)}"/>">${logoPeuBackID.logoPeuBackID.nom}</a>
+              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.entitat.logoPeuBack)}"/>">${__theForm.entitat.logoPeuBack.nom}</a>
             </c:if>
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOPEUBACKID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">
@@ -265,7 +265,7 @@
           <td id="entitat_logoLateralFrontID_columnvalueid">
               <form:errors path="entitat.logoLateralFrontID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOLATERALFRONTID)}" >
-              <a target="_blank" href="<c:url value="${car:fileUrl(logoLateralFrontID.logoLateralFrontID)}"/>">${logoLateralFrontID.logoLateralFrontID.nom}</a>
+              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.entitat.logoLateralFront)}"/>">${__theForm.entitat.logoLateralFront.nom}</a>
             </c:if>
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,EntitatFields.LOGOLATERALFRONTID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">
@@ -335,7 +335,7 @@
           <td id="entitat_iconID_columnvalueid">
               <form:errors path="entitat.iconID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.ICONID)}" >
-              <a target="_blank" href="<c:url value="${car:fileUrl(iconID.iconID)}"/>">${iconID.iconID.nom}</a>
+              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.entitat.icon)}"/>">${__theForm.entitat.icon.nom}</a>
             </c:if>
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,EntitatFields.ICONID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">
@@ -651,7 +651,7 @@
           <td id="entitat_fitxerCssID_columnvalueid">
               <form:errors path="entitat.fitxerCssID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,EntitatFields.FITXERCSSID)}" >
-              <a target="_blank" href="<c:url value="${car:fileUrl(fitxerCssID.fitxerCssID)}"/>">${fitxerCssID.fitxerCssID.nom}</a>
+              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.entitat.fitxerCss)}"/>">${__theForm.entitat.fitxerCss.nom}</a>
             </c:if>
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,EntitatFields.FITXERCSSID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">

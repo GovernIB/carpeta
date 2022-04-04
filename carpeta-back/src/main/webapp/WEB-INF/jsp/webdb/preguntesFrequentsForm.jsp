@@ -12,11 +12,18 @@
   <form:hidden path="nou" />
   
   <%@include file="preguntesFrequentsFormCorePre.jsp" %>
+
   <%@include file="preguntesFrequentsFormCore.jsp" %>
 
   <%@include file="preguntesFrequentsFormCorePost.jsp" %>
 
   <%@include file="preguntesFrequentsFormButtons.jsp" %>
+
+  <c:if test="${not empty preguntesFrequentsForm.sections}">
+     <c:set var="__basename" value="preguntesFrequents" scope="page" />
+     <%@include file="sections.jsp"%>
+  </c:if>
+
 
   <c:if test="${preguntesFrequentsForm.attachedAdditionalJspCode}">
      <%@include file="../webdbmodificable/preguntesFrequentsFormModificable.jsp" %>

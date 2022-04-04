@@ -12,11 +12,18 @@
   <form:hidden path="nou" />
   
   <%@include file="auditoriaFormCorePre.jsp" %>
+
   <%@include file="auditoriaFormCore.jsp" %>
 
   <%@include file="auditoriaFormCorePost.jsp" %>
 
   <%@include file="auditoriaFormButtons.jsp" %>
+
+  <c:if test="${not empty auditoriaForm.sections}">
+     <c:set var="__basename" value="auditoria" scope="page" />
+     <%@include file="sections.jsp"%>
+  </c:if>
+
 
   <c:if test="${auditoriaForm.attachedAdditionalJspCode}">
      <%@include file="../webdbmodificable/auditoriaFormModificable.jsp" %>

@@ -3,6 +3,7 @@ package es.caib.carpeta.logic;
 import es.caib.carpeta.model.entity.*;
 import es.caib.carpeta.persistence.EntitatJPA;
 import es.caib.carpeta.persistence.UsuariEntitatJPA;
+import es.caib.carpeta.commons.utils.UsuarioClave;
 import es.caib.carpeta.logic.utils.PluginInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import org.fundaciobit.genapp.common.StringKeyValue;
@@ -62,5 +63,7 @@ public interface UtilitiesForFrontLogicaService {
     public List<UsuariEntitatJPA> getEntitatsByNIF(String nif) throws I18NException;
 
     public List<PreguntesFrequents> getFaqsByEntity(String codiEntitat, String language) throws I18NException;
+    
+    public Ciutada updateMobileIdOfCiutada(UsuarioClave usuariClave, String expoPushToken) throws I18NException;
 
 }

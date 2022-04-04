@@ -1283,7 +1283,6 @@ public class WebUIController extends PluginFrontController {
             
             String fullID = codiEntitat + "_" + seccioContext; // + "_" + lang; ????
             
-            @SuppressWarnings("unchecked")
             Map<String, Map<String, Object>> cacheFullInfo = (Map<String, Map<String, Object>>) request.getSession().getAttribute(SESSION_FULLINFO_MAP);
             
             Map<String, Object> fullInfo = null;
@@ -1420,7 +1419,6 @@ public class WebUIController extends PluginFrontController {
             
             String fullID = codiEntitat + "_" + seccioContext + "_" + autenticat; // + "_" + lang; ???? 
             
-            @SuppressWarnings("unchecked")
             Map<String, Map<String, Object>> cacheFullInfo = (Map<String, Map<String, Object>>) request.getSession().getAttribute(SESSION_FULLINFO_SORTED_MAP);
             
             Map<String, Object> fullInfo = null;

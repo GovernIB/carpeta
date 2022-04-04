@@ -125,7 +125,7 @@
           <td id="seccio_iconaID_columnvalueid">
               <form:errors path="seccio.iconaID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,SeccioFields.ICONAID)}" >
-              <a target="_blank" href="<c:url value="${car:fileUrl(iconaID.iconaID)}"/>">${iconaID.iconaID.nom}</a>
+              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.seccio.icona)}"/>">${__theForm.seccio.icona.nom}</a>
             </c:if>
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,SeccioFields.ICONAID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">

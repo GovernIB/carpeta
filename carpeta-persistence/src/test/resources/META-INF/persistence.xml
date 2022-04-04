@@ -10,6 +10,7 @@
 		<class>es.caib.carpeta.persistence.AccesJPA</class>
 		<class>es.caib.carpeta.persistence.AuditoriaJPA</class>
 		<class>es.caib.carpeta.persistence.AvisJPA</class>
+		<class>es.caib.carpeta.persistence.CiutadaJPA</class>
 		<class>es.caib.carpeta.persistence.EnllazJPA</class>
 		<class>es.caib.carpeta.persistence.EntitatJPA</class>
 		<class>es.caib.carpeta.persistence.EstadisticaJPA</class>

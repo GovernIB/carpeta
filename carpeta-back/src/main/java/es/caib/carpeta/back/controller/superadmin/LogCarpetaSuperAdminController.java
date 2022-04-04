@@ -1,6 +1,5 @@
 package es.caib.carpeta.back.controller.superadmin;
 
-import es.caib.carpeta.model.fields.AccesFields;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Field;

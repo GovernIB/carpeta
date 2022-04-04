@@ -12,11 +12,18 @@
   <form:hidden path="nou" />
   
   <%@include file="enllazFormCorePre.jsp" %>
+
   <%@include file="enllazFormCore.jsp" %>
 
   <%@include file="enllazFormCorePost.jsp" %>
 
   <%@include file="enllazFormButtons.jsp" %>
+
+  <c:if test="${not empty enllazForm.sections}">
+     <c:set var="__basename" value="enllaz" scope="page" />
+     <%@include file="sections.jsp"%>
+  </c:if>
+
 
   <c:if test="${enllazForm.attachedAdditionalJspCode}">
      <%@include file="../webdbmodificable/enllazFormModificable.jsp" %>

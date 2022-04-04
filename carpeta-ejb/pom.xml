@@ -49,6 +49,12 @@
         
         <!--   LOGIC DEPENDENCIES -->
         <dependency>
+            <groupId>io.github.jav</groupId>
+            <artifactId>expo-server-sdk</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+        
+        <dependency>
             <artifactId>carpeta-pluginsib-carpetafront-api</artifactId>
             <groupId>es.caib.carpeta</groupId>
             <version>${project.version}</version>

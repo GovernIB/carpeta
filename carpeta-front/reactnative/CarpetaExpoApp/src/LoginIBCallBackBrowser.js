@@ -9,6 +9,7 @@ import React from 'react';
 import {StyleSheet, ScrollView, Text} from 'react-native';
 import VistaWebComponent from './components/VistaWebComponent';
 import Persistencia from './Persistencia';
+import { sessionStorageRN } from "./SessionStorageClass";
 
 class LoginIBCallBackBrowser extends React.Component {
   constructor(props) {
@@ -36,6 +37,14 @@ class LoginIBCallBackBrowser extends React.Component {
 
     var loginUrl =
       this.state.urlcarpeta + '/public/homePageAppPostWebLogin/' + this.props.codilogin;
+
+    var expoPushToken = sessionStorageRN.getItem("expoPushToken");
+    if (!expoPushToken) {
+      console.error("ExpoPushToken no definit !!! No s'envia al servidro :-(")
+    } else {
+      console.log("Enviant ExpoPushToken al Servidor: " + expoPushToken);
+      loginUrl = loginUrl + "?expopushtoken=" + encodeURIComponent(expoPushToken);
+    }
 
     console.log('LOGINIB CALLBACK => Obrint URL ' + loginUrl);
 

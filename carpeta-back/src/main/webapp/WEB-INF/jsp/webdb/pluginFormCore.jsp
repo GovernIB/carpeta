@@ -173,7 +173,7 @@
           <td id="plugin_logoID_columnvalueid">
               <form:errors path="plugin.logoID" cssClass="errorField alert alert-danger" />
             <c:if test="${gen:contains(__theForm.readOnlyFields ,PluginFields.LOGOID)}" >
-              <a target="_blank" href="<c:url value="${car:fileUrl(logoID.logoID)}"/>">${logoID.logoID.nom}</a>
+              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.plugin.logo)}"/>">${__theForm.plugin.logo.nom}</a>
             </c:if>
             <c:if test="${!gen:contains(__theForm.readOnlyFields ,PluginFields.LOGOID)}" >
               <div class="input-group col-md-9-optional" style="padding: 0px">
