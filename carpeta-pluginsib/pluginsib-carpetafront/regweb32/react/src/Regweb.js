@@ -33,13 +33,13 @@ class Regweb extends Component {
             filter_startDate: startDateObj,
             filter_endDate: endDateObj,
             filter_status: 0,
-            filter_regPorPagina: 10,
+            filter_regPorPagina: 5,
             pagination_active: 1,
-            pagination_total_items: 10,
+            pagination_total_items: 5,
             numeroRegistro: null,
             error: null,
             criteriosTexto: '',
-            cercaRegistres: 10
+            cercaRegistres: 5
         };
 
         this.handleNumberFilterParam = this.handleNumberFilterParam.bind(this);
@@ -225,7 +225,8 @@ class Regweb extends Component {
                 isLoaded: false,
                 error: null,
                 numeroRegistro: null,
-                cercaRegistres: this.state.filter_regPorPagina
+                cercaRegistres: this.state.filter_regPorPagina,
+                data: null
             });  
 
             const url2 = this.props.pathtoservei;
@@ -236,7 +237,7 @@ class Regweb extends Component {
                 fechaFin: this.state.filter_endDate,
                 estado: this.state.filter_status,
                 registrosPorPagina: this.state.filter_regPorPagina,
-                pageNumber: this.state.pagination_active-1
+                pageNumber: 0
             };
 
             axios.get(url2, {params: params}).then( (response) => {

@@ -25,14 +25,14 @@ class Notib extends Component {
             urldetallbase: null,
             urldetallbase2: null,
             urldetallbase3: null,
-            filter_regPorPagina: 10,
+            filter_regPorPagina: 5,
             filter_type: '0',
             filter_status: '0',
             pagination_active: 1,
-            pagination_total_items: 10,
+            pagination_total_items: 5,
             total_items: 0,
             error: null,
-            cercaRegistres: 10,
+            cercaRegistres: 5,
             missatgeBuid: i18n.t('notibBuid')
         };
 
@@ -272,7 +272,8 @@ class Notib extends Component {
             ...this.state,
             isLoaded: false,
             error: null,
-            cercaRegistres: this.state.filter_regPorPagina
+            cercaRegistres: this.state.filter_regPorPagina,
+            dataComunicacions: null
         });
 
 
@@ -313,7 +314,7 @@ class Notib extends Component {
 
         const params = {
             registrosPorPagina: this.state.filter_regPorPagina,
-            pageNumber: this.state.pagination_active-1,
+            pageNumber: 0,
             tipo: this.state.filter_type,
             estado: this.state.filter_status
         };
@@ -484,7 +485,7 @@ class Notib extends Component {
                         </div>
                     </Row>
                     <Row className="col-md-3 pl-0 row" style={{zIndex: '4'}}>
-                        <Button type="submit" id="botoSubmit" className="btn btn-primary carpeta-btn ml-3 mt-2" onClick={e => {this.handleSubmitSearcher(e)}} tabindex="505">{t('carpeta_buscar')}</Button>
+                        <Button type="submit" id="botoSubmit" className="btn btn-primary carpeta-btn ml-3 mt-2" onClick={(e) => {this.handleSubmitSearcher(e)}} tabindex="505">{t('carpeta_buscar')}</Button>
                     </Row>
                 </Container>
             </Form>

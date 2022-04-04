@@ -33,12 +33,12 @@ class Sistra extends Component {
             dataFi: endDateObj,
             estat: 'A',
             pagination_active: 1,
-            pagination_total_items: 10,
+            pagination_total_items: 5,
             total_items: 0,
             numeroRegistro: null,
             error: null,
-            filter_regPorPagina: 10,
-            cercaRegistres: 10
+            filter_regPorPagina: 5,
+            cercaRegistres: 5
         };
 
         this.handleChangeDataInici = this.handleChangeDataInici.bind(this);
@@ -209,7 +209,8 @@ class Sistra extends Component {
             this.setState({
                 ...this.state,
                 isLoaded: false,
-                cercaRegistres: this.state.filter_regPorPagina
+                cercaRegistres: this.state.filter_regPorPagina,
+                data: null
             });
 
             e.preventDefault();
