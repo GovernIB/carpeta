@@ -242,7 +242,7 @@ class DetallRegistre extends Component {
                                                 </> }
 
                                                 <dt className="col-sm-3 pb-2">{t('registro_presencial')}</dt>
-                                                <dd className="col-sm-7">{ registre.presencial == 'true' ? 'Sí' :  'No'}</dd>
+                                                <dd className="col-sm-7">{ registre.presencial === true ? 'Sí' :  'No'}</dd>
 
                                                 { registre.codigoSia  && <>
                                                 <dt className="col-sm-3 pb-2">{t('registro_codigoSia')}</dt>
@@ -318,7 +318,7 @@ class DetallRegistre extends Component {
                                         <div className="row no-gutters align-items-center">
                                             <div className="col mr-2 font15">
                                                 <h3 className="font-weight-bold verde text-uppercase mb-3 text-center h3">{t('registro_anexos')}</h3>
-                                                { registre.anexos.length > 0 &&
+                                                { registre.anexos && registre.anexos.length > 0 &&
                                                 <Table hover className="table-sm">
                                                     <thead>
                                                         <tr>
@@ -342,7 +342,8 @@ class DetallRegistre extends Component {
                                                         </tr> ) }
                                                     </tbody>
                                                 </Table> }
-                                                { registre.anexos.length < 1 && <p className="text-center">{t('registro_anexos_vacio')}</p>}
+                                                { registre.anexos && registre.anexos.length < 1 && <p className="text-center">{t('registro_anexos_vacio')}</p>}
+                                                { !registre.anexos && <p className="text-center">{t('registro_anexos_vacio')}</p>}
                                             </div>
                                         </div>
                                     </div>

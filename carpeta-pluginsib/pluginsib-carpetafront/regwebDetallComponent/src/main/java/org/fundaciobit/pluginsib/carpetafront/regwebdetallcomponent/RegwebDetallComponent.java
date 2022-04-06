@@ -290,7 +290,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
         Gson json = new Gson();
         String generat = json.toJson(dades);
         
-        log.info("Generat: " + generat);
+//        log.info("Generat: " + generat);
         
         try {
             response.getWriter().println(generat);
