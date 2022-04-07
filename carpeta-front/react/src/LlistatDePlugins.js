@@ -269,6 +269,22 @@ class LlistatDePlugins extends Component {
             </div>;
         }
 
+        let avisosPlugins =[];
+        this.state.items.forEach((s, i) => {
+            if(s.gravetat !== 0) {
+                avisosPlugins.push(
+                    <div key={i + 10} className={`alert avis${s.gravetat} alert-dismissible fade show`} role="alert"
+                         id={"tancarAvis" + i + 10}>
+                        {s.missatge}
+                        <button type="button" className="close" data-dismiss="alert" aria-label={t('tancar')}
+                                aria-describedby={"tancarAvis" + i + 10} tabIndex={451 + i + 10}>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                )
+            }
+        })
+
         return (
 
             <div className="row mr-0 ml-0">
@@ -282,6 +298,8 @@ class LlistatDePlugins extends Component {
                     <div className="col-md-12 border-0 pl-0 pr-0">
 
                         <p className="lh15 subtitol">{subtitolHeader}</p>
+
+                        {avisosPlugins}
 
                         <div className="card-body imc--llista--capses">
 
