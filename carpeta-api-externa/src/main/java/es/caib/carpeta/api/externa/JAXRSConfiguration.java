@@ -1,47 +1,54 @@
 package es.caib.carpeta.api.externa;
 
-import org.eclipse.microprofile.openapi.annotations.OpenAPIDefinition;
-import org.eclipse.microprofile.openapi.annotations.info.Info;
-import org.eclipse.microprofile.openapi.annotations.servers.Server;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import io.swagger.v3.oas.annotations.ExternalDocumentation;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.extensions.Extension;
+import io.swagger.v3.oas.annotations.extensions.ExtensionProperty;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.info.License;
+import io.swagger.v3.oas.annotations.servers.Server;
 
 import javax.annotation.PostConstruct;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
+import org.apache.log4j.Logger;
+
 /**
- * Configuració de l'aplicació JAX-RS. Es pot fer mitjançant aquesta subclasse de {@link Application} o
- * mitjançant la configuració a web.xml. Fer-ho amb una subclasse permet posar-hi anotacions de OpenApi.
- * Aquí fixam la informació general d'OpenAPI, la ubicació del servidor (o servidors) que bàsicament és el
- * contextpath, els sistemes d'autenticació admesos....
- * <p>
- * Al package services hi ha les classes amb els endpoints dels recursos.
- * Segueix les convencions més comunes de les apis REST, es pot trobar una bona descripció aquí:
- * https://restfulapi.net/http-methods/
- * Els mètodes de consulta GET, retornen un 200 amb la informació o 404 si no es troba.
- * Els mètodes de creació, POST, retornen un 201 amb la capçalera 'location' cap al nou recurs.
- * Els mètodes d'actualització/borrat, PUT/DELETE, retornen un 204 si ha anat bé (ja que no retornen cap entity),
- * o 404 si no es troba el recurs.
+ * 
+ * @author anadal
  *
- * @author areus
  */
-@ApplicationPath("/services")
 @OpenAPIDefinition(
-        info = @Info(title = "API REST EXTERNA", version = "1.0.0"),
-        servers = {
-                @Server(url = "/carpetaapi/externa")
-        }
+        info = @Info(
+                title = "API REST EXTERNA de Carpeta",
+                description = "Conjunt de Serveis REST de Carpeta per ser accedits des de l'exterior", 
+                version = "1.0.0",
+                license = @License(
+                        name = "License Apache 2.0",
+                        url = "http://www.apache.org/licenses/LICENSE-2.0"),
+                contact = @Contact(
+                        name = "Departament de Govern Digital a la Fundació Bit",
+                        email = "governdigital.carpeta@fundaciobit.org",
+                        url = "http://otae.fundaciobit.org")
+
+        ),
+        servers = { @Server(url = "http://localhost:8080/carpetaapi/externa") },
+        externalDocs = @ExternalDocumentation(
+                description = "Java Client (GovernIB Github)",
+                url = "https://github.com/GovernIB/carpeta/tree/carpeta-1.1/carpeta-api-externa-client")
+
 )
+@ApplicationPath("/")
 public class JAXRSConfiguration extends Application {
 
-    private static final Logger LOG = LoggerFactory.getLogger(JAXRSConfiguration.class);
+    protected Logger log = org.apache.log4j.Logger.getLogger(this.getClass());
 
     /**
      * Les aplicacions JAX-RS necessiten un constructor buid.
      */
     public JAXRSConfiguration() {
-
     }
 
     /**
@@ -49,6 +56,7 @@ public class JAXRSConfiguration extends Application {
      */
     @PostConstruct
     private void init() {
-        LOG.info("Iniciant API REST EXTERNA");
+        log.info("Iniciant API REST EXTERNA");
     }
+
 }

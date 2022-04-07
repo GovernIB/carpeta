@@ -22,8 +22,8 @@ import es.caib.carpeta.back.controller.webdb.CiutadaController;
 import es.caib.carpeta.back.form.webdb.CiutadaFilterForm;
 import es.caib.carpeta.back.form.webdb.CiutadaForm;
 import es.caib.carpeta.logic.CiutadaLogicaService;
-import es.caib.carpeta.logic.utils.SendExpoNotification;
-import es.caib.carpeta.logic.utils.SendExpoNotification.ResultSendNotification;
+import es.caib.carpeta.logic.utils.SendNotificationToMobile;
+import es.caib.carpeta.logic.utils.SendNotificationResult;
 
 /**
  * 
@@ -112,9 +112,9 @@ public class CiutadaSuperAdminController extends CiutadaController {
 
         String mobileId = ciutadaLogicaEjb.executeQueryOne(MOBILEID, CIUTADAID.equal(ciutadaid));
         
-        ResultSendNotification result = SendExpoNotification.sendMessageToMobile(mobileId, titol, missatge, codeToDo);
+        SendNotificationResult result = SendNotificationToMobile.sendMessageToMobile(mobileId, titol, missatge, codeToDo);
         
-        if (result.getEstatEnviat() == true && result.getEstatRebut() == true) {
+        if (result.isEstatEnviat() == true && result.isEstatRebut() == true) {
             HtmlUtils.saveMessageSuccess(request, result.toString().replace("\n", "<br>"));    
         } else {
             HtmlUtils.saveMessageSuccess(request, result.toString().replace("\n", "<br>"));

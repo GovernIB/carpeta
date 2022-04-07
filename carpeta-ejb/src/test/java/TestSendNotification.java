@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import es.caib.carpeta.logic.utils.SendExpoNotification;
-import es.caib.carpeta.logic.utils.SendExpoNotification.ResultSendNotification;
+import es.caib.carpeta.logic.utils.SendNotificationToMobile;
+import es.caib.carpeta.logic.utils.SendNotificationResult;
 
 /**
  * 
@@ -31,7 +31,7 @@ public class TestSendNotification {
             
             Map<String, Object> data = new HashMap<String, Object>();
             data.put("code", code);
-            ResultSendNotification result = SendExpoNotification.sendMessageToMobile(mobileid, title, message, data);
+            SendNotificationResult result = SendNotificationToMobile.sendMessageToMobile(mobileid, title, message, data);
 
             System.out.println(result);
 

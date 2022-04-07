@@ -5,14 +5,39 @@
          version="4.0">
 
     <display-name>Carpeta: API REST EXTERNA</display-name>
+ 
 
     <!-- Paràmetre que indica els locales soportats -->
     <context-param>
         <param-name>es.caib.carpeta.commons.rest.supportedLocales</param-name>
         <param-value>ca,es</param-value>
     </context-param>
-    
-    
+
+    <!-- All html files at any path -->
+    <!-- Specifically index.html at the root -->
+    <servlet-mapping>   
+        <servlet-name>default</servlet-name>
+        <url-pattern>/index.html</url-pattern>        
+        <url-pattern>/openapi.json</url-pattern>
+        <url-pattern>/index.css</url-pattern>
+        <url-pattern>/favicon-32x32.png</url-pattern>
+        <url-pattern>/favicon-16x16.png</url-pattern>
+        <url-pattern>/oauth2-redirect.html</url-pattern>
+        <url-pattern>/swagger-initializer.js</url-pattern>
+        <url-pattern>/swagger-ui-bundle.js</url-pattern>
+        <url-pattern>/swagger-ui-bundle.js.map</url-pattern>
+        <url-pattern>/swagger-ui-es-bundle-core.js</url-pattern>
+        <url-pattern>/swagger-ui-es-bundle-core.js.map</url-pattern>
+        <url-pattern>/swagger-ui-es-bundle.js</url-pattern>
+        <url-pattern>/swagger-ui-es-bundle.js.map</url-pattern>
+        <url-pattern>/swagger-ui-standalone-preset.js</url-pattern>
+        <url-pattern>/swagger-ui-standalone-preset.js.map</url-pattern>
+        <url-pattern>/swagger-ui.css</url-pattern>
+        <url-pattern>/swagger-ui.css.map</url-pattern>
+        <url-pattern>/swagger-ui.js</url-pattern>
+        <url-pattern>/swagger-ui.js.map</url-pattern>
+    </servlet-mapping>
+
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>carpeta_api_externa_secured</web-resource-name>
