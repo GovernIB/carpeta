@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2022-04-07T12:06:29.340578800+02:00[Europe/Paris]")public class NotificacionsApi {
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2022-04-08T07:41:33.125270+02:00[Europe/Paris]")public class NotificacionsApi {
   private ApiClient apiClient;
 
   public NotificacionsApi() {
@@ -40,11 +40,11 @@ import java.util.Map;
    * @return Boolean
    * @throws ApiException if fails to make API call
    */
-  public Boolean existciutada(String nif, String lang) throws ApiException {
+  public Boolean existCiutada(String nif, String lang) throws ApiException {
     Object localVarPostBody = null;
     // verify the required parameter 'nif' is set
     if (nif == null) {
-      throw new ApiException(400, "Missing the required parameter 'nif' when calling existciutada");
+      throw new ApiException(400, "Missing the required parameter 'nif' when calling existCiutada");
     }
     // create path and map variables
     String localVarPath = "/secure/mobilenotification/existciutada".replaceAll("\\{format\\}","json");
@@ -83,19 +83,19 @@ import java.util.Map;
    * @return String
    * @throws ApiException if fails to make API call
    */
-  public String sendmessage(String nif, String title, String message, String lang) throws ApiException {
+  public String sendMessage(String nif, String title, String message, String lang) throws ApiException {
     Object localVarPostBody = null;
     // verify the required parameter 'nif' is set
     if (nif == null) {
-      throw new ApiException(400, "Missing the required parameter 'nif' when calling sendmessage");
+      throw new ApiException(400, "Missing the required parameter 'nif' when calling sendMessage");
     }
     // verify the required parameter 'title' is set
     if (title == null) {
-      throw new ApiException(400, "Missing the required parameter 'title' when calling sendmessage");
+      throw new ApiException(400, "Missing the required parameter 'title' when calling sendMessage");
     }
     // verify the required parameter 'message' is set
     if (message == null) {
-      throw new ApiException(400, "Missing the required parameter 'message' when calling sendmessage");
+      throw new ApiException(400, "Missing the required parameter 'message' when calling sendMessage");
     }
     // create path and map variables
     String localVarPath = "/secure/mobilenotification/sendmessage".replaceAll("\\{format\\}","json");

@@ -4,12 +4,12 @@ All URIs are relative to *http://localhost:8080/carpetaapi/externa*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**existciutada**](NotificacionsApi.md#existciutada) | **GET** /secure/mobilenotification/existciutada | Consulta si tenim donat d&#x27;alta el mòbil d&#x27;un ciutadà/empresa a partir del seu NIF.
-[**sendmessage**](NotificacionsApi.md#sendmessage) | **GET** /secure/mobilenotification/sendmessage | Envia un missatge al mòbil del ciutada a traves de l&#x27;App de Carpeta.
+[**existCiutada**](NotificacionsApi.md#existCiutada) | **GET** /secure/mobilenotification/existciutada | Consulta si tenim donat d&#x27;alta el mòbil d&#x27;un ciutadà/empresa a partir del seu NIF.
+[**sendMessage**](NotificacionsApi.md#sendMessage) | **GET** /secure/mobilenotification/sendmessage | Envia un missatge al mòbil del ciutada a traves de l&#x27;App de Carpeta.
 
-<a name="existciutada"></a>
-# **existciutada**
-> Boolean existciutada(nif, lang)
+<a name="existCiutada"></a>
+# **existCiutada**
+> Boolean existCiutada(nif, lang)
 
 Consulta si tenim donat d&#x27;alta el mòbil d&#x27;un ciutadà/empresa a partir del seu NIF.
 
@@ -24,10 +24,10 @@ NotificacionsApi apiInstance = new NotificacionsApi();
 String nif = "nif_example"; // String | NIF del Ciutadà o l'entitat
 String lang = "lang_example"; // String | Codi de l'idioma
 try {
-    Boolean result = apiInstance.existciutada(nif, lang);
+    Boolean result = apiInstance.existCiutada(nif, lang);
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling NotificacionsApi#existciutada");
+    System.err.println("Exception when calling NotificacionsApi#existCiutada");
     e.printStackTrace();
 }
 ```
@@ -52,9 +52,9 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
-<a name="sendmessage"></a>
-# **sendmessage**
-> String sendmessage(nif, title, message, lang)
+<a name="sendMessage"></a>
+# **sendMessage**
+> String sendMessage(nif, title, message, lang)
 
 Envia un missatge al mòbil del ciutada a traves de l&#x27;App de Carpeta.
 
@@ -71,10 +71,10 @@ String title = "title_example"; // String | Títol de la notificació
 String message = "message_example"; // String | Missatge de la notificació
 String lang = "lang_example"; // String | Codi de l'idioma
 try {
-    String result = apiInstance.sendmessage(nif, title, message, lang);
+    String result = apiInstance.sendMessage(nif, title, message, lang);
     System.out.println(result);
 } catch (ApiException e) {
-    System.err.println("Exception when calling NotificacionsApi#sendmessage");
+    System.err.println("Exception when calling NotificacionsApi#sendMessage");
     e.printStackTrace();
 }
 ```
