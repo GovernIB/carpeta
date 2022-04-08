@@ -14,29 +14,25 @@ package es.caib.carpeta.apiexterna.client.api;
 
 import es.caib.carpeta.apiexterna.client.services.ApiClient;
 import es.caib.carpeta.apiexterna.client.services.ApiException;
-import es.caib.carpeta.apiexterna.client.services.auth.Authentication;
 import es.caib.carpeta.apiexterna.client.services.auth.HttpBasicAuth;
-
 import org.junit.Test;
-
 import java.io.FileInputStream;
-import java.lang.reflect.Field;
-import java.util.HashMap;
 import java.util.Properties;
 
 import org.junit.Ignore;
 
-
 /**
  * API tests for NotificacionsApi
+ * 
+ * @author anadal
  */
 @Ignore
 public class NotificacionsApiTest {
 
     private NotificacionsApi apiNotif = null;
-    
+
     private String nifTest;
-    
+
     public static void main(String[] args) {
         try {
             new NotificacionsApiTest().existCiutadaTest();
@@ -44,69 +40,59 @@ public class NotificacionsApiTest {
             e.printStackTrace();
         }
     }
-    
-    
-    
-    
+
     protected NotificacionsApi getNotificacionsApi() throws Exception {
-        
+
         if (apiNotif == null) {
-            
-            ApiClient apiClient = new ApiClient();
-            
-            Field authenticationsField = apiClient.getClass().getDeclaredField("authentications");
-            authenticationsField.setAccessible(true);
-            authenticationsField.set(apiClient, new HashMap<String, Authentication>());
-            
+
             Properties prop = new Properties();
             prop.load(new FileInputStream("connection.properties"));
-            
-            apiClient.setBasePath(prop.getProperty("urlbase"));
-            
-            
-            HttpBasicAuth basicAuth = new HttpBasicAuth();
-            basicAuth.setUsername(prop.getProperty("username"));
-            basicAuth.setPassword(prop.getProperty("password"));
-            apiClient.getAuthentications().put("basic", new HttpBasicAuth());
-            
-            
+            String urlBase = prop.getProperty("urlbase");
+            String username = prop.getProperty("username");
+            String password = prop.getProperty("password");
             nifTest = prop.getProperty("niftest");
-            
+
+            ApiClient apiClient = new ApiClient();
+            apiClient.setBasePath(urlBase);
+            HttpBasicAuth basicAuth = (HttpBasicAuth) apiClient.getAuthentication("BasicAuth");
+            basicAuth.setUsername(username);
+            basicAuth.setPassword(password);
+
             apiNotif = new NotificacionsApi(apiClient);
-        
+
         }
         return apiNotif;
     }
 
     /**
-     * Consulta si tenim donat d&#x27;alta el mòbil d&#x27;un ciutadà/empresa a partir del seu NIF.
+     * Consulta si tenim donat d&#x27;alta el mòbil d&#x27;un ciutadà/empresa a
+     * partir del seu NIF.
      *
      * 
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void existCiutadaTest() throws Exception {
 
         NotificacionsApi api = getNotificacionsApi();
-        
+
         String nif = this.nifTest;
         String lang = null;
-        
+
         System.out.println("Cridant existCiutadaTest(" + nif + ") ");
         Boolean response = api.existCiutada(nif, lang);
 
         System.out.println("existCiutadaTest(" + nif + ") => " + response);
         // TODO: test validations
     }
+
     /**
      * Envia un missatge al mòbil del ciutada a traves de l&#x27;App de Carpeta.
      *
      * 
      *
-     * @throws ApiException
-     *          if the Api call fails
+     * @throws ApiException if the Api call fails
      */
     @Test
     public void sendMessageTest() throws Exception {

@@ -18,7 +18,7 @@ public class StartUpBean {
     protected final Logger log = Logger.getLogger(this.getClass());
 
     @PostConstruct
-    public void start() throws Exception {
+    public void start() {
         log.info("\n\n ---------------------------------\n"
                 + "      PASSA PER STARTUP\n -----------------------------------\n\n");
 

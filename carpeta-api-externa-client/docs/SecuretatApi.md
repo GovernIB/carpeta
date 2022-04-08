@@ -15,9 +15,17 @@ Fa un ECHO
 ### Example
 ```java
 // Import classes:
+//import es.caib.carpeta.apiexterna.client.services.ApiClient;
 //import es.caib.carpeta.apiexterna.client.services.ApiException;
+//import es.caib.carpeta.apiexterna.client.services.Configuration;
+//import es.caib.carpeta.apiexterna.client.services.auth.*;
 //import es.caib.carpeta.apiexterna.client.api.SecuretatApi;
 
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+// Configure HTTP basic authorization: BasicAuth
+HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
+BasicAuth.setUsername("YOUR USERNAME");
+BasicAuth.setPassword("YOUR PASSWORD");
 
 SecuretatApi apiInstance = new SecuretatApi();
 String echoInput = "echoInput_example"; // String | Cadena a retornar
@@ -42,7 +50,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[BasicAuth](../README.md#BasicAuth)
 
 ### HTTP request headers
 

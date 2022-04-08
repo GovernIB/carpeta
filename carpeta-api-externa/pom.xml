@@ -161,10 +161,16 @@
                                 <useTags>true</useTags>
                             </configOptions>
 
-                            <!-- <ignoreFileOverride>${project.basedir}/.swagger-codegen-ignore</ignoreFileOverride> 
-                                ** AMOLLA DOCUMENTACIO PER PANTALLA*** <configHelp>true</configHelp> <library>jersey2</library> 
-                                <library>resttemplate</library> <configOptions> <dateLibrary>joda</dateLibrary> 
-                                </configOptions> <supportingFilesToGenerate>mvn</supportingFilesToGenerate> -->
+                            <!-- <ignoreFileOverride>${project.basedir}/.swagger-codegen-ignore</ignoreFileOverride> -->
+                            <!--    ** AMOLLA AJUDA D'AQUEST PLUGIN PER PANTALLA***  -->
+							<!-- <configHelp>true</configHelp> -->
+							<!--<library>jersey2</library>  -->
+							<!--<library>resttemplate</library>  -->
+							<!--<configOptions>  -->
+							<!--    <dateLibrary>joda</dateLibrary>  -->
+                            <!--</configOptions>  -->
+							<!--<supportingFilesToGenerate>mvn</supportingFilesToGenerate> -->
+							<hideGenerationTimestamp>true</hideGenerationTimestamp>
                             <addCompileSourceRoot>false</addCompileSourceRoot>
                             <output>${project.basedir}/../carpeta-api-externa-client</output>
                             <apiPackage>${client.default.package}.api</apiPackage>
@@ -227,7 +233,7 @@
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                    <webResources combine.children="append">
+                    <webResources><!--  combine.children="append">  -->
                         <resource>
                             <directory>${project.build.directory}/swagger-ui-${swagger-ui.version}/dist</directory>
                         </resource>

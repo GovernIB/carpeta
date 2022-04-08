@@ -16,9 +16,17 @@ Consulta si tenim donat d&#x27;alta el mòbil d&#x27;un ciutadà/empresa a parti
 ### Example
 ```java
 // Import classes:
+//import es.caib.carpeta.apiexterna.client.services.ApiClient;
 //import es.caib.carpeta.apiexterna.client.services.ApiException;
+//import es.caib.carpeta.apiexterna.client.services.Configuration;
+//import es.caib.carpeta.apiexterna.client.services.auth.*;
 //import es.caib.carpeta.apiexterna.client.api.NotificacionsApi;
 
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+// Configure HTTP basic authorization: BasicAuth
+HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
+BasicAuth.setUsername("YOUR USERNAME");
+BasicAuth.setPassword("YOUR PASSWORD");
 
 NotificacionsApi apiInstance = new NotificacionsApi();
 String nif = "nif_example"; // String | NIF del Ciutadà o l'entitat
@@ -45,7 +53,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[BasicAuth](../README.md#BasicAuth)
 
 ### HTTP request headers
 
@@ -61,9 +69,17 @@ Envia un missatge al mòbil del ciutada a traves de l&#x27;App de Carpeta.
 ### Example
 ```java
 // Import classes:
+//import es.caib.carpeta.apiexterna.client.services.ApiClient;
 //import es.caib.carpeta.apiexterna.client.services.ApiException;
+//import es.caib.carpeta.apiexterna.client.services.Configuration;
+//import es.caib.carpeta.apiexterna.client.services.auth.*;
 //import es.caib.carpeta.apiexterna.client.api.NotificacionsApi;
 
+ApiClient defaultClient = Configuration.getDefaultApiClient();
+// Configure HTTP basic authorization: BasicAuth
+HttpBasicAuth BasicAuth = (HttpBasicAuth) defaultClient.getAuthentication("BasicAuth");
+BasicAuth.setUsername("YOUR USERNAME");
+BasicAuth.setPassword("YOUR PASSWORD");
 
 NotificacionsApi apiInstance = new NotificacionsApi();
 String nif = "nif_example"; // String | NIF del Ciutadà o l'entitat
@@ -94,7 +110,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[BasicAuth](../README.md#BasicAuth)
 
 ### HTTP request headers
 

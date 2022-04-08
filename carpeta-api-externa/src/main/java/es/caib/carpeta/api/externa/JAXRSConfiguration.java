@@ -2,8 +2,6 @@ package es.caib.carpeta.api.externa;
 
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.extensions.Extension;
-import io.swagger.v3.oas.annotations.extensions.ExtensionProperty;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
@@ -56,7 +54,7 @@ public class JAXRSConfiguration extends Application {
      */
     @PostConstruct
     private void init() {
-        log.info("Iniciant API REST EXTERNA");
+        log.info("Iniciant API REST EXTERNA de Carpeta");
     }
 
 }
