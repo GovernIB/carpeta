@@ -12,7 +12,7 @@
 
 package es.caib.carpeta.apiinterna.client.services;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2022-04-08T12:18:47.927646300+02:00[Europe/Paris]")public class Pair {
+public class Pair {
     private String name = "";
     private String value = "";
 

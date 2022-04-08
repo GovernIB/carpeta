@@ -147,6 +147,7 @@
                                 <artifactVersion>1.1</artifactVersion>
                                 <dateLibrary>joda</dateLibrary>
                                 <useTags>true</useTags>
+								<hideGenerationTimestamp>true</hideGenerationTimestamp>
                             </configOptions>
 
                             <!-- <ignoreFileOverride>${project.basedir}/.swagger-codegen-ignore</ignoreFileOverride> -->
@@ -157,8 +158,7 @@
 							<!--<configOptions>  -->
 							<!--    <dateLibrary>joda</dateLibrary>  -->
                             <!--</configOptions>  -->
-							<!--<supportingFilesToGenerate>mvn</supportingFilesToGenerate> -->
-							<hideGenerationTimestamp>true</hideGenerationTimestamp>
+							<!--<supportingFilesToGenerate>mvn</supportingFilesToGenerate> -->							
                             <addCompileSourceRoot>false</addCompileSourceRoot>
                             <output>${project.basedir}/../carpeta-api-interna-client</output>
                             <apiPackage>${client.default.package}.api</apiPackage>

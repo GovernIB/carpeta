@@ -15,7 +15,7 @@ package es.caib.carpeta.apiinterna.client.services;
 import java.util.Map;
 import java.util.List;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2022-04-08T12:18:47.927646300+02:00[Europe/Paris]")public class ApiException extends Exception {
+public class ApiException extends Exception {
     private int code = 0;
     private Map<String, List<String>> responseHeaders = null;
     private String responseBody = null;

@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2022-04-08T12:18:38.160401700+02:00[Europe/Paris]")public class SecuretatApi {
+public class SecuretatApi {
   private ApiClient apiClient;
 
   public SecuretatApi() {
