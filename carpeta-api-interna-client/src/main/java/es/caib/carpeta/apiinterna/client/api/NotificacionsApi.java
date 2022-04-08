@@ -1,9 +1,9 @@
-package es.caib.carpeta.apiexterna.client.api;
+package es.caib.carpeta.apiinterna.client.api;
 
-import es.caib.carpeta.apiexterna.client.services.ApiException;
-import es.caib.carpeta.apiexterna.client.services.ApiClient;
-import es.caib.carpeta.apiexterna.client.services.Configuration;
-import es.caib.carpeta.apiexterna.client.services.Pair;
+import es.caib.carpeta.apiinterna.client.services.ApiException;
+import es.caib.carpeta.apiinterna.client.services.ApiClient;
+import es.caib.carpeta.apiinterna.client.services.Configuration;
+import es.caib.carpeta.apiinterna.client.services.Pair;
 
 import javax.ws.rs.core.GenericType;
 
@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2022-04-08T11:02:31.774506100+02:00[Europe/Paris]")public class NotificacionsApi {
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2022-04-08T12:18:47.927646300+02:00[Europe/Paris]")public class NotificacionsApi {
   private ApiClient apiClient;
 
   public NotificacionsApi() {

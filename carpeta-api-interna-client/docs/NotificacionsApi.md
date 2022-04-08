@@ -1,6 +1,6 @@
 # NotificacionsApi
 
-All URIs are relative to *http://localhost:8080/carpetaapi/externa*
+All URIs are relative to *http://localhost:8080/carpetaapi/interna*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -16,11 +16,11 @@ Consulta si tenim donat d&#x27;alta el mòbil d&#x27;un ciutadà/empresa a parti
 ### Example
 ```java
 // Import classes:
-//import es.caib.carpeta.apiexterna.client.services.ApiClient;
-//import es.caib.carpeta.apiexterna.client.services.ApiException;
-//import es.caib.carpeta.apiexterna.client.services.Configuration;
-//import es.caib.carpeta.apiexterna.client.services.auth.*;
-//import es.caib.carpeta.apiexterna.client.api.NotificacionsApi;
+//import es.caib.carpeta.apiinterna.client.services.ApiClient;
+//import es.caib.carpeta.apiinterna.client.services.ApiException;
+//import es.caib.carpeta.apiinterna.client.services.Configuration;
+//import es.caib.carpeta.apiinterna.client.services.auth.*;
+//import es.caib.carpeta.apiinterna.client.api.NotificacionsApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 // Configure HTTP basic authorization: BasicAuth
@@ -69,11 +69,11 @@ Envia un missatge al mòbil del ciutada a traves de l&#x27;App de Carpeta.
 ### Example
 ```java
 // Import classes:
-//import es.caib.carpeta.apiexterna.client.services.ApiClient;
-//import es.caib.carpeta.apiexterna.client.services.ApiException;
-//import es.caib.carpeta.apiexterna.client.services.Configuration;
-//import es.caib.carpeta.apiexterna.client.services.auth.*;
-//import es.caib.carpeta.apiexterna.client.api.NotificacionsApi;
+//import es.caib.carpeta.apiinterna.client.services.ApiClient;
+//import es.caib.carpeta.apiinterna.client.services.ApiException;
+//import es.caib.carpeta.apiinterna.client.services.Configuration;
+//import es.caib.carpeta.apiinterna.client.services.auth.*;
+//import es.caib.carpeta.apiinterna.client.api.NotificacionsApi;
 
 ApiClient defaultClient = Configuration.getDefaultApiClient();
 // Configure HTTP basic authorization: BasicAuth

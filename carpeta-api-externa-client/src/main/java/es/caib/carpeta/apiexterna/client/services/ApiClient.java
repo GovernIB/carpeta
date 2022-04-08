@@ -44,7 +44,7 @@ import es.caib.carpeta.apiexterna.client.services.auth.HttpBasicAuth;
 import es.caib.carpeta.apiexterna.client.services.auth.ApiKeyAuth;
 import es.caib.carpeta.apiexterna.client.services.auth.OAuth;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2022-04-08T11:02:31.774506100+02:00[Europe/Paris]")public class ApiClient {
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2022-04-08T12:18:38.160401700+02:00[Europe/Paris]")public class ApiClient {
   private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
   private String basePath = "http://localhost:8080/carpetaapi/externa";
   private boolean debugging = false;

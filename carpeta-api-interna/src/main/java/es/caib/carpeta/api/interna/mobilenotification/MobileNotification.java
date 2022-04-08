@@ -1,4 +1,4 @@
-package es.caib.carpeta.api.externa.mobilenotification;
+package es.caib.carpeta.api.interna.mobilenotification;
 
 import java.util.Locale;
 

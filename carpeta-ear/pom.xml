@@ -59,6 +59,14 @@
 			<type>war</type>
 		</dependency>
 		<!-- API EXTERNA END -->
+		<!-- API INTERNA START -->
+		<dependency>
+			<groupId>es.caib.carpeta</groupId>
+			<artifactId>carpeta-api-interna</artifactId>
+			<version>1.1.16</version>
+			<type>war</type>
+		</dependency>
+		<!-- API INTERNA END -->
         <!--
         <dependency>
             <groupId>es.caib.carpeta</groupId>
@@ -344,6 +352,14 @@
 							<bundleFileName>carpeta-api-externa.war</bundleFileName>
 						</webModule>
 						<!-- API EXTERNA END -->
+						<!-- API INTERNA START -->
+						<webModule>
+							<groupId>es.caib.carpeta</groupId>
+							<artifactId>carpeta-api-interna</artifactId>
+							<contextRoot>/carpetaapi/interna</contextRoot>
+							<bundleFileName>carpeta-api-interna.war</bundleFileName>
+						</webModule>
+						<!-- API INTERNA END -->
                         <!-- WS START
                         <ejbModule>
                             <groupId>es.caib.carpeta</groupId>

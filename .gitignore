@@ -165,3 +165,16 @@ nb-configuration.xml
 /carpeta-ejb/expoIDs.txt
 /carpeta-ejb/mobileid.properties
 /carpeta-api-externa-client/connection.properties
+/carpeta-api-interna-client/.swagger-codegen-ignore
+/carpeta-api-interna-client/.swagger-codegen/VERSION
+/carpeta-api-interna-client/.travis.yml
+/carpeta-api-interna-client/build.gradle
+/carpeta-api-interna-client/build.sbt
+/carpeta-api-interna-client/connection.properties
+/carpeta-api-interna-client/git_push.sh
+/carpeta-api-interna-client/gradle.properties
+/carpeta-api-interna-client/gradle/wrapper/gradle-wrapper.jar
+/carpeta-api-interna-client/gradle/wrapper/gradle-wrapper.properties
+/carpeta-api-interna-client/gradlew
+/carpeta-api-interna-client/gradlew.bat
+/carpeta-api-interna-client/settings.gradle

@@ -10,11 +10,11 @@
  * Do not edit the class manually.
  */
 
-package es.caib.carpeta.apiexterna.client.api;
+package es.caib.carpeta.apiinterna.client.api;
 
-import es.caib.carpeta.apiexterna.client.services.ApiClient;
-import es.caib.carpeta.apiexterna.client.services.ApiException;
-import es.caib.carpeta.apiexterna.client.services.auth.HttpBasicAuth;
+import es.caib.carpeta.apiinterna.client.services.ApiClient;
+import es.caib.carpeta.apiinterna.client.services.ApiException;
+import es.caib.carpeta.apiinterna.client.services.auth.HttpBasicAuth;
 import org.junit.Test;
 import java.io.FileInputStream;
 import java.util.Properties;
