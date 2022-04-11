@@ -14,14 +14,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AccessosApi {
+public class EstadistiquesApi {
   private ApiClient apiClient;
 
-  public AccessosApi() {
+  public EstadistiquesApi() {
     this(Configuration.getDefaultApiClient());
   }
 
-  public AccessosApi(ApiClient apiClient) {
+  public EstadistiquesApi(ApiClient apiClient) {
     this.apiClient = apiClient;
   }
 
@@ -42,17 +42,15 @@ public class AccessosApi {
    * @param idioma Codi de l&#x27;idioma (optional)
    * @return PaginaAcces
    * @throws ApiException if fails to make API call
-   * @deprecated
    */
-  @Deprecated
-  public PaginaAcces accessos(String entitat, String inici, String fi, String idioma) throws ApiException {
+  public PaginaAcces accessos1(String entitat, String inici, String fi, String idioma) throws ApiException {
     Object localVarPostBody = null;
     // verify the required parameter 'entitat' is set
     if (entitat == null) {
-      throw new ApiException(400, "Missing the required parameter 'entitat' when calling accessos");
+      throw new ApiException(400, "Missing the required parameter 'entitat' when calling accessos1");
     }
     // create path and map variables
-    String localVarPath = "/serveis/accessos".replaceAll("\\{format\\}","json");
+    String localVarPath = "/public/estadistiques/accessos".replaceAll("\\{format\\}","json");
 
     // query params
     List<Pair> localVarQueryParams = new ArrayList<Pair>();
