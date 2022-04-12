@@ -27,7 +27,9 @@ public class ConsultaAvanzadaService
     private final static QName CONSULTAAVANZADASERVICE_QNAME = new QName("https://consultaApoderamientos.minhap.es/", "ConsultaAvanzadaService");
 
     static {
+
         CONSULTAAVANZADASERVICE_WSDL_LOCATION = ConsultaAvanzadaService.class.getResource("classpath:wsdl/reaCXFWSv2.wsdl");
+
         WebServiceException e = null;
         if (CONSULTAAVANZADASERVICE_WSDL_LOCATION == null) {
             e = new WebServiceException("Cannot find 'classpath:wsdl/reaCXFWSv2.wsdl' wsdl. Place the resource correctly in the classpath.");

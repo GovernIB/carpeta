@@ -21,8 +21,6 @@ import org.fundaciobit.pluginsib.utils.cxf.ClientHandlerCertificate;
 import org.fundaciobit.pluginsib.utils.cxf.ClientHandlerUsernamePassword;
 
 
-
-
 /**
  * 
  * @author anadal
