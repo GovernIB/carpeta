@@ -8,25 +8,22 @@ import java.util.Properties;
 
 import javax.xml.bind.JAXBElement;
 
-import org.fundaciobit.pluginsib.carpetafront.apodera.ApoderaClient;
-import org.fundaciobit.pluginsib.carpetafront.apodera.TipoApoderamiento;
 
-
-import es.caib.apodera.client.api.ConsultaApoderamientosResponse;
-import es.caib.apodera.client.api.DatosApoderadoCompletoType;
-import es.caib.apodera.client.api.DatosApoderadoType;
-import es.caib.apodera.client.api.DatosApoderamientoType;
-import es.caib.apodera.client.api.DatosAuditoriaType;
-import es.caib.apodera.client.api.DatosConsultaApoderamientoType;
-import es.caib.apodera.client.api.DatosConsultaType;
-import es.caib.apodera.client.api.DatosPoderdanteCompletoType;
-import es.caib.apodera.client.api.ObjectFactory;
-import es.caib.apodera.client.api.Organismo;
-import es.caib.apodera.client.api.OrganismoType;
-import es.caib.apodera.client.api.PersonaFisicaType;
-import es.caib.apodera.client.api.PersonaJuridicaType;
-import es.caib.apodera.client.api.PeticionConsulta;
-import es.caib.apodera.client.api.TipoApoderamientoType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.ConsultaApoderamientosResponse;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosApoderadoCompletoType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosApoderadoType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosApoderamientoType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosAuditoriaType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosConsultaApoderamientoType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosConsultaType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosPoderdanteCompletoType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.ObjectFactory;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.Organismo;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.OrganismoType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.PersonaFisicaType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.PersonaJuridicaType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.PeticionConsulta;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.TipoApoderamientoType;
 
 /**
  * 
@@ -40,7 +37,7 @@ public class ApoderaTest {
     
     try {
       Properties prop = new Properties();
-      prop.load(new FileInputStream("E:\\dades\\dades\\Documentació projectes\\OTAE\\CARPETA_REACT\\repositorio\\carpeta\\carpeta-pluginsib\\pluginsib-carpetafront\\apodera\\connexio.properties"));
+      prop.load(new FileInputStream("connexio.properties"));
       
       
       String endPoint = prop.getProperty("endpoint");

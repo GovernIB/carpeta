@@ -1,5 +1,5 @@
 
-package es.caib.apodera.client.api;
+package org.fundaciobit.pluginsib.carpetafront.apodera.api;
 
 import java.util.ArrayList;
 import java.util.List;

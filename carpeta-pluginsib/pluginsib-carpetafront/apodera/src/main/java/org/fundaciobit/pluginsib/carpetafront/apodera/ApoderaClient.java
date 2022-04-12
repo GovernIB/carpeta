@@ -11,16 +11,17 @@ import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.ConsultaApoderamientosResponse;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.ConsultaAvanzadaPortType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.ConsultaAvanzadaService;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.PeticionConsulta;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.RespuestaConsulta;
 import org.fundaciobit.pluginsib.utils.cxf.ClientHandler;
 import org.fundaciobit.pluginsib.utils.cxf.ClientHandlerCertificate;
 import org.fundaciobit.pluginsib.utils.cxf.ClientHandlerUsernamePassword;
 
-import es.caib.apodera.client.api.ConsultaApoderamientosResponse;
-import es.caib.apodera.client.api.ConsultaAvanzadaPortType;
-import es.caib.apodera.client.api.ConsultaAvanzadaService;
-import es.caib.apodera.client.api.ErrorType;
-import es.caib.apodera.client.api.PeticionConsulta;
-import es.caib.apodera.client.api.RespuestaConsulta;
+
+
 
 /**
  * 
@@ -102,7 +103,7 @@ public class ApoderaClient {
     
     ConsultaApoderamientosResponse response = resposta.getConsultaApoderamientosResponse();
     
-    ErrorType errorType = response.getResultadoError();
+    org.fundaciobit.pluginsib.carpetafront.apodera.api.ErrorType errorType = response.getResultadoError();
             
     if (errorType == null) {
       
