@@ -98,18 +98,6 @@
     <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
-                    <webResources>
-                        <resource>
-                            <directory>${project.build.directory}/openapi</directory>
-                        </resource>
-                    </webResources>
-                </configuration>
-            </plugin>
             <!-- Genera el descriptor openapi.json de forma estàtica, després 
                 el posarem l'arrel del WAR -->
             <!-- https://github.com/swagger-api/swagger-core/tree/master/modules/swagger-maven-plugin -->
@@ -159,12 +147,18 @@
                                 <artifactVersion>1.1</artifactVersion>
                                 <dateLibrary>joda</dateLibrary>
                                 <useTags>true</useTags>
+                                <hideGenerationTimestamp>true</hideGenerationTimestamp>
                             </configOptions>
 
-                            <!-- <ignoreFileOverride>${project.basedir}/.swagger-codegen-ignore</ignoreFileOverride> 
-                                ** AMOLLA DOCUMENTACIO PER PANTALLA*** <configHelp>true</configHelp> <library>jersey2</library> 
-                                <library>resttemplate</library> <configOptions> <dateLibrary>joda</dateLibrary> 
-                                </configOptions> <supportingFilesToGenerate>mvn</supportingFilesToGenerate> -->
+                            <!-- <ignoreFileOverride>${project.basedir}/.swagger-codegen-ignore</ignoreFileOverride> -->
+                            <!--    ** AMOLLA AJUDA D'AQUEST PLUGIN PER PANTALLA***  -->
+							<!-- <configHelp>true</configHelp> -->
+							<!--<library>jersey2</library>  -->
+							<!--<library>resttemplate</library>  -->
+							<!--<configOptions>  -->
+							<!--    <dateLibrary>joda</dateLibrary>  -->
+                            <!--</configOptions>  -->
+							<!--<supportingFilesToGenerate>mvn</supportingFilesToGenerate> -->
                             <addCompileSourceRoot>false</addCompileSourceRoot>
                             <output>${project.basedir}/../carpeta-api-externa-client</output>
                             <apiPackage>${client.default.package}.api</apiPackage>
@@ -223,13 +217,17 @@
                     </replacements>
                 </configuration>
             </plugin>
-            <!-- Inclou el swagger-ui dins el war -->
+            <!-- Inclou el openapi.json i el swagger-ui dins el war -->
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                    <webResources combine.children="append">
+				<filteringDeploymentDescriptors>true</filteringDeploymentDescriptors>
+                    <webResources><!--  combine.children="append">  -->
                         <resource>
                             <directory>${project.build.directory}/swagger-ui-${swagger-ui.version}/dist</directory>
+                        </resource>
+						<resource>
+                            <directory>${project.build.directory}/openapi</directory>
                         </resource>
                     </webResources>
                 </configuration>

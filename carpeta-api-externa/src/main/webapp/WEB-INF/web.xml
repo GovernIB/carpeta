@@ -42,6 +42,7 @@
         <web-resource-collection>
             <web-resource-name>carpeta_api_externa_secured</web-resource-name>
             <url-pattern>/services/secure</url-pattern>
+            <url-pattern>/secure/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>CAR_ADMIN</role-name>

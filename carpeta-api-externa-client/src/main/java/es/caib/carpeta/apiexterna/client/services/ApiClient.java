@@ -44,7 +44,7 @@ import es.caib.carpeta.apiexterna.client.services.auth.HttpBasicAuth;
 import es.caib.carpeta.apiexterna.client.services.auth.ApiKeyAuth;
 import es.caib.carpeta.apiexterna.client.services.auth.OAuth;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2022-04-07T12:06:29.340578800+02:00[Europe/Paris]")public class ApiClient {
+public class ApiClient {
   private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
   private String basePath = "http://localhost:8080/carpetaapi/externa";
   private boolean debugging = false;
@@ -76,6 +76,7 @@ import es.caib.carpeta.apiexterna.client.services.auth.OAuth;
 
     // Setup authentications (key: authentication name, value: authentication).
     authentications = new HashMap<String, Authentication>();
+    authentications.put("BasicAuth", new HttpBasicAuth());
     // Prevent the authentications from being modified.
     authentications = Collections.unmodifiableMap(authentications);
   }

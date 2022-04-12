@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2022-04-07T12:06:29.340578800+02:00[Europe/Paris]")public class AccessosApi {
+public class AccessosApi {
   private ApiClient apiClient;
 
   public AccessosApi() {
@@ -42,7 +42,9 @@ import java.util.Map;
    * @param idioma Codi de l&#x27;idioma (optional)
    * @return PaginaAcces
    * @throws ApiException if fails to make API call
+   * @deprecated
    */
+  @Deprecated
   public PaginaAcces accessos(String entitat, String inici, String fi, String idioma) throws ApiException {
     Object localVarPostBody = null;
     // verify the required parameter 'entitat' is set

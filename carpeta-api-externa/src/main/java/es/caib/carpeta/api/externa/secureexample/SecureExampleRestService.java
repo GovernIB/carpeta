@@ -16,7 +16,10 @@ import es.caib.carpeta.commons.utils.Constants;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -30,19 +33,20 @@ import io.swagger.v3.oas.annotations.media.Content;
 @OpenAPIDefinition(        
         tags = { @Tag(name = "Securetat", description = "Exemple de Securetat"),
                })
-@Path("/secure")
+@SecurityScheme(type = SecuritySchemeType.HTTP, name = "BasicAuth", scheme = "basic")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Path("/secure")
 public class SecureExampleRestService {
 
     protected static Logger log = Logger.getLogger(SecureExampleRestService.class);
 
 
     @Operation(operationId = "echo", summary = "Fa un ECHO", tags= { "Securetat" })
-    
     @ApiResponse(responseCode = "200",
       description = "Respon el valor enviat per paràmetre",
       content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = String.class)))
+    @SecurityRequirement(name = "BasicAuth")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)

@@ -1,9 +1,8 @@
-package es.caib.carpeta.api.externa.mobilenotification;
+package es.caib.carpeta.api.interna.mobilenotification;
 
 import java.util.Locale;
 
 import javax.ejb.EJB;
-import javax.inject.Named;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -29,7 +28,10 @@ import es.caib.carpeta.model.fields.CiutadaFields;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -48,6 +50,7 @@ import io.swagger.v3.oas.annotations.media.Content;
         )
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@SecurityScheme(type = SecuritySchemeType.HTTP, name = "BasicAuth", scheme = "basic")
 public class MobileNotification {
 
     protected Logger log = Logger.getLogger(MobileNotification.class);
@@ -59,10 +62,10 @@ public class MobileNotification {
     @Path("/sendmessage")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Operation(
-            tags = {"Notificacions"},
-            operationId = "sendmessage",
+    @Operation(tags = {"Notificacions"},
+            operationId = "sendMessage",
             summary = "Envia un missatge al mòbil del ciutada a traves de l'App de Carpeta.")
+    @SecurityRequirement(name = "BasicAuth")
     @ApiResponses(
             value = {
                     @ApiResponse(
@@ -84,17 +87,15 @@ public class MobileNotification {
                                     mediaType = MediaType.APPLICATION_JSON,
                                     schema = @Schema(implementation = String.class))) })
     public Response sendMessage(
-
             @Parameter(
                     description = "NIF del Ciutadà o l'entitat",
                     required = true,
                     example = "12345678Z",
                     schema = @Schema(implementation = String.class))
-            @NotNull(message="NIF XXXXXXXXXXXXXXXXXX")
-            @Named("nifxxxx")
             @NotEmpty
             @Size(min=7, max=20)
             @QueryParam("nif") String nif,
+
             @Parameter(
                     description = "Títol de la notificació",
                     required = true,
@@ -120,13 +121,6 @@ public class MobileNotification {
             @QueryParam("lang") String lang) {
 
         try {
-
-            if (nif == null) {
-                return Response.status(Response.Status.BAD_REQUEST)
-                        .entity("{ \"error\" : " + "\"No s'ha definit el paràmetre 'nif'\" }")
-                        .build();
-            }
-
             String mobileID = getMobileIdOfCiutada(nif);
 
             if (mobileID == null) {
@@ -163,8 +157,6 @@ public class MobileNotification {
     }
 
 
-
-
     protected String getMobileIdOfCiutada(String nif) throws I18NException {
         Where w1 = CiutadaFields.NIF.equal(nif);
         Where w2 = CiutadaFields.REPRESENTANTNIF.isNull();
@@ -180,15 +172,13 @@ public class MobileNotification {
         return mobileID;
     }
     
-    
-    
-    
+
 
     @Operation(
             tags = {"Notificacions"},
-            operationId = "existciutada",
-            
+            operationId = "existCiutada",            
             summary = "Consulta si tenim donat d'alta el mòbil d'un ciutadà/empresa a partir del seu NIF.")
+    @SecurityRequirement(name = "BasicAuth")
     @ApiResponses(
             value = {
                     @ApiResponse(
@@ -214,14 +204,11 @@ public class MobileNotification {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response existCiutada(
-
             @Parameter(
                     description = "NIF del Ciutadà o l'entitat",
                     required = true,
                     example = "12345678Z",
                     schema = @Schema(implementation = String.class))
-            @NotNull(message="NIF XXXXXXXXXXXXXXXXXX")
-            @Named("nifxxxx")
             @NotEmpty
             @Size(min=7, max=20)
             @QueryParam("nif") String nif,

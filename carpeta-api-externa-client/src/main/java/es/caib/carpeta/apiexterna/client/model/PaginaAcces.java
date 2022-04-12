@@ -25,7 +25,7 @@ import java.util.List;
  * PaginaAcces
  */
 
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.JavaClientCodegen", date = "2022-04-07T12:06:29.340578800+02:00[Europe/Paris]")
+
 public class PaginaAcces {
   @JsonProperty("items")
   private List<Acces> items = null;
