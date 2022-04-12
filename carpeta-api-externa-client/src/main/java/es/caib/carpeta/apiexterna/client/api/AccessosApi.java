@@ -52,7 +52,7 @@ public class AccessosApi {
       throw new ApiException(400, "Missing the required parameter 'entitat' when calling accessos");
     }
     // create path and map variables
-    String localVarPath = "/serveis/accessos".replaceAll("\\{format\\}","json");
+    String localVarPath = "/services/accessos".replaceAll("\\{format\\}","json");
 
     // query params
     List<Pair> localVarQueryParams = new ArrayList<Pair>();

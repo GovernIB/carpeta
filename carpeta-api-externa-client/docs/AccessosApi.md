@@ -4,7 +4,7 @@ All URIs are relative to *http://localhost:8080/carpetaapi/externa*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**accessos**](AccessosApi.md#accessos) | **GET** /serveis/accessos | Retorna la llista d&#x60;accessos a CARPETA
+[**accessos**](AccessosApi.md#accessos) | **GET** /services/accessos | Retorna la llista d&#x60;accessos a CARPETA
 
 <a name="accessos"></a>
 # **accessos**
