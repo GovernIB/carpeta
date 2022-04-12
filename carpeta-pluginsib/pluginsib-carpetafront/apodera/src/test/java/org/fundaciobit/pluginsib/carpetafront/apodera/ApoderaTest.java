@@ -12,21 +12,7 @@ import org.fundaciobit.pluginsib.carpetafront.apodera.ApoderaClient;
 import org.fundaciobit.pluginsib.carpetafront.apodera.TipoApoderamiento;
 
 
-import es.caib.apodera.client.api.ConsultaApoderamientosResponse;
-import es.caib.apodera.client.api.DatosApoderadoCompletoType;
-import es.caib.apodera.client.api.DatosApoderadoType;
-import es.caib.apodera.client.api.DatosApoderamientoType;
-import es.caib.apodera.client.api.DatosAuditoriaType;
-import es.caib.apodera.client.api.DatosConsultaApoderamientoType;
-import es.caib.apodera.client.api.DatosConsultaType;
-import es.caib.apodera.client.api.DatosPoderdanteCompletoType;
-import es.caib.apodera.client.api.ObjectFactory;
-import es.caib.apodera.client.api.Organismo;
-import es.caib.apodera.client.api.OrganismoType;
-import es.caib.apodera.client.api.PersonaFisicaType;
-import es.caib.apodera.client.api.PersonaJuridicaType;
-import es.caib.apodera.client.api.PeticionConsulta;
-import es.caib.apodera.client.api.TipoApoderamientoType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.*;
 
 /**
  * 

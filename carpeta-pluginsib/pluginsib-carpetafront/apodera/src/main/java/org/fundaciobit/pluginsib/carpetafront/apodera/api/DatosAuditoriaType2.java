@@ -1,5 +1,5 @@
 
-package es.caib.apodera.client.api;
+package org.fundaciobit.pluginsib.carpetafront.apodera.api;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
