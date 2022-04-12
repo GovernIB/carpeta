@@ -31,7 +31,7 @@ import io.swagger.v3.oas.annotations.media.Content;
  * @author anadal (anotacions openapi)
  *
  */
-@Path("/serveis")
+@Path("/services")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 
