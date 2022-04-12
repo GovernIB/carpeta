@@ -24,6 +24,7 @@ import org.fundaciobit.pluginsib.carpetafront.apodera.api.PersonaFisicaType;
 import org.fundaciobit.pluginsib.carpetafront.apodera.api.PersonaJuridicaType;
 import org.fundaciobit.pluginsib.carpetafront.apodera.api.PeticionConsulta;
 import org.fundaciobit.pluginsib.carpetafront.apodera.api.TipoApoderamientoType;
+import org.junit.Test;
 
 /**
  * 
@@ -31,6 +32,12 @@ import org.fundaciobit.pluginsib.carpetafront.apodera.api.TipoApoderamientoType;
  *
  */
 public class ApoderaTest {
+    
+    @Test
+    public void extecuteTest() {
+        main(null);
+    }
+    
 
   public static void main(String[] args) {
     
