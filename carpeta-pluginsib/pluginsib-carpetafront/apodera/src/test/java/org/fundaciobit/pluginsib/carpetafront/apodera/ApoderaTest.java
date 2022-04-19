@@ -9,21 +9,7 @@ import java.util.Properties;
 import javax.xml.bind.JAXBElement;
 
 
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.ConsultaApoderamientosResponse;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosApoderadoCompletoType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosApoderadoType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosApoderamientoType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosAuditoriaType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosConsultaApoderamientoType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosConsultaType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosPoderdanteCompletoType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.ObjectFactory;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.Organismo;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.OrganismoType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.PersonaFisicaType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.PersonaJuridicaType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.PeticionConsulta;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.TipoApoderamientoType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.*;
 import org.junit.Test;
 
 /**
@@ -65,10 +51,13 @@ public class ApoderaTest {
        String organisme_denominacio = prop.getProperty("organisme.denominacio");
        
        
-       String nifApoderado = "43096845C";
+//       String nifApoderado = "43096845C";
+//       String nifPoderdante = "43096845C";
+        String nifApoderado = "43087475B";
+        String nifPoderdante = "43087475B";
+
         
-        
-        ApoderaClient api = new ApoderaClient(endPoint, auth_ks_Path, auth_ks_Type,
+        ApoderaCarpetaFrontPlugin api = new ApoderaCarpetaFrontPlugin(endPoint, auth_ks_Path, auth_ks_Type,
             auth_ks_Password, auth_ks_Alias, auth_ks_Cert_Password);
         
         DatosAuditoriaType datosAuditoriaType = new DatosAuditoriaType();
@@ -80,6 +69,9 @@ public class ApoderaTest {
         
         DatosApoderadoType datosApoderado = new DatosApoderadoType();
         datosApoderado.setNifNieApoderado(nifApoderado); //"43096845C");
+
+        DatosPoderdanteType datosPoderdante = new DatosPoderdanteType();
+        datosPoderdante.setNifNiePoderdante(nifPoderdante); //"43096845C");
 
         TipoApoderamientoType tipoApoderamiento = null;
 
@@ -106,9 +98,11 @@ public class ApoderaTest {
         tipoApoderamiento.setListaOrganismos(jaxbelementOrganismo);
         
         DatosConsultaApoderamientoType dcat = new DatosConsultaApoderamientoType();
-        dcat.setDatosApoderado(datosApoderado);
+//        dcat.setDatosApoderado(datosApoderado);
         dcat.setTipoApoderamiento(tipoApoderamiento);
-        
+
+        dcat.setDatosPoderdante(datosPoderdante);
+
         //dcat.setCodApoderamientoEXT(0L);
         //dcat.setCodApoderamientoINT(1147L);
 
@@ -121,11 +115,12 @@ public class ApoderaTest {
         peticio.setDatosAuditoriaType(datosAuditoriaType);
         peticio.setDatosConsultaType(datosConsultaType);
 
+        System.out.println("1");
         // Cridada
         ConsultaApoderamientosResponse response = api.consulta(peticio);
-        
+        System.out.println("2");
         List<DatosApoderamientoType> apoderamientos = response.getListaApoderamientos();
-        
+        System.out.println("apoderamientos: " + apoderamientos.size());
         
         if (apoderamientos.size() == 0) {
            System.err.println("No hi ha apoderaments per aquest usuari ...");
