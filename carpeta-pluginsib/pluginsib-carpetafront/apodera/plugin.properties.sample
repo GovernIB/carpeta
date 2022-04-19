@@ -1,0 +1,17 @@
+# Class => org.fundaciobit.pluginsib.carpetafront.apodera.ApoderaCarpetaFrontPlugin
+
+# Common
+es.caib.carpeta.pluginsib.carpetafront.apodera.development=true
+
+# Apoderaments APODERA
+es.caib.carpeta.pluginsib.carpetafront.apodera.endpoint=[=SP["es.caib.carpeta.pluginsib.carpetafront.apodera.endpoint"]]
+es.caib.carpeta.pluginsib.carpetafront.apodera.codiApp=CARPETA
+es.caib.carpeta.pluginsib.carpetafront.apodera.organisme.dir3=A04003003
+es.caib.carpeta.pluginsib.carpetafront.apodera.organisme.denominacio=Gobierno de las Islas Baleares
+
+es.caib.carpeta.pluginsib.carpetafront.apodera.authorization.ks.path=[=SP["es.caib.carpeta.pluginsib.carpetafront.apodera.authorization.ks.path"]]
+es.caib.carpeta.pluginsib.carpetafront.apodera.authorization.ks.type=[=SP["es.caib.carpeta.pluginsib.carpetafront.apodera.authorization.ks.type"]]
+es.caib.carpeta.pluginsib.carpetafront.apodera.authorization.ks.password=[=SP["es.caib.carpeta.pluginsib.carpetafront.apodera.authorization.ks.password"]]
+es.caib.carpeta.pluginsib.carpetafront.apodera.authorization.ks.cert.alias=[=SP["es.caib.carpeta.pluginsib.carpetafront.apodera.authorization.ks.cert.alias"]]
+es.caib.carpeta.pluginsib.carpetafront.apodera.authorization.ks.cert.password=[=SP["es.caib.carpeta.pluginsib.carpetafront.apodera.authorization.ks.cert.password"]]
+

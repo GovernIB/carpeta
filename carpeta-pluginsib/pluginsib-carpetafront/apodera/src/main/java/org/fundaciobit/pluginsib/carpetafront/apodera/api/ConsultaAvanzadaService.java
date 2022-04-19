@@ -68,6 +68,7 @@ public class ConsultaAvanzadaService
      */
     @WebEndpoint(name = "ConsultaAvanzadaPort")
     public ConsultaAvanzadaPortType getConsultaAvanzadaPort() {
+        System.out.println("GET CONSULTA AVANZADA PORT");
         return super.getPort(new QName("https://consultaApoderamientos.minhap.es/", "ConsultaAvanzadaPort"), ConsultaAvanzadaPortType.class);
     }
 

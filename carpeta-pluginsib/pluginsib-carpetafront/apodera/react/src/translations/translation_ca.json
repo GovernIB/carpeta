@@ -1,0 +1,15 @@
+{
+    "apoderaTitulo": "Llista d'apoderaments de REA",
+    "apoderaDescripcion": "Des d'aquí pot consultar el resultat de la seva consulta: ",
+    "apoderaDni": "DNI",
+    "apoderaNom": "Nom",
+    "apoderaApellido1" : "Primer Cognom",
+    "apoderaApellido2" : "Segon Cognom",
+    "apoderaResultado": "Resultat de la consulta",
+    "apoderaFecha": "A dia ",
+    "apoderaHora": " a les ",
+    "apoderaH": "h:",
+    "apoderaBuid": "No hi ha cap apoderament",
+    "apoderaError": "Ha ocorregut un error",
+    "apoderaTornar": "Torna"
+}

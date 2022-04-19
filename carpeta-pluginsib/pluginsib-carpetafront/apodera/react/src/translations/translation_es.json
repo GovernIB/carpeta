@@ -1,0 +1,15 @@
+{
+    "apoderaTitulo": "Lista de apoderamientos de REA",
+    "apoderaDescripcion": "Desde aquí puede consultar el resultado de su consulta: ",
+    "apoderaDni": "DNI",
+    "apoderaNom": "Nombre",
+    "apoderaApellido1" : "Primer Apellido",
+    "apoderaApellido2" : "Segundo Apellido",
+    "apoderaResultado": "Resultado de la consulta",
+    "apoderaFecha": "A día ",
+    "apoderaHora": " a las ",
+    "apoderaH": "h:",
+    "apoderaBuid": "No hay ningún apoderamiento",
+    "apoderaError": "Ha ocorrido un error",
+    "apoderaTornar": "Volver"
+}
