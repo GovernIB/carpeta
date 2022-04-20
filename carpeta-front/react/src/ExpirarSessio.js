@@ -97,11 +97,11 @@ class ExpirarSessio extends Component {
 
             <div className="row mr-0 ml-0">
 
-                <div id="dialog" title={t('sessioAvisTitol')} className="noVisible">
+                <div id="dialog" title={t('sessioAvisTitol')} className="noVisible expiratMobil">
                     <p className="pt-4">{t('sessioAvisDescripcio')}</p>
                 </div>
 
-                <div id="expirat" title={t('sessioExpiradaTitol')} className="dialogExpirat noVisible">
+                <div id="expirat" title={t('sessioExpiradaTitol')} className="dialogExpirat noVisible expiratMobil">
                     <p className="pt-4">{t('sessioExpiradaDescripcio')}</p>
                 </div>
 
