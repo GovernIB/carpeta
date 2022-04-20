@@ -1225,6 +1225,9 @@ input.form-control, select.form-control {
 .font15 {
 	font-size: 30px;
 }
+.expiratMobil{
+	height: auto!important;
+}
 }
 
 /*Se aplican cuando el width es menor que 480*/
