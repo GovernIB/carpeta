@@ -5,21 +5,26 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import org.hibernate.annotations.ForeignKey;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import java.util.Set;
 import java.util.HashSet;
 import javax.persistence.GenerationType;
+import javax.persistence.Index;
 import javax.persistence.GeneratedValue;
-import org.hibernate.annotations.Index;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 
 
 @Entity
-@Table(name = "car_seccio" )
+@Table(name = "car_seccio" , indexes = { 
+        @Index(name="car_seccio_pk_i", columnList = "seccioid"),
+        @Index(name="car_seccio_nomid_fk_i", columnList = "nomid"),
+        @Index(name="car_seccio_descripcioid_fk_i", columnList = "descripcioid"),
+        @Index(name="car_seccio_iconaid_fk_i", columnList = "iconaid"),
+        @Index(name="car_seccio_entitatid_fk_i", columnList = "entitatid")})
 @SequenceGenerator(name="SECCIO_SEQ", sequenceName="car_seccio_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class SeccioJPA implements Seccio {
@@ -30,15 +35,12 @@ private static final long serialVersionUID = 838506947L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="SECCIO_SEQ")
-    @Index(name="car_seccio_pk_i")
     @Column(name="seccioid",nullable = false,length = 19)
     long seccioID;
 
-    @Index(name="car_seccio_nomid_fk_i")
     @Column(name="nomid",nullable = false,length = 19)
     long nomID;
 
-    @Index(name="car_seccio_descripcioid_fk_i")
     @Column(name="descripcioid",nullable = false,length = 19)
     long descripcioID;
 
@@ -49,14 +51,12 @@ private static final long serialVersionUID = 838506947L;
     @Column(name="activa",nullable = false,length = 1)
     boolean activa;
 
-    @Index(name="car_seccio_iconaid_fk_i")
     @Column(name="iconaid",nullable = false,length = 19)
     long iconaID;
 
     @Column(name="secciopareid",length = 19)
     java.lang.Long seccioPareID;
 
-    @Index(name="car_seccio_entitatid_fk_i")
     @Column(name="entitatid",nullable = false,length = 19)
     long entitatID;
 
@@ -223,8 +223,7 @@ private static final long serialVersionUID = 838506947L;
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
-    @ForeignKey(name="car_seccio_traduccio_nom_fk")
-    @JoinColumn(name = "nomid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "nomid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_seccio_traduccio_nom_fk"))
     private TraduccioJPA nom;
 
     public TraduccioJPA getNom() {
@@ -248,8 +247,7 @@ private static final long serialVersionUID = 838506947L;
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
-    @ForeignKey(name="car_seccio_traduccio_des_fk")
-    @JoinColumn(name = "descripcioid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "descripcioid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_seccio_traduccio_des_fk"))
     private TraduccioJPA descripcio;
 
     public TraduccioJPA getDescripcio() {
@@ -273,8 +271,7 @@ private static final long serialVersionUID = 838506947L;
 // IMP Field:fitxerid | Table: car_fitxer | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @ForeignKey(name="car_seccio_fitxer_icon_fk")
-    @JoinColumn(name = "iconaid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "iconaid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_seccio_fitxer_icon_fk"))
     private FitxerJPA icona;
 
     public FitxerJPA getIcona() {
@@ -288,8 +285,7 @@ private static final long serialVersionUID = 838506947L;
 // IMP Field:entitatid | Table: car_entitat | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @ForeignKey(name="car_seccio_entitat_ent_fk")
-    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_seccio_entitat_ent_fk"))
     private EntitatJPA entitat;
 
     public EntitatJPA getEntitat() {

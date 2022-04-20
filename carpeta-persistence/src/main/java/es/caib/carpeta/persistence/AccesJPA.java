@@ -6,17 +6,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
+import javax.persistence.Index;
 import javax.persistence.GeneratedValue;
-import org.hibernate.annotations.Index;
 import javax.persistence.SequenceGenerator;
-import org.hibernate.annotations.ForeignKey;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 
 
 @Entity
-@Table(name = "car_acces" )
+@Table(name = "car_acces" , indexes = { 
+        @Index(name="car_acces_pk_i", columnList = "accesid"),
+        @Index(name="car_acces_entitatid_fk_i", columnList = "entitatid")})
 @SequenceGenerator(name="ACCES_SEQ", sequenceName="car_acces_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class AccesJPA implements Acces {
@@ -27,7 +29,6 @@ private static final long serialVersionUID = -2081832820L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ACCES_SEQ")
-    @Index(name="car_acces_pk_i")
     @Column(name="accesid",nullable = false,length = 19)
     long accesID;
 
@@ -61,7 +62,6 @@ private static final long serialVersionUID = -2081832820L;
     @Column(name="pluginid",length = 10)
     java.lang.Long pluginID;
 
-    @Index(name="car_acces_entitatid_fk_i")
     @Column(name="entitatid",nullable = false,length = 19)
     long entitatID;
 
@@ -264,8 +264,7 @@ private static final long serialVersionUID = -2081832820L;
 // IMP Field:entitatid | Table: car_entitat | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @ForeignKey(name="car_acces_entitat_entitatid_fk")
-    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_acces_entitat_entitatid_fk"))
     private EntitatJPA entitat;
 
     public EntitatJPA getEntitat() {

@@ -5,14 +5,16 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
+import javax.persistence.Index;
 import javax.persistence.GeneratedValue;
-import org.hibernate.annotations.Index;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Id;
 
 
 @Entity
-@Table(name = "car_estadistica" )
+@Table(name = "car_estadistica" , indexes = { 
+        @Index(name="car_estadistica_pk_i", columnList = "estadisticaid"),
+        @Index(name="car_estadistica_entitatid_fk_i", columnList = "entitatid")})
 @SequenceGenerator(name="ESTADISTICA_SEQ", sequenceName="car_estadistica_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class EstadisticaJPA implements Estadistica {
@@ -23,7 +25,6 @@ private static final long serialVersionUID = -2066559243L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ESTADISTICA_SEQ")
-    @Index(name="car_estadistica_pk_i")
     @Column(name="estadisticaid",nullable = false,length = 19)
     long estadisticaID;
 
@@ -39,7 +40,6 @@ private static final long serialVersionUID = -2066559243L;
     @Column(name="pluginid",length = 19)
     java.lang.Long pluginID;
 
-    @Index(name="car_estadistica_entitatid_fk_i")
     @Column(name="entitatid",length = 19)
     java.lang.Long entitatID;
 

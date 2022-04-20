@@ -6,17 +6,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
+import javax.persistence.Index;
 import javax.persistence.GeneratedValue;
-import org.hibernate.annotations.Index;
 import javax.persistence.SequenceGenerator;
-import org.hibernate.annotations.ForeignKey;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 
 
 @Entity
-@Table(name = "car_propietatglobal" )
+@Table(name = "car_propietatglobal" , indexes = { 
+        @Index(name="car_propietatglobal_pk_i", columnList = "propietatglobalid"),
+        @Index(name="car_propglob_entitatid_fk_i", columnList = "entitatid")})
 @SequenceGenerator(name="PROPIETATGLOBAL_SEQ", sequenceName="car_propietatglobal_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class PropietatGlobalJPA implements PropietatGlobal {
@@ -27,7 +29,6 @@ private static final long serialVersionUID = 1545722544L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="PROPIETATGLOBAL_SEQ")
-    @Index(name="car_propietatglobal_pk_i")
     @Column(name="propietatglobalid",nullable = false,length = 19)
     long propietaGlobalID;
 
@@ -40,7 +41,6 @@ private static final long serialVersionUID = 1545722544L;
     @Column(name="descripcio",length = 1000)
     java.lang.String descripcio;
 
-    @Index(name="car_propglob_entitatid_fk_i")
     @Column(name="entitatid",length = 19)
     java.lang.Long entitatID;
 
@@ -131,8 +131,7 @@ private static final long serialVersionUID = 1545722544L;
 // IMP Field:entitatid | Table: car_entitat | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @ForeignKey(name="car_propglob_entitat_fk")
-    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = true, insertable=false, updatable=false)
+    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_propglob_entitat_fk"))
     private EntitatJPA entitat;
 
     public EntitatJPA getEntitat() {

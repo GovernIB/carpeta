@@ -6,17 +6,24 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
+import javax.persistence.Index;
 import javax.persistence.GeneratedValue;
-import org.hibernate.annotations.Index;
 import javax.persistence.SequenceGenerator;
-import org.hibernate.annotations.ForeignKey;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 
 
 @Entity
-@Table(name = "car_enllaz" )
+@Table(name = "car_enllaz" , indexes = { 
+        @Index(name="car_enllaz_pk_i", columnList = "enllazid"),
+        @Index(name="car_enllaz_nomid_fk_i", columnList = "nomid"),
+        @Index(name="car_enllaz_descripcioid_fk_i", columnList = "descripcioid"),
+        @Index(name="car_enllaz_urlid_fk_i", columnList = "urlid"),
+        @Index(name="car_enllaz_entitatid_fk_i", columnList = "entitatid"),
+        @Index(name="car_enllaz_logoid_fk_i", columnList = "logoid"),
+        @Index(name="car_enllaz_seccioid_fk_i", columnList = "seccioid")})
 @SequenceGenerator(name="ENLLAZ_SEQ", sequenceName="car_enllaz_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class EnllazJPA implements Enllaz {
@@ -27,34 +34,27 @@ private static final long serialVersionUID = -1473310087L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ENLLAZ_SEQ")
-    @Index(name="car_enllaz_pk_i")
     @Column(name="enllazid",nullable = false,length = 19)
     long enllazID;
 
     @Column(name="tipus",nullable = false,length = 10)
     int tipus;
 
-    @Index(name="car_enllaz_nomid_fk_i")
     @Column(name="nomid",nullable = false,length = 19)
     long nomID;
 
-    @Index(name="car_enllaz_descripcioid_fk_i")
     @Column(name="descripcioid",length = 19)
     java.lang.Long descripcioID;
 
-    @Index(name="car_enllaz_urlid_fk_i")
     @Column(name="urlid",nullable = false,length = 19)
     long urlID;
 
-    @Index(name="car_enllaz_entitatid_fk_i")
     @Column(name="entitatid",nullable = false,length = 19)
     long entitatID;
 
-    @Index(name="car_enllaz_logoid_fk_i")
     @Column(name="logoid",nullable = false,length = 19)
     long logoID;
 
-    @Index(name="car_enllaz_seccioid_fk_i")
     @Column(name="seccioid",length = 19)
     java.lang.Long seccioID;
 
@@ -209,8 +209,7 @@ private static final long serialVersionUID = -1473310087L;
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
-    @ForeignKey(name="car_enllaz_traduccio_nomid_fk")
-    @JoinColumn(name = "nomid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "nomid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_enllaz_traduccio_nomid_fk"))
     private TraduccioJPA nom;
 
     public TraduccioJPA getNom() {
@@ -234,8 +233,7 @@ private static final long serialVersionUID = -1473310087L;
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
-    @ForeignKey(name="car_enllaz_traduccio_desid_fk")
-    @JoinColumn(name = "descripcioid", referencedColumnName ="traduccioID", nullable = true, insertable=false, updatable=false)
+    @JoinColumn(name = "descripcioid", referencedColumnName ="traduccioID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_enllaz_traduccio_desid_fk"))
     private TraduccioJPA descripcio;
 
     public TraduccioJPA getDescripcio() {
@@ -259,8 +257,7 @@ private static final long serialVersionUID = -1473310087L;
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
-    @ForeignKey(name="car_enllaz_traduccio_urlid_fk")
-    @JoinColumn(name = "urlid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "urlid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_enllaz_traduccio_urlid_fk"))
     private TraduccioJPA url;
 
     public TraduccioJPA getUrl() {
@@ -284,8 +281,7 @@ private static final long serialVersionUID = -1473310087L;
 // IMP Field:entitatid | Table: car_entitat | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @ForeignKey(name="car_enllaz_entitat_ent_fk")
-    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_enllaz_entitat_ent_fk"))
     private EntitatJPA entitat;
 
     public EntitatJPA getEntitat() {
@@ -299,8 +295,7 @@ private static final long serialVersionUID = -1473310087L;
 // IMP Field:fitxerid | Table: car_fitxer | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @ForeignKey(name="car_enllaz_fitxer_logo_fk")
-    @JoinColumn(name = "logoid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "logoid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_enllaz_fitxer_logo_fk"))
     private FitxerJPA logo;
 
     public FitxerJPA getLogo() {
@@ -314,8 +309,7 @@ private static final long serialVersionUID = -1473310087L;
 // IMP Field:seccioid | Table: car_seccio | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @ForeignKey(name="car_enllaz_seccio_sec_fk")
-    @JoinColumn(name = "seccioid", referencedColumnName ="seccioID", nullable = true, insertable=false, updatable=false)
+    @JoinColumn(name = "seccioid", referencedColumnName ="seccioID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_enllaz_seccio_sec_fk"))
     private SeccioJPA seccio;
 
     public SeccioJPA getSeccio() {

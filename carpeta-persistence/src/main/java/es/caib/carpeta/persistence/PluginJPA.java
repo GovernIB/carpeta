@@ -6,22 +6,28 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import org.hibernate.annotations.ForeignKey;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import java.util.Set;
 import org.hibernate.annotations.Type;
 import java.util.HashSet;
 import javax.persistence.GenerationType;
+import javax.persistence.Index;
 import javax.persistence.GeneratedValue;
-import org.hibernate.annotations.Index;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 
 
 @Entity
-@Table(name = "car_plugin" )
+@Table(name = "car_plugin" , indexes = { 
+        @Index(name="car_plugin_pk_i", columnList = "pluginid"),
+        @Index(name="car_plugin_nomid_fk_i", columnList = "nomid"),
+        @Index(name="car_plugin_descripcioid_fk_i", columnList = "descripcioid"),
+        @Index(name="car_plugin_titolllargid_fk_i", columnList = "titolllargid"),
+        @Index(name="car_plugin_subtitllargid_fk_i", columnList = "subtitolllargid"),
+        @Index(name="car_plugin_logoid_fk_i", columnList = "logoid")})
 @SequenceGenerator(name="PLUGIN_SEQ", sequenceName="car_plugin_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class PluginJPA implements Plugin {
@@ -32,30 +38,24 @@ private static final long serialVersionUID = 190357384L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="PLUGIN_SEQ")
-    @Index(name="car_plugin_pk_i")
     @Column(name="pluginid",nullable = false,length = 19)
     long pluginID;
 
-    @Index(name="car_plugin_nomid_fk_i")
     @Column(name="nomid",nullable = false,length = 19)
     long nomID;
 
-    @Index(name="car_plugin_descripcioid_fk_i")
     @Column(name="descripcioid",nullable = false,length = 19)
     java.lang.Long descripcioID;
 
-    @Index(name="car_plugin_titolllargid_fk_i")
     @Column(name="titolllargid",length = 19)
     java.lang.Long titolLlargID;
 
-    @Index(name="car_plugin_subtitllargid_fk_i")
     @Column(name="subtitolllargid",length = 19)
     java.lang.Long subtitolLlargID;
 
     @Column(name="context",length = 50)
     java.lang.String context;
 
-    @Index(name="car_plugin_logoid_fk_i")
     @Column(name="logoid",length = 19)
     java.lang.Long logoID;
 
@@ -265,8 +265,7 @@ private static final long serialVersionUID = 190357384L;
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
-    @ForeignKey(name="car_plugin_traduccio_nom_fk")
-    @JoinColumn(name = "nomid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "nomid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_plugin_traduccio_nom_fk"))
     private TraduccioJPA nom;
 
     public TraduccioJPA getNom() {
@@ -290,8 +289,7 @@ private static final long serialVersionUID = 190357384L;
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
-    @ForeignKey(name="car_plugin_traduccio_desc_fk")
-    @JoinColumn(name = "descripcioid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "descripcioid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_plugin_traduccio_desc_fk"))
     private TraduccioJPA descripcio;
 
     public TraduccioJPA getDescripcio() {
@@ -315,8 +313,7 @@ private static final long serialVersionUID = 190357384L;
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
-    @ForeignKey(name="car_plugin_traduccio_tllarg_fk")
-    @JoinColumn(name = "titolllargid", referencedColumnName ="traduccioID", nullable = true, insertable=false, updatable=false)
+    @JoinColumn(name = "titolllargid", referencedColumnName ="traduccioID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_plugin_traduccio_tllarg_fk"))
     private TraduccioJPA titolLlarg;
 
     public TraduccioJPA getTitolLlarg() {
@@ -340,8 +337,7 @@ private static final long serialVersionUID = 190357384L;
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
-    @ForeignKey(name="car_plugin_traduccio_stlar_fk")
-    @JoinColumn(name = "subtitolllargid", referencedColumnName ="traduccioID", nullable = true, insertable=false, updatable=false)
+    @JoinColumn(name = "subtitolllargid", referencedColumnName ="traduccioID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_plugin_traduccio_stlar_fk"))
     private TraduccioJPA subtitolLlarg;
 
     public TraduccioJPA getSubtitolLlarg() {
@@ -365,8 +361,7 @@ private static final long serialVersionUID = 190357384L;
 // IMP Field:fitxerid | Table: car_fitxer | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @ForeignKey(name="car_plugin_fitxer_logo_fk")
-    @JoinColumn(name = "logoid", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false)
+    @JoinColumn(name = "logoid", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_plugin_fitxer_logo_fk"))
     private FitxerJPA logo;
 
     public FitxerJPA getLogo() {

@@ -6,18 +6,23 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
+import javax.persistence.Index;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.GeneratedValue;
-import org.hibernate.annotations.Index;
 import javax.persistence.SequenceGenerator;
-import org.hibernate.annotations.ForeignKey;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 
 
 @Entity
-@Table(name = "car_pluginentitat"  , uniqueConstraints = {
+@Table(name = "car_pluginentitat" , indexes = { 
+        @Index(name="car_pluginentitat_pk_i", columnList = "pluginentitatid"),
+        @Index(name="car_plugent_pluginid_fk_i", columnList = "pluginid"),
+        @Index(name="car_plugent_entitatid_fk_i", columnList = "entitatid"),
+        @Index(name="car_plugent_seccioid_fk_i", columnList = "seccioid")},
+           uniqueConstraints = {
             @UniqueConstraint(name="car_plugent_plug_ent_uk", columnNames={"pluginid","entitatid"}) } )
 @SequenceGenerator(name="PLUGINENTITAT_SEQ", sequenceName="car_pluginentitat_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
@@ -29,22 +34,18 @@ private static final long serialVersionUID = -695907131L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="PLUGINENTITAT_SEQ")
-    @Index(name="car_pluginentitat_pk_i")
     @Column(name="pluginentitatid",nullable = false,length = 19)
     long pluginEntitatID;
 
-    @Index(name="car_plugent_pluginid_fk_i")
     @Column(name="pluginid",nullable = false,length = 19)
     long pluginID;
 
-    @Index(name="car_plugent_entitatid_fk_i")
     @Column(name="entitatid",nullable = false,length = 19)
     long entitatID;
 
     @Column(name="actiu",nullable = false,length = 1)
     boolean actiu;
 
-    @Index(name="car_plugent_seccioid_fk_i")
     @Column(name="seccioid",length = 19)
     java.lang.Long seccioID;
 
@@ -143,8 +144,7 @@ private static final long serialVersionUID = -695907131L;
 // IMP Field:pluginid | Table: car_plugin | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @ForeignKey(name="car_plugent_plugin_fk")
-    @JoinColumn(name = "pluginid", referencedColumnName ="pluginID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "pluginid", referencedColumnName ="pluginID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_plugent_plugin_fk"))
     private PluginJPA plugin;
 
     public PluginJPA getPlugin() {
@@ -158,8 +158,7 @@ private static final long serialVersionUID = -695907131L;
 // IMP Field:entitatid | Table: car_entitat | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @ForeignKey(name="car_plugent_entitat_fk")
-    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_plugent_entitat_fk"))
     private EntitatJPA entitat;
 
     public EntitatJPA getEntitat() {
@@ -173,8 +172,7 @@ private static final long serialVersionUID = -695907131L;
 // IMP Field:seccioid | Table: car_seccio | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @ForeignKey(name="car_plugent_seccio_sec_fk")
-    @JoinColumn(name = "seccioid", referencedColumnName ="seccioID", nullable = true, insertable=false, updatable=false)
+    @JoinColumn(name = "seccioid", referencedColumnName ="seccioID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_plugent_seccio_sec_fk"))
     private SeccioJPA seccio;
 
     public SeccioJPA getSeccio() {

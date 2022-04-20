@@ -5,7 +5,7 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinTable;
-import org.hibernate.annotations.ForeignKey;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import java.util.Set;
@@ -13,8 +13,8 @@ import java.util.HashMap;
 import org.hibernate.annotations.Cascade;
 import java.util.HashSet;
 import javax.persistence.GenerationType;
+import javax.persistence.Index;
 import javax.persistence.GeneratedValue;
-import org.hibernate.annotations.Index;
 import javax.persistence.SequenceGenerator;
 import java.util.Map;
 import javax.persistence.FetchType;
@@ -25,7 +25,8 @@ import javax.persistence.Id;
 
 
 @Entity
-@Table(name = "car_traduccio" )
+@Table(name = "car_traduccio" , indexes = { 
+        @Index(name="car_traduccio_pk_i", columnList = "traduccioid")})
 @SequenceGenerator(name="TRADUCCIO_SEQ", sequenceName="car_traduccio_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class TraduccioJPA implements Traduccio {
@@ -37,7 +38,6 @@ private static final long serialVersionUID = -326205279L;
   /**  */
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="TRADUCCIO_SEQ")
-    @Index(name="car_traduccio_pk_i")
     @Column(name="traduccioid",nullable = false,length = 19)
     long traduccioID;
 
@@ -275,9 +275,8 @@ private static final long serialVersionUID = -326205279L;
   @ElementCollection(fetch= FetchType.EAGER, targetClass = es.caib.carpeta.persistence.TraduccioMapJPA.class)
   @Cascade(value=org.hibernate.annotations.CascadeType.ALL)
   @LazyCollection(value= LazyCollectionOption.FALSE)
-  @JoinTable(name="car_traducciomap",joinColumns={@JoinColumn(name="traducciomapid")})
+  @JoinTable(name="car_traducciomap",joinColumns={@JoinColumn(name="traducciomapid")}, foreignKey=@ForeignKey(name="car_traducmap_traduccio_fk"))
   @javax.persistence.MapKeyColumn(name="idiomaid")
-  @ForeignKey(name="car_traducmap_traduccio_fk") 
   private Map<String, es.caib.carpeta.persistence.TraduccioMapJPA> traduccions =  new HashMap<String, es.caib.carpeta.persistence.TraduccioMapJPA>();
 
   public Map<String, es.caib.carpeta.persistence.TraduccioMapJPA> getTraduccions() {

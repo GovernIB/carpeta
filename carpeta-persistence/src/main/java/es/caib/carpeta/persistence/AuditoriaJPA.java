@@ -5,14 +5,16 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
+import javax.persistence.Index;
 import javax.persistence.GeneratedValue;
-import org.hibernate.annotations.Index;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Id;
 
 
 @Entity
-@Table(name = "car_auditoria" )
+@Table(name = "car_auditoria" , indexes = { 
+        @Index(name="car_auditoria_pk_i", columnList = "auditoriaid"),
+        @Index(name="car_auditoria_entitatid_fk_i", columnList = "entitatid")})
 @SequenceGenerator(name="AUDITORIA_SEQ", sequenceName="car_auditoria_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class AuditoriaJPA implements Auditoria {
@@ -23,7 +25,6 @@ private static final long serialVersionUID = 129744773L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="AUDITORIA_SEQ")
-    @Index(name="car_auditoria_pk_i")
     @Column(name="auditoriaid",nullable = false,length = 19)
     long auditoriaID;
 
@@ -39,7 +40,6 @@ private static final long serialVersionUID = 129744773L;
     @Column(name="username",length = 255)
     java.lang.String username;
 
-    @Index(name="car_auditoria_entitatid_fk_i")
     @Column(name="entitatid",length = 19)
     java.lang.Long entitatID;
 

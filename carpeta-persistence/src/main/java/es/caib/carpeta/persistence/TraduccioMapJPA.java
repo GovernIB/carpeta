@@ -3,10 +3,13 @@ package es.caib.carpeta.persistence;
 import es.caib.carpeta.model.entity.*;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.persistence.Index;
 
 
 @javax.persistence.Embeddable
-@Table(name = "car_traducciomap" )
+@Table(name = "car_traducciomap" , indexes = { 
+        @Index(name="car_traducciomap_pk_i", columnList = "traducciomapid"),
+        @Index(name="car_traducciomap_idiomaid_fk_i", columnList = "idiomaid")})
 @javax.xml.bind.annotation.XmlRootElement
 public class TraduccioMapJPA implements TraduccioMap {
 

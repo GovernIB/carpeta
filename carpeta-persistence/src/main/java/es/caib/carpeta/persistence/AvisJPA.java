@@ -6,17 +6,21 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
+import javax.persistence.Index;
 import javax.persistence.GeneratedValue;
-import org.hibernate.annotations.Index;
 import javax.persistence.SequenceGenerator;
-import org.hibernate.annotations.ForeignKey;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 
 
 @Entity
-@Table(name = "car_avis" )
+@Table(name = "car_avis" , indexes = { 
+        @Index(name="car_avis_pk_i", columnList = "avisid"),
+        @Index(name="car_avis_descripcioid_fk_i", columnList = "descripcioid"),
+        @Index(name="car_avis_entitatid_fk_i", columnList = "entitatid"),
+        @Index(name="car_avis_pluginfrontid_fk_i", columnList = "pluginfrontid")})
 @SequenceGenerator(name="AVIS_SEQ", sequenceName="car_avis_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class AvisJPA implements Avis {
@@ -27,15 +31,12 @@ private static final long serialVersionUID = 1036906268L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="AVIS_SEQ")
-    @Index(name="car_avis_pk_i")
     @Column(name="avisid",nullable = false,length = 19)
     long avisID;
 
-    @Index(name="car_avis_descripcioid_fk_i")
     @Column(name="descripcioid",nullable = false,length = 19)
     long descripcioID;
 
-    @Index(name="car_avis_entitatid_fk_i")
     @Column(name="entitatid",length = 19)
     java.lang.Long entitatID;
 
@@ -51,7 +52,6 @@ private static final long serialVersionUID = 1036906268L;
     @Column(name="gravetat",nullable = false,length = 10)
     int gravetat;
 
-    @Index(name="car_avis_pluginfrontid_fk_i")
     @Column(name="pluginfrontid",length = 19)
     java.lang.Long pluginFrontID;
 
@@ -174,8 +174,7 @@ private static final long serialVersionUID = 1036906268L;
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
-    @ForeignKey(name="car_avis_traduccio_desc_fk")
-    @JoinColumn(name = "descripcioid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "descripcioid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_avis_traduccio_desc_fk"))
     private TraduccioJPA descripcio;
 
     public TraduccioJPA getDescripcio() {
@@ -199,8 +198,7 @@ private static final long serialVersionUID = 1036906268L;
 // IMP Field:entitatid | Table: car_entitat | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @ForeignKey(name="car_avis_entitat_ent_fk")
-    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = true, insertable=false, updatable=false)
+    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_avis_entitat_ent_fk"))
     private EntitatJPA entitat;
 
     public EntitatJPA getEntitat() {
@@ -214,8 +212,7 @@ private static final long serialVersionUID = 1036906268L;
 // IMP Field:pluginid | Table: car_plugin | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @ForeignKey(name="car_avis_plugin_pfront_fk")
-    @JoinColumn(name = "pluginfrontid", referencedColumnName ="pluginID", nullable = true, insertable=false, updatable=false)
+    @JoinColumn(name = "pluginfrontid", referencedColumnName ="pluginID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_avis_plugin_pfront_fk"))
     private PluginJPA plugin;
 
     public PluginJPA getPlugin() {

@@ -6,15 +6,17 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.Lob;
+import javax.persistence.Index;
 import javax.persistence.GeneratedValue;
-import org.hibernate.annotations.Index;
 import javax.persistence.SequenceGenerator;
 import org.hibernate.annotations.Type;
 import javax.persistence.Id;
 
 
 @Entity
-@Table(name = "car_log" )
+@Table(name = "car_log" , indexes = { 
+        @Index(name="car_log_pk_i", columnList = "logid"),
+        @Index(name="car_log_pluginid_fk_i", columnList = "pluginid")})
 @SequenceGenerator(name="LOGCARPETA_SEQ", sequenceName="car_log_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class LogCarpetaJPA implements LogCarpeta {
@@ -25,7 +27,6 @@ private static final long serialVersionUID = 1140880713L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="LOGCARPETA_SEQ")
-    @Index(name="car_log_pk_i")
     @Column(name="logid",nullable = false,length = 19)
     long logID;
 
@@ -38,7 +39,6 @@ private static final long serialVersionUID = 1140880713L;
     @Column(name="estat",nullable = false,length = 10)
     int estat;
 
-    @Index(name="car_log_pluginid_fk_i")
     @Column(name="pluginid",length = 19)
     java.lang.Long pluginID;
 

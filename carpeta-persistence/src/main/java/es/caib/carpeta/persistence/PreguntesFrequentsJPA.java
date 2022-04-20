@@ -6,17 +6,21 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
+import javax.persistence.Index;
 import javax.persistence.GeneratedValue;
-import org.hibernate.annotations.Index;
 import javax.persistence.SequenceGenerator;
-import org.hibernate.annotations.ForeignKey;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 
 
 @Entity
-@Table(name = "car_preguntesfrequents" )
+@Table(name = "car_preguntesfrequents" , indexes = { 
+        @Index(name="car_preguntesfrequents_pk_i", columnList = "preguntesfrequentsid"),
+        @Index(name="car_faq_enunciatid_fk_i", columnList = "enunciatid"),
+        @Index(name="car_faq_respostaid_fk_i", columnList = "respostaid"),
+        @Index(name="car_faq_entitatid_fk_i", columnList = "entitatid")})
 @SequenceGenerator(name="PREGUNTESFREQUENTS_SEQ", sequenceName="car_preguntesfrequents_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class PreguntesFrequentsJPA implements PreguntesFrequents {
@@ -27,22 +31,18 @@ private static final long serialVersionUID = 1787206139L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="PREGUNTESFREQUENTS_SEQ")
-    @Index(name="car_preguntesfrequents_pk_i")
     @Column(name="preguntesfrequentsid",nullable = false,length = 19)
     long preguntesFrequentsID;
 
-    @Index(name="car_faq_enunciatid_fk_i")
     @Column(name="enunciatid",nullable = false,length = 19)
     long enunciatID;
 
-    @Index(name="car_faq_respostaid_fk_i")
     @Column(name="respostaid",nullable = false,length = 19)
     long respostaID;
 
     @Column(name="ordre",nullable = false,length = 10)
     int ordre;
 
-    @Index(name="car_faq_entitatid_fk_i")
     @Column(name="entitatid",nullable = false,length = 19)
     long entitatID;
 
@@ -128,8 +128,7 @@ private static final long serialVersionUID = 1787206139L;
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
-    @ForeignKey(name="car_faq_traduccio_enun_fk")
-    @JoinColumn(name = "enunciatid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "enunciatid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_faq_traduccio_enun_fk"))
     private TraduccioJPA enunciat;
 
     public TraduccioJPA getEnunciat() {
@@ -153,8 +152,7 @@ private static final long serialVersionUID = 1787206139L;
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
-    @ForeignKey(name="car_faq_traduccio_resp_fk")
-    @JoinColumn(name = "respostaid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "respostaid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_faq_traduccio_resp_fk"))
     private TraduccioJPA resposta;
 
     public TraduccioJPA getResposta() {
@@ -178,8 +176,7 @@ private static final long serialVersionUID = 1787206139L;
 // IMP Field:entitatid | Table: car_entitat | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @ForeignKey(name="car_faq_entitat_ent_fk")
-    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_faq_entitat_ent_fk"))
     private EntitatJPA entitat;
 
     public EntitatJPA getEntitat() {

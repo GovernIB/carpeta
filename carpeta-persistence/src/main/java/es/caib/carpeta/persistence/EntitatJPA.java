@@ -6,22 +6,32 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import org.hibernate.annotations.ForeignKey;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import java.util.Set;
 import org.hibernate.annotations.Type;
 import java.util.HashSet;
 import javax.persistence.GenerationType;
+import javax.persistence.Index;
 import javax.persistence.GeneratedValue;
-import org.hibernate.annotations.Index;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 
 
 @Entity
-@Table(name = "car_entitat" )
+@Table(name = "car_entitat" , indexes = { 
+        @Index(name="car_entitat_pk_i", columnList = "entitatid"),
+        @Index(name="car_entitat_nom_fk_i", columnList = "nomid"),
+        @Index(name="car_entitat_descripcioid_fk_i", columnList = "descripcioid"),
+        @Index(name="car_entitat_logocapback_fk_i", columnList = "logocapbackid"),
+        @Index(name="car_entitat_logopeuback_fk_i", columnList = "logopeubackid"),
+        @Index(name="car_entitat_logolatfront_fk_i", columnList = "logolateralfrontid"),
+        @Index(name="car_entitat_iconid_fk_i", columnList = "iconid"),
+        @Index(name="car_entitat_pluginloginid_fk_i", columnList = "pluginloginid"),
+        @Index(name="car_entitat_logintextid_fk_i", columnList = "logintextid"),
+        @Index(name="car_entitat_fitxercss_fk_i", columnList = "fitxercss")})
 @SequenceGenerator(name="ENTITAT_SEQ", sequenceName="car_entitat_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class EntitatJPA implements Entitat {
@@ -32,15 +42,12 @@ private static final long serialVersionUID = 489209138L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ENTITAT_SEQ")
-    @Index(name="car_entitat_pk_i")
     @Column(name="entitatid",nullable = false,length = 19)
     long entitatID;
 
-    @Index(name="car_entitat_nom_fk_i")
     @Column(name="nomid",nullable = false,length = 19)
     long nomID;
 
-    @Index(name="car_entitat_descripcioid_fk_i")
     @Column(name="descripcioid",length = 19)
     java.lang.Long descripcioID;
 
@@ -56,22 +63,18 @@ private static final long serialVersionUID = 489209138L;
     @Column(name="colormenu",nullable = false,length = 100)
     java.lang.String colorMenu;
 
-    @Index(name="car_entitat_logocapback_fk_i")
     @Column(name="logocapbackid",nullable = false,length = 19)
     long logoCapBackID;
 
-    @Index(name="car_entitat_logopeuback_fk_i")
     @Column(name="logopeubackid",nullable = false,length = 19)
     long logoPeuBackID;
 
-    @Index(name="car_entitat_logolatfront_fk_i")
     @Column(name="logolateralfrontid",nullable = false,length = 19)
     long logoLateralFrontID;
 
     @Column(name="versio",nullable = false,length = 50)
     java.lang.String versio;
 
-    @Index(name="car_entitat_iconid_fk_i")
     @Column(name="iconid",nullable = false,length = 19)
     long iconID;
 
@@ -102,15 +105,12 @@ private static final long serialVersionUID = 489209138L;
     @Column(name="suportautenticacio",length = 255)
     java.lang.String suportautenticacio;
 
-    @Index(name="car_entitat_pluginloginid_fk_i")
     @Column(name="pluginloginid",length = 19)
     java.lang.Long pluginLoginID;
 
-    @Index(name="car_entitat_logintextid_fk_i")
     @Column(name="logintextid",length = 19)
     java.lang.Long loginTextID;
 
-    @Index(name="car_entitat_fitxercss_fk_i")
     @Column(name="fitxercss",length = 19)
     java.lang.Long fitxerCssID;
 
@@ -605,8 +605,7 @@ private static final long serialVersionUID = 489209138L;
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
-    @ForeignKey(name="car_entitat_traduccio_nom_fk")
-    @JoinColumn(name = "nomid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "nomid", referencedColumnName ="traduccioID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_entitat_traduccio_nom_fk"))
     private TraduccioJPA nom;
 
     public TraduccioJPA getNom() {
@@ -630,8 +629,7 @@ private static final long serialVersionUID = 489209138L;
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
-    @ForeignKey(name="car_entitat_traduccio_des_fk")
-    @JoinColumn(name = "descripcioid", referencedColumnName ="traduccioID", nullable = true, insertable=false, updatable=false)
+    @JoinColumn(name = "descripcioid", referencedColumnName ="traduccioID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_entitat_traduccio_des_fk"))
     private TraduccioJPA descripcio;
 
     public TraduccioJPA getDescripcio() {
@@ -655,8 +653,7 @@ private static final long serialVersionUID = 489209138L;
 // IMP Field:fitxerid | Table: car_fitxer | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @ForeignKey(name="car_entitat_fitxer_lcb_fk")
-    @JoinColumn(name = "logocapbackid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "logocapbackid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_entitat_fitxer_lcb_fk"))
     private FitxerJPA logoCapBack;
 
     public FitxerJPA getLogoCapBack() {
@@ -670,8 +667,7 @@ private static final long serialVersionUID = 489209138L;
 // IMP Field:fitxerid | Table: car_fitxer | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @ForeignKey(name="car_entitat_fitxer_lpb_fk")
-    @JoinColumn(name = "logopeubackid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "logopeubackid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_entitat_fitxer_lpb_fk"))
     private FitxerJPA logoPeuBack;
 
     public FitxerJPA getLogoPeuBack() {
@@ -685,8 +681,7 @@ private static final long serialVersionUID = 489209138L;
 // IMP Field:fitxerid | Table: car_fitxer | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @ForeignKey(name="car_entitat_fitxer_llf_fk")
-    @JoinColumn(name = "logolateralfrontid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "logolateralfrontid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_entitat_fitxer_llf_fk"))
     private FitxerJPA logoLateralFront;
 
     public FitxerJPA getLogoLateralFront() {
@@ -700,8 +695,7 @@ private static final long serialVersionUID = 489209138L;
 // IMP Field:fitxerid | Table: car_fitxer | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @ForeignKey(name="car_entitat_fitxer_icon_fk")
-    @JoinColumn(name = "iconid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "iconid", referencedColumnName ="fitxerID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_entitat_fitxer_icon_fk"))
     private FitxerJPA icon;
 
     public FitxerJPA getIcon() {
@@ -715,8 +709,7 @@ private static final long serialVersionUID = 489209138L;
 // IMP Field:pluginid | Table: car_plugin | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @ForeignKey(name="car_entitat_plugin_login_fk")
-    @JoinColumn(name = "pluginloginid", referencedColumnName ="pluginID", nullable = true, insertable=false, updatable=false)
+    @JoinColumn(name = "pluginloginid", referencedColumnName ="pluginID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_entitat_plugin_login_fk"))
     private PluginJPA plugin;
 
     public PluginJPA getPlugin() {
@@ -730,8 +723,7 @@ private static final long serialVersionUID = 489209138L;
 // IMP Field:traduccioid | Table: car_traduccio | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER, cascade=javax.persistence.CascadeType.ALL)
-    @ForeignKey(name="car_entitat_traduccio_log_fk")
-    @JoinColumn(name = "logintextid", referencedColumnName ="traduccioID", nullable = true, insertable=false, updatable=false)
+    @JoinColumn(name = "logintextid", referencedColumnName ="traduccioID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_entitat_traduccio_log_fk"))
     private TraduccioJPA loginText;
 
     public TraduccioJPA getLoginText() {
@@ -755,8 +747,7 @@ private static final long serialVersionUID = 489209138L;
 // IMP Field:fitxerid | Table: car_fitxer | Type: 1  
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @ForeignKey(name="car_entitat_fitxer_css_fk")
-    @JoinColumn(name = "fitxercss", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false)
+    @JoinColumn(name = "fitxercss", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_entitat_fitxer_css_fk"))
     private FitxerJPA fitxerCss;
 
     public FitxerJPA getFitxerCss() {

@@ -1,20 +1,25 @@
 
 
-
-
-endpoint=https://pre-reaws.redsara.es/reaCXFServer/services/reaCXFWSv2
-
-codiApp=MYAPP
-
-organisme.dir3=A04003003 
-organisme.denominacio=Gobierno de las Islas Baleares
-
+#nif.poderdante=12345678Z
 nif.apoderado=12345678Z
 
-# CERTIFICATE Token
-authorization.ks.path=D:/dades/mykeystore.jks
-authorization.ks.type=JKS
-authorization.ks.password=keystore_password
-authorization.ks.cert.alias=cert_alias
-authorization.ks.cert.password=certificate_password
+es.caib.carpeta.pluginsib.carpetafront.apodera.endpoint=https://pre-reaws.redsara.es/reaCXFServer/services/reaCXFWSv2
 
+es.caib.carpeta.pluginsib.carpetafront.apodera.codiApp=CARPETA
+
+es.caib.carpeta.pluginsib.carpetafront.apodera.organisme.dir3=A04003003
+es.caib.carpeta.pluginsib.carpetafront.apodera.organisme.denominacio=Gobierno de las Islas Baleares
+
+
+# CERTIFICATE Token
+es.caib.carpeta.pluginsib.carpetafront.apodera.authorization.ks.path=D:/dades/mykeystore.jks
+es.caib.carpeta.pluginsib.carpetafront.apodera.authorization.ks.type=JKS
+es.caib.carpeta.pluginsib.carpetafront.apodera.authorization.ks.password=keystore_password
+es.caib.carpeta.pluginsib.carpetafront.apodera.authorization.ks.cert.alias=1
+es.caib.carpeta.pluginsib.carpetafront.apodera.authorization.ks.cert.password=ertificate_password
+
+
+es.caib.carpeta.pluginsib.carpetafront.apodera.connectiontimeout=20000
+es.caib.carpeta.pluginsib.carpetafront.apodera.readtimeout=20000
+
+es.caib.carpeta.pluginsib.carpetafront.apodera.desenvolupament=true

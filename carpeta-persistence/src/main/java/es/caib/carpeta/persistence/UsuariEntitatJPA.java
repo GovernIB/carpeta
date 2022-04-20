@@ -6,18 +6,22 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
+import javax.persistence.Index;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.GeneratedValue;
-import org.hibernate.annotations.Index;
 import javax.persistence.SequenceGenerator;
-import org.hibernate.annotations.ForeignKey;
+import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 
 
 @Entity
-@Table(name = "car_usuarientitat"  , uniqueConstraints = {
+@Table(name = "car_usuarientitat" , indexes = { 
+        @Index(name="car_usuarientitat_pk_i", columnList = "usuarientitatid"),
+        @Index(name="car_usuent_usuariid_fk_i", columnList = "usuariid"),
+        @Index(name="car_usuent_entitatid_fk_i", columnList = "entitatid")},
+           uniqueConstraints = {
             @UniqueConstraint(name="car_usuent_usu_ent_uk", columnNames={"usuariid","entitatid"}) } )
 @SequenceGenerator(name="USUARIENTITAT_SEQ", sequenceName="car_usuarientitat_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
@@ -29,15 +33,12 @@ private static final long serialVersionUID = 2031334771L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="USUARIENTITAT_SEQ")
-    @Index(name="car_usuarientitat_pk_i")
     @Column(name="usuarientitatid",nullable = false,length = 19)
     long usuariEntitatID;
 
-    @Index(name="car_usuent_usuariid_fk_i")
     @Column(name="usuariid",nullable = false,length = 19)
     long usuariID;
 
-    @Index(name="car_usuent_entitatid_fk_i")
     @Column(name="entitatid",nullable = false,length = 19)
     long entitatID;
 
@@ -116,8 +117,7 @@ private static final long serialVersionUID = 2031334771L;
 // IMP Field:usuariid | Table: car_usuari | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @ForeignKey(name="car_usuent_usuari_fk")
-    @JoinColumn(name = "usuariid", referencedColumnName ="usuariID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "usuariid", referencedColumnName ="usuariID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_usuent_usuari_fk"))
     private UsuariJPA usuari;
 
     public UsuariJPA getUsuari() {
@@ -131,8 +131,7 @@ private static final long serialVersionUID = 2031334771L;
 // IMP Field:entitatid | Table: car_entitat | Type: 1  
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @ForeignKey(name="car_usuent_entitat_fk")
-    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_usuent_entitat_fk"))
     private EntitatJPA entitat;
 
     public EntitatJPA getEntitat() {

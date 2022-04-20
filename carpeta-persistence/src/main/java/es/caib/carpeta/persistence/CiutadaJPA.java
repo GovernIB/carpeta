@@ -5,15 +5,17 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GenerationType;
+import javax.persistence.Index;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.GeneratedValue;
-import org.hibernate.annotations.Index;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Id;
 
 
 @Entity
-@Table(name = "car_ciutada"  , uniqueConstraints = {
+@Table(name = "car_ciutada" , indexes = { 
+        @Index(name="car_ciutada_pk_i", columnList = "ciutadaid")},
+           uniqueConstraints = {
             @UniqueConstraint(name="car_ciutada_nif_rnif_uk", columnNames={"nif","representantnif"}) } )
 @SequenceGenerator(name="CIUTADA_SEQ", sequenceName="car_ciutada_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
@@ -25,7 +27,6 @@ private static final long serialVersionUID = -591726526L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="CIUTADA_SEQ")
-    @Index(name="car_ciutada_pk_i")
     @Column(name="ciutadaid",nullable = false,length = 19)
     long ciutadaID;
 

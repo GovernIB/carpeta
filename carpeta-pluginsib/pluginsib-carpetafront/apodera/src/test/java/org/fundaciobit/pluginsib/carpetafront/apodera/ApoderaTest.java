@@ -1,13 +1,8 @@
 package org.fundaciobit.pluginsib.carpetafront.apodera;
 
 import java.io.FileInputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-
-import javax.xml.bind.JAXBElement;
-
 
 import org.fundaciobit.pluginsib.carpetafront.apodera.api.*;
 import org.junit.Test;
@@ -18,189 +13,113 @@ import org.junit.Test;
  *
  */
 public class ApoderaTest {
-    
+
     @Test
     public void extecuteTest() {
         main(null);
     }
-    
 
-  public static void main(String[] args) {
-    
-    
-    try {
-      Properties prop = new Properties();
-      prop.load(new FileInputStream("connexio.properties"));
-      
-      
-      String endPoint = prop.getProperty("endpoint");
-        
+    public static void main(String[] args) {
 
-      String codAplicacion = prop.getProperty("codiApp");
+        try {
+            Properties prop = new Properties();
+            prop.load(new FileInputStream("connexio.properties"));
 
+            String nifPoderdante = prop.getProperty("nif.poderdante");
+            String nifApoderado = prop.getProperty("nif.apoderado");
 
-       // # CERTIFICATE Token
-        
-       String auth_ks_Path = prop.getProperty("authorization.ks.path");
-       String auth_ks_Type = prop.getProperty("authorization.ks.type");
-       String auth_ks_Password = prop.getProperty("authorization.ks.password");
-       String auth_ks_Alias = prop.getProperty("authorization.ks.cert.alias");
-       String auth_ks_Cert_Password = prop.getProperty("authorization.ks.cert.password");
+            ApoderaCarpetaFrontPlugin api = new ApoderaCarpetaFrontPlugin("es.caib.carpeta.", prop);
 
-       String organisme_dir3 = prop.getProperty("organisme.dir3");
-       String organisme_denominacio = prop.getProperty("organisme.denominacio");
-       
-       
-//       String nifApoderado = "43096845C";
-//       String nifPoderdante = "43096845C";
-        String nifApoderado = "43087475B";
-        String nifPoderdante = "43087475B";
+            System.out.println("Nif Apoderado: " + nifApoderado);
+            System.out.println("Nif Poderdante: " + nifPoderdante);
+            // Cridada
+            ConsultaApoderamientosResponse response = api.consultaInterna(nifPoderdante,
+                    nifApoderado);
+            System.out.println("2");
+            List<DatosApoderamientoType> apoderamientos = response.getListaApoderamientos();
+            System.out.println("apoderamientos: " + apoderamientos.size());
 
-        
-        ApoderaCarpetaFrontPlugin api = new ApoderaCarpetaFrontPlugin(endPoint, auth_ks_Path, auth_ks_Type,
-            auth_ks_Password, auth_ks_Alias, auth_ks_Cert_Password);
-        
-        DatosAuditoriaType datosAuditoriaType = new DatosAuditoriaType();
-        datosAuditoriaType.setCodAplicacion(codAplicacion);
-        
-        SimpleDateFormat SDF = new SimpleDateFormat("yyyyMMdd");
-        
-        datosAuditoriaType.setTimestamp(Long.parseLong(SDF.format(new Date())));
-        
-        DatosApoderadoType datosApoderado = new DatosApoderadoType();
-        datosApoderado.setNifNieApoderado(nifApoderado); //"43096845C");
+            if (apoderamientos.size() == 0) {
+                System.err.println("No hi ha apoderaments per aquest usuari ...");
+            } else {
 
-        DatosPoderdanteType datosPoderdante = new DatosPoderdanteType();
-        datosPoderdante.setNifNiePoderdante(nifPoderdante); //"43096845C");
+                int i = 1;
+                for (DatosApoderamientoType d : apoderamientos) {
 
-        TipoApoderamientoType tipoApoderamiento = null;
+                    System.out.println(i + ".- Common Info=>  Estat:" + d.getEstado()
+                            + "\tcodiApoderaEXT:" + d.getCodApoderamientoEXT() + "\tcodiApoderaINT:"
+                            + d.getCodApoderamientoINT());
 
-        tipoApoderamiento = new TipoApoderamientoType();
+                    TipoApoderamiento ta = TipoApoderamiento.getTipoApoderamiento(
+                            d.getTipoApoderamiento().getTipoApod(),
+                            d.getTipoApoderamiento().getSubTipoApod());
 
-        /*
-        final TipoApoderamiento t = TipoApoderamiento.GENERAL; // TipoApoderamiento.TODAS_LAS_ADMINISTRACIONES_PUBLICAS; //TipoApoderamiento.PROCEDIMIENTOS_Y_O_TRAMITES;
-        tipoApoderamiento.setTipoApod(t.getTipo());
-        tipoApoderamiento.setSubTipoApod(t.getSubtipo());
-        */
+                    String ts = "Tipo:" + d.getTipoApoderamiento().getTipoApod() + " | Subtipo:"
+                            + d.getTipoApoderamiento().getSubTipoApod();
 
-        OrganismoType organismoType = new OrganismoType();
+                    if (ta == null) {
+                        System.out.println(i + ".- Tipo Apoderamiento => DESCONEGUT (" + ts + ")");
+                    } else {
+                        System.out.println(i + ".- Tipo Apoderamiento => " + ta.getDescripcion()
+                                + " (" + ts + ")");
+                    }
 
-        organismoType.setCodOrganismo(organisme_dir3); 
-        organismoType.setDenomOrganismo(organisme_denominacio);
+                    DatosApoderadoCompletoType apo = d.getDatosApoderado();
+                    if (apo.getPersonaFisica() != null) {
+                        PersonaFisicaType pf = apo.getPersonaFisica();
+                        String titol = i + ".- Apoderat Perso. Fisica => ";
 
-        //organismoType.setCodOrganismo("A04027052"); 
-        //organismoType.setDenomOrganismo("Gobierno de las Islas Baleares - Fundación Bit"); //"Fondo de Garantia Salarial");
+                        System.out.println(toStringPersonaFisica(pf, titol));
+                    }
+                    if (apo.getPersonaJuridica() != null) {
+                        PersonaJuridicaType pf = apo.getPersonaJuridica();
+                        String titol = i + ".- Apoderat Perso. Juridica => ";
 
-        Organismo organismo = new Organismo();
-        organismo.getOrganismo().add(organismoType);
-        ObjectFactory factory = new ObjectFactory();
-        JAXBElement<Organismo> jaxbelementOrganismo =  factory.createTipoApoderamientoTypeListaOrganismos(organismo);
-        tipoApoderamiento.setListaOrganismos(jaxbelementOrganismo);
-        
-        DatosConsultaApoderamientoType dcat = new DatosConsultaApoderamientoType();
-//        dcat.setDatosApoderado(datosApoderado);
-        dcat.setTipoApoderamiento(tipoApoderamiento);
+                        System.out.println(toStringPersonaJuridica(pf, titol));
+                    }
 
-        dcat.setDatosPoderdante(datosPoderdante);
+                    DatosPoderdanteCompletoType poderdante = d.getDatosPoderdante();
+                    if (poderdante.getPersonaFisica() != null) {
+                        System.out.println(toStringPersonaFisica(poderdante.getPersonaFisica(),
+                                i + ".- Poderdante Perso. Fisica => "));
+                    }
 
-        //dcat.setCodApoderamientoEXT(0L);
-        //dcat.setCodApoderamientoINT(1147L);
+                    if (poderdante.getPersonaJuridica() != null) {
+                        System.out.println(toStringPersonaJuridica(poderdante.getPersonaJuridica(),
+                                i + ".- Poderdante Perso. Juridica => "));
+                    }
 
-        
-        DatosConsultaType datosConsultaType = new DatosConsultaType();
-        datosConsultaType.setTipoConsulta(false); // false => simple 0 || true => completa 1
-        datosConsultaType.setDatosConsultaApoderamiento(dcat);
+                    if (poderdante.getRepresentante() != null) {
+                        System.out.println(toStringPersonaFisica(poderdante.getRepresentante(),
+                                i + ".- Poderdante Representante => "));
+                    }
 
-        PeticionConsulta peticio = new PeticionConsulta();
-        peticio.setDatosAuditoriaType(datosAuditoriaType);
-        peticio.setDatosConsultaType(datosConsultaType);
+                    if (d.getPeriodoVigencia() != null) {
+                        System.out.println(
+                                i + ".- Vigencia => " + d.getPeriodoVigencia().getFechaInicio()
+                                        + " - " + d.getPeriodoVigencia().getFechaFin());
+                    }
 
-        System.out.println("1");
-        // Cridada
-        ConsultaApoderamientosResponse response = api.consulta(peticio);
-        System.out.println("2");
-        List<DatosApoderamientoType> apoderamientos = response.getListaApoderamientos();
-        System.out.println("apoderamientos: " + apoderamientos.size());
-        
-        if (apoderamientos.size() == 0) {
-           System.err.println("No hi ha apoderaments per aquest usuari ...");
-        } else {
-        
-        int i = 1;
-        for (DatosApoderamientoType d : apoderamientos) {
+                    // d.get
+                    // System.out.println(i + ".- Common Info=>
+                    i++;
+                }
+            }
 
-           System.out.println(i + ".- Common Info=>  Estat:" + d.getEstado() 
-               + "\tcodiApoderaEXT:" + d.getCodApoderamientoEXT() + "\tcodiApoderaINT:" + d.getCodApoderamientoINT() );
-           
-           TipoApoderamiento ta = TipoApoderamiento.getTipoApoderamiento(d.getTipoApoderamiento().getTipoApod(),
-               d.getTipoApoderamiento().getSubTipoApod() );
-           
-           String ts = "Tipo:" + d.getTipoApoderamiento().getTipoApod()
-               + " | Subtipo:" + d.getTipoApoderamiento().getSubTipoApod(); 
-           
-           if (ta == null) {
-             System.out.println(i + ".- Tipo Apoderamiento => DESCONEGUT (" + ts + ")");
-           } else {
-             System.out.println(i + ".- Tipo Apoderamiento => " + ta.getDescripcion() + " (" + ts + ")");
-           }
-           
-           DatosApoderadoCompletoType apo = d.getDatosApoderado();
-           if (apo.getPersonaFisica() != null) {
-             PersonaFisicaType pf = apo.getPersonaFisica();
-             String titol = i + ".- Apoderat Perso. Fisica => ";
-             
-             System.out.println(toStringPersonaFisica(pf, titol) );
-           }
-           if (apo.getPersonaJuridica() != null) {
-             PersonaJuridicaType pf = apo.getPersonaJuridica();
-             String titol = i + ".- Apoderat Perso. Juridica => ";
-             
-             System.out.println(toStringPersonaJuridica(pf, titol) );
-           }
-           
-           DatosPoderdanteCompletoType poderdante = d.getDatosPoderdante();
-           if (poderdante.getPersonaFisica() != null) {
-             System.out.println(toStringPersonaFisica(poderdante.getPersonaFisica(), i + ".- Poderdante Perso. Fisica => ") );
-           }
-           
-           if (poderdante.getPersonaJuridica() != null) {
-             System.out.println(toStringPersonaJuridica(poderdante.getPersonaJuridica(), i + ".- Poderdante Perso. Juridica => ") );
-           }
-           
-           if (poderdante.getRepresentante() != null) {
-             System.out.println(toStringPersonaFisica(poderdante.getRepresentante(), i + ".- Poderdante Representante => ") );
-           }
-
-           if (d.getPeriodoVigencia() != null) {
-             System.out.println(i + ".- Vigencia => " +  d.getPeriodoVigencia().getFechaInicio() + " - " + d.getPeriodoVigencia().getFechaFin());          
-           }
-           
-           //d.get
-           //System.out.println(i + ".- Common Info=>
-           i++;
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-        }
-        
-        
-      
-    } catch (Exception e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
+
     }
-    
-    
-    
-    
-    
-  }
 
-  protected static String toStringPersonaJuridica(PersonaJuridicaType pf, String titol) {
-    return titol + " NIF:" + pf.getNif() + "\tN:" + pf.getRazonSocial()
-        + "\tE:" + pf.getEmail() + "\tD:" + pf.getDomicilio();
-  }
+    protected static String toStringPersonaJuridica(PersonaJuridicaType pf, String titol) {
+        return titol + " NIF:" + pf.getNif() + "\tN:" + pf.getRazonSocial() + "\tE:" + pf.getEmail()
+                + "\tD:" + pf.getDomicilio();
+    }
 
-  protected static String toStringPersonaFisica(PersonaFisicaType pf, String titol) {
-    return titol + " NIF:" + pf.getNifNie() + "\tN:" + pf.getNombre() + "\tA1:"
-       + pf.getApellido1() + "\tA2:" + pf.getApellido2() + "\tE:" + pf.getEmail();
-  }
+    protected static String toStringPersonaFisica(PersonaFisicaType pf, String titol) {
+        return titol + " NIF:" + pf.getNifNie() + "\tN:" + pf.getNombre() + "\tA1:"
+                + pf.getApellido1() + "\tA2:" + pf.getApellido2() + "\tE:" + pf.getEmail();
+    }
 }
