@@ -29,3 +29,7 @@ ALTER TABLE car_ciutada
 
 create index car_ciutada_pk_i on car_ciutada (ciutadaid);
 
+
+grant select on car_ciutada_seq to www_carpeta;
+grant select,insert,delete,update on car_ciutada to www_carpeta;
+
