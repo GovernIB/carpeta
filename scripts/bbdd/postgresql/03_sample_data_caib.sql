@@ -7,7 +7,7 @@ INSERT INTO car_traduccio VALUES (111);
 
 INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (111, 'en', 'Government of the Balearic Islands');
 INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (111, 'ca', 'Govern de les Illes Balears');
-INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (111, 'es', 'Gobierno de las Islas Baleares');
+INSERT INTO car_traducciomap(traducciomapid, idiomaid, valor) VALUES (111, 'es', 'Gobierno de las Illes Balears');
 
 
 

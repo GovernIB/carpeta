@@ -180,39 +180,46 @@ class NotificacionsSistra extends Component {
                     paginationNumbers.push(<Pagination.Item key={number} active={number === this.state.pagination_active} activeLabel="" onClick={(event) => this.handlePagination(event)} >{number}</Pagination.Item>,);
                 }
 
-                taulaNotificacionsSistra = <>
-                    <Table responsive striped bordered hover style={tamanyTaula}>
-                        <thead className="table-success">
-                        <tr>
-                            <th>{t('notificacionsSistraComunicacionDescripcion')}</th>
-                            <th style={tamanyData}>{t('notificacionsSistraComunicacionFecha')}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {this.state.dataComunicacions.map(({descripcion, fecha, url}) => {
-                            return <tr className="clickableRow" data-target="_blank" data-url={url} style={cursorPointer} tabIndex="511">
-                                <td>{descripcion}</td>
-                                <td data-order={$.dateOrder(fecha)}>{$.dateFormat(fecha)}</td>
-                            </tr>
-                        })}
-                        </tbody>
-                    </Table>
-                    <div style={{float:'left', marginTop: '9px;',width: '60%'}}>
-                        {t('carpeta_paginacion_1') +
-                        ((parseInt(this.state.pagination_active,10)-1)*10+1) +
-                        t('carpeta_paginacion_2') +
-                        ( ((parseInt(this.state.pagination_active,10)*10) <= parseInt(this.state.total_items,10))
-                                ? parseInt(this.state.pagination_active,10)*10
-                                : this.state.total_items
-                        ) +
-                        t('carpeta_paginacion_3') +
-                        this.state.total_items +
-                        t('carpeta_paginacion_4')}
-                    </div>
-                    <Pagination style={{float:'right',paddingRight: '0.7em'}}>
-                        {paginationNumbers}
-                    </Pagination>
-                </>
+                if(this.state.dataComunicacions) {
+                    taulaNotificacionsSistra =
+                        <>
+                            <Table responsive striped bordered hover style={tamanyTaula}>
+                                <thead className="table-success">
+                                <tr>
+                                    <th>{t('notificacionsSistraComunicacionDescripcion')}</th>
+                                    <th style={tamanyData}>{t('notificacionsSistraComunicacionFecha')}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {this.state.dataComunicacions.map(({descripcion, fecha, url}) => {
+                                    return <tr className="clickableRow" data-target="_blank" data-url={url}
+                                               style={cursorPointer} tabIndex="511">
+                                        <td>{descripcion}</td>
+                                        <td data-order={$.dateOrder(fecha)}>{$.dateFormat(fecha)}</td>
+                                    </tr>
+                                })}
+                                </tbody>
+                            </Table>
+                            <div style={{float: 'left', marginTop: '9px;', width: '60%'}}>
+                                {t('carpeta_paginacion_1') +
+                                ((parseInt(this.state.pagination_active, 10) - 1) * 10 + 1) +
+                                t('carpeta_paginacion_2') +
+                                (((parseInt(this.state.pagination_active, 10) * 10) <= parseInt(this.state.total_items, 10))
+                                        ? parseInt(this.state.pagination_active, 10) * 10
+                                        : this.state.total_items
+                                ) +
+                                t('carpeta_paginacion_3') +
+                                this.state.total_items +
+                                t('carpeta_paginacion_4')}
+                            </div>
+                            <Pagination style={{float: 'right', paddingRight: '0.7em'}}>
+                                {paginationNumbers}
+                            </Pagination>
+                        </>
+                }else{
+                    taulaNotificacionsSistra = <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%'}}
+                                                    role="alert">{t('notificacionsSistraBuid')}</div>;
+                }
 
             } else{
                 if(this.state.total_items === 0 && this.state.dataComunicacions !== null) {

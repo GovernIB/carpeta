@@ -187,10 +187,10 @@
   "iniciPrivatEnllasos": "EN UN CLIC",
   "iniciPrivatDescEnllas": "Enlaces rápidos y directos para la ciudadanía.",
 
-  "suportTanca": "Cierra",
+  "suportTanca": "Cerrar",
   "suportAqui": "Consulte nuestra ayuda",
   "suportAjuda": "Si necesita ayuda clique",
-  "suportTitol": "¿Necesitas ayuda?",
+  "suportTitol": "¿Necesita ayuda?",
   "suportPer": "Para ",
   "suportCrida": "Llame al teléfono ",
   "suportConsulta": "Consulte el ",
@@ -200,7 +200,7 @@
   "suportFAQ": "preguntas frecuentes (FAQ)",
   "suportConsultaTecnica": "Háganos llegar su ",
   "suportConsultaTecnicaEnllas": "consulta técnica",
-  "suportAutenticacio": "Problemas relacionados con la autenticación, llama al ",
+  "suportAutenticacio": "Problemas relacionados con la autenticación, llame al ",
 
   "sessioAvisDescripcio": "Su sesión finalizará en 30 segundos. ¿Quiere continuar la sesión?",
   "sessioAvisTitol": "Información Expiración Sesión",
@@ -231,7 +231,7 @@
   "accessibilitatWAI": "Descripción de la Web Accessibility Initiative Doble A",
   "tancar": "Cerrar",
   "menuHamburguesa": "Menú hamburguesa",
-  "menuHamburguesaTanca": "Cierra menú hamburguesa",
+  "menuHamburguesaTanca": "Cerrar menú hamburguesa",
 
   "error500plugin": "Error 500. No se puede acceder a algún plugin, revisar la configuración de los plugins.",
 
