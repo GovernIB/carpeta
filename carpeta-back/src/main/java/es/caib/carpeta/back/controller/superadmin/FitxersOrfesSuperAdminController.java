@@ -122,7 +122,7 @@ public class FitxersOrfesSuperAdminController extends FitxerController{
 		  
 		  Map<Long, File> fitxersFisics = FileSystemManager.getAllFiles();
 		  
-		  List<Long> fitxersBBDD = fitxerEjb.executeQuery(FITXERID, null, new OrderBy(FITXERID));
+		  List<Long> fitxersBBDD = fitxerEjb.executeQuery(FITXERID, new OrderBy(FITXERID));
 		  
 		  // Fitxers que existeixen a BBDD pero no fisicament
 		  for (Long fID : fitxersBBDD) {

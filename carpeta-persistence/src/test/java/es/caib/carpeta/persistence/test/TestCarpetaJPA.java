@@ -188,6 +188,11 @@ public class TestCarpetaJPA {
             return (String) obj;
         }
 
+        @Override
+        public int length() {
+            return 1;
+        }
+
     }
 
 }
