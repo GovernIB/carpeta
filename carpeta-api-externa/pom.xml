@@ -7,7 +7,7 @@
     <parent>
         <artifactId>carpeta</artifactId>
         <groupId>es.caib.carpeta</groupId>
-        <version>1.1.16</version>
+        <version>1.1.17</version>
     </parent>
 
     <artifactId>carpeta-api-externa</artifactId>
@@ -38,19 +38,19 @@
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-commons</artifactId>
-            <version>1.1.16</version>
+            <version>1.1.17</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-persistence</artifactId>
-            <version>1.1.16</version>
+            <version>1.1.17</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-ejb</artifactId>
-            <version>1.1.16</version>
+            <version>1.1.17</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
