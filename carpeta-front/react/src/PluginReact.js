@@ -113,7 +113,7 @@ class PluginReact extends Component {
         // console.log(" PLUGIN REACT RENDER seccioContext " +  this.props.seccioContext + "!");
 
 
-        if (this.props.pluginContext != this.state.pluginContext) {
+        if (this.props.pluginContext !== this.state.pluginContext) {
 
             // console.log(" PLUGIN REACT RENDER plugin context DIFERENTS !!!!");
 

@@ -93,7 +93,7 @@ public class ApoderaTest {
         organismoType.setDenomOrganismo(organisme_denominacio);
 
         //organismoType.setCodOrganismo("A04027052"); 
-        //organismoType.setDenomOrganismo("Gobierno de las Islas Baleares - Fundación Bit"); //"Fondo de Garantia Salarial");
+        //organismoType.setDenomOrganismo("Gobierno de las Illes Balears - Fundación Bit"); //"Fondo de Garantia Salarial");
 
         Organismo organismo = new Organismo();
         organismo.getOrganismo().add(organismoType);

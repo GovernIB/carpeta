@@ -1,12 +1,7 @@
 package org.fundaciobit.pluginsib.carpetafront.apodera;
 
 import java.net.URL;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.ws.BindingProvider;
@@ -126,7 +121,7 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
 
         String startURL = absolutePluginRequestPath + "/" + INDEX_HTML_PAGE;
 
-        log.info("APODERA getStartUrl( ); => " + startURL);
+//        log.info("APODERA getStartUrl( ); => " + startURL);
         return startURL;
     }
 
@@ -260,19 +255,155 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
+    protected static final String SESSIO_CACHE_APODERAMENTS_MAP_APODERA = "SESSIO_CACHE_APODERAMENT_NOTIB";
+
     protected static final String SERVEI_REST_SERVICE = "apodera";
+
+    protected static final String APODERA_RES_BUNDLE = "carpetafrontapodera";
 
     public void consultaApoderamentsRestService(String absolutePluginRequestPath,
             String relativePluginRequestPath, String query, HttpServletRequest request,
             HttpServletResponse response, UserData userData, String administrationEncriptedID,
             Locale locale, boolean isGet) {
 
-        log.info("entram servei_REST_service");
         try {
 
-            String nifPoderdante = userData.getAdministrationID();
+            // CIUTADÀ PODERDANT
+            DatosPoderdanteCompletoType poderdant = new DatosPoderdanteCompletoType();
 
-            consultaInterna(nifPoderdante, null);
+            String nifPoderdante = userData.getAdministrationID();
+            boolean isEmpresa = userData.isBusiness();
+
+            if(!isEmpresa) {
+                PersonaFisicaType persona = new PersonaFisicaType();
+                persona.setNombre(userData.getName());
+                persona.setApellido1(userData.getSurname1());
+                persona.setApellido2(userData.getSurname2());
+                persona.setNifNie(userData.getAdministrationID());
+                poderdant.setPersonaFisica(persona);
+            } else{
+                PersonaJuridicaType empresa = new PersonaJuridicaType();
+                empresa.setRazonSocial(userData.getName());
+                empresa.setNif(userData.getAdministrationID());
+                poderdant.setPersonaJuridica(empresa);
+            }
+
+            List<DatosApoderamientoType> apoderaments = consultaInterna(nifPoderdante, null).getListaApoderamientos();
+
+            int apoderamentsTotals;
+            ArrayList<Apoderamiento> apos = new ArrayList<Apoderamiento>();
+
+            if (apoderaments == null) {
+                apoderaments = new ArrayList<DatosApoderamientoType>();
+                apoderamentsTotals = 0;
+
+            } else {
+
+                apoderamentsTotals = apoderaments.size();
+
+
+                // LLISTA APODERAMENTS
+                for (DatosApoderamientoType apoderament : apoderaments) {
+
+                    Apoderamiento apo = new Apoderamiento();
+
+                    // TIPUS APODERAMENT
+                    TipoApoderamiento ta = TipoApoderamiento.getTipoApoderamiento(
+                            apoderament.getTipoApoderamiento().getTipoApod(),
+                            apoderament.getTipoApoderamiento().getSubTipoApod());
+
+                    String ts = "Tipo:" + apoderament.getTipoApoderamiento().getTipoApod() + " | Subtipo:"
+                            + apoderament.getTipoApoderamiento().getSubTipoApod();
+
+
+                    if (ta == null) {
+//                        apo.setTipus(getTraduccio(APODERA_RES_BUNDLE,"tipo.desconegut", locale) + " (" + ts + ")");
+                        apo.setTipus(getTraduccio(APODERA_RES_BUNDLE,"tipo.desconegut", locale));
+                    } else {
+//                        apo.setTipus(ta.getDescripcion() + " (" + ts + ")");
+                        apo.setTipus(ta.getDescripcion());
+                    }
+
+                    // ESTAT
+                    apo.setEstat(apoderament.getEstado());
+
+//                    switch (apoderament.getEstado()) {
+//                        case "Sin autorizar":
+//                            apo.setEstat(1L);
+//                            break;
+//                        case "Autorizado":
+//                            apo.setEstat(2L);
+//                            break;
+//                        case "Revocado":
+//                            apo.setEstat(3L);
+//                            break;
+//                        case "Renunciado":
+//                            apo.setEstat(4L);
+//                            break;
+//                        case "Caducado":
+//                            apo.setEstat(5L);
+//                            break;
+//                        case "Cancelado":
+//                            apo.setEstat(6L);
+//                            break;
+//                        default:
+//                            apo.setEstat(0L);
+//                    }
+
+
+                    // NOM I DOCUMENT APODERAT
+                    DatosApoderadoCompletoType apoCompleto = apoderament.getDatosApoderado();
+                    if (apoCompleto.getPersonaFisica() != null) {
+                        PersonaFisicaType pf = apoCompleto.getPersonaFisica();
+                        apo.setApoderado(pf.getNombre() + " " + pf.getApellido1() + " (" + pf.getNifNie() + ")" + " - " + getTraduccio(APODERA_RES_BUNDLE,"persona.fisica", locale));
+                    }
+                    if (apoCompleto.getPersonaJuridica() != null) {
+                        PersonaJuridicaType pf = apoCompleto.getPersonaJuridica();
+                        apo.setApoderado(pf.getRazonSocial() + " (" + pf.getNif() + ")" + " - " + getTraduccio(APODERA_RES_BUNDLE,"persona.juridica", locale));
+                    }
+
+
+                    // VIGÈNCIA APODERAMENT
+                    if (apoderament.getPeriodoVigencia() != null) {
+                        apo.setVigencia(apoderament.getPeriodoVigencia().getFechaInicio().substring(0,10) + " - "
+                                + apoderament.getPeriodoVigencia().getFechaFin().substring(0,10));
+                    }
+
+                    apos.add(apo);
+
+                }
+            }
+
+            Map<Long, DatosApoderamientoType> apoderamentsMap = (Map<Long, DatosApoderamientoType>) request.getSession()
+                    .getAttribute(SESSIO_CACHE_APODERAMENTS_MAP_APODERA);
+
+            if (apoderamentsMap == null) {
+                apoderamentsMap = new HashMap<Long, DatosApoderamientoType>();
+                request.getSession().setAttribute(SESSIO_CACHE_APODERAMENTS_MAP_APODERA, apoderamentsMap);
+            }
+
+
+            Map<String, Object> infoApoderaments = new HashMap<String, Object>();
+
+            infoApoderaments.put("poderdant", poderdant);
+            infoApoderaments.put("apoderaments", apos);
+            infoApoderaments.put("totalRegistres", apoderamentsTotals);
+
+            Gson gson = new Gson();
+            String json = gson.toJson(infoApoderaments);
+
+//            log.info(json);
+
+            try {
+
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
+
+                response.getWriter().write(json);
+
+            } catch (IOException e) {
+                log.error("Error obtenint writer: " + e.getMessage(), e);
+            }
 
         } catch (Throwable e) {
 
@@ -285,8 +416,8 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
 
     }
 
-    protected ConsultaApoderamientosResponse consultaInterna(String nifPoderdante,
-            String nifApoderado) throws Exception {
+    protected ConsultaApoderamientosResponse consultaInterna(String nifPoderdante, String nifApoderado) throws Exception {
+
         String codAplicacion = getPropertyRequired(APODERA_PROPERTY_BASE + "codiApp");
 
         if (nifApoderado == null && nifPoderdante == null) {
@@ -357,22 +488,15 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
 
         // Cridada
         ConsultaApoderamientosResponse response = null;
-        log.info("abans response: ");
-        // response = consulta(peticio);
-
-        log.info("entram");
 
         ConsultaAvanzadaPortType api = getApi();
 
-        log.info("1");
-
         RespuestaConsulta resposta = api.consultaAvanzadaApoderamientos(peticio);
-        log.info("2");
 
         response = resposta.getConsultaApoderamientosResponse();
-        log.info("3");
+
         ErrorType errorType = response.getResultadoError();
-        log.info("4");
+
         if (errorType != null) {
 
             if (!"0102".equals(errorType.getCodError())) {
@@ -386,60 +510,58 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
 
         }
 
-        log.info("response: " + response);
-
-        List<DatosApoderamientoType> apoderamientos = response.getListaApoderamientos();
-
-        log.info("apoderamientos: " + apoderamientos.size());
-
-        if (apoderamientos.size() == 0) {
-            log.error("No hi ha apoderaments per aquest usuari ...");
-        } else {
-
-            int i = 1;
-            for (DatosApoderamientoType d : apoderamientos) {
-
-                log.info("");
-                log.info(i + ".- Common Info=>  Estat:" + d.getEstado() + "\tcodiApoderaEXT:"
-                        + d.getCodApoderamientoEXT() + "\tcodiApoderaINT:"
-                        + d.getCodApoderamientoINT());
-
-                TipoApoderamiento ta = TipoApoderamiento.getTipoApoderamiento(
-                        d.getTipoApoderamiento().getTipoApod(),
-                        d.getTipoApoderamiento().getSubTipoApod());
-
-                String ts = "Tipo:" + d.getTipoApoderamiento().getTipoApod() + " | Subtipo:"
-                        + d.getTipoApoderamiento().getSubTipoApod();
-
-                if (ta == null) {
-                    log.info(i + ".- Tipo Apoderamiento => DESCONEGUT (" + ts + ")");
-                } else {
-                    log.info(i + ".- Tipo Apoderamiento => " + ta.getDescripcion() + " (" + ts
-                            + ")");
-                }
-
-                DatosApoderadoCompletoType apo = d.getDatosApoderado();
-                if (apo.getPersonaFisica() != null) {
-                    PersonaFisicaType pf = apo.getPersonaFisica();
-                    log.info(i + ".- Apoderat Perso. Fisica => " + pf.getNombre());
-
-                }
-                if (apo.getPersonaJuridica() != null) {
-                    PersonaJuridicaType pf = apo.getPersonaJuridica();
-                    log.info(i + ".- Apoderat Perso. Juridica => " + pf.getRazonSocial());
-
-                }
-
-                DatosPoderdanteCompletoType poderdante = d.getDatosPoderdante();
-
-                if (d.getPeriodoVigencia() != null) {
-                    log.info(i + ".- Vigencia => " + d.getPeriodoVigencia().getFechaInicio() + " - "
-                            + d.getPeriodoVigencia().getFechaFin());
-                }
-
-                i++;
-            }
-        }
+//        List<DatosApoderamientoType> apoderamientos = response.getListaApoderamientos();
+//
+//        if (apoderamientos.size() == 0) {
+//
+//            log.error("No hi ha apoderaments per aquest usuari ...");
+//
+//        } else {
+//
+//            int i = 1;
+//            for (DatosApoderamientoType d : apoderamientos) {
+//
+//                log.info("");
+//                log.info(i + ".- Common Info=>  Estat:" + d.getEstado() + "\tcodiApoderaEXT:"
+//                        + d.getCodApoderamientoEXT() + "\tcodiApoderaINT:"
+//                        + d.getCodApoderamientoINT());
+//
+//                TipoApoderamiento ta = TipoApoderamiento.getTipoApoderamiento(
+//                        d.getTipoApoderamiento().getTipoApod(),
+//                        d.getTipoApoderamiento().getSubTipoApod());
+//
+//                String ts = "Tipo:" + d.getTipoApoderamiento().getTipoApod() + " | Subtipo:"
+//                        + d.getTipoApoderamiento().getSubTipoApod();
+//
+//                if (ta == null) {
+//                    log.info(i + ".- Tipo Apoderamiento => DESCONEGUT (" + ts + ")");
+//                } else {
+//                    log.info(i + ".- Tipo Apoderamiento => " + ta.getDescripcion() + " (" + ts
+//                            + ")");
+//                }
+//
+//                DatosApoderadoCompletoType apo = d.getDatosApoderado();
+//                if (apo.getPersonaFisica() != null) {
+//                    PersonaFisicaType pf = apo.getPersonaFisica();
+//                    log.info(i + ".- Apoderat Perso. Fisica => " + pf.getNombre());
+//
+//                }
+//                if (apo.getPersonaJuridica() != null) {
+//                    PersonaJuridicaType pf = apo.getPersonaJuridica();
+//                    log.info(i + ".- Apoderat Perso. Juridica => " + pf.getRazonSocial());
+//
+//                }
+//
+//                DatosPoderdanteCompletoType poderdante = d.getDatosPoderdante();
+//
+//                if (d.getPeriodoVigencia() != null) {
+//                    log.info(i + ".- Vigencia => " + d.getPeriodoVigencia().getFechaInicio() + " - "
+//                            + d.getPeriodoVigencia().getFechaFin());
+//                }
+//
+//                i++;
+//            }
+//        }
 
         return response;
     }
@@ -503,9 +625,7 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
 
         // XYZ ZZZ TODO
         URL wsdlUrl = new URL(endPoint + "?wsdl");
-        log.info("ENDPOINT: ]" + wsdlUrl + "[");
         ConsultaAvanzadaService service = new ConsultaAvanzadaService(wsdlUrl);
-        log.info("222222");
         ConsultaAvanzadaPortType api = service.getConsultaAvanzadaPort();
 
         Map<String, Object> reqContext = ((BindingProvider) api).getRequestContext();
