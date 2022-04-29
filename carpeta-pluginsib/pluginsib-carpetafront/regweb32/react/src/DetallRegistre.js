@@ -265,15 +265,15 @@ class DetallRegistre extends Component {
 
                                             { /* typeof(this.state.data.justificante) != 'undefined' && !this.state.data.justificante.confidencial && <Button onClick={() => this.handlerJustificant(registre)}>{iconoDescargar} {t('carpeta_descargar')}</Button> */}
                                             
-                                            {this.state.data.justificanteUrl != '' && <Button className="btn btn-danger" onClick={() => { window.open(this.state.data.justificanteUrl); }}>{iconoDescargar} {t('carpeta_descargar')}</Button>}
+                                            {this.state.data.justificanteUrl !== '' && <Button className="btn btn-danger" onClick={() => { window.open(this.state.data.justificanteUrl); }}>{iconoDescargar} {t('carpeta_descargar')}</Button>}
 
-                                            {this.state.data.justificanteUrl == '' && this.state.data.justificantSenseGenerar != '' && this.state.error == '' && <Button className="btn btn-danger" onClick={() => { this.generarJustificant(this.state.data.urlGeneracioJustificant); }}>{iconoDescargar} {t('carpeta_descargar')}</Button>}
+                                            {this.state.data.justificanteUrl === '' && this.state.data.justificantSenseGenerar !== '' && this.state.error === '' && <Button className="btn btn-danger" onClick={() => { this.generarJustificant(this.state.data.urlGeneracioJustificant); }}>{iconoDescargar} {t('carpeta_descargar')}</Button>}
 
-                                            {this.state.data.justificanteId != '' && this.state.data.justificantData != '' && this.state.error == '' && <Button className="btn btn-danger" onClick={() => this.downloadDoc(this.state.data.justificantData, this.state.data.justificantFileName)}>{iconoDescargar} {t('carpeta_descargar')}</Button>} 
+                                            {this.state.data.justificanteId !== '' && this.state.data.justificantData !== '' && this.state.error === '' && <Button className="btn btn-danger" onClick={() => this.downloadDoc(this.state.data.justificantData, this.state.data.justificantFileName)}>{iconoDescargar} {t('carpeta_descargar')}</Button>}
 
-                                            {this.state.data.justificanteUrl == '' && this.state.data.justificantSenseGenerar == '' && this.state.data.justificanteId == '' && this.state.error != '' && <div className="text-center pt-3 text-danger"><span className="oi oi-warning pr-1"> </span>{this.state.error}</div>}
+                                            {this.state.data.justificanteUrl === '' && this.state.data.justificantSenseGenerar === '' && this.state.data.justificanteId === '' && this.state.data.error !== '' && <div className="text-center pt-3 text-danger"><span className="oi oi-warning pr-1"> </span>{this.state.data.error}</div>}
 
-                                            <p id="justificantEnllaz"></p>
+                                            <p id="justificantEnllaz"/>
 
                                         </div>
                                     </div>
@@ -344,6 +344,7 @@ class DetallRegistre extends Component {
                                                 </Table> }
                                                 { registre.anexos && registre.anexos.length < 1 && <p className="text-center">{t('registro_anexos_vacio')}</p>}
                                                 { !registre.anexos && <p className="text-center">{t('registro_anexos_vacio')}</p>}
+                                                <p className="text-md-left pt-2" style={{fontSize: 'small'}}>{t('registro_anexos_nodisponibles')}</p>
                                             </div>
                                         </div>
                                     </div>
