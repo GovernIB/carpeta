@@ -2,8 +2,8 @@
 *Carpeta Ciutadana del GOIB*
 
 ***Versions***
-> - Versió Estable: __carpeta-1.1.16__ (branca [carpeta-1.0](https://github.com/GovernIB/carpeta/tree/carpeta-1.0))
-> - Versió en Desenvolupament: __carpeta-1.1.16__ (branca [carpeta-1.0](https://github.com/GovernIB/carpeta/tree/carpeta-1.0))
+> - Versió Estable: __carpeta-1.1.16__ (branca [carpeta-1.1](https://github.com/GovernIB/carpeta/tree/carpeta-1.1))
+> - Versió en Desenvolupament: __carpeta-1.1.16__ (branca [carpeta-1.1](https://github.com/GovernIB/carpeta/tree/carpeta-1.1))
 
 ***Descripció***
 
