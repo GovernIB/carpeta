@@ -839,6 +839,17 @@ ul.pagination li.page-item.active {
 .react-datepicker__year-option{
 	height: 25px;
 }
+/*Issue #657*/
+/*.visioMobil{*/
+/*	display: none!important;*/
+/*}*/
+/*.ocultarMobil{*/
+/*	display: inline-block!important;*/
+/*}*/
+
+.faq-row{
+	padding-bottom: 2em!important;
+}
 
 #dadespinbalayudascontainer .descarregaJustificant { text-align:center; } 
 #dadespinbalayudascontainer .descarregaJustificant span.oi { font-size: 3rem; display:block; margin: 10px; }
@@ -1228,6 +1239,60 @@ input.form-control, select.form-control {
 .expiratMobil{
 	height: auto!important;
 }
+/*Issue #657*/
+/*!* Estils per visió mòbil *!*/
+/*.visioMobil{*/
+/*	display: inline-block!important;*/
+/*}*/
+/*.ocultarMobil{*/
+/*	display: none!important;*/
+/*}*/
+/*.imgCenter{*/
+/*	display: block;*/
+/*	margin-left: auto;*/
+/*	margin-right: auto;*/
+/*	max-height: 4em;*/
+/*	overflow: hidden;*/
+/*	width: min-content;*/
+/*}*/
+/*.titolAppInici{*/
+/*	padding-top: 2em;*/
+/*	padding-bottom: 0.5em;*/
+/*	text-align:center;*/
+/*	text-transform: uppercase;*/
+/*	font-weight: bold;*/
+/*	font-size: 2em;*/
+/*}*/
+/*body {*/
+/*	background-color: #FFFFFF !important;*/
+/*}*/
+/*.bcMobil{*/
+/*	background-color: #FFFFFF !important;*/
+/*}*/
+/*.contenedor{*/
+/*	background-color: #FFFFFF !important;*/
+/*}*/
+/*.anonimApp{*/
+/*	padding-top: 3em!important;*/
+/*	padding-bottom: 3em!important;*/
+/*}*/
+/*.wXarxa{*/
+/*	width: 150%!important;*/
+/*	max-width: none!important;*/
+/*}*/
+/*.espaiXarxa{*/
+/*	padding-left: 1em;*/
+/*	padding-right: 1em;*/
+/*}*/
+/*.imc-peu{*/
+/*	padding-left: 0!important;*/
+/*}*/
+/*#continguts{*/
+/*	width: auto!important;*/
+/*}*/
+/*.dretaXarxes{*/
+/*	padding-right: 1em;*/
+/*}*/
 }
 
 /*Se aplican cuando el width es menor que 480*/
@@ -1359,6 +1424,8 @@ body {
 		font-size: 100%;
 		text-align: center;
 		padding-bottom: 1.5em;
+		/*Issue #657*/
+		/*padding-bottom: 4em;*/
 	}
 	.capsaPeu {
 		margin-top: 0;
