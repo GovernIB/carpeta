@@ -111,7 +111,6 @@ class Apodera extends Component {
                 console.log("error.response.headers: " + error.response.headers);
             }
             if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
-                console.log("11111111111");
                 this.setState({
                     dataApoderaments: null,
                     dataPoderdant: null,
@@ -120,7 +119,6 @@ class Apodera extends Component {
                     isLoaded: true
                 });
             } else{
-                console.log("2222222222");
                 this.setState({
                     dataApoderaments: null,
                     dataPoderdant: null,
@@ -146,7 +144,7 @@ class Apodera extends Component {
         var tamanyTaula = { width: '99%'};
         var tamanyData = { width: '120px !important'};
 
-        console.log("error a RENDERRRRRRRRRRR: " + this.state.error);
+        // console.log("error a RENDERRRRRRRRRRR: " + this.state.error);
 
         if (!isLoaded) {
             content = <div  id="carregant" className="loader-container centrat ">

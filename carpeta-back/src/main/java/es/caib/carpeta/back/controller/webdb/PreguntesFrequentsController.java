@@ -33,6 +33,9 @@ import es.caib.carpeta.back.form.webdb.PreguntesFrequentsForm;
 
 import es.caib.carpeta.back.validator.webdb.PreguntesFrequentsWebValidator;
 
+import es.caib.carpeta.model.entity.Fitxer;
+import es.caib.carpeta.persistence.FitxerJPA;
+import org.fundaciobit.genapp.common.web.controller.FilesFormManager;
 import es.caib.carpeta.persistence.PreguntesFrequentsJPA;
 import es.caib.carpeta.model.entity.PreguntesFrequents;
 import es.caib.carpeta.model.fields.*;
@@ -47,7 +50,7 @@ import es.caib.carpeta.model.fields.*;
 @RequestMapping(value = "/webdb/preguntesFrequents")
 @SessionAttributes(types = { PreguntesFrequentsForm.class, PreguntesFrequentsFilterForm.class })
 public class PreguntesFrequentsController
-    extends es.caib.carpeta.back.controller.CarpetaBaseController<PreguntesFrequents, java.lang.Long> implements PreguntesFrequentsFields {
+    extends es.caib.carpeta.back.controller.CarpetaFilesBaseController<PreguntesFrequents, java.lang.Long, PreguntesFrequentsForm> implements PreguntesFrequentsFields {
 
   @EJB(mappedName = es.caib.carpeta.ejb.IdiomaService.JNDI_NAME)
   protected es.caib.carpeta.ejb.IdiomaService idiomaEjb;
@@ -336,21 +339,27 @@ public class PreguntesFrequentsController
 
     PreguntesFrequentsJPA preguntesFrequents = preguntesFrequentsForm.getPreguntesFrequents();
 
+    FilesFormManager<Fitxer> afm = getFilesFormManager(); // FILE
+
     try {
+      this.setFilesFormToEntity(afm, preguntesFrequents, preguntesFrequentsForm); // FILE
       preValidate(request, preguntesFrequentsForm, result);
       getWebValidator().validate(preguntesFrequentsForm, result);
       postValidate(request,preguntesFrequentsForm, result);
 
       if (result.hasErrors()) {
+        afm.processErrorFilesWithoutThrowException(); // FILE
         result.reject("error.form");
         return getTileForm();
       } else {
         preguntesFrequents = create(request, preguntesFrequents);
+        afm.postPersistFiles(); // FILE
         createMessageSuccess(request, "success.creation", preguntesFrequents.getPreguntesFrequentsID());
         preguntesFrequentsForm.setPreguntesFrequents(preguntesFrequents);
         return getRedirectWhenCreated(request, preguntesFrequentsForm);
       }
     } catch (Throwable __e) {
+      afm.processErrorFilesWithoutThrowException(); // FILE
       if (__e instanceof I18NValidationException) {
         ValidationWebUtils.addFieldErrorsToBindingResult(result, (I18NValidationException)__e);
         return getTileForm();
@@ -431,21 +440,26 @@ public class PreguntesFrequentsController
     }
     PreguntesFrequentsJPA preguntesFrequents = preguntesFrequentsForm.getPreguntesFrequents();
 
+    FilesFormManager<Fitxer> afm = getFilesFormManager(); // FILE
     try {
+      this.setFilesFormToEntity(afm, preguntesFrequents, preguntesFrequentsForm); // FILE
       preValidate(request, preguntesFrequentsForm, result);
       getWebValidator().validate(preguntesFrequentsForm, result);
       postValidate(request, preguntesFrequentsForm, result);
 
       if (result.hasErrors()) {
+        afm.processErrorFilesWithoutThrowException(); // FILE
         result.reject("error.form");
         return getTileForm();
       } else {
         preguntesFrequents = update(request, preguntesFrequents);
+        afm.postPersistFiles(); // FILE
         createMessageSuccess(request, "success.modification", preguntesFrequents.getPreguntesFrequentsID());
         status.setComplete();
         return getRedirectWhenModified(request, preguntesFrequentsForm, null);
       }
     } catch (Throwable __e) {
+      afm.processErrorFilesWithoutThrowException(); // FILE
       if (__e instanceof I18NValidationException) {
         ValidationWebUtils.addFieldErrorsToBindingResult(result, (I18NValidationException)__e);
         return getTileForm();
@@ -595,6 +609,51 @@ public java.lang.Long stringToPK(String value) {
     return _TABLE_MODEL;
   }
 
+  // FILE
+  @Override
+  public void setFilesFormToEntity(FilesFormManager<Fitxer> afm, PreguntesFrequents preguntesFrequents,
+      PreguntesFrequentsForm form) throws I18NException {
+
+    FitxerJPA f;
+    f = (FitxerJPA)afm.preProcessFile(form.getFitxer1ID(), form.isFitxer1IDDelete(),
+        form.isNou()? null : preguntesFrequents.getFitxer1());
+    ((PreguntesFrequentsJPA)preguntesFrequents).setFitxer1(f);
+    if (f != null) { 
+      preguntesFrequents.setFitxer1ID(f.getFitxerID());
+    } else {
+      preguntesFrequents.setFitxer1ID(null);
+    }
+
+
+    f = (FitxerJPA)afm.preProcessFile(form.getFitxer2ID(), form.isFitxer2IDDelete(),
+        form.isNou()? null : preguntesFrequents.getFitxer2());
+    ((PreguntesFrequentsJPA)preguntesFrequents).setFitxer2(f);
+    if (f != null) { 
+      preguntesFrequents.setFitxer2ID(f.getFitxerID());
+    } else {
+      preguntesFrequents.setFitxer2ID(null);
+    }
+
+
+    f = (FitxerJPA)afm.preProcessFile(form.getFitxer3ID(), form.isFitxer3IDDelete(),
+        form.isNou()? null : preguntesFrequents.getFitxer3());
+    ((PreguntesFrequentsJPA)preguntesFrequents).setFitxer3(f);
+    if (f != null) { 
+      preguntesFrequents.setFitxer3ID(f.getFitxerID());
+    } else {
+      preguntesFrequents.setFitxer3ID(null);
+    }
+
+
+  }
+
+  // FILE
+  @Override
+  public void deleteFiles(PreguntesFrequents preguntesFrequents) {
+    deleteFile(preguntesFrequents.getFitxer1ID());
+    deleteFile(preguntesFrequents.getFitxer2ID());
+    deleteFile(preguntesFrequents.getFitxer3ID());
+  }
   // Mètodes a sobreescriure 
 
   public boolean isActiveList() {

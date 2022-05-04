@@ -20,7 +20,10 @@ import javax.persistence.Id;
         @Index(name="car_preguntesfrequents_pk_i", columnList = "preguntesfrequentsid"),
         @Index(name="car_faq_enunciatid_fk_i", columnList = "enunciatid"),
         @Index(name="car_faq_respostaid_fk_i", columnList = "respostaid"),
-        @Index(name="car_faq_entitatid_fk_i", columnList = "entitatid")})
+        @Index(name="car_faq_entitatid_fk_i", columnList = "entitatid"),
+        @Index(name="car_faq_fitxer1id_fk_i", columnList = "fitxer1id"),
+        @Index(name="car_faq_fitxer2id_fk_i", columnList = "fitxer2id"),
+        @Index(name="car_faq_fitxer3id_fk_i", columnList = "fitxer3id")})
 @SequenceGenerator(name="PREGUNTESFREQUENTS_SEQ", sequenceName="car_preguntesfrequents_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class PreguntesFrequentsJPA implements PreguntesFrequents {
@@ -46,6 +49,15 @@ private static final long serialVersionUID = 1787206139L;
     @Column(name="entitatid",nullable = false,length = 19)
     long entitatID;
 
+    @Column(name="fitxer1id",length = 19)
+    java.lang.Long fitxer1ID;
+
+    @Column(name="fitxer2id",length = 19)
+    java.lang.Long fitxer2ID;
+
+    @Column(name="fitxer3id",length = 19)
+    java.lang.Long fitxer3ID;
+
 
 
   /** Constructor Buit */
@@ -53,15 +65,29 @@ private static final long serialVersionUID = 1787206139L;
   }
 
   /** Constructor amb tots els camps  */
-  public PreguntesFrequentsJPA(long preguntesFrequentsID , long enunciatID , long respostaID , int ordre , long entitatID) {
+  public PreguntesFrequentsJPA(long preguntesFrequentsID , long enunciatID , long respostaID , int ordre , long entitatID , java.lang.Long fitxer1ID , java.lang.Long fitxer2ID , java.lang.Long fitxer3ID) {
     this.preguntesFrequentsID=preguntesFrequentsID;
     this.enunciatID=enunciatID;
     this.respostaID=respostaID;
     this.ordre=ordre;
     this.entitatID=entitatID;
+    this.fitxer1ID=fitxer1ID;
+    this.fitxer2ID=fitxer2ID;
+    this.fitxer3ID=fitxer3ID;
 }
   /** Constructor sense valors autoincrementals */
-  public PreguntesFrequentsJPA(long enunciatID , long respostaID , int ordre , long entitatID) {
+  public PreguntesFrequentsJPA(long enunciatID , long respostaID , int ordre , long entitatID , java.lang.Long fitxer1ID , java.lang.Long fitxer2ID , java.lang.Long fitxer3ID) {
+    this.enunciatID=enunciatID;
+    this.respostaID=respostaID;
+    this.ordre=ordre;
+    this.entitatID=entitatID;
+    this.fitxer1ID=fitxer1ID;
+    this.fitxer2ID=fitxer2ID;
+    this.fitxer3ID=fitxer3ID;
+}
+  /** Constructor dels valors Not Null */
+  public PreguntesFrequentsJPA(long preguntesFrequentsID , long enunciatID , long respostaID , int ordre , long entitatID) {
+    this.preguntesFrequentsID=preguntesFrequentsID;
     this.enunciatID=enunciatID;
     this.respostaID=respostaID;
     this.ordre=ordre;
@@ -73,6 +99,15 @@ private static final long serialVersionUID = 1787206139L;
     this.setRespostaID(__bean.getRespostaID());
     this.setOrdre(__bean.getOrdre());
     this.setEntitatID(__bean.getEntitatID());
+    this.setFitxer1ID(__bean.getFitxer1ID());
+    this.setFitxer2ID(__bean.getFitxer2ID());
+    this.setFitxer3ID(__bean.getFitxer3ID());
+    // Fitxer
+    this.setFitxer1(FitxerJPA.toJPA(__bean.getFitxer1()));
+    // Fitxer
+    this.setFitxer2(FitxerJPA.toJPA(__bean.getFitxer2()));
+    // Fitxer
+    this.setFitxer3(FitxerJPA.toJPA(__bean.getFitxer3()));
 	}
 
 	public long getPreguntesFrequentsID() {
@@ -108,6 +143,27 @@ private static final long serialVersionUID = 1787206139L;
 	};
 	public void setEntitatID(long _entitatID_) {
 		this.entitatID = _entitatID_;
+	};
+
+	public java.lang.Long getFitxer1ID() {
+		return(fitxer1ID);
+	};
+	public void setFitxer1ID(java.lang.Long _fitxer1ID_) {
+		this.fitxer1ID = _fitxer1ID_;
+	};
+
+	public java.lang.Long getFitxer2ID() {
+		return(fitxer2ID);
+	};
+	public void setFitxer2ID(java.lang.Long _fitxer2ID_) {
+		this.fitxer2ID = _fitxer2ID_;
+	};
+
+	public java.lang.Long getFitxer3ID() {
+		return(fitxer3ID);
+	};
+	public void setFitxer3ID(java.lang.Long _fitxer3ID_) {
+		this.fitxer3ID = _fitxer3ID_;
 	};
 
 
@@ -187,6 +243,48 @@ private static final long serialVersionUID = 1787206139L;
     this.entitat = entitat;
   }
 
+// IMP Field:fitxerid | Table: car_fitxer | Type: 1  
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fitxer1id", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_faq_fitxer_fitxer1_fk"))
+    private FitxerJPA fitxer1;
+
+    public FitxerJPA getFitxer1() {
+    return this.fitxer1;
+  }
+
+    public  void setFitxer1(FitxerJPA fitxer1) {
+    this.fitxer1 = fitxer1;
+  }
+
+// IMP Field:fitxerid | Table: car_fitxer | Type: 1  
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fitxer2id", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_faq_fitxer_fitxer2_fk"))
+    private FitxerJPA fitxer2;
+
+    public FitxerJPA getFitxer2() {
+    return this.fitxer2;
+  }
+
+    public  void setFitxer2(FitxerJPA fitxer2) {
+    this.fitxer2 = fitxer2;
+  }
+
+// IMP Field:fitxerid | Table: car_fitxer | Type: 1  
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fitxer3id", referencedColumnName ="fitxerID", nullable = true, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_faq_fitxer_fitxer3_fk"))
+    private FitxerJPA fitxer3;
+
+    public FitxerJPA getFitxer3() {
+    return this.fitxer3;
+  }
+
+    public  void setFitxer3(FitxerJPA fitxer3) {
+    this.fitxer3 = fitxer3;
+  }
+
 
  // ---------------  STATIC METHODS ------------------
   public static PreguntesFrequentsJPA toJPA(PreguntesFrequents __bean) {
@@ -197,6 +295,15 @@ private static final long serialVersionUID = 1787206139L;
     __tmp.setRespostaID(__bean.getRespostaID());
     __tmp.setOrdre(__bean.getOrdre());
     __tmp.setEntitatID(__bean.getEntitatID());
+    __tmp.setFitxer1ID(__bean.getFitxer1ID());
+    __tmp.setFitxer2ID(__bean.getFitxer2ID());
+    __tmp.setFitxer3ID(__bean.getFitxer3ID());
+    // Fitxer
+    __tmp.setFitxer1(FitxerJPA.toJPA(__bean.getFitxer1()));
+    // Fitxer
+    __tmp.setFitxer2(FitxerJPA.toJPA(__bean.getFitxer2()));
+    // Fitxer
+    __tmp.setFitxer3(FitxerJPA.toJPA(__bean.getFitxer3()));
 		return __tmp;
 	}
 

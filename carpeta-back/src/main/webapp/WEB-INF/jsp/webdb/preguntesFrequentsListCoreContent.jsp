@@ -58,6 +58,27 @@
           </c:if>
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PreguntesFrequentsFields.FITXER1ID)}">
+          <td>
+            <c:if test="${not empty preguntesFrequents.fitxer1}">
+              <a target="_blank" href="<c:url value="${car:fileUrl(preguntesFrequents.fitxer1)}"/>">${preguntesFrequents.fitxer1.nom}</a>
+            </c:if>
+           </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PreguntesFrequentsFields.FITXER2ID)}">
+          <td>
+            <c:if test="${not empty preguntesFrequents.fitxer2}">
+              <a target="_blank" href="<c:url value="${car:fileUrl(preguntesFrequents.fitxer2)}"/>">${preguntesFrequents.fitxer2.nom}</a>
+            </c:if>
+           </td>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PreguntesFrequentsFields.FITXER3ID)}">
+          <td>
+            <c:if test="${not empty preguntesFrequents.fitxer3}">
+              <a target="_blank" href="<c:url value="${car:fileUrl(preguntesFrequents.fitxer3)}"/>">${preguntesFrequents.fitxer3.nom}</a>
+            </c:if>
+           </td>
+        </c:if>
 
 
         <!--  /** Additional Fields */  -->

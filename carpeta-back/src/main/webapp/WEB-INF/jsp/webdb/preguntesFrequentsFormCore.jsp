@@ -121,3 +121,171 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,PreguntesFrequentsFields.FITXER1ID)}">
+        <tr id="preguntesFrequents_fitxer1ID_rowid">
+          <td id="preguntesFrequents_fitxer1ID_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[PreguntesFrequentsFields.FITXER1ID])?'preguntesFrequents.fitxer1ID':__theForm.labels[PreguntesFrequentsFields.FITXER1ID]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[PreguntesFrequentsFields.FITXER1ID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[PreguntesFrequentsFields.FITXER1ID]}" ></i>
+              </c:if>
+            </td>
+          <td id="preguntesFrequents_fitxer1ID_columnvalueid">
+              <form:errors path="preguntesFrequents.fitxer1ID" cssClass="errorField alert alert-danger" />
+            <c:if test="${gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.FITXER1ID)}" >
+              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.preguntesFrequents.fitxer1)}"/>">${__theForm.preguntesFrequents.fitxer1.nom}</a>
+            </c:if>
+            <c:if test="${!gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.FITXER1ID)}" >
+              <div class="input-group col-md-9-optional" style="padding: 0px">
+                <div class="custom-file">
+                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.FITXER1ID)? 'true' : 'false'}" cssClass="custom-file-input form-control  ${gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.FITXER1ID)? ' uneditable-input' : ''}"   path="fitxer1ID" type="file" />
+                  <label class="custom-file-label" for="fitxer1ID">
+                  </label>
+                </div>
+                <c:choose>
+                <c:when test="${not empty __theForm.preguntesFrequents.fitxer1}">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="">
+                  <small>              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.preguntesFrequents.fitxer1)}"/>">${__theForm.preguntesFrequents.fitxer1.nom}</a>
+</small>
+                  </span>
+                  <span class="input-group-text" id="">
+                        <form:checkbox path="fitxer1IDDelete"/>
+                        <small><fmt:message key="genapp.form.file.delete"/></small>
+                  </span>
+                </div>
+                </c:when>
+                <c:otherwise>
+                <div class="input-group-append input-group-append-file">
+                  <span class="input-group-text" id="fitxer1ID-custom-file-label" style="display:none">
+                  <small></small>
+                  </span>
+                </div>
+                <script type="text/javascript">
+					$('#fitxer1ID').on('change', function(){
+						var ruta = $('#fitxer1ID').val(); 
+						var rutaArray = ruta.split('\\');
+						$('#fitxer1ID-custom-file-label').css('display','block');
+						$('#fitxer1ID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+					});
+				</script>                </c:otherwise>
+                </c:choose>
+              </div>
+            </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,PreguntesFrequentsFields.FITXER2ID)}">
+        <tr id="preguntesFrequents_fitxer2ID_rowid">
+          <td id="preguntesFrequents_fitxer2ID_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[PreguntesFrequentsFields.FITXER2ID])?'preguntesFrequents.fitxer2ID':__theForm.labels[PreguntesFrequentsFields.FITXER2ID]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[PreguntesFrequentsFields.FITXER2ID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[PreguntesFrequentsFields.FITXER2ID]}" ></i>
+              </c:if>
+            </td>
+          <td id="preguntesFrequents_fitxer2ID_columnvalueid">
+              <form:errors path="preguntesFrequents.fitxer2ID" cssClass="errorField alert alert-danger" />
+            <c:if test="${gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.FITXER2ID)}" >
+              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.preguntesFrequents.fitxer2)}"/>">${__theForm.preguntesFrequents.fitxer2.nom}</a>
+            </c:if>
+            <c:if test="${!gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.FITXER2ID)}" >
+              <div class="input-group col-md-9-optional" style="padding: 0px">
+                <div class="custom-file">
+                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.FITXER2ID)? 'true' : 'false'}" cssClass="custom-file-input form-control  ${gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.FITXER2ID)? ' uneditable-input' : ''}"   path="fitxer2ID" type="file" />
+                  <label class="custom-file-label" for="fitxer2ID">
+                  </label>
+                </div>
+                <c:choose>
+                <c:when test="${not empty __theForm.preguntesFrequents.fitxer2}">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="">
+                  <small>              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.preguntesFrequents.fitxer2)}"/>">${__theForm.preguntesFrequents.fitxer2.nom}</a>
+</small>
+                  </span>
+                  <span class="input-group-text" id="">
+                        <form:checkbox path="fitxer2IDDelete"/>
+                        <small><fmt:message key="genapp.form.file.delete"/></small>
+                  </span>
+                </div>
+                </c:when>
+                <c:otherwise>
+                <div class="input-group-append input-group-append-file">
+                  <span class="input-group-text" id="fitxer2ID-custom-file-label" style="display:none">
+                  <small></small>
+                  </span>
+                </div>
+                <script type="text/javascript">
+					$('#fitxer2ID').on('change', function(){
+						var ruta = $('#fitxer2ID').val(); 
+						var rutaArray = ruta.split('\\');
+						$('#fitxer2ID-custom-file-label').css('display','block');
+						$('#fitxer2ID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+					});
+				</script>                </c:otherwise>
+                </c:choose>
+              </div>
+            </c:if>
+           </td>
+        </tr>
+        </c:if>
+        
+        <c:if test="${!gen:contains(__theForm.hiddenFields,PreguntesFrequentsFields.FITXER3ID)}">
+        <tr id="preguntesFrequents_fitxer3ID_rowid">
+          <td id="preguntesFrequents_fitxer3ID_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[PreguntesFrequentsFields.FITXER3ID])?'preguntesFrequents.fitxer3ID':__theForm.labels[PreguntesFrequentsFields.FITXER3ID]}" />
+             </label>
+              <c:if test="${not empty __theForm.help[PreguntesFrequentsFields.FITXER3ID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[PreguntesFrequentsFields.FITXER3ID]}" ></i>
+              </c:if>
+            </td>
+          <td id="preguntesFrequents_fitxer3ID_columnvalueid">
+              <form:errors path="preguntesFrequents.fitxer3ID" cssClass="errorField alert alert-danger" />
+            <c:if test="${gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.FITXER3ID)}" >
+              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.preguntesFrequents.fitxer3)}"/>">${__theForm.preguntesFrequents.fitxer3.nom}</a>
+            </c:if>
+            <c:if test="${!gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.FITXER3ID)}" >
+              <div class="input-group col-md-9-optional" style="padding: 0px">
+                <div class="custom-file">
+                  <form:input  readonly="${ gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.FITXER3ID)? 'true' : 'false'}" cssClass="custom-file-input form-control  ${gen:contains(__theForm.readOnlyFields ,PreguntesFrequentsFields.FITXER3ID)? ' uneditable-input' : ''}"   path="fitxer3ID" type="file" />
+                  <label class="custom-file-label" for="fitxer3ID">
+                  </label>
+                </div>
+                <c:choose>
+                <c:when test="${not empty __theForm.preguntesFrequents.fitxer3}">
+                <div class="input-group-append">
+                  <span class="input-group-text" id="">
+                  <small>              <a target="_blank" href="<c:url value="${car:fileUrl(__theForm.preguntesFrequents.fitxer3)}"/>">${__theForm.preguntesFrequents.fitxer3.nom}</a>
+</small>
+                  </span>
+                  <span class="input-group-text" id="">
+                        <form:checkbox path="fitxer3IDDelete"/>
+                        <small><fmt:message key="genapp.form.file.delete"/></small>
+                  </span>
+                </div>
+                </c:when>
+                <c:otherwise>
+                <div class="input-group-append input-group-append-file">
+                  <span class="input-group-text" id="fitxer3ID-custom-file-label" style="display:none">
+                  <small></small>
+                  </span>
+                </div>
+                <script type="text/javascript">
+					$('#fitxer3ID').on('change', function(){
+						var ruta = $('#fitxer3ID').val(); 
+						var rutaArray = ruta.split('\\');
+						$('#fitxer3ID-custom-file-label').css('display','block');
+						$('#fitxer3ID-custom-file-label small').html(rutaArray[rutaArray.length - 1]);
+					});
+				</script>                </c:otherwise>
+                </c:choose>
+              </div>
+            </c:if>
+           </td>
+        </tr>
+        </c:if>
+        

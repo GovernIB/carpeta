@@ -217,6 +217,45 @@ private static final long serialVersionUID = -252813913L;
     }
 
 
+// EXP  Field:fitxer1id | Table: car_preguntesfrequents | Type: 0  
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "fitxer1ID")
+    private Set<PreguntesFrequentsJPA> preguntesFrequents_fitxer1ids = new HashSet<PreguntesFrequentsJPA>(0);
+    public  Set<PreguntesFrequentsJPA> getPreguntesFrequents_fitxer1ids() {
+    return this.preguntesFrequents_fitxer1ids;
+  }
+
+    public void setPreguntesFrequents_fitxer1ids(Set<PreguntesFrequentsJPA> preguntesFrequents_fitxer1ids) {
+      this.preguntesFrequents_fitxer1ids = preguntesFrequents_fitxer1ids;
+    }
+
+
+// EXP  Field:fitxer2id | Table: car_preguntesfrequents | Type: 0  
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "fitxer2ID")
+    private Set<PreguntesFrequentsJPA> preguntesFrequents_fitxer2ids = new HashSet<PreguntesFrequentsJPA>(0);
+    public  Set<PreguntesFrequentsJPA> getPreguntesFrequents_fitxer2ids() {
+    return this.preguntesFrequents_fitxer2ids;
+  }
+
+    public void setPreguntesFrequents_fitxer2ids(Set<PreguntesFrequentsJPA> preguntesFrequents_fitxer2ids) {
+      this.preguntesFrequents_fitxer2ids = preguntesFrequents_fitxer2ids;
+    }
+
+
+// EXP  Field:fitxer3id | Table: car_preguntesfrequents | Type: 0  
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "fitxer3ID")
+    private Set<PreguntesFrequentsJPA> preguntesFrequents_fitxer3ids = new HashSet<PreguntesFrequentsJPA>(0);
+    public  Set<PreguntesFrequentsJPA> getPreguntesFrequents_fitxer3ids() {
+    return this.preguntesFrequents_fitxer3ids;
+  }
+
+    public void setPreguntesFrequents_fitxer3ids(Set<PreguntesFrequentsJPA> preguntesFrequents_fitxer3ids) {
+      this.preguntesFrequents_fitxer3ids = preguntesFrequents_fitxer3ids;
+    }
+
+
 // EXP  Field:iconaid | Table: car_seccio | Type: 0  
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "iconaID")
@@ -343,9 +382,21 @@ private static final long serialVersionUID = -252813913L;
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.seccios) || org.hibernate.Hibernate.isInitialized(__jpa.getSeccios())) ) {
       __tmp.setSeccios(SeccioJPA.copyJPA(__jpa.getSeccios(), __alreadyCopied,"FitxerJPA"));
     }
+    if(!"PreguntesFrequentsJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.preguntesFrequents_fitxer1ids) || org.hibernate.Hibernate.isInitialized(__jpa.getPreguntesFrequents_fitxer1ids())) ) {
+      __tmp.setPreguntesFrequents_fitxer1ids(PreguntesFrequentsJPA.copyJPA(__jpa.getPreguntesFrequents_fitxer1ids(), __alreadyCopied,"FitxerJPA"));
+    }
+    if(!"PreguntesFrequentsJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.preguntesFrequents_fitxer3ids) || org.hibernate.Hibernate.isInitialized(__jpa.getPreguntesFrequents_fitxer3ids())) ) {
+      __tmp.setPreguntesFrequents_fitxer3ids(PreguntesFrequentsJPA.copyJPA(__jpa.getPreguntesFrequents_fitxer3ids(), __alreadyCopied,"FitxerJPA"));
+    }
     if(!"PluginJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.plugins) || org.hibernate.Hibernate.isInitialized(__jpa.getPlugins())) ) {
       __tmp.setPlugins(PluginJPA.copyJPA(__jpa.getPlugins(), __alreadyCopied,"FitxerJPA"));
+    }
+    if(!"PreguntesFrequentsJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.preguntesFrequents_fitxer2ids) || org.hibernate.Hibernate.isInitialized(__jpa.getPreguntesFrequents_fitxer2ids())) ) {
+      __tmp.setPreguntesFrequents_fitxer2ids(PreguntesFrequentsJPA.copyJPA(__jpa.getPreguntesFrequents_fitxer2ids(), __alreadyCopied,"FitxerJPA"));
     }
     // Copia de beans complexes (IMP)
 

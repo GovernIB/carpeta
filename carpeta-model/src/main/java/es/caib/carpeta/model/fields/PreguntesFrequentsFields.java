@@ -17,6 +17,9 @@ public interface PreguntesFrequentsFields extends java.io.Serializable {
 	 public static final LongField RESPOSTAID = new LongField(_TABLE_MODEL, "respostaID", "respostaid");
 	 public static final IntegerField ORDRE = new IntegerField(_TABLE_MODEL, "ordre", "ordre");
 	 public static final LongField ENTITATID = new LongField(_TABLE_MODEL, "entitatID", "entitatid");
+	 public static final LongField FITXER1ID = new LongField(_TABLE_MODEL, "fitxer1ID", "fitxer1id");
+	 public static final LongField FITXER2ID = new LongField(_TABLE_MODEL, "fitxer2ID", "fitxer2id");
+	 public static final LongField FITXER3ID = new LongField(_TABLE_MODEL, "fitxer3ID", "fitxer3id");
 
 
   public static final Field<?>[] ALL_PREGUNTESFREQUENTS_FIELDS = {
@@ -24,7 +27,10 @@ public interface PreguntesFrequentsFields extends java.io.Serializable {
     ENUNCIATID,
     RESPOSTAID,
     ORDRE,
-    ENTITATID
+    ENTITATID,
+    FITXER1ID,
+    FITXER2ID,
+    FITXER3ID
   };
 
 

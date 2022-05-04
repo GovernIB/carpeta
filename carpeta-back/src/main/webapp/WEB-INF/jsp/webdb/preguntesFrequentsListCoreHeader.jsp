@@ -27,6 +27,15 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PreguntesFrequentsFields.ENTITATID)}">
         <th>${car:getSortIcons(__theFilterForm,PreguntesFrequentsFields.ENTITATID)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PreguntesFrequentsFields.FITXER1ID)}">
+        <th>${car:getSortIcons(__theFilterForm,PreguntesFrequentsFields.FITXER1ID)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PreguntesFrequentsFields.FITXER2ID)}">
+        <th>${car:getSortIcons(__theFilterForm,PreguntesFrequentsFields.FITXER2ID)}</th>
+        </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,PreguntesFrequentsFields.FITXER3ID)}">
+        <th>${car:getSortIcons(__theFilterForm,PreguntesFrequentsFields.FITXER3ID)}</th>
+        </c:if>
 
 
         <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">

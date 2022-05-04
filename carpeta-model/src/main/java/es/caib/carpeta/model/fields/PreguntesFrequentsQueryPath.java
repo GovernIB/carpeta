@@ -31,6 +31,18 @@ public class PreguntesFrequentsQueryPath extends org.fundaciobit.genapp.common.q
     return new LongField(getQueryPath(), PreguntesFrequentsFields.ENTITATID);
   }
 
+  public LongField FITXER1ID() {
+    return new LongField(getQueryPath(), PreguntesFrequentsFields.FITXER1ID);
+  }
+
+  public LongField FITXER2ID() {
+    return new LongField(getQueryPath(), PreguntesFrequentsFields.FITXER2ID);
+  }
+
+  public LongField FITXER3ID() {
+    return new LongField(getQueryPath(), PreguntesFrequentsFields.FITXER3ID);
+  }
+
 
 
   @Override
@@ -60,6 +72,30 @@ public class PreguntesFrequentsQueryPath extends org.fundaciobit.genapp.common.q
     return new EntitatQueryPath(new QueryPath() {
       public String getQueryPath() {
           return PreguntesFrequentsQueryPath.this.getQueryPath() + "entitat" + ".";
+      }
+    });
+  }
+
+  public FitxerQueryPath FITXER1() {
+    return new FitxerQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return PreguntesFrequentsQueryPath.this.getQueryPath() + "fitxer1" + ".";
+      }
+    });
+  }
+
+  public FitxerQueryPath FITXER2() {
+    return new FitxerQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return PreguntesFrequentsQueryPath.this.getQueryPath() + "fitxer2" + ".";
+      }
+    });
+  }
+
+  public FitxerQueryPath FITXER3() {
+    return new FitxerQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return PreguntesFrequentsQueryPath.this.getQueryPath() + "fitxer3" + ".";
       }
     });
   }
