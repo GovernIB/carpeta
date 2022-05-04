@@ -57,6 +57,7 @@
 	"paginaIniciClave2": "Clau PIN",
 	"paginaIniciClave3": "Clau permanent",
 	"paginaIniciBotoAccedir": "Accedir a Carpeta",
+	"paginaIniciBotoAccedirMobil": "Accediu amb Cl@ve",
 	"paginaIniciProblemes": "No pots accedir a la teva Carpeta Ciutadana?",
 	"paginaIniciAjuda": "Si necessites ajuda addicional per a utilitzar el sistema Cl@ve, pots obtenir-la a través dels mitjans següents:",
 	"paginaIniciAjuda1": "A través del portal d'informació de ",
@@ -80,6 +81,7 @@
 
 	"tramitacioAnonimaTitol": "Teniu una clau de tramitació?",
 	"tramitacioEnllaz": "Accediu aquí per reprendre la tramitació anònima",
+	"tramitacioEnllazApp": "Repreneu la vostra tramitació anònima",
 	"iniciarTramitacioAnonimaTitol": "Iniciar tramitació anònima",
 	"errorTramitacioAnonima": "El codi és erroni o s'ha produït un error.",
 	"descTramitacioAnonima": "Introduïu la clau del tràmit i clicau el botó «Iniciar» per conèixer l’estat de la vostra tramitació",

@@ -57,6 +57,7 @@
 	"paginaIniciClave2": "Clave PIN",
 	"paginaIniciClave3": "Clave permanente",
 	"paginaIniciBotoAccedir": "Acceda a la Carpeta",
+	"paginaIniciBotoAccedirMobil": "Acceda con Cl@ve",
 	"paginaIniciProblemes": "¿No puede acceder a la Carpeta Ciudadana?",
 	"paginaIniciAjuda": "Si necesita ayuda adicional para utilizar el sistema Cl@ve, puede obtenerla a través de los siguientes medios:",
 	"paginaIniciAjuda1": "A través del portal de información de ",
@@ -80,6 +81,7 @@
 
 	"tramitacioAnonimaTitol": "¿Tiene una clave de tramitación?",
 	"tramitacioEnllaz": "Acceda aquí para retomar la tramitación anónima",
+	"tramitacioEnllazApp": "Retome su tramitación anónima",
 	"iniciarTramitacioAnonimaTitol": "Iniciar tramitación anónima",
 	"errorTramitacioAnonima": "El código es erróneo o se ha producido un error.",
 	"descTramitacioAnonima": "Introduzca la clave del trámite y clique el botón «Iniciar» para conocer el estado de su tramitación:",
