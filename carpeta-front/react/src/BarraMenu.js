@@ -101,6 +101,8 @@ class BarraMenu extends Component {
 
 		const styleColorMenu = (this.state.colorMenu === null)? { backgroundColor : '#32814B'} : { backgroundColor : "#"+this.state.colorMenu};
 
+		// issue #657
+		// return <div id = "barraMenu" className="ocultarMobil">
 		return <div id = "barraMenu">
 			<header className="imc-titol" style={styleColorMenu}>
 

@@ -290,14 +290,22 @@ class LlistatDePlugins extends Component {
             <div className="row mr-0 ml-0">
 
                 <DocumentTitle title={i18n.t('pipellaAutenticat') + " - " + t('menuTitol')} />
+                {/*issue #657*/}
+                {/*<div className="ocultarMobil">*/}
+                {/*    <DocumentTitle title={i18n.t('pipellaAutenticat') + " - " + t('menuTitol')} />*/}
+                {/*</div>*/}
 
                 <div className="infoNoMenu">
 
                     <h2 className="titol h2">{titolHeader}</h2>
+                    {/*issue #657*/}
+                    {/*<h2 className="titol h2 ocultarMobil">{titolHeader}</h2>*/}
 
                     <div className="col-md-12 border-0 pl-0 pr-0">
 
                         <p className="lh15 subtitol">{subtitolHeader}</p>
+                        {/*issue #657*/}
+                        {/*<p className="lh15 subtitol ocultarMobil">{subtitolHeader}</p>*/}
 
                         {avisosPlugins}
 

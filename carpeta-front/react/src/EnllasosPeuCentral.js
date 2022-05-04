@@ -93,6 +93,8 @@ class EnllasosPeuCentral extends Component {
 
         return (
             <ul className="enllasosPeu">
+                {/*issue #657*/}
+            {/*<ul className="enllasosPeu ocultarMobil">*/}
                 <li id="enllasMapaWeb"><Link to={{pathname: `/mapaweb`, nomPagina: 'peuMapa' }} tabIndex="621" aria-labelledby="enllasMapaWeb"> { t('peuMapa') }</Link></li>
                 {avisLegal}
                 {content}

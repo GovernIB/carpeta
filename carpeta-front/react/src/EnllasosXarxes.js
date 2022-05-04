@@ -53,9 +53,9 @@ class EnllasosXarxes extends Component {
             } else {
                 seguir = t('peuSeguir');
                 content = this.state.enllasosXarxes.map((s, i) => (
-                    <li key={i} id={"enllasXarxa"+i}>
+                    <li key={i} id={"enllasXarxa"+i} className="espaiXarxa">
                         <a href={s.url} className="imc-bt-xarxa border-0" title={s.label} target="_blank" tabIndex={651+i} aria-labelledby={"enllasXarxa"+i}>
-                            <img src={s.urllogo} title={t('iconaDe') + " " + s.label} alt={s.label}/>
+                            <img src={s.urllogo} title={t('iconaDe') + " " + s.label} alt={s.label} className="wXarxa"/>
                             <span>{s.label}</span>
                         </a>
                     </li>
@@ -68,6 +68,8 @@ class EnllasosXarxes extends Component {
             <div>
                 <p>{seguir}</p>
                 <ul>
+                    {/*issue #657*/}
+                {/*<ul className="dretaXarxes">*/}
                     {content}
                 </ul>
             </div>
