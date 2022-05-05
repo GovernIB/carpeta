@@ -168,6 +168,32 @@ private static final long serialVersionUID = -326205279L;
     }
 
 
+// EXP  Field:missatgeid | Table: car_notificacioapp | Type: 0  
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "missatgeID")
+    private Set<NotificacioAppJPA> notificacioApp_missatgeids = new HashSet<NotificacioAppJPA>(0);
+    public  Set<NotificacioAppJPA> getNotificacioApp_missatgeids() {
+    return this.notificacioApp_missatgeids;
+  }
+
+    public void setNotificacioApp_missatgeids(Set<NotificacioAppJPA> notificacioApp_missatgeids) {
+      this.notificacioApp_missatgeids = notificacioApp_missatgeids;
+    }
+
+
+// EXP  Field:titolid | Table: car_notificacioapp | Type: 0  
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "titolID")
+    private Set<NotificacioAppJPA> notificacioApp_titolids = new HashSet<NotificacioAppJPA>(0);
+    public  Set<NotificacioAppJPA> getNotificacioApp_titolids() {
+    return this.notificacioApp_titolids;
+  }
+
+    public void setNotificacioApp_titolids(Set<NotificacioAppJPA> notificacioApp_titolids) {
+      this.notificacioApp_titolids = notificacioApp_titolids;
+    }
+
+
 // EXP  Field:descripcioid | Table: car_plugin | Type: 0  
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "descripcioID")
@@ -365,6 +391,10 @@ private static final long serialVersionUID = -326205279L;
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.enllaz_urlids) || org.hibernate.Hibernate.isInitialized(__jpa.getEnllaz_urlids())) ) {
       __tmp.setEnllaz_urlids(EnllazJPA.copyJPA(__jpa.getEnllaz_urlids(), __alreadyCopied,"TraduccioJPA"));
     }
+    if(!"NotificacioAppJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.notificacioApp_titolids) || org.hibernate.Hibernate.isInitialized(__jpa.getNotificacioApp_titolids())) ) {
+      __tmp.setNotificacioApp_titolids(NotificacioAppJPA.copyJPA(__jpa.getNotificacioApp_titolids(), __alreadyCopied,"TraduccioJPA"));
+    }
     if(!"PluginJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.plugin_descripcioids) || org.hibernate.Hibernate.isInitialized(__jpa.getPlugin_descripcioids())) ) {
       __tmp.setPlugin_descripcioids(PluginJPA.copyJPA(__jpa.getPlugin_descripcioids(), __alreadyCopied,"TraduccioJPA"));
@@ -388,6 +418,10 @@ private static final long serialVersionUID = -326205279L;
     if(!"PluginJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.plugin_subtitolllargids) || org.hibernate.Hibernate.isInitialized(__jpa.getPlugin_subtitolllargids())) ) {
       __tmp.setPlugin_subtitolllargids(PluginJPA.copyJPA(__jpa.getPlugin_subtitolllargids(), __alreadyCopied,"TraduccioJPA"));
+    }
+    if(!"NotificacioAppJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.notificacioApp_missatgeids) || org.hibernate.Hibernate.isInitialized(__jpa.getNotificacioApp_missatgeids())) ) {
+      __tmp.setNotificacioApp_missatgeids(NotificacioAppJPA.copyJPA(__jpa.getNotificacioApp_missatgeids(), __alreadyCopied,"TraduccioJPA"));
     }
     if(!"PreguntesFrequentsJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.preguntesFrequents_enunciatids) || org.hibernate.Hibernate.isInitialized(__jpa.getPreguntesFrequents_enunciatids())) ) {

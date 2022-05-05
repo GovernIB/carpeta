@@ -20,6 +20,7 @@
 		<class>es.caib.carpeta.persistence.FitxerJPA</class>
 		<class>es.caib.carpeta.persistence.IdiomaJPA</class>
 		<class>es.caib.carpeta.persistence.LogCarpetaJPA</class>
+		<class>es.caib.carpeta.persistence.NotificacioAppJPA</class>
 		<class>es.caib.carpeta.persistence.PluginJPA</class>
 		<class>es.caib.carpeta.persistence.PluginEntitatJPA</class>
 		<class>es.caib.carpeta.persistence.PreguntesFrequentsJPA</class>

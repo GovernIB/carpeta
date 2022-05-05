@@ -127,6 +127,34 @@ public class TraduccioQueryPath extends org.fundaciobit.genapp.common.query.Quer
 
  // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
 
+  public NotificacioAppQueryPath NOTIFICACIOAPP_MISSATGEIDS() {
+    return new NotificacioAppQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return TraduccioQueryPath.this.getQueryPath() + "notificacioApp_missatgeids" + ".";
+      }
+    });
+  }
+*/
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
+  public NotificacioAppQueryPath NOTIFICACIOAPP_TITOLIDS() {
+    return new NotificacioAppQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return TraduccioQueryPath.this.getQueryPath() + "notificacioApp_titolids" + ".";
+      }
+    });
+  }
+*/
+
+/* L'ús d'aquest camp (OneToMany) llança una exception:
+ [Illegal attempt to dereference a collection]
+
+ // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
+
   public PluginQueryPath PLUGIN_DESCRIPCIOIDS() {
     return new PluginQueryPath(new QueryPath() {
       public String getQueryPath() {

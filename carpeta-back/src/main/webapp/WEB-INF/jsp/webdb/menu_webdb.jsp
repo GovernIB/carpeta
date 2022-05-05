@@ -77,6 +77,13 @@ ${entityname}
         </span></a>
         </li>
 
+    <%-- NotificacioApp --%>
+       <fmt:message var="entityname" key="notificacioApp.notificacioApp.plural"/>
+        <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/notificacioApp/list/1"/>" ><span style="${(fn:contains(url, 'notificacioApp/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >
+${entityname}
+        </span></a>
+        </li>
+
     <%-- Plugin --%>
        <fmt:message var="entityname" key="plugin.plugin.plural"/>
         <li style="list-style-type: disc; list-style-position: inside;"><a href="<c:url value="/webdb/plugin/list/1"/>" ><span style="${(fn:contains(url, 'plugin/') && fn:contains(url, '/list'))? "font-weight: bold;" : ""}" >

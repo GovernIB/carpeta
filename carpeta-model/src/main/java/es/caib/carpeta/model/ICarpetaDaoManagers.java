@@ -13,6 +13,7 @@ public interface ICarpetaDaoManagers {
 	public IFitxerManager getFitxerManager();
 	public IIdiomaManager getIdiomaManager();
 	public ILogCarpetaManager getLogCarpetaManager();
+	public INotificacioAppManager getNotificacioAppManager();
 	public IPluginManager getPluginManager();
 	public IPluginEntitatManager getPluginEntitatManager();
 	public IPreguntesFrequentsManager getPreguntesFrequentsManager();

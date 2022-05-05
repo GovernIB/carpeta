@@ -34,6 +34,5 @@ public class RedirectToIndexFilter implements Filter {
 
     @Override
     public void destroy() {
-
     }
 }

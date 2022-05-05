@@ -359,8 +359,7 @@
     <definition name="accesListSuperAdmin" extends="superadmin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/accesList.jsp" />
     </definition>
-    
-    
+
     <definition name="idiomaFormSuperAdmin" extends="superadmin">
         <put-attribute name="titol" value="idioma.idioma" />
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/idiomaForm.jsp" />
@@ -381,6 +380,15 @@
     
     <definition name="sendmessageSuperAdmin" extends="superadmin">
         <put-attribute name="contingut" value="/WEB-INF/jsp/superadmin/sendmessage.jsp" />
+    </definition>
+    
+    <definition name="notificacioAppFormSuperAdmin" extends="superadmin">
+        <put-attribute name="titol" value="notificacioApp.notificacioApp" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/notificacioAppForm.jsp" />
+    </definition>
+    
+    <definition name="notificacioAppListSuperAdmin" extends="superadmin">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/notificacioAppList.jsp" />
     </definition>
     
 
@@ -516,6 +524,16 @@
     
     <definition name="logCarpetaListWebDB" extends="webdb">
         <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/logCarpetaList.jsp" />
+    </definition>
+
+
+    <definition name="notificacioAppFormWebDB" extends="webdb">
+        <put-attribute name="titol" value="notificacioApp.notificacioApp" />
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/notificacioAppForm.jsp" />
+    </definition>
+    
+    <definition name="notificacioAppListWebDB" extends="webdb">
+        <put-attribute name="contingut" value="/WEB-INF/jsp/webdb/notificacioAppList.jsp" />
     </definition>
 
 

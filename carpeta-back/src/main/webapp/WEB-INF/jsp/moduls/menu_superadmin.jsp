@@ -91,11 +91,16 @@
 
 <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
+<a class="dropdown-item"
+   href="<c:url value="/superadmin/tipusnotificacions/list"/>"> <span
+        style="${(fn:contains(url, '/superadmin/tipusnotificacions'))? " font-weight:bold;" : ""}"><spring:message
+        code="tipusnotificacions.menu" /> </span>
+</a>
 
 <a class="dropdown-item"
    href="<c:url value="/superadmin/ciutada/list"/>"> <span
         style="${(fn:contains(url, '/superadmin/ciutada'))? " font-weight:bold;" : ""}"><spring:message
-        code="ciutada.ciutada.plural" /> </span>
+        code="ciutada.menu" /> </span>
 </a>
 
 <hr style="margin-top: 6px; margin-bottom: 6px;" />

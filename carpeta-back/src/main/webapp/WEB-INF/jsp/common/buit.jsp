@@ -159,10 +159,13 @@
 	                <p class="card-text"><spring:message code="menu.superadmin.avis.descripcio" /></p>
 	                <ul>
 	                    <li><a href="<c:url value="/superadmin/avis/list"/>"><spring:message code="avis.avis.plural" /></a></li>
+                        <li><a href="<c:url value="/superadmin/tipusnotificacions/list"/>"><spring:message code="tipusnotificacions.menu" /></a></li>
+                        <li><a href="<c:url value="/superadmin/ciutada/list"/>"><spring:message code="ciutada.menu" /></a></li>
 	                </ul>
 	            </div>
 	        </div>
         </div>
+        
    </div>
    
    <div class="row">

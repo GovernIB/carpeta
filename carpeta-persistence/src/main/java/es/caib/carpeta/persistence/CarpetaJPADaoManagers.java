@@ -16,6 +16,7 @@ public final class CarpetaJPADaoManagers implements ICarpetaDaoManagers{
    private final FitxerJPAManager car_fitxer;
    private final IdiomaJPAManager car_idioma;
    private final LogCarpetaJPAManager car_log;
+   private final NotificacioAppJPAManager car_notificacioapp;
    private final PluginJPAManager car_plugin;
    private final PluginEntitatJPAManager car_pluginentitat;
    private final PreguntesFrequentsJPAManager car_preguntesfrequents;
@@ -36,6 +37,7 @@ public final class CarpetaJPADaoManagers implements ICarpetaDaoManagers{
     this.car_fitxer = new FitxerJPAManager(__em);
     this.car_idioma = new IdiomaJPAManager(__em);
     this.car_log = new LogCarpetaJPAManager(__em);
+    this.car_notificacioapp = new NotificacioAppJPAManager(__em);
     this.car_plugin = new PluginJPAManager(__em);
     this.car_pluginentitat = new PluginEntitatJPAManager(__em);
     this.car_preguntesfrequents = new PreguntesFrequentsJPAManager(__em);
@@ -84,6 +86,10 @@ public final class CarpetaJPADaoManagers implements ICarpetaDaoManagers{
 
     public ILogCarpetaManager getLogCarpetaManager() {
         return this.car_log;
+    };
+
+    public INotificacioAppManager getNotificacioAppManager() {
+        return this.car_notificacioapp;
     };
 
     public IPluginManager getPluginManager() {
