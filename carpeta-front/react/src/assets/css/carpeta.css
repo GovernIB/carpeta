@@ -846,6 +846,11 @@ height: 25px;
 .faq-row{
 	padding-bottom: 2em!important;
 }
+.imatgeFaq{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
 
 #dadespinbalayudascontainer .descarregaJustificant { text-align:center; } 
 #dadespinbalayudascontainer .descarregaJustificant span.oi { font-size: 3rem; display:block; margin: 10px; }

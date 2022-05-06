@@ -10,6 +10,9 @@ import es.caib.carpeta.model.entity.*;
 import es.caib.carpeta.model.fields.IdiomaFields;
 import es.caib.carpeta.persistence.*;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.OrderBy;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -21,8 +24,11 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.util.WebUtils;
 
 import javax.ejb.EJB;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 
@@ -1569,6 +1575,53 @@ public class WebUIController extends PluginFrontController {
                 String title = faqJPA.getEnunciatTraduccions().get(lang).getValor();
                 String content = faqJPA.getRespostaTraduccions().get(lang).getValor();
 
+                if(faq.getFitxer1ID()!=null) {
+                    Fitxer fit1 = utilsEjb.getFileInfo(faq.getFitxer1ID());
+                    File file1 = FileSystemManager.getFile(faq.getFitxer1ID());
+                    byte[] fileContent1 = FileUtils.readFileToByteArray(file1);
+                    String encodedString1 = Base64.getEncoder().encodeToString(fileContent1);
+                    FileInputStream fis = new FileInputStream(file1);
+
+                    if(ImageIO.read(fis) != null){
+                        content = content + "<p><img class=\"imatgeFaq\" src=\"data:" + fit1.getMime() + ";base64," + encodedString1 + "\" alt=\"\" /></p>";
+                    } else if(fit1.getMime().equals("application/pdf")){
+                        content = content + "<p><a href=\"/carpetafront/webui/pdfview/" + fit1.getFitxerID() + "\" target=\"_blank\">" + fit1.getNom() + "</a></p>";
+                    }
+
+                }
+
+                if(faq.getFitxer2ID()!=null) {
+                    Fitxer fit2 = utilsEjb.getFileInfo(faq.getFitxer2ID());
+                    File file2 = FileSystemManager.getFile(faq.getFitxer2ID());
+                    byte[] fileContent2 = FileUtils.readFileToByteArray(file2);
+                    String encodedString2 = Base64.getEncoder().encodeToString(fileContent2);
+                    FileInputStream fis2 = new FileInputStream(file2);
+
+                    if(ImageIO.read(fis2) != null){
+                        content = content + "<p><img class=\"imatgeFaq\" src=\"data:" + fit2.getMime() + ";base64," + encodedString2 + "\" alt=\"\" /></p>";
+                    } else if(fit2.getMime().equals("application/pdf")){
+                        content = content + "<p><a href=\"/carpetafront/webui/pdfview/" + fit2.getFitxerID() + "\" target=\"_blank\">" + fit2.getNom() + "</a></p>";
+                    }
+
+                }
+
+                if(faq.getFitxer3ID()!=null) {
+                    Fitxer fit3 = utilsEjb.getFileInfo(faq.getFitxer3ID());
+                    File file3 = FileSystemManager.getFile(faq.getFitxer3ID());
+                    byte[] fileContent3 = FileUtils.readFileToByteArray(file3);
+                    String encodedString3 = Base64.getEncoder().encodeToString(fileContent3);
+                    FileInputStream fis3 = new FileInputStream(file3);
+
+                    if(ImageIO.read(fis3) != null){
+                        content = content + "<p><img class=\"imatgeFaq\" src=\"data:" + fit3.getMime() + ";base64," + encodedString3 + "\" alt=\"\" /></p>";
+                    } else if(fit3.getMime().equals("application/pdf")){
+                        content = content + "<p><a href=\"/carpetafront/webui/pdfview/" + fit3.getFitxerID() + "\" target=\"_blank\">" + fit3.getNom() + "</a></p>";
+                    }
+
+                }
+
+
+
                 FaqInfo fi = new FaqInfo(title, content);
                 faqsInfo.add(fi);
             }
@@ -1582,6 +1635,20 @@ public class WebUIController extends PluginFrontController {
             response.setContentType("application/json");
 
             response.getWriter().write(json);
+
+        } catch (Throwable e) {
+            processExceptionRest(e, request, response);
+        }
+
+    }
+
+    @RequestMapping(value = "/pdfview/{pdfId}", method = RequestMethod.GET)
+    public void getPdf(@PathVariable("pdfId") Long pdfId, HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+
+            log.info("Entram pdfview: " + pdfId);
+            descarregaFitxer(response, pdfId);
 
         } catch (Throwable e) {
             processExceptionRest(e, request, response);
