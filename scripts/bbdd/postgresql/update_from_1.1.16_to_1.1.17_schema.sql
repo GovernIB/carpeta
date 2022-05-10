@@ -45,6 +45,13 @@ CREATE TABLE car_notificacioapp
 );
 
 
+ALTER TABLE car_notificacioapp
+  ADD COLUMN entitatid bigint NOT NULL;
+ALTER TABLE car_notificacioapp
+  ADD CONSTRAINT car_notifica_entitat_ent_fk FOREIGN KEY (entitatid) REFERENCES car_entitat (entitatid) ON UPDATE NO ACTION ON DELETE NO ACTION;
+create index car_notifica_entitatid_fk_i on car_notificacioapp (entitatid);
+
+
 create index car_notificacioapp_pk_i on car_notificacioapp (notificacioappid);
 create index car_notifica_titolid_fk_i on car_notificacioapp (titolid);
 create index car_notifica_missatgeid_fk_i on car_notificacioapp (missatgeid);

@@ -191,3 +191,34 @@
         </tr>
         </c:if>
         
+        <c:if test="${!gen:contains(__theForm.hiddenFields,NotificacioAppFields.ENTITATID)}">
+        <tr id="notificacioApp_entitatID_rowid">
+          <td id="notificacioApp_entitatID_columnlabelid">
+            <label>
+              <fmt:message key="${(empty __theForm.labels[NotificacioAppFields.ENTITATID])?'notificacioApp.entitatID':__theForm.labels[NotificacioAppFields.ENTITATID]}" /> &nbsp;(*)
+             </label>
+              <c:if test="${not empty __theForm.help[NotificacioAppFields.ENTITATID]}">
+              <i class="fas fa-info-circle" title="${__theForm.help[NotificacioAppFields.ENTITATID]}" ></i>
+              </c:if>
+            </td>
+          <td id="notificacioApp_entitatID_columnvalueid">
+          <form:errors path="notificacioApp.entitatID" cssClass="errorField alert alert-danger" />
+          <c:if test="${gen:contains(__theForm.readOnlyFields ,NotificacioAppFields.ENTITATID)}" >
+          <form:hidden path="notificacioApp.entitatID"/>
+          <input type="text" readonly="true" class="form-control col-md-9-optional uneditable-input" value="${gen:findValue(__theForm.notificacioApp.entitatID,__theForm.listOfEntitatForEntitatID)}"  />
+          </c:if>
+          <c:if test="${!gen:contains(__theForm.readOnlyFields ,NotificacioAppFields.ENTITATID)}" >
+          <c:set var="containEmptyValue"  value="false" />
+          <form:select id="notificacioApp_entitatID"  onchange="if(typeof onChangeEntitatID == 'function') {  onChangeEntitatID(this); };"  cssClass="form-control col-md-9-optional" path="notificacioApp.entitatID">
+            <c:forEach items="${__theForm.listOfEntitatForEntitatID}" var="tmp">
+                <form:option value="${tmp.key}">${tmp.value}</form:option>
+                <c:if test="${empty tmp.key}">
+                  <c:set var="containEmptyValue"  value="true" />
+                </c:if>
+            </c:forEach>
+          </form:select>
+          </c:if>
+           </td>
+        </tr>
+        </c:if>
+        

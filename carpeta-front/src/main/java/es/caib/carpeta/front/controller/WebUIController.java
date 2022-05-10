@@ -11,7 +11,6 @@ import es.caib.carpeta.model.fields.IdiomaFields;
 import es.caib.carpeta.persistence.*;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.OrderBy;

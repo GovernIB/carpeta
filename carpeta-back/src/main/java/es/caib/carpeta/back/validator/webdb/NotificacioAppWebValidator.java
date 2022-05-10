@@ -32,6 +32,9 @@ public class NotificacioAppWebValidator extends AbstractWebValidator<Notificacio
   protected NotificacioAppValidator<NotificacioApp> validator = new NotificacioAppValidator<NotificacioApp>();
 
   // EJB's
+  @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.EntitatService.JNDI_NAME)
+  protected es.caib.carpeta.ejb.EntitatService entitatEjb;
+
   @javax.ejb.EJB(mappedName = es.caib.carpeta.ejb.NotificacioAppService.JNDI_NAME)
   protected es.caib.carpeta.ejb.NotificacioAppService notificacioAppEjb;
 
@@ -153,7 +156,7 @@ _ignoreFields.add(MISSATGEID);
   }
     BeanValidatorResult<NotificacioApp> __vr = new BeanValidatorResult<NotificacioApp>();
     validator.validate(__vr, __bean,
-      isNou, notificacioAppEjb, pluginEjb, traduccioEjb);
+      isNou, entitatEjb, notificacioAppEjb, pluginEjb, traduccioEjb);
 
     if (__vr.hasErrors()) {
         List<I18NFieldError> vrErrors = __vr.getErrors();

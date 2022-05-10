@@ -14,7 +14,7 @@ import javax.ws.rs.core.Application;
 import org.apache.log4j.Logger;
 
 /**
- * 
+ *
  * @author anadal
  *
  */

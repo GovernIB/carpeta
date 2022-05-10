@@ -17,6 +17,8 @@ public class NotificacioAppBeanValidator
 
 
   // EJB's
+  protected final es.caib.carpeta.model.dao.IEntitatManager __entitatManager;
+
   protected final es.caib.carpeta.model.dao.INotificacioAppManager __notificacioAppManager;
 
   protected final es.caib.carpeta.model.dao.IPluginManager __pluginManager;
@@ -27,9 +29,11 @@ public class NotificacioAppBeanValidator
   public final NotificacioAppValidator<NotificacioAppJPA> _validator;
 
 
-  public NotificacioAppBeanValidator(es.caib.carpeta.model.dao.INotificacioAppManager __notificacioAppManager,
+  public NotificacioAppBeanValidator(es.caib.carpeta.model.dao.IEntitatManager __entitatManager,
+     es.caib.carpeta.model.dao.INotificacioAppManager __notificacioAppManager,
      es.caib.carpeta.model.dao.IPluginManager __pluginManager,
      es.caib.carpeta.model.dao.ITraduccioManager __traduccioManager) { 
+    this.__entitatManager = __entitatManager;
     this.__notificacioAppManager = __notificacioAppManager;
     this.__pluginManager = __pluginManager;
     this.__traduccioManager = __traduccioManager;
@@ -37,9 +41,11 @@ public class NotificacioAppBeanValidator
   }
 
   public NotificacioAppBeanValidator(NotificacioAppValidator<NotificacioAppJPA> _validator,
+     es.caib.carpeta.model.dao.IEntitatManager __entitatManager,
      es.caib.carpeta.model.dao.INotificacioAppManager __notificacioAppManager,
      es.caib.carpeta.model.dao.IPluginManager __pluginManager,
      es.caib.carpeta.model.dao.ITraduccioManager __traduccioManager) {
+    this.__entitatManager = __entitatManager;
     this.__notificacioAppManager = __notificacioAppManager;
     this.__pluginManager = __pluginManager;
     this.__traduccioManager = __traduccioManager;
@@ -49,7 +55,7 @@ public class NotificacioAppBeanValidator
   @Override
   public List<I18NFieldError> validate(NotificacioAppJPA target, boolean isNou) throws I18NException {
     BeanValidatorResult<NotificacioAppJPA> _bvr_ = new BeanValidatorResult<NotificacioAppJPA>();
-    _validator.validate(_bvr_, target, isNou, __notificacioAppManager, __pluginManager, __traduccioManager);
+    _validator.validate(_bvr_, target, isNou, __entitatManager, __notificacioAppManager, __pluginManager, __traduccioManager);
     return _bvr_.getErrors();
   }
 }

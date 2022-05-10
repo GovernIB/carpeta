@@ -69,6 +69,10 @@ public class NotificacioAppController
   @Autowired
   protected PluginRefList pluginRefList;
 
+  // References 
+  @Autowired
+  protected EntitatRefList entitatRefList;
+
   /**
    * Llistat de totes NotificacioApp
    */
@@ -222,6 +226,16 @@ public class NotificacioAppController
 
       fillValuesToGroupByItemsBoolean("genapp.checkbox", groupByItemsMap, ACTIVA);
 
+    // Field entitatID
+    {
+      _listSKV = getReferenceListForEntitatID(request, mav, filterForm, list, groupByItemsMap, null);
+      _tmp = Utils.listToMap(_listSKV);
+      filterForm.setMapOfEntitatForEntitatID(_tmp);
+      if (filterForm.getGroupByFields().contains(ENTITATID)) {
+        fillValuesToGroupByItems(_tmp, groupByItemsMap, ENTITATID, false);
+      };
+    }
+
 
     return groupByItemsMap;
   }
@@ -240,6 +254,7 @@ public class NotificacioAppController
     __mapping.put(TITOLID, filterForm.getMapOfTraduccioForTitolID());
     __mapping.put(MISSATGEID, filterForm.getMapOfTraduccioForMissatgeID());
     __mapping.put(FRONTPLUGINID, filterForm.getMapOfPluginForFrontPluginID());
+    __mapping.put(ENTITATID, filterForm.getMapOfEntitatForEntitatID());
     exportData(request, response, dataExporterID, filterForm,
           list, allFields, __mapping, PRIMARYKEY_FIELDS);
   }
@@ -314,6 +329,15 @@ public class NotificacioAppController
           java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
       }
       notificacioAppForm.setListOfPluginForFrontPluginID(_listSKV);
+    }
+    // Comprovam si ja esta definida la llista
+    if (notificacioAppForm.getListOfEntitatForEntitatID() == null) {
+      List<StringKeyValue> _listSKV = getReferenceListForEntitatID(request, mav, notificacioAppForm, null);
+
+      if(_listSKV != null && !_listSKV.isEmpty()) { 
+          java.util.Collections.sort(_listSKV, STRINGKEYVALUE_COMPARATOR);
+      }
+      notificacioAppForm.setListOfEntitatForEntitatID(_listSKV);
     }
     
   }
@@ -712,6 +736,45 @@ public java.lang.Long stringToPK(String value) {
   public List<StringKeyValue> getReferenceListForFrontPluginID(HttpServletRequest request,
        ModelAndView mav, Where where)  throws I18NException {
     return pluginRefList.getReferenceList(PluginFields.PLUGINID, where );
+  }
+
+
+  public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
+       ModelAndView mav, NotificacioAppForm notificacioAppForm, Where where)  throws I18NException {
+    if (notificacioAppForm.isHiddenField(ENTITATID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _where = null;
+    if (notificacioAppForm.isReadOnlyField(ENTITATID)) {
+      _where = EntitatFields.ENTITATID.equal(notificacioAppForm.getNotificacioApp().getEntitatID());
+    }
+    return getReferenceListForEntitatID(request, mav, Where.AND(where, _where));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
+       ModelAndView mav, NotificacioAppFilterForm notificacioAppFilterForm,
+       List<NotificacioApp> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
+    if (notificacioAppFilterForm.isHiddenField(ENTITATID)
+      && !notificacioAppFilterForm.isGroupByField(ENTITATID)) {
+      return EMPTY_STRINGKEYVALUE_LIST;
+    }
+    Where _w = null;
+    if (!_groupByItemsMap.containsKey(ENTITATID)) {
+      // OBTENIR TOTES LES CLAUS (PK) i despres només cercar referències d'aquestes PK
+      java.util.Set<java.lang.Long> _pkList = new java.util.HashSet<java.lang.Long>();
+      for (NotificacioApp _item : list) {
+        _pkList.add(_item.getEntitatID());
+        }
+        _w = EntitatFields.ENTITATID.in(_pkList);
+      }
+    return getReferenceListForEntitatID(request, mav, Where.AND(where,_w));
+  }
+
+
+  public List<StringKeyValue> getReferenceListForEntitatID(HttpServletRequest request,
+       ModelAndView mav, Where where)  throws I18NException {
+    return entitatRefList.getReferenceList(EntitatFields.ENTITATID, where );
   }
 
 

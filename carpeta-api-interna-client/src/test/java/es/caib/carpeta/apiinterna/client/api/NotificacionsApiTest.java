@@ -12,13 +12,17 @@
 
 package es.caib.carpeta.apiinterna.client.api;
 
+import es.caib.carpeta.apiinterna.client.model.SendMessageResult;
 import es.caib.carpeta.apiinterna.client.services.ApiClient;
 import es.caib.carpeta.apiinterna.client.services.ApiException;
 import es.caib.carpeta.apiinterna.client.services.auth.HttpBasicAuth;
 import org.junit.Test;
 import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
+import org.junit.Assert;
 import org.junit.Ignore;
 
 /**
@@ -32,10 +36,19 @@ public class NotificacionsApiTest {
     private NotificacionsApi apiNotif = null;
 
     private String nifTest;
+    
+    private String notificationCode;
 
     public static void main(String[] args) {
         try {
-            new NotificacionsApiTest().existCiutadaTest();
+            NotificacionsApiTest n = new NotificacionsApiTest();
+            
+            //n.existCiutadaTest();
+            
+            //n.sendMessageTest();
+            
+            n.helpTest();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -51,6 +64,8 @@ public class NotificacionsApiTest {
             String username = prop.getProperty("username");
             String password = prop.getProperty("password");
             nifTest = prop.getProperty("niftest");
+            
+            notificationCode = prop.getProperty("notificationCode");
 
             ApiClient apiClient = new ApiClient();
             apiClient.setBasePath(urlBase);
@@ -80,8 +95,16 @@ public class NotificacionsApiTest {
         String nif = this.nifTest;
         String lang = null;
 
+        try {
+            api.existCitizen(nif, lang);
+            Assert.fail("Hem passat parametre lang = null i no ha fallat: hauria d'haver fallat.");
+        } catch (Exception e) {
+            // TODO: handle exception
+        } 
+        
+        lang = "es";
         System.out.println("Cridant existCiutadaTest(" + nif + ") ");
-        Boolean response = api.existCiutada(nif, lang);
+        Boolean response = api.existCitizen(nif, lang);
 
         System.out.println("existCiutadaTest(" + nif + ") => " + response);
         // TODO: test validations
@@ -90,18 +113,43 @@ public class NotificacionsApiTest {
     /**
      * Envia un missatge al mòbil del ciutada a traves de l&#x27;App de Carpeta.
      *
-     * 
-     *
      * @throws ApiException if the Api call fails
      */
     @Test
     public void sendMessageTest() throws Exception {
-        String nif = null;
-        String title = null;
-        String message = null;
-        String lang = null;
-        String response = getNotificacionsApi().sendMessage(nif, title, message, lang);
 
-        // TODO: test validations
+        List<String> notificationParameters = new ArrayList<String>();
+        notificationParameters.add("param1XXX");
+        notificationParameters.add("param2YYYY");
+        notificationParameters.add("param3ZZZZ");
+        final String notificationLang = "ca";
+        final String langError = "ca";
+        SendMessageResult smr = getNotificacionsApi().sendNotificationToMobile(this.nifTest, this.notificationCode, 
+                notificationParameters, notificationLang,langError);
+        
+        System.out.println("CODE = " + smr.getCode());
+        System.out.println("MSG = " + smr.getMessage());
+
     }
+    
+    
+    /**
+     * Retorna ajuda de certa NotificacioApp
+     * @throws Exception
+     */
+    @Test
+    public void helpTest() throws Exception {
+
+        
+  
+        final String langError = "ca";
+        String help  = getNotificacionsApi().help(this.notificationCode, langError);
+        
+        System.out.println("AJUDA =>\n" + help);
+
+    }
+    
+    
+    
+    
 }

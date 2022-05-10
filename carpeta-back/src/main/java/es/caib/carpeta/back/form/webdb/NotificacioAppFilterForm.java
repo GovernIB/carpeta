@@ -131,6 +131,28 @@ public class NotificacioAppFilterForm extends CarpetaBaseFilterForm implements N
   }
 
 
+  private java.lang.Long entitatIDDesde;
+
+  public java.lang.Long getEntitatIDDesde() {
+    return this.entitatIDDesde;
+  }
+
+  public void setEntitatIDDesde(java.lang.Long entitatIDDesde) {
+    this.entitatIDDesde = entitatIDDesde;
+  }
+
+
+  private java.lang.Long entitatIDFins;
+
+  public java.lang.Long getEntitatIDFins() {
+    return this.entitatIDFins;
+  }
+
+  public void setEntitatIDFins(java.lang.Long entitatIDFins) {
+    this.entitatIDFins = entitatIDFins;
+  }
+
+
   public NotificacioAppFilterForm() {
   }
   
@@ -146,9 +168,12 @@ public class NotificacioAppFilterForm extends CarpetaBaseFilterForm implements N
     this.frontPluginIDDesde = __toClone.frontPluginIDDesde;
     this.frontPluginIDFins = __toClone.frontPluginIDFins;
     this.ajuda = __toClone.ajuda;
+    this.entitatIDDesde = __toClone.entitatIDDesde;
+    this.entitatIDFins = __toClone.entitatIDFins;
     this.mapOfTraduccioForTitolID = __toClone.mapOfTraduccioForTitolID;
     this.mapOfTraduccioForMissatgeID = __toClone.mapOfTraduccioForMissatgeID;
     this.mapOfPluginForFrontPluginID = __toClone.mapOfPluginForFrontPluginID;
+    this.mapOfEntitatForEntitatID = __toClone.mapOfEntitatForEntitatID;
   }
   
   /* ========= UTILS ========== */
@@ -215,6 +240,18 @@ public class NotificacioAppFilterForm extends CarpetaBaseFilterForm implements N
 
   public void setMapOfPluginForFrontPluginID(Map<String, String> mapOfPluginForFrontPluginID) {
     this.mapOfPluginForFrontPluginID = mapOfPluginForFrontPluginID;
+  }
+
+
+
+  private Map<String, String> mapOfEntitatForEntitatID;
+
+  public Map<String, String> getMapOfEntitatForEntitatID() {
+    return this.mapOfEntitatForEntitatID;
+  }
+
+  public void setMapOfEntitatForEntitatID(Map<String, String> mapOfEntitatForEntitatID) {
+    this.mapOfEntitatForEntitatID = mapOfEntitatForEntitatID;
   }
 
 

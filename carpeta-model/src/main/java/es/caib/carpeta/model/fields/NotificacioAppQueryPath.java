@@ -39,6 +39,10 @@ public class NotificacioAppQueryPath extends org.fundaciobit.genapp.common.query
     return new BooleanField(getQueryPath(), NotificacioAppFields.ACTIVA);
   }
 
+  public LongField ENTITATID() {
+    return new LongField(getQueryPath(), NotificacioAppFields.ENTITATID);
+  }
+
 
 
   @Override
@@ -68,6 +72,14 @@ public class NotificacioAppQueryPath extends org.fundaciobit.genapp.common.query
     return new PluginQueryPath(new QueryPath() {
       public String getQueryPath() {
           return NotificacioAppQueryPath.this.getQueryPath() + "plugin" + ".";
+      }
+    });
+  }
+
+  public EntitatQueryPath ENTITAT() {
+    return new EntitatQueryPath(new QueryPath() {
+      public String getQueryPath() {
+          return NotificacioAppQueryPath.this.getQueryPath() + "entitat" + ".";
       }
     });
   }

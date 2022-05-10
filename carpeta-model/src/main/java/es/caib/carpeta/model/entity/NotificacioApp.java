@@ -23,6 +23,9 @@ public interface NotificacioApp extends org.fundaciobit.genapp.common.IGenAppEnt
 	public boolean isActiva();
 	public void setActiva(boolean _activa_);
 
+	public long getEntitatID();
+	public void setEntitatID(long _entitatID_);
+
 
 
   // ======================================

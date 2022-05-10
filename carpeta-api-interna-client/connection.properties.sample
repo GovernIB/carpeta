@@ -1,6 +1,7 @@
 
-urlbase=http://localhost:8080/carpetaapi/externa
+urlbase=http://localhost:8080/carpetaapi/interna
 username=myusername
 password=mypasword
 
 niftest=12345678Z
+notificationCode=TITOLMISSATGECODE

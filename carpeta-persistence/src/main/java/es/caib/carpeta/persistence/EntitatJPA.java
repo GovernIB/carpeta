@@ -524,6 +524,19 @@ private static final long serialVersionUID = 489209138L;
     }
 
 
+// EXP  Field:entitatid | Table: car_notificacioapp | Type: 0  
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
+    private Set<NotificacioAppJPA> notificacioApps = new HashSet<NotificacioAppJPA>(0);
+    public  Set<NotificacioAppJPA> getNotificacioApps() {
+    return this.notificacioApps;
+  }
+
+    public void setNotificacioApps(Set<NotificacioAppJPA> notificacioApps) {
+      this.notificacioApps = notificacioApps;
+    }
+
+
 // EXP  Field:entitatid | Table: car_pluginentitat | Type: 0  
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "entitat")
@@ -858,6 +871,10 @@ private static final long serialVersionUID = 489209138L;
     if(!"PreguntesFrequentsJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.preguntesFrequentss) || org.hibernate.Hibernate.isInitialized(__jpa.getPreguntesFrequentss())) ) {
       __tmp.setPreguntesFrequentss(PreguntesFrequentsJPA.copyJPA(__jpa.getPreguntesFrequentss(), __alreadyCopied,"EntitatJPA"));
+    }
+    if(!"NotificacioAppJPA".equals(origenJPA) 
+       && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.notificacioApps) || org.hibernate.Hibernate.isInitialized(__jpa.getNotificacioApps())) ) {
+      __tmp.setNotificacioApps(NotificacioAppJPA.copyJPA(__jpa.getNotificacioApps(), __alreadyCopied,"EntitatJPA"));
     }
     if(!"AvisJPA".equals(origenJPA) 
        && ( !org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.aviss) || org.hibernate.Hibernate.isInitialized(__jpa.getAviss())) ) {

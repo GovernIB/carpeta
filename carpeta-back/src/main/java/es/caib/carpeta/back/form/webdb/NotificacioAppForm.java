@@ -22,6 +22,7 @@ public class NotificacioAppForm extends CarpetaBaseForm {
     this.listOfTraduccioForTitolID = __toClone.listOfTraduccioForTitolID;
     this.listOfTraduccioForMissatgeID = __toClone.listOfTraduccioForMissatgeID;
     this.listOfPluginForFrontPluginID = __toClone.listOfPluginForFrontPluginID;
+    this.listOfEntitatForEntitatID = __toClone.listOfEntitatForEntitatID;
   }
   
   public NotificacioAppForm(NotificacioAppJPA notificacioApp, boolean nou) {
@@ -78,6 +79,18 @@ public class NotificacioAppForm extends CarpetaBaseForm {
 
   public void setListOfPluginForFrontPluginID(List<StringKeyValue> listOfPluginForFrontPluginID) {
     this.listOfPluginForFrontPluginID = listOfPluginForFrontPluginID;
+  }
+
+
+
+  private List<StringKeyValue> listOfEntitatForEntitatID;
+
+  public List<StringKeyValue> getListOfEntitatForEntitatID() {
+    return this.listOfEntitatForEntitatID;
+  }
+
+  public void setListOfEntitatForEntitatID(List<StringKeyValue> listOfEntitatForEntitatID) {
+    this.listOfEntitatForEntitatID = listOfEntitatForEntitatID;
   }
 
 

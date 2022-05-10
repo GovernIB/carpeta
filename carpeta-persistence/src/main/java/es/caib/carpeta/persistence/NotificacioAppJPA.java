@@ -22,7 +22,8 @@ import javax.persistence.Id;
         @Index(name="car_notificacioapp_pk_i", columnList = "notificacioappid"),
         @Index(name="car_notifica_titolid_fk_i", columnList = "titolid"),
         @Index(name="car_notifica_missatgeid_fk_i", columnList = "missatgeid"),
-        @Index(name="car_notifica_pluginid_fk_i", columnList = "frontpluginid")})
+        @Index(name="car_notifica_pluginid_fk_i", columnList = "frontpluginid"),
+        @Index(name="car_notifica_entitatid_fk_i", columnList = "entitatid")})
 @SequenceGenerator(name="NOTIFICACIOAPP_SEQ", sequenceName="car_notificacioapp_seq", allocationSize=1, initialValue=1000)
 @javax.xml.bind.annotation.XmlRootElement
 public class NotificacioAppJPA implements NotificacioApp {
@@ -56,6 +57,9 @@ private static final long serialVersionUID = 1756000396L;
     @Column(name="activa",nullable = false,length = 1)
     boolean activa;
 
+    @Column(name="entitatid",nullable = false,length = 19)
+    long entitatID;
+
 
 
   /** Constructor Buit */
@@ -63,7 +67,7 @@ private static final long serialVersionUID = 1756000396L;
   }
 
   /** Constructor amb tots els camps  */
-  public NotificacioAppJPA(long notificacioAppID , java.lang.String codi , long titolID , long missatgeID , java.lang.Long frontPluginID , java.lang.String ajuda , boolean activa) {
+  public NotificacioAppJPA(long notificacioAppID , java.lang.String codi , long titolID , long missatgeID , java.lang.Long frontPluginID , java.lang.String ajuda , boolean activa , long entitatID) {
     this.notificacioAppID=notificacioAppID;
     this.codi=codi;
     this.titolID=titolID;
@@ -71,23 +75,26 @@ private static final long serialVersionUID = 1756000396L;
     this.frontPluginID=frontPluginID;
     this.ajuda=ajuda;
     this.activa=activa;
+    this.entitatID=entitatID;
 }
   /** Constructor sense valors autoincrementals */
-  public NotificacioAppJPA(java.lang.String codi , long titolID , long missatgeID , java.lang.Long frontPluginID , java.lang.String ajuda , boolean activa) {
+  public NotificacioAppJPA(java.lang.String codi , long titolID , long missatgeID , java.lang.Long frontPluginID , java.lang.String ajuda , boolean activa , long entitatID) {
     this.codi=codi;
     this.titolID=titolID;
     this.missatgeID=missatgeID;
     this.frontPluginID=frontPluginID;
     this.ajuda=ajuda;
     this.activa=activa;
+    this.entitatID=entitatID;
 }
   /** Constructor dels valors Not Null */
-  public NotificacioAppJPA(long notificacioAppID , java.lang.String codi , long titolID , long missatgeID , boolean activa) {
+  public NotificacioAppJPA(long notificacioAppID , java.lang.String codi , long titolID , long missatgeID , boolean activa , long entitatID) {
     this.notificacioAppID=notificacioAppID;
     this.codi=codi;
     this.titolID=titolID;
     this.missatgeID=missatgeID;
     this.activa=activa;
+    this.entitatID=entitatID;
 }
   public NotificacioAppJPA(NotificacioApp __bean) {
     this.setNotificacioAppID(__bean.getNotificacioAppID());
@@ -97,6 +104,7 @@ private static final long serialVersionUID = 1756000396L;
     this.setFrontPluginID(__bean.getFrontPluginID());
     this.setAjuda(__bean.getAjuda());
     this.setActiva(__bean.isActiva());
+    this.setEntitatID(__bean.getEntitatID());
 	}
 
 	public long getNotificacioAppID() {
@@ -146,6 +154,13 @@ private static final long serialVersionUID = 1756000396L;
 	};
 	public void setActiva(boolean _activa_) {
 		this.activa = _activa_;
+	};
+
+	public long getEntitatID() {
+		return(entitatID);
+	};
+	public void setEntitatID(long _entitatID_) {
+		this.entitatID = _entitatID_;
 	};
 
 
@@ -225,6 +240,20 @@ private static final long serialVersionUID = 1756000396L;
     this.plugin = plugin;
   }
 
+// IMP Field:entitatid | Table: car_entitat | Type: 1  
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "entitatid", referencedColumnName ="entitatID", nullable = false, insertable=false, updatable=false, foreignKey=@ForeignKey(name="car_notifica_entitat_ent_fk"))
+    private EntitatJPA entitat;
+
+    public EntitatJPA getEntitat() {
+    return this.entitat;
+  }
+
+    public  void setEntitat(EntitatJPA entitat) {
+    this.entitat = entitat;
+  }
+
 
  // ---------------  STATIC METHODS ------------------
   public static NotificacioAppJPA toJPA(NotificacioApp __bean) {
@@ -237,6 +266,7 @@ private static final long serialVersionUID = 1756000396L;
     __tmp.setFrontPluginID(__bean.getFrontPluginID());
     __tmp.setAjuda(__bean.getAjuda());
     __tmp.setActiva(__bean.isActiva());
+    __tmp.setEntitatID(__bean.getEntitatID());
 		return __tmp;
 	}
 
@@ -274,6 +304,10 @@ private static final long serialVersionUID = 1756000396L;
     if(!"TraduccioJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.titol) || org.hibernate.Hibernate.isInitialized(__jpa.getTitol()) ) ) {
       __tmp.setTitol(TraduccioJPA.copyJPA(__jpa.getTitol(), __alreadyCopied,"NotificacioAppJPA"));
+    }
+    if(!"EntitatJPA".equals(origenJPA) && 
+       (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.entitat) || org.hibernate.Hibernate.isInitialized(__jpa.getEntitat()) ) ) {
+      __tmp.setEntitat(EntitatJPA.copyJPA(__jpa.getEntitat(), __alreadyCopied,"NotificacioAppJPA"));
     }
     if(!"PluginJPA".equals(origenJPA) && 
        (!org.fundaciobit.genapp.common.utils.Utils.isEmpty(__jpa.plugin) || org.hibernate.Hibernate.isInitialized(__jpa.getPlugin()) ) ) {

@@ -84,8 +84,6 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
 		            }
             	}
 
-                javax.servlet.http.HttpServletRequest httpServletRequest = null;
-
             	accesLogicaEjb.crearAcces(usuarioClave, TIPUS_ACCES_LOGIN_AUTENTICAT, entitatID, null, 
             			new Timestamp(new Date().getTime()), Locale.getDefault().getLanguage(),
                         sesionHttp.getIpAddress(), true, sesionHttp.getIdSessio());

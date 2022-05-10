@@ -19,6 +19,7 @@ public interface NotificacioAppFields extends java.io.Serializable {
 	 public static final LongField FRONTPLUGINID = new LongField(_TABLE_MODEL, "frontPluginID", "frontpluginid");
 	 public static final StringField AJUDA = new StringField(_TABLE_MODEL, "ajuda", "ajuda");
 	 public static final BooleanField ACTIVA = new BooleanField(_TABLE_MODEL, "activa", "activa");
+	 public static final LongField ENTITATID = new LongField(_TABLE_MODEL, "entitatID", "entitatid");
 
 
   public static final Field<?>[] ALL_NOTIFICACIOAPP_FIELDS = {
@@ -28,7 +29,8 @@ public interface NotificacioAppFields extends java.io.Serializable {
     MISSATGEID,
     FRONTPLUGINID,
     AJUDA,
-    ACTIVA
+    ACTIVA,
+    ENTITATID
   };
 
 

@@ -17,6 +17,7 @@ private static final long serialVersionUID = -1398779617L;
 	java.lang.Long frontPluginID;
 	java.lang.String ajuda;
 	boolean activa;
+	long entitatID;
 
 
   /** Constructor Buit */
@@ -24,7 +25,7 @@ private static final long serialVersionUID = -1398779617L;
   }
 
   /** Constructor amb tots els camps  */
-  public NotificacioAppBean(long notificacioAppID , java.lang.String codi , long titolID , long missatgeID , java.lang.Long frontPluginID , java.lang.String ajuda , boolean activa) {
+  public NotificacioAppBean(long notificacioAppID , java.lang.String codi , long titolID , long missatgeID , java.lang.Long frontPluginID , java.lang.String ajuda , boolean activa , long entitatID) {
     this.notificacioAppID=notificacioAppID;
     this.codi=codi;
     this.titolID=titolID;
@@ -32,23 +33,26 @@ private static final long serialVersionUID = -1398779617L;
     this.frontPluginID=frontPluginID;
     this.ajuda=ajuda;
     this.activa=activa;
+    this.entitatID=entitatID;
 }
   /** Constructor sense valors autoincrementals */
-  public NotificacioAppBean(java.lang.String codi , long titolID , long missatgeID , java.lang.Long frontPluginID , java.lang.String ajuda , boolean activa) {
+  public NotificacioAppBean(java.lang.String codi , long titolID , long missatgeID , java.lang.Long frontPluginID , java.lang.String ajuda , boolean activa , long entitatID) {
     this.codi=codi;
     this.titolID=titolID;
     this.missatgeID=missatgeID;
     this.frontPluginID=frontPluginID;
     this.ajuda=ajuda;
     this.activa=activa;
+    this.entitatID=entitatID;
 }
   /** Constructor dels valors Not Null */
-  public NotificacioAppBean(long notificacioAppID , java.lang.String codi , long titolID , long missatgeID , boolean activa) {
+  public NotificacioAppBean(long notificacioAppID , java.lang.String codi , long titolID , long missatgeID , boolean activa , long entitatID) {
     this.notificacioAppID=notificacioAppID;
     this.codi=codi;
     this.titolID=titolID;
     this.missatgeID=missatgeID;
     this.activa=activa;
+    this.entitatID=entitatID;
 }
   public NotificacioAppBean(NotificacioApp __bean) {
     this.setNotificacioAppID(__bean.getNotificacioAppID());
@@ -58,6 +62,7 @@ private static final long serialVersionUID = -1398779617L;
     this.setFrontPluginID(__bean.getFrontPluginID());
     this.setAjuda(__bean.getAjuda());
     this.setActiva(__bean.isActiva());
+    this.setEntitatID(__bean.getEntitatID());
 	}
 
 	public long getNotificacioAppID() {
@@ -109,6 +114,13 @@ private static final long serialVersionUID = -1398779617L;
 		this.activa = _activa_;
 	};
 
+	public long getEntitatID() {
+		return(entitatID);
+	};
+	public void setEntitatID(long _entitatID_) {
+		this.entitatID = _entitatID_;
+	};
+
 
 
   // ======================================
@@ -123,6 +135,7 @@ private static final long serialVersionUID = -1398779617L;
     __tmp.setFrontPluginID(__bean.getFrontPluginID());
     __tmp.setAjuda(__bean.getAjuda());
     __tmp.setActiva(__bean.isActiva());
+    __tmp.setEntitatID(__bean.getEntitatID());
 		return __tmp;
 	}
 

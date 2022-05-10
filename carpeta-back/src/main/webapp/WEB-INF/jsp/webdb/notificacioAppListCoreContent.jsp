@@ -68,6 +68,14 @@
             <img height="18" width="18" src="<c:url value="/img/icn_alert_${notificacioApp.activa?'success':'error'}.png"/>">
           </td>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,NotificacioAppFields.ENTITATID)}">
+          <td>
+          <c:set var="tmp">${notificacioApp.entitatID}</c:set>
+          <c:if test="${not empty tmp}">
+          ${__theFilterForm.mapOfEntitatForEntitatID[tmp]}
+          </c:if>
+          </td>
+        </c:if>
 
 
         <!--  /** Additional Fields */  -->

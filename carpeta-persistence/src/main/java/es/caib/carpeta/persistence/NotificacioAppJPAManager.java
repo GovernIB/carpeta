@@ -58,8 +58,8 @@ public class NotificacioAppJPAManager
         return list.toArray(new NotificacioApp[list.size()]);
     };
 
-    public synchronized NotificacioApp create( java.lang.String _codi_, long _titolID_, long _missatgeID_, java.lang.Long _frontPluginID_, java.lang.String _ajuda_, boolean _activa_) throws I18NException {
-        NotificacioAppJPA __bean =  new NotificacioAppJPA(_codi_,_titolID_,_missatgeID_,_frontPluginID_,_ajuda_,_activa_);
+    public synchronized NotificacioApp create( java.lang.String _codi_, long _titolID_, long _missatgeID_, java.lang.Long _frontPluginID_, java.lang.String _ajuda_, boolean _activa_, long _entitatID_) throws I18NException {
+        NotificacioAppJPA __bean =  new NotificacioAppJPA(_codi_,_titolID_,_missatgeID_,_frontPluginID_,_ajuda_,_activa_,_entitatID_);
         return create(__bean);
     }
 

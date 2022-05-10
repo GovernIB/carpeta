@@ -33,6 +33,9 @@
         <c:if test="${!gen:contains(__theFilterForm.hiddenFields,NotificacioAppFields.ACTIVA)}">
         <th>${car:getSortIcons(__theFilterForm,NotificacioAppFields.ACTIVA)}</th>
         </c:if>
+        <c:if test="${!gen:contains(__theFilterForm.hiddenFields,NotificacioAppFields.ENTITATID)}">
+        <th>${car:getSortIcons(__theFilterForm,NotificacioAppFields.ENTITATID)}</th>
+        </c:if>
 
 
         <c:forEach var="__entry" items="${__theFilterForm.additionalFields}">
