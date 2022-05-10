@@ -32,5 +32,23 @@
     "apoderaDescripcioEstat3": "Apoderament revocat pel poderdant.",
     "apoderaDescripcioEstat4": "Apoderament renunciat per l'apoderat.",
     "apoderaDescripcioEstat5": "Apoderament que ha superat el període de vigència.",
-    "apoderaDescripcioEstat6": "Apoderament que ha superat el període d'espera de confirmació per part de l'apoderat o el temps d'espera d'aprovació de l'alta de l'apoderament per part de l'assessor jurídic."
+    "apoderaDescripcioEstat6": "Apoderament que ha superat el període d'espera de confirmació per part de l'apoderat o el temps d'espera d'aprovació de l'alta de l'apoderament per part de l'assessor jurídic.",
+
+    "apoderaTipo.desconegut": "Desconegut",
+    "apoderaTipo.10": "General",
+    "apoderaTipo.20": "Administració General de l'Estat",
+    "apoderaTipo.21": "Organisme públic",
+    "apoderaTipo.22": "Administració Autonòmica",
+    "apoderaTipo.23": "Administració Local",
+    "apoderaTipo.24": "Universitats",
+    "apoderaTipo.25": "Altres institucions",
+    "apoderaTipo.30": "Totes les administracions públiques",
+    "apoderaTipo.31": "Procediments i/o tràmits",
+
+    "apoderaAmbit": "Àmbit",
+    "apoderaEstatActual": "Estat actual",
+    "apoderaProcediment": "Procediment",
+    "apoderaSubtipus": "Subtipus",
+    "apoderaAccedirApoderament": "Accedir al botó Consulti el seu apoderament",
+    "apoderaBotoApoderament": "Consulti el seu apoderament"
 }

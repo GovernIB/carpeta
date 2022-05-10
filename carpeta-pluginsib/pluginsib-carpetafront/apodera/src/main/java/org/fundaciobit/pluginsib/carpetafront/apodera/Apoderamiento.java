@@ -3,21 +3,28 @@ package org.fundaciobit.pluginsib.carpetafront.apodera;
 public class Apoderamiento {
 
     private String tipus;
+    private String subtipus;
     private String estat;
     private String apoderado;
     private String vigencia;
+    private String ambit;
+    private String descEstat;
+    private String procediment;
 
     public Apoderamiento() {
         super();
     }
 
-    public Apoderamiento(String tipus, String estat, String apoderado, String vigencia) {
+    public Apoderamiento(String tipus, String subtipus, String estat, String apoderado, String vigencia, String ambit, String descEstat, String procediment) {
         super();
         this.tipus = tipus;
+        this.subtipus = subtipus;
         this.estat = estat;
         this.apoderado = apoderado;
         this.vigencia = vigencia;
-
+        this.ambit = ambit;
+        this.descEstat = descEstat;
+        this.procediment = procediment;
     }
 
     public String getTipus() {
@@ -26,6 +33,14 @@ public class Apoderamiento {
 
     public void setTipus(String tipus) {
         this.tipus = tipus;
+    }
+
+    public String getSubtipus() {
+        return subtipus;
+    }
+
+    public void setSubtipus(String subtipus) {
+        this.subtipus = subtipus;
     }
 
     public String getEstat() {
@@ -51,5 +66,23 @@ public class Apoderamiento {
     public void setVigencia(String vigencia) {
         this.vigencia = vigencia;
     }
+
+    public String getAmbit() {
+        return ambit;
+    }
+
+    public void setAmbit(String ambit) {this.ambit = ambit; }
+
+    public String getDescEstat() {
+        return descEstat;
+    }
+
+    public void setDescEstat(String descEstat) {this.descEstat = descEstat; }
+
+    public String getProcediment() {
+        return procediment;
+    }
+
+    public void setProcediment(String procediment) {this.procediment = procediment; }
 
 }

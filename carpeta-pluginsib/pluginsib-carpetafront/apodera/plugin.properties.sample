@@ -15,3 +15,7 @@ es.caib.carpeta.pluginsib.carpetafront.apodera.authorization.ks.password=[=SP["e
 es.caib.carpeta.pluginsib.carpetafront.apodera.authorization.ks.cert.alias=[=SP["es.caib.carpeta.pluginsib.carpetafront.apodera.authorization.ks.cert.alias"]]
 es.caib.carpeta.pluginsib.carpetafront.apodera.authorization.ks.cert.password=[=SP["es.caib.carpeta.pluginsib.carpetafront.apodera.authorization.ks.cert.password"]]
 
+es.caib.carpeta.pluginsib.carpetafront.apodera.connectiontimeout=20000
+es.caib.carpeta.pluginsib.carpetafront.apodera.readtimeout=20000
+es.caib.carpeta.pluginsib.carpetafront.apodera.url=https://pre-sede-administracion.redsara.es/apodera/clave.htm
+

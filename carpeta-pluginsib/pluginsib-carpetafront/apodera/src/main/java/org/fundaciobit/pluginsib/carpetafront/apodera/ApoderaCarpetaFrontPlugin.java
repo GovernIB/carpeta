@@ -12,26 +12,7 @@ import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.ConsultaApoderamientosResponse;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.ConsultaAvanzadaPortType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.ConsultaAvanzadaService;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosApoderadoCompletoType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosApoderadoType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosApoderamientoType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosAuditoriaType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosConsultaApoderamientoType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosConsultaType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosPoderdanteCompletoType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosPoderdanteType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.ErrorType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.ObjectFactory;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.Organismo;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.OrganismoType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.PersonaFisicaType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.PersonaJuridicaType;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.PeticionConsulta;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.RespuestaConsulta;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.TipoApoderamientoType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.*;
 import org.fundaciobit.pluginsib.utils.cxf.ClientHandler;
 import org.fundaciobit.pluginsib.utils.cxf.ClientHandlerCertificate;
 
@@ -315,40 +296,40 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
                     String ts = "Tipo:" + apoderament.getTipoApoderamiento().getTipoApod() + " | Subtipo:"
                             + apoderament.getTipoApoderamiento().getSubTipoApod();
 
-
                     if (ta == null) {
 //                        apo.setTipus(getTraduccio(APODERA_RES_BUNDLE,"tipo.desconegut", locale) + " (" + ts + ")");
                         apo.setTipus(getTraduccio(APODERA_RES_BUNDLE,"tipo.desconegut", locale));
                     } else {
 //                        apo.setTipus(ta.getDescripcion() + " (" + ts + ")");
-                        apo.setTipus(ta.getDescripcion());
+                        apo.setTipus(apoderament.getTipoApoderamiento().getTipoApod());
                     }
 
-                    // ESTAT
-                    apo.setEstat(apoderament.getEstado());
+                    // SUBTIPUS
+                    apo.setSubtipus(apoderament.getTipoApoderamiento().getSubTipoApod());
 
-//                    switch (apoderament.getEstado()) {
-//                        case "Sin autorizar":
-//                            apo.setEstat(1L);
-//                            break;
-//                        case "Autorizado":
-//                            apo.setEstat(2L);
-//                            break;
-//                        case "Revocado":
-//                            apo.setEstat(3L);
-//                            break;
-//                        case "Renunciado":
-//                            apo.setEstat(4L);
-//                            break;
-//                        case "Caducado":
-//                            apo.setEstat(5L);
-//                            break;
-//                        case "Cancelado":
-//                            apo.setEstat(6L);
-//                            break;
-//                        default:
-//                            apo.setEstat(0L);
-//                    }
+                    // ESTAT
+                    switch (apoderament.getEstado().substring(0,5)) {
+                        case "Sin a":
+                            apo.setEstat("1");
+                            break;
+                        case "Autor":
+                            apo.setEstat("2");
+                            break;
+                        case "Revoc":
+                            apo.setEstat("3");
+                            break;
+                        case "Renun":
+                            apo.setEstat("4");
+                            break;
+                        case "Caduc":
+                            apo.setEstat("5");
+                            break;
+                        case "Cance":
+                            apo.setEstat("6");
+                            break;
+                        default:
+                            apo.setEstat("0");
+                    }
 
 
                     // NOM I DOCUMENT APODERAT
@@ -369,6 +350,15 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
                                 + apoderament.getPeriodoVigencia().getFechaFin().substring(0,10));
                     }
 
+                    // PROCEDIMENT
+                    if(apoderament.getTipoApoderamiento().getListaProcedimientos() != null) {
+                        Class<Procedimiento2> procediment = apoderament.getTipoApoderamiento().getListaProcedimientos().getDeclaredType();
+                        apo.setProcediment(procediment.getName());
+                    } else {
+                        apo.setProcediment(null);
+                    }
+
+                    // Afegim apoderament a la llista
                     apos.add(apo);
 
                 }
@@ -385,14 +375,17 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
 
             Map<String, Object> infoApoderaments = new HashMap<String, Object>();
 
+            String urlApodera = getPropertyRequired(APODERA_PROPERTY_BASE + "url");
+
             infoApoderaments.put("poderdant", poderdant);
             infoApoderaments.put("apoderaments", apos);
             infoApoderaments.put("totalRegistres", apoderamentsTotals);
+            infoApoderaments.put("urlApodera", urlApodera);
 
             Gson gson = new Gson();
             String json = gson.toJson(infoApoderaments);
 
-//            log.info(json);
+            //log.info(json);
 
             try {
 
