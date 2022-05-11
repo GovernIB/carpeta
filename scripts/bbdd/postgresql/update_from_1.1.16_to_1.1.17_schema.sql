@@ -15,10 +15,7 @@ ALTER TABLE car_preguntesfrequents ADD CONSTRAINT car_faq_fitxer_fitxer3_fk FORE
 CREATE INDEX car_faq_fitxer3id_fk_i ON car_preguntesfrequents using btree (fitxer3id);
 
 
-
-
-
---  Millores en la gestio de Notificacions Push a l'APP #659 
+--  2022-05-11 Millores en la gestio de Notificacions Push a l'APP #659 
 
 
 CREATE SEQUENCE car_notificacioapp_seq
@@ -37,24 +34,19 @@ CREATE TABLE car_notificacioapp
    frontpluginid bigint, 
    activa boolean NOT NULL, 
    ajuda text,
+   entitatid bigint NOT NULL,
    CONSTRAINT car_notificacioapp_pk PRIMARY KEY (notificacioappid), 
    CONSTRAINT car_notifica_traduccio_tit_fk FOREIGN KEY (titolid) REFERENCES car_traduccio (traduccioid) ON UPDATE NO ACTION ON DELETE NO ACTION, 
    CONSTRAINT car_notifica_traduccio_msg_fk FOREIGN KEY (missatgeid) REFERENCES car_traduccio (traduccioid) ON UPDATE NO ACTION ON DELETE NO ACTION, 
    CONSTRAINT car_notifica_plugin_plug_fk FOREIGN KEY (frontpluginid) REFERENCES car_plugin (pluginid) ON UPDATE NO ACTION ON DELETE NO ACTION, 
+   CONSTRAINT car_notifica_entitat_ent_fk FOREIGN KEY (entitatid) REFERENCES car_entitat (entitatid) ON UPDATE NO ACTION ON DELETE NO ACTION,
    CONSTRAINT car_notifica_codi_uk UNIQUE (codi)
 );
-
-
-ALTER TABLE car_notificacioapp
-  ADD COLUMN entitatid bigint NOT NULL;
-ALTER TABLE car_notificacioapp
-  ADD CONSTRAINT car_notifica_entitat_ent_fk FOREIGN KEY (entitatid) REFERENCES car_entitat (entitatid) ON UPDATE NO ACTION ON DELETE NO ACTION;
-create index car_notifica_entitatid_fk_i on car_notificacioapp (entitatid);
-
 
 create index car_notificacioapp_pk_i on car_notificacioapp (notificacioappid);
 create index car_notifica_titolid_fk_i on car_notificacioapp (titolid);
 create index car_notifica_missatgeid_fk_i on car_notificacioapp (missatgeid);
 create index car_notifica_pluginid_fk_i on car_notificacioapp (frontpluginid);
+create index car_notifica_entitatid_fk_i on car_notificacioapp (entitatid);
 
 COMMIT;

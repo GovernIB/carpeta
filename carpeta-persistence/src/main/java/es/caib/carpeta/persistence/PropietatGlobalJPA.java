@@ -15,7 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 
 
-@Entity
+@Entity(name = "PropietatGlobalJPA")
 @Table(name = "car_propietatglobal" , indexes = { 
         @Index(name="car_propietatglobal_pk_i", columnList = "propietatglobalid"),
         @Index(name="car_propglob_entitatid_fk_i", columnList = "entitatid")})

@@ -161,6 +161,7 @@
 	                    <li><a href="<c:url value="/superadmin/avis/list"/>"><spring:message code="avis.avis.plural" /></a></li>
                         <li><a href="<c:url value="/superadmin/tipusnotificacions/list"/>"><spring:message code="tipusnotificacions.menu" /></a></li>
                         <li><a href="<c:url value="/superadmin/ciutada/list"/>"><spring:message code="ciutada.menu" /></a></li>
+                        <li><a href="<c:url value="/superadmin/estadisticanotificacionsmobil/list"/>"><spring:message code="estadisticanotificacionsmobil.menu" /></a></li>
 	                </ul>
 	            </div>
 	        </div>

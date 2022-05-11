@@ -20,7 +20,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 
 
-@Entity
+@Entity(name = "EntitatJPA")
 @Table(name = "car_entitat" , indexes = { 
         @Index(name="car_entitat_pk_i", columnList = "entitatid"),
         @Index(name="car_entitat_nom_fk_i", columnList = "nomid"),

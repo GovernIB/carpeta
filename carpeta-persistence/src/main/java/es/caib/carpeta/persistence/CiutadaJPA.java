@@ -12,7 +12,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Id;
 
 
-@Entity
+@Entity(name = "CiutadaJPA")
 @Table(name = "car_ciutada" , indexes = { 
         @Index(name="car_ciutada_pk_i", columnList = "ciutadaid")},
            uniqueConstraints = {

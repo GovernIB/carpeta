@@ -17,7 +17,7 @@ import org.hibernate.annotations.Type;
 import javax.persistence.Id;
 
 
-@Entity
+@Entity(name = "NotificacioAppJPA")
 @Table(name = "car_notificacioapp" , indexes = { 
         @Index(name="car_notificacioapp_pk_i", columnList = "notificacioappid"),
         @Index(name="car_notifica_titolid_fk_i", columnList = "titolid"),

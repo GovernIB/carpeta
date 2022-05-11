@@ -13,7 +13,7 @@ import org.hibernate.annotations.Type;
 import javax.persistence.Id;
 
 
-@Entity
+@Entity(name = "LogCarpetaJPA")
 @Table(name = "car_log" , indexes = { 
         @Index(name="car_log_pk_i", columnList = "logid"),
         @Index(name="car_log_pluginid_fk_i", columnList = "pluginid")})

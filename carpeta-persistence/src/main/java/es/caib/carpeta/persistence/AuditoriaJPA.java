@@ -11,7 +11,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Id;
 
 
-@Entity
+@Entity(name = "AuditoriaJPA")
 @Table(name = "car_auditoria" , indexes = { 
         @Index(name="car_auditoria_pk_i", columnList = "auditoriaid"),
         @Index(name="car_auditoria_entitatid_fk_i", columnList = "entitatid")})

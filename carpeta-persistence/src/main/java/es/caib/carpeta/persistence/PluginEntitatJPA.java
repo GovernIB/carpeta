@@ -16,7 +16,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 
 
-@Entity
+@Entity(name = "PluginEntitatJPA")
 @Table(name = "car_pluginentitat" , indexes = { 
         @Index(name="car_pluginentitat_pk_i", columnList = "pluginentitatid"),
         @Index(name="car_plugent_pluginid_fk_i", columnList = "pluginid"),

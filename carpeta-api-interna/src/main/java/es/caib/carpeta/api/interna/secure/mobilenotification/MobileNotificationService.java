@@ -1,5 +1,6 @@
 package es.caib.carpeta.api.interna.secure.mobilenotification;
 
+import java.sql.Timestamp;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Locale;
@@ -22,6 +23,7 @@ import org.fundaciobit.genapp.common.i18n.I18NCommonUtils;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
 
+import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.logic.CiutadaLogicaService;
 import es.caib.carpeta.logic.EntitatLogicaService;
 import es.caib.carpeta.logic.NotificacioAppLogicaService;
@@ -34,6 +36,7 @@ import es.caib.carpeta.model.entity.PluginEntitat;
 import es.caib.carpeta.model.fields.CiutadaFields;
 import es.caib.carpeta.model.fields.NotificacioAppFields;
 import es.caib.carpeta.model.fields.PluginEntitatFields;
+import es.caib.carpeta.persistence.EstadisticaJPA;
 import es.caib.carpeta.persistence.NotificacioAppJPA;
 import es.caib.carpeta.persistence.PluginJPA;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -81,6 +84,9 @@ public class MobileNotificationService {
     @EJB(mappedName = PluginEntitatLogicaService.JNDI_NAME)
     protected PluginEntitatLogicaService pluginEntitatEjb;
 
+    @EJB(mappedName = es.caib.carpeta.ejb.EstadisticaService.JNDI_NAME)
+    protected es.caib.carpeta.ejb.EstadisticaService estadisticaEjb;
+
     @GET
     @Path("/sendnotificationtomobile")
     @Produces(MediaType.APPLICATION_JSON)
@@ -123,7 +129,7 @@ public class MobileNotificationService {
             schema = @Schema(implementation = String.class)) @NotEmpty @Size(
                     min = 7,
                     max = 20) @QueryParam("nif")
-            String nif,
+    String nif,
 
             @Parameter(
                     description = "Codi de la notificació. Demanar a l'administrador de Carpeta.",
@@ -132,14 +138,14 @@ public class MobileNotificationService {
                     example = "CODENAME") @NotNull @QueryParam("notificationCode")
             String notificationCode,
 
-            @Parameter(                    
+            @Parameter(
                     description = "Paràmetres associats al Codi de la notificació",
                     required = true,
                     example = "",
-                    array = @ArraySchema( schema = @Schema(type = "string"))
-                    ) 
-                    @NotNull @QueryParam("notificationParameters")
-             String[] notificationParameters,
+                    array = @ArraySchema(
+                            schema = @Schema(
+                                    type = "string"))) @NotNull @QueryParam("notificationParameters")
+            String[] notificationParameters,
 
             @Parameter(
                     description = "Idioma en que s'enviaran les notificacion",
@@ -157,6 +163,7 @@ public class MobileNotificationService {
                             regexp = "^ca|es$") @QueryParam("langError")
             String langError) {
 
+        final long start = System.currentTimeMillis();
         try {
 
             // Check if notificationCode is empty
@@ -178,17 +185,16 @@ public class MobileNotificationService {
 
             // Check if Entity exists
 
-            
-
             NotificacioAppJPA notificacio = (NotificacioAppJPA) nList.get(0);
             Long pluginID = notificacio.getFrontPluginID();
-            
+
             Entitat entitat = entitatLogicaEjb.findByPrimaryKey(notificacio.getEntitatID());
-            
+
             if (entitat == null) {
                 // TODO XYZ ZZZ TRA
                 return generateError(SendMessageResultCode.ENTITYCODE_DO_NOT_EXIST,
-                        "No existeix cap entitat dins Carpeta amb ID  `" + notificacio.getEntitatID()
+                        "No existeix cap entitat dins Carpeta amb ID  `"
+                                + notificacio.getEntitatID()
                                 + "`. Consulti amb l'administrador de Carpeta.");
             }
 
@@ -198,8 +204,6 @@ public class MobileNotificationService {
                         "No existeix cap entitat dins Carpeta amb codi `" + entitat.getCodi()
                                 + "`. Consulti amb l'administrador de Carpeta.");
             }
-            
-            
 
             PluginEntitat pluginEntitat = null;
 
@@ -249,7 +253,7 @@ public class MobileNotificationService {
             }
 
             // Process title and subtitle
-            Object[] parametres = toObjectParameters(notificationParameters/*.getParameters()*/);
+            Object[] parametres = toObjectParameters(notificationParameters/* .getParameters() */);
 
             String title = notificacio.getTitol().getTraduccio(notificationLang).getValor();
             String titol = MessageFormat.format(title, parametres);
@@ -261,6 +265,21 @@ public class MobileNotificationService {
             SendNotificationResult snr;
             snr = SendNotificationToMobile.sendMessageToMobile(mobileID, titol, missatge, null);
             if (snr.isEstatEnviat() && snr.isEstatRebut()) {
+
+                final int elapsed = (int)(System.currentTimeMillis() - start);
+                try {
+                    EstadisticaJPA est = new EstadisticaJPA(
+                            Constants.TIPUS_ESTADISTICA_ENVIADA_NOTIFICACIO_MOBIL,
+                            new Timestamp(System.currentTimeMillis()), elapsed,
+                            pluginEntitat == null ? null : pluginEntitat.getPluginID(),
+                            entitat.getEntitatID());
+                    estadisticaEjb.create(est);
+                } catch (Throwable th) {
+                    log.error("Error crean Estadistiques de Enviada Notificacio a Mòbil: "
+                            + th.getMessage(), th);
+
+                }
+
                 SendMessageResult smr = new SendMessageResult();
                 smr.setCode(SendMessageResultCode.OK);
                 return Response.ok().entity(smr).build();
@@ -323,7 +342,6 @@ public class MobileNotificationService {
         return mobileID;
     }
 
-    
     @Operation(
             tags = { "Notificacions" },
             operationId = "existCitizen",
@@ -394,7 +412,6 @@ public class MobileNotificationService {
         }
 
     }
-    
 
     @GET
     @Path("/help")

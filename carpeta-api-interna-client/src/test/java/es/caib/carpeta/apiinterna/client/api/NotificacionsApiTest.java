@@ -45,9 +45,9 @@ public class NotificacionsApiTest {
             
             //n.existCiutadaTest();
             
-            //n.sendMessageTest();
+            n.sendMessageTest();
             
-            n.helpTest();
+            //n.helpTest();
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,8 +63,8 @@ public class NotificacionsApiTest {
             String urlBase = prop.getProperty("urlbase");
             String username = prop.getProperty("username");
             String password = prop.getProperty("password");
+
             nifTest = prop.getProperty("niftest");
-            
             notificationCode = prop.getProperty("notificationCode");
 
             ApiClient apiClient = new ApiClient();

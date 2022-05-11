@@ -103,6 +103,12 @@
         code="ciutada.menu" /> </span>
 </a>
 
+<a class="dropdown-item"
+   href="<c:url value="/superadmin/estadisticanotificacionsmobil/list"/>"> <span
+        style="${(fn:contains(url, '/superadmin/estadisticanotificacionsmobil'))? " font-weight:bold;" : ""}"><spring:message
+        code="estadisticanotificacionsmobil.menu" /> </span>
+</a>
+
 <hr style="margin-top: 6px; margin-bottom: 6px;" />
 
 
