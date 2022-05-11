@@ -18,7 +18,8 @@ class Apodera extends Component {
             dataApoderaments: null,
             dataPoderdant: null,
             total_items: 0,
-            error: null
+            error: null,
+            urlApodera: null
         };
 
         const getLocale = Locale => require(`date-fns/locale/${sessionStorage.getItem("langActual")}/index.js`);
@@ -26,6 +27,7 @@ class Apodera extends Component {
 
         this.nomEstat = this.nomEstat.bind(this);
         this.descripcioEstat = this.descripcioEstat.bind(this);
+        this.mostrarMesInfo = this.mostrarMesInfo.bind(this);
 
         this.canviatIdioma = this.canviatIdioma.bind(this);
         i18n.on('languageChanged', this.canviatIdioma);
@@ -62,6 +64,10 @@ class Apodera extends Component {
         return estatNom;
     }
 
+    mostrarMesInfo(row) {
+        document.getElementById(row).style.display = "table-row";
+    }
+
     descripcioEstat(estat) {
         let descripcioNom = i18n.t('apoderaEstadoDesconocido');
         if (estat != null) {
@@ -92,19 +98,19 @@ class Apodera extends Component {
     componentDidMount() {
 
         const url = this.props.pathtoservei;
-        // console.log("url: " + url);
+
         axios.get(url).then(res => {
-            // console.log(" AXIOS OK OK OK OK OK", res.data);
             this.setState({
                 ...this.state,
                 isLoaded: true,
                 dataApoderaments: res.data.apoderaments,
                 dataPoderdant: res.data.poderdant,
                 total_items: res.data.totalRegistres,
-                error: null
+                error: null,
+                urlApodera: res.data.urlApodera
             });
-        }).catch(function (error) {
-            console.log("ERROR: " + JSON.stringify(error));
+        }).catch(error => {
+            // console.log("ERROR: " + JSON.stringify(error));
             if (error.response) {
                 console.log("error.response.data: " + error.response.data);
                 console.log("error.response.status: " + error.response.status);
@@ -112,11 +118,12 @@ class Apodera extends Component {
             }
             if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
                 this.setState({
+                    isLoaded: true,
                     dataApoderaments: null,
                     dataPoderdant: null,
                     total_items: 0,
                     error: "error500plugin",
-                    isLoaded: true
+                    urlApodera: null
                 });
             } else{
                 this.setState({
@@ -124,7 +131,8 @@ class Apodera extends Component {
                     dataPoderdant: null,
                     total_items: 0,
                     error: JSON.stringify(error).toString(),
-                    isLoaded: true
+                    isLoaded: true,
+                    urlApodera: null
                 });
             }
 
@@ -144,8 +152,6 @@ class Apodera extends Component {
         var tamanyTaula = { width: '99%'};
         var tamanyData = { width: '120px !important'};
 
-        // console.log("error a RENDERRRRRRRRRRR: " + this.state.error);
-
         if (!isLoaded) {
             content = <div  id="carregant" className="loader-container centrat ">
                         <div className="loader"/>
@@ -156,75 +162,138 @@ class Apodera extends Component {
 
         } else {
 
-            content = "";
+            if (this.state.error) {
+                content = <div className="alert alert-danger" role="alert">{this.state.error}</div>;
+            } else {
 
-            if(this.state.dataPoderdant.personaFisica) {
-                let nomPoderdant;
-                let llinatge1Poderdant;
-                let llinatge2Poderdant;
-                if(this.state.dataPoderdant.personaFisica.nombre !== undefined){
-                    nomPoderdant = this.state.dataPoderdant.personaFisica.nombre;
-                }else{
-                    nomPoderdant = "";
-                }
-                if(this.state.dataPoderdant.personaFisica.apellido1 !== undefined){
-                    llinatge1Poderdant = this.state.dataPoderdant.personaFisica.apellido1;
-                }else{
-                    llinatge1Poderdant = "";
-                }
-                if(this.state.dataPoderdant.personaFisica.apellido2 !== undefined){
-                    llinatge2Poderdant = this.state.dataPoderdant.personaFisica.apellido2;
-                }else{
-                    llinatge2Poderdant = "";
-                }
-                resultat = t('apoderaApoderamentsTotals1') + this.state.total_items + t('apoderaApoderamentsTotals2') + t('apoderaApoderamentsTotals3') + nomPoderdant +
-                    " " + llinatge1Poderdant + " " + llinatge2Poderdant + " (" + this.state.dataPoderdant.personaFisica.nifNie + ").";
-            }else{
-                let raoSocialPoderdant;
-                if(this.state.dataPoderdant.personaJuridica.razonSocial !== undefined){
-                    raoSocialPoderdant = this.state.dataPoderdant.personaJuridica.razonSocial;
-                }else{
-                    raoSocialPoderdant = "";
-                }
-                resultat = t('apoderaApoderamentsTotals1') + this.state.total_items + t('apoderaApoderamentsTotals2') + t('apoderaApoderamentsTotals4') + raoSocialPoderdant + " (" + this.state.dataPoderdant.personaJuridica.nif + ").";
-            }
+                content = "";
 
-            if(this.state.dataApoderaments && typeof (this.state.total_items) !== undefined && typeof (this.state.dataApoderaments) !== undefined && this.state.total_items !== 0) {
+                if (this.state.dataPoderdant.personaFisica) {
+                    let nomPoderdant;
+                    let llinatge1Poderdant;
+                    let llinatge2Poderdant;
+                    if (this.state.dataPoderdant.personaFisica.nombre !== undefined) {
+                        nomPoderdant = this.state.dataPoderdant.personaFisica.nombre;
+                    } else {
+                        nomPoderdant = "";
+                    }
+                    if (this.state.dataPoderdant.personaFisica.apellido1 !== undefined) {
+                        llinatge1Poderdant = this.state.dataPoderdant.personaFisica.apellido1;
+                    } else {
+                        llinatge1Poderdant = "";
+                    }
+                    if (this.state.dataPoderdant.personaFisica.apellido2 !== undefined) {
+                        llinatge2Poderdant = this.state.dataPoderdant.personaFisica.apellido2;
+                    } else {
+                        llinatge2Poderdant = "";
+                    }
+                    resultat = t('apoderaApoderamentsTotals1') + this.state.total_items + t('apoderaApoderamentsTotals2') + t('apoderaApoderamentsTotals3') + nomPoderdant +
+                        " " + llinatge1Poderdant + " " + llinatge2Poderdant + " (" + this.state.dataPoderdant.personaFisica.nifNie + ").";
+                } else {
+                    let raoSocialPoderdant;
+                    if (this.state.dataPoderdant.personaJuridica.razonSocial !== undefined) {
+                        raoSocialPoderdant = this.state.dataPoderdant.personaJuridica.razonSocial;
+                    } else {
+                        raoSocialPoderdant = "";
+                    }
+                    resultat = t('apoderaApoderamentsTotals1') + this.state.total_items + t('apoderaApoderamentsTotals2') + t('apoderaApoderamentsTotals4') + raoSocialPoderdant + " (" + this.state.dataPoderdant.personaJuridica.nif + ").";
+                }
 
-                taulaApodera = <>
-                    <div>
-                        <Table id="tableId" responsive striped bordered hover style={tamanyTaula}>
-                            <thead className="table-success">
-                            <tr>
-                                <th style={tamanyData}>{t('apoderaTipus')}</th>
-                                <th>{t('apoderaEstat')}</th>
-                                <th>{t('apoderaApoderado')}</th>
-                                <th>{t('apoderaVigencia')}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {this.state.dataApoderaments.map(({tipus, estat, apoderado, vigencia}) => {
-                                return <>
-                                        <tr className="" tabIndex="511">
-                                            <td>{tipus}</td>
+                if (this.state.dataApoderaments && typeof (this.state.total_items) !== undefined && typeof (this.state.dataApoderaments) !== undefined && this.state.total_items !== 0) {
+
+                    taulaApodera = <>
+                        <div>
+                            <Table id="tableId" responsive striped bordered hover style={tamanyTaula}>
+                                <thead className="table-success">
+                                <tr>
+                                    <th style={tamanyData}>{t('apoderaTipus')}</th>
+                                    <th>{t('apoderaEstat')}</th>
+                                    <th>{t('apoderaApoderado')}</th>
+                                    <th>{t('apoderaVigencia')}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {this.state.dataApoderaments.map(({
+                                                                      tipus,
+                                                                      subtipus,
+                                                                      estat,
+                                                                      apoderado,
+                                                                      vigencia,
+                                                                      procediment
+                                                                  }, i) => {
+
+                                    let valorAmbit;
+                                    if (tipus === '1') {
+                                        if (subtipus === '0') {
+                                            valorAmbit = t('apoderaTipo.' + tipus + subtipus);
+                                        } else {
+                                            valorAmbit = t('apoderaTipo.desconegut');
+                                        }
+                                    } else if (tipus === '2') {
+                                        if (subtipus === '0' || subtipus === '1' || subtipus === '2' || subtipus === '3' || subtipus === '4' || subtipus === '5') {
+                                            valorAmbit = t('apoderaTipo.' + tipus + subtipus);
+                                        } else {
+                                            valorAmbit = t('apoderaTipo.desconegut');
+                                        }
+                                    } else if (tipus === '3') {
+                                        if (subtipus === '0' || subtipus === '1') {
+                                            valorAmbit = t('apoderaTipo.' + tipus + subtipus);
+                                        } else {
+                                            valorAmbit = t('apoderaTipo.desconegut');
+                                        }
+                                    } else {
+                                        valorAmbit = t('apoderaTipo.desconegut');
+                                    }
+
+                                    return <>
+                                        <tr className="clickable-row" tabIndex={511 + i*2 - 1}
+                                            onClick={() => this.mostrarMesInfo('row' + i)} onKeyPress={() => this.mostrarMesInfo('row' + i)}>
+                                            <td>{valorAmbit}</td>
                                             {/*<td>{this.nomEstat(estat)}</td>*/}
-                                            <td>{estat}</td>
+                                            <td>{this.nomEstat(estat)}</td>
                                             <td>{apoderado}</td>
                                             <td>{vigencia}</td>
                                         </tr>
-                                        {/*<tr className="" tabIndex="540" style={{display: 'none'}}>*/}
-                                        {/*    <td colSpan="4">{this.descripcioEstat()}</td>*/}
-                                        {/*</tr>*/}
-                                       </>
-                            })}
-                            </tbody>
-                        </Table>
-                    </div>
-                </>
+                                        <tr style={{display: 'none'}} id={'row' + i}>
+                                            <td colSpan={4}>
+                                                <div style={{float: 'left', width: '70%'}}>
+                                                    <p><b>{t('apoderaAmbit')}</b>: {valorAmbit} </p>
+                                                    <p>
+                                                        <b>{t('apoderaEstatActual')}</b>: {this.nomEstat(estat)} - {this.descripcioEstat(estat)}
+                                                    </p>
+                                                    {procediment && <p><b>{t('apoderaProcediment')}</b>: {procediment}</p>}
+                                                </div>
+                                                <div style={{float: 'right', width: 'auto'}} id="accedirApodera">
+                                                    <p>
+                                                        <b>{t('apoderaTipus')}</b>: {tipus} - <b>{t('apoderaSubtipus')}</b>: {subtipus}
+                                                    </p>
+                                                    <button className="btn btn-primary carpeta-btn botoAccedirCarpeta"
+                                                            title={t('apoderaAccedirApoderament')}
+                                                            tabIndex={511 + i*2}
+                                                            aria-labelledby="accedirApodera"
+                                                            onClick={() => {
+                                                                window.open(this.state.urlApodera, "_blank")
+                                                            }}>
+                                                        <span className="oi oi-external-link" title=""
+                                                              aria-hidden="true"/> {t('apoderaBotoApoderament')}
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
 
-            } else if(this.state.total_items === 0 && this.state.dataApoderaments !== null) {
-                taulaApodera = <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%'}}
-                                  role="alert">{t('apoderaBuid')}</div>
+
+                                    </>
+                                })}
+                                </tbody>
+                            </Table>
+                        </div>
+                    </>
+
+                } else if (this.state.total_items === 0 && this.state.dataApoderaments !== null) {
+                    taulaApodera = <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%'}}
+                                        role="alert">{t('apoderaBuid')}</div>
+                }
+
             }
 
         }
@@ -236,7 +305,6 @@ class Apodera extends Component {
                     <p className="lh15">{this.props.subtitles[i18n.language]} </p>
                     <div className="infoNoMenu">
                         <div className="col-md-12 border-0 float-left p-0">
-                            {this.state.error && <div className="alert alert-danger hide" role="alert">{this.state.error}</div>}
                             {content}
                         </div>
                     </div>
@@ -250,7 +318,7 @@ class Apodera extends Component {
                 <div className="col-md-12 border-0 float-left p-0" id="botoTornarApodera" style={{ marginTop: '20px' }}>
                     <button type="button" data-toggle="modal" onClick={() => {
                         window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                    }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarApodera">{t('apoderaTornar')}</button>
+                    }} className="botoSuport" tabIndex="550" aria-labelledby="botoTornarApodera">{t('apoderaTornar')}</button>
                 </div>
             </div>
         );
