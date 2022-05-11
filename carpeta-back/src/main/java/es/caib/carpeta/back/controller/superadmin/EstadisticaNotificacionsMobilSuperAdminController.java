@@ -40,7 +40,7 @@ public class EstadisticaNotificacionsMobilSuperAdminController
 
         if (estadisticaFilterForm.isNou()) {
             
-            
+            // XYZ ZZZ TRA
             estadisticaFilterForm.addLabel(COMPTADOR, "=Temps d´enviament(ms)");
             
             estadisticaFilterForm.getGroupByFields().remove(TIPUS);
