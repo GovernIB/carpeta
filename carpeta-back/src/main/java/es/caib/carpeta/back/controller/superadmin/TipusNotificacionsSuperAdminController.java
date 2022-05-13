@@ -1,8 +1,12 @@
 package es.caib.carpeta.back.controller.superadmin;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
+import org.fundaciobit.genapp.common.query.Where;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -11,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import es.caib.carpeta.back.controller.webdb.NotificacioAppController;
 import es.caib.carpeta.back.form.webdb.NotificacioAppFilterForm;
 import es.caib.carpeta.back.form.webdb.NotificacioAppForm;
+import es.caib.carpeta.model.fields.PluginFields;
 import es.caib.carpeta.persistence.NotificacioAppJPA;
 import es.caib.carpeta.persistence.TraduccioJPA;
 import es.caib.carpeta.persistence.TraduccioMapJPA;
@@ -83,6 +88,13 @@ public class TipusNotificacionsSuperAdminController extends NotificacioAppContro
         }
 
         return notificacioAppFilterForm;
+    }
+
+    @Override
+    public List<StringKeyValue> getReferenceListForFrontPluginID(HttpServletRequest request,
+            ModelAndView mav, Where where) throws I18NException {
+        Where w = Where.AND(where, PluginFields.ACTIU.equal(true));
+        return super.getReferenceListForFrontPluginID(request, mav, w);
     }
 
 }

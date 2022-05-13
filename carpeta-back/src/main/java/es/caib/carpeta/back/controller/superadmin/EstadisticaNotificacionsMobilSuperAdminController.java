@@ -39,7 +39,6 @@ public class EstadisticaNotificacionsMobilSuperAdminController
                 request);
 
         if (estadisticaFilterForm.isNou()) {
-            
             // XYZ ZZZ TRA
             estadisticaFilterForm.addLabel(COMPTADOR, "=Temps d´enviament(ms)");
             
@@ -47,7 +46,6 @@ public class EstadisticaNotificacionsMobilSuperAdminController
             OrderBy[] orderByDef = {
                     new OrderBy(EstadisticaFields.DATAESTADISTICA.javaName, OrderType.DESC) };
             estadisticaFilterForm.setDefaultOrderBy(orderByDef);
-
         }
 
         return estadisticaFilterForm;

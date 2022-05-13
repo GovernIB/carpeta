@@ -2,48 +2,66 @@
  * @author anadal (u80067)
  * @email governdigital.carpeta@fundaciobit.org
  * @create date 17-08-2021 10:51:32
- * @modify date 17-08-2021 10:51:32
+ * @modify date 12-05-2022 11:02:24
  * @desc [description]
  */
-import React, {Component} from 'react';
-import {Dimensions, StyleSheet, Text, View} from 'react-native';
-import WebView from 'react-native-webview';
+import React, { Component } from "react";
+import { Dimensions, StyleSheet, Text, View } from "react-native";
+import WebView from "react-native-webview";
 
 // FIXME: Falta els propptypes per this.props.url
-const dim = Dimensions.get('window');
+const dim = Dimensions.get("window");
 
 class VistaWebComponent extends Component {
   alreadyopen = false;
 
   constructor(props) {
     super(props);
+    this.navigateCarpetaWeb.bind(this);
+    this.state = { url: this.props.url };
   }
 
+  componentDidMount() {
+    const { vistaWebComponentRef } = this.props;
+    vistaWebComponentRef(this);
+  }
+
+  componentWillUnmount() {
+    //const { vistaWebComponentRef } = this.props;
+    //vistaWebComponentRef(undefined);
+  }
+
+  navigateCarpetaWeb(urlParam, ispublic) {
+    console.log("VistaWebComponent::navigateCarpetaWeb(" + urlParam + "," + ispublic+ ")");
+    this.setState({ url: urlParam });
+  }
 
   render() {
-    if (this.props.debug) {
-      console.log('AMB REACT NATIVE WEBVIEW X(' + this.props.url + ')');
+    var url = this.state.url;
+    //if (this.props.debug)
+    {
+      console.log("VistaWebComponent::render()  NATIVE WEBVIEW X(" + url + ")");
     }
 
     return (
       <View id="vistaid" style={styles.classView}>
         <WebView
-          originWhitelist={['*']}
+          originWhitelist={["*"]}
           automaticallyAdjustContentInsets={true}
           scrollEnabled={true}
           ignoreSslError={true}
           javaScriptEnabled={true}
-          ref={ref => {
+          ref={(ref) => {
             this.webview = ref;
           }}
-          onNavigationStateChange={event => {
+          onNavigationStateChange={(event) => {
             if (this.props.callWhenNavigationStateChange) {
               return this.props.callWhenNavigationStateChange(event);
             }
             return true;
           }}
           onSS
-          source={{uri: this.props.url}}
+          source={{ uri: url }}
           style={styles.classWebView}
         />
       </View>
@@ -54,7 +72,7 @@ class VistaWebComponent extends Component {
 const styles = StyleSheet.create({
   classView: {
     width: dim.width,
-    height: '100%', // dim.height - 40,
+    height: "100%", // dim.height - 40,
     /*
     borderWidth: 3,
     borderColor: 'blue',
@@ -66,8 +84,8 @@ const styles = StyleSheet.create({
     width: dim.width,
     height: dim.height - 40,
     borderWidth: 3,
-    borderColor: 'green',
-    borderStyle: 'dotted',
+    borderColor: "green",
+    borderStyle: "dotted",
     flex: 1,
   },
 });

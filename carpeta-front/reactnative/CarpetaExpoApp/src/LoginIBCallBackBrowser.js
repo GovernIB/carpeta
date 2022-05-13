@@ -14,6 +14,7 @@ import { sessionStorageRN } from "./SessionStorageClass";
 class LoginIBCallBackBrowser extends React.Component {
   constructor(props) {
     super(props);
+    this.navigateCarpetaWeb.bind(this);
     this.calledWhenDataLoaded = this.calledWhenDataLoaded.bind(this);
 
     this.storage = new Persistencia();
@@ -22,6 +23,33 @@ class LoginIBCallBackBrowser extends React.Component {
 
     this.state = {loadedData: false, urlcarpeta: ''};
   }
+
+
+  componentDidMount() {
+    console.log('LoginIBCallBackBrowser => componentDidMount()');
+
+    const { loginIBCallBackBrowserRef } = this.props;
+    loginIBCallBackBrowserRef(this);
+  }
+
+  componentWillUnmount() {
+
+    const { loginIBCallBackBrowserRef } = this.props;
+    loginIBCallBackBrowserRef(undefined);
+  }
+
+  navigateCarpetaWeb(url, ispublic) {
+    // Crida a vistaWebComponent per a que canvii la pàgina web
+    // Canvia url del WebView
+    console.log('LoginIBCallBackBrowser::navigateCarpetaWeb(' + url + ',' + ispublic+ ')');
+
+    if (this.vistaWebComponent) {
+      this.vistaWebComponent.navigateCarpetaWeb(url, ispublic);
+    } else {
+      console.error("LoginIBCallBackBrowser::navigateCarpetaWeb => this.vistaWebComponent és null");
+    }
+  }
+
 
   calledWhenDataLoaded(urlcarpeta, codientitat) {
     console.log('ENTRA A DORENDER ');
@@ -40,7 +68,7 @@ class LoginIBCallBackBrowser extends React.Component {
 
     var expoPushToken = sessionStorageRN.getItem("expoPushToken");
     if (!expoPushToken) {
-      console.error("ExpoPushToken no definit !!! No s'envia al servidro :-(")
+      console.error("ExpoPushToken no definit !!! No s'envia al servidor :-(")
     } else {
       console.log("Enviant ExpoPushToken al Servidor: " + expoPushToken);
       loginUrl = loginUrl + "?expopushtoken=" + encodeURIComponent(expoPushToken);
@@ -50,7 +78,7 @@ class LoginIBCallBackBrowser extends React.Component {
 
     return (
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.borderdotted}>
-        <VistaWebComponent url={loginUrl} debug={true} />
+        <VistaWebComponent url={loginUrl} debug={true} vistaWebComponentRef={ ref => this.vistaWebComponent = ref} />
       </ScrollView>
     );
     //}

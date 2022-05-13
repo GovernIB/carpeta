@@ -17,23 +17,26 @@ import Persistencia from './Persistencia';
 class CarpetaWeb extends Component {
   constructor(props) {
     super(props);
-    this.navigate.bind(this);
 
+    this.navigate.bind(this);
+    this.navigateCarpetaWeb.bind(this);
     this.calledWhenDataLoaded = this.calledWhenDataLoaded.bind(this);
     this.callWhenNavigationStateChange = this.callWhenNavigationStateChange.bind(this);
+    
 
     this.storage = new Persistencia();
     // Carrega els valors de forma asincrona i quan ha acabat crida a la funcio passada per paràmetre
     this.storage.load(this.calledWhenDataLoaded);
-
     this.state = {loadedData: false, urlcarpeta: '', codientitat: ''};
 
-    console.log('Carpeta: Surt de Constructor');
+    this.vistaWebComponentRef = React.createRef();
+
+    console.log('CarpetaWeb: Surt de Constructor');
   }
 
   calledWhenDataLoaded(urlcarpeta, codientitat) {
     console.log(
-      'Carpeta: ENTRA A calledWhenDataLoaded =>  urlcarpeta: ' +
+      'CarpetaWeb: ENTRA A calledWhenDataLoaded =>  urlcarpeta: ' +
         urlcarpeta +
         ' |  codientitat ' +
         codientitat,
@@ -90,28 +93,48 @@ class CarpetaWeb extends Component {
   componentDidMount() {
     // B. If we are on Android, we immediately call the navigate method passing in the url.
     // If we are on iOS, We add an event listener to call handleOpenUrl when an incoming link is detected.
-    console.log('Carpeta => componentDidMount()');
+    console.log('CarpetaWeb => componentDidMount()');
 
     Linking.addEventListener('url', this.handleOpenURL);
+
+    const { carpetaWebRef } = this.props;
+    carpetaWebRef(this);
   }
 
   componentWillUnmount() {
     // C. We delete the Linking listener on componentWillUnmount
     Linking.removeEventListener('url', this.handleOpenURL);
+
+    const { carpetaWebRef } = this.props;
+    carpetaWebRef(undefined);
   }
 
   handleOpenURL = event => {
     // D. When handleOpenURL is called, we pass the event url to the navigate method.
-    console.log('Carpeta => handleOpenURL(' + event.url + ')');
+    console.log('CarpetaWeb => handleOpenURL(' + event.url + ')');
     this.navigate(event.url);
   };
+
+
+  navigateCarpetaWeb(url, ispublic) {
+    // Crida a vistaWebComponent per a que canvii la pàgina web
+    // Canvia url del WebView
+    console.log('CarpetaWeb => navigateCarpetaWeb(' + url + ','+  ispublic+ ')');
+
+    if (this.vistaWebComponent) {
+      this.vistaWebComponent.navigateCarpetaWeb(url, ispublic);
+    } else {
+      console.error("CarpetaWeb::navigateCarpetaWebthis: this.vistaWebComponent és null");
+    }
+  }
+
 
   /* Si des d'un navegador atacam a carpetaapp://carpeta/loquesigui s'executarà aquest mètode */
   navigate = url => {
     // E. We first parse the url to get the id and route name. We then check to see if the route
     // name is equal to "show", and if so we navigate to the People component, passing the id as a prop.
 
-    console.log('Carpeta => navigate(' + url + ')');
+    console.log('CarpetaWeb => navigate(' + url + ')');
 
     if (!url) {
       return;
@@ -127,7 +150,7 @@ class CarpetaWeb extends Component {
 
       var loginCode = param.substring(pos + 1, param.length);
 
-      console.log('loginCode => ' + loginCode);
+      console.log('CarpetaWeb::navigate => loginCode: ' + loginCode);
 
       this.props.history.push('/loginibcallbackbrowser/' + loginCode);
     }
@@ -164,6 +187,7 @@ class CarpetaWeb extends Component {
     return (
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <VistaWebComponent
+          vistaWebComponentRef={ ref => this.vistaWebComponent = ref}
           url={reactNativeHomepage}
           debug={false}
           callWhenNavigationStateChange={this.callWhenNavigationStateChange}

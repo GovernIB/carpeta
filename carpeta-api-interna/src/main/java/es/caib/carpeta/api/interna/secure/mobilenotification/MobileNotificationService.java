@@ -2,8 +2,10 @@ package es.caib.carpeta.api.interna.secure.mobilenotification;
 
 import java.sql.Timestamp;
 import java.text.MessageFormat;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.validation.constraints.NotEmpty;
@@ -36,6 +38,7 @@ import es.caib.carpeta.model.entity.PluginEntitat;
 import es.caib.carpeta.model.fields.CiutadaFields;
 import es.caib.carpeta.model.fields.NotificacioAppFields;
 import es.caib.carpeta.model.fields.PluginEntitatFields;
+import es.caib.carpeta.model.fields.SeccioFields;
 import es.caib.carpeta.persistence.EstadisticaJPA;
 import es.caib.carpeta.persistence.NotificacioAppJPA;
 import es.caib.carpeta.persistence.PluginJPA;
@@ -86,6 +89,9 @@ public class MobileNotificationService {
 
     @EJB(mappedName = es.caib.carpeta.ejb.EstadisticaService.JNDI_NAME)
     protected es.caib.carpeta.ejb.EstadisticaService estadisticaEjb;
+    
+    @EJB(mappedName = es.caib.carpeta.ejb.SeccioService.JNDI_NAME)
+    protected es.caib.carpeta.ejb.SeccioService seccioEjb;
 
     @GET
     @Path("/sendnotificationtomobile")
@@ -206,11 +212,12 @@ public class MobileNotificationService {
             }
 
             PluginEntitat pluginEntitat = null;
+            PluginJPA plugin = null;
 
             if (pluginID != null) {
 
                 // Check if Plugin is enabled
-                PluginJPA plugin = pluginEjb.findByPrimaryKey(pluginID);
+                plugin = pluginEjb.findByPrimaryKey(pluginID);
                 if (!plugin.isActiu()) {
                     // TODO XYZ ZZZ TRA
                     return generateError(SendMessageResultCode.PLUGIN_DISABLED,
@@ -253,7 +260,7 @@ public class MobileNotificationService {
             }
 
             // Process title and subtitle
-            Object[] parametres = toObjectParameters(notificationParameters/* .getParameters() */);
+            Object[] parametres = toObjectParameters(notificationParameters);
 
             String title = notificacio.getTitol().getTraduccio(notificationLang).getValor();
             String titol = MessageFormat.format(title, parametres);
@@ -261,9 +268,34 @@ public class MobileNotificationService {
             String message = notificacio.getMissatge().getTraduccio(notificationLang).getValor();
             String missatge = MessageFormat.format(message, parametres);
 
+            
+            Map<String, Object> data = new HashMap<String, Object>();
+            
+            if (pluginEntitat == null) {
+               data.put("action", "NONE");
+            } else {
+               data.put("action", "SHOWPLUGIN");
+               boolean ispublic = !(plugin.getTipus() == Constants.PLUGIN_TIPUS_FRONT_PRIVAT);
+               String seccio = seccioEjb.executeQueryOne(SeccioFields.CONTEXTE, SeccioFields.SECCIOID.equal(pluginEntitat.getSeccioID()));
+               
+               String url = "/#";
+               if (seccio != null) {
+                   url = url + "/seccio/" + seccio;
+               }
+               
+               if (ispublic) {
+                   url = url + "/publicmodul/";
+               } else {
+                   url = url + "/modul/";
+               }
+               
+               data.put("url", url + plugin.getContext());
+               data.put("ispublic",ispublic);
+            }
+
             // Send message
             SendNotificationResult snr;
-            snr = SendNotificationToMobile.sendMessageToMobile(mobileID, titol, missatge, null);
+            snr = SendNotificationToMobile.sendMessageToMobile(mobileID, titol, missatge, data);
             if (snr.isEstatEnviat() && snr.isEstatRebut()) {
 
                 final int elapsed = (int)(System.currentTimeMillis() - start);

@@ -1,4 +1,3 @@
-
 /**
  * @author anadal (u80067)
  * @email governdigital.carpeta@fundaciobit.org
@@ -7,7 +6,7 @@
  * @desc Punt d'entrada a l'APP i registre de Notificacions
  */
 
- import { Platform } from "react-native";
+import { Linking, Platform } from "react-native";
 import Constants from "expo-constants";
 import React, { Component } from "react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
@@ -18,6 +17,7 @@ import { sessionStorageRN } from "./src/SessionStorageClass";
 import Index from "./src/Index";
 import * as Notifications from "expo-notifications";
 import * as ScreenOrientation from "expo-screen-orientation";
+import Persistencia from './src/Persistencia';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -29,8 +29,6 @@ Notifications.setNotificationHandler({
 
 //metodo que genera y registra el token unico
 async function registerForPushNotificationsAsync() {
-
-
   if (Platform.OS === "web") {
     sessionStorageRN.setItem(
       "expoPushToken",
@@ -38,8 +36,6 @@ async function registerForPushNotificationsAsync() {
     );
     return;
   }
-
-
 
   let token;
 
@@ -91,10 +87,26 @@ async function registerForPushNotificationsAsync() {
 class App extends Component {
   constructor(props) {
     super(props);
+
+    this.calledWhenDataLoaded = this.calledWhenDataLoaded.bind(this);
+    this._handleNotificationResponse = this._handleNotificationResponse.bind(this);
+    
+
+    this.storage = new Persistencia();
+    // Carrega els valors de forma asincrona i quan ha acabat crida a la funcio passada per paràmetre
+    this.storage.load(this.calledWhenDataLoaded);
+    this.state = { loadedData: false, urlcarpeta: "" };
+  }
+
+
+
+  calledWhenDataLoaded(urlcarpeta, codientitat) {
+    console.log("ENTRA A DORENDER ");
+
+    this.setState({ loadedData: true, urlcarpeta: urlcarpeta });
   }
 
   componentDidMount() {
-
     if (Platform.OS != "web") {
       ScreenOrientation.unlockAsync();
     }
@@ -108,18 +120,19 @@ class App extends Component {
     );
   }
 
-  /** Entra aqui quan el dispositiu rep la notificació */
+  /** Entra aqui quan el dispositiu rep una notificació PUSH */
   _handleNotification = (notification) => {
     console.log(" =============================================== ");
 
     console.log(
       new Date().toLocaleString() +
-        " notification.request.content.title => " +
+        "REBUDA notification.request.content.title => " +
         notification.request.content.title
     );
+
     console.log(
       new Date().toLocaleString() +
-        " notification.request.content.body => " +
+        "REBUDA notification.request.content.body => " +
         notification.request.content.body
     );
 
@@ -140,20 +153,86 @@ class App extends Component {
     }, 5000);
   };
 
-  /** Entra aqui quan l'usuari pitja la notificació */
+  /** Entra aqui quan l'usuari pitja sobre la notificació PUSH */
   _handleNotificationResponse = (response) => {
     console.log("RESPONSE: " + response);
 
     console.log(
       new Date().toLocaleString() +
-        " response.notification.request.content.title => " +
+        "CLICK response.notification.request.content.title => " +
         response.notification.request.content.title
     );
     console.log(
       new Date().toLocaleString() +
-        " response.notification.request.content.body => " +
+        "CLICK  response.notification.request.content.body => " +
         response.notification.request.content.body
     );
+    console.log(
+      new Date().toLocaleString() +
+        "CLICK  response.notification.request.content.data => " +
+        JSON.stringify(response.notification.request.content.data)
+    );
+
+    if (response.notification.request.content.data.action) {
+
+      var action =  response.notification.request.content.data.action;
+      console.log(
+        new Date().toLocaleString() +
+          "CLICK  response.notification.request.content.data.action = " +
+          action
+      );
+      
+
+      if (action == "NONE") {
+        //  Do nothing
+      } else  if (action == "SHOWPLUGIN") {
+
+         var url = response.notification.request.content.data.url;
+         console.log(
+          new Date().toLocaleString() +
+            "CLICK  response.notification.request.content.data.url = " +
+            url
+        );
+
+         if (url) {
+
+          console.log(
+            new Date().toLocaleString() +
+              "CLICK  this.state.urlcarpeta = " +
+              this.state.urlcarpeta
+          );
+
+
+          var fullUrl = this.state.urlcarpeta + url;
+          console.log(
+            new Date().toLocaleString() +
+              "CLICK OK this.index=" + this.index
+          );
+
+          //Linking.openURL(fullUrl);
+          var ispublic = response.notification.request.content.data.ispublic;
+
+          var fullUrl = this.state.urlcarpeta + url;
+          console.log(
+            new Date().toLocaleString() +
+              "CLICK OK this.index.navigateCarpetaWeb(" +
+              fullUrl + "," + ispublic + ")"
+          );
+
+          
+          this.index.navigateCarpetaWeb(fullUrl, ispublic);
+         }
+
+      }
+      
+    } else {
+      console.log(
+        new Date().toLocaleString() +
+          "CLICK  response.notification.request.content.data.action = NO DEFINIT "
+      );
+    }
+
+   
   };
 
   render() {
@@ -161,7 +240,7 @@ class App extends Component {
       <SafeAreaProvider>
         <Router>
           <SafeAreaView>
-            <Index />
+            <Index indexRef={ref => { this.index = ref;}}/>
           </SafeAreaView>
         </Router>
       </SafeAreaProvider>
