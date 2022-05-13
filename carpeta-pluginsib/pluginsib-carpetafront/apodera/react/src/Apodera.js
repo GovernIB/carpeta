@@ -65,7 +65,11 @@ class Apodera extends Component {
     }
 
     mostrarMesInfo(row) {
-        document.getElementById(row).style.display = "table-row";
+        if(document.getElementById(row).style.display === "none" ) {
+            document.getElementById(row).style.display = "table-row";
+        } else if( document.getElementById(row).style.display === "table-row" ) {
+            document.getElementById(row).style.display = "none";
+        }
     }
 
     descripcioEstat(estat) {

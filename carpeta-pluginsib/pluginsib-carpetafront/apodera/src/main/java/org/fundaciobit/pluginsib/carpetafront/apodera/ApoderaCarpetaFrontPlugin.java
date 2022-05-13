@@ -296,13 +296,16 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
                     String ts = "Tipo:" + apoderament.getTipoApoderamiento().getTipoApod() + " | Subtipo:"
                             + apoderament.getTipoApoderamiento().getSubTipoApod();
 
-                    if (ta == null) {
-//                        apo.setTipus(getTraduccio(APODERA_RES_BUNDLE,"tipo.desconegut", locale) + " (" + ts + ")");
-                        apo.setTipus(getTraduccio(APODERA_RES_BUNDLE,"tipo.desconegut", locale));
-                    } else {
-//                        apo.setTipus(ta.getDescripcion() + " (" + ts + ")");
-                        apo.setTipus(apoderament.getTipoApoderamiento().getTipoApod());
-                    }
+//                    if (ta == null) {
+////                        apo.setTipus(getTraduccio(APODERA_RES_BUNDLE,"tipo.desconegut", locale) + " (" + ts + ")");
+//                        apo.setTipus(getTraduccio(APODERA_RES_BUNDLE,"tipo.desconegut", locale));
+//                    } else {
+////                        apo.setTipus(ta.getDescripcion() + " (" + ts + ")");
+//                        apo.setTipus(apoderament.getTipoApoderamiento().getTipoApod());
+//                    }
+
+                    apo.setTipus(apoderament.getTipoApoderamiento().getTipoApod());
+
 
                     // SUBTIPUS
                     apo.setSubtipus(apoderament.getTipoApoderamiento().getSubTipoApod());
