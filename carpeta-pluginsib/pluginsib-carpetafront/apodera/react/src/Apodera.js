@@ -234,13 +234,16 @@ class Apodera extends Component {
                                             valorAmbit = t('apoderaTipo.desconegut');
                                         }
                                     } else if (tipus === '2') {
-                                        if (subtipus === '0' || subtipus === '1' || subtipus === '2' || subtipus === '3' || subtipus === '4' || subtipus === '5') {
+                                        if (subtipus === '0' || subtipus === '1' || subtipus === '2' || subtipus === '3' || subtipus === '4' || subtipus === '5' ||
+                                            subtipus === '11' || subtipus === '12' || subtipus === '13' || subtipus === '14' || subtipus === '15' ||
+                                            subtipus === '21' || subtipus === '22' || subtipus === '23' || subtipus === '31' || subtipus === '32') {
                                             valorAmbit = t('apoderaTipo.' + tipus + subtipus);
                                         } else {
                                             valorAmbit = t('apoderaTipo.desconegut');
                                         }
                                     } else if (tipus === '3') {
-                                        if (subtipus === '0' || subtipus === '1') {
+                                        if (subtipus === '0' || subtipus === '1' || subtipus === '11' || subtipus === '12' || subtipus === '13' || subtipus === '14' ||
+                                            subtipus === '21' || subtipus === '22' || subtipus === '23' || subtipus === '31' || subtipus === '32') {
                                             valorAmbit = t('apoderaTipo.' + tipus + subtipus);
                                         } else {
                                             valorAmbit = t('apoderaTipo.desconegut');
