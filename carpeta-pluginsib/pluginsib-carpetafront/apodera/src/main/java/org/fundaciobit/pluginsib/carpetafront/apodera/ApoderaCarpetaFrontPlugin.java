@@ -372,23 +372,27 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
                         apo.setProcediment(null);
                     }
 
-//                    // ORGANISMES
-//                    if(apoderament.getTipoApoderamiento().getListaOrganismos() != null) {
-//                        log.info("ORGANISMESSSSSSSSSSSSSSSSSSSS: " + apoderament.getTipoApoderamiento().getListaOrganismos());
-//                        String org = "";
-//                        List<OrganismoType> organismes = apoderament.getTipoApoderamiento().;
-//                        for (OrganismoType organisme : organismes) {
-//                            if(organisme.getCodOrganismo().equals("Todas")){
-//                                org = getTraduccio(APODERA_RES_BUNDLE,"organisme.totes", locale);
-//                                break;
-//                            }else{
-//                                org = org + "<p>" + organisme.getCodOrganismo() + " - " + organisme.getDenomOrganismo() + "</p>";
-//                            }
-//                        }
-//                        apo.setOrganisme(org);
-//                    } else {
-//                        apo.setOrganisme(null);
-//                    }
+                    // ORGANISMES
+                    if(apoderament.getTipoApoderamiento().getListaOrganismos() != null) {
+                        List<OrganismoType> orgs = new ArrayList<OrganismoType>();
+                        Organismo2 organismes = apoderament.getTipoApoderamiento().getListaOrganismos().getValue();
+                        for (OrganismoType2 organisme : organismes.getOrganismo()) {
+                            OrganismoType organismo = new OrganismoType();
+                            if(organisme.getCodOrganismo().equals("Todas")){
+                                organismo.setCodOrganismo(null);
+                                organismo.setDenomOrganismo(getTraduccio(APODERA_RES_BUNDLE,"organisme.totes", locale));
+                                orgs.add(organismo);
+                                break;
+                            }else{
+                                organismo.setCodOrganismo(organisme.getCodOrganismo());
+                                organismo.setDenomOrganismo(organisme.getDenomOrganismo());
+                                orgs.add(organismo);
+                            }
+                        }
+                        apo.setOrganismes(orgs);
+                    } else {
+                        apo.setOrganismes(null);
+                    }
 
                     // Afegim apoderament a la llista
                     apos.add(apo);
@@ -417,7 +421,7 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
             Gson gson = new Gson();
             String json = gson.toJson(infoApoderaments);
 
-            //log.info(json);
+            log.info(json);
 
             try {
 

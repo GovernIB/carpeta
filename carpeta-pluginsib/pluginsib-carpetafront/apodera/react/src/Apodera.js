@@ -224,7 +224,7 @@ class Apodera extends Component {
                                                                       apoderado,
                                                                       vigencia,
                                                                       procediment,
-                                                                      organisme
+                                                                      organismes
                                                                   }, i) => {
 
                                     let valorAmbit;
@@ -253,6 +253,15 @@ class Apodera extends Component {
                                         valorAmbit = t('apoderaTipo.desconegut');
                                     }
 
+                                    let llistaOrganismes=[];
+                                    {organismes.forEach((s, i) => {
+                                        if(s.codOrganismo) {
+                                            llistaOrganismes.push(<p>- {s.codOrganismo}: {s.denomOrganismo}</p>)
+                                        }else{
+                                            llistaOrganismes.push(<p>- {s.denomOrganismo}</p>)
+                                        }
+                                    })}
+
                                     return <>
                                         <tr className="clickable-row" tabIndex={511 + i*2 - 1}
                                             onClick={() => this.mostrarMesInfo('row' + i)} onKeyPress={() => this.mostrarMesInfo('row' + i)}>
@@ -269,7 +278,7 @@ class Apodera extends Component {
                                                     <p>
                                                         <b>{t('apoderaEstatActual')}</b>: {this.nomEstat(estat)} - {this.descripcioEstat(estat)}
                                                     </p>
-                                                    {organisme && <p><b>{t('apoderaOrganismes')}</b>: {organisme}</p>}
+                                                    {organismes && <p><b>{t('apoderaOrganismes')}</b>: {llistaOrganismes}</p>}
                                                     {procediment && <p><b>{t('apoderaProcediment')}</b>: {procediment}</p>}
                                                 </div>
                                                 <div style={{float: 'right', width: 'auto'}} id="accedirApodera">
@@ -304,7 +313,7 @@ class Apodera extends Component {
                                                          apoderado,
                                                          vigencia,
                                                          procediment,
-                                                         organisme
+                                                         organismes
                                                      }, i) => {
 
                         let valorAmbit2;
@@ -335,6 +344,15 @@ class Apodera extends Component {
                             valorAmbit2 = t('apoderaTipo.desconegut');
                         }
 
+                        let llistaOrganismes2=[];
+                        {organismes.forEach((s, i) => {
+                            if(s.codOrganismo) {
+                                llistaOrganismes2.push(<p>- {s.codOrganismo}: {s.denomOrganismo}</p>)
+                            }else{
+                                llistaOrganismes2.push(<p>- {s.denomOrganismo}</p>)
+                            }
+                        })}
+
                         cardApoderaments.push(
                             <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil"
                                  key={i} tabIndex={511+i} onClick={(e) =>
@@ -353,8 +371,8 @@ class Apodera extends Component {
                                         <b>{t('apoderaVigencia')}: </b>{vigencia}</p>
                                     <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
                                         <b>{t('apoderaTipus')}</b>: {tipus} - <b>{t('apoderaSubtipus')}</b>: {subtipus}</p>
-                                    {organisme && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
-                                        <b>{t('apoderaOrganismes')}</b>: {organisme}</p>}
+                                    {organismes && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
+                                        <b>{t('apoderaOrganismes')}</b>: {llistaOrganismes2}</p>}
                                     {procediment && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
                                         <b>{t('apoderaProcediment')}</b>: {procediment}</p>}
                                 </div>
