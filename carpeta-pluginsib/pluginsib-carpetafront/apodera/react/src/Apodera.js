@@ -211,7 +211,7 @@ class Apodera extends Component {
                             <Table id="tableId" responsive striped bordered hover style={tamanyTaula} className="ocultarMobil">
                                 <thead className="table-success">
                                 <tr>
-                                    <th style={tamanyData}>{t('apoderaTipus')}</th>
+                                    <th style={tamanyData}>{t('apoderaAmbit')}</th>
                                     <th>{t('apoderaEstat')}</th>
                                     <th>{t('apoderaApoderado')}</th>
                                     <th>{t('apoderaVigencia')}</th>
@@ -274,7 +274,7 @@ class Apodera extends Component {
                                         <tr style={{display: 'none'}} id={'row' + i}>
                                             <td colSpan={4}>
                                                 <div style={{float: 'left', width: '70%'}}>
-                                                    <p><b>{t('apoderaAmbit')}</b>: {valorAmbit} </p>
+                                                    {/*<p><b>{t('apoderaAmbit')}</b>: {valorAmbit} </p>*/}
                                                     <p>
                                                         <b>{t('apoderaEstatActual')}</b>: {this.nomEstat(estat)} - {this.descripcioEstat(estat)}
                                                     </p>
