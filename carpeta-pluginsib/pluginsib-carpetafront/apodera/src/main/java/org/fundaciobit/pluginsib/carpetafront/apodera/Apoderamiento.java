@@ -10,12 +10,14 @@ public class Apoderamiento {
     private String ambit;
     private String descEstat;
     private String procediment;
+    private String organisme;
 
     public Apoderamiento() {
         super();
     }
 
-    public Apoderamiento(String tipus, String subtipus, String estat, String apoderado, String vigencia, String ambit, String descEstat, String procediment) {
+    public Apoderamiento(String tipus, String subtipus, String estat, String apoderado, String vigencia, String ambit,
+                         String descEstat, String procediment, String organisme) {
         super();
         this.tipus = tipus;
         this.subtipus = subtipus;
@@ -25,6 +27,7 @@ public class Apoderamiento {
         this.ambit = ambit;
         this.descEstat = descEstat;
         this.procediment = procediment;
+        this.organisme = organisme;
     }
 
     public String getTipus() {
@@ -84,5 +87,11 @@ public class Apoderamiento {
     }
 
     public void setProcediment(String procediment) {this.procediment = procediment; }
+
+    public String getOrganisme() {
+        return organisme;
+    }
+
+    public void setOrganisme(String organisme) {this.organisme = organisme; }
 
 }
