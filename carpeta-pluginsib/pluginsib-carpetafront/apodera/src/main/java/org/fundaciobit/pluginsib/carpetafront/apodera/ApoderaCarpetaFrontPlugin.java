@@ -269,7 +269,8 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
                 poderdant.setPersonaJuridica(empresa);
             }
 
-            List<DatosApoderamientoType> apoderaments = consultaInterna(nifPoderdante, null).getListaApoderamientos();
+            List<DatosApoderamientoType> apoderaments = consultaInterna(nifPoderdante, null)
+                    .getListaApoderamientos();
 
             int apoderamentsTotals;
             ArrayList<Apoderamiento> apos = new ArrayList<Apoderamiento>();
@@ -339,11 +340,13 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
                     DatosApoderadoCompletoType apoCompleto = apoderament.getDatosApoderado();
                     if (apoCompleto.getPersonaFisica() != null) {
                         PersonaFisicaType pf = apoCompleto.getPersonaFisica();
-                        apo.setApoderado(pf.getNombre() + " " + pf.getApellido1() + " (" + pf.getNifNie() + ")" + " - " + getTraduccio(APODERA_RES_BUNDLE,"persona.fisica", locale));
+                        apo.setApoderado(pf.getNombre() + " " + pf.getApellido1() + " (" + pf.getNifNie() + ")"
+                                + " - " + getTraduccio(APODERA_RES_BUNDLE,"persona.fisica", locale));
                     }
                     if (apoCompleto.getPersonaJuridica() != null) {
                         PersonaJuridicaType pf = apoCompleto.getPersonaJuridica();
-                        apo.setApoderado(pf.getRazonSocial() + " (" + pf.getNif() + ")" + " - " + getTraduccio(APODERA_RES_BUNDLE,"persona.juridica", locale));
+                        apo.setApoderado(pf.getRazonSocial() + " (" + pf.getNif() + ")" + " - " +
+                                getTraduccio(APODERA_RES_BUNDLE,"persona.juridica", locale));
                     }
 
 
@@ -355,11 +358,37 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
 
                     // PROCEDIMENT
                     if(apoderament.getTipoApoderamiento().getListaProcedimientos() != null) {
-                        Class<Procedimiento2> procediment = apoderament.getTipoApoderamiento().getListaProcedimientos().getDeclaredType();
-                        apo.setProcediment(procediment.getName());
+                        String proc = "";
+                        String codiProc;
+                        List<ProcedimientoType> procediments = (List<ProcedimientoType>)
+                                apoderament.getTipoApoderamiento().getListaProcedimientos();
+                        for (ProcedimientoType procediment : procediments) {
+                            codiProc = procediment.getCodProcedimiento();
+
+                            proc = proc + codiProc;
+                        }
+                        apo.setProcediment(proc);
                     } else {
                         apo.setProcediment(null);
                     }
+
+//                    // ORGANISMES
+//                    if(apoderament.getTipoApoderamiento().getListaOrganismos() != null) {
+//                        log.info("ORGANISMESSSSSSSSSSSSSSSSSSSS: " + apoderament.getTipoApoderamiento().getListaOrganismos());
+//                        String org = "";
+//                        List<OrganismoType> organismes = apoderament.getTipoApoderamiento().;
+//                        for (OrganismoType organisme : organismes) {
+//                            if(organisme.getCodOrganismo().equals("Todas")){
+//                                org = getTraduccio(APODERA_RES_BUNDLE,"organisme.totes", locale);
+//                                break;
+//                            }else{
+//                                org = org + "<p>" + organisme.getCodOrganismo() + " - " + organisme.getDenomOrganismo() + "</p>";
+//                            }
+//                        }
+//                        apo.setOrganisme(org);
+//                    } else {
+//                        apo.setOrganisme(null);
+//                    }
 
                     // Afegim apoderament a la llista
                     apos.add(apo);

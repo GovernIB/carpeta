@@ -1,5 +1,5 @@
 {
-      "dadespersonalsTitol": "Dades Document d'Identitat",
+    "dadespersonalsTitol": "Dades Document d'Identitat",
     "dadespersonalsDescripcio": "Des d'aquí podeu consultar les dades que apareixen en el vostre DNI.",
     "dadespersonalsNom": "Nom",
     "dadespersonalsLlinatge1": "Primer llinatge",
@@ -14,6 +14,6 @@
 	"nombrePadre": "Nom del Pare",
 	"nombreMadre": "Nom de la Mare",
     "fechaCaducidad": "Data de Caducitat",
-    "tornar": "Tornau"
-
+    "tornar": "Tornau",
+    "pinbalPoliciaConsulta": "Consulta"
 }

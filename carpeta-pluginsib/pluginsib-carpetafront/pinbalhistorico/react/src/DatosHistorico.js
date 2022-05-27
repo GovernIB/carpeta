@@ -103,6 +103,7 @@ class DatosHistorico extends Component {
         const { t, localitats } = this.props;
 
         let content;
+        let contentApp;
 
         const municipis = (localitats) ? JSON.parse(Buffer.from(this.props.localitats, 'base64')) : listaProvinciasMunicipios.localidades;
 
@@ -112,7 +113,7 @@ class DatosHistorico extends Component {
                  <form id="formulario" onSubmit={this.handleSubmit} method="GET">
                     <div className="form-group">
                         <label for="codigoMunicipio">{t('pinbalHistoricoMunicipioLabel')}</label>
-                        <div class="col-md-4 p-0 col-sm-6" style={{width:'90%'}}>
+                        <div className="col-md-4 p-0 col-sm-6" style={{width:'98%'}}>
                             <select name="codigoMunicipio" id="codigoMunicipio" className="form-control"  value={this.state.municipio} onChange={this.handleMunicipio}>
                                 <option value="">{t('pinbalHistoricoSelecciona')}</option>
                                 {
@@ -123,7 +124,7 @@ class DatosHistorico extends Component {
                     </div>
                     <div className="form-group">
                         <label for="numeroAnyos">{t('pinbalHistoricoAnyosLabel')}</label>
-                        <div class="col-md-4 p-0 col-sm-6" style={{width:'90%'}}>
+                        <div className="col-md-4 p-0 col-sm-6" style={{width:'98%'}}>
                             <input type="number" id="numeroAnyos" className="form-control"  value={this.state.anyos} onChange={this.handleAnyos} />
                         </div>
                     </div>
@@ -141,7 +142,7 @@ class DatosHistorico extends Component {
                         <form id="formulario" onSubmit={this.handleSubmit} method="GET">
                             <div className="form-group">
                                 <label for="codigoMunicipio">{t('pinbalHistoricoMunicipioLabel')}</label>
-                                <div class="col-md-4 p-0 col-sm-6" style={{width:'90%'}}>
+                                <div className="col-md-4 p-0 col-sm-6" style={{width:'98%'}}>
                                     <select name="codigoMunicipio" id="codigoMunicipio" className="form-control"  value={this.state.municipio} onChange={this.handleMunicipio}>
                                         <option value="">{t('pinbalHistoricoSelecciona')}</option>
                                         {
@@ -152,7 +153,7 @@ class DatosHistorico extends Component {
                             </div>
                             <div className="form-group">
                                 <label for="numeroAnyos">{t('pinbalHistoricoAnyosLabel')}</label>
-                                <div class="col-md-4 p-0 col-sm-6" style={{width:'90%'}}>
+                                <div className="col-md-4 p-0 col-sm-6" style={{width:'98%'}}>
                                     <input type="number" id="numeroAnyos" className="form-control"  value={this.state.anyos} onChange={this.handleAnyos} />
                                 </div>
                             </div>
@@ -291,14 +292,7 @@ class DatosHistorico extends Component {
                                     <dd className="col-sm-7">{data.documentacion}</dd>
                                 </div>
                             </dl>
-                            <hr/>
-                            {periodosHistoricoContent && <div className="domicilis" dangerouslySetInnerHTML={{__html: periodosHistoricoContent}}></div>}
-                            {data.fechaExpedicion && <dl className="row">
-                                <div>
-                                    <dt className="col-sm-3">{t('pinbalHistoricoExpedicion')}</dt>
-                                    <dd className="col-sm-7">{data.fechaExpedicion}</dd>
-                                </div>
-                            </dl>}
+
                         </div>
                     </>
                     ; 
@@ -308,34 +302,58 @@ class DatosHistorico extends Component {
                     </div>;
                 }
 
-				content = <div>
+				content = <div className="ocultarMobil">
                     {alerta}
+                    <hr/>
+                    {periodosHistoricoContent && <div className="domicilis" dangerouslySetInnerHTML={{__html: periodosHistoricoContent}}></div>}
+                    {data.fechaExpedicion && <dl className="row">
+                        <div>
+                            <dt className="col-sm-3">{t('pinbalHistoricoExpedicion')}</dt>
+                            <dd className="col-sm-7">{data.fechaExpedicion}</dd>
+                        </div>
+                    </dl>}
 				</div>;
+
+                contentApp = <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil wAuto" tabIndex={510}>
+                    <div className="col-sm-1 float-left">
+                        <span className="oi oi-bell iconaFormApp" title={t('pinbalHistoricoConsulta')} style={{verticalAlign: 'sub'}}/>
+                    </div>
+                    <div className="col-sm-10 float-right">
+                        {alerta}
+                        {periodosHistoricoContent && <div className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}} dangerouslySetInnerHTML={{__html: periodosHistoricoContent}}></div>}
+                        {data.fechaExpedicion && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalHistoricoExpedicion')}:</b> {data.fechaExpedicion}</p>}
+                    </div>
+                </div>;
 
             }
         }
 
         
-        return (
-            <div className="infoNoMenu">
-                <h2 className="titol h2">{this.props.titles[i18n.language]}</h2>
-                <div className="col-md-12 border-0 float-left p-0">
-                    <p className="lh15">{this.props.subtitles[i18n.language]} </p>
-                    <div className="infoNoMenu">
-                        <div className="col-md-12 border-0 float-left p-0">
-                            {content}
-                            <div  id="carregant" className="loader-container centrat d-none">
-                                <div className="loader"/>
-                            </div>
-                            <div className="col-md-12 border-0 float-left p-0" id="botoTornarDadesP" style={{ marginTop: '20px' }}>
-                                <button type="button" data-toggle="modal" onClick={() => {
-                                    window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                                }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarDadesP">{t('tornar')}</button>
+        return (<>
+                <div className="titolPaginaApp visioMobil">
+                    {this.props.titles[i18n.language]}
+                </div>
+                <div className="infoNoMenu">
+                    <h2 className="titol h2 ocultarMobil">{this.props.titles[i18n.language]}</h2>
+                    <div className="col-md-12 border-0 float-left p-0">
+                        <p className="lh15 ocultarMobil">{this.props.subtitles[i18n.language]} </p>
+                        <div className="infoNoMenu">
+                            <div className="col-md-12 border-0 float-left p-0">
+                                {content}
+                                {contentApp}
+                                <div  id="carregant" className="loader-container centrat d-none">
+                                    <div className="loader"/>
+                                </div>
+                                <div className="col-md-12 border-0 float-left p-0" id="botoTornarDadesP" style={{ marginTop: '20px' }}>
+                                    <button type="button" data-toggle="modal" onClick={() => {
+                                        window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
+                                    }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarDadesP">{t('tornar')}</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </>
             );
             
     }

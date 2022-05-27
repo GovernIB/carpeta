@@ -130,7 +130,7 @@ class MenuRapid extends Component {
 
                         case 0: // Plugin react
                             allItems.push(
-                                <li key={k} className="nav-item pr-4 lletraRapid">
+                                <li key={"react"+i} className="nav-item pr-4 lletraRapid">
                                     <Link className="navCarpeta"
                                           to={{pathname: Constants.PLUGINREACT_PATH + s.context, nomPagina: "plugin"}} tabIndex={301+k} aria-labelledby={"menuRapidBoto"+i} onFocus={function(){$("#submenu"+iActiu).removeClass('show');iActiu=i;}} >
                                         <img src={urlBase + s.urllogo} alt={s.nom} title={t('iconaDe') + " " + s.nom} className="imc-icona"/>
@@ -143,7 +143,7 @@ class MenuRapid extends Component {
 
                         case 1: // Plugin html
                             allItems.push(
-                                <li key={k} className="nav-item pr-4 lletraRapid">
+                                <li key={"html"+i} className="nav-item pr-4 lletraRapid">
                                     <Link className="navCarpeta"
                                           to={{pathname: Constants.PLUGINHTML_PATH + s.context, nomPagina: "plugin"}} tabIndex={301+k} aria-labelledby={"menuRapidBoto"+i} onFocus={function(){$("#submenu"+iActiu).removeClass('show');iActiu=i;}} >
                                         <img src={urlBase + s.urllogo} alt={s.nom} title={t('iconaDe') + " " + s.nom} className="imc-icona"/>
@@ -160,7 +160,7 @@ class MenuRapid extends Component {
                             s.plugins.forEach((p, j) => {
                                 if(p.reactComponent === true) {
                                     plugins.push(
-                                        <li key={k}>
+                                        <li key={"seccioReact"+j}>
                                             <Link className="navCarpeta dropdown-item linkVerd"
                                                   to={{pathname: Constants.SECCIO_PATH + s.context + Constants.PLUGINREACT_PATH + p.context, nomPagina: "plugin"
                                                   }} tabIndex={301 + k + j + 1} aria-labelledby={"menuRapidBoto"+i} onClick={function(){$("#submenu"+iActiu).removeClass('show')}}>
@@ -171,7 +171,7 @@ class MenuRapid extends Component {
                                     );
                                 }else{
                                     plugins.push(
-                                        <li key={k}>
+                                        <li key={"seccio"+j}>
                                             <Link className="navCarpeta dropdown-item linkVerd"
                                                   to={{pathname: Constants.SECCIO_PATH + s.context + Constants.PLUGINHTML_PATH + p.context, nomPagina: "plugin"
                                                   }} tabIndex={301 + k + j + 1} aria-labelledby={"menuRapidBoto"+i} onClick={function(){$("#submenu"+iActiu).removeClass('show')}}>
@@ -188,9 +188,9 @@ class MenuRapid extends Component {
 
                             // seccio global
                             allItems.push(
-                                <li className="btn-group navCarpeta pr-4" key={k}>
+                                <li className="btn-group navCarpeta pr-4" key={"global"+i}>
                                     <button type="button" className="btn btn-default dropdown-toggle p-0 lletraRapid disBlok text-verd"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id={"menuRapidBoto"+i} tabIndex={301 + k - l} 
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id={"menuRapidBoto"+i} tabIndex={301 + k - l}
                                                 onFocus={function(){$("#submenu"+iActiu).removeClass('show');iActiu=i;$("#submenu"+i).addClass('show');}}
                                                 onClick={function(){$("#submenu"+iActiu).removeClass('show');iActiu=i;$("#submenu"+i).addClass('show');}}
                                                 >
@@ -207,7 +207,7 @@ class MenuRapid extends Component {
 
                         case 4: // PseudoPlugin
                             allItems.push(
-                                <li key={k} className="nav-item pr-4 lletraRapid">
+                                <li key={"pseudo"+i} className="nav-item pr-4 lletraRapid">
                                     <a className="navCarpeta" href={s.url} target="_blank" title={s.nom} tabIndex={301+k} aria-labelledby={"menuRapidBoto"+i} onFocus={function(){$("#submenu"+iActiu).removeClass('show');iActiu=i;}} >
                                         <img src={s.urllogo} alt={s.nom} title={t('iconaDe') + " " + s.nom} className="imc-icona"/>
                                         <span className="menuRapidView" id={"menuRapidBoto"+i}>{s.nom}</span>

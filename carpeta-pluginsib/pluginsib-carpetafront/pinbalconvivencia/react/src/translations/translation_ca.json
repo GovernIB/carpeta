@@ -36,5 +36,7 @@
   "pinbalConvivenciaFechaNacimiento": "Data de naixement",
   "pinbalConvivenciaDesde" : "Des del",
   "pinbalConvivenciaValidaMunicipi" : "Heu de triar un municipi.",
-  "pinbalConvivenciaSelecciona" : "Triau un municipi"
+  "pinbalConvivenciaSelecciona" : "Triau un municipi",
+  "pinbalConvivenciaTornar" : "Tornau",
+  "pinbalConvivenciaConsulta" : "Consulta"
 }

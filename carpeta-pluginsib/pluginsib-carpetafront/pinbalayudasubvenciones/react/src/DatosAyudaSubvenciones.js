@@ -52,6 +52,7 @@ class DatosAyudaSubvenciones extends Component {
         const { t } = this.props;
 
         let content;
+        let contentApp;
 
         if (!isLoaded) {
            
@@ -81,7 +82,7 @@ class DatosAyudaSubvenciones extends Component {
                     </div>;
                 }
 
-				content = <div>
+				content = <div className="ocultarMobil">
                     {alerta}
                     <div className="contenedorInfoPersonal mt-2">
                         <dl className="row">
@@ -105,27 +106,45 @@ class DatosAyudaSubvenciones extends Component {
                     </div>
 				</div>;
 
+                contentApp = <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil wAuto" tabIndex={510}>
+                    <div className="col-sm-1 float-left">
+                        <span className="oi oi-bell iconaFormApp" title={t('pinbalSubvencionesConsulta')} style={{verticalAlign: 'sub'}}/>
+                    </div>
+                    <div className="col-sm-10 float-right">
+                        {alerta}
+                        {data.dni && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalSubvencionesDni')}:</b> {data.dni}</p>}
+                        {data.nombre && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalSubvencionesNom')}:</b> {data.nombre}</p>}
+                        {data.apellido1 && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalSubvencionesApellido1')}:</b> {data.apellido1}</p>}
+                        {data.apellido2 && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalSubvencionesApellido2')}:</b> {data.apellido2}</p>}
+                    </div>
+                </div>;
+
             }
         }
 
         
-        return (
-            <div className="infoNoMenu">
-                <h2 className="titol h2">{this.props.titles[i18n.language]}</h2>
-                <div className="col-md-12 border-0 float-left p-0">
-                    <p className="lh15">{this.props.subtitles[i18n.language]} </p>
-                    <div className="infoNoMenu">
-                        <div className="col-md-12 border-0 float-left p-0">
-                            {content}
+        return (<>
+                <div className="titolPaginaApp visioMobil">
+                    {this.props.titles[i18n.language]}
+                </div>
+                <div className="infoNoMenu">
+                    <h2 className="titol h2 ocultarMobil">{this.props.titles[i18n.language]}</h2>
+                    <div className="col-md-12 border-0 float-left p-0">
+                        <p className="lh15 ocultarMobil">{this.props.subtitles[i18n.language]} </p>
+                        <div className="infoNoMenu">
+                            <div className="col-md-12 border-0 float-left p-0">
+                                {content}
+                                {contentApp}
+                            </div>
                         </div>
                     </div>
+                    <div className="col-md-12 border-0 float-left p-0" id="botoTornarSubvenciones" style={{ marginTop: '20px' }}>
+                        <button type="button" data-toggle="modal" onClick={() => {
+                            window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
+                        }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarSubvenciones">{t('pinbalSubvencionesTornar')}</button>
+                    </div>
                 </div>
-                <div className="col-md-12 border-0 float-left p-0" id="botoTornarSubvenciones" style={{ marginTop: '20px' }}>
-                    <button type="button" data-toggle="modal" onClick={() => {
-                        window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                    }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarSubvenciones">{t('pinbalSubvencionesTornar')}</button>
-                </div>
-            </div>
+            </>
             );
             
     }

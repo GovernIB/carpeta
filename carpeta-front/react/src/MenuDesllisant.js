@@ -208,10 +208,10 @@ class MenuDesllisant extends Component {
 		console.log("Idioma actual: " + langActual);
 
 		idioma_seleccionat = idiomes.filter(s => s === langActual).map((s, i) => (
-			<strong className="lletraIdioma pl-0 pr-0" key={i} lang={s}>{t('menuIdioma_' + s)}</strong>
+			<strong className="lletraIdioma pl-0 pr-0" key={"idi" + i} lang={s}>{t('menuIdioma_' + s)}</strong>
 		));
 		idiomes_seleccionables = idiomes.filter(s => s !== langActual).map((s, i) => (
-			<span key={i} id={"idiomaMenu"+i}><button onClick={() => this.canviarIdioma(s)}
+			<span key={"sel" + i} id={"idiomaMenu"+i}><button onClick={() => this.canviarIdioma(s)}
 				className="boton-menu lletraIdioma pl-0 pr-0" tabIndex={201+i} aria-labelledby={"idiomaMenu"+i} lang={s}>{t('menuIdioma_' + s)}</button>&nbsp;&nbsp;\&nbsp;&nbsp;</span>
 		));
 
@@ -221,28 +221,51 @@ class MenuDesllisant extends Component {
 			allItems = <div className="alert alert-danger" role="alert">{t(this.state.error)}</div>;
 		} else {
 
-			allItems.push(<li key="acc">
-				<div>
-					<div className="float-left styleLiniaMenu">
-						<span className="oi oi-eye iconaMenu" title={t('menuAccessibilitat')}/>
-					</div>
-					<Link to={{pathname: `/accessibilitat`, nomPagina: 'menuAccessibilitat'}}
-						  className="imc-marc-ico imc--accessibilitat margesMenu" tabIndex="207" aria-labelledby="accessibilitatMenu">
-						<span id="accessibilitatMenu">{t('menuAccessibilitat')}</span>
-					</Link>
-				</div>
-			</li>);
+			allItems.push(<>
+					<li key="acc">
+						<div>
+							<div className="float-left styleLiniaMenu">
+								<span className="oi oi-eye iconaMenu" title={t('menuAccessibilitat')}/>
+							</div>
+							<Link to={{pathname: `/accessibilitat`, nomPagina: 'menuAccessibilitat'}}
+								  className="imc-marc-ico imc--accessibilitat margesMenu" tabIndex="207" aria-labelledby="accessibilitatMenu">
+								<span id="accessibilitatMenu">{t('menuAccessibilitat')}</span>
+							</Link>
+						</div>
+					</li>
+					<li key="avL" className="visioMobil">
+						<div>
+							<div className="float-left styleLiniaMenu">
+								<span className="oi oi-thumb-up iconaMenu" title={t('avisLegalTitol')}/>
+							</div>
+							<Link to={{pathname: `/avislegal`, nomPagina: 'menuAvisLegal'}}
+								  className="imc-marc-ico imc--accessibilitat margesMenu" tabIndex="207" aria-labelledby="avislegalMenu">
+								<span id="avislegalMenu">{t('avisLegalTitol')}</span>
+							</Link>
+						</div>
+					</li>
+					<li key="maW" className="visioMobil">
+						<div>
+							<div className="float-left styleLiniaMenu">
+								<span className="oi oi-map iconaMenu" title={t('mapaWebTitol')}/>
+							</div>
+							<Link to={{pathname: `/mapaweb`, nomPagina: 'menuMapaWeb'}}
+								  className="imc-marc-ico imc--accessibilitat margesMenu" tabIndex="207" aria-labelledby="mapawebMenu">
+								<span id="mapawebMenu">{t('mapaWebTitol')}</span>
+							</Link>
+						</div>
+					</li>
+				</>);
 
 			this.state.items.forEach((s, i) => {
 				switch (s.tipus) {
-
 
 					case -1: // Plugin html public
 					case -2: // Plugin react public
 					case 0: // Plugin react
 					case 1: // Plugin html
 						allItems.push(
-							<li key={i}>
+							<li key={"plug" + i}>
 								<div>
 									<div className="float-left styleLiniaMenu" style={{transform: "translate(0, 40%)"}}>
 									{/*<div className="float-left styleLiniaMenu">*/}
@@ -258,7 +281,7 @@ class MenuDesllisant extends Component {
 						break;
 
 					case 2: // Enllaz
-						allItems.push(<li key={i}>
+						allItems.push(<li key={"enll" + i}>
 							<div>
 								<div className="float-left styleLiniaMenu">
 									<img src={s.urllogo} className="iconaEnllas" title="" alt={s.nom} />
@@ -272,7 +295,7 @@ class MenuDesllisant extends Component {
 						break;
 
 					case 3: // Seccio
-						allItems.push(<li key={i}>
+						allItems.push(<li key={"secc" + i}>
 							<div>
 								<div className="float-left styleLiniaMenu">
 									<img src={s.urllogo} className="iconaEnllas" title="" alt={s.descripcio} />
@@ -286,7 +309,7 @@ class MenuDesllisant extends Component {
 						break;
 
 					case 4: // PseudoPlugin
-						allItems.push(<li key={i}>
+						allItems.push(<li key={"pseudo" + i}>
 							<div>
 								<div className="float-left styleLiniaMenu">
 									<img src={s.urllogo} className="iconaEnllas" title="" alt={s.nom} />

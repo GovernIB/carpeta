@@ -47,5 +47,6 @@
   "pinbalHistoricoMotivoInscripcion": "Motivo inscripción",
   "pinbalHistoricoMotivoBaja" : "Motivo baja",
   "pinbalHistoricoSelecciona" : "Escoja un municipio",
-  "pinbalHistoricoValidaMunicipi" : "Debe escoger un municipio"
+  "pinbalHistoricoValidaMunicipi" : "Debe escoger un municipio",
+  "pinbalHistoricoConsulta": "Consulta"
 }

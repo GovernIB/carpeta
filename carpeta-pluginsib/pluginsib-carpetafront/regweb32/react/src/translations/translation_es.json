@@ -80,19 +80,24 @@
     "carpeta_buscar" : "Buscar",
 
     "carpeta_paginacion_1": "Mostrando elementos del ",
+    "carpeta_paginacion_1_App": "Del ",
     "carpeta_paginacion_2": " al ",
     "carpeta_paginacion_3": " de un total de ",
+    "carpeta_paginacion_3_App": " de ",
     "carpeta_paginacion_4": " elementos",
     "carpeta_criterio_1": "Búsqueda entre el ",
     "carpeta_criterio_2": " y el ",
     "carpeta_criterio_3": " con el estado '",
     "carpeta_criterio_4": "'",
     "carpeta_criterio_5": " y número ",
+    "carpeta_criterio_6": " a ",
     "downloadjustificantText": "Fichero descargado. Clica sobre este enlace para descargarlo de nuevo",
 
     "registro_regPorPagina": "Registros por página",
     "registroMostra":"Muestra ",
     "registroRegistres":" registros",
-    "registroProblema": "Ha habido algún problema de comunicación."
+    "registroProblema": "Ha habido algún problema de comunicación.",
+    "registroDates": "Fechas",
+    "registroCerca": "Búsqueda"
 
 }

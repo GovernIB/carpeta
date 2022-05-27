@@ -157,18 +157,20 @@ class LlistatDePlugins extends Component {
                     case 0: // Plugin react
                     case 1: // Plugin html
                         allItems.push(
-                            <div className="col-lg-4 col-md-4 col-sm-4 col-xs- pl-0" key={i}>
+                            <div className="col-lg-4 col-md-4 col-sm-4 col-xs- pl-0" key={"react"+i}>
                                 <Link
-                                    className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert ${gravetatCssClass}`}
+                                    className={`card cardAppVerd col-md-12 align-items-lg-center capsaPlugin pt-3 alert ${gravetatCssClass}`}
                                     to={{
                                         pathname: baseSeccio + ((s.tipus == 0) ? Constants.PLUGINREACT_PATH :Constants.PLUGINHTML_PATH)+ s.context,
                                         nomPagina: "plugin"
                                     }} tabIndex={502+i} aria-labelledby={"nomPlug"+i} title={t('accedir') + " " + s.nom}>
+                                    <h3 className="apartat2 titolPlugin titol h3 alignCenter visioMobil titolPluginApp" id={"nomPlug"+i}>{s.nom}</h3>
+                                    <hr className="visioMobil" color="#c30045" style={{width: '40%', height: '4px', marginLeft: 'auto', marginRight: 'auto'}}/>
                                     <span className="card-title titol pl-1 h3 alignCenter"><img src={urlBase + s.urllogo}
                                                                                     alt={s.nom} title={t('iconaDe') + " " + s.nom}
-                                                                                    className="imc-icona"/></span>
-                                    <h3 className="apartat2 titolPlugin titol h3 alignCenter" id={"nomPlug"+i}>{s.nom}</h3>
-                                    <span className="card-text alignCenter"
+                                                                                    className="imc-icona iconaPluginApp"/></span>
+                                    <h3 className="apartat2 titolPlugin titol h3 alignCenter ocultarMobil" id={"nomPlug"+i}>{s.nom}</h3>
+                                    <span className="card-text alignCenter padPluginApp"
                                           style={styleDesc}>{s.descripcio}</span>
                                 </Link>
                             </div>
@@ -177,7 +179,7 @@ class LlistatDePlugins extends Component {
                         /*
                     case 1: // Plugin html
                         allItems.push(
-                            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0" key={i}>
+                            <div className="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0" key={"html"+i}>
                                 <Link
                                     className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 ${gravetatCssClass}`}
                                     to={{
@@ -198,13 +200,15 @@ class LlistatDePlugins extends Component {
 
                     case 3: // Seccio
                         allItems.push(
-                            <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0">
+                            <div key={"secc"+i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0">
                                 <Link to={baseSeccio + Constants.SECCIO_PATH + s.context}
-                                      className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert`} tabIndex={502+i} aria-labelledby={"nomSecc"+i} title={t('accedir') + " " + s.nom}>
+                                      className={`card cardAppVerd col-md-12 align-items-lg-center capsaPlugin pt-3 alert`} tabIndex={502+i} aria-labelledby={"nomSecc"+i} title={t('accedir') + " " + s.nom}>
+                                    <h3 className="apartat2 titolPlugin titol h3 alignCenter visioMobil titolPluginApp" id={"nomSecc"+i}>{s.nom}</h3>
+                                    <hr className="visioMobil" color="#c30045" style={{width: '40%', height: '4px', marginLeft: 'auto', marginRight: 'auto'}}/>
                                     <span className="card-title titol pl-1 h3 alignCenter"><img src={s.urllogo} alt={s.nom} title={t('iconaDe') + " " + s.nom}
-                                                                                    className="imc-icona"/></span>
-                                    <h3 className="apartat2 titolPlugin titol h3 alignCenter" id={"nomSecc"+i}>{s.nom}</h3>
-                                    <span className="card-text alignCenter"
+                                                                                    className="imc-icona iconaPluginApp"/></span>
+                                    <h3 className="apartat2 titolPlugin titol h3 alignCenter ocultarMobil" id={"nomSecc"+i}>{s.nom}</h3>
+                                    <span className="card-text alignCenter padPluginApp"
                                           style={styleDesc}>{s.descripcio}</span>
                                 </Link>
                             </div>
@@ -213,13 +217,15 @@ class LlistatDePlugins extends Component {
 
                     case 4: // PseudoPlugin
                         allItems.push(
-                            <div key={i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0">
-                                <button alt={s.nom} className={`card col-md-12 align-items-lg-center capsaPlugin pt-3 alert`}
+                            <div key={"pseu"+i} className="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0">
+                                <button alt={s.nom} className={`card cardAppVerd col-md-12 align-items-lg-center capsaPlugin pt-3 alert`}
                                         onClick={() => window.open(s.url)} tabIndex={502+i} aria-labelledby={"nomPseudo"+i}>
+                                    <h3 className="apartat2 titolPlugin titol h3 alignCenter visioMobil titolPluginApp" id={"nomPseudo"+i}>{s.nom}</h3>
+                                    <hr className="visioMobil" color="#c30045" style={{width: '40%', height: '4px', marginLeft: 'auto', marginRight: 'auto'}}/>
                                     <span className="card-title titol pl-1 h3 alignCenter"><img src={s.urllogo} alt={s.nom} title={t('iconaDe') + " " + s.nom}
-                                                                                    className="imc-icona"/></span>
-                                    <h3 className="apartat2 titolPlugin titol h3 alignCenter" id={"nomPseudo"+i}>{s.nom}</h3>
-                                    <span className="card-text alignCenter"
+                                                                                    className="imc-icona iconaPluginApp"/></span>
+                                    <h3 className="apartat2 titolPlugin titol h3 alignCenter ocultarMobil" id={"nomPseudo"+i}>{s.nom}</h3>
+                                    <span className="card-text alignCenter padPluginApp"
                                           style={styleDesc}>{s.descripcio}</span>
                                 </button>
                             </div>
@@ -231,7 +237,7 @@ class LlistatDePlugins extends Component {
                         contEnll = contEnll + 1;
                         const styleEnll = (contEnll % 2 === 0)? { float: 'right', marginRight: '0px'} : { float: 'left'};
 
-                        enllasos.push(<li key={i} className="col-md-5 floatEnll" id={"nomEnll"+i} style={styleEnll}>
+                        enllasos.push(<li key={"enll"+i} className="col-md-5 floatEnll" id={"nomEnll"+i} style={styleEnll}>
                             <a href={s.url} title={s.nom} target="_blank" tabIndex={565+i} aria-labelledby={"nomEnll"+i}>
                                 <span>{s.nom}</span>
                             </a>
@@ -273,7 +279,7 @@ class LlistatDePlugins extends Component {
         this.state.items.forEach((s, i) => {
             if(s.gravetat !== 0) {
                 avisosPlugins.push(
-                    <div key={i + 10} className={`alert avis${s.gravetat} alert-dismissible fade show`} role="alert"
+                    <div key={"avis"+ i + 10} className={`alert avis${s.gravetat} alert-dismissible fade show`} role="alert"
                          id={"tancarAvis" + i + 10}>
                         {s.missatge}
                         <button type="button" className="close" data-dismiss="alert" aria-label={t('tancar')}
@@ -285,48 +291,49 @@ class LlistatDePlugins extends Component {
             }
         })
 
-        return (
+        return (<>
+                <div className="titolPaginaApp visioMobil">
+                    {t('iniciTitol')}
+                </div>
 
-            <div className="row mr-0 ml-0">
+                <div className="row mr-0 ml-0">
 
-                <DocumentTitle title={i18n.t('pipellaAutenticat') + " - " + t('menuTitol')} />
-                {/*issue #657*/}
-                {/*<div className="ocultarMobil">*/}
-                {/*    <DocumentTitle title={i18n.t('pipellaAutenticat') + " - " + t('menuTitol')} />*/}
-                {/*</div>*/}
+                    {/*<DocumentTitle title={i18n.t('pipellaAutenticat') + " - " + t('menuTitol')} />*/}
+                    <div className="ocultarMobil">
+                        <DocumentTitle title={i18n.t('pipellaAutenticat') + " - " + t('menuTitol')} />
+                    </div>
 
-                <div className="infoNoMenu">
+                    <div className="infoNoMenu">
 
-                    <h2 className="titol h2">{titolHeader}</h2>
-                    {/*issue #657*/}
-                    {/*<h2 className="titol h2 ocultarMobil">{titolHeader}</h2>*/}
+                        {/*<h2 className="titol h2">{titolHeader}</h2>*/}
+                        <h2 className="titol h2 ocultarMobil">{titolHeader}</h2>
 
-                    <div className="col-md-12 border-0 pl-0 pr-0">
+                        <div className="col-md-12 border-0 pl-0 pr-0">
 
-                        <p className="lh15 subtitol">{subtitolHeader}</p>
-                        {/*issue #657*/}
-                        {/*<p className="lh15 subtitol ocultarMobil">{subtitolHeader}</p>*/}
+                            {/*<p className="lh15 subtitol">{subtitolHeader}</p>*/}
+                            <p className="lh15 subtitol ocultarMobil">{subtitolHeader}</p>
 
-                        {avisosPlugins}
+                            {avisosPlugins}
 
-                        <div className="card-body imc--llista--capses">
+                            <div className="card-body imc--llista--capses">
 
-                            <div className="row mb-0">
-                                {allItems}
+                                <div className="row mb-0">
+                                    {allItems}
+                                </div>
+
                             </div>
 
                         </div>
 
+                        {titolEnunclic}
+                        {enllasosEnunclic}
+
                     </div>
 
-                    {titolEnunclic}
-                    {enllasosEnunclic}
+                    {botoTornarEnrera}
 
                 </div>
-
-                {botoTornarEnrera}
-
-            </div>
+            </>
 
         );
     }

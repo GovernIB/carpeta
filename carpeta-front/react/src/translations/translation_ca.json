@@ -20,6 +20,9 @@
 	"menuDades": "Dades personals",
 	"menuCanviarEntitat": "Canviar d'Entitat",
 	"menuPreguntesFrecuents": "Preguntes més freqüents",
+	"menuAvisLegal": "Avís legal",
+	"menuMapaWeb": "Mapa web",
+	"menuInici": "Inici",
 
 
 	"menuLateralGovern": "Govern Illes Balears",
@@ -201,6 +204,7 @@
 	"iniciPrivatTitol": "INICI PRIVAT",
 	"iniciPrivatEnllasos": "EN UN CLIC",
 	"iniciPrivatDescEnllas": "Enllaços ràpids i directes per a la ciutadania.",
+	"iniciTitol": "INICI",
 
 	"suportTanca": "Tancau",
 	"suportAqui": "Consultau la nostra ajuda",

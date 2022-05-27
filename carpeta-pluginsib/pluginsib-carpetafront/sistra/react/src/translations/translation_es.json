@@ -22,13 +22,16 @@
     "sistraModalBotoCancelar": "Cerrar",
     "sistraModalBotoContinuar": "Ver detalle",
     "carpeta_paginacion_1": "Mostrando elementos del ",
+    "carpeta_paginacion_1_App": "Del ",
     "carpeta_paginacion_2": " al ",
     "carpeta_paginacion_3": " de un total de ",
+    "carpeta_paginacion_3_App": " de ",
     "carpeta_paginacion_4": " elementos",
     "carpeta_criterio_1": "Búsqueda entre el ",
     "carpeta_criterio_2": " y el ",
     "carpeta_criterio_3": " con el estado '",
     "carpeta_criterio_4": "'",
+    "carpeta_criterio_5": " a ",
 
     "registro_titulo_detalle": "Detalle del Registro de entrada con NÚM. REG.",
     "registro_entrada": "Registro de entrada",
@@ -103,5 +106,7 @@
     "downloadjustificantText": "Fitxer descarregat. Fes click per descarregar-ho de nou",
 
     "registro_regPorPagina": "Registros por página",
-    "sistraProblema": "Ha habido algún problema de comunicación."
+    "sistraProblema": "Ha habido algún problema de comunicación.",
+    "sistraDates": "Fechas",
+    "sistraCerca": "Búsqueda"
 }

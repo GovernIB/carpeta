@@ -38,7 +38,8 @@ class Sistra extends Component {
             numeroRegistro: null,
             error: null,
             filter_regPorPagina: 5,
-            cercaRegistres: 5
+            cercaRegistres: 5,
+            formVisible: false
         };
 
         this.handleChangeDataInici = this.handleChangeDataInici.bind(this);
@@ -46,6 +47,7 @@ class Sistra extends Component {
         this.handleChangeEstat = this.handleChangeEstat.bind(this);
         this.handleRegPorPaginaFilterParam = this.handleRegPorPaginaFilterParam.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.mostrarForm = this.mostrarForm.bind(this);
 
         const getLocale = locale => require(`date-fns/locale/${sessionStorage.getItem("langActual")}/index.js`)
         this.locale = getLocale(this.props.language);
@@ -57,6 +59,18 @@ class Sistra extends Component {
         this.fechaFin;
         this.estado;
 
+    }
+
+    mostrarForm(){
+        if(document.getElementById("fechaBusqueda").classList.contains("ocultarMobil")) {
+            document.getElementById("fechaBusqueda").classList.remove("ocultarMobil");
+        }
+        document.getElementById("idCriteris").style.display = "none";
+
+        this.setState({
+            ...this.state,
+            formVisible: true
+        });
     }
 
     canviatIdioma(lng) {
@@ -624,12 +638,15 @@ class Sistra extends Component {
         let taulaTramits;
         let detallRegistreContainer;
         let selectRegistres;
+        let criteris;
+
+        let cardTramits = [];
 
         formulari = <>
-            <Form id="fechaBusqueda" style={{ marginBottom: '20px'}}>
-                <Container style={{ width: '95%', paddingLeft: '0', margin: '0' }}>
+            <Form id="fechaBusqueda" style={{ marginBottom: '20px'}} className="ocultarMobil">
+                <Container style={{ width: '95%', paddingLeft: '0', margin: '0' }} className="ampleTotalApp">
                     <Row>
-                        <Col className="col-xs-12 mb-3">
+                        <Col className="col-xs-12 mb-3 campFormApp">
                             <Form.Group>
                                 <Form.Label>{t('sistraDataInici')}</Form.Label>
 
@@ -662,7 +679,7 @@ class Sistra extends Component {
                                 />
                             </Form.Group>
                         </Col>
-                        <Col className="col-xs-12 mb-3">
+                        <Col className="col-xs-12 mb-3 campFormApp">
                             <Form.Group>
                                 <Form.Label>{t('sistraDataFi')}</Form.Label>
                                 <DatePicker
@@ -695,7 +712,7 @@ class Sistra extends Component {
                                 />
                             </Form.Group>
                         </Col>
-                        <Col className="col-xs-12 mb-3">
+                        <Col className="col-xs-12 mb-3 campFormApp">
                             <Form.Group>
                                 <Form.Label id="estado">{t('sistraEstat')}</Form.Label>
                                 <Form.Select id="tramiteFinalizado"
@@ -714,7 +731,7 @@ class Sistra extends Component {
                         </Col>
                     </Row>
                     <Row style={{ width: 'fit-content', display: 'none'}}>
-                        <Col className="col-xs-12 mb-3">
+                        <Col className="col-xs-12 mb-3 campFormApp">
                             <Form.Group>
                                 <Form.Label>{t('registro_regPorPagina')}</Form.Label>
                                 <Form.Select id="regPorPagina"
@@ -736,8 +753,8 @@ class Sistra extends Component {
                             <div className="alert alert-danger" role="alert" id="errorMsg"/>
                         </div>
                     </Row>
-                    <Row className="col-md-3 pl-0 row" style={{zIndex: '4'}}>
-                        <Button type="submit" className="btn btn-primary carpeta-btn ml-3 mt-2" onClick={(e) => {this.handleSubmit(e)}} tabindex="504">{t('sistraCercaBoto')}</Button>
+                    <Row className="col-md-3 pl-3 row botoFormApp" style={{zIndex: '4'}}>
+                        <Button type="submit" className="btn btn-primary carpeta-btn mt-2" onClick={(e) => {this.handleSubmit(e)}} tabindex="504">{t('sistraCercaBoto')}</Button>
                     </Row>
                 </Container>
             </Form>
@@ -751,8 +768,21 @@ class Sistra extends Component {
                     </div>;
 
             selectRegistres = '';
+            criteris = '';
 
         } else {
+
+                criteris = <div id="idCriteris">
+                    <div style={{float: 'left', marginTop: '9px;', paddingBottom: '0.7em'}} className="col-md-10 pr-3 visioMobil">
+                        <span className="oi oi-calendar iconaFormApp" title={t('sistraDates')} style={{verticalAlign: 'sub'}}/>
+                        <span className="pl-3">{$.dateFormatCerca(this.state.dataInici) +
+                        t('carpeta_criterio_5') +
+                        $.dateFormatCerca(this.state.dataFi)}</span>
+                    </div>
+                    <div style={{float: 'rigth', marginTop: '9px;', paddingBottom: '0.7em', textAlign: 'end'}} onClick={() => {this.mostrarForm();}} className="col-md-1 visioMobil">
+                        <span className="oi oi-magnifying-glass iconaFormApp" title={t('sistraCerca')}/>
+                    </div>
+                </div>
 
                 if(this.state.data && typeof (this.state.total_items) !== undefined && typeof (this.state.data) !== undefined && this.state.total_items !== 0) {
                     let paginationNumbers = [];
@@ -766,7 +796,7 @@ class Sistra extends Component {
 
                     selectRegistres = <div className="col-md-12 border-0 p-0">
                                         <div className="col-sd-1 pb-2 margRegSelect">
-                                            <p className="lh15 mb-1">
+                                            <p className="lh15 mb-1 mRegSelApp">
                                                 {t('sistraMostra')}
                                                 <Form.Select id="rPP"
                                                     name="rPP" className="focusIn"
@@ -785,17 +815,16 @@ class Sistra extends Component {
                                     </div>;
 
                     taulaTramits = <>
-                        <Table responsive striped bordered hover style={tamanyTaula}>
+                        <Table responsive striped bordered hover style={tamanyTaula} className="ocultarMobil">
                             <thead className="table-success">
-                            <tr>
-                                <th>{t('sistraTramit')}</th>
-                                <th style={{whiteSpace: 'nowrap'}}>{t('sistraData')}</th>
-                                <th style={{whiteSpace: 'nowrap'}}>{t('sistraEstat')}</th>
-                            </tr>
+                                <tr>
+                                    <th>{t('sistraTramit')}</th>
+                                    <th style={{whiteSpace: 'nowrap'}}>{t('sistraData')}</th>
+                                    <th style={{whiteSpace: 'nowrap'}}>{t('sistraEstat')}</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            {this.state.data.map(({
-                                                      descripcionTramite,
+                            {this.state.data.map(({   descripcionTramite,
                                                       fechaInicio,
                                                       pendiente,
                                                       numero,
@@ -803,47 +832,53 @@ class Sistra extends Component {
                                                       versionSistra,
                                                       mostraModal,
                                                       tipo
-                                                  }) => {
+                                                  },i) => {
 
                                 if (numero !== '')
-                                    return <tr className="clickableRow" data-numero={numero} data-url={url}
-                                               data-version={versionSistra} style={cursorPointer}
-                                               data-mostramodal={$.siNo(mostraModal)}
-                                               data-pending={$.siNo(pendiente)} tabIndex="511"
-                                               onClick={(e) => this.handleItemClick(numero)}>
-                                        <td>{descripcionTramite}</td>
-                                        <td data-order={$.dateOrder(fechaInicio)}
-                                            style={{whiteSpace: 'nowrap'}}>{$.dateFormat(fechaInicio)}</td>
-                                        <td style={{whiteSpace: 'nowrap'}}>{$.estatTramit(pendiente, mostraModal, tipo, numero)}</td>
-                                    </tr>
+                                    return <>
+                                                <tr className="clickableRow" data-numero={numero} data-url={url}
+                                                           data-version={versionSistra} style={cursorPointer}
+                                                           data-mostramodal={$.siNo(mostraModal)}
+                                                           data-pending={$.siNo(pendiente)} tabIndex="511"
+                                                           onClick={(e) => this.handleItemClick(numero)}>
+                                                    <td>{descripcionTramite}</td>
+                                                    <td data-order={$.dateOrder(fechaInicio)}
+                                                        style={{whiteSpace: 'nowrap'}}>{$.dateFormat(fechaInicio)}</td>
+                                                    <td style={{whiteSpace: 'nowrap'}}>{$.estatTramit(pendiente, mostraModal, tipo, numero)}</td>
+                                                </tr>
+                                            </>
 
                                 if (numero === '' && pendiente && mostraModal)
-                                    return <tr className="clickableRow" data-numero={numero} data-url={url}
-                                               data-version={versionSistra} style={cursorPointer}
-                                               data-mostramodal={$.siNo(mostraModal)}
-                                               data-pending={$.siNo(pendiente)} tabIndex="511"
-                                               onClick={(e) => this.openModalConfirm(url)}>
-                                        <td>{descripcionTramite}</td>
-                                        <td data-order={$.dateOrder(fechaInicio)}
-                                            style={{whiteSpace: 'nowrap'}}>{$.dateFormat(fechaInicio)}</td>
-                                        <td style={{whiteSpace: 'nowrap'}}>{$.estatTramit(pendiente, mostraModal, tipo, numero)}</td>
-                                    </tr>
+                                    return <>
+                                            <tr className="clickableRow" data-numero={numero} data-url={url}
+                                                   data-version={versionSistra} style={cursorPointer}
+                                                   data-mostramodal={$.siNo(mostraModal)}
+                                                   data-pending={$.siNo(pendiente)} tabIndex="511"
+                                                   onClick={(e) => this.openModalConfirm(url)}>
+                                                <td>{descripcionTramite}</td>
+                                                <td data-order={$.dateOrder(fechaInicio)}
+                                                    style={{whiteSpace: 'nowrap'}}>{$.dateFormat(fechaInicio)}</td>
+                                                <td style={{whiteSpace: 'nowrap'}}>{$.estatTramit(pendiente, mostraModal, tipo, numero)}</td>
+                                            </tr>
+                                    </>
 
                                 if (numero === '' && (!pendiente || !mostraModal))
-                                    return <tr className="clickableRow" data-numero={numero} data-url={url}
-                                               data-version={versionSistra} style={cursorPointer}
-                                               data-mostramodal={$.siNo(mostraModal)}
-                                               data-pending={$.siNo(pendiente)} tabIndex="511"
-                                               onClick={(e) => window.open(url, '_blank')}>
-                                        <td>{descripcionTramite}</td>
-                                        <td data-order={$.dateOrder(fechaInicio)}
-                                            style={{whiteSpace: 'nowrap'}}>{$.dateFormat(fechaInicio)}</td>
-                                        <td style={{whiteSpace: 'nowrap'}}>{$.estatTramit(pendiente, mostraModal, tipo, numero)}</td>
-                                    </tr>
+                                    return <>
+                                            <tr className="clickableRow" data-numero={numero} data-url={url}
+                                                       data-version={versionSistra} style={cursorPointer}
+                                                       data-mostramodal={$.siNo(mostraModal)}
+                                                       data-pending={$.siNo(pendiente)} tabIndex="511"
+                                                       onClick={(e) => window.open(url, '_blank')}>
+                                                <td>{descripcionTramite}</td>
+                                                <td data-order={$.dateOrder(fechaInicio)}
+                                                    style={{whiteSpace: 'nowrap'}}>{$.dateFormat(fechaInicio)}</td>
+                                                <td style={{whiteSpace: 'nowrap'}}>{$.estatTramit(pendiente, mostraModal, tipo, numero)}</td>
+                                            </tr>
+                                    </>
                             })}
                             </tbody>
                         </Table>
-                        <div style={{float: 'left', marginTop: '9px;', width: '60%'}}>
+                        <div style={{float: 'left', marginTop: '9px;', width: '60%'}} className="ocultarMobil">
                             {t('carpeta_paginacion_1') +
                             ((parseInt(this.state.pagination_active, 10) - 1) * parseInt(this.state.cercaRegistres, 10) + 1) +
                             t('carpeta_paginacion_2') +
@@ -855,22 +890,92 @@ class Sistra extends Component {
                             this.state.total_items +
                             t('carpeta_paginacion_4')}
                         </div>
-                        <Pagination style={{float: 'right', paddingRight: '0.7em'}}>
+                        <Pagination style={{float: 'right', paddingRight: '0.7em'}} className="ocultarMobil">
                             {paginationNumbers}
                         </Pagination>
                     </>
 
+                    this.state.data.map(({   descripcionTramite,
+                                             fechaInicio,
+                                             pendiente,
+                                             numero,
+                                             url,
+                                             versionSistra,
+                                             mostraModal,
+                                             tipo
+                                         },i) => {
+
+                        if (numero !== '')
+                            cardTramits.push(
+                                <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil" key={i} tabIndex={502+i} data-numero={numero} data-url={url}
+                                     data-version={versionSistra} style={cursorPointer} data-mostramodal={$.siNo(mostraModal)}
+                                     data-pending={$.siNo(pendiente)} onClick={(e) => this.handleItemClick(numero)}>
+                                    <div className="col-sm-1 float-left">
+                                        <span className="oi oi-pencil iconaFormApp" title={t('sistraDates')} style={{verticalAlign: 'sub'}}/>
+                                    </div>
+                                    <div className="col-sm-10 float-right">
+                                        <p className="card-text pl-1 mt-0 font-weight-bold" style={{color: 'rgb(102, 102, 102)'}}>{descripcionTramite}</p>
+                                        <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}>{$.dateFormat(fechaInicio)}</p>
+                                        <h3 className="titolPlugin titol h3 visioMobil titolPluginApp">{$.estatTramit(pendiente, mostraModal, tipo, numero)}</h3>
+                                    </div>
+                                </div>
+                            )
+
+                        if (numero === '' && pendiente && mostraModal)
+                            cardTramits.push(
+                                <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil"  key={i} tabIndex={502+i} data-numero={numero} data-url={url}
+                                     data-version={versionSistra} style={cursorPointer} data-mostramodal={$.siNo(mostraModal)}
+                                     data-pending={$.siNo(pendiente)} onClick={(e) => this.openModalConfirm(url)}>
+                                    <div className="col-sm-1 float-left">
+                                        <span className="oi oi-circle-check iconaFormApp" title={t('sistraDates')} style={{verticalAlign: 'sub'}}/>
+                                    </div>
+                                    <div className="col-sm-10 float-right">
+                                        <p className="card-text pl-1 mt-0 font-weight-bold" style={{color: 'rgb(102, 102, 102)'}}>{descripcionTramite}</p>
+                                        <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}>{$.dateFormat(fechaInicio)}</p>
+                                        <h3 className="titolPlugin titol h3 visioMobil titolPluginApp">{$.estatTramit(pendiente, mostraModal, tipo, numero)}</h3>
+                                    </div>
+                                </div>
+                            )
+
+                        if (numero === '' && (!pendiente || !mostraModal))
+                            cardTramits.push(
+                                <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil"  key={i} tabIndex={502+i} data-numero={numero} data-url={url}
+                                     data-version={versionSistra} style={cursorPointer} data-mostramodal={$.siNo(mostraModal)}
+                                     data-pending={$.siNo(pendiente)} onClick={(e) => window.open(url, '_blank')}>
+                                    <div className="col-sm-1 float-left">
+                                        <span className="oi oi-pencil iconaFormApp" title={t('sistraDates')} style={{verticalAlign: 'sub'}}/>
+                                    </div>
+                                    <div className="col-sm-10 float-right">
+                                        <p className="card-text pl-1 mt-0 font-weight-bold" style={{color: 'rgb(102, 102, 102)'}}>{descripcionTramite}</p>
+                                        <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}>{$.dateFormat(fechaInicio)}</p>
+                                        <h3 className="titolPlugin titol h3 visioMobil titolPluginApp">{$.estatTramit(pendiente, mostraModal, tipo, numero)}</h3>
+                                    </div>
+                                </div>
+                            )
+                    })
+
+                    cardTramits.push(<div className="visioMobil">
+                        <div style={{float: 'left', marginTop: '9px;', width: '60%'}} className="visioMobil">
+                            {t('carpeta_paginacion_1_App') +
+                            ((parseInt(this.state.pagination_active, 10) - 1) * parseInt(this.state.cercaRegistres, 10) + 1) +
+                            t('carpeta_paginacion_2') +
+                            (((parseInt(this.state.pagination_active, 10) * parseInt(this.state.cercaRegistres, 10)) <= parseInt(this.state.total_items, 10))
+                                    ? parseInt(this.state.pagination_active, 10) * parseInt(this.state.cercaRegistres, 10)
+                                    : this.state.total_items
+                            ) +
+                            t('carpeta_paginacion_3_App') +
+                            this.state.total_items +
+                            t('carpeta_paginacion_4')}
+                        </div>
+                        <Pagination style={{float: 'right', paddingRight: '0.7em'}}>
+                            {paginationNumbers}
+                        </Pagination>
+                        </div>
+                    )
+
+
                 } else if (this.state.total_items === 0 && this.state.data !== null) {
                     taulaTramits = <>
-                        {/*<div style={{float: 'left', marginTop: '9px;', paddingBottom: '0.7em'}}>*/}
-                        {/*    {t('carpeta_criterio_1') +*/}
-                        {/*    $.dateFormatCerca(this.state.dataInici) +*/}
-                        {/*    t('carpeta_criterio_2') +*/}
-                        {/*    $.dateFormatCerca(this.state.dataFi) +*/}
-                        {/*    t('carpeta_criterio_3') +*/}
-                        {/*    $.nomEstat(this.state.estat) +*/}
-                        {/*    t('carpeta_criterio_4')}*/}
-                        {/*</div>*/}
                         <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%'}}
                              role="alert">{t('sistraBuid')}</div>
                     </>
@@ -879,32 +984,38 @@ class Sistra extends Component {
         }
 
         
-        return (
-            <div className="infoNoMenu">
-                {this.state.numeroRegistro == null && <>
-                    <h2 className="titol h2">{this.props.titles[i18n.language]}</h2>
-                    <div className="col-md-12 border-0 float-left p-0">
-                        <p className="lh15">{this.props.subtitles[i18n.language]} </p>
-                        <div className="infoNoMenu">
-                            <div className="col-md-12 border-0 float-left p-0">
-                                {formulari}
-                                {this.state.error && <div className="alert alert-danger hide" role="alert">{this.state.error}</div>}
-                                {content}
+        return (<>
+                <div className="titolPaginaApp visioMobil">
+                    {this.props.titles[i18n.language]}
+                </div>
+                <div className="infoNoMenu">
+                    {this.state.numeroRegistro == null && <>
+                        <h2 className="titol h2 ocultarMobil">{this.props.titles[i18n.language]}</h2>
+                        <div className="col-md-12 border-0 float-left p-0">
+                            <p className="lh15 ocultarMobil">{this.props.subtitles[i18n.language]} </p>
+                            <div className="infoNoMenu">
+                                <div className="col-md-12 border-0 float-left p-0">
+                                    {!this.state.formVisible && criteris}
+                                    {formulari}
+                                    {this.state.error && <div className="alert alert-danger hide" role="alert">{this.state.error}</div>}
+                                    {content}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="float-left" style={{width: '97%', position: 'relative'}}>
-                        {selectRegistres}
-                        {taulaTramits}
-                    </div>
-                    <div className="col-md-12 border-0 float-left p-0" id="botoTornarSistra" style={{ marginTop: '20px' }}>
-                        <button type="button" data-toggle="modal" onClick={() => {
-                            window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                        }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarSistra">{t('sistraTornar')}</button>
-                    </div>
-                </>}
-                {this.state.numeroRegistro != null && detallRegistreContainer}
-            </div>
+                        <div className="float-left" style={{width: '97%', position: 'relative'}}>
+                            {selectRegistres}
+                            {taulaTramits}
+                            {cardTramits}
+                        </div>
+                        <div className="col-md-12 border-0 float-left p-0" id="botoTornarSistra" style={{ marginTop: '20px' }}>
+                            <button type="button" data-toggle="modal" onClick={() => {
+                                window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
+                            }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarSistra">{t('sistraTornar')}</button>
+                        </div>
+                    </>}
+                    {this.state.numeroRegistro != null && detallRegistreContainer}
+                </div>
+            </>
             );
             
     }

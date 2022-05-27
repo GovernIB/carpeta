@@ -375,12 +375,14 @@ class DatosMatricula extends Component {
 
         let formulari;
         let content;
+        let contentApp;
         let alerta;
 
         formulari = <>
             <Form id="dadesMatricula" style={{ marginBottom: '20px'}}>
-                <Row style={{ width: 'fit-content'}}>
-                    <Col className="col-xs-12 col-mb-6">
+                {/*<Row style={{ width: 'fit-content'}}>*/}
+                <Row className="columnReprendre">
+                    <Col md={4} xs={12} className="ajustaForm">
                         <Form.Select id="radioOpcio"
                                      name="radioOpcio" className="form-control form-control-sm focusIn"
                                      value={this.state.radioSelectedOption}
@@ -397,11 +399,11 @@ class DatosMatricula extends Component {
                         </Form.Select>
                     </Col>
                 </Row>
-                <Container style={{ width: '95%', paddingLeft: '0', margin: '0' }}>
+                <Container style={{ width: '95%', paddingLeft: '0', margin: '0' }} className="columnReprendre">
 
                     {this.state.radioSelectedOption === 'option2' &&
                     <Row className="pt-2">
-                        <Col md={4} xs={12} className="ajustaForm">
+                        <Col md={4} xs={12} className="ajustaForm maxW97">
                             <Form.Group>
                                 <Form.Label id="tipoDocum">{t('pinbalMatriculaTipusDocument')}</Form.Label>
                                 <Form.Select id="tipusDocument"
@@ -423,7 +425,7 @@ class DatosMatricula extends Component {
                                 </Form.Select>
                             </Form.Group>
                         </Col>
-                        <Col md={4} xs={12} className="ajustaForm">
+                        <Col md={4} xs={12} className="ajustaForm maxW97">
                             <Form.Group>
                                 <Form.Label>{t('pinbalMatriculaDNI')}</Form.Label>
                                 <Form.Control
@@ -487,7 +489,7 @@ class DatosMatricula extends Component {
                             </Col>
                         </Row>
                         <Row className="pt-2">
-                            <Col md={2} xs={12} className="ajustaForm70">
+                            <Col md={3} xs={12} className="ajustaForm">
                                 <Form.Group>
                                     <Form.Label style={{ float: 'left', paddingTop: '0.5em'}}>{t('pinbalMatriculaNaixement')}</Form.Label>
                                     <DatePicker
@@ -569,61 +571,97 @@ class DatosMatricula extends Component {
                             cursFutur = <div className="pt-2"><dt className="col-sm-3">{t('pinbalMatriculaFutura')}</dt><dd className="col-sm-7">{data.cursoMatriculaFutura}</dd></div>
                         }
 
-                        content = <div className="contenedorInfoPersonal mt-2">
-                            <dl className="row">
-                                {nom}
-                                {llinatge1}
-                                {llinatge2}
-                                {document}
-                                {dataNaixe}
-                                {cursVigent}
-                                {cursFutur}
-                            </dl>
+                        content = <div className="ocultarMobil">
+                                {alerta}
+                                <div className="contenedorInfoPersonal mt-2">
+                                    <dl className="row">
+                                        {nom}
+                                        {llinatge1}
+                                        {llinatge2}
+                                        {document}
+                                        {dataNaixe}
+                                        {cursVigent}
+                                        {cursFutur}
+                                    </dl>
+                                </div>;
+                            </div>
+
+                        contentApp = <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil wAuto mt-5" tabIndex={510}>
+                            <div className="col-sm-1 float-left">
+                                <span className="oi oi-bell iconaFormApp" title={t('pinbalMatriculaConsulta')} style={{verticalAlign: 'sub'}}/>
+                            </div>
+                            <div className="col-sm-10 float-right">
+                                {alerta}
+                                {data.alumno.nombre && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalMatriculaNom')}: </b>{data.alumno.nombre} {data.alumno.apellido1} {data.alumno.apellido2}</p>}
+                                {data.alumno.idTitular.documentacion && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalMatriculaDocument')}: </b>{data.alumno.idTitular.documentacion}</p>}
+                                {data.alumno.fechaNacimiento && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalMatriculaNaixement')}: </b>{data.alumno.fechaNacimiento}</p>}
+                                {data.cursoMatriculaVigente && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalMatriculaVigent')}: </b>{data.cursoMatriculaVigente}</p>}
+                                {data.cursoMatriculaFutura && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalMatriculaFutura')}: </b>{data.cursoMatriculaFutura}</p>}
+                            </div>
                         </div>;
 
                     } else if (data.codRespuesta === '') {
                         alerta = <div className="alert alert-danger" role="alert">
                             {t('pinbalMatriculaError')} : {data.error}
                         </div>;
+                        content = <div className="ocultarMobil">{alerta}</div>;
                     } else if (data.codRespuesta === '1') {
                         alerta = <div className="alert alert-danger" role="alert">
                             {t('pinbalMatriculaFecha')} {data.fechaProceso} : {t('pinbalMatriculaCodigoInicio')} {this.mostrarDocument()} {t('pinbalMatriculaCodigo1')}
                         </div>;
+                        content = <div className="ocultarMobil">{alerta}</div>;
                     } else if (data.codRespuesta === '2') {
                         alerta = <div className="alert alert-warning" role="alert">
                             {t('pinbalMatriculaFecha')} {data.fechaProceso} : {t('pinbalMatriculaCodigo2')} {this.mostrarDocument()} {t('pinbalMatriculaCodigoFin')}
                         </div>;
+                        content = <div className="ocultarMobil">{alerta}</div>;
                     } else if (data.codRespuesta === '3') {
                         alerta = <div className="alert alert-warning" role="alert">
                             {t('pinbalMatriculaFecha')} {data.fechaProceso} : {t('pinbalMatriculaCodigo3')} {this.mostrarDocument()} {t('pinbalMatriculaCodigoFin')}
                         </div>;
+                        content = <div className="ocultarMobil">{alerta}</div>;
                     }
+
+                    contentApp = <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil wAuto mt-5" tabIndex={510}>
+                        <div className="col-sm-1 float-left">
+                            <span className="oi oi-bell iconaFormApp" title={t('pinbalMatriculaConsulta')} style={{verticalAlign: 'sub'}}/>
+                        </div>
+                        <div className="col-sm-10 float-right">
+                            {alerta}
+                        </div>
+                    </div>;
+
                 }
 
             }
         }
 
         
-        return (
-            <div className="infoNoMenu">
-                <h2 className="titol h2">{this.props.titles[i18n.language]}</h2>
-                <div className="col-md-12 border-0 float-left p-0">
-                    <p className="lh15">{this.props.subtitles[i18n.language]} </p>
+        return (<>
+                    <div className="titolPaginaApp visioMobil">
+                        {this.props.titles[i18n.language]}
+                    </div>
                     <div className="infoNoMenu">
+                        <h2 className="titol h2 ocultarMobil">{this.props.titles[i18n.language]}</h2>
                         <div className="col-md-12 border-0 float-left p-0">
-                                {formulari}
-                                {alerta}
-                                {content}
-                            <div className="col-md-12 border-0 float-left p-0" id="botoTornarMatricula" style={{ marginTop: '20px' }}>
-                                <button type="button" data-toggle="modal" onClick={() => {
-                                    window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                                }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarMatricula">{t('pinbalMatriculaTornar')}</button>
-                            </div>
+                            <p className="lh15 ocultarMobil">{this.props.subtitles[i18n.language]} </p>
+                            <div className="infoNoMenu">
+                                <div className="col-md-12 border-0 float-left p-0">
+                                        {formulari}
+                                        {/*{alerta}*/}
+                                        {content}
+                                        {contentApp}
+                                    <div className="col-md-12 border-0 float-left p-0" id="botoTornarMatricula" style={{ marginTop: '20px' }}>
+                                        <button type="button" data-toggle="modal" onClick={() => {
+                                            window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
+                                        }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarMatricula">{t('pinbalMatriculaTornar')}</button>
+                                    </div>
 
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </>
             );
             
     }

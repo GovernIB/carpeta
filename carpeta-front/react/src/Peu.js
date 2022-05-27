@@ -106,9 +106,8 @@ class Peu extends Component {
 					<div className="imc-peu-opcions">
 
 						<div className="pb-3 col2peu" id="botoSuportModal">
-							<button type="button" id="dialogAjuda" data-toggle="modal" data-target="#ajudaModal" className="botoSuport" tabIndex="611" aria-labelledby="botoSuportModal">{t('suportAqui')}</button>
-							{/*issue #657*/}
-							{/*<button type="button" id="dialogAjuda" data-toggle="modal" data-target="#ajudaModal" className="botoSuport font13App" tabIndex="611" aria-labelledby="botoSuportModal">{t('suportAqui')}</button>*/}
+							{/*<button type="button" id="dialogAjuda" data-toggle="modal" data-target="#ajudaModal" className="botoSuport" tabIndex="611" aria-labelledby="botoSuportModal">{t('suportAqui')}</button>*/}
+							<button type="button" id="dialogAjuda" data-toggle="modal" data-target="#ajudaModal" className="botoSuport font13App" tabIndex="611" aria-labelledby="botoSuportModal">{t('suportAqui')}</button>
 						</div>
 
 						<EnllasosPeuCentral autenticat={autenticat} />

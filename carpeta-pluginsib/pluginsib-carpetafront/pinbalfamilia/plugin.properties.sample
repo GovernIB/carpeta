@@ -1,4 +1,4 @@
-# Class => org.fundaciobit.pluginsib.carpetafront.pinbalfamilia.PinbalContratacionesCarpetaFrontPlugin
+# Class => org.fundaciobit.pluginsib.carpetafront.pinbalfamilia.PinbalFamiliaCarpetaFrontPlugin
 
 # Connexió
 es.caib.carpeta.pluginsib.carpetafront.pinbalfamilia.baseurl=[=SP["es.caib.carpeta.pluginsib.carpetafront.dadespersonals.pinbal.baseurl"]]

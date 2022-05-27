@@ -92,6 +92,7 @@ class DatosConvivencia extends Component {
         const { t, localitats } = this.props;
 
         let content;
+        let contentApp;
 
         const municipis = (localitats) ? JSON.parse(Buffer.from(this.props.localitats, 'base64')) : listaProvinciasMunicipios.localidades;
 
@@ -101,7 +102,7 @@ class DatosConvivencia extends Component {
                  <form id="formulario" onSubmit={this.handleSubmit} method="GET">
                     <div className="form-group">
                         <label for="codigoMunicipio">{t('pinbalConvivenciaMunicipioLabel')}</label>
-                        <div class="col-md-4 p-0 col-sm-6" style={{width:'90%'}}>
+                        <div className="col-md-4 p-0 col-sm-6" style={{width:'90%'}}>
                             <select name="codigoMunicipio" id="codigoMunicipio" className="form-control"  value={this.state.municipio} onChange={this.handleMunicipio}>
                                 <option value="">{t('pinbalConvivenciaSelecciona')}</option>
                                 {
@@ -123,7 +124,7 @@ class DatosConvivencia extends Component {
                     <form id="formulario" onSubmit={this.handleSubmit} method="GET">
                         <div className="form-group">
                             <label for="codigoMunicipio">{t('pinbalConvivenciaMunicipioLabel')}</label>
-                            <div class="col-md-4 p-0 col-sm-6" style={{width:'90%'}}>
+                            <div className="col-md-4 p-0 col-sm-6" style={{width:'90%'}}>
                                 <select name="codigoMunicipio" id="codigoMunicipio" className="form-control"  value={this.state.municipio} onChange={this.handleMunicipio}>
                                     <option value="">{t('pinbalConvivenciaSelecciona')}</option>
                                     {
@@ -138,6 +139,7 @@ class DatosConvivencia extends Component {
             } else {
 				
                 let alerta;
+                let alertaApp;
 
                 if ( data.codigo == '0003'){
 
@@ -236,41 +238,91 @@ class DatosConvivencia extends Component {
                             </dl>}
                         </div>
                     </>
-                    ; 
+
+                    alertaApp = <>
+                        <div className="alert alert-success" role="alert">
+                            {t('pinbalConvivenciaFecha')} {data.fecha} : {t('pinbalConvivenciaCodigo'+data.codigo)}
+                        </div>
+                        <br/>
+                        <div className="col-md-12 border-0 float-left p-0">
+                            <div className="row">
+                                <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaDistrito')}:</b> {data.distrito}</p>
+                                <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaSeccion')}:</b> {data.seccion}</p>
+                                <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaHoja')}:</b> {data.hoja}</p>
+                            </div>
+                            <hr/>
+                            <div className="row">
+                                <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaVia')}:</b> {data.tipoVia} {data.via}</p>
+                                {data.numero && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaNumero')}:</b> {data.numero}</p>}
+                                {data.kmt && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaKmt')}:</b> {data.kmt}</p>}
+                                {data.bloque && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaBloque')}:</b> {data.bloque}</p>}
+                                {data.portal && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaPortal')}:</b> {data.portal}</p>}
+                                {data.escalera && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaEscalera')}:</b> {data.escalera}</p>}
+                                {data.planta && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaPlanta')}:</b> {data.planta}</p>}
+                                {data.puerta && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaPuerta')}:</b> {data.puerta}</p>}
+                                <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaCodPostal')}:</b> {data.codPostal}</p>
+                            </div>
+                            <hr/>
+                            {periodosInscripcionContent && <div className="row">
+                                <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaPersonas')}:</b> <ul dangerouslySetInnerHTML={{__html: periodosInscripcionContent}}></ul></p>
+                            </div>}
+                            <hr/>
+                            {data.fechaExpedicion && <div className="row">
+                                <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaExpedicion')}:</b> {data.fechaExpedicion}</p>
+                            </div>}
+                        </div>
+                    </>
+
                 } else {
                     alerta = <div className="alert alert-warning" role="alert">
                         {t('pinbalConvivenciaFecha')} {data.fecha} : {t('pinbalConvivenciaCodigo'+data.codigo)}
                     </div>;
+
+                    alertaApp = alerta;
                 }
 
-				content = <div>
+				content = <div className="ocultarMobil">
                     {alerta}
 				</div>;
+
+                contentApp = <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil wAuto" tabIndex={510}>
+                    <div className="col-sm-1 float-left">
+                        <span className="oi oi-bell iconaFormApp" title={t('pinbalConvivenciaConsulta')} style={{verticalAlign: 'sub'}}/>
+                    </div>
+                    <div className="col-sm-10 float-right">
+                        {alertaApp}
+                    </div>
+                </div>;
 
             }
         }
 
         
-        return (
-            <div className="infoNoMenu">
-                <h2 className="titol h2">{this.props.titles[i18n.language]}</h2>
-                <div className="col-md-12 border-0 float-left p-0">
-                    <p className="lh15">{this.props.subtitles[i18n.language]} </p>
-                    <div className="infoNoMenu">
-                        <div className="col-md-12 border-0 float-left p-0">
-                            {content}
-                            <div  id="carregant" className="loader-container centrat d-none">
-                                <div className="loader"/>
-                            </div>
-                            <div className="col-md-12 border-0 float-left p-0" id="botoTornarDadesP" style={{ marginTop: '20px' }}>
-                                <button type="button" data-toggle="modal" onClick={() => {
-                                    window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                                }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarDadesP">{t('tornar')}</button>
+        return (<>
+                <div className="titolPaginaApp visioMobil">
+                    {this.props.titles[i18n.language]}
+                </div>
+                <div className="infoNoMenu">
+                    <h2 className="titol h2 ocultarMobil">{this.props.titles[i18n.language]}</h2>
+                    <div className="col-md-12 border-0 float-left p-0">
+                        <p className="lh15 ocultarMobil">{this.props.subtitles[i18n.language]} </p>
+                        <div className="infoNoMenu">
+                            <div className="col-md-12 border-0 float-left p-0">
+                                {content}
+                                {contentApp}
+                                <div  id="carregant" className="loader-container centrat d-none">
+                                    <div className="loader"/>
+                                </div>
+                                <div className="col-md-12 border-0 float-left p-0" id="botoTornarDadesP" style={{ marginTop: '20px' }}>
+                                    <button type="button" data-toggle="modal" onClick={() => {
+                                        window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
+                                    }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarDadesP">{t('pinbalConvivenciaTornar')}</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </>
             );
             
     }

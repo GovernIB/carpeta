@@ -70,21 +70,25 @@ class AvisLegal extends Component {
         }
 
 
-        return (
-            <div className="container-contenido" tabIndex="501">
-
-                <DocumentTitle title={t('peuAvis') + " - " + t('menuTitol')} />
-
-                {autenticat === '1' &&
-                <ExpirarSessio/>
-                }
-                <div className="infoNoMenu">
-                    <h2 className="titol h2">{t('avisLegalInformacio')}</h2>
-
-                    {htmlCode}
-
+        return (<>
+                <div className="titolPaginaApp">
+                    {t('avisLegalTitol')}
                 </div>
-            </div>
+                <div className="container-contenido" tabIndex="501">
+
+                    <DocumentTitle title={t('peuAvis') + " - " + t('menuTitol')} />
+
+                    {autenticat === '1' &&
+                    <ExpirarSessio/>
+                    }
+                    <div className="infoNoMenu">
+                        <h2 className="titol h2">{t('avisLegalInformacio')}</h2>
+
+                        {htmlCode}
+
+                    </div>
+                </div>
+            </>
         );
     }
 }

@@ -19,8 +19,10 @@
     "notibMostra":"Muestra ",
     "notibRegistres":" registros",
     "carpeta_paginacion_1": "Mostrando elementos del ",
+    "carpeta_paginacion_1_App": "Del ",
     "carpeta_paginacion_2": " al ",
     "carpeta_paginacion_3": " de un total de ",
+    "carpeta_paginacion_3_App": " de ",
     "carpeta_paginacion_4": " elementos",
 
     "carpeta_buscar" : "Buscar",
@@ -36,5 +38,7 @@
     "notibLlegides": "Leídas",
     "notibComunicacionsBuid": "No hay Comunicaciones",
     "notibNotificacionsBuid": "No hay Notificaciones",
-    "notibProblema": "Ha habido algún problema de comunicación."
+    "notibProblema": "Ha habido algún problema de comunicación.",
+    "notibCerca": "Búsqueda",
+    "notibTotesCriteri": "Todas Comunicaciones y Notificaciones"
 }

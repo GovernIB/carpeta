@@ -46,9 +46,8 @@ class DadesEntitat extends Component {
         }
 
         return (
-            <div className="imc-peu-govern" tabIndex="600">
-                {/*issue #657*/}
-            {/*<div className="imc-peu-govern ocultarMobil" tabIndex="600">*/}
+            // <div className="imc-peu-govern" tabIndex="600">
+            <div className="imc-peu-govern ocultarMobil" tabIndex="600">
                 <div style={{fontWeight:'bold', textTransform: 'uppercase'}}>© {entitatNom}</div>
                 <div dangerouslySetInnerHTML={content} />
             </div>

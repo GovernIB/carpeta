@@ -37,6 +37,7 @@
   "pinbalMatriculaErrorNom": "El campo 'Nombre titular' no puede estar vacío",
   "pinbalMatriculaErrorPrimerLLi": "El campo 'Primer apellido titular' no puede estar vacío",
   "pinbalMatriculaErrorData": "El campo 'Fecha nacimiento titular' no puede estar vacío",
-  "pinbalMatriculaError": "Error"
+  "pinbalMatriculaError": "Error",
+  "pinbalMatriculaConsulta": "Consulta"
 
 }

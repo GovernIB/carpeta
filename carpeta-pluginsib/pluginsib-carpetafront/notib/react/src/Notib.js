@@ -33,12 +33,14 @@ class Notib extends Component {
             total_items: 0,
             error: null,
             cercaRegistres: 5,
-            missatgeBuid: i18n.t('notibBuid')
+            missatgeBuid: i18n.t('notibBuid'),
+            formVisible: false
         };
 
         this.handleRegPorPaginaFilterParam = this.handleRegPorPaginaFilterParam.bind(this);
         this.handleTypeFilterParam = this.handleTypeFilterParam.bind(this);
         this.handleStatusFilterParam = this.handleStatusFilterParam.bind(this);
+        this.mostrarForm = this.mostrarForm.bind(this);
 
         this.handleSubmitSearcher = this.handleSubmitSearcher.bind(this);
 
@@ -48,6 +50,18 @@ class Notib extends Component {
         this.canviatIdioma = this.canviatIdioma.bind(this);
         i18n.on('languageChanged', this.canviatIdioma);
 
+    }
+
+    mostrarForm(){
+        if(document.getElementById("fechaBusqueda").classList.contains("ocultarMobil")) {
+            document.getElementById("fechaBusqueda").classList.remove("ocultarMobil");
+        }
+        document.getElementById("idCriteris").style.display = "none";
+
+        this.setState({
+            ...this.state,
+            formVisible: true
+        });
     }
 
     canviatIdioma(lng) {
@@ -425,12 +439,15 @@ class Notib extends Component {
         let content;
         let taulaNotib;
         let selectRegistres;
+        let criteris;
+
+        let cardNotificacions = [];
 
         let formulari = <>
-            <Form id="fechaBusqueda" style={{marginBottom: '20px'}}>
-                <Container style={{ width: '95%', paddingLeft: '0', margin: '0' }}>
+            <Form id="fechaBusqueda" style={{marginBottom: '20px'}} className="ocultarMobil">
+                <Container style={{ width: '95%', paddingLeft: '0', margin: '0' }} className="ampleTotalApp">
                     <Row>
-                        <div className="col-xs-12 mb-3 selectNotib">
+                        <div className="col-xs-12 mb-3 selectNotib campFormApp campFormNotibApp">
                             <Form.Group>
                                 <Form.Label style={{float:'left'}}>{t('notibTipus')}</Form.Label>
                                 <Form.Select id="tipo"
@@ -445,7 +462,7 @@ class Notib extends Component {
                                 </Form.Select>
                             </Form.Group>
                         </div>
-                        <div className="col-xs-12 mb-3 selectNotib">
+                        <div className="col-xs-12 mb-3 selectNotib campFormApp campFormNotibApp">
                             <Form.Group>
                                 <Form.Label style={{float:'left'}}>{t('notibComunicacionEstat')}</Form.Label>
                                 <Form.Select id="estat"
@@ -462,7 +479,7 @@ class Notib extends Component {
                         </div>
                     </Row>
                     <Row style={{ width: 'fit-content', display: 'none'}}>
-                        <Col className="col-xs-12 mb-3">
+                        <Col className="col-xs-12 mb-3 campFormApp">
                             <Form.Group>
                                 <Form.Label>{t('registro_regPorPagina')}</Form.Label>
                                 <Form.Select id="regPorPagina"
@@ -484,8 +501,8 @@ class Notib extends Component {
                             <div className="alert alert-danger" role="alert" id="errorMsg"/>
                         </div>
                     </Row>
-                    <Row className="col-md-3 pl-0 row" style={{zIndex: '4'}}>
-                        <Button type="submit" id="botoSubmit" className="btn btn-primary carpeta-btn ml-3 mt-2" onClick={(e) => {this.handleSubmitSearcher(e)}} tabindex="505">{t('carpeta_buscar')}</Button>
+                    <Row className="col-md-3 row botoFormApp" style={{zIndex: '4'}}>
+                        <Button type="submit" id="botoSubmit" className="btn btn-primary carpeta-btn mt-2" onClick={(e) => {this.handleSubmitSearcher(e)}} tabindex="505">{t('carpeta_buscar')}</Button>
                     </Row>
                 </Container>
             </Form>
@@ -498,8 +515,20 @@ class Notib extends Component {
 
             selectRegistres = "";
             taulaNotib = "";
+            criteris = '';
 
         } else {
+
+            criteris = <div id="idCriteris">
+                <div style={{float: 'left', marginTop: '9px;', paddingBottom: '0.7em'}} className="col-md-10 pr-3 visioMobil">
+                    <span className="oi oi-eye iconaFormApp" title={t('sistraDates')} style={{verticalAlign: 'sub'}}/>
+                    <span className="pl-3">{t('notibTotesCriteri')}</span>
+                </div>
+                <div style={{float: 'rigth', marginTop: '9px;', paddingBottom: '0.7em', textAlign: 'end'}} onClick={() => {this.mostrarForm();}} className="col-md-1 visioMobil">
+                    <span className="oi oi-magnifying-glass iconaFormApp" title={t('notibCerca')}/>
+                </div>
+            </div>
+
             content = "";
 
             const Header = [t('notibComunicacionFecha'), t('notibComunicacionConcepte'), t('notibComunicacionEstat')];
@@ -515,7 +544,7 @@ class Notib extends Component {
 
                 selectRegistres = <div className="col-md-12 border-0 p-0">
                     <div className="col-sd-1 pb-2 margRegSelect">
-                        <p className="lh15 mb-1">
+                        <p className="lh15 mb-1 mRegSelApp">
                             {t('notibMostra')}
                             <Form.Select id="rPP"
                                          name="rPP" className="focusIn"
@@ -534,7 +563,7 @@ class Notib extends Component {
                 </div>;
 
                 taulaNotib = <>
-                    <Table id="tableId" responsive striped bordered hover style={tamanyTaula}>
+                    <Table id="tableId" responsive striped bordered hover style={tamanyTaula} className="ocultarMobil">
                         <thead className="table-success">
                         <tr>
                             <th style={tamanyData}>{t('notibComunicacionFecha')}</th>
@@ -560,7 +589,7 @@ class Notib extends Component {
                         })}
                         </tbody>
                     </Table>
-                    <div style={{float:'left', marginTop: '9px;',width: '60%'}}>
+                    <div style={{float:'left', marginTop: '9px;',width: '60%'}} className="ocultarMobil">
                         {t('carpeta_paginacion_1') +
                         ((parseInt(this.state.pagination_active,10)-1)*parseInt(this.state.cercaRegistres, 10)+1) +
                         t('carpeta_paginacion_2') +
@@ -572,10 +601,52 @@ class Notib extends Component {
                         this.state.total_items +
                         t('carpeta_paginacion_4')}
                     </div>
-                    <Pagination style={{float:'right',paddingRight: '0.7em'}}>
+                    <Pagination style={{float:'right',paddingRight: '0.7em'}} className="ocultarMobil">
                         {paginationNumbers}
                     </Pagination>
                 </>
+
+                this.state.dataComunicacions.map(({transmissio, tipus},i) => {
+
+                    cardNotificacions.push(
+                        <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil"
+                             key={i} tabIndex={502+i} onClick={(e) =>
+                            window.open(tipus === 'notificacio' ? (transmissio.estat === 'FINALIZADA' || transmissio.estat === 'FINALITZADA' || transmissio.estat === 'PROCESADA' || transmissio.estat === 'PROCESSADA' ? this.state.urldetallbase2 : this.state.urldetallbase) : this.state.urldetallbase3, '_blank')}>
+                            <div className="col-sm-1 float-left">
+                                <span className="oi oi-envelope-closed iconaFormApp" title={t('notibComunicacio')} style={{verticalAlign: 'sub'}}/>
+                            </div>
+                            <div className="col-sm-10 float-right">
+                                <p className="card-text pl-1 mt-0 font-weight-bold" style={{color: 'rgb(102, 102, 102)'}}>{transmissio.concepte}</p>
+                                <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}>{$.dateFormat(transmissio.dataEnviament)}</p>
+                                <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}>{transmissio.organGestor}</p>
+                                <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}>{tipus === 'notificacio' ? i18n.t('notibNotificacio') : i18n.t('notibComunicacio')}</p>
+                                <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}><b>{t('notibComunicacionDataEstat')}: </b>{$.dateFormat(transmissio.dataEstat)}</p>
+                                <h3 className="titolPlugin titol h3 visioMobil titolPluginApp">{transmissio.estat}</h3>
+                            </div>
+                        </div>
+                    )
+
+                })
+
+                cardNotificacions.push(<div className="visioMobil">
+                        <div style={{float: 'left', marginTop: '9px;', width: '60%'}} className="visioMobil">
+                            {t('carpeta_paginacion_1_App') +
+                            ((parseInt(this.state.pagination_active, 10) - 1) * parseInt(this.state.cercaRegistres, 10) + 1) +
+                            t('carpeta_paginacion_2') +
+                            (((parseInt(this.state.pagination_active, 10) * parseInt(this.state.cercaRegistres, 10)) <= parseInt(this.state.pagination_total_items, 10))
+                                    ? parseInt(this.state.pagination_active, 10) * parseInt(this.state.cercaRegistres, 10)
+                                    : this.state.pagination_total_items
+                            ) +
+                            t('carpeta_paginacion_3_App') +
+                            this.state.pagination_total_items +
+                            t('carpeta_paginacion_4')}
+                        </div>
+                        <Pagination style={{float: 'right', paddingRight: '0.7em'}}>
+                            {paginationNumbers}
+                        </Pagination>
+                    </div>
+                )
+
 
             } else if(this.state.total_items === 0 && this.state.dataComunicacions !== null) {
 
@@ -587,29 +658,35 @@ class Notib extends Component {
         }
 
         
-        return (
-            <div className="infoNoMenu">
-                <h2 className="titol h2">{this.props.titles[i18n.language]}</h2>
-                <div className="col-md-12 border-0 float-left p-0">
-                    <p className="lh15">{this.props.subtitles[i18n.language]} </p>
-                    <div className="infoNoMenu">
-                        <div className="col-md-12 border-0 float-left p-0">
-                            {formulari}
-                            {this.state.error && <div className="alert alert-danger hide" role="alert">{this.state.error}</div>}
-                            {content}
+        return (<>
+                <div className="titolPaginaApp visioMobil">
+                    {this.props.titles[i18n.language]}
+                </div>
+                <div className="infoNoMenu">
+                    <h2 className="titol h2 ocultarMobil">{this.props.titles[i18n.language]}</h2>
+                    <div className="col-md-12 border-0 float-left p-0">
+                        <p className="lh15 ocultarMobil">{this.props.subtitles[i18n.language]} </p>
+                        <div className="infoNoMenu">
+                            <div className="col-md-12 border-0 float-left p-0">
+                                {!this.state.formVisible && criteris}
+                                {formulari}
+                                {this.state.error && <div className="alert alert-danger hide" role="alert">{this.state.error}</div>}
+                                {content}
+                            </div>
                         </div>
                     </div>
+                    <div className="float-left" style={{width: '97%', position: 'relative'}}>
+                        {selectRegistres}
+                        {this.state.isLoaded && taulaNotib }
+                        {cardNotificacions}
+                    </div>
+                    <div className="col-md-12 border-0 float-left p-0" id="botoTornarNotib" style={{ marginTop: '20px' }}>
+                        <button type="button" data-toggle="modal" onClick={() => {
+                            window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
+                        }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarNotib">{t('notibTornar')}</button>
+                    </div>
                 </div>
-                <div className="float-left" style={{width: '97%', position: 'relative'}}>
-                    {selectRegistres}
-                    {this.state.isLoaded && taulaNotib }
-                </div>
-                <div className="col-md-12 border-0 float-left p-0" id="botoTornarNotib" style={{ marginTop: '20px' }}>
-                    <button type="button" data-toggle="modal" onClick={() => {
-                        window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                    }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarNotib">{t('notibTornar')}</button>
-                </div>
-            </div>
+            </>
             );
             
     }

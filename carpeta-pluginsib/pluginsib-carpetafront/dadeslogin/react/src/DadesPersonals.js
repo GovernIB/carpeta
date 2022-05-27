@@ -75,16 +75,16 @@ class DadesPersonals extends Component {
             tipus= <p className="titol h4">{t('empresa')}</p>;
             if(userData.name){
                 nom = <div className="mt-3">
-                    <dt className="col-sm-3">{t('dadespersonalsNom')}</dt>
-                    <dd className="col-sm-7">{userData.name}</dd>
+                    <dt className="col-sm-3 colorGrisApp">{t('dadespersonalsNom')}</dt>
+                    <dd className="col-sm-7 colorGrisApp">{userData.name}</dd>
                 </div>;
             } else{
                 nom = "";
             }
             if(userData.administrationID) {
                 dni = <div className="mt-3">
-                    <dt className="col-sm-3">{t('dadespersonalsDni')}</dt>
-                    <dd className="col-sm-7">{userData.administrationID}</dd>
+                    <dt className="col-sm-3 colorGrisApp">{t('dadespersonalsDni')}</dt>
+                    <dd className="col-sm-7 colorGrisApp">{userData.administrationID}</dd>
                 </div>;
             }else{
                 dni = "";
@@ -92,8 +92,8 @@ class DadesPersonals extends Component {
         } else {
             if(userData.name){
                 nom = <div className="mt-3">
-                    <dt className="col-sm-3">{t('dadespersonalsNom')}</dt>
-                    <dd className="col-sm-7">{userData.name}</dd>
+                    <dt className="col-sm-3 colorGrisApp">{t('dadespersonalsNom')}</dt>
+                    <dd className="col-sm-7 colorGrisApp">{userData.name}</dd>
                 </div>;
             } else{
                 nom = "";
@@ -101,8 +101,8 @@ class DadesPersonals extends Component {
 
             if(userData.surname1){
                 llinatge1 = <div className="mt-3">
-                    <dt className="col-sm-3">{t('dadespersonalsLlinatge1')}</dt>
-                    <dd className="col-sm-7">{userData.surname1}</dd>
+                    <dt className="col-sm-3 colorGrisApp">{t('dadespersonalsLlinatge1')}</dt>
+                    <dd className="col-sm-7 colorGrisApp">{userData.surname1}</dd>
                 </div>;
             } else{
                 llinatge1 = "";
@@ -110,8 +110,8 @@ class DadesPersonals extends Component {
 
             if(userData.surname2) {
                 llinatge2 = <div className="mt-3">
-                    <dt className="col-sm-3">{t('dadespersonalsLlinatge2')}</dt>
-                    <dd className="col-sm-7">{userData.surname2}</dd>
+                    <dt className="col-sm-3 colorGrisApp">{t('dadespersonalsLlinatge2')}</dt>
+                    <dd className="col-sm-7 colorGrisApp">{userData.surname2}</dd>
                 </div>;
             }else{
                 llinatge2 = "";
@@ -119,8 +119,8 @@ class DadesPersonals extends Component {
 
             if(userData.administrationID) {
                 dni = <div className="mt-3">
-                    <dt className="col-sm-3">{t('dadespersonalsDni')}</dt>
-                    <dd className="col-sm-7">{userData.administrationID}</dd>
+                    <dt className="col-sm-3 colorGrisApp">{t('dadespersonalsDni')}</dt>
+                    <dd className="col-sm-7 colorGrisApp">{userData.administrationID}</dd>
                 </div>;
             }else{
                 dni = "";
@@ -128,8 +128,8 @@ class DadesPersonals extends Component {
 
             if(userData.authenticationMethod) {
                 metodeAutenticacio = <div className="mt-3">
-                    <dt className="col-sm-3">{t('dadespersonalsMetode')}</dt>
-                    <dd className="col-sm-7">{userData.authenticationMethod}</dd>
+                    <dt className="col-sm-3 colorGrisApp">{t('dadespersonalsMetode')}</dt>
+                    <dd className="col-sm-7 colorGrisApp">{userData.authenticationMethod}</dd>
                 </div>;
             }else{
                 metodeAutenticacio = "";
@@ -138,26 +138,26 @@ class DadesPersonals extends Component {
         }
 
 
-        return (
-            <div className="infoNoMenu">
-                {tipus}
-                <div className="col-md-12 border-0 float-left p-0 pb-4">
-                    <dl className="row">
-                        {nom}
-                        {llinatge1}
-                        {llinatge2}
-                        {dni}
-                        {metodeAutenticacio}
-                    </dl>
-                </div>
-                {representant}
-
-                <div className="col-md-12 border-0 float-left p-0" id="botoTornarDadesP" style={{ marginTop: '20px' }}>
-                    <button type="button" data-toggle="modal" onClick={() => {
-                        window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                    }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarDadesP">{t('tornar')}</button>
-                </div>
-            </div>
+        return (<>
+                    <div className="infoNoMenu">
+                        {tipus}
+                        <div className="col-md-12 border-0 float-left p-0 pb-4 cardAppVerd padCardDadesApp">
+                            <dl className="row">
+                                {nom}
+                                {llinatge1}
+                                {llinatge2}
+                                {dni}
+                                {metodeAutenticacio}
+                            </dl>
+                        </div>
+                        {representant}
+                    </div>
+                    <div className="col-md-12 border-0 float-left p-0" id="botoTornarDadesP" style={{ marginTop: '20px' }}>
+                        <button type="button" data-toggle="modal" onClick={() => {
+                            window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
+                        }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarDadesP">{t('tornar')}</button>
+                    </div>
+                </>
         );
 
     }

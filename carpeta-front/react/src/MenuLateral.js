@@ -8,9 +8,8 @@ class MenuLateral extends Component {
     render() {
 
         return (
-            <div className="imc-logo">
-                {/*issue #657*/}
-            {/*<div className="imc-logo ocultarMobil">*/}
+            // <div className="imc-logo">
+            <div className="imc-logo ocultarMobil">
                 <LogoLateral />
                 <EnllasosLateral />
             </div>

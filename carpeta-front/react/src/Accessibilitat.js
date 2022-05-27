@@ -67,27 +67,31 @@ class Accessibilitat extends Component {
         }
 
 
-        return (
-            <div className="container-contenido" tabIndex="501">
+        return (<>
+                <div className="titolPaginaApp">
+                    {t('menuAccessibilitat')}
+                </div>
+                <div className="container-contenido" tabIndex="501">
 
-                <DocumentTitle title={t('menuAccessibilitat') + " - " + t('menuTitol')} />
+                    <DocumentTitle title={t('menuAccessibilitat') + " - " + t('menuTitol')} />
 
-                {/*motlla*/}
-                {autenticat === '1' &&
-                    <ExpirarSessio/>
-                }
-                <div className="infoNoMenu">
-                    <h2 className="titol h2">{t('accessibilitatTitol')}</h2>
+                    {/*motlla*/}
+                    {autenticat === '1' &&
+                        <ExpirarSessio/>
+                    }
+                    <div className="infoNoMenu">
+                        <h2 className="titol h2">{t('accessibilitatTitol')}</h2>
 
-                    {htmlCode}
+                        {htmlCode}
 
-                    <div className="col-md-12 border-0 float-left p-0" id="botoTornarAcces" style={{ marginTop: '20px' }}>
-                        <button type="button" data-toggle="modal" onClick={() => {
-                            window.location.href = sessionStorage.getItem("pagTornar")
-                        }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarAcces">{t('tornar')}</button>
+                        <div className="col-md-12 border-0 float-left p-0" id="botoTornarAcces" style={{ marginTop: '20px' }}>
+                            <button type="button" data-toggle="modal" onClick={() => {
+                                window.location.href = sessionStorage.getItem("pagTornar")
+                            }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarAcces">{t('tornar')}</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </>
         );
     }
 }

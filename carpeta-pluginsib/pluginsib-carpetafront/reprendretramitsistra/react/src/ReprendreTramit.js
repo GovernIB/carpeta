@@ -112,7 +112,7 @@ class ReprendreTramit extends Component {
             content = <>
                 <div className="form-group">
                     <label for="clau">{i18n.t('reprendreClau')}</label>
-                    <input type="text" className="form-control col-md-6" id="clau" name="clau" value={this.state.clau} onChange={(e)=>{this.handleChangeClau(e);}} />
+                    <input type="text" className="form-control columnReprendre" id="clau" name="clau" value={this.state.clau} onChange={(e)=>{this.handleChangeClau(e);}} />
                     <input type="button" className="btn btn-primary carpeta-btn mt-2" onClick={() => {this.handleSubmitClau(this.state.clau)}} value={i18n.t('reprendreContinuar')} />
                 </div>
             </>
@@ -120,24 +120,28 @@ class ReprendreTramit extends Component {
         }
 
         
-        return (
-            <div className="infoNoMenu">
-                <h2 className="titol h2">{this.props.titles[i18n.language]}</h2>
-                <div className="col-md-12 border-0 float-left p-0">
-                    <p className="lh15">{this.props.subtitles[i18n.language]} </p>
+        return (<>
+                    <div className="titolPaginaApp visioMobil">
+                        {this.props.titles[i18n.language]}
+                    </div>
                     <div className="infoNoMenu">
+                        <h2 className="titol h2 ocultarMobil">{this.props.titles[i18n.language]}</h2>
                         <div className="col-md-12 border-0 float-left p-0">
-                            {this.state.error && <div className="alert alert-danger hide" role="alert">{i18n.t('reprendreNoClau')}</div>}
-                            {content}
+                            <p className="lh15 ocultarMobil">{this.props.subtitles[i18n.language]} </p>
+                            <div className="infoNoMenu">
+                                <div className="col-md-12 border-0 float-left p-0">
+                                    {this.state.error && <div className="alert alert-danger hide" role="alert">{i18n.t('reprendreNoClau')}</div>}
+                                    {content}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-12 border-0 float-left p-0" id="botoTornarDiscapacidad" style={{ marginTop: '20px' }}>
+                            <button type="button" data-toggle="modal" onClick={() => {
+                                window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
+                            }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarDiscapacidad">{i18n.t('reprendreTornar')}</button>
                         </div>
                     </div>
-                </div>
-                <div className="col-md-12 border-0 float-left p-0" id="botoTornarDiscapacidad" style={{ marginTop: '20px' }}>
-                    <button type="button" data-toggle="modal" onClick={() => {
-                        window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                    }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarDiscapacidad">{i18n.t('reprendreTornar')}</button>
-                </div>
-            </div>
+                </>
             );
             
     }

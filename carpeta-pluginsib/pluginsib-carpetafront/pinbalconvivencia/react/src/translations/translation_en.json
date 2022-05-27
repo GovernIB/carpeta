@@ -35,5 +35,7 @@
   "pinbalConvivenciaExpedicion": "Fecha expedición",
   "pinbalConvivenciaDesde" : "Desde",
   "pinbalConvivenciaValidaMunicipi" : "Debe escoger un municipio",
-  "pinbalConvivenciaSelecciona": "Seleccione un municipio"
+  "pinbalConvivenciaSelecciona": "Seleccione un municipio",
+  "pinbalConvivenciaTornar" : "Tornau",
+  "pinbalConvivenciaConsulta" : "Consulta"
 }

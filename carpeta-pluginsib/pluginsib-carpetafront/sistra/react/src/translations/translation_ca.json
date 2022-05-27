@@ -22,13 +22,16 @@
     "sistraModalBotoCancelar": "Tanca",
     "sistraModalBotoContinuar": "Veure detall",
     "carpeta_paginacion_1": "Mostrant elements del ",
+    "carpeta_paginacion_1_App": "Del ",
     "carpeta_paginacion_2": " al ",
     "carpeta_paginacion_3": " d'un total de ",
+    "carpeta_paginacion_3_App": " de ",
     "carpeta_paginacion_4": " elements",
     "carpeta_criterio_1": "Cerca entre el ",
     "carpeta_criterio_2": " i el ",
     "carpeta_criterio_3": " amb l'estat '",
     "carpeta_criterio_4": "'",
+    "carpeta_criterio_5": " a ",
 
     "registro_titulo_detalle": "Detall del Registre d'entrada amb NÚM. REG.",
     "registro_entrada": "Registre d'entrada",
@@ -103,5 +106,7 @@
     "downloadjustificantText": "Fitxer descarregat. Fes click per descarregar-ho de nou",
 
     "registro_regPorPagina": "Registres per pàgina",
-    "sistraProblema": "Hi ha hagut qualque problema de comunicació."
+    "sistraProblema": "Hi ha hagut qualque problema de comunicació.",
+    "sistraDates": "Dates",
+    "sistraCerca": "Cerca"
 }

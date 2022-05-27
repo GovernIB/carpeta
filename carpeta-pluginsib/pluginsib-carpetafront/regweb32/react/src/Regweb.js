@@ -39,7 +39,8 @@ class Regweb extends Component {
             numeroRegistro: null,
             error: null,
             criteriosTexto: '',
-            cercaRegistres: 5
+            cercaRegistres: 5,
+            formVisible: false
         };
 
         this.handleNumberFilterParam = this.handleNumberFilterParam.bind(this);
@@ -48,6 +49,7 @@ class Regweb extends Component {
         this.handleStateFilterParam = this.handleStateFilterParam.bind(this);
         this.handleRegPorPaginaFilterParam = this.handleRegPorPaginaFilterParam.bind(this);
         this.handleSubmitSearcher = this.handleSubmitSearcher.bind(this);
+        this.mostrarForm = this.mostrarForm.bind(this);
 
         const getLocale = Locale => require(`date-fns/locale/${sessionStorage.getItem("langActual")}/index.js`);
         this.locale = getLocale(this.props.language);
@@ -55,6 +57,18 @@ class Regweb extends Component {
         this.canviatIdioma = this.canviatIdioma.bind(this);
         i18n.on('languageChanged', this.canviatIdioma);
 
+    }
+
+    mostrarForm(){
+        if(document.getElementById("fechaBusqueda").classList.contains("ocultarMobil")) {
+            document.getElementById("fechaBusqueda").classList.remove("ocultarMobil");
+        }
+        document.getElementById("idCriteris").style.display = "none";
+
+        this.setState({
+            ...this.state,
+            formVisible: true
+        });
     }
 
     canviatIdioma(lng) {
@@ -547,12 +561,15 @@ class Regweb extends Component {
         var tamanyTaula = { width: '99%'};
         let selectRegistres;
         let registresBuid;
+        let criteris;
+
+        let cardRegistres = [];
 
         formulari = <>
-            <Form id="fechaBusqueda" style={{marginBottom: '20px'}}>
-                <Container style={{ width: '95%', paddingLeft: '0', margin: '0' }}>
+            <Form id="fechaBusqueda" style={{marginBottom: '20px'}} className="ocultarMobil">
+                <Container style={{ width: '95%', paddingLeft: '0', margin: '0' }} className="ampleTotalApp">
                     <Row>
-                        <Col className="col-xs-12 mb-3">
+                        <Col className="col-xs-12 mb-3 campFormApp">
                             <Form.Group>
                                 <Form.Label>{t('registro_numero')}</Form.Label>
                                 <Form.Control
@@ -565,7 +582,7 @@ class Regweb extends Component {
                                 />
                             </Form.Group>
                         </Col>
-                        <Col className="col-xs-12 mb-3">
+                        <Col className="col-xs-12 mb-3 campFormApp">
                             <Form.Group>
                                 <Form.Label>{t('registro_fecha_inicio')}</Form.Label>
                                 <DatePicker
@@ -597,7 +614,7 @@ class Regweb extends Component {
                                 />
                             </Form.Group>
                         </Col>
-                        <Col className="col-xs-12 mb-3">
+                        <Col className="col-xs-12 mb-3 campFormApp">
                             <Form.Group>
                                 <Form.Label>{t('registro_fecha_fin')}</Form.Label>
                                 <DatePicker
@@ -630,7 +647,7 @@ class Regweb extends Component {
                                 />
                             </Form.Group>
                         </Col>
-                        <Col className="col-xs-12 mb-3">
+                        <Col className="col-xs-12 mb-3 campFormApp">
                             <Form.Group>
                                 <Form.Label>{t('registro_estado')}</Form.Label>
                                 <Form.Select id="estado"
@@ -649,7 +666,7 @@ class Regweb extends Component {
                         </Col>
                     </Row>
                     <Row style={{ width: 'fit-content', display: 'none'}}>
-                        <Col className="col-xs-12 mb-3">
+                        <Col className="col-xs-12 mb-3 campFormApp">
                             <Form.Group>
                                 <Form.Label>{t('registro_regPorPagina')}</Form.Label>
                                 <Form.Select id="regPorPagina"
@@ -671,8 +688,8 @@ class Regweb extends Component {
                             <div className="alert alert-danger" role="alert" id="errorMsg"/>
                         </div>
                     </Row>
-                    <Row className="col-md-3 pl-0 row" style={{zIndex: '4'}}>
-                        <Button type="submit" className="btn btn-primary carpeta-btn ml-3 mt-2"  onClick={e => {this.handleSubmitSearcher(e)}} tabindex="505">{t('carpeta_buscar')}</Button>
+                    <Row className="col-md-3 pl-3 row botoFormApp" style={{zIndex: '4'}}>
+                        <Button type="submit" className="btn btn-primary carpeta-btn mt-2"  onClick={e => {this.handleSubmitSearcher(e)}} tabindex="505">{t('carpeta_buscar')}</Button>
                     </Row>
                 </Container>
             </Form>
@@ -687,8 +704,22 @@ class Regweb extends Component {
 
             selectRegistres = '';
             registresBuid = '';
+            criteris = '';
 
         } else {
+
+            criteris = <div id="idCriteris">
+                <div style={{float: 'left', marginTop: '9px;', paddingBottom: '0.7em'}} className="col-md-10 pr-3 visioMobil">
+                    <span className="oi oi-calendar iconaFormApp" title={t('registroDates')} style={{verticalAlign: 'sub'}}/>
+                    <span className="pl-3">{$.dateFormatCerca(this.state.filter_startDate) +
+                    t('carpeta_criterio_6') +
+                    $.dateFormatCerca(this.state.filter_endDate)}</span>
+                </div>
+                <div style={{float: 'rigth', marginTop: '9px;', paddingBottom: '0.7em', textAlign: 'end'}} onClick={() => {this.mostrarForm();}} className="col-md-1 visioMobil">
+                    <span className="oi oi-magnifying-glass iconaFormApp" title={t('registroCerca')}/>
+                </div>
+            </div>
+
             const data = this.state.data;
             registresBuid = <div className="pt-3 alert alert-secondary" style={{ float: 'left', width: '95%'}} role="alert">{t('registro_vacio')}</div>;
 
@@ -704,7 +735,7 @@ class Regweb extends Component {
 
                         selectRegistres = <div className="col-md-12 border-0 p-0">
                             <div className="col-sd-1 pb-2 margRegSelect">
-                                <p className="lh15 mb-1">
+                                <p className="lh15 mb-1 mRegSelApp">
                                     {t('registroMostra')}
                                     <Form.Select id="rPP"
                                                  name="rPP" className="focusIn"
@@ -723,7 +754,7 @@ class Regweb extends Component {
                         </div>;
 
                         taulaRegistres = <>
-                            <Table responsive striped bordered hover style={tamanyTaula}>
+                            <Table responsive striped bordered hover style={tamanyTaula} className="ocultarMobil">
                                 <thead className="table-success">
                                 <tr>
                                     <th>{t('registro_numero')}</th>
@@ -734,14 +765,13 @@ class Regweb extends Component {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {this.state.data.map(({
-                                                          numeroRegistro,
+                                {this.state.data.map(({   numeroRegistro,
                                                           fechaRegistro,
                                                           extracto,
                                                           tipoRegistro,
                                                           denominacionDestino,
                                                           estado
-                                                      }) => {
+                                                      },i) => {
                                     return <tr key={numeroRegistro}
                                                onClick={(e) => this.handleItemClick(numeroRegistro)}>
                                         <td>{numeroRegistro}</td>
@@ -753,7 +783,7 @@ class Regweb extends Component {
                                 })}
                                 </tbody>
                             </Table>
-                            <div style={{float: 'left', marginTop: '9px', width: '60%'}}>
+                            <div style={{float: 'left', marginTop: '9px', width: '60%'}} className="ocultarMobil">
                                 {t('carpeta_paginacion_1') +
                                 ((parseInt(this.state.pagination_active, 10) - 1) * parseInt(this.state.cercaRegistres, 10) + 1) +
                                 t('carpeta_paginacion_2') +
@@ -765,20 +795,57 @@ class Regweb extends Component {
                                 this.state.pagination_total_items +
                                 t('carpeta_paginacion_4')}
                             </div>
-                            <Pagination style={{float: 'right', paddingRight: '0.7em'}}>
+                            <Pagination style={{float: 'right', paddingRight: '0.7em'}} className="ocultarMobil">
                                 {paginationNumbers}
                             </Pagination>
 
-                            <div className="col-md-12 border-0 float-left p-0" id="botoTornarDiscapacidad"
-                                 style={{marginTop: '20px'}}>
-                                <button type="button" data-toggle="modal" onClick={() => {
-                                    window.location.href = sessionStorage.getItem("pagTornar");
-                                    sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                                }} className="botoSuport" tabIndex="520"
-                                        aria-labelledby="botoTornarDiscapacidad">{t('reprendreTornar')}</button>
-                            </div>
-
                         </>
+
+                    this.state.data.map(({   numeroRegistro,
+                                             fechaRegistro,
+                                             extracto,
+                                             tipoRegistro,
+                                             denominacionDestino,
+                                             estado
+                                         },i) => {
+
+                            cardRegistres.push(
+                                <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil"
+                                     key={i} tabIndex={502+i} onClick={(e) =>
+                                    this.handleItemClick(numeroRegistro)}>
+                                    <div className="col-sm-1 float-left">
+                                        <span className="oi oi-book iconaFormApp" title={t('registroDates')} style={{verticalAlign: 'sub'}}/>
+                                    </div>
+                                    <div className="col-sm-10 float-right">
+                                        <p className="card-text pl-1 mt-0 font-weight-bold" style={{color: 'rgb(102, 102, 102)'}}>{numeroRegistro}</p>
+                                        <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}>{$.dateFormat(fechaRegistro)}</p>
+                                        <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}>{extracto}</p>
+                                        <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}>{denominacionDestino}</p>
+                                        <h3 className="titolPlugin titol h3 visioMobil titolPluginApp">{t('registro_estado_' + estado)}</h3>
+                                    </div>
+                                </div>
+                            )
+
+                    })
+
+                    cardRegistres.push(<div className="visioMobil">
+                            <div style={{float: 'left', marginTop: '9px;', width: '60%'}} className="visioMobil">
+                                {t('carpeta_paginacion_1_App') +
+                                ((parseInt(this.state.pagination_active, 10) - 1) * parseInt(this.state.cercaRegistres, 10) + 1) +
+                                t('carpeta_paginacion_2') +
+                                (((parseInt(this.state.pagination_active, 10) * parseInt(this.state.cercaRegistres, 10)) <= parseInt(this.state.pagination_total_items, 10))
+                                        ? parseInt(this.state.pagination_active, 10) * parseInt(this.state.cercaRegistres, 10)
+                                        : this.state.pagination_total_items
+                                ) +
+                                t('carpeta_paginacion_3_App') +
+                                this.state.pagination_total_items +
+                                t('carpeta_paginacion_4')}
+                            </div>
+                            <Pagination style={{float: 'right', paddingRight: '0.7em'}}>
+                                {paginationNumbers}
+                            </Pagination>
+                        </div>
+                    )
 
                 } else if(this.state.total_items === 0 && this.state.data !== null) {
                     taulaRegistres = <div className="pt-3 alert alert-secondary margeBuid" style={{ float: 'left', width: '95%'}} role="alert">{t('registro_vacio')}</div>
@@ -786,15 +853,18 @@ class Regweb extends Component {
 
         }
         
-        return (
-            <div>
+        return (<>
+                <div className="titolPaginaApp visioMobil">
+                    {this.props.titles[i18n.language]}
+                </div>
                 <div className="infoNoMenu">
                     {this.state.numeroRegistro == null && <>
-                        <h2 className="titol h2">{this.props.titles[i18n.language]}</h2>
+                        <h2 className="titol h2 ocultarMobil">{this.props.titles[i18n.language]}</h2>
                         <div className="col-md-12 border-0 float-left p-0">
-                            <p className="lh15">{this.props.subtitles[i18n.language]} </p>
+                            <p className="lh15 ocultarMobil">{this.props.subtitles[i18n.language]} </p>
                             <div className="infoNoMenu">
                                 <div className="col-md-12 border-0 float-left p-0">
+                                    {!this.state.formVisible && criteris}
                                     {formulari}
                                     {this.state.error && <div className="alert alert-danger hide" role="alert">{this.state.error}</div>}                            
                                     {this.state.numeroRegistro == null && content}
@@ -805,11 +875,20 @@ class Regweb extends Component {
                             {selectRegistres}
                             {this.state.numeroRegistro == null && taulaRegistres}
                             {this.state.pagination_total_items.toString() === '0' && registresBuid}
+                            {cardRegistres}
+                        </div>
+                        <div className="col-md-12 border-0 float-left p-0" id="botoTornarRegistro"
+                             style={{marginTop: '20px'}}>
+                            <button type="button" data-toggle="modal" onClick={() => {
+                                window.location.href = sessionStorage.getItem("pagTornar");
+                                sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
+                            }} className="botoSuport" tabIndex="520"
+                                    aria-labelledby="botoTornarRegistro">{t('reprendreTornar')}</button>
                         </div>
                     </>}
                     {this.state.numeroRegistro != null && detallRegistreContainer}
                 </div>
-            </div>);
+            </>);
             
     }
 }

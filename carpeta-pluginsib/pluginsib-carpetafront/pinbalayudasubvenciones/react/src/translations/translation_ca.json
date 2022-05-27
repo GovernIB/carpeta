@@ -13,5 +13,6 @@
   "pinbalSubvencionesCodigo1": "El contribuent no es troba al corrent en les seves obligacions tributàries.",
   "pinbalSubvencionesCodigo2": "S'ha trobat més d'un registre per a les dades del titular indicats.",
   "pinbalSubvencionesCodigo3": "Per a la persona consultada no hi ha informació en la CCAA.",
-  "pinbalSubvencionesTornar": "Tornau"
+  "pinbalSubvencionesTornar": "Tornau",
+  "pinbalSubvencionesConsulta": "Consulta"
 }

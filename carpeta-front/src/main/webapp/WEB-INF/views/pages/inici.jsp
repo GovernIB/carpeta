@@ -142,9 +142,8 @@
 	  </sec:authorize> 
 
 
-    <div id="fullpagecarpetafront" tabindex="-1" class="noEnfocar"></div>
-<%--	issue #657--%>
-<%--    <div id="fullpagecarpetafront" tabindex="-1" class="noEnfocar bcMobil"></div>--%>
+<%--    <div id="fullpagecarpetafront" tabindex="-1" class="noEnfocar"></div>--%>
+    <div id="fullpagecarpetafront" tabindex="-1" class="noEnfocar bcMobil"></div>
 
 	<!-- js react -->
 	<script src = "<c:url value="/dist/reactjs_main.js"/>" type="text/javascript"></script>

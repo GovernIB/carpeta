@@ -23,26 +23,26 @@ CREATE SEQUENCE car_notificacioapp_seq START WITH 1000 INCREMENT BY 1;
 
 CREATE TABLE car_notificacioapp
 (
-   notificacioappid number(19,0) NOT NULL DEFAULT car_notificacioapp_seq.nextval, 
-   codi varchar2(50) NOT NULL, 
-   titolid number(19,0) NOT NULL, 
-   missatgeid number(19,0) NOT NULL, 
-   frontpluginid number(19,0), 
-   activa number(1,0) NOT NULL, 
-   ajuda clob,
-   entitatid number(19,0) NOT NULL
+    notificacioappid number(19,0) DEFAULT car_notificacioapp_seq.nextval NOT NULL,
+    codi varchar2(50) NOT NULL,
+    titolid number(19,0) NOT NULL,
+    missatgeid number(19,0) NOT NULL,
+    frontpluginid number(19,0),
+    activa number(1,0) NOT NULL,
+    ajuda clob,
+    entitatid number(19,0) NOT NULL
 );
 
 
-CREATE TABLE car_notificacioapp ADD CONSTRAINT car_notificacioapp_pk PRIMARY KEY (notificacioappid);
-CREATE TABLE car_notificacioapp ADD CONSTRAINT car_notifica_traduccio_tit_fk FOREIGN KEY (titolid) REFERENCES car_traduccio (traduccioid); 
-CREATE TABLE car_notificacioapp ADD CONSTRAINT car_notifica_traduccio_msg_fk FOREIGN KEY (missatgeid) REFERENCES car_traduccio (traduccioid); 
-CREATE TABLE car_notificacioapp ADD CONSTRAINT car_notifica_plugin_plug_fk FOREIGN KEY (frontpluginid) REFERENCES car_plugin (pluginid);
-CREATE TABLE car_notificacioapp ADD CONSTRAINT car_notifica_entitat_ent_fk FOREIGN KEY (entitatid) REFERENCES car_entitat (entitatid);
-CREATE TABLE car_notificacioapp ADD CONSTRAINT car_notifica_codi_uk UNIQUE (codi);
+ALTER TABLE car_notificacioapp ADD CONSTRAINT car_notificacioapp_pk PRIMARY KEY (notificacioappid);
+ALTER TABLE car_notificacioapp ADD CONSTRAINT car_notifica_traduccio_tit_fk FOREIGN KEY (titolid) REFERENCES car_traduccio (traduccioid);
+ALTER TABLE car_notificacioapp ADD CONSTRAINT car_notifica_traduccio_msg_fk FOREIGN KEY (missatgeid) REFERENCES car_traduccio (traduccioid);
+ALTER TABLE car_notificacioapp ADD CONSTRAINT car_notifica_plugin_plug_fk FOREIGN KEY (frontpluginid) REFERENCES car_plugin (pluginid);
+ALTER TABLE car_notificacioapp ADD CONSTRAINT car_notifica_entitat_ent_fk FOREIGN KEY (entitatid) REFERENCES car_entitat (entitatid);
+ALTER TABLE car_notificacioapp ADD CONSTRAINT car_notifica_codi_uk UNIQUE (codi);
 
 
-create index car_notificacioapp_pk_i on car_notificacioapp (notificacioappid);
+-- create index car_notificacioapp_pk_i on car_notificacioapp (notificacioappid);
 create index car_notifica_titolid_fk_i on car_notificacioapp (titolid);
 create index car_notifica_missatgeid_fk_i on car_notificacioapp (missatgeid);
 create index car_notifica_pluginid_fk_i on car_notificacioapp (frontpluginid);

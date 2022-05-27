@@ -19,19 +19,23 @@ class Pipelles extends Component {
         const { t } = this.props;
         const dades2 = this.props.dades;
         
-        return (
-            <div className="infoNoMenu">
-                <h2 className="titol h2">{this.props.dades.titles[i18n.language]}</h2>
-                <div className="col-md-12 border-0 float-left p-0">
-                    <p className="lh15">{this.props.dades.subtitles[i18n.language]} </p>
-                    
-                    <div class="tab-pane fade show active" id="dadespersonals" role="tabpanel" aria-labelledby="home-tab">
-                             <DadesPersonals dades={dades2} />
+        return (<>
+                    <div className="titolPaginaApp visioMobil">
+                        {this.props.dades.titles[i18n.language]}
                     </div>
-                        
-                    
-                </div>
-            </div>
+                    <div className="infoNoMenu">
+                        <h2 className="titol h2 ocultarMobil">{this.props.dades.titles[i18n.language]}</h2>
+                        <div className="col-md-12 border-0 float-left p-0">
+                            <p className="lh15 ocultarMobil">{this.props.dades.subtitles[i18n.language]} </p>
+
+                            <div className="tab-pane fade show active" id="dadespersonals" role="tabpanel" aria-labelledby="home-tab">
+                                     <DadesPersonals dades={dades2} />
+                            </div>
+
+
+                        </div>
+                    </div>
+            </>
         );
     }
 }

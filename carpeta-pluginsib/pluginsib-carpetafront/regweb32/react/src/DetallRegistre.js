@@ -195,16 +195,16 @@ class DetallRegistre extends Component {
 
                 content = 
                 <>  
-                    <h2 className="titol h2">{t('registro_titulo_detalle')} {registre.numeroRegistro}</h2>
+                    <h2 className="titol h2 ocultarMobil">{t('registro_titulo_detalle')} {registre.numeroRegistro}</h2>
                     <div className="col-md-12 border-0 float-left p-0">
                     <div className="card-body pl-0 pr-0" style={{flexFlow: "row wrap", display: "flex"}}>
                         <div className="pri-col-deta-reg col-md-6">
-                            <div className="card border-left-carpeta shadow py-2 mb-3 alert">
+                            <div className="card border-left-carpeta shadow py-2 mb-3 alert cardAppVerd">
                                 <div className="card-body">
                                     <div className="row no-gutters align-items-center">
                                         <div className="col mr-2 font15">
                                             <h3 className="font-weight-bold verde text-uppercase mb-3 text-center h3">{t('registro_entrada')}</h3>
-                                            <dl className="row">
+                                            <dl className="row colorGrisApp">
                                                 <dt className="col-sm-3 pb-2">{t('registro_fecha')}</dt>
                                                 <dd className="col-sm-7">{$.dateFormat(registre.fechaRegistro)}</dd>
 
@@ -255,7 +255,7 @@ class DetallRegistre extends Component {
                                 </div>
                             </div>
 
-                            <div className="card border-left-carpeta shadow py-2 mb-3 alert">
+                            <div className="card border-left-carpeta shadow py-2 mb-3 alert cardAppVerd">
                                 <div className="card-body">
                                     <div className="row no-gutters">
                                         <div className="col mr-2 font15 text-center">
@@ -282,7 +282,7 @@ class DetallRegistre extends Component {
                         </div>
 
                         <div className="seg-col-deta-reg col-md-5 pr-0">
-                            <div className="card border-left-carpeta shadow py-2 mb-3 alert">
+                            <div className="card border-left-carpeta shadow py-2 mb-3 alert cardAppVerd">
                                 <div className="card-body">
                                     <div className="row no-gutters align-items-center">
                                         <div className="col mr-2 font15">
@@ -313,13 +313,13 @@ class DetallRegistre extends Component {
                                 </div>
                                 </div>
 
-                                <div className="card border-left-carpeta shadow py-2 mb-3 alert">
+                                <div className="card border-left-carpeta shadow py-2 mb-3 alert cardAppVerd">
                                     <div className="card-body">
                                         <div className="row no-gutters align-items-center">
                                             <div className="col mr-2 font15">
                                                 <h3 className="font-weight-bold verde text-uppercase mb-3 text-center h3">{t('registro_anexos')}</h3>
                                                 { registre.anexos && registre.anexos.length > 0 &&
-                                                <Table hover className="table-sm">
+                                                <Table hover className="table-sm colorGrisApp">
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">#</th>
@@ -342,9 +342,9 @@ class DetallRegistre extends Component {
                                                         </tr> ) }
                                                     </tbody>
                                                 </Table> }
-                                                { registre.anexos && registre.anexos.length < 1 && <p className="text-center">{t('registro_anexos_vacio')}</p>}
-                                                { !registre.anexos && <p className="text-center">{t('registro_anexos_vacio')}</p>}
-                                                <p className="text-md-left pt-2" style={{fontSize: 'small'}}>{t('registro_anexos_nodisponibles')}</p>
+                                                { registre.anexos && registre.anexos.length < 1 && <p className="text-center colorGrisApp">{t('registro_anexos_vacio')}</p>}
+                                                { !registre.anexos && <p className="text-center colorGrisApp">{t('registro_anexos_vacio')}</p>}
+                                                <p className="text-md-left pt-2 colorGrisApp lletraPetitaApp" style={{fontSize: 'small'}}>{t('registro_anexos_nodisponibles')}</p>
                                             </div>
                                         </div>
                                     </div>

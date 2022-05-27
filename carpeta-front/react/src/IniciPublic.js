@@ -57,6 +57,7 @@ class IniciPublic extends Component {
     render() {
 
         var htmlCode;
+        var htmlCodeApp;
 
         var baseURL = sessionStorage.getItem('contextPath');
         let entitatNom = this.state.nomEntitat;
@@ -64,11 +65,13 @@ class IniciPublic extends Component {
 
         if (this.state.error) {
             htmlCode = <div className="alert alert-danger" role="alert">{this.state.error}</div>;
+            htmlCodeApp = <div className="alert alert-danger" role="alert">{this.state.error}</div>;
         } else {
 
             if (this.state.codiHtml) {
                 // console.log("  SIIII DEFINTI CODI HTML PER ENTITAT");
                 htmlCode = <div dangerouslySetInnerHTML={{__html: this.state.codiHtml}}/>
+                htmlCodeApp = <div dangerouslySetInnerHTML={{__html: this.state.codiHtml}}/>
             } else {
 
                 // console.log("  NO S'HA DEFINTI CODI HTML PER ENTITAT");
@@ -159,69 +162,68 @@ class IniciPublic extends Component {
 
                     </div>
                 </div>
+
+                htmlCodeApp = <>
+                    <div className="">
+                        <a href="http://www.caib.es" className="imc--goib" title={i18n.t('menuLateralGovern')} target="_blank" tabIndex="2" aria-label={i18n.t('menuLateralGovern')} aria-describedby="entitatLogo">
+                            <img src={baseURL + "/src/assets/images/goib-05.png"} title="" alt={i18n.t('menuLateralGovern')} className="imgCenter" width="100px"/>
+                        </a>
+                    </div>
+
+                    <h1 className="titolAppInici">{i18n.t('menuTitol')}</h1>
+
+                    <p className="margen-top-clave" id="accedirCarpetaPrivat2" style={{paddingBottom: '2em!important'}}>
+                        <button className="btn btn-primary carpeta-btn botoAccedirCarpeta" title={i18n.t('accedirBoto') + i18n.t('paginaIniciBotoAccedirMobil')}
+                                onClick={() => {
+                                    var loc = new URL(window.location.href);
+
+                                    var theUrl = baseURL + '/public/doLogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host);
+                                    // Es des d'APP?
+                                    var loginCode = sessionStorage.getItem('loginCode');
+                                    if (loginCode) {
+                                        theUrl = theUrl + '&loginCode=' + loginCode;
+                                    }
+                                    //alert('Obrim DOLOGIN => ' + theUrl);
+                                    window.location.href = theUrl
+                                }} tabIndex="503" aria-labelledby="accedirCarpetaPrivat2" style={{ padding: '1em 3em 1em 3em', borderRadius: '10px'}}>
+                            <span className="oi oi-account-login" title="" aria-hidden="true"/> {i18n.t('paginaIniciBotoAccedirMobil')}
+                        </button>
+                    </p>
+
+                    <div className="anonimApp">
+                        <h2 className="apartat h5 text-verd font-weight-bold">{i18n.t('tramitacioAnonimaTitol')}</h2>
+                        <p className="lh15 pb-3 subtitolSuperior" id="reprendreTramitacio"><a href={baseURL + '/#/publicmodul/reprendretramit'} id="tramitacioModalBtn" tabIndex="504" aria-labelledby="reprendreTramitacio"><span
+                            className="oi oi-external-link" style={{paddingRight: '20px'}}/>{i18n.t('tramitacioEnllazApp')}</a></p>
+                    </div>
+                </>
             }
 
         }
         
 
         return (
-            <div className="container-contenido homePage">
+            // <div className="container-contenido homePage">
+            //
+            //     <DocumentTitle title={i18n.t('menuTitol') + " - " + entitatNom} />
+            //
+            //     {htmlCode}
+            // </div>
 
-                <DocumentTitle title={i18n.t('menuTitol') + " - " + entitatNom} />
+            <>
+                <div className="container-contenido homePage ocultarMobil">
 
-                {htmlCode}
-            </div>
+                    <DocumentTitle title={i18n.t('menuTitol') + " - " + entitatNom} />
 
-// issue #657
-        // <>
-        //     <div className="container-contenido homePage ocultarMobil">
-        //
-        //         <DocumentTitle title={i18n.t('menuTitol') + " - " + entitatNom} />
-        //
-        //         {htmlCode}
-        //     </div>
-        //
-        //
-        //     <div className="visioMobil">
-        //
-        //         {/*<div className="">*/}
-        //         {/*    <a href="http://www.caib.es" className="imc--goib" title={i18n.t('menuLateralGovern')} target="_blank" tabIndex="2" aria-label={i18n.t('menuLateralGovern')} aria-describedby="entitatLogo">*/}
-        //         {/*        <img src={baseURL + "/src/assets/images/goib-05.png"} title="" alt={i18n.t('menuLateralGovern')} className="imgCenter"/>*/}
-        //         {/*    </a>*/}
-        //         {/*</div>*/}
-        //
-        //         <div className="imgCenter">
-        //             <LogoLateral />
-        //         </div>
-        //
-        //         <h1 className="titolAppInici">{i18n.t('menuTitol')}</h1>
-        //
-        //         <p className="margen-top-clave" id="accedirCarpetaPrivat2" style={{paddingBottom: '2em!important'}}>
-        //             <button className="btn btn-primary carpeta-btn botoAccedirCarpeta" title={i18n.t('accedirBoto') + i18n.t('paginaIniciBotoAccedirMobil')}
-        //                     onClick={() => {
-        //                         var loc = new URL(window.location.href);
-        //
-        //                         var theUrl = baseURL + '/public/doLogin?urlbase=' + encodeURIComponent(loc.protocol + '//' + loc.host);
-        //                         // Es des d'APP?
-        //                         var loginCode = sessionStorage.getItem('loginCode');
-        //                         if (loginCode) {
-        //                             theUrl = theUrl + '&loginCode=' + loginCode;
-        //                         }
-        //                         //alert('Obrim DOLOGIN => ' + theUrl);
-        //                         window.location.href = theUrl
-        //                     }} tabIndex="503" aria-labelledby="accedirCarpetaPrivat2" style={{ padding: '1em 3em 1em 3em', borderRadius: '10px'}}>
-        //                 <span className="oi oi-account-login" title="" aria-hidden="true"/> {i18n.t('paginaIniciBotoAccedirMobil')}
-        //             </button>
-        //         </p>
-        //
-        //         <div className="anonimApp">
-        //             <h2 className="apartat h5 text-verd font-weight-bold">{i18n.t('tramitacioAnonimaTitol')}</h2>
-        //             <p className="lh15 pb-3 subtitolSuperior" id="reprendreTramitacio"><a href={baseURL + '/#/publicmodul/reprendretramit'} id="tramitacioModalBtn" tabIndex="504" aria-labelledby="reprendreTramitacio"><span
-        //                 className="oi oi-external-link" style={{paddingRight: '20px'}}/>{i18n.t('tramitacioEnllazApp')}</a></p>
-        //         </div>
-        //
-        //     </div>
-        // </>
+                    {htmlCode}
+                </div>
+
+
+                <div className="visioMobil">
+
+                    {htmlCodeApp}
+
+                </div>
+            </>
         );
 
     }

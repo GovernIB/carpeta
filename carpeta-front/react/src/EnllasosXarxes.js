@@ -67,9 +67,8 @@ class EnllasosXarxes extends Component {
         return (
             <div>
                 <p>{seguir}</p>
-                <ul>
-                    {/*issue #657*/}
-                {/*<ul className="dretaXarxes">*/}
+                {/*<ul>*/}
+                <ul className="dretaXarxes">
                     {content}
                 </ul>
             </div>

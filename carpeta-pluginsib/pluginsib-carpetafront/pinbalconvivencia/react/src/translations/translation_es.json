@@ -36,5 +36,7 @@
   "pinbalConvivenciaFechaNacimiento": "Fecha de nacimiento",
   "pinbalConvivenciaDesde" : "Desde",
   "pinbalConvivenciaValidaMunicipi" : "Debe escoger un municipio",
-  "pinbalConvivenciaSelecciona": "Seleccione un municipio"
+  "pinbalConvivenciaSelecciona": "Seleccione un municipio",
+  "pinbalConvivenciaTornar" : "Volver",
+  "pinbalConvivenciaConsulta" : "Consulta"
 }

@@ -16,7 +16,9 @@
     "notificacionsSistraComunicacionCertificacio": "Certificació",
     "notificacionsSistraBuid":"No hi ha notificacions",
     "carpeta_paginacion_1": "Mostrant elements del ",
+    "carpeta_paginacion_1_App": "Del ",
     "carpeta_paginacion_2": " al ",
     "carpeta_paginacion_3": " d'un total de ",
+    "carpeta_paginacion_3_App": " de ",
     "carpeta_paginacion_4": " elements"
 }

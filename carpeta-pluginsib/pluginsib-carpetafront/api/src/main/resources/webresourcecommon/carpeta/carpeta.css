@@ -839,10 +839,9 @@ ul.pagination li.page-item.active {
 .react-datepicker__year-option{
 	height: 25px;
 }
-/*Issue #657*/
-/*.visioMobil{*/
-/*	display: none!important;*/
-/*}*/
+.visioMobil{
+	display: none!important;
+}
 /*.ocultarMobil{*/
 /*	display: inline-block!important;*/
 /*}*/
@@ -854,6 +853,12 @@ ul.pagination li.page-item.active {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+}
+.columnReprendre{
+	width: 50%;
+}
+.columnMatricula{
+	width: 30%;
 }
 
 #dadespinbalayudascontainer .descarregaJustificant { text-align:center; } 
@@ -1244,60 +1249,173 @@ input.form-control, select.form-control {
 .expiratMobil{
 	height: auto!important;
 }
-/*Issue #657*/
-/*!* Estils per visió mòbil *!*/
-/*.visioMobil{*/
-/*	display: inline-block!important;*/
-/*}*/
-/*.ocultarMobil{*/
-/*	display: none!important;*/
-/*}*/
-/*.imgCenter{*/
-/*	display: block;*/
-/*	margin-left: auto;*/
-/*	margin-right: auto;*/
-/*	max-height: 4em;*/
-/*	overflow: hidden;*/
-/*	width: min-content;*/
-/*}*/
-/*.titolAppInici{*/
-/*	padding-top: 2em;*/
-/*	padding-bottom: 0.5em;*/
-/*	text-align:center;*/
-/*	text-transform: uppercase;*/
-/*	font-weight: bold;*/
-/*	font-size: 2em;*/
-/*}*/
-/*body {*/
-/*	background-color: #FFFFFF !important;*/
-/*}*/
-/*.bcMobil{*/
-/*	background-color: #FFFFFF !important;*/
-/*}*/
-/*.contenedor{*/
-/*	background-color: #FFFFFF !important;*/
-/*}*/
-/*.anonimApp{*/
-/*	padding-top: 3em!important;*/
-/*	padding-bottom: 3em!important;*/
-/*}*/
-/*.wXarxa{*/
-/*	width: 150%!important;*/
-/*	max-width: none!important;*/
-/*}*/
-/*.espaiXarxa{*/
-/*	padding-left: 1em;*/
-/*	padding-right: 1em;*/
-/*}*/
-/*.imc-peu{*/
-/*	padding-left: 0!important;*/
-/*}*/
-/*#continguts{*/
-/*	width: auto!important;*/
-/*}*/
-/*.dretaXarxes{*/
-/*	padding-right: 1em;*/
-/*}*/
+/* Estils per visió mòbil */
+.visioMobil{
+	display: inline-block!important;
+	width: 100%;
+}
+.ocultarMobil{
+	display: none!important;
+}
+.imgCenter{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	/*max-height: 4em;*/
+	overflow: hidden;
+	width: min-content;
+}
+.titolAppInici{
+	padding-top: 2em;
+	padding-bottom: 0.5em;
+	text-align:center;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 2em;
+}
+body {
+	background-color: #FFFFFF !important;
+}
+.bcMobil{
+	background-color: #FFFFFF !important;
+}
+.contenedor{
+	background-color: #FFFFFF !important;
+}
+.anonimApp{
+	padding-top: 3em!important;
+	padding-bottom: 3em!important;
+	padding-left: 3em!important;
+}
+.font13App{
+	font-size: 1.3em;
+}
+.wXarxa{
+	width: 150%!important;
+	max-width: none!important;
+}
+.espaiXarxa{
+	padding-left: 1em;
+	padding-right: 1em;
+}
+.imc-peu{
+	padding-left: 0!important;
+}
+#continguts{
+	width: auto!important;
+}
+.dretaXarxes{
+	padding-right: 1em;
+}
+#continguts {
+	margin-left: 2em;
+	margin-right: 2em;
+}
+.titolPaginaApp{
+	position: fixed;
+	top:1.3em;
+	z-index: 5;
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 2em;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 75%;
+	text-align: center;
+	line-height: 1em;
+}
+.posHambApp{
+	padding-top: 1.6em;
+}
+.barraApp{
+	height: 4em;
+}
+.cardApp{
+	font-size: 1.3em!important;
+	border: none!important;
+}
+.iconaApp{
+	font-size: 0.8em;
+}
+.liApp{
+	margin-bottom: 1em;
+	border: 4px solid #32814B!important;
+}
+.mapaTextApp{
+	color: #32814B;
+}
+.wAuto{
+	width: auto!important;
+}
+.cardAppVerd{
+	border-radius: 2em!important;
+	border-color: #32814B!important;
+	border: 4px solid!important;
+	margin-bottom: 1.5em!important;
+	color: #32814B!important;
+	height: min-content!important;
+}
+.titolPluginApp{
+	font-size: 1.3em!important;
+	padding-bottom: 0!important;
+}
+.iconaPluginApp{
+	margin-left: auto;
+	margin-right: auto;
+	width: 150%;
+	max-width: 150%;
+	height: auto;
+}
+.padPluginApp{
+	padding-bottom: 1em;
+	padding-top: 1em;
+}
+.formApp{
+	display: none;
+}
+.iconaFormApp{
+	font-size: 2em;
+	color: #32814B;
+	padding-bottom: 1em;
+}
+.campFormApp{
+	flex-basis: auto;
+}
+.botoFormApp{
+	padding-bottom: 1em;
+}
+.mRegSelApp{
+	margin-bottom: 1em!important;
+}
+.ampleTotalApp{
+	width: 99%!important;
+}
+.pad15App{
+	padding-bottom: 1.5em!important;
+}
+.colorGrisApp{
+	color: #666!important;
+}
+.lletraPetitaApp{
+	font-size: x-large!important;
+}
+.padCardDadesApp{
+	padding: 1em!important;
+	width: auto;
+}
+.campFormNotibApp{
+	width: 100%!important;
+	padding-right: 1em!important;
+}
+.columnReprendre{
+	width: 98%!important;
+}
+.columnMatricula{
+	width: 97%;
+}
+.maxW97{
+	max-width: 97%!important;
+}
 }
 
 /*Se aplican cuando el width es menor que 480*/
@@ -1428,9 +1546,8 @@ body {
 		width: 100%;
 		font-size: 100%;
 		text-align: center;
-		padding-bottom: 1.5em;
-		/*Issue #657*/
-		/*padding-bottom: 4em;*/
+		/*padding-bottom: 1.5em;*/
+		padding-bottom: 4em;
 	}
 	.capsaPeu {
 		margin-top: 0;
@@ -1439,7 +1556,8 @@ body {
 		right: 1em;
 	}
 	.modal-dialog {
-		max-width: 700px;
+		/*max-width: 700px;*/
+		max-width: 95%;
 	}
 	.modal-body {
 		padding: 3rem;
@@ -1469,6 +1587,7 @@ body {
 	}
 	.ui-dialog{
 		height: auto !important;
+		width: 90%!important;
 	}
 }
 

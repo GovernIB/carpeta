@@ -101,23 +101,22 @@ class BarraMenu extends Component {
 
 		const styleColorMenu = (this.state.colorMenu === null)? { backgroundColor : '#32814B'} : { backgroundColor : "#"+this.state.colorMenu};
 
-		// issue #657
 		// return <div id = "barraMenu" className="ocultarMobil">
 		return <div id = "barraMenu">
-			<header className="imc-titol" style={styleColorMenu}>
+			<header className="imc-titol barraApp" style={styleColorMenu}>
 
 				<nav className="">
-					<div className="row imc--contingut">
+					<div className="row imc--contingut posHambApp">
 
 					{/*<a href="{this.context.router.goBack()}" className="imc-torna"*/}
 					{/*   title={t('menuTorna')}><span>{t('menuTorna')}</span></a>*/}
 
 						<div className="col-11 pl-0">
-							<h1 id="inici">
+							<h1 id="inici" className="ocultarMobil">
 								<Link to={'/'} className="titolAplicacio" tabIndex="101" aria-labelledby="inici">{t('menuTitol')}</Link>
 							</h1>
 
-							<ul>
+							<ul className="ocultarMobil">
 								{content}
 							</ul>
 						</div>

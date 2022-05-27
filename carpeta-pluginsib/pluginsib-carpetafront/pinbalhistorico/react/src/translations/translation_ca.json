@@ -48,5 +48,6 @@
   "pinbalHistoricoMotivoInscripcion": "Motiu inscripció",
   "pinbalHistoricoMotivoBaja" : "Motiu baixa",
   "pinbalHistoricoSelecciona" : "Triau un municipi",
-  "pinbalHistoricoValidaMunicipi" : "Heu de triar un municipi."
+  "pinbalHistoricoValidaMunicipi" : "Heu de triar un municipi.",
+  "pinbalHistoricoConsulta": "Consulta"
 }
