@@ -358,18 +358,16 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
 
                     // PROCEDIMENT
                     if(apoderament.getTipoApoderamiento().getListaProcedimientos() != null) {
-                        String proc = "";
-                        String codiProc;
-                        List<ProcedimientoType> procediments = (List<ProcedimientoType>)
-                                apoderament.getTipoApoderamiento().getListaProcedimientos();
-                        for (ProcedimientoType procediment : procediments) {
-                            codiProc = procediment.getCodProcedimiento();
-
-                            proc = proc + codiProc;
+                        List<ProcedimientoType> procs = new ArrayList<ProcedimientoType>();
+                        Procedimiento2 procediments = apoderament.getTipoApoderamiento().getListaProcedimientos().getValue();
+                        for (ProcedimientoType2 procediment : procediments.getProcedimiento()) {
+                            ProcedimientoType procedimiento = new ProcedimientoType();
+                            procedimiento.setCodProcedimiento(procediment.getCodProcedimiento());
+                            procs.add(procedimiento);
                         }
-                        apo.setProcediment(proc);
+                        apo.setProcediments(procs);
                     } else {
-                        apo.setProcediment(null);
+                        apo.setProcediments(null);
                     }
 
                     // ORGANISMES
