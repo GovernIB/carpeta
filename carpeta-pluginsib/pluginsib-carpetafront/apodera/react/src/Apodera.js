@@ -286,7 +286,7 @@ class Apodera extends Component {
                                                         <b>{t('apoderaEstatActual')}</b>: {this.nomEstat(estat)} - {this.descripcioEstat(estat)}
                                                     </p>
                                                     {organismes && <p><b>{t('apoderaOrganismes')}</b>: {llistaOrganismes}</p>}
-                                                    {procediments && <p><b>{t('apoderaProcediment')}</b>: {llistaProcediments}</p>}
+                                                    {procediments && <p><b>{t('apoderaProcediments')}</b>: {llistaProcediments}</p>}
                                                 </div>
                                                 <div style={{float: 'right', width: 'auto'}} id="accedirApodera">
                                                     <p>
@@ -388,7 +388,7 @@ class Apodera extends Component {
                                     {organismes && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
                                         <b>{t('apoderaOrganismes')}</b>: {llistaOrganismes2}</p>}
                                     {procediments && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
-                                        <b>{t('apoderaProcediment')}</b>: {llistaProcediments2}</p>}
+                                        <b>{t('apoderaProcediments')}</b>: {llistaProcediments2}</p>}
                                 </div>
                             </div>
                         )
