@@ -1,6 +1,7 @@
 package org.fundaciobit.pluginsib.carpetafront.apodera;
 
 import org.fundaciobit.pluginsib.carpetafront.apodera.api.OrganismoType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.ProcedimientoType;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class Apoderamiento {
     private String vigencia;
     private String ambit;
     private String descEstat;
-    private String procediment;
+    private List<ProcedimientoType> procediments;
     private List<OrganismoType> organismes;
 
     public Apoderamiento() {
@@ -21,7 +22,7 @@ public class Apoderamiento {
     }
 
     public Apoderamiento(String tipus, String subtipus, String estat, String apoderado, String vigencia, String ambit,
-                         String descEstat, String procediment, List<OrganismoType> organismes) {
+                         String descEstat, List<ProcedimientoType> procediments, List<OrganismoType> organismes) {
         super();
         this.tipus = tipus;
         this.subtipus = subtipus;
@@ -30,7 +31,7 @@ public class Apoderamiento {
         this.vigencia = vigencia;
         this.ambit = ambit;
         this.descEstat = descEstat;
-        this.procediment = procediment;
+        this.procediments = procediments;
         this.organismes = organismes;
     }
 
@@ -86,11 +87,11 @@ public class Apoderamiento {
 
     public void setDescEstat(String descEstat) {this.descEstat = descEstat; }
 
-    public String getProcediment() {
-        return procediment;
+    public List<ProcedimientoType> getProcediments() {
+        return procediments;
     }
 
-    public void setProcediment(String procediment) {this.procediment = procediment; }
+    public void setProcediments(List<ProcedimientoType> procediments) {this.procediments = procediments; }
 
     public List<OrganismoType> getOrganismes() {
         return organismes;

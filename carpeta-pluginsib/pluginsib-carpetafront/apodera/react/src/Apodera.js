@@ -223,7 +223,7 @@ class Apodera extends Component {
                                                                       estat,
                                                                       apoderado,
                                                                       vigencia,
-                                                                      procediment,
+                                                                      procediments,
                                                                       organismes
                                                                   }, i) => {
 
@@ -254,11 +254,18 @@ class Apodera extends Component {
                                     }
 
                                     let llistaOrganismes=[];
-                                    {organismes.forEach((s, i) => {
+                                    {organismes && organismes.forEach((s, i) => {
                                         if(s.codOrganismo) {
                                             llistaOrganismes.push(<p>- {s.codOrganismo}: {s.denomOrganismo}</p>)
                                         }else{
                                             llistaOrganismes.push(<p>- {s.denomOrganismo}</p>)
+                                        }
+                                    })}
+
+                                    let llistaProcediments=[];
+                                    {procediments && procediments.forEach((s, i) => {
+                                        if(s.codProcedimiento) {
+                                            llistaProcediments.push(<p>- {s.codProcedimiento}</p>)
                                         }
                                     })}
 
@@ -279,7 +286,7 @@ class Apodera extends Component {
                                                         <b>{t('apoderaEstatActual')}</b>: {this.nomEstat(estat)} - {this.descripcioEstat(estat)}
                                                     </p>
                                                     {organismes && <p><b>{t('apoderaOrganismes')}</b>: {llistaOrganismes}</p>}
-                                                    {procediment && <p><b>{t('apoderaProcediment')}</b>: {procediment}</p>}
+                                                    {procediments && <p><b>{t('apoderaProcediment')}</b>: {llistaProcediments}</p>}
                                                 </div>
                                                 <div style={{float: 'right', width: 'auto'}} id="accedirApodera">
                                                     <p>
@@ -312,7 +319,7 @@ class Apodera extends Component {
                                                          estat,
                                                          apoderado,
                                                          vigencia,
-                                                         procediment,
+                                                         procediments,
                                                          organismes
                                                      }, i) => {
 
@@ -345,11 +352,18 @@ class Apodera extends Component {
                         }
 
                         let llistaOrganismes2=[];
-                        {organismes.forEach((s, i) => {
+                        {organismes && organismes.forEach((s, i) => {
                             if(s.codOrganismo) {
                                 llistaOrganismes2.push(<p>- {s.codOrganismo}: {s.denomOrganismo}</p>)
                             }else{
                                 llistaOrganismes2.push(<p>- {s.denomOrganismo}</p>)
+                            }
+                        })}
+
+                        let llistaProcediments2=[];
+                        {procediments && procediments.forEach((s, i) => {
+                            if(s.codProcedimiento) {
+                                llistaProcediments2.push(<p>- {s.codProcedimiento}</p>)
                             }
                         })}
 
@@ -373,8 +387,8 @@ class Apodera extends Component {
                                         <b>{t('apoderaTipus')}</b>: {tipus} - <b>{t('apoderaSubtipus')}</b>: {subtipus}</p>
                                     {organismes && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
                                         <b>{t('apoderaOrganismes')}</b>: {llistaOrganismes2}</p>}
-                                    {procediment && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
-                                        <b>{t('apoderaProcediment')}</b>: {procediment}</p>}
+                                    {procediments && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
+                                        <b>{t('apoderaProcediment')}</b>: {llistaProcediments2}</p>}
                                 </div>
                             </div>
                         )
