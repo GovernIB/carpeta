@@ -290,12 +290,14 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
                     Apoderamiento apo = new Apoderamiento();
 
                     // TIPUS APODERAMENT
+                    /*
                     TipoApoderamiento ta = TipoApoderamiento.getTipoApoderamiento(
                             apoderament.getTipoApoderamiento().getTipoApod(),
                             apoderament.getTipoApoderamiento().getSubTipoApod());
 
                     String ts = "Tipo:" + apoderament.getTipoApoderamiento().getTipoApod() + " | Subtipo:"
                             + apoderament.getTipoApoderamiento().getSubTipoApod();
+                            */
 
 //                    if (ta == null) {
 ////                        apo.setTipus(getTraduccio(APODERA_RES_BUNDLE,"tipo.desconegut", locale) + " (" + ts + ")");

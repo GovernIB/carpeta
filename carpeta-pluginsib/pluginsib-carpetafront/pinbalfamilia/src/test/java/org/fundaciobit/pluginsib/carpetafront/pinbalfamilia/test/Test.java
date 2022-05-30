@@ -29,11 +29,11 @@ public class Test {
 			String absolutePath = "";
 			
 			DatosFamilia datos = pinbal.cridadaRest(userData, absolutePath);
-			/*
+			
 			if(datos.getError() != null && !datos.getError().isEmpty()) {
 				System.err.println("Error:" + datos.getError());
 			}
-			*/
+			
 			System.out.println("FINAL");
 			
 			

@@ -101,6 +101,9 @@ public class ApoderaTest {
         JAXBElement<Organismo> jaxbelementOrganismo =  factory.createTipoApoderamientoTypeListaOrganismos(organismo);
         tipoApoderamiento.setListaOrganismos(jaxbelementOrganismo);
         
+        
+        //tipoApoderamiento.getListaOrganismos().getValue().getOrganismo()
+        
         DatosConsultaApoderamientoType dcat = new DatosConsultaApoderamientoType();
         dcat.setDatosApoderado(datosApoderado);
         dcat.setTipoApoderamiento(tipoApoderamiento);

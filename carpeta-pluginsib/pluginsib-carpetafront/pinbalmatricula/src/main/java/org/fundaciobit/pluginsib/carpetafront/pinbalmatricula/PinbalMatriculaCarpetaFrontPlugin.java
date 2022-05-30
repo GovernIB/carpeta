@@ -7,7 +7,6 @@ import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
 import es.caib.carpeta.pluginsib.carpetafront.api.TitlesInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.pinbal.client.recobriment.model.ScspFuncionario;
-import es.caib.pinbal.client.recobriment.model.ScspJustificante;
 import es.caib.pinbal.client.recobriment.model.ScspTitular;
 import es.caib.pinbal.client.recobriment.model.ScspTitular.ScspTipoDocumentacion;
 import es.caib.pinbal.client.recobriment.model.Solicitud;
@@ -21,17 +20,13 @@ import javax.xml.bind.Unmarshaller;
 import org.apache.commons.io.IOUtils;
 import org.fundaciobit.pluginsib.carpetafront.pinbalmatricula.model.DatosAlumno;
 import org.fundaciobit.pluginsib.carpetafront.pinbalmatricula.model.DatosEspecificos;
-import org.fundaciobit.pluginsib.carpetafront.pinbalmatricula.model.IdTitular;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.StringReader;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -382,7 +377,7 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
             // Mateix Titular
             final ScspFuncionario funcionario = new ScspFuncionario();
             funcionario.setNifFuncionario(documentacionTutor);
-            funcionario.setNombreCompletoFuncionario(nombreTutor + " " + apellido1Tutor);
+            funcionario.setNombreCompletoFuncionario(nombreTutor + " " + apellido1Tutor + ((apellido2Tutor!=null)? (" " + apellido2Tutor): ""));
 
             SolicitudMatricula solicitud = new SolicitudMatricula(data, tipoDocumentacionTitular.toString(), titular.getDocumentacion(), titular.getNombre(), titular.getApellido1(), titular.getApellido2(), tipoDocumentacionTutor.toString(), documentacionTutor);
             log.info("solicitud: " + solicitud.getDatosEspecificos());

@@ -2,9 +2,6 @@ package org.fundaciobit.pluginsib.carpetafront.notificacionssistra;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
 
 import es.caib.carpeta.pluginsib.carpetafront.api.*;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementoExpediente;
@@ -15,16 +12,13 @@ import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static java.lang.reflect.Modifier.TRANSIENT;
 
 /**
  * @author jpernia

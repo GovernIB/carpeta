@@ -1,6 +1,5 @@
 package org.fundaciobit.pluginsib.carpetafront.pinbalmatricula.model;
 
-import java.util.ArrayList;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

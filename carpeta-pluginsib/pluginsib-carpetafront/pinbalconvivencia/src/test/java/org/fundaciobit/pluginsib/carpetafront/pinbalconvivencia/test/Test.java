@@ -5,7 +5,7 @@ import java.util.Properties;
 
 import org.apache.log4j.BasicConfigurator;
 import org.fundaciobit.pluginsib.carpetafront.pinbalconvivencia.PinbalConvivenciaCarpetaFrontPlugin;
-import org.fundaciobit.pluginsib.carpetafront.pinbalconvivencia.PinbalConvivenciaCarpetaFrontPlugin.DatosConvivencia;
+import org.fundaciobit.pluginsib.carpetafront.pinbalconvivencia.resposta.DatosConvivencia;
 
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 

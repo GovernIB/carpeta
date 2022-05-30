@@ -8,7 +8,6 @@ import org.fundaciobit.pluginsib.carpetafront.pinbalmatricula.PinbalMatriculaCar
 import org.fundaciobit.pluginsib.carpetafront.pinbalmatricula.PinbalMatriculaCarpetaFrontPlugin.DatosMatricula;
 
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
-import es.caib.pinbal.client.recobriment.model.ScspJustificante;
 
 import javax.servlet.http.HttpServletRequest;
 

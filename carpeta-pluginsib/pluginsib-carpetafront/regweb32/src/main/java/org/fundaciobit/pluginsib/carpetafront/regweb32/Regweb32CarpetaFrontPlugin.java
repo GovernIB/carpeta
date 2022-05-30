@@ -14,7 +14,7 @@ import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
 import es.caib.regweb3.ws.api.v3.AsientoWs;
-import es.caib.regweb3.ws.api.v3.FileInfoWs;
+
 import es.caib.regweb3.ws.api.v3.RegWebAsientoRegistralWs;
 import es.caib.regweb3.ws.api.v3.ResultadoBusquedaWs;
 
@@ -293,7 +293,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 	
 	        map.put("pathtoservei", pathtoservei);
 	        
-	        String detallpathtoservei = absolutePluginRequestPath + "/" + super.DETALL_REACT_PAGE;
+	        String detallpathtoservei = absolutePluginRequestPath + "/" + RegwebDetallComponent.DETALL_REACT_PAGE;
 	        
 	        map.put("detallpathtoservei", detallpathtoservei);
 	        
@@ -341,7 +341,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             }
 
 			// Número de registres a mostrar per pàgina
-            final int numItems = 10;
+            //final int numItems = 10;
 
             /* Filtre estat */
             String formEstat = (request.getParameter("estado") != null)
@@ -384,6 +384,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
                 log.info("DATA INICI => " + formDataIniciStr);
                 log.info("DATA FI => " + formDataFiStr);
                 log.info("ESTAT => " + formEstat);
+                log.info("PARAMETROS => " + parametros);
             }
     		
     		Map<String, String> dades = new HashMap<String, String>();

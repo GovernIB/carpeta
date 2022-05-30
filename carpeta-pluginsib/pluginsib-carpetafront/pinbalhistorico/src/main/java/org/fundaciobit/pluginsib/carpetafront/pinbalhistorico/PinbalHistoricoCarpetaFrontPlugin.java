@@ -18,20 +18,10 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.io.IOUtils;
-import org.fundaciobit.pluginsib.carpetafront.pinbalhistorico.model.ClaveHojaPadronal;
 import org.fundaciobit.pluginsib.carpetafront.pinbalhistorico.model.DatosEspecificos;
-import org.fundaciobit.pluginsib.carpetafront.pinbalhistorico.model.Direccion;
 import org.fundaciobit.pluginsib.carpetafront.pinbalhistorico.model.Documentacion;
 import org.fundaciobit.pluginsib.carpetafront.pinbalhistorico.model.Domicilio;
-import org.fundaciobit.pluginsib.carpetafront.pinbalhistorico.model.EntColectiva;
-import org.fundaciobit.pluginsib.carpetafront.pinbalhistorico.model.EntSingular;
-import org.fundaciobit.pluginsib.carpetafront.pinbalhistorico.model.MotivoBaja;
-import org.fundaciobit.pluginsib.carpetafront.pinbalhistorico.model.MotivoInscripcion;
-import org.fundaciobit.pluginsib.carpetafront.pinbalhistorico.model.MunicipioRespuesta;
-import org.fundaciobit.pluginsib.carpetafront.pinbalhistorico.model.Nucleo;
-import org.fundaciobit.pluginsib.carpetafront.pinbalhistorico.model.ProvinciaRespuesta;
 import org.fundaciobit.pluginsib.carpetafront.pinbalhistorico.model.Resultado;
-import org.fundaciobit.pluginsib.carpetafront.pinbalhistorico.model.Via;
 import org.fundaciobit.pluginsib.carpetafront.pinbalhistorico.resposta.DatosHistorico;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
@@ -42,7 +32,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;

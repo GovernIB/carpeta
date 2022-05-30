@@ -33,12 +33,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Properties;
+import java.util.TimeZone;
 import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
-
-import static java.util.Comparator.comparing;
 
 
 /**
@@ -250,7 +258,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
             map.put("pathtoservei", pathtoservei);
 
-            String detallpathtoservei = absolutePluginRequestPath + "/" + super.DETALL_REACT_PAGE;
+            String detallpathtoservei = absolutePluginRequestPath + "/" + RegwebDetallComponent.DETALL_REACT_PAGE;
 
             map.put("detallpathtoservei", detallpathtoservei);
 
@@ -287,7 +295,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
         Date formDataFi;
         String formEstat;
         int pagina;
-        int itemsPagina = 10;
+        //int itemsPagina = 10;
 
         String formDataIniciStr = request.getParameter("dataInici");
         String formDataFiStr = request.getParameter("dataFi");
@@ -309,7 +317,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             Map<String, String> dades = new HashMap<String, String>();
             List<TramitePersistenteGenerico> tramitesGenericos = new ArrayList<TramitePersistenteGenerico>();
             List<TramitePersistenteGenerico> sortedTramit = new ArrayList<TramitePersistenteGenerico>();
-            String missatgeError = "";
+            
 
             if (formDataInici == null ) {
                 dades.put("error", getTraduccio("error.dataInici.null", locale) );
@@ -325,6 +333,8 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
                         List<TramitePersistenteGenerico> tramits;
 
                         formDataFi = DateUtils.sumarRestarDiasFecha(formDataFi, 1);
+                        
+                        String missatgeError = "";
 
                         /* SISTRA1 */
                         try {
@@ -362,12 +372,12 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
                             }
                         } catch (javax.ws.rs.client.ResponseProcessingException e) {
                             tramits = null;
-                            e.printStackTrace();
-                            log.error("Sistra2 - No hi ha tramits:" + e.getMessage());
+                            
+                            log.error("Sistra2 - No hi ha tramits:" + e.getMessage(), e);
                         } catch (Exception e) {
                             tramits = null;
                             missatgeError += "Sistra2: " + e.getMessage();
-                            log.error("Error Sistra2:" + e.getMessage());
+                            log.error("Error Sistra2:" + missatgeError,e);
                         }
 
                         if (tramits != null) {
@@ -826,7 +836,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
                 });
         
         
-        if(tramitesFinalizados != null || !tramitesFinalizados.isEmpty()) {
+        if(tramitesFinalizados != null && !tramitesFinalizados.isEmpty()) {
         	for(RTramiteFinalizado tf : tramitesFinalizados) {
         		if ((finalizado.equals("A") || finalizado.equals("R"))) {
         			TramitePersistenteGenerico tpg = new TramitePersistenteGenerico(tf, 2);

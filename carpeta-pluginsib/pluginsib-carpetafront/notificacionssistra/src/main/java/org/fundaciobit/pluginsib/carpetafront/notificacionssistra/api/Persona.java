@@ -2,7 +2,6 @@ package org.fundaciobit.pluginsib.carpetafront.notificacionssistra.api;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.fundaciobit.pluginsib.carpetafront.notificacionssistra.api.PersonaTipus;
 
 @Data
 @NoArgsConstructor
