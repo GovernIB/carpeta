@@ -447,7 +447,7 @@ class Notib extends Component {
             <Form id="fechaBusqueda" style={{marginBottom: '20px'}} className="ocultarMobil">
                 <Container style={{ width: '95%', paddingLeft: '0', margin: '0' }} className="ampleTotalApp">
                     <Row>
-                        <div className="col-xs-12 mb-3 selectNotib campFormApp campFormNotibApp">
+                        <div className="col-xs-12 mb-3 col campFormApp campFormNotibApp">
                             <Form.Group>
                                 <Form.Label style={{float:'left'}}>{t('notibTipus')}</Form.Label>
                                 <Form.Select id="tipo"
@@ -462,7 +462,7 @@ class Notib extends Component {
                                 </Form.Select>
                             </Form.Group>
                         </div>
-                        <div className="col-xs-12 mb-3 selectNotib campFormApp campFormNotibApp">
+                        <div className="col-xs-12 mb-3 col campFormApp campFormNotibApp">
                             <Form.Group>
                                 <Form.Label style={{float:'left'}}>{t('notibComunicacionEstat')}</Form.Label>
                                 <Form.Select id="estat"
