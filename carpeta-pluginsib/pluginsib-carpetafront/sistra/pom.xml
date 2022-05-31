@@ -11,27 +11,27 @@
     <parent>
         <groupId>es.caib.carpeta</groupId>        
         <artifactId>carpeta-pluginsib-carpetafront</artifactId>
-        <version>1.1.17</version>
+        <version>1.1.18</version>
     </parent>
 
     <dependencies>
 
         <dependency>
             <groupId>es.caib.carpeta</groupId>
-            <version>1.1.17</version>
+            <version>1.1.18</version>
             <artifactId>carpeta-pluginsib-carpetafront-api</artifactId>
         </dependency>
         
         <dependency>
             <groupId>es.caib.carpeta</groupId>
-            <version>1.1.17</version>
+            <version>1.1.18</version>
             <artifactId>carpeta-pluginsib-carpetafront-regwebdetallcomponent</artifactId>
         </dependency>
         
         <dependency>
             <groupId>es.caib.carpeta</groupId>
             <artifactId>carpeta-commons</artifactId>
-            <version>1.1.17</version>
+            <version>1.1.18</version>
             <scope>provided</scope>
         </dependency>
 
