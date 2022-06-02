@@ -33,7 +33,7 @@ class PersistenciaControl extends Component {
     console.log('ENTRA A DORENDER ');
 
     if (urlcarpeta === '') {
-      urlcarpeta = 'https://dev.caib.es/carpetafront';
+      urlcarpeta = 'https://proves.caib.es/carpetafront';
     }
 
     if (codientitat === '') {

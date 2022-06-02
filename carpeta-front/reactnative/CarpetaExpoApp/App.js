@@ -11,13 +11,13 @@ import Constants from "expo-constants";
 import React, { Component } from "react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { withTranslation } from "react-i18next";
-
 import { Router } from "./src/components/Routing";
 import { sessionStorageRN } from "./src/SessionStorageClass";
 import Index from "./src/Index";
 import * as Notifications from "expo-notifications";
 import * as ScreenOrientation from "expo-screen-orientation";
 import Persistencia from './src/Persistencia';
+
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -56,7 +56,7 @@ async function registerForPushNotificationsAsync() {
 
   /* if (!Constants.isDevice && Platform.OS === "ios") {
     // FIXME:
-    alert("Must use physical device for Push Notifications in IOS");
+    alert("Must use physical device for Push Notifications in IOS !!!!");
     return;
   }  else  */ {
     var pushToken;

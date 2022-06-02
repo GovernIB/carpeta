@@ -34,6 +34,7 @@ export const setLocale = locale => {
 
 i18n.use(initReactI18next).init({
   resources,
+  compatibilityJSON: 'v3',
   lng: langActual,
 
   react: {
