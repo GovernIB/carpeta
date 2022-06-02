@@ -165,9 +165,13 @@ class Index extends Component {
             // render={(props) => {
             //   return <Home />;
             // }}
-          >
-            <Redirect to="/carpeta" />
-          </Route>
+//          >
+//            <Redirect to="/carpeta" />
+//          </Route>
+            render={(props) => {
+                return <CarpetaWeb {...props} />;
+              }}
+            /> 
 
           <Route
             path="/config"
