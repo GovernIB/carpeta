@@ -98,7 +98,10 @@ class CarpetaWeb extends Component {
     Linking.addEventListener('url', this.handleOpenURL);
 
     const { carpetaWebRef } = this.props;
-    carpetaWebRef(this);
+
+    if(carpetaWebRef) {
+      carpetaWebRef(this);
+    }
   }
 
   componentWillUnmount() {
@@ -106,7 +109,9 @@ class CarpetaWeb extends Component {
     Linking.removeEventListener('url', this.handleOpenURL);
 
     const { carpetaWebRef } = this.props;
-    carpetaWebRef(undefined);
+    if(carpetaWebRef) {
+      carpetaWebRef(undefined);
+    }
   }
 
   handleOpenURL = event => {
