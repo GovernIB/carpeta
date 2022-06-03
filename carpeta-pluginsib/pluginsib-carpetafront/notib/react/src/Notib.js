@@ -202,19 +202,34 @@ class Notib extends Component {
 
     }
 
-    handlePagination(event){
+    handlePagination(event, accio, isNumber, pag){
 
-        let newPageNumber =  event.target.text;
+        let newPageNumber = event.target.text;
+        let pagActiva;
+
+        if(!isNumber) {
+            if (accio === 0) {
+                pagActiva = newPageNumber;
+            }
+            if (accio === 1) {
+                pagActiva = this.state.pagination_active - 1;
+            }
+            if (accio === 2) {
+                pagActiva = this.state.pagination_active + 1;
+            }
+        }else{
+            pagActiva = pag;
+        }
 
         this.setState({
             ...this.state,
-            pagination_active: newPageNumber,
+            pagination_active: pagActiva,
             error: null,
             isLoaded: false
         });
 
         const params = {
-            pageNumber: newPageNumber-1,
+            pageNumber: pagActiva-1,
             registrosPorPagina: this.state.filter_regPorPagina,
             tipo: this.state.filter_type,
             estado: this.state.filter_status
@@ -231,7 +246,7 @@ class Notib extends Component {
                     urldetallbase3: response.data.urldetallbase3,
                     total_items: response.data.totalRegistres,
                     pagination_total_items: response.data.registresPagina,
-                    pagination_active: newPageNumber,
+                    pagination_active: pagActiva,
                     isLoaded: true,
                     error: null
                 });
@@ -535,11 +550,38 @@ class Notib extends Component {
 
             if(this.state.dataComunicacions && typeof (this.state.total_items) !== undefined && typeof (this.state.dataComunicacions) !== undefined && this.state.total_items !== 0) {
                 let paginationNumbers = [];
-                for (let number = 1; number <= Math.ceil(this.state.total_items/this.state.cercaRegistres); number++) {
+
+                let showMax = 5;
+                let endPage;
+                let startPage;
+                let pageNumbers = Math.ceil(this.state.total_items/this.state.cercaRegistres);
+                if (pageNumbers <= showMax) {
+                    startPage = 1;
+                    endPage = pageNumbers;
+                }else {
+                    if(this.state.pagination_active < 4){
+                        startPage = 1;
+                    } else{
+                        startPage = this.state.pagination_active - 2;
+                    }
+                    if (this.state.pagination_active + 2 < pageNumbers) {
+                        endPage = this.state.pagination_active + 2;
+                    }else {
+                        endPage = pageNumbers;
+                    }
+                }
+
+                for (let number = startPage; number <= endPage; number++) {
+                    if (number === startPage && startPage > 1) {
+                        paginationNumbers.push(<Pagination.Ellipsis key={number} className="muted" />);
+                    }
                     paginationNumbers.push(<Pagination.Item key={number}
                                                             active={number.toString() === this.state.pagination_active.toString()}
                                                             activeLabel=""
-                                                            onClick={(event) => this.handlePagination(event)} >{number}</Pagination.Item>,);
+                                                            onClick={(event) => this.handlePagination(event, 0, false, 0)}>{number}</Pagination.Item>,);
+                    if (number === endPage && endPage < pageNumbers) {
+                        paginationNumbers.push(<Pagination.Ellipsis key={number} className="muted" />);
+                    }
                 }
 
                 selectRegistres = <div className="col-md-12 border-0 p-0">
@@ -602,8 +644,17 @@ class Notib extends Component {
                         t('carpeta_paginacion_4')}
                     </div>
                     <Pagination style={{float:'right',paddingRight: '0.7em'}} className="ocultarMobil">
+                        {pageNumbers > showMax && <Pagination.First onClick={(event) => this.handlePagination(event, 0, true, 1)}
+                                         disabled={this.state.pagination_active === 1} />}
+                        {pageNumbers > showMax && <Pagination.Prev onClick={(event) => this.handlePagination(event, 1, false, 0)}
+                                                                disabled={this.state.pagination_active === 1}/>}
                         {paginationNumbers}
+                        {pageNumbers > showMax && <Pagination.Next onClick={(event) => this.handlePagination(event, 2, false, 0)}
+                                                                disabled={this.state.pagination_active === pageNumbers}/>}
+                        {pageNumbers > showMax && <Pagination.Last onClick={(event) => this.handlePagination(event, 0, true, pageNumbers)}
+                                         disabled={this.state.pagination_active === pageNumbers}/>}
                     </Pagination>
+
                 </>
 
                 this.state.dataComunicacions.map(({transmissio, tipus},i) => {
@@ -629,20 +680,28 @@ class Notib extends Component {
                 })
 
                 cardNotificacions.push(<div className="visioMobil">
-                        <div style={{float: 'left', marginTop: '9px;', width: '60%'}} className="visioMobil">
+                        <div style={{float: 'left', marginTop: '9px;', width: '100%'}} className="visioMobil pb-4">
                             {t('carpeta_paginacion_1_App') +
                             ((parseInt(this.state.pagination_active, 10) - 1) * parseInt(this.state.cercaRegistres, 10) + 1) +
                             t('carpeta_paginacion_2') +
-                            (((parseInt(this.state.pagination_active, 10) * parseInt(this.state.cercaRegistres, 10)) <= parseInt(this.state.pagination_total_items, 10))
-                                    ? parseInt(this.state.pagination_active, 10) * parseInt(this.state.cercaRegistres, 10)
-                                    : this.state.pagination_total_items
+                            ( ((parseInt(this.state.pagination_active,10)*parseInt(this.state.cercaRegistres, 10)) <= parseInt(this.state.total_items,10))
+                                    ? parseInt(this.state.pagination_active,10)*parseInt(this.state.cercaRegistres, 10)
+                                    : this.state.total_items
                             ) +
                             t('carpeta_paginacion_3_App') +
-                            this.state.pagination_total_items +
+                            this.state.total_items +
                             t('carpeta_paginacion_4')}
                         </div>
-                        <Pagination style={{float: 'right', paddingRight: '0.7em'}}>
+                        <Pagination style={{float: 'left', width: '100%'}} size="lg">
+                            {pageNumbers > showMax && <Pagination.First onClick={(event) => this.handlePagination(event, 0, true, 1)}
+                                              disabled={this.state.pagination_active === 1}/>}
+                            {pageNumbers > showMax && <Pagination.Prev onClick={(event) => this.handlePagination(event, 1, false, 0)}
+                                             disabled={this.state.pagination_active === 1}/>}
                             {paginationNumbers}
+                            {pageNumbers > showMax && <Pagination.Next onClick={(event) => this.handlePagination(event, 2, false, 0)}
+                                             disabled={this.state.pagination_active === pageNumbers}/>}
+                            {pageNumbers > showMax && <Pagination.Last onClick={(event) => this.handlePagination(event, 0, true, pageNumbers)}
+                                             disabled={this.state.pagination_active === pageNumbers}/>}
                         </Pagination>
                     </div>
                 )
