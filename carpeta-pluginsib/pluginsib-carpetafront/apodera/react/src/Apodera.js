@@ -211,6 +211,7 @@ class Apodera extends Component {
                             <Table id="tableId" responsive striped bordered hover style={tamanyTaula} className="ocultarMobil">
                                 <thead className="table-success">
                                 <tr>
+                                    <th>{t('apoderaTipus')}</th>
                                     <th style={tamanyData}>{t('apoderaAmbit')}</th>
                                     <th>{t('apoderaEstat')}</th>
                                     <th>{t('apoderaApoderado')}</th>
@@ -272,6 +273,7 @@ class Apodera extends Component {
                                     return <>
                                         <tr className="clickable-row" tabIndex={511 + i*2 - 1}
                                             onClick={() => this.mostrarMesInfo('row' + i)} onKeyPress={() => this.mostrarMesInfo('row' + i)}>
+                                            <td>{tipus}</td>
                                             <td>{valorAmbit}</td>
                                             {/*<td>{this.nomEstat(estat)}</td>*/}
                                             <td>{this.nomEstat(estat)}</td>
@@ -279,7 +281,7 @@ class Apodera extends Component {
                                             <td>{vigencia}</td>
                                         </tr>
                                         <tr style={{display: 'none'}} id={'row' + i}>
-                                            <td colSpan={4}>
+                                            <td colSpan={5}>
                                                 <div style={{float: 'left', width: '70%'}}>
                                                     {/*<p><b>{t('apoderaAmbit')}</b>: {valorAmbit} </p>*/}
                                                     <p>
@@ -290,18 +292,17 @@ class Apodera extends Component {
                                                 </div>
                                                 <div style={{float: 'right', width: 'auto'}} id="accedirApodera">
                                                     <p>
-                                                        <b>{t('apoderaTipus')}</b>: {tipus} - <b>{t('apoderaSubtipus')}</b>: {subtipus}
+                                                        <button className="btn btn-primary carpeta-btn botoAccedirCarpeta"
+                                                                title={t('apoderaAccedirApoderament')}
+                                                                tabIndex={511 + i*2}
+                                                                aria-labelledby="accedirApodera"
+                                                                onClick={() => {
+                                                                    window.open(this.state.urlApodera, "_blank")
+                                                                }}>
+                                                            <span className="oi oi-external-link" title=""
+                                                                  aria-hidden="true"/> {t('apoderaBotoApoderament')}
+                                                        </button>
                                                     </p>
-                                                    <button className="btn btn-primary carpeta-btn botoAccedirCarpeta"
-                                                            title={t('apoderaAccedirApoderament')}
-                                                            tabIndex={511 + i*2}
-                                                            aria-labelledby="accedirApodera"
-                                                            onClick={() => {
-                                                                window.open(this.state.urlApodera, "_blank")
-                                                            }}>
-                                                        <span className="oi oi-external-link" title=""
-                                                              aria-hidden="true"/> {t('apoderaBotoApoderament')}
-                                                    </button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -376,6 +377,8 @@ class Apodera extends Component {
                                 </div>
                                 <div className="col-sm-10 float-right">
                                     <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
+                                        <b>{t('apoderaTipus')}</b>: {tipus}</p>
+                                    <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
                                         <b>{t('apoderaAmbit')}: </b>{valorAmbit2}</p>
                                     <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
                                         <b>{t('apoderaEstatActual')}: </b>{this.nomEstat(estat)} - {this.descripcioEstat(estat)}</p>
@@ -383,8 +386,6 @@ class Apodera extends Component {
                                         <b>{t('apoderaApoderado')}: </b>{apoderado}</p>
                                     <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
                                         <b>{t('apoderaVigencia')}: </b>{vigencia}</p>
-                                    <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
-                                        <b>{t('apoderaTipus')}</b>: {tipus} - <b>{t('apoderaSubtipus')}</b>: {subtipus}</p>
                                     {organismes && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
                                         <b>{t('apoderaOrganismes')}</b>: {llistaOrganismes2}</p>}
                                     {procediments && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
