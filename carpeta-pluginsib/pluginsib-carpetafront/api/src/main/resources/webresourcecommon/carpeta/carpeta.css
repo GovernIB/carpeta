@@ -860,6 +860,12 @@ ul.pagination li.page-item.active {
 .columnMatricula{
 	width: 30%;
 }
+.visually-hidden{
+	display: none;
+}
+.colFixe{
+	width: 120px;
+}
 
 #dadespinbalayudascontainer .descarregaJustificant { text-align:center; } 
 #dadespinbalayudascontainer .descarregaJustificant span.oi { font-size: 3rem; display:block; margin: 10px; }
@@ -1415,6 +1421,9 @@ body {
 }
 .maxW97{
 	max-width: 97%!important;
+}
+.page-link{
+	font-size: 1.5em!important;
 }
 }
 

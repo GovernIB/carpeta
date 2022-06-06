@@ -160,12 +160,35 @@ class Regweb extends Component {
     }
 
 
-    handlePagination(event){
+    handlePagination(event, accio, isNumber, pag){
         const newPageNumber =  event.target.text;
+
+        let pagActiva;
+
+        if(!isNumber) {
+            if (accio === 0) {
+                pagActiva = newPageNumber;
+            }
+            if (accio === 1) {
+                pagActiva = this.state.pagination_active - 1;
+            }
+            if (accio === 2) {
+                pagActiva = this.state.pagination_active + 1;
+            }
+        }else{
+            pagActiva = pag;
+        }
 
         this.setState({
             ...this.state,
-            pagination_active: newPageNumber,
+            pagination_active: pagActiva,
+            error: null,
+            isLoaded: false
+        });
+
+        this.setState({
+            ...this.state,
+            pagination_active: pagActiva,
             error: null,
             isLoaded: false
         }); 
@@ -176,7 +199,7 @@ class Regweb extends Component {
             fechaFin: this.state.filter_endDate,
             estado: this.state.filter_status,
             registrosPorPagina: this.state.filter_regPorPagina,
-            pageNumber: newPageNumber-1
+            pageNumber: pagActiva-1
         };
 
         const url3 = this.props.pathtoservei;
@@ -187,7 +210,7 @@ class Regweb extends Component {
                 this.setState({
                     ...this.state,
                     data: JSON.parse(response.data.registres),
-                    pagination_active: newPageNumber,
+                    pagination_active: pagActiva,
                     pagination_total_items: response.data.totalRegistres,
                     isLoaded: true,
                     error: null
@@ -413,8 +436,38 @@ class Regweb extends Component {
         if(this.state.data && typeof (this.state.total_items) !== undefined && typeof (this.state.data) !== undefined && this.state.total_items !== 0) {
 
             let paginationNumbers = [];
-            for (let number = 1; number <= Math.ceil(this.state.pagination_total_items/this.state.cercaRegistres); number++) {
-                paginationNumbers.push(<Pagination.Item key={number} active={number.toString() == this.state.pagination_active.toString()} activeLabel="" onClick={(event) => this.handlePagination(event)} >{number}</Pagination.Item>,);
+
+            let showMax = 5;
+            let endPage;
+            let startPage;
+            let pageNumbers = Math.ceil(this.state.pagination_total_items/this.state.cercaRegistres);
+            if (pageNumbers <= showMax) {
+                startPage = 1;
+                endPage = pageNumbers;
+            }else {
+                if(this.state.pagination_active < 4){
+                    startPage = 1;
+                } else{
+                    startPage = this.state.pagination_active - 2;
+                }
+                if (this.state.pagination_active + 2 < pageNumbers) {
+                    endPage = this.state.pagination_active + 2;
+                }else {
+                    endPage = pageNumbers;
+                }
+            }
+
+            for (let number = startPage; number <= endPage; number++) {
+                if (number === startPage && startPage > 1) {
+                    paginationNumbers.push(<Pagination.Ellipsis key={number} className="muted" />);
+                }
+                paginationNumbers.push(<Pagination.Item key={number}
+                                                        active={number.toString() === this.state.pagination_active.toString()}
+                                                        activeLabel=""
+                                                        onClick={(event) => this.handlePagination(event, 0, false, 0)}>{number}</Pagination.Item>,);
+                if (number === endPage && endPage < pageNumbers) {
+                    paginationNumbers.push(<Pagination.Ellipsis key={number} className="muted" />);
+                }
             }
 
            taulaRegistres = <>
@@ -454,7 +507,15 @@ class Regweb extends Component {
                    t('carpeta_paginacion_4')}
                </div>
                 <Pagination style={{float:'right'}}>
+                    {pageNumbers > showMax && <Pagination.First onClick={(event) => this.handlePagination(event, 0, true, 1)}
+                                                                disabled={this.state.pagination_active === 1} />}
+                    {pageNumbers > showMax && <Pagination.Prev onClick={(event) => this.handlePagination(event, 1, false, 0)}
+                                                               disabled={this.state.pagination_active === 1}/>}
                     {paginationNumbers}
+                    {pageNumbers > showMax && <Pagination.Next onClick={(event) => this.handlePagination(event, 2, false, 0)}
+                                                               disabled={this.state.pagination_active === pageNumbers}/>}
+                    {pageNumbers > showMax && <Pagination.Last onClick={(event) => this.handlePagination(event, 0, true, pageNumbers)}
+                                                               disabled={this.state.pagination_active === pageNumbers}/>}
                 </Pagination>
             </>
 
@@ -725,13 +786,40 @@ class Regweb extends Component {
 
                 if (this.state.data != null && parseInt(this.state.pagination_total_items, 10) > 0 && this.state.data && typeof (this.state.total_items) !== undefined && typeof (this.state.data) !== undefined && this.state.total_items !== 0) {
 
-                        let paginationNumbers = [];
-                        for (let number = 1; number <= Math.ceil(this.state.pagination_total_items / this.state.cercaRegistres); number++) {
-                            paginationNumbers.push(<Pagination.Item key={number}
-                                                                    active={number.toString() === this.state.pagination_active.toString()}
-                                                                    activeLabel=""
-                                                                    onClick={(event) => this.handlePagination(event)}>{number}</Pagination.Item>,);
+                    let paginationNumbers = [];
+
+                    let showMax = 5;
+                    let endPage;
+                    let startPage;
+                    let pageNumbers = Math.ceil(this.state.pagination_total_items/this.state.cercaRegistres);
+                    if (pageNumbers <= showMax) {
+                        startPage = 1;
+                        endPage = pageNumbers;
+                    }else {
+                        if(this.state.pagination_active < 4){
+                            startPage = 1;
+                        } else{
+                            startPage = this.state.pagination_active - 2;
                         }
+                        if (this.state.pagination_active + 2 < pageNumbers) {
+                            endPage = this.state.pagination_active + 2;
+                        }else {
+                            endPage = pageNumbers;
+                        }
+                    }
+
+                    for (let number = startPage; number <= endPage; number++) {
+                        if (number === startPage && startPage > 1) {
+                            paginationNumbers.push(<Pagination.Ellipsis key={number} className="muted" />);
+                        }
+                        paginationNumbers.push(<Pagination.Item key={number}
+                                                                active={number.toString() === this.state.pagination_active.toString()}
+                                                                activeLabel=""
+                                                                onClick={(event) => this.handlePagination(event, 0, false, 0)}>{number}</Pagination.Item>,);
+                        if (number === endPage && endPage < pageNumbers) {
+                            paginationNumbers.push(<Pagination.Ellipsis key={number} className="muted" />);
+                        }
+                    }
 
                         selectRegistres = <div className="col-md-12 border-0 p-0">
                             <div className="col-sd-1 pb-2 margRegSelect">
@@ -796,7 +884,15 @@ class Regweb extends Component {
                                 t('carpeta_paginacion_4')}
                             </div>
                             <Pagination style={{float: 'right', paddingRight: '0.7em'}} className="ocultarMobil">
+                                {pageNumbers > showMax && <Pagination.First onClick={(event) => this.handlePagination(event, 0, true, 1)}
+                                                                            disabled={this.state.pagination_active === 1} />}
+                                {pageNumbers > showMax && <Pagination.Prev onClick={(event) => this.handlePagination(event, 1, false, 0)}
+                                                                           disabled={this.state.pagination_active === 1}/>}
                                 {paginationNumbers}
+                                {pageNumbers > showMax && <Pagination.Next onClick={(event) => this.handlePagination(event, 2, false, 0)}
+                                                                           disabled={this.state.pagination_active === pageNumbers}/>}
+                                {pageNumbers > showMax && <Pagination.Last onClick={(event) => this.handlePagination(event, 0, true, pageNumbers)}
+                                                                           disabled={this.state.pagination_active === pageNumbers}/>}
                             </Pagination>
 
                         </>
@@ -829,7 +925,7 @@ class Regweb extends Component {
                     })
 
                     cardRegistres.push(<div className="visioMobil">
-                            <div style={{float: 'left', marginTop: '9px;', width: '60%'}} className="visioMobil">
+                            <div style={{float: 'left', marginTop: '9px;', width: '100%'}} className="visioMobil pb-4">
                                 {t('carpeta_paginacion_1_App') +
                                 ((parseInt(this.state.pagination_active, 10) - 1) * parseInt(this.state.cercaRegistres, 10) + 1) +
                                 t('carpeta_paginacion_2') +
@@ -841,8 +937,16 @@ class Regweb extends Component {
                                 this.state.pagination_total_items +
                                 t('carpeta_paginacion_4')}
                             </div>
-                            <Pagination style={{float: 'right', paddingRight: '0.7em'}}>
+                            <Pagination style={{float: 'left', paddingRight: '0.7em', width: '100%'}} size="lg">
+                                {pageNumbers > showMax && <Pagination.First onClick={(event) => this.handlePagination(event, 0, true, 1)}
+                                                                            disabled={this.state.pagination_active === 1} />}
+                                {pageNumbers > showMax && <Pagination.Prev onClick={(event) => this.handlePagination(event, 1, false, 0)}
+                                                                           disabled={this.state.pagination_active === 1}/>}
                                 {paginationNumbers}
+                                {pageNumbers > showMax && <Pagination.Next onClick={(event) => this.handlePagination(event, 2, false, 0)}
+                                                                           disabled={this.state.pagination_active === pageNumbers}/>}
+                                {pageNumbers > showMax && <Pagination.Last onClick={(event) => this.handlePagination(event, 0, true, pageNumbers)}
+                                                                           disabled={this.state.pagination_active === pageNumbers}/>}
                             </Pagination>
                         </div>
                     )
