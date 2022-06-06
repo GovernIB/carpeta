@@ -41,6 +41,7 @@ class Notib extends Component {
         this.handleTypeFilterParam = this.handleTypeFilterParam.bind(this);
         this.handleStatusFilterParam = this.handleStatusFilterParam.bind(this);
         this.mostrarForm = this.mostrarForm.bind(this);
+        this.mostrarMesInfo = this.mostrarMesInfo.bind(this);
 
         this.handleSubmitSearcher = this.handleSubmitSearcher.bind(this);
 
@@ -62,6 +63,14 @@ class Notib extends Component {
             ...this.state,
             formVisible: true
         });
+    }
+
+    mostrarMesInfo(row) {
+        if(document.getElementById(row).style.display === "none" ) {
+            document.getElementById(row).style.display = "table-row";
+        } else if( document.getElementById(row).style.display === "table-row" ) {
+            document.getElementById(row).style.display = "none";
+        }
     }
 
     canviatIdioma(lng) {
@@ -608,26 +617,53 @@ class Notib extends Component {
                     <Table id="tableId" responsive striped bordered hover style={tamanyTaula} className="ocultarMobil">
                         <thead className="table-success">
                         <tr>
-                            <th style={tamanyData}>{t('notibComunicacionFecha')}</th>
-                            <th>{t('notibComunicacionOrgano')}</th>
+                            <th className="colFixe">{t('notibComunicacionFecha')}</th>
+                            <th className="colFixe">{t('notibTipus')}</th>
                             <th>{t('notibComunicacionConcepte')}</th>
-                            <th style={tamanyData}>{t('notibComunicacionDataEstat')}</th>
-                            <th>{t('notibTipus')}</th>
-                            <th>{t('notibComunicacionEstat')}</th>
+                            <th className="colFixe">{t('notibComunicacionEstat')}</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {this.state.dataComunicacions.map(({transmissio, tipus}) => {
-                            return <tr className="" data-target="_blank" onClick={() =>
-                                window.open(tipus === 'notificacio' ? (transmissio.estat === 'FINALIZADA' || transmissio.estat === 'FINALITZADA' || transmissio.estat === 'PROCESADA' || transmissio.estat === 'PROCESSADA' ? this.state.urldetallbase2 : this.state.urldetallbase) : this.state.urldetallbase3, '_blank')}
-                                       style={cursorPointer} tabIndex="511">
-                                <td data-order={$.dateOrder(transmissio.dataEnviament)}>{$.dateFormat(transmissio.dataEnviament)}</td>
-                                <td>{transmissio.organGestor}</td>
-                                <td>{transmissio.concepte}</td>
-                                <td>{$.dateFormat(transmissio.dataEstat)}</td>
-                                <td>{tipus === 'notificacio' ? i18n.t('notibNotificacio') : i18n.t('notibComunicacio')}</td>
-                                <td>{transmissio.estat}</td>
-                            </tr>
+                        {this.state.dataComunicacions.map(({transmissio, tipus},i) => {
+                            // let nomTitular;
+                            // if(transmissio.titular.nom){
+                            //     nomTitular = transmissio.titular.nom + " " + transmissio.titular.llinatge1;
+                            // }else{
+                            //     nomTitular = transmissio.titular.raoSocial;
+                            // }
+                            return <>
+                                    <tr className="clickable-row" style={cursorPointer} tabIndex={511 + i*2 - 1} onClick={() => this.mostrarMesInfo('row' + i)} onKeyPress={() => this.mostrarMesInfo('row' + i)}>
+                                        <td data-order={$.dateOrder(transmissio.dataEnviament)}>{$.dateFormat(transmissio.dataEnviament)}</td>
+                                        <td>{tipus === 'notificacio' ? i18n.t('notibNotificacio') : i18n.t('notibComunicacio')}</td>
+                                        <td>{transmissio.concepte}</td>
+                                        <td>{transmissio.estat}</td>
+                                    </tr>
+                                    <tr style={{display: 'none'}} id={'row' + i}>
+                                        <td colSpan={4}>
+                                            <div style={{float: 'left', width: '70%'}}>
+                                                {transmissio.emisor &&<p><b>{t('notibComunicacionEmissor')}</b>: {transmissio.emisor}</p>}
+                                                {transmissio.organGestor &&<p><b>{t('notibComunicacionOrgano')}</b>: {transmissio.organGestor}</p>}
+                                                {transmissio.procediment && <p><b>{t('notibProcediment')}</b>: {transmissio.procediment}</p>}
+                                                {transmissio.descripcio && <p><b>{t('notibDescripcioNotificacio')}</b>: {transmissio.descripcio}</p>}
+                                            </div>
+                                            <div style={{float: 'right', width: 'auto'}} id="accedirNotib">
+                                                {transmissio.dataEstat && <p><b>{t('notibDarreraModificacio')}</b>: {$.dateFormat(transmissio.dataEstat)}</p>}
+                                                {transmissio.subestat && <p><b>{t('notibSubestat')}</b>: {transmissio.subestat}</p>}
+                                                <p className="pt-2">
+                                                    <button className="btn btn-primary carpeta-btn botoAccedirCarpeta"
+                                                            title={t('notibAccedirComunicacio')}
+                                                            tabIndex={511 + i*2}
+                                                            aria-labelledby="accedirNotib"
+                                                            onClick={() =>
+                                                                window.open(tipus === 'notificacio' ? (transmissio.estat === 'FINALIZADA' || transmissio.estat === 'FINALITZADA' || transmissio.estat === 'PROCESADA' || transmissio.estat === 'PROCESSADA' ? this.state.urldetallbase2 : this.state.urldetallbase) : this.state.urldetallbase3, '_blank')}>
+                                                            <span className="oi oi-external-link" title=""
+                                                                  aria-hidden="true"/> {t('notibBotoDehu')}
+                                                    </button>
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </>
                         })}
                         </tbody>
                     </Table>
@@ -658,6 +694,12 @@ class Notib extends Component {
                 </>
 
                 this.state.dataComunicacions.map(({transmissio, tipus},i) => {
+                    // let nomTitular;
+                    // if(transmissio.titular.nom){
+                    //     nomTitular = transmissio.titular.nom + " " + transmissio.titular.llinatge1;
+                    // }else{
+                    //     nomTitular = transmissio.titular.raoSocial;
+                    // }
 
                     cardNotificacions.push(
                         <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil"
@@ -667,11 +709,15 @@ class Notib extends Component {
                                 <span className="oi oi-envelope-closed iconaFormApp" title={t('notibComunicacio')} style={{verticalAlign: 'sub'}}/>
                             </div>
                             <div className="col-sm-10 float-right">
-                                <p className="card-text pl-1 mt-0 font-weight-bold" style={{color: 'rgb(102, 102, 102)'}}>{transmissio.concepte}</p>
                                 <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}>{$.dateFormat(transmissio.dataEnviament)}</p>
-                                <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}>{transmissio.organGestor}</p>
                                 <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}>{tipus === 'notificacio' ? i18n.t('notibNotificacio') : i18n.t('notibComunicacio')}</p>
-                                <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}><b>{t('notibComunicacionDataEstat')}: </b>{$.dateFormat(transmissio.dataEstat)}</p>
+                                <p className="card-text pl-1 mt-0 font-weight-bold" style={{color: 'rgb(102, 102, 102)'}}>{transmissio.concepte}</p>
+                                {transmissio.emisor && <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}><b>{t('notibComunicacionEmissor')}: </b>{transmissio.emisor}</p>}
+                                {transmissio.organGestor && <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}>{transmissio.organGestor}</p>}
+                                {transmissio.procediment && <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}><b>{t('notibProcediment')}: </b>{transmissio.procediment}</p>}
+                                {transmissio.descripcio && <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}><b>{t('notibDescripcioNotificacio')}: </b>{transmissio.descripcio}</p>}
+                                {transmissio.dataEstat && <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}><b>{t('notibDarreraModificacio')}: </b>{$.dateFormat(transmissio.dataEstat)}</p>}
+                                {transmissio.subestat && <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}><b>{t('notibSubestat')}: </b>{transmissio.subestat}</p>}
                                 <h3 className="titolPlugin titol h3 visioMobil titolPluginApp">{transmissio.estat}</h3>
                             </div>
                         </div>

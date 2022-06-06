@@ -39,6 +39,12 @@
     "notibNotificacionsBuid": "No hi ha Notificacions",
     "notibProblema": "Hi ha hagut qualque problema de comunicació.",
     "notibCerca": "Cerca",
-    "notibTotesCriteri": "Totes Comunicacions i Notificacions"
-
+    "notibTotesCriteri": "Totes Comunicacions i Notificacions",
+    "notibProcediment": "Procediment",
+    "notibTitular": "Titular",
+    "notibAccedirComunicacio": "Accedir al botó Consulti la notificació",
+    "notibBotoDehu": "Comparèixer",
+    "notibDescripcioNotificacio": "Descripció",
+    "notibDarreraModificacio": "Darrera modificació",
+    "notibSubestat": "Subestat"
 }

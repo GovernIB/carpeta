@@ -40,5 +40,12 @@
     "notibNotificacionsBuid": "No hay Notificaciones",
     "notibProblema": "Ha habido algún problema de comunicación.",
     "notibCerca": "Búsqueda",
-    "notibTotesCriteri": "Todas Comunicaciones y Notificaciones"
+    "notibTotesCriteri": "Todas Comunicaciones y Notificaciones",
+    "notibProcediment": "Procedimiento",
+    "notibTitular": "Titular",
+    "notibAccedirComunicacio": "Acceder al botón Consulte la notificación",
+    "notibBotoDehu": "Comparecer",
+    "notibDescripcioNotificacio": "Descripción",
+    "notibDarreraModificacio": "Última modificación",
+    "notibSubestat": "Subestado"
 }
