@@ -330,7 +330,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
                     } else {
                         log.info("Consulta  resultats a sistra per dataInici:" + formDataInici + " | Data fi: " + formDataFi + " | Estat: " + formEstat);
 
-                        List<TramitePersistenteGenerico> tramits;
+                        List<TramitePersistenteGenerico> tramits = null;
 
                         formDataFi = DateUtils.sumarRestarDiasFecha(formDataFi, 1);
                         
@@ -338,12 +338,31 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
                         /* SISTRA1 */
                         try {
-                            if (isDevelopment()) {
-                                tramits = getTramitsDebug(formDataInici, formDataFi, userData.getAdministrationID(), formEstat,
-                                        locale, absolutePluginRequestPath);
-                            } else {
-                                tramits = getTramits(formDataInici, formDataFi, userData.getAdministrationID(), formEstat, locale,
-                                        absolutePluginRequestPath);
+                            // Només fa la cerca a Sistra 1 dins els 3 darrers mesos a data d'avui
+                            Calendar primeraData = Calendar.getInstance();
+                            Date avui = new Date();
+                            primeraData.setTime(avui);
+                            primeraData.add(Calendar.MONTH, -3);
+
+                            boolean cercaSistra1 = false;
+
+                            if(primeraData.getTime().after(formDataInici)){
+                                formDataInici = primeraData.getTime();
+                                if(formDataInici.equals(formDataFi) || formDataInici.before(formDataFi)){
+                                    cercaSistra1 = true;
+                                }
+                            } else{
+                                cercaSistra1 = true;
+                            }
+
+                            if(cercaSistra1){
+                                if (isDevelopment()) {
+                                    tramits = getTramitsDebug(formDataInici, formDataFi, userData.getAdministrationID(),
+                                            formEstat, locale, absolutePluginRequestPath);
+                                } else {
+                                    tramits = getTramits(formDataInici, formDataFi, userData.getAdministrationID(),
+                                            formEstat, locale, absolutePluginRequestPath);
+                                }
                             }
                         } catch (SOAPFaultException e) {
                             tramits = null;
