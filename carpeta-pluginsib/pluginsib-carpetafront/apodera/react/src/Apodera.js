@@ -121,12 +121,14 @@ class Apodera extends Component {
                 console.log("error.response.headers: " + error.response.headers);
             }
             if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                var errorPantalla = error.response.data.replace("<html><head><title>Error</title></head><body>", '');
+                errorPantalla = errorPantalla.replace("</body></html>", '');
                 this.setState({
                     isLoaded: true,
                     dataApoderaments: null,
                     dataPoderdant: null,
                     total_items: 0,
-                    error: "error500plugin",
+                    error: errorPantalla,
                     urlApodera: null
                 });
             } else{
