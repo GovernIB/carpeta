@@ -633,7 +633,7 @@ class Sistra extends Component {
                 }
             }else{
                 if (tipo === 'REGISTRO' || numero !== '') {
-                    return t('sistraRegistrat'); // Registrat
+                    return t('sistraFinalitzat'); // Registrat
                 }else{
                     return t('sistraFinalitzat'); // Finalitzat
                 }
@@ -769,7 +769,7 @@ class Sistra extends Component {
                                     <option value="S" className="form-control form-control-sm selectMobil" selected={this.state.estat === 'S'}>{t('sistraFinalitzat')}</option>
                                     <option value="N" className="form-control form-control-sm selectMobil" selected={this.state.estat === 'N'}>{t('sistraNoFinalitzat')}</option>
                                     <option value="P" className="form-control form-control-sm selectMobil" selected={this.state.estat === 'P'}>{t('sistraNoFinalizatPresencial')}</option>
-                                    <option value="R" className="form-control form-control-sm selectMobil" selected={this.state.estat === 'R'}>{t('sistraRegistrat')}</option>
+                                    {/*<option value="R" className="form-control form-control-sm selectMobil" selected={this.state.estat === 'R'}>{t('sistraRegistrat')}</option>*/}
                                 </Form.Select>
                             </Form.Group>
                         </Col>
