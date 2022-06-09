@@ -1432,6 +1432,12 @@ body {
 .centrarTop{
 	margin-top: 12%;
 }
+.textModalAjudaApp{
+	font-size: 1.2em!important;
+}
+.ajudaModalApp{
+	top: 30%;
+}
 }
 
 /*Se aplican cuando el width es menor que 480*/
