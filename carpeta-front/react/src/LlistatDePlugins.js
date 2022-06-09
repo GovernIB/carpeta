@@ -32,6 +32,10 @@ class LlistatDePlugins extends Component {
     }
 
     componentDidMount() {
+        var amplePantalla = screen.width;
+        if(amplePantalla < 576) {
+            document.getElementById("headerBarra").style.backgroundColor = sessionStorage.getItem("colorBarra");
+        }
 
         const seccioContext = this.props.seccioContext ? this.props.seccioContext : '0';
 

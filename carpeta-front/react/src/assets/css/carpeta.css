@@ -1256,7 +1256,6 @@ input.form-control, select.form-control {
 .visioMobil{
 	display: inline-block!important;
 	width: 100%;
-	margin-top: 12%;
 }
 .ocultarMobil{
 	display: none!important;
@@ -1333,7 +1332,7 @@ body {
 }
 .barraApp{
 	height: 4em;
-	background-color: #fff!important;
+	/*background-color: #fff!important;*/
 }
 .cardApp{
 	font-size: 1.3em!important;
@@ -1429,6 +1428,9 @@ body {
 }
 .textTramitacioApp{
 	font-size: 1em!important;
+}
+.centrarTop{
+	margin-top: 12%;
 }
 }
 

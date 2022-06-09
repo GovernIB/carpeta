@@ -29,6 +29,11 @@ class IniciPublic extends Component {
 
 
     componentDidMount() {
+        var amplePantalla = screen.width;
+        if(amplePantalla < 576) {
+            document.getElementById("headerBarra").style.backgroundColor = "#ffffff";
+        }
+
         var baseURL = sessionStorage.getItem('contextPath');
         var url = baseURL + "/webui/infoEntitat";
 
@@ -218,7 +223,7 @@ class IniciPublic extends Component {
                 </div>
 
 
-                <div className="visioMobil">
+                <div className="visioMobil centrarTop">
 
                     {htmlCodeApp}
 

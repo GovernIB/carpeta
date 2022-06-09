@@ -100,10 +100,12 @@ class BarraMenu extends Component {
 		}
 
 		const styleColorMenu = (this.state.colorMenu === null)? { backgroundColor : '#32814B'} : { backgroundColor : "#"+this.state.colorMenu};
+		let colorMenu = (this.state.colorMenu === null)? '#32814B' : "#"+this.state.colorMenu;
+		sessionStorage.setItem('colorBarra', colorMenu);
 
 		// return <div id = "barraMenu" className="ocultarMobil">
 		return <div id = "barraMenu">
-			<header className="imc-titol barraApp" style={styleColorMenu}>
+			<header className="imc-titol barraApp" style={styleColorMenu} id="headerBarra">
 
 				<nav className="">
 					<div className="row imc--contingut posHambApp">

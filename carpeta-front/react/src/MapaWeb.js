@@ -28,6 +28,10 @@ class MapaWeb extends Component {
     }
 
 	componentDidMount() {
+		var amplePantalla = screen.width;
+		if(amplePantalla < 576) {
+			document.getElementById("headerBarra").style.backgroundColor = sessionStorage.getItem("colorBarra");
+		}
 
 		// 0 == Nivell Arell
 		var baseURL = sessionStorage.getItem('contextPath');
