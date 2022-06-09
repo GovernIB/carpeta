@@ -185,14 +185,14 @@ class IniciPublic extends Component {
                                     }
                                     //alert('Obrim DOLOGIN => ' + theUrl);
                                     window.location.href = theUrl
-                                }} tabIndex="503" aria-labelledby="accedirCarpetaPrivat2" style={{ padding: '1em 3em 1em 3em', borderRadius: '10px'}}>
+                                }} tabIndex="503" aria-labelledby="accedirCarpetaPrivat2" style={{ padding: '1em 3.5em 1em 3.5em', borderRadius: '10px', fontSize: '1.2em'}}>
                             <span className="oi oi-account-login" title="" aria-hidden="true"/> {i18n.t('paginaIniciBotoAccedirMobil')}
                         </button>
                     </p>
 
                     <div className="anonimApp">
-                        <h2 className="apartat h5 text-verd font-weight-bold">{i18n.t('tramitacioAnonimaTitol')}</h2>
-                        <p className="lh15 pb-3 subtitolSuperior" id="reprendreTramitacio"><a href={baseURL + '/#/publicmodul/reprendretramit'} id="tramitacioModalBtn" tabIndex="504" aria-labelledby="reprendreTramitacio"><span
+                        <h2 className="apartat h5 text-verd font-weight-bold textTramitacioApp">{i18n.t('tramitacioAnonimaTitol')}</h2>
+                        <p className="lh15 pb-3 subtitolSuperior textTramitacioApp" id="reprendreTramitacio"><a href={baseURL + '/#/publicmodul/reprendretramit'} id="tramitacioModalBtn" tabIndex="504" aria-labelledby="reprendreTramitacio"><span
                             className="oi oi-external-link" style={{paddingRight: '20px'}}/>{i18n.t('tramitacioEnllazApp')}</a></p>
                     </div>
                 </>

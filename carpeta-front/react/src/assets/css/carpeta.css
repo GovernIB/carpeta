@@ -1256,6 +1256,7 @@ input.form-control, select.form-control {
 .visioMobil{
 	display: inline-block!important;
 	width: 100%;
+	margin-top: 12%;
 }
 .ocultarMobil{
 	display: none!important;
@@ -1332,6 +1333,7 @@ body {
 }
 .barraApp{
 	height: 4em;
+	background-color: #fff!important;
 }
 .cardApp{
 	font-size: 1.3em!important;
@@ -1421,6 +1423,12 @@ body {
 }
 .page-link{
 	font-size: 1.5em!important;
+}
+.botoAccedirCarpeta{
+	font-size: 1.2em;
+}
+.textTramitacioApp{
+	font-size: 1em!important;
 }
 }
 
@@ -1611,11 +1619,11 @@ body {
 
 /* GENERAL */
 .close { font-size: 2em !important; line-height: 0.7!important;}
-.btn { font-size: 1em !important; }
+.btn { font-size: 1em; }
 .table {font-size: 0.8em !important; }
 .pagination-sm .page-link { font-size: 0.875em !important; }
 .alert-warning { font-size: 0.85em !important; }
-.btn-primary.carpeta-btn { font-size: 1em !important; }
+.btn-primary.carpeta-btn { font-size: 1em; }
 /*.imc-continguts { padding-top: 5em !important; }*/
 p.subtitol { font-size: 0.8em !important; }
 
