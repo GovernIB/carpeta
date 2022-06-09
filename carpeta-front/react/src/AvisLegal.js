@@ -75,7 +75,7 @@ class AvisLegal extends Component {
 
 
         return (<>
-                <div className="titolPaginaApp">
+                <div className="titolPaginaApp visioMobil">
                     {t('avisLegalTitol')}
                 </div>
                 <div className="container-contenido" tabIndex="501">

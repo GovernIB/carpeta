@@ -171,7 +171,7 @@ class Index extends Component {
                     {/*<div className="imc-continguts noEnfocar marge-mobil" style={estilContingut} id="continguts" tabIndex="399" onFocus={function(){$("[id*='submenu']").css("display", "none");}}>*/}
 
                         {/* Molla de pa */}
-                        <Breadcrumb />
+                        <div className="ocultarMobil"><Breadcrumb /></div>
 
                         {/* Avisos Front */}
                         <AvisosFront  />

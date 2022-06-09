@@ -166,7 +166,7 @@ class MapaWeb extends Component {
 		clearTimeout(sessionStorage.getItem('idTimeOut'));
 
 		return ( <>
-				<div className="titolPaginaApp">
+				<div className="titolPaginaApp visioMobil">
 					{t('mapaWebTitol')}
 				</div>
 				<div className="container-contenido" tabIndex="501">

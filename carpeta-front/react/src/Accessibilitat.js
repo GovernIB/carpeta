@@ -72,7 +72,7 @@ class Accessibilitat extends Component {
 
 
         return (<>
-                <div className="titolPaginaApp">
+                <div className="titolPaginaApp visioMobil">
                     {t('menuAccessibilitat')}
                 </div>
                 <div className="container-contenido" tabIndex="501">
