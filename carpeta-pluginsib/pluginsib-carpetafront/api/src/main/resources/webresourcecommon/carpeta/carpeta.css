@@ -1364,7 +1364,8 @@ body {
 }
 .titolPluginApp{
 	font-size: 1.3em!important;
-	padding-bottom: 0!important;
+	padding-bottom: 0.2em !important;
+	padding-top: 0.7em !important;
 }
 .iconaPluginApp{
 	margin-left: auto;
@@ -1374,8 +1375,7 @@ body {
 	height: auto;
 }
 .padPluginApp{
-	padding-bottom: 1em;
-	padding-top: 1em;
+	padding: 1em;
 }
 .formApp{
 	display: none;
