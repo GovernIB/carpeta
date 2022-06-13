@@ -119,17 +119,17 @@ class Peu extends Component {
 				</div>
 
 				<div className="modal fade" id="ajudaModal" tabIndex="-1" aria-hidden="true">
-					<div className="modal-dialog">
+					<div className="modal-dialog ajudaModalApp">
 						<div className="modal-content">
 							<div className="modal-header">
-								<p className="card-title titol h2">{t('suportTitol')}</p>
-								<button type="button" className="close" data-dismiss="modal" aria-label={t('tancar')} aria-describedby="tancarBotoSuport">
+								<p className="card-title titol h2 textModalAjudaApp">{t('suportTitol')}</p>
+								<button type="button" className="close textModalAjudaApp" data-dismiss="modal" aria-label={t('tancar')} aria-describedby="tancarBotoSuport">
 									<span aria-hidden="true">&times;</span>
 									<span className="noVisible" id="tancarBotoSuport">{t('tancarAjuda')}</span>
 								</button>
 							</div>
 							<div className="modal-body">
-								<ul className="pl-3 ajuda">
+								<ul className="pl-3 ajuda textModalAjudaApp">
 									{content}
 									{suportWeb}
 									{suportFAQ}

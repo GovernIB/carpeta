@@ -1320,7 +1320,7 @@ body {
 	z-index: 5;
 	color: #fff;
 	text-transform: uppercase;
-	font-size: 2em;
+	font-size: 1.5em;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 75%;
@@ -1332,6 +1332,7 @@ body {
 }
 .barraApp{
 	height: 4em;
+	/*background-color: #fff!important;*/
 }
 .cardApp{
 	font-size: 1.3em!important;
@@ -1360,7 +1361,8 @@ body {
 }
 .titolPluginApp{
 	font-size: 1.3em!important;
-	padding-bottom: 0!important;
+	padding-bottom: 0.2em !important;
+	padding-top: 0.7em !important;
 }
 .iconaPluginApp{
 	margin-left: auto;
@@ -1370,8 +1372,7 @@ body {
 	height: auto;
 }
 .padPluginApp{
-	padding-bottom: 1em;
-	padding-top: 1em;
+	padding: 1em;
 }
 .formApp{
 	display: none;
@@ -1421,6 +1422,21 @@ body {
 }
 .page-link{
 	font-size: 1.5em!important;
+}
+.botoAccedirCarpeta{
+	font-size: 1.2em;
+}
+.textTramitacioApp{
+	font-size: 1em!important;
+}
+.centrarTop{
+	margin-top: 12%;
+}
+.textModalAjudaApp{
+	font-size: 1.2em!important;
+}
+.ajudaModalApp{
+	top: 30%;
 }
 }
 
@@ -1611,11 +1627,11 @@ body {
 
 /* GENERAL */
 .close { font-size: 2em !important; line-height: 0.7!important;}
-.btn { font-size: 1em !important; }
+.btn { font-size: 1em; }
 .table {font-size: 0.8em !important; }
 .pagination-sm .page-link { font-size: 0.875em !important; }
 .alert-warning { font-size: 0.85em !important; }
-.btn-primary.carpeta-btn { font-size: 1em !important; }
+.btn-primary.carpeta-btn { font-size: 1em; }
 /*.imc-continguts { padding-top: 5em !important; }*/
 p.subtitol { font-size: 0.8em !important; }
 

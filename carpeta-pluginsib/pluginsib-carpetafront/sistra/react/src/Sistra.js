@@ -139,8 +139,10 @@ class Sistra extends Component {
                 console.log("error.response.headers: " + error.response.headers);
             }
             if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                var errorPantalla = error.response.data.replace("<html><head><title>Error</title></head><body>", '');
+                errorPantalla = errorPantalla.replace("</body></html>", '');
                 this.setState({
-                    error: "error500plugin",
+                    error: errorPantalla,
                     isLoaded: true
                 });
             } else{
@@ -212,8 +214,10 @@ class Sistra extends Component {
                 console.log("error.response.headers: " + error.response.headers);
             }
             if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                var errorPantalla = error.response.data.replace("<html><head><title>Error</title></head><body>", '');
+                errorPantalla = errorPantalla.replace("</body></html>", '');
                 this.setState({
-                    error: "error500plugin",
+                    error: errorPantalla,
                     isLoaded: true
                 });
             } else{
@@ -291,8 +295,10 @@ class Sistra extends Component {
                     console.log("error.response.headers: " + error.response.headers);
                 }
                 if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                    var errorPantalla = error.response.data.replace("<html><head><title>Error</title></head><body>", '');
+                    errorPantalla = errorPantalla.replace("</body></html>", '');
                     this.setState({
-                        error: "error500plugin",
+                        error: errorPantalla,
                         isLoaded: true
                     });
                 } else{
@@ -375,8 +381,10 @@ class Sistra extends Component {
                     console.log("error.response.headers: " + error.response.headers);
                 }
                 if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                    var errorPantalla = error.response.data.replace("<html><head><title>Error</title></head><body>", '');
+                    errorPantalla = errorPantalla.replace("</body></html>", '');
                     this.setState({
-                        error: "error500plugin",
+                        error: errorPantalla,
                         isLoaded: true
                     });
                 } else{
@@ -989,7 +997,7 @@ class Sistra extends Component {
                                      data-version={versionSistra} style={cursorPointer} data-mostramodal={$.siNo(mostraModal)}
                                      data-pending={$.siNo(pendiente)} onClick={(e) => this.handleItemClick(numero)}>
                                     <div className="col-sm-1 float-left">
-                                        <span className="oi oi-pencil iconaFormApp" title={t('sistraDates')} style={{verticalAlign: 'sub'}}/>
+                                        <span className="oi oi-circle-check iconaFormApp" title={t('sistraDates')} style={{verticalAlign: 'sub'}}/>
                                     </div>
                                     <div className="col-sm-10 float-right">
                                         <p className="card-text pl-1 mt-0 font-weight-bold" style={{color: 'rgb(102, 102, 102)'}}>{descripcionTramite}</p>
@@ -1005,7 +1013,7 @@ class Sistra extends Component {
                                      data-version={versionSistra} style={cursorPointer} data-mostramodal={$.siNo(mostraModal)}
                                      data-pending={$.siNo(pendiente)} onClick={(e) => this.openModalConfirm(url)}>
                                     <div className="col-sm-1 float-left">
-                                        <span className="oi oi-circle-check iconaFormApp" title={t('sistraDates')} style={{verticalAlign: 'sub'}}/>
+                                        <span className="oi oi-pencil iconaFormApp" title={t('sistraDates')} style={{verticalAlign: 'sub'}}/>
                                     </div>
                                     <div className="col-sm-10 float-right">
                                         <p className="card-text pl-1 mt-0 font-weight-bold" style={{color: 'rgb(102, 102, 102)'}}>{descripcionTramite}</p>

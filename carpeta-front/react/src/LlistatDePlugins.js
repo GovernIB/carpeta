@@ -32,6 +32,10 @@ class LlistatDePlugins extends Component {
     }
 
     componentDidMount() {
+        var amplePantalla = screen.width;
+        if(amplePantalla < 576) {
+            document.getElementById("headerBarra").style.backgroundColor = sessionStorage.getItem("colorBarra");
+        }
 
         const seccioContext = this.props.seccioContext ? this.props.seccioContext : '0';
 
@@ -59,10 +63,12 @@ class LlistatDePlugins extends Component {
                        console.log("error.response.headers: " + error.response.headers);
                    }
                    if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                       var errorPantalla = error.response.data.replace("<html><head><title>Error</title></head><body>", '');
+                       errorPantalla = errorPantalla.replace("</body></html>", '');
                        this.setState({
                            items:false,
                            nomEntitat: [],
-                           error: "error500plugin"
+                           error: errorPantalla
                        });
                    } else{
                        this.setState({

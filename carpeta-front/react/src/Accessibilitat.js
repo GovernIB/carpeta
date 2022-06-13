@@ -22,6 +22,10 @@ class Accessibilitat extends Component {
     }
 
     componentDidMount() {
+        var amplePantalla = screen.width;
+        if(amplePantalla < 576) {
+            document.getElementById("headerBarra").style.backgroundColor = sessionStorage.getItem("colorBarra");
+        }
         $('[tabIndex=1]').focus();
 
         var baseURL = sessionStorage.getItem('contextPath');
@@ -68,7 +72,7 @@ class Accessibilitat extends Component {
 
 
         return (<>
-                <div className="titolPaginaApp">
+                <div className="titolPaginaApp visioMobil">
                     {t('menuAccessibilitat')}
                 </div>
                 <div className="container-contenido" tabIndex="501">

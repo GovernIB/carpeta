@@ -23,6 +23,10 @@ class CanviarEntitat extends Component {
 
 
     componentDidMount() {
+        var amplePantalla = screen.width;
+        if(amplePantalla < 576) {
+            document.getElementById("headerBarra").style.backgroundColor = sessionStorage.getItem("colorBarra");
+        }
         var baseURL = sessionStorage.getItem('contextPath');
         var url = baseURL + "/webui/entitats";
 

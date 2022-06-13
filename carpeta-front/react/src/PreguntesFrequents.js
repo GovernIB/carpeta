@@ -50,9 +50,11 @@ class PreguntesFrequents extends Component {
                     console.log("error.response.headers: " + error.response.headers);
                 }
                 if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                    var errorPantalla = error.response.data.replace("<html><head><title>Error</title></head><body>", '');
+                    errorPantalla = errorPantalla.replace("</body></html>", '');
                     this.setState({
                         faqs:false,
-                        error: "error500plugin"
+                        error: errorPantalla
                     });
                 } else{
                     this.setState({
