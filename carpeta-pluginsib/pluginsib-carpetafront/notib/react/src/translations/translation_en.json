@@ -47,5 +47,10 @@
     "notibBotoDehu": "Comparèixer",
     "notibDescripcioNotificacio": "Descripció",
     "notibDarreraModificacio": "Darrera modificació",
-    "notibSubestat": "Subestat"
+    "notibSubestat": "Subestat",
+    "notibDataInici": "Data inici",
+    "notibDataFi":"Data fi",
+    "notibDataIniciError":"Data inici major que Data fi",
+    "sistraDates": "Dates",
+    "carpeta_criterio_5": " a "
 }
