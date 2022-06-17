@@ -99,11 +99,15 @@ class BarraMenu extends Component {
 			}
 		}
 
-		const styleColorMenu = (this.state.colorMenu === null)? { backgroundColor : '#32814B'} : { backgroundColor : "#"+this.state.colorMenu};
+		let styleColorMenu = { backgroundColor : '#ffffff'};
+		var amplePantalla = screen.width;
+		if(amplePantalla >= 576) {
+			styleColorMenu = (this.state.colorMenu === null)? { backgroundColor : '#32814B'} : { backgroundColor : "#"+this.state.colorMenu};
+		}
+
 		let colorMenu = (this.state.colorMenu === null)? '#32814B' : "#"+this.state.colorMenu;
 		sessionStorage.setItem('colorBarra', colorMenu);
 
-		// return <div id = "barraMenu" className="ocultarMobil">
 		return <div id = "barraMenu">
 			<header className="imc-titol barraApp" style={styleColorMenu} id="headerBarra">
 
