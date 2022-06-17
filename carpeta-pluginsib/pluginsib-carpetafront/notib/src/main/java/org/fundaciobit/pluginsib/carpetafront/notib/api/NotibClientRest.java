@@ -74,7 +74,7 @@ public class NotibClientRest {
      try {
          String urlAmbMetode = baseUrl + CARPETA_SERVICE_PATH + "/notificacions/" + nif;
          String paginacio = "";
-         if (dataInicial != null && dataFinal != null && pagina != null && mida != null) {;
+         if (dataInicial != null && dataFinal != null && pagina != null && mida != null) {
              paginacio = "?dataInicial=" + dataInicial + "&dataFinal=" + dataFinal + "&pagina=" + pagina + "&mida=" + mida;
          }else if (pagina != null && mida != null) {
              paginacio = "?pagina=" + pagina + "&mida=" + mida;
@@ -107,7 +107,7 @@ public class NotibClientRest {
         try {
             String urlAmbMetode = baseUrl + CARPETA_SERVICE_PATH + "/comunicacions/" + nif;
             String paginacio = "";
-            if (dataInicial != null && dataFinal != null && pagina != null && mida != null) {;
+            if (dataInicial != null && dataFinal != null && pagina != null && mida != null) {
                 paginacio = "?dataInicial=" + dataInicial + "&dataFinal=" + dataFinal + "&pagina=" + pagina + "&mida=" + mida;
             }else if (pagina != null && mida != null) {
                 paginacio = "?pagina=" + pagina + "&mida=" + mida;
@@ -140,7 +140,7 @@ public class NotibClientRest {
         try {
             String urlAmbMetode = baseUrl + CARPETA_SERVICE_PATH + "/notificacions/" + nif + "/pendents";
             String paginacio = "";
-            if (dataInicial != null && dataFinal != null && pagina != null && mida != null) {;
+            if (dataInicial != null && dataFinal != null && pagina != null && mida != null) {
                 paginacio = "?dataInicial=" + dataInicial + "&dataFinal=" + dataFinal + "&pagina=" + pagina + "&mida=" + mida;
             }else if (pagina != null && mida != null) {
                 paginacio = "?pagina=" + pagina + "&mida=" + mida;
@@ -173,7 +173,7 @@ public class NotibClientRest {
         try {
             String urlAmbMetode = baseUrl + CARPETA_SERVICE_PATH + "/notificacions/" + nif + "/llegides";
             String paginacio = "";
-            if (dataInicial != null && dataFinal != null && pagina != null && mida != null) {;
+            if (dataInicial != null && dataFinal != null && pagina != null && mida != null) {
                 paginacio = "?dataInicial=" + dataInicial + "&dataFinal=" + dataFinal + "&pagina=" + pagina + "&mida=" + mida;
             }else if (pagina != null && mida != null) {
                 paginacio = "?pagina=" + pagina + "&mida=" + mida;
@@ -206,7 +206,7 @@ public class NotibClientRest {
         try {
             String urlAmbMetode = baseUrl + CARPETA_SERVICE_PATH + "/comunicacions/" + nif + "/pendents";
             String paginacio = "";
-            if (dataInicial != null && dataFinal != null && pagina != null && mida != null) {;
+            if (dataInicial != null && dataFinal != null && pagina != null && mida != null) {
                 paginacio = "?dataInicial=" + dataInicial + "&dataFinal=" + dataFinal + "&pagina=" + pagina + "&mida=" + mida;
             }else if (pagina != null && mida != null) {
                 paginacio = "?pagina=" + pagina + "&mida=" + mida;
@@ -239,7 +239,7 @@ public class NotibClientRest {
         try {
             String urlAmbMetode = baseUrl + CARPETA_SERVICE_PATH + "/comunicacions/" + nif + "/llegides";
             String paginacio = "";
-            if (dataInicial != null && dataFinal != null && pagina != null && mida != null) {;
+            if (dataInicial != null && dataFinal != null && pagina != null && mida != null) {
                 paginacio = "?dataInicial=" + dataInicial + "&dataFinal=" + dataFinal + "&pagina=" + pagina + "&mida=" + mida;
             }else if (pagina != null && mida != null) {
                 paginacio = "?pagina=" + pagina + "&mida=" + mida;

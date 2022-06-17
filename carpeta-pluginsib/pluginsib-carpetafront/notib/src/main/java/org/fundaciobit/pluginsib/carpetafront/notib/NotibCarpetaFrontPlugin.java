@@ -496,8 +496,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 /* Filtre dates */
                 Date formDataInici;
                 Date formDataFi;
-                String formDataIniciStr = request.getParameter("fechaInicio");
-                String formDataFiStr = request.getParameter("fechaFin");
+                String formDataIniciStr = request.getParameter("dataInici");
+                String formDataFiStr = request.getParameter("dataFi");
 
                 String parametros = "";
                 Calendar cal = Calendar.getInstance();
@@ -757,8 +757,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 /* Filtre dates */
                 Date formDataInici;
                 Date formDataFi;
-                String formDataIniciStr = request.getParameter("fechaInicio");
-                String formDataFiStr = request.getParameter("fechaFin");
+                String formDataIniciStr = request.getParameter("dataInici");
+                String formDataFiStr = request.getParameter("dataFi");
 
                 String parametros = "";
                 Calendar cal = Calendar.getInstance();
@@ -937,8 +937,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 /* Filtre dates */
                 Date formDataInici;
                 Date formDataFi;
-                String formDataIniciStr = request.getParameter("fechaInicio");
-                String formDataFiStr = request.getParameter("fechaFin");
+                String formDataIniciStr = request.getParameter("dataInici");
+                String formDataFiStr = request.getParameter("dataFi");
 
                 String parametros = "";
                 Calendar cal = Calendar.getInstance();
@@ -1033,7 +1033,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             Gson gson = new Gson();
             String json = gson.toJson(infoNotificacionsPendents);
 
-            log.info(json);
+ //           log.info(json);
 
             try {
 
@@ -1106,8 +1106,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 /* Filtre dates */
                 Date formDataInici;
                 Date formDataFi;
-                String formDataIniciStr = request.getParameter("fechaInicio");
-                String formDataFiStr = request.getParameter("fechaFin");
+                String formDataIniciStr = request.getParameter("dataInici");
+                String formDataFiStr = request.getParameter("dataFi");
 
                 String parametros = "";
                 Calendar cal = Calendar.getInstance();
@@ -1274,8 +1274,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 /* Filtre dates */
                 Date formDataInici;
                 Date formDataFi;
-                String formDataIniciStr = request.getParameter("fechaInicio");
-                String formDataFiStr = request.getParameter("fechaFin");
+                String formDataIniciStr = request.getParameter("dataInici");
+                String formDataFiStr = request.getParameter("dataFi");
 
                 String parametros = "";
                 Calendar cal = Calendar.getInstance();
@@ -1439,8 +1439,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 /* Filtre dates */
                 Date formDataInici;
                 Date formDataFi;
-                String formDataIniciStr = request.getParameter("fechaInicio");
-                String formDataFiStr = request.getParameter("fechaFin");
+                String formDataIniciStr = request.getParameter("dataInici");
+                String formDataFiStr = request.getParameter("dataFi");
 
                 String parametros = "";
                 Calendar cal = Calendar.getInstance();
@@ -1603,8 +1603,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 /* Filtre dates */
                 Date formDataInici;
                 Date formDataFi;
-                String formDataIniciStr = request.getParameter("fechaInicio");
-                String formDataFiStr = request.getParameter("fechaFin");
+                String formDataIniciStr = request.getParameter("dataInici");
+                String formDataFiStr = request.getParameter("dataFi");
 
                 String parametros = "";
                 Calendar cal = Calendar.getInstance();
@@ -1793,8 +1793,6 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
                 DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
-                log.info("*************NOTIFICACIONS: " + df.format(formDataInici) + "          " + df.format(formDataFi));
-
                 Resposta respostaNotificacions = notibClientRest.consultaNotificacions(nif, df.format(formDataInici),
                         df.format(formDataFi), 0, mida);
                 Resposta respostaComunicacions = notibClientRest.consultaComunicacions(nif, df.format(formDataInici), df.format(formDataFi), 0,
@@ -1874,7 +1872,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             Gson gson = new Gson();
             String json = gson.toJson(infoComunicacions);
 
-            log.info(json);
+//            log.info(json);
 
             try {
 
@@ -1898,8 +1896,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
-    // ------------------- CONSULTA REST NOTIFICACIONS I COMUNICACIONS PENDENTS
-    // NOTIB -----------------------
+    // --------- CONSULTA REST NOTIFICACIONS I COMUNICACIONS PENDENTS NOTIB -----------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
@@ -1949,8 +1946,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 /* Filtre dates */
                 Date formDataInici;
                 Date formDataFi;
-                String formDataIniciStr = request.getParameter("fechaInicio");
-                String formDataFiStr = request.getParameter("fechaFin");
+                String formDataIniciStr = request.getParameter("dataInici");
+                String formDataFiStr = request.getParameter("dataFi");
 
                 String parametros = "";
                 Calendar cal = Calendar.getInstance();
@@ -2126,8 +2123,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 /* Filtre dates */
                 Date formDataInici;
                 Date formDataFi;
-                String formDataIniciStr = request.getParameter("fechaInicio");
-                String formDataFiStr = request.getParameter("fechaFin");
+                String formDataIniciStr = request.getParameter("dataInici");
+                String formDataFiStr = request.getParameter("dataFi");
 
                 String parametros = "";
                 Calendar cal = Calendar.getInstance();
