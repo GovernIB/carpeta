@@ -243,7 +243,7 @@ class LlistatDePlugins extends Component {
                         contEnll = contEnll + 1;
                         const styleEnll = (contEnll % 2 === 0)? { float: 'right', marginRight: '0px'} : { float: 'left'};
 
-                        enllasos.push(<li key={"enll"+i} className="col-md-5 floatEnll" id={"nomEnll"+i} style={styleEnll}>
+                        enllasos.push(<li key={"enll"+i} className="col-md-5 floatEnll clicApp" id={"nomEnll"+i} style={styleEnll}>
                             <a href={s.url} title={s.nom} target="_blank" tabIndex={565+i} aria-labelledby={"nomEnll"+i}>
                                 <span>{s.nom}</span>
                             </a>
@@ -272,9 +272,10 @@ class LlistatDePlugins extends Component {
         let titolEnunclic="";
         let enllasosEnunclic="";
         if(enllasos.length > 0){
-            titolEnunclic = <div className="h2 mt-4">{t('iniciPrivatEnllasos')}</div>;
+            titolEnunclic = <div className="h2 mt-4 font15App">{t('iniciPrivatEnllasos')}</div>;
             enllasosEnunclic = <div className="col-md-12 border-0 pl-0 pr-0 llistaEnllasos">
-                <p className="lh15 subtitol">{t('iniciPrivatDescEnllas')}</p>
+                <p className="lh15 subtitol ocultarMobil">{t('iniciPrivatDescEnllas')}</p>
+                <p className="lh15 font12App visioMobil">{t('iniciPrivatDescEnllas')}</p>
                 <ul className="lh15 pt-3 subtitolInterior senseEstilLlista">
                     {enllasos}
                 </ul>

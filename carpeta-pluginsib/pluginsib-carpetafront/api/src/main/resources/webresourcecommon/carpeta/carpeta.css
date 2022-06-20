@@ -1302,6 +1302,16 @@ body {
 .font1App{
 	font-size: 1em!important;
 }
+.font15App{
+	font-size: 1.5em!important;
+}
+.font12App{
+	font-size: 1.2em!important;
+}
+.clicApp{
+	font-size: 1.3em!important;
+	margin-bottom: 1em;
+}
 .wXarxa{
 	width: 150%!important;
 	max-width: none!important;
