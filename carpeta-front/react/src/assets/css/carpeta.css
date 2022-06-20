@@ -1461,6 +1461,13 @@ body {
 .botoTancauApp{
 	font-size: 1.5em!important;
 }
+.iconaMenuApp{
+	font-size: xxx-large !important;
+}
+.styleLiniaMenuApp{
+	transform: translate(0, 50%) !important;
+	width: 60px !important;
+}
 }
 
 /*Se aplican cuando el width es menor que 480*/
