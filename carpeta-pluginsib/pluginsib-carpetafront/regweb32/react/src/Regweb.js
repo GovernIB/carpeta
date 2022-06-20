@@ -647,7 +647,7 @@ class Regweb extends Component {
                                     tabIndex="501"
                                     value={this.state.filter_number}
                                     onChange={(e)=>{this.handleNumberFilterParam(e);}}
-                                    className="form-control form-control-sm focusIn"
+                                    className="form-control form-control-sm focusIn font1App"
                                 />
                             </Form.Group>
                         </Col>
@@ -664,7 +664,7 @@ class Regweb extends Component {
                                     name="fechaInicio"
                                     id="fechaInicio"
                                     dateFormat="dd/MM/yyyy"
-                                    className="form-control form-control-sm estilCalendar focusIn"
+                                    className="form-control form-control-sm estilCalendar focusIn font1App"
                                     locale={this.locale}
                                     showYearDropdown={true}
                                     preventOpenOnFocus={true}
@@ -697,7 +697,7 @@ class Regweb extends Component {
                                     name="fechaFin"
                                     id="fechaFin"
                                     dateFormat="dd/MM/yyyy"
-                                    className="form-control form-control-sm estilCalendar focusIn"
+                                    className="form-control form-control-sm estilCalendar focusIn font1App"
                                     locale={this.locale}
                                     showYearDropdown={true}
                                     preventOpenOnFocus={true}
@@ -720,7 +720,7 @@ class Regweb extends Component {
                             <Form.Group>
                                 <Form.Label>{t('registro_estado')}</Form.Label>
                                 <Form.Select id="estado"
-                                             name="estado" className="form-control form-control-sm focusIn"
+                                             name="estado" className="form-control form-control-sm focusIn font1App"
                                              value={this.state.filter_status}
                                              tabindex="504"
                                              aria-labelledby="estado"
@@ -994,7 +994,7 @@ class Regweb extends Component {
                             <button type="button" data-toggle="modal" onClick={() => {
                                 window.location.href = sessionStorage.getItem("pagTornar");
                                 sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                            }} className="botoSuport" tabIndex="520"
+                            }} className="botoSuport botoTornauApp" tabIndex="520"
                                     aria-labelledby="botoTornarRegistro">{t('reprendreTornar')}</button>
                         </div>
                     </>}

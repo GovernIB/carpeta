@@ -107,7 +107,7 @@ class Peu extends Component {
 
 						<div className="pb-3 col2peu" id="botoSuportModal">
 							{/*<button type="button" id="dialogAjuda" data-toggle="modal" data-target="#ajudaModal" className="botoSuport" tabIndex="611" aria-labelledby="botoSuportModal">{t('suportAqui')}</button>*/}
-							<button type="button" id="dialogAjuda" data-toggle="modal" data-target="#ajudaModal" className="botoSuport font13App" tabIndex="611" aria-labelledby="botoSuportModal">{t('suportAqui')}</button>
+							<button type="button" id="dialogAjuda" data-toggle="modal" data-target="#ajudaModal" className="botoSuport font2App" tabIndex="611" aria-labelledby="botoSuportModal">{t('suportAqui')}</button>
 						</div>
 
 						<EnllasosPeuCentral autenticat={autenticat} />
@@ -140,7 +140,7 @@ class Peu extends Component {
 								</ul>
 							</div>
 							<div className="modal-footer" id="tancarSuportModal">
-								<button type="button" className="botoSuport" data-dismiss="modal" aria-labelledby="tancarSuportModal">{t('suportTanca')}</button>
+								<button type="button" className="botoSuport botoTancauApp" data-dismiss="modal" aria-labelledby="tancarSuportModal">{t('suportTanca')}</button>
 							</div>
 						</div>
 					</div>

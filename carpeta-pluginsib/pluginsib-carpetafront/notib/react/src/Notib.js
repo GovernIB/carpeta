@@ -600,7 +600,7 @@ class Notib extends Component {
                                     name="dataInici"
                                     id="dataInici"
                                     dateFormat="dd/MM/yyyy"
-                                    className="form-control form-control-sm estilCalendar focusIn"
+                                    className="form-control form-control-sm estilCalendar focusIn font1App"
                                     locale={this.locale}
                                     showYearDropdown={true}
                                     preventOpenOnFocus={true}
@@ -631,7 +631,7 @@ class Notib extends Component {
                                     name="dataFi"
                                     id="dataFi"
                                     dateFormat="dd/MM/yyyy"
-                                    className="form-control form-control-sm estilCalendar focusIn"
+                                    className="form-control form-control-sm estilCalendar focusIn font1App"
                                     locale={this.locale}
                                     showYearDropdown={true}
                                     preventOpenOnFocus={true}
@@ -657,7 +657,7 @@ class Notib extends Component {
                             <Form.Group>
                                 <Form.Label style={{float:'left'}}>{t('notibTipus')}</Form.Label>
                                 <Form.Select id="tipo"
-                                             name="tipo" className="form-control form-control-sm focusIn"
+                                             name="tipo" className="form-control form-control-sm focusIn font1App"
                                              value={this.state.filter_type}
                                              tabindex="504"
                                              aria-labelledby="tipo"
@@ -673,7 +673,7 @@ class Notib extends Component {
                             <Form.Group>
                                 <Form.Label style={{float:'left'}}>{t('notibComunicacionEstat')}</Form.Label>
                                 <Form.Select id="estat"
-                                             name="estat" className="form-control form-control-sm focusIn"
+                                             name="estat" className="form-control form-control-sm focusIn font1App"
                                              value={this.state.filter_status}
                                              tabindex="505"
                                              aria-labelledby="estat"
@@ -973,7 +973,7 @@ class Notib extends Component {
                     <div className="col-md-12 border-0 float-left p-0" id="botoTornarNotib" style={{ marginTop: '20px' }}>
                         <button type="button" data-toggle="modal" onClick={() => {
                             window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                        }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarNotib">{t('notibTornar')}</button>
+                        }} className="botoSuport botoTornauApp" tabIndex="520" aria-labelledby="botoTornarNotib">{t('notibTornar')}</button>
                     </div>
                 </div>
             </>

@@ -712,7 +712,7 @@ class Sistra extends Component {
                                     name="dataInici"
                                     id="dataInici"
                                     dateFormat="dd/MM/yyyy"
-                                    className="form-control form-control-sm estilCalendar focusIn"
+                                    className="form-control form-control-sm estilCalendar focusIn font1App"
                                     locale={this.locale}
                                     showYearDropdown={true}
                                     preventOpenOnFocus={true}
@@ -745,7 +745,7 @@ class Sistra extends Component {
                                     name="dataFi"
                                     id="dataFi"
                                     dateFormat="dd/MM/yyyy"
-                                    className="form-control form-control-sm estilCalendar focusIn"
+                                    className="form-control form-control-sm estilCalendar focusIn font1App"
                                     locale={this.locale}
                                     showYearDropdown={true}
                                     preventOpenOnFocus={true}
@@ -768,7 +768,7 @@ class Sistra extends Component {
                             <Form.Group>
                                 <Form.Label id="estado">{t('sistraEstat')}</Form.Label>
                                 <Form.Select id="tramiteFinalizado"
-                                             name="tramiteFinalizado" className="form-control form-control-sm focusIn"
+                                             name="tramiteFinalizado" className="form-control form-control-sm focusIn font1App"
                                              value={this.state.estat}
                                              tabindex="503"
                                              aria-labelledby="estado"
@@ -1096,7 +1096,7 @@ class Sistra extends Component {
                         <div className="col-md-12 border-0 float-left p-0" id="botoTornarSistra" style={{ marginTop: '20px' }}>
                             <button type="button" data-toggle="modal" onClick={() => {
                                 window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                            }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarSistra">{t('sistraTornar')}</button>
+                            }} className="botoSuport botoTornauApp" tabIndex="520" aria-labelledby="botoTornarSistra">{t('sistraTornar')}</button>
                         </div>
                     </>}
                     {this.state.numeroRegistro != null && detallRegistreContainer}

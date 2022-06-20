@@ -654,7 +654,7 @@ class DatosMatricula extends Component {
                                     <div className="col-md-12 border-0 float-left p-0" id="botoTornarMatricula" style={{ marginTop: '20px' }}>
                                         <button type="button" data-toggle="modal" onClick={() => {
                                             window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                                        }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarMatricula">{t('pinbalMatriculaTornar')}</button>
+                                        }} className="botoSuport botoTornauApp" tabIndex="520" aria-labelledby="botoTornarMatricula">{t('pinbalMatriculaTornar')}</button>
                                     </div>
 
                                 </div>

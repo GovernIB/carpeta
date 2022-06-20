@@ -141,7 +141,7 @@ class LlistatDePlugins extends Component {
                                           style={{marginTop: '20px'}}>
                 <button type="button" data-toggle="modal"
                         onClick={() => window.location.href = sessionStorage.getItem("pagTornar")}
-                        className="botoSuport" tabIndex="520" aria-labelledby="botoTornarModul">{t('tornar')}</button>
+                        className="botoSuport botoTornauApp" tabIndex="520" aria-labelledby="botoTornarModul">{t('tornar')}</button>
             </div>;
         }
 

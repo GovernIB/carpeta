@@ -1296,6 +1296,12 @@ body {
 .font13App{
 	font-size: 1.3em;
 }
+.font2App{
+	font-size: 2em;
+}
+.font1App{
+	font-size: 1em!important;
+}
 .wXarxa{
 	width: 150%!important;
 	max-width: none!important;
@@ -1436,10 +1442,17 @@ body {
 	margin-top: 12%;
 }
 .textModalAjudaApp{
-	font-size: 1.2em!important;
+	font-size: 1.4em!important;
+	line-height: 1.5em;
 }
 .ajudaModalApp{
 	top: 30%;
+}
+.botoTornauApp{
+	font-size: 1.3em!important;
+}
+.botoTancauApp{
+	font-size: 1.5em!important;
 }
 }
 
