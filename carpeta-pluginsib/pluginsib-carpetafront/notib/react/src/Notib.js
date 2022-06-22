@@ -296,11 +296,11 @@ class Notib extends Component {
             e.preventDefault();
 
             if(this.state.filter_type === '0'){
-                this.setState({ ...this.state, missatgeBuid: t('notibBuid') });
+                this.setState({ ...this.state, missatgeBuid: t('notibBuid'), isLoaded: false });
             } else if(this.state.filter_type === '1'){
-                this.setState({ ...this.state, missatgeBuid: t('notibNotificacionsBuid') });
+                this.setState({ ...this.state, missatgeBuid: t('notibNotificacionsBuid'), isLoaded: false });
             } else if (this.state.filter_type === '2'){
-                this.setState({ ...this.state, missatgeBuid: t('notibComunicacionsBuid') });
+                this.setState({ ...this.state, missatgeBuid: t('notibComunicacionsBuid'), isLoaded: false });
             }
 
             let url2;
@@ -339,9 +339,6 @@ class Notib extends Component {
                 estado: this.state.filter_status
             };
 
-            this.fechaInicio = this.state.dataInici;
-            this.fechaFin = this.state.dataFi;
-            this.estado = this.state.estado;
 
             axios.get(url2, {params: params}).then( (response) => {
 
