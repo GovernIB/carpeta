@@ -226,6 +226,8 @@ class Notib extends Component {
             pagination_active: pagActiva,
             error: null,
             isLoaded: false
+            // filter_type: this.state.filter_type,
+            // filter_status: this.state.filter_status
         });
 
         const params = {
@@ -236,7 +238,33 @@ class Notib extends Component {
             tipo: this.state.filter_type,
             estado: this.state.filter_status
         };
-        const url2 = this.props.pathtoservei;
+
+        let url2;
+        if(this.state.filter_type === '0') {
+            if(this.state.filter_status === '0') {
+                url2 = this.props.pathtoservei;
+            } else if(this.state.filter_status === '1') {
+                url2 = this.props.pathtoserveiPendientesUrl;
+            } else if(this.state.filter_status === '2') {
+                url2 = this.props.pathtoserveiLeidasUrl;
+            }
+        }else if(this.state.filter_type === '1') {
+            if(this.state.filter_status === '0') {
+                url2 = this.props.notificacionesTodasUrl;
+            } else if(this.state.filter_status === '1') {
+                url2 = this.props.notificacionesPendientesUrl;
+            } else if(this.state.filter_status === '2') {
+                url2 = this.props.notificacionesLeidasUrl;
+            }
+        }else if(this.state.filter_type === '2'){
+            if(this.state.filter_status === '0') {
+                url2 = this.props.comunicacionesTodasUrl;
+            } else if(this.state.filter_status === '1') {
+                url2 = this.props.comunicacionesPendientesUrl;
+            } else if(this.state.filter_status === '2') {
+                url2 = this.props.comunicacionesLeidasUrl;
+            }
+        }
 
         axios.get(url2, {params: params}).then( (response) => {
             if (response.data != null){
