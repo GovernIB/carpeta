@@ -5,6 +5,8 @@ import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,29 +61,26 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
     @Autowired
     protected SesionHttp sesionHttp;
-    
+
     @EJB(mappedName = PluginDeCarpetaFrontLogicaService.JNDI_NAME)
     protected PluginDeCarpetaFrontLogicaService pluginCarpetaFrontEjb;
 
     @EJB(mappedName = AuthenticationLogicaService.JNDI_NAME)
     protected AuthenticationLogicaService authenticationLogicaEjb;
-    
+
     @EJB(mappedName = LogCarpetaLogicaService.JNDI_NAME)
     protected LogCarpetaLogicaService logCarpetaLogicaEjb;
 
-    @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}/{urlBase}")  // 
-    public ModelAndView showCarpetaFrontModuleWithUrlBase(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("pluginID") Long pluginID,
-            @PathVariable("administrationIDEncriptat") String administrationIDEncriptat,
-            @PathVariable("urlBase") String urlBase
-            ) throws Exception {
-        
-        
-        
-
+    @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}/{urlBase}") //
+    public ModelAndView showCarpetaFrontModuleWithUrlBase(HttpServletRequest request,
+            HttpServletResponse response, @PathVariable("pluginID")
+            Long pluginID, @PathVariable("administrationIDEncriptat")
+            String administrationIDEncriptat, @PathVariable("urlBase")
+            String urlBase) throws Exception {
 
         log.info("showCarpetaFrontModule:: pluginID => " + pluginID);
-        log.info("showCarpetaFrontModule:: administrationIDEncriptat => " + administrationIDEncriptat);
+        log.info("showCarpetaFrontModule:: administrationIDEncriptat => "
+                + administrationIDEncriptat);
         log.info("showCarpetaFrontModule:: urlBase => " + urlBase);
 
         String urlBaseDec = new String(Base64.getUrlDecoder().decode(urlBase), "utf-8");
@@ -90,50 +89,39 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
         final String parameter = null;
 
-        return showCarpetaFrontModule(request, response, pluginID, administrationIDEncriptat, parameter);
+        return showCarpetaFrontModule(request, response, pluginID, administrationIDEncriptat,
+                parameter);
     }
 
     @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}/{urlBase}/p/**") // {parameter}")
     public ModelAndView showCarpetaFrontModuleWithUrlBaseAndParameter(HttpServletRequest request,
-            HttpServletResponse response, @PathVariable("pluginID") Long pluginID,
-            @PathVariable("administrationIDEncriptat") String administrationIDEncriptat,
-            @PathVariable("urlBase") String urlBase
-            //@PathVariable("parameter") String parameter
-            ) throws Exception {
+            HttpServletResponse response, @PathVariable("pluginID")
+            Long pluginID, @PathVariable("administrationIDEncriptat")
+            String administrationIDEncriptat, @PathVariable("urlBase")
+            String urlBase
+    // @PathVariable("parameter") String parameter
+    ) throws Exception {
 
-        
-        
-        
-        
-        
-        
-        String fullPath = (String) request.getAttribute(
-                HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-        
-        
+        String fullPath = (String) request
+                .getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+
         log.info("showCarpetaFrontModuleWithUrlBaseAndParameter FULL " + fullPath);
-        
+
         String parameter = fullPath.substring(fullPath.lastIndexOf("/p/") + "/p/".length());
-        
+
         log.info("showCarpetaFrontModuleWithUrlBaseAndParameter PARAMETER " + fullPath);
-        
+
         log.info("showCarpetaFrontModule:: pluginID => " + pluginID);
-        log.info("showCarpetaFrontModule:: administrationIDEncriptat => " + administrationIDEncriptat);
+        log.info("showCarpetaFrontModule:: administrationIDEncriptat => "
+                + administrationIDEncriptat);
         log.info("showCarpetaFrontModule:: urlBase => " + urlBase);
-        
-        
-        
-        
-        
-        
-        
-        
 
         String urlBaseDec = new String(Base64.getUrlDecoder().decode(urlBase), "utf-8");
 
         request.getSession().setAttribute(SESSION_URL_BASE, urlBaseDec);
 
-        return showCarpetaFrontModule(request, response, pluginID, administrationIDEncriptat, parameter);
+        return showCarpetaFrontModule(request, response, pluginID, administrationIDEncriptat,
+                parameter);
     }
 
     /*
@@ -154,72 +142,99 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
      * @RequestMapping(value =
      * "/showplugin/{pluginID}/{administrationIDEncriptat}/p/{parameter}")
      */
-    protected ModelAndView showCarpetaFrontModule(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("pluginID") Long pluginID,
-            @PathVariable("administrationIDEncriptat") String administrationIDEncriptat,
-            @PathVariable("parameter") String parameter) throws Exception {
+    protected ModelAndView showCarpetaFrontModule(HttpServletRequest request,
+            HttpServletResponse response, @PathVariable("pluginID")
+            Long pluginID, @PathVariable("administrationIDEncriptat")
+            String administrationIDEncriptat, @PathVariable("parameter")
+            String parameter) throws Exception {
 
         String administrationID = HibernateFileUtil.decryptString(administrationIDEncriptat);
 
         // El plugin existeix?
-        ICarpetaFrontPlugin carpetaFront;
+        ICarpetaFrontPlugin carpetaFrontPlugin;
         try {
-            carpetaFront = pluginCarpetaFrontEjb.getInstanceByPluginID(pluginID);
+            carpetaFrontPlugin = pluginCarpetaFrontEjb.getInstanceByPluginID(pluginID);
         } catch (I18NException e) {
-
-            String msg = I18NUtils.tradueix("plugin.signatureweb.noexist", String.valueOf(pluginID));
+            String msg = I18NUtils.tradueix("plugin.carpetafront.notexist",
+                    String.valueOf(pluginID));
             return generateErrorMAV(request, pluginID, msg, e);
         }
 
-        if (carpetaFront == null) {
+        if (carpetaFrontPlugin == null) {
+            String msg = I18NUtils.tradueix("plugin.carpetafront.notexist",
+                    String.valueOf(pluginID));
+            return generateErrorMAV(request, pluginID, msg, null);
+        }
 
-            String msg = I18NUtils.tradueix("plugin.signatureweb.noexist", String.valueOf(pluginID));
+        UserData userData = getUserData(administrationID);
+
+        log.error("\n\n UserData => " + userData + "\n\n");
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        log.error("\n\n Authentication => " + authentication + "\n\n");
+
+        if (authentication != null) {
+            log.error("\n\n authentication.getPrincipal() => " + authentication.getPrincipal()
+                    + "\n\n");
+        }
+
+        if (userData == null && !carpetaFrontPlugin.isPublic()) {
+
+            log.error("\n\n S'ha intentat accedir al plugin " + pluginID
+                    + " privat des d'una zona pública\n\n");
+
+            String msg = I18NUtils.tradueix("plugin.carpetafront.notpublic",
+                    String.valueOf(pluginID));
             return generateErrorMAV(request, pluginID, msg, null);
         }
 
         String relativeBaseServlet = getRelativeBaseServlet();
 
         String relativeControllerBase = getRelativeControllerBase(request, relativeBaseServlet);
-        String relativeRequestPluginBasePath = getRequestPluginBasePath(relativeControllerBase, pluginID,
-                URLEncoder.encode(administrationIDEncriptat, "utf-8"));
+        String relativeRequestPluginBasePath = getRequestPluginBasePath(relativeControllerBase,
+                pluginID, URLEncoder.encode(administrationIDEncriptat, "utf-8"));
 
         String urlBase = (String) request.getSession().getAttribute(SESSION_URL_BASE);
 
         String absoluteControllerBase = urlBase + relativeBaseServlet;
-        String absoluteRequestPluginBasePath = getRequestPluginBasePath(absoluteControllerBase, pluginID,
-                URLEncoder.encode(administrationIDEncriptat, "utf-8"));
+        String absoluteRequestPluginBasePath = getRequestPluginBasePath(absoluteControllerBase,
+                pluginID, URLEncoder.encode(administrationIDEncriptat, "utf-8"));
 
-        log.info("\n\n\n SHOW PLUGIN " + "\nadministrationID = " + administrationID + "\nadministrationIDEncriptat = "
-                + administrationIDEncriptat + "\nURL_BASE = " + urlBase + "\nabsoluteControllerBase = "
-                + absoluteControllerBase + "\nabsoluteRequestPluginBasePath = " + absoluteRequestPluginBasePath
-                + "\nrelativeControllerBase = " + relativeControllerBase + "\nrelativeRequestPluginBasePath = "
-                + relativeRequestPluginBasePath + "\n\n\n");
+        log.info("\n\n\n SHOW PLUGIN " + "\nadministrationID = " + administrationID
+                + "\nadministrationIDEncriptat = " + administrationIDEncriptat + "\nURL_BASE = "
+                + urlBase + "\nabsoluteControllerBase = " + absoluteControllerBase
+                + "\nabsoluteRequestPluginBasePath = " + absoluteRequestPluginBasePath
+                + "\nrelativeControllerBase = " + relativeControllerBase
+                + "\nrelativeRequestPluginBasePath = " + relativeRequestPluginBasePath + "\n\n\n");
 
-        TitlesInfo titlesInfo = carpetaFront.getTitlesInfo();
+        TitlesInfo titlesInfo = carpetaFrontPlugin.getTitlesInfo();
         if (titlesInfo == null) {
             titlesInfo = this.pluginCarpetaFrontEjb.getTitlesInfo(pluginID);
-            carpetaFront.setTitlesInfo(titlesInfo);
+            carpetaFrontPlugin.setTitlesInfo(titlesInfo);
         }
 
         log.info("\n Cridant a  carpetaFront.getStartUrl() amb PluginParameter =>  " + parameter);
 
         String codiEntitat = null;
-        if(sesionHttp != null && sesionHttp.getEntitat() != null) {
-        	codiEntitat = sesionHttp.getEntitat();
-        	log.info("IListenerLogCarpeta->codiEntitat = sesionHttp.getEntitat() => " + codiEntitat);
-        }else {
-        	PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
+        if (sesionHttp != null && sesionHttp.getEntitat() != null) {
+            codiEntitat = sesionHttp.getEntitat();
+            log.info(
+                    "IListenerLogCarpeta->codiEntitat = sesionHttp.getEntitat() => " + codiEntitat);
+        } else {
+            PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
             String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
-        	if(defaultEntityCode != null) {
-        		codiEntitat = defaultEntityCode;
-        		log.info("IListenerLogCarpeta->codiEntitat = defaultEntityCode => " + codiEntitat);
-        	}
+            if (defaultEntityCode != null) {
+                codiEntitat = defaultEntityCode;
+                log.info("IListenerLogCarpeta->codiEntitat = defaultEntityCode => " + codiEntitat);
+            }
         }
-        
-        IListenerLogCarpeta logCarpeta = new ListenerLogCarpeta(pluginID, codiEntitat, logCarpetaLogicaEjb);
-        
-        String urlToPluginWebPage = carpetaFront.getStartUrl(absoluteRequestPluginBasePath,
-                relativeRequestPluginBasePath, request, getUserData(administrationID), administrationIDEncriptat,
+
+        IListenerLogCarpeta logCarpeta = new ListenerLogCarpeta(pluginID, codiEntitat,
+                logCarpetaLogicaEjb);
+
+        String urlToPluginWebPage = carpetaFrontPlugin.getStartUrl(absoluteRequestPluginBasePath,
+                relativeRequestPluginBasePath, request, userData, administrationIDEncriptat,
                 parameter, logCarpeta);
 
         log.info("\n\n\n SHOW PLUGIN 2222 urlToPluginWebPage =>  " + urlToPluginWebPage);
@@ -234,29 +249,20 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         return "/public/carpetafrontservlet";
     }
 
-    @RequestMapping(value = "/error")
-    public ModelAndView errorProcesDeFirma(HttpServletRequest request, HttpServletResponse response,
-            @RequestParam("URL_FINAL") String urlFinal) throws Exception {
-
-        ModelAndView mav = new ModelAndView("PluginFirmaFinal");
-        mav.addObject("URL_FINAL", urlFinal);
-        mav.addObject("window", "window");
-
-        return mav;
-    }
-
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         processServlet(request, response, true);
     }
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         processServlet(request, response, false);
     }
 
-    protected void processServlet(HttpServletRequest request, HttpServletResponse response, boolean isGet)
-            throws ServletException, IOException {
+    protected void processServlet(HttpServletRequest request, HttpServletResponse response,
+            boolean isGet) throws ServletException, IOException {
 
         final boolean debug = log.isDebugEnabled();
 
@@ -290,7 +296,8 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
         String pluginIDStr = idAndQuery.substring(0, index);
         int index2 = idAndQuery.indexOf('/', index + 1);
-        String administrationIDEncripted = URLDecoder.decode(idAndQuery.substring(index + 1, index2), "utf-8");
+        String administrationIDEncripted = URLDecoder
+                .decode(idAndQuery.substring(index + 1, index2), "utf-8");
         String query = idAndQuery.substring(index2 + 1, idAndQuery.length());
 
         if (debug) {
@@ -303,12 +310,14 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         Locale locale = Locale.getDefault();
 
         try {
-            requestPlugin(request, response, pluginIDStr, administrationIDEncripted, query, locale, isGet, debug);
+            requestPlugin(request, response, pluginIDStr, administrationIDEncripted, query, locale,
+                    isGet, debug);
         } catch (Throwable th) {
 
             try {
                 authenticationLogicaEjb.crearLog("Request a Plugin", null, uri, th,
-                        "Error desconegut cridant a un request d'un plugin: " + th.getMessage(), null, request.getRequestedSessionId());
+                        "Error desconegut cridant a un request d'un plugin: " + th.getMessage(),
+                        null, request.getRequestedSessionId());
             } catch (Throwable th2) {
             }
 
@@ -321,16 +330,17 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
      * 
      * @param request
      * @param response
-     * @param signaturesSetID
-     * @param signatureIndex
+     * @param pluginIDStr
+     * @param administrationIDEncripted
      * @param query
-     * @param isPost
+     * @param locale
+     * @param isGet
+     * @param debug
      * @throws Exception
-     * @throws I18NException
      */
-    protected void requestPlugin(HttpServletRequest request, HttpServletResponse response, String pluginIDStr,
-            String administrationIDEncripted, String query, Locale locale, boolean isGet, boolean debug)
-            throws Exception {
+    protected void requestPlugin(HttpServletRequest request, HttpServletResponse response,
+            String pluginIDStr, String administrationIDEncripted, String query, Locale locale,
+            boolean isGet, boolean debug) throws Exception {
 
         String administrationID = HibernateFileUtil.decryptString(administrationIDEncripted);
 
@@ -349,13 +359,26 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         try {
             carpetaFrontPlugin = pluginCarpetaFrontEjb.getInstanceByPluginID(pluginID);
         } catch (I18NException e) {
-            String msg = I18NUtils.tradueix("plugin.signatureweb.noexist", String.valueOf(pluginID));
+            String msg = I18NUtils.tradueix("plugin.carpetafront.notexist",
+                    String.valueOf(pluginID));
             generateErrorAndRedirect(request, response, pluginID, msg, e);
             return;
         }
         if (carpetaFrontPlugin == null) {
-            String msg = I18NUtils.tradueix("plugin.signatureweb.noexist", String.valueOf(pluginID));
+            String msg = I18NUtils.tradueix("plugin.carpetafront.notexist",
+                    String.valueOf(pluginID));
             generateErrorAndRedirect(request, response, pluginID, msg, null);
+            return;
+        }
+
+        UserData userData = getUserData(administrationID);
+
+        if (userData == null && !carpetaFrontPlugin.isPublic()) {
+            log.error("\n\n S'ha intentat accedir a una consulta del plugin privat amb ID "
+                    + pluginID + " des d'una zona pública\n\n");
+            String msg = I18NUtils.tradueix("plugin.carpetafront.notpublic",
+                    String.valueOf(pluginID));
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, msg);
             return;
         }
 
@@ -367,44 +390,57 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
         String urlBase = (String) request.getSession().getAttribute(SESSION_URL_BASE);
 
-        String absoluteRequestPluginBasePath = getAbsoluteRequestPluginBasePath(urlBase, getRelativeBaseServlet(),
-                pluginID, administrationIDEncripted);
-        String relativeRequestPluginBasePath = getRelativeRequestPluginBasePath(request, getRelativeBaseServlet(),
-                pluginID, administrationIDEncripted);
+        String absoluteRequestPluginBasePath = getAbsoluteRequestPluginBasePath(urlBase,
+                getRelativeBaseServlet(), pluginID, administrationIDEncripted);
+        String relativeRequestPluginBasePath = getRelativeRequestPluginBasePath(request,
+                getRelativeBaseServlet(), pluginID, administrationIDEncripted);
 
         if (debug) {
             log.debug("absoluteRequestPluginBasePath => " + absoluteRequestPluginBasePath);
             log.debug("relativeRequestPluginBasePath => " + relativeRequestPluginBasePath);
         }
-        
-        
+
         String codiEntitat = null;
-        if(sesionHttp != null && sesionHttp.getEntitat() != null) {
-    		codiEntitat = sesionHttp.getEntitat();
-    		log.info("IListenerLogCarpeta->codiEntitat = sesionHttp.getEntitat() => " + codiEntitat);
-        }else {
-        	PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
+        if (sesionHttp != null && sesionHttp.getEntitat() != null) {
+            codiEntitat = sesionHttp.getEntitat();
+            log.info(
+                    "IListenerLogCarpeta->codiEntitat = sesionHttp.getEntitat() => " + codiEntitat);
+        } else {
+            PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
             String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
-        	if(defaultEntityCode != null) {
-        		codiEntitat = defaultEntityCode;
-        		log.info("IListenerLogCarpeta->codiEntitat = defaultEntityCode => " + codiEntitat);
-        	}
+            if (defaultEntityCode != null) {
+                codiEntitat = defaultEntityCode;
+                log.info("IListenerLogCarpeta->codiEntitat = defaultEntityCode => " + codiEntitat);
+            }
         }
-        
-        IListenerLogCarpeta logCarpeta = new ListenerLogCarpeta(pluginID, codiEntitat, logCarpetaLogicaEjb);
-        
-        carpetaFrontPlugin.requestCarpetaFront(absoluteRequestPluginBasePath, relativeRequestPluginBasePath, query,
-                request, response, administrationID, administrationIDEncripted, locale, isGet, logCarpeta);
+
+        IListenerLogCarpeta logCarpeta = new ListenerLogCarpeta(pluginID, codiEntitat,
+                logCarpetaLogicaEjb);
+
+        carpetaFrontPlugin.requestCarpetaFront(absoluteRequestPluginBasePath,
+                relativeRequestPluginBasePath, query, request, response, administrationID,
+                administrationIDEncripted, locale, isGet, logCarpeta);
 
     }
 
     // -------------------------------------------------------------------------
     // -------------------------------------------------------------------------
-    // ----------------------------- U T I L I T A T S ----------------------
+    // ----------------------------- U T I L I T A T S -------------------------
     // -------------------------------------------------------------------------
     // -------------------------------------------------------------------------
 
-    protected ModelAndView generateErrorMAV(HttpServletRequest request, Long pluginID, String msg, Throwable th) {
+    @RequestMapping(value = "/error") // {parameter}")
+    public ModelAndView error(HttpServletRequest request, HttpServletResponse response,
+            @RequestParam("error")
+            String error) throws Exception {
+        ModelAndView mav = new ModelAndView("error");
+        mav.addObject("error", error);
+
+        return mav;
+    }
+
+    protected ModelAndView generateErrorMAV(HttpServletRequest request, Long pluginID, String msg,
+            Throwable th) {
 
         String urlFinal = processError(request, pluginID, msg, th);
 
@@ -415,28 +451,27 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         return mav;
     }
 
-    protected void generateErrorAndRedirect(HttpServletRequest request, HttpServletResponse response, Long pluginID,
-            String msg, Throwable th) {
+    protected void generateErrorAndRedirect(HttpServletRequest request,
+            HttpServletResponse response, Long pluginID, String msg, Throwable th) {
 
         String urlFinal = processError(request, pluginID, msg, th);
 
         try {
 
-            String r = request.getContextPath() + getContextWeb() + "/error?URL_FINAL="
-                    + URLEncoder.encode(urlFinal, "UTF8");
+            String r = request.getContextPath() + getContextWeb() + "/error?error="
+                    + URLEncoder.encode(msg, "UTF8") + "&URL_FINAL=" + URLEncoder.encode(urlFinal, "UTF8");
 
             response.sendRedirect(r);
         } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
 
     }
 
-    protected static String processError(HttpServletRequest request, Long pluginID, String msg, Throwable th) {
+    protected static String processError(HttpServletRequest request, Long pluginID, String msg,
+            Throwable th) {
 
         String urlFinal;
 
@@ -446,13 +481,17 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         return urlFinal;
     }
 
-    public static ModelAndView startPublicSignatureProcess(HttpServletRequest request, HttpServletResponse response,
-            String view, long pluginID, String administrationID, String urlBase) throws I18NException {
+    // XYZ ZZZ NINGU CRIDA AQUEST MÈTODE !!!!!!
+    public static ModelAndView startPublicSignatureProcess(HttpServletRequest request,
+            HttpServletResponse response, String view, long pluginID, String administrationID,
+            String urlBase) throws I18NException {
         return startSignatureProcess(request, response, view, pluginID, administrationID, urlBase);
     }
 
-    private static ModelAndView startSignatureProcess(HttpServletRequest request, HttpServletResponse response,
-            String view, long pluginID, String administrationID, String urlBase) throws I18NException {
+    // XYZ ZZZ NINGU CRIDA AQUEST MÈTODE !!!!!!
+    private static ModelAndView startSignatureProcess(HttpServletRequest request,
+            HttpServletResponse response, String view, long pluginID, String administrationID,
+            String urlBase) throws I18NException {
 
         // response.addHeader("X-Frame-Options", "SAMEORIGIN");
 
@@ -482,22 +521,24 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         return getRelativePortaFIBBase(request) + webContext;
     }
 
-    protected static String getAbsoluteRequestPluginBasePath(String baseUrl, String webContext, Long pluginID,
-            String administrationIDEncripted) {
+    protected static String getAbsoluteRequestPluginBasePath(String baseUrl, String webContext,
+            Long pluginID, String administrationIDEncripted) {
 
         String base = baseUrl + webContext;
         return getRequestPluginBasePath(base, pluginID, administrationIDEncripted);
     }
 
-    public static String getRelativeRequestPluginBasePath(HttpServletRequest request, String webContext, Long pluginID,
-            String administrationIDEncripted) {
+    public static String getRelativeRequestPluginBasePath(HttpServletRequest request,
+            String webContext, Long pluginID, String administrationIDEncripted) {
 
         String base = getRelativeControllerBase(request, webContext);
         return getRequestPluginBasePath(base, pluginID, administrationIDEncripted);
     }
 
-    private static String getRequestPluginBasePath(String base, Long pluginID, String administrationIDEncripted) {
-        String absoluteRequestPluginBasePath = base + "/requestPlugin/" + pluginID + "/" + administrationIDEncripted;
+    private static String getRequestPluginBasePath(String base, Long pluginID,
+            String administrationIDEncripted) {
+        String absoluteRequestPluginBasePath = base + "/requestPlugin/" + pluginID + "/"
+                + administrationIDEncripted;
 
         return absoluteRequestPluginBasePath;
     }
