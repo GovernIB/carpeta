@@ -5,8 +5,6 @@ import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.AnnotationUtils;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -93,14 +91,15 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
                 parameter);
     }
 
+    /**
+     * 
+     */
     @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}/{urlBase}/p/**") // {parameter}")
     public ModelAndView showCarpetaFrontModuleWithUrlBaseAndParameter(HttpServletRequest request,
             HttpServletResponse response, @PathVariable("pluginID")
             Long pluginID, @PathVariable("administrationIDEncriptat")
             String administrationIDEncriptat, @PathVariable("urlBase")
-            String urlBase
-    // @PathVariable("parameter") String parameter
-    ) throws Exception {
+            String urlBase) throws Exception {
 
         String fullPath = (String) request
                 .getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
@@ -124,23 +123,15 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
                 parameter);
     }
 
-    /*
-     * @RequestMapping(value = "/showplugin/{pluginID}/{administrationIDEncriptat}")
-     * public ModelAndView showCarpetaFrontModule(HttpServletRequest request,
-     * HttpServletResponse response,
+    /**
      * 
-     * @PathVariable("pluginID") Long pluginID,
-     * 
-     * @PathVariable("administrationIDEncriptat") String administrationIDEncriptat)
-     * throws Exception {
-     * 
-     * final String parameter = null; return
-     * showCarpetaFrontModuleWithParameter(request, response, pluginID,
-     * administrationIDEncriptat,parameter); }
-     * 
-     * 
-     * @RequestMapping(value =
-     * "/showplugin/{pluginID}/{administrationIDEncriptat}/p/{parameter}")
+     * @param request
+     * @param response
+     * @param pluginID
+     * @param administrationIDEncriptat
+     * @param parameter
+     * @return
+     * @throws Exception
      */
     protected ModelAndView showCarpetaFrontModule(HttpServletRequest request,
             HttpServletResponse response, @PathVariable("pluginID")
@@ -168,25 +159,27 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
         UserData userData = getUserData(administrationID);
 
-        log.error("\n\n UserData => " + userData + "\n\n");
+        if (!carpetaFrontPlugin.isPublic()) {
+            if (userData == null) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+                log.error("\n\n CONTROLLER S'ha intentat accedir al plugin " + pluginID
+                        + " privat des d'una zona pública\n\n");
 
-        log.error("\n\n Authentication => " + authentication + "\n\n");
+                String msg = I18NUtils.tradueix("plugin.carpetafront.notpublic",
+                        String.valueOf(pluginID));
+                return generateErrorMAV(request, pluginID, msg, null);
+            } else {
 
-        if (authentication != null) {
-            log.error("\n\n authentication.getPrincipal() => " + authentication.getPrincipal()
-                    + "\n\n");
-        }
-
-        if (userData == null && !carpetaFrontPlugin.isPublic()) {
-
-            log.error("\n\n S'ha intentat accedir al plugin " + pluginID
-                    + " privat des d'una zona pública\n\n");
-
-            String msg = I18NUtils.tradueix("plugin.carpetafront.notpublic",
-                    String.valueOf(pluginID));
-            return generateErrorMAV(request, pluginID, msg, null);
+                // NIF de petició i NIF de userData ha de ser el mateix
+                if (!userData.getAdministrationID().equalsIgnoreCase(administrationID)) {
+                    final String msg = "S'ha intentat accedir a una consulta del plugin privat amb NIF "
+                            + administrationID + " però l'usuari loguejat és "
+                            + userData.getAdministrationID();
+                    log.error("\n\n " + msg + "\n\n");
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, msg);
+                    return generateErrorMAV(request, pluginID, msg, null);
+                }
+            }
         }
 
         String relativeBaseServlet = getRelativeBaseServlet();
@@ -373,13 +366,26 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
         UserData userData = getUserData(administrationID);
 
-        if (userData == null && !carpetaFrontPlugin.isPublic()) {
-            log.error("\n\n S'ha intentat accedir a una consulta del plugin privat amb ID "
-                    + pluginID + " des d'una zona pública\n\n");
-            String msg = I18NUtils.tradueix("plugin.carpetafront.notpublic",
-                    String.valueOf(pluginID));
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, msg);
-            return;
+        if (!carpetaFrontPlugin.isPublic()) {
+            if (userData == null) {
+                log.error("\n\n S'ha intentat accedir a una consulta del plugin privat amb ID "
+                        + pluginID + " des d'una zona pública\n\n");
+                final String msg = I18NUtils.tradueix("plugin.carpetafront.notpublic",
+                        String.valueOf(pluginID));
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, msg);
+                return;
+            } else {
+
+                // NIF de petició i NIF de userData ha de ser el mateix
+                if (!userData.getAdministrationID().equalsIgnoreCase(administrationID)) {
+                    final String msg = "S'ha intentat accedir a una consulta del plugin privat amb NIF "
+                            + administrationID + " però l'usuari loguejat és "
+                            + userData.getAdministrationID();
+                    log.error("\n\n " + msg + "\n\n");
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, msg);
+                    return;
+                }
+            }
         }
 
         if (debug) {
@@ -459,7 +465,8 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         try {
 
             String r = request.getContextPath() + getContextWeb() + "/error?error="
-                    + URLEncoder.encode(msg, "UTF8") + "&URL_FINAL=" + URLEncoder.encode(urlFinal, "UTF8");
+                    + URLEncoder.encode(msg, "UTF8") + "&URL_FINAL="
+                    + URLEncoder.encode(urlFinal, "UTF8");
 
             response.sendRedirect(r);
         } catch (UnsupportedEncodingException e) {
