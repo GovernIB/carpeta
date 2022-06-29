@@ -104,16 +104,16 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         String fullPath = (String) request
                 .getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 
-        log.info("showCarpetaFrontModuleWithUrlBaseAndParameter FULL " + fullPath);
-
         String parameter = fullPath.substring(fullPath.lastIndexOf("/p/") + "/p/".length());
 
-        log.info("showCarpetaFrontModuleWithUrlBaseAndParameter PARAMETER " + fullPath);
-
-        log.info("showCarpetaFrontModule:: pluginID => " + pluginID);
-        log.info("showCarpetaFrontModule:: administrationIDEncriptat => "
-                + administrationIDEncriptat);
-        log.info("showCarpetaFrontModule:: urlBase => " + urlBase);
+        {
+            log.info("showCarpetaFrontModuleWithUrlBaseAndParameter FULL " + fullPath);
+            log.info("showCarpetaFrontModuleWithUrlBaseAndParameter PARAMETER " + fullPath);
+            log.info("showCarpetaFrontModule:: pluginID => " + pluginID);
+            log.info("showCarpetaFrontModule:: administrationIDEncriptat => "
+                    + administrationIDEncriptat);
+            log.info("showCarpetaFrontModule:: urlBase => " + urlBase);
+        }
 
         String urlBaseDec = new String(Base64.getUrlDecoder().decode(urlBase), "utf-8");
 
@@ -194,12 +194,19 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         String absoluteRequestPluginBasePath = getRequestPluginBasePath(absoluteControllerBase,
                 pluginID, URLEncoder.encode(administrationIDEncriptat, "utf-8"));
 
-        log.info("\n\n\n SHOW PLUGIN " + "\nadministrationID = " + administrationID
-                + "\nadministrationIDEncriptat = " + administrationIDEncriptat + "\nURL_BASE = "
-                + urlBase + "\nabsoluteControllerBase = " + absoluteControllerBase
-                + "\nabsoluteRequestPluginBasePath = " + absoluteRequestPluginBasePath
-                + "\nrelativeControllerBase = " + relativeControllerBase
-                + "\nrelativeRequestPluginBasePath = " + relativeRequestPluginBasePath + "\n\n\n");
+        {
+           String msg= "\n\n\n SHOW PLUGIN ";
+            if (log.isDebugEnabled()) {
+                msg = msg + "\nadministrationID = " + administrationID;
+            }
+            msg = msg   + "\nadministrationIDEncriptat = " + administrationIDEncriptat + "\nURL_BASE = "
+                        + urlBase + "\nabsoluteControllerBase = " + absoluteControllerBase
+                        + "\nabsoluteRequestPluginBasePath = " + absoluteRequestPluginBasePath
+                        + "\nrelativeControllerBase = " + relativeControllerBase
+                        + "\nrelativeRequestPluginBasePath = " + relativeRequestPluginBasePath
+                        + "\n\n\n";
+            log.info(msg);
+        }
 
         TitlesInfo titlesInfo = carpetaFrontPlugin.getTitlesInfo();
         if (titlesInfo == null) {
@@ -293,11 +300,11 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
                 .decode(idAndQuery.substring(index + 1, index2), "utf-8");
         String query = idAndQuery.substring(index2 + 1, idAndQuery.length());
 
-        if (debug) {
-            log.info(" pluginID = " + pluginIDStr);
-            log.info(" administrationIDEncripted = " + administrationIDEncripted);
-            log.info(" query = " + query);
-        }
+        
+        log.info(" pluginID = " + pluginIDStr);
+        log.info(" administrationIDEncripted = " + administrationIDEncripted);
+        log.info(" query = " + query);
+        
 
         // Així si que agafa be l'idioma del front
         Locale locale = Locale.getDefault();
@@ -463,7 +470,6 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         String urlFinal = processError(request, pluginID, msg, th);
 
         try {
-
             String r = request.getContextPath() + getContextWeb() + "/error?error="
                     + URLEncoder.encode(msg, "UTF8") + "&URL_FINAL="
                     + URLEncoder.encode(urlFinal, "UTF8");
@@ -548,22 +554,6 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
                 + administrationIDEncripted;
 
         return absoluteRequestPluginBasePath;
-    }
-
-    /**
-     * 
-     * @return
-     */
-    public static long generateUniqueSignaturesSetID() {
-        long id;
-        synchronized (log) {
-            id = (System.currentTimeMillis() * 1000000L) + System.nanoTime() % 1000000L;
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-            }
-        }
-        return id;
     }
 
     /** Ha de ser igual que el RequestMapping de la Classe */
