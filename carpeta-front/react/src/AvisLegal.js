@@ -23,6 +23,10 @@ class AvisLegal extends Component {
     }
 
     componentDidMount() {
+        var amplePantalla = screen.width;
+        if(amplePantalla < 576) {
+            document.getElementById("headerBarra").style.backgroundColor = sessionStorage.getItem("colorBarra");
+        }
         $('[tabIndex=1]').focus();
 
         var baseURL = sessionStorage.getItem('contextPath');
@@ -71,7 +75,7 @@ class AvisLegal extends Component {
 
 
         return (<>
-                <div className="titolPaginaApp">
+                <div className="titolPaginaApp visioMobil">
                     {t('avisLegalTitol')}
                 </div>
                 <div className="container-contenido" tabIndex="501">
@@ -85,6 +89,12 @@ class AvisLegal extends Component {
                         <h2 className="titol h2">{t('avisLegalInformacio')}</h2>
 
                         {htmlCode}
+
+                        <div className="col-md-12 border-0 float-left p-0" id="botoTornarAvisL" style={{ marginTop: '20px' }}>
+                            <button type="button" data-toggle="modal" onClick={() => {
+                                window.location.href = sessionStorage.getItem("pagTornar")
+                            }} className="botoSuport botoTornauApp" tabIndex="520" aria-labelledby="botoTornarAvisL">{t('tornar')}</button>
+                        </div>
 
                     </div>
                 </div>

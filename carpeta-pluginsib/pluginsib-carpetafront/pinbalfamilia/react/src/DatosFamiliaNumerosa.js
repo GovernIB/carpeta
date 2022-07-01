@@ -179,7 +179,7 @@ class DatosFamiliaNumerosa extends Component {
                     <div className="col-md-12 border-0 float-left p-0" id="botoTornarFamilia" style={{ marginTop: '20px' }}>
                         <button type="button" data-toggle="modal" onClick={() => {
                             window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                        }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarFamilia">{t('pinbalFamiliaTornar')}</button>
+                        }} className="botoSuport botoTornauApp" tabIndex="520" aria-labelledby="botoTornarFamilia">{t('pinbalFamiliaTornar')}</button>
                     </div>
                 </div>
             </>

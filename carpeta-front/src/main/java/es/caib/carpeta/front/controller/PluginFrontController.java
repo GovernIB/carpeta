@@ -302,7 +302,7 @@ public class PluginFrontController extends CommonFrontController {
 
         if (administrationID == null) {
             // XYZ ZZZ
-            administrationID = "12345678Z";
+            administrationID = "null";
         }
 
         String administrationIDEncriptat = HibernateFileUtil.encryptString(administrationID);

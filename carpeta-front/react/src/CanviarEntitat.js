@@ -23,6 +23,10 @@ class CanviarEntitat extends Component {
 
 
     componentDidMount() {
+        var amplePantalla = screen.width;
+        if(amplePantalla < 576) {
+            document.getElementById("headerBarra").style.backgroundColor = sessionStorage.getItem("colorBarra");
+        }
         var baseURL = sessionStorage.getItem('contextPath');
         var url = baseURL + "/webui/entitats";
 
@@ -101,7 +105,7 @@ class CanviarEntitat extends Component {
                     <div className="col-md-12 border-0 float-left pt-0 pr-0 pb-0 pl-1" id="botoTornarCanviar" style={{ marginTop: '20px' }}>
                         <button type="button" data-toggle="modal" onClick={() => {
                             window.location.href = sessionStorage.getItem("pagTornar")
-                        }} className="botoSuport" tabIndex="550" aria-labelledby="botoTornarCanviar">{t('tornar')}</button>
+                        }} className="botoSuport botoTornauApp" tabIndex="550" aria-labelledby="botoTornarCanviar">{t('tornar')}</button>
                     </div>
 
                 </div>

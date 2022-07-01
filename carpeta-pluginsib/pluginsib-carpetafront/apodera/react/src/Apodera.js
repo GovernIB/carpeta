@@ -433,7 +433,7 @@ class Apodera extends Component {
                     <div className="col-md-12 border-0 float-left p-0" id="botoTornarApodera" style={{ marginTop: '20px' }}>
                         <button type="button" data-toggle="modal" onClick={() => {
                             window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                        }} className="botoSuport" tabIndex="550" aria-labelledby="botoTornarApodera">{t('apoderaTornar')}</button>
+                        }} className="botoSuport botoTornauApp" tabIndex="550" aria-labelledby="botoTornarApodera">{t('apoderaTornar')}</button>
                     </div>
                 </div>
             </>

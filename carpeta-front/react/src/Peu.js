@@ -107,7 +107,7 @@ class Peu extends Component {
 
 						<div className="pb-3 col2peu" id="botoSuportModal">
 							{/*<button type="button" id="dialogAjuda" data-toggle="modal" data-target="#ajudaModal" className="botoSuport" tabIndex="611" aria-labelledby="botoSuportModal">{t('suportAqui')}</button>*/}
-							<button type="button" id="dialogAjuda" data-toggle="modal" data-target="#ajudaModal" className="botoSuport font13App" tabIndex="611" aria-labelledby="botoSuportModal">{t('suportAqui')}</button>
+							<button type="button" id="dialogAjuda" data-toggle="modal" data-target="#ajudaModal" className="botoSuport font2App" tabIndex="611" aria-labelledby="botoSuportModal">{t('suportAqui')}</button>
 						</div>
 
 						<EnllasosPeuCentral autenticat={autenticat} />
@@ -119,17 +119,17 @@ class Peu extends Component {
 				</div>
 
 				<div className="modal fade" id="ajudaModal" tabIndex="-1" aria-hidden="true">
-					<div className="modal-dialog">
+					<div className="modal-dialog ajudaModalApp">
 						<div className="modal-content">
 							<div className="modal-header">
-								<p className="card-title titol h2">{t('suportTitol')}</p>
-								<button type="button" className="close" data-dismiss="modal" aria-label={t('tancar')} aria-describedby="tancarBotoSuport">
+								<p className="card-title titol h2 textModalAjudaApp">{t('suportTitol')}</p>
+								<button type="button" className="close textModalAjudaApp" data-dismiss="modal" aria-label={t('tancar')} aria-describedby="tancarBotoSuport">
 									<span aria-hidden="true">&times;</span>
 									<span className="noVisible" id="tancarBotoSuport">{t('tancarAjuda')}</span>
 								</button>
 							</div>
 							<div className="modal-body">
-								<ul className="pl-3 ajuda">
+								<ul className="pl-3 ajuda textModalAjudaApp">
 									{content}
 									{suportWeb}
 									{suportFAQ}
@@ -140,7 +140,7 @@ class Peu extends Component {
 								</ul>
 							</div>
 							<div className="modal-footer" id="tancarSuportModal">
-								<button type="button" className="botoSuport" data-dismiss="modal" aria-labelledby="tancarSuportModal">{t('suportTanca')}</button>
+								<button type="button" className="botoSuport botoTancauApp" data-dismiss="modal" aria-labelledby="tancarSuportModal">{t('suportTanca')}</button>
 							</div>
 						</div>
 					</div>

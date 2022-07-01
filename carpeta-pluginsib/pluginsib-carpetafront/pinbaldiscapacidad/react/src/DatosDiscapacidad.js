@@ -157,7 +157,7 @@ class DatosDiscapacidad extends Component {
                 <div className="col-md-12 border-0 float-left p-0" id="botoTornarDiscapacidad" style={{ marginTop: '20px' }}>
                     <button type="button" data-toggle="modal" onClick={() => {
                         window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                    }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarDiscapacidad">{t('pinbalDiscapacidadTornar')}</button>
+                    }} className="botoSuport botoTornauApp" tabIndex="520" aria-labelledby="botoTornarDiscapacidad">{t('pinbalDiscapacidadTornar')}</button>
                 </div>
             </div>
             </>

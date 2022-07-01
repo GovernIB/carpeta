@@ -9,6 +9,7 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import DatePicker from 'react-datepicker';
 
 /**
  *  @author jpernia
@@ -19,9 +20,15 @@ class Notib extends Component {
     constructor(props) {
         super(props);
 
+        let startDateObj = new Date();
+        const endDateObj = new Date();
+        startDateObj.setMonth(endDateObj.getMonth()-1);
+
         this.state = {
             isLoaded: false,
             dataComunicacions: null,
+            dataInici: startDateObj,
+            dataFi: endDateObj,
             urldetallbase: null,
             urldetallbase2: null,
             urldetallbase3: null,
@@ -37,9 +44,12 @@ class Notib extends Component {
             formVisible: false
         };
 
+        this.handleChangeDataInici = this.handleChangeDataInici.bind(this);
+        this.handleChangeDataFi = this.handleChangeDataFi.bind(this);
         this.handleRegPorPaginaFilterParam = this.handleRegPorPaginaFilterParam.bind(this);
         this.handleTypeFilterParam = this.handleTypeFilterParam.bind(this);
         this.handleStatusFilterParam = this.handleStatusFilterParam.bind(this);
+        this.handleSubmitSearcher = this.handleSubmitSearcher.bind(this);
         this.mostrarForm = this.mostrarForm.bind(this);
         this.mostrarMesInfo = this.mostrarMesInfo.bind(this);
 
@@ -77,17 +87,41 @@ class Notib extends Component {
         this.componentDidMount();
     }
 
+    handleChangeDataInici(e) {
+        this.setState({
+            ...this.state,
+            dataInici: e
+        });
+    }
+    handleChangeDataFi(e) {
+        this.setState({
+            ...this.state,
+            dataFi: e
+        });
+    }
+
+    handleTypeFilterParam(e){
+        this.setState({
+            ...this.state,
+            filter_type: e.target.value,
+            filter_status: '0'
+        });
+    };
+
+    handleStatusFilterParam(e){
+        this.setState({
+            ...this.state,
+            filter_status: e.target.value
+        });
+    };
 
     handleRegPorPaginaFilterParam(e){
-
         this.setState({
             filter_regPorPagina: e.target.value,
             isLoaded: false,
             error: null,
             cercaRegistres: e.target.value
         });
-
-        e.preventDefault();
 
         let url3;
         if(this.state.filter_type === '0') {
@@ -117,6 +151,8 @@ class Notib extends Component {
         }
 
         const params = {
+            dataInici: this.state.dataInici,
+            dataFi: this.state.dataFi,
             registrosPorPagina: e.target.value,
             pageNumber: 0,
             tipo: this.state.filter_type,
@@ -148,8 +184,10 @@ class Notib extends Component {
                 console.log("error.response.headers: " + error.response.headers);
             }
             if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                var errorPantalla = error.response.data.replace("<html><head><title>Error</title></head><body>", '');
+                errorPantalla = errorPantalla.replace("</body></html>", '');
                 this.setState({
-                    error: "error500plugin",
+                    error: errorPantalla,
                     isLoaded: true
                 });
             } else{
@@ -161,55 +199,8 @@ class Notib extends Component {
 
         });
 
-
     };
 
-    componentDidMount() {
-
-        const url = this.props.pathtoservei;
-
-        const params = {
-            pageNumber: 0,
-            registrosPorPagina: this.state.filter_regPorPagina,
-            tipo: this.state.filter_type,
-            estado: this.state.filter_status
-        };
-
-        axios.get(url, {params: params}).then( (response) => {
-            if (response.data != null){
-                this.setState({
-                    ...this.state,
-                    dataComunicacions: response.data.comunicacions,
-                    urldetallbase: response.data.urldetallbase,
-                    urldetallbase2: response.data.urldetallbase2,
-                    urldetallbase3: response.data.urldetallbase3,
-                    total_items: response.data.totalRegistres,
-                    isLoaded: true,
-                    error: null
-                });
-            }
-        }).catch(error => {
-                console.log(JSON.stringify(error));
-                if (error.response) {
-                    console.log("error.response.data: " + error.response.data);
-                    console.log("error.response.status: " + error.response.status);
-                    console.log("error.response.headers: " + error.response.headers);
-                }
-                if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
-                    this.setState({
-                        error: "error500plugin",
-                        isLoaded: true
-                    });
-                } else{
-                    this.setState({
-                        error: JSON.stringify(error),
-                        isLoaded: true
-                    });
-                }
-
-            });
-
-    }
 
     handlePagination(event, accio, isNumber, pag){
 
@@ -235,93 +226,18 @@ class Notib extends Component {
             pagination_active: pagActiva,
             error: null,
             isLoaded: false
+            // filter_type: this.state.filter_type,
+            // filter_status: this.state.filter_status
         });
 
         const params = {
+            dataInici: this.state.dataInici,
+            dataFi: this.state.dataFi,
             pageNumber: pagActiva-1,
             registrosPorPagina: this.state.filter_regPorPagina,
             tipo: this.state.filter_type,
             estado: this.state.filter_status
         };
-        const url2 = this.props.pathtoservei;
-
-        axios.get(url2, {params: params}).then( (response) => {
-            if (response.data != null){
-                this.setState({
-                    ...this.state,
-                    dataComunicacions: response.data.comunicacions,
-                    urldetallbase: response.data.urldetallbase,
-                    urldetallbase2: response.data.urldetallbase2,
-                    urldetallbase3: response.data.urldetallbase3,
-                    total_items: response.data.totalRegistres,
-                    pagination_total_items: response.data.registresPagina,
-                    pagination_active: pagActiva,
-                    isLoaded: true,
-                    error: null
-                });
-            }
-        }).catch(error => {
-                console.log(JSON.stringify(error));
-                if (error.response) {
-                    console.log("error.response.data: " + error.response.data);
-                    console.log("error.response.status: " + error.response.status);
-                    console.log("error.response.headers: " + error.response.headers);
-                }
-                if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
-                    this.setState({
-                        error: "error500plugin",
-                        isLoaded: true
-                    });
-                } else{
-                    this.setState({
-                        error: JSON.stringify(error),
-                        isLoaded: true
-                    });
-                }
-
-            });
-
-    }
-
-    handleTypeFilterParam(e){
-
-        this.setState({
-            ...this.state,
-            filter_type: e.target.value,
-            filter_status: '0'
-        });
-
-    };
-
-    handleStatusFilterParam(e){
-        this.setState({
-            ...this.state,
-            filter_status: e.target.value
-        });
-    };
-
-    handleSubmitSearcher(e) {
-
-        const {t} = this.props;
-
-        e.preventDefault();
-
-        this.setState({
-            ...this.state,
-            isLoaded: false,
-            error: null,
-            cercaRegistres: this.state.filter_regPorPagina,
-            dataComunicacions: null
-        });
-
-
-        if(this.state.filter_type === '0'){
-            this.setState({ ...this.state, missatgeBuid: t('notibBuid') });
-        } else if(this.state.filter_type === '1'){
-            this.setState({ ...this.state, missatgeBuid: t('notibNotificacionsBuid') });
-        } else if (this.state.filter_type === '2'){
-            this.setState({ ...this.state, missatgeBuid: t('notibComunicacionsBuid') });
-        }
 
         let url2;
         if(this.state.filter_type === '0') {
@@ -350,15 +266,7 @@ class Notib extends Component {
             }
         }
 
-        const params = {
-            registrosPorPagina: this.state.filter_regPorPagina,
-            pageNumber: 0,
-            tipo: this.state.filter_type,
-            estado: this.state.filter_status
-        };
-
         axios.get(url2, {params: params}).then( (response) => {
-
             if (response.data != null){
                 this.setState({
                     ...this.state,
@@ -367,13 +275,12 @@ class Notib extends Component {
                     urldetallbase2: response.data.urldetallbase2,
                     urldetallbase3: response.data.urldetallbase3,
                     total_items: response.data.totalRegistres,
-                    pagination_active: 1,
                     pagination_total_items: response.data.registresPagina,
+                    pagination_active: pagActiva,
                     isLoaded: true,
                     error: null
                 });
             }
-
         }).catch(error => {
                 console.log(JSON.stringify(error));
                 if (error.response) {
@@ -382,8 +289,10 @@ class Notib extends Component {
                     console.log("error.response.headers: " + error.response.headers);
                 }
                 if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                    var errorPantalla = error.response.data.replace("<html><head><title>Error</title></head><body>", '');
+                    errorPantalla = errorPantalla.replace("</body></html>", '');
                     this.setState({
-                        error: "error500plugin",
+                        error: errorPantalla,
                         isLoaded: true
                     });
                 } else{
@@ -397,12 +306,230 @@ class Notib extends Component {
 
     }
 
+    handleSubmitSearcher(e) {
+
+        const {t} = this.props;
+
+        let validatFormulari = this.validaFormulari();
+
+        if(validatFormulari) {
+
+            this.setState({
+                ...this.state,
+                isLoaded: false,
+                cercaRegistres: this.state.filter_regPorPagina,
+                dataComunicacions: null
+            });
+
+            e.preventDefault();
+
+            if(this.state.filter_type === '0'){
+                this.setState({ ...this.state, missatgeBuid: t('notibBuid'), isLoaded: false });
+            } else if(this.state.filter_type === '1'){
+                this.setState({ ...this.state, missatgeBuid: t('notibNotificacionsBuid'), isLoaded: false });
+            } else if (this.state.filter_type === '2'){
+                this.setState({ ...this.state, missatgeBuid: t('notibComunicacionsBuid'), isLoaded: false });
+            }
+
+            let url2;
+            if(this.state.filter_type === '0') {
+                if(this.state.filter_status === '0') {
+                    url2 = this.props.pathtoservei;
+                } else if(this.state.filter_status === '1') {
+                    url2 = this.props.pathtoserveiPendientesUrl;
+                } else if(this.state.filter_status === '2') {
+                    url2 = this.props.pathtoserveiLeidasUrl;
+                }
+            }else if(this.state.filter_type === '1') {
+                if(this.state.filter_status === '0') {
+                    url2 = this.props.notificacionesTodasUrl;
+                } else if(this.state.filter_status === '1') {
+                    url2 = this.props.notificacionesPendientesUrl;
+                } else if(this.state.filter_status === '2') {
+                    url2 = this.props.notificacionesLeidasUrl;
+                }
+            }else if(this.state.filter_type === '2'){
+                if(this.state.filter_status === '0') {
+                    url2 = this.props.comunicacionesTodasUrl;
+                } else if(this.state.filter_status === '1') {
+                    url2 = this.props.comunicacionesPendientesUrl;
+                } else if(this.state.filter_status === '2') {
+                    url2 = this.props.comunicacionesLeidasUrl;
+                }
+            }
+
+            const params = {
+                dataInici: this.state.dataInici,
+                dataFi: this.state.dataFi,
+                registrosPorPagina: this.state.filter_regPorPagina,
+                pageNumber: 0,
+                tipo: this.state.filter_type,
+                estado: this.state.filter_status
+            };
+
+
+            axios.get(url2, {params: params}).then( (response) => {
+
+                this.setState({
+                    ...this.state,
+                    isLoaded: true,
+                    pagination_active: 1,
+                    error: null
+                });
+
+                if (response.data != null){
+                    this.setState({
+                        ...this.state,
+                        dataComunicacions: response.data.comunicacions,
+                        urldetallbase: response.data.urldetallbase,
+                        urldetallbase2: response.data.urldetallbase2,
+                        urldetallbase3: response.data.urldetallbase3,
+                        total_items: response.data.totalRegistres,
+                        pagination_total_items: response.data.registresPagina
+                    });
+                } else{
+                    this.setState({
+                        ...this.state,
+                        dataComunicacions: null,
+                        total_items: 0,
+                        pagination_total_items: 10
+                    });
+                }
+
+            }).catch(error => {
+                    console.log(JSON.stringify(error));
+                    if (error.response) {
+                        console.log("error.response.data: " + error.response.data);
+                        console.log("error.response.status: " + error.response.status);
+                        console.log("error.response.headers: " + error.response.headers);
+                    }
+                    if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                        var errorPantalla = error.response.data.replace("<html><head><title>Error</title></head><body>", '');
+                        errorPantalla = errorPantalla.replace("</body></html>", '');
+                        this.setState({
+                            error: errorPantalla,
+                            isLoaded: true
+                        });
+                    } else{
+                        this.setState({
+                            error: JSON.stringify(error),
+                            isLoaded: true
+                        });
+                    }
+
+                });
+
+        } else{
+            e.preventDefault();
+        }
+
+    }
+
+    componentDidMount() {
+
+        this.setState({
+            ...this.state,
+            isLoaded: true
+        });
+
+        const { t } = this.props;
+        let validatFormulari = this.validaFormulari();
+
+        if(validatFormulari) {
+
+            this.setState({
+                ...this.state,
+                isLoaded: false
+            });
+
+            const url = this.props.pathtoservei;
+
+            const params = {
+                dataInici: this.state.dataInici,
+                dataFi: this.state.dataFi,
+                pageNumber: 0,
+                registrosPorPagina: this.state.filter_regPorPagina,
+                tipo: this.state.filter_type,
+                estado: this.state.filter_status
+            };
+
+            axios.get(url, {params: params}).then( (response) => {
+                if (response.data != null){
+                    this.setState({
+                        ...this.state,
+                        dataComunicacions: response.data.comunicacions,
+                        urldetallbase: response.data.urldetallbase,
+                        urldetallbase2: response.data.urldetallbase2,
+                        urldetallbase3: response.data.urldetallbase3,
+                        total_items: response.data.totalRegistres,
+                        isLoaded: true,
+                        error: null
+                    });
+                }
+            }).catch(error => {
+                console.log(JSON.stringify(error));
+                if (error.response) {
+                    console.log("error.response.data: " + error.response.data);
+                    console.log("error.response.status: " + error.response.status);
+                    console.log("error.response.headers: " + error.response.headers);
+                }
+                if(JSON.stringify(error).toString().includes("Request failed with status code 500")){
+                    var errorPantalla = error.response.data.replace("<html><head><title>Error</title></head><body>", '');
+                    errorPantalla = errorPantalla.replace("</body></html>", '');
+                    this.setState({
+                        error: errorPantalla,
+                        isLoaded: true
+                    });
+                } else{
+                    this.setState({
+                        error: JSON.stringify(error),
+                        isLoaded: true
+                    });
+                }
+
+            });
+
+        } else{
+            e.preventDefault();
+        }
+
+    }
+
+    validaFormulari(){
+
+        const { t } = this.props;
+
+        if(!this.validaFecha(this.state.dataInici) || !this.validaFecha(this.state.dataFi)){
+            return false;
+        }
+
+        if(Date.parse(this.state.dataInici) > Date.parse(this.state.dataFi)){
+            $('#errorMsg').html(t('notibDataIniciError'));
+            $('#errorContainer').removeClass('ocult');
+            return false;
+        }
+
+        return true;
+    }
+
+    validaFecha(date) {
+        if (isNaN(Date.parse(date))){
+            $('#errorMsg').html("Error de data");
+            $('#errorContainer').removeClass("ocult");
+            return false;
+        }else{
+            $('#errorContainer').addClass("ocult");
+            return true;
+        }
+    }
+
     componentDidUpdate() {
+        $("#dataInici").attr("tabindex","501");
+        $("#dataFi").attr("tabindex","502");
 
         $("tr").each(function(i) {
             $(this).removeAttr("role");
         });
-
     }
 
 
@@ -452,6 +579,20 @@ class Notib extends Component {
             return day + "/" + month + "/" + year + " " + hour + ":" + minute;
         };
 
+        $.dateFormatCerca = function(dateObject) {
+            var d = new Date(dateObject);
+            var day = d.getDate();
+            var month = d.getMonth() + 1;
+            var year = d.getFullYear();
+            if (day < 10) {
+                day = "0" + day;
+            }
+            if (month < 10) {
+                month = "0" + month;
+            }
+            return day + "-" + month + "-" + year;
+        };
+
         const isLoaded = this.state.isLoaded;
 
         const { t } = this.props;
@@ -465,17 +606,83 @@ class Notib extends Component {
         let selectRegistres;
         let criteris;
 
+        let mostraCarregar = false;
+
         let cardNotificacions = [];
 
         let formulari = <>
             <Form id="fechaBusqueda" style={{marginBottom: '20px'}} className="ocultarMobil">
                 <Container style={{ width: '95%', paddingLeft: '0', margin: '0' }} className="ampleTotalApp">
                     <Row>
-                        <div className="col-xs-12 mb-3 col campFormApp campFormNotibApp">
+                        <Col className="col-xs-12 mb-3 campFormApp">
+                            <Form.Group>
+                                <Form.Label>{t('notibDataInici')}</Form.Label>
+                                <DatePicker
+                                    portalId="root-portal"
+                                    selected={this.state.dataInici}
+                                    onChange={ (startDate) => this.handleChangeDataInici(startDate) }
+                                    selectsStart
+                                    name="dataInici"
+                                    id="dataInici"
+                                    dateFormat="dd/MM/yyyy"
+                                    className="form-control form-control-sm estilCalendar focusIn font1App"
+                                    locale={this.locale}
+                                    showYearDropdown={true}
+                                    preventOpenOnFocus={true}
+                                    popperPlacement="bottom"
+                                    popperModifiers={{
+                                        flip: {
+                                            behavior: ["bottom"] // don't allow it to flip to be above
+                                        },
+                                        preventOverflow: {
+                                            enabled: false // tell it not to try to stay within the view (this prevents the popper from covering the element you clicked)
+                                        },
+                                        hide: {
+                                            enabled: false // turn off since needs preventOverflow to be enabled
+                                        }
+                                    }}
+                                />
+                            </Form.Group>
+                        </Col>
+                        <Col className="col-xs-12 mb-3 campFormApp">
+                            <Form.Group>
+                                <Form.Label>{t('notibDataFi')}</Form.Label>
+                                <DatePicker
+                                    portalId="root-portal"
+                                    selected={this.state.dataFi}
+                                    onChange={ (endDate) => this.handleChangeDataFi(endDate) }
+                                    selectsEnd
+                                    minDate={this.state.dataInici}
+                                    name="dataFi"
+                                    id="dataFi"
+                                    dateFormat="dd/MM/yyyy"
+                                    className="form-control form-control-sm estilCalendar focusIn font1App"
+                                    locale={this.locale}
+                                    showYearDropdown={true}
+                                    preventOpenOnFocus={true}
+                                    popperPlacement="bottom"
+                                    popperModifiers={{
+                                        flip: {
+                                            behavior: ["bottom"] // don't allow it to flip to be above
+                                        },
+                                        preventOverflow: {
+                                            enabled: false // tell it not to try to stay within the view (this prevents the popper from covering the element you clicked)
+                                        },
+                                        hide: {
+                                            enabled: false // turn off since needs preventOverflow to be enabled
+                                        }
+                                    }}
+                                />
+                            </Form.Group>
+                        </Col>
+
+
+                        {/*<div className="col-xs-12 mb-3 col campFormApp campFormNotibApp">*/}
+                        <Col className="col-xs-12 mb-3 campFormApp">
                             <Form.Group>
                                 <Form.Label style={{float:'left'}}>{t('notibTipus')}</Form.Label>
                                 <Form.Select id="tipo"
-                                             name="tipo" className="form-control form-control-sm focusIn"
+                                             name="tipo" className="form-control form-control-sm focusIn font1App"
                                              value={this.state.filter_type}
                                              tabindex="504"
                                              aria-labelledby="tipo"
@@ -485,12 +692,13 @@ class Notib extends Component {
                                     <option value="2" className="form-control form-control-sm selectMobil">{t('notibComunicacions')}</option>
                                 </Form.Select>
                             </Form.Group>
-                        </div>
-                        <div className="col-xs-12 mb-3 col campFormApp campFormNotibApp">
+                        </Col>
+                        {/*<div className="col-xs-12 mb-3 col campFormApp campFormNotibApp">*/}
+                        <Col className="col-xs-12 mb-3 campFormApp">
                             <Form.Group>
                                 <Form.Label style={{float:'left'}}>{t('notibComunicacionEstat')}</Form.Label>
                                 <Form.Select id="estat"
-                                             name="estat" className="form-control form-control-sm focusIn"
+                                             name="estat" className="form-control form-control-sm focusIn font1App"
                                              value={this.state.filter_status}
                                              tabindex="505"
                                              aria-labelledby="estat"
@@ -500,7 +708,7 @@ class Notib extends Component {
                                     <option value="2" className="form-control form-control-sm selectMobil">{t('notibLlegides')}</option>
                                 </Form.Select>
                             </Form.Group>
-                        </div>
+                        </Col>
                     </Row>
                     <Row style={{ width: 'fit-content', display: 'none'}}>
                         <Col className="col-xs-12 mb-3 campFormApp">
@@ -545,8 +753,10 @@ class Notib extends Component {
 
             criteris = <div id="idCriteris">
                 <div style={{float: 'left', marginTop: '9px;', paddingBottom: '0.7em'}} className="col-md-10 pr-3 visioMobil">
-                    <span className="oi oi-eye iconaFormApp" title={t('sistraDates')} style={{verticalAlign: 'sub'}}/>
-                    <span className="pl-3">{t('notibTotesCriteri')}</span>
+                    <span className="oi oi-calendar iconaFormApp" title={t('notibDates')} style={{verticalAlign: 'sub'}}/>
+                    <span className="pl-3">{$.dateFormatCerca(this.state.dataInici) +
+                    t('carpeta_criterio_5') +
+                    $.dateFormatCerca(this.state.dataFi)}</span>
                 </div>
                 <div style={{float: 'rigth', marginTop: '9px;', paddingBottom: '0.7em', textAlign: 'end'}} onClick={() => {this.mostrarForm();}} className="col-md-1 visioMobil">
                     <span className="oi oi-magnifying-glass iconaFormApp" title={t('notibCerca')}/>
@@ -782,13 +992,13 @@ class Notib extends Component {
                     </div>
                     <div className="float-left" style={{width: '97%', position: 'relative'}}>
                         {selectRegistres}
-                        {this.state.isLoaded && taulaNotib }
+                        {taulaNotib}
                         {cardNotificacions}
                     </div>
                     <div className="col-md-12 border-0 float-left p-0" id="botoTornarNotib" style={{ marginTop: '20px' }}>
                         <button type="button" data-toggle="modal" onClick={() => {
                             window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                        }} className="botoSuport" tabIndex="520" aria-labelledby="botoTornarNotib">{t('notibTornar')}</button>
+                        }} className="botoSuport botoTornauApp" tabIndex="520" aria-labelledby="botoTornarNotib">{t('notibTornar')}</button>
                     </div>
                 </div>
             </>

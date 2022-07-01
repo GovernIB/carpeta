@@ -87,7 +87,7 @@ class PreguntesFrequents extends Component {
                                     style={{marginTop: '40px'}}>
                 <button type="button" data-toggle="modal"
                         onClick={() => window.location.href = sessionStorage.getItem("pagTornar")}
-                        className="botoSuport" tabIndex="550" aria-labelledby="botoTornarFaq">{t('tornar')}</button>
+                        className="botoSuport botoTornauApp" tabIndex="550" aria-labelledby="botoTornarFaq">{t('tornar')}</button>
             </div>;
         }
 

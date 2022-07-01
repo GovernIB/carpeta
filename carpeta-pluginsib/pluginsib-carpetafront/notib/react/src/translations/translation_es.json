@@ -47,5 +47,10 @@
     "notibBotoDehu": "Comparecer",
     "notibDescripcioNotificacio": "Descripción",
     "notibDarreraModificacio": "Última modificación",
-    "notibSubestat": "Subestado"
+    "notibSubestat": "Subestado",
+    "notibDataInici": "Fecha inicio",
+    "notibDataFi":"Fecha fin",
+    "notibDataIniciError":"Fecha inicio mayor que Fecha fin",
+    "sistraDates": "Fechas",
+    "carpeta_criterio_5": " a "
 }

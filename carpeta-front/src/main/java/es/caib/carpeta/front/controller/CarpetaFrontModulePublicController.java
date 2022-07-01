@@ -55,4 +55,6 @@ public class CarpetaFrontModulePublicController extends AbstractCarpetaFrontModu
         return userData;
     }
 
+    
+
 }

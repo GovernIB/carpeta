@@ -1,7 +1,10 @@
 package org.fundaciobit.pluginsib.carpetafront.notib.api;
 
 import java.rmi.RemoteException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 //import javax.ejb.CreateException;
 import javax.management.InstanceNotFoundException;
@@ -64,12 +67,16 @@ public class NotibClientRest {
 
     public Resposta consultaNotificacions(
          String nif,
+         String dataInicial,
+         String dataFinal,
          Integer pagina,
          Integer mida) {
      try {
          String urlAmbMetode = baseUrl + CARPETA_SERVICE_PATH + "/notificacions/" + nif;
          String paginacio = "";
-         if (pagina != null && mida != null) {
+         if (dataInicial != null && dataFinal != null && pagina != null && mida != null) {
+             paginacio = "?dataInicial=" + dataInicial + "&dataFinal=" + dataFinal + "&pagina=" + pagina + "&mida=" + mida;
+         }else if (pagina != null && mida != null) {
              paginacio = "?pagina=" + pagina + "&mida=" + mida;
          }
          Client jerseyClient = generarClient();
@@ -93,12 +100,16 @@ public class NotibClientRest {
 
     public Resposta consultaComunicacions(
             String nif,
+            String dataInicial,
+            String dataFinal,
             Integer pagina,
             Integer mida) {
         try {
             String urlAmbMetode = baseUrl + CARPETA_SERVICE_PATH + "/comunicacions/" + nif;
             String paginacio = "";
-            if (pagina != null && mida != null) {
+            if (dataInicial != null && dataFinal != null && pagina != null && mida != null) {
+                paginacio = "?dataInicial=" + dataInicial + "&dataFinal=" + dataFinal + "&pagina=" + pagina + "&mida=" + mida;
+            }else if (pagina != null && mida != null) {
                 paginacio = "?pagina=" + pagina + "&mida=" + mida;
             }
             Client jerseyClient = generarClient();
@@ -122,12 +133,16 @@ public class NotibClientRest {
 
     public Resposta consultaNotificacionsPendents(
             String nif,
+            String dataInicial,
+            String dataFinal,
             Integer pagina,
             Integer mida) {
         try {
             String urlAmbMetode = baseUrl + CARPETA_SERVICE_PATH + "/notificacions/" + nif + "/pendents";
             String paginacio = "";
-            if (pagina != null && mida != null) {
+            if (dataInicial != null && dataFinal != null && pagina != null && mida != null) {
+                paginacio = "?dataInicial=" + dataInicial + "&dataFinal=" + dataFinal + "&pagina=" + pagina + "&mida=" + mida;
+            }else if (pagina != null && mida != null) {
                 paginacio = "?pagina=" + pagina + "&mida=" + mida;
             }
             Client jerseyClient = generarClient();
@@ -151,12 +166,16 @@ public class NotibClientRest {
 
     public Resposta consultaNotificacionsLlegides(
             String nif,
+            String dataInicial,
+            String dataFinal,
             Integer pagina,
             Integer mida) {
         try {
             String urlAmbMetode = baseUrl + CARPETA_SERVICE_PATH + "/notificacions/" + nif + "/llegides";
             String paginacio = "";
-            if (pagina != null && mida != null) {
+            if (dataInicial != null && dataFinal != null && pagina != null && mida != null) {
+                paginacio = "?dataInicial=" + dataInicial + "&dataFinal=" + dataFinal + "&pagina=" + pagina + "&mida=" + mida;
+            }else if (pagina != null && mida != null) {
                 paginacio = "?pagina=" + pagina + "&mida=" + mida;
             }
             Client jerseyClient = generarClient();
@@ -180,12 +199,16 @@ public class NotibClientRest {
 
     public Resposta consultaComunicacionsPendents(
             String nif,
+            String dataInicial,
+            String dataFinal,
             Integer pagina,
             Integer mida) {
         try {
             String urlAmbMetode = baseUrl + CARPETA_SERVICE_PATH + "/comunicacions/" + nif + "/pendents";
             String paginacio = "";
-            if (pagina != null && mida != null) {
+            if (dataInicial != null && dataFinal != null && pagina != null && mida != null) {
+                paginacio = "?dataInicial=" + dataInicial + "&dataFinal=" + dataFinal + "&pagina=" + pagina + "&mida=" + mida;
+            }else if (pagina != null && mida != null) {
                 paginacio = "?pagina=" + pagina + "&mida=" + mida;
             }
             Client jerseyClient = generarClient();
@@ -209,12 +232,16 @@ public class NotibClientRest {
 
     public Resposta consultaComunicacionsLlegides(
             String nif,
+            String dataInicial,
+            String dataFinal,
             Integer pagina,
             Integer mida) {
         try {
             String urlAmbMetode = baseUrl + CARPETA_SERVICE_PATH + "/comunicacions/" + nif + "/llegides";
             String paginacio = "";
-            if (pagina != null && mida != null) {
+            if (dataInicial != null && dataFinal != null && pagina != null && mida != null) {
+                paginacio = "?dataInicial=" + dataInicial + "&dataFinal=" + dataFinal + "&pagina=" + pagina + "&mida=" + mida;
+            }else if (pagina != null && mida != null) {
                 paginacio = "?pagina=" + pagina + "&mida=" + mida;
             }
             Client jerseyClient = generarClient();

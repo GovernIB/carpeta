@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -492,8 +493,36 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
 
-                Resposta respostaNotificacions = notibClientRest.consultaNotificacions(nif, 0,
-                        mida);
+                /* Filtre dates */
+                Date formDataInici;
+                Date formDataFi;
+                String formDataIniciStr = request.getParameter("dataInici");
+                String formDataFiStr = request.getParameter("dataFi");
+
+                String parametros = "";
+                Calendar cal = Calendar.getInstance();
+                SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+
+                if (formDataFiStr != null && formDataFiStr != "") {
+                    formDataFi = SDF.parse(formDataFiStr);
+                    parametros += "&fechaFin=" + formDataFiStr;
+                } else {
+                    formDataFi = cal.getTime();
+                }
+
+                if (formDataIniciStr != null && formDataIniciStr != "") {
+                    formDataInici = SDF.parse(formDataIniciStr);
+                    parametros += "&fechaInicio=" + formDataIniciStr;
+                } else {
+                    /* Inicialitzam darrers 6 mesos */
+                    cal.add(Calendar.MONTH, -6);
+                    formDataInici = cal.getTime();
+                }
+
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+                Resposta respostaNotificacions = notibClientRest.consultaNotificacions(nif, df.format(formDataInici),
+                        df.format(formDataFi), 0, mida);
 
                 notificacionsList = respostaNotificacions.getResultat();
                 for (Transmissio notificacio : notificacionsList) {
@@ -586,7 +615,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
-    // ------------------- NOTIFICACIONS SISTRA ----------------
+    // ------------------- NOTIFICACIONS SISTRA ---------------------------------------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
@@ -682,7 +711,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
-    // ------------------- Notificacions NOTIB----------------
+    // ------------------- Notificacions NOTIB----------------------------------------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
@@ -725,7 +754,35 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
 
-                Resposta resposta = notibClientRest.consultaNotificacions(nif, pagina, mida);
+                /* Filtre dates */
+                Date formDataInici;
+                Date formDataFi;
+                String formDataIniciStr = request.getParameter("dataInici");
+                String formDataFiStr = request.getParameter("dataFi");
+
+                String parametros = "";
+                Calendar cal = Calendar.getInstance();
+                SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+
+                if (formDataFiStr != null && formDataFiStr != "") {
+                    formDataFi = SDF.parse(formDataFiStr);
+                    parametros += "&fechaFin=" + formDataFiStr;
+                } else {
+                    formDataFi = cal.getTime();
+                }
+
+                if (formDataIniciStr != null && formDataIniciStr != "") {
+                    formDataInici = SDF.parse(formDataIniciStr);
+                    parametros += "&fechaInicio=" + formDataIniciStr;
+                } else {
+                    /* Inicialitzam darrers 6 mesos */
+                    cal.add(Calendar.MONTH, -6);
+                    formDataInici = cal.getTime();
+                }
+
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+                Resposta resposta = notibClientRest.consultaNotificacions(nif, df.format(formDataInici), df.format(formDataFi), pagina, mida);
 
                 // System.out.println(" ------------ OK " + resposta + "---------------");
                 // System.out.println(" ------------ NUm Elements Retornats: " +
@@ -877,8 +934,37 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
 
+                /* Filtre dates */
+                Date formDataInici;
+                Date formDataFi;
+                String formDataIniciStr = request.getParameter("dataInici");
+                String formDataFiStr = request.getParameter("dataFi");
+
+                String parametros = "";
+                Calendar cal = Calendar.getInstance();
+                SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+
+                if (formDataFiStr != null && formDataFiStr != "") {
+                    formDataFi = SDF.parse(formDataFiStr);
+                    parametros += "&fechaFin=" + formDataFiStr;
+                } else {
+                    formDataFi = cal.getTime();
+                }
+
+                if (formDataIniciStr != null && formDataIniciStr != "") {
+                    formDataInici = SDF.parse(formDataIniciStr);
+                    parametros += "&fechaInicio=" + formDataIniciStr;
+                } else {
+                    /* Inicialitzam darrers 6 mesos */
+                    cal.add(Calendar.MONTH, -6);
+                    formDataInici = cal.getTime();
+                }
+
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
                 Resposta respostaNotificacionsPendents = notibClientRest
-                        .consultaNotificacionsPendents(nif, 0, mida);
+                        .consultaNotificacionsPendents(nif, df.format(formDataInici), df.format(formDataFi), 0,
+                                mida);
 
                 notificacionsPendentsList = respostaNotificacionsPendents.getResultat();
                 for (Transmissio notificacio : notificacionsPendentsList) {
@@ -947,7 +1033,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             Gson gson = new Gson();
             String json = gson.toJson(infoNotificacionsPendents);
 
-//            log.info(json);
+ //           log.info(json);
 
             try {
 
@@ -1017,8 +1103,36 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
 
-                Resposta respostaNotificacionsLlegides = notibClientRest
-                        .consultaNotificacionsLlegides(nif, 0, mida);
+                /* Filtre dates */
+                Date formDataInici;
+                Date formDataFi;
+                String formDataIniciStr = request.getParameter("dataInici");
+                String formDataFiStr = request.getParameter("dataFi");
+
+                String parametros = "";
+                Calendar cal = Calendar.getInstance();
+                SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+
+                if (formDataFiStr != null && formDataFiStr != "") {
+                    formDataFi = SDF.parse(formDataFiStr);
+                    parametros += "&fechaFin=" + formDataFiStr;
+                } else {
+                    formDataFi = cal.getTime();
+                }
+
+                if (formDataIniciStr != null && formDataIniciStr != "") {
+                    formDataInici = SDF.parse(formDataIniciStr);
+                    parametros += "&fechaInicio=" + formDataIniciStr;
+                } else {
+                    /* Inicialitzam darrers 6 mesos */
+                    cal.add(Calendar.MONTH, -6);
+                    formDataInici = cal.getTime();
+                }
+
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+                Resposta respostaNotificacionsLlegides = notibClientRest.consultaNotificacionsLlegides(nif,
+                        df.format(formDataInici), df.format(formDataFi), 0, mida);
 
                 notificacionsLlegidesList = respostaNotificacionsLlegides.getResultat();
                 for (Transmissio notificacio : notificacionsLlegidesList) {
@@ -1157,7 +1271,36 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
 
-                Resposta respostaComunicacions = notibClientRest.consultaComunicacions(nif, 0,
+                /* Filtre dates */
+                Date formDataInici;
+                Date formDataFi;
+                String formDataIniciStr = request.getParameter("dataInici");
+                String formDataFiStr = request.getParameter("dataFi");
+
+                String parametros = "";
+                Calendar cal = Calendar.getInstance();
+                SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+
+                if (formDataFiStr != null && formDataFiStr != "") {
+                    formDataFi = SDF.parse(formDataFiStr);
+                    parametros += "&fechaFin=" + formDataFiStr;
+                } else {
+                    formDataFi = cal.getTime();
+                }
+
+                if (formDataIniciStr != null && formDataIniciStr != "") {
+                    formDataInici = SDF.parse(formDataIniciStr);
+                    parametros += "&fechaInicio=" + formDataIniciStr;
+                } else {
+                    /* Inicialitzam darrers 6 mesos */
+                    cal.add(Calendar.MONTH, -6);
+                    formDataInici = cal.getTime();
+                }
+
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+                Resposta respostaComunicacions = notibClientRest.consultaComunicacions(nif, df.format(formDataInici),
+                        df.format(formDataFi), 0,
                         mida);
 
                 comunicacionsList = respostaComunicacions.getResultat();
@@ -1293,8 +1436,36 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
 
-                Resposta respostaComunicacionsPendents = notibClientRest
-                        .consultaComunicacionsPendents(nif, 0, mida);
+                /* Filtre dates */
+                Date formDataInici;
+                Date formDataFi;
+                String formDataIniciStr = request.getParameter("dataInici");
+                String formDataFiStr = request.getParameter("dataFi");
+
+                String parametros = "";
+                Calendar cal = Calendar.getInstance();
+                SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+
+                if (formDataFiStr != null && formDataFiStr != "") {
+                    formDataFi = SDF.parse(formDataFiStr);
+                    parametros += "&fechaFin=" + formDataFiStr;
+                } else {
+                    formDataFi = cal.getTime();
+                }
+
+                if (formDataIniciStr != null && formDataIniciStr != "") {
+                    formDataInici = SDF.parse(formDataIniciStr);
+                    parametros += "&fechaInicio=" + formDataIniciStr;
+                } else {
+                    /* Inicialitzam darrers 6 mesos */
+                    cal.add(Calendar.MONTH, -6);
+                    formDataInici = cal.getTime();
+                }
+
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+                Resposta respostaComunicacionsPendents = notibClientRest.consultaComunicacionsPendents(nif,
+                        df.format(formDataInici), df.format(formDataFi), 0, mida);
 
                 comunicacionsPendentsList = respostaComunicacionsPendents.getResultat();
                 for (Transmissio comunicacio : comunicacionsPendentsList) {
@@ -1429,8 +1600,36 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
 
-                Resposta respostaComunicacionsLlegides = notibClientRest
-                        .consultaComunicacionsLlegides(nif, 0, mida);
+                /* Filtre dates */
+                Date formDataInici;
+                Date formDataFi;
+                String formDataIniciStr = request.getParameter("dataInici");
+                String formDataFiStr = request.getParameter("dataFi");
+
+                String parametros = "";
+                Calendar cal = Calendar.getInstance();
+                SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+
+                if (formDataFiStr != null && formDataFiStr != "") {
+                    formDataFi = SDF.parse(formDataFiStr);
+                    parametros += "&fechaFin=" + formDataFiStr;
+                } else {
+                    formDataFi = cal.getTime();
+                }
+
+                if (formDataIniciStr != null && formDataIniciStr != "") {
+                    formDataInici = SDF.parse(formDataIniciStr);
+                    parametros += "&fechaInicio=" + formDataIniciStr;
+                } else {
+                    /* Inicialitzam darrers 6 mesos */
+                    cal.add(Calendar.MONTH, -6);
+                    formDataInici = cal.getTime();
+                }
+
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+                Resposta respostaComunicacionsLlegides = notibClientRest.consultaComunicacionsLlegides(nif,
+                        df.format(formDataInici), df.format(formDataFi), 0, mida);
 
                 comunicacionsLlegidesList = respostaComunicacionsLlegides.getResultat();
                 for (Transmissio comunicacio : comunicacionsLlegidesList) {
@@ -1566,9 +1765,37 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
 
-                Resposta respostaNotificacions = notibClientRest.consultaNotificacions(nif, 0,
-                        mida);
-                Resposta respostaComunicacions = notibClientRest.consultaComunicacions(nif, 0,
+                /* Filtre dates */
+                Date formDataInici;
+                Date formDataFi;
+                String formDataIniciStr = request.getParameter("dataInici");
+                String formDataFiStr = request.getParameter("dataFi");
+
+                String parametros = "";
+                Calendar cal = Calendar.getInstance();
+                SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+
+                if (formDataFiStr != null && formDataFiStr != "") {
+                    formDataFi = SDF.parse(formDataFiStr);
+                    parametros += "&fechaFin=" + formDataFiStr;
+                } else {
+                    formDataFi = cal.getTime();
+                }
+
+                if (formDataIniciStr != null && formDataIniciStr != "") {
+                    formDataInici = SDF.parse(formDataIniciStr);
+                    parametros += "&fechaInicio=" + formDataIniciStr;
+                } else {
+                    /* Inicialitzam darrers 6 mesos */
+                    cal.add(Calendar.MONTH, -6);
+                    formDataInici = cal.getTime();
+                }
+
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+                Resposta respostaNotificacions = notibClientRest.consultaNotificacions(nif, df.format(formDataInici),
+                        df.format(formDataFi), 0, mida);
+                Resposta respostaComunicacions = notibClientRest.consultaComunicacions(nif, df.format(formDataInici), df.format(formDataFi), 0,
                         mida);
 
                 comunicacionsList = respostaComunicacions.getResultat();
@@ -1669,8 +1896,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
-    // ------------------- CONSULTA REST NOTIFICACIONS I COMUNICACIONS PENDENTS
-    // NOTIB -----------------------
+    // --------- CONSULTA REST NOTIFICACIONS I COMUNICACIONS PENDENTS NOTIB -----------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
@@ -1717,10 +1943,38 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
 
-                Resposta respostaNotificacionsPendents = notibClientRest
-                        .consultaNotificacionsPendents(nif, 0, mida);
-                Resposta respostaComunicacionsPendents = notibClientRest
-                        .consultaComunicacionsPendents(nif, 0, mida);
+                /* Filtre dates */
+                Date formDataInici;
+                Date formDataFi;
+                String formDataIniciStr = request.getParameter("dataInici");
+                String formDataFiStr = request.getParameter("dataFi");
+
+                String parametros = "";
+                Calendar cal = Calendar.getInstance();
+                SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+
+                if (formDataFiStr != null && formDataFiStr != "") {
+                    formDataFi = SDF.parse(formDataFiStr);
+                    parametros += "&fechaFin=" + formDataFiStr;
+                } else {
+                    formDataFi = cal.getTime();
+                }
+
+                if (formDataIniciStr != null && formDataIniciStr != "") {
+                    formDataInici = SDF.parse(formDataIniciStr);
+                    parametros += "&fechaInicio=" + formDataIniciStr;
+                } else {
+                    /* Inicialitzam darrers 6 mesos */
+                    cal.add(Calendar.MONTH, -6);
+                    formDataInici = cal.getTime();
+                }
+
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+                Resposta respostaNotificacionsPendents = notibClientRest.consultaNotificacionsPendents(nif,
+                        df.format(formDataInici), df.format(formDataFi), 0, mida);
+                Resposta respostaComunicacionsPendents = notibClientRest.consultaComunicacionsPendents(nif,
+                        df.format(formDataInici), df.format(formDataFi), 0, mida);
 
                 comunicacionsPendentsList = respostaComunicacionsPendents.getResultat();
                 for (Transmissio comunicacio : comunicacionsPendentsList) {
@@ -1819,8 +2073,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
-    // ------------------- CONSULTA REST NOTIFICACIONS I COMUNICACIONS LLEGIDES
-    // NOTIB -----------------------
+    // ---------- CONSULTA REST NOTIFICACIONS I COMUNICACIONS LLEGIDES NOTIB ----------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
@@ -1867,10 +2120,38 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
 
-                Resposta respostaNotificacionsLlegides = notibClientRest
-                        .consultaNotificacionsLlegides(nif, 0, mida);
-                Resposta respostaComunicacionsLlegides = notibClientRest
-                        .consultaComunicacionsLlegides(nif, 0, mida);
+                /* Filtre dates */
+                Date formDataInici;
+                Date formDataFi;
+                String formDataIniciStr = request.getParameter("dataInici");
+                String formDataFiStr = request.getParameter("dataFi");
+
+                String parametros = "";
+                Calendar cal = Calendar.getInstance();
+                SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+
+                if (formDataFiStr != null && formDataFiStr != "") {
+                    formDataFi = SDF.parse(formDataFiStr);
+                    parametros += "&fechaFin=" + formDataFiStr;
+                } else {
+                    formDataFi = cal.getTime();
+                }
+
+                if (formDataIniciStr != null && formDataIniciStr != "") {
+                    formDataInici = SDF.parse(formDataIniciStr);
+                    parametros += "&fechaInicio=" + formDataIniciStr;
+                } else {
+                    /* Inicialitzam darrers 6 mesos */
+                    cal.add(Calendar.MONTH, -6);
+                    formDataInici = cal.getTime();
+                }
+
+                DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+                Resposta respostaNotificacionsLlegides = notibClientRest.consultaNotificacionsLlegides(nif,
+                        df.format(formDataInici), df.format(formDataFi), 0, mida);
+                Resposta respostaComunicacionsLlegides = notibClientRest.consultaComunicacionsLlegides(nif,
+                        df.format(formDataInici), df.format(formDataFi), 0, mida);
 
                 comunicacionsLlegidesList = respostaComunicacionsLlegides.getResultat();
                 for (Transmissio comunicacio : comunicacionsLlegidesList) {
