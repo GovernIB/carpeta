@@ -26,7 +26,7 @@
     "expo-constants": "~13.1.1",
     "expo-font": "~10.1.0",
     "expo-linking": "~3.1.0",
-    "expo-notifications": "~0.15.2",
+    "expo-notifications": "~0.15.4",
     "expo-permissions": "~13.2.0",
     "expo-screen-orientation": "~4.2.0",
     "expo-splash-screen": "~0.15.1",
