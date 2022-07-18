@@ -411,7 +411,7 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
 
             Map<String, Object> infoApoderaments = new HashMap<String, Object>();
 
-            String urlApodera = getPropertyRequired(APODERA_PROPERTY_BASE + "endpoint");
+            String urlApodera = getPropertyRequired(APODERA_PROPERTY_BASE + "url");
 
             infoApoderaments.put("poderdant", poderdant);
             infoApoderaments.put("apoderaments", apos);
