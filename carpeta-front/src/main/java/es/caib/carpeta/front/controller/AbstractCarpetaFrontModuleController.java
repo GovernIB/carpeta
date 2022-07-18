@@ -76,11 +76,12 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
             String administrationIDEncriptat, @PathVariable("urlBase")
             String urlBase) throws Exception {
 
-        log.info("showCarpetaFrontModule:: pluginID => " + pluginID);
-        log.info("showCarpetaFrontModule:: administrationIDEncriptat => "
-                + administrationIDEncriptat);
-        log.info("showCarpetaFrontModule:: urlBase => " + urlBase);
-
+        if (log.isDebugEnabled()) {
+            log.debug("showCarpetaFrontModule:: pluginID => " + pluginID);
+            log.debug("showCarpetaFrontModule:: administrationIDEncriptat => "
+                    + administrationIDEncriptat);
+            log.debug("showCarpetaFrontModule:: urlBase => " + urlBase);
+        }
         String urlBaseDec = new String(Base64.getUrlDecoder().decode(urlBase), "utf-8");
 
         request.getSession().setAttribute(SESSION_URL_BASE, urlBaseDec);
@@ -107,12 +108,14 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         String parameter = fullPath.substring(fullPath.lastIndexOf("/p/") + "/p/".length());
 
         {
-            log.info("showCarpetaFrontModuleWithUrlBaseAndParameter FULL " + fullPath);
-            log.info("showCarpetaFrontModuleWithUrlBaseAndParameter PARAMETER " + fullPath);
-            log.info("showCarpetaFrontModule:: pluginID => " + pluginID);
-            log.info("showCarpetaFrontModule:: administrationIDEncriptat => "
-                    + administrationIDEncriptat);
-            log.info("showCarpetaFrontModule:: urlBase => " + urlBase);
+            if (log.isDebugEnabled()) {
+                log.debug("showCarpetaFrontModuleWithUrlBaseAndParameter FULL " + fullPath);
+                log.debug("showCarpetaFrontModuleWithUrlBaseAndParameter PARAMETER " + fullPath);
+                log.debug("showCarpetaFrontModule:: pluginID => " + pluginID);
+                log.debug("showCarpetaFrontModule:: administrationIDEncriptat => "
+                        + administrationIDEncriptat);
+                log.debug("showCarpetaFrontModule:: urlBase => " + urlBase);
+            }
         }
 
         String urlBaseDec = new String(Base64.getUrlDecoder().decode(urlBase), "utf-8");
@@ -159,12 +162,12 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
         UserData userData = getUserData(administrationID);
 
+        final boolean debug = log.isDebugEnabled();
         if (!carpetaFrontPlugin.isPublic()) {
             if (userData == null) {
 
                 log.error("\n\n CONTROLLER S'ha intentat accedir al plugin " + pluginID
-                        + " privat des d'una zona pública\n\n");
-
+                            + " privat des d'una zona pública\n\n");
                 String msg = I18NUtils.tradueix("plugin.carpetafront.notpublic",
                         String.valueOf(pluginID));
                 return generateErrorMAV(request, pluginID, msg, null);
@@ -175,7 +178,9 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
                     final String msg = "S'ha intentat accedir a una consulta del plugin privat amb NIF "
                             + administrationID + " però l'usuari loguejat és "
                             + userData.getAdministrationID();
-                    log.error("\n\n " + msg + "\n\n");
+                    if (debug) {
+                        log.error("\n\n " + msg + "\n\n");
+                    }
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED, msg);
                     return generateErrorMAV(request, pluginID, msg, null);
                 }
@@ -196,7 +201,7 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
 
         {
            String msg= "\n\n\n SHOW PLUGIN ";
-            if (log.isDebugEnabled()) {
+            if (debug) {
                 msg = msg + "\nadministrationID = " + administrationID;
             }
             msg = msg   + "\nadministrationIDEncriptat = " + administrationIDEncriptat + "\nURL_BASE = "
@@ -205,7 +210,9 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
                         + "\nrelativeControllerBase = " + relativeControllerBase
                         + "\nrelativeRequestPluginBasePath = " + relativeRequestPluginBasePath
                         + "\n\n\n";
-            log.info(msg);
+            if (debug) {
+                log.debug(msg);
+            }
         }
 
         TitlesInfo titlesInfo = carpetaFrontPlugin.getTitlesInfo();
@@ -214,19 +221,25 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
             carpetaFrontPlugin.setTitlesInfo(titlesInfo);
         }
 
-        log.info("\n Cridant a  carpetaFront.getStartUrl() amb PluginParameter =>  " + parameter);
+        if (debug) {
+            log.debug("\n Cridant a  carpetaFront.getStartUrl() amb PluginParameter =>  " + parameter);
+        }
 
         String codiEntitat = null;
         if (sesionHttp != null && sesionHttp.getEntitat() != null) {
             codiEntitat = sesionHttp.getEntitat();
-            log.info(
-                    "IListenerLogCarpeta->codiEntitat = sesionHttp.getEntitat() => " + codiEntitat);
+            if (debug) {
+                log.debug(
+                        "IListenerLogCarpeta->codiEntitat = sesionHttp.getEntitat() => " + codiEntitat);
+            }
         } else {
             PropietatGlobalService propietatGlobalEjb = EjbManager.getPropietatLogicaEJB();
             String defaultEntityCode = EjbManager.getDefaultEntityCode(propietatGlobalEjb);
             if (defaultEntityCode != null) {
                 codiEntitat = defaultEntityCode;
-                log.info("IListenerLogCarpeta->codiEntitat = defaultEntityCode => " + codiEntitat);
+                if (debug) {
+                    log.debug("IListenerLogCarpeta->codiEntitat = defaultEntityCode => " + codiEntitat);
+                }
             }
         }
 
@@ -237,7 +250,9 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
                 relativeRequestPluginBasePath, request, userData, administrationIDEncriptat,
                 parameter, logCarpeta);
 
-        log.info("\n\n\n SHOW PLUGIN 2222 urlToPluginWebPage =>  " + urlToPluginWebPage);
+        if (debug) {
+            log.debug("\n\n\n SHOW PLUGIN 2222 urlToPluginWebPage =>  " + urlToPluginWebPage);
+        }
 
         return new ModelAndView(new RedirectView(urlToPluginWebPage, false));
 
@@ -289,7 +304,7 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         // idAndQuery = 1466408733012148444/-1/index.html
         String idAndQuery = uri.substring(index + BASE.length() + 1);
         if (debug) {
-            log.info(" idAndQuery = " + idAndQuery);
+            log.debug(" idAndQuery = " + idAndQuery);
         }
 
         index = idAndQuery.indexOf('/');
@@ -300,11 +315,11 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
                 .decode(idAndQuery.substring(index + 1, index2), "utf-8");
         String query = idAndQuery.substring(index2 + 1, idAndQuery.length());
 
-        
-        log.info(" pluginID = " + pluginIDStr);
-        log.info(" administrationIDEncripted = " + administrationIDEncripted);
-        log.info(" query = " + query);
-        
+        if (debug) {
+            log.debug(" pluginID = " + pluginIDStr);
+            log.debug(" administrationIDEncripted = " + administrationIDEncripted);
+            log.debug(" query = " + query);
+        }
 
         // Així si que agafa be l'idioma del front
         Locale locale = Locale.getDefault();
@@ -388,7 +403,8 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
                     final String msg = "S'ha intentat accedir a una consulta del plugin privat amb NIF "
                             + administrationID + " però l'usuari loguejat és "
                             + userData.getAdministrationID();
-                    log.error("\n\n " + msg + "\n\n");
+                    if (debug)
+                        log.error("\n\n " + msg + "\n\n");
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED, msg);
                     return;
                 }
@@ -517,8 +533,9 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         final String urlToShowPluginPage = urlBase + context + "/showplugin/" + pluginID + "/"
                 + response.encodeURL(administrationIDEncriptat);
 
-        log.info(" urlToShowPluginPage => " + urlToShowPluginPage);
-
+        if (log.isDebugEnabled()) {
+            log.debug(" urlToShowPluginPage => " + urlToShowPluginPage);
+        }
         ModelAndView mav = new ModelAndView(view);
         // mav.addObject("signaturesSetID", signaturesSetID);
         mav.addObject("urlToShowPluginPage", urlToShowPluginPage);

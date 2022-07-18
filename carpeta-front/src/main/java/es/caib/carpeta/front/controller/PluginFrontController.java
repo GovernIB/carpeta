@@ -238,7 +238,9 @@ public class PluginFrontController extends CommonFrontController {
 
             log.info("showPlugin:: urlBase = " + urlBase);
             log.info("showPlugin:: pluginID = " + pluginID);
-            log.info("showPlugin:: administrationID = " + administrationID);
+            if (log.isDebugEnabled()) {
+                log.debug("showPlugin:: administrationID = " + administrationID);
+            }
 
             /*
              * String contextPath = "/carpetafront";

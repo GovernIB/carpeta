@@ -55,7 +55,9 @@ public class CarpetaFrontAuthProvider implements AuthenticationProvider {
         final String usuario = authentication.getName();
         final String passwd = authentication.getCredentials().toString();
 
-        log.info("Usuario: " + usuario);
+        if (log.isDebugEnabled()) {
+            log.info("Usuario: " + usuario);
+        }
 
         UsuarioClave usuarioClave = null;
 

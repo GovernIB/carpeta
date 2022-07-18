@@ -120,8 +120,10 @@ public class PluginLoginLoginIB implements IPluginLogin {
         final ResponseEntity<String> responseLoginIB = restTemplate.postForEntity(LOGINIB_URL + "/login", peticion,
                 String.class);
 
-        log.info("LoginIB: response: " + responseLoginIB.toString());
-        log.info("LoginIB: URL: " + responseLoginIB.getBody());
+        if (log.isDebugEnabled()) {
+            log.debug("LoginIB: response: " + responseLoginIB.toString());
+            log.debug("LoginIB: URL: " + responseLoginIB.getBody());
+        }
 
         String url = responseLoginIB.getBody();
 
@@ -139,20 +141,26 @@ public class PluginLoginLoginIB implements IPluginLogin {
             final RDatosAutenticacion datosAutenticacion = restTemplate.getForObject(LOGINIB_URL + "/ticket/" + ticket,
                     RDatosAutenticacion.class);
 
-            log.info("LoginIB:: NIF " + datosAutenticacion.getNif());
-            log.info("LoginIB:: Name " + datosAutenticacion.getNombre());
-            log.info("LoginIB:: Surname1 " + datosAutenticacion.getApellido1());
-            log.info("LoginIB:: Surname2 " + datosAutenticacion.getApellido2());
-            log.info("LoginIB:: AdministrationID" + datosAutenticacion.getNif());
-            log.info("LoginIB:: AuthenticationMethod " + datosAutenticacion.getMetodoAutenticacion());
+            final boolean debug = log.isDebugEnabled();
+
+            if (debug) {
+                log.debug("LoginIB:: NIF " + datosAutenticacion.getNif());
+                log.debug("LoginIB:: Name " + datosAutenticacion.getNombre());
+                log.debug("LoginIB:: Surname1 " + datosAutenticacion.getApellido1());
+                log.debug("LoginIB:: Surname2 " + datosAutenticacion.getApellido2());
+                log.debug("LoginIB:: AdministrationID" + datosAutenticacion.getNif());
+                log.debug("LoginIB:: AuthenticationMethod " + datosAutenticacion.getMetodoAutenticacion());
+            }
             RDatosRepresentante rep = datosAutenticacion.getRepresentante();
 
             if (rep != null) {
-                log.info("Representant:: getNombre -> " + rep.getNombre());
-                log.info("Representant:: getApellido1-> " + rep.getApellido1());
-                log.info("Representant:: getApellido1 getApellido2 -> " + rep.getApellido2());
-                log.info("Representant:: getApellidos -> " + rep.getApellidos());
-                log.info("Representant:: getNif -> " + rep.getNif());
+                if (debug) {
+                    log.debug("Representant:: getNombre -> " + rep.getNombre());
+                    log.debug("Representant:: getApellido1-> " + rep.getApellido1());
+                    log.debug("Representant:: getApellido1 getApellido2 -> " + rep.getApellido2());
+                    log.debug("Representant:: getApellidos -> " + rep.getApellidos());
+                    log.debug("Representant:: getNif -> " + rep.getNif());
+                }
             }
 
             final String username = datosAutenticacion.getNif();

@@ -744,7 +744,9 @@ public class WebUIController extends PluginFrontController {
             Gson gson = new Gson();
             String json = gson.toJson(new Object[] { seccioInfo, pluginInfo });
 
-            log.info(" Seccio-Plugin amb seccioContext = " + seccioContext + "-" + pluginContext  + ":\n" + json + "\n");
+            if (log.isDebugEnabled()) {
+                log.debug(" Seccio-Plugin amb seccioContext = " + seccioContext + "-" + pluginContext + ":\n" + json + "\n");
+            }
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF8");
@@ -775,7 +777,9 @@ public class WebUIController extends PluginFrontController {
             Gson gson = new Gson();
             String json = gson.toJson(seccioInfo);
 
-            log.info(" Seccio amb Context = " + seccioContext + ":\n" + json + "\n");
+            if (log.isDebugEnabled()) {
+                log.info(" Seccio amb Context = " + seccioContext + ":\n" + json + "\n");
+            }
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF8");
@@ -839,9 +843,9 @@ public class WebUIController extends PluginFrontController {
             Gson gson = new Gson();
             String json = gson.toJson(seccioInfo);
             
-            
-            log.info(" Seccions amb PAREID = " + seccioPareID + ":\n" + json + "\n");
-            
+            if (log.isDebugEnabled()) {
+                log.debug(" Seccions amb PAREID = " + seccioPareID + ":\n" + json + "\n");
+            }
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF8");
@@ -1250,7 +1254,9 @@ public class WebUIController extends PluginFrontController {
             Gson gson = new Gson();
             String json = gson.toJson(pluginInfo);
 
-            log.info(" PluginInfo amb ID = " + pluginID + ":\n" + json + "\n");
+            if (log.isDebugEnabled()) {
+                log.debug(" PluginInfo amb ID = " + pluginID + ":\n" + json + "\n");
+            }
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF8");
