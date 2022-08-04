@@ -9,7 +9,7 @@
     <parent>
         <groupId>es.caib.carpeta</groupId>
         <artifactId>carpeta</artifactId>
-        <version>1.1.18</version>
+        <version>1.1.19</version>
     </parent>
 
     <name>Carpeta - Persistence</name>
