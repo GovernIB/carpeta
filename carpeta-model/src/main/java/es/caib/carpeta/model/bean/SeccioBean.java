@@ -8,8 +8,6 @@ public class SeccioBean implements Seccio {
 
 
 
-private static final long serialVersionUID = 223694536L;
-
 	long seccioID;// PK
 	long nomID;
 	long descripcioID;

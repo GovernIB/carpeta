@@ -19,10 +19,6 @@ import javax.persistence.Id;
 @javax.xml.bind.annotation.XmlRootElement
 public class AuditoriaJPA implements Auditoria {
 
-
-
-private static final long serialVersionUID = 129744773L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="AUDITORIA_SEQ")
     @Column(name="auditoriaid",nullable = false,length = 19)

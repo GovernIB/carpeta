@@ -23,10 +23,6 @@ import javax.persistence.Id;
 @javax.xml.bind.annotation.XmlRootElement
 public class AccesJPA implements Acces {
 
-
-
-private static final long serialVersionUID = -2081832820L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ACCES_SEQ")
     @Column(name="accesid",nullable = false,length = 19)

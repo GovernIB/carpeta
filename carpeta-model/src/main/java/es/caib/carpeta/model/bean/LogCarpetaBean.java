@@ -8,8 +8,6 @@ public class LogCarpetaBean implements LogCarpeta {
 
 
 
-private static final long serialVersionUID = 1007346690L;
-
 	long logID;// PK
 	java.lang.String descripcio;
 	int tipus;

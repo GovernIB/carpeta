@@ -835,6 +835,13 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
+  @Override
+  /** Ha de ser igual que el RequestMapping de la Classe */
+  public String getContextWeb() {
+    RequestMapping rm = AnnotationUtils.findAnnotation(this.getClass(), RequestMapping.class);
+    return rm.value()[0];
+  }
+
   public void preValidate(HttpServletRequest request,AvisForm avisForm , BindingResult result)  throws I18NException {
   }
 
@@ -875,13 +882,6 @@ public java.lang.Long stringToPK(String value) {
     return "avisListWebDB";
   }
 
-  @Override
-  /** Ha de ser igual que el RequestMapping de la Classe */
-  public String getContextWeb() {
-    RequestMapping rm = AnnotationUtils.findAnnotation(this.getClass(), RequestMapping.class);
-    return rm.value()[0];
-  }
-
   public String getSessionAttributeFilterForm() {
     return "AvisWebDB_FilterForm";
   }
@@ -899,18 +899,18 @@ public java.lang.Long stringToPK(String value) {
 
 
   public AvisJPA create(HttpServletRequest request, AvisJPA avis)
-    throws Exception,I18NException, I18NValidationException {
+    throws I18NException, I18NValidationException {
     return (AvisJPA) avisEjb.create(avis);
   }
 
 
   public AvisJPA update(HttpServletRequest request, AvisJPA avis)
-    throws Exception,I18NException, I18NValidationException {
+    throws I18NException, I18NValidationException {
     return (AvisJPA) avisEjb.update(avis);
   }
 
 
-  public void delete(HttpServletRequest request, Avis avis) throws Exception,I18NException {
+  public void delete(HttpServletRequest request, Avis avis) throws I18NException {
     avisEjb.delete(avis);
   }
 

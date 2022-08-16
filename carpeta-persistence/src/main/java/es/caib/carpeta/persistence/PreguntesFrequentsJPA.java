@@ -28,10 +28,6 @@ import javax.persistence.Id;
 @javax.xml.bind.annotation.XmlRootElement
 public class PreguntesFrequentsJPA implements PreguntesFrequents {
 
-
-
-private static final long serialVersionUID = 1787206139L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="PREGUNTESFREQUENTS_SEQ")
     @Column(name="preguntesfrequentsid",nullable = false,length = 19)

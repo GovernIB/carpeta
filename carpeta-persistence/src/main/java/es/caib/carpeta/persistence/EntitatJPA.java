@@ -36,10 +36,6 @@ import javax.persistence.Id;
 @javax.xml.bind.annotation.XmlRootElement
 public class EntitatJPA implements Entitat {
 
-
-
-private static final long serialVersionUID = 489209138L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ENTITAT_SEQ")
     @Column(name="entitatid",nullable = false,length = 19)

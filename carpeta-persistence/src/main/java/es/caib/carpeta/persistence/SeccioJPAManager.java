@@ -16,9 +16,6 @@ public class SeccioJPAManager
 
 
 
-
-    private static final long serialVersionUID = -903996310L;
-
     public static final TableName<Seccio> _TABLENAME =  new TableName<Seccio>("SeccioJPA");
 
 
@@ -58,7 +55,7 @@ public class SeccioJPAManager
         return list.toArray(new Seccio[list.size()]);
     };
 
-    public synchronized Seccio create( long _nomID_, long _descripcioID_, boolean _activa_, long _iconaID_, java.lang.Long _seccioPareID_, long _entitatID_, int _ordre_) throws I18NException {
+    public Seccio create( long _nomID_, long _descripcioID_, boolean _activa_, long _iconaID_, java.lang.Long _seccioPareID_, long _entitatID_, int _ordre_) throws I18NException {
         SeccioJPA __bean =  new SeccioJPA(_nomID_,_descripcioID_,_activa_,_iconaID_,_seccioPareID_,_entitatID_,_ordre_);
         return create(__bean);
     }

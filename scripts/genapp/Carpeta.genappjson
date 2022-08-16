@@ -1,0 +1,6021 @@
+{
+  "packageName": "es.caib.carpeta",
+  "projectName": "Carpeta",
+  "dataBaseInfo": {
+    "url": "jdbc:postgresql://localhost:5432/carpeta",
+    "driver": "org.postgresql.Driver",
+    "usr": "carpeta",
+    "pwd": "carpeta"
+  },
+  "modulSeguretat": "seycon",
+  "prefix": "car",
+  "prefixDirectori": "carpeta-",
+  "schema": "public",
+  "tables": [
+    {
+      "name": "car_acces",
+      "nameJava": "Acces",
+      "shortName": "acces",
+      "labels": {
+        "en": "Frontal Access",
+        "ca": "Acces del Frontal",
+        "es": "Acceso del Frontal"
+      },
+      "labelsPlural": {
+        "en": "Frontal Accesses",
+        "ca": "Accessos del Frontal",
+        "es": "Accesos del Frontal"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "car_acces_pk",
+          "index": "car_acces_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "accesid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "ID",
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "accesID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027car_acces_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0,
+            "label": [
+              "nom"
+            ]
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "tipus",
+          "sqlType": 4,
+          "size": 10,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Type",
+            "ca": "Tipus",
+            "es": "Tipo"
+          },
+          "javaName": "tipus",
+          "javaType": "int",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "minAllowedValue": "1,2,3,4,5,6,7",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 16
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "nom",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Name",
+            "ca": "Nom",
+            "es": "Nombre"
+          },
+          "javaName": "nom",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "llinatges",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "llinatges",
+            "ca": "Llinatges",
+            "es": "Apellidos"
+          },
+          "javaName": "llinatges",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "nif",
+          "sqlType": 12,
+          "size": 50,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Administration ID",
+            "ca": "NIF",
+            "es": "NIF"
+          },
+          "javaName": "nif",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "ip",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "IP Address",
+            "ca": "Direcció IP",
+            "es": "Dirección IP"
+          },
+          "javaName": "ip",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "proveidoridentitat",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Entity Provider",
+            "ca": "Proveidor de Identitat",
+            "es": "Proveedor de identidad"
+          },
+          "javaName": "proveidorIdentitat",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "metodeautenticacio",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Authentication Method",
+            "ca": "Mètode Autenticació",
+            "es": "Método Autenticación"
+          },
+          "javaName": "metodeAutenticacio",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "qaa",
+          "sqlType": 4,
+          "size": 10,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Qaa",
+            "ca": "Qaa",
+            "es": "Qaa"
+          },
+          "javaName": "qaa",
+          "javaType": "java.lang.Integer",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 14
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "dataacces",
+          "sqlType": 93,
+          "size": 29,
+          "digits": 6,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Acces Date",
+            "ca": "Data Acces",
+            "es": "Fecha Acceso"
+          },
+          "javaName": "dataAcces",
+          "javaType": "java.sql.Timestamp",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 7
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "pluginid",
+          "sqlType": 4,
+          "size": 10,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Plugin",
+            "ca": "Plugin",
+            "es": "Plugin"
+          },
+          "javaName": "pluginID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "minAllowedValue": "1,2,3,4,5",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 16
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "car_acces_entitatid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "entitatid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Entity",
+            "ca": "Entitat",
+            "es": "Entidad"
+          },
+          "javaName": "entitatID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_acces_entitatid_fk",
+              "table": "car_entitat",
+              "field": "entitatid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_acces_entitat_entitatid_fk",
+              "table": "car_entitat",
+              "field": "entitatid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "idioma",
+          "sqlType": 12,
+          "size": 50,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Language",
+            "ca": "Idioma",
+            "es": "Idioma"
+          },
+          "javaName": "idioma",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "descripcio": "Hauria d\u0027estar enllaçat amb la taula idioma",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "resultat",
+          "sqlType": -7,
+          "size": 1,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Result",
+            "ca": "Resultat",
+            "es": "Resultado"
+          },
+          "javaName": "resultat",
+          "javaType": "boolean",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "true",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 4
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "idsessio",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Session ID",
+            "ca": "ID de Sessió",
+            "es": "ID de Sesion"
+          },
+          "javaName": "idsessio",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
+      "name": "car_auditoria",
+      "nameJava": "Auditoria",
+      "shortName": "audit",
+      "labels": {
+        "en": "Back Audit",
+        "ca": "Auditoria del back",
+        "es": "Auditoria del back"
+      },
+      "labelsPlural": {
+        "en": "Back Audits",
+        "ca": "Auditories del back",
+        "es": "Auditorias del back"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "car_auditoria_pk",
+          "index": "car_auditoria_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "auditoriaid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "auditoriaid",
+            "ca": "auditoriaid",
+            "es": "auditoriaid"
+          },
+          "javaName": "auditoriaID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027car_auditoria_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "tipus",
+          "sqlType": 4,
+          "size": 10,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Type",
+            "ca": "Tipus",
+            "es": "Tipo"
+          },
+          "javaName": "tipus",
+          "javaType": "int",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "minAllowedValue": "1,2,3,4,5,6,7,8,9,10,11,12",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": true,
+          "webFieldInfo": {
+            "webtype": 16
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "objecte",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Object",
+            "ca": "Objecte",
+            "es": "Objeto"
+          },
+          "javaName": "objecte",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "dataaudit",
+          "sqlType": 93,
+          "size": 29,
+          "digits": 6,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Date",
+            "ca": "Data",
+            "es": "Fecha"
+          },
+          "javaName": "dataAudit",
+          "javaType": "java.sql.Timestamp",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": true,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 7
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "username",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Username",
+            "ca": "Username",
+            "es": "Username"
+          },
+          "javaName": "username",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "minAllowedValue": "1,2,3,4",
+          "filter": true,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "car_auditoria_entitatid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "entitatid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Entity",
+            "ca": "Entitat",
+            "es": "Entidad"
+          },
+          "javaName": "entitatID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "minAllowedValue": "1,2,3",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": true,
+          "webFieldInfo": {
+            "webtype": 16
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
+      "name": "car_avis",
+      "nameJava": "Avis",
+      "shortName": "avis",
+      "labels": {
+        "en": "Notification",
+        "ca": "Avis",
+        "es": "Aviso"
+      },
+      "labelsPlural": {
+        "en": "Notifications",
+        "ca": "Avisos",
+        "es": "Avisos"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "car_avis_pk",
+          "index": "car_avis_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "avisid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "ID",
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "avisID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027car_avis_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "car_avis_descripcioid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "descripcioid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Description",
+            "ca": "Descripció",
+            "es": "Descripción"
+          },
+          "javaName": "descripcioID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_avis_traduccio_desc_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_avis_traduccio_desc_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_avis_entitatid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "entitatid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Entity",
+            "ca": "Entitat",
+            "es": "Entidad"
+          },
+          "javaName": "entitatID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_avis_entitat_ent_fk",
+              "table": "car_entitat",
+              "field": "entitatid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_avis_entitat_ent_fk",
+              "table": "car_entitat",
+              "field": "entitatid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "datainici",
+          "sqlType": 93,
+          "size": 29,
+          "digits": 6,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Start Date",
+            "ca": "Data Inici",
+            "es": "Fecha Inicio"
+          },
+          "javaName": "dataInici",
+          "javaType": "java.sql.Timestamp",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 7
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "datafi",
+          "sqlType": 93,
+          "size": 29,
+          "digits": 6,
+          "isNotNullable": false,
+          "labels": {
+            "en": "End Date",
+            "ca": "Data Fi",
+            "es": "Fecha Fin"
+          },
+          "javaName": "dataFi",
+          "javaType": "java.sql.Timestamp",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 7
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "tipus",
+          "sqlType": 4,
+          "size": 10,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Type",
+            "ca": "Tipus",
+            "es": "Tipo"
+          },
+          "javaName": "tipus",
+          "javaType": "int",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "minAllowedValue": "1,2,3,4,5",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 16
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "gravetat",
+          "sqlType": 4,
+          "size": 10,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Severity",
+            "ca": "Gravetat",
+            "es": "Gravedad"
+          },
+          "javaName": "gravetat",
+          "javaType": "int",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "1",
+          "minAllowedValue": "1,2,3",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 16
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "car_avis_pluginfrontid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "pluginfrontid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Plugin Front",
+            "ca": "Plugin Front",
+            "es": "Plugin Front"
+          },
+          "javaName": "pluginFrontID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_avis_plugin_pfront_fk",
+              "table": "car_plugin",
+              "field": "pluginid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_avis_plugin_pfront_fk",
+              "table": "car_plugin",
+              "field": "pluginid",
+              "type": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "car_ciutada",
+      "nameJava": "Ciutada",
+      "shortName": "ciutada",
+      "labels": {
+        "en": "Citizen",
+        "ca": "Ciutadà",
+        "es": "Ciudadano"
+      },
+      "labelsPlural": {
+        "en": "Citizens",
+        "ca": "Ciutadans",
+        "es": "Ciudadanos"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "car_ciutada_pk",
+          "index": "car_ciutada_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "ciutadaid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "ID",
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "ciutadaID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027car_ciutada_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "nif",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "NIF",
+            "ca": "NIF",
+            "es": "NIF"
+          },
+          "javaName": "nif",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": true,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "llinatge1",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Surname 1",
+            "ca": "Llinatge1",
+            "es": "Apellido1"
+          },
+          "javaName": "llinatge1",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": true,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "llinatge2",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Surname2",
+            "ca": "Llinatge2",
+            "es": "Apellido2"
+          },
+          "javaName": "llinatge2",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": true,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "nom",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Name",
+            "ca": "Nom",
+            "es": "Nombre"
+          },
+          "javaName": "nom",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": true,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "empresa",
+          "sqlType": -7,
+          "size": 1,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Is bussines",
+            "ca": "És empresa",
+            "es": "Es empresa"
+          },
+          "javaName": "empresa",
+          "javaType": "boolean",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": true,
+          "webFieldInfo": {
+            "webtype": 4
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "representantnif",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Representante NIF",
+            "ca": "Representant NIF",
+            "es": "Representante NIF"
+          },
+          "javaName": "representantNif",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": true,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "representantllinatge1",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Representante Apellido1",
+            "ca": "Representant Llinatge1",
+            "es": "Representante Apellido1"
+          },
+          "javaName": "representantLlinatge1",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": true,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "representantllinatge2",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Representante Apellido2",
+            "ca": "Representant Llinatge2",
+            "es": "Representante Apellido2"
+          },
+          "javaName": "representantLlinatge2",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "representantnom",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Representante Nombre",
+            "ca": "Representant Nom",
+            "es": "Representante Nombre"
+          },
+          "javaName": "representantNom",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "datacreacio",
+          "sqlType": 93,
+          "size": 29,
+          "digits": 6,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Creation Date",
+            "ca": "Data Creació",
+            "es": "Fecha Creación"
+          },
+          "javaName": "dataCreacio",
+          "javaType": "java.sql.Timestamp",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 7
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "mobileid",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Mobile Id",
+            "ca": "Mobil Id",
+            "es": "Movil Id"
+          },
+          "javaName": "mobileId",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": true,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        }
+      ],
+      "multipleUniques": [
+        {
+          "name": "car_ciutada_nif_rnif_uk",
+          "sqlColumns": [
+            "nif",
+            "representantnif"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "car_enllaz",
+      "nameJava": "Enllaz",
+      "shortName": "enllaz",
+      "labels": {
+        "en": "Link",
+        "ca": "Enllaç",
+        "es": "Enlace"
+      },
+      "labelsPlural": {
+        "en": "Links",
+        "ca": "Enllaços",
+        "es": "Enlaces"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "car_enllaz_pk",
+          "index": "car_enllaz_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "enllazid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "ID",
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "enllazID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027car_enllaz_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "tipus",
+          "sqlType": 4,
+          "size": 10,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Type",
+            "ca": "Tipus",
+            "es": "Tipo"
+          },
+          "javaName": "tipus",
+          "javaType": "int",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "minAllowedValue": "1,2,3,4,5",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": true,
+          "webFieldInfo": {
+            "webtype": 16
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "car_enllaz_nomid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "nomid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Name",
+            "ca": "Nom",
+            "es": "Nombre"
+          },
+          "javaName": "nomID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_enllaz_traduccio_nomid_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_enllaz_traduccio_nomid_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_enllaz_descripcioid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "descripcioid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Description",
+            "ca": "Descripció",
+            "es": "Descripción"
+          },
+          "javaName": "descripcioID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_enllaz_traduccio_desid_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_enllaz_traduccio_desid_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_enllaz_urlid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "urlid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Url",
+            "ca": "Url",
+            "es": "Url"
+          },
+          "javaName": "urlID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_enllaz_traduccio_urlid_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_enllaz_traduccio_urlid_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_enllaz_entitatid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "entitatid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Entity",
+            "ca": "Entitat",
+            "es": "Entidad"
+          },
+          "javaName": "entitatID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_enllaz_entitat_ent_fk",
+              "table": "car_entitat",
+              "field": "entitatid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_enllaz_entitat_ent_fk",
+              "table": "car_entitat",
+              "field": "entitatid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_enllaz_logoid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "logoid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Image",
+            "ca": "Imatge",
+            "es": "Imagen"
+          },
+          "javaName": "logoID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_enllaz_fitxer_logo_fk",
+              "table": "car_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_enllaz_fitxer_logo_fk",
+              "table": "car_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_enllaz_seccioid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "seccioid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Section",
+            "ca": "Secció",
+            "es": "Sección"
+          },
+          "javaName": "seccioID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_enllaz_seccio_sec_fk",
+              "table": "car_seccio",
+              "field": "seccioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_enllaz_seccio_sec_fk",
+              "table": "car_seccio",
+              "field": "seccioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "actiu",
+          "sqlType": -7,
+          "size": 1,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Active",
+            "ca": "Actiu",
+            "es": "Activo"
+          },
+          "javaName": "actiu",
+          "javaType": "boolean",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "true",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 4
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "ordre",
+          "sqlType": 4,
+          "size": 10,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Order",
+            "ca": "Ordre",
+            "es": "Orden"
+          },
+          "javaName": "ordre",
+          "javaType": "int",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "1",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 14
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
+      "name": "car_entitat",
+      "nameJava": "Entitat",
+      "shortName": "entitat",
+      "labels": {
+        "en": "Entity",
+        "ca": "Entitat",
+        "es": "Entidad"
+      },
+      "labelsPlural": {
+        "en": "Entities",
+        "ca": "Entitats",
+        "es": "Entidades"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "car_entitat_pk",
+          "index": "car_entitat_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "entitatid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "ID",
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "entitatID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027car_entitat_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": [
+            {
+              "name": "car_acces_entitat_entitatid_fk",
+              "table": "car_acces",
+              "field": "entitatid",
+              "type": 0
+            },
+            {
+              "name": "car_avis_entitat_ent_fk",
+              "table": "car_avis",
+              "field": "entitatid",
+              "type": 0
+            },
+            {
+              "name": "car_enllaz_entitat_ent_fk",
+              "table": "car_enllaz",
+              "field": "entitatid",
+              "type": 0
+            },
+            {
+              "name": "car_notifica_entitat_ent_fk",
+              "table": "car_notificacioapp",
+              "field": "entitatid",
+              "type": 0
+            },
+            {
+              "name": "car_plugent_entitat_fk",
+              "table": "car_pluginentitat",
+              "field": "entitatid",
+              "type": 0
+            },
+            {
+              "name": "car_faq_entitat_ent_fk",
+              "table": "car_preguntesfrequents",
+              "field": "entitatid",
+              "type": 0
+            },
+            {
+              "name": "car_propglob_entitat_fk",
+              "table": "car_propietatglobal",
+              "field": "entitatid",
+              "type": 0
+            },
+            {
+              "name": "car_seccio_entitat_ent_fk",
+              "table": "car_seccio",
+              "field": "entitatid",
+              "type": 0
+            },
+            {
+              "name": "car_usuari_entitat_last_fk",
+              "table": "car_usuari",
+              "field": "darreraentitat",
+              "type": 0
+            },
+            {
+              "name": "car_usuent_entitat_fk",
+              "table": "car_usuarientitat",
+              "field": "entitatid",
+              "type": 0
+            }
+          ]
+        },
+        {
+          "index": "car_entitat_nom_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "nomid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Name",
+            "ca": "Nom",
+            "es": "Nombre"
+          },
+          "javaName": "nomID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_entitat_traduccio_nom_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_entitat_traduccio_nom_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_entitat_descripcioid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "descripcioid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Description",
+            "ca": "Descripció",
+            "es": "Descripción"
+          },
+          "javaName": "descripcioID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_entitat_traduccio_des_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_entitat_traduccio_des_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "codi",
+          "sqlType": 12,
+          "size": 30,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Code",
+            "ca": "Codi",
+            "es": "Código"
+          },
+          "javaName": "codi",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "minAllowedValue": "[a-z]{3,30}",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "codidir3",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Dir3 Code",
+            "ca": "Codi Dir3",
+            "es": "Código Dir3"
+          },
+          "javaName": "codiDir3",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "activa",
+          "sqlType": -7,
+          "size": 1,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Active",
+            "ca": "Activa",
+            "es": "Activa"
+          },
+          "javaName": "activa",
+          "javaType": "boolean",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 4
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "colormenu",
+          "sqlType": 12,
+          "size": 100,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Menu colour",
+            "ca": "Color menu",
+            "es": "Color menu"
+          },
+          "javaName": "colorMenu",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "car_entitat_logocapback_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "logocapbackid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Back Header logo",
+            "ca": "Logo Cap Back",
+            "es": "Logo Cabecera Back"
+          },
+          "javaName": "logoCapBackID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_entitat_fitxer_lcb_fk",
+              "table": "car_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_entitat_fitxer_lcb_fk",
+              "table": "car_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_entitat_logopeuback_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "logopeubackid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Back Footer Logo",
+            "ca": "Logo Peu Back",
+            "es": "Logo Pie Back"
+          },
+          "javaName": "logoPeuBackID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_entitat_fitxer_lpb_fk",
+              "table": "car_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_entitat_fitxer_lpb_fk",
+              "table": "car_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_entitat_logolatfront_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "logolateralfrontid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Front Lateral Logo",
+            "ca": "Logo Lateral Front",
+            "es": "Logo Lateral Front"
+          },
+          "javaName": "logoLateralFrontID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_entitat_fitxer_llf_fk",
+              "table": "car_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_entitat_fitxer_llf_fk",
+              "table": "car_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "versio",
+          "sqlType": 12,
+          "size": 50,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Version",
+            "ca": "Versió",
+            "es": "Versión"
+          },
+          "javaName": "versio",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "car_entitat_iconid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "iconid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Icon",
+            "ca": "Icona",
+            "es": "Icono"
+          },
+          "javaName": "iconID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_entitat_fitxer_icon_fk",
+              "table": "car_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_entitat_fitxer_icon_fk",
+              "table": "car_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "webentitat",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Entity Web",
+            "ca": "Web Entitat",
+            "es": "Web Entidad"
+          },
+          "javaName": "webEntitat",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 13
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "entitatdescfront",
+          "sqlType": 12,
+          "size": 4000,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Front Entity Description",
+            "ca": "Descripció Entitat Front",
+            "es": "Descripción Entidad Front"
+          },
+          "javaName": "entitatDescFront",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "suportweb",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Web Support",
+            "ca": "Suport Web",
+            "es": "Soporte Web"
+          },
+          "javaName": "suportWeb",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 13
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "suporttelefon",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Telephone Support",
+            "ca": "Suport Telefon",
+            "es": "Soporte Telefono"
+          },
+          "javaName": "suportTelefon",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "suportemail",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Email Support",
+            "ca": "Suport Email",
+            "es": "Soporte Email"
+          },
+          "javaName": "suportEmail",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "suportfaq",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "FAQ",
+            "ca": "Preguentes Freqüents (FAQ)",
+            "es": "Preguentas Frecuentes (FAQ)"
+          },
+          "javaName": "suportFAQ",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "descripcio": "Preguntes Freqüents",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "suportqssi",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "QSSI Support",
+            "ca": "Consulta tècnica",
+            "es": "Consulta técnica"
+          },
+          "javaName": "suportqssi",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "descripcio": " Queixes i suggeriments ",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "suportautenticacio",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Authentication Support",
+            "ca": "Suport Autenticació",
+            "es": "Soporte Autenticación"
+          },
+          "javaName": "suportautenticacio",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "descripcio": "Suport autenticació Front",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "car_entitat_pluginloginid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "pluginloginid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Login Plugin",
+            "ca": "Plugin de Login",
+            "es": "Plugin de Login"
+          },
+          "javaName": "pluginLoginID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_entitat_plugin_login_fk",
+              "table": "car_plugin",
+              "field": "pluginid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_entitat_plugin_login_fk",
+              "table": "car_plugin",
+              "field": "pluginid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_entitat_logintextid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "logintextid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Login HTML text",
+            "ca": "Text HTML de Login",
+            "es": "Texto HTML de Login"
+          },
+          "javaName": "loginTextID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_entitat_traduccio_log_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_entitat_traduccio_log_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_entitat_fitxercss_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "fitxercss",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Css File",
+            "ca": "Fitxer css",
+            "es": "Fichero css"
+          },
+          "javaName": "fitxerCssID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_entitat_fitxer_css_fk",
+              "table": "car_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_entitat_fitxer_css_fk",
+              "table": "car_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "context",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Context",
+            "ca": "Context",
+            "es": "Contexto"
+          },
+          "javaName": "context",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "commit",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Commit",
+            "ca": "Commit",
+            "es": "Commit"
+          },
+          "javaName": "commit",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "avislegalca",
+          "sqlType": 12,
+          "size": 2147483647,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Legal Warning Catalan",
+            "ca": "Avís Legal Català",
+            "es": "Aviso Legal Catalan"
+          },
+          "javaName": "avisLegalCa",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 8
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "avislegales",
+          "sqlType": 12,
+          "size": 2147483647,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Legal Warning Spanish",
+            "ca": "Avís Legal Castellà",
+            "es": "Aviso Legal Castellano"
+          },
+          "javaName": "avisLegalEs",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 8
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "accessibilitatca",
+          "sqlType": 12,
+          "size": 2147483647,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Accessibility Catalan",
+            "ca": "Accessibilitat Català",
+            "es": "Accesibilidad Catalán "
+          },
+          "javaName": "accessibilitatCa",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 8
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "accessibilitates",
+          "sqlType": 12,
+          "size": 2147483647,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Accessibility Spanish",
+            "ca": "Accessibilitat Castellà",
+            "es": "Accesibilidad Castellano"
+          },
+          "javaName": "accessibilitatEs",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 8
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
+      "name": "car_estadistica",
+      "nameJava": "Estadistica",
+      "shortName": "estadis",
+      "labels": {
+        "en": "Stadistics",
+        "ca": "Estadistica",
+        "es": "Estadistica"
+      },
+      "labelsPlural": {
+        "en": "Stadistics",
+        "ca": "Estadistiques",
+        "es": "Estadisticas"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "car_estadistica_pk",
+          "index": "car_estadistica_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "estadisticaid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "estadisticaid",
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "estadisticaID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027car_estadistica_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "tipus",
+          "sqlType": 4,
+          "size": 10,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Type",
+            "ca": "Tipus",
+            "es": "Tipo"
+          },
+          "javaName": "tipus",
+          "javaType": "int",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "minAllowedValue": "1,2,3,4,5",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": true,
+          "webFieldInfo": {
+            "webtype": 16
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "dataestadistica",
+          "sqlType": 93,
+          "size": 29,
+          "digits": 6,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Date",
+            "ca": "Data",
+            "es": "Fecha"
+          },
+          "javaName": "dataEstadistica",
+          "javaType": "java.sql.Timestamp",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": true,
+          "webFieldInfo": {
+            "webtype": 7
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "comptador",
+          "sqlType": 4,
+          "size": 10,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Counter",
+            "ca": "Comptador",
+            "es": "Contador"
+          },
+          "javaName": "comptador",
+          "javaType": "int",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "0",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 14
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "pluginid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Front Plugin",
+            "ca": "Plugin del Front",
+            "es": "Plugin del Front"
+          },
+          "javaName": "pluginID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "minAllowedValue": "1,2,3,4,5",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 16
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "car_estadistica_entitatid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "entitatid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Entity",
+            "ca": "Entitat",
+            "es": "Entidad"
+          },
+          "javaName": "entitatID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "minAllowedValue": "1,2,3",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": true,
+          "webFieldInfo": {
+            "webtype": 16
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
+      "name": "car_fitxer",
+      "nameJava": "Fitxer",
+      "shortName": "fitxer",
+      "labels": {
+        "de": "Datei",
+        "en": "File",
+        "ca": "Fitxer",
+        "es": "Fichero"
+      },
+      "labelsPlural": {
+        "de": "Datein",
+        "en": "Files",
+        "ca": "Fitxers",
+        "es": "Ficheros"
+      },
+      "generate": true,
+      "fileMappingEntity": true,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "car_fitxer_pk",
+          "index": "car_fitxer_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "fitxerid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "de": "ID",
+            "en": "ID",
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "fitxerID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027car_fitxer_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": [
+            {
+              "name": "car_enllaz_fitxer_logo_fk",
+              "table": "car_enllaz",
+              "field": "logoid",
+              "type": 0
+            },
+            {
+              "name": "car_entitat_fitxer_css_fk",
+              "table": "car_entitat",
+              "field": "fitxercss",
+              "type": 0
+            },
+            {
+              "name": "car_entitat_fitxer_icon_fk",
+              "table": "car_entitat",
+              "field": "iconid",
+              "type": 0
+            },
+            {
+              "name": "car_entitat_fitxer_lcb_fk",
+              "table": "car_entitat",
+              "field": "logocapbackid",
+              "type": 0
+            },
+            {
+              "name": "car_entitat_fitxer_llf_fk",
+              "table": "car_entitat",
+              "field": "logolateralfrontid",
+              "type": 0
+            },
+            {
+              "name": "car_entitat_fitxer_lpb_fk",
+              "table": "car_entitat",
+              "field": "logopeubackid",
+              "type": 0
+            },
+            {
+              "name": "car_plugin_fitxer_logo_fk",
+              "table": "car_plugin",
+              "field": "logoid",
+              "type": 0
+            },
+            {
+              "name": "car_faq_fitxer_fitxer1_fk",
+              "table": "car_preguntesfrequents",
+              "field": "fitxer1id",
+              "type": 0
+            },
+            {
+              "name": "car_faq_fitxer_fitxer2_fk",
+              "table": "car_preguntesfrequents",
+              "field": "fitxer2id",
+              "type": 0
+            },
+            {
+              "name": "car_faq_fitxer_fitxer3_fk",
+              "table": "car_preguntesfrequents",
+              "field": "fitxer3id",
+              "type": 0
+            },
+            {
+              "name": "car_seccio_fitxer_icon_fk",
+              "table": "car_seccio",
+              "field": "iconaid",
+              "type": 0
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "nom",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "de": "nom",
+            "en": "Name",
+            "ca": "Nom",
+            "es": "Nombre"
+          },
+          "javaName": "nom",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "mime",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "de": "mime",
+            "en": "mime",
+            "ca": "mime",
+            "es": "mime"
+          },
+          "javaName": "mime",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "tamany",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "de": "tamany",
+            "en": "Size",
+            "ca": "Tamany",
+            "es": "Tamaño"
+          },
+          "javaName": "tamany",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 14
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "descripcio",
+          "sqlType": 12,
+          "size": 1000,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "de": "Description",
+            "en": "Description",
+            "ca": "Descripció",
+            "es": "Descripción"
+          },
+          "javaName": "descripcio",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "NULL::character varying",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
+      "name": "car_idioma",
+      "nameJava": "Idioma",
+      "shortName": "idioma",
+      "labels": {
+        "de": "Sprache",
+        "en": "Language",
+        "ca": "Idioma",
+        "es": "Idioma"
+      },
+      "labelsPlural": {
+        "de": "Idiom",
+        "en": "Languages",
+        "ca": "Idiomes",
+        "es": "Idiomas"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": true,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "car_idioma_pk",
+          "index": "car_idioma_pk_i",
+          "isAutoIncrement": false,
+          "sqlName": "idiomaid",
+          "sqlType": 12,
+          "size": 5,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "de": "ID",
+            "en": "ID",
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "idiomaID",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": [
+            {
+              "name": "car_usuari_idioma_idi_fk",
+              "table": "car_usuari",
+              "field": "idiomaid",
+              "type": 0
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "nom",
+          "sqlType": 12,
+          "size": 50,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "de": "Name",
+            "en": "Name",
+            "ca": "Nom",
+            "es": "Nombre"
+          },
+          "javaName": "nom",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "suportat",
+          "sqlType": -7,
+          "size": 1,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "de": "suportat",
+            "en": "Suported",
+            "ca": "Suportat",
+            "es": "Suportado"
+          },
+          "javaName": "suportat",
+          "javaType": "boolean",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "true",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 4
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "ordre",
+          "sqlType": 4,
+          "size": 10,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "de": "Order",
+            "en": "Order",
+            "ca": "Ordre",
+            "es": "ordre"
+          },
+          "javaName": "ordre",
+          "javaType": "int",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "0",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 14
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
+      "name": "car_log",
+      "nameJava": "LogCarpeta",
+      "shortName": "log",
+      "labels": {
+        "en": "Error Log",
+        "ca": "Log d\u0027error",
+        "es": "Log de error"
+      },
+      "labelsPlural": {
+        "en": "Error Logs",
+        "ca": "Logs d\u0027error",
+        "es": "Logs de error"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "car_log_pk",
+          "index": "car_log_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "logid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "ID",
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "logID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027car_log_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "descripcio",
+          "sqlType": 12,
+          "size": 2000,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Description",
+            "ca": "Descripció",
+            "es": "Descripción"
+          },
+          "javaName": "descripcio",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "tipus",
+          "sqlType": 4,
+          "size": 10,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Type",
+            "ca": "Tipus",
+            "es": "Tipo"
+          },
+          "javaName": "tipus",
+          "javaType": "int",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "minAllowedValue": "1,2,3,4,5",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 16
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "estat",
+          "sqlType": 4,
+          "size": 10,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Status",
+            "ca": "Estat",
+            "es": "Estado"
+          },
+          "javaName": "estat",
+          "javaType": "int",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "minAllowedValue": "0,1,2",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 16
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "car_log_pluginid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "pluginid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Plugin",
+            "ca": "Plugin",
+            "es": "Plugin"
+          },
+          "javaName": "pluginID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "minAllowedValue": "1,2,3,4,5",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 16
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "entitatcodi",
+          "sqlType": 12,
+          "size": 9,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Code Entity",
+            "ca": "Codi entitat",
+            "es": "Código Entidad"
+          },
+          "javaName": "entitatCodi",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "temps",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Time",
+            "ca": "Temps",
+            "es": "Tiempo"
+          },
+          "javaName": "temps",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 14
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "datainici",
+          "sqlType": 93,
+          "size": 29,
+          "digits": 6,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Start date",
+            "ca": "Data inici",
+            "es": "Fecha inicio"
+          },
+          "javaName": "dataInici",
+          "javaType": "java.sql.Timestamp",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 7
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "peticio",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Request",
+            "ca": "Petició",
+            "es": "Petición"
+          },
+          "javaName": "peticio",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "error",
+          "sqlType": 12,
+          "size": 2147483647,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Error",
+            "ca": "Error",
+            "es": "Error"
+          },
+          "javaName": "error",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "excepcio",
+          "sqlType": 12,
+          "size": 2147483647,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Excepction",
+            "ca": "Excepció",
+            "es": "Excepción"
+          },
+          "javaName": "excepcio",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "idsessio",
+          "sqlType": 12,
+          "size": 2147483647,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "ID session",
+            "ca": "ID sessió",
+            "es": "ID sesión"
+          },
+          "javaName": "idSessio",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
+      "name": "car_notificacioapp",
+      "nameJava": "NotificacioApp",
+      "shortName": "notifica",
+      "labels": {
+        "en": "car_notificacioapp_XX_en",
+        "ca": "Tipus de Notificació a App",
+        "es": "Tipo de Notificación a App"
+      },
+      "labelsPlural": {
+        "en": "car_notificacioapp_plural_XX_en",
+        "ca": "Tipus de Notificació a App",
+        "es": "Tipos de Notificación a App"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "car_notificacioapp_pk",
+          "index": "car_notificacioapp_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "notificacioappid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "notificacioappid",
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "notificacioAppID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027car_notificacioapp_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": []
+        },
+        {
+          "unique": "car_notifica_codi_uk",
+          "isAutoIncrement": false,
+          "sqlName": "codi",
+          "sqlType": 12,
+          "size": 50,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "codi",
+            "ca": "Codi",
+            "es": "Código"
+          },
+          "javaName": "codi",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "minAllowedValue": "^[A-Z]*$",
+          "filter": true,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "car_notifica_titolid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "titolid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "titolid",
+            "ca": "Títol",
+            "es": "Título"
+          },
+          "javaName": "titolID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_notifica_traduccio_tit_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_notifica_traduccio_tit_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_notifica_missatgeid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "missatgeid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "missatgeid",
+            "ca": "Missatge",
+            "es": "Mensaje"
+          },
+          "javaName": "missatgeID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "minAllowedValue": "textarea",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_notifica_traduccio_msg_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_notifica_traduccio_msg_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_notifica_pluginid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "frontpluginid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "frontpluginid",
+            "ca": "Plugin",
+            "es": "Plugin"
+          },
+          "javaName": "frontPluginID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_notifica_plugin_plug_fk",
+              "table": "car_plugin",
+              "field": "pluginid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_notifica_plugin_plug_fk",
+              "table": "car_plugin",
+              "field": "pluginid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "ajuda",
+          "sqlType": 12,
+          "size": 2147483647,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "es": "Ayuda",
+            "ca": "Ajuda"
+          },
+          "javaName": "ajuda",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "activa",
+          "sqlType": -7,
+          "size": 1,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "activa",
+            "ca": "Activa",
+            "es": "Activa"
+          },
+          "javaName": "activa",
+          "javaType": "boolean",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 4
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "car_notifica_entitatid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "entitatid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "ca": "Entitat",
+            "es": "Entidad"
+          },
+          "javaName": "entitatID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_notifica_entitat_ent_fk",
+              "table": "car_entitat",
+              "field": "entitatid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_notifica_entitat_ent_fk",
+              "table": "car_entitat",
+              "field": "entitatid",
+              "type": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "car_plugin",
+      "nameJava": "Plugin",
+      "shortName": "plugin",
+      "labels": {
+        "en": "Plugin",
+        "ca": "Plugin",
+        "es": "Plugin"
+      },
+      "labelsPlural": {
+        "en": "Plugins",
+        "ca": "Plugins",
+        "es": "Plugins"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "car_plugin_pk",
+          "index": "car_plugin_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "pluginid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "ID",
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "pluginID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027car_plugin_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0,
+            "label": [
+              "nom"
+            ]
+          },
+          "foreignKeys": [
+            {
+              "name": "car_avis_plugin_pfront_fk",
+              "table": "car_avis",
+              "field": "pluginfrontid",
+              "type": 0
+            },
+            {
+              "name": "car_entitat_plugin_login_fk",
+              "table": "car_entitat",
+              "field": "pluginloginid",
+              "type": 0
+            },
+            {
+              "name": "car_notifica_plugin_plug_fk",
+              "table": "car_notificacioapp",
+              "field": "frontpluginid",
+              "type": 0
+            },
+            {
+              "name": "car_plugent_plugin_fk",
+              "table": "car_pluginentitat",
+              "field": "pluginid",
+              "type": 0
+            }
+          ]
+        },
+        {
+          "index": "car_plugin_nomid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "nomid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Short Title",
+            "ca": "Títol Curt",
+            "es": "Título Corto"
+          },
+          "javaName": "nomID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_plugin_traduccio_nom_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_plugin_traduccio_nom_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_plugin_descripcioid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "descripcioid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Short subtitle",
+            "ca": "Subtítol curt",
+            "es": "Subtítulo corto"
+          },
+          "javaName": "descripcioID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_plugin_traduccio_desc_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_plugin_traduccio_desc_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_plugin_titolllargid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "titolllargid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Long Title",
+            "ca": "Títol Llarg",
+            "es": "Tíitulo Largo"
+          },
+          "javaName": "titolLlargID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_plugin_traduccio_tllarg_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_plugin_traduccio_tllarg_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_plugin_subtitllargid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "subtitolllargid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Long subtitle",
+            "ca": "Subtítol Llarg",
+            "es": "Subtítol Largo"
+          },
+          "javaName": "subtitolLlargID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_plugin_traduccio_stllarg_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_plugin_traduccio_stlar_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "context",
+          "sqlType": 12,
+          "size": 50,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Front Context Path",
+            "ca": "Ruta Context Frontal",
+            "es": "Ruta Contexto Frontal"
+          },
+          "javaName": "context",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "minAllowedValue": "[a-z0-9]{5,}",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "car_plugin_logoid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "logoid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Logo",
+            "ca": "Logo",
+            "es": "Logo"
+          },
+          "javaName": "logoID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_plugin_fitxer_logo_fk",
+              "table": "car_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_plugin_fitxer_logo_fk",
+              "table": "car_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "classe",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Class",
+            "ca": "Classe",
+            "es": "Clase"
+          },
+          "javaName": "classe",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "propietats",
+          "sqlType": 12,
+          "size": 2147483647,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Properties",
+            "ca": "Propietats",
+            "es": "Propiedades"
+          },
+          "javaName": "propietats",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "actiu",
+          "sqlType": -7,
+          "size": 1,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Active",
+            "ca": "Actiu",
+            "es": "Activo"
+          },
+          "javaName": "actiu",
+          "javaType": "boolean",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "true",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 4
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "tipus",
+          "sqlType": 4,
+          "size": 10,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Type",
+            "ca": "Tipus",
+            "es": "Tipo"
+          },
+          "javaName": "tipus",
+          "javaType": "int",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "minAllowedValue": "1,2,3,4",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 16
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
+      "name": "car_pluginentitat",
+      "nameJava": "PluginEntitat",
+      "shortName": "plugent",
+      "labels": {
+        "en": "Entity Plugin",
+        "ca": "Plugin Entitat",
+        "es": "Plugin Entidad"
+      },
+      "labelsPlural": {
+        "en": "Plugins by Entity",
+        "ca": "Plugins per Entitat",
+        "es": "Plugins por Entidad"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "car_pluginentitat_pk",
+          "index": "car_pluginentitat_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "pluginentitatid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "ID",
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "pluginEntitatID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027car_pluginentitat_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "car_plugent_pluginid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "pluginid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Plugin",
+            "ca": "Plugin",
+            "es": "Plugin"
+          },
+          "javaName": "pluginID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_plugent_plugin_fk",
+              "table": "car_plugin",
+              "field": "pluginid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_plugent_plugin_fk",
+              "table": "car_plugin",
+              "field": "pluginid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_plugent_entitatid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "entitatid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Entity",
+            "ca": "Entitat",
+            "es": "Entidad"
+          },
+          "javaName": "entitatID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_plugent_entitat_fk",
+              "table": "car_entitat",
+              "field": "entitatid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_plugent_entitat_fk",
+              "table": "car_entitat",
+              "field": "entitatid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "actiu",
+          "sqlType": -7,
+          "size": 1,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Active",
+            "ca": "Actiu",
+            "es": "Activo"
+          },
+          "javaName": "actiu",
+          "javaType": "boolean",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 4
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "car_plugent_seccioid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "seccioid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Section",
+            "ca": "Secció",
+            "es": "Sección"
+          },
+          "javaName": "seccioID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_plugent_seccio_sec_fk",
+              "table": "car_seccio",
+              "field": "seccioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_plugent_seccio_sec_fk",
+              "table": "car_seccio",
+              "field": "seccioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "ordre",
+          "sqlType": 4,
+          "size": 10,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Order",
+            "ca": "Ordre",
+            "es": "Orden"
+          },
+          "javaName": "ordre",
+          "javaType": "int",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "1",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 14
+          },
+          "foreignKeys": []
+        }
+      ],
+      "multipleUniques": [
+        {
+          "name": "car_plugent_plug_ent_uk",
+          "sqlColumns": [
+            "pluginid",
+            "entitatid"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "car_preguntesfrequents",
+      "nameJava": "PreguntesFrequents",
+      "shortName": "faq",
+      "labels": {
+        "en": "FAQ",
+        "ca": "Pregunta Freqüent",
+        "es": "Pregunta Frecuente"
+      },
+      "labelsPlural": {
+        "en": "FAQs",
+        "ca": "Preguntes Freqüents",
+        "es": "Preguntas Frecuentes"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "car_preguntesfrequents_pk",
+          "index": "car_preguntesfrequents_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "preguntesfrequentsid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "ID",
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "preguntesFrequentsID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027car_preguntesfrequents_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "car_faq_enunciatid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "enunciatid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Question",
+            "ca": "Enunciat",
+            "es": "Enunciado"
+          },
+          "javaName": "enunciatID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": true,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_faq_traduccio_enun_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_faq_traduccio_enun_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_faq_respostaid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "respostaid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Response",
+            "ca": "Resposta",
+            "es": "Respuesta"
+          },
+          "javaName": "respostaID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_faq_traduccio_resp_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_faq_traduccio_resp_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "ordre",
+          "sqlType": 4,
+          "size": 10,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Order",
+            "ca": "Ordre",
+            "es": "Orden"
+          },
+          "javaName": "ordre",
+          "javaType": "int",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 14
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "car_faq_entitatid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "entitatid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Entity",
+            "ca": "Entitat",
+            "es": "Entidad"
+          },
+          "javaName": "entitatID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_faq_entitat_ent_fk",
+              "table": "car_entitat",
+              "field": "entitatid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_faq_entitat_ent_fk",
+              "table": "car_entitat",
+              "field": "entitatid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_faq_fitxer1id_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "fitxer1id",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Help file 1",
+            "ca": "Fitxer d\u0027ajuda 1",
+            "es": "Archivo de ayuda 1"
+          },
+          "javaName": "fitxer1ID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_faq_fitxer_fitxer1_fk",
+              "table": "car_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_faq_fitxer_fitxer1_fk",
+              "table": "car_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_faq_fitxer2id_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "fitxer2id",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Help file 2",
+            "ca": "Fitxer d\u0027ajuda 2",
+            "es": "Archivo de ayuda 2"
+          },
+          "javaName": "fitxer2ID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_faq_fitxer_fitxer2_fk",
+              "table": "car_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_faq_fitxer_fitxer2_fk",
+              "table": "car_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_faq_fitxer3id_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "fitxer3id",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Help file 3",
+            "ca": "Fitxer d\u0027ajuda 3",
+            "es": "Archivo de ayuda 3"
+          },
+          "javaName": "fitxer3ID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_faq_fitxer_fitxer3_fk",
+              "table": "car_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_faq_fitxer_fitxer3_fk",
+              "table": "car_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "car_propietatglobal",
+      "nameJava": "PropietatGlobal",
+      "shortName": "propglob",
+      "labels": {
+        "en": "Global Property",
+        "ca": "Propietat Global",
+        "es": "Propiedad Global"
+      },
+      "labelsPlural": {
+        "en": "Global Properties",
+        "ca": "Propietats  Globals",
+        "es": "Propiedades Globales"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "car_propietatglobal_pk",
+          "index": "car_propietatglobal_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "propietatglobalid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "ID",
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "propietaGlobalID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027car_propietatglobal_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "codi",
+          "sqlType": 12,
+          "size": 250,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Code",
+            "ca": "Codi",
+            "es": "Código"
+          },
+          "javaName": "codi",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "value",
+          "sqlType": 12,
+          "size": 4000,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Value",
+            "ca": "Valor",
+            "es": "Valor"
+          },
+          "javaName": "value",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "descripcio",
+          "sqlType": 12,
+          "size": 1000,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Description",
+            "ca": "Descripció",
+            "es": "Descripción"
+          },
+          "javaName": "descripcio",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 8
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "car_propglob_entitatid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "entitatid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Entity",
+            "ca": "Entitat",
+            "es": "Entidad"
+          },
+          "javaName": "entitatID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_propglob_entitat_fk",
+              "table": "car_entitat",
+              "field": "entitatid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_propglob_entitat_fk",
+              "table": "car_entitat",
+              "field": "entitatid",
+              "type": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "car_seccio",
+      "nameJava": "Seccio",
+      "shortName": "seccio",
+      "labels": {
+        "en": "Section",
+        "ca": "Secció",
+        "es": "Sección"
+      },
+      "labelsPlural": {
+        "en": "Section",
+        "ca": "Seccions",
+        "es": "Secciones"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "car_seccio_pk",
+          "index": "car_seccio_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "seccioid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "ID",
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "seccioID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027car_seccio_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": [
+            {
+              "name": "car_enllaz_seccio_sec_fk",
+              "table": "car_enllaz",
+              "field": "seccioid",
+              "type": 0
+            },
+            {
+              "name": "car_plugent_seccio_sec_fk",
+              "table": "car_pluginentitat",
+              "field": "seccioid",
+              "type": 0
+            }
+          ]
+        },
+        {
+          "index": "car_seccio_nomid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "nomid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Name",
+            "ca": "Nom",
+            "es": "Nombre"
+          },
+          "javaName": "nomID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_seccio_traduccio_nom_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_seccio_traduccio_nom_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_seccio_descripcioid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "descripcioid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Description",
+            "ca": "Descripció",
+            "es": "Descripción"
+          },
+          "javaName": "descripcioID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_seccio_traduccio_des_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_seccio_traduccio_des_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "unique": "car_seccio_context_uk",
+          "isAutoIncrement": true,
+          "sqlName": "context",
+          "sqlType": 12,
+          "size": 50,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Front Context Path",
+            "ca": "Ruta Context Frontal",
+            "es": "Ruta Contexto Frontal"
+          },
+          "javaName": "contexte",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027car_seccio_seq\u0027::regclass)",
+          "minAllowedValue": "[a-z0-9]{5,}",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "activa",
+          "sqlType": -7,
+          "size": 1,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Active",
+            "ca": "Activa",
+            "es": "Activa"
+          },
+          "javaName": "activa",
+          "javaType": "boolean",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "true",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 4
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "car_seccio_iconaid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "iconaid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Icon",
+            "ca": "Icona",
+            "es": "Icono"
+          },
+          "javaName": "iconaID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_seccio_fitxer_icon_fk",
+              "table": "car_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_seccio_fitxer_icon_fk",
+              "table": "car_fitxer",
+              "field": "fitxerid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "secciopareid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Parent Section",
+            "ca": "Secció Pare",
+            "es": "Sección Padre"
+          },
+          "javaName": "seccioPareID",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "minAllowedValue": "1,2,3",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 16
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "car_seccio_entitatid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "entitatid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Entity",
+            "ca": "Entitat",
+            "es": "Entidad"
+          },
+          "javaName": "entitatID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_seccio_entitat_ent_fk",
+              "table": "car_entitat",
+              "field": "entitatid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_seccio_entitat_ent_fk",
+              "table": "car_entitat",
+              "field": "entitatid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "ordre",
+          "sqlType": 4,
+          "size": 10,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Order",
+            "ca": "Ordre",
+            "es": "Orden"
+          },
+          "javaName": "ordre",
+          "javaType": "int",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "1",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 14
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
+      "name": "car_traduccio",
+      "nameJava": "Traduccio",
+      "shortName": "traduccio",
+      "labels": {
+        "de": "Übersetzung",
+        "en": "Translation",
+        "ca": "Traducció",
+        "es": "Traducción"
+      },
+      "labelsPlural": {
+        "de": "",
+        "en": "Translations",
+        "ca": "Traduccions",
+        "es": "Traducciones"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": true,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "car_traduccio_pk",
+          "index": "car_traduccio_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "traduccioid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "de": "ID",
+            "en": "ID",
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "traduccioID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "descripcio": "",
+          "defaultValue": "nextval(\u0027car_traduccio_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0,
+            "label": [
+              "nom"
+            ]
+          },
+          "foreignKeys": [
+            {
+              "name": "car_avis_traduccio_desc_fk",
+              "table": "car_avis",
+              "field": "descripcioid",
+              "type": 0
+            },
+            {
+              "name": "car_enllaz_traduccio_desid_fk",
+              "table": "car_enllaz",
+              "field": "descripcioid",
+              "type": 0
+            },
+            {
+              "name": "car_enllaz_traduccio_nomid_fk",
+              "table": "car_enllaz",
+              "field": "nomid",
+              "type": 0
+            },
+            {
+              "name": "car_enllaz_traduccio_urlid_fk",
+              "table": "car_enllaz",
+              "field": "urlid",
+              "type": 0
+            },
+            {
+              "name": "car_entitat_traduccio_des_fk",
+              "table": "car_entitat",
+              "field": "descripcioid",
+              "type": 0
+            },
+            {
+              "name": "car_entitat_traduccio_log_fk",
+              "table": "car_entitat",
+              "field": "logintextid",
+              "type": 0
+            },
+            {
+              "name": "car_entitat_traduccio_nom_fk",
+              "table": "car_entitat",
+              "field": "nomid",
+              "type": 0
+            },
+            {
+              "name": "car_notifica_traduccio_msg_fk",
+              "table": "car_notificacioapp",
+              "field": "missatgeid",
+              "type": 0
+            },
+            {
+              "name": "car_notifica_traduccio_tit_fk",
+              "table": "car_notificacioapp",
+              "field": "titolid",
+              "type": 0
+            },
+            {
+              "name": "car_plugin_traduccio_desc_fk",
+              "table": "car_plugin",
+              "field": "descripcioid",
+              "type": 0
+            },
+            {
+              "name": "car_plugin_traduccio_nom_fk",
+              "table": "car_plugin",
+              "field": "nomid",
+              "type": 0
+            },
+            {
+              "name": "car_plugin_traduccio_stlar_fk",
+              "table": "car_plugin",
+              "field": "subtitolllargid",
+              "type": 0
+            },
+            {
+              "name": "car_plugin_traduccio_tllarg_fk",
+              "table": "car_plugin",
+              "field": "titolllargid",
+              "type": 0
+            },
+            {
+              "name": "car_faq_traduccio_enun_fk",
+              "table": "car_preguntesfrequents",
+              "field": "enunciatid",
+              "type": 0
+            },
+            {
+              "name": "car_faq_traduccio_resp_fk",
+              "table": "car_preguntesfrequents",
+              "field": "respostaid",
+              "type": 0
+            },
+            {
+              "name": "car_seccio_traduccio_des_fk",
+              "table": "car_seccio",
+              "field": "descripcioid",
+              "type": 0
+            },
+            {
+              "name": "car_seccio_traduccio_nom_fk",
+              "table": "car_seccio",
+              "field": "nomid",
+              "type": 0
+            },
+            {
+              "name": "car_traducmap_traduccio_fk",
+              "table": "car_traducciomap",
+              "field": "traducciomapid",
+              "type": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "car_traducciomap",
+      "nameJava": "TraduccioMap",
+      "shortName": "traducmap",
+      "labels": {
+        "de": "TraduccioMap",
+        "en": "TraduccioMap",
+        "ca": "TraduccioMap",
+        "es": "TraduccioMap"
+      },
+      "labelsPlural": {
+        "de": "",
+        "en": "",
+        "ca": "",
+        "es": ""
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": true,
+      "fields": [
+        {
+          "PK": "car_traducmap_pk",
+          "index": "car_traducciomap_pk_i",
+          "isAutoIncrement": false,
+          "sqlName": "traducciomapid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "de": "ID",
+            "en": "ID",
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "traduccioMapID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "descripcio": "",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_traducmap_traduccio_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_traducmap_traduccio_fk",
+              "table": "car_traduccio",
+              "field": "traduccioid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "PK": "car_traducmap_pk",
+          "index": "car_traducciomap_idiomaid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "idiomaid",
+          "sqlType": 12,
+          "size": 10,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "de": "idiomaid",
+            "en": "idiomaID",
+            "ca": "idiomaID",
+            "es": "idiomaID"
+          },
+          "javaName": "idiomaID",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "descripcio": "",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "valor",
+          "sqlType": 12,
+          "size": 4000,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "de": "Value",
+            "en": "Value",
+            "ca": "Valor",
+            "es": "Valor"
+          },
+          "javaName": "valor",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "descripcio": "",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 2
+          },
+          "foreignKeys": []
+        }
+      ]
+    },
+    {
+      "name": "car_usuari",
+      "nameJava": "Usuari",
+      "shortName": "usuari",
+      "labels": {
+        "en": "User",
+        "ca": "Usuari",
+        "es": "Usuario"
+      },
+      "labelsPlural": {
+        "en": "Users",
+        "ca": "Usuaris",
+        "es": "Usuarios"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "car_usuari_pk",
+          "index": "car_usuari_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "usuariid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "ID",
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "usuariID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027car_usuari_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0,
+            "label": [
+              "nom"
+            ]
+          },
+          "foreignKeys": [
+            {
+              "name": "car_usuent_usuari_fk",
+              "table": "car_usuarientitat",
+              "field": "usuariid",
+              "type": 0
+            }
+          ]
+        },
+        {
+          "unique": "car_usuari_username_uk",
+          "isAutoIncrement": false,
+          "sqlName": "username",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Username",
+            "ca": "Username",
+            "es": "Username"
+          },
+          "javaName": "username",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": true,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "nom",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Name",
+            "ca": "Nom",
+            "es": "Nombre"
+          },
+          "javaName": "nom",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": true,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "llinatge1",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Surname 1",
+            "ca": "Llinatge 1",
+            "es": "Apellido 1"
+          },
+          "javaName": "llinatge1",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": true,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "llinatge2",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Surname 2",
+            "ca": "Llinatge 2",
+            "es": "Apellido 2"
+          },
+          "javaName": "llinatge2",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": true,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "email",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Email",
+            "ca": "Correu electrònic",
+            "es": "Correo electrónico"
+          },
+          "javaName": "email",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": true,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "unique": "car_usuari_nif_uk",
+          "isAutoIncrement": false,
+          "sqlName": "nif",
+          "sqlType": 12,
+          "size": 255,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Administration ID",
+            "ca": "NIF",
+            "es": "NIF"
+          },
+          "javaName": "nif",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "filter": true,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 1
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "car_usuari_darreraentitat_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "darreraentitat",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": false,
+          "labels": {
+            "en": "Last Entity",
+            "ca": "Darrera Entitat",
+            "es": "Última entidad"
+          },
+          "javaName": "darreraEntitat",
+          "javaType": "java.lang.Long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_usuari_entitat_last_fk",
+              "table": "car_entitat",
+              "field": "entitatid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_usuari_entitat_last_fk",
+              "table": "car_entitat",
+              "field": "entitatid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_usuari_idiomaid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "idiomaid",
+          "sqlType": 12,
+          "size": 5,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Default Language",
+            "ca": "Idioma per defecte",
+            "es": "Idioma por defecto"
+          },
+          "javaName": "idiomaID",
+          "javaType": "java.lang.String",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_usuari_idioma_idi_fk",
+              "table": "car_idioma",
+              "field": "idiomaid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_usuari_idioma_idi_fk",
+              "table": "car_idioma",
+              "field": "idiomaid",
+              "type": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "car_usuarientitat",
+      "nameJava": "UsuariEntitat",
+      "shortName": "usuent",
+      "labels": {
+        "en": "Entity Administrator",
+        "ca": "Administrador d\u0027Entitat",
+        "es": "Administrador de Entidad"
+      },
+      "labelsPlural": {
+        "en": "Entity Administrators",
+        "ca": "Administradors d\u0027Entitat",
+        "es": "Administradores de Entidad"
+      },
+      "generate": true,
+      "fileMappingEntity": false,
+      "languageMappingEntity": false,
+      "translationEntity": false,
+      "translationMapEntity": false,
+      "fields": [
+        {
+          "PK": "car_usuarientitat_pk",
+          "index": "car_usuarientitat_pk_i",
+          "isAutoIncrement": true,
+          "sqlName": "usuarientitatid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "ID",
+            "ca": "ID",
+            "es": "ID"
+          },
+          "javaName": "usuariEntitatID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": true,
+          "transientField": false,
+          "defaultValue": "nextval(\u0027car_usuarientitat_seq\u0027::regclass)",
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 0
+          },
+          "foreignKeys": []
+        },
+        {
+          "index": "car_usuent_usuariid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "usuariid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "User",
+            "ca": "Usuari",
+            "es": "Usuario"
+          },
+          "javaName": "usuariID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_usuent_usuari_fk",
+              "table": "car_usuari",
+              "field": "usuariid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_usuent_usuari_fk",
+              "table": "car_usuari",
+              "field": "usuariid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "index": "car_usuent_entitatid_fk_i",
+          "isAutoIncrement": false,
+          "sqlName": "entitatid",
+          "sqlType": -5,
+          "size": 19,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Entity",
+            "ca": "Entitat",
+            "es": "Entidad"
+          },
+          "javaName": "entitatID",
+          "javaType": "long",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": true,
+          "webFieldInfo": {
+            "webtype": 3,
+            "foreignKey": {
+              "name": "car_usuent_entitat_fk",
+              "table": "car_entitat",
+              "field": "entitatid",
+              "type": 1
+            }
+          },
+          "foreignKeys": [
+            {
+              "name": "car_usuent_entitat_fk",
+              "table": "car_entitat",
+              "field": "entitatid",
+              "type": 1
+            }
+          ]
+        },
+        {
+          "isAutoIncrement": false,
+          "sqlName": "actiu",
+          "sqlType": -7,
+          "size": 1,
+          "digits": 0,
+          "isNotNullable": true,
+          "labels": {
+            "en": "Active",
+            "ca": "Actiu",
+            "es": "Activo"
+          },
+          "javaName": "actiu",
+          "javaType": "boolean",
+          "traduible": false,
+          "showInWebList": true,
+          "showInReferenceList": false,
+          "transientField": false,
+          "filter": false,
+          "orderBy": 0,
+          "groupBy": false,
+          "webFieldInfo": {
+            "webtype": 4
+          },
+          "foreignKeys": []
+        }
+      ],
+      "multipleUniques": [
+        {
+          "name": "car_usuent_usu_ent_uk",
+          "sqlColumns": [
+            "usuariid",
+            "entitatid"
+          ]
+        }
+      ]
+    }
+  ],
+  "languages": [
+    "ca",
+    "es"
+  ],
+  "generateBack": true,
+  "generateWS": false
+}

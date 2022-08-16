@@ -185,7 +185,7 @@ public class UsuariSuperAdminController extends UsuariController {
 
     @Override
     public UsuariJPA create(HttpServletRequest request, UsuariJPA usuari)
-            throws Exception, I18NException, I18NValidationException {
+            throws I18NException, I18NValidationException {
         UsuariJPA u = (UsuariJPA) super.create(request, usuari);
 
         request.getSession().removeAttribute(SESSION_LOAD_USERINFO);

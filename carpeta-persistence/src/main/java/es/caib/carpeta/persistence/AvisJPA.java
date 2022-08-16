@@ -25,10 +25,6 @@ import javax.persistence.Id;
 @javax.xml.bind.annotation.XmlRootElement
 public class AvisJPA implements Avis {
 
-
-
-private static final long serialVersionUID = 1036906268L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="AVIS_SEQ")
     @Column(name="avisid",nullable = false,length = 19)

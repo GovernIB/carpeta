@@ -134,7 +134,7 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
 
     @Override
     public PluginEntitatJPA create(HttpServletRequest request, PluginEntitatJPA pluginEntitat)
-            throws Exception, I18NException, I18NValidationException {
+            throws I18NException, I18NValidationException {
         PluginEntitatJPA pluginEntitatJPA = super.create(request, pluginEntitat);
 
         try {
@@ -152,7 +152,7 @@ public class PluginEntitatAdminEntitatController extends PluginEntitatController
     }
 
     @Override
-    public void delete(HttpServletRequest request, PluginEntitat pluginEntitat) throws Exception, I18NException {
+    public void delete(HttpServletRequest request, PluginEntitat pluginEntitat) throws I18NException {
         PluginJPA plugin = (PluginJPA) pluginEjb.findByPrimaryKey(pluginEntitat.getPluginID());
         super.delete(request, pluginEntitat);
 

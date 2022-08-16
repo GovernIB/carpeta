@@ -16,9 +16,6 @@ public class PluginJPAManager
 
 
 
-
-    private static final long serialVersionUID = -1591214331L;
-
     public static final TableName<Plugin> _TABLENAME =  new TableName<Plugin>("PluginJPA");
 
 
@@ -58,7 +55,7 @@ public class PluginJPAManager
         return list.toArray(new Plugin[list.size()]);
     };
 
-    public synchronized Plugin create( long _nomID_, java.lang.Long _descripcioID_, java.lang.Long _titolLlargID_, java.lang.Long _subtitolLlargID_, java.lang.String _context_, java.lang.Long _logoID_, java.lang.String _classe_, java.lang.String _propietats_, boolean _actiu_, int _tipus_) throws I18NException {
+    public Plugin create( long _nomID_, java.lang.Long _descripcioID_, java.lang.Long _titolLlargID_, java.lang.Long _subtitolLlargID_, java.lang.String _context_, java.lang.Long _logoID_, java.lang.String _classe_, java.lang.String _propietats_, boolean _actiu_, int _tipus_) throws I18NException {
         PluginJPA __bean =  new PluginJPA(_nomID_,_descripcioID_,_titolLlargID_,_subtitolLlargID_,_context_,_logoID_,_classe_,_propietats_,_actiu_,_tipus_);
         return create(__bean);
     }

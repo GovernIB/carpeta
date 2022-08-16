@@ -700,6 +700,13 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
+  @Override
+  /** Ha de ser igual que el RequestMapping de la Classe */
+  public String getContextWeb() {
+    RequestMapping rm = AnnotationUtils.findAnnotation(this.getClass(), RequestMapping.class);
+    return rm.value()[0];
+  }
+
   public void preValidate(HttpServletRequest request,LogCarpetaForm logCarpetaForm , BindingResult result)  throws I18NException {
   }
 
@@ -740,13 +747,6 @@ public java.lang.Long stringToPK(String value) {
     return "logCarpetaListWebDB";
   }
 
-  @Override
-  /** Ha de ser igual que el RequestMapping de la Classe */
-  public String getContextWeb() {
-    RequestMapping rm = AnnotationUtils.findAnnotation(this.getClass(), RequestMapping.class);
-    return rm.value()[0];
-  }
-
   public String getSessionAttributeFilterForm() {
     return "LogCarpetaWebDB_FilterForm";
   }
@@ -764,18 +764,18 @@ public java.lang.Long stringToPK(String value) {
 
 
   public LogCarpetaJPA create(HttpServletRequest request, LogCarpetaJPA logCarpeta)
-    throws Exception,I18NException, I18NValidationException {
+    throws I18NException, I18NValidationException {
     return (LogCarpetaJPA) logCarpetaEjb.create(logCarpeta);
   }
 
 
   public LogCarpetaJPA update(HttpServletRequest request, LogCarpetaJPA logCarpeta)
-    throws Exception,I18NException, I18NValidationException {
+    throws I18NException, I18NValidationException {
     return (LogCarpetaJPA) logCarpetaEjb.update(logCarpeta);
   }
 
 
-  public void delete(HttpServletRequest request, LogCarpeta logCarpeta) throws Exception,I18NException {
+  public void delete(HttpServletRequest request, LogCarpeta logCarpeta) throws I18NException {
     logCarpetaEjb.delete(logCarpeta);
   }
 

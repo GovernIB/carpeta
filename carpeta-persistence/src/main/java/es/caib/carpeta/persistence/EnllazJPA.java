@@ -28,10 +28,6 @@ import javax.persistence.Id;
 @javax.xml.bind.annotation.XmlRootElement
 public class EnllazJPA implements Enllaz {
 
-
-
-private static final long serialVersionUID = -1473310087L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ENLLAZ_SEQ")
     @Column(name="enllazid",nullable = false,length = 19)

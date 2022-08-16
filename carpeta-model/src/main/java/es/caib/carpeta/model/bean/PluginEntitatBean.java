@@ -8,8 +8,6 @@ public class PluginEntitatBean implements PluginEntitat {
 
 
 
-private static final long serialVersionUID = -98501626L;
-
 	long pluginEntitatID;// PK
 	long pluginID;
 	long entitatID;

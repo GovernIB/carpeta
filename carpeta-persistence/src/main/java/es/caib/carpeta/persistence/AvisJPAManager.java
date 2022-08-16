@@ -16,9 +16,6 @@ public class AvisJPAManager
 
 
 
-
-    private static final long serialVersionUID = 1008320753L;
-
     public static final TableName<Avis> _TABLENAME =  new TableName<Avis>("AvisJPA");
 
 
@@ -58,7 +55,7 @@ public class AvisJPAManager
         return list.toArray(new Avis[list.size()]);
     };
 
-    public synchronized Avis create( long _descripcioID_, java.lang.Long _entitatID_, java.sql.Timestamp _dataInici_, java.sql.Timestamp _dataFi_, int _tipus_, int _gravetat_, java.lang.Long _pluginFrontID_) throws I18NException {
+    public Avis create( long _descripcioID_, java.lang.Long _entitatID_, java.sql.Timestamp _dataInici_, java.sql.Timestamp _dataFi_, int _tipus_, int _gravetat_, java.lang.Long _pluginFrontID_) throws I18NException {
         AvisJPA __bean =  new AvisJPA(_descripcioID_,_entitatID_,_dataInici_,_dataFi_,_tipus_,_gravetat_,_pluginFrontID_);
         return create(__bean);
     }

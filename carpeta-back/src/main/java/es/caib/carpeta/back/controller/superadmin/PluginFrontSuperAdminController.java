@@ -205,7 +205,7 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
 
     @Override
     public PluginJPA create(HttpServletRequest request, PluginJPA plugin)
-            throws Exception, I18NException, I18NValidationException {
+            throws I18NException, I18NValidationException {
         PluginJPA pluginJPA = super.create(request, plugin);
 
         try {
@@ -224,7 +224,7 @@ public class PluginFrontSuperAdminController extends AbstractPluginSuperAdminCon
     }
 
     @Override
-    public void delete(HttpServletRequest request, Plugin plugin) throws Exception, I18NException {
+    public void delete(HttpServletRequest request, Plugin plugin) throws I18NException {
         String nom = findByPrimaryKey(request, plugin.getPluginID()).getNomTraduccions()
                 .get(Configuracio.getDefaultLanguage()).getValor();
         

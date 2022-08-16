@@ -29,10 +29,6 @@ import javax.persistence.Id;
 @javax.xml.bind.annotation.XmlRootElement
 public class SeccioJPA implements Seccio {
 
-
-
-private static final long serialVersionUID = 838506947L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="SECCIO_SEQ")
     @Column(name="seccioid",nullable = false,length = 19)

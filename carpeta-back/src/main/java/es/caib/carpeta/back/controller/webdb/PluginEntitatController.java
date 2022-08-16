@@ -736,6 +736,13 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
+  @Override
+  /** Ha de ser igual que el RequestMapping de la Classe */
+  public String getContextWeb() {
+    RequestMapping rm = AnnotationUtils.findAnnotation(this.getClass(), RequestMapping.class);
+    return rm.value()[0];
+  }
+
   public void preValidate(HttpServletRequest request,PluginEntitatForm pluginEntitatForm , BindingResult result)  throws I18NException {
   }
 
@@ -776,13 +783,6 @@ public java.lang.Long stringToPK(String value) {
     return "pluginEntitatListWebDB";
   }
 
-  @Override
-  /** Ha de ser igual que el RequestMapping de la Classe */
-  public String getContextWeb() {
-    RequestMapping rm = AnnotationUtils.findAnnotation(this.getClass(), RequestMapping.class);
-    return rm.value()[0];
-  }
-
   public String getSessionAttributeFilterForm() {
     return "PluginEntitatWebDB_FilterForm";
   }
@@ -800,18 +800,18 @@ public java.lang.Long stringToPK(String value) {
 
 
   public PluginEntitatJPA create(HttpServletRequest request, PluginEntitatJPA pluginEntitat)
-    throws Exception,I18NException, I18NValidationException {
+    throws I18NException, I18NValidationException {
     return (PluginEntitatJPA) pluginEntitatEjb.create(pluginEntitat);
   }
 
 
   public PluginEntitatJPA update(HttpServletRequest request, PluginEntitatJPA pluginEntitat)
-    throws Exception,I18NException, I18NValidationException {
+    throws I18NException, I18NValidationException {
     return (PluginEntitatJPA) pluginEntitatEjb.update(pluginEntitat);
   }
 
 
-  public void delete(HttpServletRequest request, PluginEntitat pluginEntitat) throws Exception,I18NException {
+  public void delete(HttpServletRequest request, PluginEntitat pluginEntitat) throws I18NException {
     pluginEntitatEjb.delete(pluginEntitat);
   }
 

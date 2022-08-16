@@ -16,9 +16,6 @@ public class AuditoriaJPAManager
 
 
 
-
-    private static final long serialVersionUID = 1834834024L;
-
     public static final TableName<Auditoria> _TABLENAME =  new TableName<Auditoria>("AuditoriaJPA");
 
 
@@ -58,7 +55,7 @@ public class AuditoriaJPAManager
         return list.toArray(new Auditoria[list.size()]);
     };
 
-    public synchronized Auditoria create( int _tipus_, java.lang.String _objecte_, java.sql.Timestamp _dataAudit_, java.lang.String _username_, java.lang.Long _entitatID_) throws I18NException {
+    public Auditoria create( int _tipus_, java.lang.String _objecte_, java.sql.Timestamp _dataAudit_, java.lang.String _username_, java.lang.Long _entitatID_) throws I18NException {
         AuditoriaJPA __bean =  new AuditoriaJPA(_tipus_,_objecte_,_dataAudit_,_username_,_entitatID_);
         return create(__bean);
     }

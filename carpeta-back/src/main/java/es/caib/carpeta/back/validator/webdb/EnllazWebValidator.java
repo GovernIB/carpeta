@@ -196,17 +196,6 @@ _ignoreFields.add(URLID);
     }
 
   }
-    if (isNou) { // Creacio
-      // ================ CREATION
-      // Fitxers 
-      CommonsMultipartFile logoID = ((EnllazForm)__form).getLogoID();
-      if (logoID == null || logoID.isEmpty()) {
-        errors.rejectValue(get(LOGOID), "genapp.validation.required",
-          new String[]{ org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(get(LOGOID)) },
-          null);
-      }
-
-    }
     BeanValidatorResult<Enllaz> __vr = new BeanValidatorResult<Enllaz>();
     validator.validate(__vr, __bean,
       isNou, enllazEjb, entitatEjb, seccioEjb, traduccioEjb);
@@ -218,6 +207,19 @@ _ignoreFields.add(URLID);
         }
     }
 
+    if (isNou) { // Creacio
+      // ================ CREATION
+      // Fitxers 
+        if (!errors.hasFieldErrors(get(LOGOID))){
+            CommonsMultipartFile logoID = ((EnllazForm)__form).getLogoID();
+            if (logoID == null || logoID.isEmpty()) {
+                errors.rejectValue(get(LOGOID), "genapp.validation.required",
+                new String[]{ org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(get(LOGOID)) },
+                null);
+            }
+        }
+
+    }
 
   } // Final de metode
 

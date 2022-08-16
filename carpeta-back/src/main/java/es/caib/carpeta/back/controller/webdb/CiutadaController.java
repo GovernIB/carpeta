@@ -541,6 +541,13 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
+  @Override
+  /** Ha de ser igual que el RequestMapping de la Classe */
+  public String getContextWeb() {
+    RequestMapping rm = AnnotationUtils.findAnnotation(this.getClass(), RequestMapping.class);
+    return rm.value()[0];
+  }
+
   public void preValidate(HttpServletRequest request,CiutadaForm ciutadaForm , BindingResult result)  throws I18NException {
   }
 
@@ -581,13 +588,6 @@ public java.lang.Long stringToPK(String value) {
     return "ciutadaListWebDB";
   }
 
-  @Override
-  /** Ha de ser igual que el RequestMapping de la Classe */
-  public String getContextWeb() {
-    RequestMapping rm = AnnotationUtils.findAnnotation(this.getClass(), RequestMapping.class);
-    return rm.value()[0];
-  }
-
   public String getSessionAttributeFilterForm() {
     return "CiutadaWebDB_FilterForm";
   }
@@ -605,18 +605,18 @@ public java.lang.Long stringToPK(String value) {
 
 
   public CiutadaJPA create(HttpServletRequest request, CiutadaJPA ciutada)
-    throws Exception,I18NException, I18NValidationException {
+    throws I18NException, I18NValidationException {
     return (CiutadaJPA) ciutadaEjb.create(ciutada);
   }
 
 
   public CiutadaJPA update(HttpServletRequest request, CiutadaJPA ciutada)
-    throws Exception,I18NException, I18NValidationException {
+    throws I18NException, I18NValidationException {
     return (CiutadaJPA) ciutadaEjb.update(ciutada);
   }
 
 
-  public void delete(HttpServletRequest request, Ciutada ciutada) throws Exception,I18NException {
+  public void delete(HttpServletRequest request, Ciutada ciutada) throws I18NException {
     ciutadaEjb.delete(ciutada);
   }
 

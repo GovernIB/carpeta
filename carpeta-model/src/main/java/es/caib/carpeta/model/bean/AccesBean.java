@@ -8,8 +8,6 @@ public class AccesBean implements Acces {
 
 
 
-private static final long serialVersionUID = -112525025L;
-
 	long accesID;// PK
 	int tipus;
 	java.lang.String nom;

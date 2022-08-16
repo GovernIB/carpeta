@@ -770,6 +770,13 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
+  @Override
+  /** Ha de ser igual que el RequestMapping de la Classe */
+  public String getContextWeb() {
+    RequestMapping rm = AnnotationUtils.findAnnotation(this.getClass(), RequestMapping.class);
+    return rm.value()[0];
+  }
+
   public void preValidate(HttpServletRequest request,PreguntesFrequentsForm preguntesFrequentsForm , BindingResult result)  throws I18NException {
   }
 
@@ -810,13 +817,6 @@ public java.lang.Long stringToPK(String value) {
     return "preguntesFrequentsListWebDB";
   }
 
-  @Override
-  /** Ha de ser igual que el RequestMapping de la Classe */
-  public String getContextWeb() {
-    RequestMapping rm = AnnotationUtils.findAnnotation(this.getClass(), RequestMapping.class);
-    return rm.value()[0];
-  }
-
   public String getSessionAttributeFilterForm() {
     return "PreguntesFrequentsWebDB_FilterForm";
   }
@@ -834,18 +834,18 @@ public java.lang.Long stringToPK(String value) {
 
 
   public PreguntesFrequentsJPA create(HttpServletRequest request, PreguntesFrequentsJPA preguntesFrequents)
-    throws Exception,I18NException, I18NValidationException {
+    throws I18NException, I18NValidationException {
     return (PreguntesFrequentsJPA) preguntesFrequentsEjb.create(preguntesFrequents);
   }
 
 
   public PreguntesFrequentsJPA update(HttpServletRequest request, PreguntesFrequentsJPA preguntesFrequents)
-    throws Exception,I18NException, I18NValidationException {
+    throws I18NException, I18NValidationException {
     return (PreguntesFrequentsJPA) preguntesFrequentsEjb.update(preguntesFrequents);
   }
 
 
-  public void delete(HttpServletRequest request, PreguntesFrequents preguntesFrequents) throws Exception,I18NException {
+  public void delete(HttpServletRequest request, PreguntesFrequents preguntesFrequents) throws I18NException {
     preguntesFrequentsEjb.delete(preguntesFrequents);
   }
 

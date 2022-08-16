@@ -23,10 +23,6 @@ import javax.persistence.Id;
 @javax.xml.bind.annotation.XmlRootElement
 public class PropietatGlobalJPA implements PropietatGlobal {
 
-
-
-private static final long serialVersionUID = 1545722544L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="PROPIETATGLOBAL_SEQ")
     @Column(name="propietatglobalid",nullable = false,length = 19)

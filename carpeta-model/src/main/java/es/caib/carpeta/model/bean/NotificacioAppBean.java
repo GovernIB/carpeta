@@ -8,8 +8,6 @@ public class NotificacioAppBean implements NotificacioApp {
 
 
 
-private static final long serialVersionUID = -1398779617L;
-
 	long notificacioAppID;// PK
 	java.lang.String codi;
 	long titolID;

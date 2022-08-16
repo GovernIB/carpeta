@@ -19,10 +19,6 @@ import javax.persistence.Id;
 @javax.xml.bind.annotation.XmlRootElement
 public class EstadisticaJPA implements Estadistica {
 
-
-
-private static final long serialVersionUID = -2066559243L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="ESTADISTICA_SEQ")
     @Column(name="estadisticaid",nullable = false,length = 19)

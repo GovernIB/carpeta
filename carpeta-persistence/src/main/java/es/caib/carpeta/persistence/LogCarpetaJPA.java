@@ -21,10 +21,6 @@ import javax.persistence.Id;
 @javax.xml.bind.annotation.XmlRootElement
 public class LogCarpetaJPA implements LogCarpeta {
 
-
-
-private static final long serialVersionUID = 1140880713L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="LOGCARPETA_SEQ")
     @Column(name="logid",nullable = false,length = 19)

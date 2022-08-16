@@ -134,8 +134,7 @@ public class EntitatSuperAdminController extends EntitatController {
     }
 
     @Override
-    public void delete(HttpServletRequest request, Entitat entitat)
-            throws Exception, I18NException {
+    public void delete(HttpServletRequest request, Entitat entitat) throws I18NException {
         entitatLogicaEjb.deleteFull(entitat);
     }
 

@@ -8,8 +8,6 @@ public class CiutadaBean implements Ciutada {
 
 
 
-private static final long serialVersionUID = -1163870167L;
-
 	long ciutadaID;// PK
 	java.lang.String nif;
 	java.lang.String llinatge1;

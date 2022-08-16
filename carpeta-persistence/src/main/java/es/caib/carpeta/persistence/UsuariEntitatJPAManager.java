@@ -16,9 +16,6 @@ public class UsuariEntitatJPAManager
 
 
 
-
-    private static final long serialVersionUID = 795835066L;
-
     public static final TableName<UsuariEntitat> _TABLENAME =  new TableName<UsuariEntitat>("UsuariEntitatJPA");
 
 
@@ -58,7 +55,7 @@ public class UsuariEntitatJPAManager
         return list.toArray(new UsuariEntitat[list.size()]);
     };
 
-    public synchronized UsuariEntitat create( long _usuariID_, long _entitatID_, boolean _actiu_) throws I18NException {
+    public UsuariEntitat create( long _usuariID_, long _entitatID_, boolean _actiu_) throws I18NException {
         UsuariEntitatJPA __bean =  new UsuariEntitatJPA(_usuariID_,_entitatID_,_actiu_);
         return create(__bean);
     }

@@ -8,8 +8,6 @@ public class EnllazBean implements Enllaz {
 
 
 
-private static final long serialVersionUID = 1571810514L;
-
 	long enllazID;// PK
 	int tipus;
 	long nomID;

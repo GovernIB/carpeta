@@ -8,8 +8,6 @@ public class AvisBean implements Avis {
 
 
 
-private static final long serialVersionUID = 2079106191L;
-
 	long avisID;// PK
 	long descripcioID;
 	java.lang.Long entitatID;

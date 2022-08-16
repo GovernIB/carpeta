@@ -202,38 +202,6 @@ _ignoreFields.add(LOGINTEXTID);
     }
 
   }
-    if (isNou) { // Creacio
-      // ================ CREATION
-      // Fitxers 
-      CommonsMultipartFile logoCapBackID = ((EntitatForm)__form).getLogoCapBackID();
-      if (logoCapBackID == null || logoCapBackID.isEmpty()) {
-        errors.rejectValue(get(LOGOCAPBACKID), "genapp.validation.required",
-          new String[]{ org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(get(LOGOCAPBACKID)) },
-          null);
-      }
-
-      CommonsMultipartFile logoPeuBackID = ((EntitatForm)__form).getLogoPeuBackID();
-      if (logoPeuBackID == null || logoPeuBackID.isEmpty()) {
-        errors.rejectValue(get(LOGOPEUBACKID), "genapp.validation.required",
-          new String[]{ org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(get(LOGOPEUBACKID)) },
-          null);
-      }
-
-      CommonsMultipartFile logoLateralFrontID = ((EntitatForm)__form).getLogoLateralFrontID();
-      if (logoLateralFrontID == null || logoLateralFrontID.isEmpty()) {
-        errors.rejectValue(get(LOGOLATERALFRONTID), "genapp.validation.required",
-          new String[]{ org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(get(LOGOLATERALFRONTID)) },
-          null);
-      }
-
-      CommonsMultipartFile iconID = ((EntitatForm)__form).getIconID();
-      if (iconID == null || iconID.isEmpty()) {
-        errors.rejectValue(get(ICONID), "genapp.validation.required",
-          new String[]{ org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(get(ICONID)) },
-          null);
-      }
-
-    }
     BeanValidatorResult<Entitat> __vr = new BeanValidatorResult<Entitat>();
     validator.validate(__vr, __bean,
       isNou, entitatEjb, pluginEjb, traduccioEjb);
@@ -245,6 +213,46 @@ _ignoreFields.add(LOGINTEXTID);
         }
     }
 
+    if (isNou) { // Creacio
+      // ================ CREATION
+      // Fitxers 
+        if (!errors.hasFieldErrors(get(LOGOCAPBACKID))){
+            CommonsMultipartFile logoCapBackID = ((EntitatForm)__form).getLogoCapBackID();
+            if (logoCapBackID == null || logoCapBackID.isEmpty()) {
+                errors.rejectValue(get(LOGOCAPBACKID), "genapp.validation.required",
+                new String[]{ org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(get(LOGOCAPBACKID)) },
+                null);
+            }
+        }
+
+        if (!errors.hasFieldErrors(get(LOGOPEUBACKID))){
+            CommonsMultipartFile logoPeuBackID = ((EntitatForm)__form).getLogoPeuBackID();
+            if (logoPeuBackID == null || logoPeuBackID.isEmpty()) {
+                errors.rejectValue(get(LOGOPEUBACKID), "genapp.validation.required",
+                new String[]{ org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(get(LOGOPEUBACKID)) },
+                null);
+            }
+        }
+
+        if (!errors.hasFieldErrors(get(LOGOLATERALFRONTID))){
+            CommonsMultipartFile logoLateralFrontID = ((EntitatForm)__form).getLogoLateralFrontID();
+            if (logoLateralFrontID == null || logoLateralFrontID.isEmpty()) {
+                errors.rejectValue(get(LOGOLATERALFRONTID), "genapp.validation.required",
+                new String[]{ org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(get(LOGOLATERALFRONTID)) },
+                null);
+            }
+        }
+
+        if (!errors.hasFieldErrors(get(ICONID))){
+            CommonsMultipartFile iconID = ((EntitatForm)__form).getIconID();
+            if (iconID == null || iconID.isEmpty()) {
+                errors.rejectValue(get(ICONID), "genapp.validation.required",
+                new String[]{ org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(get(ICONID)) },
+                null);
+            }
+        }
+
+    }
 
   } // Final de metode
 

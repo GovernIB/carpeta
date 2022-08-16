@@ -86,7 +86,7 @@ public class SeccioAdminEntitatController extends SeccioController {
 
     @Override
     public SeccioJPA create(HttpServletRequest request, SeccioJPA seccio)
-            throws Exception, I18NException, I18NValidationException {
+            throws I18NException, I18NValidationException {
 
         log.info(" \n\n Creant Secció amb context ]" + seccio.getContexte() + "[ \n\n");
 
@@ -131,7 +131,7 @@ public class SeccioAdminEntitatController extends SeccioController {
     }
 
     @Override
-    public void delete(HttpServletRequest request, Seccio seccio) throws Exception, I18NException {
+    public void delete(HttpServletRequest request, Seccio seccio) throws I18NException {
         // Ho esborra tot.
         seccioLogicaEjb.deleteFull(seccio);
     }

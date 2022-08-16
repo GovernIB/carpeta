@@ -16,9 +16,6 @@ public class CiutadaJPAManager
 
 
 
-
-    private static final long serialVersionUID = -1098039029L;
-
     public static final TableName<Ciutada> _TABLENAME =  new TableName<Ciutada>("CiutadaJPA");
 
 
@@ -58,7 +55,7 @@ public class CiutadaJPAManager
         return list.toArray(new Ciutada[list.size()]);
     };
 
-    public synchronized Ciutada create( java.lang.String _nif_, java.lang.String _llinatge1_, java.lang.String _llinatge2_, java.lang.String _nom_, boolean _empresa_, java.lang.String _representantNif_, java.lang.String _representantLlinatge1_, java.lang.String _representantLlinatge2_, java.lang.String _representantNom_, java.sql.Timestamp _dataCreacio_, java.lang.String _mobileId_) throws I18NException {
+    public Ciutada create( java.lang.String _nif_, java.lang.String _llinatge1_, java.lang.String _llinatge2_, java.lang.String _nom_, boolean _empresa_, java.lang.String _representantNif_, java.lang.String _representantLlinatge1_, java.lang.String _representantLlinatge2_, java.lang.String _representantNom_, java.sql.Timestamp _dataCreacio_, java.lang.String _mobileId_) throws I18NException {
         CiutadaJPA __bean =  new CiutadaJPA(_nif_,_llinatge1_,_llinatge2_,_nom_,_empresa_,_representantNif_,_representantLlinatge1_,_representantLlinatge2_,_representantNom_,_dataCreacio_,_mobileId_);
         return create(__bean);
     }

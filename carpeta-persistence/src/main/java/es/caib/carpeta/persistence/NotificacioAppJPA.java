@@ -28,10 +28,6 @@ import javax.persistence.Id;
 @javax.xml.bind.annotation.XmlRootElement
 public class NotificacioAppJPA implements NotificacioApp {
 
-
-
-private static final long serialVersionUID = 1756000396L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="NOTIFICACIOAPP_SEQ")
     @Column(name="notificacioappid",nullable = false,length = 19)

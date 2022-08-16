@@ -110,7 +110,7 @@ public class PropietatGlobalSuperAdminController extends PropietatGlobalControll
 
     @Override
     public PropietatGlobalJPA create(HttpServletRequest request, PropietatGlobalJPA propietatGlobal)
-            throws Exception, I18NException, I18NValidationException {
+            throws I18NException, I18NValidationException {
         PropietatGlobalJPA propietatGlobalJPA = super.create(request, propietatGlobal);
 
         try {
@@ -130,7 +130,7 @@ public class PropietatGlobalSuperAdminController extends PropietatGlobalControll
     }
 
     @Override
-    public void delete(HttpServletRequest request, PropietatGlobal propietatGlobal) throws Exception, I18NException {
+    public void delete(HttpServletRequest request, PropietatGlobal propietatGlobal) throws I18NException {
         String codi = propietatGlobal.getCodi();
         super.delete(request, propietatGlobal);
 

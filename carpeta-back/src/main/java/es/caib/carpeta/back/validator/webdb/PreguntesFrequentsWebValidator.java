@@ -151,10 +151,6 @@ _ignoreFields.add(RESPOSTAID);
     }
 
   }
-    if (isNou) { // Creacio
-      // ================ CREATION
-      // Fitxers 
-    }
     BeanValidatorResult<PreguntesFrequents> __vr = new BeanValidatorResult<PreguntesFrequents>();
     validator.validate(__vr, __bean,
       isNou, entitatEjb, preguntesFrequentsEjb, traduccioEjb);
@@ -166,6 +162,10 @@ _ignoreFields.add(RESPOSTAID);
         }
     }
 
+    if (isNou) { // Creacio
+      // ================ CREATION
+      // Fitxers 
+    }
 
   } // Final de metode
 

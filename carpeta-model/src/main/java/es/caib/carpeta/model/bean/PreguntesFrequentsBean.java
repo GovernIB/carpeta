@@ -8,8 +8,6 @@ public class PreguntesFrequentsBean implements PreguntesFrequents {
 
 
 
-private static final long serialVersionUID = -431401584L;
-
 	long preguntesFrequentsID;// PK
 	long enunciatID;
 	long respostaID;

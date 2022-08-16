@@ -27,10 +27,6 @@ import javax.persistence.Id;
 @javax.xml.bind.annotation.XmlRootElement
 public class UsuariEntitatJPA implements UsuariEntitat {
 
-
-
-private static final long serialVersionUID = 2031334771L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="USUARIENTITAT_SEQ")
     @Column(name="usuarientitatid",nullable = false,length = 19)

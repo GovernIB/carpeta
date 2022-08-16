@@ -32,6 +32,12 @@ public class AvisEJB extends AvisJPAManager implements AvisService {
          return super.update(instance);
     }
 
+    public void deleteIncludingFiles(Avis instance, es.caib.carpeta.ejb.FitxerService fitxerEjb)
+            throws I18NException {
+
+        this.delete(instance);
+    }
+
     @Override
     @RolesAllowed({Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS})
     public AvisJPA findByPrimaryKey(Long _ID_) {

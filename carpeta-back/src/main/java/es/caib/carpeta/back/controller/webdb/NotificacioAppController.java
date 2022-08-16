@@ -778,6 +778,13 @@ public java.lang.Long stringToPK(String value) {
   }
 
 
+  @Override
+  /** Ha de ser igual que el RequestMapping de la Classe */
+  public String getContextWeb() {
+    RequestMapping rm = AnnotationUtils.findAnnotation(this.getClass(), RequestMapping.class);
+    return rm.value()[0];
+  }
+
   public void preValidate(HttpServletRequest request,NotificacioAppForm notificacioAppForm , BindingResult result)  throws I18NException {
   }
 
@@ -818,13 +825,6 @@ public java.lang.Long stringToPK(String value) {
     return "notificacioAppListWebDB";
   }
 
-  @Override
-  /** Ha de ser igual que el RequestMapping de la Classe */
-  public String getContextWeb() {
-    RequestMapping rm = AnnotationUtils.findAnnotation(this.getClass(), RequestMapping.class);
-    return rm.value()[0];
-  }
-
   public String getSessionAttributeFilterForm() {
     return "NotificacioAppWebDB_FilterForm";
   }
@@ -842,18 +842,18 @@ public java.lang.Long stringToPK(String value) {
 
 
   public NotificacioAppJPA create(HttpServletRequest request, NotificacioAppJPA notificacioApp)
-    throws Exception,I18NException, I18NValidationException {
+    throws I18NException, I18NValidationException {
     return (NotificacioAppJPA) notificacioAppEjb.create(notificacioApp);
   }
 
 
   public NotificacioAppJPA update(HttpServletRequest request, NotificacioAppJPA notificacioApp)
-    throws Exception,I18NException, I18NValidationException {
+    throws I18NException, I18NValidationException {
     return (NotificacioAppJPA) notificacioAppEjb.update(notificacioApp);
   }
 
 
-  public void delete(HttpServletRequest request, NotificacioApp notificacioApp) throws Exception,I18NException {
+  public void delete(HttpServletRequest request, NotificacioApp notificacioApp) throws I18NException {
     notificacioAppEjb.delete(notificacioApp);
   }
 

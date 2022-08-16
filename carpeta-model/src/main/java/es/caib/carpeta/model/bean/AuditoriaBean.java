@@ -8,8 +8,6 @@ public class AuditoriaBean implements Auditoria {
 
 
 
-private static final long serialVersionUID = -273096378L;
-
 	long auditoriaID;// PK
 	int tipus;
 	java.lang.String objecte;

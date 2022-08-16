@@ -21,10 +21,6 @@ import javax.persistence.Id;
 @javax.xml.bind.annotation.XmlRootElement
 public class CiutadaJPA implements Ciutada {
 
-
-
-private static final long serialVersionUID = -591726526L;
-
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="CIUTADA_SEQ")
     @Column(name="ciutadaid",nullable = false,length = 19)

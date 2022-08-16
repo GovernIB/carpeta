@@ -31,29 +31,29 @@ public class PropietatGlobalAdminEntitatController extends PropietatGlobalSuperA
     protected boolean isSuperAdmin() {
         return false;
     }
-    
+
     @Override
     public String getEntityNameCode() {
         return "propietatGlobal.adminentitat.titol";
-      }
+    }
 
     @Override
     public String getEntityNameCodePlural() {
         return "propietatGlobal.adminentitat.titol.plural";
     }
 
-
-
     @Override
-    public PropietatGlobalJPA create(HttpServletRequest request, PropietatGlobalJPA propietatGlobal) throws Exception, I18NException, I18NValidationException {
+    public PropietatGlobalJPA create(HttpServletRequest request, PropietatGlobalJPA propietatGlobal)
+            throws I18NException, I18NValidationException {
         PropietatGlobalJPA propietatGlobalJPA = super.create(request, propietatGlobal);
 
-        try{
+        try {
             LoginInfo loginInfo = LoginInfo.getInstance();
-            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PROPENT,loginInfo.getEntitatID(),loginInfo.getUsuariPersona().getUsername(), propietatGlobalJPA.getCodi());
-        }catch(I18NException e){
+            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_AFEGIR_PROPENT, loginInfo.getEntitatID(),
+                    loginInfo.getUsuariPersona().getUsername(), propietatGlobalJPA.getCodi());
+        } catch (I18NException e) {
 
-            String msg = "Error creant auditoria "+ "("+  e.getMessage() + ")";
+            String msg = "Error creant auditoria " + "(" + e.getMessage() + ")";
             log.error(msg, e);
         }
 
@@ -62,20 +62,19 @@ public class PropietatGlobalAdminEntitatController extends PropietatGlobalSuperA
     }
 
     @Override
-    public void delete(HttpServletRequest request, PropietatGlobal propietatGlobal) throws Exception,I18NException {
+    public void delete(HttpServletRequest request, PropietatGlobal propietatGlobal) throws I18NException {
         String codi = propietatGlobal.getCodi();
-        super.delete(request,propietatGlobal);
+        super.delete(request, propietatGlobal);
 
-        try{
+        try {
             LoginInfo loginInfo = LoginInfo.getInstance();
-            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ELIMINAT_PROPENT,loginInfo.getEntitatID(),loginInfo.getUsuariPersona().getUsername(), codi);
-        }catch(I18NException e){
+            auditoriaLogicaEjb.crearAuditoria(TIPUS_AUDIT_ELIMINAT_PROPENT, loginInfo.getEntitatID(),
+                    loginInfo.getUsuariPersona().getUsername(), codi);
+        } catch (I18NException e) {
 
-            String msg = "Error creant auditoria "+ "("+  e.getMessage() + ")";
+            String msg = "Error creant auditoria " + "(" + e.getMessage() + ")";
             log.error(msg, e);
         }
     }
-
-
 
 }
