@@ -1,7 +1,7 @@
 package org.fundaciobit.pluginsib.carpetafront.apodera;
 
 import java.net.URL;
-import java.util.*;
+
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.ws.BindingProvider;
@@ -34,6 +34,13 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Properties;
 
 /**
  * @author jpernia
@@ -411,7 +418,7 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
 
             Map<String, Object> infoApoderaments = new HashMap<String, Object>();
 
-            String urlApodera = getPropertyRequired(APODERA_PROPERTY_BASE + "url");
+            String urlApodera = getPropertyRequired(APODERA_PROPERTY_BASE + "endpoint");
 
             infoApoderaments.put("poderdant", poderdant);
             infoApoderaments.put("apoderaments", apos);
@@ -457,8 +464,7 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
         // # CERTIFICATE Token
 
         String organisme_dir3 = getPropertyRequired(APODERA_PROPERTY_BASE + "organisme.dir3");
-        String organisme_denominacio = getPropertyRequired(
-                APODERA_PROPERTY_BASE + "organisme.denominacio");
+        String organisme_denominacio = getProperty(APODERA_PROPERTY_BASE + "organisme.denominacio");
 
         /*
          * ApoderaCarpetaFrontPlugin api = new ApoderaCarpetaFrontPlugin(endPoint,
