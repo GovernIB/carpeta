@@ -35,7 +35,9 @@ public class EntitatEJB extends EntitatJPAManager implements EntitatService {
          return super.update(instance);
     }
 
-    public void deleteIncludingFiles(Entitat instance, es.caib.carpeta.ejb.FitxerService fitxerEjb)
+    @Override
+    @RolesAllowed({Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS})
+    public void deleteIncludingFiles(Entitat instance,  FitxerService fitxerEjb)
             throws I18NException {
 
         java.util.ArrayList<Long> fitxers = new java.util.ArrayList<Long>();

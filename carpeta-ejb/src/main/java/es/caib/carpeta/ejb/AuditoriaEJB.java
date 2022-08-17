@@ -32,7 +32,9 @@ public class AuditoriaEJB extends AuditoriaJPAManager implements AuditoriaServic
          return super.update(instance);
     }
 
-    public void deleteIncludingFiles(Auditoria instance, es.caib.carpeta.ejb.FitxerService fitxerEjb)
+    @Override
+    @RolesAllowed({Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS})
+    public void deleteIncludingFiles(Auditoria instance,  FitxerService fitxerEjb)
             throws I18NException {
 
         this.delete(instance);

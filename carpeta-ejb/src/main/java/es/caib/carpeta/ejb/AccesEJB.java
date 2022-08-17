@@ -32,7 +32,9 @@ public class AccesEJB extends AccesJPAManager implements AccesService {
          return super.update(instance);
     }
 
-    public void deleteIncludingFiles(Acces instance, es.caib.carpeta.ejb.FitxerService fitxerEjb)
+    @Override
+    @RolesAllowed({Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS})
+    public void deleteIncludingFiles(Acces instance,  FitxerService fitxerEjb)
             throws I18NException {
 
         this.delete(instance);

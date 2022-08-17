@@ -35,7 +35,9 @@ public class EnllazEJB extends EnllazJPAManager implements EnllazService {
          return super.update(instance);
     }
 
-    public void deleteIncludingFiles(Enllaz instance, es.caib.carpeta.ejb.FitxerService fitxerEjb)
+    @Override
+    @RolesAllowed({Constants.ROLE_EJB_FULL_ACCESS, Constants.ROLE_EJB_BASIC_ACCESS})
+    public void deleteIncludingFiles(Enllaz instance,  FitxerService fitxerEjb)
             throws I18NException {
 
         java.util.ArrayList<Long> fitxers = new java.util.ArrayList<Long>();
