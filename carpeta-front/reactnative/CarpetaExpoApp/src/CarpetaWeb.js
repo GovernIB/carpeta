@@ -126,7 +126,6 @@ class CarpetaWeb extends Component {
     this.navigate(event.url);
   };
 
-
   navigateCarpetaWeb(url, ispublic) {
     // Crida a vistaWebComponent per a que canvii la pàgina web
     // Canvia url del WebView

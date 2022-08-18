@@ -3,18 +3,10 @@
 <html>
 <head>
 <script>
-/*
-function redireccionar2() {
-	//alert("Intentant Obrir Browser Extern ...");
-    document.forms['redirectForm'].submit();
-    
-}
-*/
-
 function redireccionar() {
 	window.open("<%=request.getContextPath()%>/public/preLoginApp/${codiLogin}?urlbase=${urlbaseEncoded}", "_blank");
 }
-
+setTimeout(function(){ document.getElementById("missatge").style.display="inline"}, 1500);
 </script>
 </head>
 <body onload>  <%--="redireccionar2()">  --%>
@@ -24,9 +16,12 @@ function redireccionar() {
 <br/>
 <center>
 
-<h1><a href="javascript:redireccionar()"> PER FAVOR, SI VEU AQUEST MISSATGE<br/>
-           FACI CLIC AQUÍ PER INICIAR<br/> EL PROCÉS DE LOGIN. GRACIES. </a> </h1>
-
+<h1 id="missatge" style="display:none;">
+<a href="javascript:redireccionar()"> 
+    PER FAVOR, SI VEU AQUEST MISSATGE<br/>
+    FACI CLIC AQUÍ PER INICIAR<br/> EL PROCÉS DE LOGIN. GRACIES. 
+</a>
+</h1>
 <img src="<%=request.getContextPath()%>/src/assets/images/ajax-loader.gif" />
 </center>
 </body>
