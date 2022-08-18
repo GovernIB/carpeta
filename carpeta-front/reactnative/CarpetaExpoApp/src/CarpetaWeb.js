@@ -43,7 +43,12 @@ class CarpetaWeb extends Component {
     );
 
     if (urlcarpeta === '' || codientitat === '') {
-      this.props.history.push('/config/');
+      // això va a configuració
+      //this.props.history.push('/config/');
+
+      // posam valors a pinyo fix
+      this.setState({loadedData: true, urlcarpeta:'https://www.caib.es/carpetafront', codientitat: 'caib'});
+
     } else {
       this.setState({loadedData: true, urlcarpeta: urlcarpeta, codientitat: codientitat});
     }
@@ -95,7 +100,7 @@ class CarpetaWeb extends Component {
     // If we are on iOS, We add an event listener to call handleOpenUrl when an incoming link is detected.
     console.log('CarpetaWeb => componentDidMount()');
 
-    Linking.addEventListener('url', this.handleOpenURL);
+    this.eventListener = Linking.addEventListener('url', this.handleOpenURL);
 
     const { carpetaWebRef } = this.props;
 
@@ -106,7 +111,8 @@ class CarpetaWeb extends Component {
 
   componentWillUnmount() {
     // C. We delete the Linking listener on componentWillUnmount
-    Linking.removeEventListener('url', this.handleOpenURL);
+    //DEPRECATED: Linking.removeEventListener('url', this.handleOpenURL);
+    this.eventListener.remove();
 
     const { carpetaWebRef } = this.props;
     if(carpetaWebRef) {

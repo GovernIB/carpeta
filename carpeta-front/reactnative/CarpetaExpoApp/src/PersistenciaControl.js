@@ -9,6 +9,7 @@ import React, {Component} from 'react';
 
 import {Alert, Button, StyleSheet, Text, TextInput, View} from 'react-native';
 import Persistencia from './Persistencia';
+import Constants from "expo-constants"
 
 class PersistenciaControl extends Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class PersistenciaControl extends Component {
     console.log('ENTRA A DORENDER ');
 
     if (urlcarpeta === '') {
-      urlcarpeta = 'https://proves.caib.es/carpetafront';
+      urlcarpeta = 'https://www.caib.es/carpetafront';
     }
 
     if (codientitat === '') {
@@ -65,6 +66,8 @@ class PersistenciaControl extends Component {
 
     return (
       <View>
+        <Text style={styles.title}>Carpeta APP</Text>
+        <Text style={styles.label}>Versió App: {Constants.manifest.version}</Text>
         <View style={styles.fixToText}>
           <Text style={styles.label}>URL Servidor:</Text>
         </View>
@@ -85,7 +88,7 @@ class PersistenciaControl extends Component {
             value={this.state.codientitat}
           />
         </View>
-        <View style={styles.fixToText}>
+        <View style={styles.fixToBoto}>
           <Button title="Guardar" onPress={this.guardarDades} />
           <Button title="Tornar a Carpeta" onPress={this.tornarACarpeta} />
         </View>
@@ -94,14 +97,27 @@ class PersistenciaControl extends Component {
   }
 }
 
+
 const styles = StyleSheet.create({
   fixToText: {
     flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  fixToBoto: {
+    flexDirection: 'row',
     justifyContent: 'space-between',
+    margin: 20
   },
   label: {
     padding: 0,
+    margin: 10
+  },
+  title: {
+    padding: 0,
     margin: 10,
+    fontSize: 24,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   inputtext: {
     flex: 1,
@@ -110,7 +126,7 @@ const styles = StyleSheet.create({
     borderColor: 'red',
     borderStyle: 'solid',
     padding: 0,
-    margin: 10,
+    margin: 10
   },
 });
 
