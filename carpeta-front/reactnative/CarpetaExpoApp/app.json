@@ -2,7 +2,7 @@
   "expo": {
     "name": "CarpetaApp",
     "slug": "CarpetaApp",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "carpetaapp",
@@ -27,7 +27,11 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "es.caib.carpeta.carpetaapp",
-      "buildNumber": "1.0.5"
+      "buildNumber": "1.0.6",
+      "infoPlist": {
+        "CFBundleLocalizations" : ["ca", "es"],
+        "CFBundleDevelopmentRegion": "es"
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -35,7 +39,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "es.caib.carpeta.carpetaapp",
-	  "googleServicesFile": "./google-services.json",
+      "googleServicesFile": "./google-services.json",
       "versionCode": 1
     },
     "web": {
