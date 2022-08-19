@@ -16,6 +16,7 @@ class LoginIBCallBackBrowser extends React.Component {
     super(props);
     this.navigateCarpetaWeb.bind(this);
     this.calledWhenDataLoaded = this.calledWhenDataLoaded.bind(this);
+    this.callWhenNavigationStateChange = this.callWhenNavigationStateChange.bind(this);
 
     this.storage = new Persistencia();
     // Carrega els valors de forma asincrona i quan ha acabat crida a la funcio passada per paràmetre
@@ -52,10 +53,54 @@ class LoginIBCallBackBrowser extends React.Component {
 
 
   calledWhenDataLoaded(urlcarpeta, codientitat) {
-    console.log('ENTRA A DORENDER ');
+    console.log('LoginIBCallBackBrowser::calledWhenDataLoaded  => entra');
 
     this.setState({loadedData: true, urlcarpeta: urlcarpeta});
   }
+
+
+
+  // METODE REPETIT A CarpetaWeb.js
+  callWhenNavigationStateChange(event) {
+    var url = event.url;
+    console.log('LoginIBCallBackBrowser::Check URL => ]' + url + '[');
+
+    if (url.includes('/public/doLogin?')) {
+
+      if (this.alreadyopen) {
+        this.alreadyopen = false;
+      } else {
+        this.alreadyopen = true;
+
+        var pos = url.lastIndexOf('=');
+
+        var loginCode = url.substring(pos + 1, url.length);
+
+        console.log('LoginIBCallBackBrowser: LoginCode => ' + loginCode);
+        var urlCarpeta = this.state.urlcarpeta;
+        var urlbase = this.getUrlBase(url);
+
+        var theUrlBrowser =
+        urlCarpeta + '/public/preLoginApp/' + loginCode + '?urlbase=' + encodeURIComponent(urlbase);
+
+        console.log(new Date().toUTCString() + '  Obring URL => ]' + theUrlBrowser + '[');
+        Linking.openURL(theUrlBrowser);
+      }
+      return false;
+    }
+    if(url.startsWith(this.state.urlcarpeta)) {
+      console.log("LoginIBCallBackBrowser::URL interna : " + url);
+      return true;
+    } else {
+      console.log("LoginIBCallBackBrowser::Obrint URL externa : " + url);
+      Linking.openURL(url);
+      return false;
+    }
+   
+  }
+
+
+
 
   render() {
     if (!this.state.loadedData) {
@@ -78,7 +123,11 @@ class LoginIBCallBackBrowser extends React.Component {
 
     return (
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.borderdotted}>
-        <VistaWebComponent url={loginUrl} debug={true} vistaWebComponentRef={ ref => this.vistaWebComponent = ref} />
+        <VistaWebComponent 
+            url={loginUrl} 
+            debug={true} 
+            vistaWebComponentRef={ ref => this.vistaWebComponent = ref} 
+            callWhenNavigationStateChange={this.callWhenNavigationStateChange}/>
       </ScrollView>
     );
     //}

@@ -54,21 +54,14 @@ class CarpetaWeb extends Component {
     }
   }
 
+  // METODE REPETIT A LoginIBCallBackBrowser.js
   callWhenNavigationStateChange(event) {
     var url = event.url;
-    // console.log('Check URL => ]' + url + '[');
+    console.log('CarpetaWeb::Check URL => ]' + url + '[');
 
-    // if (url.includes('/configureApp')) {
-    //
-    //   this.props.history.push('/config/');
-    //
-    //   return false;
-    // }
+    
 
     if (url.includes('/public/doLogin?')) {
-      //console.log('');
-      //console.log(' alreadyopen => ' + this.alreadyopen);
-      //console.log('');
 
       if (this.alreadyopen) {
         this.alreadyopen = false;
@@ -79,20 +72,28 @@ class CarpetaWeb extends Component {
 
         var loginCode = url.substring(pos + 1, url.length);
 
-        console.log('Carpeta: LoginCode => ' + loginCode);
-
-        var url = this.state.urlcarpeta;
+        console.log('CarpetaWeb::LoginCode => ' + loginCode);
+        var urlCarpeta = this.state.urlcarpeta;
         var urlbase = this.getUrlBase(url);
 
         var theUrlBrowser =
-          url + '/public/preLoginApp/' + loginCode + '?urlbase=' + encodeURIComponent(urlbase);
+          urlCarpeta + '/public/preLoginApp/' + loginCode + '?urlbase=' + encodeURIComponent(urlbase);
 
         console.log(new Date().toUTCString() + '  Obring URL => ]' + theUrlBrowser + '[');
         Linking.openURL(theUrlBrowser);
       }
       return false;
     }
-    return true;
+
+    if(url.startsWith(this.state.urlcarpeta)) {
+      console.log("CarpetaWeb::URL interna : " + url);
+      return true;
+    } else {
+      console.log("CarpetaWeb::Obrint URL externa : " + url);
+      Linking.openURL(url);
+      return false;
+    }
+   
   }
 
   componentDidMount() {

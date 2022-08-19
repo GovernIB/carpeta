@@ -36,6 +36,8 @@ class VistaWebComponent extends Component {
     this.setState({ url: urlParam });
   }
 
+
+
   render() {
     var url = this.state.url;
     //if (this.props.debug)
@@ -55,9 +57,11 @@ class VistaWebComponent extends Component {
             this.webview = ref;
           }}
           onNavigationStateChange={(event) => {
+            console.log("VistaWebComponent:: onNavigationStateChange(" + event.url+ ")");
             if (this.props.callWhenNavigationStateChange) {
               return this.props.callWhenNavigationStateChange(event);
             }
+            console.log("VistaWebComponent:: NO DEFINIT this.props.callWhenNavigationStateChange: " + event.url);
             return true;
           }}
           onSS
