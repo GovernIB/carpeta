@@ -7,6 +7,7 @@
  */
 import React from 'react';
 import {StyleSheet, ScrollView, Text} from 'react-native';
+import * as Linking from "expo-linking";
 import VistaWebComponent from './components/VistaWebComponent';
 import Persistencia from './Persistencia';
 import { sessionStorageRN } from "./SessionStorageClass";
