@@ -29,7 +29,10 @@
       "bundleIdentifier": "es.caib.carpeta.carpetaapp",
       "buildNumber": "1.0.6",
       "infoPlist": {
-        "CFBundleLocalizations" : ["ca", "es"],
+        "CFBundleLocalizations": [
+          "ca",
+          "es"
+        ],
         "CFBundleDevelopmentRegion": "es"
       }
     },
@@ -44,6 +47,11 @@
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "e1d384d1-b819-4017-a131-52c6855214a5"
+      }
     }
   }
 }
