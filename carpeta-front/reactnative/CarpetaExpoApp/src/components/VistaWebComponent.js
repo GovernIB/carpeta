@@ -64,7 +64,6 @@ class VistaWebComponent extends Component {
             console.log("VistaWebComponent:: NO DEFINIT this.props.callWhenNavigationStateChange: " + event.url);
             return true;
           }}
-          onSS
           source={{ uri: url }}
           style={styles.classWebView}
         />
