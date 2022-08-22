@@ -64,6 +64,7 @@ class LoginIBCallBackBrowser extends React.Component {
   // METODE REPETIT A CarpetaWeb.js
   callWhenNavigationStateChange(event) {
     var url = event.url;
+    console.log('');
     console.log('LoginIBCallBackBrowser::Check URL => ]' + url + '[');
 
     if (url.includes('/public/doLogin?')) {
@@ -93,8 +94,25 @@ class LoginIBCallBackBrowser extends React.Component {
       console.log("LoginIBCallBackBrowser::URL interna : " + url);
       return true;
     } else {
-      console.log("LoginIBCallBackBrowser::Obrint URL externa : " + url);
-      Linking.openURL(url);
+      
+      if(!this.lastExternal || this.lastExternal != url) {      
+        console.log("LoginIBCallBackBrowser::Obrint URL externa : " + url);
+        Linking.canOpenURL(url)
+		.then((supported) => {
+			if (supported) {
+				return Linking.openURL(url)
+					.catch(() => null);
+			}
+		});
+        this.lastExternal = url;
+      } else {
+         console.log("LoginIBCallBackBrowser::NO Obrim URL externa: REPETIDA !!!! ");
+      }
+
+
+      //Linking.openURL(url);
+
+
       return false;
     }
    
@@ -104,6 +122,10 @@ class LoginIBCallBackBrowser extends React.Component {
 
 
   render() {
+
+    console.log("LoginIBCallBackBrowser::  ENTRA A RENDER ... ");
+
+    
     if (!this.state.loadedData) {
       return <Text>Loading data ...</Text>;
     }
