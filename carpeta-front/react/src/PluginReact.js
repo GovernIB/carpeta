@@ -4,6 +4,8 @@ import i18n from 'i18next';
 import ExpirarSessio from "./ExpirarSessio";
 import {withRouter} from "react-router";
 import PropTypes from 'prop-types';
+import {decode as base64_decode, encode as base64_encode} from 'base-64';
+
 
 /**
  * @author jpernia
@@ -56,10 +58,12 @@ class PluginReact extends Component {
 
         const pluginContext = this.props.pluginContext;
 
-        // console.log('PLUGIN REACT  Entra a reloadReactPlugin()');
-
         var urlBase = sessionStorage.getItem('contextPath');
-        var url = urlBase + "/pluginfront/showreactplugin/" + pluginContext + "/" + i18n.language;
+        console.log('PLUGIN REACT  Entra a reloadReactPlugin() urlBase = ' + urlBase);
+
+        var urlBaseEncoded =  base64_encode(urlBase);
+        
+        var url = urlBase + "/pluginfront/showreactplugin/" + pluginContext + "/" + urlBaseEncoded + "/" + i18n.language;
 
         // Per provocar el render !!!!
         this.setState({loaded: true, pluginContext: pluginContext });

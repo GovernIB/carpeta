@@ -19,6 +19,7 @@
     "axios": "^0.21.4",
     "babel-loader": "^8.1.0",
     "babel-preset-env": "^1.7.0",
+    "base-64": "^1.0.0",
     "bootstrap": "^5.1.1",
     "css-loader": "^4.2.0",
     "file-loader": "^6.0.0",

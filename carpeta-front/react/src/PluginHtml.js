@@ -98,11 +98,15 @@ class PluginHtml extends Component {
         var codiPlugin;
 
         var urlBase = sessionStorage.getItem('contextPath');
+
+        var urlBaseEncoded =  base64_encode(urlBase);
+
+
         var url;
         if (pluginParameter) {
-           url = urlBase + "/pluginfront/showplugin/" + pluginContext + "/" + i18n.language + "/p/" + pluginParameter;
+           url = urlBase + "/pluginfront/showplugin/" + pluginContext + "/" + urlBaseEncoded + "/" + i18n.language + "/p/" + pluginParameter;
         } else {
-           url = urlBase + "/pluginfront/showplugin/" + pluginContext + "/" + i18n.language;
+           url = urlBase + "/pluginfront/showplugin/" + pluginContext + "/" + urlBaseEncoded + "/" + i18n.language;
         }
 
         var xhr = new XMLHttpRequest();

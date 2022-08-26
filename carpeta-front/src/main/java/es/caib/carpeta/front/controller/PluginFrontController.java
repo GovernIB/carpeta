@@ -92,8 +92,9 @@ public class PluginFrontController extends CommonFrontController {
      * }
      */
 
-    @RequestMapping(value = "/showplugin/{pluginContext}/{idioma}", method = RequestMethod.POST)
+    @RequestMapping(value = "/showplugin/{pluginContext}/{urlbase}/{idioma}", method = RequestMethod.POST)
     public ModelAndView showNormalPlugin(@PathVariable("pluginContext") String pluginContext,
+            @PathVariable("urlbase") String urlbaseEncoded,
             @PathVariable("idioma") String idioma, HttpServletRequest request,
             HttpServletResponse response, Authentication authentication)
             throws Exception, I18NException {
@@ -101,31 +102,35 @@ public class PluginFrontController extends CommonFrontController {
         Long pluginID = utilsEjb.getFrontPluginIDByContext(pluginContext);
         final boolean isreact = false;
         final String pluginParameter = null;
+        final String urlbase = new String(Base64.getDecoder().decode(urlbaseEncoded));
         return showPlugin(pluginID, idioma, request, response, authentication, isreact,
-                pluginParameter);
+                pluginParameter, urlbase);
     }
 
     @RequestMapping(
-            value = "/showreactplugin/{pluginContext}/{idioma}",
+            value = "/showreactplugin/{pluginContext}/{urlbase}/{idioma}",
             method = RequestMethod.POST)
     public ModelAndView showReactPlugin(@PathVariable("pluginContext") String pluginContext,
+            @PathVariable("urlbase") String urlbaseEncoded,
             @PathVariable("idioma") String idioma, HttpServletRequest request,
             HttpServletResponse response, Authentication authentication)
             throws Exception, I18NException {
         final boolean isreact = true;
         final String pluginParameter = null;
-        Long pluginID = utilsEjb.getFrontPluginIDByContext(pluginContext);
+        final Long pluginID = utilsEjb.getFrontPluginIDByContext(pluginContext);
+        final String urlbase = new String(Base64.getDecoder().decode(urlbaseEncoded));
 
         return showPlugin(pluginID, idioma, request, response, authentication, isreact,
-                pluginParameter);
+                pluginParameter, urlbase);
     }
 
     @RequestMapping(
-            value = "/showplugin/{pluginContext}/{idioma}/p/**", // {pluginParameter}
+            value = "/showplugin/{pluginContext}/{urlbase}/{idioma}/p/**", // {pluginParameter}
             method = RequestMethod.POST)
     public ModelAndView showNormalPluginParameter(
             @PathVariable("pluginContext") String pluginContext,
-            @PathVariable("idioma") String idioma,
+            @PathVariable("urlbase") String urlbaseEncoded,
+            @PathVariable("idioma") String idioma,            
             //@PathVariable("pluginParameter") String pluginParameter,
             HttpServletRequest request,
             HttpServletResponse response, Authentication authentication)
@@ -144,8 +149,9 @@ public class PluginFrontController extends CommonFrontController {
 
         Long pluginID = utilsEjb.getFrontPluginIDByContext(pluginContext);
         final boolean isreact = false;
+        final String urlbase = new String(Base64.getDecoder().decode(urlbaseEncoded));
         return showPlugin(pluginID, idioma, request, response, authentication, isreact,
-                pluginParameter);
+                pluginParameter, urlbase);
     }
     
     
@@ -155,10 +161,11 @@ public class PluginFrontController extends CommonFrontController {
     
 
     @RequestMapping(
-            value = "/showreactplugin/{pluginContext}/{idioma}/p/**",
+            value = "/showreactplugin/{pluginContext}/{urlbase}/{idioma}/p/**",
             method = RequestMethod.POST)
     public ModelAndView showReactPluginParameter(
             @PathVariable("pluginContext") String pluginContext,
+            @PathVariable("urlbase") String urlbaseEncoded,
             @PathVariable("idioma") String idioma,
             //@PathVariable("pluginParameter") String pluginParameter,
             HttpServletRequest request,
@@ -179,10 +186,11 @@ public class PluginFrontController extends CommonFrontController {
         log.info("PLUGIN REACT REST OF URL(pluginParameter) => " + pluginParameter );
         
 
-        Long pluginID = utilsEjb.getFrontPluginIDByContext(pluginContext);
+        final Long pluginID = utilsEjb.getFrontPluginIDByContext(pluginContext);
+        final String urlbase = new String(Base64.getDecoder().decode(urlbaseEncoded));
 
         return showPlugin(pluginID, idioma, request, response, authentication, isreact,
-                pluginParameter);
+                pluginParameter, urlbase);
     }
 
     /**
@@ -200,7 +208,7 @@ public class PluginFrontController extends CommonFrontController {
      */
     protected ModelAndView showPlugin(Long pluginID, String idioma, HttpServletRequest request,
             HttpServletResponse response, Authentication authentication, boolean isreact,
-            String pluginParameter) throws Exception, I18NException {
+            String pluginParameter, String urlBase) throws Exception, I18NException {
 
         long temps = System.currentTimeMillis();
         try {
@@ -220,14 +228,18 @@ public class PluginFrontController extends CommonFrontController {
             }
 
             // TODO canviar, mirar javascript window.location.href
-            String urlBase = request.getScheme() + "://" + request.getServerName() + ":"
-                    + request.getServerPort() + request.getContextPath();
-            String baseFront = "";
-            baseFront = urlBase;
+            //String urlBase = request.getScheme() + "://" + request.getServerName() + ":"
+            //        + request.getServerPort() + request.getContextPath();
+
 
             String urlToShowPluginPage = startPublicSignatureProcess(request, response, pluginID,
-                    administrationID, baseFront, usuarioClave, pluginParameter);
+                    administrationID, urlBase, usuarioClave, pluginParameter);
             ModelAndView mav = new ModelAndView(new RedirectView(urlToShowPluginPage));
+
+            log.info("\n\n\n *+++++++++++++++++++++++++++++++++*"
+                    + "\n URL APACHE: " + urlBase 
+                    + "\n urlToShowPluginPage: " + urlToShowPluginPage 
+                    + "\n\n\n");
 
             Locale loc = new Locale(idioma);
             LocaleContextHolder.setLocale(loc);
@@ -252,19 +264,19 @@ public class PluginFrontController extends CommonFrontController {
              */
 
             if (isreact) {
-                mav = new ModelAndView(new RedirectView(urlToShowPluginPage));
+                mav = new ModelAndView(new RedirectView(urlToShowPluginPage, true));
             } else {
-
-//                log.info("XXXXXXXXXXXXXXXX   PLUGIN HTML 11111111");
-
-                final String view = "plugin_contenidor"; // =>
-                                                         // \WEB-INF\views\pages\plugin_contenidor.jsp
+                
+                
+                
+/*
+                // => \WEB-INF\views\pages\plugin_contenidor.jsp
+                final String view = "plugin_contenidor"; 
 
                 mav = new ModelAndView(view);
-                // mav.addObject("signaturesSetID", signaturesSetID);
-                mav.addObject("urlToShowPluginPage", urlToShowPluginPage);
 
-//                log.info("XXXXXXXXXXXXXXXX   PLUGIN HTML 22222222222");
+                mav.addObject("urlToShowPluginPage", urlToShowPluginPage);
+*/
             }
 
             log.info(" FINAL de showPlugin OK !!!!!!!!!!!");
@@ -310,11 +322,11 @@ public class PluginFrontController extends CommonFrontController {
         String administrationIDEncriptat = HibernateFileUtil.encryptString(administrationID);
 
         if (pluginParameter == null) {
-            urlToShowPluginPage = baseFront + context + "/showplugin/" + pluginID + "/"
+            urlToShowPluginPage =  context + "/showplugin/" + pluginID + "/"
                     + response.encodeURL(administrationIDEncriptat) + "/"
                     + Base64.getUrlEncoder().encodeToString(baseFront.getBytes());
         } else {
-            urlToShowPluginPage = baseFront + context + "/showplugin/" + pluginID + "/"
+            urlToShowPluginPage =  context + "/showplugin/" + pluginID + "/"
                     + response.encodeURL(administrationIDEncriptat) + "/"
                     + Base64.getUrlEncoder().encodeToString(baseFront.getBytes()) + "/p/"
                     + pluginParameter;
