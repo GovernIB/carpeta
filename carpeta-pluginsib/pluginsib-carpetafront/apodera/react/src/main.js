@@ -1,3 +1,8 @@
+/**
+ * @author anadal
+ * @create date 2022-08-29 09:08:12
+ * @modify date 2022-08-29 09:08:12
+ */
 import React from "react";
 import ReactDOM from "react-dom";
 import Apodera from "./Apodera";

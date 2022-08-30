@@ -2,7 +2,6 @@ package org.fundaciobit.pluginsib.carpetafront.apodera;
 
 import java.net.URL;
 
-
 import javax.xml.bind.JAXBElement;
 import javax.xml.ws.BindingProvider;
 
@@ -12,7 +11,32 @@ import org.apache.cxf.interceptor.LoggingInInterceptor;
 import org.apache.cxf.interceptor.LoggingOutInterceptor;
 import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
-import org.fundaciobit.pluginsib.carpetafront.apodera.api.*;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.ConsultaApoderamientosResponse;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.ConsultaAvanzadaPortType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.ConsultaAvanzadaService;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosApoderadoCompletoType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosApoderadoType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosApoderamientoType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosAuditoriaType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosConsultaApoderamientoType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosConsultaType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosPoderdanteCompletoType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.DatosPoderdanteType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.ErrorType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.ObjectFactory;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.Organismo;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.Organismo2;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.OrganismoType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.OrganismoType2;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.PersonaFisicaType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.PersonaJuridicaType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.PeticionConsulta;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.Procedimiento2;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.ProcedimientoType2;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.RespuestaConsulta;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.TipoApoderamientoCompletoType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.TipoApoderamientoType;
+import org.fundaciobit.pluginsib.carpetafront.apodera.api.TramiteType2;
 import org.fundaciobit.pluginsib.utils.cxf.ClientHandler;
 import org.fundaciobit.pluginsib.utils.cxf.ClientHandlerCertificate;
 
@@ -46,9 +70,12 @@ import java.util.Properties;
  * @author jpernia
  * @author anadal
  */
+@SuppressWarnings("deprecation")
 public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin {
 
     public static final String APODERA_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "apodera.";
+
+    protected static final SimpleDateFormat SDF = new SimpleDateFormat("yyyyMMdd");
 
     /**
      *
@@ -102,8 +129,8 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
 
     @Override
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
-            HttpServletRequest request, UserData userData, String administrationIDEncriptat,
-            String parameter, IListenerLogCarpeta logCarpeta) throws Exception {
+            HttpServletRequest request, UserData userData, String administrationIDEncriptat, String parameter,
+            IListenerLogCarpeta logCarpeta) throws Exception {
 
         registerUserData(userData);
 
@@ -119,10 +146,9 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
     }
 
     @Override
-    public void requestCarpetaFront(String absolutePluginRequestPath,
-            String relativePluginRequestPath, String query, HttpServletRequest request,
-            HttpServletResponse response, UserData userData, String administrationEncriptedID,
-            Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
+    public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
 
         log.info("ApoderaCarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
         log.info("ApoderaCarpetaFrontPlugin::requestCarpetaFront => administrationID: "
@@ -132,24 +158,23 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
 
         if (query.startsWith(INDEX_HTML_PAGE)) {
 
-            index(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                    userData, administrationEncriptedID, locale, isGet);
+            index(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
 
         } else if (query.startsWith(REACT_JS_PAGE)) {
 
-            reactjs(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                    userData, administrationEncriptedID, locale, isGet);
+            reactjs(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
 
         } else if (query.startsWith(SERVEI_REST_SERVICE)) {
 
-            consultaApoderamentsRestService(absolutePluginRequestPath, relativePluginRequestPath,
-                    query, request, response, userData, administrationEncriptedID, locale, isGet);
+            consultaApoderamentsRestService(absolutePluginRequestPath, relativePluginRequestPath, query, request,
+                    response, userData, administrationEncriptedID, locale, isGet);
 
         } else {
 
-            super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query,
-                    request, response, userData, administrationEncriptedID, locale, isGet,
-                    logCarpeta);
+            super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
+                    userData, administrationEncriptedID, locale, isGet, logCarpeta);
         }
 
     }
@@ -178,9 +203,9 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
 
     protected static final String INDEX_HTML_PAGE = "apodera_index.html";
 
-    public void index(String absolutePluginRequestPath, String relativePluginRequestPath,
-            String query, HttpServletRequest request, HttpServletResponse response,
-            UserData userData, String administrationEncriptedID, Locale locale, boolean isGet) {
+    public void index(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet) {
 
         try {
 
@@ -188,8 +213,8 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
 
             String resource = "/webpage/apodera_index.html";
 
-            response.setHeader("Content-Disposition", "inline;filename=\""
-                    + java.net.URLEncoder.encode(INDEX_HTML_PAGE, "UTF-8") + "\"");
+            response.setHeader("Content-Disposition",
+                    "inline;filename=\"" + java.net.URLEncoder.encode(INDEX_HTML_PAGE, "UTF-8") + "\"");
 
             response.setCharacterEncoding("utf-8");
 
@@ -249,47 +274,59 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
 
     protected static final String APODERA_RES_BUNDLE = "carpetafrontapodera";
 
-    public void consultaApoderamentsRestService(String absolutePluginRequestPath,
-            String relativePluginRequestPath, String query, HttpServletRequest request,
-            HttpServletResponse response, UserData userData, String administrationEncriptedID,
-            Locale locale, boolean isGet) {
+    public void consultaApoderamentsRestService(String absolutePluginRequestPath, String relativePluginRequestPath,
+            String query, HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet) {
 
         try {
+            String lang = request.getParameter("lang");
+
+            if (lang != null) {
+                locale = new Locale(lang);
+            }
 
             // CIUTADÀ PODERDANT
             DatosPoderdanteCompletoType poderdant = new DatosPoderdanteCompletoType();
 
-            String nifPoderdante = userData.getAdministrationID();
+            String nif = userData.getAdministrationID();
             boolean isEmpresa = userData.isBusiness();
 
-            if(!isEmpresa) {
+            if (!isEmpresa) {
                 PersonaFisicaType persona = new PersonaFisicaType();
                 persona.setNombre(userData.getName());
                 persona.setApellido1(userData.getSurname1());
                 persona.setApellido2(userData.getSurname2());
                 persona.setNifNie(userData.getAdministrationID());
                 poderdant.setPersonaFisica(persona);
-            } else{
+            } else {
                 PersonaJuridicaType empresa = new PersonaJuridicaType();
                 empresa.setRazonSocial(userData.getName());
                 empresa.setNif(userData.getAdministrationID());
                 poderdant.setPersonaJuridica(empresa);
             }
 
-            List<DatosApoderamientoType> apoderaments = consultaInterna(nifPoderdante, null)
-                    .getListaApoderamientos();
+            List<DatosApoderamientoType> apoderaments = new ArrayList<DatosApoderamientoType>();
 
-            int apoderamentsTotals;
+            int totalComPoderdant = 0;
+            {
+                List<DatosApoderamientoType> comPoderdant = consultaInterna(nif, null).getListaApoderamientos();
+                if (comPoderdant != null) {
+                    totalComPoderdant = comPoderdant.size();
+                    apoderaments.addAll(comPoderdant);
+                }
+            }
+            int totalComApoderat = 0;
+            {
+                List<DatosApoderamientoType> comApoderat = consultaInterna(null, nif).getListaApoderamientos();
+                if (comApoderat != null) {
+                    totalComApoderat = comApoderat.size();
+                    apoderaments.addAll(comApoderat);
+                }
+            }
+
             ArrayList<Apoderamiento> apos = new ArrayList<Apoderamiento>();
 
-            if (apoderaments == null) {
-                apoderaments = new ArrayList<DatosApoderamientoType>();
-                apoderamentsTotals = 0;
-
-            } else {
-
-                apoderamentsTotals = apoderaments.size();
-
+            {
 
                 // LLISTA APODERAMENTS
                 for (DatosApoderamientoType apoderament : apoderaments) {
@@ -297,82 +334,111 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
                     Apoderamiento apo = new Apoderamiento();
 
                     // TIPUS APODERAMENT
-                    /*
-                    TipoApoderamiento ta = TipoApoderamiento.getTipoApoderamiento(
-                            apoderament.getTipoApoderamiento().getTipoApod(),
-                            apoderament.getTipoApoderamiento().getSubTipoApod());
+                    TipoApoderamientoCompletoType tipusApoderament = apoderament.getTipoApoderamiento();
+                    {
+                        final String tipus = tipusApoderament.getTipoApod();
+                        final String subtipus = tipusApoderament.getSubTipoApod();
 
-                    String ts = "Tipo:" + apoderament.getTipoApoderamiento().getTipoApod() + " | Subtipo:"
-                            + apoderament.getTipoApoderamiento().getSubTipoApod();
-                            */
+                        apo.setTipus(tipus);
 
-//                    if (ta == null) {
-////                        apo.setTipus(getTraduccio(APODERA_RES_BUNDLE,"tipo.desconegut", locale) + " (" + ts + ")");
-//                        apo.setTipus(getTraduccio(APODERA_RES_BUNDLE,"tipo.desconegut", locale));
-//                    } else {
-////                        apo.setTipus(ta.getDescripcion() + " (" + ts + ")");
-//                        apo.setTipus(apoderament.getTipoApoderamiento().getTipoApod());
-//                    }
+                        TipoApoderamiento ta = TipoApoderamiento.getTipoApoderamiento(tipus, subtipus);
 
-                    apo.setTipus(apoderament.getTipoApoderamiento().getTipoApod());
+                        if (ta == null) {
+                            log.error("\n\n\n NO S'HA TROBAT TIPUS APODERAMENT TIPUS[" + tipus + "] - SUBTIPUS["
+                                    + subtipus + "]\n\n\n");
+                            apo.setSubtipus(getTraduccio(APODERA_RES_BUNDLE, "apoderatipo.desconegut", locale));
+                        } else {
+                            apo.setSubtipus(
+                                    getTraduccio(APODERA_RES_BUNDLE, "apoderatipo." + tipus + subtipus, locale));
+                        }
 
-
-                    // SUBTIPUS
-                    apo.setSubtipus(apoderament.getTipoApoderamiento().getSubTipoApod());
+                    }
 
                     // ESTAT
-                    switch (apoderament.getEstado().substring(0,5)) {
+                    switch (apoderament.getEstado().substring(0, 5)) {
                         case "Sin a":
                             apo.setEstat("1");
-                            break;
+                        break;
                         case "Autor":
                             apo.setEstat("2");
-                            break;
+                        break;
                         case "Revoc":
                             apo.setEstat("3");
-                            break;
+                        break;
                         case "Renun":
                             apo.setEstat("4");
-                            break;
+                        break;
                         case "Caduc":
                             apo.setEstat("5");
-                            break;
+                        break;
                         case "Cance":
                             apo.setEstat("6");
-                            break;
+                        break;
                         default:
                             apo.setEstat("0");
                     }
 
-
                     // NOM I DOCUMENT APODERAT
-                    DatosApoderadoCompletoType apoCompleto = apoderament.getDatosApoderado();
-                    if (apoCompleto.getPersonaFisica() != null) {
-                        PersonaFisicaType pf = apoCompleto.getPersonaFisica();
-                        apo.setApoderado(pf.getNombre() + " " + pf.getApellido1() + " (" + pf.getNifNie() + ")"
-                                + " - " + getTraduccio(APODERA_RES_BUNDLE,"persona.fisica", locale));
-                    }
-                    if (apoCompleto.getPersonaJuridica() != null) {
-                        PersonaJuridicaType pf = apoCompleto.getPersonaJuridica();
-                        apo.setApoderado(pf.getRazonSocial() + " (" + pf.getNif() + ")" + " - " +
-                                getTraduccio(APODERA_RES_BUNDLE,"persona.juridica", locale));
+                    {
+                        DatosApoderadoCompletoType apoCompleto = apoderament.getDatosApoderado();
+                        if (apoCompleto.getPersonaFisica() != null) {
+                            PersonaFisicaType pf = apoCompleto.getPersonaFisica();
+                            apo.setApoderado(pf.getNombre() + " " + pf.getApellido1() + " (" + pf.getNifNie() + ")"
+                                    + " - " + getTraduccio(APODERA_RES_BUNDLE, "persona.fisica", locale));
+                        } else {
+                            if (apoCompleto.getPersonaJuridica() != null) {
+                                PersonaJuridicaType pf = apoCompleto.getPersonaJuridica();
+                                apo.setApoderado(pf.getRazonSocial() + " (" + pf.getNif() + ")" + " - "
+                                        + getTraduccio(APODERA_RES_BUNDLE, "persona.juridica", locale));
+                            }
+                        }
                     }
 
+                    // NOM I DOCUMENT PODERDANTE
+                    {
+                        DatosPoderdanteCompletoType poderdanteCompleto = apoderament.getDatosPoderdante();
+                        if (poderdanteCompleto.getPersonaFisica() != null) {
+                            PersonaFisicaType pf = poderdanteCompleto.getPersonaFisica();
+                            apo.setPoderdante(pf.getNombre() + " " + pf.getApellido1() + " (" + pf.getNifNie() + ")"
+                                    + " - " + getTraduccio(APODERA_RES_BUNDLE, "persona.fisica", locale));
+                        } else {
+                            if (poderdanteCompleto.getPersonaJuridica() != null) {
+                                PersonaJuridicaType pf = poderdanteCompleto.getPersonaJuridica();
+                                apo.setPoderdante(pf.getRazonSocial() + " (" + pf.getNif() + ")" + " - "
+                                        + getTraduccio(APODERA_RES_BUNDLE, "persona.juridica", locale));
+                            }
+                        }
+                    }
 
                     // VIGÈNCIA APODERAMENT
                     if (apoderament.getPeriodoVigencia() != null) {
-                        apo.setVigencia(apoderament.getPeriodoVigencia().getFechaInicio().substring(0,10) + " - "
-                                + apoderament.getPeriodoVigencia().getFechaFin().substring(0,10));
+                        apo.setVigencia(apoderament.getPeriodoVigencia().getFechaInicio().substring(0, 10) + " - "
+                                + apoderament.getPeriodoVigencia().getFechaFin().substring(0, 10));
+                    }
+
+                    // TRAMITS
+                    if (tipusApoderament.getListaTramites() != null) {
+
+                        List<TramiteType2> tramiteList = tipusApoderament.getListaTramites().getValue().getTramite();
+
+                        List<String> tramits = new ArrayList<String>();
+
+                        for (TramiteType2 tt : tramiteList) {
+                            if (tt.getCodTramite() == null) {
+                                tramits.add(tt.getDescTramite());
+                            } else {
+                                tramits.add(tt.getCodTramite() + " - " + tt.getDescTramite());
+                            }
+                        }
+                        apo.setTramits(tramits);
                     }
 
                     // PROCEDIMENT
-                    if(apoderament.getTipoApoderamiento().getListaProcedimientos() != null) {
-                        List<ProcedimientoType> procs = new ArrayList<ProcedimientoType>();
-                        Procedimiento2 procediments = apoderament.getTipoApoderamiento().getListaProcedimientos().getValue();
+                    if (tipusApoderament.getListaProcedimientos() != null) {
+                        List<String> procs = new ArrayList<String>();
+                        Procedimiento2 procediments = tipusApoderament.getListaProcedimientos().getValue();
                         for (ProcedimientoType2 procediment : procediments.getProcedimiento()) {
-                            ProcedimientoType procedimiento = new ProcedimientoType();
-                            procedimiento.setCodProcedimiento(procediment.getCodProcedimiento());
-                            procs.add(procedimiento);
+                            procs.add(procediment.getCodProcedimiento() + ": " + procediment.getNombreProcedimiento());
                         }
                         apo.setProcediments(procs);
                     } else {
@@ -380,25 +446,18 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
                     }
 
                     // ORGANISMES
-                    if(apoderament.getTipoApoderamiento().getListaOrganismos() != null) {
-                        List<OrganismoType> orgs = new ArrayList<OrganismoType>();
-                        Organismo2 organismes = apoderament.getTipoApoderamiento().getListaOrganismos().getValue();
+                    if (tipusApoderament.getListaOrganismos() != null) {
+                        List<String> orgs = new ArrayList<String>();
+                        Organismo2 organismes = tipusApoderament.getListaOrganismos().getValue();
                         for (OrganismoType2 organisme : organismes.getOrganismo()) {
-                            OrganismoType organismo = new OrganismoType();
-                            if(organisme.getCodOrganismo().equals("Todas")){
-                                organismo.setCodOrganismo(null);
-                                organismo.setDenomOrganismo(getTraduccio(APODERA_RES_BUNDLE,"organisme.totes", locale));
-                                orgs.add(organismo);
+                            if (organisme.getCodOrganismo().equals("Todas")) {
+                                orgs.add(getTraduccio(APODERA_RES_BUNDLE, "organisme.totes", locale));
                                 break;
-                            }else{
-                                organismo.setCodOrganismo(organisme.getCodOrganismo());
-                                organismo.setDenomOrganismo(organisme.getDenomOrganismo());
-                                orgs.add(organismo);
+                            } else {
+                                orgs.add(organisme.getCodOrganismo() + ": " + organisme.getDenomOrganismo());
                             }
                         }
                         apo.setOrganismes(orgs);
-                    } else {
-                        apo.setOrganismes(null);
                     }
 
                     // Afegim apoderament a la llista
@@ -415,14 +474,16 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
                 request.getSession().setAttribute(SESSIO_CACHE_APODERAMENTS_MAP_APODERA, apoderamentsMap);
             }
 
-
             Map<String, Object> infoApoderaments = new HashMap<String, Object>();
 
-            String urlApodera = getPropertyRequired(APODERA_PROPERTY_BASE + "endpoint");
+            String urlApodera = getPropertyRequired(APODERA_PROPERTY_BASE + "url");
 
             infoApoderaments.put("poderdant", poderdant);
             infoApoderaments.put("apoderaments", apos);
-            infoApoderaments.put("totalRegistres", apoderamentsTotals);
+
+            infoApoderaments.put("totalComPoderdant", totalComPoderdant);
+            infoApoderaments.put("totalComApoderat", totalComApoderat);
+
             infoApoderaments.put("urlApodera", urlApodera);
 
             Gson gson = new Gson();
@@ -452,7 +513,8 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
 
     }
 
-    protected ConsultaApoderamientosResponse consultaInterna(String nifPoderdante, String nifApoderado) throws Exception {
+    protected ConsultaApoderamientosResponse consultaInterna(String nifPoderdante, String nifApoderado)
+            throws Exception {
 
         String codAplicacion = getPropertyRequired(APODERA_PROPERTY_BASE + "codiApp");
 
@@ -466,16 +528,8 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
         String organisme_dir3 = getPropertyRequired(APODERA_PROPERTY_BASE + "organisme.dir3");
         String organisme_denominacio = getProperty(APODERA_PROPERTY_BASE + "organisme.denominacio");
 
-        /*
-         * ApoderaCarpetaFrontPlugin api = new ApoderaCarpetaFrontPlugin(endPoint,
-         * auth_ks_Path, auth_ks_Type, auth_ks_Password, auth_ks_Alias,
-         * auth_ks_Cert_Password);
-         */
-
         DatosAuditoriaType datosAuditoriaType = new DatosAuditoriaType();
         datosAuditoriaType.setCodAplicacion(codAplicacion);
-
-        SimpleDateFormat SDF = new SimpleDateFormat("yyyyMMdd");
 
         datosAuditoriaType.setTimestamp(Long.parseLong(SDF.format(new Date())));
 
@@ -503,9 +557,9 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
         Organismo organismo = new Organismo();
         organismo.getOrganismo().add(organismoType);
         ObjectFactory factory = new ObjectFactory();
-        JAXBElement<Organismo> jaxbelementOrganismo = factory
-                .createTipoApoderamientoTypeListaOrganismos(organismo);
+        JAXBElement<Organismo> jaxbelementOrganismo = factory.createTipoApoderamientoTypeListaOrganismos(organismo);
         tipoApoderamiento.setListaOrganismos(jaxbelementOrganismo);
+       
 
         DatosConsultaApoderamientoType dcat = new DatosConsultaApoderamientoType();
 
@@ -516,6 +570,7 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
         DatosConsultaType datosConsultaType = new DatosConsultaType();
         datosConsultaType.setTipoConsulta(false); // false => simple 0 || true => completa 1
         datosConsultaType.setDatosConsultaApoderamiento(dcat);
+
 
         PeticionConsulta peticio = new PeticionConsulta();
         peticio.setDatosAuditoriaType(datosAuditoriaType);
@@ -539,64 +594,11 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
                 log.info("errorType::CodError => " + errorType.getCodError());
                 log.info("errorType::DesError => " + errorType.getDesError());
 
-                throw new Exception("Error cridant a la consulta de apoderaments: "
-                        + errorType.getDesError() + " (CODI: " + errorType.getCodError() + ")");
+                throw new Exception("Error cridant a la consulta de apoderaments: " + errorType.getDesError()
+                        + " (CODI: " + errorType.getCodError() + ")");
             }
 
         }
-
-//        List<DatosApoderamientoType> apoderamientos = response.getListaApoderamientos();
-//
-//        if (apoderamientos.size() == 0) {
-//
-//            log.error("No hi ha apoderaments per aquest usuari ...");
-//
-//        } else {
-//
-//            int i = 1;
-//            for (DatosApoderamientoType d : apoderamientos) {
-//
-//                log.info("");
-//                log.info(i + ".- Common Info=>  Estat:" + d.getEstado() + "\tcodiApoderaEXT:"
-//                        + d.getCodApoderamientoEXT() + "\tcodiApoderaINT:"
-//                        + d.getCodApoderamientoINT());
-//
-//                TipoApoderamiento ta = TipoApoderamiento.getTipoApoderamiento(
-//                        d.getTipoApoderamiento().getTipoApod(),
-//                        d.getTipoApoderamiento().getSubTipoApod());
-//
-//                String ts = "Tipo:" + d.getTipoApoderamiento().getTipoApod() + " | Subtipo:"
-//                        + d.getTipoApoderamiento().getSubTipoApod();
-//
-//                if (ta == null) {
-//                    log.info(i + ".- Tipo Apoderamiento => DESCONEGUT (" + ts + ")");
-//                } else {
-//                    log.info(i + ".- Tipo Apoderamiento => " + ta.getDescripcion() + " (" + ts
-//                            + ")");
-//                }
-//
-//                DatosApoderadoCompletoType apo = d.getDatosApoderado();
-//                if (apo.getPersonaFisica() != null) {
-//                    PersonaFisicaType pf = apo.getPersonaFisica();
-//                    log.info(i + ".- Apoderat Perso. Fisica => " + pf.getNombre());
-//
-//                }
-//                if (apo.getPersonaJuridica() != null) {
-//                    PersonaJuridicaType pf = apo.getPersonaJuridica();
-//                    log.info(i + ".- Apoderat Perso. Juridica => " + pf.getRazonSocial());
-//
-//                }
-//
-//                DatosPoderdanteCompletoType poderdante = d.getDatosPoderdante();
-//
-//                if (d.getPeriodoVigencia() != null) {
-//                    log.info(i + ".- Vigencia => " + d.getPeriodoVigencia().getFechaInicio() + " - "
-//                            + d.getPeriodoVigencia().getFechaFin());
-//                }
-//
-//                i++;
-//            }
-//        }
 
         return response;
     }
@@ -609,16 +611,16 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
 
     protected static final String REACT_JS_PAGE = "apodera_reactjs_main.js";
 
-    public void reactjs(String absolutePluginRequestPath, String relativePluginRequestPath,
-            String query, HttpServletRequest request, HttpServletResponse response,
-            UserData userData, String administrationEncriptedID, Locale locale, boolean isGet) {
+    public void reactjs(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet) {
 
         try {
 
             response.setContentType("application/javascript");
 
-            response.setHeader("Content-Disposition", "inline;filename=\""
-                    + java.net.URLEncoder.encode(REACT_JS_PAGE, "UTF-8") + "\"");
+            response.setHeader("Content-Disposition",
+                    "inline;filename=\"" + java.net.URLEncoder.encode(REACT_JS_PAGE, "UTF-8") + "\"");
 
             String resource = "/webpage/apodera_reactjs_main.js";
 
@@ -651,12 +653,9 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
         String endPoint = getPropertyRequired(APODERA_PROPERTY_BASE + "endpoint");
         String auth_ks_Path = getPropertyRequired(APODERA_PROPERTY_BASE + "authorization.ks.path");
         String auth_ks_Type = getPropertyRequired(APODERA_PROPERTY_BASE + "authorization.ks.type");
-        String auth_ks_Password = getPropertyRequired(
-                APODERA_PROPERTY_BASE + "authorization.ks.password");
-        String auth_ks_Alias = getPropertyRequired(
-                APODERA_PROPERTY_BASE + "authorization.ks.cert.alias");
-        String auth_ks_Cert_Password = getPropertyRequired(
-                APODERA_PROPERTY_BASE + "authorization.ks.cert.password");
+        String auth_ks_Password = getPropertyRequired(APODERA_PROPERTY_BASE + "authorization.ks.password");
+        String auth_ks_Alias = getPropertyRequired(APODERA_PROPERTY_BASE + "authorization.ks.cert.alias");
+        String auth_ks_Cert_Password = getPropertyRequired(APODERA_PROPERTY_BASE + "authorization.ks.cert.password");
 
         // XYZ ZZZ TODO
         URL wsdlUrl = new URL(endPoint + "?wsdl");
@@ -666,8 +665,8 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
         Map<String, Object> reqContext = ((BindingProvider) api).getRequestContext();
         reqContext.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, endPoint);
 
-        ClientHandler ch = new ClientHandlerCertificate(auth_ks_Path, auth_ks_Type,
-                auth_ks_Password, auth_ks_Alias, auth_ks_Cert_Password);
+        ClientHandler ch = new ClientHandlerCertificate(auth_ks_Path, auth_ks_Type, auth_ks_Password, auth_ks_Alias,
+                auth_ks_Cert_Password);
 
         ch.addSecureHeader(api);
 

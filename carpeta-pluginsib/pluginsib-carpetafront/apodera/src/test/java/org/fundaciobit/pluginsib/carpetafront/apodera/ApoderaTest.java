@@ -28,14 +28,15 @@ public class ApoderaTest {
             String nifPoderdante = prop.getProperty("nif.poderdante");
             String nifApoderado = prop.getProperty("nif.apoderado");
 
-            ApoderaCarpetaFrontPlugin api = new ApoderaCarpetaFrontPlugin("es.caib.carpeta.", prop);
+            ApoderaCarpetaFrontPlugin plugin = new ApoderaCarpetaFrontPlugin("es.caib.carpeta.", prop);
 
             System.out.println("Nif Apoderado: " + nifApoderado);
             System.out.println("Nif Poderdante: " + nifPoderdante);
             // Cridada
-            ConsultaApoderamientosResponse response = api.consultaInterna(nifPoderdante,
+            ConsultaApoderamientosResponse response = plugin.consultaInterna(nifPoderdante,
                     nifApoderado);
-            System.out.println("2");
+
+
             List<DatosApoderamientoType> apoderamientos = response.getListaApoderamientos();
             System.out.println("apoderamientos: " + apoderamientos.size());
 
@@ -93,12 +94,19 @@ public class ApoderaTest {
                         System.out.println(toStringPersonaFisica(poderdante.getRepresentante(),
                                 i + ".- Poderdante Representante => "));
                     }
+                    
+                    
+                    
+                    
 
                     if (d.getPeriodoVigencia() != null) {
                         System.out.println(
                                 i + ".- Vigencia => " + d.getPeriodoVigencia().getFechaInicio()
                                         + " - " + d.getPeriodoVigencia().getFechaFin());
                     }
+                    
+                    
+                    d.getDatosPoderdante().
 
                     // d.get
                     // System.out.println(i + ".- Common Info=>
