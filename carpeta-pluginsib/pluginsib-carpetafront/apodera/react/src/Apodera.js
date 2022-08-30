@@ -179,10 +179,10 @@ class Apodera extends Component {
 
     let nif;
     let content;
-
+/*
     let resultat1;
     let resultat2;
-
+*/
     let taulaApodera;
     var tamanyTaula = { width: "99%" };
     var tamanyData = { width: "120px !important" };
@@ -196,8 +196,10 @@ class Apodera extends Component {
       );
 
       taulaApodera = "";
+      /*
       resultat1 = "";
       resultat2 = "";
+      */
     } else {
       if (this.state.error) {
         content = (
@@ -240,6 +242,7 @@ class Apodera extends Component {
             this.state.dataPoderdant.personaFisica.nifNie +
             ")";
 
+            /*
           resultat1 = t("missatgeTotalComApoderat", {
             totalComApoderat: this.state.totalComApoderat,
             name: nomTotal,
@@ -248,6 +251,7 @@ class Apodera extends Component {
             totalComPoderdant: this.state.totalComPoderdant,
             name: nomTotal,
           });
+          */
         } else {
           nif = this.state.dataPoderdant.personaJuridica.nif;
           let raoSocialPoderdant;
@@ -264,7 +268,7 @@ class Apodera extends Component {
             " (" +
             this.state.dataPoderdant.personaJuridica.nif +
             ")";
-
+/*
           resultat1 = t("missatgeTotalComApoderat", {
             totalComApoderat: this.state.totalComApoderat,
             name: nomTotal,
@@ -273,6 +277,7 @@ class Apodera extends Component {
             totalComPoderdant: this.state.totalComPoderdant,
             name: nomTotal,
           });
+*/
         }
 
         if (
@@ -296,8 +301,8 @@ class Apodera extends Component {
                       <th>{t("apoderaTipus")}</th>
                       <th style={tamanyData}>{t("apoderaAmbit")}</th>
                       <th>{t("apoderaEstat")}</th>
-                      <th>{t("apoderaApoderado")}</th>
                       <th>{t("apoderaPoderdante")}</th>
+                      <th>{t("apoderaApoderado")}</th>                      
                       <th>{t("apoderaVigencia")}</th>
                     </tr>
                   </thead>
@@ -340,7 +345,7 @@ class Apodera extends Component {
                         {
                           tramits &&
                             tramits.forEach((s, i) => {
-                              llistaProcediments.push(<p key={i}>- {s}</p>);
+                              llistaTramits.push(<p key={i}>- {s}</p>);
                             });
                         }
 
@@ -357,17 +362,17 @@ class Apodera extends Component {
                               <td>{subtipus}</td>
                               <td>{this.nomEstat(estat)}</td>
                               <td>
-                                {apoderado.includes(nif) ? (
-                                  <b>{apoderado}</b>
-                                ) : (
-                                  apoderado
-                                )}
-                              </td>
-                              <td>
                                 {poderdante.includes(nif) ? (
                                   <b>{poderdante}</b>
                                 ) : (
                                   poderdante
+                                )}
+                              </td>
+                              <td>
+                                {apoderado.includes(nif) ? (
+                                  <b>{apoderado}</b>
+                                ) : (
+                                  apoderado
                                 )}
                               </td>
                               <td>{vigencia}</td>
@@ -538,6 +543,7 @@ class Apodera extends Component {
             className="float-left"
             style={{ width: "97%", position: "relative" }}
           >
+            { /*}
             {this.state.totalComApoderat + this.state.totalComPoderdant !==
               0 && (
               <div className="contenedorInfoPersonal mt-2 pb-2 pad15App">
@@ -545,6 +551,7 @@ class Apodera extends Component {
                 <p>{resultat2}</p>
               </div>
             )}
+              */ }
             {this.state.isLoaded && taulaApodera}
             {this.state.isLoaded && cardApoderaments}
           </div>
