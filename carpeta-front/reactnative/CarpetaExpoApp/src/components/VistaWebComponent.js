@@ -59,6 +59,7 @@ class VistaWebComponent extends Component {
           onNavigationStateChange={(event) => {
             console.log("VistaWebComponent:: onNavigationStateChange(" + event.url+ ")");
             if (this.props.callWhenNavigationStateChange) {
+              event.target = this.webview;
               return this.props.callWhenNavigationStateChange(event);
             }
             console.log("VistaWebComponent:: NO DEFINIT this.props.callWhenNavigationStateChange: " + event.url);
