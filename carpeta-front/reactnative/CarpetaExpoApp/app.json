@@ -42,8 +42,9 @@
         "backgroundColor": "#ffffff"
       },
       "package": "es.caib.carpeta.carpetaapp",
-      "googleServicesFile": "./google-services.json",
-      "versionCode": 1
+	  "permissions": [],
+      "googleServicesFile": "./google-services.json",	  
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

@@ -7,8 +7,7 @@ import javax.xml.ws.BindingProvider;
 
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
-import org.apache.cxf.interceptor.LoggingInInterceptor;
-import org.apache.cxf.interceptor.LoggingOutInterceptor;
+
 import org.apache.cxf.transport.http.HTTPConduit;
 import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
 import org.fundaciobit.pluginsib.carpetafront.apodera.api.ConsultaApoderamientosResponse;
@@ -59,6 +58,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -70,12 +71,14 @@ import java.util.Properties;
  * @author jpernia
  * @author anadal
  */
-@SuppressWarnings("deprecation")
+
 public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin {
 
     public static final String APODERA_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "apodera.";
 
     protected static final SimpleDateFormat SDF = new SimpleDateFormat("yyyyMMdd");
+
+    protected static final SimpleDateFormat SDF_VIGENCIA = new SimpleDateFormat("dd/MM/yyyy");
 
     /**
      *
@@ -412,8 +415,18 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
 
                     // VIGÈNCIA APODERAMENT
                     if (apoderament.getPeriodoVigencia() != null) {
+                        
+                        String fechaFin = apoderament.getPeriodoVigencia().getFechaFin().substring(0, 10).trim();
+                        try {
+                          long dataFinalVigencia = SDF_VIGENCIA.parse(fechaFin).getTime();
+                          apo.setDataFinalVigencia(dataFinalVigencia);
+                        } catch(Throwable th) {
+                            log.error("Error parsejant data Final vigència [ " + fechaFin + "]: " + th.getMessage(), th);
+                            apo.setDataFinalVigencia(0);
+                        }
+                        
                         apo.setVigencia(apoderament.getPeriodoVigencia().getFechaInicio().substring(0, 10) + " - "
-                                + apoderament.getPeriodoVigencia().getFechaFin().substring(0, 10));
+                                + fechaFin);
                     }
 
                     // TRAMITS
@@ -477,6 +490,22 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
             Map<String, Object> infoApoderaments = new HashMap<String, Object>();
 
             String urlApodera = getPropertyRequired(APODERA_PROPERTY_BASE + "url");
+            
+            
+            
+            Collections.sort(apos, new Comparator<Apoderamiento>() {
+
+                @Override
+                public int compare(Apoderamiento o1, Apoderamiento o2) {
+                    return (int)(o2.getDataFinalVigencia() - o1.getDataFinalVigencia());
+                }
+            });
+            
+            
+            for (Apoderamiento apoderamiento : apos) {
+                log.info(" =====>  " + apoderamiento.getVigencia());
+            }
+            
 
             infoApoderaments.put("poderdant", poderdant);
             infoApoderaments.put("apoderaments", apos);
@@ -485,6 +514,7 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
             infoApoderaments.put("totalComApoderat", totalComApoderat);
 
             infoApoderaments.put("urlApodera", urlApodera);
+            infoApoderaments.put("entitat", getProperty(APODERA_PROPERTY_BASE + "organisme.denominacio"));
 
             Gson gson = new Gson();
             String json = gson.toJson(infoApoderaments);
@@ -648,6 +678,7 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
      * @return
      * @throws Exception
      */
+    @SuppressWarnings("deprecation")
     private ConsultaAvanzadaPortType getApi() throws Exception {
 
         String endPoint = getPropertyRequired(APODERA_PROPERTY_BASE + "endpoint");
@@ -688,8 +719,8 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
 
         // Print XML in and out
         if (isDebug()) {
-            client.getInInterceptors().add(new LoggingInInterceptor());
-            client.getOutInterceptors().add(new LoggingOutInterceptor());
+            client.getInInterceptors().add(new org.apache.cxf.interceptor.LoggingInInterceptor());
+            client.getOutInterceptors().add(new org.apache.cxf.interceptor.LoggingOutInterceptor());
         }
 
         return api;

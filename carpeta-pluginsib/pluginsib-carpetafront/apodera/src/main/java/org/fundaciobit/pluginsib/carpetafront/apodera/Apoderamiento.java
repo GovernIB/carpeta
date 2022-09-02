@@ -20,6 +20,7 @@ public class Apoderamiento {
     private List<String> procediments;
     private List<String> organismes;
     private List<String> tramits;
+    private transient long dataFinalVigencia;
 
     public Apoderamiento() {
         super();
@@ -132,6 +133,14 @@ public class Apoderamiento {
 
     public void setTramits(List<String> tramits) {
         this.tramits = tramits;
+    }
+
+    public long getDataFinalVigencia() {
+        return dataFinalVigencia;
+    }
+
+    public void setDataFinalVigencia(long dataFinalVigencia) {
+        this.dataFinalVigencia = dataFinalVigencia;
     }
 
 }

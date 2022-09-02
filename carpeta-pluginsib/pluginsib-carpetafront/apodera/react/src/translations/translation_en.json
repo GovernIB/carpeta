@@ -44,6 +44,10 @@
     "apoderaSubtipus": "Subtipus",
     "apoderaAccedirApoderament": "Accedir al botó Consulti el seu apoderament",
     "apoderaBotoApoderament": "Consulti el seu apoderament",
+        
+    "apoderamentsEntitat": "En aquest llistat es mostren els apoderaments associats a l'entitat {{entitat}}",
+    "apoderaBotoTotsApoderaments": "Pe veure tots els seus apoderament per favor pitgi sobre el següent botó: ",
+
     "apoderaIconaApp": "Apoderament",
     "apoderaOrganismes": "Organismes"
 }
