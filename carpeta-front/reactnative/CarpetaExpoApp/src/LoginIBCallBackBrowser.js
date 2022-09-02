@@ -96,6 +96,8 @@ class LoginIBCallBackBrowser extends React.Component {
     } else {
       
       if(!this.lastExternal || this.lastExternal != url) {      
+        console.log("CarpetaWeb:: stopLoading ... ");
+        event.target.stopLoading();
         console.log("LoginIBCallBackBrowser::Obrint URL externa : " + url);
         Linking.canOpenURL(url)
 		.then((supported) => {
