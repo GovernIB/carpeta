@@ -78,7 +78,7 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
 
     protected static final SimpleDateFormat SDF = new SimpleDateFormat("yyyyMMdd");
 
-    protected static final SimpleDateFormat SDF_VIGENCIA = new SimpleDateFormat("dd/MM/yyyy");
+    protected static final SimpleDateFormat SDF_VIGENCIA = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
     /**
      *
@@ -416,17 +416,19 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
                     // VIGÈNCIA APODERAMENT
                     if (apoderament.getPeriodoVigencia() != null) {
                         
-                        String fechaFin = apoderament.getPeriodoVigencia().getFechaFin().substring(0, 10).trim();
+                        String fechaFinFull = apoderament.getPeriodoVigencia().getFechaFin();
+                        log.info("\n\n\n =>  ]]" + fechaFinFull + "[[");
+
                         try {
-                          long dataFinalVigencia = SDF_VIGENCIA.parse(fechaFin).getTime();
+                          long dataFinalVigencia = SDF_VIGENCIA.parse(fechaFinFull).getTime();
                           apo.setDataFinalVigencia(dataFinalVigencia);
                         } catch(Throwable th) {
-                            log.error("Error parsejant data Final vigència [ " + fechaFin + "]: " + th.getMessage(), th);
+                            log.error("Error parsejant data Final vigència [ " + fechaFinFull + "]: " + th.getMessage(), th);
                             apo.setDataFinalVigencia(0);
                         }
-                        
+
                         apo.setVigencia(apoderament.getPeriodoVigencia().getFechaInicio().substring(0, 10) + " - "
-                                + fechaFin);
+                                + fechaFinFull.substring(0, 10).trim());
                     }
 
                     // TRAMITS
@@ -503,7 +505,8 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
             
             
             for (Apoderamiento apoderamiento : apos) {
-                log.info(" =====>  " + apoderamiento.getVigencia());
+                // XYZ ZZZ
+                log.info(" =====> " + apoderamiento.getDataFinalVigencia() + " - " + apoderamiento.getVigencia());
             }
             
 
