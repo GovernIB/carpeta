@@ -176,16 +176,12 @@ class Apodera extends Component {
       });
   }
 
-
   addBold(str, nif) {
-
-    
     if (str.includes(nif)) {
-      return (<b> {str} </b>);
+      return <b> {str} </b>;
     } else {
       return str;
     }
-
   }
 
   addNewLine(str, nif) {
@@ -201,7 +197,7 @@ class Apodera extends Component {
     }
 
     var tmp = (
-      <span style={ { fontWeight: bold}}>
+      <span style={{ fontWeight: bold }}>
         <p style={{ margin: 0 }}>{nom}</p>
         <i>{fisicajuridica}</i>
       </span>
@@ -258,7 +254,7 @@ class Apodera extends Component {
         );
       } else {
         content = "";
-        
+
         if (this.state.dataPoderdant.personaFisica) {
           nif = this.state.dataPoderdant.personaFisica.nifNie;
           /*
@@ -302,7 +298,6 @@ class Apodera extends Component {
             name: nomTotal,
           });
           */
-          
         } else {
           nif = this.state.dataPoderdant.personaJuridica.nif;
           /*
@@ -331,15 +326,14 @@ class Apodera extends Component {
           */
         }
 
-
         if (
           this.state.dataApoderaments &&
           typeof this.state.dataApoderaments !== undefined
         ) {
           taulaApodera = (
             <>
-            <div>
-              { /*  ============== VERSIO NORMAL ================= */}
+              <div>
+                {/*  ============== VERSIO NORMAL ================= */}
                 <Table
                   id="tableId"
                   responsive
@@ -357,7 +351,9 @@ class Apodera extends Component {
                       <th>{t("apoderaPoderdante")}</th>
                       <th>{t("apoderaApoderado")}</th>
                       <th>{t("apoderaVigencia")}</th>
+                      {/* 
                       <th>&nbsp;</th>
+                      */}
                     </tr>
                   </thead>
                   <tbody>
@@ -400,9 +396,11 @@ class Apodera extends Component {
                               <td>{poderdante2}</td>
                               <td>{apoderado2}</td>
                               <td>{vigencia}</td>
+                              {/*
                               <td>
                                 <img src={infoImatge} alt="More Info" />
                               </td>
+                             */}
                             </tr>
                             <tr
                               key={10000 + i}
@@ -435,7 +433,7 @@ class Apodera extends Component {
                                     </span>
                                   )}
                                 </div>
-                                { /*
+
                                 <div
                                   style={{ float: "right", width: "auto" }}
                                   id="accedirApodera"
@@ -462,7 +460,6 @@ class Apodera extends Component {
                                     </button>
                                   </span>
                                 </div>
-                                    */ }
                               </td>
                             </tr>
                           </>
@@ -471,73 +468,119 @@ class Apodera extends Component {
                     )}
                   </tbody>
                 </Table>
-              
-                { /*  ============== FINAL VERSIO NORMAL ================= */}
-          
-                { /*  ============== VERSIO MÒBIL ================= */}
-           
-                {
-                  this.state.dataApoderaments.map(
-                    (
-                        { tipus,
-                          subtipus,
-                          estat,
-                          apoderado,
-                          poderdante,
-                          vigencia,
-                          procediments,
-                          organismes,
-                          tramits,
-                          }, i
-                    ) => 
+
+                {/*  ============== FINAL VERSIO NORMAL ================= */}
+
+                {/*  ============== VERSIO MÒBIL ================= */}
+
+                {this.state.dataApoderaments.map(
+                  (
                     {
+                      tipus,
+                      subtipus,
+                      estat,
+                      apoderado,
+                      poderdante,
+                      vigencia,
+                      procediments,
+                      organismes,
+                      tramits,
+                    },
+                    i
+                  ) => {
+                    let apoderado2 = this.addBold(apoderado, nif);
+                    let poderdante2 = this.addBold(poderdante, nif);
 
-                      let apoderado2 = this.addBold(apoderado, nif);
-                      let poderdante2 = this.addBold(poderdante, nif);
+                    let llistaOrganismes = this.list2Html(organismes);
 
-                      let llistaOrganismes = this.list2Html(organismes);
+                    let llistaProcediments = this.list2Html(procediments);
 
-                      let llistaProcediments = this.list2Html(procediments);
+                    let llistaTramits = this.list2Html(tramits);
 
-                      let llistaTramits = this.list2Html(tramits);
-
-
-                      cardApoderaments.push(
-                            <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5  visioMobil cardAppVerd"
-                                 key={i} tabIndex={511+i} onClick={(e) =>
-                                window.open(this.state.urlApodera, "_blank")}>
-                                <div className="col-sm-1 float-left">
-                                    <span className="oi oi-key iconaFormApp" title={t('apoderaIconaApp')} style={{verticalAlign: 'sub'}}/>
-                                </div>
-                                <div className="col-sm-10 float-right">
-                                    <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
-                                        <b>{t('apoderaTipus')}</b>: {tipus}</p>
-                                    <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
-                                        <b>{t('apoderaAmbit')}: </b>{subtipus}</p>
-                                    <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
-                                        <b>{t('apoderaEstatActual')}: </b>{this.nomEstat(estat)} - {this.descripcioEstat(estat)}</p>
-                                    <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
-                                        <b>{t('apoderaPoderdante')}</b>: {poderdante2}</p>
-                                    <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
-                                        <b>{t('apoderaApoderado')}</b>: {apoderado2}</p>
-                                    <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
-                                        <b>{t('apoderaVigencia')}: </b>{vigencia}</p>
-                                    {organismes && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
-                                        <b>{t('apoderaOrganismes')}</b>: {llistaOrganismes}</p>}
-                                    {procediments && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}>
-                                        <b>{t('apoderaProcediments')}</b>: {llistaProcediments}</p>}
-                                </div>
-                            </div>
-                      )
-                    }
-                  )
-                }
-                { /*  ============== FINAL VERSIO MÒBIL ================= */}
-          </div>
-          </>
+                    cardApoderaments.push(
+                      <div
+                        className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5  visioMobil cardAppVerd"
+                        key={i}
+                        tabIndex={511 + i}
+                        onClick={(e) =>
+                          window.open(this.state.urlApodera, "_blank")
+                        }
+                      >
+                        <div className="col-sm-1 float-left">
+                          <span
+                            className="oi oi-key iconaFormApp"
+                            title={t("apoderaIconaApp")}
+                            style={{ verticalAlign: "sub" }}
+                          />
+                        </div>
+                        <div className="col-sm-10 float-right">
+                          <p
+                            className="card-text pl-1 mt-0"
+                            style={{ color: "rgb(102, 102, 102)" }}
+                          >
+                            <b>{t("apoderaTipus")}</b>: {tipus}
+                          </p>
+                          <p
+                            className="card-text pl-1 mt-0"
+                            style={{ color: "rgb(102, 102, 102)" }}
+                          >
+                            <b>{t("apoderaAmbit")}: </b>
+                            {subtipus}
+                          </p>
+                          <p
+                            className="card-text pl-1 mt-0"
+                            style={{ color: "rgb(102, 102, 102)" }}
+                          >
+                            <b>{t("apoderaEstatActual")}: </b>
+                            {this.nomEstat(estat)} -{" "}
+                            {this.descripcioEstat(estat)}
+                          </p>
+                          <p
+                            className="card-text pl-1 mt-0"
+                            style={{ color: "rgb(102, 102, 102)" }}
+                          >
+                            <b>{t("apoderaPoderdante")}</b>: {poderdante2}
+                          </p>
+                          <p
+                            className="card-text pl-1 mt-0"
+                            style={{ color: "rgb(102, 102, 102)" }}
+                          >
+                            <b>{t("apoderaApoderado")}</b>: {apoderado2}
+                          </p>
+                          <p
+                            className="card-text pl-1 mt-0"
+                            style={{ color: "rgb(102, 102, 102)" }}
+                          >
+                            <b>{t("apoderaVigencia")}: </b>
+                            {vigencia}
+                          </p>
+                          {organismes && (
+                            <p
+                              className="card-text pl-1 mt-0"
+                              style={{ color: "rgb(102, 102, 102)" }}
+                            >
+                              <b>{t("apoderaOrganismes")}</b>:{" "}
+                              {llistaOrganismes}
+                            </p>
+                          )}
+                          {procediments && (
+                            <p
+                              className="card-text pl-1 mt-0"
+                              style={{ color: "rgb(102, 102, 102)" }}
+                            >
+                              <b>{t("apoderaProcediments")}</b>:{" "}
+                              {llistaProcediments}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  }
+                )}
+                {/*  ============== FINAL VERSIO MÒBIL ================= */}
+              </div>
+            </>
           );
-
-          
         } else if (
           this.state.totalComApoderat + this.state.totalComPoderdant === 0 &&
           this.state.dataApoderaments !== null
@@ -555,11 +598,14 @@ class Apodera extends Component {
       }
     }
 
-
     let introduccio = "";
-    if(this.state.isLoaded) {
-      introduccio = 
-         (<div className="float-left" style={{ width: "97%", position: "relative" }}>
+    if (this.state.isLoaded) {
+      introduccio = (
+        <div
+          className="float-left"
+          style={{ width: "97%", position: "relative" }}
+        >
+          {/*}
                 <div className="contenedorInfoPersonal mt-2 pb-2 pad15App">
                   {t("apoderamentsEntitat", {
                     entitat: this.state.entitat,
@@ -584,9 +630,10 @@ class Apodera extends Component {
                     
                   </button>
                   </div>
-                </div>
+                  </div> 
+               */}
 
-                {/*}
+          {/*}
                 {this.state.totalComApoderat + this.state.totalComPoderdant !==
                   0 && (
                   <div className="contenedorInfoPersonal mt-2 pb-2 pad15App">
@@ -595,10 +642,11 @@ class Apodera extends Component {
                   </div>
                 )}
                   */}
-                {taulaApodera}
-                {cardApoderaments}
-              </div>);
-            }
+          {taulaApodera}
+          {cardApoderaments}
+        </div>
+      );
+    }
 
     return (
       <>
