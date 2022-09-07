@@ -93,7 +93,12 @@ class CarpetaWeb extends Component {
       console.log("CarpetaWeb:: stopLoading ... ");
       event.target.stopLoading();
       console.log("CarpetaWeb::Obrint URL externa : " + url);
-      Linking.openURL(url);
+      Linking.canOpenURL(url).then((supported) => {
+        if (supported) {
+          return Linking.openURL(url)
+            .catch(() => null);
+        }
+      });
 
       return false;
     }

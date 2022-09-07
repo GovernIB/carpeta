@@ -496,10 +496,9 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
             
             
             Collections.sort(apos, new Comparator<Apoderamiento>() {
-
                 @Override
                 public int compare(Apoderamiento o1, Apoderamiento o2) {
-                    return (int)(o2.getDataFinalVigencia() - o1.getDataFinalVigencia());
+                    return (int)(Math.signum(o2.getDataFinalVigencia() - o1.getDataFinalVigencia()));
                 }
             });
             

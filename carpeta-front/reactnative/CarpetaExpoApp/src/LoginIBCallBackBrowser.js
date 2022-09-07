@@ -5,11 +5,11 @@
  * @modify date 19-08-2021 09:09:44
  * @desc
  */
-import React from 'react';
-import {StyleSheet, ScrollView, Text} from 'react-native';
+import React from "react";
+import { StyleSheet, ScrollView, Text } from "react-native";
 import * as Linking from "expo-linking";
-import VistaWebComponent from './components/VistaWebComponent';
-import Persistencia from './Persistencia';
+import VistaWebComponent from "./components/VistaWebComponent";
+import Persistencia from "./Persistencia";
 import { sessionStorageRN } from "./SessionStorageClass";
 
 class LoginIBCallBackBrowser extends React.Component {
@@ -17,25 +17,24 @@ class LoginIBCallBackBrowser extends React.Component {
     super(props);
     this.navigateCarpetaWeb.bind(this);
     this.calledWhenDataLoaded = this.calledWhenDataLoaded.bind(this);
-    this.callWhenNavigationStateChange = this.callWhenNavigationStateChange.bind(this);
+    this.callWhenNavigationStateChange =
+      this.callWhenNavigationStateChange.bind(this);
 
     this.storage = new Persistencia();
     // Carrega els valors de forma asincrona i quan ha acabat crida a la funcio passada per paràmetre
     this.storage.load(this.calledWhenDataLoaded);
 
-    this.state = {loadedData: false, urlcarpeta: ''};
+    this.state = { loadedData: false, urlcarpeta: "" };
   }
 
-
   componentDidMount() {
-    console.log('LoginIBCallBackBrowser => componentDidMount()');
+    console.log("LoginIBCallBackBrowser => componentDidMount()");
 
     const { loginIBCallBackBrowserRef } = this.props;
     loginIBCallBackBrowserRef(this);
   }
 
   componentWillUnmount() {
-
     const { loginIBCallBackBrowserRef } = this.props;
     loginIBCallBackBrowserRef(undefined);
   }
@@ -43,116 +42,121 @@ class LoginIBCallBackBrowser extends React.Component {
   navigateCarpetaWeb(url, ispublic) {
     // Crida a vistaWebComponent per a que canvii la pàgina web
     // Canvia url del WebView
-    console.log('LoginIBCallBackBrowser::navigateCarpetaWeb(' + url + ',' + ispublic+ ')');
+    console.log(
+      "LoginIBCallBackBrowser::navigateCarpetaWeb(" + url + "," + ispublic + ")"
+    );
 
     if (this.vistaWebComponent) {
       this.vistaWebComponent.navigateCarpetaWeb(url, ispublic);
     } else {
-      console.error("LoginIBCallBackBrowser::navigateCarpetaWeb => this.vistaWebComponent és null");
+      console.error(
+        "LoginIBCallBackBrowser::navigateCarpetaWeb => this.vistaWebComponent és null"
+      );
     }
   }
 
-
   calledWhenDataLoaded(urlcarpeta, codientitat) {
-    console.log('LoginIBCallBackBrowser::calledWhenDataLoaded  => entra');
+    console.log("LoginIBCallBackBrowser::calledWhenDataLoaded  => entra");
 
-    this.setState({loadedData: true, urlcarpeta: urlcarpeta});
+    this.setState({ loadedData: true, urlcarpeta: urlcarpeta });
   }
-
-
 
   // METODE REPETIT A CarpetaWeb.js
   callWhenNavigationStateChange(event) {
     var url = event.url;
-    console.log('');
-    console.log('LoginIBCallBackBrowser::Check URL => ]' + url + '[');
+    console.log("");
+    console.log("LoginIBCallBackBrowser::Check URL => ]" + url + "[");
 
-    if (url.includes('/public/doLogin?')) {
-
+    if (url.includes("/public/doLogin?")) {
       if (this.alreadyopen) {
         this.alreadyopen = false;
       } else {
         this.alreadyopen = true;
 
-        var pos = url.lastIndexOf('=');
+        var pos = url.lastIndexOf("=");
 
         var loginCode = url.substring(pos + 1, url.length);
 
-        console.log('LoginIBCallBackBrowser: LoginCode => ' + loginCode);
+        console.log("LoginIBCallBackBrowser: LoginCode => " + loginCode);
         var urlCarpeta = this.state.urlcarpeta;
         var urlbase = this.getUrlBase(url);
 
         var theUrlBrowser =
-        urlCarpeta + '/public/preLoginApp/' + loginCode + '?urlbase=' + encodeURIComponent(urlbase);
+          urlCarpeta +
+          "/public/preLoginApp/" +
+          loginCode +
+          "?urlbase=" +
+          encodeURIComponent(urlbase);
 
-        console.log(new Date().toUTCString() + '  Obring URL => ]' + theUrlBrowser + '[');
+        console.log(
+          new Date().toUTCString() + "  Obring URL => ]" + theUrlBrowser + "["
+        );
         Linking.openURL(theUrlBrowser);
       }
       return false;
     }
-    if(url.startsWith(this.state.urlcarpeta)) {
+    if (url.startsWith(this.state.urlcarpeta)) {
       console.log("LoginIBCallBackBrowser::URL interna : " + url);
       return true;
     } else {
-      
-      if(!this.lastExternal || this.lastExternal != url) {      
+      if (!this.lastExternal || this.lastExternal != url) {
         console.log("CarpetaWeb:: stopLoading ... ");
         event.target.stopLoading();
         console.log("LoginIBCallBackBrowser::Obrint URL externa : " + url);
-        Linking.canOpenURL(url)
-		.then((supported) => {
-			if (supported) {
-				return Linking.openURL(url)
-					.catch(() => null);
-			}
-		});
+        Linking.canOpenURL(url).then((supported) => {
+          if (supported) {
+            return Linking.openURL(url).catch(() => null);
+          }
+        });
         this.lastExternal = url;
       } else {
-         console.log("LoginIBCallBackBrowser::NO Obrim URL externa: REPETIDA !!!! ");
+        event.target.stopLoading();
+        console.log(
+          "LoginIBCallBackBrowser::NO Obrim URL externa: REPETIDA !!!! "
+        );
       }
-
-
-      //Linking.openURL(url);
-
 
       return false;
     }
-   
   }
 
-
-
-
   render() {
-
     console.log("LoginIBCallBackBrowser::  ENTRA A RENDER ... ");
 
-    
     if (!this.state.loadedData) {
       return <Text>Loading data ...</Text>;
     }
-    console.log('LOGINIB CALLBACK => Render ... CodiLogin =]' + this.props.codilogin + '[');
+    console.log(
+      "LOGINIB CALLBACK => Render ... CodiLogin =]" + this.props.codilogin + "["
+    );
 
     var loginUrl =
-      this.state.urlcarpeta + '/public/homePageAppPostWebLogin/' + this.props.codilogin;
+      this.state.urlcarpeta +
+      "/public/homePageAppPostWebLogin/" +
+      this.props.codilogin;
 
     var expoPushToken = sessionStorageRN.getItem("expoPushToken");
     if (!expoPushToken) {
-      console.error("ExpoPushToken no definit !!! No s'envia al servidor :-(")
+      console.error("ExpoPushToken no definit !!! No s'envia al servidor :-(");
     } else {
       console.log("Enviant ExpoPushToken al Servidor: " + expoPushToken);
-      loginUrl = loginUrl + "?expopushtoken=" + encodeURIComponent(expoPushToken);
+      loginUrl =
+        loginUrl + "?expopushtoken=" + encodeURIComponent(expoPushToken);
     }
 
-    console.log('LOGINIB CALLBACK => Obrint URL ' + loginUrl);
+    console.log("LOGINIB CALLBACK => Obrint URL " + loginUrl);
 
     return (
-      <ScrollView contentInsetAdjustmentBehavior="automatic" style={styles.borderdotted}>
-        <VistaWebComponent 
-            url={loginUrl} 
-            debug={true} 
-            vistaWebComponentRef={ ref => this.vistaWebComponent = ref} 
-            callWhenNavigationStateChange={this.callWhenNavigationStateChange}/>
+      <ScrollView
+        contentInsetAdjustmentBehavior="automatic"
+        style={styles.borderdotted}
+      >
+        <VistaWebComponent
+          url={loginUrl}
+          debug={true}
+          vistaWebComponentRef={(ref) => (this.vistaWebComponent = ref)}
+          callWhenNavigationStateChange={this.callWhenNavigationStateChange}
+        />
       </ScrollView>
     );
     //}
@@ -171,8 +175,8 @@ const styles = StyleSheet.create({
   // },
 
   fixToText: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });
 
