@@ -5,15 +5,16 @@
  * @modify date 17-08-2021 09:24:27
  * @desc Exemple de Control de Persistència
  */
-import React, {Component} from 'react';
+import React, { Component } from "react";
 
-import {Alert, Button, StyleSheet, Text, TextInput, View} from 'react-native';
-import Persistencia from './Persistencia';
-import Constants from "expo-constants"
+import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
+import Persistencia from "./Persistencia";
+import Constants from "expo-constants";
+import { sessionStorageRN } from "./SessionStorageClass";
 
 class PersistenciaControl extends Component {
   constructor(props) {
-    console.log('Entra a Constructor');
+    console.log("Entra a Constructor");
 
     super(props);
     this.guardarDades = this.guardarDades.bind(this);
@@ -25,55 +26,67 @@ class PersistenciaControl extends Component {
     // Carrega els valors de forma asincrona i quan ha acabat crida a la funcio passada per paràmetre
     this.storage.load(this.calledWhenDataLoaded);
 
-    this.state = {loadedData: false, urlcarpeta: '', codientitat: ''};
+    this.state = { loadedData: false, urlcarpeta: "", codientitat: "" };
 
-    console.log('Surt de Constructor');
+    console.log("Surt de Constructor");
   }
 
   calledWhenDataLoaded(urlcarpeta, codientitat) {
-    console.log('ENTRA A DORENDER ');
+    console.log("ENTRA A DORENDER ");
 
-    if (urlcarpeta === '') {
-      urlcarpeta = 'https://www.caib.es/carpetafront';
+    if (urlcarpeta === "") {
+      urlcarpeta = "https://www.caib.es/carpetafront";
     }
 
-    if (codientitat === '') {
-      codientitat = 'caib';
+    if (codientitat === "") {
+      codientitat = "caib";
     }
-    this.setState({loadedData: true, urlcarpeta: urlcarpeta, codientitat: codientitat});
+    this.setState({
+      loadedData: true,
+      urlcarpeta: urlcarpeta,
+      codientitat: codientitat,
+    });
   }
 
   tornarACarpeta() {
-    this.props.history.push('/carpeta');
+    this.props.history.push("/carpeta");
   }
 
   guardarDades() {
-    console.log('GUARDANT ' + this.state.urlcarpeta);
+    console.log("GUARDANT " + this.state.urlcarpeta);
 
     this.storage.save(this.state.urlcarpeta, this.state.codientitat);
 
-    console.log('GUARDAT ' + this.state.urlcarpeta);
+    console.log("GUARDAT " + this.state.urlcarpeta);
 
-    Alert.alert('Guardades les dades');
+    Alert.alert("Guardades les dades");
   }
 
   render() {
-    console.log('ENTRA EN RENDER  ');
+    console.log("ENTRA EN RENDER  ");
 
     if (!this.state.loadedData) {
       return <Text>Loading data ...</Text>;
     }
 
+    let expoPushToken = sessionStorageRN.getItem("expoPushToken");
+    if (!expoPushToken) {
+      expoPushToken = "== NO DEFINIT ==";
+    }
+
     return (
       <View>
         <Text style={styles.title}>Carpeta APP</Text>
-        <Text style={styles.label}>Versió App: {Constants.manifest.version}</Text>
+        <Text style={styles.label}>
+          Versió App: {Constants.manifest.version}
+        </Text>
+        <Text style={styles.label}>Expo Push Token: {expoPushToken}</Text>
         <View style={styles.fixToText}>
           <Text style={styles.label}>URL Servidor:</Text>
         </View>
         <View style={styles.fixToText}>
           <TextInput
-            onChangeText={text => this.setState({urlcarpeta: text})}
+            onChangeText={(text) => this.setState({ urlcarpeta: text })}
             style={styles.inputtext}
             value={this.state.urlcarpeta}
           />
@@ -83,7 +96,7 @@ class PersistenciaControl extends Component {
         </View>
         <View style={styles.fixToText}>
           <TextInput
-            onChangeText={text => this.setState({codientitat: text})}
+            onChangeText={(text) => this.setState({ codientitat: text })}
             style={styles.inputtext}
             value={this.state.codientitat}
           />
@@ -97,36 +110,35 @@ class PersistenciaControl extends Component {
   }
 }
 
-
 const styles = StyleSheet.create({
   fixToText: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   fixToBoto: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    margin: 20
+    flexDirection: "row",
+    justifyContent: "space-between",
+    margin: 20,
   },
   label: {
     padding: 0,
-    margin: 10
+    margin: 10,
   },
   title: {
     padding: 0,
     margin: 10,
     fontSize: 24,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center",
   },
   inputtext: {
     flex: 1,
-    color: '#FF0000',
+    color: "#FF0000",
     borderWidth: 1,
-    borderColor: 'red',
-    borderStyle: 'solid',
+    borderColor: "red",
+    borderStyle: "solid",
     padding: 0,
-    margin: 10
+    margin: 10,
   },
 });
 

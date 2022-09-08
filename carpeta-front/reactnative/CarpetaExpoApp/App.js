@@ -49,7 +49,9 @@ async function registerForPushNotificationsAsync() {
   if (finalStatus !== "granted") {
     // FIXME:
     var msg = "Failed to get push token for push notification: " + finalStatus;
-    alert(msg);
+    // Apple Store ho dóna com un error o sigui que ho deixam com console.warn !!!!!!
+    //alert(msg);
+    console.warn(msg);
     sessionStorageRN.setItem("expoPushToken", msg);
     return;
   }
