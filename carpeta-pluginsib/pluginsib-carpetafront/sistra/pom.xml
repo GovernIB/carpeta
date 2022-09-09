@@ -99,7 +99,7 @@
         <dependency>
             <groupId>es.caib.sistra2</groupId>
             <artifactId>sistramit-rest-api</artifactId>
-            <version>1.2.0</version>
+            <version>1.3.2</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework</groupId>
