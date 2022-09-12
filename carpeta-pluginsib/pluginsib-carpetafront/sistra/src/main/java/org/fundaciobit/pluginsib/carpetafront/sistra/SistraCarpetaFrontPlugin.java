@@ -676,8 +676,8 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             if (finalizado.equals("S")) {
                 coms.add(TipoElementoExpediente.REGISTRO);
             } else if (finalizado.equals("P")) {
-            	coms.add(TipoElementoExpediente.PREENVIO);
-                coms.add(TipoElementoExpediente.PREREGISTRO); 
+                coms.add(TipoElementoExpediente.PREENVIO);
+                coms.add(TipoElementoExpediente.PREREGISTRO);
             } else {
                 coms.add(TipoElementoExpediente.ENVIO);
                 coms.add(TipoElementoExpediente.PREENVIO);
@@ -691,7 +691,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             }
 
             filtroElementosExpediente.setNif(documento);
-            
+
             filtroElementosExpediente.setFechaInicio(objectFactoryElement.createFiltroElementosExpedienteFechaInicio(
                     DatatypeFactory.newInstance().newXMLGregorianCalendar(inicio)));
             filtroElementosExpediente.setFechaFin(objectFactoryElement.createFiltroElementosExpedienteFechaFin(
@@ -699,13 +699,13 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             filtroElementosExpediente.setIdioma(locale.getLanguage());
             filtroElementosExpediente.setTipos(teess);
 
-            // long num = backofficeFacade.obtenerTotalElementosExpediente(filtroElementosExpediente);
+            // long num =
+            // backofficeFacade.obtenerTotalElementosExpediente(filtroElementosExpediente);
             // int pagina = 0;
             // int tamPagina = ( num > 0 ) ? (int) num : 0;
 
             ElementosExpediente tramitesAcabados = backofficeFacade
                     .obtenerElementosExpediente(filtroElementosExpediente, null, null); // pagina, tamPagina
-
 
             for (ElementoExpediente item : tramitesAcabados.getElemento()) {
 
@@ -717,16 +717,17 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
                 tpg.setMostraModal(item.getTipo() != TipoElementoExpediente.ENVIO && estaPendent);
 
                 // Si es tipus Registro => redirigim a pagina de detall Registre
-                if(item.getTipo() == TipoElementoExpediente.REGISTRO) {
-                	tpg.setUrl(absolutePluginRequestPath + "/" + DETALL_REGISTRE_PAGE + "?numeroRegistroFormateado="
-                        + tpg.getNumero());
+                if (item.getTipo() == TipoElementoExpediente.REGISTRO) {
+                    tpg.setUrl(absolutePluginRequestPath + "/" + DETALL_REGISTRE_PAGE + "?numeroRegistroFormateado="
+                            + tpg.getNumero());
                 }
-                
-                if ( finalizado.equals("A") ||
-                	 ((((estaPendent && finalizado.equals("N") && !tpg.esMostraModal()) || (!estaPendent && finalizado.equals("S"))) && item.getTipo() != TipoElementoExpediente.REGISTRO )) || 
+
+                if (finalizado.equals("A") || ((((estaPendent && finalizado.equals("N") && !tpg.esMostraModal())
+                        || (!estaPendent && finalizado.equals("S")))
+                        && item.getTipo() != TipoElementoExpediente.REGISTRO)) ||
 //                		(finalizado.equals("R") && item.getTipo() == TipoElementoExpediente.REGISTRO) ||
-                        (finalizado.equals("S") && item.getTipo() == TipoElementoExpediente.REGISTRO) ||
-                		(finalizado.equals("P") && estaPendent)) {
+                        (finalizado.equals("S") && item.getTipo() == TipoElementoExpediente.REGISTRO)
+                        || (finalizado.equals("P") && estaPendent)) {
                     tramits.add(tpg);
                 }
             }
@@ -1006,9 +1007,9 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
         UserDataRepresentative reprentative = userData.getRepresentative();
         if (reprentative != null) {
-            
+
             log.info("\n\n\n XXXXXXXXXXXXX PASSA PER REPRESENTATIVE \n\n\n");
-            
+
             RRepresentanteInfo representant = new RRepresentanteInfo();
 
             representant.setNombre(reprentative.getName());

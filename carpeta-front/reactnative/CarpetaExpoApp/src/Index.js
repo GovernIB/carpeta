@@ -26,9 +26,7 @@ import { Link, Route, Switch, withRouter } from "./components/Routing";
 import Home from "./Home";
 import CarpetaWeb from "./CarpetaWeb";
 import LoginIBCallBackBrowser from "./LoginIBCallBackBrowser";
-import Plataforma from "./Plataforma";
 import PersistenciaControl from "./PersistenciaControl";
-import ExemplesDeComponents from "./ExemplesDeComponents";
 import { Redirect } from "react-router-dom";
 
 class Index extends Component {
@@ -117,41 +115,18 @@ class Index extends Component {
   }
 
   render() {
-    // console.log('RENDERRRR   '  + this.state.isHidden);
-    // let url = "https://www.uib.es";
-    // const [statusBarStyle] = 'dark-content';
-    //
-    // const onOpenLink = async () => {
-    //   await this.openLink(url,statusBarStyle);
-    // };
 
     return (
       <View style={styles.container}>
         {/* MENU SUPERIOR */}
         <View style={styles.nav} hide={this.state.isHidden}>
-          {/*<TouchableOpacity title='clic' onPress={()=> openLink()}>*/}
-          {/*  <View style={styles.navItem}>*/}
-          {/*    <Text>Google</Text>*/}
-          {/*  </View>*/}
-          {/*</TouchableOpacity>*/}
-          {/*<Link to="/components" style={styles.navItem}>*/}
-          {/*  <Text>Components</Text>*/}
-          {/*</Link>*/}
-          {/*<Link to="/carpeta" style={styles.navItem}>*/}
-          {/*  <Text>Carpeta</Text>*/}
-          {/*</Link>
-          <Link to="/config" style={styles.navItem}>
-            <Text>⁝</Text>
-          </Link>
-          */}
 
           <TouchableOpacity title="X" onPress={() => this.ocultarVista()}>
             <View style={styles.button}>
               <Text style={styles.buttonText}>X</Text>
             </View>
           </TouchableOpacity>
-          {/*    <Text>XX</Text> <Link to=""  style={styles.navItem}  >
-          </Link>*/}
+
         </View>
 
         {/* Contingut de la Pagina */}
@@ -162,12 +137,6 @@ class Index extends Component {
           <Route
             exact
             path="/"
-            // render={(props) => {
-            //   return <Home />;
-            // }}
-//          >
-//            <Redirect to="/carpeta" />
-//          </Route>
             render={(props) => {
                 return <CarpetaWeb {...props} />;
               }}
@@ -179,8 +148,6 @@ class Index extends Component {
               return <PersistenciaControl {...props} />;
             }}
           />
-
-          <Route path="/components" component={ExemplesDeComponents} />
 
           <Route
             path="/carpeta"

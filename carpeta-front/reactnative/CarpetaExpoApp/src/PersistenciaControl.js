@@ -6,8 +6,7 @@
  * @desc Exemple de Control de Persistència
  */
 import React, { Component } from "react";
-
-import { Alert, Button, StyleSheet, Text, TextInput, View } from "react-native";
+import { Alert, Button, StyleSheet, Text, TextInput, View, Platform } from "react-native";
 import Persistencia from "./Persistencia";
 import Constants from "expo-constants";
 import { sessionStorageRN } from "./SessionStorageClass";
@@ -78,9 +77,11 @@ class PersistenciaControl extends Component {
       <View>
         <Text style={styles.title}>Carpeta APP</Text>
         <Text style={styles.label}>
-          Versió App: {Constants.manifest.version}
+          Versió App: {Constants.manifest.version}{"\n"}
+          Expo Push Token: {expoPushToken}{"\n"}
+          Platform OS: {Platform.OS}{"\n"}
+          Platform Version: {Platform.Version}
         </Text>
-        <Text style={styles.label}>Expo Push Token: {expoPushToken}</Text>
         <View style={styles.fixToText}>
           <Text style={styles.label}>URL Servidor:</Text>
         </View>
