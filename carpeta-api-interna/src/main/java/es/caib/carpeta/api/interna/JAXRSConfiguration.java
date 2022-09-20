@@ -32,7 +32,13 @@ import org.apache.log4j.Logger;
                         url = "http://otae.fundaciobit.org")
 
         ),
-        servers = { @Server(url = "http://localhost:8080/carpetaapi/interna") },
+        servers = { @Server(url = "../../carpetaapi/interna"), 
+                    @Server(url = "http://localhost:8080/carpetaapi/interna"),
+                    @Server(url = "https://dev.caib.es/carpetaapi/interna"),
+                    @Server(url = "https://proves.caib.es/carpetaapi/interna"),
+                    @Server(url = "https://se.caib.es/carpetaapi/interna"),
+                    @Server(url = "https://www.caib.es/carpetaapi/interna")
+        },
         externalDocs = @ExternalDocumentation(
                 description = "Java Client (GovernIB Github)",
                 url = "https://github.com/GovernIB/carpeta/tree/carpeta-1.1/carpeta-api-interna-client")

@@ -1,6 +1,6 @@
 # NotificacionsApi
 
-All URIs are relative to *http://localhost:8080/carpetaapi/interna*
+All URIs are relative to *../../carpetaapi/interna*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

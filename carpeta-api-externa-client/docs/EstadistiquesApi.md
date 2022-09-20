@@ -1,6 +1,6 @@
 # EstadistiquesApi
 
-All URIs are relative to *http://localhost:8080/carpetaapi/externa*
+All URIs are relative to *../../carpetaapi/externa*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

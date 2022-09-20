@@ -64,7 +64,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 @OpenAPIDefinition(
         tags = @Tag(
                 name = "Notificacions",
-                description = "Notificacions a l'APP de Carpeta (missateg a Mòbil)"))
+                description = "Notificacions a l'APP de Carpeta (missatges a Mòbil)"))
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @SecurityScheme(type = SecuritySchemeType.HTTP, name = "BasicAuth", scheme = "basic")

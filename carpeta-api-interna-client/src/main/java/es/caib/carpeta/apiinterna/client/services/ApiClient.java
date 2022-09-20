@@ -46,7 +46,7 @@ import es.caib.carpeta.apiinterna.client.services.auth.OAuth;
 
 public class ApiClient {
   private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
-  private String basePath = "http://localhost:8080/carpetaapi/interna";
+  private String basePath = "../../carpetaapi/interna";
   private boolean debugging = false;
 
   private Client httpClient;
