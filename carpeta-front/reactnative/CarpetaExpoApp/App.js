@@ -19,6 +19,8 @@ import * as ScreenOrientation from "expo-screen-orientation";
 import Persistencia from './src/Persistencia';
 
 
+
+
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
