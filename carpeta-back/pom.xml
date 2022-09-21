@@ -402,24 +402,6 @@
             </plugin>
 
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-                <configuration>
-                    <filesets>
-                        <fileset>
-                            <directory>${basedir}/src/main/resources</directory>
-                            <includes>
-                                <include>genapp_*.properties</include>
-                                <include>carpeta_genapp_*.properties</include>
-                                <include>logicmissatges_*.properties</include>
-                            </includes>
-                            <followSymlinks>false</followSymlinks>
-                        </fileset>
-                    </filesets>
-                </configuration>
-            </plugin>
-
-            <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>
                     <execution>
@@ -429,7 +411,7 @@
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/src/main/resources</outputDirectory>
+                            <outputDirectory>${project.build.directory}/classes</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${basedir}/../carpeta-ejb/src/main/resources</directory>
