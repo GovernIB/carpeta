@@ -4,6 +4,7 @@
         dataacces timestamp,
         entitatid number(19,0) not null,
         idioma varchar2(50 char),
+        idsessio varchar2(255 char),
         ip varchar2(100 char),
         llinatges varchar2(255 char),
         metodeautenticacio varchar2(255 char),
@@ -34,6 +35,21 @@
         gravetat number(10,0) not null,
         pluginfrontid number(19,0),
         tipus number(10,0) not null
+    );
+
+    create table car_ciutada (
+       ciutadaid number(19,0) not null,
+        datacreacio timestamp not null,
+        empresa number(1,0) not null,
+        llinatge1 varchar2(255 char),
+        llinatge2 varchar2(255 char),
+        mobileid varchar2(255 char),
+        nif varchar2(100 char) not null,
+        nom varchar2(255 char),
+        representantllinatge1 varchar2(255 char),
+        representantllinatge2 varchar2(255 char),
+        representantnif varchar2(100 char),
+        representantnom varchar2(255 char)
     );
 
     create table car_enllaz (
@@ -113,10 +129,22 @@
         error clob,
         estat number(10,0) not null,
         excepcio clob,
+        idsessio clob,
         peticio varchar2(255 char),
         pluginid number(19,0),
         temps number(19,0),
         tipus number(10,0) not null
+    );
+
+    create table car_notificacioapp (
+       notificacioappid number(19,0) not null,
+        activa number(1,0) not null,
+        ajuda clob,
+        codi varchar2(50 char) not null,
+        entitatid number(19,0) not null,
+        frontpluginid number(19,0),
+        missatgeid number(19,0) not null,
+        titolid number(19,0) not null
     );
 
     create table car_plugin (
@@ -140,6 +168,17 @@
         ordre number(10,0) not null,
         pluginid number(19,0) not null,
         seccioid number(19,0)
+    );
+
+    create table car_preguntesfrequents (
+       preguntesfrequentsid number(19,0) not null,
+        entitatid number(19,0) not null,
+        enunciatid number(19,0) not null,
+        fitxer1id number(19,0),
+        fitxer2id number(19,0),
+        fitxer3id number(19,0),
+        ordre number(10,0) not null,
+        respostaid number(19,0) not null
     );
 
     create table car_propietatglobal (
@@ -190,7 +229,6 @@
         entitatid number(19,0) not null,
         usuariid number(19,0) not null
     );
-
 
 
 

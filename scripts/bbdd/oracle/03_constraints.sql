@@ -6,6 +6,8 @@
 
     alter table car_avis add constraint car_avis_pk primary key (avisid);
 
+    alter table car_ciutada add constraint car_ciutada_pk primary key (ciutadaid);
+
     alter table car_enllaz add constraint car_enllaz_pk primary key (enllazid);
 
     alter table car_entitat add constraint car_entitat_pk primary key (entitatid);
@@ -18,9 +20,13 @@
 
     alter table car_log add constraint car_log_pk primary key (logid);
 
+    alter table car_notificacioapp add constraint car_notificacioapp_pk primary key (notificacioappid);
+
     alter table car_plugin add constraint car_plugin_pk primary key (pluginid);
 
     alter table car_pluginentitat add constraint car_pluginentitat_pk primary key (pluginentitatid);
+
+    alter table car_preguntesfrequents add constraint car_preguntesfrequents_pk primary key (preguntesfrequentsid);
 
     alter table car_propietatglobal add constraint car_propietatglobal_pk primary key (propietatglobalid);
 
@@ -134,6 +140,26 @@
        foreign key (pluginloginid) 
        references car_plugin;
 
+    alter table car_notificacioapp 
+       add constraint car_notifica_entitat_ent_fk 
+       foreign key (entitatid) 
+       references car_entitat;
+
+    alter table car_notificacioapp 
+       add constraint car_notifica_traduccio_msg_fk 
+       foreign key (missatgeid) 
+       references car_traduccio;
+
+    alter table car_notificacioapp 
+       add constraint car_notifica_plugin_plug_fk 
+       foreign key (frontpluginid) 
+       references car_plugin;
+
+    alter table car_notificacioapp 
+       add constraint car_notifica_traduccio_tit_fk 
+       foreign key (titolid) 
+       references car_traduccio;
+
     alter table car_plugin 
        add constraint car_plugin_traduccio_desc_fk 
        foreign key (descripcioid) 
@@ -173,6 +199,36 @@
        add constraint car_plugent_seccio_sec_fk 
        foreign key (seccioid) 
        references car_seccio;
+
+    alter table car_preguntesfrequents 
+       add constraint car_faq_entitat_ent_fk 
+       foreign key (entitatid) 
+       references car_entitat;
+
+    alter table car_preguntesfrequents 
+       add constraint car_faq_traduccio_enun_fk 
+       foreign key (enunciatid) 
+       references car_traduccio;
+
+    alter table car_preguntesfrequents 
+       add constraint car_faq_fitxer_fitxer1_fk 
+       foreign key (fitxer1id) 
+       references car_fitxer;
+
+    alter table car_preguntesfrequents 
+       add constraint car_faq_fitxer_fitxer2_fk 
+       foreign key (fitxer2id) 
+       references car_fitxer;
+
+    alter table car_preguntesfrequents 
+       add constraint car_faq_fitxer_fitxer3_fk 
+       foreign key (fitxer3id) 
+       references car_fitxer;
+
+    alter table car_preguntesfrequents 
+       add constraint car_faq_traduccio_resp_fk 
+       foreign key (respostaid) 
+       references car_traduccio;
 
     alter table car_propietatglobal 
        add constraint car_propglob_entitat_fk 
@@ -227,6 +283,12 @@
 
 
  -- INICI UNIQUEs
+
+    alter table car_ciutada 
+       add constraint car_ciutada_nif_rnif_uk unique (nif, representantnif);
+
+    alter table car_notificacioapp 
+       add constraint UK_oyc13allxmxfjqckpbs8g2kmn unique (codi);
 
     alter table car_pluginentitat 
        add constraint car_plugent_plug_ent_uk unique (pluginid, entitatid);
