@@ -11,32 +11,43 @@ const config = {
 		rules: [
 			{
 				test: /\.(js|jsx)$/,
-				loaders: "babel-loader",
-				query: {
-					"presets": [
-						//"env",
-						"@babel/preset-react"
-						//"stage-2",
-						//"@babel/react"
-					]
-					//"plugins": [["flow-runtime"], "transform-decorators-legacy"]
-				}
+				use: [
+					{
+					  loader: "babel-loader",
+					  options: {
+						presets: [
+						  //"env",
+						  "@babel/preset-react",
+						  //"stage-2",
+						  //"@babel/react"
+						],
+						//"plugins": [["flow-runtime"], "transform-decorators-legacy"]
+					  },
+					},
+				  ]
 			}
 			,
 			// Load images.
 			{
 				test: /\.(gif|jpe?g|png)$/,
-				loader: 'url-loader?limit=25000',
-				query: {
-					limit: 10000,
-					name: 'static/media/images/[name].[hash:8].[ext]'
-				}
+				use: [
+					{
+					  loader: "url-loader?limit=25000",
+					  options: {
+						limit: 10000,
+						name: "static/media/images/[name].[hash:8].[ext]",
+					  },
+					},
+				  ]
 			}
 			,
 			// css files
 			{
 				test: /\.css$/i,
-				use: ["style-loader", "css-loader"],
+				use: [
+					{ loader: "style-loader"},
+					{ loader: "css-loader" }
+				],
 			}
 		]
 	}

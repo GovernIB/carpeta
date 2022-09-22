@@ -1,7 +1,7 @@
 {
-  "name": "HelloWorldExample",
-  "version": "1.2.3",
-  "description": "HelloWorldExample",
+  "name": "regweb32",
+  "version": "1.0.0",
+  "description": "RegWeb 32 Plugin",
   "main": "./src/main.js",
   "scripts": {
     "start": "webpack-dev-server --hot",
@@ -28,14 +28,14 @@
     "react-i18next": "^11.5.0",
     "react-select": "^5.0.0",
     "run": "^1.4.0",
-    "webpack": "^4.43.0",
-    "webpack-dev-server": "^3.11.0"
+    "webpack": "^5.74.0",
+    "webpack-dev-server": "^4.10.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "css-loader": "^6.3.0",
     "style-loader": "^3.3.0",
     "url-loader": "^4.1.1",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^4.10.0"
   }
 }

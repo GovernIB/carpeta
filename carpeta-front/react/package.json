@@ -1,13 +1,12 @@
 {
   "name": "carpeta_react",
-  "version": "1.2.3",
+  "version": "1.0.0",
   "description": "Front Carpeta versio 1.0",
   "main": "src/main.js",
   "scripts": {
-    "start": "node_modules/.bin/webpack-dev-server --hot",
+    "start": "webpack-dev-server --hot",
     "deploy": "npm run build&&gh-pages -d build",
-    "buildd": "node_modules/.bin/webpack --config webpack.config.js --mode=development",
-    "build": "node_modules/.bin/webpack --config webpack.config.js --mode=production"
+    "build": "webpack --config webpack.config.js"
   },
   "keywords": [],
   "author": "Fundacio BIT - Govern Digital",
@@ -16,7 +15,6 @@
     "@babel/core": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
     "@popperjs/core": "^2.5.4",
-    "axios": "^0.21.4",
     "babel-loader": "^8.1.0",
     "babel-preset-env": "^1.7.0",
     "base-64": "^1.0.0",
@@ -31,7 +29,7 @@
     "js-cookie": "^2.2.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
-    "react-axios": "^2.0.3",
+    "react-axios": "^2.0.6",
     "react-bootstrap": "^2.0.0-rc.0",
     "react-cookie": "^4.0.3",
     "react-datepicker": "^4.2.1",
@@ -50,11 +48,11 @@
     "run": "^1.4.0",
     "styled-components": "^5.2.1",
     "url-loader": "^4.1.0",
-    "webpack": "^4.43.0",
-    "webpack-dev-server": "^3.11.0"
+    "webpack": "^5.74.0",
+    "webpack-dev-server": "^4.10.0"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.12.1",
-    "webpack-cli": "^3.3.11"
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "webpack-cli": "^4.10.0"
   }
 }

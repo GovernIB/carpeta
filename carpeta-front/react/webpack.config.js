@@ -7,26 +7,40 @@ const config = {
 		filename: "reactjs_main.js"
 	},
 
+	mode: 'development',
+
 	module: {
 
 		rules: [
 			{
 				test: /\.(js|jsx)$/,
-				loaders: "babel-loader",
-				query: {
-
-					"presets": [
-						//"env",
-						"@babel/preset-react"
-						//"stage-2",
-						//"@babel/react"
-					]
-					//"plugins": [["flow-runtime"], "transform-decorators-legacy"]
-
-
-				}
+				use: [
+					{
+					  loader: "babel-loader",
+					  options: {
+						presets: [
+						  //"env",
+						  "@babel/preset-react",
+						  //"stage-2",
+						  //"@babel/react"
+						],
+						//"plugins": [["flow-runtime"], "transform-decorators-legacy"]
+					  },
+					},
+				  ]
 			},
-			{ test: /\.(png|jpg|)$/, loader: 'url-loader?limit=240' }
+			{
+				test: /\.(gif|jpe?g|png)$/,
+				use: [
+				  {
+					loader: "url-loader?limit=240",
+					options: {
+					  limit: 10000,
+					  name: "static/media/images/[name].[hash:8].[ext]",
+					},
+				  },
+				],
+			}
 		]
 	}
 };

@@ -1,7 +1,7 @@
 {
-  "name": "HelloWorldExample",
-  "version": "1.2.3",
-  "description": "HelloWorldExample",
+  "name": "notificacionsistra",
+  "version": "1.0.0",
+  "description": "Notificacion Sistra",
   "main": "./src/main.js",
   "scripts": {
     "start": "webpack-dev-server --hot",
@@ -27,15 +27,15 @@
     "react-datepicker": "^4.2.1",
     "react-dom": "^16.13.1",
     "react-i18next": "^11.5.0",
-    "react-pagination-table": "^2.0.2",
+    "react-pagination-table": "^1.0.2",
     "react-router-dom": "^6.0.2",
     "style-loader": "^3.3.0",
-    "webpack": "^4.43.0",
-    "webpack-dev-server": "^3.11.0"
+    "webpack": "^5.74.0",
+    "webpack-dev-server": "^4.10.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "url-loader": "^4.1.1",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^4.10.0"
   }
 }

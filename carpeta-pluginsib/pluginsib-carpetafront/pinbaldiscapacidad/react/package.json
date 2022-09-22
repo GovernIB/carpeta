@@ -1,7 +1,7 @@
 {
-  "name": "HelloWorldExample",
-  "version": "1.2.3",
-  "description": "HelloWorldExample",
+  "name": "pinbaldiscapacidad",
+  "version": "1.0.0",
+  "description": "Pinbal Discapacidad Plugin",
   "main": "./src/main.js",
   "scripts": {
     "start": "webpack-dev-server --hot",
@@ -23,7 +23,7 @@
     "react-dom": "^16.13.1",
     "react-i18next": "^11.5.0",
     "webpack": "^4.43.0",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^4.11.1"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.8.3",
