@@ -154,11 +154,7 @@ public class PluginFrontController extends CommonFrontController {
                 pluginParameter, urlbase);
     }
     
-    
-    
-    
-    
-    
+
 
     @RequestMapping(
             value = "/showreactplugin/{pluginContext}/{urlbase}/{idioma}/p/**",
@@ -232,7 +228,7 @@ public class PluginFrontController extends CommonFrontController {
             //        + request.getServerPort() + request.getContextPath();
 
 
-            String urlToShowPluginPage = startPublicSignatureProcess(request, response, pluginID,
+            String urlToShowPluginPage = startPublicShowPluginProcess(request, response, pluginID,
                     administrationID, urlBase, usuarioClave, pluginParameter);
             ModelAndView mav = new ModelAndView(new RedirectView(urlToShowPluginPage));
 
@@ -300,7 +296,7 @@ public class PluginFrontController extends CommonFrontController {
 
     }
 
-    private String startPublicSignatureProcess(HttpServletRequest request,
+    private String startPublicShowPluginProcess(HttpServletRequest request,
             HttpServletResponse response, Long pluginID, String administrationID, String baseFront,
             UsuarioClave usuarioClave, String pluginParameter) throws Exception, I18NException {
 
@@ -310,7 +306,7 @@ public class PluginFrontController extends CommonFrontController {
 //        try {
 
         // /pluginfront/showplugin/registre32/ca/p/GOIB-E-155%2F2021
-        log.info("startPublicSignatureProcess => pluginParameter: ]" + pluginParameter + "[");
+        log.info("startPublicShowPluginProcess => pluginParameter: ]" + pluginParameter + "[");
 
         String context = AbstractCarpetaFrontModuleController.PUBLIC_CONTEXTWEB;
 

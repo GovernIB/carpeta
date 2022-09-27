@@ -6,6 +6,7 @@ import {withRouter} from "react-router";
 import axios from "axios";
 import DocumentTitle from "react-document-title";
 import PropTypes from 'prop-types';
+import {decode as base64_decode, encode as base64_encode} from 'base-64';
 
 /**
  * 

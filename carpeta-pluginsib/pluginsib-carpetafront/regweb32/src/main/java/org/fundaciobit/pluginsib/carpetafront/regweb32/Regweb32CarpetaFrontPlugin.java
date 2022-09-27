@@ -233,11 +233,11 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
     
     @Override
     public boolean isReactComponent() {
-    	try {
-    		return ("true".equals(getPropertyRequired(REGWEB32_PROPERTY_BASE + "isreact")));
-    	}catch(Exception e) {
-    		return false;
+    	if(getProperty(REGWEB32_PROPERTY_BASE + "isreact") != null) {
+    	   log.error("La propietat [" + REGWEB32_PROPERTY_BASE + "isreact"  + "] del plugin " 
+    	   + this.getClass().getName() + " està deprecada. Per favor esborri aquesta propietat.") ;   
     	}
+    	return true;
     }
 
     @Override

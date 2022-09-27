@@ -56,14 +56,27 @@ class PluginReact extends Component {
 
     reloadReactPlugin() {
 
-        const pluginContext = this.props.pluginContext;
-
         var urlBase = sessionStorage.getItem('contextPath');
         console.log('PLUGIN REACT  Entra a reloadReactPlugin() urlBase = ' + urlBase);
 
         var urlBaseEncoded =  base64_encode(urlBase);
+
+        const pluginContext = this.props.pluginContext;
+        console.log("PLUGIN REACT Context =" + pluginContext);
+
+        const pluginParameter = this.props.match.params.pluginParameter;
+        console.log("PLUGIN REACT Parameter = ]" + pluginParameter + "[");
+
         
-        var url = urlBase + "/pluginfront/showreactplugin/" + pluginContext + "/" + urlBaseEncoded + "/" + i18n.language;
+        //var url = urlBase + "/pluginfront/showreactplugin/" + pluginContext + "/" + urlBaseEncoded + "/" + i18n.language;
+
+        var url;
+        if (pluginParameter) {
+           url = urlBase + "/pluginfront/showreactplugin/" + pluginContext + "/" + urlBaseEncoded + "/" + i18n.language + "/p/" + pluginParameter;
+        } else {
+           url = urlBase + "/pluginfront/showreactplugin/" + pluginContext + "/" + urlBaseEncoded + "/" + i18n.language;
+        }
+
 
         // Per provocar el render !!!!
         this.setState({loaded: true, pluginContext: pluginContext });
@@ -115,6 +128,8 @@ class PluginReact extends Component {
         // console.log(" PLUGIN REACT RENDER pluginContext state " +  this.state.pluginContext + "!");
         console.log(" PLUGIN REACT RENDER pluginContext " +  this.props.pluginContext + "!");
         // console.log(" PLUGIN REACT RENDER seccioContext " +  this.props.seccioContext + "!");
+
+        
 
 
         if (this.props.pluginContext !== this.state.pluginContext) {
