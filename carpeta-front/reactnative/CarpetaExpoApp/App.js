@@ -213,7 +213,7 @@ class App extends Component {
               "CLICK OK this.index=" + this.index
           );
 
-          //Linking.openURL(fullUrl);
+
           var ispublic = response.notification.request.content.data.ispublic;
 
           var fullUrl = this.state.urlcarpeta + url;

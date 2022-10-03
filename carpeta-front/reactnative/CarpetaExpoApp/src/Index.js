@@ -10,6 +10,7 @@ import React, { Component } from "react";
 
 // I18N
 import { withTranslation } from "react-i18next";
+import './i18n';
 
 import {
   Button,
@@ -20,10 +21,8 @@ import {
   Linking,
   Alert,
 } from "react-native";
-import { openLink, tryDeepLinking } from "./UtilsWeb";
 import { Link, Route, Switch, withRouter } from "./components/Routing";
 
-import Home from "./Home";
 import CarpetaWeb from "./CarpetaWeb";
 import LoginIBCallBackBrowser from "./LoginIBCallBackBrowser";
 import PersistenciaControl from "./PersistenciaControl";
@@ -118,6 +117,8 @@ class Index extends Component {
 
     return (
       <View style={styles.container}>
+
+
         {/* MENU SUPERIOR */}
         <View style={styles.nav} hide={this.state.isHidden}>
 

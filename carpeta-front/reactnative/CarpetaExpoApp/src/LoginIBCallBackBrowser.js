@@ -1,3 +1,12 @@
+
+import React from "react";
+import { StyleSheet, ScrollView, Text } from "react-native";
+import * as Linking from "expo-linking";
+import VistaWebComponent from "./components/VistaWebComponent";
+import Persistencia from "./Persistencia";
+import { sessionStorageRN } from "./SessionStorageClass";
+import {LinkingOpenURL} from './WebBrowserUtils';
+
 /**
  * @author anadal (u80067)
  * @email governdigital.carpeta@fundaciobit.org
@@ -5,13 +14,6 @@
  * @modify date 19-08-2021 09:09:44
  * @desc
  */
-import React from "react";
-import { StyleSheet, ScrollView, Text } from "react-native";
-import * as Linking from "expo-linking";
-import VistaWebComponent from "./components/VistaWebComponent";
-import Persistencia from "./Persistencia";
-import { sessionStorageRN } from "./SessionStorageClass";
-
 class LoginIBCallBackBrowser extends React.Component {
   constructor(props) {
     super(props);
@@ -91,7 +93,7 @@ class LoginIBCallBackBrowser extends React.Component {
         console.log(
           new Date().toUTCString() + "  Obring URL => ]" + theUrlBrowser + "["
         );
-        Linking.openURL(theUrlBrowser);
+        LinkingOpenURL(theUrlBrowser);
       }
       return false;
     }
@@ -103,11 +105,12 @@ class LoginIBCallBackBrowser extends React.Component {
         console.log("CarpetaWeb:: stopLoading ... ");
         event.target.stopLoading();
         console.log("LoginIBCallBackBrowser::Obrint URL externa : " + url);
+        /*
         Linking.canOpenURL(url).then((supported) => {
-          if (supported) {
-            return Linking.openURL(url).catch(() => null);
-          }
-        });
+          if (supported) { */
+            return LinkingOpenURL(url); // .catch(() => null);
+          /*}
+        });*/
         this.lastExternal = url;
       } else {
         event.target.stopLoading();

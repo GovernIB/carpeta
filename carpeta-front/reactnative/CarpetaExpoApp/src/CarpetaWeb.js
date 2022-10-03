@@ -13,6 +13,7 @@ import * as Linking from "expo-linking";
 import Section from './Section';
 import VistaWebComponent from './components/VistaWebComponent';
 import Persistencia from './Persistencia';
+import {LinkingOpenURL} from './WebBrowserUtils';
 
 class CarpetaWeb extends Component {
   constructor(props) {
@@ -80,7 +81,7 @@ class CarpetaWeb extends Component {
           urlCarpeta + '/public/preLoginApp/' + loginCode + '?urlbase=' + encodeURIComponent(urlbase);
 
         console.log(new Date().toUTCString() + '  Obring URL => ]' + theUrlBrowser + '[');
-        Linking.openURL(theUrlBrowser);
+        LinkingOpenURL(theUrlBrowser);
       }
       return false;
     }
@@ -93,12 +94,12 @@ class CarpetaWeb extends Component {
       console.log("CarpetaWeb:: stopLoading ... ");
       event.target.stopLoading();
       console.log("CarpetaWeb::Obrint URL externa : " + url);
+      /*
       Linking.canOpenURL(url).then((supported) => {
-        if (supported) {
-          return Linking.openURL(url)
-            .catch(() => null);
-        }
-      });
+        if (supported) {*/
+          return LinkingOpenURL(url); // .catch(() => null);
+        /*}
+      });*/
 
       return false;
     }
