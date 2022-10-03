@@ -1,3 +1,15 @@
+
+
+import React, {Component} from 'react';
+import {StyleSheet, ScrollView, Text, View, Platform } from 'react-native';
+import * as Linking from "expo-linking";
+
+import Section from './Section';
+import VistaWebComponent from './components/VistaWebComponent';
+import Persistencia from './Persistencia';
+import {LinkingOpenURL} from './WebBrowserUtils';
+import * as WebBrowser from 'expo-web-browser';
+
 /**
  * @author anadal (u80067)
  * @email governdigital.carpeta@fundaciobit.org
@@ -5,16 +17,6 @@
  * @modify date 18-08-2021 08:51:02
  * @desc [description]
  */
-
-import React, {Component} from 'react';
-import {StyleSheet, ScrollView, Text, View} from 'react-native';
-import * as Linking from "expo-linking";
-
-import Section from './Section';
-import VistaWebComponent from './components/VistaWebComponent';
-import Persistencia from './Persistencia';
-import {LinkingOpenURL} from './WebBrowserUtils';
-
 class CarpetaWeb extends Component {
   constructor(props) {
     super(props);
@@ -94,12 +96,12 @@ class CarpetaWeb extends Component {
       console.log("CarpetaWeb:: stopLoading ... ");
       event.target.stopLoading();
       console.log("CarpetaWeb::Obrint URL externa : " + url);
-      /*
+      
       Linking.canOpenURL(url).then((supported) => {
-        if (supported) {*/
-          return LinkingOpenURL(url); // .catch(() => null);
-        /*}
-      });*/
+        if (supported) {
+          return Linking.openURL(url).catch(() => null);
+        }
+      });
 
       return false;
     }
@@ -170,6 +172,13 @@ class CarpetaWeb extends Component {
       var pos = param.lastIndexOf('_');
 
       var loginCode = param.substring(pos + 1, param.length);
+        
+      
+        
+      if (Platform.OS === 'ios') {
+          console.log("Tancant WebBrowser per IOS ...");
+          WebBrowser.dismissBrowser();
+      }
 
       console.log('CarpetaWeb::navigate => loginCode: ' + loginCode);
 

@@ -105,15 +105,16 @@ class LoginIBCallBackBrowser extends React.Component {
         console.log("CarpetaWeb:: stopLoading ... ");
         event.target.stopLoading();
         console.log("LoginIBCallBackBrowser::Obrint URL externa : " + url);
-        /*
+        
         Linking.canOpenURL(url).then((supported) => {
-          if (supported) { */
-            return LinkingOpenURL(url); // .catch(() => null);
-          /*}
-        });*/
+          if (supported) {
+            return Linking.openURL(url).catch(() => null);
+          }
+        });
         this.lastExternal = url;
       } else {
         event.target.stopLoading();
+        this.lastExternal = null;
         console.log(
           "LoginIBCallBackBrowser::NO Obrim URL externa: REPETIDA !!!! "
         );
