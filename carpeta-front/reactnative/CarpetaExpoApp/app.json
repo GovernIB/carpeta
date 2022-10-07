@@ -42,7 +42,8 @@
         "backgroundColor": "#ffffff"
       },
       "package": "es.caib.carpeta.carpetaapp",
-	    "blockedPermissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION", "ACCESS_BACKGROUND_LOCATION"],
+      "blockedPermissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION", "ACCESS_BACKGROUND_LOCATION"],
+      "useNextNotificationsApi": true,
       "googleServicesFile": "./google-services.json",	  
       "versionCode": 110
     },

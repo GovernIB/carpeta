@@ -193,7 +193,6 @@ nb-configuration.xml
 /carpeta-front/reactnative/CarpetaExpoApp/Generar build per iOS (.IPA) amb Expo.pdf
 /carpeta-front/reactnative/CarpetaExpoApp/Publicar .IPA al App Store en mode proves (TestFlight) i producció.pdf
 /carpeta-front/reactnative/CarpetaExpoApp/eas.json
-/carpeta-front/reactnative/CarpetaExpoApp/google-services.json
 /carpeta-front/reactnative/CarpetaExpoApp/ios_apple_store_info.txt
 /carpeta-front/reactnative/CarpetaExpoApp/submit_to_apple_store.txt
 /videos
@@ -207,3 +206,7 @@ carpeta-pluginsib/pluginsib-carpetafront/notib/react/dist/notib_reactjs_main.js.
 carpeta-pluginsib/pluginsib-carpetafront/notificacionssistra/react/dist/notificacionssistra_reactjs_main.js.LICENSE.txt
 carpeta-pluginsib/pluginsib-carpetafront/pinbalmatricula/react/dist/reactjs_main.js.LICENSE.txt
 carpeta-pluginsib/pluginsib-carpetafront/regweb32/react/dist/regweb32_reactjs_main.js.LICENSE.txt
+/carpeta-front/reactnative/PlayStore
+/carpeta-front/reactnative/video
+/carpeta-front/reactnative/android
+/carpeta-front/reactnative/binaris
