@@ -22,7 +22,8 @@ class CarpetaWeb extends Component {
     super(props);
 
     this.navigate.bind(this);
-    this.navigateCarpetaWeb.bind(this);
+    this.navigateCarpetaWeb = this.navigateCarpetaWeb.bind(this);
+    this.loadRootPage = this.loadRootPage.bind(this);
     this.calledWhenDataLoaded = this.calledWhenDataLoaded.bind(this);
     this.callWhenNavigationStateChange = this.callWhenNavigationStateChange.bind(this);
     
@@ -83,7 +84,7 @@ class CarpetaWeb extends Component {
           urlCarpeta + '/public/preLoginApp/' + loginCode + '?urlbase=' + encodeURIComponent(urlbase);
 
         console.log(new Date().toUTCString() + '  Obring URL => ]' + theUrlBrowser + '[');
-        LinkingOpenURL(theUrlBrowser);
+        LinkingOpenURL(theUrlBrowser, this.loadRootPage);
       }
       return false;
     }
@@ -139,6 +140,13 @@ class CarpetaWeb extends Component {
     this.navigate(event.url);
   };
 
+
+
+  loadRootPage() {
+    this.navigateCarpetaWeb(this.state.urlcarpeta, true);
+  }
+
+
   navigateCarpetaWeb(url, ispublic) {
     // Crida a vistaWebComponent per a que canvii la pàgina web
     // Canvia url del WebView
@@ -157,7 +165,7 @@ class CarpetaWeb extends Component {
     // E. We first parse the url to get the id and route name. We then check to see if the route
     // name is equal to "show", and if so we navigate to the People component, passing the id as a prop.
 
-    console.log('CarpetaWeb => navigate(' + url + ')');
+    console.log('CarpetaWeb => navigate(]' + url + '[)');
 
     if (!url) {
       return;
@@ -172,13 +180,15 @@ class CarpetaWeb extends Component {
       var pos = param.lastIndexOf('_');
 
       var loginCode = param.substring(pos + 1, param.length);
-        
-      
-        
+
       if (Platform.OS === 'ios') {
           console.log("Tancant WebBrowser per IOS ...");
           WebBrowser.dismissBrowser();
       }
+
+      global.isPostLoginCarpeta = true;
+
+      console.log(new Date().toLocaleString() + " CarpetaWeb => Setting global.isPostLoginCarpeta = true");
 
       console.log('CarpetaWeb::navigate => loginCode: ' + loginCode);
 

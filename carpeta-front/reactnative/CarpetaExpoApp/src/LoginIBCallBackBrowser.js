@@ -41,6 +41,12 @@ class LoginIBCallBackBrowser extends React.Component {
     loginIBCallBackBrowserRef(undefined);
   }
 
+  
+  loadRootPage() {
+    this.navigateCarpetaWeb(this.state.urlcarpeta, true);
+  }
+
+
   navigateCarpetaWeb(url, ispublic) {
     // Crida a vistaWebComponent per a que canvii la pàgina web
     // Canvia url del WebView
@@ -93,7 +99,7 @@ class LoginIBCallBackBrowser extends React.Component {
         console.log(
           new Date().toUTCString() + "  Obring URL => ]" + theUrlBrowser + "["
         );
-        LinkingOpenURL(theUrlBrowser);
+        LinkingOpenURL(theUrlBrowser, this.loadRootPage);
       }
       return false;
     }
