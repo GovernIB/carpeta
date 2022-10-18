@@ -45,8 +45,9 @@ public class PluginEntitatJPA implements PluginEntitat {
     @Column(name="seccioid",length = 19)
     java.lang.Long seccioID;
 
+    @org.hibernate.annotations.ColumnDefault("1")
     @Column(name="ordre",nullable = false,length = 10)
-    int ordre;
+    int ordre = 1;
 
 
 

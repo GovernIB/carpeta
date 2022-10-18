@@ -64,7 +64,7 @@ public class PluginJPA implements Plugin {
     java.lang.String propietats;
 
     @Column(name="actiu",nullable = false,length = 1)
-    boolean actiu;
+    boolean actiu = true;
 
     @Column(name="tipus",nullable = false,length = 10)
     int tipus;

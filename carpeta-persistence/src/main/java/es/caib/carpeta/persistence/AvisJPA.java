@@ -45,8 +45,9 @@ public class AvisJPA implements Avis {
     @Column(name="tipus",nullable = false,length = 10)
     int tipus;
 
+    @org.hibernate.annotations.ColumnDefault("1")
     @Column(name="gravetat",nullable = false,length = 10)
-    int gravetat;
+    int gravetat = 1;
 
     @Column(name="pluginfrontid",length = 19)
     java.lang.Long pluginFrontID;

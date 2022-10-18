@@ -66,7 +66,7 @@ public class AccesJPA implements Acces {
     java.lang.String idioma;
 
     @Column(name="resultat",nullable = false,length = 1)
-    boolean resultat;
+    boolean resultat = true;
 
     @Column(name="idsessio",length = 255)
     java.lang.String idsessio;

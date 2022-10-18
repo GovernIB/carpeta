@@ -30,8 +30,9 @@ public class EstadisticaJPA implements Estadistica {
     @Column(name="dataestadistica",nullable = false,length = 29,precision = 6)
     java.sql.Timestamp dataEstadistica;
 
+    @org.hibernate.annotations.ColumnDefault("0")
     @Column(name="comptador",nullable = false,length = 10)
-    int comptador;
+    int comptador = 0;
 
     @Column(name="pluginid",length = 19)
     java.lang.Long pluginID;

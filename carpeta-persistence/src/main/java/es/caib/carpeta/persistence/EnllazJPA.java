@@ -55,10 +55,11 @@ public class EnllazJPA implements Enllaz {
     java.lang.Long seccioID;
 
     @Column(name="actiu",nullable = false,length = 1)
-    boolean actiu;
+    boolean actiu = true;
 
+    @org.hibernate.annotations.ColumnDefault("1")
     @Column(name="ordre",nullable = false,length = 10)
-    int ordre;
+    int ordre = 1;
 
 
 

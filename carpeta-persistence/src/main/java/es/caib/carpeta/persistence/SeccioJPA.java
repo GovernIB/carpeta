@@ -45,7 +45,7 @@ public class SeccioJPA implements Seccio {
     java.lang.String contexte;
 
     @Column(name="activa",nullable = false,length = 1)
-    boolean activa;
+    boolean activa = true;
 
     @Column(name="iconaid",nullable = false,length = 19)
     long iconaID;
@@ -56,8 +56,9 @@ public class SeccioJPA implements Seccio {
     @Column(name="entitatid",nullable = false,length = 19)
     long entitatID;
 
+    @org.hibernate.annotations.ColumnDefault("1")
     @Column(name="ordre",nullable = false,length = 10)
-    int ordre;
+    int ordre = 1;
 
 
 
