@@ -333,7 +333,9 @@ class Apodera extends Component {
           taulaApodera = (
             <>
               <div>
+                
                 {/*  ============== VERSIO NORMAL ================= */}
+                { 
                 <Table
                   id="tableId"
                   responsive
@@ -468,7 +470,7 @@ class Apodera extends Component {
                     )}
                   </tbody>
                 </Table>
-
+                }
                 {/*  ============== FINAL VERSIO NORMAL ================= */}
 
                 {/*  ============== VERSIO MÒBIL ================= */}
@@ -642,8 +644,9 @@ class Apodera extends Component {
                   </div>
                 )}
                   */}
-          {taulaApodera}
-          {cardApoderaments}
+          {(this.state.dataApoderaments.length == 0)?
+                  <div class="alert alert-secondary" role="alert">{t("apoderaApoderamentsNoTrobats")}</div> : taulaApodera + cardApoderaments}
+          
         </div>
       );
     }
