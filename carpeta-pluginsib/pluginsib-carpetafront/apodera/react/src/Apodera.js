@@ -644,8 +644,12 @@ class Apodera extends Component {
                   </div>
                 )}
                   */}
+
+          {/*Pintat de taula controlant que no sigui buida*/}        
           {(this.state.dataApoderaments.length == 0)?
-                  <div class="alert alert-secondary" role="alert">{t("apoderaApoderamentsNoTrobats")}</div> : taulaApodera + cardApoderaments}
+                  <div class="alert alert-secondary" role="alert">{t("apoderaApoderamentsNoTrobats")}</div> : taulaApodera}
+
+          {cardApoderaments}
           
         </div>
       );
