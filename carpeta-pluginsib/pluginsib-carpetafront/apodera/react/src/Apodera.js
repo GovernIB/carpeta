@@ -428,12 +428,12 @@ class Apodera extends Component {
                                       {llistaProcediments}
                                     </span>
                                   )}
-                                  {tramits && (
+                                  {/*tramits && (
                                     <span>
                                       <b>{t("apoderaTramits")}</b>:{" "}
                                       {llistaTramits}
                                     </span>
-                                  )}
+                                  )*/}
                                 </div>
 
                                 <div
