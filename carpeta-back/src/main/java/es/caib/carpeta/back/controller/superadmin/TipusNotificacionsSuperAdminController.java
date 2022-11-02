@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.fundaciobit.genapp.common.StringKeyValue;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
+import org.fundaciobit.genapp.common.web.i18n.I18NUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -69,7 +70,7 @@ public class TipusNotificacionsSuperAdminController extends NotificacioAppContro
 
             n.setActiva(true);
 
-            notificacioAppForm.addHelpToField(CODI, "ajuda.nomesmajuscules");
+            notificacioAppForm.addHelpToField(CODI, I18NUtils.tradueix("ajuda.nomesmajuscules"));
         }
 
         return notificacioAppForm;
