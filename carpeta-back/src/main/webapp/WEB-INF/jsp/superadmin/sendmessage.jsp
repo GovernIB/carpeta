@@ -1,4 +1,4 @@
-﻿<%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
+<%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
 
 <div class="lead" style="margin-bottom: 10px">
     <label style="font-size: 1.25rem; font-weight: bold;">
@@ -59,7 +59,7 @@
         <input type="submit" class="btn btn-primary"
             value=" <spring:message code="sendmessage.enviar" />">
         <input type="button" class="btn btn-secondary"
-            onclick="goTo('${contexte}/list')"
+            onclick="goTo('<c:url value="${contexte}/list"/>')"
             value="<spring:message code="genapp.cancel" />">
     </div>
 </form>
