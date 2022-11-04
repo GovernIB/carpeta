@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
+import io.github.jav.exposerversdk.ExpoMessageSound;
 import io.github.jav.exposerversdk.ExpoPushMessage;
 import io.github.jav.exposerversdk.ExpoPushMessageTicketPair;
 import io.github.jav.exposerversdk.ExpoPushReceipt;
@@ -36,8 +37,8 @@ public class SendNotificationToMobile {
      * @return
      * @throws I18NException
      */
-    public static SendNotificationResult sendMessageToMobile(String mobileid, String title, String message, Map<String, Object> data)
-            throws I18NException {
+    public static SendNotificationResult sendMessageToMobile(String mobileid, String title, String message,
+            Map<String, Object> data) throws I18NException {
 
         StringBuilder result = new StringBuilder();
         Map<String, SendNotificationResult> resultatEnviament = new HashMap<String, SendNotificationResult>();
@@ -65,6 +66,8 @@ public class SendNotificationToMobile {
                 messageRepliesFutures.add(client.sendPushNotificationsAsync(chunk));
             }
 
+            // Thread.sleep(6000);
+
             // Wait for each completable future to finish
 
             List<ExpoPushTicket> allTickets = new ArrayList<>();
@@ -72,13 +75,42 @@ public class SendNotificationToMobile {
             boolean hanacabattotes = true;
             do {
                 hanacabattotes = true;
-                allTickets.clear();
+                // allTickets.clear();
                 Thread.sleep(250);
                 for (CompletableFuture<List<ExpoPushTicket>> messageReplyFuture : messageRepliesFutures) {
                     if (messageReplyFuture.isDone()) {
-                        for (ExpoPushTicket ticket : messageReplyFuture.get()) {
-                            allTickets.add(ticket);
+
+                        try {
+                            for (ExpoPushTicket ticket : messageReplyFuture.get()) {
+                                allTickets.add(ticket);
+                            }
+                        } catch (Throwable e) {
+
+                            log.error("CLASS => " + e.getClass());
+                            log.error("CLASS CAUSED BY => " + e.getCause().getClass());
+                            log.error("CLASS MESSAGE CAUSED BY => " + e.getCause().getMessage() + "\n\n");
+
+                            log.error("Error esperant resposta a l'enviament d'una notificació PUSH: " + e.getMessage(),
+                                    e);
+
+                            if (e.getClass().equals(java.util.concurrent.ExecutionException.class)
+                                    && e.getCause() != null
+                                    && e.getCause().getClass().equals(java.lang.IllegalArgumentException.class)
+                                    && e.getCause().getMessage().indexOf("[DeviceNotRegistered]") != -1) {
+
+                                String msg = "El dispositiu amb ID '" + mobileid + "' no està registrat: "
+                                        + e.getMessage();
+                                log.error(msg, e);
+                                throw new I18NException("genapp.comodi", msg);
+                            } else {
+                                // TODO: handle exception
+                                String msg = "Pareix que no té configurat correctament el Proveïdor: " + e.getMessage();
+                                log.error(msg, e);
+                                throw new I18NException("genapp.comodi", msg);
+                            }
+
                         }
+
                     } else {
                         hanacabattotes = false;
                         break;
@@ -100,15 +132,14 @@ public class SendNotificationToMobile {
                     .collect(Collectors.joining(","));
             result.append("Recieved OK ticket for " + okTicketMessages.size() + " messages: " + okTicketMessagesString
                     + "\n");
-            
-            for(ExpoPushMessageTicketPair<ExpoPushMessage> ok : okTicketMessages) {
-                
+
+            for (ExpoPushMessageTicketPair<ExpoPushMessage> ok : okTicketMessages) {
+
                 String id = ok.ticket.getId();
                 SendNotificationResult rsn = new SendNotificationResult(id, ok.message.getTo());
-                
+
                 resultatEnviament.put(id, rsn);
             }
-            
 
             List<ExpoPushMessageTicketPair<ExpoPushMessage>> errorTicketMessages = client
                     .filterAllMessagesWithError(zippedMessagesTickets);
@@ -117,17 +148,16 @@ public class SendNotificationToMobile {
                     .collect(Collectors.joining(","));
             result.append("Recieved ERROR ticket for " + errorTicketMessages.size() + " messages: "
                     + errorTicketMessagesString);
-            
-            for(ExpoPushMessageTicketPair<ExpoPushMessage> errorResult : errorTicketMessages) {
-                
+
+            for (ExpoPushMessageTicketPair<ExpoPushMessage> errorResult : errorTicketMessages) {
+
                 String id = errorResult.ticket.getId();
                 SendNotificationResult rsn;
-                rsn = new SendNotificationResult(id, errorResult.message.getTo(), errorResult.ticket.getDetails().getError().toString());
-                
+                rsn = new SendNotificationResult(id, errorResult.message.getTo(),
+                        errorResult.ticket.getDetails().getError().toString());
+
                 resultatEnviament.put(id, rsn);
             }
-            
-            
 
             // Countdown 15s
             int waitTotalSec = 15;
@@ -158,32 +188,32 @@ public class SendNotificationToMobile {
                 if (receipts.size() != 0) {
 
                     for (ExpoPushReceipt reciept : receipts) {
-                        
+
                         Status s = reciept.getStatus();
-                        
+
                         String id = reciept.getId();
-                        
+
                         SendNotificationResult rsn = resultatEnviament.get(id);
-                        
+
                         if (s == Status.OK) {
                             rsn.setEstatRebut(true);
                         } else {
                             rsn.setEstatRebut(false);
                         }
-                        
-                        result.append(
-                                "Receipt for id: " + id + " had status: " + s + "\n");
+
+                        result.append("Receipt for id: " + id + " had status: " + s + "\n");
                     }
                     break;
                 }
             }
-            
+
             if (resultatEnviament.size() == 0) {
                 return null;
             } else {
-                
-                ArrayList<SendNotificationResult> list = new ArrayList<SendNotificationResult>(resultatEnviament.values());
-                
+
+                ArrayList<SendNotificationResult> list = new ArrayList<SendNotificationResult>(
+                        resultatEnviament.values());
+
                 return list.get(0);
             }
 
@@ -205,7 +235,5 @@ public class SendNotificationToMobile {
         }
 
     }
-
-    
 
 }

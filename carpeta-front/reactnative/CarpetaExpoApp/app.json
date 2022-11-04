@@ -2,7 +2,7 @@
   "expo": {
     "name": "CarpetaApp GOIB",
     "slug": "CarpetaApp",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "carpetaapp",
@@ -13,26 +13,18 @@
       "backgroundColor": "#ffffff"
     },
     "packagerOpts": {
-      "sourceExts": [
-        "web.js",
-        ".js"
-      ]
+      "sourceExts": ["web.js", ".js"]
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "es.caib.carpeta.carpetaapp",
-      "buildNumber": "1.1.0",
+      "buildNumber": "1.1.1",
       "infoPlist": {
-        "CFBundleLocalizations": [
-          "ca",
-          "es"
-        ],
+        "CFBundleLocalizations": ["ca", "es"],
         "CFBundleDevelopmentRegion": "es"
       }
     },
@@ -42,10 +34,14 @@
         "backgroundColor": "#ffffff"
       },
       "package": "es.caib.carpeta.carpetaapp",
-      "blockedPermissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION", "ACCESS_BACKGROUND_LOCATION"],
+      "blockedPermissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION"
+      ],
       "useNextNotificationsApi": true,
-      "googleServicesFile": "./google-services.json",	  
-      "versionCode": 110
+      "googleServicesFile": "./google-services.json",
+      "versionCode": 111
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
@@ -54,6 +50,16 @@
       "eas": {
         "projectId": "e1d384d1-b819-4017-a131-52c6855214a5"
       }
-    }
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/notificationicon.png",
+          "color": "#fff",
+          "sounds": ["./assets/labalanguera.wav"]
+        }
+      ]
+    ]
   }
 }
