@@ -333,7 +333,9 @@ class Apodera extends Component {
           taulaApodera = (
             <>
               <div>
+                
                 {/*  ============== VERSIO NORMAL ================= */}
+                { 
                 <Table
                   id="tableId"
                   responsive
@@ -426,12 +428,12 @@ class Apodera extends Component {
                                       {llistaProcediments}
                                     </span>
                                   )}
-                                  {tramits && (
+                                  {/*tramits && (
                                     <span>
                                       <b>{t("apoderaTramits")}</b>:{" "}
                                       {llistaTramits}
                                     </span>
-                                  )}
+                                  )*/}
                                 </div>
 
                                 <div
@@ -468,7 +470,7 @@ class Apodera extends Component {
                     )}
                   </tbody>
                 </Table>
-
+                }
                 {/*  ============== FINAL VERSIO NORMAL ================= */}
 
                 {/*  ============== VERSIO MÒBIL ================= */}
@@ -642,8 +644,14 @@ class Apodera extends Component {
                   </div>
                 )}
                   */}
-          {taulaApodera}
+
+          {/*Pintat de taula controlant que no sigui buida*/}       
+          
+          {(this.state.dataApoderaments != null && this.state.dataApoderaments.length == 0)?
+                  <div class="alert alert-secondary" role="alert">{t("apoderaApoderamentsNoTrobats")}</div> : taulaApodera}
+
           {cardApoderaments}
+          
         </div>
       );
     }
