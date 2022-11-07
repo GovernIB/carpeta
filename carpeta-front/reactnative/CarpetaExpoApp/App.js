@@ -25,7 +25,7 @@ Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
     shouldPlaySound: true,
-    shouldSetBadge: true,
+    shouldSetBadge: false,
   }),
 });
 
@@ -130,31 +130,29 @@ class App extends Component {
 
     console.log(
       new Date().toLocaleString() +
-        "REBUDA notification.request.content.title => " +
+        " REBUDA notification.request.content.title => " +
         notification.request.content.title
     );
 
     console.log(
       new Date().toLocaleString() +
-        "REBUDA notification.request.content.body => " +
+        " REBUDA notification.request.content.body => " +
         notification.request.content.body
     );
 
-    // JSON.stringify(.notification.request.content.data)
+
+
+    // Comentam aquest tros de codi a causa de l'error que llança 
+
     /*
-    title?: string;
-    subtitle?: string;
-    body?: string;
-    data?: { [key: string]: unknown };
-    badge?: number;
-    sound?
+    console.log(JSON.stringify(notification, null, 4));
+    // Això serveix per indicar d'alguna forma que s'ha processat aquesta notificació.
+    let localnotificationId = notification.request.identifier;
+    console.log(
+      new Date().toLocaleString() + "REBUDA  notificacióID => " + localnotificationId);
+    Notifications.dismissNotificationAsync(localnotificationId);
     */
 
-    let localnotificationId = notification.notificationId;
-    // Això serveix per indicar d'alguna forma que s'ha processat aquesta notificació.
-    setTimeout(function () {
-      Notifications.dismissNotificationAsync(localnotificationId);
-    }, 5000);
   };
 
   /** Entra aqui quan l'usuari pitja sobre la notificació PUSH */

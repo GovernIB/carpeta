@@ -53,6 +53,8 @@ public class SendNotificationToMobile {
             expoPushMessage.setTitle(title);
             expoPushMessage.setBody(message);
             expoPushMessage.setData(data);
+            // Llança un error
+            //expoPushMessage.setSound(new ExpoMessageSound(false, "labalanguera.wav", 1));
 
             List<ExpoPushMessage> expoPushMessages = new ArrayList<>();
             expoPushMessages.add(expoPushMessage);
