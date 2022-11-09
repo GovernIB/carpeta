@@ -211,6 +211,7 @@ carpeta-pluginsib/pluginsib-carpetafront/regweb32/react/dist/regweb32_reactjs_ma
 /carpeta-front/reactnative/android
 /carpeta-front/reactnative/binaris
 /carpeta-front/reactnative/certificat_anadal
+<<<<<<< HEAD
 scripts/log.txt
 scripts/installCert.bat
 carpeta-pluginsib/pluginsib-carpetafront/notib/installCerts.bat
@@ -218,3 +219,6 @@ carpeta-pluginsib/pluginsib-carpetafront/notib/log.txt
 carpeta-pluginsib/pluginsib-carpetafront/notib/react/installCerts.bat
 carpeta-pluginsib/pluginsib-carpetafront/notib/react/log.txt
 log.txt
+=======
+/carpeta-front/reactnative/CarpetaExpoApp/android.txt
+>>>>>>> 67abc6e11d03e08c7ed2197ff80b8695e88b5b09
