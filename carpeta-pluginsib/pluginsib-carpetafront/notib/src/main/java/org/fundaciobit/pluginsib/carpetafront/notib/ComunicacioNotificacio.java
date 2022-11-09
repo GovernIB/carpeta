@@ -1,12 +1,12 @@
 package org.fundaciobit.pluginsib.carpetafront.notib;
 
-import org.fundaciobit.pluginsib.carpetafront.notib.api.*;
+import es.caib.notib.client.domini.consulta.TransmissioV2;
 
 import java.util.Date;
 
-public class ComunicacioNotificacio extends Transmissio {
+public class ComunicacioNotificacio extends TransmissioV2 {
 
-    private Transmissio transmissio;
+    private TransmissioV2 transmissio;
     // Afegits
     private String tipus;
     private Date data;
@@ -15,18 +15,18 @@ public class ComunicacioNotificacio extends Transmissio {
         super();
     }
 
-    public ComunicacioNotificacio(Transmissio transmissio, Date data, String tipus) {
+    public ComunicacioNotificacio(TransmissioV2 transmissio, Date data, String tipus) {
         super();
         this.transmissio = transmissio;
         this.data = data;
         this.tipus = tipus;
     }
 
-    public Transmissio getTransmissio() {
+    public TransmissioV2 getTransmissio() {
         return transmissio;
     }
 
-    public void setTransmissio(Transmissio transmissio) {
+    public void setTransmissio(TransmissioV2 transmissio) {
         this.transmissio = transmissio;
     }
 

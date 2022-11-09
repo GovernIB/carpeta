@@ -846,14 +846,14 @@ class Notib extends Component {
                                         <td data-order={$.dateOrder(transmissio.dataEnviament)}>{$.dateFormat(transmissio.dataEnviament)}</td>
                                         <td>{tipus === 'notificacio' ? i18n.t('notibNotificacio') : i18n.t('notibComunicacio')}</td>
                                         <td>{transmissio.concepte}</td>
-                                        <td>{transmissio.estat}</td>
+                                        <td>{transmissio.estat.codi}</td>
                                     </tr>
                                     <tr style={{display: 'none'}} id={'row' + i}>
                                         <td colSpan={4}>
                                             <div style={{float: 'left', width: '70%'}}>
                                                 {transmissio.emisor &&<p><b>{t('notibComunicacionEmissor')}</b>: {transmissio.emisor}</p>}
-                                                {transmissio.organGestor &&<p><b>{t('notibComunicacionOrgano')}</b>: {transmissio.organGestor}</p>}
-                                                {transmissio.procediment && <p><b>{t('notibProcediment')}</b>: {transmissio.procediment}</p>}
+                                                {transmissio.organGestor.nom &&<p><b>{t('notibComunicacionOrgano')}</b>: {transmissio.organGestor.nom}</p>}
+                                                {transmissio.procediment.codi && <p><b>{t('notibProcediment')}</b>: {transmissio.procediment.codi}</p>}
                                                 {transmissio.descripcio && <p><b>{t('notibDescripcioNotificacio')}</b>: {transmissio.descripcio}</p>}
                                             </div>
                                             <div style={{float: 'right', width: 'auto'}} id="accedirNotib">
@@ -865,7 +865,7 @@ class Notib extends Component {
                                                             tabIndex={511 + i*2}
                                                             aria-labelledby="accedirNotib"
                                                             onClick={() =>
-                                                                window.open(tipus === 'notificacio' ? (transmissio.estat === 'FINALIZADA' || transmissio.estat === 'FINALITZADA' || transmissio.estat === 'PROCESADA' || transmissio.estat === 'PROCESSADA' ? this.state.urldetallbase2 : this.state.urldetallbase) : this.state.urldetallbase3, '_blank')}>
+                                                                window.open(tipus === 'notificacio' ? (transmissio.estat.codi === 'FINALIZADA' || transmissio.estat.codi === 'FINALITZADA' || transmissio.estat.codi === 'PROCESADA' || transmissio.estat.codi === 'PROCESSADA' ? this.state.urldetallbase2 : this.state.urldetallbase) : this.state.urldetallbase3, '_blank')}>
                                                             <span className="oi oi-external-link" title=""
                                                                   aria-hidden="true"/> {t('notibBotoDehu')}
                                                     </button>
@@ -914,7 +914,7 @@ class Notib extends Component {
                     cardNotificacions.push(
                         <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil"
                              key={i} tabIndex={502+i} onClick={(e) =>
-                            window.open(tipus === 'notificacio' ? (transmissio.estat === 'FINALIZADA' || transmissio.estat === 'FINALITZADA' || transmissio.estat === 'PROCESADA' || transmissio.estat === 'PROCESSADA' ? this.state.urldetallbase2 : this.state.urldetallbase) : this.state.urldetallbase3, '_blank')}>
+                            window.open(tipus === 'notificacio' ? (transmissio.estat.codi === 'FINALIZADA' || transmissio.estat.codi === 'FINALITZADA' || transmissio.estat.codi === 'PROCESADA' || transmissio.estat.codi === 'PROCESSADA' ? this.state.urldetallbase2 : this.state.urldetallbase) : this.state.urldetallbase3, '_blank')}>
                             <div className="col-sm-1 float-left">
                                 <span className="oi oi-envelope-closed iconaFormApp" title={t('notibComunicacio')} style={{verticalAlign: 'sub'}}/>
                             </div>
@@ -923,12 +923,12 @@ class Notib extends Component {
                                 <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}>{tipus === 'notificacio' ? i18n.t('notibNotificacio') : i18n.t('notibComunicacio')}</p>
                                 <p className="card-text pl-1 mt-0 font-weight-bold" style={{color: 'rgb(102, 102, 102)'}}>{transmissio.concepte}</p>
                                 {transmissio.emisor && <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}><b>{t('notibComunicacionEmissor')}: </b>{transmissio.emisor}</p>}
-                                {transmissio.organGestor && <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}>{transmissio.organGestor}</p>}
-                                {transmissio.procediment && <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}><b>{t('notibProcediment')}: </b>{transmissio.procediment}</p>}
+                                {transmissio.organGestor.nom && <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}>{transmissio.organGestor.nom}</p>}
+                                {transmissio.procediment.codi && <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}><b>{t('notibProcediment')}: </b>{transmissio.procediment.codi}</p>}
                                 {transmissio.descripcio && <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}><b>{t('notibDescripcioNotificacio')}: </b>{transmissio.descripcio}</p>}
                                 {transmissio.dataEstat && <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}><b>{t('notibDarreraModificacio')}: </b>{$.dateFormat(transmissio.dataEstat)}</p>}
                                 {transmissio.subestat && <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}><b>{t('notibSubestat')}: </b>{transmissio.subestat}</p>}
-                                <h3 className="titolPlugin titol h3 visioMobil titolPluginApp">{transmissio.estat}</h3>
+                                <h3 className="titolPlugin titol h3 visioMobil titolPluginApp">{transmissio.estat.codi}</h3>
                             </div>
                         </div>
                     )
