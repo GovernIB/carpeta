@@ -9,7 +9,7 @@ import axios from "axios";
 import i18n from "i18next";
 import Table from "react-bootstrap/Table";
 import infoImatge from "./info.png";
-import {isMobile} from "react-device-detect";
+import * as reactdetect from "react-device-detect";
 
 class Apodera extends Component {
   constructor(props) {
@@ -331,8 +331,7 @@ class Apodera extends Component {
           this.state.dataApoderaments &&
           typeof this.state.dataApoderaments !== undefined
         ) {
-            if(!isMobile){
-                 
+            if(!reactdetect.isMobileOnly){
                 taulaApodera = (
                     
                 <div>
