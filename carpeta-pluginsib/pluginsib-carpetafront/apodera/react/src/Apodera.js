@@ -9,6 +9,7 @@ import axios from "axios";
 import i18n from "i18next";
 import Table from "react-bootstrap/Table";
 import infoImatge from "./info.png";
+import {isMobile} from "react-device-detect";
 
 class Apodera extends Component {
   constructor(props) {
@@ -330,11 +331,14 @@ class Apodera extends Component {
           this.state.dataApoderaments &&
           typeof this.state.dataApoderaments !== undefined
         ) {
-          taulaApodera = (
-            <>
-              <div>
-                
+            if(!isMobile){
+                 
+                taulaApodera = (
+                    
+                <div>
+                        
                 {/*  ============== VERSIO NORMAL ================= */}
+                
                 { 
                 <Table
                   id="tableId"
@@ -471,8 +475,15 @@ class Apodera extends Component {
                   </tbody>
                 </Table>
                 }
-                {/*  ============== FINAL VERSIO NORMAL ================= */}
-
+                        
+                    </div>
+                );
+                    
+            }else{
+                     
+               taulaApodera= (
+                <>
+                <div>
                 {/*  ============== VERSIO MÒBIL ================= */}
 
                 {this.state.dataApoderaments.map(
@@ -580,9 +591,11 @@ class Apodera extends Component {
                   }
                 )}
                 {/*  ============== FINAL VERSIO MÒBIL ================= */}
-              </div>
-            </>
-          );
+                </div>
+                </>
+            );
+                        
+            }
         } else if (
           this.state.totalComApoderat + this.state.totalComPoderdant === 0 &&
           this.state.dataApoderaments !== null

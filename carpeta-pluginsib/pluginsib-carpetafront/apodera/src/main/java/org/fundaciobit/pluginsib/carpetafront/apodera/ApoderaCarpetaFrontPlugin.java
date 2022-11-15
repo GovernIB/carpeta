@@ -39,6 +39,7 @@ import org.fundaciobit.pluginsib.carpetafront.apodera.api.TramiteType2;
 import org.fundaciobit.pluginsib.utils.cxf.ClientHandler;
 import org.fundaciobit.pluginsib.utils.cxf.ClientHandlerCertificate;
 
+import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.pluginsib.carpetafront.api.AbstractPinbalCarpetaFrontPlugin;
 import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
@@ -626,8 +627,10 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
                 log.info("errorType::CodError => " + errorType.getCodError());
                 log.info("errorType::DesError => " + errorType.getDesError());
 
-                throw new Exception("Error cridant a la consulta de apoderaments: " + errorType.getDesError()
-                        + " (CODI: " + errorType.getCodError() + ")");
+                
+                throw new Exception(getTraduccio(APODERA_RES_BUNDLE, "apodera.api.error", new Locale(Configuracio.getDefaultLanguage())) + errorType.getDesError()
+                + " (CODI: " + errorType.getCodError() + ")");
+  
             }
 
         }
