@@ -4,10 +4,10 @@ const config = {
   entry: "./src/main.js",
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "apodera_reactjs_main.js",
+    filename: "reactjs_main.js",
   },
-  
-  mode: 'development',
+
+  mode: "development",
 
   module: {
     rules: [
@@ -17,9 +17,7 @@ const config = {
           {
             loader: "babel-loader",
             options: {
-              presets: [
-                "@babel/preset-react",
-              ],
+              presets: ["@babel/preset-react"],
             },
           },
         ],
@@ -40,10 +38,7 @@ const config = {
       // css files
       {
         test: /\.css$/i,
-        use: [
-			{ loader: "style-loader"},
-			{ loader: "css-loader" }
-		],
+        use: [{ loader: "style-loader" }, { loader: "css-loader" }],
       },
     ],
   },

@@ -1,0 +1,4 @@
+
+npm install 
+
+compil.bat

@@ -29,6 +29,7 @@
 		<module>pinbalconvivencia</module>
 		<module>pinbalhistorico</module>
 		<module>apodera</module>
+		<module>expedients</module>
     </modules>
 
     <dependencies>
