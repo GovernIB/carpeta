@@ -11,6 +11,9 @@ import axios from "axios";
 import i18n from "i18next";
 import Table from "react-bootstrap/Table";
 import * as reactdetect from "react-device-detect";
+import RenderTable from "./RenderTable";
+
+
 
 class ElsMeusExpedients extends Component {
   constructor(props) {
@@ -124,240 +127,81 @@ class ElsMeusExpedients extends Component {
 
     var expedients = this.state.expedientresposta.expedients;
 
-    /**
-     
-     ExpedientInfo {
+    let columnsNom = [    
+      'expedientNom',
+      'expedientDesc',
+      'expedientEstat',
+      'codiSia',
+      'nomProcediment',
+      'expedientOrgans',
+      'expedientObertura'
+    ];
 
-
-    protected String expedientNom;
-    protected String expedientDesc;
-    protected String expedientEstat;
-        protected String codiSia;
-    protected String nomProcediment;
-    protected List<String> expedientOrgans;
-    protected Date expedientObertura;
-     * 
-     */
+    let columnsTitols = [      
+      t("expedientNom"),
+      t("expedientDesc"),
+      t("expedientEstat"),
+      t("codiSia"),
+      t("nomProcediment"),
+      t("expedientOrgans"),
+      t("expedientObertura")
+    ];
 
     let content;
 
-    if (!reactdetect.isMobileOnly) {
-
-      {/*  ============== VERSIO DESKTOP ================= */ }
-
-      content = (
+  
+      return (
         <>
-          <div>
-            {
-              <Table
-                id="tableId"
-                responsive
-                striped
-                bordered
-                hover
-                style={tamanyTaula}
-              >
-                <thead className="table-success">
-                  <tr>
-                    <th>{t("expedientNom")}</th>
-                    <th>{t("expedientDesc")}</th>
-                    <th>{t("expedientEstat")}</th>
-                    <th>{t("codiSia")}</th>
-                    <th>{t("nomProcediment")}</th>
-                    <th>{t("expedientOrgans")}</th>
-                    <th>{t("expedientObertura")}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {expedients.map(
-                    (
-                      {
-                        expedientNom,
-                        expedientDesc,
-                        expedientEstat,
-                        codiSia,
-                        nomProcediment,
-                        expedientOrgans,
-                        expedientObertura,
-                      },
-                      i
-                    ) => {
-
-
-                      return (
-                        <>
-                          <tr key={i} tabIndex={511 + i * 2 - 1}>
-                            <td>{expedientNom}</td>
-                            <td>{expedientDesc}</td>
-                            <td>{expedientEstat}</td>
-                            <td>{codiSia}</td>
-                            <td>{nomProcediment}</td>
-                            <td>{expedientOrgans}</td>
-                            <td>{expedientObertura}</td>
-                          </tr>
-                        </>
-                      );
-                    }
-                  )}
-                </tbody>
-              </Table>
-            }
-          </div>
-        </>
-      );
-      {/*  ============== FINAL VERSIO DESKTOP ================= */ }
-
-    } else {
-      {/*  ============== VERSIO MÒBIL ================= */ }
-      console.log("Entrant a versió Mobil");
-
-      content = (
-        <>
-          <div>
-            {expedients.map(
-              (
-                {
-                  expedientNom,
-                  expedientDesc,
-                  expedientEstat,
-                  codiSia,
-                  nomProcediment,
-                  expedientOrgans,
-                  expedientObertura,
-                },
-                i
-              ) => {
-
-                return (
-                  <>
-                    <div
-                      className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5  visioMobil cardAppVerd"
-                      key={i}
-                      tabIndex={511 + i}
-                    >
-                      <div className="col-sm-1 float-left">
-                        <span
-                          className="oi oi-key iconaFormApp"
-                          style={{ verticalAlign: "sub" }}
-                        />
-                      </div>
-                      <div className="col-sm-10 float-right">
-                        <p
-                          className="card-text pl-1 mt-0"
-                          style={{ color: "rgb(102, 102, 102)" }}
-                        >
-                          <b>{t("expedientNom")}</b>: {expedientNom}
-                        </p>
-                      </div>
-                      <div className="col-sm-10 float-right">
-                        <p
-                          className="card-text pl-1 mt-0"
-                          style={{ color: "rgb(102, 102, 102)" }}
-                        >
-                          <b>{t("expedientDesc")}</b>: {expedientDesc}
-                        </p>
-                      </div>
-                      <div className="col-sm-10 float-right">
-                        <p
-                          className="card-text pl-1 mt-0"
-                          style={{ color: "rgb(102, 102, 102)" }}
-                        >
-                          <b>{t("expedientEstat")}</b>: {expedientEstat}
-                        </p>
-                      </div>
-                      <div className="col-sm-10 float-right">
-                        <p
-                          className="card-text pl-1 mt-0"
-                          style={{ color: "rgb(102, 102, 102)" }}
-                        >
-                          <b>{t("codiSia")}</b>: {codiSia}
-                        </p>
-                      </div>
-                      <div className="col-sm-10 float-right">
-                        <p
-                          className="card-text pl-1 mt-0"
-                          style={{ color: "rgb(102, 102, 102)" }}
-                        >
-                          <b>{t("nomProcediment")}</b>: {nomProcediment}
-                        </p>
-                      </div>
-                      <div className="col-sm-10 float-right">
-                        <p
-                          className="card-text pl-1 mt-0"
-                          style={{ color: "rgb(102, 102, 102)" }}
-                        >
-                          <b>{t("expedientOrgans")}</b>: {expedientOrgans}
-                        </p>
-                      </div>
-                      <div className="col-sm-10 float-right">
-                        <p
-                          className="card-text pl-1 mt-0"
-                          style={{ color: "rgb(102, 102, 102)" }}
-                        >
-                          <b>{t("expedientObertura")}</b>: {expedientObertura}
-                        </p>
-                      </div>
-
-                    </div>
-                  </>
-                );
-              }
-            )}
-          </div>
-        </>
-      );
-      console.log(content);
-    }
-
-    return (
-      <>
-        <div className="titolPaginaApp visioMobil">
-          {this.props.titles[i18n.language]}
-        </div>
-        <div className="infoNoMenu">
-          <h2 className="titol h2 ocultarMobil">
+          <div className="titolPaginaApp visioMobil">
             {this.props.titles[i18n.language]}
-          </h2>
-          <div className="col-md-12 border-0 float-left p-0">
-            <p className="lh15 ocultarMobil">
-              {this.props.subtitles[i18n.language]}{" "}
-            </p>
+          </div>
+          <div className="infoNoMenu">
+            <h2 className="titol h2 ocultarMobil">
+              {this.props.titles[i18n.language]}
+            </h2>
+            <div className="col-md-12 border-0 float-left p-0">
+              <p className="lh15 ocultarMobil">
+                {this.props.subtitles[i18n.language]}{" "}
+              </p>
 
-            <div
-              className="tab-pane fade show active"
-              id="elsmeusexpedients"
-              role="tabpanel"
-              aria-labelledby="home-tab"
-            >
-              <div className="infoNoMenu">{content}</div>
               <div
-                className="col-md-12 border-0 float-left p-0"
-                id="botoTornarDadesP"
-                style={{ marginTop: "20px" }}
+                className="tab-pane fade show active"
+                id="elsmeusexpedients"
+                role="tabpanel"
+                aria-labelledby="home-tab"
               >
-                <button
-                  type="button"
-                  data-toggle="modal"
-                  onClick={() => {
-                    window.location.href = sessionStorage.getItem("pagTornar");
-                    sessionStorage.setItem(
-                      "pagTornar",
-                      sessionStorage.getItem("contextPath")
-                    );
-                  }}
-                  className="botoSuport botoTornauApp"
-                  tabIndex="520"
-                  aria-labelledby="botoTornarDadesP"
+                <div className="infoNoMenu">
+                  <RenderTable dades={expedients} columnsNom={columnsNom} columnsTitols={columnsTitols} />
+                </div>
+                <div
+                  className="col-md-12 border-0 float-left p-0"
+                  id="botoTornarDadesP"
+                  style={{ marginTop: "20px" }}
                 >
-                  {t("tornar")}
-                </button>
+                  <button
+                    type="button"
+                    data-toggle="modal"
+                    onClick={() => {
+                      window.location.href = sessionStorage.getItem("pagTornar");
+                      sessionStorage.setItem(
+                        "pagTornar",
+                        sessionStorage.getItem("contextPath")
+                      );
+                    }}
+                    className="botoSuport botoTornauApp"
+                    tabIndex="520"
+                    aria-labelledby="botoTornarDadesP"
+                  >
+                    {t("tornar")}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </>
-    );
+        </>
+      );
+    }
   }
-}
+
 
 export default withTranslation()(ElsMeusExpedients);
