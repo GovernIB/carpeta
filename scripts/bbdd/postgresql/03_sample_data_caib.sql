@@ -199,14 +199,14 @@ INSERT INTO car_traducciomap VALUES (97, 'es', 'Regweb 3.2');
 
 
 
-INSERT INTO car_plugin(nomid, classe, tipus, propietats, actiu, descripcioid) VALUES (96, 'org.fundaciobit.pluginsib.carpetafront.regweb32.Regweb32CarpetaFrontPlugin', 1, '# Common
+INSERT INTO car_plugin(nomid, classe, tipus, propietats, actiu, descripcioid, context) VALUES (96, 'org.fundaciobit.pluginsib.carpetafront.regweb32.Regweb32CarpetaFrontPlugin', 1, '# Common
 es.caib.carpeta.pluginsib.carpetafront.regweb32.development=true
 es.caib.carpeta.pluginsib.carpetafront.regweb32.concsv.url=https://dev.caib.es/concsv/view.xhtml?hash=
 # Regweb3.2
 es.caib.carpeta.pluginsib.carpetafront.regweb32.url=[=SP["es.caib.carpeta.pluginsib.carpetafront.regweb32.url"]]
 es.caib.carpeta.pluginsib.carpetafront.regweb32.user=[=SP["es.caib.carpeta.pluginsib.carpetafront.regweb32.user"]]
 es.caib.carpeta.pluginsib.carpetafront.regweb32.pass=[=SP["es.caib.carpeta.pluginsib.carpetafront.regweb32.pass"]]
-es.caib.carpeta.pluginsib.carpetafront.regweb32.entidad=A04003003', true, 97);
+es.caib.carpeta.pluginsib.carpetafront.regweb32.entidad=A04003003', true, 97, 'regweb32');
 
 
 

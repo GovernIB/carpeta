@@ -474,7 +474,7 @@ CREATE TABLE car_plugin (
     actiu boolean DEFAULT true NOT NULL,
     descripcioid bigint,
     logoid bigint,
-    context character varying(50),
+    context character varying(50) NOT NULL,
     titolllargid bigint,
     subtitolllargid bigint
 );
