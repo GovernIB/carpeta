@@ -131,7 +131,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
         String startURL;
 
         if (parameter != null && parameter.trim().length() != 0) {
-            log.info("DadesPersonalsReactCarpetaFrontPlugin:: PARAMETER => ]" + parameter + "[");
+            log.info("Regweb32CarpetaFrontPlugin:: PARAMETER => ]" + parameter + "[");
             // request.getSession().setAttribute(SESSION_PARAMETER, parameter);
             startURL = absolutePluginRequestPath + "/" + ESPERA_DETALL_CODIFICAT_PAGE
                     + "?numeroRegistroFormateado=" + parameter;
