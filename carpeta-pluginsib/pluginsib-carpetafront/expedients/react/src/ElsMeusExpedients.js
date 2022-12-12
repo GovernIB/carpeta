@@ -9,8 +9,8 @@ import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
 import axios from "axios";
 import i18n from "i18next";
-import Table from "react-bootstrap/Table";
-import * as reactdetect from "react-device-detect";
+// package.json => "carpetacommonreactlib": "file:../../CarpetaCommonReactLib",
+//import RenderTable from "carpetacommonreactlib";
 import RenderTable from "./RenderTable";
 
 

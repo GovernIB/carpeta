@@ -1,18 +1,14 @@
 /**
- * @author fbosch
+ * @author fbosch, anadal
  * @create date 2022-11-23 10:30:40
  * @modify date 2022-11-23 10:30:40
  * @desc [description]
  */
 
 import React, { Component } from "react";
-import { withTranslation } from "react-i18next";
-import axios from "axios";
-import i18n from "i18next";
 import Table from "react-bootstrap/Table";
-import * as reactdetect from "react-device-detect";
 
-class RenderTable extends Component {
+class RenderTableDesktop extends Component {
   constructor(props) {
     super(props);
   }
@@ -20,24 +16,10 @@ class RenderTable extends Component {
 
   render() {
 
-    const { t } = this.props;
-
 
     var tamanyTaula = { width: "99%" };
     var tamanyData = { width: "120px !important" };
 
-    /**
-    ExpedientResposta {
-
-        protected int paginaActual;
-        protected int elementsPerPagina;
-    
-        protected int totalPagines;
-        protected int registresRetornats;
-        protected int totalRegistres;
-    
-        protected List<ExpedientInfo> expedients;
-        */
 
     console.log("Render OK: Imprimint Data RENDER TABLE DESKTOP...!");
 
@@ -48,7 +30,7 @@ class RenderTable extends Component {
     let titols = this.props.columnsTitols;
 
 
-    let content;
+
 
 
 
@@ -59,9 +41,11 @@ class RenderTable extends Component {
           capTaula.push(<th>{titols[c]}</th>);
         })
       }
-      content = (
+
+
+      return (
         <>
-          <div>
+           <div>
             <Table
               id="tableId"
               responsive
@@ -102,15 +86,9 @@ class RenderTable extends Component {
           </div>
         </>
       );
-
-      return (
-        <>
-          {content}
-        </>
-      );
   }
 }
 
 
 
-export default withTranslation()(RenderTable);
+export default RenderTableDesktop;
