@@ -36,7 +36,7 @@ class RenderTableMobile extends Component {
           <div>
             {data.map(
               (
-                expedientInfo,
+                dataInfo,
                 i
               ) => {
 
@@ -48,7 +48,7 @@ class RenderTableMobile extends Component {
                         className="card-text pl-1 mt-0"
                         style={{ color: "rgb(102, 102, 102)" }}
                       >
-                        <b>{titols[c]}</b>: {expedientInfo[clau]}
+                        <b>{titols[c]}</b>: {dataInfo[clau]}
                       </p>
                     </div>);
                   })

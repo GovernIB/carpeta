@@ -18,7 +18,6 @@ class RenderTableDesktop extends Component {
 
 
     var tamanyTaula = { width: "99%" };
-    var tamanyData = { width: "120px !important" };
 
 
     console.log("Render OK: Imprimint Data RENDER TABLE DESKTOP...!");
@@ -31,21 +30,18 @@ class RenderTableDesktop extends Component {
 
 
 
-
-
-
       let capTaula = [];
       {
         columnsNom.forEach((clau, c) => {
           console.log(c + " -> " + titols[c]);
-          capTaula.push(<th>{titols[c]}</th>);
+          capTaula.push(<th key={c}>{titols[c]}</th>);
         })
       }
 
 
       return (
         <>
-           <div>
+          <div>
             <Table
               id="tableId"
               responsive
@@ -62,13 +58,13 @@ class RenderTableDesktop extends Component {
               <tbody>
                 {data.map(
                   (
-                    expedientInfo,
+                    dataInfo,
                     i
                   ) => {
                     let fila = [];
                     columnsNom.forEach((clau, c) => {
-                      let valor = expedientInfo[clau];
-                      fila.push(<td>{valor}</td>);
+                      let valor = dataInfo[clau];
+                      fila.push(<td key={c}>{valor}</td>);
                     });
 
 

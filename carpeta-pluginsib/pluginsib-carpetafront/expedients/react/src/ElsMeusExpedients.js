@@ -107,8 +107,6 @@ class ElsMeusExpedients extends Component {
       );
     }
 
-    var tamanyTaula = { width: "99%" };
-    var tamanyData = { width: "120px !important" };
 
     /**
     ExpedientResposta {
