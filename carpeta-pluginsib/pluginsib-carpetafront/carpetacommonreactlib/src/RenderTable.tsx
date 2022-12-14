@@ -5,15 +5,22 @@
  * @desc [description]
  */
 
-import React, { Component } from "react";
+import React from "react";
 import * as reactdetect from "react-device-detect";
 import RenderTableMobile from "./RenderTableMobile";
 import RenderTableDesktop from "./RenderTableDesktop";
 
 
-class RenderTable extends Component {
+type RenderTableProps = {
+  dades : any[],
+  columnsNom : any[],
+  columnsTitols : any[]
+}
 
-  constructor(props) {
+
+class RenderTable extends React.Component<RenderTableProps> {
+
+  constructor(props: RenderTableProps) {
     super(props);
     console.log("  CONSTRUCTOR RenderTable !!!!!");
   }
@@ -32,20 +39,18 @@ class RenderTable extends Component {
     if (!reactdetect.isMobileOnly) {
 
       {/*  ============== VERSIO DESKTOP ================= */ }
-      return (
-        <>
-          <RenderTableDesktop dades={data} columnsNom={columnsNom} columnsTitols={columnsTitols} />
-        </>
-      );
+      return <RenderTableDesktop dades={data} columnsNom={columnsNom} columnsTitols={columnsTitols} />
+        
+      
 
       {/*  ============== FINAL VERSIO DESKTOP ================= */ }
 
     } else {
       {/*  ============== VERSIO MÒBIL ================= */ }
       return (
-        <>
+      
           <RenderTableMobile dades={data} columnsNom={columnsNom} columnsTitols={columnsTitols} />
-        </>
+        
       );
       {/*  ============== FINAL VERSIO MÒBIL ================= */ }
 

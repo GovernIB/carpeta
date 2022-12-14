@@ -5,12 +5,18 @@
  * @desc [description]
  */
 
-import React, { Component } from "react";
+import React from "react";
 
 
-class RenderTableMobile extends Component {
+type RenderTableProps = {
+  dades : any[],
+  columnsNom : any[],
+  columnsTitols : any[]
+}
 
-  constructor(props) {
+class RenderTableMobile extends React.Component<RenderTableProps> {
+
+  constructor(props: RenderTableProps) {
     super(props);
   }
 
@@ -20,7 +26,7 @@ class RenderTableMobile extends Component {
 
     console.log("Render OK: Imprimint Data RENDER TABLE MOBILE...!");
 
-    var data = this.props.dades; // Aquest valor sera this.props.dades
+    var data : any[] = this.props.dades; // Aquest valor sera this.props.dades
 
     let columnsNom = this.props.columnsNom;
 
@@ -40,7 +46,7 @@ class RenderTableMobile extends Component {
                 i
               ) => {
 
-                let cardsMobile = [];
+                let cardsMobile :any[] = [];
                 {
                   columnsNom.forEach((clau, c) => {
                     cardsMobile.push(<div className="col-sm-10 float-right">

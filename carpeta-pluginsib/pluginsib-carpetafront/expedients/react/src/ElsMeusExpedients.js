@@ -9,11 +9,7 @@ import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
 import axios from "axios";
 import i18n from "i18next";
-// package.json => "carpetacommonreactlib": "file:../../CarpetaCommonReactLib",
-//import RenderTable from "carpetacommonreactlib";
-import RenderTable from "./RenderTable";
-
-
+import { RenderTable } from "carpetacommonreactlib";
 
 class ElsMeusExpedients extends Component {
   constructor(props) {
@@ -107,7 +103,6 @@ class ElsMeusExpedients extends Component {
       );
     }
 
-
     /**
     ExpedientResposta {
 
@@ -125,81 +120,83 @@ class ElsMeusExpedients extends Component {
 
     var expedients = this.state.expedientresposta.expedients;
 
-    let columnsNom = [    
-      'expedientNom',
-      'expedientDesc',
-      'expedientEstat',
-      'codiSia',
-      'nomProcediment',
-      'expedientOrgans',
-      'expedientObertura'
+    let columnsNom = [
+      "expedientNom",
+      "expedientDesc",
+      "expedientEstat",
+      "codiSia",
+      "nomProcediment",
+      "expedientOrgans",
+      "expedientObertura",
     ];
 
-    let columnsTitols = [      
+    let columnsTitols = [
       t("expedientNom"),
       t("expedientDesc"),
       t("expedientEstat"),
       t("codiSia"),
       t("nomProcediment"),
       t("expedientOrgans"),
-      t("expedientObertura")
+      t("expedientObertura"),
     ];
 
     let content;
 
-  
-      return (
-        <>
-          <div className="titolPaginaApp visioMobil">
+    return (
+      <>
+        <div className="titolPaginaApp visioMobil">
+          {this.props.titles[i18n.language]}
+        </div>
+        <div className="infoNoMenu">
+          <h2 className="titol h2 ocultarMobil">
             {this.props.titles[i18n.language]}
-          </div>
-          <div className="infoNoMenu">
-            <h2 className="titol h2 ocultarMobil">
-              {this.props.titles[i18n.language]}
-            </h2>
-            <div className="col-md-12 border-0 float-left p-0">
-              <p className="lh15 ocultarMobil">
-                {this.props.subtitles[i18n.language]}{" "}
-              </p>
+          </h2>
+          <div className="col-md-12 border-0 float-left p-0">
+            <p className="lh15 ocultarMobil">
+              {this.props.subtitles[i18n.language]}{" "}
+            </p>
 
+            <div
+              className="tab-pane fade show active"
+              id="elsmeusexpedients"
+              role="tabpanel"
+              aria-labelledby="home-tab"
+            >
+              <div className="infoNoMenu">
+                <RenderTable
+                  dades={expedients}
+                  columnsNom={columnsNom}
+                  columnsTitols={columnsTitols}
+                />
+              </div>
               <div
-                className="tab-pane fade show active"
-                id="elsmeusexpedients"
-                role="tabpanel"
-                aria-labelledby="home-tab"
+                className="col-md-12 border-0 float-left p-0"
+                id="botoTornarDadesP"
+                style={{ marginTop: "20px" }}
               >
-                <div className="infoNoMenu">
-                  <RenderTable dades={expedients} columnsNom={columnsNom} columnsTitols={columnsTitols} />
-                </div>
-                <div
-                  className="col-md-12 border-0 float-left p-0"
-                  id="botoTornarDadesP"
-                  style={{ marginTop: "20px" }}
+                <button
+                  type="button"
+                  data-toggle="modal"
+                  onClick={() => {
+                    window.location.href = sessionStorage.getItem("pagTornar");
+                    sessionStorage.setItem(
+                      "pagTornar",
+                      sessionStorage.getItem("contextPath")
+                    );
+                  }}
+                  className="botoSuport botoTornauApp"
+                  tabIndex="520"
+                  aria-labelledby="botoTornarDadesP"
                 >
-                  <button
-                    type="button"
-                    data-toggle="modal"
-                    onClick={() => {
-                      window.location.href = sessionStorage.getItem("pagTornar");
-                      sessionStorage.setItem(
-                        "pagTornar",
-                        sessionStorage.getItem("contextPath")
-                      );
-                    }}
-                    className="botoSuport botoTornauApp"
-                    tabIndex="520"
-                    aria-labelledby="botoTornarDadesP"
-                  >
-                    {t("tornar")}
-                  </button>
-                </div>
+                  {t("tornar")}
+                </button>
               </div>
             </div>
           </div>
-        </>
-      );
-    }
+        </div>
+      </>
+    );
   }
-
+}
 
 export default withTranslation()(ElsMeusExpedients);

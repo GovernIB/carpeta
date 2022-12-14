@@ -25,7 +25,7 @@ public class TestConsultaExpedients {
 
             pluginProperties.load(new FileInputStream("plugin.properties"));
 
-            final String propertyBase = "org.fundaciobit.";
+            final String propertyBase = "es.caib.carpeta.";
 
             ExpedientsCarpetaFrontPlugin elsMeusExpedientsPlugin = new ExpedientsCarpetaFrontPlugin(propertyBase,
                     pluginProperties);
