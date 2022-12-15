@@ -1,4 +1,4 @@
-BEGIN;
+
 
 -- Plugin de "Els Meus Expedients"
 UPDATE car_plugin SET propietats = concat(car_plugin.propietats, '
@@ -13,3 +13,5 @@ UPDATE car_plugin SET propietats = concat(car_plugin.propietats, '
 
 #es.caib.carpeta.pluginsib.carpetafront.expedients.filtre.2.metadada=...')
 WHERE classe = 'org.fundaciobit.pluginsib.carpetafront.expedients.ExpedientsCarpetaFrontPlugin';
+
+
