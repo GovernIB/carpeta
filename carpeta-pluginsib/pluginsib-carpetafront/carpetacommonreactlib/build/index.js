@@ -4017,9 +4017,9 @@ var RenderTableDesktop = /** @class */ (function (_super) {
         var titols = this.props.columnsTitols;
         var capTaula = [];
         {
-            columnsNom.forEach(function (clau, c) {
-                console.log(" HEADER::[" + c + "] -> " + clau + " => " + titols[c]);
-                capTaula.push(React$1.createElement("th", { key: c }, titols[c]));
+            titols.forEach(function (clau, c) {
+                //console.log(" HEADER::[" + c + "] -> " + clau + " => " + titols[c]);
+                capTaula.push(React$1.createElement("th", { key: c }, clau));
             });
         }
         return (React$1.createElement(React$1.Fragment, null,

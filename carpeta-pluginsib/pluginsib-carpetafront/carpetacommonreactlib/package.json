@@ -9,7 +9,7 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prebuild": "rm -rf ./build",
+    "prebuild": "rd /s /q .\\build",
     "build": "rollup --config"
   },
   "dependencies": {

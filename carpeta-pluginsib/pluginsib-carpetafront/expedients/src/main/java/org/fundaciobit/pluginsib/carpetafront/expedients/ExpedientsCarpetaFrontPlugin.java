@@ -370,18 +370,44 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     }
 
     public ExpedientResposta getExpedientsPerAdministrationID(String nif, ExpedientConsulta consulta) throws Exception {
-
+                
         IArxiuPlugin arxiu = instanticatePluginArxiu();
 
+        //Llistat de filtres
+        List<ConsultaFiltre> filterList = new ArrayList<ConsultaFiltre>();
         ConsultaFiltre filter = new ConsultaFiltre();
+
+
+        //S'introdueix el primer filtre base (per DNI de l'usuari)
         filter.setMetadada("eni:interesados_exp"); //
         filter.setOperacio(ConsultaOperacio.CONTE);
         filter.setValorOperacio1(nif);
+        filterList.add(filter);
+        
+        log.info("Filtre Metadada: " + filter.getMetadada());
+        log.info("Filtre operacio: "+filter.getOperacio());
+        log.info("Filtre Valor1: "+filter.getValorOperacio1());
+        log.info("Filtre Valor2: "+filter.getValorOperacio2());
+        
+        
+        for(int i=1; filter.getMetadada()!=null; i++) {
+            //Variables per extreure la info de cada filtre
+            String numFiltre = Integer.toString(i);
+            String filtrePropertyBase = EXPEDIENTS_PROPERTY_BASE + "filtre."+numFiltre;
+            
+            filter = new ConsultaFiltre();
+            filter.setMetadada(getProperty(filtrePropertyBase+".metadada"));
+            
+            if(filter.getMetadada()!= null) {
+                filter.setOperacio(getTipusConsultaOperacio(getProperty(filtrePropertyBase+".operacio")));
+                filter.setValorOperacio1(getProperty(filtrePropertyBase+".valor1"));
+                filter.setValorOperacio2(getProperty(filtrePropertyBase+".valor2"));
+                filterList.add(filter);
+            }
 
-        List<ConsultaFiltre> list = new ArrayList<ConsultaFiltre>();
-        list.add(filter);
+        }
 
-        ConsultaResultat resultat = arxiu.expedientConsulta(list, consulta.getPagina(),
+        ConsultaResultat resultat = arxiu.expedientConsulta(filterList, consulta.getPagina(),
                 consulta.getElementsPerPagina());
 
         // XYZ ZZZZ
@@ -611,6 +637,28 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             }
         }
         return null;
+    }
+    
+    private ConsultaOperacio getTipusConsultaOperacio(String operacio) {
+        switch(operacio) {
+            case "IGUAL":
+                return ConsultaOperacio.IGUAL;
+            case "CONTE":
+                return ConsultaOperacio.CONTE;
+            case "MENOR":
+                return ConsultaOperacio.MENOR;
+            case "MAJOR":
+                return ConsultaOperacio.MAJOR;
+            case "ENTRE":
+                return ConsultaOperacio.ENTRE;
+            case "NO_IGUAL":
+                return ConsultaOperacio.NO_IGUAL;                
+            case "NO_CONTE":
+                return ConsultaOperacio.NO_CONTE;
+            }
+            
+        return null;
+        
     }
 
 }
