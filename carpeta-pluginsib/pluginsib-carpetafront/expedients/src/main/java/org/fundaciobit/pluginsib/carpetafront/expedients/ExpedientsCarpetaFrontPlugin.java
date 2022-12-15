@@ -384,11 +384,6 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         filter.setValorOperacio1(nif);
         filterList.add(filter);
         
-        log.info("Filtre Metadada: " + filter.getMetadada());
-        log.info("Filtre operacio: "+filter.getOperacio());
-        log.info("Filtre Valor1: "+filter.getValorOperacio1());
-        log.info("Filtre Valor2: "+filter.getValorOperacio2());
-        
         
         for(int i=1; filter.getMetadada()!=null; i++) {
             //Variables per extreure la info de cada filtre
