@@ -224,13 +224,12 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             map.put("usuariMetode", userData.getAuthenticationMethod());
             
             map.put("userData", json.toJson(userData));
-*/
-            
-            
+            */
+
             String pathtoservei = absolutePluginRequestPath + "/" + URL_REST_SERVICE_CONSULTA_EXPEDIENTS;
 
             map.put("pathtoservei", pathtoservei);
-            
+
             String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
 
             try {
@@ -242,7 +241,8 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         } catch (Exception e) {
             // XYZ ZZZ
-            log.error("Error retornant pàgina principal del Plguin " + this.getTitle(locale) + ": " + e.getMessage(), e);
+            log.error("Error retornant pàgina principal del Plguin " + this.getTitle(locale) + ": " + e.getMessage(),
+                    e);
         }
 
     }
@@ -370,33 +370,31 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     }
 
     public ExpedientResposta getExpedientsPerAdministrationID(String nif, ExpedientConsulta consulta) throws Exception {
-                
+
         IArxiuPlugin arxiu = instanticatePluginArxiu();
 
         //Llistat de filtres
         List<ConsultaFiltre> filterList = new ArrayList<ConsultaFiltre>();
         ConsultaFiltre filter = new ConsultaFiltre();
 
-
         //S'introdueix el primer filtre base (per DNI de l'usuari)
         filter.setMetadada("eni:interesados_exp"); //
         filter.setOperacio(ConsultaOperacio.CONTE);
         filter.setValorOperacio1(nif);
         filterList.add(filter);
-        
-        
-        for(int i=1; filter.getMetadada()!=null; i++) {
+
+        for (int i = 1; filter.getMetadada() != null; i++) {
             //Variables per extreure la info de cada filtre
             String numFiltre = Integer.toString(i);
-            String filtrePropertyBase = EXPEDIENTS_PROPERTY_BASE + "filtre."+numFiltre;
-            
+            String filtrePropertyBase = EXPEDIENTS_PROPERTY_BASE + "filtre." + numFiltre;
+
             filter = new ConsultaFiltre();
-            filter.setMetadada(getProperty(filtrePropertyBase+".metadada"));
-            
-            if(filter.getMetadada()!= null) {
-                filter.setOperacio(getTipusConsultaOperacio(getProperty(filtrePropertyBase+".operacio")));
-                filter.setValorOperacio1(getProperty(filtrePropertyBase+".valor1"));
-                filter.setValorOperacio2(getProperty(filtrePropertyBase+".valor2"));
+            filter.setMetadada(getProperty(filtrePropertyBase + ".metadada"));
+
+            if (filter.getMetadada() != null) {
+                filter.setOperacio(getTipusConsultaOperacio(getProperty(filtrePropertyBase + ".operacio")));
+                filter.setValorOperacio1(getProperty(filtrePropertyBase + ".valor1"));
+                filter.setValorOperacio2(getProperty(filtrePropertyBase + ".valor2"));
                 filterList.add(filter);
             }
 
@@ -436,14 +434,16 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
                 String codiSia = em.getClassificacio();
                 ei.setCodiSia(codiSia);
-                //try {
-                String nomProcediment = this.findProcedimentAmbCodiSia(codiSia, consulta.getLanguage());
-                ei.setNomProcediment(nomProcediment);
-                /*
+                String nomProcediment = "";
+                try {
+                    nomProcediment = this.findProcedimentAmbCodiSia(codiSia, consulta.getLanguage());
+                    ei.setNomProcediment(nomProcediment);
+
                 } catch (Exception e) {
                     // TODO: handle exception XYZ XXXX
+                    log.error("Error en el procedient de Rolsac. No s'ha pogut obtenir el nom del procediment.");
                     e.printStackTrace();
-                }*/
+                }
 
                 String expEstat = em.getEstat().toString();
                 if ("E01".equals(expEstat)) {
@@ -458,20 +458,17 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
                 if (organsList != null && organsList.size() != 0) {
 
-                    List<String> organsNomList =  new ArrayList<String>();
-                    
+                    List<String> organsNomList = new ArrayList<String>();
+
                     for (String organDir3 : organsList) {
                         organsNomList.add(getNomByDir3(organDir3, consulta.getLanguage()));
                     }
-                    
-                    
-                    
+
                     ei.setExpedientOrgans(organsNomList);
                 }
 
+                expedients.add(ei);
             }
-
-            expedients.add(ei);
         }
 
         ExpedientResposta resposta = new ExpedientResposta();
@@ -567,7 +564,7 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                         return (String) procediment.getNombre();
                     }
                 } else {
-
+                
                     return null;
                 }
 
@@ -633,9 +630,9 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         }
         return null;
     }
-    
+
     private ConsultaOperacio getTipusConsultaOperacio(String operacio) {
-        switch(operacio) {
+        switch (operacio) {
             case "IGUAL":
                 return ConsultaOperacio.IGUAL;
             case "CONTE":
@@ -647,13 +644,13 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             case "ENTRE":
                 return ConsultaOperacio.ENTRE;
             case "NO_IGUAL":
-                return ConsultaOperacio.NO_IGUAL;                
+                return ConsultaOperacio.NO_IGUAL;
             case "NO_CONTE":
                 return ConsultaOperacio.NO_CONTE;
-            }
-            
+        }
+
         return null;
-        
+
     }
 
 }
