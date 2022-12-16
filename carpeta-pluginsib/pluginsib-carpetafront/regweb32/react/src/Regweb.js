@@ -11,10 +11,13 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import DetallRegistre from './DetallRegistre';
+//import DetallRegistre from './DetallRegistre';
+import {DetallRegistre} from 'regwebdetallcomponentlib';
+
 
 /**
  *  @author jagarcia
+ *  @author anadal
  */
 
 class Regweb extends Component {
@@ -50,6 +53,7 @@ class Regweb extends Component {
         this.handleRegPorPaginaFilterParam = this.handleRegPorPaginaFilterParam.bind(this);
         this.handleSubmitSearcher = this.handleSubmitSearcher.bind(this);
         this.mostrarForm = this.mostrarForm.bind(this);
+        this.tornarDeDetallRegistre = this.tornarDeDetallRegistre.bind(this);
 
         const getLocale = Locale => require(`date-fns/locale/${sessionStorage.getItem("langActual")}/index.js`);
         this.locale = getLocale(this.props.language);
@@ -160,7 +164,6 @@ class Regweb extends Component {
             filter_number: e.target.value,
         });
     }
-
 
     handlePagination(event, accio, isNumber, pag){
         const newPageNumber =  event.target.text;
@@ -325,19 +328,30 @@ class Regweb extends Component {
 
     componentDidMount() {
 
+
+        console.log("componentDidMount::1");
+
         const getLocale = locale => require(`date-fns/locale/${sessionStorage.getItem("langActual")}/index.js`);
         this.locale = getLocale(this.props.language);
+
+        console.log("componentDidMount::2");
 
         this.setState({
             ...this.state, 
             isLoaded: true
         });
 
+        console.log("componentDidMount::3");
+
         const {t} = this.props;
 
         let validatFormulari = this.validaFormulari();
 
+        console.log("componentDidMount::4");
+
         if (validatFormulari){
+
+            console.log("componentDidMount::5");
 
             let criterisCercaText =
                 t('carpeta_criterio_1') + $.dateFormatCerca(this.state.filter_startDate) +
@@ -365,6 +379,8 @@ class Regweb extends Component {
                 pageNumber: this.state.pagination_active-1
             };
 
+            console.log("componentDidMount::6");
+
             axios.get(url, {params: params}).then( (response) => {
 
                 if (response.data.registres != null){
@@ -379,6 +395,7 @@ class Regweb extends Component {
                 }
 
             }).catch(error => {
+                console.log("componentDidMount::7");
                 console.log(JSON.stringify(error));
                 if (error.response) {
                     console.log("error.response.data: " + error.response.data);
@@ -402,6 +419,8 @@ class Regweb extends Component {
             });
 
         }
+
+        console.log("componentDidMount::8");
     }
 
     validaFormulari() {
@@ -432,6 +451,14 @@ class Regweb extends Component {
     }
 
     componentDidUpdate() {
+
+
+
+        if ( this.state.numeroRegistro != null ){
+            return;
+        } 
+
+
 
         $("#fechaInicio").attr("tabindex","502");
         $("#fechaFin").attr("tabindex","503");
@@ -531,20 +558,29 @@ class Regweb extends Component {
             taulaRegistres = <div className="pt-3 alert alert-secondary margeBuid" style={{ float: 'left', width: '95%'}} role="alert">{t('registro_vacio')}</div>
 
         }
-
+/*
         let detallRegistreContainer;
         if ( this.state.numeroRegistro != null ){
             detallRegistreContainer = <DetallRegistre pathtoservei={props.detallpathtoservei} numero={this.state.numeroRegistro} />;
             ReactDOM.render(detallRegistreContainer, document.getElementById('detallregistrecontainer'));
         }
+        */
     }
 
     handleItemClick(numeroRegistro) {
+
+
+        console.log("RegWeb:: Seleccionat registre " + numeroRegistro);
+
         this.setState({
             ...this.state,
             isLoaded: false,
             numeroRegistro: numeroRegistro
         });
+    }
+
+    tornarDeDetallRegistre(e) {
+        this.handleSubmitSearcher(e);
     }
 
     render() {
@@ -633,6 +669,15 @@ class Regweb extends Component {
         let criteris;
 
         let cardRegistres = [];
+
+
+        if ( this.state.numeroRegistro != null ){
+
+            console.log("Regweb:: detallpathtoservei= " + props.detallpathtoservei);
+
+
+            detallRegistreContainer = <DetallRegistre pathtoservei={props.detallpathtoservei} numero={this.state.numeroRegistro} t={t} tornarDeDetallRegistreFunc={this.tornarDeDetallRegistre }/>;
+        }
 
         formulari = <>
             <Form id="fechaBusqueda" style={{marginBottom: '20px'}} className="ocultarMobil">

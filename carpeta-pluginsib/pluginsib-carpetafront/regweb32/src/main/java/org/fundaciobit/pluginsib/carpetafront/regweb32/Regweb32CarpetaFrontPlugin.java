@@ -295,6 +295,8 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 	        
 	        String detallpathtoservei = absolutePluginRequestPath + "/" + RegwebDetallComponent.DETALL_REACT_PAGE;
 	        
+	        log.info("detallpathtoservei => " + detallpathtoservei);	        
+	        
 	        map.put("detallpathtoservei", detallpathtoservei);
 	        
 	        String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
