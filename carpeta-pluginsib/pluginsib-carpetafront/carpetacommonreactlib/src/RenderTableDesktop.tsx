@@ -30,9 +30,9 @@ class RenderTableDesktop extends Component<RenderTableProps> {
 
     let capTaula: any = [];
     {
-      columnsNom.forEach((clau: any, c: number) => {
-        console.log(" HEADER::[" + c + "] -> " + clau + " => " + titols[c]);
-        capTaula.push(<th key={c}>{titols[c]}</th>);
+      titols.forEach((clau: any, c: number) => {
+        //console.log(" HEADER::[" + c + "] -> " + clau + " => " + titols[c]);
+        capTaula.push(<th key={c}>{clau}</th>);
       });
     }
 
