@@ -30,6 +30,7 @@ import java.util.Date;
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 
@@ -130,15 +131,16 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 
         String startURL;
 
+        startURL =  absolutePluginRequestPath + "/" + INDEX_REACT_PAGE;
+        
         if (parameter != null && parameter.trim().length() != 0) {
             log.info("Regweb32CarpetaFrontPlugin:: PARAMETER => ]" + parameter + "[");
-            // request.getSession().setAttribute(SESSION_PARAMETER, parameter);
-            startURL = absolutePluginRequestPath + "/" + ESPERA_DETALL_CODIFICAT_PAGE
-                    + "?numeroRegistroFormateado=" + parameter;
+            
+            startURL = startURL + "?numeroRegistro=" + parameter;
         } else {
         	
             //startURL = absolutePluginRequestPath + "/" + ESPERA_LLISTAT_PAGE;
-        	startURL = (isReactComponent()) ? absolutePluginRequestPath + "/" + INDEX_REACT_PAGE : absolutePluginRequestPath + "/" + ESPERA_LLISTAT_PAGE;
+        	
         }
 
         log.info(" getStartUrl( ); => " + startURL);
@@ -168,12 +170,12 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
         }
 
         try {
-            if (query.startsWith(ESPERA_LLISTAT_PAGE)) {
+            /*if (query.startsWith(ESPERA_LLISTAT_PAGE)) {
 
                 esperaLlistat(absolutePluginRequestPath, relativePluginRequestPath, query, request,
                         response, userData, administrationEncriptedID, 0, locale, isGet);
 
-            }  else if (query.startsWith(ESPERA_DETALL_CODIFICAT_PAGE)) {
+            }  else*/ if (query.startsWith(ESPERA_DETALL_CODIFICAT_PAGE)) {
 
                 esperaDetallCodificat(absolutePluginRequestPath, relativePluginRequestPath, query, request,
                         response, userData, administrationEncriptedID, 0, locale, isGet);
@@ -183,13 +185,13 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
                 esperaDetall(absolutePluginRequestPath, relativePluginRequestPath, query, request,
                         response, userData, administrationEncriptedID, 0, locale, isGet);
 
-            } else if (query.startsWith(LLISTAT_REGISTRES_PAGE)) {
+            } /*else if (query.startsWith(LLISTAT_REGISTRES_PAGE)) {
 
                 llistatDeRegistres(absolutePluginRequestPath, relativePluginRequestPath, query,
                         request, response, userData, administrationEncriptedID, locale, isGet,
                         logCarpeta);
                
-            } else if (query.startsWith(INDEX_REACT_PAGE)) {
+            }*/ else if (query.startsWith(INDEX_REACT_PAGE)) {
                 
             	index(absolutePluginRequestPath, relativePluginRequestPath, query, request,
                         response, userData, administrationEncriptedID, 0, locale, isGet);
@@ -298,7 +300,18 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 	        log.info("detallpathtoservei => " + detallpathtoservei);	        
 	        
 	        map.put("detallpathtoservei", detallpathtoservei);
+
+	        String numeroRegistro = request.getParameter("numeroRegistro");
+	        log.info(" XXXXXXXXXXXXXXXXXXXXXX   numeroRegistro => " + numeroRegistro);
 	        
+	        if (numeroRegistro == null) {
+	            map.put("numeroRegistro", "");
+	        } else {
+	            numeroRegistro = new String(Base64.getDecoder().decode(numeroRegistro));
+	            log.info(" XXXXXXXXXXXXXXXXXXXXXX   numeroRegistro DECODED => " + numeroRegistro);
+	            map.put("numeroRegistro", numeroRegistro);
+	        }
+
 	        String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
 	        
 	        try {
@@ -493,7 +506,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
     // ------------------- E S P E R A L L I S T A T ----------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
-
+/*
     protected static final String ESPERA_LLISTAT_PAGE = "esperallistat";
 
     public void esperaLlistat(String absolutePluginRequestPath, String relativePluginRequestPath,
@@ -516,6 +529,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
         }
 
     }
+    */
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
@@ -588,7 +602,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
     // ------------------- L L I S T A T D E R E G I S T R E S ----------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
-
+/*
     protected static final String LLISTAT_REGISTRES_PAGE = "llistatRegistres32";
 
     public void llistatDeRegistres(String absolutePluginRequestPath,
@@ -598,21 +612,21 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 
         try {
 
-            /* Filtre número de registre */
+            // Filtre número de registre
             String formNumero = request.getParameter("numero");
 
-            /* Filtre pàgina */
+            // Filtre pàgina
             String pageNumber = request.getParameter("pageNumber");
             if (pageNumber == null) {
                 pageNumber = "1";
             }
 
-            /* Filtre estat */
+            // Filtre estat 
             String formEstat = (request.getParameter("estado") != null)
                     ? request.getParameter("estado")
                     : "0";
 
-            /* Filtre dates */
+            // Filtre dates 
             Date formDataInici;
             Date formDataFi;
             String formDataIniciStr = request.getParameter("fechaInicio");
@@ -636,7 +650,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
                 formDataInici = SDF.parse(formDataIniciStr);
                 parametros += "&fechaInicio=" + formDataIniciStr;
             } else {
-                /* Inicialitzam darrers 6 mesos */
+                //Inicialitzam darrers 6 mesos 
                 cal.add(Calendar.MONTH, -6);
                 formDataInici = cal.getTime();
             }
@@ -824,6 +838,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
         return generat;
 
     }
+    */
 
     public ResultadoBusquedaWs getRegistres(String administrationID, String entidad,
             String formNumero, Date formDataInici, Date formDataFi, String formEstat,
