@@ -1,1 +1,1 @@
-Crear un tràmit en dev: https://dev.caib.es/sistrafront/tramites/  i elegir tràmit TS0010REGT (Fer-ho en chrome)
+Crear un tràmit en dev: https://dev.caib.es/sistrafront/tramites/  i elegir tràmit TS0010REGT v3 (Fer-ho en chrome)
