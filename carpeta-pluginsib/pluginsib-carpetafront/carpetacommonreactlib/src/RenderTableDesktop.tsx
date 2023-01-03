@@ -19,7 +19,6 @@ class RenderTableDesktop extends Component<RenderTableProps> {
   }
 
   render() {
-
     console.log("Render OK: Imprimint Data RENDER TABLE DESKTOP...!");
 
     var data = this.props.dades; // Aquest valor sera this.props.dades
@@ -36,8 +35,6 @@ class RenderTableDesktop extends Component<RenderTableProps> {
       });
     }
 
-
-
     return (
       <>
         <div>
@@ -46,7 +43,7 @@ class RenderTableDesktop extends Component<RenderTableProps> {
             style={{ width: "99%", border: "0px" }}
             className="table table-striped table-bordered table-hover"
           >
-            <thead className="table-success" >
+            <thead className="table-success">
               <tr>{capTaula}</tr>
             </thead>
             <tbody>

@@ -75,25 +75,41 @@ public class TestConsultaExpedients {
 
         String nif = testProperties.getProperty("dni");
 
-        final int pagina = 0;
+        int pagina = 0;
+        int totalPagines;
 
-        final int elementsPerPagina = 150;
+        final int elementsPerPagina = 5;
 
-        ExpedientConsulta consulta = new ExpedientConsulta(language, pagina, elementsPerPagina);
+        do {
 
-        ExpedientResposta resposta = elsMeusExpedientsPlugin.getExpedientsPerAdministrationID(nif, consulta);
+            ExpedientConsulta consulta = new ExpedientConsulta(language, pagina, elementsPerPagina);
 
-        if (resposta.getError() != null) {
+            ExpedientResposta resposta = elsMeusExpedientsPlugin.getExpedientsPerAdministrationID(nif, consulta);
 
-            System.err.println("S'ha produit un error: " + resposta.getError());
+            if (resposta.getError() != null) {
 
-        } else {
+                System.err.println("S'ha produit un error: " + resposta.getError());
+                break;
+
+            }
+
+            System.out.println();
+            System.out.println();
+
+            System.out.println("======================= PAGINA " + (resposta.getPaginaActual() + 1) + "/"
+                    + resposta.getTotalPagines() + " ==================");
+            System.out.println();
+            System.out.println();
+
+            System.out.println();
 
             System.out.println("resposta.getElementsPerPagina() => " + resposta.getElementsPerPagina());
             System.out.println("resposta.getPaginaActual() => " + resposta.getPaginaActual());
             System.out.println("resposta.getRegistresRetornats() => " + resposta.getRegistresRetornats());
             System.out.println("resposta.getTotalPagines() => " + resposta.getTotalPagines());
             System.out.println("resposta.getTotalRegistres() => " + resposta.getTotalRegistres());
+
+            totalPagines = resposta.getTotalPagines();
 
             List<ExpedientInfo> resultats = resposta.getExpedients();
 
@@ -109,7 +125,9 @@ public class TestConsultaExpedients {
                 System.out.println(" ");
             }
 
-        }
+            pagina++;
+
+        } while (pagina < totalPagines);
     }
 
 }

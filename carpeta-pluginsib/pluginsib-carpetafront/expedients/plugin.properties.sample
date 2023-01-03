@@ -4,6 +4,9 @@
 # Package BASE => es.caib.carpeta.pluginsib.carpetafront.expedients.
 
 
+es.caib.carpeta.pluginsib.carpetafront.expedients.elementsperpagina=5
+
+
 # Classe i Propietats mínimes del Plugin d'Arxiu per fer Consultes
 es.caib.carpeta.pluginsib.carpetafront.expedients.arxiuclass=es.caib.plugins.arxiu.caib.ArxiuPluginCaib
 es.caib.carpeta.pluginsib.carpetafront.expedients.plugin.arxiu.caib.base.url=https://esbse.caib.es:4430/esb
@@ -12,11 +15,12 @@ es.caib.carpeta.pluginsib.carpetafront.expedients.plugin.arxiu.caib.usuari=usern
 es.caib.carpeta.pluginsib.carpetafront.expedients.plugin.arxiu.caib.contrasenya=password
 
 
+
+
 # Connexió amb ROLSAC
 
 es.caib.carpeta.pluginsib.carpetafront.expedients.rolsac.url=https://proves.caib.es/rolsac/api/rest/v1/
 es.caib.carpeta.pluginsib.carpetafront.expedients.rolsac.username=username_rolsac
 es.caib.carpeta.pluginsib.carpetafront.expedients.rolsac.password=password
-
 es.caib.carpeta.pluginsib.carpetafront.expedients.rolsac.connecttimeout=20000
 es.caib.carpeta.pluginsib.carpetafront.expedients.rolsac.readtimeout=20000

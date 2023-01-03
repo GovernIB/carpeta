@@ -22,6 +22,7 @@ import org.fundaciobit.pluginsib.carpetafront.expedients.apirolsac.ProcedimentDt
 import org.fundaciobit.pluginsib.carpetafront.expedients.apirolsac.ProcedimientosResponse;
 import org.fundaciobit.pluginsib.carpetafront.expedients.apirolsac.UnidadAdministrativa;
 import org.fundaciobit.pluginsib.carpetafront.expedients.apirolsac.UnidadesAdministrativasResponse;
+import org.fundaciobit.pluginsib.core.utils.MetadataConstants;
 import org.fundaciobit.pluginsib.core.utils.PluginsManager;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
@@ -188,24 +189,6 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             TitlesInfo titles = getTitlesInfo();
 
-            /*
-            String baseProperty = EXPEDIENTS_PROPERTY_BASE;
-            
-            for(String lang : titles.getTitlesByLang().keySet()) {
-                String trad = getProperty(baseProperty + "titol." + lang);
-                if (trad != null) {
-                    titles.getTitlesByLang().put(lang, trad);
-                }
-            }
-            
-            for(String lang : titles.getSubtitlesByLang().keySet()) {
-                String trad = getProperty(baseProperty + "subtitol." + lang);
-                if (trad != null) {
-                    titles.getSubtitlesByLang().put(lang, trad);
-                }
-            }
-            */
-
             map.put("titles", json.toJson(titles.getTitlesByLang()));
 
             map.put("subtitles", json.toJson(titles.getSubtitlesByLang()));
@@ -302,11 +285,15 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         try {
 
             /* Filtre número de registres per pàgina */
-            int elementsPerPagina;
+            int elementsPerPagina = 5;
             try {
-                elementsPerPagina = Integer.parseInt(request.getParameter("elementsPerPagina"));
-            } catch (NumberFormatException e) {
-                elementsPerPagina = 10;
+                String elementsperpagina = getProperty(EXPEDIENTS_PROPERTY_BASE + "elementsperpagina");
+                if (elementsperpagina != null) {
+                    elementsPerPagina = Integer.parseInt(elementsperpagina);
+                }
+            } catch (Exception e) {
+                log.error("Valor de la propietat " + getPropertyBase() + EXPEDIENTS_PROPERTY_BASE
+                        + "elementsperpagina no es numèric.");
             }
 
             int pagina;
@@ -375,30 +362,37 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         //Llistat de filtres
         List<ConsultaFiltre> filterList = new ArrayList<ConsultaFiltre>();
-        ConsultaFiltre filter = new ConsultaFiltre();
 
         //S'introdueix el primer filtre base (per DNI de l'usuari)
-        filter.setMetadada("eni:interesados_exp"); //
-        filter.setOperacio(ConsultaOperacio.CONTE);
-        filter.setValorOperacio1(nif);
-        filterList.add(filter);
+        {
+            ConsultaFiltre filter = new ConsultaFiltre();
+            filter.setMetadada(MetadataConstants.ENI_INTERESADOS_EXP); // == "eni:interesados_exp"
+            filter.setOperacio(ConsultaOperacio.CONTE);
+            filter.setValorOperacio1(nif);
+            filterList.add(filter);
+        }
 
-        for (int i = 1; filter.getMetadada() != null; i++) {
+        int i = 1;
+        do {
             //Variables per extreure la info de cada filtre
-            String numFiltre = Integer.toString(i);
-            String filtrePropertyBase = EXPEDIENTS_PROPERTY_BASE + "filtre." + numFiltre;
 
-            filter = new ConsultaFiltre();
-            filter.setMetadada(getProperty(filtrePropertyBase + ".metadada"));
+            final String filtrePropertyBase = EXPEDIENTS_PROPERTY_BASE + "filtre." + i;
+            final String meta = getProperty(filtrePropertyBase + ".metadada");
 
-            if (filter.getMetadada() != null) {
-                filter.setOperacio(getTipusConsultaOperacio(getProperty(filtrePropertyBase + ".operacio")));
-                filter.setValorOperacio1(getProperty(filtrePropertyBase + ".valor1"));
-                filter.setValorOperacio2(getProperty(filtrePropertyBase + ".valor2"));
-                filterList.add(filter);
+            if (meta == null || meta.trim().length() == 0) {
+                break;
             }
 
-        }
+            ConsultaFiltre filter = new ConsultaFiltre();
+            filter.setMetadada(meta);
+            filter.setOperacio(getTipusConsultaOperacio(getProperty(filtrePropertyBase + ".operacio")));
+            filter.setValorOperacio1(getProperty(filtrePropertyBase + ".valor1"));
+            filter.setValorOperacio2(getProperty(filtrePropertyBase + ".valor2"));
+            filterList.add(filter);
+
+            i++;
+
+        } while (true);
 
         ConsultaResultat resultat = arxiu.expedientConsulta(filterList, consulta.getPagina(),
                 consulta.getElementsPerPagina());
@@ -564,7 +558,7 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                         return (String) procediment.getNombre();
                     }
                 } else {
-                
+
                     return null;
                 }
 

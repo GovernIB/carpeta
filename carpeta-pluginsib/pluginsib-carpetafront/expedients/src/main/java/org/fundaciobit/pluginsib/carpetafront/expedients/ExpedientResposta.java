@@ -11,24 +11,22 @@ public class ExpedientResposta {
 
     protected int paginaActual;
     protected int elementsPerPagina;
-
     protected int totalPagines;
     protected int registresRetornats;
     protected int totalRegistres;
 
     protected List<ExpedientInfo> expedients;
-    
-    protected String error; 
+
+    protected String error;
 
     public ExpedientResposta() {
         super();
     }
-    
+
     public ExpedientResposta(String error) {
         super();
         this.error = error;
     }
-    
 
     public ExpedientResposta(int paginaActual, int elementsPerPagina, int totalPagines, int registresRetornats,
             int totalRegistres, List<ExpedientInfo> expedients) {

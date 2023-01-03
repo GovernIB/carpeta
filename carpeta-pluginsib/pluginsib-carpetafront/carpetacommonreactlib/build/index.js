@@ -3994,7 +3994,7 @@ var RenderTableMobile = /** @class */ (function (_super) {
                             React$1.createElement("span", { className: "oi oi-key iconaFormApp", style: { verticalAlign: "sub" } })),
                         cardsMobile)));
             }))));
-        return (React$1.createElement(React$1.Fragment, null, content));
+        return React$1.createElement(React$1.Fragment, null, content);
     };
     return RenderTableMobile;
 }(React$1.Component));
@@ -4062,12 +4062,164 @@ var RenderTable = /** @class */ (function (_super) {
             return React$1.createElement(RenderTableDesktop, { dades: data, columnsNom: columnsNom, columnsTitols: columnsTitols });
         }
         else {
-            return (React$1.createElement(RenderTableMobile, { dades: data, columnsNom: columnsNom, columnsTitols: columnsTitols }));
+            return React$1.createElement(RenderTableMobile, { dades: data, columnsNom: columnsNom, columnsTitols: columnsTitols });
         }
     };
     return RenderTable;
 }(React$1.Component));
 
+var tornar$2 = "Back";
+var paginacioLabel$2 = "Mostrando {{current}} entradas de {{total}} (De la posición {{from}} hasta la {{to}})";
+var translationEN = {
+	tornar: tornar$2,
+	paginacioLabel: paginacioLabel$2
+};
+
+var tornar$1 = "Volver";
+var paginacioLabel$1 = "Mostrando {{current}} entradas de {{total}} (De la posición {{from}} hasta la {to})";
+var translationES = {
+	tornar: tornar$1,
+	paginacioLabel: paginacioLabel$1
+};
+
+var tornar = "Tornau";
+var paginacioLabel = "Mostrant {{current}} entrades de {{total}} (De la posició {{from}} fins a la {{to}})";
+var translationCA = {
+	tornar: tornar,
+	paginacioLabel: paginacioLabel
+};
+
+/**
+ * @author anadal
+ * @create date 2023-01-03 11:22:46
+ * @modify date 2023-01-03 11:22:46
+ * @desc [description]
+ */
+function initTranslation(i18n) {
+    i18n.addResourceBundle("ca", "translation", translationCA, true, false);
+    i18n.addResourceBundle("es", "translation", translationES, true, false);
+    i18n.addResourceBundle("en", "translation", translationEN, true, false);
+}
+
+/**
+ * @author [anadal]
+ * @create date 2022-12-28 11:36:00
+ * @modify date 2022-12-28 11:36:00
+ * @desc [description]
+ */
+var PaginationCarpeta = /** @class */ (function (_super) {
+    __extends(PaginationCarpeta, _super);
+    function PaginationCarpeta(props) {
+        var _this = _super.call(this, props) || this;
+        console.log("  CONSTRUCTOR PaginationCarpeta !!!!!");
+        console.log("PaginationCarpeta().paginaActual  => " + _this.props.paginationInfo.paginaActual);
+        console.log("PaginationCarpeta().elementsPerPagina  => " + _this.props.paginationInfo.elementsPerPagina);
+        console.log("PaginationCarpeta().totalPagines  => " + _this.props.paginationInfo.totalPagines);
+        console.log("PaginationCarpeta().registresRetornats  => " + _this.props.paginationInfo.registresRetornats);
+        console.log("PaginationCarpeta().totalRegistres  => " + _this.props.paginationInfo.totalRegistres);
+        initTranslation(_this.props.i18n);
+        return _this;
+    }
+    PaginationCarpeta.prototype.render = function () {
+        var _this = this;
+        console.log("  RENDER PaginationCarpeta !!!!!");
+        var pagines = [];
+        {
+            var _loop_1 = function (i) {
+                pagines.push(React$1.createElement("li", { key: i, className: "page-item ".concat(this_1.props.paginationInfo.paginaActual == i ? "active" : "") },
+                    React$1.createElement("a", { className: "page-link", onClick: function () {
+                            _this.props.paginationInfo.onClickPagination(i);
+                        } }, i + 1)));
+            };
+            var this_1 = this;
+            for (var i = 0; i < this.props.paginationInfo.totalPagines; i++) {
+                _loop_1(i);
+            }
+        }
+        var current = this.props.paginationInfo.registresRetornats;
+        var total = this.props.paginationInfo.totalRegistres;
+        var from = this.props.paginationInfo.paginaActual * this.props.paginationInfo.elementsPerPagina + 1;
+        var to = Math.min(this.props.paginationInfo.totalRegistres, (1 + this.props.paginationInfo.paginaActual) * this.props.paginationInfo.elementsPerPagina);
+        return (React$1.createElement("center", null,
+            React$1.createElement("small", null, this.props.i18n.t("paginacioLabel", { current: current, total: total, from: from, to: to })),
+            React$1.createElement("nav", { "aria-label": "Page navigation" },
+                React$1.createElement("ul", { className: "pagination justify-content-center" },
+                    React$1.createElement("li", { className: "page-item" },
+                        React$1.createElement("a", { className: "page-link", onClick: function () {
+                                _this.props.paginationInfo.onClickPagination(0);
+                            } },
+                            React$1.createElement("b", null, "<<"))),
+                    pagines,
+                    React$1.createElement("li", { className: "page-item" },
+                        React$1.createElement("a", { className: "page-link", onClick: function () {
+                                _this.props.paginationInfo.onClickPagination(_this.props.paginationInfo.totalPagines - 1);
+                            } },
+                            React$1.createElement("b", null, ">>")))))));
+    };
+    return PaginationCarpeta;
+}(React$1.Component));
+
+/**
+ * @author anadal
+ * @create date 2022-12-28 13:46:48
+ * @modify date 2022-12-28 13:46:48
+ * @desc [description]
+ */
+var RenderPaginationTable = /** @class */ (function (_super) {
+    __extends(RenderPaginationTable, _super);
+    function RenderPaginationTable(props) {
+        var _this = _super.call(this, props) || this;
+        console.log("  CONSTRUCTOR RenderPaginationTable !!!!!");
+        return _this;
+    }
+    RenderPaginationTable.prototype.render = function () {
+        return (React$1.createElement(React$1.Fragment, null,
+            React$1.createElement("div", { className: "infoNoMenu" },
+                React$1.createElement(RenderTable, { dades: this.props.tableData, columnsNom: this.props.columnNames, columnsTitols: this.props.columnTitles })),
+            React$1.createElement(PaginationCarpeta, { i18n: this.props.i18n, paginationInfo: this.props.paginationInfo })));
+    };
+    return RenderPaginationTable;
+}(React$1.Component));
+
+/**
+ * @author anadal
+ * @create date 2022-12-28 13:46:48
+ * @modify date 2022-12-28 13:46:48
+ * @desc [description]
+ */
+var TemplatePageCarpeta = /** @class */ (function (_super) {
+    __extends(TemplatePageCarpeta, _super);
+    function TemplatePageCarpeta(props) {
+        var _this = _super.call(this, props) || this;
+        console.log("  CONSTRUCTOR TemplatePageCarpeta !!!!!");
+        initTranslation(_this.props.i18n);
+        return _this;
+    }
+    TemplatePageCarpeta.prototype.render = function () {
+        console.log("  RENDER TemplatePageCarpeta !!!!!");
+        var i18n = this.props.i18n;
+        var language = i18n.language;
+        return (React$1.createElement(React$1.Fragment, null,
+            React$1.createElement("div", { className: "titolPaginaApp visioMobil" }, this.props.titles[language]),
+            React$1.createElement("div", { className: "infoNoMenu" },
+                React$1.createElement("h2", { className: "titol h2 ocultarMobil" }, this.props.titles[language]),
+                React$1.createElement("div", { className: "col-md-12 border-0 float-left p-0" },
+                    React$1.createElement("p", { className: "lh15 ocultarMobil" },
+                        this.props.subtitles[language],
+                        " "),
+                    React$1.createElement("div", { className: "tab-pane fade show active", id: "elsmeusexpedients", role: "tabpanel", "aria-labelledby": "home-tab" },
+                        this.props.children,
+                        React$1.createElement("div", { className: "col-md-12 border-0 float-left p-0", id: "botoTornarDadesP", style: { marginTop: "20px" } },
+                            React$1.createElement("button", { type: "button", "data-toggle": "modal", onClick: function () {
+                                    window.location.href = sessionStorage.getItem("pagTornar");
+                                    sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"));
+                                }, className: "botoSuport botoTornauApp", tabIndex: 520, "aria-labelledby": "botoTornarDadesP" }, i18n.t("tornar"))))))));
+    };
+    return TemplatePageCarpeta;
+}(React$1.Component));
+
 exports.Button = Button;
+exports.RenderPaginationTable = RenderPaginationTable;
 exports.RenderTable = RenderTable;
+exports.TemplatePageCarpeta = TemplatePageCarpeta;
 //# sourceMappingURL=index.js.map
