@@ -440,8 +440,7 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     ei.setNomProcediment(nomProcediment);
 
                 } catch (Exception e) {
-                    // TODO: handle exception XYZ XXXX
-                    log.error("Error en el procedient de Rolsac. No s'ha pogut obtenir el nom del procediment.");
+                    log.error("Error en el procedient de Rolsac. No s'ha pogut obtenir el nom del procediment "+codiSia+": "+ e.getMessage());
                     e.printStackTrace();
                 }
 
