@@ -117,8 +117,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
         super.registerUserData(userData);
 
-        String startURL = (isReactComponent()) ? absolutePluginRequestPath + "/" + INDEX_HTML_PAGE
-                : absolutePluginRequestPath + "/" + ESPERA_PAGE;
+        String startURL =  absolutePluginRequestPath + "/" + INDEX_HTML_PAGE;
 
         log.info(" getStartUrl( ); => " + startURL);
         return startURL;
@@ -147,16 +146,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
                     + administrationEncriptedID);
         }
 
-        if (query.startsWith(ESPERA_PAGE)) {
-            espera(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
-                    administrationEncriptedID, locale, isGet);
-
-        } else if (query.startsWith(LLISTAT_TRAMITS_PAGE)) {
-
-            llistatDeTramits(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
-                    administrationEncriptedID, locale, isGet);
-
-        } else if (query.startsWith(OBTENER_TIQUET)) {
+        if (query.startsWith(OBTENER_TIQUET)) {
 
             obtenerTramiteSistra2(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                     userData, administrationEncriptedID, locale, isGet);
@@ -184,28 +174,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
     }
 
-    // --------------------------------------------------------------------------------------
-    // --------------------------------------------------------------------------------------
-    // ------------------- ESPERA ----------------
-    // --------------------------------------------------------------------------------------
-    // --------------------------------------------------------------------------------------
 
-    protected static final String ESPERA_PAGE = "espera";
-
-    public void espera(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
-            HttpServletRequest request, HttpServletResponse response, UserData userData,
-            String administrationEncriptedID, Locale locale, boolean isGet) {
-
-        try {
-
-            String rutaDesti = absolutePluginRequestPath + "/" + LLISTAT_TRAMITS_PAGE;
-
-            esperaPage(absolutePluginRequestPath, response, locale, rutaDesti);
-
-        } catch (Exception e) {
-            log.error("Error enviant pagian d'espera de Sistra: " + e.getMessage(), e);
-        }
-    }
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
@@ -463,171 +432,11 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
-    // ------------------- L L I S T A T DE T R A M I T S ----------------
+    // ------------------- U T I L S  ----------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
-    protected static final String LLISTAT_TRAMITS_PAGE = "llistatTramits";
 
-    public void llistatDeTramits(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
-            HttpServletRequest request, HttpServletResponse response, UserData userData,
-            String administrationEncriptedID, Locale locale, boolean isGet) {
-
-        try {
-
-            Date formDataInici;
-            Date formDataFi;
-            String formEstat;
-
-            if (isGet) {
-
-                Calendar cal = Calendar.getInstance();
-                cal.setTimeZone(TimeZone.getTimeZone("Europe/Madrid"));
-                formDataFi = cal.getTime();
-                cal.add(Calendar.MONTH, -6);
-                formDataInici = cal.getTime();
-                formEstat = "A";
-
-            } else {
-
-                String formDataIniciStr = request.getParameter("fechaInicio");
-                String formDataFiStr = request.getParameter("fechaFin");
-                formEstat = request.getParameter("tramiteFinalizado");
-
-                if (isDevelopment()) {
-                    log.info("formDataIniciStr: " + formDataIniciStr);
-                    log.info("formDataFiStr: " + formDataFiStr);
-                    log.info("formStatus: " + formEstat);
-                }
-
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                sdf.setTimeZone(TimeZone.getTimeZone("Europe/Madrid"));
-
-                formDataInici = sdf.parse(formDataIniciStr);
-                formDataFi = sdf.parse(formDataFiStr);
-
-            }
-
-            response.setCharacterEncoding("utf-8");
-            response.setContentType("text/html");
-
-            String webpage = getLlistatDeTramitsPage(absolutePluginRequestPath, userData, formDataInici, formDataFi,
-                    formEstat, locale, isGet);
-
-            try {
-                response.getWriter().println(webpage);
-                response.flushBuffer();
-            } catch (IOException e) {
-                log.error("Error obtening writer: " + e.getMessage(), e);
-            }
-
-        } catch (Exception e) {
-            log.error("Error llistant tràmits: " + e.getMessage(), e);
-        }
-    }
-
-    public String getLlistatDeTramitsPage(String absolutePluginRequestPath, UserData userData, Date formDataInici,
-            Date formDataFi, String formEstat, Locale locale, boolean isGet) throws Exception {
-
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("form_dataFi", formDataFi);
-        map.put("form_dataInici", formDataInici);
-        map.put("form_estat", formEstat);
-
-        List<TramitePersistenteGenerico> tramitesGenericos = new ArrayList<TramitePersistenteGenerico>();
-        String missatgeError = "";
-
-        List<TramitePersistenteGenerico> tramits;
-        if (isGet) {
-            tramits = null;
-        } else {
-
-            formDataFi = DateUtils.sumarRestarDiasFecha(formDataFi, 1);
-
-            /* SISTRA1 */
-            try {
-                if (isDevelopment()) {
-                    tramits = getTramitsDebug(formDataInici, formDataFi, userData.getAdministrationID(), formEstat,
-                            locale, absolutePluginRequestPath);
-                } else {
-                    tramits = getTramits(formDataInici, formDataFi, userData.getAdministrationID(), formEstat, locale,
-                            absolutePluginRequestPath);
-                }
-            } catch (SOAPFaultException e) {
-                tramits = null;
-
-                // Controlar excepció Sistra1 dintre plugin de tramitació #478
-                if (Configuracio.isCAIB() && e.getMessage().contains("es.caib.zonaper.modelInterfaz.ExcepcionPAD")) {
-                    missatgeError = "";
-                } else {
-                    missatgeError = "Sistra1: " + e.getMessage() + "\n";
-                }
-
-            }
-
-            if (tramits != null) {
-                tramitesGenericos.addAll(tramits);
-            }
-
-            /* SISTRA2 */
-            try {
-                if (isDevelopment()) {
-                    tramits = obtenerTramitesDebug(userData.getAdministrationID(), formDataInici, formDataFi, formEstat,
-                            absolutePluginRequestPath);
-                } else {
-                    tramits = obtenerTramites(userData.getAdministrationID(), formDataInici, formDataFi, formEstat,
-                            absolutePluginRequestPath);
-                }
-            } catch (javax.ws.rs.client.ResponseProcessingException e) {
-                tramits = null;
-                e.printStackTrace();
-                log.error("Sistra2 - No hi ha tramits:" + e.getMessage());
-            } catch (Exception e) {
-                tramits = null;
-                missatgeError += "Sistra2: " + e.getMessage();
-                log.error("Error Sistra2:" + e.getMessage());
-            }
-
-            if (tramits != null) {
-                tramitesGenericos.addAll(tramits);
-            }
-
-        }
-
-        InputStream input = this.getClass().getResourceAsStream("/webpage/sistra.html");
-        String plantilla = IOUtils.toString(input, "UTF-8");
-
-        // XYZ ZZZ
-        map.put("resources", absolutePluginRequestPath + "/" + WEBRESOURCECOMMON);
-        map.put("resourcessistra", absolutePluginRequestPath + "/webresourcesistra");
-
-        // XYZ ZZZ
-        map.put("form_action", absolutePluginRequestPath + "/" + LLISTAT_TRAMITS_PAGE);
-        map.put("lang", locale.getLanguage());
-        map.put("isget", isGet);
-
-        map.put("tramite_listado", getTitle(locale));
-        map.put("tramite_descripcion", getSubTitle(locale));
-
-        final String[] traduccions = { "tramite.tramite", "tramite.fecha.inicio", "tramite.acceso", "tramite.vacio",
-                "carpeta.buscar", "carpeta.fecha.inicio", "carpeta.fecha.fin", "tramite.continuar",
-                "tramite.genericerror", "tramite.versionsistra", "tramite.estado", "tramite.finalizado",
-                "tramite.nofinalizado", "tramite.nofinalizadopresencial", "tramite.todos", "tramite.detalle",
-                "tramite.ver", "tramite.registrado", "tramite.continuar", "tramite.modal.titulo", "tramite.modal.texte",
-                "tramite.modal.continuarBtn", "tramite.modal.cancelarBtn", "error.veure.detalls", "error.amaga.detalls",
-                "error.dates", "error.data", "boto_tornar" };
-
-        for (String t : traduccions) {
-            map.put(t.replace('.', '_'), getTraduccio(t, locale));
-        }
-
-        map.put("development", isDevelopment());
-        map.put("missatgeError", missatgeError);
-        map.put("tramits", tramitesGenericos);
-
-        String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
-        return generat;
-    }
 
     public boolean isDevelopment() {
         return "true".equals(getProperty(SISTRA_PROPERTY_BASE + "development"));
@@ -647,7 +456,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
      * @return List<TramitePersistenteGenerico>
      * @throws Exception
      */
-    public List<TramitePersistenteGenerico> getTramits(Date fechaInicio, Date fechaFin, String documento,
+    protected List<TramitePersistenteGenerico> getTramits(Date fechaInicio, Date fechaFin, String documento,
             String finalizado, Locale locale, String absolutePluginRequestPath) throws Exception {
 
         BackofficeFacade backofficeFacade = getBackofficeFacade();
@@ -718,8 +527,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
                 // Si es tipus Registro => redirigim a pagina de detall Registre
                 if (item.getTipo() == TipoElementoExpediente.REGISTRO) {
-                    tpg.setUrl(absolutePluginRequestPath + "/" + DETALL_REGISTRE_PAGE + "?numeroRegistroFormateado="
-                            + tpg.getNumero());
+                    tpg.setUrl(tpg.getNumero());
                 }
 
                 if (finalizado.equals("A") || ((((estaPendent && finalizado.equals("N") && !tpg.esMostraModal())
@@ -858,8 +666,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 //        		if ((finalizado.equals("A") || finalizado.equals("R"))) {
                 if ((finalizado.equals("A") || finalizado.equals("S"))) {
                     TramitePersistenteGenerico tpg = new TramitePersistenteGenerico(tf, 2);
-                    tpg.setUrl(absolutePluginRequestPath + "/" + DETALL_REGISTRE_PAGE + "?numeroRegistroFormateado="
-                            + tpg.getNumero());
+                    tpg.setUrl(tpg.getNumero());
                     tramits.add(tpg);
                 }
             }

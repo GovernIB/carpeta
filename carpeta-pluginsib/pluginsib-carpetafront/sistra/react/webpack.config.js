@@ -7,7 +7,23 @@ const config = {
     filename: "sistra_reactjs_main.js",
   },
   
-  mode: 'development',
+  mode: 'production',
+
+	resolve: {
+		fallback: {
+			url: false,
+			http: require.resolve('stream-http'),
+      https: require.resolve('https-browserify'),
+			buffer: false,
+			stream: false,
+			assert: false,
+      crypto: false,
+			zlib: false,
+			util: false,
+			tty: false,
+			os: false,
+		}
+	},
 
   module: {
     rules: [

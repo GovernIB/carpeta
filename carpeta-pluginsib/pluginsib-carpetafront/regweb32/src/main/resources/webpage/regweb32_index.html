@@ -7,11 +7,15 @@ var changeLanguagePlugin;
 <script src="${pathtojs}"></script>
 <script>
 var props = {
+     // Només pel cas de mostrar un sol Registre
+        "numeroregistro" : "${numeroRegistro}",
         "titles" : ${titles},
         "subtitles" : ${subtitles},
         "pathtoservei" : "${pathtoservei}",
-        "detallpathtoservei" : "${detallpathtoservei}",
+        "detallpathtoservei" : "${detallpathtoservei}"
 };
+
+//alert("numeroregistro => ]${numeroRegistro}[")
 
 newInstancePlugin('regwebcontainer', props);
 

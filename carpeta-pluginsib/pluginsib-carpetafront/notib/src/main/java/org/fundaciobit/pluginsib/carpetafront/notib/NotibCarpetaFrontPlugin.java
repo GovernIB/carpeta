@@ -1761,50 +1761,108 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 String formDataIniciStr = request.getParameter("dataInici");
                 String formDataFiStr = request.getParameter("dataFi");
 
-                String parametros = "";
+
                 Calendar cal = Calendar.getInstance();
                 SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
 
                 if (formDataFiStr != null && formDataFiStr != "") {
                     formDataFi = SDF.parse(formDataFiStr);
-                    parametros += "&fechaFin=" + formDataFiStr;
+
                 } else {
                     formDataFi = cal.getTime();
                 }
 
                 if (formDataIniciStr != null && formDataIniciStr != "") {
                     formDataInici = SDF.parse(formDataIniciStr);
-                    parametros += "&fechaInicio=" + formDataIniciStr;
+
                 } else {
                     /* Inicialitzam darrers 6 mesos */
                     cal.add(Calendar.MONTH, -6);
                     formDataInici = cal.getTime();
                 }
 
-                DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                log.info(" ===============   INICI PROCESS CONSULTES API NOTIB ================");
 
-                RespostaConsultaV2 respostaNotificacions = notibClientRest.notificacionsByTitular(nif, formDataInici,
-                        formDataFi, true, getIdiomaEnumDto(locale.getLanguage()), 0, mida);
-                RespostaConsultaV2 respostaComunicacions = notibClientRest.comunicacionsByTitular(nif, formDataInici,
-                        formDataFi, true, getIdiomaEnumDto(locale.getLanguage()), 0, mida);
-
-                comunicacionsList = respostaComunicacions.getResultat();
-                for (TransmissioV2 comunicacio : comunicacionsList) {
-                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
-                    cn.setTransmissio(comunicacio);
-                    cn.setData(comunicacio.getDataEnviament());
-                    cn.setTipus("comunicacio");
-                    cns.add(cn);
+                int reintents = 3;
+                while(reintents > 0) {
+                    try {
+                        
+                   
+                        RespostaConsultaV2 respostaNotificacions = notibClientRest.notificacionsByTitular(nif, formDataInici,
+                                formDataFi, true, getIdiomaEnumDto(locale.getLanguage()), 0, mida);
+                        
+                        notificacionsList = respostaNotificacions.getResultat();
+                        for (TransmissioV2 notificacio : notificacionsList) {
+                            ComunicacioNotificacio cn = new ComunicacioNotificacio();
+                            cn.setTransmissio(notificacio);
+                            cn.setData(notificacio.getDataEnviament());
+                            cn.setTipus("notificacio");
+                            cns.add(cn);
+                        }
+                        break;
+                    } catch (Exception e) {
+                        log.info("CLASS EXCEPTION[notificacionsByTitular]: " + e.getClass().getName());
+                        
+                        String msg_exc = e.getMessage();
+                        
+                        boolean isLoginJsonError = msg_exc.startsWith("com.fasterxml.jackson.core.JsonParseException: Unexpected character ('<' (code 60)):");
+                        
+                        log.info(" CLASS MESSAGE[notificacionsByTitular]: IS LOGIN-JSON ERROR " + isLoginJsonError);
+                        
+                        if (isLoginJsonError) {
+                            reintents--;
+                            if (reintents <= 0) {
+                                throw e;
+                            }
+                            Thread.sleep(750);
+                            continue;
+                        } else {
+                            throw e;
+                        }                        
+                    }
+                
                 }
+                
+                
+                reintents = 3;
+                while (reintents > 0) {
+                    try {
+                        RespostaConsultaV2 respostaComunicacions = notibClientRest.comunicacionsByTitular(nif,
+                                formDataInici, formDataFi, true, getIdiomaEnumDto(locale.getLanguage()), 0, mida);
 
-                notificacionsList = respostaNotificacions.getResultat();
-                for (TransmissioV2 notificacio : notificacionsList) {
-                    ComunicacioNotificacio cn = new ComunicacioNotificacio();
-                    cn.setTransmissio(notificacio);
-                    cn.setData(notificacio.getDataEnviament());
-                    cn.setTipus("notificacio");
-                    cns.add(cn);
+                        comunicacionsList = respostaComunicacions.getResultat();
+                        for (TransmissioV2 comunicacio : comunicacionsList) {
+                            ComunicacioNotificacio cn = new ComunicacioNotificacio();
+                            cn.setTransmissio(comunicacio);
+                            cn.setData(comunicacio.getDataEnviament());
+                            cn.setTipus("comunicacio");
+                            cns.add(cn);
+                        }
+
+                        break;
+                    } catch (Exception e) {
+                        log.info("CLASS EXCEPTION[comunicacionsByTitular]: " + e.getClass().getName());
+
+                        String msg_exc = e.getMessage();
+
+                        boolean isLoginJsonError = msg_exc.startsWith(
+                                "com.fasterxml.jackson.core.JsonParseException: Unexpected character ('<' (code 60)):");
+
+                        log.info(" CLASS MESSAGE[comunicacionsByTitular]: IS LOGIN-JSON ERROR " + isLoginJsonError);
+
+                        if (isLoginJsonError) {
+                            reintents--;
+                            if (reintents <= 0) {
+                                throw e;
+                            }
+                            Thread.sleep(750);
+                            continue;
+                        } else {
+                            throw e;
+                        }
+                    }
                 }
+                
 
                 // Ordenam comunicacions a mostrar
                 sortedTotes = cns.stream()
@@ -1874,7 +1932,10 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             }
 
         } catch (Exception e) {
-
+            
+            
+            
+            
             log.error("Error llistant Comunicacions NOTIB: " + e.getMessage(), e);
             errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
 
