@@ -1,0 +1,4 @@
+{
+    "tornar": "Back",
+    "paginacioLabel": "Mostrando {{current}} entradas de {{total}} (De la posición {{from}} hasta la {{to}})"
+}
