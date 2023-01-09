@@ -11,6 +11,7 @@ type RenderTableProps = {
   dades: any[];
   columnsNom: any[];
   columnsTitols: any[];
+  onClickRow?: Function;
 };
 
 class RenderTableMobile extends React.Component<RenderTableProps> {
@@ -40,7 +41,7 @@ class RenderTableMobile extends React.Component<RenderTableProps> {
             {
               columnsNom.forEach((clau, c) => {
                 cardsMobile.push(
-                  <div className="col-sm-10 float-right">
+                  <div className="col-sm-10 float-right" onClick={() => { if(this.props.onClickRow) { this.props.onClickRow(i); }}}>
                     <p className="card-text pl-1 mt-0" style={{ color: "rgb(102, 102, 102)" }}>
                       <b>{titols[c]}</b>: {dataInfo[clau]}
                     </p>

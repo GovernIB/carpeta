@@ -3969,6 +3969,7 @@ var RenderTableMobile = /** @class */ (function (_super) {
         return _super.call(this, props) || this;
     }
     RenderTableMobile.prototype.render = function () {
+        var _this = this;
         console.log("Render OK: Imprimint Data RENDER TABLE MOBILE...!");
         var data = this.props.dades; // Aquest valor sera this.props.dades
         var columnsNom = this.props.columnsNom;
@@ -3979,7 +3980,9 @@ var RenderTableMobile = /** @class */ (function (_super) {
                 var cardsMobile = [];
                 {
                     columnsNom.forEach(function (clau, c) {
-                        cardsMobile.push(React$1.createElement("div", { className: "col-sm-10 float-right" },
+                        cardsMobile.push(React$1.createElement("div", { className: "col-sm-10 float-right", onClick: function () { if (_this.props.onClickRow) {
+                                _this.props.onClickRow(i);
+                            } } },
                             React$1.createElement("p", { className: "card-text pl-1 mt-0", style: { color: "rgb(102, 102, 102)" } },
                                 React$1.createElement("b", null, titols[c]),
                                 ": ",
@@ -4009,6 +4012,7 @@ var RenderTableDesktop = /** @class */ (function (_super) {
         return _super.call(this, props) || this;
     }
     RenderTableDesktop.prototype.render = function () {
+        var _this = this;
         console.log("Render OK: Imprimint Data RENDER TABLE DESKTOP...!");
         var data = this.props.dades; // Aquest valor sera this.props.dades
         var columnsNom = this.props.columnsNom;
@@ -4032,7 +4036,11 @@ var RenderTableDesktop = /** @class */ (function (_super) {
                             fila.push(React$1.createElement("td", { key: c }, valor));
                         });
                         return (React$1.createElement(React$1.Fragment, null,
-                            React$1.createElement("tr", { key: i, tabIndex: 511 + i * 2 - 1 }, fila)));
+                            React$1.createElement("tr", { key: i, tabIndex: 511 + i * 2 - 1, onClick: function () { if (_this.props.onClickRow) {
+                                    _this.props.onClickRow(i);
+                                } }, onKeyPress: function () { if (_this.props.onClickRow) {
+                                    _this.props.onClickRow(i);
+                                } } }, fila)));
                     }))))));
     };
     return RenderTableDesktop;
@@ -4057,10 +4065,10 @@ var RenderTable = /** @class */ (function (_super) {
         var columnsNom = this.props.columnsNom;
         var columnsTitols = this.props.columnsTitols;
         if (!isMobileOnly_1) {
-            return React$1.createElement(RenderTableDesktop, { dades: data, columnsNom: columnsNom, columnsTitols: columnsTitols });
+            return React$1.createElement(RenderTableDesktop, { dades: data, columnsNom: columnsNom, columnsTitols: columnsTitols, onClickRow: this.props.onClickRow });
         }
         else {
-            return React$1.createElement(RenderTableMobile, { dades: data, columnsNom: columnsNom, columnsTitols: columnsTitols });
+            return React$1.createElement(RenderTableMobile, { dades: data, columnsNom: columnsNom, columnsTitols: columnsTitols, onClickRow: this.props.onClickRow });
         }
     };
     return RenderTable;
@@ -4205,7 +4213,7 @@ var TemplatePageCarpeta = /** @class */ (function (_super) {
                     React$1.createElement("p", { className: "lh15 ocultarMobil" },
                         this.props.subtitles[language],
                         " "),
-                    React$1.createElement("div", { className: "tab-pane fade show active", id: "elsmeusexpedients", role: "tabpanel", "aria-labelledby": "home-tab" },
+                    React$1.createElement("div", { className: "tab-pane fade show active", id: "TemplatePageCarpeta", role: "tabpanel", "aria-labelledby": "home-tab" },
                         this.props.children,
                         React$1.createElement("div", { className: "col-md-12 border-0 float-left p-0", id: "botoTornarDadesP", style: { marginTop: "20px" } },
                             React$1.createElement("button", { type: "button", "data-toggle": "modal", onClick: function () {

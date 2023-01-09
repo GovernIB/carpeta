@@ -9,6 +9,7 @@ type RenderTableProps = {
     dades: any[];
     columnsNom: any[];
     columnsTitols: any[];
+    onClickRow?: Function;
 };
 declare class RenderTableMobile extends React.Component<RenderTableProps> {
     constructor(props: RenderTableProps);

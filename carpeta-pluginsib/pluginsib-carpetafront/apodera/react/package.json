@@ -20,6 +20,7 @@
     "bootstrap": "^5.1.1",
     "i18next": "^19.4.5",
     "i18next-browser-languagedetector": "^4.2.0",
+    "carpetacommonreactlib": "file:../../carpetacommonreactlib",
     "react": "^16.13.1",
     "react-bootstrap": "^2.0.0-rc.0",
     "react-datepicker": "^4.2.1",
