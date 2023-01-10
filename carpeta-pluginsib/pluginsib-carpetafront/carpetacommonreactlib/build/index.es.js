@@ -4197,21 +4197,66 @@ var TemplatePageCarpeta = /** @class */ (function (_super) {
         console.log("  RENDER TemplatePageCarpeta !!!!!");
         var i18n = this.props.i18n;
         var language = i18n.language;
-        return (React$1.createElement(React$1.Fragment, null,
-            React$1.createElement("div", { className: "titolPaginaApp visioMobil" }, this.props.titles[language]),
-            React$1.createElement("div", { className: "infoNoMenu" },
-                React$1.createElement("h2", { className: "titol h2 ocultarMobil" }, this.props.titles[language]),
-                React$1.createElement("div", { className: "col-md-12 border-0 float-left p-0" },
-                    React$1.createElement("p", { className: "lh15 ocultarMobil" },
-                        this.props.subtitles[language],
-                        " "),
-                    React$1.createElement("div", { className: "tab-pane fade show active", id: "elsmeusexpedients", role: "tabpanel", "aria-labelledby": "home-tab" },
-                        this.props.children,
-                        React$1.createElement("div", { className: "col-md-12 border-0 float-left p-0", id: "botoTornarDadesP", style: { marginTop: "20px" } },
-                            React$1.createElement("button", { type: "button", "data-toggle": "modal", onClick: function () {
-                                    window.location.href = sessionStorage.getItem("pagTornar");
-                                    sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"));
-                                }, className: "botoSuport botoTornauApp", tabIndex: 520, "aria-labelledby": "botoTornarDadesP" }, i18n.t("tornar"))))))));
+        var content;
+        content = (React$1.createElement(React$1.Fragment, null,
+            React$1.createElement("div", { className: "tab-pane fade show active", id: "elsmeusexpedients", role: "tabpanel", "aria-labelledby": "home-tab" },
+                this.props.children,
+                React$1.createElement("div", { className: "col-md-12 border-0 float-left p-0", id: "botoTornarDadesP", style: { marginTop: "20px" } },
+                    React$1.createElement("button", { type: "button", "data-toggle": "modal", onClick: function () {
+                            window.location.href = sessionStorage.getItem("pagTornar");
+                            sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"));
+                        }, className: "botoSuport botoTornauApp", tabIndex: 520, "aria-labelledby": "botoTornarDadesP" }, i18n.t("tornar"))))));
+        if (!isMobileOnly_1) {
+            return (React$1.createElement(React$1.Fragment, null,
+                React$1.createElement("div", { className: "infoNoMenu" },
+                    React$1.createElement("h2", { className: "titol h2" }, this.props.titles[language]),
+                    React$1.createElement("div", { className: "col-md-12 border-0 float-left p-0" },
+                        React$1.createElement("p", { className: "lh15" },
+                            this.props.subtitles[language],
+                            " "),
+                        content))));
+        }
+        else {
+            return (React$1.createElement(React$1.Fragment, null,
+                React$1.createElement("div", { className: "titolPaginaApp" }, this.props.titles[language]),
+                React$1.createElement("div", { className: "infoNoMenu" },
+                    React$1.createElement("div", { className: "col-md-12 border-0 float-left p-0" }, content))));
+        }
+        /*return (
+          <>
+            <div className="titolPaginaApp visioMobil">{this.props.titles[language]}</div>
+            <div className="infoNoMenu">
+              <h2 className="titol h2 ocultarMobil">{this.props.titles[language]}</h2>
+              <div className="col-md-12 border-0 float-left p-0">
+                <p className="lh15 ocultarMobil">{this.props.subtitles[language]} </p>
+    
+                <div
+                  className="tab-pane fade show active"
+                  id="elsmeusexpedients"
+                  role="tabpanel"
+                  aria-labelledby="home-tab"
+                >
+                  {this.props.children}
+                  <div className="col-md-12 border-0 float-left p-0" id="botoTornarDadesP" style={{ marginTop: "20px" }}>
+                    <button
+                      type="button"
+                      data-toggle="modal"
+                      onClick={() => {
+                        window.location.href = sessionStorage.getItem("pagTornar") as string;
+                        sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath") as string);
+                      }}
+                      className="botoSuport botoTornauApp"
+                      tabIndex={520}
+                      aria-labelledby="botoTornarDadesP"
+                    >
+                      {i18n.t("tornar")}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        );*/
     };
     return TemplatePageCarpeta;
 }(React$1.Component));
