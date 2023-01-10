@@ -4209,7 +4209,7 @@ var TemplatePageCarpeta = /** @class */ (function (_super) {
         var language = i18n.language;
         var content;
         content = (React$1.createElement(React$1.Fragment, null,
-            React$1.createElement("div", { className: "tab-pane fade show active", id: "elsmeusexpedients", role: "tabpanel", "aria-labelledby": "home-tab" },
+            React$1.createElement("div", { className: "tab-pane fade show active", id: "TemplatePageCarpeta", role: "tabpanel", "aria-labelledby": "home-tab" },
                 this.props.children,
                 React$1.createElement("div", { className: "col-md-12 border-0 float-left p-0", id: "botoTornarDadesP", style: { marginTop: "20px" } },
                     React$1.createElement("button", { type: "button", "data-toggle": "modal", onClick: function () {
