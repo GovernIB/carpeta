@@ -1,13 +1,17 @@
 import React, {Component} from 'react';
-import {withTranslation} from 'react-i18next';
+import { withTranslation, WithTranslation } from "react-i18next";
 
+
+interface DadesPersonalsProps extends WithTranslation {
+    userData: any;
+}
 /**
  *  @author anadal
  */
-class DadesPersonals extends Component {
+class DadesPersonals extends Component<DadesPersonalsProps> {
 
 
-    constructor(props) {
+    constructor(props: DadesPersonalsProps) {
         super(props);
         // console.log('  CONSTRUCTOR DADES PERSONALS !!!!!');
     }
@@ -19,11 +23,9 @@ class DadesPersonals extends Component {
 
         const { t } = this.props;
         
-        const dades = this.props.dades;
+        const userData = this.props.userData;
 
-        const userData = dades.userData;
-
-        var tipus = '';
+        let tipus:JSX.Element = <></>;
         var representant;
         if (userData.representative) {
 
@@ -154,8 +156,8 @@ class DadesPersonals extends Component {
                     </div>
                     <div className="col-md-12 border-0 float-left p-0" id="botoTornarDadesP" style={{ marginTop: '20px' }}>
                         <button type="button" data-toggle="modal" onClick={() => {
-                            window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                        }} className="botoSuport botoTornauApp" tabIndex="520" aria-labelledby="botoTornarDadesP">{t('tornar')}</button>
+                            window.location.href = sessionStorage.getItem("pagTornar") as string; sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath") as string)
+                        }} className="botoSuport botoTornauApp" tabIndex={520} aria-labelledby="botoTornarDadesP">{t('tornar')}</button>
                     </div>
                 </>
         );
