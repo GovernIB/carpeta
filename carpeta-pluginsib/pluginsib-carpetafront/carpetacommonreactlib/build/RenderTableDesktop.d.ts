@@ -9,6 +9,7 @@ type RenderTableProps = {
     dades: any[];
     columnsNom: any[];
     columnsTitols: any[];
+    onClickRow?: Function;
 };
 declare class RenderTableDesktop extends Component<RenderTableProps> {
     constructor(props: RenderTableProps);

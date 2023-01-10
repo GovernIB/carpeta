@@ -38,7 +38,7 @@ class TemplatePageCarpeta extends React.Component<TemplatePageCarpetaProps> {
       <>
             <div
               className="tab-pane fade show active"
-              id="elsmeusexpedients"
+              id="TemplatePageCarpeta"
               role="tabpanel"
               aria-labelledby="home-tab"
             >

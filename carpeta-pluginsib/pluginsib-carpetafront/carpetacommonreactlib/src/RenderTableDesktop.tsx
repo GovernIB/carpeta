@@ -11,6 +11,7 @@ type RenderTableProps = {
   dades: any[];
   columnsNom: any[];
   columnsTitols: any[];
+  onClickRow?: Function;
 };
 
 class RenderTableDesktop extends Component<RenderTableProps> {
@@ -56,7 +57,8 @@ class RenderTableDesktop extends Component<RenderTableProps> {
 
                 return (
                   <>
-                    <tr key={i} tabIndex={511 + i * 2 - 1}>
+                    <tr key={i} tabIndex={511 + i * 2 - 1}  onClick={() => { if(this.props.onClickRow) { this.props.onClickRow(i); }}}
+                                  onKeyPress={() => { if(this.props.onClickRow) { this.props.onClickRow(i); }}}>
                       {fila}
                     </tr>
                   </>
