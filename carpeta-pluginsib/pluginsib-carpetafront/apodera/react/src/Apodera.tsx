@@ -3,17 +3,47 @@
  * @create date 2022-08-29 08:51:48
  * @modify date 2022-08-29 08:51:48
  */
-import React, { Component } from "react";
-import { withTranslation } from "react-i18next";
+import React from "react";
+import { withTranslation, WithTranslation } from "react-i18next";
 import axios from "axios";
 import i18n from "i18next";
-import Table from "react-bootstrap/Table";
-import infoImatge from "./info.png";
 import * as reactdetect from "react-device-detect";
 import { TemplatePageCarpeta, RenderTable } from "carpetacommonreactlib";
+//import * as $ from 'jquery';
 
-class Apodera extends Component {
-  constructor(props) {
+interface ApoderaProps extends WithTranslation {
+  pathtoservei: string;
+  titles: any;
+  subtitles: any;
+}
+
+type ApoderaState = {
+  isLoaded: boolean;
+  dataApoderaments: any;
+  dataPoderdant: any;
+  totalComPoderdant: number;
+  totalComApoderat: number;
+  error: string | null;
+  urlApodera: string | URL | undefined;
+  entitat: string | null;
+};
+
+type ApoderaListItem = {
+    apoderaTipus: string,
+    apoderaAmbit: string,
+    apoderaEstat: string,
+    apoderaPoderdante: JSX.Element,
+    apoderaApoderado: JSX.Element,
+    apoderaVigencia: string,
+    apoderaOrganismes?: JSX.Element[],
+    apoderaProcediments?: JSX.Element[],
+
+}
+
+
+class Apodera extends React.Component<ApoderaProps,ApoderaState>  {
+  constructor(props: ApoderaProps) {
+
     super(props);
 
     this.state = {
@@ -23,16 +53,16 @@ class Apodera extends Component {
       totalComPoderdant: 0,
       totalComApoderat: 0,
       error: null,
-      urlApodera: null,
+      urlApodera: undefined,
+      entitat: null
     };
 
     // TODO: Això es pot eliminar ?????
-    const getLocale = (Locale) => require(`date-fns/locale/${sessionStorage.getItem("langActual")}/index.js`);
-    this.locale = getLocale(this.props.language);
+    //const getLocale = (Locale) => require(`date-fns/locale/${sessionStorage.getItem("langActual")}/index.js`);
+    //this.locale = getLocale(this.props.language);
 
     this.nomEstat = this.nomEstat.bind(this);
     this.descripcioEstat = this.descripcioEstat.bind(this);
-    this.mostrarMesInfo = this.mostrarMesInfo.bind(this);
 
     this.canviatIdioma = this.canviatIdioma.bind(this);
     this.carregaDadesApoderaments = this.carregaDadesApoderaments.bind(this);
@@ -43,12 +73,12 @@ class Apodera extends Component {
     i18n.on("languageChanged", this.canviatIdioma);
   }
 
-  canviatIdioma(lng) {
+  canviatIdioma(lng:string) {
     console.log("Apodera::PASSA PER LISTENER canviatIdioma() ...");
     this.carregaDadesApoderaments();
   }
 
-  nomEstat(estat) {
+  nomEstat(estat: string) {
     let estatNom = i18n.t("apoderaEstadoDesconocido");
     if (estat != null) {
       switch (estat) {
@@ -75,15 +105,8 @@ class Apodera extends Component {
     return estatNom;
   }
 
-  mostrarMesInfo(row) {
-    if (document.getElementById(row).style.display === "none") {
-      document.getElementById(row).style.display = "table-row";
-    } else if (document.getElementById(row).style.display === "table-row") {
-      document.getElementById(row).style.display = "none";
-    }
-  }
 
-  descripcioEstat(estat) {
+  descripcioEstat(estat:string) {
     let descripcioNom = i18n.t("apoderaEstadoDesconocido");
     if (estat != null) {
       switch (estat) {
@@ -153,7 +176,7 @@ class Apodera extends Component {
             totalComPoderdant: 0,
             totalComApoderat: 0,
             error: errorPantalla,
-            urlApodera: null,
+            urlApodera: undefined,
             entitat: null,
           });
         } else {
@@ -164,14 +187,14 @@ class Apodera extends Component {
             totalComApoderat: 0,
             error: JSON.stringify(error).toString(),
             isLoaded: true,
-            urlApodera: null,
+            urlApodera: undefined,
             entitat: null,
           });
         }
       });
   }
 
-  addBold(str, nif) {
+  addBold(str:string, nif:string) {
     if (str.includes(nif)) {
       return <b> {str} </b>;
     } else {
@@ -179,7 +202,7 @@ class Apodera extends Component {
     }
   }
 
-  addNewLine(str, nif, isDesktop) {
+  addNewLine(str:string, nif:string, isDesktop:boolean) {
     var index = str.indexOf(" - ");
     var nom = str.substr(0, index);
     var fisicajuridica = str.substr(index + 3);
@@ -207,11 +230,11 @@ class Apodera extends Component {
     return tmp;
   }
 
-  list2Html(stringList) {
-    let htmlCode = [];
+  list2Html(stringList: any): JSX.Element[] {
+    let htmlCode:JSX.Element[] = [];
     {
       stringList &&
-        stringList.forEach((s, i) => {
+        stringList.forEach((s:any, i:number) => {
           htmlCode.push(
             <p style={{ margin: 0 }} key={i}>
               - {s}
@@ -222,11 +245,15 @@ class Apodera extends Component {
     return htmlCode;
   }
 
-  onClickRowDesktop(i) {
-    $("#Modal_Info_Apo_" + i).modal("show");
+  onClickRowDesktop(i:number) {
+    //$('#Modal_Info_Apo_' + i).modal("show");
+
+    let modal: any = document.getElementById('Modal_Info_Apo_' + i);
+    modal.style.display = "block";
+    modal.classList.add("show");
   }
 
-  onClickRowMobile(i) {
+  onClickRowMobile(i:number) {
     window.open(this.state.urlApodera, "_blank");
   }
 
@@ -250,7 +277,7 @@ class Apodera extends Component {
       } else {
         if (this.state.dataApoderaments != null && this.state.dataApoderaments.length == 0) {
           content = (
-            <div class="alert alert-secondary" role="alert">
+            <div className="alert alert-secondary" role="alert">
               {t("apoderaApoderamentsNoTrobats")}
             </div>
           );
@@ -266,12 +293,15 @@ class Apodera extends Component {
         } else {
           // OK Tenim dades
 
-          let nif;
+          let nif:string;
           if (this.state.dataPoderdant.personaFisica) {
             nif = this.state.dataPoderdant.personaFisica.nifNie;
           } else {
             nif = this.state.dataPoderdant.personaJuridica.nif;
           }
+
+
+          let accedirLabel:string = t("apoderaAccedirApoderament");
 
           let informacioAddicional;
 
@@ -286,8 +316,8 @@ class Apodera extends Component {
 
                 {this.state.dataApoderaments.map(
                   (
-                    { tipus, subtipus, estat, apoderado, poderdante, vigencia, procediments, organismes, tramits },
-                    i
+                    { tipus, subtipus, estat, apoderado, poderdante, vigencia, procediments, organismes, tramits }:any,
+                    i:number
                   ) => {
                     let llistaOrganismes = this.list2Html(organismes);
 
@@ -297,7 +327,7 @@ class Apodera extends Component {
 
                     return (
                       <>
-                        <div className="modal fade" id={"Modal_Info_Apo_" + i} tabIndex="-1" role="dialog">
+                        <div className="modal fade" id={"Modal_Info_Apo_" + i} tabIndex={-1} role="dialog">
                           <div className="modal-dialog modal-dialog-centered" role="document">
                             <div className="modal-content">
                               <div className="modal-header" style={{ padding: "0px" }}>
@@ -337,7 +367,7 @@ class Apodera extends Component {
                                   <span>
                                     <button
                                       className="btn btn-primary carpeta-btn botoAccedirCarpeta"
-                                      title={t("apoderaAccedirApoderament")}
+                                      title={accedirLabel}
                                       tabIndex={511 + i * 2}
                                       aria-labelledby="accedirApodera"
                                       onClick={() => {
@@ -389,21 +419,22 @@ class Apodera extends Component {
             columnsTitols.push(t("apoderaProcediments"));
           }
 
-          let apoderaments = [];
+          let apoderaments:ApoderaListItem[]  = [];
 
           {
             this.state.dataApoderaments.map(
-              ({ tipus, subtipus, estat, apoderado, poderdante, vigencia, procediments, organismes, tramits }, i) => {
+              ({ tipus, subtipus, estat, apoderado, poderdante, vigencia, procediments, organismes, tramits }:any, i: number) => {
+
                 let apoderado2 = this.addNewLine(apoderado, nif, isDesktop);
                 let poderdante2 = this.addNewLine(poderdante, nif, isDesktop);
 
-                let element = {
+                let element:ApoderaListItem = {
                   apoderaTipus: tipus,
                   apoderaAmbit: subtipus,
                   apoderaEstat: this.nomEstat(estat),
                   apoderaPoderdante: poderdante2,
                   apoderaApoderado: apoderado2,
-                  apoderaVigencia: vigencia,
+                  apoderaVigencia: vigencia
                 };
 
                 if (!isDesktop) {

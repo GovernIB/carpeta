@@ -1,3 +1,5 @@
-call npm run build --profile
+REM call npm run build --profile
 
-xcopy  /Y .\dist\apodera_reactjs_main.js ..\src\main\resources\webpage
+call npm run bundleup
+
+xcopy  /Y .\dist\reactjs_main.js ..\src\main\resources\webpage
