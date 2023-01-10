@@ -7,6 +7,8 @@
 
 import React from "react";
 import initTranslation from "./InitTranslation";
+import * as reactdetect from "react-device-detect";
+
 
 interface TemplatePageCarpetaProps {
   titles: any;
@@ -30,14 +32,10 @@ class TemplatePageCarpeta extends React.Component<TemplatePageCarpetaProps> {
 
     let language = i18n.language;
 
-    return (
-      <>
-        <div className="titolPaginaApp visioMobil">{this.props.titles[language]}</div>
-        <div className="infoNoMenu">
-          <h2 className="titol h2 ocultarMobil">{this.props.titles[language]}</h2>
-          <div className="col-md-12 border-0 float-left p-0">
-            <p className="lh15 ocultarMobil">{this.props.subtitles[language]} </p>
+    let content;
 
+    content = (
+      <>
             <div
               className="tab-pane fade show active"
               id="TemplatePageCarpeta"
@@ -61,10 +59,33 @@ class TemplatePageCarpeta extends React.Component<TemplatePageCarpetaProps> {
                 </button>
               </div>
             </div>
-          </div>
-        </div>
       </>
     );
+
+    if(!reactdetect.isMobileOnly){
+      return (
+        <>
+        <div className="infoNoMenu">
+          <h2 className="titol h2">{this.props.titles[language]}</h2>
+          <div className="col-md-12 border-0 float-left p-0">
+            <p className="lh15">{this.props.subtitles[language]} </p>
+            {content}
+          </div>
+        </div>
+        </>
+      );
+    }else{
+      return (
+        <>
+        <div className="titolPaginaApp">{this.props.titles[language]}</div>
+        <div className="infoNoMenu">
+          <div className="col-md-12 border-0 float-left p-0">
+            {content}
+          </div>
+        </div>
+        </>
+      );
+    }
   }
 }
 

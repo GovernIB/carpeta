@@ -55,6 +55,7 @@ import java.util.TreeMap;
 public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     public static final String EXPEDIENTS_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "expedients.";
+    public static final long ACTUALITZACIO_MAP_ENTITATS_MS =48 * 60 * 60 * 1000;
 
     /**
      *
@@ -448,15 +449,16 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 ei.setExpedientObertura(em.getDataObertura());
 
                 List<String> organsList = em.getOrgans();
-
+                
+                
                 if (organsList != null && organsList.size() != 0) {
 
                     List<String> organsNomList = new ArrayList<String>();
 
-                    for (String organDir3 : organsList) {
+                    for (String organDir3 : organsList) { 
                         organsNomList.add(getNomByDir3(organDir3, consulta.getLanguage()));
                     }
-
+                    
                     ei.setExpedientOrgans(organsNomList);
                 }
 
@@ -477,18 +479,33 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     }
 
-    public TreeMap<String, String> unidadesCache = null;
+    protected static TreeMap<String, TreeMap<String, String>> unidadesCache = new TreeMap<String, TreeMap<String, String>>();
+    protected static TreeMap<String, Long> t_darrera_actualitzacio_dir3 = new TreeMap<String, Long>();
 
+        
     public String getNomByDir3(String codiDir3, String language) {
 
         try {
-            if (unidadesCache == null) {
+            
+            if(t_darrera_actualitzacio_dir3.get(language) == null) {
+                t_darrera_actualitzacio_dir3.put(language, (long) 0);
+            }
+            long timeLastDir3Update = System.currentTimeMillis() - t_darrera_actualitzacio_dir3.get(language);
 
-                unidadesCache = getNomUnidadesAdministrativas(language);
-
+            
+            TreeMap<String, String> unidadesCacheLng = unidadesCache.get(language);
+            
+            if (unidadesCacheLng == null || timeLastDir3Update > ACTUALITZACIO_MAP_ENTITATS_MS ) {
+                
+                unidadesCacheLng = getNomUnidadesAdministrativas(language);
+                
+                t_darrera_actualitzacio_dir3.put(language, System.currentTimeMillis());
+                
+                unidadesCache.put(language, unidadesCacheLng);
             }
 
-            String nom = unidadesCache.get(codiDir3);
+
+            String nom = unidadesCacheLng.get(codiDir3);
 
             if (nom == null) {
                 nom = codiDir3;
