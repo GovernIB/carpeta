@@ -8,7 +8,7 @@ const config = {
   },
 
   target: "node",
-  mode: "development",
+  mode: "production",
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
