@@ -3992,7 +3992,7 @@ var RenderTableMobile = /** @class */ (function (_super) {
                 return (React$1.createElement(React$1.Fragment, null,
                     React$1.createElement("div", { className: "col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5  visioMobil cardAppVerd", key: i, tabIndex: 511 + i },
                         React$1.createElement("div", { className: "col-sm-1 float-left" },
-                            React$1.createElement("span", { className: "oi oi-key iconaFormApp", style: { verticalAlign: "sub" } })),
+                            React$1.createElement("span", { className: "oi ".concat(_this.props.mobileIcon ? _this.props.mobileIcon : "oi-key", " iconaFormApp"), style: { verticalAlign: "sub" } })),
                         cardsMobile)));
             }))));
         return React$1.createElement(React$1.Fragment, null, content);
@@ -4068,7 +4068,7 @@ var RenderTable = /** @class */ (function (_super) {
             return React$1.createElement(RenderTableDesktop, { dades: data, columnsNom: columnsNom, columnsTitols: columnsTitols, onClickRow: this.props.onClickRow });
         }
         else {
-            return React$1.createElement(RenderTableMobile, { dades: data, columnsNom: columnsNom, columnsTitols: columnsTitols, onClickRow: this.props.onClickRow });
+            return React$1.createElement(RenderTableMobile, { dades: data, columnsNom: columnsNom, columnsTitols: columnsTitols, onClickRow: this.props.onClickRow, mobileIcon: this.props.mobileIcon });
         }
     };
     return RenderTable;
@@ -4082,14 +4082,14 @@ var translationEN = {
 };
 
 var tornar$1 = "Volver";
-var paginacioLabel$1 = "Mostrando {{current}} entradas de {{total}} (De la posición {{from}} hasta la {to})";
+var paginacioLabel$1 = "Mostrando elementos del {{from}} al {{to}} de un total de {{total}} elementos";
 var translationES = {
 	tornar: tornar$1,
 	paginacioLabel: paginacioLabel$1
 };
 
 var tornar = "Tornau";
-var paginacioLabel = "Mostrant {{current}} entrades de {{total}} (De la posició {{from}} fins a la {{to}})";
+var paginacioLabel = "Mostrant elements del {{from}} al {{to}} d'un total de {{total}} elements";
 var translationCA = {
 	tornar: tornar,
 	paginacioLabel: paginacioLabel
@@ -4106,6 +4106,31 @@ function initTranslation(i18n) {
     i18n.addResourceBundle("es", "translation", translationES, true, false);
     i18n.addResourceBundle("en", "translation", translationEN, true, false);
 }
+
+/**
+ * @author anadal
+ * @create date 2023-01-11 07:56:19
+ * @modify date 2023-01-11 07:56:19
+ * @desc [description]
+ */
+var PaginationItemCarpeta = /** @class */ (function (_super) {
+    __extends(PaginationItemCarpeta, _super);
+    function PaginationItemCarpeta(props) {
+        var _this = _super.call(this, props) || this;
+        console.log("  CONSTRUCTOR PaginationItemCarpeta !!!!!");
+        return _this;
+    }
+    PaginationItemCarpeta.prototype.render = function () {
+        var _this = this;
+        console.log("  RENDER PaginationItemCarpeta !!!!!");
+        return (React$1.createElement("li", { className: "page-item ".concat(this.props.active ? "active" : "") },
+            React$1.createElement("a", { className: "page-link", role: "button", href: "javascript:console.log();", onClick: function () {
+                    _this.props.onClick(_this.props.value);
+                } },
+                React$1.createElement("b", null, this.props.children))));
+    };
+    return PaginationItemCarpeta;
+}(React$1.Component));
 
 /**
  * @author [anadal]
@@ -4127,40 +4152,42 @@ var PaginationCarpeta = /** @class */ (function (_super) {
         return _this;
     }
     PaginationCarpeta.prototype.render = function () {
-        var _this = this;
         console.log("  RENDER PaginationCarpeta !!!!!");
-        var pagines = [];
-        {
-            var _loop_1 = function (i) {
-                pagines.push(React$1.createElement("li", { key: i, className: "page-item ".concat(this_1.props.paginationInfo.paginaActual == i ? "active" : "") },
-                    React$1.createElement("a", { className: "page-link", onClick: function () {
-                            _this.props.paginationInfo.onClickPagination(i);
-                        } }, i + 1)));
-            };
-            var this_1 = this;
-            for (var i = 0; i < this.props.paginationInfo.totalPagines; i++) {
-                _loop_1(i);
-            }
-        }
         var current = this.props.paginationInfo.registresRetornats;
         var total = this.props.paginationInfo.totalRegistres;
         var from = this.props.paginationInfo.paginaActual * this.props.paginationInfo.elementsPerPagina + 1;
         var to = Math.min(this.props.paginationInfo.totalRegistres, (1 + this.props.paginationInfo.paginaActual) * this.props.paginationInfo.elementsPerPagina);
-        return (React$1.createElement("center", null,
-            React$1.createElement("small", null, this.props.i18n.t("paginacioLabel", { current: current, total: total, from: from, to: to })),
-            React$1.createElement("nav", { "aria-label": "Page navigation" },
-                React$1.createElement("ul", { className: "pagination justify-content-center" },
-                    React$1.createElement("li", { className: "page-item" },
-                        React$1.createElement("a", { className: "page-link", onClick: function () {
-                                _this.props.paginationInfo.onClickPagination(0);
-                            } },
-                            React$1.createElement("b", null, "<<"))),
-                    pagines,
-                    React$1.createElement("li", { className: "page-item" },
-                        React$1.createElement("a", { className: "page-link", onClick: function () {
-                                _this.props.paginationInfo.onClickPagination(_this.props.paginationInfo.totalPagines - 1);
-                            } },
-                            React$1.createElement("b", null, ">>")))))));
+        var pagines = [];
+        var onClick = this.props.paginationInfo.onClickPagination;
+        // First
+        pagines.push(React$1.createElement(PaginationItemCarpeta, { value: 0, onClick: onClick }, "\u00AB"));
+        // Previous
+        pagines.push(React$1.createElement(PaginationItemCarpeta, { value: Math.max(0, this.props.paginationInfo.paginaActual - 1), onClick: onClick }, "\u2039"));
+        // All pagination numbers
+        {
+            for (var i = 0; i < this.props.paginationInfo.totalPagines; i++) {
+                pagines.push(React$1.createElement(PaginationItemCarpeta, { key: i, value: i, onClick: onClick, active: this.props.paginationInfo.paginaActual == i }, "" + (i + 1)));
+            }
+        }
+        // next
+        pagines.push(React$1.createElement(PaginationItemCarpeta, { value: Math.min(this.props.paginationInfo.paginaActual + 1, this.props.paginationInfo.totalPagines - 1), onClick: onClick }, "\u203A"));
+        // Last
+        pagines.push(React$1.createElement(PaginationItemCarpeta, { value: this.props.paginationInfo.totalPagines - 1, onClick: onClick }, "\u00BB"));
+        /* Mostrant elements del {{from}} al {{to}} d'un total de {{total}} elements*/
+        var message = this.props.i18n.t("paginacioLabel", { current: current, total: total, from: from, to: to });
+        var pagination = (React$1.createElement("nav", { "aria-label": "Page navigation" },
+            React$1.createElement("ul", { style: { float: isMobileOnly_1 ? "none" : "right", paddingRight: "0.7em" }, className: "pagination justify-content-center" }, pagines)));
+        if (isMobileOnly_1) {
+            return (React$1.createElement("center", null,
+                message,
+                React$1.createElement("br", null),
+                pagination));
+        }
+        else {
+            return (React$1.createElement(React$1.Fragment, null,
+                React$1.createElement("div", { style: { float: "left", marginTop: "9px", width: "60%" } }, message),
+                pagination));
+        }
     };
     return PaginationCarpeta;
 }(React$1.Component));
@@ -4181,7 +4208,7 @@ var RenderPaginationTable = /** @class */ (function (_super) {
     RenderPaginationTable.prototype.render = function () {
         return (React$1.createElement(React$1.Fragment, null,
             React$1.createElement("div", { className: "infoNoMenu" },
-                React$1.createElement(RenderTable, { dades: this.props.tableData, columnsNom: this.props.columnNames, columnsTitols: this.props.columnTitles })),
+                React$1.createElement(RenderTable, { dades: this.props.tableData, columnsNom: this.props.columnNames, columnsTitols: this.props.columnTitles, mobileIcon: this.props.mobileIcon })),
             React$1.createElement(PaginationCarpeta, { i18n: this.props.i18n, paginationInfo: this.props.paginationInfo })));
     };
     return RenderPaginationTable;

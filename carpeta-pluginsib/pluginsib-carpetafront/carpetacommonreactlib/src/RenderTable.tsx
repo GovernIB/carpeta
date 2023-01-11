@@ -15,6 +15,7 @@ type RenderTableProps = {
   columnsNom: any[];
   columnsTitols: any[];
   onClickRow?: Function;
+  mobileIcon?: string;
 };
 
 class RenderTable extends React.Component<RenderTableProps> {
@@ -36,7 +37,14 @@ class RenderTable extends React.Component<RenderTableProps> {
       {
         /*  ============== VERSIO DESKTOP ================= */
       }
-      return <RenderTableDesktop dades={data} columnsNom={columnsNom} columnsTitols={columnsTitols} onClickRow={this.props.onClickRow} />;
+      return (
+        <RenderTableDesktop
+          dades={data}
+          columnsNom={columnsNom}
+          columnsTitols={columnsTitols}
+          onClickRow={this.props.onClickRow}
+        />
+      );
       {
         /*  ============== FINAL VERSIO DESKTOP ================= */
       }
@@ -44,7 +52,15 @@ class RenderTable extends React.Component<RenderTableProps> {
       {
         /*  ============== VERSIO MÒBIL ================= */
       }
-      return <RenderTableMobile dades={data} columnsNom={columnsNom} columnsTitols={columnsTitols} onClickRow={this.props.onClickRow} />;
+      return (
+        <RenderTableMobile
+          dades={data}
+          columnsNom={columnsNom}
+          columnsTitols={columnsTitols}
+          onClickRow={this.props.onClickRow}
+          mobileIcon={this.props.mobileIcon}
+        />
+      );
       {
         /*  ============== FINAL VERSIO MÒBIL ================= */
       }

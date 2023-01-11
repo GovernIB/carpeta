@@ -1,4 +1,4 @@
 {
     "tornar": "Volver",
-    "paginacioLabel": "Mostrando {{current}} entradas de {{total}} (De la posición {{from}} hasta la {to})"
+    "paginacioLabel": "Mostrando elementos del {{from}} al {{to}} de un total de {{total}} elementos"
 }

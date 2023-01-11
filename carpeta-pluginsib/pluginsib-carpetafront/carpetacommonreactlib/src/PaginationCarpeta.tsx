@@ -6,12 +6,12 @@
  */
 
 import React from "react";
-//import { WithTranslation, withTranslation } from "react-i18next";
 import PaginationCarpetaProps from "./PaginationCarpetaProps";
-import initTranslation from './InitTranslation';
+import initTranslation from "./InitTranslation";
+import { PaginationItemCarpeta as Item } from "./PaginationItemCarpeta";
+import * as reactdetect from "react-device-detect";
 
-
-interface InternalPaginationCarpetaProps /*extends WithTranslation */ {
+interface InternalPaginationCarpetaProps {
   paginationInfo: PaginationCarpetaProps;
   i18n: any;
 }
@@ -27,78 +27,96 @@ class PaginationCarpeta extends React.Component<InternalPaginationCarpetaProps> 
     console.log("PaginationCarpeta().registresRetornats  => " + this.props.paginationInfo.registresRetornats);
     console.log("PaginationCarpeta().totalRegistres  => " + this.props.paginationInfo.totalRegistres);
 
-
     initTranslation(this.props.i18n);
-
-
   }
 
   render() {
     console.log("  RENDER PaginationCarpeta !!!!!");
 
-    let pagines: any = [];
-    {
-      for (let i = 0; i < this.props.paginationInfo.totalPagines; i++) {
-        pagines.push(
-          <li key={i} className={`page-item ${this.props.paginationInfo.paginaActual == i ? "active" : ""}`}>
-            <a
-              className="page-link"
-              onClick={() => {
-                this.props.paginationInfo.onClickPagination(i);
-              }}
-            >
-              {i + 1}
-            </a>
-          </li>
-        );
-      }
-    }
-
-
-    const current:number = this.props.paginationInfo.registresRetornats;
-    const total:number = this.props.paginationInfo.totalRegistres;
-    const from:number = this.props.paginationInfo.paginaActual * this.props.paginationInfo.elementsPerPagina + 1;
-    const to:number = Math.min(
+    const current: number = this.props.paginationInfo.registresRetornats;
+    const total: number = this.props.paginationInfo.totalRegistres;
+    const from: number = this.props.paginationInfo.paginaActual * this.props.paginationInfo.elementsPerPagina + 1;
+    const to: number = Math.min(
       this.props.paginationInfo.totalRegistres,
       (1 + this.props.paginationInfo.paginaActual) * this.props.paginationInfo.elementsPerPagina
     );
 
-    return (
+    let pagines: any = [];
 
-      <center>
-        <small>
-          { /* XYZ ZZZ Mostrant {current} entrades de {total} (De la posició {from} fins a la {to}) */}
-          {this.props.i18n.t("paginacioLabel", {current: current, total: total, from: from, to: to})}
-        </small>
-        <nav aria-label="Page navigation">
-          <ul className="pagination justify-content-center">
-            <li className="page-item">
-              <a
-                className="page-link"
-                onClick={() => {
-                  this.props.paginationInfo.onClickPagination(0);
-                }}
-              >
-                <b>&lt;&lt;</b>
-              </a>
-            </li>
-            {pagines}
-            <li className="page-item">
-              <a
-                className="page-link"
-                onClick={() => {
-                  this.props.paginationInfo.onClickPagination(this.props.paginationInfo.totalPagines - 1);
-                }}
-              >
-                <b>&gt;&gt;</b>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </center>
+    let onClick: Function = this.props.paginationInfo.onClickPagination;
+
+    // First
+    pagines.push(
+      <Item value={0} onClick={onClick}>
+        «
+      </Item>
     );
+    // Previous
+    pagines.push(
+      <Item value={Math.max(0, this.props.paginationInfo.paginaActual - 1)} onClick={onClick}>
+        ‹
+      </Item>
+    );
+
+    // All pagination numbers
+    {
+      for (let i = 0; i < this.props.paginationInfo.totalPagines; i++) {
+        pagines.push(
+          <Item key={i} value={i} onClick={onClick} active={this.props.paginationInfo.paginaActual == i}>
+            {"" + (i + 1)}
+          </Item>
+        );
+      }
+    }
+
+    // next
+    pagines.push(
+      <Item
+        value={Math.min(this.props.paginationInfo.paginaActual + 1, this.props.paginationInfo.totalPagines - 1)}
+        onClick={onClick}
+      >
+        ›
+      </Item>
+    );
+    // Last
+    pagines.push(
+      <Item value={this.props.paginationInfo.totalPagines - 1} onClick={onClick}>
+        »
+      </Item>
+    );
+
+    /* Mostrant elements del {{from}} al {{to}} d'un total de {{total}} elements*/
+    let message: string = this.props.i18n.t("paginacioLabel", { current: current, total: total, from: from, to: to });
+
+    let pagination: JSX.Element = (
+      <nav aria-label="Page navigation">
+        <ul
+          style={{ float: reactdetect.isMobileOnly ? "none" : "right", paddingRight: "0.7em" }}
+          className="pagination justify-content-center"
+        >
+          {pagines}
+        </ul>
+      </nav>
+    );
+
+    if (reactdetect.isMobileOnly) {
+      return (
+        <center>
+          {message}
+          <br />
+          {pagination}
+        </center>
+      );
+    } else {
+      return (
+        <>
+          <div style={{ float: "left", marginTop: "9px", width: "60%" }}>{message}</div>
+
+          {pagination}
+        </>
+      );
+    }
   }
 }
 
-//export default withTranslation()(PaginationCarpeta);
 export default PaginationCarpeta;

@@ -12,6 +12,7 @@ type RenderTableProps = {
   columnsNom: any[];
   columnsTitols: any[];
   onClickRow?: Function;
+  mobileIcon?: string;
 };
 
 class RenderTableMobile extends React.Component<RenderTableProps> {
@@ -41,7 +42,14 @@ class RenderTableMobile extends React.Component<RenderTableProps> {
             {
               columnsNom.forEach((clau, c) => {
                 cardsMobile.push(
-                  <div className="col-sm-10 float-right" onClick={() => { if(this.props.onClickRow) { this.props.onClickRow(i); }}}>
+                  <div
+                    className="col-sm-10 float-right"
+                    onClick={() => {
+                      if (this.props.onClickRow) {
+                        this.props.onClickRow(i);
+                      }
+                    }}
+                  >
                     <p className="card-text pl-1 mt-0" style={{ color: "rgb(102, 102, 102)" }}>
                       <b>{titols[c]}</b>: {dataInfo[clau]}
                     </p>
@@ -57,7 +65,10 @@ class RenderTableMobile extends React.Component<RenderTableProps> {
                   tabIndex={511 + i}
                 >
                   <div className="col-sm-1 float-left">
-                    <span className="oi oi-key iconaFormApp" style={{ verticalAlign: "sub" }} />
+                    <span
+                      className={`oi ${this.props.mobileIcon ? this.props.mobileIcon : "oi-key"} iconaFormApp`}
+                      style={{ verticalAlign: "sub" }}
+                    />
                   </div>
                   {cardsMobile}
                 </div>

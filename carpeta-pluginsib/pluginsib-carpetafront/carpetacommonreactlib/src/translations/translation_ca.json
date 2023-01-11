@@ -1,4 +1,4 @@
 {
     "tornar": "Tornau",
-    "paginacioLabel": "Mostrant {{current}} entrades de {{total}} (De la posició {{from}} fins a la {{to}})"
+    "paginacioLabel": "Mostrant elements del {{from}} al {{to}} d'un total de {{total}} elements"
 }

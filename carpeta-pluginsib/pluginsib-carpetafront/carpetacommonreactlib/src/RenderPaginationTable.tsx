@@ -15,6 +15,7 @@ interface RenderPaginationTableProps /* extends WithTranslation */ {
   tableData: any[];
   columnNames: any[];
   columnTitles: any[];
+  mobileIcon?: string;
   paginationInfo: PaginationCarpetaProps;
   i18n: any;
 }
@@ -33,9 +34,10 @@ class RenderPaginationTable extends React.Component<RenderPaginationTableProps> 
             dades={this.props.tableData}
             columnsNom={this.props.columnNames}
             columnsTitols={this.props.columnTitles}
+            mobileIcon={this.props.mobileIcon}
           />
         </div>
-        <PaginationCarpeta i18n = { this.props.i18n} paginationInfo={this.props.paginationInfo} />
+        <PaginationCarpeta i18n={this.props.i18n} paginationInfo={this.props.paginationInfo} />
       </>
     );
   }

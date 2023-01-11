@@ -169,6 +169,7 @@ class ElsMeusExpedients extends React.Component<ElsMeusExpedientsProps, ElsMeusE
           tableData={expedients}
           columnNames={columnsNom}
           columnTitles={columnsTitols}
+          mobileIcon={"oi-clipboard"}
           paginationInfo={paginationInfo}
           i18n={i18n}
         />
