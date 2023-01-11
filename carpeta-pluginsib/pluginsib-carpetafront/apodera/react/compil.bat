@@ -1,8 +1,5 @@
-REM call npm run build --profile
-
 
 set STARTTIME=%TIME%
-
 
 call npm run bundleup
 
