@@ -146,8 +146,8 @@ img:hover {
 }
 .styleLiniaMenu{
 	width: 30px;
-	text-align: -webkit-center;
-	/*-webkit-text-emphasis: filled;*/
+	text-align: center;
+	-webkit-text-emphasis: filled;
 	transform: translate(0, 60%);
 }
 .iconaMenu{
@@ -289,12 +289,12 @@ img:hover {
 }
 .imc-logo ul li a .imatgeMobil {
     filter: grayscale(100%);
-    -moz-filter: grayscale(100%);
+    /*-moz-filter: grayscale(100%);*/
     -webkit-filter: grayscale(100%);
 }
 .imc-logo ul li .imatgeMobil:hover {
     filter: grayscale(0%);
-    -moz-filter: grayscale(0%);
+    /*-moz-filter: grayscale(0%);*/
     -webkit-filter: grayscale(0%);
 }
 .alert{
@@ -373,7 +373,7 @@ img:hover {
 	margin: 0 auto;
 	width: 1270px;
 	margin-bottom: 0em;
-	/*height: -webkit-fill-available;*/
+	height: -webkit-fill-available;
 }
 .menuRapid{
 	border: 0px;
@@ -575,7 +575,7 @@ img:hover {
 	display: none;
 }
 .centrat{
-	text-align: -webkit-center;
+	text-align: center;
 }
 .ajuda{
 	display: grid !important;
@@ -607,7 +607,7 @@ img:hover {
 .imc-bt-xarxa img:hover {
      filter: opacity(0.8);
      -webkit-filter: opacity(0.8);
-     -moz-filter: opacity(0.8);
+     /*-moz-filter: opacity(0.8);*/
 }
 a.imc-bt-xarxa:hover {
     background-color: #eee !important;
@@ -657,7 +657,7 @@ a.imc-bt-xarxa:hover {
     padding: 8px;
     border: 1px solid #aaa;
     border-radius: 10px;
-    -moz-border-radius:10px;
+    /*-moz-border-radius:10px;*/
     -webkit-border-radius:10px;
     top: -70px;
     left: 0;
@@ -674,7 +674,7 @@ a.imc-bt-xarxa:hover {
 	position: absolute;
 	top: 30px;
 	word-wrap:break-word;
-	-moz-border-radius:5px;
+	/*-moz-border-radius:5px;*/
 	-webkit-border-radius:5px;
 	margin-bottom:2em;
 	z-index: 1;
@@ -924,8 +924,7 @@ body {
 	/*top: .2em;*/
 }
 .imc-titol h1 span {
-	font-size: 1.35em;
-	min-font-size: 20px;
+	font-size: min(1.35em, 20px);
 }
 img {
 	max-width: 100%;
