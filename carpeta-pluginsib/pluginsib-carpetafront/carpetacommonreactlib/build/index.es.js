@@ -4018,7 +4018,6 @@ var RenderTableDesktop = /** @class */ (function (_super) {
         console.log("Render OK: Imprimint Data RENDER TABLE DESKTOP...!");
         var data = this.props.dades; // Aquest valor sera this.props.dades
         var columnsNom = this.props.columnsNom;
-        console.log("XYZ ZZZ Render: Carregat Prop columnsNom!");
         var titols = this.props.columnsTitols;
         var capTaula = [];
         {
@@ -4265,4 +4264,3 @@ var TemplatePageCarpeta = /** @class */ (function (_super) {
 }(React$1.Component));
 
 export { Button, RenderPaginationTable, RenderTable, TemplatePageCarpeta };
-//# sourceMappingURL=index.es.js.map

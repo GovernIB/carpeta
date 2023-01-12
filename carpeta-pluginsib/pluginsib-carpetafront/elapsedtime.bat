@@ -1,12 +1,28 @@
 
+@echo off
 
 set STARTTIME=%1,%2
 set ENDTIME=%3,%4
 
 
-rem output as time
 echo STARTTIME: %STARTTIME%
 echo ENDTIME:   %ENDTIME%
+
+call :strLen STARTTIME strlen
+
+
+if %strlen% == 10 (
+  set STARTTIME=0%1,%2
+)
+
+
+call :strLen ENDTIME strlen
+
+
+if %strlen% == 10 (
+  set ENDTIME=0%3,%4
+)
+
 
 rem convert STARTTIME and ENDTIME to centiseconds
 set /A STARTTIME=(1%STARTTIME:~0,2%-100)*360000 + (1%STARTTIME:~3,2%-100)*6000 + (1%STARTTIME:~6,2%-100)*100 + (1%STARTTIME:~9,2%-100)
@@ -35,3 +51,13 @@ echo Elapsed Time: %DURATIONH%:%DURATIONM%:%DURATIONS%,%DURATIONHS%
 
 endlocal
 goto :EOF
+
+
+
+:strLen
+setlocal enabledelayedexpansion
+
+:strLen_Loop
+   if not "!%1:~%len%!"=="" set /A len+=1 & goto :strLen_Loop
+(endlocal & set %2=%len%)
+goto :eof
