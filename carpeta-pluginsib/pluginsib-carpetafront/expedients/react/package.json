@@ -6,8 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server --hot",
     "deploy": "npm run build&&gh-pages -d build",
-    "build": "webpack --config webpack.config.js",
-    "bundleup": "webpack-cli"
+    "prebuild": "rimraf dist",
+    "build": "webpack-cli"
   },
   "keywords": [],
   "author": "anadal",
@@ -35,6 +35,7 @@
     "@types/react-dom": "^18.0.10",
     "@types/webpack": "^5.28.0",
     "css-loader": "^6.3.0",
+    "rimraf": "^3.0.2",
     "style-loader": "^3.3.0",
     "ts-loader": "^9.4.2",
     "ts-node": "^10.9.1",
