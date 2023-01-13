@@ -4276,3 +4276,4 @@ var TemplatePageCarpeta = /** @class */ (function (_super) {
 }(React$1.Component));
 
 export { Button, RenderPaginationTable, RenderTable, TemplatePageCarpeta };
+//# sourceMappingURL=index.es.js.map

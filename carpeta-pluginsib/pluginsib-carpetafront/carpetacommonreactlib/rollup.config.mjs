@@ -13,7 +13,7 @@ export default {
       format: 'es',
       file: packageJson.module,
       exports: 'named',
-      sourcemap: false
+      sourcemap: true
     }
   ],
   plugins: [
