@@ -223,7 +223,7 @@ class MenuDesllisant extends Component {
 			allItems = <div className="alert alert-danger" role="alert">{t(this.state.error)}</div>;
 		} else {
 
-			allItems.push(<>
+			allItems.push(
 					<li key="acc">
 						<div>
 							<div className="float-left styleLiniaMenu styleLiniaMenuApp">
@@ -234,7 +234,9 @@ class MenuDesllisant extends Component {
 								<span id="accessibilitatMenu">{t('menuAccessibilitat')}</span>
 							</Link>
 						</div>
-					</li>
+					</li>);
+					
+					allItems.push(
 					<li key="avL" className="visioMobil">
 						<div>
 							<div className="float-left styleLiniaMenu styleLiniaMenuApp">
@@ -245,7 +247,9 @@ class MenuDesllisant extends Component {
 								<span id="avislegalMenu">{t('avisLegalTitol')}</span>
 							</Link>
 						</div>
-					</li>
+					</li>);
+
+					allItems.push(
 					<li key="maW" className="visioMobil">
 						<div>
 							<div className="float-left styleLiniaMenu styleLiniaMenuApp">
@@ -256,8 +260,7 @@ class MenuDesllisant extends Component {
 								<span id="mapawebMenu">{t('mapaWebTitol')}</span>
 							</Link>
 						</div>
-					</li>
-				</>);
+					</li>);
 
 			this.state.items.forEach((s, i) => {
 				switch (s.tipus) {
@@ -376,8 +379,8 @@ class MenuDesllisant extends Component {
 						<span className="noVisible" id="tancarMenuHamburguesa">{t('accedirBoto') + t('menuHamburguesaTanca')}</span>
 					</button>
 				</div>
-				<ul>
-					<li className="imc-marc-ico">
+				<ul key="totsmenus">
+					<li  key="idiomes" className="imc-marc-ico">
 						<div>
 							<div className="float-left styleLiniaMenu styleLiniaMenuApp">
 								<span className="oi oi-globe iconaMenu iconaMenuApp" title={t('menuIdioma')}/>
