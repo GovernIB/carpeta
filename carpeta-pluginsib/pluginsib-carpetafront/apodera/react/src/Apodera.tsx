@@ -234,9 +234,9 @@ class Apodera extends React.Component<ApoderaProps,ApoderaState>  {
     let htmlCode:JSX.Element[] = [];
     {
       stringList &&
-        stringList.forEach((s:any, i:number) => {
+        stringList.forEach((s:any, x:number) => {
           htmlCode.push(
-            <p style={{ margin: 0 }} key={i}>
+            <p style={{ margin: 0 }} key={x}>
               - {s}
             </p>
           );
@@ -327,7 +327,7 @@ class Apodera extends React.Component<ApoderaProps,ApoderaState>  {
 
                     return (
                       <>
-                        <div className="modal fade" id={"Modal_Info_Apo_" + i} tabIndex={-1} role="dialog">
+                        <div className="modal fade" id={"Modal_Info_Apo_" + i} key = {i} tabIndex={-1} role="dialog">
                           <div className="modal-dialog modal-dialog-centered" role="document">
                             <div className="modal-content">
                               <div className="modal-header" style={{ padding: "0px" }}>

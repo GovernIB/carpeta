@@ -223,41 +223,44 @@ class MenuDesllisant extends Component {
 			allItems = <div className="alert alert-danger" role="alert">{t(this.state.error)}</div>;
 		} else {
 
-			allItems.push(<>
+			allItems.push(
 					<li key="acc">
 						<div>
 							<div className="float-left styleLiniaMenu styleLiniaMenuApp">
 								<span className="oi oi-eye iconaMenu iconaMenuApp" title={t('menuAccessibilitat')}/>
 							</div>
 							<Link to={{pathname: `/accessibilitat`, nomPagina: 'menuAccessibilitat'}}
-								  className="imc-marc-ico imc--accessibilitat margesMenu" tabIndex="207" aria-labelledby="accessibilitatMenu">
+								className="imc-marc-ico imc--accessibilitat margesMenu" tabIndex="207" aria-labelledby="accessibilitatMenu">
 								<span id="accessibilitatMenu">{t('menuAccessibilitat')}</span>
 							</Link>
 						</div>
-					</li>
+					</li>);
+					
+					allItems.push(
 					<li key="avL" className="visioMobil">
 						<div>
 							<div className="float-left styleLiniaMenu styleLiniaMenuApp">
 								<span className="oi oi-thumb-up iconaMenu iconaMenuApp" title={t('avisLegalTitol')}/>
 							</div>
 							<Link to={{pathname: `/avislegal`, nomPagina: 'menuAvisLegal'}}
-								  className="imc-marc-ico imc--accessibilitat margesMenu" tabIndex="207" aria-labelledby="avislegalMenu">
+								className="imc-marc-ico imc--accessibilitat margesMenu" tabIndex="207" aria-labelledby="avislegalMenu">
 								<span id="avislegalMenu">{t('avisLegalTitol')}</span>
 							</Link>
 						</div>
-					</li>
+					</li>);
+
+					allItems.push(
 					<li key="maW" className="visioMobil">
 						<div>
 							<div className="float-left styleLiniaMenu styleLiniaMenuApp">
 								<span className="oi oi-map iconaMenu iconaMenuApp" title={t('mapaWebTitol')}/>
 							</div>
 							<Link to={{pathname: `/mapaweb`, nomPagina: 'menuMapaWeb'}}
-								  className="imc-marc-ico imc--accessibilitat margesMenu" tabIndex="207" aria-labelledby="mapawebMenu">
+								className="imc-marc-ico imc--accessibilitat margesMenu" tabIndex="207" aria-labelledby="mapawebMenu">
 								<span id="mapawebMenu">{t('mapaWebTitol')}</span>
 							</Link>
 						</div>
-					</li>
-				</>);
+					</li>);
 
 			this.state.items.forEach((s, i) => {
 				switch (s.tipus) {
@@ -376,8 +379,8 @@ class MenuDesllisant extends Component {
 						<span className="noVisible" id="tancarMenuHamburguesa">{t('accedirBoto') + t('menuHamburguesaTanca')}</span>
 					</button>
 				</div>
-				<ul>
-					<li className="imc-marc-ico">
+				<ul key="totsmenus">
+					<li  key="idiomes" className="imc-marc-ico">
 						<div>
 							<div className="float-left styleLiniaMenu styleLiniaMenuApp">
 								<span className="oi oi-globe iconaMenu iconaMenuApp" title={t('menuIdioma')}/>

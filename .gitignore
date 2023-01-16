@@ -150,7 +150,7 @@ nb-configuration.xml
 /carpeta-ejb/expoIDs.txt
 /carpeta-ejb/mobileid.properties
 /carpeta-pluginsib/pluginsib-carpetafront/apodera/connexio.properties
-/carpeta-pluginsib/pluginsib-carpetafront/napodera/react/node_modules/
+/carpeta-pluginsib/pluginsib-carpetafront/apodera/react/node_modules/
 /carpeta-pluginsib/pluginsib-carpetafront/apodera/react/package-lock.json
 /carpeta-api-externa-client/connection.properties
 /carpeta-api-interna-client/.swagger-codegen-ignore
