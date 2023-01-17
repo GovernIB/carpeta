@@ -33,7 +33,7 @@ class ConfigurationProvider {
   }
 
   static getCarpetaServer() {
-    if (isRevisionPeriod()) {
+    if (this.isRevisionPeriod()) {
       return "https://se.caib.es/carpetafront";
     } else {
       return "https://www.caib.es/carpetafront";
