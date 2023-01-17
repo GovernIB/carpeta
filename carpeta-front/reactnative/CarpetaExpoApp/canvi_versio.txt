@@ -1,3 +1,6 @@
 
 package.json  x 1 entrada
-app.json      x 2 entrades
+app.json:
+      - expo.version
+      - expo.ios.buildNumber
+      - expo.android.versionCode: exemple v1.1.2  => 112

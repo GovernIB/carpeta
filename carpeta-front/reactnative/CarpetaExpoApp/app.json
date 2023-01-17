@@ -41,7 +41,7 @@
       ],
       "useNextNotificationsApi": true,
       "googleServicesFile": "./google-services.json",
-      "versionCode": 111
+      "versionCode": 112
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
