@@ -16,14 +16,14 @@ public class ExpedientInfo {
     protected String expedientDesc;
     protected String expedientEstat;
     protected List<String> expedientOrgans;
-    protected Date expedientObertura;
+    protected String expedientObertura;
 
     public ExpedientInfo() {
         super();
     }
 
     public ExpedientInfo(String codiSia, String nomProcediment, String expedientNom, String expedientDesc,
-            String expedientEstat, List<String> expedientOrgans, Date expedientObertura) {
+            String expedientEstat, List<String> expedientOrgans, String expedientObertura) {
         super();
         this.codiSia = codiSia;
         this.nomProcediment = nomProcediment;
@@ -82,11 +82,11 @@ public class ExpedientInfo {
         this.expedientOrgans = expedientOrgans;
     }
 
-    public Date getExpedientObertura() {
+    public String getExpedientObertura() {
         return expedientObertura;
     }
 
-    public void setExpedientObertura(Date expedientObertura) {
+    public void setExpedientObertura(String expedientObertura) {
         this.expedientObertura = expedientObertura;
     }
 

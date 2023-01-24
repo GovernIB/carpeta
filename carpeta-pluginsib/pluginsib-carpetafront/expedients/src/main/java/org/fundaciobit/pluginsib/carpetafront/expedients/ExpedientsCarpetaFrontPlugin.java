@@ -13,6 +13,7 @@ import es.caib.plugins.arxiu.api.ConsultaResultat;
 import es.caib.plugins.arxiu.api.ContingutArxiu;
 import es.caib.plugins.arxiu.api.ExpedientMetadades;
 import es.caib.plugins.arxiu.api.IArxiuPlugin;
+import freemarker.template.SimpleDate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,6 +41,8 @@ import com.fasterxml.jackson.databind.type.TypeFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import java.util.HashMap;
@@ -445,11 +448,12 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 } else {
                     ei.setExpedientEstat("Tancat."); // XYZ ZZZ
                 }
+                
+                DateFormat df = new SimpleDateFormat("dd-mm-yyyy hh:mm:ss");
 
-                ei.setExpedientObertura(em.getDataObertura());
+                ei.setExpedientObertura(df.format(em.getDataObertura()));
 
                 List<String> organsList = em.getOrgans();
-                
                 
                 if (organsList != null && organsList.size() != 0) {
 

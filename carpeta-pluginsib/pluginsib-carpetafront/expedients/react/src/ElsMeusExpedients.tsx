@@ -136,23 +136,21 @@ class ElsMeusExpedients extends React.Component<ElsMeusExpedientsProps, ElsMeusE
       var expedients = this.state.expedientresposta.expedients;
 
       const columnsNom = [
-        "expedientNom",
-        "expedientDesc",
-        "expedientEstat",
-        "codiSia",
-        "nomProcediment",
-        "expedientOrgans",
         "expedientObertura",
+        "expedientNom",
+        "nomProcediment",
+        "codiSia",
+        "expedientOrgans",
+        "expedientEstat"
       ];
 
       const columnsTitols = [
-        i18n.t("expedientNom"),
-        i18n.t("expedientDesc"),
-        i18n.t("expedientEstat"),
-        i18n.t("codiSia"),
-        i18n.t("nomProcediment"),
-        i18n.t("expedientOrgans"),
         i18n.t("expedientObertura"),
+        i18n.t("expedientNom"),
+        i18n.t("nomProcediment"),
+        i18n.t("codiSia"),
+        i18n.t("expedientOrgans"),
+        i18n.t("expedientEstat")
       ];
 
       const paginationInfo: PaginationCarpetaProps = {
