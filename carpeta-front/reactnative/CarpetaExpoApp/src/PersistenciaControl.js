@@ -10,6 +10,8 @@ import { Alert, Button, StyleSheet, Text, TextInput, View, Platform } from "reac
 import Persistencia from "./Persistencia";
 import Constants from "expo-constants";
 import { sessionStorageRN } from "./SessionStorageClass";
+import ConfigurationProvider from "./ConfigurationProvider";
+
 
 class PersistenciaControl extends Component {
   constructor(props) {
@@ -34,11 +36,11 @@ class PersistenciaControl extends Component {
     console.log("ENTRA A DORENDER ");
 
     if (urlcarpeta === "") {
-      urlcarpeta = "https://www.caib.es/carpetafront";
+      urlcarpeta =   ConfigurationProvider.getCarpetaServer();
     }
 
     if (codientitat === "") {
-      codientitat = "caib";
+      codientitat = ConfigurationProvider.getCarpetaEntity();
     }
     this.setState({
       loadedData: true,
@@ -77,10 +79,11 @@ class PersistenciaControl extends Component {
       <View>
         <Text style={styles.title}>Carpeta APP</Text>
         <Text style={styles.label}>
-          Versió App: {Constants.manifest.version}{"\n"}
+          Version App: {Constants.manifest.version}{"\n"}
           Expo Push Token: {expoPushToken}{"\n"}
-          Platform OS: {Platform.OS}{"\n"}
-          Platform Version: {Platform.Version}
+          Platform OS: {Platform.OS}{"\n"}          
+          Platform Version: {Platform.Version}{"\n"}
+          Revision: {ConfigurationProvider.isRevisionPeriod()?"Yes":"No"}
         </Text>
         <View style={styles.fixToText}>
           <Text style={styles.label}>URL Servidor:</Text>

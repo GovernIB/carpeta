@@ -9,6 +9,7 @@ import VistaWebComponent from './components/VistaWebComponent';
 import Persistencia from './Persistencia';
 import {LinkingOpenURL} from './WebBrowserUtils';
 import * as WebBrowser from 'expo-web-browser';
+import ConfigurationProvider from "./ConfigurationProvider";
 
 /**
  * @author anadal (u80067)
@@ -51,7 +52,7 @@ class CarpetaWeb extends Component {
       //this.props.history.push('/config/');
 
       // posam valors a pinyo fix
-      this.setState({loadedData: true, urlcarpeta:'https://www.caib.es/carpetafront', codientitat: 'caib'});
+      this.setState({loadedData: true, urlcarpeta:ConfigurationProvider.getCarpetaServer(), codientitat: ConfigurationProvider.getCarpetaEntity()});
 
     } else {
       this.setState({loadedData: true, urlcarpeta: urlcarpeta, codientitat: codientitat});
