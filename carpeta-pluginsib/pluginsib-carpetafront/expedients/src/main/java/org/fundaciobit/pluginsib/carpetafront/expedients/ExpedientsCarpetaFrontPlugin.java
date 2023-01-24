@@ -449,7 +449,7 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     ei.setExpedientEstat("Tancat."); // XYZ ZZZ
                 }
                 
-                DateFormat df = new SimpleDateFormat("dd-mm-yyyy hh:mm:ss");
+                DateFormat df = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 
                 ei.setExpedientObertura(df.format(em.getDataObertura()));
 
@@ -462,10 +462,8 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     for (String organDir3 : organsList) { 
                         organsNomList.add(getNomByDir3(organDir3, consulta.getLanguage()));
                     }
-                    
                     ei.setExpedientOrgans(organsNomList);
                 }
-
                 expedients.add(ei);
             }
         }
