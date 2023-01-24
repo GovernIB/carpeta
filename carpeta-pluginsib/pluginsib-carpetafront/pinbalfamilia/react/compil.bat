@@ -1,4 +1,9 @@
-call npm run build --profile
 
+set STARTTIME=%TIME%
+
+call npm run build
 
 xcopy  /Y .\dist\reactjs_main.js ..\src\main\resources\webpage_pinbalfamilia
+
+@echo off
+call ..\..\elapsedtime.bat %STARTTIME% %TIME%
