@@ -6,18 +6,17 @@
  */
 
 import React from "react";
-import PaginationCarpetaProps from "./PaginationCarpetaProps";
+
 import initTranslation from "./InitTranslation";
 import { PaginationItemCarpeta as Item } from "./PaginationItemCarpeta";
 import * as reactdetect from "react-device-detect";
 
-interface InternalPaginationCarpetaProps {
-  paginationInfo: PaginationCarpetaProps;
-  i18n: any;
-}
+import PaginationCarpetaPropsWithTranslation from "./PaginationCarpetaPropsWithTranslation";
 
-class PaginationCarpeta extends React.Component<InternalPaginationCarpetaProps> {
-  constructor(props: InternalPaginationCarpetaProps) {
+
+
+class PaginationCarpeta extends React.Component<PaginationCarpetaPropsWithTranslation> {
+  constructor(props: PaginationCarpetaPropsWithTranslation) {
     super(props);
     console.log("  CONSTRUCTOR PaginationCarpeta !!!!!");
 
@@ -91,6 +90,7 @@ class PaginationCarpeta extends React.Component<InternalPaginationCarpetaProps> 
     let pagination: JSX.Element = (
       <nav aria-label="Page navigation">
         <ul
+          key="pn_1"
           style={{ float: reactdetect.isMobileOnly ? "none" : "right", paddingRight: "0.7em" }}
           className="pagination justify-content-center"
         >

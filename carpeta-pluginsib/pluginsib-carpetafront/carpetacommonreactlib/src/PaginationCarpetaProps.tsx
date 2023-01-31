@@ -13,4 +13,4 @@ export default interface PaginationCarpetaProps  {
   registresRetornats: number;
   totalRegistres: number;
   onClickPagination: Function;
-};
+}

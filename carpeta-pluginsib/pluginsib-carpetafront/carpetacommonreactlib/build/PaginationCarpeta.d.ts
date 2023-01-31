@@ -5,13 +5,9 @@
  * @desc [description]
  */
 import React from "react";
-import PaginationCarpetaProps from "./PaginationCarpetaProps";
-interface InternalPaginationCarpetaProps {
-    paginationInfo: PaginationCarpetaProps;
-    i18n: any;
-}
-declare class PaginationCarpeta extends React.Component<InternalPaginationCarpetaProps> {
-    constructor(props: InternalPaginationCarpetaProps);
+import PaginationCarpetaPropsWithTranslation from "./PaginationCarpetaPropsWithTranslation";
+declare class PaginationCarpeta extends React.Component<PaginationCarpetaPropsWithTranslation> {
+    constructor(props: PaginationCarpetaPropsWithTranslation);
     render(): JSX.Element;
 }
 export default PaginationCarpeta;

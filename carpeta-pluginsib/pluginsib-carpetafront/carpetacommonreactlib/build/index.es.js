@@ -4137,7 +4137,7 @@ var PaginationItemCarpeta = /** @class */ (function (_super) {
     PaginationItemCarpeta.prototype.render = function () {
         var _this = this;
         console.log("  RENDER PaginationItemCarpeta !!!!!");
-        return (React$1.createElement("li", { className: "page-item ".concat(this.props.active ? "active" : "") },
+        return (React$1.createElement("li", { key: "item_" + this.props.value, className: "page-item ".concat(this.props.active ? "active" : "") },
             React$1.createElement("a", { className: "page-link", role: "button", href: "javascript:console.log();", onClick: function () {
                     _this.props.onClick(_this.props.value);
                 } },
@@ -4190,7 +4190,7 @@ var PaginationCarpeta = /** @class */ (function (_super) {
         /* Mostrant elements del {{from}} al {{to}} d'un total de {{total}} elements*/
         var message = this.props.i18n.t("paginacioLabel", { current: current, total: total, from: from, to: to });
         var pagination = (React$1.createElement("nav", { "aria-label": "Page navigation" },
-            React$1.createElement("ul", { style: { float: isMobileOnly_1 ? "none" : "right", paddingRight: "0.7em" }, className: "pagination justify-content-center" }, pagines)));
+            React$1.createElement("ul", { key: "pn_1", style: { float: isMobileOnly_1 ? "none" : "right", paddingRight: "0.7em" }, className: "pagination justify-content-center" }, pagines)));
         if (isMobileOnly_1) {
             return (React$1.createElement("center", null,
                 message,
