@@ -1,4 +1,6 @@
 {
     "tornar": "Volver",
-    "paginacioLabel": "Mostrando elementos del {{from}} al {{to}} de un total de {{total}} elementos"
+    "paginacioLabel": "Mostrando elementos del {{from}} al {{to}} de un total de {{total}} elementos",
+    "registroMostra":"Muestra  ",
+    "registroRegistres":"  registros"
 }

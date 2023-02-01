@@ -19,6 +19,7 @@ interface ElsMeusExpedientsProps extends WithTranslation {
 type ElsMeusExpedientsState = {
   isLoaded: boolean;
   pagina: number;
+  numExpedients: number;
   expedientresposta: any;
   error: string | null;
 };
@@ -32,8 +33,10 @@ class ElsMeusExpedients extends React.Component<ElsMeusExpedientsProps, ElsMeusE
       expedientresposta: null,
       error: null,
       pagina: 0,
+      numExpedients: 5,
     };
     this.onClickPagination = this.onClickPagination.bind(this);
+    this.onClickElementsByPage = this.onClickElementsByPage.bind(this);
     this.realoadData = this.realoadData.bind(this);
   }
 
@@ -41,14 +44,24 @@ class ElsMeusExpedients extends React.Component<ElsMeusExpedientsProps, ElsMeusE
     this.realoadData(0);
   }
 
-  realoadData(newpage: number) {
+  realoadData(newpage: number, numExpedientsPag?: number) {
     const url = this.props.pathtoservei;
+    var params;
 
-    this.setState({ pagina: newpage, isLoaded: false });
+    if(numExpedientsPag){
+      this.setState({ pagina: newpage, isLoaded: false, numExpedients: numExpedientsPag});
+      params = {
+        pagina: newpage,
+        numExpedients: numExpedientsPag,
+      };
+    }else{
+      this.setState({ pagina: newpage, isLoaded: false });
+      params = {
+        pagina: newpage,
+      };
+    }
 
-    const params = {
-      pagina: newpage,
-    };
+    
 
     console.log("Cridant a serveis REST URL: " + url);
     console.log("Cridant a serveis REST PARAMS: " + params);
@@ -93,6 +106,12 @@ class ElsMeusExpedients extends React.Component<ElsMeusExpedientsProps, ElsMeusE
     console.log("Clicat sobre paginacio ]" + page + "[");
 
     this.realoadData(page);
+  }
+
+  onClickElementsByPage(numElements: number) {
+    console.log("Clicat sobre num de elements per pagina ]" + numElements + "[");
+
+    //this.realoadData(numElements);
   }
 
   render() {
@@ -160,8 +179,8 @@ class ElsMeusExpedients extends React.Component<ElsMeusExpedientsProps, ElsMeusE
         registresRetornats: this.state.expedientresposta.registresRetornats,
         totalRegistres: this.state.expedientresposta.totalRegistres,
         onClickPagination: this.onClickPagination,
+        onClickElementsByPage: this.onClickElementsByPage
       };
-
       content = (
         <RenderPaginationTable
           tableData={expedients}

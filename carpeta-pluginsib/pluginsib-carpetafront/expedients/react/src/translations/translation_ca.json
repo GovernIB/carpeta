@@ -6,5 +6,7 @@
     "codiSia" : "Codi SIA",
     "nomProcediment" : "Nom procediment",
     "expedientOrgans" : "Òrgans",
-    "expedientObertura" : "Data"
+    "expedientObertura" : "Data",
+    "registroMostra":"Mostra ",
+    "registroRegistres":" registres"
 }

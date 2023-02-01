@@ -1,4 +1,6 @@
 {
     "tornar": "Tornau",
-    "paginacioLabel": "Mostrant elements del {{from}} al {{to}} d'un total de {{total}} elements"
+    "paginacioLabel": "Mostrant elements del {{from}} al {{to}} d'un total de {{total}} elements",
+    "registroMostra":"Mostra  ",
+    "registroRegistres":"  registres"
 }

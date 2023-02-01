@@ -11,6 +11,7 @@ import initTranslation from "./InitTranslation";
 import { PaginationItemCarpeta as Item } from "./PaginationItemCarpeta";
 import * as reactdetect from "react-device-detect";
 
+
 interface InternalPaginationCarpetaProps {
   paginationInfo: PaginationCarpetaProps;
   i18n: any;
@@ -28,6 +29,9 @@ class PaginationCarpeta extends React.Component<InternalPaginationCarpetaProps> 
     console.log("PaginationCarpeta().totalRegistres  => " + this.props.paginationInfo.totalRegistres);
 
     initTranslation(this.props.i18n);
+    if(!props.paginationInfo.elementsByPage){
+      props.paginationInfo.elementsByPage = [5, 10, 25];
+    }
   }
 
   render() {
@@ -44,6 +48,14 @@ class PaginationCarpeta extends React.Component<InternalPaginationCarpetaProps> 
     let pagines: any = [];
 
     let onClick: Function = this.props.paginationInfo.onClickPagination;
+    let onClickElementsByPage: Function = this.props.paginationInfo.onClickElementsByPage;
+
+
+    //Si el parametre onClickElementsByPage te valor, existeix una funcio per canviar el nº de elements
+    // per tant s'ha de incloure l'element per canviar el nº de elements.
+
+    // Si el parametre elementsByPage te valors, agafarlos, si no, agafar 5, 10 i 25 per defecte. 
+
 
     // First
     pagines.push(
@@ -85,36 +97,120 @@ class PaginationCarpeta extends React.Component<InternalPaginationCarpetaProps> 
       </Item>
     );
 
+    //Options per numero de elements a pintar per pagina
+    let numElements: JSX.Element;
+    if(onClickElementsByPage){
+
+      let numElementOptions: any = [];
+
+      //this.props.paginationInfo.elementsByPage.map((element) => numElementOptions.push(<option>{element}</option>));
+      /*for (var i in this.props.paginationInfo.elementsByPage) {
+        console.log("XYZ ZZZ Assignant valor numElements.");
+        numElementOptions.push(
+          <option key={i}>{this.props.paginationInfo.elementsByPage[i]}</option>
+        );
+      }
+      */
+
+      for(var i=0; i<this.props.paginationInfo.elementsByPage.length; i++){
+        numElementOptions.push(
+          <option key={i}>{this.props.paginationInfo.elementsByPage[i]}</option>
+          )
+      }
+
+      numElements = (
+        <div style={{ float:"right", paddingLeft: "0.7em", paddingRight: "0.7em" }} className="pagination justify-content-right">
+          {this.props.i18n.t("registroMostra")}
+          <select  onChange={(e) => {
+            onClickElementsByPage(e.target.value);
+          }}>
+            {numElementOptions}
+          </select>
+          {this.props.i18n.t("registroRegistres")}
+        </div>
+      );
+    }else{
+      console.log("No s'ha definit la funció onClickElementsByPage.");
+    }
+    
+
     /* Mostrant elements del {{from}} al {{to}} d'un total de {{total}} elements*/
     let message: string = this.props.i18n.t("paginacioLabel", { current: current, total: total, from: from, to: to });
 
     let pagination: JSX.Element = (
       <nav aria-label="Page navigation">
-        <ul
-          style={{ float: reactdetect.isMobileOnly ? "none" : "right", paddingRight: "0.7em" }}
-          className="pagination justify-content-center"
-        >
+        <ul className="pagination justify-content-left">
           {pagines}
         </ul>
       </nav>
     );
 
+    
     if (reactdetect.isMobileOnly) {
-      return (
-        <center>
-          {message}
-          <br />
-          {pagination}
-        </center>
-      );
+
+      if(onClickElementsByPage){
+        return (
+          <center>
+            {message}
+            <br />
+            <div style={{ width: "50%", paddingRight: "0.7em" }} className="pagination">
+              {pagination}
+              {numElements}
+            </div>
+          </center>
+        );
+      }else{
+        return (
+          <center>
+            {message}
+            <br />
+            <div className="pagination justify-content-right">
+              {pagination}
+            </div>
+          </center>
+        );
+      }
+        
     } else {
+      if(onClickElementsByPage){
+        return (
+          <>
+            <div style={{ float: "left", marginTop: "9px", width: "50%" }}>{message}</div>
+            <div style={{ float: "right", marginTop: "9px", width: "50%" }}>
+              <div 
+              style={{ float: "left", paddingRight: "0.7em" }}
+              className="pagination justify-content-left">
+                {pagination}
+              </div>
+              {numElements}
+            </div>
+            
+            
+          </>
+        );
+      }else{
+        return (
+          <>
+            <div style={{ float: "left", marginTop: "9px", width: "50%" }}>{message}</div>
+            <div 
+            style={{ float: "right", paddingRight: "0.7em" }}>
+              {pagination}
+            </div>
+            
+          </>
+        );
+      }
+      
+      /*
+      {onClickElementsByPage && {numElements}}
       return (
         <>
           <div style={{ float: "left", marginTop: "9px", width: "60%" }}>{message}</div>
 
           {pagination}
+          {onClickElementsByPage && {numElements}}
         </>
-      );
+      );*/
     }
   }
 }
