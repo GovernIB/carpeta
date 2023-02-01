@@ -6,19 +6,15 @@
  */
 
 import React from "react";
-import PaginationCarpetaProps from "./PaginationCarpetaProps";
+
 import initTranslation from "./InitTranslation";
 import { PaginationItemCarpeta as Item } from "./PaginationItemCarpeta";
 import * as reactdetect from "react-device-detect";
+import PaginationCarpetaPropsWithTranslation from "./PaginationCarpetaPropsWithTranslation";
 
 
-interface InternalPaginationCarpetaProps {
-  paginationInfo: PaginationCarpetaProps;
-  i18n: any;
-}
-
-class PaginationCarpeta extends React.Component<InternalPaginationCarpetaProps> {
-  constructor(props: InternalPaginationCarpetaProps) {
+class PaginationCarpeta extends React.Component<PaginationCarpetaPropsWithTranslation> {
+  constructor(props: PaginationCarpetaPropsWithTranslation) {
     super(props);
     console.log("  CONSTRUCTOR PaginationCarpeta !!!!!");
 
@@ -119,7 +115,7 @@ class PaginationCarpeta extends React.Component<InternalPaginationCarpetaProps> 
       }
 
       numElements = (
-        <div style={{ float:"right", paddingLeft: "0.7em", paddingRight: "0.7em" }} className="pagination justify-content-right">
+        <div className="pagination" style={{ float: "none", alignItems: "center", justifyContent: "center"}}>
           {this.props.i18n.t("registroMostra")}
           <select  onChange={(e) => {
             onClickElementsByPage(e.target.value);
@@ -139,7 +135,7 @@ class PaginationCarpeta extends React.Component<InternalPaginationCarpetaProps> 
 
     let pagination: JSX.Element = (
       <nav aria-label="Page navigation">
-        <ul className="pagination justify-content-left">
+        <ul key="pn_1" className="pagination" style={{ float: "none", alignItems: "center", justifyContent: "center", padding: "0.7em"}}>
           {pagines}
         </ul>
       </nav>
@@ -153,10 +149,14 @@ class PaginationCarpeta extends React.Component<InternalPaginationCarpetaProps> 
           <center>
             {message}
             <br />
-            <div style={{ width: "50%", paddingRight: "0.7em" }} className="pagination">
-              {pagination}
-              {numElements}
+            <div>
+            {pagination}
             </div>
+            <br />
+            <div>
+            {numElements}
+            </div>
+            
           </center>
         );
       }else{
@@ -164,7 +164,7 @@ class PaginationCarpeta extends React.Component<InternalPaginationCarpetaProps> 
           <center>
             {message}
             <br />
-            <div className="pagination justify-content-right">
+            <div className="pagination justify-content-center">
               {pagination}
             </div>
           </center>
@@ -182,7 +182,11 @@ class PaginationCarpeta extends React.Component<InternalPaginationCarpetaProps> 
               className="pagination justify-content-left">
                 {pagination}
               </div>
+              <div 
+              style={{ float: "right", paddingRight: "0.7em" }}
+              className="pagination justify-content-right">
               {numElements}
+              </div>
             </div>
             
             
@@ -192,10 +196,8 @@ class PaginationCarpeta extends React.Component<InternalPaginationCarpetaProps> 
         return (
           <>
             <div style={{ float: "left", marginTop: "9px", width: "50%" }}>{message}</div>
-            <div 
-            style={{ float: "right", paddingRight: "0.7em" }}>
-              {pagination}
-            </div>
+            
+            {pagination}
             
           </>
         );

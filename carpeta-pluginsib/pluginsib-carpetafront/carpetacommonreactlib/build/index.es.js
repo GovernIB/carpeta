@@ -4137,7 +4137,7 @@ var PaginationItemCarpeta = /** @class */ (function (_super) {
     PaginationItemCarpeta.prototype.render = function () {
         var _this = this;
         console.log("  RENDER PaginationItemCarpeta !!!!!");
-        return (React$1.createElement("li", { className: "page-item ".concat(this.props.active ? "active" : "") },
+        return (React$1.createElement("li", { key: "item_" + this.props.value, className: "page-item ".concat(this.props.active ? "active" : "") },
             React$1.createElement("a", { className: "page-link", role: "button", href: "javascript:console.log();", onClick: function () {
                     _this.props.onClick(_this.props.value);
                 } },
@@ -4209,7 +4209,7 @@ var PaginationCarpeta = /** @class */ (function (_super) {
             for (var i = 0; i < this.props.paginationInfo.elementsByPage.length; i++) {
                 numElementOptions.push(React$1.createElement("option", { key: i }, this.props.paginationInfo.elementsByPage[i]));
             }
-            numElements = (React$1.createElement("div", { style: { float: "right", paddingLeft: "0.7em", paddingRight: "0.7em" }, className: "pagination justify-content-right" },
+            numElements = (React$1.createElement("div", { className: "pagination", style: { float: "none", alignItems: "center", justifyContent: "center" } },
                 this.props.i18n.t("registroMostra"),
                 React$1.createElement("select", { onChange: function (e) {
                         onClickElementsByPage(e.target.value);
@@ -4222,21 +4222,21 @@ var PaginationCarpeta = /** @class */ (function (_super) {
         /* Mostrant elements del {{from}} al {{to}} d'un total de {{total}} elements*/
         var message = this.props.i18n.t("paginacioLabel", { current: current, total: total, from: from, to: to });
         var pagination = (React$1.createElement("nav", { "aria-label": "Page navigation" },
-            React$1.createElement("ul", { className: "pagination justify-content-left" }, pagines)));
+            React$1.createElement("ul", { key: "pn_1", className: "pagination", style: { float: "none", alignItems: "center", justifyContent: "center", padding: "0.7em" } }, pagines)));
         if (isMobileOnly_1) {
             if (onClickElementsByPage) {
                 return (React$1.createElement("center", null,
                     message,
                     React$1.createElement("br", null),
-                    React$1.createElement("div", { style: { width: "50%", paddingRight: "0.7em" }, className: "pagination" },
-                        pagination,
-                        numElements)));
+                    React$1.createElement("div", null, pagination),
+                    React$1.createElement("br", null),
+                    React$1.createElement("div", null, numElements)));
             }
             else {
                 return (React$1.createElement("center", null,
                     message,
                     React$1.createElement("br", null),
-                    React$1.createElement("div", { className: "pagination justify-content-right" }, pagination)));
+                    React$1.createElement("div", { className: "pagination justify-content-center" }, pagination)));
             }
         }
         else {
@@ -4245,12 +4245,12 @@ var PaginationCarpeta = /** @class */ (function (_super) {
                     React$1.createElement("div", { style: { float: "left", marginTop: "9px", width: "50%" } }, message),
                     React$1.createElement("div", { style: { float: "right", marginTop: "9px", width: "50%" } },
                         React$1.createElement("div", { style: { float: "left", paddingRight: "0.7em" }, className: "pagination justify-content-left" }, pagination),
-                        numElements)));
+                        React$1.createElement("div", { style: { float: "right", paddingRight: "0.7em" }, className: "pagination justify-content-right" }, numElements))));
             }
             else {
                 return (React$1.createElement(React$1.Fragment, null,
                     React$1.createElement("div", { style: { float: "left", marginTop: "9px", width: "50%" } }, message),
-                    React$1.createElement("div", { style: { float: "right", paddingRight: "0.7em" } }, pagination)));
+                    pagination));
             }
             /*
             {onClickElementsByPage && {numElements}}
