@@ -33,7 +33,7 @@ class PaginationItemCarpeta extends React.Component<InternalPaginationItemCarpet
             this.props.onClick(this.props.value);
           }}
         >
-          <b>{this.props.children}</b>
+          <a>{this.props.children}</a>
         </a>
       </li>
     );

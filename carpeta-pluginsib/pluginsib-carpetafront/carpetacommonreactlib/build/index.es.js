@@ -4141,7 +4141,7 @@ var PaginationItemCarpeta = /** @class */ (function (_super) {
             React$1.createElement("a", { className: "page-link", role: "button", href: "javascript:console.log();", onClick: function () {
                     _this.props.onClick(_this.props.value);
                 } },
-                React$1.createElement("b", null, this.props.children))));
+                React$1.createElement("a", null, this.props.children))));
     };
     return PaginationItemCarpeta;
 }(React$1.Component));
