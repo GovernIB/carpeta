@@ -1,6 +1,6 @@
 const path = require("path");
 
-const config = {
+module.exports = {
   entry: "./src/main.tsx",
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -9,6 +9,7 @@ const config = {
 
   target: "web",
   mode: "development",
+
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
@@ -42,8 +43,9 @@ const config = {
         test: /\.css$/i,
         use: [{ loader: "style-loader" }, { loader: "css-loader" }],
       },
+      
     ],
   },
 };
 
-module.exports = config;
+

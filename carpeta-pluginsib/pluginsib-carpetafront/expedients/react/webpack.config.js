@@ -16,6 +16,7 @@ const config = {
     rules: [
       {
         test: /\.(js|jsx|tsx)$/,
+        include: path.resolve(__dirname, 'src'),
         use: [
           {
             loader: "ts-loader",
