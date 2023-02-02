@@ -1,0 +1,10 @@
+{
+    "elsmeusexpedientsTitol": "Els Meus Expedients",
+    "expedientNom": "Nom",
+    "expedientDesc" : "Descripció",
+    "expedientEstat" : "Estat",
+    "codiSia" : "Codi SIA",
+    "nomProcediment" : "Nom procediment",
+    "expedientOrgans" : "Òrgans",
+    "expedientObertura" : "Data"
+}
