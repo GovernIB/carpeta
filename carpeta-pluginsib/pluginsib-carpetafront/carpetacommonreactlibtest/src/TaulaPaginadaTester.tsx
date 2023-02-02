@@ -59,7 +59,7 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       enableElementsPerPagina: true,
     };
 
-    this.onClickPagination = this.onClickPagination.bind(this);
+    this.onClickCanviDePagina = this.onClickCanviDePagina.bind(this);
 
     this.onClickCanviTotalElements = this.onClickCanviTotalElements.bind(this);
 
@@ -94,51 +94,53 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       elementsPerPagina: elementsPerPagina,
       totalRegistres: totalElements,
 
-      totalPagines: totalElements / elementsPerPagina,
+      totalPagines: Math.floor(totalElements / elementsPerPagina) + ( (totalElements % elementsPerPagina == 0? 0: 1) ),
       registresRetornats: expedients.length,
       expedients: expedients,
     };
 
+
     this.setState({
       ...this.state,
-
       paginaActual: paginaActual,
       elementsPerPagina: elementsPerPagina,
       totalElements: totalElements,
       enableElementsPerPagina: enableElementsPerPagina,
-
       expedientresposta: expedientsResposta,
       error: null,
       isLoaded: true,
     });
   }
 
-  onClickPagination(paginaActual: number) {
+  onClickCanviDePagina(novaPagina: number) {
+    console.log("onClickPagination a => " + novaPagina);
     this.canviaConfiguracio(
       this.state.totalElements,
+      this.state.enableElementsPerPagina,
+      this.state.elementsPerPagina,
+      novaPagina
+    );
+  }
+
+  onClickCanviTotalElements(totalElements: number) {
+    console.log("onClickCanviTotalElements a => " + totalElements);
+    const paginaActual:number = 0;
+    this.canviaConfiguracio(
+      totalElements,
       this.state.enableElementsPerPagina,
       this.state.elementsPerPagina,
       paginaActual
     );
   }
 
-  onClickCanviTotalElements(totalElements: number) {
-    console.log("onClickCanviTotalElements a => " + totalElements);
-    this.canviaConfiguracio(
-      totalElements,
-      this.state.enableElementsPerPagina,
-      this.state.elementsPerPagina,
-      this.state.paginaActual
-    );
-  }
-
   onClickElementsPerPagina(elementsPerPagina: number) {
     console.log("onClickElementsPerPagina a => " + elementsPerPagina);
+    const paginaActual:number = 0;
     this.canviaConfiguracio(
       this.state.totalElements,
       this.state.enableElementsPerPagina,
       elementsPerPagina,
-      this.state.paginaActual
+      paginaActual
     );
   }
 
@@ -201,7 +203,8 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
         totalPagines: this.state.expedientresposta.totalPagines,
         registresRetornats: this.state.expedientresposta.registresRetornats,
         totalRegistres: this.state.expedientresposta.totalRegistres,
-        onClickPagination: this.onClickPagination,
+        elementsByPage: [5,10,25],
+        onClickPagination: this.onClickCanviDePagina,
         onClickElementsByPage: this.state.enableElementsPerPagina ? this.onClickElementsPerPagina : undefined,
       };
 
@@ -224,6 +227,8 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
         <button onClick={() => this.onClickCanviTotalElements(3)}> 3</button>
         <button onClick={() => this.onClickCanviTotalElements(10)}> 10</button>
         <button onClick={() => this.onClickCanviTotalElements(17)}> 17</button>
+        <button onClick={() => this.onClickCanviTotalElements(39)}> 39</button>
+        <button onClick={() => this.onClickCanviTotalElements(46)}> 46</button>
         <button onClick={() => this.onClickCanviTotalElements(59)}> 59</button>
         <button onClick={() => this.onClickCanviTotalElements(97)}> 97</button>
         &nbsp;&nbsp;&nbsp;&nbsp; Mostrar Elements per pàgina:
