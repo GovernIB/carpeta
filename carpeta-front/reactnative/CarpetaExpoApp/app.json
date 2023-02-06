@@ -2,7 +2,7 @@
   "expo": {
     "name": "CarpetaApp GOIB",
     "slug": "CarpetaApp",
-    "version": "1.1.3",
+    "version": "1.1.4",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "carpetaapp",
@@ -22,7 +22,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "es.caib.carpeta.carpetaapp",
-      "buildNumber": "1.1.3",
+      "buildNumber": "1.1.4",
       "infoPlist": {
         "CFBundleLocalizations": ["ca", "es"],
         "CFBundleDevelopmentRegion": "es"
@@ -41,7 +41,7 @@
       ],
       "useNextNotificationsApi": true,
       "googleServicesFile": "./google-services.json",
-      "versionCode": 113
+      "versionCode": 114
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
