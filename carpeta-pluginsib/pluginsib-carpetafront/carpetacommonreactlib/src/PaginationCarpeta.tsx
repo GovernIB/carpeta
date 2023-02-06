@@ -178,12 +178,12 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaPropsWithTransl
             <div style={{ float: "left", marginTop: "9px", width: "50%" }}>{message}</div>
             <div style={{ float: "right", width: "50%" }}>
               <div 
-              style={{ float: "left",  marginTop: "9px", paddingRight: "0.7em" }}
+              style={{ float: "left", paddingRight: "0.7em" }}
               className="pagination justify-content-left">
                 {pagination}
               </div>
               <div 
-              style={{ float: "right",  marginTop: "9px", paddingRight: "0.7em" }}
+              style={{ float: "right", paddingRight: "0.7em" }}
               className="pagination justify-content-right">
               {numElements}
               </div>
