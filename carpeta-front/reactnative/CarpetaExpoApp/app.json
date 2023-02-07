@@ -39,7 +39,6 @@
         "ACCESS_FINE_LOCATION",
         "ACCESS_BACKGROUND_LOCATION"
       ],
-      "useNextNotificationsApi": true,
       "googleServicesFile": "./google-services.json",
       "versionCode": 114
     },

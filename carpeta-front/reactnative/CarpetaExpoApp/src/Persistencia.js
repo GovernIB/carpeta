@@ -6,10 +6,10 @@
  * @desc [description]
  */
 
-//import AsyncStorage from '@react-native-community/async-storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-//import AsyncStorage from '@react-native';
 import Storage from 'react-native-storage';
+import ConfigurationProvider from './ConfigurationProvider';
+
 var storage = new Storage({
   // Inicializar
   size: 10,
@@ -22,12 +22,15 @@ class Persistencia {
   constructor(props) {
     //super(props);
     this.load = this.load.bind(this);
-    this.valors = null;
+    this.save = this.save.bind(this);
+    //this.valors = null;
   }
 
+  /*
   getValors() {
     return this.valors;
   }
+  */
 
   /**
    *
@@ -48,15 +51,17 @@ class Persistencia {
             ' i url ' +
             ret.urlcarpeta,
         );
-        this.valors = [ret.urlcarpeta, ret.codientitat];
+        //this.valors = [ret.urlcarpeta, ret.codientitat];
         callOnFinish(ret.urlcarpeta, ret.codientitat);
       })
       // FIXME:
       // eslint-disable-next-line handle-callback-err
       .catch(err => {
-        console.log('load::Posant valors per defecte !!!!');
-        this.valors = ['', ''];
-        callOnFinish('', '');
+        console.warn('load::Posant valors per defecte !!!!');
+        console.warn("Error: " + err);
+        //this.valors = [ConfigurationProvider.getCarpetaServer(), ConfigurationProvider.getCarpetaEntity()];
+        this.save(ConfigurationProvider.getCarpetaServer(), ConfigurationProvider.getCarpetaEntity());
+        callOnFinish(ConfigurationProvider.getCarpetaServer(), ConfigurationProvider.getCarpetaEntity());
       });
   }
 

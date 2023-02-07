@@ -10,23 +10,17 @@ import React, { Component } from "react";
 
 // I18N
 import { withTranslation } from "react-i18next";
-import './i18n';
+import "./i18n";
 
-import {
-  Button,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Linking,
-  Alert,
-} from "react-native";
-import { Link, Route, Switch, withRouter } from "./components/Routing";
+import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
+
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { Routes, Route, NativeRouter, Link } from "react-router-native";
 
 import CarpetaWeb from "./CarpetaWeb";
 import LoginIBCallBackBrowser from "./LoginIBCallBackBrowser";
 import PersistenciaControl from "./PersistenciaControl";
-import { Redirect } from "react-router-dom";
+import withRouter from "./withRouter";
 
 class Index extends Component {
   constructor(props) {
@@ -35,8 +29,10 @@ class Index extends Component {
       isHidden: false,
     };
 
-    this.ocultarVista.bind(this);
-    this.navigateCarpetaWeb.bind(this);
+    this.mostrarPaginaDeConfiguracio = this.mostrarPaginaDeConfiguracio.bind(this);
+    this.navigateCarpetaWeb = this.navigateCarpetaWeb.bind(this);
+
+    //codiLogin = this.props.match.params.codilogin;
   }
 
   componentDidMount() {
@@ -49,131 +45,83 @@ class Index extends Component {
     //indexRef(undefined);
   }
 
-  navigateCarpetaWeb(url, ispublic) {
+  navigateCarpetaWeb(url: string, ispublic: boolean) {
     // Crida a CarpetaWeb per a que canvii la pàgina web
-    console.log(
-      new Date().toLocaleString() + " Index::navigateCarpetaWeb(" + url + "," + ispublic+ ")"
-    );
+    console.log(new Date().toLocaleString() + " Index::navigateCarpetaWeb(" + url + "," + ispublic + ")");
 
-    console.log(
-      new Date().toLocaleString() +
-        " Index::navigateCarpetaWeb => this.carpetaWeb = " +
-        this.carpetaWeb
-    );
-
+    console.log(new Date().toLocaleString() + " Index::navigateCarpetaWeb => this.carpetaWeb = " + this.carpetaWeb);
 
     // CARPETA FRONT PUBLIC
     if (this.carpetaWeb) {
       //
-      // S'hauria de veure si és una URL publica o securitzada ...      
-      
+      // S'hauria de veure si és una URL publica o securitzada ...
 
-      
       if (ispublic) {
-          // Si es un mòdul public de Carpeta Front, llavors s'ha de carregar
-          this.carpetaWeb.navigateCarpetaWeb(url, ispublic);
+        // Si es un mòdul public de Carpeta Front, llavors s'ha de carregar
+        this.carpetaWeb.navigateCarpetaWeb(url, ispublic);
       } else {
         // Si és un mòdul privat llavors s'ha de mostrar un avis indicant que abans s'ha d'autenticar
-        console.log("Index::navigateCarpetaWeb => Mostrant un Alert per la pantalla !!!!")
-        setTimeout( () => { 
-           Alert.alert('Requereix Autenticar-se',
-            'Per accedir als detalls de la Notificació requereix accedir/loguejar-se a Carpeta.'); }, 11);
-
-          
-      }    
-
-
+        console.log("Index::navigateCarpetaWeb => Mostrant un Alert per la pantalla !!!!");
+        setTimeout(() => {
+          Alert.alert(
+            "Requereix Autenticar-se",
+            "Per accedir als detalls de la Notificació requereix accedir/loguejar-se a Carpeta."
+          );
+        }, 11);
+      }
     } else {
-      console.log(
-        new Date().toLocaleString() +
-          " Index::navigateCarpetaWeb => this.carpetaWeb = ES NULL !!!!!"
-      );
+      console.log(new Date().toLocaleString() + " Index::navigateCarpetaWeb => this.carpetaWeb = ES NULL !!!!!");
     }
 
-    
-
-      // CARPETA FRONT AUTENTICAT
-      if (this.loginIBCallBackBrowser) {
-        this.loginIBCallBackBrowser.navigateCarpetaWeb(url, ispublic);
-      } else {
-        console.log(
-          new Date().toLocaleString() +
-            " Index::navigateCarpetaWeb => this.loginIBCallBackBrowser = ES NULL !!!!!"
-        );
-      }
-    
-
+    // CARPETA FRONT AUTENTICAT
+    if (this.loginIBCallBackBrowser) {
+      this.loginIBCallBackBrowser.navigateCarpetaWeb(url, ispublic);
+    } else {
+      console.log(
+        new Date().toLocaleString() + " Index::navigateCarpetaWeb => this.loginIBCallBackBrowser = ES NULL !!!!!"
+      );
+    }
   }
 
-  ocultarVista() {
+  mostrarPaginaDeConfiguracio() {
     console.log("Entered 1111111111 !!!!!!!!!!!!!!!!/" + this.state.isHidden);
-    //this.setState({ isHidden: true });
-    this.props.history.push("/config/");
+    this.setState({ isHidden: true });
+
+    //{ (this.state.isHidden == true) && <Navigate to="/config" replace={true} /> }
+
+    //this.props.history.push("/config/");
+    this.props.navigate("/config");
 
     console.log("Entered 22222222 !!!!!!!!!!!!!!!!/" + this.state.isHidden);
   }
 
   render() {
-
     return (
       <View style={styles.container}>
-
-
         {/* MENU SUPERIOR */}
         <View style={styles.nav} hide={this.state.isHidden}>
-
-          <TouchableOpacity title="X" onPress={() => this.ocultarVista()}>
+          <TouchableOpacity title="X" onPress={() => this.mostrarPaginaDeConfiguracio()}>
             <View style={styles.button}>
               <Text style={styles.buttonText}>X</Text>
             </View>
           </TouchableOpacity>
-
         </View>
 
         {/* Contingut de la Pagina */}
-        <Switch
-          onValueChange={(value) => this.setState({ isHidden: value })}
-          value={this.state.isHidden}
-        >
-          <Route
-            exact
-            path="/"
-            render={(props) => {
-                return <CarpetaWeb {...props} />;
-              }}
-            /> 
 
-          <Route
-            path="/config"
-            render={(props) => {
-              return <PersistenciaControl {...props} />;
-            }}
-          />
+        <Routes>
+          <Route path="/" element={<CarpetaWeb />} />
 
-          <Route
-            path="/carpeta"
-            render={(props) => {
-              return (
-                <CarpetaWeb
-                  carpetaWebRef={(ref) => (this.carpetaWeb = ref)}
-                  {...props}
-                />
-              );
-            }}
-          />
+          <Route path="/config" element={<PersistenciaControl />} />
+
+          <Route path="/carpeta" element={<CarpetaWeb carpetaWebRef={(ref) => (this.carpetaWeb = ref)} />} />
           <Route
             path="/loginibcallbackbrowser/:codilogin"
-            render={(props) => {
-              return (
-                <LoginIBCallBackBrowser
-                  {...props}
-                  codilogin={props.match.params.codilogin}
-                  loginIBCallBackBrowserRef={(ref) => (this.loginIBCallBackBrowser = ref)}
-                />
-              );
-            }}
+            element={
+              <LoginIBCallBackBrowser loginIBCallBackBrowserRef={(ref) => (this.loginIBCallBackBrowser = ref)} />
+            }
           />
-        </Switch>
+        </Routes>
       </View>
     );
   }

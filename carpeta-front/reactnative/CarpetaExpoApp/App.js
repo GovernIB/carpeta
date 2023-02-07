@@ -9,17 +9,15 @@
 import { Linking, Platform } from "react-native";
 import Constants from "expo-constants";
 import React, { Component } from "react";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { withTranslation } from "react-i18next";
-import { Router } from "./src/components/Routing";
 import { sessionStorageRN } from "./src/SessionStorageClass";
 import Index from "./src/Index";
 import * as Notifications from "expo-notifications";
 import * as ScreenOrientation from "expo-screen-orientation";
-import Persistencia from './src/Persistencia';
+import Persistencia from "./src/Persistencia";
 
-
-
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { Routes, Route, NativeRouter, Link } from "react-router-native";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -32,10 +30,7 @@ Notifications.setNotificationHandler({
 //metodo que genera y registra el token unico
 async function registerForPushNotificationsAsync() {
   if (Platform.OS === "web") {
-    sessionStorageRN.setItem(
-      "expoPushToken",
-      "Entorn Web no suporta Notificacions"
-    );
+    sessionStorageRN.setItem("expoPushToken", "Entorn Web no suporta Notificacions");
     return;
   }
 
@@ -94,15 +89,12 @@ class App extends Component {
 
     this.calledWhenDataLoaded = this.calledWhenDataLoaded.bind(this);
     this._handleNotificationResponse = this._handleNotificationResponse.bind(this);
-    
 
     this.storage = new Persistencia();
     // Carrega els valors de forma asincrona i quan ha acabat crida a la funcio passada per paràmetre
     this.storage.load(this.calledWhenDataLoaded);
     this.state = { loadedData: false, urlcarpeta: "" };
   }
-
-
 
   calledWhenDataLoaded(urlcarpeta, codientitat) {
     console.log("ENTRA A DORENDER ");
@@ -119,9 +111,7 @@ class App extends Component {
 
     Notifications.addNotificationReceivedListener(this._handleNotification);
 
-    Notifications.addNotificationResponseReceivedListener(
-      this._handleNotificationResponse
-    );
+    Notifications.addNotificationResponseReceivedListener(this._handleNotificationResponse);
   }
 
   /** Entra aqui quan el dispositiu rep una notificació PUSH */
@@ -135,14 +125,10 @@ class App extends Component {
     );
 
     console.log(
-      new Date().toLocaleString() +
-        " REBUDA notification.request.content.body => " +
-        notification.request.content.body
+      new Date().toLocaleString() + " REBUDA notification.request.content.body => " + notification.request.content.body
     );
 
-
-
-    // Comentam aquest tros de codi a causa de l'error que llança 
+    // Comentam aquest tros de codi a causa de l'error que llança
 
     /*
     console.log(JSON.stringify(notification, null, 4));
@@ -152,7 +138,6 @@ class App extends Component {
       new Date().toLocaleString() + "REBUDA  notificacióID => " + localnotificationId);
     Notifications.dismissNotificationAsync(localnotificationId);
     */
-
   };
 
   /** Entra aqui quan l'usuari pitja sobre la notificació PUSH */
@@ -176,75 +161,51 @@ class App extends Component {
     );
 
     if (response.notification.request.content.data.action) {
-
-      var action =  response.notification.request.content.data.action;
-      console.log(
-        new Date().toLocaleString() +
-          "CLICK  response.notification.request.content.data.action = " +
-          action
-      );
-      
+      var action = response.notification.request.content.data.action;
+      console.log(new Date().toLocaleString() + "CLICK  response.notification.request.content.data.action = " + action);
 
       if (action == "NONE") {
         //  Do nothing
-      } else  if (action == "SHOWPLUGIN") {
+      } else if (action == "SHOWPLUGIN") {
+        var url = response.notification.request.content.data.url;
+        console.log(new Date().toLocaleString() + "CLICK  response.notification.request.content.data.url = " + url);
 
-         var url = response.notification.request.content.data.url;
-         console.log(
-          new Date().toLocaleString() +
-            "CLICK  response.notification.request.content.data.url = " +
-            url
-        );
-
-         if (url) {
-
-          console.log(
-            new Date().toLocaleString() +
-              "CLICK  this.state.urlcarpeta = " +
-              this.state.urlcarpeta
-          );
-
+        if (url) {
+          console.log(new Date().toLocaleString() + "CLICK  this.state.urlcarpeta = " + this.state.urlcarpeta);
 
           var fullUrl = this.state.urlcarpeta + url;
-          console.log(
-            new Date().toLocaleString() +
-              "CLICK OK this.index=" + this.index
-          );
-
+          console.log(new Date().toLocaleString() + "CLICK OK this.index=" + this.index);
 
           var ispublic = response.notification.request.content.data.ispublic;
 
           var fullUrl = this.state.urlcarpeta + url;
           console.log(
-            new Date().toLocaleString() +
-              "CLICK OK this.index.navigateCarpetaWeb(" +
-              fullUrl + "," + ispublic + ")"
+            new Date().toLocaleString() + "CLICK OK this.index.navigateCarpetaWeb(" + fullUrl + "," + ispublic + ")"
           );
 
-          
           this.index.navigateCarpetaWeb(fullUrl, ispublic);
-         }
-
+        }
       }
-      
     } else {
       console.log(
-        new Date().toLocaleString() +
-          "CLICK  response.notification.request.content.data.action = NO DEFINIT "
+        new Date().toLocaleString() + "CLICK  response.notification.request.content.data.action = NO DEFINIT "
       );
     }
-
-   
   };
 
   render() {
     return (
       <SafeAreaProvider>
-        <Router>
-          <SafeAreaView>
-            <Index indexRef={ref => { this.index = ref;}}/>
-          </SafeAreaView>
-        </Router>
+      <SafeAreaView>
+        <NativeRouter onValueChange={(value) => this.setState({ isHidden: value })} value={this.state.isHidden}>
+
+      <Index
+        indexRef={(ref) => {
+          this.index = ref;
+        }}        
+      />
+      </NativeRouter>
+        </SafeAreaView>
       </SafeAreaProvider>
     );
   }

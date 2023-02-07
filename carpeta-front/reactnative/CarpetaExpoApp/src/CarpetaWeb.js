@@ -1,15 +1,14 @@
-
-
-import React, {Component} from 'react';
-import {StyleSheet, ScrollView, Text, View, Platform } from 'react-native';
+import React, { Component } from "react";
+import { StyleSheet, ScrollView, Text, View, Platform } from "react-native";
 import * as Linking from "expo-linking";
 
-import Section from './Section';
-import VistaWebComponent from './components/VistaWebComponent';
-import Persistencia from './Persistencia';
-import {LinkingOpenURL} from './WebBrowserUtils';
-import * as WebBrowser from 'expo-web-browser';
+import Section from "./Section";
+import VistaWebComponent from "./components/VistaWebComponent";
+import Persistencia from "./Persistencia";
+import { LinkingOpenURL } from "./WebBrowserUtils";
+import * as WebBrowser from "expo-web-browser";
 import ConfigurationProvider from "./ConfigurationProvider";
+import withRouter from "./withRouter";
 
 /**
  * @author anadal (u80067)
@@ -27,78 +26,72 @@ class CarpetaWeb extends Component {
     this.loadRootPage = this.loadRootPage.bind(this);
     this.calledWhenDataLoaded = this.calledWhenDataLoaded.bind(this);
     this.callWhenNavigationStateChange = this.callWhenNavigationStateChange.bind(this);
-    
 
     this.storage = new Persistencia();
     // Carrega els valors de forma asincrona i quan ha acabat crida a la funcio passada per paràmetre
     this.storage.load(this.calledWhenDataLoaded);
-    this.state = {loadedData: false, urlcarpeta: '', codientitat: ''};
+    this.state = { loadedData: false, urlcarpeta: "", codientitat: "" };
 
     this.vistaWebComponentRef = React.createRef();
 
-    console.log('CarpetaWeb: Surt de Constructor');
+    console.log("CarpetaWeb: Surt de Constructor");
   }
 
   calledWhenDataLoaded(urlcarpeta, codientitat) {
     console.log(
-      'CarpetaWeb: ENTRA A calledWhenDataLoaded =>  urlcarpeta: ' +
-        urlcarpeta +
-        ' |  codientitat ' +
-        codientitat,
+      "CarpetaWeb: ENTRA A calledWhenDataLoaded =>  urlcarpeta: " + urlcarpeta + " |  codientitat " + codientitat
     );
 
-    if (urlcarpeta === '' || codientitat === '') {
+    if (urlcarpeta === "" || codientitat === "") {
       // això va a configuració
       //this.props.history.push('/config/');
 
       // posam valors a pinyo fix
-      this.setState({loadedData: true, urlcarpeta:ConfigurationProvider.getCarpetaServer(), codientitat: ConfigurationProvider.getCarpetaEntity()});
-
+      this.setState({
+        loadedData: true,
+        urlcarpeta: ConfigurationProvider.getCarpetaServer(),
+        codientitat: ConfigurationProvider.getCarpetaEntity(),
+      });
     } else {
-      this.setState({loadedData: true, urlcarpeta: urlcarpeta, codientitat: codientitat});
+      this.setState({ loadedData: true, urlcarpeta: urlcarpeta, codientitat: codientitat });
     }
   }
 
   // METODE REPETIT A LoginIBCallBackBrowser.js
   callWhenNavigationStateChange(event) {
     var url = event.url;
-    console.log('CarpetaWeb::Check URL => ]' + url + '[');
+    console.log("CarpetaWeb::Check URL => ]" + url + "[");
 
-    
-
-    if (url.includes('/public/doLogin?')) {
-
+    if (url.includes("/public/doLogin?")) {
       if (this.alreadyopen) {
         this.alreadyopen = false;
       } else {
         this.alreadyopen = true;
 
-        var pos = url.lastIndexOf('=');
+        var pos = url.lastIndexOf("=");
 
         var loginCode = url.substring(pos + 1, url.length);
 
-        console.log('CarpetaWeb::LoginCode => ' + loginCode);
+        console.log("CarpetaWeb::LoginCode => " + loginCode);
         var urlCarpeta = this.state.urlcarpeta;
         var urlbase = this.getUrlBase(url);
 
-        var theUrlBrowser =
-          urlCarpeta + '/public/preLoginApp/' + loginCode + '?urlbase=' + encodeURIComponent(urlbase);
+        var theUrlBrowser = urlCarpeta + "/public/preLoginApp/" + loginCode + "?urlbase=" + encodeURIComponent(urlbase);
 
-        console.log(new Date().toUTCString() + '  Obring URL => ]' + theUrlBrowser + '[');
+        console.log(new Date().toUTCString() + "  Obring URL => ]" + theUrlBrowser + "[");
         LinkingOpenURL(theUrlBrowser, this.loadRootPage);
       }
       return false;
     }
 
-    if(url.startsWith(this.state.urlcarpeta)) {
+    if (url.startsWith(this.state.urlcarpeta)) {
       console.log("CarpetaWeb::URL interna : " + url);
       return true;
     } else {
-
       console.log("CarpetaWeb:: stopLoading ... ");
       event.target.stopLoading();
       console.log("CarpetaWeb::Obrint URL externa : " + url);
-      
+
       Linking.canOpenURL(url).then((supported) => {
         if (supported) {
           return Linking.openURL(url).catch(() => null);
@@ -107,19 +100,18 @@ class CarpetaWeb extends Component {
 
       return false;
     }
-   
   }
 
   componentDidMount() {
     // B. If we are on Android, we immediately call the navigate method passing in the url.
     // If we are on iOS, We add an event listener to call handleOpenUrl when an incoming link is detected.
-    console.log('CarpetaWeb => componentDidMount()');
+    console.log("CarpetaWeb => componentDidMount()");
 
-    this.eventListener = Linking.addEventListener('url', this.handleOpenURL);
+    this.eventListener = Linking.addEventListener("url", this.handleOpenURL);
 
     const { carpetaWebRef } = this.props;
 
-    if(carpetaWebRef) {
+    if (carpetaWebRef) {
       carpetaWebRef(this);
     }
   }
@@ -130,28 +122,25 @@ class CarpetaWeb extends Component {
     this.eventListener.remove();
 
     const { carpetaWebRef } = this.props;
-    if(carpetaWebRef) {
+    if (carpetaWebRef) {
       carpetaWebRef(undefined);
     }
   }
 
-  handleOpenURL = event => {
+  handleOpenURL = (event) => {
     // D. When handleOpenURL is called, we pass the event url to the navigate method.
-    console.log('CarpetaWeb => handleOpenURL(' + event.url + ')');
+    console.log("CarpetaWeb => handleOpenURL(" + event.url + ")");
     this.navigate(event.url);
   };
-
-
 
   loadRootPage() {
     this.navigateCarpetaWeb(this.state.urlcarpeta, true);
   }
 
-
   navigateCarpetaWeb(url, ispublic) {
     // Crida a vistaWebComponent per a que canvii la pàgina web
     // Canvia url del WebView
-    console.log('CarpetaWeb => navigateCarpetaWeb(' + url + ','+  ispublic+ ')');
+    console.log("CarpetaWeb => navigateCarpetaWeb(" + url + "," + ispublic + ")");
 
     if (this.vistaWebComponent) {
       this.vistaWebComponent.navigateCarpetaWeb(url, ispublic);
@@ -160,46 +149,50 @@ class CarpetaWeb extends Component {
     }
   }
 
-
   /* Si des d'un navegador atacam a carpetaapp://carpeta/loquesigui s'executarà aquest mètode */
-  navigate = url => {
+  navigate = (url) => {
     // E. We first parse the url to get the id and route name. We then check to see if the route
     // name is equal to "show", and if so we navigate to the People component, passing the id as a prop.
 
-    console.log('CarpetaWeb => navigate(]' + url + '[)');
+    console.log("CarpetaWeb => navigate(]" + url + "[)");
 
     if (!url) {
       return;
     }
 
-    const route = url.replace(/.*?:\/\//g, '');
-    console.log('route => ' + route);
+    const route = url.replace(/.*?:\/\//g, "");
+    console.log("route => " + route);
 
-    if (url.includes('/show/')) {
-      var param = route.split('/').join('_');
+    if (url.includes("/show/")) {
+      var param = route.split("/").join("_");
 
-      var pos = param.lastIndexOf('_');
+      var pos = param.lastIndexOf("_");
 
       var loginCode = param.substring(pos + 1, param.length);
 
-      if (Platform.OS === 'ios') {
-          console.log("Tancant WebBrowser per IOS ...");
-          WebBrowser.dismissBrowser();
+      if (Platform.OS === "ios") {
+        console.log("Tancant WebBrowser per IOS ...");
+        WebBrowser.dismissBrowser();
       }
 
       global.isPostLoginCarpeta = true;
 
       console.log(new Date().toLocaleString() + " CarpetaWeb => Setting global.isPostLoginCarpeta = true");
 
-      console.log('CarpetaWeb::navigate => loginCode: ' + loginCode);
+      console.log("CarpetaWeb::navigate => loginCode: " + loginCode);
 
-      this.props.history.push('/loginibcallbackbrowser/' + loginCode);
+      // XXXXXXX
+      //this.props.history.push('/loginibcallbackbrowser/' + loginCode);
+      //const history = useNavigate();
+      this.props.navigate("/loginibcallbackbrowser/" + loginCode);
+      //let novaURL = '/loginibcallbackbrowser/' + loginCode;
+      //this.setState({ferredirect:novaURL});
     }
   };
 
   getUrlBase(url) {
-    var pos = url.lastIndexOf('/');
-    var pos2 = url.indexOf('//');
+    var pos = url.lastIndexOf("/");
+    var pos2 = url.indexOf("//");
     var ubase;
     if (pos === pos2 + 1) {
       ubase = url;
@@ -219,16 +212,21 @@ class CarpetaWeb extends Component {
 
     var ubase = this.getUrlBase(u);
 
-
     var deeplinknativeapp = Linking.makeUrl("carpeta/show/LOGINCODE");
 
-    var reactNativeHomepage = u + '/public/rnhp/' + c + '?urlbase=' + encodeURIComponent(ubase)
-         + '&deeplinknativeapp=' + encodeURIComponent(deeplinknativeapp);
+    var reactNativeHomepage =
+      u +
+      "/public/rnhp/" +
+      c +
+      "?urlbase=" +
+      encodeURIComponent(ubase) +
+      "&deeplinknativeapp=" +
+      encodeURIComponent(deeplinknativeapp);
 
     return (
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <VistaWebComponent
-          vistaWebComponentRef={ ref => this.vistaWebComponent = ref}
+          vistaWebComponentRef={(ref) => (this.vistaWebComponent = ref)}
           url={reactNativeHomepage}
           debug={false}
           callWhenNavigationStateChange={this.callWhenNavigationStateChange}
@@ -249,8 +247,8 @@ const styles = StyleSheet.create({
   link: {
     marginTop: 8,
     fontSize: 18,
-    fontWeight: '400',
+    fontWeight: "400",
   },
 });
 
-export default CarpetaWeb;
+export default withRouter(CarpetaWeb);

@@ -11,6 +11,7 @@ import Persistencia from "./Persistencia";
 import Constants from "expo-constants";
 import { sessionStorageRN } from "./SessionStorageClass";
 import ConfigurationProvider from "./ConfigurationProvider";
+import withRouter from "./withRouter";
 
 
 class PersistenciaControl extends Component {
@@ -50,7 +51,8 @@ class PersistenciaControl extends Component {
   }
 
   tornarACarpeta() {
-    this.props.history.push("/carpeta");
+    //this.props.history.push("/carpeta");
+    this.props.navigate("/carpeta");
   }
 
   guardarDades() {
@@ -146,4 +148,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PersistenciaControl;
+export default withRouter(PersistenciaControl);

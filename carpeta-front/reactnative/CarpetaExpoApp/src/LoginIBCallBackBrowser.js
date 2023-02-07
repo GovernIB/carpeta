@@ -6,6 +6,7 @@ import VistaWebComponent from "./components/VistaWebComponent";
 import Persistencia from "./Persistencia";
 import { sessionStorageRN } from "./SessionStorageClass";
 import {LinkingOpenURL} from './WebBrowserUtils';
+import withRouter from './withRouter';
 
 /**
  * @author anadal (u80067)
@@ -64,7 +65,7 @@ class LoginIBCallBackBrowser extends React.Component {
   }
 
   calledWhenDataLoaded(urlcarpeta, codientitat) {
-    console.log("LoginIBCallBackBrowser::calledWhenDataLoaded  => entra");
+    console.log("LoginIBCallBackBrowser::calledWhenDataLoaded  => entra]" + urlcarpeta + "[");
 
     this.setState({ loadedData: true, urlcarpeta: urlcarpeta });
   }
@@ -85,9 +86,12 @@ class LoginIBCallBackBrowser extends React.Component {
 
         var loginCode = url.substring(pos + 1, url.length);
 
-        console.log("LoginIBCallBackBrowser: LoginCode => " + loginCode);
+        console.log("LoginIBCallBackBrowser: LoginCode => ]" + loginCode + "[");
         var urlCarpeta = this.state.urlcarpeta;
+        console.log("LoginIBCallBackBrowser: urlCarpeta => ]" + urlCarpeta + "[");
         var urlbase = this.getUrlBase(url);
+
+        console.log("LoginIBCallBackBrowser: urlbase => ]" + urlbase + "[");
 
         var theUrlBrowser =
           urlCarpeta +
@@ -133,17 +137,22 @@ class LoginIBCallBackBrowser extends React.Component {
   render() {
     console.log("LoginIBCallBackBrowser::  ENTRA A RENDER ... ");
 
+    let codilogin = this.props.params.codilogin;
+
     if (!this.state.loadedData) {
       return <Text>Loading data ...</Text>;
     }
     console.log(
-      "LOGINIB CALLBACK => Render ... CodiLogin =]" + this.props.codilogin + "["
+      "LOGINIB CALLBACK => Render ... CodiLogin =]" + codilogin + "["
+    );
+    console.log(
+      "LOGINIB CALLBACK => Render ... this.state.urlcarpeta =]" + this.state.urlcarpeta + "["
     );
 
     var loginUrl =
       this.state.urlcarpeta +
       "/public/homePageAppPostWebLogin/" +
-      this.props.codilogin;
+      codilogin;
 
     var expoPushToken = sessionStorageRN.getItem("expoPushToken");
     if (!expoPushToken) {
@@ -190,4 +199,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginIBCallBackBrowser;
+export default withRouter(LoginIBCallBackBrowser);
