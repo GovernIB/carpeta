@@ -4222,7 +4222,7 @@ var PaginationCarpeta = /** @class */ (function (_super) {
         /* Mostrant elements del {{from}} al {{to}} d'un total de {{total}} elements*/
         var message = this.props.i18n.t("paginacioLabel", { current: current, total: total, from: from, to: to });
         var pagination = (React$1.createElement("nav", { "aria-label": "Page navigation" },
-            React$1.createElement("ul", { key: "pn_1", className: "pagination", style: { float: "none", alignItems: "center", justifyContent: "center", padding: "0.7em" } }, pagines)));
+            React$1.createElement("ul", { key: "pn_1", className: "pagination", style: { float: "none", alignItems: "center", justifyContent: "center" } }, pagines)));
         if (isMobileOnly_1) {
             if (onClickElementsByPage) {
                 return (React$1.createElement("center", null,
@@ -4243,7 +4243,7 @@ var PaginationCarpeta = /** @class */ (function (_super) {
             if (onClickElementsByPage) {
                 return (React$1.createElement(React$1.Fragment, null,
                     React$1.createElement("div", { style: { float: "left", marginTop: "9px", width: "50%" } }, message),
-                    React$1.createElement("div", { style: { float: "right", marginTop: "9px", width: "50%" } },
+                    React$1.createElement("div", { style: { float: "right", width: "50%" } },
                         React$1.createElement("div", { style: { float: "left", paddingRight: "0.7em" }, className: "pagination justify-content-left" }, pagination),
                         React$1.createElement("div", { style: { float: "right", paddingRight: "0.7em" }, className: "pagination justify-content-right" }, numElements))));
             }

@@ -135,7 +135,7 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaPropsWithTransl
 
     let pagination: JSX.Element = (
       <nav aria-label="Page navigation">
-        <ul key="pn_1" className="pagination" style={{ float: "none", alignItems: "center", justifyContent: "center", padding: "0.7em"}}>
+        <ul key="pn_1" className="pagination" style={{ float: "none", alignItems: "center", justifyContent: "center"}}>
           {pagines}
         </ul>
       </nav>
@@ -176,7 +176,7 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaPropsWithTransl
         return (
           <>
             <div style={{ float: "left", marginTop: "9px", width: "50%" }}>{message}</div>
-            <div style={{ float: "right", marginTop: "9px", width: "50%" }}>
+            <div style={{ float: "right", width: "50%" }}>
               <div 
               style={{ float: "left", paddingRight: "0.7em" }}
               className="pagination justify-content-left">
