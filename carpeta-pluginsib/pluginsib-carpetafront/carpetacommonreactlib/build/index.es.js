@@ -4157,11 +4157,16 @@ var PaginationCarpeta = /** @class */ (function (_super) {
     function PaginationCarpeta(props) {
         var _this = _super.call(this, props) || this;
         console.log("  CONSTRUCTOR PaginationCarpeta !!!!!");
-        console.log("PaginationCarpeta().paginaActual  => " + _this.props.paginationInfo.paginaActual);
-        console.log("PaginationCarpeta().elementsPerPagina  => " + _this.props.paginationInfo.elementsPerPagina);
-        console.log("PaginationCarpeta().totalPagines  => " + _this.props.paginationInfo.totalPagines);
-        console.log("PaginationCarpeta().registresRetornats  => " + _this.props.paginationInfo.registresRetornats);
-        console.log("PaginationCarpeta().totalRegistres  => " + _this.props.paginationInfo.totalRegistres);
+        console.log("PaginationCarpeta().paginaActual  => " +
+            _this.props.paginationInfo.paginaActual);
+        console.log("PaginationCarpeta().elementsPerPagina  => " +
+            _this.props.paginationInfo.elementsPerPagina);
+        console.log("PaginationCarpeta().totalPagines  => " +
+            _this.props.paginationInfo.totalPagines);
+        console.log("PaginationCarpeta().registresRetornats  => " +
+            _this.props.paginationInfo.registresRetornats);
+        console.log("PaginationCarpeta().totalRegistres  => " +
+            _this.props.paginationInfo.totalRegistres);
         initTranslation(_this.props.i18n);
         if (!props.paginationInfo.elementsByPage) {
             props.paginationInfo.elementsByPage = [5, 10, 25];
@@ -4172,14 +4177,17 @@ var PaginationCarpeta = /** @class */ (function (_super) {
         console.log("  RENDER PaginationCarpeta !!!!!");
         var current = this.props.paginationInfo.registresRetornats;
         var total = this.props.paginationInfo.totalRegistres;
-        var from = this.props.paginationInfo.paginaActual * this.props.paginationInfo.elementsPerPagina + 1;
-        var to = Math.min(this.props.paginationInfo.totalRegistres, (1 + this.props.paginationInfo.paginaActual) * this.props.paginationInfo.elementsPerPagina);
+        var from = this.props.paginationInfo.paginaActual *
+            this.props.paginationInfo.elementsPerPagina +
+            1;
+        var to = Math.min(this.props.paginationInfo.totalRegistres, (1 + this.props.paginationInfo.paginaActual) *
+            this.props.paginationInfo.elementsPerPagina);
         var pagines = [];
         var onClick = this.props.paginationInfo.onClickPagination;
         var onClickElementsByPage = this.props.paginationInfo.onClickElementsByPage;
         //Si el parametre onClickElementsByPage te valor, existeix una funcio per canviar el nº de elements
         // per tant s'ha de incloure l'element per canviar el nº de elements.
-        // Si el parametre elementsByPage te valors, agafarlos, si no, agafar 5, 10 i 25 per defecte. 
+        // Si el parametre elementsByPage te valors, agafarlos, si no, agafar 5, 10 i 25 per defecte.
         // First
         pagines.push(React$1.createElement(PaginationItemCarpeta, { value: 0, onClick: onClick }, "\u00AB"));
         // Previous
@@ -4209,7 +4217,11 @@ var PaginationCarpeta = /** @class */ (function (_super) {
             for (var i = 0; i < this.props.paginationInfo.elementsByPage.length; i++) {
                 numElementOptions.push(React$1.createElement("option", { key: i }, this.props.paginationInfo.elementsByPage[i]));
             }
-            numElements = (React$1.createElement("div", { className: "pagination", style: { float: "none", alignItems: "center", justifyContent: "center" } },
+            numElements = (React$1.createElement("div", { className: "pagination", style: {
+                    float: "none",
+                    alignItems: "center",
+                    justifyContent: "center",
+                } },
                 this.props.i18n.t("registroMostra"),
                 React$1.createElement("select", { onChange: function (e) {
                         onClickElementsByPage(e.target.value);
@@ -4220,17 +4232,28 @@ var PaginationCarpeta = /** @class */ (function (_super) {
             console.log("No s'ha definit la funció onClickElementsByPage.");
         }
         /* Mostrant elements del {{from}} al {{to}} d'un total de {{total}} elements*/
-        var message = this.props.i18n.t("paginacioLabel", { current: current, total: total, from: from, to: to });
+        var message = this.props.i18n.t("paginacioLabel", {
+            current: current,
+            total: total,
+            from: from,
+            to: to,
+        });
         var pagination = (React$1.createElement("nav", { "aria-label": "Page navigation" },
-            React$1.createElement("ul", { key: "pn_1", className: "pagination", style: { float: "none", alignItems: "center", justifyContent: "center" } }, pagines)));
+            React$1.createElement("ul", { key: "pn_1", className: "pagination", style: {
+                    float: "none",
+                    alignItems: "center",
+                    justifyContent: "center",
+                } }, pagines)));
         if (isMobileOnly_1) {
             if (onClickElementsByPage) {
                 return (React$1.createElement("center", null,
-                    message,
+                    React$1.createElement("div", { className: "container-fluid mt-1" }, message),
                     React$1.createElement("br", null),
-                    React$1.createElement("div", null, pagination),
+                    React$1.createElement("div", { className: "container-fluid mt-1" }, pagination),
                     React$1.createElement("br", null),
-                    React$1.createElement("div", null, numElements)));
+                    React$1.createElement("div", { className: "container-fluid mt-1" },
+                        " ",
+                        numElements)));
             }
             else {
                 return (React$1.createElement("center", null,
@@ -4242,26 +4265,17 @@ var PaginationCarpeta = /** @class */ (function (_super) {
         else {
             if (onClickElementsByPage) {
                 return (React$1.createElement(React$1.Fragment, null,
-                    React$1.createElement("div", { style: { float: "left", marginTop: "9px", width: "50%" } }, message),
-                    React$1.createElement("div", { style: { float: "right", width: "50%" } },
-                        React$1.createElement("div", { style: { float: "left", paddingRight: "0.7em" }, className: "pagination justify-content-left" }, pagination),
-                        React$1.createElement("div", { style: { float: "right", paddingRight: "0.7em" }, className: "pagination justify-content-right" }, numElements))));
+                    React$1.createElement("div", { className: "container-fluid" },
+                        React$1.createElement("div", { className: "row d-flex" },
+                            React$1.createElement("div", { className: "col" }, message),
+                            React$1.createElement("div", { className: "pagination col justify-content-center" }, pagination),
+                            React$1.createElement("div", { className: "pagination col justify-content-end " }, numElements)))));
             }
             else {
                 return (React$1.createElement(React$1.Fragment, null,
                     React$1.createElement("div", { style: { float: "left", marginTop: "9px", width: "50%" } }, message),
                     pagination));
             }
-            /*
-            {onClickElementsByPage && {numElements}}
-            return (
-              <>
-                <div style={{ float: "left", marginTop: "9px", width: "60%" }}>{message}</div>
-      
-                {pagination}
-                {onClickElementsByPage && {numElements}}
-              </>
-            );*/
         }
     };
     return PaginationCarpeta;

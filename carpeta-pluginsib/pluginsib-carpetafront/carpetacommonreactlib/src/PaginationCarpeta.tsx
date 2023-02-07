@@ -12,20 +12,34 @@ import { PaginationItemCarpeta as Item } from "./PaginationItemCarpeta";
 import * as reactdetect from "react-device-detect";
 import PaginationCarpetaPropsWithTranslation from "./PaginationCarpetaPropsWithTranslation";
 
-
 class PaginationCarpeta extends React.Component<PaginationCarpetaPropsWithTranslation> {
   constructor(props: PaginationCarpetaPropsWithTranslation) {
     super(props);
     console.log("  CONSTRUCTOR PaginationCarpeta !!!!!");
 
-    console.log("PaginationCarpeta().paginaActual  => " + this.props.paginationInfo.paginaActual);
-    console.log("PaginationCarpeta().elementsPerPagina  => " + this.props.paginationInfo.elementsPerPagina);
-    console.log("PaginationCarpeta().totalPagines  => " + this.props.paginationInfo.totalPagines);
-    console.log("PaginationCarpeta().registresRetornats  => " + this.props.paginationInfo.registresRetornats);
-    console.log("PaginationCarpeta().totalRegistres  => " + this.props.paginationInfo.totalRegistres);
+    console.log(
+      "PaginationCarpeta().paginaActual  => " +
+        this.props.paginationInfo.paginaActual
+    );
+    console.log(
+      "PaginationCarpeta().elementsPerPagina  => " +
+        this.props.paginationInfo.elementsPerPagina
+    );
+    console.log(
+      "PaginationCarpeta().totalPagines  => " +
+        this.props.paginationInfo.totalPagines
+    );
+    console.log(
+      "PaginationCarpeta().registresRetornats  => " +
+        this.props.paginationInfo.registresRetornats
+    );
+    console.log(
+      "PaginationCarpeta().totalRegistres  => " +
+        this.props.paginationInfo.totalRegistres
+    );
 
     initTranslation(this.props.i18n);
-    if(!props.paginationInfo.elementsByPage){
+    if (!props.paginationInfo.elementsByPage) {
       props.paginationInfo.elementsByPage = [5, 10, 25];
     }
   }
@@ -35,23 +49,26 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaPropsWithTransl
 
     const current: number = this.props.paginationInfo.registresRetornats;
     const total: number = this.props.paginationInfo.totalRegistres;
-    const from: number = this.props.paginationInfo.paginaActual * this.props.paginationInfo.elementsPerPagina + 1;
+    const from: number =
+      this.props.paginationInfo.paginaActual *
+        this.props.paginationInfo.elementsPerPagina +
+      1;
     const to: number = Math.min(
       this.props.paginationInfo.totalRegistres,
-      (1 + this.props.paginationInfo.paginaActual) * this.props.paginationInfo.elementsPerPagina
+      (1 + this.props.paginationInfo.paginaActual) *
+        this.props.paginationInfo.elementsPerPagina
     );
 
     let pagines: any = [];
 
     let onClick: Function = this.props.paginationInfo.onClickPagination;
-    let onClickElementsByPage: Function = this.props.paginationInfo.onClickElementsByPage;
-
+    let onClickElementsByPage: Function =
+      this.props.paginationInfo.onClickElementsByPage;
 
     //Si el parametre onClickElementsByPage te valor, existeix una funcio per canviar el nº de elements
     // per tant s'ha de incloure l'element per canviar el nº de elements.
 
-    // Si el parametre elementsByPage te valors, agafarlos, si no, agafar 5, 10 i 25 per defecte. 
-
+    // Si el parametre elementsByPage te valors, agafarlos, si no, agafar 5, 10 i 25 per defecte.
 
     // First
     pagines.push(
@@ -61,7 +78,10 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaPropsWithTransl
     );
     // Previous
     pagines.push(
-      <Item value={Math.max(0, this.props.paginationInfo.paginaActual - 1)} onClick={onClick}>
+      <Item
+        value={Math.max(0, this.props.paginationInfo.paginaActual - 1)}
+        onClick={onClick}
+      >
         ‹
       </Item>
     );
@@ -70,7 +90,12 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaPropsWithTransl
     {
       for (let i = 0; i < this.props.paginationInfo.totalPagines; i++) {
         pagines.push(
-          <Item key={i} value={i} onClick={onClick} active={this.props.paginationInfo.paginaActual == i}>
+          <Item
+            key={i}
+            value={i}
+            onClick={onClick}
+            active={this.props.paginationInfo.paginaActual == i}
+          >
             {"" + (i + 1)}
           </Item>
         );
@@ -80,7 +105,10 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaPropsWithTransl
     // next
     pagines.push(
       <Item
-        value={Math.min(this.props.paginationInfo.paginaActual + 1, this.props.paginationInfo.totalPagines - 1)}
+        value={Math.min(
+          this.props.paginationInfo.paginaActual + 1,
+          this.props.paginationInfo.totalPagines - 1
+        )}
         onClick={onClick}
       >
         ›
@@ -88,15 +116,17 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaPropsWithTransl
     );
     // Last
     pagines.push(
-      <Item value={this.props.paginationInfo.totalPagines - 1} onClick={onClick}>
+      <Item
+        value={this.props.paginationInfo.totalPagines - 1}
+        onClick={onClick}
+      >
         »
       </Item>
     );
 
     //Options per numero de elements a pintar per pagina
     let numElements: JSX.Element;
-    if(onClickElementsByPage){
-
+    if (onClickElementsByPage) {
       let numElementOptions: any = [];
 
       //this.props.paginationInfo.elementsByPage.map((element) => numElementOptions.push(<option>{element}</option>));
@@ -108,58 +138,76 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaPropsWithTransl
       }
       */
 
-      for(var i=0; i<this.props.paginationInfo.elementsByPage.length; i++){
+      for (
+        var i = 0;
+        i < this.props.paginationInfo.elementsByPage.length;
+        i++
+      ) {
         numElementOptions.push(
           <option key={i}>{this.props.paginationInfo.elementsByPage[i]}</option>
-          )
+        );
       }
 
       numElements = (
-        <div className="pagination" style={{ float: "none", alignItems: "center", justifyContent: "center"}}>
+        <div
+          className="pagination"
+          style={{
+            float: "none",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           {this.props.i18n.t("registroMostra")}
-          <select  onChange={(e) => {
-            onClickElementsByPage(e.target.value);
-          }}>
+          <select
+            onChange={(e) => {
+              onClickElementsByPage(e.target.value);
+            }}
+          >
             {numElementOptions}
           </select>
           {this.props.i18n.t("registroRegistres")}
         </div>
       );
-    }else{
+    } else {
       console.log("No s'ha definit la funció onClickElementsByPage.");
     }
-    
 
     /* Mostrant elements del {{from}} al {{to}} d'un total de {{total}} elements*/
-    let message: string = this.props.i18n.t("paginacioLabel", { current: current, total: total, from: from, to: to });
+    let message: string = this.props.i18n.t("paginacioLabel", {
+      current: current,
+      total: total,
+      from: from,
+      to: to,
+    });
 
     let pagination: JSX.Element = (
       <nav aria-label="Page navigation">
-        <ul key="pn_1" className="pagination" style={{ float: "none", alignItems: "center", justifyContent: "center"}}>
+        <ul
+          key="pn_1"
+          className="pagination"
+          style={{
+            float: "none",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           {pagines}
         </ul>
       </nav>
     );
 
-    
     if (reactdetect.isMobileOnly) {
-
-      if(onClickElementsByPage){
+      if (onClickElementsByPage) {
         return (
           <center>
-            {message}
+            <div className="container-fluid mt-1">{message}</div>
             <br />
-            <div>
-            {pagination}
-            </div>
+            <div className="container-fluid mt-1">{pagination}</div>
             <br />
-            <div>
-            {numElements}
-            </div>
-            
+            <div className="container-fluid mt-1"> {numElements}</div>
           </center>
         );
-      }else{
+      } else {
         return (
           <center>
             {message}
@@ -170,49 +218,31 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaPropsWithTransl
           </center>
         );
       }
-        
     } else {
-      if(onClickElementsByPage){
+      if (onClickElementsByPage) {
         return (
           <>
-            <div style={{ float: "left", marginTop: "9px", width: "50%" }}>{message}</div>
-            <div style={{ float: "right", width: "50%" }}>
-              <div 
-              style={{ float: "left", paddingRight: "0.7em" }}
-              className="pagination justify-content-left">
-                {pagination}
-              </div>
-              <div 
-              style={{ float: "right", paddingRight: "0.7em" }}
-              className="pagination justify-content-right">
-              {numElements}
+            <div className="container-fluid">
+              <div className="row d-flex">
+                <div className="col">{message}</div>
+                <div className="pagination col justify-content-center">{pagination}</div>
+                <div className="pagination col justify-content-end ">{numElements}</div>
               </div>
             </div>
-            
-            
           </>
         );
-      }else{
+      } else {
         return (
           <>
-            <div style={{ float: "left", marginTop: "9px", width: "50%" }}>{message}</div>
-            
+            <div style={{ float: "left", marginTop: "9px", width: "50%" }}>
+              {message}
+            </div>
+
             {pagination}
-            
           </>
         );
       }
-      
-      /*
-      {onClickElementsByPage && {numElements}}
-      return (
-        <>
-          <div style={{ float: "left", marginTop: "9px", width: "60%" }}>{message}</div>
 
-          {pagination}
-          {onClickElementsByPage && {numElements}}
-        </>
-      );*/
     }
   }
 }
