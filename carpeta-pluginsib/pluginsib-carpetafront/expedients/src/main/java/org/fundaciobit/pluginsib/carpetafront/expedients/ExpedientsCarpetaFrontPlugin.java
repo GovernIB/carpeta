@@ -13,7 +13,6 @@ import es.caib.plugins.arxiu.api.ConsultaResultat;
 import es.caib.plugins.arxiu.api.ContingutArxiu;
 import es.caib.plugins.arxiu.api.ExpedientMetadades;
 import es.caib.plugins.arxiu.api.IArxiuPlugin;
-import freemarker.template.SimpleDate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -289,15 +288,20 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         try {
 
             /* Filtre número de registres per pàgina */
-            int elementsPerPagina = 5;
+            int elementsPerPagina;
             try {
-                String elementsperpagina = getProperty(EXPEDIENTS_PROPERTY_BASE + "elementsperpagina");
-                if (elementsperpagina != null) {
-                    elementsPerPagina = Integer.parseInt(elementsperpagina);
+                elementsPerPagina = Integer.parseInt(request.getParameter("elementsperpagina"));
+            } catch (NumberFormatException e) {
+                elementsPerPagina = 5;
+                try {
+                    String elementsperpagina = getProperty(EXPEDIENTS_PROPERTY_BASE + "elementsperpagina");
+                    if (elementsperpagina != null) {
+                        elementsPerPagina = Integer.parseInt(elementsperpagina);
+                    }
+                } catch (Exception e2) {
+                    log.error("Valor de la propietat " + getPropertyBase() + EXPEDIENTS_PROPERTY_BASE
+                            + "elementsperpagina no es numèric.", e2);
                 }
-            } catch (Exception e) {
-                log.error("Valor de la propietat " + getPropertyBase() + EXPEDIENTS_PROPERTY_BASE
-                        + "elementsperpagina no es numèric.");
             }
 
             int pagina;
@@ -432,14 +436,17 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
                 String codiSia = em.getClassificacio();
                 ei.setCodiSia(codiSia);
-                String nomProcediment;
+                String nomProcediment=null;
                 try {
                     nomProcediment = this.findProcedimentAmbCodiSia(codiSia, consulta.getLanguage());
-                    ei.setNomProcediment(nomProcediment);
-
                 } catch (Exception e) {
                     log.error("Error en el procedient de Rolsac. No s'ha pogut obtenir el nom del procediment "+codiSia+": "+ e.getMessage(), e);
-                    ei.setNomProcediment("Codi SIA: " + codiSia);
+                }
+
+                if (nomProcediment == null || nomProcediment.trim().length() == 0) {
+                    ei.setNomProcediment(getTraduccio("nomprocediment.sense", locale, codiSia));
+                } else {
+                    ei.setNomProcediment(nomProcediment);
                 }
 
                 String expEstat = em.getEstat().toString();

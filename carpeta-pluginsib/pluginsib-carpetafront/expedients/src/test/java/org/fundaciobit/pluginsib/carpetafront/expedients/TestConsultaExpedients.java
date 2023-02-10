@@ -2,6 +2,7 @@ package org.fundaciobit.pluginsib.carpetafront.expedients;
 
 import java.io.FileInputStream;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 
@@ -79,12 +80,14 @@ public class TestConsultaExpedients {
         int totalPagines;
 
         final int elementsPerPagina = 5;
+        
+        Locale locale = new Locale("ca");
 
         do {
 
             ExpedientConsulta consulta = new ExpedientConsulta(language, pagina, elementsPerPagina);
 
-            ExpedientResposta resposta = elsMeusExpedientsPlugin.getExpedientsPerAdministrationID(nif, consulta);
+            ExpedientResposta resposta = elsMeusExpedientsPlugin.getExpedientsPerAdministrationID(nif, consulta, locale);
 
             if (resposta.getError() != null) {
 

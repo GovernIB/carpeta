@@ -1,6 +1,6 @@
 package org.fundaciobit.pluginsib.carpetafront.expedients;
 
-import java.util.Date;
+
 import java.util.List;
 
 /**
