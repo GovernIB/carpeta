@@ -22,7 +22,7 @@ type TaulaPaginadaTesterState = {
   totalElements: number;
   paginaActual: number;
   enableElementsPerPagina: boolean;
-
+  conjuntElementsPerPagina: number[] | undefined;
   allExpedients: any[];
 };
 
@@ -57,6 +57,7 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       totalElements: 17,
       elementsPerPagina: 5,
       enableElementsPerPagina: true,
+      conjuntElementsPerPagina: [5, 10, 25],
     };
 
     this.onClickCanviDePagina = this.onClickCanviDePagina.bind(this);
@@ -65,11 +66,18 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
 
     this.onClickElementsPerPagina = this.onClickElementsPerPagina.bind(this);
 
+    this.onClickConjuntElementsPerPagina = this.onClickConjuntElementsPerPagina.bind(this);
+
     this.canviaConfiguracio = this.canviaConfiguracio.bind(this);
   }
 
   componentDidMount() {
-    this.canviaConfiguracio(this.state.totalElements, this.state.enableElementsPerPagina, this.state.elementsPerPagina, this.state.paginaActual);
+    this.canviaConfiguracio(
+      this.state.totalElements,
+      this.state.enableElementsPerPagina,
+      this.state.elementsPerPagina,
+      this.state.paginaActual
+    );
   }
 
   canviaConfiguracio(
@@ -94,11 +102,10 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       elementsPerPagina: elementsPerPagina,
       totalRegistres: totalElements,
 
-      totalPagines: Math.floor(totalElements / elementsPerPagina) + ( (totalElements % elementsPerPagina == 0? 0: 1) ),
+      totalPagines: Math.floor(totalElements / elementsPerPagina) + (totalElements % elementsPerPagina == 0 ? 0 : 1),
       registresRetornats: expedients.length,
       expedients: expedients,
     };
-
 
     this.setState({
       ...this.state,
@@ -109,6 +116,7 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       expedientresposta: expedientsResposta,
       error: null,
       isLoaded: true,
+      conjuntElementsPerPagina: this.state.conjuntElementsPerPagina,
     });
   }
 
@@ -124,7 +132,7 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
 
   onClickCanviTotalElements(totalElements: number) {
     console.log("onClickCanviTotalElements a => " + totalElements);
-    const paginaActual:number = 0;
+    const paginaActual: number = 0;
     this.canviaConfiguracio(
       totalElements,
       this.state.enableElementsPerPagina,
@@ -135,7 +143,7 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
 
   onClickElementsPerPagina(elementsPerPagina: number) {
     console.log("onClickElementsPerPagina a => " + elementsPerPagina);
-    const paginaActual:number = 0;
+    const paginaActual: number = 0;
     this.canviaConfiguracio(
       this.state.totalElements,
       this.state.enableElementsPerPagina,
@@ -151,6 +159,28 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       this.state.elementsPerPagina,
       this.state.paginaActual
     );
+  }
+
+  onClickConjuntElementsPerPagina(llista: number[] | undefined) {
+    console.log("onClickConjuntElementsPerPagina::llista => " + llista);
+
+    let elementsPerPagina;
+    if (llista == null) {
+      elementsPerPagina = 5;
+    } else {
+      elementsPerPagina = llista[0];
+    }
+
+    console.log("onClickConjuntElementsPerPagina::elementsPerPagina => " + elementsPerPagina);
+
+    this.setState({
+      ...this.state,
+      conjuntElementsPerPagina: llista,
+      paginaActual: 0,
+      elementsPerPagina: elementsPerPagina,
+    });
+
+    this.canviaConfiguracio(this.state.totalElements, this.state.enableElementsPerPagina, elementsPerPagina, 0);
   }
 
   render() {
@@ -203,7 +233,7 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
         totalPagines: this.state.expedientresposta.totalPagines,
         registresRetornats: this.state.expedientresposta.registresRetornats,
         totalRegistres: this.state.expedientresposta.totalRegistres,
-        elementsByPage: [5,10,25],
+        elementsByPage: this.state.conjuntElementsPerPagina,
         onClickPagination: this.onClickCanviDePagina,
         onClickElementsByPage: this.state.enableElementsPerPagina ? this.onClickElementsPerPagina : undefined,
       };
@@ -239,6 +269,13 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
             this.onCheckElementsPerPagina(e.target.checked);
           }}
         />
+        <>
+          &nbsp;&nbsp;&nbsp;&nbsp; Elements per Pàgina:
+          <button onClick={() => this.onClickConjuntElementsPerPagina(undefined)}> [NO DEFINIT]</button>
+          <button onClick={() => this.onClickConjuntElementsPerPagina([3, 13, 23, 33])}> [3, 13, 23, 33]</button>
+          <button onClick={() => this.onClickConjuntElementsPerPagina([20, 40, 60])}> [20, 40, 60]</button>
+        </>
+        <hr />
         <TemplatePageCarpeta {...this.props} titles={this.titles} subtitles={this.subtitles} i18n={i18n}>
           {content}
         </TemplatePageCarpeta>
