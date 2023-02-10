@@ -310,7 +310,7 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             String nif = userData.getAdministrationID();
             ExpedientConsulta consulta = new ExpedientConsulta(locale.getLanguage(), pagina, elementsPerPagina);
 
-            ExpedientResposta resposta = getExpedientsPerAdministrationID(nif, consulta);
+            ExpedientResposta resposta = getExpedientsPerAdministrationID(nif, consulta, locale);
 
             Gson gson = new Gson();
             String json = gson.toJson(resposta);
@@ -360,7 +360,7 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     }
 
-    public ExpedientResposta getExpedientsPerAdministrationID(String nif, ExpedientConsulta consulta) throws Exception {
+    public ExpedientResposta getExpedientsPerAdministrationID(String nif, ExpedientConsulta consulta, Locale locale) throws Exception {
 
         IArxiuPlugin arxiu = instanticatePluginArxiu();
 
@@ -444,9 +444,13 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
                 String expEstat = em.getEstat().toString();
                 if ("E01".equals(expEstat)) {
-                    ei.setExpedientEstat("Obert en tramitació."); // XYZ ZZZ
-                } else {
-                    ei.setExpedientEstat("Tancat."); // XYZ ZZZ
+                    ei.setExpedientEstat(this.getTraduccio("estat.expedient.1", locale)); 
+                } else if("E02".equals(expEstat)){
+                    ei.setExpedientEstat(this.getTraduccio("estat.expedient.2", locale)); 
+                }else if("E03".equals(expEstat)) {
+                    ei.setExpedientEstat(this.getTraduccio("estat.expedient.3", locale));
+                }else {
+                    ei.setExpedientEstat(this.getTraduccio("estat.expedient.0", locale));
                 }
                 
                 DateFormat df = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
