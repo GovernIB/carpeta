@@ -432,14 +432,14 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
                 String codiSia = em.getClassificacio();
                 ei.setCodiSia(codiSia);
-                String nomProcediment = "";
+                String nomProcediment;
                 try {
                     nomProcediment = this.findProcedimentAmbCodiSia(codiSia, consulta.getLanguage());
                     ei.setNomProcediment(nomProcediment);
 
                 } catch (Exception e) {
-                    log.error("Error en el procedient de Rolsac. No s'ha pogut obtenir el nom del procediment "+codiSia+": "+ e.getMessage());
-                    e.printStackTrace();
+                    log.error("Error en el procedient de Rolsac. No s'ha pogut obtenir el nom del procediment "+codiSia+": "+ e.getMessage(), e);
+                    ei.setNomProcediment("Codi SIA: " + codiSia);
                 }
 
                 String expEstat = em.getEstat().toString();

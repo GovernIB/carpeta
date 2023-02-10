@@ -155,6 +155,7 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaPropsWithTransl
             float: "none",
             alignItems: "center",
             justifyContent: "center",
+            marginRight: "10px"
           }}
         >
           {this.props.i18n.t("registroMostra")}
@@ -225,8 +226,8 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaPropsWithTransl
             <div className="container-fluid">
               <div className="row d-flex">
                 <div className="col">{message}</div>
-                <div className="pagination col justify-content-center">{pagination}</div>
-                <div className="pagination col justify-content-end ">{numElements}</div>
+                <div className="pagination col justify-content-center" style={{marginRight: "10px"}}>{pagination}</div>
+                <div className="pagination col justify-content-end" >{numElements}</div>
               </div>
             </div>
           </>

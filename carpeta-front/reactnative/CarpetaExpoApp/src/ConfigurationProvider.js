@@ -13,7 +13,7 @@ class ConfigurationProvider {
   static isRevisionPeriod() {
 
     // Mes => gener:0, Febrer:1, Març: 2, ...
-    let finishdaterevision = new Date(2023, 1, 10);
+    let finishdaterevision = new Date(2023, 1, 7);
     let today = new Date();
 
     console.log("Today: " + today);
