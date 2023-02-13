@@ -123,8 +123,6 @@ nb-configuration.xml
 /carpeta-pluginsib/pluginsib-carpetafront/reprendretramitsistra/react/package-lock.json
 /carpeta-pluginsib/pluginsib-carpetafront/regweb32/react/node_modules/
 /carpeta-pluginsib/pluginsib-carpetafront/regweb32/react/package-lock.json
-/carpeta-pluginsib/pluginsib-carpetafront/regwebDetallComponent/react/node_modules
-/carpeta-pluginsib/pluginsib-carpetafront/regwebDetallComponent/react/package-lock.json
 /carpeta-front/reactnative/CarpetaExpoApp/package-lock.json
 /carpeta-front/reactnative/CarpetaExpoApp/node_modules
 /carpeta-front/reactnative/CarpetaExpoApp/.expo/web
@@ -233,3 +231,18 @@ carpeta-pluginsib/pluginsib-carpetafront/carpetacommonreactlib/node_modules
 /carpeta-pluginsib/pluginsib-carpetafront/expedients/react/dist/reactjs_main.js.LICENSE.txt
 /carpeta-pluginsib/pluginsib-carpetafront/carpetacommonreactlibtest/dist
 /carpeta-pluginsib/pluginsib-carpetafront/carpetacommonreactlibtest/node_modules
+/carpeta-pluginsib/pluginsib-carpetafront/notib/react/dist/notib_reactjs_main.js
+/carpeta-pluginsib/pluginsib-carpetafront/pinbalayudasubvenciones/react/dist/reactjs_main.js
+/carpeta-pluginsib/pluginsib-carpetafront/pinbalcontrataciones/react/dist/reactjs_main.js
+/carpeta-pluginsib/pluginsib-carpetafront/pinbaldiscapacidad/react/dist/reactjs_main.js
+/carpeta-pluginsib/pluginsib-carpetafront/pinbalfamilia/react/dist/reactjs_main.js
+/carpeta-pluginsib/pluginsib-carpetafront/pinbalfamilia/react/dist/reactjs_main.js.LICENSE.txt
+/carpeta-pluginsib/pluginsib-carpetafront/pinbalhistorico/react/dist/pinbalhistorico_reactjs_main.js
+/carpeta-pluginsib/pluginsib-carpetafront/pinbalmatricula/react/dist/reactjs_main.js
+/carpeta-pluginsib/pluginsib-carpetafront/pinbalpolicia/react/dist/reactjs_main.js
+/carpeta-pluginsib/pluginsib-carpetafront/reprendretramitsistra/react/dist/reactjs_main.js
+/carpeta-pluginsib/pluginsib-carpetafront/reprendretramitsistra/react/dist/reprendre_reactjs_main.js
+/carpeta-pluginsib/pluginsib-carpetafront/pinbalconvivencia/react/dist/pinbalconvivencia_reactjs_main.js
+/carpeta-pluginsib/pluginsib-carpetafront/notificacionssistra/react/dist/notificacionssistra_reactjs_main.js
+/carpeta-pluginsib/pluginsib-carpetafront/sistra/react/dist/sistra_reactjs_main.js
+/carpeta-pluginsib/pluginsib-carpetafront/sistra/react/dist/sistra_reactjs_main.js.LICENSE.txt
