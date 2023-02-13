@@ -517,7 +517,6 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 unidadesCache.put(language, unidadesCacheLng);
             }
 
-
             String nom = unidadesCacheLng.get(codiDir3);
 
             if (nom == null) {
@@ -527,12 +526,10 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             return nom;
 
         } catch (Exception e) {
-            // XYZ ZZZ
-
+            
             log.error("Error esbrinant nom d´unidata amb codiDir3 " + codiDir3);
 
             return codiDir3;
-
         }
 
     }

@@ -11,6 +11,6 @@ export default interface PaginationCarpetaProps {
     registresRetornats: number;
     totalRegistres: number;
     onClickPagination: Function;
-    onClickElementsByPage?: Function;
-    elementsByPage?: number[];
+    onClickSelectElementsByPage?: Function;
+    selectElementsByPage?: number[];
 }
