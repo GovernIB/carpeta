@@ -69,6 +69,7 @@ class Apodera extends React.Component<ApoderaProps,ApoderaState>  {
 
     this.onClickRowDesktop = this.onClickRowDesktop.bind(this);
     this.onClickRowMobile = this.onClickRowMobile.bind(this);
+    this.tancarModal = this.tancarModal.bind(this);
 
     i18n.on("languageChanged", this.canviatIdioma);
   }
@@ -248,10 +249,25 @@ class Apodera extends React.Component<ApoderaProps,ApoderaState>  {
   onClickRowDesktop(i:number) {
     //$('#Modal_Info_Apo_' + i).modal("show");
 
+    console.log("Passa per onClickRowDesktop(" + i + ") ...")
+
     let modal: any = document.getElementById('Modal_Info_Apo_' + i);
     modal.style.display = "block";
+    modal.classList.remove("hide");
     modal.classList.add("show");
   }
+
+
+  tancarModal(modalID:string) {
+
+    console.log("Passa per tancarModal(" + modalID + ") ...")
+
+    let modal: any = document.getElementById(modalID);
+    modal.style.display = "none";
+    modal.classList.remove("show");
+    modal.classList.add("hide");
+  }
+
 
   onClickRowMobile(i:number) {
     window.open(this.state.urlApodera, "_blank");
@@ -327,14 +343,14 @@ class Apodera extends React.Component<ApoderaProps,ApoderaState>  {
 
                     return (
                       <>
-                        <div className="modal fade" id={"Modal_Info_Apo_" + i} key = {i} tabIndex={-1} role="dialog">
+                        <div className="modal" id={"Modal_Info_Apo_" + i} key = {i} tabIndex={-1} role="dialog" onClick={() => { this.tancarModal("Modal_Info_Apo_" + i); }}>
                           <div className="modal-dialog modal-dialog-centered" role="document">
                             <div className="modal-content">
                               <div className="modal-header" style={{ padding: "0px" }}>
                                 <p className="lh15" style={{ margin: "0.4em 0" }}>
                                   &nbsp;&nbsp;{t("apoderaInformacio")}
                                 </p>
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                <button type="button" className="close" data-dismiss="modal" aria-hidden="true" aria-label="Close" onClick={() => { this.tancarModal("Modal_Info_Apo_" + i); }}>
                                   <span aria-hidden="true">&times;</span>
                                 </button>
                               </div>
