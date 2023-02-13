@@ -39,8 +39,11 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaPropsWithTransl
     );
 
     initTranslation(this.props.i18n);
-    if (!props.paginationInfo.elementsByPage) {
-      props.paginationInfo.elementsByPage = [5, 10, 25];
+
+    console.log("\n\nCONSTRUCTOR  XXXXXX: " + this.props.paginationInfo.elementsByPage + "\n\n")
+
+    if (this.props.paginationInfo.elementsByPage == undefined) {
+      this.props.paginationInfo.elementsByPage = [5, 10, 25];
     }
   }
 
@@ -144,7 +147,7 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaPropsWithTransl
         i++
       ) {
         numElementOptions.push(
-          <option key={i}>{this.props.paginationInfo.elementsByPage[i]}</option>
+          <option key={i} selected={this.props.paginationInfo.elementsByPage[i]==this.props.paginationInfo.elementsPerPagina}>{this.props.paginationInfo.elementsByPage[i]}</option>
         );
       }
 

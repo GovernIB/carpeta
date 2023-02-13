@@ -76,7 +76,8 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       this.state.totalElements,
       this.state.enableElementsPerPagina,
       this.state.elementsPerPagina,
-      this.state.paginaActual
+      this.state.paginaActual,
+      this.state.conjuntElementsPerPagina
     );
   }
 
@@ -84,7 +85,8 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
     totalElements: number,
     enableElementsPerPagina: boolean,
     elementsPerPagina: number,
-    paginaActual: number
+    paginaActual: number,
+    llistatElementsPerPagina: number[] | undefined
   ) {
     var expedients: any[] = [];
 
@@ -107,6 +109,7 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       expedients: expedients,
     };
 
+    console.log("Elements per Pagina Conjunt => " + llistatElementsPerPagina);
     this.setState({
       ...this.state,
       paginaActual: paginaActual,
@@ -116,7 +119,7 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       expedientresposta: expedientsResposta,
       error: null,
       isLoaded: true,
-      conjuntElementsPerPagina: this.state.conjuntElementsPerPagina,
+      conjuntElementsPerPagina: llistatElementsPerPagina,
     });
   }
 
@@ -126,7 +129,8 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       this.state.totalElements,
       this.state.enableElementsPerPagina,
       this.state.elementsPerPagina,
-      novaPagina
+      novaPagina,
+      this.state.conjuntElementsPerPagina
     );
   }
 
@@ -137,7 +141,8 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       totalElements,
       this.state.enableElementsPerPagina,
       this.state.elementsPerPagina,
-      paginaActual
+      paginaActual,
+      this.state.conjuntElementsPerPagina
     );
   }
 
@@ -148,7 +153,8 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       this.state.totalElements,
       this.state.enableElementsPerPagina,
       elementsPerPagina,
-      paginaActual
+      paginaActual,
+      this.state.conjuntElementsPerPagina
     );
   }
 
@@ -157,7 +163,8 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       this.state.totalElements,
       enableElementsPerPagina,
       this.state.elementsPerPagina,
-      this.state.paginaActual
+      this.state.paginaActual,
+      this.state.conjuntElementsPerPagina
     );
   }
 
@@ -165,22 +172,13 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
     console.log("onClickConjuntElementsPerPagina::llista => " + llista);
 
     let elementsPerPagina;
-    if (llista == null) {
+    if (llista == undefined) {
       elementsPerPagina = 5;
     } else {
       elementsPerPagina = llista[0];
     }
 
-    console.log("onClickConjuntElementsPerPagina::elementsPerPagina => " + elementsPerPagina);
-
-    this.setState({
-      ...this.state,
-      conjuntElementsPerPagina: llista,
-      paginaActual: 0,
-      elementsPerPagina: elementsPerPagina,
-    });
-
-    this.canviaConfiguracio(this.state.totalElements, this.state.enableElementsPerPagina, elementsPerPagina, 0);
+    this.canviaConfiguracio(this.state.totalElements, this.state.enableElementsPerPagina, elementsPerPagina, 0, llista);
   }
 
   render() {

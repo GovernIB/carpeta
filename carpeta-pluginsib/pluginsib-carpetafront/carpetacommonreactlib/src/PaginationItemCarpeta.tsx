@@ -17,11 +17,9 @@ interface InternalPaginationItemCarpetaProps {
 class PaginationItemCarpeta extends React.Component<InternalPaginationItemCarpetaProps> {
   constructor(props: InternalPaginationItemCarpetaProps) {
     super(props);
-    console.log("  CONSTRUCTOR PaginationItemCarpeta !!!!!");
   }
 
   render() {
-    console.log("  RENDER PaginationItemCarpeta !!!!!");
 
     return (
       <li key={"item_" + this.props.value} className={`page-item ${this.props.active ? "active" : ""}`}>

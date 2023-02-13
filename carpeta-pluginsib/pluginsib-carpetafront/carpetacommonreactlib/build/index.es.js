@@ -4142,13 +4142,10 @@ function initTranslation(i18n) {
 var PaginationItemCarpeta = /** @class */ (function (_super) {
     __extends(PaginationItemCarpeta, _super);
     function PaginationItemCarpeta(props) {
-        var _this = _super.call(this, props) || this;
-        console.log("  CONSTRUCTOR PaginationItemCarpeta !!!!!");
-        return _this;
+        return _super.call(this, props) || this;
     }
     PaginationItemCarpeta.prototype.render = function () {
         var _this = this;
-        console.log("  RENDER PaginationItemCarpeta !!!!!");
         return (React$1.createElement("li", { key: "item_" + this.props.value, className: "page-item ".concat(this.props.active ? "active" : "") },
             React$1.createElement("a", { className: "page-link", role: "button", href: "javascript:console.log();", onClick: function () {
                     _this.props.onClick(_this.props.value);
@@ -4180,8 +4177,9 @@ var PaginationCarpeta = /** @class */ (function (_super) {
         console.log("PaginationCarpeta().totalRegistres  => " +
             _this.props.paginationInfo.totalRegistres);
         initTranslation(_this.props.i18n);
-        if (!props.paginationInfo.elementsByPage) {
-            props.paginationInfo.elementsByPage = [5, 10, 25];
+        console.log("\n\nCONSTRUCTOR  XXXXXX: " + _this.props.paginationInfo.elementsByPage + "\n\n");
+        if (_this.props.paginationInfo.elementsByPage == undefined) {
+            _this.props.paginationInfo.elementsByPage = [5, 10, 25];
         }
         return _this;
     }
@@ -4227,7 +4225,7 @@ var PaginationCarpeta = /** @class */ (function (_super) {
             }
             */
             for (var i = 0; i < this.props.paginationInfo.elementsByPage.length; i++) {
-                numElementOptions.push(React$1.createElement("option", { key: i }, this.props.paginationInfo.elementsByPage[i]));
+                numElementOptions.push(React$1.createElement("option", { key: i, selected: this.props.paginationInfo.elementsByPage[i] == this.props.paginationInfo.elementsPerPagina }, this.props.paginationInfo.elementsByPage[i]));
             }
             numElements = (React$1.createElement("div", { className: "pagination", style: {
                     float: "none",
