@@ -6,11 +6,13 @@ const config = {
 		path: path.resolve(__dirname, "dist"),
 		filename: "notib_reactjs_main.js"
 	},
+	mode: "production",
 
 	module: {
 		rules: [
 			{
 				test: /\.(js|jsx)$/,
+				include: path.resolve(__dirname, 'src'),
 				use: [
 					{
 					  loader: "babel-loader",

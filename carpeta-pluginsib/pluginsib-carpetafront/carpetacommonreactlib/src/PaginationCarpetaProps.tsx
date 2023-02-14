@@ -5,14 +5,13 @@
  * @desc [description]
  */
 
-
-export default interface PaginationCarpetaProps  {
+export default interface PaginationCarpetaProps {
   paginaActual: number;
   elementsPerPagina: number;
   totalPagines: number;
   registresRetornats: number;
   totalRegistres: number;
   onClickPagination: Function;
-  onClickElementsByPage? : Function;
-  elementsByPage?: number[];
-};
+  onClickSelectElementsByPage?: Function;
+  selectElementsByPage?: number[];
+}

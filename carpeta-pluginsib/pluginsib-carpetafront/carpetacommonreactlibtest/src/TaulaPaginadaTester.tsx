@@ -22,7 +22,7 @@ type TaulaPaginadaTesterState = {
   totalElements: number;
   paginaActual: number;
   enableElementsPerPagina: boolean;
-  conjuntElementsPerPagina: number[] | undefined;
+  selectElementsPerPagina: number[] | undefined;
   allExpedients: any[];
 };
 
@@ -57,7 +57,7 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       totalElements: 17,
       elementsPerPagina: 5,
       enableElementsPerPagina: true,
-      conjuntElementsPerPagina: [5, 10, 25],
+      selectElementsPerPagina: [5,10,15],
     };
 
     this.onClickCanviDePagina = this.onClickCanviDePagina.bind(this);
@@ -77,7 +77,7 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       this.state.enableElementsPerPagina,
       this.state.elementsPerPagina,
       this.state.paginaActual,
-      this.state.conjuntElementsPerPagina
+      this.state.selectElementsPerPagina
     );
   }
 
@@ -92,8 +92,21 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
 
     var all: any[] = this.state.allExpedients;
 
-    const start: number = paginaActual * elementsPerPagina;
-    const end: number = Math.min(totalElements, start + elementsPerPagina);
+    let start:number = paginaActual * elementsPerPagina;
+    let next:number = parseInt(start.toString()) + parseInt(elementsPerPagina.toString());
+    let end:number = Math.min(totalElements, next);
+
+    
+    console.log(" ============================================");
+    console.log("totalElements: " + totalElements);
+    console.log(" start + elementsPerPagina: " + (start + elementsPerPagina));
+    console.log(" Next: " + next);
+    console.log(" Pagina: " + paginaActual);
+    console.log(" elementsPerPagina: " + elementsPerPagina);
+    console.log(" START: " + start);
+    console.log(" END: " + end);
+    
+
 
     for (let i = start; i < end; i++) {
       expedients.push(all[i]);
@@ -119,8 +132,9 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       expedientresposta: expedientsResposta,
       error: null,
       isLoaded: true,
-      conjuntElementsPerPagina: llistatElementsPerPagina,
+      selectElementsPerPagina: llistatElementsPerPagina,
     });
+
   }
 
   onClickCanviDePagina(novaPagina: number) {
@@ -130,7 +144,7 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       this.state.enableElementsPerPagina,
       this.state.elementsPerPagina,
       novaPagina,
-      this.state.conjuntElementsPerPagina
+      this.state.selectElementsPerPagina
     );
   }
 
@@ -142,7 +156,7 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       this.state.enableElementsPerPagina,
       this.state.elementsPerPagina,
       paginaActual,
-      this.state.conjuntElementsPerPagina
+      this.state.selectElementsPerPagina
     );
   }
 
@@ -154,7 +168,7 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       this.state.enableElementsPerPagina,
       elementsPerPagina,
       paginaActual,
-      this.state.conjuntElementsPerPagina
+      this.state.selectElementsPerPagina
     );
   }
 
@@ -164,7 +178,7 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       enableElementsPerPagina,
       this.state.elementsPerPagina,
       this.state.paginaActual,
-      this.state.conjuntElementsPerPagina
+      this.state.selectElementsPerPagina
     );
   }
 
@@ -231,9 +245,9 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
         totalPagines: this.state.expedientresposta.totalPagines,
         registresRetornats: this.state.expedientresposta.registresRetornats,
         totalRegistres: this.state.expedientresposta.totalRegistres,
-        elementsByPage: this.state.conjuntElementsPerPagina,
+        selectElementsByPage: this.state.selectElementsPerPagina,
         onClickPagination: this.onClickCanviDePagina,
-        onClickElementsByPage: this.state.enableElementsPerPagina ? this.onClickElementsPerPagina : undefined,
+        onClickSelectElementsByPage: this.state.enableElementsPerPagina ? this.onClickElementsPerPagina : undefined,
       };
 
       content = (

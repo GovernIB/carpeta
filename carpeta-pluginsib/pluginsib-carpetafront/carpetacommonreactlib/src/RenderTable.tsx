@@ -25,7 +25,7 @@ class RenderTable extends React.Component<RenderTableProps> {
   }
 
   render() {
-    console.log("Render OK: Imprimint Data RENDER TABLE...!");
+    //console.log("Render OK: Imprimint Data RENDER TABLE...!");
 
     var data = this.props.dades;
 

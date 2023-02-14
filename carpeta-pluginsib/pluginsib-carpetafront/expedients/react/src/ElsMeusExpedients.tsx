@@ -179,7 +179,7 @@ class ElsMeusExpedients extends React.Component<ElsMeusExpedientsProps, ElsMeusE
         registresRetornats: this.state.expedientresposta.registresRetornats,
         totalRegistres: this.state.expedientresposta.totalRegistres,
         onClickPagination: this.onClickPagination,
-        onClickElementsByPage: this.onClickElementsByPage
+        onClickSelectElementsByPage: this.onClickElementsByPage
       };
       content = (
         <RenderPaginationTable
