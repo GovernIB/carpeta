@@ -5,13 +5,7 @@
  * @desc [description]
  */
 import React from "react";
-type RenderTableProps = {
-    dades: any[];
-    columnsNom: any[];
-    columnsTitols: any[];
-    onClickRow?: Function;
-    mobileIcon?: string;
-};
+import RenderTableProps from "./RenderTableProps";
 declare class RenderTableMobile extends React.Component<RenderTableProps> {
     constructor(props: RenderTableProps);
     render(): JSX.Element;

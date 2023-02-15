@@ -20,18 +20,17 @@ class PaginationItemCarpeta extends React.Component<InternalPaginationItemCarpet
   }
 
   render() {
-
     return (
       <li key={"item_" + this.props.value} className={`page-item ${this.props.active ? "active" : ""}`}>
         <a
           className="page-link"
           role="button"
-          href="javascript:console.log();"
+          href={undefined}
           onClick={() => {
             this.props.onClick(this.props.value);
           }}
         >
-          <a>{this.props.children}</a>
+          {this.props.children}
         </a>
       </li>
     );

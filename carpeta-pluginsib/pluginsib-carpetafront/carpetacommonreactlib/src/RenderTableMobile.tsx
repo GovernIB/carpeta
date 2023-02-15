@@ -6,14 +6,7 @@
  */
 
 import React from "react";
-
-type RenderTableProps = {
-  dades: any[];
-  columnsNom: any[];
-  columnsTitols: any[];
-  onClickRow?: Function;
-  mobileIcon?: string;
-};
+import RenderTableProps from "./RenderTableProps";
 
 class RenderTableMobile extends React.Component<RenderTableProps> {
   constructor(props: RenderTableProps) {
@@ -23,11 +16,11 @@ class RenderTableMobile extends React.Component<RenderTableProps> {
   render() {
     console.log("Render OK: Imprimint Data RENDER TABLE MOBILE...!");
 
-    var data: any[] = this.props.dades; // Aquest valor sera this.props.dades
+    var data: any[] = this.props.tableData; // Aquest valor sera this.props.dades
 
-    let columnsNom = this.props.columnsNom;
+    let columnsNom = this.props.columnNames;
 
-    let titols = this.props.columnsTitols;
+    let titols = this.props.columnTitles;
 
     let content;
 

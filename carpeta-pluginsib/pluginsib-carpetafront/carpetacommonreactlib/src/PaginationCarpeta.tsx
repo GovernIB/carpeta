@@ -124,7 +124,7 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaPropsWithTransl
         numElementOptions.push(
           <option
             key={i}
-            selected={this.props.paginationInfo.selectElementsByPage[i] == this.props.paginationInfo.elementsPerPagina}
+            value={this.props.paginationInfo.selectElementsByPage[i]}
           >
             {this.props.paginationInfo.selectElementsByPage[i]}
           </option>
@@ -143,8 +143,11 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaPropsWithTransl
         >
           {this.props.i18n.t("registroMostra")}
           <select
+            defaultValue={this.props.paginationInfo.elementsPerPagina}
             onChange={(e) => {
-              if (onClickSelectElementsByPage) { onClickSelectElementsByPage(e.target.value) };
+              if (onClickSelectElementsByPage) {
+                onClickSelectElementsByPage(e.target.value);
+              }
             }}
           >
             {numElementOptions}

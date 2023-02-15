@@ -6,33 +6,53 @@
  */
 
 import React, { Component } from "react";
+import RenderTableProps from "./RenderTableProps";
 
-type RenderTableProps = {
-  dades: any[];
-  columnsNom: any[];
-  columnsTitols: any[];
-  onClickRow?: Function;
-};
 
 class RenderTableDesktop extends Component<RenderTableProps> {
   constructor(props: RenderTableProps) {
     super(props);
+
+    this.onClickTableRow = this.onClickTableRow.bind(this);
+    this.mostrarMesInfo = this.mostrarMesInfo.bind(this);
+  }
+
+  onClickTableRow(i: number) {
+    if (this.props.columnNamesAdditionals == undefined) {
+      if (this.props.onClickRow) {
+        this.props.onClickRow(i);
+      }
+    } else {
+      // Mostrar fila addicional
+      this.mostrarMesInfo("additional_row_" + i);
+    }
+  }
+
+  mostrarMesInfo(row: string) {
+    var element = document.getElementById(row);
+    if (element) {
+      if (element.style.display === "none") {
+        element.style.display = "table-row";
+      } else if (element.style.display === "table-row") {
+        element.style.display = "none";
+      }
+    }
   }
 
   render() {
     console.log("Render OK: Imprimint Data RENDER TABLE DESKTOP...!");
 
-    var data = this.props.dades; // Aquest valor sera this.props.dades
+    var data = this.props.tableData; // Aquest valor sera this.props.dades
 
-    let columnsNom: any[] = this.props.columnsNom;
+    let columnsNom: any[] = this.props.columnNames;
 
-    let titols = this.props.columnsTitols;
+    let titols = this.props.columnTitles;
 
     let capTaula: any = [];
     {
       titols.forEach((clau: any, c: number) => {
         //console.log(" HEADER::[" + c + "] -> " + clau + " => " + titols[c]);
-        capTaula.push(<th key={c}>{clau}</th>);
+        capTaula.push(<th key={"header_" + c}>{clau}</th>);
       });
     }
 
@@ -52,15 +72,52 @@ class RenderTableDesktop extends Component<RenderTableProps> {
                 let fila: any[] = [];
                 columnsNom.forEach((clau: any, c: number) => {
                   let valor = dataInfo[clau];
-                  fila.push(<td key={c}>{valor}</td>);
+                  fila.push(<td key={i + "_" + c}>{valor}</td>);
                 });
+
+                let filaAddicional = null;
+                if (this.props.columnNamesAdditionals != undefined && this.props.columnTitlesAdditionals != undefined) {
+                  let filaAddicionalContent: JSX.Element[] = [];
+                  let columnsNomAddicionals = this.props.columnNamesAdditionals;
+                  let columnsTitolsAddicionals = this.props.columnTitlesAdditionals;
+
+                  columnsNomAddicionals.forEach((clauA: any, ca:number) => {
+                    let valor: JSX.Element = (
+                      <>
+                        <b key={i + "_" + ca + "_add"}>{columnsTitolsAddicionals[ca]}</b>
+                        {columnsTitolsAddicionals[ca]==""?"":": "}
+                        {dataInfo[clauA]} <br />
+                      </>
+                    );
+                    filaAddicionalContent.push(valor);
+                  });
+
+                  filaAddicional = (
+                    <tr key={"add_row_" + i} style={{ display: "none" }} id={"additional_row_" + i}>
+                      <td key={"add_col_" + i}  colSpan={columnsNom.length}>{filaAddicionalContent}</td>
+                    </tr>
+                  );
+                } else {
+                  filaAddicional = <></>;
+                }
 
                 return (
                   <>
-                    <tr key={i} tabIndex={511 + i * 2 - 1}  onClick={() => { if(this.props.onClickRow) { this.props.onClickRow(i); }}}
-                                  onKeyPress={() => { if(this.props.onClickRow) { this.props.onClickRow(i); }}}>
+                    <tr
+                      key={"fila_" + i}
+                      tabIndex={511 + i * 2 - 1}
+                      onClick={() => {
+                        this.onClickTableRow(i);
+                      }}
+                      onKeyPress={() => {
+                        if (this.props.onClickRow) {
+                          this.props.onClickRow(i);
+                        }
+                      }}
+                    >
                       {fila}
                     </tr>
+                    {filaAddicional}
                   </>
                 );
               })}

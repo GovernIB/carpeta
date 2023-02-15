@@ -29,21 +29,20 @@ type ApoderaState = {
 };
 
 type ApoderaListItem = {
-    apoderaTipus: string,
-    apoderaAmbit: string,
-    apoderaEstat: string,
-    apoderaPoderdante: JSX.Element,
-    apoderaApoderado: JSX.Element,
-    apoderaVigencia: string,
-    apoderaOrganismes?: JSX.Element[],
-    apoderaProcediments?: JSX.Element[],
+  apoderaTipus: string;
+  apoderaAmbit: string;
+  apoderaEstat: string;
+  apoderaEstatActual?: JSX.Element;
+  apoderaPoderdante: JSX.Element;
+  apoderaApoderado: JSX.Element;
+  apoderaVigencia: string;
+  apoderaBoto?: JSX.Element;
+  apoderaOrganismes?: JSX.Element[];
+  apoderaProcediments?: JSX.Element[];
+};
 
-}
-
-
-class Apodera extends React.Component<ApoderaProps,ApoderaState>  {
+class Apodera extends React.Component<ApoderaProps, ApoderaState> {
   constructor(props: ApoderaProps) {
-
     super(props);
 
     this.state = {
@@ -54,14 +53,11 @@ class Apodera extends React.Component<ApoderaProps,ApoderaState>  {
       totalComApoderat: 0,
       error: null,
       urlApodera: undefined,
-      entitat: null
+      entitat: null,
     };
 
-    // TODO: Això es pot eliminar ?????
-    //const getLocale = (Locale) => require(`date-fns/locale/${sessionStorage.getItem("langActual")}/index.js`);
-    //this.locale = getLocale(this.props.language);
-
     this.nomEstat = this.nomEstat.bind(this);
+    this.nomEstatActual = this.nomEstatActual.bind(this);
     this.descripcioEstat = this.descripcioEstat.bind(this);
 
     this.canviatIdioma = this.canviatIdioma.bind(this);
@@ -74,7 +70,7 @@ class Apodera extends React.Component<ApoderaProps,ApoderaState>  {
     i18n.on("languageChanged", this.canviatIdioma);
   }
 
-  canviatIdioma(lng:string) {
+  canviatIdioma(lng: string) {
     console.log("Apodera::PASSA PER LISTENER canviatIdioma() ...");
     this.carregaDadesApoderaments();
   }
@@ -106,8 +102,15 @@ class Apodera extends React.Component<ApoderaProps,ApoderaState>  {
     return estatNom;
   }
 
+  nomEstatActual(estat: string) {
+    return (
+      <>
+        {this.nomEstat(estat)} - {this.descripcioEstat(estat)}
+      </>
+    );
+  }
 
-  descripcioEstat(estat:string) {
+  descripcioEstat(estat: string) {
     let descripcioNom = i18n.t("apoderaEstadoDesconocido");
     if (estat != null) {
       switch (estat) {
@@ -195,7 +198,7 @@ class Apodera extends React.Component<ApoderaProps,ApoderaState>  {
       });
   }
 
-  addBold(str:string, nif:string) {
+  addBold(str: string, nif: string) {
     if (str.includes(nif)) {
       return <b> {str} </b>;
     } else {
@@ -203,7 +206,7 @@ class Apodera extends React.Component<ApoderaProps,ApoderaState>  {
     }
   }
 
-  addNewLine(str:string, nif:string, isDesktop:boolean) {
+  addNewLine(str: string, nif: string, isDesktop: boolean) {
     var index = str.indexOf(" - ");
     var nom = str.substr(0, index);
     var fisicajuridica = str.substr(index + 3);
@@ -232,10 +235,10 @@ class Apodera extends React.Component<ApoderaProps,ApoderaState>  {
   }
 
   list2Html(stringList: any): JSX.Element[] {
-    let htmlCode:JSX.Element[] = [];
+    let htmlCode: JSX.Element[] = [];
     {
       stringList &&
-        stringList.forEach((s:any, x:number) => {
+        stringList.forEach((s: any, x: number) => {
           htmlCode.push(
             <p style={{ margin: 0 }} key={x}>
               - {s}
@@ -246,21 +249,19 @@ class Apodera extends React.Component<ApoderaProps,ApoderaState>  {
     return htmlCode;
   }
 
-  onClickRowDesktop(i:number) {
+  onClickRowDesktop(i: number) {
     //$('#Modal_Info_Apo_' + i).modal("show");
 
-    console.log("Passa per onClickRowDesktop(" + i + ") ...")
+    console.log("Passa per onClickRowDesktop(" + i + ") ...");
 
-    let modal: any = document.getElementById('Modal_Info_Apo_' + i);
+    let modal: any = document.getElementById("Modal_Info_Apo_" + i);
     modal.style.display = "block";
     modal.classList.remove("hide");
     modal.classList.add("show");
   }
 
-
-  tancarModal(modalID:string) {
-
-    console.log("Passa per tancarModal(" + modalID + ") ...")
+  tancarModal(modalID: string) {
+    console.log("Passa per tancarModal(" + modalID + ") ...");
 
     let modal: any = document.getElementById(modalID);
     modal.style.display = "none";
@@ -268,8 +269,7 @@ class Apodera extends React.Component<ApoderaProps,ApoderaState>  {
     modal.classList.add("hide");
   }
 
-
-  onClickRowMobile(i:number) {
+  onClickRowMobile(i: number) {
     window.open(this.state.urlApodera, "_blank");
   }
 
@@ -309,105 +309,23 @@ class Apodera extends React.Component<ApoderaProps,ApoderaState>  {
         } else {
           // OK Tenim dades
 
-          let nif:string;
+          let nif: string;
           if (this.state.dataPoderdant.personaFisica) {
             nif = this.state.dataPoderdant.personaFisica.nifNie;
           } else {
             nif = this.state.dataPoderdant.personaJuridica.nif;
           }
 
-
-          let accedirLabel:string = t("apoderaAccedirApoderament");
+          let accedirLabel: string = t("apoderaAccedirApoderament");
 
           let informacioAddicional;
 
           let isDesktop = !reactdetect.isMobileOnly;
 
-          if (!isDesktop) {
-            informacioAddicional = <></>;
-          } else {
-            informacioAddicional = (
-              <>
-                {/*  ============== MODAL VERSIO DESKTOP ================= */}
 
-                {this.state.dataApoderaments.map(
-                  (
-                    { tipus, subtipus, estat, apoderado, poderdante, vigencia, procediments, organismes, tramits }:any,
-                    i:number
-                  ) => {
-                    let llistaOrganismes = this.list2Html(organismes);
-
-                    let llistaProcediments = this.list2Html(procediments);
-
-                    //let llistaTramits = this.list2Html(tramits);
-
-                    return (
-                      <>
-                        <div className="modal" id={"Modal_Info_Apo_" + i} key = {i} tabIndex={-1} role="dialog" onClick={() => { this.tancarModal("Modal_Info_Apo_" + i); }}>
-                          <div className="modal-dialog modal-dialog-centered" role="document">
-                            <div className="modal-content">
-                              <div className="modal-header" style={{ padding: "0px" }}>
-                                <p className="lh15" style={{ margin: "0.4em 0" }}>
-                                  &nbsp;&nbsp;{t("apoderaInformacio")}
-                                </p>
-                                <button type="button" className="close" data-dismiss="modal" aria-hidden="true" aria-label="Close" onClick={() => { this.tancarModal("Modal_Info_Apo_" + i); }}>
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                              </div>
-                              <div className="modal-body" style={{ fontSize: "0.8em" }}>
-                                <div style={{ width: "90%" }}>
-                                  <p>
-                                    <b>{t("apoderaEstatActual")}</b>: {this.nomEstat(estat)} -{" "}
-                                    {this.descripcioEstat(estat)}
-                                  </p>
-                                  {organismes && (
-                                    <span>
-                                      <b>{t("apoderaOrganismes")}</b>: {llistaOrganismes}
-                                    </span>
-                                  )}
-                                  {procediments && (
-                                    <span>
-                                      <b>{t("apoderaProcediments")}</b>: {llistaProcediments}
-                                    </span>
-                                  )}
-                                  {/*tramits && (
-                              <span>
-                                <b>{t("apoderaTramits")}</b>:{" "}
-                                {llistaTramits}
-                              </span>
-                            )*/}
-                                </div>
-                                <br />
-                                <br />
-                                <div style={{ width: "auto" }} id="accedirApodera">
-                                  <span>
-                                    <button
-                                      className="btn btn-primary carpeta-btn botoAccedirCarpeta"
-                                      title={accedirLabel}
-                                      tabIndex={511 + i * 2}
-                                      aria-labelledby="accedirApodera"
-                                      onClick={() => {
-                                        window.open(this.state.urlApodera, "_blank");
-                                      }}
-                                    >
-                                      <span className="oi oi-external-link" title="" aria-hidden="true" />{" "}
-                                      {t("apoderaBotoApoderament")}
-                                    </button>
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </>
-                    );
-                  }
-                )}
-              </>
-            );
-          }
-
-          const columnsNom = [
+          let columnsNomAddicionals = undefined;
+          let columnsTitolsAddicionals = undefined;
+          let columnsNom = [
             "apoderaTipus",
             "apoderaAmbit",
             "apoderaEstat",
@@ -416,12 +334,18 @@ class Apodera extends React.Component<ApoderaProps,ApoderaState>  {
             "apoderaVigencia",
           ];
 
-          if (!isDesktop) {
+          if (isDesktop) {
+            columnsNomAddicionals = [];
+            columnsNomAddicionals.push("apoderaEstatActual");
+            columnsNomAddicionals.push("apoderaOrganismes");
+            columnsNomAddicionals.push("apoderaProcediments");
+            columnsNomAddicionals.push("apoderaBoto");
+          } else {
             columnsNom.push("apoderaOrganismes");
             columnsNom.push("apoderaProcediments");
           }
 
-          const columnsTitols = [
+          let columnsTitols = [
             i18n.t("apoderaTipus"),
             i18n.t("apoderaAmbit"),
             i18n.t("apoderaEstat"),
@@ -430,33 +354,58 @@ class Apodera extends React.Component<ApoderaProps,ApoderaState>  {
             i18n.t("apoderaVigencia"),
           ];
 
-          if (!isDesktop) {
+          if (isDesktop) {
+            columnsTitolsAddicionals = [];
+
+            columnsTitolsAddicionals.push(t("apoderaEstatActual"));
+            columnsTitolsAddicionals.push(t("apoderaOrganismes"));
+            columnsTitolsAddicionals.push(t("apoderaProcediments"));
+            columnsTitolsAddicionals.push(""); // "apoderaBoto" si es buit no es mostren els ":"
+          } else {
             columnsTitols.push(t("apoderaOrganismes"));
             columnsTitols.push(t("apoderaProcediments"));
           }
 
-          let apoderaments:ApoderaListItem[]  = [];
+          let apoderaments: ApoderaListItem[] = [];
+
+          let apoderaBotoContent: JSX.Element = (
+            <div style={{ width: "auto", float: "right",  position:"relative" ,  top:"0px" }} id="accedirApodera">
+              <span>
+                <button
+                  className="btn btn-primary carpeta-btn botoAccedirCarpeta"
+                  title={accedirLabel}
+                  aria-labelledby="accedirApodera"
+                  onClick={() => {
+                    window.open(this.state.urlApodera, "_blank");
+                  }}
+                >
+                  <span className="oi oi-external-link" title="" aria-hidden="true" /> {t("apoderaBotoApoderament")}
+                </button>
+              </span>
+            </div>
+          );
 
           {
             this.state.dataApoderaments.map(
-              ({ tipus, subtipus, estat, apoderado, poderdante, vigencia, procediments, organismes, tramits }:any, i: number) => {
-
+              (
+                { tipus, subtipus, estat, apoderado, poderdante, vigencia, procediments, organismes, tramits }: any,
+                i: number
+              ) => {
                 let apoderado2 = this.addNewLine(apoderado, nif, isDesktop);
                 let poderdante2 = this.addNewLine(poderdante, nif, isDesktop);
 
-                let element:ApoderaListItem = {
+                let element: ApoderaListItem = {
                   apoderaTipus: tipus,
                   apoderaAmbit: subtipus,
                   apoderaEstat: this.nomEstat(estat),
+                  apoderaEstatActual: this.nomEstatActual(estat),
                   apoderaPoderdante: poderdante2,
                   apoderaApoderado: apoderado2,
-                  apoderaVigencia: vigencia
+                  apoderaVigencia: vigencia,
+                  apoderaOrganismes: this.list2Html(organismes),
+                  apoderaProcediments: this.list2Html(procediments),
+                  apoderaBoto: apoderaBotoContent,
                 };
-
-                if (!isDesktop) {
-                  element.apoderaOrganismes = this.list2Html(organismes);
-                  element.apoderaProcediments = this.list2Html(procediments);
-                }
 
                 apoderaments.push(element);
               }
@@ -466,10 +415,12 @@ class Apodera extends React.Component<ApoderaProps,ApoderaState>  {
           content = (
             <div className="float-left" style={{ width: "97%", position: "relative" }}>
               <RenderTable
-                dades={apoderaments}
-                columnsNom={columnsNom}
-                columnsTitols={columnsTitols}
-                onClickRow={isDesktop ? this.onClickRowDesktop : this.onClickRowMobile}
+                tableData={apoderaments}
+                columnNames={columnsNom}
+                columnTitles={columnsTitols}
+                columnNamesAdditionals={columnsNomAddicionals}
+                columnTitlesAdditionals={columnsTitolsAddicionals}
+                onClickRow={isDesktop ? undefined : this.onClickRowMobile}
               />
               {informacioAddicional}
             </div>

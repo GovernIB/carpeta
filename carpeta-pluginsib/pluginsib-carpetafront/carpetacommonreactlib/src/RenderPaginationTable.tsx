@@ -6,16 +6,12 @@
  */
 
 import React from "react";
-//import { WithTranslation, withTranslation } from "react-i18next";
 import PaginationCarpetaProps from "./PaginationCarpetaProps";
 import RenderTable from "./RenderTable";
 import PaginationCarpeta from "./PaginationCarpeta";
+import RenderTableProps from "./RenderTableProps";
 
-interface RenderPaginationTableProps /* extends WithTranslation */ {
-  tableData: any[];
-  columnNames: any[];
-  columnTitles: any[];
-  mobileIcon?: string;
+interface RenderPaginationTableProps extends RenderTableProps {
   paginationInfo: PaginationCarpetaProps;
   i18n: any;
 }
@@ -30,12 +26,7 @@ class RenderPaginationTable extends React.Component<RenderPaginationTableProps> 
     return (
       <>
         <div className="infoNoMenu">
-          <RenderTable
-            dades={this.props.tableData}
-            columnsNom={this.props.columnNames}
-            columnsTitols={this.props.columnTitles}
-            mobileIcon={this.props.mobileIcon}
-          />
+          <RenderTable {...this.props} />
         </div>
         <PaginationCarpeta i18n={this.props.i18n} paginationInfo={this.props.paginationInfo} />
       </>
@@ -43,5 +34,4 @@ class RenderPaginationTable extends React.Component<RenderPaginationTableProps> 
   }
 }
 
-//export default withTranslation()(RenderPaginationTable);
 export default RenderPaginationTable;

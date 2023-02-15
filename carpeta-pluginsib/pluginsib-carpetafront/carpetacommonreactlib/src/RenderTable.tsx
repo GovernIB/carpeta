@@ -9,14 +9,7 @@ import React from "react";
 import * as reactdetect from "react-device-detect";
 import RenderTableMobile from "./RenderTableMobile";
 import RenderTableDesktop from "./RenderTableDesktop";
-
-type RenderTableProps = {
-  dades: any[];
-  columnsNom: any[];
-  columnsTitols: any[];
-  onClickRow?: Function;
-  mobileIcon?: string;
-};
+import RenderTableProps from "./RenderTableProps";
 
 class RenderTable extends React.Component<RenderTableProps> {
   constructor(props: RenderTableProps) {
@@ -27,40 +20,19 @@ class RenderTable extends React.Component<RenderTableProps> {
   render() {
     //console.log("Render OK: Imprimint Data RENDER TABLE...!");
 
-    var data = this.props.dades;
-
-    let columnsNom = this.props.columnsNom;
-
-    let columnsTitols = this.props.columnsTitols;
-
     if (!reactdetect.isMobileOnly) {
       {
         /*  ============== VERSIO DESKTOP ================= */
       }
-      return (
-        <RenderTableDesktop
-          dades={data}
-          columnsNom={columnsNom}
-          columnsTitols={columnsTitols}
-          onClickRow={this.props.onClickRow}
-        />
-      );
+      return <RenderTableDesktop {...this.props} />;
       {
         /*  ============== FINAL VERSIO DESKTOP ================= */
       }
     } else {
       {
-        /*  ============== VERSIO MÒBIL ================= */
+        /*  ============== VERSIO MÒBIL =================        */
       }
-      return (
-        <RenderTableMobile
-          dades={data}
-          columnsNom={columnsNom}
-          columnsTitols={columnsTitols}
-          onClickRow={this.props.onClickRow}
-          mobileIcon={this.props.mobileIcon}
-        />
-      );
+      return <RenderTableMobile {...this.props} />;
       {
         /*  ============== FINAL VERSIO MÒBIL ================= */
       }

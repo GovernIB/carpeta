@@ -3983,9 +3983,9 @@ var RenderTableMobile = /** @class */ (function (_super) {
     RenderTableMobile.prototype.render = function () {
         var _this = this;
         console.log("Render OK: Imprimint Data RENDER TABLE MOBILE...!");
-        var data = this.props.dades; // Aquest valor sera this.props.dades
-        var columnsNom = this.props.columnsNom;
-        var titols = this.props.columnsTitols;
+        var data = this.props.tableData; // Aquest valor sera this.props.dades
+        var columnsNom = this.props.columnNames;
+        var titols = this.props.columnTitles;
         var content;
         content = (React$1.createElement(React$1.Fragment, null,
             React$1.createElement("div", null, data.map(function (dataInfo, i) {
@@ -4023,19 +4023,44 @@ var RenderTableMobile = /** @class */ (function (_super) {
 var RenderTableDesktop = /** @class */ (function (_super) {
     __extends(RenderTableDesktop, _super);
     function RenderTableDesktop(props) {
-        return _super.call(this, props) || this;
+        var _this = _super.call(this, props) || this;
+        _this.onClickTableRow = _this.onClickTableRow.bind(_this);
+        _this.mostrarMesInfo = _this.mostrarMesInfo.bind(_this);
+        return _this;
     }
+    RenderTableDesktop.prototype.onClickTableRow = function (i) {
+        if (this.props.columnNamesAdditionals == undefined) {
+            if (this.props.onClickRow) {
+                this.props.onClickRow(i);
+            }
+        }
+        else {
+            // Mostrar fila addicional
+            this.mostrarMesInfo("additional_row_" + i);
+        }
+    };
+    RenderTableDesktop.prototype.mostrarMesInfo = function (row) {
+        var element = document.getElementById(row);
+        if (element) {
+            if (element.style.display === "none") {
+                element.style.display = "table-row";
+            }
+            else if (element.style.display === "table-row") {
+                element.style.display = "none";
+            }
+        }
+    };
     RenderTableDesktop.prototype.render = function () {
         var _this = this;
         console.log("Render OK: Imprimint Data RENDER TABLE DESKTOP...!");
-        var data = this.props.dades; // Aquest valor sera this.props.dades
-        var columnsNom = this.props.columnsNom;
-        var titols = this.props.columnsTitols;
+        var data = this.props.tableData; // Aquest valor sera this.props.dades
+        var columnsNom = this.props.columnNames;
+        var titols = this.props.columnTitles;
         var capTaula = [];
         {
             titols.forEach(function (clau, c) {
                 //console.log(" HEADER::[" + c + "] -> " + clau + " => " + titols[c]);
-                capTaula.push(React$1.createElement("th", { key: c }, clau));
+                capTaula.push(React$1.createElement("th", { key: "header_" + c }, clau));
             });
         }
         return (React$1.createElement(React$1.Fragment, null,
@@ -4047,14 +4072,37 @@ var RenderTableDesktop = /** @class */ (function (_super) {
                         var fila = [];
                         columnsNom.forEach(function (clau, c) {
                             var valor = dataInfo[clau];
-                            fila.push(React$1.createElement("td", { key: c }, valor));
+                            fila.push(React$1.createElement("td", { key: i + "_" + c }, valor));
                         });
+                        var filaAddicional = null;
+                        if (_this.props.columnNamesAdditionals != undefined && _this.props.columnTitlesAdditionals != undefined) {
+                            var filaAddicionalContent_1 = [];
+                            var columnsNomAddicionals = _this.props.columnNamesAdditionals;
+                            var columnsTitolsAddicionals_1 = _this.props.columnTitlesAdditionals;
+                            columnsNomAddicionals.forEach(function (clauA, ca) {
+                                var valor = (React$1.createElement(React$1.Fragment, null,
+                                    React$1.createElement("b", { key: i + "_" + ca + "_add" }, columnsTitolsAddicionals_1[ca]),
+                                    columnsTitolsAddicionals_1[ca] == "" ? "" : ": ",
+                                    dataInfo[clauA],
+                                    " ",
+                                    React$1.createElement("br", null)));
+                                filaAddicionalContent_1.push(valor);
+                            });
+                            filaAddicional = (React$1.createElement("tr", { key: "add_row_" + i, style: { display: "none" }, id: "additional_row_" + i },
+                                React$1.createElement("td", { key: "add_col_" + i, colSpan: columnsNom.length }, filaAddicionalContent_1)));
+                        }
+                        else {
+                            filaAddicional = React$1.createElement(React$1.Fragment, null);
+                        }
                         return (React$1.createElement(React$1.Fragment, null,
-                            React$1.createElement("tr", { key: i, tabIndex: 511 + i * 2 - 1, onClick: function () { if (_this.props.onClickRow) {
-                                    _this.props.onClickRow(i);
-                                } }, onKeyPress: function () { if (_this.props.onClickRow) {
-                                    _this.props.onClickRow(i);
-                                } } }, fila)));
+                            React$1.createElement("tr", { key: "fila_" + i, tabIndex: 511 + i * 2 - 1, onClick: function () {
+                                    _this.onClickTableRow(i);
+                                }, onKeyPress: function () {
+                                    if (_this.props.onClickRow) {
+                                        _this.props.onClickRow(i);
+                                    }
+                                } }, fila),
+                            filaAddicional));
                     }))))));
     };
     return RenderTableDesktop;
@@ -4075,14 +4123,11 @@ var RenderTable = /** @class */ (function (_super) {
     }
     RenderTable.prototype.render = function () {
         //console.log("Render OK: Imprimint Data RENDER TABLE...!");
-        var data = this.props.dades;
-        var columnsNom = this.props.columnsNom;
-        var columnsTitols = this.props.columnsTitols;
         if (!isMobileOnly_1) {
-            return (React$1.createElement(RenderTableDesktop, { dades: data, columnsNom: columnsNom, columnsTitols: columnsTitols, onClickRow: this.props.onClickRow }));
+            return React$1.createElement(RenderTableDesktop, __assign({}, this.props));
         }
         else {
-            return (React$1.createElement(RenderTableMobile, { dades: data, columnsNom: columnsNom, columnsTitols: columnsTitols, onClickRow: this.props.onClickRow, mobileIcon: this.props.mobileIcon }));
+            return React$1.createElement(RenderTableMobile, __assign({}, this.props));
         }
     };
     return RenderTable;
@@ -4147,10 +4192,9 @@ var PaginationItemCarpeta = /** @class */ (function (_super) {
     PaginationItemCarpeta.prototype.render = function () {
         var _this = this;
         return (React$1.createElement("li", { key: "item_" + this.props.value, className: "page-item ".concat(this.props.active ? "active" : "") },
-            React$1.createElement("a", { className: "page-link", role: "button", href: "javascript:console.log();", onClick: function () {
+            React$1.createElement("a", { className: "page-link", role: "button", href: undefined, onClick: function () {
                     _this.props.onClick(_this.props.value);
-                } },
-                React$1.createElement("a", null, this.props.children))));
+                } }, this.props.children)));
     };
     return PaginationItemCarpeta;
 }(React$1.Component));
@@ -4234,7 +4278,7 @@ var PaginationCarpeta = /** @class */ (function (_super) {
             }
             */
             for (var i = 0; i < this.props.paginationInfo.selectElementsByPage.length; i++) {
-                numElementOptions.push(React$1.createElement("option", { key: i, selected: this.props.paginationInfo.selectElementsByPage[i] == this.props.paginationInfo.elementsPerPagina }, this.props.paginationInfo.selectElementsByPage[i]));
+                numElementOptions.push(React$1.createElement("option", { key: i, value: this.props.paginationInfo.selectElementsByPage[i] }, this.props.paginationInfo.selectElementsByPage[i]));
             }
             numElements = (React$1.createElement("div", { className: "pagination", style: {
                     float: "none",
@@ -4243,7 +4287,7 @@ var PaginationCarpeta = /** @class */ (function (_super) {
                     marginRight: "10px",
                 } },
                 this.props.i18n.t("registroMostra"),
-                React$1.createElement("select", { onChange: function (e) {
+                React$1.createElement("select", { defaultValue: this.props.paginationInfo.elementsPerPagina, onChange: function (e) {
                         if (onClickSelectElementsByPage) {
                             onClickSelectElementsByPage(e.target.value);
                         }
@@ -4319,7 +4363,7 @@ var RenderPaginationTable = /** @class */ (function (_super) {
     RenderPaginationTable.prototype.render = function () {
         return (React$1.createElement(React$1.Fragment, null,
             React$1.createElement("div", { className: "infoNoMenu" },
-                React$1.createElement(RenderTable, { dades: this.props.tableData, columnsNom: this.props.columnNames, columnsTitols: this.props.columnTitles, mobileIcon: this.props.mobileIcon })),
+                React$1.createElement(RenderTable, __assign({}, this.props))),
             React$1.createElement(PaginationCarpeta, { i18n: this.props.i18n, paginationInfo: this.props.paginationInfo })));
     };
     return RenderPaginationTable;

@@ -6,11 +6,8 @@
  */
 import React from "react";
 import PaginationCarpetaProps from "./PaginationCarpetaProps";
-interface RenderPaginationTableProps {
-    tableData: any[];
-    columnNames: any[];
-    columnTitles: any[];
-    mobileIcon?: string;
+import RenderTableProps from "./RenderTableProps";
+interface RenderPaginationTableProps extends RenderTableProps {
     paginationInfo: PaginationCarpetaProps;
     i18n: any;
 }

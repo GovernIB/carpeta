@@ -5,14 +5,11 @@
  * @desc [description]
  */
 import { Component } from "react";
-type RenderTableProps = {
-    dades: any[];
-    columnsNom: any[];
-    columnsTitols: any[];
-    onClickRow?: Function;
-};
+import RenderTableProps from "./RenderTableProps";
 declare class RenderTableDesktop extends Component<RenderTableProps> {
     constructor(props: RenderTableProps);
+    onClickTableRow(i: number): void;
+    mostrarMesInfo(row: string): void;
     render(): JSX.Element;
 }
 export default RenderTableDesktop;

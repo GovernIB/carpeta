@@ -1,4 +1,4 @@
-set STARTTIME=%TIME%
+set STARTTIMEALL=%TIME%
 
 FOR %%G IN ("carpetacommonreactlib","carpetacommonreactlibtest","regwebdetallcomponent\reactlib","apodera\react","dadeslogin\react","expedients\react","notib\react","notificacionssistra\react","pinbalayudasubvenciones\react","pinbalcontrataciones\react","pinbalconvivencia\react","pinbaldiscapacidad\react","pinbalfamilia\react","pinbalhistorico\react","pinbalmatricula\react","pinbalpolicia\react","regweb32\react","reprendretramitsistra\react","sistra\react") DO (
 @echo off
@@ -35,7 +35,7 @@ cd ..
 
 
 @echo off
-call elapsedtime.bat %STARTTIME% %TIME%
+call elapsedtime.bat %STARTTIMEALL% %TIME%
 
 
 

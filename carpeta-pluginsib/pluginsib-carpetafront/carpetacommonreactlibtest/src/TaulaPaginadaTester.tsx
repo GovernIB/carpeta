@@ -239,6 +239,19 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
         i18n.t("expedientEstat"),
       ];
 
+
+      const columnsNomAddicionals = [
+        "codiSia",
+        "expedientOrgans",
+        "expedientEstat"
+      ];
+
+      const columnsTitolsAddicionals = [
+        i18n.t("codiSia"),
+        i18n.t("expedientOrgans"),
+        i18n.t("expedientEstat")
+      ];
+
       const paginationInfo: PaginationCarpetaProps = {
         paginaActual: this.state.expedientresposta.paginaActual,
         elementsPerPagina: this.state.expedientresposta.elementsPerPagina,
@@ -255,6 +268,8 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
           tableData={expedients}
           columnNames={columnsNom}
           columnTitles={columnsTitols}
+          columnNamesAdditionals={columnsNomAddicionals}
+          columnTitlesAdditionals={columnsTitolsAddicionals}
           mobileIcon={"oi-clipboard"}
           paginationInfo={paginationInfo}
           i18n={i18n}
