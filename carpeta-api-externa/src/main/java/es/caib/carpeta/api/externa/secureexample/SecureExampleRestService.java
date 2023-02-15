@@ -1,6 +1,7 @@
 package es.caib.carpeta.api.externa.secureexample;
 
 import javax.annotation.security.RolesAllowed;
+import javax.annotation.security.RunAs;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -30,6 +31,7 @@ import io.swagger.v3.oas.annotations.media.Content;
  * @author anadal
  *
  */
+@RunAs(Constants.CAR_SUPER)
 @OpenAPIDefinition(        
         tags = { @Tag(name = "Securetat", description = "Exemple de Securetat"),
                })

@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <display-name>Carpeta: API REST EXTERNA</display-name>
+    <display-name>Carpeta: API REST INTERNA</display-name>
  
 
     <!-- Paràmetre que indica els locales soportats -->
@@ -44,8 +44,7 @@
             <url-pattern>/secure/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>CAR_ADMIN</role-name>
-            <role-name>CAR_SUPER</role-name>
+            <role-name>CAR_WS</role-name>
         </auth-constraint>
     </security-constraint>
 
@@ -56,13 +55,7 @@
     </login-config>
 
     <security-role>
-        <description>Super Administrador de Carpeta</description>
-        <role-name>CAR_SUPER</role-name>
+        <description>Usuari Aplicació de Carpeta</description>
+        <role-name>CAR_WS</role-name>
     </security-role>
 
-    <security-role>
-        <description>Administrador d'Entitat de Carpeta</description>
-        <role-name>CAR_ADMIN</role-name>
-    </security-role>
-
-</web-app>

@@ -45,8 +45,7 @@
             <url-pattern>/secure/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>CAR_ADMIN</role-name>
-            <role-name>CAR_SUPER</role-name>
+            <role-name>CAR_WS</role-name>
         </auth-constraint>
     </security-constraint>
 
@@ -57,13 +56,8 @@
     </login-config>
 
     <security-role>
-        <description>Super Administrador de Carpeta</description>
-        <role-name>CAR_SUPER</role-name>
-    </security-role>
-
-    <security-role>
-        <description>Administrador d'Entitat de Carpeta</description>
-        <role-name>CAR_ADMIN</role-name>
+        <description>Usuari Aplicació de Carpeta</description>
+        <role-name>CAR_WS</role-name>
     </security-role>
 
 </web-app>

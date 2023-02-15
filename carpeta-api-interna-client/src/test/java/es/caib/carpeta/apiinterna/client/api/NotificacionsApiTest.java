@@ -48,6 +48,14 @@ public class NotificacionsApiTest {
             n.sendMessageTest();
             
             //n.helpTest();
+        } catch (ApiException apie) {
+            
+            System.err.println("getCode: " + apie.getCode());
+            System.err.println("getMessage: " + apie.getMessage());
+            System.err.println("getResponseBody: " + apie.getResponseBody());
+            System.err.println("getResponseHeaders: " + apie.getResponseHeaders());
+           
+            apie.printStackTrace(System.err);
             
         } catch (Exception e) {
             e.printStackTrace();

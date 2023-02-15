@@ -26,10 +26,6 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.Where;
 
 import es.caib.carpeta.commons.utils.Constants;
-import es.caib.carpeta.logic.CiutadaLogicaService;
-import es.caib.carpeta.logic.EntitatLogicaService;
-import es.caib.carpeta.logic.NotificacioAppLogicaService;
-import es.caib.carpeta.logic.PluginEntitatLogicaService;
 import es.caib.carpeta.logic.utils.SendNotificationResult;
 import es.caib.carpeta.logic.utils.SendNotificationToMobile;
 import es.caib.carpeta.model.entity.Entitat;
@@ -70,28 +66,10 @@ import io.swagger.v3.oas.annotations.media.Content;
 @SecurityScheme(type = SecuritySchemeType.HTTP, name = "BasicAuth", scheme = "basic")
 public class MobileNotificationService {
 
-    protected Logger log = Logger.getLogger(MobileNotificationService.class);
+    protected Logger log = Logger.getLogger(this.getClass());
 
-    @EJB(mappedName = CiutadaLogicaService.JNDI_NAME)
-    protected CiutadaLogicaService ciutadaLogicaEjb;
-
-    @EJB(mappedName = NotificacioAppLogicaService.JNDI_NAME)
-    protected NotificacioAppLogicaService notificacioLogicaEjb;
-
-    @EJB(mappedName = es.caib.carpeta.ejb.PluginService.JNDI_NAME)
-    protected es.caib.carpeta.ejb.PluginService pluginEjb;
-
-    @EJB(mappedName = EntitatLogicaService.JNDI_NAME)
-    protected EntitatLogicaService entitatLogicaEjb;
-
-    @EJB(mappedName = PluginEntitatLogicaService.JNDI_NAME)
-    protected PluginEntitatLogicaService pluginEntitatEjb;
-
-    @EJB(mappedName = es.caib.carpeta.ejb.EstadisticaService.JNDI_NAME)
-    protected es.caib.carpeta.ejb.EstadisticaService estadisticaEjb;
-    
-    @EJB(mappedName = es.caib.carpeta.ejb.SeccioService.JNDI_NAME)
-    protected es.caib.carpeta.ejb.SeccioService seccioEjb;
+    @EJB(mappedName = es.caib.carpeta.logic.ApiRestLogicaService.JNDI_NAME)
+    protected es.caib.carpeta.logic.ApiRestLogicaService apiRestEjb;
 
     @GET
     @Path("/sendnotificationtomobile")
@@ -135,7 +113,7 @@ public class MobileNotificationService {
             schema = @Schema(implementation = String.class)) @NotEmpty @Size(
                     min = 7,
                     max = 20) @QueryParam("nif")
-    String nif,
+            String nif,
 
             @Parameter(
                     description = "Codi de la notificació. Demanar a l'administrador de Carpeta.",
@@ -180,8 +158,7 @@ public class MobileNotificationService {
             }
 
             // Check if notificationCode exists
-            List<NotificacioApp> nList = notificacioLogicaEjb
-                    .select(NotificacioAppFields.CODI.equal(notificationCode));
+            List<NotificacioApp> nList = apiRestEjb.notificacioLogicaEjbSelect(NotificacioAppFields.CODI.equal(notificationCode));
             if (nList.size() != 1) {
                 // TODO XYZ ZZZ TRA
                 return generateError(SendMessageResultCode.NOTIFICATION_CODE_DO_NOT_EXIST,
@@ -194,7 +171,7 @@ public class MobileNotificationService {
             NotificacioAppJPA notificacio = (NotificacioAppJPA) nList.get(0);
             Long pluginID = notificacio.getFrontPluginID();
 
-            Entitat entitat = entitatLogicaEjb.findByPrimaryKey(notificacio.getEntitatID());
+            Entitat entitat = apiRestEjb.entitatLogicaEjbFindByPrimaryKey(notificacio.getEntitatID());
 
             if (entitat == null) {
                 // TODO XYZ ZZZ TRA
@@ -217,7 +194,7 @@ public class MobileNotificationService {
             if (pluginID != null) {
 
                 // Check if Plugin is enabled
-                plugin = pluginEjb.findByPrimaryKey(pluginID);
+                plugin = apiRestEjb.pluginEjbFindByPrimaryKey(pluginID);
                 if (!plugin.isActiu()) {
                     // TODO XYZ ZZZ TRA
                     return generateError(SendMessageResultCode.PLUGIN_DISABLED,
@@ -228,7 +205,7 @@ public class MobileNotificationService {
 
                 Where w1 = PluginEntitatFields.ENTITATID.equal(entitat.getEntitatID());
                 Where w2 = PluginEntitatFields.PLUGINID.equal(pluginID);
-                List<PluginEntitat> listPE = pluginEntitatEjb.select(Where.AND(w1, w2));
+                List<PluginEntitat> listPE = apiRestEjb.pluginEntitatEjbSelect(Where.AND(w1, w2));
 
                 if (listPE.size() != 1) {
                     // TODO XYZ ZZZ TRA
@@ -276,7 +253,7 @@ public class MobileNotificationService {
             } else {
                data.put("action", "SHOWPLUGIN");
                boolean ispublic = !(plugin.getTipus() == Constants.PLUGIN_TIPUS_FRONT_PRIVAT);
-               String seccio = seccioEjb.executeQueryOne(SeccioFields.CONTEXTE, SeccioFields.SECCIOID.equal(pluginEntitat.getSeccioID()));
+               String seccio = apiRestEjb.seccioEjbExecuteQueryOne(SeccioFields.CONTEXTE, SeccioFields.SECCIOID.equal(pluginEntitat.getSeccioID()));
                
                String url = "/#";
                if (seccio != null) {
@@ -305,7 +282,7 @@ public class MobileNotificationService {
                             new Timestamp(System.currentTimeMillis()), elapsed,
                             pluginEntitat == null ? null : pluginEntitat.getPluginID(),
                             entitat.getEntitatID());
-                    estadisticaEjb.create(est);
+                    apiRestEjb.estadisticaEjbCreate(est);
                 } catch (Throwable th) {
                     log.error("Error crean Estadistiques de Enviada Notificacio a Mòbil: "
                             + th.getMessage(), th);
@@ -364,12 +341,12 @@ public class MobileNotificationService {
         Where w1 = CiutadaFields.NIF.equal(nif);
         Where w2 = CiutadaFields.REPRESENTANTNIF.isNull();
 
-        String mobileID = ciutadaLogicaEjb.executeQueryOne(CiutadaFields.MOBILEID,
+        String mobileID = apiRestEjb.ciutadaLogicaEjbExecuteQueryOne(CiutadaFields.MOBILEID,
                 Where.AND(w1, w2));
 
         if (mobileID == null) {
             Where w3 = CiutadaFields.REPRESENTANTNIF.isNotNull();
-            mobileID = ciutadaLogicaEjb.executeQueryOne(CiutadaFields.MOBILEID, Where.AND(w1, w3));
+            mobileID = apiRestEjb.ciutadaLogicaEjbExecuteQueryOne(CiutadaFields.MOBILEID, Where.AND(w1, w3));
         }
         return mobileID;
     }
@@ -505,8 +482,7 @@ public class MobileNotificationService {
             }
 
             // Check if notificationCode exists
-            List<NotificacioApp> nList = notificacioLogicaEjb
-                    .select(NotificacioAppFields.CODI.equal(notificationCode));
+            List<NotificacioApp> nList = apiRestEjb.notificacioLogicaEjbSelect(NotificacioAppFields.CODI.equal(notificationCode));
             if (nList.size() != 1) {
                 // TODO XYZ ZZZ TRA
                 return generateError("El codi de notificacio " + notificationCode

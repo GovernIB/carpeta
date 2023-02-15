@@ -1,6 +1,7 @@
 package es.caib.carpeta.api.externa.estadistiques;
 
 
+import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -12,6 +13,7 @@ import javax.ws.rs.core.Response;
 
 import org.apache.log4j.Logger;
 
+import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.logic.AccesLogicaService;
 import es.caib.carpeta.logic.PluginDeCarpetaFrontLogicaService;
 import es.caib.carpeta.logic.PluginEntitatLogicaService;
@@ -31,6 +33,7 @@ import io.swagger.v3.oas.annotations.media.Content;
  * @author anadal (anotacions openapi)
  *
  */
+@RunAs(Constants.CAR_SUPER)
 @Path("/services")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)

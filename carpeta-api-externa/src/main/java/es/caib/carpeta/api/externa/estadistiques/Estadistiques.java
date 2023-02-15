@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.annotation.security.RunAs;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -53,10 +54,10 @@ import io.swagger.v3.oas.annotations.media.Content;
  * @author anadal (anotacions openapi)
  *
  */
+@RunAs(Constants.CAR_SUPER)
 @Path("/public/estadistiques")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-
 @OpenAPIDefinition(tags = @Tag(name = "Estadistiques", description = "Estadistiques d'Accessos"))
 public class Estadistiques {
 
