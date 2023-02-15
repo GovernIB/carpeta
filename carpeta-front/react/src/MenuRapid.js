@@ -197,7 +197,7 @@ class MenuRapid extends Component {
                                                 onClick={function(){$("#submenu"+iActiu).removeClass('show');iActiu=i;$("#submenu"+i).addClass('show');}}
                                                 >
                                         <img src={s.urllogo} title={t('iconaDe') + " " + s.nom} alt={s.nom} className="imc-icona"/>
-                                        <span className="menuRapidView lletraRapid">{s.nom}</span>
+                                        <span className="menuRapidView lletraRapid" style={{ whiteSpace: "normal"}}>{s.nom}</span>
                                     </button>
                                     <ul className="dropdown-menu maxContent" aria-labelledby={"menuRapidBoto" + i} id={"submenu"+i}>
                                         {plugins}
