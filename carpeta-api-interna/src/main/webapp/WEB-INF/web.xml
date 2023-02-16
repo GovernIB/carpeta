@@ -6,7 +6,6 @@
 
     <display-name>Carpeta: API REST INTERNA</display-name>
  
-
     <!-- Paràmetre que indica els locales soportats -->
     <context-param>
         <param-name>es.caib.carpeta.commons.rest.supportedLocales</param-name>
@@ -59,3 +58,4 @@
         <role-name>CAR_WS</role-name>
     </security-role>
 
+</web-app>
