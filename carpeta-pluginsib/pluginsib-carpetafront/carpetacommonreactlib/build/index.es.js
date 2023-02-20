@@ -3970,6 +3970,76 @@ lib.useMobileOrientation = useMobileOrientation;
 lib.withOrientationChange = withOrientationChange;
 
 /**
+ * @author [author]
+ * @email [example@mail.com]
+ * @create date 2023-02-20 08:06:34
+ * @modify date 2023-02-20 08:06:34
+ * @desc [description]
+ */
+var RowType;
+(function (RowType) {
+    RowType[RowType["NONE"] = 0] = "NONE";
+    RowType[RowType["INTERNAL_LINK"] = 1] = "INTERNAL_LINK";
+    RowType[RowType["EXTERNAL_LINK"] = 2] = "EXTERNAL_LINK";
+    RowType[RowType["DOWNLOAD_FILE"] = 3] = "DOWNLOAD_FILE";
+    RowType[RowType["OPEN_DIALOG"] = 4] = "OPEN_DIALOG";
+    RowType[RowType["SHOW_ADDITIONAL_INFO"] = 5] = "SHOW_ADDITIONAL_INFO";
+    RowType[RowType["OTHER_INFO"] = 6] = "OTHER_INFO";
+})(RowType || (RowType = {}));
+
+var RowTypeUtils = /** @class */ (function () {
+    function RowTypeUtils() {
+    }
+    RowTypeUtils.getIcon = function (rowType, color) {
+        if (color === void 0) { color = true; }
+        var colorStyle;
+        if (color == true) {
+            colorStyle = { color: "#32814B" };
+        }
+        else {
+            colorStyle = {};
+        }
+        switch (rowType) {
+            case RowType.INTERNAL_LINK:
+                return React$1.createElement("i", { className: "fas fa-external-link-square-alt fa-lg", style: colorStyle });
+            case RowType.EXTERNAL_LINK:
+                return React$1.createElement("i", { className: "fas fa-external-link-alt fa-lg", style: colorStyle });
+            case RowType.DOWNLOAD_FILE:
+                return React$1.createElement("i", { className: "fas fa-file-download fa-lg", style: colorStyle });
+            case RowType.OPEN_DIALOG:
+                return React$1.createElement("i", { className: "far fa-window-maximize fa-lg", style: colorStyle });
+            case RowType.SHOW_ADDITIONAL_INFO:
+                return React$1.createElement("i", { className: "fas fa-caret-square-down fa-lg", style: colorStyle });
+            case RowType.OTHER_INFO:
+                return React$1.createElement("i", { className: "fas fa-info-circle fa-lg", style: colorStyle });
+            case RowType.NONE:
+            default:
+                return React$1.createElement(React$1.Fragment, null);
+        }
+    };
+    RowTypeUtils.getLabel = function (rowType, i18n) {
+        switch (rowType) {
+            case RowType.INTERNAL_LINK:
+                return i18n.t("rowtype.internal_link");
+            case RowType.EXTERNAL_LINK:
+                return i18n.t("rowtype.external_link");
+            case RowType.DOWNLOAD_FILE:
+                return i18n.t("rowtype.download_file");
+            case RowType.OPEN_DIALOG:
+                return i18n.t("rowtype.open_dialog");
+            case RowType.SHOW_ADDITIONAL_INFO:
+                return i18n.t("rowtype.show_additional_info");
+            case RowType.OTHER_INFO:
+                return i18n.t("rowtype.other_info");
+            case RowType.NONE:
+            default:
+                return "";
+        }
+    };
+    return RowTypeUtils;
+}());
+
+/**
  * @author fbosch, anadal
  * @create date 2022-11-23 10:30:40
  * @modify date 2022-11-23 10:30:40
@@ -3983,9 +4053,22 @@ var RenderTableMobile = /** @class */ (function (_super) {
     RenderTableMobile.prototype.render = function () {
         var _this = this;
         console.log("Render OK: Imprimint Data RENDER TABLE MOBILE...!");
+        var rowType = (this.props.rowType == undefined ? RowType.NONE : this.props.rowType);
         var data = this.props.tableData; // Aquest valor sera this.props.dades
         var columnsNom = this.props.columnNames;
+        //console.log("MOBILE[NOM] => " + columnsNom.length);
+        //console.log("MOBILE[columnNamesAdditionals] => " + this.props.columnNamesAdditionals);
+        if (this.props.columnNamesAdditionals) {
+            //console.log("MOBILE[columnNamesAdditionals.len] => " + this.props.columnNamesAdditionals.length);
+            columnsNom = columnsNom.concat(this.props.columnNamesAdditionals);
+        }
+        //console.log("MOBILE[NOM + ADDICIO] => " + columnsNom.length);
         var titols = this.props.columnTitles;
+        //console.log("MOBILE[TITOLS] => " + titols.length);
+        if (this.props.columnTitlesAdditionals) {
+            titols = titols.concat(this.props.columnTitlesAdditionals);
+        }
+        //console.log("MOBILE[TITOLS + ADDICIO] => " + columnsNom.length);
         var content;
         content = (React$1.createElement(React$1.Fragment, null,
             React$1.createElement("div", null, data.map(function (dataInfo, i) {
@@ -3997,14 +4080,17 @@ var RenderTableMobile = /** @class */ (function (_super) {
                                     _this.props.onClickRow(i);
                                 }
                             } },
-                            React$1.createElement("p", { className: "card-text pl-1 mt-0", style: { color: "rgb(102, 102, 102)" } },
+                            React$1.createElement("div", { className: "card-text pl-1 mt-0", style: { color: "rgb(102, 102, 102)" } },
                                 React$1.createElement("b", null, titols[c]),
-                                ": ",
+                                " ",
+                                titols[c] == "" ? "" : ":",
+                                " ",
                                 dataInfo[clau])));
                     });
                 }
                 return (React$1.createElement(React$1.Fragment, null,
                     React$1.createElement("div", { className: "col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5  visioMobil cardAppVerd", key: i, tabIndex: 511 + i },
+                        (rowType != RowType.NONE && rowType != RowType.SHOW_ADDITIONAL_INFO) && React$1.createElement("div", { style: { position: "absolute", right: "10px" } }, RowTypeUtils.getIcon(rowType)),
                         React$1.createElement("div", { className: "col-sm-1 float-left" },
                             React$1.createElement("span", { className: "oi ".concat(_this.props.mobileIcon ? _this.props.mobileIcon : "oi-key", " iconaFormApp"), style: { verticalAlign: "sub" } })),
                         cardsMobile)));
@@ -4053,6 +4139,7 @@ var RenderTableDesktop = /** @class */ (function (_super) {
     RenderTableDesktop.prototype.render = function () {
         var _this = this;
         console.log("Render OK: Imprimint Data RENDER TABLE DESKTOP...!");
+        var rowType = (this.props.rowType == undefined) ? RowType.NONE : this.props.rowType;
         var data = this.props.tableData; // Aquest valor sera this.props.dades
         var columnsNom = this.props.columnNames;
         var titols = this.props.columnTitles;
@@ -4062,6 +4149,9 @@ var RenderTableDesktop = /** @class */ (function (_super) {
                 //console.log(" HEADER::[" + c + "] -> " + clau + " => " + titols[c]);
                 capTaula.push(React$1.createElement("th", { key: "header_" + c }, clau));
             });
+            if (rowType != RowType.NONE) {
+                capTaula.push(React$1.createElement("th", { key: "header_RowType" }, "\u00A0"));
+            }
         }
         return (React$1.createElement(React$1.Fragment, null,
             React$1.createElement("div", null,
@@ -4074,6 +4164,11 @@ var RenderTableDesktop = /** @class */ (function (_super) {
                             var valor = dataInfo[clau];
                             fila.push(React$1.createElement("td", { key: i + "_" + c }, valor));
                         });
+                        var columnsLength = columnsNom.length;
+                        if (rowType != RowType.NONE) {
+                            fila.push(React$1.createElement("td", { key: i + "RowType", title: RowTypeUtils.getLabel(rowType, _this.props.i18n), style: { textAlign: "center" } }, RowTypeUtils.getIcon(rowType)));
+                            columnsLength++;
+                        }
                         var filaAddicional = null;
                         if (_this.props.columnNamesAdditionals != undefined && _this.props.columnTitlesAdditionals != undefined) {
                             var filaAddicionalContent_1 = [];
@@ -4089,7 +4184,7 @@ var RenderTableDesktop = /** @class */ (function (_super) {
                                 filaAddicionalContent_1.push(valor);
                             });
                             filaAddicional = (React$1.createElement("tr", { key: "add_row_" + i, style: { display: "none" }, id: "additional_row_" + i },
-                                React$1.createElement("td", { key: "add_col_" + i, colSpan: columnsNom.length }, filaAddicionalContent_1)));
+                                React$1.createElement("td", { key: "add_col_" + i, colSpan: columnsLength }, filaAddicionalContent_1)));
                         }
                         else {
                             filaAddicional = React$1.createElement(React$1.Fragment, null);
@@ -4141,7 +4236,13 @@ var translationEN = {
 	tornar: tornar$2,
 	paginacioLabel: paginacioLabel$2,
 	registroMostra: registroMostra$2,
-	registroRegistres: registroRegistres$2
+	registroRegistres: registroRegistres$2,
+	"rowtype.internal_link": "Accedeix a una altra pàgina amb més informació d'aquest element",
+	"rowtype.external_link": "Obre una altra finestra per accedir a més informació d'aquest element",
+	"rowtype.download_file": "Descarrega un fitxer",
+	"rowtype.open_dialog": "Obre un diàleg amb més informació",
+	"rowtype.show_additional_info": "Mostra més informació en un desplegable en la mateixa pàgina",
+	"rowtype.other_info": "Mostra més informació"
 };
 
 var tornar$1 = "Volver";
@@ -4152,7 +4253,13 @@ var translationES = {
 	tornar: tornar$1,
 	paginacioLabel: paginacioLabel$1,
 	registroMostra: registroMostra$1,
-	registroRegistres: registroRegistres$1
+	registroRegistres: registroRegistres$1,
+	"rowtype.internal_link": "Accede a otra página con más información de esta entrada",
+	"rowtype.external_link": "Abre otra ventana para acceder a más información de esta entrada",
+	"rowtype.download_file": "Descarga un fichero",
+	"rowtype.open_dialog": "Abre un diálogo con más información",
+	"rowtype.show_additional_info": "Muestra más información en un desplegable en la misma página",
+	"rowtype.other_info": "Muestra más información"
 };
 
 var tornar = "Tornau";
@@ -4163,7 +4270,13 @@ var translationCA = {
 	tornar: tornar,
 	paginacioLabel: paginacioLabel,
 	registroMostra: registroMostra,
-	registroRegistres: registroRegistres
+	registroRegistres: registroRegistres,
+	"rowtype.internal_link": "Accedeix a una altra pàgina amb més informació d'aquest element",
+	"rowtype.external_link": "Obre una altra finestra per accedir a més informació d'aquest element",
+	"rowtype.download_file": "Descarrega un fitxer",
+	"rowtype.open_dialog": "Obre un diàleg amb més informació",
+	"rowtype.show_additional_info": "Mostra més informació en un desplegable en la mateixa pàgina",
+	"rowtype.other_info": "Mostra més informació"
 };
 
 /**
@@ -4364,7 +4477,7 @@ var RenderPaginationTable = /** @class */ (function (_super) {
         return (React$1.createElement(React$1.Fragment, null,
             React$1.createElement("div", { className: "infoNoMenu" },
                 React$1.createElement(RenderTable, __assign({}, this.props))),
-            React$1.createElement(PaginationCarpeta, { i18n: this.props.i18n, paginationInfo: this.props.paginationInfo })));
+            React$1.createElement(PaginationCarpeta, __assign({}, this.props))));
     };
     return RenderPaginationTable;
 }(React$1.Component));
@@ -4416,5 +4529,5 @@ var TemplatePageCarpeta = /** @class */ (function (_super) {
     return TemplatePageCarpeta;
 }(React$1.Component));
 
-export { Button, RenderPaginationTable, RenderTable, TemplatePageCarpeta };
+export { Button, RenderPaginationTable, RenderTable, RowType, RowTypeUtils, TemplatePageCarpeta };
 //# sourceMappingURL=index.es.js.map

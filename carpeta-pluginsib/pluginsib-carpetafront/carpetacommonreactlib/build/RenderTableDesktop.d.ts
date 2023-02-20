@@ -5,7 +5,7 @@
  * @desc [description]
  */
 import { Component } from "react";
-import RenderTableProps from "./RenderTableProps";
+import { RenderTableProps } from "./RenderTableProps";
 declare class RenderTableDesktop extends Component<RenderTableProps> {
     constructor(props: RenderTableProps);
     onClickTableRow(i: number): void;

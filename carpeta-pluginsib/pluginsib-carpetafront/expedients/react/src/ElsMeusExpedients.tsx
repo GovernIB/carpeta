@@ -46,21 +46,12 @@ class ElsMeusExpedients extends React.Component<ElsMeusExpedientsProps, ElsMeusE
 
   realoadData(newpage: number, numExpedientsPag: number) {
     const url = this.props.pathtoservei;
-    var params;
-
-    if(numExpedientsPag){
-      this.setState({ pagina: newpage, isLoaded: false, numExpedients: numExpedientsPag});
-      params = {
-        pagina: newpage,
-        numExpedients: numExpedientsPag,
-      };
-    }else{
-      this.setState({ pagina: newpage, isLoaded: false });
-      params = {
-        pagina: newpage,
-      };
-    }
-
+    
+    this.setState({ pagina: newpage, isLoaded: false, numExpedients: numExpedientsPag});
+    var params = {
+      pagina: newpage,
+      numExpedients: numExpedientsPag,
+    };
     
 
     console.log("Cridant a serveis REST URL: " + url);

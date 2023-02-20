@@ -2,5 +2,12 @@
     "tornar": "Back",
     "paginacioLabel": "Mostrando {{current}} entradas de {{total}} (De la posición {{from}} hasta la {{to}})",
     "registroMostra":"Show  ",
-    "registroRegistres":"  elements"
+    "registroRegistres":"  elements",
+
+    "rowtype.internal_link":"Accedeix a una altra pàgina amb més informació d'aquest element",
+    "rowtype.external_link":"Obre una altra finestra per accedir a més informació d'aquest element",
+    "rowtype.download_file":"Descarrega un fitxer",
+    "rowtype.open_dialog":"Obre un diàleg amb més informació",
+    "rowtype.show_additional_info": "Mostra més informació en un desplegable en la mateixa pàgina",
+    "rowtype.other_info": "Mostra més informació"
 }

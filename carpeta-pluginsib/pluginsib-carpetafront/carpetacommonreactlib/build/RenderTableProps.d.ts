@@ -4,7 +4,8 @@
  * @modify date 2023-01-03 08:39:29
  * @desc [description]
  */
-export default interface RenderTableProps {
+import { RowType } from "./RowType";
+export interface RenderTableProps {
     tableData: any[];
     columnNames: any[];
     columnTitles: any[];
@@ -12,4 +13,6 @@ export default interface RenderTableProps {
     columnTitlesAdditionals?: any[];
     onClickRow?: Function;
     mobileIcon?: string;
+    rowType?: RowType;
+    i18n: any;
 }

@@ -122,10 +122,7 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaPropsWithTransl
       */
       for (var i = 0; i < this.props.paginationInfo.selectElementsByPage.length; i++) {
         numElementOptions.push(
-          <option
-            key={i}
-            value={this.props.paginationInfo.selectElementsByPage[i]}
-          >
+          <option key={i} value={this.props.paginationInfo.selectElementsByPage[i]}>
             {this.props.paginationInfo.selectElementsByPage[i]}
           </option>
         );

@@ -8,7 +8,8 @@
 
 import React from "react";
 import { WithTranslation, withTranslation } from "react-i18next";
-import { TemplatePageCarpeta, PaginationCarpetaProps, RenderPaginationTable } from "carpetacommonreactlib";
+import { TemplatePageCarpeta, PaginationCarpetaProps, RenderPaginationTable, RowType, RowTypeUtils} from "carpetacommonreactlib";
+
 
 interface TaulaPaginadaTesterProps extends WithTranslation {}
 
@@ -36,6 +37,24 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
 
     var expedients = [];
 
+    let apoderaBotoContent: JSX.Element = (
+      <div style={{ width: "auto", float: "right",  position:"relative" ,  top:"0px" }} id="accedirApodera">
+        <span>
+          <button
+            className="btn btn-primary carpeta-btn botoAccedirCarpeta"
+            title="accedirLabel"
+            aria-labelledby="accedirApodera"
+            onClick={() => {
+              window.open("https://otae.fundaciobit.org", "_blank");
+            }}
+          >
+            Consulti la pàgina web&nbsp;{RowTypeUtils.getIcon(RowType.EXTERNAL_LINK, false)}
+            { /* <i className="fas fa-external-link-alt fa-lg"></i>  */ }
+          </button>
+        </span>
+      </div>
+    );
+
     for (let i = 0; i < 67; i++) {
       let num = i + 1;
       expedients.push({
@@ -45,6 +64,10 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
         codiSia: " SIA0" + num,
         expedientOrgans: "CAIB",
         expedientEstat: num % 2 == 0 ? "Obert" : "Tancat",
+        codiSia2: " SIA_22_0" + num,
+        expedientOrgans2: "Govern de les Illes",
+        expedientEstat2: num % 2 == 0 ? "Obert amb explicació" : "Tancat amb explicació",
+        boto: apoderaBotoContent
       });
     }
 
@@ -228,6 +251,7 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
         "codiSia",
         "expedientOrgans",
         "expedientEstat",
+        
       ];
 
       const columnsTitols = [
@@ -237,19 +261,21 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
         i18n.t("codiSia"),
         i18n.t("expedientOrgans"),
         i18n.t("expedientEstat"),
+
       ];
 
-
       const columnsNomAddicionals = [
-        "codiSia",
-        "expedientOrgans",
-        "expedientEstat"
+        "codiSia2",
+        "expedientOrgans2",
+        "expedientEstat2",
+        "boto"
       ];
 
       const columnsTitolsAddicionals = [
-        i18n.t("codiSia"),
-        i18n.t("expedientOrgans"),
-        i18n.t("expedientEstat")
+        i18n.t("codiSia2"),
+        i18n.t("expedientOrgans2"),
+        i18n.t("expedientEstat2"),
+        "" // BOTO
       ];
 
       const paginationInfo: PaginationCarpetaProps = {
@@ -270,6 +296,7 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
           columnTitles={columnsTitols}
           columnNamesAdditionals={columnsNomAddicionals}
           columnTitlesAdditionals={columnsTitolsAddicionals}
+          rowType={RowType.SHOW_ADDITIONAL_INFO}
           mobileIcon={"oi-clipboard"}
           paginationInfo={paginationInfo}
           i18n={i18n}
@@ -279,6 +306,8 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
 
     return (
       <>
+       <br/>
+       <hr/>
         Numero d'Elements Total:
         <button onClick={() => this.onClickCanviTotalElements(0)}> 0</button>
         <button onClick={() => this.onClickCanviTotalElements(3)}> 3</button>

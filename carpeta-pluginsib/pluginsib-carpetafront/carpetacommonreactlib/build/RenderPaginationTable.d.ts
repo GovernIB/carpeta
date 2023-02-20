@@ -6,10 +6,9 @@
  */
 import React from "react";
 import PaginationCarpetaProps from "./PaginationCarpetaProps";
-import RenderTableProps from "./RenderTableProps";
+import { RenderTableProps } from "./RenderTableProps";
 interface RenderPaginationTableProps extends RenderTableProps {
     paginationInfo: PaginationCarpetaProps;
-    i18n: any;
 }
 declare class RenderPaginationTable extends React.Component<RenderPaginationTableProps> {
     constructor(props: RenderPaginationTableProps);
