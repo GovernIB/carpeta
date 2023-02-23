@@ -188,7 +188,16 @@ class MenuRapid extends Component {
 
                             })
 
+
+                            // Si és el darrer element de la llista, l'hem d'alinear a la dreta
+                            let newStyle = {};
+                            if (this.state.items.length == (i + 1)) {
+                                newStyle= { right:"-5px", left:"auto" };
+                            }
+
                             // seccio global
+
+                            
                             allItems.push(
                                 <li className="btn-group navCarpeta pr-4" key={"global"+i}>
                                     <button type="button" className="btn btn-default dropdown-toggle p-0 lletraRapid disBlok text-verd"
@@ -199,7 +208,7 @@ class MenuRapid extends Component {
                                         <img src={s.urllogo} title={t('iconaDe') + " " + s.nom} alt={s.nom} className="imc-icona"/>
                                         <span className="menuRapidView lletraRapid" style={{ whiteSpace: "normal"}}>{s.nom}</span>
                                     </button>
-                                    <ul className="dropdown-menu maxContent" aria-labelledby={"menuRapidBoto" + i} id={"submenu"+i}>
+                                    <ul className="dropdown-menu maxContent" aria-labelledby={"menuRapidBoto" + i} id={"submenu"+i} style={newStyle}>
                                         {plugins}
                                     </ul>
                                 </li>
