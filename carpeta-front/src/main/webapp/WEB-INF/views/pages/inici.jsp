@@ -10,17 +10,20 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-	<!-- Scripts React-->
+	<%-- Scripts React--%>
     <script type="text/javascript" src="<c:url value="/src/assets/js/react.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/src/assets/js/react-dom.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/src/assets/js/babel.min.js"/>"></script>
 
-	<!-- Scripts -->
-	<!-- google analytics -->
+	
+	<%-- google analytics --%>
 	<script type="text/javascript" async="" src="<c:url value="/src/assets/js/ga.js"/>"></script>
-	<script src="<c:url value="/src/assets/js/jquery-3.5.0.js"/>"></script>
+    <%-- JQuery --%>
+	<script src="<c:url value="/src/assets/js/jquery-3.5.0.js"/>"></script>    
 	<script src="<c:url value="/src/assets/js/jquery-ui.min.js"/>"></script>
+    <%-- Bootstrap --%>
 	<script src="<c:url value="/src/assets/js/bootstrap.min.js"/>"></script>
+
 	<!-- Datetimpicker -->
 	<script src="<c:url value="/src/assets/js/moment-with-locales.min.js"/>"></script>
 	<script src="<c:url value="/src/assets/js/bootstrap-datetimepicker.js"/>"></script>
@@ -49,6 +52,14 @@
 	<link href="<c:url value="/src/assets/css/open-iconic-bootstrap.css"/>" rel="stylesheet">
 	<link href="<c:url value="/src/assets/css/jquery.dataTables.min.css"/>" rel="stylesheet">
 	<link href="<c:url value="/src/assets/css/datatables.min.css"/>" rel="stylesheet">
+    
+    
+    <%--  Font AweSome --%>
+    <link href="<c:url value="/src/assets/css/fontawesome.css"/>" rel="stylesheet">
+    <link href="<c:url value="/src/assets/css/brands.css"/>" rel="stylesheet">
+    <link href="<c:url value="/src/assets/css/solid.css"/>" rel="stylesheet">
+    
+    
 
     <link href="${pageContext.request.contextPath}/webui/customcss/${entitat}" rel="stylesheet">
 

@@ -5,7 +5,7 @@
  * @desc [description]
  */
 import React from "react";
-import RenderTableProps from "./RenderTableProps";
+import { RenderTableProps } from "./RenderTableProps";
 declare class RenderTable extends React.Component<RenderTableProps> {
     constructor(props: RenderTableProps);
     render(): JSX.Element;

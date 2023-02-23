@@ -4,7 +4,6 @@
 set STARTTIME=%1,%2
 set ENDTIME=%3,%4
 
-
 echo STARTTIME: %STARTTIME%
 echo ENDTIME:   %ENDTIME%
 
@@ -17,7 +16,6 @@ if %strlen% == 10 (
 
 
 call :strLen ENDTIME strlen
-
 
 if %strlen% == 10 (
   set ENDTIME=0%3,%4

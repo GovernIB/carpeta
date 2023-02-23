@@ -6,8 +6,8 @@
  */
 
 import React, { Component } from "react";
-import RenderTableProps from "./RenderTableProps";
-
+import { RenderTableProps} from "./RenderTableProps";
+import { RowType, RowTypeUtils } from "./RowTypeUtils";
 
 class RenderTableDesktop extends Component<RenderTableProps> {
   constructor(props: RenderTableProps) {
@@ -42,6 +42,8 @@ class RenderTableDesktop extends Component<RenderTableProps> {
   render() {
     console.log("Render OK: Imprimint Data RENDER TABLE DESKTOP...!");
 
+    let rowType: RowType = (this.props.rowType == undefined) ? RowType.NONE : this.props.rowType;
+
     var data = this.props.tableData; // Aquest valor sera this.props.dades
 
     let columnsNom: any[] = this.props.columnNames;
@@ -54,6 +56,10 @@ class RenderTableDesktop extends Component<RenderTableProps> {
         //console.log(" HEADER::[" + c + "] -> " + clau + " => " + titols[c]);
         capTaula.push(<th key={"header_" + c}>{clau}</th>);
       });
+
+      if (rowType != RowType.NONE) {
+        capTaula.push(<th key={"header_RowType"}>&nbsp;</th>);
+      }
     }
 
     return (
@@ -75,17 +81,31 @@ class RenderTableDesktop extends Component<RenderTableProps> {
                   fila.push(<td key={i + "_" + c}>{valor}</td>);
                 });
 
+                let columnsLength = columnsNom.length;
+                if (rowType != RowType.NONE) {
+                  fila.push(
+                    <td
+                      key={i + "RowType"}
+                      title={RowTypeUtils.getLabel(rowType, this.props.i18n)}
+                      style={{ textAlign: "center" }}
+                    >
+                      {RowTypeUtils.getIcon(rowType)}
+                    </td>
+                  );
+                  columnsLength++;
+                }
+
                 let filaAddicional = null;
                 if (this.props.columnNamesAdditionals != undefined && this.props.columnTitlesAdditionals != undefined) {
                   let filaAddicionalContent: JSX.Element[] = [];
                   let columnsNomAddicionals = this.props.columnNamesAdditionals;
                   let columnsTitolsAddicionals = this.props.columnTitlesAdditionals;
 
-                  columnsNomAddicionals.forEach((clauA: any, ca:number) => {
+                  columnsNomAddicionals.forEach((clauA: any, ca: number) => {
                     let valor: JSX.Element = (
                       <>
                         <b key={i + "_" + ca + "_add"}>{columnsTitolsAddicionals[ca]}</b>
-                        {columnsTitolsAddicionals[ca]==""?"":": "}
+                        {columnsTitolsAddicionals[ca] == "" ? "" : ": "}
                         {dataInfo[clauA]} <br />
                       </>
                     );
@@ -94,7 +114,9 @@ class RenderTableDesktop extends Component<RenderTableProps> {
 
                   filaAddicional = (
                     <tr key={"add_row_" + i} style={{ display: "none" }} id={"additional_row_" + i}>
-                      <td key={"add_col_" + i}  colSpan={columnsNom.length}>{filaAddicionalContent}</td>
+                      <td key={"add_col_" + i} colSpan={columnsLength}>
+                        {filaAddicionalContent}
+                      </td>
                     </tr>
                   );
                 } else {

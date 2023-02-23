@@ -39,7 +39,7 @@
     <script src="<c:url value="/src/utils/carpeta_react.js"/>" type="text/javascript"></script>
 --%>
 
-    <!-- ESTILS -->
+    <!-- ESTILS entitat.jsp-->
     <link href="<c:url value="/src/assets/css/bootstrap.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/src/assets/css/bootstrap-datetimepicker.min.css"/>" rel="stylesheet">
     <link href="<c:url value="/src/assets/css/goib.css"/>" rel="stylesheet">

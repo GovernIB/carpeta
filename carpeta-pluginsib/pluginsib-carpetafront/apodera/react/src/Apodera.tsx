@@ -8,7 +8,8 @@ import { withTranslation, WithTranslation } from "react-i18next";
 import axios from "axios";
 import i18n from "i18next";
 import * as reactdetect from "react-device-detect";
-import { TemplatePageCarpeta, RenderTable } from "carpetacommonreactlib";
+import { TemplatePageCarpeta, RenderTable, RowTypeUtils, RowType } from "carpetacommonreactlib";
+
 //import * as $ from 'jquery';
 
 interface ApoderaProps extends WithTranslation {
@@ -39,6 +40,7 @@ type ApoderaListItem = {
   apoderaBoto?: JSX.Element;
   apoderaOrganismes?: JSX.Element[];
   apoderaProcediments?: JSX.Element[];
+  apoderaTipusFila?: JSX.Element;
 };
 
 class Apodera extends React.Component<ApoderaProps, ApoderaState> {
@@ -62,10 +64,6 @@ class Apodera extends React.Component<ApoderaProps, ApoderaState> {
 
     this.canviatIdioma = this.canviatIdioma.bind(this);
     this.carregaDadesApoderaments = this.carregaDadesApoderaments.bind(this);
-
-    this.onClickRowDesktop = this.onClickRowDesktop.bind(this);
-    this.onClickRowMobile = this.onClickRowMobile.bind(this);
-    this.tancarModal = this.tancarModal.bind(this);
 
     i18n.on("languageChanged", this.canviatIdioma);
   }
@@ -154,7 +152,7 @@ class Apodera extends React.Component<ApoderaProps, ApoderaState> {
         this.setState({
           ...this.state,
           isLoaded: true,
-          dataApoderaments: res.data.apoderaments,
+          dataApoderaments: this.processarDadesApoderaments(res.data.apoderaments, res.data.poderdant),
           dataPoderdant: res.data.poderdant,
           totalComPoderdant: res.data.totalComPoderdant,
           totalComApoderat: res.data.totalComApoderat,
@@ -196,6 +194,70 @@ class Apodera extends React.Component<ApoderaProps, ApoderaState> {
           });
         }
       });
+  }
+
+  processarDadesApoderaments(apoderamentsRest: any[], dataPoderdant: any): ApoderaListItem[] {
+    let apoderaments: ApoderaListItem[] = [];
+
+    const { t } = this.props;
+
+    let accedirLabel: string = t("apoderaAccedirApoderament");
+
+    let isDesktop = !reactdetect.isMobileOnly;
+
+    let nif: string;
+    if (dataPoderdant.personaFisica) {
+      nif = dataPoderdant.personaFisica.nifNie;
+    } else {
+      nif = dataPoderdant.personaJuridica.nif;
+    }
+
+    let apoderaBotoContent: JSX.Element = (
+      <div style={{ width: "auto", float: "right", position: "relative", top: "0px" }} id="accedirApodera">
+        <span>
+          <button
+            className="btn btn-primary carpeta-btn botoAccedirCarpeta"
+            title={accedirLabel}
+            aria-labelledby="accedirApodera"
+            onClick={() => {
+              window.open(this.state.urlApodera, "_blank");
+            }}
+          >
+            {t("apoderaBotoApoderament")}&nbsp;&nbsp;
+            {RowTypeUtils.getIcon(RowType.EXTERNAL_LINK, false)}
+          </button>
+        </span>
+      </div>
+    );
+
+    {
+      apoderamentsRest.map(
+        (
+          { tipus, subtipus, estat, apoderado, poderdante, vigencia, procediments, organismes, tramits }: any,
+          i: number
+        ) => {
+          let apoderado2 = this.addNewLine(apoderado, nif, isDesktop);
+          let poderdante2 = this.addNewLine(poderdante, nif, isDesktop);
+
+          let element: ApoderaListItem = {
+            apoderaTipus: tipus,
+            apoderaAmbit: subtipus,
+            apoderaEstat: this.nomEstat(estat),
+            apoderaEstatActual: this.nomEstatActual(estat),
+            apoderaPoderdante: poderdante2,
+            apoderaApoderado: apoderado2,
+            apoderaVigencia: vigencia,
+            apoderaOrganismes: this.list2Html(organismes),
+            apoderaProcediments: this.list2Html(procediments),
+            apoderaBoto: apoderaBotoContent,
+          };
+
+          apoderaments.push(element);
+        }
+      );
+    }
+
+    return apoderaments;
   }
 
   addBold(str: string, nif: string) {
@@ -249,30 +311,6 @@ class Apodera extends React.Component<ApoderaProps, ApoderaState> {
     return htmlCode;
   }
 
-  onClickRowDesktop(i: number) {
-    //$('#Modal_Info_Apo_' + i).modal("show");
-
-    console.log("Passa per onClickRowDesktop(" + i + ") ...");
-
-    let modal: any = document.getElementById("Modal_Info_Apo_" + i);
-    modal.style.display = "block";
-    modal.classList.remove("hide");
-    modal.classList.add("show");
-  }
-
-  tancarModal(modalID: string) {
-    console.log("Passa per tancarModal(" + modalID + ") ...");
-
-    let modal: any = document.getElementById(modalID);
-    modal.style.display = "none";
-    modal.classList.remove("show");
-    modal.classList.add("hide");
-  }
-
-  onClickRowMobile(i: number) {
-    window.open(this.state.urlApodera, "_blank");
-  }
-
   render() {
     const { t, i18n } = this.props;
     let content;
@@ -291,15 +329,9 @@ class Apodera extends React.Component<ApoderaProps, ApoderaState> {
           </div>
         );
       } else {
-        if (this.state.dataApoderaments != null && this.state.dataApoderaments.length == 0) {
-          content = (
-            <div className="alert alert-secondary" role="alert">
-              {t("apoderaApoderamentsNoTrobats")}
-            </div>
-          );
-        } else if (
-          this.state.totalComApoderat + this.state.totalComPoderdant === 0 &&
-          this.state.dataApoderaments !== null
+        if (
+          this.state.dataApoderaments == null ||
+          (this.state.dataApoderaments != null && this.state.dataApoderaments.length == 0)
         ) {
           content = (
             <div className="pt-3 alert alert-secondary" style={{ float: "left", width: "95%" }} role="alert">
@@ -309,19 +341,7 @@ class Apodera extends React.Component<ApoderaProps, ApoderaState> {
         } else {
           // OK Tenim dades
 
-          let nif: string;
-          if (this.state.dataPoderdant.personaFisica) {
-            nif = this.state.dataPoderdant.personaFisica.nifNie;
-          } else {
-            nif = this.state.dataPoderdant.personaJuridica.nif;
-          }
-
-          let accedirLabel: string = t("apoderaAccedirApoderament");
-
           let informacioAddicional;
-
-          let isDesktop = !reactdetect.isMobileOnly;
-
 
           let columnsNomAddicionals = undefined;
           let columnsTitolsAddicionals = undefined;
@@ -334,16 +354,17 @@ class Apodera extends React.Component<ApoderaProps, ApoderaState> {
             "apoderaVigencia",
           ];
 
-          if (isDesktop) {
-            columnsNomAddicionals = [];
-            columnsNomAddicionals.push("apoderaEstatActual");
-            columnsNomAddicionals.push("apoderaOrganismes");
-            columnsNomAddicionals.push("apoderaProcediments");
-            columnsNomAddicionals.push("apoderaBoto");
-          } else {
+          //if (isDesktop) {
+
+          columnsNomAddicionals = [];
+          columnsNomAddicionals.push("apoderaEstatActual");
+          columnsNomAddicionals.push("apoderaOrganismes");
+          columnsNomAddicionals.push("apoderaProcediments");
+          columnsNomAddicionals.push("apoderaBoto");
+          /*} else {
             columnsNom.push("apoderaOrganismes");
             columnsNom.push("apoderaProcediments");
-          }
+          }*/
 
           let columnsTitols = [
             i18n.t("apoderaTipus"),
@@ -354,63 +375,18 @@ class Apodera extends React.Component<ApoderaProps, ApoderaState> {
             i18n.t("apoderaVigencia"),
           ];
 
-          if (isDesktop) {
-            columnsTitolsAddicionals = [];
-
-            columnsTitolsAddicionals.push(t("apoderaEstatActual"));
-            columnsTitolsAddicionals.push(t("apoderaOrganismes"));
-            columnsTitolsAddicionals.push(t("apoderaProcediments"));
-            columnsTitolsAddicionals.push(""); // "apoderaBoto" si es buit no es mostren els ":"
-          } else {
+          //if (isDesktop) {
+          columnsTitolsAddicionals = [];
+          columnsTitolsAddicionals.push(t("apoderaEstatActual"));
+          columnsTitolsAddicionals.push(t("apoderaOrganismes"));
+          columnsTitolsAddicionals.push(t("apoderaProcediments"));
+          columnsTitolsAddicionals.push(""); // "apoderaBoto" si es buit no es mostren els ":"
+          /*} else {
             columnsTitols.push(t("apoderaOrganismes"));
             columnsTitols.push(t("apoderaProcediments"));
-          }
+          }*/
 
-          let apoderaments: ApoderaListItem[] = [];
-
-          let apoderaBotoContent: JSX.Element = (
-            <div style={{ width: "auto", float: "right",  position:"relative" ,  top:"0px" }} id="accedirApodera">
-              <span>
-                <button
-                  className="btn btn-primary carpeta-btn botoAccedirCarpeta"
-                  title={accedirLabel}
-                  aria-labelledby="accedirApodera"
-                  onClick={() => {
-                    window.open(this.state.urlApodera, "_blank");
-                  }}
-                >
-                  <span className="oi oi-external-link" title="" aria-hidden="true" /> {t("apoderaBotoApoderament")}
-                </button>
-              </span>
-            </div>
-          );
-
-          {
-            this.state.dataApoderaments.map(
-              (
-                { tipus, subtipus, estat, apoderado, poderdante, vigencia, procediments, organismes, tramits }: any,
-                i: number
-              ) => {
-                let apoderado2 = this.addNewLine(apoderado, nif, isDesktop);
-                let poderdante2 = this.addNewLine(poderdante, nif, isDesktop);
-
-                let element: ApoderaListItem = {
-                  apoderaTipus: tipus,
-                  apoderaAmbit: subtipus,
-                  apoderaEstat: this.nomEstat(estat),
-                  apoderaEstatActual: this.nomEstatActual(estat),
-                  apoderaPoderdante: poderdante2,
-                  apoderaApoderado: apoderado2,
-                  apoderaVigencia: vigencia,
-                  apoderaOrganismes: this.list2Html(organismes),
-                  apoderaProcediments: this.list2Html(procediments),
-                  apoderaBoto: apoderaBotoContent,
-                };
-
-                apoderaments.push(element);
-              }
-            );
-          }
+          let apoderaments = this.state.dataApoderaments;
 
           content = (
             <div className="float-left" style={{ width: "97%", position: "relative" }}>
@@ -420,7 +396,8 @@ class Apodera extends React.Component<ApoderaProps, ApoderaState> {
                 columnTitles={columnsTitols}
                 columnNamesAdditionals={columnsNomAddicionals}
                 columnTitlesAdditionals={columnsTitolsAddicionals}
-                onClickRow={isDesktop ? undefined : this.onClickRowMobile}
+                rowType={RowType.SHOW_ADDITIONAL_INFO}
+                i18n={i18n}
               />
               {informacioAddicional}
             </div>
@@ -430,11 +407,9 @@ class Apodera extends React.Component<ApoderaProps, ApoderaState> {
     }
 
     return (
-      <>
-        <TemplatePageCarpeta {...this.props} titles={this.props.titles} subtitles={this.props.subtitles} i18n={i18n}>
-          {content}
-        </TemplatePageCarpeta>
-      </>
+      <TemplatePageCarpeta {...this.props} titles={this.props.titles} subtitles={this.props.subtitles} i18n={i18n}>
+        {content}
+      </TemplatePageCarpeta>
     );
   }
 }

@@ -9,7 +9,7 @@ import React from "react";
 import * as reactdetect from "react-device-detect";
 import RenderTableMobile from "./RenderTableMobile";
 import RenderTableDesktop from "./RenderTableDesktop";
-import RenderTableProps from "./RenderTableProps";
+import {RenderTableProps} from "./RenderTableProps";
 
 class RenderTable extends React.Component<RenderTableProps> {
   constructor(props: RenderTableProps) {
