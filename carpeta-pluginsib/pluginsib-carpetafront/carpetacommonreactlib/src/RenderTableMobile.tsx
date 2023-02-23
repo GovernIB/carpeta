@@ -6,11 +6,11 @@
  */
 
 import React from "react";
-import { RenderTableProps} from "./RenderTableProps";
+import { RenderInternalTableProps} from "./RenderTableProps";
 import { RowType, RowTypeUtils } from "./RowTypeUtils";
 
-class RenderTableMobile extends React.Component<RenderTableProps> {
-  constructor(props: RenderTableProps) {
+class RenderTableMobile extends React.Component<RenderInternalTableProps> {
+  constructor(props: RenderInternalTableProps) {
     super(props);
   }
 

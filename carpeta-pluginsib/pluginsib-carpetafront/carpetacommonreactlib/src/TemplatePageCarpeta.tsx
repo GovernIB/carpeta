@@ -26,7 +26,7 @@ class TemplatePageCarpeta extends React.Component<TemplatePageCarpetaProps> {
   }
 
   render() {
-    console.log("  RENDER TemplatePageCarpeta !!!!!");
+    //console.log("TemplatePageCarpeta::render() Start");
 
     let i18n = this.props.i18n;
 

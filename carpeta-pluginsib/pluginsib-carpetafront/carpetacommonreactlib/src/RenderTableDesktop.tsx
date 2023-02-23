@@ -6,16 +6,18 @@
  */
 
 import React, { Component } from "react";
-import { RenderTableProps} from "./RenderTableProps";
+import { RenderInternalTableProps } from "./RenderTableProps";
 import { RowType, RowTypeUtils } from "./RowTypeUtils";
 
-class RenderTableDesktop extends Component<RenderTableProps> {
-  constructor(props: RenderTableProps) {
+class RenderTableDesktop extends Component<RenderInternalTableProps> {
+  constructor(props: RenderInternalTableProps) {
     super(props);
 
     this.onClickTableRow = this.onClickTableRow.bind(this);
     this.mostrarMesInfo = this.mostrarMesInfo.bind(this);
   }
+
+  componentDidMount() {}
 
   onClickTableRow(i: number) {
     if (this.props.columnNamesAdditionals == undefined) {
@@ -40,11 +42,11 @@ class RenderTableDesktop extends Component<RenderTableProps> {
   }
 
   render() {
-    console.log("Render OK: Imprimint Data RENDER TABLE DESKTOP...!");
-
-    let rowType: RowType = (this.props.rowType == undefined) ? RowType.NONE : this.props.rowType;
+    console.log("RenderTableDesktop::render() Start ...");
 
     var data = this.props.tableData; // Aquest valor sera this.props.dades
+
+    let rowType: RowType = this.props.rowType == undefined ? RowType.NONE : this.props.rowType;
 
     let columnsNom: any[] = this.props.columnNames;
 

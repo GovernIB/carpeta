@@ -5,9 +5,10 @@
  * @desc [description]
  */
 import { Component } from "react";
-import { RenderTableProps } from "./RenderTableProps";
-declare class RenderTableDesktop extends Component<RenderTableProps> {
-    constructor(props: RenderTableProps);
+import { RenderInternalTableProps } from "./RenderTableProps";
+declare class RenderTableDesktop extends Component<RenderInternalTableProps> {
+    constructor(props: RenderInternalTableProps);
+    componentDidMount(): void;
     onClickTableRow(i: number): void;
     mostrarMesInfo(row: string): void;
     render(): JSX.Element;

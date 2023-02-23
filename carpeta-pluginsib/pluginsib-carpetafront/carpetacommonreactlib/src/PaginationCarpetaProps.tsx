@@ -5,13 +5,36 @@
  * @desc [description]
  */
 
-export default interface PaginationCarpetaProps {
+import { RenderCommonTableProps, RenderTableData } from "./RenderTableProps";
+
+export interface RenderPaginationTableData extends RenderTableData {
+  paginationInfo: PaginationInfo | null;
+}
+
+export interface PaginationInfo {
   paginaActual: number;
   elementsPerPagina: number;
   totalPagines: number;
-  registresRetornats: number;
-  totalRegistres: number;
-  onClickPagination: Function;
-  onClickSelectElementsByPage?: Function;
-  selectElementsByPage?: number[];
+  elementsRetornats: number;
+  totalElements: number;
+}
+
+export interface PaginationCarpetaProps {
+  // undefined significa valor per defecte, o sigui RenderPaginationTable.DEFAULT_SELECT_ELEMENTS_BY_PAGE
+  // mentre que null significa no mostrar 
+  selectElementsByPage?: number[] | null;
+  onClickPagination(page: number):void;
+  onClickSelectElementsByPage(elementsByPage: number):void;
+  i18n: any;
+}
+
+export interface ReturnPaginationData {
+  page: number;
+  elementsByPage: number;
+  returnDataFunction(data:RenderPaginationTableData):void;
+}
+
+export interface RenderPaginationTableProps extends RenderCommonTableProps {
+  loadPaginatedData(returnData: ReturnPaginationData): void;
+  selectElementsByPage?: number[] | null;
 }

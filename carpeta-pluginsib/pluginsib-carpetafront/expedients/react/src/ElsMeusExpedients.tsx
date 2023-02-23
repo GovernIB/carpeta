@@ -1,14 +1,19 @@
 /**
  * @author anadal
  * @create date 2022-11-16 10:30:40
- * @modify date 2022-11-16 10:30:40
- * @desc [description]
+ * @modify date 2023-02-22 08:04:20
  */
 
 import React from "react";
 import { WithTranslation, withTranslation } from "react-i18next";
 import axios from "axios";
-import { TemplatePageCarpeta, PaginationCarpetaProps, RenderPaginationTable } from "carpetacommonreactlib";
+import {
+  TemplatePageCarpeta,
+  RenderPaginationTable,
+  RenderPaginationTableData,
+  PaginationInfo,
+  ReturnPaginationData,
+} from "carpetacommonreactlib";
 
 interface ElsMeusExpedientsProps extends WithTranslation {
   pathtoservei: string;
@@ -16,58 +21,48 @@ interface ElsMeusExpedientsProps extends WithTranslation {
   subtitles: any;
 }
 
-type ElsMeusExpedientsState = {
-  isLoaded: boolean;
-  pagina: number;
-  numExpedients: number;
-  expedientresposta: any;
-  error: string | null;
-};
-
-class ElsMeusExpedients extends React.Component<ElsMeusExpedientsProps, ElsMeusExpedientsState> {
+class ElsMeusExpedients extends React.Component<ElsMeusExpedientsProps> {
   constructor(props: ElsMeusExpedientsProps) {
     super(props);
-    console.log("  CONSTRUCTOR ElsMeusExpedients !!!!!");
-    this.state = {
-      isLoaded: false,
-      expedientresposta: null,
-      error: null,
-      pagina: 0,
-      numExpedients: 5,
-    };
-    this.onClickPagination = this.onClickPagination.bind(this);
-    this.onClickElementsByPage = this.onClickElementsByPage.bind(this);
-    this.realoadData = this.realoadData.bind(this);
+    this.loadPaginatedData = this.loadPaginatedData.bind(this);
   }
 
-  componentDidMount() {
-    this.realoadData(0, this.state.numExpedients);
-  }
+  loadPaginatedData(loadData: ReturnPaginationData) {
+    let page: number = loadData.page;
+    let elementsByPage: number = loadData.elementsByPage;
 
-  realoadData(newpage: number, numExpedientsPag: number) {
-    const url = this.props.pathtoservei;
-    
-    this.setState({ pagina: newpage, isLoaded: false, numExpedients: numExpedientsPag});
-    var params = {
-      pagina: newpage,
-      numExpedients: numExpedientsPag,
+    console.log("ElsMeusExpedients:loadPaginatedData() => Page: " + page + " | elementsByPage: " + elementsByPage);
+
+    let url = this.props.pathtoservei;
+
+    let params = {
+      pagina: page,
+      elementsperpagina: elementsByPage,
     };
-    
 
-    console.log("Cridant a serveis REST URL: " + url);
-    console.log("Cridant a serveis REST PARAMS: " + params);
+    console.log("ElsMeusExpedients:loadPaginatedData() => Cridant a serveis REST URL: " + url);
+    console.log("ElsMeusExpedients:loadPaginatedData() => Cridant a serveis REST PARAMS: " + params);
 
     axios
       .get(url, { params: params })
       .then((response) => {
         if (response.data != null) {
-          // response.data conté un objecte de tipus ExpedientResposta.java
-          this.setState({
-            ...this.state,
-            expedientresposta: response.data,
+          let expedientresposta: any = response.data;
+
+          let paginationInfo: PaginationInfo = {
+            paginaActual: expedientresposta.paginaActual,
+            elementsPerPagina: expedientresposta.elementsPerPagina,
+            totalPagines: expedientresposta.totalPagines,
+            elementsRetornats: expedientresposta.registresRetornats,
+            totalElements: expedientresposta.totalRegistres,
+          };
+
+          let data: RenderPaginationTableData = {
+            paginationInfo: paginationInfo,
+            tableData: expedientresposta.expedients,
             error: null,
-            isLoaded: true,
-          });
+          };
+          loadData.returnDataFunction(data);
         }
       })
       .catch((error) => {
@@ -80,113 +75,52 @@ class ElsMeusExpedients extends React.Component<ElsMeusExpedientsProps, ElsMeusE
         if (JSON.stringify(error).toString().includes("Request failed with status code 500")) {
           var errorPantalla = error.response.data.replace("<html><head><title>Error</title></head><body>", "");
           errorPantalla = errorPantalla.replace("</body></html>", "");
-          this.setState({
-            error: errorPantalla,
-            isLoaded: true,
-          });
         } else {
-          this.setState({
-            error: JSON.stringify(error),
-            isLoaded: true,
-          });
+          errorPantalla = JSON.stringify(error);
         }
+
+        let data: RenderPaginationTableData = {
+          paginationInfo: null,
+          tableData: null,
+          error: errorPantalla,
+        };
+
+        loadData.returnDataFunction(data);
       });
   }
 
-  onClickPagination(page: number) {
-    console.log("Clicat sobre paginacio ]" + page + "[");
-
-    this.realoadData(page, this.state.numExpedients);
-  }
-
-  onClickElementsByPage(numElements: number) {
-    console.log("Clicat sobre num de elements per pagina ]" + numElements + "[");
-
-    this.realoadData(0, numElements);
-  }
-
   render() {
-    console.log("  RENDER ElsMeusExpedients !!!!!");
+    console.log("ElsMeusExpedients:loadPaginatedData() =>  RENDER ElsMeusExpedients !!!!!");
 
     const { i18n } = this.props;
 
-    let content;
+    const columnsNom = [
+      "expedientObertura",
+      "expedientNom",
+      "nomProcediment",
+      "codiSia",
+      "expedientOrgans",
+      "expedientEstat",
+    ];
 
-    if (!this.state.isLoaded) {
-      console.log(" No esta carregat ... ");
-      content = (
-        <div id="carregant" className="loader-container centrat ">
-          <div className="loader" />
-        </div>
-      );
-    } else if (this.state.error) {
-      console.log(" Error: ]" + this.state.error + "|");
-      content = (
-        <div className="alert alert-danger" role="alert">
-          {this.state.error}
-        </div>
-      );
-    } else {
-      /**
-        ExpedientResposta {
-
-            protected int paginaActual;
-            protected int elementsPerPagina;
-        
-            protected int totalPagines;
-            protected int registresRetornats;
-            protected int totalRegistres;
-        
-            protected List<ExpedientInfo> expedients;
-        }
-      */
-
-      console.log("Render OK: Imprimint Expedients ...!");
-
-      var expedients = this.state.expedientresposta.expedients;
-
-      const columnsNom = [
-        "expedientObertura",
-        "expedientNom",
-        "nomProcediment",
-        "codiSia",
-        "expedientOrgans",
-        "expedientEstat"
-      ];
-
-      const columnsTitols = [
-        i18n.t("expedientObertura"),
-        i18n.t("expedientNom"),
-        i18n.t("nomProcediment"),
-        i18n.t("codiSia"),
-        i18n.t("expedientOrgans"),
-        i18n.t("expedientEstat")
-      ];
-
-      const paginationInfo: PaginationCarpetaProps = {
-        paginaActual: this.state.expedientresposta.paginaActual,
-        elementsPerPagina: this.state.expedientresposta.elementsPerPagina,
-        totalPagines: this.state.expedientresposta.totalPagines,
-        registresRetornats: this.state.expedientresposta.registresRetornats,
-        totalRegistres: this.state.expedientresposta.totalRegistres,
-        onClickPagination: this.onClickPagination,
-        onClickSelectElementsByPage: this.onClickElementsByPage
-      };
-      content = (
-        <RenderPaginationTable
-          tableData={expedients}
-          columnNames={columnsNom}
-          columnTitles={columnsTitols}
-          mobileIcon={"oi-clipboard"}
-          paginationInfo={paginationInfo}
-          i18n={i18n}
-        />
-      );
-    }
+    const columnsTitols = [
+      i18n.t("expedientObertura"),
+      i18n.t("expedientNom"),
+      i18n.t("nomProcediment"),
+      i18n.t("codiSia"),
+      i18n.t("expedientOrgans"),
+      i18n.t("expedientEstat"),
+    ];
 
     return (
       <TemplatePageCarpeta {...this.props} titles={this.props.titles} subtitles={this.props.subtitles} i18n={i18n}>
-        {content}
+        <RenderPaginationTable
+          loadPaginatedData={this.loadPaginatedData}
+          columnNames={columnsNom}
+          columnTitles={columnsTitols}
+          mobileIcon={"oi-clipboard"}
+          i18n={i18n}
+        />
       </TemplatePageCarpeta>
     );
   }

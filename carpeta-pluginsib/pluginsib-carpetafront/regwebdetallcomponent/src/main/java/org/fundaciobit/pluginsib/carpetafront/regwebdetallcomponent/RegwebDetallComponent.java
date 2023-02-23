@@ -360,6 +360,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
             try {
             	justificantRegistre = getJustificantRegistre(numeroRegistroFormateado, Long.valueOf(tipoRegistro), locale);
             }catch(Exception e){
+                log.error("Error obtenint justificant: " + e.getMessage(), e);
                 justificantRegistre = null;
             }
             

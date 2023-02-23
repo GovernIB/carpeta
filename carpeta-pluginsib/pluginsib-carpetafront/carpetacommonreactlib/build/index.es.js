@@ -4114,6 +4114,7 @@ var RenderTableDesktop = /** @class */ (function (_super) {
         _this.mostrarMesInfo = _this.mostrarMesInfo.bind(_this);
         return _this;
     }
+    RenderTableDesktop.prototype.componentDidMount = function () { };
     RenderTableDesktop.prototype.onClickTableRow = function (i) {
         if (this.props.columnNamesAdditionals == undefined) {
             if (this.props.onClickRow) {
@@ -4138,9 +4139,9 @@ var RenderTableDesktop = /** @class */ (function (_super) {
     };
     RenderTableDesktop.prototype.render = function () {
         var _this = this;
-        console.log("Render OK: Imprimint Data RENDER TABLE DESKTOP...!");
-        var rowType = (this.props.rowType == undefined) ? RowType.NONE : this.props.rowType;
+        console.log("RenderTableDesktop::render() Start ...");
         var data = this.props.tableData; // Aquest valor sera this.props.dades
+        var rowType = this.props.rowType == undefined ? RowType.NONE : this.props.rowType;
         var columnsNom = this.props.columnNames;
         var titols = this.props.columnTitles;
         var capTaula = [];
@@ -4213,16 +4214,75 @@ var RenderTable = /** @class */ (function (_super) {
     __extends(RenderTable, _super);
     function RenderTable(props) {
         var _this = _super.call(this, props) || this;
+        _this.state = {
+            isLoaded: false,
+            tableData: null,
+            error: null,
+        };
+        _this.updateTableData = _this.updateTableData.bind(_this);
+        //this.carregarDadesAsync = this.carregarDadesAsync.bind(this);
         console.log("  CONSTRUCTOR RenderTable !!!!!");
         return _this;
     }
-    RenderTable.prototype.render = function () {
-        //console.log("Render OK: Imprimint Data RENDER TABLE...!");
-        if (!isMobileOnly_1) {
-            return React$1.createElement(RenderTableDesktop, __assign({}, this.props));
+    RenderTable.prototype.componentDidMount = function () {
+        if (this.props.loadData != undefined) {
+            var returnData = {
+                returnDataFunction: this.updateTableData
+            };
+            this.props.loadData(returnData);
+        }
+    };
+    RenderTable.prototype.updateTableData = function (dades) {
+        if (dades == null) {
+            console.log("RenderTable::updateTableData(CARREGANT...)");
+            this.setState({ isLoaded: false, tableData: null, error: null });
         }
         else {
-            return React$1.createElement(RenderTableMobile, __assign({}, this.props));
+            console.log("RenderTable::updateTableData(CARREGAR DADES ...)");
+            this.setState({ isLoaded: true, tableData: dades.tableData, error: dades.error });
+        }
+    };
+    /*
+    async carregarDadesAsync() {
+      if (this.props.automaticLoadData == true) {
+        let dades: RenderTableData = this.props.loadData();
+        this.setState({ isLoaded: true, tableData: dades.tableData, error: dades.error });
+      }
+    }
+    */
+    RenderTable.prototype.render = function () {
+        console.log("RenderTable::render() => Start");
+        if (!this.state.isLoaded) {
+            return (React$1.createElement("div", { id: "carregant", className: "loader-container centrat " },
+                React$1.createElement("div", { className: "loader" })));
+        }
+        if (this.state.error != null) {
+            return (React$1.createElement("div", { className: "alert alert-danger", role: "alert" }, this.state.error));
+        }
+        if (this.state.tableData == null || (this.state.tableData != null && this.state.tableData.length == 0)) {
+            return (React$1.createElement("div", { className: "alert alert-warning", role: "alert" }, this.props.i18n.t("taulaBuida")));
+        }
+        /*
+        let currentProps: RenderInternalTableProps = {
+          columnNames: this.props.columnNames,
+          columnTitles: this.props.columnTitles,
+          columnNamesAdditionals: this.props.columnNamesAdditionals,
+          columnTitlesAdditionals: this.props.columnTitlesAdditionals,
+          onClickRow: this.props.onClickRow,
+          mobileIcon: this.props.mobileIcon,
+          rowType: this.props.rowType,
+          i18n: this.props.i18n,
+          //loadData: this.props.loadData,
+          automaticLoadData: false,
+          tableData: this.state.tableData,
+        };
+        */
+        // OK Tenim dades
+        if (!isMobileOnly_1) {
+            return React$1.createElement(RenderTableDesktop, __assign({}, this.props, { tableData: this.state.tableData }));
+        }
+        else {
+            return React$1.createElement(RenderTableMobile, __assign({}, this.props, { tableData: this.state.tableData }));
         }
     };
     return RenderTable;
@@ -4232,11 +4292,13 @@ var tornar$2 = "Back";
 var paginacioLabel$2 = "Mostrando {{current}} entradas de {{total}} (De la posición {{from}} hasta la {{to}})";
 var registroMostra$2 = "Show  ";
 var registroRegistres$2 = "  elements";
+var taulaBuida$2 = "No hay elementos para mostrar";
 var translationEN = {
 	tornar: tornar$2,
 	paginacioLabel: paginacioLabel$2,
 	registroMostra: registroMostra$2,
 	registroRegistres: registroRegistres$2,
+	taulaBuida: taulaBuida$2,
 	"rowtype.internal_link": "Accedeix a una altra pàgina amb més informació d'aquest element",
 	"rowtype.external_link": "Obre una altra finestra per accedir a més informació d'aquest element",
 	"rowtype.download_file": "Descarrega un fitxer",
@@ -4249,11 +4311,13 @@ var tornar$1 = "Volver";
 var paginacioLabel$1 = "Mostrando elementos del {{from}} al {{to}} de un total de {{total}}";
 var registroMostra$1 = "Muestra  ";
 var registroRegistres$1 = "  elementos";
+var taulaBuida$1 = "No hay elementos para mostrar";
 var translationES = {
 	tornar: tornar$1,
 	paginacioLabel: paginacioLabel$1,
 	registroMostra: registroMostra$1,
 	registroRegistres: registroRegistres$1,
+	taulaBuida: taulaBuida$1,
 	"rowtype.internal_link": "Accede a otra página con más información de esta entrada",
 	"rowtype.external_link": "Abre otra ventana para acceder a más información de esta entrada",
 	"rowtype.download_file": "Descarga un fichero",
@@ -4266,11 +4330,13 @@ var tornar = "Tornau";
 var paginacioLabel = "Mostrant elements del {{from}} al {{to}} d'un total de {{total}}";
 var registroMostra = "Mostra  ";
 var registroRegistres = "  elements";
+var taulaBuida = "No hi ha elements a mostrar";
 var translationCA = {
 	tornar: tornar,
 	paginacioLabel: paginacioLabel,
 	registroMostra: registroMostra,
 	registroRegistres: registroRegistres,
+	taulaBuida: taulaBuida,
 	"rowtype.internal_link": "Accedeix a una altra pàgina amb més informació d'aquest element",
 	"rowtype.external_link": "Obre una altra finestra per accedir a més informació d'aquest element",
 	"rowtype.download_file": "Descarrega un fitxer",
@@ -4322,107 +4388,132 @@ var PaginationCarpeta = /** @class */ (function (_super) {
     __extends(PaginationCarpeta, _super);
     function PaginationCarpeta(props) {
         var _this = _super.call(this, props) || this;
-        /*
         console.log("  CONSTRUCTOR PaginationCarpeta !!!!!");
-    
-        console.log(
-          "PaginationCarpeta().paginaActual  => " +
-            this.props.paginationInfo.paginaActual
-        );
-        console.log(
-          "PaginationCarpeta().elementsPerPagina  => " +
-            this.props.paginationInfo.elementsPerPagina
-        );
-        console.log(
-          "PaginationCarpeta().totalPagines  => " +
-            this.props.paginationInfo.totalPagines
-        );
-        console.log(
-          "PaginationCarpeta().registresRetornats  => " +
-            this.props.paginationInfo.registresRetornats
-        );
-        console.log(
-          "PaginationCarpeta().totalRegistres  => " +
-            this.props.paginationInfo.totalRegistres
-        );
-    */
+        /*
+            console.log(
+              "PaginationCarpeta().paginaActual  => " +
+                this.props.paginationInfo.paginaActual
+            );
+            console.log(
+              "PaginationCarpeta().elementsPerPagina  => " +
+                this.props.paginationInfo.elementsPerPagina
+            );
+            console.log(
+              "PaginationCarpeta().totalPagines  => " +
+                this.props.paginationInfo.totalPagines
+            );
+            console.log(
+              "PaginationCarpeta().registresRetornats  => " +
+                this.props.paginationInfo.registresRetornats
+            );
+            console.log(
+              "PaginationCarpeta().totalRegistres  => " +
+                this.props.paginationInfo.totalRegistres
+            );
+        */
         initTranslation(_this.props.i18n);
+        _this.updatePaginationInfo = _this.updatePaginationInfo.bind(_this);
+        _this.state = {
+            paginationInfo: null
+        };
         return _this;
     }
-    PaginationCarpeta.prototype.render = function () {
-        console.log("  RENDER PaginationCarpeta !!!!!");
-        if (this.props.paginationInfo.selectElementsByPage == undefined) {
-            this.props.paginationInfo.selectElementsByPage = [5, 10, 25];
-        }
-        var current = this.props.paginationInfo.registresRetornats;
-        var total = this.props.paginationInfo.totalRegistres;
-        var from = this.props.paginationInfo.paginaActual * this.props.paginationInfo.elementsPerPagina + 1;
-        var to = Math.min(this.props.paginationInfo.totalRegistres, (1 + this.props.paginationInfo.paginaActual) * this.props.paginationInfo.elementsPerPagina);
-        var pagines = [];
-        var onClick = this.props.paginationInfo.onClickPagination;
-        var onClickSelectElementsByPage = this.props.paginationInfo.onClickSelectElementsByPage;
-        //Si el parametre onClickSelectElementsByPage te valor, existeix una funcio per canviar el nº de elements
-        // per tant s'ha de incloure l'element per canviar el nº de elements.
-        // Si el parametre elementsByPage te valors, agafarlos, si no, agafar 5, 10 i 25 per defecte.
-        // First
-        pagines.push(React$1.createElement(PaginationItemCarpeta, { value: 0, onClick: onClick }, "\u00AB"));
-        // Previous
-        pagines.push(React$1.createElement(PaginationItemCarpeta, { value: Math.max(0, this.props.paginationInfo.paginaActual - 1), onClick: onClick }, "\u2039"));
-        // All pagination numbers
-        {
-            for (var i_1 = 0; i_1 < this.props.paginationInfo.totalPagines; i_1++) {
-                pagines.push(React$1.createElement(PaginationItemCarpeta, { key: i_1, value: i_1, onClick: onClick, active: this.props.paginationInfo.paginaActual == i_1 }, "" + (i_1 + 1)));
-            }
-        }
-        // next
-        pagines.push(React$1.createElement(PaginationItemCarpeta, { value: Math.min(this.props.paginationInfo.paginaActual + 1, this.props.paginationInfo.totalPagines - 1), onClick: onClick }, "\u203A"));
-        // Last
-        pagines.push(React$1.createElement(PaginationItemCarpeta, { value: this.props.paginationInfo.totalPagines - 1, onClick: onClick }, "\u00BB"));
-        //Options per numero de elements a pintar per pagina
-        var numElements = React$1.createElement(React$1.Fragment, null);
-        if (onClickSelectElementsByPage) {
-            var numElementOptions = [];
-            //this.props.paginationInfo.elementsByPage.map((element) => numElementOptions.push(<option>{element}</option>));
-            /*for (var i in this.props.paginationInfo.elementsByPage) {
-              console.log("XYZ ZZZ Assignant valor numElements.");
-              numElementOptions.push(
-                <option key={i}>{this.props.paginationInfo.elementsByPage[i]}</option>
-              );
-            }
-            */
-            for (var i = 0; i < this.props.paginationInfo.selectElementsByPage.length; i++) {
-                numElementOptions.push(React$1.createElement("option", { key: i, value: this.props.paginationInfo.selectElementsByPage[i] }, this.props.paginationInfo.selectElementsByPage[i]));
-            }
-            numElements = (React$1.createElement("div", { className: "pagination", style: {
-                    float: "none",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginRight: "10px",
-                } },
-                this.props.i18n.t("registroMostra"),
-                React$1.createElement("select", { defaultValue: this.props.paginationInfo.elementsPerPagina, onChange: function (e) {
-                        if (onClickSelectElementsByPage) {
-                            onClickSelectElementsByPage(e.target.value);
-                        }
-                    } }, numElementOptions),
-                this.props.i18n.t("registroRegistres")));
+    PaginationCarpeta.prototype.updatePaginationInfo = function (paginationInfo) {
+        if (paginationInfo == null) {
+            console.log("PaginationCarpeta::updatePaginationInfo(CARREGANT...)");
         }
         else {
-            console.log("No s'ha definit la funció onClickSelectElementsByPage.");
+            console.log("PaginationCarpeta::updatePaginationInfo(CARREGAR DADES ...)");
         }
+        this.setState({ paginationInfo: paginationInfo });
+    };
+    PaginationCarpeta.prototype.render = function () {
+        console.log("PaginationCarpeta::render() =>  START");
+        var paginationInfo = this.state.paginationInfo;
+        if (paginationInfo == null || paginationInfo.totalElements == 0) {
+            //console.log("PaginationCarpeta::render() =>  paginationInfo == null");
+            return React$1.createElement(React$1.Fragment, null);
+        }
+        //console.log("PaginationCarpeta::render() =>  this.props.paginationInfo ...");
+        var current = paginationInfo.elementsRetornats;
+        var total = paginationInfo.totalElements;
+        var from = paginationInfo.paginaActual * paginationInfo.elementsPerPagina + 1;
+        var to = Math.min(paginationInfo.totalElements, (1 + paginationInfo.paginaActual) * paginationInfo.elementsPerPagina);
         /* Mostrant elements del {{from}} al {{to}} d'un total de {{total}} elements*/
+        //console.log("PaginationCarpeta::render() =>  Desplegable elementsPerPàgina ...");
         var message = this.props.i18n.t("paginacioLabel", {
             current: current,
             total: total,
             from: from,
             to: to,
         });
-        var pagination = (React$1.createElement("nav", { "aria-label": "Page navigation" },
-            React$1.createElement("ul", { key: "pn_1", className: "pagination", style: {
-                    float: "none",
-                    alignItems: "center",
-                    justifyContent: "center",
-                } }, pagines)));
+        var onClick = this.props.onClickPagination;
+        var onClickSelectElementsByPage = undefined;
+        var pagination = React$1.createElement(React$1.Fragment, null);
+        var numElements = React$1.createElement(React$1.Fragment, null);
+        if (paginationInfo.totalPagines != 1) {
+            //console.log("PaginationCarpeta::render() =>  selectElementsByPage ...");
+            onClickSelectElementsByPage = this.props.onClickSelectElementsByPage;
+            //console.log("PaginationCarpeta::render() =>  Functions ...");
+            //Si el parametre onClickSelectElementsByPage te valor, existeix una funcio per canviar el nº de elements
+            // per tant s'ha de incloure l'element per canviar el nº de elements.
+            // Si el parametre elementsByPage te valors, agafarlos, si no, agafar 5, 10 i 25 per defecte.
+            //console.log("PaginationCarpeta::render() =>  pagines ...");
+            var pagines = [];
+            // First
+            pagines.push(React$1.createElement(PaginationItemCarpeta, { value: 0, onClick: onClick }, "\u00AB"));
+            // Previous
+            pagines.push(React$1.createElement(PaginationItemCarpeta, { value: Math.max(0, paginationInfo.paginaActual - 1), onClick: onClick }, "\u2039"));
+            // All pagination numbers
+            {
+                for (var i_1 = 0; i_1 < paginationInfo.totalPagines; i_1++) {
+                    pagines.push(React$1.createElement(PaginationItemCarpeta, { key: i_1, value: i_1, onClick: onClick, active: paginationInfo.paginaActual == i_1 }, "" + (i_1 + 1)));
+                }
+            }
+            // next
+            pagines.push(React$1.createElement(PaginationItemCarpeta, { value: Math.min(paginationInfo.paginaActual + 1, paginationInfo.totalPagines - 1), onClick: onClick }, "\u203A"));
+            // Last
+            pagines.push(React$1.createElement(PaginationItemCarpeta, { value: paginationInfo.totalPagines - 1, onClick: onClick }, "\u00BB"));
+            //Options per numero de elements a pintar per pagina
+            //console.log("PaginationCarpeta::render() =>  onClickSelectElementsByPage ...");
+            var selectElementsByPage = this.props.selectElementsByPage;
+            if (selectElementsByPage == undefined) {
+                selectElementsByPage = RenderPaginationTable$1.DEFAULT_SELECT_ELEMENTS_BY_PAGE;
+            }
+            if (selectElementsByPage != null) {
+                var numElementOptions = [];
+                //this.props.paginationInfo.elementsByPage.map((element) => numElementOptions.push(<option>{element}</option>));
+                /*for (var i in this.props.paginationInfo.elementsByPage) {
+                  console.log("XYZ ZZZ Assignant valor numElements.");
+                  numElementOptions.push(
+                    <option key={i}>{this.props.paginationInfo.elementsByPage[i]}</option>
+                  );
+                }
+                */
+                for (var i = 0; i < selectElementsByPage.length; i++) {
+                    numElementOptions.push(React$1.createElement("option", { key: i, value: selectElementsByPage[i] }, selectElementsByPage[i]));
+                }
+                numElements = (React$1.createElement("div", { className: "pagination", style: {
+                        float: "none",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        marginRight: "10px",
+                    } },
+                    this.props.i18n.t("registroMostra"),
+                    React$1.createElement("select", { defaultValue: paginationInfo.elementsPerPagina, onChange: function (e) {
+                            if (onClickSelectElementsByPage) {
+                                onClickSelectElementsByPage(e.target.value);
+                            }
+                        } }, numElementOptions),
+                    this.props.i18n.t("registroRegistres")));
+            }
+            pagination = (React$1.createElement("nav", { "aria-label": "Page navigation" },
+                React$1.createElement("ul", { key: "pn_1", className: "pagination", style: {
+                        float: "none",
+                        alignItems: "center",
+                        justifyContent: "center",
+                    } }, pagines)));
+        }
         if (isMobileOnly_1) {
             if (onClickSelectElementsByPage) {
                 return (React$1.createElement("center", null,
@@ -4466,21 +4557,102 @@ var PaginationCarpeta = /** @class */ (function (_super) {
  * @modify date 2022-12-28 13:46:48
  * @desc [description]
  */
+// XYZ ZZZ import { RenderTableData } from "./RenderTableProps";
 var RenderPaginationTable = /** @class */ (function (_super) {
     __extends(RenderPaginationTable, _super);
     function RenderPaginationTable(props) {
         var _this = _super.call(this, props) || this;
-        console.log("  CONSTRUCTOR RenderPaginationTable !!!!!");
+        _this.childRenderTable = React$1.createRef();
+        _this.childRenderPagination = React$1.createRef();
+        console.log("RenderPaginationTable() Entra CONSTRUCTOR.");
+        //let elementsByPage;
+        if (_this.props.selectElementsByPage == undefined) {
+            _this.elementsByPage = 5;
+        }
+        else {
+            _this.elementsByPage = _this.props.selectElementsByPage[0];
+        }
+        console.log("RenderPaginationTable() => elementsByPage= " + _this.elementsByPage);
+        _this.page = 0;
+        //this.state = { page: page, elementsByPage: elementsByPage };
+        _this.onClickSelectElementsByPage = _this.onClickSelectElementsByPage.bind(_this);
+        _this.onClickPagination = _this.onClickPagination.bind(_this);
+        // XYZ this.loadData = this.loadData.bind(this);
+        _this.loadDataAsync = _this.loadDataAsync.bind(_this);
+        _this.returnDataFunction = _this.returnDataFunction.bind(_this);
         return _this;
     }
+    RenderPaginationTable.prototype.componentDidMount = function () {
+        this.loadDataAsync(this.page, this.elementsByPage);
+    };
+    RenderPaginationTable.prototype.componentDidUpdate = function () {
+        console.log("<<<<<<<<<<<<<<<   RENDER PAGINATION TABLE  => COMPONENT WILL UPDATE  >>>>>>>>>>>>>>>>>>");
+        console.log("RenderPaginationTable::componentWillUpdate()  => this.props.selectElementsByPage: " +
+            this.props.selectElementsByPage);
+        if (this.props.selectElementsByPage == undefined) {
+            this.elementsByPage = RenderPaginationTable.DEFAULT_SELECT_ELEMENTS_BY_PAGE[0];
+        }
+        else {
+            this.elementsByPage = this.props.selectElementsByPage[0];
+        }
+        this.page = 0;
+        this.loadDataAsync(this.page, this.elementsByPage);
+    };
+    RenderPaginationTable.prototype.returnDataFunction = function (data) {
+        var _a, _b;
+        console.log("RenderPaginationTable::returnDataFunction() => Rebudes noves dades ...");
+        (_a = this.childRenderTable.current) === null || _a === void 0 ? void 0 : _a.updateTableData(data);
+        (_b = this.childRenderPagination.current) === null || _b === void 0 ? void 0 : _b.updatePaginationInfo(data.paginationInfo);
+    };
+    RenderPaginationTable.prototype.loadDataAsync = function (page, elementsByPage) {
+        var _a, _b;
+        console.log("RenderPaginationTable::loadDataAsync() Entra ...");
+        // Avisam que estam carregant les dades de la Taula
+        (_a = this.childRenderTable.current) === null || _a === void 0 ? void 0 : _a.updateTableData(null);
+        // Avisam al la paginació que estam carregant dades
+        (_b = this.childRenderPagination.current) === null || _b === void 0 ? void 0 : _b.updatePaginationInfo(null);
+        var returnData = {
+            page: page,
+            elementsByPage: elementsByPage,
+            returnDataFunction: this.returnDataFunction,
+        };
+        this.props.loadPaginatedData(returnData);
+        console.log("RenderPaginationTable::loadDataAsync() Surt ...");
+    };
+    // Aquest mètode mai s'ha de cridar ja que les dades les enviam a RenderTable
+    /* XYZ
+    loadData(): RenderTableData {
+      let msg: string = "Mai s'ha de cridar a la funció loadData()";
+      console.error(msg);
+  
+      let rtd: RenderTableData = {
+        tableData: null,
+        error: msg,
+      };
+  
+      return rtd;
+    }
+    */
+    RenderPaginationTable.prototype.onClickPagination = function (page) {
+        console.log("RenderPaginationTable::onClickPagination(" + page + ") Entra ..." + new Date());
+        this.loadDataAsync(page, this.elementsByPage);
+        console.log("RenderPaginationTable::onClickPagination(" + page + ") Surt ..." + new Date());
+    };
+    RenderPaginationTable.prototype.onClickSelectElementsByPage = function (elementsByPage) {
+        this.loadDataAsync(0, elementsByPage);
+    };
     RenderPaginationTable.prototype.render = function () {
+        console.log("RenderPaginationTable::render() Entra ... ");
+        console.log("RenderPaginationTable::render() this.props.selectElementsByPage: " + this.props.selectElementsByPage);
         return (React$1.createElement(React$1.Fragment, null,
             React$1.createElement("div", { className: "infoNoMenu" },
-                React$1.createElement(RenderTable, __assign({}, this.props))),
-            React$1.createElement(PaginationCarpeta, __assign({}, this.props))));
+                React$1.createElement(RenderTable, __assign({ ref: this.childRenderTable }, this.props))),
+            React$1.createElement(PaginationCarpeta, __assign({ ref: this.childRenderPagination }, this.props, { onClickPagination: this.onClickPagination, onClickSelectElementsByPage: this.onClickSelectElementsByPage, selectElementsByPage: this.props.selectElementsByPage }))));
     };
+    RenderPaginationTable.DEFAULT_SELECT_ELEMENTS_BY_PAGE = [5, 10, 25];
     return RenderPaginationTable;
 }(React$1.Component));
+var RenderPaginationTable$1 = RenderPaginationTable;
 
 /**
  * @author anadal
@@ -4497,7 +4669,7 @@ var TemplatePageCarpeta = /** @class */ (function (_super) {
         return _this;
     }
     TemplatePageCarpeta.prototype.render = function () {
-        console.log("  RENDER TemplatePageCarpeta !!!!!");
+        //console.log("TemplatePageCarpeta::render() Start");
         var i18n = this.props.i18n;
         var language = i18n.language;
         var content;
@@ -4529,5 +4701,5 @@ var TemplatePageCarpeta = /** @class */ (function (_super) {
     return TemplatePageCarpeta;
 }(React$1.Component));
 
-export { Button, RenderPaginationTable, RenderTable, RowType, RowTypeUtils, TemplatePageCarpeta };
+export { Button, RenderPaginationTable$1 as RenderPaginationTable, RenderTable, RowType, RowTypeUtils, TemplatePageCarpeta };
 //# sourceMappingURL=index.es.js.map

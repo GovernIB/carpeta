@@ -8,22 +8,22 @@
 
 import React from "react";
 import { WithTranslation, withTranslation } from "react-i18next";
-import { TemplatePageCarpeta, PaginationCarpetaProps, RenderPaginationTable, RowType, RowTypeUtils} from "carpetacommonreactlib";
-
+import {
+  TemplatePageCarpeta,
+  RenderPaginationTable,
+  RowType,
+  RowTypeUtils,
+  RenderPaginationTableData,
+  PaginationInfo,
+  ReturnPaginationData,
+} from "carpetacommonreactlib";
 
 interface TaulaPaginadaTesterProps extends WithTranslation {}
 
 type TaulaPaginadaTesterState = {
-  isLoaded: boolean;
-
-  expedientresposta: any;
-  error: string | null;
-
-  elementsPerPagina: number; // 0 ==> No mostrar deplegable
   totalElements: number;
-  paginaActual: number;
   enableElementsPerPagina: boolean;
-  selectElementsPerPagina: number[] | undefined;
+  selectElementsPerPagina: number[] | undefined | null;
   allExpedients: any[];
 };
 
@@ -37,8 +37,8 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
 
     var expedients = [];
 
-    let apoderaBotoContent: JSX.Element = (
-      <div style={{ width: "auto", float: "right",  position:"relative" ,  top:"0px" }} id="accedirApodera">
+    const apoderaBotoContent: JSX.Element = (
+      <div style={{ width: "auto", float: "right", position: "relative", top: "0px" }} id="accedirApodera">
         <span>
           <button
             className="btn btn-primary carpeta-btn botoAccedirCarpeta"
@@ -49,7 +49,6 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
             }}
           >
             Consulti la pàgina web&nbsp;{RowTypeUtils.getIcon(RowType.EXTERNAL_LINK, false)}
-            { /* <i className="fas fa-external-link-alt fa-lg"></i>  */ }
           </button>
         </span>
       </div>
@@ -67,59 +66,62 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
         codiSia2: " SIA_22_0" + num,
         expedientOrgans2: "Govern de les Illes",
         expedientEstat2: num % 2 == 0 ? "Obert amb explicació" : "Tancat amb explicació",
-        boto: apoderaBotoContent
+        boto: apoderaBotoContent,
       });
     }
 
     this.state = {
-      isLoaded: false,
-      expedientresposta: null,
       allExpedients: expedients,
-      error: null,
-      paginaActual: 0,
       totalElements: 17,
-      elementsPerPagina: 5,
       enableElementsPerPagina: true,
-      selectElementsPerPagina: [5,10,15],
+      selectElementsPerPagina: RenderPaginationTable.DEFAULT_SELECT_ELEMENTS_BY_PAGE,
     };
 
-    this.onClickCanviDePagina = this.onClickCanviDePagina.bind(this);
-
     this.onClickCanviTotalElements = this.onClickCanviTotalElements.bind(this);
-
-    this.onClickElementsPerPagina = this.onClickElementsPerPagina.bind(this);
-
     this.onClickConjuntElementsPerPagina = this.onClickConjuntElementsPerPagina.bind(this);
 
     this.canviaConfiguracio = this.canviaConfiguracio.bind(this);
+
+    this.loadPaginatedData = this.loadPaginatedData.bind(this);
+    this.loadPaginatedDataAsync = this.loadPaginatedDataAsync.bind(this);
   }
 
   componentDidMount() {
     this.canviaConfiguracio(
       this.state.totalElements,
       this.state.enableElementsPerPagina,
-      this.state.elementsPerPagina,
-      this.state.paginaActual,
-      this.state.selectElementsPerPagina
+      this.state.selectElementsPerPagina 
     );
   }
 
   canviaConfiguracio(
     totalElements: number,
     enableElementsPerPagina: boolean,
-    elementsPerPagina: number,
-    paginaActual: number,
-    llistatElementsPerPagina: number[] | undefined
+    llistatElementsPerPagina: number[]| undefined | null
   ) {
     var expedients: any[] = [];
 
     var all: any[] = this.state.allExpedients;
 
-    let start:number = paginaActual * elementsPerPagina;
-    let next:number = parseInt(start.toString()) + parseInt(elementsPerPagina.toString());
-    let end:number = Math.min(totalElements, next);
 
-    
+    if (!enableElementsPerPagina) {
+      llistatElementsPerPagina = null;
+    }
+
+
+    let elementsPerPagina:number;
+    if (llistatElementsPerPagina == undefined || llistatElementsPerPagina == null) {
+      elementsPerPagina = RenderPaginationTable.DEFAULT_SELECT_ELEMENTS_BY_PAGE[0];
+    } else {
+      elementsPerPagina = llistatElementsPerPagina[0];
+    }
+
+    let paginaActual:number  = 0;
+
+    let start: number = paginaActual * elementsPerPagina;
+    let next: number = parseInt(start.toString()) + parseInt(elementsPerPagina.toString());
+    let end: number = Math.min(totalElements, next);
+
     console.log(" ============================================");
     console.log("totalElements: " + totalElements);
     console.log(" start + elementsPerPagina: " + (start + elementsPerPagina));
@@ -128,69 +130,24 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
     console.log(" elementsPerPagina: " + elementsPerPagina);
     console.log(" START: " + start);
     console.log(" END: " + end);
-    
-
 
     for (let i = start; i < end; i++) {
       expedients.push(all[i]);
     }
 
-    var expedientsResposta = {
-      paginaActual: paginaActual,
-      elementsPerPagina: elementsPerPagina,
-      totalRegistres: totalElements,
-
-      totalPagines: Math.floor(totalElements / elementsPerPagina) + (totalElements % elementsPerPagina == 0 ? 0 : 1),
-      registresRetornats: expedients.length,
-      expedients: expedients,
-    };
-
     console.log("Elements per Pagina Conjunt => " + llistatElementsPerPagina);
     this.setState({
-      ...this.state,
-      paginaActual: paginaActual,
-      elementsPerPagina: elementsPerPagina,
       totalElements: totalElements,
       enableElementsPerPagina: enableElementsPerPagina,
-      expedientresposta: expedientsResposta,
-      error: null,
-      isLoaded: true,
       selectElementsPerPagina: llistatElementsPerPagina,
     });
-
-  }
-
-  onClickCanviDePagina(novaPagina: number) {
-    console.log("onClickPagination a => " + novaPagina);
-    this.canviaConfiguracio(
-      this.state.totalElements,
-      this.state.enableElementsPerPagina,
-      this.state.elementsPerPagina,
-      novaPagina,
-      this.state.selectElementsPerPagina
-    );
   }
 
   onClickCanviTotalElements(totalElements: number) {
-    console.log("onClickCanviTotalElements a => " + totalElements);
-    const paginaActual: number = 0;
+    console.log("TaulaPaginadaTester::onClickCanviTotalElements() => totalElements=" + totalElements);
     this.canviaConfiguracio(
       totalElements,
       this.state.enableElementsPerPagina,
-      this.state.elementsPerPagina,
-      paginaActual,
-      this.state.selectElementsPerPagina
-    );
-  }
-
-  onClickElementsPerPagina(elementsPerPagina: number) {
-    console.log("onClickElementsPerPagina a => " + elementsPerPagina);
-    const paginaActual: number = 0;
-    this.canviaConfiguracio(
-      this.state.totalElements,
-      this.state.enableElementsPerPagina,
-      elementsPerPagina,
-      paginaActual,
       this.state.selectElementsPerPagina
     );
   }
@@ -199,8 +156,6 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
     this.canviaConfiguracio(
       this.state.totalElements,
       enableElementsPerPagina,
-      this.state.elementsPerPagina,
-      this.state.paginaActual,
       this.state.selectElementsPerPagina
     );
   }
@@ -208,107 +163,106 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
   onClickConjuntElementsPerPagina(llista: number[] | undefined) {
     console.log("onClickConjuntElementsPerPagina::llista => " + llista);
 
-    let elementsPerPagina;
-    if (llista == undefined) {
-      elementsPerPagina = 5;
-    } else {
-      elementsPerPagina = llista[0];
-    }
-
-    this.canviaConfiguracio(this.state.totalElements, this.state.enableElementsPerPagina, elementsPerPagina, 0, llista);
+    this.canviaConfiguracio(this.state.totalElements, this.state.enableElementsPerPagina, llista);
   }
 
+  loadPaginatedData(loadData: ReturnPaginationData) {
+    let that = this;
+    setTimeout(function () {
+      that.loadPaginatedDataAsync(loadData);
+    }, 1250);
+  }
+
+  loadPaginatedDataAsync(loadData: ReturnPaginationData) {
+    console.log("TaulaPaginadaTester::loadPaginatedData() ENTRA " + new Date());
+
+    let page: number = loadData.page;
+    let elementsByPage: number = loadData.elementsByPage;
+
+    var all: any[] = this.state.allExpedients;
+
+    let totalElements = this.state.totalElements;
+
+    let start: number = page * elementsByPage;
+    let next: number = parseInt(start.toString()) + parseInt(elementsByPage.toString());
+    let end: number = Math.min(totalElements, next);
+
+    /*
+    console.log("totalElements: " + totalElements);
+    console.log(" start + elementsPerPagina: " + (start + elementsByPage));
+    console.log(" Next: " + next);
+    */
+    console.log("TaulaPaginadaTester::loadPaginatedData() => Pagina: " + page);
+    console.log("TaulaPaginadaTester::loadPaginatedData() => elementsPerPagina: " + elementsByPage);
+    /*
+    console.log(" START: " + start);
+    console.log(" END: " + end);
+    */
+
+    var expedients: any[] = [];
+    for (let i = start; i < end; i++) {
+      expedients.push(all[i]);
+    }
+
+    let paginationInfo: PaginationInfo = {
+      paginaActual: page,
+      elementsPerPagina: elementsByPage,
+      totalPagines: Math.floor(totalElements / elementsByPage) + (totalElements % elementsByPage == 0 ? 0 : 1),
+      elementsRetornats: expedients.length,
+      totalElements: totalElements,
+    };
+
+    let returnData: RenderPaginationTableData = {
+      tableData: expedients,
+      error: null,
+      paginationInfo: paginationInfo,
+    };
+
+    console.log("TaulaPaginadaTester::loadPaginatedData() SURT " + new Date());
+
+    // Enviam resultat a la taula
+    loadData.returnDataFunction(returnData);
+  }
+
+
+
   render() {
-    console.log("  RENDER TaulaPaginadaTester !!!!!");
+    console.log("TaulaPaginadaTester::render() => Inici !!!!!");
 
     const { i18n } = this.props;
 
-    let content;
+    const columnsNom = [
+      "expedientObertura",
+      "expedientNom",
+      "nomProcediment",
+      "codiSia",
+      "expedientOrgans",
+      "expedientEstat",
+    ];
 
-    if (!this.state.isLoaded) {
-      console.log(" No esta carregat ... ");
-      content = (
-        <div id="carregant" className="loader-container centrat ">
-          <div className="loader" />
-        </div>
-      );
-    } else if (this.state.error) {
-      console.log(" Error: ]" + this.state.error + "|");
-      content = (
-        <div className="alert alert-danger" role="alert">
-          {this.state.error}
-        </div>
-      );
-    } else {
-      console.log("Render OK: Imprimint Expedients ...!");
+    const columnsTitols = [
+      i18n.t("expedientObertura"),
+      i18n.t("expedientNom"),
+      i18n.t("nomProcediment"),
+      i18n.t("codiSia"),
+      i18n.t("expedientOrgans"),
+      i18n.t("expedientEstat"),
+    ];
 
-      var expedients = this.state.expedientresposta.expedients;
+    const columnsNomAddicionals = ["codiSia2", "expedientOrgans2", "expedientEstat2", "boto"];
 
-      const columnsNom = [
-        "expedientObertura",
-        "expedientNom",
-        "nomProcediment",
-        "codiSia",
-        "expedientOrgans",
-        "expedientEstat",
-        
-      ];
-
-      const columnsTitols = [
-        i18n.t("expedientObertura"),
-        i18n.t("expedientNom"),
-        i18n.t("nomProcediment"),
-        i18n.t("codiSia"),
-        i18n.t("expedientOrgans"),
-        i18n.t("expedientEstat"),
-
-      ];
-
-      const columnsNomAddicionals = [
-        "codiSia2",
-        "expedientOrgans2",
-        "expedientEstat2",
-        "boto"
-      ];
-
-      const columnsTitolsAddicionals = [
-        i18n.t("codiSia2"),
-        i18n.t("expedientOrgans2"),
-        i18n.t("expedientEstat2"),
-        "" // BOTO
-      ];
-
-      const paginationInfo: PaginationCarpetaProps = {
-        paginaActual: this.state.expedientresposta.paginaActual,
-        elementsPerPagina: this.state.expedientresposta.elementsPerPagina,
-        totalPagines: this.state.expedientresposta.totalPagines,
-        registresRetornats: this.state.expedientresposta.registresRetornats,
-        totalRegistres: this.state.expedientresposta.totalRegistres,
-        selectElementsByPage: this.state.selectElementsPerPagina,
-        onClickPagination: this.onClickCanviDePagina,
-        onClickSelectElementsByPage: this.state.enableElementsPerPagina ? this.onClickElementsPerPagina : undefined,
-      };
-
-      content = (
-        <RenderPaginationTable
-          tableData={expedients}
-          columnNames={columnsNom}
-          columnTitles={columnsTitols}
-          columnNamesAdditionals={columnsNomAddicionals}
-          columnTitlesAdditionals={columnsTitolsAddicionals}
-          rowType={RowType.SHOW_ADDITIONAL_INFO}
-          mobileIcon={"oi-clipboard"}
-          paginationInfo={paginationInfo}
-          i18n={i18n}
-        />
-      );
-    }
+    const columnsTitolsAddicionals = [
+      i18n.t("codiSia2"),
+      i18n.t("expedientOrgans2"),
+      i18n.t("expedientEstat2"),
+      "", // BOTO
+    ];
 
     return (
       <>
-       <br/>
-       <hr/>
-        Numero d'Elements Total:
+        <br />
+        <hr />
+        Numero d'Elements Total:        
         <button onClick={() => this.onClickCanviTotalElements(0)}> 0</button>
         <button onClick={() => this.onClickCanviTotalElements(3)}> 3</button>
         <button onClick={() => this.onClickCanviTotalElements(10)}> 10</button>
@@ -333,7 +287,17 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
         </>
         <hr />
         <TemplatePageCarpeta {...this.props} titles={this.titles} subtitles={this.subtitles} i18n={i18n}>
-          {content}
+          <RenderPaginationTable
+            loadPaginatedData={this.loadPaginatedData}
+            columnNames={columnsNom}
+            columnTitles={columnsTitols}
+            columnNamesAdditionals={columnsNomAddicionals}
+            columnTitlesAdditionals={columnsTitolsAddicionals}
+            rowType={RowType.SHOW_ADDITIONAL_INFO}
+            mobileIcon={"oi-clipboard"}
+            i18n={i18n}
+            selectElementsByPage={this.state.selectElementsPerPagina}
+          />
         </TemplatePageCarpeta>
       </>
     );

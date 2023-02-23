@@ -4,6 +4,8 @@
     "registroMostra":"Muestra  ",
     "registroRegistres":"  elementos",
 
+    "taulaBuida": "No hay elementos para mostrar",
+
     "rowtype.internal_link":"Accede a otra página con más información de esta entrada",
     "rowtype.external_link":"Abre otra ventana para acceder a más información de esta entrada",
     "rowtype.download_file":"Descarga un fichero",

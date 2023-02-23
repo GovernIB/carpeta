@@ -5,9 +5,9 @@
  * @desc [description]
  */
 import React from "react";
-import { RenderTableProps } from "./RenderTableProps";
-declare class RenderTableMobile extends React.Component<RenderTableProps> {
-    constructor(props: RenderTableProps);
+import { RenderInternalTableProps } from "./RenderTableProps";
+declare class RenderTableMobile extends React.Component<RenderInternalTableProps> {
+    constructor(props: RenderInternalTableProps);
     render(): JSX.Element;
 }
 export default RenderTableMobile;
