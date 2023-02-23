@@ -1,3 +1,4 @@
+
 function menuDesllisantJS() {
 
 
@@ -114,6 +115,8 @@ $.fn.appRellisca = function(opcions){
 				if (menu_pos === pos_marcX) {
 					return;
 				}
+
+				var menu_pos_limit = menu_pos/2;
 
 				if ( pos_marcX <= menu_pos_limit ) {
 

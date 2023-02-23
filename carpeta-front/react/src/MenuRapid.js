@@ -9,14 +9,12 @@ import * as Constants from './Constants';
  * 
  * @author anadal Migració a ROUTER
  */
-
-
 class MenuRapid extends Component {
 
     constructor(){
         super();
         this.state = {
-            items: [], // plugins, menupseudoplugin, seccions
+            items: [], // plugins, menupseudoplugin, seccions, ...
             error: null,
             added: false
         }
