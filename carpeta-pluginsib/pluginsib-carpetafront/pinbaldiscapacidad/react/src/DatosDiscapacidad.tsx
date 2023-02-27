@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {withTranslation} from 'react-i18next';
+import { withTranslation, WithTranslation } from "react-i18next";
 import axios from "axios";
 import i18n from './i18n';
 
@@ -7,8 +7,19 @@ import i18n from './i18n';
  *  @author jagarcia
  */
 
-class DatosDiscapacidad extends Component {
-    constructor(props) {
+interface DiscapacidadProps extends WithTranslation {
+    pathtoservei: string;
+    titles: any;
+    subtitles: any;
+}
+
+type DiscapacidadState = {
+    isLoaded: boolean;
+    data: any;
+};
+
+class DatosDiscapacidad extends React.Component<DiscapacidadProps, DiscapacidadState> {
+    constructor(props: DiscapacidadProps) {
         super(props);
 
         this.state = {
@@ -17,17 +28,21 @@ class DatosDiscapacidad extends Component {
         };
     }
 
-    async componentDidMount() {
+    componentDidMount(){
+        this.carregaDades();
+    }
+
+    carregaDades() {
 
         const url2 = this.props.pathtoservei;
-        await axios.get(url2).then(res => {
+        axios.get(url2).then(res => {
 
             this.setState({
                 ...this.state, 
                 isLoaded: true,
                 data: res.data
             });
-        }).catch(function (error) {
+        }).catch( (error) => {
 
             console.log(JSON.stringify(error));
             const restdata = { "error": JSON.stringify(error) };
@@ -37,7 +52,7 @@ class DatosDiscapacidad extends Component {
                 console.log("error.response.headers: " + error.response.headers);
             }
             this.setState({
-                ...this.state, 
+                ...this.state,
                 isLoaded: true,
                 data: restdata
             });
@@ -54,8 +69,8 @@ class DatosDiscapacidad extends Component {
         let contentApp;
 
         if (!isLoaded) {
-           
-             content = <div  id="carregant" className="loader-container centrat ">
+        
+            content = <div  id="carregant" className="loader-container centrat ">
                         <div className="loader"/>
                     </div>;
         } else {
@@ -156,8 +171,8 @@ class DatosDiscapacidad extends Component {
                 </div>
                 <div className="col-md-12 border-0 float-left p-0" id="botoTornarDiscapacidad" style={{ marginTop: '20px' }}>
                     <button type="button" data-toggle="modal" onClick={() => {
-                        window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                    }} className="botoSuport botoTornauApp" tabIndex="520" aria-labelledby="botoTornarDiscapacidad">{t('pinbalDiscapacidadTornar')}</button>
+                        window.location.href = sessionStorage.getItem("pagTornar")??""; sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath")??"")
+                    }} className="botoSuport botoTornauApp" tabIndex={520} aria-labelledby="botoTornarDiscapacidad">{t('pinbalDiscapacidadTornar')}</button>
                 </div>
             </div>
             </>
