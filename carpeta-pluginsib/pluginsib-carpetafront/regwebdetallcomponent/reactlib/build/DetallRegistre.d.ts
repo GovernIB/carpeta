@@ -7,7 +7,8 @@ interface DetallRegistreProps {
     pathtoservei: string;
     numero: string;
     t: any;
-    tornarDeDetallRegistreFunc: any;
+    tornarDeDetallRegistreFunc: Function;
+    axios: any;
 }
 type DetallRegistreState = {
     isLoaded: boolean;

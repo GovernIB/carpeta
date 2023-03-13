@@ -58,7 +58,7 @@ class RenderTableMobile extends React.Component<RenderInternalTableProps> {
                     className="col-sm-10 float-right"
                     onClick={() => {
                       if (this.props.onClickRow) {
-                        this.props.onClickRow(i);
+                        this.props.onClickRow(i, this.props.tableData[i]);
                       }
                     }}
                   >

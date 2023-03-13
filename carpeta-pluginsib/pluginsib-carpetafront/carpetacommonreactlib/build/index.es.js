@@ -4077,7 +4077,7 @@ var RenderTableMobile = /** @class */ (function (_super) {
                     columnsNom.forEach(function (clau, c) {
                         cardsMobile.push(React$1.createElement("div", { className: "col-sm-10 float-right", onClick: function () {
                                 if (_this.props.onClickRow) {
-                                    _this.props.onClickRow(i);
+                                    _this.props.onClickRow(i, _this.props.tableData[i]);
                                 }
                             } },
                             React$1.createElement("div", { className: "card-text pl-1 mt-0", style: { color: "rgb(102, 102, 102)" } },
@@ -4118,7 +4118,7 @@ var RenderTableDesktop = /** @class */ (function (_super) {
     RenderTableDesktop.prototype.onClickTableRow = function (i) {
         if (this.props.columnNamesAdditionals == undefined) {
             if (this.props.onClickRow) {
-                this.props.onClickRow(i);
+                this.props.onClickRow(i, this.props.tableData[i]);
             }
         }
         else {
@@ -4194,9 +4194,7 @@ var RenderTableDesktop = /** @class */ (function (_super) {
                             React$1.createElement("tr", { key: "fila_" + i, tabIndex: 511 + i * 2 - 1, onClick: function () {
                                     _this.onClickTableRow(i);
                                 }, onKeyPress: function () {
-                                    if (_this.props.onClickRow) {
-                                        _this.props.onClickRow(i);
-                                    }
+                                    _this.onClickTableRow(i);
                                 } }, fila),
                             filaAddicional));
                     }))))));
@@ -4258,6 +4256,12 @@ var RenderTable = /** @class */ (function (_super) {
         }
         if (this.state.error != null) {
             return (React$1.createElement("div", { className: "alert alert-danger", role: "alert" }, this.state.error));
+        }
+        if (!Array.isArray(this.state.tableData)) {
+            console.log("RenderTable::render() => this.state.tableData = NO ES UN ARRAY !!!!!!");
+        }
+        if (this.state.tableData != null) {
+            console.log("RenderTable::render() => this.state.tableData.length = " + this.state.tableData.length);
         }
         if (this.state.tableData == null || (this.state.tableData != null && this.state.tableData.length == 0)) {
             return (React$1.createElement("div", { className: "alert alert-warning", role: "alert" }, this.props.i18n.t("taulaBuida")));

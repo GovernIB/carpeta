@@ -1,77 +1,53 @@
 package org.fundaciobit.pluginsib.carpetafront.regweb32;
 
-import java.util.List;
+
 
 /**
  * Created by Fundació BIT.
  *
- * @author mgonzalez
+ * @author anadal
  * Date: 23/02/2021
  */
 
 public class Paginacio {
 
-    private int totalResults;
-    private int totalPages;
-    private int beginIndex;
-    private int endIndex;
-    private int currentIndex;
-    private List<?> listado;
+    private int paginaActual;
+    private int elementsPerPagina;
+    private int totalPagines;
+    private int elementsRetornats;
+    private int totalElements;
 
-    int RESULTATS_PER_PAGINA = 10;
-
-    public Paginacio(int total, int pageNumber) {
-        totalResults = total;
-        totalPages = (totalResults / RESULTATS_PER_PAGINA);
-        if(totalResults % RESULTATS_PER_PAGINA != 0){
-            totalPages = totalPages +1;
-        }
-
-        currentIndex = pageNumber;
-        beginIndex = Math.max(1, currentIndex - RESULTATS_PER_PAGINA);
-        endIndex = Math.min(beginIndex + RESULTATS_PER_PAGINA, totalPages);
+    
+    public int getPaginaActual() {
+        return paginaActual;
     }
-
-    public Paginacio(int total, int pageNumber, int totalPaginacion) {
-        totalResults = total;
-        totalPages = (totalResults / totalPaginacion);
-        if(totalResults % totalPaginacion != 0){
-            totalPages = totalPages +1;
-        }
-
-        currentIndex = pageNumber;
-        beginIndex = Math.max(1, currentIndex - totalPaginacion);
-        endIndex = Math.min(beginIndex + RESULTATS_PER_PAGINA, totalPages);
+    public void setPaginaActual(int paginaActual) {
+        this.paginaActual = paginaActual;
     }
-
-    public int getTotalPages() {
-        return totalPages;
+    public int getElementsPerPagina() {
+        return elementsPerPagina;
     }
-
-    public int getBeginIndex() {
-        return beginIndex;
+    public void setElementsPerPagina(int elementsPerPagina) {
+        this.elementsPerPagina = elementsPerPagina;
     }
-
-
-    public int getEndIndex() {
-        return endIndex;
+    public int getTotalPagines() {
+        return totalPagines;
     }
-
-
-    public int getCurrentIndex() {
-        return currentIndex;
+    public void setTotalPagines(int totalPagines) {
+        this.totalPagines = totalPagines;
     }
-
-
-    public List<?> getListado() {
-        return listado;
+    public int getElementsRetornats() {
+        return elementsRetornats;
     }
-
-    public void setListado(List<?> listado) {
-        this.listado = listado;
+    public void setElementsRetornats(int elementsRetornats) {
+        this.elementsRetornats = elementsRetornats;
     }
-
-    public int getTotalResults() {
-        return totalResults;
+    public int getTotalElements() {
+        return totalElements;
     }
+    public void setTotalElements(int totalElements) {
+        this.totalElements = totalElements;
+    }
+    
+    
 }

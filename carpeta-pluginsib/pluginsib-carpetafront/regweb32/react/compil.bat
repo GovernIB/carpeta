@@ -2,7 +2,7 @@
 
 set STARTTIME=%TIME%
 
-call npm run build --profile
+call npm run build
 
 xcopy  /Y .\dist\regweb32_reactjs_main.js ..\src\main\resources\webpage
 

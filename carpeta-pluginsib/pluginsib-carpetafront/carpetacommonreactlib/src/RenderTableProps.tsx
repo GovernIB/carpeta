@@ -19,7 +19,7 @@ export interface RenderCommonTableProps {
   columnTitles: any[];
   columnNamesAdditionals?: any[];
   columnTitlesAdditionals?: any[];
-  onClickRow?: Function;
+  onClickRow?(pos:number,item:any):void;
   mobileIcon?: string;
   rowType?: RowType;
   i18n: any;

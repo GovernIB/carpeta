@@ -243,7 +243,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
     		
 	    	response.setContentType("text/html");
 	
-	        String resource = "/webpage/regweb32_index.html";
+	        String resource = "/webpage/" + INDEX_REACT_PAGE;
 	
 	        response.setHeader("Content-Disposition",
 	                "inline;filename=\"" + java.net.URLEncoder.encode(INDEX_REACT_PAGE, "UTF-8") + "\"");
@@ -381,46 +381,62 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
                 log.info("PARAMETROS => " + parametros);
             }
     		
-    		Map<String, String> dades = new HashMap<String, String>();
-    		
-    		dades.put("form_numero", formNumero);
-            dades.put("form_dataFi", formDataFiStr);
-            dades.put("form_dataInici", formDataIniciStr);
-            dades.put("form_estat", formEstat);
-//			dades.put("num_items", String.valueOf(numItems));
-            dades.put("num_items", formRegPorPagina);
-            dades.put("page", pageNumber);
-    		
+
     		response.setContentType("application/json");
             response.setCharacterEncoding("utf-8");
-            
-            
+
             // CERCA
-            @SuppressWarnings("unchecked")
-            List<AsientoWs> registres;
-            int totalResults = 0;
+            List<AsientoWs> registresRegweb;
             
             formDataFi = DateUtils.sumarRestarDiasFecha(formDataFi, 1);
 
-            log.info("formRegPorPagina: " + formRegPorPagina);
+            log.info("registrosPorPagina: " + formRegPorPagina);
             log.info("pageNumber: " + pageNumber);
+            
+            int elementsPerPagina = Integer.parseInt(formRegPorPagina);
 
             ResultadoBusquedaWs result;
             result = getRegistres(userData.getAdministrationID(), getEntidad(), formNumero,
-                    formDataInici, formDataFi, formEstat, Integer.parseInt(pageNumber), Integer.parseInt(formRegPorPagina), locale);
+                    formDataInici, formDataFi, formEstat, Integer.parseInt(pageNumber), elementsPerPagina, locale);
 
             //@SuppressWarnings("unchecked")
-            registres = (List<AsientoWs>) (List<?>) result.getResults();
-            totalResults = result.getTotalResults();
+            registresRegweb = (List<AsientoWs>) (List<?>) result.getResults();
             
-            Gson jsonRegistres = new Gson();
-            dades.put("registres", jsonRegistres.toJson(registres));
-            dades.put("totalRegistres", String.valueOf(totalResults));
+            
+            Paginacio paginacio = new Paginacio();
+            
+            paginacio.setElementsPerPagina(elementsPerPagina);
+            paginacio.setElementsRetornats(registresRegweb.size());
+
+            paginacio.setPaginaActual(result.getPageNumber());
+            int totalElements = result.getTotalResults();
+            paginacio.setTotalElements(totalElements);
+            paginacio.setTotalPagines((int)(Math.floor(totalElements/elementsPerPagina)) + ((totalElements % elementsPerPagina == 0)?0:1));
+
+            List<Registre> registres = new ArrayList<Registre>();
+            for (AsientoWs a : registresRegweb) {
+                registres.add(new Registre(a.getNumeroRegistro(), a.getFechaRegistro(), a.getExtracto(), a.getEstado(),
+                        a.getDenominacionDestino()));
+            }
+
+            Map<String, Object> dades = new HashMap<String, Object>();
+            
+            /*
+            dades.put("form_numero", formNumero);
+            dades.put("form_dataFi", formDataFiStr);
+            dades.put("form_dataInici", formDataIniciStr);
+            dades.put("form_estat", formEstat);
+//          dades.put("num_items", String.valueOf(numItems));
+            dades.put("num_items", formRegPorPagina);
+            dades.put("page", pageNumber);
+            */
+            dades.put("registres", registres);
+            dades.put("paginacio", paginacio);
                       
             Gson json = new GsonBuilder().setDateFormat("dd-MM-yyyy HH:mm").create();
             String generat = json.toJson(dades);
             
-//            log.info("Generat: " + generat);
+            log.info("XYZ ZZZ Generat: " + generat);
             
             try {
                 response.getWriter().println(generat);

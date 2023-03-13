@@ -22,7 +22,7 @@ class RenderTableDesktop extends Component<RenderInternalTableProps> {
   onClickTableRow(i: number) {
     if (this.props.columnNamesAdditionals == undefined) {
       if (this.props.onClickRow) {
-        this.props.onClickRow(i);
+        this.props.onClickRow(i, this.props.tableData[i]);
       }
     } else {
       // Mostrar fila addicional
@@ -134,9 +134,7 @@ class RenderTableDesktop extends Component<RenderInternalTableProps> {
                         this.onClickTableRow(i);
                       }}
                       onKeyPress={() => {
-                        if (this.props.onClickRow) {
-                          this.props.onClickRow(i);
-                        }
+                        this.onClickTableRow(i);
                       }}
                     >
                       {fila}

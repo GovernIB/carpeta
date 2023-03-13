@@ -1,6 +1,6 @@
 import React from "react";
 //import { WithTranslation} from 'react-i18next';
-import axios from "axios";
+//import axios from "axios";
 //import i18n from './i18n';
 
 /**
@@ -12,7 +12,8 @@ interface DetallRegistreProps {
   pathtoservei: string;
   numero: string;
   t: any;
-  tornarDeDetallRegistreFunc: any;
+  tornarDeDetallRegistreFunc: Function;
+  axios: any;
 }
 
 type DetallRegistreState = {
@@ -21,10 +22,7 @@ type DetallRegistreState = {
   error: string;
 };
 
-class DetallRegistre extends React.Component<
-  DetallRegistreProps,
-  DetallRegistreState
-> {
+class DetallRegistre extends React.Component<DetallRegistreProps, DetallRegistreState> {
   constructor(props: DetallRegistreProps) {
     super(props);
 
@@ -45,16 +43,11 @@ class DetallRegistre extends React.Component<
 
     const params = { numero: this.props.numero };
 
-    console.log(
-      "DetallRegistre:: Cridant a " +
-        url2 +
-        " amb id de registre " +
-        this.props.numero
-    );
+    console.log("DetallRegistre:: Cridant a " + url2 + " amb id de registre " + this.props.numero);
 
-    axios
+    this.props.axios
       .get(url2, { params: params })
-      .then((response) => {
+      .then((response:any) => {
         this.setState({
           ...this.state,
           isLoaded: true,
@@ -76,7 +69,7 @@ class DetallRegistre extends React.Component<
           });
         }
       })
-      .catch((error) => {
+      .catch((error:any) => {
         console.log("Error axios", error);
         this.setState({
           ...this.state,
@@ -101,12 +94,17 @@ class DetallRegistre extends React.Component<
 
         document.body.appendChild(link);
         link.click();
-        link.parentNode.removeChild(link);
+        if (link.parentNode != null) {
+          link.parentNode.removeChild(link);
+        }
       });
   }
 
   async generarJustificant(url: any) {
-    document.getElementById("justificantLoader").style.display = "block";
+    let justificantLoader = document.getElementById("justificantLoader");
+    if (justificantLoader) {
+      justificantLoader.style.display = "block";
+    }
 
     await fetch(url, {
       method: "GET",
@@ -117,9 +115,10 @@ class DetallRegistre extends React.Component<
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        document.getElementById("justificantLoader").style.display = "none";
-        if (data.error != null)
-          this.setState({ ...this.state, error: data.error });
+        if (justificantLoader) {
+          justificantLoader.style.display = "none";
+        }
+        if (data.error != null) this.setState({ ...this.state, error: data.error });
         else {
           this.downloadDoc(data.justificantData, data.justificantFilename);
         }
@@ -135,10 +134,7 @@ class DetallRegistre extends React.Component<
 
     const linkSource = `data:application/pdf;base64,${datafile}`;
     const downloadLink = document.createElement("a");
-    const fileName =
-      typeof dataName !== "undefined" && dataName != ""
-        ? `${dataName}.pdf`
-        : `justificant.pdf`;
+    const fileName = typeof dataName !== "undefined" && dataName != "" ? `${dataName}.pdf` : `justificant.pdf`;
 
     downloadLink.href = linkSource;
     downloadLink.download = fileName;
@@ -152,18 +148,21 @@ class DetallRegistre extends React.Component<
       downloadLink.setAttribute("download", fileName);
     }
 
-    downloadLink.appendChild(
-      document.createTextNode(this.props.t("downloadjustificantText"))
-    );
-    document.getElementById("justificantEnllaz").append(downloadLink);
+    downloadLink.appendChild(document.createTextNode(this.props.t("downloadjustificantText")));
+    let just = document.getElementById("justificantEnllaz");
+    if (just != null) {
+      just.append(downloadLink);
+    }
     downloadLink.click();
   }
 
   mostraTooltip() {
-    const estiloElemento =
-      document.getElementById("descripcionTooltip").style.display;
-    document.getElementById("descripcionTooltip").style.display =
-      estiloElemento == "none" ? "block" : "none";
+    let toolTip = document.getElementById("descripcionTooltip");
+
+    if (toolTip != null) {
+      const estiloElemento = toolTip.style.display;
+      toolTip.style.display = estiloElemento == "none" ? "block" : "none";
+    }
   }
 
   dateFormat(dateObject: any) {
@@ -188,18 +187,12 @@ class DetallRegistre extends React.Component<
     return day + "/" + month + "/" + year + " " + hour + ":" + minute;
   }
 
-
-
   render() {
-
-
-    var tornarDeDetallRegistreFunc:any = this.props.tornarDeDetallRegistreFunc;
+    var tornarDeDetallRegistreFunc: any = this.props.tornarDeDetallRegistreFunc;
     console.log("DetallRegistre:: Render ...");
 
     console.log("DetallRegistre:: XXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-    console.log(
-      "DetallRegistre:: TRADUCCIO => " + this.props.t("registro_justificante")
-    );
+    console.log("DetallRegistre:: TRADUCCIO => " + this.props.t("registro_justificante"));
     console.log("DetallRegistre:: ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
 
     const isLoaded = this.state.isLoaded;
@@ -231,24 +224,19 @@ class DetallRegistre extends React.Component<
         console.log("RESPONSE", this.state.data);
 
         let solicitaExponeContainer =
-          typeof registre.expone != "undefined" ||
-          typeof registre.solicita != "undefined" ? (
+          typeof registre.expone != "undefined" || typeof registre.solicita != "undefined" ? (
             <div className="card border-left-carpeta shadow py-2 mb-3 alert">
               <div className="card-body">
                 <div className="col mr-2 font15">
                   {typeof registre.expone != "undefined" && (
                     <div>
-                      <h3 className="font-weight-bold verde text-uppercase mb-3 text-center h3">
-                        EXPOSA
-                      </h3>
+                      <h3 className="font-weight-bold verde text-uppercase mb-3 text-center h3">EXPOSA</h3>
                       <p>{registre.expone}</p>
                     </div>
                   )}
                   {typeof registre.solicita != "undefined" && (
                     <div>
-                      <h3 className="font-weight-bold verde text-uppercase mb-3 text-center h3">
-                        SOLICITA
-                      </h3>
+                      <h3 className="font-weight-bold verde text-uppercase mb-3 text-center h3">SOLICITA</h3>
                       <p>{registre.solicita}</p>
                     </div>
                   )}
@@ -262,11 +250,7 @@ class DetallRegistre extends React.Component<
         const iconoDescargar = (
           <span
             className="oi oi-data-transfer-download mr-2"
-            title={
-              this.props.t("carpeta_descargar") +
-              " " +
-              this.props.t("registro_justificante")
-            }
+            title={this.props.t("carpeta_descargar") + " " + this.props.t("registro_justificante")}
             aria-hidden="true"
           ></span>
         );
@@ -274,14 +258,10 @@ class DetallRegistre extends React.Component<
         content = (
           <>
             <h2 className="titol h2 ocultarMobil">
-              {this.props.t("registro_titulo_detalle")}{" "}
-              {registre.numeroRegistro}
+              {this.props.t("registro_titulo_detalle")} {registre.numeroRegistro}
             </h2>
             <div className="col-md-12 border-0 float-left p-0">
-              <div
-                className="card-body pl-0 pr-0"
-                style={{ flexFlow: "row wrap", display: "flex" }}
-              >
+              <div className="card-body pl-0 pr-0" style={{ flexFlow: "row wrap", display: "flex" }}>
                 <div className="pri-col-deta-reg col-md-6">
                   <div className="card border-left-carpeta shadow py-2 mb-3 alert cardAppVerd">
                     <div className="card-body">
@@ -291,118 +271,67 @@ class DetallRegistre extends React.Component<
                             {this.props.t("registro_entrada")}
                           </h3>
                           <dl className="row colorGrisApp">
-                            <dt className="col-sm-3 pb-2">
-                              {this.props.t("registro_fecha")}
-                            </dt>
-                            <dd className="col-sm-7">
-                              {this.dateFormat(registre.fechaRegistro)}
-                            </dd>
+                            <dt className="col-sm-3 pb-2">{this.props.t("registro_fecha")}</dt>
+                            <dd className="col-sm-7">{this.dateFormat(registre.fechaRegistro)}</dd>
 
-                            <dt className="col-sm-3 pb-2">
-                              {this.props.t("registro_numero")}
-                            </dt>
-                            <dd className="col-sm-7">
-                              {registre.numeroRegistro}
-                            </dd>
+                            <dt className="col-sm-3 pb-2">{this.props.t("registro_numero")}</dt>
+                            <dd className="col-sm-7">{registre.numeroRegistro}</dd>
 
                             {registre.denominacionOficinaOrigen && (
                               <>
-                                <dt className="col-sm-3 pb-2">
-                                  {this.props.t("registro_oficina")}
-                                </dt>
-                                <dd className="col-sm-7">
-                                  {registre.denominacionOficinaOrigen}
-                                </dd>
+                                <dt className="col-sm-3 pb-2">{this.props.t("registro_oficina")}</dt>
+                                <dd className="col-sm-7">{registre.denominacionOficinaOrigen}</dd>
                               </>
                             )}
 
                             {registre.denominacionDestino && (
                               <>
-                                <dt className="col-sm-3 pb-2">
-                                  {this.props.t("registro_destinatario")}
-                                </dt>
-                                <dd className="col-sm-7">
-                                  {registre.denominacionDestino}
-                                </dd>
+                                <dt className="col-sm-3 pb-2">{this.props.t("registro_destinatario")}</dt>
+                                <dd className="col-sm-7">{registre.denominacionDestino}</dd>
                               </>
                             )}
 
                             {registre.tipoDocumetacionFisica && (
                               <>
-                                <dt className="col-sm-3 pb-2">
-                                  {this.props.t("registro_tipo_doc")}
-                                </dt>
-                                <dd className="col-sm-7">
-                                  {registre.tipoDocumetacionFisica}
-                                </dd>
+                                <dt className="col-sm-3 pb-2">{this.props.t("registro_tipo_doc")}</dt>
+                                <dd className="col-sm-7">{registre.tipoDocumetacionFisica}</dd>
                               </>
                             )}
 
                             {registre.extracto && (
                               <>
-                                <dt className="col-sm-3 pb-2">
-                                  {this.props.t("registro_extracto")}
-                                </dt>
-                                <dd className="col-sm-7">
-                                  {registre.extracto}
-                                </dd>
+                                <dt className="col-sm-3 pb-2">{this.props.t("registro_extracto")}</dt>
+                                <dd className="col-sm-7">{registre.extracto}</dd>
                               </>
                             )}
 
                             {registre.idioma && (
                               <>
-                                <dt className="col-sm-3 pb-2">
-                                  {this.props.t("carpeta_idioma")}
-                                </dt>
-                                <dd className="col-sm-7">
-                                  {this.props.t(
-                                    "registro_idioma_" + registre.idioma
-                                  )}
-                                </dd>
+                                <dt className="col-sm-3 pb-2">{this.props.t("carpeta_idioma")}</dt>
+                                <dd className="col-sm-7">{this.props.t("registro_idioma_" + registre.idioma)}</dd>
                               </>
                             )}
 
                             {registre.estado && (
                               <>
-                                <dt className="col-sm-3 pb-2">
-                                  {this.props.t("registro_estado")}
-                                </dt>
+                                <dt className="col-sm-3 pb-2">{this.props.t("registro_estado")}</dt>
                                 <dd className="col-sm-7">
-                                  {this.props.t(
-                                    "registro_estado_" + registre.estado
-                                  )}{" "}
-                                  <span
-                                    className="oi oi-info pl-2"
-                                    onClick={() => this.mostraTooltip()}
-                                  ></span>{" "}
-                                  <span
-                                    id="descripcionTooltip"
-                                    style={{ display: "none" }}
-                                  >
-                                    {this.props.t(
-                                      "registro_estado_explicacion_" +
-                                        registre.estado
-                                    )}
+                                  {this.props.t("registro_estado_" + registre.estado)}{" "}
+                                  <span className="oi oi-info pl-2" onClick={() => this.mostraTooltip()}></span>{" "}
+                                  <span id="descripcionTooltip" style={{ display: "none" }}>
+                                    {this.props.t("registro_estado_explicacion_" + registre.estado)}
                                   </span>
                                 </dd>
                               </>
                             )}
 
-                            <dt className="col-sm-3 pb-2">
-                              {this.props.t("registro_presencial")}
-                            </dt>
-                            <dd className="col-sm-7">
-                              {registre.presencial === true ? "Sí" : "No"}
-                            </dd>
+                            <dt className="col-sm-3 pb-2">{this.props.t("registro_presencial")}</dt>
+                            <dd className="col-sm-7">{registre.presencial === true ? "Sí" : "No"}</dd>
 
                             {registre.codigoSia && (
                               <>
-                                <dt className="col-sm-3 pb-2">
-                                  {this.props.t("registro_codigoSia")}
-                                </dt>
-                                <dd className="col-sm-7">
-                                  {registre.codigoSia}
-                                </dd>
+                                <dt className="col-sm-3 pb-2">{this.props.t("registro_codigoSia")}</dt>
+                                <dd className="col-sm-7">{registre.codigoSia}</dd>
                               </>
                             )}
                           </dl>
@@ -448,8 +377,7 @@ class DetallRegistre extends React.Component<
                                 window.open(this.state.data.justificanteUrl);
                               }}
                             >
-                              {iconoDescargar}{" "}
-                              {this.props.t("carpeta_descargar")}
+                              {iconoDescargar} {this.props.t("carpeta_descargar")}
                             </button>
                           )}
 
@@ -460,13 +388,10 @@ class DetallRegistre extends React.Component<
                                 type="button"
                                 className="btn btn-danger"
                                 onClick={() => {
-                                  this.generarJustificant(
-                                    this.state.data.urlGeneracioJustificant
-                                  );
+                                  this.generarJustificant(this.state.data.urlGeneracioJustificant);
                                 }}
                               >
-                                {iconoDescargar}{" "}
-                                {this.props.t("carpeta_descargar")}
+                                {iconoDescargar} {this.props.t("carpeta_descargar")}
                               </button>
                             )}
 
@@ -477,14 +402,10 @@ class DetallRegistre extends React.Component<
                                 type="button"
                                 className="btn btn-danger"
                                 onClick={() =>
-                                  this.downloadDoc(
-                                    this.state.data.justificantData,
-                                    this.state.data.justificantFileName
-                                  )
+                                  this.downloadDoc(this.state.data.justificantData, this.state.data.justificantFileName)
                                 }
                               >
-                                {iconoDescargar}{" "}
-                                {this.props.t("carpeta_descargar")}
+                                {iconoDescargar} {this.props.t("carpeta_descargar")}
                               </button>
                             )}
 
@@ -518,46 +439,29 @@ class DetallRegistre extends React.Component<
                               <thead>
                                 <tr>
                                   <th scope="col">#</th>
-                                  <th scope="col">
-                                    {this.props.t("registro_interesado_nombre")}
-                                  </th>
-                                  <th scope="col">
-                                    {this.props.t(
-                                      "registro_interesado_documento"
-                                    )}
-                                  </th>
-                                  <th scope="col">
-                                    {this.props.t("registro_interesado_tipo")}
-                                  </th>
+                                  <th scope="col">{this.props.t("registro_interesado_nombre")}</th>
+                                  <th scope="col">{this.props.t("registro_interesado_documento")}</th>
+                                  <th scope="col">{this.props.t("registro_interesado_tipo")}</th>
                                 </tr>
                               </thead>
                               <tbody>
-                                {registre.interesados.map(
-                                  (item: any, index: number) => (
-                                    <tr>
-                                      <td>{index + 1}</td>
-                                      {typeof item.interesado.razonSocial ===
-                                        "undefined" && (
-                                        <td>
-                                          {item.interesado.nombre}{" "}
-                                          {item.interesado.apellido1}{" "}
-                                          {item.interesado.apellido2}
-                                        </td>
-                                      )}
-                                      {typeof item.interesado.razonSocial !==
-                                        "undefined" && (
-                                        <td>{item.interesado.razonSocial}</td>
-                                      )}
-                                      <td>{item.interesado.documento}</td>
+                                {registre.interesados.map((item: any, index: number) => (
+                                  <tr>
+                                    <td>{index + 1}</td>
+                                    {typeof item.interesado.razonSocial === "undefined" && (
                                       <td>
-                                        {this.props.t(
-                                          "registro_tipo_interesado_" +
-                                            item.interesado.tipoInteresado
-                                        )}
+                                        {item.interesado.nombre} {item.interesado.apellido1} {item.interesado.apellido2}
                                       </td>
-                                    </tr>
-                                  )
-                                )}
+                                    )}
+                                    {typeof item.interesado.razonSocial !== "undefined" && (
+                                      <td>{item.interesado.razonSocial}</td>
+                                    )}
+                                    <td>{item.interesado.documento}</td>
+                                    <td>
+                                      {this.props.t("registro_tipo_interesado_" + item.interesado.tipoInteresado)}
+                                    </td>
+                                  </tr>
+                                ))}
                               </tbody>
                             </table>
                           </div>
@@ -578,86 +482,50 @@ class DetallRegistre extends React.Component<
                               <thead>
                                 <tr>
                                   <th scope="col">#</th>
-                                  <th scope="col">
-                                    {this.props.t("registro_anexo_name")}
-                                  </th>
-                                  <th scope="col">
-                                    {this.props.t(
-                                      "registro_anexo_validezdocumento"
-                                    )}
-                                  </th>
-                                  <th scope="col">
-                                    {this.props.t("registro_anexo_file")}
-                                  </th>
+                                  <th scope="col">{this.props.t("registro_anexo_name")}</th>
+                                  <th scope="col">{this.props.t("registro_anexo_validezdocumento")}</th>
+                                  <th scope="col">{this.props.t("registro_anexo_file")}</th>
                                 </tr>
                               </thead>
                               <tbody>
-                                {registre.anexos.map(
-                                  (item: any, index: number) => (
-                                    <tr>
-                                      <td>{index + 1}</td>
-                                      <td>{item.name}</td>
-                                      <td>
-                                        {this.props.t(
-                                          "registro_anexo_validezdocumento_" +
-                                            item.validezDocumento
-                                        )}
-                                      </td>
-                                      <td>
-                                        {!item.confidencial ? (
-                                          item.mime != "" ? (
-                                            <button
-                                              type="button"
-                                              className="d-sm-inline-block btn btn-sm btn-danger shadow-sm"
-                                              onClick={() =>
-                                                this.descarregarAnnex(
-                                                  item.fileID
-                                                )
-                                              }
-                                            >
-                                              <span
-                                                className="oi oi-data-transfer-download"
-                                                title={
-                                                  this.props.t(
-                                                    "registro_anexo_descargar"
-                                                  ) +
-                                                  " " +
-                                                  item.name
-                                                }
-                                                aria-hidden="true"
-                                              ></span>
-                                            </button>
-                                          ) : (
-                                            this.props.t(
-                                              "registro_anexo_nodisponible"
-                                            )
-                                          )
+                                {registre.anexos.map((item: any, index: number) => (
+                                  <tr>
+                                    <td>{index + 1}</td>
+                                    <td>{item.name}</td>
+                                    <td>{this.props.t("registro_anexo_validezdocumento_" + item.validezDocumento)}</td>
+                                    <td>
+                                      {!item.confidencial ? (
+                                        item.mime != "" ? (
+                                          <button
+                                            type="button"
+                                            className="d-sm-inline-block btn btn-sm btn-danger shadow-sm"
+                                            onClick={() => this.descarregarAnnex(item.fileID)}
+                                          >
+                                            <span
+                                              className="oi oi-data-transfer-download"
+                                              title={this.props.t("registro_anexo_descargar") + " " + item.name}
+                                              aria-hidden="true"
+                                            ></span>
+                                          </button>
                                         ) : (
-                                          this.props.t(
-                                            "registro_anexo_confidencial"
-                                          )
-                                        )}
-                                      </td>
-                                    </tr>
-                                  )
-                                )}
+                                          this.props.t("registro_anexo_nodisponible")
+                                        )
+                                      ) : (
+                                        this.props.t("registro_anexo_confidencial")
+                                      )}
+                                    </td>
+                                  </tr>
+                                ))}
                               </tbody>
                             </table>
                           )}
                           {registre.anexos && registre.anexos.length < 1 && (
-                            <p className="text-center colorGrisApp">
-                              {this.props.t("registro_anexos_vacio")}
-                            </p>
+                            <p className="text-center colorGrisApp">{this.props.t("registro_anexos_vacio")}</p>
                           )}
                           {!registre.anexos && (
-                            <p className="text-center colorGrisApp">
-                              {this.props.t("registro_anexos_vacio")}
-                            </p>
+                            <p className="text-center colorGrisApp">{this.props.t("registro_anexos_vacio")}</p>
                           )}
-                          <p
-                            className="text-md-left pt-2 colorGrisApp lletraPetitaApp"
-                            style={{ fontSize: "small" }}
-                          >
+                          <p className="text-md-left pt-2 colorGrisApp lletraPetitaApp" style={{ fontSize: "small" }}>
                             {this.props.t("registro_anexos_nodisponibles")}
                           </p>
                         </div>
@@ -678,19 +546,19 @@ class DetallRegistre extends React.Component<
               <button
                 type="button"
                 data-toggle="modal"
-                onClick={ e => {
-                    //this.props.tornarDeDetallRegistreFunc
-                    //() => {
+                onClick={(e) => {
+                  //this.props.tornarDeDetallRegistreFunc
+                  //() => {
 
-                    tornarDeDetallRegistreFunc(e);
-                    /*
+                  tornarDeDetallRegistreFunc(e);
+                  /*
                   window.location.href = sessionStorage.getItem("pagTornar");
                   sessionStorage.setItem(
                     "pagTornar",
                     sessionStorage.getItem("contextPath")
                   );
                   */
-                } }
+                }}
                 className="botoSuport botoTornauApp"
                 tabIndex={520}
                 aria-labelledby="botoTornarDiscapacidad"
@@ -730,6 +598,5 @@ class DetallRegistre extends React.Component<
     );
   }
 }
-
 
 export default DetallRegistre;

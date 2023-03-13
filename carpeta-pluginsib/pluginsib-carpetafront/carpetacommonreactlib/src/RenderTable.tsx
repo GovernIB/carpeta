@@ -79,7 +79,16 @@ class RenderTable extends React.Component<RenderTableProps, RenderTableState> {
         <div className="alert alert-danger" role="alert">
           {this.state.error}
         </div>
-      );
+      );    
+    }
+
+
+    if (!Array.isArray(this.state.tableData)) {
+      console.log("RenderTable::render() => this.state.tableData = NO ES UN ARRAY !!!!!!");
+    }
+
+    if (this.state.tableData != null) {
+        console.log("RenderTable::render() => this.state.tableData.length = " + this.state.tableData.length);
     }
 
     if (this.state.tableData == null || (this.state.tableData != null && this.state.tableData.length == 0)) {

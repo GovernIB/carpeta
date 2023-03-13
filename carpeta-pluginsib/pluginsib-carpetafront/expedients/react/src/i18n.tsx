@@ -1,4 +1,4 @@
-import i18next from "i18next";
+import i18n from "i18next";
 import detector from "i18next-browser-languagedetector"; // web lang detect
 import { initReactI18next } from "react-i18next";
 
@@ -19,7 +19,7 @@ const resources = {
   },
 };
 
-i18next
+i18n
   .use(detector) // web lang detect
   .use(initReactI18next)
   .init({
@@ -30,4 +30,4 @@ i18next
     },
   });
 
-export default i18next;
+export default i18n;
