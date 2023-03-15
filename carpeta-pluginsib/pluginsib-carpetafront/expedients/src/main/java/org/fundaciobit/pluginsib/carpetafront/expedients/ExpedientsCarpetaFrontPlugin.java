@@ -43,7 +43,7 @@ import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -57,7 +57,8 @@ import java.util.TreeMap;
 public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     public static final String EXPEDIENTS_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "expedients.";
-    public static final long ACTUALITZACIO_MAP_ENTITATS_MS =48 * 60 * 60 * 1000;
+    public static final long ACTUALITZACIO_MAP_ENTITATS_MS = 48 * 60 * 60 * 1000;
+    public static final String ESTAT_TOTS = "E04";
 
     /**
      *
@@ -235,7 +236,7 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
-    // ------------------- JAVASCRIPT REACT ----------------
+    // --------------------------------- JAVASCRIPT REACT -----------------------------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
@@ -303,7 +304,7 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                             + "elementsperpagina no es numèric.", e2);
                 }
             }
-
+            
             int pagina;
             try {
                 pagina = Integer.parseInt(request.getParameter("pagina"));
@@ -313,8 +314,14 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             String nif = userData.getAdministrationID();
             ExpedientConsulta consulta = new ExpedientConsulta(locale.getLanguage(), pagina, elementsPerPagina);
+            
+            String filtreNom = request.getParameter("filtreNom");
+            String filtreEstat = request.getParameter("filtreEstat");
+            String filtreDataInici = request.getParameter("filtreDataInici");
+            String filtreDataFi = request.getParameter("filtreDataFi");
 
-            ExpedientResposta resposta = getExpedientsPerAdministrationID(nif, consulta, locale);
+
+            ExpedientResposta resposta = getExpedientsPerAdministrationID(nif, consulta, locale, filtreNom, filtreEstat, filtreDataInici, filtreDataFi );
 
             Gson gson = new Gson();
             String json = gson.toJson(resposta);
@@ -337,7 +344,7 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
-    // ------------------- PLUGIN ARXIU ----------------
+    // --------------------------- PLUGIN ARXIU ---------------------------------------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
@@ -364,7 +371,9 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     }
 
-    public ExpedientResposta getExpedientsPerAdministrationID(String nif, ExpedientConsulta consulta, Locale locale) throws Exception {
+    public ExpedientResposta getExpedientsPerAdministrationID(String nif, ExpedientConsulta consulta, Locale locale, 
+            String filtreNom, String filtreEstat, String filtreDataInici, String filtreDataFi)
+            throws Exception {
 
         IArxiuPlugin arxiu = instanticatePluginArxiu();
 
@@ -405,77 +414,80 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         ConsultaResultat resultat = arxiu.expedientConsulta(filterList, consulta.getPagina(),
                 consulta.getElementsPerPagina());
 
-        // XYZ ZZZZ
-        /*
-        System.out.println("resultat.getNumPagines() => " + resultat.getNumPagines());
-        System.out.println("resultat.getNumRegistres() => " + resultat.getNumRegistres());
-        System.out.println("resultat.getNumRetornat() => " + resultat.getNumRetornat());
-        System.out.println("resultat.getPaginaActual() => " + resultat.getPaginaActual());
-        */
-
         List<ContingutArxiu> resultats = resultat.getResultats();
 
         //System.out.println("#resultats  => " + resultats.size());
 
         List<ExpedientInfo> expedients = new ArrayList<ExpedientInfo>();
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date dataInici = null, dataFi = null;
+        if(filtreDataInici != null) {
+            dataInici = sdf.parse(filtreDataInici);
+        }
+        if(filtreDataFi != null) {
+            dataFi = sdf.parse(filtreDataFi);
+        }
+        
         for (ContingutArxiu ac : resultats) {
-            //System.out.println(" ============= " + ac.getIdentificador() + " =================");
-            //System.out.println("    Nom: " + ac.getNom()); //  número de l’expedient.
-            //System.out.println("    Desc: " + ac.getDescripcio());
-
-            ExpedientInfo ei = new ExpedientInfo();
-            ei.setExpedientNom(ac.getNom());
-            ei.setExpedientDesc(ac.getDescripcio());
-
+            
             ExpedientMetadades em = ac.getExpedientMetadades();
-            //System.out.println("    getExpedientMetadades(): " + em);
-            if (em != null) {
-                //System.out.println("    getClassificacio: " + em.getClassificacio());
-                //System.out.println("    getDataObertura: " + em.getDataObertura());
 
-                String codiSia = em.getClassificacio();
-                ei.setCodiSia(codiSia);
-                String nomProcediment=null;
-                try {
-                    nomProcediment = this.findProcedimentAmbCodiSia(codiSia, consulta.getLanguage());
-                } catch (Exception e) {
-                    log.error("Error en el procedient de Rolsac. No s'ha pogut obtenir el nom del procediment "+codiSia+": "+ e.getMessage(), e);
-                }
-
-                if (nomProcediment == null || nomProcediment.trim().length() == 0) {
-                    ei.setNomProcediment(getTraduccio("nomprocediment.sense", locale, codiSia));
-                } else {
-                    ei.setNomProcediment(nomProcediment);
-                }
-
-                String expEstat = em.getEstat().toString();
-                if ("E01".equals(expEstat)) {
-                    ei.setExpedientEstat(this.getTraduccio("estat.expedient.1", locale)); 
-                } else if("E02".equals(expEstat)){
-                    ei.setExpedientEstat(this.getTraduccio("estat.expedient.2", locale)); 
-                }else if("E03".equals(expEstat)) {
-                    ei.setExpedientEstat(this.getTraduccio("estat.expedient.3", locale));
-                }else {
-                    ei.setExpedientEstat(this.getTraduccio("estat.expedient.0", locale));
-                }
+            if ((filtreNom == null || filtreNom.isBlank() || ac.getNom().contains(filtreNom))
+                    && (filtreEstat == null || filtreEstat.isBlank() || filtreEstat.equals(em.getEstat().toString()) || filtreEstat.equals(ESTAT_TOTS))
+                    && (dataInici == null || dataInici.getTime() < em.getDataObertura().getTime())
+                    && (dataFi == null || dataFi.getTime() > em.getDataObertura().getTime())) {
                 
-                DateFormat df = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+                ExpedientInfo ei = new ExpedientInfo();
+                ei.setExpedientNom(ac.getNom());
+                ei.setExpedientDesc(ac.getDescripcio());
 
-                ei.setExpedientObertura(df.format(em.getDataObertura()));
-
-                List<String> organsList = em.getOrgans();
-                
-                if (organsList != null && organsList.size() != 0) {
-
-                    List<String> organsNomList = new ArrayList<String>();
-
-                    for (String organDir3 : organsList) { 
-                        organsNomList.add(getNomByDir3(organDir3, consulta.getLanguage()));
+                if (em != null) {
+                    
+                    String codiSia = em.getClassificacio();
+                    ei.setCodiSia(codiSia);
+                    String nomProcediment = null;
+                    try {
+                        nomProcediment = this.findProcedimentAmbCodiSia(codiSia, consulta.getLanguage());
+                    } catch (Exception e) {
+                        log.error("Error en el procedient de Rolsac. No s'ha pogut obtenir el nom del procediment "
+                                + codiSia + ": " + e.getMessage(), e);
                     }
-                    ei.setExpedientOrgans(organsNomList);
+
+                    if (nomProcediment == null || nomProcediment.trim().length() == 0) {
+                        ei.setNomProcediment(getTraduccio("nomprocediment.sense", locale, codiSia));
+                    } else {
+                        ei.setNomProcediment(nomProcediment);
+                    }
+
+                    String expEstat = em.getEstat().toString();
+                    if ("E01".equals(expEstat)) {
+                        ei.setExpedientEstat(this.getTraduccio("estat.expedient.1", locale));
+                    } else if ("E02".equals(expEstat)) {
+                        ei.setExpedientEstat(this.getTraduccio("estat.expedient.2", locale));
+                    } else if ("E03".equals(expEstat)) {
+                        ei.setExpedientEstat(this.getTraduccio("estat.expedient.3", locale));
+                    } else {
+                        ei.setExpedientEstat(this.getTraduccio("estat.expedient.0", locale));
+                    }
+
+                    DateFormat df = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+
+                    ei.setExpedientObertura(df.format(em.getDataObertura()));
+
+                    List<String> organsList = em.getOrgans();
+
+                    if (organsList != null && organsList.size() != 0) {
+
+                        List<String> organsNomList = new ArrayList<String>();
+
+                        for (String organDir3 : organsList) {
+                            organsNomList.add(getNomByDir3(organDir3, consulta.getLanguage()));
+                        }
+                        ei.setExpedientOrgans(organsNomList);
+                    }
+                    expedients.add(ei);
                 }
-                expedients.add(ei);
             }
         }
 
@@ -495,25 +507,23 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     protected static TreeMap<String, TreeMap<String, String>> unidadesCache = new TreeMap<String, TreeMap<String, String>>();
     protected static TreeMap<String, Long> t_darrera_actualitzacio_dir3 = new TreeMap<String, Long>();
 
-        
     public String getNomByDir3(String codiDir3, String language) {
 
         try {
-            
-            if(t_darrera_actualitzacio_dir3.get(language) == null) {
+
+            if (t_darrera_actualitzacio_dir3.get(language) == null) {
                 t_darrera_actualitzacio_dir3.put(language, (long) 0);
             }
             long timeLastDir3Update = System.currentTimeMillis() - t_darrera_actualitzacio_dir3.get(language);
 
-            
             TreeMap<String, String> unidadesCacheLng = unidadesCache.get(language);
-            
-            if (unidadesCacheLng == null || timeLastDir3Update > ACTUALITZACIO_MAP_ENTITATS_MS ) {
-                
+
+            if (unidadesCacheLng == null || timeLastDir3Update > ACTUALITZACIO_MAP_ENTITATS_MS) {
+
                 unidadesCacheLng = getNomUnidadesAdministrativas(language);
-                
+
                 t_darrera_actualitzacio_dir3.put(language, System.currentTimeMillis());
-                
+
                 unidadesCache.put(language, unidadesCacheLng);
             }
 
@@ -526,7 +536,7 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             return nom;
 
         } catch (Exception e) {
-            
+
             log.error("Error esbrinant nom d´unidata amb codiDir3 " + codiDir3);
 
             return codiDir3;
@@ -554,9 +564,7 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 if (ua.getCodigoDIR3() != null) {
                     map.put(ua.getCodigoDIR3(), ua.getNombre());
                 }
-
             }
-
         }
 
         return map;

@@ -24,3 +24,12 @@ es.caib.carpeta.pluginsib.carpetafront.expedients.rolsac.username=username_rolsa
 es.caib.carpeta.pluginsib.carpetafront.expedients.rolsac.password=password
 es.caib.carpeta.pluginsib.carpetafront.expedients.rolsac.connecttimeout=20000
 es.caib.carpeta.pluginsib.carpetafront.expedients.rolsac.readtimeout=20000
+
+
+#Filtres plugin Expedient
+#es.caib.carpeta.pluginsib.carpetafront.expedients.filtre.1.metadada=eni:metadada_sample
+#es.caib.carpeta.pluginsib.carpetafront.expedients.filtre.1.operacio=CONTE
+#es.caib.carpeta.pluginsib.carpetafront.expedients.filtre.1.valor1=valor1_sample
+#es.caib.carpeta.pluginsib.carpetafront.expedients.filtre.1.valor2=valor2_sample
+
+#es.caib.carpeta.pluginsib.carpetafront.expedients.filtre.2.metadada=...
