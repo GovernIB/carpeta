@@ -5,6 +5,7 @@ import {RenderTableData, RenderTableReturn} from "./RenderTableProps";
 import { RenderPaginationTableData, PaginationInfo, RenderPaginationTableProps, ReturnPaginationData } from "./PaginationCarpetaProps";
 import RenderPaginationTable from "./RenderPaginationTable";
 import TemplatePageCarpeta from "./TemplatePageCarpeta";
+import {TemplatePageCarpetaProps} from "./TemplatePageCarpeta";
 import { RowTypeUtils } from "./RowTypeUtils";
 import { RowType } from "./RowType";
 
@@ -17,6 +18,7 @@ export {
   RenderPaginationTableProps,
   RenderPaginationTableData,
   ReturnPaginationData,
+  TemplatePageCarpetaProps,
   PaginationInfo,
   TemplatePageCarpeta,
   RowType,

@@ -319,6 +319,9 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             String relativePluginRequestPath, String query, HttpServletRequest request,
             HttpServletResponse response, UserData userData, String administrationEncriptedID,
             Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
+        
+        
+        log.info("\n\n\n================================\nllistatDeRegistresJson:: ENTRA");
     	
     	try {
     		
@@ -446,8 +449,8 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
                 log.error("Error obtening writer: " + e.getMessage(), e);
             }
 
-        } catch (Exception e) {
-            log.error("Error generant pàgina bàsica: " + e.getMessage(), e);
+        } catch (Throwable e) {
+            log.error("Error consultant registres a traves de API: " + e.getMessage(), e);
             errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
         }
     	

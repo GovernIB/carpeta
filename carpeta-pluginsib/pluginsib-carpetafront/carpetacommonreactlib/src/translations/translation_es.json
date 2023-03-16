@@ -1,8 +1,8 @@
 {
     "tornar": "Volver",
     "paginacioLabel": "Mostrando elementos del {{from}} al {{to}} de un total de {{total}}",
-    "registroMostra":"Muestra  ",
-    "registroRegistres":"  elementos",
+    "elementPerPaginaMostra":"Muestra  ",
+    "elementPerPaginaElements":"  elementos",
 
     "taulaBuida": "No hay elementos para mostrar",
 

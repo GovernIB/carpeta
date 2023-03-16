@@ -13,19 +13,16 @@ import * as reactdetect from "react-device-detect";
 import { PaginationCarpetaProps, PaginationInfo } from "./PaginationCarpetaProps";
 import RenderPaginationTable from "./RenderPaginationTable";
 
-interface PaginationCarpetaState  {
+interface PaginationCarpetaState {
   paginationInfo: PaginationInfo | null;
 }
 
-
 class PaginationCarpeta extends React.Component<PaginationCarpetaProps, PaginationCarpetaState> {
-
-
   constructor(props: PaginationCarpetaProps) {
     super(props);
-    
+
     console.log("  CONSTRUCTOR PaginationCarpeta !!!!!");
-/*
+    /*
     console.log(
       "PaginationCarpeta().paginaActual  => " +
         this.props.paginationInfo.paginaActual
@@ -51,16 +48,11 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
     this.updatePaginationInfo = this.updatePaginationInfo.bind(this);
 
     this.state = {
-       paginationInfo : null
-    }
-
+      paginationInfo: null,
+    };
   }
 
-
-
-
   updatePaginationInfo(paginationInfo: PaginationInfo | null) {
-    
     if (paginationInfo == null) {
       console.log("PaginationCarpeta::updatePaginationInfo(CARREGANT...)");
     } else {
@@ -68,8 +60,6 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
     }
     this.setState({ paginationInfo: paginationInfo });
   }
-
-
 
   render() {
     console.log("PaginationCarpeta::render() =>  START");
@@ -81,8 +71,6 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
       return <></>;
     }
 
-
-    
     //console.log("PaginationCarpeta::render() =>  this.props.paginationInfo ...");
     const current: number = paginationInfo.elementsRetornats;
     const total: number = paginationInfo.totalElements;
@@ -92,9 +80,9 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
       (1 + paginationInfo.paginaActual) * paginationInfo.elementsPerPagina
     );
 
-        /* Mostrant elements del {{from}} al {{to}} d'un total de {{total}} elements*/
+    /* Mostrant elements del {{from}} al {{to}} d'un total de {{total}} elements*/
     //console.log("PaginationCarpeta::render() =>  Desplegable elementsPerPàgina ...");
-    
+
     let message: string = this.props.i18n.t("paginacioLabel", {
       current: current,
       total: total,
@@ -105,146 +93,129 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
     let onClick: Function = this.props.onClickPagination;
     let onClickSelectElementsByPage: Function | undefined = undefined;
 
-    let pagination:JSX.Element = <></>;
+    let pagination: JSX.Element = <></>;
     let numElements: JSX.Element = <></>;
 
-
     if (paginationInfo.totalPagines != 1) {
+      //console.log("PaginationCarpeta::render() =>  selectElementsByPage ...");
+      onClickSelectElementsByPage = this.props.onClickSelectElementsByPage;
 
-    //console.log("PaginationCarpeta::render() =>  selectElementsByPage ...");
-    onClickSelectElementsByPage = this.props.onClickSelectElementsByPage;
+      //console.log("PaginationCarpeta::render() =>  Functions ...");
 
-    
+      //Si el parametre onClickSelectElementsByPage te valor, existeix una funcio per canviar el nº de elements
+      // per tant s'ha de incloure l'element per canviar el nº de elements.
 
+      // Si el parametre elementsByPage te valors, agafarlos, si no, agafar 5, 10 i 25 per defecte.
+      //console.log("PaginationCarpeta::render() =>  pagines ...");
+      let pagines: any = [];
 
+      // First
+      pagines.push(
+        <Item value={0} onClick={onClick}>
+          «
+        </Item>
+      );
+      // Previous
+      pagines.push(
+        <Item value={Math.max(0, paginationInfo.paginaActual - 1)} onClick={onClick}>
+          ‹
+        </Item>
+      );
 
-
-    //console.log("PaginationCarpeta::render() =>  Functions ...");
-    
-
-
-
-    //Si el parametre onClickSelectElementsByPage te valor, existeix una funcio per canviar el nº de elements
-    // per tant s'ha de incloure l'element per canviar el nº de elements.
-
-    // Si el parametre elementsByPage te valors, agafarlos, si no, agafar 5, 10 i 25 per defecte.
-    //console.log("PaginationCarpeta::render() =>  pagines ...");
-    let pagines: any = [];
-
-    // First
-    pagines.push(
-      <Item value={0} onClick={onClick}>
-        «
-      </Item>
-    );
-    // Previous
-    pagines.push(
-      <Item value={Math.max(0, paginationInfo.paginaActual - 1)} onClick={onClick}>
-        ‹
-      </Item>
-    );
-
-    // All pagination numbers
-    {
-      for (let i = 0; i < paginationInfo.totalPagines; i++) {
-        pagines.push(
-          <Item key={i} value={i} onClick={onClick} active={paginationInfo.paginaActual == i}>
-            {"" + (i + 1)}
-          </Item>
-        );
+      // All pagination numbers
+      {
+        for (let i = 0; i < paginationInfo.totalPagines; i++) {
+          pagines.push(
+            <Item key={i} value={i} onClick={onClick} active={paginationInfo.paginaActual == i}>
+              {"" + (i + 1)}
+            </Item>
+          );
+        }
       }
-    }
 
-    // next
-    pagines.push(
-      <Item
-        value={Math.min(paginationInfo.paginaActual + 1, paginationInfo.totalPagines - 1)}
-        onClick={onClick}
-      >
-        ›
-      </Item>
-    );
-    // Last
-    pagines.push(
-      <Item value={paginationInfo.totalPagines - 1} onClick={onClick}>
-        »
-      </Item>
-    );
+      // next
+      pagines.push(
+        <Item value={Math.min(paginationInfo.paginaActual + 1, paginationInfo.totalPagines - 1)} onClick={onClick}>
+          ›
+        </Item>
+      );
+      // Last
+      pagines.push(
+        <Item value={paginationInfo.totalPagines - 1} onClick={onClick}>
+          »
+        </Item>
+      );
 
-    //Options per numero de elements a pintar per pagina
-    //console.log("PaginationCarpeta::render() =>  onClickSelectElementsByPage ...");
+      //Options per numero de elements a pintar per pagina
+      //console.log("PaginationCarpeta::render() =>  onClickSelectElementsByPage ...");
 
-    let selectElementsByPage =  this.props.selectElementsByPage
-    if (selectElementsByPage == undefined) {
-      selectElementsByPage = RenderPaginationTable.DEFAULT_SELECT_ELEMENTS_BY_PAGE;
-    }
-    
-    if (selectElementsByPage != null) {
-      let numElementOptions: any = [];
+      let selectElementsByPage = this.props.selectElementsByPage;
+      if (selectElementsByPage == undefined) {
+        selectElementsByPage = RenderPaginationTable.DEFAULT_SELECT_ELEMENTS_BY_PAGE;
+      }
 
-      //this.props.paginationInfo.elementsByPage.map((element) => numElementOptions.push(<option>{element}</option>));
-      /*for (var i in this.props.paginationInfo.elementsByPage) {
+      if (selectElementsByPage != null) {
+        let numElementOptions: any = [];
+
+        //this.props.paginationInfo.elementsByPage.map((element) => numElementOptions.push(<option>{element}</option>));
+        /*for (var i in this.props.paginationInfo.elementsByPage) {
         console.log("XYZ ZZZ Assignant valor numElements.");
         numElementOptions.push(
           <option key={i}>{this.props.paginationInfo.elementsByPage[i]}</option>
         );
       }
       */
-      for (var i = 0; i < selectElementsByPage.length; i++) {
-        numElementOptions.push(
-          <option key={i} value={selectElementsByPage[i]}>
-            {selectElementsByPage[i]}
-          </option>
+        for (var i = 0; i < selectElementsByPage.length; i++) {
+          numElementOptions.push(
+            <option key={i} value={selectElementsByPage[i]}>
+              {selectElementsByPage[i]}
+            </option>
+          );
+        }
+
+        numElements = (
+          <div
+            className="pagination"
+            style={{
+              float: "none",
+              alignItems: "center",
+              justifyContent: "center",
+              marginRight: "10px",
+            }}
+          >
+            {this.props.i18n.t("elementPerPaginaMostra")} &nbsp;
+            <select
+              defaultValue={paginationInfo.elementsPerPagina}
+              onChange={(e) => {
+                if (onClickSelectElementsByPage) {
+                  onClickSelectElementsByPage(e.target.value);
+                }
+              }}
+            >
+              {numElementOptions}
+            </select>
+            &nbsp;
+            {this.props.i18n.t("elementPerPaginaElements")}
+          </div>
         );
       }
 
-      numElements = (
-        <div
-          className="pagination"
-          style={{
-            float: "none",
-            alignItems: "center",
-            justifyContent: "center",
-            marginRight: "10px",
-          }}
-        >
-          {this.props.i18n.t("registroMostra")}
-          <select
-            defaultValue={paginationInfo.elementsPerPagina}
-            onChange={(e) => {
-              if (onClickSelectElementsByPage) {
-                onClickSelectElementsByPage(e.target.value);
-              }
+      pagination = (
+        <nav aria-label="Page navigation">
+          <ul
+            key="pn_1"
+            className="pagination"
+            style={{
+              float: "none",
+              alignItems: "center",
+              justifyContent: "center",
             }}
           >
-            {numElementOptions}
-          </select>
-          {this.props.i18n.t("registroRegistres")}
-        </div>
+            {pagines}
+          </ul>
+        </nav>
       );
     }
-
-
-
-    pagination = (
-      <nav aria-label="Page navigation">
-        <ul
-          key="pn_1"
-          className="pagination"
-          style={{
-            float: "none",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          {pagines}
-        </ul>
-      </nav>
-    );
-
-        }
-
-
 
     if (reactdetect.isMobileOnly) {
       if (onClickSelectElementsByPage) {

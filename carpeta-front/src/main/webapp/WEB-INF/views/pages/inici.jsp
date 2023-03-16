@@ -24,9 +24,12 @@
     <%-- Bootstrap --%>
 	<script src="<c:url value="/src/assets/js/bootstrap.min.js"/>"></script>
 
-	<!-- Datetimpicker -->
+	<!-- Datetimepicker -->
 	<script src="<c:url value="/src/assets/js/moment-with-locales.min.js"/>"></script>
-	<script src="<c:url value="/src/assets/js/bootstrap-datetimepicker.js"/>"></script>
+	<%-- <script src="<c:url value="/src/assets/js/bootstrap-datetimepicker.js"/>"></script> --%>
+    
+    <script src="<c:url value="/src/assets/js/tempusdominus-bootstrap-4.js"/>"></script>
+    
 	<!-- Necessari per les cookies -->
 	<script type="text/javascript" src="<c:url value="/src/assets/js/jquery.slimscroll.min.js"/>"></script>
 	<script src="<c:url value="/src/assets/js/modernizr.js"/>"></script>
@@ -45,7 +48,12 @@
 
 	<!-- ESTILS -->
 	<link href="<c:url value="/src/assets/css/bootstrap.min.css"/>" rel="stylesheet">
-	<link href="<c:url value="/src/assets/css/bootstrap-datetimepicker.min.css"/>" rel="stylesheet">
+	<%--
+    <link href="<c:url value="/src/assets/css/bootstrap-datetimepicker.min.css"/>" rel="stylesheet">
+    --%>
+    <!-- Bootstrap DateTimepicker CSS   -->
+    <link href="<c:url value="/src/assets/css/tempusdominus-bootstrap-4.css"/>" rel="stylesheet">
+    
 	<link href="<c:url value="/src/assets/css/jquery-ui.min.css"/>" rel="stylesheet">
 	<link href="<c:url value="/src/assets/css/goib.css"/>" rel="stylesheet">
 	<link href="<c:url value="/src/assets/css/carpeta.css"/>" rel="stylesheet">

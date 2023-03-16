@@ -7,7 +7,7 @@ const config = {
     filename: "regweb32_reactjs_main.js",
   },
   target: "node",
-  mode: "development",
+  mode: "production",
   resolve: {
     extensions: [".js",".jsx", ".ts", ".tsx"],
   },

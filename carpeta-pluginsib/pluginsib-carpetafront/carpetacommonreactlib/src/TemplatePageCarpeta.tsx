@@ -10,7 +10,7 @@ import initTranslation from "./InitTranslation";
 import * as reactdetect from "react-device-detect";
 
 
-interface TemplatePageCarpetaProps {
+export interface TemplatePageCarpetaProps {
   titles: any;
   subtitles: any;
   children: JSX.Element;

@@ -1,8 +1,8 @@
 {
     "tornar": "Tornau",
     "paginacioLabel": "Mostrant elements del {{from}} al {{to}} d'un total de {{total}}",
-    "registroMostra":"Mostra  ",
-    "registroRegistres":"  elements",
+    "elementPerPaginaMostra":"Mostra  ",
+    "elementPerPaginaElements":"  elements",
 
     "taulaBuida": "No hi ha elements a mostrar",
 
