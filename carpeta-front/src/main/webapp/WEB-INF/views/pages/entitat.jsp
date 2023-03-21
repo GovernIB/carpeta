@@ -22,7 +22,9 @@
     <script src="<c:url value="/src/assets/js/bootstrap.min.js"/>"></script>
     <!-- Datetimpicker -->
     <script src="<c:url value="/src/assets/js/moment-with-locales.min.js"/>"></script>
+    <%--
     <script src="<c:url value="/src/assets/js/bootstrap-datetimepicker.js"/>"></script>
+    --%>
     <!-- Necessari per les cookies -->
     <script type="text/javascript" src="<c:url value="/src/assets/js/jquery.slimscroll.min.js"/>"></script>
     <script src="<c:url value="/src/assets/js/modernizr.js"/>"></script>
@@ -41,7 +43,9 @@
 
     <!-- ESTILS entitat.jsp-->
     <link href="<c:url value="/src/assets/css/bootstrap.min.css"/>" rel="stylesheet">
+    <%--
     <link href="<c:url value="/src/assets/css/bootstrap-datetimepicker.min.css"/>" rel="stylesheet">
+    --%>
     <link href="<c:url value="/src/assets/css/goib.css"/>" rel="stylesheet">
     <link href="<c:url value="/src/assets/css/carpeta.css"/>" rel="stylesheet">
     <link href="<c:url value="/src/assets/css/open-iconic-bootstrap.css"/>" rel="stylesheet">

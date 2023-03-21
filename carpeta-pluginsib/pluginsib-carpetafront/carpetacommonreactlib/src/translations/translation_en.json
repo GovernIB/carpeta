@@ -1,8 +1,8 @@
 {
     "tornar": "Back",
     "paginacioLabel": "Mostrando {{current}} entradas de {{total}} (De la posición {{from}} hasta la {{to}})",
-    "registroMostra":"Show  ",
-    "registroRegistres":"  elements",
+    "elementPerPaginaMostra":"Show  ",
+    "elementPerPaginaElements":"  elements",
 
     "taulaBuida": "No hay elementos para mostrar",
 

@@ -5,7 +5,7 @@
  * @desc [description]
  */
 import React from "react";
-interface TemplatePageCarpetaProps {
+export interface TemplatePageCarpetaProps {
     titles: any;
     subtitles: any;
     children: JSX.Element;
