@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {withTranslation} from 'react-i18next';
+import { WithTranslation, withTranslation } from "react-i18next";
+
 import i18n from './i18n';
 import axios from "axios";
 import Table from 'react-bootstrap/Table';
@@ -9,15 +10,62 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import DatePicker from 'react-datepicker';
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 /**
  *  @author jpernia
  */
 
-class Notib extends Component {
+interface NotibProps extends WithTranslation {
+    pathtoservei: string;
+    titles: any;
+    subtitles: any;
+    pathtoserveiPendientesUrl: string;
+    pathtoserveiLeidasUrl: string;
+    notificacionesTodasUrl: string;
+    notificacionesPendientesUrl: string;
+    notificacionesLeidasUrl: string;
+    comunicacionesTodasUrl: string;
+    comunicacionesPendientesUrl: string;
+    comunicacionesLeidasUrl: string;
 
-    constructor(props) {
+}
+
+type NotibState = {
+    isLoaded: boolean;
+    dataComunicacions: any;
+    dataInici: Date;
+    dataFi: Date;
+    urldetallbase: string|null;
+    urldetallbase2: string|null;
+    urldetallbase3: string|undefined;
+    filter_regPorPagina: number;
+    filter_type: string;
+    filter_status: string;
+    pagination_active: number;
+    pagination_total_items: number;
+    total_items: number;
+    error: any;
+    cercaRegistres: number;
+    missatgeBuid: string;
+    formVisible: boolean;
+};
+
+type NotibTransmissio = {
+    
+}
+
+class Notib extends React.Component<
+NotibProps,
+NotibState,
+NotibTransmissio
+> {
+
+    
+
+    constructor(props: NotibProps) {
         super(props);
 
         let startDateObj = new Date();
@@ -31,7 +79,7 @@ class Notib extends Component {
             dataFi: endDateObj,
             urldetallbase: null,
             urldetallbase2: null,
-            urldetallbase3: null,
+            urldetallbase3: undefined,
             filter_regPorPagina: 5,
             filter_type: '0',
             filter_status: '0',
@@ -55,8 +103,8 @@ class Notib extends Component {
 
         this.handleSubmitSearcher = this.handleSubmitSearcher.bind(this);
 
-        const getLocale = Locale => require(`date-fns/locale/${sessionStorage.getItem("langActual")}/index.js`);
-        this.locale = getLocale(this.props.language);
+        //const getLocale = Locale => require(`date-fns/locale/${sessionStorage.getItem("langActual")}/index.js`);
+        //this.locale = getLocale(this.props.language);
 
         this.canviatIdioma = this.canviatIdioma.bind(this);
         i18n.on('languageChanged', this.canviatIdioma);
@@ -64,10 +112,16 @@ class Notib extends Component {
     }
 
     mostrarForm(){
-        if(document.getElementById("fechaBusqueda").classList.contains("ocultarMobil")) {
-            document.getElementById("fechaBusqueda").classList.remove("ocultarMobil");
+        let fechaBusqueda = document.getElementById("fechaBusqueda");
+        if(fechaBusqueda != null && fechaBusqueda.classList.contains("ocultarMobil")) {
+            fechaBusqueda.classList.remove("ocultarMobil");
         }
-        document.getElementById("idCriteris").style.display = "none";
+
+        let idCriteris = document.getElementById("idCriteris");
+        if(idCriteris != null){
+            idCriteris.style.display = "none";
+        }
+        
 
         this.setState({
             ...this.state,
@@ -75,55 +129,58 @@ class Notib extends Component {
         });
     }
 
-    mostrarMesInfo(row) {
-        if(document.getElementById(row).style.display === "none" ) {
-            document.getElementById(row).style.display = "table-row";
-        } else if( document.getElementById(row).style.display === "table-row" ) {
-            document.getElementById(row).style.display = "none";
+    mostrarMesInfo(row: string) {
+        let rowElement = document.getElementById(row);
+        if(rowElement != null){
+            if(rowElement.style.display === "none" ) {
+                rowElement.style.display = "table-row";
+            } else if( rowElement.style.display === "table-row" ) {
+                rowElement.style.display = "none";
+            }
         }
     }
 
-    canviatIdioma(lng) {
+    canviatIdioma(lng: string) {
         this.componentDidMount();
     }
 
-    handleChangeDataInici(e) {
+    handleChangeDataInici(e: Date) {
         this.setState({
             ...this.state,
             dataInici: e
         });
     }
-    handleChangeDataFi(e) {
+    handleChangeDataFi(e: Date) {
         this.setState({
             ...this.state,
             dataFi: e
         });
     }
 
-    handleTypeFilterParam(e){
+    handleTypeFilterParam(e: string){
         this.setState({
             ...this.state,
-            filter_type: e.target.value,
+            filter_type: e,
             filter_status: '0'
         });
     };
 
-    handleStatusFilterParam(e){
+    handleStatusFilterParam(e: string){
         this.setState({
             ...this.state,
-            filter_status: e.target.value
+            filter_status: e
         });
     };
 
-    handleRegPorPaginaFilterParam(e){
+    handleRegPorPaginaFilterParam(e: number){
         this.setState({
-            filter_regPorPagina: e.target.value,
+            filter_regPorPagina: e,
             isLoaded: false,
             error: null,
-            cercaRegistres: e.target.value
+            cercaRegistres: e
         });
 
-        let url3;
+        let url3 : string = "";
         if(this.state.filter_type === '0') {
             if(this.state.filter_status === '0') {
                 url3 = this.props.pathtoservei;
@@ -153,14 +210,14 @@ class Notib extends Component {
         const params = {
             dataInici: this.state.dataInici,
             dataFi: this.state.dataFi,
-            registrosPorPagina: e.target.value,
+            registrosPorPagina: e,
             pageNumber: 0,
             tipo: this.state.filter_type,
             estado: this.state.filter_status
         };
-
-        axios.get(url3, {params: params}).then( (response) => {
-
+        if(url3){
+            axios.get(url3, {params: params}).then( (response) => {
+        
             if (response.data != null){
                 this.setState({
                     ...this.state,
@@ -198,15 +255,17 @@ class Notib extends Component {
             }
 
         });
+    }
 
     };
 
 
-    handlePagination(event, accio, isNumber, pag){
+    handlePagination(event: any, accio: number, isNumber: boolean, pag: number){
 
-        let newPageNumber = event.target.text;
-        let pagActiva;
+        let newPageNumber: number = event.target.value;
+        let pagActiva: number;
 
+        pagActiva = pag;
         if(!isNumber) {
             if (accio === 0) {
                 pagActiva = newPageNumber;
@@ -217,8 +276,6 @@ class Notib extends Component {
             if (accio === 2) {
                 pagActiva = this.state.pagination_active + 1;
             }
-        }else{
-            pagActiva = pag;
         }
 
         this.setState({
@@ -239,7 +296,7 @@ class Notib extends Component {
             estado: this.state.filter_status
         };
 
-        let url2;
+        let url2: string = "";
         if(this.state.filter_type === '0') {
             if(this.state.filter_status === '0') {
                 url2 = this.props.pathtoservei;
@@ -266,6 +323,7 @@ class Notib extends Component {
             }
         }
 
+        if(url2){
         axios.get(url2, {params: params}).then( (response) => {
             if (response.data != null){
                 this.setState({
@@ -303,10 +361,11 @@ class Notib extends Component {
                 }
 
             });
+        }
 
     }
 
-    handleSubmitSearcher(e) {
+    handleSubmitSearcher(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
 
         const {t} = this.props;
 
@@ -331,7 +390,7 @@ class Notib extends Component {
                 this.setState({ ...this.state, missatgeBuid: t('notibComunicacionsBuid'), isLoaded: false });
             }
 
-            let url2;
+            let url2 : string = "";
             if(this.state.filter_type === '0') {
                 if(this.state.filter_status === '0') {
                     url2 = this.props.pathtoservei;
@@ -367,9 +426,10 @@ class Notib extends Component {
                 estado: this.state.filter_status
             };
 
+            if(url2){
 
+            
             axios.get(url2, {params: params}).then( (response) => {
-
                 this.setState({
                     ...this.state,
                     isLoaded: true,
@@ -416,17 +476,14 @@ class Notib extends Component {
                             isLoaded: true
                         });
                     }
-
                 });
-
+            }
         } else{
             e.preventDefault();
         }
-
     }
 
     componentDidMount() {
-
         this.setState({
             ...this.state,
             isLoaded: true
@@ -436,12 +493,10 @@ class Notib extends Component {
         let validatFormulari = this.validaFormulari();
 
         if(validatFormulari) {
-
             this.setState({
                 ...this.state,
                 isLoaded: false
             });
-
             const url = this.props.pathtoservei;
 
             const params = {
@@ -489,8 +544,6 @@ class Notib extends Component {
 
             });
 
-        } else{
-            e.preventDefault();
         }
 
     }
@@ -499,11 +552,11 @@ class Notib extends Component {
 
         const { t } = this.props;
 
-        if(!this.validaFecha(this.state.dataInici) || !this.validaFecha(this.state.dataFi)){
+        if(!this.validaFecha(this.state.dataInici.toDateString()) || !this.validaFecha(this.state.dataFi.toDateString())){
             return false;
         }
 
-        if(Date.parse(this.state.dataInici) > Date.parse(this.state.dataFi)){
+        if(Date.parse(this.state.dataInici.toDateString()) > Date.parse(this.state.dataFi.toDateString())){
             $('#errorMsg').html(t('notibDataIniciError'));
             $('#errorContainer').removeClass('ocult');
             return false;
@@ -512,7 +565,7 @@ class Notib extends Component {
         return true;
     }
 
-    validaFecha(date) {
+    validaFecha(date: string) {
         if (isNaN(Date.parse(date))){
             $('#errorMsg').html("Error de data");
             $('#errorContainer').removeClass("ocult");
@@ -532,66 +585,65 @@ class Notib extends Component {
         });
     }
 
+    dateOrder = function(dateObject: string) {
+        var d = new Date(dateObject);
+        var day = d.getDate();
+        var month = d.getMonth() + 1;
+        var year = d.getFullYear();
+        var hour = d.getHours();
+        var minute = d.getMinutes();
+        if (day < 10) {
+            day = 0 + day;
+        }
+        if (month < 10) {
+            month = 0 + month;
+        }
+        if (hour < 10) {
+            hour = 0 + hour;
+        }
+        if (minute < 10) {
+            minute = 0 + minute;
+        }
+        return year.toString() + month.toString() + day.toString() + hour.toString() + minute.toString();
+    };
+
+    dateFormat = function(dateObject: string) {
+        var d = new Date(dateObject);
+        var day = d.getDate();
+        var month = d.getMonth() + 1;
+        var year = d.getFullYear();
+        var hour = d.getHours();
+        var minute = d.getMinutes();
+        if (day < 10) {
+            day = 0 + day;
+        }
+        if (month < 10) {
+            month = 0 + month;
+        }
+        if (hour < 10) {
+            hour = 0 + hour;
+        }
+        if (minute < 10) {
+            minute = 0 + minute;
+        }
+        return day + "/" + month + "/" + year + " " + hour + ":" + minute;
+    };
+
+    dateFormatCerca = function(dateObject: Date) {
+        var d = new Date(dateObject);
+        var day = d.getDate();
+        var month = d.getMonth() + 1;
+        var year = d.getFullYear();
+        if (day < 10) {
+            day = 0 + day;
+        }
+        if (month < 10) {
+            month = 0 + month;
+        }
+        return day + "-" + month + "-" + year;
+    };
 
     render() {
-
-        $.dateOrder = function(dateObject) {
-            var d = new Date(dateObject);
-            var day = d.getDate();
-            var month = d.getMonth() + 1;
-            var year = d.getFullYear();
-            var hour = d.getHours();
-            var minute = d.getMinutes();
-            if (day < 10) {
-                day = "0" + day;
-            }
-            if (month < 10) {
-                month = "0" + month;
-            }
-            if (hour < 10) {
-                hour = "0" + hour;
-            }
-            if (minute < 10) {
-                minute = "0" + minute;
-            }
-            return year.toString() + month.toString() + day.toString() + hour.toString() + minute.toString();
-        };
-
-        $.dateFormat = function(dateObject) {
-            var d = new Date(dateObject);
-            var day = d.getDate();
-            var month = d.getMonth() + 1;
-            var year = d.getFullYear();
-            var hour = d.getHours();
-            var minute = d.getMinutes();
-            if (day < 10) {
-                day = "0" + day;
-            }
-            if (month < 10) {
-                month = "0" + month;
-            }
-            if (hour < 10) {
-                hour = "0" + hour;
-            }
-            if (minute < 10) {
-                minute = "0" + minute;
-            }
-            return day + "/" + month + "/" + year + " " + hour + ":" + minute;
-        };
-
-        $.dateFormatCerca = function(dateObject) {
-            var d = new Date(dateObject);
-            var day = d.getDate();
-            var month = d.getMonth() + 1;
-            var year = d.getFullYear();
-            if (day < 10) {
-                day = "0" + day;
-            }
-            if (month < 10) {
-                month = "0" + month;
-            }
-            return day + "-" + month + "-" + year;
-        };
 
         const isLoaded = this.state.isLoaded;
 
@@ -620,17 +672,18 @@ class Notib extends Component {
                                 <DatePicker
                                     portalId="root-portal"
                                     selected={this.state.dataInici}
-                                    onChange={ (startDate) => this.handleChangeDataInici(startDate) }
+                                    onChange={ (startDate: Date) => this.handleChangeDataInici(startDate) }
                                     selectsStart
                                     name="dataInici"
                                     id="dataInici"
                                     dateFormat="dd/MM/yyyy"
                                     className="form-control form-control-sm estilCalendar focusIn font1App"
-                                    locale={this.locale}
+                                    locale={this.props.i18n.language}
                                     showYearDropdown={true}
                                     preventOpenOnFocus={true}
                                     popperPlacement="bottom"
                                     popperModifiers={{
+                                        //@ts-ignore
                                         flip: {
                                             behavior: ["bottom"] // don't allow it to flip to be above
                                         },
@@ -650,18 +703,19 @@ class Notib extends Component {
                                 <DatePicker
                                     portalId="root-portal"
                                     selected={this.state.dataFi}
-                                    onChange={ (endDate) => this.handleChangeDataFi(endDate) }
+                                    onChange={ (endDate: Date) => this.handleChangeDataFi(endDate) }
                                     selectsEnd
                                     minDate={this.state.dataInici}
                                     name="dataFi"
                                     id="dataFi"
                                     dateFormat="dd/MM/yyyy"
                                     className="form-control form-control-sm estilCalendar focusIn font1App"
-                                    locale={this.locale}
+                                    locale={this.props.i18n.language}
                                     showYearDropdown={true}
                                     preventOpenOnFocus={true}
                                     popperPlacement="bottom"
                                     popperModifiers={{
+                                        //@ts-ignore
                                         flip: {
                                             behavior: ["bottom"] // don't allow it to flip to be above
                                         },
@@ -682,12 +736,12 @@ class Notib extends Component {
                             <Form.Group>
                                 <Form.Label style={{float:'left'}}>{t('notibTipus')}</Form.Label>
                                 <Form.Select id="tipo"
-                                             name="tipo" className="form-control form-control-sm focusIn font1App"
-                                             value={this.state.filter_type}
-                                             tabindex="504"
-                                             aria-labelledby="tipo"
-                                             onChange={(e) => {this.handleTypeFilterParam(e); }}>
-                                    <option value="0" className="form-control form-control-sm selectMobil" selected="selected">{t('notibTotes')}</option>
+                                            name="tipo" className="form-control form-control-sm focusIn font1App"
+                                            value={this.state.filter_type}
+                                            tabIndex = {504}
+                                            aria-labelledby="tipo"
+                                            onChange={(e) => {this.handleTypeFilterParam(e.target.value); }}>
+                                    <option value="0" className="form-control form-control-sm selectMobil" selected={true}>{t('notibTotes')}</option>
                                     <option value="1" className="form-control form-control-sm selectMobil">{t('notibNotificacions')}</option>
                                     <option value="2" className="form-control form-control-sm selectMobil">{t('notibComunicacions')}</option>
                                 </Form.Select>
@@ -698,12 +752,12 @@ class Notib extends Component {
                             <Form.Group>
                                 <Form.Label style={{float:'left'}}>{t('notibComunicacionEstat')}</Form.Label>
                                 <Form.Select id="estat"
-                                             name="estat" className="form-control form-control-sm focusIn font1App"
-                                             value={this.state.filter_status}
-                                             tabindex="505"
-                                             aria-labelledby="estat"
-                                             onChange={(e) => {this.handleStatusFilterParam(e); }}>
-                                    <option value="0" className="form-control form-control-sm selectMobil" selected="selected">{t('notibTotes')}</option>
+                                            name="estat" className="form-control form-control-sm focusIn font1App"
+                                            value={this.state.filter_status}
+                                            tabIndex= {505}
+                                            aria-labelledby="estat"
+                                            onChange={(e) => {this.handleStatusFilterParam(e.target.value); }}>
+                                    <option value="0" className="form-control form-control-sm selectMobil" selected={true}>{t('notibTotes')}</option>
                                     <option value="1" className="form-control form-control-sm selectMobil">{t('notibPendents')}</option>
                                     <option value="2" className="form-control form-control-sm selectMobil">{t('notibLlegides')}</option>
                                 </Form.Select>
@@ -715,12 +769,12 @@ class Notib extends Component {
                             <Form.Group>
                                 <Form.Label>{t('registro_regPorPagina')}</Form.Label>
                                 <Form.Select id="regPorPagina"
-                                             name="regPorPagina" className="form-control form-control-sm focusIn"
-                                             value={this.state.filter_regPorPagina}
-                                             tabindex="505"
-                                             aria-labelledby="regPorPagina"
-                                             style={{color: '#666', borderRadius: '0.2rem'}}
-                                             onChange={(e) => {this.handleRegPorPaginaFilterParam(e); }}>
+                                            name="regPorPagina" className="form-control form-control-sm focusIn"
+                                            value={this.state.filter_regPorPagina}
+                                            tabIndex={505}
+                                            aria-labelledby="regPorPagina"
+                                            style={{color: '#666', borderRadius: '0.2rem'}}
+                                            onChange={(e) => {this.handleRegPorPaginaFilterParam(parseInt(e.target.value)); }}>
                                     <option value="5" className="form-control form-control-sm selectMobil" selected={this.state.filter_regPorPagina.toString() === '5'}>5</option>
                                     <option value="10" className="form-control form-control-sm selectMobil" selected={this.state.filter_regPorPagina.toString() === '10'}>10</option>
                                     <option value="25" className="form-control form-control-sm selectMobil" selected={this.state.filter_regPorPagina.toString() === '25'}>25</option>
@@ -734,7 +788,7 @@ class Notib extends Component {
                         </div>
                     </Row>
                     <Row className="col-md-3 row botoFormApp" style={{zIndex: '4'}}>
-                        <Button type="submit" id="botoSubmit" className="btn btn-primary carpeta-btn mt-2" onClick={(e) => {this.handleSubmitSearcher(e)}} tabindex="505">{t('carpeta_buscar')}</Button>
+                        <Button type="submit" id="botoSubmit" className="btn btn-primary carpeta-btn mt-2" onClick={(e) => {this.handleSubmitSearcher(e)}} tabIndex={505}>{t('carpeta_buscar')}</Button>
                     </Row>
                 </Container>
             </Form>
@@ -754,11 +808,11 @@ class Notib extends Component {
             criteris = <div id="idCriteris">
                 <div style={{float: 'left', marginTop: '9px;', paddingBottom: '0.7em'}} className="col-md-10 pr-3 visioMobil">
                     <span className="oi oi-calendar iconaFormApp" title={t('notibDates')} style={{verticalAlign: 'sub'}}/>
-                    <span className="pl-3">{$.dateFormatCerca(this.state.dataInici) +
+                    <span className="pl-3">{this.dateFormatCerca(this.state.dataInici) +
                     t('carpeta_criterio_5') +
-                    $.dateFormatCerca(this.state.dataFi)}</span>
+                    this.dateFormatCerca(this.state.dataFi)}</span>
                 </div>
-                <div style={{float: 'rigth', marginTop: '9px;', paddingBottom: '0.7em', textAlign: 'end'}} onClick={() => {this.mostrarForm();}} className="col-md-1 visioMobil">
+                <div style={{marginTop: '9px;', paddingBottom: '0.7em', textAlign: 'end'}} onClick={() => {this.mostrarForm();}} className="col-md-1 visioMobil">
                     <span className="oi oi-magnifying-glass iconaFormApp" title={t('notibCerca')}/>
                 </div>
             </div>
@@ -808,12 +862,12 @@ class Notib extends Component {
                         <p className="lh15 mb-1 mRegSelApp">
                             {t('notibMostra')}
                             <Form.Select id="rPP"
-                                         name="rPP" className="focusIn"
-                                         value={this.state.filter_regPorPagina}
-                                         tabindex="510"
-                                         aria-labelledby="rPP"
-                                         style={{color: '#666', borderRadius: '0.2rem'}}
-                                         onChange={(e) => {this.handleRegPorPaginaFilterParam(e); }}>
+                                        name="rPP" className="focusIn"
+                                        value={this.state.filter_regPorPagina}
+                                        tabIndex={510}
+                                        aria-labelledby="rPP"
+                                        style={{color: '#666', borderRadius: '0.2rem'}}
+                                        onChange={(e) => {this.handleRegPorPaginaFilterParam(parseInt(e.target.value)); }}>
                                 <option value="5" className="form-control form-control-sm selectMobil">5</option>
                                 <option value="10" className="form-control form-control-sm selectMobil">10</option>
                                 <option value="25" className="form-control form-control-sm selectMobil">25</option>
@@ -834,17 +888,24 @@ class Notib extends Component {
                         </tr>
                         </thead>
                         <tbody>
-                        {this.state.dataComunicacions.map(({transmissio, tipus},i) => {
+                        {this.state.dataComunicacions.map((obj: any,i: number) => {
                             // let nomTitular;
                             // if(transmissio.titular.nom){
                             //     nomTitular = transmissio.titular.nom + " " + transmissio.titular.llinatge1;
                             // }else{
                             //     nomTitular = transmissio.titular.raoSocial;
                             // }
+                            let tipus: string = obj.tipus;
+                            let transmissio: any = obj.transmissio;
+                            let tipusStr: string = tipus === 'notificacio' ? i18n.t('notibNotificacio') : i18n.t('notibComunicacio');
+                            let strAux: string = this.state.urldetallbase ? this.state.urldetallbase : "";
+                            let strAux2: string = this.state.urldetallbase2 ? this.state.urldetallbase2 : "";
+                            let strAux3: string = this.state.urldetallbase3 ? this.state.urldetallbase3 : "";
+                            let tipusStr2: string = tipus === 'notificacio' ? (transmissio.estat.codi === 'FINALIZADA' || transmissio.estat.codi === 'FINALITZADA' || transmissio.estat.codi === 'PROCESADA' || transmissio.estat.codi === 'PROCESSADA' ? strAux2 : strAux) : strAux3;
                             return <>
                                     <tr className="clickable-row" style={cursorPointer} tabIndex={511 + i*2 - 1} onClick={() => this.mostrarMesInfo('row' + i)} onKeyPress={() => this.mostrarMesInfo('row' + i)}>
-                                        <td data-order={$.dateOrder(transmissio.dataEnviament)}>{$.dateFormat(transmissio.dataEnviament)}</td>
-                                        <td>{tipus === 'notificacio' ? i18n.t('notibNotificacio') : i18n.t('notibComunicacio')}</td>
+                                        <td data-order={this.dateOrder(transmissio.dataEnviament)}>{this.dateFormat(transmissio.dataEnviament)}</td>
+                                        <td>{tipusStr}</td>
                                         <td>{transmissio.concepte}</td>
                                         <td>{transmissio.estat.codi}</td>
                                     </tr>
@@ -857,7 +918,7 @@ class Notib extends Component {
                                                 {transmissio.descripcio && <p><b>{t('notibDescripcioNotificacio')}</b>: {transmissio.descripcio}</p>}
                                             </div>
                                             <div style={{float: 'right', width: 'auto'}} id="accedirNotib">
-                                                {transmissio.dataEstat && <p><b>{t('notibDarreraModificacio')}</b>: {$.dateFormat(transmissio.dataEstat)}</p>}
+                                                {transmissio.dataEstat && <p><b>{t('notibDarreraModificacio')}</b>: {this.dateFormat(transmissio.dataEstat)}</p>}
                                                 {transmissio.subestat && <p><b>{t('notibSubestat')}</b>: {transmissio.subestat}</p>}
                                                 <p className="pt-2">
                                                     <button className="btn btn-primary carpeta-btn botoAccedirCarpeta"
@@ -865,9 +926,9 @@ class Notib extends Component {
                                                             tabIndex={511 + i*2}
                                                             aria-labelledby="accedirNotib"
                                                             onClick={() =>
-                                                                window.open(tipus === 'notificacio' ? (transmissio.estat.codi === 'FINALIZADA' || transmissio.estat.codi === 'FINALITZADA' || transmissio.estat.codi === 'PROCESADA' || transmissio.estat.codi === 'PROCESSADA' ? this.state.urldetallbase2 : this.state.urldetallbase) : this.state.urldetallbase3, '_blank')}>
+                                                                window.open(tipusStr2, '_blank')}>
                                                             <span className="oi oi-external-link" title=""
-                                                                  aria-hidden="true"/> {t('notibBotoDehu')}
+                                                                aria-hidden="true"/> {t('notibBotoDehu')}
                                                     </button>
                                                 </p>
                                             </div>
@@ -879,10 +940,10 @@ class Notib extends Component {
                     </Table>
                     <div style={{float:'left', marginTop: '9px;',width: '60%'}} className="ocultarMobil">
                         {t('carpeta_paginacion_1') +
-                        ((parseInt(this.state.pagination_active,10)-1)*parseInt(this.state.cercaRegistres, 10)+1) +
+                        ((this.state.pagination_active-1)*this.state.cercaRegistres+1) +
                         t('carpeta_paginacion_2') +
-                        ( ((parseInt(this.state.pagination_active,10)*parseInt(this.state.cercaRegistres, 10)) <= parseInt(this.state.total_items,10))
-                                ? parseInt(this.state.pagination_active,10)*parseInt(this.state.cercaRegistres, 10)
+                        ( ((this.state.pagination_active*this.state.cercaRegistres) <= this.state.total_items)
+                                ? this.state.pagination_active*this.state.cercaRegistres
                                 : this.state.total_items
                         ) +
                         t('carpeta_paginacion_3') +
@@ -891,19 +952,28 @@ class Notib extends Component {
                     </div>
                     <Pagination style={{float:'right',paddingRight: '0.7em'}} className="ocultarMobil">
                         {pageNumbers > showMax && <Pagination.First onClick={(event) => this.handlePagination(event, 0, true, 1)}
-                                         disabled={this.state.pagination_active === 1} />}
+                                        disabled={this.state.pagination_active === 1} />}
                         {pageNumbers > showMax && <Pagination.Prev onClick={(event) => this.handlePagination(event, 1, false, 0)}
                                                                 disabled={this.state.pagination_active === 1}/>}
                         {paginationNumbers}
                         {pageNumbers > showMax && <Pagination.Next onClick={(event) => this.handlePagination(event, 2, false, 0)}
                                                                 disabled={this.state.pagination_active === pageNumbers}/>}
                         {pageNumbers > showMax && <Pagination.Last onClick={(event) => this.handlePagination(event, 0, true, pageNumbers)}
-                                         disabled={this.state.pagination_active === pageNumbers}/>}
+                                        disabled={this.state.pagination_active === pageNumbers}/>}
                     </Pagination>
 
                 </>
 
-                this.state.dataComunicacions.map(({transmissio, tipus},i) => {
+                this.state.dataComunicacions.map((obj: any,i: number) => {
+
+                    let tipus: string = obj.tipus;
+                    let transmissio: any = obj.transmissio;
+                    let tipusStr: string = tipus === 'notificacio' ? i18n.t('notibNotificacio') : i18n.t('notibComunicacio');
+                    let strAux: string = this.state.urldetallbase ? this.state.urldetallbase : "";
+                    let strAux2: string = this.state.urldetallbase2 ? this.state.urldetallbase2 : "";
+                    let strAux3: string = this.state.urldetallbase3 ? this.state.urldetallbase3 : "";
+                    let tipusStr2: string = tipus === 'notificacio' ? (transmissio.estat.codi === 'FINALIZADA' || transmissio.estat.codi === 'FINALITZADA' || transmissio.estat.codi === 'PROCESADA' || transmissio.estat.codi === 'PROCESSADA' ? strAux2 : strAux) : strAux3;
+
                     // let nomTitular;
                     // if(transmissio.titular.nom){
                     //     nomTitular = transmissio.titular.nom + " " + transmissio.titular.llinatge1;
@@ -913,20 +983,20 @@ class Notib extends Component {
 
                     cardNotificacions.push(
                         <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil"
-                             key={i} tabIndex={502+i} onClick={(e) =>
-                            window.open(tipus === 'notificacio' ? (transmissio.estat.codi === 'FINALIZADA' || transmissio.estat.codi === 'FINALITZADA' || transmissio.estat.codi === 'PROCESADA' || transmissio.estat.codi === 'PROCESSADA' ? this.state.urldetallbase2 : this.state.urldetallbase) : this.state.urldetallbase3, '_blank')}>
+                            key={i} tabIndex={502+i} onClick={(e) =>
+                            window.open(tipus === 'notificacio' ? (transmissio.estat.codi === 'FINALIZADA' || transmissio.estat.codi === 'FINALITZADA' || transmissio.estat.codi === 'PROCESADA' || transmissio.estat.codi === 'PROCESSADA' ? strAux2 : strAux) : strAux3, '_blank')}>
                             <div className="col-sm-1 float-left">
                                 <span className="oi oi-envelope-closed iconaFormApp" title={t('notibComunicacio')} style={{verticalAlign: 'sub'}}/>
                             </div>
                             <div className="col-sm-10 float-right">
-                                <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}>{$.dateFormat(transmissio.dataEnviament)}</p>
-                                <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}>{tipus === 'notificacio' ? i18n.t('notibNotificacio') : i18n.t('notibComunicacio')}</p>
+                                <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}>{this.dateFormat(transmissio.dataEnviament)}</p>
+                                <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}>{tipusStr}</p>
                                 <p className="card-text pl-1 mt-0 font-weight-bold" style={{color: 'rgb(102, 102, 102)'}}>{transmissio.concepte}</p>
                                 {transmissio.emisor && <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}><b>{t('notibComunicacionEmissor')}: </b>{transmissio.emisor}</p>}
                                 {transmissio.organGestor.nom && <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}>{transmissio.organGestor.nom}</p>}
                                 {transmissio.procediment.codi && <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}><b>{t('notibProcediment')}: </b>{transmissio.procediment.codi}</p>}
                                 {transmissio.descripcio && <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}><b>{t('notibDescripcioNotificacio')}: </b>{transmissio.descripcio}</p>}
-                                {transmissio.dataEstat && <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}><b>{t('notibDarreraModificacio')}: </b>{$.dateFormat(transmissio.dataEstat)}</p>}
+                                {transmissio.dataEstat && <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}><b>{t('notibDarreraModificacio')}: </b>{this.dateFormat(transmissio.dataEstat)}</p>}
                                 {transmissio.subestat && <p className="card-text pl-1" style={{color: 'rgb(102, 102, 102)'}}><b>{t('notibSubestat')}: </b>{transmissio.subestat}</p>}
                                 <h3 className="titolPlugin titol h3 visioMobil titolPluginApp">{transmissio.estat.codi}</h3>
                             </div>
@@ -938,10 +1008,10 @@ class Notib extends Component {
                 cardNotificacions.push(<div className="visioMobil">
                         <div style={{float: 'left', marginTop: '9px;', width: '100%'}} className="visioMobil pb-4">
                             {t('carpeta_paginacion_1_App') +
-                            ((parseInt(this.state.pagination_active, 10) - 1) * parseInt(this.state.cercaRegistres, 10) + 1) +
+                            ((this.state.pagination_active - 1) * this.state.cercaRegistres + 1) +
                             t('carpeta_paginacion_2') +
-                            ( ((parseInt(this.state.pagination_active,10)*parseInt(this.state.cercaRegistres, 10)) <= parseInt(this.state.total_items,10))
-                                    ? parseInt(this.state.pagination_active,10)*parseInt(this.state.cercaRegistres, 10)
+                            ( ((this.state.pagination_active*this.state.cercaRegistres) <= this.state.total_items)
+                                    ? this.state.pagination_active*this.state.cercaRegistres
                                     : this.state.total_items
                             ) +
                             t('carpeta_paginacion_3_App') +
@@ -950,14 +1020,14 @@ class Notib extends Component {
                         </div>
                         <Pagination style={{float: 'left', width: '100%'}} size="lg">
                             {pageNumbers > showMax && <Pagination.First onClick={(event) => this.handlePagination(event, 0, true, 1)}
-                                              disabled={this.state.pagination_active === 1}/>}
+                                            disabled={this.state.pagination_active === 1}/>}
                             {pageNumbers > showMax && <Pagination.Prev onClick={(event) => this.handlePagination(event, 1, false, 0)}
-                                             disabled={this.state.pagination_active === 1}/>}
+                                            disabled={this.state.pagination_active === 1}/>}
                             {paginationNumbers}
                             {pageNumbers > showMax && <Pagination.Next onClick={(event) => this.handlePagination(event, 2, false, 0)}
-                                             disabled={this.state.pagination_active === pageNumbers}/>}
+                                            disabled={this.state.pagination_active === pageNumbers}/>}
                             {pageNumbers > showMax && <Pagination.Last onClick={(event) => this.handlePagination(event, 0, true, pageNumbers)}
-                                             disabled={this.state.pagination_active === pageNumbers}/>}
+                                            disabled={this.state.pagination_active === pageNumbers}/>}
                         </Pagination>
                     </div>
                 )
@@ -966,7 +1036,7 @@ class Notib extends Component {
             } else if(this.state.total_items === 0 && this.state.dataComunicacions !== null) {
 
                 taulaNotib = <div className="pt-3 alert alert-secondary" style={{float: 'left', width: '95%'}}
-                                  role="alert">{this.state.missatgeBuid}</div>
+                                role="alert">{this.state.missatgeBuid}</div>
 
             }
 
@@ -997,8 +1067,11 @@ class Notib extends Component {
                     </div>
                     <div className="col-md-12 border-0 float-left p-0" id="botoTornarNotib" style={{ marginTop: '20px' }}>
                         <button type="button" data-toggle="modal" onClick={() => {
-                            window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                        }} className="botoSuport botoTornauApp" tabIndex="520" aria-labelledby="botoTornarNotib">{t('notibTornar')}</button>
+                            {/*@ts-ignore*/}
+                            window.location.href = sessionStorage.getItem("pagTornar"); 
+                            {/*@ts-ignore*/}
+                            sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
+                        }} className="botoSuport botoTornauApp" tabIndex={520} aria-labelledby="botoTornarNotib">{t('notibTornar')}</button>
                     </div>
                 </div>
             </>
