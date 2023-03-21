@@ -1,20 +1,18 @@
 import React from "react";
-import { WithTranslation, withTranslation } from "react-i18next";
-
-//import $ from 'jquery';
 
 /**
  *  @author anadal
  */
 
-interface CarpetaDatePickerProps extends WithTranslation {
-  name: string;
+interface CarpetaDatePickerProps  {
+  basename: string;
   defaultValue: Date;
-  onChangeDate?(newDate: Date, oldDate: Date): void;
+  onChangeDate?(newDate: Date, oldDate: Date): boolean;
+  i18n: any;
 }
 
 class CarpetaDatePicker extends React.Component<CarpetaDatePickerProps> {
-  private inputName: string;
+  private datePickerName: string;
 
   constructor(props: CarpetaDatePickerProps) {
     super(props);
@@ -27,75 +25,71 @@ class CarpetaDatePicker extends React.Component<CarpetaDatePickerProps> {
 
     this.props.i18n.on("languageChanged", this.canviatIdioma);
 
-    this.inputName = this.props.name + "Input";
+    let base: number = Math.floor(Math.random() * 10000000);
+
+    this.datePickerName = base + this.props.basename + "DatePicker";
   }
 
-  canviatIdioma(lang: string) {
+  private canviatIdioma(lang: string) {
     console.log("CarpetaDatePicker::canviatIdioma(" + lang + ") ...");
-    //const theName = this.props.name;
 
-    const theName = this.props.name;
-    // XYZ ZZZ
     //@ts-ignore
-
-    $("#" + theName).datetimepicker({
-      format: "DD/MM/YYYY",
-      locale: lang,
-    });
+    $("#" + this.datePickerName).datetimepicker("locale", lang);
 
     this.forceUpdate();
   }
 
   componentDidMount() {
-    console.log("CarpetaDatePicker::componentDidMount() => Inici ... XXXXXXXXXXXX " + this.props.i18n.language);
+    //console.log("CarpetaDatePicker::componentDidMount() => Inici ... XXXXXXXXXXXX " + this.props.i18n.language);
 
-    const theName = this.props.name;
-    // XYZ ZZZ
+    const theName = this.datePickerName;
+
     //@ts-ignore
-
     $("#" + theName).datetimepicker({
       format: "DD/MM/YYYY",
       locale: this.props.i18n.language,
     });
 
-    // ts-ignore
-
+    //@ts-ignore
     $("#" + theName).on("change.datetimepicker", this.onChangeDateCarpetaDatePicker);
   }
 
-  onChangeDateCarpetaDatePicker(e: any) {
-    console.log("change event fired   ************************************************** " + new Date().toString());
+  private onChangeDateCarpetaDatePicker(e: any) {
+    //console.log("change event fired   ************************************************** " + new Date().toString());
     console.log("e.date: => " + new Date(e.date));
-    console.log("e.oldDate: => " + new Date(e.oldDate));
-
-    /*
-        let de = document.getElementById({this.inputName});
-        if (de != null) {
-          //@ts-ignore
-          console.log("              Nova Data: " + de.value);
-        }
-*/
+    //console.log("e.oldDate: => " + new Date(e.oldDate));
 
     if (this.props.onChangeDate) {
-      this.props.onChangeDate(new Date(e.date), new Date(e.oldDate));
+      if (!this.props.onChangeDate(new Date(e.date), new Date(e.oldDate))) {
+        /*
+        let camp:any = document.getElementById(this.datePickerName + "Input");
+        if (camp) {
+          const lang = this.props.i18n.language;
+          camp.value = e.oldDate.toLocaleString(lang, {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          })
+        }
+        */
+      }
     }
   }
 
   render() {
     console.log("CarpetaDatePicker::render() " + this.props.i18n.language);
-    const t = this.props.i18n.t;
 
     const lang = this.props.i18n.language;
 
     return (
       <div className="form-group">
-        <div className="input-group date" id={this.props.name} data-target-input="nearest">
+        <div className="input-group date" id={this.datePickerName} data-target-input="nearest">
           <input
             data-toggle="datetimepicker"
             className="form-control datetimepicker-input"
-            data-target={"#" + this.props.name}
+            data-target={"#" + this.datePickerName}
             style={{ padding: "0px 0px 0px 10px" }}
-            id={this.inputName}
+            id={this.datePickerName + "Input"}
             readOnly={false}
             value={this.props.defaultValue.toLocaleString(lang, {
               year: "numeric",
@@ -103,7 +97,7 @@ class CarpetaDatePicker extends React.Component<CarpetaDatePickerProps> {
               day: "2-digit",
             })}
           />
-          <div className="input-group-append" data-target={"#" + this.props.name} data-toggle="datetimepicker">
+          <div className="input-group-append" data-target={"#" + this.datePickerName} data-toggle="datetimepicker">
             <div className="input-group-text">
               <i className="fas fa-calendar"></i>
             </div>
@@ -114,4 +108,4 @@ class CarpetaDatePicker extends React.Component<CarpetaDatePickerProps> {
   }
 }
 
-export default withTranslation()(CarpetaDatePicker);
+export default CarpetaDatePicker;

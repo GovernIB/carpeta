@@ -8,6 +8,10 @@ import TemplatePageCarpeta from "./TemplatePageCarpeta";
 import {TemplatePageCarpetaProps} from "./TemplatePageCarpeta";
 import { RowTypeUtils } from "./RowTypeUtils";
 import { RowType } from "./RowType";
+import CarpetaDatePicker from "./CarpetaDatePicker";
+import CarpetaInputText from "./CarpetaInputText";
+import CarpetaFormulariDeFiltre from "./CarpetaFormulariDeFiltre";
+import CarpetaFormulariDeFiltreItem from "./CarpetaFormulariDeFiltreItem";
 
 export {
   Button,
@@ -23,4 +27,8 @@ export {
   TemplatePageCarpeta,
   RowType,
   RowTypeUtils,
+  CarpetaDatePicker,
+  CarpetaInputText,
+  CarpetaFormulariDeFiltre,
+  CarpetaFormulariDeFiltreItem
 };

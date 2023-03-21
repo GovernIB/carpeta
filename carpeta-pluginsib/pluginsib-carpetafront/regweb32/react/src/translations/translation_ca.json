@@ -30,5 +30,8 @@
     "registroRegistres":" registres",
     "registroProblema": "Hi ha hagut qualque problema de comunicació.",
     "registroDates": "Dates",
-    "registroCerca": "Cerca"
+    "registroCerca": "Cerca",
+
+    "errorIniciMajorFinal": "La data d'inici és major que la de fi",
+    "errorEnFiltre": "Hi ha errors en el filtre de cerca ..."
 }

@@ -10,9 +10,11 @@ import {
   RenderPaginationTableData,
   ReturnPaginationData,
   TemplatePageCarpeta,
+  CarpetaDatePicker,
+  CarpetaInputText,
+  CarpetaFormulariDeFiltre,
+  CarpetaFormulariDeFiltreItem,
 } from "carpetacommonreactlib";
-
-import CarpetaDatePicker from "./CarpetaDatePicker";
 
 /**
  *  @author jagarcia
@@ -32,10 +34,12 @@ interface RegwebState {
 }
 
 class Regweb extends React.Component<RegwebProps, RegwebState> {
-  private filter_number: string | null;
+  private filter_number: string;
   private filter_status: number;
   private filter_startDate: Date;
   private filter_endDate: Date;
+
+  private errorEnFiltre: boolean;
 
   constructor(props: RegwebProps) {
     super(props);
@@ -45,20 +49,19 @@ class Regweb extends React.Component<RegwebProps, RegwebState> {
     const startDateObj = new Date();
     const endDateObj = new Date();
     startDateObj.setMonth(endDateObj.getMonth() - 1);
+
     // XYZ ZZZ
-    startDateObj.setFullYear(endDateObj.getFullYear() - 3);
+    //startDateObj.setFullYear(endDateObj.getFullYear() - 3);
 
-    this.filter_number = null;
+    this.filter_number = "";
     this.filter_status = 0;
-
     this.filter_startDate = startDateObj;
     this.filter_endDate = endDateObj;
+    this.errorEnFiltre = false;
 
     this.state = {
       numeroRegistro: null,
     };
-
-    this.handleStateFilterParam = this.handleStateFilterParam.bind(this);
 
     this.handleSubmitSearcher = this.handleSubmitSearcher.bind(this);
 
@@ -66,67 +69,67 @@ class Regweb extends React.Component<RegwebProps, RegwebState> {
 
     this.loadPaginatedData = this.loadPaginatedData.bind(this);
 
-    this.nomEstat = this.nomEstat.bind(this);
-
     this.canviatIdioma = this.canviatIdioma.bind(this);
 
     this.onClickRow = this.onClickRow.bind(this);
 
-    // XYZ ZZZ Canviar-ho per un handler de keyup a numero
-    this.guardarDadesFormulari = this.guardarDadesFormulari.bind(this);
+    this.validate = this.validate.bind(this);
 
+    this.onChangeState = this.onChangeState.bind(this);
     this.onChangeStartDate = this.onChangeStartDate.bind(this);
     this.onChangeEndDate = this.onChangeEndDate.bind(this);
+    this.onChangeNumeroRegistre = this.onChangeNumeroRegistre.bind(this);
 
     i18n.on("languageChanged", this.canviatIdioma);
 
     console.log("RegWeb::CONSTRUCTOR => Final ");
   }
 
-  canviatIdioma(lng: string) {
-    //const getLocale = (Locale: any) => require(`date-fns/locale/${lng}/index.js`);
-    //this.locale = getLocale(lng);
+  canviatIdioma(_lng: string) {
+    this.forceUpdate();
   }
 
-  handleStateFilterParam(e: any) {
-    this.filter_status = e.target.value;
-  }
+  componentDidMount() {}
 
-  guardarDadesFormulari() {
-    let tmp: any = document.getElementById("numero");
-
-    if (tmp != null) {
-      this.filter_number = tmp.value;
-    } else {
-      this.filter_number = null;
-    }
-  }
-
-  handleSubmitSearcher(e: any) {
-    console.log("RegWeb::handleSubmitSearcher() ...");
-
-    const { t } = this.props;
-
-    let validatFormulari = this.validaFormulari();
+  handleSubmitSearcher(e: any): boolean {
+    console.log("RegWeb::handleSubmitSearcher() inici");
 
     e.preventDefault();
-    if (validatFormulari) {
-      //   let numeroInput:HTMLElement | null = document.getElementById("numero");
-      //numeroInput==null?null: numeroInput.value,
-      /*
-      if (this.inputNumeroRef.current == null) {
-        this.setState({
-          ...this.state,
-          filter_number: null
-        });
-      } else {
-        this.setState({
-          ...this.state,
-          filter_number: this.inputNumeroRef.current!.value
-        });
+
+    if (this.errorEnFiltre) {
+      const t = this.props.i18n.t;
+      window.alert(t("errorEnFiltre"));
+      return false;
+    }
+
+    console.log("RegWeb::handleSubmitSearcher() final");
+
+    this.forceUpdate();
+
+    return true;
+  }
+
+  validate(startDate: Date, endDate: Date) {
+    console.log("RegWeb::validate() ... Entra");
+
+    let errorInput = document.getElementById("errorContainer");
+
+    if (startDate.getTime() > endDate.getTime()) {
+      console.log("RegWeb::validate() error");
+
+      if (errorInput) {
+        errorInput.style.display = "block";
       }
-      */
-      this.forceUpdate();
+
+      this.errorEnFiltre = true;
+      return false;
+    } else {
+      console.log("RegWeb::validate() ok");
+      if (errorInput) {
+        errorInput.style.display = "none";
+      }
+      this.errorEnFiltre = false;
+      return true;
     }
   }
 
@@ -238,47 +241,13 @@ class Regweb extends React.Component<RegwebProps, RegwebState> {
   onClickRow(pos: number, item: any): void {
     console.log("RegWeb::onClickRow(" + pos + "," + item + ") => Numero Registre " + item.numeroRegistro);
 
-    this.guardarDadesFormulari();
-
     this.setState({
       ...this.state,
       numeroRegistro: item.numeroRegistro,
     });
   }
 
-  validaFormulari() {
-    /* XYZ ZZZ
-    if (!this.validaFecha(this.state.filter_startDate) || !this.validaFecha(this.state.filter_endDate)) {
-      return false;
-    }
-
-    if (this.state.filter_startDate.getMilliseconds() > this.state.filter_endDate.getMilliseconds()) {
-      $("#errorMsg").html(t("sistraDataIniciError"));
-      $("#errorContainer").removeClass("ocult");
-      return false;
-    }
-
-    return true;
-    */
-    return true;
-  }
-
-  validaFecha(date: string): Date | null {
-    if (Date.parse(date)) {
-      //$("#errorMsg").html("Error de data");
-      let errorMsg = document.getElementById("errorMsg");
-      if (errorMsg != null) errorMsg.innerHTML = "Error de data";
-      // XYZ ZZZ
-      //$("#errorContainer").removeClass("ocult");
-      return null;
-    } else {
-      // XYZ ZZZ
-      //$("#errorContainer").addClass("ocult");
-      return new Date(Date.parse(date));
-    }
-  }
-
-  tornarDeDetallRegistre(e: any) {
+  tornarDeDetallRegistre(_e: any) {
     console.log("RegWeb::tornarDeDetallRegistre. ");
 
     this.setState({
@@ -287,57 +256,37 @@ class Regweb extends React.Component<RegwebProps, RegwebState> {
     });
   }
 
-  dateFormat(dateObject: any) {
-    var d = new Date(dateObject);
-
-    let composed = "";
-
-    composed = composed + (d.getDate() < 10 ? "0" : "") + d.getDate() + "-";
-
-    composed = composed + (d.getMonth() < 9 ? "0" : "") + (d.getMonth() + 1) + "-";
-
-    composed = composed + d.getFullYear().toString() + " ";
-
-    composed = composed + (d.getHours() < 10 ? "0" : "") + d.getHours() + ":";
-
-    composed = composed + (d.getMinutes() < 10 ? "0" : "") + d.getMinutes();
-
-    return composed;
-  }
-
-  nomEstat(estat: number) {
-    const t = this.props.i18n.t;
-    switch (estat.toString()) {
-      case "0":
-        return t("registro_estado_todos");
-      case "1":
-        return t("registro_estado_1");
-      case "2":
-        return t("registro_estado_4");
-      case "3":
-        return t("registro_estado_10");
-      case "4":
-        return t("registro_estado_11");
+  onChangeStartDate(newDate: Date, _oldDate: Date): boolean {
+    if (this.validate(newDate, this.filter_endDate)) {
+      this.filter_startDate = newDate;
+      return true;
+    } else {
+      return false;
     }
   }
 
-  onChangeStartDate(newDate: Date, _oldDate: Date) {
-    this.filter_startDate = newDate;
+  onChangeEndDate(newDate: Date, _oldDate: Date): boolean {
+    if (this.validate(this.filter_startDate, newDate)) {
+      this.filter_endDate = newDate;
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  onChangeEndDate(newDate: Date, _oldDate: Date) {
-    this.filter_endDate = newDate;
+  onChangeNumeroRegistre(nouNumero: string) {
+    this.filter_number = nouNumero;
   }
 
-  componentDidMount() {}
+  onChangeState(e: any) {
+    this.filter_status = e.target.value;
+  }
 
   render() {
+    console.log("RegWeb::render() => INICI");
     const t = this.props.i18n.t;
 
     if (this.state.numeroRegistro != null) {
-      console.log("Regweb:: detallpathtoservei= " + this.props.detallpathtoservei);
-      console.log("Regweb:: numeroRegistro= " + this.state.numeroRegistro);
-
       let numReg: string = this.state.numeroRegistro;
 
       return (
@@ -351,121 +300,92 @@ class Regweb extends React.Component<RegwebProps, RegwebState> {
       );
     }
 
-    let formulari = <></>;
-    formulari = (
+    let formulari = (
       <>
-        <form id="fechaBusqueda" style={{ marginBottom: "20px" }}>
-          <div style={{ width: "95%", paddingLeft: "0px", margin: "0px" }} className="ampleTotalApp container">
-            <div className="row">
-              <div className="col-xs-12 mb-3 campFormApp col">
-                <div>
-                  <label className="form-label">{t("registro_numero")}</label>
-                  <input
-                    placeholder={"" + t("registro_numero")}
-                    /* ref={this.inputNumeroRef} */ maxLength={25}
-                    tabIndex={501}
-                    type="text"
-                    id="numero"
-                    readOnly={false}
-                    className="form-control form-control-sm focusIn font1App"
-                    defaultValue={this.filter_number == null ? "" : this.filter_number}
-                  />
-                </div>
-              </div>
-              <div className="col-xs-12 mb-3 campFormApp col">
-                <div>
-                  <label className="form-label">{t("registro_fecha_inicio")}</label>
-
-                  <CarpetaDatePicker
-                    name={"dataInici"}
-                    defaultValue={this.filter_startDate}
-                    onChangeDate={this.onChangeStartDate}
-                  />
-                </div>
-              </div>
-              <div className="col-xs-12 mb-3 campFormApp col">
-                <div>
-                  <label className="form-label">{t("registro_fecha_fin")}</label>
-
-                  <CarpetaDatePicker
-                    name={"dataFi"}
-                    defaultValue={this.filter_endDate}
-                    onChangeDate={this.onChangeEndDate}
-                  />
-                </div>
-              </div>
-              <div className="col-xs-12 mb-3 campFormApp col">
-                <div>
-                  <label className="form-label">{t("registro_estado")}</label>
-
-                  <select
-                    id="estado"
-                    name="estado"
-                    className="form-control form-control-sm focusIn font1App form-select"
-                    tabIndex={504}
-                    aria-labelledby="estado"
-                    onChange={(e) => {
-                      this.handleStateFilterParam(e);
-                    }}
-                  >
-                    <option
-                      value="0"
-                      className="form-control form-control-sm selectMobil"
-                      selected={this.filter_status == 0}
-                    >
-                      {t("registro_estado_todos")}
-                    </option>
-                    <option
-                      value="1"
-                      className="form-control form-control-sm selectMobil"
-                      selected={this.filter_status == 1}
-                    >
-                      {t("registro_estado_1")}
-                    </option>
-                    <option
-                      value="2"
-                      className="form-control form-control-sm selectMobil"
-                      selected={this.filter_status == 2}
-                    >
-                      {t("registro_estado_4")}
-                    </option>
-                    <option
-                      value="3"
-                      className="form-control form-control-sm selectMobil"
-                      selected={this.filter_status == 3}
-                    >
-                      {t("registro_estado_10")}
-                    </option>
-                    <option
-                      value="4"
-                      className="form-control form-control-sm selectMobil"
-                      selected={this.filter_status == 4}
-                    >
-                      {t("registro_estado_11")}
-                    </option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div id="errorContainer" className="row pb-2 ml-3 mr-0 ocult">
-                <div className="alert alert-danger" role="alert" id="errorMsg" />
-              </div>
-            </div>
-            <div className="col-md-3 pl-3 row botoFormApp" style={{ zIndex: "4" }}>
-              <button
-                type="submit"
-                className="btn btn-primary carpeta-btn mt-2"
-                onClick={(e) => {
-                  this.handleSubmitSearcher(e);
-                }}
-                tabIndex={505}
-              >
-                {t("carpeta_buscar")}
-              </button>
+        <div className="row">
+          <div id="errorContainer" className="row pb-2 ml-3 mr-0 ocult">
+            <div className="alert alert-danger" role="alert" id="errorMsg">
+              {t("errorIniciMajorFinal")}
             </div>
           </div>
-        </form>
+        </div>
+
+        <CarpetaFormulariDeFiltre handleSubmitSearcher={this.handleSubmitSearcher} i18n={this.props.i18n}>
+          <>
+            <CarpetaFormulariDeFiltreItem label={t("registro_numero")}>
+              <CarpetaInputText
+                id={"numero"}
+                placeHolder={"" + t("registro_numero")}
+                defaultValue={this.filter_number}
+                onChangedText={this.onChangeNumeroRegistre}
+              />
+            </CarpetaFormulariDeFiltreItem>
+            <CarpetaFormulariDeFiltreItem label={t("registro_fecha_inicio")}>
+              <CarpetaDatePicker
+                basename={"dataInici"}
+                defaultValue={this.filter_startDate}
+                onChangeDate={this.onChangeStartDate}
+                i18n={this.props.i18n}
+              />
+            </CarpetaFormulariDeFiltreItem>
+            <CarpetaFormulariDeFiltreItem label={t("registro_fecha_fin")}>
+              <CarpetaDatePicker
+                basename={"dataFi"}
+                defaultValue={this.filter_endDate}
+                onChangeDate={this.onChangeEndDate}
+                i18n={this.props.i18n}
+              />
+            </CarpetaFormulariDeFiltreItem>
+            <CarpetaFormulariDeFiltreItem label={t("registro_estado")}>
+              <select
+                id="estado"
+                name="estado"
+                className="form-control form-control-sm focusIn font1App form-select"
+                tabIndex={504}
+                aria-labelledby="estado"
+                onChange={(e) => {
+                  this.onChangeState(e);
+                }}
+              >
+                <option
+                  value="0"
+                  className="form-control form-control-sm selectMobil"
+                  selected={this.filter_status == 0}
+                >
+                  {t("registro_estado_todos")}
+                </option>
+                <option
+                  value="1"
+                  className="form-control form-control-sm selectMobil"
+                  selected={this.filter_status == 1}
+                >
+                  {t("registro_estado_1")}
+                </option>
+                <option
+                  value="2"
+                  className="form-control form-control-sm selectMobil"
+                  selected={this.filter_status == 2}
+                >
+                  {t("registro_estado_4")}
+                </option>
+                <option
+                  value="3"
+                  className="form-control form-control-sm selectMobil"
+                  selected={this.filter_status == 3}
+                >
+                  {t("registro_estado_10")}
+                </option>
+                <option
+                  value="4"
+                  className="form-control form-control-sm selectMobil"
+                  selected={this.filter_status == 4}
+                >
+                  {t("registro_estado_11")}
+                </option>
+              </select>
+            </CarpetaFormulariDeFiltreItem>
+          </>
+        </CarpetaFormulariDeFiltre>
       </>
     );
 

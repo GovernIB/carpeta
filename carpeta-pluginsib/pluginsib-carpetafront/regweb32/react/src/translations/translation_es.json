@@ -29,6 +29,9 @@
     "registroRegistres":" registros",
     "registroProblema": "Ha habido algún problema de comunicación.",
     "registroDates": "Fechas",
-    "registroCerca": "Búsqueda"
+    "registroCerca": "Búsqueda", 
+
+    "errorIniciMajorFinal": "La fecha de inicio es mayor que la de fin",
+    "errorEnFiltre": "Hay errores en el filtro de búsqueda ..."
 
 }

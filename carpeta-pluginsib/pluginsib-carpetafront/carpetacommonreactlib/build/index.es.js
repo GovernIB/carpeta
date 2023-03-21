@@ -4394,31 +4394,31 @@ var PaginationCarpeta = /** @class */ (function (_super) {
         var _this = _super.call(this, props) || this;
         console.log("  CONSTRUCTOR PaginationCarpeta !!!!!");
         /*
-            console.log(
-              "PaginationCarpeta().paginaActual  => " +
-                this.props.paginationInfo.paginaActual
-            );
-            console.log(
-              "PaginationCarpeta().elementsPerPagina  => " +
-                this.props.paginationInfo.elementsPerPagina
-            );
-            console.log(
-              "PaginationCarpeta().totalPagines  => " +
-                this.props.paginationInfo.totalPagines
-            );
-            console.log(
-              "PaginationCarpeta().registresRetornats  => " +
-                this.props.paginationInfo.registresRetornats
-            );
-            console.log(
-              "PaginationCarpeta().totalRegistres  => " +
-                this.props.paginationInfo.totalRegistres
-            );
-        */
+        console.log(
+          "PaginationCarpeta().paginaActual  => " +
+            this.props.paginationInfo.paginaActual
+        );
+        console.log(
+          "PaginationCarpeta().elementsPerPagina  => " +
+            this.props.paginationInfo.elementsPerPagina
+        );
+        console.log(
+          "PaginationCarpeta().totalPagines  => " +
+            this.props.paginationInfo.totalPagines
+        );
+        console.log(
+          "PaginationCarpeta().registresRetornats  => " +
+            this.props.paginationInfo.registresRetornats
+        );
+        console.log(
+          "PaginationCarpeta().totalRegistres  => " +
+            this.props.paginationInfo.totalRegistres
+        );
+    */
         initTranslation(_this.props.i18n);
         _this.updatePaginationInfo = _this.updatePaginationInfo.bind(_this);
         _this.state = {
-            paginationInfo: null
+            paginationInfo: null,
         };
         return _this;
     }
@@ -4488,12 +4488,12 @@ var PaginationCarpeta = /** @class */ (function (_super) {
                 var numElementOptions = [];
                 //this.props.paginationInfo.elementsByPage.map((element) => numElementOptions.push(<option>{element}</option>));
                 /*for (var i in this.props.paginationInfo.elementsByPage) {
-                  console.log("XYZ ZZZ Assignant valor numElements.");
-                  numElementOptions.push(
-                    <option key={i}>{this.props.paginationInfo.elementsByPage[i]}</option>
-                  );
-                }
-                */
+                console.log("XYZ ZZZ Assignant valor numElements.");
+                numElementOptions.push(
+                  <option key={i}>{this.props.paginationInfo.elementsByPage[i]}</option>
+                );
+              }
+              */
                 for (var i = 0; i < selectElementsByPage.length; i++) {
                     numElementOptions.push(React$1.createElement("option", { key: i, value: selectElementsByPage[i] }, selectElementsByPage[i]));
                 }
@@ -4706,5 +4706,152 @@ var TemplatePageCarpeta = /** @class */ (function (_super) {
     return TemplatePageCarpeta;
 }(React$1.Component));
 
-export { Button, RenderPaginationTable, RenderTable, RowType, RowTypeUtils, TemplatePageCarpeta };
+var CarpetaDatePicker = /** @class */ (function (_super) {
+    __extends(CarpetaDatePicker, _super);
+    function CarpetaDatePicker(props) {
+        var _this = _super.call(this, props) || this;
+        console.log("CarpetaDatePicker::CONSTRUCTOR => Inici ");
+        _this.onChangeDateCarpetaDatePicker = _this.onChangeDateCarpetaDatePicker.bind(_this);
+        _this.canviatIdioma = _this.canviatIdioma.bind(_this);
+        _this.props.i18n.on("languageChanged", _this.canviatIdioma);
+        var base = Math.floor(Math.random() * 10000000);
+        _this.datePickerName = base + _this.props.basename + "DatePicker";
+        return _this;
+    }
+    CarpetaDatePicker.prototype.canviatIdioma = function (lang) {
+        console.log("CarpetaDatePicker::canviatIdioma(" + lang + ") ...");
+        //@ts-ignore
+        $("#" + this.datePickerName).datetimepicker("locale", lang);
+        this.forceUpdate();
+    };
+    CarpetaDatePicker.prototype.componentDidMount = function () {
+        //console.log("CarpetaDatePicker::componentDidMount() => Inici ... XXXXXXXXXXXX " + this.props.i18n.language);
+        var theName = this.datePickerName;
+        //@ts-ignore
+        $("#" + theName).datetimepicker({
+            format: "DD/MM/YYYY",
+            locale: this.props.i18n.language,
+        });
+        //@ts-ignore
+        $("#" + theName).on("change.datetimepicker", this.onChangeDateCarpetaDatePicker);
+    };
+    CarpetaDatePicker.prototype.onChangeDateCarpetaDatePicker = function (e) {
+        //console.log("change event fired   ************************************************** " + new Date().toString());
+        console.log("e.date: => " + new Date(e.date));
+        //console.log("e.oldDate: => " + new Date(e.oldDate));
+        if (this.props.onChangeDate) {
+            if (!this.props.onChangeDate(new Date(e.date), new Date(e.oldDate))) ;
+        }
+    };
+    CarpetaDatePicker.prototype.render = function () {
+        console.log("CarpetaDatePicker::render() " + this.props.i18n.language);
+        var lang = this.props.i18n.language;
+        return (React$1.createElement("div", { className: "form-group" },
+            React$1.createElement("div", { className: "input-group date", id: this.datePickerName, "data-target-input": "nearest" },
+                React$1.createElement("input", { "data-toggle": "datetimepicker", className: "form-control datetimepicker-input", "data-target": "#" + this.datePickerName, style: { padding: "0px 0px 0px 10px" }, id: this.datePickerName + "Input", readOnly: false, value: this.props.defaultValue.toLocaleString(lang, {
+                        year: "numeric",
+                        month: "2-digit",
+                        day: "2-digit",
+                    }) }),
+                React$1.createElement("div", { className: "input-group-append", "data-target": "#" + this.datePickerName, "data-toggle": "datetimepicker" },
+                    React$1.createElement("div", { className: "input-group-text" },
+                        React$1.createElement("i", { className: "fas fa-calendar" }))))));
+    };
+    return CarpetaDatePicker;
+}(React$1.Component));
+
+/**
+ * @author anadal
+ * @create date 2023-03-20 13:04:34
+ * @modify date 2023-03-20 13:04:34
+ * @desc [description]
+ */
+var CarpetaInputText = /** @class */ (function (_super) {
+    __extends(CarpetaInputText, _super);
+    function CarpetaInputText(props) {
+        var _this = _super.call(this, props) || this;
+        console.log("CarpetaInputText::CONSTRUCTOR => Inici ");
+        _this.onKeyDownInput = _this.onKeyDownInput.bind(_this);
+        _this.onKeyUpInput = _this.onKeyUpInput.bind(_this);
+        return _this;
+    }
+    CarpetaInputText.prototype.onKeyDownInput = function (event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            return false;
+        }
+        return true;
+    };
+    CarpetaInputText.prototype.onKeyUpInput = function (event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+            return false;
+        }
+        if (this.props.onChangedText) {
+            this.props.onChangedText(event.target.value);
+        }
+        return true;
+    };
+    CarpetaInputText.prototype.render = function () {
+        return (React$1.createElement("input", { placeholder: this.props.placeHolder, maxLength: 25, tabIndex: 501, type: "text", id: this.props.id, readOnly: false, onKeyDown: this.onKeyDownInput, onKeyUp: this.onKeyUpInput, className: "form-control form-control-sm focusIn font1App", defaultValue: this.props.defaultValue == undefined ? "" : this.props.defaultValue }));
+    };
+    return CarpetaInputText;
+}(React$1.Component));
+
+/**
+ * @author anadal
+ * @create date 2023-03-20 13:04:34
+ * @modify date 2023-03-20 13:04:34
+ * @desc [description]
+ */
+var CarpetaFormulariDeFiltre = /** @class */ (function (_super) {
+    __extends(CarpetaFormulariDeFiltre, _super);
+    function CarpetaFormulariDeFiltre(props) {
+        var _this = _super.call(this, props) || this;
+        console.log("CarpetaFormulariDeFiltre::CONSTRUCTOR => Inici ");
+        _this.handleSubmitSearcher = _this.handleSubmitSearcher.bind(_this);
+        return _this;
+    }
+    CarpetaFormulariDeFiltre.prototype.handleSubmitSearcher = function (e) {
+        if (this.props.handleSubmitSearcher) {
+            return this.props.handleSubmitSearcher(e);
+        }
+        return true;
+    };
+    CarpetaFormulariDeFiltre.prototype.setError = function () {
+    };
+    CarpetaFormulariDeFiltre.prototype.render = function () {
+        var _this = this;
+        return (React$1.createElement("form", { id: "formulariDeFiltre", style: { marginBottom: "20px" } },
+            React$1.createElement("div", { style: { width: "95%", paddingLeft: "0px", margin: "0px" }, className: "ampleTotalApp container" },
+                React$1.createElement("div", { className: "row" }, this.props.children),
+                React$1.createElement("div", { className: "col-md-3 pl-3 row botoFormApp", style: { zIndex: "4" } },
+                    React$1.createElement("button", { type: "submit", className: "btn btn-primary carpeta-btn mt-2", onClick: function (e) {
+                            _this.handleSubmitSearcher(e);
+                        }, tabIndex: 505 }, this.props.i18n.t("carpeta_buscar"))))));
+    };
+    return CarpetaFormulariDeFiltre;
+}(React$1.Component));
+
+/**
+ * @author anadal
+ * @create date 2023-03-20 13:04:34
+ * @modify date 2023-03-20 13:04:34
+ * @desc [description]
+ */
+var CarpetaFormulariDeFiltreItem = /** @class */ (function (_super) {
+    __extends(CarpetaFormulariDeFiltreItem, _super);
+    function CarpetaFormulariDeFiltreItem(props) {
+        return _super.call(this, props) || this;
+    }
+    CarpetaFormulariDeFiltreItem.prototype.render = function () {
+        return (React$1.createElement("div", { className: "col-xs-12 mb-3 campFormApp col" },
+            React$1.createElement("div", null,
+                React$1.createElement("label", { className: "form-label" }, this.props.label),
+                this.props.children)));
+    };
+    return CarpetaFormulariDeFiltreItem;
+}(React$1.Component));
+
+export { Button, CarpetaDatePicker, CarpetaFormulariDeFiltre, CarpetaFormulariDeFiltreItem, CarpetaInputText, RenderPaginationTable, RenderTable, RowType, RowTypeUtils, TemplatePageCarpeta };
 //# sourceMappingURL=index.es.js.map
