@@ -552,9 +552,9 @@ public class EnllazController
       return null;
     }
     try {
-      Enllaz enllaz = enllazEjb.findByPrimaryKey(enllazID);
+      Enllaz enllaz = this.findByPrimaryKey(request, enllazID);
       if (enllaz == null) {
-        String __msg =createMessageError(request, "error.notfound", enllazID);
+        String __msg = createMessageError(request, "error.notfound", enllazID);
         return getRedirectWhenDelete(request, enllazID, new Exception(__msg));
       } else {
         delete(request, enllaz);

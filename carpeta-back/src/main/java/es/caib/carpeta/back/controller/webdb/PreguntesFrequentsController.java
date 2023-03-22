@@ -485,9 +485,9 @@ public class PreguntesFrequentsController
       return null;
     }
     try {
-      PreguntesFrequents preguntesFrequents = preguntesFrequentsEjb.findByPrimaryKey(preguntesFrequentsID);
+      PreguntesFrequents preguntesFrequents = this.findByPrimaryKey(request, preguntesFrequentsID);
       if (preguntesFrequents == null) {
-        String __msg =createMessageError(request, "error.notfound", preguntesFrequentsID);
+        String __msg = createMessageError(request, "error.notfound", preguntesFrequentsID);
         return getRedirectWhenDelete(request, preguntesFrequentsID, new Exception(__msg));
       } else {
         delete(request, preguntesFrequents);

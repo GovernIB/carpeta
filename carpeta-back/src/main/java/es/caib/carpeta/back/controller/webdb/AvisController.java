@@ -515,9 +515,9 @@ public class AvisController
       return null;
     }
     try {
-      Avis avis = avisEjb.findByPrimaryKey(avisID);
+      Avis avis = this.findByPrimaryKey(request, avisID);
       if (avis == null) {
-        String __msg =createMessageError(request, "error.notfound", avisID);
+        String __msg = createMessageError(request, "error.notfound", avisID);
         return getRedirectWhenDelete(request, avisID, new Exception(__msg));
       } else {
         delete(request, avis);

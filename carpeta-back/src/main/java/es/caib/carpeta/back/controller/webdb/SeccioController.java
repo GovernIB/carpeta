@@ -508,9 +508,9 @@ public class SeccioController
       return null;
     }
     try {
-      Seccio seccio = seccioEjb.findByPrimaryKey(seccioID);
+      Seccio seccio = this.findByPrimaryKey(request, seccioID);
       if (seccio == null) {
-        String __msg =createMessageError(request, "error.notfound", seccioID);
+        String __msg = createMessageError(request, "error.notfound", seccioID);
         return getRedirectWhenDelete(request, seccioID, new Exception(__msg));
       } else {
         delete(request, seccio);

@@ -467,9 +467,9 @@ public class PluginEntitatController
       return null;
     }
     try {
-      PluginEntitat pluginEntitat = pluginEntitatEjb.findByPrimaryKey(pluginEntitatID);
+      PluginEntitat pluginEntitat = this.findByPrimaryKey(request, pluginEntitatID);
       if (pluginEntitat == null) {
-        String __msg =createMessageError(request, "error.notfound", pluginEntitatID);
+        String __msg = createMessageError(request, "error.notfound", pluginEntitatID);
         return getRedirectWhenDelete(request, pluginEntitatID, new Exception(__msg));
       } else {
         delete(request, pluginEntitat);
