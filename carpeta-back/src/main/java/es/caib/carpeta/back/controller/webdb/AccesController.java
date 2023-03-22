@@ -459,9 +459,9 @@ public class AccesController
       return null;
     }
     try {
-      Acces acces = accesEjb.findByPrimaryKey(accesID);
+      Acces acces = this.findByPrimaryKey(request, accesID);
       if (acces == null) {
-        String __msg =createMessageError(request, "error.notfound", accesID);
+        String __msg = createMessageError(request, "error.notfound", accesID);
         return getRedirectWhenDelete(request, accesID, new Exception(__msg));
       } else {
         delete(request, acces);

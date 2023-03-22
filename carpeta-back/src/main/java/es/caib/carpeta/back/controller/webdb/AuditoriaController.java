@@ -432,9 +432,9 @@ public class AuditoriaController
       return null;
     }
     try {
-      Auditoria auditoria = auditoriaEjb.findByPrimaryKey(auditoriaID);
+      Auditoria auditoria = this.findByPrimaryKey(request, auditoriaID);
       if (auditoria == null) {
-        String __msg =createMessageError(request, "error.notfound", auditoriaID);
+        String __msg = createMessageError(request, "error.notfound", auditoriaID);
         return getRedirectWhenDelete(request, auditoriaID, new Exception(__msg));
       } else {
         delete(request, auditoria);

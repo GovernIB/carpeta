@@ -440,9 +440,9 @@ public class UsuariController
       return null;
     }
     try {
-      Usuari usuari = usuariEjb.findByPrimaryKey(usuariID);
+      Usuari usuari = this.findByPrimaryKey(request, usuariID);
       if (usuari == null) {
-        String __msg =createMessageError(request, "error.notfound", usuariID);
+        String __msg = createMessageError(request, "error.notfound", usuariID);
         return getRedirectWhenDelete(request, usuariID, new Exception(__msg));
       } else {
         delete(request, usuari);

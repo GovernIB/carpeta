@@ -452,9 +452,9 @@ public class LogCarpetaController
       return null;
     }
     try {
-      LogCarpeta logCarpeta = logCarpetaEjb.findByPrimaryKey(logID);
+      LogCarpeta logCarpeta = this.findByPrimaryKey(request, logID);
       if (logCarpeta == null) {
-        String __msg =createMessageError(request, "error.notfound", logID);
+        String __msg = createMessageError(request, "error.notfound", logID);
         return getRedirectWhenDelete(request, logID, new Exception(__msg));
       } else {
         delete(request, logCarpeta);

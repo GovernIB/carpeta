@@ -390,9 +390,9 @@ public class CiutadaController
       return null;
     }
     try {
-      Ciutada ciutada = ciutadaEjb.findByPrimaryKey(ciutadaID);
+      Ciutada ciutada = this.findByPrimaryKey(request, ciutadaID);
       if (ciutada == null) {
-        String __msg =createMessageError(request, "error.notfound", ciutadaID);
+        String __msg = createMessageError(request, "error.notfound", ciutadaID);
         return getRedirectWhenDelete(request, ciutadaID, new Exception(__msg));
       } else {
         delete(request, ciutada);

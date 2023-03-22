@@ -498,9 +498,9 @@ public class NotificacioAppController
       return null;
     }
     try {
-      NotificacioApp notificacioApp = notificacioAppEjb.findByPrimaryKey(notificacioAppID);
+      NotificacioApp notificacioApp = this.findByPrimaryKey(request, notificacioAppID);
       if (notificacioApp == null) {
-        String __msg =createMessageError(request, "error.notfound", notificacioAppID);
+        String __msg = createMessageError(request, "error.notfound", notificacioAppID);
         return getRedirectWhenDelete(request, notificacioAppID, new Exception(__msg));
       } else {
         delete(request, notificacioApp);
