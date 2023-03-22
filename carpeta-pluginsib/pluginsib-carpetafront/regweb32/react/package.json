@@ -22,7 +22,6 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-i18next": "^12.1.1",
-   
     "regwebdetallcomponentlib": "file:../../regwebdetallcomponent/reactlib"
   },
   "devDependencies": {

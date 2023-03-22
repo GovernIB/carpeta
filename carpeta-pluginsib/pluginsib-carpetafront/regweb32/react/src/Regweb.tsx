@@ -64,15 +64,10 @@ class Regweb extends React.Component<RegwebProps, RegwebState> {
     };
 
     this.handleSubmitSearcher = this.handleSubmitSearcher.bind(this);
-
     this.tornarDeDetallRegistre = this.tornarDeDetallRegistre.bind(this);
-
     this.loadPaginatedData = this.loadPaginatedData.bind(this);
-
     this.canviatIdioma = this.canviatIdioma.bind(this);
-
     this.onClickRow = this.onClickRow.bind(this);
-
     this.validate = this.validate.bind(this);
 
     this.onChangeState = this.onChangeState.bind(this);
@@ -89,7 +84,7 @@ class Regweb extends React.Component<RegwebProps, RegwebState> {
     this.forceUpdate();
   }
 
-  componentDidMount() {}
+  componentDidMount() { }
 
   handleSubmitSearcher(e: any): boolean {
     console.log("RegWeb::handleSubmitSearcher() inici");

@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom";
 import Notib from "./Notib";
 import i18next from "./i18n";
