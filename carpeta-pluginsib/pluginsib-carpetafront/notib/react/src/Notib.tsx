@@ -67,8 +67,6 @@ class Notib extends React.Component<NotibProps> {
 
         const endDateObj = new Date();
         startDateObj.setMonth(endDateObj.getMonth() - 1);
-        startDateObj.setFullYear(endDateObj.getFullYear() - 3);
-
 
         this.dataInici = startDateObj;
         this.dataFi = endDateObj;
@@ -82,6 +80,7 @@ class Notib extends React.Component<NotibProps> {
         this.handleStatusFilterParam = this.handleStatusFilterParam.bind(this);
         this.handleSubmitSearcher = this.handleSubmitSearcher.bind(this);
         this.loadPaginatedData = this.loadPaginatedData.bind(this);
+        
 
 
         this.canviatIdioma = this.canviatIdioma.bind(this);
@@ -112,24 +111,6 @@ class Notib extends React.Component<NotibProps> {
         }
     }
 
-    onChangeStartDate(newDate: Date, _oldDate: Date): boolean {
-        if (this.validate(newDate, this.dataFi)) {
-            this.dataInici = newDate;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    onChangeEndDate(newDate: Date, _oldDate: Date): boolean {
-        if (this.validate(this.dataInici, newDate)) {
-            this.dataFi = newDate;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     canviatIdioma(_lng: string) {
         this.forceUpdate();
     }
@@ -142,6 +123,7 @@ class Notib extends React.Component<NotibProps> {
             return false;
         }
     }
+
     handleChangeDataFi(newDate: Date, _oldDate: Date): boolean {
 
         if (this.validate(this.dataInici, newDate)) {
@@ -275,7 +257,7 @@ class Notib extends React.Component<NotibProps> {
         urldetallbase2: string,
         urldetallbase3: string
     ): NotibData[] {
-        let apoderaments: NotibData[] = [];
+        let notificacions: NotibData[] = [];
 
         const { t } = this.props;
 
@@ -288,28 +270,20 @@ class Notib extends React.Component<NotibProps> {
                         ? i18n.t("notibNotificacio")
                         : i18n.t("notibComunicacio");
 
-                //TODO XYZ Substituir ternaris per Ifs
 
-                let strAux: string = urldetallbase
-                    ? urldetallbase
-                    : "";
-                let strAux2: string = urldetallbase2
-                    ? urldetallbase2
-                    : "";
-                let strAux3: string = urldetallbase3
-                    ? urldetallbase3
-                    : "";
-                let urlNotib: string =
-                    tipus === "notificacio"
-                        ? transmissio.estat.codi === "FINALIZADA" ||
-                            transmissio.estat.codi === "FINALITZADA" ||
-                            transmissio.estat.codi === "PROCESADA" ||
-                            transmissio.estat.codi === "PROCESSADA"
-                            ? strAux2
-                            : strAux
-                        : strAux3;
+                let urlNotib : string;
 
-                let apoderaBotoContent: JSX.Element = (
+                if(tipus == "notificacio"){
+                  if(transmissio.estat.codi === "FINALIZADA" || transmissio.estat.codi === "FINALITZADA" || transmissio.estat.codi === "PROCESADA" || transmissio.estat.codi === "PROCESSADA"){
+                    urlNotib = urldetallbase2;
+                  }else{
+                    urlNotib = urldetallbase;
+                  }
+                }else{
+                  urlNotib = urldetallbase3;
+                }
+
+                let notibBotoContent: JSX.Element = (
                     <div
                         style={{
                             width: "auto",
@@ -317,7 +291,7 @@ class Notib extends React.Component<NotibProps> {
                             position: "relative",
                             top: "0px",
                         }}
-                        id="accedirApodera"
+                        id="accedirNotib"
                     >
                         <span>
                             <button
@@ -329,7 +303,7 @@ class Notib extends React.Component<NotibProps> {
                                     window.open(urlNotib, "_blank");
                                 }}
                             >
-                                {t("apoderaBotoApoderament")}&nbsp;&nbsp;
+                                {t("notibBotoNotificacio")}&nbsp;&nbsp;
                                 {RowTypeUtils.getIcon(RowType.EXTERNAL_LINK, false)}
                             </button>
                         </span>
@@ -347,14 +321,14 @@ class Notib extends React.Component<NotibProps> {
                     descripcio: transmissio.descripcio,
                     darreraModificacio: transmissio.dataEstat,
                     subestat: transmissio.subestat,
-                    notibBoto: apoderaBotoContent,
+                    notibBoto: notibBotoContent,
                 };
 
-                apoderaments.push(element);
+                notificacions.push(element);
             });
         }
 
-        return apoderaments;
+        return notificacions;
     }
 
 
@@ -457,8 +431,6 @@ class Notib extends React.Component<NotibProps> {
     };
 
     render() {
-        //const isLoaded = this.state.isLoaded;
-
         const { t } = this.props;
 
         let formulari = (
@@ -476,16 +448,16 @@ class Notib extends React.Component<NotibProps> {
                         <CarpetaFormulariDeFiltreItem label={t("notibDataInici")}>
                             <CarpetaDatePicker
                                 basename={"dataInici"}
+                                onChangeDate={this.handleChangeDataInici}
                                 defaultValue={this.dataInici}
-                                onChangeDate={this.onChangeStartDate}
                                 i18n={this.props.i18n}
                             />
                         </CarpetaFormulariDeFiltreItem>
                         <CarpetaFormulariDeFiltreItem label={t("notibDataFi")}>
                             <CarpetaDatePicker
                                 basename={"dataFi"}
+                                onChangeDate={this.handleChangeDataFi}
                                 defaultValue={this.dataFi}
-                                onChangeDate={this.onChangeEndDate}
                                 i18n={this.props.i18n}
                             />
                         </CarpetaFormulariDeFiltreItem>
@@ -553,7 +525,7 @@ class Notib extends React.Component<NotibProps> {
                                     className="form-control form-control-sm selectMobil"
                                     selected={this.filter_status == 2}
                                 >
-                                    {t("notibLlegides")}
+                                    {t("notibExpirada")}
                                 </option>
                             </select>
                         </CarpetaFormulariDeFiltreItem>
