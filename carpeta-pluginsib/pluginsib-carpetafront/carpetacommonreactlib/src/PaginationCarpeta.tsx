@@ -18,32 +18,44 @@ interface PaginationCarpetaState {
 }
 
 class PaginationCarpeta extends React.Component<PaginationCarpetaProps, PaginationCarpetaState> {
+  private static readonly ROTATE_RIGHT_STYLE: React.CSSProperties = {
+    transform: "rotate(90deg)",
+  };
+
+  private static readonly ROTATE_LEFT_STYLE: React.CSSProperties = {
+    transform: "rotate(-90deg)",
+
+    /* Legacy vendor prefixes that you probably don't need... */
+
+    // Safari
+    //-webkit-transform:"rotate(-90deg)",
+
+    /*
+      // Firefox 
+      -moz-transform: "rotate(-90deg)"
+    
+      // IE 
+      -ms-transform: "rotate(-90deg)",
+    
+      // Opera 
+      -o-transform: "rotate(-90deg)",
+    
+      // Internet Explorer
+      filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)"
+      */
+  };
+
   constructor(props: PaginationCarpetaProps) {
     super(props);
 
     console.log("  CONSTRUCTOR PaginationCarpeta !!!!!");
     /*
-    console.log(
-      "PaginationCarpeta().paginaActual  => " +
-        this.props.paginationInfo.paginaActual
-    );
-    console.log(
-      "PaginationCarpeta().elementsPerPagina  => " +
-        this.props.paginationInfo.elementsPerPagina
-    );
-    console.log(
-      "PaginationCarpeta().totalPagines  => " +
-        this.props.paginationInfo.totalPagines
-    );
-    console.log(
-      "PaginationCarpeta().registresRetornats  => " +
-        this.props.paginationInfo.registresRetornats
-    );
-    console.log(
-      "PaginationCarpeta().totalRegistres  => " +
-        this.props.paginationInfo.totalRegistres
-    );
-*/
+    console.log("PaginationCarpeta().paginaActual  => " + this.props.paginationInfo.paginaActual);
+    console.log("PaginationCarpeta().elementsPerPagina  => " + this.props.paginationInfo.elementsPerPagina);
+    console.log("PaginationCarpeta().totalPagines  => " + this.props.paginationInfo.totalPagines);
+    console.log("PaginationCarpeta().registresRetornats  => " + this.props.paginationInfo.registresRetornats);
+    console.log("PaginationCarpeta().totalRegistres  => " + this.props.paginationInfo.totalRegistres);
+    */
     initTranslation(this.props.i18n);
     this.updatePaginationInfo = this.updatePaginationInfo.bind(this);
 
@@ -64,6 +76,8 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
   render() {
     console.log("PaginationCarpeta::render() =>  START");
 
+    const t = this.props.i18n.t;
+
     let paginationInfo: PaginationInfo | null = this.state.paginationInfo;
 
     if (paginationInfo == null || paginationInfo.totalElements == 0) {
@@ -83,14 +97,14 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
     /* Mostrant elements del {{from}} al {{to}} d'un total de {{total}} elements*/
     //console.log("PaginationCarpeta::render() =>  Desplegable elementsPerPàgina ...");
 
-    let message: string = this.props.i18n.t("paginacioLabel", {
+    let message: string = t("paginacioLabel", {
       current: current,
       total: total,
       from: from,
       to: to,
     });
 
-    let onClick: Function = this.props.onClickPagination;
+    let onClick = this.props.onClickPagination;
     let onClickSelectElementsByPage: Function | undefined = undefined;
 
     let pagination: JSX.Element = <></>;
@@ -99,6 +113,65 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
     if (paginationInfo.totalPagines != 1) {
       //console.log("PaginationCarpeta::render() =>  selectElementsByPage ...");
       onClickSelectElementsByPage = this.props.onClickSelectElementsByPage;
+
+
+      let maxCasellesPerMostrar: number;
+      let w: number = window.innerWidth;
+
+      console.log("PartitionCarpeta::render() => window.innerWidth = " + w);
+
+      // Serveix per ajustar la funció de càlcul de casseles a pintar
+      const ajust: number = reactdetect.isMobileOnly ? 0 : -2;
+      if (w < 920) {
+        maxCasellesPerMostrar = 5;
+      } else if (w > 1400) {
+        maxCasellesPerMostrar = 13 + ajust;
+      } else {
+        maxCasellesPerMostrar = Math.floor((9 * w - 5880) / 480) + ajust;
+      }
+
+      console.log("PartitionCarpeta::render() => caselles = " + maxCasellesPerMostrar);
+
+      //TODO FALTA MOBILE
+      // XYZ ZZZ
+
+      let start: number;
+      let end: number;
+
+      let showPoints: boolean;
+      console.log("PartitionCarpeta::render() => paginationInfo.totalPagines = " + paginationInfo.totalPagines);
+      if (paginationInfo.totalPagines < maxCasellesPerMostrar) {
+        start = 0;
+        end = paginationInfo.totalPagines;
+        showPoints = false;
+      } else {
+        // start = Math.max(0, paginationInfo.paginaActual - Math.floor(maxCasellesPerMostrar / 2));
+        // end = Math.min(start + maxCasellesPerMostrar, paginationInfo.totalPagines);
+
+        start = paginationInfo.paginaActual - Math.floor(maxCasellesPerMostrar / 2) + 1;
+        end = paginationInfo.paginaActual + Math.floor(maxCasellesPerMostrar / 2) + 1;
+
+        if (start < 0) {
+          // Passam els numeros negatius a end
+          end = end - start;
+          start = 0;
+        } else {
+          // Passam els numeros que passen de totalPagines a start
+          if (end > paginationInfo.totalPagines) {
+            start = start - (end - paginationInfo.totalPagines);
+            end = paginationInfo.totalPagines;
+          }
+        }
+
+        start = Math.max(0, start);
+        end = Math.min(end, paginationInfo.totalPagines);
+
+        showPoints = true;
+      }
+
+      console.log("PartitionCarpeta::render() => start = " + start);
+      console.log("PartitionCarpeta::render() => end = " + end);
+      console.log("PartitionCarpeta::render() => showPoints = " + showPoints);
 
       //console.log("PaginationCarpeta::render() =>  Functions ...");
 
@@ -109,22 +182,50 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
       //console.log("PaginationCarpeta::render() =>  pagines ...");
       let pagines: any = [];
 
-      // First
-      pagines.push(
-        <Item value={0} onClick={onClick}>
-          «
-        </Item>
-      );
-      // Previous
-      pagines.push(
-        <Item value={Math.max(0, paginationInfo.paginaActual - 1)} onClick={onClick}>
-          ‹
-        </Item>
-      );
+      // First |<
+      if (showPoints && start != 0) {
+        pagines.push(
+          <Item value={0} onClick={onClick} title={t("pagination.primerapagina")}>
+            <div style={PaginationCarpeta.ROTATE_LEFT_STYLE}> &#8892;</div>
+          </Item>
+        );
+      }
+
+      // Retrocedir <<
+      let retrocedir: number = Math.floor(start / 2);
+      let retrocedirTitle: string = t("pagination.retrocedir", { pagina: retrocedir });
+
+      if (showPoints && start != 0) {
+        pagines.push(
+          <Item key={-1} value={retrocedir} title={retrocedirTitle} onClick={onClick}>
+            &#8810;
+          </Item>
+        );
+      }
+
+      // Previous <
+      if (start != 0) {
+        pagines.push(
+          <Item value={Math.max(0, paginationInfo.paginaActual - 1)} title={t("pagination.anterior")} onClick={onClick}>
+            &#60;
+          </Item>
+        );
+      }
+
+      // ... a l'esquerra
+      /*
+      if (showPoints && start != 0) {
+        pagines.push(
+          <Item key={-1} value={retrocedir} title={retrocedirTitle} onClick={onClick}>
+            {"…"}
+          </Item>
+        );
+      }
+      */
 
       // All pagination numbers
-      {
-        for (let i = 0; i < paginationInfo.totalPagines; i++) {
+      for (let i = start; i < end - 1; i++) {
+        if (i >= 0 && i <= paginationInfo.totalPagines) {
           pagines.push(
             <Item key={i} value={i} onClick={onClick} active={paginationInfo.paginaActual == i}>
               {"" + (i + 1)}
@@ -133,18 +234,50 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
         }
       }
 
-      // next
-      pagines.push(
-        <Item value={Math.min(paginationInfo.paginaActual + 1, paginationInfo.totalPagines - 1)} onClick={onClick}>
-          ›
-        </Item>
-      );
-      // Last
-      pagines.push(
-        <Item value={paginationInfo.totalPagines - 1} onClick={onClick}>
-          »
-        </Item>
-      );
+      // ... a la dreta
+
+      let avancar: number = end + Math.floor((paginationInfo.totalPagines - end) / 2);
+      let avancarTitle: string = t("pagination.avancar", { pagina: avancar });
+      /*
+      if (showPoints && end != paginationInfo.totalPagines) {
+        pagines.push(
+          <Item key={-2} onClick={onClick} value={avancar} title={avancarTitle}>
+            {"…"}
+          </Item>
+        );
+      }
+      */
+
+      // Seguent >
+      if (end != paginationInfo.totalPagines) {
+        pagines.push(
+          <Item
+            value={Math.min(paginationInfo.paginaActual + 1, paginationInfo.totalPagines - 1)}
+            onClick={onClick}
+            title={t("pagination.seguent")}
+          >
+            &#62;
+          </Item>
+        );
+      }
+
+      // Avançar >>
+      if (showPoints && end != paginationInfo.totalPagines) {
+        pagines.push(
+          <Item key={-2} onClick={onClick} value={avancar} title={avancarTitle}>
+            &#8811;
+          </Item>
+        );
+      }
+
+      // Last  >|
+      if (showPoints && end != paginationInfo.totalPagines) {
+        pagines.push(
+          <Item value={paginationInfo.totalPagines - 2} onClick={onClick} title={t("pagination.darrerapagina")}>
+            <div style={PaginationCarpeta.ROTATE_RIGHT_STYLE}>&#8892;</div>
+          </Item>
+        );
+      }
 
       //Options per numero de elements a pintar per pagina
       //console.log("PaginationCarpeta::render() =>  onClickSelectElementsByPage ...");
@@ -225,7 +358,7 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
             <br />
             <div className="container-fluid mt-1">{pagination}</div>
             <br />
-            <div className="container-fluid mt-1"> {numElements}</div>
+            <div className="container-fluid mt-1">{numElements}</div>
           </center>
         );
       } else {
@@ -243,11 +376,18 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
           <>
             <div className="container-fluid">
               <div className="row d-flex">
-                <div className="col">{message}</div>
-                <div className="pagination col justify-content-center" style={{ marginRight: "10px" }}>
+                <div className="col" style={{ marginRight: "0px", marginLeft: "0px", paddingLeft: "0px" }}>
+                  {message}
+                </div>
+                <div
+                  className="pagination col justify-content-center"
+                  style={{ marginRight: "0px", marginLeft: "0px" }}
+                >
                   {pagination}
                 </div>
-                <div className="pagination col justify-content-end">{numElements}</div>
+                <div className="pagination col justify-content-end" style={{ marginRight: "0px", marginLeft: "0px" }}>
+                  {numElements}
+                </div>
               </div>
             </div>
           </>
@@ -256,7 +396,6 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
         return (
           <>
             <div style={{ float: "left", marginTop: "9px", width: "50%" }}>{message}</div>
-
             {pagination}
           </>
         );

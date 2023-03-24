@@ -6,6 +6,13 @@
 
     "taulaBuida": "No hay elementos para mostrar",
 
+    "pagination.primerapagina": "Ir a la primera página",
+    "pagination.darrerapagina": "Ir a la última página",
+    "pagination.avancar": "Avanzar a la página {{pagina}}",
+    "pagination.retrocedir": "Retroceder a la página {{pagina}}",
+    "pagination.seguent": "Página seguiente",
+    "pagination.anterior": "Página anterior",
+
     "rowtype.internal_link":"Accedeix a una altra pàgina amb més informació d'aquest element",
     "rowtype.external_link":"Obre una altra finestra per accedir a més informació d'aquest element",
     "rowtype.download_file":"Descarrega un fitxer",

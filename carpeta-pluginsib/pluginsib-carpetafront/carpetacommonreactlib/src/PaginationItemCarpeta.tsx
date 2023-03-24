@@ -10,8 +10,9 @@ import React from "react";
 interface InternalPaginationItemCarpetaProps {
   children: JSX.Element | string;
   value: number;
-  onClick: Function;
+  onClick?(value:number):void;
   active?: boolean;
+  title?:string;
 }
 
 class PaginationItemCarpeta extends React.Component<InternalPaginationItemCarpetaProps> {
@@ -25,9 +26,10 @@ class PaginationItemCarpeta extends React.Component<InternalPaginationItemCarpet
         <a
           className="page-link"
           role="button"
+          title={this.props.title?this.props.title:""}
           href={undefined}
           onClick={() => {
-            this.props.onClick(this.props.value);
+            if (this.props.onClick) { this.props.onClick(this.props.value); }
           }}
         >
           {this.props.children}

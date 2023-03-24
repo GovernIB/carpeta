@@ -36,11 +36,8 @@ class RenderPaginationTable extends React.Component<RenderPaginationTableProps> 
 
     this.page = 0;
 
-    //this.state = { page: page, elementsByPage: elementsByPage };
-
     this.onClickSelectElementsByPage = this.onClickSelectElementsByPage.bind(this);
     this.onClickPagination = this.onClickPagination.bind(this);
-    // XYZ this.loadData = this.loadData.bind(this);
     this.loadDataAsync = this.loadDataAsync.bind(this);
     this.returnDataFunction = this.returnDataFunction.bind(this);
   }
@@ -50,10 +47,9 @@ class RenderPaginationTable extends React.Component<RenderPaginationTableProps> 
   }
 
   componentDidUpdate(): void {
-    console.log("<<<<<<<<<<<<<<<   RENDER PAGINATION TABLE  => COMPONENT WILL UPDATE  >>>>>>>>>>>>>>>>>>");
 
     console.log(
-      "RenderPaginationTable::componentWillUpdate()  => this.props.selectElementsByPage: " +
+      "RenderPaginationTable::componentDidUpdate()  => this.props.selectElementsByPage: " +
         this.props.selectElementsByPage
     );
 

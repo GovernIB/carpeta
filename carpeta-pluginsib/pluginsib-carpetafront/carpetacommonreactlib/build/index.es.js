@@ -4250,20 +4250,27 @@ var RenderTable = /** @class */ (function (_super) {
     */
     RenderTable.prototype.render = function () {
         console.log("RenderTable::render() => Start");
-        if (!this.state.isLoaded) {
+        var tableData = this.state.tableData;
+        if (!this.state.isLoaded || tableData == undefined) {
+            if (tableData == undefined) {
+                console.error("RenderTable::render()  ===========================================");
+                console.error("RenderTable::render() => this.state.tableData == undefined !!!!!!!");
+                console.error("RenderTable::render() => Esperam a veure si tornam a carregar ....");
+                console.error("RenderTable::render()  ===========================================");
+            }
             return (React$1.createElement("div", { id: "carregant", className: "loader-container centrat " },
                 React$1.createElement("div", { className: "loader" })));
         }
         if (this.state.error != null) {
             return (React$1.createElement("div", { className: "alert alert-danger", role: "alert" }, this.state.error));
         }
-        if (!Array.isArray(this.state.tableData)) {
-            console.log("RenderTable::render() => this.state.tableData = NO ES UN ARRAY !!!!!!");
+        if (!Array.isArray(tableData)) {
+            console.error("RenderTable::render() => this.state.tableData = NO ES UN ARRAY !!!!!!");
         }
-        if (this.state.tableData != null) {
-            console.log("RenderTable::render() => this.state.tableData.length = " + this.state.tableData.length);
+        if (tableData) {
+            console.log("RenderTable::render() => this.state.tableData.length = " + tableData.length);
         }
-        if (this.state.tableData == null || (this.state.tableData != null && this.state.tableData.length == 0)) {
+        if (tableData == null || (tableData != null && tableData.length == 0)) {
             return (React$1.createElement("div", { className: "alert alert-warning", role: "alert" }, this.props.i18n.t("taulaBuida")));
         }
         /*
@@ -4283,10 +4290,10 @@ var RenderTable = /** @class */ (function (_super) {
         */
         // OK Tenim dades
         if (!isMobileOnly_1) {
-            return React$1.createElement(RenderTableDesktop, __assign({}, this.props, { tableData: this.state.tableData }));
+            return React$1.createElement(RenderTableDesktop, __assign({}, this.props, { tableData: tableData }));
         }
         else {
-            return React$1.createElement(RenderTableMobile, __assign({}, this.props, { tableData: this.state.tableData }));
+            return React$1.createElement(RenderTableMobile, __assign({}, this.props, { tableData: tableData }));
         }
     };
     return RenderTable;
@@ -4303,6 +4310,12 @@ var translationEN = {
 	elementPerPaginaMostra: elementPerPaginaMostra$2,
 	elementPerPaginaElements: elementPerPaginaElements$2,
 	taulaBuida: taulaBuida$2,
+	"pagination.primerapagina": "Ir a la primera página",
+	"pagination.darrerapagina": "Ir a la última página",
+	"pagination.avancar": "Avanzar a la página {{pagina}}",
+	"pagination.retrocedir": "Retroceder a la página {{pagina}}",
+	"pagination.seguent": "Página seguiente",
+	"pagination.anterior": "Página anterior",
 	"rowtype.internal_link": "Accedeix a una altra pàgina amb més informació d'aquest element",
 	"rowtype.external_link": "Obre una altra finestra per accedir a més informació d'aquest element",
 	"rowtype.download_file": "Descarrega un fitxer",
@@ -4312,15 +4325,21 @@ var translationEN = {
 };
 
 var tornar$1 = "Volver";
-var paginacioLabel$1 = "Mostrando elementos del {{from}} al {{to}} de un total de {{total}}";
-var elementPerPaginaMostra$1 = "Muestra  ";
-var elementPerPaginaElements$1 = "  elementos";
+var paginacioLabel$1 = "Elementos del {{from}} al {{to}} de un total de {{total}}";
+var elementPerPaginaMostra$1 = "";
+var elementPerPaginaElements$1 = "  elementos por página";
 var taulaBuida$1 = "No hay elementos para mostrar";
 var translationES = {
 	tornar: tornar$1,
 	paginacioLabel: paginacioLabel$1,
 	elementPerPaginaMostra: elementPerPaginaMostra$1,
 	elementPerPaginaElements: elementPerPaginaElements$1,
+	"pagination.primerapagina": "Ir a la primera página",
+	"pagination.darrerapagina": "Ir a la última página",
+	"pagination.avancar": "Avanzar a la página {{pagina}}",
+	"pagination.retrocedir": "Retroceder a la página {{pagina}}",
+	"pagination.seguent": "Página seguiente",
+	"pagination.anterior": "Página anterior",
 	taulaBuida: taulaBuida$1,
 	"rowtype.internal_link": "Accede a otra página con más información de esta entrada",
 	"rowtype.external_link": "Abre otra ventana para acceder a más información de esta entrada",
@@ -4331,15 +4350,21 @@ var translationES = {
 };
 
 var tornar = "Tornau";
-var paginacioLabel = "Mostrant elements del {{from}} al {{to}} d'un total de {{total}}";
-var elementPerPaginaMostra = "Mostra  ";
-var elementPerPaginaElements = "  elements";
+var paginacioLabel = "Elements del {{from}} al {{to}} d'un total de {{total}}";
+var elementPerPaginaMostra = "";
+var elementPerPaginaElements = "  elements per pàgina";
 var taulaBuida = "No hi ha elements a mostrar";
 var translationCA = {
 	tornar: tornar,
 	paginacioLabel: paginacioLabel,
 	elementPerPaginaMostra: elementPerPaginaMostra,
 	elementPerPaginaElements: elementPerPaginaElements,
+	"pagination.primerapagina": "Anar a la primera pàgina",
+	"pagination.darrerapagina": "Anar a la darrera pàgina",
+	"pagination.avancar": "Avançar a la pàgina {{pagina}}",
+	"pagination.retrocedir": "Retrocedir a la pàgina {{pagina}}",
+	"pagination.seguent": "Pàgina següent",
+	"pagination.anterior": "Pàgina anterior",
 	taulaBuida: taulaBuida,
 	"rowtype.internal_link": "Accedeix a una altra pàgina amb més informació d'aquest element",
 	"rowtype.external_link": "Obre una altra finestra per accedir a més informació d'aquest element",
@@ -4375,8 +4400,10 @@ var PaginationItemCarpeta = /** @class */ (function (_super) {
     PaginationItemCarpeta.prototype.render = function () {
         var _this = this;
         return (React$1.createElement("li", { key: "item_" + this.props.value, className: "page-item ".concat(this.props.active ? "active" : "") },
-            React$1.createElement("a", { className: "page-link", role: "button", href: undefined, onClick: function () {
-                    _this.props.onClick(_this.props.value);
+            React$1.createElement("a", { className: "page-link", role: "button", title: this.props.title ? this.props.title : "", href: undefined, onClick: function () {
+                    if (_this.props.onClick) {
+                        _this.props.onClick(_this.props.value);
+                    }
                 } }, this.props.children)));
     };
     return PaginationItemCarpeta;
@@ -4394,27 +4421,12 @@ var PaginationCarpeta = /** @class */ (function (_super) {
         var _this = _super.call(this, props) || this;
         console.log("  CONSTRUCTOR PaginationCarpeta !!!!!");
         /*
-        console.log(
-          "PaginationCarpeta().paginaActual  => " +
-            this.props.paginationInfo.paginaActual
-        );
-        console.log(
-          "PaginationCarpeta().elementsPerPagina  => " +
-            this.props.paginationInfo.elementsPerPagina
-        );
-        console.log(
-          "PaginationCarpeta().totalPagines  => " +
-            this.props.paginationInfo.totalPagines
-        );
-        console.log(
-          "PaginationCarpeta().registresRetornats  => " +
-            this.props.paginationInfo.registresRetornats
-        );
-        console.log(
-          "PaginationCarpeta().totalRegistres  => " +
-            this.props.paginationInfo.totalRegistres
-        );
-    */
+        console.log("PaginationCarpeta().paginaActual  => " + this.props.paginationInfo.paginaActual);
+        console.log("PaginationCarpeta().elementsPerPagina  => " + this.props.paginationInfo.elementsPerPagina);
+        console.log("PaginationCarpeta().totalPagines  => " + this.props.paginationInfo.totalPagines);
+        console.log("PaginationCarpeta().registresRetornats  => " + this.props.paginationInfo.registresRetornats);
+        console.log("PaginationCarpeta().totalRegistres  => " + this.props.paginationInfo.totalRegistres);
+        */
         initTranslation(_this.props.i18n);
         _this.updatePaginationInfo = _this.updatePaginationInfo.bind(_this);
         _this.state = {
@@ -4433,6 +4445,7 @@ var PaginationCarpeta = /** @class */ (function (_super) {
     };
     PaginationCarpeta.prototype.render = function () {
         console.log("PaginationCarpeta::render() =>  START");
+        var t = this.props.i18n.t;
         var paginationInfo = this.state.paginationInfo;
         if (paginationInfo == null || paginationInfo.totalElements == 0) {
             //console.log("PaginationCarpeta::render() =>  paginationInfo == null");
@@ -4445,7 +4458,7 @@ var PaginationCarpeta = /** @class */ (function (_super) {
         var to = Math.min(paginationInfo.totalElements, (1 + paginationInfo.paginaActual) * paginationInfo.elementsPerPagina);
         /* Mostrant elements del {{from}} al {{to}} d'un total de {{total}} elements*/
         //console.log("PaginationCarpeta::render() =>  Desplegable elementsPerPàgina ...");
-        var message = this.props.i18n.t("paginacioLabel", {
+        var message = t("paginacioLabel", {
             current: current,
             total: total,
             from: from,
@@ -4458,26 +4471,118 @@ var PaginationCarpeta = /** @class */ (function (_super) {
         if (paginationInfo.totalPagines != 1) {
             //console.log("PaginationCarpeta::render() =>  selectElementsByPage ...");
             onClickSelectElementsByPage = this.props.onClickSelectElementsByPage;
+            var maxCasellesPerMostrar = void 0;
+            var w = window.innerWidth;
+            console.log("PartitionCarpeta::render() => window.innerWidth = " + w);
+            // Serveix per ajustar la funció de càlcul de casseles a pintar
+            var ajust = isMobileOnly_1 ? 0 : -2;
+            if (w < 920) {
+                maxCasellesPerMostrar = 5;
+            }
+            else if (w > 1400) {
+                maxCasellesPerMostrar = 13 + ajust;
+            }
+            else {
+                maxCasellesPerMostrar = Math.floor((9 * w - 5880) / 480) + ajust;
+            }
+            console.log("PartitionCarpeta::render() => caselles = " + maxCasellesPerMostrar);
+            //TODO FALTA MOBILE
+            // XYZ ZZZ
+            var start = void 0;
+            var end = void 0;
+            var showPoints = void 0;
+            console.log("PartitionCarpeta::render() => paginationInfo.totalPagines = " + paginationInfo.totalPagines);
+            if (paginationInfo.totalPagines < maxCasellesPerMostrar) {
+                start = 0;
+                end = paginationInfo.totalPagines;
+                showPoints = false;
+            }
+            else {
+                // start = Math.max(0, paginationInfo.paginaActual - Math.floor(maxCasellesPerMostrar / 2));
+                // end = Math.min(start + maxCasellesPerMostrar, paginationInfo.totalPagines);
+                start = paginationInfo.paginaActual - Math.floor(maxCasellesPerMostrar / 2) + 1;
+                end = paginationInfo.paginaActual + Math.floor(maxCasellesPerMostrar / 2) + 1;
+                if (start < 0) {
+                    // Passam els numeros negatius a end
+                    end = end - start;
+                    start = 0;
+                }
+                else {
+                    // Passam els numeros que passen de totalPagines a start
+                    if (end > paginationInfo.totalPagines) {
+                        start = start - (end - paginationInfo.totalPagines);
+                        end = paginationInfo.totalPagines;
+                    }
+                }
+                start = Math.max(0, start);
+                end = Math.min(end, paginationInfo.totalPagines);
+                showPoints = true;
+            }
+            console.log("PartitionCarpeta::render() => start = " + start);
+            console.log("PartitionCarpeta::render() => end = " + end);
+            console.log("PartitionCarpeta::render() => showPoints = " + showPoints);
             //console.log("PaginationCarpeta::render() =>  Functions ...");
             //Si el parametre onClickSelectElementsByPage te valor, existeix una funcio per canviar el nº de elements
             // per tant s'ha de incloure l'element per canviar el nº de elements.
             // Si el parametre elementsByPage te valors, agafarlos, si no, agafar 5, 10 i 25 per defecte.
             //console.log("PaginationCarpeta::render() =>  pagines ...");
             var pagines = [];
-            // First
-            pagines.push(React$1.createElement(PaginationItemCarpeta, { value: 0, onClick: onClick }, "\u00AB"));
-            // Previous
-            pagines.push(React$1.createElement(PaginationItemCarpeta, { value: Math.max(0, paginationInfo.paginaActual - 1), onClick: onClick }, "\u2039"));
+            // First |<
+            if (showPoints && start != 0) {
+                pagines.push(React$1.createElement(PaginationItemCarpeta, { value: 0, onClick: onClick, title: t("pagination.primerapagina") },
+                    React$1.createElement("div", { style: PaginationCarpeta.ROTATE_LEFT_STYLE }, " \u22BC")));
+            }
+            // Retrocedir <<
+            var retrocedir = Math.floor(start / 2);
+            var retrocedirTitle = t("pagination.retrocedir", { pagina: retrocedir });
+            if (showPoints && start != 0) {
+                pagines.push(React$1.createElement(PaginationItemCarpeta, { key: -1, value: retrocedir, title: retrocedirTitle, onClick: onClick }, "\u226A"));
+            }
+            // Previous <
+            if (start != 0) {
+                pagines.push(React$1.createElement(PaginationItemCarpeta, { value: Math.max(0, paginationInfo.paginaActual - 1), title: t("pagination.anterior"), onClick: onClick }, "<"));
+            }
+            // ... a l'esquerra
+            /*
+            if (showPoints && start != 0) {
+              pagines.push(
+                <Item key={-1} value={retrocedir} title={retrocedirTitle} onClick={onClick}>
+                  {"…"}
+                </Item>
+              );
+            }
+            */
             // All pagination numbers
-            {
-                for (var i_1 = 0; i_1 < paginationInfo.totalPagines; i_1++) {
+            for (var i_1 = start; i_1 < end - 1; i_1++) {
+                if (i_1 >= 0 && i_1 <= paginationInfo.totalPagines) {
                     pagines.push(React$1.createElement(PaginationItemCarpeta, { key: i_1, value: i_1, onClick: onClick, active: paginationInfo.paginaActual == i_1 }, "" + (i_1 + 1)));
                 }
             }
-            // next
-            pagines.push(React$1.createElement(PaginationItemCarpeta, { value: Math.min(paginationInfo.paginaActual + 1, paginationInfo.totalPagines - 1), onClick: onClick }, "\u203A"));
-            // Last
-            pagines.push(React$1.createElement(PaginationItemCarpeta, { value: paginationInfo.totalPagines - 1, onClick: onClick }, "\u00BB"));
+            // ... a la dreta
+            var avancar = end + Math.floor((paginationInfo.totalPagines - end) / 2);
+            var avancarTitle = t("pagination.avancar", { pagina: avancar });
+            /*
+            if (showPoints && end != paginationInfo.totalPagines) {
+              pagines.push(
+                <Item key={-2} onClick={onClick} value={avancar} title={avancarTitle}>
+                  {"…"}
+                </Item>
+              );
+            }
+            */
+            // Seguent >
+            if (end != paginationInfo.totalPagines) {
+                pagines.push(React$1.createElement(PaginationItemCarpeta, { value: Math.min(paginationInfo.paginaActual + 1, paginationInfo.totalPagines - 1), onClick: onClick, title: t("pagination.seguent") }, ">"));
+            }
+            // Avançar >>
+            if (showPoints && end != paginationInfo.totalPagines) {
+                pagines.push(React$1.createElement(PaginationItemCarpeta, { key: -2, onClick: onClick, value: avancar, title: avancarTitle }, "\u226B"));
+            }
+            // Last  >|
+            if (showPoints && end != paginationInfo.totalPagines) {
+                pagines.push(React$1.createElement(PaginationItemCarpeta, { value: paginationInfo.totalPagines - 2, onClick: onClick, title: t("pagination.darrerapagina") },
+                    React$1.createElement("div", { style: PaginationCarpeta.ROTATE_RIGHT_STYLE }, "\u22BC")));
+            }
             //Options per numero de elements a pintar per pagina
             //console.log("PaginationCarpeta::render() =>  onClickSelectElementsByPage ...");
             var selectElementsByPage = this.props.selectElementsByPage;
@@ -4527,9 +4632,7 @@ var PaginationCarpeta = /** @class */ (function (_super) {
                     React$1.createElement("br", null),
                     React$1.createElement("div", { className: "container-fluid mt-1" }, pagination),
                     React$1.createElement("br", null),
-                    React$1.createElement("div", { className: "container-fluid mt-1" },
-                        " ",
-                        numElements)));
+                    React$1.createElement("div", { className: "container-fluid mt-1" }, numElements)));
             }
             else {
                 return (React$1.createElement("center", null,
@@ -4543,9 +4646,9 @@ var PaginationCarpeta = /** @class */ (function (_super) {
                 return (React$1.createElement(React$1.Fragment, null,
                     React$1.createElement("div", { className: "container-fluid" },
                         React$1.createElement("div", { className: "row d-flex" },
-                            React$1.createElement("div", { className: "col" }, message),
-                            React$1.createElement("div", { className: "pagination col justify-content-center", style: { marginRight: "10px" } }, pagination),
-                            React$1.createElement("div", { className: "pagination col justify-content-end" }, numElements)))));
+                            React$1.createElement("div", { className: "col", style: { marginRight: "0px", marginLeft: "0px", paddingLeft: "0px" } }, message),
+                            React$1.createElement("div", { className: "pagination col justify-content-center", style: { marginRight: "0px", marginLeft: "0px" } }, pagination),
+                            React$1.createElement("div", { className: "pagination col justify-content-end", style: { marginRight: "0px", marginLeft: "0px" } }, numElements)))));
             }
             else {
                 return (React$1.createElement(React$1.Fragment, null,
@@ -4553,6 +4656,28 @@ var PaginationCarpeta = /** @class */ (function (_super) {
                     pagination));
             }
         }
+    };
+    PaginationCarpeta.ROTATE_RIGHT_STYLE = {
+        transform: "rotate(90deg)",
+    };
+    PaginationCarpeta.ROTATE_LEFT_STYLE = {
+        transform: "rotate(-90deg)",
+        /* Legacy vendor prefixes that you probably don't need... */
+        // Safari
+        //-webkit-transform:"rotate(-90deg)",
+        /*
+          // Firefox
+          -moz-transform: "rotate(-90deg)"
+        
+          // IE
+          -ms-transform: "rotate(-90deg)",
+        
+          // Opera
+          -o-transform: "rotate(-90deg)",
+        
+          // Internet Explorer
+          filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)"
+          */
     };
     return PaginationCarpeta;
 }(React$1.Component));
@@ -4580,10 +4705,8 @@ var RenderPaginationTable = /** @class */ (function (_super) {
         }
         console.log("RenderPaginationTable() => elementsByPage= " + _this.elementsByPage);
         _this.page = 0;
-        //this.state = { page: page, elementsByPage: elementsByPage };
         _this.onClickSelectElementsByPage = _this.onClickSelectElementsByPage.bind(_this);
         _this.onClickPagination = _this.onClickPagination.bind(_this);
-        // XYZ this.loadData = this.loadData.bind(this);
         _this.loadDataAsync = _this.loadDataAsync.bind(_this);
         _this.returnDataFunction = _this.returnDataFunction.bind(_this);
         return _this;
@@ -4592,8 +4715,7 @@ var RenderPaginationTable = /** @class */ (function (_super) {
         this.loadDataAsync(this.page, this.elementsByPage);
     };
     RenderPaginationTable.prototype.componentDidUpdate = function () {
-        console.log("<<<<<<<<<<<<<<<   RENDER PAGINATION TABLE  => COMPONENT WILL UPDATE  >>>>>>>>>>>>>>>>>>");
-        console.log("RenderPaginationTable::componentWillUpdate()  => this.props.selectElementsByPage: " +
+        console.log("RenderPaginationTable::componentDidUpdate()  => this.props.selectElementsByPage: " +
             this.props.selectElementsByPage);
         if (this.props.selectElementsByPage == undefined) {
             this.elementsByPage = RenderPaginationTable.DEFAULT_SELECT_ELEMENTS_BY_PAGE[0];

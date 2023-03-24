@@ -1,8 +1,15 @@
 {
     "tornar": "Volver",
-    "paginacioLabel": "Mostrando elementos del {{from}} al {{to}} de un total de {{total}}",
-    "elementPerPaginaMostra":"Muestra  ",
-    "elementPerPaginaElements":"  elementos",
+    "paginacioLabel": "Elementos del {{from}} al {{to}} de un total de {{total}}",
+    "elementPerPaginaMostra":"",
+    "elementPerPaginaElements":"  elementos por página",
+
+    "pagination.primerapagina": "Ir a la primera página",
+    "pagination.darrerapagina": "Ir a la última página",
+    "pagination.avancar": "Avanzar a la página {{pagina}}",
+    "pagination.retrocedir": "Retroceder a la página {{pagina}}",
+    "pagination.seguent": "Página seguiente",
+    "pagination.anterior": "Página anterior",
 
     "taulaBuida": "No hay elementos para mostrar",
 
