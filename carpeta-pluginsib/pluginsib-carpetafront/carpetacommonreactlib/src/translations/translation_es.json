@@ -8,7 +8,7 @@
     "pagination.darrerapagina": "Ir a la última página",
     "pagination.avancar": "Avanzar a la página {{pagina}}",
     "pagination.retrocedir": "Retroceder a la página {{pagina}}",
-    "pagination.seguent": "Página seguiente",
+    "pagination.seguent": "Página siguiente",
     "pagination.anterior": "Página anterior",
 
     "taulaBuida": "No hay elementos para mostrar",
