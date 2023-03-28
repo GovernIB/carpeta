@@ -7,12 +7,7 @@
 import React, { Component } from "react";
 import { WithTranslation, withTranslation } from "react-i18next";
 import axios from "axios";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
 import i18n from "i18next";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {
   TemplatePageCarpeta,
