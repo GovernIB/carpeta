@@ -80,7 +80,7 @@ class Notib extends React.Component<NotibProps> {
         this.handleStatusFilterParam = this.handleStatusFilterParam.bind(this);
         this.handleSubmitSearcher = this.handleSubmitSearcher.bind(this);
         this.loadPaginatedData = this.loadPaginatedData.bind(this);
-        
+
 
 
         this.canviatIdioma = this.canviatIdioma.bind(this);
@@ -271,16 +271,16 @@ class Notib extends React.Component<NotibProps> {
                         : i18n.t("notibComunicacio");
 
 
-                let urlNotib : string;
+                let urlNotib: string;
 
-                if(tipus == "notificacio"){
-                  if(transmissio.estat.codi === "FINALIZADA" || transmissio.estat.codi === "FINALITZADA" || transmissio.estat.codi === "PROCESADA" || transmissio.estat.codi === "PROCESSADA"){
-                    urlNotib = urldetallbase2;
-                  }else{
-                    urlNotib = urldetallbase;
-                  }
-                }else{
-                  urlNotib = urldetallbase3;
+                if (tipus == "notificacio") {
+                    if (transmissio.estat.codi === "FINALIZADA" || transmissio.estat.codi === "FINALITZADA" || transmissio.estat.codi === "PROCESADA" || transmissio.estat.codi === "PROCESSADA") {
+                        urlNotib = urldetallbase2;
+                    } else {
+                        urlNotib = urldetallbase;
+                    }
+                } else {
+                    urlNotib = urldetallbase3;
                 }
 
                 let notibBotoContent: JSX.Element = (
@@ -533,11 +533,6 @@ class Notib extends React.Component<NotibProps> {
                 </CarpetaFormulariDeFiltre>
             </>
         );
-
-
-
-
-
 
 
 

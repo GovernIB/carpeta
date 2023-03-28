@@ -20,6 +20,10 @@ import {
   RenderPaginationTableData,
   PaginationInfo,
   ReturnPaginationData,
+  CarpetaDatePicker,
+  CarpetaFormulariDeFiltre,
+  CarpetaFormulariDeFiltreItem,
+  CarpetaInputText,
 } from "carpetacommonreactlib";
 
 
@@ -29,87 +33,62 @@ interface ElsMeusExpedientsProps extends WithTranslation {
   subtitles: any;
 }
 
-type ElsMeusExpedientsState = {
-  filter_startDate: Date | undefined;
-  filter_endDate: Date | undefined;
-  filter_nom: string | undefined;
-  filter_estat: string | undefined;
-};
 
-class ElsMeusExpedients extends React.Component<
-  ElsMeusExpedientsProps,
-  ElsMeusExpedientsState
-> {
+class ElsMeusExpedients extends React.Component<ElsMeusExpedientsProps> {
+
+  private filtre_nom: string;
+  private dataInici: Date;
+  private dataFi: Date;
+  private filter_state: string;
+  private errorEnFiltre: boolean;
+
   constructor(props: ElsMeusExpedientsProps) {
     super(props);
 
-    const startDateObj = new Date();
+
+
+    let startDateObj = new Date();
+
     const endDateObj = new Date();
     startDateObj.setMonth(endDateObj.getMonth() - 1);
-    startDateObj.setFullYear(endDateObj.getFullYear() - 3);
 
-    this.state = {
-      filter_startDate: startDateObj,
-      filter_endDate: endDateObj,
-      filter_nom: undefined,
-      filter_estat: "E04",
-    };
-
-    
+    this.filtre_nom = "";
+    this.dataInici = startDateObj;
+    this.dataFi = endDateObj;
+    this.errorEnFiltre = false;
+    this.filter_state = "E04";
 
 
     this.handleSubmitSearcher = this.handleSubmitSearcher.bind(this);
     this.loadPaginatedData = this.loadPaginatedData.bind(this);
 
     this.handleNomFilterParam = this.handleNomFilterParam.bind(this);
-    this.handleStartDateFilterParam = this.handleStartDateFilterParam.bind(this);
-    this.handleEndDateFilterParam = this.handleEndDateFilterParam.bind(this);
+    this.handleChangeDataInici = this.handleChangeDataInici.bind(this);
+    this.handleChangeDataFi = this.handleChangeDataFi.bind(this);
     this.handleStateFilterParam = this.handleStateFilterParam.bind(this);
 
   }
 
-  handleSubmitSearcher() {
-    const { t } = this.props;
+  handleSubmitSearcher(e: any) {
 
-    //let validatFormulari = this.validaFormulari();
-    this.validaFormulari();
+    console.log("RegWeb::handleSubmitSearcher() inici");
 
-    // Agafar valor del input text i ficarho a una
-    let filtre_nom = this.state.filter_nom;
-    let filtre_estat = this.state.filter_estat;
-    let filter_startDate = this.state.filter_startDate;
-    let filter_endDate = this.state.filter_endDate;
+    e.preventDefault();
 
-    this.setState({
-      filter_startDate: filter_startDate,
-      filter_endDate: filter_endDate,
-      filter_nom: filtre_nom,
-      filter_estat: filtre_estat,
-    });
-  }
-
-  validaFormulari() {
-    const { t } = this.props;
-
-    if (
-      (this.state.filter_startDate != null && !this.validaFecha(this.state.filter_startDate)) ||
-      (this.state.filter_endDate!= null && !this.validaFecha(this.state.filter_endDate))
-    ) {
+    if (this.errorEnFiltre) {
+      const t = this.props.i18n.t;
+      window.alert(t("errorEnFiltre"));
       return false;
     }
 
-    if (
-      this.state.filter_startDate != null && this.state.filter_endDate!= null &&
-      this.state.filter_startDate > this.state.filter_endDate
-    ) {
-      const labelError = t("sistraDataIniciError");
-      $("#errorMsg").html(labelError == null ? "sistraDataIniciError": labelError);
-      $("#errorContainer").removeClass("ocult");
-      return false;
-    }
+    console.log("RegWeb::handleSubmitSearcher() final");
+
+    this.forceUpdate();
+
     return true;
   }
 
+  
   validaFecha(date: Date) {
     if (!date) {
       $("#errorMsg").html("Error de data");
@@ -121,32 +100,54 @@ class ElsMeusExpedients extends React.Component<
     }
   }
 
-  handleNomFilterParam(e: string) {
-    this.setState({
-      ...this.state,
-      filter_nom: e,
-    });
+  handleNomFilterParam(nouNom: string) {
+    this.filtre_nom = nouNom;
   }
 
-  handleStartDateFilterParam(e: Date) {
-    this.setState({
-      ...this.state,
-      filter_startDate: e,
-    });
+  handleChangeDataInici(newDate: Date, _oldDate: Date) {
+    if (this.validate(newDate, this.dataFi)) {
+      this.dataInici = newDate;
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  handleEndDateFilterParam(e: Date) {
-    this.setState({
-      ...this.state,
-      filter_endDate: e,
-    });
+  handleChangeDataFi(newDate: Date, _oldDate: Date) {
+    if (this.validate(this.dataInici, newDate)) {
+      this.dataFi = newDate;
+      return true;
+    } else {
+      return false;
+    }
   }
 
-  handleStateFilterParam(e: string) {
-    this.setState({
-      ...this.state,
-      filter_estat: e
-    });
+  handleStateFilterParam(type: string) {
+    this.filter_state = type;
+  }
+
+  validate(startDate: Date, endDate: Date) {
+    console.log("RegWeb::validate() ... Entra");
+
+    let errorInput = document.getElementById("errorContainer");
+
+    if (startDate.getTime() > endDate.getTime()) {
+      console.log("RegWeb::validate() error");
+
+      if (errorInput) {
+        errorInput.style.display = "block";
+      }
+
+      this.errorEnFiltre = true;
+      return false;
+    } else {
+      console.log("RegWeb::validate() ok");
+      if (errorInput) {
+        errorInput.style.display = "none";
+      }
+      this.errorEnFiltre = false;
+      return true;
+    }
   }
 
 
@@ -156,9 +157,9 @@ class ElsMeusExpedients extends React.Component<
 
     console.log(
       "ElsMeusExpedients:loadPaginatedData() => Page: " +
-        page +
-        " | elementsByPage: " +
-        elementsByPage
+      page +
+      " | elementsByPage: " +
+      elementsByPage
     );
     console.log(
       "ElsMeusExpedients:loadPaginatedData() => Props: " + this.props
@@ -171,29 +172,29 @@ class ElsMeusExpedients extends React.Component<
       elementsperpagina: elementsByPage,
     };
 
-    if (this.state.filter_nom != null) {
-      params.filtreNom = this.state.filter_nom;
+    if (this.filtre_nom != null) {
+      params.filtreNom = this.filtre_nom;
     }
 
-    if(this.state.filter_startDate != null){
-      params.filtreDataInici = this.formatDate(this.state.filter_startDate);
+    if (this.dataInici != null) {
+      params.filtreDataInici = this.formatDate(this.dataInici);
     }
 
-    if(this.state.filter_endDate != null){
-      params.filtreDataFi = this.formatDate(this.state.filter_endDate);
+    if (this.dataFi != null) {
+      params.filtreDataFi = this.formatDate(this.dataFi);
     }
 
-    if(this.state.filter_estat != null){
-      params.filtreEstat = this.state.filter_estat;
+    if (this.filter_state != null) {
+      params.filtreEstat = this.filter_state;
     }
 
     console.log(
       "ElsMeusExpedients:loadPaginatedData() => Cridant a serveis REST URL: " +
-        url
+      url
     );
     console.log(
       "ElsMeusExpedients:loadPaginatedData() => Cridant a serveis REST PARAMS: " +
-        params
+      params
     );
 
     axios
@@ -275,6 +276,87 @@ class ElsMeusExpedients extends React.Component<
       i18n.t("expedientEstat")
     ];
 
+    let formulari = (
+      <>
+        <div className="row">
+          <div id="errorContainer" className="row pb-2 ml-3 mr-0 ocult">
+            <div className="alert alert-danger" role="alert" id="errorMsg">
+              {t("errorIniciMajorFinal")}
+            </div>
+          </div>
+        </div>
+        <CarpetaFormulariDeFiltre handleSubmitSearcher={this.handleSubmitSearcher} i18n={this.props.i18n}>
+          <>
+            <CarpetaFormulariDeFiltreItem label={t("expedient_nom")}>
+              <CarpetaInputText
+                id={"nom"}
+                placeHolder={"" + t("nomProcediment")}
+                defaultValue={this.filtre_nom}
+                onChangedText={this.handleNomFilterParam}
+              />
+            </CarpetaFormulariDeFiltreItem>
+            <CarpetaFormulariDeFiltreItem label={t("expedient_fecha_inicio")}>
+              <CarpetaDatePicker
+                basename={"dataInici"}
+                onChangeDate={this.handleChangeDataInici}
+                defaultValue={this.dataInici}
+                i18n={this.props.i18n}
+              />
+            </CarpetaFormulariDeFiltreItem>
+            <CarpetaFormulariDeFiltreItem label={t("expedient_fecha_fin")}>
+              <CarpetaDatePicker
+                basename={"dataFi"}
+                onChangeDate={this.handleChangeDataFi}
+                defaultValue={this.dataFi}
+                i18n={this.props.i18n}
+              />
+            </CarpetaFormulariDeFiltreItem>
+            <CarpetaFormulariDeFiltreItem label={t("expedient_estat")}>
+              <select
+                id="estado"
+                name="estado"
+                className="form-control form-control-sm focusIn font1App form-select"
+                tabIndex={504}
+                aria-labelledby="tipo"
+                onChange={(e) => {
+                  this.handleStateFilterParam(e.target.value);
+                }}
+              >
+                <option
+                  value="E04"
+                  className="form-control form-control-sm selectMobil"
+                  selected={this.filter_state == "E04"}
+                >
+                  {t("expediente_estado_todos")}
+                </option>
+                <option
+                  value="E01"
+                  className="form-control form-control-sm selectMobil"
+                  selected={this.filter_state == "E01"}
+                >
+                  {t("expediente_estado_1")}
+                </option>
+                <option
+                  value="E02"
+                  className="form-control form-control-sm selectMobil"
+                  selected={this.filter_state == "E02"}
+                >
+                  {t("expediente_estado_2")}
+                </option>
+                <option
+                  value="E03"
+                  className="form-control form-control-sm selectMobil"
+                  selected={this.filter_state == "E03"}
+                >
+                  {t("expediente_estado_3")}
+                </option>
+              </select>
+            </CarpetaFormulariDeFiltreItem>
+          </>
+        </CarpetaFormulariDeFiltre>
+      </>
+    );
+
     return (
       <TemplatePageCarpeta
         {...this.props}
@@ -283,146 +365,7 @@ class ElsMeusExpedients extends React.Component<
         i18n={i18n}
       >
         <div>
-          <Row style={{ width: "95%", marginLeft: "-15px", marginRight: "-15px" }} className="ampleTotalApp">
-            <Col className="col-xs-12 mb-3 campFormApp">
-              <Form.Group>
-                <Form.Label>{t('expedient_nom')}</Form.Label>
-                <Form.Control
-                  type="text"
-                  id="nom"
-                  placeholder="Nom"
-                  maxLength={25}
-                  tabIndex={501}
-                  value={this.state.filter_nom}
-                  onChange={(e) => {
-                    this.handleNomFilterParam(e.target.value);
-                  }}
-                  className="form-control form-control-sm focusIn font1App"
-                />
-              </Form.Group>
-            </Col>
-            <Col className="col-xs-12 mb-3 campFormApp">
-            <Form.Group>
-                <Form.Label>{t('expedient_fecha_inicio')}</Form.Label>
-                <DatePicker
-                    portalId="root-portal"
-                    selected={this.state.filter_startDate}
-                    onChange={(startDate:Date) => this.handleStartDateFilterParam(startDate)}
-                    selectsStart
-                    name="fechaInicio"
-                    id="fechaInicio"
-                    dateFormat="dd/MM/yyyy"
-                    className="form-control form-control-sm estilCalendar focusIn font1App"
-                    locale={this.props.i18n.language}
-                    showYearDropdown={true}
-                    preventOpenOnFocus={true}
-                    popperPlacement="bottom"
-                    popperModifiers={{
-                      //@ts-ignore
-                      flip: {
-                        behavior: ["bottom"], // don't allow it to flip to be above
-                      },
-                      preventOverflow: {
-                        enabled: false, // tell it not to try to stay within the view (this prevents the popper from covering the element you clicked)
-                      },
-                      hide: {
-                        enabled: false, // turn off since needs preventOverflow to be enabled
-                      }
-                    }}
-                    />
-              </Form.Group>
-              </Col>
-              <Col className="col-xs-12 mb-3 campFormApp">
-              <Form.Group>
-                <Form.Label>{t('expedient_fecha_fin')}</Form.Label>
-                <DatePicker
-                    portalId="root-portal"
-                    selected={this.state.filter_endDate}
-                    onChange={(endDate:Date) => this.handleEndDateFilterParam(endDate)}
-                    selectsEnd
-                    minDate={this.state.filter_startDate}
-                    name="fechaFin"
-                    id="fechaFin"
-                    dateFormat="dd/MM/yyyy"
-                    className="form-control form-control-sm estilCalendar focusIn font1App"
-                    locale={this.props.i18n.language}
-                    showYearDropdown={true}
-                    preventOpenOnFocus={true}
-                    popperPlacement="bottom"
-                    popperModifiers={{
-                      //@ts-ignore
-                      flip: {
-                        behavior: ["bottom"], // don't allow it to flip to be above
-                      },
-                      preventOverflow: {
-                        enabled: false, // tell it not to try to stay within the view (this prevents the popper from covering the element you clicked)
-                      },
-                      hide: {
-                        enabled: false, // turn off since needs preventOverflow to be enabled
-                      }
-                    }}
-                    />
-              </Form.Group>
-              </Col>
-              <Col className="col-xs-12 mb-3 campFormApp">
-                <Form.Group>
-                  <Form.Label>{t('expedient_estat')}</Form.Label>
-                  <Form.Select
-                    id="estado"
-                    name="estado"
-                    className="form-control form-control-sm focusIn font1App"
-                    value={this.state.filter_estat}
-                    tabIndex={504}
-                    aria-labelledby="estado"
-                    onChange={(e) => {
-                      this.handleStateFilterParam(e.target.value);
-                    }}
-                  >
-                    <option
-                      value="E04"
-                      className="form-control form-control-sm selectMobil"
-                      selected = {true}
-                    >
-                      {t('expediente_estado_todos')}
-                    </option>
-                    <option
-                      value="E01"
-                      className="form-control form-control-sm selectMobil"
-                    >
-                      {t('expediente_estado_1')}
-                    </option>
-                    <option
-                      value="E02"
-                      className="form-control form-control-sm selectMobil"
-                    >
-                      {t('expediente_estado_2')}
-                    </option>
-                    <option
-                      value="E03"
-                      className="form-control form-control-sm selectMobil"
-                    >
-                      {t('expediente_estado_3')}
-                    </option>
-                  </Form.Select>
-                </Form.Group>
-              </Col>
-          </Row>
-          <Row
-            className="col-md-3 pl-3 row botoFormApp"
-            style={{ zIndex: "4", marginBottom: "20px"}}
-          >
-            <Button
-              type="submit"
-              className="btn btn-primary carpeta-btn mt-2"
-              onClick={(e) => {
-                this.handleSubmitSearcher();
-              }}
-              tabIndex={505}
-            >
-              {t("carpeta_buscar")}
-            </Button>
-          </Row>
-
+          {formulari}
           <RenderPaginationTable
             loadPaginatedData={this.loadPaginatedData}
             columnNames={columnsNom}
@@ -453,19 +396,19 @@ class ElsMeusExpedients extends React.Component<
 
   formatDate(inputDate: Date) {
     let date, month, year;
-  
+
     date = inputDate.getDate();
     month = inputDate.getMonth() + 1;
     year = inputDate.getFullYear();
-  
-      date = date
-          .toString()
-          .padStart(2, '0');
-  
-      month = month
-          .toString()
-          .padStart(2, '0');
-  
+
+    date = date
+      .toString()
+      .padStart(2, '0');
+
+    month = month
+      .toString()
+      .padStart(2, '0');
+
     return `${date}/${month}/${year}`;
   }
 
