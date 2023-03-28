@@ -66,7 +66,18 @@ class RenderTable extends React.Component<RenderTableProps, RenderTableState> {
   render() {
     console.log("RenderTable::render() => Start");
 
-    if (!this.state.isLoaded) {
+    let tableData:any[] | null = this.state.tableData;
+
+    if (!this.state.isLoaded || tableData==undefined ) {
+
+      if (tableData==undefined) {
+        console.error("RenderTable::render()  ===========================================");
+        console.error("RenderTable::render() => this.state.tableData == undefined !!!!!!!");
+        console.error("RenderTable::render() => Esperam a veure si tornam a carregar ....");
+        console.error("RenderTable::render()  ===========================================");
+      }
+
+
       return (
         <div id="carregant" className="loader-container centrat ">
           <div className="loader" />
@@ -83,15 +94,15 @@ class RenderTable extends React.Component<RenderTableProps, RenderTableState> {
     }
 
 
-    if (!Array.isArray(this.state.tableData)) {
-      console.log("RenderTable::render() => this.state.tableData = NO ES UN ARRAY !!!!!!");
+    if (!Array.isArray(tableData)) {
+      console.error("RenderTable::render() => this.state.tableData = NO ES UN ARRAY !!!!!!");
     }
 
-    if (this.state.tableData != null) {
-        console.log("RenderTable::render() => this.state.tableData.length = " + this.state.tableData.length);
+    if (tableData) {
+        console.log("RenderTable::render() => this.state.tableData.length = " + tableData.length);
     }
 
-    if (this.state.tableData == null || (this.state.tableData != null && this.state.tableData.length == 0)) {
+    if (tableData == null || (tableData != null && tableData.length == 0)) {
       return (
         <div className="alert alert-warning"  role="alert">
           {this.props.i18n.t("taulaBuida")}
@@ -120,7 +131,7 @@ class RenderTable extends React.Component<RenderTableProps, RenderTableState> {
       {
         /*  ============== VERSIO DESKTOP ================= */
       }
-      return <RenderTableDesktop {...this.props} tableData={this.state.tableData}/>;
+      return <RenderTableDesktop {...this.props} tableData={tableData}/>;
       {
         /*  ============== FINAL VERSIO DESKTOP ================= */
       }
@@ -128,7 +139,7 @@ class RenderTable extends React.Component<RenderTableProps, RenderTableState> {
       {
         /*  ============== VERSIO MÒBIL =================        */
       }
-      return <RenderTableMobile {...this.props} tableData={this.state.tableData} />;
+      return <RenderTableMobile {...this.props} tableData={tableData} />;
       {
         /*  ============== FINAL VERSIO MÒBIL ================= */
       }

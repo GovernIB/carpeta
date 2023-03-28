@@ -8,8 +8,9 @@ import React from "react";
 interface InternalPaginationItemCarpetaProps {
     children: JSX.Element | string;
     value: number;
-    onClick: Function;
+    onClick?(value: number): void;
     active?: boolean;
+    title?: string;
 }
 declare class PaginationItemCarpeta extends React.Component<InternalPaginationItemCarpetaProps> {
     constructor(props: InternalPaginationItemCarpetaProps);

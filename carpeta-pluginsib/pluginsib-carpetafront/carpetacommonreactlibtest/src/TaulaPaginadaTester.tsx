@@ -24,12 +24,16 @@ type TaulaPaginadaTesterState = {
   totalElements: number;
   enableElementsPerPagina: boolean;
   selectElementsPerPagina: number[] | undefined | null;
-  allExpedients: any[];
 };
 
 class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, TaulaPaginadaTesterState> {
-  titles = { es: "Pruebas", ca: "Proves" };
-  subtitles = { es: "Pruebas Subtitle", ca: "Proves Subtitle" };
+
+  private static MAXVALUES:number = 97;
+
+  private titles = { es: "Pruebas", ca: "Proves" };
+  private subtitles = { es: "Pruebas Subtitle", ca: "Proves Subtitle" };
+
+  private allExpedients: any[];
 
   constructor(props: TaulaPaginadaTesterProps) {
     super(props);
@@ -54,7 +58,7 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       </div>
     );
 
-    for (let i = 0; i < 67; i++) {
+    for (let i = 0; i < TaulaPaginadaTester.MAXVALUES; i++) {
       let num = i + 1;
       expedients.push({
         expedientObertura: num + "/02/2023",
@@ -70,8 +74,9 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       });
     }
 
+    this.allExpedients = expedients;
+
     this.state = {
-      allExpedients: expedients,
       totalElements: 17,
       enableElementsPerPagina: true,
       selectElementsPerPagina: RenderPaginationTable.DEFAULT_SELECT_ELEMENTS_BY_PAGE,
@@ -90,39 +95,36 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
     this.canviaConfiguracio(
       this.state.totalElements,
       this.state.enableElementsPerPagina,
-      this.state.selectElementsPerPagina 
+      this.state.selectElementsPerPagina
     );
   }
 
   canviaConfiguracio(
     totalElements: number,
     enableElementsPerPagina: boolean,
-    llistatElementsPerPagina: number[]| undefined | null
+    llistatElementsPerPagina: number[] | undefined | null
   ) {
+    console.log("TaulaPaginadaTester::canviaConfiguracio() => Inici");
     var expedients: any[] = [];
-
-    var all: any[] = this.state.allExpedients;
-
 
     if (!enableElementsPerPagina) {
       llistatElementsPerPagina = null;
     }
 
-
-    let elementsPerPagina:number;
+    let elementsPerPagina: number;
     if (llistatElementsPerPagina == undefined || llistatElementsPerPagina == null) {
       elementsPerPagina = RenderPaginationTable.DEFAULT_SELECT_ELEMENTS_BY_PAGE[0];
     } else {
       elementsPerPagina = llistatElementsPerPagina[0];
     }
 
-    let paginaActual:number  = 0;
+    let paginaActual: number = 0;
 
     let start: number = paginaActual * elementsPerPagina;
     let next: number = parseInt(start.toString()) + parseInt(elementsPerPagina.toString());
     let end: number = Math.min(totalElements, next);
 
-    console.log(" ============================================");
+    console.log(" ===================CANVIA CONFIGURACIO =========================");
     console.log("totalElements: " + totalElements);
     console.log(" start + elementsPerPagina: " + (start + elementsPerPagina));
     console.log(" Next: " + next);
@@ -132,7 +134,7 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
     console.log(" END: " + end);
 
     for (let i = start; i < end; i++) {
-      expedients.push(all[i]);
+      expedients.push(this.allExpedients[i]);
     }
 
     console.log("Elements per Pagina Conjunt => " + llistatElementsPerPagina);
@@ -145,19 +147,11 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
 
   onClickCanviTotalElements(totalElements: number) {
     console.log("TaulaPaginadaTester::onClickCanviTotalElements() => totalElements=" + totalElements);
-    this.canviaConfiguracio(
-      totalElements,
-      this.state.enableElementsPerPagina,
-      this.state.selectElementsPerPagina
-    );
+    this.canviaConfiguracio(totalElements, this.state.enableElementsPerPagina, this.state.selectElementsPerPagina);
   }
 
   onCheckElementsPerPagina(enableElementsPerPagina: boolean) {
-    this.canviaConfiguracio(
-      this.state.totalElements,
-      enableElementsPerPagina,
-      this.state.selectElementsPerPagina
-    );
+    this.canviaConfiguracio(this.state.totalElements, enableElementsPerPagina, this.state.selectElementsPerPagina);
   }
 
   onClickConjuntElementsPerPagina(llista: number[] | undefined) {
@@ -179,8 +173,6 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
     let page: number = loadData.page;
     let elementsByPage: number = loadData.elementsByPage;
 
-    var all: any[] = this.state.allExpedients;
-
     let totalElements = this.state.totalElements;
 
     let start: number = page * elementsByPage;
@@ -201,7 +193,7 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
 
     var expedients: any[] = [];
     for (let i = start; i < end; i++) {
-      expedients.push(all[i]);
+      expedients.push(this.allExpedients[i]);
     }
 
     let paginationInfo: PaginationInfo = {
@@ -218,13 +210,14 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       paginationInfo: paginationInfo,
     };
 
+    console.log("TaulaPaginadaTester::loadPaginatedData() => paginationInfo:" + paginationInfo);
+    console.log("TaulaPaginadaTester::loadPaginatedData() => expedients:" + expedients);
+
     console.log("TaulaPaginadaTester::loadPaginatedData() SURT " + new Date());
 
     // Enviam resultat a la taula
     loadData.returnDataFunction(returnData);
   }
-
-
 
   render() {
     console.log("TaulaPaginadaTester::render() => Inici !!!!!");
@@ -262,7 +255,7 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
       <>
         <br />
         <hr />
-        Numero d'Elements Total:        
+        Numero d'Elements Total:
         <button onClick={() => this.onClickCanviTotalElements(0)}> 0</button>
         <button onClick={() => this.onClickCanviTotalElements(3)}> 3</button>
         <button onClick={() => this.onClickCanviTotalElements(10)}> 10</button>
@@ -270,7 +263,7 @@ class TaulaPaginadaTester extends React.Component<TaulaPaginadaTesterProps, Taul
         <button onClick={() => this.onClickCanviTotalElements(39)}> 39</button>
         <button onClick={() => this.onClickCanviTotalElements(46)}> 46</button>
         <button onClick={() => this.onClickCanviTotalElements(59)}> 59</button>
-        <button onClick={() => this.onClickCanviTotalElements(97)}> 97</button>
+        <button onClick={() => this.onClickCanviTotalElements(TaulaPaginadaTester.MAXVALUES)}> {TaulaPaginadaTester.MAXVALUES}</button>
         &nbsp;&nbsp;&nbsp;&nbsp; Mostrar Elements per pàgina:
         <input
           type="checkbox"

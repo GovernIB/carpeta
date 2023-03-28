@@ -10,6 +10,8 @@ interface PaginationCarpetaState {
     paginationInfo: PaginationInfo | null;
 }
 declare class PaginationCarpeta extends React.Component<PaginationCarpetaProps, PaginationCarpetaState> {
+    private static readonly ROTATE_RIGHT_STYLE;
+    private static readonly ROTATE_LEFT_STYLE;
     constructor(props: PaginationCarpetaProps);
     updatePaginationInfo(paginationInfo: PaginationInfo | null): void;
     render(): JSX.Element;
