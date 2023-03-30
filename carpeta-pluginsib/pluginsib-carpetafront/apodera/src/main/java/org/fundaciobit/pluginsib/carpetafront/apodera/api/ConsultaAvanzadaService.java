@@ -1,7 +1,7 @@
 
 package org.fundaciobit.pluginsib.carpetafront.apodera.api;
 
-
+import java.net.MalformedURLException;
 import java.net.URL;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "ConsultaAvanzadaService", targetNamespace = "https://consultaApoderamientos.minhap.es/", wsdlLocation = "classpath:wsdl/reaCXFWSv2.wsdl")
+@WebServiceClient(name = "ConsultaAvanzadaService", targetNamespace = "https://consultaApoderamientos.minhap.es/", wsdlLocation = "file:/D:/dades/dades/CarpetesPersonals/ProgramacioPortaFIB3/carpeta/carpeta-pluginsib/pluginsib-carpetafront/apodera/apodera_services_reaCXFWSv2.wsdl")
 public class ConsultaAvanzadaService
     extends Service
 {
@@ -27,13 +27,14 @@ public class ConsultaAvanzadaService
     private final static QName CONSULTAAVANZADASERVICE_QNAME = new QName("https://consultaApoderamientos.minhap.es/", "ConsultaAvanzadaService");
 
     static {
-
-        CONSULTAAVANZADASERVICE_WSDL_LOCATION = ConsultaAvanzadaService.class.getResource("classpath:wsdl/reaCXFWSv2.wsdl");
-
+        URL url = null;
         WebServiceException e = null;
-        if (CONSULTAAVANZADASERVICE_WSDL_LOCATION == null) {
-            e = new WebServiceException("Cannot find 'classpath:wsdl/reaCXFWSv2.wsdl' wsdl. Place the resource correctly in the classpath.");
+        try {
+            url = new URL("file:/D:/dades/dades/CarpetesPersonals/ProgramacioPortaFIB3/carpeta/carpeta-pluginsib/pluginsib-carpetafront/apodera/apodera_services_reaCXFWSv2.wsdl");
+        } catch (MalformedURLException ex) {
+            e = new WebServiceException(ex);
         }
+        CONSULTAAVANZADASERVICE_WSDL_LOCATION = url;
         CONSULTAAVANZADASERVICE_EXCEPTION = e;
     }
 
@@ -68,7 +69,6 @@ public class ConsultaAvanzadaService
      */
     @WebEndpoint(name = "ConsultaAvanzadaPort")
     public ConsultaAvanzadaPortType getConsultaAvanzadaPort() {
-        System.out.println("GET CONSULTA AVANZADA PORT");
         return super.getPort(new QName("https://consultaApoderamientos.minhap.es/", "ConsultaAvanzadaPort"), ConsultaAvanzadaPortType.class);
     }
 

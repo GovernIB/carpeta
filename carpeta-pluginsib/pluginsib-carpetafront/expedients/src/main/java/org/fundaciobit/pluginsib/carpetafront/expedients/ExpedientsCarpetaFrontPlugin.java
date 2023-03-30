@@ -43,7 +43,6 @@ import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -293,6 +292,7 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             try {
                 elementsPerPagina = Integer.parseInt(request.getParameter("elementsperpagina"));
             } catch (NumberFormatException e) {
+                log.error(e.getMessage(), e);
                 elementsPerPagina = 5;
                 try {
                     String elementsperpagina = getProperty(EXPEDIENTS_PROPERTY_BASE + "elementsperpagina");
@@ -304,7 +304,7 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                             + "elementsperpagina no es numèric.", e2);
                 }
             }
-            
+
             int pagina;
             try {
                 pagina = Integer.parseInt(request.getParameter("pagina"));
@@ -314,14 +314,14 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             String nif = userData.getAdministrationID();
             ExpedientConsulta consulta = new ExpedientConsulta(locale.getLanguage(), pagina, elementsPerPagina);
-            
+
             String filtreNom = request.getParameter("filtreNom");
             String filtreEstat = request.getParameter("filtreEstat");
             String filtreDataInici = request.getParameter("filtreDataInici");
             String filtreDataFi = request.getParameter("filtreDataFi");
 
-
-            ExpedientResposta resposta = getExpedientsPerAdministrationID(nif, consulta, locale, filtreNom, filtreEstat, filtreDataInici, filtreDataFi );
+            ExpedientResposta resposta = getExpedientsPerAdministrationID(nif, consulta, locale, filtreNom, filtreEstat,
+                    filtreDataInici, filtreDataFi);
 
             Gson gson = new Gson();
             String json = gson.toJson(resposta);
@@ -371,9 +371,8 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     }
 
-    public ExpedientResposta getExpedientsPerAdministrationID(String nif, ExpedientConsulta consulta, Locale locale, 
-            String filtreNom, String filtreEstat, String filtreDataInici, String filtreDataFi)
-            throws Exception {
+    public ExpedientResposta getExpedientsPerAdministrationID(String nif, ExpedientConsulta consulta, Locale locale,
+            String filtreNom, String filtreEstat, String filtreDataInici, String filtreDataFi) throws Exception {
 
         IArxiuPlugin arxiu = instanticatePluginArxiu();
 
@@ -411,6 +410,9 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         } while (true);
 
+        log.info("consulta.getPagina()  => " + consulta.getPagina());
+        log.info("consulta.getElementsPerPagina()  => " + consulta.getElementsPerPagina());
+
         ConsultaResultat resultat = arxiu.expedientConsulta(filterList, consulta.getPagina(),
                 consulta.getElementsPerPagina());
 
@@ -420,6 +422,7 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         List<ExpedientInfo> expedients = new ArrayList<ExpedientInfo>();
 
+        /*
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date dataInici = null, dataFi = null;
         if(filtreDataInici != null) {
@@ -428,22 +431,26 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         if(filtreDataFi != null) {
             dataFi = sdf.parse(filtreDataFi);
         }
-        
+        */
+
         for (ContingutArxiu ac : resultats) {
-            
+
             ExpedientMetadades em = ac.getExpedientMetadades();
 
+            /*
             if ((filtreNom == null || filtreNom.isBlank() || ac.getNom().contains(filtreNom))
                     && (filtreEstat == null || filtreEstat.isBlank() || filtreEstat.equals(em.getEstat().toString()) || filtreEstat.equals(ESTAT_TOTS))
                     && (dataInici == null || dataInici.getTime() < em.getDataObertura().getTime())
-                    && (dataFi == null || dataFi.getTime() > em.getDataObertura().getTime())) {
-                
+                    && (dataFi == null || dataFi.getTime() > em.getDataObertura().getTime())) 
+                    */
+            {
+
                 ExpedientInfo ei = new ExpedientInfo();
                 ei.setExpedientNom(ac.getNom());
                 ei.setExpedientDesc(ac.getDescripcio());
 
                 if (em != null) {
-                    
+
                     String codiSia = em.getClassificacio();
                     ei.setCodiSia(codiSia);
                     String nomProcediment = null;
@@ -499,6 +506,19 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         resposta.setTotalPagines(resultat.getNumPagines());
         resposta.setTotalRegistres(resultat.getNumRegistres());
         resposta.setExpedients(expedients);
+
+        /*
+        { 
+            log.info("\n\n   ============ PAGINACIO ===============");
+            log.info(" + resultat.getPaginaActual() => " + resposta.getPaginaActual() );
+            log.info(" + resultat.getTotalElements() => " + resposta.getTotalRegistres() );
+            log.info(" + resultat.getTotalPagines() => " + resposta.getTotalPagines());
+            log.info(" + resultat.getElementsPerPagina() => " + resposta.getElementsPerPagina());
+            log.info(" + resultat.getElementsRetornats() => " + resposta.getRegistresRetornats());
+            log.info(" + resposta.getExpedients().size() => " + resposta.getExpedients().size());
+        
+            }
+        */
 
         return resposta;
 

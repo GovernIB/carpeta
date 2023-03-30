@@ -1,6 +1,5 @@
 package es.caib.carpeta.logic;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import javax.annotation.security.RunAs;
@@ -12,7 +11,6 @@ import es.caib.carpeta.model.entity.Entitat;
 import es.caib.carpeta.model.entity.Estadistica;
 import es.caib.carpeta.model.entity.NotificacioApp;
 import es.caib.carpeta.model.entity.PluginEntitat;
-import es.caib.carpeta.model.fields.SeccioFields;
 import es.caib.carpeta.persistence.EstadisticaJPA;
 import es.caib.carpeta.persistence.PluginJPA;
 

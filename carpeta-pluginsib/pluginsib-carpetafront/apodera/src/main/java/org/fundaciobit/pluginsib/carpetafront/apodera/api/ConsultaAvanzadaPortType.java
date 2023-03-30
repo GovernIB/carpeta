@@ -27,7 +27,7 @@ public interface ConsultaAvanzadaPortType {
      * 
      * @param peticion
      * @return
-     *     returns es.caib.apodera.client.api.RespuestaConsulta
+     *     returns org.fundaciobit.pluginsib.carpetafront.apodera.api.RespuestaConsulta
      * @throws SoapFault
      */
     @WebMethod(action = "consultaAvanzadaApoderamientos")

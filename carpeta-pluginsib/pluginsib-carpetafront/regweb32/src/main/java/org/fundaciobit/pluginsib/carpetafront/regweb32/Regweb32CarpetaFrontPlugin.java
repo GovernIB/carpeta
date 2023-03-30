@@ -412,9 +412,21 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             paginacio.setElementsRetornats(registresRegweb.size());
 
             paginacio.setPaginaActual(result.getPageNumber());
-            int totalElements = result.getTotalResults();
+            final int totalElements = result.getTotalResults();
             paginacio.setTotalElements(totalElements);
             paginacio.setTotalPagines((int)(Math.floor(totalElements/elementsPerPagina)) + ((totalElements % elementsPerPagina == 0)?0:1));
+            
+            
+            if (isDevelopment()) {
+            log.info("\n\n   === PAGINACIO ===============");
+            log.info(" + REGWEB: paginacio.getPaginaActual() => " + paginacio.getPaginaActual() );
+            log.info(" + REGWEB: paginacio.getTotalElements() => " + paginacio.getTotalElements() );
+            log.info(" + REGWEB: paginacio.getTotalPagines() => " + paginacio.getTotalPagines());
+            log.info(" + REGWEB: paginacio.getElementsPerPagina() => " + paginacio.getElementsPerPagina());
+            log.info(" + REGWEB: paginacio.getElementsRetornats() => " + paginacio.getElementsRetornats());
+            log.info(" + REGWEB: paginacio.getTotalPagines PART 1 => " + (int) (Math.floor(totalElements / elementsPerPagina)));
+            log.info(" + REGWEB: paginacio.getTotalPagines PART 2 => " +  ((totalElements % elementsPerPagina == 0) ? 0 : 1));
+            }
 
             List<Registre> registres = new ArrayList<Registre>();
             for (AsientoWs a : registresRegweb) {
@@ -424,22 +436,13 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 
             Map<String, Object> dades = new HashMap<String, Object>();
             
-            /*
-            dades.put("form_numero", formNumero);
-            dades.put("form_dataFi", formDataFiStr);
-            dades.put("form_dataInici", formDataIniciStr);
-            dades.put("form_estat", formEstat);
-//          dades.put("num_items", String.valueOf(numItems));
-            dades.put("num_items", formRegPorPagina);
-            dades.put("page", pageNumber);
-            */
             dades.put("registres", registres);
             dades.put("paginacio", paginacio);
                       
             Gson json = new GsonBuilder().setDateFormat("dd-MM-yyyy HH:mm").create();
             String generat = json.toJson(dades);
             
-            log.info("XYZ ZZZ Generat: " + generat);
+            //log.info("XYZ ZZZ Generat: " + generat);
             
             try {
                 response.getWriter().println(generat);
@@ -530,7 +533,8 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             }
         }
 
-        if (isDevelopment()) {
+        // XYZ ZZZ if (isDevelopment()) 
+        {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             log.info("================== PARAMETROS LLAMADA API REGWEB ===============");
             log.info("locale => " + locale.getLanguage());

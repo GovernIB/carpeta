@@ -19,7 +19,7 @@ class CarpetaFormulariDeFiltreItem extends React.Component<CarpetaFormulariDeFil
 
   render() {
     return (
-      <div className="col-xs-12 mb-3 campFormApp col">
+      <div className="col-xs-12 campFormApp col">
         <div>
           <label className="form-label">{this.props.label}</label>
           {this.props.children}

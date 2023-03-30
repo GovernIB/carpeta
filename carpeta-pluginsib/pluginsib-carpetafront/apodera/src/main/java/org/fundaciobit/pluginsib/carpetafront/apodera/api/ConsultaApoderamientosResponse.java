@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="datosAuditoria" type="{https://consultaApoderamientos.minhap.es/respuestaConsulta}datosAuditoriaType" minOccurs="0"/&gt;
  *         &lt;element name="listaApoderamientos" type="{https://consultaApoderamientos.minhap.es/respuestaConsulta}datosApoderamientoType" maxOccurs="unbounded" minOccurs="0"/&gt;
  *         &lt;element name="resultadoError" type="{https://consultaApoderamientos.minhap.es/respuestaConsulta}errorType" minOccurs="0"/&gt;
+ *         &lt;element name="datosPaginacionType" type="{https://consultaApoderamientos.minhap.es/respuestaConsulta}datosPaginacionType" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -34,7 +35,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "consultaApoderamientosResponse", propOrder = {
     "datosAuditoria",
     "listaApoderamientos",
-    "resultadoError"
+    "resultadoError",
+    "datosPaginacion"
 })
 public class ConsultaApoderamientosResponse {
 
@@ -42,6 +44,7 @@ public class ConsultaApoderamientosResponse {
     @XmlElement(nillable = true)
     protected List<DatosApoderamientoType> listaApoderamientos;
     protected ErrorType resultadoError;
+    protected DatosPaginacionType2 datosPaginacion;
 
     /**
      * Obtiene el valor de la propiedad datosAuditoria.
@@ -118,6 +121,30 @@ public class ConsultaApoderamientosResponse {
      */
     public void setResultadoError(ErrorType value) {
         this.resultadoError = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad datosPaginacionType.
+     * 
+     * @return
+     *     possible object is
+     *     {@link DatosPaginacionType2 }
+     *     
+     */
+    public DatosPaginacionType2 getDatosPaginacion() {
+        return datosPaginacion;
+    }
+
+    /**
+     * Define el valor de la propiedad datosPaginacionType.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link DatosPaginacionType2 }
+     *     
+     */
+    public void setDatosPaginacion(DatosPaginacionType2 value) {
+        this.datosPaginacion = value;
     }
 
 }

@@ -148,8 +148,8 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
         // start = Math.max(0, paginationInfo.paginaActual - Math.floor(maxCasellesPerMostrar / 2));
         // end = Math.min(start + maxCasellesPerMostrar, paginationInfo.totalPagines);
 
-        start = paginationInfo.paginaActual - Math.floor(maxCasellesPerMostrar / 2) + 1;
-        end = paginationInfo.paginaActual + Math.floor(maxCasellesPerMostrar / 2) + 1;
+        start = paginationInfo.paginaActual - Math.floor(maxCasellesPerMostrar / 2);
+        end = paginationInfo.paginaActual + Math.floor(maxCasellesPerMostrar / 2);
 
         if (start < 0) {
           // Passam els numeros negatius a end
@@ -224,7 +224,7 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
       */
 
       // All pagination numbers
-      for (let i = start; i < end - 1; i++) {
+      for (let i = start; i < end; i++) {
         if (i >= 0 && i <= paginationInfo.totalPagines) {
           pagines.push(
             <Item key={i} value={i} onClick={onClick} active={paginationInfo.paginaActual == i}>
@@ -273,7 +273,7 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
       // Last  >|
       if (showPoints && end != paginationInfo.totalPagines) {
         pagines.push(
-          <Item value={paginationInfo.totalPagines - 2} onClick={onClick} title={t("pagination.darrerapagina")}>
+          <Item value={paginationInfo.totalPagines - 1} onClick={onClick} title={t("pagination.darrerapagina")}>
             <div style={PaginationCarpeta.ROTATE_RIGHT_STYLE}>&#8892;</div>
           </Item>
         );

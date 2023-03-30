@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8'?><schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:impl="https://consultaApoderamientos.minhap.es/peticionConsulta" xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="https://consultaApoderamientos.minhap.es/peticionConsulta">
+		
+	<element name="PeticionConsulta">
+		<complexType>
+			<sequence>
+				<element name="datosAuditoriaType" type="impl:datosAuditoriaType"/>
+				<element name="datosConsultaType" type="impl:datosConsultaType"/>
+				<element minOccurs="0" name="datosPaginacionType" type="impl:datosPaginacionType"/>
+			</sequence>
+		</complexType>
+	</element>
+	
+	<complexType name="datosAuditoriaType">
+		<sequence>
+			<element name="timestamp" type="xsd:long"/>
+			<element name="codAplicacion" type="xsd:string"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="datosConsultaType">
+		<sequence>
+			<element name="tipoConsulta" type="xsd:boolean"/>
+			<element name="datosConsultaApoderamiento" type="impl:datosConsultaApoderamientoType"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="datosPaginacionType">
+		<sequence>
+			<element name="pagina" type="xsd:int"/>
+			<!-- <element name="numRegistros" type="xsd:int" /> -->
+		</sequence>
+	</complexType>
+
+	<complexType name="datosConsultaApoderamientoType">
+		<sequence>
+			<element minOccurs="0" name="codApoderamientoEXT" type="xsd:long"/>
+			<element minOccurs="0" name="codApoderamientoINT" type="xsd:long"/>
+			<element minOccurs="0" name="tipoApoderamiento" type="impl:tipoApoderamientoType"/>
+			<element minOccurs="0" name="estado" type="xsd:string"/>
+			<element minOccurs="0" name="periodoRegistro" type="impl:periodoType"/>
+			<element minOccurs="0" name="datosPoderdante" type="impl:datosPoderdanteType"/>
+			<element minOccurs="0" name="datosApoderado" type="impl:datosApoderadoType"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="datosApoderadoType">
+		<sequence>
+<!-- 			<element minOccurs="0" name="nifApoderado" type="xsd:string" /> -->
+			<element minOccurs="0" name="nifNieApoderado" type="xsd:string"/>
+		</sequence>	
+	</complexType>
+	
+	<complexType name="datosPoderdanteType">
+		<sequence>
+<!-- 			<element minOccurs="0" name="nifPoderdante" type="xsd:string" /> -->
+			<element minOccurs="0" name="nifNiePoderdante" type="xsd:string"/>
+			<element minOccurs="0" name="nifNieReprPoderdante" type="xsd:string"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="periodoType">
+		<sequence>
+			<element minOccurs="0" name="fechaFin" type="xsd:string"/>
+			<element minOccurs="0" name="fechaInicio" type="xsd:string"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="tipoApoderamientoType">
+		<sequence>
+			<element minOccurs="0" name="tipoApod" type="xsd:string"/>
+			<element minOccurs="0" name="subTipoApod" type="xsd:string"/>
+			<element minOccurs="0" name="listaOrganismos" nillable="true" type="impl:organismo"/>		
+			<element minOccurs="0" name="materia" type="impl:materiaType"/>
+			<element minOccurs="0" name="listaProcedimientos" nillable="true" type="impl:procedimiento"/>	
+			<element minOccurs="0" name="listaTramites" nillable="true" type="impl:tramite"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="tramite">
+		<sequence>
+			<element maxOccurs="unbounded" minOccurs="0" name="tramite" nillable="true" type="impl:tramiteType"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="tramiteType">
+		<sequence>
+			<element minOccurs="0" name="codTramite" type="xsd:string"/>
+			<element minOccurs="0" name="descTramite" type="xsd:string"/>
+		</sequence>
+	</complexType>	
+	
+	<complexType name="procedimiento">
+		<sequence>
+			<element maxOccurs="unbounded" minOccurs="0" name="procedimiento" nillable="true" type="impl:procedimientoType"/>
+		</sequence>
+	</complexType>	
+	
+	<complexType name="procedimientoType">
+		<sequence>
+			<element minOccurs="0" name="codProcedimiento" type="xsd:string"/>
+		</sequence>
+	</complexType>	
+	
+	<complexType name="materiaType">
+		<sequence>
+			<element minOccurs="0" name="codMateria" type="xsd:string"/>
+			<element minOccurs="0" name="denomMateria" type="xsd:string"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="organismo">
+		<sequence>
+			<element maxOccurs="unbounded" minOccurs="0" name="organismo" nillable="true" type="impl:organismoType"/>
+		</sequence>
+	</complexType>	
+	
+	<complexType name="organismoType">
+		<sequence>
+			<element name="codOrganismo" type="xsd:string"/>
+			<element minOccurs="0" name="denomOrganismo" type="xsd:string"/>
+		</sequence>
+	</complexType>
+
+</schema>

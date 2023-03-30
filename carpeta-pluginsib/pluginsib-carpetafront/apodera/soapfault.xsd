@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?><schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:impl="https://consultaApoderamientos.minhap.es/soapfault" xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="https://consultaApoderamientos.minhap.es/soapfault">
+
+	<element name="NotificacionesFault" type="impl:NotificacionesFault"/>
+	<complexType final="extension" name="NotificacionesFault">
+		<sequence>
+			<element name="codigo" type="string"/>
+			<element name="descripcion" type="string"/>
+		</sequence>
+	</complexType>
+	
+</schema>

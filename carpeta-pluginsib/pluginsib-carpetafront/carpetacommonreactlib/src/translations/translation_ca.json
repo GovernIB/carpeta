@@ -11,6 +11,8 @@
     "pagination.seguent": "Pàgina següent",
     "pagination.anterior": "Pàgina anterior",
 
+    "enviar": "Cercau",
+
     "taulaBuida": "No hi ha elements a mostrar",
 
     "rowtype.internal_link":"Accedeix a una altra pàgina amb més informació d'aquest element",

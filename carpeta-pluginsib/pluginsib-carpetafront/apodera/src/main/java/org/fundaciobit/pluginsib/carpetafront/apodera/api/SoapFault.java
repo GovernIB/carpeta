@@ -45,7 +45,7 @@ public class SoapFault
     /**
      * 
      * @return
-     *     returns fault bean: es.caib.apodera.client.api.NotificacionesFault
+     *     returns fault bean: org.fundaciobit.pluginsib.carpetafront.apodera.api.NotificacionesFault
      */
     public NotificacionesFault getFaultInfo() {
         return faultInfo;

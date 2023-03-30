@@ -66,25 +66,6 @@ class RenderTable extends React.Component<RenderTableProps, RenderTableState> {
   render() {
     console.log("RenderTable::render() => Start");
 
-    let tableData:any[] | null = this.state.tableData;
-
-    if (!this.state.isLoaded || tableData==undefined ) {
-
-      if (tableData==undefined) {
-        console.error("RenderTable::render()  ===========================================");
-        console.error("RenderTable::render() => this.state.tableData == undefined !!!!!!!");
-        console.error("RenderTable::render() => Esperam a veure si tornam a carregar ....");
-        console.error("RenderTable::render()  ===========================================");
-      }
-
-
-      return (
-        <div id="carregant" className="loader-container centrat ">
-          <div className="loader" />
-        </div>
-      );
-    }
-
     if (this.state.error != null) {
       return (
         <div className="alert alert-danger" role="alert">
@@ -93,6 +74,23 @@ class RenderTable extends React.Component<RenderTableProps, RenderTableState> {
       );    
     }
 
+    let tableData:any[] | null = this.state.tableData;
+
+    if (!this.state.isLoaded || tableData==undefined ) {
+
+      if (tableData==undefined) {
+        console.log("RenderTable::render()  ===========================================");
+        console.log("RenderTable::render() => this.state.tableData == undefined !!!!!!!");
+        console.log("RenderTable::render() => Esperam a veure si tornam a carregar ....");
+        console.log("RenderTable::render()  ===========================================");
+      }
+
+      return (
+        <div id="carregant" className="loader-container centrat ">
+          <div className="loader" />
+        </div>
+      );
+    }
 
     if (!Array.isArray(tableData)) {
       console.error("RenderTable::render() => this.state.tableData = NO ES UN ARRAY !!!!!!");

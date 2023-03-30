@@ -66,6 +66,7 @@ class RenderPaginationTable extends React.Component<RenderPaginationTableProps> 
   returnDataFunction(data: RenderPaginationTableData): void {
     console.log("RenderPaginationTable::returnDataFunction() => Rebudes noves dades ...");
 
+
     this.childRenderTable.current?.updateTableData(data);
     this.childRenderPagination.current?.updatePaginationInfo(data.paginationInfo);
   }

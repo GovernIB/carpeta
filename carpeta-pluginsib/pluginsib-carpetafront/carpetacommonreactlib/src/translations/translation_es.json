@@ -11,6 +11,8 @@
     "pagination.seguent": "Página siguiente",
     "pagination.anterior": "Página anterior",
 
+    "enviar": "Buscar",
+
     "taulaBuida": "No hay elementos para mostrar",
 
     "rowtype.internal_link":"Accede a otra página con más información de esta entrada",

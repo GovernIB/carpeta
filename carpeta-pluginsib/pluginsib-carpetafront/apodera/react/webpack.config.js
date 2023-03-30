@@ -8,7 +8,8 @@ const config = {
   },
 
   target: "node",
-  mode: "production",
+  // XYZ ZZZ
+  mode: "development",
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
   },

@@ -10,12 +10,16 @@ import i18n from "i18next";
 import * as reactdetect from "react-device-detect";
 import {
   TemplatePageCarpeta,
-  RenderTable,
   RowTypeUtils,
   RowType,
-  RenderTableData,
-  RenderTableReturn,
+  CarpetaFormulariDeFiltre,
+  CarpetaFormulariDeFiltreItem,
+  ReturnPaginationData,
+  RenderPaginationTableData,
+  PaginationInfo,
+  RenderPaginationTable,
 } from "carpetacommonreactlib";
+
 
 interface ApoderaProps extends WithTranslation {
   pathtoservei: string;
@@ -27,7 +31,7 @@ type ApoderaListItem = {
   apoderaTipus: string;
   apoderaAmbit: string;
   apoderaEstat: string;
-  apoderaEstatActual?: JSX.Element;
+  apoderaEstatActual?: string;
   apoderaPoderdante: JSX.Element;
   apoderaApoderado: JSX.Element;
   apoderaVigencia: string;
@@ -45,12 +49,18 @@ class Apodera extends React.Component<ApoderaProps> {
 
   private urlApodera: string = "";
 
+  // Apoderat => 0 || Poderdant => 1
+  private filter_vista: number;
+  private filter_startDate: Date | null;
+  private filter_endDate: Date | null;
+  private filter_estat: number;
+
+  private errorEnFiltre: boolean;
+
   constructor(props: ApoderaProps) {
     super(props);
 
     {
-      // XYZ Passar al constructor
-
       this.columnsNom = [
         "apoderaTipus",
         "apoderaAmbit",
@@ -78,91 +88,147 @@ class Apodera extends React.Component<ApoderaProps> {
       ];
     }
 
-    this.nomEstat = this.nomEstat.bind(this);
-    this.nomEstatActual = this.nomEstatActual.bind(this);
-    this.descripcioEstat = this.descripcioEstat.bind(this);
-    this.carregaDadesApoderaments = this.carregaDadesApoderaments.bind(this);
+    const startDateObj = null;
+    const endDateObj = null;
+    /*
+    const startDateObj = new Date();
+    const endDateObj = new Date();
+    startDateObj.setMonth(endDateObj.getMonth() - 1);
+
+    // XYZ ZZZ
+    startDateObj.setFullYear(endDateObj.getFullYear() - 3);
+    */
+
+    this.filter_estat = 0; // Tots
+    this.filter_vista = 0;
+    this.filter_startDate = startDateObj;
+    this.filter_endDate = endDateObj;
+    this.errorEnFiltre = false;
+
+    this.validate = this.validate.bind(this);
+
+    this.onChangeVista = this.onChangeVista.bind(this);
+    this.onChangeEstat = this.onChangeEstat.bind(this);
+    /*
+    this.onChangeStartDate = this.onChangeStartDate.bind(this);
+    this.onChangeEndDate = this.onChangeEndDate.bind(this);
+  */
+    this.loadPaginatedData = this.loadPaginatedData.bind(this);
+
+    this.handleSubmitSearcher = this.handleSubmitSearcher.bind(this);
   }
 
-  nomEstat(estat: string) {
-    let estatNom = i18n.t("apoderaEstadoDesconocido");
-    if (estat != null) {
-      switch (estat) {
-        case "1":
-          estatNom = i18n.t("apoderaEstat1");
-          break;
-        case "2":
-          estatNom = i18n.t("apoderaEstat2");
-          break;
-        case "3":
-          estatNom = i18n.t("apoderaEstat3");
-          break;
-        case "4":
-          estatNom = i18n.t("apoderaEstat4");
-          break;
-        case "5":
-          estatNom = i18n.t("apoderaEstat5");
-          break;
-        case "6":
-          estatNom = i18n.t("apoderaEstat6");
-          break;
-      }
+  componentDidMount() {}
+
+  handleSubmitSearcher(e: any): boolean {
+    console.log("Apodera::handleSubmitSearcher() inici");
+
+    e.preventDefault();
+
+    if (this.errorEnFiltre) {
+      const t = this.props.i18n.t;
+      window.alert(t("errorEnFiltre"));
+      return false;
     }
-    return estatNom;
-  }
 
-  nomEstatActual(estat: string) {
-    return (
-      <>
-        {this.nomEstat(estat)} - {this.descripcioEstat(estat)}
-      </>
-    );
-  }
+    console.log("Apodera::handleSubmitSearcher() final");
 
-  descripcioEstat(estat: string) {
-    let descripcioNom = i18n.t("apoderaEstadoDesconocido");
-    if (estat != null) {
-      switch (estat) {
-        case "1":
-          descripcioNom = i18n.t("apoderaDescripcioEstat1");
-          break;
-        case "2":
-          descripcioNom = i18n.t("apoderaDescripcioEstat2");
-          break;
-        case "3":
-          descripcioNom = i18n.t("apoderaDescripcioEstat3");
-          break;
-        case "4":
-          descripcioNom = i18n.t("apoderaDescripcioEstat4");
-          break;
-        case "5":
-          descripcioNom = i18n.t("apoderaDescripcioEstat5");
-          break;
-        case "6":
-          descripcioNom = i18n.t("apoderaDescripcioEstat6");
-          break;
-      }
+    this.forceUpdate();
+
+    return true;
+  }
+  /*
+  onChangeStartDate(newDate: Date, _oldDate: Date): boolean {
+    if (this.validate(newDate, this.filter_endDate)) {
+      this.filter_startDate = newDate;
+      return true;
+    } else {
+      return false;
     }
-    return descripcioNom;
   }
 
-  carregaDadesApoderaments(returnData: RenderTableReturn) {
-    console.log("Apodera::carregaDadesApoderaments => ENTRA");
+  onChangeEndDate(newDate: Date, _oldDate: Date): boolean {
+    if (this.validate(this.filter_startDate, newDate)) {
+      this.filter_endDate = newDate;
+      return true;
+    } else {
+      return false;
+    }
+  }
+*/
+  onChangeVista(novaVista: number) {
+    this.filter_vista = novaVista;
+  }
 
-    const url = this.props.pathtoservei + "?lang=" + i18n.language;
+  onChangeEstat(nouEstat: number) {
+    this.filter_estat = nouEstat;
+  }
 
-    console.log("Apodera::carregaDadesApoderaments => CRIDANT A " + url);
+  validate(startDate: Date, endDate: Date) {
+    console.log("Apodera::validate() ... Entra");
+
+    let errorInput = document.getElementById("errorContainer");
+
+    if (startDate.getTime() > endDate.getTime()) {
+      console.log("Apodera::validate() error");
+
+      if (errorInput) {
+        errorInput.style.display = "block";
+      }
+
+      this.errorEnFiltre = true;
+      return false;
+    } else {
+      console.log("Apodera::validate() ok");
+      if (errorInput) {
+        errorInput.style.display = "none";
+      }
+      this.errorEnFiltre = false;
+      return true;
+    }
+  }
+
+  loadPaginatedData(loadData: ReturnPaginationData) {
+    let page: number = loadData.page;
+    //XYZ ZZZ let elementsByPage: number = loadData.elementsByPage;
+    console.log("Apodera::loadPaginatedData => ENTRA");
+
+    let url = this.props.pathtoservei + "?lang=" + i18n.language + "&pagina=" + page + "&vista=" + this.filter_vista;
+
+    if (this.filter_estat != 0) {
+      url = url + "&estat=" + this.filter_estat;
+    }
+
+    if (this.filter_startDate != null) {
+      url = url + "&datainici=" + this.filter_startDate.getTime();
+    }
+
+    if (this.filter_endDate != null) {
+      url = url + "&datafinal=" + this.filter_endDate.getTime();
+    }
+
+    console.log("Apodera::loadPaginatedData => CRIDANT A " + url);
 
     axios
       .get(url)
-      .then((res) => {
-        this.urlApodera = res.data.urlApodera;
+      .then((response) => {
+        this.urlApodera = response.data.urlApodera;
 
-        let dades: RenderTableData = {
-          tableData: this.processarDadesApoderaments(res.data.apoderaments, res.data.poderdant),
+        let paginationInfo: PaginationInfo = {
+          paginaActual: response.data.paginacio.paginaActual,
+          elementsPerPagina: response.data.paginacio.elementsPerPagina,
+          totalPagines: response.data.paginacio.totalPagines,
+          elementsRetornats: response.data.paginacio.elementsRetornats,
+          totalElements: response.data.paginacio.totalElements,
+        };
+
+        let data: RenderPaginationTableData = {
+          paginationInfo: paginationInfo,
+          tableData: this.processarDadesApoderaments(response.data.apoderaments, response.data.poderdant),
           error: null,
         };
-        returnData.returnDataFunction(dades);
+
+        loadData.returnDataFunction(data);
       })
       .catch((error) => {
         if (error.response) {
@@ -177,11 +243,12 @@ class Apodera extends React.Component<ApoderaProps> {
         } else {
           errorPantalla = JSON.stringify(error).toString();
         }
-        let dades: RenderTableData = {
+        let data: RenderPaginationTableData = {
+          paginationInfo: null,
           tableData: null,
           error: errorPantalla,
         };
-        returnData.returnDataFunction(dades);
+        loadData.returnDataFunction(data);
       });
   }
 
@@ -222,17 +289,30 @@ class Apodera extends React.Component<ApoderaProps> {
     {
       apoderamentsRest.map(
         (
-          { tipus, subtipus, estat, apoderado, poderdante, vigencia, procediments, organismes, tramits }: any,
+          {
+            tipus,
+            subtipus,
+            estatNom,
+            estatDesc,
+            apoderado,
+            poderdante,
+            vigencia,
+            procediments,
+            organismes,
+            tramits,
+          }: any,
           i: number
         ) => {
           let apoderado2 = this.addNewLine(apoderado, nif, isDesktop);
           let poderdante2 = this.addNewLine(poderdante, nif, isDesktop);
 
+          let apoderaEstatActual: string = estatNom + " - " + estatDesc;
+
           let element: ApoderaListItem = {
             apoderaTipus: tipus,
             apoderaAmbit: subtipus,
-            apoderaEstat: this.nomEstat(estat),
-            apoderaEstatActual: this.nomEstatActual(estat),
+            apoderaEstat: estatNom,
+            apoderaEstatActual: apoderaEstatActual,
             apoderaPoderdante: poderdante2,
             apoderaApoderado: apoderado2,
             apoderaVigencia: vigencia,
@@ -301,13 +381,161 @@ class Apodera extends React.Component<ApoderaProps> {
   }
 
   render() {
-    const { t, i18n } = this.props;
+    const t = this.props.i18n.t;
+
+    const estatsDisponibles: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 18, 19];
+    let options = [];
+
+    for (let i = 0; i < estatsDisponibles.length; i++) {
+      let obj = {
+        value: estatsDisponibles[i],
+        label: t("apodera.estat.nom." + estatsDisponibles[i]),
+      };      
+      options.push(obj);
+    }
+
+    let formulari = (
+      <>
+        <div className="row">
+          <div id="errorContainer" className="row pb-2 ml-3 mr-0 ocult">
+            <div className="alert alert-danger" role="alert" id="errorMsg">
+              {t("errorIniciMajorFinal")}
+            </div>
+          </div>
+        </div>
+
+        <CarpetaFormulariDeFiltre handleSubmitSearcher={this.handleSubmitSearcher} i18n={this.props.i18n}>
+          <>
+            {/*}
+            <CarpetaFormulariDeFiltreItem label={t("filter_datainici")}>
+              <CarpetaDatePicker
+                basename={"dataInici"}
+                defaultValue={this.filter_startDate}
+                onChangeDate={this.onChangeStartDate}
+                i18n={this.props.i18n}
+              />
+            </CarpetaFormulariDeFiltreItem>
+            <CarpetaFormulariDeFiltreItem label={t("filter_datafi")}>
+              <CarpetaDatePicker
+                basename={"dataFi"}
+                defaultValue={this.filter_endDate}
+                onChangeDate={this.onChangeEndDate}
+                i18n={this.props.i18n}
+              />
+
+            </CarpetaFormulariDeFiltreItem>    */}
+            {/* XYZ ZZZ Falta tipus apoderament
+            <CarpetaFormulariDeFiltreItem label={t("registro_estado")}>
+              <select
+                id="estado"
+                name="estado"
+                className="form-control form-control-sm focusIn font1App form-select"
+                tabIndex={504}
+                aria-labelledby="estado"
+                onChange={(e) => {
+                  this.onChangeStartDate(e);
+                }}
+              >
+                <option
+                  value="0"
+                  className="form-control form-control-sm selectMobil"
+                  selected={this.filter_status == 0}
+                >
+                  {t("registro_estado_todos")}
+                </option>
+                <option
+                  value="1"
+                  className="form-control form-control-sm selectMobil"
+                  selected={this.filter_status == 1}
+                >
+                  {t("registro_estado_1")}
+                </option>
+                <option
+                  value="2"
+                  className="form-control form-control-sm selectMobil"
+                  selected={this.filter_status == 2}
+                >
+                  {t("registro_estado_4")}
+                </option>
+                <option
+                  value="3"
+                  className="form-control form-control-sm selectMobil"
+                  selected={this.filter_status == 3}
+                >
+                  {t("registro_estado_10")}
+                </option>
+                <option
+                  value="4"
+                  className="form-control form-control-sm selectMobil"
+                  selected={this.filter_status == 4}
+                >
+                  {t("registro_estado_11")}
+                </option>
+              </select>
+            </CarpetaFormulariDeFiltreItem>
+              */}
+            <CarpetaFormulariDeFiltreItem label={t("apodera.estat")}>
+              <>
+                <select
+                  id="estat"
+                  name="estat"
+                  className="form-control form-control-sm focusIn font1App form-select"
+                  tabIndex={504}
+                  aria-labelledby="estat"
+                  onChange={(e) => {
+                    this.onChangeEstat(parseInt(e.target.value));
+                  }}
+                  defaultValue={this.filter_estat}
+                >
+                  <option key={0} value="0" className="form-control form-control-sm" >
+                    {t("apodera.estat.qualsevol")}
+                  </option>
+                  {options.map(({ value, label }, index) => (
+                    <option
+                      key={value}
+                      value={value}
+                      className="form-control form-control-sm"                      
+                    >
+                      {label}
+                    </option>
+                  ))}
+                </select>
+              </>
+            </CarpetaFormulariDeFiltreItem>
+
+            <CarpetaFormulariDeFiltreItem label={t("filter_vista")}>
+              <>
+                <select
+                  id="vista"
+                  name="vista"
+                  className="form-control form-control-sm focusIn font1App form-select"
+                  tabIndex={504}
+                  aria-labelledby="vista"
+                  onChange={(e) => {
+                    this.onChangeVista(parseInt(e.target.value));
+                  }}
+                >
+                  <option value="0" className="form-control form-control-sm" selected={this.filter_vista == 0}>
+                    {t("vista_apoderat")}
+                  </option>
+                  <option value="1" className="form-control form-control-sm" selected={this.filter_vista == 1}>
+                    {t("vista_poderdant")}
+                  </option>
+                </select>
+              </>
+            </CarpetaFormulariDeFiltreItem>
+          </>
+        </CarpetaFormulariDeFiltre>
+      </>
+    );
 
     return (
       <TemplatePageCarpeta {...this.props} titles={this.props.titles} subtitles={this.props.subtitles} i18n={i18n}>
-        <div className="float-left" style={{ width: "97%", position: "relative" }}>
-          <RenderTable
-            loadData={this.carregaDadesApoderaments}
+        <>
+          {formulari}
+          <RenderPaginationTable
+            loadPaginatedData={this.loadPaginatedData}
+            selectElementsByPage={[200]}
             columnNames={this.columnsNom}
             columnTitles={this.columnsTitols}
             columnNamesAdditionals={this.columnsNomAddicionals}
@@ -315,7 +543,7 @@ class Apodera extends React.Component<ApoderaProps> {
             rowType={RowType.SHOW_ADDITIONAL_INFO}
             i18n={i18n}
           />
-        </div>
+        </>
       </TemplatePageCarpeta>
     );
   }

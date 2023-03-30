@@ -20,6 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence&gt;
  *         &lt;element name="datosAuditoriaType" type="{https://consultaApoderamientos.minhap.es/peticionConsulta}datosAuditoriaType"/&gt;
  *         &lt;element name="datosConsultaType" type="{https://consultaApoderamientos.minhap.es/peticionConsulta}datosConsultaType"/&gt;
+ *         &lt;element name="datosPaginacionType" type="{https://consultaApoderamientos.minhap.es/peticionConsulta}datosPaginacionType" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -31,7 +32,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "datosAuditoriaType",
-    "datosConsultaType"
+    "datosConsultaType",
+    "datosPaginacionType"
 })
 @XmlRootElement(name = "PeticionConsulta", namespace = "https://consultaApoderamientos.minhap.es/peticionConsulta")
 public class PeticionConsulta {
@@ -40,6 +42,8 @@ public class PeticionConsulta {
     protected DatosAuditoriaType datosAuditoriaType;
     @XmlElement(namespace = "https://consultaApoderamientos.minhap.es/peticionConsulta", required = true)
     protected DatosConsultaType datosConsultaType;
+    @XmlElement(namespace = "https://consultaApoderamientos.minhap.es/peticionConsulta")
+    protected DatosPaginacionType datosPaginacionType;
 
     /**
      * Obtiene el valor de la propiedad datosAuditoriaType.
@@ -87,6 +91,30 @@ public class PeticionConsulta {
      */
     public void setDatosConsultaType(DatosConsultaType value) {
         this.datosConsultaType = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad datosPaginacionType.
+     * 
+     * @return
+     *     possible object is
+     *     {@link DatosPaginacionType }
+     *     
+     */
+    public DatosPaginacionType getDatosPaginacionType() {
+        return datosPaginacionType;
+    }
+
+    /**
+     * Define el valor de la propiedad datosPaginacionType.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link DatosPaginacionType }
+     *     
+     */
+    public void setDatosPaginacionType(DatosPaginacionType value) {
+        this.datosPaginacionType = value;
     }
 
 }

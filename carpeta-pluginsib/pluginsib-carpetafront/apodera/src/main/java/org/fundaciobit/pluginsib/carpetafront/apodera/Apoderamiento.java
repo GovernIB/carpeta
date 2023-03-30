@@ -11,12 +11,14 @@ public class Apoderamiento {
 
     private String tipus;
     private String subtipus;
-    private String estat;
+    private int estat;
+    private String estatNom;
+    private String estatDesc;
     private String apoderado;
     private String poderdante;
     private String vigencia;
     private String ambit;
-    private String descEstat;
+
     private List<String> procediments;
     private List<String> organismes;
     private List<String> tramits;
@@ -26,21 +28,25 @@ public class Apoderamiento {
         super();
     }
 
-    public Apoderamiento(String tipus, String subtipus, String estat, String apoderado, String poderdante,
-            String vigencia, String ambit, String descEstat, List<String> procediments, List<String> organismes,
-            List<String> tramits) {
+    public Apoderamiento(String tipus, String subtipus, int estat, String estatNom, String estatDesc, String apoderado,
+            String poderdante, String vigencia, String ambit, List<String> procediments, List<String> organismes,
+            List<String> tramits, long dataFinalVigencia) {
         super();
         this.tipus = tipus;
         this.subtipus = subtipus;
         this.estat = estat;
+        this.estatNom = estatNom;
+        this.estatDesc = estatDesc;
+
         this.apoderado = apoderado;
         this.poderdante = poderdante;
         this.vigencia = vigencia;
         this.ambit = ambit;
-        this.descEstat = descEstat;
+        this.estatDesc = estatDesc;
         this.procediments = procediments;
         this.organismes = organismes;
         this.tramits = tramits;
+        this.dataFinalVigencia = dataFinalVigencia;
     }
 
     public String getTipus() {
@@ -59,12 +65,28 @@ public class Apoderamiento {
         this.subtipus = subtipus;
     }
 
-    public String getEstat() {
+    public int getEstat() {
         return estat;
     }
 
-    public void setEstat(String estat) {
+    public void setEstat(int estat) {
         this.estat = estat;
+    }
+
+    public String getEstatNom() {
+        return estatNom;
+    }
+
+    public void setEstatNom(String estatNom) {
+        this.estatNom = estatNom;
+    }
+
+    public String getEstatDesc() {
+        return estatDesc;
+    }
+
+    public void setEstatDesc(String estatDesc) {
+        this.estatDesc = estatDesc;
     }
 
     public String getApoderao() {
@@ -101,14 +123,6 @@ public class Apoderamiento {
 
     public void setAmbit(String ambit) {
         this.ambit = ambit;
-    }
-
-    public String getDescEstat() {
-        return descEstat;
-    }
-
-    public void setDescEstat(String descEstat) {
-        this.descEstat = descEstat;
     }
 
     public List<String> getProcediments() {

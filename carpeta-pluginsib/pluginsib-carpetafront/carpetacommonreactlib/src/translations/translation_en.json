@@ -13,6 +13,8 @@
     "pagination.seguent": "Página seguiente",
     "pagination.anterior": "Página anterior",
 
+    "enviar": "Enviar",
+
     "rowtype.internal_link":"Accedeix a una altra pàgina amb més informació d'aquest element",
     "rowtype.external_link":"Obre una altra finestra per accedir a més informació d'aquest element",
     "rowtype.download_file":"Descarrega un fitxer",

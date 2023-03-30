@@ -10,7 +10,7 @@ import javax.xml.namespace.QName;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the es.caib.apodera.client.api package. 
+ * generated in the org.fundaciobit.pluginsib.carpetafront.apodera.api package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -34,7 +34,7 @@ public class ObjectFactory {
     private final static QName _TipoApoderamientoTypeListaTramites_QNAME = new QName("https://consultaApoderamientos.minhap.es/peticionConsulta", "listaTramites");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: es.caib.apodera.client.api
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: org.fundaciobit.pluginsib.carpetafront.apodera.api
      * 
      */
     public ObjectFactory() {
@@ -62,6 +62,14 @@ public class ObjectFactory {
      */
     public DatosConsultaType createDatosConsultaType() {
         return new DatosConsultaType();
+    }
+
+    /**
+     * Create an instance of {@link DatosPaginacionType }
+     * 
+     */
+    public DatosPaginacionType createDatosPaginacionType() {
+        return new DatosPaginacionType();
     }
 
     /**
@@ -342,6 +350,14 @@ public class ObjectFactory {
      */
     public ErroresInfo createErroresInfo() {
         return new ErroresInfo();
+    }
+
+    /**
+     * Create an instance of {@link DatosPaginacionType2 }
+     * 
+     */
+    public DatosPaginacionType2 createDatosPaginacionType2() {
+        return new DatosPaginacionType2();
     }
 
     /**

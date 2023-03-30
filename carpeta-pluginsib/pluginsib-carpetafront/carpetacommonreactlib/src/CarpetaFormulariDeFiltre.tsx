@@ -49,7 +49,7 @@ class CarpetaFormulariDeFiltre extends React.Component<CarpetaFormulariDeFiltreP
               }}
               tabIndex={505}
             >
-              {this.props.i18n.t("carpeta_buscar")}
+              {this.props.i18n.t("enviar")}
             </button>
           </div>
         </div>

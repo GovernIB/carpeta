@@ -1,0 +1,203 @@
+<?xml version='1.0' encoding='UTF-8'?><schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:impl="https://consultaApoderamientos.minhap.es/respuestaConsulta" xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="https://consultaApoderamientos.minhap.es/respuestaConsulta">
+		
+	<element name="RespuestaConsulta">
+		<complexType>
+			<sequence>
+				<element minOccurs="0" name="consultaApoderamientosResponse" type="impl:consultaApoderamientosResponse"/>
+			</sequence>
+		</complexType>
+	</element>
+
+	<complexType name="consultaApoderamientosResponse">
+		<sequence>
+			<element minOccurs="0" name="datosAuditoria" type="impl:datosAuditoriaType"/>
+			<element maxOccurs="unbounded" minOccurs="0" name="listaApoderamientos" nillable="true" type="impl:datosApoderamientoType"/>
+			<element minOccurs="0" name="resultadoError" type="impl:errorType"/>
+			<element minOccurs="0" name="datosPaginacionType" type="impl:datosPaginacionType"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="datosAuditoriaType">
+		<sequence>
+			<element name="timestamp" type="xsd:long"/>
+			<element name="codAplicacion" type="xsd:string"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="datosApoderamientoType">
+		<sequence>
+			<element maxOccurs="unbounded" minOccurs="0" name="anexos" nillable="true" type="impl:anexoType"/>
+			<element name="codApoderamientoEXT" type="xsd:long"/>
+			<element name="codApoderamientoINT" type="xsd:long"/>
+			<element minOccurs="0" name="datosApoderado" type="impl:datosApoderadoCompletoType"/>
+			<element minOccurs="0" name="datosPoderdante" type="impl:datosPoderdanteCompletoType"/>
+			<element minOccurs="0" name="estado" type="xsd:string"/>
+			<element minOccurs="0" name="periodoVigencia" type="impl:periodoType"/>
+			<element minOccurs="0" name="tipoApoderamiento" type="impl:tipoApoderamientoCompletoType"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="periodoType">
+		<sequence>
+			<element minOccurs="0" name="fechaFin" type="xsd:string"/>
+			<element minOccurs="0" name="fechaInicio" type="xsd:string"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="anexoType">
+		<sequence>
+			<element minOccurs="0" name="csv" type="xsd:string"/>
+			<element minOccurs="0" name="nombreDocumento" type="xsd:string"/>
+			<element minOccurs="0" name="tipoDocumento" type="xsd:string"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="datosApoderadoCompletoType">
+		<sequence>
+			<element minOccurs="0" name="personaFisica" type="impl:personaFisicaType"/>
+			<element minOccurs="0" name="personaJuridica" type="impl:personaJuridicaType"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="personaFisicaType">
+		<sequence>
+			<element minOccurs="0" name="apellido1" type="xsd:string"/>
+			<element minOccurs="0" name="apellido2" type="xsd:string"/>
+			<element minOccurs="0" name="domicilio" type="impl:domicilioType"/>
+			<element minOccurs="0" name="email" type="xsd:string"/>
+			<element minOccurs="0" name="nifNie" type="xsd:string"/>
+			<element minOccurs="0" name="nombre" type="xsd:string"/>
+			<element minOccurs="0" name="telefono" type="xsd:string"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="domicilioType">
+		<sequence>
+			<element minOccurs="0" name="bloque" type="xsd:string"/>
+			<element minOccurs="0" name="codigoPostal" type="xsd:string"/>
+			<element minOccurs="0" name="escalera" type="xsd:string"/>
+			<element minOccurs="0" name="hmt" type="xsd:string"/>
+			<element minOccurs="0" name="kmt" type="xsd:string"/>
+			<element minOccurs="0" name="localidad" type="xsd:string"/>
+			<element minOccurs="0" name="nombreVia" type="xsd:string"/>
+			<element minOccurs="0" name="numero" type="xsd:string"/>
+			<element minOccurs="0" name="numeroSup" type="xsd:string"/>
+			<element minOccurs="0" name="pais" type="xsd:string"/>
+			<element minOccurs="0" name="planta" type="xsd:string"/>
+			<element minOccurs="0" name="portal" type="xsd:string"/>
+			<element minOccurs="0" name="provincia" type="xsd:string"/>
+			<element minOccurs="0" name="puerta" type="xsd:string"/>
+			<element minOccurs="0" name="tipoVia" type="xsd:string"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="personaJuridicaType">
+		<sequence>
+			<element minOccurs="0" name="nif" type="xsd:string"/>
+			<element minOccurs="0" name="domicilio" type="impl:domicilioType"/>
+			<element minOccurs="0" name="email" type="xsd:string"/>
+			<element minOccurs="0" name="razonSocial" type="xsd:string"/>
+			<element minOccurs="0" name="telefono" type="xsd:string"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="datosPoderdanteCompletoType">
+		<sequence>
+			<element minOccurs="0" name="personaFisica" type="impl:personaFisicaType"/>
+			<element minOccurs="0" name="personaJuridica" type="impl:personaJuridicaType"/>
+			<element minOccurs="0" name="representante" type="impl:personaFisicaType"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="tipoApoderamientoCompletoType">
+		<sequence>
+			<element minOccurs="0" name="listaCategorias" nillable="true" type="impl:categoria"/>	
+			<element minOccurs="0" name="listaOrganismos" nillable="true" type="impl:organismo"/>	
+			<element name="materia" type="impl:materiaType"/>
+			<element minOccurs="0" name="listaProcedimientos" nillable="true" type="impl:procedimiento"/>
+			<element minOccurs="0" name="listaTramites" nillable="true" type="impl:tramite"/>
+			<element minOccurs="0" name="subTipoApod" type="xsd:string"/>
+			<element minOccurs="0" name="tipoApod" type="xsd:string"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="organismo">
+		<sequence>
+			<element maxOccurs="unbounded" minOccurs="0" name="organismo" nillable="true" type="impl:organismoType"/>
+		</sequence>
+	</complexType>	
+	
+	<complexType name="organismoType">
+		<sequence>
+			<element name="codOrganismo" type="xsd:string"/>
+			<element minOccurs="0" name="denomOrganismo" type="xsd:string"/>
+		</sequence>
+	</complexType>	
+	
+	<complexType name="categoria">
+		<sequence>
+			<element maxOccurs="unbounded" minOccurs="0" name="categoria" nillable="true" type="impl:categoriaType"/>
+		</sequence>
+	</complexType>		
+	
+	<complexType name="categoriaType">
+		<sequence>
+			<element minOccurs="0" name="descCategoria" type="xsd:string"/>
+			<element minOccurs="0" name="nombreCategoria" type="xsd:string"/>
+		</sequence>
+	</complexType>
+
+	<complexType name="materiaType">
+		<sequence>
+			<element minOccurs="0" name="codMateria" type="xsd:string"/>
+			<element minOccurs="0" name="denomMateria" type="xsd:string"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="procedimiento">
+		<sequence>
+			<element maxOccurs="unbounded" minOccurs="0" name="procedimiento" nillable="true" type="impl:procedimientoType"/>
+		</sequence>
+	</complexType>
+		
+	<complexType name="procedimientoType">
+		<sequence>
+			<element minOccurs="0" name="codProcedimiento" type="xsd:string"/>
+			<element minOccurs="0" name="nombreProcedimiento" type="xsd:string"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="tramite">
+		<sequence>
+			<element maxOccurs="unbounded" minOccurs="0" name="tramite" nillable="true" type="impl:tramiteType"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="tramiteType">
+		<sequence>
+			<element minOccurs="0" name="codTramite" type="xsd:string"/>
+			<element minOccurs="0" name="descTramite" type="xsd:string"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="errorType">
+		<sequence>
+			<element minOccurs="0" name="codError" type="xsd:string"/>
+			<element minOccurs="0" name="desError" type="xsd:string"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="erroresInfo">
+		<sequence>
+			<element minOccurs="0" name="code" type="xsd:string"/>
+			<element minOccurs="0" name="description" type="xsd:string"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="datosPaginacionType">
+		<sequence>
+			<element name="pagina" type="xsd:int"/>
+		</sequence>
+	</complexType>
+
+</schema>
