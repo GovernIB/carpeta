@@ -4,7 +4,7 @@
 <script type="text/javascript">
 
 function submitPage(page) {
-    submitForm("<c:url value="${dollar}{contexte}/list/" />" + page, false);
+    submitForm("<c:url value="${contexte}/list/" />" + page, false);
 }
 
 </script>
@@ -47,8 +47,14 @@ function submitPage(page) {
 
         }
 
+        System.out.println("\n\n ");
+        System.out.println(" Valor de Start |"+start+"|");
+        System.out.println("\n\n ");
         request.setAttribute("start", start);
         request.setAttribute("end", end);
+
+        System.out.println(" S'ha ficat atribut Start correctament");
+
 
         // Si el parametre onClickSelectElementsByPage te valor, existeix una funcio per canviar el nº de elements
         // per tant s'ha de incloure l'element per canviar el nº de elements.
@@ -71,10 +77,10 @@ function submitPage(page) {
         request.setAttribute("retrocedir", Math.floor(start / 2));
         %>
         <fmt:message var="retrocedirTitle" key="genapp.pagination.retrocedir">
-            <fmt:param value="${dollar}{retrocedir}" />
+            <fmt:param value="${retrocedir}" />
         </fmt:message>
-        <li class="page-item"><a class="page-link" href="#" style="letter-spacing: -4px;" onclick="submitPage(${dollar}{retrocedir})"
-            title="${dollar}{retrocedirTitle}"> &lt;&lt; </a></li>
+        <li class="page-item"><a class="page-link" href="#" style="letter-spacing: -4px;" onclick="submitPage(${retrocedir})"
+            title="${retrocedirTitle}"> &lt;&lt; </a></li>
         <%
         }
 
@@ -89,14 +95,14 @@ function submitPage(page) {
         %>
 
 
-        <c:forEach var="i" begin="${dollar}{start}" end="${dollar}{end}">
+        <c:forEach var="i" begin="${start}" end="${end}">
             <c:choose>
-                <c:when test="${dollar}{i == currentIndex}">
-                    <li class="page-item active"><a class="page-link" href="#"><c:out value="${dollar}{i}" /></a></li>
+                <c:when test="${i == currentIndex}">
+                    <li class="page-item active"><a class="page-link" href="#"><c:out value="${i}" /></a></li>
                 </c:when>
                 <c:otherwise>
-                    <li class="page-item"><a class="page-link" href="#" onclick="submitPage(${dollar}{i})"> <c:out
-                                value="${dollar}{i}" />
+                    <li class="page-item"><a class="page-link" href="#" onclick="submitPage(${i})"> <c:out
+                                value="${i}" />
                     </a></li>
                 </c:otherwise>
             </c:choose>
@@ -115,20 +121,20 @@ function submitPage(page) {
 
         // Avançar >>
         if (end != totalPages) {
-          request.setAttribute("avancar", end + Math.floor((totalPages - end) / 2));
+            request.setAttribute("avancar", end + Math.floor((totalPages - end) / 2));
         %>
         <fmt:message var="avancarTitle" key="genapp.pagination.avancar">
-            <fmt:param value="${dollar}{avancar}" />
+            <fmt:param value="${avancar}" />
         </fmt:message>
-        <li class="page-item"><a class="page-link" style="letter-spacing:-4px;" href="#" onclick="submitPage(${dollar}{avancar})"
-            title="${dollar}{avancarTitle}">&#62;&#62;</a></li>
+        <li class="page-item"><a class="page-link" style="letter-spacing:-4px;" href="#" onclick="submitPage(${avancar})"
+            title="${avancarTitle}">&#62;&#62;</a></li>
         <%
         }
 
         // Last  >|
         if (end != totalPages) {
         %>
-        <li class="page-item"><a class="page-link" href="#" onclick="submitPage(${dollar}{totalPages})"
+        <li class="page-item"><a class="page-link" href="#" onclick="submitPage(${totalPages})"
             title="<fmt:message key="genapp.pagination.darrerapagina" />">
                 <div style="transform: rotate(+90deg)">&#8892;</div>
         </a></li>

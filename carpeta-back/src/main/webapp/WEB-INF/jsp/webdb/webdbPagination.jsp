@@ -25,7 +25,7 @@ function reassignAction() {
 </script>
 <div class="row" id="${formName}_pagination" style="width:100%; text-align:center;" >
 
-  <div class="col" style="float:left;" id="${formName}_pagination_left">
+  <div class="col-3" style="float:left;" id="${formName}_pagination_left">
   <c:if test="${__theFilterForm.visibleExportList}">
       
       <%
@@ -50,19 +50,65 @@ function reassignAction() {
     
     
 <nav aria-label="Page navigation">
-    <div class="col-md-auto text-center"
-        id="${formName}_pagination_center">
-        <c:if test="${not empty __theFilterForm.itemsPerPage}">
-            <%@include file="webdbPaginationOnlyBar.jsp" %>
+  <ul class="pagination pagination-sm" id="${formName}_pagination_center">
+        <c:choose>
+            <c:when test="${currentIndex == 1}">
+                <li class="page-item disabled"><a class="page-link" href="#">&lt;&lt;</a></li>
+                <li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
+            </c:when>
+            <c:otherwise>
+                <li class="page-item"><a class="page-link" href="#" onclick="submitForm('${firstUrl}', false)">&lt;&lt;</a></li>
+                <li class="page-item"><a class="page-link" href="#" onclick="submitForm('${prevUrl}', false)">&lt;</a></li>
+            </c:otherwise>
+        </c:choose>
+
+        <c:if test="${((currentIndex - 5) >= 1) && ((currentIndex + 5) <= totalPages)}">
+            <c:set var="inici" value="${currentIndex - 5}"/>
+            <c:set var="final" value="${currentIndex + 5}"/>
         </c:if>
-    </div>
+        <c:if test="${(currentIndex - 5) < 1}">
+            <c:set var="inici" value="1"/>
+            <c:set var="final" value="11"/>
+        </c:if>
+        <c:if test="${(currentIndex + 5 > totalPages) && (totalPages > 10)}">
+            <c:set var="final" value="${totalPages}"/>
+            <c:set var="inici" value="${totalPages - 10}"/>
+        </c:if>
+        <c:if test="${totalPages <= 10}">
+            <c:set var="final" value="${totalPages}"/>
+            <c:set var="inici" value="1"/>
+        </c:if>
+
+        <c:forEach var="i" begin="${inici}" end="${final}">
+            <c:url var="pageUrl" value="${contexte}/list/${i}" />
+            <c:choose>
+                <c:when test="${i == currentIndex}">
+                    <li class="page-item active"><a class="page-link" href="#"><c:out value="${i}" /></a></li>
+                </c:when>
+                <c:otherwise>
+                    <li class="page-item"><a class="page-link" href="#" onclick="submitForm('${pageUrl}', false)"><c:out value="${i}" /></a></li>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+
+        <c:choose>
+            <c:when test="${currentIndex == totalPages}">
+                <li class="page-item disabled"><a class="page-link" href="#"> &gt;</a></li>
+                <li class="page-item disabled"><a class="page-link" href="#">&gt;&gt;</a></li>
+            </c:when>
+            <c:otherwise>
+                <li class="page-item"><a class="page-link" href="#" onclick="submitForm('${nextUrl}', false)">&gt;</a></li>
+                <li class="page-item"><a class="page-link" href="#" onclick="submitForm('${lastUrl}', false)">&gt;&gt;</a></li>
+            </c:otherwise>
+        </c:choose>
+    </ul>
     </nav>
     
     </c:if>
     </div>
 
     <fmt:message var="allitems" key="genapp.form.allitems" />
-    <div class="col" style="float:right;" id="${formName}_pagination_right" >
+    <div class="col-3" style="float:right;" id="${formName}_pagination_right" >
       <label><fmt:message key="genapp.form.itemsperpage" />:</label>
       <form:select cssClass="input-small" cssStyle="width:4em;"  onchange="document.${formName}.submit()" path="itemsPerPage" >--%>
         <c:forEach var="num" items="${__theFilterForm.allItemsPerPage}">
