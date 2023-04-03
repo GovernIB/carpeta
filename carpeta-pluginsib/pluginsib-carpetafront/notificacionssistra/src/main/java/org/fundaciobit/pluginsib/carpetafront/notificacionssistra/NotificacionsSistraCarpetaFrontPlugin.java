@@ -3,7 +3,12 @@ package org.fundaciobit.pluginsib.carpetafront.notificacionssistra;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import es.caib.carpeta.pluginsib.carpetafront.api.*;
+import es.caib.carpeta.pluginsib.carpetafront.api.AbstractCarpetaFrontPlugin;
+import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
+import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
+import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
+import es.caib.carpeta.pluginsib.carpetafront.api.TitlesInfo;
+import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementoExpediente;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.TipoElementoExpediente;
 import org.apache.commons.io.IOUtils;
@@ -12,21 +17,25 @@ import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Properties;
 
 /**
+ * @author anadal
  * @author jpernia
  */
 public class NotificacionsSistraCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
-    public static final String NOTIFICACIONSSISTRA_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE
-            + "notificacionssistra.";
+    public static final String NOTIFICACIONSSISTRA_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "notificacionssistra.";
 
     /**
      *
@@ -80,8 +89,8 @@ public class NotificacionsSistraCarpetaFrontPlugin extends AbstractCarpetaFrontP
 
     @Override
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
-            HttpServletRequest request, UserData userData, String administrationIDEncriptat,
-            String parameter, IListenerLogCarpeta logCarpeta) throws Exception {
+            HttpServletRequest request, UserData userData, String administrationIDEncriptat, String parameter,
+            IListenerLogCarpeta logCarpeta) throws Exception {
 
         registerUserData(userData);
 
@@ -97,38 +106,33 @@ public class NotificacionsSistraCarpetaFrontPlugin extends AbstractCarpetaFrontP
     }
 
     @Override
-    public void requestCarpetaFront(String absolutePluginRequestPath,
-            String relativePluginRequestPath, String query, HttpServletRequest request,
-            HttpServletResponse response, UserData userData, String administrationEncriptedID,
-            Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
+    public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
 
         if (isDevelopment()) {
-            log.info("NotificacionsSistraCarpetaFrontPlugin::requestCarpetaFront => query: ]"
-                    + query + "[");
-            log.info(
-                    "NotificacionsSistraCarpetaFrontPlugin::requestCarpetaFront => administrationID: "
-                            + userData.getAdministrationID());
-            log.info(
-                    "NotificacionsSistraCarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
-                            + administrationEncriptedID);
+            log.info("NotificacionsSistraCarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
+            log.info("NotificacionsSistraCarpetaFrontPlugin::requestCarpetaFront => administrationID: "
+                    + userData.getAdministrationID());
+            log.info("NotificacionsSistraCarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
+                    + administrationEncriptedID);
         }
 
         if (query.startsWith(INDEX_HTML_PAGE)) {
-            index(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                    userData, administrationEncriptedID, locale, isGet);
+            index(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
 
         } else if (query.startsWith(REACT_JS_PAGE)) {
-            reactjs(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                    userData, administrationEncriptedID, locale, isGet);
+            reactjs(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
 
         } else if (query.startsWith(URL_REST_SERVICE)) {
-            consultaNotificacions(absolutePluginRequestPath, relativePluginRequestPath, query,
-                    request, response, userData, administrationEncriptedID, locale, isGet);
+            consultaNotificacions(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
+                    userData, administrationEncriptedID, locale, isGet);
 
         } else {
-            super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query,
-                    request, response, userData, administrationEncriptedID, locale, isGet,
-                    logCarpeta);
+            super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
+                    userData, administrationEncriptedID, locale, isGet, logCarpeta);
         }
 
     }
@@ -151,9 +155,9 @@ public class NotificacionsSistraCarpetaFrontPlugin extends AbstractCarpetaFrontP
 
     protected static final String INDEX_HTML_PAGE = "notificacionssistra_index.html";
 
-    public void index(String absolutePluginRequestPath, String relativePluginRequestPath,
-            String query, HttpServletRequest request, HttpServletResponse response,
-            UserData userData, String administrationEncriptedID, Locale locale, boolean isGet) {
+    public void index(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet) {
 
         try {
 
@@ -161,8 +165,8 @@ public class NotificacionsSistraCarpetaFrontPlugin extends AbstractCarpetaFrontP
 
             String resource = "/webpage/notificacionssistra_index.html";
 
-            response.setHeader("Content-Disposition", "inline;filename=\""
-                    + java.net.URLEncoder.encode(INDEX_HTML_PAGE, "UTF-8") + "\"");
+            response.setHeader("Content-Disposition",
+                    "inline;filename=\"" + java.net.URLEncoder.encode(INDEX_HTML_PAGE, "UTF-8") + "\"");
 
             response.setCharacterEncoding("utf-8");
 
@@ -191,8 +195,7 @@ public class NotificacionsSistraCarpetaFrontPlugin extends AbstractCarpetaFrontP
             map.put("pathtoservei", pathtoservei);
 
             // CAIB - SISTRA 1
-            String comunicacionesURL = absolutePluginRequestPath + "/"
-                    + NOTIFICACIONS_ESPERA_SISTRA_PAGE;
+            String comunicacionesURL = absolutePluginRequestPath + "/" + NOTIFICACIONS_ESPERA_SISTRA_PAGE;
             map.put("comunicacionesUrl", comunicacionesURL);
 
             String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
@@ -217,56 +220,13 @@ public class NotificacionsSistraCarpetaFrontPlugin extends AbstractCarpetaFrontP
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
-    public static class ElementoExpedienteJson {
-
-        String descripcion;
-        String url;
-        XMLGregorianCalendar fecha;
-
-        public ElementoExpedienteJson() {
-        }
-
-        public ElementoExpedienteJson(ElementoExpediente src) {
-            this.descripcion = src.getDescripcion();
-            this.url = src.getUrl();
-            this.fecha = src.getFecha();
-        }
-
-        public String getDescripcion() {
-            return descripcion;
-        }
-
-        public void setDescripcion(String descripcion) {
-            this.descripcion = descripcion;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
-
-        public XMLGregorianCalendar getFecha() {
-            return fecha;
-        }
-
-        public void setFecha(XMLGregorianCalendar fecha) {
-            this.fecha = fecha;
-        }
-
-    }
+   
 
     protected static final String URL_REST_SERVICE = "consultaNotificacions";
 
-    public void consultaNotificacions(String absolutePluginRequestPath,
-            String relativePluginRequestPath, String query, HttpServletRequest request,
-            HttpServletResponse response, UserData userData, String administrationEncriptedID,
-            Locale locale, Boolean isGet) {
-
-        Map<String, Object> comunicacionsMap = new HashMap<String, Object>();
-        int itemsPagina = 10;
+    public void consultaNotificacions(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, Boolean isGet) {
 
         try {
 
@@ -277,27 +237,31 @@ public class NotificacionsSistraCarpetaFrontPlugin extends AbstractCarpetaFrontP
 
             Sistra1ServiceImpl sistra1Service = getSistra1ServiceImpl();
 
-            List<ElementoExpediente> comunicaciones = sistra1Service.obtenerElementosExpediente(
-                    coms, Sistra1ServiceImpl.ELEMENTO_TODOS, userData.getAdministrationID(),
-                    locale);
+            List<ElementoExpediente> comunicaciones = sistra1Service.obtenerElementosExpediente(coms,
+                    Sistra1ServiceImpl.ELEMENTO_TODOS, userData.getAdministrationID(), locale);
 
             log.debug("***********************************************************");
 
-            List<ElementoExpedienteJson> comunicacionesJson = new ArrayList<NotificacionsSistraCarpetaFrontPlugin.ElementoExpedienteJson>();
-            
+            List<NotificacioSistraItem> comunicacionesJson = new ArrayList<NotificacioSistraItem>();
+
             for (ElementoExpediente comunicacion : comunicaciones) {
                 log.debug("DESCRIPCIOON: " + comunicacion.getDescripcion());
                 log.debug("URL: " + comunicacion.getUrl());
                 log.debug("FECHA: " + comunicacion.getFecha());
-                comunicacionesJson.add(new ElementoExpedienteJson(comunicacion));
+                comunicacionesJson.add(new NotificacioSistraItem(comunicacion));
             }
             log.debug("***********************************************************");
 
+            Map<String, Object> comunicacionsMap = new HashMap<String, Object>();
             comunicacionsMap.put("comunicacions", comunicacionesJson);
+
+            /*
             comunicacionsMap.put("registresPagina", itemsPagina);
             comunicacionsMap.put("totalRegistres", comunicaciones.size());
+            */
 
-            Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();
+            //Gson gson = new GsonBuilder().enableComplexMapKeySerialization().create();
+            Gson gson = new GsonBuilder().setDateFormat("dd-MM-yyyy HH:mm").create();
             String json = gson.toJson(comunicacionsMap);
 
             log.debug(json);
@@ -330,16 +294,16 @@ public class NotificacionsSistraCarpetaFrontPlugin extends AbstractCarpetaFrontP
 
     protected static final String REACT_JS_PAGE = "notificacionssistra_reactjs_main.js";
 
-    public void reactjs(String absolutePluginRequestPath, String relativePluginRequestPath,
-            String query, HttpServletRequest request, HttpServletResponse response,
-            UserData userData, String administrationEncriptedID, Locale locale, boolean isGet) {
+    public void reactjs(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet) {
 
         try {
 
             response.setContentType("application/javascript");
 
-            response.setHeader("Content-Disposition", "inline;filename=\""
-                    + java.net.URLEncoder.encode(REACT_JS_PAGE, "UTF-8") + "\"");
+            response.setHeader("Content-Disposition",
+                    "inline;filename=\"" + java.net.URLEncoder.encode(REACT_JS_PAGE, "UTF-8") + "\"");
 
             String resource = "/webpage/notificacionssistra_reactjs_main.js";
 
@@ -432,8 +396,8 @@ public class NotificacionsSistraCarpetaFrontPlugin extends AbstractCarpetaFrontP
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
-    protected String encapsulaEnPaginaHtml(String absolutePluginRequestPath, Locale locale,
-            Map<String, Object> map, String generat) throws IOException {
+    protected String encapsulaEnPaginaHtml(String absolutePluginRequestPath, Locale locale, Map<String, Object> map,
+            String generat) throws IOException {
         String fullPage;
         {
 

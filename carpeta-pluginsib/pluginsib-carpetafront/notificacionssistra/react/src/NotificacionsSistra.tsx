@@ -1,119 +1,100 @@
-import React, {Component} from 'react';
-import {withTranslation} from 'react-i18next';
-import i18n from './i18n';
+import React from "react";
+import { WithTranslation, withTranslation } from "react-i18next";
+import i18n from "./i18n";
 import axios from "axios";
-import Table from 'react-bootstrap/Table';
-import Pagination  from 'react-bootstrap/Pagination';
+import { RenderTable, RenderTableData, RenderTableReturn, RowType, TemplatePageCarpeta } from "carpetacommonreactlib";
 
 /**
+ *  @author anadal
  *  @author jpernia
  */
 
-class NotificacionsSistra extends Component {
+interface NotificacionsSistraProps extends WithTranslation {
+  titles: any;
+  subtitles: any;
+  pathtoservei: string;
+  comunicacionesUrl: string;
+}
 
-    constructor(props) {
-        super(props);
+class NotificacionsSistra extends React.Component<NotificacionsSistraProps> {
+  private columnsNom: string[];
+  
 
-        this.state = {
-            isLoaded: false,
-            dataComunicacions: null,
-            pagination_active: 1,
-            pagination_total_items: 10,
-            total_items: 0,
-            cercaRegistres: 5,
-            error: false
-        };
+  constructor(props: NotificacionsSistraProps) {
+    super(props);
 
-        const getLocale = Locale => require(`date-fns/locale/${sessionStorage.getItem("langActual")}/index.js`);
-        this.locale = getLocale(this.props.language);
+    this.columnsNom = ["descripcion", "fecha"];
 
-        this.canviatIdioma = this.canviatIdioma.bind(this);
-        i18n.on('languageChanged', this.canviatIdioma);
 
-    }
+    this.carregaDadesNotificacionsSistra = this.carregaDadesNotificacionsSistra.bind(this);
 
-    canviatIdioma(lng) {
-        this.componentDidMount();
-    }
+    this.canviatIdioma = this.canviatIdioma.bind(this);
+    i18n.on("languageChanged", this.canviatIdioma);
+  }
 
-    componentDidMount() {
+  canviatIdioma(_lng: string) {
+    this.forceUpdate();
+  }
 
-        const url = this.props.pathtoservei;
+  componentDidMount() {}
 
-        const params = {
-            pageNumber: 0
-        };
+  carregaDadesNotificacionsSistra(returnData: RenderTableReturn) {
+    const params = {};
+    const url2 = this.props.pathtoservei;
 
-        axios.get(url, {params: params}).then( (response) => {
-            if (response.data != null){
-                this.setState({
-                    ...this.state,
-                    dataComunicacions: response.data.comunicacions,
-                    total_items: response.data.totalRegistres,
-                    isLoaded: true
-                });
-            }
-        }).catch( error => {
-            console.log('Error axios', error);
-            this.setState({
-                ...this.state,
-                error: true
-            });
-        } );
+    /*
+       public class NotificacioSistraItem {
+          String descripcion;
+          String url;
+          Date fecha;
+       }
+    */
 
-    }
+    axios
+      .get(url2, { params: params })
+      .then((response) => {
+        if (response.data == null) {
+          console.log(
+            "NotificacionsSistra::loadPaginatedData() => Error buit notificacions? => " + response.data.comunicacions
+          );
 
-    handlePagination(event, accio, isNumber, pag){
-
-        let newPageNumber =  event.target.text;
-        let pagActiva;
-
-        if(!isNumber) {
-            if (accio === 0) {
-                pagActiva = newPageNumber;
-            }
-            if (accio === 1) {
-                pagActiva = this.state.pagination_active - 1;
-            }
-            if (accio === 2) {
-                pagActiva = this.state.pagination_active + 1;
-            }
-        }else{
-            pagActiva = pag;
+          let errorPantalla = "Notificacions és null .";
+          let data: RenderTableData = {
+            tableData: null,
+            error: errorPantalla,
+          };
+          returnData.returnDataFunction(data);
+        } else {
+          let data: RenderTableData = {
+            tableData: response.data.comunicacions,
+            error: null,
+          };
+          returnData.returnDataFunction(data);
         }
-
-        this.setState({
-            ...this.state,
-            pagination_active: pagActiva,
-            error: false
-        });
-
-        const params = {
-            pageNumber: pagActiva-1
+      })
+      .catch((error) => {
+        console.log(JSON.stringify(error));
+        if (error.response) {
+          console.log("error.response.data: " + error.response.data);
+          console.log("error.response.status: " + error.response.status);
+          console.log("error.response.headers: " + error.response.headers);
+        }
+        let errorPantalla;
+        if (JSON.stringify(error).toString().includes("Request failed with status code 500")) {
+          errorPantalla = error.response.data.replace("<html><head><title>Error</title></head><body>", "");
+          errorPantalla = errorPantalla.replace("</body></html>", "");
+        } else {
+          errorPantalla = JSON.stringify(error);
+        }
+        let data: RenderTableData = {
+          tableData: null,
+          error: errorPantalla,
         };
-        const url2 = this.props.pathtoservei;
+        returnData.returnDataFunction(data);
+      });
+  }
 
-        axios.get(url2, {params: params}).then( (response) => {
-            if (response.data != null){
-                this.setState({
-                    ...this.state,
-                    dataComunicacions: response.data.comunicacions,
-                    total_items: response.data.totalRegistres,
-                    pagination_total_items: response.data.registresPagina,
-                    pagination_active: pagActiva,
-                    isLoaded: true
-                });
-            }
-        }).catch( error => {
-            console.log('Error axios', error);
-            this.setState({
-                ...this.state,
-                error: true
-            });
-        } );
-
-    }
-
+  /*
     componentDidUpdate() {
         $('.clickableRow')
             .click(function(event){
@@ -135,10 +116,37 @@ class NotificacionsSistra extends Component {
             window.open(obj.data('url'), '_blank');
         }
     }
+*/
+  onClickRow(_i: number, obj: any) {
+    window.open(obj.url, "_blank");
+  }
+
+  render() {
+    const i18n = this.props.i18n;
+
+    let columnsTitols: string[];
+    columnsTitols = [
+      i18n.t("notificacionsSistraComunicacionDescripcion"),
+      i18n.t("notificacionsSistraComunicacionFecha"),
+    ];
 
 
-    render() {
+    return (
+      <TemplatePageCarpeta {...this.props} titles={this.props.titles} subtitles={this.props.subtitles} i18n={i18n}>
+        <div className="float-left" style={{ width: "97%", position: "relative" }}>
+          <RenderTable
+            loadData={this.carregaDadesNotificacionsSistra}
+            columnNames={this.columnsNom}
+            columnTitles={columnsTitols}
+            rowType={RowType.EXTERNAL_LINK}
+            i18n={i18n}
+            onClickRow={this.onClickRow}
+          />
+        </div>
+      </TemplatePageCarpeta>
+    );
 
+    /*
         $.dateOrder = function(dateObject) {
             var day = dateObject.orig_day;
             var month = dateObject.orig_month;
@@ -371,8 +379,8 @@ class NotificacionsSistra extends Component {
                 </div>
             </>
             );
-            
-    }
+            */
+  }
 }
 
 export default withTranslation()(NotificacionsSistra);

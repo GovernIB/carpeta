@@ -27,22 +27,6 @@ const config = {
           },
         ],
       },
-      /*
-      {
-				test: /\.(js|jsx)$/,
-        include: path.resolve(__dirname, 'src'),
-				use: [
-					{
-					  loader: "babel-loader",
-					  options: {
-						presets: [
-						  "@babel/preset-react",
-						],
-					  },
-					},
-				  ]
-			},
-      */
       // Load images.
       {
         test: /\.(gif|jpe?g|png)$/,

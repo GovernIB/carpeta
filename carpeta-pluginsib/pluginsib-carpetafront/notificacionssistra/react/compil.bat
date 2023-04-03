@@ -1,8 +1,7 @@
 
 set STARTTIME=%TIME%
 
-call npm run build --profile
-
+call npm run build
 
 xcopy  /Y .\dist\notificacionssistra_reactjs_main.js ..\src\main\resources\webpage
 
