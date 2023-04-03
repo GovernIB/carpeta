@@ -23,4 +23,4 @@ es.caib.carpeta.pluginsib.carpetafront.apodera.connectiontimeout=20000
 es.caib.carpeta.pluginsib.carpetafront.apodera.readtimeout=20000
 es.caib.carpeta.pluginsib.carpetafront.apodera.url=https://pre-sede-administracion.redsara.es/apodera/clave.htm
 
-es.caib.carpeta.pluginsib.carpetafront.apodera.desenvolupament=true
+es.caib.carpeta.pluginsib.carpetafront.apodera.development=true
