@@ -387,6 +387,53 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             filter.setValorOperacio1(nif);
             filterList.add(filter);
         }
+        
+        //S'introdueixen la resta de filtres:
+        System.out.println("XYZ ZZZ FiltreNom: " + filtreNom);
+        System.out.println("XYZ ZZZ filtreEstat: " + filtreEstat);
+        System.out.println("XYZ ZZZ filtreDataInici: " + filtreDataInici);
+        System.out.println("XYZ ZZZ filtreDataFi: "+ filtreDataFi);
+        
+        //Filtre Nom:
+        if(filtreNom != null && !filtreNom.isBlank()){
+            System.out.println("XYZ ZZZ FiltreNom2: " + filtreNom);
+            ConsultaFiltre filter = new ConsultaFiltre();
+            filter.setMetadada(MetadataConstants.ENI_ID);
+            filter.setOperacio(ConsultaOperacio.CONTE);
+            filter.setValorOperacio1(filtreNom);
+            filterList.add(filter);
+        }
+        // filtreEstat
+        if(filtreEstat != null && !filtreEstat.isBlank()){
+            System.out.println("XYZ ZZZ filtreEstat2: " + filtreEstat);
+            ConsultaFiltre filter = new ConsultaFiltre();
+            filter.setMetadada(MetadataConstants.ENI_FASE_ARCHIVO);
+            filter.setOperacio(ConsultaOperacio.CONTE);
+            filter.setValorOperacio1(filtreEstat);
+            filterList.add(filter);
+        }
+        
+        //filtreDataInici
+        if(filtreDataInici != null && !filtreDataInici.isBlank()){
+            System.out.println("XYZ ZZZ filtreDataInici2: " + filtreDataInici);
+            ConsultaFiltre filter = new ConsultaFiltre();
+            filter.setMetadada(MetadataConstants.ENI_FECHA_INICIO);
+            filter.setOperacio(ConsultaOperacio.MAJOR);
+            filter.setValorOperacio1(filtreDataInici);
+            filterList.add(filter);
+        }
+        
+        // filtreDataFi
+        
+        if(filtreDataFi != null && !filtreDataFi.isBlank()){
+            System.out.println("XYZ ZZZ filtreDataFi2: "+ filtreDataFi);
+            ConsultaFiltre filter = new ConsultaFiltre();
+            filter.setMetadada(MetadataConstants.ENI_FECHA_FIN_EXP);
+            filter.setOperacio(ConsultaOperacio.MENOR);
+            filter.setValorOperacio1(filtreDataFi);
+            filterList.add(filter);
+        }
+        
 
         int i = 1;
         do {
@@ -412,7 +459,12 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         log.info("consulta.getPagina()  => " + consulta.getPagina());
         log.info("consulta.getElementsPerPagina()  => " + consulta.getElementsPerPagina());
+        
+        
 
+        
+
+        
         ConsultaResultat resultat = arxiu.expedientConsulta(filterList, consulta.getPagina(),
                 consulta.getElementsPerPagina());
 
@@ -422,27 +474,12 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         List<ExpedientInfo> expedients = new ArrayList<ExpedientInfo>();
 
-        /*
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date dataInici = null, dataFi = null;
-        if(filtreDataInici != null) {
-            dataInici = sdf.parse(filtreDataInici);
-        }
-        if(filtreDataFi != null) {
-            dataFi = sdf.parse(filtreDataFi);
-        }
-        */
+        
 
         for (ContingutArxiu ac : resultats) {
 
             ExpedientMetadades em = ac.getExpedientMetadades();
 
-            /*
-            if ((filtreNom == null || filtreNom.isBlank() || ac.getNom().contains(filtreNom))
-                    && (filtreEstat == null || filtreEstat.isBlank() || filtreEstat.equals(em.getEstat().toString()) || filtreEstat.equals(ESTAT_TOTS))
-                    && (dataInici == null || dataInici.getTime() < em.getDataObertura().getTime())
-                    && (dataFi == null || dataFi.getTime() > em.getDataObertura().getTime())) 
-                    */
             {
 
                 ExpedientInfo ei = new ExpedientInfo();

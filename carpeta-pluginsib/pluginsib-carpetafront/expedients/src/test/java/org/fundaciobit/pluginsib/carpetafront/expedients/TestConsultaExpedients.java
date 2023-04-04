@@ -86,8 +86,12 @@ public class TestConsultaExpedients {
         do {
 
             ExpedientConsulta consulta = new ExpedientConsulta(language, pagina, elementsPerPagina);
+            String filtreNom = null;
+            String filtreEstat = null;
+            String filtreDataInici = null;
+            String filtreDataFi = null;
 
-            ExpedientResposta resposta = elsMeusExpedientsPlugin.getExpedientsPerAdministrationID(nif, consulta, locale);
+            ExpedientResposta resposta = elsMeusExpedientsPlugin.getExpedientsPerAdministrationID(nif, consulta, locale, filtreNom, filtreEstat,filtreDataInici, filtreDataFi);
 
             if (resposta.getError() != null) {
 
