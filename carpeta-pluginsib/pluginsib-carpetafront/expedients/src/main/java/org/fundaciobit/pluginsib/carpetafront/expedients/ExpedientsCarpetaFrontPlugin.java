@@ -441,7 +441,7 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         // filtreDataFi
         if(filtreDataFi != null && !filtreDataFi.isBlank()){
             ConsultaFiltre filter = new ConsultaFiltre();
-            filter.setMetadada(MetadataConstants.ENI_FECHA_FIN_EXP);
+            filter.setMetadada(MetadataConstants.ENI_FECHA_INICIO);
             filter.setOperacio(ConsultaOperacio.MAJOR);
             filter.setValorOperacio1(filtreDataFi);
             filterList.add(filter);
