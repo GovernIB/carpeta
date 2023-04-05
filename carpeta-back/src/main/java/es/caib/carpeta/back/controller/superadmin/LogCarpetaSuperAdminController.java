@@ -26,7 +26,10 @@ import es.caib.carpeta.persistence.LogCarpetaJPA;
 import es.caib.carpeta.model.entity.LogCarpeta;
 import es.caib.carpeta.model.fields.LogCarpetaFields;
 import es.caib.carpeta.model.fields.PluginFields;
+
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -88,8 +91,14 @@ public class LogCarpetaSuperAdminController extends LogCarpetaController {
                     new AdditionalButton("fas fa-eye", "genapp.viewtitle", getContextWeb() + "/view/{0}", "btn-info"));
             logCarpetaFilterForm.addGroupByField(TIPUS);
             logCarpetaFilterForm.addGroupByField(ESTAT);
+            
 //            logCarpetaFilterForm.addGroupByField(DATAINICI);
             logCarpetaFilterForm.addFilterByField(DATAINICI);
+            //Calendar cal = Calendar.getInstance(); 
+            //logCarpetaFilterForm.setDataIniciFins(new Timestamp(cal.getTimeInMillis()));
+            //cal.add(Calendar.MONTH, -1);
+            //logCarpetaFilterForm.setDataIniciDesde(new Timestamp(cal.getTimeInMillis()));*/
+            
             logCarpetaFilterForm.addFilterByField(IDSESSIO);
 
             logCarpetaFilterForm.setOrderBy(LogCarpetaFields.DATAINICI.javaName);

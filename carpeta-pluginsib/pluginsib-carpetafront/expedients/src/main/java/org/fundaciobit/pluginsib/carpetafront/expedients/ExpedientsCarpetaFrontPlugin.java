@@ -459,12 +459,7 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         log.info("consulta.getPagina()  => " + consulta.getPagina());
         log.info("consulta.getElementsPerPagina()  => " + consulta.getElementsPerPagina());
-        
-        
 
-        
-
-        
         ConsultaResultat resultat = arxiu.expedientConsulta(filterList, consulta.getPagina(),
                 consulta.getElementsPerPagina());
 
@@ -473,8 +468,6 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         //System.out.println("#resultats  => " + resultats.size());
 
         List<ExpedientInfo> expedients = new ArrayList<ExpedientInfo>();
-
-        
 
         for (ContingutArxiu ac : resultats) {
 

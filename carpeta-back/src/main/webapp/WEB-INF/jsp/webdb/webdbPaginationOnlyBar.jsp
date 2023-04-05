@@ -47,14 +47,8 @@ function submitPage(page) {
 
         }
 
-        System.out.println("\n\n ");
-        System.out.println(" Valor de Start |"+start+"|");
-        System.out.println("\n\n ");
         request.setAttribute("start", start);
         request.setAttribute("end", end);
-
-        System.out.println(" S'ha ficat atribut Start correctament");
-
 
         // Si el parametre onClickSelectElementsByPage te valor, existeix una funcio per canviar el nº de elements
         // per tant s'ha de incloure l'element per canviar el nº de elements.
@@ -121,7 +115,7 @@ function submitPage(page) {
 
         // Avançar >>
         if (end != totalPages) {
-            request.setAttribute("avancar", end + Math.floor((totalPages - end) / 2));
+          request.setAttribute("avancar", end + Math.floor((totalPages - end) / 2));
         %>
         <fmt:message var="avancarTitle" key="genapp.pagination.avancar">
             <fmt:param value="${avancar}" />
