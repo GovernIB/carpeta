@@ -57,7 +57,6 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     public static final String EXPEDIENTS_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "expedients.";
     public static final long ACTUALITZACIO_MAP_ENTITATS_MS = 48 * 60 * 60 * 1000;
-    public static final String ESTAT_TOTS = "E04";
 
     /**
      *
@@ -316,11 +315,12 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             ExpedientConsulta consulta = new ExpedientConsulta(locale.getLanguage(), pagina, elementsPerPagina);
 
             String filtreNom = request.getParameter("filtreNom");
+            String filtreCodiSia = request.getParameter("filtreCodiSia");
             String filtreEstat = request.getParameter("filtreEstat");
             String filtreDataInici = request.getParameter("filtreDataInici");
             String filtreDataFi = request.getParameter("filtreDataFi");
 
-            ExpedientResposta resposta = getExpedientsPerAdministrationID(nif, consulta, locale, filtreNom, filtreEstat,
+            ExpedientResposta resposta = getExpedientsPerAdministrationID(nif, consulta, locale,filtreNom,filtreCodiSia , filtreEstat,
                     filtreDataInici, filtreDataFi);
 
             Gson gson = new Gson();
@@ -372,7 +372,7 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     }
 
     public ExpedientResposta getExpedientsPerAdministrationID(String nif, ExpedientConsulta consulta, Locale locale,
-            String filtreNom, String filtreEstat, String filtreDataInici, String filtreDataFi) throws Exception {
+            String filtreNom, String filtreCodiSia, String filtreEstat, String filtreDataInici, String filtreDataFi) throws Exception {
 
         IArxiuPlugin arxiu = instanticatePluginArxiu();
 
@@ -389,51 +389,64 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         }
         
         //S'introdueixen la resta de filtres:
-        System.out.println("XYZ ZZZ FiltreNom: " + filtreNom);
-        System.out.println("XYZ ZZZ filtreEstat: " + filtreEstat);
-        System.out.println("XYZ ZZZ filtreDataInici: " + filtreDataInici);
-        System.out.println("XYZ ZZZ filtreDataFi: "+ filtreDataFi);
+        //System.out.println("XYZ ZZZ filtreCodiSia: " + filtreCodiSia);
+        //System.out.println("XYZ ZZZ filtreEstat: " + filtreEstat);
+        //System.out.println("XYZ ZZZ filtreDataInici: " + filtreDataInici);
+        //System.out.println("XYZ ZZZ filtreDataFi: "+ filtreDataFi);
         
+        //XYZ ZZZ TODO Trobar metadada que filtri pel nom d'expedient.
         //Filtre Nom:
-        if(filtreNom != null && !filtreNom.isBlank()){
+        /*if(filtreNom != null && !filtreNom.isBlank()){
             System.out.println("XYZ ZZZ FiltreNom2: " + filtreNom);
             ConsultaFiltre filter = new ConsultaFiltre();
-            filter.setMetadada(MetadataConstants.ENI_ID);
+            filter.setMetadada(MetadataConstants.);
             filter.setOperacio(ConsultaOperacio.CONTE);
             filter.setValorOperacio1(filtreNom);
             filterList.add(filter);
+        }*/
+        
+      //Filtre Codi SIA:
+        if(filtreCodiSia != null && !filtreCodiSia.isBlank()){
+            System.out.println("XYZ ZZZ FiltreNom2: " + filtreCodiSia);
+            ConsultaFiltre filter = new ConsultaFiltre();
+            filter.setMetadada(MetadataConstants.ENI_ID_TRAMITE); // Codi SIA
+            filter.setOperacio(ConsultaOperacio.IGUAL);
+            filter.setValorOperacio1(filtreCodiSia);
+            filterList.add(filter);
         }
+        
         // filtreEstat
         if(filtreEstat != null && !filtreEstat.isBlank()){
-            System.out.println("XYZ ZZZ filtreEstat2: " + filtreEstat);
             ConsultaFiltre filter = new ConsultaFiltre();
-            filter.setMetadada(MetadataConstants.ENI_FASE_ARCHIVO);
+            filter.setMetadada(MetadataConstants.ENI_ESTADO_EXP);
             filter.setOperacio(ConsultaOperacio.CONTE);
             filter.setValorOperacio1(filtreEstat);
             filterList.add(filter);
         }
-        
+       
+      
+        //XYZ ZZZ TODO Pareix que els filtres de dates no funcionen correctament. 
+        //             Els parametres filtreDataInici i filtreDataFi estan en el format correcte?
+        //             La logica de "Menor" "Major" pot funcionar de manera diferent? Invertir no funciona.
+        /*
         //filtreDataInici
         if(filtreDataInici != null && !filtreDataInici.isBlank()){
-            System.out.println("XYZ ZZZ filtreDataInici2: " + filtreDataInici);
             ConsultaFiltre filter = new ConsultaFiltre();
             filter.setMetadada(MetadataConstants.ENI_FECHA_INICIO);
-            filter.setOperacio(ConsultaOperacio.MAJOR);
+            filter.setOperacio(ConsultaOperacio.MENOR);
             filter.setValorOperacio1(filtreDataInici);
             filterList.add(filter);
         }
         
         // filtreDataFi
-        
         if(filtreDataFi != null && !filtreDataFi.isBlank()){
-            System.out.println("XYZ ZZZ filtreDataFi2: "+ filtreDataFi);
             ConsultaFiltre filter = new ConsultaFiltre();
             filter.setMetadada(MetadataConstants.ENI_FECHA_FIN_EXP);
-            filter.setOperacio(ConsultaOperacio.MENOR);
+            filter.setOperacio(ConsultaOperacio.MAJOR);
             filter.setValorOperacio1(filtreDataFi);
             filterList.add(filter);
         }
-        
+        */
 
         int i = 1;
         do {
@@ -504,9 +517,9 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                         ei.setExpedientEstat(this.getTraduccio("estat.expedient.2", locale));
                     } else if ("E03".equals(expEstat)) {
                         ei.setExpedientEstat(this.getTraduccio("estat.expedient.3", locale));
-                    } else {
+                    } /*else {
                         ei.setExpedientEstat(this.getTraduccio("estat.expedient.0", locale));
-                    }
+                    }*/
 
                     DateFormat df = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
 

@@ -14,6 +14,7 @@
     "expediente_estado_2" : "Cerrado",
     "expediente_estado_3" : "Cerrado (disponible para subexpedientes)",
     "expedient_nom" : "Nombre",
+    "expedient_codiSia" : "Codigo SIA",
     "expedient_fecha_inicio" : "Fecha inicio",
     "expedient_fecha_fin" : "Fecha fin",
     "expedient_estat" : "Estado",

@@ -14,6 +14,7 @@
     "expediente_estado_2" : "Closed",
     "expediente_estado_3" : "Closed (available for subfile)",
     "expedient_nom" : "Name",
+    "expedient_codiSia" : "Code SIA",
     "expedient_fecha_inicio" : "Start date",
     "expedient_fecha_fin" : "End date",
     "expedient_estat" : "State",

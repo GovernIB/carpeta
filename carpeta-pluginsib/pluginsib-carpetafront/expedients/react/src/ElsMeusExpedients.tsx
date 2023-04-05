@@ -33,6 +33,7 @@ type ElsMeusExpedientsState = {
   filter_endDate: Date | undefined;
   filter_nom: string | undefined;
   filter_estat: string | undefined;
+  filter_codiSia: string | undefined;
 };
 
 class ElsMeusExpedients extends React.Component<ElsMeusExpedientsProps, ElsMeusExpedientsState> {
@@ -50,7 +51,8 @@ class ElsMeusExpedients extends React.Component<ElsMeusExpedientsProps, ElsMeusE
       filter_startDate: startDateObj,
       filter_endDate: endDateObj,
       filter_nom: undefined,
-      filter_estat: "E04",
+      filter_codiSia: undefined,
+      filter_estat: undefined
     };
 
     this.handleSubmitSearcher = this.handleSubmitSearcher.bind(this);
@@ -123,6 +125,13 @@ class ElsMeusExpedients extends React.Component<ElsMeusExpedientsProps, ElsMeusE
     });
   }
 
+  handleCodiSiaFilterParam(e: string) {
+    this.setState({
+      ...this.state,
+      filter_codiSia: e,
+    });
+  }
+
   handleStartDateFilterParam(e: Date) {
     this.setState({
       ...this.state,
@@ -160,6 +169,10 @@ class ElsMeusExpedients extends React.Component<ElsMeusExpedientsProps, ElsMeusE
 
     if (this.state.filter_nom != null) {
       params.filtreNom = this.state.filter_nom;
+    }
+
+    if (this.state.filter_codiSia != null) {
+      params.filterCodiSia = this.state.filter_codiSia;
     }
 
     if (this.state.filter_startDate != null) {
@@ -251,16 +264,17 @@ class ElsMeusExpedients extends React.Component<ElsMeusExpedientsProps, ElsMeusE
       <TemplatePageCarpeta {...this.props} titles={this.props.titles} subtitles={this.props.subtitles} i18n={i18n}>
         <div>
           <Row style={{ width: "95%", marginLeft: "-15px", marginRight: "-15px" }} className="ampleTotalApp">
+            
             <Col className="col-xs-12 mb-3 campFormApp">
               <Form.Group>
-                <Form.Label>{t("expedient_nom")}</Form.Label>
+                <Form.Label>{t("expedient_codiSia")}</Form.Label>
                 <Form.Control
                   type="text"
                   id="nom"
-                  placeholder="Nom"
+                  placeholder="Codi SIA"
                   maxLength={25}
                   tabIndex={501}
-                  value={this.state.filter_nom}
+                  value={this.state.filter_codiSia}
                   onChange={(e) => {
                     this.handleNomFilterParam(e.target.value);
                   }}
@@ -268,6 +282,7 @@ class ElsMeusExpedients extends React.Component<ElsMeusExpedientsProps, ElsMeusE
                 />
               </Form.Group>
             </Col>
+
             <Col className="col-xs-12 mb-3 campFormApp">
               <Form.Group>
                 <Form.Label>{t("expedient_fecha_inicio")}</Form.Label>
@@ -345,7 +360,7 @@ class ElsMeusExpedients extends React.Component<ElsMeusExpedientsProps, ElsMeusE
                     this.handleStateFilterParam(e.target.value);
                   }}
                 >
-                  <option value="E04" className="form-control form-control-sm selectMobil" selected={true}>
+                  <option value="" className="form-control form-control-sm selectMobil" selected={true}>
                     {t("expediente_estado_todos")}
                   </option>
                   <option value="E01" className="form-control form-control-sm selectMobil">
