@@ -393,13 +393,15 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             
             formDataFi = DateUtils.sumarRestarDiasFecha(formDataFi, 1);
 
-            log.info("registrosPorPagina: " + formRegPorPagina);
-            log.info("pageNumber: " + pageNumber);
+            log.info("llistat::registrosPorPagina: " + formRegPorPagina);
+            log.info("llistat::pageNumber: " + pageNumber);
+            final String nif = userData.getAdministrationID();
+            log.info("llistat::nif: " + nif);
             
             int elementsPerPagina = Integer.parseInt(formRegPorPagina);
 
             ResultadoBusquedaWs result;
-            result = getRegistres(userData.getAdministrationID(), getEntidad(), formNumero,
+            result = getRegistres(nif, getEntidad(), formNumero,
                     formDataInici, formDataFi, formEstat, Integer.parseInt(pageNumber), elementsPerPagina, locale);
 
             //@SuppressWarnings("unchecked")

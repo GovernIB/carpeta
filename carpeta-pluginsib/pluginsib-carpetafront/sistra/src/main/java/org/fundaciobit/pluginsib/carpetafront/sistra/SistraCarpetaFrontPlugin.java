@@ -117,7 +117,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
         super.registerUserData(userData);
 
-        String startURL =  absolutePluginRequestPath + "/" + INDEX_HTML_PAGE;
+        String startURL = absolutePluginRequestPath + "/" + INDEX_HTML_PAGE;
 
         log.info(" getStartUrl( ); => " + startURL);
         return startURL;
@@ -125,11 +125,11 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
     @Override
     public boolean isReactComponent() {
-//        try {
-//            return ("true".equals(getPropertyRequired(SISTRA_PROPERTY_BASE + "isreact")));
-//        } catch (Exception e) {
-//            return false;
-//        }
+        //        try {
+        //            return ("true".equals(getPropertyRequired(SISTRA_PROPERTY_BASE + "isreact")));
+        //        } catch (Exception e) {
+        //            return false;
+        //        }
         return true;
     }
 
@@ -148,7 +148,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
         if (query.startsWith(OBTENER_TIQUET)) {
 
-            obtenerTramiteSistra2(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
+            obtenerTiquetSistra2(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                     userData, administrationEncriptedID, locale, isGet);
 
         } else if (query.startsWith(INDEX_HTML_PAGE)) {
@@ -174,8 +174,6 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
     }
 
-
-
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
     // -------------------- INDEX -----------------------------
@@ -183,7 +181,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
     // --------------------------------------------------------------------------------------
 
     protected static final String INDEX_HTML_PAGE = "sistra_index.html";
-//    protected static final String DETALL_REACT_PAGE = "detallRegistreJson";
+    //    protected static final String DETALL_REACT_PAGE = "detallRegistreJson";
 
     public void index(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
@@ -220,7 +218,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
             map.put("pathtojsSistra", pathtojsSistra);
 
-//            String pathtoservei = absolutePluginRequestPath + "/" + LLISTAT_TRAMITS_PAGE;
+            //            String pathtoservei = absolutePluginRequestPath + "/" + LLISTAT_TRAMITS_PAGE;
             String pathtoservei = absolutePluginRequestPath + "/" + URL_REST_SERVICE;
 
             map.put("pathtoservei", pathtoservei);
@@ -260,17 +258,16 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
         Date formDataInici;
         Date formDataFi;
         String formEstat;
-        int pagina;
-        // int itemsPagina = 10;
 
         String formDataIniciStr = request.getParameter("dataInici");
         String formDataFiStr = request.getParameter("dataFi");
         formEstat = request.getParameter("estat");
-        pagina = Integer.parseInt(request.getParameter("pageNumber"));
-//        log.info("pageNumber: " + pagina);
+        //        int pagina;
+        //        pagina = Integer.parseInt(request.getParameter("pageNumber"));
+        //        log.info("pageNumber: " + pagina);
 
         /* Filtre número de registres per pàgina */
-        String formRegPorPagina = request.getParameter("registrosPorPagina");
+        //        String formRegPorPagina = request.getParameter("registrosPorPagina");
 
         try {
 
@@ -280,117 +277,110 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             formDataInici = sdf.parse(formDataIniciStr);
             formDataFi = sdf.parse(formDataFiStr);
 
-            Map<String, String> dades = new HashMap<String, String>();
             List<TramitePersistenteGenerico> tramitesGenericos = new ArrayList<TramitePersistenteGenerico>();
             List<TramitePersistenteGenerico> sortedTramit = new ArrayList<TramitePersistenteGenerico>();
 
             if (formDataInici == null) {
-                dades.put("error", getTraduccio("error.dataInici.null", locale));
-            } else {
-                if (formDataFi == null) {
-                    dades.put("error", getTraduccio("error.dataFi.null", locale));
-                } else {
-                    if (formEstat == null) {
-                        dades.put("error", getTraduccio("error.estat.null", locale));
-                    } else {
-                        log.info("Consulta  resultats a sistra per dataInici:" + formDataInici + " | Data fi: "
-                                + formDataFi + " | Estat: " + formEstat);
 
-                        List<TramitePersistenteGenerico> tramits = null;
-
-                        formDataFi = DateUtils.sumarRestarDiasFecha(formDataFi, 1);
-
-                        String missatgeError = "";
-
-                        /* SISTRA1 */
-                        try {
-                            // Només fa la cerca a Sistra 1 dins els 3 darrers mesos a data d'avui
-                            Calendar primeraData = Calendar.getInstance();
-                            Date avui = new Date();
-                            primeraData.setTime(avui);
-                            primeraData.add(Calendar.MONTH, -3);
-
-                            boolean cercaSistra1 = false;
-
-                            if (primeraData.getTime().after(formDataInici)) {
-                                formDataInici = primeraData.getTime();
-                                if (formDataInici.equals(formDataFi) || formDataInici.before(formDataFi)) {
-                                    cercaSistra1 = true;
-                                }
-                            } else {
-                                cercaSistra1 = true;
-                            }
-
-                            if (cercaSistra1) {
-                                if (isDevelopment()) {
-                                    tramits = getTramitsDebug(formDataInici, formDataFi, userData.getAdministrationID(),
-                                            formEstat, locale, absolutePluginRequestPath);
-                                } else {
-                                    tramits = getTramits(formDataInici, formDataFi, userData.getAdministrationID(),
-                                            formEstat, locale, absolutePluginRequestPath);
-                                }
-                            }
-                        } catch (SOAPFaultException e) {
-                            tramits = null;
-
-                            // Controlar excepció Sistra1 dintre plugin de tramitació #478
-                            if (Configuracio.isCAIB()
-                                    && e.getMessage().contains("es.caib.zonaper.modelInterfaz.ExcepcionPAD")) {
-                                missatgeError = "";
-                            } else {
-                                missatgeError = "Sistra1: " + e.getMessage() + "\n";
-                            }
-
-                        }
-
-                        if (tramits != null) {
-                            tramitesGenericos.addAll(tramits);
-                        }
-
-                        /* SISTRA2 */
-                        try {
-                            if (isDevelopment()) {
-                                tramits = obtenerTramitesDebug(userData.getAdministrationID(), formDataInici,
-                                        formDataFi, formEstat, absolutePluginRequestPath);
-                            } else {
-                                tramits = obtenerTramites(userData.getAdministrationID(), formDataInici, formDataFi,
-                                        formEstat, absolutePluginRequestPath);
-                            }
-                        } catch (javax.ws.rs.client.ResponseProcessingException e) {
-                            tramits = null;
-
-                            log.error("Sistra2 - No hi ha tramits:" + e.getMessage(), e);
-                        } catch (Exception e) {
-                            tramits = null;
-                            missatgeError += "Sistra2: " + e.getMessage();
-                            log.error("Error Sistra2:" + missatgeError, e);
-                        }
-
-                        if (tramits != null) {
-                            tramitesGenericos.addAll(tramits);
-                        }
-
-                        // Ordenam tràmits a mostrar
-                        sortedTramit = tramitesGenericos.stream()
-                                .sorted(Comparator.comparing(TramitePersistenteGenerico::getFechaInicio).reversed())
-                                .collect(Collectors.toList());
-
-                    }
-                }
+                throw new Exception(getTraduccio("error.dataInici.null", locale));
             }
-            List<TramitePersistenteGenerico> tramitsPagina = new ArrayList<TramitePersistenteGenerico>();
 
-//            int calcul = (pagina * itemsPagina) + itemsPagina;
+            if (formDataFi == null) {
+                throw new Exception(getTraduccio("error.dataFi.null", locale));
+            }
+
+            if (formEstat == null) {
+                throw new Exception(getTraduccio("error.estat.null", locale));
+            }
+
+            log.info("Consulta  resultats a sistra per dataInici:" + formDataInici + " | Data fi: " + formDataFi
+                    + " | Estat: " + formEstat);
+
+            formDataFi = DateUtils.sumarRestarDiasFecha(formDataFi, 1);
+
+            //String missatgeError = "";
+
+            /* SISTRA1 */
+            try {
+                // Només fa la cerca a Sistra 1 dins els 3 darrers mesos a data d'avui
+                Calendar primeraData = Calendar.getInstance();
+                Date avui = new Date();
+                primeraData.setTime(avui);
+                primeraData.add(Calendar.MONTH, -3);
+
+                boolean cercaSistra1 = false;
+
+                if (primeraData.getTime().after(formDataInici)) {
+                    formDataInici = primeraData.getTime();
+                    if (formDataInici.equals(formDataFi) || formDataInici.before(formDataFi)) {
+                        cercaSistra1 = true;
+                    }
+                } else {
+                    cercaSistra1 = true;
+                }
+
+                if (cercaSistra1) {
+                    List<TramitePersistenteGenerico> tramits = null;
+                    if (isDevelopment()) {
+                        tramits = getTramitsDebug(formDataInici, formDataFi, userData.getAdministrationID(), formEstat,
+                                locale, absolutePluginRequestPath);
+                    } else {
+                        tramits = getTramits(formDataInici, formDataFi, userData.getAdministrationID(), formEstat,
+                                locale, absolutePluginRequestPath);
+                    }
+
+                    log.info(" Afegits " + tramits.size() + " tramits SISTRA 1 al llistat ...");
+
+                    tramitesGenericos.addAll(tramits);
+                }
+            } catch (SOAPFaultException e) {
+
+                // Controlar excepció Sistra1 dintre plugin de tramitació #478
+                if (Configuracio.isCAIB() && e.getMessage().contains("es.caib.zonaper.modelInterfaz.ExcepcionPAD")) {
+
+                    final String msg = "Sistra1 Ignoram Error: " + e.getMessage() + " ...\n";
+                    log.error(msg);
+                } else {
+                    final String msg = "Sistra1 Error: " + e.getMessage() + "\n";
+                    log.error(msg, e);
+                    throw new Exception(msg, e);
+                }
+
+            }
+
+            /* SISTRA2 */
+            try {
+                List<TramitePersistenteGenerico> tramits = null;
+                if (isDevelopment()) {
+                    tramits = obtenerTramitesDebug(userData.getAdministrationID(), formDataInici, formDataFi, formEstat,
+                            absolutePluginRequestPath);
+                } else {
+                    tramits = obtenerTramites(userData.getAdministrationID(), formDataInici, formDataFi, formEstat,
+                            absolutePluginRequestPath);
+                }
+                tramitesGenericos.addAll(tramits);
+                log.info(" Afegits " + tramits.size() + " tramits SISTRA 2 al llistat ...");
+            } catch (javax.ws.rs.client.ResponseProcessingException e) {
+                final String msg = "Sistra2 - No hi ha tramits:" + e.getMessage();
+                log.error(msg, e);
+                throw new Exception(msg, e);
+            } catch (Exception e) {
+                final String msg = "Error desconegut en Sistra2: " + e.getMessage();
+                log.error(msg, e);
+                throw new Exception(msg, e);
+            }
+
+            // Ordenam tràmits a mostrar
+            sortedTramit = tramitesGenericos.stream()
+                    .sorted(Comparator.comparing(TramitePersistenteGenerico::getFechaInicio).reversed())
+                    .collect(Collectors.toList());
+
+            List<TramitePersistenteGenerico> tramitsPagina = sortedTramit;
+            /*List<TramitePersistenteGenerico> tramitsPagina = new ArrayList<TramitePersistenteGenerico>();
             int calcul = (pagina * Integer.parseInt(formRegPorPagina)) + Integer.parseInt(formRegPorPagina);
-
-//            if(sortedTramit.size() > 0) {
-//                if (calcul < sortedTramit.size()) {
-//                    tramitsPagina = sortedTramit.subList(pagina * itemsPagina, (pagina * itemsPagina) + itemsPagina);
-//                } else {
-//                    tramitsPagina = sortedTramit.subList(pagina * itemsPagina, sortedTramit.size());
-//                }
-//            }
-
+            
+            
+            
             if (sortedTramit.size() > 0) {
                 if (calcul < sortedTramit.size()) {
                     tramitsPagina = sortedTramit.subList(pagina * Integer.parseInt(formRegPorPagina),
@@ -400,17 +390,19 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
                             sortedTramit.size());
                 }
             }
+            */
 
             Map<String, Object> infoTramits = new HashMap<String, Object>();
             infoTramits.put("tramits", tramitsPagina);
-            infoTramits.put("totalRegistres", sortedTramit.size());
-//            infoTramits.put("registresPagina", itemsPagina);
-            infoTramits.put("registresPagina", formRegPorPagina);
+            //            infoTramits.put("totalRegistres", sortedTramit.size());
+            //            infoTramits.put("registresPagina", formRegPorPagina);
 
             Gson gson = new Gson();
             String json = gson.toJson(infoTramits);
 
-            log.info("JSON: " + json);
+            if (isDevelopment()) {
+              log.info("TRAMITS SISTRA JSON:\n" + json);
+            }
 
             try {
 
@@ -435,8 +427,6 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
     // ------------------- U T I L S  ----------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
-
-
 
     public boolean isDevelopment() {
         return "true".equals(getProperty(SISTRA_PROPERTY_BASE + "development"));
@@ -481,7 +471,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             // Només mostram els de tipus ENVIO, PREENVIO i PREREGISTRO
             List<TipoElementoExpediente> coms = new ArrayList<TipoElementoExpediente>();
 
-//            if (finalizado.equals("R")) {
+            //            if (finalizado.equals("R")) {
             if (finalizado.equals("S")) {
                 coms.add(TipoElementoExpediente.REGISTRO);
             } else if (finalizado.equals("P")) {
@@ -533,7 +523,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
                 if (finalizado.equals("A") || ((((estaPendent && finalizado.equals("N") && !tpg.esMostraModal())
                         || (!estaPendent && finalizado.equals("S")))
                         && item.getTipo() != TipoElementoExpediente.REGISTRO)) ||
-//                		(finalizado.equals("R") && item.getTipo() == TipoElementoExpediente.REGISTRO) ||
+                //                		(finalizado.equals("R") && item.getTipo() == TipoElementoExpediente.REGISTRO) ||
                         (finalizado.equals("S") && item.getTipo() == TipoElementoExpediente.REGISTRO)
                         || (finalizado.equals("P") && estaPendent)) {
                     tramits.add(tpg);
@@ -663,17 +653,13 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
         if (tramitesFinalizados != null && !tramitesFinalizados.isEmpty()) {
             for (RTramiteFinalizado tf : tramitesFinalizados) {
-//        		if ((finalizado.equals("A") || finalizado.equals("R"))) {
+                //        		if ((finalizado.equals("A") || finalizado.equals("R"))) {
                 if ((finalizado.equals("A") || finalizado.equals("S"))) {
                     TramitePersistenteGenerico tpg = new TramitePersistenteGenerico(tf, 2);
                     tpg.setUrl(tpg.getNumero());
                     tramits.add(tpg);
                 }
             }
-        }
-
-        if (tramits.size() < 1) {
-            tramits = null;
         }
 
         return tramits;
@@ -686,7 +672,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
                 absolutePluginRequestPath);
 
         if (tramits == null || tramits.isEmpty()) {
-            tramits = null;
+            tramits = new ArrayList<TramitePersistenteGenerico>();
             log.info("SISTRA2 TRAMITES NULL o EMPTY: " + tramits);
         } else {
             int x = 1;
@@ -768,15 +754,17 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
     protected static final String OBTENER_TIQUET = "tiquetAcceso";
 
-    public void obtenerTramiteSistra2(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+    public void obtenerTiquetSistra2(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet) {
 
+        String tramitID = request.getParameter("tramite");
+        log.error("Obtenint tiquet accès Sistra 2: TRAMITEID => " + tramitID);
         try {
 
             if (isDevelopment()) {
                 log.info("==================  OBTENER TIQUET ACCESO ==========================");
-                log.info("REQUEST TRAMITE: " + request.getParameter("tramite"));
+                log.info("REQUEST TRAMITE: " + tramitID);
                 log.info("Nombre: " + userData.getName());
                 log.info("Apellido1: " + userData.getSurname1());
                 log.info("Apellido2: " + userData.getSurname2());
@@ -786,7 +774,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
                 log.info("=====================================================================");
             }
 
-            String url = obtenerTiquetAccesoSistra2(request.getParameter("tramite"), userData);
+            String url = obtenerTiquetAccesoSistra2(tramitID, userData);
             response.sendRedirect(url);
 
         } catch (Exception e) {
@@ -833,6 +821,9 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
         String url = client.target(getPropertyRequired(SISTRA2_PROPERTY_BASE + "url") + "/ticketAcceso")
                 .request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(infoTicket, MediaType.APPLICATION_JSON), String.class);
+
+        // XYZ ZZZ
+        log.info("URL TIQUET: " + url);
 
         if (isDevelopment()) {
             log.info("URL TIQUET: " + url);

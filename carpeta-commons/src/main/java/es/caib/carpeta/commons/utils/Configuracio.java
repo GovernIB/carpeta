@@ -20,6 +20,13 @@ public class Configuracio implements Constants {
     private static final Properties fileProperties = new Properties();
 
     private static final Properties fileAndSystemProperties = new Properties();
+    
+    
+    
+    public static final void resetFilePropertiesCache() {
+        fileProperties.clear();
+        fileAndSystemProperties.clear();
+    }
 
     /*
      * Només agafa les Propietats definides dins carpeta.system.properties Seguim

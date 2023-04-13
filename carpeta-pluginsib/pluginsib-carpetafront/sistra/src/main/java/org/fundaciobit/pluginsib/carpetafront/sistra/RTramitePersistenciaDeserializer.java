@@ -4,19 +4,21 @@ import javax.json.bind.serializer.DeserializationContext;
 import javax.json.bind.serializer.JsonbDeserializer;
 import javax.json.stream.JsonParser;
 
+import org.apache.log4j.Logger;
+
 import es.caib.sistramit.rest.api.externa.v1.RTramitePersistencia;
 
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.TimeZone;
-import java.util.logging.Logger;
+
 
 import static javax.json.stream.JsonParser.Event;
 
 public class RTramitePersistenciaDeserializer implements JsonbDeserializer<RTramitePersistencia> {
 	
-	private static final Logger logger = Logger.getLogger(RTramitePersistenciaDeserializer.class.getName());
+	private static final org.apache.log4j.Logger logger = Logger.getLogger(RTramitePersistenciaDeserializer.class);
 
     @Override
     public RTramitePersistencia deserialize(JsonParser parser, DeserializationContext ctx, Type rtType) {
@@ -61,7 +63,7 @@ public class RTramitePersistenciaDeserializer implements JsonbDeserializer<RTram
             }
         	
         }catch (ParseException e) {
-        	logger.info("ERROR RTramitePersistencia: " + e.getMessage()); 
+        	logger.error("ERROR RTramitePersistencia: " + e.getMessage()); 
         }
         
         return tramite;

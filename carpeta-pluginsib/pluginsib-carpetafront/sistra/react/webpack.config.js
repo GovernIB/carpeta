@@ -1,45 +1,29 @@
 const path = require("path");
 
 const config = {
-  entry: "./src/main.js",
+  entry: "./src/main.tsx",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "sistra_reactjs_main.js",
   },
-  
-  mode: 'production',
-
-	resolve: {
-		fallback: {
-			url: false,
-			http: require.resolve('stream-http'),
-      https: require.resolve('https-browserify'),
-			buffer: false,
-			stream: false,
-			assert: false,
-      crypto: false,
-			zlib: false,
-			util: false,
-			tty: false,
-			os: false,
-		}
-	},
+  target: "node",
+  mode: "production",
+  //mode: "development",
+  resolve: {
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
+  },
 
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
+        include: path.resolve(__dirname, "src"),
         use: [
           {
-            loader: "babel-loader",
+            loader: "ts-loader",
             options: {
-              presets: [
-                //"env",
-                "@babel/preset-react",
-                //"stage-2",
-                //"@babel/react"
-              ],
-              //"plugins": [["flow-runtime"], "transform-decorators-legacy"]
+              // skip typechecking for speed
+              transpileOnly: true,
             },
           },
         ],
@@ -47,6 +31,7 @@ const config = {
       // Load images.
       {
         test: /\.(gif|jpe?g|png)$/,
+        include: path.resolve(__dirname, "src"),
         use: [
           {
             loader: "url-loader?limit=25000",
@@ -60,13 +45,11 @@ const config = {
       // css files
       {
         test: /\.css$/i,
-        use: [
-			{ loader: "style-loader"},
-			{ loader: "css-loader" }
-		],
+        use: [{ loader: "style-loader" }, { loader: "css-loader" }],
       },
     ],
   },
 };
 
 module.exports = config;
+

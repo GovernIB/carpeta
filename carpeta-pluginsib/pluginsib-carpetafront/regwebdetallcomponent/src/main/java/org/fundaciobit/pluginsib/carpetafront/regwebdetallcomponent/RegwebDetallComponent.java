@@ -155,7 +155,7 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
     
     public void detallDeRegistreJson(String absolutePluginRequestPath,
             String relativePluginRequestPath, String query, HttpServletRequest request,
-            HttpServletResponse response, UserData userData, String administrationEncriptedID,
+            HttpServletResponse response, UserData userData2, String administrationEncriptedID,
             Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
     	
     	response.setContentType("application/json");
@@ -166,13 +166,15 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
     	Map<String, String> dades = new HashMap<String, String>();
     	
     	AsientoWs registre;
+    	final String nif = userData2.getAdministrationID();
+        log.info("detallregistre::nif: " + nif);
     	
     	try {
-    	
+    
 	        if (isDevelopment()) {
-	            registre = getDetallRegistreDebug(numeroRegistroFormateado, userData.getAdministrationID(), locale);
+	            registre = getDetallRegistreDebug(numeroRegistroFormateado,nif, locale);
 	        } else {
-	            registre = getDetallRegistre(numeroRegistroFormateado, userData.getAdministrationID(), locale);
+	            registre = getDetallRegistre(numeroRegistroFormateado, nif, locale);
 	        }
 	        
 	        if (registre != null) {

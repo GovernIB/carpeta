@@ -16,6 +16,9 @@ import com.google.gson.GsonBuilder;
 public class PluginLoginMock implements IPluginLogin {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
+    
+    
+    private static final String BASE_LOGIN_MOCK = "es.caib.carpeta.pluginsib.login.mock";
 
     @Override
     public String startAuthentication(String urlCallBackLoginOk, String urCallBackLoginError,
@@ -26,19 +29,25 @@ public class PluginLoginMock implements IPluginLogin {
 
     @Override
     public LoginInfo validateAuthenticationTicket(String ticket) throws Exception {
+        
+        
+        boolean refreshEveryTime= "true".equals(Configuracio.getProperty(BASE_LOGIN_MOCK + ".refreshpropertiesfiles"));
+        
+        if (refreshEveryTime) {
+            Configuracio.resetFilePropertiesCache();
+        }
 
-        String json = Configuracio.getProperty("es.caib.carpeta.pluginsib.login.mock.logininfo");
+        String json = Configuracio.getProperty(BASE_LOGIN_MOCK + ".logininfo");
 
         if (json == null || json.trim().length() == 0) {
             throw new Exception(
-                    "No s'ha definit la propietat 'es.caib.carpeta.pluginsib.login.mock.logininfo'");
+                    "No s'ha definit la propietat '" + BASE_LOGIN_MOCK + ".logininfo'");
         }
 
         Gson gson = new GsonBuilder().create();
 
         try {
             LoginInfo logininfo = gson.fromJson(json, LoginInfo.class);
-
             return logininfo;
         } catch (Exception e) {
             String msg = "Error no controlat deserialitzant una estructura json de la classe LoginInfo: "

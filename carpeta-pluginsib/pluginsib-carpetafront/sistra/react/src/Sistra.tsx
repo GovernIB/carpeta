@@ -1,50 +1,87 @@
-import React, { Component } from "react";
-import { withTranslation } from "react-i18next";
-import axios from "axios";
-import i18n from "./i18n";
-import DatePicker from "react-datepicker";
-import Table from "react-bootstrap/Table";
-import Pagination from "react-bootstrap/Pagination";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import ReactDOM from "react-dom";
-import { DetallRegistre } from "regwebdetallcomponentlib";
-
 /**
- *  @author jpernia
- *  @author anadal
+ * @author anadal
+ * @email anadal@fundaciobit.org
+ * @create date 2023-04-05 07:47:53
+ * @modify date 2023-04-05 07:47:53
+ * @desc [description]
  */
 
-class Sistra extends Component {
-  constructor(props) {
+import React from "react";
+import { WithTranslation, withTranslation } from "react-i18next";
+import axios from "axios";
+import i18n from "./i18n";
+
+import { DetallRegistre } from "regwebdetallcomponentlib";
+import {
+  CarpetaDatePicker,
+  CarpetaFormulariDeFiltre,
+  CarpetaFormulariDeFiltreItem,
+  RenderTable,
+  RenderTableData,
+  RenderTableReturn,
+  RowType,
+  TemplatePageCarpeta,
+} from "carpetacommonreactlib";
+
+
+interface SistraProps extends WithTranslation {
+  titles: any;
+  subtitles: any;
+  pathtoservei: string;
+  detallpathtoservei: string;
+}
+
+interface SistraState {
+  numeroRegistro: string | null;
+}
+
+interface Tramit {
+  index:number,
+  descripcionTramite: string;
+  fechaInicio: string;
+  pendiente: string;
+  numero: string;
+  url: string;
+  versionSistra: string;
+  mostraModal: boolean;
+  tipo: string;
+  estat: string;
+}
+
+class Sistra extends React.Component<SistraProps, SistraState> {
+
+  private filter_status: string;
+  private filter_startDate: Date;
+  private filter_endDate: Date;
+
+  private errorEnFiltre: boolean;
+
+  private columnsNom: string[];
+
+  constructor(props: SistraProps) {
+    super(props);
 
     console.log("SISTRA:: constructor ...");
 
-    super(props);
-
-    let startDateObj = new Date();
+    const startDateObj = new Date();
     const endDateObj = new Date();
     startDateObj.setMonth(endDateObj.getMonth() - 1);
 
+    // XYZ ZZZ
+    //startDateObj.setFullYear(endDateObj.getFullYear() - 3);
+
+    this.columnsNom = ["index", "descripcionTramite", "fechaInicio", "estat"];
+
+    this.filter_status = 'A';
+    this.filter_startDate = startDateObj;
+    this.filter_endDate = endDateObj;
+    this.errorEnFiltre = false;
+
     this.state = {
-      isLoaded: false,
-      data: null,
-      dataInici: startDateObj,
-      dataFi: endDateObj,
-      estat: "A",
-      pagination_active: 1,
-      pagination_total_items: 5,
-      total_items: 0,
-      numeroRegistro: null,
-      error: null,
-      filter_regPorPagina: 5,
-      cercaRegistres: 5,
-      formVisible: false,
+      numeroRegistro: null
     };
 
+    /*
     this.handleChangeDataInici = this.handleChangeDataInici.bind(this);
     this.handleChangeDataFi = this.handleChangeDataFi.bind(this);
     this.handleChangeEstat = this.handleChangeEstat.bind(this);
@@ -53,22 +90,33 @@ class Sistra extends Component {
     );
     this.handleSubmit = this.handleSubmit.bind(this);
     this.mostrarForm = this.mostrarForm.bind(this);
+    */
+
+    this.handleSubmitSearcher = this.handleSubmitSearcher.bind(this);
+
+    this.onChangeState = this.onChangeState.bind(this);
+    this.onChangeStartDate = this.onChangeStartDate.bind(this);
+    this.onChangeEndDate = this.onChangeEndDate.bind(this);
+
+    this.processarTramits = this.processarTramits.bind(this);
+
+    this.carregaDadesSistra = this.carregaDadesSistra.bind(this);
+
+    //this.dateFormat = this.onChangeState.bind(this);
+
     this.tornarDeDetallRegistre = this.tornarDeDetallRegistre.bind(this);
 
-    const getLocale = (locale) =>
-      require(`date-fns/locale/${sessionStorage.getItem(
-        "langActual"
-      )}/index.js`);
-    this.locale = getLocale(this.props.language);
+    this.onClickRow = this.onClickRow.bind(this);
+
+    //this.siNo = this.siNo.bind(this);
+    this.estatTramit = this.estatTramit.bind(this);
+    //this.nomEstat = this.nomEstat.bind(this);
 
     this.canviatIdioma = this.canviatIdioma.bind(this);
     i18n.on("languageChanged", this.canviatIdioma);
-
-    this.fechaInicio;
-    this.fechaFin;
-    this.estado;
   }
 
+  /*
   mostrarForm() {
     if (
       document
@@ -84,12 +132,31 @@ class Sistra extends Component {
       formVisible: true,
     });
   }
+*/
+componentDidMount() {}
 
-  canviatIdioma(lng) {
-    // console.log(" CANVIAT IDIOMA EN IniciPublic A ]" + lng+ "[");
-    this.componentDidMount();
+  onClickRow(pos: number, item: any): void {
+    console.log("Ssitra::onClickRow(" + pos + "," + item + ")  ");
+
+    let tramit: Tramit = item as Tramit;
+
+    if (tramit.numero !== "") {
+      //this.handleItemClick(tramit.numero);
+      this.setState({
+        numeroRegistro: tramit.numero,
+      });
+    } else if (tramit.numero === "" && tramit.pendiente && tramit.mostraModal) {
+      this.openModalConfirm(tramit.url);
+    } else if (tramit.numero === "" && (!tramit.pendiente || !tramit.mostraModal)) {
+      window.open(tramit.url, "_blank");
+    }
   }
 
+  canviatIdioma(_lng: string) {
+    this.forceUpdate();
+  }
+
+  /*
   handleChangeDataInici(e) {
     this.setState({
       ...this.state,
@@ -108,21 +175,104 @@ class Sistra extends Component {
       estat: e.target.value,
     });
   }
-  handleRegPorPaginaFilterParam(e) {
-    this.setState({
-      ...this.state,
-      filter_regPorPagina: e.target.value,
-      isLoaded: false,
-      error: null,
-      cercaRegistres: e.target.value,
+*/
+  handleSubmitSearcher(e: any): boolean {
+    console.log("Sistra::handleSubmitSearcher() inici");
+
+    e.preventDefault();
+
+    if (this.errorEnFiltre) {
+      const t = this.props.i18n.t;
+      window.alert(t("errorEnFiltre"));
+      return false;
+    }
+
+    console.log("Sistra::handleSubmitSearcher() final");
+
+    this.forceUpdate();
+
+    return true;
+  }
+
+  onChangeStartDate(newDate: Date, _oldDate: Date): boolean {
+    if (this.validate(newDate, this.filter_endDate)) {
+      this.filter_startDate = newDate;
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  onChangeEndDate(newDate: Date, _oldDate: Date): boolean {
+    if (this.validate(this.filter_startDate, newDate)) {
+      this.filter_endDate = newDate;
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  onChangeState(e: any) {
+    this.filter_status = e.target.value;
+  }
+
+  validate(startDate: Date, endDate: Date) {
+    console.log("Sistra::validate() ... Entra");
+
+    let errorInput = document.getElementById("errorContainer");
+
+    if (startDate.getTime() > endDate.getTime()) {
+      console.log("Sistra::validate() error");
+
+      if (errorInput) {
+        errorInput.style.display = "block";
+      }
+
+      this.errorEnFiltre = true;
+      return false;
+    } else {
+      console.log("Sistra::validate() ok");
+      if (errorInput) {
+        errorInput.style.display = "none";
+      }
+      this.errorEnFiltre = false;
+      return true;
+    }
+  }
+
+  processarTramits(data: any[]): Tramit[] {
+    let tramits: Tramit[] = [];
+
+    data.map(({ descripcionTramite, fechaInicio, pendiente, numero, url, versionSistra, mostraModal, tipo }, i) => {
+      {
+        let nouTramit: Tramit = {
+          index: i + 1,
+          descripcionTramite: descripcionTramite,
+          //fechaInicio:	this.dateFormat(fechaInicio),
+          fechaInicio: fechaInicio,
+          pendiente: pendiente,
+          numero: numero,
+          url: url,
+          versionSistra: versionSistra,
+          mostraModal: mostraModal,
+          tipo: tipo,
+          estat: this.estatTramit(pendiente, mostraModal, tipo, numero),
+        };
+        tramits.push(nouTramit);
+      }
     });
 
+    return tramits;
+  }
+
+  carregaDadesSistra(returnData: RenderTableReturn) {
+
+    console.log("Sistra::carregaDadesSistra() => Inici ...");
+
     const params = {
-      dataInici: this.state.dataInici,
-      dataFi: this.state.dataFi,
-      estat: this.state.estat,
-      registrosPorPagina: e.target.value,
-      pageNumber: 0,
+      dataInici: this.filter_startDate,
+      dataFi: this.filter_endDate,
+      estat: this.filter_status,
     };
 
     const url3 = this.props.pathtoservei;
@@ -130,16 +280,22 @@ class Sistra extends Component {
     axios
       .get(url3, { params: params })
       .then((response) => {
-        if (response.data != null) {
-          this.setState({
-            ...this.state,
-            data: response.data.tramits,
-            pagination_active: 1,
-            total_items: response.data.totalRegistres,
-            pagination_total_items: response.data.registresPagina,
-            isLoaded: true,
+        if (response.data == null) {
+          console.log(
+            "Sistra::carregaDadesSistra() => Error buit tramits? => " + response.data.tramits
+          );
+          let errorPantalla = "Tràmits és null .";
+          let data: RenderTableData = {
+            tableData: null,
+            error: errorPantalla,
+          };
+          returnData.returnDataFunction(data);
+        } else {
+          let data: RenderTableData = {
+            tableData: this.processarTramits(response.data.tramits),
             error: null,
-          });
+          };
+          returnData.returnDataFunction(data);
         }
       })
       .catch((error) => {
@@ -149,29 +305,22 @@ class Sistra extends Component {
           console.log("error.response.status: " + error.response.status);
           console.log("error.response.headers: " + error.response.headers);
         }
-        if (
-          JSON.stringify(error)
-            .toString()
-            .includes("Request failed with status code 500")
-        ) {
-          var errorPantalla = error.response.data.replace(
-            "<html><head><title>Error</title></head><body>",
-            ""
-          );
+        let errorPantalla;
+        if (JSON.stringify(error).toString().includes("Request failed with status code 500")) {
+          errorPantalla = error.response.data.replace("<html><head><title>Error</title></head><body>", "");
           errorPantalla = errorPantalla.replace("</body></html>", "");
-          this.setState({
-            error: errorPantalla,
-            isLoaded: true,
-          });
         } else {
-          this.setState({
-            error: JSON.stringify(error),
-            isLoaded: true,
-          });
+          errorPantalla = JSON.stringify(error);
         }
+        let data: RenderTableData = {
+          tableData: null,
+          error: errorPantalla,
+        };
+        returnData.returnDataFunction(data);
       });
   }
 
+  /*
   handlePagination(event, accio, isNumber, pag) {
     let newPageNumber = event.target.text;
     let pagActiva;
@@ -251,6 +400,7 @@ class Sistra extends Component {
         }
       });
   }
+  
 
   handleSubmit(e) {
     const { t } = this.props;
@@ -339,141 +489,11 @@ class Sistra extends Component {
       e.preventDefault();
     }
   }
+  */
 
-  componentDidMount() {
-    console.log("SISTRA::componentDidMount::1");
 
-    console.log(
-      "SISTRA::::componentDidMount props.numeroregistro => ]" +
-        props.numeroregistro +
-        "["
-    );
 
-    var numeroRegistro = props.numeroregistro;
-
-    console.log(
-      "SISTRA::componentDidMount numeroRegistro => ]" + numeroRegistro + "["
-    );
-
-    if (numeroRegistro && numeroRegistro == "") {
-      numeroRegistro = null;
-    }
-
-    console.log(
-      "SISTRA::componentDidMount numeroRegistro NETEJAT => ]" +
-        numeroRegistro +
-        "["
-    );
-
-    // DETALL DE REGISTRE via Parametre ...
-    if (numeroRegistro) {
-      console.log(
-        "SISTRA::componentDidMount cridant a Detall de Registre => ]" +
-          numeroRegistro +
-          "["
-      );
-      this.setState({
-        ...this.state,
-        isLoaded: false,
-        numeroRegistro: numeroRegistro,
-      });
-      return;
-    }
-
-    const getLocale = (locale) =>
-      require(`date-fns/locale/${sessionStorage.getItem(
-        "langActual"
-      )}/index.js`);
-    this.locale = getLocale(this.props.language);
-
-    this.setState({
-      ...this.state,
-      isLoaded: true,
-    });
-
-    const { t } = this.props;
-    let validatFormulari = this.validaFormulari();
-
-    if (validatFormulari) {
-      this.setState({
-        ...this.state,
-        isLoaded: false,
-      });
-
-      const url = this.props.pathtoservei;
-
-      const params = {
-        dataInici: this.state.dataInici,
-        dataFi: this.state.dataFi,
-        estat: this.state.estat,
-        registrosPorPagina: this.state.filter_regPorPagina,
-        pageNumber: 0,
-      };
-
-      this.fechaInicio = this.state.dataInici;
-      this.fechaFin = this.state.dataFi;
-      this.estado = this.state.estat;
-
-      axios
-        .get(url, { params: params })
-        .then((response) => {
-          this.setState({
-            ...this.state,
-            isLoaded: true,
-            pagination_active: 1,
-            error: null,
-          });
-
-          if (response.data != null) {
-            this.setState({
-              ...this.state,
-              data: response.data.tramits,
-              total_items: response.data.totalRegistres,
-              pagination_total_items: response.data.registresPagina,
-            });
-          } else {
-            this.setState({
-              ...this.state,
-              data: null,
-              total_items: 0,
-              pagination_total_items: 10,
-            });
-          }
-        })
-        .catch((error) => {
-          console.log(JSON.stringify(error));
-          if (error.response) {
-            console.log("error.response.data: " + error.response.data);
-            console.log("error.response.status: " + error.response.status);
-            console.log("error.response.headers: " + error.response.headers);
-          }
-          if (
-            JSON.stringify(error)
-              .toString()
-              .includes("Request failed with status code 500")
-          ) {
-            var errorPantalla = error.response.data.replace(
-              "<html><head><title>Error</title></head><body>",
-              ""
-            );
-            errorPantalla = errorPantalla.replace("</body></html>", "");
-            this.setState({
-              error: errorPantalla,
-              isLoaded: true,
-            });
-          } else {
-            this.setState({
-              error: JSON.stringify(error),
-              isLoaded: true,
-            });
-          }
-        });
-    } else {
-      e.preventDefault();
-    }
-  }
-
-  obrirTramit(url) {
+  obrirTramit(url: string) {
     var win = window.open(url, "_blank");
     if (win) {
       win.focus();
@@ -481,7 +501,7 @@ class Sistra extends Component {
       alert("Permeteu finestres emergents per a aquest lloc web");
     }
   }
-
+  /*
   validaFormulari() {
     const { t } = this.props;
 
@@ -512,8 +532,10 @@ class Sistra extends Component {
       return true;
     }
   }
-
+*/
+  /*
   componentDidUpdate() {
+    
     $("#dataInici").attr("tabindex", "501");
     $("#dataFi").attr("tabindex", "502");
 
@@ -658,30 +680,32 @@ class Sistra extends Component {
     $("tr").each(function(i) {
       $(this).removeAttr("role");
     });
-
-    /*
+*/
+  /*
         let detallRegistreContainer;
         if ( this.state.numeroRegistro != null ){
             detallRegistreContainer = <DetallRegistre pathtoservei={props.detallpathtoservei} numero={this.state.numeroRegistro} />;
             ReactDOM.render(detallRegistreContainer, document.getElementById('sistracontainer'));
         }
         */
-  }
-
-  handleItemClick(numeroRegistro) {
+  // }
+  /*
+  handleItemClick(numeroRegistro:string) {
     this.setState({
-      ...this.state,
-      isLoaded: false,
       numeroRegistro: numeroRegistro,
     });
   }
-
-  tornarDeDetallRegistre(e) {
-    this.handleSubmit(e);
+*/
+  tornarDeDetallRegistre(_e: any) {
+    //this.handleSubmit(e);
+    this.setState({
+      numeroRegistro: null,
+    });
   }
 
-  openModalConfirm(url) {
+  openModalConfirm(url: string) {
     const { t } = this.props;
+    // @ts-ignore
     $("body").append(
       '<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
         '<div class="modal-dialog" role="document">' +
@@ -712,14 +736,58 @@ class Sistra extends Component {
         "</div>"
     );
 
+    // @ts-ignore
     $("#myModal").modal("show");
   }
 
-  render() {
+  /*
+  siNo(variable: any) {
+    if (variable) {
+      return "S";
+    } else {
+      return "N";
+    }
+  }
+  */
 
+  estatTramit(pendiente: string, mostraModal: boolean, tipo: string, numero: string) {
+    if (pendiente) {
+      if (mostraModal) {
+        return this.props.i18n.t("sistraNoFinalizatPresencial"); //Pendent compareixença
+      } else {
+        return this.props.i18n.t("sistraNoFinalitzat"); // Inacabat
+      }
+    } else {
+      if (tipo === "REGISTRO" || numero !== "") {
+        return this.props.i18n.t("sistraFinalitzat"); // Registrat
+      } else {
+        return this.props.i18n.t("sistraFinalitzat"); // Finalitzat
+      }
+    }
+  }
+
+  /*
+  nomEstat(estat:string) {
+    if (estat === "A") {
+      return this.props.i18n.t("sistraTots");
+    } else if (estat === "S") {
+      return this.props.i18n.t("sistraFinalitzat");
+    } else if (estat === "N") {
+      return this.props.i18n.t("sistraNoFinalitzat");
+    } else if (estat === "P") {
+      return this.props.i18n.t("sistraNoFinalizatPresencial");
+    } else if (estat === "R") {
+      return this.props.i18n.t("sistraRegistrat");
+    } else {
+      return "--Valor Desconegut [" + estat + "]";
+    }
+  };
+*/
+
+  render() {
     console.log("SISTRA:: constructor ...");
 
-
+    /*
     $.dateOrder = function(dateObject) {
       var d = new Date(dateObject);
       var day = d.getDate();
@@ -770,30 +838,7 @@ class Sistra extends Component {
       return day + "-" + month + "-" + year + " " + hour + ":" + minute;
     };
 
-    $.siNo = function(variable) {
-      if (variable) {
-        return "S";
-      } else {
-        return "N";
-      }
-    };
-
-    $.estatTramit = function(pendiente, mostraModal, tipo, numero) {
-      if (pendiente) {
-        if (mostraModal) {
-          return t("sistraNoFinalizatPresencial"); //Pendent compareixença
-        } else {
-          return t("sistraNoFinalitzat"); // Inacabat
-        }
-      } else {
-        if (tipo === "REGISTRO" || numero !== "") {
-          return t("sistraFinalitzat"); // Registrat
-        } else {
-          return t("sistraFinalitzat"); // Finalitzat
-        }
-      }
-    };
-
+    
     $.dateFormatCerca = function(dateObject) {
       var d = new Date(dateObject);
       var day = d.getDate();
@@ -807,31 +852,20 @@ class Sistra extends Component {
       }
       return day + "-" + month + "-" + year;
     };
-
-    $.nomEstat = function(estat) {
-      if (estat === "A") {
-        return t("sistraTots");
-      } else if (estat === "S") {
-        return t("sistraFinalitzat");
-      } else if (estat === "N") {
-        return t("sistraNoFinalitzat");
-      } else if (estat === "P") {
-        return t("sistraNoFinalizatPresencial");
-      } else if (estat === "R") {
-        return t("sistraRegistrat");
-      }
-    };
-
+*/
+    const t = this.props.i18n.t;
+    let formulari;
+    /*
     const isLoaded = this.state.isLoaded;
 
-    const { t } = this.props;
+    
 
     var tamanyData = { width: "120px !important" };
     var cursorPointer = { cursor: "pointer" };
     var tamanyTaula = { width: "99%" };
 
     let content;
-    let formulari;
+    
 
     let taulaTramits;
     let detallRegistreContainer;
@@ -839,15 +873,17 @@ class Sistra extends Component {
     let criteris;
 
     let cardTramits = [];
+    */
 
     if (this.state.numeroRegistro != null) {
-      console.log("SISTRA:: detallpathtoservei= " + props.detallpathtoservei);
+      let numReg: string = this.state.numeroRegistro;
 
-      detallRegistreContainer = (
+      return (
         <DetallRegistre
-          pathtoservei={props.detallpathtoservei}
-          numero={this.state.numeroRegistro}
+          pathtoservei={this.props.detallpathtoservei}
+          numero={numReg}
           t={t}
+          axios={axios}
           tornarDeDetallRegistreFunc={this.tornarDeDetallRegistre}
         />
       );
@@ -855,16 +891,64 @@ class Sistra extends Component {
 
     formulari = (
       <>
-        <Form
-          id="fechaBusqueda"
-          style={{ marginBottom: "20px" }}
-          className="ocultarMobil"
-        >
-          <Container
-            style={{ width: "95%", paddingLeft: "0", margin: "0" }}
-            className="ampleTotalApp"
-          >
-            <Row>
+        <div className="row">
+          <div id="errorContainer" className="row pb-2 ml-3 mr-0 ocult">
+            <div className="alert alert-danger" role="alert" id="errorMsg">
+              {t("errorIniciMajorFinal")}
+            </div>
+          </div>
+        </div>
+
+        <CarpetaFormulariDeFiltre handleSubmitSearcher={this.handleSubmitSearcher} i18n={this.props.i18n}>
+          <>
+            <CarpetaFormulariDeFiltreItem label={t("sistraDataInici")}>
+              <CarpetaDatePicker
+                basename={"dataInici"}
+                defaultValue={this.filter_startDate}
+                onChangeDate={this.onChangeStartDate}
+                i18n={this.props.i18n}
+              />
+            </CarpetaFormulariDeFiltreItem>
+            <CarpetaFormulariDeFiltreItem label={t("sistraDataFi")}>
+              <CarpetaDatePicker
+                basename={"dataFi"}
+                defaultValue={this.filter_endDate}
+                onChangeDate={this.onChangeEndDate}
+                i18n={this.props.i18n}
+              />
+            </CarpetaFormulariDeFiltreItem>
+            <CarpetaFormulariDeFiltreItem label={t("sistraEstat")}>
+              <select
+                id="estado"
+                name="estado"
+                className="form-control form-control-sm focusIn font1App form-select"
+                tabIndex={504}
+                aria-labelledby="estado"
+                onChange={(e) => {
+                  this.onChangeState(e);
+                }}
+                value={this.filter_status}
+              >
+                <option value="A" className="form-control form-control-sm selectMobil">
+                  {t("sistraTots")}
+                </option>
+                <option value="S" className="form-control form-control-sm selectMobil">
+                  {t("sistraFinalitzat")}
+                </option>
+                <option value="N" className="form-control form-control-sm selectMobil">
+                  {t("sistraNoFinalitzat")}
+                </option>
+                <option value="P" className="form-control form-control-sm selectMobil">
+                  {t("sistraNoFinalizatPresencial")}
+                </option>
+              </select>
+            </CarpetaFormulariDeFiltreItem>
+          </>
+        </CarpetaFormulariDeFiltre>
+      </>
+    );
+
+    /*
               <Col className="col-xs-12 mb-3 campFormApp">
                 <Form.Group>
                   <Form.Label>{t("sistraDataInici")}</Form.Label>
@@ -975,49 +1059,12 @@ class Sistra extends Component {
                     >
                       {t("sistraNoFinalizatPresencial")}
                     </option>
-                    {/*<option value="R" className="form-control form-control-sm selectMobil" selected={this.state.estat === 'R'}>{t('sistraRegistrat')}</option>*/}
+                    
                   </Form.Select>
                 </Form.Group>
               </Col>
             </Row>
-            <Row style={{ width: "fit-content", display: "none" }}>
-              <Col className="col-xs-12 mb-3 campFormApp">
-                <Form.Group>
-                  <Form.Label>{t("registro_regPorPagina")}</Form.Label>
-                  <Form.Select
-                    id="regPorPagina"
-                    name="regPorPagina"
-                    className="form-control form-control-sm focusIn"
-                    value={this.state.filter_regPorPagina}
-                    tabindex="505"
-                    aria-labelledby="regPorPagina"
-                    style={{ color: "#666", borderRadius: "0.2rem" }}
-                    onChange={(e) => {
-                      this.handleRegPorPaginaFilterParam(e);
-                    }}
-                  >
-                    <option
-                      value="5"
-                      className="form-control form-control-sm selectMobil"
-                    >
-                      5
-                    </option>
-                    <option
-                      value="10"
-                      className="form-control form-control-sm selectMobil"
-                    >
-                      10
-                    </option>
-                    <option
-                      value="25"
-                      className="form-control form-control-sm selectMobil"
-                    >
-                      25
-                    </option>
-                  </Form.Select>
-                </Form.Group>
-              </Col>
-            </Row>
+            
             <Row>
               <div id="errorContainer" className="row pb-2 ml-3 mr-0 ocult">
                 <div
@@ -1044,9 +1091,9 @@ class Sistra extends Component {
             </Row>
           </Container>
         </Form>
-      </>
-    );
+              */
 
+    /*
     if (!isLoaded) {
       taulaTramits = "";
 
@@ -1101,7 +1148,8 @@ class Sistra extends Component {
         typeof this.state.total_items !== undefined &&
         typeof this.state.data !== undefined &&
         this.state.total_items !== 0
-      ) {
+      ) */ {
+      /*
         let paginationNumbers = [];
 
         let showMax = 5;
@@ -1563,9 +1611,31 @@ class Sistra extends Component {
         );
       }
     }
+    */
 
-    return (
-      <>
+      const columnsTitols = ['#', i18n.t("sistraTramit"), i18n.t("sistraData"), i18n.t("sistraEstat")];
+
+      return (
+        <TemplatePageCarpeta {...this.props} titles={this.props.titles} subtitles={this.props.subtitles} i18n={i18n}>
+          <>
+            {formulari}
+            <div className="float-left" style={{ width: "97%", position: "relative" }}>
+              <RenderTable
+                loadData={this.carregaDadesSistra}
+                columnNames={this.columnsNom}
+                columnTitles={columnsTitols}
+                rowType={RowType.EXTERNAL_LINK}
+                i18n={i18n}
+                onClickRow={this.onClickRow}
+              />
+            </div>
+          </>
+        </TemplatePageCarpeta>
+      );
+    }
+  }
+}
+/*
         <div className="titolPaginaApp visioMobil">
           {this.props.titles[i18n.language]}
         </div>
@@ -1626,9 +1696,6 @@ class Sistra extends Component {
           )}
           {this.state.numeroRegistro != null && detallRegistreContainer}
         </div>
-      </>
-    );
-  }
-}
+                */
 
 export default withTranslation()(Sistra);
