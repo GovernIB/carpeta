@@ -432,28 +432,26 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         //             La logica de "Menor" "Major" pot funcionar de manera diferent? Invertir no funciona.
 
         //filtreDataInici & filtreDataFi
-        /*
+
         log.info("ElsMeusExpedients ==>  FILTRE DATA INICI: ]" + filtreDataInici + "[");
         log.info("ElsMeusExpedients ==>  FILTRE DATA FI: ]" + filtreDataFi + "[");
-        
-        
-        if(filtreDataInici != null && !filtreDataInici.isBlank() && filtreDataFi != null && !filtreDataFi.isBlank()){
+
+        if (filtreDataInici != null && !filtreDataInici.isBlank() && filtreDataFi != null && !filtreDataFi.isBlank()) {
             ConsultaFiltre filter = new ConsultaFiltre();
             filter.setMetadada(MetadataConstants.ENI_FECHA_INICIO);
             filter.setOperacio(ConsultaOperacio.ENTRE);
-            
+
             String d1 = formatDateIso8601(DF.parse(filtreDataInici + " 00:00:00"));
             String d2 = formatDateIso8601(DF.parse(filtreDataFi + " 23:59:59"));
-            
+
             log.info("ElsMeusExpedients ==>  FILTRE DATA INICI: ]" + d1 + "[");
             log.info("ElsMeusExpedients ==>  FILTRE DATA FI: ]" + d2 + "[");
-            
+
             filter.setValorOperacio1(d1);
             filter.setValorOperacio2(d2);
-            
+
             filterList.add(filter);
         }
-        */
 
         int i = 1;
         do {
@@ -577,9 +575,12 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             return null;
         }
         //TimeZone tz = TimeZone.getTimeZone("UTC");
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        //DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+        SimpleDateFormat sdfAlfresco = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+
         //df.setTimeZone(tz);
-        return df.format(date);
+        return sdfAlfresco.format(date);
     }
 
     protected static TreeMap<String, TreeMap<String, String>> unidadesCache = new TreeMap<String, TreeMap<String, String>>();
