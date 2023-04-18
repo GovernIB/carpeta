@@ -9,7 +9,7 @@ import React from "react";
 
 interface CarpetaFormulariDeFiltreItemProps {
   children: JSX.Element;
-  label: string;
+  label?: string;
 }
 
 class CarpetaFormulariDeFiltreItem extends React.Component<CarpetaFormulariDeFiltreItemProps> {
@@ -21,7 +21,7 @@ class CarpetaFormulariDeFiltreItem extends React.Component<CarpetaFormulariDeFil
     return (
       <div className="col-xs-12 campFormApp col">
         <div>
-          <label className="form-label">{this.props.label}</label>
+          { this.props.label && <label className="form-label">{this.props.label}</label> }
           {this.props.children}
         </div>
       </div>

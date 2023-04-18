@@ -7,8 +7,9 @@
 import React from "react";
 interface CarpetaInputTextProps {
     id: string;
-    placeHolder: string;
+    placeHolder?: string;
     defaultValue?: string;
+    tabIndex?: number;
     onChangedText?(newText: string): void;
 }
 declare class CarpetaInputText extends React.Component<CarpetaInputTextProps> {

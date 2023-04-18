@@ -4,7 +4,7 @@ const config = {
 	entry: "./src/main.tsx",
 	output: {
 		path: path.resolve(__dirname, "dist"),
-		filename: "reactjs_main.js"
+		filename: "reactjs_main_pinbalmatricula.js"
 	},
 	target: "node",
   	mode: "production",

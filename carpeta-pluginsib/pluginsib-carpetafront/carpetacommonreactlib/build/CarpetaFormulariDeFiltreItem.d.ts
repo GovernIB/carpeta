@@ -7,7 +7,7 @@
 import React from "react";
 interface CarpetaFormulariDeFiltreItemProps {
     children: JSX.Element;
-    label: string;
+    label?: string;
 }
 declare class CarpetaFormulariDeFiltreItem extends React.Component<CarpetaFormulariDeFiltreItemProps> {
     constructor(props: CarpetaFormulariDeFiltreItemProps);

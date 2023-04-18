@@ -7,8 +7,6 @@
     "nomProcediment" : "Nom procediment",
     "expedientOrgans" : "Òrgans",
     "expedientObertura" : "Data",
-    "registroMostra":"Mostra ",
-    "registroRegistres":" elements",
     "expediente_estado_todos" : "Tots",
     "expediente_estado_1" : "Obert en tramitació",
     "expediente_estado_2" : "Tancat",
@@ -18,5 +16,7 @@
     "expedient_fecha_inicio" : "Data inici",
     "expedient_fecha_fin" : "Data de fi",
     "expedient_estat" : "Estat",
-    "carpeta_buscar" : "Cercau"
+
+    "errorIniciMajorFinal": "La data d'inici és major que la de fi",
+    "errorEnFiltre": "Hi ha errors en el filtre de cerca ..."
 }

@@ -341,39 +341,35 @@ class Regweb extends React.Component<RegwebProps, RegwebState> {
                 onChange={(e) => {
                   this.onChangeState(e);
                 }}
+                defaultValue={this.filter_status}
               >
                 <option
                   value="0"
-                  className="form-control form-control-sm selectMobil"
-                  selected={this.filter_status == 0}
+                  className="form-control form-control-sm selectMobil"                  
                 >
                   {t("registro_estado_todos")}
                 </option>
                 <option
                   value="1"
                   className="form-control form-control-sm selectMobil"
-                  selected={this.filter_status == 1}
                 >
                   {t("registro_estado_1")}
                 </option>
                 <option
                   value="2"
                   className="form-control form-control-sm selectMobil"
-                  selected={this.filter_status == 2}
                 >
                   {t("registro_estado_4")}
                 </option>
                 <option
                   value="3"
                   className="form-control form-control-sm selectMobil"
-                  selected={this.filter_status == 3}
                 >
                   {t("registro_estado_10")}
                 </option>
                 <option
                   value="4"
                   className="form-control form-control-sm selectMobil"
-                  selected={this.filter_status == 4}
                 >
                   {t("registro_estado_11")}
                 </option>

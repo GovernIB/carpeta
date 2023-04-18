@@ -43,11 +43,13 @@ import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
+import java.util.TimeZone;
 import java.util.TreeMap;
 
 /**
@@ -57,6 +59,8 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     public static final String EXPEDIENTS_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "expedients.";
     public static final long ACTUALITZACIO_MAP_ENTITATS_MS = 48 * 60 * 60 * 1000;
+
+    public static final DateFormat DF = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 
     /**
      *
@@ -320,8 +324,8 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             String filtreDataInici = request.getParameter("filtreDataInici");
             String filtreDataFi = request.getParameter("filtreDataFi");
 
-            ExpedientResposta resposta = getExpedientsPerAdministrationID(nif, consulta, locale,filtreNom,filtreCodiSia , filtreEstat,
-                    filtreDataInici, filtreDataFi);
+            ExpedientResposta resposta = getExpedientsPerAdministrationID(nif, consulta, locale, filtreNom,
+                    filtreCodiSia, filtreEstat, filtreDataInici, filtreDataFi);
 
             Gson gson = new Gson();
             String json = gson.toJson(resposta);
@@ -372,7 +376,8 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     }
 
     public ExpedientResposta getExpedientsPerAdministrationID(String nif, ExpedientConsulta consulta, Locale locale,
-            String filtreNom, String filtreCodiSia, String filtreEstat, String filtreDataInici, String filtreDataFi) throws Exception {
+            String filtreNom, String filtreCodiSia, String filtreEstat, String filtreDataInici, String filtreDataFi)
+            throws Exception {
 
         IArxiuPlugin arxiu = instanticatePluginArxiu();
 
@@ -387,63 +392,65 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             filter.setValorOperacio1(nif);
             filterList.add(filter);
         }
-        
+
         //S'introdueixen la resta de filtres:
         //System.out.println("XYZ ZZZ filtreCodiSia: " + filtreCodiSia);
         //System.out.println("XYZ ZZZ filtreEstat: " + filtreEstat);
         //System.out.println("XYZ ZZZ filtreDataInici: " + filtreDataInici);
         //System.out.println("XYZ ZZZ filtreDataFi: "+ filtreDataFi);
-        
+
         //XYZ ZZZ TODO Trobar metadada que filtri pel nom d'expedient.
-        //Filtre Nom:
-        /*if(filtreNom != null && !filtreNom.isBlank()){
-            System.out.println("XYZ ZZZ FiltreNom2: " + filtreNom);
+        //Filtre Nom:        
+        if (filtreNom != null && !filtreNom.isBlank()) {
             ConsultaFiltre filter = new ConsultaFiltre();
-            filter.setMetadada(MetadataConstants.);
+            filter.setMetadada("name");
             filter.setOperacio(ConsultaOperacio.CONTE);
             filter.setValorOperacio1(filtreNom);
             filterList.add(filter);
-        }*/
-        
-      //Filtre Codi SIA:
-        if(filtreCodiSia != null && !filtreCodiSia.isBlank()){
-            System.out.println("XYZ ZZZ FiltreNom2: " + filtreCodiSia);
+        }
+
+        //Filtre Codi SIA:
+        if (filtreCodiSia != null && !filtreCodiSia.isBlank()) {
             ConsultaFiltre filter = new ConsultaFiltre();
             filter.setMetadada(MetadataConstants.ENI_ID_TRAMITE); // Codi SIA
-            filter.setOperacio(ConsultaOperacio.IGUAL);
+            filter.setOperacio(ConsultaOperacio.CONTE);
             filter.setValorOperacio1(filtreCodiSia);
             filterList.add(filter);
         }
-        
+
         // filtreEstat
-        if(filtreEstat != null && !filtreEstat.isBlank()){
+        if (filtreEstat != null && !filtreEstat.isBlank()) {
             ConsultaFiltre filter = new ConsultaFiltre();
             filter.setMetadada(MetadataConstants.ENI_ESTADO_EXP);
-            filter.setOperacio(ConsultaOperacio.CONTE);
+            filter.setOperacio(ConsultaOperacio.IGUAL);
             filter.setValorOperacio1(filtreEstat);
             filterList.add(filter);
         }
-       
-      
+
         //XYZ ZZZ TODO Pareix que els filtres de dates no funcionen correctament. 
         //             Els parametres filtreDataInici i filtreDataFi estan en el format correcte?
         //             La logica de "Menor" "Major" pot funcionar de manera diferent? Invertir no funciona.
+
+        //filtreDataInici & filtreDataFi
         /*
-        //filtreDataInici
-        if(filtreDataInici != null && !filtreDataInici.isBlank()){
-            ConsultaFiltre filter = new ConsultaFiltre();
-            filter.setMetadada(MetadataConstants.ENI_FECHA_INICIO);
-            filter.setOperacio(ConsultaOperacio.MENOR);
-            filter.setValorOperacio1(filtreDataInici);
-            filterList.add(filter);
-        }
+        log.info("ElsMeusExpedients ==>  FILTRE DATA INICI: ]" + filtreDataInici + "[");
+        log.info("ElsMeusExpedients ==>  FILTRE DATA FI: ]" + filtreDataFi + "[");
         
-        // filtreDataFi
-        if(filtreDataFi != null && !filtreDataFi.isBlank()){
+        
+        if(filtreDataInici != null && !filtreDataInici.isBlank() && filtreDataFi != null && !filtreDataFi.isBlank()){
             ConsultaFiltre filter = new ConsultaFiltre();
             filter.setMetadada(MetadataConstants.ENI_FECHA_INICIO);
-            filter.setOperacio(ConsultaOperacio.MAJOR);
-            filter.setValorOperacio1(filtreDataFi);
+            filter.setOperacio(ConsultaOperacio.ENTRE);
+            
+            String d1 = formatDateIso8601(DF.parse(filtreDataInici + " 00:00:00"));
+            String d2 = formatDateIso8601(DF.parse(filtreDataFi + " 23:59:59"));
+            
+            log.info("ElsMeusExpedients ==>  FILTRE DATA INICI: ]" + d1 + "[");
+            log.info("ElsMeusExpedients ==>  FILTRE DATA FI: ]" + d2 + "[");
+            
+            filter.setValorOperacio1(d1);
+            filter.setValorOperacio2(d2);
+            
             filterList.add(filter);
         }
         */
@@ -519,11 +526,9 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                         ei.setExpedientEstat(this.getTraduccio("estat.expedient.3", locale));
                     } /*else {
                         ei.setExpedientEstat(this.getTraduccio("estat.expedient.0", locale));
-                    }*/
+                      }*/
 
-                    DateFormat df = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-
-                    ei.setExpedientObertura(df.format(em.getDataObertura()));
+                    ei.setExpedientObertura(DF.format(em.getDataObertura()));
 
                     List<String> organsList = em.getOrgans();
 
@@ -565,6 +570,16 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         return resposta;
 
+    }
+
+    private static String formatDateIso8601(Date date) {
+        if (date == null) {
+            return null;
+        }
+        //TimeZone tz = TimeZone.getTimeZone("UTC");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        //df.setTimeZone(tz);
+        return df.format(date);
     }
 
     protected static TreeMap<String, TreeMap<String, String>> unidadesCache = new TreeMap<String, TreeMap<String, String>>();

@@ -9,8 +9,9 @@ import React from "react";
 
 interface CarpetaInputTextProps {
   id: string;
-  placeHolder: string;
+  placeHolder?: string;
   defaultValue?: string;
+  tabIndex?:number;
   onChangedText?(newText: string): void;
 }
 
@@ -48,7 +49,7 @@ class CarpetaInputText extends React.Component<CarpetaInputTextProps> {
       <input
         placeholder={this.props.placeHolder}
         maxLength={25}
-        tabIndex={501}
+        tabIndex={this.props.tabIndex}
         type="text"
         id={this.props.id}
         readOnly={false}

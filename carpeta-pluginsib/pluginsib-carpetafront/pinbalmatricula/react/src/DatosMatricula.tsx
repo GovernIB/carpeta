@@ -1,995 +1,736 @@
-import React, { Component } from "react";
+import React from "react";
 import { withTranslation, WithTranslation } from "react-i18next";
 import axios from "axios";
 import i18n from "./i18n";
+
 import Form from "react-bootstrap/Form";
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import DatePicker from "react-datepicker";
-declare type FormControlElement = HTMLInputElement | HTMLTextAreaElement;
+
+import * as reactdetect from "react-device-detect";
+import {
+  CarpetaDatePicker,
+  CarpetaFormulariDeFiltre,
+  CarpetaFormulariDeFiltreItem,
+  CarpetaInputText,
+  TemplatePageCarpeta,
+} from "carpetacommonreactlib";
+
 /**
+ *  @author anadal
  *  @author jpernia
  */
 
 interface DatosMatriculaProps extends WithTranslation {
-    pathtoservei: string;
-    titles: any;
-    subtitles: any;
+  pathtoservei: string;
+  titles: any;
+  subtitles: any;
 }
 
 type DatosMatriculaState = {
-    isLoaded: boolean;
-    data: DatosMatriculaRespuesta | null;
-    documentAutenticat: string | null;
-    documentTitular: string | undefined;
-    dataNaixementTitular: Date | null;
-    nomTitular: string | undefined;
-    primerLlinatgeTitular: string | undefined;
-    segonLlinatgeTitular: string | undefined;
-    tipusDocumentTitular: string;
-    radioSelectedOption: string;
-    mostrarInfo: boolean;
-    tipusDocument: string;
-    locale: string;
-    error: boolean;
+  isLoaded: boolean;
+  data: DatosMatriculaRespuesta | null;
+  mostrarInfo: boolean;
+  error: boolean;
+  radioSelectedOption: string;
 };
 
 type DatosMatriculaRespuesta = {
-    codRespuesta: string;
-    fechaProceso: Date;
-    alumno: DatosMatriculaAlumno;
-    cursoMatriculaVigente: string;
-    cursoMatriculaFutura: string;
-    error: string;
+  codRespuesta: string;
+  fechaProceso: Date;
+  alumno: DatosMatriculaAlumno;
+  cursoMatriculaVigente: string;
+  cursoMatriculaFutura: string;
+  error: string;
 };
 
 type DatosMatriculaAlumno = {
-    nombre: string;
-    apellido1: string;
-    apellido2: string;
-    idTitular: DatosAlumnoIdTitular;
-    fechaNacimiento: Date;
+  nombre: string;
+  apellido1: string;
+  apellido2: string;
+  idTitular: DatosAlumnoIdTitular;
+  fechaNacimiento: Date;
 };
 
 type DatosAlumnoIdTitular = {
-    documentacion: string;
-    tipoDocumentacion: string;
+  documentacion: string;
+  tipoDocumentacion: string;
 };
 
-class DatosMatricula extends React.Component<
-    DatosMatriculaProps,
-    DatosMatriculaState
-> {
-    constructor(props: DatosMatriculaProps) {
-        super(props);
-        //XYZ ZZZ Falta revisar com setejar el locale
-        this.state = {
-                ...this.state,
-                isLoaded: false,
-                data: null,
-                documentAutenticat: sessionStorage.getItem('usuariDNI'),
-                documentTitular: undefined,
-                dataNaixementTitular: null,
-                nomTitular: undefined,
-                primerLlinatgeTitular: undefined,
-                segonLlinatgeTitular: undefined,
-                tipusDocumentTitular: '1',
-                radioSelectedOption: 'option1',
-                mostrarInfo: false,
-                error: false
-            };
+class DatosMatricula extends React.Component<DatosMatriculaProps, DatosMatriculaState> {
+  private documentAutenticat: string | null;
+  private documentTitular: string;
 
-        this.handleChangeDataNaixement = this.handleChangeDataNaixement.bind(this);
-        this.handleChangeDocument = this.handleChangeDocument.bind(this);
-        this.handleChangeTipusDocument = this.handleChangeTipusDocument.bind(this);
-        this.handleChangeNom = this.handleChangeNom.bind(this);
-        this.handleChangePrimerLlinatge =
-            this.handleChangePrimerLlinatge.bind(this);
-        this.handleChangeSegonLlinatge = this.handleChangeSegonLlinatge.bind(this);
-        this.handleChangeRadio = this.handleChangeRadio.bind(this);
-        this.mostrarDocument = this.mostrarDocument.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+  private nomTitular: string;
+  private primerLlinatgeTitular: string;
+  private segonLlinatgeTitular: string;
+  private dataNaixementTitular: Date | null;
 
-        this.canviatIdioma = this.canviatIdioma.bind(this);
-        i18n.on("languageChanged", this.canviatIdioma);
+  private tipusDocumentTitular: string;
 
-    }
+  private tipusDocument: string;
 
-    canviatIdioma() {
-        this.componentDidMount();
-    }
+  constructor(props: DatosMatriculaProps) {
+    super(props);
 
-    handleChangeDataNaixement(e: Date | null) {
-        $("#fechaNacimiento").removeClass("borderError");
-        this.setState({
-            ...this.state,
-            dataNaixementTitular: e,
-        });
-    }
-
-    handleChangeTipusDocument(e: React.ChangeEvent<HTMLSelectElement>) {
-        this.setState({
-            ...this.state,
-            tipusDocumentTitular: e.target.value,
-        });
-    }
-
-    handleChangeDocument(e: React.ChangeEvent<FormControlElement>) {
-        $("#dni").removeClass("borderError");
-        this.setState({
-            ...this.state,
-            documentTitular: e.target.value,
-        });
-    }
-
-    handleChangeNom(e: React.ChangeEvent<FormControlElement>) {
-        $("#nomTitular").removeClass("borderError");
-        this.setState({
-            ...this.state,
-            nomTitular: e.target.value,
-        });
-    }
-
-    handleChangePrimerLlinatge(e: React.ChangeEvent<FormControlElement>) {
-        $("#primerLliTitular").removeClass("borderError");
-        this.setState({
-            ...this.state,
-            primerLlinatgeTitular: e.target.value,
-        });
-    }
-
-    handleChangeSegonLlinatge(e: React.ChangeEvent<FormControlElement>) {
-        this.setState({
-            ...this.state,
-            segonLlinatgeTitular: e.target.value,
-        });
-    }
-
-    handleChangeRadio(e: React.ChangeEvent<HTMLSelectElement>) {
-        $("#errorMsg").html("");
-        $("#errorContainer").addClass("ocult");
-
-        this.setState({
-                ...this.state,
-                mostrarInfo: false,
-                documentTitular: undefined,
-                dataNaixementTitular: null,
-                nomTitular: undefined,
-                primerLlinatgeTitular: undefined,
-                segonLlinatgeTitular: undefined,
-                tipusDocumentTitular: '1',
-                radioSelectedOption: e.target.value
-        });
-    }
-
-    mostrarDocument() {
-        
-        const { t } = this.props;
-        return this.state.radioSelectedOption === "option1"
-            ? this.state.documentAutenticat
-            : this.state.radioSelectedOption === "option2"
-                ? this.state.documentTitular
-                : " " +
-                this.state.nomTitular +
-                " " +
-                this.state.primerLlinatgeTitular +
-                " " +
-                this.state.segonLlinatgeTitular +
-                " " +
-                this.dateFormat(this.state.dataNaixementTitular);
-    }
-
-    dateFormat = function (dateObject: Date | null) {
-        if (dateObject != null) {
-            var d = new Date(dateObject);
-            var day: string;
-            var month: string;
-            var year: string = d.getFullYear().toString();
-
-            if (d.getDate() < 10) {
-                day = "0" + d.getDate().toString();
-            } else {
-                day = d.getDate().toString();
-            }
-
-            if (d.getMonth() < 11) {
-                month = "0" + (d.getMonth() + 1).toString();
-            } else {
-                month = (d.getMonth() + 1).toString();
-            }
-
-            return day + "/" + month + "/" + year;
-        }
+    this.state = {
+      ...this.state,
+      isLoaded: true,
+      data: null,
+      radioSelectedOption: "option1",
+      mostrarInfo: false,
+      error: false,
     };
 
-    async handleSubmit(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-        const { t } = this.props;
-        let validatFormulari = this.validaFormulari();
+    this.documentAutenticat = sessionStorage.getItem("usuariDNI");
+    this.documentTitular = "";
+    this.dataNaixementTitular = null;
+    this.nomTitular = "";
+    this.primerLlinatgeTitular = "";
+    this.segonLlinatgeTitular = "";
+    this.tipusDocumentTitular = "1";
+    this.tipusDocument = "1";
 
-        if (validatFormulari) {
-            this.setState({
-                ...this.state,
-                isLoaded: false,
-            });
+    this.handleChangeDataNaixement = this.handleChangeDataNaixement.bind(this);
+    this.handleChangeDocument = this.handleChangeDocument.bind(this);
+    this.handleChangeTipusDocument = this.handleChangeTipusDocument.bind(this);
+    this.handleChangeNom = this.handleChangeNom.bind(this);
+    this.handleChangePrimerLlinatge = this.handleChangePrimerLlinatge.bind(this);
+    this.handleChangeSegonLlinatge = this.handleChangeSegonLlinatge.bind(this);
+    this.handleChangeRadio = this.handleChangeRadio.bind(this);
+    this.mostrarDocument = this.mostrarDocument.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSubmitSync = this.handleSubmitSync.bind(this);
 
-            e.preventDefault();
+    this.isToday = this.isToday.bind(this);
 
-            const url2 = this.props.pathtoservei;
+    this.dateFormat = this.dateFormat.bind(this);
 
-            const params = {
-                dataNaixementTitular: this.state.dataNaixementTitular,
-                documentTitular: this.state.documentTitular,
-                documentAutenticat: this.state.documentAutenticat,
-                tipusDocumentTitular: this.state.tipusDocumentTitular,
-                nomTitular: this.state.nomTitular,
-                primerLlinatgeTitular: this.state.primerLlinatgeTitular,
-                segonLlinatgeTitular: this.state.segonLlinatgeTitular,
-                radioSelectedOption: this.state.radioSelectedOption,
-            };
+    this.canviatIdioma = this.canviatIdioma.bind(this);
+    i18n.on("languageChanged", this.canviatIdioma);
+  }
 
-            await axios
-                .get(url2, { params: params })
-                .then((res) => {
-                    this.setState({
-                        ...this.state,
-                        isLoaded: true,
-                        mostrarInfo: true,
-                        error: false,
-                    });
+  componentDidMount() {}
 
-                    if (res.data != null) {
-                        this.setState({
-                            ...this.state,
-                            data: res.data,
-                        });
-                    } else {
-                        this.setState({
-                            ...this.state,
-                            data: null,
-                        });
-                    }
-                })
-                .catch((error) => {
-                    console.log("Error axios", error);
-                    this.setState({
-                        ...this.state,
-                        error: true,
-                    });
-                });
-        } else {
-            e.preventDefault();
-        }
+  canviatIdioma() {
+    this.forceUpdate();
+  }
+
+  handleChangeDataNaixement(newDate: Date, _oldDate: Date): boolean {
+    $("#fechaNacimiento").removeClass("borderError");
+    this.dataNaixementTitular = newDate;
+    return true;
+  }
+
+  handleChangeTipusDocument(e: React.ChangeEvent<HTMLSelectElement>) {
+    this.tipusDocumentTitular = e.target.value;
+  }
+
+  handleChangeDocument(nouValor: string) {
+    $("#dni").removeClass("borderError");
+    this.documentTitular = nouValor;
+  }
+
+  handleChangeNom(nouValor: string) {
+    $("#nomTitular").removeClass("borderError");
+    this.nomTitular = nouValor; // e.target.value;
+  }
+
+  handleChangePrimerLlinatge(nouValor: string) {
+    $("#primerLliTitular").removeClass("borderError");
+    this.primerLlinatgeTitular = nouValor; //e.target.value;
+  }
+
+  handleChangeSegonLlinatge(nouValor: string) {
+    $("#segonLliTitular").removeClass("borderError");
+    this.segonLlinatgeTitular = nouValor; //e.target.value;
+  }
+
+  handleChangeRadio(e: React.ChangeEvent<HTMLSelectElement>) {
+    $("#errorMsg").html("");
+    $("#errorContainer").addClass("ocult");
+
+    this.documentTitular = "";
+    this.dataNaixementTitular = new Date();
+    this.nomTitular = "";
+    this.primerLlinatgeTitular = "";
+    this.segonLlinatgeTitular = "";
+    this.tipusDocumentTitular = "1";
+
+    this.setState({
+      ...this.state,
+      mostrarInfo: false,
+      radioSelectedOption: e.target.value,
+    });
+  }
+
+  mostrarDocument() {
+    return this.state.radioSelectedOption === "option1"
+      ? this.documentAutenticat
+      : this.state.radioSelectedOption === "option2"
+      ? this.documentTitular
+      : " " +
+        this.nomTitular +
+        " " +
+        this.primerLlinatgeTitular +
+        " " +
+        this.segonLlinatgeTitular +
+        " " +
+        this.dateFormat(this.dataNaixementTitular);
+  }
+
+  dateFormat(dateObject: Date | null) {
+    if (dateObject != null) {
+      var d = new Date(dateObject);
+      var day: string;
+      var month: string;
+      var year: string = d.getFullYear().toString();
+
+      if (d.getDate() < 10) {
+        day = "0" + d.getDate().toString();
+      } else {
+        day = d.getDate().toString();
+      }
+
+      if (d.getMonth() < 11) {
+        month = "0" + (d.getMonth() + 1).toString();
+      } else {
+        month = (d.getMonth() + 1).toString();
+      }
+
+      return day + "/" + month + "/" + year;
+    } else {
+      return "";
     }
+  }
 
-    componentDidMount() {
-        
+  handleSubmitSync(e: any): boolean {
+    console.log("DatosMatricula::handleSubmitSync() ENTRA");
+
+    if (this.validaFormulari()) {
+      console.log("DatosMatricula::handleSubmitSync() Validat !!!!");
+      e.preventDefault();
+      this.handleSubmit();
+      return true;
+    } else {
+      console.log("DatosMatricula::handleSubmitSync() NO Validat !!!!");
+      e.preventDefault();
+      return false;
+    }
+  }
+
+  async handleSubmit() {
+    console.log("DatosMatricula::handleSubmit() ENTRA");
+
+    this.setState({
+      ...this.state,
+      isLoaded: false,
+    });
+
+    const url2 = this.props.pathtoservei;
+
+    const params = {
+      dataNaixementTitular: this.dataNaixementTitular,
+      documentTitular: this.documentTitular,
+      documentAutenticat: this.documentAutenticat,
+      tipusDocumentTitular: this.tipusDocumentTitular,
+      nomTitular: this.nomTitular,
+      primerLlinatgeTitular: this.primerLlinatgeTitular,
+      segonLlinatgeTitular: this.segonLlinatgeTitular,
+      radioSelectedOption: this.state.radioSelectedOption,
+    };
+
+    await axios
+      .get(url2, { params: params })
+      .then((res) => {
         this.setState({
-            ...this.state,
-            isLoaded: true,
+          ...this.state,
+          isLoaded: true,
+          mostrarInfo: true,
+          error: false,
         });
-    }
 
-    validaFormulari() {
-        const { t } = this.props;
-
-        if (this.state.radioSelectedOption === "option2") {
-            if (this.state.documentTitular === null) {
-                $("#errorMsg").html(t("pinbalMatriculaErrorDocument"));
-                $("#errorContainer").removeClass("ocult");
-                $("#dni").addClass("borderError");
-                return false;
-            }
-        } else if (this.state.radioSelectedOption === "option3") {
-            if (this.state.nomTitular === null) {
-                $("#errorMsg").html(t("pinbalMatriculaErrorNom"));
-                $("#errorContainer").removeClass("ocult");
-                $("#nomTitular").addClass("borderError");
-                return false;
-            }
-            if (this.state.primerLlinatgeTitular === null) {
-                $("#errorMsg").html(t("pinbalMatriculaErrorPrimerLLi"));
-                $("#errorContainer").removeClass("ocult");
-                $("#primerLliTitular").addClass("borderError");
-                return false;
-            }
-            if (this.state.dataNaixementTitular === null) {
-                $("#errorMsg").html(t("pinbalMatriculaErrorData"));
-                $("#errorContainer").removeClass("ocult");
-                $("#fechaNacimiento").addClass("borderError");
-                return false;
-            }
-        }
-
-        $("#errorMsg").html("");
-        $("#errorContainer").addClass("ocult");
-
-        $("#dni").removeClass("borderError");
-        $("#nomTitular").removeClass("borderError");
-        $("#primerLliTitular").removeClass("borderError");
-        $("#fechaNacimiento").removeClass("borderError");
-
-        return true;
-    }
-
-    componentDidUpdate() {
-        $("#radio1").attr("tabindex", "501");
-        $("#radio2").attr("tabindex", "502");
-        $("#radio3").attr("tabindex", "503");
-
-        $("#dni").attr("tabindex", "505");
-
-        $("#nomTitular").attr("tabindex", "506");
-        $("#primerLliTitular").attr("tabindex", "507");
-        $("#segonLliTitular").attr("tabindex", "508");
-        $("#fechaNacimiento").attr("tabindex", "509");
-
-        const { t } = this.props;
-
-        let content;
-        let alerta: JSX.Element | JSX.Element[];
-        let data = this.state.data;
-
-        if (data !== null) {
-            if (data.codRespuesta === "0") {
-                alerta = (
-                    <div className="alert alert-success" role="alert">
-                        <>
-                            {t("pinbalMatriculaFecha")} {data.fechaProceso} :{" "}
-                            {t("pinbalMatriculaCodigoInicio")} {this.mostrarDocument()}{" "}
-                            {t("pinbalMatriculaCodigo0")}
-                        </>
-                    </div>
-                );
-
-                let nom;
-                let llinatge1;
-                let llinatge2;
-                let document;
-                let dataNaixe;
-                let cursVigent;
-                let cursFutur;
-
-                if (data.alumno.nombre !== undefined) {
-                    nom = (
-                        <div className="pt-2">
-                            <dt className="col-sm-3">{t("pinbalMatriculaNom")}</dt>
-                            <dd className="col-sm-7">{data.alumno.nombre}</dd>
-                        </div>
-                    );
-                }
-                if (data.alumno.apellido1 !== undefined) {
-                    llinatge1 = (
-                        <div className="pt-2">
-                            <dt className="col-sm-3">{t("pinbalMatriculaApellido1")}</dt>
-                            <dd className="col-sm-7">{data.alumno.apellido1}</dd>
-                        </div>
-                    );
-                }
-                if (data.alumno.apellido2 !== undefined) {
-                    llinatge2 = (
-                        <div className="pt-2">
-                            <dt className="col-sm-3">{t("pinbalMatriculaApellido2")}</dt>
-                            <dd className="col-sm-7">{data.alumno.apellido2}</dd>
-                        </div>
-                    );
-                }
-                if (data.alumno.idTitular.documentacion !== undefined) {
-                    document = (
-                        <div className="pt-2">
-                            <dt className="col-sm-3">{t("pinbalMatriculaDocument")}</dt>
-                            <dd className="col-sm-7">
-                                {data.alumno.idTitular.tipoDocumentacion}{" "}
-                                {data.alumno.idTitular.documentacion}
-                            </dd>
-                        </div>
-                    );
-                }
-                if (data.alumno.fechaNacimiento !== undefined) {
-                    dataNaixe = (
-                        <div className="pt-2">
-                            <dt className="col-sm-3">{t("pinbalMatriculaNaixement")}</dt>
-                            <dd className="col-sm-7">
-                                {data.alumno.fechaNacimiento.toString()}
-                            </dd>
-                        </div>
-                    );
-                }
-                if (data.cursoMatriculaVigente !== undefined) {
-                    cursVigent = (
-                        <div className="pt-2">
-                            <dt className="col-sm-3">{t("pinbalMatriculaVigent")}</dt>
-                            <dd className="col-sm-7">{data.cursoMatriculaVigente}</dd>
-                        </div>
-                    );
-                }
-                if (data.cursoMatriculaFutura !== undefined) {
-                    cursFutur = (
-                        <div className="pt-2">
-                            <dt className="col-sm-3">{t("pinbalMatriculaFutura")}</dt>
-                            <dd className="col-sm-7">{data.cursoMatriculaFutura}</dd>
-                        </div>
-                    );
-                }
-
-                content = (
-                    <div className="contenedorInfoPersonal mt-2">
-                        <dl className="row">
-                            {nom}
-                            {llinatge1}
-                            {llinatge2}
-                            {document}
-                            {dataNaixe}
-                            {cursVigent}
-                            {cursFutur}
-                        </dl>
-                    </div>
-                );
-            } else if (data.codRespuesta === "") {
-                alerta = (
-                    <div className="alert alert-danger" role="alert">
-                        {t("pinbalMatriculaError")} : {data.error}
-                    </div>
-                );
-            } else if (data.codRespuesta === "1") {
-                alerta = (
-                    <div className="alert alert-danger" role="alert">
-                        <>
-                            {t("pinbalMatriculaFecha")} {data.fechaProceso} :{" "}
-                            {t("pinbalMatriculaCodigoInicio")} {this.mostrarDocument()}{" "}
-                            {t("pinbalMatriculaCodigo1")}
-                        </>
-                    </div>
-                );
-            } else if (data.codRespuesta === "2") {
-                alerta = (
-                    <div className="alert alert-warning" role="alert">
-                        <>
-                            {t("pinbalMatriculaFecha")} {data.fechaProceso} :{" "}
-                            {t("pinbalMatriculaCodigo2")} {this.mostrarDocument()}{" "}
-                            {t("pinbalMatriculaCodigoFin")}
-                        </>
-                    </div>
-                );
-            } else if (data.codRespuesta === "3") {
-                alerta = (
-                    <div className="alert alert-warning" role="alert">
-                        <>
-                            {t("pinbalMatriculaFecha")} {data.fechaProceso} :{" "}
-                            {t("pinbalMatriculaCodigo3")} {this.mostrarDocument()}{" "}
-                            {t("pinbalMatriculaCodigoFin")}
-                        </>
-                    </div>
-                );
-            }
-        }
-    }
-
-    render() {
-        const isLoaded = this.state.isLoaded;
-
-        const { t } = this.props;
-
-        let formulari;
-        let content;
-        let contentApp;
-        let alerta;
-
-        formulari = (
-            <>
-                <Form id="dadesMatricula" style={{ marginBottom: "20px" }}>
-                    {/*<Row style={{ width: 'fit-content'}}>*/}
-                    <Row className="columnReprendre">
-                        <Col md={4} xs={12} className="ajustaForm">
-                            <Form.Select
-                                id="radioOpcio"
-                                name="radioOpcio"
-                                className="form-control form-control-sm focusIn"
-                                value={this.state.radioSelectedOption}
-                                tabIndex={503}
-                                onChange={(e) => {
-                                    this.handleChangeRadio(e);
-                                }}
-                            >
-                                <option
-                                    value="option1"
-                                    selected={this.state.radioSelectedOption === "option1"}
-                                >
-                                    {t("pinbalMatriculaDadesPropies")}
-                                </option>
-                                <option
-                                    value="option2"
-                                    selected={this.state.radioSelectedOption === "option2"}
-                                >
-                                    {t("pinbalMatriculaFillDocument")}
-                                </option>
-                                <option
-                                    value="option3"
-                                    selected={this.state.radioSelectedOption === "option3"}
-                                >
-                                    {t("pinbalMatriculaFillData")}
-                                </option>
-                            </Form.Select>
-                        </Col>
-                    </Row>
-                    <Container
-                        style={{ width: "95%", paddingLeft: "0", margin: "0" }}
-                        className="columnReprendre"
-                    >
-                        {this.state.radioSelectedOption === "option2" && (
-                            <Row className="pt-2">
-                                <Col md={4} xs={12} className="ajustaForm maxW97">
-                                    <Form.Group>
-                                        <Form.Label id="tipoDocum">
-                                            {t("pinbalMatriculaTipusDocument")}
-                                        </Form.Label>
-                                        <Form.Select
-                                            id="tipusDocument"
-                                            name="tipusDocument"
-                                            className="form-control form-control-sm focusIn"
-                                            value={this.state.tipusDocument}
-                                            tabIndex={504}
-                                            aria-labelledby="tipoDocum"
-                                            onChange={(e) => {
-                                                this.handleChangeTipusDocument(e);
-                                            }}
-                                        >
-                                            <option
-                                                value="1"
-                                                selected={this.state.tipusDocument === "1"}
-                                            >
-                                                {t("pinbalMatriculaNIF")}
-                                            </option>
-                                            <option
-                                                value="2"
-                                                selected={this.state.tipusDocument === "2"}
-                                            >
-                                                {t("pinbalMatriculaNIE")}
-                                            </option>
-                                            <option
-                                                value="3"
-                                                selected={this.state.tipusDocument === "3"}
-                                            >
-                                                {t("pinbalMatriculaPassaport")}
-                                            </option>
-                                            <option
-                                                value="4"
-                                                selected={this.state.tipusDocument === "4"}
-                                            >
-                                                {t("pinbalMatriculaComunitari")}
-                                            </option>
-                                        </Form.Select>
-                                    </Form.Group>
-                                </Col>
-                                <Col md={4} xs={12} className="ajustaForm maxW97">
-                                    <Form.Group>
-                                        <Form.Label>{t("pinbalMatriculaDNI")}</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            id="dni"
-                                            name="dni"
-                                            maxLength={12}
-                                            tabIndex={505}
-                                            value={this.state.documentTitular}
-                                            onChange={(e) => {
-                                                this.handleChangeDocument(e);
-                                            }}
-                                            className="form-control form-control-sm focusIn"
-                                        />
-                                    </Form.Group>
-                                </Col>
-                            </Row>
-                        )}
-                        {this.state.radioSelectedOption === "option3" && (
-                            <>
-                                <Row className="pt-2">
-                                    <Col md={3} xs={12} className="ajustaForm">
-                                        <Form.Group>
-                                            <Form.Label
-                                                style={{ float: "left", paddingTop: "0.5em" }}
-                                            >
-                                                {t("pinbalMatriculaNomTitular")}
-                                            </Form.Label>
-                                            <Form.Control
-                                                type="text"
-                                                id="nomTitular"
-                                                tabIndex={506}
-                                                value={this.state.nomTitular}
-                                                onChange={(e) => {
-                                                    this.handleChangeNom(e);
-                                                }}
-                                                className="form-control form-control-sm focusIn"
-                                            />
-                                        </Form.Group>
-                                    </Col>
-                                    <Col md={3} xs={12} className="ajustaForm">
-                                        <Form.Group>
-                                            <Form.Label
-                                                style={{ float: "left", paddingTop: "0.5em" }}
-                                            >
-                                                {t("pinbalMatriculaPrimerLliTitular")}
-                                            </Form.Label>
-                                            <Form.Control
-                                                type="text"
-                                                id="primerLliTitular"
-                                                tabIndex={507}
-                                                value={this.state.primerLlinatgeTitular}
-                                                onChange={(e) => {
-                                                    this.handleChangePrimerLlinatge(e);
-                                                }}
-                                                className="form-control form-control-sm focusIn"
-                                            />
-                                        </Form.Group>
-                                    </Col>
-                                    <Col md={3} xs={12} className="ajustaForm">
-                                        <Form.Group>
-                                            <Form.Label
-                                                style={{ float: "left", paddingTop: "0.5em" }}
-                                            >
-                                                {t("pinbalMatriculaSegonLliTitular")}
-                                            </Form.Label>
-                                            <Form.Control
-                                                type="text"
-                                                id="segonLliTitular"
-                                                tabIndex={508}
-                                                value={this.state.segonLlinatgeTitular}
-                                                onChange={(e) => {
-                                                    this.handleChangeSegonLlinatge(e);
-                                                }}
-                                                className="form-control form-control-sm focusIn"
-                                            />
-                                        </Form.Group>
-                                    </Col>
-                                </Row>
-                                <Row className="pt-2">
-                                    <Col md={3} xs={12} className="ajustaForm">
-                                        <Form.Group>
-                                            <Form.Label
-                                                style={{ float: "left", paddingTop: "0.5em" }}
-                                            >
-                                                {t("pinbalMatriculaNaixement")}
-                                            </Form.Label>
-                                            <DatePicker
-                                                selected={this.state.dataNaixementTitular}
-                                                onChange={(e) => this.handleChangeDataNaixement(e)}
-                                                name="fechaNacimiento"
-                                                id="fechaNacimiento"
-                                                dateFormat="dd/MM/yyyy"
-                                                className="form-control form-control-sm estilCalendar focusIn"
-                                                locale={i18n.language}
-                                                showYearDropdown={true}
-                                                preventOpenOnFocus={true}
-                                                popperPlacement="top"
-                                            />
-                                        </Form.Group>
-                                    </Col>
-                                </Row>
-                            </>
-                        )}
-                        <Row>
-                            <div
-                                id="errorContainer"
-                                className="pb-2 pt-2 ml-3 mr-0 ocult"
-                                style={{ width: "100%" }}
-                            >
-                                <div
-                                    className="alert alert-danger"
-                                    role="alert"
-                                    id="errorMsg"
-                                />
-                            </div>
-                        </Row>
-                        <Row>
-                            <Button
-                                type="submit"
-                                className="btn btn-primary carpeta-btn ml-3 mt-2"
-                                onClick={(e) => {
-                                    this.handleSubmit(e);
-                                }}
-                                tabIndex={510}
-                            >
-                                {t("pinbalMatriculaCercaBoto")}
-                            </Button>
-                        </Row>
-                    </Container>
-                </Form>
-            </>
-        );
-
-        if (!isLoaded) {
-            alerta = "";
-            content = (
-                <div id="carregant" className="loader-container centrat ">
-                    <div className="loader" />
-                </div>
-            );
+        if (res.data != null) {
+          this.setState({
+            ...this.state,
+            data: res.data,
+          });
         } else {
-            const data = this.state.data;
-
-            if (this.state.error && data != null) {
-                alerta = "";
-                content = (
-                    <div className="alert alert-danger" role="alert">
-                        {data.error}
-                    </div>
-                );
-            } else {
-                if (data !== null && this.state.mostrarInfo) {
-                    if (data.codRespuesta === "0") {
-                        alerta = (
-                            <div className="alert alert-success" role="alert">
-                                <>
-                                    {t("pinbalMatriculaFecha")} {data.fechaProceso} :{" "}
-                                    {t("pinbalMatriculaCodigoInicio")} {this.mostrarDocument()}{" "}
-                                    {t("pinbalMatriculaCodigo0")}
-                                </>
-                            </div>
-                        );
-
-                        let nom;
-                        let llinatge1;
-                        let llinatge2;
-                        let document;
-                        let dataNaixe;
-                        let cursVigent;
-                        let cursFutur;
-
-                        if (data.alumno.nombre !== undefined) {
-                            nom = (
-                                <div className="pt-2">
-                                    <dt className="col-sm-3">{t("pinbalMatriculaNom")}</dt>
-                                    <dd className="col-sm-7">{data.alumno.nombre}</dd>
-                                </div>
-                            );
-                        }
-                        if (data.alumno.apellido1 !== undefined) {
-                            llinatge1 = (
-                                <div className="pt-2">
-                                    <dt className="col-sm-3">{t("pinbalMatriculaApellido1")}</dt>
-                                    <dd className="col-sm-7">{data.alumno.apellido1}</dd>
-                                </div>
-                            );
-                        }
-                        if (data.alumno.apellido2 !== undefined) {
-                            llinatge2 = (
-                                <div className="pt-2">
-                                    <dt className="col-sm-3">{t("pinbalMatriculaApellido2")}</dt>
-                                    <dd className="col-sm-7">{data.alumno.apellido2}</dd>
-                                </div>
-                            );
-                        }
-                        if (data.alumno.idTitular.documentacion !== undefined) {
-                            document = (
-                                <div className="pt-2">
-                                    <dt className="col-sm-3">{t("pinbalMatriculaDocument")}</dt>
-                                    <dd className="col-sm-7">
-                                        {data.alumno.idTitular.tipoDocumentacion}{" "}
-                                        {data.alumno.idTitular.documentacion}
-                                    </dd>
-                                </div>
-                            );
-                        }
-                        if (data.alumno.fechaNacimiento !== undefined) {
-                            dataNaixe = (
-                                <div className="pt-2">
-                                    <dt className="col-sm-3">{t("pinbalMatriculaNaixement")}</dt>
-                                    <dd className="col-sm-7">
-                                        {data.alumno.fechaNacimiento.toString()}
-                                    </dd>
-                                </div>
-                            );
-                        }
-                        if (data.cursoMatriculaVigente !== undefined) {
-                            cursVigent = (
-                                <div className="pt-2">
-                                    <dt className="col-sm-3">{t("pinbalMatriculaVigent")}</dt>
-                                    <dd className="col-sm-7">{data.cursoMatriculaVigente}</dd>
-                                </div>
-                            );
-                        }
-                        if (data.cursoMatriculaFutura !== undefined) {
-                            cursFutur = (
-                                <div className="pt-2">
-                                    <dt className="col-sm-3">{t("pinbalMatriculaFutura")}</dt>
-                                    <dd className="col-sm-7">{data.cursoMatriculaFutura}</dd>
-                                </div>
-                            );
-                        }
-
-                        content = (
-                            <div className="ocultarMobil">
-                                {alerta}
-                                <div className="contenedorInfoPersonal mt-2">
-                                    <dl className="row">
-                                        {nom}
-                                        {llinatge1}
-                                        {llinatge2}
-                                        {document}
-                                        {dataNaixe}
-                                        {cursVigent}
-                                        {cursFutur}
-                                    </dl>
-                                </div>
-                                ;
-                            </div>
-                        );
-
-                        contentApp = (
-                            <div
-                                className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil wAuto mt-5"
-                                tabIndex={510}
-                            >
-                                <div className="col-sm-1 float-left">
-                                    <span
-                                        className="oi oi-bell iconaFormApp"
-                                        title={t("pinbalMatriculaConsulta")}
-                                        style={{ verticalAlign: "sub" }}
-                                    />
-                                </div>
-                                <div className="col-sm-10 float-right">
-                                    {alerta}
-                                    {data.alumno.nombre && (
-                                        <p
-                                            className="card-text pl-1 mt-0"
-                                            style={{ color: "rgb(102, 102, 102)" }}
-                                        >
-                                            <b>{t("pinbalMatriculaNom")}: </b>
-                                            {data.alumno.nombre} {data.alumno.apellido1}{" "}
-                                            {data.alumno.apellido2}
-                                        </p>
-                                    )}
-                                    {data.alumno.idTitular.documentacion && (
-                                        <p
-                                            className="card-text pl-1 mt-0"
-                                            style={{ color: "rgb(102, 102, 102)" }}
-                                        >
-                                            <b>{t("pinbalMatriculaDocument")}: </b>
-                                            {data.alumno.idTitular.documentacion}
-                                        </p>
-                                    )}
-                                    {data.alumno.fechaNacimiento && (
-                                        <p
-                                            className="card-text pl-1 mt-0"
-                                            style={{ color: "rgb(102, 102, 102)" }}
-                                        >
-                                            <>
-                                                <b>{t("pinbalMatriculaNaixement")}: </b>
-                                                {data.alumno.fechaNacimiento}
-                                            </>
-                                        </p>
-                                    )}
-                                    {data.cursoMatriculaVigente && (
-                                        <p
-                                            className="card-text pl-1 mt-0"
-                                            style={{ color: "rgb(102, 102, 102)" }}
-                                        >
-                                            <b>{t("pinbalMatriculaVigent")}: </b>
-                                            {data.cursoMatriculaVigente}
-                                        </p>
-                                    )}
-                                    {data.cursoMatriculaFutura && (
-                                        <p
-                                            className="card-text pl-1 mt-0"
-                                            style={{ color: "rgb(102, 102, 102)" }}
-                                        >
-                                            <b>{t("pinbalMatriculaFutura")}: </b>
-                                            {data.cursoMatriculaFutura}
-                                        </p>
-                                    )}
-                                </div>
-                            </div>
-                        );
-                    } else if (data.codRespuesta === "") {
-                        alerta = (
-                            <div className="alert alert-danger" role="alert">
-                                {t("pinbalMatriculaError")} : {data.error}
-                            </div>
-                        );
-                        content = <div className="ocultarMobil">{alerta}</div>;
-                    } else if (data.codRespuesta === "1") {
-                        alerta = (
-                            <div className="alert alert-danger" role="alert">
-                                <>
-                                    {t("pinbalMatriculaFecha")} {data.fechaProceso} :{" "}
-                                    {t("pinbalMatriculaCodigoInicio")} {this.mostrarDocument()}{" "}
-                                    {t("pinbalMatriculaCodigo1")}
-                                </>
-                            </div>
-                        );
-                        content = <div className="ocultarMobil">{alerta}</div>;
-                    } else if (data.codRespuesta === "2") {
-                        alerta = (
-                            <div className="alert alert-warning" role="alert">
-                                <>
-                                    {t("pinbalMatriculaFecha")} {data.fechaProceso} :{" "}
-                                    {t("pinbalMatriculaCodigo2")} {this.mostrarDocument()}{" "}
-                                    {t("pinbalMatriculaCodigoFin")}
-                                </>
-                            </div>
-                        );
-                        content = <div className="ocultarMobil">{alerta}</div>;
-                    } else if (data.codRespuesta === "3") {
-                        alerta = (
-                            <div className="alert alert-warning" role="alert">
-                                <>
-                                    {t("pinbalMatriculaFecha")} {data.fechaProceso} :{" "}
-                                    {t("pinbalMatriculaCodigo3")} {this.mostrarDocument()}{" "}
-                                    {t("pinbalMatriculaCodigoFin")}
-                                </>
-                            </div>
-                        );
-                        content = <div className="ocultarMobil">{alerta}</div>;
-                    }
-
-                    contentApp = (
-                        <div
-                            className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil wAuto mt-5"
-                            tabIndex={510}
-                        >
-                            <div className="col-sm-1 float-left">
-                                <span
-                                    className="oi oi-bell iconaFormApp"
-                                    title={t("pinbalMatriculaConsulta")}
-                                    style={{ verticalAlign: "sub" }}
-                                />
-                            </div>
-                            <div className="col-sm-10 float-right">{alerta}</div>
-                        </div>
-                    );
-                }
-            }
+          this.setState({
+            ...this.state,
+            data: null,
+          });
         }
+      })
+      .catch((error) => {
+        console.log("Error axios", error);
+        this.setState({
+          ...this.state,
+          error: true,
+        });
+      });
+  }
 
-        return (
-            <>
-                <div className="titolPaginaApp visioMobil">
-                    {this.props.titles[i18n.language]}
-                </div>
-                <div className="infoNoMenu">
-                    <h2 className="titol h2 ocultarMobil">
-                        {this.props.titles[i18n.language]}
-                    </h2>
-                    <div className="col-md-12 border-0 float-left p-0">
-                        <p className="lh15 ocultarMobil">
-                            {this.props.subtitles[i18n.language]}{" "}
-                        </p>
-                        <div className="infoNoMenu">
-                            <div className="col-md-12 border-0 float-left p-0">
-                                {formulari}
-                                {/*{alerta}*/}
-                                {content}
-                                {contentApp}
-                                <div
-                                    className="col-md-12 border-0 float-left p-0"
-                                    id="botoTornarMatricula"
-                                    style={{ marginTop: "20px" }}
-                                >
-                                    <button
-                                        type="button"
-                                        data-toggle="modal"
-                                        onClick={() => {
-                                            window.location.href =
-                                                sessionStorage.getItem("pagTornar") || "";
-                                            sessionStorage.setItem(
-                                                "pagTornar",
-                                                sessionStorage.getItem("contextPath") || ""
-                                            );
-                                        }}
-                                        className="botoSuport botoTornauApp"
-                                        tabIndex={520}
-                                        aria-labelledby="botoTornarMatricula"
-                                    >
-                                        {t("pinbalMatriculaTornar")}
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </>
-        );
+  validaFormulari() {
+    const { t } = this.props;
+
+    console.log("DatosMatricula::() => this.state.radioSelectedOption = " + this.state.radioSelectedOption);
+
+    switch (this.state.radioSelectedOption) {
+      case "option2":
+        {
+          if (this.documentTitular === "") {
+            $("#errorMsg").html(t("pinbalMatriculaErrorDocument"));
+            $("#errorContainer").removeClass("ocult");
+            $("#dni").addClass("borderError");
+            return false;
+          }
+        }
+        break;
+      case "option3":
+        {
+          console.log("DatosMatricula::() => this.nomTitular = ]" + this.nomTitular + "[");
+          if (this.nomTitular === "") {
+            $("#errorMsg").html(t("pinbalMatriculaErrorNom"));
+            $("#errorContainer").removeClass("ocult");
+            $("#nomTitular").addClass("borderError");
+            return false;
+          }
+
+          console.log("DatosMatricula::() => this.primerLlinatgeTitular = ]" + this.primerLlinatgeTitular + "[");
+          if (this.primerLlinatgeTitular === "") {
+            $("#errorMsg").html(t("pinbalMatriculaErrorPrimerLLi"));
+            $("#errorContainer").removeClass("ocult");
+            $("#primerLliTitular").addClass("borderError");
+            return false;
+          }
+
+          if (this.dataNaixementTitular === null || this.isToday(this.dataNaixementTitular)) {
+            $("#errorMsg").html(t("pinbalMatriculaErrorData"));
+            $("#errorContainer").removeClass("ocult");
+            $("#fechaNacimiento").addClass("borderError");
+            return false;
+          }
+        }
+        break;
     }
+
+    $("#errorMsg").html("");
+    $("#errorContainer").addClass("ocult");
+
+    $("#dni").removeClass("borderError");
+    $("#nomTitular").removeClass("borderError");
+    $("#primerLliTitular").removeClass("borderError");
+    $("#fechaNacimiento").removeClass("borderError");
+
+    return true;
+  }
+
+  isToday(date: Date): boolean {
+    let today = new Date();
+
+    if (today.getDate() == date.getDate()) {
+      if (today.getMonth() == date.getMonth()) {
+        if (today.getFullYear() == date.getFullYear()) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  componentDidUpdate() {}
+
+  render() {
+    const isLoaded = this.state.isLoaded;
+
+    const { t } = this.props;
+
+    let formulari;
+    let content;
+    let alerta;
+
+    formulari = (
+      <CarpetaFormulariDeFiltre handleSubmitSearcher={this.handleSubmitSync} i18n={this.props.i18n}>
+        <>
+          <div style={{ marginRight: "15px", marginLeft: "15px" }}>
+            <Row className="columnReprendre" style={{ width: "fit-content" }}>
+              <CarpetaFormulariDeFiltreItem>
+                <select
+                  id="radioOpcio"
+                  name="radioOpcio"
+                  className="form-control form-control-sm focusIn font1App form-select"
+                  value={this.state.radioSelectedOption}
+                  tabIndex={503}
+                  onChange={(e) => {
+                    this.handleChangeRadio(e);
+                  }}
+                >
+                  <option value="option1" selected={this.state.radioSelectedOption === "option1"}>
+                    {t("pinbalMatriculaDadesPropies")}
+                  </option>
+                  <option value="option2" selected={this.state.radioSelectedOption === "option2"}>
+                    {t("pinbalMatriculaFillDocument")}
+                  </option>
+                  <option value="option3" selected={this.state.radioSelectedOption === "option3"}>
+                    {t("pinbalMatriculaFillData")}
+                  </option>
+                </select>
+              </CarpetaFormulariDeFiltreItem>
+            </Row>
+
+            {this.state.radioSelectedOption === "option2" && (
+              <Row className="pt-2" style={{ paddingTop: "0.5em" }}>
+                {/*  <CarpetaFormulariDeFiltreItem label={t("pinbalMatriculaTipusDocument")}> */}
+
+                <Col>
+                  <Form.Group>
+                    <Form.Label id="tipoDocum">{t("pinbalMatriculaTipusDocument")}</Form.Label>
+
+                    <select
+                      id="tipusDocument"
+                      name="tipusDocument"
+                      className="form-control form-control-sm focusIn"
+                      defaultValue={this.tipusDocument}
+                      tabIndex={504}
+                      aria-labelledby="tipoDocum"
+                      onChange={(e) => {
+                        this.handleChangeTipusDocument(e);
+                      }}
+                    >
+                      <option value="1" selected={this.tipusDocument === "1"}>
+                        {t("pinbalMatriculaNIF")}
+                      </option>
+                      <option value="2" selected={this.tipusDocument === "2"}>
+                        {t("pinbalMatriculaNIE")}
+                      </option>
+                      <option value="3" selected={this.tipusDocument === "3"}>
+                        {t("pinbalMatriculaPassaport")}
+                      </option>
+                      <option value="4" selected={this.tipusDocument === "4"}>
+                        {t("pinbalMatriculaComunitari")}
+                      </option>
+                    </select>
+                    {/*  </CarpetaFormulariDeFiltreItem> */}
+                  </Form.Group>
+                </Col>
+
+                <Col>
+                  <Form.Group>
+                    <Form.Label>{t("pinbalMatriculaDNI")}</Form.Label>
+
+                    {/*}  <CarpetaFormulariDeFiltreItem label={t("pinbalMatriculaDNI")}>*/}
+
+                    <CarpetaInputText
+                      id="dni"
+                      tabIndex={505}
+                      defaultValue={this.documentTitular}
+                      onChangedText={this.handleChangeDocument}
+                    />
+                  </Form.Group>
+                </Col>
+              </Row>
+            )}
+            {this.state.radioSelectedOption === "option3" && (
+              <>
+                <Row className="pt-2" style={{ paddingTop: "0.5em" }}>
+                  <Col md={3} xs={12} className="ajustaForm">
+                    <Form.Group>
+                      <Form.Label style={{ float: "left" }}>{t("pinbalMatriculaNomTitular")}</Form.Label>
+
+                      <CarpetaInputText
+                        id="nomTitular"
+                        tabIndex={506}
+                        defaultValue={this.nomTitular}
+                        onChangedText={this.handleChangeNom}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col md={3} xs={12} className="ajustaForm">
+                    <Form.Group>
+                      <Form.Label style={{ float: "left" }}>{t("pinbalMatriculaPrimerLliTitular")}</Form.Label>
+
+                      <CarpetaInputText
+                        id="primerLliTitular"
+                        tabIndex={507}
+                        defaultValue={this.primerLlinatgeTitular}
+                        onChangedText={this.handleChangePrimerLlinatge}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col md={3} xs={12} className="ajustaForm">
+                    <Form.Group>
+                      <Form.Label style={{ float: "left" }}>{t("pinbalMatriculaSegonLliTitular")}</Form.Label>
+
+                      <CarpetaInputText
+                        id="segonLliTitular"
+                        tabIndex={508}
+                        defaultValue={this.segonLlinatgeTitular}
+                        onChangedText={this.handleChangeSegonLlinatge}
+                      />
+                    </Form.Group>
+                  </Col>
+                  <Col md={3} xs={12} className="ajustaForm">
+                    <Form.Group>
+                      <Form.Label style={{ float: "left" }}>{t("pinbalMatriculaNaixement")}</Form.Label>
+                      <CarpetaDatePicker
+                        basename={"dataNaixementTitular"}
+                        defaultValue={this.dataNaixementTitular === null ? new Date() : this.dataNaixementTitular}
+                        onChangeDate={this.handleChangeDataNaixement}
+                        i18n={this.props.i18n}
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+              </>
+            )}
+            <Row>
+              <div id="errorContainer" className="pb-2 pt-2 ml-3 mr-0 ocult" style={{ width: "100%" }}>
+                <div className="alert alert-danger" role="alert" id="errorMsg" />
+              </div>
+            </Row>
+          </div>
+        </>
+      </CarpetaFormulariDeFiltre>
+    );
+
+    if (!isLoaded) {
+      alerta = "";
+      content = (
+        <div id="carregant" className="loader-container centrat ">
+          <div className="loader" />
+        </div>
+      );
+    } else {
+      const data = this.state.data;
+
+      if (this.state.error && data != null) {
+        alerta = "";
+        content = (
+          <div className="alert alert-danger" role="alert">
+            {data.error}
+          </div>
+        );
+      } else {
+        if (data !== null && this.state.mostrarInfo) {
+          if (data.codRespuesta === "0") {
+            alerta = (
+              <div className="alert alert-success" role="alert">
+                <>
+                  {t("pinbalMatriculaFecha")} {data.fechaProceso} : {t("pinbalMatriculaCodigoInicio")}{" "}
+                  {this.mostrarDocument()} {t("pinbalMatriculaCodigo0")}
+                </>
+              </div>
+            );
+
+            if (!reactdetect.isMobileOnly) {
+              // === DESKTOP ===
+              let nom;
+              let llinatge1;
+              let llinatge2;
+              let document;
+              let dataNaixe;
+              let cursVigent;
+              let cursFutur;
+
+              if (data.alumno.nombre !== undefined) {
+                nom = (
+                  <div className="pt-2">
+                    <dt className="col-sm-3">{t("pinbalMatriculaNom")}</dt>
+                    <dd className="col-sm-7">{data.alumno.nombre}</dd>
+                  </div>
+                );
+              }
+              if (data.alumno.apellido1 !== undefined) {
+                llinatge1 = (
+                  <div className="pt-2">
+                    <dt className="col-sm-3">{t("pinbalMatriculaApellido1")}</dt>
+                    <dd className="col-sm-7">{data.alumno.apellido1}</dd>
+                  </div>
+                );
+              }
+              if (data.alumno.apellido2 !== undefined) {
+                llinatge2 = (
+                  <div className="pt-2">
+                    <dt className="col-sm-3">{t("pinbalMatriculaApellido2")}</dt>
+                    <dd className="col-sm-7">{data.alumno.apellido2}</dd>
+                  </div>
+                );
+              }
+              if (data.alumno.idTitular.documentacion !== undefined) {
+                document = (
+                  <div className="pt-2">
+                    <dt className="col-sm-3">{t("pinbalMatriculaDocument")}</dt>
+                    <dd className="col-sm-7">
+                      {data.alumno.idTitular.tipoDocumentacion} {data.alumno.idTitular.documentacion}
+                    </dd>
+                  </div>
+                );
+              }
+              if (data.alumno.fechaNacimiento !== undefined) {
+                dataNaixe = (
+                  <div className="pt-2">
+                    <dt className="col-sm-3">{t("pinbalMatriculaNaixement")}</dt>
+                    <dd className="col-sm-7">{data.alumno.fechaNacimiento.toString()}</dd>
+                  </div>
+                );
+              }
+              if (data.cursoMatriculaVigente !== undefined) {
+                cursVigent = (
+                  <div className="pt-2">
+                    <dt className="col-sm-3">{t("pinbalMatriculaVigent")}</dt>
+                    <dd className="col-sm-7">{data.cursoMatriculaVigente}</dd>
+                  </div>
+                );
+              }
+              if (data.cursoMatriculaFutura !== undefined) {
+                cursFutur = (
+                  <div className="pt-2">
+                    <dt className="col-sm-3">{t("pinbalMatriculaFutura")}</dt>
+                    <dd className="col-sm-7">{data.cursoMatriculaFutura}</dd>
+                  </div>
+                );
+              }
+
+              content = (
+                <div className="ocultarMobil">
+                  {alerta}
+                  <div className="contenedorInfoPersonal mt-2">
+                    <dl className="row">
+                      {nom}
+                      {llinatge1}
+                      {llinatge2}
+                      {document}
+                      {dataNaixe}
+                      {cursVigent}
+                      {cursFutur}
+                    </dl>
+                  </div>
+                </div>
+              );
+            } else {
+              // === MOBILE ====
+              content = (
+                <div
+                  className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil wAuto mt-5"
+                  tabIndex={510}
+                >
+                  <div className="col-sm-1 float-left">
+                    <span
+                      className="oi oi-bell iconaFormApp"
+                      title={t("pinbalMatriculaConsulta")}
+                      style={{ verticalAlign: "sub" }}
+                    />
+                  </div>
+                  <div className="col-sm-10 float-right">
+                    {alerta}
+                    {data.alumno.nombre && (
+                      <p className="card-text pl-1 mt-0" style={{ color: "rgb(102, 102, 102)" }}>
+                        <b>{t("pinbalMatriculaNom")}: </b>
+                        {data.alumno.nombre} {data.alumno.apellido1} {data.alumno.apellido2}
+                      </p>
+                    )}
+                    {data.alumno.idTitular.documentacion && (
+                      <p className="card-text pl-1 mt-0" style={{ color: "rgb(102, 102, 102)" }}>
+                        <b>{t("pinbalMatriculaDocument")}: </b>
+                        {data.alumno.idTitular.documentacion}
+                      </p>
+                    )}
+                    {data.alumno.fechaNacimiento && (
+                      <p className="card-text pl-1 mt-0" style={{ color: "rgb(102, 102, 102)" }}>
+                        <>
+                          <b>{t("pinbalMatriculaNaixement")}: </b>
+                          {data.alumno.fechaNacimiento}
+                        </>
+                      </p>
+                    )}
+                    {data.cursoMatriculaVigente && (
+                      <p className="card-text pl-1 mt-0" style={{ color: "rgb(102, 102, 102)" }}>
+                        <b>{t("pinbalMatriculaVigent")}: </b>
+                        {data.cursoMatriculaVigente}
+                      </p>
+                    )}
+                    {data.cursoMatriculaFutura && (
+                      <p className="card-text pl-1 mt-0" style={{ color: "rgb(102, 102, 102)" }}>
+                        <b>{t("pinbalMatriculaFutura")}: </b>
+                        {data.cursoMatriculaFutura}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              );
+            }
+          } else {
+            if (data.codRespuesta === "") {
+              alerta = (
+                <div className="alert alert-danger" role="alert">
+                  {t("pinbalMatriculaError")} : {data.error}
+                </div>
+              );
+            } else if (data.codRespuesta === "1") {
+              alerta = (
+                <div className="alert alert-danger" role="alert">
+                  <>
+                    {t("pinbalMatriculaFecha")} {data.fechaProceso} : {t("pinbalMatriculaCodigoInicio")}{" "}
+                    {this.mostrarDocument()} {t("pinbalMatriculaCodigo1")}
+                  </>
+                </div>
+              );
+            } else if (data.codRespuesta === "2") {
+              alerta = (
+                <div className="alert alert-warning" role="alert">
+                  <>
+                    {t("pinbalMatriculaFecha")} {data.fechaProceso} : {t("pinbalMatriculaCodigo2")}{" "}
+                    {this.mostrarDocument()} {t("pinbalMatriculaCodigoFin")}
+                  </>
+                </div>
+              );
+            } else if (data.codRespuesta === "3") {
+              alerta = (
+                <div className="alert alert-warning" role="alert">
+                  <>
+                    {t("pinbalMatriculaFecha")} {data.fechaProceso} : {t("pinbalMatriculaCodigo3")}{" "}
+                    {this.mostrarDocument()} {t("pinbalMatriculaCodigoFin")}
+                  </>
+                </div>
+              );
+            }
+
+            if (!reactdetect.isMobileOnly) {
+              /*  ============== VERSIO DESKTOP ================= */
+              content = <div className="ocultarMobil">{alerta}</div>;
+            } else {
+              /*  ============== VERSIO MÒBIL =================        */
+              content = (
+                <div
+                  className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil wAuto mt-5"
+                  tabIndex={510}
+                >
+                  <div className="col-sm-1 float-left">
+                    <span
+                      className="oi oi-bell iconaFormApp"
+                      title={t("pinbalMatriculaConsulta")}
+                      style={{ verticalAlign: "sub" }}
+                    />
+                  </div>
+                  <div className="col-sm-10 float-right">{alerta}</div>
+                </div>
+              );
+            }
+          }
+        }
+      }
+    }
+
+    return (
+      <TemplatePageCarpeta {...this.props} titles={this.props.titles} subtitles={this.props.subtitles} i18n={i18n}>
+        <>
+          {formulari}
+          {content}
+        </>
+      </TemplatePageCarpeta>
+    );
+  }
 }
 
 export default withTranslation()(DatosMatricula);

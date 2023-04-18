@@ -7,8 +7,6 @@
     "nomProcediment" : "Nombre procedimiento",
     "expedientOrgans" : "Organos",
     "expedientObertura" : "Fecha",
-    "registroMostra":"Show ",
-    "registroRegistres":" elements",
     "expediente_estado_todos" : "All",
     "expediente_estado_1" : "Open",
     "expediente_estado_2" : "Closed",
@@ -18,5 +16,8 @@
     "expedient_fecha_inicio" : "Start date",
     "expedient_fecha_fin" : "End date",
     "expedient_estat" : "State",
-    "carpeta_buscar" : "Search"
+
+    "errorIniciMajorFinal": "La fecha de inicio es mayor que la de fin",
+    "errorEnFiltre": "Hay errores en el filtro de búsqueda ..."
+
 }

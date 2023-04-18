@@ -36,7 +36,7 @@
   "pinbalMatriculaErrorDocument": "El camp 'Document titular' no pot estar buid",
   "pinbalMatriculaErrorNom": "El camp 'Nom titular' no pot estar buid",
   "pinbalMatriculaErrorPrimerLLi": "El camp 'Primer llinatge titular' no pot estar buid",
-  "pinbalMatriculaErrorData": "El camp 'Data naixement titular' no pot estar buid",
+  "pinbalMatriculaErrorData": "El camp 'Data naixement titular' no pot estar buid o ser la data d'avui",
   "pinbalMatriculaError": "Error",
   "pinbalMatriculaConsulta": "Consulta"
 

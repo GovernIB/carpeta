@@ -186,7 +186,7 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
         {
             List<Plugin> plugins = pluginCarpetaFrontEjb.getAllPlugins(Where.AND(w1, w2));
 
-            log.info(" XYZ ZZZ PLUGINS QUE PASSEN FILTRE XXXXXX[ auth = " + autenticat + "] => " + plugins.size());
+            //log.info(" XYZ ZZZ PLUGINS QUE PASSEN FILTRE XXXXXX[ auth = " + autenticat + "] => " + plugins.size());
 
             for (Plugin plugin : plugins) {
                 mapPlugins.put(plugin.getPluginID(), plugin);

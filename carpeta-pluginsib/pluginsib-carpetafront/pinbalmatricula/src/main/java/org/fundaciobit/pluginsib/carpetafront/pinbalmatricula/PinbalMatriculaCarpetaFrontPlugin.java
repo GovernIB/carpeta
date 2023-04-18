@@ -28,7 +28,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Properties;
+import java.util.TimeZone;
 
 /**
  * @author jpernia
@@ -71,9 +77,8 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
 
     @Override
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
-            HttpServletRequest request, UserData userData, String administrationIDEncriptat, 
-            String parameter, IListenerLogCarpeta logCarpeta)
-            throws Exception {
+            HttpServletRequest request, UserData userData, String administrationIDEncriptat, String parameter,
+            IListenerLogCarpeta logCarpeta) throws Exception {
 
         registerUserData(userData);
 
@@ -103,13 +108,13 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
 
             reactjs(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
                     administrationEncriptedID, locale, isGet);
-            
+
         } else if (query.startsWith(SERVEI_REST_SERVICE)) {
 
-            serveiRestService(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                    userData, administrationEncriptedID, locale, isGet);
-            
-        }  else {
+            serveiRestService(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
+
+        } else {
 
             super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
                     userData, administrationEncriptedID, locale, isGet, logCarpeta);
@@ -204,7 +209,6 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
         }
 
     }
-    
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
@@ -214,8 +218,8 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
 
     protected static final String SERVEI_REST_SERVICE = "matriculacentre";
 
-    public void serveiRestService(String absolutePluginRequestPath, String relativePluginRequestPath,
-            String query, HttpServletRequest request, HttpServletResponse response, UserData userData,
+    public void serveiRestService(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet) {
 
         response.setContentType("application/json");
@@ -225,9 +229,9 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
 
         Gson json = new Gson();
         String generat = json.toJson(datosMatricula, DatosMatricula.class);
-        
+
         log.info("\nDADES MATRICULA CENTRE EDUCATIU JSON: " + generat + "\n");
-        
+
         try {
             response.getWriter().println(generat);
             response.flushBuffer();
@@ -237,11 +241,11 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
 
     }
 
-	public DatosMatricula cridadaRest(UserData userData, String absolutePluginRequestPath, HttpServletRequest request) {
-		
-		DatosMatricula datosMatricula = new DatosMatricula();
+    public DatosMatricula cridadaRest(UserData userData, String absolutePluginRequestPath, HttpServletRequest request) {
+
+        DatosMatricula datosMatricula = new DatosMatricula();
         ScspRespuesta resposta;
-        
+
         try {
 
             // Tutor
@@ -251,7 +255,7 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
             final String nombreTutor;
 
             ScspTipoDocumentacion tipoDocumentacionTutor = ScspTipoDocumentacion.NIF;
-            
+
             // Dades del Tutor
             {
                 String nif = getProperty(PINBALMATRICULA_PROPERTY_BASE + "testnif");
@@ -259,11 +263,11 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
 
                 if (nif == null || surname == null) {
                     documentacionTutor = userData.getAdministrationID().toUpperCase();
-                    apellido1Tutor = userData.getSurname1() == null? "" : userData.getSurname1().toUpperCase();
-                    apellido2Tutor = userData.getSurname2() == null? "" : userData.getSurname2().toUpperCase();
-                    nombreTutor = userData.getName() == null? "" : userData.getName().toUpperCase();
-                }else {
-                	/* DADES TEST */
+                    apellido1Tutor = userData.getSurname1() == null ? "" : userData.getSurname1().toUpperCase();
+                    apellido2Tutor = userData.getSurname2() == null ? "" : userData.getSurname2().toUpperCase();
+                    nombreTutor = userData.getName() == null ? "" : userData.getName().toUpperCase();
+                } else {
+                    /* DADES TEST */
                     documentacionTutor = nif.toUpperCase();
                     apellido1Tutor = surname.toUpperCase();
                     apellido2Tutor = "";
@@ -274,13 +278,13 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
                 // Si comença per [X,Y,Z] és un NIE
                 // Sino es un NIF d'empresa 
                 if (!Character.isDigit(documentacionTutor.charAt(0))) {
-                	if (Character.toUpperCase(documentacionTutor.charAt(0)) == 'X' ||
-                			Character.toUpperCase(documentacionTutor.charAt(0)) == 'Y' ||
-                			Character.toUpperCase(documentacionTutor.charAt(0)) == 'Z') {
+                    if (Character.toUpperCase(documentacionTutor.charAt(0)) == 'X'
+                            || Character.toUpperCase(documentacionTutor.charAt(0)) == 'Y'
+                            || Character.toUpperCase(documentacionTutor.charAt(0)) == 'Z') {
                         tipoDocumentacionTutor = ScspTitular.ScspTipoDocumentacion.NIE;
-                	}else {
+                    } else {
                         tipoDocumentacionTutor = ScspTitular.ScspTipoDocumentacion.NIF;
-                	}                	
+                    }
                 }
             }
 
@@ -314,7 +318,6 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
                 data = "";
             }
 
-
             log.info("tipus document: " + formTipusDocumentTitular);
 
             ScspTipoDocumentacion tipoDocumentacionTitular = null;
@@ -327,7 +330,7 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
                     tipoDocumentacionTitular = tipoDocumentacionTutor;
                     documentTitular = documentacionTutor;
 
-                    break;
+                break;
 
                 case "option2":
 
@@ -335,37 +338,36 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
 
                         case "1":
                             tipoDocumentacionTitular = ScspTipoDocumentacion.NIF;
-                            break;
+                        break;
 
                         case "2":
                             tipoDocumentacionTitular = ScspTipoDocumentacion.NIE;
-                            break;
+                        break;
 
                         case "3":
                             tipoDocumentacionTitular = ScspTipoDocumentacion.Pasaporte;
-                            break;
+                        break;
 
                         case "4":
                             tipoDocumentacionTitular = ScspTipoDocumentacion.Otros;
-                            break;
+                        break;
                     }
                     documentTitular = formDocumentTitular;
-                    break;
+                break;
 
                 case "option3":
 
                     tipoDocumentacionTitular = ScspTitular.ScspTipoDocumentacion.NIF;
-                    break;
+                break;
 
             }
-
 
             // Titular
             ScspTitular titular = new ScspTitular();
 
-            if(documentTitular == null) {
+            if (documentTitular == null) {
                 titular.setTipoDocumentacion(null);
-            }else{
+            } else {
                 titular.setTipoDocumentacion(tipoDocumentacionTitular);
             }
             titular.setDocumentacion(documentTitular);
@@ -373,31 +375,34 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
             titular.setApellido1(formPrimerLlinatgeTitular);
             titular.setApellido2(formSegonLlinatgeTitular);
 
-
             // Mateix Titular
             final ScspFuncionario funcionario = new ScspFuncionario();
             funcionario.setNifFuncionario(documentacionTutor);
-            funcionario.setNombreCompletoFuncionario(nombreTutor + " " + apellido1Tutor + ((apellido2Tutor!=null)? (" " + apellido2Tutor): ""));
+            funcionario.setNombreCompletoFuncionario(
+                    nombreTutor + " " + apellido1Tutor + ((apellido2Tutor != null) ? (" " + apellido2Tutor) : ""));
 
-            SolicitudMatricula solicitud = new SolicitudMatricula(data, tipoDocumentacionTitular.toString(), titular.getDocumentacion(), titular.getNombre(), titular.getApellido1(), titular.getApellido2(), tipoDocumentacionTutor.toString(), documentacionTutor);
+            SolicitudMatricula solicitud = new SolicitudMatricula(data, tipoDocumentacionTitular.toString(),
+                    titular.getDocumentacion(), titular.getNombre(), titular.getApellido1(), titular.getApellido2(),
+                    tipoDocumentacionTutor.toString(), documentacionTutor);
             log.info("solicitud: " + solicitud.getDatosEspecificos());
             omplirDadesSolicitutComunes(solicitud, funcionario, titular);
 
-        	/*
-        	 * Petició a PINBAL i processament de la resposta XML
-        	 */
+            /*
+             * Petició a PINBAL i processament de la resposta XML
+             */
             resposta = getConnexio(List.of(solicitud));
-            
+
             if (resposta != null) {
 
-            	String datosEspecificos = resposta.getTransmisiones().get(0).getDatosEspecificos();
-                
+                String datosEspecificos = resposta.getTransmisiones().get(0).getDatosEspecificos();
+
                 JAXBContext contexto = JAXBContext.newInstance(DatosEspecificos.class);
-                
+
                 Unmarshaller datosEspecificosItem = contexto.createUnmarshaller();
 
                 // Dades per la vista
-                DatosEspecificos dte = (DatosEspecificos) datosEspecificosItem.unmarshal(new StringReader(datosEspecificos));
+                DatosEspecificos dte = (DatosEspecificos) datosEspecificosItem
+                        .unmarshal(new StringReader(datosEspecificos));
 
                 datosMatricula.setCodRespuesta(dte.getRespuesta().get(0).getCodRespuesta());
                 datosMatricula.setDescRespuesta(dte.getRespuesta().get(0).getDescRespuesta());
@@ -405,28 +410,32 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
                 datosMatricula.setCursoMatriculaVigente(dte.getRespuesta().get(0).getCursoMatriculaVigente());
                 datosMatricula.setCursoMatriculaFutura(dte.getRespuesta().get(0).getCursoMatriculaFutura());
 
-                if(dte.getRespuesta().get(0).getDatosAlumno().size()>0) {
+                if (dte.getRespuesta().get(0).getDatosAlumno().size() > 0) {
                     datosMatricula.alumno.setNombre(dte.getRespuesta().get(0).getDatosAlumno().get(0).getNombre());
-                    datosMatricula.alumno.setApellido1(dte.getRespuesta().get(0).getDatosAlumno().get(0).getApellido1());
-                    datosMatricula.alumno.setApellido2(dte.getRespuesta().get(0).getDatosAlumno().get(0).getApellido2());
-                    datosMatricula.alumno.setFechaNacimiento(dte.getRespuesta().get(0).getDatosAlumno().get(0).getFechaNacimiento());
-                    datosMatricula.alumno.setIdTitular(dte.getRespuesta().get(0).getDatosAlumno().get(0).getIdTitular());
+                    datosMatricula.alumno
+                            .setApellido1(dte.getRespuesta().get(0).getDatosAlumno().get(0).getApellido1());
+                    datosMatricula.alumno
+                            .setApellido2(dte.getRespuesta().get(0).getDatosAlumno().get(0).getApellido2());
+                    datosMatricula.alumno
+                            .setFechaNacimiento(dte.getRespuesta().get(0).getDatosAlumno().get(0).getFechaNacimiento());
+                    datosMatricula.alumno
+                            .setIdTitular(dte.getRespuesta().get(0).getDatosAlumno().get(0).getIdTitular());
                 }
-                
-            }else {
-            	resposta = null;
-            	datosMatricula.setError("Error servei. No hi ha resposta.");
+
+            } else {
+                resposta = null;
+                datosMatricula.setError("Error servei. No hi ha resposta.");
             }
 
         } catch (Throwable e) {
-        	resposta = null;
+            resposta = null;
             String msg = "Error consulta: " + e.getMessage();
             datosMatricula.setError(msg);
             log.error(msg, e);
         }
 
         return datosMatricula;
-	}
+    }
 
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
@@ -434,7 +443,7 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
-    protected static final String REACT_JS_PAGE = "reactjs_main.js";
+    protected static final String REACT_JS_PAGE = "reactjs_main_pinbalmatricula.js";
 
     public void reactjs(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
@@ -447,7 +456,7 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
             response.setHeader("Content-Disposition",
                     "inline;filename=\"" + java.net.URLEncoder.encode(REACT_JS_PAGE, "UTF-8") + "\"");
 
-            String resource = "/webpage_pinbalmatricula/reactjs_main.js";
+            String resource = "/webpage_pinbalmatricula/" + REACT_JS_PAGE;
 
             response.setCharacterEncoding("utf-8");
 
@@ -468,73 +477,70 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
 
     }
 
+    public static class SolicitudMatricula extends Solicitud {
 
-	public static class SolicitudMatricula extends Solicitud {
+        protected String fechaNacimientoTitular;
+        protected String tipoDocumentacionTitular;
+        protected String documentacionTitular;
+        protected String nombreTitular;
+        protected String primerApellidoTitular;
+        protected String segundoApellidoTitular;
+        protected String tipoDocumentacionTutor;
+        protected String documentacionTutor;
 
-        protected  String fechaNacimientoTitular;
-		protected  String tipoDocumentacionTitular;
-		protected  String documentacionTitular;
-		protected  String nombreTitular;
-		protected  String primerApellidoTitular;
-		protected  String segundoApellidoTitular;
-		protected  String tipoDocumentacionTutor;
-		protected  String documentacionTutor;
+        public SolicitudMatricula(String fechaNacimientoTitular, String tipoDocumentacionTitular,
+                String documentacionTitular, String nombreTitular, String primerApellidoTitular,
+                String segundoApellidoTitular, String tipoDocumentacionTutor, String documentacionTutor) {
+            super();
+            this.fechaNacimientoTitular = fechaNacimientoTitular;
+            this.tipoDocumentacionTitular = tipoDocumentacionTitular;
+            this.documentacionTitular = documentacionTitular;
+            this.nombreTitular = nombreTitular;
+            this.primerApellidoTitular = primerApellidoTitular;
+            this.segundoApellidoTitular = segundoApellidoTitular;
+            this.tipoDocumentacionTutor = tipoDocumentacionTutor;
+            this.documentacionTutor = documentacionTutor;
+        }
 
-		public SolicitudMatricula(String fechaNacimientoTitular, String tipoDocumentacionTitular, String documentacionTitular, String nombreTitular, String primerApellidoTitular, String segundoApellidoTitular, String tipoDocumentacionTutor, String documentacionTutor) {
-			super();
-			this.fechaNacimientoTitular = fechaNacimientoTitular;
-			this.tipoDocumentacionTitular = tipoDocumentacionTitular;
-			this.documentacionTitular = documentacionTitular;
-			this.nombreTitular = nombreTitular;
-			this.primerApellidoTitular = primerApellidoTitular;
-			this.segundoApellidoTitular = segundoApellidoTitular;
-			this.tipoDocumentacionTutor = tipoDocumentacionTutor;
-			this.documentacionTutor = documentacionTutor;
-		}
-
-		@Override
-		public String getDatosEspecificos() { // xml
+        @Override
+        public String getDatosEspecificos() { // xml
             StringBuilder xmlBuilder = new StringBuilder("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-			xmlBuilder.append("<DatosEspecificos>");
+            xmlBuilder.append("<DatosEspecificos>");
             xmlBuilder.append("<Solicitud>");
 
             // TITULAR
             if (!isEmptyString(String.valueOf(this.fechaNacimientoTitular))) {
                 xmlBuilder.append(xmlOptionalStringParameter(this.fechaNacimientoTitular, "FechaNacimientoTitular"));
             }
-//            if (!isEmptyString(String.valueOf(nombreTitular))) {
-//                xmlBuilder.append(xmlOptionalStringParameter(this.nombreTitular, "NombreTitular"));
-//            }
-//            if (!isEmptyString(String.valueOf(primerApellidoTitular))) {
-//                xmlBuilder.append(xmlOptionalStringParameter(this.primerApellidoTitular, "Apellido1Titular"));
-//            }
-//            if (!isEmptyString(String.valueOf(segundoApellidoTitular))) {
-//                xmlBuilder.append(xmlOptionalStringParameter(this.segundoApellidoTitular, "Apellido2Titular"));
-//            }
+            //            if (!isEmptyString(String.valueOf(nombreTitular))) {
+            //                xmlBuilder.append(xmlOptionalStringParameter(this.nombreTitular, "NombreTitular"));
+            //            }
+            //            if (!isEmptyString(String.valueOf(primerApellidoTitular))) {
+            //                xmlBuilder.append(xmlOptionalStringParameter(this.primerApellidoTitular, "Apellido1Titular"));
+            //            }
+            //            if (!isEmptyString(String.valueOf(segundoApellidoTitular))) {
+            //                xmlBuilder.append(xmlOptionalStringParameter(this.segundoApellidoTitular, "Apellido2Titular"));
+            //            }
 
             // TUTOR
             if (!isEmptyString(this.documentacionTutor)) {
-				xmlBuilder.append("<IdTutor>");
+                xmlBuilder.append("<IdTutor>");
                 if (!isEmptyString(this.tipoDocumentacionTutor)) {
-                    xmlBuilder.append(
-                            xmlOptionalStringParameter(this.tipoDocumentacionTutor, "TipoDocumentacion")
-                    );
+                    xmlBuilder.append(xmlOptionalStringParameter(this.tipoDocumentacionTutor, "TipoDocumentacion"));
                 }
-                xmlBuilder.append(
-                        xmlOptionalStringParameter(this.documentacionTutor, "Documentacion")
-                );
+                xmlBuilder.append(xmlOptionalStringParameter(this.documentacionTutor, "Documentacion"));
 
                 xmlBuilder.append("</IdTutor>");
-			}
+            }
             xmlBuilder.append("</Solicitud>");
-			xmlBuilder.append("</DatosEspecificos>");
-			return xmlBuilder.toString();
-		}
-	}
-    
+            xmlBuilder.append("</DatosEspecificos>");
+            return xmlBuilder.toString();
+        }
+    }
+
     public class DatosMatricula {
 
-        protected String error = "";       
+        protected String error = "";
         protected DatosAlumno alumno = new DatosAlumno();
         protected String codRespuesta = "";
         protected String descRespuesta = "";
@@ -550,67 +556,69 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
             this.error = error;
         }
 
-		public DatosAlumno getAlumno() { return alumno; }
+        public DatosAlumno getAlumno() {
+            return alumno;
+        }
 
-		public void setAlumno(DatosAlumno alumno) {
-			this.alumno = alumno;
-		}
+        public void setAlumno(DatosAlumno alumno) {
+            this.alumno = alumno;
+        }
 
-		public String getCodRespuesta() {
-			return codRespuesta;
-		}
+        public String getCodRespuesta() {
+            return codRespuesta;
+        }
 
-		public void setCodRespuesta(String codRespuesta) {
-			this.codRespuesta = codRespuesta;
-		}
-		
-		public String getDescRespuesta() {
-			return descRespuesta;
-		}
+        public void setCodRespuesta(String codRespuesta) {
+            this.codRespuesta = codRespuesta;
+        }
 
-		public void setDescRespuesta(String descRespuesta) {
-			this.descRespuesta = descRespuesta;
-		}
+        public String getDescRespuesta() {
+            return descRespuesta;
+        }
 
-		public String getCursoMatriculaVigente() {
-			return cursoMatriculaVigente;
-		}
+        public void setDescRespuesta(String descRespuesta) {
+            this.descRespuesta = descRespuesta;
+        }
 
-		public void setCursoMatriculaVigente(String cursoMatriculaVigente) {
-			this.cursoMatriculaVigente = cursoMatriculaVigente;
-		}
+        public String getCursoMatriculaVigente() {
+            return cursoMatriculaVigente;
+        }
 
-		public String getCursoMatriculaFutura() {
-			return cursoMatriculaFutura;
-		}
+        public void setCursoMatriculaVigente(String cursoMatriculaVigente) {
+            this.cursoMatriculaVigente = cursoMatriculaVigente;
+        }
 
-		public void setCursoMatriculaFutura(String cursoMatriculaFutura) {
-			this.cursoMatriculaFutura = cursoMatriculaFutura;
-		}
-		
-		public String getFechaProceso() {
-			return fechaProceso;
-		}
+        public String getCursoMatriculaFutura() {
+            return cursoMatriculaFutura;
+        }
 
-		public void setFechaProceso(String fechaProceso) {
-			this.fechaProceso = fechaProceso;
-		}
+        public void setCursoMatriculaFutura(String cursoMatriculaFutura) {
+            this.cursoMatriculaFutura = cursoMatriculaFutura;
+        }
 
-		public DatosMatricula() {
+        public String getFechaProceso() {
+            return fechaProceso;
+        }
 
-		}
+        public void setFechaProceso(String fechaProceso) {
+            this.fechaProceso = fechaProceso;
+        }
 
-		public DatosMatricula(DatosAlumno alumno, String codRespuesta, String descRespuesta, String cursoMatriculaVigente, String cursoMatriculaFutura, String fechaProceso) {
-			super();
-			this.alumno = alumno;
-			this.codRespuesta = codRespuesta;
-			this.descRespuesta = descRespuesta;
-			this.cursoMatriculaVigente = cursoMatriculaVigente;
-			this.cursoMatriculaFutura = cursoMatriculaFutura;
-			this.fechaProceso = fechaProceso;
-		}
-		
+        public DatosMatricula() {
+
+        }
+
+        public DatosMatricula(DatosAlumno alumno, String codRespuesta, String descRespuesta,
+                String cursoMatriculaVigente, String cursoMatriculaFutura, String fechaProceso) {
+            super();
+            this.alumno = alumno;
+            this.codRespuesta = codRespuesta;
+            this.descRespuesta = descRespuesta;
+            this.cursoMatriculaVigente = cursoMatriculaVigente;
+            this.cursoMatriculaFutura = cursoMatriculaFutura;
+            this.fechaProceso = fechaProceso;
+        }
+
     }
-    
 
 }
