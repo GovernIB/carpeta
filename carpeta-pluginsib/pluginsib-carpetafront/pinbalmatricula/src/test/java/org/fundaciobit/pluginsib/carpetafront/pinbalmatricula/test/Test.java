@@ -1,6 +1,7 @@
 package org.fundaciobit.pluginsib.carpetafront.pinbalmatricula.test;
 
 import java.io.FileInputStream;
+import java.util.Date;
 import java.util.Properties;
 
 import org.apache.log4j.BasicConfigurator;
@@ -9,57 +10,87 @@ import org.fundaciobit.pluginsib.carpetafront.pinbalmatricula.PinbalMatriculaCar
 
 import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
 
-import javax.servlet.http.HttpServletRequest;
-
+/**
+ * 
+ * @author anadal
+ *
+ */
 public class Test {
 
+    public static void main(String[] args) {
 
-	public static void main(String[] args) {
-		
-		String base = "es.caib.carpeta.";
-		Properties prop = new Properties();
-		
-		try {
+        String base = "es.caib.carpeta.";
+        Properties prop = new Properties();
 
-			BasicConfigurator.configure();
-			
-			prop.load(new FileInputStream("plugin.properties"));
-			
-			PinbalMatriculaCarpetaFrontPlugin pinbalMatricula = new PinbalMatriculaCarpetaFrontPlugin(base, prop);
-			
-			UserData userData = new UserData();
-			
-			String absolutePath = "";
+        Properties test = new Properties();
+        try {
 
-			HttpServletRequest request = null;
-			
-			DatosMatricula datosMatricula = pinbalMatricula.cridadaRest(userData, absolutePath, request);
-			
-			if(datosMatricula.getError() != null && !datosMatricula.getError().isEmpty()) {
-				System.err.println("Error:" + datosMatricula.getError());
-			}else {
-//				String idPeticion = datosMatricula.getIdPeticion();
-				System.out.println("RESPUESTA: " + datosMatricula.getCodRespuesta());
-//				System.out.println("PETICION: " + idPeticion);
-				
-//				ScspJustificante justificante = pinbalMatricula.obtenirJustificant(idPeticion);
-				
-//				if(justificante != null) {
-//					System.out.println("Nombre: " + justificante.getNom());
-//					System.out.println("Long. : " + justificante.getLongitud());
-//				}else {
-//					System.err.println("Justificante IS NULL");
-//				}
-				
-			}
-			
-			System.out.println("FINAL");
-			
-			
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
-	
+            BasicConfigurator.configure();
+
+            prop.load(new FileInputStream("plugin.properties"));
+
+            PinbalMatriculaCarpetaFrontPlugin pinbalMatricula = new PinbalMatriculaCarpetaFrontPlugin(base, prop);
+
+            test.load(new FileInputStream("test.properties"));
+
+            UserData userData = new UserData();
+            userData.setName(test.getProperty("userData.name"));
+            userData.setSurname1(test.getProperty("userData.surname1"));
+            userData.setSurname2(test.getProperty("userData.surname2"));
+            userData.setAdministrationID(test.getProperty("userData.administrationID"));
+
+            String formRadioOpcio = test.getProperty("formRadioOpcio");
+            String formNomFillSenseDNI = test.getProperty("formNomFillSenseDNI");
+            String formPrimerLlinatgeFillSenseDNI = test.getProperty("formPrimerLlinatgeFillSenseDNI");
+            String formSegonLlinatgeFillSenseDNI = test.getProperty("formSegonLlinatgeFillSenseDNI");
+            String formDataNaixementFillSenseDNI = test.getProperty("formDataNaixementFillSenseDNI");
+            String formDocumentFillAmbDNI = test.getProperty("formDocumentFillAmbDNI");
+            String formTipusDocumentFillAmbDNI = test.getProperty("formTipusDocumentFillAmbDNI");
+
+            Date dataNaixement = null;
+            if (formDataNaixementFillSenseDNI != null && !formDataNaixementFillSenseDNI.equals("")) {
+                dataNaixement = PinbalMatriculaCarpetaFrontPlugin.sdfOutput.parse(formDataNaixementFillSenseDNI);
+            }
+
+            DatosMatricula datosMatricula = pinbalMatricula.cridadaRestDirecta(userData, formRadioOpcio,
+                    formNomFillSenseDNI, formPrimerLlinatgeFillSenseDNI, formSegonLlinatgeFillSenseDNI, dataNaixement,
+                    formDocumentFillAmbDNI, formTipusDocumentFillAmbDNI);
+
+            if (datosMatricula.getError() != null && !datosMatricula.getError().isEmpty()) {
+                System.err.println("Error:" + datosMatricula.getError());
+            } else {
+                //				String idPeticion = datosMatricula.getIdPeticion();
+                System.out.println("getCodRespuesta: " + datosMatricula.getCodRespuesta());
+                System.out.println("getCursoMatriculaFutura: " + datosMatricula.getCursoMatriculaFutura());
+                System.out.println("getCursoMatriculaVigente: " + datosMatricula.getCursoMatriculaVigente());
+                System.out.println("getDescRespuesta: " + datosMatricula.getDescRespuesta());
+                System.out.println("getFechaProceso: " + datosMatricula.getFechaProceso());
+                System.out.println("getError: " + datosMatricula.getError());
+                System.out.println("getAlumno().getNombre(): " + datosMatricula.getAlumno().getNombre());
+                System.out.println("getAlumno().getApellido1(): " + datosMatricula.getAlumno().getApellido1());
+                System.out.println("getAlumno().getApellido2(): " + datosMatricula.getAlumno().getApellido2());
+                System.out.println("getAlumno().getIdTitular(): " + datosMatricula.getAlumno().getIdTitular());
+                System.out.println("getAlumno().getFechaNacimiento(): " + datosMatricula.getAlumno().getFechaNacimiento());
+
+                //				System.out.println("PETICION: " + idPeticion);
+
+                //				ScspJustificante justificante = pinbalMatricula.obtenirJustificant(idPeticion);
+
+                //				if(justificante != null) {
+                //					System.out.println("Nombre: " + justificante.getNom());
+                //					System.out.println("Long. : " + justificante.getLongitud());
+                //				}else {
+                //					System.err.println("Justificante IS NULL");
+                //				}
+
+            }
+
+            System.out.println("FINAL");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }

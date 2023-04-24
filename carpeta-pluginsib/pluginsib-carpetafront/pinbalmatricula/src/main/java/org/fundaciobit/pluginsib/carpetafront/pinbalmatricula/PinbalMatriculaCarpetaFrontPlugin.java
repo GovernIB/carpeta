@@ -27,6 +27,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringReader;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -34,7 +35,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
-import java.util.TimeZone;
+
 
 /**
  * @author jpernia
@@ -42,6 +43,10 @@ import java.util.TimeZone;
 public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin {
 
     public static final String PINBALMATRICULA_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "pinbalmatricula.";
+    
+    
+    public static final SimpleDateFormat sdfInput = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+    public static final SimpleDateFormat sdfOutput = new SimpleDateFormat("dd/MM/yyyy");
 
     /**
      *
@@ -159,7 +164,7 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
 
             response.setContentType("text/html");
 
-            String resource = "/webpage_pinbalmatricula/index.html";
+            String resource = "/webpage_pinbalmatricula/index_pinbalmatricula.html";
 
             response.setHeader("Content-Disposition",
                     "inline;filename=\"" + java.net.URLEncoder.encode(INDEX_HTML_PAGE, "UTF-8") + "\"");
@@ -225,7 +230,7 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
 
-        DatosMatricula datosMatricula = cridadaRest(userData, absolutePluginRequestPath, request);
+        DatosMatricula datosMatricula = cridadaRest(userData, request);
 
         Gson json = new Gson();
         String generat = json.toJson(datosMatricula, DatosMatricula.class);
@@ -241,8 +246,61 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
 
     }
 
-    public DatosMatricula cridadaRest(UserData userData, String absolutePluginRequestPath, HttpServletRequest request) {
+    public DatosMatricula cridadaRest(UserData userData, HttpServletRequest request)  {
 
+        // Dades del formulari del front
+        String formDataNaixementTitularStr = request.getParameter("dataNaixementTitular");
+        String formDocumentTitular = request.getParameter("documentTitular");
+        String formTipusDocumentTitular = request.getParameter("tipusDocumentTitular");
+        String formRadioOpcio = request.getParameter("radioSelectedOption");
+        String formNomTitular = request.getParameter("nomTitular");
+        String formPrimerLlinatgeTitular = request.getParameter("primerLlinatgeTitular");
+        String formSegonLlinatgeTitular = request.getParameter("segonLlinatgeTitular");
+
+        log.info("formDataNaixementStr: " + formDataNaixementTitularStr);
+        log.info("formDocumentTitular: " + formDocumentTitular);
+        log.info("formTipusDocumentTitular: " + formTipusDocumentTitular);
+        log.info("formRadioOpcio: " + formRadioOpcio);
+        log.info("formNomTitular: " + formNomTitular);
+        log.info("formPrimerLlinatgeTitular: " + formPrimerLlinatgeTitular);
+        log.info("formSegonLlinatgeTitular: " + formSegonLlinatgeTitular);
+        
+        
+        Date formDataNaixementTitular;
+        if (formDataNaixementTitularStr != null && !formDataNaixementTitularStr.equals("")) {
+            try {
+                formDataNaixementTitular = sdfInput.parse(formDataNaixementTitularStr);
+            } catch (ParseException e) {
+                DatosMatricula dm = new DatosMatricula();dm.setError("La data ]" + formDataNaixementTitularStr + "[ no té un format correcte: " + e.getMessage());
+                        return dm;
+            }
+        } else {
+            formDataNaixementTitular = null;
+        }
+        
+        log.info("formDataNaixementTitular: " + formDataNaixementTitular);
+        
+        
+
+        return cridadaRestDirecta(userData, formRadioOpcio, formNomTitular, formPrimerLlinatgeTitular,
+                formSegonLlinatgeTitular, formDataNaixementTitular, formDocumentTitular, formTipusDocumentTitular);
+    }
+
+    /**
+     * 
+     * @param userData
+     * @param formRadioOpcio
+     * @param formNomFillSenseDNI
+     * @param formPrimerLlinatgeFillSenseDNI
+     * @param formSegonLlinatgeFillSenseDNI
+     * @param formDataNaixementFillSenseDNI
+     * @param formDocumentFillAmbDNI
+     * @param formTipusDocumentFillAmbDNI
+     * @return
+     */
+    public DatosMatricula cridadaRestDirecta(UserData userData, String formRadioOpcio, String formNomFillSenseDNI,
+            String formPrimerLlinatgeFillSenseDNI, String formSegonLlinatgeFillSenseDNI, Date formDataNaixementFillSenseDNI,
+            String formDocumentFillAmbDNI, String formTipusDocumentFillAmbDNI) {
         DatosMatricula datosMatricula = new DatosMatricula();
         ScspRespuesta resposta;
 
@@ -288,37 +346,20 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
                 }
             }
 
-            // Dades del formulari del front
-            String formDataNaixementTitular = request.getParameter("dataNaixementTitular");
-            String formDocumentTitular = request.getParameter("documentTitular");
-            String formTipusDocumentTitular = request.getParameter("tipusDocumentTitular");
-            String formRadioOpcio = request.getParameter("radioSelectedOption");
-            String formNomTitular = request.getParameter("nomTitular");
-            String formPrimerLlinatgeTitular = request.getParameter("primerLlinatgeTitular");
-            String formSegonLlinatgeTitular = request.getParameter("segonLlinatgeTitular");
-
-            log.info("formDataNaixementStr: " + formDataNaixementTitular);
-            log.info("formDocumentTitular: " + formDocumentTitular);
-            log.info("formTipusDocumentTitular: " + formTipusDocumentTitular);
-            log.info("formRadioOpcio: " + formRadioOpcio);
-            log.info("formNomTitular: " + formNomTitular);
-            log.info("formPrimerLlinatgeTitular: " + formPrimerLlinatgeTitular);
-            log.info("formSegonLlinatgeTitular: " + formSegonLlinatgeTitular);
-
             String data;
+            if (formDataNaixementFillSenseDNI != null) {
+                
+                
+            data = sdfOutput.format(formDataNaixementFillSenseDNI.getTime());
+        } else {
+            data = "";
+        }
 
-            SimpleDateFormat sdfInput = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.getDefault());
-            SimpleDateFormat sdfOutput = new SimpleDateFormat("dd/MM/yyyy");
 
-            if (formDataNaixementTitular != null && !formDataNaixementTitular.equals("")) {
-                Date date = sdfInput.parse(formDataNaixementTitular);
-                sdfOutput.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
-                data = sdfOutput.format(new Date(date.getTime() + 86400000));
-            } else {
-                data = "";
-            }
 
-            log.info("tipus document: " + formTipusDocumentTitular);
+           
+
+            log.info("tipus document: " + formTipusDocumentFillAmbDNI);
 
             ScspTipoDocumentacion tipoDocumentacionTitular = null;
             String documentTitular = null;
@@ -334,7 +375,7 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
 
                 case "option2":
 
-                    switch (formTipusDocumentTitular) {
+                    switch (formTipusDocumentFillAmbDNI) {
 
                         case "1":
                             tipoDocumentacionTitular = ScspTipoDocumentacion.NIF;
@@ -352,7 +393,7 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
                             tipoDocumentacionTitular = ScspTipoDocumentacion.Otros;
                         break;
                     }
-                    documentTitular = formDocumentTitular;
+                    documentTitular = formDocumentFillAmbDNI;
                 break;
 
                 case "option3":
@@ -371,9 +412,9 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
                 titular.setTipoDocumentacion(tipoDocumentacionTitular);
             }
             titular.setDocumentacion(documentTitular);
-            titular.setNombre(formNomTitular);
-            titular.setApellido1(formPrimerLlinatgeTitular);
-            titular.setApellido2(formSegonLlinatgeTitular);
+            titular.setNombre(formNomFillSenseDNI);
+            titular.setApellido1(formPrimerLlinatgeFillSenseDNI);
+            titular.setApellido2(formSegonLlinatgeFillSenseDNI);
 
             // Mateix Titular
             final ScspFuncionario funcionario = new ScspFuncionario();

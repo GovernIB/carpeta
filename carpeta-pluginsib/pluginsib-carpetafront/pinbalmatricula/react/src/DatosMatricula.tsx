@@ -2,11 +2,7 @@ import React from "react";
 import { withTranslation, WithTranslation } from "react-i18next";
 import axios from "axios";
 import i18n from "./i18n";
-
-import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-
 import * as reactdetect from "react-device-detect";
 import {
   CarpetaDatePicker,
@@ -339,8 +335,6 @@ class DatosMatricula extends React.Component<DatosMatriculaProps, DatosMatricula
     return false;
   }
 
-  componentDidUpdate() {}
-
   render() {
     const isLoaded = this.state.isLoaded;
 
@@ -381,106 +375,79 @@ class DatosMatricula extends React.Component<DatosMatriculaProps, DatosMatricula
 
             {this.state.radioSelectedOption === "option2" && (
               <Row className="pt-2" style={{ paddingTop: "0.5em" }}>
-                {/*  <CarpetaFormulariDeFiltreItem label={t("pinbalMatriculaTipusDocument")}> */}
+                <CarpetaFormulariDeFiltreItem label={t("pinbalMatriculaTipusDocument")}>
+                  <select
+                    id="tipusDocument"
+                    name="tipusDocument"
+                    className="form-control form-control-sm focusIn"
+                    defaultValue={this.tipusDocument}
+                    tabIndex={504}
+                    aria-labelledby="tipoDocum"
+                    onChange={(e) => {
+                      this.handleChangeTipusDocument(e);
+                    }}
+                  >
+                    <option value="1" selected={this.tipusDocument === "1"}>
+                      {t("pinbalMatriculaNIF")}
+                    </option>
+                    <option value="2" selected={this.tipusDocument === "2"}>
+                      {t("pinbalMatriculaNIE")}
+                    </option>
+                    <option value="3" selected={this.tipusDocument === "3"}>
+                      {t("pinbalMatriculaPassaport")}
+                    </option>
+                    <option value="4" selected={this.tipusDocument === "4"}>
+                      {t("pinbalMatriculaComunitari")}
+                    </option>
+                  </select>
+                </CarpetaFormulariDeFiltreItem>
 
-                <Col>
-                  <Form.Group>
-                    <Form.Label id="tipoDocum">{t("pinbalMatriculaTipusDocument")}</Form.Label>
-
-                    <select
-                      id="tipusDocument"
-                      name="tipusDocument"
-                      className="form-control form-control-sm focusIn"
-                      defaultValue={this.tipusDocument}
-                      tabIndex={504}
-                      aria-labelledby="tipoDocum"
-                      onChange={(e) => {
-                        this.handleChangeTipusDocument(e);
-                      }}
-                    >
-                      <option value="1" selected={this.tipusDocument === "1"}>
-                        {t("pinbalMatriculaNIF")}
-                      </option>
-                      <option value="2" selected={this.tipusDocument === "2"}>
-                        {t("pinbalMatriculaNIE")}
-                      </option>
-                      <option value="3" selected={this.tipusDocument === "3"}>
-                        {t("pinbalMatriculaPassaport")}
-                      </option>
-                      <option value="4" selected={this.tipusDocument === "4"}>
-                        {t("pinbalMatriculaComunitari")}
-                      </option>
-                    </select>
-                    {/*  </CarpetaFormulariDeFiltreItem> */}
-                  </Form.Group>
-                </Col>
-
-                <Col>
-                  <Form.Group>
-                    <Form.Label>{t("pinbalMatriculaDNI")}</Form.Label>
-
-                    {/*}  <CarpetaFormulariDeFiltreItem label={t("pinbalMatriculaDNI")}>*/}
-
-                    <CarpetaInputText
-                      id="dni"
-                      tabIndex={505}
-                      defaultValue={this.documentTitular}
-                      onChangedText={this.handleChangeDocument}
-                    />
-                  </Form.Group>
-                </Col>
+                <CarpetaFormulariDeFiltreItem label={t("pinbalMatriculaDNI")}>
+                  <CarpetaInputText
+                    id="dni"
+                    tabIndex={505}
+                    defaultValue={this.documentTitular}
+                    onChangedText={this.handleChangeDocument}
+                  />
+                </CarpetaFormulariDeFiltreItem>
               </Row>
             )}
             {this.state.radioSelectedOption === "option3" && (
               <>
                 <Row className="pt-2" style={{ paddingTop: "0.5em" }}>
-                  <Col md={3} xs={12} className="ajustaForm">
-                    <Form.Group>
-                      <Form.Label style={{ float: "left" }}>{t("pinbalMatriculaNomTitular")}</Form.Label>
+                  <CarpetaFormulariDeFiltreItem label={t("pinbalMatriculaNomTitular")}>
+                    <CarpetaInputText
+                      id="nomTitular"
+                      tabIndex={506}
+                      defaultValue={this.nomTitular}
+                      onChangedText={this.handleChangeNom}
+                    />
+                  </CarpetaFormulariDeFiltreItem>
 
-                      <CarpetaInputText
-                        id="nomTitular"
-                        tabIndex={506}
-                        defaultValue={this.nomTitular}
-                        onChangedText={this.handleChangeNom}
-                      />
-                    </Form.Group>
-                  </Col>
-                  <Col md={3} xs={12} className="ajustaForm">
-                    <Form.Group>
-                      <Form.Label style={{ float: "left" }}>{t("pinbalMatriculaPrimerLliTitular")}</Form.Label>
-
-                      <CarpetaInputText
-                        id="primerLliTitular"
-                        tabIndex={507}
-                        defaultValue={this.primerLlinatgeTitular}
-                        onChangedText={this.handleChangePrimerLlinatge}
-                      />
-                    </Form.Group>
-                  </Col>
-                  <Col md={3} xs={12} className="ajustaForm">
-                    <Form.Group>
-                      <Form.Label style={{ float: "left" }}>{t("pinbalMatriculaSegonLliTitular")}</Form.Label>
-
-                      <CarpetaInputText
-                        id="segonLliTitular"
-                        tabIndex={508}
-                        defaultValue={this.segonLlinatgeTitular}
-                        onChangedText={this.handleChangeSegonLlinatge}
-                      />
-                    </Form.Group>
-                  </Col>
-                  <Col md={3} xs={12} className="ajustaForm">
-                    <Form.Group>
-                      <Form.Label style={{ float: "left" }}>{t("pinbalMatriculaNaixement")}</Form.Label>
-                      <CarpetaDatePicker
-                        basename={"dataNaixementTitular"}
-                        defaultValue={this.dataNaixementTitular === null ? new Date() : this.dataNaixementTitular}
-                        onChangeDate={this.handleChangeDataNaixement}
-                        i18n={this.props.i18n}
-                      />
-                    </Form.Group>
-                  </Col>
+                  <CarpetaFormulariDeFiltreItem label={t("pinbalMatriculaPrimerLliTitular")}>
+                    <CarpetaInputText
+                      id="primerLliTitular"
+                      tabIndex={507}
+                      defaultValue={this.primerLlinatgeTitular}
+                      onChangedText={this.handleChangePrimerLlinatge}
+                    />
+                  </CarpetaFormulariDeFiltreItem>
+                  <CarpetaFormulariDeFiltreItem label={t("pinbalMatriculaSegonLliTitular")}>
+                    <CarpetaInputText
+                      id="segonLliTitular"
+                      tabIndex={508}
+                      defaultValue={this.segonLlinatgeTitular}
+                      onChangedText={this.handleChangeSegonLlinatge}
+                    />
+                  </CarpetaFormulariDeFiltreItem>
+                  <CarpetaFormulariDeFiltreItem label={t("pinbalMatriculaNaixement")}>
+                    <CarpetaDatePicker
+                      basename={"dataNaixementTitular"}
+                      defaultValue={this.dataNaixementTitular === null ? new Date() : this.dataNaixementTitular}
+                      onChangeDate={this.handleChangeDataNaixement}
+                      i18n={this.props.i18n}
+                    />
+                  </CarpetaFormulariDeFiltreItem>
                 </Row>
               </>
             )}
