@@ -17,7 +17,9 @@
         Si volem emprar el maven.build.timestamp al filtres s'ha de "redefinir" la propietat.
         Veure: https://issues.apache.org/jira/browse/MASSEMBLY-603
          -->
-         
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <version_template_file>./templates/StaticVersion.java.template</version_template_file>
+        <version_file>src/main/java/es/caib/carpeta/commons/utils/StaticVersion.java</version_file>
         <project.buildtime>${maven.build.timestamp}</project.buildtime>
         <maven.build.timestamp.format>dd/MM/yyyy HH:mm</maven.build.timestamp.format>
     </properties>
@@ -52,6 +54,41 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
+
+        <plugins>
+
+            <plugin>
+                <groupId>com.google.code.maven-replacer-plugin</groupId>
+                <artifactId>maven-replacer-plugin</artifactId>
+                <version>1.4.0</version>
+                <executions>
+                    <execution>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>replace</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <file>${version_template_file}</file>
+                    <outputFile>${version_file}</outputFile>
+                    <replacements>
+                        <replacement>
+                            <token>@project.version@</token>
+                            <value>${project.version}</value>
+                        </replacement>
+                    </replacements>
+                </configuration>
+            </plugin>
+
+            <!-- Defineix la propietat {buildNumber} que s'empra al filtrat -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+            </plugin>
+
+        </plugins>
+
     </build>
 
     <profiles>
