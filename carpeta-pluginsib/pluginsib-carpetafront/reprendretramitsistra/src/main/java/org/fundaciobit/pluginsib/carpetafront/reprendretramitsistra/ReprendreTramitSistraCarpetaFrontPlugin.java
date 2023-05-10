@@ -254,7 +254,7 @@ public class ReprendreTramitSistraCarpetaFrontPlugin extends AbstractCarpetaFron
                 String urlAnonimo = backofficeFacade.obtenerUrlAccesoAnonimo(clau);
                 if (urlAnonimo == null) {
                 	log.info("UrlAnonimo is NULL");
-                	dades.put("error", getTraduccio("error.noclau", locale) );
+                	dades.put("error", getTraduccio("error.noclau", locale));
                 }else {
                 	log.info("UrlAnonimo: " + urlAnonimo);
                 }

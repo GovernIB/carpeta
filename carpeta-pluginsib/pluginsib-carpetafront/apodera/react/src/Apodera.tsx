@@ -385,6 +385,9 @@ class Apodera extends React.Component<ApoderaProps> {
 
     const estatsDisponibles: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 18, 19];
     let options = [];
+    let apoderaEstat: string|null = t("apodera.estat");
+    let filterVista: string|null = t("filter_vista");
+    
 
     for (let i = 0; i < estatsDisponibles.length; i++) {
       let obj = {
@@ -474,7 +477,9 @@ class Apodera extends React.Component<ApoderaProps> {
               </select>
             </CarpetaFormulariDeFiltreItem>
               */}
-            <CarpetaFormulariDeFiltreItem label={t("apodera.estat")}>
+
+            
+            <CarpetaFormulariDeFiltreItem label={apoderaEstat != null ? apoderaEstat:""}>
               <>
                 <select
                   id="estat"
@@ -503,7 +508,7 @@ class Apodera extends React.Component<ApoderaProps> {
               </>
             </CarpetaFormulariDeFiltreItem>
 
-            <CarpetaFormulariDeFiltreItem label={t("filter_vista")}>
+            <CarpetaFormulariDeFiltreItem label={filterVista != null ? filterVista : ""}>
               <>
                 <select
                   id="vista"

@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {withTranslation} from 'react-i18next';
+import React from 'react';
+import {withTranslation, WithTranslation} from 'react-i18next';
 import axios from "axios";
 import i18n from 'i18next';
 
@@ -7,54 +7,76 @@ import i18n from 'i18next';
  *  @author jagarcia
  */
 
-class ReprendreTramit extends Component {
+interface ReprendreTramitProps extends WithTranslation{
+    pathtoservei: string;
+    titles: any;
+    subtitles: any;
+}
 
-    constructor(props) {
+interface ReprendreTramitState {
+    isLoaded: boolean;
+    error: boolean;
+}
+
+class ReprendreTramit extends React.Component<ReprendreTramitProps, ReprendreTramitState> {
+
+    private clau: string|undefined;
+
+
+    constructor(props: ReprendreTramitProps) {
         super(props);
 
         this.state = {
-            isLoaded: false,
-            data: null,
-            clau: null,
+            isLoaded: true,
             error: false
-        };
+        }
+        this.clau = undefined;
+        
 
         this.handleChangeClau = this.handleChangeClau.bind(this);
         this.handleSubmitClau = this.handleSubmitClau.bind(this);
 
+        this.handleSubmitClauSync = this.handleSubmitClauSync.bind(this);
+        
+
         this.canviatIdioma = this.canviatIdioma.bind(this);
         i18n.on('languageChanged', this.canviatIdioma);
-
     }
 
-    canviatIdioma(lng) {
+    canviatIdioma(lng:string) {
       //  console.log(" CANVIAT IDIOMA EN ReprendreTramit A ]" + lng+ "[");
-      this.componentDidMount();
+        this.forceUpdate();
     }
 	
-    handleChangeClau(e) {
+    handleChangeClau(e: any) {
+        
+        this.clau = e.target.value;
+    }
+
+    handleSubmitClauSync(){
+        
+        this.handleSubmitClau(this.clau != undefined ? this.clau : "");
         this.setState({
-            ...this.state, 
-            clau: e.target.value
+            ...this.state,
+            isLoaded: false
         });
     }
 
-    async handleSubmitClau(val) {
+    async handleSubmitClau(val: string) {
 
         const url2 = this.props.pathtoservei;
         await axios.get(url2, {params:{clau: val}}).then( (response) => {
 
-            this.setState({
-                ...this.state,
-                error: false
-            });
-
             const url = response.data.url;
-            if (url.length > 0 )
+            if (url.length > 0 ){
                 window.open(url, "_blank");
-            else{
                 this.setState({
-                    ...this.state,
+                    isLoaded: true,
+                    error: false
+                });
+            }else{
+                this.setState({
+                    isLoaded: true,
                     error: true
                 });
             }
@@ -62,63 +84,47 @@ class ReprendreTramit extends Component {
         }).catch( error => {
             console.log(error);
             this.setState({
-                ...this.state,
+                isLoaded: true,
                 error: true
             });
         } );
+
     }
 
     componentDidMount() {
-        this.setState({
-            ...this.state, 
-            isLoaded: true
-        }); 
-
-        const { t } = this.props;
-        
-        let content;
-
-            content = <>
-                <div className="form-group">
-                    <label for="clau">{t('reprendreClau')}</label>
-                    <input type="text" className="form-control col-md-6" id="clau" name="clau" value={this.state.clau} onChange={(e)=>{this.handleChangeClau(e);}} />
-                    <input type="button" className="btn btn-primary carpeta-btn mt-2" onClick={() => {this.handleSubmitClau(this.state.clau)}} value={t('reprendreContinuar')} />
-                </div>
-            </>
         
     }
 
     componentDidUpdate(){
-
         // console.log("ComponentDidUpdate ReprendreTramit: " , i18n.language);
-
     }
 
     render() {
 
-        const isLoaded = this.state.isLoaded;
+        let isLoaded = this.state.isLoaded;
 
-        const { t } = this.props;
-
+        const t = this.props.i18n.t;
         let content;
 
+        let reprendreContinuar : string = t('reprendreContinuar');
+
         if (!isLoaded) {
-           
-             content = <div  id="carregant" className="loader-container centrat ">
+            content = <div  id="carregant" className="loader-container centrat ">
                         <div className="loader"/>
                     </div>;
         } else {
-
             content = <>
                 <div className="form-group">
-                    <label for="clau">{i18n.t('reprendreClau')}</label>
-                    <input type="text" className="form-control columnReprendre" id="clau" name="clau" value={this.state.clau} onChange={(e)=>{this.handleChangeClau(e);}} />
-                    <input type="button" className="btn btn-primary carpeta-btn mt-2" onClick={() => {this.handleSubmitClau(this.state.clau)}} value={i18n.t('reprendreContinuar')} />
+                    <label htmlFor="clau">{i18n.t('reprendreClau')}</label>
+                    <input type="text" className="form-control columnReprendre" id="clau" name="clau" value={this.clau} onChange={(e)=>{this.handleChangeClau(e);}} />
+                    <input type="button" className="btn btn-primary carpeta-btn mt-2" onClick={() => {this.handleSubmitClauSync()}} value={reprendreContinuar} />
                 </div>
             </>
             
         }
 
+        let pagTornar: string|null = sessionStorage.getItem("pagTornar");
+        let contextPath: string|null = sessionStorage.getItem("contextPath");
         
         return (<>
                     <div className="titolPaginaApp visioMobil">
@@ -137,8 +143,8 @@ class ReprendreTramit extends Component {
                         </div>
                         <div className="col-md-12 border-0 float-left p-0" id="botoTornarDiscapacidad" style={{ marginTop: '20px' }}>
                             <button type="button" data-toggle="modal" onClick={() => {
-                                window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                            }} className="botoSuport botoTornauApp" tabIndex="520" aria-labelledby="botoTornarDiscapacidad">{i18n.t('reprendreTornar')}</button>
+                                window.location.href = pagTornar != null ? pagTornar : "" ; sessionStorage.setItem("pagTornar", contextPath != null ? contextPath : "")
+                            }} className="botoSuport botoTornauApp" tabIndex={520} aria-labelledby="botoTornarDiscapacidad">{i18n.t('reprendreTornar')}</button>
                         </div>
                     </div>
                 </>
