@@ -1,6 +1,8 @@
 package org.fundaciobit.pluginsib.carpetafront.pinbalmatricula.test;
 
 import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.Properties;
 
@@ -27,11 +29,11 @@ public class Test {
 
             BasicConfigurator.configure();
 
-            prop.load(new FileInputStream("plugin.properties"));
+            prop.load(new InputStreamReader(new FileInputStream("plugin.properties"), Charset.forName("UTF-8")));
 
             PinbalMatriculaCarpetaFrontPlugin pinbalMatricula = new PinbalMatriculaCarpetaFrontPlugin(base, prop);
 
-            test.load(new FileInputStream("test.properties"));
+            test.load(new InputStreamReader(new FileInputStream("test_fill_sense_dni.properties"), Charset.forName("UTF-8")));
 
             UserData userData = new UserData();
             userData.setName(test.getProperty("userData.name"));
