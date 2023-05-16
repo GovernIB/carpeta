@@ -15,7 +15,7 @@ public class Registre {
 
     private String extracto;
 
-    private Long estado;
+    private String estado;
 
     private String denominacionDestino;
 
@@ -24,7 +24,7 @@ public class Registre {
     }
     
 
-    public Registre(String numeroRegistro, Date fechaRegistro, String extracto, Long estado,
+    public Registre(String numeroRegistro, Date fechaRegistro, String extracto, String estado,
             String denominacionDestino) {
         super();
         this.numeroRegistro = numeroRegistro;
@@ -59,11 +59,11 @@ public class Registre {
         this.extracto = extracto;
     }
 
-    public Long getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Long estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

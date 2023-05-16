@@ -431,10 +431,14 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             }
 
             List<Registre> registres = new ArrayList<Registre>();
+            
             for (AsientoWs a : registresRegweb) {
-                registres.add(new Registre(a.getNumeroRegistro(), a.getFechaRegistro(), a.getExtracto(), a.getEstado(),
+                String estatStr = super.getTraduccio("registro.estado."+a.getEstado(), locale);
+                registres.add(new Registre(a.getNumeroRegistro(), a.getFechaRegistro(), a.getExtracto(), estatStr,
                         a.getDenominacionDestino()));
             }
+            
+            
 
             Map<String, Object> dades = new HashMap<String, Object>();
             
