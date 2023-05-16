@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {withTranslation} from 'react-i18next';
+import React from 'react';
+import {WithTranslation, withTranslation} from 'react-i18next';
 import axios from "axios";
 import i18n from './i18n';
 
@@ -7,14 +7,28 @@ import i18n from './i18n';
  *  @author jagarcia
  */
 
-class DatosAyudaSubvenciones extends Component {
-    constructor(props) {
+interface DatosAyudaSubvencionesProps extends WithTranslation{
+    pathtoservei: string;
+    titles: any;
+    subtitles: any;
+}
+
+interface DatosAyudaSubvencionesState{
+    isLoaded: boolean;
+    data: any;
+}
+
+class DatosAyudaSubvenciones extends React.Component<DatosAyudaSubvencionesProps, DatosAyudaSubvencionesState> {
+    
+    
+    constructor(props: DatosAyudaSubvencionesProps) {
         super(props);
 
         this.state = {
             isLoaded: false,
             data: null
         };
+
     }
 
     componentDidMount() {
@@ -29,7 +43,7 @@ class DatosAyudaSubvenciones extends Component {
                 isLoaded: true,
                 data: res.data
             });
-        }).catch(function (error) {
+        }).catch(error => {
 
             console.log(JSON.stringify(error));
             const restdata = { "error": JSON.stringify(error) };
@@ -56,8 +70,8 @@ class DatosAyudaSubvenciones extends Component {
         let contentApp;
 
         if (!isLoaded) {
-           
-             content = <div  id="carregant" className="loader-container centrat ">
+        
+            content = <div  id="carregant" className="loader-container centrat ">
                         <div className="loader"/>
                     </div>;
         } else {
@@ -107,9 +121,11 @@ class DatosAyudaSubvenciones extends Component {
                     </div>
 				</div>;
 
+                let contentAppTitle: string = t('pinbalContratacionesConsulta');
+
                 contentApp = <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil wAuto" tabIndex={510}>
                     <div className="col-sm-1 float-left">
-                        <span className="oi oi-bell iconaFormApp" title={t('pinbalContratacionesConsulta')} style={{verticalAlign: 'sub'}}/>
+                        <span className="oi oi-bell iconaFormApp" title={contentAppTitle} style={{verticalAlign: 'sub'}}/>
                     </div>
                     <div className="col-sm-10 float-right">
                         {alerta}
@@ -123,7 +139,9 @@ class DatosAyudaSubvenciones extends Component {
             }
         }
 
-        
+        let paginaTornar: string|null = sessionStorage.getItem("pagTornar");
+        let contextPath: string|null = sessionStorage.getItem("contextPath");
+
         return (<>
                 <div className="titolPaginaApp visioMobil">
                     {this.props.titles[i18n.language]}
@@ -141,8 +159,8 @@ class DatosAyudaSubvenciones extends Component {
                     </div>
                     <div className="col-md-12 border-0 float-left p-0" id="botoTornarContrataciones" style={{ marginTop: '20px' }}>
                         <button type="button" data-toggle="modal" onClick={() => {
-                            window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                        }} className="botoSuport botoTornauApp" tabIndex="520" aria-labelledby="botoTornarContrataciones">{t('pinbalContratacionesTornar')}</button>
+                            window.location.href = paginaTornar != null ? paginaTornar : ""; sessionStorage.setItem("pagTornar", contextPath != null ? contextPath : "")
+                        }} className="botoSuport botoTornauApp" tabIndex={520} aria-labelledby="botoTornarContrataciones">{t('pinbalContratacionesTornar')}</button>
                     </div>
                 </div>
             </>
