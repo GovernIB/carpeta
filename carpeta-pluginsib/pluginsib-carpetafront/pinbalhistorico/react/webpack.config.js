@@ -7,33 +7,42 @@ const config = {
 		filename: "pinbalhistorico_reactjs_main.js"
 	},
 
+	//mode: 'development',
+    mode: 'production',
 	module: {
-		rules: [
+	  rules: [
+		{
+		  test: /\.(js|jsx)$/,
+		  include: path.resolve(__dirname, "src"),
+		  use: [
 			{
-				test: /\.(js|jsx)$/,
-				loaders: "babel-loader",
-				query: {
-					"presets": [
-						//"env",
-						"@babel/preset-react"
-						//"stage-2",
-						//"@babel/react"
-					]
-					//"plugins": [["flow-runtime"], "transform-decorators-legacy"]
-				}
-			}
-			,
-			// Load images.
+			  loader: "babel-loader",
+			  options: {
+				  "presets": [
+					  //"env",
+					  "@babel/preset-react"
+					  //"stage-2",
+					  //"@babel/react"
+				  ]
+			  },
+			},
+		  ],
+		},
+		// Load images.
+		{
+		  test: /\.(gif|jpe?g|png)$/,
+		  use: [
 			{
-				test: /\.(gif|jpe?g|png)$/,
-				loader: 'url-loader?limit=25000',
-				query: {
-					limit: 10000,
-					name: 'static/media/images/[name].[hash:8].[ext]'
-				}
-			}
-		]
-	}
+			  loader: "url-loader?limit=25000",
+			  options: {
+				limit: 10000,
+				name: "static/media/images/[name].[hash:8].[ext]",
+			  },
+			},
+		  ],
+		},
+	  ],
+	},
 };
 
 module.exports = config;

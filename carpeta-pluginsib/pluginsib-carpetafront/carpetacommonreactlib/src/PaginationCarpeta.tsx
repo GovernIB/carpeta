@@ -56,7 +56,7 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
     console.log("PaginationCarpeta().registresRetornats  => " + this.props.paginationInfo.registresRetornats);
     console.log("PaginationCarpeta().totalRegistres  => " + this.props.paginationInfo.totalRegistres);
     */
-    initTranslation(this.props.i18n);
+    initTranslation(props.i18n);
     this.updatePaginationInfo = this.updatePaginationInfo.bind(this);
 
     this.state = {
@@ -85,8 +85,6 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
       return <></>;
     }
 
-    //console.log("PaginationCarpeta::render() =>  this.props.paginationInfo ...");
-    const current: number = paginationInfo.elementsRetornats;
     const total: number = paginationInfo.totalElements;
     const from: number = paginationInfo.paginaActual * paginationInfo.elementsPerPagina + 1;
     const to: number = Math.min(
@@ -98,7 +96,6 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
     //console.log("PaginationCarpeta::render() =>  Desplegable elementsPerPàgina ...");
 
     let message: string = t("paginacioLabel", {
-      current: current,
       total: total,
       from: from,
       to: to,
