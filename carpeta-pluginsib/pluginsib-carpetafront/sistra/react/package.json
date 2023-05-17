@@ -25,6 +25,7 @@
     "react-i18next": "^12.1.1"
   },
   "devDependencies": {
+    "rimraf": "^3.0.2",
     "@babel/core": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
     "babel-loader": "^8.1.0",
@@ -37,7 +38,6 @@
     "@types/webpack": "^5.28.0",
     "babel-preset-es2015": "^6.24.1",
     "css-loader": "^6.3.0",
-    "rimraf": "^3.0.2",
     "style-loader": "^3.3.0",
     "ts-loader": "^9.4.2",
     "ts-node": "^10.9.1",
