@@ -7,6 +7,7 @@ const config = {
 		filename: "notib_reactjs_main.js"
 	},
 	mode: "production",
+	//mode: "development",
 	resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
   	},
