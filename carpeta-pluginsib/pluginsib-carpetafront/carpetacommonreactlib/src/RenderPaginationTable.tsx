@@ -112,7 +112,8 @@ class RenderPaginationTable extends React.Component<RenderPaginationTableProps> 
   }
 
   onClickSelectElementsByPage(elementsByPage: number): void {
-    this.loadDataAsync(0, elementsByPage);
+    this.elementsByPage = elementsByPage;
+    this.loadDataAsync(0, elementsByPage); 
   }
 
   render() {
