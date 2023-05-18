@@ -115,7 +115,7 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
       let maxCasellesPerMostrar: number;
       let w: number = window.innerWidth;
 
-      console.log("PartitionCarpeta::render() => window.innerWidth = " + w);
+      console.log("PaginationCarpeta::render() => window.innerWidth = " + w);
 
       // Serveix per ajustar la funció de càlcul de casseles a pintar
       const ajust: number = reactdetect.isMobileOnly ? 0 : -2;
@@ -127,7 +127,7 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
         maxCasellesPerMostrar = Math.floor((9 * w - 5880) / 480) + ajust;
       }
 
-      console.log("PartitionCarpeta::render() => caselles = " + maxCasellesPerMostrar);
+      console.log("PaginationCarpeta::render() => caselles = " + maxCasellesPerMostrar);
 
       //TODO FALTA MOBILE
       // XYZ ZZZ
@@ -136,7 +136,7 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
       let end: number;
 
       let showPoints: boolean;
-      console.log("PartitionCarpeta::render() => paginationInfo.totalPagines = " + paginationInfo.totalPagines);
+      console.log("PaginationCarpeta::render() => paginationInfo.totalPagines = " + paginationInfo.totalPagines);
       if (paginationInfo.totalPagines < maxCasellesPerMostrar) {
         start = 0;
         end = paginationInfo.totalPagines;
@@ -166,9 +166,9 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
         showPoints = true;
       }
 
-      console.log("PartitionCarpeta::render() => start = " + start);
-      console.log("PartitionCarpeta::render() => end = " + end);
-      console.log("PartitionCarpeta::render() => showPoints = " + showPoints);
+      console.log("PaginationCarpeta::render() => start = " + start);
+      console.log("PaginationCarpeta::render() => end = " + end);
+      console.log("PaginationCarpeta::render() => showPoints = " + showPoints);
 
       //console.log("PaginationCarpeta::render() =>  Functions ...");
 

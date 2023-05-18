@@ -1730,7 +1730,7 @@ var PaginationCarpeta = /** @class */ (function (_super) {
             onClickSelectElementsByPage = this.props.onClickSelectElementsByPage;
             var maxCasellesPerMostrar = void 0;
             var w = window.innerWidth;
-            console.log("PartitionCarpeta::render() => window.innerWidth = " + w);
+            console.log("PaginationCarpeta::render() => window.innerWidth = " + w);
             // Serveix per ajustar la funció de càlcul de casseles a pintar
             var ajust = isMobileOnly_1 ? 0 : -2;
             if (w < 920) {
@@ -1742,13 +1742,13 @@ var PaginationCarpeta = /** @class */ (function (_super) {
             else {
                 maxCasellesPerMostrar = Math.floor((9 * w - 5880) / 480) + ajust;
             }
-            console.log("PartitionCarpeta::render() => caselles = " + maxCasellesPerMostrar);
+            console.log("PaginationCarpeta::render() => caselles = " + maxCasellesPerMostrar);
             //TODO FALTA MOBILE
             // XYZ ZZZ
             var start = void 0;
             var end = void 0;
             var showPoints = void 0;
-            console.log("PartitionCarpeta::render() => paginationInfo.totalPagines = " + paginationInfo.totalPagines);
+            console.log("PaginationCarpeta::render() => paginationInfo.totalPagines = " + paginationInfo.totalPagines);
             if (paginationInfo.totalPagines < maxCasellesPerMostrar) {
                 start = 0;
                 end = paginationInfo.totalPagines;
@@ -1775,9 +1775,9 @@ var PaginationCarpeta = /** @class */ (function (_super) {
                 end = Math.min(end, paginationInfo.totalPagines);
                 showPoints = true;
             }
-            console.log("PartitionCarpeta::render() => start = " + start);
-            console.log("PartitionCarpeta::render() => end = " + end);
-            console.log("PartitionCarpeta::render() => showPoints = " + showPoints);
+            console.log("PaginationCarpeta::render() => start = " + start);
+            console.log("PaginationCarpeta::render() => end = " + end);
+            console.log("PaginationCarpeta::render() => showPoints = " + showPoints);
             //console.log("PaginationCarpeta::render() =>  Functions ...");
             //Si el parametre onClickSelectElementsByPage te valor, existeix una funcio per canviar el nº de elements
             // per tant s'ha de incloure l'element per canviar el nº de elements.
@@ -2024,6 +2024,7 @@ var RenderPaginationTable = /** @class */ (function (_super) {
         console.log("RenderPaginationTable::onClickPagination(" + page + ") Surt ..." + new Date());
     };
     RenderPaginationTable.prototype.onClickSelectElementsByPage = function (elementsByPage) {
+        this.elementsByPage = elementsByPage;
         this.loadDataAsync(0, elementsByPage);
     };
     RenderPaginationTable.prototype.render = function () {
