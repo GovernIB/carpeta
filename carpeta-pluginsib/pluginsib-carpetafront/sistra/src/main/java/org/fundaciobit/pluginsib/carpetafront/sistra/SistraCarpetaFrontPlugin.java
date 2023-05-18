@@ -3,7 +3,12 @@ package org.fundaciobit.pluginsib.carpetafront.sistra;
 import es.caib.carpeta.commons.utils.BasicAuthenticator;
 import es.caib.carpeta.commons.utils.Configuracio;
 import es.caib.carpeta.commons.utils.DateUtils;
-import es.caib.carpeta.pluginsib.carpetafront.api.*;
+import es.caib.carpeta.pluginsib.carpetafront.api.BasicServiceInformation;
+import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
+import es.caib.carpeta.pluginsib.carpetafront.api.IListenerLogCarpeta;
+import es.caib.carpeta.pluginsib.carpetafront.api.TitlesInfo;
+import es.caib.carpeta.pluginsib.carpetafront.api.UserData;
+import es.caib.carpeta.pluginsib.carpetafront.api.UserDataRepresentative;
 import es.caib.sistramit.rest.api.externa.v1.RFiltroTramitePersistencia;
 import es.caib.sistramit.rest.api.externa.v1.RFiltroTramiteFinalizado;
 import es.caib.sistramit.rest.api.externa.v1.RInfoTicketAcceso;
@@ -11,7 +16,12 @@ import es.caib.sistramit.rest.api.externa.v1.RRepresentanteInfo;
 import es.caib.sistramit.rest.api.externa.v1.RTramitePersistencia;
 import es.caib.sistramit.rest.api.externa.v1.RTramiteFinalizado;
 import es.caib.sistramit.rest.api.externa.v1.RUsuarioAutenticadoInfo;
-import es.caib.zonaper.ws.v2.model.elementoexpediente.*;
+import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementoExpediente;
+import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementosExpediente;
+import es.caib.zonaper.ws.v2.model.elementoexpediente.FiltroElementosExpediente;
+import es.caib.zonaper.ws.v2.model.elementoexpediente.ObjectFactory;
+import es.caib.zonaper.ws.v2.model.elementoexpediente.TipoElementoExpediente;
+import es.caib.zonaper.ws.v2.model.elementoexpediente.TiposElementoExpediente;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitePersistente;
 import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitesPersistentes;
 import es.caib.zonaper.ws.v2.services.BackofficeFacade;
@@ -44,7 +54,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
-import java.util.TimeZone;
 import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
@@ -251,6 +260,7 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
     protected static final String URL_REST_SERVICE = "consultaTramits";
 
+    @SuppressWarnings("deprecation")
     public void consultaTramits(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, Boolean isGet) {
@@ -268,20 +278,23 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
         /* Filtre número de registres per pàgina */
         //        String formRegPorPagina = request.getParameter("registrosPorPagina");
+        
+        log.info("SistraCarpetaFront::consulta()  Paràmetres rebuts: \n"
+                + "    + formDataIniciStr = "  + formDataIniciStr + "\n"
+                + "    + formDataFiStr = "  + formDataFiStr + "\n");
 
         try {
 
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            sdf.setTimeZone(TimeZone.getTimeZone("Europe/Madrid"));
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            //sdf.setTimeZone(TimeZone.getTimeZone("Europe/Madrid"));
 
             formDataInici = sdf.parse(formDataIniciStr);
             formDataFi = sdf.parse(formDataFiStr);
 
             List<TramitePersistenteGenerico> tramitesGenericos = new ArrayList<TramitePersistenteGenerico>();
-            List<TramitePersistenteGenerico> sortedTramit = new ArrayList<TramitePersistenteGenerico>();
+            
 
             if (formDataInici == null) {
-
                 throw new Exception(getTraduccio("error.dataInici.null", locale));
             }
 
@@ -293,10 +306,11 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
                 throw new Exception(getTraduccio("error.estat.null", locale));
             }
 
-            log.info("Consulta  resultats a sistra per dataInici:" + formDataInici + " | Data fi: " + formDataFi
+            formDataFi = DateUtils.darreraHoraDelDia(formDataFi);
+            log.info("Consulta  resultats a sistra per"
+                    + " dataInici:" + TramitePersistenteGenerico.SDF.format(formDataInici) 
+                    + " | Data fi: " + TramitePersistenteGenerico.SDF.format(formDataFi)
                     + " | Estat: " + formEstat);
-
-            formDataFi = DateUtils.sumarRestarDiasFecha(formDataFi, 1);
 
             //String missatgeError = "";
 
@@ -371,8 +385,11 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
             }
 
             // Ordenam tràmits a mostrar
+            
+            List<TramitePersistenteGenerico> sortedTramit = new ArrayList<TramitePersistenteGenerico>(tramitesGenericos);
+            
             sortedTramit = tramitesGenericos.stream()
-                    .sorted(Comparator.comparing(TramitePersistenteGenerico::getFechaInicio).reversed())
+                    .sorted(Comparator.comparing(TramitePersistenteGenerico::getFechaInicioDate).reversed())
                     .collect(Collectors.toList());
 
             List<TramitePersistenteGenerico> tramitsPagina = sortedTramit;

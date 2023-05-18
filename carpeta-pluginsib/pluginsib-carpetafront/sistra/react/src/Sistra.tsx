@@ -9,7 +9,7 @@
 import React from "react";
 import { WithTranslation, withTranslation } from "react-i18next";
 import axios from "axios";
-import i18n from "i18next";
+import i18n from "./i18n";
 
 import { DetallRegistre } from "regwebdetallcomponentlib";
 import {
@@ -18,11 +18,9 @@ import {
   CarpetaFormulariDeFiltreItem,
   RenderTable,
   RenderTableData,
-  RenderTableReturn,
   RowType,
   TemplatePageCarpeta,
 } from "carpetacommonreactlib";
-
 
 interface SistraProps extends WithTranslation {
   titles: any;
@@ -36,7 +34,7 @@ interface SistraState {
 }
 
 interface Tramit {
-  index: number,
+  index: number;
   descripcionTramite: string;
   fechaInicio: string;
   pendiente: string;
@@ -49,7 +47,6 @@ interface Tramit {
 }
 
 class Sistra extends React.Component<SistraProps, SistraState> {
-
   private childRenderTable: React.RefObject<RenderTable> = React.createRef();
 
   private filter_status: string;
@@ -74,13 +71,13 @@ class Sistra extends React.Component<SistraProps, SistraState> {
 
     this.columnsNom = ["index", "descripcionTramite", "fechaInicio", "estat"];
 
-    this.filter_status = 'A';
+    this.filter_status = "A";
     this.filter_startDate = startDateObj;
     this.filter_endDate = endDateObj;
     this.errorEnFiltre = false;
 
     this.state = {
-      numeroRegistro: null
+      numeroRegistro: null,
     };
 
     this.handleSubmitSearcher = this.handleSubmitSearcher.bind(this);
@@ -89,29 +86,33 @@ class Sistra extends React.Component<SistraProps, SistraState> {
     this.onChangeStartDate = this.onChangeStartDate.bind(this);
     this.onChangeEndDate = this.onChangeEndDate.bind(this);
 
+
+    this.formatDate = this.formatDate.bind(this);
+
     this.processarTramits = this.processarTramits.bind(this);
 
     this.carregaDadesSistra = this.carregaDadesSistra.bind(this);
-
-    //this.dateFormat = this.onChangeState.bind(this);
 
     this.tornarDeDetallRegistre = this.tornarDeDetallRegistre.bind(this);
 
     this.onClickRow = this.onClickRow.bind(this);
 
-    //this.siNo = this.siNo.bind(this);
     this.estatTramit = this.estatTramit.bind(this);
-    //this.nomEstat = this.nomEstat.bind(this);
 
     this.canviatIdioma = this.canviatIdioma.bind(this);
     i18n.on("languageChanged", this.canviatIdioma);
   }
 
-
   componentDidMount() {
     this.carregaDadesSistra();
-    if(this.childRenderTable.current != null)
-    this.childRenderTable.current.updateTableData(null);
+    if (this.childRenderTable.current != null) this.childRenderTable.current.updateTableData(null);
+  }
+
+  /**  dd-MM-yyyy */
+  formatDate(today: Date): String {
+    let mm = today.getMonth() + 1; // Months start at 0!
+    let dd = today.getDate();
+    return ((dd < 10) ? "0" + dd : "" + dd) + (mm < 10 ? "-0" + mm : "-" + mm) + "-" + today.getFullYear();
   }
 
   onClickRow(pos: number, item: any): void {
@@ -145,10 +146,9 @@ class Sistra extends React.Component<SistraProps, SistraState> {
       window.alert(t("errorEnFiltre"));
       return false;
     }
-    
+
     this.carregaDadesSistra();
-    if(this.childRenderTable.current != null)
-    this.childRenderTable.current.updateTableData(null);
+    if (this.childRenderTable.current != null) this.childRenderTable.current.updateTableData(null);
 
     console.log("Sistra::handleSubmitSearcher() final");
 
@@ -227,14 +227,16 @@ class Sistra extends React.Component<SistraProps, SistraState> {
   }
 
   async carregaDadesSistra() {
-
     console.log("Sistra::carregaDadesSistra() => Inici ...");
 
     const params = {
-      dataInici: this.filter_startDate,
-      dataFi: this.filter_endDate,
+      dataInici: this.formatDate(this.filter_startDate),
+      dataFi: this.formatDate(this.filter_endDate),
       estat: this.filter_status,
     };
+
+    console.log("Sistra::carregaDadesSistra() => dataInici: " + this.filter_startDate);
+    console.log("Sistra::carregaDadesSistra() => dataFi: " + this.filter_endDate);
 
     const url3 = this.props.pathtoservei;
 
@@ -242,23 +244,19 @@ class Sistra extends React.Component<SistraProps, SistraState> {
       .get(url3, { params: params })
       .then((response) => {
         if (response.data == null) {
-          console.log(
-            "Sistra::carregaDadesSistra() => Error buit tramits? => " + response.data.tramits
-          );
+          console.log("Sistra::carregaDadesSistra() => Error buit tramits? => " + response.data.tramits);
           let errorPantalla = "Tràmits és null .";
           let data: RenderTableData = {
             tableData: null,
             error: errorPantalla,
           };
-          if(this.childRenderTable.current != null)
-          this.childRenderTable.current.updateTableData(data);
+          if (this.childRenderTable.current != null) this.childRenderTable.current.updateTableData(data);
         } else {
           let data: RenderTableData = {
             tableData: this.processarTramits(response.data.tramits),
             error: null,
           };
-          if(this.childRenderTable.current != null)
-          this.childRenderTable.current.updateTableData(data);
+          if (this.childRenderTable.current != null) this.childRenderTable.current.updateTableData(data);
         }
       })
       .catch((error) => {
@@ -279,8 +277,7 @@ class Sistra extends React.Component<SistraProps, SistraState> {
           tableData: null,
           error: errorPantalla,
         };
-        if(this.childRenderTable.current != null)
-        this.childRenderTable.current.updateTableData(data);
+        if (this.childRenderTable.current != null) this.childRenderTable.current.updateTableData(data);
       });
   }
 
@@ -303,32 +300,32 @@ class Sistra extends React.Component<SistraProps, SistraState> {
     // @ts-ignore
     $("body").append(
       '<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">' +
-      '<div class="modal-dialog" role="document">' +
-      '<div class="modal-content">' +
-      '<div class="modal-header">' +
-      '<h3 id="myModalLabel">' +
-      t("sistraModalTitol") +
-      "</h3>" +
-      '<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="font-weight: normal;font-size: 20px;" tabindex="590">x</button>' +
-      "</div>" +
-      '<div class="modal-body">' +
-      "<p>" +
-      t("sistraModalTexte") +
-      "</p>" +
-      "</div>" +
-      '<div class="modal-footer">' +
-      '<button class="btn btn-success" type="button" onclick="window.open(\'' +
-      url +
-      "', '_blank');$('#myModal').modal('hide');\" tabindex=\"511\">" +
-      t("sistraModalBotoContinuar") +
-      "</button>" +
-      '<button class="btn btn-danger" data-dismiss="modal" aria-hidden="true" tabindex="512">' +
-      t("sistraModalBotoCancelar") +
-      "</button>" +
-      "</div>" +
-      "</div>" +
-      "</div>" +
-      "</div>"
+        '<div class="modal-dialog" role="document">' +
+        '<div class="modal-content">' +
+        '<div class="modal-header">' +
+        '<h3 id="myModalLabel">' +
+        t("sistraModalTitol") +
+        "</h3>" +
+        '<button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="font-weight: normal;font-size: 20px;" tabindex="590">x</button>' +
+        "</div>" +
+        '<div class="modal-body">' +
+        "<p>" +
+        t("sistraModalTexte") +
+        "</p>" +
+        "</div>" +
+        '<div class="modal-footer">' +
+        '<button class="btn btn-success" type="button" onclick="window.open(\'' +
+        url +
+        "', '_blank');$('#myModal').modal('hide');\" tabindex=\"511\">" +
+        t("sistraModalBotoContinuar") +
+        "</button>" +
+        '<button class="btn btn-danger" data-dismiss="modal" aria-hidden="true" tabindex="512">' +
+        t("sistraModalBotoCancelar") +
+        "</button>" +
+        "</div>" +
+        "</div>" +
+        "</div>" +
+        "</div>"
     );
 
     // @ts-ignore
@@ -370,9 +367,9 @@ class Sistra extends React.Component<SistraProps, SistraState> {
         />
       );
     }
-    let sistraDataInici : string|null = t("sistraDataInici");
-    let sistraDataFi : string|null = t("sistraDataFi");
-    let sistraEstat : string|null = t("sistraEstat");
+    let sistraDataInici: string | null = t("sistraDataInici");
+    let sistraDataFi: string | null = t("sistraDataFi");
+    let sistraEstat: string | null = t("sistraEstat");
 
     formulari = (
       <>
@@ -412,7 +409,7 @@ class Sistra extends React.Component<SistraProps, SistraState> {
                 onChange={(e) => {
                   this.onChangeState(e);
                 }}
-                value={this.filter_status}
+                defaultValue={this.filter_status}
               >
                 <option value="A" className="form-control form-control-sm selectMobil">
                   {t("sistraTots")}
@@ -433,27 +430,26 @@ class Sistra extends React.Component<SistraProps, SistraState> {
       </>
     );
 
-      const columnsTitols = ['#', i18n.t("sistraTramit"), i18n.t("sistraData"), i18n.t("sistraEstat")];
+    const columnsTitols = ["#", i18n.t("sistraTramit"), i18n.t("sistraData"), i18n.t("sistraEstat")];
 
-      return (
-        <TemplatePageCarpeta {...this.props} titles={this.props.titles} subtitles={this.props.subtitles} i18n={i18n}>
-          <>
-            {formulari}
-            <div className="float-left" style={{ width: "97%", position: "relative" }}>
-              <RenderTable
-                ref={this.childRenderTable}
-                columnNames={this.columnsNom}
-                columnTitles={columnsTitols}
-                rowType={RowType.EXTERNAL_LINK}
-                i18n={i18n}
-                onClickRow={this.onClickRow}
-              />
-            </div>
-          </>
-        </TemplatePageCarpeta>
-      );
-    }
+    return (
+      <TemplatePageCarpeta {...this.props} titles={this.props.titles} subtitles={this.props.subtitles} i18n={i18n}>
+        <>
+          {formulari}
+          <div className="float-left" style={{ width: "97%", position: "relative" }}>
+            <RenderTable
+              ref={this.childRenderTable}
+              columnNames={this.columnsNom}
+              columnTitles={columnsTitols}
+              rowType={RowType.EXTERNAL_LINK}
+              i18n={i18n}
+              onClickRow={this.onClickRow}
+            />
+          </div>
+        </>
+      </TemplatePageCarpeta>
+    );
   }
-
+}
 
 export default withTranslation()(Sistra);

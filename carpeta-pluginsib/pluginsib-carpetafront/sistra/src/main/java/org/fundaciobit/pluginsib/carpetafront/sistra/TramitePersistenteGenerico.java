@@ -1,7 +1,7 @@
 package org.fundaciobit.pluginsib.carpetafront.sistra;
 
 import java.text.SimpleDateFormat;
-import java.util.Locale;
+import java.util.Date;
 
 import es.caib.sistramit.rest.api.externa.v1.RTramitePersistencia;
 import es.caib.sistramit.rest.api.externa.v1.RTramiteFinalizado;
@@ -14,13 +14,14 @@ import es.caib.zonaper.ws.v2.model.tramitepersistente.TramitePersistente;
  * @author anadal
  *
  */
-public class TramitePersistenteGenerico { 
-    
-    private static final SimpleDateFormat SDF = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+public class TramitePersistenteGenerico {
+
+    public static final SimpleDateFormat SDF = new SimpleDateFormat("dd/MM/yyyy\u00A0HH:mm");
 
     /* Atributs compartits */
     private String descripcionTramite;
     private String fechaInicio;
+    private Date fechaInicioDate;
     private int versionSistra;
     private boolean mostraModal;
 
@@ -36,6 +37,76 @@ public class TramitePersistenteGenerico {
     private boolean pendiente = false;
     private String url;
     private String numero;
+
+    public TramitePersistenteGenerico(RTramitePersistencia tramite, int versionSistra) {
+        this.idSesionTramitacion = tramite.getIdSesionTramitacion();
+        this.idioma = tramite.getIdioma();
+        this.idTramite = tramite.getIdTramite();
+        this.versionTramite = tramite.getVersionTramite();
+        this.descripcionTramite = tramite.getDescripcionTramite();
+        this.fechaInicioDate = tramite.getFechaInicio();
+        this.fechaInicio = SDF.format(this.fechaInicioDate);
+        this.fechaUltimoAcceso = SDF.format(tramite.getFechaUltimoAcceso());
+        this.versionSistra = versionSistra;
+        this.pendiente = true;
+        this.url = "";
+        this.tipo = null;
+        this.mostraModal = false;
+        this.numero = "";
+    }
+
+    public TramitePersistenteGenerico(RTramiteFinalizado tramite, int versionSistra) {
+        this.idSesionTramitacion = tramite.getIdSesionTramitacion();
+        this.idioma = tramite.getIdioma();
+        this.idTramite = tramite.getIdTramite();
+        this.versionTramite = tramite.getVersionTramite();
+        this.descripcionTramite = tramite.getDescripcionTramite();
+        this.fechaInicioDate = tramite.getFechaFin();
+        this.fechaInicio = SDF.format(this.fechaInicioDate);
+        this.fechaUltimoAcceso = SDF.format(tramite.getFechaFin());
+        this.versionSistra = versionSistra;
+        this.pendiente = false;
+        this.url = "";
+        this.tipo = null;
+        this.mostraModal = false;
+        this.numero = tramite.getNumeroRegistro();
+    }
+
+    public TramitePersistenteGenerico(TramitePersistente tramite, int versionSistra) {
+        this.idSesionTramitacion = tramite.getIdSesionTramitacion();
+        this.idioma = tramite.getIdioma();
+        this.idTramite = tramite.getIdTramite();
+        this.versionTramite = tramite.getVersionTramite();
+        this.descripcionTramite = tramite.getDescripcionTramite();
+        this.fechaInicioDate = tramite.getFechaInicio().toGregorianCalendar().getTime();
+        this.fechaInicio = SDF.format(this.fechaInicioDate);
+        this.fechaUltimoAcceso = SDF.format(tramite.getFechaUltimoAcceso().toGregorianCalendar().getTime());
+        this.versionSistra = versionSistra;
+        this.pendiente = true;
+        this.url = tramite.getUrlAcceso();
+        this.tipo = null;
+        this.mostraModal = false;
+        this.numero = "";
+    }
+
+    public TramitePersistenteGenerico(ElementoExpediente tramite, int versionSistra) {
+        this.idSesionTramitacion = "";
+        this.idioma = "";
+        this.idTramite = tramite.getUrl().substring(tramite.getUrl().indexOf("tramite=") + 8);
+        this.versionTramite = 0;
+        this.descripcionTramite = tramite.getDescripcion();
+        this.fechaInicioDate = tramite.getFecha().toGregorianCalendar().getTime();
+        this.fechaInicio = SDF.format(this.fechaInicioDate);
+        this.fechaUltimoAcceso = SDF.format(tramite.getFecha().toGregorianCalendar().getTime());
+        this.versionSistra = versionSistra;
+        this.pendiente = tramite.isPendiente();
+        this.url = tramite.getUrl();
+        this.tipo = tramite.getTipo();
+        this.mostraModal = false;
+        this.numero = (tramite.getTipo() == TipoElementoExpediente.REGISTRO && tramite.getNumero() != null)
+                ? (String) tramite.getNumero().getValue()
+                : "";
+    }
 
     public String getIdSesionTramitacion() {
         return idSesionTramitacion;
@@ -59,6 +130,14 @@ public class TramitePersistenteGenerico {
 
     public void setVersionTramite(final int versionTramite) {
         this.versionTramite = versionTramite;
+    }
+
+    public Date getFechaInicioDate() {
+        return fechaInicioDate;
+    }
+
+    public void setFechaInicioDate(Date fechaInicioDate) {
+        this.fechaInicioDate = fechaInicioDate;
     }
 
     public String getFechaInicio() {
@@ -157,72 +236,7 @@ public class TramitePersistenteGenerico {
         this.pendiente = pendiente;
     }
 
-    public TramitePersistenteGenerico(RTramitePersistencia tramite, int versionSistra) {
-        this.idSesionTramitacion = tramite.getIdSesionTramitacion();
-        this.idioma = tramite.getIdioma();
-        this.idTramite = tramite.getIdTramite();
-        this.versionTramite = tramite.getVersionTramite();
-        this.descripcionTramite = tramite.getDescripcionTramite();
-        this.fechaInicio = SDF.format(tramite.getFechaInicio());
-        this.fechaUltimoAcceso = SDF.format(tramite.getFechaUltimoAcceso());
-        this.versionSistra = versionSistra;
-        this.pendiente = true;
-        this.url = "";
-        this.tipo = null;
-        this.mostraModal = false;
-        this.numero = "";
-    }
-
-    public TramitePersistenteGenerico(RTramiteFinalizado tramite, int versionSistra) {
-        this.idSesionTramitacion = tramite.getIdSesionTramitacion();
-        this.idioma = tramite.getIdioma();
-        this.idTramite = tramite.getIdTramite();
-        this.versionTramite = tramite.getVersionTramite();
-        this.descripcionTramite = tramite.getDescripcionTramite();
-        this.fechaInicio = SDF.format(tramite.getFechaFin());
-        this.fechaUltimoAcceso = SDF.format(tramite.getFechaFin());
-        this.versionSistra = versionSistra;
-        this.pendiente = false;
-        this.url = "";
-        this.tipo = null;
-        this.mostraModal = false;
-        this.numero = tramite.getNumeroRegistro();
-    }
-
-    public TramitePersistenteGenerico(TramitePersistente tramite, int versionSistra) {
-        this.idSesionTramitacion = tramite.getIdSesionTramitacion();
-        this.idioma = tramite.getIdioma();
-        this.idTramite = tramite.getIdTramite();
-        this.versionTramite = tramite.getVersionTramite();
-        this.descripcionTramite = tramite.getDescripcionTramite();
-        this.fechaInicio =  SDF.format(tramite.getFechaInicio().toGregorianCalendar().getTime());
-        this.fechaUltimoAcceso = SDF.format(tramite.getFechaUltimoAcceso().toGregorianCalendar().getTime());
-        this.versionSistra = versionSistra;
-        this.pendiente = true;
-        this.url = tramite.getUrlAcceso();
-        this.tipo = null;
-        this.mostraModal = false;
-        this.numero = "";
-    }
-
-    public TramitePersistenteGenerico(ElementoExpediente tramite, int versionSistra) {
-        this.idSesionTramitacion = "";
-        this.idioma = "";
-        this.idTramite = tramite.getUrl().substring(tramite.getUrl().indexOf("tramite=") + 8);
-        this.versionTramite = 0;
-        this.descripcionTramite = tramite.getDescripcion();
-        this.fechaInicio = SDF.format(tramite.getFecha().toGregorianCalendar().getTime());
-        this.fechaUltimoAcceso = SDF.format(tramite.getFecha().toGregorianCalendar().getTime());
-        this.versionSistra = versionSistra;
-        this.pendiente = tramite.isPendiente();
-        this.url = tramite.getUrl();
-        this.tipo = tramite.getTipo();
-        this.mostraModal = false;
-        this.numero = (tramite.getTipo() == TipoElementoExpediente.REGISTRO && tramite.getNumero() != null)
-                ? (String) tramite.getNumero().getValue()
-                : "";
-    }
-
+    @Override
     public String toString() {
         return "{'idSesionTramitacion': " + this.idSesionTramitacion + "'idTramite':" + this.idTramite
                 + "'descripcionTramite':" + this.descripcionTramite + "'url':" + this.url + "'numero':" + this.numero
