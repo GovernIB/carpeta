@@ -125,11 +125,30 @@ class RenderTableDesktop extends Component<RenderInternalTableProps> {
                   filaAddicional = <></>;
                 }
 
+                let rowStyle = {};
+
+                switch (rowType) {
+                  case RowType.INTERNAL_LINK:
+                  case RowType.EXTERNAL_LINK:
+                  case RowType.DOWNLOAD_FILE:
+                  case RowType.OTHER_INFO:
+                    rowStyle = { cursor: "pointer" };
+                    break;
+                  case RowType.SHOW_ADDITIONAL_INFO:
+                    rowStyle = { cursor: "zoom-in" };
+                    break;
+                  case RowType.OPEN_DIALOG:
+                    rowStyle = { cursor: "context-menu" };
+                  default:
+                    rowStyle = {};
+                }
+
                 return (
                   <>
                     <tr
                       key={"fila_" + i}
                       tabIndex={511 + i * 2 - 1}
+                      style={rowStyle}
                       onClick={() => {
                         this.onClickTableRow(i);
                       }}

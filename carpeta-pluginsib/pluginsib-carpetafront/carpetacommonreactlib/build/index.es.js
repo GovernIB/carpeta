@@ -1428,8 +1428,24 @@ var RenderTableDesktop = /** @class */ (function (_super) {
                         else {
                             filaAddicional = React$1.createElement(React$1.Fragment, null);
                         }
+                        var rowStyle = {};
+                        switch (rowType) {
+                            case RowType.INTERNAL_LINK:
+                            case RowType.EXTERNAL_LINK:
+                            case RowType.DOWNLOAD_FILE:
+                            case RowType.OTHER_INFO:
+                                rowStyle = { cursor: "pointer" };
+                                break;
+                            case RowType.SHOW_ADDITIONAL_INFO:
+                                rowStyle = { cursor: "zoom-in" };
+                                break;
+                            case RowType.OPEN_DIALOG:
+                                rowStyle = { cursor: "context-menu" };
+                            default:
+                                rowStyle = {};
+                        }
                         return (React$1.createElement(React$1.Fragment, null,
-                            React$1.createElement("tr", { key: "fila_" + i, tabIndex: 511 + i * 2 - 1, onClick: function () {
+                            React$1.createElement("tr", { key: "fila_" + i, tabIndex: 511 + i * 2 - 1, style: rowStyle, onClick: function () {
                                     _this.onClickTableRow(i);
                                 }, onKeyPress: function () {
                                     _this.onClickTableRow(i);

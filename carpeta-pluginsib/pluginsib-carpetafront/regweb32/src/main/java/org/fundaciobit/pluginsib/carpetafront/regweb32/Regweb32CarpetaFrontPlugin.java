@@ -87,6 +87,9 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             put(MIME_DEFAULT, "OCTET-STREAM");
         }
     };
+    
+    
+    public static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
     /**
      *
@@ -433,8 +436,9 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             List<Registre> registres = new ArrayList<Registre>();
             
             for (AsientoWs a : registresRegweb) {
-                String estatStr = super.getTraduccio("registro.estado."+a.getEstado(), locale);
-                registres.add(new Registre(a.getNumeroRegistro(), a.getFechaRegistro(), a.getExtracto(), estatStr,
+                final String estatStr = super.getTraduccio("registro.estado."+a.getEstado(), locale);
+                final String fechaStr = dateFormat.format(a.getFechaRegistro()).replace(" ", "\u00A0"); // == Nonbreaking space
+                registres.add(new Registre(a.getNumeroRegistro(), fechaStr, a.getExtracto(), estatStr,
                         a.getDenominacionDestino()));
             }
             
@@ -539,9 +543,9 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             }
         }
 
-        // XYZ ZZZ if (isDevelopment()) 
+        if (isDevelopment()) 
         {
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            
             log.info("================== PARAMETROS LLAMADA API REGWEB ===============");
             log.info("locale => " + locale.getLanguage());
             log.info("pageNumber => " + pageNumber);

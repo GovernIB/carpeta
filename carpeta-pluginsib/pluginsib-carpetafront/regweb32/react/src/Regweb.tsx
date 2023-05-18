@@ -14,6 +14,7 @@ import {
   CarpetaInputText,
   CarpetaFormulariDeFiltre,
   CarpetaFormulariDeFiltreItem,
+  RowType,
 } from "carpetacommonreactlib";
 
 /**
@@ -436,6 +437,7 @@ class Regweb extends React.Component<RegwebProps, RegwebState> {
             columnTitles={columnsTitols}
             mobileIcon={"oi-i-book"}
             i18n={i18n}
+            rowType={RowType.INTERNAL_LINK}
             onClickRow={this.onClickRow}
           />
         </>

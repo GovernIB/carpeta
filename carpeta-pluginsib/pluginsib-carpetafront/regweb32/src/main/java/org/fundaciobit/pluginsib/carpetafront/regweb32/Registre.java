@@ -1,7 +1,5 @@
 package org.fundaciobit.pluginsib.carpetafront.regweb32;
 
-import java.util.Date;
-
 /**
  * 
  * @author anadal
@@ -11,7 +9,7 @@ public class Registre {
 
     private String numeroRegistro;
 
-    private Date fechaRegistro;
+    private String fechaRegistro;
 
     private String extracto;
 
@@ -24,7 +22,7 @@ public class Registre {
     }
     
 
-    public Registre(String numeroRegistro, Date fechaRegistro, String extracto, String estado,
+    public Registre(String numeroRegistro, String fechaRegistro, String extracto, String estado,
             String denominacionDestino) {
         super();
         this.numeroRegistro = numeroRegistro;
@@ -43,11 +41,11 @@ public class Registre {
         this.numeroRegistro = numeroRegistro;
     }
 
-    public Date getFechaRegistro() {
+    public String getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(Date fechaRegistro) {
+    public void setFechaRegistro(String fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 
