@@ -76,8 +76,10 @@ class Notib extends React.Component<NotibProps> {
     this.handleTypeFilterParam = this.handleTypeFilterParam.bind(this);
     this.handleStatusFilterParam = this.handleStatusFilterParam.bind(this);
     this.handleSubmitSearcher = this.handleSubmitSearcher.bind(this);
+    this.processarDadesApoderaments = this.processarDadesApoderaments.bind(this);
     this.loadPaginatedData = this.loadPaginatedData.bind(this);
-
+    this.formatDate = this.formatDate.bind(this);
+    this.dateFormat = this.dateFormat.bind(this);
     this.canviatIdioma = this.canviatIdioma.bind(this);
     i18n.on("languageChanged", this.canviatIdioma);
   }
@@ -307,7 +309,7 @@ class Notib extends React.Component<NotibProps> {
           organGestor: transmissio.organGestor.nom,
           procediment: transmissio.procediment.codi,
           descripcio: transmissio.descripcio,
-          darreraModificacio: transmissio.dataEstat,
+          darreraModificacio: this.dateFormat(transmissio.dataEstat),
           subestat: transmissio.subestat,
           notibBoto: notibBotoContent,
         };
@@ -388,26 +390,93 @@ class Notib extends React.Component<NotibProps> {
     return year.toString() + month.toString() + day.toString() + hour.toString() + minute.toString();
   };
 
+   /**  dd-MM-yyyy */
+  formatDate(d: Date): string {
+
+    let date, month, year, hour, minute;
+
+    date = d.getDate();
+    month = d.getMonth() + 1;
+    year = d.getFullYear();
+    hour = d.getHours();
+    minute = d.getMinutes();
+
+    date = date.toString().padStart(2, "0");
+
+    month = month.toString().padStart(2, "0");
+
+    hour = hour.toString().padStart(2, "0");
+
+    minute = minute.toString().padStart(2, "0");
+
+    return `${date}/${month}/${year} ${hour}:${minute}`;
+    /**let mm = d.getMonth() + 1; // Months start at 0!
+    let dd = d.getDate();
+
+    var hour: string;
+    var minute: string;
+
+    if (d.getHours() < 10) {
+      hour = "0" + d.getHours();
+    }else{
+      hour = d.getHours().toString();
+    }
+    if (d.getMinutes() < 10) {
+      minute = "0" + d.getMinutes().toString();
+    }else{
+      minute = d.getMinutes().toString();
+    }
+
+    return ((dd < 10) ? "0" + dd : "" + dd) + (mm < 10 ? "-0" + mm : "-" + mm) + "-" + d.getFullYear()+" "+hour+":"+minute;**/
+  }
+
   dateFormat = function (dateObject: string) {
     var d = new Date(dateObject);
-    var day = d.getDate();
-    var month = d.getMonth() + 1;
+    let date, month, year, hour, minute;
+
+    date = d.getDate();
+    month = d.getMonth() + 1;
+    year = d.getFullYear();
+    hour = d.getHours();
+    minute = d.getMinutes();
+
+    date = date.toString().padStart(2, "0");
+
+    month = month.toString().padStart(2, "0");
+
+    hour = hour.toString().padStart(2, "0");
+
+    minute = minute.toString().padStart(2, "0");
+
+    return `${date}/${month}/${year} ${hour}:${minute}`;
+    /**var d = new Date(dateObject);
+    var day: string;
+    var month : string;
     var year = d.getFullYear();
-    var hour = d.getHours();
-    var minute = d.getMinutes();
-    if (day < 10) {
-      day = 0 + day;
+    var hour: string;
+    var minute: string;
+
+    if (d.getDate() < 10) {
+      day = "0" + d.getDate().toString();
+    }else{
+      day = d.getDate().toString();
     }
-    if (month < 10) {
-      month = 0 + month;
+    if (d.getMonth()+1 < 10) {
+      month = "0" + (d.getMonth() + 1).toString();
+    }else{
+      month = (d.getMonth() + 1).toString();
     }
-    if (hour < 10) {
-      hour = 0 + hour;
+    if (d.getHours() < 10) {
+      hour = "0" + d.getHours().toString();
+    }else{
+      hour = d.getHours().toString();
     }
-    if (minute < 10) {
-      minute = 0 + minute;
+    if (d.getMinutes() < 10) {
+      minute = "0" + d.getMinutes(). toString();
+    }else{
+      minute = d.getMinutes().toString()
     }
-    return day + "/" + month + "/" + year + " " + hour + ":" + minute;
+    return day + "/" + month + "/" + year + " " + hour + ":" + minute;**/
   };
 
   dateFormatCerca = function (dateObject: Date) {
@@ -506,7 +575,7 @@ class Notib extends React.Component<NotibProps> {
                   className="form-control form-control-sm selectMobil"
                   selected={this.filter_status == 2}
                 >
-                  {t("notibExpirada")}
+                  {t("notibLlegides")}
                 </option>
               </select>
             </CarpetaFormulariDeFiltreItem>
