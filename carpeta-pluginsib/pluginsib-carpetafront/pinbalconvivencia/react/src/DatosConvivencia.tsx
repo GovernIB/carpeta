@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {withTranslation} from 'react-i18next';
+import React from 'react';
+import { WithTranslation, withTranslation } from 'react-i18next';
 import axios from "axios";
 import i18n from './i18n';
 
@@ -9,8 +9,23 @@ import listaProvinciasMunicipios from './data/localidadesBalearesFiltrados';
  *  @author jagarcia
  */
 
-class DatosConvivencia extends Component {
-    constructor(props) {
+interface DatosConvivenciaProps extends WithTranslation {
+    pathtoservei: string;
+    localitats: string;
+    titles: any;
+    subtitles: any;
+}
+
+interface DatosConvivenciaState {
+    isLoaded: boolean;
+    data: any;
+    municipio: string | null;
+}
+
+
+class DatosConvivencia extends React.Component<DatosConvivenciaProps, DatosConvivenciaState> {
+
+    constructor(props: DatosConvivenciaProps) {
         super(props);
 
         this.state = {
@@ -24,11 +39,11 @@ class DatosConvivencia extends Component {
 
     }
 
-    handleMunicipio(event) { 
-        this.setState({municipio: event.target.value});
+    handleMunicipio(event: any) {
+        this.setState({ municipio: event.target.value });
     }
 
-    handleSubmit(event) {
+    handleSubmit(event: any) {
 
         event.preventDefault();
 
@@ -36,34 +51,45 @@ class DatosConvivencia extends Component {
 
         const url2 = this.props.pathtoservei;
 
-        document.getElementById("formulario").classList.add("d-none");
-        document.getElementById("carregant").classList.remove("d-none");
+        let formularioVar: HTMLElement | null = document.getElementById("formulario");
+        if (formularioVar) {
+            formularioVar.classList.add("d-none");
+        }
+
+        let carregantVar: HTMLElement | null = document.getElementById("carregant");
+        if (carregantVar) {
+            carregantVar.classList.remove("d-none");
+        }
 
         const municipiIsValid = (this.state.municipio) ? true : false;
 
-        if(!municipiIsValid){
-            const errorMsg = {"error":t('pinbalConvivenciaValidaMunicipi')}
+        if (!municipiIsValid) {
+            const errorMsg = { "error": t('pinbalConvivenciaValidaMunicipi') }
             this.setState({
                 ...this.state,
                 isLoaded: true,
                 data: errorMsg
             });
-            document.getElementById("carregant").classList.add("d-none");
-            document.getElementById("formulario").classList.remove("d-none");
+            if (carregantVar)
+                carregantVar.classList.add("d-none");
+
+            if (formularioVar)
+                formularioVar.classList.remove("d-none");
             return false;
         }
 
-        axios.post(url2, 'municipio='+this.state.municipio ).then(res => {
+        axios.post(url2, 'municipio=' + this.state.municipio).then(res => {
 
             this.setState({
-                ...this.state, 
+                ...this.state,
                 isLoaded: true,
                 data: res.data,
             });
 
-            document.getElementById("carregant").classList.add("d-none");
+            if (carregantVar)
+                carregantVar.classList.add("d-none");
 
-        }).catch(function (error) {
+        }).catch(error => {
 
             console.log(JSON.stringify(error));
             const restdata = { "error": JSON.stringify(error) };
@@ -73,17 +99,17 @@ class DatosConvivencia extends Component {
                 console.log("error.response.headers: " + error.response.headers);
             }
             this.setState({
-                ...this.state, 
+                ...this.state,
                 isLoaded: true,
                 data: restdata
             });
-
-            document.getElementById("carregant").classList.add("d-none");
+            if(carregantVar)
+                carregantVar.classList.add("d-none");
         });
 
         return false;
     };
-    
+
 
     render() {
 
@@ -94,19 +120,20 @@ class DatosConvivencia extends Component {
         let content;
         let contentApp;
 
-        const municipis = (localitats) ? JSON.parse(Buffer.from(this.props.localitats, 'base64')) : listaProvinciasMunicipios.localidades;
+        const buf: Buffer = Buffer.from(this.props.localitats, 'base64');
+        const municipis = (localitats) ? JSON.parse(buf.toString()) : listaProvinciasMunicipios.localidades;
 
         if (!isLoaded) {
-           
-             content =  
-                 <form id="formulario" onSubmit={this.handleSubmit} method="GET">
+
+            content =
+                <form id="formulario" onSubmit={this.handleSubmit} method="GET">
                     <div className="form-group">
-                        <label for="codigoMunicipio">{t('pinbalConvivenciaMunicipioLabel')}</label>
-                        <div className="col-md-4 p-0 col-sm-6" style={{width:'90%'}}>
-                            <select name="codigoMunicipio" id="codigoMunicipio" className="form-control"  value={this.state.municipio} onChange={this.handleMunicipio}>
+                        <label htmlFor="codigoMunicipio">{t('pinbalConvivenciaMunicipioLabel')}</label>
+                        <div className="col-md-4 p-0 col-sm-6" style={{ width: '90%' }}>
+                            <select name="codigoMunicipio" id="codigoMunicipio" className="form-control" value={this.state.municipio ? this.state.municipio : ""} onChange={this.handleMunicipio}>
                                 <option value="">{t('pinbalConvivenciaSelecciona')}</option>
                                 {
-                                    municipis.map( (item) => React.createElement('option', {value: item.codigo}, item.nombre))
+                                    municipis.map((item: any) => React.createElement('option', { value: item.codigo }, item.nombre))
                                 }
                             </select>
                         </div>
@@ -115,42 +142,42 @@ class DatosConvivencia extends Component {
                 </form>
 
         } else {
-        
+
             const data = this.state.data;
 
-            if (data.error) {  
+            if (data.error) {
                 content = <>
                     <div className="alert alert-danger" role="alert">{data.error}</div>
                     <form id="formulario" onSubmit={this.handleSubmit} method="GET">
                         <div className="form-group">
-                            <label for="codigoMunicipio">{t('pinbalConvivenciaMunicipioLabel')}</label>
-                            <div className="col-md-4 p-0 col-sm-6" style={{width:'90%'}}>
-                                <select name="codigoMunicipio" id="codigoMunicipio" className="form-control"  value={this.state.municipio} onChange={this.handleMunicipio}>
+                            <label htmlFor="codigoMunicipio">{t('pinbalConvivenciaMunicipioLabel')}</label>
+                            <div className="col-md-4 p-0 col-sm-6" style={{ width: '90%' }}>
+                                <select name="codigoMunicipio" id="codigoMunicipio" className="form-control" value={this.state.municipio ? this.state.municipio : ""} onChange={this.handleMunicipio}>
                                     <option value="">{t('pinbalConvivenciaSelecciona')}</option>
                                     {
-                                        municipis.map( (item) => React.createElement('option', {value: item.codigo}, item.nombre))
+                                        municipis.map((item: any) => React.createElement('option', { value: item.codigo }, item.nombre))
                                     }
                                 </select>
                             </div>
                         </div>
                         <button type="submit" className="btn btn-primary carpeta-btn">{t('pinbalconvivenciaConsultaBtn')}</button>
                     </form>
-                    </>
+                </>
             } else {
-				
+
                 let alerta;
                 let alertaApp;
 
-                if ( data.codigo == '0003'){
+                if (data.codigo == '0003') {
 
-                    let periodosInscripcionContent = '';                    
+                    let periodosInscripcionContent = '';
                     data.personas.forEach(
-                        (item) => {
+                        (item: any) => {
                             let periodosContent = '';
-                            if(item.periodosInscripcion.length > 0){
+                            if (item.periodosInscripcion.length > 0) {
                                 periodosContent = '<ul style="margin-left:30px;">';
-                                item.periodosInscripcion.forEach(  
-                                    (elemento) => periodosContent +=`<li>${t('pinbalConvivenciaDesde')} ${elemento.desde} ${elemento.descripcion}</li>`
+                                item.periodosInscripcion.forEach(
+                                    (elemento: any) => periodosContent += `<li>${t('pinbalConvivenciaDesde')} ${elemento.desde} ${elemento.descripcion}</li>`
                                 );
                                 periodosContent += '</ul>';
                             }
@@ -165,9 +192,9 @@ class DatosConvivencia extends Component {
 
                     alerta = <>
                         <div className="alert alert-success" role="alert">
-                            {t('pinbalConvivenciaFecha')} {data.fecha} : {t('pinbalConvivenciaCodigo'+data.codigo)}
+                            {t('pinbalConvivenciaFecha')} {data.fecha} : {t('pinbalConvivenciaCodigo' + data.codigo)}
                         </div>
-                        <br/>
+                        <br />
                         <div className="col-md-12 border-0 float-left p-0">
                             <dl className="row">
                                 <div>
@@ -183,7 +210,7 @@ class DatosConvivencia extends Component {
                                     <dd className="col-sm-7">{data.hoja}</dd>
                                 </div>
                             </dl>
-                            <hr/>
+                            <hr />
                             <dl className="row">
                                 <div>
                                     <dt className="col-sm-3">{t('pinbalConvivenciaVia')}</dt>
@@ -222,14 +249,14 @@ class DatosConvivencia extends Component {
                                     <dd className="col-sm-7">{data.codPostal}</dd>
                                 </div>
                             </dl>
-                            <hr/>
+                            <hr />
                             {periodosInscripcionContent && <dl className="row">
                                 <div>
                                     <dt className="col-sm-3">{t('pinbalConvivenciaPersonas')}</dt>
-                                    <dd className="col-sm-7"><ul dangerouslySetInnerHTML={{__html: periodosInscripcionContent}}></ul></dd>
+                                    <dd className="col-sm-7"><ul dangerouslySetInnerHTML={{ __html: periodosInscripcionContent }}></ul></dd>
                                 </div>
                             </dl>}
-                            <hr/>
+                            <hr />
                             {data.fechaExpedicion && <dl className="row">
                                 <div>
                                     <dt className="col-sm-3">{t('pinbalConvivenciaExpedicion')}</dt>
@@ -241,53 +268,53 @@ class DatosConvivencia extends Component {
 
                     alertaApp = <>
                         <div className="alert alert-success" role="alert">
-                            {t('pinbalConvivenciaFecha')} {data.fecha} : {t('pinbalConvivenciaCodigo'+data.codigo)}
+                            {t('pinbalConvivenciaFecha')} {data.fecha} : {t('pinbalConvivenciaCodigo' + data.codigo)}
                         </div>
-                        <br/>
+                        <br />
                         <div className="col-md-12 border-0 float-left p-0">
                             <div className="row">
-                                <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaDistrito')}:</b> {data.distrito}</p>
-                                <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaSeccion')}:</b> {data.seccion}</p>
-                                <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaHoja')}:</b> {data.hoja}</p>
+                                <p className="card-text pl-1 mt-0" style={{ color: 'rgb(102, 102, 102)' }}><b>{t('pinbalConvivenciaDistrito')}:</b> {data.distrito}</p>
+                                <p className="card-text pl-1 mt-0" style={{ color: 'rgb(102, 102, 102)' }}><b>{t('pinbalConvivenciaSeccion')}:</b> {data.seccion}</p>
+                                <p className="card-text pl-1 mt-0" style={{ color: 'rgb(102, 102, 102)' }}><b>{t('pinbalConvivenciaHoja')}:</b> {data.hoja}</p>
                             </div>
-                            <hr/>
+                            <hr />
                             <div className="row">
-                                <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaVia')}:</b> {data.tipoVia} {data.via}</p>
-                                {data.numero && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaNumero')}:</b> {data.numero}</p>}
-                                {data.kmt && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaKmt')}:</b> {data.kmt}</p>}
-                                {data.bloque && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaBloque')}:</b> {data.bloque}</p>}
-                                {data.portal && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaPortal')}:</b> {data.portal}</p>}
-                                {data.escalera && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaEscalera')}:</b> {data.escalera}</p>}
-                                {data.planta && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaPlanta')}:</b> {data.planta}</p>}
-                                {data.puerta && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaPuerta')}:</b> {data.puerta}</p>}
-                                <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaCodPostal')}:</b> {data.codPostal}</p>
+                                <p className="card-text pl-1 mt-0" style={{ color: 'rgb(102, 102, 102)' }}><b>{t('pinbalConvivenciaVia')}:</b> {data.tipoVia} {data.via}</p>
+                                {data.numero && <p className="card-text pl-1 mt-0" style={{ color: 'rgb(102, 102, 102)' }}><b>{t('pinbalConvivenciaNumero')}:</b> {data.numero}</p>}
+                                {data.kmt && <p className="card-text pl-1 mt-0" style={{ color: 'rgb(102, 102, 102)' }}><b>{t('pinbalConvivenciaKmt')}:</b> {data.kmt}</p>}
+                                {data.bloque && <p className="card-text pl-1 mt-0" style={{ color: 'rgb(102, 102, 102)' }}><b>{t('pinbalConvivenciaBloque')}:</b> {data.bloque}</p>}
+                                {data.portal && <p className="card-text pl-1 mt-0" style={{ color: 'rgb(102, 102, 102)' }}><b>{t('pinbalConvivenciaPortal')}:</b> {data.portal}</p>}
+                                {data.escalera && <p className="card-text pl-1 mt-0" style={{ color: 'rgb(102, 102, 102)' }}><b>{t('pinbalConvivenciaEscalera')}:</b> {data.escalera}</p>}
+                                {data.planta && <p className="card-text pl-1 mt-0" style={{ color: 'rgb(102, 102, 102)' }}><b>{t('pinbalConvivenciaPlanta')}:</b> {data.planta}</p>}
+                                {data.puerta && <p className="card-text pl-1 mt-0" style={{ color: 'rgb(102, 102, 102)' }}><b>{t('pinbalConvivenciaPuerta')}:</b> {data.puerta}</p>}
+                                <p className="card-text pl-1 mt-0" style={{ color: 'rgb(102, 102, 102)' }}><b>{t('pinbalConvivenciaCodPostal')}:</b> {data.codPostal}</p>
                             </div>
-                            <hr/>
+                            <hr />
                             {periodosInscripcionContent && <div className="row">
-                                <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaPersonas')}:</b> <ul dangerouslySetInnerHTML={{__html: periodosInscripcionContent}}></ul></p>
+                                <p className="card-text pl-1 mt-0" style={{ color: 'rgb(102, 102, 102)' }}><b>{t('pinbalConvivenciaPersonas')}:</b> <ul dangerouslySetInnerHTML={{ __html: periodosInscripcionContent }}></ul></p>
                             </div>}
-                            <hr/>
+                            <hr />
                             {data.fechaExpedicion && <div className="row">
-                                <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalConvivenciaExpedicion')}:</b> {data.fechaExpedicion}</p>
+                                <p className="card-text pl-1 mt-0" style={{ color: 'rgb(102, 102, 102)' }}><b>{t('pinbalConvivenciaExpedicion')}:</b> {data.fechaExpedicion}</p>
                             </div>}
                         </div>
                     </>
 
                 } else {
                     alerta = <div className="alert alert-warning" role="alert">
-                        {t('pinbalConvivenciaFecha')} {data.fecha} : {t('pinbalConvivenciaCodigo'+data.codigo)}
+                        {t('pinbalConvivenciaFecha')} {data.fecha} : {t('pinbalConvivenciaCodigo' + data.codigo)}
                     </div>;
 
                     alertaApp = alerta;
                 }
 
-				content = <div className="ocultarMobil">
+                content = <div className="ocultarMobil">
                     {alerta}
-				</div>;
+                </div>;
 
                 contentApp = <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil wAuto" tabIndex={510}>
                     <div className="col-sm-1 float-left">
-                        <span className="oi oi-bell iconaFormApp" title={t('pinbalConvivenciaConsulta')} style={{verticalAlign: 'sub'}}/>
+                        <span className="oi oi-bell iconaFormApp" title={t('pinbalConvivenciaConsulta')} style={{ verticalAlign: 'sub' }} />
                     </div>
                     <div className="col-sm-10 float-right">
                         {alertaApp}
@@ -297,34 +324,36 @@ class DatosConvivencia extends Component {
             }
         }
 
-        
+        let contextPath: string|null = sessionStorage.getItem("contextPath");
+        let pagTornar: string|null = sessionStorage.getItem("pagTornar");
+
         return (<>
-                <div className="titolPaginaApp visioMobil">
-                    {this.props.titles[i18n.language]}
-                </div>
-                <div className="infoNoMenu">
-                    <h2 className="titol h2 ocultarMobil">{this.props.titles[i18n.language]}</h2>
-                    <div className="col-md-12 border-0 float-left p-0">
-                        <p className="lh15 ocultarMobil">{this.props.subtitles[i18n.language]} </p>
-                        <div className="infoNoMenu">
-                            <div className="col-md-12 border-0 float-left p-0">
-                                {content}
-                                {contentApp}
-                                <div  id="carregant" className="loader-container centrat d-none">
-                                    <div className="loader"/>
-                                </div>
-                                <div className="col-md-12 border-0 float-left p-0" id="botoTornarDadesP" style={{ marginTop: '20px' }}>
-                                    <button type="button" data-toggle="modal" onClick={() => {
-                                        window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                                    }} className="botoSuport botoTornauApp" tabIndex="520" aria-labelledby="botoTornarDadesP">{t('pinbalConvivenciaTornar')}</button>
-                                </div>
+            <div className="titolPaginaApp visioMobil">
+                {this.props.titles[i18n.language]}
+            </div>
+            <div className="infoNoMenu">
+                <h2 className="titol h2 ocultarMobil">{this.props.titles[i18n.language]}</h2>
+                <div className="col-md-12 border-0 float-left p-0">
+                    <p className="lh15 ocultarMobil">{this.props.subtitles[i18n.language]} </p>
+                    <div className="infoNoMenu">
+                        <div className="col-md-12 border-0 float-left p-0">
+                            {content}
+                            {contentApp}
+                            <div id="carregant" className="loader-container centrat d-none">
+                                <div className="loader" />
+                            </div>
+                            <div className="col-md-12 border-0 float-left p-0" id="botoTornarDadesP" style={{ marginTop: '20px' }}>
+                                <button type="button" data-toggle="modal" onClick={() => {
+                                    window.location.href = pagTornar ? pagTornar : ""; sessionStorage.setItem("pagTornar", contextPath ? contextPath: "")
+                                }} className="botoSuport botoTornauApp" tabIndex={520} aria-labelledby="botoTornarDadesP">{t('pinbalConvivenciaTornar')}</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </>
-            );
-            
+            </div>
+        </>
+        );
+
     }
 }
 
