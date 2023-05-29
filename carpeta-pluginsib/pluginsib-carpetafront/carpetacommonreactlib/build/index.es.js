@@ -2108,6 +2108,8 @@ var CarpetaDatePicker = /** @class */ (function (_super) {
         //console.log("CarpetaDatePicker::componentDidMount() => Inici ... XXXXXXXXXXXX " + this.props.i18n.language);
         var theName = this.datePickerName;
         //@ts-ignore
+        //$(".bootstrap-datetimepicker-widget").css("transform","scale(1.5,1.5)");
+        //@ts-ignore
         $("#" + theName).datetimepicker({
             format: "DD/MM/YYYY",
             locale: this.props.i18n.language,
@@ -2127,6 +2129,7 @@ var CarpetaDatePicker = /** @class */ (function (_super) {
         console.log("CarpetaDatePicker::render() " + this.props.i18n.language);
         var lang = this.props.i18n.language;
         return (React$1.createElement("div", { className: "form-group" },
+            isMobileOnly_1 && React$1.createElement("style", { dangerouslySetInnerHTML: { __html: ".bootstrap-datetimepicker-widget { transform:scale(2.5,2.5); transform-origin:top left; }" } }),
             React$1.createElement("div", { className: "input-group date", id: this.datePickerName, "data-target-input": "nearest" },
                 React$1.createElement("input", { "data-toggle": "datetimepicker", className: "form-control datetimepicker-input", "data-target": "#" + this.datePickerName, style: { padding: "0px 0px 0px 10px" }, id: this.datePickerName + "Input", readOnly: false, value: this.props.defaultValue.toLocaleString(lang, {
                         year: "numeric",

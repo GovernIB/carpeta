@@ -1,4 +1,5 @@
 import React from "react";
+import * as reactdetect from "react-device-detect";
 
 /**
  *  @author anadal
@@ -44,6 +45,12 @@ class CarpetaDatePicker extends React.Component<CarpetaDatePickerProps> {
 
     const theName = this.datePickerName;
 
+    
+    //@ts-ignore
+    //$(".bootstrap-datetimepicker-widget").css("transform","scale(1.5,1.5)");
+    
+
+
     //@ts-ignore
     $("#" + theName).datetimepicker({
       format: "DD/MM/YYYY",
@@ -52,6 +59,8 @@ class CarpetaDatePicker extends React.Component<CarpetaDatePickerProps> {
 
     //@ts-ignore
     $("#" + theName).on("change.datetimepicker", this.onChangeDateCarpetaDatePicker);
+
+
   }
 
   private onChangeDateCarpetaDatePicker(e: any) {
@@ -83,6 +92,7 @@ class CarpetaDatePicker extends React.Component<CarpetaDatePickerProps> {
 
     return (
       <div className="form-group">
+        { reactdetect.isMobileOnly && <style dangerouslySetInnerHTML={{__html: `.bootstrap-datetimepicker-widget { transform:scale(2.5,2.5); transform-origin:top left; }`}} /> }
         <div className="input-group date" id={this.datePickerName} data-target-input="nearest">
           <input
             data-toggle="datetimepicker"
