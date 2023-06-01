@@ -67,9 +67,6 @@ public class CertificatsService {
             byte[] byteFile = "Hola Caracola".getBytes();
             fileInfo.setBytes(byteFile);
             
-            //String byteFileBase64 = Base64.getEncoder().encodeToString(byteFile);
-            //fileInfo.setBase64ByteArray(byteFileBase64);
-            
             fileInfo.setLength(byteFile.length);
             cert.setFitxer(fileInfo);
             

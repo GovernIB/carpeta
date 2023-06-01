@@ -61,14 +61,11 @@ public class CertificatsApiTest {
         auth.setUsername("carpetaapp");
         auth.setPassword("carpetaapp");
         
-        //client.setBasePath("http://fbosch:8080/carpetaapi/externa");
-        client.setBasePath("http://fbosch:8888/carpetaapi/externa");
+        client.setBasePath("http://fbosch:8080/carpetaapi/externa");
         
         CertificatsApi api = new CertificatsApi(client);
         
-        
-        
-        String dni = "41541598X";
+        String dni = "99999999X";
         String idioma = "ca";
         CertificatBean response = api.certificats(dni, idioma);
         System.out.println("Tipus = " + response.getTipus());
