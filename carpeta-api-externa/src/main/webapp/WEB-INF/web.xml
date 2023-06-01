@@ -43,6 +43,7 @@
             <web-resource-name>carpeta_api_externa_secured</web-resource-name>
             <url-pattern>/services/secure</url-pattern>
             <url-pattern>/secure/*</url-pattern>
+            <url-pattern>/secure/certificates/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>CAR_WS</role-name>
