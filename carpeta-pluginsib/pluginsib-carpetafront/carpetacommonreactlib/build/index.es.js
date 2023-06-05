@@ -1887,7 +1887,7 @@ var PaginationCarpeta = /** @class */ (function (_super) {
                 return (React$1.createElement("center", null,
                     message,
                     React$1.createElement("br", null),
-                    React$1.createElement("div", { className: "pagination justify-content-center text-nowrap overflow-hidden" }, pagination)));
+                    React$1.createElement("div", { className: "pagination justify-content-center" }, pagination)));
             }
         }
         else {
@@ -1895,7 +1895,7 @@ var PaginationCarpeta = /** @class */ (function (_super) {
                 return (React$1.createElement(React$1.Fragment, null,
                     React$1.createElement("div", { className: "text-nowrap" },
                         React$1.createElement("div", { className: "row d-flex" },
-                            React$1.createElement("div", { className: "col", style: { marginRight: "0px", marginLeft: "0px", paddingLeft: "0px" } }, message),
+                            React$1.createElement("div", { className: "col", style: { marginRight: "0px", marginLeft: "0px", paddingLeft: "20px" } }, message),
                             React$1.createElement("div", { className: "pagination col justify-content-center", style: { marginRight: "0px", marginLeft: "0px" } }, pagination),
                             React$1.createElement("div", { className: "pagination col justify-content-end", style: { marginRight: "0px", marginLeft: "0px" } }, numElements)))));
             }
