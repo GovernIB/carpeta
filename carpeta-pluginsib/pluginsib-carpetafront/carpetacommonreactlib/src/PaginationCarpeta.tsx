@@ -363,7 +363,7 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
           <center>
             {message}
             <br />
-            <div className="pagination justify-content-center">{pagination}</div>
+            <div className="pagination justify-content-center text-nowrap overflow-hidden">{pagination}</div>
           </center>
         );
       }
@@ -371,7 +371,7 @@ class PaginationCarpeta extends React.Component<PaginationCarpetaProps, Paginati
       if (onClickSelectElementsByPage) {
         return (
           <>
-            <div className="container-fluid">
+            <div className="text-nowrap">
               <div className="row d-flex">
                 <div className="col" style={{ marginRight: "0px", marginLeft: "0px", paddingLeft: "0px" }}>
                   {message}
