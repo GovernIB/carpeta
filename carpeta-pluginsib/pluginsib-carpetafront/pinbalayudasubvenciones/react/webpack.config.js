@@ -1,30 +1,27 @@
 const path = require("path");
 
 const config = {
-  entry: "./src/main.js",
+  entry: "./src/main.tsx",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "reactjs_main.js",
   },
 
   //mode: "development",
+  target: "node",
   mode: "production",
+  resolve: {
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
+  },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
-        include: path.resolve(__dirname, "src"),
+        test: /\.(js|jsx|tsx)$/,
+        include: path.resolve(__dirname, 'src'),
         use: [
           {
-            loader: "babel-loader",
-            options: {
-              presets: [
-                //"env",
-                "@babel/preset-react",
-                //"stage-2",
-                //"@babel/react"
-              ],
-            },
+            loader: "ts-loader",
+            options: {},
           },
         ],
       },
@@ -41,6 +38,14 @@ const config = {
           },
         ],
       },
+      {
+        test: /\.css$/i,
+        use: [
+        	{ loader: "style-loader" },
+        	{ loader: "css-loader" }],
+        	
+      },      
+        // css files
     ],
   },
 };

@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {withTranslation} from 'react-i18next';
+import React from 'react';
+import {WithTranslation, withTranslation} from 'react-i18next';
 import axios from "axios";
 import i18n from './i18n';
 
@@ -7,8 +7,19 @@ import i18n from './i18n';
  *  @author jagarcia
  */
 
-class DatosAyudaSubvenciones extends Component {
-    constructor(props) {
+interface AyudaSubvencionesProps extends WithTranslation{
+    pathtoservei: string;
+    titles: any;
+    subtitles: any;
+}
+
+type AyudaSubvencionesState = {
+    isLoaded: boolean;
+    data: any;
+}
+
+class DatosAyudaSubvenciones extends React.Component<AyudaSubvencionesProps, AyudaSubvencionesState> {
+    constructor(props: AyudaSubvencionesProps) {
         super(props);
 
         this.state = {
@@ -29,7 +40,7 @@ class DatosAyudaSubvenciones extends Component {
                 isLoaded: true,
                 data: res.data
             });
-        }).catch(function (error) {
+        }).catch((error) => {
 
             console.log(JSON.stringify(error));
             const restdata = { "error": JSON.stringify(error) };
@@ -55,8 +66,7 @@ class DatosAyudaSubvenciones extends Component {
         let contentApp;
 
         if (!isLoaded) {
-           
-             content = <div  id="carregant" className="loader-container centrat ">
+            content = <div  id="carregant" className="loader-container centrat ">
                         <div className="loader"/>
                     </div>;
         } else {
@@ -141,7 +151,7 @@ class DatosAyudaSubvenciones extends Component {
                     <div className="col-md-12 border-0 float-left p-0" id="botoTornarSubvenciones" style={{ marginTop: '20px' }}>
                         <button type="button" data-toggle="modal" onClick={() => {
                             window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                        }} className="botoSuport botoTornauApp" tabIndex="520" aria-labelledby="botoTornarSubvenciones">{t('pinbalSubvencionesTornar')}</button>
+                        }} className="botoSuport botoTornauApp" tabIndex={520} aria-labelledby="botoTornarSubvenciones">{t('pinbalSubvencionesTornar')}</button>
                     </div>
                 </div>
             </>
