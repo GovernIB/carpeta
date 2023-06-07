@@ -151,10 +151,6 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
 
     }
     
-    
-    
-    
-    
 
     private final Map<String, InternalUserData> userDataMap = new HashMap<String, AbstractCarpetaFrontPlugin.InternalUserData>();
 

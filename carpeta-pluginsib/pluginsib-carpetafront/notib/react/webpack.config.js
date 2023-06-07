@@ -19,8 +19,8 @@ const config = {
 				include: path.resolve(__dirname, 'src'),
 				use: [
 					{
-					  loader: "ts-loader",
-					  options: {},
+						loader: "ts-loader",
+						options: {},
 					},
 				  ]
 			}
