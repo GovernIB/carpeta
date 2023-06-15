@@ -3,12 +3,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**tipus** | [**TipusEnum**](#TipusEnum) |  |  [optional]
+**tipus** | **Integer** |  |  [optional]
 **fitxer** | [**CertificatFileInfo**](CertificatFileInfo.md) |  |  [optional]
-
-<a name="TipusEnum"></a>
-## Enum: TipusEnum
-Name | Value
----- | -----
-VALOR | &quot;VALOR&quot;
-FITXER | &quot;FITXER&quot;
+**url** | **String** |  |  [optional]

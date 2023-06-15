@@ -30,6 +30,7 @@
 		<module>pinbalhistorico</module>
 		<module>apodera</module>
 		<module>expedients</module>
+    <module>certificats</module>
         <module>reactjschecker</module>
     </modules>
 

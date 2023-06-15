@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 /**
  * 
  * @author fbosch
  *
  */
-@JsonFormat(shape = JsonFormat.Shape.OBJECT)
+@Schema(name = "CertificatType", enumAsRef = true)
 public enum CertificatType {
     VALOR("VALOR"), FITXER("FITXER");
     

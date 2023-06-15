@@ -1,0 +1,22 @@
+# Class => org.fundaciobit.pluginsib.carpetafront.certificats.CertificatsCarpetaFrontPlugin
+
+# Common
+org.fundaciobit.pluginsib.carpetafront.certificats.development=true
+org.fundaciobit.pluginsib.carpetafront.certificats.usenotibapi=true
+
+
+#
+# Notificacions CAIB: CERTIFICATS
+org.fundaciobit.pluginsib.carpetafront.certificats.url=[=SP["org.fundaciobit.pluginsib.carpetafront.certificats.url"]]
+org.fundaciobit.pluginsib.carpetafront.certificats.user=[=SP["org.fundaciobit.pluginsib.carpetafront.certificats.user"]]
+org.fundaciobit.pluginsib.carpetafront.certificats.pass=[=SP["org.fundaciobit.pluginsib.carpetafront.certificats.pass"]]
+
+
+# NOTIFICACIONES
+org.fundaciobit.pluginsib.carpetafront.certificats.notificaciones.url=https://sede.administracion.gob.es/carpeta/notificaciones/notifica/consultaNotificaciones.htm
+
+# Detall Notificacions CAIB: CERTIFICATS
+org.fundaciobit.pluginsib.carpetafront.certificats.notificaciones.detalle.pendientes.url=https://dehu.redsara.es/notificaciones-pendientes
+org.fundaciobit.pluginsib.carpetafront.certificats.notificaciones.detalle.realizadas.url=https://dehu.redsara.es/notificaciones-realizadas
+org.fundaciobit.pluginsib.carpetafront.certificats.comunicaciones.detalle.url=https://dehu.redsara.es/comunicaciones
+

@@ -1,6 +1,8 @@
 package es.caib.carpeta.api.externa.certificats;
 
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 
 //import org.eclipse.microprofile.openapi.annotations.media.Schema;
@@ -14,20 +16,32 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 @Schema(name = "CertificatBean")
 public class CertificatBean {
-
-	private CertificatType tipus;	
+    
+    public static final int TIPUS_FITXER=0;
+    public static final int TIPUS_URL=1;
+    
+	private int tipus;	
 	private CertificatFileInfo fitxer;
+	private String url;
 	
+    @JsonCreator
 	public CertificatBean() {
 	}
 
-    public CertificatType getTipus() {
+    
+
+    public int getTipus() {
         return tipus;
     }
 
-    public void setTipus(String tipus) {
-        this.tipus = CertificatType.valueOf(tipus);
+
+
+    public void setTipus(int tipus) {
+        this.tipus = tipus;
     }
+
+
+
     public CertificatFileInfo getFitxer() {
         return fitxer;
     }
@@ -35,6 +49,17 @@ public class CertificatBean {
     public void setFitxer(CertificatFileInfo fitxer) {
         this.fitxer = fitxer;
     }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    
+    
 
 	
 	

@@ -25,44 +25,16 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 
 public class CertificatBean {
-  /**
-   * Gets or Sets tipus
-   */
-  public enum TipusEnum {
-    VALOR("VALOR"),
-    FITXER("FITXER");
-
-    private String value;
-
-    TipusEnum(String value) {
-      this.value = value;
-    }
-    @JsonValue
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-    @JsonCreator
-    public static TipusEnum fromValue(String text) {
-      for (TipusEnum b : TipusEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-
-  }  @JsonProperty("tipus")
-  private TipusEnum tipus = null;
+  @JsonProperty("tipus")
+  private Integer tipus = null;
 
   @JsonProperty("fitxer")
   private CertificatFileInfo fitxer = null;
 
-  public CertificatBean tipus(TipusEnum tipus) {
+  @JsonProperty("url")
+  private String url = null;
+
+  public CertificatBean tipus(Integer tipus) {
     this.tipus = tipus;
     return this;
   }
@@ -72,11 +44,11 @@ public class CertificatBean {
    * @return tipus
   **/
   @Schema(description = "")
-  public TipusEnum getTipus() {
+  public Integer getTipus() {
     return tipus;
   }
 
-  public void setTipus(TipusEnum tipus) {
+  public void setTipus(Integer tipus) {
     this.tipus = tipus;
   }
 
@@ -98,6 +70,24 @@ public class CertificatBean {
     this.fitxer = fitxer;
   }
 
+  public CertificatBean url(String url) {
+    this.url = url;
+    return this;
+  }
+
+   /**
+   * Get url
+   * @return url
+  **/
+  @Schema(description = "")
+  public String getUrl() {
+    return url;
+  }
+
+  public void setUrl(String url) {
+    this.url = url;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -109,12 +99,13 @@ public class CertificatBean {
     }
     CertificatBean certificatBean = (CertificatBean) o;
     return Objects.equals(this.tipus, certificatBean.tipus) &&
-        Objects.equals(this.fitxer, certificatBean.fitxer);
+        Objects.equals(this.fitxer, certificatBean.fitxer) &&
+        Objects.equals(this.url, certificatBean.url);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(tipus, fitxer);
+    return Objects.hash(tipus, fitxer, url);
   }
 
 
@@ -125,6 +116,7 @@ public class CertificatBean {
     
     sb.append("    tipus: ").append(toIndentedString(tipus)).append("\n");
     sb.append("    fitxer: ").append(toIndentedString(fitxer)).append("\n");
+    sb.append("    url: ").append(toIndentedString(url)).append("\n");
     sb.append("}");
     return sb.toString();
   }

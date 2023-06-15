@@ -1,6 +1,9 @@
 package es.caib.carpeta.api.externa.certificats;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 import io.swagger.v3.oas.annotations.media.Schema;
+
 /**
  * 
  * @author fbosch
@@ -8,32 +11,38 @@ import io.swagger.v3.oas.annotations.media.Schema;
  */
 @Schema(name = "CertificatFileInfo")
 public class CertificatFileInfo {
-    
+
     protected String nom;
     protected String mime;
     protected int length;
     @Schema(name = "bytes",  required = true, type = "string", format = "binary")
     private byte[] bytes = null;
 
+    @JsonCreator
     public CertificatFileInfo() {
-        
+
     }
-    
+
     public String getNom() {
         return nom;
     }
+
     public void setNom(String nom) {
         this.nom = nom;
     }
+
     public String getMime() {
         return mime;
     }
+
     public void setMime(String mime) {
         this.mime = mime;
     }
+
     public int getLength() {
         return length;
     }
+
     public void setLength(int length) {
         this.length = length;
     }
@@ -45,14 +54,4 @@ public class CertificatFileInfo {
     public void setBytes(byte[] bytes) {
         this.bytes = bytes;
     }
-    
-    
-   
-    }
-
-    
-    
-    
-
-
-
+}

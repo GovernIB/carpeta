@@ -11,11 +11,8 @@
         <artifactId>carpeta-pluginsib-carpetafront</artifactId>
         <version>1.1.24</version>
     </parent>
-
     <properties>
-
     </properties>
-
     <dependencies>
 
         <dependency>
@@ -31,19 +28,16 @@
             <scope>provided</scope>
         </dependency>
 
-
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
-
 
         <dependency>
             <groupId>org.fundaciobit.pluginsib.utils</groupId>
             <artifactId>pluginsib-utils-templateengine</artifactId>
             <version>2.0.1</version>
         </dependency>
-
 
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -70,7 +64,6 @@
             </exclusions>
         </dependency>
 
-
         <dependency>
             <groupId>org.fundaciobit.pluginsib.arxiu</groupId>
             <artifactId>pluginsib-arxiu-caib</artifactId>
@@ -86,12 +79,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-  <!--      
-        <dependency>
-    <groupId>javax.ws.rs</groupId>
-    <artifactId>javax.ws.rs-api</artifactId>
-</dependency>
-  -->
 
         <dependency>
             <groupId>com.sun.jersey</groupId>

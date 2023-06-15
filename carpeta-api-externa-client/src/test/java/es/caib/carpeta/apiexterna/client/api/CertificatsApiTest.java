@@ -61,18 +61,28 @@ public class CertificatsApiTest {
         auth.setUsername("carpetaapp");
         auth.setPassword("carpetaapp");
         
-        client.setBasePath("http://fbosch:8080/carpetaapi/externa");
+        client.setBasePath("http://fbosch:8888/carpetaapi/externa");
         
         CertificatsApi api = new CertificatsApi(client);
         
         String dni = "99999999X";
-        String idioma = "ca";
-        CertificatBean response = api.certificats(dni, idioma);
-        System.out.println("Tipus = " + response.getTipus());
-        System.out.println("Nom Fitxer = " + response.getFitxer().getNom());
-        System.out.println("Mime Fitxer = " + response.getFitxer().getMime());
-        System.out.println("Length Fitxer = " + response.getFitxer().getLength());
-        System.out.println("Contingut Fitxer Codificat= " + response.getFitxer().getBytes());
+        if(api.teCertificat(dni).isTeCertificat()) {
+            String idioma = "ca";
+            CertificatBean response = api.descarregarCertificat(dni, idioma);
+            System.out.println("Tipus = " + response.getTipus());
+            System.out.println("Nom Fitxer = " + response.getFitxer().getNom());
+            System.out.println("Mime Fitxer = " + response.getFitxer().getMime());
+            System.out.println("Length Fitxer = " + response.getFitxer().getLength());
+            System.out.println("Contingut Fitxer Codificat= " + response.getFitxer().getBytes());
+        }else {
+            System.out.println("L'usuari amb DNI: "+dni + " no te certificats per aquest plugin.");
+
+        }
+        
+        
+        
+        
+        
         
         // TODO: test validations
     }
