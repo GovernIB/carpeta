@@ -1,5 +1,6 @@
 package es.caib.carpeta.api.externa.certificats;
 
+import java.util.Base64;
 import java.util.Locale;
 import javax.annotation.security.RunAs;
 import javax.ws.rs.Consumes;
@@ -37,8 +38,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 @RunAs(Constants.CAR_SUPER)
 @SecurityScheme(type = SecuritySchemeType.HTTP, name = "BasicAuth", scheme = "basic")
 @Path("/secure/certificats/")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
 @OpenAPIDefinition(tags = @Tag(name = "Certificats", description = "Certificats"))
 public class CertificatsService {
 
@@ -50,7 +49,8 @@ public class CertificatsService {
             TAG }, operationId = "descarregarCertificat", summary = "Retorna un certificat a CARPETA", method = "get")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "404", description = "Paràmetres incorrectes", content = @Content(mediaType = MediaType.APPLICATION_JSON)),
-            @ApiResponse(responseCode = "200", description = "Llista d'accessos a CARPETA", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = CertificatBean.class))) })
+            // mediaType = MediaType.APPLICATION_JSON, 
+            @ApiResponse(responseCode = "200", description = "Llista d'accessos a CARPETA", content = @Content(schema = @Schema(implementation = CertificatBean.class))) })
     @SecurityRequirement(name = "BasicAuth")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -58,18 +58,21 @@ public class CertificatsService {
     @Path("/descarregarCertificat")
     public Response descarregarCertificat(
 
-            @Parameter(description = "DNI o NIF de la persona de la qual volem obtenir el certificat.", required = false, example = "99999999X", schema = @Schema(implementation = String.class)) @QueryParam("dni") String dni,
+            @Parameter(description = "DNI o NIF de la persona de la qual volem obtenir el certificat.", required = true, example = "99999999X", schema = @Schema(implementation = String.class)) @QueryParam("dni") String dni,
 
-            @Parameter(description = "Codi de l'idioma", required = false, example = "ca", schema = @Schema(implementation = String.class)) @QueryParam("idioma") String idiomaRequest) {
+            @Parameter(description = "Codi de l'idioma", required = true, example = "ca", schema = @Schema(implementation = String.class)) @QueryParam("idioma") String idiomaRequest) {
         try {
             CertificatBean cert = new CertificatBean();
-            cert.setTipus(CertificatBean.TIPUS_FITXER);
+            cert.setTipus(CertificatType.FITXER);
+            
             CertificatFileInfo fileInfo = new CertificatFileInfo();
             fileInfo.setMime("text/plain");
             fileInfo.setNom("Hola.txt");
 
             byte[] byteFile = "Hola Caracola".getBytes();
-            fileInfo.setBytes(byteFile);
+            //fileInfo.setBytes(byteFile);
+
+            fileInfo.setDataB64(Base64.getEncoder().encodeToString(byteFile));            
 
             fileInfo.setLength(byteFile.length);
             cert.setFitxer(fileInfo);

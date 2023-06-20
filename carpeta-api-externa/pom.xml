@@ -137,7 +137,7 @@
                         <configuration>
                             <inputSpec>${project.basedir}/target/openapi/openapi.json</inputSpec>
                             <language>java</language>
-                            <configHelp>java</configHelp>
+                            
                             <library>resteasy</library>
                             <configOptions>
                                 <groupId>es.caib.carpeta</groupId>
@@ -146,6 +146,7 @@
                                 <dateLibrary>joda</dateLibrary>
                                 <useTags>true</useTags>
                                 <hideGenerationTimestamp>true</hideGenerationTimestamp>
+                                <java11>true</java11>
                             </configOptions>
 
                             <!-- <ignoreFileOverride>${project.basedir}/.swagger-codegen-ignore</ignoreFileOverride> -->
@@ -162,9 +163,9 @@
                             <apiPackage>${client.default.package}.api</apiPackage>
                             <modelPackage>${client.default.package}.model</modelPackage>
                             <invokerPackage>${client.default.package}.services</invokerPackage>
-                            <variableNamingConvention>camelCase</variableNamingConvention>
+                            <!-- <variableNamingConvention>camelCase</variableNamingConvention> -->
                             <!-- <serializableModel>true</serializableModel> -->
-                            <fullJavaUtil>true</fullJavaUtil>
+                            <!-- <fullJavaUtil>true</fullJavaUtil> -->
                         </configuration>
                     </execution>
                 </executions>
@@ -185,7 +186,7 @@
                         </goals>
                         <configuration>
                             <skipCache>false</skipCache>
-                            <url>https://github.com/swagger-api/swagger-ui/archive/v${swagger-ui.version}.tar.gz</url>
+                            <uri>https://github.com/swagger-api/swagger-ui/archive/v${swagger-ui.version}.tar.gz</uri>
                             <unpack>true</unpack>
                             <outputDirectory>${project.build.directory}</outputDirectory>
                         </configuration>

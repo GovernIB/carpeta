@@ -13,21 +13,12 @@
 package es.caib.carpeta.apiexterna.client.api;
 
 import es.caib.carpeta.apiexterna.client.services.ApiClient;
-import es.caib.carpeta.apiexterna.client.services.ApiException;
-import es.caib.carpeta.apiexterna.client.services.auth.Authentication;
 import es.caib.carpeta.apiexterna.client.services.auth.HttpBasicAuth;
 import es.caib.carpeta.apiexterna.client.model.CertificatBean;
-import es.caib.carpeta.apiexterna.client.model.CertificatFileInfo;
-import es.caib.carpeta.apiexterna.client.model.PaginaAcces;
+
 import org.junit.Test;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.Base64;
-import java.util.HashMap;
-
 import org.junit.Ignore;
-
 
 /**
  * API tests for CertificatsApi
@@ -35,12 +26,10 @@ import org.junit.Ignore;
 @Ignore
 public class CertificatsApiTest {
 
-    
-    
     public static void main(String[] args) {
         try {
             new CertificatsApiTest().certificatTest();
-        } catch (ApiException e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
@@ -55,35 +44,31 @@ public class CertificatsApiTest {
      *          if the Api call fails
      */
     @Test
-    public void certificatTest() throws ApiException {
+    public void certificatTest() throws Exception {
         ApiClient client = new ApiClient();
         HttpBasicAuth auth = (HttpBasicAuth) client.getAuthentication("BasicAuth");
         auth.setUsername("carpetaapp");
         auth.setPassword("carpetaapp");
-        
-        client.setBasePath("http://fbosch:8888/carpetaapi/externa");
-        
+
+        client.setBasePath("http://localhost:8080/carpetaapi/externa");
+
         CertificatsApi api = new CertificatsApi(client);
-        
+
         String dni = "99999999X";
-        if(api.teCertificat(dni).isTeCertificat()) {
+        if (api.teCertificat(dni).isTeCertificat()) {
             String idioma = "ca";
             CertificatBean response = api.descarregarCertificat(dni, idioma);
             System.out.println("Tipus = " + response.getTipus());
             System.out.println("Nom Fitxer = " + response.getFitxer().getNom());
             System.out.println("Mime Fitxer = " + response.getFitxer().getMime());
             System.out.println("Length Fitxer = " + response.getFitxer().getLength());
-            System.out.println("Contingut Fitxer Codificat= " + response.getFitxer().getBytes());
-        }else {
-            System.out.println("L'usuari amb DNI: "+dni + " no te certificats per aquest plugin.");
+            //System.out.println("Contingut Fitxer Codificat(byte[])= " + response.getFitxer().getBytes());
+            System.out.println("Contingut Fitxer Codificat(base64)= " + response.getFitxer().getDataB64());
+        } else {
+            System.out.println("L'usuari amb DNI: " + dni + " no te certificats per aquest plugin.");
 
         }
-        
-        
-        
-        
-        
-        
+
         // TODO: test validations
     }
 }

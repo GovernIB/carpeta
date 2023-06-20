@@ -12,6 +12,7 @@
 
 package es.caib.carpeta.apiinterna.client.services;
 
+
 public class Configuration {
     private static ApiClient defaultApiClient = new ApiClient();
 

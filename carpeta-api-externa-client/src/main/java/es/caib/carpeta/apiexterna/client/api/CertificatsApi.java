@@ -37,13 +37,21 @@ public class CertificatsApi {
   /**
    * Retorna un certificat a CARPETA
    * 
-   * @param dni DNI o NIF de la persona de la qual volem obtenir el certificat. (optional)
-   * @param idioma Codi de l&#x27;idioma (optional)
+   * @param dni DNI o NIF de la persona de la qual volem obtenir el certificat. (required)
+   * @param idioma Codi de l&#x27;idioma (required)
    * @return CertificatBean
    * @throws ApiException if fails to make API call
    */
   public CertificatBean descarregarCertificat(String dni, String idioma) throws ApiException {
     Object localVarPostBody = null;
+    // verify the required parameter 'dni' is set
+    if (dni == null) {
+      throw new ApiException(400, "Missing the required parameter 'dni' when calling descarregarCertificat");
+    }
+    // verify the required parameter 'idioma' is set
+    if (idioma == null) {
+      throw new ApiException(400, "Missing the required parameter 'idioma' when calling descarregarCertificat");
+    }
     // create path and map variables
     String localVarPath = "/secure/certificats/descarregarCertificat".replaceAll("\\{format\\}","json");
 

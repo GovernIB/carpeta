@@ -12,7 +12,6 @@
 
 package es.caib.carpeta.apiexterna.client.api;
 
-import es.caib.carpeta.apiexterna.client.services.ApiException;
 import es.caib.carpeta.apiexterna.client.model.PaginaAcces;
 import org.junit.Test;
 import org.junit.Ignore;
@@ -39,7 +38,7 @@ public class AccessosApiTest {
      *          if the Api call fails
      */
     @Test
-    public void accessosTest() throws ApiException {
+    public void accessosTest() throws Exception {
         String entitat = null;
         String inici = null;
         String fi = null;

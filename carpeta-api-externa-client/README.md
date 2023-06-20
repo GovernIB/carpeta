@@ -2,7 +2,6 @@
 
 API REST EXTERNA de Carpeta
 - API version: 1.0.0
-  - Build date: 2022-04-08T12:09:32.619803400+02:00[Europe/Paris]
 
 Conjunt de Serveis REST de Carpeta per ser accedits des de l'exterior
 
@@ -102,16 +101,23 @@ public class AccessosApiExample {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://localhost:8080/carpetaapi/externa*
+All URIs are relative to *../../carpetaapi/externa*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AccessosApi* | [**accessos**](docs/AccessosApi.md#accessos) | **GET** /serveis/accessos | Retorna la llista d&#x60;accessos a CARPETA
+*AccessosApi* | [**accessos**](docs/AccessosApi.md#accessos) | **GET** /services/accessos | Retorna la llista d&#x60;accessos a CARPETA
+*CertificatsApi* | [**descarregarCertificat**](docs/CertificatsApi.md#descarregarCertificat) | **GET** /secure/certificats/descarregarCertificat | Retorna un certificat a CARPETA
+*CertificatsApi* | [**teCertificat**](docs/CertificatsApi.md#teCertificat) | **GET** /secure/certificats/teCertificat | Retorna un CertificatInfo que indica en un boolea si l&#x27;usuari te certificat 
+*EstadistiquesApi* | [**accessos1**](docs/EstadistiquesApi.md#accessos1) | **GET** /public/estadistiques/accessos | Retorna la llista d&#x60;accessos a CARPETA
 *SecuretatApi* | [**echo**](docs/SecuretatApi.md#echo) | **GET** /secure/echo | Fa un ECHO
 
 ## Documentation for Models
 
  - [Acces](docs/Acces.md)
+ - [CertificatBean](docs/CertificatBean.md)
+ - [CertificatFileInfo](docs/CertificatFileInfo.md)
+ - [CertificatInfo](docs/CertificatInfo.md)
+ - [CertificatType](docs/CertificatType.md)
  - [PaginaAcces](docs/PaginaAcces.md)
 
 ## Documentation for Authorization

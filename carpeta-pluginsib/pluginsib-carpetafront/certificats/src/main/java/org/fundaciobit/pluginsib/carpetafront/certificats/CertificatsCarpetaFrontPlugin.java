@@ -15,7 +15,6 @@ import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import com.google.gson.Gson;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -372,7 +371,7 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             log.info("Nom Fitxer = " + file.getNom());
             log.info("Mime Fitxer = " + file.getMime());
             log.info("Length Fitxer = " + file.getLength());
-            log.info("Contingut Fitxer Codificat= " + file.getBytes());
+            log.info("Contingut Fitxer Codificat= " + file.getDataB64());
 
             // modifies response
             response.setContentType(file.getMime());
@@ -381,9 +380,18 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             String headerKey = "Content-Disposition";
             String headerValue = String.format("attachment; filename=\"%s\"", file.getNom());
             response.setHeader(headerKey, headerValue);
-
+            
+            byte[] originalData = Base64.getDecoder().decode(file.getDataB64());
+            
             OutputStream outStream = response.getOutputStream();
-            FileInputStream inStream = new FileInputStream(file.getBytes());
+            
+            outStream.write(originalData);
+            
+            outStream.close();
+/*
+ * FileInputStream inStream = new FileInputStream(file.getBytes());
+            OutputStream outStream = response.getOutputStream();
+            
             
             byte[] buffer = new byte[1024*1024];
             int bytesRead = -1;
@@ -395,6 +403,7 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             inStream.close();
             outStream.close();
+      */
 
         } catch (Exception e) {
             log.error("Error comprovant possesió de certificats: " + e.getMessage(), e);

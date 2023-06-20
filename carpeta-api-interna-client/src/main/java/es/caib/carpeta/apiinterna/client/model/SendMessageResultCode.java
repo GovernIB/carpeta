@@ -51,9 +51,9 @@ public enum SendMessageResultCode {
   }
 
   @JsonCreator
-  public static SendMessageResultCode fromValue(String text) {
+  public static SendMessageResultCode fromValue(String input) {
     for (SendMessageResultCode b : SendMessageResultCode.values()) {
-      if (String.valueOf(b.value).equals(text)) {
+      if (b.value.equals(input)) {
         return b;
       }
     }

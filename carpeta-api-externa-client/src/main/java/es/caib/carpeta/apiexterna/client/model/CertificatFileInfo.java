@@ -18,7 +18,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
-import java.io.File;
 /**
  * CertificatFileInfo
  */
@@ -34,8 +33,8 @@ public class CertificatFileInfo {
   @JsonProperty("length")
   private Integer length = null;
 
-  @JsonProperty("bytes")
-  private File bytes = null;
+  @JsonProperty("dataB64")
+  private String dataB64 = null;
 
   public CertificatFileInfo nom(String nom) {
     this.nom = nom;
@@ -91,22 +90,22 @@ public class CertificatFileInfo {
     this.length = length;
   }
 
-  public CertificatFileInfo bytes(File bytes) {
-    this.bytes = bytes;
+  public CertificatFileInfo dataB64(String dataB64) {
+    this.dataB64 = dataB64;
     return this;
   }
 
    /**
-   * Get bytes
-   * @return bytes
+   * Get dataB64
+   * @return dataB64
   **/
-  @Schema(required = true, description = "")
-  public File getBytes() {
-    return bytes;
+  @Schema(description = "")
+  public String getDataB64() {
+    return dataB64;
   }
 
-  public void setBytes(File bytes) {
-    this.bytes = bytes;
+  public void setDataB64(String dataB64) {
+    this.dataB64 = dataB64;
   }
 
 
@@ -122,12 +121,12 @@ public class CertificatFileInfo {
     return Objects.equals(this.nom, certificatFileInfo.nom) &&
         Objects.equals(this.mime, certificatFileInfo.mime) &&
         Objects.equals(this.length, certificatFileInfo.length) &&
-        Objects.equals(this.bytes, certificatFileInfo.bytes);
+        Objects.equals(this.dataB64, certificatFileInfo.dataB64);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(nom, mime, length, Objects.hashCode(bytes));
+    return Objects.hash(nom, mime, length, dataB64);
   }
 
 
@@ -139,7 +138,7 @@ public class CertificatFileInfo {
     sb.append("    nom: ").append(toIndentedString(nom)).append("\n");
     sb.append("    mime: ").append(toIndentedString(mime)).append("\n");
     sb.append("    length: ").append(toIndentedString(length)).append("\n");
-    sb.append("    bytes: ").append(toIndentedString(bytes)).append("\n");
+    sb.append("    dataB64: ").append(toIndentedString(dataB64)).append("\n");
     sb.append("}");
     return sb.toString();
   }

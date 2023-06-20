@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import es.caib.carpeta.apiexterna.client.model.CertificatFileInfo;
+import es.caib.carpeta.apiexterna.client.model.CertificatType;
 import io.swagger.v3.oas.annotations.media.Schema;
 /**
  * CertificatBean
@@ -26,7 +27,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 public class CertificatBean {
   @JsonProperty("tipus")
-  private Integer tipus = null;
+  private CertificatType tipus = null;
 
   @JsonProperty("fitxer")
   private CertificatFileInfo fitxer = null;
@@ -34,7 +35,7 @@ public class CertificatBean {
   @JsonProperty("url")
   private String url = null;
 
-  public CertificatBean tipus(Integer tipus) {
+  public CertificatBean tipus(CertificatType tipus) {
     this.tipus = tipus;
     return this;
   }
@@ -44,11 +45,11 @@ public class CertificatBean {
    * @return tipus
   **/
   @Schema(description = "")
-  public Integer getTipus() {
+  public CertificatType getTipus() {
     return tipus;
   }
 
-  public void setTipus(Integer tipus) {
+  public void setTipus(CertificatType tipus) {
     this.tipus = tipus;
   }
 
