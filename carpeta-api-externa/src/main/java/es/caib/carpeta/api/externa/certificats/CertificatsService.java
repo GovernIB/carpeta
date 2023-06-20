@@ -70,9 +70,9 @@ public class CertificatsService {
             fileInfo.setNom("Hola.txt");
 
             byte[] byteFile = "Hola Caracola".getBytes();
-            //fileInfo.setBytes(byteFile);
+            fileInfo.setBytes(byteFile);
 
-            fileInfo.setDataB64(Base64.getEncoder().encodeToString(byteFile));            
+            //fileInfo.setDataB64(Base64.getEncoder().encodeToString(byteFile));            
 
             fileInfo.setLength(byteFile.length);
             cert.setFitxer(fileInfo);

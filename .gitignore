@@ -267,3 +267,15 @@ carpeta-pluginsib/pluginsib-carpetafront/notib/react/dist/src/
 /carpeta-pluginsib/pluginsib-carpetafront/carpetacommonreactlibtest/startServer.bat
 /carpeta-pluginsib/pluginsib-carpetafront/sistra/2023-04-04 10 40 36.jpg
 /carpeta-pluginsib/pluginsib-carpetafront/sistra/2023-04-04 10 41 08.jpg
+/carpeta-api-certificats-client/.swagger-codegen-ignore
+/carpeta-api-certificats-client/.swagger-codegen/VERSION
+/carpeta-api-certificats-client/.travis.yml
+/carpeta-api-certificats-client/build.gradle
+/carpeta-api-certificats-client/build.sbt
+/carpeta-api-certificats-client/git_push.sh
+/carpeta-api-certificats-client/gradle.properties
+/carpeta-api-certificats-client/gradle/wrapper/gradle-wrapper.jar
+/carpeta-api-certificats-client/gradle/wrapper/gradle-wrapper.properties
+/carpeta-api-certificats-client/gradlew
+/carpeta-api-certificats-client/gradlew.bat
+/carpeta-api-certificats-client/settings.gradle

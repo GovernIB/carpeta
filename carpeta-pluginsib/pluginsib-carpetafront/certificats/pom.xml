@@ -16,15 +16,8 @@
 
         <dependency>
             <groupId>es.caib.carpeta</groupId>
-            <artifactId>carpeta-api-externa-client</artifactId>
+            <artifactId>carpeta-api-certificats-client</artifactId>
             <version>1.1</version>
-            <exclusions>
-                <!-- evitar conflicte amb JAX-RS de JBoss -->
-                <exclusion>
-                    <groupId>javax.ws.rs</groupId>
-                    <artifactId>jsr311-api</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
