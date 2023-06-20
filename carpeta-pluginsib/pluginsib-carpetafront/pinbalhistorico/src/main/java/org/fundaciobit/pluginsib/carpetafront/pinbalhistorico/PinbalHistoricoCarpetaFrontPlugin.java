@@ -241,7 +241,7 @@ public class PinbalHistoricoCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
         String codMunicipio = request.getParameter("municipio");
         String numAnyos = request.getParameter("anyos");
                
-        DatosHistorico datosHistorico = cridadaRest(userData, codMunicipio, numAnyos, absolutePluginRequestPath);
+        DatosHistorico datosHistorico = cridadaRest(userData, codMunicipio, absolutePluginRequestPath);
         
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
@@ -258,7 +258,7 @@ public class PinbalHistoricoCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
 
     }
 
-	public DatosHistorico cridadaRest(UserData userData, String codMunicipio, String numAnyos, String absolutePluginRequestPath) {
+	public DatosHistorico cridadaRest(UserData userData, String codMunicipio, String absolutePluginRequestPath) {
 		
 		DatosHistorico datosHistorico = new DatosHistorico();
         ScspRespuesta resposta;
@@ -329,7 +329,7 @@ public class PinbalHistoricoCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
             
             String codigoProvincia = getProperty(PINBALHISTORICO_PROPERTY_BASE + "codigoprovincia");
             
-            SolicitudHistorico solicitud = new SolicitudHistorico(codigoProvincia, codMunicipio, tipoDoc, documentacion, numAnyos);
+            SolicitudHistorico solicitud = new SolicitudHistorico(codigoProvincia, codMunicipio, tipoDoc, documentacion);
             omplirDadesSolicitutComunes(solicitud, funcionario, titular);
           
         	/*
@@ -484,15 +484,15 @@ public class PinbalHistoricoCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
 		protected  String municipioSolicitud;
 		protected  String tipoDocumentacion;
 		protected  String numeroDocumento;
-		protected  String numeroAnyos; 
+		//protected  String numeroAnyos; 
 		
-		public SolicitudHistorico(String provinciaSolicitud, String municipioSolicitud, String tipoDocumentacion, String numeroDocumento, String numeroAnyos) {
+		public SolicitudHistorico(String provinciaSolicitud, String municipioSolicitud, String tipoDocumentacion, String numeroDocumento) {
 			super();
 			this.provinciaSolicitud = provinciaSolicitud;
 			this.municipioSolicitud = municipioSolicitud;
 			this.tipoDocumentacion  = tipoDocumentacion;
 			this.numeroDocumento    = numeroDocumento;
-			this.numeroAnyos        = numeroAnyos;
+			//this.numeroAnyos        = numeroAnyos;
 		}
 
 		@Override
@@ -518,9 +518,9 @@ public class PinbalHistoricoCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
 				xmlBuilder.append("</Titular>");
 			}
 			
-			if (!isEmptyString(numeroAnyos)) {
+			/*if (!isEmptyString(numeroAnyos)) {
 				xmlBuilder.append(xmlOptionalStringParameter(this.numeroAnyos, "NumeroAnyos"));
-			}
+			}*/
 			
 			xmlBuilder.append("</Solicitud>");
 			xmlBuilder.append("</DatosEspecificos>");
