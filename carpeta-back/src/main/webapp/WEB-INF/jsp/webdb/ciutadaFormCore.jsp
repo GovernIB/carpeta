@@ -180,7 +180,7 @@
             </td>
           <td id="ciutada_dataCreacio_columnvalueid">
     <form:errors path="ciutada.dataCreacio" cssClass="errorField alert alert-danger" />
-            <div class="form-group">
+            <div class="form-group"  style="margin-bottom: 0px;" >
                 <div class="input-group date" id="ciutada_dataCreacio" data-target-input="nearest">
                       <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,CiutadaFields.DATACREACIO)? 'true' : 'false'}" cssClass="form-control datetimepicker-input"  data-target="#ciutada_dataCreacio" path="ciutada.dataCreacio" />
                     <c:if test="${!gen:contains(__theForm.readOnlyFields ,CiutadaFields.DATACREACIO)}" >

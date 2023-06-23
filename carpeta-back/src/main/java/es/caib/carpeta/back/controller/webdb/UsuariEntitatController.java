@@ -611,7 +611,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, UsuariEntitatFilterForm usuariEntitatFilterForm,
        List<UsuariEntitat> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (usuariEntitatFilterForm.isHiddenField(USUARIID)
-      && !usuariEntitatFilterForm.isGroupByField(USUARIID)) {
+       && !usuariEntitatFilterForm.isGroupByField(USUARIID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -650,7 +650,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, UsuariEntitatFilterForm usuariEntitatFilterForm,
        List<UsuariEntitat> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (usuariEntitatFilterForm.isHiddenField(ENTITATID)
-      && !usuariEntitatFilterForm.isGroupByField(ENTITATID)) {
+       && !usuariEntitatFilterForm.isGroupByField(ENTITATID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -720,7 +720,7 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getSessionAttributeFilterForm() {
-    return "UsuariEntitatWebDB_FilterForm";
+    return "UsuariEntitat_FilterForm_" + this.getClass().getName();
   }
 
 

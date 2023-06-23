@@ -45,7 +45,7 @@
             </td>
           <td id="estadistica_dataEstadistica_columnvalueid">
     <form:errors path="estadistica.dataEstadistica" cssClass="errorField alert alert-danger" />
-            <div class="form-group">
+            <div class="form-group"  style="margin-bottom: 0px;" >
                 <div class="input-group date" id="estadistica_dataEstadistica" data-target-input="nearest">
                       <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,EstadisticaFields.DATAESTADISTICA)? 'true' : 'false'}" cssClass="form-control datetimepicker-input"  data-target="#estadistica_dataEstadistica" path="estadistica.dataEstadistica" />
                     <c:if test="${!gen:contains(__theForm.readOnlyFields ,EstadisticaFields.DATAESTADISTICA)}" >

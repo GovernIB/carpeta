@@ -2879,24 +2879,6 @@
               "type": 0
             },
             {
-              "name": "car_faq_fitxer_fitxer1_fk",
-              "table": "car_preguntesfrequents",
-              "field": "fitxer1id",
-              "type": 0
-            },
-            {
-              "name": "car_faq_fitxer_fitxer2_fk",
-              "table": "car_preguntesfrequents",
-              "field": "fitxer2id",
-              "type": 0
-            },
-            {
-              "name": "car_faq_fitxer_fitxer3_fk",
-              "table": "car_preguntesfrequents",
-              "field": "fitxer3id",
-              "type": 0
-            },
-            {
               "name": "car_seccio_fitxer_icon_fk",
               "table": "car_seccio",
               "field": "iconaid",
@@ -4524,46 +4506,6 @@
           ]
         },
         {
-          "index": "car_faq_respostaid_fk_i",
-          "isAutoIncrement": false,
-          "sqlName": "respostaid",
-          "sqlType": -5,
-          "size": 19,
-          "digits": 0,
-          "isNotNullable": true,
-          "labels": {
-            "en": "Response",
-            "ca": "Resposta",
-            "es": "Respuesta"
-          },
-          "javaName": "respostaID",
-          "javaType": "long",
-          "traduible": false,
-          "showInWebList": true,
-          "showInReferenceList": false,
-          "transientField": false,
-          "filter": false,
-          "orderBy": 0,
-          "groupBy": false,
-          "webFieldInfo": {
-            "webtype": 3,
-            "foreignKey": {
-              "name": "car_faq_traduccio_resp_fk",
-              "table": "car_traduccio",
-              "field": "traduccioid",
-              "type": 1
-            }
-          },
-          "foreignKeys": [
-            {
-              "name": "car_faq_traduccio_resp_fk",
-              "table": "car_traduccio",
-              "field": "traduccioid",
-              "type": 1
-            }
-          ]
-        },
-        {
           "isAutoIncrement": false,
           "sqlName": "ordre",
           "sqlType": 4,
@@ -4630,20 +4572,18 @@
           ]
         },
         {
-          "index": "car_faq_fitxer1id_fk_i",
           "isAutoIncrement": false,
-          "sqlName": "fitxer1id",
-          "sqlType": -5,
-          "size": 19,
+          "sqlName": "respostaca",
+          "sqlType": 12,
+          "size": 2147483647,
           "digits": 0,
-          "isNotNullable": false,
+          "isNotNullable": true,
           "labels": {
-            "en": "Help file 1",
-            "ca": "Fitxer d\u0027ajuda 1",
-            "es": "Archivo de ayuda 1"
+            "ca": "Resposta Català",
+            "es": "Respuesta Catalan"
           },
-          "javaName": "fitxer1ID",
-          "javaType": "java.lang.Long",
+          "javaName": "respostaCa",
+          "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
           "showInReferenceList": false,
@@ -4652,38 +4592,23 @@
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
-            "webtype": 3,
-            "foreignKey": {
-              "name": "car_faq_fitxer_fitxer1_fk",
-              "table": "car_fitxer",
-              "field": "fitxerid",
-              "type": 1
-            }
+            "webtype": 8
           },
-          "foreignKeys": [
-            {
-              "name": "car_faq_fitxer_fitxer1_fk",
-              "table": "car_fitxer",
-              "field": "fitxerid",
-              "type": 1
-            }
-          ]
+          "foreignKeys": []
         },
         {
-          "index": "car_faq_fitxer2id_fk_i",
           "isAutoIncrement": false,
-          "sqlName": "fitxer2id",
-          "sqlType": -5,
-          "size": 19,
+          "sqlName": "respostaes",
+          "sqlType": 12,
+          "size": 2147483647,
           "digits": 0,
-          "isNotNullable": false,
+          "isNotNullable": true,
           "labels": {
-            "en": "Help file 2",
-            "ca": "Fitxer d\u0027ajuda 2",
-            "es": "Archivo de ayuda 2"
+            "ca": "Resposta Castellà",
+            "es": "Respuesta Castellano"
           },
-          "javaName": "fitxer2ID",
-          "javaType": "java.lang.Long",
+          "javaName": "respostaEs",
+          "javaType": "java.lang.String",
           "traduible": false,
           "showInWebList": true,
           "showInReferenceList": false,
@@ -4692,62 +4617,9 @@
           "orderBy": 0,
           "groupBy": false,
           "webFieldInfo": {
-            "webtype": 3,
-            "foreignKey": {
-              "name": "car_faq_fitxer_fitxer2_fk",
-              "table": "car_fitxer",
-              "field": "fitxerid",
-              "type": 1
-            }
+            "webtype": 8
           },
-          "foreignKeys": [
-            {
-              "name": "car_faq_fitxer_fitxer2_fk",
-              "table": "car_fitxer",
-              "field": "fitxerid",
-              "type": 1
-            }
-          ]
-        },
-        {
-          "index": "car_faq_fitxer3id_fk_i",
-          "isAutoIncrement": false,
-          "sqlName": "fitxer3id",
-          "sqlType": -5,
-          "size": 19,
-          "digits": 0,
-          "isNotNullable": false,
-          "labels": {
-            "en": "Help file 3",
-            "ca": "Fitxer d\u0027ajuda 3",
-            "es": "Archivo de ayuda 3"
-          },
-          "javaName": "fitxer3ID",
-          "javaType": "java.lang.Long",
-          "traduible": false,
-          "showInWebList": true,
-          "showInReferenceList": false,
-          "transientField": false,
-          "filter": false,
-          "orderBy": 0,
-          "groupBy": false,
-          "webFieldInfo": {
-            "webtype": 3,
-            "foreignKey": {
-              "name": "car_faq_fitxer_fitxer3_fk",
-              "table": "car_fitxer",
-              "field": "fitxerid",
-              "type": 1
-            }
-          },
-          "foreignKeys": [
-            {
-              "name": "car_faq_fitxer_fitxer3_fk",
-              "table": "car_fitxer",
-              "field": "fitxerid",
-              "type": 1
-            }
-          ]
+          "foreignKeys": []
         }
       ]
     },
@@ -5394,12 +5266,6 @@
               "type": 0
             },
             {
-              "name": "car_faq_traduccio_resp_fk",
-              "table": "car_preguntesfrequents",
-              "field": "respostaid",
-              "type": 0
-            },
-            {
               "name": "car_seccio_traduccio_des_fk",
               "table": "car_seccio",
               "field": "descripcioid",
@@ -6017,5 +5883,6 @@
     "es"
   ],
   "generateBack": true,
+  "generateFront": false,
   "generateWS": false
 }

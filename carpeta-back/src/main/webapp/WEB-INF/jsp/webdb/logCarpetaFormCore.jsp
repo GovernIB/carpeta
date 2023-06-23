@@ -191,7 +191,7 @@
             </td>
           <td id="logCarpeta_dataInici_columnvalueid">
     <form:errors path="logCarpeta.dataInici" cssClass="errorField alert alert-danger" />
-            <div class="form-group">
+            <div class="form-group"  style="margin-bottom: 0px;" >
                 <div class="input-group date" id="logCarpeta_dataInici" data-target-input="nearest">
                       <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.DATAINICI)? 'true' : 'false'}" cssClass="form-control datetimepicker-input"  data-target="#logCarpeta_dataInici" path="logCarpeta.dataInici" />
                     <c:if test="${!gen:contains(__theForm.readOnlyFields ,LogCarpetaFields.DATAINICI)}" >

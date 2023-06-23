@@ -62,7 +62,6 @@ public class PreguntesFrequentsWebValidator extends AbstractWebValidator<Pregunt
 
 java.util.List<Field<?>> _ignoreFields = new java.util.ArrayList<Field<?>>();
 _ignoreFields.add(ENUNCIATID);
-_ignoreFields.add(RESPOSTAID);
     WebValidationResult<PreguntesFrequentsForm> wvr;
     wvr = new WebValidationResult<PreguntesFrequentsForm>(errors, _ignoreFields);
 
@@ -118,37 +117,6 @@ _ignoreFields.add(RESPOSTAID);
         errors.rejectValue("preguntesFrequents.enunciat", "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(ENUNCIATID.fullName)}, null);
       }
     }
-    {
-      // IF CAMP ES NOT NULL verificar que totes les traduccions son not null
-      es.caib.carpeta.persistence.TraduccioJPA tradJPA = __jpa.getResposta();
-      if (tradJPA != null) {
-        // TODO ERROR
-        java.util.Map<String,es.caib.carpeta.persistence.TraduccioMapJPA> _trad = tradJPA.getTraduccions();
-        int countNotNull = 0;
-        for (String _idioma : _trad.keySet()) {
-          es.caib.carpeta.persistence.TraduccioMapJPA _map = _trad.get(_idioma);
-          if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
-          } else {
-            countNotNull++;
-          }
-        }
-
-          if (countNotNull  == _trad.size()) {
-            // OK Tot esta ple
-          } else {
-            for (String _idioma : _trad.keySet()) {
-              es.caib.carpeta.persistence.TraduccioMapJPA _map = _trad.get(_idioma);
-              if (_map == null || (_map.getValor() == null || _map.getValor().length() == 0 )) {
-                errors.rejectValue("preguntesFrequents.resposta", "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(RESPOSTAID.fullName)}, null);
-                errors.rejectValue("preguntesFrequents.resposta.traduccions["+ _idioma +"].valor",
-                  "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(RESPOSTAID.fullName)}, null);
-              }
-            }
-          }
-      } else {
-        errors.rejectValue("preguntesFrequents.resposta", "genapp.validation.required", new String[] {org.fundaciobit.genapp.common.web.i18n.I18NUtils.tradueix(RESPOSTAID.fullName)}, null);
-      }
-    }
 
   }
     BeanValidatorResult<PreguntesFrequents> __vr = new BeanValidatorResult<PreguntesFrequents>();
@@ -162,10 +130,6 @@ _ignoreFields.add(RESPOSTAID);
         }
     }
 
-    if (isNou) { // Creacio
-      // ================ CREATION
-      // Fitxers 
-    }
 
   } // Final de metode
 

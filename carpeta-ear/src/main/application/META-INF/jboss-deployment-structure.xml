@@ -17,9 +17,6 @@
             <module name="org.keycloak.keycloak-wildfly-adapter" optional="TRUE"/>
             <module name="org.keycloak.keycloak-wildfly-elytron-oidc-adapter" optional="TRUE"/>
             <module name="org.keycloak.keycloak-wildfly-subsystem" optional="TRUE"/>
-            
-            <!-- <module name="org.jboss.resteasy.resteasy-jackson2-provider" /> -->
-            
         </dependencies>
 
     </deployment>

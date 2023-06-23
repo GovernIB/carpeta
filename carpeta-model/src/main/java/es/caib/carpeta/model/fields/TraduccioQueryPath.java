@@ -211,24 +211,10 @@ public class TraduccioQueryPath extends org.fundaciobit.genapp.common.query.Quer
 
  // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
 
-  public PreguntesFrequentsQueryPath PREGUNTESFREQUENTS_ENUNCIATIDS() {
+  public PreguntesFrequentsQueryPath PREGUNTESFREQUENTSS() {
     return new PreguntesFrequentsQueryPath(new QueryPath() {
       public String getQueryPath() {
-          return TraduccioQueryPath.this.getQueryPath() + "preguntesFrequents_enunciatids" + ".";
-      }
-    });
-  }
-*/
-
-/* L'ús d'aquest camp (OneToMany) llança una exception:
- [Illegal attempt to dereference a collection]
-
- // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
-
-  public PreguntesFrequentsQueryPath PREGUNTESFREQUENTS_RESPOSTAIDS() {
-    return new PreguntesFrequentsQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return TraduccioQueryPath.this.getQueryPath() + "preguntesFrequents_respostaids" + ".";
+          return TraduccioQueryPath.this.getQueryPath() + "preguntesFrequentss" + ".";
       }
     });
   }

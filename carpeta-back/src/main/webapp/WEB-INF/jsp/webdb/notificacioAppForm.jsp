@@ -1,13 +1,13 @@
 
 <%-- ========= FITXER AUTOGENERAT - NO MODIFICAR !!!!! --%>
 <%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
- 
-  <%@include file="notificacioAppFormTitle.jsp" %>
 
 
 <form:form modelAttribute="notificacioAppForm" method="${(empty method)?'post':method}"
   enctype="multipart/form-data">
   
+  <%@include file="notificacioAppFormTitle.jsp" %>
+ 
   <c:set var="contexte" value="${notificacioAppForm.contexte}"/>
   <form:hidden path="nou" />
   

@@ -18,7 +18,7 @@
   <%-- Inici de div de TAULA CONTINGUTS --%>
   <div style="width: 100%;">
   <%@include file="logCarpetaListCore.jsp" %>
-  <c:if test="${not empty logCarpetaItems}">
+  <c:if test="${not empty logCarpetaItems && __theFilterForm.footerListVisible}">
           <%@include file="webdbPagination.jsp" %>
 
   </c:if>

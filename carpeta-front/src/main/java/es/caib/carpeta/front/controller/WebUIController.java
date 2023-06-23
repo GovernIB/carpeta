@@ -6,12 +6,19 @@ import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.hibernate.HibernateFileUtil;
 import es.caib.carpeta.logic.SeccioLogicaService;
 import es.caib.carpeta.logic.utils.PluginInfo;
-import es.caib.carpeta.model.entity.*;
+import es.caib.carpeta.model.entity.Avis;
+import es.caib.carpeta.model.entity.Enllaz;
+import es.caib.carpeta.model.entity.Entitat;
+import es.caib.carpeta.model.entity.Idioma;
+import es.caib.carpeta.model.entity.PreguntesFrequents;
+import es.caib.carpeta.model.entity.Seccio;
 import es.caib.carpeta.model.fields.IdiomaFields;
-import es.caib.carpeta.persistence.*;
+import es.caib.carpeta.persistence.AvisJPA;
+import es.caib.carpeta.persistence.EnllazJPA;
+import es.caib.carpeta.persistence.EntitatJPA;
+import es.caib.carpeta.persistence.PreguntesFrequentsJPA;
+import es.caib.carpeta.persistence.SeccioJPA;
 import es.caib.carpeta.pluginsib.carpetafront.api.FileInfo;
-import org.apache.commons.io.FileUtils;
-import org.fundaciobit.genapp.common.filesystem.FileSystemManager;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 import org.fundaciobit.genapp.common.query.OrderBy;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -23,13 +30,17 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.springframework.web.util.WebUtils;
 
 import javax.ejb.EJB;
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.TreeMap;
+
 
 /**
  * Conjunt de cridades REST per obtenir informació per a la presentació de la
@@ -1578,8 +1589,15 @@ public class WebUIController extends PluginFrontController {
                 PreguntesFrequentsJPA faqJPA = (PreguntesFrequentsJPA) faq;
 
                 String title = faqJPA.getEnunciatTraduccions().get(lang).getValor();
-                String content = faqJPA.getRespostaTraduccions().get(lang).getValor();
+                
+                String content;
+                if ("es".equalsIgnoreCase(lang)) {
+                  content = faqJPA.getRespostaEs();
+                } else {
+                  content = faqJPA.getRespostaCa();  
+                }
 
+                /*
                 if(faq.getFitxer1ID()!=null) {
                     Fitxer fit1 = utilsEjb.getFileInfo(faq.getFitxer1ID());
                     File file1 = FileSystemManager.getFile(faq.getFitxer1ID());
@@ -1624,6 +1642,7 @@ public class WebUIController extends PluginFrontController {
                     }
 
                 }
+                */
 
 
 

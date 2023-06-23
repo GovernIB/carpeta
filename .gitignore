@@ -279,3 +279,5 @@ carpeta-pluginsib/pluginsib-carpetafront/notib/react/dist/src/
 /carpeta-api-certificats-client/gradlew
 /carpeta-api-certificats-client/gradlew.bat
 /carpeta-api-certificats-client/settings.gradle
+/carpeta-api-certificats-client/.gitignore
+/carpeta-pluginsib/pluginsib-carpetafront/carpetacommonreactlib/build/index.es.js.map

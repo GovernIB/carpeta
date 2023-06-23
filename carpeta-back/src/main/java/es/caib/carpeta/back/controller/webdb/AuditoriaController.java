@@ -596,7 +596,8 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, AuditoriaFilterForm auditoriaFilterForm,
        List<Auditoria> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (auditoriaFilterForm.isHiddenField(TIPUS)
-      && !auditoriaFilterForm.isGroupByField(TIPUS)) {
+       && !auditoriaFilterForm.isGroupByField(TIPUS)
+       && !auditoriaFilterForm.isFilterByField(TIPUS)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -636,7 +637,8 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, AuditoriaFilterForm auditoriaFilterForm,
        List<Auditoria> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (auditoriaFilterForm.isHiddenField(ENTITATID)
-      && !auditoriaFilterForm.isGroupByField(ENTITATID)) {
+       && !auditoriaFilterForm.isGroupByField(ENTITATID)
+       && !auditoriaFilterForm.isFilterByField(ENTITATID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -702,7 +704,7 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getSessionAttributeFilterForm() {
-    return "AuditoriaWebDB_FilterForm";
+    return "Auditoria_FilterForm_" + this.getClass().getName();
   }
 
 

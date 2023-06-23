@@ -1,13 +1,13 @@
 
 <%-- ========= FITXER AUTOGENERAT - NO MODIFICAR !!!!! --%>
 <%@ include file="/WEB-INF/jsp/moduls/includes.jsp"%>
- 
-  <%@include file="logCarpetaFormTitle.jsp" %>
 
 
 <form:form modelAttribute="logCarpetaForm" method="${(empty method)?'post':method}"
   enctype="multipart/form-data">
   
+  <%@include file="logCarpetaFormTitle.jsp" %>
+ 
   <c:set var="contexte" value="${logCarpetaForm.contexte}"/>
   <form:hidden path="nou" />
   

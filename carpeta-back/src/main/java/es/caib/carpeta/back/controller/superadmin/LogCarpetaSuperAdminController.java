@@ -27,9 +27,7 @@ import es.caib.carpeta.model.entity.LogCarpeta;
 import es.caib.carpeta.model.fields.LogCarpetaFields;
 import es.caib.carpeta.model.fields.PluginFields;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 

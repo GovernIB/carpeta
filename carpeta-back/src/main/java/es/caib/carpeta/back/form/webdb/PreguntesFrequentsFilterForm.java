@@ -65,28 +65,6 @@ public class PreguntesFrequentsFilterForm extends CarpetaBaseFilterForm implemen
   }
 
 
-  private java.lang.Long respostaIDDesde;
-
-  public java.lang.Long getRespostaIDDesde() {
-    return this.respostaIDDesde;
-  }
-
-  public void setRespostaIDDesde(java.lang.Long respostaIDDesde) {
-    this.respostaIDDesde = respostaIDDesde;
-  }
-
-
-  private java.lang.Long respostaIDFins;
-
-  public java.lang.Long getRespostaIDFins() {
-    return this.respostaIDFins;
-  }
-
-  public void setRespostaIDFins(java.lang.Long respostaIDFins) {
-    this.respostaIDFins = respostaIDFins;
-  }
-
-
   private java.lang.Integer ordreDesde;
 
   public java.lang.Integer getOrdreDesde() {
@@ -131,6 +109,28 @@ public class PreguntesFrequentsFilterForm extends CarpetaBaseFilterForm implemen
   }
 
 
+  private java.lang.String respostaCa;
+
+  public java.lang.String getRespostaCa() {
+    return this.respostaCa;
+  }
+
+  public void setRespostaCa(java.lang.String respostaCa) {
+    this.respostaCa = respostaCa;
+  }
+
+
+  private java.lang.String respostaEs;
+
+  public java.lang.String getRespostaEs() {
+    return this.respostaEs;
+  }
+
+  public void setRespostaEs(java.lang.String respostaEs) {
+    this.respostaEs = respostaEs;
+  }
+
+
   public PreguntesFrequentsFilterForm() {
   }
   
@@ -140,14 +140,13 @@ public class PreguntesFrequentsFilterForm extends CarpetaBaseFilterForm implemen
     this.preguntesFrequentsIDFins = __toClone.preguntesFrequentsIDFins;
     this.enunciatIDDesde = __toClone.enunciatIDDesde;
     this.enunciatIDFins = __toClone.enunciatIDFins;
-    this.respostaIDDesde = __toClone.respostaIDDesde;
-    this.respostaIDFins = __toClone.respostaIDFins;
     this.ordreDesde = __toClone.ordreDesde;
     this.ordreFins = __toClone.ordreFins;
     this.entitatIDDesde = __toClone.entitatIDDesde;
     this.entitatIDFins = __toClone.entitatIDFins;
+    this.respostaCa = __toClone.respostaCa;
+    this.respostaEs = __toClone.respostaEs;
     this.mapOfTraduccioForEnunciatID = __toClone.mapOfTraduccioForEnunciatID;
-    this.mapOfTraduccioForRespostaID = __toClone.mapOfTraduccioForRespostaID;
     this.mapOfEntitatForEntitatID = __toClone.mapOfEntitatForEntitatID;
   }
   
@@ -191,18 +190,6 @@ public class PreguntesFrequentsFilterForm extends CarpetaBaseFilterForm implemen
 
   public void setMapOfTraduccioForEnunciatID(Map<String, String> mapOfTraduccioForEnunciatID) {
     this.mapOfTraduccioForEnunciatID = mapOfTraduccioForEnunciatID;
-  }
-
-
-
-  private Map<String, String> mapOfTraduccioForRespostaID;
-
-  public Map<String, String> getMapOfTraduccioForRespostaID() {
-    return this.mapOfTraduccioForRespostaID;
-  }
-
-  public void setMapOfTraduccioForRespostaID(Map<String, String> mapOfTraduccioForRespostaID) {
-    this.mapOfTraduccioForRespostaID = mapOfTraduccioForRespostaID;
   }
 
 

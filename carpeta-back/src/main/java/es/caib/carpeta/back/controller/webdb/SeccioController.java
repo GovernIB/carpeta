@@ -684,7 +684,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, SeccioFilterForm seccioFilterForm,
        List<Seccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (seccioFilterForm.isHiddenField(NOMID)
-      && !seccioFilterForm.isGroupByField(NOMID)) {
+       && !seccioFilterForm.isGroupByField(NOMID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -709,7 +709,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, SeccioFilterForm seccioFilterForm,
        List<Seccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (seccioFilterForm.isHiddenField(DESCRIPCIOID)
-      && !seccioFilterForm.isGroupByField(DESCRIPCIOID)) {
+       && !seccioFilterForm.isGroupByField(DESCRIPCIOID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -744,7 +744,8 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, SeccioFilterForm seccioFilterForm,
        List<Seccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (seccioFilterForm.isHiddenField(SECCIOPAREID)
-      && !seccioFilterForm.isGroupByField(SECCIOPAREID)) {
+       && !seccioFilterForm.isGroupByField(SECCIOPAREID)
+       && !seccioFilterForm.isFilterByField(SECCIOPAREID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -779,7 +780,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, SeccioFilterForm seccioFilterForm,
        List<Seccio> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (seccioFilterForm.isHiddenField(ENTITATID)
-      && !seccioFilterForm.isGroupByField(ENTITATID)) {
+       && !seccioFilterForm.isGroupByField(ENTITATID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -849,7 +850,7 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getSessionAttributeFilterForm() {
-    return "SeccioWebDB_FilterForm";
+    return "Seccio_FilterForm_" + this.getClass().getName();
   }
 
 
