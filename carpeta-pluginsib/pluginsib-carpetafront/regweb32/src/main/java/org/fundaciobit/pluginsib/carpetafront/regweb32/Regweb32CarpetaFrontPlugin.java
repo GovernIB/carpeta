@@ -409,8 +409,6 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 
             //@SuppressWarnings("unchecked")
             registresRegweb = (List<AsientoWs>) (List<?>) result.getResults();
-            
-            
             Paginacio paginacio = new Paginacio();
             
             paginacio.setElementsPerPagina(elementsPerPagina);

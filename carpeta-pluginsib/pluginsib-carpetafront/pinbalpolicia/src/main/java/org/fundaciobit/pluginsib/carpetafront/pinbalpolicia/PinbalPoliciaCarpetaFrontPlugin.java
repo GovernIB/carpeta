@@ -358,7 +358,7 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontP
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
-    protected static final String REACT_JS_PAGE = "reactjs_main.js";
+    protected static final String REACT_JS_PAGE = "reactjs_main_pinbalpolicia.js";
 
     public void reactjs(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
@@ -371,7 +371,7 @@ public class PinbalPoliciaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontP
             response.setHeader("Content-Disposition",
                     "inline;filename=\"" + java.net.URLEncoder.encode(REACT_JS_PAGE, "UTF-8") + "\"");
 
-            String resource = "/webpage_pinbalpolicia/reactjs_main.js";
+            String resource = "/webpage_pinbalpolicia/reactjs_main_pinbalpolicia.js";
 
             response.setCharacterEncoding("utf-8");
 

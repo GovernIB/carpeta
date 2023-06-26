@@ -16,8 +16,8 @@
     "axios": "^0.21.1",
     "i18next": "^22.4.6",
     "i18next-browser-languagedetector": "^4.2.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-i18next": "^11.5.0"
   },
   "devDependencies": {

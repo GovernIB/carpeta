@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {withTranslation} from 'react-i18next';
+import React from 'react';
+import {WithTranslation, withTranslation} from 'react-i18next';
 import axios from "axios";
 import i18n from './i18n';
 
@@ -7,8 +7,19 @@ import i18n from './i18n';
  *  @author anadal
  */
 
-class DadesPolicia extends Component {
-    constructor(props) {
+interface DadesPoliciaProps extends WithTranslation{
+    titles: any;
+    subtitles: any;
+    pathtodocumentidentitat: any;
+}
+
+interface DadesPoliciaState{
+    isLoaded: boolean;
+    data: any;
+}
+
+class DadesPolicia extends React.Component<DadesPoliciaProps, DadesPoliciaState> {
+    constructor(props: DadesPoliciaProps) {
         super(props);
 
         this.state = {
@@ -21,14 +32,14 @@ class DadesPolicia extends Component {
         // console.log("POLICIA DID MOUNT " + this.props.pathtodocumentidentitat);
 
         const url2 = this.props.pathtodocumentidentitat;
-        axios.get(url2).then(res => {
-
+        axios.get(url2)
+        .then((res: any) => {
             this.setState({
                 ...this.state, 
                 isLoaded: true,
                 data: res.data
             });
-        }).catch(function (error) {
+        }).catch((error: any) =>  {
 
             const restdata = { "error": JSON.stringify(error) };
             if (error.response) {
@@ -50,22 +61,28 @@ class DadesPolicia extends Component {
 
     render() {
         const isLoaded = this.state.isLoaded;
+        console.log("XYZ ZZZ Entrant a Render");
 
         const { t } = this.props;
+
+        console.log("XYZ ZZZ Configurat t props");
+
     
         let content;
         let contentApp;
 
         if (!isLoaded) {
-           
-             content = <div  id="carregant" className="loader-container centrat ">
+            console.log("XYZ ZZZ !IsLoaded");
+
+            content = <div  id="carregant" className="loader-container centrat ">
                         <div className="loader"/>
                     </div>;
         } else {
-        
+            console.log("XYZ ZZZ IsLoaded");
+
             const data = this.state.data;
-            if (data.error) {  
-                content = <div class="alert alert-danger" role="alert">{data.error}</div>;
+            if (data.error) {
+                content = <div className="alert alert-danger" role="alert">{data.error}</div>;
             } else {
 
                 var llinatge1;
@@ -74,19 +91,18 @@ class DadesPolicia extends Component {
                     llinatge1="";
                     llinatge2="";
                 } else {
-                   llinatge1 = <div class="mt-3">
+                    console.log("XYZ Traduccio: dadespersonalsLlinatge1 = " + t('dadespersonalsLlinatge1'));
+                    llinatge1 = <div className="mt-3">
                         <dt className="col-sm-3">{t('dadespersonalsLlinatge1')}</dt>
                         <dd className="col-sm-7">{data.datosTitular.apellido1}</dd>
                     </div>;
-                   
-                    llinatge2 = <div class="mt-3">
+
+                    llinatge2 = <div className="mt-3">
                         <dt className="col-sm-3">{t('dadespersonalsLlinatge2')}</dt>
                         <dd className="col-sm-7">{data.datosTitular.apellido2}</dd>
                     </div>;
                 }
-
-
-
+                console.log("XYZ Traduccio: dadespersonalsNom = " + t('dadespersonalsNom'));
                 content = <dl className="row ocultarMobil">
                             <div>
                                 <dt className="col-sm-3">{t('dadespersonalsNom')}</dt>
@@ -147,7 +163,6 @@ class DadesPolicia extends Component {
             }
         }
 
-        
         return (<>
                     <div className="titolPaginaApp visioMobil">
                         {this.props.titles[i18n.language]}
@@ -166,7 +181,7 @@ class DadesPolicia extends Component {
                         <div className="col-md-12 border-0 float-left p-0" id="botoTornarPolicia" style={{ marginTop: '20px' }}>
                             <button type="button" data-toggle="modal" onClick={() => {
                                 window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                            }} className="botoSuport botoTornauApp" tabIndex="520" aria-labelledby="botoTornarPolicia">{t('tornar')}</button>
+                            }} className="botoSuport botoTornauApp" tabIndex={520} aria-labelledby="botoTornarPolicia">{t('tornar')}</button>
                         </div>
                     </div>
                 </>

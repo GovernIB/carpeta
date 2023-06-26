@@ -17,11 +17,11 @@
     "i18next": "^22.4.6",
     "i18next-browser-languagedetector": "^4.2.0",
     "react-i18next": "^11.5.0",
-    "react": "^16.13.1",
+    "react": "^18.2.0",
     "bootstrap": "^5.1.3",
     "react-bootstrap": "^2.0.3",
     "react-bootstrap-form": "^0.1.4-beta6",
-    "react-dom": "^16.13.1",
+    "react-dom": "^18.2.0",
     "react-device-detect": "^2.2.2",
     "carpetacommonreactlib": "file:../../carpetacommonreactlib"
   },
