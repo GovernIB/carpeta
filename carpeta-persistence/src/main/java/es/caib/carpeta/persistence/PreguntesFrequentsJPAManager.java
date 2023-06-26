@@ -55,8 +55,8 @@ public class PreguntesFrequentsJPAManager
         return list.toArray(new PreguntesFrequents[list.size()]);
     };
 
-    public PreguntesFrequents create( long _enunciatID_, long _respostaID_, int _ordre_, long _entitatID_, java.lang.Long _fitxer1ID_, java.lang.Long _fitxer2ID_, java.lang.Long _fitxer3ID_) throws I18NException {
-        PreguntesFrequentsJPA __bean =  new PreguntesFrequentsJPA(_enunciatID_,_respostaID_,_ordre_,_entitatID_,_fitxer1ID_,_fitxer2ID_,_fitxer3ID_);
+    public PreguntesFrequents create( long _enunciatID_, int _ordre_, long _entitatID_, java.lang.String _respostaCa_, java.lang.String _respostaEs_) throws I18NException {
+        PreguntesFrequentsJPA __bean =  new PreguntesFrequentsJPA(_enunciatID_,_ordre_,_entitatID_,_respostaCa_,_respostaEs_);
         return create(__bean);
     }
 
@@ -114,18 +114,6 @@ public class PreguntesFrequentsJPAManager
               getEntityManager().persist(_trad);
             } 
             transientInstance.setEnunciatID(_trad.getTraduccioID());
-          }
-        }
-      }
-      if (transientInstance.getRespostaID() == 0) {
-        if (transientInstance instanceof PreguntesFrequentsJPA) {
-          PreguntesFrequentsJPA _jpa = (PreguntesFrequentsJPA)transientInstance;
-          TraduccioJPA _trad = _jpa.getResposta();
-           if (_trad != null) {
-            if (_trad.getTraduccioID() == 0) {
-              getEntityManager().persist(_trad);
-            } 
-            transientInstance.setRespostaID(_trad.getTraduccioID());
           }
         }
       }

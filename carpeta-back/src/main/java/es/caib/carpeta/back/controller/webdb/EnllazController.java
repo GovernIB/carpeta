@@ -738,7 +738,8 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, EnllazFilterForm enllazFilterForm,
        List<Enllaz> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (enllazFilterForm.isHiddenField(TIPUS)
-      && !enllazFilterForm.isGroupByField(TIPUS)) {
+       && !enllazFilterForm.isGroupByField(TIPUS)
+       && !enllazFilterForm.isFilterByField(TIPUS)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -761,7 +762,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, EnllazFilterForm enllazFilterForm,
        List<Enllaz> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (enllazFilterForm.isHiddenField(NOMID)
-      && !enllazFilterForm.isGroupByField(NOMID)) {
+       && !enllazFilterForm.isGroupByField(NOMID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -786,7 +787,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, EnllazFilterForm enllazFilterForm,
        List<Enllaz> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (enllazFilterForm.isHiddenField(DESCRIPCIOID)
-      && !enllazFilterForm.isGroupByField(DESCRIPCIOID)) {
+       && !enllazFilterForm.isGroupByField(DESCRIPCIOID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -812,7 +813,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, EnllazFilterForm enllazFilterForm,
        List<Enllaz> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (enllazFilterForm.isHiddenField(URLID)
-      && !enllazFilterForm.isGroupByField(URLID)) {
+       && !enllazFilterForm.isGroupByField(URLID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -851,7 +852,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, EnllazFilterForm enllazFilterForm,
        List<Enllaz> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (enllazFilterForm.isHiddenField(ENTITATID)
-      && !enllazFilterForm.isGroupByField(ENTITATID)) {
+       && !enllazFilterForm.isGroupByField(ENTITATID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -890,7 +891,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, EnllazFilterForm enllazFilterForm,
        List<Enllaz> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (enllazFilterForm.isHiddenField(SECCIOID)
-      && !enllazFilterForm.isGroupByField(SECCIOID)) {
+       && !enllazFilterForm.isGroupByField(SECCIOID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -961,7 +962,7 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getSessionAttributeFilterForm() {
-    return "EnllazWebDB_FilterForm";
+    return "Enllaz_FilterForm_" + this.getClass().getName();
   }
 
 

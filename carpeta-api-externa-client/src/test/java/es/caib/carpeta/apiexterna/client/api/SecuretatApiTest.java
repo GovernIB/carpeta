@@ -12,7 +12,6 @@
 
 package es.caib.carpeta.apiexterna.client.api;
 
-import es.caib.carpeta.apiexterna.client.services.ApiException;
 import org.junit.Test;
 import org.junit.Ignore;
 
@@ -38,7 +37,7 @@ public class SecuretatApiTest {
      *          if the Api call fails
      */
     @Test
-    public void echoTest() throws ApiException {
+    public void echoTest() throws Exception {
         String echoInput = null;
         String response = api.echo(echoInput);
 

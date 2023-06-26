@@ -2,6 +2,7 @@ package es.caib.carpeta.front.pluginlogin;
 
 import java.net.HttpURLConnection;
 import java.util.HashSet;
+import java.util.Map;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
@@ -140,6 +141,32 @@ public class PluginLoginLoginIB implements IPluginLogin {
 
             final RDatosAutenticacion datosAutenticacion = restTemplate.getForObject(LOGINIB_URL + "/ticket/" + ticket,
                     RDatosAutenticacion.class);
+            
+            
+            
+            
+            log.error("LoginIB:: NIF " + datosAutenticacion.getNif());
+            log.error("LoginIB:: Name " + datosAutenticacion.getNombre());
+            log.error("LoginIB:: Surname1 " + datosAutenticacion.getApellido1());
+            log.error("LoginIB:: Surname2 " + datosAutenticacion.getApellido2());
+            log.error("LoginIB:: AdministrationID" + datosAutenticacion.getNif());
+            log.error("LoginIB:: AuthenticationMethod " + datosAutenticacion.getMetodoAutenticacion());
+            log.error("LoginIB:: getIdSesion " + datosAutenticacion.getIdSesion());
+            
+            Map<String, String> map = datosAutenticacion.getParamsApp();
+            if (map == null || map.isEmpty()) {
+                log.error("LoginIB:: getParamsApp(): null o buit !!!!!");
+            } else {
+                for (Map.Entry<String, String> entry : map.entrySet()) {
+                    String key = entry.getKey();
+                    String val = entry.getValue();
+                    
+                    log.error("LoginIB:: getParamsApp(): [" + key + "] => " + val);
+                    
+                }
+            }
+            
+            
 
             final boolean debug = log.isDebugEnabled();
 

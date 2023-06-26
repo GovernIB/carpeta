@@ -38,10 +38,6 @@ public class PreguntesFrequentsValidator<I extends PreguntesFrequents>
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ENUNCIATID)));
 
-    __vr.rejectIfEmptyOrWhitespace(__target__,RESPOSTAID, 
-        "genapp.validation.required",
-        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(RESPOSTAID)));
-
     __vr.rejectIfEmptyOrWhitespace(__target__,ORDRE, 
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ORDRE)));
@@ -50,7 +46,31 @@ public class PreguntesFrequentsValidator<I extends PreguntesFrequents>
         "genapp.validation.required",
         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(ENTITATID)));
 
+    __vr.rejectIfEmptyOrWhitespace(__target__,RESPOSTACA, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(RESPOSTACA)));
+
+    __vr.rejectIfEmptyOrWhitespace(__target__,RESPOSTAES, 
+        "genapp.validation.required",
+        new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(RESPOSTAES)));
+
     // Check size
+    if (__vr.getFieldErrorCount(RESPOSTACA) == 0) {
+      java.lang.String __respostaca = __target__.getRespostaCa();
+      if (__respostaca!= null && __respostaca.length() > 2147483647) {
+        __vr.rejectValue(RESPOSTACA, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(RESPOSTACA)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(2147483647)));
+      }
+    }
+
+    if (__vr.getFieldErrorCount(RESPOSTAES) == 0) {
+      java.lang.String __respostaes = __target__.getRespostaEs();
+      if (__respostaes!= null && __respostaes.length() > 2147483647) {
+        __vr.rejectValue(RESPOSTAES, "genapp.validation.sizeexceeds",
+            new org.fundaciobit.genapp.common.i18n.I18NArgumentCode(get(RESPOSTAES)), new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(2147483647)));
+      }
+    }
+
     if (__isNou__) { // Creació
       // ================ CREATION
       // Fitxers 
@@ -76,18 +96,6 @@ public class PreguntesFrequentsValidator<I extends PreguntesFrequents>
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccio"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccioID"),
          new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__enunciatid)));
-      }
-    }
-
-    if (__vr.getFieldErrorCount(RESPOSTAID) == 0) {
-      java.lang.Long __respostaid = __target__.getRespostaID();
-      Long __count_ = null;
-      try { __count_ = __traduccioManager.count(TraduccioFields.TRADUCCIOID.equal(__respostaid)); } catch(org.fundaciobit.genapp.common.i18n.I18NException e) { e.printStackTrace(); };
-      if (__count_ == null || __count_ == 0) {        
-        __vr.rejectValue(RESPOSTAID, "error.notfound",
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccio"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentCode("traduccio.traduccioID"),
-         new org.fundaciobit.genapp.common.i18n.I18NArgumentString(String.valueOf(__respostaid)));
       }
     }
 

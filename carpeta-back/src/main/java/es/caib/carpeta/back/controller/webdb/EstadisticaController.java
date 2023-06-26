@@ -616,7 +616,8 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, EstadisticaFilterForm estadisticaFilterForm,
        List<Estadistica> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (estadisticaFilterForm.isHiddenField(TIPUS)
-      && !estadisticaFilterForm.isGroupByField(TIPUS)) {
+       && !estadisticaFilterForm.isGroupByField(TIPUS)
+       && !estadisticaFilterForm.isFilterByField(TIPUS)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -649,7 +650,8 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, EstadisticaFilterForm estadisticaFilterForm,
        List<Estadistica> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (estadisticaFilterForm.isHiddenField(PLUGINID)
-      && !estadisticaFilterForm.isGroupByField(PLUGINID)) {
+       && !estadisticaFilterForm.isGroupByField(PLUGINID)
+       && !estadisticaFilterForm.isFilterByField(PLUGINID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -682,7 +684,8 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, EstadisticaFilterForm estadisticaFilterForm,
        List<Estadistica> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (estadisticaFilterForm.isHiddenField(ENTITATID)
-      && !estadisticaFilterForm.isGroupByField(ENTITATID)) {
+       && !estadisticaFilterForm.isGroupByField(ENTITATID)
+       && !estadisticaFilterForm.isFilterByField(ENTITATID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -748,7 +751,7 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getSessionAttributeFilterForm() {
-    return "EstadisticaWebDB_FilterForm";
+    return "Estadistica_FilterForm_" + this.getClass().getName();
   }
 
 

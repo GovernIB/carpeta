@@ -669,7 +669,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, AvisFilterForm avisFilterForm,
        List<Avis> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (avisFilterForm.isHiddenField(DESCRIPCIOID)
-      && !avisFilterForm.isGroupByField(DESCRIPCIOID)) {
+       && !avisFilterForm.isGroupByField(DESCRIPCIOID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -708,7 +708,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, AvisFilterForm avisFilterForm,
        List<Avis> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (avisFilterForm.isHiddenField(ENTITATID)
-      && !avisFilterForm.isGroupByField(ENTITATID)) {
+       && !avisFilterForm.isGroupByField(ENTITATID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -744,7 +744,8 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, AvisFilterForm avisFilterForm,
        List<Avis> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (avisFilterForm.isHiddenField(TIPUS)
-      && !avisFilterForm.isGroupByField(TIPUS)) {
+       && !avisFilterForm.isGroupByField(TIPUS)
+       && !avisFilterForm.isFilterByField(TIPUS)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -777,7 +778,8 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, AvisFilterForm avisFilterForm,
        List<Avis> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (avisFilterForm.isHiddenField(GRAVETAT)
-      && !avisFilterForm.isGroupByField(GRAVETAT)) {
+       && !avisFilterForm.isGroupByField(GRAVETAT)
+       && !avisFilterForm.isFilterByField(GRAVETAT)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -812,7 +814,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, AvisFilterForm avisFilterForm,
        List<Avis> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (avisFilterForm.isHiddenField(PLUGINFRONTID)
-      && !avisFilterForm.isGroupByField(PLUGINFRONTID)) {
+       && !avisFilterForm.isGroupByField(PLUGINFRONTID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -883,7 +885,7 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getSessionAttributeFilterForm() {
-    return "AvisWebDB_FilterForm";
+    return "Avis_FilterForm_" + this.getClass().getName();
   }
 
 

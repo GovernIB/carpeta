@@ -12,7 +12,7 @@
 
 package es.caib.carpeta.apiexterna.client.api;
 
-import es.caib.carpeta.apiexterna.client.services.ApiException;
+
 import es.caib.carpeta.apiexterna.client.model.PaginaAcces;
 import org.junit.Test;
 import org.junit.Ignore;
@@ -39,7 +39,7 @@ public class EstadistiquesApiTest {
      *          if the Api call fails
      */
     @Test
-    public void accessos1Test() throws ApiException {
+    public void accessos1Test() throws Exception {
         String entitat = null;
         String inici = null;
         String fi = null;

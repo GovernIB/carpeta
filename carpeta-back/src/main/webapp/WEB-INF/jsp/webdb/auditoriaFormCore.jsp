@@ -84,7 +84,7 @@
             </td>
           <td id="auditoria_dataAudit_columnvalueid">
     <form:errors path="auditoria.dataAudit" cssClass="errorField alert alert-danger" />
-            <div class="form-group">
+            <div class="form-group"  style="margin-bottom: 0px;" >
                 <div class="input-group date" id="auditoria_dataAudit" data-target-input="nearest">
                       <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AuditoriaFields.DATAAUDIT)? 'true' : 'false'}" cssClass="form-control datetimepicker-input"  data-target="#auditoria_dataAudit" path="auditoria.dataAudit" />
                     <c:if test="${!gen:contains(__theForm.readOnlyFields ,AuditoriaFields.DATAAUDIT)}" >

@@ -635,7 +635,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, PluginEntitatFilterForm pluginEntitatFilterForm,
        List<PluginEntitat> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (pluginEntitatFilterForm.isHiddenField(PLUGINID)
-      && !pluginEntitatFilterForm.isGroupByField(PLUGINID)) {
+       && !pluginEntitatFilterForm.isGroupByField(PLUGINID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -674,7 +674,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, PluginEntitatFilterForm pluginEntitatFilterForm,
        List<PluginEntitat> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (pluginEntitatFilterForm.isHiddenField(ENTITATID)
-      && !pluginEntitatFilterForm.isGroupByField(ENTITATID)) {
+       && !pluginEntitatFilterForm.isGroupByField(ENTITATID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -713,7 +713,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, PluginEntitatFilterForm pluginEntitatFilterForm,
        List<PluginEntitat> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (pluginEntitatFilterForm.isHiddenField(SECCIOID)
-      && !pluginEntitatFilterForm.isGroupByField(SECCIOID)) {
+       && !pluginEntitatFilterForm.isGroupByField(SECCIOID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -784,7 +784,7 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getSessionAttributeFilterForm() {
-    return "PluginEntitatWebDB_FilterForm";
+    return "PluginEntitat_FilterForm_" + this.getClass().getName();
   }
 
 

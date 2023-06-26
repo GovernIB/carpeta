@@ -19,10 +19,6 @@ public class PreguntesFrequentsQueryPath extends org.fundaciobit.genapp.common.q
     return new LongField(getQueryPath(), PreguntesFrequentsFields.ENUNCIATID);
   }
 
-  public LongField RESPOSTAID() {
-    return new LongField(getQueryPath(), PreguntesFrequentsFields.RESPOSTAID);
-  }
-
   public IntegerField ORDRE() {
     return new IntegerField(getQueryPath(), PreguntesFrequentsFields.ORDRE);
   }
@@ -31,16 +27,12 @@ public class PreguntesFrequentsQueryPath extends org.fundaciobit.genapp.common.q
     return new LongField(getQueryPath(), PreguntesFrequentsFields.ENTITATID);
   }
 
-  public LongField FITXER1ID() {
-    return new LongField(getQueryPath(), PreguntesFrequentsFields.FITXER1ID);
+  public StringField RESPOSTACA() {
+    return new StringField(getQueryPath(), PreguntesFrequentsFields.RESPOSTACA);
   }
 
-  public LongField FITXER2ID() {
-    return new LongField(getQueryPath(), PreguntesFrequentsFields.FITXER2ID);
-  }
-
-  public LongField FITXER3ID() {
-    return new LongField(getQueryPath(), PreguntesFrequentsFields.FITXER3ID);
+  public StringField RESPOSTAES() {
+    return new StringField(getQueryPath(), PreguntesFrequentsFields.RESPOSTAES);
   }
 
 
@@ -60,42 +52,10 @@ public class PreguntesFrequentsQueryPath extends org.fundaciobit.genapp.common.q
     });
   }
 
-  public TraduccioQueryPath RESPOSTA() {
-    return new TraduccioQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return PreguntesFrequentsQueryPath.this.getQueryPath() + "resposta" + ".";
-      }
-    });
-  }
-
   public EntitatQueryPath ENTITAT() {
     return new EntitatQueryPath(new QueryPath() {
       public String getQueryPath() {
           return PreguntesFrequentsQueryPath.this.getQueryPath() + "entitat" + ".";
-      }
-    });
-  }
-
-  public FitxerQueryPath FITXER1() {
-    return new FitxerQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return PreguntesFrequentsQueryPath.this.getQueryPath() + "fitxer1" + ".";
-      }
-    });
-  }
-
-  public FitxerQueryPath FITXER2() {
-    return new FitxerQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return PreguntesFrequentsQueryPath.this.getQueryPath() + "fitxer2" + ".";
-      }
-    });
-  }
-
-  public FitxerQueryPath FITXER3() {
-    return new FitxerQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return PreguntesFrequentsQueryPath.this.getQueryPath() + "fitxer3" + ".";
       }
     });
   }

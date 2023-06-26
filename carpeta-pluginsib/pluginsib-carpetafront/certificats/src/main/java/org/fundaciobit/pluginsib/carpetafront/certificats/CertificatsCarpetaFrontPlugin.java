@@ -1,11 +1,14 @@
 package org.fundaciobit.pluginsib.carpetafront.certificats;
 
-import es.caib.carpeta.apiexterna.client.api.CertificatsApi;
-import es.caib.carpeta.apiexterna.client.model.CertificatBean;
-import es.caib.carpeta.apiexterna.client.model.CertificatFileInfo;
-import es.caib.carpeta.apiexterna.client.model.CertificatInfo;
-import es.caib.carpeta.apiexterna.client.services.ApiClient;
-import es.caib.carpeta.apiexterna.client.services.auth.HttpBasicAuth;
+
+import es.caib.carpeta.apicertificats.client.api.CertificatsApi;
+import es.caib.carpeta.apicertificats.client.model.CertificatBean;
+import es.caib.carpeta.apicertificats.client.model.CertificatFileInfo;
+import es.caib.carpeta.apicertificats.client.model.CertificatInfo;
+import es.caib.carpeta.apicertificats.client.services.ApiClient;
+import es.caib.carpeta.apicertificats.client.services.ByteArrayDeserializer;
+import es.caib.carpeta.apicertificats.client.services.JSON;
+import es.caib.carpeta.apicertificats.client.services.auth.HttpBasicAuth;
 import es.caib.carpeta.pluginsib.carpetafront.api.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,12 +17,16 @@ import org.apache.commons.io.IOUtils;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Properties;
+
 
 /**
  * @author anadal
@@ -372,7 +379,7 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             log.info("Nom Fitxer = " + file.getNom());
             log.info("Mime Fitxer = " + file.getMime());
             log.info("Length Fitxer = " + file.getLength());
-            log.info("Contingut Fitxer Codificat= " + file.getBytes());
+            
 
             // modifies response
             response.setContentType(file.getMime());
@@ -381,9 +388,18 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             String headerKey = "Content-Disposition";
             String headerValue = String.format("attachment; filename=\"%s\"", file.getNom());
             response.setHeader(headerKey, headerValue);
-
+            
+            //byte[] originalData = Base64.getDecoder().decode(file.getDataB64());
+            
             OutputStream outStream = response.getOutputStream();
-            FileInputStream inStream = new FileInputStream(file.getBytes());
+            
+            outStream.write(file.getBytes());
+            
+            outStream.close();
+/*
+ * FileInputStream inStream = new FileInputStream(file.getBytes());
+            OutputStream outStream = response.getOutputStream();
+            
             
             byte[] buffer = new byte[1024*1024];
             int bytesRead = -1;
@@ -395,6 +411,7 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             inStream.close();
             outStream.close();
+      */
 
         } catch (Exception e) {
             log.error("Error comprovant possesió de certificats: " + e.getMessage(), e);
@@ -405,6 +422,12 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     private CertificatsApi getApi(int pluginNumber) throws Exception {
         ApiClient client = new ApiClient();
+        
+        JSON serializer = client.getJSON();
+        Gson gson = new GsonBuilder().registerTypeAdapter(byte[].class, new ByteArrayDeserializer()).create();
+        serializer.setGson(gson);
+        
+        
         client.setBasePath(getPropertyRequired(CERTIFICATS_PROPERTY_BASE+pluginNumber+".url"));
         HttpBasicAuth auth = (HttpBasicAuth) client.getAuthentication("BasicAuth");
         auth.setUsername(getPropertyRequired(CERTIFICATS_PROPERTY_BASE+pluginNumber+".username"));

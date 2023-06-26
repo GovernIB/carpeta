@@ -43,25 +43,14 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
   }
 
 
-  private java.lang.Integer tipusDesde;
+  private java.util.List<java.lang.Integer> tipusSelect;
 
-  public java.lang.Integer getTipusDesde() {
-    return this.tipusDesde;
+  public java.util.List<java.lang.Integer> getTipusSelect() {
+    return this.tipusSelect;
   }
 
-  public void setTipusDesde(java.lang.Integer tipusDesde) {
-    this.tipusDesde = tipusDesde;
-  }
-
-
-  private java.lang.Integer tipusFins;
-
-  public java.lang.Integer getTipusFins() {
-    return this.tipusFins;
-  }
-
-  public void setTipusFins(java.lang.Integer tipusFins) {
-    this.tipusFins = tipusFins;
+  public void setTipusSelect(java.util.List<java.lang.Integer> tipusSelect) {
+    this.tipusSelect = tipusSelect;
   }
 
 
@@ -109,25 +98,14 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
   }
 
 
-  private java.lang.Long entitatIDDesde;
+  private java.util.List<java.lang.Long> entitatIDSelect;
 
-  public java.lang.Long getEntitatIDDesde() {
-    return this.entitatIDDesde;
+  public java.util.List<java.lang.Long> getEntitatIDSelect() {
+    return this.entitatIDSelect;
   }
 
-  public void setEntitatIDDesde(java.lang.Long entitatIDDesde) {
-    this.entitatIDDesde = entitatIDDesde;
-  }
-
-
-  private java.lang.Long entitatIDFins;
-
-  public java.lang.Long getEntitatIDFins() {
-    return this.entitatIDFins;
-  }
-
-  public void setEntitatIDFins(java.lang.Long entitatIDFins) {
-    this.entitatIDFins = entitatIDFins;
+  public void setEntitatIDSelect(java.util.List<java.lang.Long> entitatIDSelect) {
+    this.entitatIDSelect = entitatIDSelect;
   }
 
 
@@ -138,14 +116,12 @@ public class AuditoriaFilterForm extends CarpetaBaseFilterForm implements Audito
     super(__toClone);
     this.auditoriaIDDesde = __toClone.auditoriaIDDesde;
     this.auditoriaIDFins = __toClone.auditoriaIDFins;
-    this.tipusDesde = __toClone.tipusDesde;
-    this.tipusFins = __toClone.tipusFins;
+    this.tipusSelect = __toClone.tipusSelect;
     this.objecte = __toClone.objecte;
     this.dataAuditDesde = __toClone.dataAuditDesde;
     this.dataAuditFins = __toClone.dataAuditFins;
     this.username = __toClone.username;
-    this.entitatIDDesde = __toClone.entitatIDDesde;
-    this.entitatIDFins = __toClone.entitatIDFins;
+    this.entitatIDSelect = __toClone.entitatIDSelect;
     this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
     this.mapOfValuesForEntitatID = __toClone.mapOfValuesForEntitatID;
   }

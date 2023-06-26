@@ -98,25 +98,14 @@ public class SeccioFilterForm extends CarpetaBaseFilterForm implements SeccioFie
   }
 
 
-  private java.lang.Long seccioPareIDDesde;
+  private java.util.List<java.lang.Long> seccioPareIDSelect;
 
-  public java.lang.Long getSeccioPareIDDesde() {
-    return this.seccioPareIDDesde;
+  public java.util.List<java.lang.Long> getSeccioPareIDSelect() {
+    return this.seccioPareIDSelect;
   }
 
-  public void setSeccioPareIDDesde(java.lang.Long seccioPareIDDesde) {
-    this.seccioPareIDDesde = seccioPareIDDesde;
-  }
-
-
-  private java.lang.Long seccioPareIDFins;
-
-  public java.lang.Long getSeccioPareIDFins() {
-    return this.seccioPareIDFins;
-  }
-
-  public void setSeccioPareIDFins(java.lang.Long seccioPareIDFins) {
-    this.seccioPareIDFins = seccioPareIDFins;
+  public void setSeccioPareIDSelect(java.util.List<java.lang.Long> seccioPareIDSelect) {
+    this.seccioPareIDSelect = seccioPareIDSelect;
   }
 
 
@@ -176,8 +165,7 @@ public class SeccioFilterForm extends CarpetaBaseFilterForm implements SeccioFie
     this.descripcioIDDesde = __toClone.descripcioIDDesde;
     this.descripcioIDFins = __toClone.descripcioIDFins;
     this.contexte = __toClone.contexte;
-    this.seccioPareIDDesde = __toClone.seccioPareIDDesde;
-    this.seccioPareIDFins = __toClone.seccioPareIDFins;
+    this.seccioPareIDSelect = __toClone.seccioPareIDSelect;
     this.entitatIDDesde = __toClone.entitatIDDesde;
     this.entitatIDFins = __toClone.entitatIDFins;
     this.ordreDesde = __toClone.ordreDesde;

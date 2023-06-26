@@ -131,47 +131,25 @@ public class AvisFilterForm extends CarpetaBaseFilterForm implements AvisFields 
   }
 
 
-  private java.lang.Integer tipusDesde;
+  private java.util.List<java.lang.Integer> tipusSelect;
 
-  public java.lang.Integer getTipusDesde() {
-    return this.tipusDesde;
+  public java.util.List<java.lang.Integer> getTipusSelect() {
+    return this.tipusSelect;
   }
 
-  public void setTipusDesde(java.lang.Integer tipusDesde) {
-    this.tipusDesde = tipusDesde;
-  }
-
-
-  private java.lang.Integer tipusFins;
-
-  public java.lang.Integer getTipusFins() {
-    return this.tipusFins;
-  }
-
-  public void setTipusFins(java.lang.Integer tipusFins) {
-    this.tipusFins = tipusFins;
+  public void setTipusSelect(java.util.List<java.lang.Integer> tipusSelect) {
+    this.tipusSelect = tipusSelect;
   }
 
 
-  private java.lang.Integer gravetatDesde;
+  private java.util.List<java.lang.Integer> gravetatSelect;
 
-  public java.lang.Integer getGravetatDesde() {
-    return this.gravetatDesde;
+  public java.util.List<java.lang.Integer> getGravetatSelect() {
+    return this.gravetatSelect;
   }
 
-  public void setGravetatDesde(java.lang.Integer gravetatDesde) {
-    this.gravetatDesde = gravetatDesde;
-  }
-
-
-  private java.lang.Integer gravetatFins;
-
-  public java.lang.Integer getGravetatFins() {
-    return this.gravetatFins;
-  }
-
-  public void setGravetatFins(java.lang.Integer gravetatFins) {
-    this.gravetatFins = gravetatFins;
+  public void setGravetatSelect(java.util.List<java.lang.Integer> gravetatSelect) {
+    this.gravetatSelect = gravetatSelect;
   }
 
 
@@ -212,10 +190,8 @@ public class AvisFilterForm extends CarpetaBaseFilterForm implements AvisFields 
     this.dataIniciFins = __toClone.dataIniciFins;
     this.dataFiDesde = __toClone.dataFiDesde;
     this.dataFiFins = __toClone.dataFiFins;
-    this.tipusDesde = __toClone.tipusDesde;
-    this.tipusFins = __toClone.tipusFins;
-    this.gravetatDesde = __toClone.gravetatDesde;
-    this.gravetatFins = __toClone.gravetatFins;
+    this.tipusSelect = __toClone.tipusSelect;
+    this.gravetatSelect = __toClone.gravetatSelect;
     this.pluginFrontIDDesde = __toClone.pluginFrontIDDesde;
     this.pluginFrontIDFins = __toClone.pluginFrontIDFins;
     this.mapOfTraduccioForDescripcioID = __toClone.mapOfTraduccioForDescripcioID;

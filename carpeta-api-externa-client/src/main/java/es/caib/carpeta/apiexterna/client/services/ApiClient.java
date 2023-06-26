@@ -46,7 +46,7 @@ import es.caib.carpeta.apiexterna.client.services.auth.OAuth;
 
 public class ApiClient {
   private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
-  private String basePath = "../../carpetaapi/externa";
+  private String basePath = "/";
   private boolean debugging = false;
 
   private Client httpClient;

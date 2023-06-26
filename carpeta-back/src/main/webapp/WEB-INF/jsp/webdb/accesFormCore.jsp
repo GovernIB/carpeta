@@ -192,7 +192,7 @@
             </td>
           <td id="acces_dataAcces_columnvalueid">
     <form:errors path="acces.dataAcces" cssClass="errorField alert alert-danger" />
-            <div class="form-group">
+            <div class="form-group"  style="margin-bottom: 0px;" >
                 <div class="input-group date" id="acces_dataAcces" data-target-input="nearest">
                       <form:input readonly="${ gen:contains(__theForm.readOnlyFields ,AccesFields.DATAACCES)? 'true' : 'false'}" cssClass="form-control datetimepicker-input"  data-target="#acces_dataAcces" path="acces.dataAcces" />
                     <c:if test="${!gen:contains(__theForm.readOnlyFields ,AccesFields.DATAACCES)}" >

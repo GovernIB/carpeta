@@ -45,12 +45,6 @@ class CarpetaDatePicker extends React.Component<CarpetaDatePickerProps> {
 
     const theName = this.datePickerName;
 
-    
-    //@ts-ignore
-    //$(".bootstrap-datetimepicker-widget").css("transform","scale(1.5,1.5)");
-    
-
-
     //@ts-ignore
     $("#" + theName).datetimepicker({
       format: "DD/MM/YYYY",

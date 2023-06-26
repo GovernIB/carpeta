@@ -44,8 +44,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dni** | **String**| DNI o NIF de la persona de la qual volem obtenir el certificat. | [optional]
- **idioma** | **String**| Codi de l&#x27;idioma | [optional]
+ **dni** | **String**| DNI o NIF de la persona de la qual volem obtenir el certificat. |
+ **idioma** | **String**| Codi de l&#x27;idioma |
 
 ### Return type
 

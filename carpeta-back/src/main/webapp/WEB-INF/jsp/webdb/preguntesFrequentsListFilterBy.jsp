@@ -51,8 +51,8 @@
 
 
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,PreguntesFrequentsFields.PREGUNTESFREQUENTSID)}">
-            <%-- FILTRE NUMERO --%>      
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
+            <%-- FILTRE NUMERO DESDE-FINS --%>
               <span class="add-on"><fmt:message key="preguntesFrequents.preguntesFrequentsID" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
@@ -69,8 +69,8 @@
 
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,PreguntesFrequentsFields.ENUNCIATID)}">
-            <%-- FILTRE NUMERO --%>      
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
+            <%-- FILTRE NUMERO DESDE-FINS --%>
               <span class="add-on"><fmt:message key="preguntesFrequents.enunciatID" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
@@ -86,27 +86,9 @@
 
 
         </c:if>
-        <c:if test="${gen:contains(__theFilterForm.filterByFields ,PreguntesFrequentsFields.RESPOSTAID)}">
-            <%-- FILTRE NUMERO --%>      
-            <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="preguntesFrequents.respostaID" />:</span>
-
-              <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
-              
-              <form:input cssClass="input-append input-small" path="respostaIDDesde" />
-
-
-              <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
-
-              <form:input cssClass="input-append input-small search-query" path="respostaIDFins" />
-
-            </div>
-
-
-        </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,PreguntesFrequentsFields.ORDRE)}">
-            <%-- FILTRE NUMERO --%>      
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
+            <%-- FILTRE NUMERO DESDE-FINS --%>
               <span class="add-on"><fmt:message key="preguntesFrequents.ordre" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
@@ -123,8 +105,8 @@
 
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,PreguntesFrequentsFields.ENTITATID)}">
-            <%-- FILTRE NUMERO --%>      
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
+            <%-- FILTRE NUMERO DESDE-FINS --%>
               <span class="add-on"><fmt:message key="preguntesFrequents.entitatID" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
@@ -136,6 +118,32 @@
 
               <form:input cssClass="input-append input-small search-query" path="entitatIDFins" />
 
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,PreguntesFrequentsFields.RESPOSTACA)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="preguntesFrequents.respostaCa" var="respostaCa" />
+              <fmt:message key="genapp.form.searchby" var="cercaperrespostaCa" >                
+                 <fmt:param value="${respostaCa}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${respostaCa}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperrespostaCa}" path="respostaCa" />
+            </div>
+
+
+        </c:if>
+        <c:if test="${gen:contains(__theFilterForm.filterByFields ,PreguntesFrequentsFields.RESPOSTAES)}">
+            <%-- FILTRE STRING --%>
+            <div class="input-prepend" style="padding-right: 4px;padding-bottom: 4px;">
+              <fmt:message key="preguntesFrequents.respostaEs" var="respostaEs" />
+              <fmt:message key="genapp.form.searchby" var="cercaperrespostaEs" >                
+                 <fmt:param value="${respostaEs}"/>
+              </fmt:message>
+              <span class="add-on"><c:out value="${respostaEs}" />:</span>
+              <form:input cssClass="search-query input-medium" placeholder="${cercaperrespostaEs}" path="respostaEs" />
             </div>
 
 

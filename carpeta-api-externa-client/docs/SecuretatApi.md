@@ -1,6 +1,6 @@
 # SecuretatApi
 
-All URIs are relative to *../../carpetaapi/externa*
+All URIs are relative to */*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

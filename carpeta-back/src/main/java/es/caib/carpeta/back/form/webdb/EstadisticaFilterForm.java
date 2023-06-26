@@ -43,25 +43,14 @@ public class EstadisticaFilterForm extends CarpetaBaseFilterForm implements Esta
   }
 
 
-  private java.lang.Integer tipusDesde;
+  private java.util.List<java.lang.Integer> tipusSelect;
 
-  public java.lang.Integer getTipusDesde() {
-    return this.tipusDesde;
+  public java.util.List<java.lang.Integer> getTipusSelect() {
+    return this.tipusSelect;
   }
 
-  public void setTipusDesde(java.lang.Integer tipusDesde) {
-    this.tipusDesde = tipusDesde;
-  }
-
-
-  private java.lang.Integer tipusFins;
-
-  public java.lang.Integer getTipusFins() {
-    return this.tipusFins;
-  }
-
-  public void setTipusFins(java.lang.Integer tipusFins) {
-    this.tipusFins = tipusFins;
+  public void setTipusSelect(java.util.List<java.lang.Integer> tipusSelect) {
+    this.tipusSelect = tipusSelect;
   }
 
 
@@ -109,47 +98,25 @@ public class EstadisticaFilterForm extends CarpetaBaseFilterForm implements Esta
   }
 
 
-  private java.lang.Long pluginIDDesde;
+  private java.util.List<java.lang.Long> pluginIDSelect;
 
-  public java.lang.Long getPluginIDDesde() {
-    return this.pluginIDDesde;
+  public java.util.List<java.lang.Long> getPluginIDSelect() {
+    return this.pluginIDSelect;
   }
 
-  public void setPluginIDDesde(java.lang.Long pluginIDDesde) {
-    this.pluginIDDesde = pluginIDDesde;
-  }
-
-
-  private java.lang.Long pluginIDFins;
-
-  public java.lang.Long getPluginIDFins() {
-    return this.pluginIDFins;
-  }
-
-  public void setPluginIDFins(java.lang.Long pluginIDFins) {
-    this.pluginIDFins = pluginIDFins;
+  public void setPluginIDSelect(java.util.List<java.lang.Long> pluginIDSelect) {
+    this.pluginIDSelect = pluginIDSelect;
   }
 
 
-  private java.lang.Long entitatIDDesde;
+  private java.util.List<java.lang.Long> entitatIDSelect;
 
-  public java.lang.Long getEntitatIDDesde() {
-    return this.entitatIDDesde;
+  public java.util.List<java.lang.Long> getEntitatIDSelect() {
+    return this.entitatIDSelect;
   }
 
-  public void setEntitatIDDesde(java.lang.Long entitatIDDesde) {
-    this.entitatIDDesde = entitatIDDesde;
-  }
-
-
-  private java.lang.Long entitatIDFins;
-
-  public java.lang.Long getEntitatIDFins() {
-    return this.entitatIDFins;
-  }
-
-  public void setEntitatIDFins(java.lang.Long entitatIDFins) {
-    this.entitatIDFins = entitatIDFins;
+  public void setEntitatIDSelect(java.util.List<java.lang.Long> entitatIDSelect) {
+    this.entitatIDSelect = entitatIDSelect;
   }
 
 
@@ -160,16 +127,13 @@ public class EstadisticaFilterForm extends CarpetaBaseFilterForm implements Esta
     super(__toClone);
     this.estadisticaIDDesde = __toClone.estadisticaIDDesde;
     this.estadisticaIDFins = __toClone.estadisticaIDFins;
-    this.tipusDesde = __toClone.tipusDesde;
-    this.tipusFins = __toClone.tipusFins;
+    this.tipusSelect = __toClone.tipusSelect;
     this.dataEstadisticaDesde = __toClone.dataEstadisticaDesde;
     this.dataEstadisticaFins = __toClone.dataEstadisticaFins;
     this.comptadorDesde = __toClone.comptadorDesde;
     this.comptadorFins = __toClone.comptadorFins;
-    this.pluginIDDesde = __toClone.pluginIDDesde;
-    this.pluginIDFins = __toClone.pluginIDFins;
-    this.entitatIDDesde = __toClone.entitatIDDesde;
-    this.entitatIDFins = __toClone.entitatIDFins;
+    this.pluginIDSelect = __toClone.pluginIDSelect;
+    this.entitatIDSelect = __toClone.entitatIDSelect;
     this.mapOfValuesForTipus = __toClone.mapOfValuesForTipus;
     this.mapOfValuesForPluginID = __toClone.mapOfValuesForPluginID;
     this.mapOfValuesForEntitatID = __toClone.mapOfValuesForEntitatID;

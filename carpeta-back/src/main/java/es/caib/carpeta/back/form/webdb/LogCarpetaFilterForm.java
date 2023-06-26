@@ -54,69 +54,36 @@ public class LogCarpetaFilterForm extends CarpetaBaseFilterForm implements LogCa
   }
 
 
-  private java.lang.Integer tipusDesde;
+  private java.util.List<java.lang.Integer> tipusSelect;
 
-  public java.lang.Integer getTipusDesde() {
-    return this.tipusDesde;
+  public java.util.List<java.lang.Integer> getTipusSelect() {
+    return this.tipusSelect;
   }
 
-  public void setTipusDesde(java.lang.Integer tipusDesde) {
-    this.tipusDesde = tipusDesde;
-  }
-
-
-  private java.lang.Integer tipusFins;
-
-  public java.lang.Integer getTipusFins() {
-    return this.tipusFins;
-  }
-
-  public void setTipusFins(java.lang.Integer tipusFins) {
-    this.tipusFins = tipusFins;
+  public void setTipusSelect(java.util.List<java.lang.Integer> tipusSelect) {
+    this.tipusSelect = tipusSelect;
   }
 
 
-  private java.lang.Integer estatDesde;
+  private java.util.List<java.lang.Integer> estatSelect;
 
-  public java.lang.Integer getEstatDesde() {
-    return this.estatDesde;
+  public java.util.List<java.lang.Integer> getEstatSelect() {
+    return this.estatSelect;
   }
 
-  public void setEstatDesde(java.lang.Integer estatDesde) {
-    this.estatDesde = estatDesde;
-  }
-
-
-  private java.lang.Integer estatFins;
-
-  public java.lang.Integer getEstatFins() {
-    return this.estatFins;
-  }
-
-  public void setEstatFins(java.lang.Integer estatFins) {
-    this.estatFins = estatFins;
+  public void setEstatSelect(java.util.List<java.lang.Integer> estatSelect) {
+    this.estatSelect = estatSelect;
   }
 
 
-  private java.lang.Long pluginIDDesde;
+  private java.util.List<java.lang.Long> pluginIDSelect;
 
-  public java.lang.Long getPluginIDDesde() {
-    return this.pluginIDDesde;
+  public java.util.List<java.lang.Long> getPluginIDSelect() {
+    return this.pluginIDSelect;
   }
 
-  public void setPluginIDDesde(java.lang.Long pluginIDDesde) {
-    this.pluginIDDesde = pluginIDDesde;
-  }
-
-
-  private java.lang.Long pluginIDFins;
-
-  public java.lang.Long getPluginIDFins() {
-    return this.pluginIDFins;
-  }
-
-  public void setPluginIDFins(java.lang.Long pluginIDFins) {
-    this.pluginIDFins = pluginIDFins;
+  public void setPluginIDSelect(java.util.List<java.lang.Long> pluginIDSelect) {
+    this.pluginIDSelect = pluginIDSelect;
   }
 
 
@@ -227,12 +194,9 @@ public class LogCarpetaFilterForm extends CarpetaBaseFilterForm implements LogCa
     this.logIDDesde = __toClone.logIDDesde;
     this.logIDFins = __toClone.logIDFins;
     this.descripcio = __toClone.descripcio;
-    this.tipusDesde = __toClone.tipusDesde;
-    this.tipusFins = __toClone.tipusFins;
-    this.estatDesde = __toClone.estatDesde;
-    this.estatFins = __toClone.estatFins;
-    this.pluginIDDesde = __toClone.pluginIDDesde;
-    this.pluginIDFins = __toClone.pluginIDFins;
+    this.tipusSelect = __toClone.tipusSelect;
+    this.estatSelect = __toClone.estatSelect;
+    this.pluginIDSelect = __toClone.pluginIDSelect;
     this.entitatCodi = __toClone.entitatCodi;
     this.tempsDesde = __toClone.tempsDesde;
     this.tempsFins = __toClone.tempsFins;

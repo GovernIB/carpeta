@@ -725,7 +725,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, EntitatFilterForm entitatFilterForm,
        List<Entitat> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (entitatFilterForm.isHiddenField(NOMID)
-      && !entitatFilterForm.isGroupByField(NOMID)) {
+       && !entitatFilterForm.isGroupByField(NOMID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -750,7 +750,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, EntitatFilterForm entitatFilterForm,
        List<Entitat> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (entitatFilterForm.isHiddenField(DESCRIPCIOID)
-      && !entitatFilterForm.isGroupByField(DESCRIPCIOID)) {
+       && !entitatFilterForm.isGroupByField(DESCRIPCIOID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -790,7 +790,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, EntitatFilterForm entitatFilterForm,
        List<Entitat> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (entitatFilterForm.isHiddenField(PLUGINLOGINID)
-      && !entitatFilterForm.isGroupByField(PLUGINLOGINID)) {
+       && !entitatFilterForm.isGroupByField(PLUGINLOGINID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -816,7 +816,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, EntitatFilterForm entitatFilterForm,
        List<Entitat> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (entitatFilterForm.isHiddenField(LOGINTEXTID)
-      && !entitatFilterForm.isGroupByField(LOGINTEXTID)) {
+       && !entitatFilterForm.isGroupByField(LOGINTEXTID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -887,7 +887,7 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getSessionAttributeFilterForm() {
-    return "EntitatWebDB_FilterForm";
+    return "Entitat_FilterForm_" + this.getClass().getName();
   }
 
 

@@ -505,7 +505,7 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         String urlFinal;
 
         log.error(msg, th);
-        urlFinal = getRelativePortaFIBBase(request);
+        urlFinal = getRelativeCarpetaBase(request);
 
         return urlFinal;
     }
@@ -543,12 +543,12 @@ public abstract class AbstractCarpetaFrontModuleController extends HttpServlet {
         return mav;
     }
 
-    public static String getRelativePortaFIBBase(HttpServletRequest request) {
+    public static String getRelativeCarpetaBase(HttpServletRequest request) {
         return request.getContextPath();
     }
 
     public static String getRelativeControllerBase(HttpServletRequest request, String webContext) {
-        return getRelativePortaFIBBase(request) + webContext;
+        return getRelativeCarpetaBase(request) + webContext;
     }
 
     protected static String getAbsoluteRequestPluginBasePath(String baseUrl, String webContext,

@@ -39,7 +39,6 @@ public class PreguntesFrequentsRefList extends RefListBase
   public PreguntesFrequentsRefList() {
     setSelects(new Select<?>[] { PREGUNTESFREQUENTSID.select });
     addCampTraduible(ENUNCIATID.select);
-    addCampTraduible(RESPOSTAID.select);
   }
   public List<StringKeyValue> getReferenceList(Field<?> keyField, Where where, OrderBy ... orderBy) throws I18NException {
     Select<Long> _transSelect = checkTranslationFields();

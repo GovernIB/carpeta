@@ -623,7 +623,8 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, AccesFilterForm accesFilterForm,
        List<Acces> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (accesFilterForm.isHiddenField(TIPUS)
-      && !accesFilterForm.isGroupByField(TIPUS)) {
+       && !accesFilterForm.isGroupByField(TIPUS)
+       && !accesFilterForm.isFilterByField(TIPUS)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -658,7 +659,8 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, AccesFilterForm accesFilterForm,
        List<Acces> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (accesFilterForm.isHiddenField(PLUGINID)
-      && !accesFilterForm.isGroupByField(PLUGINID)) {
+       && !accesFilterForm.isGroupByField(PLUGINID)
+       && !accesFilterForm.isFilterByField(PLUGINID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -695,7 +697,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, AccesFilterForm accesFilterForm,
        List<Acces> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (accesFilterForm.isHiddenField(ENTITATID)
-      && !accesFilterForm.isGroupByField(ENTITATID)) {
+       && !accesFilterForm.isGroupByField(ENTITATID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -765,7 +767,7 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getSessionAttributeFilterForm() {
-    return "AccesWebDB_FilterForm";
+    return "Acces_FilterForm_" + this.getClass().getName();
   }
 
 

@@ -51,8 +51,8 @@
 
 
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.ACCESID)}">
-            <%-- FILTRE NUMERO --%>      
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
+            <%-- FILTRE NUMERO DESDE-FINS --%>
               <span class="add-on"><fmt:message key="acces.accesID" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
@@ -69,19 +69,28 @@
 
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.TIPUS)}">
-            <%-- FILTRE NUMERO --%>      
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="acces.tipus" />:</span>
+              <%-- FILTRE NUMERO SELECT MULTIPLE --%>
+              <div class="input-group-prepend" style="padding-top: 5px;padding-right: 5px;">
+                 <span class="add-on"><fmt:message key="acces.tipus" />:</span>
+              </div>
 
-              <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
-              
-              <form:input cssClass="input-append input-small" path="tipusDesde" />
+              <div class="input-group-prepend" style="min-width:200px">
+                <form:select id="acces_tipus_select" path="tipusSelect" cssClass="search-query input-medium form-control select2 select2-hidden-accessible" multiple="true" style="width:100%;" tabindex="-1" aria-hidden="true">
+                    <c:forEach var="_entry" items="${__theFilterForm.mapOfValuesForTipus}">
+                      <option value="${_entry.key}" ${fn:contains(__theFilterForm.tipusSelect, _entry.key)?'selected':''} >${_entry.value}</option>
+                    </c:forEach>
+                </form:select>
+              </div>
 
-
-              <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
-
-              <form:input cssClass="input-append input-small search-query" path="tipusFins" />
-
+              <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#acces_tipus_select').select2({
+                        closeOnSelect: false
+                    });
+                    $('.select2-selection__rendered').css('padding-bottom','5px');
+                });
+              </script>
             </div>
 
 
@@ -165,8 +174,8 @@
 
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.QAA)}">
-            <%-- FILTRE NUMERO --%>      
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
+            <%-- FILTRE NUMERO DESDE-FINS --%>
               <span class="add-on"><fmt:message key="acces.qaa" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
@@ -187,7 +196,7 @@
             <div class="input-group" style="padding-right:4px;padding-bottom:4px;align-items:center;">
               <span class="add-on"><fmt:message key="acces.dataAcces" />:</span>
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
-            <div class="form-group">
+            <div class="form-group"  style="margin-bottom: 0px;" >
                 <div class="input-group date" id="dataAccesDesde" data-target-input="nearest">
                       <form:input  cssClass="form-control datetimepicker-input"  data-target="#dataAccesDesde" path="dataAccesDesde" />
                     <c:if test="${!false}" >
@@ -208,7 +217,7 @@
                 });
             });
         </script>              <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
-            <div class="form-group">
+            <div class="form-group"  style="margin-bottom: 0px;" >
                 <div class="input-group date" id="dataAccesFins" data-target-input="nearest">
                       <form:input  cssClass="form-control datetimepicker-input"  data-target="#dataAccesFins" path="dataAccesFins" />
                     <c:if test="${!false}" >
@@ -233,26 +242,35 @@
     
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.PLUGINID)}">
-            <%-- FILTRE NUMERO --%>      
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="acces.pluginID" />:</span>
+              <%-- FILTRE NUMERO SELECT MULTIPLE --%>
+              <div class="input-group-prepend" style="padding-top: 5px;padding-right: 5px;">
+                 <span class="add-on"><fmt:message key="acces.pluginID" />:</span>
+              </div>
 
-              <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
-              
-              <form:input cssClass="input-append input-small" path="pluginIDDesde" />
+              <div class="input-group-prepend" style="min-width:200px">
+                <form:select id="acces_pluginID_select" path="pluginIDSelect" cssClass="search-query input-medium form-control select2 select2-hidden-accessible" multiple="true" style="width:100%;" tabindex="-1" aria-hidden="true">
+                    <c:forEach var="_entry" items="${__theFilterForm.mapOfValuesForPluginID}">
+                      <option value="${_entry.key}" ${fn:contains(__theFilterForm.pluginIDSelect, _entry.key)?'selected':''} >${_entry.value}</option>
+                    </c:forEach>
+                </form:select>
+              </div>
 
-
-              <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
-
-              <form:input cssClass="input-append input-small search-query" path="pluginIDFins" />
-
+              <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#acces_pluginID_select').select2({
+                        closeOnSelect: false
+                    });
+                    $('.select2-selection__rendered').css('padding-bottom','5px');
+                });
+              </script>
             </div>
 
 
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.ENTITATID)}">
-            <%-- FILTRE NUMERO --%>      
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
+            <%-- FILTRE NUMERO DESDE-FINS --%>
               <span class="add-on"><fmt:message key="acces.entitatID" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
@@ -282,8 +300,8 @@
 
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,AccesFields.RESULTAT)}">
-            <%-- FILTRE NUMERO --%>      
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
+            <%-- FILTRE NUMERO DESDE-FINS --%>
               <span class="add-on"><fmt:message key="acces.resultat" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>

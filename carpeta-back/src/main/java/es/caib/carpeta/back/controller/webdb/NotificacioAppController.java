@@ -652,7 +652,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, NotificacioAppFilterForm notificacioAppFilterForm,
        List<NotificacioApp> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (notificacioAppFilterForm.isHiddenField(TITOLID)
-      && !notificacioAppFilterForm.isGroupByField(TITOLID)) {
+       && !notificacioAppFilterForm.isGroupByField(TITOLID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -677,7 +677,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, NotificacioAppFilterForm notificacioAppFilterForm,
        List<NotificacioApp> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (notificacioAppFilterForm.isHiddenField(MISSATGEID)
-      && !notificacioAppFilterForm.isGroupByField(MISSATGEID)) {
+       && !notificacioAppFilterForm.isGroupByField(MISSATGEID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -716,7 +716,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, NotificacioAppFilterForm notificacioAppFilterForm,
        List<NotificacioApp> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (notificacioAppFilterForm.isHiddenField(FRONTPLUGINID)
-      && !notificacioAppFilterForm.isGroupByField(FRONTPLUGINID)) {
+       && !notificacioAppFilterForm.isGroupByField(FRONTPLUGINID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -756,7 +756,7 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, NotificacioAppFilterForm notificacioAppFilterForm,
        List<NotificacioApp> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (notificacioAppFilterForm.isHiddenField(ENTITATID)
-      && !notificacioAppFilterForm.isGroupByField(ENTITATID)) {
+       && !notificacioAppFilterForm.isGroupByField(ENTITATID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -826,7 +826,7 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getSessionAttributeFilterForm() {
-    return "NotificacioAppWebDB_FilterForm";
+    return "NotificacioApp_FilterForm_" + this.getClass().getName();
   }
 
 

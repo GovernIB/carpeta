@@ -51,8 +51,8 @@
 
 
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,UsuariEntitatFields.USUARIENTITATID)}">
-            <%-- FILTRE NUMERO --%>      
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
+            <%-- FILTRE NUMERO DESDE-FINS --%>
               <span class="add-on"><fmt:message key="usuariEntitat.usuariEntitatID" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
@@ -69,8 +69,8 @@
 
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,UsuariEntitatFields.USUARIID)}">
-            <%-- FILTRE NUMERO --%>      
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
+            <%-- FILTRE NUMERO DESDE-FINS --%>
               <span class="add-on"><fmt:message key="usuariEntitat.usuariID" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
@@ -87,8 +87,8 @@
 
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,UsuariEntitatFields.ENTITATID)}">
-            <%-- FILTRE NUMERO --%>      
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
+            <%-- FILTRE NUMERO DESDE-FINS --%>
               <span class="add-on"><fmt:message key="usuariEntitat.entitatID" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
@@ -105,8 +105,8 @@
 
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,UsuariEntitatFields.ACTIU)}">
-            <%-- FILTRE NUMERO --%>      
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
+            <%-- FILTRE NUMERO DESDE-FINS --%>
               <span class="add-on"><fmt:message key="usuariEntitat.actiu" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>

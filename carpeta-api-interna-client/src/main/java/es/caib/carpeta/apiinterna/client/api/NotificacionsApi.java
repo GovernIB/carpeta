@@ -5,7 +5,7 @@ import es.caib.carpeta.apiinterna.client.services.ApiClient;
 import es.caib.carpeta.apiinterna.client.services.Configuration;
 import es.caib.carpeta.apiinterna.client.services.Pair;
 
-import javax.ws.rs.core.GenericType;
+  import javax.ws.rs.core.GenericType;
 
 import es.caib.carpeta.apiinterna.client.model.SendMessageResult;
 
@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 public class NotificacionsApi {
   private ApiClient apiClient;

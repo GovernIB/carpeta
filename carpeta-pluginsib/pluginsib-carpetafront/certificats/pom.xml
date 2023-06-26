@@ -16,7 +16,7 @@
 
         <dependency>
             <groupId>es.caib.carpeta</groupId>
-            <artifactId>carpeta-api-externa-client</artifactId>
+            <artifactId>carpeta-api-certificats-client</artifactId>
             <version>1.1</version>
         </dependency>
 
@@ -33,7 +33,6 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
             <scope>provided</scope>
         </dependency>
 

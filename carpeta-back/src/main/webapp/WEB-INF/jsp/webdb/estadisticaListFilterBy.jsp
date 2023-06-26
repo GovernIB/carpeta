@@ -51,8 +51,8 @@
 
 
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,EstadisticaFields.ESTADISTICAID)}">
-            <%-- FILTRE NUMERO --%>      
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
+            <%-- FILTRE NUMERO DESDE-FINS --%>
               <span class="add-on"><fmt:message key="estadistica.estadisticaID" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
@@ -69,19 +69,28 @@
 
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,EstadisticaFields.TIPUS)}">
-            <%-- FILTRE NUMERO --%>      
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="estadistica.tipus" />:</span>
+              <%-- FILTRE NUMERO SELECT MULTIPLE --%>
+              <div class="input-group-prepend" style="padding-top: 5px;padding-right: 5px;">
+                 <span class="add-on"><fmt:message key="estadistica.tipus" />:</span>
+              </div>
 
-              <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
-              
-              <form:input cssClass="input-append input-small" path="tipusDesde" />
+              <div class="input-group-prepend" style="min-width:200px">
+                <form:select id="estadis_tipus_select" path="tipusSelect" cssClass="search-query input-medium form-control select2 select2-hidden-accessible" multiple="true" style="width:100%;" tabindex="-1" aria-hidden="true">
+                    <c:forEach var="_entry" items="${__theFilterForm.mapOfValuesForTipus}">
+                      <option value="${_entry.key}" ${fn:contains(__theFilterForm.tipusSelect, _entry.key)?'selected':''} >${_entry.value}</option>
+                    </c:forEach>
+                </form:select>
+              </div>
 
-
-              <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
-
-              <form:input cssClass="input-append input-small search-query" path="tipusFins" />
-
+              <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#estadis_tipus_select').select2({
+                        closeOnSelect: false
+                    });
+                    $('.select2-selection__rendered').css('padding-bottom','5px');
+                });
+              </script>
             </div>
 
 
@@ -91,7 +100,7 @@
             <div class="input-group" style="padding-right:4px;padding-bottom:4px;align-items:center;">
               <span class="add-on"><fmt:message key="estadistica.dataEstadistica" />:</span>
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
-            <div class="form-group">
+            <div class="form-group"  style="margin-bottom: 0px;" >
                 <div class="input-group date" id="dataEstadisticaDesde" data-target-input="nearest">
                       <form:input  cssClass="form-control datetimepicker-input"  data-target="#dataEstadisticaDesde" path="dataEstadisticaDesde" />
                     <c:if test="${!false}" >
@@ -112,7 +121,7 @@
                 });
             });
         </script>              <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
-            <div class="form-group">
+            <div class="form-group"  style="margin-bottom: 0px;" >
                 <div class="input-group date" id="dataEstadisticaFins" data-target-input="nearest">
                       <form:input  cssClass="form-control datetimepicker-input"  data-target="#dataEstadisticaFins" path="dataEstadisticaFins" />
                     <c:if test="${!false}" >
@@ -137,8 +146,8 @@
     
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,EstadisticaFields.COMPTADOR)}">
-            <%-- FILTRE NUMERO --%>      
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
+            <%-- FILTRE NUMERO DESDE-FINS --%>
               <span class="add-on"><fmt:message key="estadistica.comptador" />:</span>
 
               <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
@@ -155,37 +164,55 @@
 
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,EstadisticaFields.PLUGINID)}">
-            <%-- FILTRE NUMERO --%>      
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="estadistica.pluginID" />:</span>
+              <%-- FILTRE NUMERO SELECT MULTIPLE --%>
+              <div class="input-group-prepend" style="padding-top: 5px;padding-right: 5px;">
+                 <span class="add-on"><fmt:message key="estadistica.pluginID" />:</span>
+              </div>
 
-              <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
-              
-              <form:input cssClass="input-append input-small" path="pluginIDDesde" />
+              <div class="input-group-prepend" style="min-width:200px">
+                <form:select id="estadis_pluginID_select" path="pluginIDSelect" cssClass="search-query input-medium form-control select2 select2-hidden-accessible" multiple="true" style="width:100%;" tabindex="-1" aria-hidden="true">
+                    <c:forEach var="_entry" items="${__theFilterForm.mapOfValuesForPluginID}">
+                      <option value="${_entry.key}" ${fn:contains(__theFilterForm.pluginIDSelect, _entry.key)?'selected':''} >${_entry.value}</option>
+                    </c:forEach>
+                </form:select>
+              </div>
 
-
-              <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
-
-              <form:input cssClass="input-append input-small search-query" path="pluginIDFins" />
-
+              <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#estadis_pluginID_select').select2({
+                        closeOnSelect: false
+                    });
+                    $('.select2-selection__rendered').css('padding-bottom','5px');
+                });
+              </script>
             </div>
 
 
         </c:if>
         <c:if test="${gen:contains(__theFilterForm.filterByFields ,EstadisticaFields.ENTITATID)}">
-            <%-- FILTRE NUMERO --%>      
             <div class="input-group" style="padding-right: 4px;padding-bottom: 4px;">
-              <span class="add-on"><fmt:message key="estadistica.entitatID" />:</span>
+              <%-- FILTRE NUMERO SELECT MULTIPLE --%>
+              <div class="input-group-prepend" style="padding-top: 5px;padding-right: 5px;">
+                 <span class="add-on"><fmt:message key="estadistica.entitatID" />:</span>
+              </div>
 
-              <span class="add-on">&nbsp;<fmt:message key="genapp.from" /></span>
-              
-              <form:input cssClass="input-append input-small" path="entitatIDDesde" />
+              <div class="input-group-prepend" style="min-width:200px">
+                <form:select id="estadis_entitatID_select" path="entitatIDSelect" cssClass="search-query input-medium form-control select2 select2-hidden-accessible" multiple="true" style="width:100%;" tabindex="-1" aria-hidden="true">
+                    <c:forEach var="_entry" items="${__theFilterForm.mapOfValuesForEntitatID}">
+                      <option value="${_entry.key}" ${fn:contains(__theFilterForm.entitatIDSelect, _entry.key)?'selected':''} >${_entry.value}</option>
+                    </c:forEach>
+                </form:select>
+              </div>
 
-
-              <span class="add-on">&nbsp;<fmt:message key="genapp.to" />&nbsp;</span>
-
-              <form:input cssClass="input-append input-small search-query" path="entitatIDFins" />
-
+              <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#estadis_entitatID_select').select2({
+                        closeOnSelect: false
+                    });
+                    $('.select2-selection__rendered').css('padding-bottom','5px');
+                });
+              </script>
             </div>
 
 

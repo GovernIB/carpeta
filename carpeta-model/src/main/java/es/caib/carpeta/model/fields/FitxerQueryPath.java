@@ -143,48 +143,6 @@ public class FitxerQueryPath extends org.fundaciobit.genapp.common.query.QueryPa
 
  // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
 
-  public PreguntesFrequentsQueryPath PREGUNTESFREQUENTS_FITXER1IDS() {
-    return new PreguntesFrequentsQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return FitxerQueryPath.this.getQueryPath() + "preguntesFrequents_fitxer1ids" + ".";
-      }
-    });
-  }
-*/
-
-/* L'ús d'aquest camp (OneToMany) llança una exception:
- [Illegal attempt to dereference a collection]
-
- // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
-
-  public PreguntesFrequentsQueryPath PREGUNTESFREQUENTS_FITXER2IDS() {
-    return new PreguntesFrequentsQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return FitxerQueryPath.this.getQueryPath() + "preguntesFrequents_fitxer2ids" + ".";
-      }
-    });
-  }
-*/
-
-/* L'ús d'aquest camp (OneToMany) llança una exception:
- [Illegal attempt to dereference a collection]
-
- // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
-
-  public PreguntesFrequentsQueryPath PREGUNTESFREQUENTS_FITXER3IDS() {
-    return new PreguntesFrequentsQueryPath(new QueryPath() {
-      public String getQueryPath() {
-          return FitxerQueryPath.this.getQueryPath() + "preguntesFrequents_fitxer3ids" + ".";
-      }
-    });
-  }
-*/
-
-/* L'ús d'aquest camp (OneToMany) llança una exception:
- [Illegal attempt to dereference a collection]
-
- // TODO Solució dins el mètode testOneByOneDirect de la classe TestJPA 
-
   public SeccioQueryPath SECCIOS() {
     return new SeccioQueryPath(new QueryPath() {
       public String getQueryPath() {

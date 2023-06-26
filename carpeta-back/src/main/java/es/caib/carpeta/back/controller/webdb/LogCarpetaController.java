@@ -616,7 +616,8 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, LogCarpetaFilterForm logCarpetaFilterForm,
        List<LogCarpeta> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (logCarpetaFilterForm.isHiddenField(TIPUS)
-      && !logCarpetaFilterForm.isGroupByField(TIPUS)) {
+       && !logCarpetaFilterForm.isGroupByField(TIPUS)
+       && !logCarpetaFilterForm.isFilterByField(TIPUS)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -649,7 +650,8 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, LogCarpetaFilterForm logCarpetaFilterForm,
        List<LogCarpeta> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (logCarpetaFilterForm.isHiddenField(ESTAT)
-      && !logCarpetaFilterForm.isGroupByField(ESTAT)) {
+       && !logCarpetaFilterForm.isGroupByField(ESTAT)
+       && !logCarpetaFilterForm.isFilterByField(ESTAT)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -680,7 +682,8 @@ public java.lang.Long stringToPK(String value) {
        ModelAndView mav, LogCarpetaFilterForm logCarpetaFilterForm,
        List<LogCarpeta> list, Map<Field<?>, GroupByItem> _groupByItemsMap, Where where)  throws I18NException {
     if (logCarpetaFilterForm.isHiddenField(PLUGINID)
-      && !logCarpetaFilterForm.isGroupByField(PLUGINID)) {
+       && !logCarpetaFilterForm.isGroupByField(PLUGINID)
+       && !logCarpetaFilterForm.isFilterByField(PLUGINID)) {
       return EMPTY_STRINGKEYVALUE_LIST;
     }
     Where _w = null;
@@ -748,7 +751,7 @@ public java.lang.Long stringToPK(String value) {
   }
 
   public String getSessionAttributeFilterForm() {
-    return "LogCarpetaWebDB_FilterForm";
+    return "LogCarpeta_FilterForm_" + this.getClass().getName();
   }
 
 
