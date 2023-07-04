@@ -2904,7 +2904,7 @@ var DetallRegistre = /** @class */ (function (_super) {
         this.setState(__assign(__assign({}, this.state), { isLoaded: false }));
         var url2 = this.props.pathtoservei;
         var params = { numero: this.props.numero };
-        console.log("DetallRegistre:: Cridant a " + url2 + " amb id de registre " + this.props.numero);
+        //console.log("DetallRegistre:: Cridant a " + url2 + " amb id de registre " + this.props.numero);
         this.props.axios
             .get(url2, { params: params })
             .then(function (response) {
@@ -2961,7 +2961,6 @@ var DetallRegistre = /** @class */ (function (_super) {
                             })
                                 .then(function (response) { return response.json(); })
                                 .then(function (data) {
-                                console.log(data);
                                 if (justificantLoader) {
                                     justificantLoader.style.display = "none";
                                 }
@@ -3031,16 +3030,19 @@ var DetallRegistre = /** @class */ (function (_super) {
         }
         return day + "/" + month + "/" + year + " " + hour + ":" + minute;
     };
+    DetallRegistre.prototype.teRepresentant = function (interesados) {
+        var teRepresentant = false;
+        interesados.map(function (item) { return (typeof item.representante !== "undefined" && (teRepresentant = true)); });
+        return teRepresentant;
+    };
     DetallRegistre.prototype.render = function () {
         var _this = this;
         var tornarDeDetallRegistreFunc = this.props.tornarDeDetallRegistreFunc;
         console.log("DetallRegistre:: Render ...");
-        console.log("DetallRegistre:: XXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-        console.log("DetallRegistre:: TRADUCCIO => " + this.props.t("registro_justificante"));
-        console.log("DetallRegistre:: ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
         var isLoaded = this.state.isLoaded;
         // const { t } = this.props;
         var content;
+        var interessatTableContent;
         console.log("DetallRegistre:: Render 2");
         if (!isLoaded) {
             console.log("DetallRegistre:: Render !loaded");
@@ -3053,7 +3055,35 @@ var DetallRegistre = /** @class */ (function (_super) {
             console.log("DetallRegistre:: Render Registre");
             if (this.state.data != null) {
                 var registre = JSON.parse(this.state.data.registre.replace(/'/g, '"'));
-                console.log("RESPONSE", this.state.data);
+                var hasRepresentant = this.teRepresentant(registre.interesados);
+                interessatTableContent = (React.createElement("div", { className: "row no-gutters align-items-center" },
+                    React.createElement("table", { className: "table table-hover table-sm" },
+                        React.createElement("thead", null,
+                            React.createElement("tr", null,
+                                React.createElement("th", { scope: "col" }, "#"),
+                                React.createElement("th", { scope: "col" }, this.props.t("registro_interesado_nombre")),
+                                React.createElement("th", { scope: "col" }, this.props.t("registro_interesado_documento")),
+                                hasRepresentant &&
+                                    React.createElement(React.Fragment, null,
+                                        React.createElement("th", { scope: "col" }, this.props.t("registro_interesado_representante")),
+                                        React.createElement("th", { scope: "col" }, this.props.t("registro_representante_documento"))),
+                                React.createElement("th", { scope: "col" }, this.props.t("registro_interesado_tipo")))),
+                        React.createElement("tbody", null, registre.interesados.map(function (item, index) { return (React.createElement("tr", null,
+                            React.createElement("td", null, index + 1),
+                            React.createElement("td", null,
+                                item.interesado.nombre,
+                                " ",
+                                item.interesado.apellido1,
+                                " ",
+                                item.interesado.apellido2),
+                            React.createElement("td", null, item.interesado.documento),
+                            hasRepresentant && React.createElement(React.Fragment, null,
+                                React.createElement("td", null,
+                                    item.representante.nombre,
+                                    " ",
+                                    item.representante.apellido1),
+                                React.createElement("td", null, item.representante.documento)),
+                            React.createElement("td", null, _this.props.t("registro_tipo_interesado_" + item.interesado.tipoInteresado)))); })))));
                 var solicitaExponeContainer = typeof registre.expone != "undefined" || typeof registre.solicita != "undefined" ? (React.createElement("div", { className: "card border-left-carpeta shadow py-2 mb-3 alert" },
                     React.createElement("div", { className: "card-body" },
                         React.createElement("div", { className: "col mr-2 font15" },
@@ -3160,25 +3190,7 @@ var DetallRegistre = /** @class */ (function (_super) {
                                         React.createElement("div", { className: "row no-gutters align-items-center" },
                                             React.createElement("div", { className: "col mr-2 font15" },
                                                 React.createElement("h3", { className: "font-weight-bold verde text-uppercase mb-3 text-center h3" }, this.props.t("registro_interesados")),
-                                                React.createElement("div", { className: "row no-gutters align-items-center" },
-                                                    React.createElement("table", { className: "table table-hover table-sm" },
-                                                        React.createElement("thead", null,
-                                                            React.createElement("tr", null,
-                                                                React.createElement("th", { scope: "col" }, "#"),
-                                                                React.createElement("th", { scope: "col" }, this.props.t("registro_interesado_nombre")),
-                                                                React.createElement("th", { scope: "col" }, this.props.t("registro_interesado_documento")),
-                                                                React.createElement("th", { scope: "col" }, this.props.t("registro_interesado_tipo")))),
-                                                        React.createElement("tbody", null, registre.interesados.map(function (item, index) { return (React.createElement("tr", null,
-                                                            React.createElement("td", null, index + 1),
-                                                            typeof item.interesado.razonSocial === "undefined" && (React.createElement("td", null,
-                                                                item.interesado.nombre,
-                                                                " ",
-                                                                item.interesado.apellido1,
-                                                                " ",
-                                                                item.interesado.apellido2)),
-                                                            typeof item.interesado.razonSocial !== "undefined" && (React.createElement("td", null, item.interesado.razonSocial)),
-                                                            React.createElement("td", null, item.interesado.documento),
-                                                            React.createElement("td", null, _this.props.t("registro_tipo_interesado_" + item.interesado.tipoInteresado)))); })))))))),
+                                                interessatTableContent)))),
                                 React.createElement("div", { className: "card border-left-carpeta shadow py-2 mb-3 alert cardAppVerd" },
                                     React.createElement("div", { className: "card-body" },
                                         React.createElement("div", { className: "row no-gutters align-items-center" },
@@ -3251,6 +3263,8 @@ var registro_interesados$2 = "Interessats";
 var registro_interesado_nombre$2 = "Nom";
 var registro_interesado_documento$2 = "Document";
 var registro_interesado_tipo$2 = "Tipus";
+var registro_interesado_representante$2 = "Representant";
+var registro_representante_documento$2 = "Document Representant";
 var registro_anexos$2 = "Annexos";
 var registro_anexo_name$2 = "Nom";
 var registro_anexo_validezdocumento$2 = "Validesa Documental";
@@ -3321,6 +3335,8 @@ var translation_ca = {
 	registro_interesado_nombre: registro_interesado_nombre$2,
 	registro_interesado_documento: registro_interesado_documento$2,
 	registro_interesado_tipo: registro_interesado_tipo$2,
+	registro_interesado_representante: registro_interesado_representante$2,
+	registro_representante_documento: registro_representante_documento$2,
 	registro_anexos: registro_anexos$2,
 	registro_anexo_name: registro_anexo_name$2,
 	registro_anexo_validezdocumento: registro_anexo_validezdocumento$2,
@@ -3392,6 +3408,8 @@ var registro_interesados$1 = "Interesados";
 var registro_interesado_nombre$1 = "Nombre";
 var registro_interesado_documento$1 = "Documento";
 var registro_interesado_tipo$1 = "Tipo";
+var registro_interesado_representante$1 = "Representante";
+var registro_representante_documento$1 = "Documento Representante";
 var registro_anexos$1 = "Anexos";
 var registro_anexo_name$1 = "Nombre";
 var registro_anexo_validezdocumento$1 = "Validez Documental";
@@ -3462,6 +3480,8 @@ var translation_es = {
 	registro_interesado_nombre: registro_interesado_nombre$1,
 	registro_interesado_documento: registro_interesado_documento$1,
 	registro_interesado_tipo: registro_interesado_tipo$1,
+	registro_interesado_representante: registro_interesado_representante$1,
+	registro_representante_documento: registro_representante_documento$1,
 	registro_anexos: registro_anexos$1,
 	registro_anexo_name: registro_anexo_name$1,
 	registro_anexo_validezdocumento: registro_anexo_validezdocumento$1,
@@ -3533,6 +3553,8 @@ var registro_interesados = "Interessats";
 var registro_interesado_nombre = "Nom";
 var registro_interesado_documento = "Document";
 var registro_interesado_tipo = "Tipus";
+var registro_interesado_representante = "Representant";
+var registro_representante_documento = "Document Representant";
 var registro_anexos = "Annexos";
 var registro_anexo_name = "Nom";
 var registro_anexo_validezdocumento = "Validesa Documental";
@@ -3603,6 +3625,8 @@ var translation_en = {
 	registro_interesado_nombre: registro_interesado_nombre,
 	registro_interesado_documento: registro_interesado_documento,
 	registro_interesado_tipo: registro_interesado_tipo,
+	registro_interesado_representante: registro_interesado_representante,
+	registro_representante_documento: registro_representante_documento,
 	registro_anexos: registro_anexos,
 	registro_anexo_name: registro_anexo_name,
 	registro_anexo_validezdocumento: registro_anexo_validezdocumento,

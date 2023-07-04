@@ -43,7 +43,7 @@ class DetallRegistre extends React.Component<DetallRegistreProps, DetallRegistre
 
     const params = { numero: this.props.numero };
 
-    console.log("DetallRegistre:: Cridant a " + url2 + " amb id de registre " + this.props.numero);
+    //console.log("DetallRegistre:: Cridant a " + url2 + " amb id de registre " + this.props.numero);
 
     this.props.axios
       .get(url2, { params: params })
@@ -114,7 +114,6 @@ class DetallRegistre extends React.Component<DetallRegistreProps, DetallRegistre
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (justificantLoader) {
           justificantLoader.style.display = "none";
         }
@@ -187,19 +186,25 @@ class DetallRegistre extends React.Component<DetallRegistreProps, DetallRegistre
     return day + "/" + month + "/" + year + " " + hour + ":" + minute;
   }
 
+  teRepresentant(interesados: any){
+    var teRepresentant: boolean = false;
+    interesados.map((item: any) => (
+      typeof item.representante !== "undefined" && (
+        teRepresentant = true
+      )
+    ))
+    return teRepresentant;
+    }
+
   render() {
     var tornarDeDetallRegistreFunc: any = this.props.tornarDeDetallRegistreFunc;
     console.log("DetallRegistre:: Render ...");
-
-    console.log("DetallRegistre:: XXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-    console.log("DetallRegistre:: TRADUCCIO => " + this.props.t("registro_justificante"));
-    console.log("DetallRegistre:: ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
-
     const isLoaded = this.state.isLoaded;
 
     // const { t } = this.props;
 
     let content;
+    let interessatTableContent;
 
     console.log("DetallRegistre:: Render 2");
 
@@ -220,8 +225,48 @@ class DetallRegistre extends React.Component<DetallRegistreProps, DetallRegistre
 
       if (this.state.data != null) {
         let registre = JSON.parse(this.state.data.registre.replace(/'/g, '"'));
+        var hasRepresentant: boolean = this.teRepresentant(registre.interesados);
 
-        console.log("RESPONSE", this.state.data);
+          interessatTableContent = (
+                            <div className="row no-gutters align-items-center">
+                              <table className="table table-hover table-sm">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">{this.props.t("registro_interesado_nombre")}</th>
+                                    <th scope="col">{this.props.t("registro_interesado_documento")}</th>
+                                    {hasRepresentant && 
+                                      <>
+                                      <th scope="col">{this.props.t("registro_interesado_representante")}</th>
+                                      <th scope="col">{this.props.t("registro_representante_documento")}</th>
+                                      </>
+                                    }
+                                    <th scope="col">{this.props.t("registro_interesado_tipo")}</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {registre.interesados.map((item: any, index: number) => (
+                                    <tr>
+                                      <td>{index + 1}</td>
+                                      <td>
+                                        {item.interesado.nombre} {item.interesado.apellido1} {item.interesado.apellido2}
+                                      </td>
+                                      {/*<td>{item.interesado.razonSocial}</td>*/}
+                                      <td>{item.interesado.documento}</td>
+                                      {hasRepresentant && <>
+                                        <td>{item.representante.nombre} {item.representante.apellido1}</td>
+                                        <td>{item.representante.documento}</td>
+                                        </>
+                                      }
+                                      <td>
+                                        {this.props.t("registro_tipo_interesado_" + item.interesado.tipoInteresado)}
+                                      </td>
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+          );
 
         let solicitaExponeContainer =
           typeof registre.expone != "undefined" || typeof registre.solicita != "undefined" ? (
@@ -254,6 +299,7 @@ class DetallRegistre extends React.Component<DetallRegistreProps, DetallRegistre
             aria-hidden="true"
           ></span>
         );
+
 
         content = (
           <>
@@ -427,48 +473,18 @@ class DetallRegistre extends React.Component<DetallRegistreProps, DetallRegistre
                 </div>
 
                 <div className="seg-col-deta-reg col-md-5 pr-0">
-                  <div className="card border-left-carpeta shadow py-2 mb-3 alert cardAppVerd">
-                    <div className="card-body">
-                      <div className="row no-gutters align-items-center">
-                        <div className="col mr-2 font15">
-                          <h3 className="font-weight-bold verde text-uppercase mb-3 text-center h3">
-                            {this.props.t("registro_interesados")}
-                          </h3>
-                          <div className="row no-gutters align-items-center">
-                            <table className="table table-hover table-sm">
-                              <thead>
-                                <tr>
-                                  <th scope="col">#</th>
-                                  <th scope="col">{this.props.t("registro_interesado_nombre")}</th>
-                                  <th scope="col">{this.props.t("registro_interesado_documento")}</th>
-                                  <th scope="col">{this.props.t("registro_interesado_tipo")}</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {registre.interesados.map((item: any, index: number) => (
-                                  <tr>
-                                    <td>{index + 1}</td>
-                                    {typeof item.interesado.razonSocial === "undefined" && (
-                                      <td>
-                                        {item.interesado.nombre} {item.interesado.apellido1} {item.interesado.apellido2}
-                                      </td>
-                                    )}
-                                    {typeof item.interesado.razonSocial !== "undefined" && (
-                                      <td>{item.interesado.razonSocial}</td>
-                                    )}
-                                    <td>{item.interesado.documento}</td>
-                                    <td>
-                                      {this.props.t("registro_tipo_interesado_" + item.interesado.tipoInteresado)}
-                                    </td>
-                                  </tr>
-                                ))}
-                              </tbody>
-                            </table>
-                          </div>
+                <div className="card border-left-carpeta shadow py-2 mb-3 alert cardAppVerd">
+                      <div className="card-body">
+                        <div className="row no-gutters align-items-center">
+                          <div className="col mr-2 font15">
+                            <h3 className="font-weight-bold verde text-uppercase mb-3 text-center h3">
+                              {this.props.t("registro_interesados")}
+                            </h3>
+                  {interessatTableContent}
+                  </div>
                         </div>
                       </div>
                     </div>
-                  </div>
 
                   <div className="card border-left-carpeta shadow py-2 mb-3 alert cardAppVerd">
                     <div className="card-body">

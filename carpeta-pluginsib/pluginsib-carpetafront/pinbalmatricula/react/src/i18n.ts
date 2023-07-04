@@ -18,8 +18,6 @@ const resources = {
     translation: translationES
   }
 };
-
-
   
   i18n
   .use(detector) // web lang detect

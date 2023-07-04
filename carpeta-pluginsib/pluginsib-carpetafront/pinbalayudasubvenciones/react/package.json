@@ -21,8 +21,8 @@
     "babel-preset-env": "^1.7.0",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.1.1",    
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-i18next": "^11.5.0"
   },
   "devDependencies": {

@@ -36,12 +36,10 @@ public class Checker {
 
                 if (p.exists()) {
                     System.out.println(checkPackageJson(file.getName(), p));
-
                 } else {
                     File react = new File(file, "react/package.json");
                     if (react.exists()) {
                         System.out.println(checkPackageJson(file.getName(), react));
-
                     } else {
                         System.out.println(" - " + file.getName() + ":\tskip");
                     }
@@ -69,7 +67,6 @@ public class Checker {
         checkProperty(pluginName, "getAxios", packageBean.getDependencies().getAxios());
         checkProperty(pluginName, "getReact", packageBean.getDependencies().getReact());
         checkProperty(pluginName, "getReactDom", packageBean.getDependencies().getReactDom());
-        
         
         checkProperty(pluginName, "getWebpack", packageBean.getDevDependencies().getWebpack());
         

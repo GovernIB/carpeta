@@ -19,6 +19,8 @@
     "registro_interesado_nombre": "Nom",
     "registro_interesado_documento": "Document",
     "registro_interesado_tipo": "Tipus",
+    "registro_interesado_representante": "Representant",
+    "registro_representante_documento": "Document Representant",
     "registro_anexos": "Annexos",
     "registro_anexo_name": "Nom",
     "registro_anexo_validezdocumento": "Validesa Documental",
