@@ -41,6 +41,7 @@ class TemplatePageCarpeta extends React.Component<TemplatePageCarpetaProps> {
               id="TemplatePageCarpeta"
               role="tabpanel"
               aria-labelledby="home-tab"
+              style={{minHeight: "470px"}}
             >
               {this.props.children}
               <div className="col-md-12 border-0 float-left p-0" id="botoTornarDadesP" style={{ marginTop: "20px" }}>

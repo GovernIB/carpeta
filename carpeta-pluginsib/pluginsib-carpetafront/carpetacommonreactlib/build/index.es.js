@@ -2052,7 +2052,7 @@ var TemplatePageCarpeta = /** @class */ (function (_super) {
         var language = i18n.language;
         var content;
         content = (React$1.createElement(React$1.Fragment, null,
-            React$1.createElement("div", { className: "tab-pane fade show active", id: "TemplatePageCarpeta", role: "tabpanel", "aria-labelledby": "home-tab" },
+            React$1.createElement("div", { className: "tab-pane fade show active", id: "TemplatePageCarpeta", role: "tabpanel", "aria-labelledby": "home-tab", style: { minHeight: "470px" } },
                 this.props.children,
                 React$1.createElement("div", { className: "col-md-12 border-0 float-left p-0", id: "botoTornarDadesP", style: { marginTop: "20px" } },
                     React$1.createElement("button", { type: "button", "data-toggle": "modal", onClick: function () {
@@ -2101,8 +2101,6 @@ var CarpetaDatePicker = /** @class */ (function (_super) {
         //console.log("CarpetaDatePicker::componentDidMount() => Inici ... XXXXXXXXXXXX " + this.props.i18n.language);
         var theName = this.datePickerName;
         //@ts-ignore
-        //$(".bootstrap-datetimepicker-widget").css("transform","scale(1.5,1.5)");
-        //@ts-ignore
         $("#" + theName).datetimepicker({
             format: "DD/MM/YYYY",
             locale: this.props.i18n.language,
@@ -2124,7 +2122,7 @@ var CarpetaDatePicker = /** @class */ (function (_super) {
         return (React$1.createElement("div", { className: "form-group" },
             isMobileOnly_1 && React$1.createElement("style", { dangerouslySetInnerHTML: { __html: ".bootstrap-datetimepicker-widget { transform:scale(2.5,2.5); transform-origin:top left; }" } }),
             React$1.createElement("div", { className: "input-group date", id: this.datePickerName, "data-target-input": "nearest" },
-                React$1.createElement("input", { "data-toggle": "datetimepicker", className: "form-control datetimepicker-input", "data-target": "#" + this.datePickerName, style: { padding: "0px 0px 0px 10px" }, id: this.datePickerName + "Input", readOnly: false, value: this.props.defaultValue.toLocaleString(lang, {
+                React$1.createElement("input", { "data-toggle": "datetimepicker", className: "form-control datetimepicker-input", "data-target": "#" + this.datePickerName, style: { padding: "5px 5px 5px 10px" }, id: this.datePickerName + "Input", readOnly: false, value: this.props.defaultValue.toLocaleString(lang, {
                         year: "numeric",
                         month: "2-digit",
                         day: "2-digit",
