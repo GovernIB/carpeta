@@ -24,6 +24,7 @@ declare class DetallRegistre extends React.Component<DetallRegistreProps, Detall
     downloadDoc(datafile: any, dataName: any): void;
     mostraTooltip(): void;
     dateFormat(dateObject: any): string;
+    teRepresentant(interesados: any): boolean;
     render(): JSX.Element;
 }
 export default DetallRegistre;
