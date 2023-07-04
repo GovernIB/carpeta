@@ -9,8 +9,9 @@ tinyMCE.init({
         // General options  
         mode : "specific_textareas",
         editor_selector : "mceEditor",
-        theme : "advanced",  
-        plugins : "pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave",  
+        theme : "advanced",
+        //   
+        plugins : "autoresize,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave",  
         language : lang,
         
         // Theme options  
@@ -27,7 +28,9 @@ tinyMCE.init({
         // TTT
         theme_advanced_statusbar_location : "none",
         //TTT theme_advanced_statusbar_location : "bottom",  
-        theme_advanced_resizing : true,  
+        theme_advanced_resizing:true,
+        //resize: true,  
+        width: "100%",
   
         // Example content CSS (should be your site CSS)  
         // using false to ensure that the default browser settings are used for best Accessibility  
@@ -37,7 +40,7 @@ tinyMCE.init({
         browser_preferred_colors : true,  
         detect_highcontrast : true,
         
-        paste_postprocess: (editor, args) => {
+        paste_postprocess: (__editor, __args) => {
           //console.log(editor);
           //console.log(args);          
           setTimeout(postPasteTinyMCE,1000, tinymce.activeEditor );
@@ -53,7 +56,7 @@ tinyMCE.init({
     });  
 
 
-
+/*
 	tinyMCE.init({  
 	    // General options  
 	    mode : "specific_textareas",
@@ -72,7 +75,7 @@ tinyMCE.init({
 	    // TTT
 	    theme_advanced_default_foreground_color: "#FFFFFF"
 	}); 
-	
+	*/
 	
 	
 	function postPasteTinyMCE(editor) {

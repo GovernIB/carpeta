@@ -161,6 +161,12 @@ class IniciPublic extends Component {
                                     href="https://ssweb.seap.minhap.es/ayuda/consulta/Claveciudadanos"
                                     title={t('paginaIniciAjudaBustiaText')}
                                     target="_blank" rel="noopener noreferrer" tabIndex="506" aria-labelledby="bustiaAtencio">{t('paginaIniciAjudaBustia')}</a></li>
+
+                                <li><span className="oi oi-arrow-right" id="consultarPreguntesFrequents"/>
+                                    {t('paginaIniciAjuda4')} <a
+                                    href="/carpetafront/#faq"
+                                    title={t('paginaIniciAjuda4Title')}
+                                    target="_blank" rel="noopener noreferrer" tabIndex="507" aria-labelledby="bustiaAtencio">{t('paginaIniciAjuda4Title')}</a></li>
                             </ul>
 
                         </div>
