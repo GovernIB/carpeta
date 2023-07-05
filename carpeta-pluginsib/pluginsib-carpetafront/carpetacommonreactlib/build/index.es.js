@@ -2052,7 +2052,7 @@ var TemplatePageCarpeta = /** @class */ (function (_super) {
         var language = i18n.language;
         var content;
         content = (React$1.createElement(React$1.Fragment, null,
-            React$1.createElement("div", { className: "tab-pane fade show active", id: "TemplatePageCarpeta", role: "tabpanel", "aria-labelledby": "home-tab" },
+            React$1.createElement("div", { className: "tab-pane fade show active", id: "TemplatePageCarpeta", role: "tabpanel", "aria-labelledby": "home-tab", style: { minHeight: "470px" } },
                 this.props.children,
                 React$1.createElement("div", { className: "col-md-12 border-0 float-left p-0", id: "botoTornarDadesP", style: { marginTop: "20px" } },
                     React$1.createElement("button", { type: "button", "data-toggle": "modal", onClick: function () {
@@ -2100,8 +2100,6 @@ var CarpetaDatePicker = /** @class */ (function (_super) {
     CarpetaDatePicker.prototype.componentDidMount = function () {
         //console.log("CarpetaDatePicker::componentDidMount() => Inici ... XXXXXXXXXXXX " + this.props.i18n.language);
         var theName = this.datePickerName;
-        //@ts-ignore
-        //$(".bootstrap-datetimepicker-widget").css("transform","scale(1.5,1.5)");
         //@ts-ignore
         $("#" + theName).datetimepicker({
             format: "DD/MM/YYYY",
