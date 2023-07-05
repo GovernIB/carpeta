@@ -41,16 +41,28 @@ import io.swagger.v3.oas.annotations.media.Content;
 @OpenAPIDefinition(tags = @Tag(name = "Certificats", description = "Certificats"))
 public class CertificatsService {
 
+    public static int action = 0;
+
     public static final String TAG = "Certificats";
 
     protected static Logger log = Logger.getLogger(CertificatsService.class);
 
-    @Operation(tags = {
-            TAG }, operationId = "descarregarCertificat", summary = "Retorna un certificat a CARPETA", method = "get")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "404", description = "Paràmetres incorrectes", content = @Content(mediaType = MediaType.APPLICATION_JSON)),
-            // mediaType = MediaType.APPLICATION_JSON, 
-            @ApiResponse(responseCode = "200", description = "Llista d'accessos a CARPETA", content = @Content(schema = @Schema(implementation = CertificatBean.class))) })
+    @Operation(
+            tags = { TAG },
+            operationId = "descarregarCertificat",
+            summary = "Retorna un certificat a CARPETA",
+            method = "get")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Paràmetres incorrectes",
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+                    // mediaType = MediaType.APPLICATION_JSON, 
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Llista d'accessos a CARPETA",
+                            content = @Content(schema = @Schema(implementation = CertificatBean.class))) })
     @SecurityRequirement(name = "BasicAuth")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -58,26 +70,57 @@ public class CertificatsService {
     @Path("/descarregarCertificat")
     public Response descarregarCertificat(
 
-            @Parameter(description = "DNI o NIF de la persona de la qual volem obtenir el certificat.", required = true, example = "99999999X", schema = @Schema(implementation = String.class)) @QueryParam("dni") String dni,
+            @Parameter(
+                    description = "DNI o NIF de la persona de la qual volem obtenir el certificat.",
+                    required = true,
+                    example = "99999999X",
+                    schema = @Schema(implementation = String.class)) @QueryParam("dni") String dni,
 
-            @Parameter(description = "Codi de l'idioma", required = true, example = "ca", schema = @Schema(implementation = String.class)) @QueryParam("idioma") String idiomaRequest) {
+            @Parameter(
+                    description = "Codi de l'idioma",
+                    required = true,
+                    example = "ca",
+                    schema = @Schema(implementation = String.class)) @QueryParam("idioma") String idiomaRequest) {
         try {
-            CertificatBean cert = new CertificatBean();
-            cert.setTipus(CertificatType.FITXER);
-            
-            CertificatFileInfo fileInfo = new CertificatFileInfo();
-            fileInfo.setMime("text/plain");
-            fileInfo.setNom("Hola.txt");
 
-            byte[] byteFile = "Hola Caracola".getBytes();
-            fileInfo.setBytes(byteFile);
+            action++;
 
-            //fileInfo.setDataB64(Base64.getEncoder().encodeToString(byteFile));            
+            switch ((action - 1) % 3) {
 
-            fileInfo.setLength(byteFile.length);
-            cert.setFitxer(fileInfo);
+                case 2: {
+                    throw new Exception("Això és una prova d'Error");
+                }
 
-            return Response.ok().entity(cert).build();
+                case 1: {
+                    CertificatBean cert = new CertificatBean();
+                    cert.setTipus(CertificatType.VALOR);
+
+                    cert.setFitxer(null);
+                    cert.setUrl("https://governdigital.fundaciobit.org");
+
+                    return Response.ok().entity(cert).build();
+                }
+
+                default:
+                case 0: {
+                    CertificatBean cert = new CertificatBean();
+                    cert.setTipus(CertificatType.FITXER);
+
+                    CertificatFileInfo fileInfo = new CertificatFileInfo();
+                    fileInfo.setMime("text/plain");
+                    fileInfo.setNom("Hola.txt");
+
+                    byte[] byteFile = "Hola Caracola".getBytes();
+                    fileInfo.setBytes(byteFile);
+
+                    //fileInfo.setDataB64(Base64.getEncoder().encodeToString(byteFile));            
+
+                    fileInfo.setLength(byteFile.length);
+                    cert.setFitxer(fileInfo);
+
+                    return Response.ok().entity(cert).build();
+                }
+            }
 
         } catch (Throwable th) {
 
@@ -89,24 +132,43 @@ public class CertificatsService {
                 msg = th.getMessage();
             }
 
-            log.error("Error cridada api rest estadistiques accessos: " + msg, th);
+            log.error("Error cridada api rest CERTIFICATS: " + msg, th);
+            
+            
 
-            return Response.status(Response.Status.BAD_REQUEST).entity("{ \"error\" : " + "\"" + msg + "\" }").build();
+            // entity("{ \"error\" : " + "\"" + msg + "\" }")
+            return Response.status(Response.Status.BAD_REQUEST.getStatusCode(), msg).entity(msg).build();
 
         }
     }
 
-    @Operation(tags = { TAG }, operationId = "teCertificat", summary = "Retorna un CertificatInfo que indica en un boolea si l'usuari te certificat ", method = "get")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "404", description = " XYZ Paràmetres incorrectes", content = @Content(mediaType = MediaType.APPLICATION_JSON)),
-            @ApiResponse(responseCode = "200", description = "XYZ Llista d'accessos a CARPETA", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = CertificatInfo.class))) })
+    @Operation(
+            tags = { TAG },
+            operationId = "teCertificat",
+            summary = "Retorna un CertificatInfo que indica en un boolea si l'usuari te certificat ",
+            method = "get")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = " XYZ Paràmetres incorrectes",
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "XYZ Llista d'accessos a CARPETA",
+                            content = @Content(
+                                    mediaType = MediaType.APPLICATION_JSON,
+                                    schema = @Schema(implementation = CertificatInfo.class))) })
     @SecurityRequirement(name = "BasicAuth")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/teCertificat")
-    public Response teCertificat(
-            @Parameter(description = "DNI o NIF de la persona de la qual volem saber si té certificat.", required = false, example = "99999999X", schema = @Schema(implementation = String.class)) @QueryParam("dni") String dni) {
+    public Response teCertificat(@Parameter(
+            description = "DNI o NIF de la persona de la qual volem saber si té certificat.",
+            required = false,
+            example = "99999999X",
+            schema = @Schema(implementation = String.class)) @QueryParam("dni") String dni) {
         try {
             CertificatInfo cert = new CertificatInfo();
             cert.setTeCertificat(true);
