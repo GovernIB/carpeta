@@ -2122,7 +2122,7 @@ var CarpetaDatePicker = /** @class */ (function (_super) {
         return (React$1.createElement("div", { className: "form-group" },
             isMobileOnly_1 && React$1.createElement("style", { dangerouslySetInnerHTML: { __html: ".bootstrap-datetimepicker-widget { transform:scale(2.5,2.5); transform-origin:top left; }" } }),
             React$1.createElement("div", { className: "input-group date", id: this.datePickerName, "data-target-input": "nearest" },
-                React$1.createElement("input", { "data-toggle": "datetimepicker", className: "form-control datetimepicker-input", "data-target": "#" + this.datePickerName, style: { padding: "5px 5px 5px 10px" }, id: this.datePickerName + "Input", readOnly: false, value: this.props.defaultValue.toLocaleString(lang, {
+                React$1.createElement("input", { "data-toggle": "datetimepicker", className: "form-control datetimepicker-input", "data-target": "#" + this.datePickerName, style: { padding: "0px 0px 0px 10px" }, id: this.datePickerName + "Input", readOnly: false, value: this.props.defaultValue.toLocaleString(lang, {
                         year: "numeric",
                         month: "2-digit",
                         day: "2-digit",
