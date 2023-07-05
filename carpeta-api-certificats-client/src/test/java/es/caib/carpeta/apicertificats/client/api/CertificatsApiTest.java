@@ -23,10 +23,7 @@ import org.junit.Test;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-
 import org.junit.Ignore;
-
-
 
 /**
  * API tests for CertificatsApi
@@ -34,25 +31,23 @@ import org.junit.Ignore;
 @Ignore
 public class CertificatsApiTest {
 
-
     public static void main(String[] args) {
         try {
             new CertificatsApiTest().descarregarCertificatTest();
         } catch (ApiException e) {
-            
+
             System.out.println("Message: " + e.getMessage());
             System.out.println("Body: " + e.getResponseBody());
             System.out.println("Code: " + e.getCode());
-            
-            
+
             e.printStackTrace();
-            
+
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
-    
+
     /**
      * Retorna un certificat a CARPETA
      *
@@ -64,49 +59,45 @@ public class CertificatsApiTest {
     @Test
     public void descarregarCertificatTest() throws Exception {
         try {
-        ApiClient client = new ApiClient();
-        
-        
-        JSON serializer = client.getJSON();
-        Gson gson = new GsonBuilder().registerTypeAdapter(byte[].class, new ByteArrayDeserializer()).create();
-        serializer.setGson(gson);
-             
-        
-        HttpBasicAuth auth = (HttpBasicAuth) client.getAuthentication("BasicAuth");
-        auth.setUsername("carpetaapp");
-        auth.setPassword("carpetaapp");
+            ApiClient client = new ApiClient();
 
-        client.setBasePath("http://localhost:8080/carpetaapi/externa");
+            JSON serializer = client.getJSON();
+            Gson gson = new GsonBuilder().registerTypeAdapter(byte[].class, new ByteArrayDeserializer()).create();
+            serializer.setGson(gson);
 
-        CertificatsApi api = new CertificatsApi(client);
+            HttpBasicAuth auth = (HttpBasicAuth) client.getAuthentication("BasicAuth");
+            auth.setUsername("carpetaapp");
+            auth.setPassword("carpetaapp");
 
-        String dni = "99999999X";
-        if (api.teCertificat(dni).isTeCertificat()) {
-            String idioma = "ca";
-            CertificatBean response = api.descarregarCertificat(dni, idioma);
-            System.out.println("Tipus = " + response.getTipus());
-            if (response.getFitxer() != null) {
-            System.out.println("Nom Fitxer = " + response.getFitxer().getNom());
-            System.out.println("Mime Fitxer = " + response.getFitxer().getMime());
-            System.out.println("Length Fitxer = " + response.getFitxer().getLength());
-            System.out.println("Contingut Fitxer Codificat(byte[])=" + new String(response.getFitxer().getBytes()));
-            //System.out.println("Contingut Fitxer Codificat(base64)= " + response.getFitxer().getDataB64());
+            client.setBasePath("http://localhost:8080/carpetaapi/externa");
+
+            CertificatsApi api = new CertificatsApi(client);
+
+            String dni = "99999999X";
+            if (api.teCertificat(dni).isTeCertificat()) {
+                String idioma = "ca";
+                CertificatBean response = api.descarregarCertificat(dni, idioma);
+                System.out.println("Tipus = " + response.getTipus());
+                if (response.getFitxer() != null) {
+                    System.out.println("Nom Fitxer = " + response.getFitxer().getNom());
+                    System.out.println("Mime Fitxer = " + response.getFitxer().getMime());
+                    System.out.println("Length Fitxer = " + response.getFitxer().getLength());
+                    System.out.println(
+                            "Contingut Fitxer Codificat(byte[])=" + new String(response.getFitxer().getBytes()));
+                    //System.out.println("Contingut Fitxer Codificat(base64)= " + response.getFitxer().getDataB64());
+                } else {
+                    System.out.println("URL = " + response.getUrl());
+                }
             } else {
-                System.out.println("URL = " + response.getUrl());
-            }
-        } else {
-            System.out.println("L'usuari amb DNI: " + dni + " no te certificats per aquest plugin.");
+                System.out.println("L'usuari amb DNI: " + dni + " no te certificats per aquest plugin.");
 
-        }
-        }catch(ApiException api) {
-            
+            }
+        } catch (ApiException api) {
+
             throw new Exception(api.getMessage() + ": " + api.getResponseBody() + "(ErrorCode: " + api.getCode() + ")");
-            
+
         }
 
     }
-    
-    
-  
 
 }
