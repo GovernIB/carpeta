@@ -1,6 +1,5 @@
 package org.fundaciobit.pluginsib.carpetafront.certificats;
 
-
 import es.caib.carpeta.apicertificats.client.api.CertificatsApi;
 import es.caib.carpeta.apicertificats.client.model.CertificatBean;
 import es.caib.carpeta.apicertificats.client.model.CertificatFileInfo;
@@ -26,7 +25,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
-
 
 /**
  * @author anadal
@@ -128,8 +126,8 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         } else if (query.startsWith(URL_REST_SERVICE_TE_CERTIFICATS)) {
 
-            teCertificatRest(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
-                    userData, administrationEncriptedID, locale, isGet);
+            teCertificatRest(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                    administrationEncriptedID, locale, isGet);
 
         } else if (query.startsWith(URL_REST_SERVICE_DESCARREGA_CERTIFICATS)) {
 
@@ -186,27 +184,27 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             Gson json = new Gson();
 
             TitlesInfo titles = getTitlesInfo();
-            
+
             map.put("titles", json.toJson(titles.getTitlesByLang()));
 
             map.put("subtitles", json.toJson(titles.getSubtitlesByLang()));
-            
-            String activeStr = getPropertyRequired(CERTIFICATS_PROPERTY_BASE+"active");
+
+            String activeStr = getPropertyRequired(CERTIFICATS_PROPERTY_BASE + "active");
 
             String[] active = activeStr.split(",");
-            
+
             PluginInfo[] plugins = new PluginInfo[active.length];
             String lang = locale.getLanguage();
-            
+
             for (int i = 0; i < active.length; i++) {
                 PluginInfo p = new PluginInfo();
                 String num = active[i];
                 p.setPluginNumber(Integer.parseInt(num));
-                p.setTitle(getPropertyRequired(CERTIFICATS_PROPERTY_BASE+num+".label."+lang));
+                p.setTitle(getPropertyRequired(CERTIFICATS_PROPERTY_BASE + num + ".label." + lang));
                 p.setSubtitle("XYZ");
                 plugins[i] = p;
             }
-            
+
             map.put("pluginsToLoad", json.toJson(plugins));
 
             log.info("absolutePluginRequestPath ==> " + absolutePluginRequestPath);
@@ -301,12 +299,10 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, Boolean isGet) {
         try {
-            
-            int pos = query.lastIndexOf('/');
-            String numeroStr = query.substring(pos+1);
-            CertificatsApi api = getApi(Integer.parseInt(numeroStr));
-            
 
+            int pos = query.lastIndexOf('/');
+            String numeroStr = query.substring(pos + 1);
+            CertificatsApi api = getApi(Integer.parseInt(numeroStr));
 
             /*
              * String dni = "99999999X";
@@ -326,11 +322,12 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
              * 
              * }
              */
-            
+
             log.info("XYZ ZZZ userData AdministrationID = " + userData.getAdministrationID());
             CertificatInfo teCertInfo = api.teCertificat(userData.getAdministrationID());
             Boolean teCertificat = teCertInfo.isTeCertificat();
-            String url = teCertificat ? absolutePluginRequestPath + "/" + URL_REST_SERVICE_DESCARREGA_CERTIFICATS +"/"+numeroStr 
+            String url = teCertificat
+                    ? absolutePluginRequestPath + "/" + URL_REST_SERVICE_DESCARREGA_CERTIFICATS + "/" + numeroStr
                     : null;
 
             Gson gson = new Gson();
@@ -340,7 +337,7 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             response.setContentType("application/json");
             response.setCharacterEncoding("utf-8");
-            
+
             Thread.sleep(1000);
 
             response.getWriter().write(json);
@@ -356,48 +353,53 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     protected static final String URL_REST_SERVICE_DESCARREGA_CERTIFICATS = "descarregaCertificatsRest";
 
     public void descarregaCertificatsRest(String absolutePluginRequestPath, String relativePluginRequestPath,
-            String query,
-            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String query, HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, Boolean isGet) {
         try {
 
             // XYZ ZZZ Centralitzar en un mètode i agafar dades de propietats
-            log.info("XYZ ZZZ query = "+query);
+            log.info("XYZ ZZZ query = " + query);
             int pos = query.lastIndexOf('/');
-            log.info("XYZ ZZZ pos = "+pos);
-            String numeroStr = query.substring(pos+1);
-            log.info("XYZ ZZZ numeroStr = |"+numeroStr+"|");
+            log.info("XYZ ZZZ pos = " + pos);
+            String numeroStr = query.substring(pos + 1);
+            log.info("XYZ ZZZ numeroStr = |" + numeroStr + "|");
             CertificatsApi api = getApi(Integer.parseInt(numeroStr));
 
-            log.info("XYZ ZZZ AdministrationID = "+userData.getAdministrationID());
-            CertificatBean cert = api.descarregarCertificat(userData.getAdministrationID(), locale.getLanguage());
+            log.info("XYZ ZZZ AdministrationID = " + userData.getAdministrationID());
+            if (api.teCertificat(userData.getAdministrationID()).isTeCertificat()) {
+                try {
+                CertificatBean cert = api.descarregarCertificat(userData.getAdministrationID(), locale.getLanguage());
+                    log.info("Tipus = " + cert.getTipus());
+                
+                CertificatFileInfo file = cert.getFitxer();
+                    // XYZ ZZZ
+                    log.info("Nom Fitxer = " + file.getNom());
+                    log.info("Mime Fitxer = " + file.getMime());
+                    log.info("Length Fitxer = " + file.getLength());
 
-            CertificatFileInfo file = cert.getFitxer();
+                    // modifies response
+                    response.setContentType(file.getMime());
+                    response.setContentLength(file.getLength());
 
-            // XYZ ZZZ
-            log.info("Tipus = " + cert.getTipus());
-            log.info("Nom Fitxer = " + file.getNom());
-            log.info("Mime Fitxer = " + file.getMime());
-            log.info("Length Fitxer = " + file.getLength());
-            
+                    String headerKey = "Content-Disposition";
+                    String headerValue = String.format("attachment; filename=\"%s\"", file.getNom());
+                    response.setHeader(headerKey, headerValue);
 
-            // modifies response
-            response.setContentType(file.getMime());
-            response.setContentLength(file.getLength());
+                    //byte[] originalData = Base64.getDecoder().decode(file.getDataB64());
 
-            String headerKey = "Content-Disposition";
-            String headerValue = String.format("attachment; filename=\"%s\"", file.getNom());
-            response.setHeader(headerKey, headerValue);
-            
-            //byte[] originalData = Base64.getDecoder().decode(file.getDataB64());
-            
-            OutputStream outStream = response.getOutputStream();
-            
-            outStream.write(file.getBytes());
-            
-            outStream.close();
-/*
- * FileInputStream inStream = new FileInputStream(file.getBytes());
+                    OutputStream outStream = response.getOutputStream();
+
+                    outStream.write(file.getBytes());
+
+                    outStream.close();
+                }catch(Exception e) {
+                    log.error("Error descarregant certificat: "+e.getMessage());
+                }
+                
+            }
+
+            /*
+             * FileInputStream inStream = new FileInputStream(file.getBytes());
             OutputStream outStream = response.getOutputStream();
             
             
@@ -408,10 +410,10 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 outStream.write(buffer, 0, bytesRead);
             }
              
-
+            
             inStream.close();
             outStream.close();
-      */
+                  */
 
         } catch (Exception e) {
             log.error("Error comprovant possesió de certificats: " + e.getMessage(), e);
@@ -422,16 +424,15 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     private CertificatsApi getApi(int pluginNumber) throws Exception {
         ApiClient client = new ApiClient();
-        
+
         JSON serializer = client.getJSON();
         Gson gson = new GsonBuilder().registerTypeAdapter(byte[].class, new ByteArrayDeserializer()).create();
         serializer.setGson(gson);
-        
-        
-        client.setBasePath(getPropertyRequired(CERTIFICATS_PROPERTY_BASE+pluginNumber+".url"));
+
+        client.setBasePath(getPropertyRequired(CERTIFICATS_PROPERTY_BASE + pluginNumber + ".url"));
         HttpBasicAuth auth = (HttpBasicAuth) client.getAuthentication("BasicAuth");
-        auth.setUsername(getPropertyRequired(CERTIFICATS_PROPERTY_BASE+pluginNumber+".username"));
-        auth.setPassword(getPropertyRequired(CERTIFICATS_PROPERTY_BASE+pluginNumber+".password"));
+        auth.setUsername(getPropertyRequired(CERTIFICATS_PROPERTY_BASE + pluginNumber + ".username"));
+        auth.setPassword(getPropertyRequired(CERTIFICATS_PROPERTY_BASE + pluginNumber + ".password"));
 
         CertificatsApi api = new CertificatsApi(client);
         return api;
