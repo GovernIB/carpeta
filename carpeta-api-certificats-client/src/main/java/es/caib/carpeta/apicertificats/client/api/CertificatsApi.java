@@ -58,12 +58,13 @@ public class CertificatsApi {
      * Build call for descarregarCertificat
      * @param dni DNI o NIF de la persona de la qual volem obtenir el certificat. (required)
      * @param idioma Codi de l&#x27;idioma (required)
+     * @param pluginNumber Numero de plugin (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call descarregarCertificatCall(String dni, String idioma, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call descarregarCertificatCall(String dni, String idioma, String pluginNumber, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -77,6 +78,8 @@ public class CertificatsApi {
         localVarQueryParams.addAll(apiClient.parameterToPair("idioma", idioma));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        if (pluginNumber != null)
+        localVarHeaderParams.put("pluginNumber", apiClient.parameterToString(pluginNumber));
 
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
@@ -109,7 +112,7 @@ public class CertificatsApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call descarregarCertificatValidateBeforeCall(String dni, String idioma, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call descarregarCertificatValidateBeforeCall(String dni, String idioma, String pluginNumber, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         // verify the required parameter 'dni' is set
         if (dni == null) {
             throw new ApiException("Missing the required parameter 'dni' when calling descarregarCertificat(Async)");
@@ -119,7 +122,7 @@ public class CertificatsApi {
             throw new ApiException("Missing the required parameter 'idioma' when calling descarregarCertificat(Async)");
         }
         
-        com.squareup.okhttp.Call call = descarregarCertificatCall(dni, idioma, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = descarregarCertificatCall(dni, idioma, pluginNumber, progressListener, progressRequestListener);
         return call;
 
         
@@ -133,11 +136,12 @@ public class CertificatsApi {
      * 
      * @param dni DNI o NIF de la persona de la qual volem obtenir el certificat. (required)
      * @param idioma Codi de l&#x27;idioma (required)
+     * @param pluginNumber Numero de plugin (optional)
      * @return CertificatBean
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public CertificatBean descarregarCertificat(String dni, String idioma) throws ApiException {
-        ApiResponse<CertificatBean> resp = descarregarCertificatWithHttpInfo(dni, idioma);
+    public CertificatBean descarregarCertificat(String dni, String idioma, String pluginNumber) throws ApiException {
+        ApiResponse<CertificatBean> resp = descarregarCertificatWithHttpInfo(dni, idioma, pluginNumber);
         return resp.getData();
     }
 
@@ -146,11 +150,12 @@ public class CertificatsApi {
      * 
      * @param dni DNI o NIF de la persona de la qual volem obtenir el certificat. (required)
      * @param idioma Codi de l&#x27;idioma (required)
+     * @param pluginNumber Numero de plugin (optional)
      * @return ApiResponse&lt;CertificatBean&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<CertificatBean> descarregarCertificatWithHttpInfo(String dni, String idioma) throws ApiException {
-        com.squareup.okhttp.Call call = descarregarCertificatValidateBeforeCall(dni, idioma, null, null);
+    public ApiResponse<CertificatBean> descarregarCertificatWithHttpInfo(String dni, String idioma, String pluginNumber) throws ApiException {
+        com.squareup.okhttp.Call call = descarregarCertificatValidateBeforeCall(dni, idioma, pluginNumber, null, null);
         Type localVarReturnType = new TypeToken<CertificatBean>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -160,11 +165,12 @@ public class CertificatsApi {
      * 
      * @param dni DNI o NIF de la persona de la qual volem obtenir el certificat. (required)
      * @param idioma Codi de l&#x27;idioma (required)
+     * @param pluginNumber Numero de plugin (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call descarregarCertificatAsync(String dni, String idioma, final ApiCallback<CertificatBean> callback) throws ApiException {
+    public com.squareup.okhttp.Call descarregarCertificatAsync(String dni, String idioma, String pluginNumber, final ApiCallback<CertificatBean> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -185,20 +191,21 @@ public class CertificatsApi {
             };
         }
 
-        com.squareup.okhttp.Call call = descarregarCertificatValidateBeforeCall(dni, idioma, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = descarregarCertificatValidateBeforeCall(dni, idioma, pluginNumber, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<CertificatBean>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
     }
     /**
      * Build call for teCertificat
-     * @param dni DNI o NIF de la persona de la qual volem saber si té certificat. (optional)
+     * @param dni DNI o NIF de la persona de la qual volem saber si té certificat. (required)
+     * @param pluginNumber Numero de plugin (optional)
      * @param progressListener Progress listener
      * @param progressRequestListener Progress request listener
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call teCertificatCall(String dni, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call teCertificatCall(String dni, String pluginNumber, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
         
         // create path and map variables
@@ -210,6 +217,8 @@ public class CertificatsApi {
         localVarQueryParams.addAll(apiClient.parameterToPair("dni", dni));
 
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        if (pluginNumber != null)
+        localVarHeaderParams.put("pluginNumber", apiClient.parameterToString(pluginNumber));
 
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
@@ -242,9 +251,13 @@ public class CertificatsApi {
     }
     
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call teCertificatValidateBeforeCall(String dni, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call teCertificatValidateBeforeCall(String dni, String pluginNumber, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+        // verify the required parameter 'dni' is set
+        if (dni == null) {
+            throw new ApiException("Missing the required parameter 'dni' when calling teCertificat(Async)");
+        }
         
-        com.squareup.okhttp.Call call = teCertificatCall(dni, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = teCertificatCall(dni, pluginNumber, progressListener, progressRequestListener);
         return call;
 
         
@@ -256,24 +269,26 @@ public class CertificatsApi {
     /**
      * Retorna un CertificatInfo que indica en un boolea si l&#x27;usuari te certificat 
      * 
-     * @param dni DNI o NIF de la persona de la qual volem saber si té certificat. (optional)
+     * @param dni DNI o NIF de la persona de la qual volem saber si té certificat. (required)
+     * @param pluginNumber Numero de plugin (optional)
      * @return CertificatInfo
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public CertificatInfo teCertificat(String dni) throws ApiException {
-        ApiResponse<CertificatInfo> resp = teCertificatWithHttpInfo(dni);
+    public CertificatInfo teCertificat(String dni, String pluginNumber) throws ApiException {
+        ApiResponse<CertificatInfo> resp = teCertificatWithHttpInfo(dni, pluginNumber);
         return resp.getData();
     }
 
     /**
      * Retorna un CertificatInfo que indica en un boolea si l&#x27;usuari te certificat 
      * 
-     * @param dni DNI o NIF de la persona de la qual volem saber si té certificat. (optional)
+     * @param dni DNI o NIF de la persona de la qual volem saber si té certificat. (required)
+     * @param pluginNumber Numero de plugin (optional)
      * @return ApiResponse&lt;CertificatInfo&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<CertificatInfo> teCertificatWithHttpInfo(String dni) throws ApiException {
-        com.squareup.okhttp.Call call = teCertificatValidateBeforeCall(dni, null, null);
+    public ApiResponse<CertificatInfo> teCertificatWithHttpInfo(String dni, String pluginNumber) throws ApiException {
+        com.squareup.okhttp.Call call = teCertificatValidateBeforeCall(dni, pluginNumber, null, null);
         Type localVarReturnType = new TypeToken<CertificatInfo>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -281,12 +296,13 @@ public class CertificatsApi {
     /**
      * Retorna un CertificatInfo que indica en un boolea si l&#x27;usuari te certificat  (asynchronously)
      * 
-     * @param dni DNI o NIF de la persona de la qual volem saber si té certificat. (optional)
+     * @param dni DNI o NIF de la persona de la qual volem saber si té certificat. (required)
+     * @param pluginNumber Numero de plugin (optional)
      * @param callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call teCertificatAsync(String dni, final ApiCallback<CertificatInfo> callback) throws ApiException {
+    public com.squareup.okhttp.Call teCertificatAsync(String dni, String pluginNumber, final ApiCallback<CertificatInfo> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -307,7 +323,7 @@ public class CertificatsApi {
             };
         }
 
-        com.squareup.okhttp.Call call = teCertificatValidateBeforeCall(dni, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = teCertificatValidateBeforeCall(dni, pluginNumber, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<CertificatInfo>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
