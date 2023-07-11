@@ -61,7 +61,7 @@ class Regweb extends React.Component<RegwebProps, RegwebState> {
     this.errorEnFiltre = false;
 
     this.state = {
-      numeroRegistro: null,
+      numeroRegistro: props.numeroregistro,
     };
 
     this.handleSubmitSearcher = this.handleSubmitSearcher.bind(this);
