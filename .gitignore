@@ -283,3 +283,5 @@ carpeta-pluginsib/pluginsib-carpetafront/notib/react/dist/src/
 /carpeta-pluginsib/pluginsib-carpetafront/carpetacommonreactlib/build/index.es.js.map
 carpeta-pluginsib/pluginsib-carpetafront/certificats/react/node_modules/
 node_modules/
+/carpeta-front/reactnative/CarpetaExpoApp/cleancache.bat
+/carpeta-front/reactnative/CarpetaExpoApp/prebuild.bat

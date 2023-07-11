@@ -68,15 +68,17 @@ public class CertificatsApiTest {
             HttpBasicAuth auth = (HttpBasicAuth) client.getAuthentication("BasicAuth");
             auth.setUsername("carpetaapp");
             auth.setPassword("carpetaapp");
-
+            
             client.setBasePath("http://localhost:8080/carpetaapi/externa");
+            
+            String pluginNumber = "2";
 
             CertificatsApi api = new CertificatsApi(client);
 
             String dni = "99999999X";
-            if (api.teCertificat(dni).isTeCertificat()) {
+            if (api.teCertificat(dni,pluginNumber).isTeCertificat()) {
                 String idioma = "ca";
-                CertificatBean response = api.descarregarCertificat(dni, idioma);
+                CertificatBean response = api.descarregarCertificat(dni, idioma, pluginNumber);
                 System.out.println("Tipus = " + response.getTipus());
                 if (response.getFitxer() != null) {
                     System.out.println("Nom Fitxer = " + response.getFitxer().getNom());

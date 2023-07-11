@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 <a name="descarregarCertificat"></a>
 # **descarregarCertificat**
-> CertificatBean descarregarCertificat(dni, idioma)
+> CertificatBean descarregarCertificat(dni, idioma, pluginNumber)
 
 Retorna un certificat a CARPETA
 
@@ -31,8 +31,9 @@ BasicAuth.setPassword("YOUR PASSWORD");
 CertificatsApi apiInstance = new CertificatsApi();
 String dni = "dni_example"; // String | DNI o NIF de la persona de la qual volem obtenir el certificat.
 String idioma = "idioma_example"; // String | Codi de l'idioma
+String pluginNumber = "pluginNumber_example"; // String | Numero de plugin
 try {
-    CertificatBean result = apiInstance.descarregarCertificat(dni, idioma);
+    CertificatBean result = apiInstance.descarregarCertificat(dni, idioma, pluginNumber);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling CertificatsApi#descarregarCertificat");
@@ -46,6 +47,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dni** | **String**| DNI o NIF de la persona de la qual volem obtenir el certificat. |
  **idioma** | **String**| Codi de l&#x27;idioma |
+ **pluginNumber** | **String**| Numero de plugin | [optional]
 
 ### Return type
 
@@ -62,7 +64,7 @@ Name | Type | Description  | Notes
 
 <a name="teCertificat"></a>
 # **teCertificat**
-> CertificatInfo teCertificat(dni)
+> CertificatInfo teCertificat(dni, pluginNumber)
 
 Retorna un CertificatInfo que indica en un boolea si l&#x27;usuari te certificat 
 
@@ -83,8 +85,9 @@ BasicAuth.setPassword("YOUR PASSWORD");
 
 CertificatsApi apiInstance = new CertificatsApi();
 String dni = "dni_example"; // String | DNI o NIF de la persona de la qual volem saber si té certificat.
+String pluginNumber = "pluginNumber_example"; // String | Numero de plugin
 try {
-    CertificatInfo result = apiInstance.teCertificat(dni);
+    CertificatInfo result = apiInstance.teCertificat(dni, pluginNumber);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling CertificatsApi#teCertificat");
@@ -96,7 +99,8 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **dni** | **String**| DNI o NIF de la persona de la qual volem saber si té certificat. | [optional]
+ **dni** | **String**| DNI o NIF de la persona de la qual volem saber si té certificat. |
+ **pluginNumber** | **String**| Numero de plugin | [optional]
 
 ### Return type
 

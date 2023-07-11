@@ -63,12 +63,55 @@ public class Checker {
         Gson gson = new Gson();
         ReactJSChecker packageBean = gson.fromJson(new FileReader(p), ReactJSChecker.class);
 
-        checkProperty(pluginName, "getI18next", packageBean.getDependencies().getI18next());
-        checkProperty(pluginName, "getAxios", packageBean.getDependencies().getAxios());
-        checkProperty(pluginName, "getReact", packageBean.getDependencies().getReact());
-        checkProperty(pluginName, "getReactDom", packageBean.getDependencies().getReactDom());
+        Dependencies deps = packageBean.getDependencies();
         
-        checkProperty(pluginName, "getWebpack", packageBean.getDevDependencies().getWebpack());
+        checkProperty(pluginName, "getAxios", deps.getAxios());
+        
+        
+        
+        //checkProperty(pluginName, "getCarpetacommonreactlib", deps.getCarpetacommonreactlib());
+        
+        
+        checkProperty(pluginName, "getHttpsBrowserify", deps.getHttpsBrowserify());
+        checkProperty(pluginName, "getI18next", deps.getI18next());
+        checkProperty(pluginName, "getI18nextBrowserLanguagedetector", deps.getI18nextBrowserLanguagedetector());
+        checkProperty(pluginName, "getI18nextHttpBackend", deps.getI18nextHttpBackend());
+        checkProperty(pluginName, "getHttpsBrowserify", deps.getHttpsBrowserify());
+        checkProperty(pluginName, "getReact", deps.getReact());
+        checkProperty(pluginName, "getReactDom", deps.getReactDom());
+        checkProperty(pluginName, "getReactI18next", deps.getReactI18next());
+        
+        
+        
+        
+        DevDependencies devDep = packageBean.getDevDependencies();
+        checkProperty(pluginName, "getBabelCore", devDep.getBabelCore());
+        checkProperty(pluginName, "getBabelLoader", devDep.getBabelLoader());
+        checkProperty(pluginName, "getBabelPluginProposalClassProperties", devDep.getBabelPluginProposalClassProperties());
+        checkProperty(pluginName, "getBabelPresetEnv", devDep.getBabelPresetEnv());
+        checkProperty(pluginName, "getBabelPresetReact", devDep.getBabelPresetReact());
+        
+        checkProperty(pluginName, "getCssLoader", devDep.getCssLoader());
+        checkProperty(pluginName, "getRimraf", devDep.getRimraf());
+        checkProperty(pluginName, "getStyleLoader", devDep.getStyleLoader());
+        checkProperty(pluginName, "getTsLoader", devDep.getTsLoader());
+        checkProperty(pluginName, "getTsNode", devDep.getTsNode());
+        
+        
+        checkProperty(pluginName, "getTypescript", devDep.getTypescript());
+        checkProperty(pluginName, "getTypesJquery", devDep.getTypesJquery());
+        checkProperty(pluginName, "getTypesNode", devDep.getTypesNode());
+        checkProperty(pluginName, "getTypesReact", devDep.getTypesReact());
+        checkProperty(pluginName, "getTypesReactDom", devDep.getTypesReactDom());
+        
+        checkProperty(pluginName, "getTypesWebpack", devDep.getTypesWebpack());
+        checkProperty(pluginName, "getUrlLoader", devDep.getUrlLoader());
+        checkProperty(pluginName, "getWebpack", devDep.getWebpack());
+        checkProperty(pluginName, "getWebpackCli", devDep.getWebpackCli());
+        
+        
+        checkProperty(pluginName, "getWebpackDevServer", devDep.getWebpackDevServer());
+        
         
         
         //"webpack": "^5.74.0",

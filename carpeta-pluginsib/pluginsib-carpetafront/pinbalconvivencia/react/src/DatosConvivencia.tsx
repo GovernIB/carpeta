@@ -312,9 +312,10 @@ class DatosConvivencia extends React.Component<DatosConvivenciaProps, DatosConvi
                     {alerta}
                 </div>;
 
+                var tt = t('pinbalConvivenciaConsulta');
                 contentApp = <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil wAuto" tabIndex={510}>
                     <div className="col-sm-1 float-left">
-                        <span className="oi oi-bell iconaFormApp" title={t('pinbalConvivenciaConsulta')} style={{ verticalAlign: 'sub' }} />
+                        <span className="oi oi-bell iconaFormApp" title={tt} style={{ verticalAlign: 'sub' }} />
                     </div>
                     <div className="col-sm-10 float-right">
                         {alertaApp}

@@ -324,7 +324,8 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
              */
 
             log.info("XYZ ZZZ userData AdministrationID = " + userData.getAdministrationID());
-            CertificatInfo teCertInfo = api.teCertificat(userData.getAdministrationID());
+                                    
+            CertificatInfo teCertInfo = api.teCertificat(userData.getAdministrationID(), numeroStr);
             Boolean teCertificat = teCertInfo.isTeCertificat();
             String url = teCertificat
                     ? absolutePluginRequestPath + "/" + URL_REST_SERVICE_DESCARREGA_CERTIFICATS + "/" + numeroStr
@@ -366,9 +367,11 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             CertificatsApi api = getApi(Integer.parseInt(numeroStr));
 
             log.info("XYZ ZZZ AdministrationID = " + userData.getAdministrationID());
-            if (api.teCertificat(userData.getAdministrationID()).isTeCertificat()) {
+            //if (api.teCertificat(userData.getAdministrationID()).isTeCertificat()) 
+            {
                 try {
-                CertificatBean cert = api.descarregarCertificat(userData.getAdministrationID(), locale.getLanguage());
+                    
+                CertificatBean cert = api.descarregarCertificat(userData.getAdministrationID(), locale.getLanguage(), numeroStr);
                     log.info("Tipus = " + cert.getTipus());
                 
                 CertificatFileInfo file = cert.getFitxer();
@@ -424,6 +427,8 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     private CertificatsApi getApi(int pluginNumber) throws Exception {
         ApiClient client = new ApiClient();
+        
+        client.addDefaultHeader("pluginNumber", String.valueOf(pluginNumber));
 
         JSON serializer = client.getJSON();
         Gson gson = new GsonBuilder().registerTypeAdapter(byte[].class, new ByteArrayDeserializer()).create();
@@ -435,6 +440,7 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         auth.setPassword(getPropertyRequired(CERTIFICATS_PROPERTY_BASE + pluginNumber + ".password"));
 
         CertificatsApi api = new CertificatsApi(client);
+        
         return api;
     }
 

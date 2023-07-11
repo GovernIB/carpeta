@@ -1,10 +1,10 @@
 package es.caib.carpeta.api.externa.certificats;
 
-import java.util.Base64;
 import java.util.Locale;
 import javax.annotation.security.RunAs;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -17,6 +17,7 @@ import org.fundaciobit.genapp.common.i18n.I18NException;
 import es.caib.carpeta.commons.utils.Constants;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -41,8 +42,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 @OpenAPIDefinition(tags = @Tag(name = "Certificats", description = "Certificats"))
 public class CertificatsService {
 
-    public static int action = 0;
-
     public static final String TAG = "Certificats";
 
     protected static Logger log = Logger.getLogger(CertificatsService.class);
@@ -54,6 +53,10 @@ public class CertificatsService {
             method = "get")
     @ApiResponses(
             value = {
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Error intern de servidor",
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
                     @ApiResponse(
                             responseCode = "404",
                             description = "Paràmetres incorrectes",
@@ -80,18 +83,35 @@ public class CertificatsService {
                     description = "Codi de l'idioma",
                     required = true,
                     example = "ca",
-                    schema = @Schema(implementation = String.class)) @QueryParam("idioma") String idiomaRequest) {
+                    schema = @Schema(implementation = String.class)) @QueryParam("idioma") String idiomaRequest,
+            @Parameter(
+                    in = ParameterIn.HEADER,
+                    description = "Numero de plugin",
+                    required = false,
+                    example = "1",
+                    schema = @Schema(implementation = String.class)) @HeaderParam("pluginNumber") String pluginNumber) {
+
+        log.info("\n\n\n DOWN HEADER pluginNumber => ]" + pluginNumber + "[  \n\n\n");
+
         try {
 
-            action++;
+            if (pluginNumber == null) {
+                pluginNumber = "2";
+            }
 
-            switch ((action - 1) % 3) {
+            switch (pluginNumber) {
 
-                case 2: {
+                case "4": // Error consultant si té o no certificat
+                case "1": // No té certificat 
+                {
+                    throw new Exception("No té certificat. No hauria d'arribar MAI aquí.");
+                }
+
+                case "5": {
                     throw new Exception("Això és una prova d'Error");
                 }
 
-                case 1: {
+                case "3": {
                     CertificatBean cert = new CertificatBean();
                     cert.setTipus(CertificatType.VALOR);
 
@@ -102,7 +122,7 @@ public class CertificatsService {
                 }
 
                 default:
-                case 0: {
+                case "2": {
                     CertificatBean cert = new CertificatBean();
                     cert.setTipus(CertificatType.FITXER);
 
@@ -133,12 +153,8 @@ public class CertificatsService {
             }
 
             log.error("Error cridada api rest CERTIFICATS: " + msg, th);
-            
-            
 
-            // entity("{ \"error\" : " + "\"" + msg + "\" }")
-            return Response.status(Response.Status.BAD_REQUEST.getStatusCode(), msg).entity(msg).build();
-
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), msg).entity(msg).build();
         }
     }
 
@@ -149,6 +165,10 @@ public class CertificatsService {
             method = "get")
     @ApiResponses(
             value = {
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Error intern de servidor",
+                            content = @Content(mediaType = MediaType.APPLICATION_JSON)),
                     @ApiResponse(
                             responseCode = "404",
                             description = " XYZ Paràmetres incorrectes",
@@ -164,22 +184,45 @@ public class CertificatsService {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("/teCertificat")
-    public Response teCertificat(@Parameter(
-            description = "DNI o NIF de la persona de la qual volem saber si té certificat.",
-            required = false,
-            example = "99999999X",
-            schema = @Schema(implementation = String.class)) @QueryParam("dni") String dni) {
+    public Response teCertificat(
+            @Parameter(
+                    description = "DNI o NIF de la persona de la qual volem saber si té certificat.",
+                    required = true,
+                    example = "99999999X",
+                    schema = @Schema(implementation = String.class)) @QueryParam("dni") String dni,
+            @Parameter(
+                    in = ParameterIn.HEADER,
+                    description = "Numero de plugin",
+                    required = false,
+                    example = "1",
+                    schema = @Schema(implementation = String.class)) @HeaderParam("pluginNumber") String pluginNumber) {
+
+        log.info("\n\n\n TE HEADER pluginNumber => ]" + pluginNumber + "[  \n\n\n");
+
+        if (pluginNumber == null) {
+            pluginNumber = "2";
+        }
+
         try {
+
+            if ("4".equals(pluginNumber)) { // // Error consultant si té o no certificat
+
+                throw new Exception("Simulant un error en la consulta de si té o no certificat ...");
+
+            }
+
             CertificatInfo cert = new CertificatInfo();
-            cert.setTeCertificat(true);
+            if ("1".equals(pluginNumber)) {
+                cert.setTeCertificat(false);
+            } else {
+                cert.setTeCertificat(true);
+            }
             cert.setAdministrationId(dni);
             return Response.ok().entity(cert).build();
         } catch (Throwable th) {
-
-            String msg = "Error cridada api rest estadistiques accessos: " + th.getMessage();
-
+            final String msg = "Error cridada api rest estadistiques accessos: " + th.getMessage();
             log.error(msg, th);
-            return Response.status(Response.Status.BAD_REQUEST).entity("{ \"error\" : " + "\"" + msg + "\" }").build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(msg).build();
 
         }
 
