@@ -10,7 +10,7 @@
     "build": "webpack-cli"
   },
   "keywords": [],
-  "author": "xmassoft",
+  "author": "anadal",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.1",
