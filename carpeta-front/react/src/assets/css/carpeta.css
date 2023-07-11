@@ -189,7 +189,7 @@ img:hover {
     height: 31px;
 }
 .imc--gestions::before { background-image: url(src/assets/images/folder.png); }
-.imc--dades::before { background-image: url(src/assets/images/dades.PNG); }
+.imc--dades::before { background-image: url(src/assets/images/dades.png); }
 .upper{
 	text-transform: uppercase;
 }
@@ -716,7 +716,7 @@ a.imc-bt-xarxa:hover {
 }
 */
 
-.imc--recarregar::before { background-image: url(../images/recarregar.PNG); }
+.imc--recarregar::before { background-image: url(../images/recarregar.png); }
 
 .errorConnexio{
 	padding-left: 5em;
