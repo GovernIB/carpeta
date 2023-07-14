@@ -1,0 +1,182 @@
+openapi: 3.0.1
+info:
+  title: API REST EXTERNA de Carpeta
+  description: Conjunt de Serveis REST de Carpeta per ser accedits des de l'exterior
+  contact:
+    name: Departament de Govern Digital a la Fundació Bit
+    url: http://otae.fundaciobit.org
+    email: governdigital.carpeta@fundaciobit.org
+  license:
+    name: License Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+  version: 1.0.0
+externalDocs:
+  description: Java Client (GovernIB Github)
+  url: https://github.com/GovernIB/carpeta/tree/carpeta-1.1/carpeta-api-externa-client
+servers:
+- url: ../../carpetaapi/externa
+  variables: {}
+- url: http://localhost:8080/carpetaapi/externa
+  variables: {}
+- url: https://dev.caib.es/carpetaapi/externa
+  variables: {}
+- url: https://proves.caib.es/carpetaapi/externa
+  variables: {}
+- url: https://se.caib.es/carpetaapi/externa
+  variables: {}
+- url: https://www.caib.es/carpetaapi/externa
+  variables: {}
+tags:
+- name: Accessos
+  description: Estadistiques d'Accessos
+- name: Estadistiques
+  description: Estadistiques d'Accessos
+- name: Securetat
+  description: Exemple de Securetat
+paths:
+  /services/accessos:
+    get:
+      tags:
+      - Accessos
+      summary: Retorna la llista d`accessos a CARPETA
+      operationId: accessos
+      parameters:
+      - name: inici
+        in: query
+        description: "Data d'inici, en format YYYY-MM-DD, a partir de la qual volem\
+          \ obtenir estadistiques"
+        schema:
+          type: string
+        example: 2021-04-24
+      - name: fi
+        in: query
+        description: "Data fi, en format YYYY-MM-DD, fins la qual volem tenir estadistiques"
+        schema:
+          type: string
+        example: 2021-08-12
+      - name: entitat
+        in: query
+        description: Codi de l'entitat de la qual obtenim les estadistiques
+        required: true
+        schema:
+          type: string
+        example: caib
+      - name: idioma
+        in: query
+        description: Codi de l'idioma
+        schema:
+          type: string
+        example: ca
+      responses:
+        "404":
+          description: Paràmetres incorrectes
+          content:
+            application/json: {}
+        "200":
+          description: Llista d'accessos a CARPETA
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginaAcces'
+      deprecated: true
+  /public/estadistiques/accessos:
+    get:
+      tags:
+      - Estadistiques
+      summary: Retorna la llista d`accessos a CARPETA
+      operationId: accessos_1
+      parameters:
+      - name: inici
+        in: query
+        description: "Data d'inici, en format YYYY-MM-DD, a partir de la qual volem\
+          \ obtenir estadistiques"
+        schema:
+          type: string
+        example: 2021-04-24
+      - name: fi
+        in: query
+        description: "Data fi, en format YYYY-MM-DD, fins la qual volem tenir estadistiques"
+        schema:
+          type: string
+        example: 2021-08-12
+      - name: entitat
+        in: query
+        description: Codi de l'entitat de la qual obtenim les estadistiques
+        required: true
+        schema:
+          type: string
+        example: caib
+      - name: idioma
+        in: query
+        description: Codi de l'idioma
+        schema:
+          type: string
+        example: ca
+      responses:
+        "404":
+          description: Paràmetres incorrectes
+          content:
+            application/json: {}
+        "200":
+          description: Llista d'accessos a CARPETA
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginaAcces'
+  /secure/echo:
+    get:
+      tags:
+      - Securetat
+      summary: Fa un ECHO
+      operationId: echo
+      parameters:
+      - name: echoInput
+        in: query
+        description: Cadena a retornar
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Respon el valor enviat per paràmetre
+          content:
+            application/json:
+              schema:
+                type: string
+      security:
+      - BasicAuth: []
+components:
+  schemas:
+    Acces:
+      type: object
+      properties:
+        proveidor:
+          type: string
+        metodeAutenticacio:
+          type: string
+        qaa:
+          type: integer
+          format: int32
+        data:
+          type: string
+          format: date-time
+        idioma:
+          type: string
+        entitat:
+          type: string
+        tipus:
+          type: string
+        plugin:
+          type: string
+        idSessio:
+          type: string
+    PaginaAcces:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Acces'
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic

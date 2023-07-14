@@ -104,34 +104,59 @@
                 <groupId>io.swagger.core.v3</groupId>
                 <artifactId>swagger-maven-plugin</artifactId>
                 <version>2.2.0</version>
-                <configuration>
-                    <outputFileName>openapi</outputFileName>
-                    <outputPath>${project.build.directory}/openapi/</outputPath>
-                    <outputFormat>JSONANDYAML</outputFormat>
-                    <resourcePackages>
-                        <package>es.caib.carpeta.api.externa.estadistiques</package>
-                        <package>es.caib.carpeta.api.externa.secureexample</package>
-                    </resourcePackages>
-                    <prettyPrint>TRUE</prettyPrint>
-                </configuration>
+
                 <executions>
                     <execution>
+                        <id>estadistiques</id>
                         <phase>compile</phase>
                         <goals>
                             <goal>resolve</goal>
                         </goals>
+                        <configuration>
+                            <outputFileName>openapi</outputFileName>
+                            <outputPath>${project.basedir}/openapi/</outputPath>
+                            <outputFormat>JSONANDYAML</outputFormat>
+                            <resourcePackages>
+                                <package>es.caib.carpeta.api.externa.estadistiques</package>
+                                <package>es.caib.carpeta.api.externa.secureexample</package>
+                                <package>es.caib.carpeta.api.externa.config</package>
+                            </resourcePackages>
+                            <prettyPrint>TRUE</prettyPrint>
+                        </configuration>
                     </execution>
+                    <!-- NOTA: Aquesta segona execució no la fa bé. !!!! -->
+                    <!-- Per això s'executa el següent plugin io.openapitools.swagger -->
+                    <!--
+                    <execution>
+                        <id>certificats</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>resolve</goal>
+                        </goals>
+                        <configuration>
+                            <outputFileName>openapi_certificat2</outputFileName>
+                            <outputPath>${project.basedir}/openapi2/</outputPath>
+                            <outputFormat>JSONANDYAML</outputFormat>
+                            <resourcePackages>
+                                <package>es.caib.carpeta.api.externa.certificats</package>
+                                <package>es.caib.carpeta.api.externa.config</package>
+                            </resourcePackages>
+                            <prettyPrint>TRUE</prettyPrint>
+                        </configuration>
+                    </execution>
+                    -->
                 </executions>
             </plugin>
-            
+
             <plugin>
               <groupId>io.openapitools.swagger</groupId>
               <artifactId>swagger-maven-plugin</artifactId>
               <configuration>
                 <resourcePackages>
                   <package>es.caib.carpeta.api.externa.certificats</package>
+                  <package>es.caib.carpeta.api.externa.config</package>
                 </resourcePackages>
-                <outputDirectory>${project.build.directory}/openapi/</outputDirectory>
+                <outputDirectory>${project.basedir}/openapi/</outputDirectory>
                 <outputFilename>openapi_certificat</outputFilename>
                 <outputFormats>JSON,YAML</outputFormats>
                 <prettyPrint>true</prettyPrint>
@@ -144,8 +169,9 @@
                 </execution>
               </executions>
             </plugin>
-            
-            
+         
+
+
             <!-- Genera el Client Rest per Java a partir del fitxer openapi.json -->
             <!-- https://github.com/swagger-api/swagger-codegen/blob/master/modules/swagger-codegen-maven-plugin/README.md#general-configuration-parameters -->
             <plugin>
@@ -154,7 +180,7 @@
                 <version>3.0.27</version>
 
                 <executions>
-                   
+
                     <execution>
                         <id>estadistiques_i_secure</id>
                         <goals>
@@ -162,9 +188,9 @@
                         </goals>
                         <phase>install</phase>
                         <configuration>
-                            <inputSpec>${project.basedir}/target/openapi/openapi.json</inputSpec>
+                            <inputSpec>${project.basedir}/openapi/openapi.json</inputSpec>
                             <language>java</language>
-                            
+
                             <library>resteasy</library>
                             <configOptions>
                                 <groupId>es.caib.carpeta</groupId>
@@ -195,8 +221,8 @@
                             <!-- <fullJavaUtil>true</fullJavaUtil> -->
                         </configuration>
                     </execution>
-                    
-                    
+
+
                     <execution>
                         <id>certificat</id>
                         <goals>
@@ -204,10 +230,10 @@
                         </goals>
                         <phase>install</phase>
                         <configuration>
-                            <inputSpec>${project.basedir}/target/openapi/openapi_certificat.json</inputSpec>
+                            <inputSpec>${project.basedir}/openapi/openapi_certificat.json</inputSpec>
                             <language>java</language>
-                            
-                            
+
+
                             <library>okhttp-gson</library>
                             <!-- <library>resteasy</library> -->
                             <configOptions>
@@ -282,8 +308,8 @@
                     <file>${project.build.directory}/swagger-ui-${swagger-ui.version}/dist/index.html</file>
                     <replacements>
                         <replacement>
-                            <token>https://petstore.swagger.io/v2/swagger.json</token>
-                            <value>./openapi.json</value>
+                            <token>url: "https://petstore.swagger.io/v2/swagger.json",</token>
+                            <value>urls: [{url: "/carpetaapi/externa/openapi.json", name: "Estadístiques(./openapi.json)"}, {url: "/carpetaapi/externa/openapi_certificat.json", name: "Certificats (./openapi_certificat.json)"}],</value>
                         </replacement>
                     </replacements>
                 </configuration>
@@ -300,7 +326,7 @@
                             <directory>${project.build.directory}/swagger-ui-${swagger-ui.version}/dist</directory>
                         </resource>
                         <resource>
-                            <directory>${project.build.directory}/openapi</directory>
+                            <directory>${project.basedir}/openapi</directory>
                         </resource>
                     </webResources>
                 </configuration>

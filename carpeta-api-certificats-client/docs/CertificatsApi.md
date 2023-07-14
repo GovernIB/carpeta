@@ -1,6 +1,6 @@
 # CertificatsApi
 
-All URIs are relative to */*
+All URIs are relative to *../../carpetaapi/externa*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

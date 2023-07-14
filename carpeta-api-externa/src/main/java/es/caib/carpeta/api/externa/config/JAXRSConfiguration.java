@@ -1,4 +1,4 @@
-package es.caib.carpeta.api.externa;
+package es.caib.carpeta.api.externa.config;
 
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;

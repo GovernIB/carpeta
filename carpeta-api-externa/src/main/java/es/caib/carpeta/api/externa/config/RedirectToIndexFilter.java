@@ -1,4 +1,4 @@
-package es.caib.carpeta.api.externa;
+package es.caib.carpeta.api.externa.config;
 
 import java.io.IOException;
 
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author anadal
  *
  */
-@WebFilter(urlPatterns = { "/" })
+@WebFilter(urlPatterns = { "/", "" })
 public class RedirectToIndexFilter implements Filter {
 
     @Override
