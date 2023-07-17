@@ -23,6 +23,10 @@ import org.junit.Test;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.Properties;
+
 import org.junit.Ignore;
 
 /**
@@ -43,7 +47,6 @@ public class CertificatsApiTest {
             e.printStackTrace();
 
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
@@ -65,19 +68,22 @@ public class CertificatsApiTest {
             Gson gson = new GsonBuilder().registerTypeAdapter(byte[].class, new ByteArrayDeserializer()).create();
             serializer.setGson(gson);
 
+            Properties props = new Properties();
+            props.load(new FileInputStream(new File("test.properties")));
+
             HttpBasicAuth auth = (HttpBasicAuth) client.getAuthentication("BasicAuth");
-            auth.setUsername("carpetaapp");
-            auth.setPassword("carpetaapp");
-            
-            client.setBasePath("http://localhost:8080/carpetaapi/externa");
-            
-            String pluginNumber = "2";
+            auth.setUsername(props.getProperty("usr"));
+            auth.setPassword(props.getProperty("pwd"));
+
+            client.setBasePath(props.getProperty("host"));
+
+            String pluginNumber = props.getProperty("pluginNumber");
 
             CertificatsApi api = new CertificatsApi(client);
 
-            String dni = "99999999X";
-            if (api.teCertificat(dni,pluginNumber).isTeCertificat()) {
-                String idioma = "ca";
+            String dni = props.getProperty("dni");
+            if (api.teCertificat(dni, pluginNumber).isTeCertificat()) {
+                final String idioma = "ca";
                 CertificatBean response = api.descarregarCertificat(dni, idioma, pluginNumber);
                 System.out.println("Tipus = " + response.getTipus());
                 if (response.getFitxer() != null) {
