@@ -285,3 +285,6 @@ carpeta-pluginsib/pluginsib-carpetafront/certificats/react/node_modules/
 node_modules/
 /carpeta-front/reactnative/CarpetaExpoApp/cleancache.bat
 /carpeta-front/reactnative/CarpetaExpoApp/prebuild.bat
+/carpeta-pluginsib/pluginsib-carpetafront/pinbalayudasubvenciones/react/dist
+/carpeta-pluginsib/pluginsib-carpetafront/pinbalhistorico/react/dist
+

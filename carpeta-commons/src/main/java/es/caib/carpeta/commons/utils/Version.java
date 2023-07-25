@@ -28,7 +28,7 @@ public class Version {
     @PostConstruct
     public void init() {
         /* Agafa fitxer Version.properties amb el mateix package */
-        ResourceBundle bundle = ResourceBundle.getBundle("carpeta.version.Version");
+        ResourceBundle bundle = ResourceBundle.getBundle("version.Version");
         version = bundle.getString("project.version");
         buildTime = bundle.getString("project.buildtime");
         scmRevision = bundle.getString("scm.revision");

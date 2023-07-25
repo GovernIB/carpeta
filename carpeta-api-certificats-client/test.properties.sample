@@ -1,0 +1,6 @@
+host=http://localhost:8080/carpetaapi/externa
+usr=myusername
+pwd=mypassword
+dni=99999999X
+# Optional
+pluginNumber=2

@@ -1,0 +1,218 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "API REST EXTERNA de Carpeta",
+    "description" : "Conjunt de Serveis REST de Carpeta per ser accedits des de l'exterior",
+    "contact" : {
+      "name" : "Departament de Govern Digital a la Fundació Bit",
+      "url" : "http://otae.fundaciobit.org",
+      "email" : "governdigital.carpeta@fundaciobit.org"
+    },
+    "license" : {
+      "name" : "License Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0"
+    },
+    "version" : "1.0.0"
+  },
+  "externalDocs" : {
+    "description" : "Java Client (GovernIB Github)",
+    "url" : "https://github.com/GovernIB/carpeta/tree/carpeta-1.1/carpeta-api-externa-client"
+  },
+  "servers" : [ {
+    "url" : "../../carpetaapi/externa",
+    "variables" : { }
+  }, {
+    "url" : "http://localhost:8080/carpetaapi/externa",
+    "variables" : { }
+  }, {
+    "url" : "https://dev.caib.es/carpetaapi/externa",
+    "variables" : { }
+  }, {
+    "url" : "https://proves.caib.es/carpetaapi/externa",
+    "variables" : { }
+  }, {
+    "url" : "https://se.caib.es/carpetaapi/externa",
+    "variables" : { }
+  }, {
+    "url" : "https://www.caib.es/carpetaapi/externa",
+    "variables" : { }
+  } ],
+  "tags" : [ {
+    "name" : "Certificats",
+    "description" : "Certificats"
+  } ],
+  "paths" : {
+    "/secure/certificats/descarregarCertificat" : {
+      "get" : {
+        "tags" : [ "Certificats" ],
+        "summary" : "Retorna un certificat a CARPETA",
+        "operationId" : "descarregarCertificat",
+        "parameters" : [ {
+          "name" : "dni",
+          "in" : "query",
+          "description" : "DNI o NIF de la persona de la qual volem obtenir el certificat.",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "99999999X"
+        }, {
+          "name" : "idioma",
+          "in" : "query",
+          "description" : "Codi de l'idioma",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "ca"
+        }, {
+          "name" : "pluginNumber",
+          "in" : "header",
+          "description" : "Numero de plugin",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : 1
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Error intern de servidor",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "404" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "200" : {
+            "description" : "Llista d'accessos a CARPETA",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CertificatBean"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    },
+    "/secure/certificats/teCertificat" : {
+      "get" : {
+        "tags" : [ "Certificats" ],
+        "summary" : "Retorna un CertificatInfo que indica en un boolea si l'usuari te certificat ",
+        "operationId" : "teCertificat",
+        "parameters" : [ {
+          "name" : "dni",
+          "in" : "query",
+          "description" : "DNI o NIF de la persona de la qual volem saber si té certificat.",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "99999999X"
+        }, {
+          "name" : "pluginNumber",
+          "in" : "header",
+          "description" : "Numero de plugin",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : 1
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "Error intern de servidor",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "404" : {
+            "description" : " XYZ Paràmetres incorrectes",
+            "content" : {
+              "application/json" : { }
+            }
+          },
+          "200" : {
+            "description" : "XYZ Llista d'accessos a CARPETA",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/CertificatInfo"
+                }
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "BasicAuth" : [ ]
+        } ]
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "CertificatBean" : {
+        "type" : "object",
+        "properties" : {
+          "fitxer" : {
+            "$ref" : "#/components/schemas/CertificatFileInfo"
+          },
+          "tipus" : {
+            "$ref" : "#/components/schemas/CertificatType"
+          },
+          "url" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CertificatFileInfo" : {
+        "required" : [ "bytes" ],
+        "type" : "object",
+        "properties" : {
+          "bytes" : {
+            "type" : "string",
+            "format" : "byte"
+          },
+          "length" : {
+            "type" : "integer",
+            "format" : "int32"
+          },
+          "mime" : {
+            "type" : "string"
+          },
+          "nom" : {
+            "type" : "string"
+          }
+        }
+      },
+      "CertificatInfo" : {
+        "type" : "object",
+        "properties" : {
+          "administrationId" : {
+            "type" : "string"
+          },
+          "teCertificat" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "CertificatType" : {
+        "type" : "string",
+        "enum" : [ "VALOR", "FITXER" ]
+      }
+    },
+    "securitySchemes" : {
+      "BasicAuth" : {
+        "type" : "http",
+        "scheme" : "basic"
+      }
+    }
+  }
+}
