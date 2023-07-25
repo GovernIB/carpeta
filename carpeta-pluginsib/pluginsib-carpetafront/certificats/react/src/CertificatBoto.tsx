@@ -6,15 +6,16 @@ import i18n from "./i18n";
  *  @author fbosch
  */
 
-type CertificatState = {
+type CertificatBotoState = {
   isLoaded: boolean;
   urlDescarrega: string | null;
+  isVisible: boolean;
   error: string | null;
 };
 
-class Certificats extends React.Component<
+class CertificatBoto extends React.Component<
   CertificatBotoProperties,
-  CertificatState
+  CertificatBotoState
 > {
   constructor(props: CertificatBotoProperties) {
     super(props);
@@ -22,6 +23,7 @@ class Certificats extends React.Component<
     this.state = {
       isLoaded: false,
       urlDescarrega: null,
+      isVisible: true,
       error: null,
     };
     this.teCertificat = this.teCertificat.bind(this);
@@ -84,73 +86,120 @@ class Certificats extends React.Component<
     const isLoaded = this.state.isLoaded;
 
     let icon;
+    let errorMessage;
+    let certificateButton;
     let isVisible: boolean = true;
     console.log("Render 1");
 
-
-    
-
     if (!isLoaded) {
+      //Carregant
       console.log("Render 2");
-      icon =(<div  id="carregant" className="loader centrat" style={{ scale: 0.5, height: "20px", width: "20px" }}></div>);
-      /*icon = (
-        <div
-          id="carregant"
-          className="loader-container centrat "
-          style={{ height: "30px", width: "30px" }}
-        >
-          <div className="loader" style={{ height: "100%", width: "100%" }}></div>
-        </div>
-      );*/
-      
+      icon = (<div id="carregant" className="loader centrat" style={{ scale: 0.5, height: "20px", width: "20px" }}></div>);
+      certificateButton =
+        
+          <button
+            type="button"
+            data-toggle="modal"
+            onClick={this.pitjarBoto}
+            className=" btn btn-warning"
+            tabIndex={520}
+            aria-labelledby="botoCert"
+          >
+            {this.props.title + " "}  {icon}
+          </button>
+
     } else {
+      //Carregat
       console.log("Render 3");
+
+
       if (this.state.error) {
-        icon = (
-          <>
-            <br />
-            <div className="alert alert-danger" role="alert">
-              {this.state.error}
-            </div>
-          </>
-        );
+        if (this.props.noDisponiblesVisible) {
+          //Carregat i amb error
+          errorMessage = (
+            <>
+              <br />
+              <div className="alert alert-danger" role="alert">
+                {this.state.error}
+              </div>
+            </>
+          );
+          icon = <i className="far fa-time"></i>;
+          certificateButton =
+            
+              <button
+                type="button"
+                data-toggle="modal"
+                onClick={this.pitjarBoto}
+                className=" btn btn-danger"
+                tabIndex={520}
+                aria-labelledby="botoCert"
+              >
+                {this.props.title + " "}  {errorMessage}
+              </button>
+        } else {
+          certificateButton = null;
+        }
       } else {
+        //Carregat sense error
         console.log("Render 4");
         if (this.state.urlDescarrega) {
-          let urlDescarrega = this.state.urlDescarrega;
+          //Te certificat
           icon = <i className="fas fa-file-download"></i>;
+          certificateButton =
+              <button
+                type="button"
+                data-toggle="modal"
+                onClick={this.pitjarBoto}
+                className=" btn btn-success"
+                tabIndex={520}
+                aria-labelledby="botoCert"
+              >
+                {this.props.title + " "}  {icon}
+              </button>
+
         } else {
-          console.log("No te certificats per descarregar");
-          isVisible = false;
+          if (this.props.noDisponiblesVisible) {
+            //No te certificat
+            icon = <i className="far fa-time"></i>;
+            certificateButton =
+                <button
+                  type="button"
+                  data-toggle="modal"
+                  onClick={this.pitjarBoto}
+                  className=" btn btn-warning"
+                  tabIndex={520}
+                  aria-labelledby="botoCert"
+                >
+                  {this.props.title + ": No te certificat "} {icon}
+                </button>
+
+          } else {
+            certificateButton = null;
+          }
         }
       }
+
+
+
     }
 
     console.log("Render Final");
 
     return (
       <>
-        {isVisible && (
+        {isVisible && (   
           <div
-            className="col-md-12 border-0 float-left p-0"
-            id="botoCert"
-            style={{ marginTop: "20px" }}
-          >
-            <button
-              type="button"
-              data-toggle="modal"
-              onClick={this.pitjarBoto}
-              className=" btn btn-warning"
-              tabIndex={520}
-              aria-labelledby="botoCert"
-            >
-              {this.props.title + " "}  {icon}
-            </button>
-          </div>
+          className="col-md-12 border-0 float-left p-0"
+          id="botoCert"
+          style={{ marginTop: "20px" }}
+        >       
+            {certificateButton}
+        </div>
         )}
       </>
     );
   }
 }
 
-export default Certificats;
+export default CertificatBoto;

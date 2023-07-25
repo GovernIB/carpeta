@@ -112,6 +112,7 @@ public class CertificatsService {
                 }
 
                 case "3": {
+                    //Té certificat, en forma de URL
                     CertificatBean cert = new CertificatBean();
                     cert.setTipus(CertificatType.VALOR);
 
@@ -123,6 +124,7 @@ public class CertificatsService {
 
                 default:
                 case "2": {
+                    // Té certificat en forma de fitxer
                     CertificatBean cert = new CertificatBean();
                     cert.setTipus(CertificatType.FITXER);
 
