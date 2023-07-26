@@ -132,7 +132,7 @@ public class CertificatsApi {
     }
 
     /**
-     * Retorna un certificat a CARPETA
+     * Retorna un certificat provinent de un servei extern a CARPETA.
      * 
      * @param dni DNI o NIF de la persona de la qual volem obtenir el certificat. (required)
      * @param idioma Codi de l&#x27;idioma (required)
@@ -146,7 +146,7 @@ public class CertificatsApi {
     }
 
     /**
-     * Retorna un certificat a CARPETA
+     * Retorna un certificat provinent de un servei extern a CARPETA.
      * 
      * @param dni DNI o NIF de la persona de la qual volem obtenir el certificat. (required)
      * @param idioma Codi de l&#x27;idioma (required)
@@ -161,7 +161,7 @@ public class CertificatsApi {
     }
 
     /**
-     * Retorna un certificat a CARPETA (asynchronously)
+     * Retorna un certificat provinent de un servei extern a CARPETA. (asynchronously)
      * 
      * @param dni DNI o NIF de la persona de la qual volem obtenir el certificat. (required)
      * @param idioma Codi de l&#x27;idioma (required)
@@ -267,7 +267,7 @@ public class CertificatsApi {
     }
 
     /**
-     * Retorna un CertificatInfo que indica en un boolea si l&#x27;usuari te certificat 
+     * Retorna un CertificatInfo que indica si l&#x27;usuari té certificat 
      * 
      * @param dni DNI o NIF de la persona de la qual volem saber si té certificat. (required)
      * @param pluginNumber Numero de plugin (optional)
@@ -280,7 +280,7 @@ public class CertificatsApi {
     }
 
     /**
-     * Retorna un CertificatInfo que indica en un boolea si l&#x27;usuari te certificat 
+     * Retorna un CertificatInfo que indica si l&#x27;usuari té certificat 
      * 
      * @param dni DNI o NIF de la persona de la qual volem saber si té certificat. (required)
      * @param pluginNumber Numero de plugin (optional)
@@ -294,7 +294,7 @@ public class CertificatsApi {
     }
 
     /**
-     * Retorna un CertificatInfo que indica en un boolea si l&#x27;usuari te certificat  (asynchronously)
+     * Retorna un CertificatInfo que indica si l&#x27;usuari té certificat  (asynchronously)
      * 
      * @param dni DNI o NIF de la persona de la qual volem saber si té certificat. (required)
      * @param pluginNumber Numero de plugin (optional)
