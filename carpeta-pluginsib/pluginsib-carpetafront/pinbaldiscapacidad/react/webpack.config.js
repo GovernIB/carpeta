@@ -4,11 +4,12 @@ const config = {
 	entry: "./src/main.tsx",
 	output: {
 		path: path.resolve(__dirname, "dist"),
-		filename: "reactjs_main.js",
+		filename: "reactjs_main_pinbaldiscapacidad.js",
 	},
 	
 	target: "node",
-  	mode: "production",
+  	//mode: "development",
+	mode: "production",
   	resolve: {
     	extensions: [".js", ".jsx", ".ts", ".tsx"],
   	},

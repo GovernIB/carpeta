@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { withTranslation, WithTranslation } from "react-i18next";
 import axios from "axios";
 import i18n from './i18n';
@@ -117,10 +117,11 @@ class DatosDiscapacidad extends React.Component<DiscapacidadProps, DiscapacidadS
                             </div>        
                         </dl>             
                     </div>
-
+                    
+                    var pinbalDiscapacidadConsulta: string  =  t('pinbalDiscapacidadConsulta');
                     contentApp = <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil wAuto" tabIndex={510}>
                         <div className="col-sm-1 float-left">
-                            <span className="oi oi-bell iconaFormApp" title={t('pinbalDiscapacidadConsulta')} style={{verticalAlign: 'sub'}}/>
+                            <span className="oi oi-bell iconaFormApp" title={pinbalDiscapacidadConsulta} style={{verticalAlign: 'sub'}}/>
                         </div>
                         <div className="col-sm-10 float-right">
                             {alerta}
@@ -138,9 +139,10 @@ class DatosDiscapacidad extends React.Component<DiscapacidadProps, DiscapacidadS
                             {t('pinbalDiscapacidadFecha')} {data.fecha} : {t('pinbalDiscapacidadCodigo'+data.codigo)}
                         </div>
 
+                    var pinbalDiscapacidadConsulta: string  =  t('pinbalDiscapacidadConsulta');
                     contentApp = <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil wAuto" tabIndex={510}>
                         <div className="col-sm-1 float-left">
-                            <span className="oi oi-bell iconaFormApp" title={t('pinbalDiscapacidadConsulta')} style={{verticalAlign: 'sub'}}/>
+                            <span className="oi oi-bell iconaFormApp" title={pinbalDiscapacidadConsulta} style={{verticalAlign: 'sub'}}/>
                         </div>
                         <div className="col-sm-10 float-right">
                             <div className="alert alert-warning" role="alert">

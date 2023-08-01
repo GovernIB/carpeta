@@ -283,8 +283,8 @@ public class PinbalDiscapacidadCarpetaFrontPlugin extends AbstractPinbalCarpetaF
                 // Sino es un NIF d'empresa 
                 if (!Character.isDigit(documentacion.charAt(0))) {
                 	if (Character.toUpperCase(documentacion.charAt(0)) == 'X' || 
-                			Character.toUpperCase(documentacion.charAt(0)) == 'Y' || 
-                			Character.toUpperCase(documentacion.charAt(0)) == 'Z') {
+                		Character.toUpperCase(documentacion.charAt(0)) == 'Y' || 
+                		Character.toUpperCase(documentacion.charAt(0)) == 'Z') {
                 		tipoDocumentacion = ScspTitular.ScspTipoDocumentacion.NIE;
                 	}else {
                 		tipoDocumentacion = ScspTitular.ScspTipoDocumentacion.NIF;
@@ -418,7 +418,7 @@ public class PinbalDiscapacidadCarpetaFrontPlugin extends AbstractPinbalCarpetaF
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
-    protected static final String REACT_JS_PAGE = "reactjs_main.js";
+    protected static final String REACT_JS_PAGE = "reactjs_main_pinbaldiscapacidad.js";
 
     public void reactjs(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
@@ -431,12 +431,15 @@ public class PinbalDiscapacidadCarpetaFrontPlugin extends AbstractPinbalCarpetaF
             response.setHeader("Content-Disposition",
                     "inline;filename=\"" + java.net.URLEncoder.encode(REACT_JS_PAGE, "UTF-8") + "\"");
 
-            String resource = "/webpage_pinbaldiscapacidad/reactjs_main.js";
+            String resource = "/webpage_pinbaldiscapacidad/"+REACT_JS_PAGE;
 
             response.setCharacterEncoding("utf-8");
-
+            
+            log.info("Contingut de Resource: " + resource);
+            
             InputStream input = this.getClass().getResourceAsStream(resource);
-
+            
+            log.info("Contingut de Input: " + input);
             String plantilla = IOUtils.toString(input, "UTF-8");
 
             try {
