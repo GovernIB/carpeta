@@ -34,8 +34,6 @@ import io.swagger.v3.oas.annotations.media.Content;
  *
  */
 
-//XYZ ZZZ Arreglar definicions
-
 @RunAs(Constants.CAR_SUPER)
 @SecurityScheme(type = SecuritySchemeType.HTTP, name = "BasicAuth", scheme = "basic")
 @Path("/secure/certificats/")
@@ -49,7 +47,7 @@ public class CertificatsService {
     @Operation(
             tags = { TAG },
             operationId = "descarregarCertificat",
-            summary = "Retorna un certificat a CARPETA",
+            summary = "Retorna un certificat provinent de un servei extern a CARPETA.",
             method = "get")
     @ApiResponses(
             value = {
@@ -104,14 +102,15 @@ public class CertificatsService {
                 case "4": // Error consultant si té o no certificat
                 case "1": // No té certificat 
                 {
-                    throw new Exception("No té certificat. No hauria d'arribar MAI aquí.");
+                    throw new Exception("Error simulat: Error obtenint certificat. (No té certificat)");
                 }
 
                 case "5": {
-                    throw new Exception("Això és una prova d'Error");
+                    throw new Exception("Error simulat: Error obtenint el certificat de l'usuari");
                 }
 
                 case "3": {
+                    //Té certificat, en forma de URL
                     CertificatBean cert = new CertificatBean();
                     cert.setTipus(CertificatType.VALOR);
 
@@ -123,6 +122,7 @@ public class CertificatsService {
 
                 default:
                 case "2": {
+                    // Té certificat en forma de fitxer
                     CertificatBean cert = new CertificatBean();
                     cert.setTipus(CertificatType.FITXER);
 
@@ -132,8 +132,6 @@ public class CertificatsService {
 
                     byte[] byteFile = "Hola Caracola".getBytes();
                     fileInfo.setBytes(byteFile);
-
-                    //fileInfo.setDataB64(Base64.getEncoder().encodeToString(byteFile));            
 
                     fileInfo.setLength(byteFile.length);
                     cert.setFitxer(fileInfo);
@@ -161,7 +159,7 @@ public class CertificatsService {
     @Operation(
             tags = { TAG },
             operationId = "teCertificat",
-            summary = "Retorna un CertificatInfo que indica en un boolea si l'usuari te certificat ",
+            summary = "Retorna un CertificatInfo que indica si l'usuari té certificat ",
             method = "get")
     @ApiResponses(
             value = {
@@ -207,7 +205,7 @@ public class CertificatsService {
 
             if ("4".equals(pluginNumber)) { // // Error consultant si té o no certificat
 
-                throw new Exception("Simulant un error en la consulta de si té o no certificat ...");
+                throw new Exception("Error simulat: Error consultant si te Certificat.");
 
             }
 

@@ -45,7 +45,7 @@
     "/secure/certificats/descarregarCertificat" : {
       "get" : {
         "tags" : [ "Certificats" ],
-        "summary" : "Retorna un certificat a CARPETA",
+        "summary" : "Retorna un certificat provinent de un servei extern a CARPETA.",
         "operationId" : "descarregarCertificat",
         "parameters" : [ {
           "name" : "dni",
@@ -106,7 +106,7 @@
     "/secure/certificats/teCertificat" : {
       "get" : {
         "tags" : [ "Certificats" ],
-        "summary" : "Retorna un CertificatInfo que indica en un boolea si l'usuari te certificat ",
+        "summary" : "Retorna un CertificatInfo que indica si l'usuari té certificat ",
         "operationId" : "teCertificat",
         "parameters" : [ {
           "name" : "dni",

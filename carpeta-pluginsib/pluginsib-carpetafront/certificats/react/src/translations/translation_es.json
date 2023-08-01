@@ -1,5 +1,10 @@
 {
   "certificatNom": "Nombre",
   "certificatUrl": "Url",
-  "certificatBoto": "Boton"
+  "certificatBoto": "Boton",
+  "botoSenseCertificat": "No tiene certificado",
+  "amagarNoDisponibles": "Esconder certificados no disponibles",
+  "mostrarNoDisponibles": "Mostrar certificats no disponibles"
+
+
 }

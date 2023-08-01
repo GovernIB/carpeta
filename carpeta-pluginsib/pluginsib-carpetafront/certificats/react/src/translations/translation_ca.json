@@ -1,5 +1,9 @@
 {
   "certificatNom": "Nom",
   "certificatUrl": "Url",
-  "certificatBoto": "Boto"
+  "certificatBoto": "Boto",
+  "botoSenseCertificat": "No te certificat",
+  "amagarNoDisponibles": "Amagar certificats no disponibles",
+  "mostrarNoDisponibles": "Mostrar certificats no disponibles"
+
 }

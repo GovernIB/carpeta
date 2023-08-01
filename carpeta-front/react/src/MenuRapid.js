@@ -266,8 +266,8 @@ class MenuRapid extends Component {
                         $("#submenu" + i).addClass("show");
                       }}
                     >
-                      <img src={s.urllogo} title={t("iconaDe") + " " + s.nom} alt={s.nom} className="imc-icona" />
-                      <span className="menuRapidView lletraRapid" style={{ whiteSpace: "normal" }}>
+                      <img src={s.urllogo} title={t("iconaDe") + " " + s.nom} alt={s.nom} className="imc-icona" style={{ display: "inline-block" }} />
+                      <span className="menuRapidView lletraRapid" style={{ whiteSpace: "normal", display: "inline-block" }}>
                         {s.nom}
                       </span>
                     </button>

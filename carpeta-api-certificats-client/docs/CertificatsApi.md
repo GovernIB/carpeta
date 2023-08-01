@@ -4,14 +4,14 @@ All URIs are relative to *../../carpetaapi/externa*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**descarregarCertificat**](CertificatsApi.md#descarregarCertificat) | **GET** /secure/certificats/descarregarCertificat | Retorna un certificat a CARPETA
-[**teCertificat**](CertificatsApi.md#teCertificat) | **GET** /secure/certificats/teCertificat | Retorna un CertificatInfo que indica en un boolea si l&#x27;usuari te certificat 
+[**descarregarCertificat**](CertificatsApi.md#descarregarCertificat) | **GET** /secure/certificats/descarregarCertificat | Retorna un certificat provinent de un servei extern a CARPETA.
+[**teCertificat**](CertificatsApi.md#teCertificat) | **GET** /secure/certificats/teCertificat | Retorna un CertificatInfo que indica si l&#x27;usuari té certificat 
 
 <a name="descarregarCertificat"></a>
 # **descarregarCertificat**
 > CertificatBean descarregarCertificat(dni, idioma, pluginNumber)
 
-Retorna un certificat a CARPETA
+Retorna un certificat provinent de un servei extern a CARPETA.
 
 ### Example
 ```java
@@ -66,7 +66,7 @@ Name | Type | Description  | Notes
 # **teCertificat**
 > CertificatInfo teCertificat(dni, pluginNumber)
 
-Retorna un CertificatInfo que indica en un boolea si l&#x27;usuari te certificat 
+Retorna un CertificatInfo que indica si l&#x27;usuari té certificat 
 
 ### Example
 ```java
