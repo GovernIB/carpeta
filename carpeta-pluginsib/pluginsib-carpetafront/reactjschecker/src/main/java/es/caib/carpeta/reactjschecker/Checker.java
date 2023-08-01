@@ -3,7 +3,10 @@ package es.caib.carpeta.reactjschecker;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.gson.Gson;
@@ -29,8 +32,17 @@ public class Checker {
             });
 
             System.out.println("# Plugins " + projectes.length);
+            
+            
+            List<File> projectesList = new ArrayList<File>();
+            
+            projectesList.addAll(Arrays.asList(projectes));
+            
+            File reactFront= new File("../../../carpeta-front/react");
+            projectesList.add(reactFront);
 
-            for (File file : projectes) {
+
+            for (File file : projectesList) {
 
                 File p = new File(file, "package.json");
 
