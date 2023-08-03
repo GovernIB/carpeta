@@ -133,7 +133,16 @@ class DetallRegistre extends React.Component<DetallRegistreProps, DetallRegistre
 
     const linkSource = `data:application/pdf;base64,${datafile}`;
     const downloadLink = document.createElement("a");
-    const fileName = typeof dataName !== "undefined" && dataName != "" ? `${dataName}.pdf` : `justificant.pdf`;
+    var fileName;
+    if (typeof dataName !== "undefined" && dataName != "") {
+      if (dataName.toLowerCase().endsWith(".pdf")) {
+        fileName = `${dataName}`;
+      } else {
+        fileName = `${dataName}.pdf`;
+      }
+    } else {
+      fileName = `justificant.pdf`;
+    }
 
     downloadLink.href = linkSource;
     downloadLink.download = fileName;

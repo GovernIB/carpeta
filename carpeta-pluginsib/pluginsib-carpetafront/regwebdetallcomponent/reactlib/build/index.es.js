@@ -2984,7 +2984,18 @@ var DetallRegistre = /** @class */ (function (_super) {
         //const {t} = this.props;
         var linkSource = "data:application/pdf;base64,".concat(datafile);
         var downloadLink = document.createElement("a");
-        var fileName = typeof dataName !== "undefined" && dataName != "" ? "".concat(dataName, ".pdf") : "justificant.pdf";
+        var fileName;
+        if (typeof dataName !== "undefined" && dataName != "") {
+            if (dataName.toLowerCase().endsWith(".pdf")) {
+                fileName = "".concat(dataName);
+            }
+            else {
+                fileName = "".concat(dataName, ".pdf");
+            }
+        }
+        else {
+            fileName = "justificant.pdf";
+        }
         downloadLink.href = linkSource;
         downloadLink.download = fileName;
         /*if (typeof window.navigator.msSaveBlob === 'function') {

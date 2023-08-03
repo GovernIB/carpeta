@@ -7,7 +7,7 @@ var changeLanguagePlugin;
 <script>
 var props = {
      // Només pel cas de mostrar un sol Registre
-        "numeroregistro" : "${numeroRegistro}",
+        "numeroregistro" : <#if numeroRegistro == "">null<#else>'${numeroRegistro}'</#if>,
         "titles" : ${titles},
         "subtitles" : ${subtitles},
         "pathtoservei" : "${pathtoservei}",
