@@ -40,7 +40,7 @@
 			<dependency>
             <groupId>es.caib.pinbal</groupId>
             <artifactId>pinbal-client</artifactId>
-            <version>1.4.26</version>
+            <version>1.4.36</version>
             <exclusions>
                 <!-- evitar conflicte amb JAX-RS de JBoss -->
                 <exclusion>

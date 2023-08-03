@@ -72,7 +72,7 @@ public abstract class AbstractPinbalCarpetaFrontPlugin extends AbstractCarpetaFr
 		
 		final String codigoCertificado = getPropertyRequired(propertyBase + "codicertificat"); 
 		
-		ClientGeneric clientRest = new ClientGeneric(baseUrl,userName,password);
+		ClientGeneric clientRest = new ClientGeneric(baseUrl,userName,password); //, true, null, null       );
 		log.info("solicitud tamany: " + solicituds.size());
 		log.info("solicitud3: " + solicituds.get(0).getDatosEspecificos());
 		resposta = clientRest.peticionSincrona(codigoCertificado, solicituds);
