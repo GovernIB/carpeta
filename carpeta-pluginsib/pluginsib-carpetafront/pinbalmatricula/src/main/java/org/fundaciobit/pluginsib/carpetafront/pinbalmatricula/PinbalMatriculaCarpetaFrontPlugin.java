@@ -279,7 +279,8 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
         }
         
         log.info("formDataNaixementTitular: " + formDataNaixementTitular);
-        
+        log.info("radioSelectedOption: " + formRadioOpcio);
+
         
 
         return cridadaRestDirecta(userData, formRadioOpcio, formNomTitular, formPrimerLlinatgeTitular,
@@ -363,7 +364,9 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
 
             ScspTipoDocumentacion tipoDocumentacionTitular = null;
             String documentTitular = null;
-
+            if(formRadioOpcio != null) {
+                
+            
             switch (formRadioOpcio) {
 
                 case "option1":
@@ -401,6 +404,10 @@ public class PinbalMatriculaCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
                     tipoDocumentacionTitular = ScspTitular.ScspTipoDocumentacion.NIF;
                 break;
 
+            }
+            }else {
+                tipoDocumentacionTitular = tipoDocumentacionTutor;
+                documentTitular = documentacionTutor;
             }
 
             // Titular

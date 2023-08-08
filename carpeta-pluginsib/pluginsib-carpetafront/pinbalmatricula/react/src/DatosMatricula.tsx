@@ -276,7 +276,7 @@ class DatosMatricula extends React.Component<DatosMatriculaProps, DatosMatricula
       case "option2":
         {
           if (this.documentTitular === "") {
-            $("#errorMsg").html(t("pinbalMatriculaErrorDocument"));
+            $("#errorMsg").html(t("pinbalMatriculaErrorDocument").toString());
             $("#errorContainer").removeClass("ocult");
             $("#dni").addClass("borderError");
             return false;
@@ -287,7 +287,7 @@ class DatosMatricula extends React.Component<DatosMatriculaProps, DatosMatricula
         {
           console.log("DatosMatricula::() => this.nomTitular = ]" + this.nomTitular + "[");
           if (this.nomTitular === "") {
-            $("#errorMsg").html(t("pinbalMatriculaErrorNom"));
+            $("#errorMsg").html(t("pinbalMatriculaErrorNom").toString());
             $("#errorContainer").removeClass("ocult");
             $("#nomTitular").addClass("borderError");
             return false;
@@ -295,14 +295,14 @@ class DatosMatricula extends React.Component<DatosMatriculaProps, DatosMatricula
 
           console.log("DatosMatricula::() => this.primerLlinatgeTitular = ]" + this.primerLlinatgeTitular + "[");
           if (this.primerLlinatgeTitular === "") {
-            $("#errorMsg").html(t("pinbalMatriculaErrorPrimerLLi"));
+            $("#errorMsg").html(t("pinbalMatriculaErrorPrimerLLi").toString());
             $("#errorContainer").removeClass("ocult");
             $("#primerLliTitular").addClass("borderError");
             return false;
           }
 
           if (this.dataNaixementTitular === null || this.isToday(this.dataNaixementTitular)) {
-            $("#errorMsg").html(t("pinbalMatriculaErrorData"));
+            $("#errorMsg").html(t("pinbalMatriculaErrorData").toString());
             $("#errorContainer").removeClass("ocult");
             $("#fechaNacimiento").addClass("borderError");
             return false;
@@ -375,7 +375,7 @@ class DatosMatricula extends React.Component<DatosMatriculaProps, DatosMatricula
 
             {this.state.radioSelectedOption === "option2" && (
               <Row className="pt-2" style={{ paddingTop: "0.5em" }}>
-                <CarpetaFormulariDeFiltreItem label={t("pinbalMatriculaTipusDocument")}>
+                <CarpetaFormulariDeFiltreItem label={t("pinbalMatriculaTipusDocument").toString()}>
                   <select
                     id="tipusDocument"
                     name="tipusDocument"
@@ -402,7 +402,7 @@ class DatosMatricula extends React.Component<DatosMatriculaProps, DatosMatricula
                   </select>
                 </CarpetaFormulariDeFiltreItem>
 
-                <CarpetaFormulariDeFiltreItem label={t("pinbalMatriculaDNI")}>
+                <CarpetaFormulariDeFiltreItem label={t("pinbalMatriculaDNI").toString()}>
                   <CarpetaInputText
                     id="dni"
                     tabIndex={505}
@@ -415,7 +415,7 @@ class DatosMatricula extends React.Component<DatosMatriculaProps, DatosMatricula
             {this.state.radioSelectedOption === "option3" && (
               <>
                 <Row className="pt-2" style={{ paddingTop: "0.5em" }}>
-                  <CarpetaFormulariDeFiltreItem label={t("pinbalMatriculaNomTitular")}>
+                  <CarpetaFormulariDeFiltreItem label={t("pinbalMatriculaNomTitular").toString()}>
                     <CarpetaInputText
                       id="nomTitular"
                       tabIndex={506}
@@ -424,7 +424,7 @@ class DatosMatricula extends React.Component<DatosMatriculaProps, DatosMatricula
                     />
                   </CarpetaFormulariDeFiltreItem>
 
-                  <CarpetaFormulariDeFiltreItem label={t("pinbalMatriculaPrimerLliTitular")}>
+                  <CarpetaFormulariDeFiltreItem label={t("pinbalMatriculaPrimerLliTitular").toString()}>
                     <CarpetaInputText
                       id="primerLliTitular"
                       tabIndex={507}
@@ -432,7 +432,7 @@ class DatosMatricula extends React.Component<DatosMatriculaProps, DatosMatricula
                       onChangedText={this.handleChangePrimerLlinatge}
                     />
                   </CarpetaFormulariDeFiltreItem>
-                  <CarpetaFormulariDeFiltreItem label={t("pinbalMatriculaSegonLliTitular")}>
+                  <CarpetaFormulariDeFiltreItem label={t("pinbalMatriculaSegonLliTitular").toString()}>
                     <CarpetaInputText
                       id="segonLliTitular"
                       tabIndex={508}
@@ -440,7 +440,7 @@ class DatosMatricula extends React.Component<DatosMatriculaProps, DatosMatricula
                       onChangedText={this.handleChangeSegonLlinatge}
                     />
                   </CarpetaFormulariDeFiltreItem>
-                  <CarpetaFormulariDeFiltreItem label={t("pinbalMatriculaNaixement")}>
+                  <CarpetaFormulariDeFiltreItem label={t("pinbalMatriculaNaixement").toString()}>
                     <CarpetaDatePicker
                       basename={"dataNaixementTitular"}
                       defaultValue={this.dataNaixementTitular === null ? new Date() : this.dataNaixementTitular}
@@ -585,7 +585,7 @@ class DatosMatricula extends React.Component<DatosMatriculaProps, DatosMatricula
                   <div className="col-sm-1 float-left">
                     <span
                       className="oi oi-bell iconaFormApp"
-                      title={t("pinbalMatriculaConsulta")}
+                      title={t("pinbalMatriculaConsulta").toString()}
                       style={{ verticalAlign: "sub" }}
                     />
                   </div>
@@ -676,7 +676,7 @@ class DatosMatricula extends React.Component<DatosMatriculaProps, DatosMatricula
                   <div className="col-sm-1 float-left">
                     <span
                       className="oi oi-bell iconaFormApp"
-                      title={t("pinbalMatriculaConsulta")}
+                      title={t("pinbalMatriculaConsulta").toString()}
                       style={{ verticalAlign: "sub" }}
                     />
                   </div>
