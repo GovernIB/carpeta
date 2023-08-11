@@ -369,8 +369,6 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
             Gson json = new GsonBuilder().setDateFormat("dd-MM-yyyy HH:mm").create();
             String generat = json.toJson(dades);
 
-            log.info("Generat: " + generat);
-
             response.getWriter().println(generat);
             response.flushBuffer();
 
