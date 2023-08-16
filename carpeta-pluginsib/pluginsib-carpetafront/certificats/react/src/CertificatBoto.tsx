@@ -96,17 +96,22 @@ class CertificatBoto extends React.Component<
       console.log("Render 2");
       icon = (<div id="carregant" className="loader centrat" style={{ scale: 0.5, height: "20px", width: "20px" }}></div>);
       certificateButton =
-        
-          <button
-            type="button"
-            data-toggle="modal"
-            onClick={this.pitjarBoto}
-            className=" btn btn-warning"
-            tabIndex={520}
+
+      <p data-toggle="modal" 
+            style={{ color: "grey", marginTop: "20px" }} 
             aria-labelledby="botoCert"
-          >
-            {this.props.title + " "}  {icon}
-          </button>
+            >{this.props.title + " "}  {icon}
+            </p>
+        /*<button
+          type="button"
+          data-toggle="modal"
+          onClick={this.pitjarBoto}
+          className=" btn btn-warning"
+          tabIndex={520}
+          aria-labelledby="botoCert"
+        >
+          {this.props.title + " "}  {icon}
+        </button>*/
 
     } else {
       //Carregat
@@ -126,17 +131,25 @@ class CertificatBoto extends React.Component<
           );
           icon = <i className="far fa-time"></i>;
           certificateButton =
-            
-              <button
-                type="button"
-                data-toggle="modal"
-                onClick={this.pitjarBoto}
-                className=" btn btn-danger"
-                tabIndex={520}
-                aria-labelledby="botoCert"
-              >
-                {this.props.title + " "}  {errorMessage}
-              </button>
+          <div className="alert alert-danger">
+            <a data-toggle="modal" 
+            onClick={this.pitjarBoto} 
+            href="javascript:void(0);" 
+            style={{ color: "red", marginTop: "20px" }} 
+            aria-labelledby="botoCert"
+            >{this.props.title + " "}  {errorMessage}
+            </a>
+          </div>
+          /*<button
+            type="button"
+            data-toggle="modal"
+            onClick={this.pitjarBoto}
+            className=" btn btn-danger"
+            tabIndex={520}
+            aria-labelledby="botoCert"
+          >
+            {this.props.title + " "}  {errorMessage}
+          </button>*/
         } else {
           certificateButton = null;
         }
@@ -147,32 +160,50 @@ class CertificatBoto extends React.Component<
           //Te certificat
           icon = <i className="fas fa-file-download"></i>;
           certificateButton =
-              <button
-                type="button"
-                data-toggle="modal"
-                onClick={this.pitjarBoto}
-                className=" btn btn-success"
-                tabIndex={520}
-                aria-labelledby="botoCert"
-              >
-                {this.props.title + " "}  {icon}
-              </button>
+          <div className="alert alert-success">
+            <a 
+            data-toggle="modal" 
+            onClick={this.pitjarBoto}
+            href="javascript:void(0);"
+            style={{ color: "green", marginTop: "20px" }}
+            aria-labelledby="botoCert">{this.props.title + " "}  {icon}</a>
+            </div>
+
+          /*<button
+            type="button"
+            data-toggle="modal"
+            onClick={this.pitjarBoto}
+            className=" btn btn-success"
+            tabIndex={520}
+            aria-labelledby="botoCert"
+          >
+            {this.props.title + " "}  {icon}
+          </button>*/
 
         } else {
           if (this.props.noDisponiblesVisible) {
             //No te certificat
             icon = <i className="far fa-time"></i>;
             certificateButton =
-                <button
-                  type="button"
-                  data-toggle="modal"
-                  onClick={this.pitjarBoto}
-                  className=" btn btn-warning"
-                  tabIndex={520}
-                  aria-labelledby="botoCert"
-                >
-                  {this.props.title + ": No te certificat "} {icon}
-                </button>
+            <div className="alert alert-warning">
+              <a data-toggle="modal" 
+              style={{ color: "grey", marginTop: "20px"}} 
+              aria-labelledby="botoCert"
+              >{this.props.title + ": No te certificat "} {icon}
+              </a>
+              </div>
+
+
+            /*<button
+              type="button"
+              data-toggle="modal"
+              onClick={this.pitjarBoto}
+              className=" btn btn-warning"
+              tabIndex={520}
+              aria-labelledby="botoCert"
+            >
+              {this.props.title + ": No te certificat "} {icon}
+            </button>*/
 
           } else {
             certificateButton = null;
@@ -188,14 +219,13 @@ class CertificatBoto extends React.Component<
 
     return (
       <>
-        {isVisible && (   
+        {isVisible && (
           <div
-          className="col-md-12 border-0 float-left p-0"
-          id="botoCert"
-          style={{ marginTop: "20px" }}
-        >       
+            className="col-md-12 border-0 float-left p-0"
+            id="botoCert"
+          >
             {certificateButton}
-        </div>
+          </div>
         )}
       </>
     );
