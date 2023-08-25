@@ -1,3 +1,5 @@
+<%@page import="es.caib.carpeta.commons.utils.Constants"%>
+<%@page import="es.caib.carpeta.commons.utils.Configuracio"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -14,10 +16,12 @@
     <script type="text/javascript" src="<c:url value="/src/assets/js/react.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/src/assets/js/react-dom.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/src/assets/js/babel.min.js"/>"></script>
+    
 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<%=Configuracio.getProperty(Constants.CARPETA_PROPERTY_BASE + "googlestatskey")%>"></script> 
+    <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-TM4RLMKYJG'); </script>
 	
-	<%-- google analytics --%>
-	<script type="text/javascript" async="" src="<c:url value="/src/assets/js/ga.js"/>"></script>
+	
     <%-- JQuery --%>
 	<script src="<c:url value="/src/assets/js/jquery-3.5.0.js"/>"></script>    
 	<script src="<c:url value="/src/assets/js/jquery-ui.min.js"/>"></script>
