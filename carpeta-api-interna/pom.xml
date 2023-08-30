@@ -137,7 +137,6 @@
                         <configuration>
                             <inputSpec>${project.basedir}/target/openapi/openapi.json</inputSpec>
                             <language>java</language>
-                            <configHelp>java</configHelp>
                             <library>resteasy</library>
                             <configOptions>
                                 <groupId>es.caib.carpeta</groupId>
