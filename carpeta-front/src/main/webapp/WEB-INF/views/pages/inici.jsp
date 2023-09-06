@@ -17,9 +17,8 @@
     <script type="text/javascript" src="<c:url value="/src/assets/js/react-dom.js"/>"></script>
     <script type="text/javascript" src="<c:url value="/src/assets/js/babel.min.js"/>"></script>
     
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id=<%=Configuracio.getProperty(Constants.CARPETA_PROPERTY_BASE + "googlestatskey")%>"></script> 
-    <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-TM4RLMKYJG'); </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=<%= Configuracio.getProperty(Constants.CARPETA_PROPERTY_BASE + "googlestatskey") %>"></script> 
+    <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', <%= Configuracio.getProperty(Constants.CARPETA_PROPERTY_BASE + "googlestatskey") %>); </script>
 	
 	
     <%-- JQuery --%>
