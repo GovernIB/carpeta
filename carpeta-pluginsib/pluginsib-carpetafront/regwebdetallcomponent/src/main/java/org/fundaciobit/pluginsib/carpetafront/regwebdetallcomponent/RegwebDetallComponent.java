@@ -24,6 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.BindingProvider;
 
+import org.fundaciobit.genapp.common.i18n.I18NException;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -226,7 +228,11 @@ public abstract class RegwebDetallComponent extends AbstractCarpetaFrontPlugin {
             }
 
         } catch (Exception e) {
-            log.error("Error detallRegistreJson: " + e.getMessage());
+            
+            
+            log.error("Error CLASS: " + e.getClass());
+            
+            log.error("Error detallRegistreJson: " + e.getMessage(), e);
             dades.put("error", e.getMessage());
         }
 

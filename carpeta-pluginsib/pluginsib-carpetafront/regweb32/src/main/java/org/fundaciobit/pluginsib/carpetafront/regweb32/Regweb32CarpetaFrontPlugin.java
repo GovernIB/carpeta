@@ -32,7 +32,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.sql.Timestamp;
-import java.text.DateFormat;
 
 import es.caib.carpeta.pluginsib.carpetafront.api.TitlesInfo;
 import com.google.gson.Gson;
@@ -291,6 +290,33 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 	        } else {
 	            numeroRegistro = new String(Base64.getDecoder().decode(numeroRegistro));
 	            log.info(" XXXXXXXXXXXXXXXXXXXXXX   numeroRegistro DECODED => " + numeroRegistro);
+	            
+	            
+	            try {
+	                // Es una estructura JSON ???
+	                // {"numreg":"GOIBS505/2022","nifs":["12345678Z","87654321Z"]}
+	                Gson gs = new GsonBuilder().create();
+	                RegistreInfo ri = gs.fromJson(numeroRegistro, RegistreInfo.class);
+	                
+	                if (ri == null && ri.numreg != null) {
+	                    numeroRegistro = ri.numreg; 
+	                }	                
+	                
+	                List<String> nifs = new ArrayList<String>();
+	                for (String nif : ri.nifs) {
+                        nifs.add(nif.toUpperCase());
+                    }
+
+	                if (!nifs.contains(userData.getAdministrationID().toUpperCase())) {
+	                    throw new Exception("Vostè no forma part de la llista d'interessats del registre que intenta consultar");
+	                }
+	                
+	                
+	              } catch(com.google.gson.JsonSyntaxException je) {
+	                  // No es una estructura JSON. NO podem comprovar NIFS
+	              }
+	            
+	            
 	            map.put("numeroRegistro", numeroRegistro);
 	        }
 
@@ -306,6 +332,17 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 	    } catch (Exception e) {
 	        // XYZ ZZZ
 	        log.error("Error generant pàgina bàsica: " + e.getMessage(), e);
+	        
+	        
+	        try {
+
+                errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath,
+                        locale);
+                
+            } catch (Exception e2) {
+                log.error("Error mostrant pàgina d'error (index): " + e2.getMessage(), e2);
+            }
+	        
 	    }
     	
     }
@@ -611,4 +648,43 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
         return REGWEB32_PROPERTY_BASE;
     }
 
+    public static class RegistreInfo {
+        
+        public String numreg;
+        
+        public String[] nifs;
+        
+    }
+    
+    
+    public static void main(String[] args) {
+        Gson gs = new GsonBuilder().create();
+        
+        RegistreInfo ri = new RegistreInfo();
+        
+        ri.numreg = "GOIBS505/2022";
+        ri.nifs = new String[] { "12345678Z", "87654321Z" };
+        
+        
+        String json = gs.toJson(ri);
+        
+        
+                
+        System.out.println(json);
+        
+        System.out.println(Base64.getEncoder().encodeToString(json.getBytes()));
+        
+        
+        json = "43096845C";
+        
+        try {
+          ri = gs.fromJson(json, RegistreInfo.class);
+        } catch(com.google.gson.JsonSyntaxException je) {
+            System.err.println("No es una estructura: ");
+        }
+        
+        
+        
+    }
+    
 }

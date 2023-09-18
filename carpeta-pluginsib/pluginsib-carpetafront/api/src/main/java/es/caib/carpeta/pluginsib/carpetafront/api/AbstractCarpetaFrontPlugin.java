@@ -354,7 +354,7 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
 	        		"error.veure.detalls", "error.tornar"};
 
             for (String t : traduccions) {
-            	String traduccion = getTraduccio(RESOURCE_BUNDLE_NAME, t, locale);
+            	String traduccion = getTraduccio(RESOURCE_BUNDLE_NAME, t, locale, errorMsg);
                 map.put(t.replace('.', '_'), traduccion);
             }
 	
