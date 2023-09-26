@@ -86,8 +86,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             put(MIME_DEFAULT, "OCTET-STREAM");
         }
     };
-    
-    
+
     public static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
     /**
@@ -126,23 +125,23 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 
     @Override
     public String getStartUrl(String absolutePluginRequestPath, String relativePluginRequestPath,
-            HttpServletRequest request, UserData userData, String administrationIDEncriptat,
-            String parameter, IListenerLogCarpeta logCarpeta) throws Exception {
+            HttpServletRequest request, UserData userData, String administrationIDEncriptat, String parameter,
+            IListenerLogCarpeta logCarpeta) throws Exception {
 
         registerUserData(userData);
 
         String startURL;
 
-        startURL =  absolutePluginRequestPath + "/" + INDEX_REACT_PAGE;
-        
+        startURL = absolutePluginRequestPath + "/" + INDEX_REACT_PAGE;
+
         if (parameter != null && parameter.trim().length() != 0) {
             log.info("Regweb32CarpetaFrontPlugin:: PARAMETER => ]" + parameter + "[");
-            
+
             startURL = startURL + "?numeroRegistro=" + parameter;
         } else {
-        	
+
             //startURL = absolutePluginRequestPath + "/" + ESPERA_LLISTAT_PAGE;
-        	
+
         }
 
         log.info(" getStartUrl( ); => " + startURL);
@@ -157,49 +156,44 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
     }
 
     @Override
-    public void requestCarpetaFront(String absolutePluginRequestPath,
-            String relativePluginRequestPath, String query, HttpServletRequest request,
-            HttpServletResponse response, UserData userData, String administrationEncriptedID,
-            Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
+    public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
 
         if (isDevelopment()) {
             log.info("Regweb32CarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
             log.info("Regweb32CarpetaFrontPlugin::requestCarpetaFront => administrationID: "
                     + userData.getAdministrationID());
-            log.info(
-                    "Regweb32CarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
-                            + administrationEncriptedID);
+            log.info("Regweb32CarpetaFrontPlugin::requestCarpetaFront => administrationEncriptedID: "
+                    + administrationEncriptedID);
         }
 
         try {
-           if (query.startsWith(INDEX_REACT_PAGE)) {
-                
-            	index(absolutePluginRequestPath, relativePluginRequestPath, query, request,
-                        response, userData, administrationEncriptedID, 0, locale, isGet);
-            
+            if (query.startsWith(INDEX_REACT_PAGE)) {
+
+                index(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
+                        administrationEncriptedID, 0, locale, isGet);
+
             } else if (query.startsWith(REACT_JS_PAGE)) {
-            	
+
                 reactjs(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
                         administrationEncriptedID, locale, isGet);
-                
-           } else if (query.startsWith(URL_REST_SERVICE)) {
-                	
-                llistatDeRegistresJson(absolutePluginRequestPath, relativePluginRequestPath, query,
-                        request, response, userData, administrationEncriptedID, locale, isGet,
-                        logCarpeta);
-           
+
+            } else if (query.startsWith(URL_REST_SERVICE)) {
+
+                llistatDeRegistresJson(absolutePluginRequestPath, relativePluginRequestPath, query, request, response,
+                        userData, administrationEncriptedID, locale, isGet, logCarpeta);
+
             } else {
 
-                super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath,
-                        query, request, response, userData, administrationEncriptedID, locale,
-                        isGet, logCarpeta);
+                super.requestCarpetaFront(absolutePluginRequestPath, relativePluginRequestPath, query, request,
+                        response, userData, administrationEncriptedID, locale, isGet, logCarpeta);
             }
 
         } catch (Exception e) {
             try {
 
-                errorPage(e.getLocalizedMessage(), e, request, response, absolutePluginRequestPath,
-                        locale);
+                errorPage(e.getLocalizedMessage(), e, request, response, absolutePluginRequestPath, locale);
                 log.error("Error plugin registre: " + e.getMessage(), e);
             } catch (Exception e2) {
                 log.error("Error mostrant pàgina d'error: " + e2.getMessage(), e2);
@@ -213,14 +207,14 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
     public boolean isDevelopment() {
         return "true".equals(getProperty(REGWEB32_PROPERTY_BASE + "development"));
     }
-    
+
     @Override
     public boolean isReactComponent() {
-    	if(getProperty(REGWEB32_PROPERTY_BASE + "isreact") != null) {
-    	   log.error("La propietat [" + REGWEB32_PROPERTY_BASE + "isreact"  + "] del plugin " 
-    	   + this.getClass().getName() + " està deprecada. Per favor esborri aquesta propietat.") ;   
-    	}
-    	return true;
+        if (getProperty(REGWEB32_PROPERTY_BASE + "isreact") != null) {
+            log.error("La propietat [" + REGWEB32_PROPERTY_BASE + "isreact" + "] del plugin "
+                    + this.getClass().getName() + " està deprecada. Per favor esborri aquesta propietat.");
+        }
+        return true;
     }
 
     @Override
@@ -235,137 +229,130 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
     // --------------------------------------------------------------------------------------
 
     protected static final String INDEX_REACT_PAGE = "regweb32_index.html";
-    
-    public void index(String absolutePluginRequestPath, String relativePluginRequestPath,
-            String query, HttpServletRequest request, HttpServletResponse response,
-            UserData userData, String administrationEncriptedID, int pageNumber, Locale locale,
-            boolean isGet) {
-    	
-    	try {
-    		
-	    	response.setContentType("text/html");
-	
-	        String resource = "/webpage/" + INDEX_REACT_PAGE;
-	
-	        response.setHeader("Content-Disposition",
-	                "inline;filename=\"" + java.net.URLEncoder.encode(INDEX_REACT_PAGE, "UTF-8") + "\"");
-	
-	        response.setCharacterEncoding("utf-8");
-	
-	        InputStream input = this.getClass().getResourceAsStream(resource);
-	
-	        String plantilla = IOUtils.toString(input, "UTF-8");
-	
-	        Map<String, Object> map = new HashMap<String, Object>();
-	
-	        Gson json = new Gson();
-	
-	        TitlesInfo titles = getTitlesInfo();
 
-	        map.put("titles", json.toJson(titles.getTitlesByLang()));
-	
-	        map.put("subtitles", json.toJson(titles.getSubtitlesByLang()));
-	
-	        log.info("absolutePluginRequestPath ==> " + absolutePluginRequestPath);
-	
-	        String pathtojs = absolutePluginRequestPath + "/" + REACT_JS_PAGE;
-	
-	        map.put("pathtojs", pathtojs);
-	        
-	        String pathtoservei = absolutePluginRequestPath + "/" + URL_REST_SERVICE;
-	
-	        map.put("pathtoservei", pathtoservei);
-	        
-	        String detallpathtoservei = absolutePluginRequestPath + "/" + RegwebDetallComponent.DETALL_REACT_PAGE;
-	        
-	        log.info("detallpathtoservei => " + detallpathtoservei);	        
-	        
-	        map.put("detallpathtoservei", detallpathtoservei);
+    public void index(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, int pageNumber, Locale locale, boolean isGet) {
 
-	        String numeroRegistro = request.getParameter("numeroRegistro");
-	        log.info(" XXXXXXXXXXXXXXXXXXXXXX   numeroRegistro => " + numeroRegistro);
-	        
-	        if (numeroRegistro == null) {
-	            map.put("numeroRegistro", "");
-	        } else {
-	            numeroRegistro = new String(Base64.getDecoder().decode(numeroRegistro));
-	            log.info(" XXXXXXXXXXXXXXXXXXXXXX   numeroRegistro DECODED => " + numeroRegistro);
-	            
-	            
-	            try {
-	                // Es una estructura JSON ???
-	                // {"numreg":"GOIBS505/2022","nifs":["12345678Z","87654321Z"]}
-	                Gson gs = new GsonBuilder().create();
-	                RegistreInfo ri = gs.fromJson(numeroRegistro, RegistreInfo.class);
-	                
-	                if (ri == null && ri.numreg != null) {
-	                    numeroRegistro = ri.numreg; 
-	                }	                
-	                
-	                List<String> nifs = new ArrayList<String>();
-	                for (String nif : ri.nifs) {
+        try {
+
+            response.setContentType("text/html");
+
+            String resource = "/webpage/" + INDEX_REACT_PAGE;
+
+            response.setHeader("Content-Disposition",
+                    "inline;filename=\"" + java.net.URLEncoder.encode(INDEX_REACT_PAGE, "UTF-8") + "\"");
+
+            response.setCharacterEncoding("utf-8");
+
+            InputStream input = this.getClass().getResourceAsStream(resource);
+
+            String plantilla = IOUtils.toString(input, "UTF-8");
+
+            Map<String, Object> map = new HashMap<String, Object>();
+
+            Gson json = new Gson();
+
+            TitlesInfo titles = getTitlesInfo();
+
+            map.put("titles", json.toJson(titles.getTitlesByLang()));
+
+            map.put("subtitles", json.toJson(titles.getSubtitlesByLang()));
+
+            log.info("absolutePluginRequestPath ==> " + absolutePluginRequestPath);
+
+            String pathtojs = absolutePluginRequestPath + "/" + REACT_JS_PAGE;
+
+            map.put("pathtojs", pathtojs);
+
+            String pathtoservei = absolutePluginRequestPath + "/" + URL_REST_SERVICE;
+
+            map.put("pathtoservei", pathtoservei);
+
+            String detallpathtoservei = absolutePluginRequestPath + "/" + RegwebDetallComponent.DETALL_REACT_PAGE;
+
+            log.info("detallpathtoservei => " + detallpathtoservei);
+
+            map.put("detallpathtoservei", detallpathtoservei);
+
+            String numeroRegistro = request.getParameter("numeroRegistro");
+            log.info(" XXXXXXXXXXXXXXXXXXXXXX   numeroRegistro => " + numeroRegistro);
+
+            if (numeroRegistro == null) {
+                map.put("numeroRegistro", "");
+            } else {
+                numeroRegistro = new String(Base64.getDecoder().decode(numeroRegistro));
+                log.info(" XXXXXXXXXXXXXXXXXXXXXX   numeroRegistro DECODED => " + numeroRegistro);
+
+                try {
+                    // Es una estructura JSON ???
+                    // {"numreg":"GOIBS505/2022","nifs":["12345678Z","87654321Z"]}
+                    Gson gs = new GsonBuilder().create();
+                    RegistreInfo ri = gs.fromJson(numeroRegistro, RegistreInfo.class);
+
+                    if (ri == null && ri.numreg != null) {
+                        numeroRegistro = ri.numreg;
+                    }
+
+                    List<String> nifs = new ArrayList<String>();
+                    for (String nif : ri.nifs) {
                         nifs.add(nif.toUpperCase());
                     }
 
-	                if (!nifs.contains(userData.getAdministrationID().toUpperCase())) {
-	                    throw new Exception("Vostè no forma part de la llista d'interessats del registre que intenta consultar");
-	                }
-	                
-	                
-	              } catch(com.google.gson.JsonSyntaxException je) {
-	                  // No es una estructura JSON. NO podem comprovar NIFS
-	              }
-	            
-	            
-	            map.put("numeroRegistro", numeroRegistro);
-	        }
+                    if (!nifs.contains(userData.getAdministrationID().toUpperCase())) {
+                        throw new Exception(
+                                "Vostè no forma part de la llista d'interessats del registre que intenta consultar");
+                    }
 
-	        String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
-	        
-	        try {
-	            response.getWriter().println(generat);
-	            response.flushBuffer();
-	        } catch (IOException e) {
-	            log.error("Error obtening writer: " + e.getMessage(), e);
-	        }
-	
-	    } catch (Exception e) {
-	        // XYZ ZZZ
-	        log.error("Error generant pàgina bàsica: " + e.getMessage(), e);
-	        
-	        
-	        try {
+                } catch (com.google.gson.JsonSyntaxException je) {
+                    // No es una estructura JSON. NO podem comprovar NIFS
+                }
 
-                errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath,
-                        locale);
-                
+                map.put("numeroRegistro", numeroRegistro);
+            }
+
+            String generat = TemplateEngine.processExpressionLanguage(plantilla, map, locale);
+
+            try {
+                response.getWriter().println(generat);
+                response.flushBuffer();
+            } catch (IOException e) {
+                log.error("Error obtening writer: " + e.getMessage(), e);
+            }
+
+        } catch (Exception e) {
+            // XYZ ZZZ
+            log.error("Error generant pàgina bàsica: " + e.getMessage(), e);
+
+            try {
+
+                errorPage(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
+
             } catch (Exception e2) {
                 log.error("Error mostrant pàgina d'error (index): " + e2.getMessage(), e2);
             }
-	        
-	    }
-    	
+
+        }
+
     }
-    
+
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
     // ------------------- C O N S U L T A  S E R V I C E ----------------
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
-    
+
     protected static final String URL_REST_SERVICE = "consultaLlistat";
-    
-    public void llistatDeRegistresJson(String absolutePluginRequestPath,
-            String relativePluginRequestPath, String query, HttpServletRequest request,
-            HttpServletResponse response, UserData userData, String administrationEncriptedID,
-            Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
-        
-        
+
+    public void llistatDeRegistresJson(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+            HttpServletRequest request, HttpServletResponse response, UserData userData,
+            String administrationEncriptedID, Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
+
         log.info("\n\n\n================================\nllistatDeRegistresJson:: ENTRA");
-    	
-    	try {
-    		
-    		/* Filtre número de registre */
+
+        try {
+
+            /* Filtre número de registre */
             String formNumero = request.getParameter("numero");
 
             /* Filtre número de registres per pàgina */
@@ -377,20 +364,18 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
                 pageNumber = "1";
             }
 
-			// Número de registres a mostrar per pàgina
+            // Número de registres a mostrar per pàgina
             //final int numItems = 10;
 
             /* Filtre estat */
-            String formEstat = (request.getParameter("estado") != null)
-                    ? request.getParameter("estado")
-                    : "0";
+            String formEstat = (request.getParameter("estado") != null) ? request.getParameter("estado") : "0";
 
             /* Filtre dates */
             Date formDataInici;
             Date formDataFi;
             String formDataIniciStr = request.getParameter("fechaInicio");
             String formDataFiStr = request.getParameter("fechaFin");
-    		
+
             String parametros = "";
             Calendar cal = Calendar.getInstance();
             SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
@@ -423,76 +408,75 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
                 log.info("ESTAT => " + formEstat);
                 log.info("PARAMETROS => " + parametros);
             }
-    		
 
-    		response.setContentType("application/json");
+            response.setContentType("application/json");
             response.setCharacterEncoding("utf-8");
 
             // CERCA
             List<AsientoWs> registresRegweb;
-            
+
             formDataFi = DateUtils.sumarRestarDiasFecha(formDataFi, 1);
 
             log.info("llistat::registrosPorPagina: " + formRegPorPagina);
             log.info("llistat::pageNumber: " + pageNumber);
             final String nif = userData.getAdministrationID();
             log.info("llistat::nif: " + nif);
-            
+
             int elementsPerPagina = Integer.parseInt(formRegPorPagina);
 
             ResultadoBusquedaWs result;
-            result = getRegistres(nif, getEntidad(), formNumero,
-                    formDataInici, formDataFi, formEstat, Integer.parseInt(pageNumber), elementsPerPagina, locale);
+            result = getRegistres(nif, getEntidad(), formNumero, formDataInici, formDataFi, formEstat,
+                    Integer.parseInt(pageNumber), elementsPerPagina, locale);
 
             //@SuppressWarnings("unchecked")
             registresRegweb = (List<AsientoWs>) (List<?>) result.getResults();
             Paginacio paginacio = new Paginacio();
-            
+
             paginacio.setElementsPerPagina(elementsPerPagina);
             paginacio.setElementsRetornats(registresRegweb.size());
 
             paginacio.setPaginaActual(result.getPageNumber());
             final int totalElements = result.getTotalResults();
             paginacio.setTotalElements(totalElements);
-            paginacio.setTotalPagines((int)(Math.floor(totalElements/elementsPerPagina)) + ((totalElements % elementsPerPagina == 0)?0:1));
-            
-            
+            paginacio.setTotalPagines((int) (Math.floor(totalElements / elementsPerPagina))
+                    + ((totalElements % elementsPerPagina == 0) ? 0 : 1));
+
             if (isDevelopment()) {
-            log.info("\n\n   === PAGINACIO ===============");
-            log.info(" + REGWEB: paginacio.getPaginaActual() => " + paginacio.getPaginaActual() );
-            log.info(" + REGWEB: paginacio.getTotalElements() => " + paginacio.getTotalElements() );
-            log.info(" + REGWEB: paginacio.getTotalPagines() => " + paginacio.getTotalPagines());
-            log.info(" + REGWEB: paginacio.getElementsPerPagina() => " + paginacio.getElementsPerPagina());
-            log.info(" + REGWEB: paginacio.getElementsRetornats() => " + paginacio.getElementsRetornats());
-            log.info(" + REGWEB: paginacio.getTotalPagines PART 1 => " + (int) (Math.floor(totalElements / elementsPerPagina)));
-            log.info(" + REGWEB: paginacio.getTotalPagines PART 2 => " +  ((totalElements % elementsPerPagina == 0) ? 0 : 1));
+                log.info("\n\n   === PAGINACIO ===============");
+                log.info(" + REGWEB: paginacio.getPaginaActual() => " + paginacio.getPaginaActual());
+                log.info(" + REGWEB: paginacio.getTotalElements() => " + paginacio.getTotalElements());
+                log.info(" + REGWEB: paginacio.getTotalPagines() => " + paginacio.getTotalPagines());
+                log.info(" + REGWEB: paginacio.getElementsPerPagina() => " + paginacio.getElementsPerPagina());
+                log.info(" + REGWEB: paginacio.getElementsRetornats() => " + paginacio.getElementsRetornats());
+                log.info(" + REGWEB: paginacio.getTotalPagines PART 1 => "
+                        + (int) (Math.floor(totalElements / elementsPerPagina)));
+                log.info(" + REGWEB: paginacio.getTotalPagines PART 2 => "
+                        + ((totalElements % elementsPerPagina == 0) ? 0 : 1));
             }
 
             List<Registre> registres = new ArrayList<Registre>();
-            
+
             for (AsientoWs a : registresRegweb) {
-                final String estatStr = super.getTraduccio("registro.estado."+a.getEstado(), locale);
+                final String estatStr = super.getTraduccio("registro.estado." + a.getEstado(), locale);
                 final String fechaStr = dateFormat.format(a.getFechaRegistro()).replace(" ", "\u00A0"); // == Nonbreaking space
                 registres.add(new Registre(a.getNumeroRegistro(), fechaStr, a.getExtracto(), estatStr,
                         a.getDenominacionDestino()));
             }
-            
-            
 
             Map<String, Object> dades = new HashMap<String, Object>();
-            
+
             dades.put("registres", registres);
             dades.put("paginacio", paginacio);
-                      
+
             Gson json = new GsonBuilder().setDateFormat("dd-MM-yyyy HH:mm").create();
             String generat = json.toJson(dades);
-            
+
             //log.info("XYZ ZZZ Generat: " + generat);
-            
+
             try {
                 response.getWriter().println(generat);
                 response.flushBuffer();
-                
+
             } catch (IOException e) {
                 log.error("Error obtening writer: " + e.getMessage(), e);
             }
@@ -501,9 +485,9 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             log.error("Error consultant registres a traves de API: " + e.getMessage(), e);
             errorRest(e.getMessage(), e, request, response, absolutePluginRequestPath, locale);
         }
-    	
+
     }
-    
+
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
     // ------------------- JAVASCRIPT REACT ----------------
@@ -544,12 +528,9 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 
     }
 
-    
-    
-
-    public ResultadoBusquedaWs getRegistres(String administrationID, String entidad,
-            String formNumero, Date formDataInici, Date formDataFi, String formEstat,
-            int pageNumber, int numItems, Locale locale) throws Exception {
+    public ResultadoBusquedaWs getRegistres(String administrationID, String entidad, String formNumero,
+            Date formDataInici, Date formDataFi, String formEstat, int pageNumber, int numItems, Locale locale)
+            throws Exception {
 
         RegWebAsientoRegistralWs service = super.getRegWebAsientoRegistralWsService();
 
@@ -578,9 +559,8 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             }
         }
 
-        if (isDevelopment()) 
-        {
-            
+        if (isDevelopment()) {
+
             log.info("================== PARAMETROS LLAMADA API REGWEB ===============");
             log.info("locale => " + locale.getLanguage());
             log.info("pageNumber => " + pageNumber);
@@ -592,9 +572,8 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             log.info("formEstats.size => " + formEstats.size());
         }
 
-        ResultadoBusquedaWs result = service.obtenerAsientosCiudadanoCarpeta(entidad,
-                administrationID, pageNumber, locale.getLanguage(),
-                new Timestamp(formDataInici.getTime()), new Timestamp(formDataFi.getTime()),
+        ResultadoBusquedaWs result = service.obtenerAsientosCiudadanoCarpeta(entidad, administrationID, pageNumber,
+                locale.getLanguage(), new Timestamp(formDataInici.getTime()), new Timestamp(formDataFi.getTime()),
                 formNumero, formEstats, "", numItems);
 
         if (isDevelopment()) {
@@ -612,8 +591,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
                     log.info("ar.getNumeroRegistroFormateado() => " + (ar.getNumeroRegistro()));
                     log.info("ar.getResumen() => " + ar.getExtracto());
                     log.info("ar.getFechaRegistro(); => " + ar.getFechaRegistro());
-                    log.info("ar.getUnidadTramitacionDestinoDenominacion() => "
-                            + ar.getDenominacionDestino());
+                    log.info("ar.getUnidadTramitacionDestinoDenominacion() => " + ar.getDenominacionDestino());
                     log.info("ar.getEstado() => " + ar.getEstado());
 
                     x++;
@@ -625,10 +603,6 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
 
         return result;
     }
-    
-    
-    
-    
 
     /**
      * Mètode que retorna la icona del plugin
@@ -649,42 +623,27 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
     }
 
     public static class RegistreInfo {
-        
+
         public String numreg;
-        
+
         public String[] nifs;
-        
+
     }
-    
-    
+
     public static void main(String[] args) {
         Gson gs = new GsonBuilder().create();
-        
+
         RegistreInfo ri = new RegistreInfo();
-        
+
         ri.numreg = "GOIBS505/2022";
         ri.nifs = new String[] { "12345678Z", "87654321Z" };
-        
-        
+
         String json = gs.toJson(ri);
-        
-        
-                
+
         System.out.println(json);
-        
+
         System.out.println(Base64.getEncoder().encodeToString(json.getBytes()));
-        
-        
-        json = "43096845C";
-        
-        try {
-          ri = gs.fromJson(json, RegistreInfo.class);
-        } catch(com.google.gson.JsonSyntaxException je) {
-            System.err.println("No es una estructura: ");
-        }
-        
-        
-        
+
     }
-    
+
 }
