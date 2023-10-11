@@ -141,11 +141,6 @@ public class ExpedientsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     }
 
-    @Override
-    public boolean isReactComponent() {
-        return true;
-    }
-
     /**
      * Mètode que retorna la icona del plugin
      * 

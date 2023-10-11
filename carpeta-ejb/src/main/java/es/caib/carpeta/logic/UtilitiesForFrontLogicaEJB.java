@@ -301,8 +301,8 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
 
         PluginInfo pluginInfo;
         pluginInfo = new PluginInfo(String.valueOf(p.getPluginID()), p.getNom().getTraduccio(language).getValor(),
-                p.getDescripcio().getTraduccio(language).getValor(), p.getContext(), cfp.isReactComponent(),
-                gravetatAvis, missatgeAvis, ordre, p.getTipus());
+                p.getDescripcio().getTraduccio(language).getValor(), p.getContext(),gravetatAvis, missatgeAvis, 
+                ordre, p.getTipus());
 
         return pluginInfo;
     }

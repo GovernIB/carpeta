@@ -273,11 +273,6 @@ public abstract class AbstractCarpetaFrontPlugin extends AbstractPluginFullUtili
 
     public static final String LOGORESOURCE = "logo";
 
-    @Override
-    public boolean isReactComponent() {
-        return false;
-    }
-
     public abstract String getPropertyBase();
 
     protected abstract FileInfo getResourceIcon(Locale locale);

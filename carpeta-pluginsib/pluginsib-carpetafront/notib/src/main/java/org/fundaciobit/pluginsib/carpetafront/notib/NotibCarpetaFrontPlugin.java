@@ -84,16 +84,10 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         registerUserData(userData);
 
-        String startURL = (isReactComponent()) ? absolutePluginRequestPath + "/" + INDEX_HTML_PAGE
-                : absolutePluginRequestPath + "/" + NOTIFICACIONS_ESPERA_NOTIB_PAGE;
+        String startURL = (absolutePluginRequestPath + "/" + INDEX_HTML_PAGE);
 
         log.info(" NOTIB getStartUrl( ); => " + startURL);
         return startURL;
-    }
-
-    @Override
-    public boolean isReactComponent() {
-        return true;
     }
 
     @Override

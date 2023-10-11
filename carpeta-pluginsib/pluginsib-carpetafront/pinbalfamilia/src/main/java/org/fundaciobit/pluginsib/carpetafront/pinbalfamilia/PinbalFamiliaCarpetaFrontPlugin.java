@@ -126,11 +126,6 @@ public class PinbalFamiliaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontP
 
     }
 
-    @Override
-    public boolean isReactComponent() {
-        return true;
-    }
-
     /**
      * Mètode que retorna la icona del plugin
      * 

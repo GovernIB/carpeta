@@ -91,8 +91,7 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         registerUserData(userdata);
 
-        String startURL = (isReactComponent()) ? absolutePluginRequestPath + "/" + INDEX_HTML_PAGE
-                : absolutePluginRequestPath + "/" + ESPERA_CERTIFICATS_PAGE;
+        String startURL = absolutePluginRequestPath + "/" + INDEX_HTML_PAGE;
 
         log.info(" CERTIFICATS getStartUrl( ); => " + startURL);
         return startURL;
@@ -140,11 +139,6 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     userData, administrationEncriptedID, locale, isGet, logCarpeta);
         }
 
-    }
-
-    @Override
-    public boolean isReactComponent() {
-        return true;
     }
 
     @Override

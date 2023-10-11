@@ -1,13 +1,11 @@
 package es.caib.carpeta.front.controller;
 
-
 import es.caib.carpeta.commons.utils.Constants;
 import es.caib.carpeta.front.controller.WebUIController.EnllazInfo;
 import es.caib.carpeta.front.controller.WebUIController.SeccioInfo;
 import es.caib.carpeta.logic.utils.PluginInfo;
 
 import java.util.List;
-
 
 /**
  * 
@@ -17,9 +15,9 @@ import java.util.List;
 public class ItemInfo implements Comparable<ItemInfo> {
 
     public static final int TIPUS_REACT_PLUGIN_PUBLIC = -2;
-    public static final int TIPUS_HTML_PLUGIN_PUBLIC = -1;
+    //public static final int TIPUS_HTML_PLUGIN_PUBLIC = -1;
     public static final int TIPUS_REACT_PLUGIN = 0;
-    public static final int TIPUS_HTML_PLUGIN = 1;
+    //public static final int TIPUS_HTML_PLUGIN = 1;
     public static final int TIPUS_ENLLAZ = 2;
     public static final int TIPUS_SECCIO = 3;
     public static final int TIPUS_PSEUDOPLUGIN = 4;
@@ -54,7 +52,7 @@ public class ItemInfo implements Comparable<ItemInfo> {
     }
 
     public ItemInfo(String id, String nom, String descripcio, String context, int tipus, int gravetat, String missatge,
-                    String url, String urllogo, int order, List<PluginInfo> plugins) {
+            String url, String urllogo, int order, List<PluginInfo> plugins) {
         super();
         this.id = id;
         this.nom = nom;
@@ -149,28 +147,19 @@ public class ItemInfo implements Comparable<ItemInfo> {
         this.order = order;
     }
 
-
     public static ItemInfo createFromPluginInfo(PluginInfo p) {
         final int tipusPlugin = p.getTipusPlugin();
         final int tipus;
-        if (p.isReactComponent()) {
-            if (tipusPlugin == Constants.PLUGIN_TIPUS_FRONT_PRIVAT) {
-                tipus =  TIPUS_REACT_PLUGIN;
-            } else {
-                tipus = TIPUS_REACT_PLUGIN_PUBLIC;
-            }
+
+        if (tipusPlugin == Constants.PLUGIN_TIPUS_FRONT_PRIVAT) {
+            tipus = TIPUS_REACT_PLUGIN;
         } else {
-            if (tipusPlugin == Constants.PLUGIN_TIPUS_FRONT_PRIVAT) {
-                tipus =  TIPUS_HTML_PLUGIN;
-            } else {
-                tipus = TIPUS_HTML_PLUGIN_PUBLIC;
-            }
+            tipus = TIPUS_REACT_PLUGIN_PUBLIC;
         }
 
-        return new ItemInfo(p.getPluginID(), p.getNom(), p.getDescripcio(), p.getContext(),
-                tipus,
-                p.getGravetat() == null ? 0 : (int) (long) p.getGravetat(), p.getMissatge(), null,                        
-                        "/pluginfront/pluginicon/" + p.getPluginID(), p.getOrder());
+        return new ItemInfo(p.getPluginID(), p.getNom(), p.getDescripcio(), p.getContext(), tipus,
+                p.getGravetat() == null ? 0 : (int) (long) p.getGravetat(), p.getMissatge(), null,
+                "/pluginfront/pluginicon/" + p.getPluginID(), p.getOrder());
 
     }
 

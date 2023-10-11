@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 import org.apache.log4j.Logger;
 import org.fundaciobit.genapp.common.i18n.I18NException;
 
-import io.github.jav.exposerversdk.ExpoMessageSound;
 import io.github.jav.exposerversdk.ExpoPushMessage;
 import io.github.jav.exposerversdk.ExpoPushMessageTicketPair;
 import io.github.jav.exposerversdk.ExpoPushReceipt;

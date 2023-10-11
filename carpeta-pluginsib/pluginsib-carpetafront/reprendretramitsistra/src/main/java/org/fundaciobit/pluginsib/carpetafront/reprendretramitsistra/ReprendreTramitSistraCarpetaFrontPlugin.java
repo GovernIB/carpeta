@@ -104,19 +104,16 @@ public class ReprendreTramitSistraCarpetaFrontPlugin extends AbstractCarpetaFron
 
         String startURL;
 
-        if (parameter == null) {
+        /*if (parameter == null) {
             startURL = (isReactComponent()) ? absolutePluginRequestPath + "/" + INDEX_HTML_PAGE : absolutePluginRequestPath + "/" + SHOW_FORM_TRAMITID;
         } else {
             startURL = absolutePluginRequestPath + "/" + TRAMITACIO_ANONIMA_PARAMETRE + "/" + parameter;
-        }
+        }*/
+        
+        startURL = absolutePluginRequestPath + "/" + TRAMITACIO_ANONIMA_PARAMETRE + "/" + parameter;
 
         log.info(" getStartUrl( ); => " + startURL);
         return startURL;
-    }
-    
-    @Override
-    public boolean isReactComponent() {
-    	return true;
     }
 
     @Override
@@ -128,12 +125,12 @@ public class ReprendreTramitSistraCarpetaFrontPlugin extends AbstractCarpetaFron
             log.info("ReprendreTramitSistraCarpetaFrontPlugin::requestCarpetaFront => query: ]" + query + "[");
         }
 
-        if (query.startsWith(SHOW_FORM_TRAMITID)) {
+        /*if (query.startsWith(SHOW_FORM_TRAMITID)) {
 
             mostrarForm(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
                     administrationEncriptedID, locale, isGet);
             
-        } else if (query.startsWith(INDEX_HTML_PAGE)) {
+        } else*/ if (query.startsWith(INDEX_HTML_PAGE)) {
         	        	
         	index(absolutePluginRequestPath, relativePluginRequestPath, query, request, response, userData,
                     administrationEncriptedID, locale, isGet);
@@ -297,9 +294,9 @@ public class ReprendreTramitSistraCarpetaFrontPlugin extends AbstractCarpetaFron
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
-    protected static final String SHOW_FORM_TRAMITID = "showformtramit";
+    //protected static final String SHOW_FORM_TRAMITID = "showformtramit";
 
-    public void mostrarForm(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
+    /*public void mostrarForm(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, Boolean isGet) {
 
@@ -307,7 +304,7 @@ public class ReprendreTramitSistraCarpetaFrontPlugin extends AbstractCarpetaFron
 
         internalMostrarForm(absolutePluginRequestPath, request, response, administrationEncriptedID, locale, isGet,
                 clau);
-    }
+    }*/
 
     protected void internalMostrarForm(String absolutePluginRequestPath, HttpServletRequest request,
             HttpServletResponse response, String administrationEncriptedID, Locale locale, Boolean isGet, String clau) {
@@ -357,7 +354,7 @@ public class ReprendreTramitSistraCarpetaFrontPlugin extends AbstractCarpetaFron
             map.put("resources", absolutePluginRequestPath + "/" + WEBRESOURCECOMMON);
 
             // XYZ ZZZ
-            map.put("form_action", absolutePluginRequestPath + "/" + SHOW_FORM_TRAMITID);
+            //map.put("form_action", absolutePluginRequestPath + "/" + SHOW_FORM_TRAMITID);
             map.put("lang", locale.getLanguage());
 
             map.put("esParametre", esParametre);

@@ -101,11 +101,6 @@ public class NotificacionsSistraCarpetaFrontPlugin extends AbstractCarpetaFrontP
     }
 
     @Override
-    public boolean isReactComponent() {
-        return true;
-    }
-
-    @Override
     public void requestCarpetaFront(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, boolean isGet, IListenerLogCarpeta logCarpeta) {
