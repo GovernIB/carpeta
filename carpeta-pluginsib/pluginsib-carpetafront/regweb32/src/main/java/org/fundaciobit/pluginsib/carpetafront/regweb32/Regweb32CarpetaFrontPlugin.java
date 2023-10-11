@@ -290,7 +290,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
                     Gson gs = new GsonBuilder().create();
                     RegistreInfo ri = gs.fromJson(numeroRegistro, RegistreInfo.class);
 
-                    if (ri == null && ri.numreg != null) {
+                    if (ri != null && ri.numreg != null) {
                         numeroRegistro = ri.numreg;
                     }
 
@@ -428,8 +428,7 @@ public class Regweb32CarpetaFrontPlugin extends RegwebDetallComponent {
             result = getRegistres(nif, getEntidad(), formNumero, formDataInici, formDataFi, formEstat,
                     Integer.parseInt(pageNumber), elementsPerPagina, locale);
 
-            //@SuppressWarnings("unchecked")
-            registresRegweb = (List<AsientoWs>) (List<?>) result.getResults();
+            registresRegweb = (List<AsientoWs>)(Object)result.getResults();
             Paginacio paginacio = new Paginacio();
 
             paginacio.setElementsPerPagina(elementsPerPagina);

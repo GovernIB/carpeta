@@ -24,8 +24,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.BindingProvider;
 
-import org.fundaciobit.genapp.common.i18n.I18NException;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

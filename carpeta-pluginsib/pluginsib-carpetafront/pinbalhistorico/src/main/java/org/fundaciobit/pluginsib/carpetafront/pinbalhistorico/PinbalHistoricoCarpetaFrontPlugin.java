@@ -234,7 +234,6 @@ public class PinbalHistoricoCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
         response.setCharacterEncoding("utf-8");
         
         String codMunicipio = request.getParameter("municipio");
-        String numAnyos = request.getParameter("anyos");
                
         DatosHistorico datosHistorico = cridadaRest(userData, codMunicipio, absolutePluginRequestPath);
         

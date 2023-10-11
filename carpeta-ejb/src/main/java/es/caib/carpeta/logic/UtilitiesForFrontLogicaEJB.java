@@ -284,7 +284,7 @@ public class UtilitiesForFrontLogicaEJB implements UtilitiesForFrontLogicaServic
         int ordre = pluginEntitatLogicaEjb.executeQueryOne(PluginEntitatFields.ORDRE, Where.AND(
                 PluginEntitatFields.PLUGINID.equal(p.getPluginID()), PluginEntitatFields.ENTITATID.equal(entitatID)));
 
-        ICarpetaFrontPlugin cfp = pluginCarpetaFrontEjb.getInstanceByPluginID(p.getPluginID());
+        
 
         List<Avis> avisos = avisEjb.findActiveByPluginID(p.getPluginID());
 

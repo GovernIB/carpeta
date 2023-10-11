@@ -260,7 +260,6 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
     protected static final String URL_REST_SERVICE = "consultaTramits";
 
-    @SuppressWarnings("deprecation")
     public void consultaTramits(String absolutePluginRequestPath, String relativePluginRequestPath, String query,
             HttpServletRequest request, HttpServletResponse response, UserData userData,
             String administrationEncriptedID, Locale locale, Boolean isGet) {

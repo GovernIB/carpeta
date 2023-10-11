@@ -54,40 +54,43 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
+        <pluginManagement>
 
-        <plugins>
+            <plugins>
 
-            <plugin>
-                <groupId>com.google.code.maven-replacer-plugin</groupId>
-                <artifactId>maven-replacer-plugin</artifactId>
-                <version>1.4.0</version>
-                <executions>
-                    <execution>
-                        <phase>process-sources</phase>
-                        <goals>
-                            <goal>replace</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <file>${version_template_file}</file>
-                    <outputFile>${version_file}</outputFile>
-                    <replacements>
-                        <replacement>
-                            <token>@project.version@</token>
-                            <value>${project.version}</value>
-                        </replacement>
-                    </replacements>
-                </configuration>
-            </plugin>
+                <plugin>
+                    <groupId>com.google.code.maven-replacer-plugin</groupId>
+                    <artifactId>maven-replacer-plugin</artifactId>
+                    <version>1.4.0</version>
+                    <executions>
+                        <execution>
+                            <phase>process-sources</phase>
+                            <goals>
+                                <goal>replace</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <file>${version_template_file}</file>
+                        <outputFile>${version_file}</outputFile>
+                        <replacements>
+                            <replacement>
+                                <token>@project.version@</token>
+                                <value>${project.version}</value>
+                            </replacement>
+                        </replacements>
+                    </configuration>
+                </plugin>
 
-            <!-- Defineix la propietat {buildNumber} que s'empra al filtrat -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>buildnumber-maven-plugin</artifactId>
-            </plugin>
+                <!-- Defineix la propietat {buildNumber} que s'empra al filtrat -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>buildnumber-maven-plugin</artifactId>
+                </plugin>
 
-        </plugins>
+            </plugins>
+        </pluginManagement>
+
 
     </build>
 
