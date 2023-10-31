@@ -44,8 +44,8 @@ public class PrincipalController {
 		if (initialized == null) {
 			//HtmlUtils.saveMessageInfo(request, "MessageInfo : Benvingut a Carpeta");
 
-//			log.info(" request.isUserInRole(ROLE_ADMIN) =>    "  + request.isUserInRole("ROLE_ADMIN") );
-//			log.info(" request.isUserInRole(ROLE_SUPER) =>    "  + request.isUserInRole("ROLE_SUPER") );
+		    //log.info(" request.isUserInRole(ROLE_ADMIN) =>    "  + request.isUserInRole("ROLE_ADMIN") );
+		    //log.info(" request.isUserInRole(ROLE_SUPER) =>    "  + request.isUserInRole("ROLE_SUPER") );
 
             if (request.isUserInRole("ROLE_SUPER")) {
                 return new ModelAndView(new RedirectView("/superadmin/buit", true));

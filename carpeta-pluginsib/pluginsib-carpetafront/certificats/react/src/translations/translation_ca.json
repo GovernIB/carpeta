@@ -4,6 +4,9 @@
   "certificatBoto": "Boto",
   "botoSenseCertificat": "No te certificat",
   "amagarNoDisponibles": "Amagar certificats no disponibles",
-  "mostrarNoDisponibles": "Mostrar certificats no disponibles"
+  "mostrarNoDisponibles": "Mostrar certificats no disponibles",
+  "errorCertificat": "S'ha produit un error obtenint el certificat",
+  "noCertificat":"No disposa d'aquest certificat",
+  "descarregarCertificat": "Descarregar Certificat"
 
 }

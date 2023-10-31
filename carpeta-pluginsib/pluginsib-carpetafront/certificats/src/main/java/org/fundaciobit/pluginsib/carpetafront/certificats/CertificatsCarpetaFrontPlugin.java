@@ -32,7 +32,12 @@ import java.util.Properties;
 public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     public static final String CERTIFICATS_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "certificats.";
+    public static final String MAPAWEB_CERTIFICATS = "mapawebcertificats";
+    
+    
     protected static final String ESPERA_CERTIFICATS_PAGE = "esperacertificats";
+    protected static final String TITLE_PROPERTY = "title";
+    protected static final String SUBTITLE_PROPERTY = "subtitle";
 
     /**
      *
@@ -194,8 +199,8 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 PluginInfo p = new PluginInfo();
                 String num = active[i];
                 p.setPluginNumber(Integer.parseInt(num));
-                p.setTitle(getPropertyRequired(CERTIFICATS_PROPERTY_BASE + num + ".label." + lang));
-                p.setSubtitle("XYZ");
+                p.setTitle(getPropertyRequired(CERTIFICATS_PROPERTY_BASE + num + "."+TITLE_PROPERTY+"." + lang));
+                p.setSubtitle(getPropertyRequired(CERTIFICATS_PROPERTY_BASE + num + "."+SUBTITLE_PROPERTY+"." + lang));
                 plugins[i] = p;
             }
 
@@ -353,14 +358,10 @@ public class CertificatsCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
         try {
 
             // XYZ ZZZ Centralitzar en un mètode i agafar dades de propietats
-            log.info("XYZ ZZZ query = " + query);
             int pos = query.lastIndexOf('/');
-            log.info("XYZ ZZZ pos = " + pos);
             String numeroStr = query.substring(pos + 1);
-            log.info("XYZ ZZZ numeroStr = |" + numeroStr + "|");
             CertificatsApi api = getApi(Integer.parseInt(numeroStr));
 
-            log.info("XYZ ZZZ AdministrationID = " + userData.getAdministrationID());
             //if (api.teCertificat(userData.getAdministrationID()).isTeCertificat()) 
             {
                 try {

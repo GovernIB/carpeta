@@ -1,17 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
-import i18n from "./i18n";
 
 /**
  *  @author fbosch
  */
-
-type CertificatBotoState = {
-  isLoaded: boolean;
-  urlDescarrega: string | null;
-  isVisible: boolean;
-  error: string | null;
-};
 
 class CertificatBoto extends React.Component<
   CertificatBotoProperties,
@@ -29,7 +21,7 @@ class CertificatBoto extends React.Component<
     this.teCertificat = this.teCertificat.bind(this);
     this.pitjarBoto = this.pitjarBoto.bind(this);
     this.canviatIdioma = this.canviatIdioma.bind(this);
-    i18n.on("languageChanged", this.canviatIdioma);
+    this.props.i18n.on("languageChanged", this.canviatIdioma);
   }
 
   componentDidMount() {
@@ -83,13 +75,23 @@ class CertificatBoto extends React.Component<
   }
 
   render() {
+
+    const t = this.props.i18n.t;
+
+
+    const styleDesc =  { fontSize: '84%', color: '#666', textAlign: 'center' as 'center' } ;
     const isLoaded = this.state.isLoaded;
 
     let icon;
     let errorMessage;
+    let warnMessage
+    let botoDescarrega;
     let certificateButton;
     let isVisible: boolean = true;
     console.log("Render 1");
+
+
+    let i = this.props.pluginNumber;
 
     if (!isLoaded) {
       //Carregant
@@ -102,17 +104,7 @@ class CertificatBoto extends React.Component<
             aria-labelledby="botoCert"
             >{this.props.title + " "}  {icon}
             </p>
-        /*<button
-          type="button"
-          data-toggle="modal"
-          onClick={this.pitjarBoto}
-          className=" btn btn-warning"
-          tabIndex={520}
-          aria-labelledby="botoCert"
-        >
-          {this.props.title + " "}  {icon}
-        </button>*/
-
+        
     } else {
       //Carregat
       console.log("Render 3");
@@ -124,32 +116,33 @@ class CertificatBoto extends React.Component<
           errorMessage = (
             <>
               <br />
-              <div className="alert alert-danger" role="alert">
-                {this.state.error}
+              <div className="alert alert-warning" role="alert">
+                S'ha produit un error obtenint el certificat.
               </div>
             </>
           );
           icon = <i className="far fa-time"></i>;
           certificateButton =
-          <div className="alert alert-danger">
-            <a data-toggle="modal" 
-            onClick={this.pitjarBoto} 
-            href="javascript:void(0);" 
-            style={{ color: "red", marginTop: "20px" }} 
-            aria-labelledby="botoCert"
-            >{this.props.title + " "}  {errorMessage}
-            </a>
+          
+          <div
+              className="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0"
+              id="botoCert"
+              >
+          <div key={"cert"+i} className="col-md-12 border-0 pl-0 pr-0">
+          <div className={`card cardAppVerd col-md-12 align-items-lg-center capsaPlugin pt-3 alert`}
+                  tabIndex={502+i} aria-labelledby={"nomPseudo"+i}>
+              <h3 className="apartat2 titolPlugin titol h3 alignCenter visioMobil titolPluginApp" id={"nomPseudo"+i}>{this.props.title}</h3>
+              <hr className="visioMobil" color="red" style={{width: '40%', height: '4px', marginLeft: 'auto', marginRight: 'auto'}}/>
+              <span className="card-title titol pl-1 h3 alignCenter">{icon}</span>
+              <h3 className="apartat2 titolPlugin titol h3 alignCenter ocultarMobil" id={"nomPseudo"+i}>{this.props.title}</h3>
+              <span className="card-text alignCenter padPluginApp"
+                  style={styleDesc}>{this.props.subtitle}
+                  
+                  {errorMessage}</span>
           </div>
-          /*<button
-            type="button"
-            data-toggle="modal"
-            onClick={this.pitjarBoto}
-            className=" btn btn-danger"
-            tabIndex={520}
-            aria-labelledby="botoCert"
-          >
-            {this.props.title + " "}  {errorMessage}
-          </button>*/
+          </div>
+          </div>
+
         } else {
           certificateButton = null;
         }
@@ -157,10 +150,20 @@ class CertificatBoto extends React.Component<
         //Carregat sense error
         console.log("Render 4");
         if (this.state.urlDescarrega) {
+
+          botoDescarrega = (
+            <>
+              <br />
+              <button className="alert alert-success" role="alert" onClick={this.pitjarBoto}>
+                {t("descarregarCertificat")}
+              </button>
+            </>
+          );
           //Te certificat
           icon = <i className="fas fa-file-download"></i>;
+          
           certificateButton =
-          <div className="alert alert-success">
+          /*<div className="alert alert-success">
             <a 
             data-toggle="modal" 
             onClick={this.pitjarBoto}
@@ -168,42 +171,62 @@ class CertificatBoto extends React.Component<
             style={{ color: "green", marginTop: "20px" }}
             aria-labelledby="botoCert">{this.props.title + " "}  {icon}</a>
             </div>
+            */
 
-          /*<button
-            type="button"
-            data-toggle="modal"
-            onClick={this.pitjarBoto}
-            className=" btn btn-success"
-            tabIndex={520}
-            aria-labelledby="botoCert"
-          >
-            {this.props.title + " "}  {icon}
-          </button>*/
+            <div
+              className="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0"
+              id="botoCert"
+              >
+            <div key={"cert"+i} className="col-md-12 border-0 pl-0 pr-0">
+            <div className={`card cardAppVerd col-md-12 align-items-lg-center capsaPlugin pt-3 alert`}
+                    tabIndex={502+i} aria-labelledby={"nomPseudo"+i}>
+                <h3 className="apartat2 titolPlugin titol h3 alignCenter visioMobil titolPluginApp" id={"nomPseudo"+i}>{this.props.title}</h3>
+                <hr className="visioMobil" color="#c30045" style={{width: '40%', height: '4px', marginLeft: 'auto', marginRight: 'auto'}}/>
+                <span className="card-title titol pl-1 h3 alignCenter">{icon}</span>
+                <h3 className="apartat2 titolPlugin titol h3 alignCenter ocultarMobil" id={"nomPseudo"+i}>{this.props.title}</h3>
+                <span className="card-text alignCenter padPluginApp"
+                    style={styleDesc}>{this.props.subtitle}
+                    
+                    {botoDescarrega}</span>
+                    
+            </div>
+            </div>
+            </div>
 
         } else {
           if (this.props.noDisponiblesVisible) {
             //No te certificat
             icon = <i className="far fa-time"></i>;
+
+            warnMessage = (
+              <>
+                <br />
+                <div className="alert alert-warning" role="alert">
+                  No s'ha pogut obtenir el certificat
+                </div>
+              </>
+            );
+
+
             certificateButton =
-            <div className="alert alert-warning">
-              <a data-toggle="modal" 
-              style={{ color: "grey", marginTop: "20px"}} 
-              aria-labelledby="botoCert"
-              >{this.props.title + ": No te certificat "} {icon}
-              </a>
+            <div
+              className="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0"
+              id="botoCert"
+              >
+              <div key={"cert"+i} className="col-md-12 border-0 pl-0 pr-0">
+              <button className={`card cardAppVerd col-md-12 align-items-lg-center capsaPlugin pt-3 alert`}
+                      tabIndex={502+i} aria-labelledby={"nomPseudo"+i}>
+                  <h3 className="apartat2 titolPlugin titol h3 alignCenter visioMobil titolPluginApp" id={"nomPseudo"+i}>{this.props.title}</h3>
+                  <hr className="visioMobil" color="grey" style={{width: '40%', height: '4px', marginLeft: 'auto', marginRight: 'auto'}}/>
+                  <span className="card-title titol pl-1 h3 alignCenter">{icon}</span>
+                  <h3 className="apartat2 titolPlugin titol h3 alignCenter ocultarMobil" id={"nomPseudo"+i}>{this.props.title}</h3>
+                  <span className="card-text alignCenter padPluginApp"
+                      style={styleDesc}>{this.props.subtitle}:
+                      
+                      {warnMessage}</span>
+              </button>
               </div>
-
-
-            /*<button
-              type="button"
-              data-toggle="modal"
-              onClick={this.pitjarBoto}
-              className=" btn btn-warning"
-              tabIndex={520}
-              aria-labelledby="botoCert"
-            >
-              {this.props.title + ": No te certificat "} {icon}
-            </button>*/
+              </div>
 
           } else {
             certificateButton = null;
@@ -215,21 +238,13 @@ class CertificatBoto extends React.Component<
 
     }
 
-    console.log("Render Final");
-
-    return (
-      <>
-        {isVisible && (
-          <div
-            className="col-md-12 border-0 float-left p-0"
-            id="botoCert"
-          >
-            {certificateButton}
-          </div>
-        )}
-      </>
-    );
+    if(isVisible){
+      return <>{certificateButton}</>
+    }else{
+      return null;
+    }
   }
 }
 
 export default CertificatBoto;
+

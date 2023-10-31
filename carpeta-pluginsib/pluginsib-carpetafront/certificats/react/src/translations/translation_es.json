@@ -4,7 +4,11 @@
   "certificatBoto": "Boton",
   "botoSenseCertificat": "No tiene certificado",
   "amagarNoDisponibles": "Esconder certificados no disponibles",
-  "mostrarNoDisponibles": "Mostrar certificats no disponibles"
+  "mostrarNoDisponibles": "Mostrar certificats no disponibles",
+  "errorCertificat": "Se ha producido un error obteniendo el certificado",
+  "noCertificat":"No dispone de este certificado",
+  "descarregarCertificat": "Descargar certificado"
+
 
 
 }

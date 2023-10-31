@@ -57,7 +57,6 @@ class Certificats extends React.Component<CertificatsProps, CertificatsState> {
                 noDisponiblesVisible: true
             });
         }
-        console.log("XYZ ZZZ Entrat a onChangeNoDisponiblesVisibles");
         this.forceUpdate();
     }
 
@@ -73,18 +72,21 @@ class Certificats extends React.Component<CertificatsProps, CertificatsState> {
     render() {
         const t = this.props.i18n.t;
         const buttons = [];
+        let botoProps : CertificatBotoProperties;
+        let botoState : CertificatBotoState;
 
         var textBotoAmagarNoDisponibles;
         if(this.state.noDisponiblesVisible){
-            textBotoAmagarNoDisponibles = this.props.i18n.t("amagarNoDisponibles")
+            textBotoAmagarNoDisponibles = t("amagarNoDisponibles")
         }else{
-            textBotoAmagarNoDisponibles = this.props.i18n.t("mostrarNoDisponibles")
+            textBotoAmagarNoDisponibles = t("mostrarNoDisponibles")
         }
 
         for (let i = 0; i < this.props.pluginsToLoad.length; i++) {
 
             let p: PluginInfo = this.props.pluginsToLoad[i];
-            buttons.push(<CertificatBoto noDisponiblesVisible={this.state.noDisponiblesVisible} subtitle={p.subtitle} title={p.title} pluginNumber={p.pluginNumber} pathToServeiTe={this.props.pathtoserveiTe + "/" + p.pluginNumber} key={i} />);
+            let certificatButton = <CertificatBoto i18n={this.props.i18n} noDisponiblesVisible={this.state.noDisponiblesVisible} subtitle={p.subtitle} title={p.title} pluginNumber={p.pluginNumber} pathToServeiTe={this.props.pathtoserveiTe + "/" + p.pluginNumber} key={i} />;
+            buttons.push(certificatButton);
         }
 
         let formulari = (
@@ -118,14 +120,20 @@ class Certificats extends React.Component<CertificatsProps, CertificatsState> {
         return (
             <TemplatePageCarpeta {...this.props} titles={this.props.titles} subtitles={this.props.subtitles} i18n={i18n}>
                 <>
-                    <div>
-                        {buttons}
+
+                <div className="col-md-12 border-0 pl-0 pr-0">
+                    <div className="card-body imc--llista--capses">
+                        <div className="row mb-0">
+                            {buttons}
+                        </div>
                     </div>
-                    <div tabIndex={520}
-                        id="botoAmagarNoDisponibles"
-                    >
-                        {formulari}
-                    </div>
+                </div>
+
+                <div tabIndex={520}
+                    id="botoAmagarNoDisponibles"
+                >
+                    {formulari}
+                </div>
                 </>
             </TemplatePageCarpeta>
 
