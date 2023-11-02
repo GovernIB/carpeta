@@ -34,9 +34,12 @@ interface CertificatsState {
 
 
 class Certificats extends React.Component<CertificatsProps, CertificatsState> {
+
+    refButtons: React.RefObject<CertificatBoto>[];
+
     constructor(props: CertificatsProps) {
         super(props);
-
+        this.refButtons = [];
         this.state = {
             noDisponiblesVisible: true
         }
@@ -48,7 +51,21 @@ class Certificats extends React.Component<CertificatsProps, CertificatsState> {
     }
 
     onChangeNoDisponiblesVisibles() {
-        if (this.state.noDisponiblesVisible) {
+        let nouValor : boolean;
+
+        nouValor = !this.state.noDisponiblesVisible;
+
+        for (let i = 0; i < this.refButtons.length; i++) {
+            //@ts-ignore
+            this.refButtons[i].current.mostrar(nouValor);
+        }
+
+        this.setState({
+            noDisponiblesVisible: nouValor
+        });
+
+
+    /*  if (this.state.noDisponiblesVisible) {
             this.setState({
                 noDisponiblesVisible: false
             });
@@ -57,7 +74,7 @@ class Certificats extends React.Component<CertificatsProps, CertificatsState> {
                 noDisponiblesVisible: true
             });
         }
-        this.forceUpdate();
+        this.forceUpdate();*/
     }
 
 
@@ -82,12 +99,21 @@ class Certificats extends React.Component<CertificatsProps, CertificatsState> {
             textBotoAmagarNoDisponibles = t("mostrarNoDisponibles")
         }
 
+        let referenceButtonList = [];
+
         for (let i = 0; i < this.props.pluginsToLoad.length; i++) {
 
+            let myRef : React.RefObject<CertificatBoto> = React.createRef();
+
             let p: PluginInfo = this.props.pluginsToLoad[i];
-            let certificatButton = <CertificatBoto i18n={this.props.i18n} noDisponiblesVisible={this.state.noDisponiblesVisible} subtitle={p.subtitle} title={p.title} pluginNumber={p.pluginNumber} pathToServeiTe={this.props.pathtoserveiTe + "/" + p.pluginNumber} key={i} />;
+            let certificatButton = <CertificatBoto ref={myRef} i18n={this.props.i18n} noDisponiblesVisible={this.state.noDisponiblesVisible} subtitle={p.subtitle} title={p.title} pluginNumber={p.pluginNumber} pathToServeiTe={this.props.pathtoserveiTe + "/" + p.pluginNumber} key={i} />;
+
             buttons.push(certificatButton);
+
+            referenceButtonList.push(myRef);
         }
+
+        this.refButtons = referenceButtonList;
 
         let formulari = (
             <>

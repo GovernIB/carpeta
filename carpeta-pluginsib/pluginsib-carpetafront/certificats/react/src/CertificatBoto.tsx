@@ -17,10 +17,12 @@ class CertificatBoto extends React.Component<
       urlDescarrega: null,
       isVisible: true,
       error: null,
+      valorDisplay: 'block'
     };
     this.teCertificat = this.teCertificat.bind(this);
     this.pitjarBoto = this.pitjarBoto.bind(this);
     this.canviatIdioma = this.canviatIdioma.bind(this);
+    this.mostrar = this.mostrar.bind(this);
     this.props.i18n.on("languageChanged", this.canviatIdioma);
   }
 
@@ -37,7 +39,6 @@ class CertificatBoto extends React.Component<
     axios
       .get(url2)
       .then((res) => {
-        console.log("XYZ Entra a TeCertificat() Res.Data= " + res.data);
         this.setState({
           ...this.state,
           isLoaded: true,
@@ -48,9 +49,6 @@ class CertificatBoto extends React.Component<
       .catch((error) => {
         console.log(JSON.stringify(error));
         if (error.response) {
-          console.log("error.response.data: " + error.response.data);
-          console.log("error.response.status: " + error.response.status);
-          console.log("error.response.headers: " + error.response.headers);
           this.setState({
             ...this.state,
             isLoaded: true,
@@ -66,12 +64,26 @@ class CertificatBoto extends React.Component<
           });
         }
       });
+
+      if(this.state.urlDescarrega != null){
+        return true;
+      }
   }
 
   pitjarBoto() {
     if (this.state.urlDescarrega) {
       window.open(this.state.urlDescarrega, "_blank");
     }
+  }
+
+  mostrar(mostrar: boolean){
+    
+    if(!this.state.urlDescarrega){
+      this.setState({
+        valorDisplay: mostrar? 'block' : 'none'
+      });
+    }
+    
   }
 
   render() {
@@ -83,7 +95,8 @@ class CertificatBoto extends React.Component<
     const isLoaded = this.state.isLoaded;
 
     let icon;
-    let errorMessage;
+    let downloadButton;
+    let buttonMessage;
     let warnMessage
     let botoDescarrega;
     let certificateButton;
@@ -98,7 +111,6 @@ class CertificatBoto extends React.Component<
       console.log("Render 2");
       icon = (<div id="carregant" className="loader centrat" style={{ scale: 0.5, height: "20px", width: "20px" }}></div>);
       certificateButton =
-
       <p data-toggle="modal" 
             style={{ color: "grey", marginTop: "20px" }} 
             aria-labelledby="botoCert"
@@ -107,51 +119,30 @@ class CertificatBoto extends React.Component<
         
     } else {
       //Carregat
-      console.log("Render 3");
-
 
       if (this.state.error) {
         if (this.props.noDisponiblesVisible) {
           //Carregat i amb error
-          errorMessage = (
+          
+          downloadButton =(
             <>
               <br />
               <div className="alert alert-warning" role="alert">
-                S'ha produit un error obtenint el certificat.
+                {t("errorCertificat")}
               </div>
             </>
           );
-          icon = <i className="far fa-time"></i>;
-          certificateButton =
+          icon = null;
           
-          <div
-              className="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0"
-              id="botoCert"
-              >
-          <div key={"cert"+i} className="col-md-12 border-0 pl-0 pr-0">
-          <div className={`card cardAppVerd col-md-12 align-items-lg-center capsaPlugin pt-3 alert`}
-                  tabIndex={502+i} aria-labelledby={"nomPseudo"+i}>
-              <h3 className="apartat2 titolPlugin titol h3 alignCenter visioMobil titolPluginApp" id={"nomPseudo"+i}>{this.props.title}</h3>
-              <hr className="visioMobil" color="red" style={{width: '40%', height: '4px', marginLeft: 'auto', marginRight: 'auto'}}/>
-              <span className="card-title titol pl-1 h3 alignCenter">{icon}</span>
-              <h3 className="apartat2 titolPlugin titol h3 alignCenter ocultarMobil" id={"nomPseudo"+i}>{this.props.title}</h3>
-              <span className="card-text alignCenter padPluginApp"
-                  style={styleDesc}>{this.props.subtitle}
-                  
-                  {errorMessage}</span>
-          </div>
-          </div>
-          </div>
 
         } else {
           certificateButton = null;
         }
       } else {
         //Carregat sense error
-        console.log("Render 4");
         if (this.state.urlDescarrega) {
-
-          botoDescarrega = (
+          console.log();
+          downloadButton = (
             <>
               <br />
               <button className="alert alert-success" role="alert" onClick={this.pitjarBoto}>
@@ -160,86 +151,51 @@ class CertificatBoto extends React.Component<
             </>
           );
           //Te certificat
-          icon = <i className="fas fa-file-download"></i>;
-          
-          certificateButton =
-          /*<div className="alert alert-success">
-            <a 
-            data-toggle="modal" 
-            onClick={this.pitjarBoto}
-            href="javascript:void(0);"
-            style={{ color: "green", marginTop: "20px" }}
-            aria-labelledby="botoCert">{this.props.title + " "}  {icon}</a>
-            </div>
-            */
-
-            <div
-              className="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0"
-              id="botoCert"
-              >
-            <div key={"cert"+i} className="col-md-12 border-0 pl-0 pr-0">
-            <div className={`card cardAppVerd col-md-12 align-items-lg-center capsaPlugin pt-3 alert`}
-                    tabIndex={502+i} aria-labelledby={"nomPseudo"+i}>
-                <h3 className="apartat2 titolPlugin titol h3 alignCenter visioMobil titolPluginApp" id={"nomPseudo"+i}>{this.props.title}</h3>
-                <hr className="visioMobil" color="#c30045" style={{width: '40%', height: '4px', marginLeft: 'auto', marginRight: 'auto'}}/>
-                <span className="card-title titol pl-1 h3 alignCenter">{icon}</span>
-                <h3 className="apartat2 titolPlugin titol h3 alignCenter ocultarMobil" id={"nomPseudo"+i}>{this.props.title}</h3>
-                <span className="card-text alignCenter padPluginApp"
-                    style={styleDesc}>{this.props.subtitle}
-                    
-                    {botoDescarrega}</span>
-                    
-            </div>
-            </div>
-            </div>
+          icon = <i className="fas fa-certificate" style={{ color: "#328141"}}></i>;
 
         } else {
           if (this.props.noDisponiblesVisible) {
             //No te certificat
-            icon = <i className="far fa-time"></i>;
+            icon = null;
 
-            warnMessage = (
+            downloadButton = (
               <>
                 <br />
                 <div className="alert alert-warning" role="alert">
-                  No s'ha pogut obtenir el certificat
+                  {t("noCertificat")}
                 </div>
               </>
             );
 
-
-            certificateButton =
-            <div
-              className="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0"
-              id="botoCert"
-              >
-              <div key={"cert"+i} className="col-md-12 border-0 pl-0 pr-0">
-              <button className={`card cardAppVerd col-md-12 align-items-lg-center capsaPlugin pt-3 alert`}
-                      tabIndex={502+i} aria-labelledby={"nomPseudo"+i}>
-                  <h3 className="apartat2 titolPlugin titol h3 alignCenter visioMobil titolPluginApp" id={"nomPseudo"+i}>{this.props.title}</h3>
-                  <hr className="visioMobil" color="grey" style={{width: '40%', height: '4px', marginLeft: 'auto', marginRight: 'auto'}}/>
-                  <span className="card-title titol pl-1 h3 alignCenter">{icon}</span>
-                  <h3 className="apartat2 titolPlugin titol h3 alignCenter ocultarMobil" id={"nomPseudo"+i}>{this.props.title}</h3>
-                  <span className="card-text alignCenter padPluginApp"
-                      style={styleDesc}>{this.props.subtitle}:
-                      
-                      {warnMessage}</span>
-              </button>
-              </div>
-              </div>
 
           } else {
             certificateButton = null;
           }
         }
       }
-
-
-
+      certificateButton = 
+      <div key={"cert"+i} className="col-md-12 border-0 pl-0 pr-0">
+              <p className={`card cardAppVerd col-md-12 align-items-lg-center capsaPlugin pt-3 alert`}
+                      tabIndex={502+i} aria-labelledby={"nomPseudo"+i}>
+                  <h3 className="apartat2 titolPlugin titol h3 alignCenter visioMobil titolPluginApp" id={"nomPseudo"+i}>{this.props.title}</h3>
+                  <hr className="visioMobil" color="grey" style={{width: '40%', height: '4px', marginLeft: 'auto', marginRight: 'auto'}}/>
+                  <span className="pl-1 alignCenter" style={{position: 'absolute', top: '4px', marginBottom: '4px'}}>{icon}</span>
+                  <h3 className="apartat2 titolPlugin h3 alignCenter ocultarMobil" style={{verticalAlign: 'middle', fontWeight: 'bold',lineHeight: 1.1, marginTop: '8px'}} id={"nomPseudo"+i}>{this.props.title}</h3>
+                  <span className="card-text alignCenter padPluginApp" style={styleDesc}>{this.props.subtitle}</span>
+                  <span style={{position: 'absolute', bottom: '4px'}}>{downloadButton}</span>
+              </p>
+              </div>
     }
 
     if(isVisible){
-      return <>{certificateButton}</>
+      return <>
+      <div
+              className="col-lg-4 col-md-4 col-sm-4 col-xs-12 pl-0"
+              id="botoCert"
+              style={{display: this.state.valorDisplay}}
+              >
+      {certificateButton}
+      </div></>
     }else{
       return null;
     }
