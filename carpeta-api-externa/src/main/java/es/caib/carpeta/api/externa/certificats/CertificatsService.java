@@ -104,9 +104,46 @@ public class CertificatsService {
                 {
                     throw new Exception("Error simulat: Error obtenint certificat. (No té certificat)");
                 }
+                case "6":{
+                    throw new Exception("Error simulat: Error obtenint certificat de discapacitat de mock. (No té certificat)");
+                }
 
                 case "5": {
                     throw new Exception("Error simulat: Error obtenint el certificat de l'usuari");
+                }
+                case "7":
+                {
+                  //Té certificat, en forma de URL
+                    CertificatBean cert = new CertificatBean();
+                    cert.setTipus(CertificatType.VALOR);
+
+                    cert.setFitxer(null);
+                    cert.setUrl("https://governdigital.fundaciobit.org");
+
+                    return Response.ok().entity(cert).build();
+                }
+                case "8":
+                {
+                 // Té certificat en forma de fitxer
+                    CertificatBean cert = new CertificatBean();
+                    cert.setTipus(CertificatType.FITXER);
+
+                    CertificatFileInfo fileInfo = new CertificatFileInfo();
+                    fileInfo.setMime("text/plain");
+                    fileInfo.setNom("Certificat.txt");
+
+                    byte[] byteFile = "Certificat de mock de familia nombrosa.".getBytes();
+                    fileInfo.setBytes(byteFile);
+
+                    fileInfo.setLength(byteFile.length);
+                    cert.setFitxer(fileInfo);
+
+                    return Response.ok().entity(cert).build();
+                }
+                case "9":
+                {
+                    throw new Exception("Error simulat: Error obtenint el certificat de l'usuari");
+
                 }
 
                 case "3": {
@@ -210,7 +247,7 @@ public class CertificatsService {
             }
 
             CertificatInfo cert = new CertificatInfo();
-            if ("1".equals(pluginNumber)) {
+            if ("1".equals(pluginNumber) || "6".equals(pluginNumber)) {
                 cert.setTeCertificat(false);
             } else {
                 cert.setTeCertificat(true);
