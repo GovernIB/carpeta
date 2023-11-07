@@ -69,6 +69,7 @@
     "justificante_error_obteniendo" : "S'ha produit un error obtenint el contingut del justificant",
     "anexo_error_obtenent" : "S'ha produit un error obtenint l'annex",
     "registro_anexo_confidencial": "Confidencial",
+    "carpeta_descargar": "Descarregar",
 
     "tornar" : "Tornar"
 }

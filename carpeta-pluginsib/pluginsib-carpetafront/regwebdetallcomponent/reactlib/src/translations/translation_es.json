@@ -70,6 +70,7 @@
     "justificante_error_obteniendo" : "Se ha producio un error obteniendo el contenido del justificante",
     "anexo_error_obtenent" : "Se ha producido un error obtenieno el anexo",
     "registro_anexo_confidencial": "Confidencial",
+    "carpeta_descargar": "Descargar",
 
     "tornar" : "Volver"
    

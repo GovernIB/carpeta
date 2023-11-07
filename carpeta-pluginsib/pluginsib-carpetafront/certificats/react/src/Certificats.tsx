@@ -1,19 +1,9 @@
 import React, { Component } from 'react';
 import { withTranslation, WithTranslation } from "react-i18next";
-import axios from "axios";
 import i18n from './i18n';
 
 import {
-    PaginationInfo,
-    RenderPaginationTable,
-    RenderPaginationTableData,
-    ReturnPaginationData,
     TemplatePageCarpeta,
-    CarpetaDatePicker,
-    CarpetaInputText,
-    CarpetaFormulariDeFiltre,
-    CarpetaFormulariDeFiltreItem,
-    RowType
 } from "carpetacommonreactlib";
 import CertificatBoto from './CertificatBoto';
 
