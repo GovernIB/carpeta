@@ -14,5 +14,8 @@
   "pinbalSubvencionesCodigo2": "Se ha encontrado más de un registro para los datos del titular indicados.",
   "pinbalSubvencionesCodigo3": "Para la persona consultada no hay información en la CCAA.",
   "pinbalSubvencionesTornar": "Volver",
-  "pinbalSubvencionesConsulta": "Consulta"
+  "pinbalSubvencionesConsulta": "Consulta",
+  "errorConsultaPinbal": "No se han podido consultar los datos.",
+  "mostrarDetallError": "Mostrar detalle",
+  "amagarDetallError": "Esconder detalle"
 }

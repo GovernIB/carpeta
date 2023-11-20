@@ -16,5 +16,8 @@
   "pinbalContratacionesDescargarJustificante": "Download justificante",
   "pinbalContratacionesError": "Ha ocurrido un error",
   "pinbalContratacionesTornar": "Tornau",
-  "pinbalContratacionesConsulta": "Consulta"
+  "pinbalContratacionesConsulta": "Consulta",
+  "errorConsultaPinbal": "No s'han pogut consultar les dades.",
+  "mostrarDetallError": "Mostrar detall",
+  "amagarDetallError": "Amagar detall"
 }

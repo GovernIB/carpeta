@@ -28,8 +28,28 @@ class DatosDiscapacidad extends React.Component<DiscapacidadProps, DiscapacidadS
         };
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.carregaDades();
+    }
+
+    onChangeMostrarDetallError() {
+        const { t } = this.props;
+        const detallError = document.getElementById("errorDetail");
+        const detallBoto = document.getElementById("detallBoto");
+        if (detallError?.style.display == 'block') {
+            detallError?.setAttribute("style", "color: red; display: none");
+            if(detallBoto){
+                detallBoto.textContent = t("mostrarDetallError");
+            }
+            
+        } else {
+            detallError?.setAttribute("style", "color: red; display: block");
+            if(detallBoto){
+                detallBoto.textContent = t("amagarDetallError");
+            }
+        }
+
+
     }
 
     carregaDades() {
@@ -38,11 +58,11 @@ class DatosDiscapacidad extends React.Component<DiscapacidadProps, DiscapacidadS
         axios.get(url2).then(res => {
 
             this.setState({
-                ...this.state, 
+                ...this.state,
                 isLoaded: true,
                 data: res.data
             });
-        }).catch( (error) => {
+        }).catch((error) => {
 
             console.log(JSON.stringify(error));
             const restdata = { "error": JSON.stringify(error) };
@@ -57,7 +77,7 @@ class DatosDiscapacidad extends React.Component<DiscapacidadProps, DiscapacidadS
                 data: restdata
             });
         });
-        
+
     }
 
     render() {
@@ -69,23 +89,37 @@ class DatosDiscapacidad extends React.Component<DiscapacidadProps, DiscapacidadS
         let contentApp;
 
         if (!isLoaded) {
-        
-            content = <div  id="carregant" className="loader-container centrat ">
-                        <div className="loader"/>
-                    </div>;
+
+            content = <div id="carregant" className="loader-container centrat ">
+                <div className="loader" />
+            </div>;
         } else {
-        
+
             const data = this.state.data;
-            if (data.error) {  
-                content = <div className="alert alert-danger" role="alert">{data.error}</div>;
+            if (data.error) {
+
+                content = <><div className="alert alert-warning" role="alert">{t("errorConsultaPinbal")}
+                    <br />
+                    <button id = "detallBoto" type="submit"
+                        className="btn btn-warning carpeta-btn mt-2"
+                        onClick={() => {
+                            this.onChangeMostrarDetallError();
+                        }}
+                        tabIndex={505}>{t("mostrarDetallError")}</button>
+                    <br /><br />
+                    <div style={{ color: "red", display: "none" }} id="errorDetail" >
+                        {data.error}
+                    </div>
+                </div>
+                </>;
             } else {
 
                 let alerta;
 
-                if ( data.codigo === '0'){
+                if (data.codigo === '0') {
 
                     alerta = <div className="alert alert-success" role="alert">
-                        {t('pinbalDiscapacidadFecha')} {data.fecha} : {t('pinbalDiscapacidadCodigo'+data.codigo)}
+                        {t('pinbalDiscapacidadFecha')} {data.fecha} : {t('pinbalDiscapacidadCodigo' + data.codigo)}
                     </div>
 
                     content = <div className="ocultarMobil">
@@ -114,39 +148,39 @@ class DatosDiscapacidad extends React.Component<DiscapacidadProps, DiscapacidadS
                             <div className="mt-3 mb-3">
                                 <dt className="col-sm-3">{t('pinbalDiscapacidadValidez')}</dt>
                                 <dd className="col-sm-7">{data.validezPermanente}</dd>
-                            </div>        
-                        </dl>             
+                            </div>
+                        </dl>
                     </div>
-                    
-                    var pinbalDiscapacidadConsulta: string  =  t('pinbalDiscapacidadConsulta');
+
+                    var pinbalDiscapacidadConsulta: string = t('pinbalDiscapacidadConsulta');
                     contentApp = <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil wAuto" tabIndex={510}>
                         <div className="col-sm-1 float-left">
-                            <span className="oi oi-bell iconaFormApp" title={pinbalDiscapacidadConsulta} style={{verticalAlign: 'sub'}}/>
+                            <span className="oi oi-bell iconaFormApp" title={pinbalDiscapacidadConsulta} style={{ verticalAlign: 'sub' }} />
                         </div>
                         <div className="col-sm-10 float-right">
                             {alerta}
-                            {data.expediente && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalDiscapacidadExpediente')}:</b> {data.expediente}</p>}
-                            {data.tiposDiscapacidad && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalDiscapacidadTipo')}:</b> {data.tiposDiscapacidad}</p>}
-                            {data.gradoDiscapacidad && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalDiscapacidadGrado')}:</b> {data.gradoDiscapacidad}</p>}
-                            {data.fechaEfectos && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalDiscapacidadEfectos')}:</b> {data.fechaEfectos}</p>}
-                            {data.fechaRevision && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalDiscapacidadRevision')}:</b> {data.fechaRevision}</p>}
-                            {data.validezPermanente && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalDiscapacidadValidez')}:</b> {data.validezPermanente}</p>}
+                            {data.expediente && <p className="card-text pl-1 mt-0" style={{ color: 'rgb(102, 102, 102)' }}><b>{t('pinbalDiscapacidadExpediente')}:</b> {data.expediente}</p>}
+                            {data.tiposDiscapacidad && <p className="card-text pl-1 mt-0" style={{ color: 'rgb(102, 102, 102)' }}><b>{t('pinbalDiscapacidadTipo')}:</b> {data.tiposDiscapacidad}</p>}
+                            {data.gradoDiscapacidad && <p className="card-text pl-1 mt-0" style={{ color: 'rgb(102, 102, 102)' }}><b>{t('pinbalDiscapacidadGrado')}:</b> {data.gradoDiscapacidad}</p>}
+                            {data.fechaEfectos && <p className="card-text pl-1 mt-0" style={{ color: 'rgb(102, 102, 102)' }}><b>{t('pinbalDiscapacidadEfectos')}:</b> {data.fechaEfectos}</p>}
+                            {data.fechaRevision && <p className="card-text pl-1 mt-0" style={{ color: 'rgb(102, 102, 102)' }}><b>{t('pinbalDiscapacidadRevision')}:</b> {data.fechaRevision}</p>}
+                            {data.validezPermanente && <p className="card-text pl-1 mt-0" style={{ color: 'rgb(102, 102, 102)' }}><b>{t('pinbalDiscapacidadValidez')}:</b> {data.validezPermanente}</p>}
                         </div>
                     </div>;
 
                 } else {
                     content = <div className="alert alert-warning ocultarMobil" role="alert">
-                            {t('pinbalDiscapacidadFecha')} {data.fecha} : {t('pinbalDiscapacidadCodigo'+data.codigo)}
-                        </div>
+                        {t('pinbalDiscapacidadFecha')} {data.fecha} : {t('pinbalDiscapacidadCodigo' + data.codigo)}
+                    </div>
 
-                    var pinbalDiscapacidadConsulta: string  =  t('pinbalDiscapacidadConsulta');
+                    var pinbalDiscapacidadConsulta: string = t('pinbalDiscapacidadConsulta');
                     contentApp = <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil wAuto" tabIndex={510}>
                         <div className="col-sm-1 float-left">
-                            <span className="oi oi-bell iconaFormApp" title={pinbalDiscapacidadConsulta} style={{verticalAlign: 'sub'}}/>
+                            <span className="oi oi-bell iconaFormApp" title={pinbalDiscapacidadConsulta} style={{ verticalAlign: 'sub' }} />
                         </div>
                         <div className="col-sm-10 float-right">
                             <div className="alert alert-warning" role="alert">
-                                {t('pinbalDiscapacidadFecha')} {data.fecha} : {t('pinbalDiscapacidadCodigo'+data.codigo)}
+                                {t('pinbalDiscapacidadFecha')} {data.fecha} : {t('pinbalDiscapacidadCodigo' + data.codigo)}
                             </div>
                         </div>
                     </div>;
@@ -155,7 +189,7 @@ class DatosDiscapacidad extends React.Component<DiscapacidadProps, DiscapacidadS
             }
         }
 
-        
+
         return (<>
             <div className="titolPaginaApp visioMobil">
                 {this.props.titles[i18n.language]}
@@ -163,7 +197,7 @@ class DatosDiscapacidad extends React.Component<DiscapacidadProps, DiscapacidadS
             <div className="infoNoMenu">
                 <h2 className="titol h2 ocultarMobil">{this.props.titles[i18n.language]}</h2>
                 <div className="col-md-12 border-0 float-left p-0">
-                    <p className="lh15 ocultarMobil">{this.props.subtitles[i18n.language]} </p>
+                    <p className="lh15 ocultarMobil pt-3">{this.props.subtitles[i18n.language]} </p>
                     <div className="infoNoMenu">
                         <div className="col-md-12 border-0 float-left p-0">
                             {content}
@@ -173,13 +207,13 @@ class DatosDiscapacidad extends React.Component<DiscapacidadProps, DiscapacidadS
                 </div>
                 <div className="col-md-12 border-0 float-left p-0" id="botoTornarDiscapacidad" style={{ marginTop: '20px' }}>
                     <button type="button" data-toggle="modal" onClick={() => {
-                        window.location.href = sessionStorage.getItem("pagTornar")??""; sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath")??"")
+                        window.location.href = sessionStorage.getItem("pagTornar") ?? ""; sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath") ?? "")
                     }} className="botoSuport botoTornauApp" tabIndex={520} aria-labelledby="botoTornarDiscapacidad">{t('pinbalDiscapacidadTornar')}</button>
                 </div>
             </div>
-            </>
-            );
-            
+        </>
+        );
+
     }
 }
 

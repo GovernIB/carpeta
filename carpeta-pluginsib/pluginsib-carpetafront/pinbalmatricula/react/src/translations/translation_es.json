@@ -38,6 +38,9 @@
   "pinbalMatriculaErrorPrimerLLi": "El campo 'Primer apellido titular' no puede estar vacío",
   "pinbalMatriculaErrorData": "El campo 'Fecha nacimiento titular' no puede estar vacío o ser la fecha de hoy",
   "pinbalMatriculaError": "Error",
-  "pinbalMatriculaConsulta": "Consulta"
+  "pinbalMatriculaConsulta": "Consulta",
+  "errorConsultaPinbal": "No se han podido consultar los datos.",
+  "mostrarDetallError": "Mostrar detalle",
+  "amagarDetallError": "Esconder detalle"
 
 }

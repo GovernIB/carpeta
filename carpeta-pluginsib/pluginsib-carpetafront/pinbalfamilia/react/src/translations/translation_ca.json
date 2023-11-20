@@ -32,5 +32,8 @@
   "pinbalFamiliaHijos": "Nombre de fills",
   "pinbalFamiliaBeneficiarios": "Beneficiaris",
   "pinbalFamiliaTornar": "Tornau",
-  "pinbalFamiliaConsulta": "Consulta"
+  "pinbalFamiliaConsulta": "Consulta",
+  "errorConsultaPinbal": "No s'han pogut consultar les dades.",
+  "mostrarDetallError": "Mostrar detall",
+  "amagarDetallError": "Amagar detall"
 }

@@ -33,5 +33,9 @@
   "pinbalDiscapacidadDependencia": "Respuesta Dependencia",
   "pinbalDiscapacidadAcompanante": "Acompañante",
   "pinbalDiscapacidadTornar": "Volver",
-  "pinbalDiscapacidadConsulta": "Consulta"
+  "pinbalDiscapacidadConsulta": "Consulta",
+  "errorConsultaPinbal": "No se han podido consultar los datos.",
+  "mostrarDetallError": "Mostrar detalle",
+  "amagarDetallError": "Esconder detalle"
+
 }

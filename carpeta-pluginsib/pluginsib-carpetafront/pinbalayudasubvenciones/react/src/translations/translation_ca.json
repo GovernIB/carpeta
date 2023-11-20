@@ -14,5 +14,8 @@
   "pinbalSubvencionesCodigo2": "S'ha trobat més d'un registre per a les dades del titular indicats.",
   "pinbalSubvencionesCodigo3": "Per a la persona consultada no hi ha informació en la CCAA.",
   "pinbalSubvencionesTornar": "Tornau",
-  "pinbalSubvencionesConsulta": "Consulta"
+  "pinbalSubvencionesConsulta": "Consulta",
+  "errorConsultaPinbal": "No s'han pogut consultar les dades.",
+  "mostrarDetallError": "Mostrar detall",
+  "amagarDetallError": "Amagar detall"
 }

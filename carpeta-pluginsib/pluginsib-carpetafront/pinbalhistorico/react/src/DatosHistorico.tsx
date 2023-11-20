@@ -1,5 +1,5 @@
 import React from 'react';
-import {WithTranslation, withTranslation} from 'react-i18next';
+import { WithTranslation, withTranslation } from 'react-i18next';
 import axios from "axios";
 import i18n from './i18n';
 
@@ -9,7 +9,7 @@ import listaProvinciasMunicipios from './data/localidadesBalearesFiltrados';
  *  @author jagarcia
  */
 
-interface DatosHistoricoProps extends WithTranslation{
+interface DatosHistoricoProps extends WithTranslation {
     pathtoservei: string;
     titles: any;
     subtitles: any;
@@ -37,15 +37,33 @@ class DatosHistorico extends React.Component<DatosHistoricoProps, DatosHistorico
         this.handleMunicipio = this.handleMunicipio.bind(this);
         this.handleAnyos = this.handleAnyos.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        
+
     }
 
-    handleAnyos(event){
-        this.setState({anyos: event.target.value});
+    handleAnyos(event) {
+        this.setState({ anyos: event.target.value });
     }
 
-    handleMunicipio(event) { 
-        this.setState({municipio: event.target.value});
+    handleMunicipio(event) {
+        this.setState({ municipio: event.target.value });
+    }
+
+    onChangeMostrarDetallError() {
+        const { t } = this.props;
+        const detallError = document.getElementById("errorDetail");
+        const detallBoto = document.getElementById("detallBoto");
+        if (detallError?.style.display == 'block') {
+            detallError?.setAttribute("style", "color: red; display: none");
+            if(detallBoto){
+                detallBoto.textContent = t("mostrarDetallError");
+            }
+            
+        } else {
+            detallError?.setAttribute("style", "color: red; display: block");
+            if(detallBoto){
+                detallBoto.textContent = t("amagarDetallError");
+            }
+        }
     }
 
     handleSubmit(event) {
@@ -61,8 +79,8 @@ class DatosHistorico extends React.Component<DatosHistoricoProps, DatosHistorico
 
         const municipiIsValid = (this.state.municipio) ? true : false;
 
-        if(!municipiIsValid){
-            const errorMsg = {"error":t('pinbalHistoricoValidaMunicipi')}
+        if (!municipiIsValid) {
+            const errorMsg = { "error": t('pinbalHistoricoValidaMunicipi') }
             this.setState({
                 ...this.state,
                 isLoaded: true,
@@ -76,10 +94,10 @@ class DatosHistorico extends React.Component<DatosHistoricoProps, DatosHistorico
         // Si no és un valor númeric, inserim el valor per defecte 1.
         const numeroAnyos = (isNaN(Number(this.state.anyos))) ? 1 : this.state.anyos;
 
-        axios.post(url2, 'municipio='+this.state.municipio+'&anyos='+numeroAnyos).then(res => {
+        axios.post(url2, 'municipio=' + this.state.municipio + '&anyos=' + numeroAnyos).then(res => {
 
             this.setState({
-                ...this.state, 
+                ...this.state,
                 isLoaded: true,
                 data: res.data,
             });
@@ -96,7 +114,7 @@ class DatosHistorico extends React.Component<DatosHistoricoProps, DatosHistorico
                 console.log("error.response.headers: " + error.response.headers);
             }
             this.setState({
-                ...this.state, 
+                ...this.state,
                 isLoaded: true,
                 data: restdata
             });
@@ -116,71 +134,83 @@ class DatosHistorico extends React.Component<DatosHistoricoProps, DatosHistorico
         let content;
         let contentApp;
 
-        console.log("XYZ ZZZ: localitats = "+ this.props.localitats);
+        console.log("XYZ ZZZ: localitats = " + this.props.localitats);
         const municipis = (localitats) ? JSON.parse(this.props.localitats) : listaProvinciasMunicipios.localidades;
 
         if (!isLoaded) {
-            console.log("Entrant a !isLoaded: localitats = "+ this.props.localitats);
-            console.log("Municipis = "+ municipis);
-            content =  
+            console.log("Entrant a !isLoaded: localitats = " + this.props.localitats);
+            console.log("Municipis = " + municipis);
+            content =
                 <form id="formulario" onSubmit={this.handleSubmit} method="GET">
                     <div className="form-group">
                         <label htmlFor="codigoMunicipio">{t('pinbalHistoricoMunicipioLabel')}</label>
-                        <div className="col-md-4 p-0 col-sm-6" style={{width:'98%'}}>
-                            <select name="codigoMunicipio" id="codigoMunicipio" className="form-control"  value={this.state.municipio} onChange={this.handleMunicipio}>
+                        <div className="col-md-4 p-0 col-sm-6" style={{ width: '98%' }}>
+                            <select name="codigoMunicipio" id="codigoMunicipio" className="form-control" value={this.state.municipio} onChange={this.handleMunicipio}>
                                 <option value="">{t('pinbalHistoricoSelecciona')}</option>
                                 {
-                                    municipis.map( (item) => React.createElement('option', {value: item.codigo}, item.nombre))
+                                    municipis.map((item) => React.createElement('option', { value: item.codigo }, item.nombre))
                                 }
                             </select>
                         </div>
                     </div>
                     <div className="form-group">
                         <label htmlFor="numeroAnyos">{t('pinbalHistoricoAnyosLabel')}</label>
-                        <div className="col-md-4 p-0 col-sm-6" style={{width:'98%'}}>
-                            <input type="number" id="numeroAnyos" className="form-control"  value={this.state.anyos} onChange={this.handleAnyos} />
+                        <div className="col-md-4 p-0 col-sm-6" style={{ width: '98%' }}>
+                            <input type="number" id="numeroAnyos" className="form-control" value={this.state.anyos} onChange={this.handleAnyos} />
                         </div>
                     </div>
                     <button type="submit" className="btn btn-primary carpeta-btn">{t('pinbalHistoricoConsultaBtn')}</button>
                 </form>;
 
         } else {
-            console.log("Entrant a isLoaded: localitats = "+ this.props.localitats);
-            console.log("Municipis = "+ municipis);
-            
+            console.log("Entrant a isLoaded: localitats = " + this.props.localitats);
+            console.log("Municipis = " + municipis);
+
             const data = this.state.data;
 
-            if (data.error) {  
-                content = 
+            if (data.error) {
+                content =
                     <>
-                        <div className="alert alert-danger" role="alert">{data.error}</div>
+                        <div className="alert alert-warning" role="alert">{t("errorConsultaPinbal")}
+                            <br />
+                            <button id="detallBoto" type="submit"
+                                className="btn btn-warning carpeta-btn mt-2"
+                                onClick={() => {
+                                    this.onChangeMostrarDetallError();
+                                }}
+                                tabIndex={505}>{t("mostrarDetallError")}</button>
+                            <br /><br />
+                            <div style={{ color: "red", display: "none" }} id="errorDetail" >
+                                {data.error}
+                            </div>
+                        </div>
                         <form id="formulario" onSubmit={this.handleSubmit} method="GET">
                             <div className="form-group">
                                 <label htmlFor="codigoMunicipio">{t('pinbalHistoricoMunicipioLabel')}</label>
-                                <div className="col-md-4 p-0 col-sm-6" style={{width:'98%'}}>
-                                    <select name="codigoMunicipio" id="codigoMunicipio" className="form-control"  value={this.state.municipio} onChange={this.handleMunicipio}>
+                                <div className="col-md-4 p-0 col-sm-6" style={{ width: '98%' }}>
+                                    <select name="codigoMunicipio" id="codigoMunicipio" className="form-control" value={this.state.municipio} onChange={this.handleMunicipio}>
                                         <option value="">{t('pinbalHistoricoSelecciona')}</option>
                                         {
-                                            municipis.map( (item) => React.createElement('option', {value: item.codigo}, item.nombre))
+                                            municipis.map((item) => React.createElement('option', { value: item.codigo }, item.nombre))
                                         }
                                     </select>
                                 </div>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="numeroAnyos">{t('pinbalHistoricoAnyosLabel')}</label>
-                                <div className="col-md-4 p-0 col-sm-6" style={{width:'98%'}}>
-                                    <input type="number" id="numeroAnyos" className="form-control"  value={this.state.anyos} onChange={this.handleAnyos} />
+                                <div className="col-md-4 p-0 col-sm-6" style={{ width: '98%' }}>
+                                    <input type="number" id="numeroAnyos" className="form-control" value={this.state.anyos} onChange={this.handleAnyos} />
                                 </div>
                             </div>
                             <button type="submit" className="btn btn-primary carpeta-btn">{t('pinbalHistoricoConsultaBtn')}</button>
                         </form>
                     </>
             } else {
-				
-                let alerta;
-                let periodosHistoricoContent = '';                    
 
-                if ( data.codigo == '0003'){
+                let alerta;
+                let periodosHistoricoContent = '';
+
+                if (data.codigo == '0003') {
 
                     data.historico.forEach(
                         (item) => {
@@ -188,12 +218,12 @@ class DatosHistorico extends React.Component<DatosHistoricoProps, DatosHistorico
                                 <div class="domicilio" style="border: 1px solid #ccc; padding: 10px 20px; border-radius: 10px; margin-bottom: 10px;">
                                     <strong>${t('pinbalHistoricoDesde')} ${item.desde} ${t('pinbalHistoricoHasta')} ${item.hasta}</strong>
                                     <hr>
-                                    ${ item.motivoInscripcion[0] && `<dl class="row">
+                                    ${item.motivoInscripcion[0] && `<dl class="row">
                                     <div>
                                         <dt class="col-sm-3">${t('pinbalHistoricoMotivoInscripcion')}</dt>
                                         <dd class="col-sm-7">${item.motivoInscripcion[0].descripcion}</dd>
                                     </div></dl>`}
-                                    ${ item.motivoBaja[0] && `<dl class="row">
+                                    ${item.motivoBaja[0] && `<dl class="row">
                                         <div>
                                             <dt class="col-sm-3">${t('pinbalHistoricoMotivoBaja')}</dt>
                                             <dd class="col-sm-7">${item.motivoBaja[0].descripcion}</dd>
@@ -220,15 +250,15 @@ class DatosHistorico extends React.Component<DatosHistoricoProps, DatosHistorico
                                             <dt class="col-sm-3">${t('pinbalHistoricoMunicipio')}</dt>
                                             <dd class="col-sm-7">${item.municipioRespuesta[0].nombre}</dd>
                                         </div>
-                                        ${ item.entColectiva[0].nombre && `<div>
+                                        ${item.entColectiva[0].nombre && `<div>
                                             <dt class="col-sm-3">${t('pinbalHistoricoEntColectiva')}</dt>
                                             <dd class="col-sm-7">${item.entColectiva[0].nombre}</dd>
                                         </div>` }
-                                        ${ item.entSingular[0].nombre && `<div>
+                                        ${item.entSingular[0].nombre && `<div>
                                             <dt class="col-sm-3">${t('pinbalHistoricoEntSingular')}</dt>
                                             <dd class="col-sm-7">${item.entSingular[0].nombre}</dd>
                                         </div>` }
-                                        ${ item.nucleo[0].nombre && `<div>
+                                        ${item.nucleo[0].nombre && `<div>
                                             <dt class="col-sm-3">${t('pinbalHistoricoNucleo')}</dt>
                                             <dd class="col-sm-7">${item.nucleo[0].nombre}</dd>
                                         </div>` }
@@ -236,35 +266,35 @@ class DatosHistorico extends React.Component<DatosHistoricoProps, DatosHistorico
                                             <dt class="col-sm-3">${t('pinbalHistoricoVia')}</dt>
                                             <dd class="col-sm-7">${item.direccion[0].via[0].tipo} ${item.direccion[0].via[0].nombre}</dd>
                                         </div>
-                                        ${ item.direccion[0].numero && `<div>
+                                        ${item.direccion[0].numero && `<div>
                                             <dt class="col-sm-3">${t('pinbalHistoricoNumero')}</dt>
                                             <dd class="col-sm-7">${item.direccion[0].numero}</dd>
                                         </div>` }
-                                        ${ item.direccion[0].kmt && `<div>
+                                        ${item.direccion[0].kmt && `<div>
                                             <dt class="col-sm-3">${t('pinbalHistoricoKmt')}</dt>
                                             <dd class="col-sm-7">${item.direccion[0].kmt}</dd>
                                         </div>` }
-                                        ${ item.direccion[0].bloque && `<div>
+                                        ${item.direccion[0].bloque && `<div>
                                             <dt class="col-sm-3">${t('pinbalHistoricoBloque')}</dt>
                                             <dd class="col-sm-7">${item.direccion[0].bloque}</dd>
                                         </div>` } 
-                                        ${ item.direccion[0].portal && `<div>
+                                        ${item.direccion[0].portal && `<div>
                                             <dt class="col-sm-3">${t('pinbalHistoricoPortal')}</dt>
                                             <dd class="col-sm-7">${item.direccion[0].portal}</dd>
                                         </div>` }
-                                        ${ item.direccion[0].escalera && `<div>
+                                        ${item.direccion[0].escalera && `<div>
                                             <dt class="col-sm-3">${t('pinbalHistoricoEscalera')}</dt>
                                             <dd class="col-sm-7">${item.direccion[0].escalera}</dd>
                                         </div>` }
-                                        ${ item.direccion[0].planta && `<div>
+                                        ${item.direccion[0].planta && `<div>
                                             <dt class="col-sm-3">${t('pinbalHistoricoPlanta')}</dt>
                                             <dd class="col-sm-7">${item.direccion[0].planta}</dd>
                                         </div>`}
-                                        ${ item.direccion[0].puerta && `<div>
+                                        ${item.direccion[0].puerta && `<div>
                                             <dt class="col-sm-3">${t('pinbalHistoricoPuerta')}</dt>
                                             <dd class="col-sm-7">${item.direccion[0].puerta}</dd>
                                         </div>` }
-                                        ${ item.direccion[0].codigoPostal && `<div>
+                                        ${item.direccion[0].codigoPostal && `<div>
                                             <dt class="col-sm-3">${t('pinbalHistoricoCodPostal')}</dt>
                                             <dd class="col-sm-7">${item.direccion[0].codigoPostal}</dd>
                                         </div>` }
@@ -275,9 +305,9 @@ class DatosHistorico extends React.Component<DatosHistoricoProps, DatosHistorico
 
                     alerta = <>
                         <div className="alert alert-success" role="alert">
-                            {t('pinbalHistoricoFecha')} {data.fecha} : {t('pinbalHistoricoCodigo'+data.codigo)}
+                            {t('pinbalHistoricoFecha')} {data.fecha} : {t('pinbalHistoricoCodigo' + data.codigo)}
                         </div>
-                        <br/>
+                        <br />
                         <div className="col-md-12 border-0 float-left p-0">
 
                             <dl className="row">
@@ -309,67 +339,67 @@ class DatosHistorico extends React.Component<DatosHistoricoProps, DatosHistorico
 
                         </div>
                     </>
-                    ; 
+                        ;
                 } else {
                     alerta = <div className="alert alert-warning" role="alert">
-                        {t('pinbalHistoricoFecha')} {data.fecha} : {t('pinbalHistoricoCodigo'+data.codigo)}
+                        {t('pinbalHistoricoFecha')} {data.fecha} : {t('pinbalHistoricoCodigo' + data.codigo)}
                     </div>;
                 }
 
-				content = <div className="ocultarMobil">
+                content = <div className="ocultarMobil">
                     {alerta}
-                    <hr/>
-                    {periodosHistoricoContent && <div className="domicilis" dangerouslySetInnerHTML={{__html: periodosHistoricoContent}}></div>}
+                    <hr />
+                    {periodosHistoricoContent && <div className="domicilis" dangerouslySetInnerHTML={{ __html: periodosHistoricoContent }}></div>}
                     {data.fechaExpedicion && <dl className="row">
                         <div>
                             <dt className="col-sm-3">{t('pinbalHistoricoExpedicion')}</dt>
                             <dd className="col-sm-7">{data.fechaExpedicion}</dd>
                         </div>
                     </dl>}
-				</div>;
+                </div>;
 
                 contentApp = <div className="col-lg-4 col-md-4 col-sm-4 pl-2 pt-5 pb-5 visioMobil cardAppVerd visioMobil wAuto" tabIndex={510}>
                     <div className="col-sm-1 float-left">
-                        <span className="oi oi-bell iconaFormApp" title={t('pinbalHistoricoConsulta')} style={{verticalAlign: 'sub'}}/>
+                        <span className="oi oi-bell iconaFormApp" title={t('pinbalHistoricoConsulta')} style={{ verticalAlign: 'sub' }} />
                     </div>
                     <div className="col-sm-10 float-right">
                         {alerta}
-                        {periodosHistoricoContent && <div className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}} dangerouslySetInnerHTML={{__html: periodosHistoricoContent}}></div>}
-                        {data.fechaExpedicion && <p className="card-text pl-1 mt-0" style={{color: 'rgb(102, 102, 102)'}}><b>{t('pinbalHistoricoExpedicion')}:</b> {data.fechaExpedicion}</p>}
+                        {periodosHistoricoContent && <div className="card-text pl-1 mt-0" style={{ color: 'rgb(102, 102, 102)' }} dangerouslySetInnerHTML={{ __html: periodosHistoricoContent }}></div>}
+                        {data.fechaExpedicion && <p className="card-text pl-1 mt-0" style={{ color: 'rgb(102, 102, 102)' }}><b>{t('pinbalHistoricoExpedicion')}:</b> {data.fechaExpedicion}</p>}
                     </div>
                 </div>;
 
             }
         }
 
-        
+
         return (<>
-                <div className="titolPaginaApp visioMobil">
-                    {this.props.titles[i18n.language]}
-                </div>
-                <div className="infoNoMenu">
-                    <h2 className="titol h2 ocultarMobil">{this.props.titles[i18n.language]}</h2>
-                    <div className="col-md-12 border-0 float-left p-0">
-                        <p className="lh15 ocultarMobil">{this.props.subtitles[i18n.language]} </p>
-                        <div className="infoNoMenu">
-                            <div className="col-md-12 border-0 float-left p-0">
-                                {content}
-                                {contentApp}
-                                <div  id="carregant" className="loader-container centrat d-none">
-                                    <div className="loader"/>
-                                </div>
-                                <div className="col-md-12 border-0 float-left p-0" id="botoTornarDadesP" style={{ marginTop: '20px' }}>
-                                    <button type="button" data-toggle="modal" onClick={() => {
-                                        window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
-                                    }} className="botoSuport botoTornauApp" tabIndex={520} aria-labelledby="botoTornarDadesP">{t('tornar')}</button>
-                                </div>
+            <div className="titolPaginaApp visioMobil">
+                {this.props.titles[i18n.language]}
+            </div>
+            <div className="infoNoMenu">
+                <h2 className="titol h2 ocultarMobil">{this.props.titles[i18n.language]}</h2>
+                <div className="col-md-12 border-0 float-left p-0">
+                    <p className="lh15 ocultarMobil pt-3">{this.props.subtitles[i18n.language]} </p>
+                    <div className="infoNoMenu">
+                        <div className="col-md-12 border-0 float-left p-0">
+                            {content}
+                            {contentApp}
+                            <div id="carregant" className="loader-container centrat d-none">
+                                <div className="loader" />
+                            </div>
+                            <div className="col-md-12 border-0 float-left p-0" id="botoTornarDadesP" style={{ marginTop: '20px' }}>
+                                <button type="button" data-toggle="modal" onClick={() => {
+                                    window.location.href = sessionStorage.getItem("pagTornar"); sessionStorage.setItem("pagTornar", sessionStorage.getItem("contextPath"))
+                                }} className="botoSuport botoTornauApp" tabIndex={520} aria-labelledby="botoTornarDadesP">{t('tornar')}</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </>
-            );
-            
+            </div>
+        </>
+        );
+
     }
 }
 

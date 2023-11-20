@@ -38,5 +38,8 @@
   "pinbalConvivenciaValidaMunicipi" : "Debe escoger un municipio",
   "pinbalConvivenciaSelecciona": "Seleccione un municipio",
   "pinbalConvivenciaTornar" : "Volver",
-  "pinbalConvivenciaConsulta" : "Consulta"
+  "pinbalConvivenciaConsulta" : "Consulta",
+  "errorConsultaPinbal": "No se han podido consultar los datos.",
+  "mostrarDetallError": "Mostrar detalle",
+  "amagarDetallError": "Esconder detalle"
 }

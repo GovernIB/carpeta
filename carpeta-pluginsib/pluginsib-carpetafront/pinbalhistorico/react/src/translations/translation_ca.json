@@ -49,5 +49,8 @@
   "pinbalHistoricoMotivoBaja" : "Motiu baixa",
   "pinbalHistoricoSelecciona" : "Triau un municipi",
   "pinbalHistoricoValidaMunicipi" : "Heu de triar un municipi.",
-  "pinbalHistoricoConsulta": "Consulta"
+  "pinbalHistoricoConsulta": "Consulta",
+  "errorConsultaPinbal": "No s'han pogut consultar les dades.",
+  "mostrarDetallError": "Mostrar detall",
+  "amagarDetallError": "Amagar detall"
 }

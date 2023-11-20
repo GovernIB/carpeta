@@ -378,7 +378,7 @@ public class PinbalHistoricoCarpetaFrontPlugin extends AbstractPinbalCarpetaFron
 
         } catch (Throwable e) {
         	resposta = null;
-            String msg = "Error consulta: " + e.getMessage();
+            String msg = "Error de Pinbal: " + e.getMessage();
             datosHistorico.setError(msg);
             log.error(msg, e);
         }

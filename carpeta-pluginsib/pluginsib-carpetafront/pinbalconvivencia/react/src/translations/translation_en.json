@@ -37,5 +37,8 @@
   "pinbalConvivenciaValidaMunicipi" : "Debe escoger un municipio",
   "pinbalConvivenciaSelecciona": "Seleccione un municipio",
   "pinbalConvivenciaTornar" : "Tornau",
-  "pinbalConvivenciaConsulta" : "Consulta"
+  "pinbalConvivenciaConsulta" : "Consulta",
+  "errorConsultaPinbal": "No s'han pogut consultar les dades.",
+  "mostrarDetallError": "Mostrar detall",
+  "amagarDetallError": "Amagar detall"
 }

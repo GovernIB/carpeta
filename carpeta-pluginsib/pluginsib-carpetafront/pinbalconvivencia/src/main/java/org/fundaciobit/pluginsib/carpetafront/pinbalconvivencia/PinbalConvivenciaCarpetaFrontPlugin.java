@@ -416,7 +416,7 @@ public class PinbalConvivenciaCarpetaFrontPlugin extends AbstractPinbalCarpetaFr
 
         } catch (Throwable e) {
         	resposta = null;
-            String msg = "Error consulta: " + e.getMessage();
+            String msg = "Error de Pinbal: " + e.getMessage();
             datosConvivencia.setError(msg);
             log.error(msg, e);
         }

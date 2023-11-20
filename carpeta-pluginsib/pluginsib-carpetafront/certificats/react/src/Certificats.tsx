@@ -53,18 +53,6 @@ class Certificats extends React.Component<CertificatsProps, CertificatsState> {
         this.setState({
             noDisponiblesVisible: nouValor
         });
-
-
-    /*  if (this.state.noDisponiblesVisible) {
-            this.setState({
-                noDisponiblesVisible: false
-            });
-        } else {
-            this.setState({
-                noDisponiblesVisible: true
-            });
-        }
-        this.forceUpdate();*/
     }
 
 

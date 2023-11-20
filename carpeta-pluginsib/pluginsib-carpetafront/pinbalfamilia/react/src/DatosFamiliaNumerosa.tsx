@@ -39,6 +39,26 @@ class DatosFamiliaNumerosa extends React.Component<
         this.carregaDades();
     }
 
+    onChangeMostrarDetallError() {
+        const { t } = this.props;
+        const detallError = document.getElementById("errorDetail");
+        const detallBoto = document.getElementById("detallBoto");
+        if (detallError?.style.display == 'block') {
+            detallError?.setAttribute("style", "color: red; display: none");
+            if(detallBoto){
+                detallBoto.textContent = t("mostrarDetallError");
+            }
+            
+        } else {
+            detallError?.setAttribute("style", "color: red; display: block");
+            if(detallBoto){
+                detallBoto.textContent = t("amagarDetallError");
+            }
+        }
+
+
+    }
+
     carregaDades() {
         const url2 = this.props.pathtoservei;
         axios
@@ -83,11 +103,20 @@ class DatosFamiliaNumerosa extends React.Component<
         } else {
             const data = this.state.data;
             if (data.error) {
-                content = (
-                    <div className="alert alert-danger" role="alert">
+                content = <><div className="alert alert-warning" role="alert">{t("errorConsultaPinbal")}
+                    <br />
+                    <button id = "detallBoto" type="submit"
+                        className="btn btn-warning carpeta-btn mt-2"
+                        onClick={() => {
+                            this.onChangeMostrarDetallError();
+                        }}
+                        tabIndex={505}>{t("mostrarDetallError")}</button>
+                    <br /><br />
+                    <div style={{ color: "red", display: "none" }} id="errorDetail" >
                         {data.error}
                     </div>
-                );
+                </div>
+                </>;
             } else {
                 let alerta;
 
@@ -272,7 +301,7 @@ class DatosFamiliaNumerosa extends React.Component<
                         {this.props.titles[i18n.language]}
                     </h2>
                     <div className="col-md-12 border-0 float-left p-0">
-                        <p className="lh15 ocultarMobil">
+                        <p className="lh15 ocultarMobil pt-3">
                             {this.props.subtitles[i18n.language]}{" "}
                         </p>
                         <div className="infoNoMenu">

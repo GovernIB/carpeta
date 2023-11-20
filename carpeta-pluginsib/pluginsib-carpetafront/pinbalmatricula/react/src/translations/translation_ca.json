@@ -38,7 +38,10 @@
   "pinbalMatriculaErrorPrimerLLi": "El camp 'Primer llinatge titular' no pot estar buid",
   "pinbalMatriculaErrorData": "El camp 'Data naixement titular' no pot estar buid o ser la data d'avui",
   "pinbalMatriculaError": "Error",
-  "pinbalMatriculaConsulta": "Consulta"
+  "pinbalMatriculaConsulta": "Consulta",
+  "errorConsultaPinbal": "No s'han pogut consultar les dades.",
+  "mostrarDetallError": "Mostrar detall",
+  "amagarDetallError": "Amagar detall"
 
 
 }

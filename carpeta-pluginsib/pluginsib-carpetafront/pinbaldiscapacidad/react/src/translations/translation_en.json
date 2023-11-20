@@ -33,5 +33,11 @@
   "pinbalDiscapacidadDependencia": "Respuesta Dependencia",
   "pinbalDiscapacidadAcompanante": "Acompañante",
   "pinbalDiscapacidadTornar": "Tornau",
-  "pinbalDiscapacidadConsulta": "Consulta"
+  "pinbalDiscapacidadConsulta": "Consulta",
+  "errorConsultaPinbal": "No s'han pogut consultar les dades.",
+  "mostrarDetallError": "Mostrar detall",
+  "amagarDetallError": "Amagar detall"
+  
+
+
 }

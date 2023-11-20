@@ -144,9 +144,15 @@ img:hover {
 .imc-marc-ico::before {
 	content: none;
 }
+.styleLineaMenuLateral{
+	width: 30px;
+	text-align: center;
+	transform: translate(0, 60%);
+}
 .styleLiniaMenu{
 	width: 30px;
 	text-align: center;
+	-webkit-text-emphasis: filled;
 	transform: translate(0, 60%);
 }
 .iconaMenu{

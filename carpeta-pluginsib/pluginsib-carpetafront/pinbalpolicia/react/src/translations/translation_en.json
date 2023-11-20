@@ -15,5 +15,8 @@
 	"nombreMadre": "Nombre de la Madre EN",
     "fechaCaducidad": "Fecha Caducidad EN",
     "tornar": "Tornau",
-    "pinbalPoliciaConsulta": "Consulta"
+    "pinbalPoliciaConsulta": "Consulta",
+    "errorConsultaPinbal": "No s'han pogut consultar les dades.",
+    "mostrarDetallError": "Mostrar detall",
+    "amagarDetallError": "Amagar detall"
 }

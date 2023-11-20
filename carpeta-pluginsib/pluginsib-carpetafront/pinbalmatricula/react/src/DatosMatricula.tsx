@@ -112,6 +112,26 @@ class DatosMatricula extends React.Component<DatosMatriculaProps, DatosMatricula
     this.forceUpdate();
   }
 
+  onChangeMostrarDetallError() {
+    const { t } = this.props;
+    const detallError = document.getElementById("errorDetail");
+    const detallBoto = document.getElementById("detallBoto");
+    if (detallError?.style.display == 'block') {
+        detallError?.setAttribute("style", "color: red; display: none");
+        if(detallBoto){
+            detallBoto.textContent = t("mostrarDetallError");
+        }
+        
+    } else {
+        detallError?.setAttribute("style", "color: red; display: block");
+        if(detallBoto){
+            detallBoto.textContent = t("amagarDetallError");
+        }
+    }
+
+
+}
+
   handleChangeDataNaixement(newDate: Date, _oldDate: Date): boolean {
     $("#fechaNacimiento").removeClass("borderError");
     this.dataNaixementTitular = newDate;
@@ -473,11 +493,20 @@ class DatosMatricula extends React.Component<DatosMatriculaProps, DatosMatricula
 
       if (this.state.error && data != null) {
         alerta = "";
-        content = (
-          <div className="alert alert-danger" role="alert">
-            {data.error}
-          </div>
-        );
+        content = <><div className="alert alert-warning" role="alert">{t("errorConsultaPinbal")}
+                    <br />
+                    <button id = "detallBoto" type="submit"
+                        className="btn btn-warning carpeta-btn mt-2"
+                        onClick={() => {
+                            this.onChangeMostrarDetallError();
+                        }}
+                        tabIndex={505}>{t("mostrarDetallError")}</button>
+                    <br /><br />
+                    <div style={{ color: "red", display: "none" }} id="errorDetail" >
+                        {data.error}
+                    </div>
+                </div>
+                </>;
       } else {
         if (data !== null && this.state.mostrarInfo) {
           if (data.codRespuesta === "0") {

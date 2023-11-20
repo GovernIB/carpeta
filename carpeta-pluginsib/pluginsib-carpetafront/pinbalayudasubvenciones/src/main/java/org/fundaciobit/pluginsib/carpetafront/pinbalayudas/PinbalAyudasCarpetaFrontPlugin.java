@@ -331,12 +331,12 @@ public class PinbalAyudasCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPl
                 
             }else {
             	resposta = null;
-            	datosAyuda.setError("Error servei. No hi ha resposta.");
+            	datosAyuda.setError("Error al servei. No hi ha resposta.");
             }
 
         } catch (Throwable e) {
         	resposta = null;
-            String msg = "Error consulta: " + e.getMessage();
+            String msg = "Error de Pinbal: " + e.getMessage();
             datosAyuda.setError(msg);
             log.error(msg, e);
         }

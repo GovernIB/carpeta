@@ -15,5 +15,8 @@
 	"nombreMadre": "Nombre de la Madre",
     "fechaCaducidad": "Fecha Caducidad",
     "tornar": "Volver",
-    "pinbalPoliciaConsulta": "Consulta"
+    "pinbalPoliciaConsulta": "Consulta",
+    "errorConsultaPinbal": "No se han podido consultar los datos.",
+    "mostrarDetallError": "Mostrar detalle",
+    "amagarDetallError": "Esconder detalle"
 }

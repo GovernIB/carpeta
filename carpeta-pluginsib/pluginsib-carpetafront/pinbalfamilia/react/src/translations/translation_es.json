@@ -32,5 +32,8 @@
   "pinbalFamiliaHijos": "Número de hijos",
   "pinbalFamiliaBeneficiarios": "Beneficiarios",
   "pinbalFamiliaTornar": "Volver",
-  "pinbalFamiliaConsulta": "Consulta"
+  "pinbalFamiliaConsulta": "Consulta",
+  "errorConsultaPinbal": "No se han podido consultar los datos.",
+  "mostrarDetallError": "Mostrar detalle",
+  "amagarDetallError": "Esconder detalle"
 }

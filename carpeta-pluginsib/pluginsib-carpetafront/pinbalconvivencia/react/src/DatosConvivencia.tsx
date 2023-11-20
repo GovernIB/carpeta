@@ -43,6 +43,26 @@ class DatosConvivencia extends React.Component<DatosConvivenciaProps, DatosConvi
         this.setState({ municipio: event.target.value });
     }
 
+    onChangeMostrarDetallError() {
+        const { t } = this.props;
+        const detallError = document.getElementById("errorDetail");
+        const detallBoto = document.getElementById("detallBoto");
+        if (detallError?.style.display == 'block') {
+            detallError?.setAttribute("style", "color: red; display: none");
+            if(detallBoto){
+                detallBoto.textContent = t("mostrarDetallError");
+            }
+            
+        } else {
+            detallError?.setAttribute("style", "color: red; display: block");
+            if(detallBoto){
+                detallBoto.textContent = t("amagarDetallError");
+            }
+        }
+
+
+    }
+
     handleSubmit(event: any) {
 
         event.preventDefault();
@@ -335,7 +355,7 @@ class DatosConvivencia extends React.Component<DatosConvivenciaProps, DatosConvi
             <div className="infoNoMenu">
                 <h2 className="titol h2 ocultarMobil">{this.props.titles[i18n.language]}</h2>
                 <div className="col-md-12 border-0 float-left p-0">
-                    <p className="lh15 ocultarMobil">{this.props.subtitles[i18n.language]} </p>
+                    <p className="lh15 ocultarMobil pt-3">{this.props.subtitles[i18n.language]} </p>
                     <div className="infoNoMenu">
                         <div className="col-md-12 border-0 float-left p-0">
                             {content}

@@ -345,7 +345,7 @@ public class PinbalContratacionesCarpetaFrontPlugin extends AbstractPinbalCarpet
 
         } catch (Throwable e) {
         	resposta = null;
-            String msg = "Error consulta: " + e.getMessage();
+            String msg = "Error de Pinbal: " + e.getMessage();
             datos.setError(msg);
             log.error(msg, e);
         }
