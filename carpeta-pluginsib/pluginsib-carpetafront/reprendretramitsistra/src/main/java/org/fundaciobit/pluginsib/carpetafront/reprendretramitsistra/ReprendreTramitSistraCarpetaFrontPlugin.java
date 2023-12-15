@@ -104,13 +104,11 @@ public class ReprendreTramitSistraCarpetaFrontPlugin extends AbstractCarpetaFron
 
         String startURL;
 
-        /*if (parameter == null) {
-            startURL = (isReactComponent()) ? absolutePluginRequestPath + "/" + INDEX_HTML_PAGE : absolutePluginRequestPath + "/" + SHOW_FORM_TRAMITID;
+        if (parameter == null) {
+            startURL =  absolutePluginRequestPath + "/" + INDEX_HTML_PAGE;
         } else {
             startURL = absolutePluginRequestPath + "/" + TRAMITACIO_ANONIMA_PARAMETRE + "/" + parameter;
-        }*/
-        
-        startURL = absolutePluginRequestPath + "/" + TRAMITACIO_ANONIMA_PARAMETRE + "/" + parameter;
+        }
 
         log.info(" getStartUrl( ); => " + startURL);
         return startURL;
