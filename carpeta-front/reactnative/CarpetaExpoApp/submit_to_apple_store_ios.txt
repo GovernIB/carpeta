@@ -1,0 +1,77 @@
+
+
+(1) Compilar i Build
+   (a) npm install -g eas-cli
+   (b) eas build -p ios
+  Més info a  https://docs.expo.dev/build/setup/
+
+
+
+(2) Email governdigital.carpeta@fundaciobit.org (contrasenya igual que keeweb)
+
+(3) Validar account a traves de "device" (Obrir màqina virtual MacOS Monterey) o a traves de telefons de anadal(73) o atrobat
+
+(4) Esperar a que acabi de construir-se. 
+
+(5) Entrar a https://expo.dev amb governdigital.carpeta@fundaciobit.org (contrasenya igual que keeweb)
+
+(6) Anar als builds que acabam de construir i fer click. Anar a "Options" 
+    i seleccionar "Submit to an app store". Seguir instruccions (eas submit --platform ios )
+        - Triar "Select a build from EAS"
+        o
+        - Triar [Enter amb App Specific Password]
+        - Escriure Contrasenya: Veure fitxer   submit_to_apple_store_ios_password.txt
+		
+(7) Al final t'informarà d'una ruta al "https://appstoreconnect.apple.com/apps/..." que apunta a l'APP que acabam de pujar
+    (Sino apareix anar a https://expo.dev/, i al final dels logs del darrer build trobareu la URL)
+      - Les credencials es troben al Keeweb (cercar Apple o AppStore)
+      - Anar a CarpetaApp
+	  - Anar a TestFlight
+	  (7.1) Detals de com provar l'App:
+	     - Anar a Builds >> ios (menu lateral). Esperar a que acabi el l'estat de Processing (Pot tardar varies hores).
+	     - Fer click sobre el número de la versió que esta en color blau (devora el logo)
+	     - Afegir dades a "Test Details" de com fer el Test:
+-----------------------------------------------------------------------		 
+TO TEST APP
+==========
+
+(1) Download https://governdigital.fundaciobit.org/downloads/cert2.p12.zip
+(2) Unzip cert2.p12.zip (it contains a unique file named cert2.p12)
+(3) Install certificate into IOS device (certificate password 12345)
+(4) Open the APP and to allow NOTIFICATIONS permission.
+(5) Click in green button labelled as "Accediu a la Carpeta" or "Acceda a la Carpeta"
+(6) Select option labelled with "DNIe / Certificat electrònic" or  "DNIe / Certificado Electronico"
+(7) Select installed certificate
+(8) You will be returned to the App.
+------------------------------------------------------------------------------
+		 
+		 
+      (7.2) Convidar a usuaris a provar APP:
+	      - Anar a Internal Testing >> App Store Connect Users
+		  - Pitjar la icona (+) de testers i afegir
+      (7.3) Anar al mòbil iphone, entrar a TestFlight, descarregar nova versió i provar-la.
+	  (7.4) Esperar a que l'estat "Waiting for Review" de TestFlight hagi acabat i s'hagi passat a "Testing" (color verd).  
+
+(8) Despres anar a la pipella AppStore de "CarpetaAPP GOIB"
+
+      (8.1) Al menu lateral pitjar sobre "Add version". Escriure la nova versió
+	  (8.2) Entrar a la versió en qüestió i anar a l'apartat "Build" i seleccionar la versió correcta. Pitjar a SAVE.
+	  (8.3) Adjuntar fitxer cert2.p12.zip a l'apartat "App Review Information"
+	  (8.4) Revisar la resta de informació (Mirar What's New in This Version)
+	  (8.5) Pitjar sobre "Add for Review"
+      (8.6) Pitjar sobre "Submit to App Review"
+      (8.7) Esperar que desapareixi l'estat "Waiting for Review"
+      
+      Finalment quan posi "XXXXXX" agafar mòbil IOS i provar nova versió contra tots els entorns:
+                   (1) Govern Digital (https://governdigital.fundaciobit.org/carpetafront)
+                   (2) CAIB (https://www.caib.es/carpetafront)
+	  
+
+-----------
+     - Baixar fins a trobar el camp "versió". Actualitzar el numero de versió i pitjar boto SAVE (adalt)
+     - Un cop fet l'anterior el boto "Add for Review" s'activarà i el pitjarem.
+------------
+
+
+
+

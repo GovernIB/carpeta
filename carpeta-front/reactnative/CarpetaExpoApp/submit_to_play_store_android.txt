@@ -1,0 +1,29 @@
+
+
+* Canviar versions (Veure fitxer canvi_versio.txt)
+
+* Per construir AAB per enviar a Google Console (Play Store) => "eas build -p android"
+
+* Anar a https://expo.dev/accounts/carpeta per veure progres
+
+* Descarregar fitxer generat *.aab de expo.dev/accounts/carpeta
+
+* Anar a https://play.google.com/console/u/2/developers/?pli=1 (Veure KeeWeb)
+
+* Anar a Explorador d'app bundles i pitjar sobre "^ Penja una versió nova"  del fitxer *.aab descarregat. Esperar que tarda bastant ...
+
+* Entrar a la versió, anar a pipella de Baixades i descarregar la versió global i signada. 
+
+* Instalar-ho a un Android a veure si tot va bé.
+
+* Anar  https://play.google.com/console/
+     (1) A l'app "Carpeta Ciutadana GOIB", Apartat "Produccio" i pitjar "Crea una versió"
+     (2) Ves a App bundles i pitja "Afegeix de biblioteca"
+     (3) Boto d'abaix titulat "Següent"
+     (4) Boto d'abaix titulat "Desa"
+     (5) Enviarà a "Visio General de la publicació" i pitjar "Envia 1 canvi a revisió"
+     (6) Es posarà en estat "En revisió". Esperar ...
+   
+
+
+* TEST ICON-NOTIFICATION => https://romannurik.github.io/AndroidAssetStudio/icons-notification.html
