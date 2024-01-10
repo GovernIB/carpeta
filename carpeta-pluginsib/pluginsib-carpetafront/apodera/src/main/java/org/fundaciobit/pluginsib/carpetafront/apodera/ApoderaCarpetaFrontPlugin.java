@@ -338,7 +338,9 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
             String estatFilter = request.getParameter("estat");
 
             String tipusApodera = request.getParameter("tipus");
+            log.info("XYZ ZZZ tipus: " + tipusApodera); // TODO
             String subTipusApodera = request.getParameter("subtipus");
+            log.info("XYZ ZZZ subtipus: " + subTipusApodera); // TODO
 
             // TODO XYZ ZZZ 
             final int elementsPerPagina = 200;
@@ -366,15 +368,15 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
             List<DatosApoderamientoType> apoderaments = new ArrayList<DatosApoderamientoType>();
 
             if (vistaFiltre == VISTA_PODERDANT) {
-                List<DatosApoderamientoType> comPoderdant = consultaInterna(nif, null, pagina, lang, startDate, endDate, tipusApodera, subTipusApodera,  estatFilter)
-                        .getListaApoderamientos();
+                List<DatosApoderamientoType> comPoderdant = consultaInterna(nif, null, pagina, lang, startDate, endDate,
+                        tipusApodera, subTipusApodera, estatFilter).getListaApoderamientos();
                 if (comPoderdant != null) {
                     //totalComPoderdant = comPoderdant.size();
                     apoderaments.addAll(comPoderdant);
                 }
             } else {
-                List<DatosApoderamientoType> comApoderat = consultaInterna(null, nif, pagina, lang, startDate, endDate, tipusApodera, subTipusApodera,  estatFilter)
-                        .getListaApoderamientos();
+                List<DatosApoderamientoType> comApoderat = consultaInterna(null, nif, pagina, lang, startDate, endDate,
+                        tipusApodera, subTipusApodera, estatFilter).getListaApoderamientos();
                 if (comApoderat != null) {
                     //totalComApoderat = comApoderat.size();
                     apoderaments.addAll(comApoderat);
@@ -465,32 +467,38 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
                     // NOM I DOCUMENT APODERAT
                     {
                         DatosApoderadoCompletoType apoCompleto = apoderament.getDatosApoderado();
-                        if (apoCompleto.getPersonaFisica() != null) {
+                        if (apoCompleto.getPersonaJuridica() != null) {
+                            PersonaJuridicaType pf = apoCompleto.getPersonaJuridica();
+                            apo.setApoderado(pf.getRazonSocial() + " (" + pf.getNif() + ")" + " - "
+                                    + getTraduccio(APODERA_RES_BUNDLE, "persona.juridica", locale));
+                        } else if (apoCompleto.getPersonaFisica() != null) {
                             PersonaFisicaType pf = apoCompleto.getPersonaFisica();
                             apo.setApoderado(pf.getNombre() + " " + pf.getApellido1() + " (" + pf.getNifNie() + ")"
                                     + " - " + getTraduccio(APODERA_RES_BUNDLE, "persona.fisica", locale));
                         } else {
-                            if (apoCompleto.getPersonaJuridica() != null) {
-                                PersonaJuridicaType pf = apoCompleto.getPersonaJuridica();
-                                apo.setApoderado(pf.getRazonSocial() + " (" + pf.getNif() + ")" + " - "
-                                        + getTraduccio(APODERA_RES_BUNDLE, "persona.juridica", locale));
-                            }
+                            
+                           log.warn("Apoderat de l'apoderament amb ID " + apoderament.getCodApoderamientoINT() 
+                              + "(" + apoderament.getCodApoderamientoEXT() + ")"
+                              + " no defineix ni persona física ni persona jurídica !!!!!", new Exception());
                         }
                     }
 
                     // NOM I DOCUMENT PODERDANTE
                     {
                         DatosPoderdanteCompletoType poderdanteCompleto = apoderament.getDatosPoderdante();
-                        if (poderdanteCompleto.getPersonaFisica() != null) {
+                        if (poderdanteCompleto.getPersonaJuridica() != null) {
+                            PersonaJuridicaType pf = poderdanteCompleto.getPersonaJuridica();
+                            apo.setPoderdante(pf.getRazonSocial() + " (" + pf.getNif() + ")" + " - "
+                                    + getTraduccio(APODERA_RES_BUNDLE, "persona.juridica", locale));
+                        } else if (poderdanteCompleto.getPersonaFisica() != null) {
                             PersonaFisicaType pf = poderdanteCompleto.getPersonaFisica();
                             apo.setPoderdante(pf.getNombre() + " " + pf.getApellido1() + " (" + pf.getNifNie() + ")"
                                     + " - " + getTraduccio(APODERA_RES_BUNDLE, "persona.fisica", locale));
                         } else {
-                            if (poderdanteCompleto.getPersonaJuridica() != null) {
-                                PersonaJuridicaType pf = poderdanteCompleto.getPersonaJuridica();
-                                apo.setPoderdante(pf.getRazonSocial() + " (" + pf.getNif() + ")" + " - "
-                                        + getTraduccio(APODERA_RES_BUNDLE, "persona.juridica", locale));
-                            }
+                            log.warn("Poderdant de l'apoderament amb ID " + apoderament.getCodApoderamientoINT() 
+                            + "(" + apoderament.getCodApoderamientoEXT() + ")"
+                            + " no defineix ni persona física ni persona jurídica !!!!!", new Exception());
+                            
                         }
                     }
 
@@ -566,7 +574,7 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
             /*
             Map<Long, DatosApoderamientoType> apoderamentsMap = (Map<Long, DatosApoderamientoType>) request.getSession()
                     .getAttribute(SESSIO_CACHE_APODERAMENTS_MAP_APODERA);
-
+            
             if (apoderamentsMap == null) {
                 apoderamentsMap = new HashMap<Long, DatosApoderamientoType>();
                 request.getSession().setAttribute(SESSIO_CACHE_APODERAMENTS_MAP_APODERA, apoderamentsMap);
@@ -596,25 +604,24 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
                 // A Apodera WS la paginació es gestionada des del numero 1, mentre que a REACT es gestionada des del 0.
                 paginacio.setPaginaActual(pagina - 1);
 
-                
-
                 final int totalElements = paginacio.getPaginaActual() * elementsPerPagina
                         + (apos.size() == elementsPerPagina ? (elementsPerPagina + 1) : apos.size());
 
                 paginacio.setTotalElements(totalElements); // XYZ ZZZ ERROR FA FALTA
                 paginacio.setTotalPagines((int) (Math.floor(totalElements / elementsPerPagina))
                         + ((totalElements % elementsPerPagina == 0) ? 0 : 1));
-                
-                
+
                 log.info("\n\n   === PAGINACIO ===============");
-                log.info(" + PAGINA ACTUAL => " + paginacio.getPaginaActual() );
-                log.info(" + totalElements => " + totalElements );
+                log.info(" + PAGINA ACTUAL => " + paginacio.getPaginaActual());
+                log.info(" + totalElements => " + totalElements);
                 log.info(" + paginacio.getTotalPagines => " + paginacio.getTotalPagines());
                 log.info(" + paginacio.setElementsPerPagina => " + paginacio.getElementsPerPagina());
                 log.info(" + paginacio.setElementsRetornats => " + paginacio.getElementsRetornats());
-                
-                log.info(" + paginacio.getTotalPagines PART 1 => " + (int) (Math.floor(totalElements / elementsPerPagina)));
-                log.info(" + paginacio.getTotalPagines PART 2 => " +  ((totalElements % elementsPerPagina == 0) ? 0 : 1));
+
+                log.info(" + paginacio.getTotalPagines PART 1 => "
+                        + (int) (Math.floor(totalElements / elementsPerPagina)));
+                log.info(
+                        " + paginacio.getTotalPagines PART 2 => " + ((totalElements % elementsPerPagina == 0) ? 0 : 1));
 
                 infoApoderaments.put("paginacio", paginacio);
             }
@@ -713,7 +720,7 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
 
         if (tipusApodera != null && subTipusApodera != null) {
             tipoApoderamiento.setTipoApod(tipusApodera);
-            tipoApoderamiento.setTipoApod(subTipusApodera);
+            tipoApoderamiento.setSubTipoApod(subTipusApodera);
         }
 
         // Formato dd/MM/yyyy
