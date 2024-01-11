@@ -20,7 +20,6 @@ import {
   RenderPaginationTable,
 } from "carpetacommonreactlib";
 
-
 interface ApoderaProps extends WithTranslation {
   pathtoservei: string;
   titles: any;
@@ -338,9 +337,36 @@ class Apodera extends React.Component<ApoderaProps> {
   }
 
   addNewLine(str: string, nif: string, isDesktop: boolean) {
+    const tabulador = isDesktop ? <></> : <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</>;
+
     var index = str.indexOf(" - ");
     var nom = str.substr(0, index);
-    var fisicajuridica = str.substr(index + 3);
+    var fisicajuridicaStr = str.substr(index + 3);
+
+    // Miram si una persona juridica inclou el responsable, separat també per ' - '
+    var fisicajuridica;
+    index = fisicajuridicaStr.indexOf(" - ");
+    if (index == -1) {
+      fisicajuridica = (
+        <i>
+          {tabulador}
+          {fisicajuridicaStr}
+        </i>
+      );
+    } else {
+      var nomFJ = fisicajuridicaStr.substr(0, index);
+      var resp = fisicajuridicaStr.substr(index + 3);
+      fisicajuridica = (
+        <i>
+          <p style={{ margin: 0 }}>
+            {tabulador}
+            {nomFJ}
+          </p>
+          {tabulador}
+          {resp}
+        </i>
+      );
+    }
 
     var bold;
     if (str.includes(nif)) {
@@ -349,16 +375,12 @@ class Apodera extends React.Component<ApoderaProps> {
       bold = "normal";
     }
 
-    const tabulador = isDesktop ? <></> : <>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</>;
     var tmp = (
       <span style={{ fontWeight: bold }}>
         <p style={{ margin: 0 }}>
           {tabulador} {nom}
         </p>
-        <i>
-          {tabulador}
-          {fisicajuridica}
-        </i>
+        {fisicajuridica}
       </span>
     );
 
@@ -385,15 +407,14 @@ class Apodera extends React.Component<ApoderaProps> {
 
     const estatsDisponibles: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 18, 19];
     let options = [];
-    let apoderaEstat: string|null = t("apodera.estat");
-    let filterVista: string|null = t("filter_vista");
-    
+    let apoderaEstat: string | null = t("apodera.estat");
+    let filterVista: string | null = t("filter_vista");
 
     for (let i = 0; i < estatsDisponibles.length; i++) {
       let obj = {
         value: estatsDisponibles[i],
         label: t("apodera.estat.nom." + estatsDisponibles[i]),
-      };      
+      };
       options.push(obj);
     }
 
@@ -478,8 +499,7 @@ class Apodera extends React.Component<ApoderaProps> {
             </CarpetaFormulariDeFiltreItem>
               */}
 
-            
-            <CarpetaFormulariDeFiltreItem label={apoderaEstat != null ? apoderaEstat:""}>
+            <CarpetaFormulariDeFiltreItem label={apoderaEstat != null ? apoderaEstat : ""}>
               <>
                 <select
                   id="estat"
@@ -492,15 +512,11 @@ class Apodera extends React.Component<ApoderaProps> {
                   }}
                   defaultValue={this.filter_estat}
                 >
-                  <option key={0} value="0" className="form-control form-control-sm" >
+                  <option key={0} value="0" className="form-control form-control-sm">
                     {t("apodera.estat.qualsevol")}
                   </option>
                   {options.map(({ value, label }, index) => (
-                    <option
-                      key={value}
-                      value={value}
-                      className="form-control form-control-sm"                      
-                    >
+                    <option key={value} value={value} className="form-control form-control-sm">
                       {label}
                     </option>
                   ))}

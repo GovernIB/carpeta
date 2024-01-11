@@ -338,9 +338,7 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
             String estatFilter = request.getParameter("estat");
 
             String tipusApodera = request.getParameter("tipus");
-            log.info("XYZ ZZZ tipus: " + tipusApodera); // TODO
             String subTipusApodera = request.getParameter("subtipus");
-            log.info("XYZ ZZZ subtipus: " + subTipusApodera); // TODO
 
             // TODO XYZ ZZZ 
             final int elementsPerPagina = 200;
@@ -468,18 +466,16 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
                     {
                         DatosApoderadoCompletoType apoCompleto = apoderament.getDatosApoderado();
                         if (apoCompleto.getPersonaJuridica() != null) {
-                            PersonaJuridicaType pf = apoCompleto.getPersonaJuridica();
-                            apo.setApoderado(pf.getRazonSocial() + " (" + pf.getNif() + ")" + " - "
-                                    + getTraduccio(APODERA_RES_BUNDLE, "persona.juridica", locale));
+                            apo.setApoderado(generaLabelPersonaJuridica(locale, apoCompleto.getPersonaJuridica(),
+                                    apoCompleto.getPersonaFisica()));
                         } else if (apoCompleto.getPersonaFisica() != null) {
-                            PersonaFisicaType pf = apoCompleto.getPersonaFisica();
-                            apo.setApoderado(pf.getNombre() + " " + pf.getApellido1() + " (" + pf.getNifNie() + ")"
-                                    + " - " + getTraduccio(APODERA_RES_BUNDLE, "persona.fisica", locale));
+                            apo.setApoderado(generaLabelPersonaFisica(locale, apoCompleto.getPersonaFisica()));
                         } else {
-                            
-                           log.warn("Apoderat de l'apoderament amb ID " + apoderament.getCodApoderamientoINT() 
-                              + "(" + apoderament.getCodApoderamientoEXT() + ")"
-                              + " no defineix ni persona física ni persona jurídica !!!!!", new Exception());
+                            String msg = "Apoderat de l'apoderament amb ID " + apoderament.getCodApoderamientoINT()
+                                    + "(" + apoderament.getCodApoderamientoEXT() + ")"
+                                    + " no defineix ni persona física ni persona jurídica !!!!!";
+                            apo.setApoderado(msg);
+                            log.warn(msg, new Exception());
                         }
                     }
 
@@ -487,18 +483,17 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
                     {
                         DatosPoderdanteCompletoType poderdanteCompleto = apoderament.getDatosPoderdante();
                         if (poderdanteCompleto.getPersonaJuridica() != null) {
-                            PersonaJuridicaType pf = poderdanteCompleto.getPersonaJuridica();
-                            apo.setPoderdante(pf.getRazonSocial() + " (" + pf.getNif() + ")" + " - "
-                                    + getTraduccio(APODERA_RES_BUNDLE, "persona.juridica", locale));
+                            apo.setPoderdante(generaLabelPersonaJuridica(locale,
+                                    poderdanteCompleto.getPersonaJuridica(), poderdanteCompleto.getPersonaFisica()));
                         } else if (poderdanteCompleto.getPersonaFisica() != null) {
-                            PersonaFisicaType pf = poderdanteCompleto.getPersonaFisica();
-                            apo.setPoderdante(pf.getNombre() + " " + pf.getApellido1() + " (" + pf.getNifNie() + ")"
-                                    + " - " + getTraduccio(APODERA_RES_BUNDLE, "persona.fisica", locale));
+                            apo.setPoderdante(generaLabelPersonaFisica(locale, poderdanteCompleto.getPersonaFisica()));
                         } else {
-                            log.warn("Poderdant de l'apoderament amb ID " + apoderament.getCodApoderamientoINT() 
-                            + "(" + apoderament.getCodApoderamientoEXT() + ")"
-                            + " no defineix ni persona física ni persona jurídica !!!!!", new Exception());
-                            
+                            String msg = "Poderdant de l'apoderament amb ID " + apoderament.getCodApoderamientoINT()
+                                    + "(" + apoderament.getCodApoderamientoEXT() + ")"
+                                    + " no defineix ni persona física ni persona jurídica !!!!!";
+                            apo.setPoderdante(msg);
+                            log.warn(msg, new Exception());
+
                         }
                     }
 
@@ -658,6 +653,24 @@ public class ApoderaCarpetaFrontPlugin extends AbstractPinbalCarpetaFrontPlugin 
 
         }
 
+    }
+
+    protected String generaLabelPersonaFisica(Locale locale, PersonaFisicaType pf) {
+        return pf.getNombre() + " " + pf.getApellido1() + " (" + pf.getNifNie() + ")" + " - "
+                + getTraduccio(APODERA_RES_BUNDLE, "persona.fisica", locale);
+    }
+
+    protected String generaLabelPersonaJuridica(Locale locale, PersonaJuridicaType pj, PersonaFisicaType pf) {
+
+        String label = pj.getRazonSocial() + " (" + pj.getNif() + ")" + " - "
+                + getTraduccio(APODERA_RES_BUNDLE, "persona.juridica", locale);
+
+        if (pf != null) {
+            label = label + " - " + getTraduccio(APODERA_RES_BUNDLE, "responsable.abreviat", locale) + ": "
+              + pf.getNombre() + " " + pf.getApellido1() + " (" + pf.getNifNie() + ")";
+        }
+
+        return label;
     }
 
     protected ConsultaApoderamientosResponse consultaInterna(String nifPoderdante, String nifApoderado, int pagina,
