@@ -9,7 +9,7 @@
     <parent>
         <groupId>es.caib.carpeta</groupId>
         <artifactId>carpeta-pluginsib-carpetafront</artifactId>
-        <version>1.1.26</version>
+        <version>1.1.27</version>
     </parent>
     <properties>
     </properties>
@@ -17,7 +17,7 @@
 
         <dependency>
             <groupId>es.caib.carpeta</groupId>
-            <version>1.1.26</version>
+            <version>1.1.27</version>
             <artifactId>carpeta-pluginsib-carpetafront-api</artifactId>
         </dependency>
 
