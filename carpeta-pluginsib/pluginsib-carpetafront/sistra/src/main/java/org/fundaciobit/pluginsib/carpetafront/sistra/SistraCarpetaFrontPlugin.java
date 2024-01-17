@@ -315,16 +315,13 @@ public class SistraCarpetaFrontPlugin extends RegwebDetallComponent {
 
             /* SISTRA1 */
             try {
-                // Només fa la cerca a Sistra 1 dins els 3 darrers mesos a data d'avui
                 Calendar primeraData = Calendar.getInstance();
                 Date avui = new Date();
-                primeraData.setTime(avui);
-                primeraData.add(Calendar.MONTH, -3);
 
+                primeraData.setTime(avui);
                 boolean cercaSistra1 = false;
 
                 if (primeraData.getTime().after(formDataInici)) {
-                    formDataInici = primeraData.getTime();
                     if (formDataInici.equals(formDataFi) || formDataInici.before(formDataFi)) {
                         cercaSistra1 = true;
                     }
