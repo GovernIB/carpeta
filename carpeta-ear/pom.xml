@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>es.caib.carpeta</groupId>
 		<artifactId>carpeta</artifactId>
-		<version>1.1.26</version>
+		<version>1.1.28</version>
 	</parent>
 	<artifactId>carpeta-ear</artifactId>
 	<packaging>ear</packaging>
@@ -32,14 +32,14 @@
 		<dependency>
 			<groupId>es.caib.carpeta</groupId>
 			<artifactId>carpeta-ejb</artifactId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 			<type>ejb</type>
 		</dependency>
 		<!-- BACK START -->
 		<dependency>
 			<groupId>es.caib.carpeta</groupId>
 			<artifactId>carpeta-back</artifactId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 			<type>war</type>
 		</dependency>
 		<!-- BACK END -->
@@ -47,7 +47,7 @@
 		<dependency>
 			<groupId>es.caib.carpeta</groupId>
 			<artifactId>carpeta-front</artifactId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 			<type>war</type>
 		</dependency>
 		<!-- FRONT END -->
@@ -55,7 +55,7 @@
 		<dependency>
 			<groupId>es.caib.carpeta</groupId>
 			<artifactId>carpeta-api-externa</artifactId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 			<type>war</type>
 		</dependency>
 		<!-- API EXTERNA END -->
@@ -63,7 +63,7 @@
 		<dependency>
 			<groupId>es.caib.carpeta</groupId>
 			<artifactId>carpeta-api-interna</artifactId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 			<type>war</type>
 		</dependency>
 		<!-- API INTERNA END -->
@@ -83,22 +83,22 @@
 		<dependency>
 			<groupId>es.caib.carpeta</groupId>
 			<artifactId>carpeta-model</artifactId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 		</dependency>
 		<dependency>
 			<groupId>es.caib.carpeta</groupId>
 			<artifactId>carpeta-persistence</artifactId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 		</dependency>
 		<dependency>
 			<groupId>es.caib.carpeta</groupId>
 			<artifactId>carpeta-commons</artifactId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 		</dependency>
 		<dependency>
 			<artifactId>carpeta-pluginsib-carpetafront-pinbalmatricula</artifactId>
 			<groupId>es.caib.carpeta</groupId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 		</dependency>
 
 		<!-- ====================================== -->
@@ -107,92 +107,92 @@
 		<dependency>
 			<artifactId>carpeta-pluginsib-carpetafront-api</artifactId>
 			<groupId>es.caib.carpeta</groupId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 		</dependency>
 		<dependency>
 			<artifactId>carpeta-pluginsib-carpetafront-sistra</artifactId>
 			<groupId>es.caib.carpeta</groupId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 		</dependency>
 		<dependency>
 			<artifactId>carpeta-pluginsib-carpetafront-reprendretramitsistra</artifactId>
 			<groupId>es.caib.carpeta</groupId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 		</dependency>
 		<dependency>
 			<artifactId>carpeta-pluginsib-carpetafront-notib</artifactId>
 			<groupId>es.caib.carpeta</groupId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 		</dependency>
 		<dependency>
 			<artifactId>carpeta-pluginsib-carpetafront-notificacionssistra</artifactId>
 			<groupId>es.caib.carpeta</groupId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 		</dependency>
 		<dependency>
 			<artifactId>carpeta-pluginsib-carpetafront-dadeslogin</artifactId>
 			<groupId>es.caib.carpeta</groupId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 		</dependency>
 		<dependency>
 			<artifactId>carpeta-pluginsib-carpetafront-pinbalpolicia</artifactId>
 			<groupId>es.caib.carpeta</groupId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 		</dependency>
 		<dependency>
 			<artifactId>carpeta-pluginsib-carpetafront-regweb32</artifactId>
 			<groupId>es.caib.carpeta</groupId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 		</dependency>
 		<dependency>
 			<artifactId>carpeta-pluginsib-carpetafront-regwebdetallcomponent</artifactId>
 			<groupId>es.caib.carpeta</groupId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 		</dependency>
 		<dependency>
 			<artifactId>carpeta-pluginsib-carpetafront-pinbalayudas</artifactId>
 			<groupId>es.caib.carpeta</groupId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 		</dependency>
 		<dependency>
 			<artifactId>carpeta-pluginsib-carpetafront-pinbalfamilia</artifactId>
 			<groupId>es.caib.carpeta</groupId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 		</dependency>
 		<dependency>
             <artifactId>carpeta-pluginsib-carpetafront-pinbalcontrataciones</artifactId>
             <groupId>es.caib.carpeta</groupId>
-            <version>1.1.26</version>
+            <version>1.1.28</version>
         </dependency>
 		<dependency>
             <artifactId>carpeta-pluginsib-carpetafront-pinbaldiscapacidad</artifactId>
             <groupId>es.caib.carpeta</groupId>
-            <version>1.1.26</version>
+            <version>1.1.28</version>
         </dependency>
 		<dependency>
             <artifactId>carpeta-pluginsib-carpetafront-pinbalconvivencia</artifactId>
             <groupId>es.caib.carpeta</groupId>
-            <version>1.1.26</version>
+            <version>1.1.28</version>
         </dependency>
         <dependency>
             <artifactId>carpeta-pluginsib-carpetafront-pinbalhistorico</artifactId>
             <groupId>es.caib.carpeta</groupId>
-            <version>1.1.26</version>
+            <version>1.1.28</version>
         </dependency>
 		<dependency>
 			<artifactId>carpeta-pluginsib-carpetafront-apodera</artifactId>
 			<groupId>es.caib.carpeta</groupId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 		</dependency>
 		<dependency>
 			<artifactId>carpeta-pluginsib-carpetafront-expedients</artifactId>
 			<groupId>es.caib.carpeta</groupId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 		</dependency>
 		<dependency>
 			<artifactId>carpeta-pluginsib-carpetafront-certificats</artifactId>
 			<groupId>es.caib.carpeta</groupId>
-			<version>1.1.26</version>
+			<version>1.1.28</version>
 		</dependency>
 
 		<!-- ====================================== -->
