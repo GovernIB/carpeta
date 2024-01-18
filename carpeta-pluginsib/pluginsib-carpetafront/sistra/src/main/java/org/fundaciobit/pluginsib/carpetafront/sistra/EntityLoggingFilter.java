@@ -26,7 +26,7 @@ public class EntityLoggingFilter implements ClientRequestFilter, ClientResponseF
     private static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
     private final int maxEntitySize = 1024 * 8;
 
-    private void log(StringBuilder sb) {
+    private void log(String titol, StringBuilder sb) {
         logger.info(sb.toString());
     }
 
@@ -62,7 +62,7 @@ public class EntityLoggingFilter implements ClientRequestFilter, ClientResponseF
         if (responseContext.hasEntity()) {
             responseContext.setEntityStream(logInboundEntity(sb, responseContext.getEntityStream(),
                     DEFAULT_CHARSET));
-            log(sb);
+            log("filter", sb);
         }
 
     }
@@ -73,7 +73,7 @@ public class EntityLoggingFilter implements ClientRequestFilter, ClientResponseF
         final LoggingStream stream = (LoggingStream) context.getProperty(ENTITY_STREAM_PROPERTY);
         context.proceed();
         if (stream != null) {
-            log(stream.getStringBuilder(DEFAULT_CHARSET));
+            log("aroundWriteTo", stream.getStringBuilder(DEFAULT_CHARSET));
         }
     }
 
