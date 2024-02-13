@@ -77,7 +77,6 @@
       <scope>provided</scope>
     </dependency>
   </dependencies>
-  <!-- XYZ ZZZ
   <repositories>
     <repository>
       <id>maven-nuxeo</id>
@@ -99,11 +98,9 @@
       <url>http://GovernIB.github.io/maven/maven/</url>
     </repository>
   </repositories>
-  -->
   <build>
     <pluginManagement>
       <plugins>
-        <!-- XYZ ZZZ
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
@@ -129,7 +126,6 @@
             <downloadJavadocs>true</downloadJavadocs>
           </configuration>
         </plugin>
-        -->
       </plugins>
     </pluginManagement>
   </build>

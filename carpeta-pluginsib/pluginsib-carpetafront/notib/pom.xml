@@ -39,6 +39,9 @@
             <artifactId>carpeta-pluginsib-notib2client</artifactId>
             <version>2.0</version>
         </dependency>
+        
+        <!-- Dependències incompatibles amb altres pluguins. En vers d'emprar aquest client, 
+            el generam a partir del openapi.json dins el directori notib2client de pluginsib-->
         <!--<dependency>
             <groupId>es.caib.notib</groupId>
             <artifactId>notib-client-intf</artifactId>
