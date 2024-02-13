@@ -1,80 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>carpeta-pluginsib-carpetafront</artifactId>
-    <packaging>pom</packaging>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>carpeta-pluginsib-carpetafront</artifactId>
+  <packaging>pom</packaging>
 
-    <parent>
-        <groupId>es.caib.carpeta</groupId>
-        <version>1.1.28</version>
-        <artifactId>carpeta-pluginsib</artifactId>
-    </parent>
+  <parent>
+    <groupId>es.caib.carpeta</groupId>
+    <version>1.1.28</version>
+    <artifactId>carpeta-pluginsib</artifactId>
+  </parent>
 
-    <name>Carpeta - PluginsIB - Carpeta Front</name>
-    <modules>
-        <module>api</module>
-        <module>sistra</module>
-        <module>regweb32</module>
-        <module>notib</module>
-        <module>notificacionssistra</module>
-		<module>dadeslogin</module>
-		<module>pinbalpolicia</module>
-        <module>regwebdetallcomponent</module>
-		<module>reprendretramitsistra</module>
-		<module>pinbalayudasubvenciones</module>
-		<module>pinbalfamilia</module>
-		<module>pinbalcontrataciones</module>
-		<module>pinbaldiscapacidad</module>
-		<module>pinbalmatricula</module>
-		<module>pinbalconvivencia</module>
-		<module>pinbalhistorico</module>
-		<module>apodera</module>
-		<module>expedients</module>
+  <name>Carpeta - PluginsIB - Carpeta Front</name>
+  <modules>
+
+    <module>api</module>
+    <module>sistra</module>
+    <module>regweb32</module>
+    <module>notib2client</module>
+    <module>notib</module>
+    <module>notificacionssistra</module>
+    <module>dadeslogin</module>
+    <module>pinbalpolicia</module>
+    <module>regwebdetallcomponent</module>
+    <module>reprendretramitsistra</module>
+    <module>pinbalayudasubvenciones</module>
+    <module>pinbalfamilia</module>
+    <module>pinbalcontrataciones</module>
+    <module>pinbaldiscapacidad</module>
+    <module>pinbalmatricula</module>
+    <module>pinbalconvivencia</module>
+    <module>pinbalhistorico</module>
+    <module>apodera</module>
+    <module>expedients</module>
     <module>certificats</module>
-        <module>reactjschecker</module>
-    </modules>
-    
-    <dependencyManagement>
-		<dependencies>
-			
-			<dependency>
-            <groupId>es.caib.pinbal</groupId>
-            <artifactId>pinbal-client</artifactId>
-            <version>1.4.36</version>
-            <exclusions>
-                <!-- evitar conflicte amb JAX-RS de JBoss -->
-                <exclusion>
-                    <groupId>javax.ws.rs</groupId>
-                    <artifactId>jsr311-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-      </dependencies>
-      </dependencyManagement>
+    <module>reactjschecker</module>
+  </modules>
 
+  <dependencyManagement>
     <dependencies>
-        <dependency>
-            <groupId>org.fundaciobit.pluginsib.core</groupId>
-            <artifactId>pluginsib-core</artifactId>
-            <version>2.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <scope>provided</scope>
-        </dependency>
+
+      <dependency>
+        <groupId>es.caib.pinbal</groupId>
+        <artifactId>pinbal-client</artifactId>
+        <version>1.4.36</version>
+        <exclusions>
+          <!-- evitar conflicte amb JAX-RS de JBoss -->
+          <exclusion>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
     </dependencies>
-    <!-- XYZ ZZZ
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.fundaciobit.pluginsib.core</groupId>
+      <artifactId>pluginsib-core</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+  <!-- XYZ ZZZ
   <repositories>
     <repository>
       <id>maven-nuxeo</id>
@@ -97,10 +100,10 @@
     </repository>
   </repositories>
   -->
-    <build>
-        <pluginManagement>
-            <plugins>
-                <!-- XYZ ZZZ
+  <build>
+    <pluginManagement>
+      <plugins>
+        <!-- XYZ ZZZ
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
@@ -127,7 +130,7 @@
           </configuration>
         </plugin>
         -->
-            </plugins>
-        </pluginManagement>
-    </build>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>

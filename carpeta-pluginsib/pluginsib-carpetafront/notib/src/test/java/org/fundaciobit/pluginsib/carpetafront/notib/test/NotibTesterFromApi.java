@@ -27,8 +27,8 @@ public class NotibTesterFromApi {
         Integer mida = 20;
 
         /* Filtre dates */
-        String formDataInici = "13%2F01%2F2022";
-        String formDataFi = "13%2F06%2F2022";
+        //String formDataInici = "13%2F01%2F2022";
+        //String formDataFi = "13%2F06%2F2022";
         
         Date dataInici = new Date("13%2F01%2F2022");
         Date dataFi = new Date("13%2F06%2F2022");

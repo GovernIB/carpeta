@@ -1,24 +1,34 @@
 package org.fundaciobit.pluginsib.carpetafront.notib;
 
-import es.caib.notib.client.domini.consulta.TransmissioV2;
 
 import java.util.Date;
+
+import org.fundaciobit.pluginsib.carpetafront.notib2client.model.TransmissioV2;
+import org.joda.time.DateTime;
 
 public class ComunicacioNotificacio extends TransmissioV2 {
 
     private TransmissioV2 transmissio;
     // Afegits
     private String tipus;
-    private Date data;
+    private DateTime data;
 
     public ComunicacioNotificacio() {
         super();
     }
 
-    public ComunicacioNotificacio(TransmissioV2 transmissio, Date data, String tipus) {
+    public ComunicacioNotificacio(TransmissioV2 transmissio, DateTime data, String tipus) {
         super();
         this.transmissio = transmissio;
         this.data = data;
+        this.tipus = tipus;
+    }
+    
+    
+    public ComunicacioNotificacio(TransmissioV2 transmissio, Date data, String tipus) {
+        super();
+        this.transmissio = transmissio;
+        this.data = new DateTime(data);
         this.tipus = tipus;
     }
 
@@ -30,11 +40,11 @@ public class ComunicacioNotificacio extends TransmissioV2 {
         this.transmissio = transmissio;
     }
 
-    public Date getData() {
+    public DateTime getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(DateTime data) {
         this.data = data;
     }
 

@@ -1,0 +1,1 @@
+mvn clean install -P generacio-notib2-client 

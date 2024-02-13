@@ -1,15 +1,24 @@
 package org.fundaciobit.pluginsib.carpetafront.notib;
 
 import com.google.gson.Gson;
+
+
 import es.caib.carpeta.pluginsib.carpetafront.api.*;
-import es.caib.notib.client.NotificacioRestClientV2;
-import es.caib.notib.client.domini.IdiomaEnumDto;
-import es.caib.notib.client.domini.consulta.*;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementoExpediente;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.TipoElementoExpediente;
 import org.apache.commons.io.IOUtils;
+import org.fundaciobit.pluginsib.carpetafront.notib2client.api.ConsultaV2Api;
+import org.fundaciobit.pluginsib.carpetafront.notib2client.api.NotificacioV2Api;
+import org.fundaciobit.pluginsib.carpetafront.notib2client.model.DocumentConsultaV2;
+import org.fundaciobit.pluginsib.carpetafront.notib2client.model.NotificacioV2.IdiomaEnum;
+import org.fundaciobit.pluginsib.carpetafront.notib2client.model.PersonaConsultaV2;
+import org.fundaciobit.pluginsib.carpetafront.notib2client.model.RespostaConsultaV2;
+import org.fundaciobit.pluginsib.carpetafront.notib2client.model.TransmissioV2;
+import org.fundaciobit.pluginsib.carpetafront.notib2client.services.ApiClient;
+import org.fundaciobit.pluginsib.carpetafront.notib2client.services.auth.HttpBasicAuth;
 //import org.fundaciobit.pluginsib.carpetafront.notib.api.*;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
+import org.joda.time.DateTime;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -483,7 +492,14 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     String user = getPropertyRequired(NOTIB_PROPERTY_BASE + "user");
                     String pass = getPropertyRequired(NOTIB_PROPERTY_BASE + "pass");
 
-                    notibClientRest = new NotificacioRestClientV2(url, user, pass);
+                    ApiClient apiClient = new ApiClient();
+                    apiClient.setBasePath(url);
+                    HttpBasicAuth basicAuth = (HttpBasicAuth) apiClient.getAuthentication("BasicAuth");
+                    basicAuth.setUsername(user);
+                    basicAuth.setPassword(pass);
+
+                    notibClientRest = new ConsultaV2Api(apiClient);
+                    
                 }
 
                 String nif = userData.getAdministrationID();
@@ -512,10 +528,12 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     formDataInici = cal.getTime();
                 }
 
-                RespostaConsultaV2 respostaNotificacions = notibClientRest.notificacionsByTitular(nif, formDataInici,
-                        formDataFi, true, getIdiomaEnumDto(locale.getLanguage()), 0, mida);
+                RespostaConsultaV2 respostaNotificacions = notibClientRest.notificacionsByTitular(nif, new DateTime(formDataInici),
+                        new DateTime(formDataFi), true, locale.getLanguage(), 0, mida);
+                
+                
 
-                notificacionsList = respostaNotificacions.getResultat();
+                notificacionsList = respostaNotificacions.getEmisor();
                 for (TransmissioV2 notificacio : notificacionsList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(notificacio);
@@ -706,7 +724,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     // --------------------------------------------------------------------------------------
     // --------------------------------------------------------------------------------------
 
-    private NotificacioRestClientV2 notibClientRest = null;
+    private ConsultaV2Api notibClientRest = null;
 
     protected static final String SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB = "SESSIO_CACHE_COMUNICACION_NOTIB";
 
@@ -738,8 +756,15 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     String url = getPropertyRequired(NOTIB_PROPERTY_BASE + "url");
                     String user = getPropertyRequired(NOTIB_PROPERTY_BASE + "user");
                     String pass = getPropertyRequired(NOTIB_PROPERTY_BASE + "pass");
+                    
+                    ApiClient apiClient = new ApiClient();
+                    apiClient.setBasePath(url);
+                    HttpBasicAuth basicAuth = (HttpBasicAuth) apiClient.getAuthentication("BasicAuth");
+                    basicAuth.setUsername(user);
+                    basicAuth.setPassword(pass);
+                    
 
-                    notibClientRest = new NotificacioRestClientV2(url, user, pass);
+                    notibClientRest = new ConsultaV2Api(apiClient);
                 }
 
                 String nif = userData.getAdministrationID();
@@ -768,14 +793,14 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     formDataInici = cal.getTime();
                 }
 
-                RespostaConsultaV2 resposta = notibClientRest.notificacionsByTitular(nif, formDataInici, formDataFi, true, getIdiomaEnumDto(locale.getLanguage()), pagina, mida);
+                RespostaConsultaV2 resposta = notibClientRest.notificacionsByTitular(nif, new DateTime(formDataInici), new DateTime(formDataFi), true, locale.getLanguage(), pagina, mida);
 
                 // System.out.println(" ------------ OK " + resposta + "---------------");
                 // System.out.println(" ------------ NUm Elements Retornats: " +
                 // resposta.getNumeroElementsRetornats());
                 // System.out.println(" ------------ NUm Elements Totals: " +
                 // resposta.getNumeroElementsTotals());
-                notificacions = resposta.getResultat();
+                notificacions = resposta.getEmisor();
 
             }
 
@@ -913,7 +938,14 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     String user = getPropertyRequired(NOTIB_PROPERTY_BASE + "user");
                     String pass = getPropertyRequired(NOTIB_PROPERTY_BASE + "pass");
 
-                    notibClientRest = new NotificacioRestClientV2(url, user, pass);
+                    ApiClient apiClient = new ApiClient();
+                    apiClient.setBasePath(url);
+                    HttpBasicAuth basicAuth = (HttpBasicAuth) apiClient.getAuthentication("BasicAuth");
+                    basicAuth.setUsername(user);
+                    basicAuth.setPassword(pass);
+                    
+                    
+                    notibClientRest = new ConsultaV2Api(apiClient);
                 }
 
                 String nif = userData.getAdministrationID();
@@ -944,10 +976,10 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
 
                 RespostaConsultaV2 respostaNotificacionsPendents = notibClientRest
-                        .notificacionsPendentsByTitular(nif, formDataInici, formDataFi, true, getIdiomaEnumDto(locale.getLanguage()),0,
+                        .notificacionsPendentsByTitular(nif, new DateTime(formDataInici), new DateTime(formDataFi), true, locale.getLanguage(),0,
                                 mida);
 
-                notificacionsPendentsList = respostaNotificacionsPendents.getResultat();
+                notificacionsPendentsList = respostaNotificacionsPendents.getEmisor();
                 for (TransmissioV2 notificacio : notificacionsPendentsList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(notificacio);
@@ -1076,8 +1108,14 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     String url = getPropertyRequired(NOTIB_PROPERTY_BASE + "url");
                     String user = getPropertyRequired(NOTIB_PROPERTY_BASE + "user");
                     String pass = getPropertyRequired(NOTIB_PROPERTY_BASE + "pass");
-
-                    notibClientRest = new NotificacioRestClientV2(url, user, pass);
+                    
+                    ApiClient apiClient = new ApiClient();
+                    apiClient.setBasePath(url);
+                    HttpBasicAuth basicAuth = (HttpBasicAuth) apiClient.getAuthentication("BasicAuth");
+                    basicAuth.setUsername(user);
+                    basicAuth.setPassword(pass);
+                    
+                    notibClientRest = new ConsultaV2Api(apiClient);
                 }
 
                 String nif = userData.getAdministrationID();
@@ -1108,9 +1146,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
 
                 RespostaConsultaV2 respostaNotificacionsLlegides = notibClientRest.notificacionsLlegidesByTitular(nif,
-                        formDataInici, formDataFi, true, getIdiomaEnumDto(locale.getLanguage()),0, mida);
+                        new DateTime(formDataInici), new DateTime(formDataFi), true, locale.getLanguage(),0, mida);
 
-                notificacionsLlegidesList = respostaNotificacionsLlegides.getResultat();
+                notificacionsLlegidesList = respostaNotificacionsLlegides.getEmisor();
                 for (TransmissioV2 notificacio : notificacionsLlegidesList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(notificacio);
@@ -1240,7 +1278,13 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     String user = getPropertyRequired(NOTIB_PROPERTY_BASE + "user");
                     String pass = getPropertyRequired(NOTIB_PROPERTY_BASE + "pass");
 
-                    notibClientRest = new NotificacioRestClientV2(url, user, pass);
+                    ApiClient apiClient = new ApiClient();
+                    apiClient.setBasePath(url);
+                    HttpBasicAuth basicAuth = (HttpBasicAuth) apiClient.getAuthentication("BasicAuth");
+                    basicAuth.setUsername(user);
+                    basicAuth.setPassword(pass);
+                    
+                    notibClientRest = new ConsultaV2Api(apiClient);
                 }
 
                 String nif = userData.getAdministrationID();
@@ -1269,11 +1313,11 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     formDataInici = cal.getTime();
                 }
 
-                RespostaConsultaV2 respostaComunicacions = notibClientRest.comunicacionsByTitular(nif, formDataInici,
-                        formDataFi,true, getIdiomaEnumDto(locale.getLanguage()), 0,
+                RespostaConsultaV2 respostaComunicacions = notibClientRest.comunicacionsByTitular(nif, new DateTime(formDataInici),
+                        new DateTime(formDataFi),true, locale.getLanguage(), 0,
                         mida);
 
-                comunicacionsList = respostaComunicacions.getResultat();
+                comunicacionsList = respostaComunicacions.getEmisor();
                 for (TransmissioV2 comunicacio : comunicacionsList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(comunicacio);
@@ -1399,7 +1443,13 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     String user = getPropertyRequired(NOTIB_PROPERTY_BASE + "user");
                     String pass = getPropertyRequired(NOTIB_PROPERTY_BASE + "pass");
 
-                    notibClientRest = new NotificacioRestClientV2(url, user, pass);
+                    ApiClient apiClient = new ApiClient();
+                    apiClient.setBasePath(url);
+                    HttpBasicAuth basicAuth = (HttpBasicAuth) apiClient.getAuthentication("BasicAuth");
+                    basicAuth.setUsername(user);
+                    basicAuth.setPassword(pass);
+                    
+                    notibClientRest = new ConsultaV2Api(apiClient);
                 }
 
                 String nif = userData.getAdministrationID();
@@ -1429,9 +1479,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 }
 
                 RespostaConsultaV2 respostaComunicacionsPendents = notibClientRest.comunicacionsPendentsByTitular(nif,
-                        formDataInici, formDataFi,true, getIdiomaEnumDto(locale.getLanguage()),  0, mida);
+                        new DateTime(formDataInici), new DateTime(formDataFi),true, locale.getLanguage(),  0, mida);
 
-                comunicacionsPendentsList = respostaComunicacionsPendents.getResultat();
+                comunicacionsPendentsList = respostaComunicacionsPendents.getEmisor();
                 for (TransmissioV2 comunicacio : comunicacionsPendentsList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(comunicacio);
@@ -1557,7 +1607,13 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     String user = getPropertyRequired(NOTIB_PROPERTY_BASE + "user");
                     String pass = getPropertyRequired(NOTIB_PROPERTY_BASE + "pass");
 
-                    notibClientRest = new NotificacioRestClientV2(url, user, pass);
+                    ApiClient apiClient = new ApiClient();
+                    apiClient.setBasePath(url);
+                    HttpBasicAuth basicAuth = (HttpBasicAuth) apiClient.getAuthentication("BasicAuth");
+                    basicAuth.setUsername(user);
+                    basicAuth.setPassword(pass);
+                    
+                    notibClientRest = new ConsultaV2Api(apiClient);
                 }
 
                 String nif = userData.getAdministrationID();
@@ -1587,9 +1643,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 }
 
                 RespostaConsultaV2 respostaComunicacionsLlegides = notibClientRest.comunicacionsLlegidesByTitular(nif,
-                        formDataInici, formDataFi, true, getIdiomaEnumDto(locale.getLanguage()), 0, mida);
+                        new DateTime(formDataInici), new DateTime(formDataFi), true, locale.getLanguage(), 0, mida);
 
-                comunicacionsLlegidesList = respostaComunicacionsLlegides.getResultat();
+                comunicacionsLlegidesList = respostaComunicacionsLlegides.getEmisor();
                 for (TransmissioV2 comunicacio : comunicacionsLlegidesList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(comunicacio);
@@ -1701,7 +1757,6 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             }
             List<TransmissioV2> comunicacionsList;
             List<TransmissioV2> notificacionsList;
-            //List<TransmissioV2> totes = new ArrayList<TransmissioV2>();
             List<ComunicacioNotificacio> sortedTotes = new ArrayList<ComunicacioNotificacio>();
             ArrayList<ComunicacioNotificacio> cns = new ArrayList<ComunicacioNotificacio>();
 
@@ -1711,12 +1766,18 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             {
 
                 if (notibClientRest == null) {
-
+                    
                     String url = getPropertyRequired(NOTIB_PROPERTY_BASE + "url");
                     String user = getPropertyRequired(NOTIB_PROPERTY_BASE + "user");
                     String pass = getPropertyRequired(NOTIB_PROPERTY_BASE + "pass");
 
-                    notibClientRest = new NotificacioRestClientV2(url, user, pass);
+                    ApiClient apiClient = new ApiClient();
+                    apiClient.setBasePath(url);
+                    HttpBasicAuth basicAuth = (HttpBasicAuth) apiClient.getAuthentication("basic");
+                    basicAuth.setUsername(user);
+                    basicAuth.setPassword(pass);
+                    
+                    notibClientRest = new ConsultaV2Api(apiClient);
                 }
 
                 String nif = userData.getAdministrationID();
@@ -1755,10 +1816,10 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     try {
                         
                    
-                        RespostaConsultaV2 respostaNotificacions = notibClientRest.notificacionsByTitular(nif, formDataInici,
-                                formDataFi, true, getIdiomaEnumDto(locale.getLanguage()), 0, mida);
+                        RespostaConsultaV2 respostaNotificacions = notibClientRest.notificacionsByTitular(nif, new DateTime(formDataInici),
+                                new DateTime(formDataFi), true, locale.getLanguage(), 0, mida);
                         
-                        notificacionsList = respostaNotificacions.getResultat();
+                        notificacionsList = respostaNotificacions.getEmisor();
                         for (TransmissioV2 notificacio : notificacionsList) {
                             ComunicacioNotificacio cn = new ComunicacioNotificacio();
                             cn.setTransmissio(notificacio);
@@ -1795,9 +1856,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 while (reintents > 0) {
                     try {
                         RespostaConsultaV2 respostaComunicacions = notibClientRest.comunicacionsByTitular(nif,
-                                formDataInici, formDataFi, true, getIdiomaEnumDto(locale.getLanguage()), 0, mida);
+                                new DateTime(formDataInici), new DateTime(formDataFi), true, locale.getLanguage(), 0, mida);
 
-                        comunicacionsList = respostaComunicacions.getResultat();
+                        comunicacionsList = respostaComunicacions.getEmisor();
                         for (TransmissioV2 comunicacio : comunicacionsList) {
                             ComunicacioNotificacio cn = new ComunicacioNotificacio();
                             cn.setTransmissio(comunicacio);
@@ -1953,8 +2014,13 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     String user = getPropertyRequired(NOTIB_PROPERTY_BASE + "user");
                     String pass = getPropertyRequired(NOTIB_PROPERTY_BASE + "pass");
 
-                    notibClientRest = new NotificacioRestClientV2(url, user, pass);
-                }
+                    ApiClient apiClient = new ApiClient();
+                    apiClient.setBasePath(url);
+                    HttpBasicAuth basicAuth = (HttpBasicAuth) apiClient.getAuthentication("BasicAuth");
+                    basicAuth.setUsername(user);
+                    basicAuth.setPassword(pass);
+                    
+                    notibClientRest = new ConsultaV2Api(apiClient);                }
 
                 String nif = userData.getAdministrationID();
                 Integer mida = 200;
@@ -1982,12 +2048,12 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     formDataInici = cal.getTime();
                 }
 
-                RespostaConsultaV2 respostaNotificacionsPendents = notibClientRest.notificacionsPendentsByTitular(nif, formDataInici, formDataFi, true, getIdiomaEnumDto(locale.getLanguage()),0,
+                RespostaConsultaV2 respostaNotificacionsPendents = notibClientRest.notificacionsPendentsByTitular(nif, new DateTime(formDataInici), new DateTime(formDataFi), true, locale.getLanguage(),0,
                         mida);
-                RespostaConsultaV2 respostaComunicacionsPendents = notibClientRest.comunicacionsPendentsByTitular(nif, formDataInici, formDataFi, true, getIdiomaEnumDto(locale.getLanguage()),0,
+                RespostaConsultaV2 respostaComunicacionsPendents = notibClientRest.comunicacionsPendentsByTitular(nif, new DateTime(formDataInici), new DateTime(formDataFi), true, locale.getLanguage(),0,
                         mida);
 
-                comunicacionsPendentsList = respostaComunicacionsPendents.getResultat();
+                comunicacionsPendentsList = respostaComunicacionsPendents.getEmisor();
                 for (TransmissioV2 comunicacio : comunicacionsPendentsList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(comunicacio);
@@ -1996,7 +2062,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     cns.add(cn);
                 }
 
-                notificacionsPendentsList = respostaNotificacionsPendents.getResultat();
+                notificacionsPendentsList = respostaNotificacionsPendents.getEmisor();
                 for (TransmissioV2 notificacio : notificacionsPendentsList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(notificacio);
@@ -2124,7 +2190,13 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     String user = getPropertyRequired(NOTIB_PROPERTY_BASE + "user");
                     String pass = getPropertyRequired(NOTIB_PROPERTY_BASE + "pass");
 
-                    notibClientRest = new NotificacioRestClientV2(url, user, pass);
+                    ApiClient apiClient = new ApiClient();
+                    apiClient.setBasePath(url);
+                    HttpBasicAuth basicAuth = (HttpBasicAuth) apiClient.getAuthentication("BasicAuth");
+                    basicAuth.setUsername(user);
+                    basicAuth.setPassword(pass);
+                    
+                    notibClientRest = new ConsultaV2Api(apiClient);
                 }
 
                 String nif = userData.getAdministrationID();
@@ -2153,12 +2225,12 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     formDataInici = cal.getTime();
                 }
 
-                RespostaConsultaV2 respostaNotificacionsLlegides = notibClientRest.notificacionsLlegidesByTitular(nif, formDataInici, formDataFi, true, getIdiomaEnumDto(locale.getLanguage()),0,
+                RespostaConsultaV2 respostaNotificacionsLlegides = notibClientRest.notificacionsLlegidesByTitular(nif, new DateTime(formDataInici), new DateTime(formDataFi), true, locale.getLanguage(),0,
                         mida);
-                RespostaConsultaV2 respostaComunicacionsLlegides = notibClientRest.comunicacionsLlegidesByTitular(nif, formDataInici, formDataFi, true, getIdiomaEnumDto(locale.getLanguage()),0,
+                RespostaConsultaV2 respostaComunicacionsLlegides = notibClientRest.comunicacionsLlegidesByTitular(nif, new DateTime(formDataInici), new DateTime(formDataFi), true, locale.getLanguage(),0,
                         mida);
 
-                comunicacionsLlegidesList = respostaComunicacionsLlegides.getResultat();
+                comunicacionsLlegidesList = respostaComunicacionsLlegides.getEmisor();
                 for (TransmissioV2 comunicacio : comunicacionsLlegidesList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(comunicacio);
@@ -2167,7 +2239,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     cns.add(cn);
                 }
 
-                notificacionsLlegidesList = respostaNotificacionsLlegides.getResultat();
+                notificacionsLlegidesList = respostaNotificacionsLlegides.getEmisor();
                 for (TransmissioV2 notificacio : notificacionsLlegidesList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(notificacio);
@@ -2311,19 +2383,19 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             camps.add(newKeyValue(T("id"), n.getId()));
             camps.add(newKeyValue(T("emisor"), n.getEmisor()));
-            camps.add(newKeyValue(T("organGestor"), n.getOrganGestor().getCodi()));
+            camps.add(newKeyValue(T("organGestor"), n.getOrganGestor()));
 
             camps.add(newKeyValue(T("procediment"), n.getProcediment().getCodi()));
             camps.add(newKeyValue(T("numExpedient"), n.getNumExpedient()));
             camps.add(newKeyValue(T("concepte"), n.getConcepte()));
             camps.add(newKeyValue(T("descripcio"), n.getDescripcio()));
-            camps.add(newKeyValue(T("dataEnviament"), n.getDataEnviament()));
+            camps.add(newKeyValue(T("dataEnviament"), n.getDataEnviament().toDate()));
 
             String estatStr;
             estatStr = n.getEstat().getCodi();
 
             camps.add(newKeyValue(T("estat"), estatStr));
-            camps.add(newKeyValue(T("dataEstat"), n.getDataEstat()));
+            camps.add(newKeyValue(T("dataEstat"), n.getDataEstat().toDate()));
 
             DocumentConsultaV2 document = n.getDocument();
             if (document != null) {
@@ -2351,11 +2423,13 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             // Error
             camps.add(newKeyValue(T("error"), String.valueOf(n.isError())));
-            camps.add(newKeyValue(T("errorData"), n.getErrorData()));
+            camps.add(newKeyValue(T("errorData"), n.getErrorData().toDate()));
             camps.add(newKeyValue(T("errorDescripcio"), n.getErrorDescripcio()));
-
-            camps.add(newKeyValue(T("justificant"), n.getJustificant()));
-            camps.add(newKeyValue(T("certificacio"), n.getCertificacio()));
+            
+            // XYZ Aquests camps no s'empren al front? No se perque estaven aqui. 
+            // No es troben al nou client de Notib 2
+            //camps.add(newKeyValue(T("justificant"), n.getJustificant()));
+            //camps.add(newKeyValue(T("certificacio"), n.getCertificacio()));
 
             map.put("clauvalors", camps);
 
@@ -2532,11 +2606,11 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     }
     
-    private IdiomaEnumDto getIdiomaEnumDto(String lang) {
+    private IdiomaEnum getIdiomaEnumDto(String lang) {
         if(lang.equals("es")) {
-            return IdiomaEnumDto.ES;
+            return IdiomaEnum.ES;
         }
-        return IdiomaEnumDto.CA;
+        return IdiomaEnum.CA;
         
     }
 
