@@ -5,22 +5,34 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import es.caib.notib.client.NotificacioRestClientV2;
-import es.caib.notib.client.domini.IdiomaEnumDto;
-import es.caib.notib.client.domini.consulta.RespostaConsultaV2;
-import es.caib.notib.client.domini.consulta.TransmissioV2;
+import org.fundaciobit.pluginsib.carpetafront.notib2client.api.ConsultaV2Api;
+import org.fundaciobit.pluginsib.carpetafront.notib2client.model.RespostaConsultaV2;
+import org.fundaciobit.pluginsib.carpetafront.notib2client.model.TransmissioV2;
+import org.fundaciobit.pluginsib.carpetafront.notib2client.services.ApiClient;
+import org.fundaciobit.pluginsib.carpetafront.notib2client.services.ApiException;
+import org.fundaciobit.pluginsib.carpetafront.notib2client.services.auth.HttpBasicAuth;
+import org.joda.time.DateTime;
 
 public class NotibTesterFromApi {
 
     public static void main(String[] args) {
 
         //String endPoint = "https://proves.caib.es/notib";
-        String endPoint = "https://dev.caib.es/notib";
+        //String endPoint = "https://dev.caib.es/notib";
         // String endPoint = "https://localhost:9999/notib";
-        String usuari = "$carpeta_notib";
-        String password = "carpeta_notib";
+        
+        String url="https://se.caib.es/notibapi/interna/";
+        String user="$carpeta_notib";
+        String pass="carpeta_notib";
+        
+        ApiClient apiClient = new ApiClient();
+        
+        apiClient.setBasePath(url);
+        HttpBasicAuth basicAuth = (HttpBasicAuth) apiClient.getAuthentication("basic");
+        basicAuth.setUsername(user);
+        basicAuth.setPassword(pass);
 
-        NotificacioRestClientV2 api = new NotificacioRestClientV2(endPoint, usuari, password);
+        ConsultaV2Api api = new ConsultaV2Api(apiClient);
 
         String nif = "XXXXXX";
         Integer pagina = 1;
@@ -34,7 +46,10 @@ public class NotibTesterFromApi {
         Date dataFi = new Date("13%2F06%2F2022");
 
         // Notificacions
-        RespostaConsultaV2 resposta = api.notificacionsByTitular(nif, dataInici, dataFi, true, IdiomaEnumDto.CA, pagina, mida);
+        RespostaConsultaV2 resposta;
+        try {
+            resposta = api.notificacionsByTitular(nif, new DateTime(dataInici), new DateTime(dataFi), true, "ca", pagina, mida);
+        
         // Comunicacions
         // Resposta resposta = api.consultaComunicacions(nif, formDataInici, formDataFi, pagina, mida);
 
@@ -46,6 +61,10 @@ public class NotibTesterFromApi {
 
         for (TransmissioV2 t : list) {
             System.out.println("Trans => " + t.getDescripcio());
+        }
+        } catch (ApiException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
 
     }

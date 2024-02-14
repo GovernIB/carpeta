@@ -533,7 +533,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 
                 
 
-                notificacionsList = respostaNotificacions.getEmisor();
+                notificacionsList = respostaNotificacions.getResultat();
                 for (TransmissioV2 notificacio : notificacionsList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(notificacio);
@@ -800,7 +800,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 // resposta.getNumeroElementsRetornats());
                 // System.out.println(" ------------ NUm Elements Totals: " +
                 // resposta.getNumeroElementsTotals());
-                notificacions = resposta.getEmisor();
+                notificacions = resposta.getResultat();
 
             }
 
@@ -979,7 +979,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                         .notificacionsPendentsByTitular(nif, new DateTime(formDataInici), new DateTime(formDataFi), true, locale.getLanguage(),0,
                                 mida);
 
-                notificacionsPendentsList = respostaNotificacionsPendents.getEmisor();
+                notificacionsPendentsList = respostaNotificacionsPendents.getResultat();
                 for (TransmissioV2 notificacio : notificacionsPendentsList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(notificacio);
@@ -1148,7 +1148,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 RespostaConsultaV2 respostaNotificacionsLlegides = notibClientRest.notificacionsLlegidesByTitular(nif,
                         new DateTime(formDataInici), new DateTime(formDataFi), true, locale.getLanguage(),0, mida);
 
-                notificacionsLlegidesList = respostaNotificacionsLlegides.getEmisor();
+                notificacionsLlegidesList = respostaNotificacionsLlegides.getResultat();
                 for (TransmissioV2 notificacio : notificacionsLlegidesList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(notificacio);
@@ -1317,7 +1317,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                         new DateTime(formDataFi),true, locale.getLanguage(), 0,
                         mida);
 
-                comunicacionsList = respostaComunicacions.getEmisor();
+                comunicacionsList = respostaComunicacions.getResultat();
                 for (TransmissioV2 comunicacio : comunicacionsList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(comunicacio);
@@ -1481,7 +1481,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 RespostaConsultaV2 respostaComunicacionsPendents = notibClientRest.comunicacionsPendentsByTitular(nif,
                         new DateTime(formDataInici), new DateTime(formDataFi),true, locale.getLanguage(),  0, mida);
 
-                comunicacionsPendentsList = respostaComunicacionsPendents.getEmisor();
+                comunicacionsPendentsList = respostaComunicacionsPendents.getResultat();
                 for (TransmissioV2 comunicacio : comunicacionsPendentsList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(comunicacio);
@@ -1645,7 +1645,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 RespostaConsultaV2 respostaComunicacionsLlegides = notibClientRest.comunicacionsLlegidesByTitular(nif,
                         new DateTime(formDataInici), new DateTime(formDataFi), true, locale.getLanguage(), 0, mida);
 
-                comunicacionsLlegidesList = respostaComunicacionsLlegides.getEmisor();
+                comunicacionsLlegidesList = respostaComunicacionsLlegides.getResultat();
                 for (TransmissioV2 comunicacio : comunicacionsLlegidesList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(comunicacio);
@@ -1819,7 +1819,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                         RespostaConsultaV2 respostaNotificacions = notibClientRest.notificacionsByTitular(nif, new DateTime(formDataInici),
                                 new DateTime(formDataFi), true, locale.getLanguage(), 0, mida);
                         
-                        notificacionsList = respostaNotificacions.getEmisor();
+                        notificacionsList = respostaNotificacions.getResultat();
                         for (TransmissioV2 notificacio : notificacionsList) {
                             ComunicacioNotificacio cn = new ComunicacioNotificacio();
                             cn.setTransmissio(notificacio);
@@ -1858,7 +1858,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                         RespostaConsultaV2 respostaComunicacions = notibClientRest.comunicacionsByTitular(nif,
                                 new DateTime(formDataInici), new DateTime(formDataFi), true, locale.getLanguage(), 0, mida);
 
-                        comunicacionsList = respostaComunicacions.getEmisor();
+                        comunicacionsList = respostaComunicacions.getResultat();
                         for (TransmissioV2 comunicacio : comunicacionsList) {
                             ComunicacioNotificacio cn = new ComunicacioNotificacio();
                             cn.setTransmissio(comunicacio);
@@ -2053,7 +2053,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 RespostaConsultaV2 respostaComunicacionsPendents = notibClientRest.comunicacionsPendentsByTitular(nif, new DateTime(formDataInici), new DateTime(formDataFi), true, locale.getLanguage(),0,
                         mida);
 
-                comunicacionsPendentsList = respostaComunicacionsPendents.getEmisor();
+                comunicacionsPendentsList = respostaComunicacionsPendents.getResultat();
                 for (TransmissioV2 comunicacio : comunicacionsPendentsList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(comunicacio);
@@ -2062,7 +2062,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     cns.add(cn);
                 }
 
-                notificacionsPendentsList = respostaNotificacionsPendents.getEmisor();
+                notificacionsPendentsList = respostaNotificacionsPendents.getResultat();
                 for (TransmissioV2 notificacio : notificacionsPendentsList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(notificacio);
@@ -2230,7 +2230,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 RespostaConsultaV2 respostaComunicacionsLlegides = notibClientRest.comunicacionsLlegidesByTitular(nif, new DateTime(formDataInici), new DateTime(formDataFi), true, locale.getLanguage(),0,
                         mida);
 
-                comunicacionsLlegidesList = respostaComunicacionsLlegides.getEmisor();
+                comunicacionsLlegidesList = respostaComunicacionsLlegides.getResultat();
                 for (TransmissioV2 comunicacio : comunicacionsLlegidesList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(comunicacio);
@@ -2239,7 +2239,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     cns.add(cn);
                 }
 
-                notificacionsLlegidesList = respostaNotificacionsLlegides.getEmisor();
+                notificacionsLlegidesList = respostaNotificacionsLlegides.getResultat();
                 for (TransmissioV2 notificacio : notificacionsLlegidesList) {
                     ComunicacioNotificacio cn = new ComunicacioNotificacio();
                     cn.setTransmissio(notificacio);
