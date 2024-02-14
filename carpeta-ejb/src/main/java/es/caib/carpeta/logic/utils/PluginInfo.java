@@ -11,7 +11,6 @@ public class PluginInfo {
     protected String nom;
     protected String descripcio;
     protected String context;
-    //protected boolean reactComponent;
     protected Long gravetat;
     protected String missatge;
     protected int order;
@@ -21,14 +20,13 @@ public class PluginInfo {
         super();
     }
 
-    public PluginInfo(String pluginID, String nom, String descripcio, String context, /*boolean reactComponent*/
+    public PluginInfo(String pluginID, String nom, String descripcio, String context,
             Long gravetat, String missatge, int order, int tipusPlugin) {
         super();
         this.nom = nom;
         this.descripcio = descripcio;
         this.context = context;
         this.pluginID = pluginID;
-        //this.reactComponent = reactComponent;
         this.gravetat = gravetat;
         this.missatge = missatge;
         this.order = order;
