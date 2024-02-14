@@ -13,14 +13,9 @@
 package es.caib.carpeta.apiexterna.client.api;
 
 
-import es.caib.carpeta.apiexterna.client.model.PaginaAcces;
+import es.caib.carpeta.apiexterna.client.model.LlistatPaginatAcces;
 import org.junit.Test;
 import org.junit.Ignore;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * API tests for EstadistiquesApi
@@ -41,10 +36,12 @@ public class EstadistiquesApiTest {
     @Test
     public void accessos1Test() throws Exception {
         String entitat = null;
-        String inici = null;
-        String fi = null;
-        String idioma = null;
-        PaginaAcces response = api.accessos1(entitat, inici, fi, idioma);
+        String startdate = null;
+        String enddate = null;
+        Integer page = null;
+        Integer pageSize = null;
+        String language = null;
+        LlistatPaginatAcces response = api.accessos(entitat, startdate, enddate, page, pageSize, language);
 
         // TODO: test validations
     }

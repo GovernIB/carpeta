@@ -1,4 +1,4 @@
-# PaginaAcces
+# LlistatPaginatAcces
 
 ## Properties
 Name | Type | Description | Notes

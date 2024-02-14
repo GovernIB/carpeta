@@ -20,9 +20,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
 import org.joda.time.DateTime;
 /**
- * Acces
+ * Elements retornats. Pot retornar un null o una llista bida si no hi ha elements.
  */
-
+@Schema(description = "Elements retornats. Pot retornar un null o una llista bida si no hi ha elements.")
 
 public class Acces {
   @JsonProperty("proveidor")
@@ -33,9 +33,6 @@ public class Acces {
 
   @JsonProperty("qaa")
   private Integer qaa = null;
-
-  @JsonProperty("data")
-  private DateTime data = null;
 
   @JsonProperty("idioma")
   private String idioma = null;
@@ -51,6 +48,9 @@ public class Acces {
 
   @JsonProperty("idSessio")
   private String idSessio = null;
+
+  @JsonProperty("data")
+  private DateTime data = null;
 
   public Acces proveidor(String proveidor) {
     this.proveidor = proveidor;
@@ -104,24 +104,6 @@ public class Acces {
 
   public void setQaa(Integer qaa) {
     this.qaa = qaa;
-  }
-
-  public Acces data(DateTime data) {
-    this.data = data;
-    return this;
-  }
-
-   /**
-   * Get data
-   * @return data
-  **/
-  @Schema(description = "")
-  public DateTime getData() {
-    return data;
-  }
-
-  public void setData(DateTime data) {
-    this.data = data;
   }
 
   public Acces idioma(String idioma) {
@@ -214,6 +196,24 @@ public class Acces {
     this.idSessio = idSessio;
   }
 
+  public Acces data(DateTime data) {
+    this.data = data;
+    return this;
+  }
+
+   /**
+   * Data en que es va fer l&#x27;accés
+   * @return data
+  **/
+  @Schema(description = "Data en que es va fer l'accés")
+  public DateTime getData() {
+    return data;
+  }
+
+  public void setData(DateTime data) {
+    this.data = data;
+  }
+
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -227,17 +227,17 @@ public class Acces {
     return Objects.equals(this.proveidor, acces.proveidor) &&
         Objects.equals(this.metodeAutenticacio, acces.metodeAutenticacio) &&
         Objects.equals(this.qaa, acces.qaa) &&
-        Objects.equals(this.data, acces.data) &&
         Objects.equals(this.idioma, acces.idioma) &&
         Objects.equals(this.entitat, acces.entitat) &&
         Objects.equals(this.tipus, acces.tipus) &&
         Objects.equals(this.plugin, acces.plugin) &&
-        Objects.equals(this.idSessio, acces.idSessio);
+        Objects.equals(this.idSessio, acces.idSessio) &&
+        Objects.equals(this.data, acces.data);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(proveidor, metodeAutenticacio, qaa, data, idioma, entitat, tipus, plugin, idSessio);
+    return Objects.hash(proveidor, metodeAutenticacio, qaa, idioma, entitat, tipus, plugin, idSessio, data);
   }
 
 
@@ -249,12 +249,12 @@ public class Acces {
     sb.append("    proveidor: ").append(toIndentedString(proveidor)).append("\n");
     sb.append("    metodeAutenticacio: ").append(toIndentedString(metodeAutenticacio)).append("\n");
     sb.append("    qaa: ").append(toIndentedString(qaa)).append("\n");
-    sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("    idioma: ").append(toIndentedString(idioma)).append("\n");
     sb.append("    entitat: ").append(toIndentedString(entitat)).append("\n");
     sb.append("    tipus: ").append(toIndentedString(tipus)).append("\n");
     sb.append("    plugin: ").append(toIndentedString(plugin)).append("\n");
     sb.append("    idSessio: ").append(toIndentedString(idSessio)).append("\n");
+    sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("}");
     return sb.toString();
   }

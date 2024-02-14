@@ -38,128 +38,106 @@
     "variables" : { }
   } ],
   "tags" : [ {
-    "name" : "Accessos",
-    "description" : "Estadistiques d'Accessos"
-  }, {
     "name" : "Estadistiques",
-    "description" : "Estadistiques d'Accessos"
+    "description" : "Estadístiques d'Accessos"
   }, {
     "name" : "Securetat",
     "description" : "Exemple de Securetat"
   } ],
   "paths" : {
-    "/services/accessos" : {
-      "get" : {
-        "tags" : [ "Accessos" ],
-        "summary" : "Retorna la llista d`accessos a CARPETA",
-        "operationId" : "accessos",
-        "parameters" : [ {
-          "name" : "inici",
-          "in" : "query",
-          "description" : "Data d'inici, en format YYYY-MM-DD, a partir de la qual volem obtenir estadistiques",
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "2021-04-24"
-        }, {
-          "name" : "fi",
-          "in" : "query",
-          "description" : "Data fi, en format YYYY-MM-DD, fins la qual volem tenir estadistiques",
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "2021-08-12"
-        }, {
-          "name" : "entitat",
-          "in" : "query",
-          "description" : "Codi de l'entitat de la qual obtenim les estadistiques",
-          "required" : true,
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "caib"
-        }, {
-          "name" : "idioma",
-          "in" : "query",
-          "description" : "Codi de l'idioma",
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "ca"
-        } ],
-        "responses" : {
-          "404" : {
-            "description" : "Paràmetres incorrectes",
-            "content" : {
-              "application/json" : { }
-            }
-          },
-          "200" : {
-            "description" : "Llista d'accessos a CARPETA",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/PaginaAcces"
-                }
-              }
-            }
-          }
-        },
-        "deprecated" : true
-      }
-    },
     "/public/estadistiques/accessos" : {
       "get" : {
         "tags" : [ "Estadistiques" ],
         "summary" : "Retorna la llista d`accessos a CARPETA",
-        "operationId" : "accessos_1",
+        "operationId" : "accessos",
         "parameters" : [ {
-          "name" : "inici",
-          "in" : "query",
-          "description" : "Data d'inici, en format YYYY-MM-DD, a partir de la qual volem obtenir estadistiques",
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "2021-04-24"
-        }, {
-          "name" : "fi",
-          "in" : "query",
-          "description" : "Data fi, en format YYYY-MM-DD, fins la qual volem tenir estadistiques",
-          "schema" : {
-            "type" : "string"
-          },
-          "example" : "2021-08-12"
-        }, {
           "name" : "entitat",
           "in" : "query",
-          "description" : "Codi de l'entitat de la qual obtenim les estadistiques",
-          "required" : true,
+          "description" : "Codi de l'entitat de la qual obtenim les estadístiques",
           "schema" : {
             "type" : "string"
           },
           "example" : "caib"
         }, {
-          "name" : "idioma",
+          "name" : "startdate",
           "in" : "query",
-          "description" : "Codi de l'idioma",
+          "description" : "Filtre Data d'inici de la consulta. Opcional. Format yyyy-MM-dd (ISO 8601)",
           "schema" : {
+            "pattern" : "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29))$",
             "type" : "string"
           },
-          "example" : "ca"
+          "example" : "2023-07-19"
+        }, {
+          "name" : "enddate",
+          "in" : "query",
+          "description" : "Filtre Data final de la consulta. Opcional. Format yyyy-MM-dd (ISO 8601)",
+          "schema" : {
+            "pattern" : "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29))$",
+            "type" : "string"
+          },
+          "example" : "2024-12-31"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Numero de pàgina quan el llistat és paginat. Opcional. Per defecte 1.",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "page-size",
+          "in" : "query",
+          "description" : "Número d'elements a retornar per pàgina. Opcional. Per defecte 25",
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        }, {
+          "name" : "language",
+          "in" : "query",
+          "description" : "Idioma en que s'han de retornar les dades(Només suportat 'ca' o 'es')",
+          "schema" : {
+            "type" : "string",
+            "default" : "ca"
+          },
+          "examples" : {
+            "Català" : {
+              "description" : "Català",
+              "value" : "ca"
+            },
+            "Castellano" : {
+              "description" : "Castellano",
+              "value" : "es"
+            }
+          }
         } ],
         "responses" : {
-          "404" : {
-            "description" : "Paràmetres incorrectes",
-            "content" : {
-              "application/json" : { }
-            }
-          },
           "200" : {
             "description" : "Llista d'accessos a CARPETA",
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PaginaAcces"
+                  "$ref" : "#/components/schemas/LlistatPaginatAcces"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Paràmetres incorrectes",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "Error no controlat",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/RestExceptionInfo"
                 }
               }
             }
@@ -213,10 +191,6 @@
             "type" : "integer",
             "format" : "int32"
           },
-          "data" : {
-            "type" : "string",
-            "format" : "date-time"
-          },
           "idioma" : {
             "type" : "string"
           },
@@ -231,19 +205,94 @@
           },
           "idSessio" : {
             "type" : "string"
+          },
+          "data" : {
+            "pattern" : "yyyy-MM-dd'T'HH:mm:ss",
+            "type" : "string",
+            "description" : "Data en que es va fer l'accés",
+            "format" : "date-time"
           }
-        }
+        },
+        "description" : "Elements retornats. Pot retornar un null o una llista bida si no hi ha elements."
       },
-      "PaginaAcces" : {
+      "LlistatPaginatAcces" : {
+        "required" : [ "date-download", "items-returned", "name", "page", "page-size", "total-count", "total-pages" ],
         "type" : "object",
         "properties" : {
-          "items" : {
+          "name" : {
+            "type" : "string",
+            "description" : "Nom descriptiu del que s'està retornant"
+          },
+          "page" : {
+            "type" : "integer",
+            "description" : "Número pàgina. Comença per 1.",
+            "format" : "int32"
+          },
+          "page-size" : {
+            "type" : "integer",
+            "description" : "Mida de pàgina",
+            "format" : "int32"
+          },
+          "total-pages" : {
+            "type" : "integer",
+            "description" : "Número total de pàgines",
+            "format" : "int32"
+          },
+          "total-count" : {
+            "type" : "integer",
+            "description" : "Número total d'elements",
+            "format" : "int32"
+          },
+          "items-returned" : {
+            "type" : "integer",
+            "description" : "Numero d'elements retornats",
+            "format" : "int32"
+          },
+          "next" : {
+            "type" : "string",
+            "description" : "Si hi ha més elements, llavors retorna la URL a la següent pàgina de dades."
+          },
+          "date-download" : {
+            "pattern" : "^(?:[1-9]\\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)T(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:Z|[+-][01]\\d:[0-5]\\d)$",
+            "type" : "string",
+            "description" : "Data i hora en que s'han retornat les dades. Format ISO-8601"
+          },
+          "data" : {
             "type" : "array",
+            "description" : "Elements retornats. Pot retornar un null o una llista bida si no hi ha elements.",
             "items" : {
               "$ref" : "#/components/schemas/Acces"
             }
           }
         }
+      },
+      "RestExceptionInfo" : {
+        "required" : [ "code", "errorMessage" ],
+        "type" : "object",
+        "properties" : {
+          "code" : {
+            "type" : "integer",
+            "description" : "Codi de HTTP de l'error. Veure https://en.wikipedia.org/wiki/List_of_HTTP_status_codes.",
+            "format" : "int32"
+          },
+          "errorMessage" : {
+            "type" : "string",
+            "description" : "Missatge de l'error"
+          },
+          "stackTrace" : {
+            "type" : "string",
+            "description" : "Stacktrace de l'excepció si n'hi hagués."
+          },
+          "causeException" : {
+            "type" : "string",
+            "description" : "Tipus de l'excepció origen (cause) si n'hi hagués."
+          },
+          "causeStackTrace" : {
+            "type" : "string",
+            "description" : "Stacktrace de l'excepció origen (cause) si n'hi hagués."
+          }
+        },
+        "description" : "Estructura de dades utilitzada per passar informació d'un error"
       }
     },
     "securitySchemes" : {
