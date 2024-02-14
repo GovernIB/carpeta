@@ -196,8 +196,8 @@ public class ConsultaV2ApiTest {
         RespostaConsultaV2 response = api.notificacionsByTitular(dniTitular, dataInicial, dataFinal, visibleCarpeta, lang, pagina, mida);
         if(response != null) {
             System.out.println("Response = "+ response);
-            System.out.println("Response = "+ response.getEmisor());
-            System.out.println("Response = "+ response.getEmisor().size());
+            System.out.println("Response = "+ response.getResultat());
+            System.out.println("Response = "+ response.getResultat().size());
         }else {
             
             System.out.println("Response = null!!!!!!");

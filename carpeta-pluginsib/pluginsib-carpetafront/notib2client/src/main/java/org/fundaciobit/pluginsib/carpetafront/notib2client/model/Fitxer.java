@@ -25,8 +25,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 
 public class Fitxer {
-  @JsonProperty("titular")
-  private String titular = null;
+  @JsonProperty("nom")
+  private String nom = null;
 
   @JsonProperty("contentType")
   private String contentType = null;
@@ -37,22 +37,22 @@ public class Fitxer {
   @JsonProperty("tamany")
   private Long tamany = null;
 
-  public Fitxer titular(String titular) {
-    this.titular = titular;
+  public Fitxer nom(String nom) {
+    this.nom = nom;
     return this;
   }
 
    /**
-   * Titular
-   * @return titular
+   * Nom del fitxer
+   * @return nom
   **/
-  @Schema(example = "document", description = "Titular")
-  public String getTitular() {
-    return titular;
+  @Schema(example = "document", description = "Nom del fitxer")
+  public String getNom() {
+    return nom;
   }
 
-  public void setTitular(String titular) {
-    this.titular = titular;
+  public void setNom(String nom) {
+    this.nom = nom;
   }
 
   public Fitxer contentType(String contentType) {
@@ -119,7 +119,7 @@ public class Fitxer {
       return false;
     }
     Fitxer fitxer = (Fitxer) o;
-    return Objects.equals(this.titular, fitxer.titular) &&
+    return Objects.equals(this.nom, fitxer.nom) &&
         Objects.equals(this.contentType, fitxer.contentType) &&
         Objects.equals(this.contingut, fitxer.contingut) &&
         Objects.equals(this.tamany, fitxer.tamany);
@@ -127,7 +127,7 @@ public class Fitxer {
 
   @Override
   public int hashCode() {
-    return Objects.hash(titular, contentType, contingut, tamany);
+    return Objects.hash(nom, contentType, contingut, tamany);
   }
 
 
@@ -136,7 +136,7 @@ public class Fitxer {
     StringBuilder sb = new StringBuilder();
     sb.append("class Fitxer {\n");
     
-    sb.append("    titular: ").append(toIndentedString(titular)).append("\n");
+    sb.append("    nom: ").append(toIndentedString(nom)).append("\n");
     sb.append("    contentType: ").append(toIndentedString(contentType)).append("\n");
     sb.append("    contingut: ").append(toIndentedString(contingut)).append("\n");
     sb.append("    tamany: ").append(toIndentedString(tamany)).append("\n");

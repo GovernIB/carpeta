@@ -144,13 +144,14 @@ class MenuRapid extends Component {
                 </li>
               );
               break;
-
+    
+            //XYZ No hauria de passar mai. No queden plugins HTML, tots estan migrats a react.
             case 1: // Plugin html
               allItems.push(
                 <li key={"html" + i} className="nav-item pr-4 lletraRapid">
                   <Link
                     className="navCarpeta"
-                    to={{ pathname: Constants.PLUGINHTML_PATH + s.context, nomPagina: "plugin" }}
+                    to={{ pathname: Constants.PLUGINREACT_PATH + s.context, nomPagina: "plugin" }}
                     tabIndex={301 + k}
                     aria-labelledby={"menuRapidBoto" + i}
                     onFocus={function () {
@@ -176,7 +177,6 @@ class MenuRapid extends Component {
             case 3: // Seccio
               // plugins
               s.plugins.forEach((p, j) => {
-                if (p.reactComponent === true) {
                   {
                     /*<a className="dropdown-item" key={"seccioReact" + j} href="#">
                      <li key={"seccioReact" + j}> */
@@ -204,31 +204,6 @@ class MenuRapid extends Component {
                     </Link>
                    
                   );
-                } else {
-                  plugins.push(
-
-                    <Link className="navCarpeta dropdown-item linkVerd" key={"seccio"+j}
-                      to={{
-                        pathname: Constants.SECCIO_PATH + s.context + Constants.PLUGINHTML_PATH + p.context,
-                        nomPagina: "plugin",
-                      }}
-                      tabIndex={301 + k + j + 1}
-                      aria-labelledby={"menuRapidBoto" + i}
-                      onClick={function () {
-                        $("#submenu" + iActiu).removeClass("show");
-                      }}
-                    >
-                      <img
-                        src={urlBase + "/pluginfront/pluginicon/" + p.pluginID + "/" + i18n.language + ""}
-                        alt={p.nom}
-                        title={t("iconaDe") + " " + p.nom}
-                        className="imc-icona"
-                      />
-                      <span className="menuRapidView">{p.nom}</span>
-                    </Link>
-
-                  );
-                }
                 k = k + 1;
                 l = j + 1;
               });

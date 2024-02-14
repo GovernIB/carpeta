@@ -21,6 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.List;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.TransmissioV2;
+import org.joda.time.DateTime;
 /**
  * RespostaConsultaV2
  */
@@ -28,33 +29,138 @@ import org.fundaciobit.pluginsib.carpetafront.notib2client.model.TransmissioV2;
 
 
 public class RespostaConsultaV2 {
-  @JsonProperty("emisor")
-  private List<TransmissioV2> emisor = null;
+  @JsonProperty("numeroElementsTotals")
+  private Integer numeroElementsTotals = null;
 
-  public RespostaConsultaV2 emisor(List<TransmissioV2> emisor) {
-    this.emisor = emisor;
+  @JsonProperty("numeroElementsRetornats")
+  private Integer numeroElementsRetornats = null;
+
+  @JsonProperty("resultat")
+  private List<TransmissioV2> resultat = null;
+
+  @JsonProperty("error")
+  private Boolean error = null;
+
+  @JsonProperty("errorDescripcio")
+  private String errorDescripcio = null;
+
+  @JsonProperty("errorData")
+  private DateTime errorData = null;
+
+  public RespostaConsultaV2 numeroElementsTotals(Integer numeroElementsTotals) {
+    this.numeroElementsTotals = numeroElementsTotals;
     return this;
   }
 
-  public RespostaConsultaV2 addEmisorItem(TransmissioV2 emisorItem) {
-    if (this.emisor == null) {
-      this.emisor = new ArrayList<TransmissioV2>();
+   /**
+   * Número total de notificacions, segons el filtre aplicat
+   * @return numeroElementsTotals
+  **/
+  @Schema(example = "127", description = "Número total de notificacions, segons el filtre aplicat")
+  public Integer getNumeroElementsTotals() {
+    return numeroElementsTotals;
+  }
+
+  public void setNumeroElementsTotals(Integer numeroElementsTotals) {
+    this.numeroElementsTotals = numeroElementsTotals;
+  }
+
+  public RespostaConsultaV2 numeroElementsRetornats(Integer numeroElementsRetornats) {
+    this.numeroElementsRetornats = numeroElementsRetornats;
+    return this;
+  }
+
+   /**
+   * Número de notificacions retornades, depenent de la paginació
+   * @return numeroElementsRetornats
+  **/
+  @Schema(example = "10", description = "Número de notificacions retornades, depenent de la paginació")
+  public Integer getNumeroElementsRetornats() {
+    return numeroElementsRetornats;
+  }
+
+  public void setNumeroElementsRetornats(Integer numeroElementsRetornats) {
+    this.numeroElementsRetornats = numeroElementsRetornats;
+  }
+
+  public RespostaConsultaV2 resultat(List<TransmissioV2> resultat) {
+    this.resultat = resultat;
+    return this;
+  }
+
+  public RespostaConsultaV2 addResultatItem(TransmissioV2 resultatItem) {
+    if (this.resultat == null) {
+      this.resultat = new ArrayList<TransmissioV2>();
     }
-    this.emisor.add(emisorItem);
+    this.resultat.add(resultatItem);
     return this;
   }
 
    /**
    * Llistat de les notificacions retornades
-   * @return emisor
+   * @return resultat
   **/
   @Schema(description = "Llistat de les notificacions retornades")
-  public List<TransmissioV2> getEmisor() {
-    return emisor;
+  public List<TransmissioV2> getResultat() {
+    return resultat;
   }
 
-  public void setEmisor(List<TransmissioV2> emisor) {
-    this.emisor = emisor;
+  public void setResultat(List<TransmissioV2> resultat) {
+    this.resultat = resultat;
+  }
+
+  public RespostaConsultaV2 error(Boolean error) {
+    this.error = error;
+    return this;
+  }
+
+   /**
+   * Error en la consulta
+   * @return error
+  **/
+  @Schema(example = "false", description = "Error en la consulta")
+  public Boolean isError() {
+    return error;
+  }
+
+  public void setError(Boolean error) {
+    this.error = error;
+  }
+
+  public RespostaConsultaV2 errorDescripcio(String errorDescripcio) {
+    this.errorDescripcio = errorDescripcio;
+    return this;
+  }
+
+   /**
+   * Descripció de l&#x27;error
+   * @return errorDescripcio
+  **/
+  @Schema(example = "java.lang.NullPointerException", description = "Descripció de l'error")
+  public String getErrorDescripcio() {
+    return errorDescripcio;
+  }
+
+  public void setErrorDescripcio(String errorDescripcio) {
+    this.errorDescripcio = errorDescripcio;
+  }
+
+  public RespostaConsultaV2 errorData(DateTime errorData) {
+    this.errorData = errorData;
+    return this;
+  }
+
+   /**
+   * Data de l&#x27;error
+   * @return errorData
+  **/
+  @Schema(description = "Data de l'error")
+  public DateTime getErrorData() {
+    return errorData;
+  }
+
+  public void setErrorData(DateTime errorData) {
+    this.errorData = errorData;
   }
 
 
@@ -67,12 +173,17 @@ public class RespostaConsultaV2 {
       return false;
     }
     RespostaConsultaV2 respostaConsultaV2 = (RespostaConsultaV2) o;
-    return Objects.equals(this.emisor, respostaConsultaV2.emisor);
+    return Objects.equals(this.numeroElementsTotals, respostaConsultaV2.numeroElementsTotals) &&
+        Objects.equals(this.numeroElementsRetornats, respostaConsultaV2.numeroElementsRetornats) &&
+        Objects.equals(this.resultat, respostaConsultaV2.resultat) &&
+        Objects.equals(this.error, respostaConsultaV2.error) &&
+        Objects.equals(this.errorDescripcio, respostaConsultaV2.errorDescripcio) &&
+        Objects.equals(this.errorData, respostaConsultaV2.errorData);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(emisor);
+    return Objects.hash(numeroElementsTotals, numeroElementsRetornats, resultat, error, errorDescripcio, errorData);
   }
 
 
@@ -81,7 +192,12 @@ public class RespostaConsultaV2 {
     StringBuilder sb = new StringBuilder();
     sb.append("class RespostaConsultaV2 {\n");
     
-    sb.append("    emisor: ").append(toIndentedString(emisor)).append("\n");
+    sb.append("    numeroElementsTotals: ").append(toIndentedString(numeroElementsTotals)).append("\n");
+    sb.append("    numeroElementsRetornats: ").append(toIndentedString(numeroElementsRetornats)).append("\n");
+    sb.append("    resultat: ").append(toIndentedString(resultat)).append("\n");
+    sb.append("    error: ").append(toIndentedString(error)).append("\n");
+    sb.append("    errorDescripcio: ").append(toIndentedString(errorDescripcio)).append("\n");
+    sb.append("    errorData: ").append(toIndentedString(errorData)).append("\n");
     sb.append("}");
     return sb.toString();
   }

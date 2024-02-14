@@ -1510,9 +1510,9 @@
       "Fitxer": {
         "type": "object",
         "properties": {
-          "titular": {
+          "nom": {
             "type": "string",
-            "description": "Titular",
+            "description": "Nom del fitxer",
             "example": "document"
           },
           "contentType": {
@@ -2044,10 +2044,37 @@
       "RespostaConsultaV2": {
         "type": "object",
         "properties": {
-          "emisor": {
+          "numeroElementsTotals": {
+            "type": "integer",
+            "description": "Número total de notificacions, segons el filtre aplicat",
+            "format": "int32",
+            "example": 127
+          },
+          "numeroElementsRetornats": {
+            "type": "integer",
+            "description": "Número de notificacions retornades, depenent de la paginació",
+            "format": "int32",
+            "example": 10
+          },
+          "resultat": {
             "type": "array",
             "description": "Llistat de les notificacions retornades",
             "items": { "$ref": "#/components/schemas/TransmissioV2" }
+          },
+          "error": {
+            "type": "boolean",
+            "description": "Error en la consulta",
+            "example": false
+          },
+          "errorDescripcio": {
+            "type": "string",
+            "description": "Descripció de l'error",
+            "example": "java.lang.NullPointerException"
+          },
+          "errorData": {
+            "type": "string",
+            "description": "Data de l'error",
+            "format": "date-time"
           }
         }
       },
