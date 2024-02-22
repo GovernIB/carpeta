@@ -223,14 +223,18 @@
             "in": "query",
             "description": "Data inicial d'enviament a consultar",
             "required": false,
-            "schema": { "type": "string", "format": "date-time" }
+            "content": {
+              "*/*": { "schema": { "type": "string", "format": "date" } }
+            }
           },
           {
             "name": "dataFinal",
             "in": "query",
-            "description": "Data final d'enviament a consultar",
+            "description": "Datfa final d'enviament a consultar",
             "required": false,
-            "schema": { "type": "string", "format": "date-time" }
+            "content": {
+              "*/*": { "schema": { "type": "string", "format": "date" } }
+            }
           },
           {
             "name": "visibleCarpeta",
@@ -295,14 +299,18 @@
             "in": "query",
             "description": "Data inicial d'enviament a consultar",
             "required": false,
-            "schema": { "type": "string", "format": "date-time" }
+            "content": {
+              "*/*": { "schema": { "type": "string", "format": "date" } }
+            }
           },
           {
             "name": "dataFinal",
             "in": "query",
-            "description": "Data final d'enviament a consultar",
+            "description": "Datfa final d'enviament a consultar",
             "required": false,
-            "schema": { "type": "string", "format": "date-time" }
+            "content": {
+              "*/*": { "schema": { "type": "string", "format": "date" } }
+            }
           },
           {
             "name": "visibleCarpeta",
@@ -367,14 +375,18 @@
             "in": "query",
             "description": "Data inicial d'enviament a consultar",
             "required": false,
-            "schema": { "type": "string", "format": "date-time" }
+            "content": {
+              "*/*": { "schema": { "type": "string", "format": "date" } }
+            }
           },
           {
             "name": "dataFinal",
             "in": "query",
-            "description": "Data final d'enviament a consultar",
+            "description": "Datfa final d'enviament a consultar",
             "required": false,
-            "schema": { "type": "string", "format": "date-time" }
+            "content": {
+              "*/*": { "schema": { "type": "string", "format": "date" } }
+            }
           },
           {
             "name": "visibleCarpeta",
@@ -495,14 +507,18 @@
             "in": "query",
             "description": "Data inicial d'enviament a consultar",
             "required": false,
-            "schema": { "type": "string", "format": "date-time" }
+            "content": {
+              "*/*": { "schema": { "type": "string", "format": "date" } }
+            }
           },
           {
             "name": "dataFinal",
             "in": "query",
             "description": "Datfa final d'enviament a consultar",
             "required": false,
-            "schema": { "type": "string", "format": "date-time" }
+            "content": {
+              "*/*": { "schema": { "type": "string", "format": "date" } }
+            }
           },
           {
             "name": "visibleCarpeta",
@@ -567,14 +583,18 @@
             "in": "query",
             "description": "Data inicial d'enviament a consultar",
             "required": false,
-            "schema": { "type": "string", "format": "date-time" }
+            "content": {
+              "*/*": { "schema": { "type": "string", "format": "date" } }
+            }
           },
           {
             "name": "dataFinal",
             "in": "query",
-            "description": "Data final d'enviament a consultar",
+            "description": "Datfa final d'enviament a consultar",
             "required": false,
-            "schema": { "type": "string", "format": "date-time" }
+            "content": {
+              "*/*": { "schema": { "type": "string", "format": "date" } }
+            }
           },
           {
             "name": "visibleCarpeta",
@@ -639,14 +659,18 @@
             "in": "query",
             "description": "Data inicial d'enviament a consultar",
             "required": false,
-            "schema": { "type": "string", "format": "date-time" }
+            "content": {
+              "*/*": { "schema": { "type": "string", "format": "date" } }
+            }
           },
           {
             "name": "dataFinal",
             "in": "query",
-            "description": "Data final d'enviament a consultar",
+            "description": "Datfa final d'enviament a consultar",
             "required": false,
-            "schema": { "type": "string", "format": "date-time" }
+            "content": {
+              "*/*": { "schema": { "type": "string", "format": "date" } }
+            }
           },
           {
             "name": "visibleCarpeta",
@@ -2091,11 +2115,7 @@
             "description": "Codi dir3 de l'entitat emisora",
             "example": "A04003003"
           },
-          "organGestor": {
-            "type": "string",
-            "description": "Codi dir3 de l'òrgan gestor",
-            "example": "A04035965"
-          },
+          "organGestor": { "$ref": "#/components/schemas/GenericInfo" },
           "procediment": { "$ref": "#/components/schemas/GenericInfo" },
           "numExpedient": {
             "type": "string",
@@ -2145,7 +2165,12 @@
             "description": "Descripció de l'error",
             "example": "java.lang.NullPointerException"
           },
-          "codi": {
+          "justificant": {
+            "type": "string",
+            "description": "Url per a descarregar el justificant de registre",
+            "example": "http://localhost:8080/notibapi/interna/v2/justificant/00000000-0000-0000-0000-000000000000"
+          },
+          "certificacio": {
             "type": "string",
             "description": "Url per a descarregar la Certificació generada al realitzar la compareixença de la notificació",
             "example": "http://localhost:8080/notibapi/interna/v2/certificacio/00000000-0000-0000-0000-000000000000"

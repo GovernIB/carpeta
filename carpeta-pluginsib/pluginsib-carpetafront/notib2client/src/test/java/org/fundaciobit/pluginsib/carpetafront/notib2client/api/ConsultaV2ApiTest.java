@@ -13,18 +13,38 @@
 package org.fundaciobit.pluginsib.carpetafront.notib2client.api;
 
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.Arxiu;
-import org.joda.time.DateTime;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.RespostaConsultaV2;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.services.ApiClient;
+import org.fundaciobit.pluginsib.carpetafront.notib2client.services.BooleanDeserializer;
+import org.fundaciobit.pluginsib.carpetafront.notib2client.services.DateTimeJodaDeserializer;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.services.auth.HttpBasicAuth;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.junit.Test;
+
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.ser.std.ByteArraySerializer;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
+import com.fasterxml.jackson.datatype.joda.deser.DateTimeDeserializer;
+
 import org.junit.Ignore;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Properties;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -32,35 +52,61 @@ import java.util.Map;
  */
 @Ignore
 public class ConsultaV2ApiTest {
+    
+    
+    
 
     private static final ConsultaV2Api api;
     
     static {
         
-        String url="https://se.caib.es/notibapi/interna/";
-        String user="$carpeta_notib";
-        String pass="carpeta_notib";
+        Properties props = new Properties();
+        try {
+            props.load(new FileInputStream(new File("test.properties")));
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        String url = props.getProperty("url");
+        String user = props.getProperty("user");
+        String pass = props.getProperty("pass");
         
         
         ApiClient apiClient = new ApiClient();
-        
-        
         
         apiClient.setBasePath(url);
         HttpBasicAuth basicAuth = (HttpBasicAuth) apiClient.getAuthentication("basic");
         basicAuth.setUsername(user);
         basicAuth.setPassword(pass);
-
+        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+        //apiClient.setDateFormat(sdf);
+        
+        //ObjectMapper objectMapper =apiClient.getJSON().getContext(null);
+        /*SimpleModule modul = new SimpleModule();
+        modul.addDeserializer(DateTime.class, new DateTimeJodaDeserializer());
+        modul.addDeserializer(Boolean.class, new BooleanDeserializer());
+        objectMapper.registerModule(modul);*/
+        //objectMapper.registerModule(new JodaModule());
+        
         api = new ConsultaV2Api(apiClient);
-        
-        
-        
+                
     }
+    
+    
+    
     
     
     public static void main(String[] args) {
         try {
             new ConsultaV2ApiTest().notificacionsByTitularTest();
+            /*String date="2024-01-25T07:34:53.962+0000";
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+            Date dateTime = sdf.parse(date);
+            System.out.println("Date = "+dateTime);*/
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -79,8 +125,8 @@ public class ConsultaV2ApiTest {
     @Test
     public void comunicacionsByTitularTest() throws Exception {
         String dniTitular = null;
-        DateTime dataInicial = null;
-        DateTime dataFinal = null;
+        LocalDate dataInicial = null;
+        LocalDate dataFinal = null;
         Boolean visibleCarpeta = null;
         String lang = null;
         Integer pagina = null;
@@ -100,8 +146,8 @@ public class ConsultaV2ApiTest {
     @Test
     public void comunicacionsLlegidesByTitularTest() throws Exception {
         String dniTitular = null;
-        DateTime dataInicial = null;
-        DateTime dataFinal = null;
+        LocalDate dataInicial = null;
+        LocalDate dataFinal = null;
         Boolean visibleCarpeta = null;
         String lang = null;
         Integer pagina = null;
@@ -121,8 +167,8 @@ public class ConsultaV2ApiTest {
     @Test
     public void comunicacionsPendentsByTitularTest() throws Exception {
         String dniTitular = null;
-        DateTime dataInicial = null;
-        DateTime dataFinal = null;
+        LocalDate dataInicial = null;
+        LocalDate dataFinal = null;
         Boolean visibleCarpeta = null;
         String lang = null;
         Integer pagina = null;
@@ -187,19 +233,21 @@ public class ConsultaV2ApiTest {
     @Test
     public void notificacionsByTitularTest() throws Exception {
         String dniTitular = "99999999R";
-        DateTime dataInicial = null;
-        DateTime dataFinal = null;
-        Boolean visibleCarpeta = null;
-        String lang = null;
-        Integer pagina = null;
-        Integer mida = null;
+        LocalDate dataInicial = null;
+        LocalDate dataFinal = null;
+        Boolean visibleCarpeta = true;
+        String lang = "ca";
+        Integer pagina = 0;
+        Integer mida = 3;
         RespostaConsultaV2 response = api.notificacionsByTitular(dniTitular, dataInicial, dataFinal, visibleCarpeta, lang, pagina, mida);
         if(response != null) {
             System.out.println("Response = "+ response);
-            System.out.println("Response = "+ response.getResultat());
-            System.out.println("Response = "+ response.getResultat().size());
-        }else {
+            //DateTime datEnv = response.getResultat().get(0).getDataEnviament();
+            //DateTime dataEstat = response.getResultat().get(0).getDataEstat();
             
+            //System.out.println("\n\n ");
+            
+        }else {
             System.out.println("Response = null!!!!!!");
         }
         
@@ -219,8 +267,8 @@ public class ConsultaV2ApiTest {
     @Test
     public void notificacionsLlegidesByTitularTest() throws Exception {
         String dniTitular = null;
-        DateTime dataInicial = null;
-        DateTime dataFinal = null;
+        LocalDate dataInicial = null;
+        LocalDate dataFinal = null;
         Boolean visibleCarpeta = null;
         String lang = null;
         Integer pagina = null;
@@ -240,8 +288,8 @@ public class ConsultaV2ApiTest {
     @Test
     public void notificacionsPendentsByTitularTest() throws Exception {
         String dniTitular = null;
-        DateTime dataInicial = null;
-        DateTime dataFinal = null;
+        LocalDate dataInicial = null;
+        LocalDate dataFinal = null;
         Boolean visibleCarpeta = null;
         String lang = null;
         Integer pagina = null;

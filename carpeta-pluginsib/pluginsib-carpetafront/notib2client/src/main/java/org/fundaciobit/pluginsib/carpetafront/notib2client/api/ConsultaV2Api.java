@@ -8,7 +8,7 @@ import org.fundaciobit.pluginsib.carpetafront.notib2client.services.Pair;
   import javax.ws.rs.core.GenericType;
 
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.Arxiu;
-import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.RespostaConsultaV2;
 
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class ConsultaV2Api {
    * @return RespostaConsultaV2
    * @throws ApiException if fails to make API call
    */
-  public RespostaConsultaV2 comunicacionsByTitular(String dniTitular, DateTime dataInicial, DateTime dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
+  public RespostaConsultaV2 comunicacionsByTitular(String dniTitular, LocalDate dataInicial, LocalDate dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
     Object localVarPostBody = null;
     // verify the required parameter 'dniTitular' is set
     if (dniTitular == null) {
@@ -92,7 +92,7 @@ public class ConsultaV2Api {
    * Retorna informació sobre les comunicacions ja llegides d&#x27;un titular, i el seu estat
    * @param dniTitular DNI del titular de les comunicacions a consultar (required)
    * @param dataInicial Data inicial d&#x27;enviament a consultar (optional)
-   * @param dataFinal Data final d&#x27;enviament a consultar (optional)
+   * @param dataFinal Datfa final d&#x27;enviament a consultar (optional)
    * @param visibleCarpeta Filtrar per visible a carpeta. Si s&#x27;indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s&#x27;indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta. (optional)
    * @param lang Idioma de les descripcions (optional)
    * @param pagina Número de pàgina a mostrar en la paginació (optional)
@@ -100,7 +100,7 @@ public class ConsultaV2Api {
    * @return RespostaConsultaV2
    * @throws ApiException if fails to make API call
    */
-  public RespostaConsultaV2 comunicacionsLlegidesByTitular(String dniTitular, DateTime dataInicial, DateTime dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
+  public RespostaConsultaV2 comunicacionsLlegidesByTitular(String dniTitular, LocalDate dataInicial, LocalDate dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
     Object localVarPostBody = null;
     // verify the required parameter 'dniTitular' is set
     if (dniTitular == null) {
@@ -143,7 +143,7 @@ public class ConsultaV2Api {
    * Retorna informació sobre les comunicacions pendents d&#x27;un titular, i el seu estat
    * @param dniTitular DNI del titular de les comunicacions a consultar (required)
    * @param dataInicial Data inicial d&#x27;enviament a consultar (optional)
-   * @param dataFinal Data final d&#x27;enviament a consultar (optional)
+   * @param dataFinal Datfa final d&#x27;enviament a consultar (optional)
    * @param visibleCarpeta Filtrar per visible a carpeta. Si s&#x27;indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s&#x27;indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta. (optional)
    * @param lang Idioma de les descripcions (optional)
    * @param pagina Número de pàgina a mostrar en la paginació (optional)
@@ -151,7 +151,7 @@ public class ConsultaV2Api {
    * @return RespostaConsultaV2
    * @throws ApiException if fails to make API call
    */
-  public RespostaConsultaV2 comunicacionsPendentsByTitular(String dniTitular, DateTime dataInicial, DateTime dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
+  public RespostaConsultaV2 comunicacionsPendentsByTitular(String dniTitular, LocalDate dataInicial, LocalDate dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
     Object localVarPostBody = null;
     // verify the required parameter 'dniTitular' is set
     if (dniTitular == null) {
@@ -311,7 +311,7 @@ public class ConsultaV2Api {
    * Retorna informació de totes les notificacions d&#x27;un titular, i el seu estat
    * @param dniTitular DNI del titular de les comunicacions a consultar (required)
    * @param dataInicial Data inicial d&#x27;enviament a consultar (optional)
-   * @param dataFinal Data final d&#x27;enviament a consultar (optional)
+   * @param dataFinal Datfa final d&#x27;enviament a consultar (optional)
    * @param visibleCarpeta Filtrar per visible a carpeta. Si s&#x27;indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s&#x27;indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta. (optional)
    * @param lang Idioma de les descripcions (optional)
    * @param pagina Número de pàgina a mostrar en la paginació (optional)
@@ -319,7 +319,7 @@ public class ConsultaV2Api {
    * @return RespostaConsultaV2
    * @throws ApiException if fails to make API call
    */
-  public RespostaConsultaV2 notificacionsByTitular(String dniTitular, DateTime dataInicial, DateTime dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
+  public RespostaConsultaV2 notificacionsByTitular(String dniTitular, LocalDate dataInicial, LocalDate dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
     Object localVarPostBody = null;
     // verify the required parameter 'dniTitular' is set
     if (dniTitular == null) {
@@ -362,7 +362,7 @@ public class ConsultaV2Api {
    * Retorna informació sobre les notificacions ja llegides d&#x27;un titular, i el seu estat
    * @param dniTitular DNI del titular de les comunicacions a consultar (required)
    * @param dataInicial Data inicial d&#x27;enviament a consultar (optional)
-   * @param dataFinal Data final d&#x27;enviament a consultar (optional)
+   * @param dataFinal Datfa final d&#x27;enviament a consultar (optional)
    * @param visibleCarpeta Filtrar per visible a carpeta. Si s&#x27;indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s&#x27;indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta. (optional)
    * @param lang Idioma de les descripcions (optional)
    * @param pagina Número de pàgina a mostrar en la paginació (optional)
@@ -370,7 +370,7 @@ public class ConsultaV2Api {
    * @return RespostaConsultaV2
    * @throws ApiException if fails to make API call
    */
-  public RespostaConsultaV2 notificacionsLlegidesByTitular(String dniTitular, DateTime dataInicial, DateTime dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
+  public RespostaConsultaV2 notificacionsLlegidesByTitular(String dniTitular, LocalDate dataInicial, LocalDate dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
     Object localVarPostBody = null;
     // verify the required parameter 'dniTitular' is set
     if (dniTitular == null) {
@@ -413,7 +413,7 @@ public class ConsultaV2Api {
    * Retorna informació sobre les notificacions pendents d&#x27;un titular, i el seu estat
    * @param dniTitular DNI del titular de les comunicacions a consultar (required)
    * @param dataInicial Data inicial d&#x27;enviament a consultar (optional)
-   * @param dataFinal Data final d&#x27;enviament a consultar (optional)
+   * @param dataFinal Datfa final d&#x27;enviament a consultar (optional)
    * @param visibleCarpeta Filtrar per visible a carpeta. Si s&#x27;indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s&#x27;indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta. (optional)
    * @param lang Idioma de les descripcions (optional)
    * @param pagina Número de pàgina a mostrar en la paginació (optional)
@@ -421,7 +421,7 @@ public class ConsultaV2Api {
    * @return RespostaConsultaV2
    * @throws ApiException if fails to make API call
    */
-  public RespostaConsultaV2 notificacionsPendentsByTitular(String dniTitular, DateTime dataInicial, DateTime dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
+  public RespostaConsultaV2 notificacionsPendentsByTitular(String dniTitular, LocalDate dataInicial, LocalDate dataFinal, Boolean visibleCarpeta, String lang, Integer pagina, Integer mida) throws ApiException {
     Object localVarPostBody = null;
     // verify the required parameter 'dniTitular' is set
     if (dniTitular == null) {

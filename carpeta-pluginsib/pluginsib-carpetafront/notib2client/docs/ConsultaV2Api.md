@@ -39,8 +39,8 @@ basic.setPassword("YOUR PASSWORD");
 
 ConsultaV2Api apiInstance = new ConsultaV2Api();
 String dniTitular = "dniTitular_example"; // String | DNI del titular de les comunicacions a consultar
-DateTime dataInicial = new DateTime(); // DateTime | Data inicial d'enviament a consultar
-DateTime dataFinal = new DateTime(); // DateTime | Datfa final d'enviament a consultar
+LocalDate dataInicial = new LocalDate(); // LocalDate | Data inicial d'enviament a consultar
+LocalDate dataFinal = new LocalDate(); // LocalDate | Datfa final d'enviament a consultar
 Boolean visibleCarpeta = true; // Boolean | Filtrar per visible a carpeta. Si s'indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s'indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta.
 String lang = "lang_example"; // String | Idioma de les descripcions
 Integer pagina = 56; // Integer | Número de pàgina a mostrar en la paginació
@@ -59,8 +59,8 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dniTitular** | **String**| DNI del titular de les comunicacions a consultar |
- **dataInicial** | **DateTime**| Data inicial d&#x27;enviament a consultar | [optional]
- **dataFinal** | **DateTime**| Datfa final d&#x27;enviament a consultar | [optional]
+ **dataInicial** | **LocalDate**| Data inicial d&#x27;enviament a consultar | [optional]
+ **dataFinal** | **LocalDate**| Datfa final d&#x27;enviament a consultar | [optional]
  **visibleCarpeta** | **Boolean**| Filtrar per visible a carpeta. Si s&#x27;indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s&#x27;indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta. | [optional]
  **lang** | **String**| Idioma de les descripcions | [optional] [enum: CA, ES]
  **pagina** | **Integer**| Número de pàgina a mostrar en la paginació | [optional]
@@ -104,8 +104,8 @@ basic.setPassword("YOUR PASSWORD");
 
 ConsultaV2Api apiInstance = new ConsultaV2Api();
 String dniTitular = "dniTitular_example"; // String | DNI del titular de les comunicacions a consultar
-DateTime dataInicial = new DateTime(); // DateTime | Data inicial d'enviament a consultar
-DateTime dataFinal = new DateTime(); // DateTime | Data final d'enviament a consultar
+LocalDate dataInicial = new LocalDate(); // LocalDate | Data inicial d'enviament a consultar
+LocalDate dataFinal = new LocalDate(); // LocalDate | Datfa final d'enviament a consultar
 Boolean visibleCarpeta = true; // Boolean | Filtrar per visible a carpeta. Si s'indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s'indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta.
 String lang = "lang_example"; // String | Idioma de les descripcions
 Integer pagina = 56; // Integer | Número de pàgina a mostrar en la paginació
@@ -124,8 +124,8 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dniTitular** | **String**| DNI del titular de les comunicacions a consultar |
- **dataInicial** | **DateTime**| Data inicial d&#x27;enviament a consultar | [optional]
- **dataFinal** | **DateTime**| Data final d&#x27;enviament a consultar | [optional]
+ **dataInicial** | **LocalDate**| Data inicial d&#x27;enviament a consultar | [optional]
+ **dataFinal** | **LocalDate**| Datfa final d&#x27;enviament a consultar | [optional]
  **visibleCarpeta** | **Boolean**| Filtrar per visible a carpeta. Si s&#x27;indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s&#x27;indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta. | [optional]
  **lang** | **String**| Idioma de les descripcions | [optional] [enum: CA, ES]
  **pagina** | **Integer**| Número de pàgina a mostrar en la paginació | [optional]
@@ -169,8 +169,8 @@ basic.setPassword("YOUR PASSWORD");
 
 ConsultaV2Api apiInstance = new ConsultaV2Api();
 String dniTitular = "dniTitular_example"; // String | DNI del titular de les comunicacions a consultar
-DateTime dataInicial = new DateTime(); // DateTime | Data inicial d'enviament a consultar
-DateTime dataFinal = new DateTime(); // DateTime | Data final d'enviament a consultar
+LocalDate dataInicial = new LocalDate(); // LocalDate | Data inicial d'enviament a consultar
+LocalDate dataFinal = new LocalDate(); // LocalDate | Datfa final d'enviament a consultar
 Boolean visibleCarpeta = true; // Boolean | Filtrar per visible a carpeta. Si s'indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s'indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta.
 String lang = "lang_example"; // String | Idioma de les descripcions
 Integer pagina = 56; // Integer | Número de pàgina a mostrar en la paginació
@@ -189,8 +189,8 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dniTitular** | **String**| DNI del titular de les comunicacions a consultar |
- **dataInicial** | **DateTime**| Data inicial d&#x27;enviament a consultar | [optional]
- **dataFinal** | **DateTime**| Data final d&#x27;enviament a consultar | [optional]
+ **dataInicial** | **LocalDate**| Data inicial d&#x27;enviament a consultar | [optional]
+ **dataFinal** | **LocalDate**| Datfa final d&#x27;enviament a consultar | [optional]
  **visibleCarpeta** | **Boolean**| Filtrar per visible a carpeta. Si s&#x27;indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s&#x27;indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta. | [optional]
  **lang** | **String**| Idioma de les descripcions | [optional] [enum: CA, ES]
  **pagina** | **Integer**| Número de pàgina a mostrar en la paginació | [optional]
@@ -393,8 +393,8 @@ basic.setPassword("YOUR PASSWORD");
 
 ConsultaV2Api apiInstance = new ConsultaV2Api();
 String dniTitular = "dniTitular_example"; // String | DNI del titular de les comunicacions a consultar
-DateTime dataInicial = new DateTime(); // DateTime | Data inicial d'enviament a consultar
-DateTime dataFinal = new DateTime(); // DateTime | Data final d'enviament a consultar
+LocalDate dataInicial = new LocalDate(); // LocalDate | Data inicial d'enviament a consultar
+LocalDate dataFinal = new LocalDate(); // LocalDate | Datfa final d'enviament a consultar
 Boolean visibleCarpeta = true; // Boolean | Filtrar per visible a carpeta. Si s'indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s'indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta.
 String lang = "lang_example"; // String | Idioma de les descripcions
 Integer pagina = 56; // Integer | Número de pàgina a mostrar en la paginació
@@ -413,8 +413,8 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dniTitular** | **String**| DNI del titular de les comunicacions a consultar |
- **dataInicial** | **DateTime**| Data inicial d&#x27;enviament a consultar | [optional]
- **dataFinal** | **DateTime**| Data final d&#x27;enviament a consultar | [optional]
+ **dataInicial** | **LocalDate**| Data inicial d&#x27;enviament a consultar | [optional]
+ **dataFinal** | **LocalDate**| Datfa final d&#x27;enviament a consultar | [optional]
  **visibleCarpeta** | **Boolean**| Filtrar per visible a carpeta. Si s&#x27;indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s&#x27;indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta. | [optional]
  **lang** | **String**| Idioma de les descripcions | [optional] [enum: CA, ES]
  **pagina** | **Integer**| Número de pàgina a mostrar en la paginació | [optional]
@@ -458,8 +458,8 @@ basic.setPassword("YOUR PASSWORD");
 
 ConsultaV2Api apiInstance = new ConsultaV2Api();
 String dniTitular = "dniTitular_example"; // String | DNI del titular de les comunicacions a consultar
-DateTime dataInicial = new DateTime(); // DateTime | Data inicial d'enviament a consultar
-DateTime dataFinal = new DateTime(); // DateTime | Data final d'enviament a consultar
+LocalDate dataInicial = new LocalDate(); // LocalDate | Data inicial d'enviament a consultar
+LocalDate dataFinal = new LocalDate(); // LocalDate | Datfa final d'enviament a consultar
 Boolean visibleCarpeta = true; // Boolean | Filtrar per visible a carpeta. Si s'indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s'indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta.
 String lang = "lang_example"; // String | Idioma de les descripcions
 Integer pagina = 56; // Integer | Número de pàgina a mostrar en la paginació
@@ -478,8 +478,8 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dniTitular** | **String**| DNI del titular de les comunicacions a consultar |
- **dataInicial** | **DateTime**| Data inicial d&#x27;enviament a consultar | [optional]
- **dataFinal** | **DateTime**| Data final d&#x27;enviament a consultar | [optional]
+ **dataInicial** | **LocalDate**| Data inicial d&#x27;enviament a consultar | [optional]
+ **dataFinal** | **LocalDate**| Datfa final d&#x27;enviament a consultar | [optional]
  **visibleCarpeta** | **Boolean**| Filtrar per visible a carpeta. Si s&#x27;indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s&#x27;indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta. | [optional]
  **lang** | **String**| Idioma de les descripcions | [optional] [enum: CA, ES]
  **pagina** | **Integer**| Número de pàgina a mostrar en la paginació | [optional]
@@ -523,8 +523,8 @@ basic.setPassword("YOUR PASSWORD");
 
 ConsultaV2Api apiInstance = new ConsultaV2Api();
 String dniTitular = "dniTitular_example"; // String | DNI del titular de les comunicacions a consultar
-DateTime dataInicial = new DateTime(); // DateTime | Data inicial d'enviament a consultar
-DateTime dataFinal = new DateTime(); // DateTime | Data final d'enviament a consultar
+LocalDate dataInicial = new LocalDate(); // LocalDate | Data inicial d'enviament a consultar
+LocalDate dataFinal = new LocalDate(); // LocalDate | Datfa final d'enviament a consultar
 Boolean visibleCarpeta = true; // Boolean | Filtrar per visible a carpeta. Si s'indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s'indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta.
 String lang = "lang_example"; // String | Idioma de les descripcions
 Integer pagina = 56; // Integer | Número de pàgina a mostrar en la paginació
@@ -543,8 +543,8 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **dniTitular** | **String**| DNI del titular de les comunicacions a consultar |
- **dataInicial** | **DateTime**| Data inicial d&#x27;enviament a consultar | [optional]
- **dataFinal** | **DateTime**| Data final d&#x27;enviament a consultar | [optional]
+ **dataInicial** | **LocalDate**| Data inicial d&#x27;enviament a consultar | [optional]
+ **dataFinal** | **LocalDate**| Datfa final d&#x27;enviament a consultar | [optional]
  **visibleCarpeta** | **Boolean**| Filtrar per visible a carpeta. Si s&#x27;indica el valor si, només es retornaran enviaments amb estats visibles per la carpeta. Si s&#x27;indica el valor no, es retornaran tots els enviaments independentment de si els seus estats son visible o no a la carpeta. | [optional]
  **lang** | **String**| Idioma de les descripcions | [optional] [enum: CA, ES]
  **pagina** | **Integer**| Número de pàgina a mostrar en la paginació | [optional]

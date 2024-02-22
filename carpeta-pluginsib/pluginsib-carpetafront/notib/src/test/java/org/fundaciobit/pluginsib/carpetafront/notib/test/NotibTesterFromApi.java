@@ -1,9 +1,16 @@
 package org.fundaciobit.pluginsib.carpetafront.notib.test;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 import org.fundaciobit.pluginsib.carpetafront.notib2client.api.ConsultaV2Api;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.RespostaConsultaV2;
@@ -11,27 +18,33 @@ import org.fundaciobit.pluginsib.carpetafront.notib2client.model.TransmissioV2;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.services.ApiClient;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.services.ApiException;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.services.auth.HttpBasicAuth;
-import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 public class NotibTesterFromApi {
+    
+    public static final String IPLUGINSIB_BASE_PROPERTIES = "pluginsib.";
+    public static final String CARPETAFRONT_PROPERTY_BASE = IPLUGINSIB_BASE_PROPERTIES + "carpetafront.";
+    public static final String NOTIB_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "notib.";
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
 
-        //String endPoint = "https://proves.caib.es/notib";
-        //String endPoint = "https://dev.caib.es/notib";
-        // String endPoint = "https://localhost:9999/notib";
         
-        String url="https://se.caib.es/notibapi/interna/";
-        String user="$carpeta_notib";
-        String pass="carpeta_notib";
+        Properties props = new Properties();
+        props.load(new FileInputStream(new File("test.properties")));
         
+        String url = props.getProperty("url");
+        String user = props.getProperty("user");
+        String pass = props.getProperty("pass");
+        
+        
+
         ApiClient apiClient = new ApiClient();
         
         apiClient.setBasePath(url);
         HttpBasicAuth basicAuth = (HttpBasicAuth) apiClient.getAuthentication("basic");
         basicAuth.setUsername(user);
         basicAuth.setPassword(pass);
-
+      
         ConsultaV2Api api = new ConsultaV2Api(apiClient);
 
         String nif = "XXXXXX";
@@ -48,7 +61,7 @@ public class NotibTesterFromApi {
         // Notificacions
         RespostaConsultaV2 resposta;
         try {
-            resposta = api.notificacionsByTitular(nif, new DateTime(dataInici), new DateTime(dataFi), true, "ca", pagina, mida);
+            resposta = api.notificacionsByTitular(nif, new LocalDate(dataInici), new LocalDate(dataFi), true, "ca", pagina, mida);
         
         // Comunicacions
         // Resposta resposta = api.consultaComunicacions(nif, formDataInici, formDataFi, pagina, mida);

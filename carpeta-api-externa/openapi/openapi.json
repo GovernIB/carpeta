@@ -45,6 +45,27 @@
     "description" : "Exemple de Securetat"
   } ],
   "paths" : {
+    "/public/estadistiques/consulta/v2/notificacions/{nif}" : {
+      "get" : {
+        "operationId" : "consultaNotificacions",
+        "parameters" : [ {
+          "name" : "nif",
+          "in" : "path",
+          "required" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "default response",
+            "content" : {
+              "application/json" : { }
+            }
+          }
+        }
+      }
+    },
     "/public/estadistiques/accessos" : {
       "get" : {
         "tags" : [ "Estadistiques" ],

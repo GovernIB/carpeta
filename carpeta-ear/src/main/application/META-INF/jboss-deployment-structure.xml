@@ -18,6 +18,5 @@
             <module name="org.keycloak.keycloak-wildfly-elytron-oidc-adapter" optional="TRUE"/>
             <module name="org.keycloak.keycloak-wildfly-subsystem" optional="TRUE"/>
         </dependencies>
-
     </deployment>
 </jboss-deployment-structure>

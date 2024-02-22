@@ -38,7 +38,7 @@ public class TransmissioV2 {
   private String emisor = null;
 
   @JsonProperty("organGestor")
-  private String organGestor = null;
+  private GenericInfo organGestor = null;
 
   @JsonProperty("procediment")
   private GenericInfo procediment = null;
@@ -79,8 +79,11 @@ public class TransmissioV2 {
   @JsonProperty("errorDescripcio")
   private String errorDescripcio = null;
 
-  @JsonProperty("codi")
-  private String codi = null;
+  @JsonProperty("justificant")
+  private String justificant = null;
+
+  @JsonProperty("certificacio")
+  private String certificacio = null;
 
   public TransmissioV2 id(Long id) {
     this.id = id;
@@ -118,21 +121,21 @@ public class TransmissioV2 {
     this.emisor = emisor;
   }
 
-  public TransmissioV2 organGestor(String organGestor) {
+  public TransmissioV2 organGestor(GenericInfo organGestor) {
     this.organGestor = organGestor;
     return this;
   }
 
    /**
-   * Codi dir3 de l&#x27;òrgan gestor
+   * Get organGestor
    * @return organGestor
   **/
-  @Schema(example = "A04035965", description = "Codi dir3 de l'òrgan gestor")
-  public String getOrganGestor() {
+  @Schema(description = "")
+  public GenericInfo getOrganGestor() {
     return organGestor;
   }
 
-  public void setOrganGestor(String organGestor) {
+  public void setOrganGestor(GenericInfo organGestor) {
     this.organGestor = organGestor;
   }
 
@@ -378,22 +381,40 @@ public class TransmissioV2 {
     this.errorDescripcio = errorDescripcio;
   }
 
-  public TransmissioV2 codi(String codi) {
-    this.codi = codi;
+  public TransmissioV2 justificant(String justificant) {
+    this.justificant = justificant;
+    return this;
+  }
+
+   /**
+   * Url per a descarregar el justificant de registre
+   * @return justificant
+  **/
+  @Schema(example = "http://localhost:8080/notibapi/interna/v2/justificant/00000000-0000-0000-0000-000000000000", description = "Url per a descarregar el justificant de registre")
+  public String getJustificant() {
+    return justificant;
+  }
+
+  public void setJustificant(String justificant) {
+    this.justificant = justificant;
+  }
+
+  public TransmissioV2 certificacio(String certificacio) {
+    this.certificacio = certificacio;
     return this;
   }
 
    /**
    * Url per a descarregar la Certificació generada al realitzar la compareixença de la notificació
-   * @return codi
+   * @return certificacio
   **/
   @Schema(example = "http://localhost:8080/notibapi/interna/v2/certificacio/00000000-0000-0000-0000-000000000000", description = "Url per a descarregar la Certificació generada al realitzar la compareixença de la notificació")
-  public String getCodi() {
-    return codi;
+  public String getCertificacio() {
+    return certificacio;
   }
 
-  public void setCodi(String codi) {
-    this.codi = codi;
+  public void setCertificacio(String certificacio) {
+    this.certificacio = certificacio;
   }
 
 
@@ -422,12 +443,13 @@ public class TransmissioV2 {
         Objects.equals(this.error, transmissioV2.error) &&
         Objects.equals(this.errorData, transmissioV2.errorData) &&
         Objects.equals(this.errorDescripcio, transmissioV2.errorDescripcio) &&
-        Objects.equals(this.codi, transmissioV2.codi);
+        Objects.equals(this.justificant, transmissioV2.justificant) &&
+        Objects.equals(this.certificacio, transmissioV2.certificacio);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, emisor, organGestor, procediment, numExpedient, concepte, descripcio, dataEnviament, estat, dataEstat, document, titular, destinataris, error, errorData, errorDescripcio, codi);
+    return Objects.hash(id, emisor, organGestor, procediment, numExpedient, concepte, descripcio, dataEnviament, estat, dataEstat, document, titular, destinataris, error, errorData, errorDescripcio, justificant, certificacio);
   }
 
 
@@ -452,7 +474,8 @@ public class TransmissioV2 {
     sb.append("    error: ").append(toIndentedString(error)).append("\n");
     sb.append("    errorData: ").append(toIndentedString(errorData)).append("\n");
     sb.append("    errorDescripcio: ").append(toIndentedString(errorDescripcio)).append("\n");
-    sb.append("    codi: ").append(toIndentedString(codi)).append("\n");
+    sb.append("    justificant: ").append(toIndentedString(justificant)).append("\n");
+    sb.append("    certificacio: ").append(toIndentedString(certificacio)).append("\n");
     sb.append("}");
     return sb.toString();
   }
