@@ -1,7 +1,5 @@
 package org.fundaciobit.pluginsib.carpetafront.notib;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.google.gson.Gson;
 
 import es.caib.carpeta.pluginsib.carpetafront.api.*;
@@ -9,27 +7,22 @@ import es.caib.zonaper.ws.v2.model.elementoexpediente.ElementoExpediente;
 import es.caib.zonaper.ws.v2.model.elementoexpediente.TipoElementoExpediente;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Logger;
+
 import org.fundaciobit.pluginsib.carpetafront.notib2client.api.ConsultaV2Api;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.DocumentConsultaV2;
-import org.fundaciobit.pluginsib.carpetafront.notib2client.model.NotificacioV2.IdiomaEnum;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.PersonaConsultaV2;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.RespostaConsultaV2;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.model.TransmissioV2;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.services.ApiClient;
 import org.fundaciobit.pluginsib.carpetafront.notib2client.services.auth.HttpBasicAuth;
 import org.fundaciobit.pluginsib.utils.templateengine.TemplateEngine;
-import org.jboss.resteasy.plugins.providers.jackson.ResteasyJackson2Provider;
-import org.jboss.resteasy.spi.ResteasyProviderFactory;
-
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -48,7 +41,6 @@ import java.util.stream.Collectors;
 public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     public static final String NOTIB_PROPERTY_BASE = CARPETAFRONT_PROPERTY_BASE + "notib.";
-
 
     /**
      *
@@ -514,8 +506,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 }
 
                 RespostaConsultaV2 respostaNotificacions = notibClientRest.notificacionsByTitular(nif,
-                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true,
-                        locale.getLanguage(), 0, mida);
+                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
+                        mida);
 
                 notificacionsList = respostaNotificacions.getResultat();
                 for (TransmissioV2 notificacio : notificacionsList) {
@@ -543,7 +535,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 notificacionsTotals = comNumero;
             }
 
-            @SuppressWarnings("unchecked")
+            
             Map<Long, TransmissioV2> notificacionsMap = (Map<Long, TransmissioV2>) request.getSession()
                     .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
 
@@ -598,54 +590,11 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
     }
 
-    public static class MyResteasyJackson2Provider extends ResteasyJackson2Provider {
-
-        protected Logger log = Logger.getLogger(MyResteasyJackson2Provider.class);
-
-        public MyResteasyJackson2Provider() {
-            super();
-
-            ObjectMapper objectMapper = this._mapperConfig.getConfiguredMapper();
-
-            //this.readFrom(null, _defaultReadView, null, null, null, null)
-
-            if (objectMapper == null) {
-                objectMapper = new ObjectMapper();
-                this._mapperConfig.setMapper(objectMapper);
-            }
-
-            //ObjectMapper objectMapper = new ObjectMapper();
-
-            SimpleModule modul = new SimpleModule();
-            //modul.addDeserializer(DateTime.class, new DateTimeJodaDeserializer());
-            //modul.addDeserializer(Boolean.class, new BooleanDeserializer());
-            objectMapper.registerModule(modul);
-
-        }
-
-        @Override
-        public Object readFrom(Class<Object> type, final Type genericType, Annotation[] annotations,
-                javax.ws.rs.core.MediaType mediaType, javax.ws.rs.core.MultivaluedMap<String, String> httpHeaders,
-                InputStream entityStream) throws IOException {
-            log.error("\n - " + type + "\n");
-            return super.readFrom(type, genericType, annotations, null, httpHeaders, entityStream);
-        }
-
-    }
-
     private ConsultaV2Api notibClientRest2 = null;
 
     private ConsultaV2Api getApi() throws Exception {
 
         if (notibClientRest2 == null) {
-            /*
-            {
-                MyResteasyJackson2Provider rj2p = new MyResteasyJackson2Provider();
-               
-
-                ResteasyProviderFactory.getInstance().register(rj2p);
-            }
-            */
 
             String url = getPropertyRequired(NOTIB_PROPERTY_BASE + "url");
             String user = getPropertyRequired(NOTIB_PROPERTY_BASE + "user");
@@ -656,28 +605,6 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             HttpBasicAuth basicAuth = (HttpBasicAuth) apiClient.getAuthentication("basic");
             basicAuth.setUsername(user);
             basicAuth.setPassword(pass);
-
-            //ResteasyProviderFactory.getInstance().registerProvider(ObjectMapperContextResolver.class);
-
-            /*
-            ObjectMapper objectMapper = apiClient.getJSON().getContext(null);
-            apiClient.setDebugging(true);
-            /*ContextResolver<ObjectMapper> resolver = 
-                    providers.getContextResolver(ObjectMapper.class, MediaType.WILDCARD_TYPE);
-            ObjectMapper objectMapper = resolver.getContext(ObjectMapper.class);*/
-
-            log.info("\n\n\n Inicialitzant ObjectMapper ZZZZZZZZZZZZZZZZZZ \n\n\n ");
-            //ObjectMapper objectMapper = new ObjectMapper();
-            /*
-            SimpleModule modul = new SimpleModule();
-            modul.addDeserializer(DateTime.class, new DateTimeJodaDeserializer());
-            modul.addDeserializer(Boolean.class, new BooleanDeserializer());
-            objectMapper.registerModule(modul);
-            */
-
-            //rj2p.setMapper(objectMapper);
-
-            //ResteasyProviderFactory.getInstance().registerProvider(ResteasyJackson2Provider.class);
 
             notibClientRest2 = new ConsultaV2Api(apiClient);
 
@@ -837,8 +764,9 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     formDataInici = cal.getTime();
                 }
 
-                RespostaConsultaV2 resposta = notibClientRest.notificacionsByTitular(nif, convertToApiDate(formDataInici),
-                        convertToApiDate(formDataFi), true, locale.getLanguage(), pagina, mida);
+                RespostaConsultaV2 resposta = notibClientRest.notificacionsByTitular(nif,
+                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(),
+                        pagina, mida);
 
                 // System.out.println(" ------------ OK " + resposta + "---------------");
                 // System.out.println(" ------------ NUm Elements Retornats: " +
@@ -873,7 +801,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             // notificacions.get(0).getDescripcio()
             // notificacions.get(0).getDataEnviament()
             // notificacions.get(0).getDocument().getUrl()
-            @SuppressWarnings("unchecked")
+            
             Map<Long, TransmissioV2> comunicacionsMap = (Map<Long, TransmissioV2>) request.getSession()
                     .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
 
@@ -1002,7 +930,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 }
 
                 RespostaConsultaV2 respostaNotificacionsPendents = notibClientRest.notificacionsPendentsByTitular(nif,
-                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0, mida);
+                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
+                        mida);
 
                 notificacionsPendentsList = respostaNotificacionsPendents.getResultat();
                 for (TransmissioV2 notificacio : notificacionsPendentsList) {
@@ -1030,7 +959,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 notificacionsPendentsTotals = comNumero;
             }
 
-            @SuppressWarnings("unchecked")
+            
             Map<Long, TransmissioV2> notificacionsPendentsMap = (Map<Long, TransmissioV2>) request.getSession()
                     .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
 
@@ -1148,7 +1077,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 }
 
                 RespostaConsultaV2 respostaNotificacionsLlegides = notibClientRest.notificacionsLlegidesByTitular(nif,
-                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0, mida);
+                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
+                        mida);
 
                 notificacionsLlegidesList = respostaNotificacionsLlegides.getResultat();
                 for (TransmissioV2 notificacio : notificacionsLlegidesList) {
@@ -1176,7 +1106,6 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 notificacionsLlegidesTotals = comNumero;
             }
 
-            @SuppressWarnings("unchecked")
             Map<Long, TransmissioV2> notificacionsLlegidesMap = (Map<Long, TransmissioV2>) request.getSession()
                     .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
 
@@ -1294,7 +1223,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 }
 
                 RespostaConsultaV2 respostaComunicacions = notibClientRest.comunicacionsByTitular(nif,
-                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0, mida);
+                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
+                        mida);
 
                 comunicacionsList = respostaComunicacions.getResultat();
                 for (TransmissioV2 comunicacio : comunicacionsList) {
@@ -1322,7 +1252,6 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 comunicacionsTotals = comNumero;
             }
 
-            @SuppressWarnings("unchecked")
             Map<Long, TransmissioV2> comunicacionsMap = (Map<Long, TransmissioV2>) request.getSession()
                     .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
 
@@ -1442,7 +1371,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 }
 
                 RespostaConsultaV2 respostaComunicacionsPendents = notibClientRest.comunicacionsPendentsByTitular(nif,
-                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0, mida);
+                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
+                        mida);
 
                 comunicacionsPendentsList = respostaComunicacionsPendents.getResultat();
                 for (TransmissioV2 comunicacio : comunicacionsPendentsList) {
@@ -1470,7 +1400,6 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 comunicacionsPendentsTotals = comNumero;
             }
 
-            @SuppressWarnings("unchecked")
             Map<Long, TransmissioV2> comunicacionsPendentsMap = (Map<Long, TransmissioV2>) request.getSession()
                     .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
 
@@ -1590,7 +1519,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 }
 
                 RespostaConsultaV2 respostaComunicacionsLlegides = notibClientRest.comunicacionsLlegidesByTitular(nif,
-                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0, mida);
+                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
+                        mida);
 
                 comunicacionsLlegidesList = respostaComunicacionsLlegides.getResultat();
                 for (TransmissioV2 comunicacio : comunicacionsLlegidesList) {
@@ -1618,7 +1548,6 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 comunicacionsLlegidesTotals = comNumero;
             }
 
-            @SuppressWarnings("unchecked")
             Map<Long, TransmissioV2> comunicacionsLlegidesMap = (Map<Long, TransmissioV2>) request.getSession()
                     .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
 
@@ -1747,8 +1676,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                     try {
 
                         RespostaConsultaV2 respostaNotificacions = notibClientRest.notificacionsByTitular(nif,
-                                convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
-                                mida);
+                                convertToApiDate(formDataInici), convertToApiDate(formDataFi), true,
+                                locale.getLanguage(), 0, mida);
 
                         notificacionsList = respostaNotificacions.getResultat();
                         for (TransmissioV2 notificacio : notificacionsList) {
@@ -1787,8 +1716,8 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 while (reintents > 0) {
                     try {
                         RespostaConsultaV2 respostaComunicacions = notibClientRest.comunicacionsByTitular(nif,
-                                convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
-                                mida);
+                                convertToApiDate(formDataInici), convertToApiDate(formDataFi), true,
+                                locale.getLanguage(), 0, mida);
 
                         comunicacionsList = respostaComunicacions.getResultat();
                         for (TransmissioV2 comunicacio : comunicacionsList) {
@@ -1833,9 +1762,6 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             int totesTotals = comNumero;
 
-            //            Collections.reverse(comunicacions);
-
-            @SuppressWarnings("unchecked")
             Map<Long, TransmissioV2> totesMap = (Map<Long, TransmissioV2>) request.getSession()
                     .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
 
@@ -1954,9 +1880,11 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 }
 
                 RespostaConsultaV2 respostaNotificacionsPendents = notibClientRest.notificacionsPendentsByTitular(nif,
-                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0, mida);
+                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
+                        mida);
                 RespostaConsultaV2 respostaComunicacionsPendents = notibClientRest.comunicacionsPendentsByTitular(nif,
-                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0, mida);
+                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
+                        mida);
 
                 comunicacionsPendentsList = respostaComunicacionsPendents.getResultat();
                 for (TransmissioV2 comunicacio : comunicacionsPendentsList) {
@@ -1987,7 +1915,6 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             int totesPendentsTotals = comNumero;
 
-            @SuppressWarnings("unchecked")
             Map<Long, TransmissioV2> totesPendentsMap = (Map<Long, TransmissioV2>) request.getSession()
                     .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
 
@@ -2108,9 +2035,11 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
                 }
 
                 RespostaConsultaV2 respostaNotificacionsLlegides = notibClientRest.notificacionsLlegidesByTitular(nif,
-                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0, mida);
+                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
+                        mida);
                 RespostaConsultaV2 respostaComunicacionsLlegides = notibClientRest.comunicacionsLlegidesByTitular(nif,
-                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0, mida);
+                        convertToApiDate(formDataInici), convertToApiDate(formDataFi), true, locale.getLanguage(), 0,
+                        mida);
 
                 comunicacionsLlegidesList = respostaComunicacionsLlegides.getResultat();
                 for (TransmissioV2 comunicacio : comunicacionsLlegidesList) {
@@ -2141,7 +2070,6 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
             int totesLlegidesTotals = comNumero;
 
-            @SuppressWarnings("unchecked")
             Map<Long, TransmissioV2> totesLlegidesMap = (Map<Long, TransmissioV2>) request.getSession()
                     .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
 
@@ -2213,7 +2141,6 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
 
         try {
 
-            @SuppressWarnings("unchecked")
             Map<Long, TransmissioV2> comunicacionsMap = (Map<Long, TransmissioV2>) request.getSession()
                     .getAttribute(SESSIO_CACHE_COMUNICACIONS_MAP_NOTIB);
 
@@ -2482,7 +2409,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
             return IdiomaEnum.ES;
         }
         return IdiomaEnum.CA;
-
+    
     }
     */
 
@@ -2529,8 +2456,7 @@ public class NotibCarpetaFrontPlugin extends AbstractCarpetaFrontPlugin {
     public static Date convertToApiDate(Date dateToConvert) {
         return dateToConvert;
     }
-    
-    
+
     public static Date convertToApiDate(Long dateToConvert) {
         if (dateToConvert == null) {
             return null;
